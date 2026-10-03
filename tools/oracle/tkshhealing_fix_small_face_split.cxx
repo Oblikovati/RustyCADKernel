@@ -47,6 +47,32 @@ static TopoDS_Face near_boundary_vertex_face() {
   return BRepBuilderAPI_MakeFace(gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), wire, true).Face();
 }
 
+static TopoDS_Face zigzag_face() {
+  BRep_Builder builder;
+  const gp_Pnt points[] = {{0.0, 0.0, 0.0}, {4.0, 0.0, 0.0}, {4.0, 2.0, 0.0},
+                           {3.0, 1.0e-5, 0.0}, {2.0, 2.0, 0.0}, {1.0, 1.0e-5, 0.0},
+                           {0.0, 2.0, 0.0}};
+  TopoDS_Vertex vertices[7];
+  for (int i = 0; i < 7; ++i) builder.MakeVertex(vertices[i], points[i], 1.0e-4);
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  for (int i = 0; i < 7; ++i)
+    builder.Add(wire, BRepBuilderAPI_MakeEdge(vertices[i], vertices[(i + 1) % 7]).Edge());
+  return BRepBuilderAPI_MakeFace(gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), wire, true).Face();
+}
+
+static void probe_zigzag() {
+  TopoDS_Face face = zigzag_face();
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(face);
+  fixer.myAnalyzer.SetTolerance(1.0e-4);
+  TopoDS_Compound output;
+  BRep_Builder().MakeCompound(output);
+  const bool split = fixer.SplitOneFace(face, output);
+  std::cout << "zigzag " << split << ' ' << count_faces(output) << ' '
+            << count(output, TopAbs_EDGE) << ' ' << count(output, TopAbs_VERTEX) << '\n';
+}
+
 static void probe_fix_split_face() {
   TopoDS_Face face = near_boundary_vertex_face();
   ShapeFix_FixSmallFace fixer;
@@ -76,4 +102,5 @@ int main() {
   std::cout << split << ' ' << count_faces(split_faces) << ' '
             << count(split_faces, TopAbs_EDGE) << ' ' << count(split_faces, TopAbs_VERTEX) << '\n';
   probe_fix_split_face();
+  probe_zigzag();
 }

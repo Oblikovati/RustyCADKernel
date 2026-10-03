@@ -178,11 +178,37 @@ mod tests {
         assert_aggregate_split_output(face);
     }
 
+    #[test]
+    fn initialized_splitter_recursively_splits_zigzag_into_three_faces() {
+        assert_native_split_output();
+        let face = zigzag_fixture_face();
+        let fixer = ShapeFixFixSmallFace::new(face.clone().into_shape());
+        fixer.analyzer.write().set_tolerance(1.0e-4);
+        let mut output = Compound::default();
+        Builder.make_compound(&mut output);
+        assert!(
+            fixer
+                .split_one_face(&mut face.clone(), &mut output)
+                .unwrap()
+        );
+        let shape = output.into_shape();
+        assert_eq!(count_faces(&shape).unwrap(), 3);
+        assert_eq!(shape_counts(&shape).unwrap(), (13, 26));
+    }
+
     fn assert_native_split_output() {
         let fixture =
             include_str!("../../../../../tools/oracle/tkshhealing_fix_small_face_split.expected");
         let rows = fixture.lines().collect::<Vec<_>>();
-        assert_eq!(rows, ["detected 2 1", "1 2 6 12", "aggregate 2 0 4 6 12"]);
+        assert_eq!(
+            rows,
+            [
+                "detected 2 1",
+                "1 2 6 12",
+                "aggregate 2 0 4 6 12",
+                "zigzag 1 3 13 26"
+            ]
+        );
     }
 
     fn assert_detector_output(face: &Face) {
@@ -236,6 +262,57 @@ mod tests {
             make_edge(&vertices[2], &vertices[0]),
         ];
         face_from_edges(edges)
+    }
+
+    fn zigzag_fixture_face() -> Face {
+        let points = [
+            Point3::new(0.0, 0.0, 0.0),
+            Point3::new(4.0, 0.0, 0.0),
+            Point3::new(4.0, 2.0, 0.0),
+            Point3::new(3.0, 1.0e-5, 0.0),
+            Point3::new(2.0, 2.0, 0.0),
+            Point3::new(1.0, 1.0e-5, 0.0),
+            Point3::new(0.0, 2.0, 0.0),
+        ];
+        polygon_face(&points)
+    }
+
+    fn polygon_face(points: &[Point3]) -> Face {
+        let vertices = polygon_vertices(points);
+        let edges = polygon_edges(&vertices);
+        face_from_polygon_edges(edges)
+    }
+
+    fn polygon_vertices(points: &[Point3]) -> Vec<rustycad_tkbrep::topods::Vertex> {
+        points.iter().map(|point| make_vertex(*point)).collect()
+    }
+
+    fn make_vertex(point: Point3) -> rustycad_tkbrep::topods::Vertex {
+        let mut vertex = rustycad_tkbrep::topods::Vertex::default();
+        BRepBuilder::default()
+            .make_vertex_at(&mut vertex, point, 1.0e-4)
+            .unwrap();
+        vertex
+    }
+
+    fn polygon_edges(vertices: &[rustycad_tkbrep::topods::Vertex]) -> Vec<Edge> {
+        (0..vertices.len())
+            .map(|index| make_edge(&vertices[index], &vertices[(index + 1) % vertices.len()]))
+            .collect()
+    }
+
+    fn face_from_polygon_edges(edges: Vec<Edge>) -> Face {
+        let mut wire = rustycad_tkbrep::topods::Wire::default();
+        Builder.make_wire(&mut wire);
+        let mut shape = wire.into_shape();
+        for edge in edges {
+            Builder.add(&mut shape, &edge.into_shape()).unwrap();
+        }
+        let wire = rustycad_tkbrep::topods::wire(&shape).unwrap();
+        BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
+            .unwrap()
+            .face()
+            .unwrap()
     }
 
     fn boundary_vertices() -> [rustycad_tkbrep::topods::Vertex; 3] {
