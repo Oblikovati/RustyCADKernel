@@ -20,6 +20,7 @@ DIRECT_HELPERS = (
     "tools/tkernel_native_baseline.py",
     "tools/tkernel_mapping.py",
     "tools/legacy_runtime_evidence.py",
+    "tools/tkmath_native_provenance.py",
 )
 TRANSITIVE_HELPERS = (
     "tools/api_tool_hashes.py",

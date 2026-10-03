@@ -24,14 +24,23 @@ from legacy_runtime_evidence import (
     require_unchanged_runtime_inputs,
 )
 from porting import ROOT, snapshot
+from tkmath_native_provenance import (
+    NATIVE_BUILD,
+    hash_linked_native_libraries,
+    linked_native_library_paths,
+    native_configuration,
+    native_env,
+    native_hashes,
+    native_library_hashes,
+    sha256,
+    verify_native_hashes,
+)
 from tkernel_mapping import (
     listed_runtime_cases,
     mapped_runtime_sets,
     runtime_case_results,
 )
 
-NATIVE_BUILD = Path("target/occt-modeling-full")
-NATIVE_EXECUTABLE = Path("lin64/gcc/bini/OpenCascadeGTest")
 DECLARATION = re.compile(r"(?:TEST(?:_F)?|TYPED_TEST)\((\w+), (\w+)\)")
 
 
@@ -98,24 +107,6 @@ def verify_source_group(
     mapped = {str(row["upstream_id"]) for row in mappings}
     if names != mapped or any(row["source_sha256"] != digest for row in mappings):
         raise RuntimeError(f"Stale or incomplete TKMath source mapping: {relative}")
-
-
-def native_configuration(build: Path, source: Path) -> tuple[Path, Path]:
-    """Require a CMake test build tied to OCCT; e.g. `native_configuration(build, source)`."""
-    cache = build / "CMakeCache.txt"
-    contents = cache.read_text()
-    match = re.search(r"^CMAKE_HOME_DIRECTORY:INTERNAL=(.*)$", contents, re.M)
-    if match is None or Path(match.group(1)).resolve() != source:
-        raise RuntimeError(f"{cache}: expected CMake home directory {source}")
-    executable = build / NATIVE_EXECUTABLE
-    if not executable.is_file():
-        raise RuntimeError(f"{executable}: expected OpenCascadeGTest executable")
-    return cache, executable
-
-
-def sha256(path: Path) -> str:
-    """Hash one provenance input; e.g. `sha256(build / 'CMakeCache.txt')`."""
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def native_filter(cases: set[str]) -> str:
@@ -370,68 +361,6 @@ def verify_native_discovery(executable: Path, expected: set[str], output: Path) 
         )
 
 
-def native_hashes(
-    cache: Path, executable: Path, build: Path, source: Path
-) -> JSONObject:
-    """Fingerprint the native test build; e.g. `native_hashes(cache, exe, build, source)`."""
-    libraries = native_library_hashes(executable, build)
-    return {
-        "build_directory": str(build.resolve()),
-        "cmake_cache_sha256": sha256(cache),
-        "cmake_home_directory": str(source),
-        "executable": str(executable.resolve()),
-        "executable_sha256": sha256(executable),
-        "linked_libraries_sha256": libraries,
-    }
-
-
-def native_library_hashes(executable: Path, build: Path) -> JSONObject:
-    """Hash resolved OCCT and GoogleTest libraries; e.g. `native_library_hashes(exe, build)`."""
-    result = subprocess.run(
-        ["ldd", str(executable)],
-        check=True,
-        capture_output=True,
-        text=True,
-        env=native_env(),
-    )
-    return hash_linked_native_libraries(result.stdout, build)
-
-
-def hash_linked_native_libraries(output: str, build: Path) -> JSONObject:
-    """Hash linked libraries below the build; e.g. `hash_linked_native_libraries(text, build)`."""
-    libraries = linked_native_library_paths(output)
-    require_native_library_set(libraries)
-    build_root = build.resolve()
-    return {
-        str(Path(path).resolve().relative_to(build_root)): sha256(Path(path))
-        for path in sorted(libraries.values())
-    }
-
-
-def linked_native_library_paths(output: str) -> dict[str, str]:
-    """Parse OCCT and GoogleTest `ldd` paths; e.g. `libTKMath.so => /build/libTKMath.so`."""
-    paths: dict[str, str] = {}
-    for line in output.splitlines():
-        match = re.match(r"\s*(lib(?:TK|gtest)[^ ]*)\s+=>\s+(\S+)", line)
-        if match is not None and match.group(2) == "not":
-            raise RuntimeError(f"Native shared library is unresolved: {match.group(1)}")
-        if match is not None:
-            paths[match.group(1)] = match.group(2)
-    return paths
-
-
-def require_native_library_set(libraries: dict[str, str]) -> None:
-    """Require the linked test and core libraries; e.g. TKernel, TKMath, GTest."""
-    prefixes = ("libTKernel.so", "libTKMath.so", "libgtest.so", "libgtest_main.so")
-    missing = [
-        prefix
-        for prefix in prefixes
-        if not any(name.startswith(prefix) for name in libraries)
-    ]
-    if missing:
-        raise RuntimeError(f"Native runtime lacks linked libraries: {missing!r}")
-
-
 def execute_native_filter(
     executable: Path, expected: set[str], output: Path
 ) -> dict[str, str]:
@@ -449,28 +378,6 @@ def execute_native_filter(
         timeout=3600,
     )
     return native_statuses(xml_path, expected)
-
-
-def verify_native_hashes(
-    cache: Path, executable: Path, build: Path, before: JSONObject
-) -> None:
-    """Ensure the build identity stayed fixed; e.g. `verify_native_hashes(cache, exe, provenance)`."""
-    if (
-        sha256(executable) != before["executable_sha256"]
-        or sha256(cache) != before["cmake_cache_sha256"]
-        or native_library_hashes(executable, build) != before["linked_libraries_sha256"]
-    ):
-        raise RuntimeError(
-            "Native test binary or CMake provenance changed during the run"
-        )
-
-
-def native_env() -> dict[str, str]:
-    """Set the native oracle's deterministic C locale; e.g. `native_env()`."""
-    env = dict(os.environ, LC_ALL="C", LANG="C")
-    env.pop("LD_LIBRARY_PATH", None)
-    env.pop("LD_PRELOAD", None)
-    return env
 
 
 def cargo_env(target_dir: Path) -> dict[str, str]:
