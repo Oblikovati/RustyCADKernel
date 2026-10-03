@@ -7,7 +7,13 @@ from api_inventory.inputs import JSONObject
 
 from api_coverage_report import cpp_candidates, report_document
 from api_coverage_report import declaration_toolkits, rust_inventory_gaps
-from api_crosswalk import rust_candidates, rust_crates
+from api_crosswalk import (
+    canonical_parameter_type,
+    cpp_candidates,
+    parameter_match,
+    rust_candidates,
+    rust_crates,
+)
 from api_identity import parse_upstream_id
 
 HEADER_PATH = "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_Surface.hxx"
@@ -93,6 +99,59 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         )
         self.assertEqual(status, "unique")
         self.assertEqual([row["id"] for row in rows], ["int"])
+
+    def test_quantity_period_uses_real_occt_top_level_const_parameters(self) -> None:
+        fixture_path = (
+            Path(__file__).parent / "fixtures/occt-quantity-period-constructor.json"
+        )
+        declaration = json.loads(fixture_path.read_text(encoding="utf-8"))
+        declaration["_toolkits"] = {"TKernel"}
+        by_name = {"Quantity_Period::Quantity_Period": [declaration]}
+
+        status, rows = cpp_candidates(
+            "Quantity_Period::Quantity_Period(int,int)", "TKernel", by_name
+        )
+
+        self.assertEqual(status, "unique")
+        self.assertEqual(rows[0]["parameter_types"], ["const int", "const int"])
+
+    def test_parameter_cv_canonicalization_preserves_pointer_and_reference_cv(self) -> None:
+        self.assertEqual(
+            canonical_parameter_type("std::vector<int const> const"),
+            "std::vector<int const>",
+        )
+        self.assertEqual(canonical_parameter_type("const int* const"), "const int*")
+        self.assertEqual(canonical_parameter_type("const int&"), "const int&")
+        self.assertNotEqual(
+            canonical_parameter_type("int*"), canonical_parameter_type("const int*")
+        )
+        self.assertNotEqual(
+            canonical_parameter_type("int&"), canonical_parameter_type("const int&")
+        )
+
+    def test_unsupported_parenthesized_declarators_remain_unmatched(self) -> None:
+        self.assertIsNone(canonical_parameter_type("int (*)(int)"))
+        self.assertFalse(
+            parameter_match(
+                ["int (*)(int)"], {"parameter_types": ["int (*)(int)"]}
+            )
+        )
+
+    def test_parameter_match_keeps_nested_and_indirected_cv_semantics(self) -> None:
+        self.assertTrue(
+            parameter_match(
+                ["std::vector<int const>"],
+                {"parameter_types": ["std::vector<int const> const"]},
+            )
+        )
+        self.assertTrue(
+            parameter_match(["const int*"], {"parameter_types": ["const int* const"]})
+        )
+        self.assertFalse(parameter_match(["int*"], {"parameter_types": ["const int*"]}))
+        self.assertTrue(
+            parameter_match(["const int&"], {"parameter_types": ["const int&"]})
+        )
+        self.assertFalse(parameter_match(["int&"], {"parameter_types": ["const int&"]}))
 
     def test_bare_overload_name_stays_ambiguous(self) -> None:
         overloads = [
