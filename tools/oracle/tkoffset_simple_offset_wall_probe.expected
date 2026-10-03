@@ -1,0 +1,35 @@
+case plane
+wall 1 null 0 map 2 valid 1 orient 0 surface Geom_Plane loc 1 bounds -2e+100 2e+100 -2e+100 2e+100 tol 9.9999999999999995e-08 point 0 1 0.75 edges 4
+edge 1 ori 0 range3d 0 3 range2d 0 3 curve Geom_Line pcurve Geom2d_Line xyz 0 0 0 0 3 0 uv -0.5 1.5 -0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 0 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 0 3 0 0 3 1 uv -0.5 -1.5 0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 3 ori 1 range3d 0 3 range2d 0 3 curve Geom_Line pcurve Geom2d_Line xyz 0 0 1 0 3 1 uv 0.5 1.5 0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 4 ori 1 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 0 0 0 0 0 1 uv -0.5 1.5 0.5 1.5 tol 9.9999999999999995e-08 flags 1 1 0
+wall 2 null 0 map 3 valid 1 orient 0 surface Geom_Plane loc 1 bounds -2e+100 2e+100 -2e+100 2e+100 tol 9.9999999999999995e-08 point 1.5 0 0.75 edges 4
+edge 1 ori 1 range3d 0 2 range2d 0 2 curve Geom_Line pcurve Geom2d_Line xyz 0 0 0 2 0 0 uv -0.5 -1 -0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 1 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 2 0 0 2 0 1 uv -0.5 1 0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 3 ori 0 range3d 0 2 range2d 0 2 curve Geom_Line pcurve Geom2d_Line xyz 0 0 1 2 0 1 uv 0.5 -1 0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 4 ori 0 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 0 0 0 0 0 1 uv -0.5 -1 0.5 -1 tol 9.9999999999999995e-08 flags 1 1 0
+wall 3 null 0 map 4 valid 1 orient 0 surface Geom_Plane loc 1 bounds -2e+100 2e+100 -2e+100 2e+100 tol 9.9999999999999995e-08 point 2 1 0.75 edges 4
+edge 1 ori 0 range3d 0 3 range2d 0 3 curve Geom_Line pcurve Geom2d_Line xyz 2 0 0 2 3 0 uv -0.5 1.5 -0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 0 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 2 3 0 2 3 1 uv -0.5 -1.5 0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 3 ori 1 range3d 0 3 range2d 0 3 curve Geom_Line pcurve Geom2d_Line xyz 2 0 1 2 3 1 uv 0.5 1.5 0.5 -1.5 tol 9.9999999999999995e-08 flags 1 1 0
+edge 4 ori 1 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 2 0 0 2 0 1 uv -0.5 1.5 0.5 1.5 tol 9.9999999999999995e-08 flags 1 1 0
+wall 4 null 0 map 4 valid 1 orient 0 surface Geom_Plane loc 1 bounds -2e+100 2e+100 -2e+100 2e+100 tol 9.9999999999999995e-08 point 1.5 3 0.75 edges 4
+edge 1 ori 1 range3d 0 2 range2d 0 2 curve Geom_Line pcurve Geom2d_Line xyz 0 3 0 2 3 0 uv -0.5 -1 -0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 1 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 2 3 0 2 3 1 uv -0.5 1 0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 3 ori 0 range3d 0 2 range2d 0 2 curve Geom_Line pcurve Geom2d_Line xyz 0 3 1 2 3 1 uv 0.5 -1 0.5 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 4 ori 0 range3d 0 1 range2d 0 1 curve Geom_Line pcurve Geom2d_Line xyz 0 3 0 0 3 1 uv -0.5 -1 0.5 -1 tol 9.9999999999999995e-08 flags 1 1 0
+case coincident
+wall 1 null 1 map 0
+case half_arc
+wall 1 null 0 map 2 valid 0 orient 0 surface Geom_BSplineSurface loc 1 bounds 0 3.1415926535897931 0 1 tol 9.9999999999999995e-08 point 2.9067372829339573 0.74221187715264025 1.0000000000000013 edges 4
+edge 1 ori 0 range3d 0 3.1415926535897931 range2d 0 3.1415926535897931 curve Geom_Circle pcurve Geom2d_Line xyz 3 0 0 -3 3.6739403974420594e-16 0 uv 0 0 3.1415926535897931 0 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 0 range3d 0 1 range2d 0 1 curve Geom_BSplineCurve pcurve Geom2d_Line xyz -3.0000000000000004 4.4408920985006262e-16 0 -3.0000000000000004 4.4408920985006262e-16 2 uv 3.1415926535897931 0 3.1415926535897931 1 tol 9.9999999999999995e-08 flags 0 0 0
+edge 3 ori 1 range3d 0 3.1415926535897931 range2d 0 3.1415926535897931 curve Geom_Circle pcurve Geom2d_Line xyz 3 0 2 -3 3.6739403974420594e-16 2 uv 0 1 3.1415926535897931 1 tol 9.9999999999999995e-08 flags 1 1 0
+edge 4 ori 1 range3d 0 1 range2d 0 1 curve Geom_BSplineCurve pcurve Geom2d_Line xyz 3.0000000000000004 -4.4408920985006262e-16 0 3.0000000000000004 -4.4408920985006262e-16 2 uv 0 0 0 1 tol 9.9999999999999995e-08 flags 0 0 0
+case closed_circle
+wall 1 null 0 map 1 valid 1 orient 0 surface Geom_BSplineSurface loc 1 bounds 0 6.2831853071795862 0 1 tol 9.9999999999999995e-08 point 2.9067371922853966 0.74221188453707931 0.99999999999998879 edges 3
+edge 1 ori 0 range3d 0 6.2831853071795862 range2d 0 6.2831853071795862 curve Geom_Circle pcurve Geom2d_Line xyz 3 0 0 3 -7.3478807948841188e-16 0 uv 0 0 6.2831853071795862 0 tol 9.9999999999999995e-08 flags 1 1 0
+edge 2 ori 0 range3d 0 1 range2d 0 1 curve Geom_BSplineCurve pcurve Geom2d_Line xyz 2.9999999999999987 -3.0563008512717008e-15 0 2.9999999999999987 -3.0563008512717008e-15 2 uv 6.2831853071795862 0 6.2831853071795862 1 tol 9.9999999999999995e-08 flags 1 1 1
+seam 2 range 0 1 uv 0 0 0 1
+edge 3 ori 1 range3d 0 6.2831853071795862 range2d 0 6.2831853071795862 curve Geom_Circle pcurve Geom2d_Line xyz 3 0 2 3 -7.3478807948841188e-16 2 uv 0 1 6.2831853071795862 1 tol 9.9999999999999995e-08 flags 1 1 0
