@@ -9,6 +9,19 @@ use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 
 impl ShapeFixWire {
+    /// Restores native wire mode defaults without clearing repair statuses.
+    /// Example: `fixer.clear_modes()`.
+    pub fn clear_modes(&self) {
+        let mut state = self.state.write();
+        state.closed_mode = true;
+        state.topology_mode = false;
+        state.geometry_mode = true;
+        state.preference_pcurve_mode = true;
+        state.fix_gaps_by_ranges = false;
+        reset_edge_repair_modes(&mut state);
+        reset_wire_repair_modes(&mut state);
+    }
+
     /// Selects aggregate reorder behavior; `fixer.set_fix_reorder_mode(0)` disables it.
     pub fn set_fix_reorder_mode(&self, mode: i32) {
         self.state.write().fix_reorder_mode = mode;
@@ -60,6 +73,36 @@ impl ShapeFixWire {
         self.state.write().fix_lacking_mode = mode;
     }
 
+    /// Selects whether edge repair prefers p-curves; `fixer.set_preference_pcurve_mode(false)`.
+    pub fn set_preference_pcurve_mode(&self, prefer: bool) {
+        self.state.write().preference_pcurve_mode = prefer;
+    }
+
+    /// Reads native `PreferencePCurveMode`; `assert!(fixer.preference_pcurve_mode())`.
+    pub fn preference_pcurve_mode(&self) -> bool {
+        self.state.read().preference_pcurve_mode
+    }
+
+    /// Selects aggregate 3D gap repair; `fixer.set_fix_gaps_3d_mode(0)` disables dispatch.
+    pub fn set_fix_gaps_3d_mode(&self, mode: i32) {
+        self.state.write().fix_gaps_3d_mode = mode;
+    }
+
+    /// Reads native 3D gap repair mode; `assert_eq!(fixer.fix_gaps_3d_mode(), -1)`.
+    pub fn fix_gaps_3d_mode(&self) -> i32 {
+        self.state.read().fix_gaps_3d_mode
+    }
+
+    /// Selects aggregate 2D gap repair; `fixer.set_fix_gaps_2d_mode(0)` disables dispatch.
+    pub fn set_fix_gaps_2d_mode(&self, mode: i32) {
+        self.state.write().fix_gaps_2d_mode = mode;
+    }
+
+    /// Reads native 2D gap repair mode; `assert_eq!(fixer.fix_gaps_2d_mode(), -1)`.
+    pub fn fix_gaps_2d_mode(&self) -> i32 {
+        self.state.read().fix_gaps_2d_mode
+    }
+
     /// Reads the native aggregate small-edge mode; `fixer.fix_small_mode()`.
     pub fn fix_small_mode(&self) -> i32 {
         self.state.read().fix_small_mode
@@ -83,6 +126,21 @@ impl ShapeFixWire {
     /// Reads the native aggregate missing-edge mode; `fixer.fix_lacking_mode()`.
     pub fn fix_lacking_mode(&self) -> i32 {
         self.state.read().fix_lacking_mode
+    }
+
+    /// Reads native aggregate reorder dispatch; `assert_eq!(fixer.fix_reorder_mode(), -1)`.
+    pub fn fix_reorder_mode(&self) -> i32 {
+        self.state.read().fix_reorder_mode
+    }
+
+    /// Reads native aggregate notched-edge dispatch; `fixer.fix_notched_edges_mode()`.
+    pub fn fix_notched_edges_mode(&self) -> i32 {
+        self.state.read().fix_notched_edges_mode
+    }
+
+    /// Reads native aggregate tail dispatch; `fixer.fix_tail_mode()`.
+    pub fn fix_tail_mode(&self) -> i32 {
+        self.state.read().fix_tail_mode
     }
 
     /// Returns whether self-intersection repair removed a segment; `fixer.status_removed_segment()`.
@@ -271,4 +329,34 @@ impl ShapeFixWire {
         self.working_analyzer()
             .set_located_surface(surface, location)
     }
+}
+
+fn reset_edge_repair_modes(state: &mut super::WireFixState) {
+    state.remove_loop_mode = -1;
+    state.reversed_2d_mode = -1;
+    state.remove_pcurve_mode = -1;
+    state.remove_curve_3d_mode = -1;
+    state.add_pcurve_mode = -1;
+    state.add_curve_3d_mode = -1;
+    state.seam_mode = -1;
+    state.shifted_mode = -1;
+    state.same_parameter_mode = -1;
+    state.vertex_tolerance_mode = -1;
+}
+
+fn reset_wire_repair_modes(state: &mut super::WireFixState) {
+    state.fix_notched_edges_mode = -1;
+    state.fix_self_intersecting_edge_mode = -1;
+    state.fix_intersecting_edges_mode = -1;
+    state.fix_nonadjacent_intersecting_edges_mode = -1;
+    state.fix_tail_mode = 0;
+    state.fix_reorder_mode = -1;
+    state.fix_small_mode = -1;
+    state.fix_connected_mode = -1;
+    state.edge_curves_mode = -1;
+    state.fix_degenerated_mode = -1;
+    state.fix_self_intersection_mode = -1;
+    state.fix_lacking_mode = -1;
+    state.fix_gaps_3d_mode = -1;
+    state.fix_gaps_2d_mode = -1;
 }
