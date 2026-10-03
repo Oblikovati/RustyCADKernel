@@ -8,8 +8,9 @@ generated with OCCT revision `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 The box's sampled maximum normal angle is 90 degrees, so `expectedTolerance = 1`
 produces `0.31830985435280207` with the primitive's max vertex tolerance. A single
 face and a cylinder's lateral seam produce no non-smooth face pair, leaving the
-cached angle at zero. The resulting IEEE infinity and NaN are part of OCCT's
-observable division behavior and are preserved by the Rust helper.
+cached angle at zero. A pair of sewn Bezier extrusion faces records the trimmed
+23-step sample result for a curved junction. The resulting IEEE infinity and NaN
+are part of OCCT's observable division behavior and are preserved by the Rust helper.
 
 Build and run against the OCCT build used by the port:
 
