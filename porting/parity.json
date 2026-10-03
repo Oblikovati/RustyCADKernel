@@ -25260,6 +25260,78 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::BracketResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::IsValid",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::is_valid",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::A",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::a",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::B",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::b",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::Fa",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::fa",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::Fb",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::fb",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::HasFA",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::has_fa",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult::HasFB",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult::has_fb",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
       "upstream_id": "MathUtils::Utils::EvaluateFinite(Function&,double,double&,MathUtils::Status&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
@@ -25292,12 +25364,148 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::MinBracketResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::IsValid",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::is_valid",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::A",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::a",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::B",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::b",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::C",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::c",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::Fa",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::fa",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::Fb",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::fb",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult::Fc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult::fc",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
       "upstream_id": "MathUtils::MinBracketOptions",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
       "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::MaxIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::max_iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::UseLimits",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::use_limits",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::LeftLimit",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::left_limit",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::RightLimit",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::right_limit",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::HasFA",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::has_fa",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::HasFB",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::has_fb",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::FA",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::fa",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions::FB",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions::fb",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding field through the public MathUtils facade."
     },
     {
       "upstream_id": "MathUtils::Utils::Limited(double,const MinBracketOptions&)",
