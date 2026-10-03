@@ -3,6 +3,8 @@
 #include <Geom2d_BezierCurve.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <Geom_BezierSurface.hxx>
+#include <Geom2d_Line.hxx>
+#include <GeomLib.hxx>
 #include <ShapeUpgrade_ShapeConvertToBezier.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
@@ -11,7 +13,9 @@
 #include <gp_Pln.hxx>
 #include <gp_Cylinder.hxx>
 #include <gp_Ax3.hxx>
+#include <gp_Ax2d.hxx>
 #include <iostream>
+#include <Precision.hxx>
 
 static void report_modes(const char* name, ShapeUpgrade_ShapeConvertToBezier& tool)
 {
@@ -98,4 +102,12 @@ int main()
   lineOnly.Set3dConversion(true);
   lineOnly.Set3dCircleConversion(false);
   report_shape("cylinder_line_only", lineOnly, lineOnly.Perform());
+
+  occ::handle<Geom2d_Curve> reverseSource = new Geom2d_Line(gp_Ax2d());
+  occ::handle<Geom2d_Curve> normalizedReverse;
+  GeomLib::SameRange(Precision::PConfusion(), reverseSource, 2.0, 5.0, 0.0, 1.0, normalizedReverse);
+  const gp_Pnt2d reverseStart = normalizedReverse->Value(0.0);
+  const gp_Pnt2d reverseEnd = normalizedReverse->Value(1.0);
+  std::cout << "reverse_line_unit_range " << reverseStart.X() << ' ' << reverseStart.Y() << ' '
+            << reverseEnd.X() << ' ' << reverseEnd.Y() << '\n';
 }

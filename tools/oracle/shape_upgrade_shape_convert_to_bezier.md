@@ -20,7 +20,7 @@ g++ -std=c++17 -I"$build/include/opencascade" \
 cargo test -p rustycad-tkshhealing --test shape_upgrade_shape_convert_to_bezier
 ```
 
-Known limits: conic policy combinations, seam p-curve range repair, and
-nested/reentrant `Perform` calls are not yet covered by the differential
-fixture. The current p-curve repair path does not implement OCCT's
-`GeomLib::SameRange` fallback for non-Bezier reverse seam p-curves.
+Known limits: conic policy combinations, end-to-end non-unit seam p-curve
+range repair, and nested/reentrant `Perform` calls are not yet covered by the
+differential fixture. The non-Bezier reverse-curve `GeomLib::SameRange`
+fallback is covered directly against native `GeomLib` output.
