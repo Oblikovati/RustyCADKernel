@@ -223299,6 +223299,411 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::accept",
       "status": "partial",
       "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckContours(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_contours",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(const TopoDS_Wire &,const int,TopoDS_Wire &,double &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches_at",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(occ::handle<ShapeAnalysis_FreeBoundData> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches_data",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ClosedFreeBound(const int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::closed_free_bound",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ClosedFreeBounds() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::closed_free_bounds",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::DispatchBounds()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::dispatch_bounds",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::FillProperties(occ::handle<ShapeAnalysis_FreeBoundData> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::fill_properties",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Init(const TopoDS_Shape &,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::init",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Init(const TopoDS_Shape &,const double,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::init_with_tolerance",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::IsLoaded() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::is_loaded",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::NbClosedFreeBounds() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::nb_closed_free_bounds",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::NbFreeBounds() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::nb_free_bounds",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::NbOpenFreeBounds() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::nb_open_free_bounds",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::OpenFreeBound(const int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::open_free_bound",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::OpenFreeBounds() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::open_free_bounds",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::perform",
+      "status": "partial",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Shape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::shape",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ShapeAnalysis_FreeBoundsProperties()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::new",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ShapeAnalysis_FreeBoundsProperties(const TopoDS_Shape &,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::with_shape",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ShapeAnalysis_FreeBoundsProperties(const TopoDS_Shape &,const double,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::with_tolerance",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Tolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
+      "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::tolerance",
+      "status": "implemented",
+      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Get2dConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_2d_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Get3dCircleConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_3d_circle_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Get3dConicConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_3d_conic_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Get3dConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_3d_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Get3dLineConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_3d_line_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::GetBSplineMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_bspline_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::GetExtrusionMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_extrusion_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::GetPlaneMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_plane_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::GetRevolutionMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_revolution_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::GetSurfaceConversion() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::get_surface_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Perform(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::perform",
+      "status": "partial",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Set2dConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_2d_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Set3dCircleConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_3d_circle_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Set3dConicConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_3d_conic_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Set3dConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_3d_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::Set3dLineConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_3d_line_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::SetBSplineMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_bspline_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::SetExtrusionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_extrusion_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::SetPlaneMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_plane_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::SetRevolutionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_revolution_mode",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::SetSurfaceConversion(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::set_surface_conversion",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::ShapeUpgrade_ShapeConvertToBezier()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::empty",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeConvertToBezier::ShapeUpgrade_ShapeConvertToBezier(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeConvertToBezier.hxx",
+      "source_sha256": "67cdaf5bb9e3fc9049cf39c127164ecd4f0182947e870e99e4fe3108b392f7ba",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::new",
+      "status": "implemented",
+      "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
     }
   ],
   "tests": [
