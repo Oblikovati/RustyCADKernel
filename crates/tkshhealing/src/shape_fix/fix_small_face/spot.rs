@@ -28,6 +28,24 @@ pub(super) fn fix_spot_face(fixer: &ShapeFixFixSmallFace) -> Result<Shape, Failu
     Ok(result)
 }
 
+pub(super) fn replace_vertices_in_case_of_spot(
+    fixer: &ShapeFixFixSmallFace,
+    face: &mut Face,
+    _tolerance: f64,
+) -> Result<bool, Failure> {
+    let context = context(fixer)?;
+    replace_spot_vertices(&context, face)?;
+    Ok(true)
+}
+
+pub(super) fn remove_faces_in_case_of_spot(
+    fixer: &ShapeFixFixSmallFace,
+    face: &Face,
+) -> Result<bool, Failure> {
+    remove_spot_face(fixer, &context(fixer)?, face)?;
+    Ok(true)
+}
+
 fn spot_phase_shape(shape: &Shape) -> Result<bool, Failure> {
     Ok(matches!(
         shape.shape_type()?,
@@ -206,6 +224,11 @@ fn finish_spot_phase(
     fix_shape_faces(fixer, shape)
 }
 
+pub(super) fn fix_shape(fixer: &ShapeFixFixSmallFace) -> Result<Shape, Failure> {
+    let shape = fixer.input.read().clone();
+    fix_shape_faces(fixer, &shape)
+}
+
 fn fix_shape_faces(fixer: &ShapeFixFixSmallFace, shape: &Shape) -> Result<Shape, Failure> {
     let context = context(fixer)?;
     let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
@@ -214,6 +237,14 @@ fn fix_shape_faces(fixer: &ShapeFixFixSmallFace, shape: &Shape) -> Result<Shape,
         faces.next()?;
     }
     ReShape::apply(context.get().unwrap(), shape, ShapeEnum::Shape)
+}
+
+pub(super) fn fix_face(fixer: &ShapeFixFixSmallFace, face: &Face) -> Result<Face, Failure> {
+    let fixer_face = ShapeFixFace::default();
+    fixer_face.set_context(&context(fixer)?);
+    fixer_face.init(face.clone().into_shape());
+    fixer_face.perform()?;
+    fixer_face.face()
 }
 
 fn fix_one_face(context: &Handle<ShapeBuildReShape>, shape: &Shape) -> Result<(), Failure> {

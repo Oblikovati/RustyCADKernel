@@ -23,6 +23,11 @@ fn regular_box_is_preserved_by_the_spot_phase() {
     let result = fixer.fix_spot_face().unwrap();
     assert!(result.is_same(&input));
     assert!(fixer.shape().is_same(&input));
+    assert!(fixer.fix_shape().unwrap().is_same(&input));
+    let mut first_face = first_face(&input);
+    let before = first_face.clone().into_shape();
+    assert!(fixer.fix_pin_face(&mut first_face));
+    assert!(first_face.into_shape().is_same(&before));
 }
 
 #[test]
@@ -106,4 +111,9 @@ fn count_shapes(shape: &Shape, target: ShapeEnum) -> usize {
         explorer.next().unwrap();
     }
     count
+}
+
+fn first_face(shape: &Shape) -> Face {
+    let explorer = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+    topods::face(explorer.current()).unwrap()
 }
