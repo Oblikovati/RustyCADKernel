@@ -1,4 +1,5 @@
 """Tests for source-backed retries of failed OCCT header probes."""
+
 from __future__ import annotations
 
 import pathlib
@@ -26,8 +27,15 @@ class RetryHeaderContextTest(unittest.TestCase):
             self.assertEqual(artifact_reference(output, root), "artifacts/probe.jsonl")
 
     def test_include_roots_separate_quote_and_system_search_paths(self) -> None:
-        roots = include_roots(("-iquote", "/project/quote", "-I/project/include",
-                               "-isystem", "/usr/include"))
+        roots = include_roots(
+            (
+                "-iquote",
+                "/project/quote",
+                "-I/project/include",
+                "-isystem",
+                "/usr/include",
+            )
+        )
         self.assertEqual([str(path) for path in roots[0]], ["/project/quote"])
         self.assertEqual([str(path) for path in roots[1]], ["/project/include"])
         self.assertEqual([str(path) for path in roots[2]], ["/usr/include"])
@@ -40,7 +48,7 @@ class RetryHeaderContextTest(unittest.TestCase):
             header.parent.mkdir()
             source.parent.mkdir()
             header.write_text("class Part {};\n")
-            source.write_text('#include <Part.hxx>\n')
+            source.write_text("#include <Part.hxx>\n")
             self.assertEqual(include_directives(source), [("<", "Part.hxx")])
             found, name = resolves_to_header(source, (f"-I{header.parent}",), header)
         self.assertTrue(found)

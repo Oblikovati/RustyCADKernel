@@ -24,7 +24,9 @@ def normalize_template_signature(signature: str) -> TemplateIdentity:
     return normalize_bounded_signature(signature, start, end)
 
 
-def normalize_bounded_signature(signature: str, start: int, end: int) -> TemplateIdentity:
+def normalize_bounded_signature(
+    signature: str, start: int, end: int
+) -> TemplateIdentity:
     """Normalize each parameter in an already validated signature span."""
     parts = split_template_parameters(signature[start + 1 : end])
     if parts is None:
@@ -33,7 +35,9 @@ def normalize_bounded_signature(signature: str, start: int, end: int) -> Templat
     if normalized is None:
         return TemplateIdentity(signature, False, "template_parameter_unparsed")
     replacement = ", ".join(normalized)
-    return TemplateIdentity(signature[: start + 1] + replacement + signature[end:], True)
+    return TemplateIdentity(
+        signature[: start + 1] + replacement + signature[end:], True
+    )
 
 
 def normalize_parameters(parameters: list[str]) -> list[str] | None:
@@ -65,7 +69,9 @@ def normalize_nested_lists(parameter: str) -> str | None:
     spans = outermost_template_spans(template_keyword_bounds(parameter, tokens))
     if len(spans) > 1:
         return None
-    return normalize_template_parameter_span(parameter, spans[0]) if spans else parameter
+    return (
+        normalize_template_parameter_span(parameter, spans[0]) if spans else parameter
+    )
 
 
 def outermost_template_spans(
@@ -117,9 +123,7 @@ def template_keyword_bounds(
     return spans
 
 
-def balanced_angle_bounds(
-    text: str, start: int
-) -> tuple[int, int] | None:
+def balanced_angle_bounds(text: str, start: int) -> tuple[int, int] | None:
     """Match angle brackets while ignoring parenthesized operators and literals."""
     tokens = lexical_tokens_from(text, start)
     return None if tokens is None else find_angle_closer(tokens, start)
@@ -146,9 +150,7 @@ def find_angle_closer(
     return None
 
 
-def advance_depths(
-    depths: dict[str, int], token: str, closing: dict[str, str]
-) -> bool:
+def advance_depths(depths: dict[str, int], token: str, closing: dict[str, str]) -> bool:
     """Update nested delimiter depths, returning false for an unmatched closer."""
     if token in closing:
         if token == ">" and depths["("]:
@@ -198,8 +200,11 @@ def top_level_default(parameter: str) -> int | None:
 
 
 def assignment_token(
-    tokens: list[tuple[str, int, int]], index: int, token: str, start: int,
-    depths: dict[str, int]
+    tokens: list[tuple[str, int, int]],
+    index: int,
+    token: str,
+    start: int,
+    depths: dict[str, int],
 ) -> bool:
     """Recognize a top-level default assignment rather than a comparison token."""
     if token != "=" or any(depths.values()):
@@ -252,7 +257,7 @@ def skip_trivia_or_literal(text: str, index: int) -> int | None:
 
 def raw_literal_end(text: str, index: int) -> int | None:
     """Skip raw strings by their exact delimiter; malformed raw literals fail closed."""
-    prefixes = ("u8R\"", "uR\"", "UR\"", "LR\"", "R\"")
+    prefixes = ('u8R"', 'uR"', 'UR"', 'LR"', 'R"')
     prefix = next((item for item in prefixes if text.startswith(item, index)), None)
     if prefix is None:
         return None
@@ -270,7 +275,22 @@ def raw_literal_end(text: str, index: int) -> int | None:
 
 def quote_start(text: str, index: int) -> int | None:
     """Locate ordinary, prefixed, or raw C++ string and character literals."""
-    for prefix in ("u8R\"", "uR\"", "UR\"", "LR\"", "R\"", 'u8"', 'u"', 'U"', 'L"', '"', "u'", "U'", "L'", "'"):
+    for prefix in (
+        'u8R"',
+        'uR"',
+        'UR"',
+        'LR"',
+        'R"',
+        'u8"',
+        'u"',
+        'U"',
+        'L"',
+        '"',
+        "u'",
+        "U'",
+        "L'",
+        "'",
+    ):
         if text.startswith(prefix, index):
             return index + len(prefix) - 1
     return None

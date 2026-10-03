@@ -75,9 +75,9 @@ Each output line is a JSON object with an `event` discriminator and the
 
 Declarations are source occurrences. A header declaration and its `.lxx`
 definition can therefore share a USR while carrying distinct locations. A
-consumer should group declarations by USR, kind, normalized identity signature,
-and normalized template parameter signature, then preserve all source
-occurrences. Clang can emit the same USR for SFINAE overloads whose dependent
+consumer groups callable declarations by USR, kind, normalized identity
+signature, and normalized template parameter signature, while other declarations
+use USR and kind. All source occurrences are preserved. Clang can emit the same USR for SFINAE overloads whose dependent
 return types differ; the canonical signature keeps those overloads distinct.
 Parameter spelling is normalized so out-of-line definitions and redeclarations
 with different parameter names share an identity. Template wrappers are
@@ -88,7 +88,10 @@ unparsed, and uninstantiated states. They do not participate in declaration
 identity because defaults may appear on only one redeclaration. Merged rows
 retain each distinct default observation; older extractor records carry an
 explicit `default_argument_capture=unavailable` status, while non-callable
-records are marked `not_applicable`.
+records are marked `not_applicable`. Empty template metadata means the
+declaration is not a function template. Template defaults are removed from
+identity only when the bounded normalizer accepts the syntax; unsupported forms
+retain their raw spelling and are blocked from crosswalk credit.
 
 ## Completeness limits
 
@@ -134,8 +137,9 @@ The merger writes deterministic compressed tables under
 `porting/api-inventory/`: declarations, macro candidates, header coverage,
 diagnostics, unsupported records, skipped preprocessor ranges, and contributing
 files. The manifest records counts and SHA256 values. C++ USR, declaration
-kind, normalized identity signature, and normalized template parameter
-signature identify a declaration; all observed source sites are retained. A
+kind identify non-callable declarations; callable identities also include
+normalized identity and template parameter signatures. All observed source
+sites and raw signature variants are retained. A
 source-TU definition without a header declaration site is retained as an
 excluded implementation-only declaration. A missing USR uses a visibly
 unverified location identity. Signature or visibility

@@ -154,9 +154,7 @@ class MergeTests(InventoryFixture):
         nested = normalize_template_signature(
             "template <typename __template_param_0 = std::pair<int, long>>"
         )
-        plain = normalize_template_signature(
-            "template <typename __template_param_0>"
-        )
+        plain = normalize_template_signature("template <typename __template_param_0>")
         self.assertTrue(nested.supported)
         self.assertEqual(nested.normalized, plain.normalized)
 

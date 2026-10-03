@@ -180,7 +180,8 @@ These API mappings are manually inventoried and remain `implemented`, not global
   mutable array views. Its heap-object regressions use the owned
   `AsciiString` implementation, whose full legacy suite is now translated.
 - `Failure` preserves typed messages, explicit stack strings and copy behavior.
-  Automatic stack capture and the full exception hierarchy remain pending.
+  Automatic stack capture and the exception hierarchy are implemented; see the
+  Standard runtime section below for platform and native-undefined-behavior limits.
 - NCollection_Vec2/Vec3/Vec4, NCollection_Mat3 and NCollection_Mat4 now map every
   public member (see the NCollection vectors and matrices section below).
 - `Color`/`ColorRgba` preserve float channel storage, all 509 canonical named colors

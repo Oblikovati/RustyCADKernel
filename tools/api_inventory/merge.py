@@ -178,9 +178,7 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
     signatures = cast(list[JSONValue], existing["signature_variants"])
     if row.get("signature") not in signatures:
         signatures.append(row.get("signature"))
-    template_signatures = cast(
-        list[JSONValue], existing["template_signature_variants"]
-    )
+    template_signatures = cast(list[JSONValue], existing["template_signature_variants"])
     if row.get("template_signature") not in template_signatures:
         template_signatures.append(row.get("template_signature"))
     merge_default_arguments(existing, row)
@@ -362,9 +360,7 @@ def exclude_implementation_only_macros(records: InventoryRecords) -> int:
         if macro.get("api_candidate") is not True:
             continue
         macro["api_candidate"] = False
-        macro["api_resolution"] = (
-            "implementation_only_macro_without_header_definition"
-        )
+        macro["api_resolution"] = "implementation_only_macro_without_header_definition"
         macro["exclusion_reason"] = "implementation_only_no_header_site"
         excluded += 1
     return excluded

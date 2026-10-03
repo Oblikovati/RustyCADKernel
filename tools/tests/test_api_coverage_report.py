@@ -116,9 +116,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
 
     def test_unstable_template_identity_blocks_automatic_credit(self) -> None:
         declaration = cpp_decl("unstable", "fixture::choose", ["int"])
-        declaration["api_resolution"] = (
-            "unsupported_template_signature_normalization"
-        )
+        declaration["api_resolution"] = "unsupported_template_signature_normalization"
         declaration["unstable_identity"] = True
         declaration["_toolkits"] = {"TKFixture"}
         status, rows = cpp_candidates(
@@ -159,7 +157,9 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         self.assertEqual(status, "unique")
         self.assertEqual(rows[0]["parameter_types"], ["const int", "const int"])
 
-    def test_parameter_cv_canonicalization_preserves_pointer_and_reference_cv(self) -> None:
+    def test_parameter_cv_canonicalization_preserves_pointer_and_reference_cv(
+        self,
+    ) -> None:
         self.assertEqual(
             canonical_parameter_type("std::vector<int const> const"),
             "std::vector<int const>",
@@ -176,9 +176,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
     def test_unsupported_parenthesized_declarators_remain_unmatched(self) -> None:
         self.assertIsNone(canonical_parameter_type("int (*)(int)"))
         self.assertFalse(
-            parameter_match(
-                ["int (*)(int)"], {"parameter_types": ["int (*)(int)"]}
-            )
+            parameter_match(["int (*)(int)"], {"parameter_types": ["int (*)(int)"]})
         )
 
     def test_parameter_match_keeps_nested_and_indirected_cv_semantics(self) -> None:
@@ -235,7 +233,9 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         self.assertEqual(report["crosswalk_rows"][0]["cpp_status"], "unique")
         self.assertEqual(report["crosswalk_rows"][0]["cpp_ids"], ["public"])
 
-    def test_hidden_only_declaration_does_not_receive_implementation_credit(self) -> None:
+    def test_hidden_only_declaration_does_not_receive_implementation_credit(
+        self,
+    ) -> None:
         hidden = cpp_decl("template", "GeomAbs::Convert", ["int"], visible=False)
         hidden["exclusion_reason"] = "template_pattern"
         report = report_document(

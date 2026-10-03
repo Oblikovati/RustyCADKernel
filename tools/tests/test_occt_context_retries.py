@@ -141,9 +141,7 @@ class ContextReconciliationTests(unittest.TestCase):
         }
         retry_path.write_text(json.dumps(retry))
         records = InventoryRecords()
-        merge_context_retries(
-            records, capture, capture_path, retry_path, self.root
-        )
+        merge_context_retries(records, capture, capture_path, retry_path, self.root)
         self.assertEqual(len(records.summaries), 1)
         self.assertEqual(capture["results"][0]["status"], "parsed_with_context")
 
