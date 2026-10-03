@@ -16,6 +16,7 @@ from verify_tkmath_legacy import (
     native_filter,
     native_env,
     native_statuses,
+    main,
     report_header_fields,
     cargo_env,
     verify_source_group,
@@ -24,6 +25,13 @@ from tkmath_native_provenance import (
     require_native_library_set,
     required_toolkit_libraries,
 )
+
+
+class FailedToolkitRun:
+    """Named fake that simulates an execution failure after CLI setup."""
+
+    def __call__(self, _args: object) -> None:
+        raise RuntimeError("simulated native execution failure")
 
 
 class TkMathLegacyRuntimeTest(unittest.TestCase):
@@ -37,6 +45,21 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
         self.assertEqual(default.output.name, "oracle-tkmath-legacy")
         self.assertEqual(tkg2d.toolkit, "TKG2d")
         self.assertEqual(tkg2d.output.name, "oracle-tkg2d-legacy")
+
+    def test_failed_rerun_removes_previous_success_report(self) -> None:
+        """Old green receipts are removed before a fresh run starts."""
+        with tempfile.TemporaryDirectory() as temporary:
+            output = pathlib.Path(temporary)
+            report_path = output / "report.json"
+            report_path.write_text('{"toolkit_complete": true}\n')
+            argv = ["verify_tkmath_legacy.py", "--output", str(output)]
+            with patch("sys.argv", argv), patch(
+                "verify_tkmath_legacy.run_verification",
+                side_effect=FailedToolkitRun(),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "simulated native"):
+                    main()
+            self.assertFalse(report_path.exists())
 
     def test_tkg2d_runtime_report_does_not_claim_toolkit_completion(self) -> None:
         """Mapped runtime evidence stays scoped and non-complete; e.g. TKG2d header."""

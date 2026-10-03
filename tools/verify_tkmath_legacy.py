@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Verify mapped legacy cases against OCCT and Rust for TKMath, TKG2d, or TKG3d.
-
-The no-argument command retains TKMath scope; add `--toolkit TKG2d` for 2D.
-"""
+"""Verify mapped OCCT runtime cases for TKMath, TKG2d, or TKG3d."""
 
 from __future__ import annotations
 
@@ -485,12 +482,13 @@ def arguments() -> argparse.Namespace:
 
 def main() -> None:
     """Run the pinned toolkit verifier; e.g. `... --toolkit TKG2d`."""
-    if sys.platform != "linux":
-        raise RuntimeError("This native oracle profile is Linux-only")
     args = arguments()
     args.output.mkdir(parents=True, exist_ok=True)
-    result = run_verification(args)
     report_path = args.output / "report.json"
+    report_path.unlink(missing_ok=True)
+    if sys.platform != "linux":
+        raise RuntimeError("This native oracle profile is Linux-only")
+    result = run_verification(args)
     report_path.write_text(json.dumps(result, indent=2) + "\n")
     print(f"PASS: {args.toolkit} mapped runtime evidence written to {report_path}")
 
