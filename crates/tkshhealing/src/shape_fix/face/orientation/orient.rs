@@ -12,10 +12,9 @@ pub(super) fn orient_classified_wires(
     fixer: &ShapeFixFace,
     face: &Face,
     wires: &FaceWireSet,
-    relations: Vec<WireRelation>,
     output_map: &mut ShapeFixFaceWireMap,
+    mut classify: impl FnMut(usize, &Wire) -> Result<WireRelation, Failure>,
 ) -> Result<(Vec<Wire>, Vec<usize>, bool), Failure> {
-    let internal = collect_internal_shapes(&relations);
     let mut changes = OrientationChanges {
         fixer,
         face,
@@ -24,7 +23,9 @@ pub(super) fn orient_classified_wires(
         reversed: Vec::new(),
         changed: wires.changed,
     };
-    changes.apply_relations(&relations, &internal)?;
+    let relations = changes.classify_and_orient_first(&mut classify)?;
+    let internal = collect_internal_shapes(&relations);
+    changes.orient_nested_wires(&relations, &internal)?;
     Ok((changes.output, changes.reversed, changes.changed))
 }
 
@@ -48,14 +49,24 @@ struct OrientationChanges<'a> {
 }
 
 impl OrientationChanges<'_> {
-    fn apply_relations(
+    fn classify_and_orient_first(
+        &mut self,
+        classify: &mut impl FnMut(usize, &Wire) -> Result<WireRelation, Failure>,
+    ) -> Result<Vec<WireRelation>, Failure> {
+        let mut relations = Vec::with_capacity(self.output.len());
+        for index in 0..self.output.len() {
+            let relation = classify(index, &self.output[index])?;
+            self.orient_first(index, &relation)?;
+            relations.push(relation);
+        }
+        Ok(relations)
+    }
+
+    fn orient_nested_wires(
         &mut self,
         relations: &[WireRelation],
         internal: &MapOfShape,
     ) -> Result<(), Failure> {
-        for (index, relation) in relations.iter().enumerate() {
-            self.orient_first(index, relation)?;
-        }
         for (index, relation) in relations.iter().enumerate() {
             self.orient_nested(index, relation, internal)?;
         }

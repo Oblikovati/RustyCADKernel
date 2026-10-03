@@ -125,6 +125,11 @@ fn face_mode_defaults_and_shape_fix_root_parent_are_native() {
     fixer.set_fix_add_natural_bound_mode(1);
     assert_eq!(fixer.fix_orientation_mode(), 0);
     assert_eq!(fixer.fix_add_natural_bound_mode(), 1);
+    let parent: &ShapeFixRoot = &fixer;
+    parent.set_precision(0.25);
+    assert_eq!(fixer.precision(), 0.25);
+    fixer.set_min_tolerance(0.125);
+    assert_eq!(parent.min_tolerance(), 0.125);
 }
 
 #[test]
@@ -390,6 +395,58 @@ fn periodic_seam_classification_shifts_the_candidate_pcurve() {
     assert_eq!(warnings.len(), 2);
     assert!(warnings.iter().any(|message| message.contains("MSG5")));
     assert!(warnings.iter().any(|message| message.contains("MSG11")));
+}
+
+#[test]
+fn immediate_wire_reversal_preserves_shared_periodic_seam_state() {
+    let surface = cylinder_surface();
+    let wire = patch_wire(&surface, (0.0, std::f64::consts::TAU, 1.0, 4.0));
+    let reversed = rustycad_tkbrep::topods::wire(&wire.clone().into_shape().reversed()).unwrap();
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface, 1e-7)
+        .unwrap();
+    Builder.add(&mut face, &wire.clone().into_shape()).unwrap();
+    Builder.add(&mut face, &reversed.into_shape()).unwrap();
+
+    let fixer = ShapeFixFace::new(face.into_shape());
+    assert!(fixer.fix_orientation().unwrap());
+    let fixed_face = fixer.face().unwrap();
+    let fixed_wires = wire_shapes(&fixed_face);
+    assert_eq!(fixed_wires.len(), 2);
+    assert!(
+        (first_pcurve_midpoint(&fixed_face, &fixed_wires[0]).x() - std::f64::consts::TAU).abs()
+            < 1e-7
+    );
+    assert!(
+        (first_pcurve_midpoint(&fixed_face, &fixed_wires[1]).x() - std::f64::consts::TAU).abs()
+            < 1e-7
+    );
+}
+
+fn cylinder_surface() -> Handle<dyn GeomSurface> {
+    Handle::new(
+        GeomCylindricalSurface::new(
+            Axis3::new(
+                Point3::default(),
+                Direction3::new(0.0, 0.0, 1.0).unwrap(),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+            )
+            .unwrap(),
+            1.0,
+        )
+        .unwrap(),
+    )
+    .cast::<dyn GeomSurface>()
+}
+
+fn wire_shapes(face: &Face) -> Vec<Wire> {
+    ShapeIterator::new(&face.clone().into_shape(), false, true)
+        .filter_map(|child| {
+            (child.shape_type().ok() == Some(rustycad_tkg3d::top_abs::ShapeEnum::Wire))
+                .then(|| rustycad_tkbrep::topods::wire(&child).unwrap())
+        })
+        .collect()
 }
 
 fn patch_wire(surface: &Handle<dyn GeomSurface>, bounds: (f64, f64, f64, f64)) -> Wire {

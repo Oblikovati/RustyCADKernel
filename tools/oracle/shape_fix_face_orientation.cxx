@@ -164,6 +164,32 @@ static void print_periodic_shift_case() {
             << " edge_forward=" << edgeForward << " edge_reversed=" << edgeReversed << '\n';
 }
 
+static void print_shared_seam_reversal_case() {
+  const gp_Cylinder cylinder(gp_Ax3(), 1.0);
+  occ::handle<Geom_Surface> surface = new Geom_CylindricalSurface(cylinder);
+  BRepBuilderAPI_MakeFace patch(surface, 0.0, 2.0 * M_PI, 1.0, 4.0, Precision::Confusion());
+  TopoDS_Wire wire = TopoDS::Wire(TopExp_Explorer(patch.Face(), TopAbs_WIRE).Current());
+  TopoDS_Wire reversed = wire;
+  reversed.Reverse();
+  TopoDS_Face face;
+  BRep_Builder builder;
+  builder.MakeFace(face, surface, Precision::Confusion());
+  builder.Add(face, wire);
+  builder.Add(face, reversed);
+
+  ShapeFix_Face fixer(face);
+  fixer.FixAddNaturalBoundMode() = 0;
+  const bool changed = fixer.FixOrientation();
+  std::cout << "shared_seam_reversal changed=" << changed;
+  for (TopExp_Explorer wi(fixer.Face(), TopAbs_WIRE); wi.More(); wi.Next()) {
+    TopoDS_Edge edge = TopoDS::Edge(TopExp_Explorer(wi.Current(), TopAbs_EDGE).Current());
+    double first = 0, last = 0;
+    const auto curve = BRep_Tool::CurveOnSurface(edge, fixer.Face(), first, last);
+    std::cout << " p=" << curve->Value((first + last) * 0.5).X();
+  }
+  std::cout << '\n';
+}
+
 static void print_context_case(const gp_Pln& plane) {
   TopoDS_Face original = face_with_wire(plane, square(20, 20, 24, 24));
   TopoDS_Face replacement = face_with_wire(plane, square(0, 0, 4, 4, true));
@@ -235,6 +261,7 @@ int main() {
   builder.Add(internal, internalWire);
   print_case("internal_child_preserved", internal);
   print_periodic_shift_case();
+  print_shared_seam_reversal_case();
   print_context_case(plane);
   print_sphere_natural_bound_case();
   return 0;

@@ -37,6 +37,7 @@ periodic_shifted_states infinite=1 5.8,2.5=1 6.1,1=1 6.4,2.5=1 6.1,4=1
 periodic_reverse_states infinite=1 5.8,2.5=1 6.1,1=1 6.4,2.5=1 6.1,4=1
 periodic_messages Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG11:L=1:R=0 Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG5:L=0:R=0
 periodic_shift changed=1 pcurve_mid_before=0.1 pcurve_mid_after=6.38319 map=0 forward=2 reversed=0 warning_shapes=2 edge_forward=4 edge_reversed=4
+shared_seam_reversal changed=1 p=6.28319 p=6.28319
 context changed=1 result_matches_context=1 result_forward=1
 sphere_natural_bound changed=0 wire_orientation=1
 ```
@@ -54,3 +55,10 @@ The periodic result also checks that the candidate right pcurve is translated by
 records `MSG11`: OCCT sets an unknown aggregate state on mixed edge classifications,
 then still applies the final candidate-state comparison before selecting the
 warning/reversal behavior. The Rust port preserves that control flow.
+
+`shared_seam_reversal` adds the exact same periodic-cylinder wire twice, once reversed,
+so the first pass exercises a seam pcurve shared by both source wires. Native reverses
+the first wire before classifying the second; the resulting shared pcurve midpoint is
+`2π` on both rebuilt wires. Rust now classifies and applies each first-pass result in
+source order before proceeding to the next wire, then performs the separate nested-wire
+pass.
