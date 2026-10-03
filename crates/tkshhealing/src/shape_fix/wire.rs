@@ -12,6 +12,8 @@ mod wire_degenerated;
 mod wire_lacking;
 #[path = "wire_seam.rs"]
 mod wire_seam;
+#[path = "wire_self_intersection_fix.rs"]
+mod wire_self_intersection_fix;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
 #[path = "wire_small.rs"]
