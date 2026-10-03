@@ -74984,8 +74984,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::from_locale",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Implements the POSIX C locale every program starts in (Rust has no process locale): single-byte ASCII. Quirk preserved: NCollection_UtfStringTool sizes its buffer with mblen, which measures the first character only, so at most one character is converted; a leading non-ASCII byte clears."
+      "status": "partial",
+      "notes": "Unix delegates to the active C locale through a project-owned libc adapter. Preserves the first-character mblen byte count as the mbstowcs wide-character limit; UTF-8 and Latin-1 native probe recorded in tools/oracle/ncollection_utf_locale_probe.cxx. Embedded NUL terminates input. Native uninitialized storage after a later invalid multibyte sequence is zero-initialized for Rust safety, not counted as parity. Non-Unix system code-page conversion remains unported."
     },
     {
       "upstream_id": "NCollection_UtfString::~NCollection_UtfString()",
@@ -75056,8 +75056,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::to_locale",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The buffer and its size become one byte slice. C locale as for FromLocale; quirks of wcstombs and the native `<= 0` test on its unsigned result preserved: only an empty conversion is false, a non-ASCII symbol stops the copy yet reports true, a full buffer gets no terminator. The native terminator store into a zero-sized buffer is skipped (a slice cannot be written past its end)."
+      "status": "partial",
+      "notes": "Unix uses active-locale wcstombs with the native unsigned-result comparison: conversion error returns true, zero output returns false, a full output buffer gets no terminator. Empty Rust slices skip the native out-of-bounds terminator store. Verified UTF-8 truncation, C-locale errors, and CLocaleSentry switching. Non-Unix system code-page conversion remains unported."
     },
     {
       "upstream_id": "NCollection_UtfString::IsEmpty() const",

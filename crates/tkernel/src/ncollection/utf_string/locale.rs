@@ -1,44 +1,20 @@
-//! FromLocale/ToLocale over the POSIX "C" locale (NCollection_UtfStringTool on glibc).
-//!
-//! Every C/C++ program starts in the "C" locale and OCCT never calls `setlocale`; Rust has no
-//! process locale, so this module implements exactly that locale: single-byte ASCII, where
-//! bytes and wide characters above 0x7F are conversion errors.
+//! Multibyte conversion in the active C locale, with OCCT's buffer-sizing quirks.
 use super::UtfString;
 use crate::ncollection::{UtfUnit, WideChar};
 
-/// The C-locale `mblen(text, MB_CUR_MAX)`: 0 for an empty string, 1 for ASCII, -1 otherwise.
-fn c_locale_mblen(text: &[u8]) -> i32 {
-    match text.first().copied().unwrap_or(0) {
-        0 => 0,
-        0x01..=0x7F => 1,
-        _ => -1,
-    }
-}
-
-/// The C-locale `wcstombs(buffer, wide, buffer.len())`: bytes stored before the terminator,
-/// `usize::MAX` (the native `(size_t)-1`) on a non-ASCII character. A full buffer is left
-/// without a terminator, as the C function does.
-fn c_locale_wcstombs(wide: &[WideChar], buffer: &mut [u8]) -> usize {
-    for (written, slot) in buffer.iter_mut().enumerate() {
-        #[allow(clippy::useless_conversion)] // WideChar is u16 on Windows
-        let symbol: u32 = wide.get(written).map_or(0, |&unit| unit.into());
-        if symbol > 0x7F {
-            return usize::MAX;
-        }
-        *slot = symbol as u8;
-        if symbol == 0 {
-            return written;
-        }
-    }
-    buffer.len()
-}
+#[cfg(unix)]
+#[path = "locale_unix.rs"]
+mod platform;
+#[cfg(not(unix))]
+#[path = "locale_fallback.rs"]
+mod platform;
 
 impl<T: UtfUnit> UtfString<T> {
-    /// Replaces the contents with multibyte text in the C locale (native `FromLocale`).
+    /// Replaces the contents with multibyte text in the active C locale (native `FromLocale`).
     ///
     /// Quirk preserved: the native tool sizes its wide buffer with `mblen`, which measures the
-    /// first character only, so at most one character is converted; a leading non-ASCII byte or
-    /// an empty input clears the string.
+    /// first character only. That byte count limits the number of converted wide characters.
+    /// An invalid first character or empty input clears the string.
     ///
     /// ```
     /// use rustycad_tkernel::ncollection::UtfString;
@@ -47,18 +23,18 @@ impl<T: UtfUnit> UtfString<T> {
     /// assert_eq!(text.to_c_string(), b"a\0");
     /// ```
     pub fn from_locale(&mut self, text: &[u8], length: i32) {
-        if c_locale_mblen(text) <= 0 {
+        let wide = platform::decode(text);
+        if wide.is_empty() {
             self.clear();
             return;
         }
-        let wide: [WideChar; 2] = [WideChar::from(text[0]), 0];
         self.from_unicode(&wide, length);
     }
 
-    /// Writes the string in the C locale into `buffer` (native `ToLocale`, size = `buffer.len()`).
+    /// Writes the string in the active C locale into `buffer` (native `ToLocale`, size = `buffer.len()`).
     ///
     /// Quirks preserved from `wcstombs` and the native `<= 0` test on its unsigned result:
-    /// only an empty conversion reports false (and stores a terminator); a non-ASCII symbol
+    /// only an empty conversion reports false (and stores a terminator); an unrepresentable symbol
     /// stops the copy but still reports true, and a full buffer gets no terminator.
     ///
     /// ```
@@ -69,7 +45,7 @@ impl<T: UtfUnit> UtfString<T> {
     /// ```
     pub fn to_locale(&self, buffer: &mut [u8]) -> bool {
         let wide = UtfString::<WideChar>::from_unicode_units(&self.units, self.length);
-        if c_locale_wcstombs(wide.to_c_string(), buffer) == 0 {
+        if platform::encode(wide.to_c_string(), buffer) == 0 {
             // The native code stores the terminator even into a zero-sized buffer; a slice
             // cannot be written past its end, so an empty buffer stays untouched.
             if let Some(first) = buffer.first_mut() {

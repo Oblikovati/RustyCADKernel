@@ -758,11 +758,14 @@ code-unit offsets. These native quirks are preserved:
   `Length()`.
 - `operator+` always adds both cached lengths. `operator+=` skips an empty right side.
 - `SubString` uses `end - start` as the symbol budget, so a negative start widens the copy.
-- `FromLocale`/`ToLocale` implement the POSIX "C" locale that every program starts in. Rust has
-  no process locale, which is a deliberate deviation from locale-dependent hosts. `FromLocale`
-  converts at most one character, because `mblen` measures only the first one. `ToLocale`
-  reports true even when `wcstombs` fails on a non-ASCII symbol. It reports false only for an
-  empty conversion, and it leaves a full buffer without a terminator.
+- On Unix, `FromLocale`/`ToLocale` use the active C locale through a small libc adapter.
+  `FromLocale` limits wide-character output by the byte length of the first multibyte
+  character: UTF-8 `äbc` becomes `äb`, while ASCII `abc` becomes `a`. `ToLocale`
+  reports true even on conversion error, false on zero output, and leaves a full
+  buffer without a terminator. CLocaleSentry switching and restoration are tested.
+  Invalid later input can expose uninitialized native storage; Rust zero-initializes
+  that storage without claiming parity for the undefined native case. Non-Unix
+  system code-page conversion remains unported; both ledger entries are partial.
 
 `GetUtf*` write into a destination slice and return the count of code units written. A slice
 that is too short is a `UtfBufferError`; the native code overruns.
