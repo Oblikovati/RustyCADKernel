@@ -1,0 +1,23 @@
+[package]
+name = "rustycad-tkoffset"
+description = "OCCT TKOffset toolkit: offset modeling algorithms"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
+
+[dev-dependencies]
+rustycad-tkprim = { path = "../tkprim" }
