@@ -2,12 +2,20 @@
 
 //! `Standard_CLocaleSentry`: formatting and parsing in the "C" locale within a scope.
 //!
-//! Native code switches the calling thread to the C locale (`uselocale`, or `setlocale`
-//! where POSIX.1-2008 is missing) so that `sprintf`/`atof`-style calls ignore the user's
-//! locale, and restores the previous locale when the sentry is destroyed. Rust's number
-//! formatting and parsing never consult a process locale, and every OCCT formatting
-//! routine in this port already produces C-locale text, so there is nothing to switch:
-//! the sentry is a scope marker and the locale object describes the fixed C conventions.
+//! Rust's number formatting and parsing never consult a process locale, but OCCT also
+//! exposes this sentry to code that calls locale-sensitive C routines. POSIX targets
+//! switch only the calling thread to `C` and restore its previous thread locale on drop.
+//! Other targets retain the descriptive scope API; their locale switching is not ported.
+
+#[cfg(all(unix, not(target_os = "android")))]
+#[path = "c_locale_sentry/locale_posix.rs"]
+mod locale_scope;
+#[cfg(any(not(unix), target_os = "android"))]
+#[path = "c_locale_sentry/locale_fallback.rs"]
+mod locale_scope;
+
+use std::marker::PhantomData;
+use std::rc::Rc;
 
 /// The "C" locale that `_l` style calls format with; `CLocaleSentry::get_c_locale().decimal_point()`.
 #[derive(Debug, Eq, PartialEq)]
@@ -34,18 +42,22 @@ impl CLocale {
 
 static C_LOCALE: CLocale = CLocale { name: "C" };
 
-/// Scope in which formatting uses the C locale; `let _sentry = CLocaleSentry::new();`.
+/// Scope in which locale-sensitive C routines use the C locale; `CLocaleSentry::new()`.
 #[derive(Debug)]
 pub struct CLocaleSentry {
-    // Keeps construction explicit, as the native class has no copy constructor.
-    _scope: (),
+    // A sentry must be dropped on the thread whose prior locale it captured.
+    _scope: locale_scope::ThreadLocaleScope,
+    _thread_bound: PhantomData<Rc<()>>,
 }
 
 impl CLocaleSentry {
-    /// Enters the C locale scope (a no-op for locale-independent Rust formatting);
-    /// `CLocaleSentry::new()`.
+    /// Enters the C locale scope and restores the prior thread locale on drop;
+    /// panics if the locale cannot be activated. Example: `let _sentry = CLocaleSentry::new();`.
     pub fn new() -> Self {
-        Self { _scope: () }
+        Self {
+            _scope: locale_scope::ThreadLocaleScope::enter(),
+            _thread_bound: PhantomData,
+        }
     }
 
     /// The process-wide C locale object; every call returns the same instance, as the
