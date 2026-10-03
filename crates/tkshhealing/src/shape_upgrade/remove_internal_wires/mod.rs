@@ -136,6 +136,16 @@ impl ShapeUpgradeRemoveInternalWires {
     pub fn removed_wires(&self) -> Handle<HSequence<Shape>> {
         self.fields.read().removed_wires.clone()
     }
+    /// Read native protected `myStatus` for specialized removal algorithms.
+    /// Example: `let bits = remover.status_bits();`.
+    pub fn status_bits(&self) -> i32 {
+        self.fields.read().status
+    }
+    /// Write native protected `myStatus` without changing removal outputs.
+    /// Example: `remover.set_status_bits(0x101);`.
+    pub fn set_status_bits(&self, bits: i32) {
+        self.fields.write().status = bits;
+    }
     /// Decodes the last operation's ShapeExtend status; `remover.status(ShapeExtendStatus::Done1)`.
     pub fn status(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.fields.read().status, status)

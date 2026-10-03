@@ -310,3 +310,18 @@ fn protected_clear_keeps_result_context_and_configuration() {
     assert!(removed == remover.removed_wires());
     assert!(removed.sequence(|seq| seq.is_empty()));
 }
+
+#[test]
+fn protected_status_storage_matches_native_subclass_access() {
+    let remover = ShapeUpgradeRemoveInternalWires::new();
+    remover.set_status_bits(0x101);
+    let row = format!(
+        "protected_status {} {} {}",
+        remover.status_bits(),
+        i32::from(remover.status(ShapeExtendStatus::Done1)),
+        i32::from(remover.status(ShapeExtendStatus::Fail1))
+    );
+    assert_eq!(row, expected_row("protected_status").join(" "));
+    remover.clear();
+    assert_eq!(remover.status_bits(), 0);
+}

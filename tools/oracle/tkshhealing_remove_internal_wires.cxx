@@ -156,6 +156,22 @@ static void runPersistentContext()
             << count(result, TopAbs_FACE) << ' ' << count(result, TopAbs_WIRE) << '\n';
 }
 
+class ProtectedStatusProbe : public ShapeUpgrade_RemoveInternalWires
+{
+public:
+  void WriteStatus(int value) { myStatus = value; }
+  int ReadStatus() const { return myStatus; }
+};
+
+static void runProtectedStatus()
+{
+  ProtectedStatusProbe probe;
+  probe.WriteStatus(0x101);
+  std::cout << "protected_status " << probe.ReadStatus() << ' '
+            << probe.Status(ShapeExtend_DONE1) << ' '
+            << probe.Status(ShapeExtend_FAIL1) << '\n';
+}
+
 int main()
 {
   run("remove_hole", false, true, 2.0);
@@ -167,6 +183,7 @@ int main()
   runFaceCandidate();
   runMultipleAdjacentCandidates();
   runPersistentContext();
+  runProtectedStatus();
   ShapeUpgrade_RemoveInternalWires empty;
   std::cout << "null_shape " << empty.Perform() << ' '
             << empty.Status(ShapeExtend_FAIL1) << ' '

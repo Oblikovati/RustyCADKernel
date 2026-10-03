@@ -24,5 +24,4 @@ second hole is sampled, incremental visibility of the first removed wire, retain
 sequence identity across the protected `Clear`, and the native removed-face iterator's
 advance after a successful match. Geometry/context calls execute outside the remover's
 state lock; each context operation fetches the current context. These supplementary
-checks are not additional mapped legacy declarations. Native protected `myStatus` remains
-an explicit field-access obligation; the public/protected methods are mapped separately.
+checks are not additional mapped legacy declarations. Native protected `myStatus` has read/write accessor equivalents, with a native derived-class fixture checking raw flag decoding.
