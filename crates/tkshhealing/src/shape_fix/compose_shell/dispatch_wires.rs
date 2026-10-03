@@ -52,9 +52,6 @@ fn adjust_closed_centers(
     grid: &ShapeExtendCompositeSurface,
     mut centers: Vec<Point2>,
 ) -> Vec<Point2> {
-    if !composer.closed_mode() {
-        return centers;
-    }
     let fields = composer.fields.read();
     let bounds = grid.bounds();
     for center in &mut centers {
@@ -191,11 +188,17 @@ fn copied_or_recorded_edge(
     copied_edges: &mut Vec<(Edge, Edge)>,
 ) -> Result<Edge, Failure> {
     let target = match copied_edges.iter().find(|(edge, _)| edge.is_same(source)) {
-        Some((_, copied)) => copied.clone(),
+        Some((_, copied)) => copied_occurrence(copied, source),
         None => record_edge_copy(source, context, copied_edges)?,
     };
     ShapeBuildEdge.reassign_pcurve(&target, source_face, patch_face)?;
     Ok(target)
+}
+
+fn copied_occurrence(copied: &Edge, source: &Edge) -> Edge {
+    let mut occurrence = copied.clone();
+    occurrence.set_orientation(source.orientation());
+    occurrence
 }
 
 fn record_edge_copy(

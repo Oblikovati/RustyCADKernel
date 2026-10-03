@@ -33,6 +33,7 @@ of two manually split segments, including the consumed source orientations.
 The `Perform` rows record the complete one-patch face result and a two-patch shell result,
 including result orientation, direct child count and `DONE1` status. The no-wire row
 verifies `false`, retained null result, `FAIL6`, and no `DONE1` when loading yields no segments.
+Open and closed periodic-cylinder rows cover the cylindrical seam dispatch path.
 The periodic-cylinder `SplitByLine` rows cut the seam at both U=0 and U=2π; the
 second row checks that shifting the cutter across the period preserves the native
 intersection order and vertex coordinates.
