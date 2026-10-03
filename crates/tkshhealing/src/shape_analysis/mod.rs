@@ -3,6 +3,7 @@
 //! OCCT package ShapeAnalysis: the analysis tools that detect problems of shapes (wires,
 //! edges, surfaces, free bounds, contents). docs/shhealing-design.md section 4 fixes how
 //! its classes map; docs/tkshhealing-progress.md lists the ported classes.
+mod check_small_face;
 mod edge;
 mod free_bound_data;
 mod geom;
@@ -10,6 +11,7 @@ mod shape_tolerance;
 mod shell;
 mod wire_order;
 
+pub use check_small_face::ShapeAnalysisCheckSmallFace;
 pub use free_bound_data::ShapeAnalysisFreeBoundData;
 pub use geom::ShapeAnalysisGeom;
 pub use shape_tolerance::ShapeAnalysisShapeTolerance;
