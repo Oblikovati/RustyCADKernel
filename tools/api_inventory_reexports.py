@@ -4,7 +4,13 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 
-from api_inventory_json import JSONValue, array_value, declaration_digest, object_value, string_value
+from api_inventory_json import (
+    JSONValue,
+    array_value,
+    declaration_digest,
+    object_value,
+    string_value,
+)
 
 
 def resolve_cross_crate_reexports(crates: list[dict[str, JSONValue]]) -> None:
@@ -16,7 +22,9 @@ def resolve_cross_crate_reexports(crates: list[dict[str, JSONValue]]) -> None:
         crate["source_files"] = source_hashes(crate["declarations"])
 
 
-def path_catalog(crates: Sequence[Mapping[str, JSONValue]]) -> dict[str, list[dict[str, JSONValue]]]:
+def path_catalog(
+    crates: Sequence[Mapping[str, JSONValue]],
+) -> dict[str, list[dict[str, JSONValue]]]:
     catalog: dict[str, list[dict[str, JSONValue]]] = {}
     for crate in crates:
         name = string_value(crate.get("crate"), "crate name")
@@ -27,8 +35,11 @@ def path_catalog(crates: Sequence[Mapping[str, JSONValue]]) -> dict[str, list[di
     return catalog
 
 
-def expand_reexports(crate: Mapping[str, JSONValue], declarations: Sequence[JSONValue],
-                     catalog: Mapping[str, list[dict[str, JSONValue]]]) -> list[dict[str, JSONValue]]:
+def expand_reexports(
+    crate: Mapping[str, JSONValue],
+    declarations: Sequence[JSONValue],
+    catalog: Mapping[str, list[dict[str, JSONValue]]],
+) -> list[dict[str, JSONValue]]:
     crate_name = string_value(crate.get("crate"), "crate name")
     output: list[dict[str, JSONValue]] = []
     for value in declarations:
@@ -37,16 +48,22 @@ def expand_reexports(crate: Mapping[str, JSONValue], declarations: Sequence[JSON
     return output
 
 
-def expand_one_reexport(crate_name: str, entry: Mapping[str, JSONValue],
-                        catalog: Mapping[str, list[dict[str, JSONValue]]]) -> list[dict[str, JSONValue]]:
+def expand_one_reexport(
+    crate_name: str,
+    entry: Mapping[str, JSONValue],
+    catalog: Mapping[str, list[dict[str, JSONValue]]],
+) -> list[dict[str, JSONValue]]:
     kind = string_value(entry.get("kind"), "declaration kind")
     if kind not in {"unresolved_reexport", "reexport_module"}:
         return [dict(entry)]
     return resolve_reexport_entry(crate_name, entry, catalog)
 
 
-def resolve_reexport_entry(crate_name: str, entry: Mapping[str, JSONValue],
-                           catalog: Mapping[str, list[dict[str, JSONValue]]]) -> list[dict[str, JSONValue]]:
+def resolve_reexport_entry(
+    crate_name: str,
+    entry: Mapping[str, JSONValue],
+    catalog: Mapping[str, list[dict[str, JSONValue]]],
+) -> list[dict[str, JSONValue]]:
     target = string_value(entry.get("target_path"), "re-export target path")
     metadata = entry.get("reexport")
     alternatives = reexport_target_paths(target, metadata)
@@ -55,8 +72,15 @@ def resolve_reexport_entry(crate_name: str, entry: Mapping[str, JSONValue],
         return [dict(entry)]
     for candidate_path in alternatives:
         candidates = external_candidates(owner, candidate_path, catalog)
-        if candidates:
-            return [remap_reexport(candidate, candidate_path, entry) for candidate in candidates]
+        if not candidates:
+            continue
+        if isinstance(metadata, dict) and metadata.get("is_glob") is True:
+            candidates = [
+                row for row in candidates if row.get("path") != candidate_path
+            ]
+        return [
+            remap_reexport(candidate, candidate_path, entry) for candidate in candidates
+        ]
     return [dict(entry)]
 
 
@@ -69,15 +93,19 @@ def reexport_target_paths(target: str, metadata: JSONValue | None) -> list[str]:
     return paths
 
 
-def external_candidates(owner: str, target: str,
-                        catalog: Mapping[str, list[dict[str, JSONValue]]]) -> list[dict[str, JSONValue]]:
+def external_candidates(
+    owner: str, target: str, catalog: Mapping[str, list[dict[str, JSONValue]]]
+) -> list[dict[str, JSONValue]]:
     prefix = f"{target}::"
     candidates = []
     for path, records in catalog.items():
         if path != target and not path.startswith(prefix):
             continue
-        candidates.extend(record["entry"] for record in records
-                          if record.get("crate") == owner and not unresolved_kind(record["entry"]))
+        candidates.extend(
+            record["entry"]
+            for record in records
+            if record.get("crate") == owner and not unresolved_kind(record["entry"])
+        )
     return candidates
 
 
@@ -87,12 +115,13 @@ def unresolved_kind(entry: Mapping[str, JSONValue]) -> bool:
     return False
 
 
-def remap_reexport(source: Mapping[str, JSONValue], target: str,
-                   alias: Mapping[str, JSONValue]) -> dict[str, JSONValue]:
+def remap_reexport(
+    source: Mapping[str, JSONValue], target: str, alias: Mapping[str, JSONValue]
+) -> dict[str, JSONValue]:
     source_path = string_value(source.get("path"), "source declaration path")
     alias_path = string_value(alias.get("path"), "alias declaration path")
     mapped = dict(source)
-    mapped["path"] = alias_path + source_path[len(target):]
+    mapped["path"] = alias_path + source_path[len(target) :]
     mapped["reexport_origin_path"] = source_path
     if source_path == target and isinstance(alias.get("reexport"), dict):
         mapped["reexport"] = alias["reexport"]
@@ -126,14 +155,18 @@ def collect_unresolved_fields(value: Mapping[str, JSONValue], found: set[str]) -
             found.add(str(target))
 
 
-def source_hashes(entries: Sequence[Mapping[str, JSONValue]]) -> list[dict[str, JSONValue]]:
+def source_hashes(
+    entries: Sequence[Mapping[str, JSONValue]],
+) -> list[dict[str, JSONValue]]:
     records: dict[str, str] = {}
     for entry in entries:
         add_source_hash(records, entry)
         reexport = entry.get("reexport")
         if isinstance(reexport, dict):
             add_source_hash(records, reexport)
-    return [{"path": filename, "sha256": records[filename]} for filename in sorted(records)]
+    return [
+        {"path": filename, "sha256": records[filename]} for filename in sorted(records)
+    ]
 
 
 def add_source_hash(records: dict[str, str], entry: Mapping[str, JSONValue]) -> None:

@@ -27,7 +27,11 @@ declaration hash.
 
 The versioned visibility policy includes every reachable public item present in
 rustdoc JSON, including items marked `doc(hidden)`; the normalizer does not
-silently exclude them.
+silently exclude them. A glob re-export exposes members in the importing
+namespace: `pub use hidden::*` does not expose a `hidden` module. Rustdoc
+canonical defining paths are used inside signatures, but do not grant public
+reachability through private modules. A checked-in nightly format-61 compiler
+fixture covers nested and crate-root glob exports.
 
 Capture provenance includes the workspace revision, tool versions, input and
 artifact hashes, selected feature policy, and each crate's feature selection.
