@@ -138,7 +138,7 @@ def require_native_passes(cases: list[ET.Element]) -> None:
         raise RuntimeError(
             "TKMath native skips require explicit review before evidence is emitted"
         )
-    return statuses
+    return None
 
 
 def rust_statuses(
