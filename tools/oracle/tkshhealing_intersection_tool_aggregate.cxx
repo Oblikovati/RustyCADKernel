@@ -1,6 +1,8 @@
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_Line.hxx>
+#include <Geom_Circle.hxx>
+#include <Geom2d_Circle.hxx>
 #include <Geom2d_Line.hxx>
 #include <Geom_Plane.hxx>
 #include <ShapeBuild_ReShape.hxx>
@@ -123,6 +125,37 @@ int main() {
   for (int i = 1; i <= reversedWire->NbEdges(); ++i) {
     double first, last;
     BRep_Tool::Range(reversedWire->Edge(i), reversedFace, first, last);
+    std::cout << " " << first << " " << last;
+  }
+  std::cout << '\n';
+
+  TopoDS_Face multipleFace;
+  builder.MakeFace(multipleFace, new Geom_Plane(gp_Ax3()), 1.e-7);
+  Handle(ShapeExtend_WireData) multipleWire = new ShapeExtend_WireData;
+  TopoDS_Edge circleEdge;
+  builder.MakeEdge(circleEdge, new Geom_Circle(gp_Ax2(gp_Pnt(0., 0., 0.), gp_Dir(0., 0., 1.)), 1.), 1.e-7);
+  TopoDS_Vertex circleVertex;
+  builder.MakeVertex(circleVertex, gp_Pnt(1., 0., 0.), 1.e-7);
+  builder.Add(circleEdge, circleVertex.Oriented(TopAbs_FORWARD));
+  builder.Add(circleEdge, circleVertex.Oriented(TopAbs_REVERSED));
+  builder.UpdateEdge(circleEdge, new Geom2d_Circle(gp_Ax2d(gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.)), 1.), multipleFace, 1.e-7);
+  builder.Range(circleEdge, multipleFace, 0., 2. * M_PI);
+  builder.Range(circleEdge, 0., 2. * M_PI);
+  builder.SameRange(circleEdge, true);
+  builder.SameParameter(circleEdge, true);
+  multipleWire->Add(circleEdge);
+  multipleWire->Add(edgeOnPlane(multipleFace, gp_Pnt(3., 3., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(3., 3.), gp_Dir2d(1., 0.)));
+  multipleWire->Add(edgeOnPlane(multipleFace, gp_Pnt(-2., .5, 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(-2., .5), gp_Dir2d(1., 0.), 4.));
+  multipleWire->Add(edgeOnPlane(multipleFace, gp_Pnt(-4., -4., 0.), gp_Dir(0., 1., 0.), gp_Pnt2d(-4., -4.), gp_Dir2d(0., 1.)));
+  builder.Add(multipleFace, multipleWire->Wire());
+  Handle(ShapeBuild_ReShape) multipleContext = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool multipleTool(multipleContext, 1.e-7);
+  split = 91; cut = 92; removed = 93;
+  done = multipleTool.FixSelfIntersectWire(multipleWire, multipleFace, split, cut, removed);
+  std::cout << done << " " << split << " " << cut << " " << removed << " " << multipleWire->NbEdges();
+  for (int i = 1; i <= multipleWire->NbEdges(); ++i) {
+    double first, last;
+    BRep_Tool::Range(multipleWire->Edge(i), multipleFace, first, last);
     std::cout << " " << first << " " << last;
   }
   std::cout << '\n';
