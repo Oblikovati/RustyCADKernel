@@ -1,0 +1,2837 @@
+{
+  "schema_version": 1,
+  "scope": "283 existing TKernel implemented claims; add only the observed noexcept qualifier to const method selectors. Every C++ identity and Rust target uniquely resolved with source hashes checked; no conflicted identities accepted. No implementation/status/test changes and no behavioral proof.",
+  "source_capture_revision": "cf359bf0",
+  "corrections": [
+    {
+      "previous_id": "NCollection_Vec2::GetData() const",
+      "upstream_id": "NCollection_Vec2::GetData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::data",
+      "cpp_id": "fe31cbad2fadfaef93b938357a8a830cbea82e86b156f0bc89364d3fb45d06fb",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec2::maxComp() const",
+      "upstream_id": "NCollection_Vec2::maxComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::max_comp",
+      "cpp_id": "f52512aae29dea11390faa2fc156e469bf5c2c4ced8b0b342a8c296bffb166e8",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec2::minComp() const",
+      "upstream_id": "NCollection_Vec2::minComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::min_comp",
+      "cpp_id": "0c9cd9d68090298ccf2efadfed86413e5a21ea9951c10b985a01da2ffa16fdcd",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec2::SquareModulus() const",
+      "upstream_id": "NCollection_Vec2::SquareModulus() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::square_modulus",
+      "cpp_id": "5dcbac9848f1547bf74879497deeb920810b3be8c3d3077a93035ba5a1103773",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/float.rs",
+      "rust_source_sha256": "db00f76b462abe3c9e4dc7c12db597f0255d6ce5043053e2ae3fbb709c929a13"
+    },
+    {
+      "previous_id": "NCollection_Vec2::Multiplied(Element_t) const",
+      "upstream_id": "NCollection_Vec2::Multiplied(Element_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::multiplied",
+      "cpp_id": "d950627555604f1f76e66f045a2cdcb5c4ebc39cb3bcaf7488654fbe4bc8c430",
+      "cpp_signature": "NCollection_Vec2<Element_t> (type-parameter-0-0) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec3::maxComp() const",
+      "upstream_id": "NCollection_Vec3::maxComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::max_comp",
+      "cpp_id": "0aa8bca053bfc2f0dce9f3f604925b991fb2dcba83b90f10d639c342281a0315",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec3::minComp() const",
+      "upstream_id": "NCollection_Vec3::minComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::min_comp",
+      "cpp_id": "6dd93557ca7fa72d105f7c18f70f6982995750f4fbbcce3561b9822558345f6e",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec4::maxComp() const",
+      "upstream_id": "NCollection_Vec4::maxComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::max_comp",
+      "cpp_id": "f47d70250ff6145d20e86029acf3eab3462f0d45e9d5bee21e0a1e9275ea327d",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec4::minComp() const",
+      "upstream_id": "NCollection_Vec4::minComp() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::min_comp",
+      "cpp_id": "2981290d6da3c0924ffe7b1a46bcffb70a3a66766cbf94f70ee85ddb2484a6a8",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetValue(size_t,size_t) const",
+      "upstream_id": "NCollection_Mat4::GetValue(size_t,size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_value",
+      "cpp_id": "fd46b5aeadba93d3c607cd2687bc1e2a74a7277c88dde713ecc07bdae39e8e1b",
+      "cpp_signature": "type-parameter-0-0 (unsigned long, unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetRow(size_t) const",
+      "upstream_id": "NCollection_Mat4::GetRow(size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_row",
+      "cpp_id": "46493cb7a31d3b581c966cef28f4e8119b9958910ec45ebaf303c0cc80801f05",
+      "cpp_signature": "NCollection_Vec4<type-parameter-0-0> (unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetColumn(size_t) const",
+      "upstream_id": "NCollection_Mat4::GetColumn(size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_column",
+      "cpp_id": "e3180adabe4f1e459c21a3556f55b354907acce1c7344489080d38c94c9844c6",
+      "cpp_signature": "NCollection_Vec4<type-parameter-0-0> (unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetDiagonal() const",
+      "upstream_id": "NCollection_Mat4::GetDiagonal() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_diagonal",
+      "cpp_id": "5603d3e56047886c645f002914664c177c3b739b60718fb5526e26abf4e33959",
+      "cpp_signature": "NCollection_Vec4<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::IsZero() const",
+      "upstream_id": "NCollection_Mat4::IsZero() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::is_zero",
+      "cpp_id": "607019abfd104c7f0860b4097c91caf47e728e65dccc0512fc0bb0be7c306157",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::IsIdentity() const",
+      "upstream_id": "NCollection_Mat4::IsIdentity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::is_identity",
+      "cpp_id": "7b45fe54c4cd4f65fd37a68ce8322966e465c9637c6610eefb2a7a5a4befdcf2",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetData() const",
+      "upstream_id": "NCollection_Mat4::GetData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::data",
+      "cpp_id": "8fb8c2122df3bcb5465067e9d249e9bb1342061a0b5a45f4c4c25d44026b495e",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::Transposed() const",
+      "upstream_id": "NCollection_Mat4::Transposed() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::transposed",
+      "cpp_id": "392054ad37d130a866554994edde9a0c3b76e04e448fbad6d9a41e83fa355e5e",
+      "cpp_signature": "NCollection_Mat4<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Vec2::xy() const",
+      "upstream_id": "NCollection_Vec2::xy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::xy",
+      "cpp_id": "9f1e656b2b276b52affb0fe09b96915741cd0ca1680cd1b6e4abb895e0713b4b",
+      "cpp_signature": "NCollection_Vec2<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec2::yx() const",
+      "upstream_id": "NCollection_Vec2::yx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::yx",
+      "cpp_id": "82a25f21cc76b28e999bffece158a4fe9deefffd69923bf2d4fd9e6818c6d40b",
+      "cpp_signature": "NCollection_Vec2<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::GetData() const",
+      "upstream_id": "NCollection_Vec3::GetData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::data",
+      "cpp_id": "4681cfd415ff1b6e7dbb20203bb987eb20cf3994976e92e35dd8d07a158d45fc",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec3::Multiplied(Element_t) const",
+      "upstream_id": "NCollection_Vec3::Multiplied(Element_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::multiplied",
+      "cpp_id": "f652f77740fc13912461ff5c981ff44bf644b8a14b86d3b801add7448cef5fa2",
+      "cpp_signature": "NCollection_Vec3<Element_t> (type-parameter-0-0) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec3::xy() const",
+      "upstream_id": "NCollection_Vec3::xy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::xy",
+      "cpp_id": "993d37c771ba9a1ccd9bb8ed7ee27a55aa3a6b4b12ba7a69b65fe399ffffc97b",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::xz() const",
+      "upstream_id": "NCollection_Vec3::xz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::xz",
+      "cpp_id": "69b5d0905d2f412c3d84b77363f364b38ecfbdb2ccb45ecf8b7e3f09aea97859",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::yz() const",
+      "upstream_id": "NCollection_Vec3::yz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::yz",
+      "cpp_id": "3c702b7ab4b611df219a345bebbb7354f3b57ce505dce65fb51c86f23297c47f",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::yx() const",
+      "upstream_id": "NCollection_Vec3::yx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::yx",
+      "cpp_id": "a378ab9156a3b54d8857ed0515802c77a9e3cff4152a290a4f65d05964a4eef6",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::zx() const",
+      "upstream_id": "NCollection_Vec3::zx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::zx",
+      "cpp_id": "11ef33efcd063205ca82d1892039784f2b1db3abb24057ece081953eba9df9e4",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::zy() const",
+      "upstream_id": "NCollection_Vec3::zy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::zy",
+      "cpp_id": "e761f1ba56b231567f06a3da57dd95903541f8045311d7758f564633135b15ab",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::xyz() const",
+      "upstream_id": "NCollection_Vec3::xyz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::xyz",
+      "cpp_id": "5c47ad55b1a6511bf041fed98f2d4af1ce8f873e813901c18a4a91723a5a3f06",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::xzy() const",
+      "upstream_id": "NCollection_Vec3::xzy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::xzy",
+      "cpp_id": "338c131539558042e10410fc0a5fce9905277e99773c7b194c0325b2af286042",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::yxz() const",
+      "upstream_id": "NCollection_Vec3::yxz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::yxz",
+      "cpp_id": "f470dc4faf2b9ea84cdb077819b5acfafba1e2b1c8c51e30bc0d74c82b8bf82c",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::yzx() const",
+      "upstream_id": "NCollection_Vec3::yzx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::yzx",
+      "cpp_id": "d08392e37d804a2d0b824b7fec59ab193e210a2c3abf056fd16a771c5b518788",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::zyx() const",
+      "upstream_id": "NCollection_Vec3::zyx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::zyx",
+      "cpp_id": "2c4975c67fdb3e7107ab89c31befb0d5343e1a9f9eaa7848e3fccdf9d6fbb5e4",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::zxy() const",
+      "upstream_id": "NCollection_Vec3::zxy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::zxy",
+      "cpp_id": "ff371991049f33a9fe525b104c0b7a3a04ab6a25026897bffe52bc81eeb9ef93",
+      "cpp_signature": "NCollection_Vec3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::r() const",
+      "upstream_id": "NCollection_Vec3::r() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::r",
+      "cpp_id": "60757a74b366754c056240c0d10bf156c058b6c5919a0531ca65ed598857ce7e",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::g() const",
+      "upstream_id": "NCollection_Vec3::g() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::g",
+      "cpp_id": "85034948565b46faa53a1d401fa3a32256f1a2d4acfe9878ae0b7ae3f9e5dfd2",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::b() const",
+      "upstream_id": "NCollection_Vec3::b() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::b",
+      "cpp_id": "86f60e5e928f827b349055efa0b61500d2f57062c3fd84e1802a92dd34af99c1",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec3::SquareModulus() const",
+      "upstream_id": "NCollection_Vec3::SquareModulus() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::square_modulus",
+      "cpp_id": "50c20b3e4c851afd90f3ca0da75abe371a309cf8dff43c607c107c351428b123",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/float.rs",
+      "rust_source_sha256": "db00f76b462abe3c9e4dc7c12db597f0255d6ce5043053e2ae3fbb709c929a13"
+    },
+    {
+      "previous_id": "NCollection_Vec4::GetData() const",
+      "upstream_id": "NCollection_Vec4::GetData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::data",
+      "cpp_id": "98c3c077f5305cbd19a7d385a1ce3af171b537d8f5e672299fedeb4d89180912",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec4::Multiplied(Element_t) const",
+      "upstream_id": "NCollection_Vec4::Multiplied(Element_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::multiplied",
+      "cpp_id": "fedc9484597f275635522ee7ab5822bb41ed5b0d2e577370ff91330e7b3e61ca",
+      "cpp_signature": "NCollection_Vec4<Element_t> (type-parameter-0-0) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "rust_source_sha256": "33639aa179c6a08233c5319b79806ae591e8ddd4e4d92b177cf6fc4dd128b27e"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xy() const",
+      "upstream_id": "NCollection_Vec4::xy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xy",
+      "cpp_id": "a6658dfa91f67584fed8d5eff7b0ec48675d23132310f4335ffcd79fd9e6dfd5",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xz() const",
+      "upstream_id": "NCollection_Vec4::xz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xz",
+      "cpp_id": "c20021711662e2b65408501985f7064130c6bc6f28cd8455b2df7fe2e4a4e83a",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xw() const",
+      "upstream_id": "NCollection_Vec4::xw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xw",
+      "cpp_id": "6023391eb62013dcb2630d3c118a1c4b00eb89a260eced483cf28781d4ba4b01",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yz() const",
+      "upstream_id": "NCollection_Vec4::yz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yz",
+      "cpp_id": "41fd3f9e5a64f0e7d97480e24f764568bc47da940c8c82d30166e86420bdc02f",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yw() const",
+      "upstream_id": "NCollection_Vec4::yw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yw",
+      "cpp_id": "e47c39961449d025cf1e5f0386b36d6a21fba3229b5acc89e47234a7686b00d3",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zw() const",
+      "upstream_id": "NCollection_Vec4::zw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zw",
+      "cpp_id": "3392081568d1eff7e4976e22e2ed5769460f866f8333fd1399aa446af5944cb9",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yx() const",
+      "upstream_id": "NCollection_Vec4::yx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yx",
+      "cpp_id": "e2fa6b8205443d3fc15fe139de33dc26520f5be0972e61c44b9dfa119cd05c65",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zx() const",
+      "upstream_id": "NCollection_Vec4::zx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zx",
+      "cpp_id": "d8464475b959a13bafdc8935b156f5daac3428dd80cb5e5c4f6ed15db840714c",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wx() const",
+      "upstream_id": "NCollection_Vec4::wx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wx",
+      "cpp_id": "a2224ceff4d87b4714f66857464bf09c51c8ea3cb6bb1674b89936bc0b3f5cf3",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zy() const",
+      "upstream_id": "NCollection_Vec4::zy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zy",
+      "cpp_id": "e50c944d697523c653352cdb5094e41bae53c82d87213936539481a5f34e9db4",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wy() const",
+      "upstream_id": "NCollection_Vec4::wy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wy",
+      "cpp_id": "f0ae97e43aa54bece52422764c4b9fcaf2b2cb37828c210567bd1100c634ce5a",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wz() const",
+      "upstream_id": "NCollection_Vec4::wz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wz",
+      "cpp_id": "71fa02dd4dda8926c3867926481754d2cd56c9c25f35b742d006d5a5705720bb",
+      "cpp_signature": "NCollection_Vec2<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xyz() const",
+      "upstream_id": "NCollection_Vec4::xyz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xyz",
+      "cpp_id": "a705b3230138addb94c6a1aab344e19e1a31f574663dba857af0de4cb65cc816",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xzy() const",
+      "upstream_id": "NCollection_Vec4::xzy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xzy",
+      "cpp_id": "ecca0ee84bd17e6e5b99944b12dc2b7f2c826dfd3f1dabda974a3ab221fcef2d",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yxz() const",
+      "upstream_id": "NCollection_Vec4::yxz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yxz",
+      "cpp_id": "9e7cac3de575b5e26a023351066c943e454a80f4712bb826e0d839d1ceded94f",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yzx() const",
+      "upstream_id": "NCollection_Vec4::yzx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yzx",
+      "cpp_id": "d32445b6bdf66e8cc680c7df41ad89b99b5d1f9b0504922ddfe479afbf697e39",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zyx() const",
+      "upstream_id": "NCollection_Vec4::zyx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zyx",
+      "cpp_id": "e244f51624c645c64f3a82a44ef9b735c4b6bce12e8844ffec379c919d4d0d3b",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zxy() const",
+      "upstream_id": "NCollection_Vec4::zxy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zxy",
+      "cpp_id": "7d94378a250829b51d9a8878227e32b442a1ce1d087b42f25392224026c449da",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xyw() const",
+      "upstream_id": "NCollection_Vec4::xyw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xyw",
+      "cpp_id": "a3358e87675094b11bb79cf2314ed1a47025d2c4e55c6d79fee526e8eb975590",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xwy() const",
+      "upstream_id": "NCollection_Vec4::xwy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xwy",
+      "cpp_id": "f8001220d12a29651198891a1a6820d32b46d9397c726cb039c84fdbd0fd3b82",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yxw() const",
+      "upstream_id": "NCollection_Vec4::yxw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yxw",
+      "cpp_id": "63c94ad8ab6eb0be30e647e986c7183f92de233ce9aea11fedf32e878146147b",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::ywx() const",
+      "upstream_id": "NCollection_Vec4::ywx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::ywx",
+      "cpp_id": "1867a1bf549f32a1bc4b91b33dac0359d256710a02ea4a43d5da33c638f87d5f",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wyx() const",
+      "upstream_id": "NCollection_Vec4::wyx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wyx",
+      "cpp_id": "1c2e79ee04932e2e6cbfd435dc5ebb160b727998d771be39b594a9eb94223e74",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wxy() const",
+      "upstream_id": "NCollection_Vec4::wxy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wxy",
+      "cpp_id": "d704e250cc3ffb08c09cc84e7ec786e0ab386baca8df3b9fcee122ea0b956022",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xzw() const",
+      "upstream_id": "NCollection_Vec4::xzw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xzw",
+      "cpp_id": "1746ed40c3cec6864ef60110d5ed9ef33740a55c637696163699b87f9d2e66e4",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::xwz() const",
+      "upstream_id": "NCollection_Vec4::xwz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::xwz",
+      "cpp_id": "67626e235054f51fa42659b2cd3c0fec02b16a8b2cc51ccada9526f6ea8b9dc4",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zxw() const",
+      "upstream_id": "NCollection_Vec4::zxw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zxw",
+      "cpp_id": "bf6f673565d6ae659502299df935c1d3995c8cece6225856e143393ea74d5ff8",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zwx() const",
+      "upstream_id": "NCollection_Vec4::zwx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zwx",
+      "cpp_id": "0d375afd796e926dc7aedf916d9f1995e605d1068f3e8f94ca0f3fc5b71002ac",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wzx() const",
+      "upstream_id": "NCollection_Vec4::wzx() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wzx",
+      "cpp_id": "c941a66ef506088890bf31bd25a579c94f73c610146adf634568b0264bdf10ae",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wxz() const",
+      "upstream_id": "NCollection_Vec4::wxz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wxz",
+      "cpp_id": "7cf6ebfd12712af9081e4e9097970b06809b61e48479d2ad10bb775d9a098d67",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::yzw() const",
+      "upstream_id": "NCollection_Vec4::yzw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::yzw",
+      "cpp_id": "6779ace66493ac570c94c99a11fa104ebc7b99ed23fa03cdf8a5a89308e5885f",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::ywz() const",
+      "upstream_id": "NCollection_Vec4::ywz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::ywz",
+      "cpp_id": "d2c944eb3b79e82b54bcb54247e14aee4bff11ce6fa249e45ac84dc3c896754c",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zyw() const",
+      "upstream_id": "NCollection_Vec4::zyw() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zyw",
+      "cpp_id": "2bc75f626040754f9123c579b67c72716ebd3531d1df0bd392e3e9e14b329ab8",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::zwy() const",
+      "upstream_id": "NCollection_Vec4::zwy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::zwy",
+      "cpp_id": "29342d76c235a928ed2b8e135c89fa94df943bb1bf3595fc022820ce285901eb",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wzy() const",
+      "upstream_id": "NCollection_Vec4::wzy() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wzy",
+      "cpp_id": "0b39b417e6a4b2a9ea49485e2e4e2aa7e2aea5d96c313af4fd0241775f8cdb23",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::wyz() const",
+      "upstream_id": "NCollection_Vec4::wyz() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::wyz",
+      "cpp_id": "320ab31e955a3892a6525ff226e44d8a08c256645c9b33b60ccb28bb1048c6da",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::rgb() const",
+      "upstream_id": "NCollection_Vec4::rgb() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::rgb",
+      "cpp_id": "d1fb1d023ac223940740e774371be66f36cb9873ed155bb82d6368a5de40b480",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::rbg() const",
+      "upstream_id": "NCollection_Vec4::rbg() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::rbg",
+      "cpp_id": "7d3bc4b8805b841c0010d690166d2c29e78620c41a0c840b10a7fed395531c6e",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::grb() const",
+      "upstream_id": "NCollection_Vec4::grb() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::grb",
+      "cpp_id": "a047f92ea2205b51379007717d41c3de45951513750e1f06f67ab486a10110b2",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::gbr() const",
+      "upstream_id": "NCollection_Vec4::gbr() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::gbr",
+      "cpp_id": "fb6a8c99081fc654eff39f0c94fd66563fdbcf635771dd05b6aeabc4e3691b64",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::bgr() const",
+      "upstream_id": "NCollection_Vec4::bgr() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::bgr",
+      "cpp_id": "978690cb095088c002ff76541edba7fb4fd9ce9e3ee0a096dc2b120c0a19e2e9",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::brg() const",
+      "upstream_id": "NCollection_Vec4::brg() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::brg",
+      "cpp_id": "d013012eed6648a1f217395348857cd34f712f2b7964f62b24c38d9a21409022",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::r() const",
+      "upstream_id": "NCollection_Vec4::r() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::r",
+      "cpp_id": "eff2b37c488df8678e3f2d396d62e8ad950317ddbe64151db644d323be4b668b",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::g() const",
+      "upstream_id": "NCollection_Vec4::g() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::g",
+      "cpp_id": "eeb931cc41c09ea90340d97a7d9f332b282ee15b36c2538d9c37cc716101227f",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::b() const",
+      "upstream_id": "NCollection_Vec4::b() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::b",
+      "cpp_id": "387d02418fe13f149069a41aae871afcfdfe278c0ed0b347c63c5710096fe3a5",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Vec4::a() const",
+      "upstream_id": "NCollection_Vec4::a() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::a",
+      "cpp_id": "adbee10275ef25e56822d83e2db1fb25d0a8726a0975671740570c4893494053",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/vector/swizzle.rs",
+      "rust_source_sha256": "3c0c79de2e6f7dd91e16c57ad496454ee440f80af25341bfe0da3f14774c75ad"
+    },
+    {
+      "previous_id": "NCollection_Mat3::GetValue(size_t,size_t) const",
+      "upstream_id": "NCollection_Mat3::GetValue(size_t,size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::get_value",
+      "cpp_id": "8a61dabdbffa59a05e3f6a0cd7258cc94bec8c61ac8ec9f5bf35d0f991e93907",
+      "cpp_signature": "type-parameter-0-0 (unsigned long, unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::operator()(size_t,size_t) const",
+      "upstream_id": "NCollection_Mat3::operator()(size_t,size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::get_value",
+      "cpp_id": "d9f4747d28c6854c9206dba71343050ef012fb51e7fb7e2ac0b2bea98a7cc2a3",
+      "cpp_signature": "type-parameter-0-0 (unsigned long, unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::GetRow(size_t) const",
+      "upstream_id": "NCollection_Mat3::GetRow(size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::get_row",
+      "cpp_id": "daf6d05b2aece927c1f71d4bf48f3337725e25193b98d1bb6450083c523614e6",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> (unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::GetColumn(size_t) const",
+      "upstream_id": "NCollection_Mat3::GetColumn(size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::get_column",
+      "cpp_id": "27d1d992efef1791b637187342d0307ec2d5cd4c0fb3cbed6fca9cb1fb492450",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> (unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::GetDiagonal() const",
+      "upstream_id": "NCollection_Mat3::GetDiagonal() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::get_diagonal",
+      "cpp_id": "720fb19d8ecef35ed570e78653da965ad6ee16293d7c01f5758f4e6f578af4f2",
+      "cpp_signature": "NCollection_Vec3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::IsZero() const",
+      "upstream_id": "NCollection_Mat3::IsZero() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::is_zero",
+      "cpp_id": "149070f35e4d2ed7e3ecebfd05928bc2396ed248f38e00a4266388903be75ce9",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::IsIdentity() const",
+      "upstream_id": "NCollection_Mat3::IsIdentity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::is_identity",
+      "cpp_id": "7c10862ab625bdfede95e37deb4e4bd833e3749584e4262729b559377b8e0f3c",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::GetData() const",
+      "upstream_id": "NCollection_Mat3::GetData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::data",
+      "cpp_id": "9db283d113fd5e4fa0b39cadb7fc2e23c1b9b46766aadbc07ed9ee374e70d827",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::Multiplied(Element_t) const",
+      "upstream_id": "NCollection_Mat3::Multiplied(Element_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::multiplied_scalar",
+      "cpp_id": "44a41d5e698a4fde68dcd325806fbdccdb382365e71aaa191a2e270514d5f11f",
+      "cpp_signature": "NCollection_Mat3<Element_t> (type-parameter-0-0) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::Negated() const",
+      "upstream_id": "NCollection_Mat3::Negated() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::negated",
+      "cpp_id": "56fff3332869fd189addd6aef45a8169f04c7936e4e93da6562db210232a20a2",
+      "cpp_signature": "NCollection_Mat3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::Transposed() const",
+      "upstream_id": "NCollection_Mat3::Transposed() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::transposed",
+      "cpp_id": "cf23f768dc96eb0f0dc550f54127788c65be7cde9f76e81e6105cbdf466d6d6e",
+      "cpp_signature": "NCollection_Mat3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::Adjoint() const",
+      "upstream_id": "NCollection_Mat3::Adjoint() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::adjoint",
+      "cpp_id": "0e993e6017d11e4dd9b078e37c2bf577c44e3d734f1619069a52105645531fef",
+      "cpp_signature": "NCollection_Mat3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat3::Determinant() const",
+      "upstream_id": "NCollection_Mat3::Determinant() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::determinant",
+      "cpp_id": "0b845be780e8aefa8f7e5f9d2021d7eff6780c5ad05507645c8d71bc1e11a6b6",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat3.rs",
+      "rust_source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63"
+    },
+    {
+      "previous_id": "NCollection_Mat4::operator()(size_t,size_t) const",
+      "upstream_id": "NCollection_Mat4::operator()(size_t,size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_value",
+      "cpp_id": "31e4b33daa16989e5f18720dbaec9da9260783351a6d8ed0c3350986418426f2",
+      "cpp_signature": "type-parameter-0-0 (unsigned long, unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::Multiplied(Element_t) const",
+      "upstream_id": "NCollection_Mat4::Multiplied(Element_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::multiplied_scalar",
+      "cpp_id": "bc7dab9791a8c363d10f470161d33334384c87ecfe8ef9ce533762cbf8322337",
+      "cpp_signature": "NCollection_Mat4<Element_t> (type-parameter-0-0) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::Negated() const",
+      "upstream_id": "NCollection_Mat4::Negated() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::negated",
+      "cpp_id": "d6d248aa63e8783901c2c95e9545a12ffc35b055cab0a2dcd1c613b8c3ee9d41",
+      "cpp_signature": "NCollection_Mat4<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::Adjoint() const",
+      "upstream_id": "NCollection_Mat4::Adjoint() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::adjoint",
+      "cpp_id": "6435dfe8042459b3ee59912a4840b0692733bd85318e3fd41ddf2e490afd7eae",
+      "cpp_signature": "NCollection_Mat4<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::GetMat3() const",
+      "upstream_id": "NCollection_Mat4::GetMat3() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::get_mat3",
+      "cpp_id": "84d0cdf1cb07c496875c9e5c9a504cc552a1b43ffdc98b745dc34ef8a8795c53",
+      "cpp_signature": "NCollection_Mat3<type-parameter-0-0> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_Mat4::DeterminantMat3() const",
+      "upstream_id": "NCollection_Mat4::DeterminantMat3() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::determinant_mat3",
+      "cpp_id": "e2226610f2b83250f715939c6943719d30bf3d00a849779c822a937e0b5c62b9",
+      "cpp_signature": "type-parameter-0-0 () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/mat4.rs",
+      "rust_source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0"
+    },
+    {
+      "previous_id": "NCollection_HArray1::Array1() const",
+      "upstream_id": "NCollection_HArray1::Array1() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::array1",
+      "cpp_id": "d6c93cdfa8c227c2af683f2864c9fdf66c8cbb4774ef463c002d2d321c54b433",
+      "cpp_signature": "const NCollection_Array1<type-parameter-0-0> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/harray.rs",
+      "rust_source_sha256": "732653e693283519c1bc86999b8625423578d8b90aba0fb79ec3f4daf3ba1592"
+    },
+    {
+      "previous_id": "NCollection_Array1::Data() const",
+      "upstream_id": "NCollection_Array1::Data() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::as_slice",
+      "cpp_id": "c9dcc32bc06a4090d1bccd920272c01afc5d45e26ecbd67cd521eb1210408e9a",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::Size() const",
+      "upstream_id": "NCollection_Array1::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::len",
+      "cpp_id": "f675ade9c2d19c15590dffcdb12de8ddd56793eab02d2f9e88fbf7af36304c84",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::Length() const",
+      "upstream_id": "NCollection_Array1::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::length",
+      "cpp_id": "ca68b47571e79de8d13abbc4101d2cfd8ddb718197b1dbcb3b25a6a83ca76b76",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::IsEmpty() const",
+      "upstream_id": "NCollection_Array1::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::is_empty",
+      "cpp_id": "3508236e95ecf33dfc140fd747f1b7be20b14937f3f05d77cfc3eee8899aa34b",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::Lower() const",
+      "upstream_id": "NCollection_Array1::Lower() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::lower",
+      "cpp_id": "86d9dd3075915a9ab59d022bda4dba5ff993762fd810640425d879ce37c7f6a6",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::Upper() const",
+      "upstream_id": "NCollection_Array1::Upper() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::upper",
+      "cpp_id": "c01096e2fbf899e50baf77c20b0fb63c072397f56c75da8848e9905d9be878c5",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::IsDeletable() const",
+      "upstream_id": "NCollection_Array1::IsDeletable() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::is_deletable",
+      "cpp_id": "b817abdaafe4f6ddd59be6bde9b49ec3f374322e3209218e84863a52606a662c",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::First() const",
+      "upstream_id": "NCollection_Array1::First() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::first",
+      "cpp_id": "bea244ff144facab8e623a8fa2b54ea5e5b2e97e39174067bf319f8e0e5073e8",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array1::Last() const",
+      "upstream_id": "NCollection_Array1::Last() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::last",
+      "cpp_id": "26a8f5966f1c18e14214448f9f33e0937e56480d5306e66b4012a21b4c8589e7",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array1.rs",
+      "rust_source_sha256": "fc380173bf4fe7b4b57bbf9293966f120f23d3b455f855f1d75be52938a05683"
+    },
+    {
+      "previous_id": "NCollection_Array2::Data() const",
+      "upstream_id": "NCollection_Array2::Data() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::as_slice",
+      "cpp_id": "f8d62cbac41f615fa629b04923321166356e930ff375a9b7aac359e94ba4a184",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::Size() const",
+      "upstream_id": "NCollection_Array2::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::len",
+      "cpp_id": "1fc068067041d3b5b578072889a5933ed93bedbaa346034cb5bc663c8e445633",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::IsEmpty() const",
+      "upstream_id": "NCollection_Array2::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::is_empty",
+      "cpp_id": "816b5ac8364773570a0bbdaf0c729942b90b92c8d05da21ff4362b3bf58701ce",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::Length() const",
+      "upstream_id": "NCollection_Array2::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::length",
+      "cpp_id": "7c7be7b60268f79c86cd3ead13c39fb30c8765743b4d0153346cc04c15fed913",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::NbRows() const",
+      "upstream_id": "NCollection_Array2::NbRows() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::nb_rows",
+      "cpp_id": "ebd9e694279c7992df7ab4781f40f52935cde9fa06c046984a5b8672305a7244",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::RowSize() const",
+      "upstream_id": "NCollection_Array2::RowSize() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::row_size",
+      "cpp_id": "23733afa2dabde0eda577ff2551303cb7bf63783f6b1366b98091276f8e7ee8e",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::NbColumns() const",
+      "upstream_id": "NCollection_Array2::NbColumns() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::nb_columns",
+      "cpp_id": "d17d133f0d42a0f6d0b0fdd29d3272eb78039d175a16744bde160a738245bb1f",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::ColSize() const",
+      "upstream_id": "NCollection_Array2::ColSize() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::col_size",
+      "cpp_id": "503bdecfda79ca224401522fa5f8e3af58fcfd47ec3e078dfc03f5e7683b0176",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::RowLength() const",
+      "upstream_id": "NCollection_Array2::RowLength() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::row_length",
+      "cpp_id": "28b22b894ab1c1822125b5fe3423276938d81434573442ac0c1ff0767ace432d",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::ColLength() const",
+      "upstream_id": "NCollection_Array2::ColLength() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::col_length",
+      "cpp_id": "d75a0f91cdefa7e562f348374996939c0f09a9178a3dbbde002d13b1e1a8af07",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::Array1() const",
+      "upstream_id": "NCollection_Array2::Array1() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::array1",
+      "cpp_id": "497ffa4c71067d53970a12ef68da40045fe83231c2d226d42839a8f3057eb7fe",
+      "cpp_signature": "const NCollection_Array1<type-parameter-0-0> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::First() const",
+      "upstream_id": "NCollection_Array2::First() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::first",
+      "cpp_id": "db74d69e348144b3c8962edad66e0c158d0adfcda4bdd93a778483e5ad0b8211",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::Last() const",
+      "upstream_id": "NCollection_Array2::Last() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::last",
+      "cpp_id": "4ec8b75a0daff7d9a85131a94ebb02533fa1c090651cba6d74d569317f330898",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2_layout.rs",
+      "rust_source_sha256": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f"
+    },
+    {
+      "previous_id": "NCollection_Array2::IsDeletable() const",
+      "upstream_id": "NCollection_Array2::IsDeletable() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::is_deletable",
+      "cpp_id": "de4d86d88ccef58b7173a6710e5868171ffc31825ebb911cdff853cc2b7d49b4",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::LowerRow() const",
+      "upstream_id": "NCollection_Array2::LowerRow() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_row",
+      "cpp_id": "4fe3431485d312c560eadf445f8ce58bbbd2a7ed82363dd701e899a651319304",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::UpperRow() const",
+      "upstream_id": "NCollection_Array2::UpperRow() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::upper_row",
+      "cpp_id": "9908a9515dadb71821c665ab9698ff3186fee89abc403ee60799cad030297ed9",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::LowerCol() const",
+      "upstream_id": "NCollection_Array2::LowerCol() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_col",
+      "cpp_id": "2af365d3075a7000251ba7cdac3d69508241427786f9a34f1ff03c4daaca4ef7",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_Array2::UpperCol() const",
+      "upstream_id": "NCollection_Array2::UpperCol() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::upper_col",
+      "cpp_id": "065efac015bc9725ef3fb130337cb3195d4a589631985983154fea79c0cae085",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/array2.rs",
+      "rust_source_sha256": "6994e95800615f1bfb050e917cce630a1b07038af1c6e230c7952c707db98574"
+    },
+    {
+      "previous_id": "NCollection_HArray2::Array2() const",
+      "upstream_id": "NCollection_HArray2::Array2() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::array2",
+      "cpp_id": "3e7802b408c13bf06125aa8b362792e1f85ca9e0712e2b111d0d90ea2fde1e49",
+      "cpp_signature": "const NCollection_Array2<type-parameter-0-0> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/harray.rs",
+      "rust_source_sha256": "732653e693283519c1bc86999b8625423578d8b90aba0fb79ec3f4daf3ba1592"
+    },
+    {
+      "previous_id": "NCollection_LocalArray::Size() const",
+      "upstream_id": "NCollection_LocalArray::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::len",
+      "cpp_id": "5af5f175feea067e9a295d930cfde159fc41ea851b1e1e985b6c8855301e1951",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/local_array.rs",
+      "rust_source_sha256": "846d2dcc0431cb2c0825e79653fcee7e0ec59644db01a09a03ae2ccd9907a8c4"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::Data() const",
+      "upstream_id": "NCollection_LinearVector::Data() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::as_slice",
+      "cpp_id": "34ce12c33bd04fd96c0b1051f85c00ce6c24b28c8cae5ca2791118b0e6c40934",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::HasData() const",
+      "upstream_id": "NCollection_LinearVector::HasData() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::has_data",
+      "cpp_id": "4a0ba124ac94b9cdedf53744e94b1d94e5eee6c7c923877049ea8cc36cfb95f4",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::Empty() const",
+      "upstream_id": "NCollection_LinearVector::Empty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::is_empty",
+      "cpp_id": "706aecb16ae0fd93f158b2e1057f1cc0b2c651dcb342c0dce580dea18fdd1e21",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::Size() const",
+      "upstream_id": "NCollection_LinearVector::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::len",
+      "cpp_id": "1ceb705399536db0f8f953643e00d599b9f3fc0e1c0acbc17fa04f276e9a851b",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::IsEmpty() const",
+      "upstream_id": "NCollection_LinearVector::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::is_empty",
+      "cpp_id": "cec44b36f1cfc54ba664d2e12e29739124c2c1c03130ffb6f799733849e5c4c1",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_LinearVector::Capacity() const",
+      "upstream_id": "NCollection_LinearVector::Capacity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::capacity",
+      "cpp_id": "3c39799521042c4dcd208ae76ddefe461f0d0952ff31b6e8d7e732d53f471c43",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "rust_source_sha256": "8b4842a5946dae57b7b1508cc181d50af7941ad1c6a7b3da90280baf7abacbf7"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Size() const",
+      "upstream_id": "NCollection_DynamicArray::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::len",
+      "cpp_id": "cf31de045a6e213d7de991536687e4c70dc3d64b8ce36d61ac9e912de4898a67",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Length() const",
+      "upstream_id": "NCollection_DynamicArray::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::length",
+      "cpp_id": "ef57c7033a14af6bbe13a3716b5ba45d860f4bad0820747f45f729fd50854029",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Lower() const",
+      "upstream_id": "NCollection_DynamicArray::Lower() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::lower",
+      "cpp_id": "8be8541ce54acfafb91ab6414dee3828be0736132a855f4765f2474c7a723a39",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Upper() const",
+      "upstream_id": "NCollection_DynamicArray::Upper() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::upper",
+      "cpp_id": "d5bb4187c81d8974509e64cc118cacb5b0c1c708744408450a356c514743f9ea",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::IsEmpty() const",
+      "upstream_id": "NCollection_DynamicArray::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::is_empty",
+      "cpp_id": "920f55fa9d9e8fc6890d0b2458d382d74e9c99f1d366decedd17a50a318542bb",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Allocator() const",
+      "upstream_id": "NCollection_DynamicArray::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::allocator",
+      "cpp_id": "42ffa96fecf5ba5e0d40c90cad19ebb706fdb37b7b4bc15879c84b81e410644b",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::operator()(int) const",
+      "upstream_id": "NCollection_DynamicArray::operator()(int) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "cpp_id": "c4cccd742c66cb4419ae355962da5294adb33a58809f777057c67e95b3bdcfd8",
+      "cpp_signature": "const type-parameter-0-0 &(int) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::operator[](int) const",
+      "upstream_id": "NCollection_DynamicArray::operator[](int) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "cpp_id": "c1ae172934cd262c747f85934338cbda2444283719f63f96eebb90f9a82e2608",
+      "cpp_signature": "const type-parameter-0-0 &(int) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Value(size_t) const",
+      "upstream_id": "NCollection_DynamicArray::Value(size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "cpp_id": "257ffebb62b84b057ca8caa0fab6b4a7b1235ea0f344b9465866c80fa008a9f1",
+      "cpp_signature": "const type-parameter-0-0 &(unsigned long) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Value(int) const",
+      "upstream_id": "NCollection_DynamicArray::Value(int) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "cpp_id": "97a4f6777533ed1b8f405e9c865de7d859394f33aeecc43bed27fd51ca5cf214",
+      "cpp_signature": "const type-parameter-0-0 &(int) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::First() const",
+      "upstream_id": "NCollection_DynamicArray::First() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::first",
+      "cpp_id": "dcfdcdd0dfd2a30057ce460ce8148381619e8ca640c28c6fe509b6d133e5f874",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_DynamicArray::Last() const",
+      "upstream_id": "NCollection_DynamicArray::Last() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::last",
+      "cpp_id": "9ab95a2c3cc8df30ff130fd1bd26013081a2ab99389614315f322b4a65039b43",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+      "rust_source_sha256": "722ebff54e090e5a8554b704d89531c2c02e42c08a471ccf703836a21b516324"
+    },
+    {
+      "previous_id": "NCollection_AliasedArray::Stride() const",
+      "upstream_id": "NCollection_AliasedArray::Stride() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::stride",
+      "cpp_id": "3b6043148407875d36b4e730cf48d86aee7603612c1d1e29e7f103ad390dcdd0",
+      "cpp_signature": "unsigned int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/aliased_array.rs",
+      "rust_source_sha256": "5eef1ce0f46c9f8150e6cfe478219dca25290b0dc96104fd3699ca07f51df844"
+    },
+    {
+      "previous_id": "NCollection_AliasedArray::Size() const",
+      "upstream_id": "NCollection_AliasedArray::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::len",
+      "cpp_id": "fd5d7bd005e0eea119cacb437a7fa2ee89fae43237a02ef1c41316400642a72b",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/aliased_array.rs",
+      "rust_source_sha256": "5eef1ce0f46c9f8150e6cfe478219dca25290b0dc96104fd3699ca07f51df844"
+    },
+    {
+      "previous_id": "NCollection_AliasedArray::Length() const",
+      "upstream_id": "NCollection_AliasedArray::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::length",
+      "cpp_id": "ec05c89469b45cd6410aef8d65b5d5ae8373f9bf575d6b03e3fc6b5cf945f303",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/aliased_array.rs",
+      "rust_source_sha256": "5eef1ce0f46c9f8150e6cfe478219dca25290b0dc96104fd3699ca07f51df844"
+    },
+    {
+      "previous_id": "NCollection_AliasedArray::IsEmpty() const",
+      "upstream_id": "NCollection_AliasedArray::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::is_empty",
+      "cpp_id": "f15892d234691260610b3c7dba5259370eb481f7de88b993c7a69fd8f3cafbf7",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/aliased_array.rs",
+      "rust_source_sha256": "5eef1ce0f46c9f8150e6cfe478219dca25290b0dc96104fd3699ca07f51df844"
+    },
+    {
+      "previous_id": "NCollection_SparseArray::Extent() const",
+      "upstream_id": "NCollection_SparseArray::Extent() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::extent",
+      "cpp_id": "456fcaec3e3d3c2421137ac35de07bf43e6cb2a768e74cec76dd0be5e583c5ca",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sparse_array.rs",
+      "rust_source_sha256": "6b5a91b1bac39da9042c6b3571fce0db40e6190b9cf7673e80d24a36888ee4d7"
+    },
+    {
+      "previous_id": "NCollection_SparseArray::IsEmpty() const",
+      "upstream_id": "NCollection_SparseArray::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::is_empty",
+      "cpp_id": "4ab435a47beb4d2310ee3fd86c5189ec133b1d89bbe1dce415b4ee030ae29976",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sparse_array.rs",
+      "rust_source_sha256": "6b5a91b1bac39da9042c6b3571fce0db40e6190b9cf7673e80d24a36888ee4d7"
+    },
+    {
+      "previous_id": "NCollection_SparseArrayBase::Size() const",
+      "upstream_id": "NCollection_SparseArrayBase::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::len",
+      "cpp_id": "9145c3426912e188f7bcb67e3132c668f1bf2a3d2388357e7366c6425cc94192",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sparse_array.rs",
+      "rust_source_sha256": "6b5a91b1bac39da9042c6b3571fce0db40e6190b9cf7673e80d24a36888ee4d7"
+    },
+    {
+      "previous_id": "NCollection_SparseArrayBase::Capacity() const",
+      "upstream_id": "NCollection_SparseArrayBase::Capacity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::capacity",
+      "cpp_id": "543168f361787c6a9a2e8a7caa1e1891aec6695022848f4887a8247a160f07d1",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sparse_array.rs",
+      "rust_source_sha256": "6b5a91b1bac39da9042c6b3571fce0db40e6190b9cf7673e80d24a36888ee4d7"
+    },
+    {
+      "previous_id": "NCollection_BaseList::Iterator::More() const",
+      "upstream_id": "NCollection_BaseList::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::more",
+      "cpp_id": "ede67c30076c810ee4a7af8f2fb39f5a8b70b6ba171727a3161268218dbdd99d",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list/iteration.rs",
+      "rust_source_sha256": "cdb120e16e25d732eb4f5a52294c3df51800ed6da7776542b7a98a85109079eb"
+    },
+    {
+      "previous_id": "NCollection_BaseList::Extent() const",
+      "upstream_id": "NCollection_BaseList::Extent() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::List::extent",
+      "cpp_id": "d9a78c0cc8b1cb6dc7e6bb337bc3b2cd826358d41bfbc2935d208d08bdbd500d",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list.rs",
+      "rust_source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018"
+    },
+    {
+      "previous_id": "NCollection_BaseList::Length() const",
+      "upstream_id": "NCollection_BaseList::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::List::length",
+      "cpp_id": "25a12e2aa1a5cd0cd51bf667a26eae866295b15c1c9d0e045629867c7d12400d",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list.rs",
+      "rust_source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018"
+    },
+    {
+      "previous_id": "NCollection_BaseList::Size() const",
+      "upstream_id": "NCollection_BaseList::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::List::len",
+      "cpp_id": "24c345c704681a1bf3546dd2b022c77ad735ced6c908b2ab81ac013cf50c6111",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list.rs",
+      "rust_source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018"
+    },
+    {
+      "previous_id": "NCollection_BaseList::IsEmpty() const",
+      "upstream_id": "NCollection_BaseList::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::List::is_empty",
+      "cpp_id": "34e80c090961fd21a717a6580ee187a9284c71a2eb40336c0461be85eac11e02",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list.rs",
+      "rust_source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018"
+    },
+    {
+      "previous_id": "NCollection_BaseList::Allocator() const",
+      "upstream_id": "NCollection_BaseList::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::List::allocator",
+      "cpp_id": "4de464feb13a23f5fea97b8db2e857f0a36a820a17ac46cf79308dadcc9d1983",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/list.rs",
+      "rust_source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018"
+    },
+    {
+      "previous_id": "NCollection_Sequence::Iterator::More() const",
+      "upstream_id": "NCollection_Sequence::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::more",
+      "cpp_id": "7c84973f960b82c9e78df2625c3e6d1b627dae7d48b1467f0594f21c4408f2d3",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence/iteration.rs",
+      "rust_source_sha256": "8822a9630ae72597612419273f04bfc27e1fd12f65a6ada6eed98f5acbf8b1bb"
+    },
+    {
+      "previous_id": "NCollection_Sequence::Iterator::Value() const",
+      "upstream_id": "NCollection_Sequence::Iterator::Value() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::value",
+      "cpp_id": "7304c94944f79a78cb3e0f2f794b32846915310f7bd50a043c324030df2aae9f",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence/iteration.rs",
+      "rust_source_sha256": "8822a9630ae72597612419273f04bfc27e1fd12f65a6ada6eed98f5acbf8b1bb"
+    },
+    {
+      "previous_id": "NCollection_Sequence::Iterator::ChangeValue() const",
+      "upstream_id": "NCollection_Sequence::Iterator::ChangeValue() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::change_value",
+      "cpp_id": "d81608ab590d0252ef2885c3c59ccc3f4f2c7e535f98b01d72f9a1b39f325e22",
+      "cpp_signature": "type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence/iteration.rs",
+      "rust_source_sha256": "8822a9630ae72597612419273f04bfc27e1fd12f65a6ada6eed98f5acbf8b1bb"
+    },
+    {
+      "previous_id": "NCollection_Sequence::Upper() const",
+      "upstream_id": "NCollection_Sequence::Upper() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::upper",
+      "cpp_id": "6eeffb977c3b933d0c490045340cb1882919ca5cd0e66bd32fcd0bdc18b30284",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_Sequence::IsEmpty() const",
+      "upstream_id": "NCollection_Sequence::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::is_empty",
+      "cpp_id": "2b0db0ab08a0fe15cc4e2d6ef3d22f73a17bcde761690d4d4fd961d7b6357607",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_BaseSequence::IsEmpty() const",
+      "upstream_id": "NCollection_BaseSequence::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::is_empty",
+      "cpp_id": "723a6377d73c2c3f86a7fd18e5a729991d959264f484adfcdf4c844156b444ed",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_BaseSequence::Length() const",
+      "upstream_id": "NCollection_BaseSequence::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::length",
+      "cpp_id": "22312b4603dce945c7d3e9a4dafded5c4d81e251a2ed2b8150b2ca0bca0f2a78",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_BaseSequence::Size() const",
+      "upstream_id": "NCollection_BaseSequence::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::len",
+      "cpp_id": "6576585419957a38e8647dc0cb6813c8a27cbafd7e8507d208b33b96300f8fcb",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_BaseSequence::Allocator() const",
+      "upstream_id": "NCollection_BaseSequence::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::allocator",
+      "cpp_id": "00721084aeba128456613c0e2d26cddbe8f8c88b4d2de25d72ed2729db3dcd0d",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/sequence.rs",
+      "rust_source_sha256": "a45f112ec65767745d2bfd25d3c635a8f759b81404fd45766593cc06a19e42a8"
+    },
+    {
+      "previous_id": "NCollection_HSequence::Sequence() const",
+      "upstream_id": "NCollection_HSequence::Sequence() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::sequence",
+      "cpp_id": "a8096296759c1135f837d155785b760bb9d1feaff2ed48c6617ea72f9c5a59e5",
+      "cpp_signature": "const NCollection_Sequence<type-parameter-0-0> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/h_sequence.rs",
+      "rust_source_sha256": "08746056271803535c45f6b184e0c837da4324955f6a410b2f61d68057b6edc4"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::Size() const",
+      "upstream_id": "NCollection_FlatDataMap::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::len",
+      "cpp_id": "497bcd3d0a65bf91b2110abb73a2597a382d4f3274635d40119bc10a485db630",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map.rs",
+      "rust_source_sha256": "14c74acba7210e212a42b46e387fea6553f1562899843429d28aea719778ea6f"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::Extent() const",
+      "upstream_id": "NCollection_FlatDataMap::Extent() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::extent",
+      "cpp_id": "1fbb6b00885cae607250ea9376731cec33d7a81f4c8701a3b7fc75c273d06857",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map.rs",
+      "rust_source_sha256": "14c74acba7210e212a42b46e387fea6553f1562899843429d28aea719778ea6f"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::IsEmpty() const",
+      "upstream_id": "NCollection_FlatDataMap::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::is_empty",
+      "cpp_id": "df47efe1352caaeb7ac4770297707adeb3931d313f467c1ebc864b14063b6412",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map.rs",
+      "rust_source_sha256": "14c74acba7210e212a42b46e387fea6553f1562899843429d28aea719778ea6f"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::Capacity() const",
+      "upstream_id": "NCollection_FlatDataMap::Capacity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::capacity",
+      "cpp_id": "6b6e68f4a92936d81679d599eea3d3e13067877c77e89f96fd5cc96210d8a01f",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map.rs",
+      "rust_source_sha256": "14c74acba7210e212a42b46e387fea6553f1562899843429d28aea719778ea6f"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::GetHasher() const",
+      "upstream_id": "NCollection_FlatDataMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::hasher",
+      "cpp_id": "0c0a48406d44def827bfe30611514aed00010f5f365b5bae4a236703aec1bc03",
+      "cpp_signature": "const type-parameter-0-2 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map.rs",
+      "rust_source_sha256": "14c74acba7210e212a42b46e387fea6553f1562899843429d28aea719778ea6f"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::begin() const",
+      "upstream_id": "NCollection_FlatDataMap::begin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::iter",
+      "cpp_id": "be43ee2e75f2d0760789564d03293d3283b350a03afcecb3befe666348be2740",
+      "cpp_signature": "NCollection_FlatDataMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map/iteration.rs",
+      "rust_source_sha256": "610dc38cc7f5b40adad974f73801464fa381e01f8ff9338cf7662a89ea17cf9b"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::end() const",
+      "upstream_id": "NCollection_FlatDataMap::end() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::end",
+      "cpp_id": "2e493602d7d3fad4d8d61d0574236304fdad00f3b9706fef42846c9b35332f7b",
+      "cpp_signature": "NCollection_FlatDataMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map/iteration.rs",
+      "rust_source_sha256": "610dc38cc7f5b40adad974f73801464fa381e01f8ff9338cf7662a89ea17cf9b"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::cbegin() const",
+      "upstream_id": "NCollection_FlatDataMap::cbegin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::iter",
+      "cpp_id": "0625831d0939b5fce7e175af4a06a3dc014790ca2ca0401f013cc3ce8d7f50c7",
+      "cpp_signature": "NCollection_FlatDataMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map/iteration.rs",
+      "rust_source_sha256": "610dc38cc7f5b40adad974f73801464fa381e01f8ff9338cf7662a89ea17cf9b"
+    },
+    {
+      "previous_id": "NCollection_FlatDataMap::cend() const",
+      "upstream_id": "NCollection_FlatDataMap::cend() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::end",
+      "cpp_id": "06fa4714dbbd195862949db7d6b4d83c9343d4f19e889a9daf38e481f77c7f89",
+      "cpp_signature": "NCollection_FlatDataMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_data_map/iteration.rs",
+      "rust_source_sha256": "610dc38cc7f5b40adad974f73801464fa381e01f8ff9338cf7662a89ea17cf9b"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::Size() const",
+      "upstream_id": "NCollection_FlatMap::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::len",
+      "cpp_id": "0ca13266972185f4f958eeb1af20d1506c2c853f74d250c995aface666410f4f",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::IsEmpty() const",
+      "upstream_id": "NCollection_FlatMap::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::is_empty",
+      "cpp_id": "f6daab9cb14c803b3a9fa103c89a812d01a97eb4eb93e8b7840c3bcb76746a12",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::Capacity() const",
+      "upstream_id": "NCollection_FlatMap::Capacity() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::capacity",
+      "cpp_id": "2f7c7bf152ac515ab27a163cb84b7559729348b24d3830adc38d6015b833e1f8",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::GetHasher() const",
+      "upstream_id": "NCollection_FlatMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::hasher",
+      "cpp_id": "2260bd2dcfe9b694f1ab424bcc7efab91e39c62b6a8c0944e95f3616f7926445",
+      "cpp_signature": "const type-parameter-0-1 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::begin() const",
+      "upstream_id": "NCollection_FlatMap::begin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::iter",
+      "cpp_id": "c82587e385ad7d297ed0b2a2185c7ffa4fa292bdfd30fd6830fa1f005709ff1c",
+      "cpp_signature": "NCollection_FlatMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::end() const",
+      "upstream_id": "NCollection_FlatMap::end() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::end",
+      "cpp_id": "c9a60a6fc83cee71cd00d8fcdf1d61507e927dcd12b2ae907124c5ce313dd7e1",
+      "cpp_signature": "NCollection_FlatMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::cbegin() const",
+      "upstream_id": "NCollection_FlatMap::cbegin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::iter",
+      "cpp_id": "8ad9de9c841e0f296c2b4cc4383989ac95feb11ecf144fe0ac72a775c3a2ba16",
+      "cpp_signature": "NCollection_FlatMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_FlatMap::cend() const",
+      "upstream_id": "NCollection_FlatMap::cend() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::end",
+      "cpp_id": "d19662737ce3e12ad5bcc174cd36e0db03e1f89c6896f94bdfb7e991a734970d",
+      "cpp_signature": "NCollection_FlatMap::iterator_impl<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/flat_map.rs",
+      "rust_source_sha256": "faa818d6f85143bf9171b5d3610d001b91c5720f26a4aac3ba01e295ac3b71b1"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::OrderedDataMapNode::Key() const",
+      "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::Key() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::key",
+      "cpp_id": "6a98fe5fcc4000e800ee1661c3588ae4ba5c6dd21dbbc97caa672566ebcf51fc",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_table/nodes.rs",
+      "rust_source_sha256": "da1adefd1cc95e547144ba60c99f05dfd0a1847142e8097a7d859dedaa145186"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::OrderedDataMapNode::OrderNext() const",
+      "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::OrderNext() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
+      "cpp_id": "290d1d8d2ec5e9114b9dd0d4ad24d85dbc95578e58f6ae9552435b64d7ec81c6",
+      "cpp_signature": "const class NCollection_OrderedDataMap::OrderedDataMapNode *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_table/nodes.rs",
+      "rust_source_sha256": "da1adefd1cc95e547144ba60c99f05dfd0a1847142e8097a7d859dedaa145186"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::Iterator::More() const",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataCursor::more",
+      "cpp_id": "3eac60610cb3b19e7ccb1d55287bd3fd765dcfe8ded989e2f85241d34151be96",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/cursor.rs",
+      "rust_source_sha256": "123c69f08d20185444d8fa8f6c9db7cd88f6cb6532dfd6b12794afa5729bbec4"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::begin() const",
+      "upstream_id": "NCollection_OrderedDataMap::begin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::iter",
+      "cpp_id": "22aa66e67b0c0417cd59d2512f0ff94f8b497c81c38678ef5c75e52bea5f5430",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs",
+      "rust_source_sha256": "2adafe21005ea7ac9ab5a49032975db2dc91254f7cbe90be7e5a85c51941423c"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::end() const",
+      "upstream_id": "NCollection_OrderedDataMap::end() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::end",
+      "cpp_id": "5afc161bc2996c63f60dad64fb23723dbc727ce9dccebd29123ef6d6978a666e",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs",
+      "rust_source_sha256": "2adafe21005ea7ac9ab5a49032975db2dc91254f7cbe90be7e5a85c51941423c"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::cbegin() const",
+      "upstream_id": "NCollection_OrderedDataMap::cbegin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::iter",
+      "cpp_id": "13a5e2d885b7c3c3bb01d8a9314f3a4cbee2b9fb238a1f28a36fc0f8b023678e",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs",
+      "rust_source_sha256": "2adafe21005ea7ac9ab5a49032975db2dc91254f7cbe90be7e5a85c51941423c"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::cend() const",
+      "upstream_id": "NCollection_OrderedDataMap::cend() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::end",
+      "cpp_id": "d68fe7ff856ff616618474e3d102453c725f626358073a8bc2beefd1e36e22eb",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs",
+      "rust_source_sha256": "2adafe21005ea7ac9ab5a49032975db2dc91254f7cbe90be7e5a85c51941423c"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::FirstNode() const",
+      "upstream_id": "NCollection_OrderedDataMap::FirstNode() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::first_node",
+      "cpp_id": "875b6272679ef686d773384984d23d242ba7987121631880630421b146c4af0d",
+      "cpp_signature": "const class NCollection_OrderedDataMap::OrderedDataMapNode *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map/edges.rs",
+      "rust_source_sha256": "28239b217443ba83e3508e588dbda1fcbad1b0078fedcd0811e2982a6e64ab6a"
+    },
+    {
+      "previous_id": "NCollection_OrderedDataMap::GetHasher() const",
+      "upstream_id": "NCollection_OrderedDataMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::hasher",
+      "cpp_id": "5a4af129c01904e5c0d22dc42d035a679d051a2f8b981b2f60dbee09f97b8925",
+      "cpp_signature": "const type-parameter-0-2 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_data_map.rs",
+      "rust_source_sha256": "d63f09e0b7631043fd7815512ad2adb1e5545906d2c1a0716f964bcec0ecba34"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::OrderedMapNode::Key() const",
+      "upstream_id": "NCollection_OrderedMap::OrderedMapNode::Key() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::key",
+      "cpp_id": "2fca807861d724e80bdb61e27eeb51c255ff091bb7f0633cb2a19a84e3877fd9",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_table/nodes.rs",
+      "rust_source_sha256": "da1adefd1cc95e547144ba60c99f05dfd0a1847142e8097a7d859dedaa145186"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::OrderedMapNode::OrderNext() const",
+      "upstream_id": "NCollection_OrderedMap::OrderedMapNode::OrderNext() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
+      "cpp_id": "ae81e51c7f61ed6719b07b11b9912067cf452c6d7fc68fe2fcf4dc916cdb3291",
+      "cpp_signature": "const class NCollection_OrderedMap::OrderedMapNode *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_table/nodes.rs",
+      "rust_source_sha256": "da1adefd1cc95e547144ba60c99f05dfd0a1847142e8097a7d859dedaa145186"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::Iterator::More() const",
+      "upstream_id": "NCollection_OrderedMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMapIter::more",
+      "cpp_id": "ecfa377ce97c6320a5fa0a88e5c96ab9a200e87392d39ffdb3559fc0e330ae79",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::begin() const",
+      "upstream_id": "NCollection_OrderedMap::begin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::iter",
+      "cpp_id": "56002d97cd8d56952ec5a0f80e296107d5eed2f6daf8ae77b7590b620340c246",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::end() const",
+      "upstream_id": "NCollection_OrderedMap::end() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::end",
+      "cpp_id": "7174ca7f71da755145bcb05d3f8fc087ce0b1c15783bcec04fbd96a4c3fe8ed7",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::cbegin() const",
+      "upstream_id": "NCollection_OrderedMap::cbegin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::iter",
+      "cpp_id": "49d64d4909a249fab0256d1abc8e17944ec46f45b00b123ac7fe6dcee557e923",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::cend() const",
+      "upstream_id": "NCollection_OrderedMap::cend() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::end",
+      "cpp_id": "85161e01f0fd8e549f4343d282cad3732ada336ddfeed8218207a01ce30e74af",
+      "cpp_signature": "NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::FirstNode() const",
+      "upstream_id": "NCollection_OrderedMap::FirstNode() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::first_node",
+      "cpp_id": "d9517a00674a03bcc6225c2f3ecfbca4af5ea52cd072c19719dff5640db6b20d",
+      "cpp_signature": "const class NCollection_OrderedMap::OrderedMapNode *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_OrderedMap::GetHasher() const",
+      "upstream_id": "NCollection_OrderedMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::hasher",
+      "cpp_id": "1b49cc805f96270e1f6b1791033927aa89382c21fed56fc8e0c0bcc4e40e0ef5",
+      "cpp_signature": "const type-parameter-0-1 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ordered_map.rs",
+      "rust_source_sha256": "48ed4f5ebd8ac64791b160b3a15cb02c909be9f99dcde5abf1f29d377392bdad"
+    },
+    {
+      "previous_id": "NCollection_PackedMap::Iterator::More() const",
+      "upstream_id": "NCollection_PackedMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::PackedMapIter::more",
+      "cpp_id": "6b9410aa5929669fb39c09d6f958094b148d1b7795c7e7e8648159b315f8ced8",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/packed_map/iteration.rs",
+      "rust_source_sha256": "13ba7348949543ef5e3b62f85fb9050fa2b1476d24ee48eb62225cb1a623ff64"
+    },
+    {
+      "previous_id": "NCollection_PackedMap::begin() const",
+      "upstream_id": "NCollection_PackedMap::begin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::PackedMap::iter",
+      "cpp_id": "15e16accff2b706758311aae6e5ffbec4f0cd48ffc1a4fe5f3569054e8b5f68a",
+      "cpp_signature": "NCollection_PackedMap::BasicIterator<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/packed_map/iteration.rs",
+      "rust_source_sha256": "13ba7348949543ef5e3b62f85fb9050fa2b1476d24ee48eb62225cb1a623ff64"
+    },
+    {
+      "previous_id": "NCollection_PackedMap::cbegin() const",
+      "upstream_id": "NCollection_PackedMap::cbegin() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::PackedMap::iter",
+      "cpp_id": "daf43a31e968e4c3e0add67820801a0817fc7a389424df0ae7b7bae8eb27abe2",
+      "cpp_signature": "NCollection_PackedMap::BasicIterator<true> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/packed_map/iteration.rs",
+      "rust_source_sha256": "13ba7348949543ef5e3b62f85fb9050fa2b1476d24ee48eb62225cb1a623ff64"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::IsValid() const",
+      "upstream_id": "NCollection_UtfIterator::IsValid() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::is_valid",
+      "cpp_id": "7a8b99b96ccb0ead7b5c3172eac1e2ccc7ebad68eb2ad665f37ec07dc1ec0e47",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::operator*() const",
+      "upstream_id": "NCollection_UtfIterator::operator*() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::current",
+      "cpp_id": "3c903d63cfa68f14e1849c0d02f615245cbe49a27322a5219f469df2366be6bf",
+      "cpp_signature": "char32_t () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::BufferHere() const",
+      "upstream_id": "NCollection_UtfIterator::BufferHere() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_here",
+      "cpp_id": "95024e66a7e4b0b90af706bd877eab9ef36cddf5a524bcf7bf04c99e6a9291a2",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::BufferNext() const",
+      "upstream_id": "NCollection_UtfIterator::BufferNext() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_next",
+      "cpp_id": "22663e3151991a1dd8ff01119df75a551e04c060398f59d9b80554a35aa441ba",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::Index() const",
+      "upstream_id": "NCollection_UtfIterator::Index() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::index",
+      "cpp_id": "8a448a8bae060b57ea0ede19046697c41b5218da2d2756bac513e8d28894931f",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfIterator::AdvanceBytesUtf32() const",
+      "upstream_id": "NCollection_UtfIterator::AdvanceBytesUtf32() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_bytes_utf32",
+      "cpp_id": "2a6ecfbdc7ddf62f085cbf6b62814c5074e2e37fdd15930507cbf46530f76087",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "rust_source_sha256": "acaf86c1d2f4c306318fc46e628a5f139fc1a8e24e2a39db0b6abff632c7e815"
+    },
+    {
+      "previous_id": "NCollection_UtfString::Size() const",
+      "upstream_id": "NCollection_UtfString::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::size",
+      "cpp_id": "fb8163942b436400cd9caa75a52da174013b2fec6b17378b65c03ca5a551beb8",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_string.rs",
+      "rust_source_sha256": "800a09a1065b80d74f35b1fdc81217b8dd9477a35b3a388345f4fa4e3ff5c22b"
+    },
+    {
+      "previous_id": "NCollection_UtfString::Length() const",
+      "upstream_id": "NCollection_UtfString::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::length",
+      "cpp_id": "cba53d89507ea69034ed2b133c2262d5041d9e340851e6a67193f47cbd6f2621",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_string.rs",
+      "rust_source_sha256": "800a09a1065b80d74f35b1fdc81217b8dd9477a35b3a388345f4fa4e3ff5c22b"
+    },
+    {
+      "previous_id": "NCollection_UtfString::ToCString() const",
+      "upstream_id": "NCollection_UtfString::ToCString() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_c_string",
+      "cpp_id": "9ca17bd4d2edf1769dc62bd2e696e4f62b26a5c18575511220b9e470bed96f40",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_string.rs",
+      "rust_source_sha256": "800a09a1065b80d74f35b1fdc81217b8dd9477a35b3a388345f4fa4e3ff5c22b"
+    },
+    {
+      "previous_id": "NCollection_UtfString::IsEmpty() const",
+      "upstream_id": "NCollection_UtfString::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::is_empty",
+      "cpp_id": "e4663db73689e582d02eae6c63c6d11b927c66c5352ed518139805add03b8b6e",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/utf_string.rs",
+      "rust_source_sha256": "800a09a1065b80d74f35b1fdc81217b8dd9477a35b3a388345f4fa4e3ff5c22b"
+    },
+    {
+      "previous_id": "NCollection_ItemsView::View::size() const",
+      "upstream_id": "NCollection_ItemsView::View::size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::size",
+      "cpp_id": "44c2724b726706595430bb72b090e3104ad2f5b4273375c1fc9a004a00619119",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/items_view.rs",
+      "rust_source_sha256": "2d3cc22bc0147b339af5f49639765470b3ad5062b313d1908ce2ef0127a7ac21"
+    },
+    {
+      "previous_id": "NCollection_ItemsView::View::empty() const",
+      "upstream_id": "NCollection_ItemsView::View::empty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::is_empty",
+      "cpp_id": "320ac3873720551081be4d338ab90f893004754032070b0132779b3b2df5ed45",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/items_view.rs",
+      "rust_source_sha256": "2d3cc22bc0147b339af5f49639765470b3ad5062b313d1908ce2ef0127a7ac21"
+    },
+    {
+      "previous_id": "NCollection_Iterator::More() const",
+      "upstream_id": "NCollection_Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::more",
+      "cpp_id": "8e137a1f1da2ce6faba04fef7289e6f2594887ed3aac3a3f0b2ea5f19a418b87",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/collection_cursor.rs",
+      "rust_source_sha256": "d6ef1f6940ff7661ffe2673d4b2a0c5dae4e482081450d741baa948128cab710"
+    },
+    {
+      "previous_id": "NCollection_Iterator::ValueIter() const",
+      "upstream_id": "NCollection_Iterator::ValueIter() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::value_iter",
+      "cpp_id": "7157b9a76a63672698188b84af5d27821c064f1dfd418b193b8128bb89534caf",
+      "cpp_signature": "const std::conditional<value-parameter-0-1, type-parameter-0-0::const_iterator, type-parameter-0-0::iterator>::type &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/collection_cursor.rs",
+      "rust_source_sha256": "d6ef1f6940ff7661ffe2673d4b2a0c5dae4e482081450d741baa948128cab710"
+    },
+    {
+      "previous_id": "NCollection_Iterator::EndIter() const",
+      "upstream_id": "NCollection_Iterator::EndIter() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::end_iter",
+      "cpp_id": "e474fc8b40ea19964f176cd94e63e5e51bd5c9bbe45a70138164a78922fd9d42",
+      "cpp_signature": "const std::conditional<value-parameter-0-1, type-parameter-0-0::const_iterator, type-parameter-0-0::iterator>::type &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/collection_cursor.rs",
+      "rust_source_sha256": "d6ef1f6940ff7661ffe2673d4b2a0c5dae4e482081450d741baa948128cab710"
+    },
+    {
+      "previous_id": "NCollection_DataMap::Iterator::More() const",
+      "upstream_id": "NCollection_DataMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::more",
+      "cpp_id": "fe91ef07f7d30c9fd1b69c99c5429e858b8748d8d60e7f83ce35b196760c336a",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/data_map/cursor.rs",
+      "rust_source_sha256": "401ca3341cc1d8f729d854c08f712a1c65ffe3d60cf57a77dcf562ddb33fdb02"
+    },
+    {
+      "previous_id": "NCollection_DataMap::GetHasher() const",
+      "upstream_id": "NCollection_DataMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::hasher",
+      "cpp_id": "43e58cd4370fe1d443efc827a076f7a8b149869a189e71056b67bfe59637e980",
+      "cpp_signature": "const type-parameter-0-2 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/data_map.rs",
+      "rust_source_sha256": "01232f9103d0c65652a0bc37916001f39ddc3c57dab4de515920f61e3880361a"
+    },
+    {
+      "previous_id": "NCollection_DoubleMap::Iterator::More() const",
+      "upstream_id": "NCollection_DoubleMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMapIterator::more",
+      "cpp_id": "f82c16393499fc24d8dfd087178708078489dfaa3f33aa9b77a0ff323c278a84",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/double_map/cursor.rs",
+      "rust_source_sha256": "b2c2cfc56394009f55daeca1ae7a99de25d8b15096dc1ccc27f4e35e66425326"
+    },
+    {
+      "previous_id": "NCollection_IndexedDataMap::Iterator::More() const",
+      "upstream_id": "NCollection_IndexedDataMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMapIterator::more",
+      "cpp_id": "7c6ccb6b2165347b3445d3db9e9e90fbf43256979e4e458464183669cac83933",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_data_map/cursor.rs",
+      "rust_source_sha256": "2be1233a2fc7c1a3fc23fb060abb2e1dd3fd99ea891e84e5f01c10f39eefd89e"
+    },
+    {
+      "previous_id": "NCollection_IndexedDataMap::Iterator::Index() const",
+      "upstream_id": "NCollection_IndexedDataMap::Iterator::Index() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMapIterator::index",
+      "cpp_id": "3a30ee917a329d30a97a2f0a3f224786912c8b95b76677b1516e0b34c0f5d71f",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_data_map/cursor.rs",
+      "rust_source_sha256": "2be1233a2fc7c1a3fc23fb060abb2e1dd3fd99ea891e84e5f01c10f39eefd89e"
+    },
+    {
+      "previous_id": "NCollection_IndexedDataMap::GetHasher() const",
+      "upstream_id": "NCollection_IndexedDataMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::hasher",
+      "cpp_id": "2fa387dc0f7604f56eeb2e0ea13a7f8cb2bda4734deac66b5635fdc71c373d81",
+      "cpp_signature": "const type-parameter-0-2 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_data_map.rs",
+      "rust_source_sha256": "8298736f6fa257a144c2d458d30435d3190ede75afd51e03d8713d51374622fe"
+    },
+    {
+      "previous_id": "NCollection_IndexedMap::Iterator::More() const",
+      "upstream_id": "NCollection_IndexedMap::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMapIterator::more",
+      "cpp_id": "27e80beec44ea64d9f2ac73defb5ede62130ec6e2da5a70622aa73972ac887fd",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_map/cursor.rs",
+      "rust_source_sha256": "ebbee0347106f368b9c81ec457793105c3fb6670573bf61183260f678c52dc0e"
+    },
+    {
+      "previous_id": "NCollection_IndexedMap::Iterator::Index() const",
+      "upstream_id": "NCollection_IndexedMap::Iterator::Index() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMapIterator::index",
+      "cpp_id": "2224a19199005c33b37f61f2f6842b8617351fa35da6b3c7d977677b4a657f9e",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_map/cursor.rs",
+      "rust_source_sha256": "ebbee0347106f368b9c81ec457793105c3fb6670573bf61183260f678c52dc0e"
+    },
+    {
+      "previous_id": "NCollection_IndexedMap::GetHasher() const",
+      "upstream_id": "NCollection_IndexedMap::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::hasher",
+      "cpp_id": "0873dbd69f772da6c92bfdc290bdf1256fe99c84e3f80d639b5ddfe11c849128",
+      "cpp_signature": "const type-parameter-0-1 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/indexed_map.rs",
+      "rust_source_sha256": "56b75d162bc5810dc2fabc1eaa65b33aca574542ccaa05106eb34e9dc3e17752"
+    },
+    {
+      "previous_id": "NCollection_Map::Iterator::More() const",
+      "upstream_id": "NCollection_Map::Iterator::More() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::MapIterator::more",
+      "cpp_id": "46d558c194e8a2ce33d98813ad7063a3ef0e7c4bc666251c87cb2060fc082848",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/map/cursor.rs",
+      "rust_source_sha256": "8af48a95ae6eec13f25fb0a46d6cb29871fb0bbbb42562edda3c753516bdf33b"
+    },
+    {
+      "previous_id": "NCollection_Map::GetHasher() const",
+      "upstream_id": "NCollection_Map::GetHasher() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Map::hasher",
+      "cpp_id": "6a35b462c334e9c8ef3908cb732bce483b370716fb946ffa06692e49e7aadb49",
+      "cpp_signature": "const type-parameter-0-1 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/map.rs",
+      "rust_source_sha256": "f6f7a64ee565d892c012a588861b6c89ff173614fa597aac1a55065e6ca7b9e5"
+    },
+    {
+      "previous_id": "NCollection_UBTree::Selector::Stop() const",
+      "upstream_id": "NCollection_UBTree::Selector::Stop() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::TreeSelector::stop",
+      "cpp_id": "9866a0cbc6869d5ea960c2933bcebe66c06e45a1ff654978cd4a55b1bbe6a42a",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::IsLeaf() const",
+      "upstream_id": "NCollection_UBTree::TreeNode::IsLeaf() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::is_leaf",
+      "cpp_id": "48ee49914dc1bce7cc61d0546b3cb269916799858a94a776d6bb5bc767c300bb",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::IsRoot() const",
+      "upstream_id": "NCollection_UBTree::TreeNode::IsRoot() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::is_root",
+      "cpp_id": "86c137238ab5e85936ceac3753720d558e894bd2320cfa76f76474fee24c4f4d",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::Bnd() const",
+      "upstream_id": "NCollection_UBTree::TreeNode::Bnd() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::bounds",
+      "cpp_id": "74cb656e3442c04a941d3fc57494720061a0f942d017c35308afe334bf0033c2",
+      "cpp_signature": "const type-parameter-0-1 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::Object() const",
+      "upstream_id": "NCollection_UBTree::TreeNode::Object() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::object",
+      "cpp_id": "044793a958a3c09bb1a9be1ad67d9d8f7f486552bfc9bebc69ef9f03bf0b8505",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::Child(int) const",
+      "upstream_id": "NCollection_UBTree::TreeNode::Child(int) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::child",
+      "cpp_id": "cfa9466dc361f773a98163499b03d1bb932d9d5e2ced1d92adee7a96e1f04471",
+      "cpp_signature": "const class NCollection_UBTree::TreeNode &(int) const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree/navigation.rs",
+      "rust_source_sha256": "171bc8ce1bcb4ac7b4de407030e473a222bb916e1eb1ea309c459c18d3140066"
+    },
+    {
+      "previous_id": "NCollection_UBTree::TreeNode::Parent() const",
+      "upstream_id": "NCollection_UBTree::TreeNode::Parent() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::parent",
+      "cpp_id": "98f31c06fab2e355f1d939b9b34c5af6e5de7c5d87964a7495ce8e3c3bb68fcf",
+      "cpp_signature": "const class NCollection_UBTree::TreeNode &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree/navigation.rs",
+      "rust_source_sha256": "171bc8ce1bcb4ac7b4de407030e473a222bb916e1eb1ea309c459c18d3140066"
+    },
+    {
+      "previous_id": "NCollection_UBTree::IsEmpty() const",
+      "upstream_id": "NCollection_UBTree::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::is_empty",
+      "cpp_id": "992b872ae89bf5a32e7dd09812e8a4c1110f16c9e351df6f86adceb60c2d3cba",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::Root() const",
+      "upstream_id": "NCollection_UBTree::Root() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::root",
+      "cpp_id": "c9da0354837663b152180d9ae4dfdfee843f8aa6862e9912084431ab80b7b775",
+      "cpp_signature": "const class NCollection_UBTree::TreeNode &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_UBTree::Allocator() const",
+      "upstream_id": "NCollection_UBTree::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::allocator",
+      "cpp_id": "0015e14af82d3965d2f5dd7d5b8b283e842ed89c8bca11712fb7f887d36d2e31",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/ubtree.rs",
+      "rust_source_sha256": "57869b55ba34ec36313b417aa0a63100dc0f27a2a45b7310eb7bbaa7313ea0a7"
+    },
+    {
+      "previous_id": "NCollection_OccAllocator::Allocator() const",
+      "upstream_id": "NCollection_OccAllocator::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::allocator",
+      "cpp_id": "204110ba9093e96635da6c9e81fbe448e5b97b1ab087945adaa6a7bbc37236af",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/occ_allocator.rs",
+      "rust_source_sha256": "7bacac0d38444ac335ebca74267da98ef009c1b7de690f3a087c41f20d22be40"
+    },
+    {
+      "previous_id": "NCollection_OccAllocator::max_size() const",
+      "upstream_id": "NCollection_OccAllocator::max_size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::max_size",
+      "cpp_id": "e3cec0a52e470e0554053f255ad5dc1167fb9880d0607476b3b9899a6a2511df",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/occ_allocator.rs",
+      "rust_source_sha256": "7bacac0d38444ac335ebca74267da98ef009c1b7de690f3a087c41f20d22be40"
+    },
+    {
+      "previous_id": "NCollection_Buffer::Data() const",
+      "upstream_id": "NCollection_Buffer::Data() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::as_slice",
+      "cpp_id": "c8e8254369b0af6d7a0195546ef167b0d1faa5a5adb5e6f9e340785d910f90b3",
+      "cpp_signature": "const unsigned char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/buffer.rs",
+      "rust_source_sha256": "66e0fcb5df398636995893826def6b1b2c5b077f9665ed08edee5f3ef47920f6"
+    },
+    {
+      "previous_id": "NCollection_Buffer::IsEmpty() const",
+      "upstream_id": "NCollection_Buffer::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::is_empty",
+      "cpp_id": "24796894e839bb79a1b189fcb18bb58f4b0ac9dbbd9884f3e18c31071ee5a119",
+      "cpp_signature": "bool () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/buffer.rs",
+      "rust_source_sha256": "66e0fcb5df398636995893826def6b1b2c5b077f9665ed08edee5f3ef47920f6"
+    },
+    {
+      "previous_id": "NCollection_Buffer::Size() const",
+      "upstream_id": "NCollection_Buffer::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::size",
+      "cpp_id": "036abe2265a6d64a6122d8b68f9abb43762135de9087fce6b551fd2f36a89125",
+      "cpp_signature": "unsigned long () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/buffer.rs",
+      "rust_source_sha256": "66e0fcb5df398636995893826def6b1b2c5b077f9665ed08edee5f3ef47920f6"
+    },
+    {
+      "previous_id": "NCollection_Buffer::Allocator() const",
+      "upstream_id": "NCollection_Buffer::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::allocator",
+      "cpp_id": "9f14362e4d34161a3047e7d6dcb41752155c2dad7decef958dcd7ef037969194",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/buffer.rs",
+      "rust_source_sha256": "66e0fcb5df398636995893826def6b1b2c5b077f9665ed08edee5f3ef47920f6"
+    },
+    {
+      "previous_id": "NCollection_Handle::get() const",
+      "upstream_id": "NCollection_Handle::get() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "cpp_id": "5a1f377f8dfc22f0b978897ca50e5b5edf7571e5bc36fe6322b731fcda4dc797",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/object_handle.rs",
+      "rust_source_sha256": "bb606baa5d98103831f61ee86ebc430dbadbe3a7c722659887d34b9dcf3f6010"
+    },
+    {
+      "previous_id": "NCollection_Handle::operator->() const",
+      "upstream_id": "NCollection_Handle::operator->() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "cpp_id": "651fa7e5a4f8ec28bc723f382525f08cacf66e2ce114c27669b52a424e7820a2",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/object_handle.rs",
+      "rust_source_sha256": "bb606baa5d98103831f61ee86ebc430dbadbe3a7c722659887d34b9dcf3f6010"
+    },
+    {
+      "previous_id": "NCollection_Handle::operator*() const",
+      "upstream_id": "NCollection_Handle::operator*() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "cpp_id": "4ba17e2db694da28c0b0ced879ebdcb15f6d93947cd9b5ee062fbc8e30f1b21e",
+      "cpp_signature": "const type-parameter-0-0 &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_source": "crates/tkernel/src/ncollection/object_handle.rs",
+      "rust_source_sha256": "bb606baa5d98103831f61ee86ebc430dbadbe3a7c722659887d34b9dcf3f6010"
+    },
+    {
+      "previous_id": "Standard_CStringHasher::operator()(const char* const) const",
+      "upstream_id": "Standard_CStringHasher::operator()(const char* const) const noexcept",
+      "rust_item": "rustycad_tkernel::standard::c_string::CStringHasher::hash_code",
+      "cpp_id": "c0cac74ea3a42a7c05fd45f2a7ee5997302cfc672d973d490f7631ef2cedad1a",
+      "cpp_signature": "unsigned long (const char *) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CStringHasher.hxx",
+      "rust_source": "crates/tkernel/src/standard/c_string.rs",
+      "rust_source_sha256": "1df62ab5544a610d5298a95c45c9071f5ab6e1f34cfef352936a15d6469613fe"
+    },
+    {
+      "previous_id": "Standard_CStringHasher::operator()(const char* const,const char* const) const",
+      "upstream_id": "Standard_CStringHasher::operator()(const char* const,const char* const) const noexcept",
+      "rust_item": "rustycad_tkernel::standard::c_string::CStringHasher::is_equal",
+      "cpp_id": "7eec390fe3469194b9679aa0104ec238f8c108002cd4144b6df1b0653d36c960",
+      "cpp_signature": "bool (const char *, const char *) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CStringHasher.hxx",
+      "rust_source": "crates/tkernel/src/standard/c_string.rs",
+      "rust_source_sha256": "1df62ab5544a610d5298a95c45c9071f5ab6e1f34cfef352936a15d6469613fe"
+    },
+    {
+      "previous_id": "Standard_GUID::IsSame(const Standard_GUID&) const",
+      "upstream_id": "Standard_GUID::IsSame(const Standard_GUID&) const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_same",
+      "cpp_id": "86035b3b80ead83b04f0e10fad2e3efa5858e6f6e50be76a3267fcd9c6cd4990",
+      "cpp_signature": "bool (const class Standard_GUID &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "previous_id": "Standard_GUID::IsNotSame(const Standard_GUID&) const",
+      "upstream_id": "Standard_GUID::IsNotSame(const Standard_GUID&) const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_not_same",
+      "cpp_id": "c45df095e7302412cd3b793500c69b81ec71aef0286c32c715692a65c637dc54",
+      "cpp_signature": "bool (const class Standard_GUID &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "previous_id": "Standard_Transient::GetRefCount() const",
+      "upstream_id": "Standard_Transient::GetRefCount() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::ref_count",
+      "cpp_id": "007395bf31b0068b86d70ca2bab93d16be367d8491cf6fddd17faecc081d7f35",
+      "cpp_signature": "int () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_source": "crates/tkernel/src/standard/transient.rs",
+      "rust_source_sha256": "3783afc7c12daf71cee2aab164607c76f6a2552a833c68e9b69e0f52b25fc4b3"
+    },
+    {
+      "previous_id": "Standard_Failure::what() const",
+      "upstream_id": "Standard_Failure::what() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "cpp_id": "f796563c619a7ca64aff366c51a08781443fc0a96a641fa05094b6278902b71f",
+      "cpp_signature": "const char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_source": "crates/tkernel/src/standard/failure.rs",
+      "rust_source_sha256": "5e1ecf8726a9d6449d5be7da4caa3caa2447baf0d731fade7e8cde071e627c72"
+    },
+    {
+      "previous_id": "Standard_Failure::GetMessageString() const",
+      "upstream_id": "Standard_Failure::GetMessageString() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "cpp_id": "e24a35141c7c146acf606a83eb62a2d8b5c144e422c057fcf19451dd859af6c4",
+      "cpp_signature": "const char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_source": "crates/tkernel/src/standard/failure.rs",
+      "rust_source_sha256": "5e1ecf8726a9d6449d5be7da4caa3caa2447baf0d731fade7e8cde071e627c72"
+    },
+    {
+      "previous_id": "Standard_Failure::ExceptionType() const",
+      "upstream_id": "Standard_Failure::ExceptionType() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "cpp_id": "ae578a5be22d493c513e9c2e6e35872e18847e2322e18c9313644029b7ff018f",
+      "cpp_signature": "const char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_source": "crates/tkernel/src/standard/failure.rs",
+      "rust_source_sha256": "5e1ecf8726a9d6449d5be7da4caa3caa2447baf0d731fade7e8cde071e627c72"
+    },
+    {
+      "previous_id": "Standard_OutOfMemory::what() const",
+      "upstream_id": "Standard_OutOfMemory::what() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "cpp_id": "1be261a9b0391c4714f37665caef54a2f77a74afb000d6fa97fe793b773a9f01",
+      "cpp_signature": "const char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_source": "crates/tkernel/src/standard/failure.rs",
+      "rust_source_sha256": "5e1ecf8726a9d6449d5be7da4caa3caa2447baf0d731fade7e8cde071e627c72"
+    },
+    {
+      "previous_id": "Standard_OutOfMemory::ExceptionType() const",
+      "upstream_id": "Standard_OutOfMemory::ExceptionType() const noexcept",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "cpp_id": "c3823adb929bfc1ca89335fad9ba79794f1b7eeda3cbee3112811761ca06f526",
+      "cpp_signature": "const char *() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_source": "crates/tkernel/src/standard/failure.rs",
+      "rust_source_sha256": "5e1ecf8726a9d6449d5be7da4caa3caa2447baf0d731fade7e8cde071e627c72"
+    },
+    {
+      "previous_id": "Quantity_Color::Red() const",
+      "upstream_id": "Quantity_Color::Red() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::red",
+      "cpp_id": "73a454ce74db433cd2cba344037c4963ceda999b19306ec6915f5fa8747be5c5",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Green() const",
+      "upstream_id": "Quantity_Color::Green() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::green",
+      "cpp_id": "00642c405c2b904abd9195c4cd7617910e29c9a2cf4ed8d5d4de0322255023b5",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Blue() const",
+      "upstream_id": "Quantity_Color::Blue() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::blue",
+      "cpp_id": "f3aa5d982bf3d647138bba839f59aa473916eff856f3e0de33312392de15416c",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Hue() const",
+      "upstream_id": "Quantity_Color::Hue() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::hue",
+      "cpp_id": "d391ce87d774362f28f71386863977ba18381be5c8d1439b80267576c72a110c",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Light() const",
+      "upstream_id": "Quantity_Color::Light() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::light",
+      "cpp_id": "fe9ae2b0b4f810207a183b12a36c784d5feafd6256f03cce5f979e56584d0a07",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Saturation() const",
+      "upstream_id": "Quantity_Color::Saturation() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::saturation",
+      "cpp_id": "f043945e4eedc42ac1052ef8404cfd2c27ce28d8f215a8c3669d5bdea6e71ad9",
+      "cpp_signature": "double () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::IsDifferent(const Quantity_Color&) const",
+      "upstream_id": "Quantity_Color::IsDifferent(const Quantity_Color&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::is_different",
+      "cpp_id": "e6181ba182d9d33d6e02bd3eed5e30d48049ab72d95d3944d777cefc2f1b5af7",
+      "cpp_signature": "bool (const class Quantity_Color &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::IsEqual(const Quantity_Color&) const",
+      "upstream_id": "Quantity_Color::IsEqual(const Quantity_Color&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::is_equal",
+      "cpp_id": "0e05712000653b1deadba1bdc92b5a9b8025cca48328e3d08bc8e22c0453d4e0",
+      "cpp_signature": "bool (const class Quantity_Color &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::Distance(const Quantity_Color&) const",
+      "upstream_id": "Quantity_Color::Distance(const Quantity_Color&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::distance",
+      "cpp_id": "9bbb2ed66a1edb836cdbf304ca363c40f207c599b081ac4b4e83d1044070ba24",
+      "cpp_signature": "double (const class Quantity_Color &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_Color::SquareDistance(const Quantity_Color&) const",
+      "upstream_id": "Quantity_Color::SquareDistance(const Quantity_Color&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::Color::square_distance",
+      "cpp_id": "79eac6df5948daec9b820022dfbc6a0f671204055db19668dba6d8a038a9173b",
+      "cpp_signature": "double (const class Quantity_Color &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color.rs",
+      "rust_source_sha256": "1474987036b83dd1b3320be8e316eb3a8496a49a0e4b1dadebedf0ab8ee6d859"
+    },
+    {
+      "previous_id": "Quantity_ColorRGBA::GetRGB() const",
+      "upstream_id": "Quantity_ColorRGBA::GetRGB() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::rgb",
+      "cpp_id": "dd85e9d92da810433f0a523ef5a152f876fc9e161ee62a2a39deeaf1c9f1647c",
+      "cpp_signature": "const class Quantity_Color &() const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color_rgba.rs",
+      "rust_source_sha256": "e5b7899283fcd7dd21557ab85fc6da4bbd039be21d7611516669ae39fae8d685"
+    },
+    {
+      "previous_id": "Quantity_ColorRGBA::Alpha() const",
+      "upstream_id": "Quantity_ColorRGBA::Alpha() const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::alpha",
+      "cpp_id": "b4ba9b7baa3c13bceb234c4c6a6ad87015dd7b8ddce4d94e5ae514ad04898c0e",
+      "cpp_signature": "float () const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color_rgba.rs",
+      "rust_source_sha256": "e5b7899283fcd7dd21557ab85fc6da4bbd039be21d7611516669ae39fae8d685"
+    },
+    {
+      "previous_id": "Quantity_ColorRGBA::IsDifferent(const Quantity_ColorRGBA&) const",
+      "upstream_id": "Quantity_ColorRGBA::IsDifferent(const Quantity_ColorRGBA&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::is_different",
+      "cpp_id": "4b0cbd63414839e51736557bf153d63a7734acc1db4f91596b8d75da60f43ac6",
+      "cpp_signature": "bool (const class Quantity_ColorRGBA &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color_rgba.rs",
+      "rust_source_sha256": "e5b7899283fcd7dd21557ab85fc6da4bbd039be21d7611516669ae39fae8d685"
+    },
+    {
+      "previous_id": "Quantity_ColorRGBA::IsEqual(const Quantity_ColorRGBA&) const",
+      "upstream_id": "Quantity_ColorRGBA::IsEqual(const Quantity_ColorRGBA&) const noexcept",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::is_equal",
+      "cpp_id": "589d1ceff7bfdd74c55a318ead064a16d58794aa9e29f05384bf8fcf32922005",
+      "cpp_signature": "bool (const class Quantity_ColorRGBA &) const noexcept",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_source": "crates/tkernel/src/quantity/color_rgba.rs",
+      "rust_source_sha256": "e5b7899283fcd7dd21557ab85fc6da4bbd039be21d7611516669ae39fae8d685"
+    }
+  ]
+}
