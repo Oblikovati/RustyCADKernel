@@ -1,4 +1,5 @@
 use super::{ShapeUpgradeUnifySameDomain, face_wires};
+mod bspline;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepTool;
@@ -25,7 +26,12 @@ pub(super) fn merge_wire_edge_chains(
         return Ok(shape.clone());
     }
     match shape.shape_type()? {
-        ShapeEnum::Wire => merge_wire_chains(shape, fields.angular_tolerance, true),
+        ShapeEnum::Wire => merge_wire_chains(
+            shape,
+            fields.angular_tolerance,
+            true,
+            fields._concat_bspline_edges,
+        ),
         ShapeEnum::Face => merge_planar_face_lines(shape, fields.angular_tolerance),
         _ => Ok(shape.clone()),
     }
@@ -35,6 +41,7 @@ fn merge_wire_chains(
     shape: &Shape,
     angular_tolerance: f64,
     unify_circles: bool,
+    concat_bspline_edges: bool,
 ) -> Result<Shape, Failure> {
     let mut result = shape.clone();
     let limit = wire_edges(shape)?.len();
@@ -44,14 +51,19 @@ fn merge_wire_chains(
             result = replace_line_pair(&result, &first, &second, start, end)?;
             continue;
         }
-        if !unify_circles {
-            break;
+        if unify_circles
+            && let Some((first, second, start, end)) = first_circle_pair(&edges, angular_tolerance)?
+        {
+            result = replace_circle_pair(&result, &first, &second, start, end)?;
+            continue;
         }
-        let Some((first, second, start, end)) = first_circle_pair(&edges, angular_tolerance)?
-        else {
-            break;
-        };
-        result = replace_circle_pair(&result, &first, &second, start, end)?;
+        if concat_bspline_edges
+            && let Some(joined) = bspline::merge_first_pair(&result, &edges, angular_tolerance)?
+        {
+            result = joined;
+            continue;
+        }
+        break;
     }
     Ok(result)
 }
@@ -66,7 +78,12 @@ fn merge_planar_face_lines(shape: &Shape, angular_tolerance: f64) -> Result<Shap
         return Ok(shape.clone());
     }
     let before = wire_edges(&wires[0].clone().into_shape())?.len();
-    let merged = merge_wire_chains(&wires[0].clone().into_shape(), angular_tolerance, false)?;
+    let merged = merge_wire_chains(
+        &wires[0].clone().into_shape(),
+        angular_tolerance,
+        false,
+        false,
+    )?;
     if wire_edges(&merged)?.len() == before {
         return Ok(shape.clone());
     }

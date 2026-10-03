@@ -337,7 +337,7 @@ fn has_collinear_edge_pair(shape: &Shape, angular_tolerance: f64) -> Result<bool
     Ok(false)
 }
 
-/// Tests whether two incident curves are collinear, conservatively retaining unknown types.
+/// Tests collinearity only for line pairs; other curve classes have separate merge paths.
 fn curves_may_be_collinear(
     first: &topods::Edge,
     second: &topods::Edge,
@@ -346,7 +346,7 @@ fn curves_may_be_collinear(
     let first_curve = BRepAdaptorCurve::with_edge(first)?;
     let second_curve = BRepAdaptorCurve::with_edge(second)?;
     if first_curve.get_type()? != CurveType::Line || second_curve.get_type()? != CurveType::Line {
-        return Ok(true);
+        return Ok(false);
     }
     let first_dir = first_curve.line()?.position().direction();
     let second_dir = second_curve.line()?.position().direction();
