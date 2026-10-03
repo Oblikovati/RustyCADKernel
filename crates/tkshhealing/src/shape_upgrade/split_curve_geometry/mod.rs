@@ -110,6 +110,9 @@ impl<G: CurveGeometry + 'static> CurveSplitKernel<G> {
     pub(super) fn curves(&self) -> CurveArray<G> {
         self.state.read().result.clone()
     }
+    pub(super) fn set_result_curves(&self, curves: CurveArray<G>) {
+        self.state.write().result = curves;
+    }
     fn allocate_curves(&self, count: i32) -> Result<(), Failure> {
         self.split_curve_data()
             .with_mut(|fields| fields.nb_curves = count);
