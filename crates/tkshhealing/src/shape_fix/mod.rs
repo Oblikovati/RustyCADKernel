@@ -38,3 +38,6 @@ pub use wire_segment::{ShapeFixWireSegment, WirePatchIndex};
 
 mod free_bounds;
 pub use free_bounds::ShapeFixFreeBounds;
+
+mod package;
+pub use package::ShapeFix;
