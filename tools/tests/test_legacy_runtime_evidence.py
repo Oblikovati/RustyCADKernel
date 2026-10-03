@@ -12,6 +12,7 @@ from legacy_runtime_evidence import (
     HASHED_FIXED_INPUTS,
     assess_report,
     file_digest,
+    fixed_runtime_inputs,
     tracked_runtime_inputs,
 )
 
@@ -86,6 +87,40 @@ class LegacyRuntimeEvidenceTest(unittest.TestCase):
         self.assertEqual(result["status"], "stale")
         self.assertTrue(
             any("capture_rustdoc_json.py" in reason for reason in result["reasons"])
+        )
+
+    def test_tkmath_proof_tools_are_required_inputs(self) -> None:
+        """Runner and joiner code are assessor inputs; e.g. both paths are hashed."""
+        required = {
+            "tools/verify_tkmath_legacy.py",
+            "tools/join_legacy_runtime_evidence.py",
+            "tools/tests/test_tkmath_legacy_runtime.py",
+        }
+        self.assertTrue(required <= set(HASHED_FIXED_INPUTS))
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            create_fixture_inputs(root, "pinned-occt-revision")
+            self.assertTrue(
+                required
+                <= {
+                    path.relative_to(root).as_posix()
+                    for path in fixed_runtime_inputs(root)
+                }
+            )
+            self.assertTrue(required <= tracked_runtime_inputs(root))
+
+    def test_missing_tkmath_runtime_helper_hash_marks_report_stale(self) -> None:
+        """TKMath proof tools are fingerprinted; e.g. remove its runner hash."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary) / "rust"
+            root.mkdir()
+            create_fixture_inputs(root, "pinned-occt-revision")
+            report = report_for(root)
+            del report["source_hashes"]["tools/verify_tkmath_legacy.py"]
+            result = assess_report(report, root)
+        self.assertEqual(result["status"], "stale")
+        self.assertTrue(
+            any("verify_tkmath_legacy.py" in row for row in result["reasons"])
         )
 
     def test_case_rows_are_not_joined_without_declaration_identity(self) -> None:

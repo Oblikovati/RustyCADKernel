@@ -8,6 +8,7 @@ import hashlib
 import json
 import pathlib
 import re
+import subprocess
 from typing import cast
 
 from api_inventory.inputs import (
@@ -221,7 +222,10 @@ def join_declarations(
 
 
 def join_report(
-    report: JSONObject, inventory: JSONObject, parity: JSONObject
+    report: JSONObject,
+    inventory: JSONObject,
+    parity: JSONObject,
+    provenance: JSONObject,
 ) -> JSONObject:
     """Produce declaration-level results; e.g. `join_report(report, inventory, parity)`."""
     declarations, anomalies = gtest_records(inventory, parity)
@@ -229,7 +233,7 @@ def join_report(
     cases = case_rows(case_values) if case_values is not None else []
     scope = string_field(report, "runtime_evidence_toolkit")
     joined, unclaimed = join_declarations(declarations, cases, scope)
-    return joined_report(report, inventory, joined, anomalies, unclaimed)
+    return joined_report(report, inventory, joined, anomalies, unclaimed, provenance)
 
 
 def joined_report(
@@ -238,19 +242,30 @@ def joined_report(
     rows: list[JSONObject],
     anomalies: list[JSONObject],
     unclaimed: list[JSONObject],
+    provenance: JSONObject,
 ) -> JSONObject:
     """Summarize an incremental join; e.g. `joined_report(report, inventory, rows, [], [])`."""
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "occt_revision": report["revision"],
+        "runtime_provenance": provenance,
+        "inventory_revision_matches_report": inventory.get("revision")
+        == report["revision"],
+        **join_status_fields(rows, anomalies, unclaimed),
+    }
+
+
+def join_status_fields(
+    rows: list[JSONObject], anomalies: list[JSONObject], unclaimed: list[JSONObject]
+) -> JSONObject:
+    """Build incremental status fields; e.g. `join_status_fields(joined_rows)`."""
+    return {
         "declarations": rows,
         "mapping_anomalies": anomalies,
         "unclaimed_runtime_cases": unclaimed,
         "counts": runtime_counts(rows),
         "toolkit_proofs": toolkit_proofs(rows),
         **global_proof_fields(),
-        "inventory_revision_matches_report": inventory.get("revision")
-        == report["revision"],
     }
 
 
@@ -294,28 +309,45 @@ def checked_report(
     root: pathlib.Path,
     source: pathlib.Path,
     parity: JSONObject,
+    report_sha256: str,
 ) -> JSONObject:
-    """Require fresh source-bound evidence; e.g. `checked_report(report, root, source, parity)`."""
-    freshness = assess_report(report, root, source)
-    if freshness["status"] == "stale" or freshness["status"] == "invalid":
-        raise ValueError(
-            f"runtime report is {freshness['status']}: {freshness['reasons']}"
-        )
-    inventory = snapshot(source)
-    if report.get("revision") != inventory.get("revision"):
-        raise ValueError("inventory revision does not match runtime report")
-    source_errors = source_mapping_errors(parity, source)
+    """Require fresh evidence and bind the join to its report bytes; e.g. `checked_report(report, root, source, parity, sha)`."""
+    inventory = checked_inventory(report, root, source)
+    source_errors = source_mapping_errors(parity, source, report_toolkit(report))
     if source_errors:
         raise ValueError(f"stale parity source hashes: {source_errors}")
     require_schema(report)
-    return join_report(report, inventory, parity)
+    provenance = runtime_provenance(report, root, report_sha256)
+    return join_report(report, inventory, parity, provenance)
 
 
-def source_mapping_errors(parity: JSONObject, source: pathlib.Path) -> list[str]:
-    """Check mapped C++ source hashes against pinned OCCT; e.g. `source_mapping_errors(parity, source)`."""
+def checked_inventory(
+    report: JSONObject, root: pathlib.Path, source: pathlib.Path
+) -> JSONObject:
+    """Validate report freshness and source revision; e.g. `checked_inventory(report, root, source)`."""
+    freshness = assess_report(report, root, source)
+    if freshness["status"] in {"stale", "invalid"}:
+        raise ValueError(
+            f"runtime report is {freshness['status']}: {freshness['reasons']}"
+        )
+    inventory = cast(JSONObject, snapshot(source))
+    if report.get("revision") != inventory.get("revision"):
+        raise ValueError("inventory revision does not match runtime report")
+    return inventory
+
+
+def report_toolkit(report: JSONObject) -> str:
+    """Get the source-validation scope; e.g. `report_toolkit(report) == 'TKMath'`."""
+    return text_field(report, "runtime_evidence_toolkit")
+
+
+def source_mapping_errors(
+    parity: JSONObject, source: pathlib.Path, toolkit: str = "TKernel"
+) -> list[str]:
+    """Check mapped C++ hashes for one toolkit; e.g. `source_mapping_errors(parity, source, 'TKMath')`."""
     errors = []
     for row in object_rows(parity.get("tests"), "parity tests"):
-        if text_field(row, "toolkit") != "TKernel":
+        if text_field(row, "toolkit") != toolkit:
             continue
         errors.extend(one_source_mapping_error(row, source))
     return errors
@@ -337,9 +369,85 @@ def require_schema(report: JSONObject) -> None:
     schema = report.get("runtime_evidence_schema")
     if not isinstance(schema, int) or isinstance(schema, bool) or schema != 1:
         raise ValueError("runtime report lacks runtime_evidence_schema 1")
-    if report.get("runtime_evidence_toolkit") != "TKernel":
-        raise ValueError("runtime report toolkit must be TKernel")
+    text_field(report, "runtime_evidence_toolkit")
     case_rows(report.get("runtime_case_results"))
+
+
+def runtime_provenance(
+    report: JSONObject, root: pathlib.Path, report_sha256: str
+) -> JSONObject:
+    """Bind joined rows to report, Rust revision and exact input manifest; e.g. `runtime_provenance(report, root, sha)`."""
+    if not is_digest(report_sha256):
+        raise ValueError("report_sha256: expected lowercase SHA-256 digest")
+    manifest = report.get("source_hashes")
+    if not isinstance(manifest, dict) or not all(
+        isinstance(path, str) and is_digest(digest) for path, digest in manifest.items()
+    ):
+        raise ValueError("source_hashes: expected relative-path digest manifest")
+    return provenance_fields(report, root, report_sha256, cast(JSONObject, manifest))
+
+
+def provenance_fields(
+    report: JSONObject,
+    root: pathlib.Path,
+    report_sha256: str,
+    manifest: JSONObject,
+) -> JSONObject:
+    """Serialize immutable join inputs; e.g. `provenance_fields(report, root, digest, hashes)`."""
+    return provenance_payload(
+        report, root, report_sha256, manifest, manifest_digest(manifest)
+    )
+
+
+def manifest_digest(manifest: JSONObject) -> str:
+    """Hash canonical input paths; e.g. `manifest_digest({'Cargo.lock': sha})`."""
+    manifest_bytes = json.dumps(
+        manifest, sort_keys=True, separators=(",", ":")
+    ).encode()
+    return hashlib.sha256(manifest_bytes).hexdigest()
+
+
+def provenance_payload(
+    report: JSONObject,
+    root: pathlib.Path,
+    report_sha256: str,
+    manifest: JSONObject,
+    manifest_sha256: str,
+) -> JSONObject:
+    """Record join inputs; e.g. `provenance_payload(report, root, digest, hashes, manifest_sha)`."""
+    return {
+        "runtime_report_sha256": report_sha256,
+        "runtime_report_revision": report["revision"],
+        "rust_revision": git_revision(root),
+        "rust_worktree_clean": git_clean(root),
+        "runtime_input_manifest_sha256": manifest_sha256,
+        "runtime_input_manifest": manifest,
+        "join_tool_sha256": hashlib.sha256(
+            pathlib.Path(__file__).read_bytes()
+        ).hexdigest(),
+    }
+
+
+def git_revision(root: pathlib.Path) -> str:
+    """Record the Rust repository commit; e.g. `git_revision(Path('/repo'))`."""
+    result = subprocess.run(
+        ["git", "-C", str(root), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
+
+
+def git_clean(root: pathlib.Path) -> bool:
+    """Record whether the Rust tree was clean; e.g. `git_clean(Path('/repo'))`."""
+    result = subprocess.run(
+        ["git", "-C", str(root), "status", "--porcelain", "--untracked-files=normal"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return not result.stdout.strip()
 
 
 def cli_arguments() -> argparse.Namespace:
@@ -358,7 +466,8 @@ def main() -> None:
     root = args.root.resolve()
     parity = read_object(root / "porting/parity.json")
     report = read_object(args.report)
-    result = checked_report(report, root, args.occt_source, parity)
+    report_digest = hashlib.sha256(args.report.read_bytes()).hexdigest()
+    result = checked_report(report, root, args.occt_source, parity, report_digest)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
 
