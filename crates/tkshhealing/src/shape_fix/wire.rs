@@ -2,6 +2,8 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
+#[path = "wire_closed.rs"]
+mod wire_closed;
 #[path = "wire_connected.rs"]
 mod wire_connected;
 #[path = "wire_degenerated.rs"]
@@ -41,6 +43,7 @@ struct WireFixState {
     last_fix_status: i32,
     small_status: i32,
     connected_status: i32,
+    closed_status: i32,
     intersections_status: i32,
     lacking_status: i32,
     closed_mode: bool,
@@ -69,6 +72,7 @@ impl Default for ShapeFixWire {
                 last_fix_status: 0,
                 small_status: 0,
                 connected_status: 0,
+                closed_status: 0,
                 intersections_status: 0,
                 lacking_status: 0,
                 closed_mode: true,
@@ -603,6 +607,7 @@ impl ShapeFixWire {
         state.last_fix_status = 0;
         state.small_status = 0;
         state.connected_status = 0;
+        state.closed_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {
