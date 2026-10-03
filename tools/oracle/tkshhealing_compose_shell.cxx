@@ -13,6 +13,7 @@
 #include <TopAbs_ShapeEnum.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Iterator.hxx>
+#include <TopoDS.hxx>
 #include <ShapeAnalysis_TransferParameters.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Pnt.hxx>
@@ -64,6 +65,38 @@ static void runLoadWires()
   tool.LoadWires(segments);
   std::cout << "load_wires " << segments.Length() << ' ' << segments(1).NbEdges() << ' '
             << (segments(1).Orientation() == TopAbs_REVERSED ? "reversed" : "other") << '\n';
+}
+
+static void runMixedLoadWires()
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+  {
+    BRepBuilderAPI_MakeEdge made(points[i], points[(i + 1) % 4]);
+    TopoDS_Shape edge = made.Shape();
+    if (i == 0)
+      edge.Orientation(TopAbs_INTERNAL);
+    wire.Add(TopoDS::Edge(edge));
+  }
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  tool.LoadWires(segments);
+  std::cout << "load_wires_mixed " << segments.Length();
+  for (int i = 1; i <= segments.Length(); ++i)
+  {
+    const char* orientation = segments(i).Orientation() == TopAbs_INTERNAL ? "internal" :
+                              segments(i).Orientation() == TopAbs_REVERSED ? "reversed" : "other";
+    std::cout << ' ' << segments(i).NbEdges() << ' ' << orientation;
+  }
+  std::cout << '\n';
 }
 
 static void runSplitEdges()
@@ -152,6 +185,7 @@ int main()
   std::cout << "transfer_type " << tool.GetTransferParamTool()->DynamicType()->Name() << '\n';
   runInit();
   runLoadWires();
+  runMixedLoadWires();
   runComputeCode();
   runPatchLimits();
   runSplitEdges();
