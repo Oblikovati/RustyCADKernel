@@ -221858,6 +221858,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_small",
       "status": "implemented",
       "notes": "Native vertex-distance and midpoint checks, 3D-to-pcurve fallback, degenerate pcurve guard, simultaneous DONE/FAIL and persistent aggregate flags. Eleven pinned native observations compared exactly. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSeam(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_seam_at",
+      "status": "implemented",
+      "notes": "Native seam selection and ordered output-reference updates, forcing forward face plus forward/reversed edge occurrences. Seven pinned native rows compare seam ordering, reversed face/edge, unready/ordinary-edge sentinel preservation. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSeam(int,occ::handle<Geom2d_Curve>&,occ::handle<Geom2d_Curve>&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_seam_into",
+      "status": "implemented",
+      "notes": "Native seam selection and ordered output-reference updates, forcing forward face plus forward/reversed edge occurrences. Seven pinned native rows compare seam ordering, reversed face/edge, unready/ordinary-edge sentinel preservation. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

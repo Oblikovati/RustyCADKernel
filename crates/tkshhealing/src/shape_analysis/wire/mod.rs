@@ -18,6 +18,7 @@ mod degenerated;
 mod gaps;
 mod lacking;
 mod order;
+mod seam;
 mod shape_connect;
 mod small;
 mod state;
