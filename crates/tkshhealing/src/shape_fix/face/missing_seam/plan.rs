@@ -49,7 +49,18 @@ pub(super) fn analyze(
     if surface.is_null() {
         return Ok(None);
     }
-    let (u_closed, v_closed) = closed_directions(surface)?;
+    let closed = closed_directions(surface)?;
+    analyze_with_closure(face, surface, closed)
+}
+
+pub(super) fn analyze_with_closure(
+    face: &Face,
+    surface: &Handle<dyn GeomSurface>,
+    (u_closed, v_closed): (bool, bool),
+) -> Result<Option<MissingSeamPlan>, Failure> {
+    if surface.is_null() {
+        return Ok(None);
+    }
     if !u_closed && !v_closed || !periodic_spline_supported(surface) {
         return Ok(None);
     }
@@ -288,7 +299,8 @@ fn assemble_plan(
 #[cfg(test)]
 mod tests {
     use super::{
-        analyze, finite_direction, manifold_orientation, opposite_directions, same_directions,
+        analyze, analyze_with_closure, finite_direction, manifold_orientation, opposite_directions,
+        same_directions,
     };
     use crate::shape_analysis::ShapeAnalysisEdge;
     use crate::shape_fix::face::missing_seam::check_wire::OpenWireDirection;
@@ -311,6 +323,17 @@ mod tests {
         assert!(manifold_orientation(Orientation::Forward));
         assert!(manifold_orientation(Orientation::Reversed));
         assert!(!manifold_orientation(Orientation::Internal));
+    }
+
+    #[test]
+    fn planning_uses_the_cached_native_closure_pair() {
+        let (face, surface) = periodic_cylinder_face().unwrap();
+        assert!(analyze(&face, &surface).unwrap().is_some());
+        assert!(
+            analyze_with_closure(&face, &surface, (false, false))
+                .unwrap()
+                .is_none()
+        );
     }
 
     #[test]
