@@ -2,6 +2,28 @@
 use super::*;
 
 impl ShapeAnalysisWire {
+    /// Report an incorrectly oriented outer boundary using the requested wire builder.
+    /// Example: `analyzer.check_outer_bound(false)?`.
+    pub fn check_outer_bound(&self, api_make: bool) -> Result<bool, Failure> {
+        self.set_last_status(ShapeExtendStatus::Ok);
+        if !self.is_ready() {
+            return Ok(false);
+        }
+        let wire = if api_make {
+            self.wire_data().wire_api_make()?
+        } else {
+            self.wire_data().wire()?
+        };
+        let mut face = self.face().empty_copied()?;
+        rustycad_tkbrep::topods::Builder.add(&mut face, &wire.into_shape())?;
+        let face = rustycad_tkbrep::topods::face(&face)?;
+        if crate::shape_analysis::ShapeAnalysis::is_outer_bound(&face)? {
+            return Ok(false);
+        }
+        self.set_last_status(ShapeExtendStatus::Done1);
+        Ok(true)
+    }
+
     /// Check the closing edge pair, resetting only the aggregate closure status.
     /// Example: `analyzer.check_closed(0.0)?`.
     pub fn check_closed(&self, precision: f64) -> Result<bool, Failure> {

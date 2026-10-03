@@ -221777,6 +221777,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_lacking",
       "status": "implemented",
       "notes": "Source translation with native fixture tkshhealing_wire_lacking: missing vertices, disconnected vertices, absent pcurves, small/large gaps, reversed edge tangents, caller tolerance, aggregate DONE/FAIL retention and clearing. UV outputs adapted to returned tuple; native squared MaxDistance2d early return and independent maximum 3D state retained. Tests compare exact native float values. Branch evidence is not exhaustive toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckOuterBound(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_outer_bound",
+      "status": "implemented",
+      "notes": "Native implementation delegates to ShapeAnalysis::IsOuterBound on a face copy holding the current wire. Both Wire and WireAPIMake modes compared for forward/reversed wires on all six box faces (24 native observations); unready status regression. No full toolkit proof."
     }
   ],
   "tests": [
