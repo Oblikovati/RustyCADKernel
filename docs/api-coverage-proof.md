@@ -124,12 +124,25 @@ normalize signatures, account for each independent feature combination or
 target platform, or crosswalk Rust items to OCCT declarations. Its manifest
 keeps `normalized_public_inventory` false.
 
+The Rust normalization stage is now available in
+[`rust-api-inventory.md`](rust-api-inventory.md). It normalizes public
+reachable surfaces with a versioned policy that includes `doc(hidden)` items.
+The existing fixture capture normalizes to 43,371 declarations across 17
+crates. Cross-crate re-exports are now expanded from the matching artifact
+set, yielding 50,410 path entries with no unresolved links or unclassified
+rustdoc item kinds. Its 124 MiB JSON output is generated under `target/` and is
+not checked in. It was produced at revision
+`4fa164336ea50d8a4c1db914321590135b7ce5bf`; the integrated workspace has since
+advanced, so a fresh capture is required before using it as the current Rust
+surface. The output still makes no OCCT parity claim.
+
 ## Completeness limitations
 
 The bootstrap currently provides Clang and a pinned nightly rustdoc compiler,
-but its Linux CMake configuration does not cover every manifest toolkit and no
-complete C++ or Rust public-item inventory has been generated. Therefore it
-cannot currently validate 100% API coverage. The existing
+but its Linux CMake configuration does not cover every manifest toolkit. A
+normalized Rust inventory exists for the prior capture revision, but there is
+no complete C++ inventory or Rust-to-OCCT crosswalk. Therefore the proof cannot
+currently validate 100% API coverage. The existing
 `tools/audit_api_rows.py` is explicitly heuristic and cannot substitute for the
 compiler-backed stage.
 
@@ -140,10 +153,10 @@ the generated file; its configured content and the exact CMake options must be
 captured alongside any AST output.
 
 Before enabling the proof gate, configure OCCT with every in-scope module/toolkit
-and generated header, normalize the pinned rustdoc JSON under a versioned public
-visibility policy, validate the schema against representative
-templates/macros/overloads/re-exports, then run the extractor over all 6,316
-installed source headers and account for every declaration kind. The gate must
+and generated header, regenerate and normalize rustdoc JSON for the current
+workspace, validate the schema against representative templates, macros,
+overloads, and re-exports, then run the extractor over all 6,316 installed
+source headers and account for every declaration kind. The gate must
 also bind output to the OCCT SHA, header hashes, tool versions, CMake config, and
 Rust crate sources so source or configuration changes invalidate the result.
 
