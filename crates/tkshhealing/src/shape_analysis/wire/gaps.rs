@@ -19,9 +19,12 @@ impl ShapeAnalysisWire {
         for index in 1..=self.nb_edges() {
             self.check_gap_3d_at(index)?;
             self.accumulate_gap_status(true);
-            max_distance = max_distance.max(self.fields.read().min_3d);
+            if !self.last_check_status(ShapeExtendStatus::Fail1) {
+                max_distance = max_distance.max(self.fields.read().min_3d);
+            }
         }
         self.fields.write().min_3d = max_distance;
+        self.fields.write().max_3d = max_distance;
         Ok(self.status_gaps_3d(ShapeExtendStatus::Done))
     }
 
@@ -36,7 +39,9 @@ impl ShapeAnalysisWire {
         for index in 1..=self.nb_edges() {
             self.check_gap_2d_at(index)?;
             self.accumulate_gap_status(false);
-            max_distance = max_distance.max(self.fields.read().max_2d);
+            if !self.last_check_status(ShapeExtendStatus::Fail1) {
+                max_distance = max_distance.max(self.fields.read().min_2d);
+            }
         }
         let mut fields = self.fields.write();
         fields.min_2d = max_distance;
@@ -55,6 +60,7 @@ impl ShapeAnalysisWire {
             return Ok(self.fail_gap());
         };
         self.fields.write().min_3d = distance;
+        self.fields.write().max_3d = distance;
         self.record_gap(distance, self.precision());
         Ok(self.last_check_status(ShapeExtendStatus::Done))
     }
@@ -77,9 +83,12 @@ impl ShapeAnalysisWire {
 
     /// `CheckGap2d(num)`: compare the preceding p-curve end with this p-curve start.
     pub fn check_gap_2d_at(&self, index: i32) -> Result<bool, Failure> {
+        if self.face().is_null() || self.surface().is_null() {
+            return Ok(self.fail_gap());
+        }
         self.set_last_status(ShapeExtendStatus::Ok);
         if !self.is_ready() {
-            return Ok(self.fail_gap());
+            return Ok(false);
         }
         let Some(distance) = self.gap_distance_2d(index)? else {
             return Ok(self.fail_gap());
@@ -120,7 +129,7 @@ impl ShapeAnalysisWire {
 
     /// The largest measured 3D boundary gap.
     pub fn max_distance_3d(&self) -> f64 {
-        self.fields.read().min_3d
+        self.fields.read().max_3d
     }
 
     /// The largest measured 2D boundary gap.

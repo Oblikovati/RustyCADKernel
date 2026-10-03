@@ -221741,6 +221741,42 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_closed",
       "status": "implemented",
       "notes": "Native closure check composes CheckConnected(1,prec) and CheckDegenerated(1), resets aggregate closure status, preserves last advanced-check status, and returns only accumulated DONE. Native singular-check fixtures verify DONE1/DONE2, FAIL1, and mixed DONE1/FAIL2. Default prec=0 represented by explicit Rust argument. No full toolkit claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckLacking()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_lacking",
+      "status": "implemented",
+      "notes": "Source translation with native fixture tkshhealing_wire_lacking: missing vertices, disconnected vertices, absent pcurves, small/large gaps, reversed edge tangents, caller tolerance, aggregate DONE/FAIL retention and clearing. UV outputs adapted to returned tuple; native squared MaxDistance2d early return and independent maximum 3D state retained. Tests compare exact native float values. Branch evidence is not exhaustive toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckLacking(int,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_lacking_edge",
+      "status": "implemented",
+      "notes": "Source translation with native fixture tkshhealing_wire_lacking: missing vertices, disconnected vertices, absent pcurves, small/large gaps, reversed edge tangents, caller tolerance, aggregate DONE/FAIL retention and clearing. UV outputs adapted to returned tuple; native squared MaxDistance2d early return and independent maximum 3D state retained. Tests compare exact native float values. Branch evidence is not exhaustive toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckLacking(int,double,gp_Pnt2d&,gp_Pnt2d&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_lacking_at",
+      "status": "implemented",
+      "notes": "Source translation with native fixture tkshhealing_wire_lacking: missing vertices, disconnected vertices, absent pcurves, small/large gaps, reversed edge tangents, caller tolerance, aggregate DONE/FAIL retention and clearing. UV outputs adapted to returned tuple; native squared MaxDistance2d early return and independent maximum 3D state retained. Tests compare exact native float values. Branch evidence is not exhaustive toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusLacking(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_lacking",
+      "status": "implemented",
+      "notes": "Source translation with native fixture tkshhealing_wire_lacking: missing vertices, disconnected vertices, absent pcurves, small/large gaps, reversed edge tangents, caller tolerance, aggregate DONE/FAIL retention and clearing. UV outputs adapted to returned tuple; native squared MaxDistance2d early return and independent maximum 3D state retained. Tests compare exact native float values. Branch evidence is not exhaustive toolkit parity."
     }
   ],
   "tests": [
