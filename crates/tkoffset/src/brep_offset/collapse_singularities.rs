@@ -2,7 +2,7 @@
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::{self, Explorer};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex};
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomSurface};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Point3, resolution};
@@ -38,6 +38,9 @@ pub fn collapse_singularities(
     face: &Face,
     precision: f64,
 ) -> Result<Handle<dyn GeomSurface>, Failure> {
+    if !surface.is_instance(GeomBSplineSurface::static_type()) {
+        return Ok(surface.clone());
+    }
     let bspline_handle: Handle<GeomBSplineSurface> = surface.cast();
     let Some(bspline) = bspline_handle.get() else {
         return Ok(surface.clone());
@@ -125,16 +128,10 @@ fn collapse_side_center(
     precision: f64,
 ) -> Option<Point3> {
     let center = pole_center(poles);
-    if poles
-        .iter()
-        .all(|pole| pole.point.distance(&center) <= resolution())
-    {
+    if all_not_greater_than(poles, &center, resolution()) {
         return None;
     }
-    if poles
-        .iter()
-        .all(|pole| pole.point.distance(&center) <= precision)
-    {
+    if all_not_greater_than(poles, &center, precision) {
         return Some(center);
     }
     let fitting_count = remove_fitting_vertices(poles, vertices);
@@ -142,6 +139,10 @@ fn collapse_side_center(
         return None;
     }
     Some(center)
+}
+
+fn all_not_greater_than(poles: &[SurfaceSidePole], center: &Point3, limit: f64) -> bool {
+    !poles.iter().any(|pole| pole.point.distance(center) > limit)
 }
 
 fn remove_fitting_vertices(
@@ -162,9 +163,9 @@ fn remove_fitting_vertices(
 }
 
 fn side_fits_vertex(poles: &[SurfaceSidePole], vertex: &DegeneratedVertexPoint) -> bool {
-    poles
+    !poles
         .iter()
-        .all(|pole| pole.point.distance(&vertex.point) < vertex.tolerance)
+        .any(|pole| pole.point.distance(&vertex.point) >= vertex.tolerance)
 }
 
 fn pole_center(poles: &[SurfaceSidePole]) -> Point3 {

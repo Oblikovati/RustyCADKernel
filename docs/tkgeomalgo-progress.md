@@ -83,20 +83,23 @@ operation additionally needs `BRepOffset_MakeOffset` (5,659 lines), its shared
 Existing `GeomOffsetSurface`, `BRepTools_Modifier`, `BRepLib::BuildCurves3d` and edge
 validation primitives cover dependencies, but not this orchestration or its shape-level
 semantics. Both exact native tests therefore stay pending; no fixture-only offset result
-is substituted. The TKOffset crate now contains reusable internal `FillEdgeData` and
-`FillVertexData` steps. The latter also ports the vertex-to-edge ancestor-map traversal,
-computes the centroid of incident offset-curve endpoints, and derives its tolerance from
-edge tolerances and centroid deviation. These private algorithm steps do not implement or
+is substituted. The TKOffset crate now contains reusable internal `FillFaceData`,
+`FillEdgeData` and `FillVertexData` steps. `FillFaceData` preserves face orientation,
+location, tolerance and the offset status, and applies B-spline singularity preprocessing.
+`FillVertexData` also ports the vertex-to-edge ancestor-map traversal, computes the
+centroid of incident offset-curve endpoints, and derives its tolerance from edge
+tolerances and centroid deviation. These private algorithm steps do not implement or
 claim the full `BRepOffset_SimpleOffset` class. The two independent GeomFill cases
 (OCC13904 and OCC27704) run as behavior
 tests (`geom_fill_skin_behavior` and `geom_fill_filling_behavior`) and in the numeric
 corpus.
 
-`tools/oracle/tkoffset_simple_offset_edge_probe.cxx` is a direct oracle for that internal
-probe invokes pinned `BRepOffset_SimpleOffset::NewCurve` and `NewPoint` on bounded,
-located, reversed and adjacent-face plane inputs. Focused Rust tests check edge locations,
-endpoints, vertex centroids, and tolerances (`1e-7` for the simple edge, `1.001e-7` for
-simple vertices, `20.0002` for the opposed adjacent edge, and `20.0202` for its vertices).
+`tools/oracle/tkoffset_simple_offset_edge_probe.cxx` directly invokes pinned
+`BRepOffset_SimpleOffset::NewSurface`, `NewCurve` and `NewPoint`. Face tests match the
+native plane outputs at z=10, z=13 for a located face, z=-10 for a reversed face, and
+radius 15 for a cylinder. Focused Rust tests check edge locations, endpoints, vertex
+centroids, and tolerances (`1e-7` for simple faces/edges, `1.001e-7` for simple vertices,
+`20.0002` for the opposed adjacent edge, and `20.0202` for its vertices).
 The helper returns no vertex result when its input edges yield no offset samples; native
 empty-sample behavior is unprobed and remains unsupported. Build the probe with `g++ -std=c++17`, the OCCT build's
 `include/opencascade` and `lin64/gcc/libi` paths, and link `TKOffset`, `TKShHealing`,
