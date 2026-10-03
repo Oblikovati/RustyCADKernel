@@ -1,5 +1,5 @@
 use super::check_wire::{OpenWireDirection, check_wire};
-use crate::shape_analysis::ShapeAnalysis;
+use rustycad_tkbrep::brep_tools;
 use rustycad_tkbrep::topods::{self, Face, Shape, ShapeIterator, Wire};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -110,13 +110,17 @@ fn periodic_spline_supported(surface: &Handle<dyn GeomSurface>) -> bool {
 }
 
 fn finite_bounds(bounds: SurfaceBounds, face: &Face) -> Result<SurfaceBounds, Failure> {
-    let face_bounds = ShapeAnalysis::get_face_uv_bounds(face)?;
+    // OCCT uses BRepTools here: its empty-pcurve fallback is the surface bounds.
+    let face_bounds = brep_tools::uv_bounds(face)?;
     let u = finite_direction(bounds.0, bounds.1, face_bounds.0, face_bounds.1);
     let v = finite_direction(bounds.2, bounds.3, face_bounds.2, face_bounds.3);
     Ok((u.0, u.1, v.0, v.1))
 }
 
 fn finite_direction(first: f64, last: f64, face_first: f64, face_last: f64) -> (f64, f64) {
+    if !precision::is_infinite(first) && !precision::is_infinite(last) {
+        return (first, last);
+    }
     let start = if precision::is_infinite(first) {
         face_first
     } else {
@@ -130,7 +134,8 @@ fn finite_direction(first: f64, last: f64, face_first: f64, face_last: f64) -> (
     if (end - start).abs().partial_cmp(&precision::p_confusion()) != Some(Ordering::Less) {
         return (start, end);
     }
-    if precision::is_infinite(first) {
+    // OCCT tests the substituted bound, not the original infinite bound.
+    if precision::is_infinite(start) {
         (start - 1000.0, end)
     } else {
         (start, end + 1000.0)
@@ -364,9 +369,10 @@ mod tests {
     }
 
     #[test]
-    fn native_infinite_bounds_expand_collapsed_domains_only_on_the_infinite_side() {
-        assert_eq!(finite_direction(-1.0e100, 4.0, 4.0, 4.0), (-996.0, 4.0));
+    fn native_collapsed_bounds_test_the_substituted_endpoint() {
+        assert_eq!(finite_direction(-1.0e100, 4.0, 4.0, 4.0), (4.0, 1004.0));
         assert_eq!(finite_direction(0.0, 1.0e100, 0.0, 0.0), (0.0, 1000.0));
+        assert_eq!(finite_direction(3.0, 3.0, 3.0, 3.0), (3.0, 3.0));
     }
 
     #[test]

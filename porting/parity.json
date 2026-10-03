@@ -224732,6 +224732,15 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_split_face",
       "status": "partial",
       "notes": "Ten native rows cover multiple outer wires, missing map entries, open/empty/single wires, hole orientation, reversed face, internal wire exclusion, result/working-face/status state and context replacement. Broader curved/located classification and failure domains need oracle coverage; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::Perform(const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::perform",
+      "status": "partial",
+      "notes": "Native aggregate stages with FixWireMode=0; sixteen differential rows cover planar splitting/hole orientation, removed/non-face context and periodic cone combinations. Missing-seam bounds now use native BRepTools fallback. Default wire-enabled orchestration and progress overload remain incomplete; small-area aggregate combinations need more evidence."
     }
   ],
   "tests": [

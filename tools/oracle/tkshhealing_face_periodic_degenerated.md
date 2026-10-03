@@ -15,3 +15,11 @@ repair stage of Perform. Broader placed/transformed and failure domains remain
 unproven. No legacy declarations are added by these differential fixtures.
 
 Run `cargo test -p rustycad-tkshhealing --test shape_fix_face_periodic_degenerated --test shape_fix_face_test`.
+
+Eight aggregate rows additionally call Perform with FixWireMode=0. They compare
+both cone signs, wire/face reversal, partial/missing/multiple p-curves and context.
+The missing-pcurve case caught an incorrect helper choice: native FixMissingSeam
+calls BRepTools::UVBounds, whose fallback uses surface bounds; ShapeAnalysis's
+bounds helper raises on the empty curve box. The port now calls BRepTools too.
+Source audit also corrected collapsed-domain expansion to test the substituted
+bound, as OCCT does, instead of the original infinite bound.

@@ -3,7 +3,7 @@ use rustycad_tkbrep::{
     brep::BRepBuilder,
     brep_tools::ReShape,
     topexp::Explorer,
-    topods::{Face, Shape, ShapeIterator, Wire},
+    topods::{Compound, Face, Shape, ShapeIterator, Wire},
 };
 use rustycad_tkernel::{ncollection::List, standard::Handle};
 use rustycad_tkg3d::{
@@ -98,6 +98,19 @@ fn output(
         i32::from(tool.status(ShapeExtendStatus::Done)),
         i32::from(context.is_recorded(face)),
     ];
+    values.extend(
+        [
+            ShapeExtendStatus::Done1,
+            ShapeExtendStatus::Done2,
+            ShapeExtendStatus::Done3,
+            ShapeExtendStatus::Done4,
+            ShapeExtendStatus::Done5,
+            ShapeExtendStatus::Done6,
+            ShapeExtendStatus::Done7,
+            ShapeExtendStatus::Done8,
+        ]
+        .map(|status| i32::from(tool.status(status))),
+    );
     if result.is_null() {
         return values;
     }
@@ -111,10 +124,23 @@ fn run(name: &str, mode: i32) {
     let (face, groups) = fixture(mode);
     let tool = ShapeFixFace::new(face.clone().into_shape());
     let context = Handle::new(ShapeBuildReShape::new());
-    if mode == 9 {
+    if mode >= 9 {
         tool.set_context(&context);
     }
-    let changed = tool.fix_split_face(&groups).unwrap();
+    if mode == 10 {
+        context.remove(&face).unwrap();
+    }
+    if mode == 11 {
+        let mut compound = Compound::default();
+        BRepBuilder::default().make_compound(&mut compound);
+        context.replace(&face, &compound).unwrap();
+    }
+    tool.set_fix_wire_mode(0);
+    let changed = if name.starts_with("perform_") {
+        tool.perform().unwrap()
+    } else {
+        tool.fix_split_face(&groups).unwrap()
+    };
     let expected: Vec<i32> = include_str!("../../../tools/oracle/tkshhealing_face_split.expected")
         .lines()
         .find(|line| line.starts_with(&format!("{name} ")))
@@ -145,6 +171,22 @@ fn native_hole_and_face_orientation() {
         ("forward_hole", 5),
         ("reversed_hole", 6),
         ("internal_ignored", 7),
+    ] {
+        run(name, mode);
+    }
+}
+
+#[test]
+fn native_face_aggregate_with_wire_repair_disabled() {
+    for (name, mode) in [
+        ("perform_removed", 10),
+        ("perform_nonface", 11),
+        ("perform_two_outer", 0),
+        ("perform_reversed", 4),
+        ("perform_forward_hole", 5),
+        ("perform_reversed_hole", 6),
+        ("perform_single", 8),
+        ("perform_context", 9),
     ] {
         run(name, mode);
     }

@@ -10,6 +10,7 @@ pub(crate) mod make_faces_on_patch;
 mod missing_seam;
 mod natural_bound;
 mod orientation;
+mod perform_without_wire;
 mod periodic_cone;
 mod periodic_degenerated;
 mod small_area;
@@ -178,8 +179,12 @@ impl ShapeFixFace {
         missing_seam::fix::fix(self)
     }
 
-    /// `Perform()`: preserve context replacements and repair a single periodic cone loop.
+    /// Run face repairs; `fixer.perform()?`.
+    /// Wire-disabled orchestration follows OCCT; wire-enabled orchestration remains partial.
     pub fn perform(&self) -> Result<bool, Failure> {
+        if self.fix_wire_mode() == 0 {
+            return self.perform_without_wire();
+        }
         *self.status.write() = 0;
         let (context, tolerance) = self
             .parent

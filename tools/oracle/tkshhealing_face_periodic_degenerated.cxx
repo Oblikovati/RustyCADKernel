@@ -20,10 +20,10 @@ TopoDS_Face fixture(double angle,double span,bool reverse,bool pcurve,bool twice
  TopoDS_Wire wire;b.MakeWire(wire);b.Add(wire,edge);if(reverse)wire.Reverse();b.Add(face,wire);if(twice)b.Add(face,wire);return face;
 }
 int count(const TopoDS_Shape& shape,TopAbs_ShapeEnum kind){if(shape.IsNull())return 0;int n=0;for(TopExp_Explorer e(shape,kind);e.More();e.Next())++n;return n;}
-void run(const char* name,double angle,double span,bool reverse=false,bool pcurve=true,bool twice=false,bool reversed_face=false,bool context=false){
+void run(const char* name,double angle,double span,bool reverse=false,bool pcurve=true,bool twice=false,bool reversed_face=false,bool context=false,bool aggregate=false){
  auto face=fixture(angle,span,reverse,pcurve,twice);if(reversed_face)face.Reverse();
  ShapeFix_Face tool(face);tool.SetPrecision(0.002);occ::handle<ShapeBuild_ReShape> reshape=new ShapeBuild_ReShape;if(context)tool.SetContext(reshape);
- bool changed=tool.FixPeriodicDegenerated();auto result=tool.Result();
+ if(aggregate)tool.FixWireMode()=0;bool changed=aggregate?tool.Perform():tool.FixPeriodicDegenerated();auto result=tool.Result();
  std::cout<<name<<' '<<changed<<' '<<tool.Face().IsSame(face)<<' '<<count(result,TopAbs_WIRE)<<' '<<count(result,TopAbs_EDGE)<<' '<<tool.Status(ShapeExtend_DONE)<<' '<<reshape->IsRecorded(face);
  if(!result.IsNull()){
   std::cout<<' '<<int(result.Orientation());for(TopoDS_Iterator it(result,false);it.More();it.Next())std::cout<<' '<<int(it.Value().Orientation());
@@ -34,4 +34,4 @@ void run(const char* name,double angle,double span,bool reverse=false,bool pcurv
  }
  std::cout<<'\n';
 }
-int main(){run("below",0.3,2*M_PI);run("above",-0.3,2*M_PI);run("reverse",0.3,2*M_PI,true);run("reversed_face",0.3,2*M_PI,false,true,false,true);run("partial",0.3,M_PI);run("missing",0.3,2*M_PI,false,false);run("multiple",0.3,2*M_PI,false,true,true);run("context",0.3,2*M_PI,false,true,false,false,true);}
+int main(){run("aggregate_below",0.3,2*M_PI,false,true,false,false,false,true);run("aggregate_above",-0.3,2*M_PI,false,true,false,false,false,true);run("aggregate_reverse",0.3,2*M_PI,true,true,false,false,false,true);run("aggregate_reversed_face",0.3,2*M_PI,false,true,false,true,false,true);run("aggregate_partial",0.3,M_PI,false,true,false,false,false,true);run("aggregate_missing",0.3,2*M_PI,false,false,false,false,false,true);run("aggregate_multiple",0.3,2*M_PI,false,true,true,false,false,true);run("aggregate_context",0.3,2*M_PI,false,true,false,false,true,true);run("below",0.3,2*M_PI);run("above",-0.3,2*M_PI);run("reverse",0.3,2*M_PI,true);run("reversed_face",0.3,2*M_PI,false,true,false,true);run("partial",0.3,M_PI);run("missing",0.3,2*M_PI,false,false);run("multiple",0.3,2*M_PI,false,true,true);run("context",0.3,2*M_PI,false,true,false,false,true);}

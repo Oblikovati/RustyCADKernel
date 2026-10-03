@@ -114,7 +114,10 @@ fn apex_values(edge: &Edge, face: &Face) -> [f64; 7] {
         end.y(),
     ]
 }
-fn run(name: &str) {
+fn run(expected_name: &str) {
+    let name = expected_name
+        .strip_prefix("aggregate_")
+        .unwrap_or(expected_name);
     let angle = if name == "above" { -0.3 } else { 0.3 };
     let span = if name == "partial" { PI } else { 2. * PI };
     let mut face = fixture(
@@ -133,12 +136,18 @@ fn run(name: &str) {
     if name == "context" {
         tool.set_context(&context);
     }
-    let changed = tool.fix_periodic_degenerated().unwrap();
+    let changed = if expected_name.starts_with("aggregate_") {
+        tool.set_fix_wire_mode(0);
+        tool.perform()
+            .unwrap_or_else(|error| panic!("{expected_name}: {error:?}"))
+    } else {
+        tool.fix_periodic_degenerated().unwrap()
+    };
     let actual = observations(&tool, &face, &context, changed);
     let expected =
         include_str!("../../../tools/oracle/tkshhealing_face_periodic_degenerated.expected")
             .lines()
-            .find(|line| line.split_whitespace().next() == Some(name))
+            .find(|line| line.split_whitespace().next() == Some(expected_name))
             .unwrap()
             .split_whitespace()
             .skip(1)
@@ -162,5 +171,21 @@ fn native_apex_orientation_parameters_and_context() {
         "context",
     ] {
         run(name);
+    }
+}
+
+#[test]
+fn native_periodic_aggregate_without_wire_repair() {
+    for name in [
+        "below",
+        "above",
+        "reverse",
+        "reversed_face",
+        "partial",
+        "missing",
+        "multiple",
+        "context",
+    ] {
+        run(&format!("aggregate_{name}"));
     }
 }

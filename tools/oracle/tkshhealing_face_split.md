@@ -19,3 +19,11 @@ failure cases require further differential evidence. No legacy-test mapping or
 full behavioral parity is claimed.
 
 Run `cargo test -p rustycad-tkshhealing --test shape_fix_face_split`.
+
+Eight additional rows call Perform with FixWireMode=0 and compare all eight DONE
+bits as well. The cases cover two outer contours, reversed face, both hole
+orientations, a single contour, context replacement, prior removal and prior
+replacement by a non-face. Aggregate processing follows native periodic/seam,
+intersection, orientation, natural-bound, split and small-area stage ordering.
+The default wire-enabled aggregate and its progress overload remain incomplete;
+periodic/seam and small-area aggregate combinations require additional fixtures.
