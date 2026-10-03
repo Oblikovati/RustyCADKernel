@@ -90,7 +90,7 @@ impl ShapeUpgradeRemoveInternalWires {
     pub fn init(&self, shape: &Shape) -> Result<(), Failure> {
         let mut fields = self.fields.write();
         fields.shape = shape.clone();
-        let context_handle = self.context();
+        let context_handle = self.parent.context();
         context_handle
             .get()
             .ok_or_else(null_context)?
@@ -139,10 +139,6 @@ impl ShapeUpgradeRemoveInternalWires {
     /// Decodes the last operation's ShapeExtend status; `remover.status(ShapeExtendStatus::Done1)`.
     pub fn status(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.fields.read().status, status)
-    }
-
-    pub(super) fn context(&self) -> Handle<ShapeBuildReShape> {
-        self.parent.context()
     }
 }
 

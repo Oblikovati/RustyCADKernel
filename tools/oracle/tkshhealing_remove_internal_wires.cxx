@@ -36,18 +36,20 @@ static Fixture makeFixture()
   return {face, hole};
 }
 
-static Fixture makePartitionFixture()
+static Fixture makePartitionFixture(int adjacentFaces = 1)
 {
   Fixture fixture = makeFixture();
   BRepBuilderAPI_MakeWire wireBuilder;
   for (TopExp_Explorer edgeExp(fixture.hole, TopAbs_EDGE); edgeExp.More(); edgeExp.Next())
     wireBuilder.Add(TopoDS::Edge(edgeExp.Current()));
-  TopoDS_Face filler = BRepBuilderAPI_MakeFace(gp_Pln(), wireBuilder.Wire(), true).Face();
   TopoDS_Compound compound;
   BRep_Builder builder;
   builder.MakeCompound(compound);
   builder.Add(compound, fixture.shape);
-  builder.Add(compound, filler);
+  for (int index = 0; index < adjacentFaces; ++index) {
+    TopoDS_Face filler = BRepBuilderAPI_MakeFace(gp_Pln(), wireBuilder.Wire(), true).Face();
+    builder.Add(compound, filler);
+  }
   return {compound, fixture.hole};
 }
 
@@ -89,6 +91,23 @@ static void runFaceCandidate()
   bool done = remover.Perform();
   TopoDS_Shape result = remover.GetResult();
   std::cout << "remove_small_face " << done << ' '
+            << remover.Status(ShapeExtend_DONE1) << ' '
+            << remover.Status(ShapeExtend_DONE2) << ' '
+            << remover.Status(ShapeExtend_FAIL1) << ' '
+            << remover.Status(ShapeExtend_FAIL2) << ' '
+            << remover.RemovedWires().Length() << ' '
+            << remover.RemovedFaces().Length() << ' '
+            << count(result, TopAbs_FACE) << ' ' << count(result, TopAbs_WIRE) << '\n';
+}
+
+static void runMultipleAdjacentCandidates()
+{
+  Fixture fixture = makePartitionFixture(2);
+  ShapeUpgrade_RemoveInternalWires remover(fixture.shape);
+  remover.MinArea() = 2.0;
+  bool done = remover.Perform();
+  TopoDS_Shape result = remover.GetResult();
+  std::cout << "multiple_adjacent_faces " << done << ' '
             << remover.Status(ShapeExtend_DONE1) << ' '
             << remover.Status(ShapeExtend_DONE2) << ' '
             << remover.Status(ShapeExtend_FAIL1) << ' '
@@ -146,6 +165,7 @@ int main()
   run("selected_hole", true, false, 2.0);
   runForeignFace();
   runFaceCandidate();
+  runMultipleAdjacentCandidates();
   runPersistentContext();
   ShapeUpgrade_RemoveInternalWires empty;
   std::cout << "null_shape " << empty.Perform() << ' '
