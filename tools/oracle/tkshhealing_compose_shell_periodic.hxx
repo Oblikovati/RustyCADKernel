@@ -70,7 +70,7 @@ static void runPerformPeriodicCylinder(bool closedMode)
   std::cout << '\n';
 }
 
-static void runPerformPeriodicCylinderPatches()
+static void runPerformPeriodicCylinderPatches(bool closedMode)
 {
   const gp_Cylinder cylinder(gp_Ax3(), 2.0);
   const TopoDS_Face face = BRepBuilderAPI_MakeFace(cylinder, 0., 2. * M_PI, 0., 2.).Face();
@@ -82,13 +82,15 @@ static void runPerformPeriodicCylinderPatches()
   ShapeFix_ComposeShell tool;
   tool.SetContext(new ShapeBuild_ReShape);
   tool.Init(new ShapeExtend_CompositeSurface(patches), TopLoc_Location(), face, 1.0e-7);
-  tool.ClosedMode() = true;
+  tool.ClosedMode() = closedMode;
   const bool done = tool.Perform();
   const TopoDS_Shape result = tool.Result();
   int children = 0;
   for (TopoDS_Iterator it(result); it.More(); it.Next())
     ++children;
-  std::cout << "perform_periodic_cylinder_patches " << done << ' ' << result.ShapeType() << ' '
+  std::cout << (closedMode ? "perform_periodic_cylinder_patches_closed " :
+                             "perform_periodic_cylinder_patches_open ")
+            << done << ' ' << result.ShapeType() << ' '
             << result.Orientation() << ' ' << children << ' '
             << tool.Status(ShapeExtend_DONE1);
   printPcurveBounds(result);
