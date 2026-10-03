@@ -12,6 +12,8 @@ The mixed-wire case verifies native ordering when one INTERNAL edge is separated
 from the three manifold edges.
 The `ComputeCode` fixture checks the protected edge-side classifier on a p-curve
 subrange against a vertical cutting line.
+The classifier rows also cover the opposite side, a coincident segment, and
+closed-mode accumulation across both sides of the line.
 The patch-limit fixture checks the native undefined-index sentinels and side-bit updates.
 The two-patch planar `SplitEdges` row records the replacement type/count for each
 boundary edge after a vertical joint splits the top and bottom edges.

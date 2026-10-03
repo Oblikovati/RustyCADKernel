@@ -150,7 +150,7 @@ mod tests {
                 "patch_limits {} {} {} {}",
                 patch.u_min, patch.u_max, patch.v_min, patch.v_max
             ),
-            expected.lines().nth(6).unwrap()
+            expected.lines().nth(10).unwrap()
         );
     }
 

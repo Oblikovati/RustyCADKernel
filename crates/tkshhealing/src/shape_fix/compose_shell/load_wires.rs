@@ -279,6 +279,14 @@ mod tests {
             (0.25, 0.75),
             expected.lines().nth(8).unwrap(),
         );
+        composer.set_closed_mode(true);
+        assert_native_code(
+            &composer,
+            wire,
+            line,
+            (0.0, 2.0),
+            expected.lines().nth(9).unwrap(),
+        );
     }
 
     #[test]
