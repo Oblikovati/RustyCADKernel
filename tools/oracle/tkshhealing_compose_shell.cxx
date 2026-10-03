@@ -574,4 +574,6 @@ int main()
   runPerformNoWires();
   runSplitEdges(true);
   runSplitEdgesPeriodicCylinder();
+  runPerformPeriodicCylinder(false);
+  runPerformPeriodicCylinder(true);
 }
