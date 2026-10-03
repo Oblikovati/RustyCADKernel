@@ -9,7 +9,7 @@ import json
 import pathlib
 import shutil
 
-from api_inventory.inputs import JSONObject, digest, read_object
+from api_inventory.inputs import JSONObject, digest, read_object, object_rows
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DETAIL_TABLES = {
@@ -37,6 +37,30 @@ def compress_snapshot(source: pathlib.Path, target: pathlib.Path) -> JSONObject:
     }
 
 
+def snapshot_summary(
+    document: JSONObject, rust: pathlib.Path, artifacts: JSONObject
+) -> JSONObject:
+    """Keep source provenance beside the small counts; e.g. `snapshot_summary(report, rust, artifacts)`."""
+    public = read_object(rust)
+    crates = object_rows(public.get("crates", []), "Rust crates")
+    summary = {
+        key: value for key, value in document.items() if key not in DETAIL_TABLES
+    }
+    summary.update(
+        {
+            "artifacts": artifacts,
+            "rust_capture_revision": public.get("capture_workspace_revision"),
+            "rust_capture_inputs": public.get("capture_inputs"),
+            "rust_crates": len(crates),
+            "rust_public_paths": sum(
+                len(object_rows(crate.get("declarations", []), "Rust declarations"))
+                for crate in crates
+            ),
+        }
+    )
+    return summary
+
+
 def publish_snapshot(
     rust: pathlib.Path, report: pathlib.Path, output: pathlib.Path
 ) -> None:
@@ -52,10 +76,7 @@ def publish_snapshot(
         label: compress_snapshot(path, output / f"{label}.json.gz")
         for label, path in (("rust-api", rust), ("api-crosswalk", report))
     }
-    summary = {
-        key: value for key, value in document.items() if key not in DETAIL_TABLES
-    }
-    summary["artifacts"] = artifacts
+    summary = snapshot_summary(document, rust, artifacts)
     (output / "completeness.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n"
     )

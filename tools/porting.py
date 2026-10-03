@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from api_inventory_status import compiler_status_lines, current_workspace_digest
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "porting/baseline.json"
@@ -92,7 +93,8 @@ def status():
         mapped = [row for row in ledger["tests"] if row["toolkit"] == toolkit["name"]]
         if mapped:
             print(f"{toolkit['name']}: {len(mapped)}/{len(toolkit['gtest_declaration_candidates'])} GoogleTest declarations mapped (source discovery, not full runtime/DRAW coverage)")
-    print("API coverage: UNKNOWN (authoritative symbol inventory pending); port completion: NOT COMPLETE")
+    for line in compiler_status_lines(ROOT, current_workspace_digest()):
+        print(line)
 
 
 def main():

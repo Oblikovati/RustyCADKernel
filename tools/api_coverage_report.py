@@ -29,7 +29,11 @@ from api_crosswalk import (
     rust_summary,
     suffix_matches,
 )
-from api_report_inputs import crosswalk_input_hashes
+from api_report_inputs import (
+    crosswalk_input_hashes,
+    mark_conflicted_declarations,
+    verify_conflict_artifact,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CPP_DEFAULT = ROOT / "porting/api-inventory/occt-declarations.jsonl.gz"
@@ -122,7 +126,8 @@ def header_inventory_gaps(
     if not isinstance(statuses, dict):
         gaps.append("missing_header_status_counts")
     elif any(
-        status != "parsed" and count_nonzero(count)
+        status not in {"parsed", "included_fragment", "parsed_with_context"}
+        and count_nonzero(count)
         for status, count in statuses.items()
     ):
         gaps.append("cxx_headers_not_all_parsed")
@@ -170,6 +175,9 @@ def toolkit_report(
             "observed_cpp_api": len({row.get("id") for row in visible}),
             "parity_rows": len(mapped),
             "implemented": count_resolution(mapped, "implemented"),
+            "cpp_declarations_with_resolved_implemented_claim": len(
+                implemented_declaration_ids(mapped)
+            ),
             "partial": count_parity_status(mapped, "partial"),
             "excluded": count_resolution(mapped, "excluded"),
             "upstream_unimplemented": count_parity_status(
@@ -302,6 +310,17 @@ def cpp_unsupported_count(manifest: dict[str, JSONValue]) -> int:
     return max(record_count, legacy_count)
 
 
+def implemented_declaration_ids(rows: list[dict[str, JSONValue]]) -> set[str]:
+    """Count declaration identities rather than repeated ledger claims."""
+    return {
+        identity
+        for row in rows
+        if row.get("resolution") == "implemented"
+        for identity in row.get("cpp_ids", [])
+        if isinstance(identity, str)
+    }
+
+
 def report_fields(
     cpp: list[dict[str, JSONValue]],
     cpp_manifest: dict[str, JSONValue],
@@ -321,6 +340,9 @@ def report_fields(
         "observed_cpp_api_declarations": len({row.get("id") for row in visible}),
         "parity_api_rows": len(api_rows),
         "matched_declared_mappings": resolutions["implemented"],
+        "cpp_declarations_with_resolved_implemented_claim": len(
+            implemented_declaration_ids(matched)
+        ),
         "accounted_exclusions": resolutions["excluded"],
         "partial_mappings": count_parity_status(matched, "partial"),
         "upstream_unimplemented": count_parity_status(
@@ -376,6 +398,10 @@ def main() -> int:
     args = arguments()
     cpp = read_jsonl(args.cpp)
     cpp_manifest = read_json(args.cpp_manifest)
+    conflicts = read_jsonl(
+        verify_conflict_artifact(cpp_manifest, args.cpp_manifest.parent)
+    )
+    mark_conflicted_declarations(cpp, conflicts)
     source_headers = read_json(args.headers)
     rust_doc = read_json(args.rust)
     parity = read_json(args.parity)

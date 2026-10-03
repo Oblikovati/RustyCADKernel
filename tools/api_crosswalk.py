@@ -168,13 +168,17 @@ def cpp_candidates(
     candidates = [
         row
         for row in candidates
-        if row.get("api_visible") is True
-        and toolkit in row.get("_toolkits", set())
+        if row.get("api_visible") is True and toolkit in row.get("_toolkits", set())
     ]
     if params is not None:
         candidates = [row for row in candidates if parameter_match(params, row)]
     candidates = [row for row in candidates if suffix_matches(suffix, row)]
-    return candidate_status(candidates), candidates
+    status = (
+        "conflicting_inventory"
+        if any(row.get("inventory_conflict") for row in candidates)
+        else candidate_status(candidates)
+    )
+    return status, candidates
 
 
 def candidate_status(candidates: list[dict[str, JSONValue]]) -> str:
@@ -258,6 +262,8 @@ def match_api_row(
 def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) -> str:
     if parity == "excluded" and cpp == "missing":
         return "unmatched_exclusion" if source_known else "stale_exclusion"
+    if cpp == "conflicting_inventory":
+        return "conflicting_cpp_inventory"
     if cpp == "ambiguous":
         return "ambiguous_cpp"
     if cpp != "unique":
