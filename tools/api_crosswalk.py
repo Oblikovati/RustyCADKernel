@@ -83,13 +83,69 @@ def suffix_matches(identity_suffix: str, declaration: dict[str, JSONValue]) -> b
 
 
 def parameter_match(params: list[str], declaration: dict[str, JSONValue]) -> bool:
-    expected = [norm_cpp(item) for item in params]
+    expected = [canonical_parameter_type(item) for item in params]
+    if any(item is None for item in expected):
+        return False
     choices = []
     for field in ("written_parameter_types", "parameter_types"):
         value = declaration.get(field)
         if isinstance(value, list) and all(isinstance(item, str) for item in value):
-            choices.append([norm_cpp(item) for item in value])
+            choice = [canonical_parameter_type(item) for item in value]
+            if all(item is not None for item in choice):
+                choices.append(choice)
     return expected in choices
+
+
+def canonical_parameter_type(text: str) -> str | None:
+    # C++ function types discard only top-level cv on by-value parameters.
+    normalized = norm_cpp(text)
+    tokens = top_level_type_tokens(normalized)
+    if tokens is None:
+        return None
+    if any(token in {"&", "&&"} for token, _, _ in tokens):
+        return normalized
+    # Parenthesized declarators need a full declarator parser before matching.
+    if any(token in {"(", ")", "[", "]"} for token, _, _ in tokens):
+        return None
+    stars = [end for token, _, end in tokens if token == "*"]
+    removable = top_cv_tokens(tokens, stars[-1] if stars else 0)
+    return remove_token_spans(normalized, removable)
+
+
+def top_level_type_tokens(text: str) -> list[tuple[str, int, int]] | None:
+    depths = {"<": 0, "(": 0, "[": 0}
+    closing = {">": "<", ")": "(", "]": "["}
+    pattern = re.compile(r"[A-Za-z_]\w*|&&|[<>()\[\]*&]")
+    tokens = []
+    for match in pattern.finditer(text):
+        token = match.group()
+        if token in closing:
+            key = closing[token]
+            depths[key] -= 1
+            if depths[key] < 0:
+                return None
+            continue
+        if not any(depths.values()):
+            tokens.append((token, match.start(), match.end()))
+        if token in depths:
+            depths[token] += 1
+    return tokens if not any(depths.values()) else None
+
+
+def top_cv_tokens(
+    tokens: list[tuple[str, int, int]], minimum_start: int
+) -> list[tuple[str, int, int]]:
+    return [
+        item
+        for item in tokens
+        if item[0] in {"const", "volatile"} and item[1] >= minimum_start
+    ]
+
+
+def remove_token_spans(text: str, tokens: list[tuple[str, int, int]]) -> str:
+    for _, start, end in reversed(tokens):
+        text = text[:start] + text[end:]
+    return norm_cpp(text)
 
 
 def cpp_candidates(
