@@ -252,6 +252,13 @@ mod tests {
             let seam = periodic_seam_values(&result).unwrap();
             row.push_str(&format!(" {} {} {} {}", seam.0, seam.1, seam.2, seam.3));
         }
+        if label == "perform_two_patches" {
+            let bounds = pcurve_bounds(&result).unwrap();
+            row.push_str(&format!(
+                " {} {} {} {}",
+                bounds.0, bounds.1, bounds.2, bounds.3
+            ));
+        }
         assert_eq!(
             row,
             expected
@@ -301,6 +308,82 @@ mod tests {
 
     fn scaled(value: f64) -> i64 {
         (value * 1.0e6).round() as i64
+    }
+
+    fn pcurve_bounds(result: &Shape) -> Result<(i64, i64, i64, i64), Failure> {
+        let mut bounds = (
+            f64::INFINITY,
+            f64::NEG_INFINITY,
+            f64::INFINITY,
+            f64::NEG_INFINITY,
+        );
+        let analyzer = crate::shape_analysis::ShapeAnalysisEdge::new();
+        for face in result_faces(result) {
+            update_face_pcurve_bounds(&face, &analyzer, &mut bounds)?;
+        }
+        Ok((
+            scaled(bounds.0),
+            scaled(bounds.1),
+            scaled(bounds.2),
+            scaled(bounds.3),
+        ))
+    }
+
+    fn result_faces(result: &Shape) -> Vec<Face> {
+        rustycad_tkbrep::topods::ShapeIterator::new(result, false, false)
+            .filter_map(|shape| rustycad_tkbrep::topods::face(&shape).ok())
+            .collect()
+    }
+
+    fn update_face_pcurve_bounds(
+        face: &Face,
+        analyzer: &crate::shape_analysis::ShapeAnalysisEdge,
+        bounds: &mut (f64, f64, f64, f64),
+    ) -> Result<(), Failure> {
+        for wire in
+            rustycad_tkbrep::topods::ShapeIterator::new(&face.clone().into_shape(), false, false)
+        {
+            update_wire_pcurve_bounds(&wire, face, analyzer, bounds)?;
+        }
+        Ok(())
+    }
+
+    fn update_wire_pcurve_bounds(
+        wire: &Shape,
+        face: &Face,
+        analyzer: &crate::shape_analysis::ShapeAnalysisEdge,
+        bounds: &mut (f64, f64, f64, f64),
+    ) -> Result<(), Failure> {
+        for edge_shape in rustycad_tkbrep::topods::ShapeIterator::new(wire, false, false) {
+            update_edge_pcurve_bounds(&edge_shape, face, analyzer, bounds)?;
+        }
+        Ok(())
+    }
+
+    fn update_edge_pcurve_bounds(
+        edge_shape: &Shape,
+        face: &Face,
+        analyzer: &crate::shape_analysis::ShapeAnalysisEdge,
+        bounds: &mut (f64, f64, f64, f64),
+    ) -> Result<(), Failure> {
+        if edge_shape.shape_type()? != ShapeEnum::Edge {
+            return Ok(());
+        }
+        let edge = rustycad_tkbrep::topods::edge(edge_shape)?;
+        let (curve, first, last) = analyzer.pcurve_on_face(&edge, face, false)?;
+        if curve.is_null() {
+            return Ok(());
+        }
+        update_point_bound(&curve.value(first)?, bounds);
+        update_point_bound(&curve.value(last)?, bounds);
+        Ok(())
+    }
+
+    fn update_point_bound(point: &rustycad_tkmath::gp::Point2, bounds: &mut (f64, f64, f64, f64)) {
+        bounds.0 = bounds.0.min(point.x());
+        bounds.1 = bounds.1.max(point.x());
+        bounds.2 = bounds.2.min(point.y());
+        bounds.3 = bounds.3.max(point.y());
     }
 
     fn initialized_composer(face: &Face) -> ShapeFixComposeShell {
