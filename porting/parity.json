@@ -221687,6 +221687,42 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::status_bits",
       "status": "implemented",
       "notes": "Native protected myStatus read/write is represented by status_bits/set_status_bits. Subclass native fixture verifies 0x101 decoding; Clear preserves outputs and resets status. Generated regression, not a new legacy declaration."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckDegenerated()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_degenerated",
+      "status": "implemented",
+      "notes": "Source translation of singular-edge checks and native accumulated status semantics. Native fixtures tkshhealing_wire_degenerated and tkshhealing_wire_singular_checks cover invalid flags, cone apex, midpoint veto, disconnected vertices, aggregate retention and ClearStatuses. UV output references adapted to a returned tuple. Branch validation is not exhaustive API or whole-toolkit behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckDegenerated(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_degenerated_edge",
+      "status": "implemented",
+      "notes": "Source translation of singular-edge checks and native accumulated status semantics. Native fixtures tkshhealing_wire_degenerated and tkshhealing_wire_singular_checks cover invalid flags, cone apex, midpoint veto, disconnected vertices, aggregate retention and ClearStatuses. UV output references adapted to a returned tuple. Branch validation is not exhaustive API or whole-toolkit behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckDegenerated(int,gp_Pnt2d&,gp_Pnt2d&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_degenerated_at",
+      "status": "implemented",
+      "notes": "Source translation of singular-edge checks and native accumulated status semantics. Native fixtures tkshhealing_wire_degenerated and tkshhealing_wire_singular_checks cover invalid flags, cone apex, midpoint veto, disconnected vertices, aggregate retention and ClearStatuses. UV output references adapted to a returned tuple. Branch validation is not exhaustive API or whole-toolkit behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusDegenerated(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_degenerated",
+      "status": "implemented",
+      "notes": "Source translation of singular-edge checks and native accumulated status semantics. Native fixtures tkshhealing_wire_degenerated and tkshhealing_wire_singular_checks cover invalid flags, cone apex, midpoint veto, disconnected vertices, aggregate retention and ClearStatuses. UV output references adapted to a returned tuple. Branch validation is not exhaustive API or whole-toolkit behavior proof."
     }
   ],
   "tests": [

@@ -46,6 +46,13 @@ static void inspect(const char* name, const Handle(ShapeExtend_WireData)& wire)
             << analyzer.LastCheckStatus(ShapeExtend_DONE2) << " "
             << analyzer.LastCheckStatus(ShapeExtend_FAIL1) << " "
             << analyzer.LastCheckStatus(ShapeExtend_FAIL2) << '\n';
+  const bool aggregate = analyzer.CheckDegenerated();
+  const bool wrapped = analyzer.CheckDegenerated(wire->NbEdges());
+  wire->Clear();
+  const bool retained = analyzer.CheckDegenerated();
+  analyzer.ClearStatuses();
+  std::cout << name << "_aggregate " << aggregate << " " << wrapped << " "
+            << retained << " " << analyzer.StatusDegenerated(ShapeExtend_OK) << '\n';
 }
 
 int main()
@@ -54,6 +61,7 @@ int main()
   TopoDS_Edge apex = edgeAt(gp_Pnt(), gp_Pnt());
   single->Add(apex);
   inspect("apex_without_pcurve", single);
+  single->Add(apex);
   BRep_Builder builder;
   builder.UpdateEdge(apex, new Geom_Circle(gp_Ax2(gp_Pnt(-1.,0.,0.), gp_Dir(0.,0.,1.)), 1.), 1.e-7);
   builder.Range(apex, 0., 6.283185307179586, true);

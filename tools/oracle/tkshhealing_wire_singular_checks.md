@@ -14,6 +14,8 @@ change OCCT or its tests. Each expected row records `found DONE1 DONE2 FAIL1 FAI
   even when their supplied p-curves lie along the cone apex.
 
 All three Rust regressions failed before the correction and pass after it.
+Each case additionally checks the boolean overload and bulk overload, retention
+of aggregate statuses after clearing the wire, and explicit ClearStatuses reset.
 These are branch fixtures, not a claim of exhaustive wire API or legacy parity.
 The Rust translation also restores the separate minimum, maximum, and expanded
 vertex tolerances, the previous-start-vertex check, index-based adjacency, and

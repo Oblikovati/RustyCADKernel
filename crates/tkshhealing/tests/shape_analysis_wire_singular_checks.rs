@@ -91,6 +91,7 @@ fn inspect(name: &str, wire: &Handle<ShapeExtendWireData>) {
             .find(|line| line.starts_with(&format!("{name} "))),
         Some(row.as_str())
     );
+    check_aggregate(name, &analyzer, wire);
 }
 
 fn edge_at(first: Point3, last: Point3) -> Edge {
@@ -122,4 +123,26 @@ fn attach_apex_pcurves(wire: &Handle<ShapeExtendWireData>, face: &Face) {
             .unwrap();
         builder.range_on_face(&edge, face, 0., 1.).unwrap();
     }
+}
+
+fn check_aggregate(name: &str, analyzer: &ShapeAnalysisWire, wire: &Handle<ShapeExtendWireData>) {
+    let aggregate = analyzer.check_degenerated().unwrap();
+    let wrapped = analyzer.check_degenerated_edge(wire.nb_edges()).unwrap();
+    wire.clear();
+    let retained = analyzer.check_degenerated().unwrap();
+    analyzer.clear_statuses();
+    let cleared = analyzer.status_degenerated(ShapeExtendStatus::Ok);
+    let row = format!(
+        "{name}_aggregate {} {} {} {}",
+        u8::from(aggregate),
+        u8::from(wrapped),
+        u8::from(retained),
+        u8::from(cleared)
+    );
+    assert_eq!(
+        EXPECTED
+            .lines()
+            .find(|line| line.starts_with(&format!("{name}_aggregate "))),
+        Some(row.as_str())
+    );
 }
