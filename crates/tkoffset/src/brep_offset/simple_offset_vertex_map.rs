@@ -74,7 +74,7 @@ fn incident_edge_offset(
 ) -> OffsetVertexIncidentEdge {
     let geometry = edge_offsets
         .iter()
-        .find(|(mapped, _)| mapped.is_same(&edge))
+        .find(|(mapped, _)| mapped.is_equal(&edge))
         .and_then(|(_, geometry)| geometry.clone());
     OffsetVertexIncidentEdge { edge, geometry }
 }

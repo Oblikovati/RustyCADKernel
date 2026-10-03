@@ -12,6 +12,8 @@
 #include <TopoDS_Compound.hxx>
 #include <TopoDS_Vertex.hxx>
 #include <gp_Pln.hxx>
+#include <gp_Cylinder.hxx>
+#include <gp_Ax3.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Trsf.hxx>
 #include <gp_Vec.hxx>
@@ -79,6 +81,14 @@ void print_basic_face_cases()
   run_shape(reversedFace);
 }
 
+void print_closed_cylinder_case()
+{
+  const TopoDS_Face cylinderFace =
+    BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(), 5.0), 0.0, 2.0 * M_PI, 0.0, 2.0).Face();
+  std::cout << "cylinder\n";
+  run_shape(cylinderFace);
+}
+
 TopoDS_Compound opposed_faces()
 {
   TopoDS_Face firstFace =
@@ -96,6 +106,7 @@ TopoDS_Compound opposed_faces()
 int main()
 {
   print_basic_face_cases();
+  print_closed_cylinder_case();
   std::cout << "adjacent\n";
   run_shape(opposed_faces());
 }

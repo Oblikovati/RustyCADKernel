@@ -31,8 +31,14 @@ pub struct OffsetVertexGeometry {
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Vertex;
+/// use rustycad_tkbrep::brep::BRepBuilder;
+/// use rustycad_tkmath::gp::Point3;
 /// use rustycad_tkoffset::brep_offset::build_simple_offset_vertex;
-/// assert!(build_simple_offset_vertex(&Vertex::default(), &[]).unwrap().is_none());
+/// let mut vertex = Vertex::default();
+/// BRepBuilder::default()
+///     .make_vertex_at(&mut vertex, Point3::new(1.0, 2.0, 3.0), 1.0e-7)
+///     .unwrap();
+/// assert!(build_simple_offset_vertex(&vertex, &[]).unwrap().is_none());
 /// ```
 pub fn build_simple_offset_vertex(
     vertex: &Vertex,
