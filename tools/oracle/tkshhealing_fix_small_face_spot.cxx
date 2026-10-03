@@ -53,6 +53,38 @@ static void probe(const char* name, const TopoDS_Shape& input) {
   std::cout << '\n';
 }
 
+static void probe_split_empty() {
+  BRep_Builder builder;
+  TopoDS_Compound empty;
+  builder.MakeCompound(empty);
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(empty);
+  const TopoDS_Shape result = fixer.FixSplitFace(empty);
+  std::cout << "split_empty " << result.IsSame(empty) << ' ' << result.ShapeType() << ' '
+            << count(result, TopAbs_FACE) << '\n';
+}
+
+static void probe_split_regular_precision_indeterminate(const TopoDS_Shape& input) {
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(input);
+  const TopoDS_Shape result = fixer.FixSplitFace(input);
+  std::cout << "split_regular_precision_indeterminate " << count(result, TopAbs_FACE) << ' '
+            << result.ShapeType() << '\n';
+}
+
+static void probe_split_empty_face() {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  TopoDS_Compound output;
+  builder.MakeFace(face);
+  builder.MakeCompound(output);
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(face);
+  const bool split = fixer.SplitOneFace(face, output);
+  std::cout << "split_empty_face " << split << ' ' << output.ShapeType() << ' '
+            << count(output, TopAbs_FACE) << '\n';
+}
+
 static void probe_perform(const char* name, const TopoDS_Shape& input) {
   ShapeFix_FixSmallFace fixer;
   fixer.Init(input);
@@ -82,6 +114,9 @@ int main() {
   const TopoDS_Shape regular = BRepPrimAPI_MakeBox(1.0, 1.0, 1.0).Shape();
   probe("regular_solid", regular);
   probe_perform("perform_regular", regular);
+  probe_split_empty();
+  probe_split_regular_precision_indeterminate(regular);
+  probe_split_empty_face();
   BRep_Builder builder;
   TopoDS_Face tiny_face;
   TopoDS_Wire tiny_wire;

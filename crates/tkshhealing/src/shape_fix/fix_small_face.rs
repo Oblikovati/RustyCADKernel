@@ -1,4 +1,5 @@
 //! Spot-face healing from `ShapeFix_FixSmallFace`.
+mod split;
 mod spot;
 mod strip;
 
@@ -108,6 +109,22 @@ impl ShapeFixFixSmallFace {
     /// Native `FixPinFace` is currently a no-op returning true; `assert!(fixer.fix_pin_face(&mut face))`.
     pub fn fix_pin_face(&self, _face: &mut Face) -> bool {
         true
+    }
+
+    /// Splits detected crossing-vertex faces; upstream precision is uninitialized in this call path.
+    /// Example: `let repaired = fixer.fix_split_face(&input)?`.
+    pub fn fix_split_face(&self, _shape: &Shape) -> Result<Shape, Failure> {
+        split::fix_split_face(self)
+    }
+
+    /// Processes one face; an empty face returns false, while detected splits remain unsupported.
+    /// Example: `let split = fixer.split_one_face(&mut face, &mut output)?`.
+    pub fn split_one_face(
+        &self,
+        face: &mut Face,
+        output: &mut rustycad_tkbrep::topods::Compound,
+    ) -> Result<bool, Failure> {
+        split::split_one_face(self, face, output)
     }
 
     /// Replaces recognized strip faces and applies the shared reshape context; `fixer.fix_strip_face(false)?`.
