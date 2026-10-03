@@ -159,6 +159,74 @@ static void runRemoveLoopModeOne(const TopoDS_Face& face) {
   printObservation(fixer, wire, face, context, fixer.FixSelfIntersection());
 }
 
+static void setGeometryModesNonDefault(ShapeFix_Wire& fixer) {
+  fixer.ModifyTopologyMode() = true; fixer.ModifyGeometryMode() = false;
+  fixer.ClosedWireMode() = false; fixer.PreferencePCurveMode() = false;
+  fixer.FixGapsByRangesMode() = true; fixer.ModifyRemoveLoopMode() = 1;
+  fixer.FixReversed2dMode() = 1; fixer.FixRemovePCurveMode() = 1;
+  fixer.FixRemoveCurve3dMode() = 1; fixer.FixAddPCurveMode() = 1;
+  fixer.FixAddCurve3dMode() = 1; fixer.FixSeamMode() = 1;
+  fixer.FixShiftedMode() = 1; fixer.FixSameParameterMode() = 1;
+  fixer.FixVertexToleranceMode() = 1;
+}
+
+static void setAggregateModesNonDefault(ShapeFix_Wire& fixer) {
+  fixer.FixNotchedEdgesMode() = 1; fixer.FixSelfIntersectingEdgeMode() = 1;
+  fixer.FixIntersectingEdgesMode() = 1; fixer.FixNonAdjacentIntersectingEdgesMode() = 1;
+  fixer.FixTailMode() = 1; fixer.FixReorderMode() = 1; fixer.FixSmallMode() = 1;
+  fixer.FixConnectedMode() = 1; fixer.FixEdgeCurvesMode() = 1;
+  fixer.FixDegeneratedMode() = 1; fixer.FixSelfIntersectionMode() = 1;
+  fixer.FixLackingMode() = 1; fixer.FixGaps3dMode() = 1; fixer.FixGaps2dMode() = 1;
+}
+
+static void printGeometryModeDefaults(ShapeFix_Wire& fixer) {
+  std::cout << fixer.ModifyTopologyMode() << " " << fixer.ModifyGeometryMode()
+            << " " << fixer.ClosedWireMode() << " " << fixer.PreferencePCurveMode()
+            << " " << fixer.FixGapsByRangesMode() << " " << fixer.ModifyRemoveLoopMode();
+  std::cout << " " << fixer.FixReversed2dMode() << " " << fixer.FixRemovePCurveMode()
+            << " " << fixer.FixRemoveCurve3dMode() << " " << fixer.FixAddPCurveMode()
+            << " " << fixer.FixAddCurve3dMode() << " " << fixer.FixSeamMode()
+            << " " << fixer.FixShiftedMode() << " " << fixer.FixSameParameterMode()
+            << " " << fixer.FixVertexToleranceMode();
+}
+
+static void printAggregateModeDefaults(ShapeFix_Wire& fixer) {
+  std::cout << " " << fixer.FixNotchedEdgesMode() << " " << fixer.FixSelfIntersectingEdgeMode()
+            << " " << fixer.FixIntersectingEdgesMode() << " " << fixer.FixNonAdjacentIntersectingEdgesMode()
+            << " " << fixer.FixTailMode() << " " << fixer.FixReorderMode() << " " << fixer.FixSmallMode()
+            << " " << fixer.FixConnectedMode() << " " << fixer.FixEdgeCurvesMode()
+            << " " << fixer.FixDegeneratedMode() << " " << fixer.FixSelfIntersectionMode()
+            << " " << fixer.FixLackingMode() << " " << fixer.FixGaps3dMode() << " " << fixer.FixGaps2dMode();
+}
+
+static void printStatusesAfterClear(ShapeFix_Wire& fixer) {
+  std::cout << fixer.LastFixStatus(ShapeExtend_DONE) << " " << fixer.StatusReorder(ShapeExtend_DONE)
+            << " " << fixer.StatusSmall(ShapeExtend_DONE) << " " << fixer.StatusConnected(ShapeExtend_DONE)
+            << " " << fixer.StatusEdgeCurves(ShapeExtend_DONE) << " " << fixer.StatusDegenerated(ShapeExtend_DONE)
+            << " " << fixer.StatusClosed(ShapeExtend_DONE) << " " << fixer.StatusSelfIntersection(ShapeExtend_DONE)
+            << " " << fixer.StatusLacking(ShapeExtend_DONE) << " " << fixer.StatusGaps3d(ShapeExtend_DONE)
+            << " " << fixer.StatusGaps2d(ShapeExtend_DONE) << " " << fixer.StatusNotches(ShapeExtend_DONE)
+            << " " << fixer.StatusFixTails(ShapeExtend_DONE) << " " << fixer.StatusRemovedSegment();
+}
+
+static void runClearModes(const TopoDS_Face& face) {
+  TopoDS_Wire wire = crossingWire(face);
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_Wire fixer(wire, face, 1.e-7);
+  fixer.SetContext(context);
+  fixer.FixSelfIntersection();
+  setGeometryModesNonDefault(fixer);
+  setAggregateModesNonDefault(fixer);
+  fixer.ClearModes();
+  printGeometryModeDefaults(fixer);
+  printAggregateModeDefaults(fixer);
+  std::cout << " " << fixer.StatusSelfIntersection(ShapeExtend_DONE);
+  fixer.ClearStatuses();
+  std::cout << " ";
+  printStatusesAfterClear(fixer);
+  std::cout << "\n";
+}
+
 int main() {
   BRep_Builder builder;
   TopoDS_Face face;
@@ -166,4 +234,5 @@ int main() {
   runOracle(crossingWire(face), face, true);
   runOracle(crossingWire(face), face, false);
   runRemoveLoopModeOne(face);
+  runClearModes(face);
 }

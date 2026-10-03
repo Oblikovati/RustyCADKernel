@@ -83,6 +83,8 @@ struct WireFixState {
     closed_mode: bool,
     topology_mode: bool,
     geometry_mode: bool,
+    preference_pcurve_mode: bool,
+    fix_gaps_by_ranges: bool,
     remove_loop_mode: i32,
     edge_curves_mode: i32,
     reversed_2d_mode: i32,
@@ -106,6 +108,8 @@ struct WireFixState {
     fix_intersecting_edges_mode: i32,
     fix_nonadjacent_intersecting_edges_mode: i32,
     fix_lacking_mode: i32,
+    fix_gaps_3d_mode: i32,
+    fix_gaps_2d_mode: i32,
     notches_status: i32,
     tails_status: i32,
     max_tail_angle_sine: f64,
@@ -141,6 +145,8 @@ impl Default for ShapeFixWire {
                 closed_mode: true,
                 topology_mode: false,
                 geometry_mode: true,
+                preference_pcurve_mode: true,
+                fix_gaps_by_ranges: false,
                 remove_loop_mode: -1,
                 edge_curves_mode: -1,
                 reversed_2d_mode: -1,
@@ -164,6 +170,8 @@ impl Default for ShapeFixWire {
                 fix_intersecting_edges_mode: -1,
                 fix_nonadjacent_intersecting_edges_mode: -1,
                 fix_lacking_mode: -1,
+                fix_gaps_3d_mode: -1,
+                fix_gaps_2d_mode: -1,
                 notches_status: 0,
                 tails_status: 0,
                 max_tail_angle_sine: 0.0,
@@ -438,11 +446,13 @@ impl ShapeFixWire {
         self.state.read().topology_mode
     }
 
-    fn geometry_mode(&self) -> bool {
+    /// Reads native geometry modification mode; `assert!(fixer.geometry_mode())`.
+    pub fn geometry_mode(&self) -> bool {
         self.state.read().geometry_mode
     }
 
-    fn remove_loop_mode(&self) -> i32 {
+    /// Reads native loop-removal mode; `assert_eq!(fixer.remove_loop_mode(), -1)`.
+    pub fn remove_loop_mode(&self) -> i32 {
         self.state.read().remove_loop_mode
     }
 
@@ -699,7 +709,9 @@ impl ShapeFixWire {
         )
     }
 
-    fn clear_statuses(&self) {
+    /// Clears native repair status masks while preserving `StatusRemovedSegment`.
+    /// Example: `fixer.clear_statuses()`.
+    pub fn clear_statuses(&self) {
         let mut state = self.state.write();
         state.reorder_status = 0;
         state.gaps_3d_status = 0;

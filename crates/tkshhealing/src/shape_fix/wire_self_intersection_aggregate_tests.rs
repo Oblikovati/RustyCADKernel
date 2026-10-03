@@ -53,6 +53,128 @@ fn remove_loop_mode_one_rechecks_after_removal_and_runs_closed_pass() {
     assert_eq!(observed, expected_row(2));
 }
 
+#[test]
+fn clear_modes_restores_defaults_and_clear_statuses_clears_all_recorded_statuses() {
+    let face = plane();
+    let data = crossing_wire_data(&face);
+    let fixer = aggregate_fixer(&data, &face, false);
+    assert!(fixer.fix_self_intersection().unwrap());
+    set_nondefault_modes(&fixer);
+    fixer.clear_modes();
+    let mut observed = mode_values(&fixer);
+    observed.push(f64::from(
+        fixer.status_self_intersection(ShapeExtendStatus::Done),
+    ));
+    fixer.clear_statuses();
+    observed.extend(status_values_after_clear(&fixer));
+    assert_eq!(observed, expected_row(3));
+}
+
+fn set_nondefault_modes(fixer: &ShapeFixWire) {
+    fixer.set_topology_mode(true);
+    fixer.set_geometry_mode(false);
+    fixer.set_closed_mode(false);
+    fixer.set_preference_pcurve_mode(false);
+    fixer.state.write().fix_gaps_by_ranges = true;
+    set_nondefault_edge_modes(fixer);
+    set_nondefault_aggregate_modes(fixer);
+}
+
+fn set_nondefault_edge_modes(fixer: &ShapeFixWire) {
+    fixer.set_remove_loop_mode(1);
+    fixer.set_fix_reversed_2d_mode(1);
+    fixer.set_fix_remove_pcurve_mode(1);
+    fixer.set_fix_remove_curve_3d_mode(1);
+    fixer.set_fix_add_pcurve_mode(1);
+    fixer.set_fix_add_curve_3d_mode(1);
+    fixer.set_fix_seam_mode(1);
+    fixer.set_fix_shifted_mode(1);
+    fixer.set_fix_same_parameter_mode(1);
+    fixer.set_fix_vertex_tolerance_mode(1);
+}
+
+fn set_nondefault_aggregate_modes(fixer: &ShapeFixWire) {
+    fixer.set_fix_notched_edges_mode(1);
+    fixer.set_fix_self_intersecting_edge_mode(1);
+    fixer.set_fix_intersecting_edges_mode(1);
+    fixer.set_fix_nonadjacent_intersecting_edges_mode(1);
+    fixer.set_fix_tail_mode(1);
+    fixer.set_fix_reorder_mode(1);
+    fixer.set_fix_small_mode(1);
+    fixer.set_fix_connected_mode(1);
+    fixer.set_fix_edge_curves_mode(1);
+    fixer.set_fix_degenerated_mode(1);
+    fixer.set_fix_self_intersection_mode(1);
+    fixer.set_fix_lacking_mode(1);
+    fixer.set_fix_gaps_3d_mode(1);
+    fixer.set_fix_gaps_2d_mode(1);
+}
+
+fn mode_values(fixer: &ShapeFixWire) -> Vec<f64> {
+    let mut values = geometry_mode_values(fixer);
+    values.extend(aggregate_mode_values(fixer));
+    values
+}
+
+fn geometry_mode_values(fixer: &ShapeFixWire) -> Vec<f64> {
+    vec![
+        f64::from(fixer.topology_mode()),
+        f64::from(fixer.geometry_mode()),
+        f64::from(fixer.closed_mode()),
+        f64::from(fixer.preference_pcurve_mode()),
+        f64::from(fixer.state.read().fix_gaps_by_ranges),
+        f64::from(fixer.remove_loop_mode()),
+        f64::from(fixer.fix_reversed_2d_mode()),
+        f64::from(fixer.fix_remove_pcurve_mode()),
+        f64::from(fixer.fix_remove_curve_3d_mode()),
+        f64::from(fixer.fix_add_pcurve_mode()),
+        f64::from(fixer.fix_add_curve_3d_mode()),
+        f64::from(fixer.fix_seam_mode()),
+        f64::from(fixer.fix_shifted_mode()),
+        f64::from(fixer.fix_same_parameter_mode()),
+        f64::from(fixer.fix_vertex_tolerance_mode()),
+    ]
+}
+
+fn aggregate_mode_values(fixer: &ShapeFixWire) -> Vec<f64> {
+    vec![
+        f64::from(fixer.fix_notched_edges_mode()),
+        f64::from(fixer.fix_self_intersecting_edge_mode()),
+        f64::from(fixer.fix_intersecting_edges_mode()),
+        f64::from(fixer.fix_nonadjacent_intersecting_edges_mode()),
+        f64::from(fixer.fix_tail_mode()),
+        f64::from(fixer.fix_reorder_mode()),
+        f64::from(fixer.fix_small_mode()),
+        f64::from(fixer.fix_connected_mode()),
+        f64::from(fixer.fix_edge_curves_mode()),
+        f64::from(fixer.fix_degenerated_mode()),
+        f64::from(fixer.fix_self_intersection_mode()),
+        f64::from(fixer.fix_lacking_mode()),
+        f64::from(fixer.fix_gaps_3d_mode()),
+        f64::from(fixer.fix_gaps_2d_mode()),
+    ]
+}
+
+fn status_values_after_clear(fixer: &ShapeFixWire) -> Vec<f64> {
+    let statuses = [
+        fixer.last_fix_status(ShapeExtendStatus::Done),
+        fixer.status_reorder(ShapeExtendStatus::Done),
+        fixer.status_small(ShapeExtendStatus::Done),
+        fixer.status_connected(ShapeExtendStatus::Done),
+        fixer.status_edge_curves(ShapeExtendStatus::Done),
+        fixer.status_degenerated(ShapeExtendStatus::Done),
+        fixer.status_closed(ShapeExtendStatus::Done),
+        fixer.status_self_intersection(ShapeExtendStatus::Done),
+        fixer.status_lacking(ShapeExtendStatus::Done),
+        fixer.status_gaps_3d(ShapeExtendStatus::Done),
+        fixer.status_gaps_2d(ShapeExtendStatus::Done),
+        fixer.status_notches(ShapeExtendStatus::Done),
+        fixer.status_fix_tails(ShapeExtendStatus::Done),
+        fixer.status_removed_segment(),
+    ];
+    statuses.into_iter().map(f64::from).collect()
+}
+
 fn expected_row(index: usize) -> Vec<f64> {
     NATIVE
         .lines()

@@ -8,7 +8,9 @@ direct `ShapeFix_IntersectionTool` point-crossing fixture, with an explicit
 passes to isolate nonadjacent handling. The second keeps native default modes
 and exercises the aggregate pass order. A third row uses the Bezier loop
 fixture to exercise `ModifyRemoveLoopMode=1`, including the per-edge rescan
-and `FixClosed` call. Each row contains the aggregate return, edge count,
+and `FixClosed` call. The fourth row sets every mode away from its default,
+checks `ClearModes` values and status retention, then checks `ClearStatuses`.
+The first three rows contain the aggregate return, edge count,
 removed-segment flag, all 19 native status queries in enum order, every
 resulting edge range, and the edge count after applying the context to the
 original wire. These are focused cases, not a claim of whole-class parity.
