@@ -219791,6 +219791,54 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::build",
       "status": "partial",
       "notes": "Focused same-domain face/edge handling and exact missing-pcurve regressions are implemented. General native face-group selection and TransformPCurves for non-identical supports, axes, projection and seam handling remain unported. Passing the two missing-pcurve declarations does not establish this full API behavior; native probing preserves source pcurve identity in both fixtures."
+    },
+    {
+      "upstream_id": "BRepOffset::Surface(const occ::handle<Geom_Surface>&,double,BRepOffset_Status&,bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::surface",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_Status",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Status.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_Good",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Status.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus::Good",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_Reversed",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Status.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus::Reversed",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_Degenerated",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Status.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus::Degenerated",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_Unknown",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Status.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus::Unknown",
+      "status": "implemented",
+      "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
     }
   ],
   "tests": [

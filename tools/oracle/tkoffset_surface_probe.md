@@ -36,3 +36,11 @@ cylinder/sphere/torus also falls back to `Geom_OffsetSurface`; a torus with
 and the torus reversed branch sets status but still falls back. The cone path
 uses zero as its radius threshold and reverses a negative result while keeping
 status `Good`.
+
+The Rust replay is `cargo test --locked -p rustycad-tkoffset --test
+ offset_surface_oracle` (join the wrapped command into one line). It checks all
+131 records, including every recorded output property, and requires exact finite
+floating-point bits. The integration worktree regenerated the fixture with the
+command above and compared it byte-for-byte before accepting the Rust results.
+This focused oracle is supplemental evidence, not a translated legacy GoogleTest
+or a claim of complete TKOffset behavior.
