@@ -4,6 +4,7 @@
 #include <BRepOffset_SimpleOffset.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_Curve.hxx>
+#include <Geom_Surface.hxx>
 #include <TopLoc_Location.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
@@ -48,6 +49,22 @@ void print_vertex(const TopoDS_Vertex& vertex, BRepOffset_SimpleOffset& offset)
             << point.Z() << '\n';
 }
 
+void print_face_surface(const TopoDS_Face& face)
+{
+  BRepOffset_SimpleOffset         offset(face, 10.0, 1.e-7);
+  occ::handle<Geom_Surface>       surface;
+  TopLoc_Location                 location;
+  double                          tolerance = 0.0;
+  bool                            reverseWires = false;
+  bool                            reverseFace = false;
+  const bool                      found =
+    offset.NewSurface(face, surface, location, tolerance, reverseWires, reverseFace);
+  const gp_Pnt point = surface->Value(0.0, 0.0).Transformed(location.Transformation());
+  std::cout << found << ' ' << location.IsIdentity() << ' ' << tolerance << ' ' << reverseWires
+            << ' ' << reverseFace << ' ' << point.X() << ' ' << point.Y() << ' ' << point.Z()
+            << '\n';
+}
+
 void run_shape(const TopoDS_Shape& shape)
 {
   BRepOffset_SimpleOffset offset(shape, 10.0, 1.e-7);
@@ -66,6 +83,7 @@ void print_basic_face_cases()
   const TopoDS_Face planeFace =
     BRepBuilderAPI_MakeFace(gp_Pln(gp::XOY()), -1., 1., -1., 1.).Face();
   std::cout << "plane\n";
+  print_face_surface(planeFace);
   run_shape(planeFace);
 
   TopoDS_Face locatedFace = planeFace;
@@ -73,11 +91,13 @@ void print_basic_face_cases()
   translation.SetTranslation(gp_Vec(0.0, 0.0, 3.0));
   locatedFace.Move(TopLoc_Location(translation));
   std::cout << "located\n";
+  print_face_surface(locatedFace);
   run_shape(locatedFace);
 
   TopoDS_Face reversedFace = planeFace;
   reversedFace.Reverse();
   std::cout << "reversed\n";
+  print_face_surface(reversedFace);
   run_shape(reversedFace);
 }
 
@@ -86,6 +106,7 @@ void print_closed_cylinder_case()
   const TopoDS_Face cylinderFace =
     BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(), 5.0), 0.0, 2.0 * M_PI, 0.0, 2.0).Face();
   std::cout << "cylinder\n";
+  print_face_surface(cylinderFace);
   run_shape(cylinderFace);
 }
 
