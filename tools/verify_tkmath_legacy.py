@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Verify mapped TKMath legacy tests individually against OCCT and Rust."""
+"""Verify mapped legacy cases against OCCT and Rust for TKMath, TKG2d, or TKG3d.
+
+The no-argument command retains TKMath scope; add `--toolkit TKG2d` for 2D.
+"""
 
 from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -24,6 +26,12 @@ from legacy_runtime_evidence import (
     require_unchanged_runtime_inputs,
 )
 from porting import ROOT, snapshot
+from legacy_toolkit_sources import (
+    SUPPORTED_RUNTIME_TOOLKITS,
+    toolkit_rows,
+    verify_source_group,
+    verify_source_rows,
+)
 from tkmath_native_provenance import (
     NATIVE_BUILD,
     hash_linked_native_libraries,
@@ -32,7 +40,6 @@ from tkmath_native_provenance import (
     native_env,
     native_hashes,
     native_library_hashes,
-    sha256,
     verify_native_hashes,
 )
 from tkernel_mapping import (
@@ -41,14 +48,13 @@ from tkernel_mapping import (
     runtime_case_results,
 )
 
-DECLARATION = re.compile(r"(?:TEST(?:_F)?|TYPED_TEST)\((\w+), (\w+)\)")
-
 
 @dataclass(frozen=True)
 class VerifiedRun:
     """Pin report inputs before execution; e.g. `VerifiedRun(source, inventory, ...)`."""
 
     source: Path
+    toolkit: str
     inventory: JSONObject
     rows: list[JSONObject]
     sources: set[str]
@@ -76,39 +82,6 @@ def command(
     return result.stdout
 
 
-def toolkit_rows(ledger_path: Path) -> list[JSONObject]:
-    """Load translated TKMath declarations; e.g. `toolkit_rows(ROOT / 'porting/parity.json')`."""
-    ledger = json.loads(ledger_path.read_text())
-    rows = [row for row in ledger["tests"] if row["toolkit"] == "TKMath"]
-    if not rows or any(row["status"] != "translated" for row in rows):
-        raise RuntimeError("TKMath mappings must be nonempty and translated")
-    return rows
-
-
-def verify_source_rows(source: Path, rows: list[JSONObject]) -> set[str]:
-    """Check hashes and complete suite declarations; e.g. `verify_source_rows(occt, rows)`."""
-    grouped: dict[str, list[JSONObject]] = {}
-    for row in rows:
-        grouped.setdefault(str(row["source"]), []).append(row)
-    for relative, mappings in grouped.items():
-        verify_source_group(source, relative, mappings)
-    return set(grouped)
-
-
-def verify_source_group(
-    source: Path, relative: str, mappings: list[JSONObject]
-) -> None:
-    """Reject incomplete or stale source mappings; e.g. `verify_source_group(root, path, rows)`."""
-    contents = (source / relative).read_bytes()
-    digest = hashlib.sha256(contents).hexdigest()
-    names = {
-        f"{suite}.{case}" for suite, case in DECLARATION.findall(contents.decode())
-    }
-    mapped = {str(row["upstream_id"]) for row in mappings}
-    if names != mapped or any(row["source_sha256"] != digest for row in mappings):
-        raise RuntimeError(f"Stale or incomplete TKMath source mapping: {relative}")
-
-
 def native_filter(cases: set[str]) -> str:
     """Build an exact GoogleTest filter; e.g. `native_filter({'Suite.Case'})`."""
     if not cases or any(any(mark in case for mark in ":*?-") for case in cases):
@@ -118,15 +91,17 @@ def native_filter(cases: set[str]) -> str:
     return ":".join(sorted(cases))
 
 
-def native_statuses(xml_path: Path, expected: set[str]) -> dict[str, str]:
-    """Require every selected native case to pass; e.g. `native_statuses(path, expected)`."""
+def native_statuses(
+    xml_path: Path, expected: set[str], toolkit: str = "TKMath"
+) -> dict[str, str]:
+    """Require selected cases to pass; e.g. `native_statuses(path, expected, 'TKG2d')`."""
     cases = ET.parse(xml_path).findall(".//testcase")
     identities = [native_identity(case) for case in cases]
     if set(identities) != expected or len(identities) != len(set(identities)):
         raise RuntimeError(
-            "Native TKMath runtime cases differ from the mapped exact set"
+            f"Native {toolkit} runtime cases differ from the mapped exact set"
         )
-    require_native_passes(cases)
+    require_native_passes(cases, toolkit)
     return {identity: "passed" for identity in identities}
 
 
@@ -135,16 +110,16 @@ def native_identity(case: ET.Element) -> str:
     return case.attrib["classname"] + "." + case.attrib["name"]
 
 
-def require_native_passes(cases: list[ET.Element]) -> None:
-    """Reject failed, unrun or skipped cases; e.g. `require_native_passes(xml_cases)`."""
+def require_native_passes(cases: list[ET.Element], toolkit: str = "TKMath") -> None:
+    """Reject failed, unrun, or skipped cases; e.g. `require_native_passes(cases, 'TKG2d')`."""
     if any(
         case.attrib.get("status") != "run" or case.find("failure") is not None
         for case in cases
     ):
-        raise RuntimeError("Native TKMath contains failed or unexecuted cases")
+        raise RuntimeError(f"Native {toolkit} contains failed or unexecuted cases")
     if any(case.find("skipped") is not None for case in cases):
         raise RuntimeError(
-            "TKMath native skips require explicit review before evidence is emitted"
+            f"{toolkit} native skips require explicit review before evidence is emitted"
         )
     return None
 
@@ -207,28 +182,29 @@ def validate_rust_target(
     return target_passed
 
 
-def package_name(rows: list[dict[str, object]]) -> str:
-    """Require one Rust package for this toolkit; e.g. `package_name(tkmath_rows)`."""
+def package_name(rows: list[dict[str, object]], toolkit: str = "TKMath") -> str:
+    """Require one Rust package; e.g. `package_name(tkg2d_rows, 'TKG2d')`."""
     packages = {str(row["rust_package"]) for row in rows}
     if len(packages) != 1:
         raise RuntimeError(
-            f"TKMath mappings use unexpected Rust packages: {sorted(packages)}"
+            f"{toolkit} mappings use unexpected Rust packages: {sorted(packages)}"
         )
     return packages.pop()
 
 
 def run_verification(args: argparse.Namespace) -> JSONObject:
-    """Run native and Rust cases and assemble exact pair evidence; e.g. `run_verification(args)`."""
+    """Run one toolkit's cases; e.g. `run_verification(args)` for TKMath or TKG2d."""
     source = args.source.resolve()
     inventory = cast(JSONObject, snapshot(source))
-    rows = toolkit_rows(ROOT / "porting/parity.json")
+    rows = toolkit_rows(ROOT / "porting/parity.json", args.toolkit)
     sources = verify_source_rows(source, rows)
-    return execute_verified_rows(args, source, inventory, rows, sources)
+    return execute_verified_rows(args, source, args.toolkit, inventory, rows, sources)
 
 
 def execute_verified_rows(
     args: argparse.Namespace,
     source: Path,
+    toolkit: str,
     inventory: JSONObject,
     rows: list[JSONObject],
     sources: set[str],
@@ -238,6 +214,7 @@ def execute_verified_rows(
     require_clean_runtime_git_state(rust_state)
     run = VerifiedRun(
         source,
+        toolkit,
         inventory,
         rows,
         sources,
@@ -267,8 +244,11 @@ def finish_verified_run(
     native_provenance: JSONObject,
 ) -> JSONObject:
     """Validate run stability and serialize results; e.g. `finish_verified_run(run, native, rust, provenance)`."""
-    validate_run_inputs(run.input_hashes, run.source, run.inventory, run.rust_state)
+    validate_run_inputs(
+        run.input_hashes, run.source, run.inventory, run.rust_state, run.toolkit
+    )
     return report(
+        run.toolkit,
         run.rows,
         run.inventory,
         run.sources,
@@ -289,16 +269,21 @@ def run_mapped_rust_cases(
 ) -> set[tuple[str, str]]:
     """Run exact Rust peers of native cases; e.g. `run_mapped_rust_cases(rows, native, output)`."""
     expected, rust_expected = mapped_runtime_sets(rows)
-    validate_native_identity_set(native, expected)
+    toolkit = str(rows[0]["toolkit"])
+    validate_native_identity_set(native, expected, toolkit)
     return rust_statuses(
-        package_name(rows), rust_expected, cargo_env(cargo_target_dir), output
+        package_name(rows, toolkit), rust_expected, cargo_env(cargo_target_dir), output
     )
 
 
-def validate_native_identity_set(observed: dict[str, str], expected: set[str]) -> None:
-    """Reject native case drift; e.g. `validate_native_identity_set(statuses, expected)`."""
+def validate_native_identity_set(
+    observed: dict[str, str], expected: set[str], toolkit: str = "TKMath"
+) -> None:
+    """Reject native case drift; e.g. `validate_native_identity_set(states, cases, 'TKG2d')`."""
     if set(observed) != expected:
-        raise RuntimeError("Mapped TKMath native identity set changed during execution")
+        raise RuntimeError(
+            f"Mapped {toolkit} native identity set changed during execution"
+        )
 
 
 def validate_run_inputs(
@@ -306,24 +291,26 @@ def validate_run_inputs(
     source: Path,
     inventory: JSONObject,
     rust_state: JSONObject,
+    toolkit: str = "TKMath",
 ) -> None:
     """Require unchanged Rust inputs and pinned OCCT; e.g. `validate_run_inputs(before, source, inventory)`."""
     require_unchanged_runtime_inputs(before, runtime_input_hashes(ROOT))
     require_unchanged_runtime_git_state(rust_state, runtime_git_state(ROOT))
     if snapshot(source)["revision"] != inventory["revision"]:
-        raise RuntimeError("OCCT revision changed while TKMath tests were running")
+        raise RuntimeError(f"OCCT revision changed while {toolkit} tests were running")
 
 
 def run_native(
     rows: list[JSONObject], source: Path, args: argparse.Namespace
 ) -> tuple[dict[str, str], JSONObject]:
     """Build/list/run the mapped OCCT tests; e.g. `run_native(rows, occt, args)`."""
+    toolkit = args.toolkit
     cache, executable = prepare_native_binary(args.build_dir, source, args)
     expected, _ = mapped_runtime_sets(rows)
-    verify_native_discovery(executable, expected, args.output)
-    provenance = native_hashes(cache, executable, args.build_dir, source)
-    statuses = execute_native_filter(executable, expected, args.output)
-    verify_native_hashes(cache, executable, args.build_dir, provenance)
+    verify_native_discovery(executable, expected, args.output, toolkit)
+    provenance = native_hashes(cache, executable, args.build_dir, source, toolkit)
+    statuses = execute_native_filter(executable, expected, args.output, toolkit)
+    verify_native_hashes(cache, executable, args.build_dir, provenance, toolkit)
     return statuses, provenance
 
 
@@ -349,23 +336,25 @@ def prepare_native_binary(
     return native_configuration(build, source)
 
 
-def verify_native_discovery(executable: Path, expected: set[str], output: Path) -> None:
-    """Check every exact mapped case exists in the built binary; e.g. `verify_native_discovery(exe, cases, out)`."""
+def verify_native_discovery(
+    executable: Path, expected: set[str], output: Path, toolkit: str = "TKMath"
+) -> None:
+    """Check exact mapped cases exist; e.g. `verify_native_discovery(exe, cases, out, 'TKG2d')`."""
     listing = command(
         [executable, "--gtest_list_tests"], output / "native-list.log", env=native_env()
     )
     discovered = listed_runtime_cases(listing)
     if not expected <= discovered:
         raise RuntimeError(
-            "Native OpenCascadeGTest lacks mapped TKMath case identities"
+            f"Native OpenCascadeGTest lacks mapped {toolkit} case identities"
         )
 
 
 def execute_native_filter(
-    executable: Path, expected: set[str], output: Path
+    executable: Path, expected: set[str], output: Path, toolkit: str = "TKMath"
 ) -> dict[str, str]:
     """Run only mapped native cases; e.g. `execute_native_filter(exe, cases, out)`."""
-    xml_path = output / "tkmath-upstream.xml"
+    xml_path = output / f"{toolkit.lower()}-upstream.xml"
     filter_value = native_filter(expected)
     command(
         [
@@ -377,7 +366,7 @@ def execute_native_filter(
         env=native_env(),
         timeout=3600,
     )
-    return native_statuses(xml_path, expected)
+    return native_statuses(xml_path, expected, toolkit)
 
 
 def cargo_env(target_dir: Path) -> dict[str, str]:
@@ -390,6 +379,7 @@ def cargo_env(target_dir: Path) -> dict[str, str]:
 
 
 def report(
+    toolkit: str,
     rows: list[JSONObject],
     inventory: JSONObject,
     sources: set[str],
@@ -403,7 +393,12 @@ def report(
     """Serialize observed pairs without asserting toolkit completion; e.g. `report(...)`."""
     return {
         **report_header_fields(
-            inventory, input_hashes, native_provenance, rust_state, cargo_target_dir
+            toolkit,
+            inventory,
+            input_hashes,
+            native_provenance,
+            rust_state,
+            cargo_target_dir,
         ),
         **runtime_counts_fields(rows, native, rust_passed),
         **runtime_case_fields(rows, native, rust_passed, sources, native_provenance),
@@ -411,6 +406,7 @@ def report(
 
 
 def report_header_fields(
+    toolkit: str,
     inventory: JSONObject,
     input_hashes: dict[str, str],
     native: JSONObject,
@@ -421,13 +417,13 @@ def report_header_fields(
     return {
         "schema_version": 1,
         "runtime_evidence_schema": 1,
-        "runtime_evidence_toolkit": "TKMath",
+        "runtime_evidence_toolkit": toolkit,
         "revision": inventory["revision"],
         **rust_report_fields(rust_state, cargo_target_dir),
         "source_hashes": input_hashes,
         "native_provenance": native,
         "toolkit_complete": False,
-        "scope": "Mapped TKMath cases only; declaration and toolkit acceptance remain pending",
+        "scope": f"Mapped {toolkit} cases only; declaration and toolkit acceptance remain pending",
     }
 
 
@@ -471,20 +467,24 @@ def runtime_case_fields(
 
 
 def arguments() -> argparse.Namespace:
-    """Parse source and build inputs; e.g. `arguments()` for the verifier CLI."""
+    """Parse source and toolkit inputs; e.g. `arguments()` defaults to TKMath."""
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--toolkit", choices=SUPPORTED_RUNTIME_TOOLKITS, default="TKMath"
+    )
     parser.add_argument("--source", type=Path, default=ROOT / "../OCCT")
     parser.add_argument("--build-dir", type=Path, default=ROOT / NATIVE_BUILD)
-    parser.add_argument(
-        "--output", type=Path, default=ROOT / "target/oracle-tkmath-legacy"
-    )
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--cargo-target-dir", type=Path, default=ROOT / "target")
     parser.add_argument("--jobs", type=int, default=2)
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.output is None:
+        args.output = ROOT / f"target/oracle-{args.toolkit.lower()}-legacy"
+    return args
 
 
 def main() -> None:
-    """Run the pinned TKMath runtime verifier; e.g. `python tools/verify_tkmath_legacy.py`."""
+    """Run the pinned toolkit verifier; e.g. `... --toolkit TKG2d`."""
     if sys.platform != "linux":
         raise RuntimeError("This native oracle profile is Linux-only")
     args = arguments()
@@ -492,7 +492,7 @@ def main() -> None:
     result = run_verification(args)
     report_path = args.output / "report.json"
     report_path.write_text(json.dumps(result, indent=2) + "\n")
-    print(f"PASS: TKMath mapped runtime evidence written to {report_path}")
+    print(f"PASS: {args.toolkit} mapped runtime evidence written to {report_path}")
 
 
 if __name__ == "__main__":

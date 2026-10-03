@@ -1,4 +1,4 @@
-"""Bind TKMath runtime evidence to the built OCCT test oracle and libraries."""
+"""Bind core-toolkit runtime evidence to the built OCCT oracle and libraries."""
 
 from __future__ import annotations
 
@@ -12,6 +12,12 @@ from api_inventory.inputs import JSONObject
 
 NATIVE_BUILD = Path("target/occt-modeling-full")
 NATIVE_EXECUTABLE = Path("lin64/gcc/bini/OpenCascadeGTest")
+TOOLKIT_LIBRARY_PREFIXES = {
+    "TKMath": ("libTKernel.so", "libTKMath.so"),
+    "TKG2d": ("libTKernel.so", "libTKMath.so", "libTKG2d.so"),
+    "TKG3d": ("libTKernel.so", "libTKMath.so", "libTKG2d.so", "libTKG3d.so"),
+}
+GOOGLETEST_LIBRARY_PREFIXES = ("libgtest.so", "libgtest_main.so")
 
 
 def native_configuration(build: Path, source: Path) -> tuple[Path, Path]:
@@ -33,7 +39,7 @@ def sha256(path: Path) -> str:
 
 
 def native_hashes(
-    cache: Path, executable: Path, build: Path, source: Path
+    cache: Path, executable: Path, build: Path, source: Path, toolkit: str = "TKMath"
 ) -> JSONObject:
     """Fingerprint the test executable and its build libraries; e.g. `native_hashes(cache, exe, build, source)`."""
     return {
@@ -42,11 +48,14 @@ def native_hashes(
         "cmake_home_directory": str(source),
         "executable": str(executable.resolve()),
         "executable_sha256": sha256(executable),
-        "linked_libraries_sha256": native_library_hashes(executable, build),
+        "required_toolkit_libraries": list(required_toolkit_libraries(toolkit)),
+        "linked_libraries_sha256": native_library_hashes(executable, build, toolkit),
     }
 
 
-def native_library_hashes(executable: Path, build: Path) -> JSONObject:
+def native_library_hashes(
+    executable: Path, build: Path, toolkit: str = "TKMath"
+) -> JSONObject:
     """Hash resolved OCCT and GoogleTest libraries; e.g. `native_library_hashes(exe, build)`."""
     result = subprocess.run(
         ["ldd", str(executable)],
@@ -55,13 +64,15 @@ def native_library_hashes(executable: Path, build: Path) -> JSONObject:
         text=True,
         env=native_env(),
     )
-    return hash_linked_native_libraries(result.stdout, build)
+    return hash_linked_native_libraries(result.stdout, build, toolkit)
 
 
-def hash_linked_native_libraries(output: str, build: Path) -> JSONObject:
+def hash_linked_native_libraries(
+    output: str, build: Path, toolkit: str = "TKMath"
+) -> JSONObject:
     """Hash linked libraries under the native build; e.g. parsed `ldd` output."""
     libraries = linked_native_library_paths(output)
-    require_native_library_set(libraries)
+    require_native_library_set(libraries, toolkit)
     build_root = build.resolve()
     return linked_library_digests(libraries, build_root)
 
@@ -92,9 +103,19 @@ def record_linked_library(line: str, paths: dict[str, str]) -> None:
     paths[match.group(1)] = match.group(2)
 
 
-def require_native_library_set(libraries: dict[str, str]) -> None:
+def required_toolkit_libraries(toolkit: str) -> tuple[str, ...]:
+    """Return native prerequisites; e.g. TKG2d requires TKMath and TKernel."""
+    try:
+        return TOOLKIT_LIBRARY_PREFIXES[toolkit]
+    except KeyError as error:
+        raise ValueError(f"Unsupported runtime toolkit {toolkit!r}") from error
+
+
+def require_native_library_set(
+    libraries: dict[str, str], toolkit: str = "TKMath"
+) -> None:
     """Require OCCT core and GoogleTest libraries; e.g. TKernel, TKMath, and GTest."""
-    prefixes = ("libTKernel.so", "libTKMath.so", "libgtest.so", "libgtest_main.so")
+    prefixes = (*required_toolkit_libraries(toolkit), *GOOGLETEST_LIBRARY_PREFIXES)
     missing = [
         name for name in prefixes if not any(key.startswith(name) for key in libraries)
     ]
@@ -103,13 +124,18 @@ def require_native_library_set(libraries: dict[str, str]) -> None:
 
 
 def verify_native_hashes(
-    cache: Path, executable: Path, build: Path, before: JSONObject
+    cache: Path,
+    executable: Path,
+    build: Path,
+    before: JSONObject,
+    toolkit: str = "TKMath",
 ) -> None:
     """Reject build or library drift during a run; e.g. `verify_native_hashes(cache, exe, build, before)`."""
     changed = (
         sha256(executable) != before["executable_sha256"]
         or sha256(cache) != before["cmake_cache_sha256"]
-        or native_library_hashes(executable, build) != before["linked_libraries_sha256"]
+        or native_library_hashes(executable, build, toolkit)
+        != before["linked_libraries_sha256"]
     )
     if changed:
         raise RuntimeError(

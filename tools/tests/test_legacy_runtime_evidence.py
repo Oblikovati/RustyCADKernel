@@ -96,7 +96,9 @@ class LegacyRuntimeEvidenceTest(unittest.TestCase):
         """Runner and joiner code are assessor inputs; e.g. both paths are hashed."""
         required = {
             "tools/verify_tkmath_legacy.py",
+            "tools/legacy_toolkit_sources.py",
             "tools/tkmath_native_provenance.py",
+            "tools/tests/test_legacy_toolkit_sources.py",
             "tools/join_legacy_runtime_evidence.py",
             "tools/tests/test_tkmath_legacy_runtime.py",
         }
@@ -154,6 +156,20 @@ class LegacyRuntimeEvidenceTest(unittest.TestCase):
         self.assertEqual(result["status"], "stale")
         self.assertTrue(
             any("tkmath_native_provenance.py" in row for row in result["reasons"])
+        )
+
+    def test_missing_toolkit_source_helper_hash_marks_report_stale(self) -> None:
+        """Source-manifest coverage code is assessor input; e.g. helper hash absent."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary) / "rust"
+            root.mkdir()
+            create_fixture_inputs(root, "pinned-occt-revision")
+            report = report_for(root)
+            del report["source_hashes"]["tools/legacy_toolkit_sources.py"]
+            result = assess_report(report, root)
+        self.assertEqual(result["status"], "stale")
+        self.assertTrue(
+            any("legacy_toolkit_sources.py" in row for row in result["reasons"])
         )
 
     def test_case_rows_are_not_joined_without_declaration_identity(self) -> None:
