@@ -78,3 +78,16 @@ turns a `translated` ledger status into a green runtime result. Regenerate with:
 ```sh
 python3 tools/publish_legacy_test_inventory.py
 ```
+
+Audit an existing TKernel runtime report with the pinned source checkout:
+
+```sh
+python3 tools/legacy_runtime_evidence.py target/oracle-tkernel/report.json \
+  --occt-source /path/to/OCCT
+```
+
+This check rejects missing or changed input hashes and a mismatched or dirty OCCT
+checkout. Aggregate reports remain `aggregate_only` even when their inputs match;
+individual declaration results require an explicit runtime-instance join. The
+assessor never grants runtime proof. New TKernel reports also fingerprint the
+verifier's local helper modules.

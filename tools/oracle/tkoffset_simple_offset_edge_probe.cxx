@@ -1,6 +1,5 @@
 // Oracle for BRepOffset_SimpleOffset::FillEdgeData's curve/location/tolerance outputs.
 #include <BRepBuilderAPI_MakeFace.hxx>
-#include <BRepBuilderAPI_MakePolygon.hxx>
 #include <BRep_Builder.hxx>
 #include <BRepOffset_SimpleOffset.hxx>
 #include <BRep_Tool.hxx>
@@ -11,7 +10,6 @@
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Compound.hxx>
-#include <TopoDS_Wire.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Trsf.hxx>
@@ -69,13 +67,8 @@ void print_basic_face_cases()
 
 TopoDS_Compound opposed_faces()
 {
-  BRepBuilderAPI_MakePolygon polygon;
-  polygon.Add(gp_Pnt(-1., -1., 0.));
-  polygon.Add(gp_Pnt(1., -1., 0.));
-  polygon.Add(gp_Pnt(1., 1., 0.));
-  polygon.Add(gp_Pnt(-1., 1., 0.));
-  polygon.Close();
-  TopoDS_Face firstFace = BRepBuilderAPI_MakeFace(gp_Pln(gp::XOY()), polygon.Wire()).Face();
+  TopoDS_Face firstFace =
+    BRepBuilderAPI_MakeFace(gp_Pln(gp::XOY()), -1., 1., -1., 1.).Face();
   TopoDS_Face secondFace = firstFace;
   secondFace.Reverse();
   TopoDS_Compound adjacentFaces;

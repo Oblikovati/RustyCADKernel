@@ -19,7 +19,7 @@ fn matches_native_simple_offset_curve_location_and_tolerance() {
 }
 
 #[test]
-fn uses_curve_on_face_for_located_and_reversed_faces() {
+fn uses_curve_on_face_for_located_faces() {
     let mut located = bounded_plane_face();
     located
         .set_location(
@@ -30,7 +30,10 @@ fn uses_curve_on_face_for_located_and_reversed_faces() {
     for edge in face_edges(&located) {
         assert_native_edge_result(&edge, &[offset_face(&located, 13.0)], 13.0, 1.0e-7);
     }
+}
 
+#[test]
+fn uses_curve_on_face_for_reversed_faces() {
     let mut reversed = bounded_plane_face();
     reversed.set_orientation(Orientation::Reversed);
     for edge in face_edges(&reversed) {
@@ -44,8 +47,9 @@ fn measures_max_deviation_across_adjacent_offset_faces() {
     let mut reversed = face.clone();
     reversed.reverse();
     let adjacent = [offset_face(&face, 10.0), offset_face(&reversed, -10.0)];
-    let edge = face_edges(&face).remove(0);
-    assert_native_edge_result(&edge, &adjacent, 10.0, 20.0002);
+    for edge in face_edges(&face) {
+        assert_native_edge_result(&edge, &adjacent, 10.0, 20.0002);
+    }
 }
 
 #[test]
@@ -86,6 +90,7 @@ fn face_edges(face: &Face) -> Vec<Edge> {
         edges.push(Edge::unchecked(explorer.current().clone()));
         explorer.next().unwrap();
     }
+    assert_eq!(edges.len(), 4);
     edges
 }
 
@@ -102,7 +107,14 @@ fn assert_native_edge_result(
     let (first, last) = BRepTool::range(edge).unwrap();
     let start = curve.value(first).unwrap();
     let end = curve.value(last).unwrap();
-    assert!((start.z() - expected_z).abs() < 1.0e-10);
-    assert!((end.z() - expected_z).abs() < 1.0e-10);
+    let (source, _, _) = BRepTool::curve(edge).unwrap();
+    assert_offset_endpoint(start, source.get().unwrap(), first, expected_z);
+    assert_offset_endpoint(end, source.get().unwrap(), last, expected_z);
     assert!((start.square_distance(&end) - 4.0).abs() < 1.0e-10);
+}
+
+fn assert_offset_endpoint(point: Point3, source: &dyn GeomCurve, parameter: f64, z: f64) {
+    let original = source.value(parameter).unwrap();
+    let expected = Point3::new(original.x(), original.y(), z);
+    assert!(point.square_distance(&expected) < 1.0e-20);
 }

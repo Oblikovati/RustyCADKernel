@@ -16,6 +16,12 @@ markers and each artifact's recorded digest, byte size, rustdoc format version,
 and indexed item count. It also recomputes each crate's source input digest;
 normalization fails if those sources do not match the capture record.
 
+The raw capture's `verify` command compares the exact recorded Git revision and
+build environment as well as content hashes. Run it before committing a snapshot.
+`porting.py status` instead checks the recorded source, ledger, artifact and tool
+content hashes, so a later documentation-only commit does not invalidate those
+content checks.
+
 Each declaration has a stable Rust path, kind, normalized rustdoc signature,
 source file and source hash, and a declaration hash. The inventory includes
 reachable public modules and re-exports, nominal declarations, public struct
