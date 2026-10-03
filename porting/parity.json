@@ -223893,6 +223893,140 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge",
       "status": "partial",
       "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::ShapeFix_Shell()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::new",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::ShapeFix_Shell(const TopoDS_Shell &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::from_shell",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::Init(const TopoDS_Shell &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::init",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::Shell()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::shell",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::shape",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::NbShells() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::nb_shells",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::ErrorFaces() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::error_faces",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::Status(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::status_flag",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::FixFaceTool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_tool",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::SetNonManifoldFlag(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::set_non_manifold_flag",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::FixFaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_mode",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShell::set_fix_face_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::FixOrientationMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_orientation_mode",
+      "status": "implemented",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_orientation_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShell::set_fix_orientation_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::Perform(const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::perform_with_progress",
+      "status": "partial",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Shell::FixFaceOrientation(const TopoDS_Shell &,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shell.hxx",
+      "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_orientation",
+      "status": "partial",
+      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
     }
   ],
   "tests": [

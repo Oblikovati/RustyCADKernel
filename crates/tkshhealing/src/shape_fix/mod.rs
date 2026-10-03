@@ -43,3 +43,6 @@ pub use free_bounds::ShapeFixFreeBounds;
 
 mod package;
 pub use package::ShapeFix;
+
+mod shell;
+pub use shell::ShapeFixShell;
