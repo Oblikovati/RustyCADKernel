@@ -19,12 +19,12 @@ def runtime_pairs(row):
 
 
 def mapped_runtime_sets(mappings):
-    """Require a distinct Rust test for each distinct native runtime identity."""
+    """Keep package, target, and test in each exact identity; e.g. `mapped_runtime_sets(rows)`."""
     native_cases = set()
     rust_cases = set()
     for row in mappings:
         for native, rust in runtime_pairs(row):
-            rust_identity = (row["rust_target"], rust)
+            rust_identity = (row["rust_package"], row["rust_target"], rust)
             if native in native_cases or rust_identity in rust_cases:
                 raise ValueError(
                     f"Duplicate mapped runtime identity: {native}, {rust_identity}"
@@ -37,7 +37,7 @@ def mapped_runtime_sets(mappings):
 def runtime_case_results(
     mappings: list[JSONObject],
     native_statuses: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
 ) -> list[JSONObject]:
     """Bind observed statuses to mapped declarations; e.g. `runtime_case_results(rows, native, rust)`."""
     return [
@@ -52,10 +52,13 @@ def runtime_case_result(
     native: str,
     rust: str,
     native_statuses: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
 ) -> JSONObject:
     """Serialize one case pair; e.g. `runtime_case_result(mapping, native, rust, states, passed)`."""
-    status = "passed" if (row["rust_target"], rust) in rust_passed else "missing"
+    package = row["rust_package"]
+    status = (
+        "passed" if (package, row["rust_target"], rust) in rust_passed else "missing"
+    )
     return {
         "toolkit": row["toolkit"],
         "source": row["source"],
@@ -63,6 +66,7 @@ def runtime_case_result(
         "native_case": native,
         "source_sha256": row["source_sha256"],
         "native_status": native_statuses[native],
+        "rust_package": package,
         "rust_target": row["rust_target"],
         "rust_test": rust,
         "rust_status": status,
@@ -92,25 +96,40 @@ OCC23497_REASON = "TODO OCC23497: composite units are not supported by UnitsAPI.
 
 def verified_native_skips(cases, mappings):
     """Reject failures and all skips except the exact recorded OCC23497 provenance."""
-    approved = {row["upstream_id"]: row for row in mappings if row.get("status") == "upstream_skipped"}
+    approved = {
+        row["upstream_id"]: row
+        for row in mappings
+        if row.get("status") == "upstream_skipped"
+    }
     if set(approved) - {OCC23497}:
         raise ValueError("Unapproved upstream skip mapping")
     skipped = []
     for case in cases:
-        identity = case.attrib['classname']+'.'+case.attrib['name']
-        if case.find('failure') is not None or case.attrib.get('status') != 'run':
+        identity = case.attrib["classname"] + "." + case.attrib["name"]
+        if case.find("failure") is not None or case.attrib.get("status") != "run":
             raise ValueError(f"Failed or unexecuted native case: {identity}")
-        marker = case.find('skipped')
+        marker = case.find("skipped")
         if marker is None:
-            if identity in approved: raise ValueError(f"Native skip changed; review required: {identity}")
+            if identity in approved:
+                raise ValueError(f"Native skip changed; review required: {identity}")
             continue
         row = approved.get(identity)
-        reason_lines = marker.attrib.get('message', '').strip().splitlines()
-        reason = reason_lines[-1] if reason_lines else ''
-        if not row or reason != OCC23497_REASON or row.get('behavior_decision') != 'preserve_current':
+        reason_lines = marker.attrib.get("message", "").strip().splitlines()
+        reason = reason_lines[-1] if reason_lines else ""
+        if (
+            not row
+            or reason != OCC23497_REASON
+            or row.get("behavior_decision") != "preserve_current"
+        ):
             raise ValueError(f"Unexpected native skip: {identity}: {reason}")
-        skipped.append({'upstream_id': identity, 'reason': reason,
-                        'current_behavior_rust_test': row['rust_test'], 'legacy_assertions_passed': False})
-    if {row['upstream_id'] for row in skipped} != set(approved):
+        skipped.append(
+            {
+                "upstream_id": identity,
+                "reason": reason,
+                "current_behavior_rust_test": row["rust_test"],
+                "legacy_assertions_passed": False,
+            }
+        )
+    if {row["upstream_id"] for row in skipped} != set(approved):
         raise ValueError("Missing approved native skip observation")
     return skipped

@@ -19,35 +19,13 @@ from api_inventory.inputs import (
     text_field,
 )
 from legacy_runtime_evidence import assess_report, is_digest
+from legacy_runtime_case_identity import CaseIdentity, case_identity, string_field
 from publish_legacy_test_inventory import gtest_records
 from porting import snapshot
 from tkernel_mapping import runtime_pairs
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 NATIVE_STATES = {"passed", "upstream_skipped"}
-
-
-def case_identity(row: JSONObject) -> tuple[str, str, str, str, str, str]:
-    """Key a case by declaration and both runtime names; e.g. `case_identity(row)`."""
-    return tuple(
-        string_field(row, field)
-        for field in (
-            "toolkit",
-            "source",
-            "upstream_id",
-            "native_case",
-            "rust_target",
-            "rust_test",
-        )
-    )
-
-
-def string_field(row: JSONObject, field: str) -> str:
-    """Require a string identity component; e.g. `string_field(row, 'source')`."""
-    value = row.get(field)
-    if not isinstance(value, str) or not value:
-        raise ValueError(f"{field}: expected nonempty string, got {value!r}")
-    return value
 
 
 def case_rows(value: JSONValue) -> list[JSONObject]:
@@ -77,9 +55,9 @@ def validate_case_rows(rows: list[JSONObject]) -> None:
 
 def case_index(
     rows: list[JSONObject],
-) -> dict[tuple[str, str, str, str, str, str], JSONObject]:
+) -> dict[CaseIdentity, JSONObject]:
     """Index unique pair identities; e.g. `case_index(runtime_case_rows)`."""
-    index: dict[tuple[str, str, str, str, str, str], JSONObject] = {}
+    index: dict[CaseIdentity, JSONObject] = {}
     for row in rows:
         key = case_identity(row)
         if key in index:
@@ -90,21 +68,25 @@ def case_index(
 
 def expected_case_keys(
     declaration: JSONObject, mapping: JSONObject
-) -> list[tuple[str, str, str, str, str, str]]:
+) -> list[CaseIdentity]:
     """Expand a mapping into declaration-bound cases; e.g. `expected_case_keys(row, map)`."""
     base = (
         string_field(declaration, "toolkit"),
         string_field(declaration, "source"),
         string_field(declaration, "name"),
     )
+    package = string_field(mapping, "rust_package")
     target = string_field(mapping, "rust_target")
-    return [(*base, native, target, rust) for native, rust in runtime_pairs(mapping)]
+    return [
+        (*base, native, package, target, rust)
+        for native, rust in runtime_pairs(mapping)
+    ]
 
 
 def declaration_evidence(
     declaration: JSONObject,
-    index: dict[tuple[str, str, str, str, str, str], JSONObject],
-    consumed: set[tuple[str, str, str, str, str, str]],
+    index: dict[CaseIdentity, JSONObject],
+    consumed: set[CaseIdentity],
     toolkit_scope: str | None,
 ) -> JSONObject:
     """Attach exact passing evidence; e.g. `declaration_evidence(row, index, consumed)`."""
@@ -135,9 +117,9 @@ def mapping_unverified_reason(declaration: JSONObject, scope: str | None) -> str
 
 
 def collect_expected_cases(
-    keys: list[tuple[str, str, str, str, str, str]],
-    index: dict[tuple[str, str, str, str, str, str], JSONObject],
-    consumed: set[tuple[str, str, str, str, str, str]],
+    keys: list[CaseIdentity],
+    index: dict[CaseIdentity, JSONObject],
+    consumed: set[CaseIdentity],
 ) -> list[JSONObject]:
     """Collect exact observed case pairs; e.g. `collect_expected_cases(keys, index, consumed)`."""
     observed = [index[key] for key in keys if key in index]
@@ -166,7 +148,7 @@ def with_runtime_state(
 def evidence_for_mapping(
     declaration: JSONObject,
     mapping: JSONObject,
-    keys: list[tuple[str, str, str, str, str, str]],
+    keys: list[CaseIdentity],
     observed: list[JSONObject],
 ) -> JSONObject:
     """Classify all paired results; e.g. `evidence_for_mapping(row, map, keys, results)`."""
@@ -212,7 +194,7 @@ def join_declarations(
 ) -> tuple[list[JSONObject], list[JSONObject]]:
     """Join mappings and results without name-only matching; e.g. `join_declarations(rows, cases)`."""
     index = case_index(case_results)
-    consumed: set[tuple[str, str, str, str, str, str]] = set()
+    consumed: set[CaseIdentity] = set()
     joined = [
         declaration_evidence(row, index, consumed, toolkit_scope)
         for row in declarations
@@ -434,10 +416,18 @@ def provenance_payload(
         **join_time_git_provenance(root),
         "runtime_input_manifest_sha256": manifest_sha256,
         "runtime_input_manifest": manifest,
-        "join_tool_sha256": hashlib.sha256(
-            pathlib.Path(__file__).read_bytes()
-        ).hexdigest(),
+        "join_tool_sha256": join_tool_digest(ROOT),
     }
+
+
+def join_tool_digest(root: pathlib.Path) -> str:
+    """Bind imported identity logic with the join entry point; e.g. `join_tool_digest(root)`."""
+    paths = [pathlib.Path(__file__), root / "tools/legacy_runtime_case_identity.py"]
+    digest = hashlib.sha256()
+    for path in paths:
+        digest.update(path.relative_to(root).as_posix().encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
 
 
 def join_time_git_provenance(root: pathlib.Path) -> JSONObject:

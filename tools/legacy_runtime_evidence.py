@@ -44,6 +44,7 @@ HASHED_FIXED_INPUTS = (
     "tools/verify_tkernel.py",
     "tools/verify_tkmath_legacy.py",
     "tools/join_legacy_runtime_evidence.py",
+    "tools/legacy_runtime_case_identity.py",
     "tools/tests/test_legacy_toolkit_sources.py",
     "tools/tests/test_tkmath_legacy_runtime.py",
     "tools/oracle/tkernel_probe.cxx",
