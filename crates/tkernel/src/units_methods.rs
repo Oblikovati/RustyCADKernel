@@ -3,6 +3,8 @@
 //!
 //! The native setting is a process-wide atomic; here it is a [`UnitsMethods`] value
 //! with the same atomic storage, injected where the unit is needed.
+//! Rust has no C++-style default arguments, so `*_default` methods preserve calls
+//! that omit the native `Millimeter` base without creating extra source declarations.
 use crate::tcollection::AsciiString;
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -93,6 +95,18 @@ impl UnitsMethods {
             _ => 1.0,
         }
     }
+    /// `GetCasCadeLengthUnit()` with its native default base unit, millimetres;
+    /// `methods.get_cascade_length_unit_default()`.
+    pub fn get_cascade_length_unit_default(&self) -> f64 {
+        self.get_cascade_length_unit(LengthUnit::Millimeter)
+    }
+
+    /// `SetCasCadeLengthUnit(value)` with its native default base unit, millimetres;
+    /// `methods.set_cascade_length_unit_default(25.4)`.
+    pub fn set_cascade_length_unit_default(&self, value: f64) {
+        self.set_cascade_length_unit(value, LengthUnit::Millimeter);
+    }
+
     /// The cascade unit expressed in `base`; `methods.get_cascade_length_unit(LengthUnit::Meter)`.
     pub fn get_cascade_length_unit(&self, base: LengthUnit) -> f64 {
         let unit = f64::from_bits(self.cascade_length_unit.load(Ordering::SeqCst));
@@ -124,10 +138,23 @@ impl UnitsMethods {
             .find(|(reference, _)| (reference - value).abs() < 1.0e-6)
             .map_or(LengthUnit::Undefined, |(_, unit)| *unit)
     }
+
+    /// `GetLengthUnitByFactorValue(factor)` with its native default base unit, millimetres;
+    /// `UnitsMethods::get_length_unit_by_factor_value_default(25.4)`.
+    pub fn get_length_unit_by_factor_value_default(factor: f64) -> LengthUnit {
+        Self::get_length_unit_by_factor_value(factor, LengthUnit::Millimeter)
+    }
+
     /// The short name of the unit matching `factor` in `base`;
     /// `UnitsMethods::dump_length_unit_factor(25.4, LengthUnit::Millimeter) == "in"`.
     pub fn dump_length_unit_factor(factor: f64, base: LengthUnit) -> &'static str {
         Self::dump_length_unit(Self::get_length_unit_by_factor_value(factor, base))
+    }
+
+    /// `DumpLengthUnit(factor)` with its native default base unit, millimetres;
+    /// `UnitsMethods::dump_length_unit_factor_default(25.4) == "in"`.
+    pub fn dump_length_unit_factor_default(factor: f64) -> &'static str {
+        Self::dump_length_unit_factor(factor, LengthUnit::Millimeter)
     }
     /// The short name of `unit` (`UNDEFINED` for Undefined; mil is `min`, microinch
     /// `nin`); `UnitsMethods::dump_length_unit(LengthUnit::Foot) == "ft"`.
@@ -196,5 +223,21 @@ mod tests {
             methods.get_cascade_length_unit(LengthUnit::Inch),
             25.4 * (1.0 / 25.4)
         );
+    }
+
+    #[test]
+    fn default_argument_calls_use_millimetres() {
+        let methods = UnitsMethods::default();
+        assert_eq!(
+            methods.get_cascade_length_unit_default(),
+            methods.get_cascade_length_unit(LengthUnit::Millimeter)
+        );
+        methods.set_cascade_length_unit_default(25.4);
+        assert_eq!(methods.get_cascade_length_unit_default(), 25.4);
+        assert_eq!(
+            UnitsMethods::get_length_unit_by_factor_value_default(25.4),
+            LengthUnit::Inch
+        );
+        assert_eq!(UnitsMethods::dump_length_unit_factor_default(25.4), "in");
     }
 }
