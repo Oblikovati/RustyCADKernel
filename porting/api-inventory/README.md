@@ -58,14 +58,16 @@ python3 tools/api_coverage_report.py --rust porting/api-inventory/rust-api.json.
 
 This last command checks correspondence against the recorded Rust snapshot.
 After changing Rust source, recapture and normalize before treating the result
-as current. Captured absolute build paths identify the original environment;
+as current. Freshness checks also bind the Rust normalizer and crosswalk tool
+implementations by content hash; changing those tools requires regenerating
+the affected stages. Captured absolute build paths identify the original environment;
 content hashes and source-relative declaration paths are the portable identity.
 
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,394 have exact Rust mappings and
-1,254 remain unmapped. There are no duplicate or unknown mappings in this
+all 8,648 GoogleTest declaration candidates: 7,397 have exact Rust mappings and
+1,251 remain unmapped. There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
 

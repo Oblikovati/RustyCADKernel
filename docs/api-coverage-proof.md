@@ -1,6 +1,6 @@
 # OCCT API coverage proof
 
-`porting/parity.json` is a manually curated mapping ledger. Its 27,143 API rows are
+`porting/parity.json` is a manually curated mapping ledger. Its 27,209 API rows are
 useful work records, but they are not an authoritative upstream symbol inventory.
 `api_inventory_complete` must remain `false` until an independent inventory is
 generated from both projects and the comparison gate passes.
@@ -31,9 +31,16 @@ count: the current visibility filter still includes internal helpers, so it is
 neither a validated lower bound nor a denominator for API coverage.
 
 The legacy-test snapshot separately accounts for 8,648 GoogleTest declarations:
-7,394 exact Rust mappings and 1,254 unmapped, with zero unknown or duplicate
+7,397 exact Rust mappings and 1,251 unmapped, with zero unknown or duplicate
 mappings. Its runtime status remains unverified until verifier evidence is
 joined; DRAW candidates are also explicit unverified obligations.
+
+The current Rust capture covers 17 crates and 50,289 reachable public paths.
+The crosswalk resolves 15,919 implemented declaration claims, while 10,882 ledger
+rows remain unresolved and 89,311 C++ declaration candidates remain unclaimed.
+These categories describe correspondence; they are not a behavioral coverage
+percentage. Rust normalizer and crosswalk implementation hashes are included in
+freshness checks alongside source, ledger, compiler and artifact hashes.
 
 See the [snapshot summary](../porting/api-inventory/completeness.json) for
 compiler-checked mapping counts, per-toolkit gaps, input hashes, and the exact
