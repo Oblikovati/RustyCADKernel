@@ -28,6 +28,7 @@ fn Standard_Character_Test__OCC29925_CharacterClassificationFunctions() {
     assert!(!is_digit(b'A'));
     assert!(is_space(b' '));
     assert!(is_space(b'\t'));
+    assert!(is_space(0x0B));
     assert!(!is_space(b'A'));
     assert!(is_lower_case(b'a'));
     assert!(!is_lower_case(b'A'));
