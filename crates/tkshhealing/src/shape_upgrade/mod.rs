@@ -36,6 +36,10 @@ pub use split_surface::{
 mod split_curve_2d;
 mod split_curve_geometry;
 pub use split_curve_2d::{ShapeUpgradeSplitCurve2d, SplitCurves2d};
+mod convert_curve2d_to_bezier;
+pub use convert_curve2d_to_bezier::ShapeUpgradeConvertCurve2dToBezier;
+mod convert_curve3d_to_bezier;
+pub use convert_curve3d_to_bezier::ShapeUpgradeConvertCurve3dToBezier;
 
 mod edge_divide;
 pub use edge_divide::{
