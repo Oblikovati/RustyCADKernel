@@ -14,7 +14,7 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkg3d::top_abs::Orientation;
-use rustycad_tkmath::gp::Point2;
+use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
 use rustycad_tkmath::toploc::Location;
 
 pub(super) struct PatchLoopGroup {
@@ -32,15 +32,16 @@ pub(super) fn dispatch_wires(
     closed_wires::prepare_closed_wires(composer, wires, &face)?;
     let middles = middle_point::wire_middle_points(wires, &face)?;
     let middles = adjust_closed_centers(composer, grid, middles);
-    let mut copied_edges = Vec::new();
-    for index in 1..=wires.length() as usize {
-        reassign_segment_edges(
-            wires.change_value(index)?,
-            face.clone(),
-            location.clone(),
-            grid,
-            &context,
-            &mut copied_edges,
+    let mut reassignment = EdgeReassignment::new(face.clone(), location.clone(), grid, &context);
+    for (index, center) in middles.iter().copied().enumerate() {
+        let original_center = middle_point::wire_middle_point(wires.value(index + 1)?, &face)?;
+        reassignment.apply(
+            wires.change_value(index + 1)?,
+            center,
+            Vector2::new(
+                center.x() - original_center.x(),
+                center.y() - original_center.y(),
+            ),
         )?;
     }
     group_patch_loops(wires, middles, grid)
@@ -80,40 +81,93 @@ fn live_grid(
     })
 }
 
-fn reassign_segment_edges(
-    segment: &ShapeFixWireSegment,
+struct EdgeReassignment<'a> {
     source_face: Face,
     location: Location,
-    grid: &ShapeExtendCompositeSurface,
-    context: &Handle<ShapeBuildReShape>,
-    copied_edges: &mut Vec<(Edge, Edge)>,
-) -> Result<(), Failure> {
-    if segment.is_vertex() {
-        return Ok(());
+    grid: &'a ShapeExtendCompositeSurface,
+    context: &'a Handle<ShapeBuildReShape>,
+    copied_edges: Vec<(Edge, Edge)>,
+}
+
+impl<'a> EdgeReassignment<'a> {
+    fn new(
+        source_face: Face,
+        location: Location,
+        grid: &'a ShapeExtendCompositeSurface,
+        context: &'a Handle<ShapeBuildReShape>,
+    ) -> Self {
+        Self {
+            source_face,
+            location,
+            grid,
+            context,
+            copied_edges: Vec::new(),
+        }
     }
-    let center = middle_point::wire_middle_point(segment, &source_face)?;
-    let (patch, transform) = patch_face(grid, center, &location)?;
-    for edge_index in 1..=segment.nb_edges() {
+
+    fn apply(
+        &mut self,
+        segment: &ShapeFixWireSegment,
+        center: Point2,
+        period_shift: Vector2,
+    ) -> Result<(), Failure> {
+        if segment.is_vertex() {
+            return Ok(());
+        }
+        let patch = patch_face(self.grid, center, period_shift, &self.location)?;
+        for edge_index in 1..=segment.nb_edges() {
+            self.reassign_edge(segment, &patch, edge_index)?;
+        }
+        Ok(())
+    }
+
+    fn reassign_edge(
+        &mut self,
+        segment: &ShapeFixWireSegment,
+        patch: &PatchTransform,
+        edge_index: i32,
+    ) -> Result<(), Failure> {
         let source = segment.edge(edge_index)?;
-        let target = copied_or_recorded_edge(&source, &source_face, &patch, context, copied_edges)?;
-        edge_reassignment::transform_edge_pcurve(&target, &patch, transform)?;
+        let target = copied_or_recorded_edge(
+            &source,
+            &self.source_face,
+            &patch.face,
+            self.context,
+            &mut self.copied_edges,
+        )?;
+        edge_reassignment::transform_edge_pcurve(
+            &target,
+            &patch.face,
+            (patch.needed, patch.factor, patch.transform),
+        )?;
         segment
             .wire_data()
             .get()
             .ok_or_else(null_wire)?
-            .set(&target, edge_index)?;
+            .set(&target, edge_index)
     }
-    Ok(())
+}
+
+struct PatchTransform {
+    face: Face,
+    needed: bool,
+    factor: f64,
+    transform: Transform2,
 }
 
 fn patch_face(
     grid: &ShapeExtendCompositeSurface,
     center: Point2,
+    period_shift: Vector2,
     location: &Location,
-) -> Result<(Face, (bool, f64, rustycad_tkmath::gp::Transform2)), Failure> {
+) -> Result<PatchTransform, Failure> {
     let (u, v) = grid.locate_uv_point(center)?;
     let surface = grid.patch(u, v)?;
-    let transform = grid.global_to_local_transformation(u, v)?;
+    let (mut needed, factor, mut transform) = grid.global_to_local_transformation(u, v)?;
+    if period_shift.x() != 0.0 || period_shift.y() != 0.0 {
+        transform.multiply(Transform2::translation_vector(period_shift));
+        needed = true;
+    }
     let mut face = Face::default();
     BRepBuilder::default().make_face_on_located_surface(
         &mut face,
@@ -121,7 +175,12 @@ fn patch_face(
         location,
         precision::confusion(),
     )?;
-    Ok((face, transform))
+    Ok(PatchTransform {
+        face,
+        needed,
+        factor,
+        transform,
+    })
 }
 
 fn copied_or_recorded_edge(
@@ -226,9 +285,7 @@ fn append_loop_shape(segment: &ShapeFixWireSegment, loops: &mut Vec<Shape>) -> R
         return Ok(());
     }
     let data = segment.wire_data().get().ok_or_else(null_wire)?;
-    if data.nb_edges() > 0 {
-        loops.push(data.wire()?.into_shape());
-    }
+    loops.push(data.wire()?.into_shape());
     Ok(())
 }
 

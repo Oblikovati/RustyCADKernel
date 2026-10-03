@@ -7,6 +7,7 @@ mod geometry;
 mod grid;
 mod init;
 mod load_wires;
+mod perform;
 mod split_by_grid;
 mod split_by_line;
 mod split_line_sequence;
@@ -204,6 +205,11 @@ impl ShapeFixComposeShell {
         self.fields.write().status = 0;
         let mut segments = self.load_wires()?;
         split_by_grid::split_by_grid(self, &mut segments)
+    }
+
+    /// Runs the full wire-to-patch-face composition; `composer.perform()?`.
+    pub fn perform(&self) -> Result<bool, Failure> {
+        perform::perform(self)
     }
 
     /// Split all segments and create the interior joint edges between their intersections.

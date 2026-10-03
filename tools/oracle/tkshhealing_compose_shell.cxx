@@ -207,6 +207,45 @@ static void runPerform()
             << tool.Status(ShapeExtend_DONE1) << '\n';
 }
 
+static void runPerformTwoPatches()
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    wire.Add(BRepBuilderAPI_MakeEdge(points[i], points[(i + 1) % 4]).Edge());
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 2, 1, 1);
+  Handle(Geom_Surface) plane = new Geom_Plane(gp_Pln());
+  patches->SetValue(1, 1, new Geom_RectangularTrimmedSurface(plane, 0., 1., 0., 2., true, true));
+  patches->SetValue(2, 1, new Geom_RectangularTrimmedSurface(plane, 1., 3., 0., 2., true, true));
+  ShapeFix_ComposeShell tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(new ShapeExtend_CompositeSurface(patches), TopLoc_Location(), face, 1.0e-7);
+  bool done = tool.Perform();
+  TopoDS_Shape result = tool.Result();
+  int children = 0;
+  for (TopoDS_Iterator it(result); it.More(); it.Next())
+    ++children;
+  std::cout << "perform_two_patches " << done << ' ' << result.ShapeType() << ' '
+            << result.Orientation() << ' ' << children << ' '
+            << tool.Status(ShapeExtend_DONE1) << '\n';
+}
+
+static void runPerformNoWires()
+{
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln()).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  ShapeFix_ComposeShell tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(new ShapeExtend_CompositeSurface(patches), TopLoc_Location(), face, 1.0e-7);
+  bool done = tool.Perform();
+  std::cout << "perform_no_wires " << done << ' ' << tool.Result().IsNull() << ' '
+            << tool.Status(ShapeExtend_FAIL6) << ' ' << tool.Status(ShapeExtend_DONE1) << '\n';
+}
+
 static void runBreakWires()
 {
   BRep_Builder builder;
@@ -531,6 +570,8 @@ int main()
   runCollectWires();
   runCollectWires(true);
   runPerform();
+  runPerformTwoPatches();
+  runPerformNoWires();
   runSplitEdges(true);
   runSplitEdgesPeriodicCylinder();
 }
