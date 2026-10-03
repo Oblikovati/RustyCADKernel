@@ -1,7 +1,7 @@
 //! Native constructor and public mutable-option parity for ShapeFix_ComposeShell.
-use rustycad_tkbrep::{brep_tools::ReShape, topods::Builder};
+use rustycad_tkbrep::{brep::BRepTool, brep_tools::ReShape, topods::Builder};
 use rustycad_tkernel::{
-    ncollection::{HArray2, Sequence},
+    ncollection::{HArray1, HArray2, Sequence},
     standard::Handle,
 };
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
@@ -205,4 +205,90 @@ fn native_row<'a>(expected: &'a str, label: &str) -> &'a str {
         .lines()
         .find(|row| row.starts_with(label))
         .expect("native oracle row exists")
+}
+
+#[test]
+fn split_wire_rectangular_loop_matches_native_patch_and_vertex_counts() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let composer = ShapeFixComposeShell::new();
+    composer.set_context(&Handle::new(ShapeBuildReShape::new()));
+    composer
+        .init(
+            &two_patch_plane_grid(),
+            &Location::default(),
+            &face_fixture(),
+            1.0e-7,
+        )
+        .unwrap();
+    let segments = composer.load_wires().unwrap();
+    let mut wire = segments.value(1).unwrap().clone();
+    let mut indices = sequence(&[1, 3]);
+    let values = sequence(&[1.0, 1.0]);
+    let codes = sequence(&[2, 1]);
+    let mut vertices = Sequence::default();
+    let result = composer
+        .split_wire(
+            &mut wire,
+            &mut indices,
+            &values,
+            &mut vertices,
+            &codes,
+            true,
+            1,
+        )
+        .unwrap();
+    assert_eq!(
+        split_wire_summary(&result, vertices.length()),
+        native_row(expected, "split_wire ")
+    );
+}
+
+fn sequence<T: Clone>(values: &[T]) -> Sequence<T> {
+    let mut sequence = Sequence::default();
+    for value in values {
+        sequence.append(value.clone());
+    }
+    sequence
+}
+
+fn two_patch_plane_grid() -> Handle<ShapeExtendCompositeSurface> {
+    let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+    let cells = HArray2::with_value(1, 2, 1, 1, Handle::<dyn GeomSurface>::default()).unwrap();
+    cells
+        .change_array2()
+        .set_value(1, 1, plane.clone())
+        .unwrap();
+    cells.change_array2().set_value(2, 1, plane).unwrap();
+    let patches = Handle::new(cells);
+    let grid = Handle::new(
+        ShapeExtendCompositeSurface::with_grid(&patches, ShapeExtendParametrisation::Natural)
+            .unwrap(),
+    );
+    let joints = HArray1::with_value(1, 3, 0.0).unwrap();
+    joints.change_array1().set_value(2, 1.0).unwrap();
+    joints.change_array1().set_value(3, 2.0).unwrap();
+    assert!(
+        grid.get()
+            .unwrap()
+            .set_u_joint_values(&joints.array1())
+            .unwrap()
+    );
+    grid
+}
+
+fn split_wire_summary(segment: &ShapeFixWireSegment, vertex_count: i32) -> String {
+    let mut summary = format!("split_wire {} {vertex_count}", segment.nb_edges());
+    for edge in 1..=segment.nb_edges() {
+        let patch = segment.patch_index(edge).unwrap();
+        summary.push_str(&format!(
+            " {}:{}:{}:{}@{}:{}",
+            patch.u_min,
+            patch.u_max,
+            patch.v_min,
+            patch.v_max,
+            BRepTool::range(&segment.edge(edge).unwrap()).unwrap().0,
+            BRepTool::range(&segment.edge(edge).unwrap()).unwrap().1
+        ));
+    }
+    summary
 }

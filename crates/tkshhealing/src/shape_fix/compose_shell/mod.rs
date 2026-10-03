@@ -5,6 +5,7 @@ mod geometry;
 mod grid;
 mod init;
 mod load_wires;
+mod split_wire;
 
 use crate::shape_analysis::{ShapeAnalysisTransferParametersProj, TransferParameters};
 use crate::shape_extend::{ShapeExtend, ShapeExtendCompositeSurface};
@@ -171,6 +172,8 @@ impl ShapeFixComposeShell {
     }
 
     /// Classifies a wire interval relative to a patch line; `composer.compute_code(&wire, line, 1, 1, 0.25, 0.75, false)?`.
+    // Keep OCCT's argument list intact so callers can port existing code directly.
+    #[allow(clippy::too_many_arguments)]
     pub fn compute_code(
         &self,
         wire: &crate::shape_extend::ShapeExtendWireData,
@@ -183,13 +186,42 @@ impl ShapeFixComposeShell {
     ) -> Result<i32, Failure> {
         compute_code::compute_code(
             self,
-            wire,
-            line,
-            begin_edge,
-            end_edge,
-            begin_parameter,
-            end_parameter,
-            internal,
+            compute_code::ComputeCodeInput {
+                wire,
+                line,
+                begin_edge,
+                end_edge,
+                begin_parameter,
+                end_parameter,
+                internal,
+            },
+        )
+    }
+
+    /// Splits one wire segment at ordered edge parameters; `composer.split_wire(&mut wire, &mut indices, &values, &mut vertices, &codes, true, 1)?`.
+    // Keep the native public parameter list intact for direct 1:1 API calls.
+    #[allow(clippy::too_many_arguments)]
+    pub fn split_wire(
+        &self,
+        wire: &mut crate::shape_fix::ShapeFixWireSegment,
+        indices: &mut rustycad_tkernel::ncollection::Sequence<i32>,
+        values: &rustycad_tkernel::ncollection::Sequence<f64>,
+        vertices: &mut rustycad_tkernel::ncollection::Sequence<rustycad_tkbrep::topods::Shape>,
+        segment_codes: &rustycad_tkernel::ncollection::Sequence<i32>,
+        cut_by_u: bool,
+        cut_index: i32,
+    ) -> Result<crate::shape_fix::ShapeFixWireSegment, Failure> {
+        split_wire::split_wire(
+            self,
+            split_wire::SplitWireInput {
+                wire,
+                indices,
+                values,
+                vertices,
+                segment_codes,
+                cut_by_u,
+                cut_index,
+            },
         )
     }
 }

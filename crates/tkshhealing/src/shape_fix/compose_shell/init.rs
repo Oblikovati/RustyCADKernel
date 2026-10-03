@@ -9,6 +9,8 @@ use rustycad_tkg3d::geom::{GeomElementarySurface, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkmath::toploc::Location;
 
+type PatchResolutionInputs = (f64, f64, (f64, f64, f64, f64), GeomAdaptorSurface);
+
 pub(super) fn initialize(
     composer: &ShapeFixComposeShell,
     grid: &Handle<ShapeExtendCompositeSurface>,
@@ -210,7 +212,7 @@ fn patch_resolution_inputs(
     grid: &ShapeExtendCompositeSurface,
     i: i32,
     j: i32,
-) -> Result<(f64, f64, (f64, f64, f64, f64), GeomAdaptorSurface), Failure> {
+) -> Result<PatchResolutionInputs, Failure> {
     let u_range = grid.u_joint_value(i + 1)? - grid.u_joint_value(i)?;
     let v_range = grid.v_joint_value(j + 1)? - grid.v_joint_value(j)?;
     let surface = grid.patch(i, j)?;
