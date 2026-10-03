@@ -25,3 +25,9 @@ Additional rows bind the ten mode defaults, the no-op behavior of p-curve and
 3D-curve removal when their endpoint checks pass, and the plane-projection
 no-op. The sphere-pole fixture also checks that both the edge and p-curve
 ranges are restricted to each resulting segment.
+
+The failure/context rows establish two distinct outcomes. A missing 3D curve
+causes `FixAddPCurve` to report FAIL3 and keep the edge. A pole-crossing edge
+without a reshape context receives a p-curve but is not split. A deliberately
+misplaced p-curve is removed, while native `ShapeFix_Edge` leaves the aggregate
+DONE2/FAIL2 bits clear for that mutation.
