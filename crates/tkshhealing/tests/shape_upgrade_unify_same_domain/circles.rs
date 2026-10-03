@@ -25,6 +25,16 @@ fn three_same_circle_arcs_merge_as_one_native_open_arc() {
     );
 }
 
+#[test]
+fn reverse_insertion_order_keeps_the_native_circle_chain_direction() {
+    assert_native_circle_merge(&reverse_order_circle_wire(), "circle_reverse_order");
+}
+
+#[test]
+fn reversed_circle_edge_occurrences_keep_native_endpoints() {
+    assert_native_circle_merge(&reversed_circle_wire(), "circle_reversed_occurrences");
+}
+
 fn assert_native_circle_merge(input: &Shape, case: &str) {
     let unifier = ShapeUpgradeUnifySameDomain::new(input, true, false, false);
     unifier.build().unwrap();
@@ -54,13 +64,46 @@ fn assert_native_circle_sample(edge: &rustycad_tkbrep::topods::Edge) {
 }
 
 fn circle_wire(breaks: &[f64]) -> Shape {
+    circle_wire_segments(
+        &breaks
+            .windows(2)
+            .map(|pair| (pair[0], pair[1]))
+            .collect::<Vec<_>>(),
+    )
+}
+
+fn reverse_order_circle_wire() -> Shape {
+    circle_wire_segments(&[
+        (std::f64::consts::FRAC_PI_2, std::f64::consts::PI),
+        (0., std::f64::consts::FRAC_PI_2),
+    ])
+}
+
+fn circle_wire_segments(segments: &[(f64, f64)]) -> Shape {
     let circle = Circle3::new(Axis2::default(), 2.0).unwrap();
     let mut wire = BRepBuilderAPIMakeWire::new();
-    for pair in breaks.windows(2) {
-        let edge = BRepBuilderAPIMakeEdge::from_circ_params(circle, pair[0], pair[1])
+    for (first, last) in segments {
+        let edge = BRepBuilderAPIMakeEdge::from_circ_params(circle, *first, *last)
             .unwrap()
             .edge()
             .unwrap();
+        wire.add_edge(&edge).unwrap();
+    }
+    wire.wire().unwrap().into_shape()
+}
+
+fn reversed_circle_wire() -> Shape {
+    let circle = Circle3::new(Axis2::default(), 2.0).unwrap();
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    for (first, last) in [
+        (0., std::f64::consts::FRAC_PI_2),
+        (std::f64::consts::FRAC_PI_2, std::f64::consts::PI),
+    ] {
+        let mut edge = BRepBuilderAPIMakeEdge::from_circ_params(circle, first, last)
+            .unwrap()
+            .edge()
+            .unwrap();
+        edge.reverse();
         wire.add_edge(&edge).unwrap();
     }
     wire.wire().unwrap().into_shape()
