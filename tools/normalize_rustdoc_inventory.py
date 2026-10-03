@@ -20,6 +20,7 @@ from api_inventory_json import (
 )
 from api_inventory_json import read_json, sha256_bytes, string_value
 from api_inventory_reexports import resolve_cross_crate_reexports, source_hashes
+from api_tool_hashes import stage_hashes
 from rustdoc_impl_ownership import inherent_members, unresolved_impl_owner_links
 from rustdoc_declarations import (
     file_hash,
@@ -351,6 +352,9 @@ def normalized_manifest(
         "visibility_policy": "public-reachable-including-doc-hidden-v1",
         "capture_manifest_sha256": sha256_bytes(manifest_path.read_bytes()),
         "capture_workspace_revision": capture_revision(manifest),
+        "tool_implementation_sha256": {
+            "rust_normalizer": stage_hashes(workspace, "rust_normalizer")
+        },
         "capture_feature_policy": manifest.get("feature_policy"),
         "cargo_arguments": manifest.get("cargo_arguments"),
         "capture_inputs": selected_capture_inputs(manifest),

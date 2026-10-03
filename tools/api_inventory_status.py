@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from api_inventory.inputs import JSONObject, digest, read_object
+from api_tool_hashes import implementation_hashes_match
 from capture_rustdoc_json import (
     FINGERPRINT_FILES,
     ROOT,
@@ -34,9 +35,9 @@ def compiler_status_lines(root: Path, workspace_digest: str) -> list[str]:
         and source.get("workspace_inputs_sha256") == workspace_digest
     )
     state = (
-        "source/ledger/artifact fingerprints current"
+        "source/ledger/artifact/tool fingerprints current"
         if recorded_inputs_match(root, report) and source_matches
-        else "STALE: regenerate after source/ledger/artifact changes"
+        else "STALE: regenerate after source/ledger/artifact/tool changes"
     )
     return [
         f"Compiler API snapshot: {counts} ({state})",
@@ -60,7 +61,11 @@ def recorded_inputs_match(root: Path, report: JSONObject) -> bool:
         path = root / name
         if not path.is_file() or inputs.get(key) != digest(path):
             return False
-    return archived_inputs_match(root, report) and cpp_archives_match(root)
+    return (
+        implementation_hashes_match(root, report.get("tool_implementation_sha256"))
+        and archived_inputs_match(root, report)
+        and cpp_archives_match(root)
+    )
 
 
 def archived_inputs_match(root: Path, report: JSONObject) -> bool:

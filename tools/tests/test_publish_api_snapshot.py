@@ -7,7 +7,8 @@ import tempfile
 import unittest
 
 from api_inventory.inputs import digest
-from publish_api_snapshot import compress_snapshot, publish_snapshot
+from api_tool_hashes import implementation_hashes
+from publish_api_snapshot import ROOT, compress_snapshot, publish_snapshot
 
 
 class SnapshotPublicationTests(unittest.TestCase):
@@ -27,7 +28,12 @@ class SnapshotPublicationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             rust, report = root / "rust.json", root / "report.json"
-            rust.write_text("{}")
+            tools = implementation_hashes(ROOT)
+            rust.write_text(
+                json.dumps(
+                    {"tool_implementation_sha256": {"rust_normalizer": tools["rust_normalizer"]}}
+                )
+            )
             report.write_text(
                 json.dumps(
                     {
@@ -35,6 +41,7 @@ class SnapshotPublicationTests(unittest.TestCase):
                         "crosswalk_rows": [],
                         "proof_gaps": ["missing"],
                         "declaration_crosswalk_proof": False,
+                        "tool_implementation_sha256": tools,
                     }
                 )
             )
@@ -42,6 +49,16 @@ class SnapshotPublicationTests(unittest.TestCase):
             summary = json.loads((root / "out/completeness.json").read_text())
             self.assertEqual(summary["proof_gaps"], ["missing"])
             self.assertNotIn("crosswalk_rows", summary)
+            self.assertEqual(summary["tool_implementation_sha256"], tools)
             rust.write_text("changed")
             with self.assertRaisesRegex(ValueError, "expected the exact"):
+                publish_snapshot(rust, report, root / "out")
+
+    def test_missing_implementation_metadata_cannot_be_published(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            rust, report = root / "rust.json", root / "report.json"
+            rust.write_text("{}")
+            report.write_text(json.dumps({"input_sha256": {"rust": digest(rust)}}))
+            with self.assertRaisesRegex(ValueError, "implementation hashes are missing or stale"):
                 publish_snapshot(rust, report, root / "out")
