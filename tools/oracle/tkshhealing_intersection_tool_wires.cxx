@@ -131,6 +131,75 @@ static void runShortOverlapCase() {
   std::cout << '\n';
 }
 
+static void runLongOverlapCase() {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
+  TopoDS_Edge firstOverlap = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
+                                         gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 10.);
+  TopoDS_Edge secondOverlap = edgeOnPlane(face, gp_Pnt(2., 0., 0.), gp_Dir(1., 0., 0.),
+                                          gp_Pnt2d(2., 0.), gp_Dir2d(1., 0.), 6.);
+  ShapeAnalysis_Edge analysis;
+  builder.UpdateVertex(analysis.FirstVertex(firstOverlap), 1.e-5);
+  TopoDS_Edge firstFar = edgeOnPlane(face, gp_Pnt(30., 30., 0.), gp_Dir(1., 0., 0.),
+                                     gp_Pnt2d(30., 30.), gp_Dir2d(1., 0.));
+  TopoDS_Edge secondFar = edgeOnPlane(face, gp_Pnt(-30., -30., 0.), gp_Dir(0., 1., 0.),
+                                      gp_Pnt2d(-30., -30.), gp_Dir2d(0., 1.));
+  Handle(ShapeExtend_WireData) first = makeWire(face, firstOverlap, firstFar);
+  Handle(ShapeExtend_WireData) second = makeWire(face, secondOverlap, secondFar);
+  builder.Add(face, first->Wire());
+  builder.Add(face, second->Wire());
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool tool(context, 1.e-7);
+  bool done = tool.FixIntersectingWires(face);
+  Handle(ShapeExtend_WireData) result[2];
+  int wireIndex = 0;
+  for (TopoDS_Iterator wires(face, false, true); wires.More(); wires.Next()) {
+    if (wires.Value().ShapeType() == TopAbs_WIRE) {
+      result[wireIndex++] = new ShapeExtend_WireData(TopoDS::Wire(wires.Value()));
+    }
+  }
+  std::cout << std::setprecision(17) << done << " " << result[0]->NbEdges() << " " << result[1]->NbEdges();
+  for (int wire = 0; wire < 2; ++wire) {
+    for (int index = 1; index <= result[wire]->NbEdges(); ++index) {
+      double firstParameter, lastParameter;
+      BRep_Tool::Range(result[wire]->Edge(index), face, firstParameter, lastParameter);
+      std::cout << " " << firstParameter << " " << lastParameter;
+    }
+  }
+  std::cout << '\n';
+}
+
+static void runEndpointCutCase() {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
+  TopoDS_Edge longEdge = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
+                                      gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 1000.);
+  ShapeAnalysis_Edge analysis;
+  builder.UpdateVertex(analysis.FirstVertex(longEdge), 2.);
+  TopoDS_Edge firstFar = edgeOnPlane(face, gp_Pnt(3000., 3000., 0.), gp_Dir(1., 0., 0.),
+                                     gp_Pnt2d(3000., 3000.), gp_Dir2d(1., 0.));
+  TopoDS_Edge shortEdge = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
+                                      gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 1.);
+  TopoDS_Edge secondFar = edgeOnPlane(face, gp_Pnt(-3000., -3000., 0.), gp_Dir(0., 1., 0.),
+                                      gp_Pnt2d(-3000., -3000.), gp_Dir2d(0., 1.));
+  Handle(ShapeExtend_WireData) first = makeWire(face, longEdge, firstFar);
+  Handle(ShapeExtend_WireData) second = makeWire(face, shortEdge, secondFar);
+  builder.Add(face, first->Wire());
+  builder.Add(face, second->Wire());
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool tool(context, 1.e-7);
+  bool done = tool.FixIntersectingWires(face);
+  std::cout << std::setprecision(17) << done << " " << first->NbEdges() << " " << second->NbEdges();
+  for (const TopoDS_Edge& edge : {first->Edge(1), second->Edge(1)}) {
+    double firstParameter, lastParameter;
+    BRep_Tool::Range(edge, face, firstParameter, lastParameter);
+    std::cout << " " << firstParameter << " " << lastParameter;
+  }
+  std::cout << '\n';
+}
+
 int main() {
   BRep_Builder builder;
   TopoDS_Face face;
@@ -168,4 +237,6 @@ int main() {
   runVertexCase(true);
   runVertexCase(false);
   runShortOverlapCase();
+  runLongOverlapCase();
+  runEndpointCutCase();
 }

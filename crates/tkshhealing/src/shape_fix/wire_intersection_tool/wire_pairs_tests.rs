@@ -175,6 +175,113 @@ fn short_cross_wire_overlap_splits_both_overlapping_edges() {
     );
 }
 
+#[test]
+fn long_overlap_reuses_one_wire_segment_for_the_full_overlap() {
+    let mut face = planar_face();
+    let first_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 10.0);
+    let first_vertex = ShapeAnalysisEdge::new().first_vertex(&first_edge);
+    BRepBuilder::default()
+        .update_vertex_tolerance(&first_vertex, 1.0e-5)
+        .unwrap();
+    let first = Handle::new(ShapeExtendWireData::new());
+    first.add_edge(&first_edge, 0).unwrap();
+    first
+        .add_edge(&line_edge(&face, 30.0, 30.0, 1.0, 0.0), 0)
+        .unwrap();
+    let second = Handle::new(ShapeExtendWireData::new());
+    second
+        .add_edge(&line_edge_range(&face, 2.0, 0.0, 0.0, 1.0, 0.0, 6.0), 0)
+        .unwrap();
+    second
+        .add_edge(&line_edge(&face, -30.0, -30.0, 0.0, 1.0), 0)
+        .unwrap();
+    add_wires(&mut face, &first, &second);
+    let old_face = face.clone().into_shape();
+    let context = Handle::new(ShapeBuildReShape::new());
+    let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+
+    assert!(tool.fix_intersecting_wires(&mut face).unwrap());
+
+    let wires = direct_wires(&face);
+    assert_eq!([wires[0].nb_children(), wires[1].nb_children()], [4, 2]);
+    let first_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[0]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    let second_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[1]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    assert!(
+        first_data
+            .edge(2)
+            .unwrap()
+            .is_same(&second_data.edge(1).unwrap())
+    );
+    let applied = context
+        .apply(&old_face, rustycad_tkg3d::top_abs::ShapeEnum::Shape)
+        .unwrap();
+    assert!(applied.is_same(&face.clone().into_shape()));
+    assert_eq!(
+        wires
+            .iter()
+            .flat_map(|wire| direct_edge_ranges(wire, &face))
+            .collect::<Vec<_>>(),
+        [0.0, 2.0, 2.0, 8.0, 8.0, 10.0, 0.0, 2.0, 2.0, 8.0, 0.0, 2.0]
+    );
+}
+
+#[test]
+fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
+    let mut face = planar_face();
+    let long_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1000.0);
+    let endpoint = ShapeAnalysisEdge::new().first_vertex(&long_edge);
+    BRepBuilder::default()
+        .update_vertex_tolerance(&endpoint, 2.0)
+        .unwrap();
+    let first = Handle::new(ShapeExtendWireData::new());
+    first.add_edge(&long_edge, 0).unwrap();
+    first
+        .add_edge(&line_edge(&face, 3000.0, 3000.0, 1.0, 0.0), 0)
+        .unwrap();
+    let second = Handle::new(ShapeExtendWireData::new());
+    second
+        .add_edge(&line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0), 0)
+        .unwrap();
+    second
+        .add_edge(&line_edge(&face, -3000.0, -3000.0, 0.0, 1.0), 0)
+        .unwrap();
+    add_wires(&mut face, &first, &second);
+    let context = Handle::new(ShapeBuildReShape::new());
+    let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+
+    assert!(!tool.fix_intersecting_wires(&mut face).unwrap());
+
+    let wires = direct_wires(&face);
+    assert_eq!([wires[0].nb_children(), wires[1].nb_children()], [2, 2]);
+    assert_eq!(
+        wires
+            .iter()
+            .flat_map(|wire| direct_edge_ranges(wire, &face))
+            .collect::<Vec<_>>(),
+        [1.0, 1000.0, 0.0, 2.0, 0.0, 1.0, 0.0, 2.0]
+    );
+}
+
+fn add_wires(face: &mut Face, first: &ShapeExtendWireData, second: &ShapeExtendWireData) {
+    let builder = BRepBuilder::default();
+    builder
+        .add(face, &first.wire().unwrap().into_shape())
+        .unwrap();
+    builder
+        .add(face, &second.wire().unwrap().into_shape())
+        .unwrap();
+}
+
 fn planar_face() -> Face {
     let surface: Handle<dyn rustycad_tkg3d::geom::GeomSurface> =
         Handle::new(GeomPlane::new(Axis3::default())).cast();
