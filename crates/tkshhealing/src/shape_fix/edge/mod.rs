@@ -1,8 +1,10 @@
 // Translation of ShapeFix_Edge parameter and vertex repair at
 // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
+mod add_pcurve;
 mod curves;
 mod parameter;
 mod range;
+mod seam;
 mod vertex;
 
 use crate::shape_build::ShapeBuildReShape;
@@ -11,8 +13,7 @@ use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::{Handle, StandardTransient};
 
-/// Repair edge parameter consistency and vertex tolerances.
-/// Missing-curve projection and removal operations remain separate porting work.
+/// Repair missing or inconsistent edge curves, parameterization and vertex tolerances.
 ///
 /// ```
 /// use rustycad_tkshhealing::shape_fix::ShapeFixEdge;
