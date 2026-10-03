@@ -45,6 +45,9 @@ impl ShapeUpgradeSplitCurve3d {
     pub(super) fn source_curve(&self) -> Handle<dyn GeomCurve> {
         self.parent.source_curve()
     }
+    pub(super) fn set_result_curves(&self, curves: SplitCurves3d) {
+        self.parent.set_result_curves(curves);
+    }
     /// Shared result array; null before Build allocates it; `splitter.curves()`.
     pub fn curves(&self) -> SplitCurves3d {
         self.parent.curves()

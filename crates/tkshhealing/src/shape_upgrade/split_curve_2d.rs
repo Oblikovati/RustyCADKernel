@@ -49,4 +49,7 @@ impl ShapeUpgradeSplitCurve2d {
     pub(super) fn source_curve(&self) -> Handle<dyn Geom2dCurve> {
         self.parent.source_curve()
     }
+    pub(super) fn set_result_curves(&self, curves: SplitCurves2d) {
+        self.parent.set_result_curves(curves);
+    }
 }
