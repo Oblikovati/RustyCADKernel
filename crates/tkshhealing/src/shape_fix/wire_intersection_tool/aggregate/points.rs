@@ -13,7 +13,7 @@ use rustycad_tkgeomalgo::int_res2d::{Domain, IntersectionPoint, Position};
 use rustycad_tkmath::bnd::BoundingBox2;
 use rustycad_tkmath::gp::Point3;
 
-pub(super) fn pair_curves(
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn pair_curves(
     first: &Edge,
     second: &Edge,
     face: &Face,
@@ -62,7 +62,7 @@ fn bounded_domain(
     ))
 }
 
-pub(super) fn selected_point(
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn selected_point(
     intersections: &GInter,
     count: i32,
 ) -> Result<IntersectionPoint, Failure> {

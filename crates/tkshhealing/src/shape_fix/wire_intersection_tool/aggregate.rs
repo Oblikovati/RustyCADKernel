@@ -1,6 +1,6 @@
 //! Nonadjacent wire edge intersections; currently exercised for point intersections.
 #[path = "aggregate/segment.rs"]
-mod segment;
+pub(super) mod segment;
 use super::{ShapeFixIntersectionTool, boxes};
 use crate::shape_extend::ShapeExtendWireData;
 use rustycad_tkbrep::brep::BRepTool;
@@ -194,7 +194,7 @@ fn process_pair(
 }
 
 #[path = "aggregate/points.rs"]
-mod points;
+pub(super) mod points;
 
 #[cfg(test)]
 #[path = "aggregate/tests.rs"]

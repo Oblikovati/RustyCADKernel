@@ -115,21 +115,21 @@ pub(super) fn repair(
     )
 }
 
-struct SegmentPoints {
-    first_parameters: (f64, f64),
-    second_parameters: (f64, f64),
-    first: [Point3; 2],
-    second: [Point3; 2],
+pub(in crate::shape_fix::wire::wire_intersection_tool) struct SegmentPoints {
+    pub(in crate::shape_fix::wire::wire_intersection_tool) first_parameters: (f64, f64),
+    pub(in crate::shape_fix::wire::wire_intersection_tool) second_parameters: (f64, f64),
+    pub(in crate::shape_fix::wire::wire_intersection_tool) first: [Point3; 2],
+    pub(in crate::shape_fix::wire::wire_intersection_tool) second: [Point3; 2],
 }
 
-struct SelectedEndpoint {
-    vertex: Vertex,
-    tolerance: f64,
-    parameter: f64,
-    found: bool,
+pub(in crate::shape_fix::wire::wire_intersection_tool) struct SelectedEndpoint {
+    pub(in crate::shape_fix::wire::wire_intersection_tool) vertex: Vertex,
+    pub(in crate::shape_fix::wire::wire_intersection_tool) tolerance: f64,
+    pub(in crate::shape_fix::wire::wire_intersection_tool) parameter: f64,
+    pub(in crate::shape_fix::wire::wire_intersection_tool) found: bool,
 }
 
-fn segment_points(
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn segment_points(
     segment: IntersectionSegment,
     first: &Edge,
     second: &Edge,
@@ -156,12 +156,15 @@ fn segment_points(
     })
 }
 
-fn separated_overlap(points: &SegmentPoints, tolerance: f64) -> bool {
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn separated_overlap(
+    points: &SegmentPoints,
+    tolerance: f64,
+) -> bool {
     points.first[0].distance(&points.second[0]) > tolerance
         || points.first[1].distance(&points.second[1]) > tolerance
 }
 
-fn select_existing_endpoint(
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn select_existing_endpoint(
     edge: &Edge,
     range: (f64, f64),
     parameters: (f64, f64),
@@ -237,7 +240,7 @@ fn endpoint_parameters(edge: &Edge, range: (f64, f64)) -> (f64, f64) {
     }
 }
 
-fn cut_selected_endpoint(
+pub(in crate::shape_fix::wire::wire_intersection_tool) fn cut_selected_endpoint(
     tool: &ShapeFixIntersectionTool,
     edge: &Edge,
     face: &Face,

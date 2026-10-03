@@ -7,6 +7,8 @@ mod boxes;
 mod cut;
 #[path = "wire_intersection_tool/vertices.rs"]
 mod vertices;
+#[path = "wire_intersection_tool/wire_pairs.rs"]
+mod wire_pairs;
 use crate::shape_analysis::{
     ShapeAnalysisEdge, ShapeAnalysisSurface, ShapeAnalysisTransferParametersProj,
     TransferParameters,
@@ -99,6 +101,14 @@ impl ShapeFixIntersectionTool {
         removed_count: &mut i32,
     ) -> Result<bool, Failure> {
         aggregate::fix_self_intersect_wire(self, wire, face, split_count, cut_count, removed_count)
+    }
+
+    /// Repairs point crossings and short overlaps between direct face wires, then replaces the face.
+    ///
+    /// Example: `tool.fix_intersecting_wires(&mut face)?`. Long-overlap reconstruction and
+    /// some tolerance-based endpoint-cut cases remain untranslated.
+    pub fn fix_intersecting_wires(&self, face: &mut Face) -> Result<bool, Failure> {
+        wire_pairs::fix_intersecting_wires(self, face)
     }
 
     fn max_tolerance(&self) -> f64 {
