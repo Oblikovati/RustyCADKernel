@@ -2,9 +2,13 @@
 
 This probe covers the no-op on an open plane, an open sphere boundary, opposing open cylinder boundaries, a
 same-direction cylinder pair (which requires native wire reversal), a single
-open boundary on a spindle torus, and an open boundary on a periodic
-B-spline sphere. It compares the returned `changed` flag and resulting face,
-edge, seam, and degenerated-edge counts.
+same-direction cylinder pair (which requires native wire reversal), a pair
+whose second wire is topologically reversed, a single open boundary on a
+spindle torus, and an open boundary on a periodic B-spline sphere. The
+reversed-wire case also checks the source iterator semantics: the native
+`TopoDS_Iterator(wire)` composes parent orientation into its edge, so the
+open-direction test sees a negative U displacement. It compares the returned
+`changed` flag and resulting face, edge, seam, and degenerated-edge counts.
 
 Run it against the pinned OCCT build with:
 
