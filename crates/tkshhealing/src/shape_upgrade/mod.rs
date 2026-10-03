@@ -55,3 +55,6 @@ pub use face_divide::ShapeUpgradeFaceDivide;
 
 mod split_curve3d_continuity;
 pub use split_curve3d_continuity::ShapeUpgradeSplitCurve3dContinuity;
+
+mod closed_edge_divide;
+pub use closed_edge_divide::ShapeUpgradeClosedEdgeDivide;

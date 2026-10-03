@@ -220775,6 +220775,22 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex::new",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_shape_fix_split_common_vertex.cxx and six Rust regressions verify orientation-sensitive matching, per-face replacement reuse, discarded Init result, warning target, shared handles and actual ShapeFixRoot base projection. No exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedEdgeDivide::ShapeUpgrade_ClosedEdgeDivide()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedEdgeDivide.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedEdgeDivide::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_closed_edge_divide.cxx; seven generated oracle cases with bit-exact split parameters plus shared state/runtime dispatch tests. Legacy test obligations remain separate; no exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedEdgeDivide::Compute(const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedEdgeDivide.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedEdgeDivide::<rustycad_tkshhealing::shape_upgrade::EdgeDivider>::compute",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_closed_edge_divide.cxx; seven generated oracle cases with bit-exact split parameters plus shared state/runtime dispatch tests. Legacy test obligations remain separate; no exhaustive behavioral proof."
     }
   ],
   "tests": [
