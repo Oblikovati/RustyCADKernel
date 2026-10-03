@@ -21,12 +21,21 @@ pub fn build_simple_offset_wall(
         return Ok(Face::default());
     };
     let wire = wall_wire([&original, &wall1, &offset, &wall2])?;
-    if let Ok(maker) = BRepLibMakeFace::from_wire(&wire, true)
-        && maker.is_done()
+    if let Ok(face) = planar_wall(&wire)
+        && !face.is_null()
     {
-        return maker.face();
+        return Ok(face);
     }
     loft::loft_wall(&original, &offset, &wall1, &wall2, &wire)
+}
+
+/// Native catches failures from both face construction and `Face()` before using GeomFill.
+fn planar_wall(wire: &Wire) -> Result<Face, Failure> {
+    let maker = BRepLibMakeFace::from_wire(wire, true)?;
+    if !maker.is_done() {
+        return Ok(Face::default());
+    }
+    maker.face()
 }
 
 fn connecting_edges(
