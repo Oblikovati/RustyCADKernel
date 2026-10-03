@@ -2,14 +2,15 @@
 
 Pinned OCCT revision: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
-This fixture uses the same four line edges with 3D curves and face p-curves as
-the direct `ShapeFix_IntersectionTool` point-crossing fixture. It disables the
-single-edge and adjacent-edge passes, enables the nonadjacent pass, and gives
-the fixer an explicit `ShapeBuild_ReShape` context. The recorded row contains
-the aggregate return, edge count, removed-segment flag, all 19 native status
-queries in enum order, every resulting edge range, and the edge count after
-applying the context to the original wire. This is a focused aggregate case,
-not a claim of whole-class parity.
+Both rows use the same four line edges with 3D curves and face p-curves as the
+direct `ShapeFix_IntersectionTool` point-crossing fixture, with an explicit
+`ShapeBuild_ReShape` context. The first disables the single-edge and adjacent
+passes to isolate nonadjacent handling. The second keeps native default modes
+and exercises the aggregate pass order. Each row contains the aggregate
+return, edge count, removed-segment flag, all 19 native status queries in enum
+order, every resulting edge range, and the edge count after applying the
+context to the original wire. These are focused cases, not a claim of
+whole-class parity.
 
 Build and run:
 
