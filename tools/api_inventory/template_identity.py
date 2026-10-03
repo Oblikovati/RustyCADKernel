@@ -62,20 +62,33 @@ def normalize_nested_lists(parameter: str) -> str | None:
     tokens = lexical_tokens(parameter)
     if tokens is None:
         return None
-    result = parameter
-    for start, end in reversed(template_keyword_bounds(parameter, tokens)):
-        inner = parameter[start + 1 : end]
-        parts = split_template_parameters(inner)
-        if parts is None:
-            return None
-        normalized: list[str] = []
-        for part in parts:
-            item = normalize_parameter(part)
-            if not item.supported:
-                return None
-            normalized.append(item.normalized)
-        result = result[:start + 1] + ", ".join(normalized) + result[end:]
-    return result
+    spans = outermost_template_spans(template_keyword_bounds(parameter, tokens))
+    if len(spans) > 1:
+        return None
+    return normalize_template_parameter_span(parameter, spans[0]) if spans else parameter
+
+
+def outermost_template_spans(
+    spans: list[tuple[int, int]],
+) -> list[tuple[int, int]]:
+    """Keep only non-overlapping outer spans for recursive, offset-safe edits."""
+    return [
+        span
+        for span in spans
+        if not any(other[0] < span[0] and span[1] < other[1] for other in spans)
+    ]
+
+
+def normalize_template_parameter_span(
+    parameter: str, bounds: tuple[int, int]
+) -> str | None:
+    """Normalize one template-template list through recursion before replacing it."""
+    start, end = bounds
+    parts = split_template_parameters(parameter[start + 1 : end])
+    normalized = None if parts is None else normalize_parameters(parts)
+    if normalized is None:
+        return None
+    return parameter[: start + 1] + ", ".join(normalized) + parameter[end:]
 
 
 def template_parameter_bounds(signature: str) -> tuple[int, int] | None:

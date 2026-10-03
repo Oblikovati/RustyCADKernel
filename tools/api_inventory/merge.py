@@ -192,7 +192,7 @@ def mark_unsupported_template_identity(
 ) -> None:
     """Withhold declarations whose template signature cannot be safely normalized."""
     signature = row.get("template_signature")
-    if not isinstance(signature, str):
+    if not isinstance(signature, str) or not signature.strip():
         return
     result = normalize_template_signature(signature)
     if result.supported:

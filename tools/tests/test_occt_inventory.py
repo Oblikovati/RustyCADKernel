@@ -160,6 +160,16 @@ class MergeTests(InventoryFixture):
         self.assertTrue(nested.supported)
         self.assertEqual(nested.normalized, plain.normalized)
 
+    def test_nested_nested_template_defaults_keep_offsets_valid(self) -> None:
+        nested = normalize_template_signature(
+            "template <template <template <typename T = int> class Inner = std::vector> class Outer>"
+        )
+        plain = normalize_template_signature(
+            "template <template <template <typename T> class Inner> class Outer>"
+        )
+        self.assertTrue(nested.supported)
+        self.assertEqual(nested.normalized, plain.normalized)
+
     def test_ambiguous_shift_default_is_marked_unstable(self) -> None:
         records = InventoryRecords()
         row = self.declaration("c:@FT@shift#")
