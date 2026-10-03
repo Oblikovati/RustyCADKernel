@@ -77,7 +77,7 @@ fn choose_cut_values(
     if let Some(values) = super::seam::seam_cuts(face, tool.nb_split_points())? {
         return Ok(Some(values));
     }
-    super::closure::closure_cuts(surface, bounds, tool.nb_split_points())
+    super::closure::closure_cuts(surface, bounds, tool.nb_split_points(), tool.precision())
 }
 
 fn initialize_splitter(
