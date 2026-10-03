@@ -23,7 +23,7 @@ fn missing_source_pcurve_does_not_abort_transformation() {
     );
     assert_eq!(face_count(&fixture.shell), 2);
     let source_curve_before =
-        stored_curve_address(&fixture.transformed_source_edge, &fixture.reference_face);
+        stored_curve_address(&fixture.source_probe_edge, &fixture.reference_face);
 
     let unifier = ShapeUpgradeUnifySameDomain::new(&fixture.shell, false, true, false);
     unifier.allow_internal_edges(true);
@@ -32,10 +32,10 @@ fn missing_source_pcurve_does_not_abort_transformation() {
     let result = unifier.shape();
     assert!(!result.is_null());
     assert_eq!(face_count(&result), 2);
-    assert_ne!(
+    assert_eq!(
         source_curve_before,
-        stored_curve_address(&fixture.transformed_source_edge, &fixture.reference_face),
-        "source p-curve should be copied to the temporary reference support"
+        stored_curve_address(&fixture.source_probe_edge, &fixture.reference_face),
+        "p-curve identity should remain unchanged, matching the pinned OCCT fixture"
     );
     assert!(
         !BRepTool::curve_on_face(&fixture.missing_edge, &fixture.reference_face)
@@ -48,7 +48,9 @@ fn missing_source_pcurve_does_not_abort_transformation() {
 #[test]
 fn missing_pcurve_does_not_abort_unrelated_planar_merge() {
     let fixture = missing_pcurve_shell_fixture();
-    assert!(!fixture.shell.is_null());
+    let shell = add_planar_pair_to_shell(&fixture.shell).expect("planar faces should be added");
+    assert!(!shell.is_null());
+    assert_eq!(face_count(&shell), 4);
     assert!(
         !BRepTool::curve_on_face(&fixture.missing_edge, &fixture.reference_face)
             .unwrap()
@@ -60,13 +62,17 @@ fn missing_pcurve_does_not_abort_unrelated_planar_merge() {
             .is_stored
     );
     let source_curve_before =
-        stored_curve_address(&fixture.transformed_source_edge, &fixture.reference_face);
-    add_planar_pair_to_shell(&fixture.shell)
-        .expect("planar coplanar pair should be added to cylinder shell");
-    assert_ne!(
+        stored_curve_address(&fixture.source_probe_edge, &fixture.reference_face);
+    let unifier = ShapeUpgradeUnifySameDomain::new(&shell, false, true, false);
+    unifier.allow_internal_edges(true);
+    unifier.build().unwrap();
+    let result = unifier.shape();
+    assert!(!result.is_null());
+    assert_eq!(face_count(&result), 3);
+    assert_eq!(
         source_curve_before,
-        stored_curve_address(&fixture.transformed_source_edge, &fixture.reference_face),
-        "source p-curve transfer should run before the unrelated planar merge"
+        stored_curve_address(&fixture.source_probe_edge, &fixture.reference_face),
+        "same-support p-curve identity should remain unchanged"
     );
 }
 
@@ -75,7 +81,7 @@ struct MissingPcurveFixture {
     reference_face: rustycad_tkbrep::topods::Face,
     missing_edge: rustycad_tkbrep::topods::Edge,
     valid_pcurve_edge: rustycad_tkbrep::topods::Edge,
-    transformed_source_edge: rustycad_tkbrep::topods::Edge,
+    source_probe_edge: rustycad_tkbrep::topods::Edge,
 }
 
 fn stored_curve_address(
@@ -170,7 +176,7 @@ fn missing_pcurve_shell_fixture() -> MissingPcurveFixture {
         reference_face: first_face,
         missing_edge: missing,
         valid_pcurve_edge: bd,
-        transformed_source_edge: eb,
+        source_probe_edge: eb,
     }
 }
 
@@ -259,7 +265,7 @@ fn missing_pcurve_transformation_fixture() -> MissingPcurveFixture {
         reference_face: first_face,
         missing_edge: missing,
         valid_pcurve_edge: bc,
-        transformed_source_edge: ef,
+        source_probe_edge: ef,
     }
 }
 
@@ -358,17 +364,13 @@ fn cylinder_shell(builder: &BRepBuilder, faces: &[&rustycad_tkbrep::topods::Face
     shell.into_shape()
 }
 
-fn add_planar_pair_to_shell(shell: &Shape) -> Result<(), rustycad_tkernel::standard::Failure> {
+fn add_planar_pair_to_shell(shell: &Shape) -> Result<Shape, rustycad_tkernel::standard::Failure> {
     let builder = BRepBuilder::default();
     let (left_face, right_face) = planar_pair_faces(&builder)?;
     let mut result = shell.clone();
     builder.add(&mut result, &left_face.into_shape())?;
     builder.add(&mut result, &right_face.into_shape())?;
-    let unifier = ShapeUpgradeUnifySameDomain::new(&result, false, true, false);
-    unifier.allow_internal_edges(true);
-    unifier.build()?;
-    assert_eq!(face_count(&unifier.shape()), 3);
-    Ok(())
+    Ok(result)
 }
 
 fn pcurve_line(first: Point2, last: Point2) -> Geom2dLine {

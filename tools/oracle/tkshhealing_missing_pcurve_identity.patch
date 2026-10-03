@@ -1,0 +1,52 @@
+diff --git a/src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx b/src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx
+--- a/src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx
++++ b/src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx
+@@ -56,6 +56,7 @@
+ 
+ #include <cmath>
+ #include <algorithm>
++#include <iostream>
+ 
+ //=================================================================================================
+ // ShapeUpgrade_UnifySameDomain Tests
+@@ -69,4 +70,5 @@ struct MissingPCurveShape
+   TopoDS_Face  ReferenceFace;
+   TopoDS_Edge  MissingPCurveEdge;
+   TopoDS_Edge  ValidPCurveEdge;
++  TopoDS_Edge  ProbeEdge;
+ };
+@@ -159,5 +161,6 @@ static MissingPCurveShape makeMissingPCurveShape(BRep_Builder& theBuilder)
+   aResult.ReferenceFace     = aSelfTouchingFace;
+   aResult.MissingPCurveEdge = anEdgeBC;
+   aResult.ValidPCurveEdge   = anEdgeBD;
++  aResult.ProbeEdge         = anEdgeEB;
+   return aResult;
+ }
+@@ -211,4 +214,5 @@ static MissingPCurveShape makeMissingPCurveTransformationShape(BRep_Builder& theBuilder)
+   aResult.MissingPCurveEdge = anEdgeBE;
+   aResult.ValidPCurveEdge   = anEdgeBC;
++  aResult.ProbeEdge         = anEdgeEF;
+   return aResult;
+ }
+@@ -580,6 +584,10 @@ TEST(ShapeUpgrade_UnifySameDomainTest, MissingPCurveDoesNotAbortShellProcessing)
+ 
+   ShapeUpgrade_UnifySameDomain aUnifier(aTestShape.Shell, false, true, false);
+   aUnifier.AllowInternalEdges(true);
++  const auto aBefore = BRep_Tool::CurveOnSurface(aTestShape.ProbeEdge, aTestShape.ReferenceFace, aFirst, aLast);
++  std::cerr << "Probe shell/reference handle before: " << static_cast<const void*>(aBefore.get()) << '\n';
+   aUnifier.Build();
++  const auto aAfter = BRep_Tool::CurveOnSurface(aTestShape.ProbeEdge, aTestShape.ReferenceFace, aFirst, aLast);
++  std::cerr << "Probe shell/reference handle after:  " << static_cast<const void*>(aAfter.get()) << '\n';
+ 
+   const TopoDS_Shape& aResult = aUnifier.Shape();
+@@ -608,6 +616,10 @@ TEST(ShapeUpgrade_UnifySameDomainTest, MissingSourcePCurveDuringTransformation)
+ 
+   ShapeUpgrade_UnifySameDomain aUnifier(aTestShape.Shell, false, true, false);
+   aUnifier.AllowInternalEdges(true);
++  const auto aBefore = BRep_Tool::CurveOnSurface(aTestShape.ProbeEdge, aTestShape.ReferenceFace, aFirst, aLast);
++  std::cerr << "Probe source/reference handle before: " << static_cast<const void*>(aBefore.get()) << '\n';
+   aUnifier.Build();
++  const auto aAfter = BRep_Tool::CurveOnSurface(aTestShape.ProbeEdge, aTestShape.ReferenceFace, aFirst, aLast);
++  std::cerr << "Probe source/reference handle after:  " << static_cast<const void*>(aAfter.get()) << '\n';
+ 
+   const TopoDS_Shape& aResult = aUnifier.Shape();
