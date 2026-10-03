@@ -4,7 +4,9 @@ use rustycad_tkernel::{
     standard::Handle,
 };
 use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCircle, Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCircle, GeomCurve, GeomLine, GeomTrimmedCurve};
+use rustycad_tkg3d::geom::{
+    GeomBezierCurve, GeomCircle, GeomCurve, GeomEllipse, GeomLine, GeomTrimmedCurve,
+};
 use rustycad_tkmath::gp::{Axis1, Axis2, Direction2, Direction3, Point2, Point3};
 use rustycad_tkshhealing::{
     shape_extend::ShapeExtendStatus,
@@ -168,9 +170,21 @@ fn split3(
     line_mode: bool,
     circle_mode: bool,
 ) {
+    split3_with_conic(name, curve, range, line_mode, circle_mode, true);
+}
+
+fn split3_with_conic(
+    name: &str,
+    curve: &Handle<dyn GeomCurve>,
+    range: (f64, f64),
+    line_mode: bool,
+    circle_mode: bool,
+    conic_mode: bool,
+) {
     let tool = ShapeUpgradeConvertCurve3dToBezier::new();
     tool.set_line_mode(line_mode);
     tool.set_circle_mode(circle_mode);
+    tool.set_conic_mode(conic_mode);
     tool.init_curve_range(curve, range.0, range.1).unwrap();
     let values = Handle::new(HSequence::default());
     values.append((range.0 + range.1) / 2.);
@@ -178,6 +192,18 @@ fn split3(
     tool.compute().unwrap();
     tool.build(true).unwrap();
     check3(name, &tool);
+}
+
+#[test]
+fn native_3d_ellipse_conic_mode_matches() {
+    let ellipse: Handle<dyn GeomCurve> =
+        Handle::new(GeomEllipse::new(Axis2::default(), 3., 2.).unwrap()).cast();
+    for (name, enabled) in [
+        ("ellipse-conic-mode-off", false),
+        ("ellipse-conic-mode-on", true),
+    ] {
+        split3_with_conic(name, &ellipse, (0., 1.), true, true, enabled);
+    }
 }
 
 fn check3(name: &str, tool: &ShapeUpgradeConvertCurve3dToBezier) {
