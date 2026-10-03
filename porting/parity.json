@@ -224988,6 +224988,42 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::split_one_face",
       "status": "partial",
       "notes": "Partial: empty-face false result is pinned. Recursive splitting is unported; native detection reads uninitialized myPrecision and cannot be assigned a defined cross-run result."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::SetMaxTailAngle(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_max_tail_angle",
+      "status": "partial",
+      "notes": "Source-pinned scalar setter stores max(sin(angle), 0). Direct value observation and non-default angle effect are not yet covered by the Rust/native differential fixture."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::SetMaxTailWidth(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_max_tail_width",
+      "status": "implemented",
+      "notes": "Source-pinned scalar setter; removable-tail differential fixture configures a positive width and observes the resulting edge removal. Other FixTails branches remain open."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixTails()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_tails",
+      "status": "partial",
+      "notes": "Exact native oracle covers no-match status retention and a removable two-edge tail. Remaining tail representations and p-curve/context failure branches are not yet proven."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixNotchedEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_notched_edges",
+      "status": "partial",
+      "notes": "Native differential covers a planar three-edge overlap that splits the long edge and removes the short edge, plus status and mode-accessor rows. Curved/seam p-curves, context failures and full Perform dispatch remain open."
     }
   ],
   "tests": [
