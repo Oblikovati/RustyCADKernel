@@ -221831,6 +221831,33 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_curve_gaps",
       "status": "implemented",
       "notes": "Native 45-point curve/surface adaptor sampling, independent parameter ranges, reversal-independent evaluation, retained metrics on missing-curve failure, aggregate reset/OR and ClearStatuses. Five pinned native rows compared exactly, plus unloaded checks. Does not establish full wire or toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSmall(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_small",
+      "status": "implemented",
+      "notes": "Native vertex-distance and midpoint checks, 3D-to-pcurve fallback, degenerate pcurve guard, simultaneous DONE/FAIL and persistent aggregate flags. Eleven pinned native observations compared exactly. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSmall(int,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_small_at",
+      "status": "implemented",
+      "notes": "Native vertex-distance and midpoint checks, 3D-to-pcurve fallback, degenerate pcurve guard, simultaneous DONE/FAIL and persistent aggregate flags. Eleven pinned native observations compared exactly. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusSmall(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_small",
+      "status": "implemented",
+      "notes": "Native vertex-distance and midpoint checks, 3D-to-pcurve fallback, degenerate pcurve guard, simultaneous DONE/FAIL and persistent aggregate flags. Eleven pinned native observations compared exactly. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

@@ -19,6 +19,7 @@ mod gaps;
 mod lacking;
 mod order;
 mod shape_connect;
+mod small;
 mod state;
 struct WireAnalysisFields {
     wire: Handle<ShapeExtendWireData>,
@@ -34,6 +35,7 @@ struct WireAnalysisFields {
     status_degenerated: i32,
     status_closed: i32,
     status_lacking: i32,
+    status_small: i32,
     min_3d: f64,
     max_3d: f64,
     min_2d: f64,
@@ -69,6 +71,7 @@ impl Default for ShapeAnalysisWire {
                 status_degenerated: 0,
                 status_closed: 0,
                 status_lacking: 0,
+                status_small: 0,
                 min_3d: 0.,
                 max_3d: 0.,
                 min_2d: 0.,
