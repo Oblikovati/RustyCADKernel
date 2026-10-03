@@ -20,6 +20,8 @@ mod wire_intersection_tool;
 mod wire_lacking;
 #[path = "wire_nonadjacent_intersection_fix.rs"]
 mod wire_nonadjacent_intersection_fix;
+#[path = "wire_perform.rs"]
+mod wire_perform;
 #[path = "wire_seam.rs"]
 mod wire_seam;
 #[path = "wire_self_intersection_fix.rs"]
@@ -85,6 +87,16 @@ struct WireFixState {
     same_parameter_mode: i32,
     vertex_tolerance_mode: i32,
     edge_curves_status: i32,
+    fix_reorder_mode: i32,
+    fix_small_mode: i32,
+    fix_connected_mode: i32,
+    fix_degenerated_mode: i32,
+    fix_notched_edges_mode: i32,
+    fix_tail_mode: i32,
+    fix_self_intersection_mode: i32,
+    fix_lacking_mode: i32,
+    notches_status: i32,
+    tails_status: i32,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -127,6 +139,16 @@ impl Default for ShapeFixWire {
                 same_parameter_mode: -1,
                 vertex_tolerance_mode: -1,
                 edge_curves_status: 0,
+                fix_reorder_mode: -1,
+                fix_small_mode: -1,
+                fix_connected_mode: -1,
+                fix_degenerated_mode: -1,
+                fix_notched_edges_mode: -1,
+                fix_tail_mode: 0,
+                fix_self_intersection_mode: -1,
+                fix_lacking_mode: -1,
+                notches_status: 0,
+                tails_status: 0,
             }),
             edge_fixer: Handle::new(ShapeFixEdge::new()),
         }
@@ -670,6 +692,8 @@ impl ShapeFixWire {
         state.small_status = 0;
         state.connected_status = 0;
         state.closed_status = 0;
+        state.notches_status = 0;
+        state.tails_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {

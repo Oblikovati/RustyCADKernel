@@ -1,6 +1,7 @@
 //! Working analyzer delegation for ShapeFix_Wire.
 use super::ShapeFixWire;
 use crate::shape_analysis::{ShapeAnalysisSurface, ShapeAnalysisWire};
+use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use crate::shape_fix::FixRoot;
 use rustycad_tkbrep::topods::{Face, Wire};
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -8,6 +9,56 @@ use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 
 impl ShapeFixWire {
+    /// Selects aggregate reorder behavior; `fixer.set_fix_reorder_mode(0)` disables it.
+    pub fn set_fix_reorder_mode(&self, mode: i32) {
+        self.state.write().fix_reorder_mode = mode;
+    }
+
+    /// Selects aggregate small-edge repair; `fixer.set_fix_small_mode(1)` enables it.
+    pub fn set_fix_small_mode(&self, mode: i32) {
+        self.state.write().fix_small_mode = mode;
+    }
+
+    /// Selects aggregate vertex-connection repair; `fixer.set_fix_connected_mode(0)` disables it.
+    pub fn set_fix_connected_mode(&self, mode: i32) {
+        self.state.write().fix_connected_mode = mode;
+    }
+
+    /// Selects aggregate degenerated-edge repair; `fixer.set_fix_degenerated_mode(1)` enables it.
+    pub fn set_fix_degenerated_mode(&self, mode: i32) {
+        self.state.write().fix_degenerated_mode = mode;
+    }
+
+    /// Selects aggregate notched-edge repair; `fixer.set_fix_notched_edges_mode(0)` disables it.
+    pub fn set_fix_notched_edges_mode(&self, mode: i32) {
+        self.state.write().fix_notched_edges_mode = mode;
+    }
+
+    /// Selects aggregate tail repair; `fixer.set_fix_tail_mode(1)` enables it.
+    pub fn set_fix_tail_mode(&self, mode: i32) {
+        self.state.write().fix_tail_mode = mode;
+    }
+
+    /// Selects aggregate self-intersection repair; `fixer.set_fix_self_intersection_mode(0)` disables it.
+    pub fn set_fix_self_intersection_mode(&self, mode: i32) {
+        self.state.write().fix_self_intersection_mode = mode;
+    }
+
+    /// Selects aggregate missing-edge repair; `fixer.set_fix_lacking_mode(1)` enables it.
+    pub fn set_fix_lacking_mode(&self, mode: i32) {
+        self.state.write().fix_lacking_mode = mode;
+    }
+
+    /// Reads aggregate notched-edge status; `fixer.status_notches(ShapeExtendStatus::Done)`.
+    pub fn status_notches(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().notches_status, status)
+    }
+
+    /// Reads aggregate tail status; `fixer.status_fix_tails(ShapeExtendStatus::Done)`.
+    pub fn status_fix_tails(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().tails_status, status)
+    }
+
     /// Sets whether high-level `Perform` invokes `FixEdgeCurves`; `fixer.set_fix_edge_curves_mode(0)`.
     pub fn set_fix_edge_curves_mode(&self, mode: i32) {
         self.state.write().edge_curves_mode = mode;
