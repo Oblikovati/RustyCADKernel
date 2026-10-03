@@ -220823,6 +220823,38 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceAngle::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_split_surface_angle.cxx: 15 bit-exact generated cases cover rotational classes, one-level wrapper recognition, status retention and parameter identity. Undefined native float-to-int conversions become explicit Rust failure; these cases are not parity evidence. Legacy tests remain separate."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2dContinuity::SetTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2dContinuity::set_tolerance",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_curve2d_continuity.cxx preserves PConfusion default, persistent knot cursor, inclusive last-bound threshold, and unchanged last-index after removal. Generated oracle fixtures remain separate from legacy tests; full module acceptance is pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2dContinuity::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2dContinuity::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::compute",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_curve2d_continuity.cxx preserves PConfusion default, persistent knot cursor, inclusive last-bound threshold, and unchanged last-index after removal. Generated oracle fixtures remain separate from legacy tests; full module acceptance is pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2dContinuity::ShapeUpgrade_SplitCurve2dContinuity()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2dContinuity::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_curve2d_continuity.cxx preserves PConfusion default, persistent knot cursor, inclusive last-bound threshold, and unchanged last-index after removal. Generated oracle fixtures remain separate from legacy tests; full module acceptance is pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2dContinuity::SetCriterion(const GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2dContinuity::set_criterion",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_curve2d_continuity.cxx preserves PConfusion default, persistent knot cursor, inclusive last-bound threshold, and unchanged last-index after removal. Generated oracle fixtures remain separate from legacy tests; full module acceptance is pending."
     }
   ],
   "tests": [

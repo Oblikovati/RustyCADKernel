@@ -1012,3 +1012,12 @@ native oracle cases and three Rust tests cover private geometry, knot mutation,
 status overwrites, copied wrapper recursion, handle identity and virtual dispatch.
 Additional periodic fixtures are in progress. These generated probes do not replace
 legacy test declarations, and none of these entries asserts toolkit completion.
+
+`ShapeUpgradeSplitCurve2dContinuity` additionally preserves the native 2D scan's
+persistent knot cursor and removal-index behavior; it has ten native oracle rows.
+`ShapeUpgradeClosedEdgeDivide` preserves the 22-step repeated-addition sample loop,
+3D-curve precedence, tolerance limits, and shared splitting tools (seven oracle rows).
+`ShapeUpgradeSplitSurfaceAngle` preserves one-level wrapper recognition, native
+status retention and angular interval arithmetic (fifteen oracle rows). Undefined
+native integer conversions return an explicit Rust failure documented separately.
+All four explicit angle methods and both closed-edge methods have API mappings.

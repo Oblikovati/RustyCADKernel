@@ -111,7 +111,7 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json 
   --occt-source /path/to/OCCT --output target/api-proof/tkernel-joined-runtime.json
 ```
 
-The current API crosswalk resolves 19,880 implemented declaration claims; 7,205
+The published API crosswalk at Rust revision `27399709` resolves 19,880 implemented declaration claims; 7,205
 ledger rows remain unresolved. It is not a behavioral coverage percentage.
 
 ### TKMath paired run
