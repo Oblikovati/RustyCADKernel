@@ -8,7 +8,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
-use rustycad_tkoffset::brep_offset::BRepOffsetAPIMakeOffsetShape;
+use rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape};
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
