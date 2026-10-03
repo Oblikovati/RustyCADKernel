@@ -1,6 +1,7 @@
-//! Native BoxBndTree selection: traversal order and tail preference are observable.
+//! Adapt zero-based working wires to the public native endpoint selector.
 use super::*;
-use rustycad_tkernel::ncollection::TreeSelector;
+use crate::shape_analysis::ShapeAnalysisBoxBndTreeSelector;
+use rustycad_tkernel::ncollection::{FallibleTreeSelector, HArray1};
 use rustycad_tkmath::{bnd::BoundingBox3, gp::Point3};
 pub(super) struct BoundsSelector<'a> {
     pub wires: &'a mut [Shape],
@@ -8,142 +9,88 @@ pub(super) struct BoundsSelector<'a> {
     pub selected: usize,
     pub status: i32,
     shared: bool,
-    stop: bool,
-    ends: [Vertex; 2],
-    points: [Point3; 2],
-    boxes: [BoundingBox3; 2],
-    indices: [usize; 2],
-    tolerance: f64,
-    minimum: f64,
-    pub error: Option<Failure>,
+    selector: ShapeAnalysisBoxBndTreeSelector,
 }
 impl<'a> BoundsSelector<'a> {
-    pub fn new(wires: &'a mut [Shape], shared: bool) -> Self {
-        Self {
+    pub fn new(wires: &'a mut [Shape], shared: bool) -> Result<Self, Failure> {
+        let array = wire_array(wires)?;
+        Ok(Self {
             consumed: vec![false; wires.len()],
             wires,
             selected: 0,
             status: 0,
             shared,
-            stop: false,
-            ends: Default::default(),
-            points: Default::default(),
-            boxes: Default::default(),
-            indices: [0; 2],
-            tolerance: 1e-7,
-            minimum: 1e-7,
-            error: None,
-        }
+            selector: ShapeAnalysisBoxBndTreeSelector::new(&array, shared),
+        })
     }
     pub fn reset(&mut self, ends: [Vertex; 2], tolerance: f64) -> Result<(), Failure> {
-        self.stop = false;
-        self.indices = [0; 2];
-        self.points = [BRepTool::pnt(&ends[0])?, BRepTool::pnt(&ends[1])?];
-        self.boxes = self.points.map(|point| endpoint_box(point, tolerance));
-        self.ends = ends;
+        self.selector.set_stop();
+        let points = [BRepTool::pnt(&ends[0])?, BRepTool::pnt(&ends[1])?];
+        let boxes = points.map(|point| endpoint_box(point, tolerance));
+        self.selector.define_boxes(&boxes[0], &boxes[1]);
+        self.selector.define_pnt(points[0], points[1]);
+        self.selector
+            .define_vertexes(ends[0].clone(), ends[1].clone());
         self.status = 0;
         if !self.shared {
-            self.tolerance = tolerance;
-            self.minimum = tolerance;
+            self.selector.set_tolerance(tolerance);
         }
         Ok(())
     }
-    fn accept_wire(&mut self, index: usize) -> Result<bool, Failure> {
-        if self.consumed[index] {
-            return Ok(false);
-        }
-        let (first, last) =
-            rustycad_tkbrep::topexp::wire_vertices(&topods::wire(&self.wires[index])?);
-        if self.shared {
-            return Ok(self.accept_shared(index, &[first, last]));
-        }
-        let points = [BRepTool::pnt(&first)?, BRepTool::pnt(&last)?];
-        Ok(self.accept_nearest(index, points))
-    }
-    fn accept_shared(&mut self, index: usize, ends: &[Vertex; 2]) -> bool {
-        let pairs = [(1, 0), (1, 1), (0, 1), (0, 0)];
-        let Some(kind) = pairs
+    fn synchronize_selection(&mut self) {
+        self.selected = self.selector.nb().saturating_sub(1) as usize;
+        let flags = [
+            ShapeExtendStatus::Done1,
+            ShapeExtendStatus::Done2,
+            ShapeExtendStatus::Done3,
+            ShapeExtendStatus::Done4,
+        ];
+        self.status = flags
             .iter()
-            .position(|&(own, other)| self.ends[own].is_same(&ends[other]))
-        else {
-            self.status = -2;
-            self.stop = false;
-            return false;
-        };
-        self.status = kind as i32 + 1;
-        self.indices[if kind < 2 { 1 } else { 0 }] = index + 1;
-        self.selected = index;
-        if self.indices[1] != 0 {
-            self.stop = true;
-        }
-        true
-    }
-    fn endpoint_distances(&self, points: [Point3; 2]) -> [f64; 4] {
-        [
-            points[0].distance(&self.points[1]),
-            points[1].distance(&self.points[1]),
-            points[1].distance(&self.points[0]),
-            points[0].distance(&self.points[0]),
-        ]
-    }
-    fn accept_nearest(&mut self, index: usize, points: [Point3; 2]) -> bool {
-        let distances = self.endpoint_distances(points);
-        let tail = usize::from(distances[0] > distances[1]);
-        let head = 2 + usize::from(distances[2] > distances[3]);
-        let kind = if distances[tail] > distances[head] {
-            head
-        } else {
-            tail
-        };
-        let minimum = if distances[head] < distances[tail] {
-            distances[head]
-        } else {
-            distances[tail]
-        };
-        if minimum > self.minimum {
-            return false;
-        }
-        self.accept_distance(index, kind, minimum)
-    }
-    fn accept_distance(&mut self, index: usize, kind: usize, minimum: f64) -> bool {
-        self.indices[if kind < 2 { 1 } else { 0 }] = index + 1;
-        // The upstream positive-difference condition cannot fire after the preceding rejection.
-        self.minimum = minimum;
-        if minimum > self.tolerance {
-            self.status = -2;
-            return false;
-        }
-        self.selected = if self.indices[1] != 0 {
-            self.indices[1] - 1
-        } else {
-            self.indices[0] - 1
-        };
-        if minimum == 0. && kind < 2 {
-            self.stop = true;
-        }
-        if self.selected == index {
-            self.status = kind as i32 + 1;
-        }
-        true
+            .position(|flag| self.selector.last_check_status(*flag))
+            .map_or_else(
+                || {
+                    if self.selector.last_check_status(ShapeExtendStatus::Fail2) {
+                        -2
+                    } else {
+                        0
+                    }
+                },
+                |index| index as i32 + 1,
+            );
     }
 }
-impl TreeSelector<usize, BoundingBox3> for BoundsSelector<'_> {
+impl FallibleTreeSelector<usize, BoundingBox3> for BoundsSelector<'_> {
+    type Error = Failure;
     fn reject(&self, bounds: &BoundingBox3) -> bool {
-        self.boxes[0].is_out_box(bounds) && self.boxes[1].is_out_box(bounds)
+        self.selector.reject(bounds)
     }
-    fn accept(&mut self, index: &usize) -> bool {
-        match self.accept_wire(*index) {
-            Ok(accepted) => accepted,
-            Err(error) => {
-                self.error = Some(error);
-                self.stop = true;
-                false
-            }
+    fn accept(&mut self, index: &usize) -> Result<bool, Failure> {
+        if self.consumed[*index] {
+            return Ok(false);
         }
+        let accepted = self.selector.accept((*index + 1) as i32)?;
+        self.synchronize_selection();
+        Ok(accepted)
     }
     fn stop(&self) -> bool {
-        self.stop
+        self.selector.stop()
     }
+}
+fn wire_array(wires: &[Shape]) -> Result<Handle<HArray1<Shape>>, Failure> {
+    let count = i32::try_from(wires.len()).map_err(|_| wire_count_failure(wires.len()))?;
+    let array =
+        HArray1::<Shape>::with_bounds(1, count).map_err(|_| wire_count_failure(wires.len()))?;
+    // Slots are reversed only after consumption; shared TShapes preserve all live endpoint changes.
+    array.change_array1().as_mut_slice().clone_from_slice(wires);
+    Ok(Handle::new(array))
+}
+fn wire_count_failure(count: usize) -> Failure {
+    Failure::with_type(
+        "Standard_OutOfRange",
+        &format!("wire count {count}; expected 1..=i32::MAX"),
+        "",
+    )
 }
 pub(super) fn endpoint_box(point: Point3, tolerance: f64) -> BoundingBox3 {
     let mut bounds = BoundingBox3::default();

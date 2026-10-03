@@ -49,3 +49,6 @@ pub use wire_vertex::ShapeAnalysisWireVertex;
 
 mod shape_contents;
 pub use shape_contents::ShapeAnalysisShapeContents;
+
+mod box_bnd_tree;
+pub use box_bnd_tree::ShapeAnalysisBoxBndTreeSelector;

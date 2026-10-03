@@ -17,7 +17,7 @@ pub(super) fn connect_wires(
     }
     let mut working = wires.to_vec();
     let tolerance = tolerance.max(precision::confusion());
-    let mut selector = BoundsSelector::new(&mut working, shared);
+    let mut selector = BoundsSelector::new(&mut working, shared)?;
     let Some(wire) = initialize_chains(&mut selector, output)? else {
         return Ok(());
     };
@@ -121,10 +121,7 @@ fn select_next(
         ],
         tolerance,
     )?;
-    let accepted = tree.select(selector);
-    if let Some(error) = selector.error.take() {
-        return Err(error);
-    }
+    let accepted = tree.try_select(selector)?;
     Ok(accepted != 0 && selector.status > 0)
 }
 fn finish_chain(
