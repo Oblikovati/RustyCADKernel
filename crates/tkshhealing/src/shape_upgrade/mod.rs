@@ -68,6 +68,9 @@ pub use split_surface_angle::ShapeUpgradeSplitSurfaceAngle;
 mod split_surface_area;
 pub use split_surface_area::ShapeUpgradeSplitSurfaceArea;
 
+mod convert_surface_bezier;
+pub use convert_surface_bezier::ShapeUpgradeConvertSurfaceToBezierBasis;
+
 mod split_curve2d_continuity;
 pub use split_curve2d_continuity::ShapeUpgradeSplitCurve2dContinuity;
 mod curve_continuity;
