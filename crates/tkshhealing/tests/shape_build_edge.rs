@@ -3,12 +3,16 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
+use rustycad_tkg3d::geom::{GeomCurve, GeomCylindricalSurface, GeomLine, GeomPlane, GeomSurface};
 use rustycad_tkmath::gp::{
     Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3, Transform2, Transform3, Vector3,
 };
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::shape_build::{ShapeBuildEdge, ShapeBuildVertex};
+use rustycad_tktopalgo::brep_lib::BRepLibMakeEdge;
+
+const REASSIGN_ORACLE: &str =
+    include_str!("../../../tools/oracle/tkshhealing_reassign_pcurve.expected");
 
 fn plane() -> Handle<dyn GeomSurface> {
     Handle::new(GeomPlane::new(Axis3::default())).cast()
@@ -201,4 +205,179 @@ fn combine_vertex_keeps_the_larger_sphere_or_spans_both() {
         .unwrap();
     assert_eq!(BRepTool::pnt(&spanning).unwrap().x(), 1.0);
     assert_eq!(BRepTool::vertex_tolerance(&spanning).unwrap(), 1.5);
+}
+
+#[test]
+fn reassign_pcurve_moves_single_and_plane_generated_curves() {
+    let (edge, old_face, new_face) = planar_reassign_fixture(true);
+    assert_reassign_case("ordinary", &edge, &old_face, &new_face);
+
+    let (edge, old_face, new_face) = planar_reassign_fixture(false);
+    assert_reassign_case("plane-generated", &edge, &old_face, &new_face);
+}
+
+#[test]
+fn reassign_pcurve_splits_old_seam_and_extends_existing_target_curve() {
+    let (edge, old_face, new_face) = cylindrical_seam_reassign_fixture();
+    assert_reassign_case("seam-into-seam", &edge, &old_face, &new_face);
+}
+
+#[test]
+fn reassign_pcurve_preserves_reversed_edge_seam_order() {
+    let (mut edge, old_face, new_face) = cylindrical_seam_reassign_fixture();
+    edge.reverse();
+    assert_reassign_case("seam-into-seam-reversed", &edge, &old_face, &new_face);
+}
+
+#[test]
+fn reassign_pcurve_returns_false_when_source_has_no_pcurve() {
+    let mut edge = Edge::default();
+    BRepBuilder::default().make_edge(&mut edge).unwrap();
+    let old_face = cylinder_face(1.);
+    let new_face = plane_face(0.);
+    assert_reassign_case("missing-source", &edge, &old_face, &new_face);
+}
+
+fn planar_reassign_fixture(has_stored_curve: bool) -> (Edge, Face, Face) {
+    let edge = BRepLibMakeEdge::from_points(Point3::new(0., 0., 0.), Point3::new(1., 0., 0.))
+        .unwrap()
+        .edge()
+        .unwrap();
+    let (old_face, new_face) = (plane_face(0.), plane_face(1.));
+    if has_stored_curve {
+        let builder = BRepBuilder::default();
+        builder
+            .update_edge_pcurve_on_face(&edge, &x_line_2d(), &old_face, 1e-7)
+            .unwrap();
+        builder.range_on_face(&edge, &old_face, 0., 1.).unwrap();
+    }
+    (edge, old_face, new_face)
+}
+
+fn plane_face(z: f64) -> Face {
+    let surface: Handle<dyn GeomSurface> = Handle::new(
+        GeomPlane::from_point(Point3::new(0., 0., z), Direction3::new(0., 0., 1.).unwrap())
+            .unwrap(),
+    )
+    .cast();
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface, 1e-7)
+        .unwrap();
+    face
+}
+
+fn cylindrical_seam_reassign_fixture() -> (Edge, Face, Face) {
+    let mut edge = Edge::default();
+    BRepBuilder::default().make_edge(&mut edge).unwrap();
+    let (old_face, new_face) = (cylinder_face(1.), cylinder_face(2.));
+    let first = line_pcurve(Point2::new(0., 0.));
+    let second = line_pcurve(Point2::new(std::f64::consts::TAU, 0.));
+    BRepBuilder::default()
+        .update_edge_pcurves_on_face(&edge, (&first, &second), &old_face, 1e-7)
+        .unwrap();
+    BRepBuilder::default()
+        .range_on_face(&edge, &old_face, 0., 1.)
+        .unwrap();
+    set_face_line_pcurve(&edge, &new_face, Point2::new(0.3, 0.));
+    (edge, old_face, new_face)
+}
+
+fn cylinder_face(radius: f64) -> Face {
+    let surface: Handle<dyn GeomSurface> =
+        Handle::new(GeomCylindricalSurface::new(Axis3::default(), radius).unwrap()).cast();
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface, 1e-7)
+        .unwrap();
+    face
+}
+
+fn line_pcurve(point: Point2) -> Handle<dyn Geom2dCurve> {
+    Handle::new(Geom2dLine::from_point(
+        point,
+        Direction2::new(0., 1.).unwrap(),
+    ))
+    .cast()
+}
+
+fn set_face_line_pcurve(edge: &Edge, face: &Face, point: Point2) {
+    BRepBuilder::default()
+        .update_edge_pcurve_on_face(edge, &line_pcurve(point), face, 1e-7)
+        .unwrap();
+    BRepBuilder::default()
+        .range_on_face(edge, face, 0., 1.)
+        .unwrap();
+}
+
+fn assert_reassign_case(name: &str, edge: &Edge, old_face: &Face, new_face: &Face) {
+    let expected: Vec<&str> = REASSIGN_ORACLE
+        .lines()
+        .find(|line| line.starts_with(name))
+        .unwrap()
+        .split_whitespace()
+        .collect();
+    assert_eq!(
+        ShapeBuildEdge
+            .reassign_pcurve(edge, old_face, new_face)
+            .unwrap(),
+        expected[1] == "1"
+    );
+    assert_face_curve(&expected, edge, old_face, 2, 4, 6);
+    assert_face_curve(&expected, edge, new_face, 3, 5, 12);
+}
+
+fn assert_face_curve(
+    expected: &[&str],
+    edge: &Edge,
+    face: &Face,
+    stored_index: usize,
+    closed_index: usize,
+    range_index: usize,
+) {
+    let curve = BRepTool::curve_on_face(edge, face).unwrap();
+    let closed = BRepTool::is_closed_on_face(edge, face).unwrap();
+    assert_eq!(curve.is_stored, expected[stored_index] == "1");
+    assert_eq!(closed, expected[closed_index] == "1");
+    if curve.pcurve.is_null() {
+        return;
+    }
+    assert_pcurve_values(
+        &curve.pcurve,
+        curve.first,
+        curve.last,
+        expected,
+        range_index,
+    );
+}
+
+fn assert_pcurve_values(
+    pcurve: &Handle<dyn Geom2dCurve>,
+    first: f64,
+    last: f64,
+    expected: &[&str],
+    range_index: usize,
+) {
+    let pcurve = pcurve.get().unwrap();
+    let first_point = pcurve.value(first).unwrap();
+    let last_point = pcurve.value(last).unwrap();
+    let actual = [
+        first,
+        last,
+        first_point.x(),
+        first_point.y(),
+        last_point.x(),
+        last_point.y(),
+    ];
+    for (index, (value, field)) in actual
+        .into_iter()
+        .zip(&expected[range_index..range_index + 6])
+        .enumerate()
+    {
+        let oracle_value = field.parse::<f64>().unwrap();
+        assert!(
+            (value - oracle_value).abs() < 1e-11,
+            "native p-curve mismatch at {index}: actual={value} expected={oracle_value} row={expected:?}"
+        );
+    }
 }
