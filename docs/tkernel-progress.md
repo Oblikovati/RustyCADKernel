@@ -1173,8 +1173,9 @@ Standard_ArrayStreamBuffer, Standard_Dump and Plugin.hxx have 89 rows (80 implem
 - **Standard_Mutex and Standard_Condition.** The implementation creates a recursive
   pthread mutex (the header says otherwise), so `StandardMutex` keeps an owner and a
   depth: the owner re-locks, `try_lock` fails only for other threads, and an unlock by a
-  non-owner does nothing (pthread EPERM). `Sentry` unlocks on drop, also during a panic,
-  which replaces the error-handler callback. `StandardCondition` is the manual-reset
+  non-owner does nothing (pthread EPERM). `Sentry` registers an error-handler callback
+  and unlocks when that handler is destroyed. A one-shot release also handles normal
+  drop and unwinding without a second unlock. `StandardCondition` is the manual-reset
   event; `Wait(int)` is `wait_timeout`, and a zero or negative limit only tests the flag.
   Thread scripts are compared token by token.
 - **Standard_CLocaleSentry.** On POSIX, the sentry activates one cached C locale
