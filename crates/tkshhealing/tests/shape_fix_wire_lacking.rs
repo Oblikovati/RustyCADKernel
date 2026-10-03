@@ -63,7 +63,7 @@ fn topology_mode_inserts_closed_edge_when_existing_vertices_are_off_surface() {
 }
 
 #[test]
-fn topological_backtracking_curve_matches_native_add_edge_status() {
+fn topology_mode_inserts_closed_edge_for_backtracking_curve() {
     let (analyzer, _, wire) = topology_gap_wire(0.001);
     let fixer = ShapeFixWire::new();
     fixer.init(&analyzer);
@@ -76,7 +76,7 @@ fn topological_backtracking_curve_matches_native_add_edge_status() {
     assert!(
         EXPECTED
             .lines()
-            .any(|row| row == "long=1 count=2 done1=0 done2=1 done4=1 fail1=0")
+            .any(|row| row == "closed=1 count=2 done1=0 done2=1 done4=1 fail1=0")
     );
 }
 
