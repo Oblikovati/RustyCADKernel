@@ -9,6 +9,8 @@ pub fn face_count(shape: &Shape) -> usize {
         .count()
 }
 
+// This shared fixture is unused by some integration-test binaries.
+#[allow(dead_code)]
 pub fn rectangle_wire(x_min: f64, x_max: f64, y_min: f64, y_max: f64) -> Wire {
     let points = [
         Point3::new(x_min, y_min, 0.0),
