@@ -1,5 +1,5 @@
 //! Native-backed no-change behavior of the `ShapeFix_FixSmallFace` spot phase.
-use rustycad_tkbrep::brep::BRepBuilder;
+use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Builder, Compound, Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::standard::Handle;
@@ -7,7 +7,10 @@ use rustycad_tkg3d::geom::{GeomCircle, GeomCurve};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
-use rustycad_tkshhealing::{shape_extend::ShapeExtendStatus, shape_fix::ShapeFixFixSmallFace};
+use rustycad_tkshhealing::{
+    shape_extend::ShapeExtendStatus,
+    shape_fix::{FixRoot, ShapeFixFixSmallFace},
+};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 #[test]
@@ -46,6 +49,33 @@ fn spot_face_is_removed_from_a_compound_and_regular_faces_survive() {
     assert_eq!(count_shapes(&output, ShapeEnum::Edge), 24);
     assert_eq!(count_shapes(&output, ShapeEnum::Vertex), 48);
     assert!(fixer.status(ShapeExtendStatus::Done1));
+}
+
+#[test]
+fn strip_face_replacement_matches_thin_box_topology() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected")
+        .lines()
+        .find(|row| row.starts_with("thin_solid "))
+        .unwrap();
+    let native_bounds = expected
+        .split_whitespace()
+        .skip(7)
+        .map(|value| value.parse::<f64>().unwrap())
+        .collect::<Vec<_>>();
+    assert_eq!(native_bounds.len(), 6);
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0e-4, 1.0e-4).unwrap();
+    let input = box_maker.shape().unwrap().clone();
+    let fixer = ShapeFixFixSmallFace::new(input.clone());
+    FixRoot::set_precision(&fixer, 0.001);
+    let output = fixer.fix_strip_face(false).unwrap();
+    assert!(!output.is_same(&input));
+    assert_eq!(output.shape_type().unwrap(), ShapeEnum::Solid);
+    assert_eq!(count_shapes(&output, ShapeEnum::Face), 3);
+    assert_eq!(count_shapes(&output, ShapeEnum::Edge), 6);
+    assert_eq!(count_shapes(&output, ShapeEnum::Vertex), 12);
+    let actual_bounds = vertex_bounds(&output);
+    assert_eq!(actual_bounds, native_bounds.as_slice());
+    assert!(fixer.status(ShapeExtendStatus::Done2));
 }
 
 fn compound_with_tiny_face_and_regular_box() -> Shape {
@@ -116,4 +146,32 @@ fn count_shapes(shape: &Shape, target: ShapeEnum) -> usize {
 fn first_face(shape: &Shape) -> Face {
     let explorer = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
     topods::face(explorer.current()).unwrap()
+}
+
+fn vertex_bounds(shape: &Shape) -> [f64; 6] {
+    let mut bounds = [
+        f64::INFINITY,
+        f64::NEG_INFINITY,
+        f64::INFINITY,
+        f64::NEG_INFINITY,
+        f64::INFINITY,
+        f64::NEG_INFINITY,
+    ];
+    let mut vertices = Explorer::new(shape, ShapeEnum::Vertex, ShapeEnum::Shape).unwrap();
+    while vertices.more() {
+        let vertex = topods::vertex(vertices.current()).unwrap();
+        let point = BRepTool::pnt(&vertex).unwrap();
+        update_bounds(&mut bounds, point);
+        vertices.next().unwrap();
+    }
+    bounds
+}
+
+fn update_bounds(bounds: &mut [f64; 6], point: Point3) {
+    bounds[0] = bounds[0].min(point.x());
+    bounds[1] = bounds[1].max(point.x());
+    bounds[2] = bounds[2].min(point.y());
+    bounds[3] = bounds[3].max(point.y());
+    bounds[4] = bounds[4].min(point.z());
+    bounds[5] = bounds[5].max(point.z());
 }
