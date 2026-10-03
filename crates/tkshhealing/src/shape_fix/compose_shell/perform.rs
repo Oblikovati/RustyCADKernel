@@ -174,6 +174,13 @@ mod tests {
         assert_periodic_cylinder_result(true, "perform_periodic_cylinder_closed");
     }
 
+    #[test]
+    fn perform_periodic_cylinder_with_trimmed_patches_matches_native_pcurves() {
+        let composer = initialized_trimmed_cylinder_composer();
+        let done = composer.perform().unwrap();
+        assert_native_result(&composer, done, "perform_periodic_cylinder_patches");
+    }
+
     fn assert_periodic_cylinder_result(closed: bool, label: &str) {
         let composer = initialized_cylinder_composer(closed);
         let done = composer.perform().unwrap();
@@ -205,6 +212,48 @@ mod tests {
             .unwrap();
         composer.set_closed_mode(closed);
         composer
+    }
+
+    fn initialized_trimmed_cylinder_composer() -> ShapeFixComposeShell {
+        let cylinder = Cylinder3::new(Axis3::default(), 2.0).unwrap();
+        let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+            cylinder,
+            (0.0, std::f64::consts::TAU, 0.0, 2.0),
+        )
+        .unwrap()
+        .face()
+        .unwrap();
+        let basis: Handle<dyn GeomSurface> = Handle::new(
+            rustycad_tkg3d::geom::GeomCylindricalSurface::from_cylinder(cylinder),
+        )
+        .cast();
+        let first = trimmed_cylinder(&basis, (0.0, std::f64::consts::PI));
+        let second = trimmed_cylinder(&basis, (std::f64::consts::PI, std::f64::consts::TAU));
+        let composer = ShapeFixComposeShell::new();
+        composer.set_context(&Handle::new(ShapeBuildReShape::new()));
+        composer
+            .init(
+                &composite_grid(2, vec![first, second]),
+                &Location::default(),
+                &face,
+                1.0e-7,
+            )
+            .unwrap();
+        composer.set_closed_mode(true);
+        composer
+    }
+
+    fn trimmed_cylinder(basis: &Handle<dyn GeomSurface>, u: (f64, f64)) -> Handle<dyn GeomSurface> {
+        Handle::new(
+            rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::new(
+                basis,
+                u,
+                (0.0, 2.0),
+                (true, true),
+            )
+            .unwrap(),
+        )
+        .cast()
     }
 
     fn assert_nested_face_matches_oracle(result: &Shape) {
@@ -248,11 +297,12 @@ mod tests {
             result.nb_children(),
             i32::from(composer.status(ShapeExtendStatus::Done1)),
         );
-        if label.starts_with("perform_periodic_cylinder_") {
+        if label == "perform_periodic_cylinder_open" || label == "perform_periodic_cylinder_closed"
+        {
             let seam = periodic_seam_values(&result).unwrap();
             row.push_str(&format!(" {} {} {} {}", seam.0, seam.1, seam.2, seam.3));
         }
-        if label == "perform_two_patches" {
+        if label == "perform_two_patches" || label == "perform_periodic_cylinder_patches" {
             let bounds = pcurve_bounds(&result).unwrap();
             row.push_str(&format!(
                 " {} {} {} {}",
@@ -330,6 +380,9 @@ mod tests {
     }
 
     fn result_faces(result: &Shape) -> Vec<Face> {
+        if result.shape_type().ok() == Some(ShapeEnum::Face) {
+            return rustycad_tkbrep::topods::face(result).into_iter().collect();
+        }
         rustycad_tkbrep::topods::ShapeIterator::new(result, false, false)
             .filter_map(|shape| rustycad_tkbrep::topods::face(&shape).ok())
             .collect()

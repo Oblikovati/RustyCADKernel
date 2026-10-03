@@ -21,6 +21,7 @@ static void printMappedEdges(
   const Handle(ShapeBuild_ReShape)& context,
   const TopoDS_Shape& wire);
 static void printFirstSeamPcurve(const TopoDS_Shape& result);
+static void printPcurveBounds(const TopoDS_Shape& result);
 
 static void runSplitEdgesPeriodicCylinder()
 {
@@ -66,6 +67,31 @@ static void runPerformPeriodicCylinder(bool closedMode)
             << done << ' ' << result.ShapeType() << ' ' << result.Orientation() << ' '
             << children << ' ' << tool.Status(ShapeExtend_DONE1);
   printFirstSeamPcurve(result);
+  std::cout << '\n';
+}
+
+static void runPerformPeriodicCylinderPatches()
+{
+  const gp_Cylinder cylinder(gp_Ax3(), 2.0);
+  const TopoDS_Face face = BRepBuilderAPI_MakeFace(cylinder, 0., 2. * M_PI, 0., 2.).Face();
+  const Handle(Geom_Surface) basis = new Geom_CylindricalSurface(cylinder);
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 2, 1, 1);
+  patches->SetValue(1, 1, new Geom_RectangularTrimmedSurface(basis, 0., M_PI, 0., 2., true, true));
+  patches->SetValue(2, 1, new Geom_RectangularTrimmedSurface(basis, M_PI, 2. * M_PI, 0., 2., true, true));
+  ShapeFix_ComposeShell tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(new ShapeExtend_CompositeSurface(patches), TopLoc_Location(), face, 1.0e-7);
+  tool.ClosedMode() = true;
+  const bool done = tool.Perform();
+  const TopoDS_Shape result = tool.Result();
+  int children = 0;
+  for (TopoDS_Iterator it(result); it.More(); it.Next())
+    ++children;
+  std::cout << "perform_periodic_cylinder_patches " << done << ' ' << result.ShapeType() << ' '
+            << result.Orientation() << ' ' << children << ' '
+            << tool.Status(ShapeExtend_DONE1);
+  printPcurveBounds(result);
   std::cout << '\n';
 }
 

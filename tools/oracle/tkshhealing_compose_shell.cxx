@@ -616,4 +616,5 @@ int main()
   runSplitEdgesPeriodicCylinder();
   runPerformPeriodicCylinder(false);
   runPerformPeriodicCylinder(true);
+  runPerformPeriodicCylinderPatches();
 }
