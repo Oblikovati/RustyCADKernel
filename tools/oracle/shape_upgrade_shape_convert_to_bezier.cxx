@@ -7,14 +7,18 @@
 #include <GeomLib.hxx>
 #include <ShapeUpgrade_ShapeConvertToBezier.hxx>
 #include <TopExp_Explorer.hxx>
+#include <BRep_Builder.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
+#include <Geom2d_BezierCurve.hxx>
+#include <NCollection_Array1.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Cylinder.hxx>
 #include <gp_Ax3.hxx>
 #include <gp_Ax2d.hxx>
 #include <iostream>
+#include <iomanip>
 #include <Precision.hxx>
 
 static void report_modes(const char* name, ShapeUpgrade_ShapeConvertToBezier& tool)
@@ -50,6 +54,56 @@ static void report_shape(const char* name, ShapeUpgrade_ShapeConvertToBezier& to
   std::cout << name << " changed=" << changed << " faces=" << faces << " edges=" << edges
             << " curves3d=" << curves3d << " curves2d=" << curves2d
             << " bezierSurfaces=" << bezierSurfaces << '\n';
+}
+
+static void report_mixed_range_seam()
+{
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(), 2.0), 0.0, 6.283185307179586, 0.0, 5.0);
+  BRep_Builder builder;
+  for (TopExp_Explorer edgeIt(face, TopAbs_EDGE); edgeIt.More(); edgeIt.Next())
+  {
+    TopoDS_Edge edge = TopoDS::Edge(edgeIt.Current());
+    edge.Orientation(TopAbs_FORWARD);
+    if (!BRep_Tool::IsClosed(edge, face)) continue;
+    double first = 0.0, last = 0.0;
+    occ::handle<Geom2d_Curve> current = BRep_Tool::CurveOnSurface(edge, face, first, last);
+    const gp_Pnt2d p1 = current->Value(first), p2 = current->Value(last);
+    NCollection_Array1<gp_Pnt2d> poles(1, 2);
+    poles(1) = p1;
+    poles(2) = p2;
+    occ::handle<Geom2d_Curve> bezier = new Geom2d_BezierCurve(poles);
+    occ::handle<Geom2d_Curve> reverse;
+    TopoDS_Edge reversed = TopoDS::Edge(edge.Reversed());
+    double reverseFirst = 0.0, reverseLast = 0.0;
+    reverse = BRep_Tool::CurveOnSurface(reversed, face, reverseFirst, reverseLast);
+    builder.UpdateEdge(edge, bezier, reverse, face, 0.0);
+    builder.Range(edge, face, 0.2, 0.8);
+    break;
+  }
+  ShapeUpgrade_ShapeConvertToBezier converter(face);
+  converter.SetSurfaceConversion(true);
+  const bool changed = converter.Perform();
+  const TopoDS_Face result = TopoDS::Face(converter.Result());
+  for (TopExp_Explorer edgeIt(result, TopAbs_EDGE); edgeIt.More(); edgeIt.Next())
+  {
+    TopoDS_Edge edge = TopoDS::Edge(edgeIt.Current());
+    edge.Orientation(TopAbs_FORWARD);
+    if (!BRep_Tool::IsClosed(edge, result)) continue;
+    double first = 0.0, last = 0.0;
+    occ::handle<Geom2d_Curve> current = BRep_Tool::CurveOnSurface(edge, result, first, last);
+    TopoDS_Edge reversed = TopoDS::Edge(edge.Reversed());
+    double reverseFirst = 0.0, reverseLast = 0.0;
+    occ::handle<Geom2d_Curve> reverse = BRep_Tool::CurveOnSurface(reversed, result, reverseFirst, reverseLast);
+    const gp_Pnt2d p1 = current->Value(first), p2 = current->Value(last);
+    const gp_Pnt2d r1 = reverse->Value(reverseFirst), r2 = reverse->Value(reverseLast);
+    std::cout << std::fixed << std::setprecision(5)
+              << "mixed_range_seam changed=" << changed << " currentBezier=" << current->IsKind(STANDARD_TYPE(Geom2d_BezierCurve))
+              << " reverseBezier=" << reverse->IsKind(STANDARD_TYPE(Geom2d_BezierCurve))
+              << " range=" << first << ',' << last << " reverseRange=" << reverseFirst << ',' << reverseLast
+              << " currentEnds=" << p1.X() << ',' << p1.Y() << ';' << p2.X() << ',' << p2.Y()
+              << " reverseEnds=" << r1.X() << ',' << r1.Y() << ';' << r2.X() << ',' << r2.Y() << '\n';
+    break;
+  }
 }
 
 int main()
@@ -110,4 +164,5 @@ int main()
   const gp_Pnt2d reverseEnd = normalizedReverse->Value(1.0);
   std::cout << "reverse_line_unit_range " << reverseStart.X() << ' ' << reverseStart.Y() << ' '
             << reverseEnd.X() << ' ' << reverseEnd.Y() << '\n';
+  report_mixed_range_seam();
 }

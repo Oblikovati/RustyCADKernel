@@ -1,10 +1,11 @@
 //! Native differential tests for ShapeUpgrade_ShapeConvertToBezier.
 use rustycad_tkbrep::{
-    brep::BRepTool,
+    brep::{BRepBuilder, BRepTool},
     topexp::Explorer,
     topods::{Face, Shape},
 };
-use rustycad_tkg2d::geom2d::Geom2dBezierCurve;
+use rustycad_tkernel::standard::Handle;
+use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve, arrays};
 use rustycad_tkg3d::{
     geom::{GeomBezierCurve, GeomBezierSurface},
     top_abs::ShapeEnum,
@@ -60,6 +61,22 @@ fn cylinder_conversion_preserves_native_circle_policy_and_topology()
     assert_eq!(
         conversion_summary("cylinder_line_only", &lines_only)?,
         expected_line(9)
+    );
+    Ok(())
+}
+
+#[test]
+fn non_unit_mixed_seam_ranges_match_native_postprocess()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let face = mixed_range_seam_face()?;
+    let converter = ShapeUpgradeShapeConvertToBezier::new(face.into_shape());
+    converter.set_surface_conversion(true);
+    let changed = converter.perform(true)?;
+    let result_face = first_face(&converter.result())?;
+    let seam = first_seam_edge(&result_face)?;
+    assert_eq!(
+        mixed_seam_row(changed, &seam, &result_face)?,
+        expected_line(11)
     );
     Ok(())
 }
@@ -183,6 +200,126 @@ fn cylinder_face() -> Result<Face, rustycad_tkernel::standard::Failure> {
     let surface = Cylinder3::new(Axis3::default(), 2.)?;
     BRepBuilderAPIMakeFace::from_cylinder_bounds(surface, (0., std::f64::consts::TAU, 0., 1.))?
         .face()
+}
+
+fn mixed_range_seam_face() -> Result<Face, rustycad_tkernel::standard::Failure> {
+    let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+        Cylinder3::new(Axis3::default(), 2.)?,
+        (0., std::f64::consts::TAU, 0., 5.),
+    )?
+    .face()?;
+    let seam = first_seam_edge(&face)?;
+    install_mixed_seam_curves(&face, &seam)?;
+    Ok(face)
+}
+
+fn install_mixed_seam_curves(
+    face: &Face,
+    edge: &rustycad_tkbrep::topods::Edge,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let analysis = ShapeAnalysisEdge::new();
+    let (current, first, last) = analysis.pcurve_on_face(edge, face, false)?;
+    let reverse_shape = edge.reversed();
+    let reverse_edge = rustycad_tkbrep::topods::edge(&reverse_shape)?;
+    let (reverse, _, _) = analysis.pcurve_on_face(&reverse_edge, face, false)?;
+    let poles = bezier_poles(&current, first, last)?;
+    let bezier = Handle::new(Geom2dBezierCurve::new(&poles)?).cast();
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurves_on_face(edge, (&bezier, &reverse), face, 0.)?;
+    builder.range_on_face(edge, face, 0.2, 0.8)
+}
+
+fn bezier_poles(
+    curve: &Handle<dyn Geom2dCurve>,
+    first: f64,
+    last: f64,
+) -> Result<
+    rustycad_tkernel::ncollection::Array1<'static, rustycad_tkmath::gp::Point2>,
+    rustycad_tkernel::standard::Failure,
+> {
+    let mut poles = arrays::one_based(2)?;
+    arrays::put(&mut poles, 1, curve.value(first)?)?;
+    arrays::put(&mut poles, 2, curve.value(last)?)?;
+    Ok(poles)
+}
+
+fn first_face(shape: &Shape) -> Result<Face, rustycad_tkernel::standard::Failure> {
+    let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
+    rustycad_tkbrep::topods::face(faces.current())
+}
+
+fn first_seam_edge(
+    face: &Face,
+) -> Result<rustycad_tkbrep::topods::Edge, rustycad_tkernel::standard::Failure> {
+    let edges = Explorer::new(face, ShapeEnum::Edge, ShapeEnum::Shape)?;
+    for found in edges {
+        let mut edge = rustycad_tkbrep::topods::edge(&found)?;
+        edge.set_orientation(rustycad_tkg3d::top_abs::Orientation::Forward);
+        if BRepTool::is_closed_on_face(&edge, face)? {
+            return Ok(edge);
+        }
+    }
+    Err(rustycad_tkernel::standard::Failure::with_type(
+        "Standard_NoSuchObject",
+        "mixed seam fixture has no closed edge; expected a cylindrical periodic seam",
+        "",
+    ))
+}
+
+fn mixed_seam_row(
+    changed: bool,
+    edge: &rustycad_tkbrep::topods::Edge,
+    face: &Face,
+) -> Result<String, rustycad_tkernel::standard::Failure> {
+    let analysis = ShapeAnalysisEdge::new();
+    let (current, first, last) = analysis.pcurve_on_face(edge, face, false)?;
+    let reverse_shape = edge.reversed();
+    let reverse = rustycad_tkbrep::topods::edge(&reverse_shape)?;
+    let (opposite, first2, last2) = analysis.pcurve_on_face(&reverse, face, false)?;
+    format_mixed_seam(changed, &current, (first, last), &opposite, (first2, last2))
+}
+
+fn format_mixed_seam(
+    changed: bool,
+    current: &Handle<dyn Geom2dCurve>,
+    current_range: (f64, f64),
+    opposite: &Handle<dyn Geom2dCurve>,
+    opposite_range: (f64, f64),
+) -> Result<String, rustycad_tkernel::standard::Failure> {
+    let a = current.value(current_range.0)?;
+    let b = current.value(current_range.1)?;
+    let c = opposite.value(opposite_range.0)?;
+    let d = opposite.value(opposite_range.1)?;
+    Ok(format!(
+        "mixed_range_seam changed={} currentBezier={} reverseBezier={} range={:.5},{:.5} reverseRange={:.5},{:.5} {}",
+        usize::from(changed),
+        usize::from(current.cast::<Geom2dBezierCurve>().is_some()),
+        usize::from(opposite.cast::<Geom2dBezierCurve>().is_some()),
+        current_range.0,
+        current_range.1,
+        opposite_range.0,
+        opposite_range.1,
+        endpoint_text(a, b, c, d),
+    ))
+}
+
+fn endpoint_text(
+    current_start: rustycad_tkmath::gp::Point2,
+    current_end: rustycad_tkmath::gp::Point2,
+    reverse_start: rustycad_tkmath::gp::Point2,
+    reverse_end: rustycad_tkmath::gp::Point2,
+) -> String {
+    format!(
+        "currentEnds={:.5},{:.5};{:.5},{:.5} reverseEnds={:.5},{:.5};{:.5},{:.5}",
+        current_start.x(),
+        current_start.y(),
+        current_end.x(),
+        current_end.y(),
+        reverse_start.x(),
+        reverse_start.y(),
+        reverse_end.x(),
+        reverse_end.y(),
+    )
 }
 
 fn count_faces(shape: &Shape) -> usize {
