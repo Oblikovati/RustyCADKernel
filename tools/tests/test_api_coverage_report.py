@@ -113,9 +113,24 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         )
         self.assertEqual(status, "unresolved_member_target")
         self.assertEqual(rows, [declaration])
+
+    def test_unstable_template_identity_blocks_automatic_credit(self) -> None:
+        declaration = cpp_decl("unstable", "fixture::choose", ["int"])
+        declaration["api_resolution"] = (
+            "unsupported_template_signature_normalization"
+        )
+        declaration["unstable_identity"] = True
+        declaration["_toolkits"] = {"TKFixture"}
+        status, rows = cpp_candidates(
+            "fixture::choose(int)",
+            "TKFixture",
+            {"fixture::choose": [declaration]},
+        )
+        self.assertEqual(status, "unstable_cpp_identity")
+        self.assertEqual(rows, [declaration])
         self.assertEqual(
             resolve_status("implemented", status, "unique"),
-            "unresolved_cpp_member_target",
+            "unstable_cpp_identity",
         )
 
     def test_exact_qualified_signature_selects_matching_overload(self) -> None:
