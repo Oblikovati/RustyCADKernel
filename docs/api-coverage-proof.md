@@ -23,8 +23,10 @@ All 384 `.lxx` fragments are observed. Context successes retain their original
 standalone failure, source translation unit, flags, and hashes. Six toolkit
 configurations remain absent; OpenGL/GLES share physical headers, so per-toolkit
 ownership totals overlap and do not prove the absent GLES configuration.
-There are 5,224 conflicting-declaration observations and 1,094 skipped preprocessor
-ranges retained for review. The declaration count is a preliminary candidate
+There are 5,224 conflicting-declaration observations across 162 identities, plus
+1,094 skipped preprocessor ranges retained for review. Observation counts may
+include repeated encounters with the same declaration; they do not count distinct
+unported APIs. The declaration count is a preliminary candidate
 count: the current visibility filter still includes internal helpers, so it is
 neither a validated lower bound nor a denominator for API coverage.
 

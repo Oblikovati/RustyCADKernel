@@ -403,7 +403,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
                 ]
             },
         )
-        self.assertIn("unsupported_cpp_declarations:2", report["proof_gaps"])
+        self.assertIn("unsupported_cpp_inventory_records:2", report["proof_gaps"])
         self.assertIn("rust_unclassified_items:rustycad_tkmath", report["proof_gaps"])
         self.assertFalse(report["declaration_crosswalk_proof"])
 

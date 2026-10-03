@@ -280,7 +280,7 @@ def proof_gaps(
     )
     unsupported = cpp_unsupported_count(cpp_manifest)
     if unsupported:
-        gaps.append(f"unsupported_cpp_declarations:{unsupported}")
+        gaps.append(f"unsupported_cpp_inventory_records:{unsupported}")
     if duplicate_ids:
         gaps.append("duplicate_cpp_declaration_ids")
     if malformed:
