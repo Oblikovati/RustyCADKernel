@@ -62,20 +62,7 @@ pub trait FaceDivider: Transient {
     fn face_divide_base(&self) -> &ShapeUpgradeTool;
     /// Split surfaces before curves and retain aggregate status; `divider.perform(0.)?`.
     fn perform(&self, area: f64) -> Result<bool, Failure> {
-        let state = self.face_divide_data();
-        state.with_mut(|fields| fields.status = 0);
-        let face = state.with(|fields| fields.face.clone());
-        if face.is_null() {
-            return Ok(false);
-        }
-        let base = self.face_divide_base();
-        if base.context().is_null() {
-            base.set_context(&Handle::new(crate::shape_build::ShapeBuildReShape::new()));
-        }
-        state.with_mut(|fields| fields.result = face.into_shape());
-        self.split_surface(area)?;
-        self.split_curves()?;
-        Ok(state.with(|fields| ShapeExtend::decode_status(fields.status, ShapeExtendStatus::Done)))
+        perform_face_division(self, area)
     }
     /// Split the supporting surface and compose its patch faces; `divider.split_surface(0.)?`.
     fn split_surface(&self, area: f64) -> Result<bool, Failure> {
@@ -96,6 +83,26 @@ pub trait FaceDivider: Transient {
             .with(|fields| fields.wire_tool.clone())
     }
 }
+pub(super) fn perform_face_division(
+    tool: &(impl FaceDivider + ?Sized),
+    area: f64,
+) -> Result<bool, Failure> {
+    let state = tool.face_divide_data();
+    state.with_mut(|fields| fields.status = 0);
+    let face = state.with(|fields| fields.face.clone());
+    if face.is_null() {
+        return Ok(false);
+    }
+    let base = tool.face_divide_base();
+    if base.context().is_null() {
+        base.set_context(&Handle::new(crate::shape_build::ShapeBuildReShape::new()));
+    }
+    state.with_mut(|fields| fields.result = face.into_shape());
+    tool.split_surface(area)?;
+    tool.split_curves()?;
+    Ok(state.with(|fields| ShapeExtend::decode_status(fields.status, ShapeExtendStatus::Done)))
+}
+
 impl_transient_interface!(dyn FaceDivider, "ShapeUpgrade_FaceDivide", ShapeUpgradeTool);
 
 /// Divides a face using configurable surface and wire criteria.
@@ -128,6 +135,10 @@ impl std::ops::Deref for ShapeUpgradeFaceDivide {
     }
 }
 impl ShapeUpgradeFaceDivide {
+    /// Create a divider without a face; `ShapeUpgradeFaceDivide::empty()`.
+    pub fn empty() -> Self {
+        Self::default()
+    }
     /// Construct with the face and result initialized to `face`; `ShapeUpgradeFaceDivide::new(face)`.
     pub fn new(face: Face) -> Self {
         let tool = Self::default();

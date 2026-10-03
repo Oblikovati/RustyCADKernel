@@ -82,3 +82,6 @@ pub use split_surface_continuity::ShapeUpgradeSplitSurfaceContinuity;
 
 mod remove_internal_wires;
 pub use remove_internal_wires::ShapeUpgradeRemoveInternalWires;
+
+mod face_divide_area;
+pub use face_divide_area::ShapeUpgradeFaceDivideArea;

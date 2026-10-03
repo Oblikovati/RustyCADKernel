@@ -13,7 +13,7 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 
 pub(super) fn infer_external_code(cut_by_u: bool, point_index: i32) -> i32 {
-    if cut_by_u == (point_index == 1) { 2 } else { 1 }
+    if cut_by_u == (point_index == 1) { 1 } else { 2 }
 }
 
 pub(super) fn infer_external_code_by_parameter(
@@ -313,4 +313,19 @@ pub(super) fn result_edges_as_wire(
             .add(&mut result_shape, &segment.edge(index)?.into_shape())?;
     }
     topods::wire(&result_shape)
+}
+
+#[cfg(test)]
+mod side_code_tests {
+    use super::{infer_external_code, infer_external_code_by_parameter};
+    #[test]
+    fn cut_and_unsplit_external_edges_use_opposite_native_side_codes() {
+        // ShapeFix_ComposeShell.cxx at 3d097a0 uses opposite ternaries in these branches.
+        assert_eq!(infer_external_code(true, 1), 1);
+        assert_eq!(infer_external_code(true, 2), 2);
+        assert_eq!(infer_external_code(false, 1), 2);
+        assert_eq!(infer_external_code(false, 2), 1);
+        assert_eq!(infer_external_code_by_parameter(true, 0., 1., 0.), 2);
+        assert_eq!(infer_external_code_by_parameter(false, 0., 1., 0.), 1);
+    }
 }

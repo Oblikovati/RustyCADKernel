@@ -222296,7 +222296,7 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivide.hxx",
       "source_sha256": "6a227e5bf88a89be6da4c47a3b403d97c50dc443406ef8edc61cfb31b6ddfb19",
-      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivide::default",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivide::empty",
       "status": "implemented",
       "notes": "Surface-then-wire subdivision with virtual policy dispatch, native context/status lifetime and protected vertex copies. Nine native oracle cases plus both translated legacy safety regressions pass. Advanced operations inherit remaining ComposeShell/configured-policy limitations and are retained as partial; no complete face/toolkit parity claim."
     },
@@ -222443,6 +222443,69 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_missing_seam",
       "status": "partial",
       "notes": "Direct periodic seam repair now matches native sphere and two-wire cylinder results and context lifetime. Torus, periodic B-spline and broader multiwire paths still require source audit and native end-to-end validation; Face Perform remains separate and partial."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::ShapeUpgrade_FaceDivideArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::empty",
+      "status": "implemented",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::ShapeUpgrade_FaceDivideArea(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::new",
+      "status": "implemented",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::Perform(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::perform",
+      "status": "partial",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::MaxArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::max_area",
+      "status": "implemented",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::NbParts()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::nb_parts",
+      "status": "implemented",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::SetNumbersUVSplits(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_numbers_uv_splits",
+      "status": "partial",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FaceDivideArea::SetSplittingByNumber(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivideArea.hxx",
+      "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_splitting_by_number",
+      "status": "implemented",
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
     }
   ],
   "tests": [

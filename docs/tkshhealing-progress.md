@@ -1068,3 +1068,15 @@ See `tools/oracle/tkshhealing_face_divide.md` for reproduction and scope.
 These are additional oracle cases; legacy mapping totals do not increase.
 The advanced API mappings remain partial while inherited composition/policy
 limitations remain; no whole-class or toolkit completeness claim is made.
+
+### Area-based face subdivision
+
+`ShapeUpgradeFaceDivideArea` now implements area measurement, count-derived limits,
+fixed U/V criteria, recursive face refinement and native working-face/status/context
+mutations. Eight native oracle cases pass, including a sphere that recursively
+produces twenty faces with matching UV bounds and areas. This fixture also corrected
+reversed external split-edge side codes in ComposeShell. The base face divider now
+exposes an inherent empty constructor so its inventory target is reachable.
+Perform remains partial through inherited policy/composition limits; checked integer
+overflow remains explicit and unapproved as a parity exception. Legacy mapping
+counts are unchanged. See `tools/oracle/tkshhealing_face_divide_area.md`.
