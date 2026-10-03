@@ -24,11 +24,9 @@ use rustycad_tkmath::bnd::BoundingBox2;
 /// Native `ShapeFix_IntersectionTool` edge primitives; `tool.cut_edge(&edge, 0.0, 0.4, &face, &mut cut_line)?`.
 pub struct ShapeFixIntersectionTool {
     context: Handle<ShapeBuildReShape>,
-    // Retained for the remaining wire aggregation routines in this native class.
+    // OCCT retains this configuration for other private aggregation routines.
     #[allow(dead_code)]
     precision: f64,
-    // Retained for tolerance checks during native nonadjacent crossing repair.
-    #[allow(dead_code)]
     max_tolerance: f64,
 }
 
@@ -89,7 +87,10 @@ impl ShapeFixIntersectionTool {
         cut::cut_edge(edge, endpoint, cut, face, cut_line)
     }
 
-    pub(super) fn fix_self_intersect_wire(
+    /// Repairs nonadjacent self-intersections in a wire using this tool's replacement context.
+    ///
+    /// Example: `tool.fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)?`.
+    pub fn fix_self_intersect_wire(
         &self,
         wire: &ShapeExtendWireData,
         face: &Face,
