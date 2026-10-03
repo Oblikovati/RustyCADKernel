@@ -16,6 +16,7 @@ impl ShapeAnalysisWire {
         fields.status_small = 0;
         fields.status_self_intersection = 0;
         fields.status_edge_curves = 0;
+        fields.status_loop = 0;
         fields.min_3d = 0.;
         fields.max_3d = 0.;
         fields.min_2d = 0.;

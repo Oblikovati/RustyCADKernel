@@ -19,6 +19,7 @@ mod edge_curves;
 mod gaps;
 mod intersections;
 mod lacking;
+mod loops;
 mod order;
 mod seam;
 mod shape_connect;
@@ -42,6 +43,7 @@ struct WireAnalysisFields {
     status_small: i32,
     status_self_intersection: i32,
     status_edge_curves: i32,
+    status_loop: i32,
     min_3d: f64,
     max_3d: f64,
     min_2d: f64,
@@ -80,6 +82,7 @@ impl Default for ShapeAnalysisWire {
                 status_small: 0,
                 status_self_intersection: 0,
                 status_edge_curves: 0,
+                status_loop: 0,
                 min_3d: 0.,
                 max_3d: 0.,
                 min_2d: 0.,

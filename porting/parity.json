@@ -221993,6 +221993,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_self_intersection",
       "status": "implemented",
       "notes": "Native eight-check Perform sequence and self/adjacent/nonadjacent intersection aggregate, including bounding boxes, repeated CheckClosed side effects and native FAIL1-only nonadjacent aggregation. Five polygonal native rows compare full status state; six self-edge rows cover local success/fail filtering. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckLoop(NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_loop",
+      "status": "implemented",
+      "notes": "Native vertex-incidence loop detection, small/seam exclusion, output-map accumulation and status lifetime. Ten pinned native cases compare two successive calls, loop ordering and partial mutations including infinite precision on FAIL2. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusLoop(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_loop",
+      "status": "implemented",
+      "notes": "Native vertex-incidence loop detection, small/seam exclusion, output-map accumulation and status lifetime. Ten pinned native cases compare two successive calls, loop ordering and partial mutations including infinite precision on FAIL2. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [
