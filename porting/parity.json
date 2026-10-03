@@ -219839,6 +219839,70 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetStatus::Unknown",
       "status": "implemented",
       "notes": "Pinned BRepOffset::Surface dispatcher; 131 native fixture cases match status, dynamic type, bounds, sample points and analytic parameters (finite bits exact). Module and legacy-test parity remain incomplete."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::BRepOffset_SimpleOffset(const TopoDS_Shape&,double,double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::new",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::NewSurface",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_surface",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::NewCurve",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::NewPoint",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_point",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::NewCurve2d",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve2d",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::NewParameter",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_parameter",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
+    },
+    {
+      "upstream_id": "BRepOffset_SimpleOffset::Continuity",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_SimpleOffset.hxx",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleOffset::<rustycad_tkbrep::brep_tools::BRepToolsModification>::continuity",
+      "status": "implemented",
+      "notes": "Face/edge/vertex preparation and modification callbacks ported from pinned OCCT. Native callback oracle and Rust regressions cover geometry, history rebuild, output preservation, orientation-sensitive lookup, and empty vertex samples. RTTI surface and overall toolkit parity remain separate obligations."
     }
   ],
   "tests": [
@@ -324599,6 +324663,21 @@
         "linux-gcc-c-locale"
       ],
       "notes": "Pinned topology assertions are ported. A probe of the pinned OCCT fixture showed same-support source p-curve handle identity unchanged across Build; general face-group selection and non-identical-support TransformPCurves transformations remain unimplemented."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurvesTest.OCC28131_SimpleOffsetOfFilledFace",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_BSplineCurves_Test.cxx",
+      "source_sha256": "f3b7fd67929126e922be5022c6fc5971a902398c9df3cec7d3554bfd77ed17a9",
+      "rust_package": "rustycad-tkoffset",
+      "rust_target": "occ28131_modification",
+      "rust_test": "geom_fill_bspline_curves_occ28131_simple_offset_of_filled_face",
+      "rust_source": "crates/tkoffset/tests/occ28131_modification.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "Exact legacy fixture and assertions run through BRepOffsetAPI_MakeOffsetShape::PerformBySimple. Native original test passed; result validity, maximum tolerance and surface area pass. Standard/join offset and solid wall acceptance remain separate."
     }
   ]
 }
