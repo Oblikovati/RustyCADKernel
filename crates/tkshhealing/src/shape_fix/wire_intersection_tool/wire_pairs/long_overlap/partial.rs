@@ -190,9 +190,14 @@ fn replace_partial_target(
     )? {
         return Ok(false);
     }
-    let middle_index = middle_edge_index(&wire.data, face, points.second_parameters)?;
-    let middle = wire.data.edge(middle_index)?;
-    replace_second_edge(tool, wire, middle_index, &middle, shared, source_boxes)?;
+    // OCCT selects the post-split slot for descending second-edge parameters.
+    let replacement_index = if points.second_parameters.0 > points.second_parameters.1 {
+        split_index + 1
+    } else {
+        middle_edge_index(&wire.data, face, points.second_parameters)?
+    };
+    let target = wire.data.edge(replacement_index)?;
+    replace_second_edge(tool, wire, replacement_index, &target, shared, source_boxes)?;
     Ok(true)
 }
 
