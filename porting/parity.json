@@ -221930,6 +221930,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_self_intersecting_edge_into",
       "status": "implemented",
       "notes": "Native GInter self-intersection, middle-transition and vertex-tolerance filtering, output clearing before ready check, SameParameter-aware located 3D/surface point evaluation. Six pinned native rows compared exactly, including Bezier interior loop and tolerance suppression. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckIntersectingEdges(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_intersecting_edges",
+      "status": "implemented",
+      "notes": "Native arbitrary-edge intersection with point/overlap-segment selection, endpoint tolerance filtering, SameParameter-aware spatial midpoint/error and output-clear timing. Eleven native rows compared exactly, including preserved sentinels and NullObject after clearing. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckIntersectingEdges(int,int,NCollection_Sequence<IntRes2d_IntersectionPoint>&,NCollection_Sequence<gp_Pnt>&,NCollection_Sequence<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_intersecting_edges_into",
+      "status": "implemented",
+      "notes": "Native arbitrary-edge intersection with point/overlap-segment selection, endpoint tolerance filtering, SameParameter-aware spatial midpoint/error and output-clear timing. Eleven native rows compared exactly, including preserved sentinels and NullObject after clearing. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [
