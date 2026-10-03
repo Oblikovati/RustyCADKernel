@@ -81,17 +81,40 @@ static TopoDS_Wire makeClosedCircleWire() {
   return wireBuilder.Wire();
 }
 
+static TopoDS_Edge makeBezierSegment(const gp_Pnt& first, const gp_Pnt& middle,
+                                     const gp_Pnt& last) {
+  NCollection_Array1<gp_Pnt> poles(1, 3);
+  poles.SetValue(1, first);
+  poles.SetValue(2, middle);
+  poles.SetValue(3, last);
+  return BRepBuilderAPI_MakeEdge(new Geom_BezierCurve(poles));
+}
+
 static TopoDS_Wire makeBezierChainWire() {
-  NCollection_Array1<gp_Pnt> firstPoles(1, 3), secondPoles(1, 3);
-  firstPoles.SetValue(1, gp_Pnt(0, 0, 0));
-  firstPoles.SetValue(2, gp_Pnt(0.5, 0, 0));
-  firstPoles.SetValue(3, gp_Pnt(1, 1, 0));
-  secondPoles.SetValue(1, gp_Pnt(1, 1, 0));
-  secondPoles.SetValue(2, gp_Pnt(1.5, 2, 0));
-  secondPoles.SetValue(3, gp_Pnt(2, 4, 0));
   BRepBuilderAPI_MakeWire wireBuilder;
-  wireBuilder.Add(BRepBuilderAPI_MakeEdge(new Geom_BezierCurve(firstPoles)));
-  wireBuilder.Add(BRepBuilderAPI_MakeEdge(new Geom_BezierCurve(secondPoles)));
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(0, 0, 0), gp_Pnt(0.5, 0, 0), gp_Pnt(1, 1, 0)));
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(1, 1, 0), gp_Pnt(1.5, 2, 0), gp_Pnt(2, 4, 0)));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeThreeBezierWire() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(0, 0, 0), gp_Pnt(0.5, 0, 0), gp_Pnt(1, 1, 0)));
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(1, 1, 0), gp_Pnt(1.5, 2, 0), gp_Pnt(2, 4, 0)));
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(2, 4, 0), gp_Pnt(2.5, 6, 0), gp_Pnt(3, 9, 0)));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeReverseBezierWire(bool reverseOccurrences) {
+  TopoDS_Edge first = makeBezierSegment(gp_Pnt(0, 0, 0), gp_Pnt(0.5, 0, 0), gp_Pnt(1, 1, 0));
+  TopoDS_Edge second = makeBezierSegment(gp_Pnt(1, 1, 0), gp_Pnt(1.5, 2, 0), gp_Pnt(2, 4, 0));
+  if (reverseOccurrences) {
+    first.Reverse();
+    second.Reverse();
+  }
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(second);
+  wireBuilder.Add(first);
   return wireBuilder.Wire();
 }
 
@@ -183,5 +206,8 @@ int main() {
   runCase("circle_closed", makeClosedCircleWire(), true);
   runCase("bezier_disabled", makeBezierChainWire(), true);
   runCase("bezier_chain", makeBezierChainWire(), true, true);
+  runCase("bezier_three", makeThreeBezierWire(), true, true);
+  runCase("bezier_reverse_order", makeReverseBezierWire(false), true, true);
+  runCase("bezier_reversed_occurrences", makeReverseBezierWire(true), true, true);
   runPlanarFaceCase();
 }
