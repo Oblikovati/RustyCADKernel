@@ -3,6 +3,7 @@
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRep_Tool.hxx>
 #include <BRepCheck_Analyzer.hxx>
+#include <BRepAdaptor_Curve.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
 #include <TopExp.hxx>
 #include <TopExp_Explorer.hxx>
@@ -10,6 +11,8 @@
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Wire.hxx>
 #include <gp_Pnt.hxx>
+#include <gp_Ax2.hxx>
+#include <gp_Circ.hxx>
 
 #include <iomanip>
 #include <iostream>
@@ -28,6 +31,23 @@ static TopoDS_Wire makeThreeLineWire() {
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)));
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0, 0), gp_Pnt(2, 0, 0)));
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(3, 0, 0)));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeCircleWire() {
+  const gp_Circ circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 2.0);
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, 0.0, M_PI / 2.0));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, M_PI / 2.0, M_PI));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeThreeCircleWire() {
+  const gp_Circ circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 2.0);
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, 0.0, M_PI / 3.0));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, M_PI / 3.0, 2.0 * M_PI / 3.0));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, 2.0 * M_PI / 3.0, M_PI));
   return wireBuilder.Wire();
 }
 
@@ -76,6 +96,13 @@ static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) 
     std::cout << std::setprecision(17) << name << " endpoints " << firstPoint.X() << ' '
               << firstPoint.Y() << ' ' << firstPoint.Z() << ' ' << lastPoint.X() << ' '
               << lastPoint.Y() << ' ' << lastPoint.Z() << '\n';
+    if (name[0] == 'c') {
+      const BRepAdaptor_Curve curve(TopoDS::Edge(explorer.Current()));
+      const double first = curve.FirstParameter(), last = curve.LastParameter();
+      const gp_Pnt middle = curve.Value((first + last) * 0.5);
+      std::cout << name << " curve " << curve.GetType() << ' ' << first << ' ' << last << ' '
+                << middle.X() << ' ' << middle.Y() << ' ' << middle.Z() << '\n';
+    }
   }
 }
 
@@ -104,5 +131,7 @@ int main() {
   runCase("reversed_occurrences", makeReversedOccurrencesWire(), true);
   runCase("disabled", makeWire(gp_Pnt(2, 0, 0)), false);
   runCase("perpendicular", makeWire(gp_Pnt(1, 1, 0)), true);
+  runCase("circle", makeCircleWire(), true);
+  runCase("circle_three", makeThreeCircleWire(), true);
   runPlanarFaceCase();
 }
