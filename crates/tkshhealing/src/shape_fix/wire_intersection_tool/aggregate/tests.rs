@@ -49,6 +49,40 @@ mod tests {
     }
 
     #[test]
+    fn middle_to_endpoint_intersection_reuses_endpoint_vertex() {
+        let mut face = plane();
+        let wire = Handle::new(ShapeExtendWireData::new());
+        for edge in middle_to_endpoint_edges(&face) {
+            wire.add_edge(&edge, 0).unwrap();
+        }
+        BRepBuilder::default()
+            .add(&mut face, &wire.wire().unwrap().into_shape())
+            .unwrap();
+        let context = Handle::new(ShapeBuildReShape::new());
+        let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+        let (mut split, mut cut, mut removed) = (91, 92, 93);
+        let done = tool
+            .fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)
+            .unwrap();
+        let mut observed = vec![
+            f64::from(done),
+            f64::from(split),
+            f64::from(cut),
+            f64::from(removed),
+            f64::from(wire.nb_edges()),
+        ];
+        append_ranges(&wire, &face, &mut observed);
+        let expected = EXPECTED
+            .lines()
+            .nth(1)
+            .unwrap()
+            .split_whitespace()
+            .map(|value| value.parse().unwrap())
+            .collect::<Vec<f64>>();
+        assert_eq!(observed, expected);
+    }
+
+    #[test]
     fn long_overlap_triple_split_removes_overlapped_pieces() {
         let mut face = plane();
         let wire = Handle::new(ShapeExtendWireData::new());
@@ -75,7 +109,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(1)
+            .nth(2)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -109,7 +143,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(2)
+            .nth(3)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -147,6 +181,39 @@ mod tests {
                 Point3::new(0.0, -1.0, 0.0),
                 Direction3::new(0.0, 1.0, 0.0).unwrap(),
                 Point2::new(0.0, -1.0),
+                Direction2::new(0.0, 1.0).unwrap(),
+            ),
+            line_edge(
+                face,
+                Point3::new(-4.0, -4.0, 0.0),
+                Direction3::new(0.0, 1.0, 0.0).unwrap(),
+                Point2::new(-4.0, -4.0),
+                Direction2::new(0.0, 1.0).unwrap(),
+            ),
+        ]
+    }
+
+    fn middle_to_endpoint_edges(face: &Face) -> [Edge; 4] {
+        [
+            line_edge(
+                face,
+                Point3::new(-1.0, 0.0, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(-1.0, 0.0),
+                Direction2::new(1.0, 0.0).unwrap(),
+            ),
+            line_edge(
+                face,
+                Point3::new(3.0, 3.0, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(3.0, 3.0),
+                Direction2::new(1.0, 0.0).unwrap(),
+            ),
+            line_edge(
+                face,
+                Point3::new(0.0, 0.0, 0.0),
+                Direction3::new(0.0, 1.0, 0.0).unwrap(),
+                Point2::new(0.0, 0.0),
                 Direction2::new(0.0, 1.0).unwrap(),
             ),
             line_edge(
