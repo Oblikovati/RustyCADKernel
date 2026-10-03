@@ -1,7 +1,9 @@
 # ShapeFix_Face::FixMissingSeam
 
-This probe builds the pinned sphere fixture with a single open U-periodic boundary.
-It compares the returned `changed` flag, face count, and number of degenerated edges.
+This probe covers an open sphere boundary, opposing open cylinder boundaries, a
+single open boundary on a spindle torus, and an open boundary on a periodic
+B-spline sphere. It compares the returned `changed` flag and resulting face,
+edge, seam, and degenerated-edge counts.
 
 Run it against the pinned OCCT build with:
 
