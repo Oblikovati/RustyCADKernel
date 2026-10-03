@@ -198,11 +198,19 @@ impl ShapeUpgradeSplitSurfaceContinuity {
 
 fn clip_bounds(trim: (f64, f64, f64, f64), split: (f64, f64, f64, f64)) -> (f64, f64, f64, f64) {
     (
-        trim.0.max(split.0),
-        trim.1.min(split.1),
-        trim.2.max(split.2),
-        trim.3.min(split.3),
+        native_max(trim.0, split.0),
+        native_min(trim.1, split.1),
+        native_max(trim.2, split.2),
+        native_min(trim.3, split.3),
     )
+}
+
+fn native_max(left: f64, right: f64) -> f64 {
+    if left < right { right } else { left }
+}
+
+fn native_min(left: f64, right: f64) -> f64 {
+    if right < left { right } else { left }
 }
 
 fn offset_surface_criterion(criterion: Shape) -> Shape {
@@ -219,5 +227,26 @@ fn offset_settings(settings: ContinuitySettings, criterion: Shape) -> Continuity
         criterion,
         order: continuity_order(criterion),
         ..settings
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{native_max, native_min};
+
+    #[test]
+    fn bound_helpers_preserve_native_nan_operand_order() {
+        assert!(native_max(f64::NAN, 2.0).is_nan());
+        assert_eq!(native_max(2.0, f64::NAN), 2.0);
+        assert!(native_min(f64::NAN, 2.0).is_nan());
+        assert_eq!(native_min(2.0, f64::NAN), 2.0);
+    }
+
+    #[test]
+    fn bound_helpers_preserve_native_signed_zero_operand_order() {
+        assert!(native_max(0.0, -0.0).is_sign_positive());
+        assert!(native_max(-0.0, 0.0).is_sign_negative());
+        assert!(native_min(0.0, -0.0).is_sign_positive());
+        assert!(native_min(-0.0, 0.0).is_sign_negative());
     }
 }
