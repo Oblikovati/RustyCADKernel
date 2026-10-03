@@ -52,3 +52,6 @@ pub use shape_contents::ShapeAnalysisShapeContents;
 
 mod box_bnd_tree;
 pub use box_bnd_tree::ShapeAnalysisBoxBndTreeSelector;
+
+mod free_bounds_properties;
+pub use free_bounds_properties::{FreeBoundPropertySequence, ShapeAnalysisFreeBoundsProperties};
