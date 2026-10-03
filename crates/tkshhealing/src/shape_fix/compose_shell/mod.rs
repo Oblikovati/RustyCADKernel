@@ -1,10 +1,12 @@
 //! Shell composition state and public operations from `ShapeFix_ComposeShell`.
 mod break_wires;
+mod collect_wires;
 mod compute_code;
 mod geometry;
 mod grid;
 mod init;
 mod load_wires;
+mod split_by_grid;
 mod split_by_line;
 mod split_wire;
 
@@ -91,6 +93,28 @@ impl FixRoot for ShapeFixComposeShell {
 }
 
 impl ShapeFixComposeShell {
+    pub(super) fn collection_inputs(
+        &self,
+    ) -> (
+        Handle<ShapeExtendCompositeSurface>,
+        Face,
+        Location,
+        (f64, f64),
+    ) {
+        let fields = self.fields.read();
+        (
+            fields.grid.clone(),
+            fields.face.clone(),
+            fields.location.clone(),
+            (fields.u_resolution, fields.v_resolution),
+        )
+    }
+
+    pub(super) fn resolutions(&self) -> (f64, f64) {
+        let fields = self.fields.read();
+        (fields.u_resolution, fields.v_resolution)
+    }
+
     /// Creates an empty shell composer; `ShapeFixComposeShell::new()`.
     pub fn new() -> Self {
         Self::default()
@@ -170,6 +194,24 @@ impl ShapeFixComposeShell {
         >,
     ) -> Result<(), Failure> {
         load_wires::load_wires_into(self, segments)
+    }
+
+    /// Splits the loaded face boundary at every composite-surface joint; `composer.split_edges()?`.
+    pub fn split_edges(&self) -> Result<(), Failure> {
+        self.fields.write().status = 0;
+        let mut segments = self.load_wires()?;
+        split_by_grid::split_by_grid(self, &mut segments)
+    }
+
+    /// Greedily joins split wire segments into patch-local loops; `composer.collect_wires(&mut loops, &mut segments)?`.
+    pub fn collect_wires(
+        &self,
+        loops: &mut rustycad_tkernel::ncollection::Sequence<crate::shape_fix::ShapeFixWireSegment>,
+        segments: &mut rustycad_tkernel::ncollection::Sequence<
+            crate::shape_fix::ShapeFixWireSegment,
+        >,
+    ) -> Result<(), Failure> {
+        collect_wires::collect_wires(self, loops, segments)
     }
 
     /// Classifies a wire interval relative to a patch line; `composer.compute_code(&wire, line, 1, 1, 0.25, 0.75, false)?`.

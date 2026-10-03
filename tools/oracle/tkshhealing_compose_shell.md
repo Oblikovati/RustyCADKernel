@@ -24,6 +24,12 @@ The patch-limit fixture checks the native undefined-index sentinels and side-bit
 The protected `BreakWires` fixture records how one external diagonal partitions a closed square wire; it checks sequence order, segment orientation, and copied patch minima. It also checks the INTERNAL-wire edge conversion to an EXTERNAL segment.
 The two-patch planar `SplitEdges` row records the replacement type/count for each
 boundary edge after a vertical joint splits the top and bottom edges.
+The closed-mode planar row exercises per-segment bounds and patch-limit initialization
+while retaining the same topology replacements. The periodic-cylinder row exercises the
+periodic grid pass over a cylinder boundary; OCCT leaves all four original edge mappings
+unchanged for this fixture.
+The two `CollectWires` rows check extraction of one closed boundary loop and greedy joining
+of two manually split segments, including the consumed source orientations.
 The periodic-cylinder `SplitByLine` rows cut the seam at both U=0 and U=2π; the
 second row checks that shifting the cutter across the period preserves the native
 intersection order and vertex coordinates.

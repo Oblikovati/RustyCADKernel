@@ -9,6 +9,7 @@ use rustycad_tkernel::{
     standard::Handle,
 };
 use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomPlane, GeomSurface};
+use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Axis3, Cylinder3, Direction2, Line2, Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::{
@@ -206,6 +207,80 @@ fn native_compute_code(composer: &ShapeFixComposeShell, wire: &ShapeExtendWireDa
             .compute_code(wire, line, 1, 1, 0.25, 0.75, false)
             .unwrap()
     )
+}
+
+#[test]
+fn collect_wires_closes_a_single_boundary_loop_like_native() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let context = Handle::new(ShapeBuildReShape::new());
+    let composer = initialized_composer(&face_fixture(), &context);
+    let mut segments = composer.load_wires().unwrap();
+    let mut loops = Sequence::default();
+    composer.collect_wires(&mut loops, &mut segments).unwrap();
+    assert_eq!(
+        format!(
+            "collect_wires {} {} {} {} {}",
+            loops.length(),
+            loops.value(1).unwrap().nb_edges(),
+            segments.length(),
+            segments.value(1).unwrap().orientation() as i32,
+            loops.value(1).unwrap().orientation() as i32,
+        ),
+        native_row(expected, "collect_wires ")
+    );
+}
+
+#[test]
+fn collect_wires_chains_two_segments_in_native_orientation_order() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let context = Handle::new(ShapeBuildReShape::new());
+    let composer = initialized_composer(&face_fixture(), &context);
+    let original = composer.load_wires().unwrap().value(1).unwrap().clone();
+    let mut segments = split_boundary_segments(&original);
+    let mut loops = Sequence::default();
+    composer.collect_wires(&mut loops, &mut segments).unwrap();
+    assert_eq!(
+        collect_split_summary(&loops, &segments),
+        native_row(expected, "collect_wires_split ")
+    );
+}
+
+fn split_boundary_segments(original: &ShapeFixWireSegment) -> Sequence<ShapeFixWireSegment> {
+    let source = original.wire_data().get().unwrap();
+    let first = Handle::new(ShapeExtendWireData::new());
+    let second = Handle::new(ShapeExtendWireData::new());
+    first.set_manifold_mode(source.manifold_mode());
+    second.set_manifold_mode(source.manifold_mode());
+    for index in 1..=2 {
+        first.add_edge(&original.edge(index).unwrap(), 0).unwrap();
+        second
+            .add_edge(&original.edge(index + 2).unwrap(), 0)
+            .unwrap();
+    }
+    let mut segments = Sequence::default();
+    segments.append(ShapeFixWireSegment::from_wire_data(&first, Orientation::Forward).unwrap());
+    segments.append(ShapeFixWireSegment::from_wire_data(&second, Orientation::Forward).unwrap());
+    segments
+}
+
+fn collect_split_summary(
+    loops: &Sequence<ShapeFixWireSegment>,
+    segments: &Sequence<ShapeFixWireSegment>,
+) -> String {
+    let mut row = format!(
+        "collect_wires_split {} {} {}",
+        loops.length(),
+        loops.value(1).unwrap().nb_edges(),
+        segments.length()
+    );
+    for segment in segments.iter() {
+        row.push_str(&format!(" {}", segment.orientation() as i32));
+    }
+    row.push_str(&format!(
+        " {}",
+        loops.value(1).unwrap().orientation() as i32
+    ));
+    row
 }
 
 fn native_row<'a>(expected: &'a str, label: &str) -> &'a str {
