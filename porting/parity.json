@@ -222922,6 +222922,131 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_edge_curves",
       "status": "implemented",
       "notes": "Native edge-curve repair pass order, configuration and status oracle. FixEdgeCurves inherits remaining primitive and geometry-domain limitations; no whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedFaceDivide::ShapeUpgrade_ClosedFaceDivide()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedFaceDivide.hxx",
+      "source_sha256": "f75ee531755f04924a7f4ed774803b417a43e0f8040d23be5ff996353390f121",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedFaceDivide::empty",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedFaceDivide::ShapeUpgrade_ClosedFaceDivide(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedFaceDivide.hxx",
+      "source_sha256": "f75ee531755f04924a7f4ed774803b417a43e0f8040d23be5ff996353390f121",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedFaceDivide::new",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedFaceDivide::SplitSurface(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedFaceDivide.hxx",
+      "source_sha256": "f75ee531755f04924a7f4ed774803b417a43e0f8040d23be5ff996353390f121",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedFaceDivide::split_surface",
+      "status": "partial",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedFaceDivide::SetNbSplitPoints(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedFaceDivide.hxx",
+      "source_sha256": "f75ee531755f04924a7f4ed774803b417a43e0f8040d23be5ff996353390f121",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedFaceDivide::set_nb_split_points",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ClosedFaceDivide::GetNbSplitPoints() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ClosedFaceDivide.hxx",
+      "source_sha256": "f75ee531755f04924a7f4ed774803b417a43e0f8040d23be5ff996353390f121",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedFaceDivide::nb_split_points",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideClosed::ShapeUpgrade_ShapeDivideClosed(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideClosed.hxx",
+      "source_sha256": "a54dadbdc9731122f1d8873c0ab10fd8b80a30180282c800fe1a9e0b2acc4639",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideClosed::new",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideClosed::SetNbSplitPoints(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideClosed.hxx",
+      "source_sha256": "a54dadbdc9731122f1d8873c0ab10fd8b80a30180282c800fe1a9e0b2acc4639",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideClosed::set_nb_split_points",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::ShapeUpgrade_ShapeDivideArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::empty",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::ShapeUpgrade_ShapeDivideArea(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::new",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::MaxArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::max_area",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::max_area",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_max_area"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::NbParts()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::nb_parts",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::nb_parts",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_nb_parts"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::SetNumbersUVSplits(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_numbers_uv_splits",
+      "status": "partial",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideArea::SetSplittingByNumber(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideArea.hxx",
+      "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_splitting_by_number",
+      "status": "implemented",
+      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
     }
   ],
   "tests": [
