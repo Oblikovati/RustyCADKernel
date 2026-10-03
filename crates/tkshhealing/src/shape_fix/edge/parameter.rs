@@ -55,6 +55,20 @@ fn vertex_tolerance(vertex: Vertex) -> Result<(Vertex, f64), Failure> {
 }
 
 impl ShapeFixEdge {
+    /// Use OCCT's default zero tolerance for `FixSameParameter(edge, tolerance=0)`: `tool.fix_same_parameter_default(&edge)?`.
+    pub fn fix_same_parameter_default(&mut self, edge: &Edge) -> Result<bool, Failure> {
+        self.fix_same_parameter(edge, 0.0)
+    }
+
+    /// Use the default zero tolerance with a selected face; `tool.fix_same_parameter_on_face_default(&edge, &face)?`.
+    pub fn fix_same_parameter_on_face_default(
+        &mut self,
+        edge: &Edge,
+        face: &Face,
+    ) -> Result<bool, Failure> {
+        self.fix_same_parameter_on_face(edge, face, 0.0)
+    }
+
     /// Choose native repair or deviation-only tolerance growth; `tool.fix_same_parameter(&edge, 0.0)?`.
     pub fn fix_same_parameter(&mut self, edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
         self.fix_same_parameter_on_face(edge, &Face::default(), tolerance)
