@@ -24,49 +24,49 @@ pub(super) fn compute_code(
     internal: bool,
 ) -> Result<i32, Failure> {
     let fields = composer.fields.read().clone();
-    let special = special_segment(
-        wire,
-        begin_edge,
-        end_edge,
-        begin_parameter,
-        end_parameter,
-        &fields,
-        internal,
-    )?;
-    let result = sample_segment(
-        composer,
-        &fields,
-        wire,
-        line,
-        begin_edge,
-        end_edge,
-        begin_parameter,
-        end_parameter,
-        special,
-    )?;
-    finish_code(composer, &fields, result, line)
+    let bounds = segment_bounds((begin_edge, end_edge), (begin_parameter, end_parameter));
+    let special = special_segment(wire, bounds, &fields, internal)?;
+    sample_and_finish(composer, &fields, wire, line, bounds, special)
+}
+
+fn segment_bounds(edges: (i32, i32), params: (f64, f64)) -> SegmentBounds {
+    SegmentBounds {
+        begin_edge: edges.0,
+        end_edge: edges.1,
+        begin_parameter: params.0,
+        end_parameter: params.1,
+    }
+}
+
+fn sample_and_finish(
+    composer: &ShapeFixComposeShell,
+    fields: &super::ComposeShellFields,
+    wire: &ShapeExtendWireData,
+    line: Line2,
+    bounds: SegmentBounds,
+    special: i32,
+) -> Result<i32, Failure> {
+    let result = sample_segment(composer, fields, wire, line, bounds, special)?;
+    finish_code(composer, fields, result, line)
 }
 
 fn special_segment(
     wire: &ShapeExtendWireData,
-    begin_edge: i32,
-    end_edge: i32,
-    begin_parameter: f64,
-    end_parameter: f64,
+    bounds: SegmentBounds,
     fields: &super::ComposeShellFields,
     internal: bool,
 ) -> Result<i32, Failure> {
-    let edge = wire.edge(begin_edge)?;
+    let edge = wire.edge(bounds.begin_edge)?;
     let same_direction = matches!(
         edge.orientation(),
         Orientation::Forward | Orientation::Internal
-    ) == (begin_parameter > end_parameter);
-    if begin_edge == end_edge && same_direction {
+    ) == (bounds.begin_parameter > bounds.end_parameter);
+    if bounds.begin_edge == bounds.end_edge && same_direction {
         return Ok(1);
     }
     Ok(i32::from(
-        begin_edge == end_edge
-            && begin_parameter == end_parameter
+        bounds.begin_edge == bounds.end_edge
+            && bounds.begin_parameter == bounds.end_parameter
             && (fields.closed_mode || internal),
     ))
 }
@@ -76,14 +76,11 @@ fn sample_segment(
     fields: &super::ComposeShellFields,
     wire: &ShapeExtendWireData,
     line: Line2,
-    begin_edge: i32,
-    end_edge: i32,
-    begin_parameter: f64,
-    end_parameter: f64,
+    bounds: SegmentBounds,
     mut special: i32,
 ) -> Result<SampleResult, Failure> {
     let mut result = SampleResult::default();
-    let mut edge_index = begin_edge;
+    let mut edge_index = bounds.begin_edge;
     loop {
         sample_edge(
             composer,
@@ -92,27 +89,32 @@ fn sample_segment(
             line,
             &mut result,
             edge_index,
-            begin_edge,
-            end_edge,
-            begin_parameter,
-            end_parameter,
+            bounds,
             special,
         )?;
-        if result.stopped {
+        if !continue_sampling(&result, edge_index, bounds.end_edge, &mut special) {
             break;
-        }
-        if edge_index == end_edge {
-            if special <= 0 {
-                break;
-            }
-            special = -1;
         }
         edge_index = next_edge(edge_index, wire.nb_edges());
     }
     Ok(result)
 }
 
-#[allow(clippy::too_many_arguments)]
+fn continue_sampling(
+    result: &SampleResult,
+    edge_index: i32,
+    end_edge: i32,
+    special: &mut i32,
+) -> bool {
+    if result.stopped || (edge_index == end_edge && *special <= 0) {
+        return false;
+    }
+    if edge_index == end_edge {
+        *special = -1;
+    }
+    true
+}
+
 fn sample_edge(
     composer: &ShapeFixComposeShell,
     fields: &super::ComposeShellFields,
@@ -120,10 +122,7 @@ fn sample_edge(
     line: Line2,
     result: &mut SampleResult,
     edge_index: i32,
-    begin_edge: i32,
-    end_edge: i32,
-    begin_parameter: f64,
-    end_parameter: f64,
+    bounds: SegmentBounds,
     special: i32,
 ) -> Result<(), Failure> {
     let edge = wire.edge(edge_index)?;
@@ -136,14 +135,10 @@ fn sample_edge(
     result.tolerance = composer.limit_tolerance(BRepTool::edge_tolerance(&edge)?);
     let (start, end) = sample_parameters(
         edge_index,
-        begin_edge,
-        end_edge,
-        begin_parameter,
-        end_parameter,
+        bounds,
         special,
         edge.orientation(),
-        first,
-        last,
+        (first, last),
     );
     sample_parameters_on_edge(fields, line, result, curve, start, end)?;
     Ok(())
@@ -157,56 +152,92 @@ fn sample_parameters_on_edge(
     start: f64,
     end: f64,
 ) -> Result<(), Failure> {
-    let step = (end - start) / (SAMPLE_COUNT - 1) as f64;
-    let count = if step.abs() < precision::p_confusion() {
-        1
-    } else {
-        SAMPLE_COUNT
-    };
+    let (step, count) = sample_interval(start, end);
     for index in 0..count {
-        let mut point = curve.value(start + step * index as f64)?;
-        adjust_sample(fields, line, result, &mut point, index == 0);
-        let position = geometry::point_line_position(point, line).0;
-        if position == 0 {
-            continue;
-        }
-        if !coincides_with_line(point, line, fields, result.tolerance) {
-            if !fields.closed_mode {
-                result.code = position;
-                result.stopped = true;
-                return Ok(());
-            }
-            result.code |= position;
+        sample_point(
+            fields,
+            line,
+            result,
+            curve,
+            start + step * index as f64,
+            index == 0,
+        )?;
+        if result.stopped {
+            break;
         }
     }
     Ok(())
 }
 
+fn sample_interval(start: f64, end: f64) -> (f64, i32) {
+    let step = (end - start) / (SAMPLE_COUNT - 1) as f64;
+    (
+        step,
+        if step.abs() < precision::p_confusion() {
+            1
+        } else {
+            SAMPLE_COUNT
+        },
+    )
+}
+
+fn sample_point(
+    fields: &super::ComposeShellFields,
+    line: Line2,
+    result: &mut SampleResult,
+    curve: &dyn rustycad_tkg2d::geom2d::Geom2dCurve,
+    parameter: f64,
+    first: bool,
+) -> Result<(), Failure> {
+    let mut point = curve.value(parameter)?;
+    adjust_sample(fields, line, result, &mut point, first);
+    classify_sample_point(fields, line, result, point)
+}
+
+fn classify_sample_point(
+    fields: &super::ComposeShellFields,
+    line: Line2,
+    result: &mut SampleResult,
+    point: Point2,
+) -> Result<(), Failure> {
+    let position = geometry::point_line_position(point, line).0;
+    if position == 0 || coincides_with_line(point, line, fields, result.tolerance) {
+        return Ok(());
+    }
+    record_position(fields, result, position);
+    Ok(())
+}
+
+fn record_position(fields: &super::ComposeShellFields, result: &mut SampleResult, position: i32) {
+    if fields.closed_mode {
+        result.code |= position;
+        return;
+    }
+    result.code = position;
+    result.stopped = true;
+}
+
 fn sample_parameters(
     index: i32,
-    begin_edge: i32,
-    end_edge: i32,
-    begin: f64,
-    end: f64,
+    bounds: SegmentBounds,
     special: i32,
     orientation: Orientation,
-    first: f64,
-    last: f64,
+    range: (f64, f64),
 ) -> (f64, f64) {
     let reversed = orientation == Orientation::Reversed;
-    let start = if index == begin_edge && special >= 0 {
-        begin
+    let start = if index == bounds.begin_edge && special >= 0 {
+        bounds.begin_parameter
     } else if reversed {
-        last
+        range.1
     } else {
-        first
+        range.0
     };
-    let stop = if index == end_edge && special <= 0 {
-        end
+    let stop = if index == bounds.end_edge && special <= 0 {
+        bounds.end_parameter
     } else if reversed {
-        first
+        range.0
     } else {
-        last
+        range.1
     };
     (start, stop)
 }
@@ -219,10 +250,20 @@ fn adjust_sample(
     first_in_segment: bool,
 ) {
     if !fields.closed_mode {
-        result.previous_point = *point;
-        result.begin = false;
+        record_point(result, *point);
         return;
     }
+    adjust_periodic_sample(fields, line, result, point, first_in_segment);
+    record_point(result, *point);
+}
+
+fn adjust_periodic_sample(
+    fields: &super::ComposeShellFields,
+    line: Line2,
+    result: &mut SampleResult,
+    point: &mut Point2,
+    first_in_segment: bool,
+) {
     adjust_closed_axis(
         point,
         line,
@@ -241,8 +282,11 @@ fn adjust_sample(
         result,
         first_in_segment,
     );
+}
+
+fn record_point(result: &mut SampleResult, point: Point2) {
+    result.previous_point = point;
     result.begin = false;
-    result.previous_point = *point;
 }
 
 fn adjust_closed_axis(
@@ -321,7 +365,7 @@ fn next_edge(index: i32, count: i32) -> i32 {
 fn finish_code(
     composer: &ShapeFixComposeShell,
     fields: &super::ComposeShellFields,
-    mut sample: SampleResult,
+    sample: SampleResult,
     line: Line2,
 ) -> Result<i32, Failure> {
     if fields.closed_mode {
@@ -336,11 +380,15 @@ fn finish_code(
     if !sample.stopped {
         return Ok(0);
     }
-    if sample.code == BOTH {
-        sample.code = LEFT;
-        mark_failure(composer, ShapeExtendStatus::Fail2);
+    Ok(resolve_parity_code(composer, sample.code))
+}
+
+fn resolve_parity_code(composer: &ShapeFixComposeShell, code: i32) -> i32 {
+    if code != BOTH {
+        return code;
     }
-    Ok(sample.code)
+    mark_failure(composer, ShapeExtendStatus::Fail2);
+    LEFT
 }
 
 fn close_periodic_code(
@@ -387,6 +435,14 @@ struct SampleResult {
     tolerance: f64,
     u_shift: f64,
     v_shift: f64,
+}
+
+#[derive(Clone, Copy)]
+struct SegmentBounds {
+    begin_edge: i32,
+    end_edge: i32,
+    begin_parameter: f64,
+    end_parameter: f64,
 }
 
 impl Default for SampleResult {
