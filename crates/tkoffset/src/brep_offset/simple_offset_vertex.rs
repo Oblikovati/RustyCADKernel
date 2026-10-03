@@ -26,8 +26,9 @@ pub struct OffsetVertexGeometry {
 }
 
 /// Computes the private `FillVertexData` result from incident edge-map entries.
-/// Returns `None` when none contributes a non-null 3D offset curve. Native empty-sample
-/// behavior is unprobed and remains unsupported by this helper.
+/// Returns `None` only when the vertex has no incident edges; a nonempty map with no
+/// usable offset samples preserves OCCT's NaN point and zero tolerance result. A mapped
+/// null offset curve is reported because OCCT dereferences it without a defined result.
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Vertex;
@@ -55,7 +56,7 @@ pub fn build_simple_offset_vertex(
             &mut max_edge_tolerance,
         )?;
     }
-    if samples.is_empty() {
+    if incident_edges.is_empty() {
         return Ok(None);
     }
     let point = centroid(&samples);
@@ -74,7 +75,10 @@ fn collect_incident_samples(
         return Ok(());
     };
     let Some(offset_curve) = geometry.curve.get() else {
-        return Ok(());
+        // OCCT 3d097a0328e7 dereferences a bound null curve; its result is undefined.
+        return Err(Failure::new(
+            "mapped edge has a null offset curve; expected a non-null 3D curve",
+        ));
     };
     let (source_curve, first, last) = BRepTool::curve(&incident.edge)?;
     let Some(source_curve) = source_curve.get() else {
