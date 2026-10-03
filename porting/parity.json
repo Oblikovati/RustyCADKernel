@@ -30796,6 +30796,22 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::Domain1D::Min",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::min",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Max",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::max",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
+    },
+    {
       "upstream_id": "MathUtils::Domain1D()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
@@ -30906,6 +30922,38 @@
       "rust_item": "rustycad_tkmath::math_utils::Domain2D",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::UMin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::u_min",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::UMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::u_max",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::VMin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::v_min",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::VMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::v_max",
+      "status": "implemented",
+      "notes": "Public C++ data field maps to the corresponding publicly mutable Rust struct field."
     },
     {
       "upstream_id": "MathUtils::Domain2D()",
