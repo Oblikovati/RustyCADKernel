@@ -2,13 +2,16 @@
 //! (twin of tkernel_standard_values_probe.cxx).
 use super::super::common::{guarded, hex, next, next_bytes};
 use super::scalar::hex64;
-use rustycad_tkernel::standard::{Guid, atomic, time, version_info};
+use rustycad_tkernel::standard::{GUID_SIZE, GUID_SIZE_ALLOC, Guid, atomic, time, version_info};
 use std::str::SplitWhitespace;
 use std::sync::atomic::{AtomicI32, Ordering};
 
 /// Text, UUID fields, std::hash, ToExtString and ShallowDump of one GUID.
 fn guid_image(guid: Guid) -> String {
     let uuid = guid.to_uuid();
+    let mut c_string = [0; GUID_SIZE_ALLOC];
+    guid.write_c_string(&mut c_string);
+    let text = std::str::from_utf8(&c_string[..GUID_SIZE]).expect("GUID uses ASCII");
     let ext: Vec<u8> = guid
         .to_ext_string()
         .iter()
@@ -17,7 +20,7 @@ fn guid_image(guid: Guid) -> String {
     let mut dump = String::new();
     guid.shallow_dump(&mut dump).expect("String write");
     format!(
-        "{guid} {} {} {} {} {} {} {dump}",
+        "{text} {} {} {} {} {} {} {dump}",
         uuid.data1,
         uuid.data2,
         uuid.data3,

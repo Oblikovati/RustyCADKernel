@@ -110,8 +110,21 @@ impl Guid {
     /// ```
     pub fn to_c_string(self) -> [u8; GUID_SIZE_ALLOC] {
         let mut output: [u8; GUID_SIZE_ALLOC] = [0; GUID_SIZE_ALLOC];
-        output[..GUID_SIZE].copy_from_slice(self.to_string().as_bytes());
+        self.write_c_string(&mut output);
         output
+    }
+
+    /// Writes lowercase text and a NUL into an OCCT-sized output buffer.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::{Guid, GUID_SIZE_ALLOC};
+    /// let mut output = [b'X'; GUID_SIZE_ALLOC];
+    /// Guid::new().write_c_string(&mut output);
+    /// assert_eq!(output[36], 0);
+    /// ```
+    pub fn write_c_string(&self, output: &mut [u8; GUID_SIZE_ALLOC]) {
+        output[..GUID_SIZE].copy_from_slice(self.to_string().as_bytes());
+        output[GUID_SIZE] = 0;
     }
 
     /// `ToExtString(Standard_PExtCharacter)`: the UTF-16 text and its NUL terminator.
@@ -157,5 +170,25 @@ impl std::fmt::Display for Guid {
             write!(f, "{byte:02x}")?;
         }
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{GUID_SIZE, GUID_SIZE_ALLOC, Guid};
+
+    #[test]
+    fn writes_complete_text_and_replaces_previous_terminator() {
+        let guid = Guid::from_components(
+            0x12345678, 0x9abc, 0xdef0, 0x1234, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+        );
+        let mut output = [b'X'; GUID_SIZE_ALLOC];
+        guid.write_c_string(&mut output);
+
+        assert_eq!(
+            &output[..GUID_SIZE],
+            b"12345678-9abc-def0-1234-56789abcdef0"
+        );
+        assert_eq!(output[GUID_SIZE], 0);
     }
 }
