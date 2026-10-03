@@ -93585,7 +93585,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -93617,7 +93617,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -216222,7 +216222,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -220638,7 +220638,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::curve",
       "status": "implemented",
-      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress. Supplemental periodic full-knot-removal fixture currently exposes an extra upper-end split parameter in Rust; investigation pending, module acceptance is false."
     },
     {
       "upstream_id": "ShapeFix_EdgeProjAux::Init2d(const double)",
@@ -220654,7 +220654,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::compute",
       "status": "implemented",
-      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress. Supplemental periodic full-knot-removal fixture currently exposes an extra upper-end split parameter in Rust; investigation pending, module acceptance is false."
     },
     {
       "upstream_id": "ShapeFix_EdgeProjAux::Init(const TopoDS_Face &,const TopoDS_Edge &)",
@@ -220678,7 +220678,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::set_criterion",
       "status": "implemented",
-      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress. Supplemental periodic full-knot-removal fixture currently exposes an extra upper-end split parameter in Rust; investigation pending, module acceptance is false."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::SetTolerance(const double)",
@@ -220686,7 +220686,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::set_tolerance",
       "status": "implemented",
-      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress. Supplemental periodic full-knot-removal fixture currently exposes an extra upper-end split parameter in Rust; investigation pending, module acceptance is false."
     },
     {
       "upstream_id": "ShapeFix_EdgeProjAux::Init3d(const double)",
@@ -220742,7 +220742,39 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::new",
       "status": "implemented",
-      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress. Supplemental periodic full-knot-removal fixture currently exposes an extra upper-end split parameter in Rust; investigation pending, module acceptance is false."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitCommonVertex::Init(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitCommonVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex::init",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_fix_split_common_vertex.cxx and six Rust regressions verify orientation-sensitive matching, per-face replacement reuse, discarded Init result, warning target, shared handles and actual ShapeFixRoot base projection. No exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitCommonVertex::Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitCommonVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex::shape",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_fix_split_common_vertex.cxx and six Rust regressions verify orientation-sensitive matching, per-face replacement reuse, discarded Init result, warning target, shared handles and actual ShapeFixRoot base projection. No exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitCommonVertex::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitCommonVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex::perform",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_fix_split_common_vertex.cxx and six Rust regressions verify orientation-sensitive matching, per-face replacement reuse, discarded Init result, warning target, shared handles and actual ShapeFixRoot base projection. No exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitCommonVertex::ShapeFix_SplitCommonVertex()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitCommonVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_fix_split_common_vertex.cxx and six Rust regressions verify orientation-sensitive matching, per-face replacement reuse, discarded Init result, warning target, shared handles and actual ShapeFixRoot base projection. No exhaustive behavioral proof."
     }
   ],
   "tests": [

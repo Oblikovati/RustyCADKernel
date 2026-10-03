@@ -13,7 +13,7 @@ use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixSplitCommonVertex};
 fn splits_shared_equal_vertex_on_later_wire_and_warns_on_root_shape() {
     let (face, _, _) = two_wire_face(false);
     let registrator = Handle::new(ShapeExtendMsgRegistrator::new());
-    let mut fixer = ShapeFixSplitCommonVertex::new();
+    let fixer = ShapeFixSplitCommonVertex::new();
     fixer.set_msg_registrator(&registrator.clone().cast::<dyn BasicMsgRegistrator>());
     fixer.init(&face.clone().into_shape()).unwrap();
     fixer.perform().unwrap();
@@ -24,7 +24,7 @@ fn splits_shared_equal_vertex_on_later_wire_and_warns_on_root_shape() {
 #[test]
 fn does_not_split_vertices_with_different_orientations() {
     let (face, _, _) = two_wire_face(true);
-    let mut fixer = ShapeFixSplitCommonVertex::new();
+    let fixer = ShapeFixSplitCommonVertex::new();
     fixer.init(&face.into_shape()).unwrap();
     fixer.perform().unwrap();
     assert_face_endpoint_identity(&fixer.shape().unwrap(), true);
@@ -42,7 +42,7 @@ fn init_discards_the_context_apply_result_until_perform() {
         &replacement.clone().into_shape(),
     )
     .unwrap();
-    let mut fixer = ShapeFixSplitCommonVertex::new();
+    let fixer = ShapeFixSplitCommonVertex::new();
     fixer.set_context(&Handle::new(context));
     fixer.init(&source.clone().into_shape()).unwrap();
     assert!(fixer.shape().unwrap().is_same(&source.clone().into_shape()));
@@ -53,7 +53,7 @@ fn init_discards_the_context_apply_result_until_perform() {
 #[test]
 fn replacements_are_reused_across_wire_pairs_on_one_face() {
     let face = three_wire_face();
-    let mut fixer = ShapeFixSplitCommonVertex::new();
+    let fixer = ShapeFixSplitCommonVertex::new();
     fixer.init(&face.into_shape()).unwrap();
     fixer.perform().unwrap();
     let edges = face_edges(&fixer.shape().unwrap());
@@ -71,14 +71,14 @@ fn compound_input_runs_face_search_and_root_shape_kinds_above_face_are_noop() {
     Builder
         .add(&mut compound_shape, &face.clone().into_shape())
         .unwrap();
-    let mut fixer = ShapeFixSplitCommonVertex::new();
+    let fixer = ShapeFixSplitCommonVertex::new();
     fixer.init(&compound_shape).unwrap();
     fixer.perform().unwrap();
     assert_face_endpoint_identity(&fixer.shape().unwrap(), false);
 
     let mut wire = Wire::default();
     Builder.make_wire(&mut wire);
-    let mut no_op = ShapeFixSplitCommonVertex::new();
+    let no_op = ShapeFixSplitCommonVertex::new();
     no_op.init(&wire.clone().into_shape()).unwrap();
     no_op.perform().unwrap();
     assert!(no_op.shape().unwrap().is_same(&wire.into_shape()));
@@ -182,4 +182,23 @@ fn vertex_at_shared_point(edge: &Shape) -> Vertex {
         })
         .map(|child| topods::vertex(&child).unwrap())
         .unwrap()
+}
+
+#[test]
+fn native_handle_aliases_share_mutations_and_project_to_real_root() {
+    use rustycad_tkshhealing::shape_fix::ShapeFixRoot;
+    let (face, _, _) = two_wire_face(false);
+    let fixer = Handle::new(ShapeFixSplitCommonVertex::new());
+    let alias = fixer.clone();
+    let root = fixer.cast::<ShapeFixRoot>();
+    assert!(!root.is_null());
+    fixer.init(&face.into_shape()).unwrap();
+    assert_eq!(
+        root.context().object_address(),
+        fixer.context().object_address()
+    );
+    alias.perform().unwrap();
+    assert_face_endpoint_identity(&fixer.shape().unwrap(), false);
+    root.set_precision(0.25);
+    assert_eq!(fixer.precision(), 0.25);
 }

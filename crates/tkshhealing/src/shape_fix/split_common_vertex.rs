@@ -5,7 +5,7 @@
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::ShapeExtendWireData;
-use crate::shape_fix::{FixRoot, FixRootData};
+use crate::shape_fix::{FixRoot, FixRootData, ShapeFixRoot};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_tools::ReShape;
@@ -13,7 +13,7 @@ use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Face, Shape, ShapeIterator, Vertex, Wire};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::message::Msg;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::Point3;
 
@@ -25,7 +25,7 @@ use rustycad_tkmath::gp::Point3;
 /// use rustycad_tkshhealing::shape_fix::ShapeFixSplitCommonVertex;
 /// let mut face = Face::default();
 /// BRepBuilder::default().make_face(&mut face);
-/// let mut fixer = ShapeFixSplitCommonVertex::new();
+/// let fixer = ShapeFixSplitCommonVertex::new();
 /// fixer.init(&face.clone().into_shape())?;
 /// fixer.perform()?;
 /// assert!(fixer.shape()?.is_same(&face.clone().into_shape()));
@@ -33,11 +33,10 @@ use rustycad_tkmath::gp::Point3;
 /// ```
 #[derive(Default)]
 pub struct ShapeFixSplitCommonVertex {
-    parent: StandardTransient,
-    root: FixRootData,
-    shape: Shape,
+    parent: ShapeFixRoot,
+    shape: SharedState<Shape>,
 }
-impl_transient!(ShapeFixSplitCommonVertex, "ShapeFix_SplitCommonVertex", StandardTransient, parent, interfaces: [dyn FixRoot]);
+impl_transient!(ShapeFixSplitCommonVertex, "ShapeFix_SplitCommonVertex", ShapeFixRoot, parent, interfaces: [dyn FixRoot]);
 
 impl ShapeFixSplitCommonVertex {
     /// `ShapeFix_SplitCommonVertex()`: initializes the root precision and an empty shape;
@@ -49,8 +48,8 @@ impl ShapeFixSplitCommonVertex {
     }
 
     /// `Init(shape)`: retains the input while ensuring a context exists; `fixer.init(&shape)?`.
-    pub fn init(&mut self, shape: &Shape) -> Result<(), Failure> {
-        self.shape = shape.clone();
+    pub fn init(&self, shape: &Shape) -> Result<(), Failure> {
+        *self.shape.write() = shape.clone();
         let context = self.context();
         if context.is_null() {
             self.set_context(&Handle::new(ShapeBuildReShape::new()));
@@ -62,23 +61,25 @@ impl ShapeFixSplitCommonVertex {
 
     /// `Perform()`: replaces matching vertices on the later wire of each face;
     /// `fixer.perform()?`.
-    pub fn perform(&mut self) -> Result<(), Failure> {
-        if self.shape.shape_type()? > ShapeEnum::Face {
+    pub fn perform(&self) -> Result<(), Failure> {
+        let original = self.shape.read().clone();
+        if original.shape_type()? > ShapeEnum::Face {
             return Ok(());
         }
-        self.perform_faces()?;
-        self.shape = self.context().apply(&self.shape, ShapeEnum::Shape)?;
+        self.perform_faces(&original)?;
+        let result = self.context().apply(&original, ShapeEnum::Shape)?;
+        *self.shape.write() = result;
         Ok(())
     }
 
     /// `Shape()`: the retained input after recorded replacements are applied;
     /// `let result = fixer.shape()?`.
     pub fn shape(&self) -> Result<Shape, Failure> {
-        Ok(self.shape.clone())
+        Ok(self.shape.read().clone())
     }
 
-    fn perform_faces(&self) -> Result<(), Failure> {
-        let faces = Explorer::new(&self.shape, ShapeEnum::Face, ShapeEnum::Shape)?;
+    fn perform_faces(&self, original: &Shape) -> Result<(), Failure> {
+        let faces = Explorer::new(original, ShapeEnum::Face, ShapeEnum::Shape)?;
         for face in faces {
             self.split_face_wires(&face)?;
         }
@@ -97,6 +98,7 @@ impl ShapeFixSplitCommonVertex {
         }
         let mut replacements = Vec::new();
         for first in 0..wires.len() - 1 {
+            let _first_wire_data = ShapeExtendWireData::from_wire(&wires[first], true, true)?;
             for second in first + 1..wires.len() {
                 self.compare_wire_pair(&wires[first], &wires[second], &mut replacements)?;
             }
@@ -119,13 +121,14 @@ impl ShapeFixSplitCommonVertex {
         second: &Wire,
         replacements: &mut Vec<(Shape, Vertex)>,
     ) -> Result<(), Failure> {
+        let second_wire_data = ShapeExtendWireData::from_wire(second, true, true)?;
         let first_vertices = vertices(&first.clone().into_shape())?;
         let second_vertices = vertices(&second.clone().into_shape())?;
         for left in &first_vertices {
             for right in &second_vertices {
                 if left.is_equal(right) {
                     let replacement = replacement_for(right, replacements)?;
-                    replace_edge_vertices(self, second, right, &replacement)?;
+                    replace_edge_vertices(self, &second_wire_data, right, &replacement)?;
                 }
             }
         }
@@ -135,7 +138,7 @@ impl ShapeFixSplitCommonVertex {
 
 impl FixRoot for ShapeFixSplitCommonVertex {
     fn fix_root_data(&self) -> &FixRootData {
-        &self.root
+        self.parent.fix_root_data()
     }
 }
 
@@ -173,11 +176,10 @@ fn replacement_for(
 
 fn replace_edge_vertices(
     fixer: &ShapeFixSplitCommonVertex,
-    wire: &Wire,
+    wire_data: &ShapeExtendWireData,
     shared: &Vertex,
     replacement: &Vertex,
 ) -> Result<(), Failure> {
-    let wire_data = ShapeExtendWireData::from_wire(wire, true, true)?;
     let analysis = ShapeAnalysisEdge::new();
     for index in 1..=wire_data.nb_edges() {
         let edge = wire_data.edge(index)?;
