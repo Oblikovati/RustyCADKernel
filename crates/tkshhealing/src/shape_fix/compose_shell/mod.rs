@@ -1,4 +1,5 @@
 //! Shell composition state and public operations from `ShapeFix_ComposeShell`.
+mod compute_code;
 mod geometry;
 mod grid;
 mod init;
@@ -144,5 +145,27 @@ impl ShapeFixComposeShell {
         Failure,
     > {
         load_wires::load_wires(self)
+    }
+
+    pub(super) fn compute_code(
+        &self,
+        wire: &crate::shape_extend::ShapeExtendWireData,
+        line: rustycad_tkmath::gp::Line2,
+        begin_edge: i32,
+        end_edge: i32,
+        begin_parameter: f64,
+        end_parameter: f64,
+        internal: bool,
+    ) -> Result<i32, Failure> {
+        compute_code::compute_code(
+            self,
+            wire,
+            line,
+            begin_edge,
+            end_edge,
+            begin_parameter,
+            end_parameter,
+            internal,
+        )
     }
 }

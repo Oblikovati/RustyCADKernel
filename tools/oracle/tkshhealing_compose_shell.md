@@ -8,6 +8,10 @@ and status while leaving closed mode disabled.
 The protected `LoadWires` fixture uses a derived native probe to verify edge count and
 traversal orientation for a manifold boundary. It also verifies that an empty
 nonmanifold partition does not produce a spurious wire segment.
+The `ComputeCode` fixture checks the protected edge-side classifier on a p-curve
+subrange against a vertical cutting line.
+The two-patch planar `SplitEdges` row records the replacement type/count for each
+boundary edge after a vertical joint splits the top and bottom edges.
 
 ```sh
 build=/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full

@@ -231,6 +231,36 @@ mod tests {
         );
     }
 
+    #[test]
+    fn edge_segment_side_code_matches_native_protected_helper() {
+        let expected =
+            include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
+        let composer = ShapeFixComposeShell::new();
+        let context = Handle::new(ShapeBuildReShape::new());
+        composer.set_context(&context);
+        composer
+            .init(
+                &one_patch_grid(),
+                &Location::default(),
+                &square_face(),
+                1.0e-7,
+            )
+            .unwrap();
+        let segments = load_wires(&composer).unwrap();
+        let wire = segments.value(1).unwrap().wire_data().get().unwrap();
+        let line = rustycad_tkmath::gp::Line2::new(
+            rustycad_tkmath::gp::Point2::new(1.0, 0.0),
+            rustycad_tkmath::gp::Direction2::new(0.0, 1.0).unwrap(),
+        );
+        let code = composer
+            .compute_code(wire, line, 1, 1, 0.25, 0.75, false)
+            .unwrap();
+        assert_eq!(
+            format!("compute_code {code}"),
+            expected.lines().nth(5).unwrap()
+        );
+    }
+
     fn native_segment_summary(segments: &Sequence<ShapeFixWireSegment>) -> String {
         let segment = segments.value(1).unwrap();
         let orientation = if segment.orientation() == Orientation::Reversed {
