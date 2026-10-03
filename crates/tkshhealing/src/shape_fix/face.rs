@@ -179,6 +179,12 @@ impl ShapeFixFace {
         natural_bound::fix_add_natural_bound(self)
     }
 
+    /// Adds a missing periodic seam and removes ComposeShell's small by-products.
+    /// Example: `let changed = fixer.fix_missing_seam()?`.
+    pub fn fix_missing_seam(&self) -> Result<bool, Failure> {
+        missing_seam::fix::fix(self)
+    }
+
     /// `Perform()`: preserve context replacements and repair a single periodic cone loop.
     pub fn perform(&self) -> Result<bool, Failure> {
         *self.status.write() = 0;
