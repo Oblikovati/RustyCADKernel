@@ -3,6 +3,7 @@
 //! OCCT package ShapeFix: the fixing tools that correct the problems that ShapeAnalysis
 //! detects. docs/shhealing-design.md section 4 fixes how its classes map;
 //! docs/tkshhealing-progress.md lists the ported classes.
+mod edge;
 mod edge_connect;
 mod face;
 mod face_connect;
@@ -14,6 +15,7 @@ mod shape_tolerance;
 mod shell_orientation;
 mod wire;
 
+pub use edge::ShapeFixEdge;
 pub use edge_connect::ShapeFixEdgeConnect;
 pub use face::ShapeFixFace;
 pub use face_connect::ShapeFixFaceConnect;
