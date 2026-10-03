@@ -223704,6 +223704,78 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::new",
       "status": "implemented",
       "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix::FixVertexPosition(TopoDS_Shape&,double,const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
+      "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::fix_vertex_position",
+      "status": "partial",
+      "notes": "Fourteen pinned native fixture rows cover vertex grouping, recursive rejection, loop ordering, endpoint splitting and midpoint updates. Null reshape context returns explicit Failure on repair paths where native dereferences null; internal vertices, transformed placements and prepopulated contexts need broader oracle coverage. Additional differential cases, no new legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::ShapeFix_FixSmallSolid()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::new",
+      "status": "implemented",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::SetFixMode(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::set_fix_mode",
+      "status": "implemented",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::SetVolumeThreshold(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::set_volume_threshold",
+      "status": "implemented",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::SetWidthFactorThreshold(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::set_width_factor_threshold",
+      "status": "implemented",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::Remove(const TopoDS_Shape&,const occ::handle<ShapeBuild_ReShape>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::remove",
+      "status": "partial",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallSolid::Merge(const TopoDS_Shape&,const occ::handle<ShapeBuild_ReShape>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
+      "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::merge",
+      "status": "partial",
+      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::FixSelfIntersectWire(occ::handle<ShapeExtend_WireData>&,const TopoDS_Face&,int&,int&,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_self_intersect_wire",
+      "status": "partial",
+      "notes": "Four native fixture cases cover crossing, long/short overlaps and endpoint reuse at a mixed transition. Multiple-hit, endpoint union, reversed/asymmetric and broader overlap replacement branches require additional evidence. No whole-class parity claim or new legacy mappings."
     }
   ],
   "tests": [

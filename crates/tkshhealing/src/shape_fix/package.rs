@@ -48,3 +48,5 @@ mod same_parameter;
 
 #[cfg(test)]
 mod plane_tolerances_tests;
+
+mod vertex_position;
