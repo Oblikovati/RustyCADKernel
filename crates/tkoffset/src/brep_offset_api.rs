@@ -1,7 +1,7 @@
 // Rust translation of BRepOffsetAPI_MakeOffsetShape::PerformBySimple at OCCT 3d097a0328e7.
 
 //! The simple-algorithm entry point of `BRepOffsetAPI_MakeOffsetShape`.
-use super::BRepOffsetMakeSimpleOffset;
+use crate::brep_offset::BRepOffsetMakeSimpleOffset;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::ncollection::List;
@@ -21,7 +21,8 @@ enum LastOffsetAlgorithm {
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Shape;
-/// use rustycad_tkoffset::brep_offset::BRepOffsetAPIMakeOffsetShape;
+/// use rustycad_tkoffset::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
+/// use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 /// let mut maker = BRepOffsetAPIMakeOffsetShape::new();
 /// maker.perform_by_simple(&Shape::default(), 1.0)?;
 /// assert!(!maker.is_done());
