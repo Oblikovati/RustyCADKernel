@@ -11,7 +11,9 @@ impl ShapeAnalysisWire {
         fields.status_gaps2d = 0;
         fields.status_degenerated = 0;
         fields.status_closed = 0;
+        fields.status_lacking = 0;
         fields.min_3d = 0.;
+        fields.max_3d = 0.;
         fields.min_2d = 0.;
         fields.max_2d = 0.;
     }
