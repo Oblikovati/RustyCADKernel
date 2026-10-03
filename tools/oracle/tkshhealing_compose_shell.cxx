@@ -183,6 +183,30 @@ static void runCollectWires(bool splitInputs = false)
   std::cout << ' ' << loops(1).Orientation() << '\n';
 }
 
+static void runPerform()
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    wire.Add(BRepBuilderAPI_MakeEdge(points[i], points[(i + 1) % 4]).Edge());
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ShapeFix_ComposeShell tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  bool done = tool.Perform();
+  TopoDS_Shape result = tool.Result();
+  int children = 0;
+  for (TopoDS_Iterator it(result); it.More(); it.Next())
+    ++children;
+  std::cout << "perform_plane_face " << done << ' ' << result.ShapeType() << ' '
+            << result.Orientation() << ' ' << children << ' '
+            << tool.Status(ShapeExtend_DONE1) << '\n';
+}
+
 static void runBreakWires()
 {
   BRep_Builder builder;
@@ -506,6 +530,7 @@ int main()
   runSplitEdges();
   runCollectWires();
   runCollectWires(true);
+  runPerform();
   runSplitEdges(true);
   runSplitEdgesPeriodicCylinder();
 }
