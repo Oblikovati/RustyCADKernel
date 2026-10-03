@@ -1,13 +1,13 @@
 // Rust translation of ShapeFix_ComposeShell::SplitWire at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::{ComposeShellFields, ShapeFixComposeShell, grid};
+use crate::shape_analysis::ShapeAnalysisSurface;
 mod context;
-use crate::shape_build::ShapeBuildReShape;
 use crate::shape_fix::{FixRoot, ShapeFixWireSegment, WirePatchIndex};
 use context::{apply_context, distribute_split_points};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Edge, Shape, Vertex};
 use rustycad_tkernel::ncollection::Sequence;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Point3;
 
@@ -33,7 +33,7 @@ pub(super) fn split_wire(
 struct SplitWireState<'a> {
     composer: &'a ShapeFixComposeShell,
     fields: ComposeShellFields,
-    context: Handle<ShapeBuildReShape>,
+    surface_tool: ShapeAnalysisSurface,
     wire: &'a mut ShapeFixWireSegment,
     indices: &'a mut Sequence<i32>,
     values: &'a Sequence<f64>,
@@ -60,12 +60,13 @@ pub(super) struct SplitEdgeWork {
 impl<'a> SplitWireState<'a> {
     fn new(composer: &'a ShapeFixComposeShell, input: SplitWireInput<'a>) -> Result<Self, Failure> {
         let fields = composer.fields.read().clone();
-        let context = composer.context();
-        context.get().ok_or_else(null_context)?;
+        composer.context().get().ok_or_else(null_context)?;
+        let surface_tool =
+            ShapeAnalysisSurface::new(&rustycad_tkbrep::brep::BRepTool::surface(&fields.face)?)?;
         Ok(Self {
             composer,
             fields,
-            context,
+            surface_tool,
             wire: input.wire,
             indices: input.indices,
             values: input.values,
@@ -90,7 +91,7 @@ impl<'a> SplitWireState<'a> {
     }
 
     fn process_edge(&mut self, edge_index: i32) -> Result<(), Failure> {
-        let replaced_count = apply_context(self.wire, edge_index, &self.context)?;
+        let replaced_count = apply_context(self.wire, edge_index, &self.composer.context())?;
         self.distribute_if_replaced(edge_index, replaced_count)?;
         let edge = self.wire.edge(edge_index)?;
         self.process_edge_geometry(edge_index, edge)
@@ -109,6 +110,7 @@ impl<'a> SplitWireState<'a> {
             self.values,
         )?;
         if count <= 0 {
+            // Native SplitWire retries this dismissed edge and the pinned probe crashes.
             return Err(not_implemented(
                 "SplitWire cannot process a removed source edge",
             ));
@@ -124,7 +126,8 @@ impl<'a> SplitWireState<'a> {
             self.append_unsplit_edge(&edge, patch, code)?;
             return Ok(());
         }
-        let edge_state = EdgeSplitState::new(self.composer, &self.fields, &edge)?;
+        let edge_state =
+            EdgeSplitState::new(self.composer, &self.fields, &self.surface_tool, &edge)?;
         self.split_edge_at_parameters(edge, patch, edge_state, stop)
     }
 
@@ -331,7 +334,8 @@ impl<'a> SplitWireState<'a> {
                 work.initial_edge_count,
                 work.edge.orientation(),
             )?;
-            self.context
+            self.composer
+                .context()
                 .get()
                 .ok_or_else(null_context)?
                 .replace(&work.edge.clone().into_shape(), &wire.into_shape())?;
@@ -369,7 +373,12 @@ impl<'a> SplitWireState<'a> {
         if self.wire.orientation() != Orientation::Internal || code != 0 {
             return Ok(edge.clone());
         }
-        copy_as_external_edge(edge, edge_state, &self.fields.face, &self.context)
+        copy_as_external_edge(
+            edge,
+            edge_state,
+            &self.fields.face,
+            &self.composer.context(),
+        )
     }
 }
 

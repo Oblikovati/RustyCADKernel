@@ -31,6 +31,7 @@ public:
   using ShapeFix_ComposeShell::ComputeCode;
   using ShapeFix_ComposeShell::BreakWires;
   using ShapeFix_ComposeShell::SplitWire;
+  using ShapeFix_ComposeShell::SplitByLine;
 };
 
 static void runInit()
@@ -291,6 +292,100 @@ static void runSplitWire()
   std::cout << '\n';
 }
 
+static void runSplitByLine()
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    wire.Add(BRepBuilderAPI_MakeEdge(points[i], points[(i + 1) % 4]).Edge());
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  tool.LoadWires(segments);
+  ShapeFix_WireSegment segment = segments(1);
+  gp_Lin2d line(gp_Pnt2d(1, 0), gp_Dir2d(0, 1));
+  NCollection_Sequence<double> parameters;
+  NCollection_Sequence<int> codes;
+  NCollection_Sequence<TopoDS_Shape> vertices;
+  bool done = tool.SplitByLine(segment, line, true, 1, parameters, codes, vertices);
+  std::cout << "split_by_line " << done << ' ' << segment.NbEdges() << ' '
+            << parameters.Length() << ' ' << codes.Length() << ' ' << vertices.Length();
+  for (int i = 1; i <= parameters.Length(); ++i)
+  {
+    gp_Pnt point = BRep_Tool::Pnt(TopoDS::Vertex(vertices(i)));
+    std::cout << ' ' << parameters(i) << ':' << codes(i) << ':' << point.X() << ':' << point.Y();
+  }
+  std::cout << '\n';
+}
+
+static void runSplitByLineLooseVertex()
+{
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), 0., 2., 0., 2.).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  BRep_Builder builder;
+  TopoDS_Vertex source;
+  builder.MakeVertex(source, gp_Pnt(1, 1, 0), 1.0e-7);
+  ShapeFix_WireSegment segment;
+  segment.SetVertex(source);
+  gp_Lin2d line(gp_Pnt2d(1, 0), gp_Dir2d(0, 1));
+  NCollection_Sequence<double> parameters;
+  NCollection_Sequence<int> codes;
+  NCollection_Sequence<TopoDS_Shape> vertices;
+  bool done = tool.SplitByLine(segment, line, true, 1, parameters, codes, vertices);
+  gp_Pnt point = BRep_Tool::Pnt(TopoDS::Vertex(vertices(1)));
+  std::cout << "split_by_line_vertex " << done << ' ' << segment.IsVertex() << ' '
+            << parameters.Length() << ' ' << codes(1) << ' ' << point.X() << ':' << point.Y()
+            << '\n';
+}
+
+static void runSplitWireInternalVertex()
+{
+  TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0)).Edge();
+  BRep_Builder builder;
+  TopoDS_Vertex internal;
+  builder.MakeVertex(internal, gp_Pnt(0.5, 0, 0), 1.0e-7);
+  internal.Orientation(TopAbs_INTERNAL);
+  builder.Add(edge, internal);
+  ShapeFix_WireSegment segment;
+  segment.AddEdge(0, edge);
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), 0., 2., -1., 1.).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  NCollection_Sequence<int> indices, codes;
+  indices.Append(1);
+  codes.Append(2);
+  NCollection_Sequence<double> values;
+  values.Append(1.0);
+  NCollection_Sequence<TopoDS_Shape> vertices;
+  ShapeFix_WireSegment result = tool.SplitWire(segment, indices, values, vertices, codes, true, 1);
+  std::cout << "split_wire_internal " << result.NbEdges() << ' ' << vertices.Length();
+  for (int i = 1; i <= result.NbEdges(); ++i)
+  {
+    int internalCount = 0;
+    for (TopoDS_Iterator child(result.Edge(i), false); child.More(); child.Next())
+      internalCount += child.Value().Orientation() == TopAbs_INTERNAL;
+    std::cout << ' ' << internalCount;
+  }
+  std::cout << '\n';
+}
+
 static void runPatchLimits()
 {
   TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)).Edge();
@@ -319,6 +414,9 @@ int main()
   runMixedLoadWires();
   runComputeCode();
   runSplitWire();
+  runSplitWireInternalVertex();
+  runSplitByLine();
+  runSplitByLineLooseVertex();
   runBreakWires();
   runInternalExternalBreakWires();
   runPatchLimits();

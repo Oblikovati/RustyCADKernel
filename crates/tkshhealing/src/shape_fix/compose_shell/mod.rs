@@ -5,6 +5,7 @@ mod geometry;
 mod grid;
 mod init;
 mod load_wires;
+mod split_by_line;
 mod split_wire;
 
 use crate::shape_analysis::{ShapeAnalysisTransferParametersProj, TransferParameters};
@@ -221,6 +222,34 @@ impl ShapeFixComposeShell {
                 segment_codes,
                 cut_by_u,
                 cut_index,
+            },
+        )
+    }
+
+    /// Splits one oriented wire at intersections with a parameter-space line.
+    /// `composer.split_by_line(&mut wire, line, true, 1, &mut parameters, &mut codes, &mut vertices)?`.
+    // Keep OCCT's protected parameter list intact for direct porting of derived classes.
+    #[allow(clippy::too_many_arguments)]
+    pub fn split_by_line(
+        &self,
+        wire: &mut crate::shape_fix::ShapeFixWireSegment,
+        line: rustycad_tkmath::gp::Line2,
+        cut_by_u: bool,
+        cut_index: i32,
+        line_parameters: &mut rustycad_tkernel::ncollection::Sequence<f64>,
+        point_codes: &mut rustycad_tkernel::ncollection::Sequence<i32>,
+        vertices: &mut rustycad_tkernel::ncollection::Sequence<Shape>,
+    ) -> Result<bool, Failure> {
+        split_by_line::split_by_line(
+            self,
+            split_by_line::SplitByLineInput {
+                wire,
+                line,
+                cut_by_u,
+                cut_index,
+                line_parameters,
+                point_codes,
+                vertices,
             },
         )
     }

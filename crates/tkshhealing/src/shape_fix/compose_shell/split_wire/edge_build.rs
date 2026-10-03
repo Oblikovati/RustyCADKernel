@@ -119,10 +119,15 @@ fn protect_edge_endpoints(
         return Ok(());
     }
     let copied_first = topods::vertex(&first.clone().into_shape().empty_copied()?)?;
-    state.context.get().ok_or_else(null_context)?.replace(
-        &first.clone().into_shape(),
-        &copied_first.clone().into_shape(),
-    )?;
+    state
+        .composer
+        .context()
+        .get()
+        .ok_or_else(null_context)?
+        .replace(
+            &first.clone().into_shape(),
+            &copied_first.clone().into_shape(),
+        )?;
     let copied_last = if first.is_same(last) {
         topods::vertex(
             &copied_first
@@ -133,7 +138,8 @@ fn protect_edge_endpoints(
     } else {
         let copy = topods::vertex(&last.clone().into_shape().empty_copied()?)?;
         state
-            .context
+            .composer
+            .context()
             .get()
             .ok_or_else(null_context)?
             .replace(&last.clone().into_shape(), &copy.clone().into_shape())?;
@@ -184,24 +190,35 @@ fn add_internal_vertices(
         let cut_parameter = edge_state.non_manifold_parameters[index];
         let vertex = topods::vertex(&edge_state.non_manifold_vertices[index])?;
         let applied = state
-            .context
+            .composer
+            .context()
             .get()
             .ok_or_else(null_context)?
             .apply(&vertex.clone().into_shape(), ShapeEnum::Shape)?;
         let applied_vertex = topods::vertex(&applied)?;
         if (cut_parameter - edge_state.previous_parameter).abs() <= precision::p_confusion() {
-            state.context.get().ok_or_else(null_context)?.replace(
-                &applied_vertex.clone().into_shape(),
-                &first.clone().into_shape(),
-            )?;
+            state
+                .composer
+                .context()
+                .get()
+                .ok_or_else(null_context)?
+                .replace(
+                    &applied_vertex.clone().into_shape(),
+                    &first.clone().into_shape(),
+                )?;
             remove_internal_vertex(edge_state, index);
             continue;
         }
         if (cut_parameter - parameter).abs() <= precision::p_confusion() {
-            state.context.get().ok_or_else(null_context)?.replace(
-                &applied_vertex.clone().into_shape(),
-                &last.clone().into_shape(),
-            )?;
+            state
+                .composer
+                .context()
+                .get()
+                .ok_or_else(null_context)?
+                .replace(
+                    &applied_vertex.clone().into_shape(),
+                    &last.clone().into_shape(),
+                )?;
             remove_internal_vertex(edge_state, index);
             continue;
         }
