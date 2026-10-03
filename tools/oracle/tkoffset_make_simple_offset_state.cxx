@@ -1,6 +1,10 @@
 #include <BRepBuilderAPI_MakeFace.hxx>
+#include <BRepCheck_Analyzer.hxx>
 #include <BRepOffset_MakeSimpleOffset.hxx>
+#include <BRepPrimAPI_MakeBox.hxx>
+#include <BRepGProp.hxx>
 #include <BRep_Tool.hxx>
+#include <GProp_GProps.hxx>
 #include <Standard_Failure.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <gp.hxx>
@@ -40,12 +44,12 @@ int main()
   catch (Standard_NoSuchObject const& failure)
   {
     std::cout << "case=generated_before_perform error=Standard_NoSuchObject message="
-              << failure.GetMessageString() << '\n';
+              << failure.what() << '\n';
   }
   catch (Standard_Failure const& failure)
   {
     std::cout << "case=generated_before_perform error=Standard_Failure message="
-              << failure.GetMessageString() << '\n';
+              << failure.what() << '\n';
   }
   maker.Perform();
   writeState("null_perform", maker);
@@ -69,4 +73,21 @@ int main()
             << maker.Generated(source).IsSame(generated) << '\n';
   maker.Perform();
   writeState("reinitialized_null_perform", maker);
+
+  BRepOffset_MakeSimpleOffset solidMaker(source, 1.5);
+  solidMaker.SetBuildSolidFlag(true);
+  solidMaker.SetTolerance(2.0e-6);
+  solidMaker.Perform();
+  writeState("plane_solid_perform", solidMaker);
+  GProp_GProps properties;
+  BRepGProp::VolumeProperties(solidMaker.GetResultShape(), properties);
+  std::cout << "case=plane_solid_metrics valid="
+            << BRepCheck_Analyzer(solidMaker.GetResultShape()).IsValid()
+            << " volume=" << properties.Mass() << '\n';
+
+  const TopoDS_Shape box = BRepPrimAPI_MakeBox(1.0, 1.0, 1.0).Shape();
+  BRepOffset_MakeSimpleOffset closedSolidMaker(box, 0.1);
+  closedSolidMaker.SetBuildSolidFlag(true);
+  closedSolidMaker.Perform();
+  writeState("box_solid_perform", closedSolidMaker);
 }
