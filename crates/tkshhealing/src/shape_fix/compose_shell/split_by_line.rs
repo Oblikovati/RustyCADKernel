@@ -181,19 +181,19 @@ impl<'a> SplitByLineState<'a> {
             junction.start_code = code;
             junction.start_point = Some(start);
             junction.start_deviation = deviation;
-        } else if code == 0 || code != junction.previous_code {
-            if junction_within_half_period(deviation, junction.previous_deviation, periodic_axis) {
-                self.intersections.push(SplitIntersection {
-                    edge_index: index,
-                    edge_parameter: start_parameter,
-                    line_parameter: geometry::parameter_between_points(
-                        start,
-                        junction.previous_point,
-                        self.input.line,
-                    ),
-                    order: 0,
-                });
-            }
+        } else if (code == 0 || code != junction.previous_code)
+            && junction_within_half_period(deviation, junction.previous_deviation, periodic_axis)
+        {
+            self.intersections.push(SplitIntersection {
+                edge_index: index,
+                edge_parameter: start_parameter,
+                line_parameter: geometry::parameter_between_points(
+                    start,
+                    junction.previous_point,
+                    self.input.line,
+                ),
+                order: 0,
+            });
         }
         junction.previous_point = end;
         junction.previous_code = end_code;

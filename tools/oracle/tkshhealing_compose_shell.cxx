@@ -26,6 +26,7 @@
 #include <gp_Ax3.hxx>
 #include <TopLoc_Location.hxx>
 #include <iostream>
+#include "tkshhealing_compose_shell_periodic.hxx"
 
 class ComposeProbe : public ShapeFix_ComposeShell
 {
@@ -35,6 +36,7 @@ public:
   using ShapeFix_ComposeShell::BreakWires;
   using ShapeFix_ComposeShell::SplitWire;
   using ShapeFix_ComposeShell::SplitByLine;
+  using ShapeFix_ComposeShell::CollectWires;
 };
 
 static void runInit()
@@ -106,7 +108,7 @@ static void runMixedLoadWires()
   std::cout << '\n';
 }
 
-static void runSplitEdges()
+static void runSplitEdges(bool closedMode = false)
 {
   BRepBuilderAPI_MakeWire wire;
   gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
@@ -123,8 +125,9 @@ static void runSplitEdges()
   Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
   tool.SetContext(context);
   tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  tool.ClosedMode() = closedMode;
   tool.SplitEdges();
-  std::cout << "split_edges";
+  std::cout << (closedMode ? "split_edges_closed" : "split_edges");
   TopoDS_Shape sourceWire = wire.Shape();
   for (TopoDS_Iterator it(sourceWire); it.More(); it.Next())
   {
@@ -139,6 +142,45 @@ static void runSplitEdges()
     }
   }
   std::cout << '\n';
+}
+
+static void runCollectWires(bool splitInputs = false)
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    wire.Add(BRepBuilderAPI_MakeEdge(points[i], points[(i + 1) % 4]).Edge());
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  NCollection_Sequence<ShapeFix_WireSegment> segments, loops;
+  tool.LoadWires(segments);
+  if (splitInputs)
+  {
+    const ShapeFix_WireSegment source = segments(1);
+    Handle(ShapeExtend_WireData) firstData = new ShapeExtend_WireData;
+    Handle(ShapeExtend_WireData) secondData = new ShapeExtend_WireData;
+    firstData->ManifoldMode() = source.WireData()->ManifoldMode();
+    secondData->ManifoldMode() = source.WireData()->ManifoldMode();
+    firstData->Add(source.WireData()->Edge(1));
+    firstData->Add(source.WireData()->Edge(2));
+    secondData->Add(source.WireData()->Edge(3));
+    secondData->Add(source.WireData()->Edge(4));
+    segments.Clear();
+    segments.Append(ShapeFix_WireSegment(firstData, TopAbs_FORWARD));
+    segments.Append(ShapeFix_WireSegment(secondData, TopAbs_FORWARD));
+  }
+  tool.CollectWires(loops, segments);
+  std::cout << (splitInputs ? "collect_wires_split" : "collect_wires") << ' '
+            << loops.Length() << ' ' << loops(1).NbEdges() << ' ' << segments.Length();
+  for (int i = 1; i <= segments.Length(); ++i)
+    std::cout << ' ' << segments(i).Orientation();
+  std::cout << ' ' << loops(1).Orientation() << '\n';
 }
 
 static void runBreakWires()
@@ -462,4 +504,8 @@ int main()
   runInternalExternalBreakWires();
   runPatchLimits();
   runSplitEdges();
+  runCollectWires();
+  runCollectWires(true);
+  runSplitEdges(true);
+  runSplitEdgesPeriodicCylinder();
 }

@@ -1,4 +1,134 @@
 use super::*;
+use rustycad_tkbrep::topexp::Explorer;
+use rustycad_tkg3d::geom::GeomRectangularTrimmedSurface;
+use rustycad_tkg3d::top_abs::ShapeEnum;
+
+#[test]
+fn split_edges_two_patch_planar_face_matches_native_context_replacements() {
+    let expected = include_str!("../../../../tools/oracle/tkshhealing_compose_shell.expected");
+    assert_eq!(
+        split_edges_summary(false),
+        native_row(expected, "split_edges ")
+    );
+}
+
+#[test]
+fn split_edges_closed_mode_matches_native_context_replacements() {
+    let expected = include_str!("../../../../tools/oracle/tkshhealing_compose_shell.expected");
+    assert_eq!(
+        split_edges_summary(true),
+        native_row(expected, "split_edges_closed ")
+    );
+}
+
+#[test]
+fn split_edges_periodic_cylinder_matches_native_context_replacements() {
+    let expected = include_str!("../../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let result = split_periodic_face_edges();
+    assert_eq!(result, native_row(expected, "split_edges_periodic "));
+}
+
+fn split_periodic_face_edges() -> String {
+    let cylinder = Cylinder3::new(Axis3::default(), 2.0).unwrap();
+    let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+        cylinder,
+        (0.0, std::f64::consts::TAU, 0.0, 2.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap();
+    let surface: Handle<dyn GeomSurface> =
+        Handle::new(GeomCylindricalSurface::from_cylinder(cylinder)).cast();
+    let grid = surface_grid(surface);
+    let context = Handle::new(ShapeBuildReShape::new());
+    let composer = initialized_composer(&face, &context);
+    composer
+        .init(&grid, &Location::default(), &face, 1.0e-7)
+        .unwrap();
+    let original = composer.load_wires().unwrap().value(1).unwrap().clone();
+    composer.split_edges().unwrap();
+    mapped_edge_summary("split_edges_periodic", &original, &context)
+}
+
+fn split_edges_summary(closed_mode: bool) -> String {
+    let face = face_fixture();
+    let context = Handle::new(ShapeBuildReShape::new());
+    let composer = initialized_composer(&face, &context);
+    let grid = two_trimmed_patch_grid();
+    composer
+        .init(&grid, &Location::default(), &face, 1.0e-7)
+        .unwrap();
+    composer.set_closed_mode(closed_mode);
+    let original = composer.load_wires().unwrap().value(1).unwrap().clone();
+    composer.split_edges().unwrap();
+    let prefix = if closed_mode {
+        "split_edges_closed"
+    } else {
+        "split_edges"
+    };
+    mapped_edge_summary(prefix, &original, &context)
+}
+
+fn mapped_edge_summary(
+    prefix: &str,
+    original: &ShapeFixWireSegment,
+    context: &Handle<ShapeBuildReShape>,
+) -> String {
+    let mut result = String::from(prefix);
+    for index in 1..=original.nb_edges() {
+        let mapped = context
+            .apply(
+                &original.edge(index).unwrap().into_shape(),
+                ShapeEnum::Shape,
+            )
+            .unwrap();
+        append_mapped_edge(&mut result, &mapped);
+    }
+    result
+}
+
+fn append_mapped_edge(result: &mut String, mapped: &rustycad_tkbrep::topods::Shape) {
+    let kind = mapped.shape_type().unwrap();
+    result.push_str(&format!(" {}", kind as i32));
+    if kind == ShapeEnum::Wire {
+        let count = Explorer::new(mapped, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .count();
+        result.push_str(&format!(":{count}"));
+    }
+}
+
+fn two_trimmed_patch_grid() -> Handle<ShapeExtendCompositeSurface> {
+    let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+    let left =
+        GeomRectangularTrimmedSurface::new(&plane, (0.0, 1.0), (0.0, 2.0), (true, true)).unwrap();
+    let right =
+        GeomRectangularTrimmedSurface::new(&plane, (1.0, 3.0), (0.0, 2.0), (true, true)).unwrap();
+    let patches = HArray2::with_value(1, 2, 1, 1, Handle::<dyn GeomSurface>::default()).unwrap();
+    patches
+        .change_array2()
+        .set_value(1, 1, Handle::new(left).cast())
+        .unwrap();
+    patches
+        .change_array2()
+        .set_value(2, 1, Handle::new(right).cast())
+        .unwrap();
+    let grid = Handle::new(
+        ShapeExtendCompositeSurface::with_grid(
+            &Handle::new(patches),
+            ShapeExtendParametrisation::Natural,
+        )
+        .unwrap(),
+    );
+    let joints = HArray1::with_value(1, 3, 0.0).unwrap();
+    joints.change_array1().set_value(2, 1.0).unwrap();
+    joints.change_array1().set_value(3, 3.0).unwrap();
+    grid.get()
+        .unwrap()
+        .set_u_joint_values(&joints.array1())
+        .unwrap();
+    grid
+}
 
 #[test]
 fn split_by_line_rectangular_loop_matches_native_intersections_and_codes() {
