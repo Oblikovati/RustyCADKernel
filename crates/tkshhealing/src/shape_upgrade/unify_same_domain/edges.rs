@@ -178,6 +178,14 @@ fn connected_circle_pair(
     let (second_start, second_end) = edge_vertices(&analysis, second);
     if first_end.is_same(&second_start) {
         ensure_same_circle_support(&first_circle, &second_circle, tolerance)?;
+        if second_end.is_same(&first_start) {
+            return Ok(Some((
+                first.clone(),
+                second.clone(),
+                first_end.clone(),
+                first_end,
+            )));
+        }
         return Ok(Some((
             first.clone(),
             second.clone(),
@@ -239,13 +247,36 @@ fn replace_circle_pair(
     start: Vertex,
     end: Vertex,
 ) -> Result<Shape, Failure> {
-    let edge = make_merged_circle_edge(first, &start, &end)?;
+    let edge = if start.is_same(&end) {
+        make_closed_circle_edge(first, &start)?
+    } else {
+        make_merged_circle_edge(first, &start, &end)?
+    };
     let context = Handle::new(ShapeBuildReShape::new());
     context.merge(
         &[first.clone().into_shape(), second.clone().into_shape()],
         &edge.into_shape(),
     )?;
     context.apply(shape, ShapeEnum::Shape)
+}
+
+fn make_closed_circle_edge(first: &Edge, vertex: &Vertex) -> Result<Edge, Failure> {
+    let source = BRepAdaptorCurve::with_edge(first)?.circle()?;
+    let point = BRepTool::pnt(vertex)?;
+    let radial = Vector3::between(source.location(), point);
+    let x_axis = Direction3::new(radial.x(), radial.y(), radial.z())?;
+    let position =
+        Axis2::with_x_direction(source.location(), source.position().direction(), x_axis)?;
+    let circle = Circle3::new(position, source.radius())?;
+    let curve: Handle<dyn GeomCurve> = Handle::new(GeomCircle::from_circ(circle)).cast();
+    BRepBuilderAPIMakeEdge::from_curve_vertices_params(
+        &curve,
+        vertex,
+        vertex,
+        0.,
+        std::f64::consts::TAU,
+    )?
+    .edge()
 }
 
 fn make_merged_circle_edge(first: &Edge, start: &Vertex, end: &Vertex) -> Result<Edge, Failure> {

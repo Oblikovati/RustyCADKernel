@@ -35,6 +35,14 @@ fn reversed_circle_edge_occurrences_keep_native_endpoints() {
     assert_native_circle_merge(&reversed_circle_wire(), "circle_reversed_occurrences");
 }
 
+#[test]
+fn two_circle_arcs_form_the_native_closed_circle_edge() {
+    assert_native_circle_merge(
+        &circle_wire(&[0., std::f64::consts::PI, std::f64::consts::TAU]),
+        "circle_closed",
+    );
+}
+
 fn assert_native_circle_merge(input: &Shape, case: &str) {
     let unifier = ShapeUpgradeUnifySameDomain::new(input, true, false, false);
     unifier.build().unwrap();
@@ -49,17 +57,27 @@ fn assert_native_circle_merge(input: &Shape, case: &str) {
     );
     let (start, end) = edge_endpoints(&edges[0]);
     assert_eq!(endpoint_coordinates(start, end), native_endpoints(case));
-    assert_native_circle_sample(&edges[0]);
+    assert_native_circle_sample(&edges[0], case == "circle_closed");
 }
 
-fn assert_native_circle_sample(edge: &rustycad_tkbrep::topods::Edge) {
+fn assert_native_circle_sample(edge: &rustycad_tkbrep::topods::Edge, closed: bool) {
     let curve = BRepAdaptorCurve::with_edge(edge).unwrap();
     assert_eq!(curve.get_type().unwrap(), CurveType::Circle);
     assert_eq!(curve.first_parameter().unwrap(), 0.);
-    assert_eq!(curve.last_parameter().unwrap(), std::f64::consts::PI);
-    let middle = curve.value(std::f64::consts::FRAC_PI_2).unwrap();
-    assert!(middle.x().abs() < 1e-14);
-    assert!((middle.y() - 2.).abs() < 1e-14);
+    let last = if closed {
+        std::f64::consts::TAU
+    } else {
+        std::f64::consts::PI
+    };
+    assert_eq!(curve.last_parameter().unwrap(), last);
+    let middle = curve.value(last * 0.5).unwrap();
+    if closed {
+        assert!((middle.x() - 2.).abs() < 1e-14);
+        assert!(middle.y().abs() < 1e-14);
+    } else {
+        assert!(middle.x().abs() < 1e-14);
+        assert!((middle.y() - 2.).abs() < 1e-14);
+    }
     assert!(middle.z().abs() < 1e-14);
 }
 
