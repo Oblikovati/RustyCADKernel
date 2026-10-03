@@ -764,8 +764,11 @@ code-unit offsets. These native quirks are preserved:
   reports true even on conversion error, false on zero output, and leaves a full
   buffer without a terminator. CLocaleSentry switching and restoration are tested.
   Invalid later input can expose uninitialized native storage; Rust zero-initializes
-  that storage without claiming parity for the undefined native case. Non-Unix
-  system code-page conversion remains unported; both ledger entries are partial.
+  that storage without claiming parity for the undefined native case. On Android,
+  `FromLocale` follows the direct Unicode conversion and `ToLocale` copies UTF-8 only
+  when the destination fits the terminator. `UtfStringTool` exposes the non-Android
+  public helper and mutably borrows its tool-owned wide buffer; the native probe exercises
+  edits and replacement. Windows system code-page conversion remains partial.
 
 `GetUtf*` write into a destination slice and return the count of code units written. A slice
 that is too short is a `UtfBufferError`; the native code overruns.
@@ -786,7 +789,7 @@ ASCII and truncation tails, and overlong, surrogate and beyond-U+10FFFF encoding
 cover UTF-16 lone, reversed and paired surrogates, UTF-32 boundary values and seeded random
 sequences. All 1,980 cases are identical.
 
-122 api rows: 103 implemented and 19 excluded. The excluded rows are destructors, move
+126 api rows: 102 implemented, 20 excluded, and four partial. The excluded rows are destructors, move
 operations, STL iterator boilerplate, the structured-binding `get<I>()` protocol and
 `ChangeBufferHere`.
 ## Standard, TCollection, TColStd, StdFail, Plugin and TShort API completion

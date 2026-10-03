@@ -1,7 +1,7 @@
 #![cfg(all(unix, not(target_os = "android")))]
 #![allow(unsafe_code)]
 //! Thread locales isolate native conversion tests from other test threads.
-use rustycad_tkernel::ncollection::UtfString;
+use rustycad_tkernel::ncollection::{UtfString, UtfStringTool};
 use rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry;
 use std::ffi::CStr;
 
@@ -91,4 +91,27 @@ fn sentry_restores_multibyte_conversion_and_explicit_symbol_limit() {
     let mut text = UtfString::<u16>::new();
     text.from_locale("€bcd".as_bytes(), 1);
     assert_eq!(text.to_c_string(), &[0x20ac, 0]);
+}
+
+#[test]
+fn public_utf_string_tool_owns_wide_buffer_and_converts_back_to_active_locale() {
+    let _locale = TestThreadLocale::enter(c"C.UTF-8");
+    let mut tool = UtfStringTool::new();
+    let wide = tool.from_locale("äbc".as_bytes()).unwrap();
+    assert_eq!(
+        wide,
+        &[0xe4, b'b' as rustycad_tkernel::ncollection::WideChar, 0]
+    );
+    wide[0] = b'x' as rustycad_tkernel::ncollection::WideChar;
+
+    let mut output = [0xff; 5];
+    assert!(UtfStringTool::to_locale(wide, &mut output));
+    assert_eq!(output, [b'x', b'b', 0, 0xff, 0xff]);
+
+    let replacement = tool.from_locale(b"z").unwrap();
+    assert_eq!(
+        replacement,
+        &[b'z' as rustycad_tkernel::ncollection::WideChar, 0]
+    );
+    assert!(tool.from_locale(b"").is_none());
 }

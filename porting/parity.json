@@ -74985,7 +74985,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::from_locale",
       "status": "partial",
-      "notes": "Unix delegates to the active C locale through a project-owned libc adapter. Preserves the first-character mblen byte count as the mbstowcs wide-character limit; UTF-8 and Latin-1 native probe recorded in tools/oracle/ncollection_utf_locale_probe.cxx. Embedded NUL terminates input. Native uninitialized storage after a later invalid multibyte sequence is zero-initialized for Rust safety, not counted as parity. Non-Unix system code-page conversion remains unported."
+      "notes": "Unix delegates to the active C locale through a project-owned libc adapter. Preserves the first-character mblen byte count as the mbstowcs wide-character limit; UTF-8 and Latin-1 native probe recorded in tools/oracle/ncollection_utf_locale_probe.cxx. Android follows its native direct FromUnicode path. Embedded NUL terminates input. Native uninitialized storage after a later invalid multibyte sequence is zero-initialized for Rust safety, not counted as parity. Windows system code-page conversion remains partial."
     },
     {
       "upstream_id": "NCollection_UtfString::~NCollection_UtfString()",
@@ -75057,7 +75057,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::to_locale",
       "status": "partial",
-      "notes": "Unix uses active-locale wcstombs with the native unsigned-result comparison: conversion error returns true, zero output returns false, a full output buffer gets no terminator. Empty Rust slices skip the native out-of-bounds terminator store. Verified UTF-8 truncation, C-locale errors, and CLocaleSentry switching. Non-Unix system code-page conversion remains unported."
+      "notes": "Unix uses active-locale wcstombs with the native unsigned-result comparison: conversion error returns true, zero output returns false, a full output buffer gets no terminator. Android follows the native UTF-8-copy path and checks room for the terminator. Empty Rust slices skip the native out-of-bounds terminator store. Verified UTF-8 truncation, C-locale errors, and CLocaleSentry switching. Windows system code-page conversion remains partial."
     },
     {
       "upstream_id": "NCollection_UtfString::IsEmpty() const",
@@ -75074,6 +75074,38 @@
       "rust_item": "rustycad_tkernel::ncollection::UtfString::clear",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfStringTool::NCollection_UtfStringTool()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfStringTool::new",
+      "status": "implemented",
+      "notes": "Public only outside Android, matching the upstream preprocessor guard. The Rust tool owns its temporary wide buffer; the native probe exercises the public conversion tool."
+    },
+    {
+      "upstream_id": "NCollection_UtfStringTool::~NCollection_UtfStringTool()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "The native destructor deletes its temporary wide buffer; Rust releases the owned Vec through Drop glue, with no callable destructor counterpart."
+    },
+    {
+      "upstream_id": "NCollection_UtfStringTool::FromLocale(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfStringTool::from_locale",
+      "status": "partial",
+      "notes": "Unix follows the active C locale using the shared UtfString adapter; returned wide units mutably borrow the tool-owned temporary buffer, include its terminator, and can be edited before ToLocale. Windows code-page conversion remains partial; the type is absent on Android as upstream defines it."
+    },
+    {
+      "upstream_id": "NCollection_UtfStringTool::ToLocale(const wchar_t*,char*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfStringTool::to_locale",
+      "status": "partial",
+      "notes": "Unix follows active-locale wcstombs and the native zero-result check; Windows code-page conversion remains partial. Input is a wide-unit slice that may include its NUL terminator. The tool is absent on Android, matching upstream."
     },
     {
       "upstream_id": "NCollection_UtfString::Assign(const NCollection_UtfString&)",

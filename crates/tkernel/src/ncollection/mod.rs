@@ -129,6 +129,8 @@ pub use kdtree::{KDTree, KdPoint};
 mod utf_iterator;
 pub use utf_iterator::{UtfBufferError, UtfIterator, UtfUnit, WideChar};
 mod utf_string;
+#[cfg(not(target_os = "android"))]
+pub use utf_string::UtfStringTool;
 pub use utf_string::{String8, UtfString};
 mod collection_cursor;
 pub use collection_cursor::{CollectionCursor, CollectionCursorMut, CursorPositions};

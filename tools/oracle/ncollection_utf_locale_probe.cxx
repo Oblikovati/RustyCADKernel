@@ -15,6 +15,31 @@ static void inspect(const char* label, const char* input)
   std::puts("");
 }
 
+static void inspectTool(const char* label, const char* input)
+{
+  NCollection_UtfStringTool aTool;
+  wchar_t*                  aWideString = aTool.FromLocale(input);
+  unsigned char             anOutput[12];
+  if (aWideString != nullptr)
+  {
+    aWideString[0] = L'x';
+  }
+  for (auto& aByte : anOutput) aByte = 0xff;
+  const bool isDone = aWideString != nullptr
+                      && NCollection_UtfStringTool::ToLocale(
+                        aWideString, reinterpret_cast<char*>(anOutput), 12);
+  std::printf("%s:%d:", label, isDone);
+  for (auto aByte : anOutput) std::printf("%02x", aByte);
+  std::puts("");
+  aWideString = aTool.FromLocale("z");
+  for (auto& aByte : anOutput) aByte = 0xff;
+  const bool isReplaced = NCollection_UtfStringTool::ToLocale(
+    aWideString, reinterpret_cast<char*>(anOutput), 12);
+  std::printf("%s_replaced:%d:", label, isReplaced);
+  for (auto aByte : anOutput) std::printf("%02x", aByte);
+  std::puts("");
+}
+
 int main(int argc, char** argv)
 {
   if (argc != 2 || !std::setlocale(LC_CTYPE, argv[1])) return 2;
@@ -24,4 +49,6 @@ int main(int argc, char** argv)
   inspect("four", "\xf0\x9f\x98\x80" "abcd");
   inspect("latin", "\xe4" "bc");
   inspect("empty", "");
+  inspectTool("tool_utf8", "\xc3\xa4" "bc");
+  inspectTool("tool_empty", "");
 }
