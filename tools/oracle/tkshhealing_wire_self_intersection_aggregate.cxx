@@ -1,11 +1,14 @@
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
+#include <Geom_BezierCurve.hxx>
 #include <Geom_Line.hxx>
+#include <Geom2d_BezierCurve.hxx>
 #include <Geom2d_Line.hxx>
 #include <Geom_Plane.hxx>
 #include <ShapeBuild_ReShape.hxx>
 #include <ShapeFix_Wire.hxx>
 #include <ShapeExtend_Status.hxx>
+#include <NCollection_Array1.hxx>
 #include <TopExp.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS_Edge.hxx>
@@ -71,6 +74,18 @@ static void printRanges(const ShapeFix_Wire& fixer, const TopoDS_Face& face) {
   }
 }
 
+static int appliedEdgeCount(const Handle(ShapeBuild_ReShape)& context, const TopoDS_Wire& wire);
+
+static void printObservation(const ShapeFix_Wire& fixer, const TopoDS_Wire& wire,
+                            const TopoDS_Face& face,
+                            const Handle(ShapeBuild_ReShape)& context, bool changed) {
+  std::cout << std::setprecision(17) << changed << " " << fixer.WireData()->NbEdges()
+            << " " << fixer.StatusRemovedSegment();
+  printStatuses(fixer);
+  printRanges(fixer, face);
+  std::cout << " " << appliedEdgeCount(context, wire) << "\n";
+}
+
 static int appliedEdgeCount(const Handle(ShapeBuild_ReShape)& context, const TopoDS_Wire& wire) {
   TopoDS_Shape applied = context->Apply(wire);
   int count = 0;
@@ -90,11 +105,58 @@ static void runOracle(const TopoDS_Wire& wire, const TopoDS_Face& face, bool iso
   fixer.SetContext(context);
   if (isolateNonAdjacent) configureNonAdjacentOnly(fixer);
   bool changed = fixer.FixSelfIntersection();
-  std::cout << std::setprecision(17) << changed << " " << fixer.WireData()->NbEdges()
-            << " " << fixer.StatusRemovedSegment();
-  printStatuses(fixer);
-  printRanges(fixer, face);
-  std::cout << " " << appliedEdgeCount(context, wire) << "\n";
+  printObservation(fixer, wire, face, context, changed);
+}
+
+static Handle(Geom_BezierCurve) loopCurve3d() {
+  NCollection_Array1<gp_Pnt> poles(1, 4);
+  poles.SetValue(1, gp_Pnt(0., 0., 0.)); poles.SetValue(2, gp_Pnt(3., 3., 0.));
+  poles.SetValue(3, gp_Pnt(-3., 3., 0.)); poles.SetValue(4, gp_Pnt(1., 0., 0.));
+  return new Geom_BezierCurve(poles);
+}
+
+static Handle(Geom2d_BezierCurve) loopPCurve() {
+  NCollection_Array1<gp_Pnt2d> poles(1, 4);
+  poles.SetValue(1, gp_Pnt2d(0., 0.)); poles.SetValue(2, gp_Pnt2d(3., 3.));
+  poles.SetValue(3, gp_Pnt2d(-3., 3.)); poles.SetValue(4, gp_Pnt2d(1., 0.));
+  return new Geom2d_BezierCurve(poles);
+}
+
+static TopoDS_Edge loopEdge(const TopoDS_Face& face) {
+  BRep_Builder builder;
+  TopoDS_Edge edge;
+  builder.MakeEdge(edge, loopCurve3d(), 1.e-7);
+  TopoDS_Vertex first, last;
+  builder.MakeVertex(first, gp_Pnt(0., 0., 0.), 1.e-7);
+  builder.MakeVertex(last, gp_Pnt(1., 0., 0.), 1.e-7);
+  builder.Add(edge, first.Oriented(TopAbs_FORWARD));
+  builder.Add(edge, last.Oriented(TopAbs_REVERSED));
+  builder.UpdateEdge(edge, loopPCurve(), face, 1.e-7);
+  builder.Range(edge, face, 0., 1.);
+  builder.Range(edge, 0., 1.);
+  builder.SameRange(edge, false);
+  builder.SameParameter(edge, false);
+  return edge;
+}
+
+static TopoDS_Wire loopWire(const TopoDS_Face& face) {
+  BRep_Builder builder;
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, loopEdge(face));
+  return wire;
+}
+
+static void runRemoveLoopModeOne(const TopoDS_Face& face) {
+  TopoDS_Wire wire = loopWire(face);
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_Wire fixer(wire, face, 1.e-7);
+  fixer.SetContext(context);
+  fixer.FixSelfIntersectingEdgeMode() = 1;
+  fixer.FixIntersectingEdgesMode() = 0;
+  fixer.FixNonAdjacentIntersectingEdgesMode() = 0;
+  fixer.ModifyRemoveLoopMode() = 1;
+  printObservation(fixer, wire, face, context, fixer.FixSelfIntersection());
 }
 
 int main() {
@@ -103,4 +165,5 @@ int main() {
   builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
   runOracle(crossingWire(face), face, true);
   runOracle(crossingWire(face), face, false);
+  runRemoveLoopModeOne(face);
 }
