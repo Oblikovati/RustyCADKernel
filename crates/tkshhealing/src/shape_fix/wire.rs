@@ -8,6 +8,8 @@ mod wire_degenerated;
 mod wire_lacking;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
+#[path = "wire_small.rs"]
+mod wire_small;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
@@ -33,6 +35,7 @@ struct WireFixState {
     gaps_2d_status: i32,
     degenerated_status: i32,
     last_fix_status: i32,
+    small_status: i32,
     intersections_status: i32,
     lacking_status: i32,
     closed_mode: bool,
@@ -59,6 +62,7 @@ impl Default for ShapeFixWire {
                 gaps_2d_status: 0,
                 degenerated_status: 0,
                 last_fix_status: 0,
+                small_status: 0,
                 intersections_status: 0,
                 lacking_status: 0,
                 closed_mode: true,
@@ -159,6 +163,11 @@ impl ShapeFixWire {
     /// Query the aggregate flags from the last `FixLacking()` call.
     pub fn status_lacking(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.state.read().lacking_status, status)
+    }
+
+    /// Queries accumulated small-edge repair status; `fixer.status_small(ShapeExtendStatus::Done)`.
+    pub fn status_small(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().small_status, status)
     }
 
     /// `FixReorder()`: analyze the loaded 3D endpoints, then apply the proposed order.
@@ -311,7 +320,8 @@ impl ShapeFixWire {
         self.state.read().closed_mode
     }
 
-    fn topology_mode(&self) -> bool {
+    /// Reads native `TopoMode`; `assert!(!fixer.topology_mode())`.
+    pub fn topology_mode(&self) -> bool {
         self.state.read().topology_mode
     }
 
@@ -579,6 +589,7 @@ impl ShapeFixWire {
         state.gaps_2d_status = 0;
         state.degenerated_status = 0;
         state.last_fix_status = 0;
+        state.small_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {

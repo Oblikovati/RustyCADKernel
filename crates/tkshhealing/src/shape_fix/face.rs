@@ -2,6 +2,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Context preservation and apex-edge repair for periodic loops on conical faces.
+mod missing_seam;
 mod natural_bound;
 mod orientation;
 mod periodic_cone;
