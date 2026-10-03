@@ -22,3 +22,12 @@ cargo test -p rustycad-tkshhealing --test shape_analysis_wire_intersections
 ```
 
 These observations do not establish full wire/toolkit parity.
+
+## Adjacent overload
+
+Ten `adjacent_*` rows verify immediate sequence clearing, last/first wire ordering
+with unequal curve parameters, endpoint connection failures, missing pcurves,
+zero ranges, tight edge tolerances inside larger shared vertex tolerances,
+SameParameter-dependent filtering, and coincident outer endpoint suppression.
+Rows: `found DONE1 FAIL1 FAIL2 FAIL3 count2d count3d errors_count
+[parameter1 parameter2 x y z error]* wrapper_found`.

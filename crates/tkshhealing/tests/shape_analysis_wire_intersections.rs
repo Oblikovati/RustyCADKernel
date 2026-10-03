@@ -2,7 +2,7 @@
 mod support;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
-    topods::{Edge, Face},
+    topods::{Edge, Face, Vertex},
 };
 use rustycad_tkernel::{ncollection::Sequence, standard::Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
@@ -88,22 +88,8 @@ fn pair_observation(analyzer: &ShapeAnalysisWire) -> Vec<f64> {
         f64::from(found),
         f64::from(analyzer.last_check_status(ShapeExtendStatus::Done1)),
         f64::from(analyzer.last_check_status(ShapeExtendStatus::Fail3)),
-        f64::from(uv.length()),
-        f64::from(xyz.length()),
-        f64::from(errors.length()),
     ];
-    for index in 1..=uv.length() as usize {
-        let point = uv.value(index).unwrap();
-        let spatial = xyz.value(index).unwrap();
-        observed.extend([
-            point.param_on_first(),
-            point.param_on_second(),
-            spatial.x(),
-            spatial.y(),
-            spatial.z(),
-            *errors.value(index).unwrap(),
-        ]);
-    }
+    append_intersection_outputs(&mut observed, &uv, &xyz, &errors);
     observed
 }
 
@@ -182,8 +168,8 @@ fn endpoint_edge(first: Point2, last: Point2, z: f64, mode: usize) -> Edge {
         builder.make_edge(&mut edge).unwrap();
         return edge;
     }
-    let first = support::vertex_at(Point3::new(first.x(), first.y(), z));
-    let last = support::vertex_at(Point3::new(last.x(), last.y(), z));
+    let first = vertex_at(Point3::new(first.x(), first.y(), z));
+    let last = vertex_at(Point3::new(last.x(), last.y(), z));
     if mode == 6 {
         builder.update_vertex_tolerance(&first, 100.).unwrap();
         builder.update_vertex_tolerance(&last, 100.).unwrap();
@@ -203,4 +189,168 @@ fn attach_spatial_curve(edge: &Edge, first: Point2, last: Point2, direction: Dir
     BRepBuilder::default()
         .range(edge, 0., first.distance(last), true)
         .unwrap();
+}
+
+fn vertex_at(point: Point3) -> Vertex {
+    let mut vertex = Vertex::default();
+    BRepBuilder::default()
+        .make_vertex_at(&mut vertex, point, 1e-7)
+        .unwrap();
+    vertex
+}
+
+#[test]
+fn adjacent_intersection_filters_and_failures_match_native() {
+    for (name, mode, index) in [
+        ("adjacent_crossing", 0, 0),
+        ("adjacent_closure", 11, 1),
+        ("adjacent_outer_coincident", 12, 2),
+        ("adjacent_tolerance", 16, 2),
+        ("adjacent_not_same_parameter", 17, 2),
+        ("adjacent_missing_vertices", 9, 2),
+        ("adjacent_disconnected", 13, 2),
+        ("adjacent_no_face", 14, 2),
+        ("adjacent_missing_pcurve", 7, 2),
+        ("adjacent_zero_range", 8, 2),
+    ] {
+        inspect_adjacent(name, mode, index);
+    }
+}
+
+fn inspect_adjacent(name: &str, mode: usize, index: i32) {
+    let analyzer = adjacent_analyzer(mode);
+    let mut uv = Sequence::default();
+    let mut xyz = Sequence::default();
+    let mut errors = Sequence::default();
+    uv.append(IntersectionPoint::default());
+    xyz.append(Point3::new(77., 88., 99.));
+    errors.append(66.);
+    let found = analyzer
+        .check_adjacent_intersections_into(index, &mut uv, &mut xyz, &mut errors)
+        .unwrap();
+    let mut observed = vec![f64::from(found)];
+    for flag in [
+        ShapeExtendStatus::Done1,
+        ShapeExtendStatus::Fail1,
+        ShapeExtendStatus::Fail2,
+        ShapeExtendStatus::Fail3,
+    ] {
+        observed.push(f64::from(analyzer.last_check_status(flag)));
+    }
+    append_intersection_outputs(&mut observed, &uv, &xyz, &errors);
+    observed.push(f64::from(
+        analyzer.check_adjacent_intersections(index).unwrap(),
+    ));
+    let row = EXPECTED
+        .lines()
+        .find(|line| line.starts_with(&format!("{name} ")))
+        .unwrap();
+    let expected: Vec<f64> = row
+        .split_whitespace()
+        .skip(1)
+        .map(|value| value.parse().unwrap())
+        .collect();
+    assert_eq!(observed, expected, "native adjacent case {name}");
+}
+
+fn append_intersection_outputs(
+    observed: &mut Vec<f64>,
+    uv: &Sequence<IntersectionPoint>,
+    xyz: &Sequence<Point3>,
+    errors: &Sequence<f64>,
+) {
+    observed.extend([
+        f64::from(uv.length()),
+        f64::from(xyz.length()),
+        f64::from(errors.length()),
+    ]);
+    for index in 1..=uv.length() as usize {
+        let point = uv.value(index).unwrap();
+        let spatial = xyz.value(index).unwrap();
+        observed.extend([
+            point.param_on_first(),
+            point.param_on_second(),
+            spatial.x(),
+            spatial.y(),
+            spatial.z(),
+            *errors.value(index).unwrap(),
+        ]);
+    }
+}
+
+fn adjacent_analyzer(mode: usize) -> ShapeAnalysisWire {
+    let face = planar_face();
+    let first = edge_on(
+        &face,
+        Point2::new(-1., 0.),
+        Point2::new(1., 0.),
+        mode,
+        false,
+    );
+    let second = edge_on(&face, Point2::new(0., -2.), Point2::new(0., 1.), mode, true);
+    adjust_adjacent_vertices(&first, &second, mode);
+    if mode == 17 {
+        BRepBuilder::default()
+            .same_parameter(&first, false)
+            .unwrap();
+        BRepBuilder::default()
+            .same_parameter(&second, false)
+            .unwrap();
+    }
+    let wire = Handle::new(ShapeExtendWireData::new());
+    wire.add_edge(&first, 0).unwrap();
+    wire.add_edge(&second, 0).unwrap();
+    let face = if mode == 14 { Face::default() } else { face };
+    ShapeAnalysisWire::from_wire_data(&wire, &face, 1e-7).unwrap()
+}
+
+fn adjust_adjacent_vertices(first: &Edge, second: &Edge, mode: usize) {
+    use rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge;
+    if mode == 9 || mode == 13 {
+        return;
+    }
+    let analysis = ShapeAnalysisEdge::new();
+    let tolerance = if mode == 16 || mode == 17 { 10. } else { 1e-7 };
+    let builder = BRepBuilder::default();
+    builder
+        .update_vertex_point(
+            &analysis.first_vertex(second),
+            Point3::new(1., 0., 0.),
+            tolerance,
+        )
+        .unwrap();
+    builder
+        .update_vertex_point(
+            &analysis.last_vertex(first),
+            Point3::new(1., 0., 0.),
+            tolerance,
+        )
+        .unwrap();
+    if mode == 11 {
+        builder
+            .update_vertex_point(&analysis.first_vertex(first), Point3::new(1., 0., 0.), 1e-7)
+            .unwrap();
+        builder
+            .update_vertex_point(&analysis.last_vertex(first), Point3::new(3., 3., 0.), 1e-7)
+            .unwrap();
+        builder
+            .update_vertex_point(
+                &analysis.first_vertex(second),
+                Point3::new(3., 3., 0.),
+                1e-7,
+            )
+            .unwrap();
+        builder
+            .update_vertex_point(&analysis.last_vertex(second), Point3::new(1., 0., 0.), 1e-7)
+            .unwrap();
+    }
+    if mode == 12 {
+        builder
+            .update_vertex_point(
+                &analysis.last_vertex(second),
+                Point3::new(-1., 0., 0.),
+                1e-7,
+            )
+            .unwrap();
+    }
 }

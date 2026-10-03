@@ -2,7 +2,6 @@
 use super::ShapeFixWire;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildEdge;
-use crate::shape_extend::ShapeExtendStatus;
 use crate::shape_fix::ShapeFixEdge;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face};
@@ -16,11 +15,11 @@ use rustycad_tkgeombase::geom2d_convert::curve_to_bspline_curve;
 use rustycad_tkmath::convert::ParameterisationType;
 use rustycad_tkmath::gp::Point2;
 
-pub(super) struct BentPCurve {
-    pub(super) curve: Handle<dyn Geom2dCurve>,
-    pub(super) first: f64,
-    pub(super) last: f64,
-    pub(super) tolerance: f64,
+pub(in crate::shape_fix::wire) struct BentPCurve {
+    pub(in crate::shape_fix::wire) curve: Handle<dyn Geom2dCurve>,
+    pub(in crate::shape_fix::wire) first: f64,
+    pub(in crate::shape_fix::wire) last: f64,
+    pub(in crate::shape_fix::wire) tolerance: f64,
 }
 
 struct BendingTarget {
@@ -109,7 +108,7 @@ impl ShapeFixWire {
         self.try_new_pcurve(edge, face, spline.cast(), target.first, target.last)
     }
 
-    fn try_new_pcurve(
+    pub(in crate::shape_fix::wire) fn try_new_pcurve(
         &self,
         edge: &Edge,
         face: &Face,
@@ -140,13 +139,12 @@ impl ShapeFixWire {
         face: &Face,
         left: &BentPCurve,
         right: &BentPCurve,
-    ) -> Result<bool, Failure> {
+    ) -> Result<(), Failure> {
         attach_bent_curve(previous, face, left)?;
         attach_bent_curve(current, face, right)?;
         update_vertex_tolerances(previous, left.tolerance)?;
         update_vertex_tolerances(current, right.tolerance)?;
-        self.or_last_fix_status(ShapeExtendStatus::Done5);
-        Ok(true)
+        Ok(())
     }
 }
 

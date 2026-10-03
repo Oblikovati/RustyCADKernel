@@ -4,12 +4,22 @@
 //! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
 #[path = "wire_degenerated.rs"]
 mod wire_degenerated;
+#[path = "wire_intersection_fix.rs"]
+mod wire_intersection_fix;
+#[path = "wire_intersection_geometry.rs"]
+mod wire_intersection_geometry;
 #[path = "wire_lacking.rs"]
 mod wire_lacking;
 #[path = "wire_self_intersection_fix.rs"]
 mod wire_self_intersection_fix;
+#[path = "wire_self_intersection_remove.rs"]
+mod wire_self_intersection_remove;
+#[path = "wire_self_intersection_split.rs"]
+mod wire_self_intersection_split;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
+#[path = "wire_split_tool.rs"]
+mod wire_split_tool;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
@@ -40,6 +50,7 @@ struct WireFixState {
     closed_mode: bool,
     topology_mode: bool,
     geometry_mode: bool,
+    remove_loop_mode: i32,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -66,6 +77,7 @@ impl Default for ShapeFixWire {
                 closed_mode: true,
                 topology_mode: false,
                 geometry_mode: true,
+                remove_loop_mode: -1,
             }),
         }
     }
@@ -156,6 +168,11 @@ impl ShapeFixWire {
     /// Set whether `FixLacking` may bend existing p-curves; `fixer.set_geometry_mode(false)`.
     pub fn set_geometry_mode(&self, enabled: bool) {
         self.state.write().geometry_mode = enabled;
+    }
+
+    /// Select `ModifyRemoveLoopMode()` behavior; `fixer.set_remove_loop_mode(1)`.
+    pub fn set_remove_loop_mode(&self, mode: i32) {
+        self.state.write().remove_loop_mode = mode;
     }
 
     /// Query the aggregate flags from the last `FixLacking()` call.
@@ -319,6 +336,10 @@ impl ShapeFixWire {
 
     fn geometry_mode(&self) -> bool {
         self.state.read().geometry_mode
+    }
+
+    fn remove_loop_mode(&self) -> i32 {
+        self.state.read().remove_loop_mode
     }
 
     fn apply_order(
@@ -580,6 +601,8 @@ impl ShapeFixWire {
         state.gaps_3d_status = 0;
         state.gaps_2d_status = 0;
         state.degenerated_status = 0;
+        state.intersections_status = 0;
+        state.lacking_status = 0;
         state.last_fix_status = 0;
     }
 

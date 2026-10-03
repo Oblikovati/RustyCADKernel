@@ -1,9 +1,9 @@
 use super::*;
 
-struct EdgePairCurves {
-    edges: [Edge; 2],
-    pcurves: [Handle<dyn Geom2dCurve>; 2],
-    ranges: [(f64, f64); 2],
+pub(super) struct EdgePairCurves {
+    pub(super) edges: [Edge; 2],
+    pub(super) pcurves: [Handle<dyn Geom2dCurve>; 2],
+    pub(super) ranges: [(f64, f64); 2],
 }
 
 struct EdgePairIntersections {
@@ -70,6 +70,13 @@ impl ShapeAnalysisWire {
             wire.edge(if first > 0 { first } else { wire.nb_edges() })?,
             wire.edge(if second > 0 { second } else { wire.nb_edges() })?,
         ];
+        self.intersection_curves_for_edges(edges)
+    }
+
+    pub(super) fn intersection_curves_for_edges(
+        &self,
+        edges: [Edge; 2],
+    ) -> Result<Option<EdgePairCurves>, Failure> {
         let analysis = ShapeAnalysisEdge::new();
         let (pcurve1, a1, b1) = analysis.pcurve_on_face(&edges[0], &self.face(), false)?;
         if pcurve1.is_null() {
