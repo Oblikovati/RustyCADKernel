@@ -222101,6 +222101,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::max_distance_2d",
       "status": "implemented",
       "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixSeam(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_seam",
+      "status": "implemented",
+      "notes": "Native seam analyzer followed by p-curve exchange, retained range and zero requested builder tolerance. Seven pinned native cases compare curve ordering, tolerance, last-fix flags and idempotent second call for normal/reversed occurrences and unready/nonseam edges. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

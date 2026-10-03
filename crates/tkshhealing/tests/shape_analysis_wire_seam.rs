@@ -1,6 +1,6 @@
 //! Native seam ordering and output-reference preservation.
 use rustycad_tkbrep::{
-    brep::BRepBuilder,
+    brep::{BRepBuilder, BRepTool},
     topods::{Edge, Face},
 };
 use rustycad_tkernel::standard::Handle;
@@ -13,6 +13,7 @@ use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2};
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
+    shape_fix::ShapeFixWire,
 };
 const EXPECTED: &str = include_str!("../../../tools/oracle/tkshhealing_wire_seam.expected");
 
@@ -32,12 +33,12 @@ fn unready_and_ordinary_edges_preserve_output_sentinels() {
 }
 
 fn inspect(name: &str, mode: u8, reverse_face: bool, reverse_edge: bool) {
-    let analyzer = seam_analyzer(mode, reverse_face, reverse_edge);
+    let analyzer = Handle::new(seam_analyzer(mode, reverse_face, reverse_edge));
     let (mut first, mut second, mut range) = (line(77.), line(88.), (17., 19.));
     let found = analyzer
         .check_seam_into(0, &mut first, &mut second, &mut range)
         .unwrap();
-    let observed = [
+    let mut observed = vec![
         f64::from(found),
         f64::from(analyzer.last_check_status(ShapeExtendStatus::Done1)),
         first.value(0.).unwrap().x(),
@@ -46,6 +47,7 @@ fn inspect(name: &str, mode: u8, reverse_face: bool, reverse_edge: bool) {
         range.1,
         f64::from(analyzer.check_seam_at(0).unwrap()),
     ];
+    append_seam_repair(&analyzer, mode, &mut observed);
     let row = EXPECTED
         .lines()
         .find(|line| line.starts_with(&format!("{name} ")))
@@ -60,6 +62,41 @@ fn inspect(name: &str, mode: u8, reverse_face: bool, reverse_edge: bool) {
         expected.as_slice(),
         "native seam case {name}"
     );
+}
+
+fn append_seam_repair(analyzer: &Handle<ShapeAnalysisWire>, mode: u8, observed: &mut Vec<f64>) {
+    let fixer = ShapeFixWire::new();
+    fixer.init(analyzer);
+    observed.extend([
+        f64::from(fixer.fix_seam(0).unwrap()),
+        f64::from(fixer.last_fix_status(ShapeExtendStatus::Done1)),
+    ]);
+    if mode == 0 {
+        observed.extend([77., 88., 17., 19., 0.]);
+    } else {
+        append_repaired_pcurves(analyzer, observed);
+    }
+    observed.extend([
+        f64::from(fixer.fix_seam(0).unwrap()),
+        f64::from(fixer.last_fix_status(ShapeExtendStatus::Ok)),
+    ]);
+}
+
+fn append_repaired_pcurves(analyzer: &ShapeAnalysisWire, observed: &mut Vec<f64>) {
+    let mut face = analyzer.face();
+    let mut edge = analyzer.wire_data().edge(1).unwrap();
+    face.set_orientation(Orientation::Forward);
+    edge.set_orientation(Orientation::Forward);
+    let forward = BRepTool::curve_on_face(&edge, &face).unwrap();
+    observed.push(forward.pcurve.value(0.).unwrap().x());
+    edge.set_orientation(Orientation::Reversed);
+    let reverse = BRepTool::curve_on_face(&edge, &face).unwrap();
+    observed.extend([
+        reverse.pcurve.value(0.).unwrap().x(),
+        reverse.first,
+        reverse.last,
+        BRepTool::edge_tolerance(&edge).unwrap(),
+    ]);
 }
 
 fn seam_analyzer(mode: u8, reverse_face: bool, reverse_edge: bool) -> ShapeAnalysisWire {

@@ -6,6 +6,8 @@
 mod wire_degenerated;
 #[path = "wire_lacking.rs"]
 mod wire_lacking;
+#[path = "wire_seam.rs"]
+mod wire_seam;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
 #[path = "wire_small.rs"]

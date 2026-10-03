@@ -3,6 +3,8 @@
 #include <Geom_CylindricalSurface.hxx>
 #include <Geom2d_Line.hxx>
 #include <ShapeAnalysis_Wire.hxx>
+#include <ShapeFix_Wire.hxx>
+#include <BRep_Tool.hxx>
 #include <ShapeExtend_WireData.hxx>
 #include <TopoDS_Edge.hxx>
 #include <gp_Ax3.hxx>
@@ -25,13 +27,24 @@ static void inspect(const char* name, int mode, bool reverseFace, bool reverseEd
   if (reverseFace) face.Reverse();
   Handle(ShapeExtend_WireData) wire = new ShapeExtend_WireData;
   if (mode) wire->Add(edge);
-  ShapeAnalysis_Wire analysis(wire, face, 1.e-7);
+  Handle(ShapeAnalysis_Wire) analysis=new ShapeAnalysis_Wire(wire, face, 1.e-7);
   Handle(Geom2d_Curve) first=line(77.), second=line(88.);
   double f=17., l=19.;
-  std::cout << name << " " << analysis.CheckSeam(0, first, second, f, l)
-            << " " << analysis.LastCheckStatus(ShapeExtend_DONE1)
+  std::cout << name << " " << analysis->CheckSeam(0, first, second, f, l)
+            << " " << analysis->LastCheckStatus(ShapeExtend_DONE1)
             << " " << first->Value(0.).X() << " " << second->Value(0.).X()
-            << " " << f << " " << l << " " << analysis.CheckSeam(0) << '\n';
+            << " " << f << " " << l << " " << analysis->CheckSeam(0);
+  ShapeFix_Wire fixer; fixer.Init(analysis);
+  std::cout << " " << fixer.FixSeam(0) << " " << fixer.LastFixStatus(ShapeExtend_DONE1);
+  if(mode) {
+    face.Orientation(TopAbs_FORWARD); edge.Orientation(TopAbs_FORWARD);
+    auto forward=BRep_Tool::CurveOnSurface(edge,face,f,l);
+    std::cout << " " << forward->Value(0.).X();
+    edge.Orientation(TopAbs_REVERSED);
+    auto reverse=BRep_Tool::CurveOnSurface(edge,face,f,l);
+    std::cout << " " << reverse->Value(0.).X() << " " << f << " " << l << " " << BRep_Tool::Tolerance(edge);
+  } else std::cout << " 77 88 17 19 0";
+  std::cout << " " << fixer.FixSeam(0) << " " << fixer.LastFixStatus(ShapeExtend_OK) << '\n';
 }
 int main()
 {
