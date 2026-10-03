@@ -146,3 +146,22 @@ source revision; it does not prove API, DRAW, toolkit or global completion.
 python3 tools/verify_tkmath_legacy.py --toolkit TKG2d --source /path/to/OCCT \
   --build-dir /path/to/occt-modeling-full --jobs 2
 ```
+
+### TKG3d paired run
+
+`tkg3d-runtime-report.json.gz` and `tkg3d-runtime-declarations.json.gz` retain
+794 exact native/Rust pairs from clean execution revision `1696fa2f`. All passed,
+with zero skips, unmatched runtime cases or mapping anomalies. The runner retains
+Rust package identity because the mappings span `rustycad-tkg3d` and
+`rustycad-tkgeomalgo`. The global inventory still has 7,854 unverified declarations
+in this scoped receipt; toolkit and global proof flags remain false.
+
+```sh
+python3 tools/verify_tkmath_legacy.py --toolkit TKG3d --source /path/to/OCCT \
+  --build-dir /path/to/occt-modeling-full --jobs 2
+python3 tools/join_legacy_runtime_evidence.py target/oracle-tkg3d-legacy/report.json \
+  --occt-source /path/to/OCCT --output target/api-proof/tkg3d-joined-runtime.json
+```
+
+The source revision and all hashed runtime inputs are retained in each receipt.
+These historical receipts do not jointly establish a current whole-kernel pass.
