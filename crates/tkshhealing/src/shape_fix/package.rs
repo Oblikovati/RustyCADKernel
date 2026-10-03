@@ -42,3 +42,9 @@ fn sampled_edge_extent(edge: &Edge) -> Result<f64, Failure> {
     let [x1, y1, z1, x2, y2, z2] = bounds.get()?;
     Ok((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) + (z2 - z1) * (z2 - z1))
 }
+
+mod plane_tolerances;
+mod same_parameter;
+
+#[cfg(test)]
+mod plane_tolerances_tests;
