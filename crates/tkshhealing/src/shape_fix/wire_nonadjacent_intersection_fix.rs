@@ -35,6 +35,8 @@ struct PairToleranceUpdates {
 impl ShapeFixWire {
     /// Run native `FixIntersectingEdges(num1, num2)` for a selected nonadjacent pair.
     /// Example: `let fixed = fixer.fix_nonadjacent_intersecting_edges(1, 3)?;`.
+    // OCCT declares this overload private and has no production call sites.
+    #[allow(dead_code)]
     pub(super) fn fix_nonadjacent_intersecting_edges(
         &self,
         first_index: i32,

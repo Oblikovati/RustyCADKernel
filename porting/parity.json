@@ -222506,6 +222506,195 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_splitting_by_number",
       "status": "implemented",
       "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::ShapeUpgrade_ShapeDivide()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::empty",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::ShapeUpgrade_ShapeDivide(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::new",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::Init(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::init",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_precision",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetMaxTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_max_tolerance",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetMinTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_min_tolerance",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetSurfaceSegmentMode(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_surface_segment_mode",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::Perform(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::perform",
+      "status": "partial",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::Result() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::result",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::GetContext() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::context",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetContext(const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_context",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::MsgRegistrator() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::msg_registrator",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SendMsg(const TopoDS_Shape&,const Message_Msg&,Message_Gravity) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::send_msg",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::status_flag",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetSplitFaceTool(const occ::handle<ShapeUpgrade_FaceDivide>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_split_face_tool",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetEdgeMode(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivide::set_edge_mode",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::SetMsgRegistrator(const occ::handle<ShapeExtend_BasicMsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::set_msg_registrator",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::GetSplitFaceTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::split_face_tool",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::GetFaceMsg() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::face_msg",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::GetWireMsg() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::wire_msg",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivide::GetEdgeMsg() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivide.hxx",
+      "source_sha256": "8dc8122a11611798097e50b2e9aa469762b8c3cea020f564e75e6e91b2c2560c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::edge_msg",
+      "status": "implemented",
+      "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
     }
   ],
   "tests": [

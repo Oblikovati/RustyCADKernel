@@ -85,3 +85,6 @@ pub use remove_internal_wires::ShapeUpgradeRemoveInternalWires;
 
 mod face_divide_area;
 pub use face_divide_area::ShapeUpgradeFaceDivideArea;
+
+mod shape_divide;
+pub use shape_divide::{ShapeDivideFields, ShapeDivider, ShapeUpgradeShapeDivide};

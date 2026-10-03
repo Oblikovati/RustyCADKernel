@@ -1080,3 +1080,13 @@ exposes an inherent empty constructor so its inventory target is reachable.
 Perform remains partial through inherited policy/composition limits; checked integer
 overflow remains explicit and unapproved as a parity exception. Legacy mapping
 counts are unchanged. See `tools/oracle/tkshhealing_face_divide_area.md`.
+
+### Whole-shape subdivision
+
+`ShapeUpgradeShapeDivide` now traverses faces, free wires and free edges with
+virtual criteria and completion messages. Compound recursion retains shared context,
+restores the source and aggregates statuses while composing placements/orientations.
+Fifteen native cases compare topology, identity, statuses, messages and placements.
+`ShapeDivider` exposes virtual policy dispatch and protected fields remain available
+for derived tools. Perform remains partial through inherited limits and the explicit
+null face-tool exceptional-domain difference; no new legacy declarations are claimed.

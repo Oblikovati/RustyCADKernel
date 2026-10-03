@@ -42,6 +42,7 @@ struct OpenWirePair {
     second_degenerate_index: usize,
 }
 
+#[cfg(test)]
 pub(super) fn analyze(
     face: &Face,
     surface: &Handle<dyn GeomSurface>,
@@ -89,6 +90,7 @@ fn analyze_wire_pair(
     )
 }
 
+#[cfg(test)]
 fn closed_directions(surface: &Handle<dyn GeomSurface>) -> Result<(bool, bool), Failure> {
     let live = surface.get().ok_or_else(|| {
         Failure::with_message(
