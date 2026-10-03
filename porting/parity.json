@@ -224512,6 +224512,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_splitting_vertices",
       "status": "partial",
       "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixWiresTwoCoincEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_wires_two_coinc_edges",
+      "status": "partial",
+      "notes": "Two-coincident-edge wire removal follows native eligibility, orientation, context, result and status behavior with six pinned rows. Cross-wire repair delegates to the partially ported IntersectionTool and preserves face mutations on failure. Broader context and topology domains remain unproven; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixIntersectingWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_intersecting_wires",
+      "status": "partial",
+      "notes": "Two-coincident-edge wire removal follows native eligibility, orientation, context, result and status behavior with six pinned rows. Cross-wire repair delegates to the partially ported IntersectionTool and preserves face mutations on failure. Broader context and topology domains remain unproven; no legacy mapping increase."
     }
   ],
   "tests": [
