@@ -7,6 +7,7 @@ mod simple_offset_face;
 mod simple_offset_maker;
 mod simple_offset_vertex;
 mod simple_offset_vertex_map;
+mod simple_offset_wall;
 mod surface;
 mod surface_analytic;
 
@@ -23,3 +24,5 @@ pub use simple_offset_vertex::{
 };
 pub use simple_offset_vertex_map::{OffsetVertexData, build_simple_offset_vertices};
 pub use surface::{BRepOffsetStatus, surface};
+
+pub use simple_offset_wall::build_simple_offset_wall;
