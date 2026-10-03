@@ -4,6 +4,10 @@
 #define FIXTURE_DECLARE(name) int name();
 #define FIXTURE_SCALE(value) ((value) * 2)
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 namespace fixture {
 using Scalar = double;
 typedef unsigned long Count;
@@ -37,6 +41,17 @@ template <typename T, unsigned N = 2> struct Box {
   T value;
   T scale(T input) const;
 };
+
+template <typename T> T identity(T value);
+
+inline void function_with_locals() {
+  using LocalAlias = int;
+  struct LocalRecord {};
+  int local_value = 0;
+  (void)sizeof(LocalAlias);
+  (void)sizeof(LocalRecord);
+  (void)local_value;
+}
 
 enum class Direction { Left, Right };
 inline constexpr int scaled = FIXTURE_SCALE(3);
