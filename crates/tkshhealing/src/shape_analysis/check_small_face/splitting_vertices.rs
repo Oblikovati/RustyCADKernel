@@ -233,22 +233,8 @@ fn bind_split_data(
     edge_map: &mut SplittingVertexEdges,
     parameter_map: &mut SplittingVertexParameters,
 ) -> Result<(), Failure> {
-    if edge_map.is_bound(&vertex) {
-        return Err(duplicate_split_binding("MapEdges", &vertex));
-    }
-    edge_map.bind(vertex.clone(), edges);
-    if parameter_map.is_bound(&vertex) {
-        return Err(duplicate_split_binding("MapParam", &vertex));
-    }
-    parameter_map.bind(vertex, parameters);
+    // OCCT ignores Bind's false result when TopExp_Explorer repeats a split vertex.
+    let _ = edge_map.bind(vertex.clone(), edges);
+    let _ = parameter_map.bind(vertex, parameters);
     Ok(())
-}
-
-fn duplicate_split_binding(map: &str, vertex: &Shape) -> Failure {
-    Failure::with_message(
-        "Standard_DomainError",
-        &format!(
-            "ShapeAnalysis_CheckSmallFace::CheckSplittingVertices: {map} already contains {vertex:?}; expected a new vertex key"
-        ),
-    )
 }
