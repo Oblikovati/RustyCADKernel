@@ -11,8 +11,8 @@ overlap, and partial intervals that retain a head or tail while inserting the
 opposite wire's middle segment, including both reversed-parameter layouts that
 follow OCCT's resulting split-slot selection. Three endpoint-cut cases confirm that
 OCCT trims the long edge at either end while reporting no face replacement.
-When the short edge is visited first and its cut fails, the long edge is left
-unchanged.
+Failed short-edge cuts leave the long edge unchanged whether the short edge is
+visited first or second.
 
 Build and run against the pinned OCCT install:
 

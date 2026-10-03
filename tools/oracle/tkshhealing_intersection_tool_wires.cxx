@@ -354,16 +354,23 @@ static void runFarEndpointCutCase() {
   std::cout << '\n';
 }
 
-static void runLongSecondEdgeCutCase() {
+static void runLongSecondEdgeCutCase(double shortStart,
+                                     bool shortEndpointHasTolerance,
+                                     bool longEndpointHasTolerance) {
   BRep_Builder builder;
   TopoDS_Face face;
   builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
-  TopoDS_Edge shortEdge = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
-                                       gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 1.);
+  TopoDS_Edge shortEdge = edgeOnPlane(face, gp_Pnt(shortStart, 0., 0.), gp_Dir(1., 0., 0.),
+                                       gp_Pnt2d(shortStart, 0.), gp_Dir2d(1., 0.), 1.);
   TopoDS_Edge longEdge = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
                                       gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 1000.);
   ShapeAnalysis_Edge analysis;
-  builder.UpdateVertex(analysis.FirstVertex(longEdge), 2.);
+  if (shortEndpointHasTolerance) {
+    builder.UpdateVertex(analysis.FirstVertex(shortEdge), 2.);
+  }
+  if (longEndpointHasTolerance) {
+    builder.UpdateVertex(analysis.FirstVertex(longEdge), 2.);
+  }
   TopoDS_Edge firstFar = edgeOnPlane(face, gp_Pnt(3000., 3000., 0.), gp_Dir(1., 0., 0.),
                                      gp_Pnt2d(3000., 3000.), gp_Dir2d(1., 0.));
   TopoDS_Edge secondFar = edgeOnPlane(face, gp_Pnt(-3000., -3000., 0.), gp_Dir(0., 1., 0.),
@@ -460,6 +467,7 @@ int main() {
   runReversedLongOverlapCase();
   runTwoSidedEndpointCutCase();
   runFarEndpointCutCase();
-  runLongSecondEdgeCutCase();
+  runLongSecondEdgeCutCase(0., false, true);
+  runLongSecondEdgeCutCase(500., true, false);
   runEndpointCutCase();
 }
