@@ -150,7 +150,10 @@ mod tests {
                 "patch_limits {} {} {} {}",
                 patch.u_min, patch.u_max, patch.v_min, patch.v_max
             ),
-            expected.lines().nth(10).unwrap()
+            expected
+                .lines()
+                .find(|row| row.starts_with("patch_limits "))
+                .unwrap()
         );
     }
 

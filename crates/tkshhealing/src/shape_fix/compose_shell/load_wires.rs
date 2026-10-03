@@ -229,7 +229,10 @@ mod tests {
         let segments = load_wires(&composer).unwrap();
         assert_eq!(
             native_segment_summary(&segments),
-            expected.lines().nth(4).unwrap()
+            expected
+                .lines()
+                .find(|row| row.starts_with("load_wires "))
+                .unwrap()
         );
     }
 
@@ -259,14 +262,20 @@ mod tests {
             wire,
             line,
             (0.25, 0.75),
-            expected.lines().nth(6).unwrap(),
+            expected
+                .lines()
+                .find(|row| row.starts_with("compute_code "))
+                .unwrap(),
         );
         assert_native_code(
             &composer,
             wire,
             line,
             (1.25, 1.75),
-            expected.lines().nth(7).unwrap(),
+            expected
+                .lines()
+                .find(|row| row.starts_with("compute_code_right "))
+                .unwrap(),
         );
         let tangent = rustycad_tkmath::gp::Line2::new(
             rustycad_tkmath::gp::Point2::new(0.0, 0.0),
@@ -277,7 +286,10 @@ mod tests {
             wire,
             tangent,
             (0.25, 0.75),
-            expected.lines().nth(8).unwrap(),
+            expected
+                .lines()
+                .find(|row| row.starts_with("compute_code_tangent "))
+                .unwrap(),
         );
         composer.set_closed_mode(true);
         assert_native_code(
@@ -285,7 +297,10 @@ mod tests {
             wire,
             line,
             (0.0, 2.0),
-            expected.lines().nth(9).unwrap(),
+            expected
+                .lines()
+                .find(|row| row.starts_with("compute_code_closed_mode "))
+                .unwrap(),
         );
     }
 
@@ -307,7 +322,10 @@ mod tests {
         let segments = load_wires(&composer).unwrap();
         assert_eq!(
             mixed_segment_summary(&segments),
-            expected.lines().nth(5).unwrap()
+            expected
+                .lines()
+                .find(|row| row.starts_with("load_wires_mixed "))
+                .unwrap()
         );
     }
 

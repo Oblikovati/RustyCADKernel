@@ -30,7 +30,10 @@ fn constructor_modes_and_transfer_tool_match_native() {
     composer.set_closed_mode(true);
     assert_eq!(
         format!("closed_mode {}", composer.closed_mode() as u8),
-        expected.lines().nth(1).unwrap()
+        expected
+            .lines()
+            .find(|row| row.starts_with("closed_mode "))
+            .unwrap()
     );
     let replacement = Handle::new(ShapeAnalysisTransferParameters::new()).cast();
     composer.set_transfer_param_tool(&replacement);
@@ -43,7 +46,10 @@ fn constructor_modes_and_transfer_tool_match_native() {
                 .unwrap()
                 .name()
         ),
-        expected.lines().nth(2).unwrap()
+        expected
+            .lines()
+            .find(|row| row.starts_with("transfer_type "))
+            .unwrap()
     );
     assert_init_matches_native(expected);
 }
@@ -62,7 +68,10 @@ fn assert_init_matches_native(expected: &str) {
             composer.status(ShapeExtendStatus::Done1) as u8,
             composer.result().is_null() as u8,
         ),
-        expected.lines().nth(3).unwrap()
+        expected
+            .lines()
+            .find(|row| row.starts_with("init "))
+            .unwrap()
     );
 }
 
