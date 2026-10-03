@@ -82287,7 +82287,7 @@
       "upstream_id": "Standard_GUID::operator=(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid / From<Uuid>",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid",
       "status": "implemented",
       "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Rust has no cross-type assignment operator: `guid = uuid.into()` or assign_uuid."
     },
@@ -88351,7 +88351,7 @@
       "upstream_id": "Quantity_ColorRGBA::ColorFromHex(const char* const,Quantity_ColorRGBA&,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
-      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_hex / set_hex",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::set_hex",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). from_hex returns Option; set_hex keeps the in-place form."
     },
@@ -88647,7 +88647,7 @@
       "upstream_id": "Resource_Manager::GetResourcePath(TCollection_AsciiString&,const char* const,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
-      "rust_item": "rustycad_tkernel::resource::ResourceManager::resource_path / rustycad_tkernel::resource::ResourceManager::resource_path_with",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::resource_path",
       "status": "implemented",
       "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. The output reference becomes the return value; resource_path_with takes the environment seam."
     },
@@ -88759,7 +88759,7 @@
       "upstream_id": "Resource_Unicode::GetFormat()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
-      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::get_format / rustycad_tkernel::resource::ResourceUnicode::get_format_with",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::get_format",
       "status": "implemented",
       "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Read on first use from the CharSet resources; get_format_with takes the host seams."
     },
@@ -88767,7 +88767,7 @@
       "upstream_id": "Resource_Unicode::ReadFormat()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
-      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::read_format / rustycad_tkernel::resource::ResourceUnicode::read_format_with",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::read_format",
       "status": "implemented",
       "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Only SJIS, EUC and GB are recognized; anything else selects ANSI."
     },
