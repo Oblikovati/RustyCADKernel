@@ -7,7 +7,7 @@ generated from both projects and the comparison gate passes.
 
 ## Current compiler inventory
 
-The configured scan observes **110,270 public/protected C++ declaration
+The configured scan observes **110,035 public/protected C++ declaration
 candidates**, plus 6,526 macro candidates tracked separately. It accounts for
 all 6,316 source-header paths and the generated version header:
 
@@ -28,7 +28,7 @@ ranges retained for review. The observed declaration count is a lower bound on
 the cross-platform surface, not a denominator for a full-port percentage.
 
 The legacy-test snapshot separately accounts for 8,648 GoogleTest declarations:
-7,393 exact Rust mappings and 1,255 unmapped, with zero unknown or duplicate
+7,394 exact Rust mappings and 1,254 unmapped, with zero unknown or duplicate
 mappings. Its runtime status remains unverified until verifier evidence is
 joined; DRAW candidates are also explicit unverified obligations.
 

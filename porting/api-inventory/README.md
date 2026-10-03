@@ -18,7 +18,7 @@ configuration. It parsed 5,633; authentic OCCT translation-unit retries recovere
 remain unresolved and another 28 distinct source headers lack a configured
 owning toolkit. Original failures are preserved even when a context retry works.
 
-The observed surface contains 110,270 public/protected declaration candidates
+The observed surface contains 110,035 public/protected declaration candidates
 and 6,526 macro candidates. Macro bodies, inactive platform/configuration
 branches, unknown configurations, and unresolved identities require additional
 work. These are observed counts, not a full-port percentage. Shared package
@@ -62,8 +62,8 @@ content hashes and source-relative declaration paths are the portable identity.
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,393 have exact Rust mappings and
-1,255 remain unmapped. There are no duplicate or unknown mappings in this
+all 8,648 GoogleTest declaration candidates: 7,394 have exact Rust mappings and
+1,254 remain unmapped. There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
 
