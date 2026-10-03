@@ -258,3 +258,7 @@ impl AdjacentIntersectionWalk {
 fn is_enabled(mode: i32, default: bool) -> bool {
     mode < 0 && default || mode > 0
 }
+
+#[cfg(test)]
+#[path = "wire_self_intersection_aggregate_tests.rs"]
+mod tests;
