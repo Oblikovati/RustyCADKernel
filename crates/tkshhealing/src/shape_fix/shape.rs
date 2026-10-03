@@ -1,7 +1,7 @@
 // Rust translation of ShapeFix/ShapeFix_Shape.cxx dispatch at
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Native shape dispatch and shared repair tools; wire dispatch remains incomplete.
+//! Native shape dispatch and shared repair tools; face repair remains a partial dependency.
 mod configuration;
 use configuration::ShapeFixModes;
 mod perform;

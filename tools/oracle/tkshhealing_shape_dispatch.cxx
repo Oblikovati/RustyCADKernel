@@ -26,7 +26,7 @@ void run(const char* name,const TopoDS_Shape& shape,bool off=false,bool cancelle
 }
 int main(){
  auto box=BRepPrimAPI_MakeBox(2,3,4).Shape();
- for(auto item:{std::pair<const char*,TopAbs_ShapeEnum>{"solid",TopAbs_SOLID},{"shell",TopAbs_SHELL},{"face",TopAbs_FACE},{"edge",TopAbs_EDGE},{"vertex",TopAbs_VERTEX}})run(item.first,TopExp_Explorer(box,item.second).Current());
+ for(auto item:{std::pair<const char*,TopAbs_ShapeEnum>{"solid",TopAbs_SOLID},{"shell",TopAbs_SHELL},{"face",TopAbs_FACE},{"wire",TopAbs_WIRE},{"edge",TopAbs_EDGE},{"vertex",TopAbs_VERTEX}})run(item.first,TopExp_Explorer(box,item.second).Current());
  run("solid_off",box,true);run("wire_off",TopExp_Explorer(box,TopAbs_WIRE).Current(),true);run("cancelled",box,false,true);
  ShapeFix_Shape tool(box);result("repeat_first",tool,tool.Perform());result("repeat_second",tool,tool.Perform());tool.Init(box);result("after_init",tool,false);result("repeat_init",tool,tool.Perform());
  ShapeFix_Shape face_tool(TopExp_Explorer(box,TopAbs_FACE).Current());result("face_first",face_tool,face_tool.Perform());result("face_repeat",face_tool,face_tool.Perform());

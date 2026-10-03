@@ -88,6 +88,7 @@ fn native_repair_dispatch_and_modes() {
         ("solid", ShapeEnum::Solid),
         ("shell", ShapeEnum::Shell),
         ("face", ShapeEnum::Face),
+        ("wire", ShapeEnum::Wire),
         ("edge", ShapeEnum::Edge),
         ("vertex", ShapeEnum::Vertex),
     ] {

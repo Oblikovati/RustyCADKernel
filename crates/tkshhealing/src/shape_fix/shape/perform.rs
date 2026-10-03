@@ -85,13 +85,7 @@ impl ShapeFixShape {
                 self.repair_shell(shape, &scope.next(1.))
             }
             ShapeEnum::Face if need_fix(self.fix_free_face_mode(), true) => self.repair_face(shape),
-            ShapeEnum::Wire if need_fix(self.fix_free_wire_mode(), true) => {
-                Err(Failure::with_type(
-                    "Standard_NotImplemented",
-                    "ShapeFix_Shape::Perform: free wire dispatch requires ShapeFix_Wire::Perform; expected ported aggregate wire repair",
-                    "",
-                ))
-            }
+            ShapeEnum::Wire if need_fix(self.fix_free_wire_mode(), true) => self.repair_wire(shape),
             ShapeEnum::Edge => self.repair_edge(shape),
             _ => Ok(false),
         }
@@ -159,6 +153,25 @@ impl ShapeFixShape {
         let changed = face.perform()?;
         wire.set_topology_mode(saved);
         *self.status.write() |= ShapeExtend::encode_status(ShapeExtendStatus::Done3);
+        Ok(changed)
+    }
+    fn repair_wire(&self, shape: &Shape) -> Result<bool, Failure> {
+        let wire = self.fix_wire_tool();
+        let (topology, closed) = (wire.topology_mode(), wire.closed_mode());
+        wire.set_topology_mode(true);
+        if !shape.closed()? {
+            wire.set_closed_mode(false);
+        }
+        wire.set_face(&topods::Face::default())?;
+        wire.load(&topods::wire(shape)?)?;
+        wire.set_context(&self.context());
+        let changed = wire.perform()?;
+        if changed {
+            self.context().replace(shape, &wire.wire()?.into_shape())?;
+        }
+        wire.set_topology_mode(topology);
+        wire.set_closed_mode(closed);
+        *self.status.write() |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
         Ok(changed)
     }
     fn repair_edge(&self, shape: &Shape) -> Result<bool, Failure> {

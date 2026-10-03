@@ -10,6 +10,7 @@ mod missing_seam;
 mod natural_bound;
 mod orientation;
 mod periodic_cone;
+mod periodic_degenerated;
 mod small_area;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};

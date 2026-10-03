@@ -9,15 +9,16 @@ use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomConicalSurface, GeomSurface};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Axis2d, Direction2, Point2, StandardDirection2};
+use rustycad_tkmath::toploc::Location;
 use std::f64::consts::PI;
 
 /// The UV bounds and winding direction of a periodic conical loop.
-struct ConicalLoopBounds {
-    min_u: f64,
-    max_u: f64,
-    min_v: f64,
-    max_v: f64,
-    decreasing: bool,
+pub(super) struct ConicalLoopBounds {
+    pub min_u: f64,
+    pub max_u: f64,
+    pub min_v: f64,
+    pub max_v: f64,
+    pub decreasing: bool,
 }
 
 /// The UV extents used for the two cone meridian edges.
@@ -29,7 +30,7 @@ struct PeriodicSeamBounds {
 }
 
 /// The direct wire children of a face with the orientations accepted by OCCT's fix.
-fn face_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
+pub(super) fn face_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
     let mut wires = Vec::new();
     for child in ShapeIterator::new(&face.clone().into_shape(), false, true) {
         let shape = child;
@@ -98,15 +99,35 @@ fn conical_loop_bounds(
     wire: &Wire,
     tolerance: f64,
 ) -> Result<Option<ConicalLoopBounds>, Failure> {
+    conical_bounds_from_pcurves(wire, tolerance, |edge| {
+        ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)
+    })
+}
+pub(super) fn conical_bounds_on_surface(
+    wire: &Wire,
+    surface: &Handle<dyn GeomSurface>,
+    tolerance: f64,
+) -> Result<Option<ConicalLoopBounds>, Failure> {
+    conical_bounds_from_pcurves(wire, tolerance, |edge| {
+        ShapeAnalysisEdge::new().pcurve_on_surface(edge, surface, &Location::default(), true)
+    })
+}
+fn conical_bounds_from_pcurves<F>(
+    wire: &Wire,
+    tolerance: f64,
+    pcurve: F,
+) -> Result<Option<ConicalLoopBounds>, Failure>
+where
+    F: Fn(&rustycad_tkbrep::topods::Edge) -> Result<(Handle<dyn Geom2dCurve>, f64, f64), Failure>,
+{
     let mut min_u = f64::MAX;
     let mut max_u = f64::MIN;
     let mut min_v = f64::MAX;
     let mut max_v = f64::MIN;
     let (mut delta, mut abs_delta) = (0.0, 0.0);
-    let analysis = ShapeAnalysisEdge::new();
     for child in ShapeIterator::new(&wire.clone().into_shape(), false, true) {
         let edge = topods::edge(&child)?;
-        let (curve, first, last) = analysis.pcurve_on_face(&edge, face, true)?;
+        let (curve, first, last) = pcurve(&edge)?;
         let Some(curve) = curve.get() else {
             return Ok(None);
         };
@@ -157,16 +178,27 @@ pub(super) fn repair_periodic_cone(face: &Face, tolerance: f64) -> Result<Option
     {
         return Ok(None);
     }
-    build_apex_face(face, &wires[0], cone, &bounds, apex_v).map(Some)
+    build_apex_face(
+        face,
+        &wires[0],
+        cone,
+        &bounds,
+        apex_v,
+        true,
+        precision::confusion(),
+    )
+    .map(Some)
 }
 
 /// Creates the degenerated edge at the cone apex and inserts it into an empty face copy.
-fn build_apex_face(
+pub(super) fn build_apex_face(
     face: &Face,
     wire: &Wire,
     cone: &GeomConicalSurface,
     bounds: &ConicalLoopBounds,
     apex_v: f64,
+    add_seam: bool,
+    tolerance: f64,
 ) -> Result<Shape, Failure> {
     let (start_u, direction) = if apex_v < bounds.min_v {
         (
@@ -194,7 +226,7 @@ fn build_apex_face(
     builder.make_vertex_at(&mut apex, cone.apex(), precision::confusion())?;
     let mut edge = rustycad_tkbrep::topods::Edge::default();
     builder.make_edge(&mut edge)?;
-    builder.update_edge_pcurve_on_face(&edge, &line, face, precision::confusion())?;
+    builder.update_edge_pcurve_on_face(&edge, &line, face, tolerance)?;
     let mut edge_shape = edge.clone().into_shape();
     let topo_builder = Builder;
     topo_builder.add(&mut edge_shape, &apex.clone().into_shape())?;
@@ -206,10 +238,14 @@ fn build_apex_face(
     let apex_wire = rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_edge(&edge)?.wire()?;
     apex_wire.set_closed(true)?;
     let mut result_shape = face.empty_copied()?;
+    result_shape.set_orientation(Orientation::Forward);
     topo_builder.add(&mut result_shape, &fixed_wire.clone().into_shape())?;
     topo_builder.add(&mut result_shape, &apex_wire.into_shape())?;
     let mut result = topods::face(&result_shape)?;
     result.set_orientation(face.orientation());
+    if !add_seam {
+        return Ok(result.into_shape());
+    }
     build_missing_seam_face(
         &result,
         &fixed_wire,

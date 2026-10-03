@@ -224227,7 +224227,7 @@
       "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_intersecting_wires",
       "status": "partial",
-      "notes": "Direct-wire traversal, point intersections, endpoint reuse/union and short overlap splits are compared with native output including split ranges. Long-overlap and remaining endpoint-cut branches are still being ported. This row records an incomplete implementation, not class or legacy-test parity."
+      "notes": "Native fixtures cover points, endpoint reuse/union, short overlaps, full-second-edge long overlap and its reversed direction, and a cut that mutates one edge but returns false. Partial long overlap and remaining continuation combinations are under active porting; no full class or legacy parity claim."
     },
     {
       "upstream_id": "ShapeFix_Shape::ShapeFix_Shape()",
@@ -224236,7 +224236,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::empty",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::ShapeFix_Shape(const TopoDS_Shape &)",
@@ -224245,7 +224245,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::new",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::Init(const TopoDS_Shape &)",
@@ -224254,7 +224254,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::init",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::Perform(const Message_ProgressRange &)",
@@ -224263,7 +224263,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::perform_with_progress",
       "status": "partial",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::Shape() const",
@@ -224272,7 +224272,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::shape",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::Status(const ShapeExtend_Status) const",
@@ -224281,7 +224281,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::status",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::SameParameter(const TopoDS_Shape &,const bool,const Message_ProgressRange &)",
@@ -224290,7 +224290,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::same_parameter",
       "status": "partial",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixSolidTool() const",
@@ -224299,7 +224299,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_tool",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixShellTool() const",
@@ -224308,7 +224308,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_shell_tool",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixFaceTool() const",
@@ -224317,7 +224317,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_face_tool",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixWireTool() const",
@@ -224326,7 +224326,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_wire_tool",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixEdgeTool() const",
@@ -224335,7 +224335,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_edge_tool",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixSolidMode()",
@@ -224344,7 +224344,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_solid_mode"
@@ -224357,7 +224357,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_shell_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_shell_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_shell_mode"
@@ -224370,7 +224370,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_face_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_face_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_face_mode"
@@ -224383,7 +224383,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_wire_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_wire_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_wire_mode"
@@ -224396,7 +224396,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_same_parameter_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_same_parameter_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_same_parameter_mode"
@@ -224409,7 +224409,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_position_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_position_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_vertex_position_mode"
@@ -224422,7 +224422,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_tol_mode",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
       "rust_items": [
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_tol_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_vertex_tol_mode"
@@ -224435,7 +224435,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_precision",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::SetMinTolerance(const double)",
@@ -224444,7 +224444,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_min_tolerance",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Shape::SetMaxTolerance(const double)",
@@ -224453,7 +224453,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_max_tolerance",
       "status": "implemented",
-      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
     },
     {
       "upstream_id": "ShapeFix_Face::FixWireTool()",
@@ -224669,6 +224669,51 @@
         "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_periodic_degenerated_mode",
         "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_periodic_degenerated_mode"
       ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixPeriodicDegenerated()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_periodic_degenerated",
+      "status": "partial",
+      "notes": "Eight pinned rows cover above/below apex, reverse wire/face, partial loop, missing p-curve, multiple wires and context. Result changes while Face remains original; edge tolerance follows configured precision. Legacy Perform cone path still adds seams separately. Located/transformed and broader failure domains need more oracle coverage; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
+      "status": "partial",
+      "notes": "Native-backed no-face aggregate stages, configuration, status and cancellation ordering. Face-ready aggregate stages remain explicitly incomplete; no full behavioral or legacy parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckPinFace(const TopoDS_Face &,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin_face",
+      "status": "partial",
+      "notes": "Native pair scan retains the restrictive second-edge length gate. No-wire native invalid Current access becomes explicit Rust failure. PinFace/PinEdges status fields are constructor-uninitialized and represented as unknown until written. General domains remain partial."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusPinFace(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin_face",
+      "status": "partial",
+      "notes": "Native constructor leaves this status indeterminate; Rust Option<bool> explicitly models unknown until written. This is an unresolved behavior domain, not an approved exception."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusPinEdges(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin_edges",
+      "status": "partial",
+      "notes": "Native constructor leaves this status indeterminate; Rust Option<bool> explicitly models unknown until written. This is an unresolved behavior domain, not an approved exception."
     }
   ],
   "tests": [
