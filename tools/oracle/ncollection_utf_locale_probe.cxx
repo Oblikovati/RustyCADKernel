@@ -40,6 +40,34 @@ static void inspectTool(const char* label, const char* input)
   std::puts("");
 }
 
+static void inspectToolOutputEdges()
+{
+  const wchar_t aUmlaut[] = {L'\u00e4', L'\0'};
+  const wchar_t anEmpty[] = {L'\0'};
+  unsigned char anOutput[4];
+  for (auto& aByte : anOutput) aByte = 0xff;
+  const bool isShort = NCollection_UtfStringTool::ToLocale(
+    aUmlaut, reinterpret_cast<char*>(anOutput), 1);
+  std::printf("tool_short:%d:", isShort);
+  for (auto aByte : anOutput) std::printf("%02x", aByte);
+  std::puts("");
+
+  for (auto& aByte : anOutput) aByte = 0xff;
+  const bool isEmpty = NCollection_UtfStringTool::ToLocale(
+    anEmpty, reinterpret_cast<char*>(anOutput), 4);
+  std::printf("tool_empty_output:%d:", isEmpty);
+  for (auto aByte : anOutput) std::printf("%02x", aByte);
+  std::puts("");
+
+  std::setlocale(LC_CTYPE, "C");
+  for (auto& aByte : anOutput) aByte = 0xff;
+  const bool isUnrepresentable = NCollection_UtfStringTool::ToLocale(
+    aUmlaut, reinterpret_cast<char*>(anOutput), 4);
+  std::printf("tool_error:%d:", isUnrepresentable);
+  for (auto aByte : anOutput) std::printf("%02x", aByte);
+  std::puts("");
+}
+
 int main(int argc, char** argv)
 {
   if (argc != 2 || !std::setlocale(LC_CTYPE, argv[1])) return 2;
@@ -51,4 +79,5 @@ int main(int argc, char** argv)
   inspect("empty", "");
   inspectTool("tool_utf8", "\xc3\xa4" "bc");
   inspectTool("tool_empty", "");
+  inspectToolOutputEdges();
 }
