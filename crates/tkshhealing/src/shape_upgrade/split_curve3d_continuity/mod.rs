@@ -1,6 +1,8 @@
 //! OCCT ShapeUpgrade_SplitCurve3dContinuity at 3d097a0328e71b8.
-use super::{ShapeUpgradeSplitCurve3d, SplitCurve, SplitCurveData, SplitCurves3d};
-use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
+use super::{
+    ShapeUpgradeSplitCurve3d, SplitCurve, SplitCurveData, SplitCurves3d,
+    curve_continuity::ContinuitySettings,
+};
 use rustycad_tkernel::{
     impl_transient, precision,
     standard::{Failure, Handle, SharedState},
@@ -9,28 +11,19 @@ use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve, GeomOffsetCurve, GeomTri
 use rustycad_tkmath::geom_abs::Shape;
 mod compute;
 
-#[derive(Clone, Copy)]
-struct ContinuitySettings {
-    criterion: Shape,
-    tolerance: f64,
-    order: i32,
-}
-impl Default for ContinuitySettings {
-    fn default() -> Self {
-        Self {
-            criterion: Shape::C1,
-            tolerance: precision::confusion(),
-            order: 1,
-        }
-    }
-}
-
 /// Correct or split a private curve copy at insufficiently continuous knots.
 /// `let splitter = ShapeUpgradeSplitCurve3dContinuity::new();`
-#[derive(Default)]
 pub struct ShapeUpgradeSplitCurve3dContinuity {
     parent: ShapeUpgradeSplitCurve3d,
     settings: SharedState<ContinuitySettings>,
+}
+impl Default for ShapeUpgradeSplitCurve3dContinuity {
+    fn default() -> Self {
+        Self {
+            parent: ShapeUpgradeSplitCurve3d::default(),
+            settings: SharedState::new(ContinuitySettings::with_tolerance(precision::confusion())),
+        }
+    }
 }
 impl_transient!(ShapeUpgradeSplitCurve3dContinuity, "ShapeUpgrade_SplitCurve3dContinuity",
     ShapeUpgradeSplitCurve3d, parent, interfaces: [dyn SplitCurve]);
@@ -43,15 +36,7 @@ impl ShapeUpgradeSplitCurve3dContinuity {
     /// Set the required continuity; geometric criteria use order one as in OCCT.
     /// `splitter.set_criterion(Shape::C2)`.
     pub fn set_criterion(&self, criterion: Shape) {
-        let mut settings = self.settings.write();
-        settings.criterion = criterion;
-        settings.order = match criterion {
-            Shape::C0 => 0,
-            Shape::C2 => 2,
-            Shape::C3 => 3,
-            Shape::CN => 4,
-            _ => 1,
-        };
+        self.settings.write().set_criterion(criterion);
     }
     /// Set the knot-removal tolerance without clamping; `splitter.set_tolerance(1e-6)`.
     pub fn set_tolerance(&self, tolerance: f64) {
@@ -77,14 +62,6 @@ impl ShapeUpgradeSplitCurve3dContinuity {
     /// Share the built pieces; `let pieces = splitter.curves()`.
     pub fn curves(&self) -> SplitCurves3d {
         self.parent.curves()
-    }
-    fn replace_status(&self, status: ShapeExtendStatus) {
-        self.split_curve_data()
-            .with_mut(|f| f.status = ShapeExtend::encode_status(status));
-    }
-    fn add_status(&self, status: ShapeExtendStatus) {
-        self.split_curve_data()
-            .with_mut(|f| f.status |= ShapeExtend::encode_status(status));
     }
 }
 impl SplitCurve for ShapeUpgradeSplitCurve3dContinuity {

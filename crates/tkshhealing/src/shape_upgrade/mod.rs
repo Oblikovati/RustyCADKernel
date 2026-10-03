@@ -64,3 +64,4 @@ pub use split_surface_angle::ShapeUpgradeSplitSurfaceAngle;
 
 mod split_curve2d_continuity;
 pub use split_curve2d_continuity::ShapeUpgradeSplitCurve2dContinuity;
+mod curve_continuity;
