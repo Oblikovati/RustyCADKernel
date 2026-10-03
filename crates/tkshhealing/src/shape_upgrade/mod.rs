@@ -88,3 +88,5 @@ pub use face_divide_area::ShapeUpgradeFaceDivideArea;
 
 mod shape_divide;
 pub use shape_divide::{ShapeDivideFields, ShapeDivider, ShapeUpgradeShapeDivide};
+mod shape_divide_area;
+pub use shape_divide_area::ShapeUpgradeShapeDivideArea;
