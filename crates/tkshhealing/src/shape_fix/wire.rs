@@ -8,6 +8,8 @@ mod wire_closed;
 mod wire_connected;
 #[path = "wire_degenerated.rs"]
 mod wire_degenerated;
+#[path = "wire_dummy_seam.rs"]
+mod wire_dummy_seam;
 #[path = "wire_edge_curves.rs"]
 mod wire_edge_curves;
 #[path = "wire_intersection_fix.rs"]
@@ -38,6 +40,8 @@ mod wire_small;
 mod wire_split_tool;
 #[path = "wire_state.rs"]
 mod wire_state;
+#[path = "wire_tails.rs"]
+mod wire_tails;
 
 pub use wire_intersection_tool::ShapeFixIntersectionTool;
 pub use wire_split_tool::ShapeFixSplitTool;
@@ -97,6 +101,8 @@ struct WireFixState {
     fix_lacking_mode: i32,
     notches_status: i32,
     tails_status: i32,
+    max_tail_angle_sine: f64,
+    max_tail_width: f64,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -149,6 +155,8 @@ impl Default for ShapeFixWire {
                 fix_lacking_mode: -1,
                 notches_status: 0,
                 tails_status: 0,
+                max_tail_angle_sine: 0.0,
+                max_tail_width: -1.0,
             }),
             edge_fixer: Handle::new(ShapeFixEdge::new()),
         }

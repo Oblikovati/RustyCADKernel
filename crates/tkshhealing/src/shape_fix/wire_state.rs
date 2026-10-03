@@ -39,6 +39,17 @@ impl ShapeFixWire {
         self.state.write().fix_tail_mode = mode;
     }
 
+    /// Sets the native maximum tail angle in radians; `fixer.set_max_tail_angle(0.25)`.
+    pub fn set_max_tail_angle(&self, angle: f64) {
+        let sine = angle.sin();
+        self.state.write().max_tail_angle_sine = sine.max(0.0);
+    }
+
+    /// Sets the maximum tail width; `fixer.set_max_tail_width(0.01)`.
+    pub fn set_max_tail_width(&self, width: f64) {
+        self.state.write().max_tail_width = width;
+    }
+
     /// Selects aggregate self-intersection repair; `fixer.set_fix_self_intersection_mode(0)` disables it.
     pub fn set_fix_self_intersection_mode(&self, mode: i32) {
         self.state.write().fix_self_intersection_mode = mode;
