@@ -14,6 +14,7 @@ mod root;
 mod shape;
 mod shape_tolerance;
 mod shell_orientation;
+mod split_common_vertex;
 mod wire;
 mod wire_vertex;
 
@@ -26,6 +27,7 @@ pub use intersection::{PcurveCrossing, line_pcurve_crossing};
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;
+pub use split_common_vertex::ShapeFixSplitCommonVertex;
 pub use wire::ShapeFixWire;
 pub use wire_vertex::ShapeFixWireVertex;
 
