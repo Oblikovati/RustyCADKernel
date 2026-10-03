@@ -1,21 +1,104 @@
-// Rust translation of ShapeUpgrade/ShapeUpgrade_FaceDivide's unchanged-face path
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-
-//! Face-level surface and boundary-curve division.
-use super::ShapeUpgradeTool;
-use crate::shape_build::ShapeBuildReShape;
+//! Face subdivision orchestration from OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::{ShapeUpgradeSplitSurface, ShapeUpgradeTool, ShapeUpgradeWireDivide};
+use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkbrep::topods::{Face, Shape};
-use rustycad_tkernel::standard::{Failure, Handle, SharedState};
+use rustycad_tkernel::{
+    impl_transient, impl_transient_interface,
+    standard::{Failure, Handle, SharedState, Transient},
+};
+mod curves;
+mod surface;
 
-#[derive(Clone, Default)]
-struct FaceDivideFields {
-    face: Face,
-    result: Shape,
+/// Native protected face subdivision state; `FaceDivideData::default()`.
+pub struct FaceDivideData {
+    fields: SharedState<FaceDivideFields>,
+}
+/// Working face, result, modes, and configured criteria.
+pub struct FaceDivideFields {
+    /// Original supporting face.
+    pub face: Face,
+    /// Current intermediate/result shape.
+    pub result: Shape,
+    /// Whether split surfaces are segmented.
+    pub segment: bool,
+    /// Native ShapeExtend status bits.
+    pub status: i32,
+    surface_tool: Handle<ShapeUpgradeSplitSurface>,
+    wire_tool: Handle<ShapeUpgradeWireDivide>,
+}
+impl Default for FaceDivideData {
+    fn default() -> Self {
+        Self {
+            fields: SharedState::new(FaceDivideFields {
+                face: Face::default(),
+                result: Shape::default(),
+                segment: true,
+                status: 0,
+                surface_tool: Handle::new(ShapeUpgradeSplitSurface::new()),
+                wire_tool: Handle::new(ShapeUpgradeWireDivide::new()),
+            }),
+        }
+    }
+}
+impl FaceDivideData {
+    /// Read protected state; `state.with(|fields| fields.segment)`.
+    pub fn with<R>(&self, read: impl FnOnce(&FaceDivideFields) -> R) -> R {
+        read(&self.fields.read())
+    }
+    /// Update protected state for a derived policy; `state.with_mut(|fields| fields.status = 0)`.
+    pub fn with_mut<R>(&self, write: impl FnOnce(&mut FaceDivideFields) -> R) -> R {
+        write(&mut self.fields.write())
+    }
+    fn add_status(&self, status: ShapeExtendStatus) {
+        self.with_mut(|fields| fields.status |= ShapeExtend::encode_status(status));
+    }
 }
 
-/// `ShapeUpgrade_FaceDivide` for faces that need no surface or curve subdivision.
-/// The upstream `Perform()` creates a missing re-shaping context before attempting its
-/// split operations; this implementation currently preserves input faces unchanged.
+/// Virtual surface and boundary subdivision policy; `divider.perform(0.)?`.
+pub trait FaceDivider: Transient {
+    /// Shared protected state; `divider.face_divide_data()`.
+    fn face_divide_data(&self) -> &FaceDivideData;
+    /// Shared tolerance and reshape context; `divider.face_divide_base()`.
+    fn face_divide_base(&self) -> &ShapeUpgradeTool;
+    /// Split surfaces before curves and retain aggregate status; `divider.perform(0.)?`.
+    fn perform(&self, area: f64) -> Result<bool, Failure> {
+        let state = self.face_divide_data();
+        state.with_mut(|fields| fields.status = 0);
+        let face = state.with(|fields| fields.face.clone());
+        if face.is_null() {
+            return Ok(false);
+        }
+        let base = self.face_divide_base();
+        if base.context().is_null() {
+            base.set_context(&Handle::new(crate::shape_build::ShapeBuildReShape::new()));
+        }
+        state.with_mut(|fields| fields.result = face.into_shape());
+        self.split_surface(area)?;
+        self.split_curves()?;
+        Ok(state.with(|fields| ShapeExtend::decode_status(fields.status, ShapeExtendStatus::Done)))
+    }
+    /// Split the supporting surface and compose its patch faces; `divider.split_surface(0.)?`.
+    fn split_surface(&self, area: f64) -> Result<bool, Failure> {
+        surface::split_surface(self, area)
+    }
+    /// Split every boundary wire through its configured policy; `divider.split_curves()?`.
+    fn split_curves(&self) -> Result<bool, Failure> {
+        curves::split_curves(self)
+    }
+    /// Virtual surface criterion selection; `divider.split_surface_tool()`.
+    fn split_surface_tool(&self) -> Handle<ShapeUpgradeSplitSurface> {
+        self.face_divide_data()
+            .with(|fields| fields.surface_tool.clone())
+    }
+    /// Virtual wire criterion selection; `divider.wire_divide_tool()`.
+    fn wire_divide_tool(&self) -> Handle<ShapeUpgradeWireDivide> {
+        self.face_divide_data()
+            .with(|fields| fields.wire_tool.clone())
+    }
+}
+impl_transient_interface!(dyn FaceDivider, "ShapeUpgrade_FaceDivide", ShapeUpgradeTool);
+
+/// Divides a face using configurable surface and wire criteria.
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Face;
@@ -24,107 +107,68 @@ struct FaceDivideFields {
 /// assert!(!divider.perform(0.0)?);
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
+#[derive(Default)]
 pub struct ShapeUpgradeFaceDivide {
     parent: ShapeUpgradeTool,
-    fields: SharedState<FaceDivideFields>,
+    state: FaceDivideData,
 }
-
-impl Default for ShapeUpgradeFaceDivide {
-    fn default() -> Self {
-        Self::new(Face::default())
+impl_transient!(ShapeUpgradeFaceDivide, "ShapeUpgrade_FaceDivide", ShapeUpgradeTool, parent, interfaces:[dyn FaceDivider]);
+impl FaceDivider for ShapeUpgradeFaceDivide {
+    fn face_divide_data(&self) -> &FaceDivideData {
+        &self.state
+    }
+    fn face_divide_base(&self) -> &ShapeUpgradeTool {
+        &self.parent
     }
 }
-
 impl std::ops::Deref for ShapeUpgradeFaceDivide {
     type Target = ShapeUpgradeTool;
-
     fn deref(&self) -> &Self::Target {
         &self.parent
     }
 }
-
 impl ShapeUpgradeFaceDivide {
-    /// Construct with the face and result initialized to `face`;
-    /// `ShapeUpgradeFaceDivide::new(face)`.
+    /// Construct with the face and result initialized to `face`; `ShapeUpgradeFaceDivide::new(face)`.
     pub fn new(face: Face) -> Self {
-        Self {
-            parent: ShapeUpgradeTool::new(),
-            fields: SharedState::new(FaceDivideFields {
-                face: face.clone(),
-                result: face.into(),
-            }),
-        }
+        let tool = Self::default();
+        tool.init(&face);
+        tool
     }
-
-    /// Replace the working face and its current result; `divider.init(&face)`.
+    /// Replace working face and result without clearing statuses; `divider.init(&face)`.
     pub fn init(&self, face: &Face) {
-        let mut fields = self.fields.write();
-        fields.face = face.clone();
-        fields.result = face.clone().into();
+        self.state.with_mut(|fields| {
+            fields.face = face.clone();
+            fields.result = face.clone().into_shape();
+        });
     }
-
-    /// Prepare the native default context and preserve an unchanged face;
-    /// `assert!(!divider.perform(0.0)?)`.
-    pub fn perform(&self, _area: f64) -> Result<bool, Failure> {
-        let face = self.fields.read().face.clone();
-        if face.is_null() {
-            self.fields.write().result = Shape::default();
-            return Ok(false);
-        }
-        self.initialize_context();
-        self.fields.write().result = face.into();
-        Ok(false)
+    /// Dispatch the configured subdivision policies; `divider.perform(0.)?`.
+    pub fn perform(&self, area: f64) -> Result<bool, Failure> {
+        FaceDivider::perform(self, area)
     }
-
-    /// Return the current result face as a shape; `let result = divider.result()`.
+    /// Return the current intermediate/result shape; `divider.result()`.
     pub fn result(&self) -> Shape {
-        self.fields.read().result.clone()
+        self.state.with(|fields| fields.result.clone())
     }
-
-    fn initialize_context(&self) {
-        if self.context().is_null() {
-            self.set_context(&Handle::new(ShapeBuildReShape::new()));
-        }
+    /// Query native subdivision flags; `divider.status_flag(ShapeExtendStatus::Done)`.
+    pub fn status_flag(&self, status: ShapeExtendStatus) -> bool {
+        self.state
+            .with(|fields| ShapeExtend::decode_status(fields.status, status))
+    }
+    /// Select geometric segmentation; `divider.set_surface_segment_mode(false)`.
+    pub fn set_surface_segment_mode(&self, enabled: bool) {
+        self.state.with_mut(|fields| fields.segment = enabled);
+    }
+    /// Replace the surface criterion, allowing a null tool; `divider.set_split_surface_tool(&tool)`.
+    pub fn set_split_surface_tool(&self, tool: &Handle<ShapeUpgradeSplitSurface>) {
+        self.state
+            .with_mut(|fields| fields.surface_tool = tool.clone());
+    }
+    /// Replace the wire criterion, allowing a null tool; `divider.set_wire_divide_tool(&tool)`.
+    pub fn set_wire_divide_tool(&self, tool: &Handle<ShapeUpgradeWireDivide>) {
+        self.state
+            .with_mut(|fields| fields.wire_tool = tool.clone());
     }
 }
-
 #[cfg(test)]
-mod tests {
-    use super::ShapeUpgradeFaceDivide;
-    use rustycad_tkbrep::topods::Face;
-    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
-    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
-
-    fn valid_box_face() -> Face {
-        let mut box_maker = BRepPrimAPIMakeBox::from_sizes(2.0, 3.0, 4.0).unwrap();
-        let shape = box_maker.shape().unwrap();
-        let faces = rustycad_tkbrep::topexp::Explorer::new(
-            shape,
-            rustycad_tkg3d::top_abs::ShapeEnum::Face,
-            rustycad_tkg3d::top_abs::ShapeEnum::Shape,
-        )
-        .unwrap();
-        rustycad_tkbrep::topods::face(faces.current()).unwrap()
-    }
-
-    #[test]
-    fn default_perform_preserves_null_face_and_result() {
-        let divider = ShapeUpgradeFaceDivide::default();
-        assert!(!divider.perform(0.0).unwrap());
-        assert!(divider.result().is_null());
-    }
-
-    #[test]
-    fn perform_creates_the_default_reshape_context() {
-        let divider = ShapeUpgradeFaceDivide::new(valid_box_face());
-        divider.perform(0.0).unwrap();
-        assert!(!divider.context().is_null());
-    }
-
-    #[test]
-    fn init_replaces_the_face_and_result() {
-        let divider = ShapeUpgradeFaceDivide::default();
-        divider.init(&Face::default());
-        assert!(divider.result().is_null());
-    }
-}
+#[path = "face_divide/legacy_tests.rs"]
+mod legacy_tests;

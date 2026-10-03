@@ -727,10 +727,9 @@ all 101 mapped declarations in native and Rust executions.
 All 2 declarations from `ShapeUpgrade_FaceDivide_Test.cxx` are mapped together. The
 filtered native/Rust source gate passes both OCCT declarations and both Rust runtime
 cases, including 100 independent concurrent `Perform()` calls. The focused crate tests
-also pass 3/3, and `cargo fmt --all --check` is clean. The port currently implements
-FaceDivide's unchanged-face path and default context initialization; actual surface and
-boundary subdivision remains unported, so the FaceDivide API and TKShHealing toolkit
-are still partial. The toolkit source inventory is now 107/143 mapped. Remaining
+also pass 3/3, and `cargo fmt --all --check` is clean. At this historical checkpoint the port implemented only the unchanged-face path
+and context initialization. Surface and boundary orchestration was subsequently
+ported; see the face subdivision update below. Complete API parity remains unproven. The toolkit source inventory is now 107/143 mapped. Remaining
 unmapped suites are FaceConnect (16), Face (4), Shape (7), and UnifySameDomain (9).
 
 ### FaceConnect selected sewing suite
@@ -1054,3 +1053,18 @@ counts and six shared recording sequences. Sixteen native rows and six Rust test
 cover topology placement, the strict spline-pole threshold, geometry kinds and copy
 sharing. Native counters are uninitialized before Clear/Perform; Rust initializes
 that undefined domain to zero, documented separately from parity evidence.
+
+
+### Face subdivision orchestration update
+
+`ShapeUpgradeFaceDivide` now dispatches configured surface and wire policies,
+constructs patch faces through `ShapeFixComposeShell`, records protective vertex
+copies when the surface reports DONE3, and preserves native intermediate statuses.
+`FaceDivider` provides the native virtual extension points and `FaceDivideData`
+exposes protected state. The existing two legacy safety tests remain green.
+Nine additional native oracle cases compare results, flags, context creation and
+vertex-copy records, including an angular cylinder split and a removed face.
+See `tools/oracle/tkshhealing_face_divide.md` for reproduction and scope.
+These are additional oracle cases; legacy mapping totals do not increase.
+The advanced API mappings remain partial while inherited composition/policy
+limitations remain; no whole-class or toolkit completeness claim is made.

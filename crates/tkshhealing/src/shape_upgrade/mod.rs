@@ -55,7 +55,7 @@ mod wire_divide;
 pub use wire_divide::{ShapeUpgradeWireDivide, WireDivideData, WireDivideFields, WireDivider};
 
 mod face_divide;
-pub use face_divide::ShapeUpgradeFaceDivide;
+pub use face_divide::{FaceDivideData, FaceDivideFields, FaceDivider, ShapeUpgradeFaceDivide};
 
 mod split_curve3d_continuity;
 pub use split_curve3d_continuity::ShapeUpgradeSplitCurve3dContinuity;
