@@ -75156,12 +75156,12 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Forwards to FromUnicode with no length limit, as from_unicode(source, -1); wchar_t is WideChar."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator+=(const NCollection_UtfString&)",
+      "upstream_id": "NCollection_UtfString::operator+=(const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::UtfString as AddAssign<&UtfString>>::add_assign",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::ops::arith::AddAssign>::add_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Quirk preserved: an empty right side is skipped, so its cached length is not added."
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. The Rust AddAssign<&UtfString<T>> trait implementation is the unique normalized public rustdoc item. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Quirk preserved: an empty right side is skipped, so its cached length is not added."
     },
     {
       "upstream_id": "NCollection_UtfString::operator+(const NCollection_UtfString&,const NCollection_UtfString&)",
@@ -75172,12 +75172,20 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The hidden friend always sums both cached lengths."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator==(const NCollection_UtfString&) const",
+      "upstream_id": "NCollection_UtfString::operator==(const NCollection_UtfString<Type>&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::UtfString as PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. The Rust PartialEq implementation is the unique normalized public rustdoc item. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_String",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_String.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::String8",
+      "status": "implemented",
+      "notes": "The native NCollection_String typedef is NCollection_UtfString<char>; Rust exposes the same byte-string specialization as the public String8 alias to UtfString<u8>. The TKernel unit and conversion tests cover this specialization."
     },
     {
       "upstream_id": "NCollection_UtfString::operator!=(const NCollection_UtfString&) const",
@@ -81636,6 +81644,22 @@
       "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template is enabled only for std::time_t, which is the signed 64-bit TimeT alias on the supported profiles."
     },
     {
+      "upstream_id": "Standard_Time",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "rust_item": "rustycad_tkernel::standard::time::TimeT",
+      "status": "implemented",
+      "notes": "OCCT typedefs Standard_Time to std::time_t. Rust exposes TimeT as i64, matching the signed 64-bit time_t used by the supported OCCT profiles; other ABI profiles require their own inventory and conformance evidence."
+    },
+    {
+      "upstream_id": "Standard_WideChar",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::WideChar",
+      "status": "implemented",
+      "notes": "OCCT typedefs Standard_WideChar to wchar_t. Rust WideChar is cfg-selected as u32 on Unix and u16 on Windows, following the native wchar_t width on those supported profiles."
+    },
+    {
       "upstream_id": "Standard_Atomic::Standard_Atomic_Increment(volatile int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
@@ -82484,6 +82508,14 @@
       "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
+      "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::domain_error",
+      "status": "partial",
+      "notes": "Rust domain_error(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
+    },
+    {
       "upstream_id": "Standard_ImmutableObject",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ImmutableObject.hxx",
@@ -82548,6 +82580,14 @@
       "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
+      "upstream_id": "Standard_NotImplemented::Standard_NotImplemented(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NotImplemented.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::not_implemented",
+      "status": "partial",
+      "notes": "Rust not_implemented(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
+    },
+    {
       "upstream_id": "Standard_NullObject",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_NullObject.hxx",
@@ -82602,6 +82642,14 @@
       "rust_item": "rustycad_tkernel::standard::exceptions::range_error",
       "status": "implemented",
       "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+    },
+    {
+      "upstream_id": "Standard_RangeError::Standard_RangeError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_RangeError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::range_error",
+      "status": "partial",
+      "notes": "Rust range_error(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
     },
     {
       "upstream_id": "Standard_TypeMismatch",
