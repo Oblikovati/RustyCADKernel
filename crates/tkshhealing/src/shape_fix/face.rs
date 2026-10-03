@@ -13,6 +13,7 @@ mod orientation;
 mod periodic_cone;
 mod periodic_degenerated;
 mod small_area;
+mod split_face;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::ShapeAnalysisSurface;
