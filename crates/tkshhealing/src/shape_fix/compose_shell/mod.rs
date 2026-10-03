@@ -1,4 +1,5 @@
 //! Shell composition state and public operations from `ShapeFix_ComposeShell`.
+mod break_wires;
 mod compute_code;
 mod geometry;
 mod grid;
@@ -136,6 +137,17 @@ impl ShapeFixComposeShell {
     /// Returns the current transfer strategy; `let tool = composer.transfer_parameter_tool()`.
     pub fn get_transfer_param_tool(&self) -> Handle<dyn TransferParameters> {
         self.fields.read().transfer_tool.clone()
+    }
+
+    /// Splits loaded wire segments at external joint-line vertices.
+    /// `composer.break_wires(&mut segments)?`.
+    pub fn break_wires(
+        &self,
+        segments: &mut rustycad_tkernel::ncollection::Sequence<
+            crate::shape_fix::ShapeFixWireSegment,
+        >,
+    ) -> Result<(), Failure> {
+        break_wires::break_wires(self, segments)
     }
 
     pub(super) fn load_wires(
