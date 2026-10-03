@@ -221599,6 +221599,102 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::bspline_mode",
       "status": "implemented",
       "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::ShapeUpgrade_RemoveInternalWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::new",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::ShapeUpgrade_RemoveInternalWires(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::with_shape",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::Init(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::init",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::perform",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::Perform(const NCollection_Sequence<TopoDS_Shape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::perform_on",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::GetResult() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::get_result",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::MinArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::min_area",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::RemoveFaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::remove_face_mode",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::RemovedFaces() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::removed_faces",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::RemovedWires() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::removed_wires",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::Status(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::status",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveInternalWires::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveInternalWires.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveInternalWires::clear",
+      "status": "implemented",
+      "notes": "Pinned native removal/adjacency/threshold/context fixtures and Rust shared-state, protected-clear and reentrant geometry regressions. Native traversal cursor advances even after a match. Mutable scalar references use getter/setter pairs; removed sequences preserve shared identity. Protected myStatus field access remains unclaimed; exhaustive parity pending."
     }
   ],
   "tests": [

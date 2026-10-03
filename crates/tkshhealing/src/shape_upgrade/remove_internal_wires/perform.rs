@@ -8,52 +8,56 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::ncollection::Sequence;
 
 impl ShapeUpgradeRemoveInternalWires {
+    /// Expose the native protected reset without changing the input, result, or settings.
+    /// Example: `remover.clear();`.
+    pub fn clear(&self) {
+        clear(&self.fields);
+    }
+
     /// Removes every eligible internal wire in the initialized shape; `remover.perform()?`.
     pub fn perform(&self) -> Result<bool, Failure> {
-        let mut fields = self.fields.write();
-        clear(&mut fields);
-        if fields.shape.is_null() {
-            return fail_initial_shape(&mut fields);
+        let fields = &self.fields;
+        clear(fields);
+        if fields.read().shape.is_null() {
+            return fail_initial_shape(fields);
         }
-        let context_handle = self.context();
-        let context = context_handle.get().ok_or_else(null_context)?;
-        let input = fields.shape.clone();
-        scan_all_faces(&mut fields, context, &input)?;
-        finish_perform(&mut fields, context, &input)
+        let context = self;
+        let input = fields.read().shape.clone();
+        scan_all_faces(fields, context, &input)?;
+        finish_perform(fields, context, &input)
     }
 
     /// Processes only listed faces and wires; `sequence.append(face); remover.perform_on(&sequence)?`.
     pub fn perform_on(&self, shapes: &Sequence<Shape>) -> Result<bool, Failure> {
-        let mut fields = self.fields.write();
-        if fields.shape.is_null() {
-            return fail_initial_shape(&mut fields);
+        let fields = &self.fields;
+        if fields.read().shape.is_null() {
+            return fail_initial_shape(fields);
         }
-        clear(&mut fields);
-        let context_handle = self.context();
-        let context = context_handle.get().ok_or_else(null_context)?;
-        let input = fields.shape.clone();
-        scan_selected_shapes(&mut fields, context, &input, shapes)?;
-        finish_perform(&mut fields, context, &input)
+        clear(fields);
+        let context = self;
+        let input = fields.read().shape.clone();
+        scan_selected_shapes(fields, context, &input, shapes)?;
+        finish_perform(fields, context, &input)
     }
 }
 
 fn scan_all_faces(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     input: &Shape,
 ) -> Result<(), Failure> {
     for face in Explorer::new(input, ShapeEnum::Face, ShapeEnum::Shape)? {
         remove_small_wire(fields, context, &face, None)?;
     }
-    if fields.remove_face_mode {
+    if fields.read().remove_face_mode {
         remove_small_faces(fields, context)?;
     }
     Ok(())
 }
 
 fn scan_selected_shapes(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     input: &Shape,
     shapes: &Sequence<Shape>,
 ) -> Result<(), Failure> {
@@ -61,27 +65,32 @@ fn scan_selected_shapes(
     for shape in shapes.iter() {
         process_selected_shape(fields, context, input, shape, &mut wire_faces)?;
     }
-    if fields.remove_face_mode {
+    if fields.read().remove_face_mode {
         remove_small_faces(fields, context)?;
     }
     Ok(())
 }
 
 fn finish_perform(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     input: &Shape,
 ) -> Result<bool, Failure> {
-    fields.result = context.apply(input, ShapeEnum::Shape)?;
+    let result = context
+        .context()
+        .get()
+        .ok_or_else(null_context)?
+        .apply(input, ShapeEnum::Shape)?;
+    fields.write().result = result;
     Ok(ShapeExtend::decode_status(
-        fields.status,
+        fields.read().status,
         ShapeExtendStatus::Done,
     ))
 }
 
 fn process_selected_shape(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     input: &Shape,
     shape: &Shape,
     wire_faces: &mut Option<IndexedDataMapOfShapeListOfShape>,
@@ -94,8 +103,8 @@ fn process_selected_shape(
 }
 
 fn process_selected_wire(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     input: &Shape,
     wire: &Shape,
     wire_faces: &mut Option<IndexedDataMapOfShapeListOfShape>,
@@ -127,21 +136,22 @@ fn initialize_wire_faces(
     Ok(())
 }
 
-fn clear(fields: &mut RemoveInternalWiresFields) {
+fn clear(fields: &SharedState<RemoveInternalWiresFields>) {
+    let mut fields = fields.write();
     fields.remove_edges.clear(true);
-    fields.removed_faces.clear();
-    fields.removed_wires.clear();
+    fields.removed_faces.change_sequence(|seq| seq.clear(None));
+    fields.removed_wires.change_sequence(|seq| seq.clear(None));
     fields.status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
 }
 
-fn fail_initial_shape(fields: &mut RemoveInternalWiresFields) -> Result<bool, Failure> {
-    fields.status |= ShapeExtend::encode_status(ShapeExtendStatus::Fail1);
+fn fail_initial_shape(fields: &SharedState<RemoveInternalWiresFields>) -> Result<bool, Failure> {
+    fields.write().status |= ShapeExtend::encode_status(ShapeExtendStatus::Fail1);
     Ok(false)
 }
 
 fn remove_small_wire(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     selected_wire: Option<&Shape>,
 ) -> Result<(), Failure> {
@@ -160,39 +170,55 @@ fn remove_small_wire(
 }
 
 fn remove_wire_if_small(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &rustycad_tkbrep::topods::Face,
     wire: &Shape,
 ) -> Result<(), Failure> {
     if !wire_is_small(fields, wire)? {
         return Ok(());
     }
-    context.remove(wire)?;
-    fields.removed_wires.push(wire.clone());
-    fields.status |= ShapeExtend::encode_status(ShapeExtendStatus::Done1);
-    if !fields.remove_face_mode {
+    context
+        .context()
+        .get()
+        .ok_or_else(null_context)?
+        .remove(wire)?;
+    context.removed_wires().append(wire.clone());
+    fields.write().status |= ShapeExtend::encode_status(ShapeExtendStatus::Done1);
+    if !fields.read().remove_face_mode {
         return Ok(());
     }
     record_removed_edges(fields, wire, &face.clone().into_shape());
     Ok(())
 }
 
-fn wire_is_small(fields: &RemoveInternalWiresFields, wire: &Shape) -> Result<bool, Failure> {
+fn wire_is_small(
+    fields: &SharedState<RemoveInternalWiresFields>,
+    wire: &Shape,
+) -> Result<bool, Failure> {
     let area = ShapeAnalysis::contour_area(&topods::wire(wire)?)?;
-    let threshold = fields.min_area - rustycad_tkernel::precision::confusion();
+    let threshold = fields.read().min_area - rustycad_tkernel::precision::confusion();
     Ok(area
         .partial_cmp(&threshold)
         .is_some_and(|order| order.is_lt()))
 }
 
-fn record_removed_edges(fields: &mut RemoveInternalWiresFields, wire: &Shape, face: &Shape) {
+fn record_removed_edges(
+    fields: &SharedState<RemoveInternalWiresFields>,
+    wire: &Shape,
+    face: &Shape,
+) {
     for edge in ShapeIterator::new(wire, false, true) {
         append_removed_edge_face(fields, &edge, face);
     }
 }
 
-fn append_removed_edge_face(fields: &mut RemoveInternalWiresFields, edge: &Shape, face: &Shape) {
+fn append_removed_edge_face(
+    fields: &SharedState<RemoveInternalWiresFields>,
+    edge: &Shape,
+    face: &Shape,
+) {
+    let mut fields = fields.write();
     if let Some(faces) = fields.remove_edges.change_seek(edge) {
         faces.append(face.clone());
         return;
@@ -203,23 +229,26 @@ fn append_removed_edge_face(fields: &mut RemoveInternalWiresFields, edge: &Shape
 }
 
 fn remove_small_faces(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
 ) -> Result<(), Failure> {
-    for wire in fields.removed_wires.clone() {
+    let wires: Vec<Shape> = context
+        .removed_wires()
+        .sequence(|seq| seq.iter().cloned().collect());
+    for wire in wires {
         let mut candidates = Vec::new();
         gather_face_candidates(fields, context, &wire, &mut candidates)?;
         remove_empty_candidates(fields, context, &candidates)?;
     }
-    if !fields.removed_faces.is_empty() {
-        fields.status |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
+    if !context.removed_faces().sequence(|seq| seq.is_empty()) {
+        fields.write().status |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
     }
     Ok(())
 }
 
 fn gather_face_candidates(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     wire: &Shape,
     candidates: &mut Vec<Shape>,
 ) -> Result<(), Failure> {
@@ -230,25 +259,28 @@ fn gather_face_candidates(
 }
 
 fn collect_edge_candidates(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     edge: &Shape,
     candidates: &mut Vec<Shape>,
 ) -> Result<(), Failure> {
-    let Some(faces) = fields.edge_faces.seek(edge) else {
-        fields.status |= ShapeExtend::encode_status(ShapeExtendStatus::Fail2);
+    let faces = fields.read().edge_faces.seek(edge).cloned();
+    let Some(faces) = faces else {
+        fields.write().status |= ShapeExtend::encode_status(ShapeExtendStatus::Fail2);
         return Ok(());
     };
     let removed = fields
+        .read()
         .remove_edges
         .seek(edge)
+        .cloned()
         .ok_or_else(|| missing_edge_faces(edge))?;
     let mut removed_cursor = 0;
     for face in faces.iter() {
         collect_candidate(
             context,
             face,
-            removed,
+            &removed,
             &mut removed_cursor,
             edge,
             candidates,
@@ -258,14 +290,18 @@ fn collect_edge_candidates(
 }
 
 fn collect_candidate(
-    context: &ShapeBuildReShape,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     removed: &List<Shape>,
     removed_cursor: &mut usize,
     edge: &Shape,
     candidates: &mut Vec<Shape>,
 ) -> Result<(), Failure> {
-    let applied = context.apply(face, ShapeEnum::Shape)?;
+    let applied = context
+        .context()
+        .get()
+        .ok_or_else(null_context)?
+        .apply(face, ShapeEnum::Shape)?;
     if applied.is_null() || matches_removed_face(context, &applied, removed, removed_cursor)? {
         return Ok(());
     }
@@ -277,15 +313,19 @@ fn collect_candidate(
 }
 
 fn matches_removed_face(
-    context: &ShapeBuildReShape,
+    context: &ShapeUpgradeRemoveInternalWires,
     candidate: &Shape,
     removed: &List<Shape>,
     cursor: &mut usize,
 ) -> Result<bool, Failure> {
     for (index, old) in removed.iter().enumerate().skip(*cursor) {
-        let applied = context.apply(old, ShapeEnum::Shape)?;
+        let applied = context
+            .context()
+            .get()
+            .ok_or_else(null_context)?
+            .apply(old, ShapeEnum::Shape)?;
         if candidate.is_same(&applied) {
-            *cursor = index;
+            *cursor = index + 1;
             return Ok(true);
         }
         *cursor = index + 1;
@@ -301,23 +341,27 @@ fn outer_contains_edge(face: &Shape, edge: &Shape) -> Result<bool, Failure> {
 }
 
 fn remove_empty_candidates(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     candidates: &[Shape],
 ) -> Result<(), Failure> {
     for face in candidates {
         if has_nonremoved_neighbor(fields, context, face, candidates)? {
             continue;
         }
-        context.remove(face)?;
-        fields.removed_faces.push(face.clone());
+        context
+            .context()
+            .get()
+            .ok_or_else(null_context)?
+            .remove(face)?;
+        context.removed_faces().append(face.clone());
     }
     Ok(())
 }
 
 fn has_nonremoved_neighbor(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     candidates: &[Shape],
 ) -> Result<bool, Failure> {
@@ -334,8 +378,8 @@ fn has_nonremoved_neighbor(
 }
 
 fn edge_neighbor_count(
-    fields: &mut RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     candidates: &[Shape],
     wire_data: &crate::shape_extend::ShapeExtendWireData,
@@ -345,21 +389,22 @@ fn edge_neighbor_count(
         return Ok(0);
     }
     let edge = wire_data.edge(index)?.into_shape();
-    if fields.remove_edges.contains(&edge) {
+    if fields.read().remove_edges.contains(&edge) {
         return Ok(0);
     }
     count_external_adjacent_faces(fields, context, face, candidates, &edge)
 }
 
 fn count_external_adjacent_faces(
-    fields: &RemoveInternalWiresFields,
-    context: &ShapeBuildReShape,
+    fields: &SharedState<RemoveInternalWiresFields>,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     candidates: &[Shape],
     edge: &Shape,
 ) -> Result<usize, Failure> {
     let mut count = 0;
-    for adjacent in fields.edge_faces.find_from_key(edge)?.iter() {
+    let adjacent_faces = fields.read().edge_faces.find_from_key(edge)?.clone();
+    for adjacent in adjacent_faces.iter() {
         if face_is_external(context, face, adjacent, candidates)? {
             count += 1;
         }
@@ -368,12 +413,16 @@ fn count_external_adjacent_faces(
 }
 
 fn face_is_external(
-    context: &ShapeBuildReShape,
+    context: &ShapeUpgradeRemoveInternalWires,
     face: &Shape,
     adjacent: &Shape,
     candidates: &[Shape],
 ) -> Result<bool, Failure> {
-    let applied = context.apply(adjacent, ShapeEnum::Shape)?;
+    let applied = context
+        .context()
+        .get()
+        .ok_or_else(null_context)?
+        .apply(adjacent, ShapeEnum::Shape)?;
     Ok(!applied.is_null()
         && !face.is_same(&applied)
         && !candidates
@@ -390,3 +439,7 @@ fn missing_edge_faces(edge: &Shape) -> Failure {
         ),
     )
 }
+
+#[cfg(test)]
+#[path = "cursor_tests.rs"]
+mod cursor_tests;

@@ -8,7 +8,7 @@ use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::{IndexedDataMapOfShapeListOfShape, ShapeMapHasher};
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::ncollection::{IndexedDataMap, List};
+use rustycad_tkernel::ncollection::{HSequence, IndexedDataMap, List};
 use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
@@ -22,8 +22,8 @@ struct RemoveInternalWiresFields {
     status: i32,
     edge_faces: IndexedDataMapOfShapeListOfShape,
     remove_edges: RemovedEdgeFaces,
-    removed_faces: Vec<Shape>,
-    removed_wires: Vec<Shape>,
+    removed_faces: Handle<HSequence<Shape>>,
+    removed_wires: Handle<HSequence<Shape>>,
 }
 
 impl Default for RemoveInternalWiresFields {
@@ -36,8 +36,8 @@ impl Default for RemoveInternalWiresFields {
             status: ShapeExtend::encode_status(ShapeExtendStatus::Ok),
             edge_faces: IndexedDataMapOfShapeListOfShape::default(),
             remove_edges: RemovedEdgeFaces::default(),
-            removed_faces: Vec::new(),
-            removed_wires: Vec::new(),
+            removed_faces: Handle::new(HSequence::default()),
+            removed_wires: Handle::new(HSequence::default()),
         }
     }
 }
@@ -88,13 +88,13 @@ impl ShapeUpgradeRemoveInternalWires {
 
     /// Initializes input topology, preserving the native reshape context; `remover.init(&shape)?`.
     pub fn init(&self, shape: &Shape) -> Result<(), Failure> {
-        let mut fields = self.fields.write();
-        fields.shape = shape.clone();
+        self.fields.write().shape = shape.clone();
         let context_handle = self.parent.context();
         context_handle
             .get()
             .ok_or_else(null_context)?
             .apply(shape, ShapeEnum::Shape)?;
+        let mut fields = self.fields.write();
         rustycad_tkbrep::topexp::map_shapes_and_ancestors(
             shape,
             ShapeEnum::Edge,
@@ -128,12 +128,12 @@ impl ShapeUpgradeRemoveInternalWires {
     pub fn get_result(&self) -> Shape {
         self.fields.read().result.clone()
     }
-    /// Returns the removed faces in native discovery order; `remover.removed_faces()`.
-    pub fn removed_faces(&self) -> Vec<Shape> {
+    /// Returns the shared sequence of removed faces in native discovery order; `remover.removed_faces()`.
+    pub fn removed_faces(&self) -> Handle<HSequence<Shape>> {
         self.fields.read().removed_faces.clone()
     }
-    /// Returns the removed wires in native discovery order; `remover.removed_wires()`.
-    pub fn removed_wires(&self) -> Vec<Shape> {
+    /// Returns the shared sequence of removed wires in native discovery order; `remover.removed_wires()`.
+    pub fn removed_wires(&self) -> Handle<HSequence<Shape>> {
         self.fields.read().removed_wires.clone()
     }
     /// Decodes the last operation's ShapeExtend status; `remover.status(ShapeExtendStatus::Done1)`.

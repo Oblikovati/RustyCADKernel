@@ -18,3 +18,11 @@ g++ -std=c++17 -I"$build/include/opencascade" \
 /tmp/tkshhealing_remove_internal_wires
 cargo test -p rustycad-tkshhealing --test shape_upgrade_remove_internal_wires
 ```
+
+Additional Rust regressions cover getter reentry from a named curve observer while a
+second hole is sampled, incremental visibility of the first removed wire, retained
+sequence identity across the protected `Clear`, and the native removed-face iterator's
+advance after a successful match. Geometry/context calls execute outside the remover's
+state lock; each context operation fetches the current context. These supplementary
+checks are not additional mapped legacy declarations. Native protected `myStatus` remains
+an explicit field-access obligation; the public/protected methods are mapped separately.

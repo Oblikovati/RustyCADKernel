@@ -74,7 +74,7 @@ fn empty_input_reports_initial_shape_failure() {
 
     assert!(!remover.perform().unwrap());
     assert!(remover.status(ShapeExtendStatus::Fail1));
-    assert!(remover.removed_wires().is_empty());
+    assert!(remover.removed_wires().sequence(|seq| seq.is_empty()));
 }
 
 #[test]
@@ -135,8 +135,14 @@ fn assert_statuses(name: &str, remover: &ShapeUpgradeRemoveInternalWires, values
 }
 
 fn assert_result_counts(remover: &ShapeUpgradeRemoveInternalWires, values: &[String]) {
-    assert_eq!(remover.removed_wires().len(), values[6].parse().unwrap());
-    assert_eq!(remover.removed_faces().len(), values[7].parse().unwrap());
+    assert_eq!(
+        remover.removed_wires().sequence(|seq| seq.len()),
+        values[6].parse().unwrap()
+    );
+    assert_eq!(
+        remover.removed_faces().sequence(|seq| seq.len()),
+        values[7].parse().unwrap()
+    );
     assert_eq!(
         count(&remover.get_result(), ShapeEnum::Face),
         values[8].parse().unwrap()
@@ -223,4 +229,84 @@ fn expected_row(name: &str) -> Vec<String> {
         .split_whitespace()
         .map(str::to_owned)
         .collect()
+}
+
+#[path = "support/remove_internal_wires/observed_curve.rs"]
+mod observed_curve;
+
+#[test]
+fn geometry_callback_reads_incremental_removal_state_without_deadlock() {
+    let (sender, receiver) = std::sync::mpsc::channel();
+    let worker = std::thread::spawn(move || sender.send(observe_second_hole()).unwrap());
+    assert_eq!(
+        receiver
+            .recv_timeout(std::time::Duration::from_secs(10))
+            .unwrap(),
+        2
+    );
+    worker.join().unwrap();
+}
+
+fn observe_second_hole() -> usize {
+    use std::sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    };
+    let (mut shape, _) = fixture();
+    let mut second = rectangle(4., 5.);
+    second.set_orientation(Orientation::Internal);
+    BRepBuilder::default()
+        .add(&mut shape, &second.clone().into_shape())
+        .unwrap();
+    let remover = Arc::new(ShapeUpgradeRemoveInternalWires::with_shape(&shape).unwrap());
+    remover.set_min_area(2.0);
+    remover.set_remove_face_mode(false);
+    let observed = Arc::new(AtomicUsize::new(0));
+    observe_wire_geometry(&second, &remover, &observed);
+    assert!(remover.perform().unwrap());
+    assert_eq!(remover.removed_wires().sequence(|seq| seq.len()), 2);
+    observed.load(Ordering::SeqCst)
+}
+
+fn observe_wire_geometry(
+    wire: &Wire,
+    remover: &std::sync::Arc<ShapeUpgradeRemoveInternalWires>,
+    observed: &std::sync::Arc<std::sync::atomic::AtomicUsize>,
+) {
+    use rustycad_tkbrep::{brep::BRepTool, topods};
+    use rustycad_tkernel::standard::Handle;
+    for child in ShapeIterator::new(wire, false, true) {
+        let edge = topods::edge(&child).unwrap();
+        let (basis, _, _) = BRepTool::curve(&edge).unwrap();
+        let observer = Handle::new(observed_curve::RemovalObservingCurve::new(
+            basis, remover, observed,
+        ));
+        BRepBuilder::default()
+            .update_edge_curve(
+                &edge,
+                &observer.cast(),
+                BRepTool::edge_tolerance(&edge).unwrap(),
+            )
+            .unwrap();
+    }
+}
+
+#[test]
+fn protected_clear_keeps_result_context_and_configuration() {
+    let remover = configure(2.0, false);
+    assert!(remover.perform().unwrap());
+    let result = remover.get_result();
+    let removed = remover.removed_wires();
+    assert_eq!(removed.sequence(|seq| seq.len()), 1);
+    let context = remover.context();
+    remover.clear();
+    assert!(remover.removed_wires().sequence(|seq| seq.is_empty()));
+    assert!(remover.removed_faces().sequence(|seq| seq.is_empty()));
+    assert!(remover.status(ShapeExtendStatus::Ok));
+    assert_eq!(remover.min_area(), 2.0);
+    assert!(!remover.remove_face_mode());
+    assert!(result.is_same(&remover.get_result()));
+    assert!(context == remover.context());
+    assert!(removed == remover.removed_wires());
+    assert!(removed.sequence(|seq| seq.is_empty()));
 }
