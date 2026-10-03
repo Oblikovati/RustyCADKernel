@@ -267,6 +267,39 @@ fn split_by_line_rectangular_loop_matches_native_intersections_and_codes() {
 }
 
 #[test]
+fn split_by_line_closed_mode_on_nonperiodic_face_matches_native() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let composer = initialized_composer(&face_fixture(), &Handle::new(ShapeBuildReShape::new()));
+    composer.set_closed_mode(true);
+    let segments = composer.load_wires().unwrap();
+    let mut wire = segments.value(1).unwrap().clone();
+    let mut parameters = Sequence::default();
+    let mut codes = Sequence::default();
+    let mut vertices = Sequence::default();
+    let line = Line2::new(Point2::new(1.0, 0.0), Direction2::new(0.0, 1.0).unwrap());
+    let done = composer
+        .split_by_line(
+            &mut wire,
+            line,
+            true,
+            1,
+            &mut parameters,
+            &mut codes,
+            &mut vertices,
+        )
+        .unwrap();
+    assert!(done);
+    assert_eq!(
+        split_by_line_summary(&wire, &parameters, &codes, &vertices),
+        native_row(expected, "split_by_line_closed ").replacen(
+            "split_by_line_closed",
+            "split_by_line",
+            1
+        )
+    );
+}
+
+#[test]
 fn split_by_line_vertex_segment_matches_native_projection_and_replacement() {
     let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
     assert_eq!(

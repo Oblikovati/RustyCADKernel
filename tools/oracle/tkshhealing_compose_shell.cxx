@@ -292,7 +292,7 @@ static void runSplitWire()
   std::cout << '\n';
 }
 
-static void runSplitByLine()
+static void runSplitByLine(bool closedMode = false)
 {
   BRepBuilderAPI_MakeWire wire;
   gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
@@ -304,6 +304,7 @@ static void runSplitByLine()
   patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
   Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
   ComposeProbe tool;
+  tool.ClosedMode() = closedMode;
   tool.SetContext(new ShapeBuild_ReShape);
   tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
   NCollection_Sequence<ShapeFix_WireSegment> segments;
@@ -314,7 +315,8 @@ static void runSplitByLine()
   NCollection_Sequence<int> codes;
   NCollection_Sequence<TopoDS_Shape> vertices;
   bool done = tool.SplitByLine(segment, line, true, 1, parameters, codes, vertices);
-  std::cout << "split_by_line " << done << ' ' << segment.NbEdges() << ' '
+  std::cout << (closedMode ? "split_by_line_closed " : "split_by_line ")
+            << done << ' ' << segment.NbEdges() << ' '
             << parameters.Length() << ' ' << codes.Length() << ' ' << vertices.Length();
   for (int i = 1; i <= parameters.Length(); ++i)
   {
@@ -416,6 +418,7 @@ int main()
   runSplitWire();
   runSplitWireInternalVertex();
   runSplitByLine();
+  runSplitByLine(true);
   runSplitByLineLooseVertex();
   runBreakWires();
   runInternalExternalBreakWires();
