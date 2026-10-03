@@ -111,16 +111,12 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json 
   --occt-source /path/to/OCCT --output target/api-proof/tkernel-joined-runtime.json
 ```
 
-The published API crosswalk at Rust revision `19a5789c` resolves
-20,379 implemented declaration claims out of 110,134 observed candidates;
-6,902 ledger rows remain unresolved and 86,095 candidates have no claim.
-These are declaration accounting counts, not behavioral coverage percentages or a
-validated complete API denominator. This refresh adds wire state, precision and closure mappings, face subdivision,
-small-area removal, and shell composition mappings. Partial orchestration remains
-explicitly partial. The default face-divider constructor now resolves to an inherent Rust
-constructor. Area-based face subdivision retains partial Perform and overflow-domain
-claims, with eight native cases including twenty recursive spherical patches. Earlier TKernel `noexcept`
-selector corrections remain audited in
+The published API crosswalk records its exact Rust revision and accounting counts
+in [`completeness.json`](completeness.json). These are declaration accounting counts,
+not behavioral coverage percentages or a validated complete API denominator.
+Partial orchestration and failure-domain differences remain explicitly partial.
+Additional native differential fixtures do not increase mapped legacy declaration
+counts. Earlier TKernel `noexcept` selector corrections remain audited in
 [`tkernel-noexcept-selector-audit.json`](../tkernel-noexcept-selector-audit.json).
 
 ### TKMath paired run
