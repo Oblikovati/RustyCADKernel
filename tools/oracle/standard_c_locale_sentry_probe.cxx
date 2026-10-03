@@ -14,17 +14,21 @@ int main() {
   const bool before = isLatin1();
   bool nested = false;
   bool restored = false;
+  bool sharedHandle = false;
   {
     Standard_CLocaleSentry outer;
     const bool outerC = isC();
+    const bool outerHandle = uselocale(nullptr) == Standard_CLocaleSentry::GetCLocale();
     {
       Standard_CLocaleSentry inner;
-      nested = outerC && isC();
+      const bool innerHandle = uselocale(nullptr) == Standard_CLocaleSentry::GetCLocale();
+      nested = outerC && isC() && outerHandle && innerHandle;
     }
     restored = nested && isC();
+    sharedHandle = uselocale(nullptr) == Standard_CLocaleSentry::GetCLocale();
   }
   const bool after = isLatin1();
-  const bool checks[] = {before, nested, restored, after};
+  const bool checks[] = {before, nested, restored, sharedHandle, after};
   for (bool check : checks) {
     std::printf("%d\n", check ? 1 : 0);
     if (!check) return 1;
