@@ -2,6 +2,8 @@
 mod conversion;
 mod locale;
 mod operators;
+#[cfg(not(target_os = "android"))]
+pub use locale::UtfStringTool;
 
 use super::{UtfIterator, UtfUnit, WideChar};
 
