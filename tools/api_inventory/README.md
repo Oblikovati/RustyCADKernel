@@ -1,0 +1,91 @@
+# OCCT API extractor (experimental)
+
+`occt-api-extract` parses one configured OCCT header as a synthetic C++
+translation unit and writes JSON Lines to stdout. It uses Clang LibTooling and
+USR generation, rather than the hand-maintained API ledger. This is an
+inventory input; it does not establish that the full OCCT API has been
+extracted or ported.
+
+## Build
+
+The prototype is built against LLVM and Clang 23.1.2:
+
+```sh
+cmake -S tools/api_inventory -B target/api_inventory \
+  -DLLVM_DIR=/path/to/llvm-23.1.2/lib/cmake/llvm \
+  -DClang_DIR=/path/to/llvm-23.1.2/lib/cmake/clang \
+  -DCMAKE_PREFIX_PATH=/path/to/llvm-23.1.2
+cmake --build target/api_inventory -j4
+ctest --test-dir target/api_inventory --output-on-failure
+```
+
+## Invocation
+
+```sh
+target/api_inventory/occt-api-extract \
+  --source-root /path/to/OCCT/src \
+  --main-header /path/to/OCCT/src/Standard/Standard.hxx \
+  --emit-header /path/to/generated/header.hxx \
+  -- -std=c++17 -I/path/to/OCCT/include -I/path/to/build/include
+```
+
+Compiler flags follow `--`. The wrapper should remove compiler executable,
+source-file, output-file, and compile-only arguments from captured build flags.
+The tool adds syntax-only mode and its Clang resource directory. A generated
+main header is emitted even when it is outside `source-root`. Included source
+files are emitted when they are the main header, explicitly named with
+`--emit-header`, or `.lxx`, `.pxx`, or `.gxx` fragments under `source-root`.
+All encountered include files are reported by `header_seen`.
+
+## Event policy
+
+Each output line is a JSON object with an `event` discriminator and the
+`main_header` that caused it:
+
+* `declaration`: Clang declaration kind, USR, qualified name, canonical
+  signature/type, canonical and written parameter types, direct and ancestor
+  access, parent USR, implicit/macro status, spelling/expansion locations,
+  visibility disposition, and source path. Public and protected declarations
+  are candidates. Private declarations and declarations nested under a private
+  type are retained with an explicit exclusion reason. Parameters, compiler
+  generated declarations, template-owned record/function patterns, access
+  markers, static assertions, and other non-API AST nodes are also reported as
+  exclusions. Namespace/file variables and static data members are candidates.
+* `macro`: definition, replacement tokens, parameters, and location. Include
+  guards are separate rows marked `macro_category=include_guard` and excluded
+  from API candidates. Other source macros remain candidates for a later
+  mapping decision.
+* `header_seen`: canonical included path plus whether declarations from that
+  path were emitted for this run.
+* `skipped_range`: an inactive preprocessor range with start/end locations.
+  Declarations inside it are not in the AST output; this event makes that
+  omission visible.
+* `diagnostic`: Clang severity, message, source location when available, and
+  main-header context.
+* `summary`: counts by encountered declaration kind and disposition. Any
+  encountered declaration kind without an explicit candidate or exclusion
+  policy is `unhandled_decl_kind`, listed in `unhandled_decl_kinds`, and makes
+  the process exit with status 3. Parse errors fail with a nonzero status.
+
+Declarations are source occurrences. A header declaration and its `.lxx`
+definition can therefore share a USR while carrying distinct locations. A
+consumer should group symbol identity by USR and preserve all source
+occurrences. Template wrappers are candidates; the associated pattern record
+or function node is retained as `template_owned_declaration` to avoid claiming
+it as a second API symbol.
+
+## Completeness limits
+
+This prototype is intentionally not an API-completeness proof. Extraction
+depends on the exact compile flags, generated headers, platform configuration,
+and selected main-header set. Each configuration sees only declarations active
+in that preprocessor run; `skipped_range` records inactive regions but does not
+enumerate declarations hidden inside them. A cross-platform/configuration
+matrix is needed to cover those APIs. External/system headers are excluded
+from declaration emission, though their paths appear as `header_seen`.
+Unsupported declaration kinds stop a run, but passing the gate only means all
+kinds encountered in that one AST have an explicit policy. Macro candidate
+rows are not expanded into C++ declarations or Rust coverage claims. Rust item
+matching, source/header reachability validation, C-binding dependency
+exclusions, and global inventory reconciliation belong to the orchestration
+and proof pipeline.
