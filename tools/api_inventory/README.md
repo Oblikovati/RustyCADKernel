@@ -166,6 +166,10 @@ python3 tools/retry_occt_header_context.py \
   --output target/api-proof/occt-context-retries
 ```
 
+Retry artifacts are recorded relative to the retry manifest directory. The
+merger also accepts prior working-directory-relative artifact paths and
+absolute artifact paths.
+
 The checked-in
 `porting/api-inventory/occt-transitive-context-plan.json` records 21 contexts
 found by following actual OCCT header include chains: sixteen prior successful
