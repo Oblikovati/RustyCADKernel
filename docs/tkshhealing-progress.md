@@ -1090,3 +1090,9 @@ Fifteen native cases compare topology, identity, statuses, messages and placemen
 `ShapeDivider` exposes virtual policy dispatch and protected fields remain available
 for derived tools. Perform remains partial through inherited limits and the explicit
 null face-tool exceptional-domain difference; no new legacy declarations are claimed.
+
+`ShapeUpgradeShapeDivideAngle` and `ShapeUpgradeShapeDivideClosedEdges` now install
+the native child policies. Eight oracle rows verify angular face counts, criterion
+identity and fallback, and the intentionally ignored closed-edge split count.
+Angle resets discard wire division but retain the face tool. Inherited whole-shape
+Perform remains partial, as do angle setters for the null face-tool exceptional case.

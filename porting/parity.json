@@ -222695,6 +222695,69 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeDivider::edge_msg",
       "status": "implemented",
       "notes": "Whole-shape traversal, virtual criteria/messages, compound location/orientation handling, context lifetime and face-failure catch scope. Fifteen native cases compare results, topology counts, context/source identity, statuses, message counts and placements. Perform inherits child-policy limits; null face tool returns explicit Rust failure where native dereferences null. Additional oracle cases, no legacy declaration mapping or whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideAngle::ShapeUpgrade_ShapeDivideAngle(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
+      "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::new",
+      "status": "implemented",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideAngle::ShapeUpgrade_ShapeDivideAngle(double,const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
+      "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::with_shape",
+      "status": "implemented",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideAngle::InitTool(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
+      "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::init_tool",
+      "status": "partial",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideAngle::SetMaxAngle(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
+      "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::set_max_angle",
+      "status": "partial",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideAngle::MaxAngle() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
+      "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::max_angle",
+      "status": "implemented",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideClosedEdges::ShapeUpgrade_ShapeDivideClosedEdges(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideClosedEdges.hxx",
+      "source_sha256": "e7cd4b91355c9789c52ef103c94523c0ba103e16d6994a42c29f34e3bd4160b4",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideClosedEdges::new",
+      "status": "implemented",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideClosedEdges::SetNbSplitPoints(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideClosedEdges.hxx",
+      "source_sha256": "e7cd4b91355c9789c52ef103c94523c0ba103e16d6994a42c29f34e3bd4160b4",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideClosedEdges::set_nb_split_points",
+      "status": "implemented",
+      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
     }
   ],
   "tests": [
