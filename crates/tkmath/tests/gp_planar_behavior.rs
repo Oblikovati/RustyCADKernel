@@ -32,6 +32,13 @@ fn xy_members_follow_native_order_and_checks() {
 #[test]
 fn xy_linear_forms_and_matrix_products() {
     let (a, b) = (Xy::new(1.0, 2.0), Xy::new(3.0, 5.0));
+    assert_eq!(a + b, Xy::new(4.0, 7.0));
+    assert_eq!(b - a, Xy::new(2.0, 3.0));
+    let mut arithmetic = a;
+    arithmetic += b;
+    assert_eq!(arithmetic, Xy::new(4.0, 7.0));
+    arithmetic -= b;
+    assert_eq!(arithmetic, a);
     let mut xy = Xy::default();
     xy.set_linear_form(2.0, a, 3.0, b);
     assert_eq!(xy, Xy::new(11.0, 19.0));

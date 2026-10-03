@@ -22,7 +22,7 @@ void gp2_xy_case(std::istream& in){
  gp2_real(a.Modulus());gp2_real(a.SquareModulus());gp2_flag(a.IsEqual(b,s));gp2_real(a.Crossed(b));gp2_real(a^b);
  gp2_real(a.CrossMagnitude(b));gp2_real(a.CrossSquareMagnitude(b));gp2_real(a.Dot(b));gp2_real(a*b);
  xy(a.Added(b));xy(a.Subtracted(b));xy(a.Multiplied(s));xy(s*a);xy(a.Multiplied(b));xy(a.Multiplied(m));xy(m*a);
- xy(a.Divided(s));xy(a.Reversed());xy(-a);gp_XY c=a;c.Multiply(m);xy(c);c=a;c*=b;xy(c);c=a;c/=s;xy(c);
+ xy(a.Divided(s));xy(a.Reversed());xy(-a);gp_XY c=a;c.Multiply(m);xy(c);c=a;c+=b;xy(c);c-=b;xy(c);c=a;c*=b;xy(c);c=a;c/=s;xy(c);
  GP2_TRY(xy(a.Normalized()));c=a;GP2_TRY(c.Normalize());xy(c);
  c.SetLinearForm(s,a,t,b);xy(c);c.SetLinearForm(s,a,t,b,a);xy(c);c.SetLinearForm(s,a,b);xy(c);c.SetLinearForm(a,b);xy(c);
  c=a;GP2_TRY(c.SetCoord(index,s));xy(c);GP2_TRY(gp2_real(a.Coord(index)));std::cout<<'\n';
