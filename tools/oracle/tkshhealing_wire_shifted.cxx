@@ -25,13 +25,15 @@
 #include <gp_Circ.hxx>
 #include <gp.hxx>
 #include <iostream>
+#include <iomanip>
+#include <ShapeAnalysis_Surface.hxx>
 #include <cmath>
 
 static void check_cyclic_stop_revisit();
 static void check_periodic_shift();
 static void check_revolution_basis_period();
 static void check_singularity_uses_fixer_precision();
-static void check_spherical_bimeridian();
+static void check_spherical_bimeridian(bool singular = false);
 static void check_spherical_v_period();
 
 int main()
@@ -39,6 +41,7 @@ int main()
   check_periodic_shift();
   check_spherical_v_period();
   check_spherical_bimeridian();
+  check_spherical_bimeridian(true);
   check_cyclic_stop_revisit();
   check_singularity_uses_fixer_precision();
   check_revolution_basis_period();
@@ -119,7 +122,7 @@ static TopoDS_Edge make_sphere_edge(BRep_Builder& builder,
   builder.Add(edge, second);
   return edge;
 }
-static void check_spherical_bimeridian()
+static void check_spherical_bimeridian(bool singular)
 {
   BRep_Builder builder;
   Handle(Geom_SphericalSurface) sphere = new Geom_SphericalSurface(gp_Ax3(), 1.0);
@@ -134,9 +137,11 @@ static void check_spherical_bimeridian()
   analyzer->Init(data, face, 1.0e-7);
   ShapeFix_Wire fixer;
   fixer.Init(analyzer);
+  if (singular) fixer.SetPrecision(0.4);
   const bool changed = fixer.FixShifted();
+  if (singular) std::cout << std::setprecision(17);
   ShapeAnalysis_Edge edgeAnalysis;
-  std::cout << "bimeridian=" << changed << " done1="
+  std::cout << (singular ? "singular_traversal=" : "bimeridian=") << changed << " done1="
             << fixer.LastFixStatus(ShapeExtend_DONE1) << " done2="
             << fixer.LastFixStatus(ShapeExtend_DONE2);
   for (int index = 1; index <= data->NbEdges(); ++index)
@@ -150,7 +155,8 @@ static void check_spherical_bimeridian()
     std::cout << " e" << index << "=" << a.X() << ',' << a.Y() << ',' << b.X() << ','
               << b.Y();
   }
-  std::cout << '\n';
+  if (singular) std::cout << " gap=" << analyzer->Surface()->Gap();
+  std::cout << '\n' << std::setprecision(6);
 }
 static TopoDS_Edge make_cylinder_u_edge(BRep_Builder& builder,
                                         const TopoDS_Face& face,
