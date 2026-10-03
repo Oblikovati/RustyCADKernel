@@ -1,7 +1,9 @@
 use super::*;
-use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
+use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve, BRepAdaptorCurve2d};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Handle;
+use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d as _;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve};
 use rustycad_tkmath::geom_abs::CurveType;
@@ -61,13 +63,71 @@ fn bezier_chain_stays_split_when_concatenation_is_disabled() {
 }
 
 #[test]
-fn spline_boundary_candidate_on_a_face_is_reported_unimplemented() {
+fn spline_face_merge_repairs_the_projected_bspline_pcurve() {
     let input = bezier_face();
     let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, true);
-    assert_eq!(
-        unifier.build().unwrap_err().exception_type(),
-        "Standard_NotImplemented"
-    );
+    unifier.build().unwrap();
+    let result = unifier.shape();
+    let native = include_str!("../../../../tools/oracle/tkshhealing_unify_collinear_wire.expected");
+    assert_native_bezier_face(native);
+    assert_eq!(edge_shapes(&result).len(), 3);
+    assert!(face_is_valid(&result));
+    assert_merged_edge_pcurve(&result, native);
+}
+
+fn assert_native_bezier_face(native: &str) {
+    let summary = native
+        .lines()
+        .find(|line| line.starts_with("bezier_face edges"))
+        .unwrap();
+    assert_eq!(summary, "bezier_face edges 3 valid 1");
+}
+
+fn face_is_valid(shape: &Shape) -> bool {
+    BRepCheckAnalyzer::new(shape, true, false, false)
+        .unwrap()
+        .is_valid()
+        .unwrap()
+}
+
+fn assert_merged_edge_pcurve(shape: &Shape, native: &str) {
+    let face = rustycad_tkbrep::topods::face(shape).unwrap();
+    let edges = edge_shapes(shape);
+    let merged = find_bspline_edge(&edges);
+    let pcurve = BRepTool::curve_on_face(merged, &face).unwrap();
+    assert!(pcurve.is_stored);
+    let adaptor = BRepAdaptorCurve2d::with_edge_on_face(merged, &face).unwrap();
+    assert_eq!(adaptor.get_type().unwrap(), CurveType::BSplineCurve);
+    assert_eq!(adaptor.first_parameter().unwrap(), 0.);
+    assert_eq!(adaptor.last_parameter().unwrap(), 2.);
+    assert_eq!(adaptor.value(1.).unwrap(), native_pcurve_midpoint(native));
+}
+
+fn find_bspline_edge(edges: &[rustycad_tkbrep::topods::Edge]) -> &rustycad_tkbrep::topods::Edge {
+    edges
+        .iter()
+        .find(|edge| {
+            BRepAdaptorCurve::with_edge(edge)
+                .unwrap()
+                .get_type()
+                .unwrap()
+                == CurveType::BSplineCurve
+        })
+        .unwrap()
+}
+
+fn native_pcurve_midpoint(native: &str) -> rustycad_tkmath::gp::Point2 {
+    let row = native
+        .lines()
+        .find(|line| line.starts_with("bezier_face pcurve"))
+        .unwrap();
+    let values = row
+        .split_whitespace()
+        .skip(2)
+        .map(|value| value.parse::<f64>().unwrap())
+        .collect::<Vec<_>>();
+    assert_eq!(values, [6., 0., 2., 1., 1.]);
+    rustycad_tkmath::gp::Point2::new(values[3], values[4])
 }
 
 fn assert_native_merge(input: &Shape, case: &str, last: f64, middle: Point3) {
