@@ -9,3 +9,17 @@ case=reinitialized_null_perform done=0 error=1 message=Null input shape build_so
 case=plane_solid_perform done=1 error=0 message=<empty> build_solid=1 offset=1.5 tolerance=1.9999999999999999e-06 result_null=0 result_type=2
 case=plane_solid_metrics valid=1 volume=-3
 case=box_solid_perform done=0 error=4 message=Result contains two or more shells build_solid=1 offset=0.10000000000000001 tolerance=9.9999999999999995e-08 result_null=0 result_type=2
+case=null_safe_offset safe=0
+case=plane_safe_offset safe=inf
+case=box_safe_offset safe=0.0031830670308492888
+case=protected_compute_safe safe=0.0031830670308492888
+case=protected_clear_before done=1 error=0 message=<empty> build_solid=1 offset=-0.25 tolerance=3.0000000000000001e-06 result_null=0 result_type=2
+case=protected_clear done=0 error=0 result_preserved=1 build_solid=1 offset=-0.25 tolerance=3.0000000000000001e-06
+case=protected_clear_error_before done=0 error=4 message=Result contains two or more shells build_solid=1 offset=0.10000000000000001 tolerance=9.9999999999999995e-08 result_null=0 result_type=2
+case=protected_clear_error done=0 error=0 result_preserved=1
+case=cylinder_shell_perform done=1 error=0 message=<empty> build_solid=0 offset=0.25 tolerance=9.9999999999999995e-08 result_null=0 result_type=2
+case=cylinder_shell_perform_metrics valid=1 input_degenerate=0 result_degenerate=0
+case=sphere_shell_perform done=1 error=0 message=<empty> build_solid=0 offset=0.25 tolerance=9.9999999999999995e-08 result_null=0 result_type=2
+case=sphere_shell_perform_metrics valid=1 input_degenerate=2 result_degenerate=2
+case=cone_shell_perform done=1 error=0 message=<empty> build_solid=0 offset=0.25 tolerance=9.9999999999999995e-08 result_null=0 result_type=2
+case=cone_shell_perform_metrics valid=1 input_degenerate=0 result_degenerate=0

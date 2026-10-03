@@ -114,6 +114,7 @@ fn sole_closed_shell(shells: &Shape) -> Result<Result<Shell, BRepOffsetSimpleSta
         }
         result = Shell::unchecked(shell);
     }
+    // OCCT dereferences a null shell in BRep_Tool::IsClosed here; make the undefined case stable.
     if result.is_null() {
         return Ok(Err(BRepOffsetSimpleStatus::ErrorNonClosedShell));
     }

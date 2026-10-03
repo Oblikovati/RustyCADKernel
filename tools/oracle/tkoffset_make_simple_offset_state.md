@@ -3,7 +3,9 @@
 The native probe exercises default construction, `Perform()` on a null input,
 successful shell generation from a bounded plane, `Generated`/`Modified`,
 reinitialization after success, a bounded plane offset into a solid, and a closed-box
-offset that reports multiple shells. The checked-in output is
+offset that reports multiple shells. It also covers safe-offset values, protected
+`Clear`/`ComputeMaxAngle`, and simple offsets of cylinder, sphere, and cone solids. The
+checked-in output is
 `crates/tkoffset/tests/fixtures/make_simple_offset_state.txt`; it was generated
 with OCCT revision `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
@@ -13,10 +15,17 @@ tolerance. The Rust class follows those state transitions. The plane case produc
 valid solid with signed volume `-3`; the closed-box case retains the offset result and
 reports `ErrorInvalidNbShells`, matching the native probe.
 
+The exposed protected-method probe verifies `ComputeMaxAngle` feeds the cached
+`GetSafeOffset` path. `Clear` after both success and `ErrorInvalidNbShells` resets done/error
+while preserving the result and the build flag, offset, and tolerance settings.
+
 `BRepOffset_MakeSimpleOffset` calls the one-argument
 `ShapeAnalysis_FreeBounds(shape)` overload. In the pinned header, that resolves to the
 three-argument actual-boundary overload with defaults `(splitclosed=false,
 splitopen=true, checkinternaledges=false)`, which the Rust code calls explicitly.
+Sphere output exercises native degeneracy restoration: both pole edges remain
+degenerated after modification. The cylinder, sphere, and cone simple-offset results
+are valid solids with the expected edge-degeneracy counts.
 
 Build and run against the OCCT build used by the port:
 

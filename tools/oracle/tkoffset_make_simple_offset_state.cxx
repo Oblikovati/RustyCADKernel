@@ -2,9 +2,14 @@
 #include <BRepCheck_Analyzer.hxx>
 #include <BRepOffset_MakeSimpleOffset.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
+#include <BRepPrimAPI_MakeCone.hxx>
+#include <BRepPrimAPI_MakeCylinder.hxx>
+#include <BRepPrimAPI_MakeSphere.hxx>
 #include <BRepGProp.hxx>
 #include <BRep_Tool.hxx>
 #include <GProp_GProps.hxx>
+#include <TopExp_Explorer.hxx>
+#include <TopoDS.hxx>
 #include <Standard_Failure.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <gp.hxx>
@@ -16,6 +21,13 @@
 
 namespace
 {
+class ExposedSimpleOffset : public BRepOffset_MakeSimpleOffset
+{
+public:
+  void ClearPublic() { Clear(); }
+  void ComputeMaxAnglePublic() { ComputeMaxAngle(); }
+};
+
 void writeState(const char* label, const BRepOffset_MakeSimpleOffset& maker)
 {
   const TopoDS_Shape& result = maker.GetResultShape();
@@ -29,6 +41,33 @@ void writeState(const char* label, const BRepOffset_MakeSimpleOffset& maker)
             << " result_null=" << result.IsNull();
   if (!result.IsNull()) std::cout << " result_type=" << static_cast<int>(result.ShapeType());
   std::cout << '\n';
+}
+
+int degeneratedEdges(const TopoDS_Shape& shape)
+{
+  int count = 0;
+  for (TopExp_Explorer edges(shape, TopAbs_EDGE); edges.More(); edges.Next())
+  {
+    if (BRep_Tool::Degenerated(TopoDS::Edge(edges.Current()))) ++count;
+  }
+  return count;
+}
+
+void writeSafeOffset(const char* label, const TopoDS_Shape& shape, const double expected)
+{
+  BRepOffset_MakeSimpleOffset maker(shape, 0.25);
+  std::cout << "case=" << label << " safe=" << maker.GetSafeOffset(expected) << '\n';
+}
+
+void writePrimitiveOffset(const char* label, const TopoDS_Shape& shape)
+{
+  BRepOffset_MakeSimpleOffset maker(shape, 0.25);
+  maker.Perform();
+  writeState(label, maker);
+  std::cout << "case=" << label << "_metrics valid="
+            << BRepCheck_Analyzer(maker.GetResultShape()).IsValid()
+            << " input_degenerate=" << degeneratedEdges(shape)
+            << " result_degenerate=" << degeneratedEdges(maker.GetResultShape()) << '\n';
 }
 } // namespace
 
@@ -90,4 +129,46 @@ int main()
   closedSolidMaker.SetBuildSolidFlag(true);
   closedSolidMaker.Perform();
   writeState("box_solid_perform", closedSolidMaker);
+
+  writeSafeOffset("null_safe_offset", TopoDS_Shape(), 1.0e-3);
+  writeSafeOffset("plane_safe_offset", source, 1.0e-3);
+  writeSafeOffset("box_safe_offset", box, 1.0e-2);
+
+  ExposedSimpleOffset computed;
+  computed.Initialize(box, 0.0);
+  computed.ComputeMaxAnglePublic();
+  std::cout << "case=protected_compute_safe safe=" << computed.GetSafeOffset(1.0e-2)
+            << '\n';
+
+  ExposedSimpleOffset exposed;
+  exposed.Initialize(source, -0.25);
+  exposed.SetOffsetValue(-0.25);
+  exposed.SetTolerance(3.0e-6);
+  exposed.SetBuildSolidFlag(true);
+  exposed.Perform();
+  writeState("protected_clear_before", exposed);
+  const TopoDS_Shape resultBeforeClear = exposed.GetResultShape();
+  exposed.ClearPublic();
+  std::cout << "case=protected_clear done=" << exposed.IsDone()
+            << " error=" << static_cast<int>(exposed.GetError())
+            << " result_preserved=" << exposed.GetResultShape().IsSame(resultBeforeClear)
+            << " build_solid=" << exposed.GetBuildSolidFlag()
+            << " offset=" << exposed.GetOffsetValue()
+            << " tolerance=" << exposed.GetTolerance() << '\n';
+
+  ExposedSimpleOffset clearError;
+  clearError.Initialize(box, 0.1);
+  clearError.SetBuildSolidFlag(true);
+  clearError.Perform();
+  writeState("protected_clear_error_before", clearError);
+  const TopoDS_Shape resultBeforeErrorClear = clearError.GetResultShape();
+  clearError.ClearPublic();
+  std::cout << "case=protected_clear_error done=" << clearError.IsDone()
+            << " error=" << static_cast<int>(clearError.GetError())
+            << " result_preserved="
+            << clearError.GetResultShape().IsSame(resultBeforeErrorClear) << '\n';
+
+  writePrimitiveOffset("cylinder_shell_perform", BRepPrimAPI_MakeCylinder(2.0, 4.0).Shape());
+  writePrimitiveOffset("sphere_shell_perform", BRepPrimAPI_MakeSphere(2.0).Shape());
+  writePrimitiveOffset("cone_shell_perform", BRepPrimAPI_MakeCone(3.0, 1.0, 4.0).Shape());
 }
