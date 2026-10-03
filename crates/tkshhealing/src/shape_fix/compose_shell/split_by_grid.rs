@@ -1,6 +1,5 @@
+use super::ShapeFixComposeShell;
 use super::grid::patch_index;
-use super::split_by_line;
-use super::{ShapeFixComposeShell, split_by_line::SplitByLineInput};
 use crate::shape_analysis::{ShapeAnalysis, adjust_to_period};
 use crate::shape_extend::ShapeExtendCompositeSurface;
 use crate::shape_fix::ShapeFixWireSegment;
@@ -147,11 +146,13 @@ fn shift_segment_bounds(
     Ok(())
 }
 
+type PatchRanges = ((i32, i32), (i32, i32));
+
 fn closed_patch_ranges(
     composer: &ShapeFixComposeShell,
     grid: &ShapeExtendCompositeSurface,
     bounds: (f64, f64, f64, f64),
-) -> Result<((i32, i32), (i32, i32)), Failure> {
+) -> Result<PatchRanges, Failure> {
     let (u_min, u_max, v_min, v_max) = bounds;
     Ok((
         closed_axis_range(
@@ -317,24 +318,7 @@ fn split_segments(
     along_u: bool,
     cut_index: i32,
 ) -> Result<(), Failure> {
-    for index in 1..=segments.length() {
-        let mut parameters = Sequence::default();
-        let mut codes = Sequence::default();
-        let mut vertices = Sequence::default();
-        split_by_line::split_by_line(
-            composer,
-            SplitByLineInput {
-                wire: segments.change_value(index as usize)?,
-                line,
-                cut_by_u: along_u,
-                cut_index,
-                line_parameters: &mut parameters,
-                point_codes: &mut codes,
-                vertices: &mut vertices,
-            },
-        )?;
-    }
-    Ok(())
+    super::split_line_sequence::split_sequence(composer, segments, line, along_u, cut_index)
 }
 
 fn joint_value(

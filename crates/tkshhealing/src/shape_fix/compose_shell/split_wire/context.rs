@@ -7,7 +7,7 @@ use rustycad_tkernel::ncollection::Sequence;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 
-pub(super) fn apply_context(
+pub(in crate::shape_fix::compose_shell) fn apply_context(
     wire: &ShapeFixWireSegment,
     index: i32,
     context: &Handle<ShapeBuildReShape>,
