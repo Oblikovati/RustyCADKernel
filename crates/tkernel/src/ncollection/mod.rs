@@ -107,7 +107,7 @@ pub use cell_filter::{CellAction, CellFilter, CellGeometry, CellInspector};
 mod ebtree;
 mod ubtree;
 pub use ebtree::EBTree;
-pub use ubtree::{BoundingNode, BoundingVolume, TreeSelector, UBTree};
+pub use ubtree::{BoundingNode, BoundingVolume, FallibleTreeSelector, TreeSelector, UBTree};
 mod ubtree_filler;
 pub use ubtree_filler::{BoundingTreeInsertion, ObjBnd, UBTreeFiller};
 

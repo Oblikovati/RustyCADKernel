@@ -7,6 +7,8 @@ use super::{AllocatedBox, BaseAllocator};
 mod insertion;
 mod navigation;
 mod removal;
+mod selection;
+pub use selection::FallibleTreeSelector;
 /// Bounding geometry required by the native insertion algorithm.
 pub trait BoundingVolume: Clone {
     /// Enlarge this bound to include another; `bound.add(&other)`.
