@@ -67,7 +67,7 @@ fn consume_pin_face_step(
         PinFaceStep::Abort => true,
         PinFaceStep::Matched => {
             state.done = true;
-            analyzer.pin_face_status = ShapeExtend::encode_status(ShapeExtendStatus::Done);
+            analyzer.pin_face_status = Some(ShapeExtend::encode_status(ShapeExtendStatus::Done));
             false
         }
         PinFaceStep::Continue => false,

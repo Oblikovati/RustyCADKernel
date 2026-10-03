@@ -15,7 +15,8 @@ pub struct ShapeAnalysisCheckSmallFace {
     pub(super) pin_status: i32,
     pub(super) split_vertex_status: i32,
     pub(super) twisted_status: i32,
-    pub(super) pin_face_status: i32,
+    pub(super) pin_face_status: Option<i32>,
+    pub(super) pin_edges_status: Option<i32>,
     pub(super) tolerance: Option<f64>,
 }
 
@@ -67,9 +68,18 @@ impl ShapeAnalysisCheckSmallFace {
         ShapeExtend::decode_status(self.twisted_status, status)
     }
 
-    /// Decodes the last `CheckPinFace` result; `analyzer.status_pin_face(ShapeExtendStatus::Done)`.
-    pub fn status_pin_face(&self, status: ShapeExtendStatus) -> bool {
-        ShapeExtend::decode_status(self.pin_face_status, status)
+    /// Decodes `StatusPinFace` only after native code has written its uninitialized field;
+    /// `analyzer.status_pin_face(ShapeExtendStatus::Done) == None` on a fresh analyzer.
+    pub fn status_pin_face(&self, status: ShapeExtendStatus) -> Option<bool> {
+        self.pin_face_status
+            .map(|value| ShapeExtend::decode_status(value, status))
+    }
+
+    /// Decodes `StatusPinEdges` when known; native currently never writes that field.
+    /// `analyzer.status_pin_edges(ShapeExtendStatus::Done) == None`.
+    pub fn status_pin_edges(&self, status: ShapeExtendStatus) -> Option<bool> {
+        self.pin_edges_status
+            .map(|value| ShapeExtend::decode_status(value, status))
     }
 
     /// Sets the separate checker precision field; `analyzer.set_tolerance(0.01)`.

@@ -24,7 +24,8 @@ fn pin_face_keeps_the_native_nonmatching_edge_gate() {
         .unwrap();
     assert!(!matched);
     assert!(edge_pairs.is_empty());
-    assert!(!analyzer.status_pin_face(ShapeExtendStatus::Done));
+    assert_eq!(analyzer.status_pin_face(ShapeExtendStatus::Done), None);
+    assert_eq!(analyzer.status_pin_edges(ShapeExtendStatus::Done), None);
 }
 
 #[test]
