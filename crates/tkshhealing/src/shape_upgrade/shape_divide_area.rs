@@ -42,6 +42,11 @@ impl Default for ShapeUpgradeShapeDivideArea {
     }
 }
 impl ShapeUpgradeShapeDivideArea {
+    /// Retain the area policy for direct calls; `divider.perform(true)?`.
+    pub fn perform(&self, new_context: bool) -> Result<bool, Failure> {
+        ShapeDivider::perform(self, new_context)
+    }
+
     /// Construct without a source shape; `ShapeUpgradeShapeDivideArea::empty()`.
     pub fn empty() -> Self {
         Self::default()
