@@ -158,6 +158,9 @@ static void runComputeCode()
   gp_Lin2d tangent(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
   std::cout << "compute_code_tangent "
             << tool.ComputeCode(segments(1).WireData(), tangent, 1, 1, 0.25, 0.75) << '\n';
+  tool.ClosedMode() = true;
+  std::cout << "compute_code_closed_mode "
+            << tool.ComputeCode(segments(1).WireData(), line, 1, 1, 0., 2.) << '\n';
 }
 
 static void runPatchLimits()
