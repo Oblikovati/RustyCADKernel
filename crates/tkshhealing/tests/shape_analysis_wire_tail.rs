@@ -5,8 +5,8 @@ use rustycad_tkbrep::{
     topods::{Edge, Face},
 };
 use rustycad_tkernel::{ncollection::Array1, standard::Handle};
-use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomLine, GeomPlane, GeomSurface};
-use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
+use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomLine};
+use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
@@ -77,7 +77,7 @@ fn append_part_vertices(observed: &mut Vec<f64>, part: &Edge) {
 }
 
 fn fixture_analyzer(mode: usize) -> (ShapeAnalysisWire, Edge, Edge) {
-    let face = planar_face();
+    let face = support::planar_face();
     let (first, second) = fixture_pair(mode);
     let wire = Handle::new(ShapeExtendWireData::new());
     if mode != 10 {
@@ -157,13 +157,4 @@ fn curved_pair(shorter: bool) -> (Edge, Edge) {
     let first = curve_edge(&curve, 0., 1., true);
     let second = curve_edge(&curve, if shorter { 0.5 } else { 0. }, 1., true);
     (first, Edge::unchecked(second.reversed()))
-}
-
-fn planar_face() -> Face {
-    let mut face = Face::default();
-    let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-    BRepBuilder::default()
-        .make_face_on_surface(&mut face, &surface, 1e-7)
-        .unwrap();
-    face
 }

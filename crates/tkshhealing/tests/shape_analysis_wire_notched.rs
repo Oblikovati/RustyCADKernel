@@ -6,8 +6,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::{ncollection::Array1, standard::Handle};
 use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomSurface};
-use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2};
+use rustycad_tkmath::gp::{Axis2d, Direction2, Point2};
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
@@ -41,7 +40,7 @@ fn notched_edges_match_pinned_native_geometry_and_outputs() {
 }
 
 fn fixture_analyzer(mode: usize) -> ShapeAnalysisWire {
-    let face = cylindrical_face();
+    let face = support::cylindrical_face(1.);
     let wire = Handle::new(ShapeExtendWireData::new());
     if mode != 12 {
         let mut first = fixture_edge(&face, 0., 1., 2., mode, true);
@@ -61,16 +60,6 @@ fn fixture_analyzer(mode: usize) -> ShapeAnalysisWire {
         wire.add_edge(&last, 0).unwrap();
     }
     ShapeAnalysisWire::from_wire_data(&wire, &face, 1e-7).unwrap()
-}
-
-fn cylindrical_face() -> Face {
-    let mut face = Face::default();
-    let surface: Handle<dyn GeomSurface> =
-        Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.).unwrap()).cast();
-    BRepBuilder::default()
-        .make_face_on_surface(&mut face, &surface, 1e-7)
-        .unwrap();
-    face
 }
 
 fn fixture_edge(

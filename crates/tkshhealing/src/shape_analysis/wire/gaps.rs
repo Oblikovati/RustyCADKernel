@@ -69,10 +69,11 @@ impl ShapeAnalysisWire {
         let (previous, current) = self.gap_pair(index)?;
         let analysis = ShapeAnalysisEdge::new();
         let (previous_curve, _, previous_last) = analysis.curve_3d(&previous, true)?;
+        let Some(previous_curve) = previous_curve.get() else {
+            return Ok(None);
+        };
         let (current_curve, current_first, _) = analysis.curve_3d(&current, true)?;
-        let (Some(previous_curve), Some(current_curve)) =
-            (previous_curve.get(), current_curve.get())
-        else {
+        let Some(current_curve) = current_curve.get() else {
             return Ok(None);
         };
         let distance = previous_curve
@@ -105,10 +106,11 @@ impl ShapeAnalysisWire {
         let face = self.face();
         let analysis = ShapeAnalysisEdge::new();
         let (previous_curve, _, previous_last) = analysis.pcurve_on_face(&previous, &face, true)?;
+        let Some(previous_curve) = previous_curve.get() else {
+            return Ok(None);
+        };
         let (current_curve, current_first, _) = analysis.pcurve_on_face(&current, &face, true)?;
-        let (Some(previous_curve), Some(current_curve)) =
-            (previous_curve.get(), current_curve.get())
-        else {
+        let Some(current_curve) = current_curve.get() else {
             return Ok(None);
         };
         let distance = previous_curve
@@ -190,9 +192,9 @@ impl ShapeAnalysisWire {
     }
 
     fn record_gap(&self, distance: f64, tolerance: f64) {
-        if distance <= tolerance {
-            return;
+        // Preserve OCCT's positive comparison: unordered NaN precision does not flag a gap.
+        if distance > tolerance {
+            self.set_last_status(ShapeExtendStatus::Done1);
         }
-        self.set_last_status(ShapeExtendStatus::Done1);
     }
 }

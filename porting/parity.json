@@ -222029,6 +222029,78 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_tail",
       "status": "implemented",
       "notes": "Native tail endpoint/angle screening, length sampling, range-clamped projection, bisection, 22-point validation and edge split/parameter-transfer/linear-mass decisions. Four mutable native edge outputs represented by an ordered [Edge;4]. Thirteen pinned native cases compare exact coordinates, ranges, tolerances, identities, flags and untouched outputs. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckGaps3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_gaps_3d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckGaps2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_gaps_2d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckGap3d(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_gap_3d_at",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckGap2d(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_gap_2d_at",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusGaps3d(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_gaps_3d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusGaps2d(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_gaps_2d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::MaxDistance3d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::max_distance_3d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::MaxDistance2d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::max_distance_2d",
+      "status": "implemented",
+      "notes": "Native oriented boundary gap measurements, 2D surface-resolution tolerance, aggregate status/maxima and failure metric retention. Thirteen pinned native cases compare exact results and metrics for closure/default/negative indices, reversed edges, cylinders, planar p-curve fallback, removed geometry and NaN precision. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [
