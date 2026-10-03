@@ -42,6 +42,20 @@ def run(args, log, *, input=None, timeout=900, env=None):
     return result.stdout
 
 
+def run_rust_mappings(expected: set[tuple[str, str, str]], env: dict[str, str], output: Path) -> set[tuple[str, str, str]]:
+    """Run each mapped package and target exactly; e.g. `run_rust_mappings(expected, env, out)`."""
+    passed_cases = set()
+    for package, target in sorted({(package, target) for package, target, _ in expected}):
+        log = output / f"rust-{package}-{target}.log"
+        result = run(["cargo", "test", "--locked", "-p", package, "--test", target, "--", "--test-threads=1"], log, env=env)
+        passed = {(package, target, name) for name in re.findall(r"^test (\S+) \.\.\. ok$", result, re.M)}
+        wanted = {case for case in expected if case[:2] == (package, target)}
+        if passed != wanted:
+            raise RuntimeError(f"Rust tests missing, skipped or unmapped in {package}/{target}")
+        passed_cases.update(passed)
+    return passed_cases
+
+
 def unique(root, name):
     paths = list(root.rglob(name))
     if len(paths) != 1:
@@ -173,14 +187,7 @@ def main():
                        for case in cases}
     native_passed = len(cases) - len(native_skips)
     print(f"OCCT: {native_passed} legacy tests passed; {len(native_skips)} explicit upstream skips; running mapped Rust tests", flush=True)
-    rust_passed = set()
-    for target in sorted({m["rust_target"] for m in mappings}):
-        result = run(["cargo","test","--locked","-p","rustycad-tkernel","--test",target,"--","--test-threads=1"],output/f"rust-{target}.log",env=env)
-        passed = set(re.findall(r"^test (\S+) \.\.\. ok$",result,re.M))
-        rust_passed.update((target, test_name) for test_name in passed)
-        wanted = {name for mapped_target, name in rust_expected if mapped_target == target}
-        if passed != wanted:
-            raise RuntimeError(f"Rust tests missing, skipped or unmapped in {target}")
+    rust_passed = run_rust_mappings(rust_expected, env, output)
     case_results = runtime_case_results(mappings, native_statuses, rust_passed)
     if any(m["rust_target"] == "quantity_color" for m in mappings):
         # The named-color table is generated data; a stale copy would pass the Rust tests alone.
