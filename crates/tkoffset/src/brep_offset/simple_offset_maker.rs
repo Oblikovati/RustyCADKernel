@@ -133,7 +133,7 @@ impl BRepOffsetMakeSimpleOffset {
 
     fn ensure_max_angle(&mut self) -> Result<(), Failure> {
         if self.max_angle == 0.0 {
-            self.max_angle = compute_simple_offset_max_angle(&self.input_shape)?;
+            self.compute_max_angle()?;
         }
         Ok(())
     }
@@ -171,8 +171,16 @@ impl BRepOffsetMakeSimpleOffset {
         Ok(())
     }
 
-    /// `Clear()`: clear done/error/cache/history, preserving inputs, output and build flag.
-    fn clear(&mut self) {
+    /// `Clear()` is protected in OCCT; Rust exposes it to reset run state and history,
+    /// preserving inputs, output and the build-solid flag.
+    ///
+    /// ```
+    /// use rustycad_tkoffset::brep_offset::BRepOffsetMakeSimpleOffset;
+    /// let mut maker = BRepOffsetMakeSimpleOffset::new();
+    /// maker.clear();
+    /// assert!(!maker.is_done());
+    /// ```
+    pub fn clear(&mut self) {
         self.done = false;
         self.error = BRepOffsetSimpleStatus::Ok;
         self.max_angle = 0.0;
@@ -181,6 +189,23 @@ impl BRepOffsetMakeSimpleOffset {
             .expect("reshape handle is initialized")
             .clear();
         self.wall_edges.clear(true);
+    }
+
+    /// `ComputeMaxAngle()` is protected in OCCT; Rust exposes it to prime the cached
+    /// largest angle between adjacent face normals before `safe_offset`.
+    ///
+    /// ```
+    /// use rustycad_tkoffset::brep_offset::BRepOffsetMakeSimpleOffset;
+    /// let mut maker = BRepOffsetMakeSimpleOffset::new();
+    /// maker.compute_max_angle()?;
+    /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
+    /// ```
+    pub fn compute_max_angle(&mut self) -> Result<(), Failure> {
+        let measured = compute_simple_offset_max_angle(&self.input_shape)?;
+        if measured > self.max_angle {
+            self.max_angle = measured;
+        }
+        Ok(())
     }
 
     fn build_solid_result(&mut self) -> Result<(), Failure> {
@@ -219,7 +244,7 @@ impl BRepOffsetMakeSimpleOffset {
             return Ok(0.0);
         }
         if self.max_angle == 0.0 {
-            self.max_angle = compute_simple_offset_max_angle(&self.input_shape)?;
+            self.compute_max_angle()?;
         }
         let max_tolerance = BRepTool::max_tolerance(&self.input_shape, ShapeEnum::Vertex)?;
         let estimate = (expected_tolerance - max_tolerance) / (2.0 * self.max_angle);

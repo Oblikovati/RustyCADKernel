@@ -4,7 +4,9 @@ use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::gp::{Plane3, Point3};
 use rustycad_tkoffset::brep_offset::{BRepOffsetMakeSimpleOffset, BRepOffsetSimpleStatus};
-use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+use rustycad_tkprim::brep_prim_api::{
+    BRepPrimAPIMakeBox, BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeSphere,
+};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape};
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
@@ -115,6 +117,106 @@ fn closed_input_reports_multiple_shells_like_native()
         maker.result_shape().shape_type()?,
         rustycad_tkg3d::top_abs::ShapeEnum::Solid
     );
+    Ok(())
+}
+
+#[test]
+fn analytic_solids_keep_native_degenerate_edge_flags()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let mut cylinder = BRepPrimAPIMakeCylinder::new(2.0, 4.0);
+    check_analytic_offset(cylinder.shape()?, 0)?;
+    let mut sphere = BRepPrimAPIMakeSphere::new(2.0)?;
+    check_analytic_offset(sphere.shape()?, 2)?;
+    let mut cone = BRepPrimAPIMakeCone::new(3.0, 1.0, 4.0)?;
+    check_analytic_offset(cone.shape()?, 0)?;
+    Ok(())
+}
+
+fn check_analytic_offset(
+    source: &Shape,
+    expected_degenerate: usize,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    assert_eq!(degenerated_edges(source)?, expected_degenerate);
+    let mut maker = BRepOffsetMakeSimpleOffset::with_shape(source, 0.25);
+    maker.perform()?;
+    assert!(maker.is_done());
+    assert_eq!(maker.error(), BRepOffsetSimpleStatus::Ok);
+    assert_eq!(
+        degenerated_edges(maker.result_shape())?,
+        expected_degenerate
+    );
+    assert_eq!(
+        maker.result_shape().shape_type()?,
+        rustycad_tkg3d::top_abs::ShapeEnum::Solid
+    );
+    let analyzer = BRepCheckAnalyzer::new(maker.result_shape(), true, false, false)?;
+    assert!(analyzer.is_valid()?);
+    Ok(())
+}
+
+fn degenerated_edges(shape: &Shape) -> Result<usize, rustycad_tkernel::standard::Failure> {
+    use rustycad_tkbrep::topexp::Explorer;
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+
+    let mut explorer = Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?;
+    let mut count = 0;
+    while explorer.more() {
+        count += usize::from(BRepTool::degenerated(
+            &rustycad_tkbrep::topods::Edge::unchecked(explorer.current().clone()),
+        )?);
+        explorer.next()?;
+    }
+    Ok(count)
+}
+
+#[test]
+fn safe_offset_and_protected_cache_reset_match_native()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    check_safe_offset_values()?;
+    check_clear_preserves_result_and_settings()?;
+    Ok(())
+}
+
+fn check_safe_offset_values() -> Result<(), rustycad_tkernel::standard::Failure> {
+    let mut plane = BRepOffsetMakeSimpleOffset::with_shape(&plane_face()?, 0.25);
+    assert!(plane.safe_offset(1.0e-3)?.is_infinite());
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0)?;
+    let mut maker = BRepOffsetMakeSimpleOffset::with_shape(box_maker.shape()?, 0.0);
+    maker.compute_max_angle()?;
+    let expected = maker.safe_offset(1.0e-2)?;
+    assert!((expected - 0.0031830670308492888).abs() < 1.0e-15);
+    assert_eq!(BRepOffsetMakeSimpleOffset::new().safe_offset(1.0e-3)?, 0.0);
+    Ok(())
+}
+
+fn check_clear_preserves_result_and_settings() -> Result<(), rustycad_tkernel::standard::Failure> {
+    let source = plane_face()?;
+    let mut maker = BRepOffsetMakeSimpleOffset::with_shape(&source, -0.25);
+    maker.set_tolerance(3.0e-6);
+    maker.set_build_solid_flag(true);
+    maker.perform()?;
+    assert!(maker.is_done());
+    let result = maker.result_shape().clone();
+    maker.clear();
+    assert!(!maker.is_done() && maker.error() == BRepOffsetSimpleStatus::Ok);
+    assert!(maker.result_shape().is_same(&result));
+    assert!(maker.build_solid_flag());
+    assert_eq!(maker.offset_value(), -0.25);
+    assert_eq!(maker.tolerance(), 3.0e-6);
+    check_clear_resets_failed_solid_status()?;
+    Ok(())
+}
+
+fn check_clear_resets_failed_solid_status() -> Result<(), rustycad_tkernel::standard::Failure> {
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0)?;
+    let mut maker = BRepOffsetMakeSimpleOffset::with_shape(box_maker.shape()?, 0.1);
+    maker.set_build_solid_flag(true);
+    maker.perform()?;
+    assert_eq!(maker.error(), BRepOffsetSimpleStatus::ErrorInvalidNbShells);
+    let result = maker.result_shape().clone();
+    maker.clear();
+    assert_eq!(maker.error(), BRepOffsetSimpleStatus::Ok);
+    assert!(maker.result_shape().is_same(&result));
     Ok(())
 }
 
