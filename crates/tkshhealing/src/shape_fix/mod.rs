@@ -5,6 +5,7 @@
 //! docs/tkshhealing-progress.md lists the ported classes.
 mod edge;
 mod edge_connect;
+mod edge_proj_aux;
 mod face;
 mod face_connect;
 mod face_loops;
@@ -17,6 +18,7 @@ mod wire;
 
 pub use edge::ShapeFixEdge;
 pub use edge_connect::ShapeFixEdgeConnect;
+pub use edge_proj_aux::ShapeFixEdgeProjAux;
 pub use face::ShapeFixFace;
 pub use face_connect::ShapeFixFaceConnect;
 pub use intersection::{PcurveCrossing, line_pcurve_crossing};
