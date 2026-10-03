@@ -10,6 +10,7 @@ pub(crate) mod make_faces_on_patch;
 mod missing_seam;
 mod natural_bound;
 mod orientation;
+mod perform_wire;
 mod perform_without_wire;
 mod periodic_cone;
 mod periodic_degenerated;
@@ -180,35 +181,19 @@ impl ShapeFixFace {
     }
 
     /// Run face repairs; `fixer.perform()?`.
-    /// Wire-disabled orchestration follows OCCT; wire-enabled orchestration remains partial.
     pub fn perform(&self) -> Result<bool, Failure> {
+        self.perform_with_progress(&rustycad_tkernel::message::ProgressRange::default())
+    }
+
+    /// Run face repairs with a progress range; `fixer.perform_with_progress(&progress)?`.
+    pub fn perform_with_progress(
+        &self,
+        progress: &rustycad_tkernel::message::ProgressRange<'_>,
+    ) -> Result<bool, Failure> {
         if self.fix_wire_mode() == 0 {
             return self.perform_without_wire();
         }
-        *self.status.write() = 0;
-        let (context, tolerance) = self
-            .parent
-            .fix_root_data()
-            .with(|fields| (fields.context.clone(), fields.precision));
-        let input = self.face_state.read().clone();
-        let applied = apply_context(&input, &context)?;
-        if !is_face(&applied)? {
-            *self.result.write() = applied;
-            return Ok(false);
-        }
-        let face = topods::face(&applied)?;
-        if let Some(split) = super::face_loops::split_bowtie_face(&face, tolerance, &context)? {
-            *self.status.write() = ShapeExtend::encode_status(ShapeExtendStatus::Done7);
-            *self.result.write() = split.clone();
-            replace_context(&context, &face, &split)?;
-            return Ok(true);
-        }
-        let fixed = periodic_cone::repair_periodic_cone(&face, tolerance)?;
-        let result = fixed.clone().unwrap_or(applied);
-        *self.face_state.write() = result.clone();
-        *self.result.write() = result.clone();
-        replace_context(&context, &face, &result)?;
-        Ok(false)
+        self.perform_wire_enabled(progress)
     }
 
     /// `Result()`: return the last performed shape, including non-face context results.

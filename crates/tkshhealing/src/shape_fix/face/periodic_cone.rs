@@ -1,5 +1,4 @@
-use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisSurface};
-use crate::shape_construct::ShapeConstructProjectCurveOnSurface;
+use crate::shape_analysis::ShapeAnalysisEdge;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp;
 use rustycad_tkbrep::topods::{self, Builder, Face, Shape, ShapeIterator, Wire};
@@ -48,61 +47,7 @@ pub(super) fn face_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
     Ok(wires)
 }
 
-/// Adds missing p-curves to a conical wire using OCCT's curve-on-surface projector.
-fn add_wire_pcurves(
-    face: &Face,
-    wire: &Wire,
-    surface: &Handle<dyn GeomSurface>,
-    tolerance: f64,
-) -> Result<(), Failure> {
-    let builder = BRepBuilder::default();
-    let analysis_surface = Handle::new(ShapeAnalysisSurface::new(surface)?);
-    let projector = ShapeConstructProjectCurveOnSurface::new();
-    projector.init_analysis(&analysis_surface, tolerance);
-    let analysis = ShapeAnalysisEdge::new();
-    for child in ShapeIterator::new(&wire.clone().into_shape(), false, true) {
-        let edge = topods::edge(&child)?;
-        if analysis.has_pcurve_on_face(&edge, face)? {
-            continue;
-        }
-        let (curve, first, last) = BRepTool::curve(&edge)?;
-        let tolerances = endpoint_tolerances(&analysis, &edge)?;
-        let mut pcurve = Handle::default();
-        projector.perform(&curve, (first, last), &mut pcurve, tolerances)?;
-        builder.same_parameter(&edge, false)?;
-        builder.update_edge_pcurve_on_face(&edge, &pcurve, face, tolerance)?;
-    }
-    Ok(())
-}
-
-/// The endpoint tolerances passed to ShapeFix_Edge::FixAddPCurve.
-fn endpoint_tolerances(
-    analysis: &ShapeAnalysisEdge,
-    edge: &rustycad_tkbrep::topods::Edge,
-) -> Result<(f64, f64), Failure> {
-    let first = analysis.first_vertex(edge);
-    let last = analysis.last_vertex(edge);
-    Ok((vertex_tolerance(&first)?, vertex_tolerance(&last)?))
-}
-
-/// Native uses -1 for a missing endpoint vertex.
-fn vertex_tolerance(vertex: &rustycad_tkbrep::topods::Vertex) -> Result<f64, Failure> {
-    if vertex.is_null() {
-        return Ok(-1.0);
-    }
-    BRepTool::vertex_tolerance(vertex)
-}
-
-/// The bounds and winding of a wire's p-curves on a conical face.
-fn conical_loop_bounds(
-    face: &Face,
-    wire: &Wire,
-    tolerance: f64,
-) -> Result<Option<ConicalLoopBounds>, Failure> {
-    conical_bounds_from_pcurves(wire, tolerance, |edge| {
-        ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)
-    })
-}
+/// The bounds and winding of a wire's p-curves on the analyzed conical surface.
 pub(super) fn conical_bounds_on_surface(
     wire: &Wire,
     surface: &Handle<dyn GeomSurface>,
@@ -153,41 +98,6 @@ where
     } else {
         Ok(None)
     }
-}
-
-/// Builds OCCT's apex p-curve edge and returns a face copy containing both wires.
-pub(super) fn repair_periodic_cone(face: &Face, tolerance: f64) -> Result<Option<Shape>, Failure> {
-    let wires = face_wires(face)?;
-    if wires.len() != 1 {
-        return Ok(None);
-    }
-    let (surface, _) = BRepTool::surface_with_location(face)?;
-    let cone = Handle::<GeomConicalSurface>::down_cast(&surface);
-    let Some(cone) = cone.get() else {
-        return Ok(None);
-    };
-    add_wire_pcurves(face, &wires[0], &surface, tolerance)?;
-    let bounds = conical_loop_bounds(face, &wires[0], tolerance)?;
-    let Some(bounds) = bounds else {
-        return Ok(None);
-    };
-    let apex_v = -cone.ref_radius() / cone.semi_angle().sin();
-    if (apex_v - bounds.min_v).abs() <= tolerance
-        || (apex_v - bounds.max_v).abs() <= tolerance
-        || (apex_v < bounds.max_v && apex_v > bounds.min_v)
-    {
-        return Ok(None);
-    }
-    build_apex_face(
-        face,
-        &wires[0],
-        cone,
-        &bounds,
-        apex_v,
-        true,
-        precision::confusion(),
-    )
-    .map(Some)
 }
 
 /// Creates the degenerated edge at the cone apex and inserts it into an empty face copy.
