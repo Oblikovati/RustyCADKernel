@@ -83,6 +83,11 @@ fn xy_products(a: Xy, b: Xy, s: f64, m: Matrix2) {
     c.multiply_matrix(m);
     pair(c);
     c = a;
+    c += b;
+    pair(c);
+    c -= b;
+    pair(c);
+    c = a;
     c *= b;
     pair(c);
     c = a;
