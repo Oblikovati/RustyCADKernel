@@ -13,6 +13,9 @@ from legacy_runtime_evidence import (
     assess_report,
     file_digest,
     fixed_runtime_inputs,
+    require_clean_runtime_git_state,
+    require_unchanged_runtime_git_state,
+    runtime_git_state,
     tracked_runtime_inputs,
 )
 
@@ -108,6 +111,21 @@ class LegacyRuntimeEvidenceTest(unittest.TestCase):
                 }
             )
             self.assertTrue(required <= tracked_runtime_inputs(root))
+
+    def test_runtime_git_state_requires_same_clean_revision(self) -> None:
+        """Execution metadata pins a clean commit; e.g. a changed checkout fails."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            initialize_occt(root)
+            before = runtime_git_state(root)
+            require_clean_runtime_git_state(before)
+            require_unchanged_runtime_git_state(before, runtime_git_state(root))
+            (root / "dirty.txt").write_text("uncommitted")
+            after = runtime_git_state(root)
+        with self.assertRaisesRegex(ValueError, "Rust source tree must be clean"):
+            require_clean_runtime_git_state(after)
+        with self.assertRaisesRegex(ValueError, "git state changed"):
+            require_unchanged_runtime_git_state(before, after)
 
     def test_missing_tkmath_runtime_helper_hash_marks_report_stale(self) -> None:
         """TKMath proof tools are fingerprinted; e.g. remove its runner hash."""

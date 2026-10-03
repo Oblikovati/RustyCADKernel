@@ -12,7 +12,13 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
-from legacy_runtime_evidence import runtime_input_hashes, require_unchanged_runtime_inputs
+from legacy_runtime_evidence import (
+    runtime_git_state,
+    runtime_input_hashes,
+    require_clean_runtime_git_state,
+    require_unchanged_runtime_git_state,
+    require_unchanged_runtime_inputs,
+)
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, runtime_case_results, verified_native_skips
 from tkernel_native_baseline import compile_sources
@@ -101,6 +107,8 @@ def main():
     report_path.unlink(missing_ok=True)  # Never retain a success report after a failed rerun.
     source = args.source.resolve()
     inventory = snapshot(source)  # Checks exact revision, cleanliness and complete toolkit accounting.
+    initial_rust_state = runtime_git_state(ROOT)
+    require_clean_runtime_git_state(initial_rust_state)
     initial_hashes = runtime_input_hashes(ROOT)
     ledger = json.loads((ROOT / "porting/parity.json").read_text())
     mappings = ledger["tests"]
@@ -220,6 +228,9 @@ def main():
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
     require_unchanged_runtime_inputs(initial_hashes, runtime_input_hashes(ROOT))
+    require_unchanged_runtime_git_state(
+        initial_rust_state, runtime_git_state(ROOT)
+    )
     snapshot(source)  # Reject upstream edits made while native tests were running.
     report = {"schema_version":1,"profile":"linux-gcc-c-locale","revision":inventory['revision'],
               "platform":platform.platform(),"python":platform.python_version(),
@@ -244,6 +255,8 @@ def main():
               "input_sha256":hashlib.sha256(requests.encode()).hexdigest(),
               "output_sha256":hashlib.sha256(oracle.encode()).hexdigest(),
               "source_hashes":initial_hashes,
+              "rust_git_commit":initial_rust_state["commit"],
+              "rust_source_clean":initial_rust_state["clean"],
               "toolkit_complete":False,"scope":"Mapped suites only; full TKernel and DRAW acceptance pending"}
     report_path.write_text(json.dumps(report,indent=2)+'\n')
     print(f"PASS: {len(mappings)} mapped declarations ({len(native_skips)} upstream skips with separate compatibility regressions) and {report['differential_cases_passed']} differential cases; report: {report_path.relative_to(ROOT)}")

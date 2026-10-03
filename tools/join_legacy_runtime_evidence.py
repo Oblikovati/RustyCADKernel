@@ -379,12 +379,23 @@ def runtime_provenance(
     """Bind joined rows to report, Rust revision and exact input manifest; e.g. `runtime_provenance(report, root, sha)`."""
     if not is_digest(report_sha256):
         raise ValueError("report_sha256: expected lowercase SHA-256 digest")
+    report_rust_revision(report)
     manifest = report.get("source_hashes")
     if not isinstance(manifest, dict) or not all(
         isinstance(path, str) and is_digest(digest) for path, digest in manifest.items()
     ):
         raise ValueError("source_hashes: expected relative-path digest manifest")
     return provenance_fields(report, root, report_sha256, cast(JSONObject, manifest))
+
+
+def report_rust_revision(report: JSONObject) -> str:
+    """Require clean run-time Rust provenance; e.g. revision from a verifier report."""
+    revision = text_field(report, "rust_git_commit")
+    if re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", revision) is None:
+        raise ValueError("rust_git_commit: expected a full lowercase Git object ID")
+    if report.get("rust_source_clean") is not True:
+        raise ValueError("rust_source_clean: runtime must capture a clean source tree")
+    return revision
 
 
 def provenance_fields(
@@ -418,13 +429,22 @@ def provenance_payload(
     return {
         "runtime_report_sha256": report_sha256,
         "runtime_report_revision": report["revision"],
-        "rust_revision": git_revision(root),
-        "rust_worktree_clean": git_clean(root),
+        "rust_revision": report_rust_revision(report),
+        "rust_source_clean": report["rust_source_clean"],
+        **join_time_git_provenance(root),
         "runtime_input_manifest_sha256": manifest_sha256,
         "runtime_input_manifest": manifest,
         "join_tool_sha256": hashlib.sha256(
             pathlib.Path(__file__).read_bytes()
         ).hexdigest(),
+    }
+
+
+def join_time_git_provenance(root: pathlib.Path) -> JSONObject:
+    """Label the checkout used to join; e.g. distinguish it from execution revision."""
+    return {
+        "joined_on_rust_revision": git_revision(root),
+        "joined_on_rust_worktree_clean": git_clean(root),
     }
 
 

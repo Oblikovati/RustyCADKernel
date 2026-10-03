@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 import hashlib
 import json
 import os
@@ -16,7 +17,10 @@ from typing import cast
 
 from api_inventory.inputs import JSONObject
 from legacy_runtime_evidence import (
+    require_clean_runtime_git_state,
+    require_unchanged_runtime_git_state,
     runtime_input_hashes,
+    runtime_git_state,
     require_unchanged_runtime_inputs,
 )
 from porting import ROOT, snapshot
@@ -29,6 +33,19 @@ from tkernel_mapping import (
 NATIVE_BUILD = Path("target/occt-modeling-full")
 NATIVE_EXECUTABLE = Path("lin64/gcc/bini/OpenCascadeGTest")
 DECLARATION = re.compile(r"(?:TEST(?:_F)?|TYPED_TEST)\((\w+), (\w+)\)")
+
+
+@dataclass(frozen=True)
+class VerifiedRun:
+    """Pin report inputs before execution; e.g. `VerifiedRun(source, inventory, ...)`."""
+
+    source: Path
+    inventory: JSONObject
+    rows: list[JSONObject]
+    sources: set[str]
+    input_hashes: dict[str, str]
+    rust_state: JSONObject
+    cargo_target_dir: Path
 
 
 def command(
@@ -226,16 +243,64 @@ def execute_verified_rows(
     sources: set[str],
 ) -> JSONObject:
     """Run source-bound mapped suites; e.g. `execute_verified_rows(args, source, inventory, rows, paths)`."""
-    before = runtime_input_hashes(ROOT)
-    native, native_provenance = run_native(rows, source, args)
+    rust_state = runtime_git_state(ROOT)
+    require_clean_runtime_git_state(rust_state)
+    run = VerifiedRun(
+        source,
+        inventory,
+        rows,
+        sources,
+        runtime_input_hashes(ROOT),
+        rust_state,
+        args.cargo_target_dir,
+    )
+    return execute_verified_run(args, run)
+
+
+def execute_verified_run(
+    args: argparse.Namespace,
+    run: VerifiedRun,
+) -> JSONObject:
+    """Run native and Rust cases; e.g. `execute_verified_run(args, run_snapshot)`."""
+    native, provenance = run_native(run.rows, run.source, args)
+    rust_passed = run_mapped_rust_cases(
+        run.rows, native, args.output, args.cargo_target_dir
+    )
+    return finish_verified_run(run, native, rust_passed, provenance)
+
+
+def finish_verified_run(
+    run: VerifiedRun,
+    native: dict[str, str],
+    rust_passed: set[tuple[str, str]],
+    native_provenance: JSONObject,
+) -> JSONObject:
+    """Validate run stability and serialize results; e.g. `finish_verified_run(run, native, rust, provenance)`."""
+    validate_run_inputs(run.input_hashes, run.source, run.inventory, run.rust_state)
+    return report(
+        run.rows,
+        run.inventory,
+        run.sources,
+        native,
+        rust_passed,
+        run.input_hashes,
+        native_provenance,
+        run.rust_state,
+        run.cargo_target_dir,
+    )
+
+
+def run_mapped_rust_cases(
+    rows: list[JSONObject],
+    native: dict[str, str],
+    output: Path,
+    cargo_target_dir: Path,
+) -> set[tuple[str, str]]:
+    """Run exact Rust peers of native cases; e.g. `run_mapped_rust_cases(rows, native, output)`."""
     expected, rust_expected = mapped_runtime_sets(rows)
     validate_native_identity_set(native, expected)
-    rust_passed = rust_statuses(
-        package_name(rows), rust_expected, cargo_env(), args.output
-    )
-    validate_run_inputs(before, source, inventory)
-    return report(
-        rows, inventory, sources, native, rust_passed, before, native_provenance
+    return rust_statuses(
+        package_name(rows), rust_expected, cargo_env(cargo_target_dir), output
     )
 
 
@@ -246,10 +311,14 @@ def validate_native_identity_set(observed: dict[str, str], expected: set[str]) -
 
 
 def validate_run_inputs(
-    before: dict[str, str], source: Path, inventory: JSONObject
+    before: dict[str, str],
+    source: Path,
+    inventory: JSONObject,
+    rust_state: JSONObject,
 ) -> None:
     """Require unchanged Rust inputs and pinned OCCT; e.g. `validate_run_inputs(before, source, inventory)`."""
     require_unchanged_runtime_inputs(before, runtime_input_hashes(ROOT))
+    require_unchanged_runtime_git_state(rust_state, runtime_git_state(ROOT))
     if snapshot(source)["revision"] != inventory["revision"]:
         raise RuntimeError("OCCT revision changed while TKMath tests were running")
 
@@ -263,7 +332,7 @@ def run_native(
     verify_native_discovery(executable, expected, args.output)
     provenance = native_hashes(cache, executable, args.build_dir, source)
     statuses = execute_native_filter(executable, expected, args.output)
-    verify_native_hashes(cache, executable, provenance)
+    verify_native_hashes(cache, executable, args.build_dir, provenance)
     return statuses, provenance
 
 
@@ -305,13 +374,62 @@ def native_hashes(
     cache: Path, executable: Path, build: Path, source: Path
 ) -> JSONObject:
     """Fingerprint the native test build; e.g. `native_hashes(cache, exe, build, source)`."""
+    libraries = native_library_hashes(executable, build)
     return {
         "build_directory": str(build.resolve()),
         "cmake_cache_sha256": sha256(cache),
         "cmake_home_directory": str(source),
         "executable": str(executable.resolve()),
         "executable_sha256": sha256(executable),
+        "linked_libraries_sha256": libraries,
     }
+
+
+def native_library_hashes(executable: Path, build: Path) -> JSONObject:
+    """Hash resolved OCCT and GoogleTest libraries; e.g. `native_library_hashes(exe, build)`."""
+    result = subprocess.run(
+        ["ldd", str(executable)],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=native_env(),
+    )
+    return hash_linked_native_libraries(result.stdout, build)
+
+
+def hash_linked_native_libraries(output: str, build: Path) -> JSONObject:
+    """Hash linked libraries below the build; e.g. `hash_linked_native_libraries(text, build)`."""
+    libraries = linked_native_library_paths(output)
+    require_native_library_set(libraries)
+    build_root = build.resolve()
+    return {
+        str(Path(path).resolve().relative_to(build_root)): sha256(Path(path))
+        for path in sorted(libraries.values())
+    }
+
+
+def linked_native_library_paths(output: str) -> dict[str, str]:
+    """Parse OCCT and GoogleTest `ldd` paths; e.g. `libTKMath.so => /build/libTKMath.so`."""
+    paths: dict[str, str] = {}
+    for line in output.splitlines():
+        match = re.match(r"\s*(lib(?:TK|gtest)[^ ]*)\s+=>\s+(\S+)", line)
+        if match is not None and match.group(2) == "not":
+            raise RuntimeError(f"Native shared library is unresolved: {match.group(1)}")
+        if match is not None:
+            paths[match.group(1)] = match.group(2)
+    return paths
+
+
+def require_native_library_set(libraries: dict[str, str]) -> None:
+    """Require the linked test and core libraries; e.g. TKernel, TKMath, GTest."""
+    prefixes = ("libTKernel.so", "libTKMath.so", "libgtest.so", "libgtest_main.so")
+    missing = [
+        prefix
+        for prefix in prefixes
+        if not any(name.startswith(prefix) for name in libraries)
+    ]
+    if missing:
+        raise RuntimeError(f"Native runtime lacks linked libraries: {missing!r}")
 
 
 def execute_native_filter(
@@ -333,11 +451,14 @@ def execute_native_filter(
     return native_statuses(xml_path, expected)
 
 
-def verify_native_hashes(cache: Path, executable: Path, before: JSONObject) -> None:
+def verify_native_hashes(
+    cache: Path, executable: Path, build: Path, before: JSONObject
+) -> None:
     """Ensure the build identity stayed fixed; e.g. `verify_native_hashes(cache, exe, provenance)`."""
     if (
         sha256(executable) != before["executable_sha256"]
         or sha256(cache) != before["cmake_cache_sha256"]
+        or native_library_hashes(executable, build) != before["linked_libraries_sha256"]
     ):
         raise RuntimeError(
             "Native test binary or CMake provenance changed during the run"
@@ -346,14 +467,18 @@ def verify_native_hashes(cache: Path, executable: Path, before: JSONObject) -> N
 
 def native_env() -> dict[str, str]:
     """Set the native oracle's deterministic C locale; e.g. `native_env()`."""
-    return dict(os.environ, LC_ALL="C", LANG="C")
+    env = dict(os.environ, LC_ALL="C", LANG="C")
+    env.pop("LD_LIBRARY_PATH", None)
+    env.pop("LD_PRELOAD", None)
+    return env
 
 
-def cargo_env() -> dict[str, str]:
-    """Expose the pinned rustup toolchain; e.g. `cargo_env()`."""
+def cargo_env(target_dir: Path) -> dict[str, str]:
+    """Pin Cargo artifacts to this checkout; e.g. `cargo_env(ROOT / 'target')`."""
     env = native_env()
     cargo_bin = Path.home() / ".cargo/bin"
     env["PATH"] = str(cargo_bin) + os.pathsep + env["PATH"]
+    env["CARGO_TARGET_DIR"] = str(target_dir.resolve())
     return env
 
 
@@ -365,17 +490,25 @@ def report(
     rust_passed: set[tuple[str, str]],
     input_hashes: dict[str, str],
     native_provenance: JSONObject,
+    rust_state: JSONObject,
+    cargo_target_dir: Path,
 ) -> JSONObject:
     """Serialize observed pairs without asserting toolkit completion; e.g. `report(...)`."""
     return {
-        **report_header_fields(inventory, input_hashes, native_provenance),
+        **report_header_fields(
+            inventory, input_hashes, native_provenance, rust_state, cargo_target_dir
+        ),
         **runtime_counts_fields(rows, native, rust_passed),
         **runtime_case_fields(rows, native, rust_passed, sources, native_provenance),
     }
 
 
 def report_header_fields(
-    inventory: JSONObject, input_hashes: dict[str, str], native: JSONObject
+    inventory: JSONObject,
+    input_hashes: dict[str, str],
+    native: JSONObject,
+    rust_state: JSONObject,
+    cargo_target_dir: Path,
 ) -> JSONObject:
     """Mark report scope and runtime inputs; e.g. `report_header_fields(inventory, hashes, native)`."""
     return {
@@ -383,10 +516,20 @@ def report_header_fields(
         "runtime_evidence_schema": 1,
         "runtime_evidence_toolkit": "TKMath",
         "revision": inventory["revision"],
+        **rust_report_fields(rust_state, cargo_target_dir),
         "source_hashes": input_hashes,
         "native_provenance": native,
         "toolkit_complete": False,
         "scope": "Mapped TKMath cases only; declaration and toolkit acceptance remain pending",
+    }
+
+
+def rust_report_fields(rust_state: JSONObject, cargo_target_dir: Path) -> JSONObject:
+    """Record run-time Rust identity and Cargo target; e.g. `rust_report_fields(state, target)`."""
+    return {
+        "rust_git_commit": rust_state["commit"],
+        "rust_source_clean": rust_state["clean"],
+        "cargo_target_directory": str(cargo_target_dir.resolve()),
     }
 
 
@@ -428,6 +571,7 @@ def arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output", type=Path, default=ROOT / "target/oracle-tkmath-legacy"
     )
+    parser.add_argument("--cargo-target-dir", type=Path, default=ROOT / "target")
     parser.add_argument("--jobs", type=int, default=2)
     return parser.parse_args()
 
