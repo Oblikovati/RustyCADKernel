@@ -71,6 +71,14 @@ static TopoDS_Wire makeReversedCircleOccurrencesWire() {
   return wireBuilder.Wire();
 }
 
+static TopoDS_Wire makeClosedCircleWire() {
+  const gp_Circ circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 2.0);
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, 0.0, M_PI));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(circle, M_PI, 2.0 * M_PI));
+  return wireBuilder.Wire();
+}
+
 static TopoDS_Wire makeReverseOrderWire() {
   BRepBuilderAPI_MakeWire wireBuilder;
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(3, 0, 0)));
@@ -155,5 +163,6 @@ int main() {
   runCase("circle_three", makeThreeCircleWire(), true);
   runCase("circle_reverse_order", makeReverseCircleWire(), true);
   runCase("circle_reversed_occurrences", makeReversedCircleOccurrencesWire(), true);
+  runCase("circle_closed", makeClosedCircleWire(), true);
   runPlanarFaceCase();
 }
