@@ -90,6 +90,8 @@ pub use face_divide_area::ShapeUpgradeFaceDivideArea;
 
 mod shape_divide;
 pub use shape_divide::{ShapeDivideFields, ShapeDivider, ShapeUpgradeShapeDivide};
+mod shape_divide_continuity;
+pub use shape_divide_continuity::ShapeUpgradeShapeDivideContinuity;
 
 mod shape_divide_angle;
 pub use shape_divide_angle::ShapeUpgradeShapeDivideAngle;
