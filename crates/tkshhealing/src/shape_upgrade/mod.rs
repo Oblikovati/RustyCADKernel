@@ -61,3 +61,6 @@ pub use closed_edge_divide::ShapeUpgradeClosedEdgeDivide;
 
 mod split_surface_angle;
 pub use split_surface_angle::ShapeUpgradeSplitSurfaceAngle;
+
+mod split_curve2d_continuity;
+pub use split_curve2d_continuity::ShapeUpgradeSplitCurve2dContinuity;
