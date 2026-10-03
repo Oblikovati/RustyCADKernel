@@ -50,12 +50,13 @@ def source_identity(filename: str, source: pathlib.Path) -> str:
 
 
 def declaration_identity(row: JSONObject) -> str:
-    """Use USR plus canonical signature to retain SFINAE overloads."""
+    """Use normalized USR signatures so spelling changes do not split redeclarations."""
     usr = row.get("usr")
+    signature = row.get("identity_signature", row.get("signature"))
     components = [
         usr,
         row.get("kind"),
-        row.get("signature"),
+        signature,
         row.get("template_signature"),
     ]
     if not usr:
@@ -64,7 +65,7 @@ def declaration_identity(row: JSONObject) -> str:
             row.get("expansion_location"),
             row.get("spelling_location"),
             row.get("parent_usr"),
-            row.get("signature"),
+            signature,
             row.get("qualified_name"),
             row.get("kind"),
         ]
@@ -90,7 +91,12 @@ def compare_declarations(
     records: InventoryRecords, first: JSONObject, other: JSONObject, header: str
 ) -> None:
     """Retain mismatches as blockers instead of choosing a convenient declaration."""
-    for key in ("signature", "api_visible", "exclusion_reason"):
+    signature_key = (
+        "identity_signature"
+        if "identity_signature" in first or "identity_signature" in other
+        else "signature"
+    )
+    for key in (signature_key, "api_visible", "exclusion_reason"):
         if first.get(key) != other.get(key):
             conflict = {
                 "reason": "conflicting_declaration",
@@ -103,15 +109,38 @@ def compare_declarations(
             records.unsupported.append(conflict)
 
 
+def merge_default_arguments(existing: JSONObject, row: JSONObject) -> None:
+    """Preserve default-argument AST observations without using them as identity."""
+    defaults = row.get("default_arguments")
+    if not isinstance(defaults, list):
+        return
+    observations = cast(list[JSONValue], existing["default_argument_observations"])
+    if defaults not in observations:
+        observations.append(defaults)
+    existing["default_argument_capture"] = "complete"
+
+
 def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -> None:
     """Merge redeclarations without losing conflicting signatures or visibility."""
     identifier = declaration_identity(row)
     site = declaration_site(row, header)
     site_key = json.dumps(site, sort_keys=True)
+    default_capture = default_argument_capture_status(row)
     if identifier not in records.declarations:
         records.site_keys[identifier] = {site_key}
         row.update(
-            {"id": identifier, "sites": [site], "stable_identity": bool(row.get("usr"))}
+            {
+                "id": identifier,
+                "sites": [site],
+                "signature_variants": [row.get("signature")],
+                "default_argument_capture": default_capture,
+                "default_argument_observations": (
+                    [row["default_arguments"]]
+                    if isinstance(row.get("default_arguments"), list)
+                    else []
+                ),
+                "stable_identity": bool(row.get("usr")),
+            }
         )
         records.declarations[identifier] = row
         return
@@ -120,7 +149,19 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
     if site_key not in records.site_keys[identifier]:
         records.site_keys[identifier].add(site_key)
         sites.append(site)
+    signatures = cast(list[JSONValue], existing["signature_variants"])
+    if row.get("signature") not in signatures:
+        signatures.append(row.get("signature"))
+    merge_default_arguments(existing, row)
     compare_declarations(records, existing, row, header)
+
+
+def default_argument_capture_status(row: JSONObject) -> str:
+    if isinstance(row.get("default_arguments"), list):
+        return "complete"
+    if isinstance(row.get("parameter_types"), list):
+        return "unavailable"
+    return "not_applicable"
 
 
 def merge_macro(records: InventoryRecords, row: JSONObject, header: str) -> None:
@@ -237,20 +278,41 @@ def consume_capture(
 
 def exclude_implementation_only_declarations(records: InventoryRecords) -> int:
     """Withhold source-TU definitions lacking any header declaration site."""
-    implementation_suffixes = {".c", ".cc", ".cpp", ".cxx"}
     excluded = 0
     for declaration in records.declarations.values():
         sites = cast(list[JSONObject], declaration["sites"])
         sources = [site.get("source") for site in sites]
         has_header_site = any(
-            pathlib.Path(str(path)).suffix not in implementation_suffixes
-            for path in sources
+            not is_implementation_source(str(path)) for path in sources
         )
         if not sources or has_header_site:
             continue
         declaration["api_visible"] = False
         declaration["api_resolution"] = "implementation_only_without_header_declaration"
         declaration["exclusion_reason"] = "implementation_only_no_header_site"
+        excluded += 1
+    return excluded
+
+
+def is_implementation_source(filename: str) -> bool:
+    """Recognize translation-unit source extensions used by OCCT."""
+    return pathlib.Path(filename).suffix in {".c", ".cc", ".cpp", ".cxx"}
+
+
+def exclude_implementation_only_macros(records: InventoryRecords) -> int:
+    """Keep source-TU macro evidence while withholding it from API candidates."""
+    excluded = 0
+    for macro in records.macros.values():
+        source = macro.get("source")
+        if not isinstance(source, str) or not is_implementation_source(source):
+            continue
+        if macro.get("api_candidate") is not True:
+            continue
+        macro["api_candidate"] = False
+        macro["api_resolution"] = (
+            "implementation_only_macro_without_header_definition"
+        )
+        macro["exclusion_reason"] = "implementation_only_no_header_site"
         excluded += 1
     return excluded
 

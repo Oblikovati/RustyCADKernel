@@ -22,6 +22,7 @@ from api_inventory.merge import (
     consume_capture,
     coverage_rows,
     exclude_implementation_only_declarations,
+    exclude_implementation_only_macros,
     inventory_summary,
     write_jsonl_gzip,
 )
@@ -73,6 +74,7 @@ def export_inventory(
     """Write inventory and failure evidence; e.g. `export_inventory(capture, records, source, output)`."""
     output.mkdir(parents=True, exist_ok=True)
     exclude_implementation_only_declarations(records)
+    exclude_implementation_only_macros(records)
     headers = coverage_rows(capture, records)
     tables = inventory_tables(records, headers, source)
     artifacts = {

@@ -54,8 +54,28 @@ def check_declarations(events):
     assert len({event["template_signature"] for event in sfinae_overloads}) == 1
     unresolved_using = one(events, "declaration", qualified_name="fixture::DependentValueBase::inherited_value")
     assert unresolved_using["kind"] == "UnresolvedUsingValue"
-    assert unresolved_using["exclusion_reason"] == "unresolved_using_value"
-    assert not unresolved_using["api_visible"]
+    assert unresolved_using["api_visible"]
+    assert unresolved_using["api_resolution"] == "unresolved_using_value_target"
+    assert unresolved_using["callable_status"] == "unknown"
+    redeclared = [event for event in declarations if event.get("qualified_name") == "fixture::redeclared_value"]
+    assert len(redeclared) == 2
+    assert len({event["identity_signature"] for event in redeclared}) == 1
+    default_rows = [event for event in declarations if event.get("qualified_name") == "fixture::redeclared_default"]
+    assert len(default_rows) == 2
+    default_observations = [entry for event in default_rows for entry in event["default_arguments"]]
+    assert any(entry["state"] == "explicit" and entry["expression"] == "7" for entry in default_observations)
+    assert any(entry["state"] == "inherited" for entry in default_observations)
+    inherited = one(events, "declaration", qualified_name="fixture::BaseDefaults::inherited_default")
+    assert inherited["default_arguments"][0]["state"] == "explicit"
+    assert inherited["default_arguments"][0]["expression"] == "11"
+    named_templates = [event for event in declarations if event.get("qualified_name") == "fixture::named_template" and event.get("kind") == "FunctionTemplate"]
+    assert len(named_templates) == 2
+    assert len({event["identity_signature"] for event in named_templates}) == 1
+    assert len({event["template_signature"] for event in named_templates}) == 1
+    class_templates = [event for event in declarations if event.get("qualified_name") == "fixture::class_template_parameter" and event.get("kind") == "FunctionTemplate"]
+    assert len(class_templates) == 2
+    assert len({event["identity_signature"] for event in class_templates}) == 1
+    assert len({event["template_signature"] for event in class_templates}) == 1
     generated = one(events, "declaration", qualified_name="fixture::PublicType::from_macro")
     assert generated["macro_generated"]
     assert generated["spelling_location"] != generated["expansion_location"]

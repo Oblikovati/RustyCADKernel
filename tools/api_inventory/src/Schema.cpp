@@ -8,6 +8,7 @@
 #include "clang/Lex/Lexer.h"
 #include "llvm/Support/FormatVariadic.h"
 #include "llvm/Support/raw_ostream.h"
+#include <cctype>
 #include <system_error>
 
 namespace api_inventory {
@@ -103,8 +104,6 @@ std::string exclusionFor(const clang::Decl &declaration) {
   if (hasLocalAncestor(declaration)) return "local_scope";
   if (llvm::isa<clang::AccessSpecDecl>(&declaration)) return "access_marker";
   if (llvm::isa<clang::UsingShadowDecl>(&declaration)) return "using_shadow";
-  if (llvm::isa<clang::UnresolvedUsingValueDecl>(&declaration))
-    return "unresolved_using_value";
   if (llvm::isa<clang::FriendDecl>(&declaration)) return "friend_wrapper";
   if (llvm::isa<clang::StaticAssertDecl>(&declaration)) return "static_assert";
   if (llvm::isa<clang::LinkageSpecDecl, clang::ExternCContextDecl>(&declaration))
@@ -145,6 +144,48 @@ llvm::json::Array parameterTypes(const clang::FunctionDecl &function,
   return types;
 }
 
+std::string defaultArgumentState(const clang::ParmVarDecl &parameter) {
+  if (parameter.hasUnparsedDefaultArg()) return "unparsed";
+  if (parameter.hasUninstantiatedDefaultArg()) return "uninstantiated";
+  if (!parameter.hasDefaultArg()) return "absent";
+  return parameter.hasInheritedDefaultArg() ? "inherited" : "explicit";
+}
+
+std::string defaultArgumentExpression(const clang::ParmVarDecl &parameter,
+                                      const clang::ASTContext &context) {
+  if (!parameter.hasDefaultArg()) return "";
+  const clang::SourceRange range = parameter.getDefaultArgRange();
+  if (range.isInvalid()) return "";
+  bool invalid = false;
+  const auto text = clang::Lexer::getSourceText(
+      clang::CharSourceRange::getTokenRange(range), context.getSourceManager(),
+      context.getLangOpts(), &invalid);
+  return invalid ? "" : text.str();
+}
+
+llvm::json::Object defaultArgumentEvent(const clang::ParmVarDecl &parameter,
+                                        unsigned index,
+                                        const clang::ASTContext &context) {
+  const std::string expression = defaultArgumentExpression(parameter, context);
+  const std::string state = defaultArgumentState(parameter);
+  return llvm::json::Object{
+      {"parameter_index", static_cast<int64_t>(index)},
+      {"state", state},
+      {"expression", expression},
+      {"expression_status",
+       state == "absent" ? "not_applicable"
+                         : expression.empty() ? "unavailable" : "captured"}};
+}
+
+llvm::json::Array defaultArguments(const clang::FunctionDecl &function,
+                                   const clang::ASTContext &context) {
+  llvm::json::Array arguments;
+  for (unsigned index = 0; index < function.getNumParams(); ++index)
+    arguments.push_back(defaultArgumentEvent(*function.getParamDecl(index), index,
+                                             context));
+  return arguments;
+}
+
 const clang::FunctionDecl *functionForApi(const clang::Decl &declaration) {
   if (const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration))
     return function;
@@ -161,6 +202,48 @@ const clang::FunctionTemplateDecl *functionTemplateForApi(
   return function ? function->getDescribedFunctionTemplate() : nullptr;
 }
 
+bool isIdentifierCharacter(char character) {
+  return std::isalnum(static_cast<unsigned char>(character)) || character == '_';
+}
+
+std::string replaceIdentifier(const std::string &text, const std::string &name,
+                              const std::string &replacement) {
+  if (name.empty()) return text;
+  std::string result;
+  for (std::size_t index = 0; index < text.size();) {
+    const bool matches = text.compare(index, name.size(), name) == 0;
+    const bool leftBoundary = index == 0 || !isIdentifierCharacter(text[index - 1]);
+    const std::size_t end = index + name.size();
+    const bool rightBoundary = end == text.size() || !isIdentifierCharacter(text[end]);
+    if (matches && leftBoundary && rightBoundary) {
+      result += replacement;
+      index = end;
+    } else {
+      result += text[index++];
+    }
+  }
+  return result;
+}
+
+std::string canonicalSignature(const clang::Decl &declaration,
+                               const clang::ASTContext &context);
+
+std::string identitySignature(const clang::Decl &declaration,
+                              const clang::ASTContext &context) {
+  std::string signature = canonicalSignature(declaration, context);
+  const auto *function = functionForApi(declaration);
+  if (!function) return signature;
+  for (const clang::FunctionDecl *redeclaration : function->redecls()) {
+    for (unsigned index = 0; index < redeclaration->getNumParams(); ++index) {
+      const clang::ParmVarDecl *parameter = redeclaration->getParamDecl(index);
+      if (parameter->getIdentifier())
+        signature = replaceIdentifier(signature, parameter->getNameAsString(),
+                                       "__argument_" + std::to_string(index));
+    }
+  }
+  return signature;
+}
+
 std::string templateParameterSignature(const clang::Decl &declaration,
                                        const clang::ASTContext &context) {
   const auto *templ = functionTemplateForApi(declaration);
@@ -170,7 +253,16 @@ std::string templateParameterSignature(const clang::Decl &declaration,
   clang::PrintingPolicy policy(context.getLangOpts());
   policy.FullyQualifiedName = true;
   templ->getTemplateParameters()->print(output, context, policy);
-  return output.str();
+  output.flush();
+  std::string normalized = signature;
+  for (unsigned index = 0; index < templ->getTemplateParameters()->size(); ++index) {
+    const auto *parameter = llvm::dyn_cast<clang::NamedDecl>(
+        templ->getTemplateParameters()->getParam(index));
+    if (parameter && !parameter->getName().empty())
+      normalized = replaceIdentifier(normalized, parameter->getNameAsString(),
+                                     "__template_param_" + std::to_string(index));
+  }
+  return replaceIdentifier(normalized, "class", "typename");
 }
 
 llvm::json::Array ancestorAccess(const clang::Decl &declaration) {
@@ -256,6 +348,7 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
       {"qualified_name", named ? named->getQualifiedNameAsString() : ""},
       {"kind", kind},
       {"signature", canonicalSignature(declaration, context)},
+      {"identity_signature", identitySignature(declaration, context)},
       {"template_signature", templateParameterSignature(declaration, context)},
       {"access", directAccess(declaration)},
       {"ancestor_access", ancestorAccess(declaration)},
@@ -270,9 +363,14 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
       {"api_visible", reason.empty()},
       {"exclusion_reason", reason},
       {"canonical_type", declarationType(declaration, context)}};
+  if (llvm::isa<clang::UnresolvedUsingValueDecl>(&declaration)) {
+    event["api_resolution"] = "unresolved_using_value_target";
+    event["callable_status"] = "unknown";
+  }
   if (function) {
     event["parameter_types"] = parameterTypes(*function, context, true);
     event["written_parameter_types"] = parameterTypes(*function, context, false);
+    event["default_arguments"] = defaultArguments(*function, context);
     event["variadic"] = function->isVariadic();
   } else {
     event["type"] = declarationType(declaration, context);

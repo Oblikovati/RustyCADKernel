@@ -11,6 +11,7 @@ from api_crosswalk import (
     canonical_parameter_type,
     cpp_candidates,
     parameter_match,
+    resolve_status,
     rust_candidates,
     rust_crates,
 )
@@ -89,6 +90,24 @@ def rust_inventory(paths: list[str]) -> JSONObject:
 
 
 class ApiCoverageCrosswalkTest(unittest.TestCase):
+    def test_unresolved_using_member_blocks_automatic_credit(self) -> None:
+        declaration = cpp_decl(
+            "unresolved", "fixture::Derived::member", [], visible=True
+        )
+        declaration["api_resolution"] = "unresolved_using_value_target"
+        declaration["_toolkits"] = {"TKFixture"}
+        status, rows = cpp_candidates(
+            "fixture::Derived::member",
+            "TKFixture",
+            {"fixture::Derived::member": [declaration]},
+        )
+        self.assertEqual(status, "unresolved_member_target")
+        self.assertEqual(rows, [declaration])
+        self.assertEqual(
+            resolve_status("implemented", status, "unique"),
+            "unresolved_cpp_member_target",
+        )
+
     def test_exact_qualified_signature_selects_matching_overload(self) -> None:
         overloads = [
             cpp_decl("int", "GeomAbs::Convert", ["int"]),

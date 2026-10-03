@@ -140,6 +140,17 @@ class CaptureTests(InventoryFixture):
 
 
 class MergeTests(InventoryFixture):
+    def test_default_arguments_merge_as_observations_not_identity(self) -> None:
+        records = InventoryRecords()
+        for source, default in (("a.hxx", "7"), ("a.cxx", "")):
+            row = self.declaration()
+            row["default_arguments"] = [{"state": "explicit", "expression": default}]
+            consume_event(records, row, source, self.root)
+        merged = next(iter(records.declarations.values()))
+        self.assertEqual(len(records.declarations), 1)
+        self.assertEqual(len(merged["default_argument_observations"]), 2)
+        self.assertEqual(merged["default_argument_capture"], "complete")
+
     def test_overloads_remain_distinct_redeclarations_merge(self) -> None:
         records = InventoryRecords()
         consume_event(records, self.declaration(), "a.hxx", self.root)
@@ -174,9 +185,9 @@ class MergeTests(InventoryFixture):
     def test_conflicts_and_unknown_events_block_proof(self) -> None:
         records = InventoryRecords()
         consume_event(records, self.declaration(), "a.hxx", self.root)
-        consume_event(
-            records, self.declaration(signature="void (long)"), "b.hxx", self.root
-        )
+        hidden = self.declaration()
+        hidden["api_visible"] = False
+        consume_event(records, hidden, "b.hxx", self.root)
         consume_event(records, {"event": "new_clang_event"}, "a.hxx", self.root)
         self.assertEqual(len(records.unsupported), 2)
         summary = inventory_summary({"inputs": {}, "fingerprint": "abc"}, records, [])

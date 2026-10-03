@@ -9,6 +9,7 @@ from api_inventory.merge import (
     consume_event,
     declaration_identity,
     exclude_implementation_only_declarations,
+    exclude_implementation_only_macros,
 )
 
 
@@ -42,6 +43,27 @@ class SourceTranslationUnitTest(unittest.TestCase):
         hidden = records.declarations[declaration_identity(internal)]
         self.assertFalse(hidden["api_visible"])
         self.assertEqual(hidden["exclusion_reason"], "implementation_only_no_header_site")
+
+    def test_source_only_macros_remain_as_excluded_evidence(self) -> None:
+        records = InventoryRecords()
+        consume_event(
+            records,
+            {
+                "event": "macro",
+                "source": "src/private.cxx",
+                "name": "PRIVATE",
+                "api_candidate": True,
+                "location": {},
+            },
+            "private.cxx",
+            pathlib.Path("/"),
+        )
+        self.assertEqual(exclude_implementation_only_macros(records), 1)
+        macro = next(iter(records.macros.values()))
+        self.assertFalse(macro["api_candidate"])
+        self.assertEqual(
+            macro["exclusion_reason"], "implementation_only_no_header_site"
+        )
 
 
 if __name__ == "__main__":
