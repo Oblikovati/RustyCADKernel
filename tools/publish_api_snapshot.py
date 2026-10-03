@@ -10,6 +10,7 @@ import pathlib
 import shutil
 
 from api_inventory.inputs import JSONObject, digest, read_object, object_rows
+from api_tool_hashes import implementation_hashes_match
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DETAIL_TABLES = {
@@ -62,7 +63,10 @@ def snapshot_summary(
 
 
 def publish_snapshot(
-    rust: pathlib.Path, report: pathlib.Path, output: pathlib.Path
+    rust: pathlib.Path,
+    report: pathlib.Path,
+    output: pathlib.Path,
+    project_root: pathlib.Path = ROOT,
 ) -> None:
     """Persist the exact crosswalk inputs; e.g. `publish_snapshot(rust, report, output)`."""
     document = read_object(report)
@@ -71,6 +75,17 @@ def publish_snapshot(
         raise ValueError(
             f"Rust snapshot {rust}: expected the exact crosswalk input hash, got {fingerprints!r}"
         )
+    tool_hashes = document.get("tool_implementation_sha256")
+    if not implementation_hashes_match(project_root, tool_hashes):
+        raise ValueError("API report implementation hashes are missing or stale")
+    rust_tools = read_object(rust).get("tool_implementation_sha256")
+    expected_rust_tools = (
+        {"rust_normalizer": tool_hashes["rust_normalizer"]}
+        if isinstance(tool_hashes, dict)
+        else None
+    )
+    if rust_tools != expected_rust_tools:
+        raise ValueError("Rust snapshot normalizer hashes differ from the API report")
     output.mkdir(parents=True, exist_ok=True)
     artifacts = {
         label: compress_snapshot(path, output / f"{label}.json.gz")

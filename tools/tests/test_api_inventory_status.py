@@ -7,6 +7,7 @@ import unittest
 
 from api_inventory.inputs import JSONObject, digest
 from api_inventory_status import compiler_status_lines
+from api_tool_hashes import IMPLEMENTATION_FILES, implementation_hashes
 
 
 class CompilerSnapshotFixture:
@@ -14,14 +15,23 @@ class CompilerSnapshotFixture:
 
     def __init__(self, root: Path) -> None:
         self.root = root
+        self.create_tool_inputs()
         self.folder = root / "porting/api-inventory"
         self.folder.mkdir(parents=True)
         self.report: JSONObject = {
             "input_sha256": self.input_hashes(),
             "rust_capture_inputs": {"workspace_inputs_sha256": "source"},
+            "tool_implementation_sha256": implementation_hashes(root),
             "artifacts": self.archive_hashes(),
         }
         (self.folder / "completeness.json").write_text(json.dumps(self.report))
+
+    def create_tool_inputs(self) -> None:
+        for paths in IMPLEMENTATION_FILES.values():
+            for relative in paths:
+                path = self.root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(f"fixture:{relative}")
 
     def input_hashes(self) -> JSONObject:
         paths = {
@@ -81,4 +91,24 @@ class CompilerStatusTests(unittest.TestCase):
                 (fixture.folder / name).write_text("changed")
                 self.assertIn("STALE", compiler_status_lines(root, "source")[0])
                 (fixture.folder / name).unlink()
+                self.assertIn("STALE", compiler_status_lines(root, "source")[0])
+
+    def test_legacy_snapshot_without_tool_metadata_is_stale(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            fixture = CompilerSnapshotFixture(root)
+            fixture.report.pop("tool_implementation_sha256")
+            (fixture.folder / "completeness.json").write_text(json.dumps(fixture.report))
+            self.assertIn("STALE", compiler_status_lines(root, "source")[0])
+
+    def test_tool_edit_or_removal_makes_published_summary_stale(self) -> None:
+        for remove in (False, True):
+            with self.subTest(remove=remove), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                fixture = CompilerSnapshotFixture(root)
+                tool = root / "tools/rustdoc_declarations.py"
+                if remove:
+                    tool.unlink()
+                else:
+                    tool.write_text("changed")
                 self.assertIn("STALE", compiler_status_lines(root, "source")[0])

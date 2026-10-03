@@ -34,6 +34,7 @@ from api_report_inputs import (
     mark_conflicted_declarations,
     verify_conflict_artifact,
 )
+from api_tool_hashes import implementation_hashes, stage_hashes
 
 ROOT = Path(__file__).resolve().parents[1]
 CPP_DEFAULT = ROOT / "porting/api-inventory/occt-declarations.jsonl.gz"
@@ -76,6 +77,19 @@ def read_jsonl(path: Path) -> list[dict[str, JSONValue]]:
                 raise ValueError(f"{path}:{line_number} must be a JSON object")
             rows.append(value)
     return rows
+
+
+def report_tool_hashes(root: Path, rust_doc: dict[str, JSONValue]) -> dict[str, JSONValue]:
+    """Bind a report to current crosswalk code and its Rust inventory normalizer."""
+    recorded = rust_doc.get("tool_implementation_sha256")
+    normalizer = (
+        recorded.get("rust_normalizer")
+        if isinstance(recorded, dict) and set(recorded) == {"rust_normalizer"}
+        else None
+    )
+    if normalizer != stage_hashes(root, "rust_normalizer"):
+        raise ValueError("Rust inventory normalizer hashes are missing or stale")
+    return implementation_hashes(root)
 
 
 def cxx_public(declaration: dict[str, JSONValue]) -> bool:
@@ -413,6 +427,7 @@ def main() -> int:
         },
         cpp_manifest,
     )
+    report["tool_implementation_sha256"] = report_tool_hashes(ROOT, rust_doc)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
