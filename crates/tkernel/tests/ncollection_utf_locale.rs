@@ -115,3 +115,20 @@ fn public_utf_string_tool_owns_wide_buffer_and_converts_back_to_active_locale() 
     );
     assert!(tool.from_locale(b"").is_none());
 }
+
+#[test]
+fn public_utf_string_tool_preserves_zero_output_termination_and_conversion_error() {
+    let _locale = TestThreadLocale::enter(c"C.UTF-8");
+    let mut short = [0xff];
+    assert!(!UtfStringTool::to_locale(&[0xe4, 0], &mut short));
+    assert_eq!(short, [0]);
+
+    let mut empty = [0xff];
+    assert!(!UtfStringTool::to_locale(&[0], &mut empty));
+    assert_eq!(empty, [0]);
+
+    let _c_locale = CLocaleSentry::new();
+    let mut unsupported = [0xff; 4];
+    assert!(UtfStringTool::to_locale(&[0xe4, 0], &mut unsupported));
+    assert_eq!(unsupported, [0xff; 4]);
+}

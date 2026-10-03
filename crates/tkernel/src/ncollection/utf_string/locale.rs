@@ -1,11 +1,13 @@
 //! Multibyte conversion in the active C locale, with OCCT's buffer-sizing quirks.
 use super::UtfString;
-use crate::ncollection::{UtfUnit, WideChar};
+use crate::ncollection::UtfUnit;
+#[cfg(not(target_os = "android"))]
+use crate::ncollection::WideChar;
 
-#[cfg(unix)]
+#[cfg(all(unix, not(target_os = "android")))]
 #[path = "locale_unix.rs"]
 mod platform;
-#[cfg(not(unix))]
+#[cfg(all(not(unix), not(target_os = "android")))]
 #[path = "locale_fallback.rs"]
 mod platform;
 
@@ -39,10 +41,16 @@ impl UtfStringTool {
 
     /// Converts a wide-character sequence into the active locale; `UtfStringTool::to_locale(wide, &mut bytes)`.
     ///
-    /// The input may include its terminating zero. A false result means the converted output
-    /// wrote no bytes; a full buffer follows `wcstombs` and may have no terminator.
+    /// The input may include its terminating zero. A zero conversion stores a terminator when
+    /// possible; a full buffer follows `wcstombs` and may have no terminator.
     pub fn to_locale(wide_string: &[WideChar], buffer: &mut [u8]) -> bool {
-        platform::encode(wide_string, buffer) != 0
+        if platform::encode(wide_string, buffer) != 0 {
+            return true;
+        }
+        if let Some(first) = buffer.first_mut() {
+            *first = 0;
+        }
+        false
     }
 }
 
@@ -57,6 +65,9 @@ impl<T: UtfUnit> UtfString<T> {
     /// use rustycad_tkernel::ncollection::UtfString;
     /// let mut text = UtfString::<u8>::new();
     /// text.from_locale(b"abc", -1);
+    /// #[cfg(target_os = "android")]
+    /// assert_eq!(text.to_c_string(), b"abc\0");
+    /// #[cfg(not(target_os = "android"))]
     /// assert_eq!(text.to_c_string(), b"a\0");
     /// ```
     pub fn from_locale(&mut self, text: &[u8], length: i32) {
@@ -112,15 +123,7 @@ impl<T: UtfUnit> UtfString<T> {
     #[cfg(not(target_os = "android"))]
     fn to_locale_tool(&self, buffer: &mut [u8]) -> bool {
         let wide = UtfString::<WideChar>::from_unicode_units(&self.units, self.length);
-        if !UtfStringTool::to_locale(wide.to_c_string(), buffer) {
-            // The native code stores the terminator even into a zero-sized buffer; a slice
-            // cannot be written past its end, so an empty buffer stays untouched.
-            if let Some(first) = buffer.first_mut() {
-                *first = 0;
-            }
-            return false;
-        }
-        true
+        UtfStringTool::to_locale(wide.to_c_string(), buffer)
     }
 }
 
