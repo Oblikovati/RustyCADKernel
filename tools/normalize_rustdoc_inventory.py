@@ -14,6 +14,7 @@ from api_inventory_capture import capture_files, index_records, verify_artifact
 from api_inventory_json import JSONValue, array_value, declaration_digest, integer_value, object_value
 from api_inventory_json import read_json, sha256_bytes, string_value
 from api_inventory_reexports import resolve_cross_crate_reexports, source_hashes
+from rustdoc_impl_ownership import inherent_members, unresolved_impl_owner_links
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DEFAULT_CAPTURE = ROOT / "target/api-proof/rustdoc-json"
 DEFAULT_OUTPUT = ROOT / "target/api-proof/rust-api-inventory.json"
@@ -204,25 +205,6 @@ def member_ids(kind: str, body: Mapping[str, JSONValue]) -> list[JSONValue]:
     return []
 
 
-def inherent_members(item: Mapping[str, JSONValue], path: str, items: Mapping[str, dict[str, JSONValue]],
-                     paths: Mapping[str, JSONValue], source_root: pathlib.Path,
-                     unresolved: list[str]) -> list[dict[str, JSONValue]]:
-    _, body = item_inner(item)
-    impl_ids = body.get("impls", [])
-    output = []
-    for impl_id in array_value(impl_ids, "impls"):
-        impl = items.get(str(impl_id))
-        if impl is None:
-            continue
-        impl_kind, impl_body = item_inner(impl)
-        if impl_kind != "impl" or impl_body.get("is_synthetic") is True:
-            continue
-        if impl_body.get("blanket_impl") is not None:
-            continue
-        output.extend(visible_impl_items(impl_body, path, items, paths, source_root, unresolved))
-    return output
-
-
 def visible_impl_items(impl: Mapping[str, JSONValue], path: str, items: Mapping[str, dict[str, JSONValue]],
                        paths: Mapping[str, JSONValue], source_root: pathlib.Path,
                        unresolved: list[str]) -> list[dict[str, JSONValue]]:
@@ -265,6 +247,9 @@ def make_reachable_inventory(document: Mapping[str, JSONValue], source_root: pat
         raise ValueError(f"rustdoc root {root_name} does not match {crate_name}")
     state = WalkState(items, paths, source_root)
     walk_module(root_item, root_name, state, set())
+    state.unresolved.extend(
+        unresolved_impl_owner_links(state.foreign_impl_links, state.owned_impl_ids)
+    )
     return {"crate": crate_name, "declarations": state.entries,
             "unclassified_kinds": {"counts": unsupported_counts(items),
                                     "scope": "raw index item kinds not classified by this normalizer"},
@@ -280,6 +265,8 @@ class WalkState:
         self.entries: list[dict[str, JSONValue]] = []
         self.unresolved: list[str] = []
         self.seen: set[tuple[str, str]] = set()
+        self.foreign_impl_links: dict[str, set[str]] = {}
+        self.owned_impl_ids: set[str] = set()
 
 
 def walk_module(item: Mapping[str, JSONValue], path: str, state: WalkState,
@@ -322,7 +309,9 @@ def expose_child(item: Mapping[str, JSONValue], parent: str, active: set[str], s
     state.seen.add(key)
     state.entries.append(record_entry(path, item_id, item, state.source_root, state.paths, state.unresolved))
     state.entries.extend(member_entries(item, path, state.items, state.paths, state.source_root, state.unresolved))
-    state.entries.extend(inherent_members(item, path, state.items, state.paths, state.source_root, state.unresolved))
+    state.entries.extend(
+        inherent_members(item, path, state, item_inner, visible_impl_items)
+    )
 
 
 def item_name(item: Mapping[str, JSONValue], kind: str, body: Mapping[str, JSONValue]) -> str:
@@ -388,7 +377,9 @@ def expose_alias_target(item: Mapping[str, JSONValue], path: str, target: str,
     entry["declaration_sha256"] = declaration_digest(entry)
     state.entries.append(entry)
     state.entries.extend(member_entries(item, path, state.items, state.paths, state.source_root, state.unresolved))
-    state.entries.extend(inherent_members(item, path, state.items, state.paths, state.source_root, state.unresolved))
+    state.entries.extend(
+        inherent_members(item, path, state, item_inner, visible_impl_items)
+    )
 
 
 def unsupported_counts(items: Mapping[str, dict[str, JSONValue]]) -> dict[str, int]:
