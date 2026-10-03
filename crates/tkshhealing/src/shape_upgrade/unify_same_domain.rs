@@ -1,4 +1,5 @@
 //! Focused same-domain face merge and no-merge behavior for `ShapeUpgrade_UnifySameDomain`.
+mod edges;
 mod internal_wires;
 use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepTool;
@@ -101,6 +102,9 @@ impl ShapeUpgradeUnifySameDomain {
         let mut result = fields.input.clone();
         if fields.unify_faces {
             result = merge_coplanar_faces(&result, &fields)?;
+        }
+        if fields.unify_edges {
+            result = edges::merge_two_line_wire_edges(self, &result)?;
         }
         let face_candidate = fields.unify_faces && first_coplanar_pair(&result, &fields)?.is_some();
         let edge_candidate =
