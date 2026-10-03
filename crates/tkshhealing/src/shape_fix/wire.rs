@@ -16,6 +16,8 @@ mod wire_seam;
 mod wire_shifted;
 #[path = "wire_small.rs"]
 mod wire_small;
+#[path = "wire_state.rs"]
+mod wire_state;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
@@ -707,6 +709,11 @@ fn reset_replacement_tolerances(vertex: &Vertex, edge: &Edge) -> Result<(), Fail
 }
 
 impl FixRoot for ShapeFixWire {
+    fn set_precision(&self, precision: f64) {
+        self.parent.set_precision(precision);
+        self.state.read().analyzer.set_precision(precision);
+    }
+
     fn fix_root_data(&self) -> &FixRootData {
         self.parent.fix_root_data()
     }
