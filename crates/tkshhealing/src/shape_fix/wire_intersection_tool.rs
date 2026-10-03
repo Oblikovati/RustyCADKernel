@@ -105,8 +105,8 @@ impl ShapeFixIntersectionTool {
 
     /// Repairs point crossings and supported overlaps between direct face wires.
     ///
-    /// Example: `tool.fix_intersecting_wires(&mut face)?`. Full coverage of the second overlap edge
-    /// is supported; partial long-overlap reconstruction remains incomplete.
+    /// Example: `tool.fix_intersecting_wires(&mut face)?`. Contained overlaps and one partial
+    /// endpoint-insertion path are covered; other long-overlap layouts remain incomplete.
     pub fn fix_intersecting_wires(&self, face: &mut Face) -> Result<bool, Failure> {
         wire_pairs::fix_intersecting_wires(self, face)
     }

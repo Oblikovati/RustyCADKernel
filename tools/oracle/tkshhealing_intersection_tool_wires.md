@@ -6,9 +6,10 @@ parameter ranges, and confirms the replacement context maps the new face to
 itself. The next rows exercise middle-to-endpoint vertex reuse and
 endpoint-to-endpoint vertex union. Rust has a separate one-wire guard
 regression. The short-overlap case checks an offset intersection that splits
-each wire once. Two long-overlap cases split one edge into three and reuse its
-middle edge in the other wire, including reversed parameter direction. The
-endpoint-cut case confirms that OCCT trims
+each wire once. Long-overlap cases cover either edge fully containing the
+overlap, reversed parameter direction, and one partial interval that retains a
+target tail while inserting the source middle segment. The endpoint-cut case
+confirms that OCCT trims
 the long edge from parameter 0 to 1 but reports no face replacement and leaves
 the short edge's range intact.
 
@@ -23,5 +24,5 @@ g++ -std=c++17 -I"$OCCT_INSTALL/include/opencascade" \
 LD_LIBRARY_PATH="$OCCT_INSTALL/lib" /tmp/tksh-intersection-tool-wires
 ```
 
-Partial long-overlap replacement and endpoint-cut cases that continue into
-splitting remain outside this fixture.
+Other partial-overlap endpoint arrangements and endpoint cuts that continue
+into splitting remain outside this fixture.

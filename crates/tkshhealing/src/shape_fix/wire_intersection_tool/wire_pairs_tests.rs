@@ -185,6 +185,128 @@ fn reversed_long_overlap_reuses_one_wire_segment_for_the_full_overlap() {
     assert_full_long_overlap_replacement(8.0, -1.0);
 }
 
+#[test]
+fn contained_first_long_overlap_is_inserted_into_the_second_wire() {
+    let mut face = planar_face();
+    let first = Handle::new(ShapeExtendWireData::new());
+    first
+        .add_edge(&line_edge_range(&face, 2.0, 0.0, 0.0, 1.0, 0.0, 6.0), 0)
+        .unwrap();
+    first
+        .add_edge(&line_edge(&face, 30.0, 30.0, 1.0, 0.0), 0)
+        .unwrap();
+    let second_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 10.0);
+    let second_endpoint = ShapeAnalysisEdge::new().first_vertex(&second_edge);
+    BRepBuilder::default()
+        .update_vertex_tolerance(&second_endpoint, 1.0e-5)
+        .unwrap();
+    let second = Handle::new(ShapeExtendWireData::new());
+    second.add_edge(&second_edge, 0).unwrap();
+    second
+        .add_edge(&line_edge(&face, -30.0, -30.0, 0.0, 1.0), 0)
+        .unwrap();
+    add_wires(&mut face, &first, &second);
+    let old_face = face.clone().into_shape();
+    let context = Handle::new(ShapeBuildReShape::new());
+    let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+
+    assert!(tool.fix_intersecting_wires(&mut face).unwrap());
+
+    let wires = direct_wires(&face);
+    assert_eq!([wires[0].nb_children(), wires[1].nb_children()], [2, 4]);
+    assert_eq!(
+        wires
+            .iter()
+            .flat_map(|wire| direct_edge_ranges(wire, &face))
+            .collect::<Vec<_>>(),
+        [0.0, 6.0, 0.0, 2.0, 0.0, 2.0, 0.0, 6.0, 8.0, 10.0, 0.0, 2.0]
+    );
+    let first_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[0]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    let second_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[1]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    assert!(
+        first_data
+            .edge(1)
+            .unwrap()
+            .is_same(&second_data.edge(2).unwrap())
+    );
+    let applied = context
+        .apply(&old_face, rustycad_tkg3d::top_abs::ShapeEnum::Shape)
+        .unwrap();
+    assert!(applied.is_same(&face.clone().into_shape()));
+}
+
+#[test]
+fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
+    let mut face = planar_face();
+    let first = Handle::new(ShapeExtendWireData::new());
+    first
+        .add_edge(&line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 10.0), 0)
+        .unwrap();
+    first
+        .add_edge(&line_edge(&face, 30.0, 30.0, 1.0, 0.0), 0)
+        .unwrap();
+    let second_edge = line_edge_range(&face, 2.0, 0.0, 0.0, 1.0, 0.0, 10.0);
+    let endpoint = ShapeAnalysisEdge::new().first_vertex(&second_edge);
+    BRepBuilder::default()
+        .update_vertex_tolerance(&endpoint, 1.0e-5)
+        .unwrap();
+    let second = Handle::new(ShapeExtendWireData::new());
+    second.add_edge(&second_edge, 0).unwrap();
+    second
+        .add_edge(&line_edge(&face, -30.0, -30.0, 0.0, 1.0), 0)
+        .unwrap();
+    add_wires(&mut face, &first, &second);
+    let old_face = face.clone().into_shape();
+    let context = Handle::new(ShapeBuildReShape::new());
+    let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+
+    assert!(tool.fix_intersecting_wires(&mut face).unwrap());
+
+    let wires = direct_wires(&face);
+    assert_eq!([wires[0].nb_children(), wires[1].nb_children()], [3, 3]);
+    assert_eq!(
+        wires
+            .iter()
+            .flat_map(|wire| direct_edge_ranges(wire, &face))
+            .collect::<Vec<_>>(),
+        [
+            0.0, 2.0, 2.0, 10.0, 0.0, 2.0, 2.0, 10.0, 8.0, 10.0, 0.0, 2.0
+        ]
+    );
+    let first_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[0]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    let second_data = ShapeExtendWireData::from_wire(
+        &rustycad_tkbrep::topods::wire(&wires[1]).unwrap(),
+        true,
+        true,
+    )
+    .unwrap();
+    assert!(
+        first_data
+            .edge(2)
+            .unwrap()
+            .is_same(&second_data.edge(1).unwrap())
+    );
+    let applied = context
+        .apply(&old_face, rustycad_tkg3d::top_abs::ShapeEnum::Shape)
+        .unwrap();
+    assert!(applied.is_same(&face.clone().into_shape()));
+}
+
 fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64) {
     let mut face = planar_face();
     let first_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 10.0);
