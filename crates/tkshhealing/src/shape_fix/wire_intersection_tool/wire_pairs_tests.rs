@@ -249,6 +249,7 @@ fn contained_first_long_overlap_is_inserted_into_the_second_wire() {
 fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
     assert_partial_long_overlap(
         -2.0,
+        1.0,
         1,
         2,
         [0.0, 8.0, 8.0, 10.0, 0.0, 2.0, 0.0, 2.0, 0.0, 8.0, 0.0, 2.0],
@@ -259,6 +260,7 @@ fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
 fn partial_long_overlap_keeps_source_head_and_inserts_target_middle() {
     assert_partial_long_overlap(
         2.0,
+        1.0,
         2,
         1,
         [
@@ -267,8 +269,20 @@ fn partial_long_overlap_keeps_source_head_and_inserts_target_middle() {
     );
 }
 
+#[test]
+fn reversed_partial_long_overlap_replaces_the_native_split_slot() {
+    assert_partial_long_overlap(
+        8.0,
+        -1.0,
+        1,
+        2,
+        [0.0, 8.0, 8.0, 10.0, 0.0, 2.0, 0.0, 8.0, 0.0, 8.0, 0.0, 2.0],
+    );
+}
+
 fn assert_partial_long_overlap(
     second_start: f64,
+    second_direction: f64,
     source_middle_index: i32,
     target_middle_index: i32,
     expected_ranges: [f64; 12],
@@ -281,7 +295,7 @@ fn assert_partial_long_overlap(
     first
         .add_edge(&line_edge(&face, 30.0, 30.0, 1.0, 0.0), 0)
         .unwrap();
-    let second_edge = line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 10.0);
+    let second_edge = line_edge_range(&face, second_start, 0.0, 0.0, second_direction, 0.0, 10.0);
     let endpoint = ShapeAnalysisEdge::new().first_vertex(&second_edge);
     BRepBuilder::default()
         .update_vertex_tolerance(&endpoint, 1.0e-5)
@@ -395,18 +409,32 @@ fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64
 
 #[test]
 fn two_sided_endpoint_cut_trims_long_edge_without_replacing_face() {
-    assert_endpoint_cut(0.5, 1.5);
+    assert_endpoint_cut(0.5, (1.5, 1000.0), false);
+}
+
+#[test]
+fn far_endpoint_cut_trims_long_edge_without_replacing_face() {
+    assert_endpoint_cut(999.0, (0.0, 999.0), true);
 }
 
 #[test]
 fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
-    assert_endpoint_cut(0.0, 1.0);
+    assert_endpoint_cut(0.0, (1.0, 1000.0), false);
 }
 
-fn assert_endpoint_cut(second_start: f64, expected_start: f64) {
+fn assert_endpoint_cut(
+    second_start: f64,
+    expected_long_range: (f64, f64),
+    use_last_vertex_tolerance: bool,
+) {
     let mut face = planar_face();
     let long_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1000.0);
-    let endpoint = ShapeAnalysisEdge::new().first_vertex(&long_edge);
+    let analysis = ShapeAnalysisEdge::new();
+    let endpoint = if use_last_vertex_tolerance {
+        analysis.last_vertex(&long_edge)
+    } else {
+        analysis.first_vertex(&long_edge)
+    };
     BRepBuilder::default()
         .update_vertex_tolerance(&endpoint, 2.0)
         .unwrap();
@@ -438,7 +466,16 @@ fn assert_endpoint_cut(second_start: f64, expected_start: f64) {
             .iter()
             .flat_map(|wire| direct_edge_ranges(wire, &face))
             .collect::<Vec<_>>(),
-        [expected_start, 1000.0, 0.0, 2.0, 0.0, 1.0, 0.0, 2.0]
+        [
+            expected_long_range.0,
+            expected_long_range.1,
+            0.0,
+            2.0,
+            0.0,
+            1.0,
+            0.0,
+            2.0,
+        ]
     );
 }
 
