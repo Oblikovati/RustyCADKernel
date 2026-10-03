@@ -1,6 +1,7 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepBuilderAPI_MakeWire.hxx>
+#include <BRep_Builder.hxx>
 #include <Geom_Plane.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
 #include <NCollection_HArray2.hxx>
@@ -28,6 +29,7 @@ class ComposeProbe : public ShapeFix_ComposeShell
 public:
   using ShapeFix_ComposeShell::LoadWires;
   using ShapeFix_ComposeShell::ComputeCode;
+  using ShapeFix_ComposeShell::BreakWires;
 };
 
 static void runInit()
@@ -134,6 +136,85 @@ static void runSplitEdges()
   std::cout << '\n';
 }
 
+static void runBreakWires()
+{
+  BRep_Builder builder;
+  TopoDS_Vertex vertices[4];
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    builder.MakeVertex(vertices[i], points[i], 1.0e-7);
+  TopoDS_Edge boundary[4];
+  for (int i = 0; i < 4; ++i) {
+    builder.MakeEdge(boundary[i]);
+    builder.Add(boundary[i], vertices[i]);
+    TopoDS_Vertex last = vertices[(i + 1) % 4];
+    last.Orientation(TopAbs_REVERSED);
+    builder.Add(boundary[i], last);
+  }
+  TopoDS_Edge diagonal;
+  builder.MakeEdge(diagonal);
+  builder.Add(diagonal, vertices[1]);
+  TopoDS_Vertex diagonalEnd = vertices[3];
+  diagonalEnd.Orientation(TopAbs_REVERSED);
+  builder.Add(diagonal, diagonalEnd);
+  diagonal.Orientation(TopAbs_EXTERNAL);
+
+  ShapeFix_WireSegment boundarySegment;
+  for (int i = 0; i < 4; ++i) {
+    boundarySegment.AddEdge(0, boundary[i]);
+    boundarySegment.DefineIUMin(i + 1, i + 3);
+  }
+  ShapeFix_WireSegment cutSegment;
+  cutSegment.AddEdge(0, diagonal);
+  cutSegment.Orientation(TopAbs_EXTERNAL);
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  segments.Append(boundarySegment);
+  segments.Append(cutSegment);
+  ComposeProbe tool;
+  tool.BreakWires(segments);
+  std::cout << "break_wires " << segments.Length();
+  for (int i = 1; i <= segments.Length(); ++i) {
+    int umin, umax, vmin, vmax;
+    const ShapeFix_WireSegment& segment = segments(i);
+    std::cout << ' ' << segment.NbEdges() << ':' << segment.Orientation() << ':';
+    for (int j = 1; j <= segment.NbEdges(); ++j) {
+      segment.GetPatchIndex(j, umin, umax, vmin, vmax);
+      if (j > 1) std::cout << ',';
+      std::cout << umin;
+    }
+  }
+  std::cout << '\n';
+}
+
+static void runInternalExternalBreakWires()
+{
+  BRep_Builder builder;
+  TopoDS_Vertex vertices[3];
+  for (int i = 0; i < 3; ++i)
+    builder.MakeVertex(vertices[i], gp_Pnt(i, 0, 0), 1.0e-7);
+  TopoDS_Edge edges[2];
+  for (int i = 0; i < 2; ++i) {
+    builder.MakeEdge(edges[i]);
+    builder.Add(edges[i], vertices[i]);
+    TopoDS_Vertex last = vertices[i + 1];
+    last.Orientation(TopAbs_REVERSED);
+    builder.Add(edges[i], last);
+  }
+  edges[0].Orientation(TopAbs_EXTERNAL);
+  ShapeFix_WireSegment segment;
+  segment.AddEdge(0, edges[0]);
+  segment.AddEdge(0, edges[1]);
+  segment.Orientation(TopAbs_INTERNAL);
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  segments.Append(segment);
+  ComposeProbe tool;
+  tool.BreakWires(segments);
+  std::cout << "break_wires_internal_external " << segments.Length();
+  for (int i = 1; i <= segments.Length(); ++i)
+    std::cout << ' ' << segments(i).NbEdges() << ':' << segments(i).Orientation();
+  std::cout << '\n';
+}
+
 static void runComputeCode()
 {
   BRepBuilderAPI_MakeWire wire;
@@ -190,6 +271,8 @@ int main()
   runLoadWires();
   runMixedLoadWires();
   runComputeCode();
+  runBreakWires();
+  runInternalExternalBreakWires();
   runPatchLimits();
   runSplitEdges();
 }
