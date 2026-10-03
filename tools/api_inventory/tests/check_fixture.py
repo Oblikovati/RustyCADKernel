@@ -5,6 +5,11 @@ import subprocess
 import sys
 import tempfile
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
+
+from api_inventory.merge import InventoryRecords, merge_declaration
+from api_inventory.template_identity import normalize_template_signature
+
 
 def run_extract(executable: str, root: pathlib.Path, header: pathlib.Path):
     command = [
@@ -84,6 +89,26 @@ def check_declarations(events):
     assert generated["spelling_location"] != generated["expansion_location"]
 
 
+def check_merged_template_metadata(events) -> None:
+    plain = dict(one(events, "declaration", qualified_name="fixture::scaled"))
+    assert plain["template_signature"] == ""
+    records = InventoryRecords()
+    merge_declaration(records, plain, "Fixture.hxx")
+    assert plain["stable_identity"] and "api_resolution" not in plain
+    unresolved = dict(one(events, "declaration", kind="UnresolvedUsingValue"))
+    assert unresolved["template_signature"] == ""
+    merge_declaration(records, unresolved, "Fixture.hxx")
+    assert unresolved["api_resolution"] == "unresolved_using_value_target"
+    templates = [
+        event["template_signature"]
+        for event in events
+        if event.get("event") == "declaration"
+        and event.get("kind") == "FunctionTemplate"
+    ]
+    results = [normalize_template_signature(item) for item in templates]
+    assert results and all(item.supported for item in results)
+
+
 def check_preprocessor(events, root: pathlib.Path):
     guard = one(events, "macro", name="_Fixture_HeaderFile")
     assert guard["macro_category"] == "include_guard" and not guard["api_candidate"]
@@ -127,6 +152,7 @@ def main():
     result, events = run_extract(executable, fixture_root, header)
     assert result.returncode == 0, result.stderr
     check_declarations(events)
+    check_merged_template_metadata(events)
     check_preprocessor(events, fixture_root)
     summary = one(events, "summary")
     assert summary["complete_for_emit_scope"]
