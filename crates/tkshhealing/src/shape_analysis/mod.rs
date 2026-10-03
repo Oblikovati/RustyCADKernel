@@ -11,7 +11,9 @@ mod shape_tolerance;
 mod shell;
 mod wire_order;
 
-pub use check_small_face::ShapeAnalysisCheckSmallFace;
+pub use check_small_face::{
+    ShapeAnalysisCheckSmallFace, SplittingVertexEdges, SplittingVertexParameters,
+};
 pub use free_bound_data::ShapeAnalysisFreeBoundData;
 pub use geom::ShapeAnalysisGeom;
 pub use shape_tolerance::ShapeAnalysisShapeTolerance;

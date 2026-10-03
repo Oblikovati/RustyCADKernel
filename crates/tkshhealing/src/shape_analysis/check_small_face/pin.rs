@@ -66,17 +66,34 @@ fn check_surface_poles(
     surface: &Handle<dyn GeomSurface>,
     tolerance: f64,
 ) -> Result<Option<PinResult>, Failure> {
-    let bspline = surface.cast::<GeomBSplineSurface>();
-    if let Some(surface) = bspline.get() {
-        return inspect_poles(
-            surface.nb_u_poles(),
-            surface.nb_v_poles(),
-            tolerance,
-            |u, v| surface.pole(u, v),
-        );
+    if let Some(result) = check_bspline_poles(surface, tolerance)? {
+        return Ok(Some(result));
     }
-    let bezier = surface.cast::<GeomBezierSurface>();
-    let Some(surface) = bezier.get() else {
+    check_bezier_poles(surface, tolerance)
+}
+
+fn check_bspline_poles(
+    surface: &Handle<dyn GeomSurface>,
+    tolerance: f64,
+) -> Result<Option<PinResult>, Failure> {
+    let cast = surface.cast::<GeomBSplineSurface>();
+    let Some(surface) = cast.get() else {
+        return Ok(None);
+    };
+    inspect_poles(
+        surface.nb_u_poles(),
+        surface.nb_v_poles(),
+        tolerance,
+        |u, v| surface.pole(u, v),
+    )
+}
+
+fn check_bezier_poles(
+    surface: &Handle<dyn GeomSurface>,
+    tolerance: f64,
+) -> Result<Option<PinResult>, Failure> {
+    let cast = surface.cast::<GeomBezierSurface>();
+    let Some(surface) = cast.get() else {
         return Ok(None);
     };
     inspect_poles(
@@ -100,19 +117,33 @@ fn inspect_poles(
     if sense == 0 {
         return Ok(None);
     }
-    let mut pin_status = match status {
-        1 => ShapeExtendStatus::Done1,
-        2 => ShapeExtendStatus::Done2,
-        _ => ShapeExtendStatus::Ok,
-    };
-    if status == 1 && has_identical_boundary_poles(u_count, v_count, &pole)? {
-        pin_status = ShapeExtendStatus::Done3;
-    }
+    let pin_status = initial_pin_status(status);
+    let pin_status = sharp_pole_status(pin_status, status, (u_count, v_count), &pole)?;
     Ok(Some(PinResult {
         row,
         sense,
         status: pin_status,
     }))
+}
+
+fn initial_pin_status(status: i32) -> ShapeExtendStatus {
+    match status {
+        1 => ShapeExtendStatus::Done1,
+        2 => ShapeExtendStatus::Done2,
+        _ => ShapeExtendStatus::Ok,
+    }
+}
+
+fn sharp_pole_status(
+    previous: ShapeExtendStatus,
+    status: i32,
+    counts: (i32, i32),
+    pole: &impl Fn(i32, i32) -> Result<Point3, Failure>,
+) -> Result<ShapeExtendStatus, Failure> {
+    if status != 1 || !has_identical_boundary_poles(counts.0, counts.1, pole)? {
+        return Ok(previous);
+    }
+    Ok(ShapeExtendStatus::Done3)
 }
 
 fn inspect_bounds(
@@ -157,20 +188,38 @@ fn iso_status(
     tolerance: f64,
     pole: &impl Fn(i32, i32) -> Result<Point3, Failure>,
 ) -> Result<i32, Failure> {
-    let count = if direction == 1 { v_count } else { u_count };
-    let mut bounds = PoleBounds::default();
-    for index in 1..=count {
-        let point = if direction == 1 {
-            pole(rank, index)?
-        } else {
-            pole(index, rank)?
-        };
-        bounds.include(point);
-    }
+    let bounds = iso_bounds(direction, rank, (u_count, v_count), pole)?;
     if bounds.is_small(PIN_TOLERANCE) {
         return Ok(0);
     }
     Ok(if bounds.is_small(tolerance) { 1 } else { 2 })
+}
+
+fn iso_bounds(
+    direction: i32,
+    rank: i32,
+    counts: (i32, i32),
+    pole: &impl Fn(i32, i32) -> Result<Point3, Failure>,
+) -> Result<PoleBounds, Failure> {
+    let mut bounds = PoleBounds::default();
+    let count = if direction == 1 { counts.1 } else { counts.0 };
+    for index in 1..=count {
+        bounds.include(boundary_pole(direction, rank, index, pole)?);
+    }
+    Ok(bounds)
+}
+
+fn boundary_pole(
+    direction: i32,
+    rank: i32,
+    index: i32,
+    pole: &impl Fn(i32, i32) -> Result<Point3, Failure>,
+) -> Result<Point3, Failure> {
+    if direction == 1 {
+        pole(rank, index)
+    } else {
+        pole(index, rank)
+    }
 }
 
 #[derive(Default)]
@@ -229,11 +278,8 @@ fn boundary_has_equal_neighbors(
 ) -> Result<bool, Failure> {
     let count = if direction == 1 { v_count } else { u_count };
     for index in 1..count {
-        let (first, second) = if direction == 1 {
-            (pole(rank, index)?, pole(rank, index + 1)?)
-        } else {
-            (pole(index, rank)?, pole(index + 1, rank)?)
-        };
+        let first = boundary_pole(direction, rank, index, pole)?;
+        let second = boundary_pole(direction, rank, index + 1, pole)?;
         if first.distance(&second) <= POLE_EQUALITY_TOLERANCE {
             return Ok(true);
         }
