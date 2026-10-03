@@ -96,7 +96,7 @@ int main()
   fixer3.ModifyTopologyMode() = true;
   fixer3.SetMaxTolerance(1.e-4);
   const bool changed3 = fixer3.FixLacking(1, false);
-  std::cout << "long=" << changed3 << " count=" << data3->NbEdges()
+  std::cout << "closed=" << changed3 << " count=" << data3->NbEdges()
             << " done1=" << fixer3.LastFixStatus(ShapeExtend_DONE1)
             << " done2=" << fixer3.LastFixStatus(ShapeExtend_DONE2)
             << " done4=" << fixer3.LastFixStatus(ShapeExtend_DONE4)
