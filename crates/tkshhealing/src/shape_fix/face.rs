@@ -2,6 +2,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Context preservation and apex-edge repair for periodic loops on conical faces.
+mod natural_bound;
 mod orientation;
 mod periodic_cone;
 
@@ -169,6 +170,12 @@ impl ShapeFixFace {
     /// Example: `let changed = fixer.fix_orientation()?`.
     pub fn fix_orientation(&self) -> Result<bool, Failure> {
         orientation::fix_orientation_empty_map(self)
+    }
+
+    /// Applies OCCT's empty-face and doubly periodic natural-bound paths;
+    /// `let changed = fixer.fix_add_natural_bound()?`.
+    pub fn fix_add_natural_bound(&self) -> Result<bool, Failure> {
+        natural_bound::fix_add_natural_bound(self)
     }
 
     /// `Perform()`: preserve context replacements and repair a single periodic cone loop.

@@ -9,6 +9,7 @@
 #include <Geom_Plane.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <Geom_SphericalSurface.hxx>
+#include <Geom_ToroidalSurface.hxx>
 #include <NCollection_DataMap.hxx>
 #include <NCollection_List.hxx>
 #include <ShapeFix_Face.hxx>
@@ -26,6 +27,7 @@
 #include <gp_Pln.hxx>
 #include <gp_Sphere.hxx>
 #include <gp_Cylinder.hxx>
+#include <gp_Torus.hxx>
 #include <iostream>
 #include <string>
 
@@ -190,6 +192,70 @@ static void print_shared_seam_reversal_case() {
   std::cout << '\n';
 }
 
+static void print_empty_sphere_natural_bound_case() {
+  occ::handle<Geom_SphericalSurface> surface = new Geom_SphericalSurface(gp_Sphere(gp_Ax3(), 2.0));
+  ShapeFix_Face fixer;
+  fixer.Init(surface, Precision::Confusion(), true);
+  fixer.FixAddNaturalBoundMode() = 0;
+  const bool changed = fixer.FixAddNaturalBound();
+  int wires = 0;
+  for (TopExp_Explorer it(fixer.Face(), TopAbs_WIRE); it.More(); it.Next()) ++wires;
+  std::cout << "empty_sphere_natural_bound changed=" << changed << " wires=" << wires
+            << " orientation=" << fixer.Face().Orientation() << '\n';
+}
+
+static void print_empty_cylinder_natural_bound_case() {
+  occ::handle<Geom_CylindricalSurface> surface = new Geom_CylindricalSurface(gp_Cylinder(gp_Ax3(), 1.0));
+  ShapeFix_Face fixer;
+  fixer.Init(surface, Precision::Confusion(), true);
+  const bool changed = fixer.FixAddNaturalBound();
+  int wires = 0;
+  for (TopExp_Explorer it(fixer.Face(), TopAbs_WIRE); it.More(); it.Next()) ++wires;
+  std::cout << "empty_cylinder_natural_bound changed=" << changed << " wires=" << wires << '\n';
+}
+
+static void print_uninitialized_natural_bound_case() {
+  ShapeFix_Face fixer;
+  std::cout << "uninitialized_natural_bound changed=" << fixer.FixAddNaturalBound() << '\n';
+}
+
+static void print_sphere_wire_natural_bound_case() {
+  occ::handle<Geom_SphericalSurface> surface = new Geom_SphericalSurface(gp_Sphere(gp_Ax3(), 2.0));
+  BRepBuilderAPI_MakeFace patch(surface, 0.2, 1.0, 0.1, 0.5, Precision::Confusion());
+  TopoDS_Wire wire = TopoDS::Wire(TopExp_Explorer(patch.Face(), TopAbs_WIRE).Current());
+  ShapeFix_Face fixer;
+  fixer.Init(surface, Precision::Confusion(), true);
+  fixer.Add(wire);
+  const bool changed = fixer.FixAddNaturalBound();
+  int wires = 0;
+  for (TopExp_Explorer it(fixer.Face(), TopAbs_WIRE); it.More(); it.Next()) ++wires;
+  std::cout << "sphere_wire_natural_bound changed=" << changed << " wires=" << wires << '\n';
+}
+
+static void print_torus_reversed_wire_natural_bound_case() {
+  occ::handle<Geom_Surface> surface = new Geom_ToroidalSurface(gp_Torus(gp_Ax3(), 5.0, 1.0));
+  BRepBuilderAPI_MakeFace patch(surface, 0.2, 1.0, 0.2, 1.0, Precision::Confusion());
+  TopoDS_Wire wire = TopoDS::Wire(TopExp_Explorer(patch.Face(), TopAbs_WIRE).Current());
+  wire.Reverse();
+  TopoDS_Face face;
+  BRep_Builder builder;
+  builder.MakeFace(face, surface, Precision::Confusion());
+  builder.Add(face, wire);
+  ShapeFix_Face fixer(face);
+  fixer.FixAddNaturalBoundMode() = 1;
+  const bool changed = fixer.FixAddNaturalBound();
+  int wires = 0;
+  for (TopExp_Explorer it(fixer.Face(), TopAbs_WIRE); it.More(); it.Next()) {
+    ++wires;
+    TopoDS_Edge edge = TopoDS::Edge(TopExp_Explorer(it.Current(), TopAbs_EDGE).Current());
+    double first = 0, last = 0;
+    const auto pcurve = BRep_Tool::CurveOnSurface(edge, fixer.Face(), first, last);
+    std::cout << " torus_p=" << pcurve->Value((first + last) * 0.5).X() << ','
+              << pcurve->Value((first + last) * 0.5).Y();
+  }
+  std::cout << "\ntorus_reversed_wire_natural_bound changed=" << changed << " wires=" << wires << '\n';
+}
+
 static void print_context_case(const gp_Pln& plane) {
   TopoDS_Face original = face_with_wire(plane, square(20, 20, 24, 24));
   TopoDS_Face replacement = face_with_wire(plane, square(0, 0, 4, 4, true));
@@ -262,6 +328,11 @@ int main() {
   print_case("internal_child_preserved", internal);
   print_periodic_shift_case();
   print_shared_seam_reversal_case();
+  print_empty_sphere_natural_bound_case();
+  print_empty_cylinder_natural_bound_case();
+  print_uninitialized_natural_bound_case();
+  print_sphere_wire_natural_bound_case();
+  print_torus_reversed_wire_natural_bound_case();
   print_context_case(plane);
   print_sphere_natural_bound_case();
   return 0;
