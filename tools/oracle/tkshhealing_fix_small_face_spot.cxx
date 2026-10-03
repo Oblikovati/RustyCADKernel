@@ -53,6 +53,16 @@ static void probe(const char* name, const TopoDS_Shape& input) {
   std::cout << '\n';
 }
 
+static void probe_perform(const char* name, const TopoDS_Shape& input) {
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(input);
+  fixer.Perform();
+  const TopoDS_Shape output = fixer.Shape();
+  std::cout << name << ' ' << output.IsSame(input) << ' ' << output.ShapeType() << ' '
+            << count(output, TopAbs_FACE) << ' ' << count(output, TopAbs_EDGE) << ' '
+            << count(output, TopAbs_VERTEX) << '\n';
+}
+
 static void probe_strip(const char* name, const TopoDS_Shape& input) {
   ShapeFix_FixSmallFace fixer;
   fixer.Init(input);
@@ -71,6 +81,7 @@ int main() {
   std::cout << std::setprecision(17);
   const TopoDS_Shape regular = BRepPrimAPI_MakeBox(1.0, 1.0, 1.0).Shape();
   probe("regular_solid", regular);
+  probe_perform("perform_regular", regular);
   BRep_Builder builder;
   TopoDS_Face tiny_face;
   TopoDS_Wire tiny_wire;
