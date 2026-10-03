@@ -4,7 +4,7 @@ use crate::shape_build::{ShapeBuildEdge, ShapeBuildVertex};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use crate::shape_fix::FixRoot;
 use rustycad_tkbrep::brep_tools::ReShape;
-use rustycad_tkbrep::topods::{Builder, Edge, Vertex};
+use rustycad_tkbrep::topods::{self, Builder, Edge, Vertex};
 use rustycad_tkernel::message::Msg;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
@@ -41,16 +41,16 @@ impl ShapeFixWire {
 
     /// Removes small edges in reverse order and accumulates native status flags.
     /// Example: `fixer.fix_small_all(false, 1.0e-7)?`.
-    pub fn fix_small_all(&self, lock_vertex: bool, small_tolerance: f64) -> Result<bool, Failure> {
+    pub fn fix_small_all(&self, lock_vertex: bool, small_tolerance: f64) -> Result<i32, Failure> {
         self.state.write().small_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
         let Some(analyzer) = self.loaded_wire_analyzer()? else {
-            return Ok(false);
+            return Ok(0);
         };
         for index in (1..=analyzer.nb_edges()).rev() {
             self.fix_small_at(index, lock_vertex, small_tolerance)?;
             self.accumulate_small_status();
         }
-        Ok(self.status_small(ShapeExtendStatus::Done))
+        Ok(i32::from(self.status_small(ShapeExtendStatus::Done)))
     }
 
     /// Repairs one adjacent vertex pair using the analyzer's last CheckConnected result.
@@ -72,6 +72,25 @@ impl ShapeFixWire {
             return Ok(false);
         }
         self.replace_connected_vertices(&analyzer, index, update_wire)
+    }
+
+    /// Repairs every adjacent pair and refreshes context-replaced predecessors in native order.
+    /// Example: `fixer.fix_connected_all(1.0e-7)?`.
+    pub fn fix_connected_all(&self, precision: f64) -> Result<bool, Failure> {
+        self.state.write().connected_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
+        let Some(analyzer) = self.loaded_wire_analyzer()? else {
+            return Ok(false);
+        };
+        let stop = if self.closed_mode() { 0 } else { 1 };
+        for index in ((stop + 1)..=analyzer.nb_edges()).rev() {
+            self.fix_connected_at(index, precision, false)?;
+            self.accumulate_connected_status();
+            self.refresh_next_edge(&analyzer, index, stop)?;
+        }
+        if !self.context().is_null() {
+            self.update_wire()?;
+        }
+        Ok(self.status_connected(ShapeExtendStatus::Done))
     }
 
     fn ready_small_analyzer(&self) -> Result<Option<Handle<ShapeAnalysisWire>>, Failure> {
@@ -162,6 +181,47 @@ impl ShapeFixWire {
     fn accumulate_small_status(&self) {
         let last_status = self.state.read().last_fix_status;
         self.state.write().small_status |= last_status;
+    }
+
+    fn accumulate_connected_status(&self) {
+        let last_status = self.state.read().last_fix_status;
+        self.state.write().connected_status |= last_status;
+    }
+
+    fn refresh_next_edge(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+        stop: i32,
+    ) -> Result<(), Failure> {
+        let context = self.context();
+        if context.is_null() || index - 1 <= stop {
+            return Ok(());
+        }
+        let next = if index - 1 > 1 {
+            index - 2
+        } else {
+            analyzer.nb_edges()
+        };
+        if next == index || next == index - 1 {
+            return Ok(());
+        }
+        let wire_data = analyzer.wire_data();
+        let previous = wire_data.edge(next)?;
+        let context = context.get().ok_or_else(null_context)?;
+        let previous_shape = previous.clone().into_shape();
+        let replacement = ReShape::apply(
+            context,
+            &previous_shape,
+            rustycad_tkg3d::top_abs::ShapeEnum::Shape,
+        )?;
+        if replacement.is_null() || replacement.is_same(&previous.clone().into_shape()) {
+            return Ok(());
+        }
+        if replacement.shape_type()? != rustycad_tkg3d::top_abs::ShapeEnum::Edge {
+            return Ok(());
+        }
+        wire_data.set(&topods::edge(&replacement)?, next)
     }
 
     fn replace_connected_vertices(
@@ -357,6 +417,13 @@ impl ShapeFixWire {
         }
         Ok(())
     }
+}
+
+fn null_context() -> Failure {
+    Failure::with_message(
+        "Standard_NullObject",
+        "ShapeFix_Wire::FixConnected: null context",
+    )
 }
 
 fn should_replace_previous(analyzer: &ShapeAnalysisWire, same_endpoints: bool) -> bool {

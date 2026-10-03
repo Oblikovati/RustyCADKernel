@@ -38,6 +38,7 @@ struct WireFixState {
     degenerated_status: i32,
     last_fix_status: i32,
     small_status: i32,
+    connected_status: i32,
     intersections_status: i32,
     lacking_status: i32,
     closed_mode: bool,
@@ -65,6 +66,7 @@ impl Default for ShapeFixWire {
                 degenerated_status: 0,
                 last_fix_status: 0,
                 small_status: 0,
+                connected_status: 0,
                 intersections_status: 0,
                 lacking_status: 0,
                 closed_mode: true,
@@ -170,6 +172,11 @@ impl ShapeFixWire {
     /// Queries accumulated small-edge repair status; `fixer.status_small(ShapeExtendStatus::Done)`.
     pub fn status_small(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.state.read().small_status, status)
+    }
+
+    /// Query aggregate connection repair flags; `fixer.status_connected(ShapeExtendStatus::Done)`.
+    pub fn status_connected(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().connected_status, status)
     }
 
     /// `FixReorder()`: analyze the loaded 3D endpoints, then apply the proposed order.
@@ -318,7 +325,8 @@ impl ShapeFixWire {
         wire_data.remove(index + replacements.len() as i32)
     }
 
-    fn closed_mode(&self) -> bool {
+    /// Reads native `ClosedMode`; `assert!(fixer.closed_mode())`.
+    pub fn closed_mode(&self) -> bool {
         self.state.read().closed_mode
     }
 
@@ -592,6 +600,7 @@ impl ShapeFixWire {
         state.degenerated_status = 0;
         state.last_fix_status = 0;
         state.small_status = 0;
+        state.connected_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {
