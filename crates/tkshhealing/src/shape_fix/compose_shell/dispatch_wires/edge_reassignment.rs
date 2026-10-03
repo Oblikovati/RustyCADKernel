@@ -28,6 +28,9 @@ fn transform_pcurves(
 ) -> Result<(), Failure> {
     let analyzer = ShapeAnalysisEdge::new();
     let (curve, original_first, original_last) = analyzer.pcurve_on_face(edge, face, false)?;
+    if curve.is_null() {
+        return Ok(());
+    }
     let (curve, first, last) = ShapeBuildEdge.transform_pcurve(
         &curve,
         transform,
@@ -39,8 +42,6 @@ fn transform_pcurves(
         return transform_seam_pcurve(
             edge,
             face,
-            transform,
-            u_factor,
             (curve, first, last),
             (original_first, original_last),
         );
@@ -58,16 +59,21 @@ fn transform_pcurves(
 fn transform_seam_pcurve(
     edge: &Edge,
     face: &Face,
-    transform: Transform2,
-    u_factor: f64,
     first_curve: (Handle<dyn Geom2dCurve>, f64, f64),
     original_range: (f64, f64),
 ) -> Result<(), Failure> {
     let reversed = topods::edge(&edge.reversed())?;
-    let (second_curve, first, last) =
-        ShapeAnalysisEdge::new().pcurve_on_face(&reversed, face, false)?;
-    let (second_curve, second_first, second_last) =
-        ShapeBuildEdge.transform_pcurve(&second_curve, transform, u_factor, first, last)?;
+    let (second_curve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(&reversed, face, false)?;
+    if second_curve.is_null() {
+        return update_pcurve(
+            edge,
+            face,
+            &first_curve.0,
+            first_curve.1,
+            first_curve.2,
+            original_range,
+        );
+    }
     let builder = BRepBuilder::default();
     let curves = if edge.orientation() == Orientation::Forward {
         (&first_curve.0, &second_curve)
@@ -76,7 +82,6 @@ fn transform_seam_pcurve(
     };
     builder.update_edge_pcurves_on_face(edge, curves, face, 0.0)?;
     builder.range_on_face(edge, face, first_curve.1, first_curve.2)?;
-    let _ = (second_first, second_last);
     invalidate_same_range_if_needed(edge, original_range, (first_curve.1, first_curve.2))
 }
 

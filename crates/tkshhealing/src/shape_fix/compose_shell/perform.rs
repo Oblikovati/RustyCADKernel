@@ -47,7 +47,8 @@ fn compose_patch_faces(
     let groups = dispatch_wires(composer, segments)?;
     let (_, original, location, _) = composer.collection_inputs();
     let context = composer.context();
-    assemble_patch_groups(groups, &original, &location, &context)
+    let invert_edge_status = composer.fields.read().invert_edge_status;
+    assemble_patch_groups(groups, &original, &location, &context, invert_edge_status)
 }
 
 fn assemble_patch_groups(
@@ -55,6 +56,7 @@ fn assemble_patch_groups(
     original_face: &Face,
     location: &rustycad_tkmath::toploc::Location,
     context: &rustycad_tkernel::standard::Handle<ShapeBuildReShape>,
+    invert_edge_status: bool,
 ) -> Result<Vec<Face>, Failure> {
     let mut faces = Vec::new();
     for group in groups {
@@ -63,6 +65,7 @@ fn assemble_patch_groups(
             original_face,
             location,
             context,
+            invert_edge_status,
         )?);
     }
     Ok(faces)
@@ -73,6 +76,7 @@ fn assemble_patch_group(
     original_face: &Face,
     location: &rustycad_tkmath::toploc::Location,
     context: &rustycad_tkernel::standard::Handle<ShapeBuildReShape>,
+    invert_edge_status: bool,
 ) -> Result<Vec<Face>, Failure> {
     let mut loops = Sequence::default();
     for shape in group.loops.drain(..) {
@@ -84,7 +88,7 @@ fn assemble_patch_group(
         original_face,
         location,
         context,
-        false,
+        invert_edge_status,
     )
 }
 
@@ -122,7 +126,7 @@ mod tests {
     use rustycad_tkernel::standard::Handle;
     use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
     use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
-    use rustycad_tkmath::gp::{Axis3, Plane3, Point3};
+    use rustycad_tkmath::gp::{Axis3, Cylinder3, Plane3, Point3};
     use rustycad_tkmath::toploc::Location;
     use rustycad_tktopalgo::brep_builder_api::{
         BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire,
@@ -164,6 +168,45 @@ mod tests {
         assert_nested_face_matches_oracle(&result);
     }
 
+    #[test]
+    fn perform_periodic_cylinder_matches_native_open_and_closed_paths() {
+        assert_periodic_cylinder_result(false, "perform_periodic_cylinder_open");
+        assert_periodic_cylinder_result(true, "perform_periodic_cylinder_closed");
+    }
+
+    fn assert_periodic_cylinder_result(closed: bool, label: &str) {
+        let composer = initialized_cylinder_composer(closed);
+        let done = composer.perform().unwrap();
+        assert_native_result(&composer, done, label);
+    }
+
+    fn initialized_cylinder_composer(closed: bool) -> ShapeFixComposeShell {
+        let cylinder = Cylinder3::new(Axis3::default(), 2.0).unwrap();
+        let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+            cylinder,
+            (0.0, std::f64::consts::TAU, 0.0, 2.0),
+        )
+        .unwrap()
+        .face()
+        .unwrap();
+        let surface: Handle<dyn GeomSurface> = Handle::new(
+            rustycad_tkg3d::geom::GeomCylindricalSurface::from_cylinder(cylinder),
+        )
+        .cast();
+        let composer = ShapeFixComposeShell::new();
+        composer.set_context(&Handle::new(ShapeBuildReShape::new()));
+        composer
+            .init(
+                &composite_grid(1, vec![surface]),
+                &Location::default(),
+                &face,
+                1.0e-7,
+            )
+            .unwrap();
+        composer.set_closed_mode(closed);
+        composer
+    }
+
     fn assert_nested_face_matches_oracle(result: &Shape) {
         let expected =
             include_str!("../../../../../tools/oracle/shape_fix_compose_shell_make_faces.expected");
@@ -197,7 +240,7 @@ mod tests {
         let expected =
             include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
         let result = composer.result();
-        let row = format!(
+        let mut row = format!(
             "{label} {} {} {} {} {}",
             i32::from(done),
             result.shape_type().unwrap() as i32,
@@ -205,6 +248,10 @@ mod tests {
             result.nb_children(),
             i32::from(composer.status(ShapeExtendStatus::Done1)),
         );
+        if label.starts_with("perform_periodic_cylinder_") {
+            let seam = periodic_seam_values(&result).unwrap();
+            row.push_str(&format!(" {} {} {} {}", seam.0, seam.1, seam.2, seam.3));
+        }
         assert_eq!(
             row,
             expected
@@ -212,6 +259,48 @@ mod tests {
                 .find(|line| line.starts_with(label))
                 .unwrap()
         );
+    }
+
+    fn periodic_seam_values(result: &Shape) -> Result<(i64, i64, i64, i64), Failure> {
+        let face = rustycad_tkbrep::topods::face(result)?;
+        for wire in rustycad_tkbrep::topods::ShapeIterator::new(result, false, false) {
+            for child in rustycad_tkbrep::topods::ShapeIterator::new(&wire, false, false) {
+                if child.shape_type()? != ShapeEnum::Edge {
+                    continue;
+                }
+                let edge = rustycad_tkbrep::topods::edge(&child)?;
+                if !rustycad_tkbrep::brep::BRepTool::is_closed_on_face(&edge, &face)? {
+                    continue;
+                }
+                return seam_endpoint_values(&edge, &face);
+            }
+        }
+        Err(Failure::with_message(
+            "Standard_NoSuchObject",
+            "periodic result had no seam edge; expected closed edge on face",
+        ))
+    }
+
+    fn seam_endpoint_values(
+        edge: &rustycad_tkbrep::topods::Edge,
+        face: &Face,
+    ) -> Result<(i64, i64, i64, i64), Failure> {
+        let analyzer = crate::shape_analysis::ShapeAnalysisEdge::new();
+        let (first, first_parameter, _) = analyzer.pcurve_on_face(edge, face, false)?;
+        let reversed = rustycad_tkbrep::topods::edge(&edge.reversed())?;
+        let (second, second_parameter, _) = analyzer.pcurve_on_face(&reversed, face, false)?;
+        let first_point = first.value(first_parameter)?;
+        let second_point = second.value(second_parameter)?;
+        Ok((
+            scaled(first_point.x()),
+            scaled(first_point.y()),
+            scaled(second_point.x()),
+            scaled(second_point.y()),
+        ))
+    }
+
+    fn scaled(value: f64) -> i64 {
+        (value * 1.0e6).round() as i64
     }
 
     fn initialized_composer(face: &Face) -> ShapeFixComposeShell {
