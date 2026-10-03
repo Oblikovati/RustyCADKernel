@@ -218087,6 +218087,14 @@
       "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo::set_progress_range",
       "status": "implemented",
       "notes": "Native range-overload no-op and progress ownership verified by tkbo_parallel.cxx; compiler crosswalk pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::Build()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::build",
+      "status": "partial",
+      "notes": "Focused same-domain face/edge handling and exact missing-pcurve regressions are implemented. General native face-group selection and TransformPCurves for non-identical supports, axes, projection and seam handling remain unported. Passing the two missing-pcurve declarations does not establish this full API behavior; native probing preserves source pcurve identity in both fixtures."
     }
   ],
   "tests": [
