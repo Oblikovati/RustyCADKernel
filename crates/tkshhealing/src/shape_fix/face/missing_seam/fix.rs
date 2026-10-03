@@ -49,7 +49,9 @@ fn compose_and_cleanup(
 fn surface_is_closed(surface: &ShapeAnalysisSurface) -> Result<bool, Failure> {
     let live = surface.surface();
     let live = live.get().ok_or_else(null_surface)?;
-    Ok(live.is_u_closed()? || live.is_v_closed()?)
+    let u_closed = live.is_u_closed()?;
+    let v_closed = live.is_v_closed()?;
+    Ok(u_closed || v_closed)
 }
 
 fn apply_current_face(fixer: &ShapeFixFace) -> Result<(Face, Handle<ShapeBuildReShape>), Failure> {
@@ -68,9 +70,9 @@ fn compose_missing_seam(
     grid: &Handle<crate::shape_extend::ShapeExtendCompositeSurface>,
     context: &Handle<ShapeBuildReShape>,
 ) -> Result<(), Failure> {
-    let context = ensure_context(fixer, context);
     let composer = ShapeFixComposeShell::new();
     composer.init(grid, &Location::default(), &face, precision::confusion())?;
+    let context = ensure_context(fixer, context);
     composer.set_closed_mode(true);
     composer.set_context(&context);
     composer.set_max_tolerance(fixer.max_tolerance());
