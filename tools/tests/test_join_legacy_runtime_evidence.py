@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 import hashlib
 import pathlib
+import subprocess
 import tempfile
 
 from api_inventory.inputs import JSONObject
@@ -13,6 +14,8 @@ from join_legacy_runtime_evidence import (
     joined_report,
     one_source_mapping_error,
     require_schema,
+    runtime_provenance,
+    source_mapping_errors,
 )
 
 
@@ -89,9 +92,37 @@ class LegacyRuntimeJoinTest(unittest.TestCase):
         report: JSONObject = {"revision": "pinned"}
         inventory: JSONObject = {"revision": "pinned"}
         rows = [{**mapped_declaration(), "runtime_status": "passed"}]
-        result = joined_report(report, inventory, rows, [], [])
+        result = joined_report(report, inventory, rows, [], [], provenance_fixture())
         self.assertFalse(result["runtime_proof"])
         self.assertEqual(result["counts"]["passed"], 1)
+        self.assertEqual(result["schema_version"], 2)
+
+    def test_join_provenance_binds_exact_report_and_rust_inputs(self) -> None:
+        """The artifact fingerprints its report and input set; e.g. hashes change."""
+        with tempfile.TemporaryDirectory() as temporary:
+            first, changed = changed_provenance_pair(pathlib.Path(temporary))
+        self.assertEqual(first["runtime_report_sha256"], "b" * 64)
+        self.assertEqual(first["runtime_report_revision"], "occt-revision")
+        self.assertNotEqual(
+            first["runtime_input_manifest_sha256"],
+            changed["runtime_input_manifest_sha256"],
+        )
+        self.assertNotEqual(
+            first["runtime_report_sha256"], changed["runtime_report_sha256"]
+        )
+        self.assertEqual(first["rust_worktree_clean"], True)
+
+    def test_join_provenance_rejects_missing_manifest(self) -> None:
+        """A report without input hashes cannot produce a self-contained join."""
+        with self.assertRaisesRegex(ValueError, "source_hashes"):
+            runtime_provenance({"revision": "x"}, pathlib.Path("."), "b" * 64)
+
+    def test_source_mapping_errors_accept_tkmath_scope(self) -> None:
+        """Source freshness checks target the report toolkit; e.g. TKMath rows."""
+        with tempfile.TemporaryDirectory() as temporary:
+            parity, source = tkmath_source_scope_fixture(pathlib.Path(temporary))
+            errors = source_mapping_errors(parity, source, "TKMath")
+        self.assertEqual(errors, [])
 
     def test_boolean_is_not_accepted_as_runtime_schema_version(self) -> None:
         """Python bool equality cannot satisfy schema identity; e.g. True is rejected."""
@@ -168,6 +199,64 @@ def stale_source_fixture(source: pathlib.Path) -> list[str]:
     (source / "A_Test.cxx").write_bytes(b"changed")
     row = {"source": "A_Test.cxx", "source_sha256": hashlib.sha256(b"old").hexdigest()}
     return one_source_mapping_error(row, source)
+
+
+def provenance_fixture() -> JSONObject:
+    """Build minimal report provenance; e.g. `provenance_fixture()`."""
+    return {
+        "runtime_report_sha256": "b" * 64,
+        "runtime_report_revision": "pinned",
+        "rust_revision": "rust-revision",
+        "rust_worktree_clean": True,
+        "runtime_input_manifest_sha256": "c" * 64,
+        "runtime_input_manifest": {"Cargo.lock": "a" * 64},
+        "join_tool_sha256": "d" * 64,
+    }
+
+
+def initialize_git(root: pathlib.Path) -> None:
+    """Create a clean Rust revision fixture; e.g. `initialize_git(root)`."""
+    run_git_fixture(root, ["init", "-q", str(root)])
+    run_git_fixture(
+        root,
+        [
+            "-c",
+            "user.name=Test",
+            "-c",
+            "user.email=test@example.invalid",
+            "commit",
+            "--allow-empty",
+            "-qm",
+            "base",
+        ],
+    )
+
+
+def run_git_fixture(root: pathlib.Path, arguments: list[str]) -> None:
+    """Run one fixture git command; e.g. `run_git_fixture(root, ['status'])`."""
+    subprocess.run(["git", "-C", str(root), *arguments], check=True)
+
+
+def changed_provenance_pair(root: pathlib.Path) -> tuple[JSONObject, JSONObject]:
+    """Make two provenance records with changed inputs; e.g. `changed_provenance_pair(root)`."""
+    initialize_git(root)
+    report: JSONObject = {
+        "revision": "occt-revision",
+        "source_hashes": {"Cargo.lock": "a" * 64},
+    }
+    first = runtime_provenance(report, root, "b" * 64)
+    changed_report = {**report, "source_hashes": {"Cargo.lock": "c" * 64}}
+    return first, runtime_provenance(changed_report, root, "d" * 64)
+
+
+def tkmath_source_scope_fixture(root: pathlib.Path) -> tuple[JSONObject, pathlib.Path]:
+    """Create TKMath and unrelated rows; e.g. `tkmath_source_scope_fixture(root)`."""
+    contents = b"TEST_F(MathSuite, Case) {}\n"
+    (root / "Math_Test.cxx").write_bytes(contents)
+    digest = hashlib.sha256(contents).hexdigest()
+    rows = [{"toolkit": "TKMath", "source": "Math_Test.cxx", "source_sha256": digest}]
+    rows.append({"toolkit": "TKernel", "source": "missing.cxx", "source_sha256": "x"})
+    return {"tests": rows}, root
 
 
 def case_result(
