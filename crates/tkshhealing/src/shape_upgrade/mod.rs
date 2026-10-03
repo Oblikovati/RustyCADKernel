@@ -90,3 +90,5 @@ pub use face_divide_area::ShapeUpgradeFaceDivideArea;
 
 mod shape_divide;
 pub use shape_divide::{ShapeDivideFields, ShapeDivider, ShapeUpgradeShapeDivide};
+mod shape_divide_closed;
+pub use shape_divide_closed::ShapeUpgradeShapeDivideClosed;
