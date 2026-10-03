@@ -2,6 +2,7 @@
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepBuilderAPI_MakeWire.hxx>
 #include <BRep_Builder.hxx>
+#include <BRep_Tool.hxx>
 #include <Geom_Plane.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
@@ -15,6 +16,8 @@
 #include <TopAbs_ShapeEnum.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Iterator.hxx>
+#include <TopExp_Explorer.hxx>
+#include <Geom2d_Curve.hxx>
 #include <TopoDS.hxx>
 #include <ShapeAnalysis_TransferParameters.hxx>
 #include <gp_Pln.hxx>
@@ -26,6 +29,9 @@
 #include <gp_Ax3.hxx>
 #include <TopLoc_Location.hxx>
 #include <iostream>
+#include <limits>
+#include <algorithm>
+#include <cmath>
 #include "tkshhealing_compose_shell_periodic.hxx"
 
 class ComposeProbe : public ShapeFix_ComposeShell
@@ -38,6 +44,8 @@ public:
   using ShapeFix_ComposeShell::SplitByLine;
   using ShapeFix_ComposeShell::CollectWires;
 };
+
+static void printPcurveBounds(const TopoDS_Shape& result);
 
 static void runInit()
 {
@@ -229,7 +237,39 @@ static void runPerformTwoPatches()
     ++children;
   std::cout << "perform_two_patches " << done << ' ' << result.ShapeType() << ' '
             << result.Orientation() << ' ' << children << ' '
-            << tool.Status(ShapeExtend_DONE1) << '\n';
+            << tool.Status(ShapeExtend_DONE1);
+  printPcurveBounds(result);
+  std::cout << '\n';
+}
+
+static void printPcurveBounds(const TopoDS_Shape& result)
+{
+  double uMin = std::numeric_limits<double>::max();
+  double uMax = -uMin;
+  double vMin = uMin;
+  double vMax = -uMin;
+  for (TopExp_Explorer faceIt(result, TopAbs_FACE); faceIt.More(); faceIt.Next())
+  {
+    const TopoDS_Face face = TopoDS::Face(faceIt.Current());
+    for (TopExp_Explorer edgeIt(face, TopAbs_EDGE); edgeIt.More(); edgeIt.Next())
+    {
+      const TopoDS_Edge edge = TopoDS::Edge(edgeIt.Current());
+      double first = 0., last = 0.;
+      const Handle(Geom2d_Curve) curve = BRep_Tool::CurveOnSurface(edge, face, first, last);
+      if (curve.IsNull())
+        continue;
+      for (double parameter : {first, last})
+      {
+        const gp_Pnt2d point = curve->Value(parameter);
+        uMin = std::min(uMin, point.X());
+        uMax = std::max(uMax, point.X());
+        vMin = std::min(vMin, point.Y());
+        vMax = std::max(vMax, point.Y());
+      }
+    }
+  }
+  std::cout << ' ' << std::llround(uMin * 1.e6) << ' ' << std::llround(uMax * 1.e6)
+            << ' ' << std::llround(vMin * 1.e6) << ' ' << std::llround(vMax * 1.e6);
 }
 
 static void runPerformNoWires()
