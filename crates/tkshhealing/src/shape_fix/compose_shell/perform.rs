@@ -1,0 +1,335 @@
+//! Full ComposeShell orchestration from native `Perform`.
+use super::dispatch_wires::{PatchLoopGroup, dispatch_wires};
+use super::{ShapeFixComposeShell, ShapeFixWireSegment};
+use crate::shape_build::ShapeBuildReShape;
+use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
+use crate::shape_fix::{FixRoot, face::make_faces_on_patch::make_faces_on_patch};
+use rustycad_tkbrep::topods::{Builder, Face, Shape, Shell};
+use rustycad_tkernel::ncollection::Sequence;
+use rustycad_tkernel::standard::Failure;
+
+pub(super) fn perform(composer: &ShapeFixComposeShell) -> Result<bool, Failure> {
+    initialize_perform(composer);
+    let mut segments = composer.load_wires()?;
+    if segments.is_empty() {
+        mark_status(composer, ShapeExtendStatus::Fail6);
+        return Ok(false);
+    }
+    split_and_collect(composer, &mut segments)?;
+    let faces = compose_patch_faces(composer, &mut segments)?;
+    store_result(composer, faces)?;
+    mark_status(composer, ShapeExtendStatus::Done1);
+    Ok(true)
+}
+
+fn initialize_perform(composer: &ShapeFixComposeShell) {
+    let mut fields = composer.fields.write();
+    fields.status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
+    fields.invert_edge_status = false;
+}
+
+fn split_and_collect(
+    composer: &ShapeFixComposeShell,
+    segments: &mut Sequence<ShapeFixWireSegment>,
+) -> Result<(), Failure> {
+    super::split_by_grid::split_by_grid(composer, segments)?;
+    composer.break_wires(segments)?;
+    let mut loops = Sequence::default();
+    composer.collect_wires(&mut loops, segments)?;
+    *segments = loops;
+    Ok(())
+}
+
+fn compose_patch_faces(
+    composer: &ShapeFixComposeShell,
+    segments: &mut Sequence<ShapeFixWireSegment>,
+) -> Result<Vec<Face>, Failure> {
+    let groups = dispatch_wires(composer, segments)?;
+    let (_, original, location, _) = composer.collection_inputs();
+    let context = composer.context();
+    assemble_patch_groups(groups, &original, &location, &context)
+}
+
+fn assemble_patch_groups(
+    groups: Vec<PatchLoopGroup>,
+    original_face: &Face,
+    location: &rustycad_tkmath::toploc::Location,
+    context: &rustycad_tkernel::standard::Handle<ShapeBuildReShape>,
+) -> Result<Vec<Face>, Failure> {
+    let mut faces = Vec::new();
+    for group in groups {
+        faces.extend(assemble_patch_group(
+            group,
+            original_face,
+            location,
+            context,
+        )?);
+    }
+    Ok(faces)
+}
+
+fn assemble_patch_group(
+    mut group: PatchLoopGroup,
+    original_face: &Face,
+    location: &rustycad_tkmath::toploc::Location,
+    context: &rustycad_tkernel::standard::Handle<ShapeBuildReShape>,
+) -> Result<Vec<Face>, Failure> {
+    let mut loops = Sequence::default();
+    for shape in group.loops.drain(..) {
+        loops.append(shape);
+    }
+    make_faces_on_patch(
+        &group.surface,
+        &mut loops,
+        original_face,
+        location,
+        context,
+        false,
+    )
+}
+
+fn store_result(composer: &ShapeFixComposeShell, faces: Vec<Face>) -> Result<(), Failure> {
+    let mut result = if faces.len() == 1 {
+        faces[0].clone().into_shape()
+    } else {
+        make_result_shell(faces)?
+    };
+    result.set_orientation(composer.fields.read().orientation);
+    composer.fields.write().result = result;
+    Ok(())
+}
+
+fn make_result_shell(faces: Vec<Face>) -> Result<Shape, Failure> {
+    let mut shell = Shell::default();
+    Builder.make_shell(&mut shell);
+    for face in faces {
+        Builder.add(&mut shell, &face.clone().into_shape())?;
+    }
+    Ok(shell.into_shape())
+}
+
+fn mark_status(composer: &ShapeFixComposeShell, status: ShapeExtendStatus) {
+    composer.fields.write().status |= ShapeExtend::encode_status(status);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::shape_build::ShapeBuildReShape;
+    use crate::shape_extend::{ShapeExtendCompositeSurface, ShapeExtendParametrisation};
+    use crate::shape_fix::FixRoot;
+    use rustycad_tkernel::ncollection::HArray2;
+    use rustycad_tkernel::standard::Handle;
+    use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
+    use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+    use rustycad_tkmath::gp::{Axis3, Plane3, Point3};
+    use rustycad_tkmath::toploc::Location;
+    use rustycad_tktopalgo::brep_builder_api::{
+        BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire,
+    };
+
+    #[test]
+    fn perform_planar_face_matches_native_output_and_done_status() {
+        let composer = initialized_composer(&square_face());
+        let done = composer.perform().unwrap();
+        assert_native_result(&composer, done, "perform_plane_face");
+        assert_eq!(composer.result().shape_type().unwrap(), ShapeEnum::Face);
+        assert_eq!(composer.result().orientation(), Orientation::Forward);
+    }
+
+    #[test]
+    fn perform_two_patches_matches_native_shell_and_done_status() {
+        let composer = initialized_two_patch_composer();
+        let done = composer.perform().unwrap();
+        assert_native_result(&composer, done, "perform_two_patches");
+    }
+
+    #[test]
+    fn perform_without_wire_segments_sets_fail6_and_keeps_null_result() {
+        let composer = initialized_composer(&empty_plane_face());
+        let done = composer.perform().unwrap();
+        assert!(!done);
+        assert!(composer.result().is_null());
+        assert!(composer.status(ShapeExtendStatus::Fail6));
+        assert!(!composer.status(ShapeExtendStatus::Done1));
+        assert_no_wire_oracle_row(&composer);
+    }
+
+    #[test]
+    fn perform_assigns_a_contained_loop_as_a_hole_like_native() {
+        let composer = initialized_composer(&nested_face());
+        composer.set_closed_mode(true);
+        assert!(composer.perform().unwrap());
+        let result = composer.result();
+        assert_nested_face_matches_oracle(&result);
+    }
+
+    fn assert_nested_face_matches_oracle(result: &Shape) {
+        let expected =
+            include_str!("../../../../../tools/oracle/shape_fix_compose_shell_make_faces.expected");
+        let wires = rustycad_tkbrep::topods::ShapeIterator::new(result, false, false)
+            .filter(|shape| shape.shape_type().ok() == Some(ShapeEnum::Wire))
+            .count();
+        let row = format!("nested_patch changed=1 faces=1 wires={wires}");
+        assert_eq!(row, expected.trim());
+    }
+
+    fn assert_no_wire_oracle_row(composer: &ShapeFixComposeShell) {
+        let expected =
+            include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
+        let row = format!(
+            "perform_no_wires {} {} {} {}",
+            0,
+            i32::from(composer.result().is_null()),
+            i32::from(composer.status(ShapeExtendStatus::Fail6)),
+            i32::from(composer.status(ShapeExtendStatus::Done1)),
+        );
+        assert_eq!(
+            row,
+            expected
+                .lines()
+                .find(|line| line.starts_with("perform_no_wires "))
+                .unwrap()
+        );
+    }
+
+    fn assert_native_result(composer: &ShapeFixComposeShell, done: bool, label: &str) {
+        let expected =
+            include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
+        let result = composer.result();
+        let row = format!(
+            "{label} {} {} {} {} {}",
+            i32::from(done),
+            result.shape_type().unwrap() as i32,
+            result.orientation() as i32,
+            result.nb_children(),
+            i32::from(composer.status(ShapeExtendStatus::Done1)),
+        );
+        assert_eq!(
+            row,
+            expected
+                .lines()
+                .find(|line| line.starts_with(label))
+                .unwrap()
+        );
+    }
+
+    fn initialized_composer(face: &Face) -> ShapeFixComposeShell {
+        let composer = ShapeFixComposeShell::new();
+        composer.set_context(&Handle::new(ShapeBuildReShape::new()));
+        composer
+            .init(&one_patch_grid(), &Location::default(), face, 1.0e-7)
+            .unwrap();
+        composer
+    }
+
+    fn initialized_two_patch_composer() -> ShapeFixComposeShell {
+        let composer = ShapeFixComposeShell::new();
+        composer.set_context(&Handle::new(ShapeBuildReShape::new()));
+        composer
+            .init(
+                &two_patch_grid(),
+                &Location::default(),
+                &square_face(),
+                1.0e-7,
+            )
+            .unwrap();
+        composer
+    }
+
+    fn one_patch_grid() -> Handle<ShapeExtendCompositeSurface> {
+        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+        composite_grid(1, vec![surface])
+    }
+
+    fn two_patch_grid() -> Handle<ShapeExtendCompositeSurface> {
+        let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+        let left = trimmed_plane(&plane, (0.0, 1.0));
+        let right = trimmed_plane(&plane, (1.0, 3.0));
+        composite_grid(2, vec![left, right])
+    }
+
+    fn trimmed_plane(plane: &Handle<dyn GeomSurface>, u: (f64, f64)) -> Handle<dyn GeomSurface> {
+        Handle::new(
+            rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::new(
+                plane,
+                u,
+                (0.0, 2.0),
+                (true, true),
+            )
+            .unwrap(),
+        )
+        .cast()
+    }
+
+    fn composite_grid(
+        columns: i32,
+        surfaces: Vec<Handle<dyn GeomSurface>>,
+    ) -> Handle<ShapeExtendCompositeSurface> {
+        let cells =
+            HArray2::with_value(1, columns, 1, 1, Handle::<dyn GeomSurface>::default()).unwrap();
+        for (index, surface) in surfaces.into_iter().enumerate() {
+            cells
+                .change_array2()
+                .set_value(index as i32 + 1, 1, surface)
+                .unwrap();
+        }
+        Handle::new(
+            ShapeExtendCompositeSurface::with_grid(
+                &Handle::new(cells),
+                ShapeExtendParametrisation::Natural,
+            )
+            .unwrap(),
+        )
+    }
+
+    fn square_face() -> Face {
+        let wire = square_wire_bounds((0.0, 0.0), (2.0, 2.0));
+        BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
+            .unwrap()
+            .face()
+            .unwrap()
+    }
+
+    fn empty_plane_face() -> Face {
+        BRepBuilderAPIMakeFace::from_plane(Plane3::default())
+            .unwrap()
+            .face()
+            .unwrap()
+    }
+
+    fn nested_face() -> Face {
+        let outer = square_wire_bounds((0.0, 0.0), (5.0, 5.0));
+        let mut face = BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &outer, true)
+            .unwrap()
+            .face()
+            .unwrap();
+        let hole = square_wire_bounds((1.0, 1.0), (2.0, 2.0));
+        Builder.add(&mut face, &hole.reversed()).unwrap();
+        face
+    }
+
+    fn square_wire_bounds(
+        (x_min, y_min): (f64, f64),
+        (x_max, y_max): (f64, f64),
+    ) -> rustycad_tkbrep::topods::Wire {
+        let points = [
+            Point3::new(x_min, y_min, 0.0),
+            Point3::new(x_max, y_min, 0.0),
+            Point3::new(x_max, y_max, 0.0),
+            Point3::new(x_min, y_max, 0.0),
+        ];
+        let mut wire = BRepBuilderAPIMakeWire::new();
+        for index in 0..points.len() {
+            let edge = BRepBuilderAPIMakeEdge::from_points(
+                points[index],
+                points[(index + 1) % points.len()],
+            )
+            .unwrap()
+            .edge()
+            .unwrap();
+            wire.add_edge(&edge).unwrap();
+        }
+        wire.wire().unwrap()
+    }
+}

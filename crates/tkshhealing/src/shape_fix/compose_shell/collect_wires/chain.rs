@@ -6,7 +6,7 @@ use crate::shape_extend::{
     ShapeExtend, ShapeExtendCompositeSurface, ShapeExtendStatus, ShapeExtendWireData,
 };
 use crate::shape_fix::{ShapeFixWireSegment, WirePatchIndex};
-use candidate::{Candidate, choose_segment, endpoint_orientation};
+use candidate::{Candidate, CandidateSearch, choose_segment, endpoint_orientation};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::ncollection::Sequence;
@@ -23,20 +23,24 @@ pub(super) fn collect_chains(
     shortness: &[i32],
 ) -> Result<(), Failure> {
     let (nu, nv) = patch_counts(grid)?;
+    let search = CandidateSearch {
+        composer,
+        grid,
+        face,
+        shortness,
+        nu,
+        nv,
+    };
     let mut state = ChainState::default();
     loop {
-        let Some(candidate) =
-            choose_segment(composer, segments, grid, face, shortness, &state, nu, nv)?
-        else {
+        let Some(candidate) = choose_segment(&search, segments, &state)? else {
             if state.wire_data.is_null() {
                 break;
             }
             close_current_loop(composer, loops, face, &mut state)?;
             continue;
         };
-        append_candidate(
-            composer, segments, grid, face, &mut state, candidate, nu, nv,
-        )?;
+        append_candidate(&search, segments, &mut state, candidate)?;
         update_chain_end(composer, segments, face, shortness, &mut state, candidate)?;
         close_if_ready(composer, loops, face, &mut state)?;
     }
@@ -67,29 +71,25 @@ struct ChainState {
 }
 
 fn append_candidate(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segments: &mut Sequence<ShapeFixWireSegment>,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
     state: &mut ChainState,
     candidate: Candidate,
-    nu: i32,
-    nv: i32,
 ) -> Result<(), Failure> {
     let segment = segments.value(candidate.index)?.clone();
     if candidate.misoriented {
-        composer.fields.write().invert_edge_status = true;
+        search.composer.fields.write().invert_edge_status = true;
     }
     if state.wire_data.is_null() {
         state.wire_data = Handle::new(ShapeExtendWireData::new());
         state.patch = segment.patch_index(1)?;
     } else if candidate.same_patch {
-        patch::extend_same_patch(&segment, &mut state.patch, nu, nv, true);
+        patch::extend_same_patch(&segment, &mut state.patch, search.nu, search.nv, true);
     }
-    if composer.closed_mode() {
+    if search.composer.closed_mode() {
         state.patch = segment.patch_index(1)?;
     }
-    add_segment_data(state, &segment, face, candidate.reverse)?;
+    add_segment_data(state, &segment, search.face, candidate.reverse)?;
     mark_segment_consumed(
         segments,
         candidate.index,
@@ -97,11 +97,10 @@ fn append_candidate(
         candidate.reverse,
     )?;
     if state.end_vertex.is_null() {
-        initialize_chain_start(state, face)?;
+        initialize_chain_start(state, search.face)?;
     }
     state.shift_u = candidate.shift_u;
     state.shift_v = candidate.shift_v;
-    let _ = grid;
     Ok(())
 }
 
