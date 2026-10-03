@@ -17,6 +17,30 @@ struct CandidateEdges<'a> {
 }
 
 impl ShapeAnalysisWire {
+    /// Accumulate singular-edge statuses, retaining earlier findings until cleared.
+    /// Example: `analyzer.check_degenerated()?`.
+    pub fn check_degenerated(&self) -> Result<bool, Failure> {
+        let mut index = 1;
+        while index <= self.wire_data().nb_edges() {
+            self.check_degenerated_edge(index)?;
+            let mut fields = self.fields.write();
+            fields.status_degenerated |= fields.status;
+            index += 1;
+        }
+        Ok(self.status_degenerated(ShapeExtendStatus::Done))
+    }
+
+    /// Check one edge while discarding candidate UV endpoints.
+    /// Example: `analyzer.check_degenerated_edge(1)?`.
+    pub fn check_degenerated_edge(&self, index: i32) -> Result<bool, Failure> {
+        Ok(self.check_degenerated_at(index)?.0)
+    }
+
+    /// Query accumulated singular-edge findings; `analyzer.status_degenerated(ShapeExtendStatus::Done2)`.
+    pub fn status_degenerated(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.fields.read().status_degenerated, status)
+    }
+
     /// `CheckDegenerated(num, p2d1, p2d2)`; reports the native status and candidate UV segment.
     /// `let (found, first, last) = analyzer.check_degenerated_at(1)?`.
     pub fn check_degenerated_at(&self, index: i32) -> Result<(bool, Point2, Point2), Failure> {
