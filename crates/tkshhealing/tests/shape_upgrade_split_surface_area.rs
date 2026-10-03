@@ -158,19 +158,43 @@ fn configure(fixture: Fixture) -> Handle<dyn SplitSurface> {
 }
 
 fn run_fixture(fixture: Fixture) -> (i32, Vec<f64>, Vec<f64>) {
+    run_fixture_with_measures(fixture, None)
+}
+
+fn run_fixture_with_measures(
+    fixture: Fixture,
+    measures: Option<(f64, f64)>,
+) -> (i32, Vec<f64>, Vec<f64>) {
     let criterion = configure(fixture);
+    seed_measures(&criterion, measures);
     let (u_values, v_values) = (criterion.u_split_values(), criterion.v_split_values());
+    compute_fixture(&criterion, fixture.repeat);
+    let area = criterion.cast::<ShapeUpgradeSplitSurfaceArea>();
+    assert_area_dynamic_type(&area);
+    assert_parent_sequences(&criterion, &u_values, &v_values);
+    (area.nb_parts(), snapshot(&u_values), snapshot(&v_values))
+}
+
+fn seed_measures(criterion: &Handle<dyn SplitSurface>, measures: Option<(f64, f64)>) {
+    if let Some((u_size, v_size)) = measures {
+        criterion
+            .split_surface_data()
+            .with_mut(|fields| (fields.u_size, fields.v_size) = (u_size, v_size));
+    }
+}
+
+fn compute_fixture(criterion: &Handle<dyn SplitSurface>, repeat: bool) {
     criterion.compute(false).unwrap();
-    if fixture.repeat {
+    if repeat {
         criterion.compute(false).unwrap();
     }
-    let area = criterion.cast::<ShapeUpgradeSplitSurfaceArea>();
+}
+
+fn assert_area_dynamic_type(area: &Handle<ShapeUpgradeSplitSurfaceArea>) {
     assert_eq!(
         area.dynamic_type().unwrap().name(),
         "ShapeUpgrade_SplitSurfaceArea"
     );
-    assert_parent_sequences(&criterion, &u_values, &v_values);
-    (area.nb_parts(), snapshot(&u_values), snapshot(&v_values))
 }
 
 fn assert_parent_sequences(
@@ -232,6 +256,24 @@ fn area_split_parameter_sequences_match_pinned_native_oracle() {
     for fixture in FIXTURES {
         assert_fixture_matches(fixture, &oracle);
     }
+}
+
+#[test]
+fn native_negative_square_measure_is_not_replaced_with_one() {
+    let oracle = native_rows();
+    let row = oracle
+        .iter()
+        .find(|row| row[0] == "negative-square-v-measure")
+        .unwrap();
+    let fixture = fixture(
+        "negative-square-v-measure",
+        (10., 2.),
+        (4, true, None),
+        4.,
+        (false, false),
+    );
+    let (_, u_values, v_values) = run_fixture_with_measures(fixture, Some((3., -2.)));
+    assert_sequences((u_values, v_values), row, fixture.name);
 }
 
 #[test]

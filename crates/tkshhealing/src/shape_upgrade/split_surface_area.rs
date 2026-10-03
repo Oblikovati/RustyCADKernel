@@ -18,7 +18,7 @@ struct AreaSplitSettings {
 }
 
 /// Split a surface into parameter-space regions sized from its physical aspect ratio.
-/// Example: `let splitter = ShapeUpgradeSplitSurfaceArea::new(); splitter.set_nb_parts(6);`.
+/// Example: `let splitter = ShapeUpgradeSplitSurfaceArea::new();`.
 pub struct ShapeUpgradeSplitSurfaceArea {
     parent: ShapeUpgradeSplitSurface,
     settings: SharedState<AreaSplitSettings>,
@@ -156,7 +156,7 @@ impl AreaSplitPlan {
         measures: (f64, f64, f64),
         settings: AreaSplitSettings,
     ) -> Result<Self, Failure> {
-        let ratio = (sizes.0 / sizes.1).abs();
+        let ratio = sizes.0 / sizes.1;
         let native_u_first = ratio > 1.0;
         let first_u = ratio.partial_cmp(&1.0) != Some(Ordering::Less);
         let adjusted_ratio = if ratio < 1.0 { 1.0 / ratio } else { ratio };
@@ -285,13 +285,20 @@ fn set_square_counts(
     let square_size = (area / f64::from(settings.parts)).sqrt();
     settings.u_splits = checked_native_int(sizes.0 / square_size, "U square count")?;
     settings.v_splits = checked_native_int(sizes.1 / square_size, "V square count")?;
-    settings.u_splits = settings.u_splits.max(1);
-    settings.v_splits = settings.v_splits.max(1);
+    replace_zero_count(&mut settings.u_splits);
+    replace_zero_count(&mut settings.v_splits);
     Ok(())
 }
 
+fn replace_zero_count(count: &mut i32) {
+    if *count == 0 {
+        *count = 1;
+    }
+}
+
 fn checked_native_int(value: f64, label: &str) -> Result<i32, Failure> {
-    if !value.is_finite() || value < f64::from(i32::MIN) || value > f64::from(i32::MAX) {
+    let truncated = value.trunc();
+    if !value.is_finite() || truncated < f64::from(i32::MIN) || truncated > f64::from(i32::MAX) {
         return Err(Failure::with_type(
             "Standard_OutOfRange",
             &format!(
@@ -300,7 +307,7 @@ fn checked_native_int(value: f64, label: &str) -> Result<i32, Failure> {
             "",
         ));
     }
-    Ok(value as i32)
+    Ok(truncated as i32)
 }
 
 fn insert_even_values(
@@ -330,4 +337,44 @@ fn missing_split_values() -> Failure {
         "ShapeUpgrade_SplitSurfaceArea requires initialized split values with two bounds",
         "",
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{AreaSplitPlan, AreaSplitSettings, checked_native_int, replace_zero_count};
+
+    #[test]
+    fn native_truncation_accepts_fraction_above_int_max() {
+        let value = f64::from(i32::MAX) + 0.5;
+        assert_eq!(checked_native_int(value, "test count").unwrap(), i32::MAX);
+    }
+
+    #[test]
+    fn native_truncation_rejects_next_integer() {
+        let value = f64::from(i32::MAX) + 1.0;
+        let failure = checked_native_int(value, "test count").unwrap_err();
+        assert_eq!(failure.exception_type(), "Standard_OutOfRange");
+    }
+
+    #[test]
+    fn zero_count_replacement_preserves_nonzero_negative_counts() {
+        let mut count = -2;
+        replace_zero_count(&mut count);
+        assert_eq!(count, -2);
+        let mut zero = 0;
+        replace_zero_count(&mut zero);
+        assert_eq!(zero, 1);
+    }
+
+    #[test]
+    fn negative_native_aspect_ratio_keeps_v_as_first_direction() {
+        let settings = AreaSplitSettings {
+            parts: 4,
+            u_splits: -1,
+            v_splits: -1,
+            into_squares: false,
+        };
+        let plan = AreaSplitPlan::choose_counts((-2., 1.), (0., 0., 0.), settings).unwrap();
+        assert!(!plan.first_u);
+    }
 }

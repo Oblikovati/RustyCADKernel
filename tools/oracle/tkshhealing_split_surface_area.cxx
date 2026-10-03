@@ -11,6 +11,23 @@ static void printValues(const occ::handle<NCollection_HSequence<double>>& values
   for (int i = 1; i <= values->Length(); ++i) std::cout << ' ' << values->Value(i);
 }
 
+static void writeResult(const char* name, int parts, bool sharedU, bool sharedV,
+                        const occ::handle<NCollection_HSequence<double>>& uValues,
+                        const occ::handle<NCollection_HSequence<double>>& vValues)
+{
+  std::cout << name << ' ' << parts << ' ' << sharedU << ' ' << sharedV;
+  printValues(uValues);
+  std::cout << " |";
+  printValues(vValues);
+  std::cout << '\n';
+}
+
+class SeededArea : public ShapeUpgrade_SplitSurfaceArea
+{
+public:
+  void SetPhysicalSizes(double uSize, double vSize) { myUsize = uSize; myVsize = vSize; }
+};
+
 static occ::handle<ShapeUpgrade_SplitSurfaceArea> newSplitter(
   double uLast, double vLast, int parts, bool squares, int uCount,
   int vCount, double area, double cylinderRadius)
@@ -34,12 +51,21 @@ static void report(const char* name, double uLast, double vLast, int parts,
   auto uValues = splitter->USplitValues();
   auto vValues = splitter->VSplitValues();
   splitter->Compute(false);
-  std::cout << name << ' ' << splitter->NbParts() << ' ' << (uValues == splitter->USplitValues())
-            << ' ' << (vValues == splitter->VSplitValues());
-  printValues(uValues);
-  std::cout << " |";
-  printValues(vValues);
-  std::cout << '\n';
+  writeResult(name, splitter->NbParts(), uValues == splitter->USplitValues(),
+              vValues == splitter->VSplitValues(), uValues, vValues);
+}
+
+static void reportNegativeSquareVMeasure()
+{
+  SeededArea splitter;
+  splitter.Init(new Geom_Plane(gp::XOY()), 0., 10., 0., 2., 4.);
+  splitter.NbParts() = 4;
+  splitter.SetSplittingIntoSquares(true);
+  splitter.SetPhysicalSizes(3., -2.);
+  auto uValues = splitter.USplitValues();
+  auto vValues = splitter.VSplitValues();
+  splitter.Compute(false);
+  writeResult("negative-square-v-measure", splitter.NbParts(), true, true, uValues, vValues);
 }
 
 static void reportRepeatedSquare()
@@ -50,11 +76,8 @@ static void reportRepeatedSquare()
   repeated.SetSplittingIntoSquares(true);
   repeated.Compute(false);
   repeated.Compute(false);
-  std::cout << "auto-square-second-call " << repeated.NbParts() << " 1 1";
-  printValues(repeated.USplitValues());
-  std::cout << " |";
-  printValues(repeated.VSplitValues());
-  std::cout << '\n';
+  writeResult("auto-square-second-call", repeated.NbParts(), true, true,
+              repeated.USplitValues(), repeated.VSplitValues());
 }
 
 int main()
@@ -71,5 +94,6 @@ int main()
   report("auto-square", 10., 2., 4, true, -1, -1, 100.);
   report("cylinder-auto-square", 2. * M_PI, 4., 4, true, -1, -1, 25., 2.);
   report("invalid-fixed-count-retains-parts", 5., 2., 4, true, 2, -1, 100.);
+  reportNegativeSquareVMeasure();
   reportRepeatedSquare();
 }
