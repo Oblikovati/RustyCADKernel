@@ -2,6 +2,7 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <ShapeAnalysis_CheckSmallFace.hxx>
+#include <ShapeExtend.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Edge.hxx>
@@ -27,6 +28,22 @@ static void probe(const char* name, const TopoDS_Face& face, double tolerance) {
 static TopoDS_Face first_face(const TopoDS_Shape& shape) {
   TopExp_Explorer faces(shape, TopAbs_FACE);
   return TopoDS::Face(faces.Current());
+}
+
+static void checker_state(const TopoDS_Face& tiny, const TopoDS_Face& regular,
+                          const TopoDS_Face& shared_vertex) {
+  ShapeAnalysis_CheckSmallFace analyzer;
+  const bool check_tiny = analyzer.CheckSpotFace(tiny, 0.001);
+  const bool tiny_done = analyzer.StatusSpot(ShapeExtend_DONE1);
+  const bool check_regular = analyzer.CheckSpotFace(regular, 0.001);
+  const bool still_done = analyzer.StatusSpot(ShapeExtend_DONE1);
+  const bool check_shared = analyzer.CheckSpotFace(shared_vertex, 0.001);
+  const bool shared_done = analyzer.StatusSpot(ShapeExtend_DONE2);
+  const bool fail1 = analyzer.StatusSpot(ShapeExtend_FAIL1);
+  analyzer.SetTolerance(-0.25);
+  std::cout << "check_spot " << check_tiny << ' ' << tiny_done << ' ' << check_regular << ' '
+            << still_done << ' ' << check_shared << ' ' << shared_done << ' ' << fail1 << ' '
+            << analyzer.Tolerance() << '\n';
 }
 
 int main() {
@@ -74,4 +91,5 @@ int main() {
   probe("local_tolerance", local_tolerance_face, -1.0);
   const TopoDS_Shape regular = BRepPrimAPI_MakeBox(gp_Pnt(2, 3, 4), 1, 1, 1).Shape();
   probe("regular_box", first_face(regular), 0.001);
+  checker_state(first_face(tiny), first_face(regular), shared_vertex_face);
 }
