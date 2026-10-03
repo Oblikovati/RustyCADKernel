@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
 
@@ -108,7 +109,12 @@ def cpp_candidates(
             if leaf_name(key) == name
             for row in rows
         ]
-    candidates = [row for row in candidates if toolkit in row.get("_toolkits", set())]
+    candidates = [
+        row
+        for row in candidates
+        if row.get("api_visible") is True
+        and toolkit in row.get("_toolkits", set())
+    ]
     if params is not None:
         candidates = [row for row in candidates if parameter_match(params, row)]
     candidates = [row for row in candidates if suffix_matches(suffix, row)]
@@ -146,7 +152,22 @@ def rust_candidates(
     if not separator or prefix not in crates:
         return "unknown_rust_crate", []
     candidates = crates[prefix].get(f"crate::{path}", [])
-    return candidate_status(candidates), candidates
+    status = candidate_status(candidates)
+    if status == "unique" and not rust_source_is_pinned(candidates[0]):
+        return "unverifiable_source", candidates
+    return status, candidates
+
+
+def rust_source_is_pinned(item: dict[str, JSONValue]) -> bool:
+    source_file = item.get("source_file")
+    source_hash = item.get("source_sha256")
+    return (
+        isinstance(source_file, str)
+        and bool(source_file)
+        and item.get("source_status") is None
+        and isinstance(source_hash, str)
+        and re.fullmatch(r"[0-9a-f]{64}", source_hash) is not None
+    )
 
 
 def match_api_row(
@@ -193,6 +214,8 @@ def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) 
         return "excluded"
     if rust == "ambiguous":
         return "ambiguous_rust"
+    if rust == "unverifiable_source":
+        return "unverifiable_rust_source"
     if rust != "unique":
         return "missing_rust_target"
     if parity == "excluded":
@@ -212,5 +235,12 @@ def declaration_summary(row: dict[str, JSONValue]) -> dict[str, JSONValue]:
 def rust_summary(row: dict[str, JSONValue]) -> dict[str, JSONValue]:
     return {
         key: row.get(key)
-        for key in ("path", "kind", "signature", "source_file", "source_status")
+        for key in (
+            "path",
+            "kind",
+            "signature",
+            "source_file",
+            "source_status",
+            "source_sha256",
+        )
     }

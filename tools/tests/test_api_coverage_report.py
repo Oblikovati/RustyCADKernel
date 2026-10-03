@@ -62,7 +62,14 @@ def rust_inventory(paths: list[str]) -> JSONObject:
             {
                 "crate": "rustycad_tkmath",
                 "declarations": [
-                    {"path": path, "kind": "function", "signature": {}}
+                    {
+                        "path": path,
+                        "kind": "function",
+                        "signature": {},
+                        "source_file": "crates/tkmath/src/lib.rs",
+                        "source_status": None,
+                        "source_sha256": "a" * 64,
+                    }
                     for path in paths
                 ],
                 "unresolved_links": [],
@@ -100,6 +107,72 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         )
         self.assertEqual(status, "missing")
         self.assertEqual(rows, [])
+
+    def test_hidden_template_pattern_cannot_claim_a_public_declaration(self) -> None:
+        public = cpp_decl("public", "GeomAbs::Convert", ["int"])
+        hidden = cpp_decl("template", "GeomAbs::Convert", ["int"], visible=False)
+        hidden["exclusion_reason"] = "template_pattern"
+        parity = {
+            "api": [
+                api_row(
+                    "GeomAbs::Convert(int) const", "rustycad_tkmath::geom_abs::convert"
+                )
+            ]
+        }
+        report = report_document(
+            [public, hidden],
+            cpp_manifest(),
+            source_headers(),
+            rust_inventory(["crate::geom_abs::convert"]),
+            parity,
+        )
+        self.assertEqual(report["crosswalk_rows"][0]["cpp_status"], "unique")
+        self.assertEqual(report["crosswalk_rows"][0]["cpp_ids"], ["public"])
+
+    def test_hidden_only_declaration_does_not_receive_implementation_credit(self) -> None:
+        hidden = cpp_decl("template", "GeomAbs::Convert", ["int"], visible=False)
+        hidden["exclusion_reason"] = "template_pattern"
+        report = report_document(
+            [hidden],
+            cpp_manifest(),
+            source_headers(),
+            rust_inventory(["crate::geom_abs::convert"]),
+            {
+                "api": [
+                    api_row(
+                        "GeomAbs::Convert(int) const",
+                        "rustycad_tkmath::geom_abs::convert",
+                    )
+                ]
+            },
+        )
+        self.assertEqual(report["crosswalk_rows"][0]["resolution"], "missing_cpp")
+
+    def test_rust_target_without_pinned_source_cannot_receive_credit(self) -> None:
+        rust = rust_inventory(["crate::geom_abs::convert"])
+        item = rust["crates"][0]["declarations"][0]
+        item["source_status"] = "source_file_missing"
+        item["source_sha256"] = None
+        report = report_document(
+            [cpp_decl("public", "GeomAbs::Convert", ["int"])],
+            cpp_manifest(),
+            source_headers(),
+            rust,
+            {
+                "api": [
+                    api_row(
+                        "GeomAbs::Convert(int) const",
+                        "rustycad_tkmath::geom_abs::convert",
+                    )
+                ]
+            },
+        )
+        self.assertEqual(
+            report["crosswalk_rows"][0]["rust_status"], "unverifiable_source"
+        )
+        self.assertEqual(
+            report["crosswalk_rows"][0]["resolution"], "unverifiable_rust_source"
+        )
 
     def test_template_commas_and_operator_names_parse_without_guessing(self) -> None:
         template = parse_upstream_id(
