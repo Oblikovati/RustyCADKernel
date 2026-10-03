@@ -43,6 +43,8 @@ template <typename T, unsigned N = 2> struct Box {
 };
 
 template <typename T> T identity(T value);
+template <typename Defaulted = int> void default_template_parameter(Defaulted value);
+template <typename Renamed> void default_template_parameter(Renamed other) {}
 
 using CountAlias = unsigned long;
 void redeclared_value(const CountAlias original_count);

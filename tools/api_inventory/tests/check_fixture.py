@@ -76,6 +76,9 @@ def check_declarations(events):
     assert len(class_templates) == 2
     assert len({event["identity_signature"] for event in class_templates}) == 1
     assert len({event["template_signature"] for event in class_templates}) == 1
+    default_templates = [event for event in declarations if event.get("qualified_name") == "fixture::default_template_parameter" and event.get("kind") == "FunctionTemplate"]
+    assert len(default_templates) == 2
+    assert default_templates[0]["template_signature"] != default_templates[1]["template_signature"]
     generated = one(events, "declaration", qualified_name="fixture::PublicType::from_macro")
     assert generated["macro_generated"]
     assert generated["spelling_location"] != generated["expansion_location"]

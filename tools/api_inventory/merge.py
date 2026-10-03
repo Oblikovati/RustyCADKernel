@@ -13,6 +13,17 @@ from typing import Iterator, cast
 
 from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
 
+CALLABLE_DECLARATION_KINDS = frozenset(
+    {
+        "Function",
+        "FunctionTemplate",
+        "CXXMethod",
+        "CXXConstructor",
+        "CXXDestructor",
+        "CXXConversion",
+    }
+)
+
 
 @dataclass
 class InventoryRecords:
@@ -50,15 +61,12 @@ def source_identity(filename: str, source: pathlib.Path) -> str:
 
 
 def declaration_identity(row: JSONObject) -> str:
-    """Use normalized USR signatures so spelling changes do not split redeclarations."""
+    """Use signatures for callable overloads while retaining USR identity elsewhere."""
     usr = row.get("usr")
     signature = row.get("identity_signature", row.get("signature"))
-    components = [
-        usr,
-        row.get("kind"),
-        signature,
-        row.get("template_signature"),
-    ]
+    components: list[JSONValue] = [usr, row.get("kind")]
+    if row.get("kind") in CALLABLE_DECLARATION_KINDS:
+        components.extend([signature, normalized_template_signature(row)])
     if not usr:
         components = [
             row.get("source"),
@@ -70,6 +78,88 @@ def declaration_identity(row: JSONObject) -> str:
             row.get("kind"),
         ]
     return hashlib.sha256(json.dumps(components, sort_keys=True).encode()).hexdigest()
+
+
+def normalized_template_signature(row: JSONObject) -> JSONValue:
+    """Remove top-level template defaults while preserving the recorded spelling."""
+    signature = row.get("template_signature")
+    if not isinstance(signature, str):
+        return signature
+    bounds = template_parameter_bounds(signature)
+    if bounds is None:
+        return signature
+    start, end = bounds
+    chunks = split_template_parameters(signature[start + 1 : end])
+    if chunks is None:
+        return signature
+    normalized = [without_template_default(chunk) for chunk in chunks]
+    return signature[: start + 1] + ", ".join(normalized) + signature[end:]
+
+
+def normalize_nested_template_defaults(parameter: str) -> str:
+    """Normalize defaults in nested template-template parameter lists."""
+    bounds = template_parameter_bounds(parameter)
+    if bounds is None:
+        return parameter
+    start, end = bounds
+    chunks = split_template_parameters(parameter[start + 1 : end])
+    if chunks is None:
+        return parameter
+    normalized = [without_template_default(chunk) for chunk in chunks]
+    return parameter[: start + 1] + ", ".join(normalized) + parameter[end:]
+
+
+def template_parameter_bounds(signature: str) -> tuple[int, int] | None:
+    """Find one balanced template parameter list, returning delimiters."""
+    start = signature.find("<", signature.find("template"))
+    if start < 0:
+        return None
+    depth = 0
+    for index in range(start, len(signature)):
+        depth += (signature[index] == "<") - (signature[index] == ">")
+        if depth == 0:
+            return start, index
+    return None
+
+
+def split_template_parameters(signature: str) -> list[str] | None:
+    """Split balanced top-level parameters; return None for malformed syntax."""
+    chunks: list[str] = []
+    depths = {"<": 0, "(": 0, "[": 0, "{": 0}
+    closing = {">": "<", ")": "(", "]": "[", "}": "{"}
+    start = 0
+    for index, character in enumerate(signature):
+        if character == "," and not any(depths.values()):
+            chunks.append(signature[start:index].strip())
+            start = index + 1
+        if character in depths:
+            depths[character] += 1
+        elif character in closing:
+            depths[closing[character]] -= 1
+            if min(depths.values()) < 0:
+                return None
+    if any(depths.values()):
+        return None
+    chunks.append(signature[start:].strip())
+    return chunks
+
+
+def without_template_default(parameter: str) -> str:
+    """Drop a top-level template default expression; e.g. `typename T = int`."""
+    parameter = normalize_nested_template_defaults(parameter)
+    depths = {"<": 0, "(": 0, "[": 0, "{": 0}
+    closing = {">": "<", ")": "(", "]": "[", "}": "{"}
+    for index, character in enumerate(parameter):
+        if character == "=" and not any(depths.values()):
+            before = parameter[index - 1] if index else ""
+            after = parameter[index + 1] if index + 1 < len(parameter) else ""
+            if before not in "=!<>" and after != "=":
+                return parameter[:index].rstrip()
+        if character in depths:
+            depths[character] += 1
+        elif character in closing:
+            depths[closing[character]] -= 1
+    return parameter
 
 
 def declaration_site(row: JSONObject, header: str) -> JSONObject:
@@ -91,13 +181,15 @@ def compare_declarations(
     records: InventoryRecords, first: JSONObject, other: JSONObject, header: str
 ) -> None:
     """Retain mismatches as blockers instead of choosing a convenient declaration."""
-    signature_key = (
-        "identity_signature"
-        if "identity_signature" in first or "identity_signature" in other
-        else "signature"
+    callable_kind = first.get("kind") in CALLABLE_DECLARATION_KINDS
+    signature_keys = (
+        ["identity_signature"]
+        if callable_kind and "identity_signature" in first
+        else ["signature", "identity_signature"]
     )
-    for key in (signature_key, "api_visible", "exclusion_reason"):
+    for key in (*signature_keys, "api_visible", "exclusion_reason"):
         if first.get(key) != other.get(key):
+            first["inventory_conflict"] = True
             conflict = {
                 "reason": "conflicting_declaration",
                 "id": first["id"],
@@ -133,6 +225,7 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
                 "id": identifier,
                 "sites": [site],
                 "signature_variants": [row.get("signature")],
+                "template_signature_variants": [row.get("template_signature")],
                 "default_argument_capture": default_capture,
                 "default_argument_observations": (
                     [row["default_arguments"]]
@@ -152,6 +245,11 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
     signatures = cast(list[JSONValue], existing["signature_variants"])
     if row.get("signature") not in signatures:
         signatures.append(row.get("signature"))
+    template_signatures = cast(
+        list[JSONValue], existing["template_signature_variants"]
+    )
+    if row.get("template_signature") not in template_signatures:
+        template_signatures.append(row.get("template_signature"))
     merge_default_arguments(existing, row)
     compare_declarations(records, existing, row, header)
 

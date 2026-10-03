@@ -90,6 +90,16 @@ def rust_inventory(paths: list[str]) -> JSONObject:
 
 
 class ApiCoverageCrosswalkTest(unittest.TestCase):
+    def test_inventory_conflict_withholds_a_unique_candidate(self) -> None:
+        declaration = cpp_decl("alias", "math_Vector", [], visible=True)
+        declaration["inventory_conflict"] = True
+        declaration["_toolkits"] = {"TKMath"}
+        status, candidates = cpp_candidates(
+            "math_Vector", "TKMath", {"math_Vector": [declaration]}
+        )
+        self.assertEqual(status, "conflicting_inventory")
+        self.assertEqual(candidates, [declaration])
+
     def test_unresolved_using_member_blocks_automatic_credit(self) -> None:
         declaration = cpp_decl(
             "unresolved", "fixture::Derived::member", [], visible=True

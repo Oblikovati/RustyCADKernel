@@ -26,6 +26,31 @@ def main():
     assert declaration_identity(base) == declaration_identity(dict(base))
     assert declaration_identity(base) != declaration_identity(size_overload)
     assert declaration_identity(base) != declaration_identity(constrained_overload)
+    defaulted = {
+        **base,
+        "template_signature": "template <typename __template_param_0 = int>",
+    }
+    redeclared = {
+        **base,
+        "template_signature": "template <typename __template_param_0>",
+    }
+    assert declaration_identity(defaulted) == declaration_identity(redeclared)
+    nested_default = {
+        **base,
+        "template_signature": "template <typename __template_param_0 = std::pair<int, long>>",
+    }
+    assert declaration_identity(nested_default) == declaration_identity(redeclared)
+    template_template_default = {
+        **base,
+        "template_signature": "template <template <typename T = int> class C>",
+    }
+    template_template_redecl = {
+        **base,
+        "template_signature": "template <template <typename T> class C>",
+    }
+    assert declaration_identity(template_template_default) == declaration_identity(
+        template_template_redecl
+    )
     renamed_parameter = {
         **base,
         "signature": "decltype(other.Nb()) (const Provider &) const",
