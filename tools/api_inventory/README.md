@@ -43,7 +43,7 @@ Each output line is a JSON object with an `event` discriminator and the
 `main_header` that caused it:
 
 * `declaration`: Clang declaration kind, USR, qualified name, canonical
-  signature/type, canonical and written parameter types, direct and ancestor
+  signature/type, template parameter signature, canonical and written parameter types, direct and ancestor
   access, parent USR, implicit/macro status, spelling/expansion locations,
   visibility disposition, and source path. Public and protected declarations
   are candidates. Private declarations and declarations nested under a private
@@ -51,6 +51,9 @@ Each output line is a JSON object with an `event` discriminator and the
   generated declarations, template-owned record/function patterns, access
   markers, static assertions, and other non-API AST nodes are also reported as
   exclusions. Namespace/file variables and static data members are candidates.
+  Dependent `UnresolvedUsingValue` declarations are retained with the explicit
+  `unresolved_using_value` exclusion reason until template instantiation can
+  resolve their targets.
 * `macro`: definition, replacement tokens, parameters, and location. Include
   guards are identified by Clang's completed multiple-include/header-guard
   analysis, emitted as `macro_category=include_guard`, and excluded from API
@@ -70,10 +73,12 @@ Each output line is a JSON object with an `event` discriminator and the
 
 Declarations are source occurrences. A header declaration and its `.lxx`
 definition can therefore share a USR while carrying distinct locations. A
-consumer should group symbol identity by USR and preserve all source
-occurrences. Template wrappers are candidates; the associated pattern record
-or function node is retained as `template_owned_declaration` to avoid claiming
-it as a second API symbol.
+consumer should group declarations by USR, kind, canonical signature, and
+template parameter signature, then preserve all source occurrences. Clang can
+emit the same USR for SFINAE overloads whose dependent return types differ; the
+canonical signature keeps those overloads distinct. Template wrappers are
+candidates; the associated pattern record or function node is retained as
+`template_owned_declaration` to avoid claiming it as a second API symbol.
 
 ## Completeness limits
 
@@ -118,9 +123,10 @@ from the current configuration.
 The merger writes deterministic compressed tables under
 `porting/api-inventory/`: declarations, macro candidates, header coverage,
 diagnostics, unsupported records, skipped preprocessor ranges, and contributing
-files. The manifest records counts and SHA256 values. C++ USR plus declaration
-kind identifies a declaration; all observed source sites are retained. A missing
-USR uses a visibly unverified location identity. Signature or visibility
+files. The manifest records counts and SHA256 values. C++ USR, declaration
+kind, canonical signature, and template parameter signature identify a
+declaration; all observed source sites are retained. A missing USR uses a
+visibly unverified location identity. Signature or visibility
 conflicts remain explicit blockers. Macro definitions are a separate table and
 must not silently enter the declaration coverage numerator.
 

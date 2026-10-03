@@ -64,6 +64,7 @@ bool isCandidateKind(const clang::Decl &declaration) {
   return llvm::isa<clang::NamespaceDecl, clang::NamespaceAliasDecl,
                    clang::RecordDecl, clang::EnumDecl, clang::EnumConstantDecl,
                    clang::FunctionDecl, clang::FieldDecl, clang::IndirectFieldDecl,
+                   clang::UnresolvedUsingValueDecl,
                    clang::TypedefNameDecl, clang::UsingDecl,
                    clang::UsingDirectiveDecl, clang::UsingEnumDecl,
                    clang::ClassTemplateDecl, clang::FunctionTemplateDecl,
@@ -102,6 +103,8 @@ std::string exclusionFor(const clang::Decl &declaration) {
   if (hasLocalAncestor(declaration)) return "local_scope";
   if (llvm::isa<clang::AccessSpecDecl>(&declaration)) return "access_marker";
   if (llvm::isa<clang::UsingShadowDecl>(&declaration)) return "using_shadow";
+  if (llvm::isa<clang::UnresolvedUsingValueDecl>(&declaration))
+    return "unresolved_using_value";
   if (llvm::isa<clang::FriendDecl>(&declaration)) return "friend_wrapper";
   if (llvm::isa<clang::StaticAssertDecl>(&declaration)) return "static_assert";
   if (llvm::isa<clang::LinkageSpecDecl, clang::ExternCContextDecl>(&declaration))
@@ -148,6 +151,26 @@ const clang::FunctionDecl *functionForApi(const clang::Decl &declaration) {
   if (const auto *templ = llvm::dyn_cast<clang::FunctionTemplateDecl>(&declaration))
     return templ->getTemplatedDecl();
   return nullptr;
+}
+
+const clang::FunctionTemplateDecl *functionTemplateForApi(
+    const clang::Decl &declaration) {
+  if (const auto *templ = llvm::dyn_cast<clang::FunctionTemplateDecl>(&declaration))
+    return templ;
+  const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration);
+  return function ? function->getDescribedFunctionTemplate() : nullptr;
+}
+
+std::string templateParameterSignature(const clang::Decl &declaration,
+                                       const clang::ASTContext &context) {
+  const auto *templ = functionTemplateForApi(declaration);
+  if (!templ) return "";
+  std::string signature;
+  llvm::raw_string_ostream output(signature);
+  clang::PrintingPolicy policy(context.getLangOpts());
+  policy.FullyQualifiedName = true;
+  templ->getTemplateParameters()->print(output, context, policy);
+  return output.str();
 }
 
 llvm::json::Array ancestorAccess(const clang::Decl &declaration) {
@@ -233,6 +256,7 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
       {"qualified_name", named ? named->getQualifiedNameAsString() : ""},
       {"kind", kind},
       {"signature", canonicalSignature(declaration, context)},
+      {"template_signature", templateParameterSignature(declaration, context)},
       {"access", directAccess(declaration)},
       {"ancestor_access", ancestorAccess(declaration)},
       {"parent_usr", declaration.getDeclContext()->isTranslationUnit()

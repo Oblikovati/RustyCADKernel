@@ -50,9 +50,14 @@ def source_identity(filename: str, source: pathlib.Path) -> str:
 
 
 def declaration_identity(row: JSONObject) -> str:
-    """Use compiler USRs; location fallback remains explicitly unverified."""
+    """Use USR plus canonical signature to retain SFINAE overloads."""
     usr = row.get("usr")
-    components = [usr, row.get("kind")]
+    components = [
+        usr,
+        row.get("kind"),
+        row.get("signature"),
+        row.get("template_signature"),
+    ]
     if not usr:
         components = [
             row.get("source"),

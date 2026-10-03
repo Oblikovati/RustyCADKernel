@@ -28,9 +28,6 @@ def one(events, event_type: str, **fields):
 
 def check_declarations(events):
     declarations = [event for event in events if event.get("event") == "declaration"]
-    usr_rows = [event for event in declarations if event["api_visible"]]
-    usrs = [event["usr"] for event in usr_rows]
-    assert len(usrs) == len(set(usrs)), "candidate declaration USRs must be unique"
     assert all(event["source"] for event in declarations)
     assert one(events, "declaration", qualified_name="fixture::PublicType::protected_field")["api_visible"]
     assert one(events, "declaration", qualified_name="fixture::PublicType::private_field")["exclusion_reason"] == "private_access"
@@ -50,6 +47,15 @@ def check_declarations(events):
     assert one(events, "declaration", kind="StaticAssert")["exclusion_reason"] == "static_assert"
     overloads = [event for event in declarations if event.get("qualified_name") == "fixture::PublicType::overload"]
     assert len(overloads) == 2 and overloads[0]["usr"] != overloads[1]["usr"]
+    sfinae_overloads = [event for event in declarations if event.get("qualified_name") == "fixture::SFINAEOverloads::IsValidIn" and event.get("kind") == "FunctionTemplate"]
+    assert len(sfinae_overloads) == 2
+    assert sfinae_overloads[0]["usr"] == sfinae_overloads[1]["usr"]
+    assert len({event["signature"] for event in sfinae_overloads}) == 2
+    assert len({event["template_signature"] for event in sfinae_overloads}) == 1
+    unresolved_using = one(events, "declaration", qualified_name="fixture::DependentValueBase::inherited_value")
+    assert unresolved_using["kind"] == "UnresolvedUsingValue"
+    assert unresolved_using["exclusion_reason"] == "unresolved_using_value"
+    assert not unresolved_using["api_visible"]
     generated = one(events, "declaration", qualified_name="fixture::PublicType::from_macro")
     assert generated["macro_generated"]
     assert generated["spelling_location"] != generated["expansion_location"]
