@@ -90,3 +90,43 @@ rows are not expanded into C++ declarations or Rust coverage claims. Rust item
 matching, source/header reachability validation, C-binding dependency
 exclusions, and global inventory reconciliation belong to the orchestration
 and proof pipeline.
+
+## Whole-checkout capture and reconciliation
+
+The header manifest is the input boundary. Capture uses each header's owning
+CMake toolkit flags and fingerprints the pinned source, compiler binary and
+libraries, generated version header, compilation database, SDK headers, and
+collector. Successful cached probes are reusable only with the same inputs and
+unchanged artifact bytes. Failed probes remain in the header table.
+
+```sh
+python3 tools/capture_occt_inventory.py \
+  --source /path/to/OCCT \
+  --database /path/to/configured/compile_commands.json \
+  --extractor target/api_inventory/occt-api-extract --jobs 8
+python3 tools/merge_occt_inventory.py \
+  --capture target/api-proof/occt-inventory
+PYTHONPATH=tools python3 -m unittest discover -s tools/tests
+```
+
+`--limit N` runs a development subset and leaves every other header pending.
+It cannot produce a complete inventory. `.lxx` fragments are tracked through
+successful containing-header probes. Generated headers have explicit generated
+identities. Shared headers retain every toolkit owner, including owners absent
+from the current configuration.
+
+The merger writes deterministic compressed tables under
+`porting/api-inventory/`: declarations, macro candidates, header coverage,
+diagnostics, unsupported records, skipped preprocessor ranges, and contributing
+files. The manifest records counts and SHA256 values. C++ USR plus declaration
+kind identifies a declaration; all observed source sites are retained. A missing
+USR uses a visibly unverified location identity. Signature or visibility
+conflicts remain explicit blockers. Macro definitions are a separate table and
+must not silently enter the declaration coverage numerator.
+
+A successful standalone header parse proves only that configured header scope.
+The inventory does not yet resolve every standalone-header failure, inactive
+preprocessor branch, platform-specific toolkit, macro mapping, or behavioral
+obligation. Therefore `coverage_proof` and `declaration_inventory_complete`
+remain false. A ledger mapping alone is not compiler correspondence or test
+parity evidence.
