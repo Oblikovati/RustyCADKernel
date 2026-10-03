@@ -110,6 +110,9 @@ fn mesh_free_edges(
     if !BRepMeshEdgeDiscret::new().perform(model, parameters, range) {
         return Err(unsupported_shape(shape));
     }
+    if !BRepMeshModelPostProcessor::new().perform(model, parameters, range) {
+        return Err(unsupported_shape(shape));
+    }
     model_status_flags(model)
 }
 

@@ -3,9 +3,9 @@
 //! `support` (TKPrim is not ported).
 //!
 //! Three declarations map directly here: ASCII shape save/restore, all eight empty
-//! topology types, and box subshape tolerances. The other eight source declarations
-//! still need parallel, NURBS, binary persistence, mesh, property, or Boolean behavior;
-//! see docs/tkbrep-progress.md, "Dependency gap". Native CTest builds all eleven.
+//! topology types, and box subshape tolerances. Six of the other eight declarations
+//! map in extended-stream and TKMesh targets; two Boolean-dependent cases remain. See
+//! docs/tkbrep-progress.md, "Dependency gap". Native CTest builds all eleven.
 #![allow(non_snake_case)]
 mod support;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};

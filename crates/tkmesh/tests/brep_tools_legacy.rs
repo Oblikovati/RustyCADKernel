@@ -10,11 +10,12 @@ use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::storage::IoStream;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
+use rustycad_tkmath::gp::Point3;
 use rustycad_tkmath::poly::mesh_purpose;
 use rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh;
 use rustycad_tkmesh::imesh_tools::MeshParameters;
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeShape};
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
 use std::io::{Read, Seek, SeekFrom};
 
@@ -137,4 +138,36 @@ fn BRepTools_Test__ModDataBug_31946_TriangleOptions() {
         expect_equivalent_shape(&shape, &with_triangles, 12);
         expect_equivalent_shape(&shape, &without_triangles, 0);
     }
+}
+
+#[test]
+fn BRepTools_Test__ModDataBug_27356_CleanRemovesFreeEdgePolygon3d() {
+    let an_edge = free_line_edge();
+    let edge_shape = an_edge.clone().into_shape();
+    BRepMeshIncrementalMesh::with_parameters(
+        &edge_shape,
+        &MeshParameters {
+            deflection: 0.01,
+            ..MeshParameters::default()
+        },
+        &ProgressRange::default(),
+    )
+    .expect("BRepMesh_IncrementalMesh::IsDone() should be true");
+
+    let (polygon, _a_location) = BRepTool::polygon3d(&an_edge).unwrap();
+    assert!(!polygon.is_null());
+
+    brep_tools::clean(&edge_shape, false).unwrap();
+
+    let (polygon, _) = BRepTool::polygon3d(&an_edge).unwrap();
+    assert!(polygon.is_null());
+}
+
+fn free_line_edge() -> rustycad_tkbrep::topods::Edge {
+    let maker =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0))
+            .unwrap();
+    let edge = maker.edge().unwrap();
+    assert!(!edge.is_null());
+    edge
 }
