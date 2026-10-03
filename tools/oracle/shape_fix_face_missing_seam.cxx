@@ -3,6 +3,7 @@
 #include <BRep_Tool.hxx>
 #include <Geom2d_Line.hxx>
 #include <Geom_Circle.hxx>
+#include <Geom_Plane.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <GeomConvert.hxx>
 #include <Geom_ToroidalSurface.hxx>
@@ -28,6 +29,12 @@ static void addSphereBoundary(BRep_Builder& builder, TopoDS_Face& face);
 
 int main() {
   BRep_Builder builder;
+  const Handle(Geom_Plane) plane = new Geom_Plane(gp_Ax3());
+  TopoDS_Face planarFace;
+  builder.MakeFace(planarFace, plane, 1.e-7);
+  ShapeFix_Face planarFixer(planarFace);
+  std::cout << "plane_open changed=" << planarFixer.FixMissingSeam() << '\n';
+
   const Handle(Geom_SphericalSurface) surface =
       new Geom_SphericalSurface(gp_Ax3(), 1.0);
   TopoDS_Face face;

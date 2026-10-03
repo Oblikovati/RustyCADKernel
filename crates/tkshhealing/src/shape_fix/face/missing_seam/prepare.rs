@@ -83,13 +83,27 @@ mod tests {
     use rustycad_tkernel::standard::Handle;
     use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
     use rustycad_tkg3d::geom::{
-        GeomCircle, GeomCylindricalSurface, GeomSphericalSurface, GeomSurface, GeomToroidalSurface,
+        GeomCircle, GeomCylindricalSurface, GeomPlane, GeomSphericalSurface, GeomSurface,
+        GeomToroidalSurface,
     };
     use rustycad_tkg3d::top_abs::ShapeEnum;
     use rustycad_tkmath::gp::{
         Axis2, Axis3, Direction2, Point2, Point3, StandardDirection2, StandardDirection3,
     };
     use std::f64::consts::TAU;
+
+    #[test]
+    fn open_plane_keeps_native_missing_seam_noop() {
+        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+        let mut face = Face::default();
+        BRepBuilder::default()
+            .make_face_on_surface(&mut face, &surface, precision::confusion())
+            .unwrap();
+        let fixer = ShapeFixFace::new(face.into_shape());
+        assert!(!fixer.fix_missing_seam().unwrap());
+        assert!(fixer.context().is_null());
+        assert_native_row("plane_open changed=0".to_owned(), 0);
+    }
 
     #[test]
     fn sphere_missing_seam_becomes_a_one_patch_periodic_grid() {
@@ -116,7 +130,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(sphere_row(&result), 0);
+        assert_native_row(sphere_row(&result), 1);
     }
 
     #[test]
@@ -127,7 +141,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(cylinder_row(&result), 1);
+        assert_native_row(cylinder_row(&result), 2);
     }
 
     #[test]
@@ -138,7 +152,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(torus_row(&result), 2);
+        assert_native_row(torus_row(&result), 3);
     }
 
     #[test]
@@ -149,7 +163,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(bspline_sphere_row(&result), 3);
+        assert_native_row(bspline_sphere_row(&result), 4);
     }
 
     fn sphere_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
