@@ -2,6 +2,11 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
+#[path = "wire_degenerated.rs"]
+mod wire_degenerated;
+#[path = "wire_shifted.rs"]
+mod wire_shifted;
+
 use super::{FixRoot, FixRootData};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
@@ -9,7 +14,8 @@ use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
 use crate::shape_fix::ShapeFixShapeTolerance;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_tools::ReShape;
-use rustycad_tkbrep::topods::{self, Edge, Face, Vertex, Wire};
+use rustycad_tkbrep::topexp::Explorer;
+use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkg2d::geom2d::Geom2dCurve;
@@ -23,6 +29,8 @@ struct WireFixState {
     reorder_status: i32,
     gaps_3d_status: i32,
     gaps_2d_status: i32,
+    degenerated_status: i32,
+    last_fix_status: i32,
     intersections_status: i32,
     closed_mode: bool,
 }
@@ -42,10 +50,12 @@ impl Default for ShapeFixWire {
             parent: StandardTransient::default(),
             root: FixRootData::default(),
             state: SharedState::new(WireFixState {
-                analyzer: Handle::default(),
+                analyzer: Handle::new(ShapeAnalysisWire::new()),
                 reorder_status: 0,
                 gaps_3d_status: 0,
                 gaps_2d_status: 0,
+                degenerated_status: 0,
+                last_fix_status: 0,
                 intersections_status: 0,
                 closed_mode: true,
             }),
@@ -63,14 +73,63 @@ impl ShapeFixWire {
     pub fn init(&self, analyzer: &Handle<ShapeAnalysisWire>) {
         self.state.write().analyzer = analyzer.clone();
         self.clear_statuses();
+        self.root.with_mut(|fields| fields.shape = Shape::default());
     }
 
     /// `Load(wire)`: replace the analyzer edge list and clear prior statuses.
     pub fn load(&self, wire: &Wire) -> Result<(), Failure> {
-        let analyzer = self.ensure_analyzer();
-        analyzer.load_wire(wire)?;
         self.clear_statuses();
+        let working_wire = self.context_wire(wire)?;
+        let analyzer = self.ensure_analyzer();
+        analyzer.load_wire(&working_wire)?;
+        self.root
+            .with_mut(|fields| fields.shape = wire.clone().into_shape());
         Ok(())
+    }
+
+    /// `Load(wireData)`: share data and apply context replacements in place;
+    /// `fixer.load_wire_data(&data)?`.
+    pub fn load_wire_data(&self, wire_data: &Handle<ShapeExtendWireData>) -> Result<(), Failure> {
+        self.clear_statuses();
+        self.ensure_analyzer().load_wire_data(wire_data);
+        self.root.with_mut(|fields| fields.shape = Shape::default());
+        self.update_wire()
+    }
+
+    /// Applies the current reshape context to every working edge, splicing replacement edges.
+    /// `fixer.update_wire()?`.
+    pub fn update_wire(&self) -> Result<(), Failure> {
+        let context = self.context();
+        if context.is_null() {
+            return Ok(());
+        }
+        let analyzer = self.ensure_analyzer();
+        self.replace_context_edges(&analyzer.wire_data(), &context)
+    }
+
+    /// Current analysis data; `let data = fixer.wire_data()?`.
+    pub fn wire_data(&self) -> Result<Handle<ShapeExtendWireData>, Failure> {
+        Ok(self.analyzer()?.wire_data())
+    }
+
+    /// Whether the analyzer has at least one working edge; `fixer.is_loaded()`.
+    pub fn is_loaded(&self) -> bool {
+        self.state.read().analyzer.is_loaded()
+    }
+
+    /// Whether both working edges and a supporting face are available; `fixer.is_ready()`.
+    pub fn is_ready(&self) -> bool {
+        self.state.read().analyzer.is_ready()
+    }
+
+    /// Builds a wire from the current working edge sequence; `fixer.wire()?`.
+    pub fn wire(&self) -> Result<Wire, Failure> {
+        self.ensure_analyzer().wire_data().wire()
+    }
+
+    /// Builds a wire using the BRep API maker; `fixer.wire_api_make()?`.
+    pub fn wire_api_make(&self) -> Result<Wire, Failure> {
+        self.ensure_analyzer().wire_data().wire_api_make()
     }
 
     /// `SetFace(face)`: update the shared analyzer support face.
@@ -176,8 +235,52 @@ impl ShapeFixWire {
         Ok(analyzer)
     }
 
-    fn wire_data(&self) -> Result<Handle<ShapeExtendWireData>, Failure> {
-        Ok(self.analyzer()?.wire_data())
+    fn context_wire(&self, wire: &Wire) -> Result<Wire, Failure> {
+        let context = self.context();
+        if context.is_null() {
+            return Ok(wire.clone());
+        }
+        let context = context
+            .get()
+            .ok_or_else(|| Failure::new("ShapeFix_Wire context is null"))?;
+        let replacement = ReShape::apply(context, &wire.clone().into_shape(), ShapeEnum::Shape)?;
+        topods::wire(&replacement)
+    }
+
+    fn replace_context_edges(
+        &self,
+        wire_data: &ShapeExtendWireData,
+        context: &Handle<ShapeBuildReShape>,
+    ) -> Result<(), Failure> {
+        let context = context
+            .get()
+            .ok_or_else(|| Failure::new("ShapeFix_Wire context is null"))?;
+        let mut index = 1;
+        while index <= wire_data.nb_edges() {
+            let edge = wire_data.edge(index)?;
+            let replacement =
+                ReShape::apply(context, &edge.clone().into_shape(), ShapeEnum::Shape)?;
+            if replacement == edge.clone().into_shape() {
+                index += 1;
+                continue;
+            }
+            let replacements = replacement_edges(&replacement)?;
+            self.splice_context_edges(wire_data, index, &replacements)?;
+            index += replacements.len() as i32;
+        }
+        Ok(())
+    }
+
+    fn splice_context_edges(
+        &self,
+        wire_data: &ShapeExtendWireData,
+        index: i32,
+        replacements: &[Edge],
+    ) -> Result<(), Failure> {
+        for (offset, edge) in replacements.iter().enumerate() {
+            wire_data.add_edge(edge, index + offset as i32)?;
+        }
+        wire_data.remove(index + replacements.len() as i32)
     }
 
     fn closed_mode(&self) -> bool {
@@ -442,6 +545,8 @@ impl ShapeFixWire {
         state.reorder_status = 0;
         state.gaps_3d_status = 0;
         state.gaps_2d_status = 0;
+        state.degenerated_status = 0;
+        state.last_fix_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {
@@ -567,4 +672,20 @@ fn unsupported_gap(index: i32, is_3d: bool, analyzer: &ShapeAnalysisWire) -> Fai
             "ShapeFix_Wire gap correction is not ported for {space} pair {index}, gap {distance}"
         ),
     )
+}
+
+fn replacement_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
+    if shape.is_null() {
+        return Ok(Vec::new());
+    }
+    if shape.shape_type()? == ShapeEnum::Edge {
+        return Ok(vec![topods::edge(shape)?]);
+    }
+    let mut explorer = Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?;
+    let mut edges = Vec::new();
+    while explorer.more() {
+        edges.push(topods::edge(explorer.current())?);
+        explorer.next()?;
+    }
+    Ok(edges)
 }

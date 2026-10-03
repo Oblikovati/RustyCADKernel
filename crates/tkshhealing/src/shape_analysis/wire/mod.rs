@@ -12,6 +12,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 mod connected;
+mod degenerated;
 mod gaps;
 mod order;
 mod state;
