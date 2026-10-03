@@ -221804,6 +221804,33 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_shape_connect_into",
       "status": "implemented",
       "notes": "Native endpoint pairing and exact tie/status ordering. Four output references represented by caller-owned [f64;4] in tailhead,tailtail,headtail,headhead order, preserved on early failure and endpoint exception. Eleven native rows cover four pairings, ties, tolerance, null/unsupported shapes, wire orientation and disconnected-wire NullObject exception with DONE1 already set. No whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckCurveGaps()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_curve_gaps",
+      "status": "implemented",
+      "notes": "Native 45-point curve/surface adaptor sampling, independent parameter ranges, reversal-independent evaluation, retained metrics on missing-curve failure, aggregate reset/OR and ClearStatuses. Five pinned native rows compared exactly, plus unloaded checks. Does not establish full wire or toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckCurveGap(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_curve_gap_at",
+      "status": "implemented",
+      "notes": "Native 45-point curve/surface adaptor sampling, independent parameter ranges, reversal-independent evaluation, retained metrics on missing-curve failure, aggregate reset/OR and ClearStatuses. Five pinned native rows compared exactly, plus unloaded checks. Does not establish full wire or toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusCurveGaps(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_curve_gaps",
+      "status": "implemented",
+      "notes": "Native 45-point curve/surface adaptor sampling, independent parameter ranges, reversal-independent evaluation, retained metrics on missing-curve failure, aggregate reset/OR and ClearStatuses. Five pinned native rows compared exactly, plus unloaded checks. Does not establish full wire or toolkit parity."
     }
   ],
   "tests": [

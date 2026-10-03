@@ -13,6 +13,7 @@ use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 mod closed;
 mod connected;
+mod curve_gaps;
 mod degenerated;
 mod gaps;
 mod lacking;
@@ -29,6 +30,7 @@ struct WireAnalysisFields {
     status_connected: i32,
     status_gaps3d: i32,
     status_gaps2d: i32,
+    status_curve_gaps: i32,
     status_degenerated: i32,
     status_closed: i32,
     status_lacking: i32,
@@ -63,6 +65,7 @@ impl Default for ShapeAnalysisWire {
                 status_connected: 0,
                 status_gaps3d: 0,
                 status_gaps2d: 0,
+                status_curve_gaps: 0,
                 status_degenerated: 0,
                 status_closed: 0,
                 status_lacking: 0,
