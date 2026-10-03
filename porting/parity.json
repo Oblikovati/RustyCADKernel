@@ -30324,6 +30324,54 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::Config::MaxIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::max_iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::Config::Tolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::Config::XTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::x_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::Config::FTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::f_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::Config::RelativeTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::relative_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::Config::StepMin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::step_min",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::Config()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
@@ -30354,6 +30402,22 @@
       "rust_item": "rustycad_tkmath::math_utils::BoundedConfig",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig::LowerBound",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BoundedConfig::lower_bound",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig::UpperBound",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BoundedConfig::upper_bound",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::BoundedConfig()",
@@ -30388,6 +30452,14 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::NDimConfig::UseBounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NDimConfig::use_bounds",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::NDimConfig()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
@@ -30410,6 +30482,38 @@
       "rust_item": "rustycad_tkmath::math_utils::IntegConfig",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig::InitialOrder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::initial_order",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig::MaxOrder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::max_order",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig::MaxIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::max_iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig::Tolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::IntegConfig()",
@@ -30442,6 +30546,22 @@
       "rust_item": "rustycad_tkmath::math_utils::LinConfig",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinConfig::SingularityTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinConfig::singularity_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::LinConfig::UsePivoting",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinConfig::use_pivoting",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::LinConfig()",
@@ -31292,6 +31412,46 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::ScalarResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::Root",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::root",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::Value",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::value",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::Derivative",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::derivative",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::ScalarResult::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
@@ -31314,6 +31474,30 @@
       "rust_item": "rustycad_tkmath::math_utils::PolyResult",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::NbRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::number_of_roots",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::Roots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::roots",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::PolyResult::IsDone() const",
@@ -31348,6 +31532,54 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::VectorResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::Solution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::solution",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::Value",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::value",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::Gradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::gradient",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::Jacobian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::jacobian",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::VectorResult::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
@@ -31370,6 +31602,30 @@
       "rust_item": "rustycad_tkmath::math_utils::LinearResult",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult::Solution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearResult::solution",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::LinearResult::IsDone() const",
@@ -31396,6 +31652,30 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::LinearMultipleResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearMultipleResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::LinearMultipleResult::Solutions",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearMultipleResult::solutions",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::LinearMultipleResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearMultipleResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::LinearMultipleResult::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
@@ -31418,6 +31698,38 @@
       "rust_item": "rustycad_tkmath::math_utils::EigenResult",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::EigenValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult::eigen_values",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::EigenVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult::eigen_vectors",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::EigenResult::IsDone() const",
@@ -31444,6 +31756,46 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::DecompResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::L",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::lower",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::U",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::upper",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::diagonal",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::DecompResult::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
@@ -31468,6 +31820,54 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
+      "upstream_id": "MathUtils::IntegResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::NbPoints",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::number_of_points",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::Value",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::value",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::AbsoluteError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::absolute_error",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::RelativeError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::relative_error",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
       "upstream_id": "MathUtils::IntegResult::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
@@ -31490,6 +31890,30 @@
       "rust_item": "rustycad_tkmath::math_utils::InverseResult",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::InverseResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult::Inverse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::InverseResult::inverse",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::InverseResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data field is available through the public Rust MathUtils facade field."
     },
     {
       "upstream_id": "MathUtils::InverseResult::IsDone() const",
@@ -91889,7 +92313,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91921,7 +92345,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -214526,7 +214950,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",

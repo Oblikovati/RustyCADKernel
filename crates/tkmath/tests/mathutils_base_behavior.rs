@@ -117,18 +117,54 @@ fn convergence_uses_finite_absolute_and_relative_tests() {
 }
 #[test]
 fn configuration_defaults_and_validation() {
+    let defaults: Config = Config::default();
+    assert_eq!(
+        (
+            defaults.max_iterations,
+            defaults.tolerance,
+            defaults.x_tolerance,
+            defaults.f_tolerance,
+            defaults.relative_tolerance,
+            defaults.step_min,
+        ),
+        (100, 1e-10, 1e-10, 1e-10, 1e-10, f64::EPSILON)
+    );
     let c: Config = Config::new(1e-8, 7);
     assert!(c.is_valid());
     assert_eq!(c.step_min, f64::EPSILON);
     assert!(!Config::new(-1.0, 7).is_valid());
     assert!(!Config::new(1e-8, 0).is_valid());
     assert!(BoundedConfig::default().is_valid());
+    assert_eq!(
+        (
+            BoundedConfig::default().lower_bound,
+            BoundedConfig::default().upper_bound
+        ),
+        (-2e100, 2e100)
+    );
     assert!(!BoundedConfig::new(2.0, 1.0, 1e-8, 7).is_valid());
     assert!(NDimConfig::default().is_valid());
     assert!(NDimConfig::new(1e-8, 7, true).use_bounds);
+    assert!(!NDimConfig::default().use_bounds);
     assert!(IntegConfig::default().is_valid());
+    assert_eq!(
+        (
+            IntegConfig::default().initial_order,
+            IntegConfig::default().max_order,
+            IntegConfig::default().max_iterations,
+            IntegConfig::default().tolerance,
+        ),
+        (15, 61, 100, 1e-10)
+    );
     assert!(!IntegConfig::new(f64::INFINITY, 7).is_valid());
     assert!(LinConfig::default().is_valid());
+    assert_eq!(
+        (
+            LinConfig::default().singularity_tolerance,
+            LinConfig::default().use_pivoting,
+        ),
+        (1e-15, true)
+    );
     assert!(
         !LinConfig {
             singularity_tolerance: -1.0,
@@ -181,6 +217,15 @@ fn domains_preserve_unchecked_arithmetic_and_checked_containment() {
 #[test]
 fn result_scalarresult_defaults_to_not_converged() {
     let mut result: ScalarResult = ScalarResult::default();
+    assert_eq!(
+        (
+            result.iterations,
+            result.root,
+            result.value,
+            result.derivative
+        ),
+        (0, None, None, None)
+    );
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -190,6 +235,7 @@ fn result_scalarresult_defaults_to_not_converged() {
 #[test]
 fn result_polyresult_defaults_to_not_converged() {
     let mut result: PolyResult = PolyResult::default();
+    assert_eq!((result.number_of_roots, result.roots), (0, [0.0; 4]));
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -199,6 +245,11 @@ fn result_polyresult_defaults_to_not_converged() {
 #[test]
 fn result_vectorresult_defaults_to_not_converged() {
     let mut result: VectorResult = VectorResult::default();
+    assert_eq!(result.iterations, 0);
+    assert!(result.solution.is_none());
+    assert!(result.value.is_none());
+    assert!(result.gradient.is_none());
+    assert!(result.jacobian.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -208,6 +259,8 @@ fn result_vectorresult_defaults_to_not_converged() {
 #[test]
 fn result_linearresult_defaults_to_not_converged() {
     let mut result: LinearResult = LinearResult::default();
+    assert!(result.solution.is_none());
+    assert!(result.determinant.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -217,6 +270,8 @@ fn result_linearresult_defaults_to_not_converged() {
 #[test]
 fn result_linearmultipleresult_defaults_to_not_converged() {
     let mut result: LinearMultipleResult = LinearMultipleResult::default();
+    assert!(result.solutions.is_none());
+    assert!(result.determinant.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -226,6 +281,9 @@ fn result_linearmultipleresult_defaults_to_not_converged() {
 #[test]
 fn result_eigenresult_defaults_to_not_converged() {
     let mut result: EigenResult = EigenResult::default();
+    assert_eq!(result.iterations, 0);
+    assert!(result.eigen_values.is_none());
+    assert!(result.eigen_vectors.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -235,6 +293,10 @@ fn result_eigenresult_defaults_to_not_converged() {
 #[test]
 fn result_decompresult_defaults_to_not_converged() {
     let mut result: DecompResult = DecompResult::default();
+    assert!(result.lower.is_none());
+    assert!(result.upper.is_none());
+    assert!(result.diagonal.is_none());
+    assert!(result.determinant.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -244,6 +306,16 @@ fn result_decompresult_defaults_to_not_converged() {
 #[test]
 fn result_integresult_defaults_to_not_converged() {
     let mut result: IntegResult = IntegResult::default();
+    assert_eq!(
+        (
+            result.iterations,
+            result.number_of_points,
+            result.value,
+            result.absolute_error,
+            result.relative_error
+        ),
+        (0, 0, None, None, None)
+    );
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
@@ -253,6 +325,8 @@ fn result_integresult_defaults_to_not_converged() {
 #[test]
 fn result_inverseresult_defaults_to_not_converged() {
     let mut result: InverseResult = InverseResult::default();
+    assert!(result.inverse.is_none());
+    assert!(result.determinant.is_none());
     assert!(!result.is_done());
     assert!(!bool::from(&result));
     result.status = Status::Ok;
