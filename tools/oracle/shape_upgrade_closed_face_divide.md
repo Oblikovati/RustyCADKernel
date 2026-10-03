@@ -2,8 +2,10 @@
 
 The probe covers a cylindrical face split from an existing seam with the default
 and two interior cut points, and the geometric-closure fallback on a sphere.
-It records the changed result, resulting face/edge counts, seam count, and
-ShapeExtend status bits.
+The near-closed sphere uses `SetPrecision(0.1)` to cover precision propagation
+through closure detection and adaptor resolution; its truncated U range does
+not qualify at the default confusion tolerance. The probe records the changed
+result, resulting face/edge counts, seam count, and ShapeExtend status bits.
 
 ```sh
 g++ -std=c++17 -I"$OCCT_INSTALL/include/opencascade" \

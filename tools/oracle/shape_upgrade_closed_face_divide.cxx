@@ -8,6 +8,10 @@
 #include <TopoDS_Shape.hxx>
 #include <TopoDS_Wire.hxx>
 #include <BRep_Tool.hxx>
+#include <BRepBuilderAPI_MakeFace.hxx>
+#include <Geom_SphericalSurface.hxx>
+#include <gp_Ax3.hxx>
+#include <gp_Pnt.hxx>
 #include <iostream>
 
 static void report(const char* name, ShapeUpgrade_ClosedFaceDivide& divider, bool changed) {
@@ -51,4 +55,16 @@ int main() {
   ShapeUpgrade_ClosedFaceDivide sphereDivider(sphereFace);
   const bool sphereChanged = sphereDivider.Perform();
   report("sphere_geometric_closure", sphereDivider, sphereChanged);
+
+  occ::handle<Geom_SphericalSurface> nearClosedSurface =
+      new Geom_SphericalSurface(gp_Ax3(gp_Pnt(0.0, 0.0, 0.0), gp_Dir(0.0, 0.0, 1.0)), 2.0);
+  TopoDS_Face nearClosedFace =
+      BRepBuilderAPI_MakeFace(nearClosedSurface, 0.0, 6.283185307179586 - 0.01, -1.0, 1.0, 1e-7);
+  ShapeUpgrade_ClosedFaceDivide defaultPrecisionDivider(nearClosedFace);
+  const bool defaultPrecisionChanged = defaultPrecisionDivider.Perform();
+  report("near_closed_default_precision", defaultPrecisionDivider, defaultPrecisionChanged);
+  ShapeUpgrade_ClosedFaceDivide precisionDivider(nearClosedFace);
+  precisionDivider.SetPrecision(0.1);
+  const bool precisionChanged = precisionDivider.Perform();
+  report("near_closed_precision", precisionDivider, precisionChanged);
 }
