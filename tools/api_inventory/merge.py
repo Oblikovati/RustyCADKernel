@@ -230,6 +230,26 @@ def consume_capture(
         capture_diagnostic(records, result, "compiler_stderr")
 
 
+def exclude_implementation_only_declarations(records: InventoryRecords) -> int:
+    """Withhold source-TU definitions lacking any header declaration site."""
+    implementation_suffixes = {".c", ".cc", ".cpp", ".cxx"}
+    excluded = 0
+    for declaration in records.declarations.values():
+        sites = cast(list[JSONObject], declaration["sites"])
+        sources = [site.get("source") for site in sites]
+        has_header_site = any(
+            pathlib.Path(str(path)).suffix not in implementation_suffixes
+            for path in sources
+        )
+        if not sources or has_header_site:
+            continue
+        declaration["api_visible"] = False
+        declaration["api_resolution"] = "implementation_only_without_header_declaration"
+        declaration["exclusion_reason"] = "implementation_only_no_header_site"
+        excluded += 1
+    return excluded
+
+
 def coverage_rows(capture: JSONObject, records: InventoryRecords) -> list[JSONObject]:
     """Keep missing configurations and unobserved fragments in the denominator."""
     results = {
