@@ -1031,3 +1031,9 @@ outputs, forward-bound reuse in seam approximation, CN continuity errors, and tr
 versus approximation exception boundaries. The parent and splitting tools retain
 shared handle identity. Approximation-not-done and arbitrary geometry domains still
 need broader differential coverage; the toolkit acceptance gate remains false.
+
+`ShapeAnalysis` now supplies `GetFaceUVBounds`, `ContourArea`, `FindBounds`, and
+`IsOuterBound`, completing its eight explicit package operations alongside the
+existing outer-wire, 2D area and period-shift functions. Eighteen generated native
+rows and four Rust regressions cover bounds, classification, contour closure and
+oriented endpoints. This API implementation claim is not exhaustive behavioral proof.

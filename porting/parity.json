@@ -220871,6 +220871,38 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallBezierCurves::<rustycad_tkshhealing::shape_upgrade::FixSmallCurves>::approx",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_fix_small_bezier_curves.cxx: sixteen generated cases preserve 3D/2D splitter status asymmetry, forward bounds reused by the seam, CN approximation errors, and exception boundaries. Four Rust regressions also cover actual parent projection and shared state. Generated fixtures do not replace legacy test obligations or establish exhaustive behavior."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::GetFaceUVBounds(const TopoDS_Face &, double &, double &, double &, double &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::get_face_uv_bounds",
+      "status": "implemented",
+      "notes": "Pinned tools/oracle/tkshhealing_shape_analysis_package.cxx: eighteen generated rows cover natural/trimmed pcurve bounds, missing-pcurve failure, reversed/single/multiple wires, sampled contour closure, and oriented endpoint discovery. Four Rust regressions pass; generated fixtures do not replace legacy test obligations or constitute exhaustive behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::ContourArea(const TopoDS_Wire &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::contour_area",
+      "status": "implemented",
+      "notes": "Pinned tools/oracle/tkshhealing_shape_analysis_package.cxx: eighteen generated rows cover natural/trimmed pcurve bounds, missing-pcurve failure, reversed/single/multiple wires, sampled contour closure, and oriented endpoint discovery. Four Rust regressions pass; generated fixtures do not replace legacy test obligations or constitute exhaustive behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::FindBounds(const TopoDS_Shape &, TopoDS_Vertex &, TopoDS_Vertex &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::find_bounds",
+      "status": "implemented",
+      "notes": "Pinned tools/oracle/tkshhealing_shape_analysis_package.cxx: eighteen generated rows cover natural/trimmed pcurve bounds, missing-pcurve failure, reversed/single/multiple wires, sampled contour closure, and oriented endpoint discovery. Four Rust regressions pass; generated fixtures do not replace legacy test obligations or constitute exhaustive behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::IsOuterBound(const TopoDS_Face &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::is_outer_bound",
+      "status": "implemented",
+      "notes": "Pinned tools/oracle/tkshhealing_shape_analysis_package.cxx: eighteen generated rows cover natural/trimmed pcurve bounds, missing-pcurve failure, reversed/single/multiple wires, sampled contour closure, and oriented endpoint discovery. Four Rust regressions pass; generated fixtures do not replace legacy test obligations or constitute exhaustive behavior proof."
     }
   ],
   "tests": [
