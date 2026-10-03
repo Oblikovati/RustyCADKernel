@@ -18,13 +18,14 @@ pub(super) struct PeriodicSurfaceData {
 pub(super) fn shifted_surface_data(
     analysis: &crate::shape_analysis::ShapeAnalysisSurface,
     surface: &Handle<dyn GeomSurface>,
+    precision: f64,
 ) -> Result<PeriodicSurfaceData, Failure> {
-    let closed = shifted_closure(analysis, surface)?;
+    let closed = shifted_closure(analysis, surface, precision)?;
     let bounds = surface
         .get()
         .ok_or_else(|| Failure::new("ShapeFix_Wire::FixShifted requires a support surface"))?
         .bounds();
-    let periods = shifted_periods(closed, bounds, surface);
+    let periods = shifted_periods(closed, bounds, surface)?;
     Ok(PeriodicSurfaceData {
         closure: closed,
         periods,
@@ -59,38 +60,6 @@ pub(super) fn wire_uv_bounds(
         add_edge_uv_bounds(analyzer, edge, &mut bounds)?;
     }
     Ok(bounds.finish())
-}
-
-/// Collects the prior-edge endpoints used by FixShifted's early recenter test.
-pub(super) fn initial_wire_uv_bounds(
-    analyzer: &ShapeAnalysisWire,
-    edges: &[Edge],
-) -> Result<Option<(f64, f64, f64, f64)>, Failure> {
-    let mut bounds = UVBounds::default();
-    for index in 0..edges.len() {
-        add_pair_endpoint(analyzer, edges, index, &mut bounds)?;
-    }
-    Ok(bounds.finish())
-}
-
-fn add_pair_endpoint(
-    analyzer: &ShapeAnalysisWire,
-    edges: &[Edge],
-    index: usize,
-    bounds: &mut UVBounds,
-) -> Result<(), Failure> {
-    let previous = &edges[(index + edges.len() - 1) % edges.len()];
-    let current = &edges[index];
-    if BRepTool::degenerated(previous)? || BRepTool::degenerated(current)? {
-        return Ok(());
-    }
-    let (curve, _, last) =
-        ShapeAnalysisEdge::new().pcurve_on_face(previous, &analyzer.face(), true)?;
-    let Some(curve) = curve.get() else {
-        return Ok(());
-    };
-    bounds.add(curve.value(last)?);
-    Ok(())
 }
 
 fn add_edge_uv_bounds(
@@ -133,6 +102,39 @@ pub(super) fn periodic_gap_translation(
     Vector2::new(du, dv)
 }
 
+pub(super) fn is_moderate_gap(
+    previous: Point2,
+    current: Point2,
+    closed: (bool, bool),
+    periods: (f64, f64),
+    singular_axis: i32,
+) -> bool {
+    moderate_axis_gap(
+        previous.x(),
+        current.x(),
+        closed.0,
+        periods.0,
+        singular_axis != 1,
+    ) || moderate_axis_gap(
+        previous.y(),
+        current.y(),
+        closed.1,
+        periods.1,
+        singular_axis != 2,
+    )
+}
+
+fn moderate_axis_gap(
+    previous: f64,
+    current: f64,
+    closed: bool,
+    period: f64,
+    can_shift: bool,
+) -> bool {
+    let gap = (current - previous).abs();
+    closed && can_shift && gap > 0.2 * period && gap <= 0.8 * period
+}
+
 fn period_gap(previous: f64, current: f64, closed: bool, period: f64, can_shift: bool) -> f64 {
     if !closed || !can_shift || (previous - current).abs() <= 0.8 * period {
         return 0.0;
@@ -166,21 +168,24 @@ fn periodic_middle_shift(value: f64, target: f64, closed: bool, period: f64) -> 
 }
 
 /// Tests the native first endpoint plus midpoint condition before a recenter pass.
-pub(super) fn is_centered(range: (f64, f64, f64, f64), surface: (f64, f64, f64, f64)) -> bool {
-    let u_width = (surface.1 - surface.0).abs();
-    let v_width = (surface.3 - surface.2).abs();
-    (range.0 + range.1 - surface.0 - surface.1).abs() < u_width
-        && (range.2 + range.3 - surface.2 - surface.3).abs() < v_width
+pub(super) fn is_centered(
+    range: (f64, f64, f64, f64),
+    surface: (f64, f64, f64, f64),
+    periods: (f64, f64),
+) -> bool {
+    (range.0 + range.1 - surface.0 - surface.1).abs() < periods.0
+        && (range.2 + range.3 - surface.2 - surface.3).abs() < periods.1
 }
 
 fn shifted_closure(
     analysis: &crate::shape_analysis::ShapeAnalysisSurface,
     surface: &Handle<dyn GeomSurface>,
+    precision: f64,
 ) -> Result<(bool, bool), Failure> {
-    let u_closed = analysis.is_u_closed(rustycad_tkernel::precision::confusion())?;
-    let v_closed = analysis.is_v_closed(rustycad_tkernel::precision::confusion())?
+    let u_closed = analysis.is_u_closed(precision)?;
+    let v_closed = analysis.is_v_closed(precision)?
         || surface.is_kind_name("Geom_SphericalSurface")
-        || revolution_basis_period(surface).is_some();
+        || revolution_basis_period(surface)?.is_some();
     Ok((u_closed, v_closed))
 }
 
@@ -188,12 +193,12 @@ fn shifted_periods(
     closed: (bool, bool),
     bounds: (f64, f64, f64, f64),
     surface: &Handle<dyn GeomSurface>,
-) -> (f64, f64) {
+) -> Result<(f64, f64), Failure> {
     let mut periods = closed_periods(closed, bounds);
-    if let Some(period) = revolution_basis_period(surface) {
+    if let Some(period) = revolution_basis_period(surface)? {
         periods.1 = period;
     }
-    periods
+    Ok(periods)
 }
 
 fn closed_periods(closed: (bool, bool), bounds: (f64, f64, f64, f64)) -> (f64, f64) {
@@ -201,22 +206,30 @@ fn closed_periods(closed: (bool, bool), bounds: (f64, f64, f64, f64)) -> (f64, f
         if closed.0 {
             (bounds.1 - bounds.0).abs()
         } else {
-            rustycad_tkernel::precision::infinite()
+            f64::MAX
         },
         if closed.1 {
             (bounds.3 - bounds.2).abs()
         } else {
-            rustycad_tkernel::precision::infinite()
+            f64::MAX
         },
     )
 }
 
-fn revolution_basis_period(surface: &Handle<dyn GeomSurface>) -> Option<f64> {
+fn revolution_basis_period(surface: &Handle<dyn GeomSurface>) -> Result<Option<f64>, Failure> {
     let revolution = surface.cast::<GeomSurfaceOfRevolution>();
-    let curve = revolution.get()?.basis_curve();
+    let Some(revolution) = revolution.get() else {
+        return Ok(None);
+    };
+    let curve = revolution.basis_curve();
     let curve = unwrap_periodic_curve(curve);
-    let curve = curve.get()?;
-    curve.is_periodic().then(|| curve.period().ok()).flatten()
+    let Some(curve) = curve.get() else {
+        return Ok(None);
+    };
+    if curve.is_periodic() {
+        return curve.period().map(Some);
+    }
+    Ok(None)
 }
 
 fn unwrap_periodic_curve(mut curve: Handle<dyn GeomCurve>) -> Handle<dyn GeomCurve> {
@@ -242,7 +255,7 @@ fn adjust_by_period(value: f64, target: f64, period: f64) -> f64 {
 }
 
 #[derive(Default)]
-struct UVBounds {
+pub(super) struct UVBounds {
     min_u: f64,
     max_u: f64,
     min_v: f64,
@@ -251,7 +264,7 @@ struct UVBounds {
 }
 
 impl UVBounds {
-    fn add(&mut self, point: Point2) {
+    pub(super) fn add(&mut self, point: Point2) {
         if !self.seen {
             (self.min_u, self.max_u, self.min_v, self.max_v) =
                 (point.x(), point.x(), point.y(), point.y());
@@ -264,7 +277,7 @@ impl UVBounds {
         self.max_v = self.max_v.max(point.y());
     }
 
-    fn finish(self) -> Option<(f64, f64, f64, f64)> {
+    pub(super) fn finish(self) -> Option<(f64, f64, f64, f64)> {
         self.seen
             .then_some((self.min_u, self.max_u, self.min_v, self.max_v))
     }
