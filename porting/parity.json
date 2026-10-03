@@ -222281,6 +222281,15 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_precision",
       "status": "implemented",
       "notes": "Working-analyzer delegation backed by eleven native state rows in tkshhealing_wire_state.cxx and shape_fix_wire_state.rs. SetPrecision is a ShapeFixWire override of FixRoot and updates root plus analyzer; Init(analyzer) preserves root precision. ClosedWireMode uses closed_mode getter and set_closed_mode setter. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixSmallAreaWire(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_small_area_wire",
+      "status": "implemented",
+      "notes": "Native context application, CheckSmallArea filtering, warning, complete-face removal and mixed-wire replacement. Seven native cases compare return, working-face count/identity/orientation, root/result identity and context removal. Additional oracle tests, no legacy test declaration mapping or full face parity claim."
     }
   ],
   "tests": [
