@@ -130,7 +130,7 @@ fn append_manifold_wire(
         return Ok(());
     }
     let fixer = ShapeFixWire::new();
-    fixer.load_wire_data(wire_data);
+    fixer.load_wire_data(wire_data)?;
     let mut orient = 1;
     let surface = rustycad_tkbrep::brep::BRepTool::surface(face)?;
     if surface
