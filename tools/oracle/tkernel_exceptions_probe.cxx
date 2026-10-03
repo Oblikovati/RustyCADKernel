@@ -93,16 +93,11 @@ static std::string catch_matrix(const Thrower& theThrow)
   return aRow;
 }
 
-// "exception_kind <Class> <hex message>": catch matrix, ExceptionType, what() and Print().
-static std::string kind_case(std::istream& theInput)
+static std::string format_exception(const Thrower& aThrow, const char* theMessage)
 {
-  std::string aName;
-  theInput >> aName;
-  const std::string aMessage = tkernel_probe::next_bytes(theInput);
-  const Thrower&    aThrow   = throwers().at(aName);
   try
   {
-    aThrow(aMessage.c_str());
+    aThrow(theMessage);
   }
   catch (const Standard_Failure& anError)
   {
@@ -115,5 +110,26 @@ static std::string kind_case(std::istream& theInput)
   return "not thrown";
 }
 
-static const tkernel_probe::Table cases = {{"exception_kind", kind_case}};
+// "exception_kind <Class> <hex message>": catch matrix, ExceptionType, what() and Print().
+static std::string kind_case(std::istream& theInput)
+{
+  std::string aName;
+  theInput >> aName;
+  const std::string aMessage = tkernel_probe::next_bytes(theInput);
+  return format_exception(throwers().at(aName), aMessage.c_str());
+}
+
+static std::string default_case(std::istream& theInput)
+{
+  std::string aName;
+  theInput >> aName;
+  static const std::map<std::string, Thrower> aDefaults = {
+    {"Standard_DomainError", [](const char*) { throw Standard_DomainError(); }},
+    {"Standard_RangeError", [](const char*) { throw Standard_RangeError(); }},
+    {"Standard_NotImplemented", [](const char*) { throw Standard_NotImplemented(); }}};
+  return format_exception(aDefaults.at(aName), "");
+}
+
+static const tkernel_probe::Table cases = {
+  {"exception_kind", kind_case}, {"exception_default", default_case}};
 } // namespace exceptions_probe

@@ -5,7 +5,10 @@ use rustycad_tkernel::{plugin, std_fail};
 use std::str::SplitWhitespace;
 
 /// Operation name and handler of every case this area answers.
-pub const CASES: &[(&str, Case)] = &[("exception_kind", kind_case)];
+pub const CASES: &[(&str, Case)] = &[
+    ("exception_kind", kind_case),
+    ("exception_default", default_case),
+];
 
 type Constructor = fn(&str) -> Failure;
 
@@ -61,6 +64,21 @@ fn kind_case(input: &mut SplitWhitespace<'_>) -> String {
     // C++ passes the message as a C string, so it ends at the first NUL.
     let text = String::from_utf8_lossy(&message);
     let failure = construct(text.split('\0').next().unwrap_or_default());
+    format_exception(failure)
+}
+
+fn default_case(input: &mut SplitWhitespace<'_>) -> String {
+    let name = input.next().expect("expected exception class");
+    let failure = match name {
+        "Standard_DomainError" => exceptions::default_domain_error(),
+        "Standard_RangeError" => exceptions::default_range_error(),
+        "Standard_NotImplemented" => exceptions::default_not_implemented(),
+        _ => panic!("exception class {name:?}: expected DomainError, RangeError or NotImplemented"),
+    };
+    format_exception(failure)
+}
+
+fn format_exception(failure: Failure) -> String {
     let matrix: String = CLASSES
         .iter()
         .map(|(class, _)| if failure.is_kind(class) { '1' } else { '0' })
