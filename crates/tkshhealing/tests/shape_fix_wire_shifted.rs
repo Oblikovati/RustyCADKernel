@@ -428,3 +428,27 @@ fn cylinder_edge(
         .unwrap();
     topods::edge(&shape).unwrap()
 }
+
+#[test]
+fn geometric_singularity_revisits_the_prefix_and_preserves_surface_gap() {
+    let (analyzer, _) = spherical_bimeridian_wire();
+    let fixer = ShapeFixWire::new();
+    fixer.init(&analyzer);
+    fixer.set_precision(0.4);
+    let changed = fixer.fix_shifted().unwrap();
+    let row = NATIVE_RESULT
+        .lines()
+        .find(|row| row.starts_with("singular_traversal="))
+        .unwrap();
+    let gap: f64 = row.split(" gap=").nth(1).unwrap().parse().unwrap();
+    assert_eq!(changed, row.starts_with("singular_traversal=1"));
+    assert_eq!(analyzer.surface().gap(), gap);
+    assert_eq!(
+        fixer.last_fix_status(ShapeExtendStatus::Done1),
+        row.contains("done1=1")
+    );
+    assert_eq!(
+        fixer.last_fix_status(ShapeExtendStatus::Done2),
+        row.contains("done2=1")
+    );
+}

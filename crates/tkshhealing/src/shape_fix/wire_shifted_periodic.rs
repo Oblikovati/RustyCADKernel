@@ -1,4 +1,4 @@
-use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire};
+use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, adjust_by_period};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -132,11 +132,11 @@ fn moderate_axis_gap(
     can_shift: bool,
 ) -> bool {
     let gap = (current - previous).abs();
-    closed && can_shift && gap > 0.2 * period && gap <= 0.8 * period
+    closed && can_shift && gap > 0.2 * period && gap <= (period - 0.2 * period)
 }
 
 fn period_gap(previous: f64, current: f64, closed: bool, period: f64, can_shift: bool) -> f64 {
-    if !closed || !can_shift || (previous - current).abs() <= 0.8 * period {
+    if !closed || !can_shift || (previous - current).abs() <= (period - 0.2 * period) {
         return 0.0;
     }
     adjust_by_period(current, previous, period)
@@ -242,16 +242,6 @@ fn unwrap_periodic_curve(mut curve: Handle<dyn GeomCurve>) -> Handle<dyn GeomCur
             return curve;
         }
     }
-}
-
-fn adjust_by_period(value: f64, target: f64, period: f64) -> f64 {
-    let difference = value - target;
-    let distance = difference.abs();
-    if distance <= 0.5 * period {
-        return 0.0;
-    }
-    let multiple = (distance / period + 0.5).floor();
-    difference.signum().mul_add(-period * multiple, 0.0)
 }
 
 #[derive(Default)]
