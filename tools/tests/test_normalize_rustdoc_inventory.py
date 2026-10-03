@@ -78,6 +78,20 @@ def rustdoc_date_period_fixture() -> dict[str, JSONValue]:
     return json.loads(fixture_path.read_text(encoding="utf-8"))
 
 
+def add_alias_self_type(document: dict[str, JSONValue], target: dict[str, JSONValue]) -> None:
+    alias = item(500, "DateAlias", "public", "type_alias", {"type": target})
+    document["index"]["500"] = alias
+    document["paths"]["500"] = {
+        "crate_id": 0,
+        "path": ["rustycad_tkernel", "quantity", "DateAlias"],
+        "kind": "type_alias",
+    }
+    implementation = document["index"]["176"]["inner"]["impl"]
+    implementation["for"] = {
+        "resolved_path": {"path": "DateAlias", "id": 500, "args": None}
+    }
+
+
 class RustdocReachabilityTests(unittest.TestCase):
     def test_trait_impls_follow_the_rustdoc_self_type(self: RustdocReachabilityTests) -> None:
         document = rustdoc_date_period_fixture()
@@ -108,6 +122,40 @@ class RustdocReachabilityTests(unittest.TestCase):
         paths = {entry["path"] for entry in result["declarations"]}
         self.assertFalse(any(path.endswith("arith::Add>::add") for path in paths))
         self.assertIn("impl:176:unknown-self-type", result["unresolved_links"])
+
+    def test_trait_impl_self_alias_resolves_to_its_nominal_owner(
+        self: RustdocReachabilityTests,
+    ) -> None:
+        document = rustdoc_date_period_fixture()
+        add_alias_self_type(document, {"resolved_path": {"path": "Date", "id": 174}})
+        with tempfile.TemporaryDirectory() as directory:
+            result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
+        paths = {entry["path"] for entry in result["declarations"]}
+        self.assertIn("rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add", paths)
+        self.assertNotIn("rustycad_tkernel::quantity::Period::<core::ops::arith::Add>::add", paths)
+        self.assertEqual(result["unresolved_links"], [])
+
+    def test_unresolved_alias_impl_target_is_reported_explicitly(
+        self: RustdocReachabilityTests,
+    ) -> None:
+        document = rustdoc_date_period_fixture()
+        add_alias_self_type(document, {"generic": "T"})
+        with tempfile.TemporaryDirectory() as directory:
+            result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
+        self.assertIn("impl:176:unknown-self-alias", result["unresolved_links"])
+
+    def test_external_impl_self_owner_is_reported_when_not_reachable(
+        self: RustdocReachabilityTests,
+    ) -> None:
+        document = rustdoc_date_period_fixture()
+        document["index"]["176"]["inner"]["impl"]["for"] = {
+            "resolved_path": {"path": "Foreign", "id": 999, "args": None}
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
+        self.assertIn(
+            "impl:176:unreachable-self-owner:999", result["unresolved_links"]
+        )
 
     def test_public_reexports_members_and_signatures_are_normalized(
             self: RustdocReachabilityTests) -> None:
