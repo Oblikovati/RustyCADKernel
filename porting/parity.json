@@ -224530,6 +224530,145 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_intersecting_wires",
       "status": "partial",
       "notes": "Two-coincident-edge wire removal follows native eligibility, orientation, context, result and status behavior with six pinned rows. Cross-wire repair delegates to the partially ported IntersectionTool and preserves face mutations on failure. Broader context and topology domains remain unproven; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::ClearModes()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::clear_modes",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixWireMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_wire_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_wire_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_wire_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixOrientationMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_orientation_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_orientation_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_orientation_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixAddNaturalBoundMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_add_natural_bound_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_add_natural_bound_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_add_natural_bound_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixMissingSeamMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_missing_seam_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_missing_seam_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_missing_seam_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::RemoveSmallAreaFaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::remove_small_area_face_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::remove_small_area_face_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_remove_small_area_face_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixIntersectingWiresMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_intersecting_wires_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_intersecting_wires_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_intersecting_wires_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixLoopWiresMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_loop_wires_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_loop_wires_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_loop_wires_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixSplitFaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_split_face_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_split_face_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_split_face_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::AutoCorrectPrecisionMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::auto_correct_precision_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::auto_correct_precision_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_auto_correct_precision_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixPeriodicDegeneratedMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_periodic_degenerated_mode",
+      "status": "implemented",
+      "notes": "Native configuration defaults, arbitrary integer mutation and ClearModes are compared with three pinned oracle rows. ClearModes retains child wire configuration. This claim covers scalar state only; Face Perform remains incomplete for mode-controlled behavior.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_periodic_degenerated_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_periodic_degenerated_mode"
+      ]
     }
   ],
   "tests": [

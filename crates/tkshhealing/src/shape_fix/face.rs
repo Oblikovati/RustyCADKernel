@@ -4,6 +4,7 @@
 //! Context preservation and apex-edge repair for periodic loops on conical faces.
 mod coincident_wires;
 mod configuration;
+use configuration::FaceFixModes;
 pub(crate) mod make_faces_on_patch;
 mod missing_seam;
 mod natural_bound;
@@ -63,23 +64,6 @@ impl Default for ShapeFixFace {
 /// `MapWires`: each resulting outside wire and its contained internal wires.
 pub type ShapeFixFaceWireMap =
     DataMap<Shape, List<Shape>, rustycad_tkbrep::toptools::ShapeMapHasher>;
-
-#[derive(Clone, Copy)]
-struct FaceFixModes {
-    orientation: i32,
-    add_natural_bound: i32,
-    small_area_wire: i32,
-}
-
-impl Default for FaceFixModes {
-    fn default() -> Self {
-        Self {
-            orientation: -1,
-            add_natural_bound: -1,
-            small_area_wire: -1,
-        }
-    }
-}
 
 impl ShapeFixFace {
     /// `ShapeFix_Face(face)`: initialize the root shape and working face;
