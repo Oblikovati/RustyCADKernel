@@ -48,6 +48,44 @@ fn perform_runs_spot_then_strip_on_a_regular_box() {
 }
 
 #[test]
+fn nonempty_split_path_reports_the_uninitialized_native_tolerance_gap() {
+    let native = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected");
+    assert!(
+        native
+            .lines()
+            .any(|row| { row == "split_regular_precision_indeterminate 6 2" })
+    );
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0).unwrap();
+    let input = box_maker.shape().unwrap().clone();
+    let fixer = ShapeFixFixSmallFace::new(input.clone());
+    let failure = fixer.fix_split_face(&input).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_ConstructionError");
+    assert!(failure.message().contains("SetTolerance"));
+    assert!(fixer.shape().is_same(&input));
+}
+
+#[test]
+fn split_methods_match_native_empty_topology_cases() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected");
+    assert!(expected.lines().any(|row| row == "split_empty 1 0 0"));
+    assert!(expected.lines().any(|row| row == "split_empty_face 0 0 0"));
+    let mut empty = Compound::default();
+    Builder.make_compound(&mut empty);
+    let input = empty.into_shape();
+    let fixer = ShapeFixFixSmallFace::new(input.clone());
+    assert!(fixer.fix_split_face(&input).unwrap().is_same(&input));
+    let mut face = Face::default();
+    BRepBuilder::default().make_face(&mut face);
+    let mut output = Compound::default();
+    Builder.make_compound(&mut output);
+    assert!(!fixer.split_one_face(&mut face, &mut output).unwrap());
+    assert_eq!(
+        count_shapes(&output.clone().into_shape(), ShapeEnum::Face),
+        0
+    );
+}
+
+#[test]
 fn spot_face_is_removed_from_a_compound_and_regular_faces_survive() {
     let native = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected")
         .lines()
