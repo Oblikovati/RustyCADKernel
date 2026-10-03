@@ -215,7 +215,10 @@ def changed_hash_reasons(
 
 def granularity_status(report: JSONObject) -> tuple[str, list[str]]:
     """Describe report granularity; e.g. `granularity_status(report)`."""
-    if "cases" in report or "instance_results" in report:
+    if any(
+        field in report
+        for field in ("cases", "instance_results", "runtime_case_results")
+    ):
         return "granular_unjoined", ["declaration_instance_join_not_implemented"]
     return "aggregate_only", ["report_has_no_per_instance_results"]
 
