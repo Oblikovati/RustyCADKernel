@@ -24,6 +24,21 @@ macro_rules! define_standard_exceptions {
 }
 pub(crate) use define_standard_exceptions;
 
+/// Constructs the native default-message domain exception; `default_domain_error().message() == ""`.
+pub fn default_domain_error() -> Failure {
+    domain_error("")
+}
+
+/// Constructs the native default-message range exception; `default_range_error().message() == ""`.
+pub fn default_range_error() -> Failure {
+    range_error("")
+}
+
+/// Constructs the native default-message unsupported-operation exception; `default_not_implemented().message() == ""`.
+pub fn default_not_implemented() -> Failure {
+    not_implemented("")
+}
+
 define_standard_exceptions! {
     STANDARD_HIERARCHY;
     abortive_transaction => "Standard_AbortiveTransaction" : "Standard_Failure";

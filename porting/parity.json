@@ -82984,8 +82984,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::domain_error",
-      "status": "partial",
-      "notes": "Rust domain_error(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
+      "status": "implemented",
+      "notes": "Explicit-message calls use domain_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_domain_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
     },
     {
       "upstream_id": "Standard_ImmutableObject",
@@ -83056,8 +83056,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_NotImplemented.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::not_implemented",
-      "status": "partial",
-      "notes": "Rust not_implemented(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
+      "status": "implemented",
+      "notes": "Explicit-message calls use not_implemented(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_not_implemented(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
     },
     {
       "upstream_id": "Standard_NullObject",
@@ -83120,8 +83120,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_RangeError.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::range_error",
-      "status": "partial",
-      "notes": "Rust range_error(message) implements the explicit-message call to the unique public one-argument constructor emitted by DEFINE_STANDARD_EXCEPTION. The exception behavior is covered by the TKernel native differential probe. C++ also permits a zero-argument call through the default message; this Rust function does not yet expose that call form, so the mapping remains partial."
+      "status": "implemented",
+      "notes": "Explicit-message calls use range_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_range_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
     },
     {
       "upstream_id": "Standard_TypeMismatch",
@@ -92313,7 +92313,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -92345,7 +92345,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -214950,7 +214950,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
