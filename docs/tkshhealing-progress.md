@@ -1047,3 +1047,10 @@ cases cover default-versus-explicit C1, U/V knot removal and splitting, supplied
 trimmed/offset recursion, and swept surfaces. Follow-up regressions preserve native
 copy order, min/max NaN and signed-zero behavior, and shared-sequence errors. Neither
 class asserts exhaustive behavioral coverage or toolkit completion.
+
+`ShapeAnalysisShapeContents` implements all fifty explicit method declarations,
+including native reference flags, the deprecated spelling alias, occurrence/shared
+counts and six shared recording sequences. Sixteen native rows and six Rust tests
+cover topology placement, the strict spline-pole threshold, geometry kinds and copy
+sharing. Native counters are uninitialized before Clear/Perform; Rust initializes
+that undefined domain to zero, documented separately from parity evidence.

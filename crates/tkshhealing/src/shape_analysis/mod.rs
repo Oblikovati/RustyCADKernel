@@ -46,3 +46,6 @@ pub use transfer_parameters_proj::ShapeAnalysisTransferParametersProj;
 
 mod wire_vertex;
 pub use wire_vertex::ShapeAnalysisWireVertex;
+
+mod shape_contents;
+pub use shape_contents::ShapeAnalysisShapeContents;

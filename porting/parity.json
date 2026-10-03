@@ -220975,6 +220975,406 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceContinuity::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
       "status": "implemented",
       "notes": "Fourteen generated native cases plus Rust regressions preserve default myCont=0, U/V removal indices, wrapper status/copy order, extrusion-only basis replacement, shared endpoints, and failure propagation. Native-style min/max operand order includes NaN/signed-zero unit evidence. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ShapeAnalysis_ShapeContents()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::clear",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ClearFlags()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::clear_flags",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::Perform(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::perform",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSolids()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_solids",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbShells()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shells",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbFaces()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_faces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_wires",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_edges",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbVertices()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_vertices",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSolidsWithVoids()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_solids_with_voids",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbBigSplines()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_big_splines",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbC0Surfaces()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_c0_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbC0Curves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_c0_curves",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbOffsetSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_offset_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbIndirectSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_indirect_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbOffsetCurves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_offset_curves",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbTrimmedCurve2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_trimmed_curves_2d",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbTrimmedCurve3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_trimmed_curves_3d",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbBSplibeSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_bspline_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbBezierSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_bezier_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbTrimSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_trimmed_surfaces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbWireWitnSeam()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_wires_with_seam",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbWireWithSevSeams()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_wires_with_several_seams",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbFaceWithSevWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_faces_with_several_wires",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbNoPCurve()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_missing_pcurves",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbFreeFaces()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_free_faces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbFreeWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_free_wires",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbFreeEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_free_edges",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedSolids()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_solids",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedShells()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_shells",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedFaces()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_faces",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_wires",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedFreeWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_free_wires",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedFreeEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_free_edges",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_edges",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::NbSharedVertices()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::nb_shared_vertices",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyBigSplineMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_big_spline_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::BigSplineSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::big_spline_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyIndirectMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_indirect_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::IndirectSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::indirect_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyOffsetSurfaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_offset_surface_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::OffsetSurfaceSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::offset_surface_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyTrimmed3dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_trimmed_3d_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::Trimmed3dSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::trimmed_3d_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyOffsetCurveMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_offset_curve_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::OffsetCurveSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::offset_curve_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyTrimmed2dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_trimmed_2d_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::Trimmed2dSec()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::trimmed_2d_sequence",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeContents::ModifyOffestSurfaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_offest_surface_mode",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
     }
   ],
   "tests": [
