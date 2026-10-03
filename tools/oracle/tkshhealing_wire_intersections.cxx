@@ -4,6 +4,7 @@
 #include <Geom_Line.hxx>
 #include <Geom2d_Line.hxx>
 #include <ShapeAnalysis_Wire.hxx>
+#include <ShapeAnalysis_Edge.hxx>
 #include <ShapeExtend_WireData.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Vertex.hxx>
@@ -61,8 +62,52 @@ static void inspect(const char* name, int mode) {
             << " " << xyz(i).X() << " " << xyz(i).Y() << " " << xyz(i).Z() << " " << errors(i);
   std::cout << '\n';
 }
+static void adjacent(const char* name, int mode, int index) {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face,new Geom_Plane(gp_Ax3()),1.e-7);
+  TopoDS_Edge first=edgeOn(face,gp_Pnt2d(-1.,0.),gp_Pnt2d(1.,0.),mode,false);
+  TopoDS_Edge second=edgeOn(face,gp_Pnt2d(0.,-2.),gp_Pnt2d(0.,1.),mode,true);
+  ShapeAnalysis_Edge sae;
+  if(mode!=9 && mode!=13) {
+    double tolerance=(mode==16 || mode==17) ? 10. : 1.e-7;
+    builder.UpdateVertex(sae.FirstVertex(second),gp_Pnt(1.,0.,0.),tolerance);
+    builder.UpdateVertex(sae.LastVertex(first),gp_Pnt(1.,0.,0.),tolerance);
+  }
+  if(mode==11) {
+    builder.UpdateVertex(sae.FirstVertex(first),gp_Pnt(1.,0.,0.),1.e-7);
+    builder.UpdateVertex(sae.LastVertex(first),gp_Pnt(3.,3.,0.),1.e-7);
+    builder.UpdateVertex(sae.FirstVertex(second),gp_Pnt(3.,3.,0.),1.e-7);
+    builder.UpdateVertex(sae.LastVertex(second),gp_Pnt(1.,0.,0.),1.e-7);
+  }
+  if(mode==12) builder.UpdateVertex(sae.LastVertex(second),gp_Pnt(-1.,0.,0.),1.e-7);
+  if(mode==17) { builder.SameParameter(first,false); builder.SameParameter(second,false); }
+  Handle(ShapeExtend_WireData) wire=new ShapeExtend_WireData;
+  wire->Add(first); wire->Add(second);
+  ShapeAnalysis_Wire analysis(wire,mode==14 ? TopoDS_Face() : face,1.e-7);
+  NCollection_Sequence<IntRes2d_IntersectionPoint> uv; uv.Append(IntRes2d_IntersectionPoint());
+  NCollection_Sequence<gp_Pnt> xyz; xyz.Append(gp_Pnt(77.,88.,99.));
+  NCollection_Sequence<double> errors; errors.Append(66.);
+  bool found=analysis.CheckIntersectingEdges(index,uv,xyz,errors);
+  std::cout << name << " " << found << " " << analysis.LastCheckStatus(ShapeExtend_DONE1)
+            << " " << analysis.LastCheckStatus(ShapeExtend_FAIL1) << " " << analysis.LastCheckStatus(ShapeExtend_FAIL2)
+            << " " << analysis.LastCheckStatus(ShapeExtend_FAIL3) << " " << uv.Length() << " " << xyz.Length() << " " << errors.Length();
+  for(int i=1;i<=uv.Length();++i) std::cout << " " << uv(i).ParamOnFirst() << " " << uv(i).ParamOnSecond()
+            << " " << xyz(i).X() << " " << xyz(i).Y() << " " << xyz(i).Z() << " " << errors(i);
+  std::cout << " " << analysis.CheckIntersectingEdges(index) << '\n';
+}
 int main() {
   std::cout << std::setprecision(17);
   const char* names[]={"crossing","endpoint","one_endpoint","overlap","reversed","spatial_error","tolerated","missing_pcurve","zero_range","missing_vertices","unloaded"};
   for(int mode=0;mode<11;++mode) inspect(names[mode],mode);
+  adjacent("adjacent_crossing",0,0);
+  adjacent("adjacent_closure",11,1);
+  adjacent("adjacent_outer_coincident",12,2);
+  adjacent("adjacent_tolerance",16,2);
+  adjacent("adjacent_not_same_parameter",17,2);
+  adjacent("adjacent_missing_vertices",9,2);
+  adjacent("adjacent_disconnected",13,2);
+  adjacent("adjacent_no_face",14,2);
+  adjacent("adjacent_missing_pcurve",7,2);
+  adjacent("adjacent_zero_range",8,2);
 }
