@@ -64,6 +64,14 @@ mod tests {
         let done = tool
             .fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)
             .unwrap();
+        let analysis = ShapeAnalysisEdge::new();
+        let split_edge = wire.edge(1).unwrap();
+        let endpoint_edge = wire.edge(4).unwrap();
+        assert!(
+            analysis
+                .last_vertex(&split_edge)
+                .is_same(&analysis.first_vertex(&endpoint_edge))
+        );
         let mut observed = vec![
             f64::from(done),
             f64::from(split),
@@ -75,6 +83,48 @@ mod tests {
         let expected = EXPECTED
             .lines()
             .nth(1)
+            .unwrap()
+            .split_whitespace()
+            .map(|value| value.parse().unwrap())
+            .collect::<Vec<f64>>();
+        assert_eq!(observed, expected);
+    }
+
+    #[test]
+    fn endpoint_to_endpoint_intersection_unions_shared_vertex() {
+        let mut face = plane();
+        let wire = Handle::new(ShapeExtendWireData::new());
+        for edge in endpoint_to_endpoint_edges(&face) {
+            wire.add_edge(&edge, 0).unwrap();
+        }
+        BRepBuilder::default()
+            .add(&mut face, &wire.wire().unwrap().into_shape())
+            .unwrap();
+        let context = Handle::new(ShapeBuildReShape::new());
+        let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+        let (mut split, mut cut, mut removed) = (91, 92, 93);
+        let done = tool
+            .fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)
+            .unwrap();
+        let analysis = ShapeAnalysisEdge::new();
+        let first_edge = wire.edge(1).unwrap();
+        let third_edge = wire.edge(3).unwrap();
+        assert!(
+            analysis
+                .last_vertex(&first_edge)
+                .is_same(&analysis.first_vertex(&third_edge))
+        );
+        let mut observed = vec![
+            f64::from(done),
+            f64::from(split),
+            f64::from(cut),
+            f64::from(removed),
+            f64::from(wire.nb_edges()),
+        ];
+        append_ranges(&wire, &face, &mut observed);
+        let expected = EXPECTED
+            .lines()
+            .nth(2)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -109,7 +159,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(2)
+            .nth(3)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -143,7 +193,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(3)
+            .nth(4)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -215,6 +265,43 @@ mod tests {
                 Direction3::new(0.0, 1.0, 0.0).unwrap(),
                 Point2::new(0.0, 0.0),
                 Direction2::new(0.0, 1.0).unwrap(),
+            ),
+            line_edge(
+                face,
+                Point3::new(-4.0, -4.0, 0.0),
+                Direction3::new(0.0, 1.0, 0.0).unwrap(),
+                Point2::new(-4.0, -4.0),
+                Direction2::new(0.0, 1.0).unwrap(),
+            ),
+        ]
+    }
+
+    fn endpoint_to_endpoint_edges(face: &Face) -> [Edge; 4] {
+        [
+            line_edge_with_range(
+                face,
+                Point3::new(-1.0, 0.0, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(-1.0, 0.0),
+                Direction2::new(1.0, 0.0).unwrap(),
+                1.0,
+                1.0e-7,
+            ),
+            line_edge(
+                face,
+                Point3::new(3.0, 3.0, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(3.0, 3.0),
+                Direction2::new(1.0, 0.0).unwrap(),
+            ),
+            line_edge_with_range(
+                face,
+                Point3::new(0.0, 0.0, 0.0),
+                Direction3::new(0.0, 1.0, 0.0).unwrap(),
+                Point2::new(0.0, 0.0),
+                Direction2::new(0.0, 1.0).unwrap(),
+                1.0,
+                1.0e-7,
             ),
             line_edge(
                 face,
