@@ -8,6 +8,12 @@ and status while leaving closed mode disabled.
 The protected `LoadWires` fixture uses a derived native probe to verify edge count and
 traversal orientation for a manifold boundary. It also verifies that an empty
 nonmanifold partition does not produce a spurious wire segment.
+Rust exposes this protected helper as `load_wires` and `load_wires_into`; the latter
+preserves OCCT's clear-then-append sequence semantics on recoverable errors. A context
+that removes a later face child reaches undefined behavior in native OCCT because
+`TopoDS_Shape::ShapeType()` dereferences the null `TShape`; Rust reports
+`Standard_NullObject` and retains segments appended before that child. This safe case is
+tested separately and is not counted as a native parity fixture.
 The mixed-wire case verifies native ordering when one INTERNAL edge is separated
 from the three manifold edges.
 The `ComputeCode` fixture checks the protected edge-side classifier on a p-curve

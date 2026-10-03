@@ -148,7 +148,9 @@ impl ShapeFixComposeShell {
         break_wires::break_wires(self, segments)
     }
 
-    pub(super) fn load_wires(
+    /// Loads face wires into oriented segments after applying the reshape context.
+    /// `let segments = composer.load_wires()?` after `set_context` and `init`.
+    pub fn load_wires(
         &self,
     ) -> Result<
         rustycad_tkernel::ncollection::Sequence<crate::shape_fix::ShapeFixWireSegment>,
@@ -157,7 +159,19 @@ impl ShapeFixComposeShell {
         load_wires::load_wires(self)
     }
 
-    pub(super) fn compute_code(
+    /// Clears and incrementally fills a caller-owned sequence with oriented wire segments.
+    /// `let mut segments = Sequence::default(); composer.load_wires_into(&mut segments)?`.
+    pub fn load_wires_into(
+        &self,
+        segments: &mut rustycad_tkernel::ncollection::Sequence<
+            crate::shape_fix::ShapeFixWireSegment,
+        >,
+    ) -> Result<(), Failure> {
+        load_wires::load_wires_into(self, segments)
+    }
+
+    /// Classifies a wire interval relative to a patch line; `composer.compute_code(&wire, line, 1, 1, 0.25, 0.75, false)?`.
+    pub fn compute_code(
         &self,
         wire: &crate::shape_extend::ShapeExtendWireData,
         line: rustycad_tkmath::gp::Line2,

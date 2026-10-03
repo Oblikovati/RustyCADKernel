@@ -16,15 +16,24 @@ use rustycad_tkmath::gp::Xy;
 pub(super) fn load_wires(
     composer: &ShapeFixComposeShell,
 ) -> Result<Sequence<ShapeFixWireSegment>, Failure> {
+    let mut segments = Sequence::default();
+    load_wires_into(composer, &mut segments)?;
+    Ok(segments)
+}
+
+pub(super) fn load_wires_into(
+    composer: &ShapeFixComposeShell,
+    segments: &mut Sequence<ShapeFixWireSegment>,
+) -> Result<(), Failure> {
+    segments.clear(None);
     let face = composer.fields.read().face.clone();
     let context_handle = composer.context();
     let context = context_handle.get().ok_or_else(null_context)?;
-    let mut segments = Sequence::default();
     let face_shape = face.clone().into_shape();
     for child in ShapeIterator::new(&face_shape, false, true) {
-        load_child(&mut segments, &face, context, &child)?;
+        load_child(segments, &face, context, &child)?;
     }
-    Ok(segments)
+    Ok(())
 }
 
 fn load_child(
@@ -34,9 +43,6 @@ fn load_child(
     child: &Shape,
 ) -> Result<(), Failure> {
     let applied = context.apply(child, ShapeEnum::Shape)?;
-    if applied.is_null() {
-        return Ok(());
-    }
     match applied.shape_type()? {
         ShapeEnum::Wire => load_wire(segments, face, &topods::wire(&applied)?),
         ShapeEnum::Vertex => append_vertex(segments, &applied),

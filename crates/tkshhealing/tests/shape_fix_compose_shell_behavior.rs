@@ -1,15 +1,24 @@
 //! Native constructor and public mutable-option parity for ShapeFix_ComposeShell.
-use rustycad_tkernel::{ncollection::HArray2, standard::Handle};
+use rustycad_tkbrep::{brep_tools::ReShape, topods::Builder};
+use rustycad_tkernel::{
+    ncollection::{HArray2, Sequence},
+    standard::Handle,
+};
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkmath::gp::{Axis3, Point3};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisTransferParameters,
-    shape_extend::{ShapeExtendCompositeSurface, ShapeExtendParametrisation, ShapeExtendStatus},
-    shape_fix::{FixRoot, ShapeFixComposeShell, ShapeFixRoot},
+    shape_build::ShapeBuildReShape,
+    shape_extend::{
+        ShapeExtendCompositeSurface, ShapeExtendParametrisation, ShapeExtendStatus,
+        ShapeExtendWireData,
+    },
+    shape_fix::{FixRoot, ShapeFixComposeShell, ShapeFixRoot, ShapeFixWireSegment},
 };
 use rustycad_tktopalgo::brep_builder_api::{
-    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire,
+    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeVertex,
+    BRepBuilderAPIMakeWire,
 };
 
 #[test]
@@ -119,4 +128,81 @@ fn root_base_cast_shares_compose_shell_fix_state() {
     root.get().unwrap().set_precision(0.125);
     assert_eq!(composer.precision(), 0.125);
     assert_eq!(root.get().unwrap().precision(), 0.125);
+}
+
+#[test]
+fn protected_wire_helpers_are_reachable_and_match_native_rows() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let composer = ShapeFixComposeShell::new();
+    let context = Handle::new(ShapeBuildReShape::new());
+    composer.set_context(&context);
+    composer
+        .init(&plane_grid(), &Location::default(), &face_fixture(), 1.0e-7)
+        .unwrap();
+    let segments = composer.load_wires().unwrap();
+    let wire = segments.value(1).unwrap().wire_data().get().unwrap();
+    assert_eq!(segments.length(), 1);
+    assert_eq!(segments.value(1).unwrap().nb_edges(), 4);
+    assert_eq!(
+        native_compute_code(&composer, wire),
+        native_row(expected, "compute_code ")
+    );
+}
+
+#[test]
+fn load_wires_safe_null_replacement_failure_retains_prior_segment() {
+    let (face, context) = face_with_removed_later_vertex();
+    let composer = initialized_composer(&face, &context);
+    let mut segments = Sequence::default();
+    segments.append(ShapeFixWireSegment::new());
+    let error = composer.load_wires_into(&mut segments).unwrap_err();
+    assert_eq!(error.exception_type(), "Standard_NullObject");
+    assert_eq!(segments.length(), 1);
+    assert_eq!(segments.value(1).unwrap().nb_edges(), 4);
+}
+
+fn face_with_removed_later_vertex() -> (rustycad_tkbrep::topods::Face, Handle<ShapeBuildReShape>) {
+    let mut face = face_fixture();
+    let vertex = BRepBuilderAPIMakeVertex::new(Point3::new(1.0, 1.0, 0.0))
+        .unwrap()
+        .vertex()
+        .unwrap();
+    Builder
+        .add(&mut face, &vertex.clone().into_shape())
+        .unwrap();
+    let context = Handle::new(ShapeBuildReShape::new());
+    context.remove(&vertex.clone().into_shape()).unwrap();
+    (face, context)
+}
+
+fn initialized_composer(
+    face: &rustycad_tkbrep::topods::Face,
+    context: &Handle<ShapeBuildReShape>,
+) -> ShapeFixComposeShell {
+    let composer = ShapeFixComposeShell::new();
+    composer.set_context(context);
+    composer
+        .init(&plane_grid(), &Location::default(), face, 1.0e-7)
+        .unwrap();
+    composer
+}
+
+fn native_compute_code(composer: &ShapeFixComposeShell, wire: &ShapeExtendWireData) -> String {
+    let line = rustycad_tkmath::gp::Line2::new(
+        rustycad_tkmath::gp::Point2::new(1.0, 0.0),
+        rustycad_tkmath::gp::Direction2::new(0.0, 1.0).unwrap(),
+    );
+    format!(
+        "compute_code {}",
+        composer
+            .compute_code(wire, line, 1, 1, 0.25, 0.75, false)
+            .unwrap()
+    )
+}
+
+fn native_row<'a>(expected: &'a str, label: &str) -> &'a str {
+    expected
+        .lines()
+        .find(|row| row.starts_with(label))
+        .expect("native oracle row exists")
 }
