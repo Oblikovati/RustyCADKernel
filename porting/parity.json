@@ -33953,7 +33953,7 @@
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
     {
-      "upstream_id": "MathLin::GetEigenVector(const EigenResult&,size_t)",
+      "upstream_id": "MathLin::GetEigenVector(const MathLin::EigenResult &,size_t)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
       "rust_item": "rustycad_tkmath::math_lin::get_eigen_vector",
@@ -34153,7 +34153,7 @@
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
     {
-      "upstream_id": "MathLin::LeastSquares(const math_Matrix&,const math_Vector&,LeastSquaresMethod,double)",
+      "upstream_id": "MathLin::LeastSquares(const math_Matrix &,const math_Vector &,MathLin::LeastSquaresMethod,double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
       "rust_item": "rustycad_tkmath::math_lin::least_squares",
@@ -34161,7 +34161,7 @@
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
     {
-      "upstream_id": "MathLin::WeightedLeastSquares(const math_Matrix&,const math_Vector&,const math_Vector&,LeastSquaresMethod,double)",
+      "upstream_id": "MathLin::WeightedLeastSquares(const math_Matrix &,const math_Vector &,const math_Vector &,MathLin::LeastSquaresMethod,double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
       "rust_item": "rustycad_tkmath::math_lin::weighted_least_squares",

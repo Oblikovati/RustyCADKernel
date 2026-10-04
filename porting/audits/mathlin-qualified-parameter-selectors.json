@@ -1,0 +1,33 @@
+{
+  "scope": "Three MathLin selectors require namespace-qualified parameter types",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "behavior_change": false,
+  "original_tests_added": 0,
+  "reason": "Compiler written parameter types retain MathLin::EigenResult and MathLin::LeastSquaresMethod qualification; ledger previously used unqualified names. The three native names each have exactly one observed declaration, and the unchanged Rust signatures use the corresponding result and method types.",
+  "changes": [
+    {
+      "previous_selector": "MathLin::GetEigenVector(const EigenResult&,size_t)",
+      "selector": "MathLin::GetEigenVector(const MathLin::EigenResult &,size_t)",
+      "cpp_id": "0278f3ee7103f861b4dcfefdaac8d31915c82c560542eb562538c9a3ae715055",
+      "cpp_source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "cpp_source_sha256": "481e4aa79c8214d09b117941113de066c37c6da6f7665f91ae7af175a75ba606",
+      "rust_target": "rustycad_tkmath::math_lin::get_eigen_vector"
+    },
+    {
+      "previous_selector": "MathLin::LeastSquares(const math_Matrix&,const math_Vector&,LeastSquaresMethod,double)",
+      "selector": "MathLin::LeastSquares(const math_Matrix &,const math_Vector &,MathLin::LeastSquaresMethod,double)",
+      "cpp_id": "ae4e12103f5d2cd281bf81994cea68edbb1d95c59ac245a1ef5ce054978b16ce",
+      "cpp_source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "cpp_source_sha256": "358013c6fdf5a0ed33de9c8aa3a00d50be19d3f89d1c810ee828bb4d084946af",
+      "rust_target": "rustycad_tkmath::math_lin::least_squares"
+    },
+    {
+      "previous_selector": "MathLin::WeightedLeastSquares(const math_Matrix&,const math_Vector&,const math_Vector&,LeastSquaresMethod,double)",
+      "selector": "MathLin::WeightedLeastSquares(const math_Matrix &,const math_Vector &,const math_Vector &,MathLin::LeastSquaresMethod,double)",
+      "cpp_id": "0795b00f221110dc1ea5ff5e71c08e9755a4cac347d168ba9b925d564fcd4ace",
+      "cpp_source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "cpp_source_sha256": "358013c6fdf5a0ed33de9c8aa3a00d50be19d3f89d1c810ee828bb4d084946af",
+      "rust_target": "rustycad_tkmath::math_lin::weighted_least_squares"
+    }
+  ]
+}
