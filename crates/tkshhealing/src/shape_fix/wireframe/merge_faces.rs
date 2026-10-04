@@ -20,6 +20,7 @@ pub(super) fn merge_face_small_edges(
     small: &mut MapOfShape,
     edge_faces: &ShapeFixWireframeShapeLists,
     face_small: &ShapeFixWireframeShapeLists,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     if face_small.is_empty() {
         return Ok(false);
@@ -27,7 +28,7 @@ pub(super) fn merge_face_small_edges(
     let (source, edges) = single_face_entry(face_small)?;
     validate_face_edge_links(&source, edges, edge_faces)?;
     validate_no_shared_edges(&source, edge_faces)?;
-    merge_one_face(fixer, small, &source)
+    merge_one_face(fixer, small, &source, angle_limit)
 }
 
 fn validate_no_shared_edges(
@@ -83,6 +84,7 @@ fn merge_one_face(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
     source: &Shape,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let context = fixer.context();
     if context.is_null() {
@@ -91,7 +93,7 @@ fn merge_one_face(
     let face = applied_face(source, &context)?;
     let mut changed = false;
     for wire in face_wires(&face)? {
-        changed |= merge_face_wire(fixer, &face, &wire, &context, small)?;
+        changed |= merge_face_wire(fixer, &face, &wire, &context, small, angle_limit)?;
     }
     if !changed {
         return Ok(false);
@@ -119,10 +121,10 @@ fn merge_face_wire(
     wire: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let source = wire.clone();
-    let applied = ReShape::apply(&**context, &source.clone().into_shape(), ShapeEnum::Shape)?;
-    let current = topods::wire(&applied)?;
+    let current = applied_wire(&source, context)?;
     merge_wire_with_faces(
         fixer,
         &source,
@@ -130,5 +132,11 @@ fn merge_face_wire(
         context,
         small,
         std::slice::from_ref(face),
+        angle_limit,
     )
+}
+
+fn applied_wire(source: &Wire, context: &Handle<ShapeBuildReShape>) -> Result<Wire, Failure> {
+    let shape = ReShape::apply(&**context, &source.clone().into_shape(), ShapeEnum::Shape)?;
+    topods::wire(&shape)
 }

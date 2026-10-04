@@ -47,6 +47,17 @@ static TopoDS_Wire two_tiny_wire() {
   return polygon.Wire();
 }
 
+static TopoDS_Wire angled_tiny_wire() {
+  BRepBuilderAPI_MakePolygon polygon;
+  polygon.Add(gp_Pnt(0, 0, 0));
+  polygon.Add(gp_Pnt(0.01, 0, 0));
+  polygon.Add(gp_Pnt(1, 0.5, 0));
+  polygon.Add(gp_Pnt(0.7, 1, 0));
+  polygon.Add(gp_Pnt(0, 1, 0));
+  polygon.Close();
+  return polygon.Wire();
+}
+
 static int count_edges(const TopoDS_Shape& shape) {
   int count = 0;
   for (TopExp_Explorer it(shape, TopAbs_EDGE); it.More(); it.Next()) ++count;
@@ -70,6 +81,13 @@ static void report(const char* name, ShapeFix_Wireframe& fixer, bool changed) {
 static void run_loaded(const char* name, const TopoDS_Shape& shape) {
   ShapeFix_Wireframe fixer(shape);
   fixer.SetPrecision(0.1);
+  report(name, fixer, fixer.FixSmallEdges());
+}
+
+static void run_angle_limited(const char* name, const TopoDS_Shape& shape) {
+  ShapeFix_Wireframe fixer(shape);
+  fixer.SetPrecision(0.1);
+  fixer.SetLimitAngle(0.1);
   report(name, fixer, fixer.FixSmallEdges());
 }
 
@@ -142,6 +160,7 @@ int main() {
   const TopoDS_Wire wire = unit_wire();
   run_loaded("wire", wire);
   run_loaded("small_wire", tiny_wire());
+  run_angle_limited("angle_limited", angled_tiny_wire());
   report_small_curve();
   report_face_small_edge();
   report_face_two_small_edges();

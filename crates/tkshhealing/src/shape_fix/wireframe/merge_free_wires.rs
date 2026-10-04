@@ -29,22 +29,37 @@ struct CandidatePair {
     next_index: i32,
     take_next: bool,
     faces: Vec<Face>,
+    minimum_angle: f64,
+}
+
+struct PairIndexes {
+    middle: i32,
+    previous: i32,
+    next: i32,
+}
+
+struct CandidateEdges {
+    before: Edge,
+    middle: Edge,
+    after: Edge,
 }
 
 pub(super) fn merge_small_edges(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
     multiple: &mut MapOfShape,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     if !multiple.is_empty() {
         return Err(unported_small_edge_merge());
     }
-    merge_free_wire_candidates(fixer, small)
+    merge_free_wire_candidates(fixer, small, angle_limit)
 }
 
 fn merge_free_wire_candidates(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let context = fixer.context();
     let mut changed = false;
@@ -54,7 +69,7 @@ fn merge_free_wire_candidates(
         rustycad_tkg3d::top_abs::ShapeEnum::Face,
     )? {
         let wire = topods::wire(&source)?;
-        changed |= merge_one_free_wire(fixer, &wire, &context, small)?;
+        changed |= merge_one_free_wire(fixer, &wire, &context, small, angle_limit)?;
     }
     if !changed {
         return Ok(false);
@@ -67,6 +82,7 @@ fn merge_one_free_wire(
     source: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let applied = ReShape::apply(
         &**context,
@@ -74,7 +90,7 @@ fn merge_one_free_wire(
         rustycad_tkg3d::top_abs::ShapeEnum::Shape,
     )?;
     let wire = topods::wire(&applied)?;
-    merge_wire_with_faces(fixer, source, &wire, context, small, &[])
+    merge_wire_with_faces(fixer, source, &wire, context, small, &[], angle_limit)
 }
 
 pub(super) fn merge_wire_with_faces(
@@ -84,10 +100,11 @@ pub(super) fn merge_wire_with_faces(
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
     faces: &[Face],
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let tool = prepared_wire_fixer(wire, context)?;
     let wire_data = tool.wire_data()?;
-    merge_wire_data(fixer, &tool, source, &wire_data, small, faces)
+    merge_wire_data(fixer, &tool, source, &wire_data, small, faces, angle_limit)
 }
 
 fn prepared_wire_fixer(
@@ -108,8 +125,9 @@ fn merge_wire_data(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     faces: &[Face],
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
-    let changed = merge_wire_candidates(fixer, wire_data, small, faces)?;
+    let changed = merge_wire_candidates(fixer, wire_data, small, faces, angle_limit)?;
     publish_changed_wire(fixer, wire_fixer, source, wire_data, changed)?;
     Ok(changed)
 }
@@ -119,11 +137,13 @@ fn merge_wire_candidates(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     faces: &[Face],
+    angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let mut index = 1;
     let mut changed = false;
     while index <= wire_data.nb_edges() && wire_data.nb_edges() > 1 {
-        let merged_index = merge_small_at_index(fixer, wire_data, small, index, faces)?;
+        let merged_index =
+            merge_small_at_index(fixer, wire_data, small, index, faces, angle_limit)?;
         index = advance_merge_index(index, merged_index, &mut changed);
     }
     Ok(changed)
@@ -162,11 +182,12 @@ fn merge_small_at_index(
     small: &mut MapOfShape,
     index: i32,
     faces: &[Face],
+    angle_limit: Option<f64>,
 ) -> Result<Option<i32>, Failure> {
     let count = wire_data.nb_edges();
     let previous = if index == 1 { count } else { index - 1 };
     let next = if index == count { 1 } else { index + 1 };
-    let pair = candidate_pair(wire_data, small, index, previous, next, faces)?;
+    let pair = candidate_pair(wire_data, small, index, previous, next, faces, angle_limit)?;
     let Some(pair) = pair else {
         return Ok(None);
     };
@@ -180,55 +201,78 @@ fn candidate_pair(
     previous: i32,
     next: i32,
     faces: &[Face],
+    angle_limit: Option<f64>,
 ) -> Result<Option<CandidatePair>, Failure> {
+    let Some(edges) = candidate_edges(wire_data, small, index, previous, next)? else {
+        return Ok(None);
+    };
+    let indexes = PairIndexes {
+        middle: index,
+        previous,
+        next,
+    };
+    limited_candidate_pair(edges, indexes, faces, angle_limit)
+}
+
+fn limited_candidate_pair(
+    edges: CandidateEdges,
+    indexes: PairIndexes,
+    faces: &[Face],
+    angle_limit: Option<f64>,
+) -> Result<Option<CandidatePair>, Failure> {
+    let pair = select_candidate_pair(edges, indexes, faces)?;
+    if exceeds_pair_angle_limit(&pair, angle_limit) {
+        return Ok(None);
+    }
+    Ok(Some(pair))
+}
+
+fn candidate_edges(
+    wire_data: &Handle<ShapeExtendWireData>,
+    small: &MapOfShape,
+    index: i32,
+    previous: i32,
+    next: i32,
+) -> Result<Option<CandidateEdges>, Failure> {
     let middle = wire_data.edge(index)?;
     if !is_mergeable_middle(small, &middle, index, previous, next) {
         return Ok(None);
     }
-    let before = wire_data.edge(previous)?;
-    let after = wire_data.edge(next)?;
-    Ok(Some(select_candidate_pair(
-        before, middle, after, index, previous, next, faces,
-    )?))
+    Ok(Some(CandidateEdges {
+        before: wire_data.edge(previous)?,
+        middle,
+        after: wire_data.edge(next)?,
+    }))
+}
+
+fn exceeds_pair_angle_limit(pair: &CandidatePair, limit: Option<f64>) -> bool {
+    limit.is_some_and(|maximum| pair.minimum_angle > maximum)
 }
 
 fn select_candidate_pair(
-    before: Edge,
-    middle: Edge,
-    after: Edge,
-    index: i32,
-    previous: i32,
-    next: i32,
+    edges: CandidateEdges,
+    indexes: PairIndexes,
     faces: &[Face],
 ) -> Result<CandidatePair, Failure> {
-    let take_next = choose_next_pair(&before, &middle, &after)?;
-    let (first, second) = if take_next {
-        (middle, after)
-    } else {
-        (before, middle)
-    };
-    Ok(candidate_pair_from_edges(
-        first, second, index, previous, next, take_next, faces,
-    ))
-}
-
-fn candidate_pair_from_edges(
-    first: Edge,
-    second: Edge,
-    index: i32,
-    previous: i32,
-    next: i32,
-    take_next: bool,
-    faces: &[Face],
-) -> CandidatePair {
-    CandidatePair {
+    let (take_next, minimum_angle) = choose_next_pair(&edges.before, &edges.middle, &edges.after)?;
+    let (first, second) = selected_pair_edges(edges, take_next);
+    Ok(CandidatePair {
         first,
         second,
-        middle_index: index,
-        previous_index: previous,
-        next_index: next,
+        middle_index: indexes.middle,
+        previous_index: indexes.previous,
+        next_index: indexes.next,
         take_next,
         faces: faces.to_vec(),
+        minimum_angle,
+    })
+}
+
+fn selected_pair_edges(edges: CandidateEdges, take_next: bool) -> (Edge, Edge) {
+    if take_next {
+        (edges.middle, edges.after)
+    } else {
+        (edges.before, edges.middle)
     }
 }
 
@@ -245,13 +289,13 @@ fn is_mergeable_middle(
         && previous != next
 }
 
-fn choose_next_pair(before: &Edge, middle: &Edge, after: &Edge) -> Result<bool, Failure> {
+fn choose_next_pair(before: &Edge, middle: &Edge, after: &Edge) -> Result<(bool, f64), Failure> {
     let angle_before = adjacent_angle(before, middle)?;
     let angle_after = adjacent_angle(middle, after)?;
     if (angle_after - angle_before).abs() > precision::angular() {
-        return Ok(angle_after < angle_before);
+        return Ok((angle_after < angle_before, angle_before.min(angle_after)));
     }
-    Ok(false)
+    Ok((false, angle_before.min(angle_after)))
 }
 
 fn adjacent_angle(first: &Edge, second: &Edge) -> Result<f64, Failure> {

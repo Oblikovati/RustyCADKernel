@@ -55,6 +55,21 @@ fn two_tiny_wire() -> Wire {
     maker.wire().unwrap()
 }
 
+fn angled_tiny_wire() -> Wire {
+    let mut maker = BRepBuilderAPIMakePolygon::new();
+    for point in [
+        Point3::new(0., 0., 0.),
+        Point3::new(0.01, 0., 0.),
+        Point3::new(1., 0.5, 0.),
+        Point3::new(0.7, 1., 0.),
+        Point3::new(0., 1., 0.),
+    ] {
+        maker.add_point(point).unwrap();
+    }
+    maker.close().unwrap();
+    maker.wire().unwrap()
+}
+
 fn report(name: &str, tool: &ShapeFixWireframe, changed: bool) -> Vec<f64> {
     let shape = tool.shape();
     let edges = Explorer::new(&shape, ShapeEnum::Edge, ShapeEnum::Shape)
@@ -100,6 +115,14 @@ fn no_small_edges_preserves_shape_and_reports_native_status() {
     let result = run_loaded("small_wire", &tiny.into_shape());
     assert_eq!(topology_counts(&result), expected("small_topology"));
     assert_joined_bspline(&result);
+    let limited = ShapeFixWireframe::from_shape(&angled_tiny_wire().into_shape());
+    limited.set_precision(0.1);
+    limited.set_limit_angle(0.1);
+    report(
+        "angle_limited",
+        &limited,
+        limited.fix_small_edges().unwrap(),
+    );
     let mut compound = Compound::default();
     Builder.make_compound(&mut compound);
     Builder.add(&mut compound, &wire).unwrap();
