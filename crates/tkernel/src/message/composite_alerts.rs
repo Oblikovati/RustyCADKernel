@@ -64,19 +64,22 @@ impl CompositeAlerts {
     /// Adds an alert, or merges it into the first earlier alert of exactly its type that
     /// accepts the merge; true only when appended; `composite.add_alert(Gravity::Info, &alert)`.
     pub fn add_alert(&self, gravity: Gravity, alert: &AlertHandle) -> bool {
-        let existing = self.alerts(gravity);
-        if alert.supports_merge() && !existing.is_empty() {
-            let kind = alert.dynamic_type();
-            // Merge callbacks run without the lock: user alerts may inspect other alerts.
-            let merged = existing
-                .iter()
-                .any(|target| std::ptr::eq(kind, target.dynamic_type()) && alert.merge(target));
-            if merged {
-                return false;
-            }
+        if alert.supports_merge() && self.merge_live_alerts(gravity, alert) {
+            return false;
         }
         self.append_entry(gravity, alert);
         true
+    }
+    fn merge_live_alerts(&self, gravity: Gravity, alert: &AlertHandle) -> bool {
+        let kind = alert.dynamic_type();
+        let mut cursor = AlertCursor::new(self, gravity);
+        while let Some(target) = cursor.current_alert() {
+            if std::ptr::eq(kind, target.dynamic_type()) && alert.merge(&target) {
+                return true;
+            }
+            cursor.advance();
+        }
+        false
     }
     fn append_entry(&self, gravity: Gravity, alert: &AlertHandle) {
         let mut lists = self.lists();
