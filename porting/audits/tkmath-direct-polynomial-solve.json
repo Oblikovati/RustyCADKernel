@@ -1,0 +1,62 @@
+{
+  "audit": "TKMath protected DirectPolynomialRoots Solve overload state reuse",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source": {
+    "header": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
+    "header_sha256": "357604688545f0a238ef78607e5d5614a8dab2ec25150a5373c9e4a8f3da2bfc",
+    "implementation": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.cxx",
+    "implementation_sha256": "cbc9650d3062a2ee76d7ad28f43731affe693cec7baf6686c4dc9f81e1ab72c5",
+    "rust_sources": {
+      "crates/tkmath/src/math/direct_polynomial_roots.rs": "057345eb4e42f83d887eb7bd1c0ba2e8847f5d38b6201679bd590f68f3548a0a",
+      "crates/tkmath/src/math/direct_polynomial_roots/quadratic.rs": "8736ef0c88b399816774c655e6453ab6ac1af47b1a5b41f6796c9e4c43261ad5",
+      "crates/tkmath/src/math/direct_polynomial_roots/cubic.rs": "76d04cc28eb6a055934a7eb49c859bd423bf7cad24646d72ce84f8a26ea09fbf",
+      "crates/tkmath/src/math/direct_polynomial_roots/quartic.rs": "7f09ccaaf157ad811f38e19a24141cd206bf44f7bc06d8c390e2a91341ea03bb"
+    }
+  },
+  "oracle": {
+    "source": "tools/oracle/tkmath_direct_roots_solve_reuse.cxx",
+    "expected": "tools/oracle/tkmath_direct_roots_solve_reuse.expected",
+    "executable_sha256": "9f9c0824de92923fcaa66c83d2adcb2461db0802a819aa98a2b990aec89e6fca",
+    "native_library_sha256": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+    "tested_transitions": [
+      "quartic success to no-real-root count replacement",
+      "cubic success to overflow failure retaining count and roots",
+      "cubic success after failure retaining myDone=false",
+      "quadratic success to no-real-root count replacement",
+      "linear identity flag persisting across linear and quadratic solves"
+    ],
+    "limitations": [
+      "Rust methods are public while native Solve overloads are protected; this is an access-level adaptation for downstream derived-class use.",
+      "Fresh native overflow constructors leave myNbSol indeterminate; no result is asserted for that undefined state.",
+      "The oracle covers selected transition cases, not all floating-point inputs or platform profiles."
+    ],
+    "source_sha256": "7eac1d37d3040ba6c3df3bc41a964d9d56f0a7adfea68d1839d8e9f987c172e8"
+  },
+  "selectors": [
+    {
+      "id": "87b7c891b889080868d8978d5a6c80817560e9d853a5ea693a0fa57b9b653f7a",
+      "native_signature": "void Solve(double, double, double, double, double)",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_quartic",
+      "status": "implemented"
+    },
+    {
+      "id": "c5bc978fe5471c48f9764e796fd390c6b7305642c8f85b485a4e915de20cd3c1",
+      "native_signature": "void Solve(double, double, double, double)",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_cubic",
+      "status": "implemented"
+    },
+    {
+      "id": "ce36484ec7e279d858f2db068119d67dba076b69c855c420d36a47b0f857252e",
+      "native_signature": "void Solve(double, double, double)",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_quadratic",
+      "status": "implemented"
+    },
+    {
+      "id": "8bc56841c5b52e32d80f590c4f82082dabfbbbd4282fc89ca45d2fca0b7c4d1b",
+      "native_signature": "void Solve(double, double)",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_linear",
+      "status": "implemented"
+    }
+  ],
+  "implementation_delta": "The four existing Rust mutating solve methods already implement the same state updates; this change adds native-derived state transition coverage and exact selector mappings rather than duplicating their algorithms."
+}
