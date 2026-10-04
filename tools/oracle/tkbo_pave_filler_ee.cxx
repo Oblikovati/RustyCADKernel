@@ -16,6 +16,11 @@
 class Probe final : public BOPAlgo_PaveFiller {
 public:
   void Run() { Init(Message_ProgressRange()); PerformEE(Message_ProgressRange()); }
+  void RunVEAndEE() {
+    Init(Message_ProgressRange());
+    PerformVE(Message_ProgressRange());
+    PerformEE(Message_ProgressRange());
+  }
   BOPDS_DS& DS() { return *myDS; }
   void PrintVerticesToAvoidExtension() const {
     std::cout << "endpoint-avoid";
@@ -203,6 +208,48 @@ int main() {
               << record.IndexNew() << ' ' << point.X() << ' ' << point.Y() << ' '
               << point.Z() << ' ' << BRep_Tool::Tolerance(vertex) << '\n';
   }
+  Probe partialOverlap;
+  partialOverlap.AddArgument(edge_argument(
+    gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0)));
+  partialOverlap.AddArgument(edge_argument(
+    gp_Pnt(1, 0, 0), gp_Pnt(3, 0, 0)));
+  partialOverlap.SetFuzzyValue(1.0e-6);
+  partialOverlap.RunVEAndEE();
+  auto& partialDS = partialOverlap.DS();
+  std::cout << "partial-overlap " << partialDS.NbShapes() << ' '
+            << partialDS.InterfVE().Length() << ' ' << partialDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < partialDS.InterfVE().Length(); ++i) {
+    const auto& record = partialDS.InterfVE().Value(i);
+    std::cout << "partial-ve " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << record.Parameter() << '\n';
+  }
+  for (int i = 0; i < partialDS.InterfEE().Length(); ++i) {
+    const auto& record = partialDS.InterfEE().Value(i);
+    std::cout << "partial-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << record.CommonPart().Type() << '\n';
+  }
+  for (int edge : {1, 5}) {
+    const auto& blocks = partialDS.PaveBlocks(edge);
+    std::cout << "partial-edge " << edge << ' ' << blocks.Extent() << '\n';
+    for (auto it = blocks.cbegin(); it != blocks.cend(); ++it) {
+      int firstIndex, lastIndex;
+      double first, last;
+      (*it)->Indices(firstIndex, lastIndex);
+      (*it)->Range(first, last);
+      const auto common = partialDS.CommonBlock(*it);
+      std::cout << "partial-pb " << firstIndex << ' ' << lastIndex << ' '
+                << first << ' ' << last << ' '
+                << (common.IsNull() ? 0 : common->PaveBlocks().Extent()) << '\n';
+    }
+  }
+  Probe partialEEOnly;
+  partialEEOnly.AddArgument(edge_argument(gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0)));
+  partialEEOnly.AddArgument(edge_argument(gp_Pnt(1, 0, 0), gp_Pnt(3, 0, 0)));
+  partialEEOnly.SetFuzzyValue(1.0e-6);
+  partialEEOnly.Run();
+  auto& partialOnlyDS = partialEEOnly.DS();
+  std::cout << "partial-ee-only " << partialOnlyDS.NbShapes() << ' '
+            << partialOnlyDS.InterfEE().Length() << '\n';
   Probe overlap;
   BRep_Builder builder;
   TopoDS_Vertex start, end;
