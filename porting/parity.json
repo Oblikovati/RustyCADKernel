@@ -95446,7 +95446,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
       "rust_item": "rustycad_tkernel::osd::DirectoryIterator::more",
       "status": "partial",
-      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. readdir entries are read at opendir time (the native reads lazily). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. Unix reads names lazily through an owned POSIX cursor, as native; tools/oracle/tkernel_directory_cursor.md records lifecycle and 120 exact filesystem corpus comparisons. Existing injected backends may use the compatible buffered default. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
     },
     {
       "upstream_id": "OSD_DirectoryIterator::Next()",
@@ -95542,7 +95542,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
       "rust_item": "rustycad_tkernel::osd::FileIterator::more",
       "status": "partial",
-      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. readdir entries are read at opendir time (the native reads lazily). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. Unix reads names lazily through an owned POSIX cursor, as native; tools/oracle/tkernel_directory_cursor.md records lifecycle and 120 exact filesystem corpus comparisons. Existing injected backends may use the compatible buffered default. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
     },
     {
       "upstream_id": "OSD_FileIterator::Next()",
