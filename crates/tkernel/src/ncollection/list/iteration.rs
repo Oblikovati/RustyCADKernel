@@ -12,6 +12,18 @@ impl ListCursor {
     pub fn value<T>(self, list: &List<T>) -> Option<&T> {
         self.node(list).map(|node| &node.value)
     }
+    /// Borrows the positioned value for mutation; `*cursor.change_value(&mut list).unwrap() = 9`.
+    /// An end or foreign cursor returns `None`, rejecting native's undefined dereference domain.
+    pub fn change_value<'a, T>(&self, list: &'a mut List<T>) -> Option<&'a mut T> {
+        let mut node = list.head.as_deref_mut();
+        while let Some(current) = node {
+            if Some(current as *mut Node<T> as usize) == self.address {
+                return Some(&mut current.value);
+            }
+            node = current.next.as_deref_mut();
+        }
+        None
+    }
     /// Advances to the next node; `cursor.next(&list)`.
     pub fn next<T>(&mut self, list: &List<T>) {
         self.address = self.node(list).and_then(|node| address(&node.next));
