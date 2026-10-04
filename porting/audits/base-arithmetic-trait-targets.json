@@ -1,0 +1,20 @@
+{
+  "scope": "TKernel vector/matrix and TKMath gp exact arithmetic trait target corrections",
+  "rust_capture_revision": "9115f458413f78886462da5782945ac29b0afa62",
+  "audited_on_revision": "8ad987ca3c1e9b02e89a00cdbd8d4c8b21c819fd",
+  "changed_rows": 74,
+  "classification": "metadata only: existing implemented assertions; no newly ported behavior or legacy declarations",
+  "selection_rules": [
+    "C++ selector already resolves uniquely.",
+    "Old selector explicitly identifies the same concrete Rust owner, unparameterized standard trait and method.",
+    "Exactly one compiler-recorded target exists at the fully qualified trait path.",
+    "Trait implementation has no explicit generic arguments or constraints; parameterized or overloaded trait candidates are withheld.",
+    "Every Rust source hash is unchanged since the captured compiler inventory."
+  ],
+  "claims": "base-arithmetic-trait-targets.jsonl.gz",
+  "claims_sha256": "713725850a87cf484811380b187223b504e16f343d066403b294a3f0e0e6eb9b",
+  "limitations": [
+    "Correct path resolution is not a proof of behavioral equivalence.",
+    "Remaining trait overload selectors require exact generic argument identities; they are not guessed."
+  ]
+}
