@@ -59,6 +59,30 @@ fn purge_releases_medium_blocks_only() {
 }
 
 #[test]
+fn free_pools_invalidates_small_handles_and_keeps_medium_blocks() {
+    let mut opt = manager(true, false);
+    let small = opt.allocate(16).unwrap();
+    let medium = opt.allocate(300).unwrap();
+    opt.bytes_mut(medium).unwrap()[..4].copy_from_slice(b"keep");
+    opt.free_pools().unwrap();
+    assert!(opt.bytes(small).is_err());
+    assert_eq!(&opt.bytes(medium).unwrap()[..4], b"keep");
+    opt.free_pools().unwrap();
+    let next_small = opt.allocate(16).unwrap();
+    assert!(opt.bytes(next_small).unwrap().iter().all(|byte| *byte == 0));
+}
+
+#[test]
+fn free_pools_prunes_recycled_pool_blocks_before_reuse() {
+    let mut opt = manager(true, false);
+    let released = opt.allocate(16).unwrap();
+    opt.free(Some(released)).unwrap();
+    opt.free_pools().unwrap();
+    let next = opt.allocate(16).unwrap();
+    assert!(opt.bytes(next).unwrap().iter().all(|byte| *byte == 0));
+}
+
+#[test]
 fn a_fully_free_pool_is_never_released() {
     // 100 pages hold (P - 8) / 24 blocks of 16 bytes; the tally of a completely free pool
     // is P - 8 (or P - 16), never the pool size P that Purge compares it with.

@@ -9,6 +9,7 @@ use address_space::{AddressSpace, WORD};
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::RwLock;
 mod address_space;
+mod free_pools;
 mod os_page;
 mod pools;
 mod purge;
