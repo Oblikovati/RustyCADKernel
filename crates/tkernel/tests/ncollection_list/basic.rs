@@ -51,6 +51,10 @@ fn NCollection_ListTest__STLIterators() {
     }
     let constant = &list;
     assert!(list.iter() == constant.iter());
+    let (mut mutable_end, mut const_end) = (list.iter(), constant.iter());
+    mutable_end.by_ref().for_each(drop);
+    const_end.by_ref().for_each(drop);
+    assert!(mutable_end == const_end);
     assert!(list.iter().nth(3).is_none());
     assert!(constant.iter().nth(3).is_none());
     assert_eq!(constant.iter().filter(|&&value| value == 20).count(), 1);

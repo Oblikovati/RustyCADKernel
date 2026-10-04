@@ -70,7 +70,7 @@ struct Pair {
 }
 fn check_pair(pair: &Pair, integer: i32, real: f64) {
     assert_eq!(pair.integer, integer);
-    assert!((pair.real - real).abs() < 1e-10);
+    assert!((pair.real - real).abs() <= 1e-10);
 }
 #[test]
 fn NCollection_Array2Test__EmplaceValue() {
