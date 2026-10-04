@@ -113,3 +113,96 @@ fn default_bean_state_retains_native_sentinels() {
     assert_eq!(solver.result().length(), 0);
     assert_eq!(solver.minimal_square_distance(), f64::MAX);
 }
+
+fn analytic_edge(mode: i32) -> Edge {
+    use rustycad_tkmath::gp::{Axis2, Circle3};
+    if mode >= 7 {
+        return conic_edge(mode);
+    }
+    if (2..4).contains(&mode) || mode == 6 {
+        let x = if mode == 2 { 1. } else { 2. };
+        return BRepBuilderAPIMakeEdge::from_points(
+            Point3::new(x, 0., -1.),
+            Point3::new(x, 0., 1.),
+        )
+        .unwrap()
+        .edge()
+        .unwrap();
+    }
+    let mut axis = Axis2::default();
+    if mode < 2 {
+        axis.set_location(Point3::new(0., 0., f64::from(mode)));
+    }
+    let radius = if mode < 2 {
+        0.5
+    } else if mode == 4 {
+        1.
+    } else {
+        2.
+    };
+    BRepBuilderAPIMakeEdge::from_circ_params(Circle3::new(axis, radius).unwrap(), 0., 1.)
+        .unwrap()
+        .edge()
+        .unwrap()
+}
+
+fn analytic_face(mode: i32) -> Face {
+    use rustycad_tkmath::gp::{Axis3, Cylinder3, Sphere3};
+    if !(2..7).contains(&mode) {
+        return source_face();
+    }
+    let bounds = (0., std::f64::consts::TAU, -1., 1.);
+    let maker = if mode == 6 {
+        BRepBuilderAPIMakeFace::from_sphere_bounds(
+            Sphere3::new(Axis3::default(), 1.).unwrap(),
+            bounds,
+        )
+    } else {
+        BRepBuilderAPIMakeFace::from_cylinder_bounds(
+            Cylinder3::new(Axis3::default(), 1.).unwrap(),
+            bounds,
+        )
+    };
+    maker.unwrap().face().unwrap()
+}
+
+#[test]
+fn analytic_facade_matches_native_coincidence_and_separation() {
+    let mut rows = String::new();
+    for mode in 0..10 {
+        let mut solver =
+            BeanFaceIntersector::from_shapes(&analytic_edge(mode), &analytic_face(mode)).unwrap();
+        solver.set_bean_parameters(0., 1.);
+        for pass in 0..2 {
+            solver.perform().unwrap();
+            snapshot(&solver, mode, 0, pass, &mut rows);
+        }
+    }
+    assert_eq!(rows.lines().count(), 20);
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_bean_analytic_facade.expected")
+    );
+}
+
+fn conic_edge(mode: i32) -> Edge {
+    use rustycad_tkmath::gp::{Axis2, Ellipse3, Hyperbola3, Parabola3};
+    let maker = match mode {
+        7 => BRepBuilderAPIMakeEdge::from_elips_params(
+            Ellipse3::new(Axis2::default(), 2., 1.).unwrap(),
+            0.,
+            1.,
+        ),
+        8 => BRepBuilderAPIMakeEdge::from_hypr_params(
+            Hyperbola3::new(Axis2::default(), 2., 1.).unwrap(),
+            0.,
+            1.,
+        ),
+        _ => BRepBuilderAPIMakeEdge::from_parab_params(
+            Parabola3::new(Axis2::default(), 1.).unwrap(),
+            0.,
+            1.,
+        ),
+    };
+    maker.unwrap().edge().unwrap()
+}

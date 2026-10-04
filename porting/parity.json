@@ -218621,12 +218621,13 @@
       "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::UpdateFaceInfoIn(const NCollection_Map<int>&)",
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoIn(const NCollection_Map<int> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_face_info_in_map",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native map-only record creation, index-role filtering, common-block/new-vertex and pave refinement; tools/oracle/tkbo_face_info_map.cxx. Allocator/invalid-input and full legacy/API proof remain unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const int)",
@@ -218638,12 +218639,13 @@
       "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const NCollection_Map<int>&)",
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const NCollection_Map<int> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_face_info_on_map",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native map-only record creation, index-role filtering, common-block/new-vertex and pave refinement; tools/oracle/tkbo_face_info_map.cxx. Allocator/invalid-input and full legacy/API proof remain unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::FaceInfoOn(const int, NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>> &, NCollection_Map<int> &)",
@@ -218675,9 +218677,10 @@
       "upstream_id": "BOPDS_DS::RefineFaceInfoOn()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::refine_face_info_on",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native map-only record creation, index-role filtering, common-block/new-vertex and pave refinement; tools/oracle/tkbo_face_info_map.cxx. Allocator/invalid-input and full legacy/API proof remain unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::RefineFaceInfoIn()",
@@ -227961,7 +227964,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::init_adaptors",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector(const BRepAdaptor_Curve &, const BRepAdaptor_Surface &, const double, const double)",
@@ -227970,7 +227973,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::from_adaptors",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::IsDone()",
@@ -227979,7 +227982,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::is_done",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::SetContext(const occ::handle<IntTools_Context> &)",
@@ -227988,7 +227991,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_context",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::Perform()",
@@ -227997,7 +228000,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::perform",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::SetBeanParameters(const double, const double)",
@@ -228006,7 +228009,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_bean_parameters",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::Init(const TopoDS_Edge &, const TopoDS_Face &)",
@@ -228015,7 +228018,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::init_shapes",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::MinimalSquareDistance()",
@@ -228024,7 +228027,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::minimal_square_distance",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::SetSurfaceParameters(const double, const double, const double, const double)",
@@ -228033,7 +228036,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_surface_parameters",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::Context()",
@@ -228042,7 +228045,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::context",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::Result(NCollection_Sequence<IntTools_Range> &)",
@@ -228051,7 +228054,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::result_into",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::Result()",
@@ -228060,7 +228063,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::result",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector()",
@@ -228069,7 +228072,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::new",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector(const TopoDS_Edge &, const TopoDS_Face &)",
@@ -228078,7 +228081,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::from_shapes",
       "status": "partial",
-      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. General Perform stages and long overloads remain explicitly unported; full legacy/API parity unproven."
     }
   ],
   "tests": [
