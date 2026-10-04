@@ -11,6 +11,7 @@ mod make_offset_build_adjacent;
 mod make_offset_build_spheres;
 mod make_offset_check;
 mod make_offset_history;
+mod make_offset_thick_solid;
 mod offset_face;
 mod offset_rails;
 mod offset_rails_adaptors;
