@@ -47,8 +47,28 @@ void printDataCursor()
   printFailure([&] { cursor.Value(); });
 }
 
+void printMutableCursor()
+{
+  NCollection_FlatDataMap<int, int> map, other;
+  for (const int key : {3, 11, 4}) map.Bind(key, key * 10);
+  other.Bind(3, 30);
+  NCollection_FlatDataMap<int, int>::Iterator cursor(map), different(other), empty;
+  std::cout << cursor.More() << ' ' << cursor.IsEqual(different) << '\n';
+  while (cursor.More()) {
+    cursor.ChangeValue() += cursor.Key();
+    const auto alias = cursor;
+    std::cout << cursor.Key() << ' ' << cursor.Value() << ' ' << alias.Value() << '\n';
+    cursor.Next();
+  }
+  cursor.Next();
+  std::cout << cursor.More() << ' ' << cursor.IsEqual(empty) << '\n';
+  printFailure([&] { cursor.ChangeValue(); });
+  std::cout << map.Find(3) << ' ' << map.Find(11) << ' ' << map.Find(4) << '\n';
+}
+
 int main()
 {
   printSetCursor();
   printDataCursor();
+  printMutableCursor();
 }

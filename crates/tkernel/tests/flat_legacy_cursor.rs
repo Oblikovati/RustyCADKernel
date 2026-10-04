@@ -2,6 +2,8 @@
 use rustycad_tkernel::ncollection::{FlatDataItems, FlatDataMap, FlatMap, FlatMapIter};
 use rustycad_tkernel::standard::Failure;
 use std::fmt::Write;
+#[path = "flat_legacy_cursor/mutable.rs"]
+mod mutable;
 
 fn append_failure(output: &mut String, result: Result<&i32, Failure>) {
     let error = result.expect_err("exhausted cursor must reject access");
@@ -71,6 +73,7 @@ fn legacy_cursor_observation_and_exhaustion_match_native_receipt() {
     let mut output = String::new();
     append_set_cursor(&mut output);
     append_data_cursor(&mut output);
+    mutable::append_mutable_cursor(&mut output);
     assert_eq!(
         output,
         include_str!("../../../tools/oracle/tkernel_flat_legacy_cursor.expected")

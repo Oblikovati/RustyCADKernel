@@ -73280,9 +73280,9 @@
       "upstream_id": "NCollection_FlatDataMap::Iterator(NCollection_FlatDataMap&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items_mut",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::cursor_mut",
       "status": "partial",
-      "notes": "Rust supports immutable cursor inspection through items and consuming mutable iteration through items_mut; a complete mutable legacy cursor and native shared mutable cursor aliases remain unported. See porting/audits/flat-legacy-cursor.json."
+      "notes": "Exclusive mutable legacy cursor starts at the first occupied slot and supports More/Next/Key/Value/ChangeValue/IsEqual. Native copied mutable aliases remain unported. See porting/audits/flat-data-mutable-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator(const NCollection_FlatDataMap&)",
@@ -73290,7 +73290,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items",
       "status": "partial",
-      "notes": "Rust supports immutable cursor inspection through items and consuming mutable iteration through items_mut; a complete mutable legacy cursor and native shared mutable cursor aliases remain unported. See porting/audits/flat-legacy-cursor.json."
+      "notes": "Read-only cursor inspection is available through items; mutable access through an exclusive map borrow uses cursor_mut. Native mutation through a const map and shared mutable cursor aliases remain unported. See porting/audits/flat-data-mutable-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::More() const",
@@ -73298,7 +73298,11 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::more",
       "status": "implemented",
-      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json. Exclusive mutable cursors provide the same inspection/advance protocol; see porting/audits/flat-data-mutable-cursor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::more",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::more"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Next()",
@@ -73306,7 +73310,11 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::advance",
       "status": "implemented",
-      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json. Exclusive mutable cursors provide the same inspection/advance protocol; see porting/audits/flat-data-mutable-cursor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::advance",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::advance"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Key() const",
@@ -73314,7 +73322,11 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::key",
       "status": "implemented",
-      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json. Exclusive mutable cursors provide the same inspection/advance protocol; see porting/audits/flat-data-mutable-cursor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::key",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::key"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Value() const",
@@ -73322,15 +73334,19 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::value",
       "status": "implemented",
-      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json. Exclusive mutable cursors provide the same inspection/advance protocol; see porting/audits/flat-data-mutable-cursor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::value",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::value"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::ChangeValue() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items_mut",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataCursorMut::change_value",
       "status": "partial",
-      "notes": "items_mut provides consuming mutable iteration, but the native non-consuming ChangeValue cursor operation and shared mutable cursor aliases are not yet ported. The new FlatDataItems Key/Value/More/Next path is read-only. See porting/audits/flat-legacy-cursor.json."
+      "notes": "Non-consuming mutable value access and exact exhausted Standard_OutOfRange behavior are ported for an exclusively borrowed map. Native mutable cursor aliases and mutation through a const map are not yet represented. See porting/audits/flat-data-mutable-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::IsEqual(const Iterator&) const",
@@ -73338,7 +73354,11 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Native end equality uses !More() on both cursors, including after Next on an exhausted cursor; otherwise compare slot identity and index. See porting/audits/flat-legacy-cursor.json."
+      "notes": "Native end equality uses !More() on both cursors, including after Next on an exhausted cursor; otherwise compare slot identity and index. See porting/audits/flat-legacy-cursor.json. Exclusive mutable cursors provide the same inspection/advance protocol; see porting/audits/flat-data-mutable-cursor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::<core::cmp::PartialEq>::eq",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::is_equal"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap()",

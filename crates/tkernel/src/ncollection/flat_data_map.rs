@@ -148,4 +148,6 @@ fn missing_flat_key<K: Debug>(key: &K) -> Failure {
     )
 }
 mod binding;
+mod cursor;
 mod iteration;
+pub use cursor::FlatDataCursorMut;

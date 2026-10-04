@@ -87,7 +87,9 @@ mod flat_table;
 pub use flat_map::{FlatMap, FlatMapIter};
 
 mod flat_data_map;
-pub use flat_data_map::{FlatDataItems, FlatDataMap, FlatDataValues, FlatDataValuesMut};
+pub use flat_data_map::{
+    FlatDataCursorMut, FlatDataItems, FlatDataMap, FlatDataValues, FlatDataValuesMut,
+};
 
 mod ordered_map;
 mod ordered_table;
