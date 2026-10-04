@@ -74,7 +74,7 @@ fn observe(
             &mut point,
             &context,
         ),
-        Some(_) => algo_tools3d::point_in_face_from_edge(
+        Some(2) => algo_tools3d::point_in_face_from_edge(
             &fixture.face,
             &edge,
             0.5,
@@ -83,6 +83,9 @@ fn observe(
             &mut uv,
             &context,
         ),
+        Some(_) => {
+            algo_tools3d::point_near_edge(&edge, &fixture.face, &mut uv, &mut point, &context)
+        }
     }
     .unwrap();
     [

@@ -52,3 +52,6 @@ pub use point_in_face::{point_in_face, point_in_face_curve, point_in_face_from_e
 
 mod near_edge_context;
 pub use near_edge_context::{point_near_edge_at, point_near_edge_with_step};
+
+mod orient_edge;
+pub use orient_edge::{orient_edge_on_face, point_near_edge};
