@@ -1,9 +1,11 @@
 //! Differential public wrappers for the defined, bounded `Standard_CString` format subset.
 use rustycad_tkernel::standard::c_string::{
-    FormatArg, fprintf_to, printf_to, sprintf_into, vsprintf_into,
+    FormatArg, fprintf_to, printf_to, sprintf_into, sprintf_into_slice, vsprintf_into,
+    vsprintf_into_slice,
 };
 
 const NATIVE_ROWS: &str = include_str!("../../../tools/oracle/tkernel_c_string_format.expected");
+type FixedFormatter = for<'a> fn(&mut [u8], &[u8], &[FormatArg<'a>]) -> std::io::Result<usize>;
 
 #[test]
 fn standard_c_string_sprintf_matches_native_fixture() {
@@ -22,6 +24,22 @@ fn standard_c_string_sprintf_matches_native_fixture() {
 fn standard_c_string_printf_and_fprintf_write_native_bytes() {
     assert_writer_row("printf", write_printf());
     assert_writer_row("fprintf", write_fprintf());
+}
+
+#[test]
+fn standard_c_string_fixed_buffers_preserve_native_suffix() {
+    assert_fixed_row("sprintf_slice_tail", sprintf_fixed_buffer());
+    assert_fixed_row("vsprintf_slice_tail", vsprintf_fixed_buffer());
+}
+
+#[test]
+fn standard_c_string_fixed_buffer_rejects_short_capacity_without_mutation() {
+    let mut output = [0x5a; 6];
+    let original = output;
+    let error = sprintf_into_slice(&mut output, b"%c:%04d", &fixed_args()).unwrap_err();
+    assert_eq!(error.kind(), std::io::ErrorKind::InvalidInput);
+    assert!(error.to_string().contains("7 bytes"));
+    assert_eq!(output, original);
 }
 
 #[test]
@@ -122,6 +140,24 @@ fn format_variadic_slice() -> (Vec<u8>, usize) {
     (output, count)
 }
 
+fn sprintf_fixed_buffer() -> (Vec<u8>, usize) {
+    format_fixed_buffer(sprintf_into_slice)
+}
+
+fn vsprintf_fixed_buffer() -> (Vec<u8>, usize) {
+    format_fixed_buffer(vsprintf_into_slice)
+}
+
+fn format_fixed_buffer(format: FixedFormatter) -> (Vec<u8>, usize) {
+    let mut output = vec![0xa5; 16];
+    let count = format(&mut output, b"%c:%04d", &fixed_args()).unwrap();
+    (output, count)
+}
+
+fn fixed_args() -> [FormatArg<'static>; 2] {
+    [FormatArg::Int(0), FormatArg::Int(7)]
+}
+
 fn format_buffer(format: &[u8], args: &[FormatArg<'_>]) -> (Vec<u8>, usize) {
     let mut output = Vec::new();
     let count = sprintf_into(&mut output, format, args).unwrap();
@@ -155,15 +191,28 @@ fn assert_writer_row(label: &str, actual: (Vec<u8>, usize)) {
     assert_native_row(label, count, &bytes);
 }
 
+fn assert_fixed_row(label: &str, actual: (Vec<u8>, usize)) {
+    let (buffer, count) = actual;
+    let row = native_row(label);
+    let mut fields = row.split_ascii_whitespace();
+    assert_eq!(fields.next(), Some(label));
+    assert_eq!(fields.next().unwrap().parse::<usize>().unwrap(), count);
+    assert_eq!(decode_hex(fields.next().unwrap()), buffer);
+}
+
 fn assert_native_row(label: &str, count: usize, bytes: &[u8]) {
-    let row = NATIVE_ROWS
-        .lines()
-        .find(|row| row.starts_with(label))
-        .unwrap();
+    let row = native_row(label);
     let mut fields = row.split_ascii_whitespace();
     assert_eq!(fields.next(), Some(label));
     assert_eq!(fields.next().unwrap().parse::<usize>().unwrap(), count);
     assert_eq!(decode_hex(fields.next().unwrap()), bytes);
+}
+
+fn native_row(label: &str) -> &str {
+    NATIVE_ROWS
+        .lines()
+        .find(|row| row.starts_with(label))
+        .unwrap()
 }
 
 fn assert_format_error(format: &[u8], args: &[FormatArg<'_>]) {

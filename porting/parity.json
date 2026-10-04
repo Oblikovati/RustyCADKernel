@@ -82204,17 +82204,17 @@
       "upstream_id": "Sprintf(char*,const char*,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": "rustycad_tkernel::standard::c_string::sprintf_into",
+      "rust_item": "rustycad_tkernel::standard::c_string::sprintf_into_slice",
       "status": "partial",
-      "notes": "Typed `FormatArg` slice and growable byte buffer reuse the existing c_format engine; native return count and terminating NUL are checked. This replaces Vec contents and does not accept a raw fixed caller buffer, model untouched tail bytes, varargs, or C int count overflow; unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
+      "notes": "Typed `FormatArg` slice and caller byte slice reuse c_format; the native count, terminating NUL, embedded NUL, and untouched tail are checked. Too-small slices return InvalidInput before mutation because native undersized-buffer behavior overruns memory. C varargs and int count overflow remain partial; see tools/oracle/tkernel_c_string_format.md. Corrected the former pseudo-namespace to the native global function; see porting/audits/standard-global-function-selectors.jsonl."
     },
     {
       "upstream_id": "Vsprintf(char*,const char*,struct __va_list_tag*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": "rustycad_tkernel::standard::c_string::vsprintf_into",
+      "rust_item": "rustycad_tkernel::standard::c_string::vsprintf_into_slice",
       "status": "partial",
-      "notes": "The safe analogue accepts a typed `FormatArg` slice rather than `va_list`; it reuses the existing c_format engine and writes a trailing NUL. Native format/count cases are checked, but ABI/va_list behavior, fixed-buffer tail semantics, C int count overflow, and unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl. The va_list parameter selector uses its adjusted Linux compiler type; other platform configurations remain unproven."
+      "notes": "The safe analogue accepts typed `FormatArg` values rather than `va_list`; the caller-slice variant reuses c_format and matches native count, NUL, embedded NUL, and untouched tail on sufficiently large buffers. Too-small slices fail safely where native writes out of bounds; C ABI/va_list behavior and int count overflow remain partial. See tools/oracle/tkernel_c_string_format.md and standard-global-function-selectors.jsonl. The va_list selector uses the adjusted Linux compiler type; other platform configurations remain unproven."
     },
     {
       "upstream_id": "Standard_CStringHasher::operator()(const char* const) const noexcept",
