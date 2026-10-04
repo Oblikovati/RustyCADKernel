@@ -226527,6 +226527,42 @@
       "rust_item": "rustycad_tkbo::bop_tools::is_split_to_reverse_with_warning",
       "status": "partial",
       "notes": "Six native success/failure optional-report cases compare repeated warning counts, message keys and compound child identity/order. Underlying orientation comparison remains partial; see tools/oracle/tkbo_face_orientation.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::Dimension(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::dimension",
+      "status": "partial",
+      "notes": "40 native dimension/compound fence cases and 32 shell occurrence/orientation cases pass. Located/shared-geometry arrangements, exceptional inputs and wider topology stress remain unproven; see tools/oracle/tkbo_shape_utilities.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsOpenShell(const TopoDS_Shell &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_open_shell",
+      "status": "partial",
+      "notes": "40 native dimension/compound fence cases and 32 shell occurrence/orientation cases pass. Located/shared-geometry arrangements, exceptional inputs and wider topology stress remain unproven; see tools/oracle/tkbo_shape_utilities.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::TreatCompound(const TopoDS_Shape &, NCollection_List<TopoDS_Shape> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> *)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::treat_compound",
+      "status": "partial",
+      "notes": "40 native dimension/compound fence cases and 32 shell occurrence/orientation cases pass. Located/shared-geometry arrangements, exceptional inputs and wider topology stress remain unproven; see tools/oracle/tkbo_shape_utilities.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::Dimensions(const TopoDS_Shape &, int &, int &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::dimensions",
+      "status": "partial",
+      "notes": "40 native dimension/compound fence cases and 32 shell occurrence/orientation cases pass. Located/shared-geometry arrangements, exceptional inputs and wider topology stress remain unproven; see tools/oracle/tkbo_shape_utilities.md."
     }
   ],
   "tests": [

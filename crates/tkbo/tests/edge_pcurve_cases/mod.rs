@@ -174,3 +174,5 @@ mod attach;
 mod face_orientation;
 
 mod orientation_warning;
+
+mod shape_utilities;

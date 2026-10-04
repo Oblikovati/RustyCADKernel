@@ -16,3 +16,8 @@ pub use face_orientation::{face_sense, is_split_face_to_reverse, is_split_shape_
 
 mod orientation_warning;
 pub use orientation_warning::is_split_to_reverse_with_warning;
+
+mod shape_dimensions;
+pub use shape_dimensions::{dimension, dimensions, treat_compound};
+mod open_shell;
+pub use open_shell::is_open_shell;
