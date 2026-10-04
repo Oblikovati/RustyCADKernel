@@ -44,7 +44,9 @@ struct CandidateEdges {
 pub(in crate::shape_fix::wireframe) struct MergePolicy {
     pub(super) faces: Vec<Face>,
     pub(in crate::shape_fix::wireframe) edge_faces: Vec<(Shape, Vec<Shape>)>,
+    pub(in crate::shape_fix::wireframe) face_small_entries: Vec<(Shape, Vec<Shape>)>,
     pub(in crate::shape_fix::wireframe) face_small_changed: bool,
+    pub(in crate::shape_fix::wireframe) face_small_exact_changed: bool,
     pub(super) multiple_edges: Vec<Shape>,
     pub(super) angle_limit: Option<f64>,
     pub(super) drop_mode: bool,
@@ -59,7 +61,9 @@ impl MergePolicy {
         Self {
             faces: Vec::new(),
             edge_faces: Vec::new(),
+            face_small_entries: Vec::new(),
             face_small_changed: false,
+            face_small_exact_changed: false,
             multiple_edges,
             angle_limit,
             drop_mode,
@@ -69,6 +73,7 @@ impl MergePolicy {
     pub(in crate::shape_fix::wireframe) fn face(
         face: &Face,
         edge_faces: Vec<(Shape, Vec<Shape>)>,
+        face_small_entries: Vec<(Shape, Vec<Shape>)>,
         angle_limit: Option<f64>,
         multiple_edges: Vec<Shape>,
         drop_mode: bool,
@@ -76,7 +81,9 @@ impl MergePolicy {
         Self {
             faces: vec![face.clone()],
             edge_faces,
+            face_small_entries,
             face_small_changed: false,
+            face_small_exact_changed: false,
             multiple_edges,
             angle_limit,
             drop_mode,

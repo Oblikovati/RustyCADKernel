@@ -20,6 +20,9 @@ use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPICopy, BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon, BRepBuilderAPIMakeShape,
 };
 
+#[path = "shape_fix_wireframe_merge_branches/face_drop.rs"]
+mod face_drop;
+
 #[test]
 fn multiedge_neighbor_is_skipped_like_native() {
     assert_eq!(multiedge_neighbor_row(), expected("multiple_neighbor_skip"));
@@ -438,6 +441,19 @@ fn tiny_wire() -> Wire {
         Point3::new(0.01, 0., 0.),
         Point3::new(1., 0., 0.),
         Point3::new(1., 1., 0.),
+        true,
+    )
+    .unwrap()
+    .wire()
+    .unwrap()
+}
+
+fn unit_wire() -> Wire {
+    BRepBuilderAPIMakePolygon::from_four_points(
+        Point3::new(0., 0., 0.),
+        Point3::new(2., 0., 0.),
+        Point3::new(2., 2., 0.),
+        Point3::new(0., 2., 0.),
         true,
     )
     .unwrap()
