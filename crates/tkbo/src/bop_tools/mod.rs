@@ -78,3 +78,6 @@ pub use face_connexity::make_connexity_block;
 
 mod shape_tolerances;
 pub use shape_tolerances::correct_shape_tolerances;
+
+mod point_curve_tolerance;
+pub use point_curve_tolerance::correct_point_on_curve;

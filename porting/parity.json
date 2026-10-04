@@ -227358,6 +227358,15 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edge_tube",
       "status": "partial",
       "notes": "Identity-located 3D free-boundary tube initializer: positive/negative native state, area, topology, orientation and Generated fixture in tools/oracle/tkoffset_offset_edge_tube.md. General curve/location/pcurve-only and exceptional history paths remain unproven; no complete API/legacy claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::CorrectPointOnCurve(const TopoDS_Shape &, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const double, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::correct_point_on_curve",
+      "status": "partial",
+      "notes": "Source curve-representation/point-parameter traversal and 162 native endpoint/internal, max-tolerance, avoidance and relative-location observations. tools/oracle/tkbo_point_curve_tolerance.md. Scheduling remains serial; arbitrary/multiple curves and complete legacy/API parity unproven."
     }
   ],
   "tests": [
