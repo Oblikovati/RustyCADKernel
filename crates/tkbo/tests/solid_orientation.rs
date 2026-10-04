@@ -43,3 +43,6 @@ fn native_infinite_point_solid_orientation_matches() {
 
 #[path = "solid_orientation_cases/state.rs"]
 mod state;
+
+#[path = "solid_orientation_cases/shell.rs"]
+mod shell;

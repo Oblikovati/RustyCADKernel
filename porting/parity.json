@@ -225518,7 +225518,11 @@
       "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::face",
       "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial."
+      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
+      "rust_items": [
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::face",
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::face"
+      ]
     },
     {
       "upstream_id": "BRepOffset_Offset::Status() const",
@@ -225527,7 +225531,11 @@
       "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::status",
       "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial."
+      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
+      "rust_items": [
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::status",
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::status"
+      ]
     },
     {
       "upstream_id": "BRepOffset_Offset::Generated(const TopoDS_Shape &) const",
@@ -225536,7 +225544,11 @@
       "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
       "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial."
+      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
+      "rust_items": [
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
+        "rustycad_tkoffset::brep_offset::BRepOffsetOffset::generated"
+      ]
     },
     {
       "upstream_id": "TopOpeBRepTool_TOOL::minDUV(const TopoDS_Face &)",
@@ -227229,6 +227241,60 @@
       "rust_item": "rustycad_tkbo::bop_tools::is_hole",
       "status": "partial",
       "notes": "Native sampled-area source translation; 288 observations include orientations, circles, periodic supports and missing-pcurve early termination. See tools/oracle/tkbo_wire_hole.md. Supplemental evidence, not full legacy/API parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::OrientEdgesOnWire(TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::orient_edges_on_wire",
+      "status": "partial",
+      "notes": "Source translation and 192 native graph/orientation cases; see tools/oracle/tkbo_orient_wire.md. Supplemental evidence, not full API/legacy parity."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::new",
+      "status": "partial",
+      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const bool, const double, const GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edges",
+      "status": "partial",
+      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Edge &, const double, const bool, const double, const GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_edges",
+      "status": "partial",
+      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::InitialShape()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.lxx",
+      "source_sha256": "93aeef12258a9df7099180cd06131258c365e9ba3a231313306c0819e633e5a2",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::initial_shape",
+      "status": "partial",
+      "notes": "Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::OrientFacesOnShell(TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::orient_faces_on_shell",
+      "status": "partial",
+      "notes": "Native two-pass edge-adjacency orientation translation; 192 differential shell/face ordering and orientation cases. See tools/oracle/tkbo_orient_shell.md; supplemental evidence, not complete API/legacy parity."
     }
   ],
   "tests": [

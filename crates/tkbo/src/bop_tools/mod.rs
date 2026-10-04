@@ -63,3 +63,9 @@ pub use compute_state::{
 
 mod wire_hole;
 pub use wire_hole::is_hole;
+
+mod orient_wire;
+pub use orient_wire::orient_edges_on_wire;
+
+mod orient_shell;
+pub use orient_shell::orient_faces_on_shell;
