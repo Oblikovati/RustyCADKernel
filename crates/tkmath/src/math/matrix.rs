@@ -78,6 +78,16 @@ impl Matrix<'_> {
     pub fn upper_col(&self) -> i32 {
         self.table.upper_col()
     }
+    /// Exposes the native protected row-reindex hook to Rust specializations without moving cells;
+    /// `matrix.set_lower_row(-2)`.
+    pub fn set_lower_row(&mut self, lower: i32) {
+        self.table.set_lower_row(lower);
+    }
+    /// Exposes the native protected column-reindex hook to Rust specializations without moving cells;
+    /// `matrix.set_lower_col(8)`.
+    pub fn set_lower_col(&mut self, lower: i32) {
+        self.table.set_lower_col(lower);
+    }
     /// Mutates a zero-based cell independently of declared bounds; `*matrix.change_at(0,0)? = 2.0`.
     pub fn change_at(&mut self, row: usize, col: usize) -> Result<&mut f64, ArrayError> {
         self.table.change_at(row, col)
