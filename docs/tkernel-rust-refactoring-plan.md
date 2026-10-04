@@ -327,3 +327,29 @@ consulted for language/library guarantees; latest documentation may describe a n
 release than the workspace's pinned 1.98.1, so implementation must check availability on that
 pinned toolchain. No compiler, benchmark, Miri, or implementation test was run for this
 research-only change; relative document links and `git diff --check` were checked.
+
+## Dated implementation review: fallible UBTree selection (2026-10-04)
+
+The report snapshot `65fed4cd` predates TKernel commit `e3fdf4ab`, which adds the Rust-only
+`FallibleTreeSelector` trait and `UBTree::try_select`. The adapter routes the existing tree
+traversal through an infallible `TreeSelector`; it does not duplicate traversal. Its
+`accept` callback returns `Result<bool, E>`, and an error stops later leaf acceptance while
+preserving the error value. The existing `TreeSelector` and `UBTree::select` remain available.
+
+This is an idiomatic Rust extension, not an OCCT declaration mapping. Keep both extension
+paths visible in the Rust API inventory as Rust-only; they must not satisfy or reduce the
+native declaration denominator. The mapped compatibility obligation remains the original
+infallible selector API and its source order, branch rejection, count and stop behavior.
+
+The new `ubtree_fallible` tests exercise callback order, rejection, stopping and an `i32`
+error on a toy bound. Before treating the adapter as behaviorally established, add a native
+selector exception probe and compare it with direct `select` plus `try_select`: verify the
+exact exception/error boundary, error identity, that no later leaf is accepted, and that
+there is no second traversal. The current trait only makes `accept` fallible; `reject` and
+`stop` still cannot return errors, so exceptions from those callbacks remain a separate
+compatibility gap. Reentrant and panic behavior also remain under the existing callback
+audit and should not be inferred from the toy tests.
+
+This new API does not change the earlier collection-replacement recommendations or measured
+source totals. Refresh compiler/Rust API capture at the new source revision before publishing
+coverage claims; these two Rust-only paths are not OCCT parity credit.
