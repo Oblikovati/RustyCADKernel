@@ -7,7 +7,7 @@ use crate::{
     poly::{Triangle, Triangulation, coherent::CoherentNode},
 };
 use rustycad_tkernel::{
-    ncollection::List,
+    ncollection::{BaseAllocator, List},
     precision,
     standard::{Failure, Handle},
 };
@@ -55,11 +55,18 @@ impl CoherentTriangulation {
     /// and removed triangles are dropped and links are not copied; `None` where OCCT returns
     /// a null handle (no triangle or node); `mesh.clone_triangulation()?`.
     pub fn clone_triangulation(&self) -> Result<Option<Self>, Failure> {
+        self.clone_triangulation_in(BaseAllocator::common())
+    }
+    /// Rebuilds a copy using `allocator` for incident rings; `mesh.clone_triangulation_in(arena)?`.
+    pub fn clone_triangulation_in(
+        &self,
+        allocator: BaseAllocator,
+    ) -> Result<Option<Self>, Failure> {
         if self.n_triangles() == 0 || self.n_nodes() == 0 {
             return Ok(None);
         }
         let exported = self.get_triangulation()?;
-        let mut copy = Self::from_triangulation(&exported)?;
+        let mut copy = Self::from_triangulation_in(&exported, allocator)?;
         copy.set_deflection(exported.deflection());
         Ok(Some(copy))
     }

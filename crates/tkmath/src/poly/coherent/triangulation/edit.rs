@@ -9,12 +9,16 @@ impl CoherentTriangulation {
     /// true when a node dropped it; `mesh.remove_triangle(0)?`.
     pub fn remove_triangle(&mut self, triangle: usize) -> Result<bool, Failure> {
         self.triangle(triangle)?;
+        let allocator = self.allocator.clone();
         let mut removed = false;
         for side in 0..3 {
             let node = self.triangles[triangle].nodes[side];
             if node >= 0 {
                 self.release_side_link(triangle, side)?;
-                if self.change_node(node)?.remove_triangle(triangle) {
+                if self
+                    .change_node(node)?
+                    .remove_triangle_in(triangle, &allocator)?
+                {
                     self.triangles[triangle].nodes[side] = -1;
                     removed = true;
                 }
@@ -79,12 +83,14 @@ impl CoherentTriangulation {
             return Ok(false);
         }
         self.triangles[triangle] = CoherentTriangle::new(node0, node1, node2);
+        let allocator = self.allocator.clone();
         for node in [node0, node1, node2] {
             let incident: Vec<usize> = self.node(node)?.triangles().collect();
             for other in incident {
                 CoherentTriangle::set_connection_any(&mut self.triangles, other, triangle)?;
             }
-            self.change_node(node)?.add_triangle(triangle);
+            self.change_node(node)?
+                .add_triangle_in(triangle, allocator.clone())?;
         }
         if self.link_count > 0 {
             for side in 0..3 {
