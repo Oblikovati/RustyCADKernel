@@ -474,25 +474,7 @@ void print_failure_state(const char* exception, ShapeFix_Wire& tool) {
   std::cout << '\n';
 }
 
-
-void run_trimmed_surface_clip() {
-  BRep_Builder builder;
-  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
-  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(1.1, 0.2, 0), gp_Pnt(2.1, 0.2, 0));
-  TopoDS_Wire wire;
-  builder.MakeWire(wire);
-  builder.Add(wire, first);
-  builder.Add(wire, second);
-  TopoDS_Face face;
-  Handle(Geom_Surface) plane = new Geom_Plane(gp_Pln());
-  Handle(Geom_Surface) surface = new Geom_RectangularTrimmedSurface(plane, 0., 1., 0., 1., true, true);
-  builder.MakeFace(face, surface, 1e-7);
-  builder.Add(face, wire);
-  ShapeFix_Wire tool;
-  tool.Load(wire);
-  tool.SetFace(face);
-  print_result("trimmed_surface_clip", tool, tool.FixGap2d(2, false));
-}
+#include "tkshhealing_wire_gap2d_ranges_boundary.inc"
 
 int main() {
   run_crossing_lines();
@@ -513,4 +495,5 @@ int main() {
   run_parabola_line_extension();
   run_parallel_projection();
   run_trimmed_surface_clip();
+  run_surface_boundary_crossing();
 }

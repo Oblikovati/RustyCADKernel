@@ -82,6 +82,46 @@ fn finite_surface_keeps_a_nearest_hit_when_boundary_lies_beyond_gap_segment() {
 }
 
 #[test]
+fn surface_boundary_clips_an_intersection_beyond_the_trimmed_domain() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(0.8, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.8, 0.4, 0.0), Point3::new(1.8, -0.6, 0.0));
+    let base: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+    let surface: Handle<dyn GeomSurface> = Handle::new(
+        GeomRectangularTrimmedSurface::new(&base, (0.0, 1.0), (0.0, 1.0), (true, true)).unwrap(),
+    )
+    .cast();
+    let (face, wire) = wire_with_surface(&first, &second, &surface);
+    let builder = rustycad_tkbrep::brep::BRepBuilder::default();
+    let first_curve: Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve> = Handle::new(
+        rustycad_tkg2d::geom2d::Geom2dLine::new(rustycad_tkmath::gp::Axis2d::new(
+            rustycad_tkmath::gp::Point2::new(0.0, 0.0),
+            rustycad_tkmath::gp::Direction2::new(1.0, 0.0).unwrap(),
+        )),
+    )
+    .cast();
+    let second_curve: Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve> = Handle::new(
+        rustycad_tkg2d::geom2d::Geom2dLine::new(rustycad_tkmath::gp::Axis2d::new(
+            rustycad_tkmath::gp::Point2::new(0.8, 0.4),
+            rustycad_tkmath::gp::Direction2::new(1.0, -1.0).unwrap(),
+        )),
+    )
+    .cast();
+    set_pcurve_range(&builder, &first, &face, &first_curve, 0.8);
+    set_pcurve_range(&builder, &second, &face, &second_curve, 2.0_f64.sqrt());
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_line_observation(&tool, &face, 1, [0.0, 1.0, 0.0, 0.0, 1.0, 0.0]);
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [0.5656854249492381, 2.0_f64.sqrt(), 1.2, 0.0, 1.8, -0.6],
+    );
+}
+
+#[test]
 fn one_edge_circular_pcurve_expands_both_parameter_ends() {
     let (face, wire) = one_circular_arc_wire();
     let tool = ShapeFixWire::new();
