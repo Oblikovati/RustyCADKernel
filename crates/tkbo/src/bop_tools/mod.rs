@@ -48,3 +48,6 @@ pub use solid_orientation::is_inverted_solid;
 
 mod edge_construction;
 pub use edge_construction::{copy_edge, make_edge, make_section_edge, make_split_edge};
+
+mod vertex_update;
+pub use vertex_update::{update_vertex_curve, update_vertex_edge, update_vertex_pair};

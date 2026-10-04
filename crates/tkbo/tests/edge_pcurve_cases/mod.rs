@@ -190,3 +190,5 @@ mod vertex_tools;
 mod curve_tolerance;
 
 mod edge_construction;
+
+mod vertex_update;

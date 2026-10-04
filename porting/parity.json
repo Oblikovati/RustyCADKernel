@@ -226914,6 +226914,33 @@
       "rust_item": "rustycad_tkbo::bop_tools::copy_edge",
       "status": "partial",
       "notes": "Source translation; 40 copy/split and 12 section native observations cover line/circle identity, orientations, ranges, null endpoints and failure-side tolerance mutation. See tools/oracle/tkbo_edge_construction.md; supplemental fixtures, not complete legacy/API parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::UpdateVertex(const IntTools_Curve &, const double, const TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::update_vertex_curve",
+      "status": "partial",
+      "notes": "Source translation; 99 native differential observations check tolerance growth/no-growth and unchanged points. See tools/oracle/tkbo_vertex_update.md; no complete API/legacy parity claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::UpdateVertex(const TopoDS_Vertex &, const TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::update_vertex_pair",
+      "status": "partial",
+      "notes": "Source translation; 99 native differential observations check tolerance growth/no-growth and unchanged points. See tools/oracle/tkbo_vertex_update.md; no complete API/legacy parity claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::UpdateVertex(const TopoDS_Edge &, const double, const TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::update_vertex_edge",
+      "status": "partial",
+      "notes": "Source translation; 99 native differential observations check tolerance growth/no-growth and unchanged points. See tools/oracle/tkbo_vertex_update.md; no complete API/legacy parity claim."
     }
   ],
   "tests": [
