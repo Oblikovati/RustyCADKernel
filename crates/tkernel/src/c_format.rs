@@ -8,6 +8,7 @@
 mod float;
 mod hexadecimal;
 mod integer;
+mod pointer;
 mod validation;
 
 /// One typed argument for the supported C `printf` conversions.
@@ -35,6 +36,8 @@ pub enum FormatArg<'a> {
     UnsignedPtrDiff(usize),
     /// A `double` argument.
     Real(f64),
+    /// A C `%p` address, formatted without accessing the pointed-to storage.
+    Pointer(*const std::ffi::c_void),
     /// A byte string used as a `const char*`, truncated at the first NUL.
     Text(&'a [u8]),
 }
@@ -99,6 +102,7 @@ fn render(
             float::format(spec, arguments.next())
         }
         b's' => text(spec, arguments.next()),
+        b'p' => pointer::format(spec, arguments.next()),
         b'c' => character(spec, arguments.next()),
         // An invalid conversion is undefined behavior in C; glibc echoes the directive.
         _ => consumed[consumed.iter().rposition(|&byte| byte == b'%').unwrap_or(0)..].to_vec(),

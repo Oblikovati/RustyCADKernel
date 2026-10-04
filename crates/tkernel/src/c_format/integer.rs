@@ -31,16 +31,21 @@ fn magnitude_digits(magnitude: u128, conversion: u8) -> Vec<u8> {
 pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
     let signed = matches!(spec.conversion, b'd' | b'i');
     let value = integer_value(argument, spec, signed);
-    let mut digits = magnitude_digits(value.unsigned_abs(), spec.conversion);
-    if let Some(precision) = spec.precision {
+    let mut digits = precision_digits(value.unsigned_abs(), spec.conversion, spec.precision);
+    let prefix = integer_prefix(spec, value, &mut digits, signed);
+    pad(spec, prefix, digits, spec.precision.is_none())
+}
+
+pub(super) fn precision_digits(value: u128, conversion: u8, precision: Option<usize>) -> Vec<u8> {
+    let mut digits = magnitude_digits(value, conversion);
+    if let Some(precision) = precision {
         if precision == 0 && value == 0 {
             digits.clear();
         }
         let missing = precision.saturating_sub(digits.len());
         digits.splice(0..0, std::iter::repeat_n(b'0', missing));
     }
-    let prefix = integer_prefix(spec, value, &mut digits, signed);
-    pad(spec, prefix, digits, spec.precision.is_none())
+    digits
 }
 
 fn integer_value(argument: Option<&CArg<'_>>, spec: &Spec, signed: bool) -> i128 {

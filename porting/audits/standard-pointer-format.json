@@ -1,0 +1,32 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "profile": "Linux x86_64 glibc 2.39 C locale; pointer representation",
+  "cases": 72,
+  "source_sha256": {
+    "tools/oracle/tkernel_pointer_format.cxx": "d3fbf950af32e20b75b4e5d45c11c8a26e1724623692143ef4f3eb1f2ecb07ec",
+    "tools/oracle/tkernel_pointer_format.expected": "1c3b5d74b817cb0d0848082a2afba7ed19367d7b19c8ef3692c1b6ad6bd7d3da",
+    "../OCCT/src/FoundationClasses/TKernel/Standard/Standard_CString.cxx": "37462215d76cf69012c70e4a9a958a8610c7373cb6bed85208a03ccf3c3f690f",
+    "target/occt-foundation/lin64/gcc/libi/libTKernel.so": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b"
+  },
+  "rust_test": "standard_pointer_format::pointer_formats_match_linux_native_rows",
+  "native_build": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-Itarget/occt-foundation/include/opencascade",
+    "tools/oracle/tkernel_pointer_format.cxx",
+    "target/occt-foundation/lin64/gcc/libi/libTKernel.so",
+    "-Wl,-rpath,target/occt-foundation/lin64/gcc/libi",
+    "-o",
+    "/tmp/tkernel-pointer-format"
+  ],
+  "native_run": [
+    "/tmp/tkernel-pointer-format"
+  ],
+  "limitations": [
+    "Supplemental corpus only; no original legacy declaration count increase.",
+    "Other C libraries and pointer widths have no native fixture evidence; pointers are formatted without dereferencing.",
+    "Typed arguments and injected output sinks do not reproduce C varargs or FILE state.",
+    "No full API or behavioral equivalence claim."
+  ]
+}

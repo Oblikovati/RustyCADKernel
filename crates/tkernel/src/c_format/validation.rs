@@ -108,7 +108,7 @@ fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatEr
         format_error(
             spec,
             offset,
-            "a supported %c/%d/%i/%o/%u/%x/%X/%z/%t/%l/%ll/%a/%A/%f/%e/%g/%s directive",
+            "a supported %c/%d/%i/%o/%u/%x/%X/%z/%t/%l/%ll/%p/%a/%A/%f/%e/%g/%s directive",
         )
     })
 }
@@ -123,6 +123,7 @@ fn supported_argument_kind(spec: Spec) -> Option<&'static str> {
             Some("a Real argument")
         }
         b's' if spec.length == 0 => Some("a Text argument"),
+        b'p' if spec.length == 0 => Some("a Pointer argument"),
         b'c' if character_format_is_supported(spec) => Some("an Int argument"),
         _ => None,
     }
@@ -162,6 +163,7 @@ fn matches_argument(argument: &FormatArg<'_>, spec: Spec) -> bool {
             matches!(argument, FormatArg::Real(_))
         }
         b's' => matches!(argument, FormatArg::Text(_)),
+        b'p' => matches!(argument, FormatArg::Pointer(_)),
         b'c' => matches!(argument, FormatArg::Int(_)),
         _ => false,
     }
