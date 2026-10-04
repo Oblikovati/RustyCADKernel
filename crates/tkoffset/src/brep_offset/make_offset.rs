@@ -6,14 +6,14 @@ use rustycad_tkmath::geom_abs::JoinType;
 
 /// Persistent state of `BRepOffset_MakeOffset`; `BRepOffsetMakeOffset::new()`.
 pub struct BRepOffsetMakeOffset {
-    config: Option<BRepOffsetMakeOffsetConfiguration>,
+    pub(super) config: Option<BRepOffsetMakeOffsetConfiguration>,
     allow_linearization: Option<bool>,
-    initial_shape: Shape,
+    pub(super) initial_shape: Shape,
     result_shape: Shape,
     closing_faces: Vec<Face>,
-    face_offsets: Vec<(Face, f64)>,
-    error: Option<BRepOffsetError>,
-    bad_shape: Shape,
+    pub(super) face_offsets: Vec<(Face, f64)>,
+    pub(super) error: Option<BRepOffsetError>,
+    pub(super) bad_shape: Shape,
     done: bool,
 }
 
