@@ -20,3 +20,13 @@ fn set_lower_col_preserves_positional_cells() {
     assert_eq!((matrix.lower_col(), matrix.upper_col()), (-2, -1));
     assert_eq!((matrix[(1, -2)], matrix[(1, -1)]), (10.0, 20.0));
 }
+
+#[test]
+fn set_lower_reindexes_both_axes() {
+    let mut matrix = Matrix::with_bounds(1, 2, 1, 2).unwrap();
+    matrix[(1, 1)] = 10.0;
+    matrix[(2, 2)] = 40.0;
+    matrix.set_lower(10, -2);
+    assert_eq!((matrix.lower_row(), matrix.lower_col()), (10, -2));
+    assert_eq!((matrix[(10, -2)], matrix[(11, -1)]), (10.0, 40.0));
+}
