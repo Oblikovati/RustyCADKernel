@@ -432,6 +432,9 @@ pub(super) fn compute_native_connector_curve(
     surface: &Handle<dyn GeomSurface>,
 ) -> Result<(), Failure> {
     let surface_type = GeomAdaptorSurface::with_surface(surface)?.get_type()?;
+    if super::offset_rails_iso::store_exact_iso_curve(edge, surface)? {
+        return Ok(());
+    }
     if supports_native_curve_image(surface_type) {
         let _computed = build_curve3d(
             edge,

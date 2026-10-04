@@ -5,13 +5,13 @@ same 26-face, 96-edge topology: six shifted planes, twelve edge-join cylinders, 
 eight spherical vertex closures. Whole-solid and per-face `BRepCheck_Analyzer`
 validation pass, and source face/edge/vertex history counts match this fixture.
 
-Surface area still differs slightly. OCCT reports `43.991148576` at the fixture's
-stable nine-digit precision; Rust reports `43.99114858034269`, a `3.94e-9` excess
-against the full-precision native run. The eight Rust spherical faces are each about
-`4.9e-10` larger than their native counterparts; plane and cylinder areas agree at
-the printed precision. The Rust test uses `1e-8` only to keep this topology fixture
-stable. Numerical parity for spherical pcurves remains unresolved, so this result is
-not evidence of full `BRepOffset_MakeOffset` parity.
+The former `3.94e-9` excess came from approximating elementary pipe connector
+isocurves as 3D B-splines before projecting them onto the vertex spheres. The native
+connector probe in `tkoffset_sphere_connector_curves.md` established the exact circle
+and p-curve types. The Rust builder now stores those elementary isos exactly, and its
+whole-solid area is within `1e-12` of the native full-precision fixture. This resolves
+the area discrepancy for this box input; it does not establish full
+`BRepOffset_MakeOffset` parity.
 
 OCCT source baseline: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 

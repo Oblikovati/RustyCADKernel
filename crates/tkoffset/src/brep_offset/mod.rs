@@ -16,6 +16,7 @@ mod offset_rails;
 mod offset_rails_adaptors;
 mod offset_rails_closed;
 mod offset_rails_geometry;
+mod offset_rails_iso;
 mod offset_tube;
 mod simple_offset;
 mod simple_offset_angle;
