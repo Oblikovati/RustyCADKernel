@@ -57,4 +57,41 @@ Standalone native profile reproduction used the exact OCCT test translation unit
 
 This is a real observed profile-specific output discrepancy: the standard optimized OCCT test fails its own exact assertion while both Rust profiles return zero. It is not evidence of a missing extrema branch. The native evaluator's `Value()` is inline in `ExtremaPC2d_Hyperbola.hxx` and uses cached center/axis/radii; `ElCLib::Value()` dispatches to `ElCLib::HyperbolaValue()` implemented in the shared library. Both express the same hyperbola formula, but the test compares computations compiled in different translation units. The sensitivity to optimization and `cosh`/`sinh` built-ins indicates a last-bit/compiler-libm effect. The exact failure remains part of pinned OCCT test behavior and remains unresolved for the standard profile; no native source, Rust behavior, assertion, or profile was modified to suppress it.
 
+### Code-generation diagnosis
+
+The standard flags are faithful to the pinned build, not a custom oracle compile: `CMAKE_BUILD_TYPE=RelWithDebInfo`, GCC 13.3.0, and `-fexceptions -fPIC -Wall -Wextra -O2 -g -DNDEBUG -std=gnu++17` for both the GTest TU and TKMath. The library object for `ElCLib::HyperbolaValue(double, gp_Ax22d const&, double, double)` disassembles to calls to `cosh@plt` and `sinh@plt`. The test's inline `ExtremaPC2d_Hyperbola::Value(-0.7)` has a compile-time literal argument; under `-O2`, GCC constant-folds the hyperbolic functions into constants in the caller TU.
+
+The call-site/library disassembly check is reproducible with:
+
+```sh
+objdump -d -C /tmp/tkgeombase_hyperbola_value_profile | rg 'sinh@plt|cosh@plt|ElCLib::HyperbolaValue'
+objdump -d -C --disassemble='ElCLib::HyperbolaValue(double, gp_Ax22d const&, double, double)' \
+  target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0 | rg 'sinh@plt|cosh@plt'
+```
+
+The caller command shows its ElCLib call but no caller-side `sinh`/`cosh` calls; the second shows both PLT calls in TKMath.
+
+`tools/oracle/tkgeombase_hyperbola_value_profile.cxx` reproduces the exact geometry and prints component bits. With the standard flags, `cosh` and the X coordinate match, while Y is `-0.7585837018395335` (`bfe8465153d5bdbd`) in the inline caller and `-0.75858370183953339` (`bfe8465153d5bdbc`) from the shared-library ElCLib call. The one-ULP difference gives distance `1.1102230246251565e-16`. Adding `-fno-builtin-sinh -fno-builtin-cosh` to the test TU makes both paths call libm and produces exact equality; it also changes the pinned `RelWithDebInfo` test profile, so it is diagnostic evidence, not an accepted green workaround.
+
+Build and replay the bit-level probe with the native flags:
+
+```sh
+occt=target/occt-modeling-full
+c++ -fexceptions -fPIC -Wall -Wextra -O2 -g -DNDEBUG -std=gnu++17 \
+  -I"$occt/include/opencascade" tools/oracle/tkgeombase_hyperbola_value_profile.cxx \
+  -L"$occt/lin64/gcc/libi" -Wl,-rpath,"$PWD/$occt/lin64/gcc/libi" \
+  -lTKGeomBase -lTKMath -lTKernel -o /tmp/tkgeombase_hyperbola_value_profile
+/tmp/tkgeombase_hyperbola_value_profile
+```
+
+Probe source SHA-256: `bb49ce9d7ea936657972a3ba2fbb982505797f7bf0931e3fb9b93abd6b729a45`.
+Standard-profile expected output SHA-256: `a448f719bf7e8b5ec8691643069e543b3ad24b62fd38c0e08937036f484cbbf6`.
+The control output with `-fno-builtin-sinh -fno-builtin-cosh` has SHA-256
+`9acb3fd1874594824b024f131b6dbf2f62c707884fe1592eb2aff6b261c5f985`.
+The control compile is otherwise identical, with those two flags appended. The exact native
+GTest rerun still fails under the CMake-generated standard flags. Rust default and release
+reruns on the current main-based isolated worktree both pass the original exact assertion.
+
+The standard OCCT exact test therefore remains failing and the TKGeomBase module remains un-green. Passing it would require changing the original exact assertion or compiling that test with nonstandard math flags; neither preserves the currently pinned native test behavior.
+
 The broad TKGeomBase runtime receipt must therefore continue to record 838 native passes and this one failure among 839 declarations. This file is evidence only; it does not authorize a skip or claim full toolkit parity.
