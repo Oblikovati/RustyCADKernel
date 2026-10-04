@@ -239,6 +239,8 @@ def rust_candidates(
 ) -> tuple[str, list[dict[str, JSONValue]]]:
     if not isinstance(rust_item, str) or not rust_item:
         return "no_rust_target_declared", []
+    if bool_primitive_ufcs_target(rust_item):
+        return bool_primitive_candidates(rust_item, crates)
     prefix, separator = rust_target_prefix(rust_item)
     if not separator or prefix not in crates:
         return "unknown_rust_crate", []
@@ -247,6 +249,43 @@ def rust_candidates(
     if status == "unique" and not rust_source_is_pinned(candidates[0]):
         return "unverifiable_source", candidates
     return status, candidates
+
+
+def bool_primitive_ufcs_target(target: str) -> bool:
+    return target.startswith("<bool as ") and ">::" in target
+
+
+def bool_primitive_candidates(
+    target: str, crates: dict[str, dict[str, list[dict[str, JSONValue]]]]
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    matches = [
+        item
+        for crate_name, paths in crates.items()
+        for item in paths.get(target, [])
+        if item.get("foreign_impl_self_primitive") == "bool"
+        and normalized_origin(item) == crate_name
+    ]
+    status = candidate_status(matches)
+    if status == "unique" and not bool_source_is_pinned(matches[0]):
+        return "unverifiable_source", matches
+    return status, matches
+
+
+def bool_source_is_pinned(item: dict[str, JSONValue]) -> bool:
+    anchor_file = item.get("foreign_impl_anchor_source_file")
+    anchor_hash = item.get("foreign_impl_anchor_source_sha256")
+    return (
+        rust_source_is_pinned(item)
+        and isinstance(anchor_file, str)
+        and bool(anchor_file)
+        and isinstance(anchor_hash, str)
+        and re.fullmatch(r"[0-9a-f]{64}", anchor_hash) is not None
+    )
+
+
+def normalized_origin(item: dict[str, JSONValue]) -> str | None:
+    origin = item.get("foreign_impl_origin_crate")
+    return origin.replace("-", "_") if isinstance(origin, str) else None
 
 
 def rust_target_prefix(target: str) -> tuple[str, bool]:
