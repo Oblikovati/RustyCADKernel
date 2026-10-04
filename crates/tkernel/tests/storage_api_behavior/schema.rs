@@ -117,7 +117,7 @@ fn bindings_need_a_write_in_progress() {
 #[test]
 fn the_callback_registry_keeps_non_null_callbacks_by_type_name() {
     let mut schema = schema();
-    let callback: Arc<dyn CallBack> = Arc::new(DefaultCallBack);
+    let callback: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
     schema.add_read_unknown_type_callback(&"A".into(), Some(callback.clone()));
     schema.add_read_unknown_type_callback(&"B".into(), None);
     let listed = schema.installed_callback_list();
@@ -147,7 +147,7 @@ fn the_callback_registry_keeps_non_null_callbacks_by_type_name() {
 
 #[test]
 fn default_callback_creates_plain_objects_and_skips_their_data() {
-    let callback = DefaultCallBack;
+    let callback = DefaultCallBack::default();
     let schema = schema();
     let object = callback.new_persistent();
     let mut driver = ScriptedDriver::opened(OpenMode::Read);
@@ -158,7 +158,7 @@ fn default_callback_creates_plain_objects_and_skips_their_data() {
     let typed = TypedCallBack::default();
     typed.set_type(&"T".into());
     typed.set_index(4);
-    typed.set_callback(Some(Arc::new(DefaultCallBack)));
+    typed.set_callback(Some(Arc::new(DefaultCallBack::default())));
     assert_eq!(
         (typed.type_name().as_bytes(), typed.index()),
         (b"T".as_slice(), 4)

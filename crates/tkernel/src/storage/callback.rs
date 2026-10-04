@@ -1,12 +1,19 @@
 //! `Storage_CallBack`, `Storage_DefaultCallBack` and `Storage_TypedCallBack`.
 use super::{BaseDriver, Schema};
-use crate::standard::{Failure, Handle, StandardPersistent, StandardTransient};
+use crate::standard::{Failure, Handle, StandardPersistent, StandardTransient, Transient};
 use crate::tcollection::AsciiString;
-use std::sync::{Arc, PoisonError, RwLock};
+use std::{
+    fmt,
+    sync::{Arc, PoisonError, RwLock},
+};
 
 /// `Storage_CallBack`: creates, registers, writes and reads the persistent objects of one
 /// type. Native callbacks are shared through handles; Rust shares them as `Arc<dyn CallBack>`.
-pub trait CallBack: Send + Sync {
+/// Custom callbacks embed `StandardTransient` and register their concrete runtime descriptor
+/// with `impl_transient!`, so a retrieved binding keeps its native type ancestry.
+/// `Send + Sync` permits sharing across Rust threads; custom implementations must keep any
+/// mutable callback state synchronized, as `Schema::type_binding` returns a shared callback.
+pub trait CallBack: Transient {
     /// `New`: a fresh object of the callback's type; `callback.new_persistent()`.
     fn new_persistent(&self) -> Handle<StandardPersistent>;
 
@@ -35,10 +42,28 @@ pub trait CallBack: Send + Sync {
 ///
 /// ```
 /// use rustycad_tkernel::storage::{CallBack, DefaultCallBack};
-/// assert!(DefaultCallBack.new_persistent().is_some());
+/// assert!(DefaultCallBack::default().new_persistent().is_some());
 /// ```
-#[derive(Clone, Copy, Debug, Default)]
-pub struct DefaultCallBack;
+#[derive(Clone, Default)]
+pub struct DefaultCallBack {
+    parent: StandardTransient,
+}
+
+crate::impl_transient!(
+    DefaultCallBack,
+    "Storage_DefaultCallBack",
+    dyn CallBack,
+    parent,
+    interfaces: [dyn CallBack]
+);
+
+crate::impl_transient_interface!(dyn CallBack, "Storage_CallBack", StandardTransient);
+
+impl fmt::Debug for DefaultCallBack {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("DefaultCallBack")
+    }
+}
 
 impl CallBack for DefaultCallBack {
     fn new_persistent(&self) -> Handle<StandardPersistent> {
@@ -81,7 +106,10 @@ struct TypedFields {
 /// use rustycad_tkernel::storage::{DefaultCallBack, TypedCallBack};
 /// use rustycad_tkernel::tcollection::AsciiString;
 /// use std::sync::Arc;
-/// let typed = TypedCallBack::new(&AsciiString::new("PDoc"), Some(Arc::new(DefaultCallBack)));
+/// let typed = TypedCallBack::new(
+///     &AsciiString::new("PDoc"),
+///     Some(Arc::new(DefaultCallBack::default())),
+/// );
 /// typed.set_index(3);
 /// assert_eq!(typed.index(), 3);
 /// ```
