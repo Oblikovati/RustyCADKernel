@@ -1,7 +1,7 @@
 //! Sampling of the function on the square: `mma2ds1_` and the file-static
 //! `mma2ds2_`.
 use super::discretise::{SquareTables, SquareViews};
-use crate::adv_app2var::evaluator::{AdvApp2VarEvaluation, AdvApp2VarEvaluatorFunc2Var};
+use crate::adv_app2var::evaluator::{AdvApp2VarEvaluationMut, AdvApp2VarEvaluatorFunc2Var};
 use crate::adv_app2var::f2c::{F2cArray, F2cArrayMut};
 use crate::adv_app2var::math_base::mmfmtb1_;
 
@@ -166,75 +166,230 @@ fn sample_rows(
     ttable: &mut [f64],
     iercod: &mut i32,
 ) {
-    let (u, v) = (square.uintfn, square.vintfn);
-    let (alinu, blinu) = ((u[1] - u[0]) / 2., (u[1] + u[0]) / 2.);
-    let (alinv, blinv) = ((v[1] - v[0]) / 2., (v[1] + v[0]) / 2.);
-    let (dbfn1, dbfn2) = if iiuouv == 1 { (v, u) } else { (u, v) };
-    let (nbpntu, nbpntv) = (square.nbpntu, square.nbpntv);
-    let urootb = F2cArray::new(square.urootb, 1);
-    let vrootb = F2cArray::new(square.vrootb, 1);
-    {
-        let mut tt = F2cArrayMut::new(ttable, 1);
-        for iu in 1..=nbpntu {
-            tt[iu] = blinu + alinu * urootb[iu];
+    let mut rows = SquareRows::new(square, iiuouv, foncnp, tables, fpntab, ttable, iercod);
+    rows.run();
+}
+
+struct SquareRows<'a, 'b> {
+    square: &'a SampledSquare<'b>,
+    sampler: RowSampler<'a>,
+    state: MutableSquareState,
+    tables: SquareViews<'a>,
+    fpntab: &'a mut [f64],
+    ttable: &'a mut [f64],
+    iercod: &'a mut i32,
+    alinv: f64,
+    blinv: f64,
+}
+
+impl<'a, 'b> SquareRows<'a, 'b> {
+    fn new(
+        square: &'a SampledSquare<'b>,
+        iiuouv: i32,
+        foncnp: &'a dyn AdvApp2VarEvaluatorFunc2Var,
+        tables: &'a mut SquareTables<'_>,
+        fpntab: &'a mut [f64],
+        ttable: &'a mut [f64],
+        iercod: &'a mut i32,
+    ) -> Self {
+        initialize_parameter_roots(square, ttable);
+        let state = mutable_square_state(square, iiuouv);
+        let views = SquareViews::new(tables, square.nbpntu, square.nbpntv);
+        Self::from_parts(square, foncnp, state, views, fpntab, ttable, iercod)
+    }
+
+    fn from_parts(
+        square: &'a SampledSquare<'b>,
+        foncnp: &'a dyn AdvApp2VarEvaluatorFunc2Var,
+        state: MutableSquareState,
+        tables: SquareViews<'a>,
+        fpntab: &'a mut [f64],
+        ttable: &'a mut [f64],
+        iercod: &'a mut i32,
+    ) -> Self {
+        let v = square.vintfn;
+        Self {
+            square,
+            sampler: RowSampler { foncnp },
+            state,
+            tables,
+            fpntab,
+            ttable,
+            iercod,
+            alinv: (v[1] - v[0]) / 2.,
+            blinv: (v[1] + v[0]) / 2.,
         }
     }
-    let sampler = RowSampler {
-        square,
-        iiuouv,
-        dbfn: [dbfn1, dbfn2],
-        ttable,
-        foncnp,
-    };
-    let mut t = SquareViews::new(tables, nbpntu, nbpntv);
-    let nvroo: i32 = nbpntv / 2;
-    for iv in 1..=nvroo {
-        let tcons: f64 = blinv + alinv * vrootb[iv];
-        if !sampler.row(tcons, fpntab, iercod) {
+
+    fn run(&mut self) {
+        self.sample_negative_rows();
+        if *self.iercod > 0 || !self.sample_middle_row() {
             return;
         }
-        fold_row(&mut t, fpntab, square, nvroo - iv + 1, -1.);
+        self.sample_positive_rows();
     }
-    if nbpntv % 2 != 0 {
-        if !sampler.row(blinv, fpntab, iercod) {
-            return;
+
+    fn sample_negative_rows(&mut self) {
+        for iv in 1..=self.square.nbpntv / 2 {
+            let root = F2cArray::new(self.square.vrootb, 1)[iv];
+            let row = self.nvroo() - iv + 1;
+            if !self.sample_and_fold(self.blinv + self.alinv * root, row, -1.) {
+                return;
+            }
         }
-        fold_middle_row(&mut t, fpntab, square);
     }
-    for iv in 1..=nvroo {
-        let tcons: f64 = alinv * vrootb[(nbpntv + 1) / 2 + iv] + blinv;
-        if !sampler.row(tcons, fpntab, iercod) {
-            return;
+
+    fn sample_middle_row(&mut self) -> bool {
+        if self.square.nbpntv % 2 == 0 {
+            return true;
         }
-        fold_row(&mut t, fpntab, square, iv, 1.);
+        if !self.sampler.row(
+            &mut self.state,
+            self.blinv,
+            self.ttable,
+            self.fpntab,
+            self.iercod,
+        ) {
+            return false;
+        }
+        fold_middle_row(&mut self.tables, self.fpntab, self.square, &self.state);
+        true
+    }
+
+    fn sample_positive_rows(&mut self) {
+        let nvroo = self.nvroo();
+        for iv in 1..=nvroo {
+            let root_index = (self.square.nbpntv + 1) / 2 + iv;
+            let root = F2cArray::new(self.square.vrootb, 1)[root_index];
+            let constant = self.alinv * root + self.blinv;
+            if !self.sample_and_fold(constant, iv, 1.) {
+                return;
+            }
+        }
+    }
+
+    fn sample_and_fold(&mut self, constant: f64, row: i32, sign: f64) -> bool {
+        if !self.sampler.row(
+            &mut self.state,
+            constant,
+            self.ttable,
+            self.fpntab,
+            self.iercod,
+        ) {
+            return false;
+        }
+        fold_row(
+            &mut self.tables,
+            self.fpntab,
+            self.square,
+            &self.state,
+            row,
+            sign,
+        );
+        true
+    }
+
+    fn nvroo(&self) -> i32 {
+        self.square.nbpntv / 2
     }
 }
 
+fn initialize_parameter_roots(square: &SampledSquare<'_>, ttable: &mut [f64]) {
+    let u = square.uintfn;
+    let (half_span, center) = ((u[1] - u[0]) / 2., (u[1] + u[0]) / 2.);
+    let roots = F2cArray::new(square.urootb, 1);
+    let mut params = F2cArrayMut::new(ttable, 1);
+    for index in 1..=square.nbpntu {
+        params[index] = center + half_span * roots[index];
+    }
+}
+
+fn mutable_square_state(square: &SampledSquare<'_>, iso: i32) -> MutableSquareState {
+    let (first, second) = if iso == 1 {
+        (square.vintfn, square.uintfn)
+    } else {
+        (square.uintfn, square.vintfn)
+    };
+    MutableSquareState::new(square, iso, first, second)
+}
+
 /// One `Evaluate` call of `mma2ds2_` along the U roots at the constant `tcons`.
+struct MutableSquareState {
+    dimension: i32,
+    parameter_count: i32,
+    favor_iso: i32,
+    intervals: [[f64; 2]; 2],
+    derivative_order: i32,
+}
+
+impl MutableSquareState {
+    fn new(
+        square: &SampledSquare<'_>,
+        favor_iso: i32,
+        first_interval: [f64; 2],
+        second_interval: [f64; 2],
+    ) -> Self {
+        Self {
+            dimension: square.ndimen,
+            parameter_count: square.nbpntu,
+            favor_iso,
+            intervals: [first_interval, second_interval],
+            derivative_order: 0,
+        }
+    }
+}
+
 struct RowSampler<'a> {
-    square: &'a SampledSquare<'a>,
-    iiuouv: i32,
-    dbfn: [[f64; 2]; 2],
-    ttable: &'a [f64],
     foncnp: &'a dyn AdvApp2VarEvaluatorFunc2Var,
 }
 
 impl RowSampler<'_> {
     /// Evaluates the row; false when the evaluator returns a positive code.
-    fn row(&self, tcons: f64, fpntab: &mut [f64], iercod: &mut i32) -> bool {
-        let request = AdvApp2VarEvaluation {
-            dimension: self.square.ndimen,
-            u_start_end: self.dbfn[0],
-            v_start_end: self.dbfn[1],
-            favor_iso: self.iiuouv,
-            const_param: tcons,
-            nb_params: self.square.nbpntu,
-            parameters: self.ttable,
-            u_order: 0,
-            v_order: 0,
-        };
-        self.foncnp.evaluate(&request, fpntab, iercod);
+    fn row(
+        &self,
+        state: &mut MutableSquareState,
+        constant: f64,
+        parameters: &mut [f64],
+        fpntab: &mut [f64],
+        iercod: &mut i32,
+    ) -> bool {
+        evaluate_row(self.foncnp, state, constant, parameters, fpntab, iercod);
         *iercod <= 0
+    }
+}
+
+fn evaluate_row(
+    foncnp: &dyn AdvApp2VarEvaluatorFunc2Var,
+    state: &mut MutableSquareState,
+    constant: f64,
+    parameters: &mut [f64],
+    fpntab: &mut [f64],
+    iercod: &mut i32,
+) {
+    let mut u_order = state.derivative_order;
+    let mut v_order = state.derivative_order;
+    let mut const_param = constant;
+    let [u_start_end, v_start_end] = &mut state.intervals;
+    let mut call = AdvApp2VarEvaluationMut {
+        dimension: &mut state.dimension,
+        u_start_end,
+        v_start_end,
+        favor_iso: &mut state.favor_iso,
+        const_param: &mut const_param,
+        nb_params: &mut state.parameter_count,
+        parameters,
+        u_order: &mut u_order,
+        v_order: &mut v_order,
+    };
+    foncnp.evaluate_native(&mut call, fpntab, iercod);
+    state.derivative_order = changed_order(state.derivative_order, u_order, v_order);
+}
+
+fn changed_order(previous: i32, u_order: i32, v_order: i32) -> i32 {
+    if u_order != previous {
+        u_order
+    } else {
+        v_order
     }
 }
 
@@ -244,17 +399,18 @@ fn fold_row(
     t: &mut SquareViews<'_>,
     fpntab: &[f64],
     square: &SampledSquare<'_>,
+    state: &MutableSquareState,
     jv: i32,
     sign: f64,
 ) {
-    let ndimen: i32 = square.ndimen;
-    let fpnt = F2cArray::new(fpntab, ndimen + 1);
+    let ndimen: i32 = state.dimension;
+    let fpnt = F2cArray::new(fpntab, square.ndimen + 1);
     let nuroo: i32 = square.nbpntu / 2;
     let jdec: i32 = (square.nbpntu + 1) / 2;
     for id in 1..=ndimen {
         for iu in 1..=nuroo {
-            let up: f64 = fpnt[id + (iu + jdec) * ndimen];
-            let um: f64 = fpnt[id + (nuroo - iu + 1) * ndimen];
+            let up: f64 = fpnt[id + (iu + jdec) * square.ndimen];
+            let um: f64 = fpnt[id + (nuroo - iu + 1) * square.ndimen];
             let (f, h) = (t.f(iu, jv, id), t.h(iu, jv, id));
             t.soso[f] = t.soso[f] + up + um;
             t.diso[h] = t.diso[h] + up - um;
@@ -266,8 +422,8 @@ fn fold_row(
                 t.didi[f] = t.didi[f] + up - um;
             }
         }
-        if square.nbpntu % 2 != 0 {
-            let up: f64 = fpnt[id + jdec * ndimen];
+        if state.parameter_count % 2 != 0 {
+            let up: f64 = fpnt[id + jdec * square.ndimen];
             let f: i32 = t.f(0, jv, id);
             t.soso[f] += up;
             if sign < 0. {
@@ -280,23 +436,32 @@ fn fold_row(
 }
 
 /// Folds the row at the middle V root of an odd count into the `jv = 0` entries.
-fn fold_middle_row(t: &mut SquareViews<'_>, fpntab: &[f64], square: &SampledSquare<'_>) {
-    let ndimen: i32 = square.ndimen;
-    let fpnt = F2cArray::new(fpntab, ndimen + 1);
+fn fold_middle_row(
+    t: &mut SquareViews<'_>,
+    fpntab: &[f64],
+    square: &SampledSquare<'_>,
+    state: &MutableSquareState,
+) {
+    let ndimen: i32 = state.dimension;
+    let fpnt = F2cArray::new(fpntab, square.ndimen + 1);
     let nuroo: i32 = square.nbpntu / 2;
     let jdec: i32 = (square.nbpntu + 1) / 2;
     for id in 1..=ndimen {
         for iu in 1..=nuroo {
-            let up: f64 = fpnt[id + (jdec + iu) * ndimen];
-            let um: f64 = fpnt[id + (nuroo - iu + 1) * ndimen];
+            let up: f64 = fpnt[id + (jdec + iu) * square.ndimen];
+            let um: f64 = fpnt[id + (nuroo - iu + 1) * square.ndimen];
             let f: i32 = t.f(iu, 0, id);
             t.soso[f] = t.soso[f] + up + um;
             t.didi[f] = t.didi[f] + up - um;
         }
-        if square.nbpntu % 2 != 0 {
-            let up: f64 = fpnt[id + jdec * ndimen];
+        if state.parameter_count % 2 != 0 {
+            let up: f64 = fpnt[id + jdec * square.ndimen];
             let f: i32 = t.f(0, 0, id);
             t.soso[f] += up;
         }
     }
 }
+
+#[cfg(test)]
+#[path = "sampling_tests.rs"]
+mod tests;

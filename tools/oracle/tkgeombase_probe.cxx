@@ -289,6 +289,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"aa_mma2ce1", gb_aa_mma2ce1_case},
  {"aa_mma2fnc", gb_aa_mma2fnc_case},
  {"aa_mma2fnc_mut_order", gb_aa_mma2fnc_mut_order_case},
+ {"aa_mma2ds1_mut_state", gb_aa_mma2ds1_mut_state_case},
  {"aa_mma2fx6", gb_aa_mma2fx6_case},
  // AdvApp2Var classes (tkgeombase_probe_advapp2var_class.cxx)
  {"aa_context", gb_aa_context_case},

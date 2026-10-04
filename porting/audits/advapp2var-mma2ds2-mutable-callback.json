@@ -1,0 +1,50 @@
+{
+  "scope": "Mutable evaluator state lifetime in private AdvApp2Var_ApproxF2var::mma2ds2_, observed through public mma2ds1_",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.cxx",
+  "native_source_sha256": "6245348d786f74c1bd85ef6142e4eec038a48cf685511c3b043607dd0a8c269e",
+  "native_evaluator_header_sha256": "2e345d4baa003214c058ab11c4532fdde7a6da414759ad011be6c2e95156dfa8",
+  "source_behavior": [
+    "mma2ds2_ reuses dimension, interval arrays, iso selector, point count, parameter table, and derivative-order local across row callbacks.",
+    "The constant parameter is a row-local tcons overwritten before each callback.",
+    "Native source documents that callback input arguments SHOULD NOT be modified; the fixture characterizes safely reachable out-of-contract mutations only."
+  ],
+  "focused_case": {
+    "public_route": "AdvApp2Var_ApproxF2var::mma2ds1_ with isofav=2, 2 dimensions, 3x3 roots; invokes private mma2ds2_ directly.",
+    "callback_mutations_after_first_row": [
+      "dimension 2 to 1",
+      "iso 2 to 1",
+      "parameter count 3 to 2",
+      "first U bound 0 to -0.5",
+      "last V bound 1 to 0.75",
+      "first ttable value increased by 0.125"
+    ],
+    "remaining_calls_observe_mutations": true,
+    "safe_buffer_domain": "Mutated dimension and count are reduced; no request reads or result writes exceed the original allocations.",
+    "native_rust_output_sha256": "dabc92c436779473dc51a699e4e0e7a7093b4dd3e60316dc1a04861d4a4d61e7",
+    "native_probe_sha256": "1a51dfe69e6079948c6cf665ab090436bbc9fc3ec53a175d7f9fe35df0625ef6"
+  },
+  "numeric_replay": {
+    "command": "python3 tools/verify_tkgeombase_numeric.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --native-build /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full",
+    "result": "45635 exact numeric comparisons passed",
+    "input_sha256": "8882e4abe7fc2066465e074b5fe0818379cbcc3d1326e21e8b114f0b4c243057",
+    "native_output_sha256": "9b11ceb91b9bf5d01bf90b7ff763a07e132079a1be86bd7479f316e6db740329",
+    "rust_output_sha256": "59527e2b684ab1429fee2fcd65f86ea01e7c5352b2e36008bc914d4e37563bce",
+    "report_sha256": "ed15b7692a703baa9c2d6d3f41d2e1cdce05ac3b4d83810f7df86327d61a1c5c"
+  },
+  "native_libraries_sha256": {
+    "TKGeomBase": "7689e777ccbc7051d8375dc5f909a89fda70e518500b1d64894e12e0e9a0a039",
+    "TKG3d": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+    "TKG2d": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce",
+    "TKMath": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "TKernel": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "package_tests": {
+    "command": "cargo test -p rustycad-tkgeombase",
+    "result": "1221 passed, 0 failed, 19 ignored across 91 test-result groups",
+    "log": "porting/audits/advapp2var-mma2ds2-package-tests.log",
+    "log_sha256": "4bd3fe8e19ead09c82e23eb63cdd3c8c344da5b041f2a54b7db124e61f21633b"
+  },
+  "strict_clippy": "cargo clippy -p rustycad-tkgeombase --all-targets -- -D warnings: passed",
+  "scope_limit": "This covers reusable mutation inside mma2ds2_ when observed through the iso=2 mma2ds1_ route. mma2ds1_ external caller copy-back, callback mutation under all iso paths, and in-callback visibility of aliased derivative-order pointers are not claimed; the input contract says not to modify these fields."
+}

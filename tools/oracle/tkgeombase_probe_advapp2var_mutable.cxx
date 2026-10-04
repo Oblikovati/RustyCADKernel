@@ -39,3 +39,58 @@ void gb_aa_mma2fnc_mut_order_case(std::istream&) {
   for (const auto& call : function.calls) { gb_int(call[0]); gb_int(call[1]); gb_int(call[2]); }
   gb_end();
 }
+
+class GbAaMutatingSquareState : public AdvApp2Var_EvaluatorFunc2Var {
+public:
+  mutable std::vector<std::array<int, 3>> intCalls;
+  mutable std::vector<std::array<double, 5>> realCalls;
+
+  void Evaluate(int* dim, double* first, double* second, int* iso, double* constant, int* count,
+                double* params, int*, int*, double* result, int* error) const override {
+    record(*dim, first, second, *iso, *count, params);
+    writeValues(*dim, *count, first, second, *constant, params, result);
+    mutateFirst(*dim, first, second, *iso, *count, params);
+    *error = 0;
+  }
+
+private:
+  void record(int dim, double* first, double* second, int iso, int count, double* params) const {
+    intCalls.push_back({dim, iso, count});
+    realCalls.push_back({first[0], first[1], second[0], second[1], params[0]});
+  }
+
+  static void writeValues(int dim, int count, double* first, double* second, double constant,
+                          double* params, double* result) {
+    for (int point = 0; point < count; ++point)
+      for (int component = 0; component < dim; ++component)
+        result[point * dim + component] = 10. * constant + params[point] + first[0] + 3. * second[1]
+                                          + 100. * component;
+  }
+
+  void mutateFirst(int& dim, double* first, double* second, int& iso, int& count,
+                   double* params) const {
+    if (intCalls.size() != 1) return;
+    dim = 1; iso = 1; count = 2;
+    first[0] = -0.5; second[1] = 0.75; params[0] += 0.125;
+  }
+};
+
+void gb_aa_mma2ds1_mut_state_case(std::istream&) {
+  int dim = 2, nu = 3, nv = 3, iso = 2, error = -1;
+  double uv[4] = {0., 1., 0., 1.};
+  auto ur = gb_aa_fill(nu), vr = gb_aa_fill(nv);
+  AdvApp2Var_ApproxF2var::mma2roo_(&nu, &nv, ur.data(), vr.data());
+  GbAaSquare tables(nu, nv, dim, 0.25);
+  auto fp = gb_aa_fill(dim * nu), tt = gb_aa_fill(nu);
+  GbAaMutatingSquareState function;
+  AdvApp2Var_ApproxF2var::mma2ds1_(&dim, uv, uv + 2, function, &nu, &nv, ur.data(), vr.data(), &iso,
+    tables.soso.data(), tables.diso.data(), tables.sodi.data(), tables.didi.data(), fp.data(), tt.data(), &error);
+  gb_int(error);
+  gb_int(static_cast<int>(function.intCalls.size()));
+  for (std::size_t index = 0; index < function.intCalls.size(); ++index) {
+    for (int value : function.intCalls[index]) gb_int(value);
+    for (double value : function.realCalls[index]) gb_real(value);
+  }
+  tables.print();
+  gb_end();
+}

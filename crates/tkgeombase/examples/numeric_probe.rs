@@ -226,6 +226,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "aa_mma2fnc_mut_order",
         adv_mutable_eval::mma2fnc_mut_order_case,
     ),
+    (
+        "aa_mma2ds1_mut_state",
+        adv_mutable_eval::mma2ds1_mut_state_case,
+    ),
     ("aa_mma2fx6", adv_f2var2::mma2fx6_case),
     // AdvApp2Var classes (gb_probe/adv_class.rs)
     ("aa_context", adv_class::context_case),

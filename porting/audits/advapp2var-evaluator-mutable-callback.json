@@ -37,5 +37,5 @@
     "package_test_log": "porting/audits/advapp2var-package-tests.log",
     "package_test_log_sha256": "2dc4b9d17c3d68adcf974d50dfb426287c6f14bd58fcf78a9fadc78bc0563c66"
   },
-  "scope_limit": "Mutable fields are exposed on every callback. This commit propagates reusable mutable state through mma1fdi_ only; mma2ds2_ and higher-level dimension/bounds copy-back remain unaudited and are not claimed complete."
+  "scope_limit": "The mma1fdi_ route is covered here; mma2ds2_ mutable local state is characterized separately by advapp2var-mma2ds2-mutable-callback.json. Mutations remain outside the evaluator input contract. External caller copy-back through mma2ds1_, in-callback observation of aliased derivative-order pointers, and higher-level wrapper state remain partial."
 }
