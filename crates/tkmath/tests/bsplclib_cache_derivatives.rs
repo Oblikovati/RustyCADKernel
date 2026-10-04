@@ -29,6 +29,20 @@ fn rational_cache_3d() -> Cache {
     cache
 }
 
+fn quartic_cache_3d() -> Cache {
+    let mut knots: Array1<'static, f64> = Array1::with_bounds(1, 10).unwrap();
+    knots.as_mut_slice()[..5].fill(2.0);
+    knots.as_mut_slice()[5..].fill(6.0);
+    let mut poles: Array1<'static, Point3> = Array1::with_bounds(1, 5).unwrap();
+    for index in 1..=4 {
+        poles[index] = Point3::new(0.0, 0.0, 0.0);
+    }
+    poles[5] = Point3::new(1.0, 0.0, 0.0);
+    let mut cache: Cache = Cache::new(4, false, &knots, &poles, None).unwrap();
+    cache.build_cache(4.0, &knots, &poles, None).unwrap();
+    cache
+}
+
 #[test]
 fn local_raw_derivatives_match_native_and_preserve_extra_capacity() {
     let cache: Cache = cache_2d();
@@ -60,6 +74,22 @@ fn raw_derivatives_clear_rows_above_curve_degree() {
 }
 
 #[test]
+fn non_rational_cache_writes_defined_order_five_rows() {
+    let cache: Cache = quartic_cache_3d();
+    let mut rows: [f64; 20] = [-77.0; 20];
+
+    cache.derivatives_into(4.0, 5, &mut rows).unwrap();
+
+    assert_eq!(
+        rows,
+        [
+            0.0625, 0.0, 0.0, 0.125, 0.0, 0.0, 0.1875, 0.0, 0.0, 0.1875, 0.0, 0.0, 0.09375, 0.0,
+            0.0, 0.0, 0.0, 0.0, -77.0, -77.0,
+        ]
+    );
+}
+
+#[test]
 fn rational_3d_global_and_local_buffers_match_native() {
     let cache: Cache = rational_cache_3d();
     let mut global: [f64; 8] = [-77.0; 8];
@@ -86,7 +116,7 @@ fn raw_derivatives_reject_short_buffers_without_writing() {
 }
 
 #[test]
-fn raw_derivatives_reject_orders_outside_native_cache_capacity() {
+fn local_raw_derivatives_reject_orders_outside_native_documented_range() {
     let cache: Cache = cache_2d();
     let mut rows: [f64; 16] = [-77.0; 16];
 
@@ -97,6 +127,50 @@ fn raw_derivatives_reject_orders_outside_native_cache_capacity() {
         assert_eq!(error.exception_type(), "Standard_OutOfRange");
         assert_eq!(rows, [-77.0; 16]);
     }
+}
+
+#[test]
+fn global_raw_derivatives_reject_negative_order_without_writing() {
+    let cache: Cache = quartic_cache_3d();
+    let mut rows: [f64; 20] = [-77.0; 20];
+
+    let error = cache.derivatives_into(4.0, -1, &mut rows).unwrap_err();
+
+    assert_eq!(error.exception_type(), "Standard_OutOfRange");
+    assert_eq!(rows, [-77.0; 20]);
+}
+
+#[test]
+fn rational_cache_keeps_four_row_temporary_limit() {
+    let cache: Cache = rational_cache_3d();
+    let mut rows: [f64; 20] = [-77.0; 20];
+
+    let error = cache
+        .derivatives_local_into(0.25, 4, &mut rows)
+        .unwrap_err();
+
+    assert_eq!(error.exception_type(), "Standard_OutOfRange");
+    assert_eq!(rows, [-77.0; 20]);
+}
+
+#[test]
+fn high_order_global_output_requires_all_rows_before_writing() {
+    let cache: Cache = quartic_cache_3d();
+    let mut rows: [f64; 17] = [-77.0; 17];
+
+    let error = cache.derivatives_into(4.0, 5, &mut rows).unwrap_err();
+
+    assert_eq!(error.exception_type(), "Standard_DimensionMismatch");
+    assert_eq!(rows, [-77.0; 17]);
+}
+
+#[test]
+fn fixed_array_derivatives_reject_high_order_without_panicking() {
+    let cache: Cache = quartic_cache_3d();
+
+    let error = cache.derivatives(4.0, 4).unwrap_err();
+
+    assert_eq!(error.exception_type(), "Standard_OutOfRange");
 }
 
 fn assert_near(actual: &[f64], expected: &[f64]) {
