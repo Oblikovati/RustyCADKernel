@@ -6,6 +6,7 @@ mod data_structure;
 mod face_info;
 mod index_range;
 mod interference;
+mod iterator;
 mod pair;
 mod pave;
 mod pave_block;
@@ -21,6 +22,7 @@ pub use interference::{
     InterfEE, InterfEF, InterfEZ, InterfFF, InterfFZ, InterfVE, InterfVF, InterfVV, InterfVZ,
     InterfZZ, Interference,
 };
+pub use iterator::BOPDSIterator;
 pub use pair::Pair;
 pub use pave::Pave;
 pub use pave_block::{PaveBlock, PaveBlockHandle};
