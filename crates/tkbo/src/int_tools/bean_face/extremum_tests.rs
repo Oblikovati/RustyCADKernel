@@ -17,16 +17,7 @@ fn parallel_extremum_bisects_to_near_face_interval() {
     compute(&mut bean).unwrap();
 
     assert_eq!(bean.range_manager.length(), 5);
-    assert_ranges(
-        &bean,
-        &[
-            (0, 0.0, 0.0),
-            (2, 0.0, 0.5),
-            (0, 0.5, 0.5),
-            (2, 0.5, 1.0),
-            (0, 1.0, 1.0),
-        ],
-    );
+    assert_native_ranges(&bean, "range ");
     assert_eq!(bean.minimal_square_distance(), 0.0);
 }
 
@@ -46,20 +37,7 @@ fn nonparallel_extrema_seed_both_circle_plane_crossings() {
     assert_eq!(bean.range_manager.flag(6).unwrap(), 2);
     assert_eq!(bean.range_manager.flag(8).unwrap(), 2);
     assert_eq!(bean.minimal_square_distance(), 0.0);
-    assert_ranges(
-        &bean,
-        &[
-            (0, 0.0, 0.1001672),
-            (2, 0.1001672, 0.1001674),
-            (0, 0.1001674, 0.1001674),
-            (2, 0.1001674, 0.1001676),
-            (0, 0.1001676, 3.0414250),
-            (2, 3.0414250, 3.0414252),
-            (0, 3.0414252, 3.0414252),
-            (2, 3.0414252, 3.0414254),
-            (0, 3.0414254, std::f64::consts::TAU),
-        ],
-    );
+    assert_native_ranges(&bean, "circle_range ");
 }
 
 fn circle_crossing_plane() -> Edge {
@@ -83,14 +61,34 @@ fn wide_plane() -> Face {
         .unwrap()
 }
 
-fn assert_ranges(bean: &BeanFaceIntersector, expected: &[(i32, f64, f64)]) {
-    for (index, (flag, first, last)) in expected.iter().enumerate() {
-        let native_index = index as i32 + 1;
-        let actual = bean.range_manager.range(native_index).unwrap();
-        assert_eq!(bean.range_manager.flag(native_index).unwrap(), *flag);
-        assert!((actual.first() - first).abs() < 1e-6);
-        assert!((actual.last() - last).abs() < 1e-6);
+fn assert_native_ranges(bean: &BeanFaceIntersector, prefix: &str) {
+    let fixture = include_str!("../../../../../tools/oracle/tkbo_bean_using_extremum.expected");
+    let rows: Vec<_> = fixture
+        .lines()
+        .filter(|line| line.starts_with(prefix))
+        .collect();
+    assert_eq!(rows.len(), bean.range_manager.length() as usize);
+    for row in rows {
+        assert_native_range(bean, row);
     }
+}
+
+fn assert_native_range(bean: &BeanFaceIntersector, row: &str) {
+    let columns: Vec<_> = row.split_whitespace().collect();
+    let index = columns[1].parse::<i32>().unwrap();
+    let flag = columns[2].parse::<i32>().unwrap();
+    let first = columns[3].parse::<f64>().unwrap();
+    let last = columns[4].parse::<f64>().unwrap();
+    let actual = bean.range_manager.range(index).unwrap();
+    assert_eq!(bean.range_manager.flag(index).unwrap(), flag);
+    assert!(
+        (actual.first() - first).abs() < 1e-12,
+        "first interval bound: {row}"
+    );
+    assert!(
+        (actual.last() - last).abs() < 1e-12,
+        "last interval bound: {row}"
+    );
 }
 
 fn edge_across_trimmed_face() -> Edge {

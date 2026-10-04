@@ -22,3 +22,8 @@ g++ -std=c++17 -I target/occt-modeling-full/include/opencascade \
 
 `tkbo_bean_using_extremum.expected` records the native ranges and flags. The Rust
 unit fixtures invoke the same stage directly and compare each range boundary.
+The replay loads the full-precision captured endpoints directly and checks them
+at absolute tolerance `1e-12`. The earlier rounded literals and `1e-6` tolerance
+were weaker than the roughly `2e-7` intervals; they have been removed. Range
+counts and every flag are compared exactly. These remain supplemental private
+stage fixtures, not newly mapped legacy declarations or bitwise numeric proof.

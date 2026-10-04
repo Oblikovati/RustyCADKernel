@@ -16,7 +16,9 @@ fn near_plane_boundaries_seed_native_overlap_range() {
     compute(&mut bean).unwrap();
 
     assert_eq!(bean.range_manager.length(), 3);
+    assert_eq!(bean.range_manager.flag(1).unwrap(), 0);
     assert_eq!(bean.range_manager.flag(2).unwrap(), 2);
+    assert_eq!(bean.range_manager.flag(3).unwrap(), 0);
     assert_range(&bean, 1, (0.0, 0.0));
     assert_range(&bean, 2, (0.0, 1.0));
     assert_range(&bean, 3, (1.0, 1.0));
