@@ -21,7 +21,7 @@ use crate::geom::{
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bsplclib::flat_bezier_knots;
-use rustycad_tkmath::bsplslib::Cache;
+use rustycad_tkmath::bsplslib::{Cache, SharedBSplineSurfaceCache};
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::gp::Vector3;
 
@@ -67,10 +67,12 @@ pub(super) fn cached_bezier<O: CachedOrder>(
     if data.eval_rep.is_some() {
         return O::surface(&*data.surface, u, v);
     }
-    if data.cache.is_none() {
-        data.cache = Some(bezier_cache(&data.surface, (u, v))?);
+    if data.cache.is_null() {
+        data.cache = SharedBSplineSurfaceCache::new(bezier_cache(&data.surface, (u, v))?);
     }
-    O::cached(data.cache.as_ref().expect("cache built above"), u, v)
+    data.cache
+        .with(|cache| O::cached(cache, u, v))
+        .expect("Bezier cache built above")
 }
 
 /// The B-spline branch of D0: the cache, rebuilt when `(u, v)` leaves its span;
@@ -81,12 +83,14 @@ pub(super) fn cached_bspline<O: CachedOrder>(
 ) -> Result<O::Output, Failure> {
     let valid: bool = data
         .cache
-        .as_ref()
-        .is_some_and(|cache| cache.is_cache_valid(u, v));
+        .with(|cache| cache.is_cache_valid(u, v))
+        .unwrap_or(false);
     if !valid {
         rebuild_bspline_cache(data, (u, v))?;
     }
-    O::cached(data.cache.as_ref().expect("cache built above"), u, v)
+    data.cache
+        .with(|cache| O::cached(cache, u, v))
+        .expect("B-spline cache built above")
 }
 
 /// The B-spline branch of D1 and D2: the boundary span at a snapped bound on a knot
@@ -110,8 +114,8 @@ fn rebuild_bspline_cache(data: &mut BSplineData, (u, v): (f64, f64)) -> Result<(
     let surface: &GeomBSplineSurface = &data.surface;
     let (flat_u, flat_v) = (surface.u_knot_sequence(), surface.v_knot_sequence());
     let (poles, weights) = (surface.poles(), surface.weights());
-    if data.cache.is_none() {
-        data.cache = Some(Cache::new(
+    if data.cache.is_null() {
+        let cache = Cache::new(
             surface.u_degree(),
             surface.is_u_periodic(),
             &flat_u,
@@ -119,10 +123,12 @@ fn rebuild_bspline_cache(data: &mut BSplineData, (u, v): (f64, f64)) -> Result<(
             surface.is_v_periodic(),
             &flat_v,
             weights.as_ref(),
-        )?);
+        )?;
+        data.cache = SharedBSplineSurfaceCache::new(cache);
     }
-    let cache: &mut Cache = data.cache.as_mut().expect("cache created above");
-    cache.build_cache(u, v, &flat_u, &flat_v, &poles, weights.as_ref())
+    data.cache
+        .with_mut(|cache| cache.build_cache(u, v, &flat_u, &flat_v, &poles, weights.as_ref()))
+        .expect("B-spline cache created above")
 }
 
 // RebuildCache for a Bezier surface: the flat knots of each degree.

@@ -16,9 +16,13 @@ use crate::geom::{
 };
 use crate::geom_eval::RepSurfaceDesc;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
-use rustycad_tkmath::bsplslib::Cache;
+use rustycad_tkmath::bsplslib::SharedBSplineSurfaceCache;
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Axis1, Cone3, Cylinder3, Plane3, Sphere3, Torus3, Xyz};
+
+#[path = "surface_state_copy.rs"]
+mod copy;
+pub(crate) use copy::copy_value;
 
 /// Extrusion data (`ExtrusionData`): the basis curve adaptor and the direction.
 pub(crate) struct ExtrusionData {
@@ -63,13 +67,13 @@ pub(crate) struct OffsetData {
 /// evaluation representation it had when it was loaded.
 pub(crate) struct BezierData {
     pub(crate) surface: Handle<GeomBezierSurface>,
-    pub(crate) cache: Option<Cache>,
+    pub(crate) cache: SharedBSplineSurfaceCache,
     pub(crate) eval_rep: Handle<dyn RepSurfaceDesc>,
 }
 /// B-spline data (`BSplineData`), as `BezierData`.
 pub(crate) struct BSplineData {
     pub(crate) surface: Handle<GeomBSplineSurface>,
-    pub(crate) cache: Option<Cache>,
+    pub(crate) cache: SharedBSplineSurfaceCache,
     pub(crate) eval_rep: Handle<dyn RepSurfaceDesc>,
 }
 /// Kind-specific evaluation data (`SurfaceDataVariant`); `None` is `std::monostate`.
@@ -304,7 +308,7 @@ fn bezier_data(surface: &Handle<dyn GeomSurface>) -> SurfaceData {
     let eval_rep = bezier.eval_representation();
     SurfaceData::Bezier(BezierData {
         surface: bezier,
-        cache: None,
+        cache: SharedBSplineSurfaceCache::default(),
         eval_rep,
     })
 }
@@ -314,7 +318,7 @@ fn bspline_data(surface: &Handle<dyn GeomSurface>) -> SurfaceData {
     let eval_rep = bspline.eval_representation();
     SurfaceData::BSpline(BSplineData {
         surface: bspline,
-        cache: None,
+        cache: SharedBSplineSurfaceCache::default(),
         eval_rep,
     })
 }
@@ -384,12 +388,12 @@ pub(crate) fn shallow_data(data: &SurfaceData) -> Result<SurfaceData, Failure> {
         SurfaceData::Offset(offset) => SurfaceData::Offset(shallow_offset(offset)?),
         SurfaceData::BSpline(bspline) => SurfaceData::BSpline(BSplineData {
             surface: bspline.surface.clone(),
-            cache: None,
+            cache: SharedBSplineSurfaceCache::default(),
             eval_rep: bspline.eval_rep.clone(),
         }),
         SurfaceData::Bezier(bezier) => SurfaceData::Bezier(BezierData {
             surface: bezier.surface.clone(),
-            cache: None,
+            cache: SharedBSplineSurfaceCache::default(),
             eval_rep: bezier.eval_rep.clone(),
         }),
         other => elementary_copy(other),

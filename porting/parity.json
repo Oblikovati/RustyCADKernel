@@ -66778,7 +66778,7 @@
       "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::<rustycad_tkg3d::adaptor3d::Adaptor3dSurface>::shallow_copy",
       "status": "implemented",
-      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+      "notes": "The original GeomAdaptor_Surface uses its native ShallowCopy path (separate adaptor state, rebuilt caches); the optional transformed GeomAdaptor_Surface is copied by value, with nested Geom and spline-cache handles retaining shared identity. Rust mirrors both paths; native fixture verifies source and copy member states diverge independently."
     },
     {
       "upstream_id": "GeomAdaptor_TransformedSurface::Load(const occ::handle<Geom_Surface>&,const gp_Trsf&)",
