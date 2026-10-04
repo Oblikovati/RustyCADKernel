@@ -10,7 +10,7 @@ use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
 
 mod basis;
-pub(in crate::plib) use basis::BasisRows;
+pub use basis::BasisRows;
 mod conversion;
 mod errors;
 

@@ -32,6 +32,7 @@ pub use hermit_jacobi::HermitJacobi;
 pub use hermite::{hermite_coefficients, hermite_interpolate};
 pub use horner::{eval_poly_2var, eval_polynomial, no_derivative_eval_polynomial};
 pub use interpolation::{eval_cubic_hermite, eval_lagrange};
+pub use jacobi_polynomial::BasisRows;
 pub use jacobi_polynomial::JacobiPolynomial;
 pub use length::{eval_length, eval_length_with_tolerance};
 pub use poles::{PolePoint, get_poles, get_rational_poles, set_poles, set_rational_poles};
