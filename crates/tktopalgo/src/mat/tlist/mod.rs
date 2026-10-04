@@ -221,11 +221,11 @@ impl<I: MatTListItem> RuntimeTyped for MatTList<I> {
     fn static_type() -> &'static RuntimeType {
         // The registry is keyed by the Rust type, so each instance keeps its own
         // descriptor (a static in a generic function would be shared).
-        RuntimeType::register::<Self>(
+        RuntimeType::retain_class_descriptor::<Self>(RuntimeType::register::<Self>(
             I::LIST_NAME,
             std::mem::size_of::<Self>(),
             Some(StandardTransient::static_type()),
-        )
+        ))
     }
     fn project_from(object: &dyn Transient) -> Option<&Self> {
         project_concrete::<Self>(object)

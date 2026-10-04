@@ -21,8 +21,8 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
         let Some(owner) = self.owner.take() else {
             return Handle::default();
         };
-        if U::project_from(owner.as_ref()).is_none() {
-            owner.transient_base().decrement_ref_counter();
+        if U::project_from(owner.get()).is_none() {
+            owner.get().transient_base().decrement_ref_counter();
             return Handle::default();
         }
         Handle {

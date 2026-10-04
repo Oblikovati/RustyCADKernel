@@ -9,7 +9,7 @@
 //! trait object by itself, so each concrete class registers, in its own
 //! descriptor, one safe function per abstract ancestor that does the view change
 //! (see docs/geom-design.md).
-use super::{StandardTransient, Transient};
+use super::{Handle, StandardTransient, Transient};
 use std::{
     any::{Any, TypeId},
     collections::HashMap,
@@ -58,14 +58,21 @@ pub struct RuntimeType {
     size: usize,
     rust_type: TypeId,
     parent: Option<&'static RuntimeType>,
+    _parent_handle: Option<Handle<RuntimeType>>,
     interfaces: Vec<InterfaceEntry>,
 }
 crate::impl_transient!(RuntimeType, "Standard_Type", StandardTransient, base);
 /// The process-wide registry behind `Standard_Type::Register`.
 type Registry = Mutex<HashMap<TypeId, &'static RuntimeType>>;
+/// Static owners for generic Rust classes whose monomorphized methods cannot share a local static.
+type StaticOwners = Mutex<HashMap<TypeId, Handle<RuntimeType>>>;
 fn registry() -> &'static Registry {
     static REGISTRY: OnceLock<Registry> = OnceLock::new();
     REGISTRY.get_or_init(Registry::default)
+}
+fn static_owners() -> &'static StaticOwners {
+    static OWNERS: OnceLock<StaticOwners> = OnceLock::new();
+    OWNERS.get_or_init(StaticOwners::default)
 }
 /// The bytes a C string argument holds: everything before the first NUL.
 pub(crate) fn c_prefix(text: &str) -> &str {
@@ -84,6 +91,19 @@ impl RuntimeType {
     ) -> &'static RuntimeType {
         Self::register_with_interfaces::<T>(name, size, parent, Vec::new())
     }
+    /// Keep one class-style owner for a descriptor registered by a generic Rust class;
+    /// `RuntimeType::retain_class_descriptor::<MyGeneric<u32>>(descriptor)`.
+    pub fn retain_class_descriptor<T: ?Sized + 'static>(
+        descriptor: &'static RuntimeType,
+    ) -> &'static RuntimeType {
+        let mut owners = static_owners()
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner);
+        owners
+            .entry(TypeId::of::<T>())
+            .or_insert_with(|| Handle::from_static(descriptor));
+        descriptor
+    }
     /// [`RuntimeType::register`] for a concrete class that also carries the interface
     /// casters of its abstract ancestors; a repeated registration ignores `interfaces`
     /// as it ignores the other arguments;
@@ -98,7 +118,8 @@ impl RuntimeType {
         if let Some(existing) = registered.get(&TypeId::of::<T>()) {
             return existing;
         }
-        // The descriptor lives until process exit, like the C++ registry's static handles.
+        // The registry stores a raw descriptor pointer; class-level handles own its baseline.
+        let parent_handle = parent.map(Handle::from_static);
         let descriptor: &'static RuntimeType = Box::leak(Box::new(Self {
             base: StandardTransient::default(),
             system_name: std::any::type_name::<T>(),
@@ -106,6 +127,7 @@ impl RuntimeType {
             size,
             rust_type: TypeId::of::<T>(),
             parent,
+            _parent_handle: parent_handle,
             interfaces,
         }));
         registered.insert(TypeId::of::<T>(), descriptor);
@@ -155,7 +177,7 @@ impl RuntimeType {
             if std::ptr::eq(candidate, base) {
                 return true;
             }
-            current = candidate.parent;
+            current = candidate.parent();
         }
         false
     }
@@ -168,7 +190,7 @@ impl RuntimeType {
             if candidate.name == name {
                 return true;
             }
-            current = candidate.parent;
+            current = candidate.parent();
         }
         false
     }
@@ -197,6 +219,11 @@ pub trait RuntimeTyped: 'static {
     /// Return the one registered descriptor for this concrete class, as
     /// `get_type_descriptor()`; `T::static_type()`.
     fn static_type() -> &'static RuntimeType;
+    /// Own the class descriptor, incrementing its native-style count;
+    /// `MyClass::static_type_handle()`.
+    fn static_type_handle() -> Handle<RuntimeType> {
+        Handle::from_static(Self::static_type())
+    }
     /// Borrow `Self` inside a live object: the embedded subobject of a concrete
     /// class, or the interface view of an abstract class; `T::project_from(object)`.
     fn project_from(object: &dyn Transient) -> Option<&Self>;

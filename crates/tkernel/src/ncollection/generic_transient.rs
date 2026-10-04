@@ -10,7 +10,11 @@ use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
 /// `generic_static_type::<HArray1<f64>>("NCollection_HArray1")`.
 pub(crate) fn generic_static_type<C: 'static>(name: &'static str) -> &'static RuntimeType {
     let parent = Some(<StandardTransient as RuntimeTyped>::static_type());
-    RuntimeType::register::<C>(name, std::mem::size_of::<C>(), parent)
+    RuntimeType::retain_class_descriptor::<C>(RuntimeType::register::<C>(
+        name,
+        std::mem::size_of::<C>(),
+        parent,
+    ))
 }
 
 /// Implements `RuntimeTyped` and `Transient` for a generic handle-shared collection

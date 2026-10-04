@@ -1,6 +1,7 @@
 //! Transient base with native atomic counter ordering and safe base projections.
 use super::{
-    Failure, RuntimeType, RuntimeTyped, exceptions, project_concrete, runtime_type::c_prefix,
+    Failure, Handle, RuntimeType, RuntimeTyped, exceptions, project_concrete,
+    runtime_type::c_prefix,
 };
 use std::{
     any::{Any, TypeId},
@@ -13,6 +14,10 @@ use std::{
 pub trait Transient: Any + Send + Sync {
     /// Dispatch the most-derived OCCT descriptor; `object.dynamic_type()`.
     fn dynamic_type(&self) -> &'static RuntimeType;
+    /// Own the dynamic class descriptor; `object.dynamic_type_handle()`.
+    fn dynamic_type_handle(&self) -> Handle<RuntimeType> {
+        Handle::from_static(self.dynamic_type())
+    }
     /// Project an actual base subobject, without pointer reinterpreting; `object.project(TypeId::of::<Base>())`.
     fn project(&self, requested: TypeId) -> Option<&dyn Any>;
     /// Borrow the embedded reference-count base; `object.transient_base().ref_count()`.
@@ -83,10 +88,17 @@ impl Clone for StandardTransient {
 impl RuntimeTyped for StandardTransient {
     const TYPE_NAME: &'static str = "Standard_Transient";
     fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<&'static RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::register::<Self>(Self::TYPE_NAME, std::mem::size_of::<Self>(), None)
-        })
+        static DESCRIPTOR: OnceLock<Handle<RuntimeType>> = OnceLock::new();
+        DESCRIPTOR
+            .get_or_init(|| {
+                Handle::from_static(RuntimeType::register::<Self>(
+                    Self::TYPE_NAME,
+                    std::mem::size_of::<Self>(),
+                    None,
+                ))
+            })
+            .get()
+            .expect("registered descriptor")
     }
     fn project_from(object: &dyn Transient) -> Option<&Self> {
         project_concrete::<Self>(object)
@@ -121,23 +133,24 @@ macro_rules! impl_transient {
         impl $crate::standard::RuntimeTyped for $class {
             const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                // One cached registry lookup per class, as the C++ function-local static handle.
-                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
+                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::Handle<$crate::standard::RuntimeType>> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::register_with_interfaces::<Self>(
-                        $name,
-                        std::mem::size_of::<Self>(),
-                        Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
-                        vec![$($crate::standard::InterfaceEntry::new(
-                            $crate::standard::InterfaceCaster::<$interface>::new(|object| {
-                                let concrete: &$class =
-                                    $crate::standard::project_concrete::<$class>(object)?;
-                                Some(concrete as &$interface)
-                            }),
-                        )),*],
+                    $crate::standard::Handle::from_static(
+                        $crate::standard::RuntimeType::register_with_interfaces::<Self>(
+                            $name,
+                            std::mem::size_of::<Self>(),
+                            Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                            vec![$($crate::standard::InterfaceEntry::new(
+                                $crate::standard::InterfaceCaster::<$interface>::new(|object| {
+                                    let concrete: &$class =
+                                        $crate::standard::project_concrete::<$class>(object)?;
+                                    Some(concrete as &$interface)
+                                }),
+                            )),*],
+                        ),
                     )
-                })
+                }).get().expect("registered descriptor")
             }
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
                 $crate::standard::project_concrete::<Self>(object)
@@ -173,17 +186,23 @@ macro_rules! impl_transient_interface {
         impl $crate::standard::RuntimeTyped for $interface {
             const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
-                    std::sync::OnceLock::new();
-                DESCRIPTOR.get_or_init(|| {
-                    let parent: &'static $crate::standard::RuntimeType =
-                        <$parent as $crate::standard::RuntimeTyped>::static_type();
-                    $crate::standard::RuntimeType::register::<Self>(
-                        $name,
-                        parent.size(),
-                        Some(parent),
-                    )
-                })
+                static DESCRIPTOR: std::sync::OnceLock<
+                    $crate::standard::Handle<$crate::standard::RuntimeType>,
+                > = std::sync::OnceLock::new();
+                DESCRIPTOR
+                    .get_or_init(|| {
+                        let parent: &'static $crate::standard::RuntimeType =
+                            <$parent as $crate::standard::RuntimeTyped>::static_type();
+                        $crate::standard::Handle::from_static(
+                            $crate::standard::RuntimeType::register::<Self>(
+                                $name,
+                                parent.size(),
+                                Some(parent),
+                            ),
+                        )
+                    })
+                    .get()
+                    .expect("registered descriptor")
             }
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
                 $crate::standard::project_interface::<Self>(object)

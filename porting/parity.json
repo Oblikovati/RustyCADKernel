@@ -84363,7 +84363,7 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::parent",
       "status": "implemented",
-      "notes": "None for Standard_Transient (C++ null handle). Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+      "notes": "Returns a borrowed descriptor reference, matching the native const handle-reference accessor; the child descriptor separately owns one parent handle. None for Standard_Transient (C++ null handle). Compared with OCCT by the runtime_type probe and the owning-descriptor probe."
     },
     {
       "upstream_id": "Standard_Type::SubType(const occ::handle<Standard_Type>&) const",
@@ -84402,16 +84402,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::register",
-      "status": "implemented",
-      "notes": "Process-wide registry under a mutex, keyed by the Rust TypeId (C++ keys by the typeid name): the first registration of a class wins and later calls return it unchanged; the name is deep-copied up to its NUL. impl_transient! registers every class with its size and parent."
+      "status": "partial",
+      "notes": "The raw registry remains first-registration-wins, keyed by Rust TypeId (C++ keys by typeid name), and copies names up to NUL. Register itself does not own the new descriptor; class static handles provide the baseline count, and each descriptor owns its parent handle. Rust leaks registry descriptors to keep stable addresses, so explicit registration/destruction lifetime parity remains partial. See porting/audits/runtime-type-owning-descriptors.json."
     },
     {
       "upstream_id": "Standard_Type::~Standard_Type()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": null,
-      "status": "excluded",
-      "notes": "Destructor that unregisters the descriptor; Rust descriptors live until process exit, as the C++ static handles do."
+      "status": "partial",
+      "notes": "Native destruction unregisters and releases the descriptor. Rust currently leaks descriptors to preserve stable registry addresses and does not reproduce explicit destruction/unregistration. Static class handles and parent ownership counts are covered; full lifetime parity is not. See porting/audits/runtime-type-owning-descriptors.json."
     },
     {
       "upstream_id": "Standard_Type::DEFINE_STANDARD_RTTIEXT(Standard_Type,Standard_Transient)",
