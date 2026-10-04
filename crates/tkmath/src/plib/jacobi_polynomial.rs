@@ -13,6 +13,7 @@ mod basis;
 pub use basis::BasisRows;
 mod conversion;
 mod errors;
+mod storage;
 
 // Largest degree of Q(t) the native tables cover.
 const MAX_DEGREE: i32 = 30;

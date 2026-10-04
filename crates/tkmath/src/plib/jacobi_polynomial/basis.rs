@@ -2,10 +2,11 @@
 
 //! Normalized Jacobi basis values and derivatives by three-term recurrence.
 use super::{JacobiPolynomial, table_value};
-use crate::plib::access::require_length;
 use crate::plib::jacobi_tables::{self, ChunkedTable};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
+
+use super::storage::{IndexedRows, OutputRows, SeparateRows};
 
 // Degree-30 recurrence tables; lower degrees use their prefixes (proved by the generator).
 static TNORM: [&ChunkedTable; 3] = [
@@ -108,113 +109,39 @@ impl JacobiPolynomial {
     /// `jacobi.d0123(2, 0.5, BasisRows { rows: [&mut value, &mut d1, &mut d2, &mut []] })?`.
     /// Rows start at each native lower bound; negative orders preserve the native initialized D1 path.
     /// For `NDeriv > 3`, OCCT computes rows 0–2 and still scales row 3.
-    pub fn d0123(
+    pub fn d0123(&self, native_order: i32, u: f64, basis: BasisRows<'_>) -> Result<(), Failure> {
+        let mut rows: SeparateRows<'_> = SeparateRows::new(basis.rows);
+        self.evaluate_rows(native_order, u, &mut rows)
+    }
+
+    /// Evaluates rows over one caller buffer, preserving native write order when spans overlap;
+    /// `jacobi.d0123_overlapping(2, 0.5, &mut storage, [0, 0, 2, 3])?`.
+    pub fn d0123_overlapping(
         &self,
         native_order: i32,
         u: f64,
-        mut basis: BasisRows<'_>,
+        values: &mut [f64],
+        row_starts: [usize; 4],
     ) -> Result<(), Failure> {
-        if native_order < 0 {
-            return self.evaluate_negative_order(&mut basis, u);
-        }
+        let (_, normalize_order) = jacobi_orders(native_order);
+        let count: usize = self.degree as usize + 1;
+        let mut rows: IndexedRows<'_> =
+            IndexedRows::new(values, row_starts, count, normalize_order)?;
+        self.evaluate_rows(native_order, u, &mut rows)
+    }
+
+    fn evaluate_rows<S: OutputRows>(
+        &self,
+        native_order: i32,
+        u: f64,
+        rows: &mut S,
+    ) -> Result<(), Failure> {
         let (compute_order, normalize_order) = jacobi_orders(native_order);
         let count: usize = self.degree as usize + 1;
-        self.validate_rows(normalize_order, count, &basis.rows)?;
-        self.seed_rows(compute_order, u, &mut basis.rows);
-        self.recur_rows(compute_order, u, &mut basis.rows)?;
-        self.scale_rows(normalize_order, count, &mut basis.rows)?;
-        Ok(())
-    }
-
-    fn evaluate_negative_order(&self, basis: &mut BasisRows<'_>, u: f64) -> Result<(), Failure> {
-        let count: usize = self.degree as usize + 1;
-        self.validate_rows(1, count, &basis.rows)?;
-        self.seed_rows(0, u, &mut basis.rows);
-        self.recur_negative_rows(u, &mut basis.rows)?;
-        self.scale_rows(1, count, &mut basis.rows)?;
-        Ok(())
-    }
-
-    fn validate_rows(
-        &self,
-        order: usize,
-        count: usize,
-        rows: &[&mut [f64]; 4],
-    ) -> Result<(), Failure> {
-        for (derivative, row) in rows.iter().enumerate().take(order + 1) {
-            require_length(
-                "PLib_JacobiPolynomial::D0123",
-                ["BasisValue", "BasisD1", "BasisD2", "BasisD3"][derivative],
-                row.len(),
-                count,
-            )?;
-        }
-        Ok(())
-    }
-
-    fn scale_rows(
-        &self,
-        order: usize,
-        count: usize,
-        rows: &mut [&mut [f64]; 4],
-    ) -> Result<(), Failure> {
-        for index in 0..count {
-            let factor: f64 = table_value(TNORM[self.level()], index, "TNorm")?;
-            for row in rows.iter_mut().take(order + 1) {
-                row[index] *= factor;
-            }
-        }
-        Ok(())
-    }
-
-    fn recur_negative_rows(&self, u: f64, rows: &mut [&mut [f64]; 4]) -> Result<(), Failure> {
-        for i in 2..=self.degree as usize {
-            let (a, b, denom) = self.recurrence_coefficients(i)?;
-            rows[0][i] = recurrence_term(a, b, denom, u, rows[0][i - 1], rows[0][i - 2], 0, 0.0);
-            rows[1][i] = recurrence_term(
-                a,
-                b,
-                denom,
-                u,
-                rows[1][i - 1],
-                rows[1][i - 2],
-                1,
-                rows[0][i - 1],
-            );
-        }
-        Ok(())
-    }
-
-    // Degree 0 and 1 terms ("positionnements triviaux").
-    fn seed_rows(&self, order: usize, u: f64, rows: &mut [&mut [f64]; 4]) {
-        rows[0][0] = 1.0;
-        for row in rows.iter_mut().take(order + 1).skip(1) {
-            row[0] = 0.0;
-        }
-        if self.degree == 0 {
-            return;
-        }
-        let aux: f64 = f64::from(2 * (self.niv_constr + 1) + 1);
-        rows[0][1] = aux * u;
-        if order >= 1 {
-            rows[1][1] = aux;
-        }
-        for row in rows.iter_mut().take(order + 1).skip(2) {
-            row[1] = 0.0;
-        }
-    }
-
-    // J_i = (A_i u J_{i-1} + B_i J_{i-2}) D_i, differentiated term by term.
-    fn recur_rows(&self, order: usize, u: f64, rows: &mut [&mut [f64]; 4]) -> Result<(), Failure> {
-        for i in 2..=self.degree.max(1) as usize {
-            let (a, b, denom) = self.recurrence_coefficients(i)?;
-            // Derivative k adds k times derivative k-1 inside the A term; k = 0 has no such term.
-            for k in (0..=order).rev() {
-                let lower: f64 = if k == 0 { 0.0 } else { rows[k - 1][i - 1] };
-                rows[k][i] =
-                    recurrence_term(a, b, denom, u, rows[k][i - 1], rows[k][i - 2], k, lower);
-            }
-        }
+        validate_rows(rows, normalize_order, count)?;
+        seed_rows(self, native_order, u, rows);
+        recur_rows(self, compute_order, u, rows)?;
+        scale_rows(self, normalize_order, count, rows)?;
         Ok(())
     }
 
@@ -228,11 +155,129 @@ impl JacobiPolynomial {
 }
 
 fn jacobi_orders(native_order: i32) -> (usize, usize) {
+    if native_order < 0 {
+        return (1, 1);
+    }
     if native_order > 3 {
         return (2, 3);
     }
     let order: usize = native_order as usize;
     (order, order)
+}
+
+fn validate_rows<S: OutputRows>(rows: &S, order: usize, count: usize) -> Result<(), Failure> {
+    for row in 0..=order {
+        if rows.len(row) < count {
+            return Err(Failure::out_of_range(&format!(
+                "PLib_JacobiPolynomial::D0123 row {row} has length {}, expected {count}",
+                rows.len(row)
+            )));
+        }
+    }
+    Ok(())
+}
+
+fn seed_rows<S: OutputRows>(basis: &JacobiPolynomial, native_order: i32, u: f64, rows: &mut S) {
+    rows.write(0, 0, 1.0);
+    if basis.degree == 0 {
+        seed_constant_derivatives(native_order, rows);
+        return;
+    }
+    seed_linear_value(basis, u, rows);
+    seed_derivatives(basis, native_order, rows);
+}
+
+fn seed_constant_derivatives<S: OutputRows>(native_order: i32, rows: &mut S) {
+    if native_order >= 1 {
+        rows.write(1, 0, 0.0);
+    }
+    if native_order >= 2 {
+        rows.write(2, 0, 0.0);
+    }
+    if native_order == 3 {
+        rows.write(3, 0, 0.0);
+    }
+}
+
+fn seed_linear_value<S: OutputRows>(basis: &JacobiPolynomial, u: f64, rows: &mut S) {
+    let aux: f64 = f64::from(2 * (basis.niv_constr + 1) + 1);
+    rows.write(0, 1, aux * u);
+}
+
+fn seed_derivatives<S: OutputRows>(basis: &JacobiPolynomial, native_order: i32, rows: &mut S) {
+    if native_order < 1 {
+        return;
+    }
+    rows.write(1, 0, 0.0);
+    let aux: f64 = f64::from(2 * (basis.niv_constr + 1) + 1);
+    rows.write(1, 1, aux);
+    if native_order >= 2 {
+        rows.write(2, 0, 0.0);
+        rows.write(2, 1, 0.0);
+    }
+    if native_order == 3 {
+        rows.write(3, 0, 0.0);
+        rows.write(3, 1, 0.0);
+    }
+}
+
+fn recur_rows<S: OutputRows>(
+    basis: &JacobiPolynomial,
+    compute_order: usize,
+    u: f64,
+    rows: &mut S,
+) -> Result<(), Failure> {
+    if basis.degree <= 1 {
+        return Ok(());
+    }
+    for index in 2..=basis.degree as usize {
+        recur_index(basis, compute_order, u, index, rows)?;
+    }
+    Ok(())
+}
+
+fn recur_index<S: OutputRows>(
+    basis: &JacobiPolynomial,
+    compute_order: usize,
+    u: f64,
+    index: usize,
+    rows: &mut S,
+) -> Result<(), Failure> {
+    let (a, b, denom) = basis.recurrence_coefficients(index)?;
+    for row in 0..=compute_order {
+        let lower: f64 = if row == 0 {
+            0.0
+        } else {
+            rows.read(row - 1, index - 1)
+        };
+        let value: f64 = recurrence_term(
+            a,
+            b,
+            denom,
+            u,
+            rows.read(row, index - 1),
+            rows.read(row, index - 2),
+            row,
+            lower,
+        );
+        rows.write(row, index, value);
+    }
+    Ok(())
+}
+
+fn scale_rows<S: OutputRows>(
+    basis: &JacobiPolynomial,
+    order: usize,
+    count: usize,
+    rows: &mut S,
+) -> Result<(), Failure> {
+    for index in 0..count {
+        let factor: f64 = table_value(TNORM[basis.level()], index, "TNorm")?;
+        for row in 0..=order {
+            rows.write(row, index, rows.read(row, index) * factor);
+        }
+    }
+    Ok(())
 }
 
 #[allow(clippy::too_many_arguments)] // One scalar per recurrence operand keeps the native order visible.
