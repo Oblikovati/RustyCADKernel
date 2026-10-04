@@ -1,5 +1,6 @@
 use super::{ShapeUpgradeUnifySameDomain, face_wires};
 mod bspline;
+mod containers;
 mod safe_input;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildReShape;
@@ -44,7 +45,7 @@ pub(super) fn merge_wire_edge_chains(
             &fields.keep_shapes,
             fields.safe_input_mode,
         ),
-        _ => Ok(shape.clone()),
+        _ => containers::merge_nested_children(shape, &fields),
     }
 }
 
