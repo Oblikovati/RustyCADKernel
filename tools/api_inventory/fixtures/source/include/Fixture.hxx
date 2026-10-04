@@ -1,6 +1,7 @@
 #ifndef _Fixture_HeaderFile
 #define _Fixture_HeaderFile
 
+
 #define FIXTURE_DECLARE(name) int name();
 #define FIXTURE_SCALE(value) ((value) * 2)
 
@@ -123,6 +124,60 @@ struct SFINAEOverloads {
   template <typename Provider>
   auto IsValidIn(const Provider& provider) const
       -> decltype(provider.Size(), bool()) { return true; }
+};
+
+template <bool Enabled> struct RequireTrue;
+template <> struct RequireTrue<true> { using type = int; };
+
+struct AliasExposureRoot {
+private:
+  template <bool Enabled> struct Hidden;
+
+public:
+  using EnabledAlias = Hidden<true>;
+  using DisabledAlias = Hidden<false>;
+  using AliasChain = EnabledAlias;
+  template <bool Enabled> struct PublicTemplate { void public_member() {} };
+  using PublicTemplateAlias = PublicTemplate<true>;
+
+protected:
+  using ProtectedAlias = Hidden<true>;
+
+private:
+  using PrivateAlias = Hidden<true>;
+};
+
+template <bool Enabled>
+struct AliasExposureRoot::Hidden {
+  void common_member() {}
+  template <bool IsEnabled = Enabled>
+  typename RequireTrue<IsEnabled>::type enabled_member() { return 1; }
+
+protected:
+  void protected_member() {}
+
+private:
+  void private_member() {}
+};
+
+struct AliasExposureDerived : AliasExposureRoot::EnabledAlias {
+  void call_protected_member() { protected_member(); }
+};
+
+struct AliasDefaultPublicRoot {
+private:
+  template <bool> struct Hidden { void implicit_public_member() {} };
+
+public:
+  using Alias = Hidden<true>;
+};
+
+struct AliasDefaultPrivateRoot {
+private:
+  template <bool> class Hidden { void implicit_private_member() {} };
+
+public:
+  using Alias = Hidden<true>;
 };
 
 inline void function_with_locals() {

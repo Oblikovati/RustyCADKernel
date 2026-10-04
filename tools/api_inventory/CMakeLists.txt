@@ -4,6 +4,7 @@ project(occt_api_extract LANGUAGES CXX)
 find_package(LLVM 23.1.2 CONFIG REQUIRED)
 find_package(Clang 23.1.2 CONFIG REQUIRED)
 add_executable(occt-api-extract
+  src/AliasReachability.cpp
   src/main.cpp
   src/InventoryVisitor.cpp
   src/PreprocessorEvents.cpp

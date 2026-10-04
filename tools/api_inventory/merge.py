@@ -31,6 +31,7 @@ class InventoryRecords:
     source_aliases: dict[str, str] = field(default_factory=dict)
     site_keys: dict[str, set[str]] = field(default_factory=dict)
     declarations: dict[str, JSONObject] = field(default_factory=dict)
+    alias_reachability: list[JSONObject] = field(default_factory=list)
     macros: dict[str, JSONObject] = field(default_factory=dict)
     includes: set[str] = field(default_factory=set)
     skipped_ranges: list[JSONObject] = field(default_factory=list)
@@ -232,6 +233,7 @@ def preserve_evidence_event(
         "skipped_range": records.skipped_ranges,
         "diagnostic": records.diagnostics,
         "summary": records.summaries,
+        "alias_reachability": records.alias_reachability,
         "unsupported": records.unsupported,
     }
     target = collections.get(str(event.get("event")), records.unsupported)
@@ -261,6 +263,8 @@ def consume_event(
         merge_macro(records, event, header)
     elif kind == "header_seen":
         records.includes.add(text_field(event, "source"))
+    elif kind == "alias_reachability":
+        preserve_evidence_event(records, event, header)
     else:
         preserve_evidence_event(records, event, header)
 
@@ -275,9 +279,9 @@ def capture_diagnostic(
 
 
 def verify_capture_summary(
-    records: InventoryRecords, previous: int, header: str
+    records: InventoryRecords, previous: int, previous_aliases: int, header: str
 ) -> None:
-    """Reject silent truncated output; e.g. `verify_capture_summary(records, 0, header)`."""
+    """Reject truncated declarations and alias edges; e.g. `verify_capture_summary(records, 0, 0, header)`."""
     summaries = records.summaries[previous:]
     complete = (
         len(summaries) == 1 and summaries[0].get("complete_for_emit_scope") is True
@@ -285,6 +289,14 @@ def verify_capture_summary(
     if not complete:
         records.unsupported.append(
             {"reason": "incomplete_compiler_summary", "header": header}
+        )
+        return
+    emitted = summaries[0].get("alias_reachability_events")
+    observed = len(records.alias_reachability) - previous_aliases
+    if type(emitted) is not int or emitted != observed:
+        records.unsupported.append(
+            {"reason": "alias_reachability_count_mismatch", "header": header,
+             "summary_count": emitted, "observed_count": observed}
         )
 
 
@@ -320,9 +332,12 @@ def consume_capture(
         preserve_failed_capture(records, artifact, result, source)
         return
     summary_count = len(records.summaries)
+    alias_count = len(records.alias_reachability)
     for event in json_lines(artifact):
         consume_event(records, event, text_field(result, "path"), source)
-    verify_capture_summary(records, summary_count, text_field(result, "path"))
+    verify_capture_summary(
+        records, summary_count, alias_count, text_field(result, "path")
+    )
     if result.get("stderr"):
         capture_diagnostic(records, result, "compiler_stderr")
 
@@ -405,6 +420,11 @@ def declaration_counts(records: InventoryRecords) -> JSONObject:
     return {
         "declarations": len(records.declarations),
         "api_declarations": len(public),
+        "alias_reachability_records": len(records.alias_reachability),
+        "alias_reachability_members": sum(
+            len(cast(list[JSONValue], row.get("exposed_members", [])))
+            for row in records.alias_reachability
+        ),
         "macro_definitions": len(records.macros),
         "macro_candidates": sum(
             row.get("api_candidate") is True for row in records.macros.values()

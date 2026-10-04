@@ -45,7 +45,10 @@ class FakeCompiler:
 
     def run(self, command: list[str], **options: object) -> FakeCompiler:
         stream = cast(TextIO, options["stdout"])
-        stream.write('{"event":"summary","complete_for_emit_scope":true}\n')
+        stream.write(
+            '{"event":"summary","complete_for_emit_scope":true,'
+            '"alias_reachability_events":0}\n'
+        )
         return self
 
 
@@ -268,6 +271,37 @@ class MergeTests(InventoryFixture):
         self.assertFalse(summary["coverage_proof"])
         self.assertFalse(summary["declaration_inventory_complete"])
 
+    def test_alias_reachability_is_retained_separately_from_declarations(self) -> None:
+        member_row = self.declaration("c:@S@Hidden@F@call#")
+        member_row["api_visible"] = False
+        member_row["exclusion_reason"] = "private_ancestor"
+        event = {
+            "event": "alias_reachability",
+            "source": str(self.root / "a.hxx"),
+            "alias_usr": "c:@S@Root@Alias",
+            "proof_status": "supplemental_unresolved",
+            "coverage_credit": False,
+            "specialization_arguments": [{"index": 0, "text": "true"}],
+            "exposed_members": [{
+                "visibility_basis": "public_or_protected_member_of_alias_target",
+                "api_visible_through_alias": True,
+                "declaration": member_row,
+            }],
+        }
+        records = InventoryRecords()
+        consume_event(records, event, "a.hxx", self.root)
+        summary = inventory_summary(
+            {"inputs": {}, "fingerprint": "abc"}, records, []
+        )
+        self.assertEqual(len(records.alias_reachability), 1)
+        self.assertEqual(records.alias_reachability[0]["proof_status"],
+                         "supplemental_unresolved")
+        self.assertFalse(records.alias_reachability[0]["coverage_credit"])
+        self.assertFalse(records.declarations)
+        self.assertFalse(records.unsupported)
+        self.assertEqual(summary["alias_reachability_members"], 1)
+        self.assertFalse(summary["coverage_proof"])
+
     def test_failed_and_truncated_capture_never_proves_coverage(self) -> None:
         artifact = self.root / "raw.jsonl"
         artifact.write_text(json.dumps(self.declaration()) + "\n")
@@ -288,6 +322,20 @@ class MergeTests(InventoryFixture):
         artifact.write_text("changed")
         with self.assertRaises(ValueError):
             consume_capture(records, result, self.root, self.root)
+
+    def test_alias_reachability_summary_count_must_match_events(self) -> None:
+        artifact = self.root / "alias.jsonl"
+        event = {"event": "alias_reachability", "source": "a.hxx",
+                 "alias_usr": "alias", "exposed_members": []}
+        summary = {"event": "summary", "complete_for_emit_scope": True,
+                   "alias_reachability_events": 0}
+        artifact.write_text(json.dumps(event) + "\n" + json.dumps(summary) + "\n")
+        result = {"path": "a.hxx", "artifact": "alias.jsonl",
+                  "output_sha256": digest(artifact), "status": "parsed"}
+        records = InventoryRecords()
+        consume_capture(records, result, self.root, self.root)
+        self.assertEqual(records.unsupported[0]["reason"],
+                         "alias_reachability_count_mismatch")
 
     def test_generated_locations_and_deterministic_gzip(self) -> None:
         generated = str(self.root / "a.hxx")

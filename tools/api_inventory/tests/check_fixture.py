@@ -107,6 +107,99 @@ def check_nested_class_template_access(events):
     check_private_nested_templates(events)
 
 
+def check_private_template_alias_reachability(events: list[JSONObject]) -> None:
+    exposures = [event for event in events if event.get("event") == "alias_reachability"]
+    check_alias_binding_specializations(exposures)
+    check_alias_member_surface(exposures, events)
+    check_alias_default_access(exposures)
+    assert all(event["proof_status"] == "supplemental_unresolved" for event in exposures)
+    assert all(event["template_constraints_evaluated"] is False for event in exposures)
+    assert all(event["member_surface_basis"] == "primary_template_pattern" for event in exposures)
+    assert all(event["coverage_credit"] is False for event in exposures)
+
+
+def check_alias_binding_specializations(exposures: list[JSONObject]) -> None:
+    assert len(exposures) == 6, exposures
+    enabled = alias_exposure(exposures, "fixture::AliasExposureRoot::EnabledAlias")
+    disabled = alias_exposure(exposures, "fixture::AliasExposureRoot::DisabledAlias")
+    assert enabled["specialization_arguments"][0]["text"] == "true"
+    assert disabled["specialization_arguments"][0]["text"] == "false"
+    chained = alias_exposure(exposures, "fixture::AliasExposureRoot::AliasChain")
+    protected = alias_exposure(exposures, "fixture::AliasExposureRoot::ProtectedAlias")
+    assert all(event["member_constraints_evaluated"] is False for event in exposures)
+    assert chained["specialization_arguments"] == enabled["specialization_arguments"]
+    assert protected["specialization_arguments"] == enabled["specialization_arguments"]
+
+
+def check_alias_member_surface(
+    exposures: list[JSONObject], events: list[JSONObject]
+) -> None:
+    enabled = alias_exposure(exposures, "fixture::AliasExposureRoot::EnabledAlias")
+    assert member_names(enabled) == {"common_member", "enabled_member", "protected_member"}
+    enabled_member = member(enabled, "enabled_member")
+    assert "RequireTrue" in enabled_member["declaration"]["signature"]
+    assert all(item["declaration"]["access"] != "private" for item in enabled["exposed_members"])
+    assert all(item["visibility_basis"] == "public_or_protected_member_of_alias_target"
+               for item in enabled["exposed_members"])
+    private_alias = one(events, "declaration",
+                        qualified_name="fixture::AliasExposureRoot::PrivateAlias")
+    assert private_alias["exclusion_reason"] == "private_access"
+    assert not any(event.get("alias_qualified_name")
+                   == "fixture::AliasExposureRoot::PublicTemplateAlias"
+                   for event in exposures)
+
+
+def check_alias_default_access(exposures: list[JSONObject]) -> None:
+    public = alias_exposure(exposures, "fixture::AliasDefaultPublicRoot::Alias")
+    private = alias_exposure(exposures, "fixture::AliasDefaultPrivateRoot::Alias")
+    assert member_names(public) == {"implicit_public_member"}
+    assert member_names(private) == set()
+
+
+def alias_exposure(exposures: list[JSONObject], qualified_name: str) -> JSONObject:
+    matches = [event for event in exposures if event.get("alias_qualified_name") == qualified_name]
+    assert len(matches) == 1, (qualified_name, len(matches))
+    return matches[0]
+
+
+def member_names(exposure: JSONObject) -> set[str]:
+    return {item["declaration"]["qualified_name"].split("::")[-1]
+            for item in exposure["exposed_members"]}
+
+
+def member(exposure: JSONObject, name: str) -> JSONObject:
+    matches = [item for item in exposure["exposed_members"]
+               if item["declaration"]["qualified_name"].endswith("::" + name)]
+    assert len(matches) == 1, (name, len(matches))
+    return matches[0]
+
+
+def check_native_alias_controls(fixtures: pathlib.Path) -> None:
+    with tempfile.TemporaryDirectory() as temporary:
+        binary = pathlib.Path(temporary) / "positive"
+        positive = fixtures / "private_template_alias_positive.cpp"
+        negative = fixtures / "private_template_alias_negative.cpp"
+        private_member = fixtures / "private_template_alias_member_negative.cpp"
+        compile_fixture(positive, fixtures / "source", binary, expect_success=True)
+        compile_fixture(negative, fixtures / "source", binary, False, "Hidden")
+        compile_fixture(private_member, fixtures / "source", binary, False,
+                        "implicit_private_member")
+
+
+def compile_fixture(
+    source: pathlib.Path,
+    include_root: pathlib.Path,
+    binary: pathlib.Path,
+    expect_success: bool,
+    expected_error: str = "",
+) -> None:
+    command = ["c++", "-std=c++17", "-I", str(include_root), str(source), "-o", str(binary)]
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    assert (result.returncode == 0) is expect_success, result.stderr
+    if expected_error:
+        assert "private" in result.stderr and expected_error in result.stderr, result.stderr
+
+
 def check_template_owned_pattern(events, qualified_name, expected_access):
     pattern = one(events, "declaration", qualified_name=qualified_name, kind="CXXRecord")
     assert pattern["exclusion_reason"] == "template_owned_declaration"
@@ -234,8 +327,10 @@ def main():
     result, events = run_extract(executable, fixture_root, header)
     assert result.returncode == 0, result.stderr
     check_declarations(events)
+    check_private_template_alias_reachability(events)
     check_merged_template_metadata(events)
     check_preprocessor(events, fixture_root)
+    check_native_alias_controls(pathlib.Path(sys.argv[2]).resolve())
     summary = one(events, "summary")
     assert summary["complete_for_emit_scope"]
     assert not summary["unhandled_decl_kinds"]

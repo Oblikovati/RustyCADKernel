@@ -335,6 +335,10 @@ bool shouldEmit(const std::filesystem::path &path, const Config &config) {
   return fragment && isUnder(path, config.sourceRoot);
 }
 
+std::string declarationAccess(const clang::Decl &declaration) {
+  return directAccess(declaration);
+}
+
 llvm::json::Object locationObject(clang::SourceLocation location,
                                   const clang::SourceManager &sources) {
   llvm::json::Object result;

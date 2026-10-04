@@ -1,4 +1,5 @@
 #include "InventoryVisitor.h"
+#include "AliasReachability.h"
 #include "clang/AST/ASTContext.h"
 
 namespace api_inventory {
@@ -28,7 +29,18 @@ bool InventoryVisitor::VisitDecl(clang::Decl *declaration) {
   if (!visible && reason == "unhandled_decl_kind") unhandledKinds_.insert(kind);
   ++emitted_;
   writeEvent(event);
+  emitAliasReachability(*declaration, event);
   return true;
+}
+
+void InventoryVisitor::emitAliasReachability(
+    const clang::Decl &declaration, const llvm::json::Object &event) {
+  const auto *alias = llvm::dyn_cast<clang::TypedefNameDecl>(&declaration);
+  if (!alias || !event.getBoolean("api_visible").value_or(false)) return;
+  for (auto exposure : aliasReachabilityEvents(*alias, context_, config_)) {
+    writeEvent(std::move(exposure));
+    ++aliasReachabilityEvents_;
+  }
 }
 
 void InventoryVisitor::emitSummary() {
@@ -42,6 +54,7 @@ void InventoryVisitor::emitSummary() {
   writeEvent(llvm::json::Object{
       {"event", "summary"},
       {"emitted_declarations", static_cast<int64_t>(emitted_)},
+      {"alias_reachability_events", static_cast<int64_t>(aliasReachabilityEvents_)},
       {"external_declarations_excluded", static_cast<int64_t>(externalDecls_)},
       {"occt_declarations_outside_emit_scope", static_cast<int64_t>(occtUnemittedDecls_)},
       {"declarations_by_kind", std::move(kinds)},

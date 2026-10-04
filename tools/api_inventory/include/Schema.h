@@ -18,6 +18,7 @@ struct Config {
 std::filesystem::path canonicalPath(const std::filesystem::path &path);
 bool isUnder(const std::filesystem::path &path, const std::filesystem::path &root);
 bool shouldEmit(const std::filesystem::path &path, const Config &config);
+std::string declarationAccess(const clang::Decl &declaration);
 llvm::json::Object locationObject(clang::SourceLocation location,
                                   const clang::SourceManager &sources);
 llvm::json::Object declarationEvent(const clang::Decl &declaration,
