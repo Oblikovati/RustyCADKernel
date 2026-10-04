@@ -227403,6 +227403,69 @@
       "rust_item": "rustycad_tkbo::bop_tools::correct_curve_on_surface",
       "status": "partial",
       "notes": "400 native tolerance observations; tools/oracle/tkbo_curve_surface_tolerances.md. Serial scheduling and untested representation/location/failure branches remain partial."
+    },
+    {
+      "upstream_id": "BOPTools_CoupleOfShape::Shape2()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_CoupleOfShape.hxx",
+      "source_sha256": "13ac9eb2535a273673faf4df2c6a66dac60c7683758348d2c12c67e4e000746c",
+      "rust_item": "rustycad_tkbo::bop_tools::CoupleOfShape::shape2",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::GetFaceOff(const TopoDS_Edge &, const TopoDS_Face &, NCollection_List<BOPTools_CoupleOfShape> &, TopoDS_Face &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::get_face_off",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_CoupleOfShape::SetShape1(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_CoupleOfShape.hxx",
+      "source_sha256": "13ac9eb2535a273673faf4df2c6a66dac60c7683758348d2c12c67e4e000746c",
+      "rust_item": "rustycad_tkbo::bop_tools::CoupleOfShape::set_shape1",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_CoupleOfShape::Shape1()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_CoupleOfShape.hxx",
+      "source_sha256": "13ac9eb2535a273673faf4df2c6a66dac60c7683758348d2c12c67e4e000746c",
+      "rust_item": "rustycad_tkbo::bop_tools::CoupleOfShape::shape1",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_CoupleOfShape::SetShape2(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_CoupleOfShape.hxx",
+      "source_sha256": "13ac9eb2535a273673faf4df2c6a66dac60c7683758348d2c12c67e4e000746c",
+      "rust_item": "rustycad_tkbo::bop_tools::CoupleOfShape::set_shape2",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_CoupleOfShape::BOPTools_CoupleOfShape()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_CoupleOfShape.hxx",
+      "source_sha256": "13ac9eb2535a273673faf4df2c6a66dac60c7683758348d2c12c67e4e000746c",
+      "rust_item": "rustycad_tkbo::bop_tools::CoupleOfShape::new",
+      "status": "partial",
+      "notes": "280 native angular face selection observations and Rust shape-pair semantics; tools/oracle/tkbo_face_off.md. General support/failure/location and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsInternalFace(const TopoDS_Face &, const TopoDS_Edge &, const TopoDS_Face &, const TopoDS_Face &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::internal_face_between",
+      "status": "partial",
+      "notes": "280 native box/cylinder/sphere/thin-box angular classification observations, identical boundaries and four target orientations; tools/oracle/tkbo_face_off.md. General topology/location/failure and complete legacy/API parity unproven."
     }
   ],
   "tests": [

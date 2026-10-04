@@ -84,3 +84,11 @@ pub use point_curve_tolerance::correct_point_on_curve;
 
 mod curve_surface_tolerance;
 pub use curve_surface_tolerance::{correct_curve_on_surface, correct_tolerances};
+
+mod couple_of_shape;
+pub use couple_of_shape::CoupleOfShape;
+mod face_off;
+pub use face_off::get_face_off;
+
+mod internal_face;
+pub use internal_face::internal_face_between;
