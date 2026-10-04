@@ -99822,25 +99822,25 @@
       "upstream_id": "FSD_BinaryFile::Open(const TCollection_AsciiString&,Storage_OpenMode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::open",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::BaseDriver>::open",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::IsEnd()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::is_end",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::BaseDriver>::is_end",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::Tell()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::tell",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::BaseDriver>::tell",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString&)",
@@ -99854,9 +99854,9 @@
       "upstream_id": "FSD_BinaryFile::BeginWriteInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_info_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::begin_write_info_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WriteInfo(Standard_OStream&,int,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const NCollection_Sequence<TCollection_AsciiString>&,bool)",
@@ -99870,17 +99870,17 @@
       "upstream_id": "FSD_BinaryFile::WriteInfo(int,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const NCollection_Sequence<TCollection_AsciiString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_info",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::write_info",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_info_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::end_write_info_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteInfoSection(Standard_OStream&)",
@@ -99894,41 +99894,41 @@
       "upstream_id": "FSD_BinaryFile::BeginReadInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_info_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::begin_read_info_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadInfo(int&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_ExtendedString&,TCollection_AsciiString&,TCollection_ExtendedString&,NCollection_Sequence<TCollection_AsciiString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_info",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::read_info",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadCompleteInfo(Standard_IStream&,occ::handle<Storage_Data>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_complete_info",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::read_complete_info",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndReadInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_info_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::end_read_info_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::begin_write_comment_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteCommentSection(Standard_OStream&)",
@@ -99942,9 +99942,9 @@
       "upstream_id": "FSD_BinaryFile::WriteComment(const NCollection_Sequence<TCollection_ExtendedString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_comment",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::write_comment",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WriteComment(Standard_OStream&,const NCollection_Sequence<TCollection_ExtendedString>&,bool)",
@@ -99958,9 +99958,9 @@
       "upstream_id": "FSD_BinaryFile::EndWriteCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::end_write_comment_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteCommentSection(Standard_OStream&)",
@@ -99974,17 +99974,17 @@
       "upstream_id": "FSD_BinaryFile::BeginReadCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::begin_read_comment_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadComment(NCollection_Sequence<TCollection_ExtendedString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_comment",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::read_comment",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadComment(Standard_IStream&,NCollection_Sequence<TCollection_ExtendedString>&)",
@@ -99998,57 +99998,57 @@
       "upstream_id": "FSD_BinaryFile::EndReadCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::end_read_comment_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_type_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_write_type_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::SetTypeSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::set_type_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::set_type_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WriteTypeInformations(int,const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_type_informations",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::write_type_informations",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_type_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_write_type_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_type_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_read_type_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::TypeSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::type_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::type_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::TypeSectionSize(Standard_IStream&)",
@@ -100062,9 +100062,9 @@
       "upstream_id": "FSD_BinaryFile::ReadTypeInformations(int&,TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_type_informations",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::read_type_informations",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadTypeInformations(Standard_IStream&,int&,TCollection_AsciiString&)",
@@ -100078,57 +100078,57 @@
       "upstream_id": "FSD_BinaryFile::EndReadTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_type_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_read_type_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_root_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_write_root_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::SetRootSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::set_root_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::set_root_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WriteRoot(const TCollection_AsciiString&,int,const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_root",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::write_root",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_root_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_write_root_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_root_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_read_root_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::RootSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::root_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::root_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::RootSectionSize(Standard_IStream&)",
@@ -100142,9 +100142,9 @@
       "upstream_id": "FSD_BinaryFile::ReadRoot(TCollection_AsciiString&,int&,TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_root",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::read_root",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadRoot(Standard_IStream&,TCollection_AsciiString&,int&,TCollection_AsciiString&)",
@@ -100158,57 +100158,57 @@
       "upstream_id": "FSD_BinaryFile::EndReadRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_root_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_read_root_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_write_ref_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::SetRefSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::set_ref_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::set_ref_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WriteReferenceType(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_reference_type",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::write_reference_type",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_write_ref_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::begin_read_ref_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::RefSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::ref_section_size",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::ref_section_size",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::RefSectionSize(Standard_IStream&)",
@@ -100222,9 +100222,9 @@
       "upstream_id": "FSD_BinaryFile::ReadReferenceType(int&,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_reference_type",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::read_reference_type",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadReferenceType(Standard_IStream&,int&,int&)",
@@ -100238,153 +100238,153 @@
       "upstream_id": "FSD_BinaryFile::EndReadRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::TableSections>::end_read_ref_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_data_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_write_data_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::WritePersistentObjectHeader(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::write_persistent_object_header",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_write_persistent_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_write_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_write_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_write_persistent_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndWriteDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_write_data_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_write_data_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_data_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_read_data_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::ReadPersistentObjectHeader(int&,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::read_persistent_object_header",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_read_persistent_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::BeginReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::begin_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::begin_read_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_read_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_read_persistent_object_data",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndReadDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::end_read_data_section",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DataSections>::end_read_data_section",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::SkipObject()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::skip_object",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::BaseDriver>::skip_object",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutReference(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_reference",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_reference",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutCharacter(char)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_character",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_character",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutExtCharacter(char16_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_ext_character",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_ext_character",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutInteger(Standard_OStream&,int,bool)",
@@ -100398,49 +100398,49 @@
       "upstream_id": "FSD_BinaryFile::PutInteger(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_integer",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_integer",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutBoolean(bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_boolean",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_boolean",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutReal(double)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_real",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_real",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::PutShortReal(float)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::put_short_real",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::put_short_real",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetReference(int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_reference",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_reference",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetCharacter(char&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_character",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_character",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetReference(Standard_IStream&,int&)",
@@ -100454,17 +100454,17 @@
       "upstream_id": "FSD_BinaryFile::GetExtCharacter(char16_t&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_ext_character",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_ext_character",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetInteger(int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_integer",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_integer",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetInteger(Standard_IStream&,int&)",
@@ -100478,33 +100478,33 @@
       "upstream_id": "FSD_BinaryFile::GetBoolean(bool&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_boolean",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_boolean",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetReal(double&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_real",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_real",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::GetShortReal(float&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::get_short_real",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::DriverPrimitives>::get_short_real",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::Close()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile::close",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::BaseDriver>::close",
       "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
     },
     {
       "upstream_id": "FSD_BinaryFile::Destroy()",
