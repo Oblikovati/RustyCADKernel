@@ -3,9 +3,13 @@
 //! `Standard_ReadLineBuffer`: splits a stream into lines through a fixed-size read buffer.
 use super::FreadStream;
 use super::stream_fill::fill_from;
+use super::{IstreamException, IstreamStream};
 use std::io::Read;
 mod scan;
 
+#[cfg(test)]
+#[path = "read_line_buffer/istream_exception_tests.rs"]
+mod istream_exception_tests;
 #[cfg(test)]
 #[path = "read_line_buffer/stream_hook_tests.rs"]
 mod stream_hook_tests;
@@ -119,6 +123,43 @@ impl ReadLineBuffer {
         !filled.failed
     }
 
+    /// Uses the exception-mask-aware native stream protocol; `buffer.read_stream_istream(&mut stream, 4, &mut count)?`.
+    pub fn read_stream_istream<R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+        len: usize,
+        read_len: &mut usize,
+    ) -> Result<bool, IstreamException> {
+        let Some(buffer) = self.read_buffer.get_mut(..len) else {
+            *read_len = 0;
+            return Ok(false);
+        };
+        let result = stream.read_block(buffer)?;
+        *read_len = result.gcount();
+        Ok(result.is_good())
+    }
+
+    /// Reads a line while preserving native exception-mask state transitions;
+    /// `let line = buffer.read_line_istream(&mut stream, &mut length, &mut count)?`.
+    pub fn read_line_istream<R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+        line_length: &mut usize,
+        read_data: &mut i64,
+    ) -> Result<Option<&[u8]>, IstreamException> {
+        *line_length = 0;
+        *read_data = 0;
+        let span = self.next_line_fallible(
+            |buffer| {
+                stream
+                    .read_block(buffer)
+                    .map(|result| (result.gcount(), result.is_good()))
+            },
+            read_data,
+        )?;
+        Ok(span.map(|span| self.line_for_span(span)))
+    }
+
     /// Reads a C-file-style block, preserving its sticky EOF/error indicators;
     /// `buffer.read_stream_file(&mut file, 4, &mut count)`.
     pub fn read_stream_file<R: Read>(
@@ -156,24 +197,39 @@ impl ReadLineBuffer {
     where
         F: FnMut(&mut [u8]) -> (usize, bool),
     {
+        match self.next_line_fallible(
+            |buffer| Ok::<_, std::convert::Infallible>(read_block(buffer)),
+            read_data,
+        ) {
+            Ok(span) => span,
+            Err(never) => match never {},
+        }
+    }
+
+    fn next_line_fallible<F, E>(
+        &mut self,
+        mut read_block: F,
+        read_data: &mut i64,
+    ) -> Result<Option<LineSpan>, E>
+    where
+        F: FnMut(&mut [u8]) -> Result<(usize, bool), E>,
+    {
         let mut continued = false;
         loop {
             if self.position == 0 || self.position >= self.last_read {
-                // The native code stores gcount() before it checks bad().
-                let (block_count, succeeded) = read_block(&mut self.read_buffer);
-                self.last_read = block_count;
-                if !succeeded {
-                    return None;
+                let (count, good) = read_block(&mut self.read_buffer)?;
+                self.last_read = count;
+                if !good {
+                    return Ok(None);
                 }
-                *read_data = self.last_read as i64;
-                if self.last_read == 0 {
-                    return self.take_final_line();
+                *read_data = count as i64;
+                if count == 0 {
+                    return Ok(self.take_final_line());
                 }
                 self.position = 0;
             }
-            let start = self.position;
-            if let Some(span) = self.scan_block(start, &mut continued) {
-                return Some(span);
+            if let Some(span) = self.scan_block(self.position, &mut continued) {
+                return Ok(Some(span));
             }
         }
     }

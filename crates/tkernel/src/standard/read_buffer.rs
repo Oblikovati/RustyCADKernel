@@ -2,10 +2,12 @@
 
 //! `Standard_ReadBuffer`: reads a stream in fixed-size chunks through a 4096-byte cache.
 use super::stream_fill::fill_from;
-use super::{Failure, exceptions};
+use super::{Failure, IstreamException, IstreamStream, exceptions};
 use bytemuck::AnyBitPattern;
 use std::io::Read;
 mod file_chunks;
+#[cfg(test)]
+mod istream_chunks;
 
 /// Size of the native `myBuffer` cache.
 const CACHE: usize = 4096;
@@ -93,15 +95,31 @@ impl ReadBuffer {
         &mut self,
         stream: &mut impl Read,
     ) -> Result<Option<T>, Failure> {
+        self.check_stream_chunk_size::<T>()?;
         let size = size_of::<T>();
-        if size > self.chunk_len {
-            return Err(exceptions::program_error(&format!(
-                "Standard_ReadBuffer::ReadChunk: a {size}-byte value does not fit a {}-byte chunk",
-                self.chunk_len
-            )));
-        }
         let chunk = self.read_data_chunk(stream);
         Ok(chunk.map(|bytes| bytemuck::pod_read_unaligned(&bytes[..size])))
+    }
+
+    /// Reads a chunk through the exception-mask-aware istream protocol;
+    /// `let chunk = buffer.read_data_chunk_istream(&mut stream)?`.
+    pub fn read_data_chunk_istream<R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+    ) -> Result<Option<&[u8]>, IstreamException> {
+        let start = self.next_chunk_istream(stream)?;
+        Ok(start.map(|start| &self.cache[start..start + self.chunk_len]))
+    }
+
+    /// Reads a typed chunk while returning masked istream failures;
+    /// `let value = buffer.read_chunk_istream::<u32, _>(&mut stream)?`.
+    pub fn read_chunk_istream<T: AnyBitPattern, R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+    ) -> Result<Option<T>, ReadChunkIstreamError> {
+        self.check_stream_chunk_size::<T>()?;
+        let chunk = self.read_data_chunk_istream(stream)?;
+        Ok(chunk.map(|bytes| bytemuck::pod_read_unaligned(&bytes[..size_of::<T>()])))
     }
 
     /// `readRawDataChunk`: advances within the cache or refills it; returns the chunk offset.
@@ -116,40 +134,108 @@ impl ReadBuffer {
     where
         F: FnMut(&mut [u8]) -> (usize, bool),
     {
-        let advanced = self.position? + self.chunk_len;
-        if advanced < self.end {
-            self.position = Some(advanced);
-            return Some(advanced);
+        match self
+            .next_chunk_fallible(|buffer| Ok::<_, std::convert::Infallible>(read_block(buffer)))
+        {
+            Ok(start) => start,
+            Err(never) => match never {},
         }
-        self.position = None;
-        self.refill(&mut read_block)
     }
 
-    /// Reads as many whole chunks as the cache holds, or the data left; `None` at the end
-    /// of data or after a short read.
-    fn refill<F>(&mut self, read_block: &mut F) -> Option<usize>
+    fn next_chunk_istream<R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+    ) -> Result<Option<usize>, IstreamException> {
+        self.next_chunk_fallible(|buffer| {
+            stream
+                .read_block(buffer)
+                .map(|result| (result.gcount(), result.is_good()))
+        })
+    }
+
+    fn next_chunk_fallible<F, E>(&mut self, mut read_block: F) -> Result<Option<usize>, E>
     where
-        F: FnMut(&mut [u8]) -> (usize, bool),
+        F: FnMut(&mut [u8]) -> Result<(usize, bool), E>,
+    {
+        let Some(position) = self.position else {
+            return Ok(None);
+        };
+        let advanced = position + self.chunk_len;
+        if advanced < self.end {
+            self.position = Some(advanced);
+            return Ok(Some(advanced));
+        }
+        self.position = None;
+        self.refill_fallible(&mut read_block)
+    }
+
+    /// Reads whole cache chunks; a failed refill leaves data_read unchanged.
+    fn refill_fallible<F, E>(&mut self, read_block: &mut F) -> Result<Option<usize>, E>
+    where
+        F: FnMut(&mut [u8]) -> Result<(usize, bool), E>,
     {
         let left = self.data_len - self.data_read;
         if left <= 0 {
-            return None;
+            return Ok(None);
         }
         let to_read = if self.buffer_len as i64 > left {
             left as usize
         } else {
             self.buffer_len
         };
-        let (count, succeeded) = read_block(&mut self.cache[..to_read]);
+        let (count, succeeded) = read_block(&mut self.cache[..to_read])?;
         if !succeeded || count != to_read {
-            return None;
+            return Ok(None);
         }
         self.position = Some(0);
         self.end = to_read;
         self.data_read += to_read as i64;
-        Some(0)
+        Ok(Some(0))
+    }
+
+    fn check_stream_chunk_size<T: AnyBitPattern>(&self) -> Result<(), Failure> {
+        let size = size_of::<T>();
+        if size > self.chunk_len {
+            return Err(exceptions::program_error(&format!(
+                "Standard_ReadBuffer::ReadChunk: a {size}-byte value does not fit a {}-byte chunk",
+                self.chunk_len
+            )));
+        }
+        Ok(())
     }
 }
+
+/// Error from an exception-aware typed chunk read.
+#[derive(Debug)]
+pub enum ReadChunkIstreamError {
+    /// The requested Rust value is larger than the native chunk.
+    InvalidChunk(Failure),
+    /// The native stream exception mask was triggered.
+    Stream(IstreamException),
+}
+
+impl From<Failure> for ReadChunkIstreamError {
+    fn from(error: Failure) -> Self {
+        Self::InvalidChunk(error)
+    }
+}
+
+impl From<IstreamException> for ReadChunkIstreamError {
+    fn from(error: IstreamException) -> Self {
+        Self::Stream(error)
+    }
+}
+
+impl std::fmt::Display for ReadChunkIstreamError {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InvalidChunk(error) => std::fmt::Display::fmt(error, formatter),
+            Self::Stream(error) => std::fmt::Display::fmt(error, formatter),
+        }
+    }
+}
+
+impl std::error::Error for ReadChunkIstreamError {}
 
 /// The length `Init` keeps: whole chunks only (C++ `%` on `int64_t`, rounding toward zero)
 /// unless the payload is partial; `truncated_length(13, 4, false) == 12`.
