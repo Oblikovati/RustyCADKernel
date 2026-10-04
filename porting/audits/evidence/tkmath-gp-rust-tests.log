@@ -1,0 +1,90 @@
+   Compiling rustycad-cmath v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/cmath)
+   Compiling rustycad-tkernel v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkmath)
+   Compiling rustycad-tkg2d v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkg2d)
+   Compiling rustycad-tkg3d v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tktopalgo)
+   Compiling rustycad-tkprim v0.1.0 (/tmp/rustycad-tkmath-gp-audit-receipt/crates/tkprim)
+    Finished `test` profile [unoptimized] target(s) in 29.63s
+     Running tests/gp_quaternion.rs (/tmp/rustycad-tkmath-gp-math-audit-target/debug/deps/gp_quaternion-d28c92d2dd21201b)
+
+running 5 tests
+test gp_QuaternionTest__OCC25574_EulerAnglesConsistency ... ok
+test gp_QuaternionTest__OCC25574_ExtrinsicIntrinsicCorrespondence ... ok
+test gp_QuaternionTest__OCC25574_EulerAxisRotationPreservesAxis ... ok
+test gp_QuaternionTest__OCC25574_IntrinsicZYX_vs_ExtrinsicXYZ ... ok
+test gp_QuaternionTest__OCC25574_YawPitchRollRoundTrip ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gp_trsf.rs (/tmp/rustycad-tkmath-gp-math-audit-target/debug/deps/gp_trsf-74942f7fb4a54f02)
+
+running 1 test
+test gp_TrsfTest__OCC23361_TransformationComposition ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gp_trsf3d_behavior.rs (/tmp/rustycad-tkmath-gp-math-audit-target/debug/deps/gp_trsf3d_behavior-56735989eae1a5f9)
+
+running 8 tests
+test mirror_products_follow_the_branch_table ... ok
+test frame_changes_quaternions_and_planar_copies ... ok
+test general_transform_members ... ok
+test mat4_and_json_round_trip ... ok
+test mirrors_store_native_forms ... ok
+test scale_factor_translation_and_rotation_part_rederive_forms ... ok
+test set_values_factors_a_cube_root_scale ... ok
+test trsf_transforms_mutates_coordinates_using_scale_and_location ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gp_vec.rs (/tmp/rustycad-tkmath-gp-math-audit-target/debug/deps/gp_vec-1e976153b0f30ab8)
+
+running 18 tests
+test gp_VecTest__AddSubtract ... ok
+test gp_VecTest__Angle ... ok
+test gp_VecTest__CoordinateConstructor ... ok
+test gp_VecTest__Cross ... ok
+test gp_VecTest__CrossMagnitude ... ok
+test gp_VecTest__DefaultConstructor ... ok
+test gp_VecTest__DirConstructor ... ok
+test gp_VecTest__Dot ... ok
+test gp_VecTest__DotCross_TripleScalarProduct ... ok
+test gp_VecTest__IsNormal ... ok
+test gp_VecTest__IsOpposite ... ok
+test gp_VecTest__IsParallel ... ok
+test gp_VecTest__Magnitude ... ok
+test gp_VecTest__MultiplyDivide ... ok
+test gp_VecTest__Normalize ... ok
+test gp_VecTest__Reverse ... ok
+test gp_VecTest__SetLinearForm ... ok
+test gp_VecTest__TwoPointConstructor ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gp_xyz.rs (/tmp/rustycad-tkmath-gp-math-audit-target/debug/deps/gp_xyz-db24aaf070086926)
+
+running 17 tests
+test gp_XYZTest__Accessors ... ok
+test gp_XYZTest__Add ... ok
+test gp_XYZTest__CoordinateConstructor ... ok
+test gp_XYZTest__Cross ... ok
+test gp_XYZTest__CrossMagnitude ... ok
+test gp_XYZTest__CrossSquareMagnitude ... ok
+test gp_XYZTest__DefaultConstructor ... ok
+test gp_XYZTest__Dot ... ok
+test gp_XYZTest__Divide ... ok
+test gp_XYZTest__DotCross ... ok
+test gp_XYZTest__IsEqual ... ok
+test gp_XYZTest__Modulus ... ok
+test gp_XYZTest__Multiply ... ok
+test gp_XYZTest__SetCoord ... ok
+test gp_XYZTest__SetLinearForm ... ok
+test gp_XYZTest__SquareModulus ... ok
+test gp_XYZTest__Subtract ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
