@@ -7,7 +7,8 @@
 //! here the evaluator is a `&mut dyn AdvApproxEvaluatorFunction` borrowed for the
 //! computation (closures implement it), and the cutting strategies implement
 //! [`AdvApproxCutting`]. The native result handles become `Option` values that are
-//! `None` where the native handle is null.
+//! `None` where the native handle is null. Evaluators can keep value-style inputs
+//! or override [`AdvApproxEvaluation`] handling to observe native in/out pointers.
 mod approx_a_function;
 mod approximation;
 mod cutting;
@@ -19,7 +20,7 @@ mod simple_approx;
 pub use approx_a_function::{AdvApproxApproxAFunction, SubSpaceTolerances};
 pub use approximation::{AdvApproxApproximationInput, AdvApproxApproximationOutput, approximation};
 pub use cutting::{AdvApproxCutting, AdvApproxDichoCutting, AdvApproxPrefAndRec};
-pub use evaluator::AdvApproxEvaluatorFunction;
+pub use evaluator::{AdvApproxEvaluation, AdvApproxEvaluatorFunction};
 pub use simple_approx::AdvApproxSimpleApprox;
 
 use rustycad_tkernel::tcollection::AsciiString;

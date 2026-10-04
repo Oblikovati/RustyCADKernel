@@ -5,8 +5,8 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adv_approx::{
     AdvApproxApproxAFunction, AdvApproxApproximationInput, AdvApproxApproximationOutput,
-    AdvApproxCutting, AdvApproxDichoCutting, AdvApproxEvaluatorFunction, AdvApproxPrefAndRec,
-    AdvApproxSimpleApprox, approximation,
+    AdvApproxCutting, AdvApproxDichoCutting, AdvApproxEvaluation, AdvApproxEvaluatorFunction,
+    AdvApproxPrefAndRec, AdvApproxSimpleApprox, approximation,
 };
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Point3};
@@ -93,6 +93,28 @@ struct Evaluator {
 
 impl AdvApproxEvaluatorFunction for Evaluator {
     fn evaluate(&mut self, dimension: i32, _: [f64; 2], t: f64, d: i32, result: &mut [f64]) -> i32 {
+        self.evaluate_values(dimension, t, d, result)
+    }
+
+    fn evaluate_native(&mut self, call: &mut AdvApproxEvaluation<'_>) {
+        if self.mode == 3 && self.calls == 0 {
+            call.start_end[1] = 2.0;
+            *call.parameter = 0.25;
+        }
+        if self.mode == 3 && self.calls == 4 {
+            *call.derivative_request = 1;
+        }
+        *call.error_code = self.evaluate_values(
+            *call.dimension,
+            *call.parameter,
+            *call.derivative_request,
+            call.result,
+        );
+    }
+}
+
+impl Evaluator {
+    fn evaluate_values(&mut self, dimension: i32, t: f64, d: i32, result: &mut [f64]) -> i32 {
         self.calls += 1;
         if (self.mode == 1 && d == 2) || (self.mode == 2 && self.calls == self.fail_at) {
             return 1;

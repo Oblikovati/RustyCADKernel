@@ -14,6 +14,10 @@ use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::plib::{self, JacobiPolynomial};
 use std::io;
 
+#[path = "simple_approx/evaluation.rs"]
+mod evaluation;
+use evaluation::EvaluationState;
+
 /// The approximator of one span (`AdvApprox_SimpleApprox`); it keeps the evaluator
 /// borrowed, as the native object keeps its pointer;
 /// `AdvApproxSimpleApprox::new(3, 1, Shape::C1, 20, 25, &jacobi, &mut f)?`.
@@ -117,8 +121,8 @@ impl<'e> AdvApproxSimpleApprox<'e> {
         max_degree: i32,
     ) -> Result<(), Failure> {
         self.done = false;
-        let first_last: [f64; 2] = [first, last];
-        if !self.hermite_part(first_last)? || !self.gauss_sums(first_last)? {
+        let mut evaluation = EvaluationState::new(self.total_dimension, [first, last]);
+        if !self.hermite_part(&mut evaluation)? || !self.gauss_sums(&mut evaluation)? {
             return Ok(());
         }
         self.q_coefficients()?;
@@ -128,18 +132,21 @@ impl<'e> AdvApproxSimpleApprox<'e> {
     }
 
     // Evaluates the function; false when the evaluator reports an error.
-    fn evaluate(&mut self, first_last: [f64; 2], t: f64, derive: i32, out: &mut [f64]) -> bool {
-        let dimension: i32 = self.total_dimension;
-        self.evaluator
-            .evaluate(dimension, first_last, t, derive, out)
-            == 0
+    fn evaluate(
+        &mut self,
+        state: &mut EvaluationState,
+        parameter: &mut f64,
+        derivative: &mut i32,
+        result: &mut [f64],
+    ) -> bool {
+        state.evaluate(self.evaluator, parameter, derivative, result)
     }
 
     // The end constraints, scaled to [-1, 1], and their Hermite interpolant R(t).
-    fn hermite_part(&mut self, first_last: [f64; 2]) -> Result<bool, Failure> {
+    fn hermite_part(&mut self, state: &mut EvaluationState) -> Result<bool, Failure> {
         let mut result: Vec<f64> = vec![0.0; self.total_dimension as usize];
-        for (param, at_last) in [(first_last[0], false), (first_last[1], true)] {
-            if !self.end_constraints(first_last, param, at_last, &mut result)? {
+        for (param, at_last) in [(state.interval[0], false), (state.interval[1], true)] {
+            if !self.end_constraints(state, param, at_last, &mut result)? {
                 return Ok(false);
             }
         }
@@ -158,14 +165,16 @@ impl<'e> AdvApproxSimpleApprox<'e> {
 
     fn end_constraints(
         &mut self,
-        first_last: [f64; 2],
+        state: &mut EvaluationState,
         param: f64,
         at_last: bool,
         result: &mut [f64],
     ) -> Result<bool, Failure> {
-        let fact: f64 = (first_last[1] - first_last[0]) / 2.;
-        for derive in (0..=self.niv_constr).rev() {
-            if !self.evaluate(first_last, param, derive, result) {
+        let fact: f64 = state.fact;
+        let mut param: f64 = param;
+        let mut derive: i32 = self.niv_constr;
+        while derive >= 0 {
+            if !self.evaluate(state, &mut param, &mut derive, result) {
                 return Ok(false);
             }
             if derive >= 1 {
@@ -184,22 +193,24 @@ impl<'e> AdvApproxSimpleApprox<'e> {
                     .set_value(idim, derive, value)
                     .map_err(errors::array_bounds)?;
             }
+            derive -= 1;
         }
         Ok(true)
     }
 
     // F(t_i) + F(-t_i) - R(t_i) - R(-t_i) into SomTab and the differences into DifTab.
-    fn gauss_sums(&mut self, first_last: [f64; 2]) -> Result<bool, Failure> {
+    fn gauss_sums(&mut self, state: &mut EvaluationState) -> Result<bool, Failure> {
         let td: usize = self.total_dimension as usize;
         let mut fti: Vec<f64> = vec![0.0; td];
         let (alin, blin) = (
-            (first_last[1] - first_last[0]) / 2.,
-            (first_last[1] + first_last[0]) / 2.,
+            (state.interval[1] - state.interval[0]) / 2.,
+            (state.interval[1] + state.interval[0]) / 2.,
         );
         let half: i32 = self.nb_gauss_points / 2;
+        let mut derive: i32 = 0;
         for i in 1..=half {
-            let tip: f64 = alin * at(&self.tab_points, i)? + blin;
-            if !self.evaluate(first_last, tip, 0, &mut fti) {
+            let mut tip: f64 = alin * at(&self.tab_points, i)? + blin;
+            if !self.evaluate(state, &mut tip, &mut derive, &mut fti) {
                 return Ok(false);
             }
             let start: usize = i as usize * td;
@@ -207,12 +218,12 @@ impl<'e> AdvApproxSimpleApprox<'e> {
             self.dif_tab.as_mut_slice()[start..start + td].copy_from_slice(&fti);
         }
         for i in 1..=half {
-            if !self.negative_side(first_last, (alin, blin), i, &mut fti)? {
+            if !self.negative_side(state, (alin, blin), i, &mut derive, &mut fti)? {
                 return Ok(false);
             }
         }
         if self.nb_gauss_points % 2 == 1 {
-            return self.center_value(first_last, blin, &mut fti);
+            return self.center_value(state, blin, &mut derive, &mut fti);
         }
         Ok(true)
     }
@@ -235,14 +246,15 @@ impl<'e> AdvApproxSimpleApprox<'e> {
 
     fn negative_side(
         &mut self,
-        first_last: [f64; 2],
+        state: &mut EvaluationState,
         (alin, blin): (f64, f64),
         i: i32,
+        derive: &mut i32,
         fti: &mut [f64],
     ) -> Result<bool, Failure> {
         let ti: f64 = at(&self.tab_points, i)?;
-        let tin: f64 = -alin * ti + blin;
-        if !self.evaluate(first_last, tin, 0, fti) {
+        let mut tin: f64 = -alin * ti + blin;
+        if !self.evaluate(state, &mut tin, derive, fti) {
             return Ok(false);
         }
         let (rpti, rmti) = (self.hermite_value(ti)?, self.hermite_value(-ti)?);
@@ -259,12 +271,14 @@ impl<'e> AdvApproxSimpleApprox<'e> {
     // For an odd point count, F(0) - R(0) at the head of both tables.
     fn center_value(
         &mut self,
-        first_last: [f64; 2],
+        state: &mut EvaluationState,
         blin: f64,
+        derive: &mut i32,
         fti: &mut [f64],
     ) -> Result<bool, Failure> {
         let ti: f64 = at(&self.tab_points, 0)?;
-        if !self.evaluate(first_last, blin, 0, fti) {
+        let mut parameter: f64 = blin;
+        if !self.evaluate(state, &mut parameter, derive, fti) {
             return Ok(false);
         }
         let rpti: Vec<f64> = self.hermite_value(ti)?;

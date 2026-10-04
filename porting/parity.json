@@ -50856,17 +50856,17 @@
       "upstream_id": "AdvApprox_EvaluatorFunction::Evaluate(int*,double StartEnd [2],double*,int*,double*,int*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
-      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
       "status": "implemented",
-      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+      "notes": "The value-style `evaluate` adapter covers ordinary callbacks; `evaluate_native` plus AdvApproxEvaluation preserves mutation of Dimension, StartEnd, Parameter, DerivativeRequest, Result, and ErrorCode across native sampling calls. The result slice remains the originally allocated dimension; increasing Dimension beyond that storage is undefined in native OCCT and cannot be made memory-safe as an equivalent operation. The mutable protocol was replayed through AdvApprox_SimpleApprox against the pinned OCCT probe."
     },
     {
       "upstream_id": "AdvApprox_EvaluatorFunction::operator()(int*,double StartEnd [2],double*,int*,double*,int*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
-      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
       "status": "implemented",
-      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+      "notes": "The function-call shortcut delegates to the same Rust mutable callback protocol (`evaluate_native`/AdvApproxEvaluation); the value-style adapter remains available for ordinary evaluators. The backing result slice is bounded by its original allocation, so a native callback that enlarges Dimension beyond that storage remains outside the safe parity domain."
     },
     {
       "upstream_id": "AdvApprox_PrefAndRec::AdvApprox_PrefAndRec(const NCollection_Array1<double>&,const NCollection_Array1<double>&,double)",
