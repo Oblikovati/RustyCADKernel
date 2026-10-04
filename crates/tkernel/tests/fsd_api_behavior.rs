@@ -8,6 +8,8 @@ mod binary;
 mod cmp_dialect_inheritance;
 #[path = "fsd_api_behavior/fakes.rs"]
 mod fakes;
+#[path = "fsd_api_behavior/object_hook_delegation.rs"]
+mod object_hook_delegation;
 #[path = "fsd_api_behavior/text.rs"]
 mod text;
 #[path = "fsd_api_behavior/text_dialect_state.rs"]

@@ -12,6 +12,64 @@ fn format_error(expected: u8) -> Failure {
 }
 
 impl<D: TextDialect> TextFile<D> {
+    /// Calls qualified FSD header writing without redispatching the dialect hook.
+    /// Example: `file.write_fsd_object_header_base(4, 2)`.
+    pub fn write_fsd_object_header_base(
+        &mut self,
+        reference: i32,
+        type_number: i32,
+    ) -> Result<(), Failure> {
+        self.stream.insert_bytes(b"\n#");
+        self.stream.insert_integer(i64::from(reference));
+        self.stream.insert_bytes(b"=%");
+        self.stream.insert_integer(i64::from(type_number));
+        self.check_written("FSD_File::WritePersistentObjectHeader")
+    }
+
+    /// Calls qualified FSD object opening, using `member` for native error context.
+    /// Example: `file.begin_fsd_write_object_base("FSD_File::BeginWriteObjectData")`.
+    pub fn begin_fsd_write_object_base(&mut self, member: &str) -> Result<(), Failure> {
+        self.stream.insert_bytes(b"( ");
+        self.check_written(member)
+    }
+
+    /// Calls qualified FSD object closing; `last` selects persistent-object framing.
+    /// Example: `file.end_fsd_write_object_base(false, "FSD_File::EndWriteObjectData")`.
+    pub fn end_fsd_write_object_base(&mut self, last: bool, member: &str) -> Result<(), Failure> {
+        self.stream.insert_bytes(if last { b")" } else { b") " });
+        self.check_written(member)
+    }
+
+    /// Calls qualified FSD header parsing without redispatching the dialect hook.
+    /// Example: `file.read_fsd_object_header_base(&mut reference, &mut type_number)`.
+    pub fn read_fsd_object_header_base(
+        &mut self,
+        reference: &mut i32,
+        type_number: &mut i32,
+    ) -> Result<(), Failure> {
+        self.expect_marker(b'#')?;
+        self.extract_integer(reference, "FSD_File::ReadPersistentObjectHeader")?;
+        self.expect_marker(b'=')?;
+        self.expect_marker(b'%')?;
+        self.extract_integer(type_number, "FSD_File::ReadPersistentObjectHeader")
+    }
+
+    /// Calls qualified FSD object opening without redispatching the dialect hook.
+    /// Example: `file.begin_fsd_read_object_base()`.
+    pub fn begin_fsd_read_object_base(&mut self) -> Result<(), Failure> {
+        self.expect_marker(b'(')
+    }
+
+    /// Calls qualified FSD object closing and optional line-end validation.
+    /// Example: `file.end_fsd_read_object_base(true)`.
+    pub fn end_fsd_read_object_base(&mut self, last: bool) -> Result<(), Failure> {
+        self.expect_marker(b')')?;
+        if last {
+            self.expect_line_end(false)?;
+        }
+        Ok(())
+    }
+
     /// The native marker loops: `get(c); while (c != marker) { if (IsEnd() || c != ' ')
     /// throw Storage_StreamFormatError(); get(c); }`.
     pub(crate) fn expect_marker(&mut self, marker: u8) -> Result<(), Failure> {
