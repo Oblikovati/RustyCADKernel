@@ -32,6 +32,9 @@ the candidate intersection changes both range endpoints without replacing the
 Bezier dynamic type.
 `bspline_line_pcurves` provides the matching degree-one B-spline case, including
 the source knot interval `[0,1]` and preserved B-spline representation.
+`tangent_parabola_line` checks a repeated/tangent intersection from a quadratic
+Bezier curve against a line; OCCT selects the common parameter `0.5` and trims
+both p-curves to that point.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
 fallback, finite-surface bounds handling, trimmed and offset wrappers, and

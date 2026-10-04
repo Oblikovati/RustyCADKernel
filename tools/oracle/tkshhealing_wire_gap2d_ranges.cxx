@@ -278,6 +278,32 @@ void run_bspline_line_pcurves() {
   print_result("bspline_line_pcurves", tool, tool.FixGap2d(2, false));
 }
 
+void run_tangent_parabola_line() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0.25, 0), gp_Pnt(1, 0.25, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  NCollection_Array1<gp_Pnt2d> parabolaPoles(1, 3);
+  parabolaPoles.SetValue(1, gp_Pnt2d(0, 0));
+  parabolaPoles.SetValue(2, gp_Pnt2d(0.5, 0.5));
+  parabolaPoles.SetValue(3, gp_Pnt2d(1, 0));
+  builder.UpdateEdge(first, new Geom2d_BezierCurve(parabolaPoles), face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  Handle(Geom2d_Curve) line = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0, 0.25), gp_Dir2d(1, 0)));
+  builder.UpdateEdge(second, line, face, 1e-7);
+  builder.Range(second, face, 0., 1.);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("tangent_parabola_line", tool, tool.FixGap2d(2, false));
+}
+
 void run_trimmed_surface_clip() {
   BRep_Builder builder;
   TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
@@ -308,6 +334,7 @@ int main() {
   run_offset_line_pcurves();
   run_bezier_line_pcurves();
   run_bspline_line_pcurves();
+  run_tangent_parabola_line();
   run_parallel_projection();
   run_trimmed_surface_clip();
 }

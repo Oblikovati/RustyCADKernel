@@ -26,6 +26,29 @@ pub(super) fn set_bspline_line_pcurves(
     set_pcurve_range(&builder, second_edge, face, &second, 1.0);
 }
 
+pub(super) fn set_tangent_pcurves(
+    face: &Face,
+    first_edge: &rustycad_tkbrep::topods::Edge,
+    second_edge: &rustycad_tkbrep::topods::Edge,
+) {
+    let builder = BRepBuilder::default();
+    let parabola_poles = [
+        Point2::new(0.0, 0.0),
+        Point2::new(0.5, 0.5),
+        Point2::new(1.0, 0.0),
+    ];
+    let parabola: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dBezierCurve::new(&Array1::from_shared(&parabola_poles, 1)).unwrap())
+            .cast();
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::new(0.0, 0.25),
+        Direction2::new(1.0, 0.0).unwrap(),
+    )))
+    .cast();
+    set_pcurve_range(&builder, first_edge, face, &parabola, 1.0);
+    set_pcurve_range(&builder, second_edge, face, &line, 1.0);
+}
+
 pub(super) fn bspline_line(start: Point2, end: Point2) -> Handle<dyn Geom2dCurve> {
     let poles = [start, end];
     let knots = [0.0, 1.0];
