@@ -23,6 +23,20 @@ fn curve_cache_handle_projects_to_standard_transient() {
     assert_base_projection(&handle);
 }
 
+#[test]
+fn curve_cache_debug_keeps_the_pre_transient_fields_and_order() {
+    let knots: Array1<'static, f64> = flat_knots();
+    let poles: Array1<'static, Point3> = flat_poles();
+    let cache: Cache = Cache::new(1, false, &knots, &poles, None).unwrap();
+    let rendered: String = format!("{cache:?}");
+    let positions: [usize; 4] = ["is_rational", "params", "row_length", "poles_weights"]
+        .map(|field| rendered.find(field).unwrap());
+
+    assert!(rendered.starts_with("Cache {"));
+    assert!(positions.windows(2).all(|pair| pair[0] < pair[1]));
+    assert!(!rendered.contains("base:"));
+}
+
 fn assert_base_projection(handle: &Handle<Cache>) {
     let base: Handle<StandardTransient> = handle.cast();
     assert!(base.is_instance_name("BSplCLib_Cache"));
