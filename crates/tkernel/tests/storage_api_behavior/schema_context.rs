@@ -5,7 +5,6 @@ use rustycad_tkernel::storage::{
     BaseDriver, CallBack, Data, DefaultCallBack, OpenMode, Schema, SchemaContext, StreamException,
 };
 use std::{
-    any::TypeId,
     fmt::Write,
     sync::{
         Arc,
@@ -84,8 +83,8 @@ fn retained_write(schema: &Schema) -> Handle<Data> {
 
 fn binding_sequence(first: &Schema, second: &Schema) -> String {
     let current = retained_write(first);
-    let original: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
-    let replacement: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
+    let original = Handle::new(DefaultCallBack::default()).cast::<dyn CallBack>();
+    let replacement = Handle::new(DefaultCallBack::default()).cast::<dyn CallBack>();
     let mut output = String::from("write raised\n");
     writeln!(
         output,
@@ -94,18 +93,16 @@ fn binding_sequence(first: &Schema, second: &Schema) -> String {
         i32::from(second.has_type_binding(&"A".into()).unwrap())
     )
     .unwrap();
-    first
-        .bind_type(&"A".into(), Some(original.clone()))
-        .unwrap();
-    let shared = second.type_binding(&"A".into()).unwrap().unwrap();
+    first.bind_type(&"A".into(), &original).unwrap();
+    let shared = second.type_binding(&"A".into()).unwrap();
     writeln!(
         output,
         "{} {}",
         i32::from(second.has_type_binding(&"A".into()).unwrap()),
-        i32::from(Arc::ptr_eq(&shared, &original))
+        i32::from(shared == original)
     )
     .unwrap();
-    second.bind_type(&"A".into(), Some(replacement)).unwrap();
+    second.bind_type(&"A".into(), &replacement).unwrap();
     append_binding_identity(&mut output, first, &original, &current);
     append_null_binding(&mut output, first, second, &current);
     output
@@ -114,10 +111,10 @@ fn binding_sequence(first: &Schema, second: &Schema) -> String {
 fn append_binding_identity(
     output: &mut String,
     schema: &Schema,
-    original: &Arc<dyn CallBack>,
+    original: &Handle<dyn CallBack>,
     current: &Handle<Data>,
 ) {
-    let retained = schema.type_binding(&"A".into()).unwrap().unwrap();
+    let retained = schema.type_binding(&"A".into()).unwrap();
     let count = current
         .get()
         .unwrap()
@@ -125,12 +122,7 @@ fn append_binding_identity(
         .get()
         .unwrap()
         .number_of_types();
-    writeln!(
-        output,
-        "{} {count}",
-        i32::from(Arc::ptr_eq(&retained, original))
-    )
-    .unwrap();
+    writeln!(output, "{} {count}", i32::from(retained == *original)).unwrap();
 }
 
 fn append_null_binding(
@@ -139,7 +131,7 @@ fn append_null_binding(
     second: &Schema,
     current: &Handle<Data>,
 ) {
-    second.bind_type(&"B".into(), None).unwrap();
+    second.bind_type(&"B".into(), &Handle::default()).unwrap();
     let count = current
         .get()
         .unwrap()
@@ -151,13 +143,13 @@ fn append_null_binding(
         output,
         "{} {} {} {count}",
         i32::from(first.has_type_binding(&"B".into()).unwrap()),
-        i32::from(first.type_binding(&"B".into()).unwrap().is_none()),
-        i32::from(first.type_binding(&"missing".into()).unwrap().is_none())
+        i32::from(first.type_binding(&"B".into()).unwrap().is_null()),
+        i32::from(first.type_binding(&"missing".into()).unwrap().is_null())
     )
     .unwrap();
 }
 
-fn invoke_all_callback_overrides(bound: &Arc<dyn CallBack>, schema: &Schema) {
+fn invoke_all_callback_overrides(bound: &Handle<dyn CallBack>, schema: &Schema) {
     let persistent = bound.new_persistent();
     let mut driver = ScriptedDriver::opened(OpenMode::Read);
     bound.add(&persistent, schema).unwrap();
@@ -166,31 +158,31 @@ fn invoke_all_callback_overrides(bound: &Arc<dyn CallBack>, schema: &Schema) {
     assert!(persistent.is_some());
 }
 
-fn bind_custom_callback(schema: &Schema, concrete: &Arc<DispatchCallBack>) -> Arc<dyn CallBack> {
-    let callback: Arc<dyn CallBack> = concrete.clone();
-    schema
-        .bind_type(&"dispatch".into(), Some(callback.clone()))
-        .unwrap();
-    schema.type_binding(&"dispatch".into()).unwrap().unwrap()
-}
-
-fn callback_runtime_report(bound: &Arc<dyn CallBack>) -> String {
+fn callback_runtime_report(
+    bound: &Handle<dyn CallBack>,
+    binding_count: i32,
+    copied_count: i32,
+    this_matches: bool,
+    cast_count: i32,
+    derived_matches: bool,
+    base_matches: bool,
+) -> String {
     format!(
-        "1 4\n{}\n{}\n",
-        bound.dynamic_type().name(),
+        "{binding_count}\n{copied_count} {}\n{cast_count} {} {}\n1 4\n{}\n{}\n",
+        i32::from(this_matches),
+        i32::from(derived_matches),
+        i32::from(base_matches),
+        bound.dynamic_type().unwrap().name(),
         i32::from(bound.is_kind(<dyn CallBack as RuntimeTyped>::static_type()))
     )
 }
 
-fn assert_callback_runtime(bound: &Arc<dyn CallBack>, concrete: &DispatchCallBack) {
-    assert_eq!(bound.dynamic_type().name(), "TestDispatchCallBack");
+fn assert_callback_runtime(bound: &Handle<dyn CallBack>, concrete: &Handle<DispatchCallBack>) {
+    assert_eq!(bound.dynamic_type().unwrap().name(), "TestDispatchCallBack");
     assert!(bound.is_kind(<dyn CallBack as RuntimeTyped>::static_type()));
     assert!(bound.is_kind(StandardTransient::static_type()));
-    let projected = bound.project(TypeId::of::<DispatchCallBack>()).unwrap();
-    assert!(std::ptr::eq(
-        projected.downcast_ref::<DispatchCallBack>().unwrap(),
-        concrete
-    ));
+    let projected = bound.cast::<DispatchCallBack>();
+    assert!(projected == *concrete);
 }
 
 #[test]
@@ -236,7 +228,7 @@ fn completed_write_clears_the_shared_context_for_every_schema() {
     let first = Schema::with_context(Arc::new(FixedClock), context.clone());
     let second = Schema::with_context(Arc::new(FixedClock), context);
     let current = retained_write(&first);
-    second.bind_type(&"A".into(), None).unwrap();
+    second.bind_type(&"A".into(), &Handle::default()).unwrap();
     first
         .write(&mut ScriptedDriver::opened(OpenMode::Read), &current)
         .unwrap();
@@ -254,18 +246,39 @@ fn completed_write_clears_the_shared_context_for_every_schema() {
 fn custom_callback_binding_preserves_rtti_identity_and_virtual_dispatch() {
     let schema = Schema::with_context(Arc::new(FixedClock), SchemaContext::default());
     let _current = retained_write(&schema);
-    let concrete = Arc::new(DispatchCallBack {
+    let concrete = Handle::new(DispatchCallBack {
         parent: StandardTransient::default(),
         calls: AtomicUsize::new(0),
     });
-    let bound = bind_custom_callback(&schema, &concrete);
-    let callback: Arc<dyn CallBack> = concrete.clone();
-    assert!(Arc::ptr_eq(&callback, &bound));
-    assert_callback_runtime(&bound, concrete.as_ref());
+    let callback = concrete.cast::<dyn CallBack>();
+    schema.bind_type(&"dispatch".into(), &callback).unwrap();
+    let binding_count = callback.ref_count();
+    let bound = schema.type_binding(&"dispatch".into()).unwrap();
+    assert!(bound == callback);
+    assert_callback_runtime(&bound, &concrete);
+    let copied_count = bound.ref_count();
+    assert_eq!(copied_count, 4);
+    let transient = bound.get().unwrap().transient_base();
+    let this_matches = std::ptr::eq(transient.this().unwrap(), transient);
+    let derived = bound.cast::<DispatchCallBack>();
+    let base = bound.cast::<StandardTransient>();
+    let cast_count = bound.ref_count();
+    let derived_matches = derived == concrete;
+    let base_matches = base == bound;
+    assert_eq!(cast_count, 6);
+    assert!(derived_matches && base_matches && this_matches);
     invoke_all_callback_overrides(&bound, &schema);
-    assert_eq!(concrete.calls.load(Ordering::Relaxed), 4);
+    assert_eq!(concrete.get().unwrap().calls.load(Ordering::Relaxed), 4);
     assert_eq!(
-        callback_runtime_report(&bound),
+        callback_runtime_report(
+            &bound,
+            binding_count,
+            copied_count,
+            this_matches,
+            cast_count,
+            derived_matches,
+            base_matches,
+        ),
         include_str!("../../../../tools/oracle/tkernel_storage_schema_callback_dispatch.expected")
     );
 }

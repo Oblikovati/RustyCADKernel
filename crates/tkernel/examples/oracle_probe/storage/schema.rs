@@ -12,7 +12,6 @@ use rustycad_tkernel::storage::{
 use rustycad_tkernel::tcollection::AsciiString;
 use std::rc::Rc;
 use std::str::SplitWhitespace;
-use std::sync::Arc;
 
 /// The output of a schema-level operation, or `None` when `op` belongs elsewhere.
 pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
@@ -243,9 +242,11 @@ fn callback_script(input: &mut SplitWhitespace<'_>) -> String {
         let name = ascii(value);
         out += &format!(" {op}");
         match op {
-            "add" => schema
-                .add_read_unknown_type_callback(&name, Some(Arc::new(DefaultCallBack::default()))),
-            "addn" => schema.add_read_unknown_type_callback(&name, None),
+            "add" => schema.add_read_unknown_type_callback(
+                &name,
+                &Handle::new(DefaultCallBack::default()).cast(),
+            ),
+            "addn" => schema.add_read_unknown_type_callback(&name, &Handle::default()),
             "rm" => schema.remove_read_unknown_type_callback(&name),
             "ls" => {
                 let list = schema.installed_callback_list();
@@ -262,8 +263,8 @@ fn callback_script(input: &mut SplitWhitespace<'_>) -> String {
             "dont" => schema.dont_use_default_callback(),
             "is" => out += &format!("={}", u8::from(schema.is_using_default_callback())),
             "rst" => schema.reset_default_callback(),
-            "setn" => schema.set_default_callback(None),
-            _ => out += &format!("={}", u8::from(schema.default_callback().is_some())),
+            "setn" => schema.set_default_callback(&Handle::default()),
+            _ => out += &format!("={}", u8::from(!schema.default_callback().is_null())),
         }
     }
     out

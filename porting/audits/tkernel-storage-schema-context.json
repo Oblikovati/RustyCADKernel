@@ -22,7 +22,9 @@
     "src/FoundationClasses/TKernel/Storage/Storage_Schema.cxx": "7936e472284038427e49a18873aeac1ad1f87f17b0978e4dfd83582620142f64",
     "src/FoundationClasses/TKernel/Storage/Storage_CallBack.hxx": "21f9a3b7507e745c6a7d8bc2d64d0aadac0ad1ee9ba6216fc1ac3b92151f61f9",
     "src/FoundationClasses/TKernel/Storage/Storage_DefaultCallBack.hxx": "fb8de535e14a2aca3e1d3f7d7565b3fab8fc1ae73ff4578cf89a0b9d021f44d3",
-    "src/FoundationClasses/TKernel/Storage/Storage_DefaultCallBack.cxx": "08791dacf031d8ce534021e5178f28ce9e378bc9d261ac185c8883193df52472"
+    "src/FoundationClasses/TKernel/Storage/Storage_DefaultCallBack.cxx": "08791dacf031d8ce534021e5178f28ce9e378bc9d261ac185c8883193df52472",
+    "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+    "src/FoundationClasses/TKernel/Storage/Storage_TypedCallBack.hxx": "cf54e249c46b56642dd4d986152e39fcd6d186a5caf82a261beec34e99a38026"
   },
   "profile": "Linux x86_64 GCC C++17 -O2; sequential cross-schema write failure and custom callback dispatch",
   "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_storage_schema_context.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-storage-schema-context",
@@ -30,40 +32,51 @@
   "artifact_sha256": {
     "tools/oracle/tkernel_storage_schema_context.cxx": "137c059872807f0656d3088d237fec9032f0069536c7f1305cc2844f51969332",
     "tools/oracle/tkernel_storage_schema_context.expected": "15d3c8e11ca049250fadb165da30c03178599e7372bc21c10d96f0e10d5dde6c",
-    "tools/oracle/tkernel_storage_schema_callback_dispatch.cxx": "2bbfc38e67f62483b9647cec384338c50c68436e6c9d64141d0e1324a1cd0370",
-    "tools/oracle/tkernel_storage_schema_callback_dispatch.expected": "0ad962a20af7d7553aacd0d05fc9c8c0875fc84e4f2ebbb599f65443b009c31c"
+    "tools/oracle/tkernel_storage_schema_callback_dispatch.cxx": "0b22c4b64a4a3e25113d13a4d8dc5a05f8c45f8c9bf27e43ef7feddd246d5866",
+    "tools/oracle/tkernel_storage_schema_callback_dispatch.expected": "bb732c0fd370566cddf38fe47f64ba5856aae57f50c2151de07655834ccb3a9f"
   },
   "legacy_declaration_count_changed": false,
   "full_api_parity_proven": false,
   "behavior_change": "Default schemas now share the process current-data slot rather than keeping one per instance. Constructors clear that shared slot, completed writes clear it, non-write exceptions leave it available to other schemas. Context injection preserves independent test/session state.",
   "limitations": [
     "Native null current-data dereference is replaced by Standard_NullObject.",
-    "Rust callback implementations must satisfy Send + Sync because bindings are shared through Arc; native same-thread callbacks with thread-confined unsynchronized mutable state therefore have no direct Rust implementation. Unsynchronized concurrent native access is undefined and is not claimed."
+    "Rust callback implementations must satisfy Send + Sync because Transient requires thread-safe object ownership; native same-thread callbacks with thread-confined unsynchronized mutable state therefore have no direct Rust implementation. Unsynchronized concurrent native access is undefined and is not claimed."
   ],
   "validation": {
-    "package_test_passed": 2621,
+    "package_test_passed": 2423,
     "package_test_failed": 0,
     "strict_clippy_passed": true,
     "supplemental_tests": 4,
     "native_fixture_rows": 5,
-    "callback_dispatch_native_rows": 3,
-    "tkernel_all_targets_passed": 2418,
+    "callback_dispatch_native_rows": 6,
+    "tkernel_all_targets_passed": 2423,
     "tkernel_all_targets_failed": 0,
     "workspace_all_target_check_passed": true,
-    "callback_dispatch_native_exact_output": true
+    "callback_dispatch_native_exact_output": true,
+    "callback_handle_counts_match_native": true
   },
   "callback_rtti_fixture": {
     "source": "tools/oracle/tkernel_storage_schema_callback_dispatch.cxx",
     "expected": "tools/oracle/tkernel_storage_schema_callback_dispatch.expected",
-    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_storage_schema_callback_dispatch.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-storage-schema-callback-dispatch",
-    "run_command": "/tmp/tkernel-storage-schema-callback-dispatch <temporary-file-path>",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-tkernel-full/include/opencascade tools/oracle/tkernel_storage_schema_callback_dispatch.cxx -L target/occt-tkernel-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-tkernel-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel-storage-schema-callback-dispatch-handles",
+    "run_command": "/tmp/tkernel-storage-schema-callback-dispatch-handles <temporary-file-path> > /tmp/tkernel-storage-schema-callback-dispatch-handles.out",
     "observations": [
-      "retrieved callback handle preserves identity",
+      "retrieved callback handle preserves identity and contributes one StandardTransient reference",
+      "BindType stores one owning callback handle; TypeBinding returns another owning handle",
+      "This succeeds and points to the retrieved callback object while its handle is live",
+      "owning upcast to Standard_Transient and downcast to the custom callback preserve shared identity and native reference-count changes",
       "New/Add/Write/Read dispatch to custom overrides",
       "DynamicType reports the custom callback class",
-      "IsKind reports Storage_CallBack ancestry",
-      "the Rust runtime descriptor projects the exact custom callback type, matching native down_cast availability"
+      "IsKind reports Storage_CallBack ancestry"
     ],
-    "rust_counterpart": "crates/tkernel/tests/storage_api_behavior/schema_context.rs::custom_callback_binding_preserves_rtti_identity_and_virtual_dispatch"
+    "rust_counterpart": "crates/tkernel/tests/storage_api_behavior/schema_context.rs::custom_callback_binding_preserves_rtti_identity_and_virtual_dispatch",
+    "run_output": [
+      "3",
+      "4 1",
+      "6 1 1",
+      "1 4",
+      "TestDispatchCallBack",
+      "1"
+    ]
   }
 }

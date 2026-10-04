@@ -94032,7 +94032,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -94064,7 +94064,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -216801,7 +216801,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -235138,7 +235138,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::type_binding",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, owning callback-handle identity/refcount, This(), subclass override dispatch and runtime type ancestry. Rust stores and returns Handle<dyn CallBack>, including the native copy semantics. The remaining callback-domain gap is Send + Sync: a native same-thread callback with thread-confined unsynchronized mutable state cannot implement Rust Transient. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
     },
     {
       "upstream_id": "Storage_Schema::HasTypeBinding(const TCollection_AsciiString &) const",
@@ -235146,7 +235146,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::has_type_binding",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, owning callback-handle identity/refcount, This(), subclass override dispatch and runtime type ancestry. Rust stores and returns Handle<dyn CallBack>, including the native copy semantics. The remaining callback-domain gap is Send + Sync: a native same-thread callback with thread-confined unsynchronized mutable state cannot implement Rust Transient. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
     },
     {
       "upstream_id": "Storage_Schema::BindType(const TCollection_AsciiString &,const occ::handle<Storage_CallBack> &) const",
@@ -235154,7 +235154,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::bind_type",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, owning callback-handle identity/refcount, This(), subclass override dispatch and runtime type ancestry. Rust stores and returns Handle<dyn CallBack>, including the native copy semantics. The remaining callback-domain gap is Send + Sync: a native same-thread callback with thread-confined unsynchronized mutable state cannot implement Rust Transient. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
     },
     {
       "upstream_id": "gp_Trsf::Orthogonalize()",

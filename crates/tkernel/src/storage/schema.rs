@@ -30,7 +30,7 @@ pub struct Schema {
     parent: StandardTransient,
     callbacks: DataMap<AsciiString, Handle<TypedCallBack>>,
     callback_state: bool,
-    default_callback: Option<Arc<dyn CallBack>>,
+    default_callback: Handle<dyn CallBack>,
     name: AsciiString,
     version: AsciiString,
     current: SchemaContext,
@@ -57,7 +57,7 @@ impl Schema {
             parent: StandardTransient::default(),
             callbacks: DataMap::default(),
             callback_state: false,
-            default_callback: None,
+            default_callback: Handle::default(),
             name: AsciiString::default(),
             version: AsciiString::default(),
             current: context,
@@ -101,14 +101,14 @@ impl Schema {
 }
 
 impl Schema {
-    /// `AddReadUnknownTypeCallBack`: binds `callback` to `type_name`; a null callback is
-    /// ignored; `schema.add_read_unknown_type_callback(&name, Some(callback))`.
+    /// `AddReadUnknownTypeCallBack`: binds a non-null `callback` to `type_name`;
+    /// `schema.add_read_unknown_type_callback(&name, &callback)`.
     pub fn add_read_unknown_type_callback(
         &mut self,
         type_name: &AsciiString,
-        callback: Option<Arc<dyn CallBack>>,
+        callback: &Handle<dyn CallBack>,
     ) {
-        if callback.is_some() {
+        if !callback.is_null() {
             let typed = Handle::new(TypedCallBack::new(type_name, callback));
             self.callbacks.bind(type_name.clone(), typed);
         }
@@ -148,19 +148,19 @@ impl Schema {
         self.callback_state
     }
 
-    /// `SetDefaultCallBack`; `schema.set_default_callback(Some(callback))`.
-    pub fn set_default_callback(&mut self, callback: Option<Arc<dyn CallBack>>) {
-        self.default_callback = callback;
+    /// `SetDefaultCallBack`; `schema.set_default_callback(&callback)`.
+    pub fn set_default_callback(&mut self, callback: &Handle<dyn CallBack>) {
+        self.default_callback = callback.clone();
     }
 
     /// `ResetDefaultCallBack`: back to a fresh `Storage_DefaultCallBack`.
     /// Example: `schema.reset_default_callback()`.
     pub fn reset_default_callback(&mut self) {
-        self.default_callback = Some(Arc::new(DefaultCallBack::default()));
+        self.default_callback = Handle::new(DefaultCallBack::default()).cast();
     }
 
-    /// `DefaultCallBack`; `schema.default_callback()`.
-    pub fn default_callback(&self) -> Option<Arc<dyn CallBack>> {
+    /// `DefaultCallBack`; `schema.default_callback()` returns a null handle when absent.
+    pub fn default_callback(&self) -> Handle<dyn CallBack> {
         self.default_callback.clone()
     }
 }

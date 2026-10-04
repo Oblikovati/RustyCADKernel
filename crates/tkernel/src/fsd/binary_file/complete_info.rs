@@ -149,7 +149,7 @@ fn read_types(stream: &mut IoStream, target: &mut Target<'_>) -> Result<(), Fail
         if let Some(types) = types.get() {
             types.add_type(&name, number);
         }
-        callbacks.set_value(number, None)?;
+        callbacks.set_value(number, &Handle::default())?;
     }
     target.callbacks = Some(callbacks);
     Ok(())
