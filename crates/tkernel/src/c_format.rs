@@ -1,5 +1,8 @@
 //! Shared C-style formatting engine used by Message helpers and safe `Standard_CString` wrappers.
 //!
+//! Message_Msg::Arg formats are user data (`%-10.3f`, `%05d`, `%s`) passed to native
+//! Sprintf. Message::FillTime and OSD timing output also depend on its C-locale layout.
+//!
 //! It implements literal and dynamic width/precision, `c_format` numeric/text conversions,
 //! and glibc layout rules. The public wrappers validate a narrower defined subset before render.
 mod float;
@@ -112,23 +115,15 @@ fn validate_dynamic_arguments(
     mut argument_index: usize,
     offset: usize,
 ) -> Result<usize, FormatError> {
-    if spec.dynamic_width {
-        validate_star_argument(
-            spec,
-            args.get(argument_index),
-            "an Int for dynamic width",
-            offset,
-        )?;
-        argument_index += 1;
-    }
-    if spec.dynamic_precision {
-        validate_star_argument(
-            spec,
-            args.get(argument_index),
-            "an Int for dynamic precision",
-            offset,
-        )?;
-        argument_index += 1;
+    let dimensions = [
+        (spec.dynamic_width, "an Int for dynamic width"),
+        (spec.dynamic_precision, "an Int for dynamic precision"),
+    ];
+    for (enabled, expected) in dimensions {
+        if enabled {
+            validate_star_argument(spec, args.get(argument_index), expected, offset)?;
+            argument_index += 1;
+        }
     }
     Ok(argument_index)
 }
@@ -254,6 +249,17 @@ fn render(
 
 fn parse_spec(format: &[u8], mut index: usize) -> (Spec, usize) {
     let mut spec = Spec::default();
+    index = parse_flags(format, index, &mut spec);
+    index = parse_width(format, index, &mut spec);
+    if format.get(index) == Some(&b'.') {
+        index = parse_precision(format, index + 1, &mut spec);
+    }
+    (spec.length, index) = length_modifier(format, index);
+    spec.conversion = format.get(index).copied().unwrap_or(0);
+    (spec, (index + 1).min(format.len()))
+}
+
+fn parse_flags(format: &[u8], mut index: usize, spec: &mut Spec) -> usize {
     while let Some(&flag) = format.get(index) {
         match flag {
             b'-' => spec.left = true,
@@ -265,13 +271,7 @@ fn parse_spec(format: &[u8], mut index: usize) -> (Spec, usize) {
         }
         index += 1;
     }
-    index = parse_width(format, index, &mut spec);
-    if format.get(index) == Some(&b'.') {
-        index = parse_precision(format, index + 1, &mut spec);
-    }
-    (spec.length, index) = length_modifier(format, index);
-    spec.conversion = format.get(index).copied().unwrap_or(0);
-    (spec, (index + 1).min(format.len()))
+    index
 }
 
 fn parse_width(format: &[u8], index: usize, spec: &mut Spec) -> usize {
