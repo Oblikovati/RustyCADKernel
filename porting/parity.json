@@ -230026,7 +230026,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::derivatives_local_into",
       "status": "partial",
-      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed coordinate derivative rows in original curve-parameter units. Native probe covers 2D polynomial degree-below-order and rational 3D non-unit span, both global/local entrypoints; Rust rational comparison tolerance 1e-14. Current explicit derivative-order range 0..=3; higher requests and complete protected-surface parity remain unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only."
+      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Direct native local order-5 quartic probe confirms defined non-rational higher orders beyond the header-documented 1..=3. Rational requests remain bounded to 0..=3 (native fixed temporary), with rational comparison tolerance 1e-14. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only; complete protected-surface parity remains unproven."
     },
     {
       "upstream_id": "math_Matrix::SetLowerRow(int) noexcept",
@@ -230083,6 +230083,14 @@
       "rust_item": "rustycad_tkmath::bsplslib::Cache::<rustycad_tkernel::standard::Transient>::dynamic_type",
       "status": "partial",
       "notes": "Cache descriptor, Standard_Transient ancestry, handle upcast and object identity now tested against native OCCT. Rust descriptor access returns a static RuntimeType reference; native descriptor Handle/reference-count semantics and integration with the separate mutable shared-cache wrapper are not fully established. See tools/oracle/tkmath_bsplslib_cache_rtti.md. Supplemental evidence only."
+    },
+    {
+      "upstream_id": "math_Householder::Perform(const math_Matrix&,const math_Matrix&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math::Householder::perform",
+      "status": "implemented",
+      "notes": "Protected reusable reduction hook on retained Q/Solution storage and constructor input bounds. Native derived probe confirms success -> zero-pivot not-done -> success transitions and new RHS solution values. Malformed native dimensions with disabled checks are outside this defined-input probe. See tools/oracle/tkmath_householder_perform_probe.cxx and crates/tkmath/tests/householder_perform_behavior.rs; supplemental evidence, no new legacy declaration."
     }
   ],
   "tests": [

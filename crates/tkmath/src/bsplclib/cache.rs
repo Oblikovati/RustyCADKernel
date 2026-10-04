@@ -211,15 +211,6 @@ impl Cache {
         output: &mut [f64],
     ) -> Result<(), Failure> {
         let local_param: f64 = self.local_parameter(parameter);
-        if !self.is_rational && derivative > 3 {
-            let needed: usize =
-                ensure_derivative_output_capacity(self, derivative, output.len(), true)?;
-            return self.derivatives_non_rational_local_into(
-                local_param,
-                derivative,
-                &mut output[..needed],
-            );
-        }
         self.derivatives_local_into(local_param, derivative, output)
     }
 
