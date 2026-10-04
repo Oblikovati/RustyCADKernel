@@ -83289,8 +83289,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_stream",
-      "status": "partial",
-      "notes": "Clang candidate ebd7fa14a40405498cbe2e2ea362a98885eeec44dcc3245bbdf455ed5a7f89a0 (bool(std::istream&,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. Native hook is protected and non-virtual; Rust exposes the same operation as a callable Read-generic method and reuses the line reader's fill logic. It preserves count and buffer contents on a preexisting stream error. The safe Rust surface rejects lengths beyond allocation, which are outside native's defined buffer domain. Native derived-class fixture: tools/oracle/tkernel_standard_read_stream_hook.cxx; FILE* overload remains unmapped."
+      "status": "implemented",
+      "notes": "Clang candidate ebd7fa14a40405498cbe2e2ea362a98885eeec44dcc3245bbdf455ed5a7f89a0 (bool(std::istream&,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. Native hook is protected and non-virtual; the Read-generic Rust method matches full reads, short EOF reads, bad/error state, partial byte counts, and buffer mutation. The safe Rust surface rejects lengths beyond allocation; that request is outside the native method's defined buffer domain. Native derived-class fixture: tools/oracle/tkernel_standard_read_stream_hook.cxx."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::readStream(FILE*,size_t,size_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_stream_file",
+      "status": "implemented",
+      "notes": "Clang candidate 7422cc72045e50c8967c6aadfdec9f61d0820846d74b8f8b7414ec5d69c785cc (bool(_IO_FILE*,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. FreadStream<R> supplies the FILE overload's sticky EOF/error indicators without a C ABI pointer. The native fopencookie fixture verifies partial count and buffer contents, persistent ferror while subsequent fread calls still read bytes, and EOF; Rust also provides ReadLineBuffer::read_line_file[_counted] to use this adapter with the templated line reader. Fixture: tools/oracle/tkernel_standard_read_file_stream.cxx."
     },
     {
       "upstream_id": "Standard_ReadLineBuffer::Clear()",
@@ -83306,7 +83314,7 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line",
       "status": "implemented",
-      "notes": "The line is returned as a slice whose length is the output length; the terminator is overwritten with NUL in place. Native quirks kept: a backslash that ends a read block in multiline mode makes later newlines part of the line, and an empty carry-over that never held a byte ends the stream (its Data() is NULL). The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+      "notes": "The line is returned as a slice whose length is the output length; the terminator is overwritten with NUL in place. Native quirks kept: a backslash that ends a read block in multiline mode makes later newlines part of the line, and an empty carry-over that never held a byte ends the stream (its Data() is NULL). Read-generic entry points model std::istream; read_line_file[_counted] use FreadStream to preserve FILE* sticky error/EOF state. The differential probe (services_ operations) compares it with the native kernel."
     },
     {
       "upstream_id": "Standard_ReadLineBuffer::ReadLine(Stream_T&,size_t&,int64_t&)",
@@ -83314,7 +83322,7 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line_counted",
       "status": "implemented",
-      "notes": "The overload with theReadData has a distinct Rust name; the count is the size of the last block read during the call, not the total. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+      "notes": "The overload with theReadData has a distinct Rust name; the count is the size of the last block read during the call, not the total. read_line_counted models std::istream; read_line_file_counted uses FreadStream so FILE* retains sticky ferror/feof state. The differential probe (services_ operations) compares the line behavior with the native kernel."
     },
     {
       "upstream_id": "Standard_ReadLineBuffer::IsMultilineMode() const",

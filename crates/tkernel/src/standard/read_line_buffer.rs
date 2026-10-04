@@ -1,6 +1,7 @@
 // Rust translation of FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Standard_ReadLineBuffer`: splits a stream into lines through a fixed-size read buffer.
+use super::FreadStream;
 use super::stream_fill::fill_from;
 use std::io::Read;
 mod scan;
@@ -78,11 +79,27 @@ impl ReadLineBuffer {
         read_data: &mut i64,
     ) -> Option<&[u8]> {
         *read_data = 0;
-        let span = self.next_line(stream, read_data)?;
-        Some(match span {
-            LineSpan::Buffer(start, length) => &self.read_buffer[start..start + length],
-            LineSpan::Carried(length) => &self.carried[..length],
-        })
+        let span = self.next_line(|buffer| read_rust_stream(stream, buffer), read_data)?;
+        Some(self.line_for_span(span))
+    }
+
+    /// Reads a line from an `fread`-style adapter, preserving sticky error state;
+    /// `buffer.read_line_file(&mut file)`. Empty lines are returned as empty slices.
+    pub fn read_line_file<R: Read>(&mut self, stream: &mut FreadStream<R>) -> Option<&[u8]> {
+        let mut read_data = 0;
+        self.read_line_file_counted(stream, &mut read_data)
+    }
+
+    /// Reads a file-adapted line and reports the last successful block size;
+    /// `buffer.read_line_file_counted(&mut file, &mut count)`.
+    pub fn read_line_file_counted<R: Read>(
+        &mut self,
+        stream: &mut FreadStream<R>,
+        read_data: &mut i64,
+    ) -> Option<&[u8]> {
+        *read_data = 0;
+        let span = self.next_line(|buffer| stream.read_block(buffer), read_data)?;
+        Some(self.line_for_span(span))
     }
 
     /// Reads at most `len` bytes into the internal buffer like the protected native stream hook;
@@ -102,6 +119,23 @@ impl ReadLineBuffer {
         !filled.failed
     }
 
+    /// Reads a C-file-style block, preserving its sticky EOF/error indicators;
+    /// `buffer.read_stream_file(&mut file, 4, &mut count)`.
+    pub fn read_stream_file<R: Read>(
+        &mut self,
+        stream: &mut FreadStream<R>,
+        len: usize,
+        read_len: &mut usize,
+    ) -> bool {
+        let Some(buffer) = self.read_buffer.get_mut(..len) else {
+            *read_len = 0;
+            return false;
+        };
+        let (count, is_good) = stream.read_block(buffer);
+        *read_len = count;
+        is_good
+    }
+
     /// True when backslash continuation is enabled (false by default); `buffer.is_multiline_mode()`.
     pub fn is_multiline_mode(&self) -> bool {
         self.multiline
@@ -118,13 +152,15 @@ impl ReadLineBuffer {
         self.put_gap = put_gap;
     }
 
-    fn next_line(&mut self, stream: &mut impl Read, read_data: &mut i64) -> Option<LineSpan> {
+    fn next_line<F>(&mut self, mut read_block: F, read_data: &mut i64) -> Option<LineSpan>
+    where
+        F: FnMut(&mut [u8]) -> (usize, bool),
+    {
         let mut continued = false;
         loop {
             if self.position == 0 || self.position >= self.last_read {
                 // The native code stores gcount() before it checks bad().
-                let mut block_count = 0;
-                let succeeded = self.read_stream(stream, self.read_buffer.len(), &mut block_count);
+                let (block_count, succeeded) = read_block(&mut self.read_buffer);
                 self.last_read = block_count;
                 if !succeeded {
                     return None;
@@ -139,6 +175,13 @@ impl ReadLineBuffer {
             if let Some(span) = self.scan_block(start, &mut continued) {
                 return Some(span);
             }
+        }
+    }
+
+    fn line_for_span(&self, span: LineSpan) -> &[u8] {
+        match span {
+            LineSpan::Buffer(start, length) => &self.read_buffer[start..start + length],
+            LineSpan::Carried(length) => &self.carried[..length],
         }
     }
 
@@ -164,4 +207,9 @@ impl ReadLineBuffer {
             .extend_from_slice(&self.read_buffer[start..end]);
         self.carried_allocated |= end > start;
     }
+}
+
+fn read_rust_stream(stream: &mut impl Read, buffer: &mut [u8]) -> (usize, bool) {
+    let filled = fill_from(stream, buffer);
+    (filled.count, !filled.failed)
 }
