@@ -1,7 +1,7 @@
 //! Argument/tool lists shared by BOPAlgo tools-based algorithms.
 use super::BOPAlgoBuilder;
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::{impl_transient, ncollection::List};
+use rustycad_tkernel::ncollection::List;
 use std::ops::{Deref, DerefMut};
 
 /// The source-pinned tool storage state of `BOPAlgo_ToolsProvider`.
@@ -15,13 +15,6 @@ pub struct BOPAlgoToolsProvider {
     tools: List<Shape>,
     tool_fence: rustycad_tkbrep::toptools::MapOfShape,
 }
-
-impl_transient!(
-    BOPAlgoToolsProvider,
-    "BOPAlgo_ToolsProvider",
-    BOPAlgoBuilder,
-    builder
-);
 
 impl Default for BOPAlgoToolsProvider {
     fn default() -> Self {
