@@ -1,4 +1,4 @@
-//! Multibyte conversion in the active C locale, with OCCT's buffer-sizing quirks.
+//! Multibyte conversion in the active locale, with OCCT's buffer-sizing quirks.
 use super::UtfString;
 use crate::ncollection::UtfUnit;
 #[cfg(not(target_os = "android"))]
@@ -7,9 +7,15 @@ use crate::ncollection::WideChar;
 #[cfg(all(unix, not(target_os = "android")))]
 #[path = "locale_unix.rs"]
 mod platform;
-#[cfg(all(not(unix), not(target_os = "android")))]
+#[cfg(windows)]
+#[path = "locale_windows.rs"]
+mod platform;
+#[cfg(all(not(unix), not(windows), not(target_os = "android")))]
 #[path = "locale_fallback.rs"]
 mod platform;
+#[cfg(all(test, not(windows), not(target_os = "android")))]
+#[path = "locale_windows.rs"]
+mod windows_locale_tests;
 
 /// Temporary wide-character conversion storage used by `NCollection_UtfStringTool`.
 ///
@@ -58,8 +64,8 @@ impl<T: UtfUnit> UtfString<T> {
     /// Replaces the contents with multibyte text in the active C locale (native `FromLocale`).
     ///
     /// Unix preserves the native `mblen` sizing quirk: the first character's byte count limits
-    /// converted wide characters. Invalid first characters or empty input clear the string.
-    /// Android bypasses locale conversion and interprets the bytes as UTF-8.
+    /// converted wide characters. Windows uses the active ANSI code page. Android bypasses
+    /// locale conversion and interprets the bytes as UTF-8.
     ///
     /// ```
     /// use rustycad_tkernel::ncollection::UtfString;
@@ -67,7 +73,11 @@ impl<T: UtfUnit> UtfString<T> {
     /// text.from_locale(b"abc", -1);
     /// #[cfg(target_os = "android")]
     /// assert_eq!(text.to_c_string(), b"abc\0");
-    /// #[cfg(not(target_os = "android"))]
+    /// #[cfg(windows)]
+    /// assert_eq!(text.to_c_string(), b"abc\0");
+    /// #[cfg(all(unix, not(target_os = "android")))]
+    /// assert_eq!(text.to_c_string(), b"a\0");
+    /// #[cfg(all(not(unix), not(windows), not(target_os = "android")))]
     /// assert_eq!(text.to_c_string(), b"a\0");
     /// ```
     pub fn from_locale(&mut self, text: &[u8], length: i32) {
@@ -76,9 +86,8 @@ impl<T: UtfUnit> UtfString<T> {
 
     /// Writes the string in the active C locale into `buffer` (native `ToLocale`, size = `buffer.len()`).
     ///
-    /// Unix preserves `wcstombs` and the native unsigned-result check: empty output reports false,
-    /// an unrepresentable symbol still reports true, and a full buffer has no terminator.
-    /// Android copies UTF-8 and reports false unless the buffer fits the converted text and NUL.
+    /// Unix preserves `wcstombs` and its native result quirks. Windows converts through the active
+    /// ANSI code page; Android copies UTF-8 and requires room for the converted text and NUL.
     ///
     /// ```
     /// use rustycad_tkernel::ncollection::UtfString;
