@@ -94,8 +94,9 @@ impl<W: LoopWay> MakeLoops<W> {
     pub(super) fn stored(&self, index: usize) -> Result<&Link, Failure> {
         self.links.find_key(index)
     }
-    /// The link of a signed index, as the protected `getLink`; `builder.get_link(-1)`.
-    pub fn get_link(&self, segment: i32) -> Link {
+    /// The link of a signed index, as protected `getLink`; invalid indices fail;
+    /// `builder.get_link(-1)?`.
+    pub fn get_link(&self, segment: i32) -> Result<Link, Failure> {
         get_link(&self.links, segment)
     }
     /// Builds loops in two passes (the second one restarts from hanging links) and returns
@@ -187,10 +188,12 @@ impl<W: LoopWay> MakeLoops<W> {
     pub fn get_nb_hanging(&self) -> i32 {
         self.hang_indices.extent()
     }
-    /// Appends the hanging links, oriented by their sign, in map order; `builder.get_hanging_links(&mut list)`.
-    pub fn get_hanging_links(&self, links: &mut ListOfLink) {
+    /// Appends hanging links in map order; invalid internal indices return a range failure;
+    /// `builder.get_hanging_links(&mut list)?`.
+    pub fn get_hanging_links(&self, links: &mut ListOfLink) -> Result<(), Failure> {
         for index in self.hang_indices.iter() {
-            links.append(self.get_link(index));
+            links.append(self.get_link(index)?);
         }
+        Ok(())
     }
 }

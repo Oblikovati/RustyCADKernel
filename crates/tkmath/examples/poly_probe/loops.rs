@@ -81,7 +81,7 @@ fn run<W: LoopWay>(algo: &mut MakeLoops<W>, links: &[Link], edits: &Edits) -> Re
         print!("] ");
     }
     let mut hanging = ListOfLink::default();
-    algo.get_hanging_links(&mut hanging);
+    algo.get_hanging_links(&mut hanging)?;
     print!("{} ", algo.get_nb_hanging());
     hanging.iter().for_each(loop_link);
     Ok(())
