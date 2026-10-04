@@ -51,8 +51,17 @@ impl<D: TextDialect> TextFile<D> {
     }
 
     /// Skips spaces/newlines and reads to the next delimiter; `file.read_word()`.
-    /// Embedded NUL bytes truncate each native C-string chunk.
     pub fn read_word(&mut self) -> AsciiString {
+        D::read_word(self)
+    }
+
+    /// Reads up to `size` characters from the current position; `file.read_char(4)`.
+    pub fn read_char(&mut self, size: usize) -> AsciiString {
+        D::read_char(self, size)
+    }
+
+    /// Base `FSD_File::ReadWord`, used by the default dialect hook.
+    pub(crate) fn fsd_read_word(&mut self) -> AsciiString {
         let mut byte = 0_u8;
         while !self.stream.eof() {
             self.stream.get(&mut byte);
@@ -77,9 +86,8 @@ impl<D: TextDialect> TextFile<D> {
         word
     }
 
-    /// Reads up to `size` characters from the current position; `file.read_char(4)`.
-    /// A failed `get` appends the previous byte, as the native method does.
-    pub fn read_char(&mut self, size: usize) -> AsciiString {
+    /// Base `FSD_File::ReadChar`; failed `get` appends the preceding byte as natively.
+    pub(crate) fn fsd_read_char(&mut self, size: usize) -> AsciiString {
         let mut buffer = AsciiString::default();
         let mut byte = 0_u8;
         let mut count = 0;

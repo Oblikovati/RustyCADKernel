@@ -9,7 +9,6 @@ use super::{DriverFileSystem, FileOpenMode};
 use crate::standard::Failure;
 use crate::storage::{BaseDriver, DriverBase, IoStream, OpenMode, Position, StorageError};
 use crate::tcollection::AsciiString;
-use std::marker::PhantomData;
 use std::rc::Rc;
 mod dialect;
 mod hooks;
@@ -45,18 +44,40 @@ pub struct TextFile<D: TextDialect> {
     base: DriverBase,
     file_system: Rc<dyn DriverFileSystem>,
     stream: IoStream,
-    dialect: PhantomData<D>,
+    // Keeps legacy `new()` usable for dialect types without imposing `Default`.
+    dialect: Option<D>,
 }
 
 impl<D: TextDialect> TextFile<D> {
-    /// `FSD_File()`/`FSD_CmpFile()`: a closed stream; `File::new(file_system)`.
+    /// Creates a stateless closed FSD stream; `File::new(file_system)`.
+    /// Use `with_dialect` when the dialect needs owned state.
     pub fn new(file_system: Rc<dyn DriverFileSystem>) -> Self {
+        Self::construct(file_system, None)
+    }
+
+    /// Creates a text driver with owned per-instance dialect state.
+    /// Example: `TextFile::with_dialect(fs, MyDialect::default())`.
+    pub fn with_dialect(file_system: Rc<dyn DriverFileSystem>, dialect: D) -> Self {
+        Self::construct(file_system, Some(dialect))
+    }
+
+    fn construct(file_system: Rc<dyn DriverFileSystem>, dialect: Option<D>) -> Self {
         Self {
             base: DriverBase::default(),
             file_system,
             stream: IoStream::default(),
-            dialect: PhantomData,
+            dialect,
         }
+    }
+
+    /// Reads installed dialect state; `driver.dialect().is_some()`.
+    pub fn dialect(&self) -> Option<&D> {
+        self.dialect.as_ref()
+    }
+
+    /// Mutably accesses installed dialect state; `driver.dialect_mut().is_some()`.
+    pub fn dialect_mut(&mut self) -> Option<&mut D> {
+        self.dialect.as_mut()
     }
 
     /// `MagicNumber`: `"FSDFILE"` or `"CMPFILE"`; `File::magic_number()`.
@@ -75,7 +96,7 @@ impl<D: TextDialect> TextFile<D> {
         if status != StorageError::Ok {
             return Ok(status);
         }
-        let magic = file.read_char(D::MAGIC_NUMBER.len());
+        let magic = file.fsd_read_char(D::MAGIC_NUMBER.len());
         file.close()?;
         Ok(super::binary_file::magic_status(&magic, D::MAGIC_NUMBER))
     }
