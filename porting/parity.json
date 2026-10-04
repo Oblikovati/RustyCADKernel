@@ -229804,6 +229804,213 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::CurveDataVariant",
       "status": "implemented",
       "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ExtrusionData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceExtrusionData",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ExtrusionData::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceExtrusionData::basis_curve",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ExtrusionData::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceExtrusionData::direction",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ExtrusionData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceExtrusionData::eval_rep",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::RevolutionData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceRevolutionData",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::RevolutionData::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceRevolutionData::basis_curve",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::RevolutionData::Axis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceRevolutionData::axis",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::RevolutionData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceRevolutionData::eval_rep",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData::BasisAdaptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData::basis_adaptor",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData::EquivalentAdaptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData::equivalent_adaptor",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData::OffsetSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData::offset_surface",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData::Offset",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData::offset",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOffsetData::eval_rep",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BezierData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBezierData",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BezierData::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBezierData::surface",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BezierData::Cache",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBezierData::cache",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BezierData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBezierData::eval_rep",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BSplineData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBSplineData",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BSplineData::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBSplineData::surface",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BSplineData::Cache",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBSplineData::cache",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BSplineData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceBSplineData::eval_rep",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::SurfaceDataVariant",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "source_sha256": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceDataVariant",
+      "status": "implemented",
+      "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
     }
   ],
   "tests": [
