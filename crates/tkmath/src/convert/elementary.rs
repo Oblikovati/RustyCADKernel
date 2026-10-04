@@ -39,6 +39,27 @@ pub(super) struct SurfaceSizes {
     pub(super) v_degree: i32,
 }
 
+impl SurfaceSizes {
+    /// Construction limits for an elementary-surface conversion; `SurfaceSizes::new(4, 3, 3, 2, 2, 1)`.
+    pub(super) const fn new(
+        u_poles: i32,
+        v_poles: i32,
+        u_knots: i32,
+        v_knots: i32,
+        u_degree: i32,
+        v_degree: i32,
+    ) -> Self {
+        Self {
+            u_poles,
+            v_poles,
+            u_knots,
+            v_knots,
+            u_degree,
+            v_degree,
+        }
+    }
+}
+
 fn allocation(error: ArrayError) -> Failure {
     Failure::with_type(
         "Standard_OutOfMemory",
@@ -61,6 +82,21 @@ fn checked(accessor: &str, index: i32, count: i32) -> Result<(), Failure> {
 }
 
 impl ElementarySurfaceToBSplineSurface {
+    /// Allocates maximum pole/knot storage for a custom elementary-surface conversion;
+    /// `ElementarySurfaceToBSplineSurface::with_capacity(4, 3, 3, 2, 2, 1)?`.
+    pub fn with_capacity(
+        u_poles: i32,
+        v_poles: i32,
+        u_knots: i32,
+        v_knots: i32,
+        u_degree: i32,
+        v_degree: i32,
+    ) -> Result<Self, Failure> {
+        Self::with_sizes(SurfaceSizes::new(
+            u_poles, v_poles, u_knots, v_knots, u_degree, v_degree,
+        ))
+    }
+
     /// The protected base constructor with 1-based arrays of the maximal sizes;
     /// `ElementarySurfaceToBSplineSurface::with_sizes(sizes)?`.
     pub(super) fn with_sizes(sizes: SurfaceSizes) -> Result<Self, Failure> {
@@ -82,24 +118,61 @@ impl ElementarySurfaceToBSplineSurface {
         })
     }
 
-    /// Trims the maximal arrays to the counts the constructor settled on, keeping
-    /// every element at its (row, column) (`Finalize`); `surface.finalize()?`.
-    pub(super) fn finalize(&mut self) -> Result<(), Failure> {
-        let (nu, nv) = (self.nb_u_poles, self.nb_v_poles);
-        if self.poles.nb_rows() as i64 != i64::from(nu)
-            || self.poles.nb_columns() as i64 != i64::from(nv)
-        {
-            self.poles
-                .resize_trim_bounds(1, nu, 1, nv, true)
-                .map_err(allocation)?;
-        }
-        if self.weights.nb_rows() as i64 != i64::from(nu)
-            || self.weights.nb_columns() as i64 != i64::from(nv)
-        {
-            self.weights
-                .resize_trim_bounds(1, nu, 1, nv, true)
-                .map_err(allocation)?;
-        }
+    /// Sets the active counts before finalization; `surface.set_actual_counts(2, 2, 2, 1)`.
+    pub fn set_actual_counts(&mut self, u_poles: i32, v_poles: i32, u_knots: i32, v_knots: i32) {
+        (self.nb_u_poles, self.nb_v_poles) = (u_poles, v_poles);
+        (self.nb_u_knots, self.nb_v_knots) = (u_knots, v_knots);
+    }
+
+    /// Sets the output degrees; `surface.set_degrees(2, 1)`.
+    pub fn set_degrees(&mut self, u_degree: i32, v_degree: i32) {
+        (self.u_degree, self.v_degree) = (u_degree, v_degree);
+    }
+
+    /// Sets output periodicity; `surface.set_periodicity(true, false)`.
+    pub fn set_periodicity(&mut self, u_periodic: bool, v_periodic: bool) {
+        (self.u_periodic, self.v_periodic) = (u_periodic, v_periodic);
+    }
+
+    /// Mutable pole storage before finalization; `surface.poles_mut()[(1, 1)] = point`.
+    pub fn poles_mut(&mut self) -> &mut Array2<'static, Point3> {
+        &mut self.poles
+    }
+
+    /// Mutable weight storage before finalization; `surface.weights_mut()[(1, 1)] = 1.0`.
+    pub fn weights_mut(&mut self) -> &mut Array2<'static, f64> {
+        &mut self.weights
+    }
+
+    /// Mutable U-knot storage before finalization; `surface.u_knots_mut()[1] = 0.0`.
+    pub fn u_knots_mut(&mut self) -> &mut Array1<'static, f64> {
+        &mut self.u_knots
+    }
+
+    /// Mutable V-knot storage before finalization; `surface.v_knots_mut()[1] = 0.0`.
+    pub fn v_knots_mut(&mut self) -> &mut Array1<'static, f64> {
+        &mut self.v_knots
+    }
+
+    /// Mutable U multiplicities before finalization; `surface.u_multiplicities_mut()[1] = 3`.
+    pub fn u_multiplicities_mut(&mut self) -> &mut Array1<'static, i32> {
+        &mut self.u_mults
+    }
+
+    /// Mutable V multiplicities before finalization; `surface.v_multiplicities_mut()[1] = 2`.
+    pub fn v_multiplicities_mut(&mut self) -> &mut Array1<'static, i32> {
+        &mut self.v_mults
+    }
+
+    /// Shrinks arrays to active counts in native order, preserving elements;
+    /// `surface.finalize()?`.
+    pub fn finalize(&mut self) -> Result<(), Failure> {
+        resize_grid(&mut self.poles, self.nb_u_poles, self.nb_v_poles)?;
+        resize_grid(&mut self.weights, self.nb_u_poles, self.nb_v_poles)?;
+        self.trim_knots()
+    }
+
+    fn trim_knots(&mut self) -> Result<(), Failure> {
         resize_knots(&mut self.u_knots, self.nb_u_knots)?;
         resize_knots(&mut self.u_mults, self.nb_u_knots)?;
         resize_knots(&mut self.v_knots, self.nb_v_knots)?;
@@ -253,4 +326,19 @@ fn resize_knots<T: Default + Clone>(
         return Ok(());
     }
     array.resize_bounds(1, count, true).map_err(allocation)
+}
+
+fn resize_grid<T: Default + Clone>(
+    array: &mut Array2<'static, T>,
+    rows: i32,
+    columns: i32,
+) -> Result<(), Failure> {
+    if array.nb_rows() as i64 == i64::from(rows) && array.nb_columns() as i64 == i64::from(columns)
+    {
+        return Ok(());
+    }
+    // The native ResizeWithTrim keeps each value at its original (row, column).
+    array
+        .resize_trim_bounds(1, rows, 1, columns, true)
+        .map_err(allocation)
 }

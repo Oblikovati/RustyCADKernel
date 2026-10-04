@@ -18994,6 +18994,22 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Convert_ElementarySurfaceToBSplineSurface(int,int,int,int,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::with_capacity",
+      "status": "partial",
+      "notes": "Protected storage constructor exposed as a safe Rust capacity initializer. The derived-class fixture fills all arrays before observation; C++ subclass ABI and protected layout are not represented. Compiler declaration ID 7ad17411e0bbe391a2f184bb21d9c9818b8ee5b7f17e182db1222e27cd829173; evidence: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Finalize()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::finalize",
+      "status": "partial",
+      "notes": "Native ordered array trimming, retained initialized values, idempotence, prior mutation on failure, and Standard_OutOfMemory class match the pinned derived-class fixture. The negative-count diagnostic text differs because Rust rejects invalid array bounds before the native allocator fails; the custom memory-manager message is unproven. Compiler declaration ID da07de0f77704c07687378f79e76954b88b8648029fb42534ee1fa7be95749e6; evidence: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
       "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UDegree() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
