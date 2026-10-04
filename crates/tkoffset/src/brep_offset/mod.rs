@@ -1,5 +1,6 @@
 //! BRep offset geometry helpers.
 mod collapse_singularities;
+mod offset_face;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
@@ -27,5 +28,6 @@ pub use simple_offset_vertex::{
 pub use simple_offset_vertex_map::{OffsetVertexData, build_simple_offset_vertices};
 pub use surface::{BRepOffsetStatus, surface};
 
+pub use offset_face::BRepOffsetOffsetFace;
 pub use simple_offset_wall::build_simple_offset_wall;
 pub use sphere_join::build_vertex_arc_join;
