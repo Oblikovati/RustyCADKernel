@@ -3,8 +3,8 @@
 **In progress; toolkit acceptance is not complete.** The source inventory contains
 120 GoogleTest files and 2023 declaration candidates. All 2023 declarations are
 mapped and pass the integrated source gate in native and Rust. The three Bug30655
-tests use equivalent Rust triangulation fixtures; they do not yet reproduce the
-native full-face meshing setup described below.
+tests now construct the same primitive shapes and run the Rust incremental mesher
+before exercising the distance queries.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -1656,24 +1656,21 @@ regression tests.
 
 ## Recovered foundation legacy mappings
 
-Eighteen newly mapped declarations bring TKMath to 2,020 of 2,023 declaration candidates
-across 118 complete source suites. These tests use higher-level crates as dev dependencies,
-so the production TKMath dependency layer is unchanged. That audit left three meshed Bug30655 distance declarations; the mappings below now
-cover them with explicit triangulation fixture substitutes. Toolkit runtime, DRAW, and API
-acceptance remain incomplete.
+Eighteen newly mapped declarations brought TKMath to 2,020 of 2,023 declaration candidates
+across 118 complete source suites. The three remaining meshed Bug30655 distance declarations
+are also mapped; TKMath's production dependency layer is unchanged. Toolkit runtime, DRAW,
+and API acceptance remain incomplete.
 
 ### Bug30655 distance regressions
 
-The three remaining TKMath declarations are now mapped in
-`crates/tkmath/tests/bvh_bug30655.rs`: the signed box distance field and pairwise
-box/sphere distances. The tests exercise the Rust BVH distance code against the
-same dimensions, signed-value, completion, and analytic-distance checks, and the
-pinned native GTest declarations all pass.
+The three mapped declarations are in `crates/tkmath/tests/bvh_bug30655.rs` and
+retain the native assertions and meshing parameters. The Rust tests build boxes and
+spheres with the primitive builders, run `BRepMesh_IncrementalMesh`, and query the
+resulting triangulations. The native suite passes all three pinned declarations.
 
-Rust does not yet provide `BRepMesh_IncrementalMesh`. The tests therefore use
-standalone triangulations: a closed box mesh for the field and box-pair cases, and
-local spherical surface patches for the sphere-pair case. These fixtures verify
-the translated BVH behavior and expected values, but they do not reproduce the
-native full-face meshing or the sphere's full triangle set. Replacing them with
-`TopoDS` primitive construction plus the Rust BRep mesher remains necessary for
-an exact fixture-level port.
+The sphere fixture exposed missing interior nodes in the production sphere range
+splitter. `crates/tkmesh/src/brep_mesh/sphere_nodes.rs` now follows the pinned
+`BRepMesh_SphereRangeSplitter` sampling, including its alternating half-step rows.
+The optimized focused Rust test passes in about 45 seconds; the regular debug test
+takes about 253 seconds. This remains a mesher performance cost to address without
+changing the fixture's deflection or node ordering.

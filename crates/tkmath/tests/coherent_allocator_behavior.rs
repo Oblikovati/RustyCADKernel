@@ -130,6 +130,21 @@ fn heap_policy_instances_can_remove_each_others_ring_lists() {
 }
 
 #[test]
+fn common_and_heap_allocators_release_each_others_node_members() {
+    let common = BaseAllocator::fresh_common();
+    let heap = BaseAllocator::fresh_heap();
+    assert_cross_backend_node_removal(&heap, &common);
+    assert_cross_backend_node_removal(&common, &heap);
+}
+
+fn assert_cross_backend_node_removal(owner: &BaseAllocator, remover: &BaseAllocator) {
+    let mut node = CoherentNode::default();
+    node.add_triangle_in(12, owner.clone()).unwrap();
+    assert!(node.remove_triangle_in(12, remover).unwrap());
+    assert!(node.is_free_node());
+}
+
+#[test]
 fn separate_arena_instances_remain_incompatible_until_owner_removal() {
     let owner = BaseAllocator::incremental(4096);
     let other = BaseAllocator::incremental(4096);
