@@ -92,26 +92,53 @@ impl File {
     /// read error records errno and natively leaves both outputs untouched: the buffer is
     /// kept and 0 is returned.
     pub fn read_line(&mut self, buffer: &mut AsciiString, count: i32) -> Result<i32, Failure> {
+        Ok(self.read_line_observation(buffer, count)?.unwrap_or(0))
+    }
+    /// Matches the native output-reference overload: `read_count` stays unchanged on a stream
+    /// error; `file.read_line_with_count(&mut line, 1024, &mut count)?`.
+    pub fn read_line_with_count(
+        &mut self,
+        buffer: &mut AsciiString,
+        count: i32,
+        read_count: &mut i32,
+    ) -> Result<(), Failure> {
+        if let Some(observed) = self.read_line_observation(buffer, count)? {
+            *read_count = observed;
+        }
+        Ok(())
+    }
+    fn read_line_observation(
+        &mut self,
+        buffer: &mut AsciiString,
+        count: i32,
+    ) -> Result<Option<i32>, Failure> {
         self.check_readable("ReadLine", count)?;
+        self.read_stdio_line(buffer, count)
+    }
+    fn read_stdio_line(
+        &mut self,
+        buffer: &mut AsciiString,
+        count: i32,
+    ) -> Result<Option<i32>, Failure> {
         let calls = std::sync::Arc::clone(&self.node.calls);
         let Some(stream) = self.stream.as_mut() else {
             // fdopen failed: natively fgets dereferences NULL.
             self.node.record(Errno(ebadf()), IAM, "ReadLine");
-            return Ok(0);
+            return Ok(None);
         };
         let Some(line) = stream.fgets(calls.as_ref(), count) else {
             if !stream.eof() {
                 let errno: i32 = stream.last_errno();
                 self.node.record(Errno(errno), IAM, "ReadLine");
-                return Ok(0);
+                return Ok(None);
             }
             self.at_end = true;
             *buffer = AsciiString::default();
-            return Ok(0);
+            return Ok(Some(0));
         };
         let text: &[u8] = c_text(&line);
         *buffer = AsciiString::from_raw(text);
-        Ok(text.len() as i32)
+        Ok(Some(text.len() as i32))
     }
     /// `Write(buffer, nbyte)` of a string: writes its first `count` bytes, the terminating
     /// NUL included when `count` is its length plus one; `file.write(&text, text.length())?`.
