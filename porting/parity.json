@@ -227184,6 +227184,178 @@
       "status": "partial",
       "notes": "Source translation with supplemental differential oracle; see tools/oracle/tkbo_pave_filler_init.md. Full Boolean execution and complete API/legacy parity remain unproven."
     }
+,
+    {
+      "upstream_id": "IntTools_EdgeFace::IntTools_EdgeFace()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::new",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetEdge(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_edge",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::Edge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::edge",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_face",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::Face() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::face",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetRange(const IntTools_Range&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_range",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetRange(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_range_bounds",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::Range() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::range",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetContext(const occ::handle<IntTools_Context>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_context",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::Context() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::context",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::SetFuzzyValue(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::set_fuzzy_value",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::FuzzyValue() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::fuzzy_value",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::UseQuickCoincidenceCheck(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::use_quick_coincidence_check",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::IsCoincidenceCheckedQuickly()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::is_coincidence_checked_quickly",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::IsDone() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::is_done",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::ErrorStatus() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::error_status",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::CommonParts() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::common_parts",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::MinimalDistance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::minimal_distance",
+      "status": "partial",
+      "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing and quick coincidence; helper-only tests cover CheckTouchVertex, line/cylinder and circle/plane postprocessing, plus a line/plane HInter fallback. BeanFace still rejects line/cylinder and circle/plane end-to-end pairs. Broader curve/surface families, constructor-history coverage, and range-bounded HInter behavior remain unproven."
+    }
   ],
   "tests": [
     {
