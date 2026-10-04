@@ -11,6 +11,7 @@ impl Householder {
             self.check_pivot_row(column, rhs.col_number())?;
             let reflection = self.reflection(column);
             if reflection.g.abs() <= epsilon {
+                self.done = false;
                 return Ok(());
             }
             for next in column + 1..=self.q.col_number() {

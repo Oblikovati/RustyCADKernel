@@ -13,25 +13,23 @@ impl Householder {
             solution: allocate(1, cols, 1, rhs.col_number())?,
             q: allocate(1, rows, q_lower_col, q_lower_col + cols - 1)?,
             done: false,
+            input_bounds: bounds,
         };
-        let mut transformed = allocate(1, rows, 1, rhs.col_number())?;
-        for row in 1..=rows {
-            result.copy_input_row(matrix, rhs, &mut transformed, row, rl, cl)?;
-        }
-        result.reduce(&mut transformed, epsilon)?;
+        result.perform(matrix, rhs, epsilon)?;
         Ok(result)
     }
-    fn copy_input_row(
+    pub(super) fn copy_input_row(
         &mut self,
         matrix: &Matrix<'_>,
         rhs: &Matrix<'_>,
         transformed: &mut Matrix<'_>,
         row: i32,
-        rl: i32,
-        cl: i32,
     ) -> Result<(), Failure> {
         for col in 1..=self.q.col_number() {
-            *self.q.change_value(row, col)? = *matrix.value(row + rl - 1, col + cl - 1)?;
+            *self.q.change_value(row, col)? = *matrix.value(
+                row + self.input_bounds[0] - 1,
+                col + self.input_bounds[2] - 1,
+            )?;
         }
         for col in 1..=rhs.col_number() {
             transformed[(row, col)] = *rhs.value(row + rhs.lower_row() - 1, col)?;
@@ -39,6 +37,6 @@ impl Householder {
         Ok(())
     }
 }
-fn allocate(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Matrix<'static>, Failure> {
+pub(super) fn allocate(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Matrix<'static>, Failure> {
     Matrix::with_bounds(rl, ru, cl, cu).map_err(|error| error.into_failure("math_Householder"))
 }

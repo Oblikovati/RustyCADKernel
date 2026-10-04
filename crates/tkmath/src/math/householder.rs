@@ -1,6 +1,7 @@
 //! Householder transformation and simultaneous RHS reduction from pinned OCCT 3d097a0.
 use super::{Matrix, Vector};
 use rustycad_tkernel::standard::Failure;
+mod perform;
 mod reduction;
 mod setup;
 /// Direct least-squares solver retaining OCCT's reflection sign rule; `Householder::from_vector(&a,&b,1e-20)?`.
@@ -8,6 +9,7 @@ pub struct Householder {
     solution: Matrix<'static>,
     q: Matrix<'static>,
     done: bool,
+    input_bounds: [i32; 4],
 }
 impl Householder {
     /// Solves a vector RHS with the supplied native epsilon; `Householder::from_vector(&a,&b,1e-20)?`.
