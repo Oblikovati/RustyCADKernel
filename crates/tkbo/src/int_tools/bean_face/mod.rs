@@ -13,6 +13,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 mod analytic_adaptors;
+mod bounded_initialization;
 mod coincidence;
 mod distance;
 mod empty_range;

@@ -318,3 +318,43 @@ fn general_coincidence_matches_native_reversed_circle_and_bezier() {
         include_str!("../../../tools/oracle/tkbo_bean_coincident_curves.expected")
     );
 }
+
+fn bounded_initialization_snapshots(mode: i32, rows: &mut String) {
+    let curve = BRepAdaptorCurve::with_edge(&source_edge(mode)).unwrap();
+    let surface = BRepAdaptorSurface::with_face(&source_face(), true).unwrap();
+    let mut solver = BeanFaceIntersector::from_adaptors_with_bounds(
+        &curve,
+        &surface,
+        Range::new(0., 2.),
+        [-1., 1., -1., 1.],
+        [1e-7, 1e-7],
+    )
+    .unwrap();
+    snapshot(&solver, mode, 2, 0, rows);
+    solver.perform().unwrap();
+    snapshot(&solver, mode, 2, 1, rows);
+    solver
+        .init_adaptors_with_bounds(
+            &curve,
+            &surface,
+            Range::new(0.25, 1.5),
+            [-0.5, 0.5, -0.25, 0.25],
+            [2e-7, 3e-7],
+        )
+        .unwrap();
+    snapshot(&solver, mode, 2, 2, rows);
+    solver.perform().unwrap();
+    snapshot(&solver, mode, 2, 3, rows);
+}
+
+#[test]
+fn bounded_constructor_and_reinitialization_match_native() {
+    let mut rows = String::new();
+    for mode in 0..6 {
+        bounded_initialization_snapshots(mode, &mut rows);
+    }
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_bean_bounded_initialization.expected")
+    );
+}
