@@ -1,8 +1,9 @@
-# Single planar face through `BRepOffset_MakeOffset`
+# Single face through `BRepOffset_MakeOffset`
 
-This probe exercises native `MakeOffsetShape` for a forward face with positive and
-negative offsets, and for a reversed face with a positive offset. The source is
-pinned to OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`.
+This probe exercises native `MakeOffsetShape` for a forward plane with positive and
+negative offsets, a reversed plane with a positive offset, and a quarter-cylinder
+face with a positive offset. The source is pinned to OCCT
+`3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
 Compile and compare from the RustyCADKernel repository root:
 
@@ -21,8 +22,10 @@ c++ -std=c++17 \
 ```
 
 The Rust implementation currently supports a single identity-located planar face
-with Arc joins, uniform face processing, and no caps, thickening, or intersection
-repair. It offsets by a topology-preserving translation, then builds the single
-open shell. Shared-edge tubes, multiple faces, non-planar surfaces, and other
-construction options return explicit `Standard_NotImplemented` errors. This is a
-real `MakeOffsetShape` slice; it does not complete the OCC28131 regression.
+or a quarter-cylinder face with Arc joins, uniform face processing, and no caps,
+thickening, or intersection repair. The plane uses a topology-preserving
+translation. The cylinder uses the existing regular offset-face builder, including
+source vertex orientations when it attaches generated boundary vertices. Shared
+edge tubes, multiple faces, unverified non-planar surfaces, and other construction
+options remain outside this validated slice. This is a real `MakeOffsetShape`
+slice; it does not complete the OCC28131 regression.

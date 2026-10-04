@@ -294,14 +294,24 @@ fn make_offset_edge(
     end: f64,
 ) -> Result<Edge, Failure> {
     let builder = BRepBuilder::default();
+    let (first, last) = orient_image_vertices(source, first, last);
     let mut edge = Edge::default();
     builder.make_edge(&mut edge)?;
-    builder.add(&mut edge, &first.clone().into_shape())?;
-    builder.add(&mut edge, &last.clone().into_shape())?;
+    builder.add(&mut edge, &first)?;
+    builder.add(&mut edge, &last)?;
     builder.update_edge_pcurve_on_face(&edge, pcurve, target, BRepTool::edge_tolerance(source)?)?;
     builder.range_on_face(&edge, target, start, end)?;
     builder.degenerated(&edge, BRepTool::degenerated(source)?)?;
     Ok(edge)
+}
+
+fn orient_image_vertices(source: &Edge, first: &Vertex, last: &Vertex) -> (Shape, Shape) {
+    let (source_first, source_last) = edge_vertices(source, false);
+    // `BRepOffset_Offset::Init(Face)` attaches generated vertices with source orientations.
+    (
+        first.oriented(source_first.orientation()),
+        last.oriented(source_last.orientation()),
+    )
 }
 
 fn build_image_curve(image: &Edge, source: &Edge) -> Result<(), Failure> {
