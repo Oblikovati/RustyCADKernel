@@ -4,6 +4,13 @@ use crate::int_tools::Context;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
+#[derive(Clone, Copy)]
+struct PreparationOptions<'a> {
+    context: Option<&'a Context>,
+    check_obb: bool,
+    fuzzy: f64,
+}
+
 /// `BOPDS_Iterator` candidate pairs grouped by native interference type.
 /// `let mut iterator = BOPDSIterator::default(); iterator.prepare(&ds)?;`.
 #[derive(Default)]
@@ -34,10 +41,16 @@ impl BOPDSIterator {
     ) -> Result<(), Failure> {
         self.clear_lists();
         self.shape_types = source_types(structure)?;
+        let options = PreparationOptions {
+            context,
+            check_obb,
+            fuzzy,
+        };
         let candidates = self.candidate_pairs(structure)?;
+        let mut candidate_index = 0;
         for range_index in 0..structure.nb_ranges() {
             let range = structure.range(range_index)?;
-            self.add_range_pairs(structure, range, &candidates, context, check_obb, fuzzy)?;
+            self.add_range_pairs(structure, range, &candidates, &mut candidate_index, options)?;
         }
         Ok(())
     }
@@ -153,18 +166,18 @@ impl BOPDSIterator {
         structure: &DataStructure,
         range: &IndexRange,
         candidates: &[Pair],
-        context: Option<&Context>,
-        check_obb: bool,
-        fuzzy: f64,
+        candidate_index: &mut usize,
+        options: PreparationOptions<'_>,
     ) -> Result<(), Failure> {
-        for pair in candidates {
+        while let Some(pair) = candidates.get(*candidate_index) {
             let (first, second) = pair.indices();
             if !range.contains(first) {
                 break;
             }
+            *candidate_index += 1;
             if range.contains(second)
                 || self.is_contained_pair(structure, first, second)?
-                || self.is_out_obb(structure, first, second, context, check_obb, fuzzy)?
+                || self.is_out_obb(structure, first, second, options)?
             {
                 continue;
             }
@@ -178,20 +191,18 @@ impl BOPDSIterator {
         structure: &DataStructure,
         first: i32,
         second: i32,
-        context: Option<&Context>,
-        check_obb: bool,
-        fuzzy: f64,
+        options: PreparationOptions<'_>,
     ) -> Result<bool, Failure> {
-        if !check_obb {
+        if !options.check_obb {
             return Ok(false);
         }
-        let Some(context) = context else {
+        let Some(context) = options.context else {
             return Ok(false);
         };
         let first_shape = structure.shape(first)?;
         let second_shape = structure.shape(second)?;
-        let first_box = context.obb(first_shape, fuzzy)?;
-        let second_box = context.obb(second_shape, fuzzy)?;
+        let first_box = context.obb(first_shape, options.fuzzy)?;
+        let second_box = context.obb(second_shape, options.fuzzy)?;
         Ok(first_box.read().is_out_box(&second_box.read()))
     }
 

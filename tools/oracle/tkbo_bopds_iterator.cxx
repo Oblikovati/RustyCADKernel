@@ -34,4 +34,12 @@ int main() {
       std::cout << '\n';
     }
   }
+  iterator.Initialize(TopAbs_VERTEX, TopAbs_EDGE);
+  int first = -1, second = -1;
+  iterator.Value(first, second);
+  iterator.Initialize(TopAbs_VERTEX, TopAbs_COMPOUND);
+  int staleFirst = -1, staleSecond = -1;
+  iterator.Value(staleFirst, staleSecond);
+  std::cout << "invalid " << iterator.ExpectedLength() << ' ' << iterator.More() << ' '
+            << staleFirst << '-' << staleSecond << '\n';
 }
