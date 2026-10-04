@@ -227295,6 +227295,33 @@
       "rust_item": "rustycad_tkbo::bop_tools::orient_faces_on_shell",
       "status": "partial",
       "notes": "Native two-pass edge-adjacency orientation translation; 192 differential shell/face ordering and orientation cases. See tools/oracle/tkbo_orient_shell.md; supplemental evidence, not complete API/legacy parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsBlockInOnFace(const IntTools_Range &, const TopoDS_Face &, const TopoDS_Edge &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_block_in_on_face",
+      "status": "partial",
+      "notes": "Source translation and 90 native observations including final cached projector state; tools/oracle/tkbo_block_face.md. Supplemental fixtures, not complete API/legacy parity."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Face &, const double, const bool, const GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_face",
+      "status": "partial",
+      "notes": "Default OffsetOutside=true / Arc face constructor facade over existing source-derived face image. Native planar state/topology/validity/history fixture: tools/oracle/tkoffset_offset_face_mode.md. Nondefault options and full API/legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::BRepOffset_Offset(const TopoDS_Vertex &, const NCollection_List<TopoDS_Shape> &, const double, const bool, const double, const GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_vertex",
+      "status": "partial",
+      "notes": "Default non-polynomial vertex constructor facade over source-derived spherical join; positive/negative native geometry and facade state/null-history checks in tools/oracle/tkoffset_vertex_arc_join.md. Nondefault Tol/Conti, polynomial mode and full API/legacy parity remain unproven."
     }
   ],
   "tests": [

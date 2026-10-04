@@ -69,3 +69,6 @@ pub use orient_wire::orient_edges_on_wire;
 
 mod orient_shell;
 pub use orient_shell::orient_faces_on_shell;
+
+mod block_face;
+pub use block_face::is_block_in_on_face;
