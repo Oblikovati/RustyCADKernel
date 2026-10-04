@@ -1,5 +1,9 @@
 //! Native ShapeFix_Wire_1.cxx pcurve conversion and gap mutations.
+mod clipping;
 mod convert;
+mod domains;
+mod fallback;
+mod ranges;
 mod replace;
 use super::{FixRoot, ShapeFixWire};
 use crate::{
@@ -14,7 +18,9 @@ use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle},
 };
-use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
+use rustycad_tkg2d::geom2d::{
+    Geom2dBSplineCurve, Geom2dCurve, Geom2dOffsetCurve, Geom2dTrimmedCurve,
+};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::Point2;
 struct PcurveGap {
@@ -25,6 +31,7 @@ struct PcurveGap {
     last: f64,
     point: Point2,
     reversed: bool,
+    trimmed: bool,
 }
 impl ShapeFixWire {
     /// Repair pcurve junctions and accumulate native status flags; `tool.fix_gaps_2d()?`.
@@ -69,12 +76,7 @@ impl ShapeFixWire {
             return Ok(false);
         }
         if !convert {
-            return Err(Failure::with_message(
-                "Standard_NotImplemented",
-                &format!(
-                    "FixGap2d({index}, false): nonzero pcurve gap; expected implemented range repair"
-                ),
-            ));
+            return ranges::repair_range(self, &face, &first, &second);
         }
         self.convert_pcurve_gap(&face, &first, &second)
     }
@@ -125,6 +127,7 @@ impl PcurveGap {
         if curve.is_null() || tool.wire_data()?.is_seam(index) {
             return Ok(None);
         }
+        let trimmed = has_trimmed_basis(&curve);
         let point = curve.value(if last_end { end } else { start })?;
         let reversed = edge.orientation() == Orientation::Reversed;
         let (first, last) = if reversed { (end, start) } else { (start, end) };
@@ -136,6 +139,21 @@ impl PcurveGap {
             last,
             point,
             reversed,
+            trimmed,
         }))
+    }
+}
+
+fn has_trimmed_basis(curve: &Handle<dyn Geom2dCurve>) -> bool {
+    let mut current = curve.clone();
+    loop {
+        if !current.cast::<Geom2dTrimmedCurve>().is_null() {
+            return true;
+        }
+        let offset = current.cast::<Geom2dOffsetCurve>();
+        let Some(offset) = offset.get() else {
+            return false;
+        };
+        current = offset.basis_curve();
     }
 }
