@@ -327,15 +327,17 @@ impl BaseAllocator {
         Arc::as_ptr(&self.inner).cast()
     }
 
-    /// Whether this handle can release storage from `owner`; distinct common/common and heap/heap
-    /// handles share their native free backend, while arena identities remain distinct.
+    /// Whether this handle can release storage from `owner`; Common and Heap share the process
+    /// heap release backend, while arena identities remain distinct.
     /// Example: `BaseAllocator::fresh_heap().can_free_from(&BaseAllocator::global_heap())`.
     pub fn can_free_from(&self, owner: &Self) -> bool {
         Arc::ptr_eq(&self.inner, &owner.inner)
             || matches!(
                 (&*self.inner, &*owner.inner),
-                (AllocatorKind::Common, AllocatorKind::Common)
-                    | (AllocatorKind::Heap, AllocatorKind::Heap)
+                (
+                    AllocatorKind::Common | AllocatorKind::Heap,
+                    AllocatorKind::Common | AllocatorKind::Heap
+                )
             )
     }
 }

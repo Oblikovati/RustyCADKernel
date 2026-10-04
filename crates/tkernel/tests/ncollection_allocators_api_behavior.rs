@@ -427,7 +427,8 @@ fn assert_backend_release_compatibility(
 ) {
     assert!(fresh_common.can_free_from(common));
     assert!(fresh_heap.can_free_from(heap));
-    assert!(!fresh_common.can_free_from(fresh_heap));
+    assert!(fresh_common.can_free_from(fresh_heap));
+    assert!(fresh_heap.can_free_from(fresh_common));
     assert!(!BaseAllocator::incremental(4096).can_free_from(&BaseAllocator::incremental(4096)));
     assert!(
         !BaseAllocator::accumulating(64)
