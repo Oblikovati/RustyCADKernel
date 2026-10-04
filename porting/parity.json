@@ -234933,6 +234933,22 @@
       "rust_item": "rustycad_tkernel::storage::Schema::bind_type",
       "status": "partial",
       "notes": "Protected schema binding hook with default process-shared current write context. Native fixture confirms cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings and unbound lookup. Rust uses Arc callbacks and synchronized access; native callback subclass/RTTI ABI and concurrent calls are not proven. See porting/audits/tkernel-storage-schema-context.json."
+    },
+    {
+      "upstream_id": "gp_Trsf::Orthogonalize()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform3::orthogonalize",
+      "status": "implemented",
+      "notes": "Protected nonvirtual Gram-Schmidt hook made callable. Reuses the native-order SetValues implementation; matrix assignment occurs only after both passes succeed. Native success/repeat/zero-column/dependent-column probes preserve scale, form and translation. Clang candidate 33b55d41c812590386cb8c17cf6d8ff5fb2dcb173e096a62e62281d827cf5d1f. See porting/audits/tkmath-orthogonalize-hooks.json."
+    },
+    {
+      "upstream_id": "gp_Trsf2d::Orthogonalize()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform2::orthogonalize",
+      "status": "implemented",
+      "notes": "Protected nonvirtual Gram-Schmidt hook made callable. Reuses the native-order SetValues implementation; matrix assignment occurs only after both passes succeed. Native success/repeat/zero-column/dependent-column probes preserve scale, form and translation. Clang candidate f87c53bca687d2a0e2c00b83d85934e7ad23f74e4f5a3128e0bd7e5b31867da5. See porting/audits/tkmath-orthogonalize-hooks.json."
     }
   ],
   "tests": [

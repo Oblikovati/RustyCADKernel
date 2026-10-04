@@ -121,8 +121,10 @@ impl Transform3 {
         self.offset = column(3);
         Ok(())
     }
-    /// Gram-Schmidt on the columns and then on the rows (gp_Trsf::Orthogonalize).
-    fn orthogonalize(&mut self) -> Result<(), Failure> {
+    /// Gram-Schmidt on columns then rows (gp_Trsf::Orthogonalize).
+    /// Retains scale, form and translation; failures retain the original matrix.
+    /// `transform.orthogonalize()?`.
+    pub fn orthogonalize(&mut self) -> Result<(), Failure> {
         let mut matrix = self.matrix;
         let [first, second, third] =
             orthonormal_triple([matrix.column(1)?, matrix.column(2)?, matrix.column(3)?])?;

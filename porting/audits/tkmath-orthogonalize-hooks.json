@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": [
+    "gp_Trsf::Orthogonalize",
+    "gp_Trsf2d::Orthogonalize"
+  ],
+  "native_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_orthogonalize_hooks.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkmath-orthogonalize-hooks && /tmp/tkmath-orthogonalize-hooks > /tmp/tkmath-orthogonalize-hooks.out",
+  "rust_command": "cargo test -p rustycad-tkmath --test gp_orthogonalize_hooks",
+  "native_output_rows": 12,
+  "sha256": {
+    "tools/oracle/tkmath_orthogonalize_hooks.cxx": "c32c7682b26ca7f23b0cd96095ad4cb89434f55b111494569dcc0c5ab5d16f50",
+    "tools/oracle/tkmath_orthogonalize_hooks.expected": "28a6ea93fb2ac8ed2878dfa824462b87ef61829890fae5fc0905db40af7caae7",
+    "../OCCT/src/FoundationClasses/TKMath/gp/gp_Trsf.cxx": "16cbfc3987ded03b184652038bf24b3592c9b9056bbfec704cca71333f7ff645",
+    "../OCCT/src/FoundationClasses/TKMath/gp/gp_Trsf2d.cxx": "3dd120228646f18d96a9e48bde5fcca253bf233725dd84b8eec9379e621f48f3",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKMath.so": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "legacy_declarations_added": 0,
+  "limitations": [
+    "Supplemental public-hook tests; no increase in legacy mapping counts.",
+    "Finite Linux native fixture does not prove behavior across every floating-point value or compiler/platform."
+  ]
+}

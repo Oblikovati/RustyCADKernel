@@ -100,8 +100,10 @@ impl Transform2 {
         self.offset = Xy::new(a13, a23);
         Ok(())
     }
-    /// Gram-Schmidt on the columns and then on the rows (gp_Trsf2d::Orthogonalize).
-    fn orthogonalize(&mut self) -> Result<(), Failure> {
+    /// Gram-Schmidt on columns then rows (gp_Trsf2d::Orthogonalize).
+    /// Retains scale, form and translation; failures retain the original matrix.
+    /// `transform.orthogonalize()?`.
+    pub fn orthogonalize(&mut self) -> Result<(), Failure> {
         let mut matrix = self.matrix;
         let (first, second) = orthonormal_pair(matrix.column(1)?, matrix.column(2)?)?;
         matrix.set_columns(first, second);
