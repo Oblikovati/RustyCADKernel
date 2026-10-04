@@ -1,0 +1,45 @@
+{
+  "scope": "Poly_Triangulation virtual extension hooks",
+  "claim": "implemented scoped functional hook behavior",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_sources": {
+    "header": {
+      "path": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "sha256": "885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802"
+    },
+    "implementation": {
+      "path": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.cxx",
+      "sha256": "1d97cc0d54a4cd3c76758c2e9cfababad049ce70bebc937c161c09ffa0dc5a8e"
+    }
+  },
+  "native_probe": {
+    "source": "tools/oracle/poly_triangulation_virtual_hooks.cxx",
+    "source_sha256": "140b0cf90e4e0a8b2792fa3ac5f01a15c17d7d0b7880e6a75e0f0cdb83e361a2",
+    "expected": "tools/oracle/poly_triangulation_virtual_hooks.expected",
+    "expected_sha256": "741bd6953dee36d10fb5c0a1ddfb43b854fdc4dc81bce1080536469b433123ae",
+    "executable_sha256": "bc42d444cd8ff178d8a62d3870a39d0582ba89b3f902af55f386b38b6338712f",
+    "command": "c++ -std=c++17 -O0 -g0 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/poly_triangulation_virtual_hooks.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKMath -lTKernel -o /tmp/poly-triangulation-virtual-hooks",
+    "output_matches_expected": true,
+    "linked_libraries": {
+      "libTKMath.so.8.0.0": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "libTKernel.so.8.0.0": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    }
+  },
+  "rust_probe": {
+    "source": "crates/tkmath/tests/poly_triangulation_virtual_hooks.rs",
+    "source_sha256": "5aac24cc0023ed239fcaf79116ddb9edc022721e73208106e191ff2042221071",
+    "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-poly-tri-deferred-target cargo test -p rustycad-tkmath --test poly_triangulation_virtual_hooks --test poly_deferred_filesystem --test poly_triangulation_behavior",
+    "result": "12 passed, 0 failed"
+  },
+  "strict_lint": {
+    "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-poly-tri-deferred-target cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
+    "result": "passed"
+  },
+  "mapped_declarations": [
+    "db11afad80b78af44ee5910400477dac690eebd1196f8e8109cb3b67b5562a29",
+    "8f12e5e5972126cd2cddc406e105f690893390f7efcb2e38cc59e45d4e5d27e1",
+    "3280aca5d10a3bbcd19dee694fcfa6c2d3c9a7915c2b5591b4d45acefb8609cb"
+  ],
+  "remaining_limitations": [],
+  "representation_note": "Rust represents native protected virtual overrides with TriangulationHooks; C++ subclass layout and RTTI are not part of functional behavior parity."
+}

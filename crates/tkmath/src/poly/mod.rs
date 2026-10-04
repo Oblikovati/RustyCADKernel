@@ -42,4 +42,4 @@ pub use polygon_on_triangulation::PolygonOnTriangulation;
 pub use polygon2d::Polygon2D;
 pub use polygon3d::Polygon3D;
 pub use triangle::{Array1OfTriangle, Triangle};
-pub use triangulation::{DeferredTriangulation, Triangulation};
+pub use triangulation::{DeferredTriangulation, Triangulation, TriangulationHooks};

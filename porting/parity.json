@@ -235013,6 +235013,30 @@
       "rust_item": "rustycad_tkmath::poly::Triangulation::unset_cached_min_max",
       "status": "implemented",
       "notes": "Existing public analogue now covered directly against the protected native operation. Clearing empty/cached/populated/repeated states preserves nodes and restores node-derived bounds. Clang candidate 0b263b88682ea78b498adddd9266c08fc499491a0a84cfa33a689eea6cde8d2e. Supplemental evidence: porting/audits/tkmath-protected-bounds.json; no legacy mapping count increase."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::computeBoundingBox(const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::compute_bounding_box",
+      "status": "implemented",
+      "notes": "Protected virtual ID db11afad80b78af44ee5910400477dac690eebd1196f8e8109cb3b67b5562a29. `MinMax` and the direct Rust virtual analogue dispatch through `TriangulationHooks::compute_bounding_box`; `compute_bounding_box_base` provides base-qualified delegation. The derived probe verifies custom/base dispatch, accurate rotated MinMax, cached MinMax bypass, and inherited Copy behavior against pinned OCCT. Native probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::createNewEntity() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::create_new_entity",
+      "status": "implemented",
+      "notes": "Protected virtual ID 8f12e5e5972126cd2cddc406e105f690893390f7efcb2e38cc59e45d4e5d27e1. `DetachedLoadDeferredData` dispatches the hook factory; the probe verifies a detached entity returned with its own hook behavior. Native probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::loadDeferredData(const occ::handle<OSD_FileSystem>&,const occ::handle<Poly_Triangulation>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::load_deferred_data_with_file_system",
+      "status": "implemented",
+      "notes": "Protected virtual ID 3280aca5d10a3bbcd19dee694fcfa6c2d3c9a7915c2b5591b4d45acefb8609cb. Existing tests verify optional filesystem forwarding and load failure; the derived probe verifies this hook composes with a custom detached factory and destination behavior. Native probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
     }
   ],
   "tests": [
