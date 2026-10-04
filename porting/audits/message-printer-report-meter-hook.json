@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "protected_api_exposure",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "aa1f4d65383e4229a1895ee788ea45d11b7613a9",
+  "cpp_api_id": "f7229ddfcedc4bfc67d7d67142f7982e29462374b09d22c1035e145460ced571",
+  "native_profile": "Linux GCC C++17 -O2; target/occt-modeling-full libTKernel.so",
+  "native_binary_sha256": "eb0533da84c5ca1e5fad11afc5844a038591fc9a51aa455e2e90d06e2f45f6ef",
+  "native_exit_code": 0,
+  "behavior": "The direct protected hook inserts an AttributeMeter without active metrics and leaves pending stream names untouched. Three extra boundary cases confirm existing C-string prefix conversion; no prior behavior regression is claimed.",
+  "test_command": "cargo test -p rustycad-tkernel --locked --test message_printer_report_stream_prefix --test message_api_behavior",
+  "passed": 39,
+  "failed": 0,
+  "clippy": "cargo clippy -p rustycad-tkernel --all-targets --locked -- -D warnings",
+  "logs": {
+    "boundary-before-exposure": {
+      "path": "message-printer-report-meter-hook-boundary-before-exposure.log.gz",
+      "sha256": "168987619bc66c299cde111e8c532c2e7629456826f0458e164a2c107636de12"
+    },
+    "green": {
+      "path": "message-printer-report-meter-hook-green.log.gz",
+      "sha256": "e89950b1bf3f161b21970c96905915cf2cbdaa5d5cdf7ddcaeccfb358d59f001"
+    },
+    "clippy": {
+      "path": "message-printer-report-meter-hook-clippy.log.gz",
+      "sha256": "399f41dd9d5b41c029def6b81e77081a60feb094a7cc69d3bd130c92db2c7d00"
+    }
+  },
+  "source_sha256": {
+    "crates/tkernel/src/message/printer_to_report.rs": "9ac546ca01751bb62d6180e35feba41a10b72c26e6cc1c724e384e43e0a9a7fe",
+    "crates/tkernel/tests/message_printer_report_stream_prefix.rs": "c319e4205a74ced489c91761209670e183d91d3591fab9d22e9388c0c3484306",
+    "tools/oracle/tkernel_printer_report_stream_prefix.cxx": "c5d85cef9b87013dcf2bc3ab16cbc534d88bf9373629c2018a92b010e211f279",
+    "tools/oracle/tkernel_printer_report_stream_prefix.expected": "3a46b54b6ac2a58a59e0b30a0e3ceeb88799867df6b48c5b90555d8f6e8f3f08"
+  },
+  "legacy_declaration_count_change": 0,
+  "full_api_parity_proven": false
+}

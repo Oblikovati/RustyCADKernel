@@ -235549,6 +235549,15 @@
       "rust_item": "rustycad_tkernel::message::Report::send_composite_messages",
       "status": "implemented",
       "notes": "Protected report operation over an explicitly supplied nullable composite; preserves child traversal at selected gravity, C-string keys, and native live-list append/unlink semantics during callbacks. Public dump/send routes release the report-state mutex before callback invocation. Native derived-class oracle and supplemental tests: porting/audits/message-report-composite-hooks.json. Native invalidation by deleting the current list node is outside the defined iterator domain."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::sendMetricAlert(const TCollection_AsciiString &,const Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "source_sha256": "bd1859c5261d494008fa678a2053b2b68fcb7d037cf817cd3291281e59694fc5",
+      "rust_item": "rustycad_tkernel::message::PrinterToReport::send_metric_alert",
+      "status": "implemented",
+      "notes": "Exposes protected meter insertion through the shared implementation. Inserts an AttributeMeter even with no active metrics, leaves the pending stream name untouched, and targets the selected report. Source-bound native probe and four supplemental boundary tests: porting/audits/message-printer-report-meter-hook.json. The stream C-string prefix behavior was already correct through AsciiString::from_bytes; it is tested without claiming a new bug fix."
     }
   ],
   "tests": [
