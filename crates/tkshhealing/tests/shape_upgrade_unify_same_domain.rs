@@ -6,6 +6,8 @@ mod circles;
 mod common;
 #[path = "shape_upgrade_unify_same_domain/controls.rs"]
 mod controls;
+#[path = "shape_upgrade_unify_same_domain/nested.rs"]
+mod nested;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp::Explorer;
