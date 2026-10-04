@@ -1,5 +1,5 @@
 //! Free-boundary pipe mode of `BRepOffset_Offset::Init(Edge, Offset)`.
-use super::offset_rails::trimmed_curve;
+use super::offset_rails_adaptors::trimmed_curve;
 use super::offset_rails_geometry::{construction_error, unsupported_edge};
 use rustycad_tkbrep::{
     topexp::{Explorer, vertices},
