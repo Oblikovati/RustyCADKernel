@@ -120,6 +120,9 @@ fn bind_generated_shape(
     offset: &BRepOffsetOffsetFace,
     source: &Shape,
 ) -> Result<(), Failure> {
+    if history.has_image(source) {
+        return Ok(());
+    }
     let image = offset.generated(source);
     if image.is_null() {
         return Ok(());

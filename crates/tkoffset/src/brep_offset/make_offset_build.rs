@@ -20,6 +20,9 @@ impl BRepOffsetMakeOffset {
         if !self.check_input_data()? {
             return Ok(());
         }
+        if face_count(&self.face_component)? > 1 {
+            return self.build_multi_face_shell();
+        }
         self.build_single_face_shell()
     }
 
@@ -38,6 +41,109 @@ impl BRepOffsetMakeOffset {
         self.done = true;
         Ok(())
     }
+
+    fn build_multi_face_shell(&mut self) -> Result<(), Failure> {
+        let config = self.configuration()?;
+        reject_unsupported_build_options(config, self.closing_faces.len())?;
+        let faces = source_faces(&self.face_component)?;
+        let _analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
+        reject_unsupported_tangent_faces(&faces)?;
+        let images = offset_face_images(&faces, config.offset)?;
+        self.record_face_histories(&faces, &images)?;
+        let image_refs = images.iter().collect::<Vec<_>>();
+        let patches =
+            super::correct_singular_face::correct_singular_faces(&image_refs, config.offset)?;
+        self.result_shape = shell_from_faces(&images, &patches)?;
+        self.error = Some(BRepOffsetError::NoError);
+        self.done = true;
+        Ok(())
+    }
+
+    fn record_face_histories(
+        &mut self,
+        sources: &[Face],
+        images: &[BRepOffsetOffsetFace],
+    ) -> Result<(), Failure> {
+        for (source, image) in sources.iter().zip(images) {
+            self.record_offset_history(source, image)?;
+        }
+        Ok(())
+    }
+}
+
+fn face_count(component: &Shape) -> Result<usize, Failure> {
+    Ok(Explorer::new(component, ShapeEnum::Face, ShapeEnum::Shape)?.count())
+}
+
+fn source_faces(component: &Shape) -> Result<Vec<Face>, Failure> {
+    Explorer::new(component, ShapeEnum::Face, ShapeEnum::Shape)
+        .map(|faces| faces.map(Face::unchecked).collect())
+}
+
+fn reject_unsupported_tangent_faces(faces: &[Face]) -> Result<(), Failure> {
+    if !faces_share_support_surface(faces)? {
+        return Err(not_implemented(
+            "multi-face offset requires a shared support surface",
+        ));
+    }
+    Ok(())
+}
+
+fn faces_share_support_surface(faces: &[Face]) -> Result<bool, Failure> {
+    let first = faces.first().ok_or_else(no_offset_face)?;
+    let (surface, location) = BRepTool::surface_with_location(first)?;
+    if !location.is_identity() {
+        return Ok(false);
+    }
+    for face in &faces[1..] {
+        let (candidate, candidate_location) = BRepTool::surface_with_location(face)?;
+        if candidate.object_address() != surface.object_address()
+            || !candidate_location.is_identity()
+        {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+fn offset_face_images(faces: &[Face], offset: f64) -> Result<Vec<BRepOffsetOffsetFace>, Failure> {
+    let mut created = super::offset_face::FaceCreatedImages::default();
+    faces
+        .iter()
+        .map(|face| BRepOffsetOffsetFace::from_face_with_created(face, offset, &mut created))
+        .collect()
+}
+
+fn shell_from_faces(images: &[BRepOffsetOffsetFace], patches: &[Face]) -> Result<Shape, Failure> {
+    let mut shell = Shell::default();
+    let builder = BRepBuilder::default();
+    builder.make_shell(&mut shell);
+    add_offset_faces(&builder, &mut shell, images, patches)?;
+    let shape = shell.into_shape();
+    shape.set_closed(BRepTool::is_closed(&shape)?)?;
+    Ok(shape)
+}
+
+fn add_offset_faces(
+    builder: &BRepBuilder,
+    shell: &mut Shell,
+    images: &[BRepOffsetOffsetFace],
+    patches: &[Face],
+) -> Result<(), Failure> {
+    for image in images {
+        builder.add(shell, &image.face().clone().into_shape())?;
+    }
+    for patch in patches {
+        builder.add(shell, &patch.clone().into_shape())?;
+    }
+    Ok(())
+}
+
+fn no_offset_face() -> Failure {
+    Failure::with_message(
+        "Standard_NoSuchObject",
+        "standard offset requires at least one face",
+    )
 }
 
 fn reject_unsupported_build_options(
