@@ -22,6 +22,23 @@ pub struct BvhBinaryTree;
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct BvhQuadTree;
 
+/// Immutable node inputs passed to a shared-set worker split.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct BvhNodeSnapshot<V: BvhVector> {
+    /// Node index in the source tree.
+    pub index: i32,
+    /// First primitive in the inclusive node range.
+    pub begin: i32,
+    /// Last primitive in the inclusive node range.
+    pub end: i32,
+    /// Depth of this node.
+    pub level: i32,
+    /// Node minimum bound.
+    pub minimum: V,
+    /// Node maximum bound.
+    pub maximum: V,
+}
+
 /// Bounding volume hierarchy of arity 2 (default) or 4.
 ///
 /// The buffers are public data upstream (builders write them directly), so
@@ -48,6 +65,18 @@ impl<V: BvhVector, A> Default for BvhTree<V, A> {
     }
 }
 impl<V: BvhVector, A> BvhTree<V, A> {
+    /// Copies stable split inputs while a parallel builder holds the tree lock.
+    pub(crate) fn node_snapshot(&self, node: i32) -> Result<BvhNodeSnapshot<V>, Failure> {
+        Ok(BvhNodeSnapshot {
+            index: node,
+            begin: self.beg_primitive(node)?,
+            end: self.end_primitive(node)?,
+            level: self.level(node)?,
+            minimum: *self.min_point(node)?,
+            maximum: *self.max_point(node)?,
+        })
+    }
+
     /// Returns depth (height) of BVH tree; `tree.depth()`.
     pub fn depth(&self) -> i32 {
         self.depth

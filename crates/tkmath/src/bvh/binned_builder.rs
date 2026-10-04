@@ -4,9 +4,9 @@
 use super::bounding_box::BvhBox;
 use super::builder::{BvhBuilder, BvhBuilderTransient};
 use super::constants::{LEAF_NODE_SIZE_DEFAULT, MAX_TREE_DEPTH, NB_BINS_OPTIMAL};
-use super::queue_builder::{BvhChildNodes, BvhQueueBuilder, queue_build};
-use super::set::BvhSet;
-use super::tree::BvhTree;
+use super::queue_builder::{BvhChildNodes, BvhParallelQueueBuilder, BvhQueueBuilder, queue_build};
+use super::set::{BvhSet, BvhSharedSet};
+use super::tree::{BvhNodeSnapshot, BvhTree};
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 use std::marker::PhantomData;
@@ -93,6 +93,21 @@ impl<V: BvhVector, const BINS: usize> BvhQueueBuilder<V> for BvhBinnedBuilder<V,
         node: i32,
     ) -> Result<BvhChildNodes<V>, Failure> {
         split::build_binned_node::<V, BINS>(self, set, bvh, node)
+    }
+}
+impl<V: BvhVector, const BINS: usize> BvhParallelQueueBuilder<V> for BvhBinnedBuilder<V, BINS> {
+    fn queue_builder_transient(&self) -> &BvhBuilderTransient {
+        &self.transient
+    }
+    fn num_of_threads(&self) -> i32 {
+        self.num_of_threads
+    }
+    fn build_node(
+        &self,
+        set: &dyn BvhSharedSet<V>,
+        node: BvhNodeSnapshot<V>,
+    ) -> Result<BvhChildNodes<V>, Failure> {
+        split::build_binned_node_shared(self, set, node)
     }
 }
 impl<V: BvhVector, const BINS: usize> BvhBuilder<V> for BvhBinnedBuilder<V, BINS> {

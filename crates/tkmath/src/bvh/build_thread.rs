@@ -3,6 +3,7 @@
 //! `BVH_BuildTool` and `BVH_BuildThread`: workers draining a build queue.
 use super::build_queue::BvhBuildQueue;
 use rustycad_tkernel::standard::Failure;
+use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
 use std::thread::{Scope, ScopedJoinHandle};
 
 /// Tool object to call BVH builder subroutines; shared by all build threads,
@@ -36,10 +37,7 @@ impl<'a> BvhBuildThread<'a> {
         loop {
             let node = self.build_queue.fetch(&mut was_busy);
             if node != -1 {
-                if let Err(failure) = self.build_tool.perform(node) {
-                    self.build_queue.abandon(was_busy);
-                    return Err(failure);
-                }
+                self.perform_node(node, was_busy)?;
                 continue;
             }
             if !self.build_queue.has_busy_threads() {
@@ -47,6 +45,22 @@ impl<'a> BvhBuildThread<'a> {
             }
             std::hint::spin_loop();
         }
+    }
+
+    fn perform_node(&self, node: i32, was_busy: bool) -> Result<(), Failure> {
+        match catch_unwind(AssertUnwindSafe(|| self.build_tool.perform(node))) {
+            Ok(Ok(())) => Ok(()),
+            Ok(Err(failure)) => self.abandon_with(Err(failure), was_busy),
+            Err(payload) => {
+                self.build_queue.abandon(was_busy);
+                resume_unwind(payload)
+            }
+        }
+    }
+
+    fn abandon_with(&self, result: Result<(), Failure>, was_busy: bool) -> Result<(), Failure> {
+        self.build_queue.abandon(was_busy);
+        result
     }
 
     /// Starts execution on a new OS thread of `scope` (`Run`).

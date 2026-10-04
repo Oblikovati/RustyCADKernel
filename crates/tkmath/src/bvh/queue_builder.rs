@@ -5,11 +5,14 @@ use super::bounding_box::BvhBox;
 use super::build_queue::BvhBuildQueue;
 use super::builder::{BvhBuilderTransient, update_depth};
 use super::set::BvhSet;
-use super::tree::BvhTree;
+use super::set::BvhSharedSet;
+use super::tree::{BvhNodeSnapshot, BvhTree};
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 mod build;
+mod parallel_build;
 pub use build::queue_build;
+pub use parallel_build::parallel_queue_build;
 
 /// Range of primitives belonging to a BVH node (`BVH_PrimitiveRange`).
 /// Example: `BvhPrimitiveRange::new(0, 9).size() == 10`.
@@ -97,6 +100,33 @@ pub trait BvhQueueBuilder<V: BvhVector>: Send + Sync {
         node: i32,
     ) -> Result<BvhChildNodes<V>, Failure>;
     /// Processes child nodes of the split node (virtual `addChildren`).
+    fn add_children(
+        &self,
+        bvh: &mut BvhTree<V>,
+        queue: &BvhBuildQueue,
+        node: i32,
+        children: &BvhChildNodes<V>,
+    ) -> Result<(), Failure> {
+        add_queued_children(self.queue_builder_transient(), bvh, queue, node, children)
+    }
+}
+
+/// Safe opt-in path for builders that split immutable snapshots over a
+/// synchronized set. Builders must split disjoint primitive ranges. A failed
+/// split does not promise native partial tree state.
+/// Example: `parallel_queue_build(&builder, &set, &mut tree, &bounds)?`.
+pub trait BvhParallelQueueBuilder<V: BvhVector>: Send + Sync {
+    /// Borrows the inherited builder limits.
+    fn queue_builder_transient(&self) -> &BvhBuilderTransient;
+    /// Number of worker threads used by the parallel build.
+    fn num_of_threads(&self) -> i32;
+    /// Computes children from a stable node snapshot without mutating the tree.
+    fn build_node(
+        &self,
+        set: &dyn BvhSharedSet<V>,
+        node: BvhNodeSnapshot<V>,
+    ) -> Result<BvhChildNodes<V>, Failure>;
+    /// Registers the computed children under the tree lock.
     fn add_children(
         &self,
         bvh: &mut BvhTree<V>,

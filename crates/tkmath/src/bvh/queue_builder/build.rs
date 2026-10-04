@@ -89,8 +89,16 @@ fn run_threads<V: BvhVector, B: BvhQueueBuilder<V> + ?Sized>(
     threads: i32,
 ) -> Result<(), Failure> {
     let tool = typed_tool(algorithm, queue, set, bvh);
+    run_workers(&tool, queue, threads)
+}
+
+pub(super) fn run_workers(
+    tool: &dyn BvhBuildTool,
+    queue: &BvhBuildQueue,
+    threads: i32,
+) -> Result<(), Failure> {
     let workers: Vec<BvhBuildThread<'_>> = (0..threads)
-        .map(|_| BvhBuildThread::new(&tool, queue))
+        .map(|_| BvhBuildThread::new(tool, queue))
         .collect();
     std::thread::scope(|scope| {
         let handles: Vec<_> = workers.iter().map(|worker| worker.run(scope)).collect();

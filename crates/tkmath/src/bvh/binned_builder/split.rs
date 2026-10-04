@@ -1,13 +1,14 @@
 // Rust translation of FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BVH_BinnedBuilder::buildNode` and `getSubVolumes`.
+use super::partition::split_primitives_shared;
 use super::{BvhBin, BvhBinnedBuilder, BvhSplitPlane, main_axis, split_primitives};
 use crate::bvh::bounding_box::BvhBox;
 use crate::bvh::constants::THE_NODE_MIN_SIZE;
 use crate::bvh::queue_builder::{BvhChildNodes, BvhPrimitiveRange};
 use crate::bvh::scalar::{BvhScalar, int_floor};
-use crate::bvh::set::BvhSet;
-use crate::bvh::tree::BvhTree;
+use crate::bvh::set::{BvhSet, BvhSetRead, BvhSharedSet, MutableSetRead, SharedSetRead};
+use crate::bvh::tree::{BvhNodeSnapshot, BvhTree};
 use crate::bvh::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 
@@ -32,8 +33,23 @@ pub fn get_sub_volumes<V: BvhVector, const BINS: usize>(
 ) -> Result<(), Failure> {
     let min = bvh.min_point(node)?.component(axis);
     let max = bvh.max_point(node)?.component(axis);
+    let begin = bvh.beg_primitive(node)?;
+    let end = bvh.end_primitive(node)?;
+    let access = MutableSetRead::new(set);
+    accumulate_sub_volumes::<V, BINS>(&access, begin, end, min, max, bins, axis)
+}
+
+fn accumulate_sub_volumes<V: BvhVector, const BINS: usize>(
+    set: &dyn BvhSetRead<V>,
+    begin: i32,
+    end: i32,
+    min: V::Scalar,
+    max: V::Scalar,
+    bins: &mut [BvhBin<V>],
+    axis: i32,
+) -> Result<(), Failure> {
     let inverse_step = V::Scalar::from_int(BINS as i32) / (max - min);
-    for index in bvh.beg_primitive(node)?..=bvh.end_primitive(node)? {
+    for index in begin..=end {
         let bounding = set.element_box(index)?;
         let bin = int_floor((set.center(index, axis)? - min) * inverse_step);
         let bin = bin.clamp(0, BINS as i32 - 1) as usize;
@@ -92,9 +108,8 @@ fn choose_split<V: BvhVector, const BINS: usize>(
 /// Searches the candidate axes (all of X/Y/Z, or only the main one).
 fn find_best_split<V: BvhVector, const BINS: usize>(
     builder: &BvhBinnedBuilder<V, BINS>,
-    set: &dyn BvhSet<V>,
-    bvh: &BvhTree<V>,
-    node: i32,
+    set: &dyn BvhSetRead<V>,
+    node: BvhNodeSnapshot<V>,
     node_box: &BvhBox<V>,
 ) -> Result<BestSplit<V>, Failure> {
     let size = node_box.size();
@@ -116,7 +131,15 @@ fn find_best_split<V: BvhVector, const BINS: usize>(
             continue;
         }
         let mut bins = vec![BvhBin::default(); BINS];
-        get_sub_volumes::<V, BINS>(set, bvh, node, &mut bins, axis)?;
+        accumulate_sub_volumes::<V, BINS>(
+            set,
+            node.begin,
+            node.end,
+            node.minimum.component(axis),
+            node.maximum.component(axis),
+            &mut bins,
+            axis,
+        )?;
         let planes = split_planes::<V, BINS>(&bins);
         choose_split::<V, BINS>(&planes, node_box.area().to_double(), axis, &mut best);
     }
@@ -131,39 +154,88 @@ pub(super) fn build_binned_node<V: BvhVector, const BINS: usize>(
     bvh: &mut BvhTree<V>,
     node: i32,
 ) -> Result<BvhChildNodes<V>, Failure> {
-    let begin = bvh.beg_primitive(node)?;
-    let end = bvh.end_primitive(node)?;
-    if bvh.nb_primitives(node)? <= builder.transient.leaf_node_size() {
+    let snapshot = bvh.node_snapshot(node)?;
+    if snapshot.end - snapshot.begin < builder.transient.leaf_node_size() {
         return Ok(BvhChildNodes::default());
     }
-    let node_box = BvhBox::from_corners(*bvh.min_point(node)?, *bvh.max_point(node)?);
-    let mut best = find_best_split(builder, &*set, bvh, node, &node_box)?;
+    let node_box = BvhBox::from_corners(snapshot.minimum, snapshot.maximum);
+    let access = MutableSetRead::new(&*set);
+    let mut best = find_best_split(builder, &access, snapshot, &node_box)?;
     bvh.set_inner(node)?;
-    let middle = if best.left.count == 0 || best.right.count == 0 || best.axis == -1 {
-        middle_split(set, begin, end, &mut best)?
+    let middle = if needs_middle_split(&best) {
+        middle_split(&access, snapshot.begin, snapshot.end, &mut best)?
     } else {
         split_primitives(
             set,
             &node_box,
-            begin,
-            end,
+            snapshot.begin,
+            snapshot.end,
             best.index - 1,
             best.axis,
             BINS as i32,
         )?
     };
-    Ok(BvhChildNodes::new(
+    Ok(child_nodes(snapshot, &best, middle))
+}
+
+pub(super) fn build_binned_node_shared<V: BvhVector, const BINS: usize>(
+    builder: &BvhBinnedBuilder<V, BINS>,
+    set: &dyn BvhSharedSet<V>,
+    snapshot: BvhNodeSnapshot<V>,
+) -> Result<BvhChildNodes<V>, Failure> {
+    if snapshot.end - snapshot.begin < builder.transient.leaf_node_size() {
+        return Ok(BvhChildNodes::default());
+    }
+    let node_box = BvhBox::from_corners(snapshot.minimum, snapshot.maximum);
+    let access = SharedSetRead::new(set);
+    let mut best = find_best_split(builder, &access, snapshot, &node_box)?;
+    let middle =
+        split_binned_range_shared::<V, BINS>(set, snapshot, &access, &node_box, &mut best)?;
+    Ok(child_nodes(snapshot, &best, middle))
+}
+
+fn split_binned_range_shared<V: BvhVector, const BINS: usize>(
+    set: &dyn BvhSharedSet<V>,
+    node: BvhNodeSnapshot<V>,
+    access: &dyn BvhSetRead<V>,
+    node_box: &BvhBox<V>,
+    best: &mut BestSplit<V>,
+) -> Result<i32, Failure> {
+    if needs_middle_split(best) {
+        return middle_split(access, node.begin, node.end, best);
+    }
+    split_primitives_shared(
+        set,
+        node_box,
+        node.begin,
+        node.end,
+        best.index - 1,
+        best.axis,
+        BINS as i32,
+    )
+}
+
+fn needs_middle_split<V: BvhVector>(best: &BestSplit<V>) -> bool {
+    best.left.count == 0 || best.right.count == 0 || best.axis == -1
+}
+
+fn child_nodes<V: BvhVector>(
+    node: BvhNodeSnapshot<V>,
+    best: &BestSplit<V>,
+    middle: i32,
+) -> BvhChildNodes<V> {
+    BvhChildNodes::new(
         best.left.bounding,
         best.right.bounding,
-        BvhPrimitiveRange::new(begin, middle - 1),
-        BvhPrimitiveRange::new(middle, end),
-    ))
+        BvhPrimitiveRange::new(node.begin, middle - 1),
+        BvhPrimitiveRange::new(middle, node.end),
+    )
 }
 
 /// Objects with the same center: split the index range in the middle, the
 /// middle being computed through `float` as `(beg + end) / 2.f` upstream.
 fn middle_split<V: BvhVector>(
-    set: &dyn BvhSet<V>,
+    set: &dyn BvhSetRead<V>,
     begin: i32,
     end: i32,
     best: &mut BestSplit<V>,
