@@ -73,6 +73,23 @@ fn standard_c_string_long_long_lengths_match_native_extremes() {
     assert_buffer_row("sprintf_long_long_lengths", format_long_long_lengths());
 }
 
+#[cfg(all(target_os = "linux", target_pointer_width = "64"))]
+#[test]
+fn standard_c_string_size_difference_lengths_match_native_extremes() {
+    assert_buffer_row(
+        "sprintf_size_difference_lengths",
+        format_size_difference_lengths(),
+    );
+}
+
+#[test]
+fn standard_c_string_size_difference_types_follow_target_width() {
+    let expected = expected_size_difference_text();
+    let (bytes, count) = format_size_difference_lengths();
+    assert_eq!(&bytes[..bytes.len() - 1], expected.as_bytes());
+    assert_eq!(count, expected.len());
+}
+
 #[test]
 fn standard_c_string_formatter_rejects_unsupported_and_mismatched_arguments() {
     assert_format_error(b"%*d", &[FormatArg::Int(3)]);
@@ -88,10 +105,18 @@ fn standard_c_string_formatter_rejects_unsupported_and_mismatched_arguments() {
     assert_format_error(b"%.1c", &[FormatArg::Int(65)]);
     assert_format_error(b"%*d", &[FormatArg::Int(4)]);
     assert_format_error(b"%+c", &[FormatArg::Int(65)]);
+    assert_invalid_integer_length_pairs();
+}
+
+fn assert_invalid_integer_length_pairs() {
     assert_format_error(b"%ld", &[FormatArg::Int(7)]);
     assert_format_error(b"%lld", &[FormatArg::Long(7)]);
     assert_format_error(b"%lu", &[FormatArg::UInt(7)]);
     assert_format_error(b"%llu", &[FormatArg::ULong(7)]);
+    assert_format_error(b"%zd", &[FormatArg::Size(7)]);
+    assert_format_error(b"%td", &[FormatArg::SignedSize(7)]);
+    assert_format_error(b"%zu", &[FormatArg::UnsignedPtrDiff(7)]);
+    assert_format_error(b"%tu", &[FormatArg::Size(7)]);
 }
 
 fn format_integer() -> (Vec<u8>, usize) {
@@ -196,6 +221,39 @@ fn format_long_long_lengths() -> (Vec<u8>, usize) {
             FormatArg::ULongLong(u64::MAX),
             FormatArg::ULongLong(42),
         ],
+    )
+}
+
+fn format_size_difference_lengths() -> (Vec<u8>, usize) {
+    format_buffer(
+        b"%zd|%zi|%zu|%#018zx|%#zo|%.20zu|%td|%ti|%tu|%#018tX|%#to",
+        &[
+            FormatArg::SignedSize(isize::MIN),
+            FormatArg::SignedSize(isize::MAX),
+            FormatArg::Size(usize::MAX),
+            FormatArg::Size(0xdead_beef),
+            FormatArg::Size(8),
+            FormatArg::Size(42),
+            FormatArg::PtrDiff(isize::MIN),
+            FormatArg::PtrDiff(isize::MAX),
+            FormatArg::UnsignedPtrDiff(usize::MAX),
+            FormatArg::UnsignedPtrDiff(42),
+            FormatArg::UnsignedPtrDiff(15),
+        ],
+    )
+}
+
+fn expected_size_difference_text() -> String {
+    format!(
+        "{}|{}|{}|0x{:016x}|010|00000000000000000042|{}|{}|{}|0X{:016X}|017",
+        isize::MIN,
+        isize::MAX,
+        usize::MAX,
+        0xdead_beef_usize,
+        isize::MIN,
+        isize::MAX,
+        usize::MAX,
+        42_usize
     )
 }
 

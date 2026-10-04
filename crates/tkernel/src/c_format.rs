@@ -24,6 +24,14 @@ pub enum FormatArg<'a> {
     LongLong(i64),
     /// A C `unsigned long long` argument.
     ULongLong(u64),
+    /// The signed integer type corresponding to C `size_t`, for `%zd` and `%zi`.
+    SignedSize(isize),
+    /// A C `size_t` argument, for `%zu`, `%zo`, `%zx`, and `%zX`.
+    Size(usize),
+    /// A C `ptrdiff_t` argument, for `%td` and `%ti`.
+    PtrDiff(isize),
+    /// The unsigned integer type corresponding to C `ptrdiff_t`.
+    UnsignedPtrDiff(usize),
     /// A `double` argument.
     Real(f64),
     /// A byte string used as a `const char*`, truncated at the first NUL.
@@ -51,7 +59,7 @@ pub(crate) struct Spec {
     pub(crate) dynamic_width: bool,
     pub(crate) precision: Option<usize>,
     pub(crate) dynamic_precision: bool,
-    /// Length modifier: -2 `hh`, -1 `h`, 0 none, 1 `l`, 2 `ll`.
+    /// Length modifier: -2 `hh`, -1 `h`, 0 none, 1 `l`, 2 `ll`, 3 `z`, 4 `t`.
     pub(crate) length: i8,
     pub(crate) conversion: u8,
 }
@@ -197,6 +205,8 @@ fn length_modifier(format: &[u8], index: usize) -> (i8, usize) {
         (Some(b'h'), _) => (-1, index + 1),
         (Some(b'l'), Some(b'l')) => (2, index + 2),
         (Some(b'l'), _) => (1, index + 1),
+        (Some(b'z'), _) => (3, index + 1),
+        (Some(b't'), _) => (4, index + 1),
         _ => (0, index),
     }
 }

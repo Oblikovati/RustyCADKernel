@@ -108,7 +108,7 @@ fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatEr
         format_error(
             spec,
             offset,
-            "a supported %c/%d/%i/%o/%u/%x/%X/%ld/%li/%lu/%lx/%lX/%lld/%llu/%f/%e/%g/%s directive",
+            "a supported %c/%d/%i/%o/%u/%x/%X/%z/%t/%l/%ll/%f/%e/%g/%s directive",
         )
     })
 }
@@ -131,10 +131,14 @@ fn integer_argument_kind(spec: Spec) -> Option<&'static str> {
         (b'd' | b'i', -2..=0) => Some("an Int argument (hh/h/no modifier)"),
         (b'd' | b'i', 1) => Some("a Long argument for %l"),
         (b'd' | b'i', 2) => Some("a LongLong argument for %ll"),
+        (b'd' | b'i', 3) => Some("a SignedSize argument for %z"),
+        (b'd' | b'i', 4) => Some("a PtrDiff argument for %t"),
         (b'o' | b'u' | b'x' | b'X', -2 | -1) => Some("an Int argument (hh/h)"),
         (b'o' | b'u' | b'x' | b'X', 0) => Some("a UInt argument"),
         (b'o' | b'u' | b'x' | b'X', 1) => Some("a ULong argument for %l"),
         (b'o' | b'u' | b'x' | b'X', 2) => Some("a ULongLong argument for %ll"),
+        (b'o' | b'u' | b'x' | b'X', 3) => Some("a Size argument for %z"),
+        (b'o' | b'u' | b'x' | b'X', 4) => Some("an UnsignedPtrDiff argument for %t"),
         _ => None,
     }
 }
@@ -165,10 +169,14 @@ fn integer_argument_matches(argument: &FormatArg<'_>, spec: Spec) -> bool {
         (b'd' | b'i', -2..=0, FormatArg::Int(_))
             | (b'd' | b'i', 1, FormatArg::Long(_))
             | (b'd' | b'i', 2, FormatArg::LongLong(_))
+            | (b'd' | b'i', 3, FormatArg::SignedSize(_))
+            | (b'd' | b'i', 4, FormatArg::PtrDiff(_))
             | (b'o' | b'u' | b'x' | b'X', -2 | -1, FormatArg::Int(_))
             | (b'o' | b'u' | b'x' | b'X', 0, FormatArg::UInt(_))
             | (b'o' | b'u' | b'x' | b'X', 1, FormatArg::ULong(_))
             | (b'o' | b'u' | b'x' | b'X', 2, FormatArg::ULongLong(_))
+            | (b'o' | b'u' | b'x' | b'X', 3, FormatArg::Size(_))
+            | (b'o' | b'u' | b'x' | b'X', 4, FormatArg::UnsignedPtrDiff(_))
     )
 }
 

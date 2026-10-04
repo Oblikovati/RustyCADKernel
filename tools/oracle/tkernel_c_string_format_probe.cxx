@@ -1,10 +1,13 @@
 #include <Standard_CString.hxx>
 #include <climits>
+#include <cstddef>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include <limits>
 #include <string>
+#include <type_traits>
 #include <unistd.h>
 #include <vector>
 
@@ -128,6 +131,25 @@ static void format_long_long_cases(char* theBuffer)
   record("sprintf_long_long_lengths", aCount, theBuffer);
 }
 
+static void format_size_difference_cases(char* theBuffer)
+{
+  using SignedSize = std::make_signed_t<std::size_t>;
+  using UnsignedPtrDiff = std::make_unsigned_t<std::ptrdiff_t>;
+  const int aCount = Sprintf(theBuffer, "%zd|%zi|%zu|%#018zx|%#zo|%.20zu|%td|%ti|%tu|%#018tX|%#to",
+                             std::numeric_limits<SignedSize>::min(),
+                             std::numeric_limits<SignedSize>::max(),
+                             std::numeric_limits<std::size_t>::max(),
+                             std::size_t(0xdeadbeef),
+                             std::size_t(8),
+                             std::size_t(42),
+                             std::numeric_limits<std::ptrdiff_t>::min(),
+                             std::numeric_limits<std::ptrdiff_t>::max(),
+                             std::numeric_limits<UnsignedPtrDiff>::max(),
+                             UnsignedPtrDiff(42),
+                             UnsignedPtrDiff(15));
+  record("sprintf_size_difference_lengths", aCount, theBuffer);
+}
+
 int main()
 {
   char aBuffer[256] = {};
@@ -136,6 +158,7 @@ int main()
   format_fixed_buffer_cases();
   format_long_integer_cases(aBuffer);
   format_long_long_cases(aBuffer);
+  format_size_difference_cases(aBuffer);
   format_writer_cases(aBuffer);
   return 0;
 }
