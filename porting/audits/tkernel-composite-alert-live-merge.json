@@ -1,0 +1,81 @@
+{
+  "title": "Message_CompositeAlerts::AddAlert live callback iteration",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source": {
+    "path": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.cxx",
+    "sha256": "5d73be0b216a8d7f5c1c80efd9460cc6d45b15a7078930a369d0eaf4f8b1a3a7",
+    "relevant_lines": "47-71"
+  },
+  "native_probe": {
+    "path": "tools/oracle/tkernel_composite_alert_live_merge.cxx",
+    "sha256": "cfdc55952327b60c374eaef258903123d56fbedcf52ec8e4b62d09efe80e4cce",
+    "expected_path": "tools/oracle/tkernel_composite_alert_live_merge.expected",
+    "expected_sha256": "ff7d75ce374ae8926706b603c9b196aa0da55334cd373d256b72e2c598b5cf7e",
+    "output_sha256": "ff7d75ce374ae8926706b603c9b196aa0da55334cd373d256b72e2c598b5cf7e",
+    "binary_sha256": "32c3862c5efcba0553db38da72b8f275d72b7066b805b6c37d6ec747d936bc32",
+    "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_composite_alert_live_merge.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_composite_alert_live_merge",
+    "replay_command": "/tmp/tkernel_composite_alert_live_merge > /tmp/tkernel_composite_alert_live_merge.out",
+    "exact_expected_match": true
+  },
+  "rust_probe": {
+    "base_revision": "a5c1277b5ee1dc689972f5272cb086c16fc52a59",
+    "implementation_path": "crates/tkernel/src/message/composite_alerts.rs",
+    "implementation_sha256": "253b4016559e39b98c6344805d9d303dbd7c5b88725e9f1e0bd96066e113540a",
+    "test_path": "crates/tkernel/tests/message_composite_live_merge.rs",
+    "test_sha256": "e1fd783aff98e34fdc457dcc808efc9103a460ec64589d574a8fb1bc2a059c84",
+    "toolchain": {
+      "rustc": "rustc 1.98.1 (48a229cea 2026-09-01); LLVM 22.1.8",
+      "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
+    }
+  },
+  "cases": [
+    {
+      "case": "SupportsMerge appends a same-type nonmerging candidate before cursor creation",
+      "native_observation": "The live traversal visits support-target; incoming merges and is not appended. List size 2; custom DynamicType calls 2.",
+      "rust_observation": "Matches native callback order, merge result, list size, and custom DynamicType call count."
+    },
+    {
+      "case": "Merge appends a later target then declines the first target",
+      "native_observation": "The same forward iterator visits first then late-target; incoming merges into late-target. List size 2; custom DynamicType calls 3.",
+      "rust_observation": "Matches native callback order, merge result, list size, and custom DynamicType call count."
+    },
+    {
+      "case": "empty list skips incoming DynamicType query",
+      "native_observation": "SupportsMerge runs, the empty list short-circuits DynamicType lookup, then incoming appends. DynamicType calls 0.",
+      "rust_observation": "Matches the zero DynamicType calls and appends incoming."
+    }
+  ],
+  "pre_fix_regression": {
+    "source_revision": "a5c1277b5ee1dc689972f5272cb086c16fc52a59",
+    "source_sha256": "d047a87fb14cea6c8bb0312ce7dd059fc9ef757130af1376ed4fa7db3716a5c5",
+    "method": "Temporarily replaced only composite_alerts.rs with the pre-fix version, ran the regression file, then restored the fixed source.",
+    "command": "cargo test -p rustycad-tkernel --test message_composite_live_merge",
+    "exit_code": 101,
+    "passed": 1,
+    "failed": 2,
+    "failed_cases": [
+      "supports_merge_appends_before_the_live_cursor_is_created",
+      "merge_callback_appends_a_target_visited_by_the_same_cursor"
+    ],
+    "log_path": "porting/audits/tkernel-composite-alert-live-merge-pre-fix.log.gz",
+    "log_sha256": "cbd6604b2ef9343bae031f035cd52cc1be829e11282fc4b6231efc38e2faa3a9"
+  },
+  "validation": {
+    "focused_command": "cargo test -p rustycad-tkernel --test message_composite_live_merge",
+    "focused_passed": 3,
+    "focused_failed": 0,
+    "full_command": "cargo test -p rustycad-tkernel --quiet",
+    "full_result_groups": 156,
+    "full_passed": 2712,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "full_log_path": "porting/audits/tkernel-composite-alert-live-merge-cargo-test.log.gz",
+    "full_log_sha256": "5043f24deb5f9cc282a3fd6ddced1b017514d64dfaac8166391908e939326c15",
+    "strict_clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "strict_clippy_exit_code": 0,
+    "fmt_command": "cargo fmt --all -- --check",
+    "fmt_exit_code": 0
+  },
+  "defined_domain_note": "Forward appends during SupportsMerge and Merge callbacks are tested. Removing the active NCollection_List iterator node from a callback is outside the defined native iterator domain and is not claimed."
+}
