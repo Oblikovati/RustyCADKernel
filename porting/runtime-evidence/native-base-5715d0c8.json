@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "native_ctest_run",
+  "rust_source_revision_at_launch": "5715d0c86f1635797e782138dd1cd8a76085d4f9",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "command": [
+    "ctest",
+    "--test-dir",
+    "target/occt-modeling-full",
+    "--output-on-failure",
+    "--parallel",
+    "4",
+    "-R",
+    "^(FoundationClasses::(TKernel|TKMath)|ModelingData::(TKG2d|TKG3d))::"
+  ],
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi"
+  },
+  "exit_code": 0,
+  "registered": 4656,
+  "passed": 4655,
+  "failed": 0,
+  "upstream_skipped": 1,
+  "registered_by_toolkit": {
+    "TKG2d": 523,
+    "TKG3d": 794,
+    "TKMath": 2023,
+    "TKernel": 1316
+  },
+  "skipped_cases": [
+    "FoundationClasses::TKernel::UnitsAPI_Test.FClassesBug_23497_CompositeUnit"
+  ],
+  "native_artifact_sha256": {
+    "target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+    "target/occt-modeling-full/CTestTestfile.cmake": "00546ab6a7d87537d0934a22348c2a6af18165b5a64ab2118e4a9607dc8c7bea",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKBO.so.8.1.0": "85aa23cf53a4e243a2217b321502954ce958654a9fe324d8c98df2d632da9072",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKBRep.so.8.1.0": "f19f04b8cbed1b23de6be72a7667992c69e9919d42c261f3c1ade694fcf83037",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKBool.so.8.1.0": "908ee228bdf87332f8a1b4c89f70c2f3cafbef71fbd0cf5b76e01a0f414260f2",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKExpress.so.8.1.0": "d348fa76a8b2bf4cc58d0f2f722996ba3ec2881292bd3fd40c212d6b7c5bc6e3",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKFeat.so.8.1.0": "78b8cf8ff0696d923e7d299122f386ae293a4fc9d65f2eaef54c6a37dab05643",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKFillet.so.8.1.0": "8e02a5cdda3a422bead5c78fc88e1c5c014988ce5d1642dd16e0401960f76c96",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKG2d.so.8.1.0": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKGeomAlgo.so.8.1.0": "80d1caf726eb1eacb56dc0f6ff509e386c03275cb4b1d5ca26a9d6583a8dd4f2",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKGeomBase.so.8.1.0": "7689e777ccbc7051d8375dc5f909a89fda70e518500b1d64894e12e0e9a0a039",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKHLR.so.8.1.0": "31d4c08bd00788c1fa5e1fdc5e9ca705cf6939b252e69cca2d17c9621765ec4d",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKHelix.so.8.1.0": "0762b85ca7f4514f7d01b37fdfa92e23fb30c43295770c3c5e83adce8b375975",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKMesh.so.8.1.0": "0fbc7887b5a914802d0934d89ed7197ba83d2e38622592383a64aa63e6453f9b",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKOffset.so.8.1.0": "60feb372f24d5d83e63c0b835385eeb57dfa03d5ae88b26602927f2b5295f2c0",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKPrim.so.8.1.0": "8b294a8d9e5123883112c9f48b006dc7a6f22791b1d465292c4b7bc19ea32101",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKShHealing.so.8.1.0": "9136732bc7e30f719f53c5e9244fdd39c6a59a19998d897caaf3052cb57692c7",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKTopAlgo.so.8.1.0": "4820cb490942e5af992c0a4199586230a83b29e5027b07ac19d0ac3ed8bdc0c2",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKXMesh.so.8.1.0": "58542dfccccab4ee2d192ec82d7dd42684b1ce62751663aacde975c2b7a0db79",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "log": "native-base-5715d0c8.log.gz",
+  "log_sha256": "f52882ac5105b2a3fdd89e741a760323f9963157207ca4393e68283580717423",
+  "uncompressed_log_sha256": "532554a6ebbf83dd3bcd768f07d7f18c2509318fdf2687bc9594a8e5316bff36",
+  "full_occt_api_parity_proven": false,
+  "full_occt_legacy_runtime_parity_proven": false,
+  "limitations": [
+    "Native-only receipt; no per-declaration Rust runtime join is asserted.",
+    "OCC23497 is an upstream skip, not a passing assertion.",
+    "Only four base toolkits are selected; this does not cover every OCCT toolkit."
+  ]
+}
