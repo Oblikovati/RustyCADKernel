@@ -11,6 +11,12 @@ to `-77`, then requests order 3 from a degree-1 curve and prints all ten slots.
 It also evaluates a rational 3D curve on a non-unit `[2, 6]` span through both
 the global-parameter and local-parameter protected helpers.
 
+Compiler used for the checked-in output: `g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1)
+13.3.0`. The exact command below produced `/tmp/tkmath-cache-derivatives-pinned`;
+the checked-in expected file was copied from its stdout and verified with `cmp`.
+Binary SHA-256: `6fec632a0490fea53b6ebd13e2bcbc71e835b55b706e4bb84c684c07706f7ea7`;
+captured stdout SHA-256: `828831e58ea807ad2588a9feafaddba4804ba03aab8f4d86e42a21ecd9cad316`.
+
 Reproduce against the pinned OCCT headers and libraries:
 
 ```sh
@@ -19,8 +25,15 @@ g++ -std=c++17 \
   tools/oracle/tkmath_cache_derivatives.cxx \
   -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
   -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
-  -lTKMath -lTKernel -o /tmp/tkmath-cache-derivatives
-/tmp/tkmath-cache-derivatives
+  -lTKMath -lTKernel -o /tmp/tkmath-cache-derivatives-pinned
+/tmp/tkmath-cache-derivatives-pinned
+```
+
+To regenerate and check the expected output byte-for-byte, use:
+
+```sh
+/tmp/tkmath-cache-derivatives-pinned > /tmp/tkmath-cache-derivatives-pinned.out
+cmp /tmp/tkmath-cache-derivatives-pinned.out tools/oracle/tkmath_cache_derivatives.expected
 ```
 
 Observed OCCT output begins with `1 2 4 8 -77 -77`, then `1 2 4 8 0 0 0 0
