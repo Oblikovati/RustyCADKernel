@@ -358,3 +358,64 @@ fn bounded_constructor_and_reinitialization_match_native() {
         include_str!("../../../tools/oracle/tkbo_bean_bounded_initialization.expected")
     );
 }
+
+fn general_intersection_edge(mode: i32) -> Edge {
+    use rustycad_tkmath::gp::{Axis2, Circle3, Direction3};
+    if mode == 4 {
+        let axis = Axis2::new(Point3::default(), Direction3::new(0., 1., 0.).unwrap()).unwrap();
+        return BRepBuilderAPIMakeEdge::from_circ_params(
+            Circle3::new(axis, 1.).unwrap(),
+            0.,
+            std::f64::consts::TAU,
+        )
+        .unwrap()
+        .edge()
+        .unwrap();
+    }
+    let y = match mode {
+        2 => 1.,
+        3 | 5 => 1.0000001,
+        _ => 0.,
+    };
+    BRepBuilderAPIMakeEdge::from_points(Point3::new(-2., y, 0.), Point3::new(2., y, 0.))
+        .unwrap()
+        .edge()
+        .unwrap()
+}
+
+#[test]
+fn general_intersection_matches_native_crossings_and_tangencies() {
+    let mut rows = String::new();
+    for mode in 0..6 {
+        let (edge, face) = general_intersection_shapes(mode);
+        let mut solver = BeanFaceIntersector::from_shapes(&edge, &face).unwrap();
+        solver.set_bean_parameters(0., if mode == 4 { std::f64::consts::TAU } else { 4. });
+        for pass in 0..2 {
+            solver.perform().unwrap();
+            snapshot(&solver, mode, 0, pass, &mut rows);
+        }
+    }
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_bean_general_facade.expected")
+    );
+}
+
+fn general_intersection_shapes(mode: i32) -> (Edge, Face) {
+    use rustycad_tkmath::gp::{Transform3, Vector3};
+    use rustycad_tkmath::toploc::Location;
+    let face_mode = match mode {
+        0 => 6,
+        4 => 0,
+        _ => 2,
+    };
+    let (mut edge, mut face) = (general_intersection_edge(mode), analytic_face(face_mode));
+    if mode == 5 {
+        let mut transform = Transform3::default();
+        transform.set_translation(Vector3::new(10., 20., 30.));
+        let location = Location::new(transform);
+        edge.set_location(&location, true).unwrap();
+        face.set_location(&location, true).unwrap();
+    }
+    (edge, face)
+}
