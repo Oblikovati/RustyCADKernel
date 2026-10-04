@@ -42,6 +42,37 @@ fn standard_c_string_fixed_buffer_rejects_short_capacity_without_mutation() {
     assert_eq!(output, original);
 }
 
+#[cfg(all(target_os = "linux", target_pointer_width = "64"))]
+#[test]
+fn standard_c_string_linux_long_lengths_match_native_extremes() {
+    assert_buffer_row("sprintf_long_lengths", format_long_integer_lengths());
+}
+
+#[test]
+fn standard_c_string_long_aliases_follow_target_c_width() {
+    let expected = format!(
+        "{}|{}|{}",
+        std::ffi::c_long::MIN,
+        std::ffi::c_long::MAX,
+        std::ffi::c_ulong::MAX
+    );
+    let actual = format_buffer(
+        b"%ld|%ld|%lu",
+        &[
+            FormatArg::Long(std::ffi::c_long::MIN),
+            FormatArg::Long(std::ffi::c_long::MAX),
+            FormatArg::ULong(std::ffi::c_ulong::MAX),
+        ],
+    );
+    assert_eq!(&actual.0[..actual.0.len() - 1], expected.as_bytes());
+    assert_eq!(actual.1, expected.len());
+}
+
+#[test]
+fn standard_c_string_long_long_lengths_match_native_extremes() {
+    assert_buffer_row("sprintf_long_long_lengths", format_long_long_lengths());
+}
+
 #[test]
 fn standard_c_string_formatter_rejects_unsupported_and_mismatched_arguments() {
     assert_format_error(b"%*d", &[FormatArg::Int(3)]);
@@ -57,6 +88,10 @@ fn standard_c_string_formatter_rejects_unsupported_and_mismatched_arguments() {
     assert_format_error(b"%.1c", &[FormatArg::Int(65)]);
     assert_format_error(b"%*d", &[FormatArg::Int(4)]);
     assert_format_error(b"%+c", &[FormatArg::Int(65)]);
+    assert_format_error(b"%ld", &[FormatArg::Int(7)]);
+    assert_format_error(b"%lld", &[FormatArg::Long(7)]);
+    assert_format_error(b"%lu", &[FormatArg::UInt(7)]);
+    assert_format_error(b"%llu", &[FormatArg::ULong(7)]);
 }
 
 fn format_integer() -> (Vec<u8>, usize) {
@@ -138,6 +173,30 @@ fn format_variadic_slice() -> (Vec<u8>, usize) {
     )
     .unwrap();
     (output, count)
+}
+
+fn format_long_integer_lengths() -> (Vec<u8>, usize) {
+    format_buffer(
+        b"%ld|%ld|%lu|%#018lx",
+        &[
+            FormatArg::Long(std::ffi::c_long::MIN),
+            FormatArg::Long(std::ffi::c_long::MAX),
+            FormatArg::ULong(std::ffi::c_ulong::MAX),
+            FormatArg::ULong(0xdead_beef),
+        ],
+    )
+}
+
+fn format_long_long_lengths() -> (Vec<u8>, usize) {
+    format_buffer(
+        b"%lld|%lld|%.20llu|%#020llX",
+        &[
+            FormatArg::LongLong(i64::MIN),
+            FormatArg::LongLong(i64::MAX),
+            FormatArg::ULongLong(u64::MAX),
+            FormatArg::ULongLong(42),
+        ],
+    )
 }
 
 fn sprintf_fixed_buffer() -> (Vec<u8>, usize) {

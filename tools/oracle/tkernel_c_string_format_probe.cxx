@@ -1,4 +1,5 @@
 #include <Standard_CString.hxx>
+#include <climits>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
@@ -109,12 +110,32 @@ static void format_fixed_buffer_cases()
   record_bytes("vsprintf_slice_tail", aVsprintfCount, aVsprintfBuffer, sizeof(aVsprintfBuffer));
 }
 
+static void format_long_integer_cases(char* theBuffer)
+{
+  const int aCount = Sprintf(theBuffer,
+                             "%ld|%ld|%lu|%#018lx",
+                             LONG_MIN,
+                             LONG_MAX,
+                             ULONG_MAX,
+                             0xdeadbeefUL);
+  record("sprintf_long_lengths", aCount, theBuffer);
+}
+
+static void format_long_long_cases(char* theBuffer)
+{
+  const int aCount = Sprintf(theBuffer, "%lld|%lld|%.20llu|%#020llX",
+                             LLONG_MIN, LLONG_MAX, ULLONG_MAX, 42ULL);
+  record("sprintf_long_long_lengths", aCount, theBuffer);
+}
+
 int main()
 {
   char aBuffer[256] = {};
   format_buffer_cases(aBuffer);
   format_star_char_cases(aBuffer);
   format_fixed_buffer_cases();
+  format_long_integer_cases(aBuffer);
+  format_long_long_cases(aBuffer);
   format_writer_cases(aBuffer);
   return 0;
 }
