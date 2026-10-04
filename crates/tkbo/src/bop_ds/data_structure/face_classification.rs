@@ -105,7 +105,7 @@ impl DataStructure {
         Ok(())
     }
 
-    fn face_internal_vertices(&self, index: i32) -> Result<Vec<i32>, Failure> {
+    pub(super) fn face_internal_vertices(&self, index: i32) -> Result<Vec<i32>, Failure> {
         let mut vertices = Vec::new();
         let mut children = ShapeIterator::new(self.shape(index)?, true, true);
         while children.more() {
@@ -118,7 +118,7 @@ impl DataStructure {
         Ok(vertices)
     }
 
-    fn face_info_slot(&self, index: i32) -> Result<usize, Failure> {
+    pub(super) fn face_info_slot(&self, index: i32) -> Result<usize, Failure> {
         checked_slot(
             self.shape_info(index)?.reference(),
             self.face_info_pool.len(),
