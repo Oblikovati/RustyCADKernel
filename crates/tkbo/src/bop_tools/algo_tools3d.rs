@@ -46,3 +46,9 @@ pub fn get_normal_to_face_on_edge_at(
 
 mod near_edge;
 pub use near_edge::point_near_edge_step;
+
+mod point_in_face;
+pub use point_in_face::{point_in_face, point_in_face_curve, point_in_face_from_edge};
+
+mod near_edge_context;
+pub use near_edge_context::{point_near_edge_at, point_near_edge_with_step};

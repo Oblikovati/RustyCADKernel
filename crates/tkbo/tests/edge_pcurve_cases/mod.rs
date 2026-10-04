@@ -156,3 +156,5 @@ fn store_pcurve(fixture: &ProjectionFixture, edge: &Edge) {
 }
 
 mod near_edge;
+
+mod point_in_face;

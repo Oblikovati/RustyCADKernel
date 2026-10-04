@@ -41,7 +41,7 @@ pub fn point_near_edge_step(
     *point = surface.value(uv.x(), uv.y())?;
     Ok(0)
 }
-fn interior_direction(
+pub(super) fn interior_direction(
     tangent: rustycad_tkmath::gp::Vector2,
     edge: Orientation,
     face: Orientation,

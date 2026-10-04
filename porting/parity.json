@@ -226005,6 +226005,51 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge_step",
       "status": "partial",
       "notes": "480 native explicit-step cases; see tools/oracle/tkbo_point_near_edge.md. Spherical/spline/location and singular domains pending; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointInFace(const TopoDS_Face &, gp_Pnt &, gp_Pnt2d &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_in_face",
+      "status": "partial",
+      "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointNearEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, gp_Pnt2d &, gp_Pnt &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge_at",
+      "status": "partial",
+      "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointInFace(const TopoDS_Face &, const TopoDS_Edge &, const double, const double, gp_Pnt &, gp_Pnt2d &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_in_face_from_edge",
+      "status": "partial",
+      "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointInFace(const TopoDS_Face &, const occ::handle<Geom2d_Curve> &, gp_Pnt &, gp_Pnt2d &, const occ::handle<IntTools_Context> &, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_in_face_curve",
+      "status": "partial",
+      "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointNearEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, const double, gp_Pnt2d &, gp_Pnt &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge_with_step",
+      "status": "partial",
+      "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
     }
   ],
   "tests": [
