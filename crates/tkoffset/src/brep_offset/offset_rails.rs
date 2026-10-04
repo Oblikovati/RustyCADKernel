@@ -1,8 +1,8 @@
 //! Edge-rail branch of `BRepOffset_Offset::Init`.
-use super::BRepOffsetStatus;
 use super::offset_rails_geometry::{
     assemble_pipe_face, construction_error, install_rail_pcurves, make_connectors, unsupported_edge,
 };
+use super::{BRepOffsetOffsetFace, BRepOffsetStatus};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     brep_tools::update_face,
@@ -27,6 +27,7 @@ pub struct BRepOffsetOffset {
     status: BRepOffsetStatus,
     connectors: Vec<Edge>,
     wire_reversed: bool,
+    face_image: Option<BRepOffsetOffsetFace>,
 }
 
 pub(super) struct PipeFaceOptions<'a> {
@@ -51,6 +52,7 @@ impl BRepOffsetOffset {
             status: BRepOffsetStatus::Good,
             connectors: Vec::new(),
             wire_reversed: false,
+            face_image: None,
         }
     }
 
@@ -72,6 +74,20 @@ impl BRepOffsetOffset {
         Ok(result)
     }
 
+    /// Builds the default outside/arc image for a source face.
+    /// `BRepOffsetOffset::from_face(&face, 0.5)?`.
+    pub fn from_face(face: &Face, offset: f64) -> Result<Self, Failure> {
+        let image = BRepOffsetOffsetFace::from_face(face, offset)?;
+        Ok(Self {
+            initial: face.clone().into_shape(),
+            face: image.face().clone(),
+            status: image.status(),
+            connectors: Vec::new(),
+            wire_reversed: false,
+            face_image: Some(image),
+        })
+    }
+
     /// Reinitializes the pipe face, mutating its rail edges' face p-curves like OCCT.
     /// `offset.init_edges(&path, &edge1, &edge2, 0.5, false, 1e-4, Continuity::C1)?`.
     #[allow(clippy::too_many_arguments)]
@@ -87,6 +103,7 @@ impl BRepOffsetOffset {
     ) -> Result<(), Failure> {
         self.initial = path.clone().into_shape();
         self.status = BRepOffsetStatus::Good;
+        self.face_image = None;
         validate_edges(path, edge1, edge2)?;
         let pipe = build_ready_rail_pipe(
             path, edge1, edge2, offset, tolerance, polynomial, continuity,
@@ -117,6 +134,9 @@ impl BRepOffsetOffset {
     /// Returns a generated connector edge for a path endpoint, or a null shape.
     /// `offset.generated(&vertex.clone().into_shape())`.
     pub fn generated(&self, source: &Shape) -> Shape {
+        if let Some(image) = &self.face_image {
+            return image.generated(source);
+        }
         let (_, last) = vertices(&Edge::unchecked(self.initial.clone()), false);
         let index = usize::from(last.is_same(source));
         let Some(edge) = self.connectors.get(index) else {
