@@ -12,6 +12,8 @@ use rustycad_tkernel::{
 };
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
+mod analytic_adaptors;
+mod fast_analytic;
 mod line_plane;
 
 /// Curve/face intersection ranges; `BeanFaceIntersector::from_shapes(&edge, &face)?`.
@@ -165,8 +167,12 @@ impl BeanFaceIntersector {
         if curve_type == CurveType::Line && surface_type == SurfaceType::Plane {
             return self.compute_line_plane();
         }
+        if self.fast_compute_analytic()? {
+            self.done = true;
+            return Ok(());
+        }
         Err(Failure::new(&format!(
-            "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported Line/Plane stage"
+            "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported analytic stage"
         )))
     }
 

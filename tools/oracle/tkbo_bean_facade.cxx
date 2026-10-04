@@ -34,4 +34,4 @@ void run(int mode,int constructor)
  output(solver,mode,constructor,3);solver.Perform();output(solver,mode,constructor,4);
  solver.SetContext(occ::handle<IntTools_Context>());solver.Perform();output(solver,mode,constructor,5);
 }
-int main(){std::cout<<std::fixed<<std::setprecision(12);for(int mode=0;mode<6;++mode)for(int ctor=0;ctor<2;++ctor)run(mode,ctor);}
+int main(){std::cout<<std::fixed<<std::setprecision(12);for(int mode=0;mode<6;++mode)for(int ctor=0;ctor<2;++ctor)run(mode,ctor);return 0;}
