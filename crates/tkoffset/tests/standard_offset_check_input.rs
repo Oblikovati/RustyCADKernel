@@ -168,7 +168,7 @@ fn assert_box_solid_result(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
     );
     let mut properties = GProps::new();
     BRepGProp::surface_properties(maker.shape(), &mut properties, false, false).unwrap();
-    assert!((properties.mass() - 43.991_148_576_407_51).abs() < 1.0e-8);
+    assert!((properties.mass() - 43.991_148_576_407_51).abs() < 1.0e-12);
     assert_box_generated_history(maker, source);
     for face in Explorer::new(maker.shape(), ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
         let analyzer = BRepCheckAnalyzer::new(&face, true, false, false).unwrap();
