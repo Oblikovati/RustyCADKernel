@@ -225557,7 +225557,7 @@
       "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
       "status": "partial",
-      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Endpoint-edge overloads, pcurve-only/located/degenerated/closed rails and complete offset variants remain unsupported or unproven.",
+      "notes": "Identity-located face offset construction includes seam pcurves, shared Created edge/vertex images, conical apex grouping and spherical completion (e0d7ccce). Native tools/oracle/tkoffset_conical_grouping.cxx and OCC28131 face-stage/standard-offset fixtures match topology, validity and area. OCC28131 legacy declaration is mapped. General locations, different-support multi-face offsets, options and complete offset variants remain partial. Also mapped to the edge-rail object mode: Identity-located 3D path/two-rail constructor source translation and native topology/area/tolerance/history fixture; see tools/oracle/tkoffset_offset_rails.md. Subsequent endpoint-edge, pcurve-only, located, degenerated and closed-rail fixtures extend partial coverage; see tkoffset_offset_rails_located and tkoffset_offset_rails_options oracle fixtures. The box corner fixture preserves shared edge identity and opposite orientation across pipe/sphere faces (tools/oracle/tkoffset_sphere_connector_curves.md). Arbitrary combinations and complete offset variants remain unproven.",
       "rust_items": [
         "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
         "rustycad_tkoffset::brep_offset::BRepOffsetOffset::generated"
@@ -225795,7 +225795,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::new",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Initialize(const TopoDS_Shape &, const double, const double, const BRepOffset_Mode, const bool, const bool, const GeomAbs_JoinType, const bool, const bool)",
@@ -225804,7 +225804,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::initialize",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Clear()",
@@ -225813,7 +225813,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::clear",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::AllowLinearization(const bool)",
@@ -225822,7 +225822,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::allow_linearization",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::AddFace(const TopoDS_Face &)",
@@ -225831,7 +225831,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::add_face",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::SetOffsetOnFace(const TopoDS_Face &, const double)",
@@ -225840,7 +225840,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::set_offset_on_face",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::MakeOffsetShape(const Message_ProgressRange &)",
@@ -225849,7 +225849,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_offset_shape",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::CheckInputData(const Message_ProgressRange &)",
@@ -225858,7 +225858,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::check_input_data",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::IsDone() const",
@@ -225867,7 +225867,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_done",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Shape() const",
@@ -225876,7 +225876,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::shape",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::InitShape() const",
@@ -225885,7 +225885,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::init_shape",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::Error() const",
@@ -225894,7 +225894,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::error",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetJoinType() const",
@@ -225903,7 +225903,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::join_type",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::ClosingFaces() const",
@@ -225912,7 +225912,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::closing_faces",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetBadShape() const",
@@ -225921,7 +225921,7 @@
       "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::bad_shape",
       "status": "partial",
-      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Different-support multi-face offsets, general intersections, caps/thickening, histories and cancellation remain incomplete."
+      "notes": "Native configuration/input-validation and bounded identity-located open offsets cover plane/cylinder single faces, OCC28131 filled-face standard offset, and two half-cone faces sharing one support. Shared conical apex completion preserves shared edge/vertex images (e0d7ccce; tools/oracle/tkoffset_conical_grouping.cxx). OCC28131 legacy declaration is mapped. Uninitialized native scalars use explicit Rust Option/error boundaries. Subsequent native fixtures cover adjacent plane/plane and plane/cylinder supports and a 1x2x3 box with 26 faces, 96 edges and eight spherical corners. Analytic connector curves and pcurve representations now match the box fixture, with area tolerance 1e-12 (tools/oracle/tkoffset_sphere_connector_curves.md). General intersections, caps/thickening, arbitrary histories and cancellation remain incomplete; supplemental fixtures do not map additional legacy declarations."
     },
     {
       "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnSurf(const BRepAdaptor_Surface &, const double, const double, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &)",
@@ -228100,8 +228100,7 @@
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::from_adaptors_with_bounds",
       "status": "partial",
       "notes": "24 native line/plane snapshots for explicit bounds overloads; tools/oracle/tkbo_bean_bounded_initialization.md. Six bound scalars are grouped as Range and [f64; 4], tolerances as [f64; 2]. Arbitrary adaptor copy/cache semantics and general solver parity remain unproven; supplemental tests only."
-    }
-,
+    },
     {
       "upstream_id": "IntTools_EdgeFace::IntTools_EdgeFace()",
       "toolkit": "TKBO",
@@ -333062,8 +333061,7 @@
         "linux-gcc-c-locale"
       ],
       "notes": "Exact original fixture and all legacy assertions pass through standard BRepOffset_MakeOffset followed by ShapeFix_Shape. Pinned native GTest passes. Supplemental raw-result area, topology and shared endpoint identity checks also pass. General multi-face offset, intersection and conical branches remain partial."
-    }
-,
+    },
     {
       "upstream_id": "BRepAlgoAPI_BuilderAlgoTest.NotCopyConstructible",
       "toolkit": "TKBO",
@@ -333074,7 +333072,9 @@
       "rust_test": "not_copy_constructible",
       "rust_source": "crates/tkbo/tests/brep_algo_api_noncopy_legacy.rs",
       "status": "translated",
-      "profiles": ["linux-gcc-c-locale"]
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }
