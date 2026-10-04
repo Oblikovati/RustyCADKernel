@@ -29,9 +29,10 @@ static DENOM: [&ChunkedTable; 3] = [
     &jacobi_tables::DENOM_C2,
 ];
 
-/// Mutable outputs for a basis evaluation; rows above the requested order stay untouched.
+/// Mutable outputs for a basis evaluation; D0–D3 calls leave rows above their order untouched.
 ///
 /// `BasisRows { rows: [&mut values, &mut first, &mut second, &mut third] }`.
+/// Separate slices cannot alias one native array across argument positions.
 pub struct BasisRows<'r> {
     /// Values, then first, second and third derivatives.
     pub rows: [&'r mut [f64]; 4],
@@ -114,7 +115,7 @@ impl JacobiPolynomial {
         mut basis: BasisRows<'_>,
     ) -> Result<(), Failure> {
         if native_order < 0 {
-            return self.evaluate_negative_order(&mut basis, native_order, u);
+            return self.evaluate_negative_order(&mut basis, u);
         }
         let (compute_order, normalize_order) = jacobi_orders(native_order);
         let count: usize = self.degree as usize + 1;
@@ -125,12 +126,7 @@ impl JacobiPolynomial {
         Ok(())
     }
 
-    fn evaluate_negative_order(
-        &self,
-        basis: &mut BasisRows<'_>,
-        _native_order: i32,
-        u: f64,
-    ) -> Result<(), Failure> {
+    fn evaluate_negative_order(&self, basis: &mut BasisRows<'_>, u: f64) -> Result<(), Failure> {
         let count: usize = self.degree as usize + 1;
         self.validate_rows(1, count, &basis.rows)?;
         self.seed_rows(0, u, &mut basis.rows);
