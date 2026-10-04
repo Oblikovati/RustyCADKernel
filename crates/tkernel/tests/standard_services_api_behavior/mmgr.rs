@@ -37,7 +37,7 @@ fn mapped_system_regions_round_to_pages_and_are_zeroed() {
 }
 
 #[test]
-fn heap_system_regions_keep_size_and_reject_inexact_or_foreign_frees() {
+fn heap_system_regions_keep_size_and_ignore_free_size() {
     let mut opt = manager(true, false);
     let mut other = manager(true, false);
     let mut size = 37;
@@ -50,9 +50,49 @@ fn heap_system_regions_keep_size_and_reject_inexact_or_foreign_frees() {
             .iter()
             .all(|b| *b == 0)
     );
-    assert_program_error(opt.free_system_memory(&mut block, 36).unwrap_err());
     assert_program_error(other.free_system_memory(&mut block, size).unwrap_err());
+    opt.free_system_memory(&mut block, 36).unwrap();
+    assert!(opt.system_memory_bytes(&block).is_err());
+}
+
+#[test]
+fn mapped_partial_system_free_moves_handle_to_remaining_suffix() {
+    let mut opt = manager(true, true);
+    let page = opt.page_size();
+    let mut size = 3 * page;
+    let mut block = opt.allocate_system_memory(&mut size).unwrap();
+    let old_address = block.address().get();
+    opt.system_memory_bytes_mut(&block).unwrap()[2 * page] = 0x5a;
+    opt.free_system_memory(&mut block, page + 1).unwrap();
+    assert_eq!(block.address().get(), old_address + 2 * page);
+    assert_eq!(block.allocated_size(), page);
+    assert_eq!(opt.system_memory_bytes(&block).unwrap()[0], 0x5a);
+    opt.free_system_memory(&mut block, page).unwrap();
+    assert!(opt.system_memory_bytes(&block).is_err());
+}
+
+#[test]
+fn zero_size_mapped_free_leaves_region_unchanged() {
+    let mut opt = manager(true, true);
+    let mut size = opt.page_size();
+    let mut block = opt.allocate_system_memory(&mut size).unwrap();
+    let address = block.address();
+    opt.free_system_memory(&mut block, 0).unwrap();
+    assert_eq!(block.address(), address);
+    assert_eq!(opt.system_memory_bytes(&block).unwrap().len(), size);
     opt.free_system_memory(&mut block, size).unwrap();
+}
+
+#[test]
+fn mapped_free_cannot_release_past_the_tracked_region() {
+    let mut opt = manager(true, true);
+    let page = opt.page_size();
+    let mut size = page;
+    let mut block = opt.allocate_system_memory(&mut size).unwrap();
+    assert_program_error(opt.free_system_memory(&mut block, page + 1).unwrap_err());
+    assert_program_error(opt.free_system_memory(&mut block, usize::MAX).unwrap_err());
+    assert_eq!(opt.system_memory_bytes(&block).unwrap().len(), page);
+    opt.free_system_memory(&mut block, page).unwrap();
 }
 
 fn assert_program_error(failure: rustycad_tkernel::standard::Failure) {

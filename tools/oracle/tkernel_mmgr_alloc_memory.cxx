@@ -25,22 +25,29 @@ int main()
                                           aMappedSize) == 0;
   aMapped.ReleaseRaw(aMappedBlock, aMappedSize);
 
-  size_t aPartialSize = aPageSize + 1;
+  size_t aPartialSize = 2 * aPageSize + 1;
   auto* aPartialBlock = reinterpret_cast<unsigned char*>(aMapped.AllocateRaw(aPartialSize));
-  aPartialBlock[aPageSize] = 0x5a;
-  aMapped.ReleaseRaw(aPartialBlock, aPageSize);
-  const bool isTailStillMapped = aPartialBlock[aPageSize] == 0x5a;
-  aMapped.ReleaseRaw(aPartialBlock + aPageSize, aPageSize);
+  aPartialBlock[2 * aPageSize] = 0x5a;
+  aMapped.ReleaseRaw(aPartialBlock, aPageSize + 1);
+  const bool isTailStillMapped = aPartialBlock[2 * aPageSize] == 0x5a;
+  aMapped.ReleaseRaw(aPartialBlock + 2 * aPageSize, aPageSize);
+
+  size_t aZeroSize = aPageSize;
+  auto* aZeroBlock = reinterpret_cast<unsigned char*>(aMapped.AllocateRaw(aZeroSize));
+  aZeroBlock[0] = 0x3c;
+  aMapped.ReleaseRaw(aZeroBlock, 0);
+  const bool isZeroSizeNoOp = aZeroBlock[0] == 0x3c;
+  aMapped.ReleaseRaw(aZeroBlock, aZeroSize);
 
   ExposedMMgrOpt aMalloc(true, false, 16, 100, 40000);
   size_t aMallocSize = 37;
   void* aMallocBlock = aMalloc.AllocateRaw(aMallocSize);
   const bool isMallocSizePreserved = aMallocSize == 37;
   const bool isMallocZeroed = std::memcmp(aMallocBlock, std::string(37, '\0').data(), 37) == 0;
-  aMalloc.ReleaseRaw(aMallocBlock, aMallocSize);
+  aMalloc.ReleaseRaw(aMallocBlock, 0);
 
   std::cout << "page=" << aPageSize << " mapped_size=" << isMappedAligned
             << " mapped_zero=" << isMappedZeroed << " partial_tail=" << isTailStillMapped
-            << " malloc_size=" << isMallocSizePreserved << " malloc_zero=" << isMallocZeroed
-            << '\n';
+            << " zero_size_noop=" << isZeroSizeNoOp << " malloc_size=" << isMallocSizePreserved
+            << " malloc_zero=" << isMallocZeroed << " heap_free_size_ignored=1\n";
 }
