@@ -1,0 +1,42 @@
+{
+  "source_revision": "edafda0ad5ef4301ac5b641bfb9add17bfd2f841",
+  "scope": "Focused validation of merged base toolkit slices; no complete workspace or full legacy runtime claim",
+  "rust_tests_passed": 142,
+  "rust_tests_failed": 0,
+  "rust_commands": [
+    "cargo test -p rustycad-tkernel --lib --test flat_legacy_cursor --test storage_api_behavior",
+    "cargo test -p rustycad-tkmath --test bspline_cache_shared_handle"
+  ],
+  "source_clean_at_test_execution": true,
+  "archive": "base-focused-edafda0a.tar.gz",
+  "archive_sha256": "d6d486302549a109edbc417c018bf17dba315f7e44f310ac3356bec968a7edbf",
+  "files_sha256": {
+    "edaf-tkernel-focused.log": "9ecb7cc24e9cdd02f478957ba7d9edb321d0974aa7e187328730c9c24e394197",
+    "edaf-cache-focused.log": "40a63c5c97bc8d0b299fd692f49e3b79eb4213a4dc24e639b24865324253b858",
+    "tkernel_standard_istream_exceptions-main.txt": "cdc9a8abe8adcad5b6a96f2951f27bc4eeeac86cd798a715ddd1d3e5943d9333",
+    "tkmath_bspline_cache_shared_handle-main.txt": "60939020479888adcc3459f4fd6d7212eaf22dcfea67ee9da74cb9f3c4d02715"
+  },
+  "native_probes": [
+    {
+      "source": "tools/oracle/tkernel_standard_istream_exceptions.cxx",
+      "source_sha256": "e8596e8e8de2e2879d2bd1e756110606b477f82ee3a08ddcfaef8708f166efd7",
+      "expected": "tools/oracle/tkernel_standard_istream_exceptions.expected",
+      "output_sha256": "cdc9a8abe8adcad5b6a96f2951f27bc4eeeac86cd798a715ddd1d3e5943d9333",
+      "executable_sha256": "ebddb24c6a5e4201406d1650f48521d9de7ec4a7d0e83fd7b93e40fc7919d7bd",
+      "compile_command": "g++ -std=c++17 -O2 tools/oracle/tkernel_standard_istream_exceptions.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkernel_standard_istream_exceptions-main"
+    },
+    {
+      "source": "tools/oracle/tkmath_bspline_cache_shared_handle.cxx",
+      "source_sha256": "d2adb055946f3b3d4c5681d5d1256d7a0699523f6bd84201299906cb0502c840",
+      "expected": "tools/oracle/tkmath_bspline_cache_shared_handle.expected",
+      "output_sha256": "60939020479888adcc3459f4fd6d7212eaf22dcfea67ee9da74cb9f3c4d02715",
+      "executable_sha256": "b11051e54e610ee3e63c4946ce83bb22149ddb37fa257763ff2c64d1eaf3eba5",
+      "compile_command": "g++ -std=c++17 -O2 tools/oracle/tkmath_bspline_cache_shared_handle.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath_bspline_cache_shared_handle-main"
+    }
+  ],
+  "native_libraries_sha256": {
+    "libTKMath.so": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "libTKernel.so": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871"
+}
