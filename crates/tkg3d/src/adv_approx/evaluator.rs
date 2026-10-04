@@ -43,7 +43,7 @@ pub trait AdvApproxEvaluatorFunction {
 
 /// Borrowed inputs and outputs of native `Evaluate`.
 pub struct AdvApproxEvaluation<'a> {
-    /// Native `Dimension`; result storage still has the caller's allocated length.
+    /// Mutable native `Dimension`; result storage retains its original safe slice length.
     pub dimension: &'a mut i32,
     /// Native mutable interval pair, reused by `AdvApprox_SimpleApprox::Perform`.
     pub start_end: &'a mut [f64; 2],

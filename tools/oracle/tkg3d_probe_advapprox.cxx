@@ -27,6 +27,7 @@ public:
   if(mode==3&&calls==5){*DerivativeRequest=1;}
   if((mode==1&&*DerivativeRequest==2)||(mode==2&&calls==failAt)){*ErrorCode=1;return;}
   for(int c=0;c<*Dimension;++c)Result[c]=g3_aa_value(kind,c,*Parameter,*DerivativeRequest);
+  if(mode==3&&calls==5){*Dimension=1;}
  }
 };
 // Reads: kind mode failAt.
