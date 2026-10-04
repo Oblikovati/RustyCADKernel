@@ -23,11 +23,13 @@ use std::{
     sync::{Arc, Mutex, MutexGuard, OnceLock},
 };
 mod accumulating;
+mod aligned;
 mod incremental;
 mod owned;
 mod raw_heap;
 use accumulating::AccEngine;
 pub use accumulating::{ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockState};
+pub use aligned::{AccAlignedPtr, AccAlignedSize};
 use incremental::IncEngine;
 pub use incremental::{
     INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,

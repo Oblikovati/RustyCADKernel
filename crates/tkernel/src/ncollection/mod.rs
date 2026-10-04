@@ -28,9 +28,9 @@ pub use mat4::Mat4;
 #[allow(unsafe_code)]
 mod allocator;
 pub use allocator::{
-    ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockState, AllocatedArray,
-    AllocatedBox, AllocatedBytes, BaseAllocator, INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE,
-    IncBlock, IncBlockSizeLevel,
+    ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccAlignedPtr, AccAlignedSize,
+    AccBlockState, AllocatedArray, AllocatedBox, AllocatedBytes, BaseAllocator,
+    INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
 mod dynamic_array;
 pub use dynamic_array::{DynamicArray, DynamicCursor};
