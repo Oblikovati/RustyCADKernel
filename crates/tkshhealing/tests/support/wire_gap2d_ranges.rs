@@ -5,11 +5,11 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::{ncollection::Array1, standard::Handle};
 use rustycad_tkg2d::geom2d::{
     Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCurve, Geom2dLine, Geom2dOffsetCurve,
-    Geom2dTrimmedCurve,
+    Geom2dParabola, Geom2dTrimmedCurve,
 };
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkmath::gp::{
-    Axis2, Axis2d, Axis3, Circle3, Direction2, Direction3, Ellipse3, Point2, Point3,
+    Axis2, Axis2d, Axis3, Axis22d, Circle3, Direction2, Direction3, Ellipse3, Point2, Point3,
 };
 use rustycad_tkshhealing::shape_fix::ShapeFixWire;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
@@ -79,6 +79,24 @@ pub(super) fn set_tangent_bspline_pcurves(
     )))
     .cast();
     set_pcurve_range(&builder, first_edge, face, &spline, 1.0);
+    set_pcurve_range(&builder, second_edge, face, &line, 1.0);
+}
+
+pub(super) fn set_parabola_line_pcurves(
+    face: &Face,
+    first_edge: &rustycad_tkbrep::topods::Edge,
+    second_edge: &rustycad_tkbrep::topods::Edge,
+) {
+    let builder = BRepBuilder::default();
+    let parabola: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dParabola::new(Axis22d::default(), 0.25).unwrap()).cast();
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::new(0.2, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+    )))
+    .cast();
+    set_pcurve_range(&builder, first_edge, face, &parabola, 0.2);
+    builder.range_on_face(first_edge, face, 0.1, 0.2).unwrap();
     set_pcurve_range(&builder, second_edge, face, &line, 1.0);
 }
 
