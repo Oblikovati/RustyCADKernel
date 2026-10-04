@@ -98,6 +98,10 @@ bool hasLocalAncestor(const clang::Decl &declaration) {
 std::string exclusionFor(const clang::Decl &declaration) {
   if (declaration.isImplicit()) return "implicit_declaration";
   if (llvm::isa<clang::ParmVarDecl>(&declaration)) return "function_parameter";
+  if (llvm::isa<clang::TemplateTypeParmDecl,
+                clang::NonTypeTemplateParmDecl,
+                clang::TemplateTemplateParmDecl>(&declaration))
+    return "template_parameter_metadata";
   if (const auto *variable = llvm::dyn_cast<clang::VarDecl>(&declaration))
     if (!variable->isFileVarDecl() && !variable->isStaticDataMember())
       return "local_variable";
@@ -194,12 +198,23 @@ const clang::FunctionDecl *functionForApi(const clang::Decl &declaration) {
   return nullptr;
 }
 
-const clang::FunctionTemplateDecl *functionTemplateForApi(
+const clang::TemplateParameterList *templateParametersForApi(
     const clang::Decl &declaration) {
-  if (const auto *templ = llvm::dyn_cast<clang::FunctionTemplateDecl>(&declaration))
-    return templ;
-  const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration);
-  return function ? function->getDescribedFunctionTemplate() : nullptr;
+  if (const auto *templ = llvm::dyn_cast<clang::TemplateDecl>(&declaration))
+    return templ->getTemplateParameters();
+  if (const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration)) {
+    const auto *templ = function->getDescribedFunctionTemplate();
+    return templ ? templ->getTemplateParameters() : nullptr;
+  }
+  if (const auto *partial =
+          llvm::dyn_cast<clang::ClassTemplatePartialSpecializationDecl>(
+              &declaration))
+    return partial->getTemplateParameters();
+  if (const auto *partial =
+          llvm::dyn_cast<clang::VarTemplatePartialSpecializationDecl>(
+              &declaration))
+    return partial->getTemplateParameters();
+  return nullptr;
 }
 
 bool isIdentifierCharacter(char character) {
@@ -246,18 +261,18 @@ std::string identitySignature(const clang::Decl &declaration,
 
 std::string templateParameterSignature(const clang::Decl &declaration,
                                        const clang::ASTContext &context) {
-  const auto *templ = functionTemplateForApi(declaration);
-  if (!templ) return "";
+  const auto *parameters = templateParametersForApi(declaration);
+  if (!parameters) return "";
   std::string signature;
   llvm::raw_string_ostream output(signature);
   clang::PrintingPolicy policy(context.getLangOpts());
   policy.FullyQualifiedName = true;
-  templ->getTemplateParameters()->print(output, context, policy);
+  parameters->print(output, context, policy);
   output.flush();
   std::string normalized = signature;
-  for (unsigned index = 0; index < templ->getTemplateParameters()->size(); ++index) {
+  for (unsigned index = 0; index < parameters->size(); ++index) {
     const auto *parameter = llvm::dyn_cast<clang::NamedDecl>(
-        templ->getTemplateParameters()->getParam(index));
+        parameters->getParam(index));
     if (parameter && !parameter->getName().empty())
       normalized = replaceIdentifier(normalized, parameter->getNameAsString(),
                                      "__template_param_" + std::to_string(index));

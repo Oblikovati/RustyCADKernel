@@ -53,6 +53,10 @@ Each output line is a JSON object with an `event` discriminator and the
   generated declarations, template-owned record/function patterns, access
   markers, static assertions, and other non-API AST nodes are also reported as
   exclusions. Namespace/file variables and static data members are candidates.
+  Template parameter nodes are retained as `template_parameter_metadata`
+  exclusions; their defaults, bounds, packs, and nested template-parameter
+  lists are captured on the enclosing template declaration's
+  `template_signature`, so they do not become independent Rust API obligations.
   Dependent `UnresolvedUsingValue` declarations remain visible API obligations
   with `api_resolution=unresolved_using_value_target` and
   `callable_status=unknown` until template instantiation resolves their targets.
