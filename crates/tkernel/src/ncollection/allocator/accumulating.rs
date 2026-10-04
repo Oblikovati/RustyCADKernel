@@ -3,6 +3,7 @@
 //! Blocks are found by `address / block_size` exactly as upstream; the map stores block
 //! descriptors by key and the `prevBlock` chain links keys instead of descriptor pointers.
 use super::raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_reallocate};
+use super::{AccAlignedSize, AccBlock};
 use crate::standard::Failure;
 use std::{collections::HashMap, ptr::NonNull};
 
@@ -32,40 +33,41 @@ pub struct AccBlockState {
 }
 
 /// Native `Block`: allocation grows down from `alloc_start` towards `address`.
-struct AccBlock {
-    address: NonNull<u8>,
-    alloc_start: usize,
-    prev_block: Option<usize>,
-    alloc_count: i32,
+struct AccBlockSlot {
+    payload: NonNull<u8>,
+    descriptor: AccBlock,
 }
 
-impl AccBlock {
+impl AccBlockSlot {
     fn new(address: NonNull<u8>, size: usize, prev_block: Option<usize>) -> Self {
-        let mut block = Self {
-            address,
-            alloc_start: 0,
-            prev_block,
-            alloc_count: 0,
-        };
-        block.set_free_size(size);
-        block
+        let descriptor = AccBlock::with_previous(address.as_ptr() as usize, size, prev_block);
+        Self {
+            payload: address,
+            descriptor,
+        }
     }
     fn start(&self) -> usize {
-        self.address.as_ptr() as usize
+        self.descriptor.address
     }
-    /// `SetFreeSize`: the AlignedPtr constructor masks the new start down to 4 bytes.
+    /// Delegates cursor initialization to the same public record operation.
     fn set_free_size(&mut self, size: usize) {
-        self.alloc_start = self.start().wrapping_add(size) & !(ACC_ALIGN - 1);
+        self.descriptor.set_free_size(size);
     }
     fn free_size(&self) -> usize {
-        self.alloc_start - self.start()
+        self.descriptor.free_size()
     }
     fn state(&self) -> AccBlockState {
         AccBlockState {
             address: self.start(),
             free_size: self.free_size(),
-            alloc_count: self.alloc_count,
+            alloc_count: self.descriptor.alloc_count,
         }
+    }
+    fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
+        let cursor = self.descriptor.allocate(AccAlignedSize::new(size));
+        // SAFETY: selection guarantees the descriptor cursor stays within the owned block; the
+        // slot's payload pointer supplies allocation provenance for the native numeric address.
+        NonNull::new(self.payload.as_ptr().with_addr(cursor.as_ptr() as usize))
     }
 }
 
@@ -73,7 +75,7 @@ impl AccBlock {
 pub(super) struct AccEngine {
     block_size: usize,
     last_block: Option<usize>,
-    blocks: HashMap<usize, AccBlock>,
+    blocks: HashMap<usize, AccBlockSlot>,
 }
 
 // SAFETY: the engine exclusively owns every block allocation; it is only reached through a Mutex.
@@ -116,12 +118,10 @@ impl AccEngine {
     pub(super) fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
         let size = aligned_size(size)?;
         let key = self.select_block(size)?;
-        let block = self.blocks.get_mut(&key).expect("selected block is bound");
-        block.alloc_count += 1;
-        block.alloc_start -= size;
-        let offset = block.alloc_start - block.start();
-        // SAFETY: alloc_start stays within [address, address + block size].
-        Some(unsafe { block.address.add(offset) })
+        self.blocks
+            .get_mut(&key)
+            .expect("selected block is bound")
+            .allocate(size)
     }
 
     /// Allocation honouring a Rust layout alignment (typed allocations only).
@@ -157,7 +157,7 @@ impl AccEngine {
     /// The native `for (b = last->prev; b && --rest; b = b->prev)` scan.
     fn lookup_previous(&self, last: usize, size: usize) -> Option<usize> {
         let mut rest = ACC_MAX_LOOKUP_BLOCKS;
-        let mut iterator = self.blocks[&last].prev_block;
+        let mut iterator = self.blocks[&last].descriptor.prev_block;
         while let Some(key) = iterator {
             rest -= 1;
             if rest == 0 {
@@ -166,7 +166,7 @@ impl AccEngine {
             if size <= self.blocks[&key].free_size() {
                 return Some(key);
             }
-            iterator = self.blocks[&key].prev_block;
+            iterator = self.blocks[&key].descriptor.prev_block;
         }
         None
     }
@@ -176,7 +176,7 @@ impl AccEngine {
         let rounded = aligned_size(size)?;
         let address = heap_allocate(rounded, MALLOC_ALIGNMENT, true)?;
         let key = self.key(address.as_ptr() as usize);
-        let block = AccBlock::new(address, size, self.last_block);
+        let block = AccBlockSlot::new(address, size, self.last_block);
         self.blocks.insert(key, block);
         self.last_block = Some(key);
         Some(key)
@@ -209,7 +209,7 @@ impl AccEngine {
         let mut iterator = self.last_block;
         while let Some(key) = iterator {
             states.push(self.blocks[&key].state());
-            iterator = self.blocks[&key].prev_block;
+            iterator = self.blocks[&key].descriptor.prev_block;
         }
         states
     }
@@ -219,7 +219,7 @@ impl AccEngine {
     /// which `findBlock` cannot reach) or the block has no live allocation.
     pub(super) fn freeable_block(&self, address: usize) -> Result<usize, Failure> {
         self.find_block(address)
-            .filter(|key| self.blocks[key].alloc_count != 0)
+            .filter(|key| self.blocks[key].descriptor.alloc_count != 0)
             .ok_or_else(|| Failure::with_type("Standard_ProgramError", INVALID_FREE, ""))
     }
 
@@ -230,8 +230,8 @@ impl AccEngine {
     pub(super) fn free(&mut self, address: usize) -> Result<(), Failure> {
         let key = self.freeable_block(address)?;
         let block = self.blocks.get_mut(&key).expect("found block is bound");
-        block.alloc_count -= 1;
-        if block.alloc_count != 0 {
+        block.descriptor.free();
+        if block.descriptor.alloc_count != 0 {
             return Ok(());
         }
         if self.blocks.len() > 1 {
@@ -246,9 +246,9 @@ impl AccEngine {
     fn release_block(&mut self, key: usize) {
         let block = self.blocks.remove(&key).expect("released block is bound");
         // SAFETY: the block payload came from heap_allocate/heap_reallocate and is freed once.
-        unsafe { heap_free(block.address) };
+        unsafe { heap_free(block.payload) };
         if self.last_block == Some(key) {
-            self.last_block = block.prev_block;
+            self.last_block = block.descriptor.prev_block;
             return;
         }
         let mut iterator = self.last_block;
@@ -257,11 +257,11 @@ impl AccEngine {
                 .blocks
                 .get_mut(&current)
                 .expect("chained block is bound");
-            if slot.prev_block == Some(key) {
-                slot.prev_block = block.prev_block;
+            if slot.descriptor.prev_block == Some(key) {
+                slot.descriptor.prev_block = block.descriptor.prev_block;
                 return;
             }
-            iterator = slot.prev_block;
+            iterator = slot.descriptor.prev_block;
         }
     }
 
@@ -269,7 +269,7 @@ impl AccEngine {
     fn shrink_sole_block(&mut self, key: usize) {
         let rounded =
             aligned_size(self.block_size).expect("block size was rounded at construction");
-        let address = self.blocks[&key].address;
+        let address = self.blocks[&key].payload;
         // SAFETY: the block payload is live and owned by this engine.
         let Some(moved) = (unsafe { heap_reallocate(address, rounded) }) else {
             return; // native realloc failure throws before touching the block
@@ -277,13 +277,14 @@ impl AccEngine {
         let new_key = self.key(moved.as_ptr() as usize);
         let block = self.blocks.get_mut(&key).expect("sole block is bound");
         if moved == address || new_key == key {
-            block.address = moved;
+            block.payload = moved;
+            block.descriptor.address = moved.as_ptr() as usize;
             block.set_free_size(self.block_size);
             return;
         }
         self.blocks.clear();
         self.blocks
-            .insert(new_key, AccBlock::new(moved, self.block_size, None));
+            .insert(new_key, AccBlockSlot::new(moved, self.block_size, None));
         self.last_block = Some(new_key);
     }
 }
@@ -292,7 +293,7 @@ impl Drop for AccEngine {
     fn drop(&mut self) {
         for (_, block) in self.blocks.drain() {
             // SAFETY: each payload is owned by this engine and freed exactly once here.
-            unsafe { heap_free(block.address) };
+            unsafe { heap_free(block.payload) };
         }
     }
 }

@@ -24,6 +24,7 @@ use std::{
 };
 mod accumulating;
 mod aligned;
+mod block;
 mod incremental;
 mod keys;
 mod owned;
@@ -31,6 +32,7 @@ mod raw_heap;
 use accumulating::AccEngine;
 pub use accumulating::{ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockState};
 pub use aligned::{AccAlignedPtr, AccAlignedSize};
+pub use block::AccBlock;
 use incremental::IncEngine;
 pub use incremental::{
     INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,

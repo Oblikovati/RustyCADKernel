@@ -93750,7 +93750,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -93782,7 +93782,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -216387,7 +216387,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -234478,6 +234478,94 @@
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer",
       "status": "partial",
       "notes": "Concrete bounded borrowed-buffer reading and seeking are implemented. Native virtual Init and protected std::streambuf hook overriding are not exposed through an equivalent Rust trait/base surface. The callable put_back_integer hook covers full native int requests, but does not implement subclass dispatch. See porting/audits/array-stream-override-surface.md."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock",
+      "status": "partial",
+      "notes": "Protected record value model only; Rust does not expose native allocator inheritance or its block map. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::Block(void*,size_t,Block*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::with_previous",
+      "status": "partial",
+      "notes": "Construction preserves cursor alignment and count initialization; pointer identities are represented as usize and never dereferenced. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::SetFreeSize(size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::set_free_size",
+      "status": "partial",
+      "notes": "Matches cursor alignment for defined address ranges; Rust uses integer address identities, not live pointer provenance. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::FreeSize() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::free_size",
+      "status": "partial",
+      "notes": "Matches byte distance for defined in-block states; addresses are value identities. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::Allocate(NCollection_AccAllocator::AlignedSize) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::allocate",
+      "status": "partial",
+      "notes": "Matches rounded downward cursor and allocation-count transitions when the request remains inside the represented block; Rust does not dereference the returned pointer. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::Free()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::free",
+      "status": "implemented",
+      "notes": "Decrements the native live-allocation count; wrapping only differs outside defined signed integer range. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::IsEmpty() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::is_empty",
+      "status": "implemented",
+      "notes": "Returns whether the native live-allocation count is zero. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::address",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::address",
+      "status": "partial",
+      "notes": "Address identity is held as usize so record methods cannot dereference allocator storage. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::allocStart",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::alloc_start",
+      "status": "partial",
+      "notes": "Cursor is represented by the existing aligned raw-pointer value wrapper; record operations do not dereference it. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::prevBlock",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::prev_block",
+      "status": "partial",
+      "notes": "Previous descriptor pointer is represented as an optional usize identity, without ownership or dereference. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Block::allocCount",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlock::alloc_count",
+      "status": "implemented",
+      "notes": "Native int maps to i32 and remains directly mutable; behavior outside signed overflow remains unspecified as in C++. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
     }
   ],
   "tests": [
