@@ -11,6 +11,7 @@ use rustycad_tkernel::standard::Failure;
 use std::sync::OnceLock;
 
 mod basis;
+mod overlapping;
 
 // W(t) = (1 - t^2)^(NivConstr+1) in canonical coefficients.
 const W_COEFFICIENTS: [&[f64]; 3] = [

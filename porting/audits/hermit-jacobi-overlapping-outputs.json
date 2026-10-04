@@ -1,0 +1,68 @@
+{
+  "scope": "PLib_HermitJacobi D0123 overlapping caller arrays, also available for D1/D2/D3 through explicit derivative order",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "evidence": {
+    "native_source": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.cxx",
+      "sha256": "935cf733c4b2bdecdf722d4c9bf1ee58491f08279e494e075ab4a09d94aca93a"
+    },
+    "probe": {
+      "path": "tools/oracle/tkmath_hermit_overlapping.cxx",
+      "sha256": "3cb64d1d32dfce4302b43c539f6e97d8fda872bb12a33eefe87e2f4a615f040b"
+    },
+    "expected": {
+      "path": "tools/oracle/tkmath_hermit_overlapping.expected",
+      "sha256": "09451c55d28ecf20e7fe7a1ed8af3859f91354e95d626f0842967fb9a2923b7f"
+    },
+    "library": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0",
+      "sha256": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8"
+    }
+  },
+  "cases": 48,
+  "compared_f64_bits": 2304,
+  "patterns": [
+    "all rows share a start",
+    "partly overlapping forward and reverse starts",
+    "reverse offset starts",
+    "disjoint starts"
+  ],
+  "constraints": [
+    "C0",
+    "C1",
+    "C2"
+  ],
+  "derivative_orders": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "work_degree": 8,
+  "parameter": 0.37,
+  "native_compiler": "GCC 13.3.0",
+  "native_flags": [
+    "-std=c++17",
+    "-O2"
+  ],
+  "implementation": "Reuse nonalias polynomial evaluation, then copy complete output rows in native order; native output arrays are not read while computing intermediates. No overlapping mutable references.",
+  "focused_tests": "5 passed including existing protected D0123 cases",
+  "strict_clippy": "cargo clippy -p rustycad-tkmath --all-targets -- -D warnings passed",
+  "limits": [
+    "Orders outside 0..3 and out-of-buffer spans are rejected safely.",
+    "This receipt covers HermitJacobi; JacobiPolynomial recurrence aliasing remains a separate partial mapping.",
+    "No new original legacy test declarations."
+  ],
+  "package_tests": {
+    "passed": 2738,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 244
+  },
+  "package_log": {
+    "path": "porting/audits/hermit-jacobi-overlapping-package.log.gz",
+    "sha256": "b1e4f6e7c10513c2b757904533d9c578a4e0aa6fa8421ff149243085c0ffa95c",
+    "uncompressed_sha256": "85895117f64319a94291116ef9cbadaedff3871b7ece13ea68d8fd3db6777b80",
+    "target_directory": "/tmp/rustycad-hermit-overlap-target"
+  }
+}
