@@ -89,7 +89,7 @@
   ],
   "current_work": {
     "TKernel": "Public typed C-string formatting wrappers now reuse the existing engine (partial format/stdio domain). Allocator key field borrowing and full integer stream putback inputs are implemented with native probes. Native stream override dispatch and platform backends remain partial.",
-    "TKMath": "Public protected gp_Ax2 direction helpers now expose existing algorithms with native probes. Const-specialized alias inventory support added with explicit bindings and fail-closed constraints; refresh inventory to confirm Bnd method resolution. Descriptor-handle semantics and mutable cache wrapper integration remain partial.",
+    "TKMath": "Protected gp_Ax2 direction helpers are public and native-probed. Const-specialized alias normalization records bindings, but actual Bnd aliases still lack captured impls because rustdoc strips the private target module. Private-item capture with public-reachability filtering is in progress. Descriptor-handle semantics and mutable cache wrapper integration remain partial.",
     "TKG2d/TKG3d": "Public curve/surface adaptor records, shared nullable spline caches, and scoped B-spline pole readers implemented with native probes. Const-reference lifetime parity and cache RTTI remain open.",
     "TKGeomBase/TKGeomAlgo": "Audit missing callable implementations and select dependency blockers."
   },
@@ -106,8 +106,8 @@
     }
   ],
   "evidence": {
-    "rust_workspace": "porting/runtime-evidence/cargo-workspace-5b5912bd.json",
-    "native_rust_declaration_joins": "porting/runtime-evidence/base-legacy-5b5912bd.json",
+    "rust_workspace": "porting/runtime-evidence/cargo-workspace-a1841184.json",
+    "native_rust_declaration_joins": "porting/runtime-evidence/base-legacy-a1841184.json",
     "api_inventory": "porting/api-inventory/completeness.json",
     "freshness": "Receipts identify source revisions. Declarations, typed runtime expansions, CTest registrations, and supplemental probes have separate counts."
   },
