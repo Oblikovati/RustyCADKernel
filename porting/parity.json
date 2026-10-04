@@ -230472,7 +230472,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "partial",
-      "notes": "Cache descriptor, Standard_Transient ancestry, handle upcast and object identity now tested against native OCCT. Rust descriptor access returns a static RuntimeType reference; native descriptor Handle/reference-count semantics and integration with the separate mutable shared-cache wrapper are not fully established. See tools/oracle/tkmath_bsplclib_cache_rtti.md. Supplemental evidence only."
+      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplclib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplCLib_Cache::DynamicType() const",
@@ -230480,7 +230480,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::<rustycad_tkernel::standard::Transient>::dynamic_type",
       "status": "partial",
-      "notes": "Cache descriptor, Standard_Transient ancestry, handle upcast and object identity now tested against native OCCT. Rust descriptor access returns a static RuntimeType reference; native descriptor Handle/reference-count semantics and integration with the separate mutable shared-cache wrapper are not fully established. See tools/oracle/tkmath_bsplclib_cache_rtti.md. Supplemental evidence only."
+      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplclib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplSLib_Cache::get_type_descriptor()",
@@ -230488,7 +230488,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplslib::Cache::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "partial",
-      "notes": "Cache descriptor, Standard_Transient ancestry, handle upcast and object identity now tested against native OCCT. Rust descriptor access returns a static RuntimeType reference; native descriptor Handle/reference-count semantics and integration with the separate mutable shared-cache wrapper are not fully established. See tools/oracle/tkmath_bsplslib_cache_rtti.md. Supplemental evidence only."
+      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplslib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplSLib_Cache::DynamicType() const",
@@ -230496,7 +230496,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplslib::Cache::<rustycad_tkernel::standard::Transient>::dynamic_type",
       "status": "partial",
-      "notes": "Cache descriptor, Standard_Transient ancestry, handle upcast and object identity now tested against native OCCT. Rust descriptor access returns a static RuntimeType reference; native descriptor Handle/reference-count semantics and integration with the separate mutable shared-cache wrapper are not fully established. See tools/oracle/tkmath_bsplslib_cache_rtti.md. Supplemental evidence only."
+      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplslib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "math_Householder::Perform(const math_Matrix&,const math_Matrix&,double)",
@@ -235138,7 +235138,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::type_binding",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json. Callback ownership still uses Arc<dyn CallBack>; cloned owners do not increment the embedded StandardTransient counter. Native GetRefCount/This behavior and owning base-handle projections remain unported."
     },
     {
       "upstream_id": "Storage_Schema::HasTypeBinding(const TCollection_AsciiString &) const",
@@ -235146,7 +235146,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::has_type_binding",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json. Callback ownership still uses Arc<dyn CallBack>; cloned owners do not increment the embedded StandardTransient counter. Native GetRefCount/This behavior and owning base-handle projections remain unported."
     },
     {
       "upstream_id": "Storage_Schema::BindType(const TCollection_AsciiString &,const occ::handle<Storage_CallBack> &) const",
@@ -235154,7 +235154,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::bind_type",
       "status": "partial",
-      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json."
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixtures confirm cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings, unbound lookup, callback handle identity, subclass override dispatch and runtime type ancestry. Rust callbacks implement the existing Transient/RuntimeTyped model. Rust requires Send+Sync for callbacks; native same-thread callbacks with unsynchronized thread-confined mutable state cannot implement that trait. Concurrent unsynchronized native access is undefined and is not claimed. See porting/audits/tkernel-storage-schema-context.json. Callback ownership still uses Arc<dyn CallBack>; cloned owners do not increment the embedded StandardTransient counter. Native GetRefCount/This behavior and owning base-handle projections remain unported."
     },
     {
       "upstream_id": "gp_Trsf::Orthogonalize()",

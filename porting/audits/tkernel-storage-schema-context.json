@@ -38,7 +38,8 @@
   "behavior_change": "Default schemas now share the process current-data slot rather than keeping one per instance. Constructors clear that shared slot, completed writes clear it, non-write exceptions leave it available to other schemas. Context injection preserves independent test/session state.",
   "limitations": [
     "Native null current-data dereference is replaced by Standard_NullObject.",
-    "Rust callback implementations must satisfy Send + Sync because bindings are shared through Arc; native same-thread callbacks with thread-confined unsynchronized mutable state therefore have no direct Rust implementation. Unsynchronized concurrent native access is undefined and is not claimed."
+    "Rust callback implementations must satisfy Send + Sync because bindings are shared through Arc; native same-thread callbacks with thread-confined unsynchronized mutable state therefore have no direct Rust implementation. Unsynchronized concurrent native access is undefined and is not claimed.",
+    "Callback ownership still uses Arc<dyn CallBack>; cloned owners do not increment the embedded StandardTransient counter. Native GetRefCount/This behavior and owning base-handle projections remain unported."
   ],
   "validation": {
     "package_test_passed": 2621,

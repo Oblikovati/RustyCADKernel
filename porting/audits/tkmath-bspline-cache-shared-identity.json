@@ -1,0 +1,45 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx": "a2fa139ecc1871424bf722abf3f8beb041cf4969b2670825c56ab9fe38362ad9",
+    "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.cxx": "ba74142b88030fc10b7e79a778c1303734e13a1991a9c800a893c377b4fabc59",
+    "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx": "d6e54cfaa813f8d8c9e6fccd0ae5747e6b65f100c2b1a4cd4d41436c6e28a23e",
+    "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.cxx": "00643cffe1811a98c2da02eb6eed6a3242eae7e5ca9f62e91c37acea60b913a3"
+  },
+  "scope": "Supplemental runtime-type and identity behavior of the mutable Rust cache owners used by geometry adaptors; no legacy declaration or test mapping count changes.",
+  "native_fixture": {
+    "source": "tools/oracle/tkmath_bspline_cache_shared_handle.cxx",
+    "expected": "tools/oracle/tkmath_bspline_cache_shared_handle.expected",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_bspline_cache_shared_handle.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath-bspline-cache-shared-handle",
+    "run_command": "/tmp/tkmath-bspline-cache-shared-handle",
+    "observed": [
+      "Both cache classes report their native dynamic type.",
+      "IsInstance recognizes the concrete cache class.",
+      "A copied handle preserves native object identity.",
+      "IsKind recognizes Standard_Transient ancestry."
+    ],
+    "sha256": {
+      "tools/oracle/tkmath_bspline_cache_shared_handle.cxx": "d2adb055946f3b3d4c5681d5d1256d7a0699523f6bd84201299906cb0502c840",
+      "tools/oracle/tkmath_bspline_cache_shared_handle.expected": "60939020479888adcc3459f4fd6d7212eaf22dcfea67ee9da74cb9f3c4d02715"
+    }
+  },
+  "rust_fixture": {
+    "test": "crates/tkmath/tests/bspline_cache_shared_handle.rs::mutable_shared_cache_owners_match_native_handle_identity_and_type",
+    "target": "crates/tkmath/src/bsplclib/shared_cache.rs::SharedCache<T: Transient>",
+    "validation": "cargo +1.98.1 test -p rustycad-tkmath --test bspline_cache_shared_handle"
+  },
+  "limitations": [
+    "SharedCache clones use Arc<Mutex<T>> ownership and do not increment the embedded StandardTransient counter; the regression records that it stays zero where native copied Handles increment GetRefCount.",
+    "SharedCache exposes borrowed access to the cache and no owning Standard_Transient base-handle projection.",
+    "get_type_descriptor and DynamicType return Rust static RuntimeType references rather than owning Standard_Type Handles, so native descriptor-handle reference-count behavior remains unrepresented."
+  ],
+  "legacy_declaration_count_changed": false,
+  "full_api_parity_proven": false,
+  "validation": {
+    "focused_tests_passed": 3,
+    "tkmath_all_targets_passed": 2699,
+    "tkmath_all_targets_failed": 0,
+    "strict_clippy_passed": true,
+    "native_output_byte_match": true
+  }
+}
