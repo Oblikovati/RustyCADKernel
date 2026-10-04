@@ -38005,24 +38005,24 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::clear",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentNode::AddTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::add_triangle",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentNode::RemoveTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::remove_triangle",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentNode::TriangleIterator() const",
@@ -38101,8 +38101,8 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtrIterator::ptr_value",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Poly_CoherentTriPtr(const Poly_CoherentTriangle&)",
@@ -38133,48 +38133,48 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::next",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Previous() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::previous",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Append(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::append",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Prepend(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::prepend",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Remove(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::RemoveList(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_list",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
     },
     {
       "upstream_id": "Poly_CoherentTriangle()",
