@@ -13,7 +13,10 @@ context state, ranges and endpoint coordinates. `trimmed_surface_clip` uses a
 plane trimmed to `[0,1]×[0,1]`. The proposed nearest point is outside U, but its
 surface-bound intersection lies beyond the candidate-to-original endpoint
 segment; OCCT keeps that candidate range, matching its clipping loop's finite
-parameter domain.
+parameter domain. `surface_boundary_crossing` places the p-curve intersection
+beyond U=1 while the corresponding trim-boundary hit lies on the candidate
+segment. OCCT extends the first p-curve to U=1 and starts the second at
+parameter `0.5656854249`, preserving its native untrimmed line parameterization.
 
 `single_circular_arc` and `single_elliptical_arc` cover OCCT's same-edge conic
 branch, which expands both parameter ends by `PI - gap/2`; the circular case's
@@ -51,8 +54,8 @@ as a successful repair.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
 fallback, finite-surface bounds handling, trimmed and offset wrappers, and
-copied-edge/context replacement paths. Higher-degree spline and boundary-crossing
-cases remain uncovered.
+copied-edge/context replacement paths. Higher-degree spline cases remain
+uncovered.
 
 Rebuild with:
 
