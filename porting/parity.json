@@ -227349,6 +227349,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::correct_shape_tolerances",
       "status": "partial",
       "notes": "Source pass-order/avoidance translation, 48 native tolerance observations including one/two passes and both requested scheduling flags. Rust currently executes serially. tools/oracle/tkbo_shape_tolerances.md; general topology/concurrency and full legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Edge &, const double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::init_edge_tube",
+      "status": "partial",
+      "notes": "Identity-located 3D free-boundary tube initializer: positive/negative native state, area, topology, orientation and Generated fixture in tools/oracle/tkoffset_offset_edge_tube.md. General curve/location/pcurve-only and exceptional history paths remain unproven; no complete API/legacy claim."
     }
   ],
   "tests": [
