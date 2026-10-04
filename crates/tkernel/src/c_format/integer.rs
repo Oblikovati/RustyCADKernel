@@ -29,9 +29,8 @@ fn magnitude_digits(magnitude: u128, conversion: u8) -> Vec<u8> {
 
 /// Formats one integer conversion; a missing or non-integer argument formats as 0.
 pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
-    let raw = integer_bits(argument);
     let signed = matches!(spec.conversion, b'd' | b'i');
-    let value = widened(raw, spec, signed);
+    let value = integer_value(argument, spec, signed);
     let mut digits = magnitude_digits(value.unsigned_abs(), spec.conversion);
     if let Some(precision) = spec.precision {
         if precision == 0 && value == 0 {
@@ -44,10 +43,14 @@ pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
     pad(spec, prefix, digits, spec.precision.is_none())
 }
 
-fn integer_bits(argument: Option<&CArg<'_>>) -> i32 {
+fn integer_value(argument: Option<&CArg<'_>>, spec: &Spec, signed: bool) -> i128 {
     match argument {
-        Some(CArg::Int(value)) => *value,
-        Some(CArg::UInt(value)) => *value as i32,
+        Some(CArg::Int(value)) => widened(*value, spec, signed),
+        Some(CArg::UInt(value)) => widened(*value as i32, spec, signed),
+        Some(CArg::Long(value)) => i128::from(*value),
+        Some(CArg::ULong(value)) => i128::from(*value),
+        Some(CArg::LongLong(value)) => i128::from(*value),
+        Some(CArg::ULongLong(value)) => i128::from(*value),
         _ => 0,
     }
 }
@@ -65,5 +68,18 @@ fn integer_prefix(spec: &Spec, value: i128, digits: &mut Vec<u8>, signed: bool) 
         b'x' if spec.alternate && value != 0 => b"0x".to_vec(),
         b'X' if spec.alternate && value != 0 => b"0X".to_vec(),
         _ => Vec::new(),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::c_format::{CArg, c_sprintf};
+
+    #[test]
+    fn private_int_long_mismatch_keeps_legacy_x86_64_widening() {
+        assert_eq!(c_sprintf(b"%ld", &[CArg::Int(-1)]), b"4294967295");
+        assert_eq!(c_sprintf(b"%lld", &[CArg::Int(-1)]), b"4294967295");
+        assert_eq!(c_sprintf(b"%d", &[CArg::UInt(u32::MAX)]), b"-1");
+        assert_eq!(c_sprintf(b"%u", &[CArg::UInt(u32::MAX)]), b"4294967295");
     }
 }
