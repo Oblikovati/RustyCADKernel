@@ -98,8 +98,10 @@ impl<'a> GeomGridEvalCurve<'a> {
             curve_type: CurveType::OtherCurve,
         }
     }
-    // `initialization(const Adaptor3d_Curve&)`.
-    fn initialization_adaptor(&mut self, curve: &'a dyn Adaptor3dCurve) -> Result<(), Failure> {
+    /// Replace the evaluator through the native protected adaptor initialization hook.
+    /// A failing `GetType` preserves the previous evaluator; fallback evaluation borrows
+    /// `curve` for this evaluator's lifetime. Example: `eval.initialization_adaptor(&adaptor)?`.
+    pub fn initialization_adaptor(&mut self, curve: &'a dyn Adaptor3dCurve) -> Result<(), Failure> {
         if let Some(geom_adaptor) = GeomAdaptorCurve::project_from(curve) {
             self.initialization_curve(&geom_adaptor.curve());
             return Ok(());
@@ -108,8 +110,10 @@ impl<'a> GeomGridEvalCurve<'a> {
         self.evaluator = GeomGridEvalCurveEvaluator::Other(GeomGridEvalOtherCurve::new(curve));
         Ok(())
     }
-    // `initialization(const occ::handle<Geom_Curve>&)`.
-    fn initialization_curve(&mut self, curve: &Handle<dyn GeomCurve>) {
+    /// Replace the evaluator through the native protected curve initialization hook.
+    /// Trimming wrappers are stripped and a null handle clears it;
+    /// `eval.initialization_curve(&curve)`.
+    pub fn initialization_curve(&mut self, curve: &Handle<dyn GeomCurve>) {
         let (curve_type, evaluator) = classify(&extract_basis_curve(curve));
         self.curve_type = curve_type;
         self.evaluator = evaluator;

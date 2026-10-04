@@ -5,7 +5,7 @@ use rustycad_tkmath::math::DirectPolynomialRoots;
 fn quartic_overload_preserves_flags_and_replaces_solution_count() {
     let mut roots = DirectPolynomialRoots::quartic(1.0, 0.0, -5.0, 0.0, 4.0);
     assert_eq!(
-        root_bits4(&roots),
+        root_bits::<4>(&roots),
         [
             0xc000_0000_0000_0000,
             0xbff0_0000_0000_0000,
@@ -25,7 +25,7 @@ fn cubic_overflow_keeps_prior_count_roots_and_failed_status() {
     assert!(!roots.is_done());
     assert_eq!(roots.solutions().unwrap(), 3);
     assert_eq!(
-        root_bits(&roots),
+        root_bits::<3>(&roots),
         [
             0x4008_0000_0000_0000,
             0x4000_0000_0000_0000,
@@ -41,7 +41,7 @@ fn cubic_success_does_not_reset_previous_failure_status() {
     assert!(!roots.is_done());
     assert_eq!(roots.solutions().unwrap(), 3);
     assert_eq!(
-        root_bits(&roots),
+        root_bits::<3>(&roots),
         [
             0x4008_0000_0000_0000,
             0x4000_0000_0000_0000,
@@ -54,7 +54,7 @@ fn cubic_success_does_not_reset_previous_failure_status() {
 fn quadratic_no_real_roots_replaces_count_without_changing_done() {
     let mut roots = DirectPolynomialRoots::quadratic(1.0, -5.0, 6.0);
     assert_eq!(
-        root_bits2(&roots),
+        root_bits::<2>(&roots),
         [0x4008_0000_0000_0000, 0x4000_0000_0000_0000]
     );
     roots.solve_quadratic(1.0, 1.0, 1.0);
@@ -84,26 +84,6 @@ fn linear_success_updates_root_and_preserves_done_state() {
     assert_eq!(roots.value(1).unwrap().to_bits(), 0x4008_0000_0000_0000);
 }
 
-fn root_bits(roots: &DirectPolynomialRoots) -> [u64; 3] {
-    [
-        roots.value(1).unwrap().to_bits(),
-        roots.value(2).unwrap().to_bits(),
-        roots.value(3).unwrap().to_bits(),
-    ]
-}
-
-fn root_bits2(roots: &DirectPolynomialRoots) -> [u64; 2] {
-    [
-        roots.value(1).unwrap().to_bits(),
-        roots.value(2).unwrap().to_bits(),
-    ]
-}
-
-fn root_bits4(roots: &DirectPolynomialRoots) -> [u64; 4] {
-    [
-        roots.value(1).unwrap().to_bits(),
-        roots.value(2).unwrap().to_bits(),
-        roots.value(3).unwrap().to_bits(),
-        roots.value(4).unwrap().to_bits(),
-    ]
+fn root_bits<const N: usize>(roots: &DirectPolynomialRoots) -> [u64; N] {
+    std::array::from_fn(|index| roots.value(index as i32 + 1).unwrap().to_bits())
 }

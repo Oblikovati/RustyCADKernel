@@ -1,0 +1,61 @@
+{
+  "audit": "TKG3d GeomGridEval_Curve protected initialization hooks",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_header": {
+    "path": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+    "sha256": "279d9f6ef2c25b11ae3197db302ff2d6bceae3a950218d59f8e499619ec5d8e0",
+    "native_implementation": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.cxx",
+    "implementation_sha256": "06230b2774f40018e34812ee3042b130a82923a5a6b1cb571fd25697bb78a011"
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkg3d_grid_eval_curve_reinitialization.cxx",
+    "source_sha256": "37b730afc8ce71d9dec6340514f0c1cefa497062a83209a6d828cfdceb3a3a70",
+    "expected": "tools/oracle/tkg3d_grid_eval_curve_reinitialization.expected",
+    "executable_sha256": "f125c04edde7fdef349b69ce656634cd668e8047f69e853a572862403869daa0",
+    "native_libraries": "occt-install TKGeomBase/TKG3d/TKMath/TKernel, Linux GCC optimized profile",
+    "compile_command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/tkg3d_grid_eval_curve_reinitialization.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKGeomBase -lTKG3d -lTKMath -lTKernel -o /tmp/tkg3d-grid-eval-curve-reinitialization",
+    "run_command": "LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib:/home/vmiguel/git/oblikovati-workspace/occt-install/lib /tmp/tkg3d-grid-eval-curve-reinitialization",
+    "expected_sha256": "5862083dc1bf5efeac43df16564f7504f60932f4787142423a00a53e90c55805",
+    "library_sha256": {
+      "TKGeomBase": "f2c685e230b5dc1de6e757b6dfb543c631877e17298be02c36147e5fb983b8b4",
+      "TKG3d": "1513492fe8bda6bf051ee1a2aa0ab6c84047d4bb8cee40fdbab6e2ed5954e3a3",
+      "TKMath": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "TKernel": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    }
+  },
+  "rust_counterpart": {
+    "implementation": "crates/tkg3d/src/geom_grid_eval/curve.rs",
+    "methods": [
+      "GeomGridEvalCurve::initialization_adaptor",
+      "GeomGridEvalCurve::initialization_curve"
+    ],
+    "tests": "crates/tkg3d/tests/geom_grid_eval_curve_reinitialization.rs",
+    "implementation_sha256": "11e8672897952c224f2bc24924e727ceed6b301102482ef1eeaf68a5806c6d21",
+    "tests_sha256": "88b8277439fe802418383f517c0186b716b165a7bb78cfb19cbf3eded558dca4"
+  },
+  "verified_cases": [
+    "line to circle to trimmed circle reinitialization; evaluation outside trim bounds still uses the basis circle",
+    "null curve resets type to OtherCurve and produces an empty grid",
+    "GeomAdaptor_Curve range is ignored and its underlying Geom_Line is selected",
+    "non-Geom adaptor uses the borrowed fallback evaluator and retains its results",
+    "GetType failure returns the error without replacing the prior fallback evaluator"
+  ],
+  "limitations": [
+    "The fallback adaptor reference must outlive the evaluator, enforced through Rust's lifetime parameter.",
+    "The native probe exercises one fallback adaptor and one GetType exception; it does not enumerate every adaptor implementation."
+  ],
+  "selectors": [
+    {
+      "id": "c337872628e5c344b05e57de949197bc03354b10c195887ffd0aaafd8f1194da",
+      "signature": "void initialization(const Adaptor3d_Curve&)",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::initialization_adaptor",
+      "status": "implemented"
+    },
+    {
+      "id": "e3df0da63867ae0480f01cca197e70b6eb13db124d404f23fff08ffd9509f156",
+      "signature": "void initialization(const occ::handle<Geom_Curve>&)",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::initialization_curve",
+      "status": "implemented"
+    }
+  ]
+}
