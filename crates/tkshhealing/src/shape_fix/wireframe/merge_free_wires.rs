@@ -10,7 +10,7 @@ use crate::{
 use rustycad_tkbrep::{
     brep_tools::ReShape,
     topexp::Explorer,
-    topods::{self, Edge, Wire},
+    topods::{self, Edge, Face, Wire},
     toptools::MapOfShape,
 };
 use rustycad_tkernel::{
@@ -28,36 +28,18 @@ struct CandidatePair {
     previous_index: i32,
     next_index: i32,
     take_next: bool,
+    faces: Vec<Face>,
 }
 
 pub(super) fn merge_small_edges(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
-    edge_faces: &mut super::ShapeFixWireframeShapeLists,
-    face_small: &mut super::ShapeFixWireframeShapeLists,
     multiple: &mut MapOfShape,
 ) -> Result<bool, Failure> {
-    if has_face_edge_lists(small, edge_faces, face_small, multiple)? {
+    if !multiple.is_empty() {
         return Err(unported_small_edge_merge());
     }
     merge_free_wire_candidates(fixer, small)
-}
-
-fn has_face_edge_lists(
-    small: &MapOfShape,
-    edge_faces: &super::ShapeFixWireframeShapeLists,
-    face_small: &super::ShapeFixWireframeShapeLists,
-    multiple: &MapOfShape,
-) -> Result<bool, Failure> {
-    if !face_small.is_empty() || !multiple.is_empty() {
-        return Ok(true);
-    }
-    for edge in small.iter() {
-        if edge_faces.is_bound(edge) {
-            return Ok(true);
-        }
-    }
-    Ok(false)
 }
 
 fn merge_free_wire_candidates(
@@ -92,9 +74,20 @@ fn merge_one_free_wire(
         rustycad_tkg3d::top_abs::ShapeEnum::Shape,
     )?;
     let wire = topods::wire(&applied)?;
-    let tool = prepared_wire_fixer(&wire, context)?;
+    merge_wire_with_faces(fixer, source, &wire, context, small, &[])
+}
+
+pub(super) fn merge_wire_with_faces(
+    fixer: &ShapeFixWireframe,
+    source: &Wire,
+    wire: &Wire,
+    context: &Handle<ShapeBuildReShape>,
+    small: &mut MapOfShape,
+    faces: &[Face],
+) -> Result<bool, Failure> {
+    let tool = prepared_wire_fixer(wire, context)?;
     let wire_data = tool.wire_data()?;
-    merge_wire_data(fixer, &tool, &wire, &wire_data, small)
+    merge_wire_data(fixer, &tool, source, &wire_data, small, faces)
 }
 
 fn prepared_wire_fixer(
@@ -114,8 +107,9 @@ fn merge_wire_data(
     source: &Wire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
+    faces: &[Face],
 ) -> Result<bool, Failure> {
-    let changed = merge_wire_candidates(fixer, wire_data, small)?;
+    let changed = merge_wire_candidates(fixer, wire_data, small, faces)?;
     publish_changed_wire(fixer, wire_fixer, source, wire_data, changed)?;
     Ok(changed)
 }
@@ -124,11 +118,12 @@ fn merge_wire_candidates(
     fixer: &ShapeFixWireframe,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
+    faces: &[Face],
 ) -> Result<bool, Failure> {
     let mut index = 1;
     let mut changed = false;
     while index <= wire_data.nb_edges() && wire_data.nb_edges() > 1 {
-        let merged_index = merge_small_at_index(fixer, wire_data, small, index)?;
+        let merged_index = merge_small_at_index(fixer, wire_data, small, index, faces)?;
         index = advance_merge_index(index, merged_index, &mut changed);
     }
     Ok(changed)
@@ -166,11 +161,12 @@ fn merge_small_at_index(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     index: i32,
+    faces: &[Face],
 ) -> Result<Option<i32>, Failure> {
     let count = wire_data.nb_edges();
     let previous = if index == 1 { count } else { index - 1 };
     let next = if index == count { 1 } else { index + 1 };
-    let pair = candidate_pair(wire_data, small, index, previous, next)?;
+    let pair = candidate_pair(wire_data, small, index, previous, next, faces)?;
     let Some(pair) = pair else {
         return Ok(None);
     };
@@ -183,6 +179,7 @@ fn candidate_pair(
     index: i32,
     previous: i32,
     next: i32,
+    faces: &[Face],
 ) -> Result<Option<CandidatePair>, Failure> {
     let middle = wire_data.edge(index)?;
     if !is_mergeable_middle(small, &middle, index, previous, next) {
@@ -191,7 +188,7 @@ fn candidate_pair(
     let before = wire_data.edge(previous)?;
     let after = wire_data.edge(next)?;
     Ok(Some(select_candidate_pair(
-        before, middle, after, index, previous, next,
+        before, middle, after, index, previous, next, faces,
     )?))
 }
 
@@ -202,6 +199,7 @@ fn select_candidate_pair(
     index: i32,
     previous: i32,
     next: i32,
+    faces: &[Face],
 ) -> Result<CandidatePair, Failure> {
     let take_next = choose_next_pair(&before, &middle, &after)?;
     let (first, second) = if take_next {
@@ -210,7 +208,7 @@ fn select_candidate_pair(
         (before, middle)
     };
     Ok(candidate_pair_from_edges(
-        first, second, index, previous, next, take_next,
+        first, second, index, previous, next, take_next, faces,
     ))
 }
 
@@ -221,6 +219,7 @@ fn candidate_pair_from_edges(
     previous: i32,
     next: i32,
     take_next: bool,
+    faces: &[Face],
 ) -> CandidatePair {
     CandidatePair {
         first,
@@ -229,6 +228,7 @@ fn candidate_pair_from_edges(
         previous_index: previous,
         next_index: next,
         take_next,
+        faces: faces.to_vec(),
     }
 }
 
@@ -290,7 +290,7 @@ fn merge_candidate_pair(
     small: &mut MapOfShape,
     pair: &CandidatePair,
 ) -> Result<Option<i32>, Failure> {
-    let Some(joined) = join_edges_3d(&pair.first, &pair.second)? else {
+    let Some(joined) = join_edges_3d(&pair.first, &pair.second, &pair.faces)? else {
         return Ok(None);
     };
     install_joined_edge(fixer, wire_data, small, pair, joined)?;
@@ -385,7 +385,7 @@ fn replace_pair_in_context(
     ReShape::remove(&*context, &removed.clone().into_shape())
 }
 
-fn finish_free_wire_merge(
+pub(super) fn finish_free_wire_merge(
     fixer: &ShapeFixWireframe,
     context: &Handle<ShapeBuildReShape>,
 ) -> Result<bool, Failure> {

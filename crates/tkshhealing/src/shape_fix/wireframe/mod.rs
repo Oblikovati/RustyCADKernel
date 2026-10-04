@@ -1,6 +1,7 @@
 //! ShapeFix_Wireframe state and topology analysis from OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 mod gaps;
 mod join_3d;
+mod merge_faces;
 mod merge_free_wires;
 mod repair;
 mod small_edges;
