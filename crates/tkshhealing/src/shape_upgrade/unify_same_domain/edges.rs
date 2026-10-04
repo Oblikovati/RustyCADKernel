@@ -3,6 +3,7 @@ mod bspline;
 mod containers;
 mod global_context;
 mod global_merge;
+mod pcurve_circle;
 mod pcurve_concat;
 mod pcurve_union;
 mod safe_input;
