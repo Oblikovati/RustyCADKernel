@@ -40,3 +40,6 @@ fn native_infinite_point_solid_orientation_matches() {
         assert_eq!(is_inverted_solid(&solid).unwrap(), row[2] != 0, "{line}");
     }
 }
+
+#[path = "solid_orientation_cases/state.rs"]
+mod state;

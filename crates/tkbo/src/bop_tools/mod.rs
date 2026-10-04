@@ -54,3 +54,9 @@ pub use vertex_update::{update_vertex_curve, update_vertex_edge, update_vertex_p
 
 mod make_pcurve;
 pub use make_pcurve::make_pcurve;
+
+mod compute_state;
+pub use compute_state::{
+    compute_state_by_one_point, compute_state_edge, compute_state_face, compute_state_point,
+    compute_state_vertex,
+};

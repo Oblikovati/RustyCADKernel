@@ -227175,6 +227175,51 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::is_avoid_build_pcurve",
       "status": "partial",
       "notes": "Source translation with supplemental differential oracle; see tools/oracle/tkbo_pave_filler_init.md. Full Boolean execution and complete API/legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeState(const TopoDS_Vertex &, const TopoDS_Solid &, const double, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_state_vertex",
+      "status": "partial",
+      "notes": "Source translation and 88 native point/vertex/edge/face/container observations. Native container result discard is preserved. See tools/oracle/tkbo_compute_state.md; general geometry/fallback and full legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeState(const gp_Pnt &, const TopoDS_Solid &, const double, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_state_point",
+      "status": "partial",
+      "notes": "Source translation and 88 native point/vertex/edge/face/container observations. Native container result discard is preserved. See tools/oracle/tkbo_compute_state.md; general geometry/fallback and full legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeState(const TopoDS_Edge &, const TopoDS_Solid &, const double, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_state_edge",
+      "status": "partial",
+      "notes": "Source translation and 88 native point/vertex/edge/face/container observations. Native container result discard is preserved. See tools/oracle/tkbo_compute_state.md; general geometry/fallback and full legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeStateByOnePoint(const TopoDS_Shape &, const TopoDS_Solid &, const double, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_state_by_one_point",
+      "status": "partial",
+      "notes": "Source translation and 88 native point/vertex/edge/face/container observations. Native container result discard is preserved. See tools/oracle/tkbo_compute_state.md; general geometry/fallback and full legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeState(const TopoDS_Face &, const TopoDS_Solid &, const double, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_state_face",
+      "status": "partial",
+      "notes": "Source translation and 88 native point/vertex/edge/face/container observations. Native container result discard is preserved. See tools/oracle/tkbo_compute_state.md; general geometry/fallback and full legacy parity remain unproven."
     }
   ],
   "tests": [
