@@ -5,6 +5,8 @@ use rustycad_tkernel::ncollection::{DataMap, List};
 
 #[path = "builder/images.rs"]
 mod images;
+#[path = "builder/images_edges.rs"]
+mod images_edges;
 
 /// The source-pinned argument and option state of `BOPAlgo_Builder`.
 /// Boolean execution is supplied by `BOPAlgo_PaveFiller` and is not part of this state slice.
