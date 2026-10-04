@@ -1,5 +1,6 @@
 //! BRepOffset_Analyse at OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 mod classify;
+mod mixed;
 mod queries;
 use super::BRepOffsetInterval;
 use rustycad_tkbrep::{topods::Shape, toptools::ShapeMapHasher};

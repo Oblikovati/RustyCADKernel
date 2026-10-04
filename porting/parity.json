@@ -225086,7 +225086,7 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_by_ranges",
       "status": "implemented",
-      "notes": "Native default false and mutable bool mode exposed through getter/set_fix_gaps_by_ranges. Native range-mode fixtures verify 3D dispatch; 2D range repair remains explicitly unsupported and is not included in this scalar accessor claim."
+      "notes": "Native default false and mutable bool mode exposed through getter/set_fix_gaps_by_ranges. Native range-mode fixtures verify 3D dispatch; 2D range dispatch now has native crossing/reversed/parallel/clipping/single-circle fixtures; scalar accessor coverage remains separate."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGap2d(const int, const bool)",
@@ -225095,7 +225095,7 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_2d",
       "status": "partial",
-      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. Nonzero 2D range repair remains explicitly unported; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. 2D range repair now has native crossing/reversed/parallel/clipping/single-circle fixtures; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGaps2d()",
@@ -225104,7 +225104,7 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d",
       "status": "partial",
-      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. Nonzero 2D range repair remains explicitly unported; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. 2D range repair now has native crossing/reversed/parallel/clipping/single-circle fixtures; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wire::ClearModes()",
@@ -225158,7 +225158,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Shared-face/seam/multiple-face/drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Direct sole-edge free-wire dropping matches native map/context/status removal; shared-face/seam/multiple-face/other-drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wireframe::MergeSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool, const double)",
@@ -225167,7 +225167,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Shared-face/seam/multiple-face/drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Direct sole-edge free-wire dropping matches native map/context/status removal; shared-face/seam/multiple-face/other-drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ChFiDS_TypeOfConcavity",
@@ -225581,7 +225581,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Perform(const TopoDS_Shape &, const double, const Message_ProgressRange &)",
@@ -225590,7 +225590,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::perform",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Type(const TopoDS_Edge &) const",
@@ -225599,7 +225599,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Ancestors(const TopoDS_Shape &) const",
@@ -225608,7 +225608,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::ancestors",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     },
     {
       "upstream_id": "BRepOffset_Analyse::TangentEdges(const TopoDS_Edge &, const TopoDS_Vertex &, NCollection_List<TopoDS_Shape> &) const",
@@ -225617,7 +225617,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     }
   ],
   "tests": [

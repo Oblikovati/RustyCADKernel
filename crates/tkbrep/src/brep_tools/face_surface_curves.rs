@@ -1,4 +1,5 @@
-use rustycad_tkbrep::{
+//! Shared pcurve selection from ChFi3d::IsTangentFaces and BRepOffset_Analyse::CheckMixedContinuity.
+use crate::{
     brep::{BRepTool, EdgePCurve},
     topexp::Explorer,
     topods::{self, Edge, Face},
@@ -9,15 +10,24 @@ use rustycad_tkg3d::{
     geom::GeomSurface,
     top_abs::{Orientation, ShapeEnum},
 };
-pub(super) struct TangencyGeometry {
+/// Pcurves, located surfaces and the second pcurve range used by continuity analysis.
+/// Obtain with `FaceSurfaceCurves::load(&edge, &first_face, &second_face)?`.
+pub struct FaceSurfaceCurves {
+    /// Pcurve selected on the first face occurrence.
     pub first_curve: Handle<dyn Geom2dCurve>,
+    /// Pcurve selected on the second face occurrence.
     pub second_curve: Handle<dyn Geom2dCurve>,
+    /// Located support surface of the first face.
     pub first_surface: Handle<dyn GeomSurface>,
+    /// Located support surface of the second face.
     pub second_surface: Handle<dyn GeomSurface>,
+    /// First bound from the second pcurve lookup, matching native overwrite order.
     pub first: f64,
+    /// Last bound from the second pcurve lookup.
     pub last: f64,
 }
-impl TangencyGeometry {
+impl FaceSurfaceCurves {
+    /// Select seam occurrences and return None for absent support; `FaceSurfaceCurves::load(&edge, &first, &second)?`.
     pub fn load(edge: &Edge, first: &Face, second: &Face) -> Result<Option<Self>, Failure> {
         let Some((a, b)) = pcurve_pair(edge, first, second)? else {
             return Ok(None);

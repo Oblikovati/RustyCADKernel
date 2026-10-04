@@ -1,6 +1,5 @@
 //! ChFi3d.cxx::IsTangentFaces at OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
-mod geometry;
-use geometry::TangencyGeometry;
+use rustycad_tkbrep::brep_tools::FaceSurfaceCurves;
 use rustycad_tkbrep::{
     brep::BRepTool,
     brep_adaptor::BRepAdaptorSurface,
@@ -25,7 +24,7 @@ pub fn is_tangent_faces(
         return Ok(true);
     }
     let tolerance = (1.5 * BRepTool::edge_tolerance(edge)?).max(0.001);
-    let Some(geometry) = TangencyGeometry::load(edge, first, second)? else {
+    let Some(geometry) = FaceSurfaceCurves::load(edge, first, second)? else {
         return Ok(false);
     };
     let samples = sample_count(first)?.max(sample_count(second)?);
@@ -40,7 +39,7 @@ fn sample_count(face: &Face) -> Result<i32, Failure> {
     BRepTopAdaptorTopolTool::with_surface(&surface)?.nb_samples()
 }
 fn sample_continuity(
-    geometry: &TangencyGeometry,
+    geometry: &FaceSurfaceCurves,
     order: Shape,
     tolerance: f64,
     samples: i32,
@@ -62,7 +61,7 @@ fn sample_continuity(
     Ok(not_done != samples)
 }
 fn continuity_sample(
-    geometry: &TangencyGeometry,
+    geometry: &FaceSurfaceCurves,
     parameter: f64,
     order: Shape,
     tolerance: f64,
@@ -104,7 +103,7 @@ fn sample_satisfies(
     }
 }
 fn compatible_normals(
-    geometry: &TangencyGeometry,
+    geometry: &FaceSurfaceCurves,
     first: &Face,
     second: &Face,
 ) -> Result<bool, Failure> {

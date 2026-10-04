@@ -1,4 +1,5 @@
-//! Differential replay of BRepOffset_Analyse box, face and free-edge incidence.
+//! Differential replay of BRepOffset_Analyse box, face and spline incidence.
+mod spline_fixture;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topexp::Explorer,
@@ -44,6 +45,9 @@ fn fixture_shapes() -> Vec<Shape> {
         face,
         edge.into_shape(),
         empty.into_shape(),
+        spline_fixture::pair(0.),
+        spline_fixture::pair(1.),
+        spline_fixture::pair(3.),
     ]
 }
 fn replay_row(fields: &[&str], shape: &Shape, analysis: &BRepOffsetAnalyse) {

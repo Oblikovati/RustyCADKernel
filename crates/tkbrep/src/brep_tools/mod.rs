@@ -69,3 +69,6 @@ pub use uv_bounds::{
     uv_bounds_of_edge, uv_bounds_of_wire,
 };
 pub use wire_explorer::WireExplorer;
+
+mod face_surface_curves;
+pub use face_surface_curves::FaceSurfaceCurves;

@@ -8,6 +8,24 @@
 #include <TopoDS_Compound.hxx>
 #include <iostream>
 #include <iomanip>
+#include <Geom_BezierSurface.hxx>
+#include <Geom2d_Line.hxx>
+#include <TopoDS_Wire.hxx>
+#include <NCollection_Array2.hxx>
+TopoDS_Shape spline_pair(double slope){
+ BRep_Builder builder;TopoDS_Compound pair;builder.MakeCompound(pair);
+ auto edge=BRepBuilderAPI_MakeEdge(gp_Pnt(),gp_Pnt(1,0,0)).Edge();
+ for(int side=0;side<2;side++){
+  NCollection_Array2<gp_Pnt> poles(1,2,1,2);
+  for(int u=1;u<=2;u++)for(int v=1;v<=2;v++)poles(u,v)=gp_Pnt(u-1,v-1,side*slope*(u-1));
+  Handle(Geom_Surface) surface=new Geom_BezierSurface(poles);
+  TopoDS_Face face;builder.MakeFace(face,surface,1e-7);
+  Handle(Geom2d_Curve) curve=new Geom2d_Line(gp_Ax2d(gp_Pnt2d(),gp_Dir2d(1,0)));
+  builder.UpdateEdge(edge,curve,face,1e-7);builder.Range(edge,face,0.,1.);
+  TopoDS_Wire wire;builder.MakeWire(wire);builder.Add(wire,edge);builder.Add(face,wire);builder.Add(pair,face);
+ }
+ return pair;
+}
 void inspect(const TopoDS_Shape& shape,int kind){
  BRepOffset_Analyse analysis(shape,.01);
  std::cout<<"state "<<kind<<' '<<analysis.IsDone()<<' '<<analysis.NewFaces().Extent()<<'\n';
@@ -43,5 +61,5 @@ int main(){
  auto reversed=box.Reversed();inspect(reversed,1);
  TopExp_Explorer faces(box,TopAbs_FACE);inspect(faces.Current(),2);
  auto edge=BRepBuilderAPI_MakeEdge(gp_Pnt(),gp_Pnt(2,0,0)).Edge();inspect(edge,3);
- TopoDS_Compound empty;BRep_Builder().MakeCompound(empty);inspect(empty,4);
+ TopoDS_Compound empty;BRep_Builder().MakeCompound(empty);inspect(empty,4);inspect(spline_pair(0.),5);inspect(spline_pair(1.),6);inspect(spline_pair(3.),7);
 }

@@ -90,11 +90,11 @@ fn classify_pair(
         }
         return chfi3d::define_connect_type(edge, first, second, sin_tolerance, false);
     }
-    if spline_surface(first_type) && spline_surface(second_type) {
-        return Err(Failure::with_message(
-            "Standard_NotImplemented",
-            "BRepOffset_Analyse paired spline surfaces; expected implemented mixed-continuity analysis",
-        ));
+    if spline_surface(first_type)
+        && spline_surface(second_type)
+        && super::mixed::check_mixed_continuity(edge, first, second, 0.1)?
+    {
+        return Ok(TypeOfConcavity::Mixed);
     }
     if chfi3d::is_tangent_faces(edge, first, second, Continuity::G1)? {
         return Ok(TypeOfConcavity::Tangential);
