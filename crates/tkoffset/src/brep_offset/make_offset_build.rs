@@ -45,6 +45,7 @@ impl BRepOffsetMakeOffset {
     fn build_multi_face_shell(&mut self) -> Result<(), Failure> {
         let config = self.configuration()?;
         reject_unsupported_build_options(config, self.closing_faces.len())?;
+        reject_solid_without_vertex_closures(&self.initial_shape)?;
         let faces = source_faces(&self.face_component)?;
         let analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
         let shared_support = faces_share_support_surface(&faces)?;
@@ -54,7 +55,7 @@ impl BRepOffsetMakeOffset {
             let image_refs = images.iter().collect::<Vec<_>>();
             super::correct_singular_face::correct_singular_faces(&image_refs, config.offset)?
         } else {
-            let joins = super::make_offset_build_adjacent::arc_patches_for_adjacent_planes(
+            let joins = super::make_offset_build_adjacent::arc_patches_for_supported_faces(
                 &faces,
                 &images,
                 &analyzer,
@@ -82,7 +83,7 @@ impl BRepOffsetMakeOffset {
 
     fn record_join_histories(
         &mut self,
-        joins: &[super::make_offset_build_adjacent::AdjacentPlanarJoin],
+        joins: &[super::make_offset_build_adjacent::SharedSupportJoin],
     ) {
         for join in joins {
             let source = join.source_edge.clone().into_shape();
@@ -90,6 +91,20 @@ impl BRepOffsetMakeOffset {
             self.record_join_generated_face(&source, &image);
         }
     }
+}
+
+fn reject_solid_without_vertex_closures(shape: &Shape) -> Result<(), Failure> {
+    let kind = shape.shape_type()?;
+    if kind != ShapeEnum::Solid {
+        return Ok(());
+    }
+    Err(Failure::with_type(
+        "Standard_NotImplemented",
+        &format!(
+            "input shape type {kind:?}; expected a shell until the native spherical vertex-closure stage is ported"
+        ),
+        "BRepOffset_MakeOffset::MakeOffsetShape",
+    ))
 }
 
 fn face_count(component: &Shape) -> Result<usize, Failure> {

@@ -1,5 +1,6 @@
 //! Regular face-boundary branch of `BRepOffset_Offset::Init`.
 mod created_images;
+mod offset_face_curve;
 
 use super::{BRepOffsetStatus, surface};
 pub(super) use created_images::FaceCreatedImages;
@@ -201,7 +202,7 @@ impl FaceBoundaryCopy<'_> {
         let was_created = self.created.has_edge(edge);
         let image = make_edge_image(self, edge)?;
         if !was_created {
-            build_image_curve(&image, edge)?;
+            build_image_curve(&image, edge, self.target)?;
             self.created.bind_edge(edge, &image);
         }
         self.edge_images.push((edge.clone(), image.clone()));
@@ -362,8 +363,11 @@ fn orient_image_vertices(source: &Edge, first: &Vertex, last: &Vertex) -> (Shape
     )
 }
 
-fn build_image_curve(image: &Edge, source: &Edge) -> Result<(), Failure> {
+fn build_image_curve(image: &Edge, source: &Edge, target: &Face) -> Result<(), Failure> {
     if !BRepTool::degenerated(source)? {
+        if offset_face_curve::build_cylinder_v_iso(image, source, target)? {
+            return Ok(());
+        }
         let _ = rustycad_tktopalgo::brep_lib::build_curves3d_default(&image.clone().into_shape())?;
     }
     Ok(())
