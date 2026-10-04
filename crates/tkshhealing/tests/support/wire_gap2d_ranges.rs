@@ -49,6 +49,39 @@ pub(super) fn set_tangent_pcurves(
     set_pcurve_range(&builder, second_edge, face, &line, 1.0);
 }
 
+pub(super) fn set_tangent_bspline_pcurves(
+    face: &Face,
+    first_edge: &rustycad_tkbrep::topods::Edge,
+    second_edge: &rustycad_tkbrep::topods::Edge,
+) {
+    let builder = BRepBuilder::default();
+    let poles = [
+        Point2::new(0.0, 0.0),
+        Point2::new(0.5, 0.5),
+        Point2::new(1.0, 0.0),
+    ];
+    let knots = [0.0, 1.0];
+    let multiplicities = [3, 3];
+    let spline: Handle<dyn Geom2dCurve> = Handle::new(
+        Geom2dBSplineCurve::new(
+            &Array1::from_shared(&poles, 1),
+            &Array1::from_shared(&knots, 1),
+            &Array1::from_shared(&multiplicities, 1),
+            2,
+            false,
+        )
+        .unwrap(),
+    )
+    .cast();
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::new(0.0, 0.25),
+        Direction2::new(1.0, 0.0).unwrap(),
+    )))
+    .cast();
+    set_pcurve_range(&builder, first_edge, face, &spline, 1.0);
+    set_pcurve_range(&builder, second_edge, face, &line, 1.0);
+}
+
 pub(super) fn bspline_line(start: Point2, end: Point2) -> Handle<dyn Geom2dCurve> {
     let poles = [start, end];
     let knots = [0.0, 1.0];
