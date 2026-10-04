@@ -18,6 +18,8 @@ use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
 use std::collections::HashMap;
 use std::sync::Arc;
 
+mod same_domain;
+
 /// The shape and argument storage shared by Boolean operation algorithms.
 /// `let mut ds = DataStructure::default(); ds.append_shape(shape);`.
 #[derive(Default)]
@@ -98,21 +100,6 @@ impl DataStructure {
         self.interfered_shapes.add(first);
         self.interfered_shapes.add(second);
         true
-    }
-
-    /// Binds a source vertex to its same-domain representative; `ds.add_shape_sd(3, 8)`.
-    pub fn add_shape_sd(&mut self, source: i32, representative: i32) {
-        self.same_domain_vertices.bind(source, representative);
-    }
-
-    /// Reads a same-domain representative; `ds.shape_sd(3) == Some(8)`.
-    pub fn shape_sd(&self, source: i32) -> Option<i32> {
-        self.same_domain_vertices.find(&source).ok().copied()
-    }
-
-    /// Traverses same-domain entries in native hash-bucket order; `ds.shape_sd_items().count()`.
-    pub fn shape_sd_items(&self) -> impl Iterator<Item = (&i32, &i32)> {
-        self.same_domain_vertices.items()
     }
 
     /// Reports whether any stored pair contains `index`; `ds.has_interference_for(3)`.
