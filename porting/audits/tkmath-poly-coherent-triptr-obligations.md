@@ -50,7 +50,7 @@ Out-of-range positional lookups reject the index before walking the ring, includ
 
 The explicit removal methods currently validate `BaseAllocator` handle identity. That is a conservative ownership rule, not an exact model of every native `Free` combination: different native allocator objects can share a compatible heap backend. The node owner always frees through its creating Rust allocator, so this check prevents releasing memory through an incompatible arena. Exact native backend-compatibility semantics remain open.
 
-The broader native node/mesh allocator threading remains incomplete. `Poly_CoherentNode::AddTriangle`, `RemoveTriangle`, and `Clear` receive an allocator at each call, while existing Rust `CoherentNode` methods still use the default common allocator through compatibility methods. `Poly_CoherentTriangulation` also retains its constructor allocator in `myAlloc` and passes it to node operations; Rust does not yet expose this allocator constructor/propagation. Consequently this slice is not a parity claim for the surrounding node or triangulation classes.
+The subsequent [coherent allocator propagation slice](tkmath-coherent-allocator-propagation.md) adds explicit node allocator operations and retains/forwards the mesh allocator through construction, edits, cloning and destruction. That closes the missing forwarding path described by the initial audit. Backend compatibility and nullable triangle values remain partial, so this is still not a parity claim for the complete node or triangulation classes.
 
 ## Reproduction
 
@@ -77,6 +77,6 @@ The expected output is in `tools/oracle/tkmath_coherent_triptr_alloc.expected`.
 | OCCT `Poly_CoherentNode.hxx` | `43fb34c629691f23c8345f450a741238aa0a4e0947719e5406b789baf39ce254` |
 | OCCT `Poly_CoherentNode.cxx` | `03f46cb19ea098227ed6b4bbc1e0b396004774d1486c689dcf744fa73615fbb1` |
 | Rust `tri_ptr.rs` | `bae641cb69a9957b7fe429bca4222641eb286a681a649dd9bd996ac00eaa4a6b` |
-| Rust `node.rs` | `4c3f41755aa0502775cbbdca2c69144ddae8b494d623c178644ce222dcec061d` |
-| Rust `allocator.rs` | `42dc18b0a6ada3338b24bcaeac11008cb0cf326fc7fce9e340661fcf26e7b7c2` |
+| Rust `node.rs` | `d677820448dd1cd95f8da4b6e547de7ba37286fe1db5c64075f1043829429ab2` |
+| Rust `allocator.rs` | `80060dbc92dc681ed324edea5739c5067cb18a6a31c3359715fbef8aec7d00c0` |
 | Native probe | `18eca46be5cf9b1c0c9dc61846eb407002339d2f272a17c5a1252cd9e31fc5cb` |
