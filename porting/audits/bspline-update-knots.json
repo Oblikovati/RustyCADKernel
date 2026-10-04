@@ -1,0 +1,70 @@
+{
+  "scope": "protected Geom2d_BSplineCurve::updateKnots and Geom_BSplineCurve::updateKnots",
+  "claim": "implemented safe callable counterparts forwarding to the shared BSplineCurveCore update operation",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_declarations": [
+    {
+      "id": "37e8f4e0e9311971ef3086c10a9d7481bc144d7244ca08d384f5cb3f330c4cea",
+      "name": "Geom2d_BSplineCurve::updateKnots()",
+      "signature": "void ()",
+      "visibility": "protected",
+      "header": "src/ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.hxx",
+      "header_sha256": "d473e585a73f3556aed96de8a21715e0d0afddddc50d01d8a38abca78bf738ee",
+      "implementation": "src/ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx:1280",
+      "implementation_sha256": "65f2dbf5decd8e4389f1407f95d3f2e48a9b1a0c8deae1f82dcd5a36136084be",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dBSplineCurve::update_knots"
+    },
+    {
+      "id": "83cbb4d19db71a1cbede583ac9f2729044838938feacc708fc43842d1f5bb491",
+      "name": "Geom_BSplineCurve::updateKnots()",
+      "signature": "void ()",
+      "visibility": "protected",
+      "header": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "header_sha256": "6070421a76816696d9c116dc0b184e6a4afe9c63c77240b709ec0d2a690409b8",
+      "implementation": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx:1171",
+      "implementation_sha256": "1c0de7612992d171766a5d5378a2ed807855340776dd7b689c69de347a80641a",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::update_knots"
+    }
+  ],
+  "native_probe": {
+    "source": "tools/oracle/bspline_update_knots.cxx",
+    "source_sha256": "c983dc4bf02f613d39783d67673bfaeca881f4ca1fff0dc94d7a7a0acf051111",
+    "expected": "tools/oracle/bspline_update_knots.expected",
+    "expected_sha256": "ab3146f9f8bdb4953ba919d5bc720987f73adaba85495248c30f1640ba0eb2cb",
+    "executable_sha256": "d132aec242e6b24af4f7f9af2de31045d598dd49c5a3fcfa3a8b0f78cebe424f",
+    "command": "c++ -std=c++17 -O0 -g0 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/bspline_update_knots.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKG2d -lTKG3d -lTKGeomBase -lTKMath -lTKernel -o /tmp/bspline-update-knots; LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/occt-install/lib /tmp/bspline-update-knots",
+    "output_matches_expected": true,
+    "linked_libraries": {
+      "libTKG2d.so.8.0.0": "2d67f94a2a8c52d2048913cda0f6e2406fb37c2b3a6116f535039884f692dcb0",
+      "libTKG3d.so.8.0.0": "1513492fe8bda6bf051ee1a2aa0ab6c84047d4bb8cee40fdbab6e2ed5954e3a3",
+      "libTKGeomBase.so.8.0.0": "f2c685e230b5dc1de6e757b6dfb543c631877e17298be02c36147e5fb983b8b4",
+      "libTKMath.so.8.0.0": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "libTKernel.so.8.0.0": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    }
+  },
+  "rust_tests": [
+    {
+      "source": "crates/tkg2d/tests/geom2d_bspline_update_knots.rs",
+      "sha256": "b15d0572bd349e1e511b93b17be930a2bb91fb911654106c2a1739ceb52c6b50",
+      "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-bspline-update-knots-target cargo test -p rustycad-tkg2d --test geom2d_bspline_update_knots",
+      "result": "1 passed, 0 failed"
+    },
+    {
+      "source": "crates/tkg3d/tests/geom_bspline_update_knots.rs",
+      "sha256": "0135e1218cbfe2ff210d34bdcf1b4b6a5252a4d856b1281ed7a23beb10c9809d",
+      "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-bspline-update-knots-target cargo test -p rustycad-tkg3d --test geom_bspline_update_knots",
+      "result": "1 passed, 0 failed"
+    }
+  ],
+  "package_validation": {
+    "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-bspline-update-knots-target cargo test -p rustycad-tkg2d -p rustycad-tkg3d",
+    "result": "exit 0; all package tests and doctests passed"
+  },
+  "strict_lint": {
+    "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-bspline-update-knots-target cargo clippy -p rustycad-tkg2d -p rustycad-tkg3d --all-targets -- -D warnings",
+    "result": "passed"
+  },
+  "limitations": [
+    "Rust forwards through the validated shared core and returns Result for safe error propagation; the native protected method returns void. The probe covers valid constructed curves, not corrupted private knot arrays."
+  ]
+}

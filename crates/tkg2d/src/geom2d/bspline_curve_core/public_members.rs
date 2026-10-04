@@ -137,6 +137,11 @@ macro_rules! bspline_curve_accessors {
 #[macro_export]
 macro_rules! bspline_curve_edits {
     ($point:ty, $vector:ty) => {
+        /// Rebuild knot metadata and invalidate cached resolution without clearing the
+        /// evaluation representation; `curve.update_knots()?`.
+        pub fn update_knots(&self) -> Result<(), Failure> {
+            self.state.write().update_knots()
+        }
         /// Raise the degree (`IncreaseDegree`); `curve.increase_degree(5)?`.
         pub fn increase_degree(&self, degree: i32) -> Result<(), Failure> {
             self.state.write().increase_degree(degree)
