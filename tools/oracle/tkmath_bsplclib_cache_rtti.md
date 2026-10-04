@@ -31,3 +31,14 @@ The Rust regression checks the concrete descriptor, its direct
 and the incremented reference count. `SharedBSplineCache` remains the mutable
 shared-cache wrapper used by adaptors; this adds transient identity to the cache
 value without changing that sharing behavior.
+
+## Shared cache owner follow-up
+
+The current wrapper stores an owning `Handle<BSplCLib_Cache>` and the cache
+keeps its embedded `Standard_Transient` outside the payload mutex. The expanded
+probe `tools/oracle/tkmath_bspline_cache_shared_handle.cxx` verifies copied
+owner and base projection identity together; the reference count is `3` while
+the concrete owner, alias, and projected base handle coexist. A bounded Rust
+regression clones and upcasts while the cache payload mutex is held. The only
+remaining descriptor gap is that `RuntimeType` values are static Rust references
+rather than owning OCCT `Standard_Type` handles.

@@ -230547,7 +230547,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "partial",
-      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplclib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
+      "notes": "Concrete descriptor, Standard_Transient ancestry, owning base-handle projection, object identity, and embedded refcount behavior are tested against native OCCT. This descriptor row remains partial because Rust exposes static RuntimeType references rather than owning Standard_Type handles; see porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplCLib_Cache::DynamicType() const",
@@ -230555,7 +230555,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::<rustycad_tkernel::standard::Transient>::dynamic_type",
       "status": "partial",
-      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplclib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
+      "notes": "Concrete descriptor, Standard_Transient ancestry, owning base-handle projection, object identity, and embedded refcount behavior are tested against native OCCT. This descriptor row remains partial because Rust exposes static RuntimeType references rather than owning Standard_Type handles; see porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplSLib_Cache::get_type_descriptor()",
@@ -230563,7 +230563,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplslib::Cache::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "partial",
-      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplslib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
+      "notes": "Concrete descriptor, Standard_Transient ancestry, owning base-handle projection, object identity, and embedded refcount behavior are tested against native OCCT. This descriptor row remains partial because Rust exposes static RuntimeType references rather than owning Standard_Type handles; see porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "BSplSLib_Cache::DynamicType() const",
@@ -230571,7 +230571,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplslib::Cache::<rustycad_tkernel::standard::Transient>::dynamic_type",
       "status": "partial",
-      "notes": "The concrete Cache descriptor, Standard_Transient ancestry, handle upcast and object identity are tested against native OCCT; mutable SharedCache owners now forward underlying dynamic type, exact-instance/ancestor queries and cloned-owner identity. This row remains partial: SharedCache clones do not increment the embedded StandardTransient counter and have no owning base-handle projection, while Rust returns static RuntimeType references instead of owning Standard_Type Handles. See tools/oracle/tkmath_bsplslib_cache_rtti.md and porting/audits/tkmath-bspline-cache-shared-identity.json."
+      "notes": "Concrete descriptor, Standard_Transient ancestry, owning base-handle projection, object identity, and embedded refcount behavior are tested against native OCCT. This descriptor row remains partial because Rust exposes static RuntimeType references rather than owning Standard_Type handles; see porting/audits/tkmath-bspline-cache-shared-identity.json."
     },
     {
       "upstream_id": "math_Householder::Perform(const math_Matrix&,const math_Matrix&,double)",
