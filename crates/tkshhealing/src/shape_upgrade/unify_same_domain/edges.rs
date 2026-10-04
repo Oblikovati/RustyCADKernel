@@ -13,8 +13,9 @@ pub(super) use global_context::protected_shapes;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 use rustycad_tkbrep::brep_tools::ReShape;
+use rustycad_tkbrep::brep_tools::WireExplorer;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Edge, Shape, Vertex};
+use rustycad_tkbrep::topods::{self, Edge, Shape, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
@@ -266,6 +267,17 @@ fn connected_circle_pair(
     let analysis = ShapeAnalysisEdge::new();
     let (first_start, first_end) = edge_vertices(&analysis, first);
     let (second_start, second_end) = edge_vertices(&analysis, second);
+    if connected_vertex_occurrences(&second_end, &first_start) {
+        if !bspline::aligned_join(second, first, tolerance)? {
+            return Ok(None);
+        }
+        return Ok(Some((
+            second.clone(),
+            first.clone(),
+            second_start,
+            first_end,
+        )));
+    }
     if connected_vertex_occurrences(&first_end, &second_start) {
         if !bspline::aligned_join(first, second, tolerance)? {
             return Ok(None);
@@ -283,17 +295,6 @@ fn connected_circle_pair(
             second.clone(),
             first_start,
             second_end,
-        )));
-    }
-    if connected_vertex_occurrences(&second_end, &first_start) {
-        if !bspline::aligned_join(second, first, tolerance)? {
-            return Ok(None);
-        }
-        return Ok(Some((
-            second.clone(),
-            first.clone(),
-            second_start,
-            first_end,
         )));
     }
     Ok(None)
@@ -333,6 +334,7 @@ fn replace_circle_pair(
     } else {
         make_merged_circle_edge(first, &original_start, &original_end, &start, &end)?
     };
+    pcurve_union::union_pcurves(shape, first, second, &edge)?;
     record_safe_vertex(context, &original_start, &start, safe_input_mode)?;
     if !closed {
         record_safe_vertex(context, &original_end, &end, safe_input_mode)?;
@@ -456,7 +458,17 @@ fn trimmed_line(start: Point3, end: Point3) -> Result<Handle<dyn GeomCurve>, Fai
 }
 
 fn wire_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
+    if shape.shape_type()? == ShapeEnum::Wire {
+        let wire = topods::wire(shape)?;
+        let mut explorer = WireExplorer::with_wire(&wire)?;
+        let mut edges = Vec::new();
+        while explorer.more() {
+            edges.push(explorer.current().clone());
+            explorer.next()?;
+        }
+        return Ok(edges);
+    }
     Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?
-        .map(|edge| rustycad_tkbrep::topods::edge(&edge))
+        .map(|edge| topods::edge(&edge))
         .collect()
 }

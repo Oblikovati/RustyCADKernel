@@ -132,7 +132,7 @@ fn merged_pcurve_pass(
     if let Some(result) = merge_same_support_lines(merged, &first, &second)? {
         return Ok(result);
     }
-    if let Some(result) = merge_same_support_circle_pair(merged, &first, &second)? {
+    if let Some(result) = merge_same_support_circle_pair(face, merged, &first, &second)? {
         return Ok(result);
     }
     merge_matching_or_general_curve(merged, &first, &second)
@@ -227,11 +227,12 @@ fn merge_same_support_lines(
 }
 
 fn merge_same_support_circle_pair(
+    face: &Face,
     merged: &Edge,
     first: &OrientedPCurve,
     second: &OrientedPCurve,
 ) -> Result<Option<MergedPCurve>, Failure> {
-    merge_same_support_circles(merged, first, second)
+    merge_same_support_circles(face, merged, first, second)
 }
 
 fn null_pcurve() -> Failure {
