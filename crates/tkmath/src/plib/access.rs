@@ -65,6 +65,16 @@ pub(crate) fn require_length(
     )))
 }
 
+/// Rejects derivative counts outside the native D0–D3 protected contract.
+pub(crate) fn validate_derivative_order(function: &str, order: i32) -> Result<(), Failure> {
+    if (0..=3).contains(&order) {
+        return Ok(());
+    }
+    Err(Failure::out_of_range(&format!(
+        "{function}: NDeriv = {order}; expected 0..=3"
+    )))
+}
+
 /// Reads a raw-buffer entry addressed with native signed arithmetic;
 /// `buffer_value("PLib_JacobiPolynomial::MaxError", coefficients, 7)?`.
 pub(crate) fn buffer_value(function: &str, values: &[f64], index: i64) -> Result<f64, Failure> {

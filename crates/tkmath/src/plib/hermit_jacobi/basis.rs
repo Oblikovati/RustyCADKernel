@@ -2,7 +2,7 @@
 
 //! Hermite-Jacobi basis values: Hermite rows first, then W(t) times Jacobi rows.
 use super::{HermitJacobi, W_COEFFICIENTS, hermite_matrix};
-use crate::plib::access::require_length;
+use crate::plib::access::{require_length, validate_derivative_order};
 use crate::plib::horner::{eval_polynomial, no_derivative_eval_polynomial};
 use crate::plib::jacobi_polynomial::BasisRows;
 use rustycad_tkernel::ncollection::Array1;
@@ -74,26 +74,61 @@ impl HermitJacobi {
         self.d0123(3, u, BasisRows { rows })
     }
 
-    // Native protected D0123: rows start at each array's lower bound.
-    fn d0123(&self, order: usize, u: f64, basis: BasisRows<'_>) -> Result<(), Failure> {
+    /// Evaluates the requested derivative rows (`PLib_HermitJacobi::D0123`);
+    /// `basis.d0123(2, 0.5, BasisRows { rows: [&mut value, &mut d1, &mut d2, &mut []] })?`.
+    /// Rows start at each native array's lower bound; orders outside 0–3 are rejected safely.
+    pub fn d0123(&self, native_order: i32, u: f64, basis: BasisRows<'_>) -> Result<(), Failure> {
+        validate_derivative_order("PLib_HermitJacobi::D0123", native_order)?;
+        let order: usize = native_order as usize;
+        self.evaluate_order(order, u, basis)
+    }
+
+    fn evaluate_order(&self, order: usize, u: f64, basis: BasisRows<'_>) -> Result<(), Failure> {
         let work_count: usize = self.work_degree() as usize + 1;
-        for (derivative, row) in basis.rows.iter().enumerate().take(order + 1) {
-            let name: &str = ["BasisValue", "BasisD1", "BasisD2", "BasisD3"][derivative];
-            require_length("PLib_HermitJacobi::D0123", name, row.len(), work_count)?;
-        }
+        self.validate_output_rows(order, work_count, &basis.rows)?;
         let hermite: Vec<[f64; 4]> = self.hermite_values(order, u)?;
-        let jacobi_count: usize = work_count - hermite.len();
-        let mut jacobi: [Vec<f64>; 4] = std::array::from_fn(|_| vec![0.0; jacobi_count]);
+        let jacobi: [Vec<f64>; 4] = self.jacobi_values(order, u, work_count - hermite.len())?;
+        let weight: [f64; 4] = self.weight_values(order, u)?;
+        self.write_output_rows(order, work_count, hermite, weight, jacobi, basis.rows);
+        Ok(())
+    }
+
+    fn validate_output_rows(
+        &self,
+        order: usize,
+        count: usize,
+        rows: &[&mut [f64]; 4],
+    ) -> Result<(), Failure> {
+        for (derivative, row) in rows.iter().enumerate().take(order + 1) {
+            let name: &str = ["BasisValue", "BasisD1", "BasisD2", "BasisD3"][derivative];
+            require_length("PLib_HermitJacobi::D0123", name, row.len(), count)?;
+        }
+        Ok(())
+    }
+
+    fn jacobi_values(&self, order: usize, u: f64, count: usize) -> Result<[Vec<f64>; 4], Failure> {
+        let mut jacobi: [Vec<f64>; 4] = std::array::from_fn(|_| vec![0.0; count]);
         let [j0, j1, j2, j3] = &mut jacobi;
         self.jacobi.d0123(
-            order,
+            order as i32,
             u,
             BasisRows {
                 rows: [j0, j1, j2, j3],
             },
         )?;
-        let weight: [f64; 4] = self.weight_values(order, u)?;
-        let [value, d1, d2, d3] = basis.rows;
+        Ok(jacobi)
+    }
+
+    fn write_output_rows(
+        &self,
+        order: usize,
+        work_count: usize,
+        hermite: Vec<[f64; 4]>,
+        weight: [f64; 4],
+        jacobi: [Vec<f64>; 4],
+        rows: [&mut [f64]; 4],
+    ) {
+        let [value, d1, d2, d3] = rows;
         let mut outputs: [&mut [f64]; 4] = [value, d1, d2, d3];
         for (derivative, output) in outputs.iter_mut().enumerate().take(order + 1) {
             for (i, row) in hermite.iter().enumerate() {
@@ -103,7 +138,6 @@ impl HermitJacobi {
                 *slot = leibniz_term(derivative, &weight, &jacobi, j);
             }
         }
-        Ok(())
     }
 
     // Values and derivatives of each Hermite polynomial (rows of the Hermite matrix).

@@ -29,8 +29,11 @@ static DENOM: [&ChunkedTable; 3] = [
     &jacobi_tables::DENOM_C2,
 ];
 
-/// Output rows of one basis evaluation; rows above the requested order stay untouched.
-pub(in crate::plib) struct BasisRows<'r> {
+/// Mutable outputs for a basis evaluation; D0–D3 calls leave rows above their order untouched.
+///
+/// `BasisRows { rows: [&mut values, &mut first, &mut second, &mut third] }`.
+/// Separate slices cannot alias one native array across argument positions.
+pub struct BasisRows<'r> {
     /// Values, then first, second and third derivatives.
     pub rows: [&'r mut [f64]; 4],
 }
@@ -101,16 +104,44 @@ impl JacobiPolynomial {
         self.d0123(3, u, BasisRows { rows })
     }
 
-    /// Common part of D0..D3 (native protected `D0123`); rows start at each array's
-    /// lower bound and must hold Degree+1 values up to the requested order.
-    pub(in crate::plib) fn d0123(
+    /// Evaluates the requested derivative rows (`PLib_JacobiPolynomial::D0123`);
+    /// `jacobi.d0123(2, 0.5, BasisRows { rows: [&mut value, &mut d1, &mut d2, &mut []] })?`.
+    /// Rows start at each native lower bound; negative orders preserve the native initialized D1 path.
+    /// For `NDeriv > 3`, OCCT computes rows 0–2 and still scales row 3.
+    pub fn d0123(
         &self,
-        order: usize,
+        native_order: i32,
         u: f64,
         mut basis: BasisRows<'_>,
     ) -> Result<(), Failure> {
+        if native_order < 0 {
+            return self.evaluate_negative_order(&mut basis, u);
+        }
+        let (compute_order, normalize_order) = jacobi_orders(native_order);
         let count: usize = self.degree as usize + 1;
-        for (derivative, row) in basis.rows.iter().enumerate().take(order + 1) {
+        self.validate_rows(normalize_order, count, &basis.rows)?;
+        self.seed_rows(compute_order, u, &mut basis.rows);
+        self.recur_rows(compute_order, u, &mut basis.rows)?;
+        self.scale_rows(normalize_order, count, &mut basis.rows)?;
+        Ok(())
+    }
+
+    fn evaluate_negative_order(&self, basis: &mut BasisRows<'_>, u: f64) -> Result<(), Failure> {
+        let count: usize = self.degree as usize + 1;
+        self.validate_rows(1, count, &basis.rows)?;
+        self.seed_rows(0, u, &mut basis.rows);
+        self.recur_negative_rows(u, &mut basis.rows)?;
+        self.scale_rows(1, count, &mut basis.rows)?;
+        Ok(())
+    }
+
+    fn validate_rows(
+        &self,
+        order: usize,
+        count: usize,
+        rows: &[&mut [f64]; 4],
+    ) -> Result<(), Failure> {
+        for (derivative, row) in rows.iter().enumerate().take(order + 1) {
             require_length(
                 "PLib_JacobiPolynomial::D0123",
                 ["BasisValue", "BasisD1", "BasisD2", "BasisD3"][derivative],
@@ -118,14 +149,38 @@ impl JacobiPolynomial {
                 count,
             )?;
         }
-        self.seed_rows(order, u, &mut basis.rows);
-        self.recur_rows(order, u, &mut basis.rows)?;
-        let norm: &ChunkedTable = TNORM[self.level()];
-        for i in 0..count {
-            let factor: f64 = table_value(norm, i, "TNorm")?;
-            for row in basis.rows.iter_mut().take(order + 1) {
-                row[i] *= factor;
+        Ok(())
+    }
+
+    fn scale_rows(
+        &self,
+        order: usize,
+        count: usize,
+        rows: &mut [&mut [f64]; 4],
+    ) -> Result<(), Failure> {
+        for index in 0..count {
+            let factor: f64 = table_value(TNORM[self.level()], index, "TNorm")?;
+            for row in rows.iter_mut().take(order + 1) {
+                row[index] *= factor;
             }
+        }
+        Ok(())
+    }
+
+    fn recur_negative_rows(&self, u: f64, rows: &mut [&mut [f64]; 4]) -> Result<(), Failure> {
+        for i in 2..=self.degree as usize {
+            let (a, b, denom) = self.recurrence_coefficients(i)?;
+            rows[0][i] = recurrence_term(a, b, denom, u, rows[0][i - 1], rows[0][i - 2], 0, 0.0);
+            rows[1][i] = recurrence_term(
+                a,
+                b,
+                denom,
+                u,
+                rows[1][i - 1],
+                rows[1][i - 2],
+                1,
+                rows[0][i - 1],
+            );
         }
         Ok(())
     }
@@ -151,11 +206,8 @@ impl JacobiPolynomial {
 
     // J_i = (A_i u J_{i-1} + B_i J_{i-2}) D_i, differentiated term by term.
     fn recur_rows(&self, order: usize, u: f64, rows: &mut [&mut [f64]; 4]) -> Result<(), Failure> {
-        let level: usize = self.level();
         for i in 2..=self.degree.max(1) as usize {
-            let a: f64 = table_value(COF_A[level], i, "CofA")?;
-            let b: f64 = table_value(COF_B[level], i, "CofB")?;
-            let denom: f64 = table_value(DENOM[level], i, "Denom")?;
+            let (a, b, denom) = self.recurrence_coefficients(i)?;
             // Derivative k adds k times derivative k-1 inside the A term; k = 0 has no such term.
             for k in (0..=order).rev() {
                 let lower: f64 = if k == 0 { 0.0 } else { rows[k - 1][i - 1] };
@@ -165,6 +217,22 @@ impl JacobiPolynomial {
         }
         Ok(())
     }
+
+    fn recurrence_coefficients(&self, index: usize) -> Result<(f64, f64, f64), Failure> {
+        let level: usize = self.level();
+        let a: f64 = table_value(COF_A[level], index, "CofA")?;
+        let b: f64 = table_value(COF_B[level], index, "CofB")?;
+        let denom: f64 = table_value(DENOM[level], index, "Denom")?;
+        Ok((a, b, denom))
+    }
+}
+
+fn jacobi_orders(native_order: i32) -> (usize, usize) {
+    if native_order > 3 {
+        return (2, 3);
+    }
+    let order: usize = native_order as usize;
+    (order, order)
 }
 
 #[allow(clippy::too_many_arguments)] // One scalar per recurrence operand keeps the native order visible.
