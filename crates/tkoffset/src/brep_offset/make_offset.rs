@@ -9,12 +9,13 @@ pub struct BRepOffsetMakeOffset {
     pub(super) config: Option<BRepOffsetMakeOffsetConfiguration>,
     allow_linearization: Option<bool>,
     pub(super) initial_shape: Shape,
-    result_shape: Shape,
-    closing_faces: Vec<Face>,
+    pub(super) face_component: Shape,
+    pub(super) result_shape: Shape,
+    pub(super) closing_faces: Vec<Face>,
     pub(super) face_offsets: Vec<(Face, f64)>,
     pub(super) error: Option<BRepOffsetError>,
     pub(super) bad_shape: Shape,
-    done: bool,
+    pub(super) done: bool,
 }
 
 /// A snapshot of `Initialize` arguments for callers that need to inspect stored parameters.
@@ -51,6 +52,7 @@ impl BRepOffsetMakeOffset {
             config: None,
             allow_linearization: None,
             initial_shape: Shape::default(),
+            face_component: Shape::default(),
             result_shape: Shape::default(),
             closing_faces: Vec::new(),
             face_offsets: Vec::new(),

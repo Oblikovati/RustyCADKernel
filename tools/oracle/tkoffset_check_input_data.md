@@ -19,7 +19,10 @@ c++ -std=c++17 \
 /tmp/tkoffset-check-input-data | diff -u tools/oracle/tkoffset_check_input_data.expected.txt -
 ```
 
-The Rust method currently validates connectivity, C0 continuity, the 21-by-21
-normal grid, and face vertex parameters. Native progress interruption and
-`BuildFaceComp` selection from face-specific offsets still need implementation
-before the method can be considered a complete port.
+The Rust checker validates connectivity, C0 continuity, the 21-by-21 normal grid,
+and face vertex parameters. The current `MakeOffsetShape` subset populates its face
+component from the initial input directly; native planar-face replacement and
+face-specific selection in `SetFaces`/`BuildFaceComp`, plus progress interruption,
+still need implementation before the full pipeline is complete. A direct Rust
+`check_input_data()` call inspects the maker's current face component, matching the
+native call order when `MakeOffsetShape` has not populated one yet.

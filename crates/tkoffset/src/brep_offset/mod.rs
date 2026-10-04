@@ -5,6 +5,7 @@ pub use classification::{BRepOffsetError, BRepOffsetMode};
 mod interval;
 pub use interval::BRepOffsetInterval;
 mod make_offset;
+mod make_offset_build;
 mod make_offset_check;
 mod offset_face;
 mod simple_offset;
