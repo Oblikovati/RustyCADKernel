@@ -36,6 +36,17 @@ fn shared_context_reaches_solid_faces_and_preserves_validity() {
     );
 }
 
+#[test]
+fn nonplanar_cylinder_keeps_native_edge_selection_and_validity() {
+    let input = BRepPrimAPIMakeCylinder::new(2.0, 5.0)
+        .shape()
+        .unwrap()
+        .clone();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    assert_global_counts(&unifier.shape(), "cylinder_solid");
+}
+
 fn sewn_split_faces() -> Shape {
     let mut sewing = BRepBuilderAPISewing::default();
     sewing.add(&split_side(0., 1., true)).unwrap();

@@ -143,7 +143,7 @@ fn ordered_pair(
     second_start: Vertex,
     second_end: Vertex,
 ) -> Result<Option<(Edge, Edge, Vertex, Vertex)>, Failure> {
-    if first_end.is_same(&second_start) {
+    if super::connected_vertex_occurrences(&first_end, &second_start) {
         return Ok(Some((
             first.clone(),
             second.clone(),
@@ -151,7 +151,7 @@ fn ordered_pair(
             second_end,
         )));
     }
-    if second_end.is_same(&first_start) {
+    if super::connected_vertex_occurrences(&second_end, &first_start) {
         return Ok(Some((
             second.clone(),
             first.clone(),

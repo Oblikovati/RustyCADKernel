@@ -7,7 +7,8 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 /// Protects kept shapes and shared junctions before the global edge pass.
 pub(crate) fn protected_shapes(shape: &Shape, keep: &[Shape]) -> Result<Vec<Shape>, Failure> {
     let mut protected = keep.to_vec();
-    for vertex in shared_junctions(shape)? {
+    let shared = shared_junctions(shape)?;
+    for vertex in shared {
         if !protected.iter().any(|known| known.is_same(&vertex)) {
             protected.push(vertex);
         }
@@ -30,7 +31,7 @@ fn shared_junctions(shape: &Shape) -> Result<Vec<Shape>, Failure> {
         .collect())
 }
 
-fn unique_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
+pub(super) fn unique_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
     let mut unique = Vec::new();
     for candidate in Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)? {
         let edge = rustycad_tkbrep::topods::edge(&candidate)?;

@@ -3,6 +3,7 @@
 #include <BRepBuilderAPI_MakeWire.hxx>
 #include <BRepBuilderAPI_Sewing.hxx>
 #include <BRepCheck_Analyzer.hxx>
+#include <BRepPrimAPI_MakeCylinder.hxx>
 #include <BRepPrimAPI_MakePrism.hxx>
 #include <BRep_Builder.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
@@ -79,4 +80,6 @@ int main() {
   emit("two_face_compound", compound);
   BRepPrimAPI_MakePrism prism(single, gp_Vec(0, 0, 1));
   emit("prism_solid", prism.Shape());
+  BRepPrimAPI_MakeCylinder cylinder(2.0, 5.0);
+  emit("cylinder_solid", cylinder.Shape());
 }
