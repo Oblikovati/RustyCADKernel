@@ -101,3 +101,53 @@ fn assert_read(
     assert_eq!(lines.read_stream(stream, 2, &mut count), expected_good);
     assert_eq!(count, expected_count);
 }
+
+#[test]
+fn exception_masks_apply_after_state_mutation_and_distinguish_bits() {
+    use crate::standard::IstreamExceptionMask;
+    let mut stream = IstreamStream::new(Cursor::new(Vec::<u8>::new()));
+    stream.set_status(false, false, true);
+    stream
+        .set_exceptions(IstreamExceptionMask::new(false, true, false))
+        .unwrap();
+    assert!(stream.is_bad() && stream.is_fail());
+    assert!(
+        stream
+            .set_exceptions(IstreamExceptionMask::new(false, false, true))
+            .is_err()
+    );
+    assert!(stream.clear_state(false, false, true).is_err());
+    assert!(stream.is_bad());
+    stream.clear();
+    assert!(!stream.is_bad() && !stream.is_fail());
+}
+
+#[test]
+fn badbit_masks_failbit_only_after_the_next_sentry() {
+    use crate::standard::IstreamExceptionMask;
+    let source = ErrorThenBytes {
+        source: Cursor::new(Vec::new()),
+        fail_once: true,
+    };
+    let mut stream = IstreamStream::new(source);
+    stream
+        .set_exceptions(IstreamExceptionMask::new(false, true, false))
+        .unwrap();
+    let mut byte = [0];
+    let first = stream.read_block(&mut byte).unwrap();
+    assert!(!first.is_good() && stream.is_bad());
+    assert!(stream.read_block(&mut byte).unwrap_err().fail());
+}
+
+#[test]
+fn zero_length_read_checks_existing_masked_state() {
+    use crate::standard::IstreamExceptionMask;
+    let mut stream = IstreamStream::new(Cursor::new(b"z".to_vec()));
+    stream
+        .set_exceptions(IstreamExceptionMask::new(false, false, true))
+        .unwrap();
+    stream.set_status(false, false, true);
+    let error = stream.read_block(&mut []).unwrap_err();
+    assert!(error.bad() && error.fail());
+    assert!(stream.is_fail());
+}
