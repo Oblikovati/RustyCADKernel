@@ -68,8 +68,11 @@ impl<T: BoxReal> CompactBox2<T> {
         let half = delta * 0.5;
         let center = Xy::new(self.center[0].to_double(), self.center[1].to_double());
         let displacement = origin + half - center;
-        displacement.x().abs() > self.half[0].to_double() + half.x().abs()
-            || displacement.y().abs() > self.half[1].to_double() + half.y().abs()
+        let half_size = Xy::new(
+            self.half[0].to_double() + half.x().abs(),
+            self.half[1].to_double() + half.y().abs(),
+        );
+        CompactBox2::<T>::compare_dist_d(half_size, displacement)
     }
     /// Transforms center and absolute matrix extents with native promotion; `bounds.transformed(transform)`.
     pub fn transformed(&self, transform: Transform2) -> Self {

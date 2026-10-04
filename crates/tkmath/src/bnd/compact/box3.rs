@@ -3,6 +3,16 @@ use crate::gp::{Point3, Transform3, TransformForm, Xyz};
 /// Native Bnd_B3<double/float> storage; `CompactBox3::<f64>::new(center,half_size)`.
 pub type CompactBox3<T = f64> = CompactBounds<T, 3>;
 impl<T: BoxReal> CompactBounds<T, 3> {
+    /// Tests the native double-precision vector hook.
+    ///
+    /// ```
+    /// use rustycad_tkmath::{bnd::CompactBox3, gp::Xyz};
+    /// assert!(CompactBox3::<f32>::compare_dist_d(Xyz::new(1.0, 2.0, 3.0), Xyz::new(0.0, 0.0, 3.1)));
+    /// ```
+    pub fn compare_dist_d(half_size: Xyz, distance: Xyz) -> bool {
+        CompactBounds::<f64, 3>::compare_dist(half_size.coordinates(), distance.coordinates())
+    }
+
     /// Converts coordinates to the requested scalar storage; `CompactBox3::<f32>::new(center,half)`.
     pub fn new(center: Xyz, half: Xyz) -> Self {
         Self::from_arrays(convert(center), convert(half))
