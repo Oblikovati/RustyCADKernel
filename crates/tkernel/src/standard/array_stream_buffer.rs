@@ -33,13 +33,26 @@ impl<'a> ArrayStreamBuffer<'a> {
     }
     /// Backs up only for EOF or the matching previous byte (`pbackfail`); `buffer.put_back(Some(b'A'))`.
     ///
-    /// Native code compares the unsigned `int_type` of the request with the previous `char`
+    /// Native code compares the nonnegative byte request with the previous `char`
     /// promoted to `int`, so where `char` is signed a byte of 0x80 or more never matches.
+    /// Use `put_back_integer` to supply the negative promoted value directly.
     pub fn put_back(&mut self, byte: Option<u8>) -> Option<u8> {
+        self.put_back_integer(byte.map_or(-1, i32::from))
+    }
+    /// Calls native `pbackfail(int_type)`, including negative promoted character values.
+    /// The EOF request `-1` backs up regardless of the previous byte.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::ArrayStreamBuffer;
+    /// let mut buffer = ArrayStreamBuffer::new(b"A");
+    /// assert_eq!(buffer.uflow(), Some(b'A'));
+    /// assert_eq!(buffer.put_back_integer(65), Some(b'A'));
+    /// ```
+    pub fn put_back_integer(&mut self, requested: i32) -> Option<u8> {
         let previous = self.position.checked_sub(1)?;
         let actual = self.bytes[previous];
         let promoted = i32::from(actual as std::ffi::c_char);
-        if byte.is_some_and(|requested| i32::from(requested) != promoted) {
+        if requested != -1 && requested != promoted {
             return None;
         }
         self.position = previous;

@@ -234435,6 +234435,14 @@
       "rust_item": "rustycad_tkernel::quantity::NamedColor::YELLOW1",
       "status": "implemented",
       "notes": "Existing named-color associated constant. Native compiled enum integer and Rust source constant expression checked by porting/audits/quantity-color-enumerators.jsonl; alias values retained. This adds an API declaration mapping, not a new legacy test or complete behavioral proof."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::pbackfail(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::put_back_integer",
+      "status": "implemented",
+      "notes": "Protected stream hook accepts the full i32 int_type domain, including negative signed-char promotions. EOF -1 unconditionally restores a previous byte; failure preserves position. Return EOF becomes None and unsigned character results become Some(u8). Native probe: tools/oracle/array_stream_integer_putback.cxx; supplemental tests only. Existing Option<u8> convenience delegates to this implementation."
     }
   ],
   "tests": [
