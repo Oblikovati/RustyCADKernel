@@ -228279,7 +228279,7 @@
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ef",
       "status": "partial",
-      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Deferred common-block face membership, sampled tolerances and endpoint propagation have single-block/two-face native replays. Multi-block grouping, general new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and other curve/surface families remain incomplete or unverified. The flat Bezier-face native success now matches the Rust interference record and source/generated vertex coordinates after localized BeanFace integration. Supplemental fixtures do not map new legacy declarations."
+      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Deferred common-block face membership, sampled tolerances and endpoint propagation have single-block/two-face native replays. Multi-block grouping, general new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and other curve/surface families remain incomplete or unverified. The flat Bezier-face native success now matches the Rust interference record and source/generated vertex coordinates after localized BeanFace integration. Supplemental fixtures do not map new legacy declarations. Fused generated-vertex projection before splitting now matches native IntersectVE(..., false), without VE records, for three nearby line/plane hits with fuzzy 0.0004; tools/oracle/tkbo_pave_filler_ef_new_vertices.md. Other projection domains and multi-block grouping remain unproven."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetAnalyse() const",
@@ -228397,6 +228397,195 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::set_section_attribute",
       "status": "implemented",
       "notes": "Native value assignment, default flags and retention after source mutation/Clear replayed in tkbo_section_attribute native fixture. This implements configuration storage; PerformFF consumption remains unported."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Add(const TopoDS_Shape &, const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::add_many",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Add(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::add",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Ascendant(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::ascendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::BRepAlgo_AsDes()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::new",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::ChangeDescendant(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::change_descendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::clear",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Descendant(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::descendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::HasAscendant(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::has_ascendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::HasCommonDescendant(const TopoDS_Shape &, const TopoDS_Shape &, NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::has_common_descendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::HasDescendant(const TopoDS_Shape &) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::has_descendant",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Remove(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::remove",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepAlgo_AsDes::Replace(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_AsDes.hxx",
+      "source_sha256": "480bf992317e327b90d24ba8a6dc35aa8afbbbf47dfdfb94b686ce6803889097",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoAsDes::replace",
+      "status": "partial",
+      "notes": "Native association and replacement fixtures: tools/oracle/brep_algo_as_des.md; shared Store mutation: tools/oracle/tkoffset_inter3d_state.md. Partial capability: readers return snapshots instead of live list references; ChangeDescendant on missing keys returns None instead of native mutable static empty list; mutation through shared handles is currently limited to add_shared. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::AsDes() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::as_des",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::BRepOffset_Inter3d(const occ::handle<BRepAlgo_AsDes> &, const TopAbs_State, const double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::FaceInter(const TopoDS_Face &, const TopoDS_Face &, const BRepAlgo_Image &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::face_inter",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::IsDone(const TopoDS_Face &, const TopoDS_Face &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::is_done",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::NewEdges()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new_edges",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::SetDone(const TopoDS_Face &, const TopoDS_Face &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::set_done",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Inter3d::TouchedFaces()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
+      "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::touched_faces",
+      "status": "partial",
+      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     }
   ],
   "tests": [
