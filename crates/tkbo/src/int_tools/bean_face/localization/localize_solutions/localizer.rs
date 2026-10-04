@@ -142,8 +142,8 @@ impl Localizer<'_> {
                     row_has_out = true;
                     continue;
                 }
-                let cell_box = self.surface_cell_box(cell, bounds)?;
-                if self.cell_is_out(cell, &cell_box, curve_box, &mut row_has_out)? {
+                let (cell_box, found) = self.surface_cell_box(cell, bounds)?;
+                if self.cell_is_out(cell, &cell_box, curve_box, found, &mut row_has_out)? {
                     continue;
                 }
                 let candidates = self.curve_candidates(
@@ -178,14 +178,14 @@ impl Localizer<'_> {
         &mut self,
         sample: SurfaceRangeSample,
         bounds: [f64; 4],
-    ) -> Result<BoundingBox3, Failure> {
+    ) -> Result<(BoundingBox3, bool), Failure> {
         let mut output = BoundingBox3::default();
         if self.surface_cache.find_box(&sample, &mut output) {
-            return Ok(output);
+            return Ok((output, true));
         }
         self.build_surface_cell_box(bounds, &mut output)?;
         self.surface_cache.add_box(&sample, &output);
-        Ok(output)
+        Ok((output, false))
     }
 
     fn build_surface_cell_box(
@@ -206,10 +206,10 @@ impl Localizer<'_> {
         sample: SurfaceRangeSample,
         cell_box: &BoundingBox3,
         curve_box: &BoundingBox3,
+        cached: bool,
         row_has_out: &mut bool,
     ) -> Result<bool, Failure> {
-        let root_curve_box = self.cached_root_curve_box();
-        if cell_box.is_out_box(&root_curve_box) {
+        if !cached && cell_box.is_out_box(&self.cached_root_curve_box()) {
             self.surface_cache.add_out_range(&sample);
             *row_has_out = true;
             return Ok(true);
@@ -262,8 +262,13 @@ impl Localizer<'_> {
             return Ok(());
         }
         let (first, last) = cell_bounds(scan.state.curve, scan.state.steps[0], cell);
-        let bounds = self.curve_cell_box(sample, first, last)?;
-        if bounds.is_out_box(self.surface_root) && !*scan.global_checked {
+        let (bounds, cached) = self.curve_cell_box(sample, first, last)?;
+        if !cached && bounds.is_out_box(self.surface_root) {
+            self.curve_cache.add_out_range(&sample);
+            scan.candidates.has_out = true;
+            return Ok(());
+        }
+        if !*scan.global_checked && bounds.is_out_box(self.surface_root) {
             self.curve_cache.add_out_range(&sample);
             scan.avoid_cells.push(cell);
             scan.candidates.has_out = true;
@@ -284,10 +289,10 @@ impl Localizer<'_> {
         sample: CurveRangeSample,
         first: f64,
         last: f64,
-    ) -> Result<BoundingBox3, Failure> {
+    ) -> Result<(BoundingBox3, bool), Failure> {
         let mut bounds = BoundingBox3::default();
         if self.curve_cache.find_box(&sample, &mut bounds) {
-            return Ok(bounds);
+            return Ok((bounds, true));
         }
         Add3dCurve::add_range(
             self.bean.curve.get().expect("bean curve"),
@@ -297,7 +302,7 @@ impl Localizer<'_> {
             &mut bounds,
         )?;
         self.curve_cache.add_box(&sample, &bounds);
-        Ok(bounds)
+        Ok((bounds, false))
     }
 
     fn visit_candidates(

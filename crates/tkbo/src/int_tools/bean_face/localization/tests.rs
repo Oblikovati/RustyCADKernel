@@ -10,6 +10,13 @@ use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomBezierSurface, GeomSurface};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
 
+#[path = "cache_state_tests.rs"]
+mod cache_state_tests;
+#[path = "periodic_origin_tests.rs"]
+mod periodic_origin_tests;
+#[path = "public_perform_tests.rs"]
+mod public_perform_tests;
+
 #[test]
 fn localized_flat_bezier_matches_native_recursive_ranges() {
     let mut bean = bezier_bean();
@@ -40,11 +47,23 @@ fn localized_repeat_reuses_surface_box_cache_and_releases_grid() {
     assert_grid_is_clear(&bean);
 
     bean.range_manager.set_boundaries(0.0, 2.0, 0);
+    seed_obsolete_surface_exclusion(&bean);
     assert!(compute(&mut bean).unwrap());
 
     assert_eq!(range_snapshot(&bean), first);
     assert_same_box(&first_box, &cached_root_surface_box(&bean));
+    assert_exclusion_was_cleared(&bean);
     assert_grid_is_clear(&bean);
+}
+
+fn seed_obsolete_surface_exclusion(bean: &BeanFaceIntersector) {
+    let cache = super::surface_cache(bean).unwrap();
+    cache.write().add_out_range(&SurfaceRangeSample::default());
+}
+
+fn assert_exclusion_was_cleared(bean: &BeanFaceIntersector) {
+    let cache = super::surface_cache(bean).unwrap();
+    assert!(!cache.read().is_range_out(&SurfaceRangeSample::default()));
 }
 
 fn cached_root_surface_box(bean: &BeanFaceIntersector) -> rustycad_tkmath::bnd::BoundingBox3 {
@@ -62,8 +81,7 @@ fn assert_same_box(
     expected: &rustycad_tkmath::bnd::BoundingBox3,
     actual: &rustycad_tkmath::bnd::BoundingBox3,
 ) {
-    assert!(!expected.is_out_box(actual));
-    assert!(!actual.is_out_box(expected));
+    assert_eq!(expected.get().unwrap(), actual.get().unwrap());
 }
 
 fn range_snapshot(bean: &BeanFaceIntersector) -> Vec<(i32, f64, f64)> {
