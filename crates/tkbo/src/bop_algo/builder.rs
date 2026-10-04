@@ -1,7 +1,10 @@
 //! Argument and result state inherited by General Fuse and Boolean builders.
 use super::{Glue, Options};
 use rustycad_tkbrep::{topods::Shape, toptools::MapOfShape};
-use rustycad_tkernel::ncollection::List;
+use rustycad_tkernel::ncollection::{DataMap, List};
+
+#[path = "builder/images.rs"]
+mod images;
 
 /// The source-pinned argument and option state of `BOPAlgo_Builder`.
 /// Boolean execution is supplied by `BOPAlgo_PaveFiller` and is not part of this state slice.
@@ -16,6 +19,9 @@ pub struct BOPAlgoBuilder {
     shape: Shape,
     arguments: List<Shape>,
     argument_fence: MapOfShape,
+    images: DataMap<Shape, List<Shape>, rustycad_tkbrep::toptools::ShapeMapHasher>,
+    origins: DataMap<Shape, List<Shape>, rustycad_tkbrep::toptools::ShapeMapHasher>,
+    shapes_sd: DataMap<Shape, Shape, rustycad_tkbrep::toptools::ShapeMapHasher>,
     non_destructive: bool,
     glue: Glue,
     check_inverted: bool,
@@ -36,6 +42,9 @@ impl BOPAlgoBuilder {
             shape: Shape::default(),
             arguments: List::default(),
             argument_fence: MapOfShape::default(),
+            images: DataMap::default(),
+            origins: DataMap::default(),
+            shapes_sd: DataMap::default(),
             non_destructive: false,
             glue: Glue::Off,
             check_inverted: true,
@@ -69,6 +78,9 @@ impl BOPAlgoBuilder {
         self.shape = Shape::default();
         self.arguments.clear();
         self.argument_fence.clear(false);
+        self.images.clear(false);
+        self.origins.clear(false);
+        self.shapes_sd.clear(false);
     }
 
     /// Returns the current result shape, null before an execution algorithm is connected.
