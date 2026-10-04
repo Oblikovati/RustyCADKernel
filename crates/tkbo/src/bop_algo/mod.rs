@@ -11,6 +11,8 @@ pub use progress::{Algo, PISteps};
 mod alerts;
 pub use alerts::*;
 mod builder;
+mod pave_filler;
 mod tools_provider;
 pub use builder::BOPAlgoBuilder;
+pub use pave_filler::BOPAlgoPaveFiller;
 pub use tools_provider::BOPAlgoToolsProvider;
