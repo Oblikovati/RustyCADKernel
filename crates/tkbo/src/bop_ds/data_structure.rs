@@ -126,6 +126,19 @@ impl DataStructure {
         self.interference_table.contains(&Pair::new(first, second))
     }
 
+    /// Detects a vertex interference with any direct subshape of `index`; `ds.has_interference_shape_subshapes(vertex, edge)`.
+    pub fn has_interference_shape_subshapes(
+        &self,
+        shape: i32,
+        parent: i32,
+    ) -> Result<bool, Failure> {
+        let info = self.shape_info(parent)?;
+        Ok(info
+            .sub_shapes()
+            .iter()
+            .any(|subshape| self.has_interference_between(shape, *subshape)))
+    }
+
     /// Borrows the deduplicated pair table in native hash-map traversal order.
     /// `ds.interferences().iter()`.
     pub fn interferences(&self) -> &Map<Pair> {
@@ -229,6 +242,11 @@ impl DataStructure {
     /// Mutably borrows vertex/edge records; `ds.interf_ve().append(InterfVE::default())`.
     pub fn interf_ve(&mut self) -> &mut DynamicArray<InterfVE> {
         &mut self.interf_ve
+    }
+
+    /// Borrows vertex/edge interference records in insertion order; `ds.interf_ve_records().len()`.
+    pub fn interf_ve_records(&self) -> &DynamicArray<InterfVE> {
+        &self.interf_ve
     }
 
     /// Mutably borrows vertex/face records; `ds.interf_vf().append(InterfVF::default())`.
