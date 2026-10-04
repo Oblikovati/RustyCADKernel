@@ -4,5 +4,6 @@
 //! Concrete Boolean builders and the full intersection pipeline remain incomplete.
 pub mod bop_algo;
 pub mod bop_ds;
+pub mod bop_tools;
 pub mod brep_algo_api;
 pub mod int_tools;

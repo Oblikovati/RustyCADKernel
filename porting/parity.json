@@ -225663,6 +225663,96 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode_two_types",
       "status": "partial",
       "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock",
+      "status": "partial",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::Shapes() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::shapes",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::ChangeShapes()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::change_shapes",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::Loops() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::loops",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::ChangeLoops()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::change_loops",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::SetRegular(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::set_regular",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock::IsRegular() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::is_regular",
+      "status": "implemented",
+      "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeConnexityBlocks(const TopoDS_Shape &, const TopAbs_ShapeEnum, const TopAbs_ShapeEnum, NCollection_List<NCollection_List<TopoDS_Shape>> &, NCollection_IndexedDataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_connexity_blocks",
+      "status": "partial",
+      "notes": "Source translated, native output/order/identity/orientation/regularity comparison for box, face wire, empty and disconnected input. Existing outputs and repeated ancestor-map entries are preserved. External prepopulated ancestor maps and broader shape-kind combinations need native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeConnexityBlocks(const TopoDS_Shape &, const TopAbs_ShapeEnum, const TopAbs_ShapeEnum, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_connexity_compounds",
+      "status": "partial",
+      "notes": "Source translated, native output/order/identity/orientation/regularity comparison for box, face wire, empty and disconnected input. Existing outputs and repeated ancestor-map entries are preserved. External prepopulated ancestor maps and broader shape-kind combinations need native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeConnexityBlocks(const NCollection_List<TopoDS_Shape> &, const TopAbs_ShapeEnum, const TopAbs_ShapeEnum, NCollection_List<BOPTools_ConnexityBlock> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_connexity_blocks_from_shapes",
+      "status": "partial",
+      "notes": "Source translated, native output/order/identity/orientation/regularity comparison for box, face wire, empty and disconnected input. Existing outputs and repeated ancestor-map entries are preserved. External prepopulated ancestor maps and broader shape-kind combinations need native evidence. No legacy completion claim."
     }
   ],
   "tests": [

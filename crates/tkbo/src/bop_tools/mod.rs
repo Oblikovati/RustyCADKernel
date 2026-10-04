@@ -1,0 +1,7 @@
+//! Boolean topology utilities from the pinned OCCT BOPTools package.
+mod connexity;
+mod connexity_block;
+pub use connexity::{
+    make_connexity_blocks, make_connexity_blocks_from_shapes, make_connexity_compounds,
+};
+pub use connexity_block::ConnexityBlock;
