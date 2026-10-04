@@ -52,30 +52,35 @@ impl BRepMeshDelaun {
         squared_tolerance: f64,
     ) -> Result<(), Failure> {
         let mut boundary = loop_edges();
-        let Some(triangle) = self.find_insert_triangle(vertex, squared_tolerance)? else {
+        let mut candidates = self.selected_circles(vertex.coord())?;
+        let Some(triangle) =
+            self.find_insert_triangle(vertex, squared_tolerance, &mut candidates)?
+        else {
             return Ok(());
         };
         self.delete_triangle(triangle, &mut boundary)?;
-        self.expand_cavity(vertex.coord(), &mut boundary)?;
+        self.expand_cavity(&mut boundary, &mut candidates)?;
         self.create_triangles(vertex_id, &mut boundary)
+    }
+
+    fn selected_circles(&mut self, point: &Xy) -> Result<Vec<i32>, Failure> {
+        Ok(self.circles.select(point)?.iter().copied().collect())
     }
 
     fn find_insert_triangle(
         &mut self,
         vertex: &super::BRepMeshVertex,
         squared_tolerance: f64,
+        candidates: &mut Vec<i32>,
     ) -> Result<Option<i32>, Failure> {
-        let candidates = self
-            .circles
-            .select(vertex.coord())?
-            .iter()
-            .copied()
-            .collect::<Vec<_>>();
-        for triangle in candidates {
+        let mut candidate_index = 0;
+        while candidate_index < candidates.len() {
+            let triangle = candidates[candidate_index];
             if self.is_insert_candidate(triangle, vertex, squared_tolerance)? {
-                self.remove_circle_candidate(vertex.coord(), triangle)?;
+                candidates.remove(candidate_index);
                 return Ok(Some(triangle));
             }
+            candidate_index += 1;
         }
         Ok(None)
     }
@@ -99,47 +104,30 @@ impl BRepMeshDelaun {
         Ok(true)
     }
 
-    fn expand_cavity(&mut self, point: &Xy, boundary: &mut LoopEdges) -> Result<(), Failure> {
-        loop {
-            let candidates = self
-                .circles
-                .select(point)?
-                .iter()
-                .copied()
-                .collect::<Vec<_>>();
-            let Some(victim) = self.find_adjacent_circle(&candidates, boundary)? else {
-                return Ok(());
-            };
-            self.remove_circle_candidate(point, victim)?;
+    fn expand_cavity(
+        &mut self,
+        boundary: &mut LoopEdges,
+        candidates: &mut Vec<i32>,
+    ) -> Result<(), Failure> {
+        while let Some((index, victim)) = self.find_adjacent_circle(candidates, boundary)? {
             self.delete_triangle(victim, boundary)?;
+            candidates.remove(index);
         }
+        Ok(())
     }
 
     fn find_adjacent_circle(
         &self,
         candidates: &[i32],
         boundary: &LoopEdges,
-    ) -> Result<Option<i32>, Failure> {
-        for triangle_id in candidates {
-            let triangle = self.get_triangle(*triangle_id)?;
+    ) -> Result<Option<(usize, i32)>, Failure> {
+        for (index, triangle_id) in candidates.iter().copied().enumerate() {
+            let triangle = self.get_triangle(triangle_id)?;
             if triangle.edges.iter().any(|edge| boundary.is_bound(edge)) {
-                return Ok(Some(*triangle_id));
+                return Ok(Some((index, triangle_id)));
             }
         }
         Ok(None)
-    }
-
-    fn remove_circle_candidate(&mut self, point: &Xy, triangle: i32) -> Result<(), Failure> {
-        let selected = self.circles.select(point)?;
-        let mut cursor = selected.cursor();
-        while cursor.more() {
-            if cursor.value(selected) == Some(&triangle) {
-                selected.remove(&mut cursor)?;
-                return Ok(());
-            }
-            cursor.next(selected);
-        }
-        Ok(())
     }
 
     fn insertion_bounds(&self, indices: &[i32]) -> Result<[f64; 4], Failure> {
