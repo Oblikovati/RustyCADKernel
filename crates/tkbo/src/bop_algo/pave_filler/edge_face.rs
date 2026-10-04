@@ -41,6 +41,7 @@ struct PendingEFVertex {
     candidate: EdgeFaceCandidate,
     common: CommonPrt,
     vertex: Vertex,
+    tolerance: f64,
 }
 
 #[derive(Default)]
@@ -215,14 +216,14 @@ impl BOPAlgoPaveFiller {
         common: &CommonPrt,
         results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
-        let parameter = common.vertex_parameter1();
-        let Some(vertex) = self.make_edge_face_vertex(candidate, parameter)? else {
+        let Some((vertex, tolerance)) = self.make_edge_face_vertex(candidate, common)? else {
             return Ok(());
         };
         results.vertices.push(PendingEFVertex {
             candidate: candidate.clone(),
             common: common.clone(),
             vertex,
+            tolerance,
         });
         results.faces.add(candidate.face_index);
         Ok(())
@@ -243,14 +244,22 @@ impl BOPAlgoPaveFiller {
     fn make_edge_face_vertex(
         &mut self,
         candidate: &EdgeFaceCandidate,
-        parameter: f64,
-    ) -> Result<Option<Vertex>, Failure> {
+        common: &CommonPrt,
+    ) -> Result<Option<(Vertex, f64)>, Failure> {
         let mut vertex = Vertex::default();
-        make_new_vertex_edge_face(&candidate.edge, parameter, &candidate.face, &mut vertex)?;
-        if !self.vertex_is_on_face(&vertex, &candidate.face)? {
+        make_new_vertex_edge_face(
+            &candidate.edge,
+            common.vertex_parameter1(),
+            &candidate.face,
+            &mut vertex,
+        )?;
+        vertices::update_vertex_tolerance(candidate, &vertex)?;
+        let context = self.context.get().expect("initialized EF context");
+        let tolerance = vertices::candidate_tolerance(candidate, common, &vertex, context)?;
+        if !self.vertex_is_on_face(&vertex, &candidate.face, tolerance)? {
             return Ok(None);
         }
-        Ok(Some(vertex))
+        Ok(Some((vertex, tolerance)))
     }
 
     fn accept_edge_common(
@@ -309,9 +318,13 @@ impl BOPAlgoPaveFiller {
         ds.add_interference(edge, face);
     }
 
-    fn vertex_is_on_face(&self, vertex: &Vertex, face: &Face) -> Result<bool, Failure> {
+    fn vertex_is_on_face(
+        &self,
+        vertex: &Vertex,
+        face: &Face,
+        tolerance: f64,
+    ) -> Result<bool, Failure> {
         let point = BRepTool::pnt(vertex)?;
-        let tolerance = BRepTool::vertex_tolerance(vertex)?;
         self.context
             .get()
             .expect("initialized EF context")
