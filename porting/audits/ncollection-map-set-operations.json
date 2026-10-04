@@ -1,0 +1,207 @@
+{
+  "known_semantic_details": [
+    "Union, Intersection, Subtraction, Difference take destination/left/right. Native permits destination aliasing an input; Rust borrow rules do not.",
+    "Unite, Intersect, Subtract, Differ are in-place bool operations. Native Intersect and Differ rebuild using a default hasher; Rust does likewise and tests a salted hasher.",
+    "Bool results report extent changes, not equality of complete key sets; symmetric difference can change keys yet return false if extent is unchanged."
+  ],
+  "overload_mapping": [
+    {
+      "cpp": {
+        "id": "124ac734a0e9c3b64f2a80be89dda7bad49b8e94bdfa764787c4993617956ff5",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Union",
+        "signature": "void (const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Union#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#S0_#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "union",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::union",
+        "semantics": "three-map result; clear and insert left then right, preserving result policy",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Union"
+    },
+    {
+      "cpp": {
+        "id": "6c2144aa1be5dfabfd2d20a04ad764824c8f7dbc7aebaf826ba3a89e0cbe1fc4",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Unite",
+        "signature": "bool (const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Unite#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "unite",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::unite",
+        "semantics": "in-place; add right-side keys; true iff extent grows",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Unite"
+    },
+    {
+      "cpp": {
+        "id": "d33ffaff1514afdc9beadcbc64f7343309651c66ab03a1b599e205eca17078b5",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Intersection",
+        "signature": "void (const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Intersection#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#S0_#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "intersection",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::intersection",
+        "semantics": "three-map result; common keys, smaller operand traversal order (right on ties)",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Intersection"
+    },
+    {
+      "cpp": {
+        "id": "9c827888c093742572fb967e53b830d2b65556df41959b849f04eef626f98549",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Intersect",
+        "signature": "bool (const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Intersect#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "intersect",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::intersect",
+        "semantics": "in-place; rebuild through fresh default-hasher map; true iff extent changes",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Intersect"
+    },
+    {
+      "cpp": {
+        "id": "1d67cb5026c9597f3f03d8fe2b7328e7617a02c9003f8604fef3d3952fb1ea4d",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Subtraction",
+        "signature": "void (const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Subtraction#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#S0_#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "subtraction",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::subtraction",
+        "semantics": "three-map result; copy left then remove right-side keys",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Subtraction"
+    },
+    {
+      "cpp": {
+        "id": "277d50bb51d25597d277e919cfd7778e219bf4c1d40cbe24a9283588d86e942d",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Subtract",
+        "signature": "bool (const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Subtract#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "subtract",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::subtract",
+        "semantics": "in-place; remove keys present in other; true iff extent shrinks",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Subtract"
+    },
+    {
+      "cpp": {
+        "id": "742b32713e407cd79d0981a83ecb75802875d232729d014c7e211c4cc87c57f8",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Difference",
+        "signature": "void (const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Difference#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#S0_#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "difference",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::difference",
+        "semantics": "three-map result; symmetric difference, left-only then right-only traversal",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Difference"
+    },
+    {
+      "cpp": {
+        "id": "0585454e9ef17a06ef34479110a96a0b4900a903f5719a923a3c521b48cea8bf",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_Map::Differ",
+        "signature": "bool (const NCollection_Map<TheKeyType, Hasher> &)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "usr": "c:@ST>2#T#T@NCollection_Map@F@Differ#&1>@ST>2#T#T@NCollection_Map2t0.0t0.1#"
+      },
+      "mapping_note": "Existing public free function; no method wrapper proposed.",
+      "rust_behavioral_analog": {
+        "function": "differ",
+        "public_path": "rustycad_tkernel::ncollection::map_algo::differ",
+        "semantics": "in-place symmetric difference through fresh default-hasher map; bool compares extents",
+        "source": "crates/tkernel/src/ncollection/map_algo.rs"
+      },
+      "selector": "NCollection_Map::Differ"
+    }
+  ],
+  "provenance": {
+    "cpp_headers": [
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+        "sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
+      },
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_MapAlgo.hxx",
+        "sha256": "049fdc1847ba35fba6f40be474ed14a8ec4d7404ba3c0b5b46ee35a341c64291"
+      }
+    ],
+    "inventory_snapshot": "porting/api-inventory/api-crosswalk.json.gz",
+    "rust_sources": [
+      {
+        "path": "crates/tkernel/src/ncollection/map_algo.rs",
+        "sha256": "21197aa6ac23aeb47fb7ba6aead90d24f97f59d3b130b4121ae630042c63a186"
+      },
+      {
+        "path": "crates/tkernel/src/ncollection/mod.rs",
+        "sha256": "05e5b78578d5c653df3d665901109c17d4123c214f75b6f464b42f0133c46dce"
+      }
+    ],
+    "tests": [
+      {
+        "declaration_id": "1983b5d7346c30c03bdaa720228e1ae20398077bcfeb8b78ff2aa5ddf667644e",
+        "legacy_mapping_status": "mapped",
+        "native_coverage": "Result union/intersection/subtraction/symmetric-difference membership and extent; directly tests NCollection_MapAlgo.",
+        "path": "src/FoundationClasses/TKernel/GTests/NCollection_Map_Test.cxx",
+        "sha256": "573ecff35f5058fc5b3f2218e552d3e25ee80d6a6c77095cdfa2ab636ee638e2",
+        "test": "NCollection_MapTest.OCC24271_BooleanOperations"
+      },
+      {
+        "legacy_mapping_status": "translated",
+        "path": "crates/tkernel/tests/ncollection_map.rs",
+        "sha256": "d9bfb4c7cbdd805ba63b17d30dea58dc47fc2d45048c1cb85b572959b325ae9e",
+        "test": "NCollection_MapTest__OCC24271_BooleanOperations"
+      },
+      {
+        "native_coverage": "In-place Unite/Intersect/Subtract/Differ result and bool semantics.",
+        "path": "crates/tkernel/tests/ncollection_hash_maps_api_behavior.rs",
+        "sha256": "e8a7bcd818a8838246e986e58e9ab710b7db09cb180d5882aac0c88b88b434af",
+        "test": "map_algo_in_place_forms_match_native_results"
+      }
+    ]
+  },
+  "schema_version": 1,
+  "scope_note": "OCCT members are deprecated forwarding methods into NCollection_MapAlgo. Rust provides their behavior through public free functions. This is a behavioral inventory proposal, not C++ method-syntax or ABI compatibility.",
+  "status": "proposed_behavioral_crosswalk",
+  "topic": "NCollection_Map deprecated Boolean set-operation member overloads",
+  "unverified_scope": [
+    "OCC24271 directly exercises NCollection_MapAlgo; the eight member wrappers are source-verified forwarding calls, not separately tested via wrapper syntax.",
+    "The Rust analog preserves observable set-operation behavior while intentionally exposing free functions.",
+    "In-place Intersect/Differ require a default-constructible Rust HashPolicy, matching native fresh MapType construction."
+  ]
+}
