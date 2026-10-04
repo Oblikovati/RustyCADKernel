@@ -1,4 +1,6 @@
 //! Native `BOPAlgo_PaveFiller::Init` state and broad-phase preparation.
+#[path = "pave_filler/edge_edge.rs"]
+mod edge_edge;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
 #[path = "pave_filler/split_blocks.rs"]
