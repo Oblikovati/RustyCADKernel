@@ -16,11 +16,11 @@ def constructor_candidates(
     candidates: list[dict[str, JSONValue]],
     by_name: dict[str, list[dict[str, JSONValue]]],
 ) -> list[dict[str, JSONValue]]:
-    if exact_candidates(name, "CXXRecord", candidates):
-        return constructors_for_record(name, candidates, by_name)
     templates = exact_candidates(name, "ClassTemplate", candidates)
     if templates:
         return constructors_for_template(templates, by_name)
+    if exact_candidates(name, "CXXRecord", candidates):
+        return constructors_for_record(name, candidates, by_name)
     owner = name.rsplit("::", 1)[0] if "::" in name else name
     if leaf_name(name) != leaf_name(owner):
         return candidates
