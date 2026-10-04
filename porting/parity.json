@@ -228903,6 +228903,15 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::vertex",
       "status": "implemented",
       "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ff",
+      "status": "partial",
+      "notes": "Bounded stage prepares FaceInfo, schedules ordinary face/face tasks, honors section settings and Glue, and stores InterfFF geometry. Native plane/cylinder isolated-stage replay checks indices, face info, curve range, tolerance and box; tools/oracle/tkbo_perform_ff.md. Native full pipeline preceding VF/EF creates additional state and is not claimed equivalent by the isolated replay. EE seam shifts and EF seed inputs currently return NotImplemented; progress/cancellation, parallel task dispatch and downstream MakeBlocks remain unported. Supplemental probe maps no original legacy declaration."
     }
   ],
   "tests": [
