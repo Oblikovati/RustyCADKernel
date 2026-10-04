@@ -5,6 +5,10 @@ use super::stream_fill::fill_from;
 use std::io::Read;
 mod scan;
 
+#[cfg(test)]
+#[path = "read_line_buffer/stream_hook_tests.rs"]
+mod stream_hook_tests;
+
 /// Where the line a call returns lives.
 #[derive(Clone, Copy)]
 enum LineSpan {
@@ -81,6 +85,23 @@ impl ReadLineBuffer {
         })
     }
 
+    /// Reads at most `len` bytes into the internal buffer like the protected native stream hook;
+    /// `buffer.read_stream(&mut stream, 4, &mut count)`. `len` must not exceed the allocated buffer.
+    pub fn read_stream(
+        &mut self,
+        stream: &mut impl Read,
+        len: usize,
+        read_len: &mut usize,
+    ) -> bool {
+        if len > self.read_buffer.len() {
+            *read_len = 0;
+            return false;
+        }
+        let filled = fill_from(stream, &mut self.read_buffer[..len]);
+        *read_len = filled.count;
+        !filled.failed
+    }
+
     /// True when backslash continuation is enabled (false by default); `buffer.is_multiline_mode()`.
     pub fn is_multiline_mode(&self) -> bool {
         self.multiline
@@ -101,10 +122,11 @@ impl ReadLineBuffer {
         let mut continued = false;
         loop {
             if self.position == 0 || self.position >= self.last_read {
-                let filled = fill_from(stream, &mut self.read_buffer);
                 // The native code stores gcount() before it checks bad().
-                self.last_read = filled.count;
-                if filled.failed {
+                let mut block_count = 0;
+                let succeeded = self.read_stream(stream, self.read_buffer.len(), &mut block_count);
+                self.last_read = block_count;
+                if !succeeded {
                     return None;
                 }
                 *read_data = self.last_read as i64;
