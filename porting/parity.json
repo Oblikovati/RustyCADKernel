@@ -94072,7 +94072,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -94104,7 +94104,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -119835,8 +119835,8 @@
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
       "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2fnc_",
-      "status": "implemented",
-      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+      "status": "partial",
+      "notes": "Existing numerical path passes the native corpus. Mutable callback reuse in mma1fdi_ is now ported and probed, but complete pointer write-back through the outer routine and surface mma2ds2_ path remains unproven. Caller-visible scalar/bound arrays must retain native mutation and lifetime semantics before promoting this row. See porting/audits/advapp2var-evaluator-mutable-callback.json."
     },
     {
       "upstream_id": "AdvApp2Var_ApproxF2var::mma2roo_(int*,int*,double*,double*)",
@@ -119875,8 +119875,8 @@
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
       "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ds1_",
-      "status": "implemented",
-      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+      "status": "partial",
+      "notes": "Existing numerical path passes the native corpus. Mutable callback reuse in mma1fdi_ is now ported and probed, but complete pointer write-back through the outer routine and surface mma2ds2_ path remains unproven. Caller-visible scalar/bound arrays must retain native mutation and lifetime semantics before promoting this row. See porting/audits/advapp2var-evaluator-mutable-callback.json."
     },
     {
       "upstream_id": "AdvApp2Var_ApproxF2var::mma2ce1_(int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,double*,double*,double*,double*,double*,double*,double*,double*,int*,int*,int*,int*)",
@@ -120178,17 +120178,17 @@
       "upstream_id": "AdvApp2Var_EvaluatorFunc2Var::Evaluate(int*,double*,double*,int*,double*,int*,double*,int*,int*,double*,int*) const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
-      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate_native",
       "status": "implemented",
-      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+      "notes": "The mutable callback view exposes all native pointer arguments and caller-owned result/error storage, with a default adapter for read-only evaluators. mma1fdi_ reuse is differentially verified; full pointer copy-back through mma2ds2_ and higher-level callers is tracked separately as partial. See porting/audits/advapp2var-evaluator-mutable-callback.json."
     },
     {
       "upstream_id": "AdvApp2Var_EvaluatorFunc2Var::operator()(int*,double*,double*,int*,double*,int*,double*,int*,int*,double*,int*) const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
-      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate_native",
       "status": "implemented",
-      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+      "notes": "The mutable callback view exposes all native pointer arguments and caller-owned result/error storage, with a default adapter for read-only evaluators. mma1fdi_ reuse is differentially verified; full pointer copy-back through mma2ds2_ and higher-level callers is tracked separately as partial. See porting/audits/advapp2var-evaluator-mutable-callback.json."
     },
     {
       "upstream_id": "AdvApp2Var_Framework()",
@@ -216841,7 +216841,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
