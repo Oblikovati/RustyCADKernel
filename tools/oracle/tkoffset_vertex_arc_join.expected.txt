@@ -1,0 +1,9 @@
+OCCT source: 3d097a0328e71b826377d4814ab05ec3c3d23871
+Probe: tools/oracle/tkoffset_vertex_arc_join.cxx
+Native output columns: surface status edges vertices radius face-orientation origin direction x-direction valid area
+offset=2: Geom_SphericalSurface 0 3 6 2 0 0 0 0 -0.707107 0 0.707107 -0.57735 -0.57735 -0.57735 0 0
+offset=-2: Geom_SphericalSurface 0 3 6 2 1 0 0 0 -0.707107 0 0.707107 -0.57735 -0.57735 -0.57735 0 0
+
+Built against the pinned `target/occt-modeling-full` libraries with C++17. The output
+preserves `BRepOffset_Offset`'s deliberately incomplete standalone face: its projected
+wire is not a valid closed spherical patch, so OCCT reports zero surface mass here.
