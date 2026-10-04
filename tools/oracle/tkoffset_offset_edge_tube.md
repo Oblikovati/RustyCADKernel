@@ -18,4 +18,8 @@ g++ -std=c++17 -I"$OCCT_INSTALL/include/opencascade" \
 
 P-curve-only and nonidentity-located source edges remain unported. OCCT exposes
 this as an `Init` overload after default construction, not a two-argument C++
-constructor.
+constructor. A separate manual probe found that calling native `Generated` on
+the default object segfaults while evaluating its null initial shape; the Rust
+facade returns null for that uninitialized call rather than reproducing a process
+crash. The supported tube path requires the first wire to have the four edge
+occurrences that native `Generated` selects.

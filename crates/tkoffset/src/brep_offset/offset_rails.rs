@@ -2,24 +2,24 @@
 use super::offset_rails_geometry::{
     assemble_pipe_face, construction_error, install_rail_pcurves, make_connectors, unsupported_edge,
 };
+use super::offset_tube::{generated_tube_edge, initialize_edge_tube};
 use super::sphere_join::build_vertex_arc_join;
 use super::{BRepOffsetOffsetFace, BRepOffsetStatus};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     brep_tools::update_face,
-    topexp::{Explorer, vertices},
-    topods::{Edge, Face, Shape, Vertex, Wire},
+    topexp::vertices,
+    topods::{Edge, Face, Shape, Vertex},
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::{
     adaptor3d::Adaptor3dCurve,
     geom::{GeomCurve, GeomSurface},
     geom_adaptor::GeomAdaptorCurve,
-    top_abs::{Orientation, ShapeEnum},
+    top_abs::Orientation,
 };
 use rustycad_tkgeomalgo::geom_fill::GeomFillPipe;
 use rustycad_tkmath::geom_abs::Shape as Continuity;
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace;
 
 /// The edge-rail branch of `BRepOffset_Offset`, retaining the source path edge.
 /// This port currently accepts identity-located edges with 3D curves.
@@ -112,19 +112,14 @@ impl BRepOffsetOffset {
         })
     }
 
-    /// Builds the free-boundary tube around one identity-located 3D edge.
+    /// Builds a free-boundary tube when its first wire has the four native history slots.
     /// `let mut offset = BRepOffsetOffset::new(); offset.init_edge_tube(&edge, 1.0)?`.
     pub fn init_edge_tube(&mut self, edge: &Edge, offset: f64) -> Result<(), Failure> {
         self.initial = edge.clone().into_shape();
         self.face_image = None;
         self.vertex_mode = false;
-        if !edge.location().is_identity() {
-            return Err(unsupported_edge("Edge"));
-        }
-        let curve = trimmed_curve(edge)?;
-        let surface = edge_tube_surface(&curve, offset.abs())?;
-        let face = edge_tube_face(&surface, offset)?;
-        self.face = face;
+        self.tube_mode = false;
+        self.face = initialize_edge_tube(edge, offset)?;
         self.connectors.clear();
         self.wire_reversed = false;
         self.tube_mode = true;
@@ -176,8 +171,9 @@ impl BRepOffsetOffset {
         self.status
     }
 
-    /// Returns a generated connector edge for a path endpoint, or a null shape.
-    /// `offset.generated(&vertex.clone().into_shape())`.
+    /// Returns the mapped source image, or null when this mode has no image.
+    /// Native `Generated` crashes on a default null object; Rust returns null there.
+    /// `let image = offset.generated(&vertex.clone().into_shape())`.
     pub fn generated(&self, source: &Shape) -> Shape {
         if self.vertex_mode {
             return Shape::default();
@@ -359,7 +355,7 @@ fn perform_rail_pipe(
     Ok(pipe)
 }
 
-fn trimmed_curve(edge: &Edge) -> Result<Handle<dyn GeomCurve>, Failure> {
+pub(super) fn trimmed_curve(edge: &Edge) -> Result<Handle<dyn GeomCurve>, Failure> {
     let (curve, first, last) = BRepTool::curve(edge)?;
     let trimmed = rustycad_tkg3d::geom::GeomTrimmedCurve::new(&curve, first, last, true, true)?;
     Ok(Handle::new(trimmed).cast())
@@ -367,81 +363,4 @@ fn trimmed_curve(edge: &Edge) -> Result<Handle<dyn GeomCurve>, Failure> {
 
 fn adaptor(curve: &Handle<dyn GeomCurve>) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
     Ok(Handle::new(GeomAdaptorCurve::with_curve(curve)?).cast())
-}
-
-fn generated_tube_edge(face: &Face, initial: &Shape, source: &Shape) -> Shape {
-    let (_, last) = vertices(&Edge::unchecked(initial.clone()), false);
-    let index = if last.is_same(source) { 2 } else { 3 };
-    let Ok(wires) = Explorer::new(
-        &face.clone().into_shape(),
-        ShapeEnum::Wire,
-        ShapeEnum::Shape,
-    ) else {
-        return Shape::default();
-    };
-    if !wires.more() {
-        return Shape::default();
-    }
-    let wire_shape = wires.current().clone();
-    tube_edge_at(&Wire::unchecked(wire_shape), face, index)
-}
-
-fn tube_edge_at(wire: &Wire, face: &Face, index: usize) -> Shape {
-    let Ok(mut edges) = Explorer::new(
-        &wire.oriented(Orientation::Forward),
-        ShapeEnum::Edge,
-        ShapeEnum::Shape,
-    ) else {
-        return Shape::default();
-    };
-    let Some(edge) = explorer_edge(&mut edges, index) else {
-        return Shape::default();
-    };
-    orient_generated_tube_edge(Edge::unchecked(edge), wire, face).into_shape()
-}
-
-fn explorer_edge(explorer: &mut Explorer, index: usize) -> Option<Shape> {
-    for current in 0..=index {
-        if !explorer.more() {
-            return None;
-        }
-        let edge = explorer.current().clone();
-        if current == index {
-            return Some(edge);
-        }
-        explorer.next().ok()?;
-    }
-    None
-}
-
-fn orient_generated_tube_edge(mut edge: Edge, wire: &Wire, face: &Face) -> Edge {
-    if wire.orientation() == Orientation::Reversed {
-        edge.reverse();
-    }
-    if face.orientation() == Orientation::Reversed {
-        edge.reverse();
-    }
-    edge
-}
-
-fn edge_tube_surface(
-    curve: &Handle<dyn GeomCurve>,
-    radius: f64,
-) -> Result<Handle<dyn GeomSurface>, Failure> {
-    let mut pipe = GeomFillPipe::with_radius(curve, radius)?;
-    pipe.perform(1.0e-4, false, Continuity::C1, 11, 30)?;
-    if !pipe.is_done() {
-        return Err(construction_error("GeomFill_Pipe : Cannot make a surface"));
-    }
-    Ok(pipe.surface())
-}
-
-fn edge_tube_face(surface: &Handle<dyn GeomSurface>, offset: f64) -> Result<Face, Failure> {
-    let maker =
-        BRepBuilderAPIMakeFace::from_surface(surface, rustycad_tkernel::precision::confusion())?;
-    let mut face = maker.face()?;
-    if offset < 0.0 {
-        face.reverse();
-    }
-    Ok(face)
 }
