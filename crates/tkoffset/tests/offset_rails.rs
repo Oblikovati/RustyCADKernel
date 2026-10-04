@@ -1,10 +1,15 @@
 //! Native differential coverage for the 3D-rail `BRepOffset_Offset` constructor.
 use rustycad_tkbrep::{brep::BRepTool, topexp::Explorer, topods};
-use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkernel::standard::Handle;
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg3d::{
+    geom::{GeomPlane, GeomSurface},
+    top_abs::ShapeEnum,
+};
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::{
     geom_abs::Shape as Continuity,
-    gp::{Axis2, Circle3, Point3, Transform3},
+    gp::{Axis2, Axis3, Circle3, Direction2, Direction3, Point2, Point3, Transform3, Vector3},
     toploc::Location,
 };
 use rustycad_tkoffset::brep_offset::{BRepOffsetOffset, BRepOffsetStatus};
@@ -12,6 +17,7 @@ use rustycad_tktopalgo::{
     brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeVertex},
     brep_check::BRepCheckAnalyzer,
     brep_gprop::BRepGProp,
+    brep_lib::BRepLibMakeEdge,
 };
 
 #[test]
@@ -45,6 +51,51 @@ fn straight_path_and_two_3d_rails_build_the_native_face()
     let mut properties = GProps::default();
     BRepGProp::surface_properties(&face.clone().into_shape(), &mut properties, false, false)?;
     assert!((properties.mass() - 7.853_981_633_974_483).abs() < 1.0e-10);
+    Ok(())
+}
+
+#[test]
+fn pcurve_only_rails_follow_the_native_adaptor_branch()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let path = edge((0.0, 0.0, 0.0), (0.0, 0.0, 5.0))?;
+    let rail1 = pcurve_edge(Point3::new(1.0, 0.0, 0.0), Direction3::Y, Direction3::Z)?;
+    let rail2 = pcurve_edge(Point3::new(0.0, 1.0, 0.0), Direction3::X, Direction3::Z)?;
+    assert!(BRepTool::curve_with_location(&rail1)?.curve.is_null());
+    assert!(BRepTool::first_curve_on_surface(&rail1)?.pcurve.is_some());
+    let offset =
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+    let face_shape = offset.face().clone().into_shape();
+    assert_eq!(offset.status(), BRepOffsetStatus::Good);
+    assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
+    assert_eq!(count(&face_shape, ShapeEnum::Vertex), 8);
+    assert_eq!(count_curves(&face_shape)?, 4);
+    assert!(BRepTool::curve_with_location(&rail1)?.curve.is_some());
+    assert!(BRepTool::curve_with_location(&rail2)?.curve.is_some());
+    assert!((BRepTool::edge_tolerance(&rail1)? - 0.525).abs() < 1.0e-12);
+    assert!((BRepTool::edge_tolerance(&rail2)? - 0.525).abs() < 1.0e-12);
+    let mut properties = GProps::default();
+    BRepGProp::surface_properties(&face_shape, &mut properties, false, false)?;
+    assert!((properties.mass() - 3.926_990_816_987_241_4).abs() < 1.0e-9);
+    assert!(BRepCheckAnalyzer::new(&face_shape, true, false, false)?.is_valid()?);
+    Ok(())
+}
+
+#[test]
+fn nonidentity_edge_locations_are_applied_before_pipe_construction()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let location = Location::new(Transform3::translation_vector(Vector3::new(3.0, 4.0, 2.0)));
+    let path = located_edge((0.0, 0.0, 0.0), (0.0, 0.0, 5.0), &location)?;
+    let rail1 = located_edge((1.0, 0.0, 0.0), (1.0, 0.0, 5.0), &location)?;
+    let rail2 = located_edge((0.0, 1.0, 0.0), (0.0, 1.0, 5.0), &location)?;
+    let offset =
+        BRepOffsetOffset::from_edges(&path, &rail1, &rail2, 0.5, false, 1.0e-4, Continuity::C1)?;
+    let face_shape = offset.face().clone().into_shape();
+    assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
+    assert_eq!(count_curves(&face_shape)?, 4);
+    let mut properties = GProps::default();
+    BRepGProp::surface_properties(&face_shape, &mut properties, false, false)?;
+    assert!((properties.mass() - 3.926_990_816_987_241_4).abs() < 1.0e-9);
+    assert!(BRepCheckAnalyzer::new(&face_shape, true, false, false)?.is_valid()?);
     Ok(())
 }
 
@@ -285,6 +336,30 @@ fn edge(
 ) -> Result<topods::Edge, rustycad_tkernel::standard::Failure> {
     let point = |(x, y, z)| Point3::new(x, y, z);
     BRepBuilderAPIMakeEdge::from_points(point(first), point(last))?.edge()
+}
+
+fn located_edge(
+    first: (f64, f64, f64),
+    last: (f64, f64, f64),
+    location: &Location,
+) -> Result<topods::Edge, rustycad_tkernel::standard::Failure> {
+    let mut edge = edge(first, last)?;
+    edge.set_location(location, false)?;
+    Ok(edge)
+}
+
+fn pcurve_edge(
+    origin: Point3,
+    normal: Direction3,
+    x_direction: Direction3,
+) -> Result<topods::Edge, rustycad_tkernel::standard::Failure> {
+    let frame = Axis3::new(origin, normal, x_direction)?;
+    let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(frame)).cast();
+    let pcurve: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dLine::from_point(Point2::new(0.0, 0.0), Direction2::X)).cast();
+    let mut maker = BRepLibMakeEdge::new();
+    maker.init_pcurve_params(&pcurve, &surface, 0.0, 5.0)?;
+    maker.edge()
 }
 
 fn count(shape: &topods::Shape, kind: ShapeEnum) -> usize {

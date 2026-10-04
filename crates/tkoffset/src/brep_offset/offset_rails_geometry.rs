@@ -62,6 +62,12 @@ fn attach_pipe_wire(
 pub(super) type Bounds = (f64, f64, f64, f64);
 pub(super) type RailRanges = ((f64, f64), (f64, f64));
 
+struct RailPcurvePlacement {
+    range: (f64, f64),
+    path_tolerance: f64,
+    rail_index: usize,
+}
+
 struct ConnectorGeometry<'a> {
     curve: &'a Handle<dyn Geom2dCurve>,
     range: (f64, f64),
@@ -115,16 +121,13 @@ fn install_rail_pair(
     options: &PipeFaceOptions<'_>,
     path_tolerance: f64,
 ) -> Result<(), Failure> {
-    for (edge, pcurve) in edges.into_iter().zip(pcurves) {
-        set_rail_pcurve(
-            builder,
-            face,
-            edge,
-            pcurve,
-            ranges.0,
-            options,
+    for (index, (edge, pcurve)) in edges.into_iter().zip(pcurves).enumerate() {
+        let placement = RailPcurvePlacement {
+            range: ranges.0,
             path_tolerance,
-        )?;
+            rail_index: index,
+        };
+        set_rail_pcurve(builder, face, edge, pcurve, options, &placement)?;
     }
     Ok(())
 }
@@ -138,12 +141,14 @@ fn set_rail_pcurve(
     face: &Face,
     edge: &Edge,
     pcurve: &Handle<dyn Geom2dCurve>,
-    range: (f64, f64),
     options: &PipeFaceOptions<'_>,
-    path_tolerance: f64,
+    placement: &RailPcurvePlacement,
 ) -> Result<(), Failure> {
+    install_missing_3d_rail_curve(builder, edge, options, placement.rail_index)?;
     remove_degenerated_circle_curve(builder, edge)?;
-    let tolerance = path_tolerance.max(BRepTool::edge_tolerance(edge)? + options.error);
+    let tolerance = placement
+        .path_tolerance
+        .max(BRepTool::edge_tolerance(edge)? + options.error);
     builder.update_edge_pcurve(
         edge,
         pcurve,
@@ -152,13 +157,34 @@ fn set_rail_pcurve(
         tolerance,
         None,
     )?;
-    builder.range_on_face(edge, face, range.0, range.1)?;
+    builder.range_on_face(edge, face, placement.range.0, placement.range.1)?;
     same_range(edge, tolerance)?;
     if options.error == 0.0 {
         builder.same_parameter(edge, false)?;
         same_parameter_edge(edge, tolerance.max(options.tolerance))?;
     }
     Ok(())
+}
+
+fn install_missing_3d_rail_curve(
+    builder: &BRepBuilder,
+    edge: &Edge,
+    options: &PipeFaceOptions<'_>,
+    rail_index: usize,
+) -> Result<(), Failure> {
+    if BRepTool::curve_with_location(edge)?.curve.is_some() {
+        return Ok(());
+    }
+    let bounds = options.surface.bounds();
+    let parameter = if rail_index == 0 { bounds.0 } else { bounds.1 };
+    let curve = if options.exchange_uv {
+        options
+            .surface
+            .v_iso(if rail_index == 0 { bounds.2 } else { bounds.3 })?
+    } else {
+        options.surface.u_iso(parameter)?
+    };
+    builder.update_edge_curve(edge, &curve, BRepTool::edge_tolerance(edge)?)
 }
 
 fn remove_degenerated_circle_curve(builder: &BRepBuilder, edge: &Edge) -> Result<(), Failure> {

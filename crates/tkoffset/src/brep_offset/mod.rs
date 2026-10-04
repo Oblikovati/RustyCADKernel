@@ -11,6 +11,7 @@ mod make_offset_check;
 mod make_offset_history;
 mod offset_face;
 mod offset_rails;
+mod offset_rails_adaptors;
 mod offset_rails_closed;
 mod offset_rails_geometry;
 mod offset_tube;

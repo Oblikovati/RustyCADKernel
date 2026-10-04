@@ -15,6 +15,7 @@ g++ -std=c++17 -I"$OCCT_INSTALL/include/opencascade" \
 /tmp/tkoffset_offset_rails
 ```
 
-Native output is recorded in `tkoffset_offset_rails.expected`. P-curve-only rails,
-nonidentity locations, degenerated circular rails, closed paths, and supplied
-`FirstEdge`/`LastEdge` remain unported by this Rust slice.
+Native output is recorded in `tkoffset_offset_rails.expected`. P-curve-only rails and nonidentity locations are covered by the companion
+`tkoffset_offset_rails_pcurve_only` and `tkoffset_offset_rails_located` fixtures.
+Degenerated circular rails, closed paths, and supplied `FirstEdge`/`LastEdge` have
+separate companion fixtures.

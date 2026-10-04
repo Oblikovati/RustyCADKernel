@@ -1,6 +1,7 @@
 //! Edge-rail branch of `BRepOffset_Offset::Init`.
+use super::offset_rails_adaptors::build_ready_rail_pipe;
 use super::offset_rails_geometry::{
-    assemble_pipe_face, construction_error, install_rail_pcurves, make_connectors, unsupported_edge,
+    assemble_pipe_face, install_rail_pcurves, make_connectors, unsupported_edge,
 };
 use super::offset_tube::{generated_tube_edge, initialize_edge_tube};
 use super::sphere_join::build_vertex_arc_join;
@@ -12,17 +13,12 @@ use rustycad_tkbrep::{
     topods::{Edge, Face, Shape, Vertex},
 };
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::{
-    adaptor3d::Adaptor3dCurve,
-    geom::{GeomCurve, GeomSurface},
-    geom_adaptor::GeomAdaptorCurve,
-    top_abs::Orientation,
-};
+use rustycad_tkg3d::{geom::GeomSurface, top_abs::Orientation};
 use rustycad_tkgeomalgo::geom_fill::GeomFillPipe;
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 
 /// The edge-rail branch of `BRepOffset_Offset`, retaining the source path edge.
-/// This port currently accepts identity-located edges with 3D curves.
+/// The path needs a 3D curve; rails may use either 3D curves or p-curves.
 pub struct BRepOffsetOffset {
     initial: Shape,
     face: Face,
@@ -371,87 +367,15 @@ fn apply_source_orientation(face: &mut Face, edge1: &Edge) {
 }
 
 fn validate_edges(path: &Edge, edge1: &Edge, edge2: &Edge) -> Result<(), Failure> {
-    for (name, edge) in [("Path", path), ("Edge1", edge1), ("Edge2", edge2)] {
-        if !edge.location().is_identity() || BRepTool::curve_with_location(edge)?.curve.is_null() {
+    if BRepTool::curve_with_location(path)?.curve.is_null() {
+        return Err(unsupported_edge("Path"));
+    }
+    for (name, edge) in [("Edge1", edge1), ("Edge2", edge2)] {
+        if BRepTool::curve_with_location(edge)?.curve.is_null()
+            && BRepTool::first_curve_on_surface(edge)?.pcurve.is_null()
+        {
             return Err(unsupported_edge(name));
         }
     }
     Ok(())
-}
-
-fn build_rail_pipe(
-    path: &Edge,
-    edge1: &Edge,
-    edge2: &Edge,
-    offset: f64,
-    tolerance: f64,
-    polynomial: bool,
-    continuity: Continuity,
-) -> Result<GeomFillPipe, Failure> {
-    let curves = rail_curves(path, edge1, edge2)?;
-    let adaptors = rail_adaptors(&curves)?;
-    perform_rail_pipe(&adaptors, offset.abs(), tolerance, polynomial, continuity)
-}
-
-fn build_ready_rail_pipe(
-    path: &Edge,
-    edge1: &Edge,
-    edge2: &Edge,
-    offset: f64,
-    tolerance: f64,
-    polynomial: bool,
-    continuity: Continuity,
-) -> Result<GeomFillPipe, Failure> {
-    let pipe = build_rail_pipe(
-        path, edge1, edge2, offset, tolerance, polynomial, continuity,
-    )?;
-    if pipe.is_done() {
-        return Ok(pipe);
-    }
-    Err(construction_error("GeomFill_Pipe: Cannot make a surface"))
-}
-
-fn rail_curves(
-    path: &Edge,
-    edge1: &Edge,
-    edge2: &Edge,
-) -> Result<[Handle<dyn GeomCurve>; 3], Failure> {
-    Ok([
-        trimmed_curve(path)?,
-        trimmed_curve(edge1)?,
-        trimmed_curve(edge2)?,
-    ])
-}
-
-fn rail_adaptors(
-    curves: &[Handle<dyn GeomCurve>; 3],
-) -> Result<[Handle<dyn Adaptor3dCurve>; 3], Failure> {
-    Ok([
-        adaptor(&curves[0])?,
-        adaptor(&curves[1])?,
-        adaptor(&curves[2])?,
-    ])
-}
-
-fn perform_rail_pipe(
-    adaptors: &[Handle<dyn Adaptor3dCurve>; 3],
-    radius: f64,
-    tolerance: f64,
-    polynomial: bool,
-    continuity: Continuity,
-) -> Result<GeomFillPipe, Failure> {
-    let mut pipe =
-        GeomFillPipe::with_adaptor_rails(&adaptors[0], &adaptors[1], &adaptors[2], radius);
-    pipe.perform(tolerance, polynomial, continuity, 11, 30)?;
-    Ok(pipe)
-}
-
-pub(super) fn trimmed_curve(edge: &Edge) -> Result<Handle<dyn GeomCurve>, Failure> {
-    let (curve, first, last) = BRepTool::curve(edge)?;
-    let trimmed = rustycad_tkg3d::geom::GeomTrimmedCurve::new(&curve, first, last, true, true)?;
-    Ok(Handle::new(trimmed).cast())
-}
-
-fn adaptor(curve: &Handle<dyn GeomCurve>) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
-    Ok(Handle::new(GeomAdaptorCurve::with_curve(curve)?).cast())
 }
