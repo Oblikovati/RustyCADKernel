@@ -4,11 +4,11 @@ use crate::standard::{Failure, Handle, StandardPersistent, StandardTransient, Tr
 use crate::tcollection::AsciiString;
 use std::{
     fmt,
-    sync::{Arc, PoisonError, RwLock},
+    sync::{PoisonError, RwLock},
 };
 
 /// `Storage_CallBack`: creates, registers, writes and reads the persistent objects of one
-/// type. Native callbacks are shared through handles; Rust shares them as `Arc<dyn CallBack>`.
+/// type. Native and Rust callbacks are shared through owning handles.
 /// Custom callbacks embed `StandardTransient` and register their concrete runtime descriptor
 /// with `impl_transient!`, so a retrieved binding keeps its native type ancestry.
 /// `Send + Sync` permits sharing across Rust threads; custom implementations must keep any
@@ -96,20 +96,18 @@ impl CallBack for DefaultCallBack {
 
 struct TypedFields {
     type_name: AsciiString,
-    callback: Option<Arc<dyn CallBack>>,
+    callback: Handle<dyn CallBack>,
     index: i32,
 }
 
 /// `Storage_TypedCallBack`: a callback bound to a type name and a type index.
 ///
 /// ```
+/// use rustycad_tkernel::standard::Handle;
 /// use rustycad_tkernel::storage::{DefaultCallBack, TypedCallBack};
 /// use rustycad_tkernel::tcollection::AsciiString;
-/// use std::sync::Arc;
-/// let typed = TypedCallBack::new(
-///     &AsciiString::new("PDoc"),
-///     Some(Arc::new(DefaultCallBack::default())),
-/// );
+/// let callback = Handle::new(DefaultCallBack::default()).cast::<dyn CallBack>();
+/// let typed = TypedCallBack::new(&AsciiString::new("PDoc"), &callback);
 /// typed.set_index(3);
 /// assert_eq!(typed.index(), 3);
 /// ```
@@ -120,18 +118,18 @@ pub struct TypedCallBack {
 
 impl Default for TypedCallBack {
     fn default() -> Self {
-        Self::new(&AsciiString::default(), None)
+        Self::new(&AsciiString::default(), &Handle::default())
     }
 }
 
 impl TypedCallBack {
-    /// `Storage_TypedCallBack(aTypeName, aCallBack)` with index 0; `TypedCallBack::new(&name, None)`.
-    pub fn new(type_name: &AsciiString, callback: Option<Arc<dyn CallBack>>) -> Self {
+    /// `Storage_TypedCallBack(aTypeName, aCallBack)` with index 0; `TypedCallBack::new(&name, &callback)`.
+    pub fn new(type_name: &AsciiString, callback: &Handle<dyn CallBack>) -> Self {
         Self {
             parent: StandardTransient::default(),
             fields: RwLock::new(TypedFields {
                 type_name: type_name.clone(),
-                callback,
+                callback: callback.clone(),
                 index: 0,
             }),
         }
@@ -155,13 +153,13 @@ impl TypedCallBack {
         self.view(|fields| fields.type_name.clone())
     }
 
-    /// `SetCallBack`; `typed.set_callback(Some(callback))`.
-    pub fn set_callback(&self, callback: Option<Arc<dyn CallBack>>) {
-        self.edit(|fields| fields.callback = callback);
+    /// `SetCallBack`; `typed.set_callback(&callback)`.
+    pub fn set_callback(&self, callback: &Handle<dyn CallBack>) {
+        self.edit(|fields| fields.callback = callback.clone());
     }
 
-    /// `CallBack`: the bound callback, `None` for a null handle; `typed.callback()`.
-    pub fn callback(&self) -> Option<Arc<dyn CallBack>> {
+    /// `CallBack`: the bound callback, null when unbound; `typed.callback()`.
+    pub fn callback(&self) -> Handle<dyn CallBack> {
         self.view(|fields| fields.callback.clone())
     }
 
@@ -185,7 +183,7 @@ crate::impl_transient!(
 
 /// An `NCollection_HArray1<occ::handle<Storage_CallBack>>(1, len)`: the per-type callback
 /// table `Storage_Schema::Write` and `FSD_BinaryFile::ReadCompleteInfo` index by type number.
-pub(crate) struct CallBackTable(Vec<Option<Arc<dyn CallBack>>>);
+pub(crate) struct CallBackTable(Vec<Handle<dyn CallBack>>);
 
 impl CallBackTable {
     /// `len` null callbacks; a negative length fails like the native allocation.
@@ -197,7 +195,7 @@ impl CallBackTable {
                 "",
             )
         })?;
-        Ok(Self(vec![None; length]))
+        Ok(Self(vec![Handle::default(); length]))
     }
 
     fn slot(&self, member: &str, index: i32) -> Result<usize, Failure> {
@@ -219,18 +217,18 @@ impl CallBackTable {
     pub(crate) fn set_value(
         &mut self,
         index: i32,
-        callback: Option<Arc<dyn CallBack>>,
+        callback: &Handle<dyn CallBack>,
     ) -> Result<(), Failure> {
         let slot = self.slot("SetValue", index)?;
-        self.0[slot] = callback;
+        self.0[slot] = callback.clone();
         Ok(())
     }
 
     /// `Value(index)` dereferenced: out of range is `Standard_OutOfRange`, a null callback
     /// (a native null-pointer call) is `Standard_NullObject`.
-    pub(crate) fn value(&self, index: i32, caller: &str) -> Result<Arc<dyn CallBack>, Failure> {
+    pub(crate) fn value(&self, index: i32, caller: &str) -> Result<&dyn CallBack, Failure> {
         let slot = self.slot("Value", index)?;
-        self.0[slot].clone().ok_or_else(|| {
+        self.0[slot].get().ok_or_else(|| {
             Failure::with_type(
                 "Standard_NullObject",
                 &format!("{caller}: type {index} has a null callback; expected a bound type"),

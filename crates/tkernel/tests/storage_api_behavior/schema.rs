@@ -91,7 +91,9 @@ fn bindings_need_a_write_in_progress() {
         schema.has_type_binding(&"T".into()).unwrap_err(),
         schema.persistent_to_add(&object).unwrap_err(),
         schema.add_persistent(&object, "T").unwrap_err(),
-        schema.bind_type(&"T".into(), None).unwrap_err(),
+        schema
+            .bind_type(&"T".into(), &Handle::default())
+            .unwrap_err(),
     ] {
         assert_eq!(failure.exception_type(), "Standard_NullObject");
     }
@@ -117,13 +119,13 @@ fn bindings_need_a_write_in_progress() {
 #[test]
 fn the_callback_registry_keeps_non_null_callbacks_by_type_name() {
     let mut schema = schema();
-    let callback: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
-    schema.add_read_unknown_type_callback(&"A".into(), Some(callback.clone()));
-    schema.add_read_unknown_type_callback(&"B".into(), None);
+    let callback = Handle::new(DefaultCallBack::default()).cast::<dyn CallBack>();
+    schema.add_read_unknown_type_callback(&"A".into(), &callback);
+    schema.add_read_unknown_type_callback(&"B".into(), &Handle::default());
     let listed = schema.installed_callback_list();
     assert_eq!(listed.get().unwrap().sequence(|items| items.len()), 1);
     schema.remove_read_unknown_type_callback(&"A".into());
-    schema.add_read_unknown_type_callback(&"C".into(), Some(callback));
+    schema.add_read_unknown_type_callback(&"C".into(), &callback);
     schema.clear_callback_list();
     assert_eq!(
         schema
@@ -137,10 +139,10 @@ fn the_callback_registry_keeps_non_null_callbacks_by_type_name() {
     schema.use_default_callback();
     assert!(schema.is_using_default_callback());
     schema.dont_use_default_callback();
-    schema.set_default_callback(None);
-    assert!(schema.default_callback().is_none());
+    schema.set_default_callback(&Handle::default());
+    assert!(schema.default_callback().is_null());
     schema.reset_default_callback();
-    assert!(schema.default_callback().is_some());
+    assert!(!schema.default_callback().is_null());
     assert_eq!(schema.name().as_bytes(), b"Std");
     assert_eq!(schema.version().as_bytes(), b"2");
 }
@@ -158,12 +160,13 @@ fn default_callback_creates_plain_objects_and_skips_their_data() {
     let typed = TypedCallBack::default();
     typed.set_type(&"T".into());
     typed.set_index(4);
-    typed.set_callback(Some(Arc::new(DefaultCallBack::default())));
+    let callback = Handle::new(DefaultCallBack::default()).cast();
+    typed.set_callback(&callback);
     assert_eq!(
         (typed.type_name().as_bytes(), typed.index()),
         (b"T".as_slice(), 4)
     );
-    assert!(typed.callback().is_some());
+    assert!(!typed.callback().is_null());
 }
 
 #[test]

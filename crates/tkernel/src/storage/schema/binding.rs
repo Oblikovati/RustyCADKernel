@@ -4,7 +4,6 @@ use crate::standard::{Failure, Handle, StandardPersistent};
 use crate::storage::PersistentNumbers;
 use crate::storage::{BaseDriver, CallBack, TypedCallBack};
 use crate::tcollection::AsciiString;
-use std::sync::Arc;
 
 impl Schema {
     /// Protected `HasTypeBinding`: whether the current data set bound `type_name`.
@@ -16,11 +15,11 @@ impl Schema {
     }
 
     /// Protected `BindType`: gives an unbound type the next type number, both in the type
-    /// section and in the bindings; `schema.bind_type(&name, Some(callback))?`.
+    /// section and in the bindings; `schema.bind_type(&name, &callback)?`.
     pub fn bind_type(
         &self,
         type_name: &AsciiString,
-        callback: Option<Arc<dyn CallBack>>,
+        callback: &Handle<dyn CallBack>,
     ) -> Result<(), Failure> {
         if self.has_type_binding(type_name)? {
             return Ok(());
@@ -39,16 +38,16 @@ impl Schema {
         })
     }
 
-    /// Protected `TypeBinding`: the callback bound to `type_name`, `None` when unbound.
-    /// Example: `schema.type_binding(&name)?`.
-    pub fn type_binding(
-        &self,
-        type_name: &AsciiString,
-    ) -> Result<Option<Arc<dyn CallBack>>, Failure> {
+    /// Protected `TypeBinding`: returns a null handle when `type_name` is unbound.
+    /// Example: `schema.type_binding(&name)?.is_null()`.
+    pub fn type_binding(&self, type_name: &AsciiString) -> Result<Handle<dyn CallBack>, Failure> {
         self.with_current("TypeBinding", |_, internal| {
             let fields = internal.lock();
-            let typed = fields.type_binding.seek(type_name)?;
-            typed.get().and_then(TypedCallBack::callback)
+            fields
+                .type_binding
+                .seek(type_name)
+                .and_then(|typed| typed.get().map(TypedCallBack::callback))
+                .unwrap_or_default()
         })
     }
 

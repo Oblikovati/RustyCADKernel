@@ -194,7 +194,8 @@ fn write_type_section(
     driver.set_type_section_size(length)?;
     for typed in bound_types(set) {
         if let Some(typed) = typed.get() {
-            functions.set_value(typed.index(), typed.callback())?;
+            let callback = typed.callback();
+            functions.set_value(typed.index(), &callback)?;
         }
     }
     step.0 = "WriteTypeInformations";

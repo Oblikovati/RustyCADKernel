@@ -6,6 +6,7 @@
 #include <Storage_Data.hxx>
 #include <Storage_Schema.hxx>
 #include <Storage_StreamTypeMismatchError.hxx>
+#include <Standard_Transient.hxx>
 #include <iostream>
 
 struct SchemaBindingProbe : Storage_Schema {
@@ -51,15 +52,22 @@ int main(int argc, char** argv) {
   try { schema.Write(driver, current); }
   catch (const Storage_StreamTypeMismatchError&) {}
 
-  occ::handle<Storage_CallBack> original = new TestDispatchCallBack;
+  occ::handle<TestDispatchCallBack> concrete = new TestDispatchCallBack;
+  occ::handle<Storage_CallBack> original = concrete.operator->();
   schema.BindType("dispatch", original);
+  std::cout << original->GetRefCount() << '\n';
   const auto bound = schema.TypeBinding("dispatch");
-  const auto concrete = occ::down_cast<TestDispatchCallBack>(bound);
+  std::cout << bound->GetRefCount() << ' '
+            << (bound->This() == bound.operator->()) << '\n';
+  const auto derived = occ::down_cast<TestDispatchCallBack>(bound);
+  const occ::handle<Standard_Transient> base = bound.operator->();
+  std::cout << bound->GetRefCount() << ' '
+            << (derived == concrete) << ' ' << (base == bound) << '\n';
   const auto persistent = bound->New();
   bound->Add(persistent, {});
   bound->Write(persistent, {}, {});
   bound->Read(persistent, {}, {});
-  std::cout << (bound == original) << ' ' << concrete->Calls() << '\n';
+  std::cout << (bound == original) << ' ' << derived->Calls() << '\n';
   std::cout << bound->DynamicType()->Name() << '\n';
   std::cout << bound->IsKind(STANDARD_TYPE(Storage_CallBack)) << '\n';
   driver->Close();
