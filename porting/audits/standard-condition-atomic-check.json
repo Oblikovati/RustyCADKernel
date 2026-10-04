@@ -1,0 +1,53 @@
+{
+  "scope": "Standard_Condition atomic flag reads and one shared Standard/OSD manual-reset event implementation",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+  "native_source_sha256": "dd762a1e18fc56d7e942b55f04bb96d01a40108feb37ba84308f11f8a1e03de3",
+  "behavior": "Native Check uses seq_cst atomic load without taking the waiter mutex. Set, Reset, and CheckReset keep the native waiter lock; Rust condition predicates read the same atomic flag. OSD threads reuse this implementation.",
+  "supplemental_tests": [
+    "Check completes while the waiter mutex is held; test releases the lock before asserting so a locking regression cannot strand a worker.",
+    "Duration-based OSD timeout adapter preserves manual-reset transitions."
+  ],
+  "native_cases": 9,
+  "native_requests": [
+    "services_condition 0 C X C",
+    "services_condition 1 C X C X",
+    "services_condition 0 S C R C",
+    "services_condition 0 W0 W-5 W10 S W0 W-1 W10",
+    "services_condition 1 W0 X W0",
+    "services_condition 0 D20,5000 C",
+    "services_condition 0 D0,5000 X",
+    "services_condition 0 I20 C R I0 X",
+    "services_condition 1 I50 C"
+  ],
+  "native_output": [
+    "0 0 0",
+    "1 1 0 0",
+    "- 1 - 0",
+    "0 0 0 - 1 1 1",
+    "1 1 0",
+    "1 1",
+    "1 1",
+    "- 1 - - 1",
+    "- 1"
+  ],
+  "input_sha256": "e5f03c1acc53b2ab3c4d8c12550ff70273d27a159bb375a08b4571b25ba94212",
+  "output_sha256": "d6ed25616e59de9c6901e9a6ba910ce217a16cf4bc693093847d820a4578ad7a",
+  "executable_sha256": {
+    "/tmp/condition-native-probe": "15c2931b78d4ef40310167f3d40d49cb5b0f0a3636e1ad12269b8c6b4942afa2",
+    "/tmp/rustycad-condition-target/debug/examples/api_probe": "499f20e5b28011fa9323f868ea6c561ed058da76edb01d096d4755222518be34"
+  },
+  "package_tests": {
+    "passed": 2690,
+    "failed": 0,
+    "ignored": 0
+  },
+  "package_log": {
+    "path": "porting/audits/standard-condition-atomic-package.log.gz",
+    "sha256": "28fcfad79651e25a4118ee9b22e97995701a51a083e02568cd36117f96d8f9bd",
+    "uncompressed_sha256": "a043cf30169c8170c5915da5e964bac7807ccaf02c679b1f863c8a2c454d3029"
+  },
+  "limits": [
+    "No added original legacy declarations; atomic-lock regression is supplemental to the native script comparison."
+  ]
+}
