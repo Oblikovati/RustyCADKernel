@@ -1,7 +1,10 @@
 #include <BRepAlgo_AsDes.hxx>
 #include <BRepAlgo_Image.hxx>
+#include <BRep_Tool.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepOffset_Inter3d.hxx>
+#include <TopoDS.hxx>
+#include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
 #include <gp_Pln.hxx>
 #include <iostream>
@@ -31,6 +34,17 @@ int main()
             << " new_edges=" << intersections.NewEdges().Extent()
             << " descendants=" << asDes->Descendant(f1).Extent() << ','
             << asDes->Descendant(f2).Extent() << '\n';
+  const TopoDS_Edge& section = TopoDS::Edge(intersections.NewEdges().FindKey(1));
+  TopLoc_Location location;
+  double first, last;
+  occ::handle<Geom_Curve> curve = BRep_Tool::Curve(section, location, first, last);
+  gp_Pnt start = curve->Value(first), finish = curve->Value(last);
+  std::cout << "section=" << first << ',' << last << ' '
+            << start.X() << ',' << start.Y() << ',' << start.Z() << ' '
+            << finish.X() << ',' << finish.Y() << ',' << finish.Z() << ' '
+            << static_cast<int>(section.Orientation()) << ','
+            << static_cast<int>(TopoDS::Edge(asDes->Descendant(f2).First()).Orientation())
+            << '\n';
 
   TopoDS_Face f3 = makeFace(gp_Pln(gp_Pnt(0, 0, 4), gp_Dir(0, 0, 1)));
   intersections.SetDone(f1, f3);

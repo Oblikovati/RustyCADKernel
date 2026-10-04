@@ -3,6 +3,7 @@ use rustycad_tkbool::brep_algo::BRepAlgoAsDes;
 use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::State;
+mod face_inter;
 
 /// Stores completed face pairs and their new section edges; `BRepOffsetInter3d::new(...)`.
 pub struct BRepOffsetInter3d {
@@ -58,8 +59,7 @@ impl BRepOffsetInter3d {
     }
 
     /// Records a native Store call and then marks the pair done.
-    // This native-private helper is retained for FaceInter/ConnexInt callers arriving next.
-    #[allow(dead_code)]
+    // Native-private Store centralizes the same edge-list mutation used by FaceInter and ConnexInt.
     pub(crate) fn store(
         &mut self,
         first: &Face,
