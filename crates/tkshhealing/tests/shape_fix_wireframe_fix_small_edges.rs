@@ -7,12 +7,12 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::Point3;
+use rustycad_tkmath::gp::{Plane3, Point3};
 use rustycad_tkshhealing::{
     shape_extend::ShapeExtendStatus,
     shape_fix::{FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists},
 };
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakePolygon;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon};
 
 fn unit_wire() -> Wire {
     BRepBuilderAPIMakePolygon::from_four_points(
@@ -25,6 +25,34 @@ fn unit_wire() -> Wire {
     .unwrap()
     .wire()
     .unwrap()
+}
+
+fn tiny_wire() -> Wire {
+    BRepBuilderAPIMakePolygon::from_four_points(
+        Point3::new(0., 0., 0.),
+        Point3::new(0.01, 0., 0.),
+        Point3::new(1., 0., 0.),
+        Point3::new(1., 1., 0.),
+        true,
+    )
+    .unwrap()
+    .wire()
+    .unwrap()
+}
+
+fn two_tiny_wire() -> Wire {
+    let mut maker = BRepBuilderAPIMakePolygon::new();
+    for point in [
+        Point3::new(0., 0., 0.),
+        Point3::new(0.01, 0., 0.),
+        Point3::new(0.02, 0., 0.),
+        Point3::new(1., 0., 0.),
+        Point3::new(1., 1., 0.),
+    ] {
+        maker.add_point(point).unwrap();
+    }
+    maker.close().unwrap();
+    maker.wire().unwrap()
 }
 
 fn report(name: &str, tool: &ShapeFixWireframe, changed: bool) -> Vec<f64> {
@@ -68,16 +96,7 @@ fn no_small_edges_preserves_shape_and_reports_native_status() {
     report("null", &tool, tool.fix_small_edges().unwrap());
     let wire = unit_wire();
     run_loaded("wire", &wire.clone().into_shape());
-    let tiny = BRepBuilderAPIMakePolygon::from_four_points(
-        Point3::new(0., 0., 0.),
-        Point3::new(0.01, 0., 0.),
-        Point3::new(1., 0., 0.),
-        Point3::new(1., 1., 0.),
-        true,
-    )
-    .unwrap()
-    .wire()
-    .unwrap();
+    let tiny = tiny_wire();
     let result = run_loaded("small_wire", &tiny.into_shape());
     assert_eq!(topology_counts(&result), expected("small_topology"));
     assert_joined_bspline(&result);
@@ -144,4 +163,102 @@ fn empty_merge_map_returns_native_false() {
         )
         .unwrap();
     assert_eq!(vec![f64::from(changed)], expected("merge_empty"));
+}
+
+#[test]
+fn one_face_pcurve_join_matches_native_edge_and_pcurve_counts() {
+    let face = BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &tiny_wire(), true)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape();
+    let fixer = ShapeFixWireframe::from_shape(&face);
+    fixer.set_precision(0.1);
+    let changed = fixer.fix_small_edges().unwrap();
+    let result = fixer.shape();
+    let result_face = topods::face(&result).unwrap();
+    let (edges, curves) = face_edge_curves(&result_face);
+    let pcurves = curves.len();
+    assert_eq!(
+        vec![
+            f64::from(changed),
+            f64::from(fixer.status_small_edges(ShapeExtendStatus::Done)),
+            edges as f64,
+            Explorer::new(&result, ShapeEnum::Vertex, ShapeEnum::Shape)
+                .unwrap()
+                .count() as f64,
+            pcurves as f64,
+        ],
+        expected("face_small")
+    );
+    assert_eq!(curves, expected_rows("face_pcurve"));
+}
+
+#[test]
+fn adjacent_small_edges_join_into_one_native_face_curve() {
+    let face = BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &two_tiny_wire(), true)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape();
+    let fixer = ShapeFixWireframe::from_shape(&face);
+    fixer.set_precision(0.1);
+    let changed = fixer.fix_small_edges().unwrap();
+    let result = fixer.shape();
+    let result_face = topods::face(&result).unwrap();
+    let (edges, curves) = face_edge_curves(&result_face);
+    assert_eq!(
+        vec![
+            f64::from(changed),
+            f64::from(fixer.status_small_edges(ShapeExtendStatus::Done)),
+            edges as f64,
+            Explorer::new(&result, ShapeEnum::Vertex, ShapeEnum::Shape)
+                .unwrap()
+                .count() as f64,
+            curves.len() as f64,
+        ],
+        expected("face_pair")
+    );
+    assert_eq!(curves, expected_rows("face_pair_pcurve"));
+}
+
+fn face_edge_curves(face: &rustycad_tkbrep::topods::Face) -> (usize, Vec<Vec<f64>>) {
+    let mut edges = 0;
+    let mut pcurves = Vec::new();
+    for edge in Explorer::new(
+        &face.clone().into_shape(),
+        ShapeEnum::Edge,
+        ShapeEnum::Shape,
+    )
+    .unwrap()
+    {
+        edges += 1;
+        let curve = BRepTool::curve_on_face(&topods::edge(&edge).unwrap(), face).unwrap();
+        if !curve.pcurve.is_null() {
+            let start = curve.pcurve.value(curve.first).unwrap();
+            let end = curve.pcurve.value(curve.last).unwrap();
+            pcurves.push(vec![
+                curve.first,
+                curve.last,
+                start.x(),
+                start.y(),
+                end.x(),
+                end.y(),
+            ]);
+        }
+    }
+    (edges, pcurves)
+}
+
+fn expected_rows(name: &str) -> Vec<Vec<f64>> {
+    include_str!("../../../tools/oracle/tkshhealing_wireframe_fix_small_edges.expected")
+        .lines()
+        .filter(|line| line.starts_with(&format!("{name} ")))
+        .map(|line| {
+            line.split_whitespace()
+                .skip(1)
+                .map(|value| value.parse().unwrap())
+                .collect()
+        })
+        .collect()
 }

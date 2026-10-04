@@ -1,4 +1,6 @@
-use super::{FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists, merge_free_wires};
+use super::{
+    FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists, merge_faces, merge_free_wires,
+};
 use crate::{shape_build::ShapeBuildReShape, shape_extend::ShapeExtendStatus};
 use rustycad_tkbrep::{
     brep::BRepBuilder,
@@ -126,10 +128,13 @@ impl ShapeFixWireframe {
         if drop_mode || has_angle_limit {
             return Err(unported_small_edge_merge());
         }
-        if !face_small.is_empty() || !multiple.is_empty() {
+        if !multiple.is_empty() {
             return Err(unported_small_edge_merge());
         }
-        merge_free_wires::merge_small_edges(self, small, edge_faces, face_small, multiple)
+        let face_changed =
+            merge_faces::merge_face_small_edges(self, small, edge_faces, face_small)?;
+        merge_free_wires::merge_small_edges(self, small, multiple)
+            .map(|free_changed| face_changed || free_changed)
     }
 }
 

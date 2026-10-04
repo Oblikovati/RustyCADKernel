@@ -1,15 +1,17 @@
 use crate::{shape_analysis::ShapeAnalysisEdge, shape_construct::ShapeConstructCurve};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
-    topods::{Builder, Edge},
+    topods::{Builder, Edge, Face},
 };
 use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle},
 };
+use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBoundedCurve, Geom2dCurve};
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBoundedCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve;
+use rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve as CompCurve2d;
 use rustycad_tkmath::{convert::ParameterisationType, gp::Point3};
 
 pub(super) struct JoinedEdge3d {
@@ -18,16 +20,149 @@ pub(super) struct JoinedEdge3d {
 }
 
 type JoinedCurve3d = (Handle<GeomBSplineCurve>, (f64, f64), bool);
+type JoinedCurve2d = (Handle<Geom2dBSplineCurve>, (f64, f64));
 
-pub(super) fn join_edges_3d(first: &Edge, second: &Edge) -> Result<Option<JoinedEdge3d>, Failure> {
+pub(super) fn join_edges_3d(
+    first: &Edge,
+    second: &Edge,
+    faces: &[Face],
+) -> Result<Option<JoinedEdge3d>, Failure> {
+    if has_seam(first, second, faces)? {
+        return Ok(None);
+    }
     let Some((curve, range, replace_first)) = joined_curve(first, second)? else {
         return Ok(None);
     };
-    let edge = make_joined_edge(first, second, &curve, range)?;
+    let mut edge = make_joined_edge(first, second, &curve, range)?;
+    if !append_face_pcurves(&mut edge, first, second, faces)? {
+        return Ok(None);
+    }
     Ok(Some(JoinedEdge3d {
         edge,
         replace_first,
     }))
+}
+
+fn has_seam(first: &Edge, second: &Edge, faces: &[Face]) -> Result<bool, Failure> {
+    let analysis = ShapeAnalysisEdge::new();
+    for face in faces {
+        if analysis.is_seam_on_face(first, face)? || analysis.is_seam_on_face(second, face)? {
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
+fn append_face_pcurves(
+    joined: &mut Edge,
+    first: &Edge,
+    second: &Edge,
+    faces: &[Face],
+) -> Result<bool, Failure> {
+    for face in faces {
+        if !append_face_pcurve(joined, first, second, face)? {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+fn append_face_pcurve(
+    joined: &Edge,
+    first: &Edge,
+    second: &Edge,
+    face: &Face,
+) -> Result<bool, Failure> {
+    let Some((curve, range)) = joined_pcurve(first, second, face)? else {
+        return Ok(false);
+    };
+    install_face_pcurve(joined, face, &curve, range)?;
+    Ok(true)
+}
+
+fn joined_pcurve(
+    first: &Edge,
+    second: &Edge,
+    face: &Face,
+) -> Result<Option<JoinedCurve2d>, Failure> {
+    let analysis = ShapeAnalysisEdge::new();
+    let first_curve = analysis.pcurve_on_face(first, face, false)?;
+    let second_curve = analysis.pcurve_on_face(second, face, false)?;
+    if first_curve.0.is_null() || second_curve.0.is_null() {
+        return Ok(None);
+    }
+    let first_curve = oriented_pcurve(first, first_curve)?;
+    let second_curve = oriented_pcurve(second, second_curve)?;
+    compose_pcurves(first_curve, second_curve)
+}
+
+fn oriented_pcurve(
+    edge: &Edge,
+    (curve, mut first, mut last): (Handle<dyn Geom2dCurve>, f64, f64),
+) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
+    let copy: Handle<dyn Geom2dCurve> = curve.copy()?.cast();
+    if edge.orientation() == Orientation::Reversed {
+        (first, last) = reversed_pcurve_range(&curve, first, last)?;
+        copy.reverse()?;
+    }
+    ShapeConstructCurve.convert_to_bspline_2d(&copy, first, last, precision::confusion())
+}
+
+fn reversed_pcurve_range(
+    curve: &Handle<dyn Geom2dCurve>,
+    first: f64,
+    last: f64,
+) -> Result<(f64, f64), Failure> {
+    Ok((
+        curve.reversed_parameter(last)?,
+        curve.reversed_parameter(first)?,
+    ))
+}
+
+fn compose_pcurves(
+    first: Handle<Geom2dBSplineCurve>,
+    second: Handle<Geom2dBSplineCurve>,
+) -> Result<Option<JoinedCurve2d>, Failure> {
+    let ranges = (
+        (first.first_parameter(), first.last_parameter()),
+        (second.first_parameter(), second.last_parameter()),
+    );
+    let curve = append_pcurve_bspline(&first, &second)?;
+    Ok(curve.map(|curve| (curve, composed_pcurve_range(ranges.0, ranges.1))))
+}
+
+fn append_pcurve_bspline(
+    first: &Handle<Geom2dBSplineCurve>,
+    second: &Handle<Geom2dBSplineCurve>,
+) -> Result<Option<Handle<Geom2dBSplineCurve>>, Failure> {
+    let bounded = first.cast::<dyn Geom2dBoundedCurve>();
+    let mut builder = CompCurve2d::with_curve(&bounded, ParameterisationType::TgtThetaOver2)?;
+    let added = builder.add(
+        &second.cast::<dyn Geom2dBoundedCurve>(),
+        precision::confusion(),
+        true,
+    )?;
+    if !added {
+        return Ok(None);
+    }
+    Ok(Some(builder.bspline_curve()))
+}
+
+fn composed_pcurve_range(first: (f64, f64), second: (f64, f64)) -> (f64, f64) {
+    (first.0, first.1 + second.1 - second.0)
+}
+
+fn install_face_pcurve(
+    edge: &Edge,
+    face: &Face,
+    curve: &Handle<Geom2dBSplineCurve>,
+    range: (f64, f64),
+) -> Result<(), Failure> {
+    let curve: Handle<dyn Geom2dCurve> = curve.clone().cast();
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurve_on_face(edge, &curve, face, 0.)?;
+    builder.range_on_face(edge, face, range.0, range.1)?;
+    builder.same_range(edge, false)
 }
 
 fn joined_curve(first: &Edge, second: &Edge) -> Result<Option<JoinedCurve3d>, Failure> {
