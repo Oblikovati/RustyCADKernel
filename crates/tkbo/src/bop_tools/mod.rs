@@ -33,3 +33,9 @@ pub use micro_edge::is_micro_edge;
 
 mod face_relations;
 pub use face_relations::{are_faces_same_domain, get_edge_off, get_edge_on_face};
+
+mod vertex_tools;
+pub use vertex_tools::{
+    compute_vertex_point, compute_vertices, d_tolerance, make_new_vertex_edge_face,
+    make_new_vertex_edges, make_new_vertex_pair, make_new_vertex_point, make_vertex,
+};

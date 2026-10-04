@@ -226635,6 +226635,231 @@
       "rust_item": "rustycad_tkbo::bop_tools::get_edge_off",
       "status": "partial",
       "notes": "150 native face-domain and 160 edge-occurrence lookup cases pass, including two translated supports, tolerance scales and retained outputs. Complex nesting, holes, spline domains, exceptional states and other transforms remain unproven; see tools/oracle/tkbo_face_relations.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeNewVertex(const TopoDS_Vertex &, const TopoDS_Vertex &, TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_new_vertex_pair",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::AddArgument(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::add_argument",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::SetNonDestructive(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::set_non_destructive",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::DTolerance()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::d_tolerance",
+      "status": "implemented",
+      "notes": "Native constant 1e-12; checked in every vertex comparison oracle row."
+    },
+    {
+      "upstream_id": "BOPAlgo_ToolsProvider::Tools()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ToolsProvider.hxx",
+      "source_sha256": "07c276c6e755e45a700e263b57f0a2e8157b9ea240df72ab84c089ba4cb67830",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoToolsProvider::tools",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::NonDestructive()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::non_destructive",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeVV(const TopoDS_Vertex &, const TopoDS_Vertex &, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_vertices",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::Glue()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::glue",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_BuilderShape::Shape()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BuilderShape.hxx",
+      "source_sha256": "5b797b055dba7b0b45d751c3d0b010091793307c083116474f8f98adb6a10cb0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::shape",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_BuilderShape::HasHistory()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BuilderShape.hxx",
+      "source_sha256": "5b797b055dba7b0b45d751c3d0b010091793307c083116474f8f98adb6a10cb0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::has_history",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeVertex(const NCollection_List<TopoDS_Shape> &, TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_vertex",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_ToolsProvider::SetTools(const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ToolsProvider.hxx",
+      "source_sha256": "07c276c6e755e45a700e263b57f0a2e8157b9ea240df72ab84c089ba4cb67830",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoToolsProvider::set_tools",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::SetCheckInverted(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::set_check_inverted",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeNewVertex(const gp_Pnt &, const double, TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_new_vertex_point",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::SetGlue(const BOPAlgo_GlueEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::set_glue",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeNewVertex(const TopoDS_Edge &, const double, const TopoDS_Edge &, const double, TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_new_vertex_edges",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::CheckInverted()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::check_inverted",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_ToolsProvider::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ToolsProvider.hxx",
+      "source_sha256": "07c276c6e755e45a700e263b57f0a2e8157b9ea240df72ab84c089ba4cb67830",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoToolsProvider::clear",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_ToolsProvider::AddTool(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ToolsProvider.hxx",
+      "source_sha256": "07c276c6e755e45a700e263b57f0a2e8157b9ea240df72ab84c089ba4cb67830",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoToolsProvider::add_tool",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::clear",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::ComputeVV(const TopoDS_Vertex &, const gp_Pnt &, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::compute_vertex_point",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::Arguments()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::arguments",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeNewVertex(const TopoDS_Edge &, const double, const TopoDS_Face &, TopoDS_Vertex &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_new_vertex_edge_face",
+      "status": "partial",
+      "notes": "36 native sphere comparison cases, six list cases and 12 new-vertex cases pass. Located/non-finite inputs, broader geometry and exceptional output state remain unproven; see tools/oracle/tkbo_vertex_tools.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_BuilderShape::SetToFillHistory(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BuilderShape.hxx",
+      "source_sha256": "5b797b055dba7b0b45d751c3d0b010091793307c083116474f8f98adb6a10cb0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::set_to_fill_history",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::SetArguments(const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::set_arguments",
+      "status": "partial",
+      "notes": "Native argument/tool/configuration state and Clear fixtures pass, including retained SetArguments/SetTools fences. Broader BuilderShape history, Algo lifecycle and Boolean execution remain unimplemented; see tools/oracle/tkbo_builder_argument_state.md."
     }
   ],
   "tests": [

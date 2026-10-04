@@ -184,3 +184,5 @@ mod correct_range;
 mod micro_edge;
 
 mod face_relations;
+
+mod vertex_tools;
