@@ -23,6 +23,30 @@ fn c_string(bytes: &[u8]) -> &[u8] {
 }
 
 impl<D: TextDialect> TextFile<D> {
+    /// Calls the qualified FSD base body, bypassing the dialect's `ReadLine` hook.
+    /// Example: `file.read_fsd_line_base()`.
+    pub fn read_fsd_line_base(&mut self) -> AsciiString {
+        self.fsd_read_line()
+    }
+
+    /// Calls the qualified FSD base body, bypassing the dialect's `ReadString` hook.
+    /// Example: `file.read_fsd_string_base()`.
+    pub fn read_fsd_string_base(&mut self) -> AsciiString {
+        self.fsd_read_string()
+    }
+
+    /// Calls the qualified FSD base body, bypassing the dialect's `ReadWord` hook.
+    /// Example: `file.read_fsd_word_base()`.
+    pub fn read_fsd_word_base(&mut self) -> AsciiString {
+        self.fsd_read_word()
+    }
+
+    /// Calls the qualified FSD base body, bypassing the dialect's `ReadChar` hook.
+    /// Example: `file.read_fsd_char_base(4)`.
+    pub fn read_fsd_char_base(&mut self, size: usize) -> AsciiString {
+        self.fsd_read_char(size)
+    }
+
     /// `FSD_File::ReadLine`: one `getline` of at most 8191 bytes unless at end of file.
     pub(crate) fn fsd_read_line(&mut self) -> AsciiString {
         let mut buffer = AsciiString::default();
@@ -102,6 +126,21 @@ impl<D: TextDialect> TextFile<D> {
 }
 
 impl<D: TextDialect> TextFile<D> {
+    /// Calls the qualified FSD base writer, bypassing the dialect's extended-line hook.
+    /// Example: `file.write_fsd_extended_line_base(&text)`.
+    pub fn write_fsd_extended_line_base(&mut self, text: &ExtendedString) {
+        self.fsd_write_extended_line(text);
+    }
+
+    /// Calls the qualified FSD base reader, bypassing the dialect's extended-line hook.
+    /// Example: `file.read_fsd_extended_line_base(&mut text)`.
+    pub fn read_fsd_extended_line_base(
+        &mut self,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
+        self.fsd_read_extended_line(text)
+    }
+
     /// `FSD_File::WriteExtendedLine`: each unit as its high and low byte, then NUL and a
     /// newline. A unit 0x000A therefore ends the line early for the reader.
     pub(crate) fn fsd_write_extended_line(&mut self, text: &ExtendedString) {

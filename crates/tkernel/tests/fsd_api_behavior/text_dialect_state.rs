@@ -10,6 +10,8 @@ struct StatefulDialect {
     word: String,
     read_char_calls: usize,
     read_word_calls: usize,
+    read_line_calls: usize,
+    read_string_calls: usize,
     flush_calls: usize,
     find_tag_calls: usize,
 }
@@ -28,16 +30,17 @@ impl TextDialect for StatefulDialect {
 
     fn read_char(file: &mut TextFile<Self>, size: usize) -> AsciiString {
         file.dialect_mut().unwrap().read_char_calls += 1;
-        let mut output = AsciiString::default();
-        let mut byte = 0;
-        for _ in 0..size {
-            if file.stream().eof() {
-                break;
-            }
-            file.stream().get(&mut byte);
-            output.assign_cat(byte);
-        }
-        output
+        file.read_fsd_char_base(size)
+    }
+
+    fn read_line(file: &mut TextFile<Self>) -> AsciiString {
+        file.dialect_mut().unwrap().read_line_calls += 1;
+        file.read_fsd_line_base()
+    }
+
+    fn read_string(file: &mut TextFile<Self>) -> AsciiString {
+        file.dialect_mut().unwrap().read_string_calls += 1;
+        file.read_fsd_string_base()
     }
 
     fn read_word(file: &mut TextFile<Self>) -> AsciiString {
@@ -51,20 +54,12 @@ impl TextDialect for StatefulDialect {
 
     fn flush_end_of_line(file: &mut TextFile<Self>) {
         file.dialect_mut().unwrap().flush_calls += 1;
-        Self::read_line(file);
+        file.flush_fsd_end_of_line_base();
     }
 
     fn find_tag(file: &mut TextFile<Self>, tag: &str) -> StorageError {
         file.dialect_mut().unwrap().find_tag_calls += 1;
-        let mut line = file.read_string();
-        while line.as_bytes() != tag.as_bytes() && !file.stream().eof() {
-            line = file.read_string();
-        }
-        if file.stream().eof() {
-            StorageError::SectionNotFound
-        } else {
-            StorageError::Ok
-        }
+        file.find_fsd_tag_base(tag)
     }
 }
 
@@ -75,6 +70,20 @@ fn opened_dialect(bytes: &[u8], word: &str) -> TextFile<StatefulDialect> {
     file
 }
 
+#[derive(Default)]
+struct BaseWordDialect {
+    read_word_calls: usize,
+}
+
+impl TextDialect for BaseWordDialect {
+    const MAGIC_NUMBER: &'static str = "BASEWORD";
+
+    fn read_word(file: &mut TextFile<Self>) -> AsciiString {
+        file.dialect_mut().unwrap().read_word_calls += 1;
+        file.read_fsd_word_base()
+    }
+}
+
 #[test]
 fn custom_dialect_values_are_owned_per_instance() {
     let mut first = opened_dialect(b"unused", "first");
@@ -83,6 +92,15 @@ fn custom_dialect_values_are_owned_per_instance() {
     assert_eq!(second.read_word().as_bytes(), b"second");
     assert_eq!(first.dialect().unwrap().read_word_calls, 1);
     assert_eq!(second.dialect().unwrap().read_word_calls, 1);
+}
+
+#[test]
+fn custom_word_override_can_call_qualified_fsd_body() {
+    let (_, filesystem) = with_file("base-word", b"native-word remainder\n");
+    let mut file = TextFile::with_dialect(filesystem, BaseWordDialect::default());
+    file.open(&"base-word".into(), OpenMode::Read).unwrap();
+    assert_eq!(file.read_word().as_bytes(), b"native-word");
+    assert_eq!(file.dialect().unwrap().read_word_calls, 1);
 }
 
 #[test]
@@ -108,6 +126,8 @@ fn assert_direct_virtual_calls() {
     let dialect = direct.dialect().unwrap();
     assert_eq!(dialect.flush_calls, 1);
     assert_eq!(dialect.find_tag_calls, 1);
+    assert_eq!(dialect.read_line_calls, 1);
+    assert_eq!(dialect.read_string_calls, 1);
 }
 
 fn assert_internal_virtual_calls() {
@@ -126,4 +146,6 @@ fn assert_internal_virtual_calls() {
     assert_eq!(dialect.find_tag_calls, 1);
     assert_eq!(dialect.flush_calls, 1);
     assert_eq!(dialect.read_word_calls, 2);
+    assert_eq!(dialect.read_string_calls, 2);
+    assert_eq!(dialect.read_line_calls, 1);
 }

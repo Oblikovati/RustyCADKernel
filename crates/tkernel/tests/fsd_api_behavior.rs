@@ -4,6 +4,8 @@
 mod base64;
 #[path = "fsd_api_behavior/binary.rs"]
 mod binary;
+#[path = "fsd_api_behavior/cmp_dialect_inheritance.rs"]
+mod cmp_dialect_inheritance;
 #[path = "fsd_api_behavior/fakes.rs"]
 mod fakes;
 #[path = "fsd_api_behavior/text.rs"]

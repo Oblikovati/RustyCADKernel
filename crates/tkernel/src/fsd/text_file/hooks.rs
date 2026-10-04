@@ -5,6 +5,19 @@ use crate::storage::StorageError;
 use crate::tcollection::{AsciiString, ExtendedString};
 
 impl<D: TextDialect> TextFile<D> {
+    /// Calls qualified FSD `FlushEndOfLine`, retaining virtual `ReadLine` dispatch.
+    /// Example: `file.flush_fsd_end_of_line_base()`.
+    pub fn flush_fsd_end_of_line_base(&mut self) {
+        D::read_line(self);
+    }
+
+    /// Calls qualified FSD `FindTag`, retaining virtual `ReadString` dispatch.
+    /// Example: `file.find_fsd_tag_base("BEGIN_INFO_SECTION")`.
+    pub fn find_fsd_tag_base(&mut self, tag: &str) -> StorageError {
+        let c_tag = tag.split('\0').next().unwrap_or_default();
+        self.find_tag_c_string(c_tag.as_bytes())
+    }
+
     /// Reads through the selected dialect's virtual `ReadLine`; `file.read_line()`.
     pub fn read_line(&mut self) -> AsciiString {
         D::read_line(self)

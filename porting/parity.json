@@ -100865,32 +100865,32 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
       "rust_item": "rustycad_tkernel::fsd::CmpFile::read_line",
-      "status": "partial",
-      "notes": "Built-in CmpDialect read_line behavior is native-matched. Remaining observable gap: a custom TextDialect does not inherit this Cmp-specific read_line override; the TextDialect default uses the FSD implementation unless that custom dialect explicitly supplies read_line. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; existing Cmp behavior corpus evidence is unchanged. Clang candidate f31b861024fed88c35e0f5ae197962de8f6b7c7055c641695cfa7a805b13615f; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
+      "status": "implemented",
+      "notes": "Reusable Cmp text defaults are selected by TextDialect::USE_CMP_TEXT_DEFAULTS; custom overrides can delegate through read_cmp_*_base/write_cmp_*_base. A native derived class counts each hook, calls the qualified FSD_CmpFile body, and confirms nested virtual FlushEndOfLine-to-ReadLine dispatch; stateful Rust dialect tests cover the same paths. Evidence: tools/oracle/tkernel_fsd_cmp_dialect_dispatch.cxx and .expected; crates/tkernel/tests/fsd_api_behavior/cmp_dialect_inheritance.rs. Clang candidate f31b861024fed88c35e0f5ae197962de8f6b7c7055c641695cfa7a805b13615f; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
     },
     {
       "upstream_id": "FSD_CmpFile::ReadString(TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
       "rust_item": "rustycad_tkernel::fsd::CmpFile::read_string",
-      "status": "partial",
-      "notes": "Built-in CmpDialect read_string behavior is native-matched. Remaining observable gap: a custom TextDialect does not inherit this Cmp-specific read_string override; the TextDialect default uses the FSD implementation unless that custom dialect explicitly supplies read_string. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; existing Cmp behavior corpus evidence is unchanged. Clang candidate f730e33564964fc72bd9b0d226b381c7f9b8018cffa0d0de22764a64390e8339; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
+      "status": "implemented",
+      "notes": "Reusable Cmp text defaults are selected by TextDialect::USE_CMP_TEXT_DEFAULTS; custom overrides can delegate through read_cmp_*_base/write_cmp_*_base. A native derived class counts each hook, calls the qualified FSD_CmpFile body, and confirms nested virtual FlushEndOfLine-to-ReadLine dispatch; stateful Rust dialect tests cover the same paths. Evidence: tools/oracle/tkernel_fsd_cmp_dialect_dispatch.cxx and .expected; crates/tkernel/tests/fsd_api_behavior/cmp_dialect_inheritance.rs. Clang candidate f730e33564964fc72bd9b0d226b381c7f9b8018cffa0d0de22764a64390e8339; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
     },
     {
       "upstream_id": "FSD_CmpFile::ReadExtendedLine(TCollection_ExtendedString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
       "rust_item": "rustycad_tkernel::fsd::CmpFile::read_extended_line",
-      "status": "partial",
-      "notes": "Built-in CmpDialect read_extended_line behavior is native-matched. Remaining observable gap: a custom TextDialect does not inherit this Cmp-specific read_extended_line override; the TextDialect default uses the FSD implementation unless that custom dialect explicitly supplies read_extended_line. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; existing Cmp behavior corpus evidence is unchanged. Clang candidate 565c9fa18161f24b4770f5cf416c8929dfdc71e0b8a454ca923e84452fea8b84; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
+      "status": "implemented",
+      "notes": "Reusable Cmp text defaults are selected by TextDialect::USE_CMP_TEXT_DEFAULTS; custom overrides can delegate through read_cmp_*_base/write_cmp_*_base. A native derived class counts each hook, calls the qualified FSD_CmpFile body, and confirms nested virtual FlushEndOfLine-to-ReadLine dispatch; stateful Rust dialect tests cover the same paths. Evidence: tools/oracle/tkernel_fsd_cmp_dialect_dispatch.cxx and .expected; crates/tkernel/tests/fsd_api_behavior/cmp_dialect_inheritance.rs. Clang candidate 565c9fa18161f24b4770f5cf416c8929dfdc71e0b8a454ca923e84452fea8b84; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
     },
     {
       "upstream_id": "FSD_CmpFile::WriteExtendedLine(const TCollection_ExtendedString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
       "rust_item": "rustycad_tkernel::fsd::CmpFile::write_extended_line",
-      "status": "partial",
-      "notes": "Built-in CmpDialect write_extended_line behavior is native-matched. Remaining observable gap: a custom TextDialect does not inherit this Cmp-specific write_extended_line override; the TextDialect default uses the FSD implementation unless that custom dialect explicitly supplies write_extended_line. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; existing Cmp behavior corpus evidence is unchanged. Clang candidate 216acbbc9615d521fcdd44f29ee86149bf25ab1a26663e502095305ef53a1ea0; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
+      "status": "implemented",
+      "notes": "Reusable Cmp text defaults are selected by TextDialect::USE_CMP_TEXT_DEFAULTS; custom overrides can delegate through read_cmp_*_base/write_cmp_*_base. A native derived class counts each hook, calls the qualified FSD_CmpFile body, and confirms nested virtual FlushEndOfLine-to-ReadLine dispatch; stateful Rust dialect tests cover the same paths. Evidence: tools/oracle/tkernel_fsd_cmp_dialect_dispatch.cxx and .expected; crates/tkernel/tests/fsd_api_behavior/cmp_dialect_inheritance.rs. Clang candidate 216acbbc9615d521fcdd44f29ee86149bf25ab1a26663e502095305ef53a1ea0; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
     },
     {
       "upstream_id": "FSD_File::DEFINE_STANDARD_RTTIEXT(FSD_File,Storage_BaseDriver)",
@@ -101506,7 +101506,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::read_char",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 05838c35e3b3f03e78ac811522e90ce74d8b30ff8554f3b028bb9296dd40ef8e; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 05838c35e3b3f03e78ac811522e90ce74d8b30ff8554f3b028bb9296dd40ef8e; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::ReadWord(TCollection_AsciiString&)",
@@ -101514,7 +101514,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::read_word",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate f3a76b8a67b607a8b5abc6acd7af45e36f39ee8e39e4f9f43849d570b8729d0f; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate f3a76b8a67b607a8b5abc6acd7af45e36f39ee8e39e4f9f43849d570b8729d0f; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::ReadLine(TCollection_AsciiString&)",
@@ -101522,7 +101522,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::read_line",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate a6e97a8eaa7a1854e0b38923f6e16b2538a8cfd96d666f3125ea964472d0974b; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate a6e97a8eaa7a1854e0b38923f6e16b2538a8cfd96d666f3125ea964472d0974b; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::ReadString(TCollection_AsciiString&)",
@@ -101530,7 +101530,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::read_string",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 413c065f8d772f2161a266f5f7fe057fee821c34615786c1ed8e8e4d67a3d6c6; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 413c065f8d772f2161a266f5f7fe057fee821c34615786c1ed8e8e4d67a3d6c6; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::ReadExtendedLine(TCollection_ExtendedString&)",
@@ -101538,7 +101538,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::read_extended_line",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 0e02ddd1412c03fbc41f34ed881e0e07be86f39736e3528fc0231143f9d44e9f; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 0e02ddd1412c03fbc41f34ed881e0e07be86f39736e3528fc0231143f9d44e9f; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::WriteExtendedLine(const TCollection_ExtendedString&)",
@@ -101546,7 +101546,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::write_extended_line",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 2d10638d08b9a4fbc0fdd2b1541364e0a31fcbac5f11b8dfdcc9408283201670; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 2d10638d08b9a4fbc0fdd2b1541364e0a31fcbac5f11b8dfdcc9408283201670; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::FlushEndOfLine()",
@@ -101554,7 +101554,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::flush_end_of_line",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 47054961f48a5de8f12f5081860cde4f0f23e7fe3d67cdd9779bf4692a0e0624; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate 47054961f48a5de8f12f5081860cde4f0f23e7fe3d67cdd9779bf4692a0e0624; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "FSD_File::FindTag(const char*)",
@@ -101562,7 +101562,7 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "rust_item": "rustycad_tkernel::fsd::File::find_tag",
       "status": "implemented",
-      "notes": "FSD base behavior is implemented by TextDialect defaults and per-instance TextFile<D> dispatch. The native derived oracle checks direct and internal dispatch, including stateful hooks; native IsGoodFileType static probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom-state test: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate ea973a63c27388d41143e9cd78d4cfae4d5e99f3f071f3c33a6b0760ee114549; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
+      "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate ea973a63c27388d41143e9cd78d4cfae4d5e99f3f071f3c33a6b0760ee114549; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
       "upstream_id": "Quantity_Color::operator const NCollection_Vec3<float>&() const",
