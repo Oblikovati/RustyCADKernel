@@ -228307,6 +228307,96 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::check_planes",
       "status": "partial",
       "notes": "Native lazy FaceInfo initialization, same-face call and eight In/On membership combinations replay exactly; preserves duplicate occurrence counting across the second face sets. tools/oracle/tkbo_pave_filler_check_planes.md. Rust needs mutable receiver because native const method mutates the pointed-to DS. Uninitialized Rust errors are safety evidence, not native parity. Full PerformFF integration and additional legacy coverage remain open."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::BOPAlgo_SectionAttribute()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::new",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::BOPAlgo_SectionAttribute(const bool, const bool, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::with_flags",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::Approximation() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::approximation",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::PCurveOnS1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::pcurve_on_s1",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::PCurveOnS2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::pcurve_on_s2",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::Approximation(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::set_approximation",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::PCurveOnS1(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::set_pcurve_on_s1",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_SectionAttribute::PCurveOnS2(const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_SectionAttribute.hxx",
+      "source_sha256": "86f1963def51e8217a4d3ae9e8d04d619d614cfce427de1e6f6dee7ef6cef172",
+      "rust_item": "rustycad_tkbo::bop_algo::SectionAttribute::set_pcurve_on_s2",
+      "status": "implemented",
+      "notes": "Pinned native truth-table replay covers all eight flag combinations and all 48 single-flag Boolean transitions; tools/oracle/tkbo_section_attribute.md. Supplemental evidence, not additional legacy declarations or full Boolean pipeline parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::SetSectionAttribute(const BOPAlgo_SectionAttribute &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::set_section_attribute",
+      "status": "implemented",
+      "notes": "Native value assignment, default flags and retention after source mutation/Clear replayed in tkbo_section_attribute native fixture. This implements configuration storage; PerformFF consumption remains unported."
     }
   ],
   "tests": [

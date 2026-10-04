@@ -5,6 +5,9 @@ mod edge_edge;
 mod edge_face;
 #[path = "pave_filler/face_face_prepare.rs"]
 mod face_face_prepare;
+#[cfg(test)]
+#[path = "pave_filler/section_attribute_tests.rs"]
+mod section_attribute_tests;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
 #[path = "pave_filler/split_blocks.rs"]
@@ -15,7 +18,7 @@ mod vertex_edge;
 mod vertex_face;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
-use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options};
+use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options, SectionAttribute};
 use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::{message::AlertHandle, ncollection::List, standard::Handle};
@@ -34,6 +37,7 @@ pub struct BOPAlgoPaveFiller {
     avoid_build_pcurve: bool,
     is_primary: bool,
     vertices_to_avoid_extension: Vec<i32>,
+    section_attribute: SectionAttribute,
 }
 
 impl Default for BOPAlgoPaveFiller {
@@ -56,6 +60,7 @@ impl BOPAlgoPaveFiller {
             avoid_build_pcurve: false,
             is_primary: true,
             vertices_to_avoid_extension: Vec::new(),
+            section_attribute: SectionAttribute::new(),
         }
     }
 
@@ -72,6 +77,11 @@ impl BOPAlgoPaveFiller {
     /// Borrows configured arguments; `filler.arguments().len()`.
     pub fn arguments(&self) -> &List<Shape> {
         &self.arguments
+    }
+
+    /// Copies intersection flags, retained by Clear; `filler.set_section_attribute(&flags)`.
+    pub fn set_section_attribute(&mut self, flags: &SectionAttribute) {
+        self.section_attribute = *flags;
     }
 
     /// Prepares the DS, context, broad-phase iterator, and automatic safety mode.

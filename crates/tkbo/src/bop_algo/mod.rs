@@ -4,9 +4,11 @@ mod options;
 pub use enums::{Glue, Operation};
 mod parallel;
 mod progress;
+mod section_attribute;
 pub use options::Options;
 pub use parallel::{ParallelAlgo, ParallelAlgoBase};
 pub use progress::{Algo, PISteps};
+pub use section_attribute::SectionAttribute;
 
 mod alerts;
 pub use alerts::*;
