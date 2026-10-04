@@ -60,3 +60,33 @@ The committed crosswalk used for the 1,777-row count has SHA-256
 counts and generated artifacts have not been edited or relabeled. A fresh
 compiler capture and normalization is required before publishing the reduced
 candidate denominator and its new provenance.
+
+
+## Fresh capture at Rust revision e8f0f360
+
+The rebuilt extractor was run over all 5,905 configured standalone header probes,
+then 266 failed probes were retried in real source contexts. The validated
+transitive-context plan supplied 16 additional successful contexts. The combined
+result retains 5,639 standalone parses, 260 context parses, six parse failures,
+384 included fragments, and 28 missing configurations.
+
+All **271,643 declaration identities** remain in the published compiler evidence.
+An identity-by-identity comparison confirms that the only visibility changes are
+1,502 type parameters, 274 non-type parameters, and one template-template parameter,
+now explicitly classified as `template_parameter_metadata`. No callable, nominal
+class, template wrapper, or alias identity was removed. The observed API denominator
+is **108,357**, down from 110,134 solely through this classification correction.
+This changes inventory accounting, not the number of implemented Rust APIs.
+
+The published `occt-manifest.json` binds the new extractor, source/header manifest,
+compile database, SDK headers, and compressed artifacts by hash. Header gaps and
+5,224 unsupported records remain explicit; all full-coverage proof flags remain false.
+The Rust crosswalk was regenerated from source revision `e8f0f360`, with each of the
+new Storage setters and PLib derivative hooks resolving to a unique native and Rust
+item. Supplemental tests do not increase the 7,400/8,648 legacy declaration mapping count.
+
+Capture intermediates are in `target/api-proof/occt-template-metadata*`.
+`tools/capture_occt_inventory.py`, `tools/retry_occt_header_context.py`, and
+`tools/replay_occt_header_context.py` generated the native evidence;
+`tools/merge_occt_inventory.py` merged it. The combined context manifest retains
+both failed original attempts and successful replay records, with input manifest hashes.
