@@ -34,6 +34,7 @@ pub struct DataStructure {
     interf_ff: DynamicArray<InterfFF>,
     interference_table: Map<Pair>,
     interfered_shapes: Map<i32>,
+    same_domain_vertices: DataMap<i32, i32>,
     source_shape_count: i32,
 }
 
@@ -93,6 +94,21 @@ impl DataStructure {
         self.interfered_shapes.add(first);
         self.interfered_shapes.add(second);
         true
+    }
+
+    /// Binds a source vertex to its same-domain representative; `ds.add_shape_sd(3, 8)`.
+    pub fn add_shape_sd(&mut self, source: i32, representative: i32) {
+        self.same_domain_vertices.bind(source, representative);
+    }
+
+    /// Reads a same-domain representative; `ds.shape_sd(3) == Some(8)`.
+    pub fn shape_sd(&self, source: i32) -> Option<i32> {
+        self.same_domain_vertices.find(&source).ok().copied()
+    }
+
+    /// Traverses same-domain entries in native hash-bucket order; `ds.shape_sd_items().count()`.
+    pub fn shape_sd_items(&self) -> impl Iterator<Item = (&i32, &i32)> {
+        self.same_domain_vertices.items()
     }
 
     /// Reports whether any stored pair contains `index`; `ds.has_interference_for(3)`.
@@ -199,6 +215,11 @@ impl DataStructure {
     /// Mutably borrows vertex/vertex records; `ds.interf_vv().append(InterfVV::default())`.
     pub fn interf_vv(&mut self) -> &mut DynamicArray<InterfVV> {
         &mut self.interf_vv
+    }
+
+    /// Borrows vertex/vertex records in native insertion order; `ds.interf_vv_records().len()`.
+    pub fn interf_vv_records(&self) -> &DynamicArray<InterfVV> {
+        &self.interf_vv
     }
 
     /// Mutably borrows vertex/edge records; `ds.interf_ve().append(InterfVE::default())`.
@@ -342,6 +363,7 @@ impl DataStructure {
         self.interf_ee.clear(false);
         self.interf_ef.clear(false);
         self.interf_ff.clear(false);
+        self.same_domain_vertices.clear(false);
         self.source_shape_count = 0;
         if let Some(indices) = &mut self.shape_indices {
             indices.clear(false);
