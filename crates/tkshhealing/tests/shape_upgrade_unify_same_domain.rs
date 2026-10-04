@@ -10,6 +10,8 @@ mod controls;
 mod global_context;
 #[path = "shape_upgrade_unify_same_domain/nested.rs"]
 mod nested;
+#[path = "shape_upgrade_unify_same_domain/pcurve_concat.rs"]
+mod pcurve_concat;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp::Explorer;
