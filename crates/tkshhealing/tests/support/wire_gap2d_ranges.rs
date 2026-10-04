@@ -4,8 +4,8 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::{ncollection::Array1, standard::Handle};
 use rustycad_tkg2d::geom2d::{
-    Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCurve, Geom2dLine, Geom2dOffsetCurve,
-    Geom2dParabola, Geom2dTrimmedCurve,
+    Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCurve, Geom2dEllipse, Geom2dLine,
+    Geom2dOffsetCurve, Geom2dParabola, Geom2dTrimmedCurve,
 };
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkmath::gp::{
@@ -98,6 +98,38 @@ pub(super) fn set_parabola_line_pcurves(
     set_pcurve_range(&builder, first_edge, face, &parabola, 0.2);
     builder.range_on_face(first_edge, face, 0.1, 0.2).unwrap();
     set_pcurve_range(&builder, second_edge, face, &line, 1.0);
+}
+
+pub(super) fn set_intersecting_ellipse_pcurves(
+    face: &Face,
+    first_edge: &rustycad_tkbrep::topods::Edge,
+    second_edge: &rustycad_tkbrep::topods::Edge,
+) {
+    let builder = BRepBuilder::default();
+    let x = Direction2::new(1.0, 0.0).unwrap();
+    let first_axis = Axis22d::new(Point2::new(0.0, 0.0), x, true).unwrap();
+    let second_axis = Axis22d::new(Point2::new(5.0, 0.0), x, true).unwrap();
+    let first: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dEllipse::new(first_axis, 3.0, 1.0).unwrap()).cast();
+    let second: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dEllipse::new(second_axis, 3.0, 1.0).unwrap()).cast();
+    set_pcurve_range(&builder, first_edge, face, &first, 0.1);
+    set_pcurve_range(
+        &builder,
+        second_edge,
+        face,
+        &second,
+        std::f64::consts::PI + 0.1,
+    );
+    builder.range_on_face(first_edge, face, 0.0, 0.1).unwrap();
+    builder
+        .range_on_face(
+            second_edge,
+            face,
+            std::f64::consts::PI,
+            std::f64::consts::PI + 0.1,
+        )
+        .unwrap();
 }
 
 pub(super) fn bspline_line(start: Point2, end: Point2) -> Handle<dyn Geom2dCurve> {

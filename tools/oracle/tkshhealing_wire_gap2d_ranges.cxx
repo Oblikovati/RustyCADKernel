@@ -5,6 +5,7 @@
 #include <Geom2d_Line.hxx>
 #include <Geom2d_BezierCurve.hxx>
 #include <Geom2d_BSplineCurve.hxx>
+#include <Geom2d_Ellipse.hxx>
 #include <Geom2d_OffsetCurve.hxx>
 #include <Geom2d_Parabola.hxx>
 #include <Geom2d_TrimmedCurve.hxx>
@@ -27,6 +28,7 @@
 #include <NCollection_Array1.hxx>
 #include <iomanip>
 #include <iostream>
+#include <cmath>
 
 void print_pcurve(const TopoDS_Edge& edge, const TopoDS_Face& face) {
   double first = 0.0, last = 0.0;
@@ -41,6 +43,15 @@ void print_result(const char* name, ShapeFix_Wire& tool, bool changed) {
             << tool.LastFixStatus(ShapeExtend_FAIL) << ' ' << tool.Context().IsNull();
   for (TopExp_Explorer edge(tool.Wire(), TopAbs_EDGE); edge.More(); edge.Next()) {
     print_pcurve(TopoDS::Edge(edge.Current()), tool.Face());
+  }
+  std::cout << '\n';
+}
+
+void print_wire_data_result(const char* name, ShapeFix_Wire& tool, bool changed) {
+  std::cout << name << ' ' << changed << ' ' << tool.LastFixStatus(ShapeExtend_DONE1) << ' '
+            << tool.LastFixStatus(ShapeExtend_FAIL) << ' ' << tool.Context().IsNull();
+  for (int index = 1; index <= tool.WireData()->NbEdges(); ++index) {
+    print_pcurve(tool.WireData()->Edge(index), tool.Face());
   }
   std::cout << '\n';
 }
@@ -155,6 +166,29 @@ void run_intersecting_circles() {
   tool.Load(wire);
   tool.SetFace(face);
   print_result("intersecting_circles", tool, tool.FixGap2d(2, false));
+}
+
+void run_intersecting_ellipses() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(3, 0, 0), gp_Pnt(3 * std::cos(0.1), std::sin(0.1), 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(5 + 3 * std::cos(M_PI + 0.1), std::sin(M_PI + 0.1), 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  Handle(Geom2d_Curve) firstCurve = new Geom2d_Ellipse(gp_Ax22d(gp_Pnt2d(0, 0), gp_Dir2d(1, 0)), 3., 1.);
+  Handle(Geom2d_Curve) secondCurve = new Geom2d_Ellipse(gp_Ax22d(gp_Pnt2d(5, 0), gp_Dir2d(1, 0)), 3., 1.);
+  builder.UpdateEdge(first, firstCurve, face, 1e-7);
+  builder.Range(first, face, 0., 0.1);
+  builder.UpdateEdge(second, secondCurve, face, 1e-7);
+  builder.Range(second, face, M_PI, M_PI + 0.1);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_wire_data_result("intersecting_ellipses", tool, tool.FixGap2d(2, false));
 }
 
 void run_disjoint_circles_extrema() {
@@ -406,6 +440,7 @@ int main() {
   run_single_circular_arc();
   run_single_elliptical_arc();
   run_intersecting_circles();
+  run_intersecting_ellipses();
   run_disjoint_circles_extrema();
   run_trimmed_line_pcurves();
   run_offset_line_pcurves();

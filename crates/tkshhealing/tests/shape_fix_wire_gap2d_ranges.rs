@@ -305,3 +305,51 @@ fn parabolic_extension_retains_native_not_done_failure_state() {
     assert_line_observation(&tool, &face, 1, [0.1, 0.2, 0.01, 0.1, 0.04, 0.2]);
     assert_line_observation(&tool, &face, 2, [0.0, 1.0, 0.2, 0.0, 1.2, 0.0]);
 }
+
+#[test]
+fn intersecting_ellipses_use_the_full_conic_search_domain() {
+    let first = edge_between(
+        Point3::new(3.0, 0.0, 0.0),
+        Point3::new(3.0 * 0.1_f64.cos(), 0.1_f64.sin(), 0.0),
+    );
+    let second = edge_between(
+        Point3::new(2.0, 0.0, 0.0),
+        Point3::new(
+            5.0 + 3.0 * (std::f64::consts::PI + 0.1).cos(),
+            (std::f64::consts::PI + 0.1).sin(),
+            0.0,
+        ),
+    );
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_intersecting_ellipse_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_line_observation(
+        &tool,
+        &face,
+        1,
+        [
+            0.0,
+            0.1000000010050206,
+            3.0,
+            0.0,
+            2.9850124955330735,
+            0.099_833_417_646_827_84,
+        ],
+    );
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [
+            3.041_592_652_584_772,
+            3.241_592_653_589_793,
+            2.0149875044669265,
+            0.099_833_417_646_828_4,
+            2.0149875041659224,
+            -0.099_833_416_646_828_11,
+        ],
+    );
+}
