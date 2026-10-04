@@ -16,7 +16,7 @@ LD_LIBRARY_PATH="$OCCT_BUILD/lin64/gcc/lib" \
 diff -u tools/oracle/tkbo_bopds_iterator.expected /tmp/tkbo_bopds_iterator.expected
 ```
 
-The Rust slice now uses OCCT's linear-BVH BoxSet construction and PairSelector traversal, including mapped-ID sorting, the retained source-range cursor, and pair normalization at the native append point. OBB rejection is covered through the PaveFiller oracle and the reordered-input fixture below. `IntersectExt`, extended lists, and complete API/legacy parity remain outside this slice.
+The Rust slice now uses OCCT's linear-BVH BoxSet construction and PairSelector traversal, including mapped-ID sorting, the retained source-range cursor, and pair normalization at the native append point. OBB rejection is covered through the PaveFiller oracle and the reordered-input fixture below. Extended-list behavior now has its own partial port and fixture in `tkbo_iterator_extended.md`; complete API/legacy parity remains unproven.
 
 The three-argument range cursor has its own overlapping-box fixture. It catches mistakes where the candidate pair traversal restarts instead of retaining the index between source ranges:
 

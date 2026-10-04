@@ -1,5 +1,6 @@
 //! AABB candidate-pair preparation for Boolean interference algorithms.
 use super::{DataStructure, IndexRange, Pair};
+mod extended;
 use crate::int_tools::Context;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -16,6 +17,8 @@ struct PreparationOptions<'a> {
 #[derive(Default)]
 pub struct BOPDSIterator {
     lists: [Vec<Pair>; 10],
+    extended_lists: [Vec<Pair>; 4],
+    use_extended: bool,
     active_pairs: Vec<Pair>,
     shape_types: Vec<ShapeEnum>,
     position: usize,
@@ -61,7 +64,12 @@ impl BOPDSIterator {
             self.length = 0;
             return;
         };
-        self.active_pairs.clone_from(&self.lists[list_index]);
+        let pairs = if self.use_extended && list_index < Self::nb_ext_interfs() as usize {
+            &self.extended_lists[list_index]
+        } else {
+            &self.lists[list_index]
+        };
+        self.active_pairs.clone_from(pairs);
         self.active_pairs.sort_by_key(Pair::indices);
         self.position = 0;
         self.length = self.active_pairs.len() as i32;

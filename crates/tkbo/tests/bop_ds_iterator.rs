@@ -180,3 +180,6 @@ fn iterator_bvh_reordering_and_obb_match_native() {
         include_str!("../../../tools/oracle/tkbo_bopds_iterator_bvh.expected")
     );
 }
+
+#[path = "bop_ds_iterator_cases/extended.rs"]
+mod extended;
