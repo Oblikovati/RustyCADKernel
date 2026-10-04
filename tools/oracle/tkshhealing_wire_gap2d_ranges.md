@@ -15,8 +15,9 @@ surface-bound intersection lies beyond the candidate-to-original endpoint
 segment; OCCT keeps that candidate range, matching its clipping loop's finite
 parameter domain.
 
-`single_circular_arc` covers OCCT's same-edge conic branch, which expands both
-parameter ends by `PI - gap/2`; its separate WireData and Wire rows agree.
+`single_circular_arc` and `single_elliptical_arc` cover OCCT's same-edge conic
+branch, which expands both parameter ends by `PI - gap/2`; the circular case's
+separate WireData and Wire rows agree.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
 fallback, finite-surface bounds handling and copied-edge/context replacement
