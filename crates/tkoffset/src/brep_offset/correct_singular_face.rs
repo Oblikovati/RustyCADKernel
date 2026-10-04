@@ -1,6 +1,7 @@
 //! Corrects non-collapsed offset images of degenerated boundary edges.
+mod spherical_patch;
+
 use super::BRepOffsetOffsetFace;
-use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::{
     brep::BRepTool,
     brep_adaptor::BRepAdaptorCurve2d,
@@ -19,8 +20,8 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::gp::{Axis3, Direction2, Direction3, Point2, Point3, Vector3};
-use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
-use rustycad_tktopalgo::{brep_builder_api::BRepBuilderAPIMakeFace, brep_lib::same_parameter_edge};
+use rustycad_tktopalgo::brep_lib::same_parameter_edge;
+use spherical_patch::build_spherical_patch;
 
 pub(super) fn correct_singular_face(
     offset: &BRepOffsetOffsetFace,
@@ -74,21 +75,22 @@ fn correct_singular_edge(
     distance: f64,
 ) -> Result<Face, Failure> {
     let points = edge_surface_points(face, image_edge)?;
+    let old_vertices = topexp::vertices(image_edge, false);
     let sphere = make_apex_sphere(apex, points, distance)?;
     let corrected = rebuild_singular_edge(image_edge, &sphere, points)?;
-    replace_adjacent_vertices(face, image_edge, &corrected, points)?;
+    replace_adjacent_vertices(face, image_edge, &old_vertices, &corrected, points)?;
     build_spherical_patch(&corrected, &sphere)
 }
 
 type EdgeSurfacePoints = (Point3, Point3, Point3, Point2, Point2);
 
-type SphericalParameters = (f64, f64, f64, f64);
+pub(super) type SphericalParameters = (f64, f64, f64, f64);
 
-struct CorrectedEdge {
-    edge: Edge,
-    first_vertex: Vertex,
-    last_vertex: Vertex,
-    parameters: SphericalParameters,
+pub(super) struct CorrectedEdge {
+    pub(super) edge: Edge,
+    pub(super) first_vertex: Vertex,
+    pub(super) last_vertex: Vertex,
+    pub(super) parameters: SphericalParameters,
 }
 
 fn edge_surface_points(face: &Face, edge: &Edge) -> Result<EdgeSurfacePoints, Failure> {
@@ -128,7 +130,7 @@ fn direction(vector: &Vector3) -> Result<Direction3, Failure> {
     Direction3::new(vector.x(), vector.y(), vector.z())
 }
 
-fn null_surface() -> Failure {
+pub(super) fn null_surface() -> Failure {
     Failure::with_message(
         "Standard_NullObject",
         "offset correction face has no surface",
@@ -258,18 +260,12 @@ type SphericalEdgeGeometry = (
 fn replace_adjacent_vertices(
     face: &Face,
     singular_edge: &Edge,
+    old_vertices: &(Vertex, Vertex),
     corrected: &CorrectedEdge,
     points: EdgeSurfacePoints,
 ) -> Result<(), Failure> {
-    let (old_first, old_last) = topexp::vertices(singular_edge, false);
-    replace_edges_on_face(
-        face,
-        singular_edge,
-        &old_first,
-        &old_last,
-        corrected,
-        points,
-    )
+    let (old_first, old_last) = old_vertices;
+    replace_edges_on_face(face, singular_edge, old_first, old_last, corrected, points)
 }
 
 fn replace_edges_on_face(
@@ -280,25 +276,67 @@ fn replace_edges_on_face(
     corrected: &CorrectedEdge,
     points: EdgeSurfacePoints,
 ) -> Result<(), Failure> {
-    let mut edges = Explorer::new(
+    let edges = face_edges(face)?;
+    replace_adjacent_edges(
+        face,
+        edges,
+        singular_edge,
+        old_first,
+        old_last,
+        corrected,
+        points,
+    )
+}
+
+fn face_edges(face: &Face) -> Result<Explorer, Failure> {
+    Explorer::new(
         &face.clone().into_shape(),
         ShapeEnum::Edge,
         ShapeEnum::Shape,
-    )?;
-    while edges.more() {
-        let edge = Edge::unchecked(edges.current().clone());
-        replace_adjacent_if_needed(
+    )
+}
+
+fn replace_adjacent_edges(
+    face: &Face,
+    edges: Explorer,
+    singular_edge: &Edge,
+    old_first: &Vertex,
+    old_last: &Vertex,
+    corrected: &CorrectedEdge,
+    points: EdgeSurfacePoints,
+) -> Result<(), Failure> {
+    for edge in edges {
+        replace_listed_adjacent(
             face,
+            edge,
             singular_edge,
-            &edge,
             old_first,
             old_last,
             corrected,
             points,
         )?;
-        edges.next()?;
     }
     Ok(())
+}
+
+fn replace_listed_adjacent(
+    face: &Face,
+    edge: Shape,
+    singular_edge: &Edge,
+    old_first: &Vertex,
+    old_last: &Vertex,
+    corrected: &CorrectedEdge,
+    points: EdgeSurfacePoints,
+) -> Result<(), Failure> {
+    replace_adjacent_if_needed(
+        face,
+        singular_edge,
+        &Edge::unchecked(edge),
+        old_first,
+        old_last,
+        corrected,
+        points,
+    )
 }
 
 fn replace_adjacent_if_needed(
@@ -313,7 +351,8 @@ fn replace_adjacent_if_needed(
     if edge.is_same(singular_edge) || BRepTool::degenerated(edge)? {
         return Ok(());
     }
-    replace_adjacent_edge_vertex(face, edge, old_first, old_last, corrected, points)
+    let forward = Edge::unchecked(edge.oriented(Orientation::Forward));
+    replace_adjacent_edge_vertex(face, &forward, old_first, old_last, corrected, points)
 }
 
 fn replace_adjacent_edge_vertex(
@@ -392,89 +431,10 @@ fn corrected_vertex_at_uv(
     }
 }
 
-fn replace_vertex(edge: &Edge, old: &Vertex, new: &Shape) -> Result<(), Failure> {
+pub(super) fn replace_vertex(edge: &Edge, old: &Vertex, new: &Shape) -> Result<(), Failure> {
     let builder = rustycad_tkbrep::brep::BRepBuilder::default();
     let mut edge_shape = edge.clone().oriented(Orientation::Forward);
     edge_shape.set_free(true)?;
     builder.remove(&mut edge_shape, &old.clone().into_shape())?;
     builder.add(&mut edge_shape, new)
-}
-
-fn build_spherical_patch(
-    corrected: &CorrectedEdge,
-    sphere: &Handle<GeomSphericalSurface>,
-) -> Result<Face, Failure> {
-    let (u_first, u_last, v, _) = corrected.parameters;
-    let v_bounds = if v > 0.0 {
-        (v, std::f64::consts::FRAC_PI_2)
-    } else {
-        (-std::f64::consts::FRAC_PI_2, v)
-    };
-    let surface: Handle<dyn GeomSurface> = sphere.clone().cast();
-    let face = BRepBuilderAPIMakeFace::from_surface_bounds(
-        &surface,
-        (u_first, u_last, v_bounds.0, v_bounds.1),
-        precision::confusion(),
-    )?
-    .face()?;
-    replace_patch_boundary(&face, corrected)
-}
-
-fn replace_patch_boundary(face: &Face, corrected: &CorrectedEdge) -> Result<Face, Failure> {
-    let old_edge = opposite_pole_edge(face, corrected.parameters)?;
-    let reshape = ShapeBuildReShape::new();
-    replace_patch_edge(&reshape, &old_edge, corrected)?;
-    let result = reshape.apply(&face.clone().into_shape(), ShapeEnum::Face)?;
-    Ok(Face::unchecked(result))
-}
-
-fn opposite_pole_edge(face: &Face, parameters: SphericalParameters) -> Result<Edge, Failure> {
-    let (u_first, u_last, _, _) = parameters;
-    let mut edges = Explorer::new(
-        &face.clone().into_shape(),
-        ShapeEnum::Edge,
-        ShapeEnum::Shape,
-    )?;
-    while edges.more() {
-        let edge = Edge::unchecked(edges.current().clone());
-        let (first, last) = edge_range(&edge)?;
-        if !BRepTool::degenerated(&edge)?
-            && (first - u_first).abs() <= precision::confusion()
-            && (last - u_last).abs() <= precision::confusion()
-        {
-            return Ok(edge);
-        }
-        edges.next()?;
-    }
-    Err(null_surface())
-}
-
-fn replace_patch_edge(
-    reshape: &ShapeBuildReShape,
-    old_edge: &Edge,
-    corrected: &CorrectedEdge,
-) -> Result<(), Failure> {
-    let (old_first, old_last) = topexp::vertices(old_edge, false);
-    reshape.replace(
-        &old_edge.clone().into_shape(),
-        &corrected.edge.clone().into_shape(),
-    )?;
-    replace_patch_vertex(reshape, &old_first, &corrected.first_vertex)?;
-    if !old_first.is_same(&old_last) {
-        replace_patch_vertex(reshape, &old_last, &corrected.last_vertex)?;
-    }
-    Ok(())
-}
-
-fn replace_patch_vertex(
-    reshape: &ShapeBuildReShape,
-    old: &Vertex,
-    new: &Vertex,
-) -> Result<(), Failure> {
-    reshape.replace(&old.clone().into_shape(), &new.clone().into_shape())
-}
-
-fn edge_range(edge: &Edge) -> Result<(f64, f64), Failure> {
-    let range = BRepTool::range(edge)?;
-    Ok(range)
 }
