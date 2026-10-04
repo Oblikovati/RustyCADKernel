@@ -1,4 +1,4 @@
-//! Boundary constrained plane meshing, matching `BRepMesh_BaseMeshAlgo`'s data flow.
+//! Boundary-constrained analytic face meshing, following `BRepMesh_BaseMeshAlgo`'s data flow.
 use super::{
     BRepMeshDataStructureOfDelaun, BRepMeshDelaun, BRepMeshEdge, BRepMeshVertex, ShapeTool,
 };
@@ -7,21 +7,22 @@ use crate::{
     imesh_data::{FaceHandle, MeshModel, MeshWire},
     imesh_tools::{MeshParameters, ModelAlgo},
 };
-use rustycad_tkbrep::{brep::BRepTool, topexp::Explorer, topods};
 use rustycad_tkernel::{
     impl_transient,
     message::ProgressRange,
     ncollection::IncrementalAllocatorObject,
     standard::{Failure, Handle, StandardTransient},
 };
-use rustycad_tkg3d::top_abs::{ShapeEnum, State};
 use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, top_abs::Orientation};
 use rustycad_tkmath::{
     geom_abs::SurfaceType,
     gp::{Point2, Xy},
     poly::{Triangle, Triangulation},
 };
-use rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d;
+#[path = "planar_face_discret/interior_nodes.rs"]
+mod interior_nodes;
+#[path = "planar_face_discret/sphere_nodes.rs"]
+mod sphere_nodes;
 
 /// Mesh planar faces from registered boundary samples; `BRepMeshPlanarFaceDiscret::new()`.
 #[derive(Default)]
@@ -43,7 +44,7 @@ impl BRepMeshPlanarFaceDiscret {
         ) {
             return Err(Failure::with_message(
                 "Standard_NotImplemented",
-                "BRepMesh boundary face strategy requires a plane or cylinder surface",
+                "BRepMesh boundary face strategy requires a plane, cylinder, cone, or sphere surface",
             ));
         }
         let allocator = Handle::new(IncrementalAllocatorObject::new(
@@ -51,10 +52,10 @@ impl BRepMeshPlanarFaceDiscret {
         ));
         let mesh = Handle::new(BRepMeshDataStructureOfDelaun::new(&allocator, 16));
         let splitter = Self::range_splitter(face, parameters)?;
-        Self::configure_vertex_tool(&splitter, &mesh)?;
+        interior_nodes::configure_vertex_tool(&splitter, &mesh)?;
         let mut points = Vec::new();
         if parameters.internal_vertices_mode {
-            Self::register_internal_vertices(face, &splitter, &mesh, &mut points)?;
+            interior_nodes::register_internal_vertices(face, &splitter, &mesh, &mut points)?;
         }
         Self::register_boundaries(face, &splitter, &mesh, &mut points)?;
         let mut vertices = (1..=mesh.nb_nodes()).collect::<Vec<_>>();
@@ -64,8 +65,13 @@ impl BRepMeshPlanarFaceDiscret {
             face.get_deflection(),
             Some(&splitter),
         )?;
-        BRepMeshDelaun::from_mesh(&mesh, cells_u, cells_v, true)?
-            .triangulate_vertices_probe(&mut vertices)?;
+        let mut delaun = BRepMeshDelaun::from_mesh(&mesh, cells_u, cells_v, true)?;
+        delaun.triangulate_vertices_probe(&mut vertices)?;
+        let mut surface_nodes =
+            sphere_nodes::register_interior(face, parameters, &splitter, &mesh, &mut points)?;
+        if !surface_nodes.is_empty() {
+            delaun.insert_vertices_probe(&mut surface_nodes)?;
+        }
         Self::publish_mesh(face, &splitter, &mesh, &points)
     }
 
@@ -107,78 +113,6 @@ impl BRepMeshPlanarFaceDiscret {
         Ok(())
     }
 
-    fn register_internal_vertices(
-        face: &FaceHandle,
-        splitter: &DefaultRangeSplitter,
-        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
-        points: &mut Vec<rustycad_tkmath::gp::Point3>,
-    ) -> Result<(), Failure> {
-        let topological_face = face.get_face()?;
-        let classifier = BRepTopAdaptorFClass2d::new(&topological_face, 1e-9)?;
-        for shape in Explorer::new(&topological_face, ShapeEnum::Vertex, ShapeEnum::Edge)? {
-            if shape.orientation() != Orientation::Internal {
-                continue;
-            }
-            Self::register_internal_vertex(
-                &shape,
-                &topological_face,
-                &classifier,
-                splitter,
-                mesh,
-                points,
-            )?;
-        }
-        Ok(())
-    }
-
-    fn register_internal_vertex(
-        shape: &rustycad_tkbrep::topods::Shape,
-        face: &rustycad_tkbrep::topods::Face,
-        classifier: &BRepTopAdaptorFClass2d,
-        splitter: &DefaultRangeSplitter,
-        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
-        points: &mut Vec<rustycad_tkmath::gp::Point3>,
-    ) -> Result<(), Failure> {
-        let vertex = topods::vertex(shape)?;
-        let Some(uv) = Self::internal_vertex_uv(&vertex, face, classifier)? else {
-            return Ok(());
-        };
-        let point = BRepTool::pnt(&vertex)?;
-        Self::register_internal_node(uv, point, splitter, mesh, points)
-    }
-
-    fn internal_vertex_uv(
-        vertex: &rustycad_tkbrep::topods::Vertex,
-        face: &rustycad_tkbrep::topods::Face,
-        classifier: &BRepTopAdaptorFClass2d,
-    ) -> Result<Option<Point2>, Failure> {
-        let uv = BRepTool::parameters(vertex, face)?;
-        if classifier.perform(uv, true)? == State::In {
-            return Ok(Some(uv));
-        }
-        Ok(None)
-    }
-
-    fn register_internal_node(
-        uv: Point2,
-        point: rustycad_tkmath::gp::Point3,
-        splitter: &DefaultRangeSplitter,
-        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
-        points: &mut Vec<rustycad_tkmath::gp::Point3>,
-    ) -> Result<(), Failure> {
-        let scaled = splitter.scale(uv, true);
-        let location = points.len() as i32 + 1;
-        let node = BRepMeshVertex::new(
-            Xy::new(scaled.x(), scaled.y()),
-            location,
-            super::DegreeOfFreedom::Fixed,
-        );
-        if mesh.add_node(&node, false)? == location {
-            points.push(point);
-        }
-        Ok(())
-    }
-
     fn scale_cylinder_range(
         face: &FaceHandle,
         parameters: &MeshParameters,
@@ -196,19 +130,6 @@ impl BRepMeshPlanarFaceDiscret {
         )?;
         let range_v = splitter.get_range_v();
         splitter.delta = (step / (range_v.1 - range_v.0), 1.0);
-        Ok(())
-    }
-
-    fn configure_vertex_tool(
-        splitter: &DefaultRangeSplitter,
-        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
-    ) -> Result<(), Failure> {
-        let delta = splitter.get_delta();
-        let tolerance = splitter.get_tolerance_uv();
-        mesh.vertex_tool()
-            .set_tolerances(tolerance.0 / delta.0, tolerance.1 / delta.1);
-        mesh.vertex_tool()
-            .set_cell_sizes(14.0 * tolerance.0 / delta.0, 14.0 * tolerance.1 / delta.1)?;
         Ok(())
     }
 

@@ -1,13 +1,25 @@
 //! Rust translations of the three Bug30655 BVH regression declarations.
 #![allow(non_snake_case)]
 
+use rustycad_tkbrep::{
+    brep::BRepTool,
+    topexp,
+    topods::{self, Shape},
+    toptools::IndexedMapOfShape,
+};
+use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bvh::tools::point_triangle_square_distance;
 use rustycad_tkmath::bvh::{
     BvhBaseTraverse, BvhBox, BvhBoxSet, BvhDistanceField, BvhGeometry, BvhLinearBuilder, BvhObject,
     BvhPairDistance, BvhPairDistanceTraverse, BvhPairSetTraverse, BvhPairTraverse,
     BvhTriangulation, BvhVec3d, BvhVec4i, array,
 };
+use rustycad_tkmath::gp::Point3;
+use rustycad_tkmath::poly::mesh_purpose;
+use rustycad_tkmesh::{brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters};
+use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeBox, BRepPrimAPIMakeSphere};
 use std::sync::Arc;
 
 #[derive(Clone, Copy)]
@@ -15,9 +27,9 @@ struct Triangle([BvhVec3d; 3]);
 
 type TriangleSet = BvhBoxSet<BvhVec3d, Triangle>;
 
-fn append_triangle(mesh: &mut BvhTriangulation<BvhVec3d>, triangle: Triangle) {
+fn append_triangle(mesh: &mut BvhTriangulation<BvhVec3d>, triangle: [BvhVec3d; 3]) {
     let first = mesh.vertices.len() as i32;
-    for point in triangle.0 {
+    for point in triangle {
         array::append(&mut mesh.vertices, point);
     }
     array::append(
@@ -26,75 +38,102 @@ fn append_triangle(mesh: &mut BvhTriangulation<BvhVec3d>, triangle: Triangle) {
     );
 }
 
-fn box_triangles(minimum: BvhVec3d, maximum: BvhVec3d) -> Vec<Triangle> {
-    box_triangles_with_mask(minimum, maximum, 0)
+fn make_box(
+    point: Point3,
+    sizes: [f64; 3],
+    deflection: f64,
+) -> Result<Shape, rustycad_tkernel::standard::Failure> {
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+    let mut maker = BRepPrimAPIMakeBox::at_point(point, sizes[0], sizes[1], sizes[2])?;
+    let shape = maker.shape()?.clone();
+    mesh_shape(&shape, deflection)?;
+    Ok(shape)
 }
 
-fn box_points(minimum: BvhVec3d, maximum: BvhVec3d) -> [BvhVec3d; 8] {
-    [
-        BvhVec3d::new(minimum.x, minimum.y, minimum.z),
-        BvhVec3d::new(maximum.x, minimum.y, minimum.z),
-        BvhVec3d::new(maximum.x, maximum.y, minimum.z),
-        BvhVec3d::new(minimum.x, maximum.y, minimum.z),
-        BvhVec3d::new(minimum.x, minimum.y, maximum.z),
-        BvhVec3d::new(maximum.x, minimum.y, maximum.z),
-        BvhVec3d::new(maximum.x, maximum.y, maximum.z),
-        BvhVec3d::new(minimum.x, maximum.y, maximum.z),
-    ]
+fn make_sphere(
+    center: Point3,
+    radius: f64,
+    deflection: f64,
+) -> Result<Shape, rustycad_tkernel::standard::Failure> {
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+    let mut maker = BRepPrimAPIMakeSphere::at_center(center, radius)?;
+    let shape = maker.shape()?.clone();
+    mesh_shape(&shape, deflection)?;
+    Ok(shape)
 }
 
-fn box_face_meshes(minimum: BvhVec3d, maximum: BvhVec3d, mask: usize) -> [[Triangle; 2]; 6] {
-    let points = box_points(minimum, maximum);
-    let faces = [
-        [0, 1, 2, 0, 2, 3],
-        [4, 5, 6, 4, 6, 7],
-        [0, 1, 5, 0, 5, 4],
-        [1, 2, 6, 1, 6, 5],
-        [2, 3, 7, 2, 7, 6],
-        [3, 0, 4, 3, 4, 7],
-    ];
-    std::array::from_fn(|side| face_triangles(points, faces[side], mask & (1 << side) != 0))
+fn mesh_shape(shape: &Shape, deflection: f64) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let parameters = MeshParameters {
+        deflection,
+        ..MeshParameters::default()
+    };
+    BRepMeshIncrementalMesh::with_parameters(shape, &parameters, &ProgressRange::default())?;
+    Ok(())
 }
 
-fn box_triangles_with_mask(minimum: BvhVec3d, maximum: BvhVec3d, mask: usize) -> Vec<Triangle> {
-    box_face_meshes(minimum, maximum, mask)
-        .into_iter()
-        .flatten()
-        .collect()
-}
-
-fn face_triangles(points: [BvhVec3d; 8], face: [usize; 6], reverse: bool) -> [Triangle; 2] {
-    let mut triangles = [
-        Triangle([points[face[0]], points[face[1]], points[face[2]]]),
-        Triangle([points[face[3]], points[face[4]], points[face[5]]]),
-    ];
-    if reverse {
-        for triangle in &mut triangles {
-            triangle.0.swap(1, 2);
-        }
+fn shape_triangles(shape: &Shape) -> Result<Vec<Triangle>, rustycad_tkernel::standard::Failure> {
+    // Native makeTriangleBoxSet traverses TopExp's indexed face map, then each face's raw triangles.
+    let faces = face_map(shape)?;
+    let mut triangles = Vec::new();
+    for index in 1..=faces.extent() {
+        let face = topods::face(faces.find_key(index)?)?;
+        triangles.extend(face_triangles_from_mesh(&face)?.into_iter().map(Triangle));
     }
-    triangles
+    Ok(triangles)
 }
 
-fn box_geometry() -> BvhGeometry<BvhVec3d> {
+fn face_map(shape: &Shape) -> Result<IndexedMapOfShape, rustycad_tkernel::standard::Failure> {
+    let mut faces = IndexedMapOfShape::default();
+    topexp::map_shapes_of_type(shape, ShapeEnum::Face, &mut faces)?;
+    Ok(faces)
+}
+
+fn face_triangles_from_mesh(
+    face: &topods::Face,
+) -> Result<Vec<[BvhVec3d; 3]>, rustycad_tkernel::standard::Failure> {
+    let (handle, location) = BRepTool::triangulation(face, mesh_purpose::NONE)?;
+    let triangulation = handle.get().ok_or_else(|| {
+        rustycad_tkernel::standard::Failure::new(
+            "Bug30655 face triangulation is null; expected a meshed face",
+        )
+    })?;
+    // OCCT transforms nodes by the location returned from Triangulation; triangle winding stays raw.
+    let transform = location.transformation();
+    let mut triangles = Vec::new();
+    for index in 1..=triangulation.nb_triangles() {
+        let (a, b, c) = triangulation.triangle(index)?.get();
+        triangles.push([
+            mesh_node(triangulation, a, transform)?,
+            mesh_node(triangulation, b, transform)?,
+            mesh_node(triangulation, c, transform)?,
+        ]);
+    }
+    Ok(triangles)
+}
+
+fn mesh_node(
+    triangulation: &rustycad_tkmath::poly::Triangulation,
+    index: i32,
+    transform: rustycad_tkmath::gp::Transform3,
+) -> Result<BvhVec3d, rustycad_tkernel::standard::Failure> {
+    let point = triangulation.node(index)?.transformed(transform);
+    Ok(BvhVec3d::new(point.x(), point.y(), point.z()))
+}
+
+fn box_geometry(
+    shape: &Shape,
+) -> Result<BvhGeometry<BvhVec3d>, rustycad_tkernel::standard::Failure> {
     let mut geometry = BvhGeometry::default();
-    // Raw triangle winding drives signed distances; reverse +X to preserve the
-    // positive outside voxel observed in OCCT's BRepMesh fixture.
-    let faces = box_face_meshes(
-        BvhVec3d::new(0.0, 0.0, 0.0),
-        BvhVec3d::new(10.0, 10.0, 10.0),
-        8,
-    );
-    for face in faces {
+    for face in face_map(shape)?.iter() {
         let mut mesh = BvhTriangulation::default();
-        for triangle in face {
+        for triangle in face_triangles_from_mesh(&topods::face(face)?)? {
             append_triangle(&mut mesh, triangle);
         }
         mesh.mark_dirty();
         geometry.objects_mut().append(Some(Box::new(mesh)));
     }
     geometry.mark_dirty();
-    geometry
+    Ok(geometry)
 }
 
 fn triangle_box(triangle: Triangle) -> BvhBox<BvhVec3d> {
@@ -225,25 +264,10 @@ fn run_distance(first_triangles: &[Triangle], second_triangles: &[Triangle]) -> 
     (result.sqrt(), distance.state.distance().sqrt())
 }
 
-fn sphere_patch(center: BvhVec3d, direction: BvhVec3d, radius: f64) -> Triangle {
-    let tangent = BvhVec3d::new(direction.y, -direction.x, 0.0);
-    let tangent = tangent * (1.0 / vector_length(tangent));
-    let bitangent = BvhVec3d::new(
-        direction.y * tangent.z - direction.z * tangent.y,
-        direction.z * tangent.x - direction.x * tangent.z,
-        direction.x * tangent.y - direction.y * tangent.x,
-    );
-    let point = |axis: BvhVec3d| center + axis * radius;
-    let theta: f64 = 0.004;
-    let near = point(direction);
-    let along_tangent = point(direction * theta.cos() + tangent * theta.sin());
-    let along_bitangent = point(direction * theta.cos() + bitangent * theta.sin());
-    Triangle([near, along_tangent, along_bitangent])
-}
-
 #[test]
 fn BVH_DistanceFieldTest__Bug30655_BoxDistanceField() {
-    let mut geometry = box_geometry();
+    let shape = make_box(Point3::new(0.0, 0.0, 0.0), [10.0; 3], 0.1).unwrap();
+    let mut geometry = box_geometry(&shape).unwrap();
     let mut field = BvhDistanceField::<BvhVec3d>::new(2, true).unwrap();
     assert!(field.build(&mut geometry).unwrap());
     assert_eq!(
@@ -264,14 +288,10 @@ fn BVH_DistanceFieldTest__Bug30655_BoxDistanceField() {
 
 #[test]
 fn BVH_PairDistanceTest__Bug30655_BoxDistance() {
-    let first = box_triangles(
-        BvhVec3d::new(0.0, 0.0, 0.0),
-        BvhVec3d::new(10.0, 10.0, 10.0),
-    );
-    let second = box_triangles(
-        BvhVec3d::new(20.0, 0.0, 0.0),
-        BvhVec3d::new(30.0, 10.0, 10.0),
-    );
+    let first_shape = make_box(Point3::new(0.0, 0.0, 0.0), [10.0; 3], 0.1).unwrap();
+    let second_shape = make_box(Point3::new(20.0, 0.0, 0.0), [10.0; 3], 0.1).unwrap();
+    let first = shape_triangles(&first_shape).unwrap();
+    let second = shape_triangles(&second_shape).unwrap();
     let (computed, stored) = run_distance(&first, &second);
     assert!((computed - 10.0).abs() <= 1.0e-2);
     assert!((stored - 10.0).abs() <= 1.0e-2);
@@ -279,19 +299,18 @@ fn BVH_PairDistanceTest__Bug30655_BoxDistance() {
 
 #[test]
 fn BVH_PairDistanceTest__Bug30655_SphereDistance() {
-    let direction = BvhVec3d::new(
-        1.0 / 3.0_f64.sqrt(),
-        1.0 / 3.0_f64.sqrt(),
-        1.0 / 3.0_f64.sqrt(),
-    );
-    let first = [sphere_patch(BvhVec3d::new(0.0, 0.0, 0.0), direction, 100.0)];
-    let second = [sphere_patch(
-        BvhVec3d::new(150.0, 150.0, 150.0),
-        direction * -1.0,
-        110.0,
-    )];
+    let first_shape = make_sphere(Point3::new(0.0, 0.0, 0.0), 100.0, 0.01).unwrap();
+    let second_shape = make_sphere(Point3::new(150.0, 150.0, 150.0), 110.0, 0.01).unwrap();
+    let first = shape_triangles(&first_shape).unwrap();
+    let second = shape_triangles(&second_shape).unwrap();
     let expected = (3.0_f64 * 150.0 * 150.0).sqrt() - 210.0;
     let (computed, stored) = run_distance(&first, &second);
-    assert!((computed - expected).abs() <= 1.0e-2);
-    assert!((stored - expected).abs() <= 1.0e-2);
+    assert!(
+        (computed - expected).abs() <= 1.0e-2,
+        "computed {computed}, expected {expected}"
+    );
+    assert!(
+        (stored - expected).abs() <= 1.0e-2,
+        "stored {stored}, expected {expected}"
+    );
 }
