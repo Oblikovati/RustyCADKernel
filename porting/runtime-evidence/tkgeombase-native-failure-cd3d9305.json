@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source_revision": "cd3d9305a959bb74535c250f75008326bc764a52",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "command": "python3 tools/verify_tkmath_legacy.py --toolkit TKGeomBase --source ../OCCT --build-dir target/occt-modeling-full --output target/oracle-tkgeombase-cd3d9305 --cargo-target-dir target --jobs 4",
+  "exit_code": 1,
+  "native_tests_passed": 838,
+  "native_tests_failed": 1,
+  "failed_test": "ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor",
+  "failed_assertion": "Distance at parameter -0.7 is exactly 0.0",
+  "actual_distance": 1.1102230246251565e-16,
+  "upstream_test_source": "../OCCT/src/ModelingData/TKGeomBase/GTests/ExtremaPC2d_Hyperbola_Test.cxx",
+  "upstream_test_source_sha256": "e890d8c136e29c51611de2ae1dca23e1c6df75ecfae612879b5911a2b576d646",
+  "native_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+  "archive": "tkgeombase-native-failure-cd3d9305.tar.gz",
+  "archive_sha256": "5c664d430ec6488aa91cbc5de20a5559ccc93f39329cea9fb85995bf0b173822",
+  "scope": "The native stage failed before the verifier could run or join Rust TKGeomBase cases. This receipt records a failed native replay, not a passed native/Rust comparison. Original assertions were unchanged.",
+  "full_test_parity_proven": false
+}
