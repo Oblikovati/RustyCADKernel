@@ -1,0 +1,30 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx": "44dd0d284354a52fb22881ae0366e768ff9b1e7ebd832fdac0c215f04444980b",
+    "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.cxx": "6ce511ff351af0fecb2af096196b7b25563e6d6af8f66f7f4206a29352f527e5"
+  },
+  "probe": "tools/oracle/tkg3d_surface_reinitialization.cxx",
+  "expected": "tools/oracle/tkg3d_surface_reinitialization.expected",
+  "rust_test": "crates/tkg3d/tests/geom_surface_reinitialization.rs",
+  "native_profile": "Linux x86_64 GCC C++17 -O2",
+  "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkg3d_surface_reinitialization.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKG3d -lTKMath -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkg3d-surface-reinitialization",
+  "legacy_declaration_count_changed": false,
+  "full_api_parity_proven": false,
+  "artifact_sha256": {
+    "tools/oracle/tkg3d_surface_reinitialization.cxx": "5aa7fd625ddb2b10edb1c43cb350eac99054c9069323105764aeb3975ef958a6",
+    "tools/oracle/tkg3d_surface_reinitialization.expected": "ec3633463a322e2a845850c3a3f4697301cb03dd048e205cab56ef47b28c228c"
+  },
+  "library_sha256": {
+    "TKG3d": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+    "TKMath": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "TKernel": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "validation": {
+    "package_test_passed": 817,
+    "package_test_failed": 0,
+    "supplemental_tests": 2,
+    "native_fixture_rows": 9,
+    "strict_clippy_passed": true
+  }
+}

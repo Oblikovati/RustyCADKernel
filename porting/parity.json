@@ -234697,6 +234697,22 @@
       "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::initialization_curve",
       "status": "partial",
       "notes": "Public Rust counterpart of protected native reinitialization. Supplemental native transition fixture covers line/circle/trimmed/null, bounded concrete and fallback adaptors, and GetType exception preservation. Existing grid algorithms are reused. Borrowed adaptor lifetime is enforced by Rust; C++ subclass layout/raw-reference ABI is not reproduced. See porting/audits/tkg2d-curve-reinitialization.json."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::initialization(const Adaptor3d_Surface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::initialization_adaptor",
+      "status": "partial",
+      "notes": "Protected native hook exposed for Rust reuse. Adaptor initialization clears transformation before fallible queries; handle initialization retains it, including null. Supplemental native fixture covers replacement, clearing, exception side effects, restoring transformed/plain adaptors, and stripped trimming. Raw subclass ABI is not reproduced; borrowed adaptor lifetime is explicit. See porting/audits/tkg3d-surface-reinitialization.json."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::initialization(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::initialization_surface",
+      "status": "partial",
+      "notes": "Protected native hook exposed for Rust reuse. Adaptor initialization clears transformation before fallible queries; handle initialization retains it, including null. Supplemental native fixture covers replacement, clearing, exception side effects, restoring transformed/plain adaptors, and stripped trimming. Raw subclass ABI is not reproduced; borrowed adaptor lifetime is explicit. See porting/audits/tkg3d-surface-reinitialization.json."
     }
   ],
   "tests": [

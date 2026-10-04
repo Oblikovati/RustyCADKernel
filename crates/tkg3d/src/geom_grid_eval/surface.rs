@@ -92,17 +92,7 @@ impl<'a> GeomGridEvalSurface<'a> {
     /// fallback borrows `surface`; `GeomGridEvalSurface::from_adaptor(&adaptor)?`.
     pub fn from_adaptor(surface: &'a dyn Adaptor3dSurface) -> Result<Self, Failure> {
         let mut result = Self::uninitialized();
-        match resolve_adaptor(surface)? {
-            AdaptorResolution::Geometry(geom, trsf) => {
-                result.trsf = trsf;
-                result.initialization_surface(&geom);
-            }
-            AdaptorResolution::Fallback(surface_type, adaptor) => {
-                result.surface_type = surface_type;
-                let other = GeomGridEvalOtherSurface::from_adaptor(adaptor);
-                result.evaluator = GeomGridEvalSurfaceEvaluator::Other(other);
-            }
-        }
+        result.initialization_adaptor(surface)?;
         Ok(result)
     }
     /// Evaluator of a surface handle (`GeomGridEval_Surface(const
@@ -119,8 +109,32 @@ impl<'a> GeomGridEvalSurface<'a> {
             trsf: None,
         }
     }
-    // `initialization(const occ::handle<Geom_Surface>&)`.
-    fn initialization_surface(&mut self, surface: &Handle<dyn GeomSurface>) {
+    /// Reinitialize through the native protected adaptor hook.
+    /// Clears the previous transformation before querying the adaptor, including
+    /// when that query fails. Example: `eval.initialization_adaptor(&adaptor)?`.
+    pub fn initialization_adaptor(
+        &mut self,
+        surface: &'a dyn Adaptor3dSurface,
+    ) -> Result<(), Failure> {
+        // Native GeomGridEval_Surface.cxx resets myTrsf before any failing query.
+        self.trsf = None;
+        match resolve_adaptor(surface)? {
+            AdaptorResolution::Geometry(geom, trsf) => {
+                self.trsf = trsf;
+                self.initialization_surface(&geom);
+            }
+            AdaptorResolution::Fallback(surface_type, adaptor) => {
+                self.surface_type = surface_type;
+                let other = GeomGridEvalOtherSurface::from_adaptor(adaptor);
+                self.evaluator = GeomGridEvalSurfaceEvaluator::Other(other);
+            }
+        }
+        Ok(())
+    }
+    /// Reinitialize through the native protected geometry hook, retaining any
+    /// adaptor transformation. A null handle clears the held surface only.
+    /// Example: `eval.initialization_surface(&Handle::default())`.
+    pub fn initialization_surface(&mut self, surface: &Handle<dyn GeomSurface>) {
         if surface.is_null() {
             self.evaluator = GeomGridEvalSurfaceEvaluator::Uninitialized;
             self.surface_type = SurfaceType::OtherSurface;
