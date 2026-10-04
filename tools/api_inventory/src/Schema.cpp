@@ -56,6 +56,12 @@ std::string directAccess(const clang::Decl &declaration) {
   const auto *named = llvm::dyn_cast<clang::NamedDecl>(&declaration);
   if (!named) return "none";
   if (named->getAccess() != clang::AS_none) return accessName(named->getAccess());
+  if (const auto *record = llvm::dyn_cast<clang::CXXRecordDecl>(named)) {
+    const auto *classTemplate = record->getDescribedClassTemplate();
+    // Clang's pattern record may omit access that the template wrapper retains.
+    if (classTemplate && classTemplate->getAccess() != clang::AS_none)
+      return accessName(classTemplate->getAccess());
+  }
   const auto *record = llvm::dyn_cast<clang::CXXRecordDecl>(named->getDeclContext());
   if (!record) return "public";
   return record->isClass() ? "private_default" : "public_default";
