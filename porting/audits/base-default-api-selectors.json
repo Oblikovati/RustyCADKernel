@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "scope": "Exact Default implementation selectors in base toolkits",
+  "rust_capture_revision": "eb00c3411724ce04ec7986efcc46b5ef2b8a3227",
+  "normalized_rust_sha256": "ad622c75b3df01f3c03667eb2e72f0c9502b058aed9679b9a18fcc2e36c0a328",
+  "rows_updated": 54,
+  "implementation_changes": 0,
+  "legacy_declarations_added": 0,
+  "notes": [
+    "Each target is a unique compiler-recorded function at the existing type owner, qualified by core::default::Default.",
+    "Only stale shorthand selectors were corrected; existing parity statuses were not upgraded.",
+    "This repairs declaration linkage; it is not new behavioral evidence or proof of full API parity."
+  ],
+  "changes": [
+    {
+      "upstream_id": "gp_Circ()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Circle3::default",
+      "rust_item": "rustycad_tkmath::gp::Circle3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/circle.rs",
+      "source_sha256": "d1dde4a9f6372f4dea9b210ada723bd4ca6edcd8dda48a080d22a9c9cb880065",
+      "declaration_sha256": "e551a8188a85ed951e2b6d22ed15fb4214d3c870a8785adcf74be52152bc5f0e"
+    },
+    {
+      "upstream_id": "gp_Elips()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Ellipse3::default",
+      "rust_item": "rustycad_tkmath::gp::Ellipse3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/ellipse.rs",
+      "source_sha256": "16481f5ba1e942a58831c35071c05e8ae668610d4bb3cf16ec327ff8bbf6a080",
+      "declaration_sha256": "d77e9ea4b240f151c6ab21ab1da3a7008c4930b3c2abc351f772ba084ecc553b"
+    },
+    {
+      "upstream_id": "gp_Hypr()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Hyperbola3::default",
+      "rust_item": "rustycad_tkmath::gp::Hyperbola3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/hyperbola.rs",
+      "source_sha256": "22e614db050574f719c7c74cc47d8cd0a44060a68951373354d372eb22241596",
+      "declaration_sha256": "6ed213f66ca7e8371a72ab39eec6929b96610c516d6f505bb1c3c8b87a9833a6"
+    },
+    {
+      "upstream_id": "gp_Parab()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Parabola3::default",
+      "rust_item": "rustycad_tkmath::gp::Parabola3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/parabola.rs",
+      "source_sha256": "4f96cd8242c67f5af3db3d383e1f1c5b9255fab8fd0dea27d96db73fb220c0dd",
+      "declaration_sha256": "0db4cbd1b3445f9f1abdf3b0c7b14f612aa77a1d6a54275ea33a32c6d0009884"
+    },
+    {
+      "upstream_id": "gp_Circ2d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Circle2::default",
+      "rust_item": "rustycad_tkmath::gp::Circle2::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/circle.rs",
+      "source_sha256": "83dcfa6c11c824d44fed70718237bb2cd230956a006feb040e8243ce7648bea3",
+      "declaration_sha256": "3b1672240f3907851509fa6bcb677480d86f82c7f7e874a04cdc92294c6a8059"
+    },
+    {
+      "upstream_id": "gp_Elips2d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Ellipse2::default",
+      "rust_item": "rustycad_tkmath::gp::Ellipse2::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/ellipse.rs",
+      "source_sha256": "632149b92c69ea2842fac97321fd7568a7c71244f6b3e282b58df9243dc663f4",
+      "declaration_sha256": "6a94f28853f641ee08637e1c0bd9506d943d42f0e6edeef78253bf17036e9532"
+    },
+    {
+      "upstream_id": "gp_Hypr2d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Hyperbola2::default",
+      "rust_item": "rustycad_tkmath::gp::Hyperbola2::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/hyperbola.rs",
+      "source_sha256": "ec8d51edd578f8d622e106ff78d8b75e88b21cf1f6e238459628b62a72b83cfa",
+      "declaration_sha256": "380d063ce617a54f1bdf6cf2106e208415e87a110921bd1b2bba70edc55bd356"
+    },
+    {
+      "upstream_id": "gp_Parab2d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Parabola2::default",
+      "rust_item": "rustycad_tkmath::gp::Parabola2::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/parabola.rs",
+      "source_sha256": "aea46766aa9b0cf4bd9164c7806b17598c159597f1ba139409d3beee4655e968",
+      "declaration_sha256": "badd48693ccd4841cba583712d4c3b5a00e28359854778605db417329c9fc06f"
+    },
+    {
+      "upstream_id": "gp_Sphere()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Sphere3::default",
+      "rust_item": "rustycad_tkmath::gp::Sphere3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/sphere.rs",
+      "source_sha256": "f07786391329d841075ce3d57c352252126383422d5d6e9afc4d7f07c9c17f15",
+      "declaration_sha256": "16929984796b0129098f76f3ebf4e03ac85b5856da92b389041983481366ee57"
+    },
+    {
+      "upstream_id": "gp_Cylinder()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Cylinder3::default",
+      "rust_item": "rustycad_tkmath::gp::Cylinder3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/cylinder.rs",
+      "source_sha256": "a90256ea76d8eed223e1ef555f5e95582a52b50003bcf0ad87796f6b39c521d9",
+      "declaration_sha256": "e21b6fd04a35d372c82bc601c0d8d23113e443b438f6f72672e9232ca19eeb2d"
+    },
+    {
+      "upstream_id": "gp_Cone()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Cone3::default",
+      "rust_item": "rustycad_tkmath::gp::Cone3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/cone.rs",
+      "source_sha256": "ea3ed00c41f320c107ee644bb2bbb2c3e38eb134f772773e4276cd2867ba6786",
+      "declaration_sha256": "093ec6dda7b1a1adcc04210f370f62ecf2ae8acda1cf41abc77c5dc9cb7bcc1e"
+    },
+    {
+      "upstream_id": "gp_Torus()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Torus3::default",
+      "rust_item": "rustycad_tkmath::gp::Torus3::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/torus.rs",
+      "source_sha256": "9b0006582eb2f42b76d0f24be54d5d9e8583dfdcf4885037cb0af3a5e7891574",
+      "declaration_sha256": "56187656ed4971eb00eb573c923bd220ec2e21915718174ec913b8ba9baef374"
+    },
+    {
+      "upstream_id": "gp_Ax22d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Axis22d::default",
+      "rust_item": "rustycad_tkmath::gp::Axis22d::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/frame.rs",
+      "source_sha256": "74a4854cf11781a288f41338b609b7d4436139dc389dac51dda7a9e1d122d308",
+      "declaration_sha256": "788025d9e09c1b7acd067c1ee28ed2f96a94ef263f977ab2909765ebf7d13448"
+    },
+    {
+      "upstream_id": "gp_Ax2d()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Axis2d::default",
+      "rust_item": "rustycad_tkmath::gp::Axis2d::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/planar/axis.rs",
+      "source_sha256": "de8b57be29ce11c8935c52510495eed1bba0bb23502a2768f016c82634e24961",
+      "declaration_sha256": "2f15f3de4468de82d447f709a5d571c039e6e540db411e50858e5923ba511b86"
+    },
+    {
+      "upstream_id": "gp_Ax1()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::gp::Axis1::default",
+      "rust_item": "rustycad_tkmath::gp::Axis1::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/gp/axis1.rs",
+      "source_sha256": "01ec931bea928ff0e04b41069965e008ba0d50bb99d2d016205728249c5a8c29",
+      "declaration_sha256": "e0a970f19c1e64a32ad3894b96e42bd7cb110afed243014fb4c01f061c3b25c1"
+    },
+    {
+      "upstream_id": "BVH_Ray::BVH_Ray()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhRay::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhRay::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/ray.rs",
+      "source_sha256": "75881a1881b04ca1a7f109c5acd810ba18163135abcedbf84accd0295fd97bbe",
+      "declaration_sha256": "4000e4c734deb938478ffb68a71f056e8689b4c90980a8c9e28048e9adfc6292"
+    },
+    {
+      "upstream_id": "BVH_TreeBase::BVH_TreeBase()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhTree::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/tree.rs",
+      "source_sha256": "aa963d8b47bec44111450bacc97f570f56ee1484e5bd6958bcbbadc30eb24a31",
+      "declaration_sha256": "0e3dde6c2b1d3c1b662439ab26b2b46c6b769cf27d61a5af56954040b39795fa"
+    },
+    {
+      "upstream_id": "BVH_Transform::BVH_Transform()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhTransform::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhTransform::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/properties.rs",
+      "source_sha256": "62515332348f9896faeadc751cb93bd5ccf618672ed873f2bb483ec79de2db27",
+      "declaration_sha256": "a15563164e1acbcd416175a4ac4142405f8edede70020421c5d9b61dac8a63bf"
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::BVH_PrimitiveSet()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/primitive_set.rs",
+      "source_sha256": "d91e82713071eda53b5b2930adf2e72dc4043e690ce882599502805c8eea8596",
+      "declaration_sha256": "0305b225a29f435e2cc6b73f58e9df5b4fe0f1cfc7f7ec4ff4986621b307012d"
+    },
+    {
+      "upstream_id": "BVH_Triangulation::BVH_Triangulation()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhTriangulation::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/triangulation.rs",
+      "source_sha256": "d7d8b2ba73b0139e904df6d3d5f168da41faf528c51e10b54f3b75200e72e349",
+      "declaration_sha256": "a6b30845e14a0ae2a949d890587a69cffb5fdef374cac6fee1725d190765becf"
+    },
+    {
+      "upstream_id": "BVH_Distance::BVH_Distance()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhDistance::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/distance.rs",
+      "source_sha256": "20996a13515c022cc3d92008107fa412fac355530c6b0ac1bb30c2fd4c91df8e",
+      "declaration_sha256": "c227a65c40dd942d86194368b2c8a2cdea425a1de6a86e063e78964ee999c8d7"
+    },
+    {
+      "upstream_id": "BVH_PairDistance::BVH_PairDistance()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhPairDistance::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/pair_distance.rs",
+      "source_sha256": "ad7b8837501318f9989c635f7032bf4f64eb87fbd23d1fa3f688f24d2c5ea43d",
+      "declaration_sha256": "21b282e0a6915da9f13047295bf19aa4d6ddb3a5bb583eee1c5be41093a0992c"
+    },
+    {
+      "upstream_id": "BVH_BoxSet::BVH_BoxSet()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhBoxSet::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/box_set.rs",
+      "source_sha256": "fcd628dbeaccec58c6b85497617e386af16cbaf9c28e079cbafd3e3a61a6a603",
+      "declaration_sha256": "45dc4addb059662e42612d8ac15f7a38fcd4c1b80bff6d98a97831c14cd09484"
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::BVH_IndexedBoxSet()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/box_set/indexed.rs",
+      "source_sha256": "3826d925dfb2820120fd96f772c6a1b67676f13e9379c04d6345e2a0da68f9c3",
+      "declaration_sha256": "db508326e7506274868dbfa7158683ba6143bf7c6dfdb7a5d48f59ed9cfc18fe"
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::BVH_ObjectSet()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhObjectSet::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/object_set.rs",
+      "source_sha256": "40c8d206598d7f84a23dfa70aa36b093bd2326b9a4694d5fce16d3c77287b497",
+      "declaration_sha256": "10ed7dff273d0990bacc9deb1312ec070ff66a17ed50c52fdf8cb346af66fba6"
+    },
+    {
+      "upstream_id": "BVH_Geometry::BVH_Geometry()",
+      "toolkit": "TKMath",
+      "previous_rust_item": "rustycad_tkmath::bvh::BvhGeometry::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::<core::default::Default>::default",
+      "source_file": "crates/tkmath/src/bvh/geometry.rs",
+      "source_sha256": "f431e32551f29e8019f72dfea2fccb66f310ab3e725ac8efeedf87d0d7726bd0",
+      "declaration_sha256": "708ec87b6ca4a8651f24199af80b3063a7c243381f13a4f1899d6eb994b20cb9"
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d()",
+      "toolkit": "TKG2d",
+      "previous_rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::default",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<core::default::Default>::default",
+      "source_file": "crates/tkg2d/src/adaptor2d/line2d.rs",
+      "source_sha256": "595d55c295d6992595f3551b0a4d78fc2cfa52e5618e0ca799078c2ce0ae38e6",
+      "declaration_sha256": "0b972c66f93b51de732e6a2fa0bcb351b2c7bbf1996a224cb34ae037685beddf"
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve()",
+      "toolkit": "TKG2d",
+      "previous_rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::default",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<core::default::Default>::default",
+      "source_file": "crates/tkg2d/src/adaptor2d/offset_curve.rs",
+      "source_sha256": "9f63eb0d0a42b35babe51a5e0dfabfa65f2818126fee3cab851cb21c83120a4a",
+      "declaration_sha256": "b42c7aa3192a07bed6aadfabf7f8353a694663c9ddf9f19af6a456d652285b25"
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve()",
+      "toolkit": "TKG2d",
+      "previous_rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::default",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<core::default::Default>::default",
+      "source_file": "crates/tkg2d/src/geom2d_adaptor/curve.rs",
+      "source_sha256": "739062f6058d2367b19ac52a559cd840fa2d3b721b7a05d476c487bd7e372a3c",
+      "declaration_sha256": "71510bbe67b6644ec6570baed1199d89071377899c6d2e9e8733c2066af55863"
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::default",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/int_ana2d/int_point.rs",
+      "source_sha256": "4a830dc531425f84cfa940c2fc07790692a4860a3383713d4b68d781613fe9e7",
+      "declaration_sha256": "492921c0d9032b1f474688d07bc5c068be35ba61f7be210d9a3cb87fd12f5fe2"
+    },
+    {
+      "upstream_id": "Standard_DumpValue()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::standard::dump::DumpValue::default",
+      "rust_item": "rustycad_tkernel::standard::dump::DumpValue::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/standard/dump/split.rs",
+      "source_sha256": "59e9bedc1797d7523de94d8549bc3e9b54e891b8c41d002461ae84965999a514",
+      "declaration_sha256": "0f32d931e078e353acd2e10ff99aa18eda6f8165ea7493de75188397da011c47"
+    },
+    {
+      "upstream_id": "Message_ProgressRange()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::message::ProgressRange::default",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/message/progress_range.rs",
+      "source_sha256": "151bb332a119e7d9ccd0b6a0624e9edc317cbccf8f3bb1f4b24ba79b97efca4f",
+      "declaration_sha256": "bdae228d53bc33277cd3aec80680273e0beddb9c3caf4017379cacb29040aa4d"
+    },
+    {
+      "upstream_id": "Message_ProgressScope()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::message::ProgressScope::default",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/message/progress_scope.rs",
+      "source_sha256": "3c9f28e2673ef1d6f4ac5241a321f313cbfd6f46483d99520a3b21c4e3db41d4",
+      "declaration_sha256": "192db8a260a74d8383bc54d4ac86cc7c1ace80743fdee64ab770a39a71a1ed59"
+    },
+    {
+      "upstream_id": "Units_Explorer()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::units::Explorer::default",
+      "rust_item": "rustycad_tkernel::units::Explorer::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/units/explorer.rs",
+      "source_sha256": "d551e466acabeb750af876ac9517e5c54f883cb976a17f40964815ece3729a5d",
+      "declaration_sha256": "c966bfb21ba5f0ce7659e83bc0d76a6539025116a06a46626f941c6ada815edf"
+    },
+    {
+      "upstream_id": "Storage_Bucket()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::Bucket::default",
+      "rust_item": "rustycad_tkernel::storage::Bucket::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/bucket.rs",
+      "source_sha256": "b303244d49b07db2d99ca7b1bb134e6d8898b051c7ac758eac10d88d5322f023",
+      "declaration_sha256": "289ac49cff6c6284fdc1f6eebd4eb04dec17c70961828145578b4681353b5025"
+    },
+    {
+      "upstream_id": "Storage_Bucket(int)",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::Bucket::default",
+      "rust_item": "rustycad_tkernel::storage::Bucket::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/bucket.rs",
+      "source_sha256": "b303244d49b07db2d99ca7b1bb134e6d8898b051c7ac758eac10d88d5322f023",
+      "declaration_sha256": "289ac49cff6c6284fdc1f6eebd4eb04dec17c70961828145578b4681353b5025"
+    },
+    {
+      "upstream_id": "Storage_BucketOfPersistent(int,int)",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::BucketOfPersistent::default",
+      "rust_item": "rustycad_tkernel::storage::BucketOfPersistent::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/bucket.rs",
+      "source_sha256": "b303244d49b07db2d99ca7b1bb134e6d8898b051c7ac758eac10d88d5322f023",
+      "declaration_sha256": "bf83a98fe5650e8666fe34fef4666fd42245c82dffc351cef1f0fd96889c614a"
+    },
+    {
+      "upstream_id": "Storage_Data()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::Data::default",
+      "rust_item": "rustycad_tkernel::storage::Data::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/data.rs",
+      "source_sha256": "07d8938cb21fbb60f15a0f05d8d2239fa57d4b43fcad383b94ff5943ebe2da63",
+      "declaration_sha256": "05378d2b48269fce21c89152012eda539a68f4a672805a7a9502b5b13bc95fcb"
+    },
+    {
+      "upstream_id": "Storage_HeaderData()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::HeaderData::default",
+      "rust_item": "rustycad_tkernel::storage::HeaderData::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/header_data.rs",
+      "source_sha256": "6c74ba9b2267aede631bb7ecfc87c5bef1031ca1d3f2bd7c311912df2869769e",
+      "declaration_sha256": "82d6283a2fa55a0b4e70b101d3cb6b23546548d9894328c44a8ef483f4e20cd9"
+    },
+    {
+      "upstream_id": "Storage_InternalData()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::InternalData::default",
+      "rust_item": "rustycad_tkernel::storage::InternalData::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/internal_data.rs",
+      "source_sha256": "94b063414fe6bf7e4e1cf0cd694751858bd051ac87f925e9f954e6cce5001494",
+      "declaration_sha256": "7e4ad50e42d2b67dc260db8afcf0673db5a94a032c0cdb8f70cfdd5da978d5b9"
+    },
+    {
+      "upstream_id": "Storage_Root()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::Root::default",
+      "rust_item": "rustycad_tkernel::storage::Root::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/root.rs",
+      "source_sha256": "06571752dd1cf198cc8426baffc19cad54a09509c5b56e041c832a9c0e70d6a7",
+      "declaration_sha256": "f825a8fdb35cb6d8d11751cba7e6f6e5e6c6f1d52418902a958c3c2460256135"
+    },
+    {
+      "upstream_id": "Storage_RootData()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::RootData::default",
+      "rust_item": "rustycad_tkernel::storage::RootData::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/root_data.rs",
+      "source_sha256": "7a4d22605f6332d820b6d77492b3be9586c2da69862b2df4c14a6b48cfd52074",
+      "declaration_sha256": "61b40ff48313567caeb1430f8b408934c7a1c55e55270502dab23e6074a69a41"
+    },
+    {
+      "upstream_id": "Storage_TypeData()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::TypeData::default",
+      "rust_item": "rustycad_tkernel::storage::TypeData::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/type_data.rs",
+      "source_sha256": "c3412755ea4b1e088a364c4d623a341d5cd6cc276bcc5f5d7a9fecf0a5d64cc9",
+      "declaration_sha256": "a56c6a5c29d9351db099466c7896fdcf23f3d1a3166504f903ef0fa97c07a30f"
+    },
+    {
+      "upstream_id": "Storage_TypedCallBack()",
+      "toolkit": "TKernel",
+      "previous_rust_item": "rustycad_tkernel::storage::TypedCallBack::default",
+      "rust_item": "rustycad_tkernel::storage::TypedCallBack::<core::default::Default>::default",
+      "source_file": "crates/tkernel/src/storage/callback.rs",
+      "source_sha256": "2e6b8e73aa48bd1bb86c774a745134223ae671563391917a1cfc14af14d29848",
+      "declaration_sha256": "18c5c87645cb87b148c9827e0de64198b9eda5ea1700400d2023be7405832d1a"
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandlerBase::default",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandlerBase::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/geom_tools/undefined_type_handler.rs",
+      "source_sha256": "907f8463aa6b6fd94e5b7ffb037d7ffde231ea015cb7ff2fe4093740a2c17650",
+      "declaration_sha256": "43f6f4742b5fe7f7b5593422c5c47d9b68b14714da0756ab62f7ea13ce9a94f8"
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::default",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/adv_app2var/context.rs",
+      "source_sha256": "28945c846a68089293507015b032c5f6114c84a56357577fb6043cce289f3c13",
+      "declaration_sha256": "49a5721300dee5994395cf0bd27e1a01bafba243b7e3c31303727aefab0fdf91"
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::default",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/adv_app2var/framework.rs",
+      "source_sha256": "76b6912124a5461de9a6cb50514ffb747a6352d8c1e972f8c161a8c5c7a22924",
+      "declaration_sha256": "a77532de94e0c593bc9af47a625d57106ef26bdd126e03dbd0919585a95ddef2"
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::default",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/adv_app2var/network.rs",
+      "source_sha256": "3965cb3b712ca24227a40e43616ab2830169bed1924c40b511d08e90cf13d3a5",
+      "declaration_sha256": "ba7c09dcebc4b5956558937a4e99eb37ac54e35db4b3c22f76d6cfaff5b9dd8d"
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::default",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/geom2d_convert/ppoint.rs",
+      "source_sha256": "c3333b63209ca9c41d8b4c62611423dc2484f13bbc6b548bccd0242b7ab1ac8e",
+      "declaration_sha256": "3c56ae8ba4f9c164f0c0975ed8befc2d2969bc1a82041e6faeb1bd986e96b7d4"
+    },
+    {
+      "upstream_id": "Extrema_POnSurf()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::extrema::POnSurf::default",
+      "rust_item": "rustycad_tkgeombase::extrema::POnSurf::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/extrema/pon.rs",
+      "source_sha256": "8db95be3ad99d447734f139704f766689fb1279a2f57c7e78f4ceb2e9c3dac3e",
+      "declaration_sha256": "ce024e4d23672e130add2821471f755d79fdd417e8dee5896da1004e85a88a9f"
+    },
+    {
+      "upstream_id": "Extrema_POnSurfParams()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::extrema::POnSurfParams::default",
+      "rust_item": "rustycad_tkgeombase::extrema::POnSurfParams::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/extrema/pon.rs",
+      "source_sha256": "8db95be3ad99d447734f139704f766689fb1279a2f57c7e78f4ceb2e9c3dac3e",
+      "declaration_sha256": "937605eaa6b8b3642899663544e51374624ad59cbc08341ba9ed5c751659ea62"
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::default",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/geom_convert/func_ls_dist.rs",
+      "source_sha256": "c50e6e8eefc72d40f1af497af9aefa8deed27f165ebad86ecf0c3dd3d3af3e95",
+      "declaration_sha256": "500bfa5898f5ec6d3a58ba2950ec029d081c5b172325664db436f9866248d861"
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::default",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/geom_convert/func_ls_dist.rs",
+      "source_sha256": "c50e6e8eefc72d40f1af497af9aefa8deed27f165ebad86ecf0c3dd3d3af3e95",
+      "declaration_sha256": "e4198e700ba963a10d65b3294b666f91917da1e9964e2081856c27911537e73e"
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist()",
+      "toolkit": "TKGeomBase",
+      "previous_rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::default",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::<core::default::Default>::default",
+      "source_file": "crates/tkgeombase/src/geom_convert/func_ls_dist.rs",
+      "source_sha256": "c50e6e8eefc72d40f1af497af9aefa8deed27f165ebad86ecf0c3dd3d3af3e95",
+      "declaration_sha256": "46fd8faebfcb1c7b42e75fb00141161386ef2a17665d0baa0231022889dbca25"
+    }
+  ]
+}
