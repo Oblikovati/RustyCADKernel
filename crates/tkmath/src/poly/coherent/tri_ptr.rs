@@ -1,6 +1,8 @@
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Poly_CoherentTriPtr`: a circular list of allocator-owned triangle members.
+mod nullable;
+
 use rustycad_tkernel::ncollection::{AllocatedBox, BaseAllocator};
 use rustycad_tkernel::standard::Failure;
 use std::collections::HashMap;
@@ -12,7 +14,7 @@ pub struct CoherentTriMember(usize);
 
 #[derive(Debug)]
 struct RingMember {
-    triangle: usize,
+    triangle: Option<usize>,
     next: CoherentTriMember,
     previous: CoherentTriMember,
 }
@@ -37,17 +39,7 @@ impl CoherentTriPtr {
 
     /// A one-member ring in a selected allocator; `CoherentTriPtr::new_in(0, arena)`.
     pub fn new_in(triangle: usize, allocator: BaseAllocator) -> Self {
-        let mut ring = Self {
-            head: None,
-            length: 0,
-            members: HashMap::new(),
-        };
-        let member = ring.allocate_member(triangle, allocator);
-        ring.members.get_mut(&member).unwrap().member.next = member;
-        ring.members.get_mut(&member).unwrap().member.previous = member;
-        ring.head = Some(member);
-        ring.length = 1;
-        ring
+        Self::new_from_nullable_triangle_in(Some(triangle), allocator)
     }
 
     /// Stable identity of the head member; `ring.head_member().unwrap()`.
@@ -57,7 +49,8 @@ impl CoherentTriPtr {
 
     /// Triangle index stored at a stable member; `ring.triangle(member)?`.
     pub fn triangle(&self, member: CoherentTriMember) -> Result<usize, Failure> {
-        Ok(self.member(member)?.triangle)
+        self.triangle_nullable(member)?
+            .ok_or_else(|| null_triangle(member))
     }
 
     /// Changes a stable member's triangle index; `ring.set_member_triangle(member, 3)?`.
@@ -66,8 +59,7 @@ impl CoherentTriPtr {
         member: CoherentTriMember,
         triangle: usize,
     ) -> Result<(), Failure> {
-        self.member_mut(member)?.triangle = triangle;
-        Ok(())
+        self.set_member_triangle_nullable(member, Some(triangle))
     }
 
     /// Next stable member, wrapping at the end; `ring.next_member(member)?`.
@@ -87,10 +79,7 @@ impl CoherentTriPtr {
         triangle: usize,
         allocator: BaseAllocator,
     ) -> Result<CoherentTriMember, Failure> {
-        let following = self.member(member)?.next;
-        let added = self.allocate_member(triangle, allocator);
-        self.link_between(member, added, following);
-        Ok(added)
+        self.append_member_value(member, Some(triangle), allocator)
     }
 
     /// Inserts before a stable member using the supplied allocator; `ring.prepend_member(m, 4, arena)?`.
@@ -101,7 +90,7 @@ impl CoherentTriPtr {
         allocator: BaseAllocator,
     ) -> Result<CoherentTriMember, Failure> {
         let preceding = self.member(member)?.previous;
-        let added = self.allocate_member(triangle, allocator);
+        let added = self.allocate_member(Some(triangle), allocator);
         self.link_between(preceding, added, member);
         Ok(added)
     }
@@ -130,15 +119,15 @@ impl CoherentTriPtr {
 
     /// Triangle of the head member, as `GetTriangle`; `ring.get_triangle()`.
     pub fn get_triangle(&self) -> usize {
-        self.triangle(self.head.expect("a nonempty coherent ring has a head"))
-            .expect("the head member belongs to its ring")
+        self.try_get_triangle()
+            .expect("a coherent ring head must be live")
+            .expect("a coherent ring head must contain a triangle")
     }
 
     /// Re-points the head member, as `SetTriangle`; `ring.set_triangle(3)`.
     pub fn set_triangle(&mut self, triangle: usize) {
-        let head = self.head.expect("a nonempty coherent ring has a head");
-        self.set_member_triangle(head, triangle)
-            .expect("the head member belongs to its ring");
+        self.set_triangle_nullable(Some(triangle))
+            .expect("a coherent ring head must be live");
     }
 
     /// Number of members; `ring.len()`.
@@ -224,7 +213,11 @@ impl CoherentTriPtr {
     /// Drops every allocator-owned ring node; `ring.remove_list()`.
     pub fn remove_list(self) {}
 
-    fn allocate_member(&mut self, triangle: usize, allocator: BaseAllocator) -> CoherentTriMember {
+    fn allocate_member(
+        &mut self,
+        triangle: Option<usize>,
+        allocator: BaseAllocator,
+    ) -> CoherentTriMember {
         let member = allocator.allocate_value(RingMember {
             triangle,
             next: CoherentTriMember(0),
@@ -265,7 +258,7 @@ impl CoherentTriPtr {
         self.length -= 1;
     }
 
-    fn drain_next(&mut self) -> Option<usize> {
+    fn drain_next(&mut self) -> Option<Option<usize>> {
         let head = self.head?;
         let triangle = self.member(head).ok()?.triangle;
         self.unlink_member(head);
@@ -339,13 +332,15 @@ impl Clone for CoherentTriPtr {
                 members: HashMap::new(),
             };
         };
-        let mut clone = Self::new_in(self.get_triangle(), self.allocation(head).allocator.clone());
+        let triangle = self.member(head).unwrap().triangle;
+        let mut clone =
+            Self::new_from_nullable_triangle_in(triangle, self.allocation(head).allocator.clone());
         let mut current = self.next_member(head).unwrap();
         while current != head {
             let source = self.allocation(current);
             let tail = clone.member(clone.head.unwrap()).unwrap().previous;
             clone
-                .append_member(tail, source.member.triangle, source.allocator.clone())
+                .append_member_value(tail, source.member.triangle, source.allocator.clone())
                 .unwrap();
             current = self.next_member(current).unwrap();
         }
@@ -355,7 +350,7 @@ impl Clone for CoherentTriPtr {
 
 impl PartialEq for CoherentTriPtr {
     fn eq(&self, other: &Self) -> bool {
-        self.iter().eq(other.iter())
+        self.triangles_nullable().eq(other.triangles_nullable())
     }
 }
 impl Eq for CoherentTriPtr {}
@@ -367,7 +362,10 @@ impl Drop for CoherentTriPtr {
 
 impl fmt::Debug for CoherentTriPtr {
     fn fmt(&self, output: &mut fmt::Formatter<'_>) -> fmt::Result {
-        output.debug_list().entries(self.iter()).finish()
+        output
+            .debug_list()
+            .entries(self.triangles_nullable())
+            .finish()
     }
 }
 
@@ -418,7 +416,10 @@ impl CoherentTriPtrIterator<'_> {
 impl Iterator for CoherentTriPtrIterator<'_> {
     type Item = usize;
     fn next(&mut self) -> Option<Self::Item> {
-        let value = self.value()?;
+        let current = self.current?;
+        let value = self.value().unwrap_or_else(|| {
+            panic!("coherent ring iterator reached null triangle at {current:?}")
+        });
         self.advance();
         Some(value)
     }
@@ -427,6 +428,22 @@ impl Iterator for CoherentTriPtrIterator<'_> {
 fn missing_member(member: CoherentTriMember) -> Failure {
     let message = format!("coherent ring member {member:?} is not live");
     Failure::with_type("Standard_NoSuchObject", &message, "")
+}
+
+fn null_triangle(member: CoherentTriMember) -> Failure {
+    Failure::with_type(
+        "Standard_NullObject",
+        &format!("coherent ring member {member:?} contains a null triangle pointer"),
+        "",
+    )
+}
+
+fn empty_ring() -> Failure {
+    Failure::with_type(
+        "Standard_NoSuchObject",
+        "coherent triangle ring is empty; expected a head member",
+        "",
+    )
 }
 
 fn allocator_mismatch(member: CoherentTriMember) -> Failure {
@@ -448,7 +465,7 @@ mod tests {
         ring.prepend_member(head, 3, allocator).unwrap();
         assert_eq!(
             std::iter::from_fn(|| ring.drain_next()).collect::<Vec<_>>(),
-            [1, 2, 3]
+            [Some(1), Some(2), Some(3)]
         );
     }
 }
