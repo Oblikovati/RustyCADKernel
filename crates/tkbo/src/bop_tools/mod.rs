@@ -60,3 +60,6 @@ pub use compute_state::{
     compute_state_by_one_point, compute_state_edge, compute_state_face, compute_state_point,
     compute_state_vertex,
 };
+
+mod wire_hole;
+pub use wire_hole::is_hole;

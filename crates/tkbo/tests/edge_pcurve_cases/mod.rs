@@ -194,3 +194,5 @@ mod edge_construction;
 mod vertex_update;
 
 mod make_section_pcurve;
+
+mod wire_hole;
