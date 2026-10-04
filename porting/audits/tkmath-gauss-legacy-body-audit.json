@@ -1,0 +1,177 @@
+{
+  "body_observation": {
+    "native_source_detail": "The body constructs aSingular with 1e-25 entries, but never passes it to math_Gauss or asserts on it; it checks default-pivot success on another matrix and failure on a zero matrix.",
+    "native_test": "MathGaussTest.CustomMinPivot",
+    "rust_legacy_body": "Mirrors that declaration and its observable assertions, retaining the unused initialized matrix.",
+    "supplemental_probe": {
+      "classification": "Supplemental source comparison; not a legacy GoogleTest declaration.",
+      "expected": "tools/oracle/tkmath_gauss_min_pivot_probe.expected",
+      "input": "2x2 diagonal matrix with both diagonal values 1e-21; compare default MinPivot 1e-20 and explicit MinPivot 1e-25.",
+      "native_compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_gauss_min_pivot_probe.cxx target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0 target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0 -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkmath_gauss_min_pivot_probe",
+      "native_result": "0 1",
+      "rust_counterpart": "gauss_behavior::minimum_pivot_and_non_square_constructor_follow_native_rules",
+      "source": "tools/oracle/tkmath_gauss_min_pivot_probe.cxx"
+    }
+  },
+  "declarations": [
+    {
+      "native_line": 29,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "WellConditionedMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_0.rs",
+      "rust_test": "MathGaussTest__WellConditionedMatrix"
+    },
+    {
+      "native_line": 72,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "IdentityMatrix",
+      "rust_line": 43,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_0.rs",
+      "rust_test": "MathGaussTest__IdentityMatrix"
+    },
+    {
+      "native_line": 103,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "DiagonalMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_1.rs",
+      "rust_test": "MathGaussTest__DiagonalMatrix"
+    },
+    {
+      "native_line": 134,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "InPlaceSolve",
+      "rust_line": 33,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_1.rs",
+      "rust_test": "MathGaussTest__InPlaceSolve"
+    },
+    {
+      "native_line": 164,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "Determinant",
+      "rust_line": 63,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_1.rs",
+      "rust_test": "MathGaussTest__Determinant"
+    },
+    {
+      "native_line": 186,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "MatrixInversion",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_2.rs",
+      "rust_test": "MathGaussTest__MatrixInversion"
+    },
+    {
+      "native_line": 229,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "SingularMatrix",
+      "rust_line": 42,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_2.rs",
+      "rust_test": "MathGaussTest__SingularMatrix"
+    },
+    {
+      "native_line": 253,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "CustomMinPivot",
+      "rust_line": 65,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_2.rs",
+      "rust_test": "MathGaussTest__CustomMinPivot"
+    },
+    {
+      "native_line": 284,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "LargerMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_3.rs",
+      "rust_test": "MathGaussTest__LargerMatrix"
+    },
+    {
+      "native_line": 335,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "DimensionCompatibility",
+      "rust_line": 51,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_3.rs",
+      "rust_test": "MathGaussTest__DimensionCompatibility"
+    },
+    {
+      "native_line": 372,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "SingularMatrixState",
+      "rust_line": 88,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_3.rs",
+      "rust_test": "MathGaussTest__SingularMatrixState"
+    },
+    {
+      "native_line": 385,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx",
+      "native_suite": "MathGaussTest",
+      "native_test": "CustomBounds",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_gauss/suites_4.rs",
+      "rust_test": "MathGaussTest__CustomBounds"
+    }
+  ],
+  "input_sha256": {
+    "crates/tkmath/tests/gauss_behavior.rs": "1703b84edb8a59cf33a72015a15bc9d674436c6422f1d6ab9f1d5f3ed03fa91d",
+    "crates/tkmath/tests/math_gauss.rs": "fc2b6352f12b92d8f02f6563cd501b93bfaa17db2110d0071dbc85a0bdb74c08",
+    "crates/tkmath/tests/math_gauss/suites_0.rs": "b88e8add0d4a81083396fd20c42c71c0e99b2a69240b9e48d9ae547a3bcad44c",
+    "crates/tkmath/tests/math_gauss/suites_1.rs": "4c4e1a8ec87431fbd8db07a5e43b6d3b4b5777748e33311d28cbf25cb85b9107",
+    "crates/tkmath/tests/math_gauss/suites_2.rs": "df4766ad67f18158e5a0c7bdd24ccb4f898b9bdeaa63816e30c3b5b480b5e19c",
+    "crates/tkmath/tests/math_gauss/suites_3.rs": "682bf84faba227e2e750582e697b6d5ffea170f6fddef9df7dd1bc7d9b3b2628",
+    "crates/tkmath/tests/math_gauss/suites_4.rs": "88bd6999c33c42f397e6468e73f02d451f1726fed26dc7c440011ce975a2aa06",
+    "src/FoundationClasses/TKMath/GTests/math_Gauss_Test.cxx": "e60ff631a98b02bf182fa9ca9973045922b694e9d3ae9b26641d95df795f99db",
+    "tools/oracle/tkmath_gauss_min_pivot_probe.cxx": "7735dc0d70f6df6daf84aa81357a112502cc439e243dda881325af9720885c48",
+    "tools/oracle/tkmath_gauss_min_pivot_probe.expected": "a79122992d53d358e6bbbbb98883d64fa0c15df3bcb08ff7b65a0580870af424"
+  },
+  "native_build": {
+    "configuration": "target/occt-modeling-full",
+    "ctest_registration_sha256": "00546ab6a7d87537d0934a22348c2a6af18165b5a64ab2118e4a9607dc8c7bea",
+    "executable": "target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest",
+    "executable_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "native_legacy_declaration_count": 12,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_mapped_legacy_declaration_count": 12,
+  "rust_revision": "5715d0c86f1635797e782138dd1cd8a76085d4f9",
+  "schema": "tkmath-gauss-legacy-body-audit-v1",
+  "scope": "Exact native/Rust declaration and body audit for math_Gauss with a separately recorded supplement probing the ineffective min-pivot legacy setup.",
+  "status": "All 12 native declarations map one-to-one and pass in both suites. No omitted Rust assertion was found in the remaining Gaussian body. The native CustomMinPivot declaration does not actually test its prepared aSingular input; the separately labeled probe confirms the supported threshold behavior.",
+  "validation": [
+    {
+      "command": "ctest --test-dir target/occt-modeling-full --output-on-failure -R 'FoundationClasses::TKMath::MathGaussTest\\.'",
+      "exit_code": 0,
+      "kind": "native_ctest",
+      "log": "porting/audits/evidence/tkmath-gauss-native.log",
+      "log_sha256": "17746b7939b2db8493bc383027db314a730a3eadad76444611677b6c858a756d",
+      "result": "12/12 passed"
+    },
+    {
+      "command": "cargo +1.98.1 test -p rustycad-tkmath --test math_gauss --test gauss_behavior",
+      "exit_code": 0,
+      "kind": "rust_cargo_test",
+      "log": "porting/audits/evidence/tkmath-gauss-rust.log",
+      "log_sha256": "a1bd687ff95e380f624efabced2ea0c2615f7a1abf7d351877cf8873292c3e6e",
+      "result": "16 passed: 12 legacy mappings and 4 supplemental behavior tests",
+      "toolchain": "rustc 1.98.1"
+    },
+    {
+      "command": "/tmp/tkmath_gauss_min_pivot_probe",
+      "exit_code": 0,
+      "expected_sha256": "a79122992d53d358e6bbbbb98883d64fa0c15df3bcb08ff7b65a0580870af424",
+      "kind": "native_standalone_probe",
+      "result": "0 1"
+    }
+  ]
+}
