@@ -135,14 +135,18 @@ fn unsupported_join_mode_returns_a_named_partial_port_error() {
 }
 
 #[test]
-fn multiple_faces_stop_at_the_explicit_single_face_boundary() {
+fn unrelated_multi_face_offset_stops_at_the_shared_surface_boundary() {
     let mut source = BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0).unwrap();
     let shape = source.shape().unwrap().clone();
     let mut maker = initialized(&shape, 0.5);
 
     let error = maker.make_offset_shape().unwrap_err();
     assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("exactly one source face"));
+    assert!(
+        error
+            .message()
+            .contains("requires a shared support surface")
+    );
     assert!(!maker.is_done());
     assert!(maker.shape().is_null());
 }
