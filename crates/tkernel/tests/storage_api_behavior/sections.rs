@@ -142,6 +142,25 @@ fn driver_base_and_the_stream_shorthands() {
 }
 
 #[test]
+fn protected_driver_setters_change_state_without_opening_the_stream() {
+    use rustycad_tkernel::fsd::{File, MemoryFileSystem};
+    use std::rc::Rc;
+
+    let mut file = File::new(Rc::new(MemoryFileSystem::default()));
+    file.set_name(&"before".into());
+    file.set_open_mode(OpenMode::Read);
+    assert_eq!(file.name().as_bytes(), b"before");
+    assert_eq!(
+        file.open(&"request".into(), OpenMode::Write).unwrap(),
+        StorageError::AlreadyOpen
+    );
+    assert_eq!(file.name().as_bytes(), b"request");
+    assert_eq!(file.close().unwrap(), StorageError::Ok);
+    assert_eq!(file.open_mode(), OpenMode::None);
+    assert_eq!(file.name().as_bytes(), b"request");
+}
+
+#[test]
 fn magic_number_reads_seven_characters_and_repeats_the_last_at_end_of_input() {
     let mut stream = IoStream::from_bytes(b"BINFILEextra".to_vec());
     assert_eq!(

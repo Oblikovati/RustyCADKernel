@@ -97797,6 +97797,22 @@
       "notes": "Storage_BaseDriver is the trait BaseDriver over HeaderSections, TableSections, DataSections and DriverPrimitives; every step returns Result so driver exceptions (Storage_Stream*Error) propagate; &mut dyn BaseDriver replaces the handle; name/open mode live in DriverBase. operator<</>> are the chaining put/get on dyn BaseDriver. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
+      "upstream_id": "Storage_BaseDriver::SetName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "rust_item": "rustycad_tkernel::storage::BaseDriver::set_name",
+      "status": "implemented",
+      "notes": "Native protected setter is exposed through a default BaseDriver method delegating to DriverBase. Native derived-class probe tools/oracle/tkernel_storage_base_driver_setters.cxx confirms name mutation, Open's pre-AlreadyOpen name update, and Close preserving the name."
+    },
+    {
+      "upstream_id": "Storage_BaseDriver::SetOpenMode(Storage_OpenMode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "rust_item": "rustycad_tkernel::storage::BaseDriver::set_open_mode",
+      "status": "implemented",
+      "notes": "Native protected setter is exposed through a default BaseDriver method delegating to DriverBase. Native derived-class probe tools/oracle/tkernel_storage_base_driver_setters.cxx confirms mode mutation, Open reporting AlreadyOpen without a stream, and Close resetting the mode."
+    },
+    {
       "upstream_id": "Storage_BaseDriver::ReadMagicNumber(Standard_IStream&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
