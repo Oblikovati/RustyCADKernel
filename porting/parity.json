@@ -26282,7 +26282,7 @@
       "upstream_id": "Geom2dEval_RepCurveDesc::Full::GetKind",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::kind",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::<rustycad_tkg2d::geom2d_eval::RepCurveDesc>::kind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -26290,7 +26290,7 @@
       "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::GetKind",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::kind",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::<rustycad_tkg2d::geom2d_eval::RepCurveDesc>::kind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -26306,7 +26306,7 @@
       "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::GetKind",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::kind",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::<rustycad_tkg2d::geom2d_eval::RepCurveDesc>::kind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -26754,7 +26754,7 @@
       "upstream_id": "Adaptor2d_Line2d::ShallowCopy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::shallow_copy",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::shallow_copy",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26778,7 +26778,7 @@
       "upstream_id": "Adaptor2d_Line2d::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::first_parameter",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::first_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26786,7 +26786,7 @@
       "upstream_id": "Adaptor2d_Line2d::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::last_parameter",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::last_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26794,7 +26794,7 @@
       "upstream_id": "Adaptor2d_Line2d::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::continuity",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::continuity",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26802,7 +26802,7 @@
       "upstream_id": "Adaptor2d_Line2d::NbIntervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_intervals",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26810,7 +26810,7 @@
       "upstream_id": "Adaptor2d_Line2d::Intervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::intervals",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26818,7 +26818,7 @@
       "upstream_id": "Adaptor2d_Line2d::Trim",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::trim",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::trim",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26826,7 +26826,7 @@
       "upstream_id": "Adaptor2d_Line2d::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_closed",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_closed",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26834,7 +26834,7 @@
       "upstream_id": "Adaptor2d_Line2d::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_periodic",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_periodic",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26842,7 +26842,7 @@
       "upstream_id": "Adaptor2d_Line2d::Period",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::period",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::period",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26850,7 +26850,7 @@
       "upstream_id": "Adaptor2d_Line2d::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d0",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d0",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26858,7 +26858,7 @@
       "upstream_id": "Adaptor2d_Line2d::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d1",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d1",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26866,7 +26866,7 @@
       "upstream_id": "Adaptor2d_Line2d::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d2",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d2",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26874,7 +26874,7 @@
       "upstream_id": "Adaptor2d_Line2d::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d3",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d3",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26882,7 +26882,7 @@
       "upstream_id": "Adaptor2d_Line2d::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_dn",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_dn",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26890,7 +26890,7 @@
       "upstream_id": "Adaptor2d_Line2d::Resolution",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::resolution",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::resolution",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26898,7 +26898,7 @@
       "upstream_id": "Adaptor2d_Line2d::GetType",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::get_type",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::get_type",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26906,7 +26906,7 @@
       "upstream_id": "Adaptor2d_Line2d::Line",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::line",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::line",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26914,7 +26914,7 @@
       "upstream_id": "Adaptor2d_Line2d::Circle",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::circle",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::circle",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26922,7 +26922,7 @@
       "upstream_id": "Adaptor2d_Line2d::Ellipse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::ellipse",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::ellipse",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26930,7 +26930,7 @@
       "upstream_id": "Adaptor2d_Line2d::Hyperbola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::hyperbola",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::hyperbola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26938,7 +26938,7 @@
       "upstream_id": "Adaptor2d_Line2d::Parabola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::parabola",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::parabola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26946,7 +26946,7 @@
       "upstream_id": "Adaptor2d_Line2d::Degree",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::degree",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::degree",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26954,7 +26954,7 @@
       "upstream_id": "Adaptor2d_Line2d::IsRational",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_rational",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_rational",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26962,7 +26962,7 @@
       "upstream_id": "Adaptor2d_Line2d::NbPoles",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_poles",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_poles",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26970,7 +26970,7 @@
       "upstream_id": "Adaptor2d_Line2d::NbKnots",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_knots",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_knots",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26978,7 +26978,7 @@
       "upstream_id": "Adaptor2d_Line2d::Bezier",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::bezier",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bezier",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -26986,7 +26986,7 @@
       "upstream_id": "Adaptor2d_Line2d::BSpline",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::bspline",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bspline",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27034,7 +27034,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::ShallowCopy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::shallow_copy",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::shallow_copy",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27082,7 +27082,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::first_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27090,7 +27090,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::last_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27098,7 +27098,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::continuity",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::continuity",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27106,7 +27106,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::NbIntervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_intervals",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27114,7 +27114,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Intervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::intervals",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27122,7 +27122,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Trim",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::trim",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::trim",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27130,7 +27130,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_closed",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27138,7 +27138,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_periodic",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27146,7 +27146,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Period",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::period",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::period",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27154,7 +27154,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d0",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27162,7 +27162,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d1",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27170,7 +27170,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d2",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27178,7 +27178,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d3",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27186,7 +27186,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_dn",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27194,7 +27194,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Resolution",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::resolution",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::resolution",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27202,7 +27202,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::GetType",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::get_type",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::get_type",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27210,7 +27210,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Line",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::line",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::line",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27218,7 +27218,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Circle",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::circle",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::circle",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27226,7 +27226,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Ellipse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::ellipse",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::ellipse",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27234,7 +27234,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Hyperbola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::hyperbola",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::hyperbola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27242,7 +27242,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Parabola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::parabola",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::parabola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27250,7 +27250,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Degree",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::degree",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::degree",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27258,7 +27258,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::IsRational",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_rational",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_rational",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27266,7 +27266,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::NbPoles",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_poles",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_poles",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27274,7 +27274,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::NbKnots",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_knots",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_knots",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27282,7 +27282,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::Bezier",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::bezier",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bezier",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27290,7 +27290,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::BSpline",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::bspline",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bspline",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27298,7 +27298,7 @@
       "upstream_id": "Adaptor2d_OffsetCurve::NbSamples",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
-      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_samples",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_samples",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27346,7 +27346,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::ShallowCopy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::shallow_copy",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::shallow_copy",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27394,7 +27394,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::first_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27402,7 +27402,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::last_parameter",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27410,7 +27410,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::continuity",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27418,7 +27418,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::NbIntervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_intervals",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27426,7 +27426,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Intervals",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::intervals",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::intervals",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27434,7 +27434,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Trim",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::trim",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::trim",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27442,7 +27442,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_closed",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27450,7 +27450,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_periodic",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27458,7 +27458,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Period",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::period",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::period",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27466,7 +27466,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Resolution",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::resolution",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::resolution",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27474,7 +27474,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::GetType",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::get_type",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::get_type",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27482,7 +27482,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Line",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::line",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::line",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27490,7 +27490,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Circle",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::circle",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::circle",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27498,7 +27498,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Ellipse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::ellipse",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::ellipse",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27506,7 +27506,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Hyperbola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::hyperbola",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::hyperbola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27514,7 +27514,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Parabola",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::parabola",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::parabola",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27522,7 +27522,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Degree",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::degree",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::degree",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27530,7 +27530,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::IsRational",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_rational",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::is_rational",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27538,7 +27538,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::NbPoles",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_poles",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_poles",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27546,7 +27546,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::NbKnots",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_knots",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_knots",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27554,7 +27554,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::NbSamples",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_samples",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::nb_samples",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27562,7 +27562,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::Bezier",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::bezier",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bezier",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27570,7 +27570,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::BSpline",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::bspline",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::bspline",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27578,7 +27578,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d0",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27586,7 +27586,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d1",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27594,7 +27594,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d2",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27602,7 +27602,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_d3",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -27610,7 +27610,7 @@
       "upstream_id": "Geom2dAdaptor_Curve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::<rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d>::eval_dn",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
@@ -36012,7 +36012,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::StartPoint",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::start_point",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dBoundedCurve>::start_point",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36020,7 +36020,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EndPoint",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::end_point",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dBoundedCurve>::end_point",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36028,7 +36028,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36036,7 +36036,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36044,7 +36044,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36052,7 +36052,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36060,7 +36060,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36068,7 +36068,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36076,7 +36076,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36084,7 +36084,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36092,7 +36092,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36100,7 +36100,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36108,7 +36108,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36116,7 +36116,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36124,7 +36124,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36132,7 +36132,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36140,7 +36140,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36148,7 +36148,7 @@
       "upstream_id": "Geom2dEval_AHTBezierCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_AHTBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalAHTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36196,7 +36196,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36204,7 +36204,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36212,7 +36212,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36220,7 +36220,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36228,7 +36228,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36236,7 +36236,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36244,7 +36244,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36252,7 +36252,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36260,7 +36260,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36268,7 +36268,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36276,7 +36276,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36284,7 +36284,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36292,7 +36292,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36300,7 +36300,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36308,7 +36308,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36316,7 +36316,7 @@
       "upstream_id": "Geom2dEval_ArchimedeanSpiralCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_ArchimedeanSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalArchimedeanSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36356,7 +36356,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36364,7 +36364,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36372,7 +36372,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36380,7 +36380,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36388,7 +36388,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36396,7 +36396,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36404,7 +36404,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36412,7 +36412,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36420,7 +36420,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36428,7 +36428,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36436,7 +36436,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36444,7 +36444,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36452,7 +36452,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36460,7 +36460,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36468,7 +36468,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36476,7 +36476,7 @@
       "upstream_id": "Geom2dEval_CircleInvoluteCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_CircleInvoluteCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalCircleInvoluteCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36524,7 +36524,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36532,7 +36532,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36540,7 +36540,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36548,7 +36548,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36556,7 +36556,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36564,7 +36564,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36572,7 +36572,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36580,7 +36580,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36588,7 +36588,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36596,7 +36596,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36604,7 +36604,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36612,7 +36612,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36620,7 +36620,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36628,7 +36628,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36636,7 +36636,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36644,7 +36644,7 @@
       "upstream_id": "Geom2dEval_LogarithmicSpiralCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_LogarithmicSpiralCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalLogarithmicSpiralCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36740,7 +36740,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36748,7 +36748,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36756,7 +36756,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36764,7 +36764,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36772,7 +36772,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36780,7 +36780,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36788,7 +36788,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36796,7 +36796,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36804,7 +36804,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36812,7 +36812,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36820,7 +36820,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36828,7 +36828,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36836,7 +36836,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36844,7 +36844,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36852,7 +36852,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36860,7 +36860,7 @@
       "upstream_id": "Geom2dEval_SineWaveCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_SineWaveCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalSineWaveCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36940,7 +36940,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::StartPoint",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::start_point",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dBoundedCurve>::start_point",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36948,7 +36948,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EndPoint",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::end_point",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dBoundedCurve>::end_point",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36956,7 +36956,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::reverse",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36964,7 +36964,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::ReversedParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::reversed_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36972,7 +36972,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::FirstParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::first_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36980,7 +36980,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::LastParameter",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::last_parameter",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36988,7 +36988,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::IsClosed",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::is_closed",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -36996,7 +36996,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::IsPeriodic",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::is_periodic",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37004,7 +37004,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::Continuity",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::continuity",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37012,7 +37012,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::IsCN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::is_cn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37020,7 +37020,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EvalD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::eval_d0",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37028,7 +37028,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EvalD1",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::eval_d1",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37036,7 +37036,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EvalD2",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::eval_d2",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37044,7 +37044,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EvalD3",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::eval_d3",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37052,7 +37052,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::EvalDN",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::eval_dn",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37060,7 +37060,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::Transform",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::transform",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37068,7 +37068,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::Copy",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::copy",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
@@ -37076,7 +37076,7 @@
       "upstream_id": "Geom2dEval_TBezierCurve::DumpJson",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::dump_json",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Geom2dEvalTBezierCurve::<rustycad_tkg2d::geom2d::Geom2dGeometry>::dump_json",
       "status": "implemented",
       "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom2d lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing. Authoritative toolkit API enumeration pending."
     },
