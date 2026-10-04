@@ -88,8 +88,8 @@
     "Keep supplemental oracle probes separate from original legacy mappings."
   ],
   "current_work": {
-    "TKernel": "Nullable frees, protected allocator alignment/key helpers, and byte-domain Strtod/Atof are implemented with native probes. Continue C-locale formatting family and platform backends; retain Windows and Unix destructor-resource differences as partial.",
-    "TKMath": "Non-rational global/local high-order cache derivatives, curve/surface transient identity, matrix reindex and Householder reuse hooks, and compact Bnd comparison hooks are implemented with native probes. Generic Bnd type-alias method normalization, descriptor-handle semantics, and mutable cache wrapper integration remain unresolved/partial.",
+    "TKernel": "Public typed C-string formatting wrappers now reuse the existing engine (partial format/stdio domain). Allocator key field borrowing and full integer stream putback inputs are implemented with native probes. Native stream override dispatch and platform backends remain partial.",
+    "TKMath": "Public protected gp_Ax2 direction helpers now expose existing algorithms with native probes. Const-specialized alias inventory support added with explicit bindings and fail-closed constraints; refresh inventory to confirm Bnd method resolution. Descriptor-handle semantics and mutable cache wrapper integration remain partial.",
     "TKG2d/TKG3d": "Public curve/surface adaptor records, shared nullable spline caches, and scoped B-spline pole readers implemented with native probes. Const-reference lifetime parity and cache RTTI remain open.",
     "TKGeomBase/TKGeomAlgo": "Audit missing callable implementations and select dependency blockers."
   },
@@ -116,7 +116,7 @@
       "toolkit": "TKernel",
       "surface": "Standard_CString Printf/Fprintf/Sprintf/Vsprintf",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "gap": "No public Standard_CString formatting API. Existing private crates/tkernel/src/c_format.rs already implements the subset consumed by Message/OSD; reuse and extend it rather than duplicating formatting logic. Expose typed arguments and output/writer interfaces preserving native percent-format behavior.",
+      "gap": "Public typed formatting wrappers now exist. Extend the shared engine for remaining defined conversions and widths; fixed caller-buffer tail semantics, C int count overflow and stdio behavior remain partial. See tools/oracle/tkernel_c_string_format.md.",
       "audit_revision": "5b5912bd"
     },
     {
@@ -132,6 +132,12 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.cxx",
       "gap": "Non-Unix loader is a failure stub. Port native Windows loading, symbol lookup, unload and error behavior used by Plugin; require native DLL oracle fixture.",
       "audit_revision": "5b5912bd"
+    },
+    {
+      "toolkit": "TKernel",
+      "surface": "Standard_ArrayStreamBuffer virtual override interface",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "gap": "Concrete buffer behavior is implemented, including signed integer putback. Native virtual Init and protected stream hook overriding have no equivalent Rust trait/base surface. See porting/audits/array-stream-override-surface.md."
     }
   ]
 }
