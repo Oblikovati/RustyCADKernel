@@ -92,3 +92,6 @@ pub use face_off::get_face_off;
 
 mod internal_face;
 pub use internal_face::internal_face_between;
+
+mod internal_solid_face;
+pub use internal_solid_face::internal_face_in_solid;

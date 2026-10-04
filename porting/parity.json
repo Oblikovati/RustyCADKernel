@@ -227466,6 +227466,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::internal_face_between",
       "status": "partial",
       "notes": "280 native box/cylinder/sphere/thin-box angular classification observations, identical boundaries and four target orientations; tools/oracle/tkbo_face_off.md. General topology/location/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsInternalFace(const TopoDS_Face &, const TopoDS_Solid &, NCollection_IndexedDataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, const double, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::internal_face_in_solid",
+      "status": "partial",
+      "notes": "160 native located box-face, orientation, adjacency and fallback observations; tools/oracle/tkbo_internal_solid_face.md. Singleton internal-edge/non-manifold/curved/failure and complete legacy/API parity unproven."
     }
   ],
   "tests": [
