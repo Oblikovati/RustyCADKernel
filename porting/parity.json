@@ -40431,9 +40431,9 @@
       "upstream_id": "TopLoc_Location::operator gp_Trsf() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/TopLoc/TopLoc_Location.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform3 as From<&rustycad_tkmath::toploc::Location>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform3 as core::convert::From<&rustycad_tkmath::toploc::Location>>::from",
       "status": "implemented",
-      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself."
+      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself. Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "TopLoc_Location::Inverted() const",
@@ -59180,9 +59180,9 @@
       "upstream_id": "gce_MakeCirc2d::operator gp_Circ2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeCirc2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Circle2 as TryFrom<&rustycad_tkgeombase::gce::MakeCirc2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Circle2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeCirc2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeCone::gce_MakeCone(const gp_Ax2&,double,double)",
@@ -59260,9 +59260,9 @@
       "upstream_id": "gce_MakeCone::operator gp_Cone() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeCone.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Cone3 as TryFrom<&rustycad_tkgeombase::gce::MakeCone>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Cone3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeCone>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeCylinder::gce_MakeCylinder(const gp_Ax2&,double)",
@@ -59332,9 +59332,9 @@
       "upstream_id": "gce_MakeCylinder::operator gp_Cylinder() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeCylinder.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Cylinder3 as TryFrom<&rustycad_tkgeombase::gce::MakeCylinder>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Cylinder3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeCylinder>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeDir::gce_MakeDir(const gp_Vec&)",
@@ -59388,9 +59388,9 @@
       "upstream_id": "gce_MakeDir::operator gp_Dir() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeDir.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Direction3 as TryFrom<&rustycad_tkgeombase::gce::MakeDir>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Direction3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeDir>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeDir2d::gce_MakeDir2d(const gp_Vec2d&)",
@@ -59444,9 +59444,9 @@
       "upstream_id": "gce_MakeDir2d::operator gp_Dir2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeDir2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Direction2 as TryFrom<&rustycad_tkgeombase::gce::MakeDir2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Direction2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeDir2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeElips::gce_MakeElips(const gp_Ax2&,double,double)",
@@ -59484,9 +59484,9 @@
       "upstream_id": "gce_MakeElips::operator gp_Elips() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeElips.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Ellipse3 as TryFrom<&rustycad_tkgeombase::gce::MakeElips>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Ellipse3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeElips>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeElips2d::gce_MakeElips2d(const gp_Ax2d&,double,double,bool)",
@@ -59532,9 +59532,9 @@
       "upstream_id": "gce_MakeElips2d::operator gp_Elips2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeElips2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Ellipse2 as TryFrom<&rustycad_tkgeombase::gce::MakeElips2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Ellipse2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeElips2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeHypr::gce_MakeHypr(const gp_Ax2&,double,double)",
@@ -59572,9 +59572,9 @@
       "upstream_id": "gce_MakeHypr::operator gp_Hypr() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeHypr.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Hyperbola3 as TryFrom<&rustycad_tkgeombase::gce::MakeHypr>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Hyperbola3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeHypr>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeHypr2d::gce_MakeHypr2d(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
@@ -59620,9 +59620,9 @@
       "upstream_id": "gce_MakeHypr2d::operator gp_Hypr2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeHypr2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Hyperbola2 as TryFrom<&rustycad_tkgeombase::gce::MakeHypr2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Hyperbola2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeHypr2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeLin::gce_MakeLin(const gp_Ax1&)",
@@ -59676,9 +59676,9 @@
       "upstream_id": "gce_MakeLin::operator gp_Lin() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeLin.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Line3 as TryFrom<&rustycad_tkgeombase::gce::MakeLin>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Line3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeLin>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeLin2d::gce_MakeLin2d(const gp_Ax2d&)",
@@ -59748,9 +59748,9 @@
       "upstream_id": "gce_MakeLin2d::operator gp_Lin2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeLin2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Line2 as TryFrom<&rustycad_tkgeombase::gce::MakeLin2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Line2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeLin2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeMirror::gce_MakeMirror(const gp_Pnt&)",
@@ -59820,9 +59820,9 @@
       "upstream_id": "gce_MakeMirror::operator gp_Trsf() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeMirror.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform3 as From<&rustycad_tkgeombase::gce::MakeMirror>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform3 as core::convert::From<&rustycad_tkgeombase::gce::MakeMirror>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeMirror2d::gce_MakeMirror2d(const gp_Pnt2d&)",
@@ -59876,9 +59876,9 @@
       "upstream_id": "gce_MakeMirror2d::operator gp_Trsf2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeMirror2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform2 as From<&rustycad_tkgeombase::gce::MakeMirror2d>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform2 as core::convert::From<&rustycad_tkgeombase::gce::MakeMirror2d>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeParab::gce_MakeParab(const gp_Ax2&,double)",
@@ -59916,9 +59916,9 @@
       "upstream_id": "gce_MakeParab::operator gp_Parab() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeParab.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Parabola3 as TryFrom<&rustycad_tkgeombase::gce::MakeParab>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Parabola3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeParab>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeParab2d::gce_MakeParab2d(const gp_Ax2d&,double,bool)",
@@ -59972,9 +59972,9 @@
       "upstream_id": "gce_MakeParab2d::operator gp_Parab2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeParab2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Parabola2 as TryFrom<&rustycad_tkgeombase::gce::MakeParab2d>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Parabola2 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeParab2d>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakePln::gce_MakePln(const gp_Ax2&)",
@@ -60060,9 +60060,9 @@
       "upstream_id": "gce_MakePln::operator gp_Pln() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakePln.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Plane3 as TryFrom<&rustycad_tkgeombase::gce::MakePln>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Plane3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakePln>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeRotation::gce_MakeRotation(const gp_Lin&,double)",
@@ -60108,9 +60108,9 @@
       "upstream_id": "gce_MakeRotation::operator gp_Trsf() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeRotation.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform3 as From<&rustycad_tkgeombase::gce::MakeRotation>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform3 as core::convert::From<&rustycad_tkgeombase::gce::MakeRotation>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeRotation2d::gce_MakeRotation2d(const gp_Pnt2d&,double)",
@@ -60140,9 +60140,9 @@
       "upstream_id": "gce_MakeRotation2d::operator gp_Trsf2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeRotation2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform2 as From<&rustycad_tkgeombase::gce::MakeRotation2d>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform2 as core::convert::From<&rustycad_tkgeombase::gce::MakeRotation2d>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeScale::gce_MakeScale(const gp_Pnt&,double)",
@@ -60172,9 +60172,9 @@
       "upstream_id": "gce_MakeScale::operator gp_Trsf() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeScale.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform3 as From<&rustycad_tkgeombase::gce::MakeScale>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform3 as core::convert::From<&rustycad_tkgeombase::gce::MakeScale>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeScale2d::gce_MakeScale2d(const gp_Pnt2d&,double)",
@@ -60204,9 +60204,9 @@
       "upstream_id": "gce_MakeScale2d::operator gp_Trsf2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeScale2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform2 as From<&rustycad_tkgeombase::gce::MakeScale2d>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform2 as core::convert::From<&rustycad_tkgeombase::gce::MakeScale2d>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeTranslation::gce_MakeTranslation(const gp_Vec&)",
@@ -60244,9 +60244,9 @@
       "upstream_id": "gce_MakeTranslation::operator gp_Trsf() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeTranslation.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform3 as From<&rustycad_tkgeombase::gce::MakeTranslation>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform3 as core::convert::From<&rustycad_tkgeombase::gce::MakeTranslation>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_MakeTranslation2d::gce_MakeTranslation2d(const gp_Vec2d&)",
@@ -60284,9 +60284,9 @@
       "upstream_id": "gce_MakeTranslation2d::operator gp_Trsf2d() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeTranslation2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Transform2 as From<&rustycad_tkgeombase::gce::MakeTranslation2d>>::from",
+      "rust_item": "<rustycad_tkmath::gp::Transform2 as core::convert::From<&rustycad_tkgeombase::gce::MakeTranslation2d>>::from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "gce_Root::IsDone() const",
@@ -85524,17 +85524,17 @@
       "upstream_id": "TCollection_HExtendedString(const TCollection_ExtendedString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as From<&rustycad_tkernel::tcollection::ExtendedString>>::from",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as core::convert::From<&rustycad_tkernel::tcollection::ExtendedString>>::from",
       "status": "implemented",
-      "notes": "Copies the string."
+      "notes": "Copies the string. Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "TCollection_HExtendedString(TCollection_ExtendedString&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as From<rustycad_tkernel::tcollection::ExtendedString>>::from",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as core::convert::From<rustycad_tkernel::tcollection::ExtendedString>>::from",
       "status": "implemented",
-      "notes": "Takes the string by value (the Rust move)."
+      "notes": "Takes the string by value (the Rust move). Exact core::convert trait path resolves the existing implementation in compiler inventory; see porting/audits/base-conversion-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
       "upstream_id": "TCollection_HExtendedString::TCollection_HExtendedString(const occ::handle<TCollection_HAsciiString>&)",
