@@ -26,6 +26,12 @@ visibility filter still includes internal helpers, so it is neither a validated
 lower bound nor a denominator for API coverage. Shared package ownership makes
 per-toolkit totals overlap.
 
+Rustdoc captures private items as internal inputs (`document-private-items-v1`) so
+methods on private implementation types can be resolved through public aliases.
+The normalizer still emits only publicly reachable paths. Const-specialized aliases
+retain their type/const bindings; unsupported constraints and missing implementation
+metadata remain explicit gaps. This policy does not make private modules public APIs.
+
 ## Reproduce
 
 Build the pinned extractor as described in
@@ -66,8 +72,8 @@ content hashes and source-relative declaration paths are the portable identity.
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,398 have exact Rust mappings and
-1,250 remain unmapped. There are no duplicate or unknown mappings in this
+all 8,648 GoogleTest declaration candidates: 7,400 have exact Rust mappings and
+1,248 remain unmapped. There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
 
@@ -118,6 +124,19 @@ Partial orchestration and failure-domain differences remain explicitly partial.
 Additional native differential fixtures do not increase mapped legacy declaration
 counts. Earlier TKernel `noexcept` selector corrections remain audited in
 [`tkernel-noexcept-selector-audit.json`](../tkernel-noexcept-selector-audit.json).
+
+### Most recent combined base receipt
+
+[`base-legacy-a1841184.json`](../runtime-evidence/base-legacy-a1841184.json)
+retains all four source-bound base runs at Rust revision `a1841184`: 4,655 passing
+mapped declarations and the single approved OCC23497 skip. Typed expansions produced
+4,861 native passes plus one skip and 4,862 Rust passes; joins contain no unclaimed
+runtime cases. TKernel also matched 201,890 differential cases.
+[`cargo-workspace-a1841184.json`](../runtime-evidence/cargo-workspace-a1841184.json)
+records 12,899 Rust passes and 70 ignored documentation examples at that revision.
+These receipts become historical after later source changes; older individual
+receipts below remain retained for provenance. Full API/DRAW/configuration proof
+flags are false.
 
 ### TKMath paired run
 

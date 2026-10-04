@@ -89,7 +89,7 @@
   ],
   "current_work": {
     "TKernel": "Public typed C-string formatting wrappers now reuse the existing engine (partial format/stdio domain). Allocator key field borrowing and full integer stream putback inputs are implemented with native probes. Native stream override dispatch and platform backends remain partial.",
-    "TKMath": "Protected gp_Ax2 direction helpers are public and native-probed. Const-specialized alias normalization records bindings, but actual Bnd aliases still lack captured impls because rustdoc strips the private target module. Private-item capture with public-reachability filtering is in progress. Descriptor-handle semantics and mutable cache wrapper integration remain partial.",
+    "TKMath": "Protected gp_Ax2 direction helpers are public and native-probed. Private-item rustdoc capture plus public-alias normalization now resolves all four CompactBox2/3 comparison hooks with explicit dimension bindings. Unsupported const constraints remain unresolved; descriptor-handle semantics and mutable cache wrapper integration remain partial.",
     "TKG2d/TKG3d": "Public curve/surface adaptor records, shared nullable spline caches, and scoped B-spline pole readers implemented with native probes. Const-reference lifetime parity and cache RTTI remain open.",
     "TKGeomBase/TKGeomAlgo": "Audit missing callable implementations and select dependency blockers."
   },
