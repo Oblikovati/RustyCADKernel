@@ -206,3 +206,72 @@ fn conic_edge(mode: i32) -> Edge {
     };
     maker.unwrap().edge().unwrap()
 }
+
+fn distance_rows(
+    solver: &BeanFaceIntersector,
+    face: &Face,
+    mode: i32,
+    bounded: i32,
+    rows: &mut String,
+) -> usize {
+    let mut fallbacks = 0;
+    for parameter in [0., 0.25, 1., 2.] {
+        let distance = solver.distance(parameter).unwrap();
+        let (mut u, mut v) = (77., 88.);
+        let with_uv = solver.distance_uv(parameter, &mut u, &mut v).unwrap();
+        writeln!(
+            rows,
+            "{mode} {bounded} {parameter:.12} {distance:.12} {with_uv:.12} {u:.12} {v:.12}"
+        )
+        .unwrap();
+        let cached = solver.context().get().unwrap().proj_ps(face).unwrap();
+        let projector = cached.read();
+        fallbacks += usize::from(!projector.is_done() || projector.nb_points().unwrap() == 0);
+    }
+    fallbacks
+}
+
+#[test]
+fn bean_distance_matches_native_projection_boundary_fallback_and_uv_clamping() {
+    let mut rows = String::new();
+    let mut fallbacks = 0;
+    for mode in 0..11 {
+        let (edge, face) = distance_shapes(mode);
+        let mut solver = BeanFaceIntersector::from_shapes(&edge, &face).unwrap();
+        fallbacks += distance_rows(&solver, &face, mode, 0, &mut rows);
+        solver.set_surface_parameters(0.1, 0.2, 0.1, 0.2);
+        fallbacks += distance_rows(&solver, &face, mode, 1, &mut rows);
+    }
+    assert_eq!(fallbacks, 18);
+    assert_eq!(rows.lines().count(), 88);
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_bean_distance.expected")
+    );
+}
+
+fn distance_shapes(mode: i32) -> (Edge, Face) {
+    use rustycad_tkmath::gp::{Axis3, Sphere3};
+    if mode != 10 {
+        return (analytic_edge(mode), analytic_face(mode));
+    }
+    let edge =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., -1.), Point3::new(0., 0., 1.))
+            .unwrap()
+            .edge()
+            .unwrap();
+    let bounds = (
+        0.,
+        std::f64::consts::TAU,
+        -std::f64::consts::FRAC_PI_2,
+        std::f64::consts::FRAC_PI_2,
+    );
+    let face = BRepBuilderAPIMakeFace::from_sphere_bounds(
+        Sphere3::new(Axis3::default(), 1.).unwrap(),
+        bounds,
+    )
+    .unwrap()
+    .face()
+    .unwrap();
+    (edge, face)
+}
