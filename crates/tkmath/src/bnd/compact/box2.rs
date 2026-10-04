@@ -3,6 +3,19 @@ use crate::gp::{Point2, Xy};
 /// Native Bnd_B2<double/float> storage; `CompactBox2::<f64>::new(center,half_size)`.
 pub type CompactBox2<T = f64> = CompactBounds<T, 2>;
 impl<T: BoxReal> CompactBounds<T, 2> {
+    /// Tests the native double-precision vector hook.
+    ///
+    /// ```
+    /// use rustycad_tkmath::{bnd::CompactBox2, gp::Xy};
+    /// assert!(CompactBox2::<f32>::compare_dist_d(Xy::new(1.0, 2.0), Xy::new(1.1, 0.0)));
+    /// ```
+    pub fn compare_dist_d(half_size: Xy, distance: Xy) -> bool {
+        CompactBounds::<f64, 2>::compare_dist(
+            &xy_distance_components(half_size),
+            &xy_distance_components(distance),
+        )
+    }
+
     /// Converts double coordinates to the storage scalar; `CompactBox2::<f32>::new(center,half)`.
     pub fn new(center: Xy, half: Xy) -> Self {
         Self {
@@ -52,5 +65,8 @@ impl<T: BoxReal> CompactBounds<T, 2> {
 }
 fn convert<T: BoxReal>(xy: Xy) -> [T; 2] {
     [T::from_double(xy.x()), T::from_double(xy.y())]
+}
+fn xy_distance_components(xy: Xy) -> [f64; 2] {
+    [xy.x(), xy.y()]
 }
 mod queries;

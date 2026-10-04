@@ -14,6 +14,16 @@ impl<T: BoxReal, const N: usize> Default for CompactBounds<T, N> {
     }
 }
 impl<T: BoxReal, const N: usize> CompactBounds<T, N> {
+    /// Tests whether any signed distance exceeds its half size.
+    ///
+    /// ```
+    /// use rustycad_tkmath::bnd::CompactBox2;
+    /// assert!(CompactBox2::<f64>::compare_dist(&[1.0, 2.0], &[0.0, 2.1]));
+    /// ```
+    pub fn compare_dist(half_size: &[T; N], distance: &[T; N]) -> bool {
+        (0..N).any(|axis| distance[axis].absolute() > half_size[axis])
+    }
+
     /// Retains scalar arrays without conversion; `CompactBox2::from_arrays(center,half)`.
     pub const fn from_arrays(center: [T; N], half: [T; N]) -> Self {
         Self { center, half }
@@ -63,7 +73,9 @@ impl<T: BoxReal, const N: usize> CompactBounds<T, N> {
     }
     /// Tests separation in the stored scalar; `bounds.is_out_box(&other)`.
     pub fn is_out_box(&self, other: &Self) -> bool {
-        (0..N).any(|i| (other.center[i] - self.center[i]).absolute() > other.half[i] + self.half[i])
+        let distance = std::array::from_fn(|axis| other.center[axis] - self.center[axis]);
+        let half_size = std::array::from_fn(|axis| other.half[axis] + self.half[axis]);
+        Self::compare_dist(&half_size, &distance)
     }
     /// Uses strict containment, so identical boxes are not inside; `bounds.is_in_box(&other)`.
     pub fn is_in_box(&self, other: &Self) -> bool {
