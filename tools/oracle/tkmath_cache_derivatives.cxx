@@ -22,7 +22,11 @@ public:
 void print_values(const double* theValues, int theCount)
 {
   std::cout << std::setprecision(17);
-  for (int anIndex = 0; anIndex < theCount; ++anIndex) std::cout << theValues[anIndex] << ' ';
+  for (int anIndex = 0; anIndex < theCount; ++anIndex)
+  {
+    if (anIndex > 0) std::cout << ' ';
+    std::cout << theValues[anIndex];
+  }
   std::cout << '\n';
 }
 
