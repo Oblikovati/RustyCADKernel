@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "known_behavioral_divergence_accounting",
+  "base_revision": "a29c04805631293e350ed44956ebbcfd473cfdac",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_profile": "Linux GCC C++17 -O2; target/occt-modeling-full libTKernel.so",
+  "native_binary_sha256": "0ec2fb1ffea8a9e497b3a58f9aee68520097a186adf97f32159bc777feb08b58",
+  "native_observations": [
+    {
+      "mode": "composite",
+      "case": "matching",
+      "status": "returned",
+      "exit_code": 0,
+      "stdout": "entered\nreturned 0\n"
+    },
+    {
+      "mode": "composite",
+      "case": "foreign",
+      "status": "timeout",
+      "timeout_seconds": 1,
+      "stdout": "entered\n"
+    },
+    {
+      "mode": "report",
+      "case": "matching",
+      "status": "returned",
+      "exit_code": 0,
+      "stdout": "entered\nreturned 0\n"
+    },
+    {
+      "mode": "report",
+      "case": "foreign",
+      "status": "timeout",
+      "timeout_seconds": 1,
+      "stdout": "entered\n"
+    }
+  ],
+  "source_explanation": "The native foreign-type branch calls anIt.More() rather than anIt.Next(), leaving the loop condition and current node unchanged. Message_Report::Clear(type) delegates to this loop.",
+  "rust_behavior": "The existing mixed-type regression returns, removes matching alerts, and retains others. No Rust implementation change is made by this audit.",
+  "rust_test_command": "cargo test -p rustycad-tkernel --locked --test message_api_behavior clearing_by_gravity_type_and_everything",
+  "rust_test_result": "1 passed; 0 failed",
+  "rust_test_run_location": "main at the same base_revision, whose Rust source matches the source hashes below",
+  "rust_test_log": "message-clear-type-nontermination-rust.log.gz",
+  "rust_test_log_sha256": "d175abf349f0879418fda1382a3d6675de698b2247205d8a1c65ee98b6bf2678",
+  "source_sha256": {
+    "crates/tkernel/src/message/composite_alerts.rs": "d047a87fb14cea6c8bb0312ce7dd059fc9ef757130af1376ed4fa7db3716a5c5",
+    "crates/tkernel/src/message/report.rs": "5441dabe51638490840eaa2933efb0aa5ee2936db1befc2df0759c8a94456248",
+    "crates/tkernel/tests/message_api_behavior/report.rs": "4e3e0e2415026dbf8acb258a54b6d0a2da73e61f9a050a675afb804014864ebb",
+    "tools/oracle/tkernel_clear_type_nontermination.cxx": "f335bf3e3a7d2e06c5cebbfae854e2a70955f288aedee12b5db5b74e76f8d0c7"
+  },
+  "upstream_source_sha256": {
+    "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.cxx": "5d73be0b216a8d7f5c1c80efd9460cc6d45b15a7078930a369d0eaf4f8b1a3a7",
+    "src/FoundationClasses/TKernel/Message/Message_Report.cxx": "9fee426effe047c9d36903b9b370e0fd70c46a7abd8acc59cc3e8559aea44b6d"
+  },
+  "ledger_changes": {
+    "previous_status": "implemented",
+    "status": "partial",
+    "overloads": [
+      "Message_CompositeAlerts::Clear(const occ::handle<Standard_Type>&)",
+      "Message_Report::Clear(const occ::handle<Standard_Type>&)"
+    ]
+  },
+  "legacy_declaration_count_change": 0,
+  "full_api_parity_proven": false
+}

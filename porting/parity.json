@@ -90458,8 +90458,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
       "rust_item": "rustycad_tkernel::message::CompositeAlerts::clear_type",
-      "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+      "status": "partial",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert. Bounded native replay confirms nontermination when an alert has another type; the existing Rust implementation returns while retaining that alert. This known behavioral divergence prevents full parity for this overload and its report delegate. See porting/audits/message-clear-type-nontermination.json."
     },
     {
       "upstream_id": "Message_CompositeAlerts::DumpJson(Standard_OStream&,int) const",
@@ -91594,8 +91594,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::clear_type",
-      "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+      "status": "partial",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Bounded native replay confirms nontermination when an alert has another type; the existing Rust implementation returns while retaining that alert. This known behavioral divergence prevents full parity for this overload and its report delegate. See porting/audits/message-clear-type-nontermination.json."
     },
     {
       "upstream_id": "Message_Report::ActiveMetrics() const",
