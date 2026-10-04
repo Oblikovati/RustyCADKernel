@@ -110,6 +110,14 @@ impl GeomBSplineCurve {
         let state = BSplineState::from_arrays(poles, Some(given), knots, mults, degree, periodic)?;
         Ok(Self::from_state(state))
     }
+    /// Read stored poles without copying while the curve read lock is held; do not
+    /// mutate the curve from `read` (`Poles()` const reference);
+    /// `curve.poles_array(|poles| poles[1])`.
+    pub fn poles_array<R>(&self, read: impl FnOnce(&Array1<'static, Point3>) -> R) -> R {
+        let state = self.state.read();
+        let poles: &Array1<'static, Point3> = &state.poles;
+        read(poles)
+    }
     /// The native copy constructor: the evaluation representation is deep-copied, the
     /// cached resolution value is kept but marked stale
     /// (`Geom_BSplineCurve(const Geom_BSplineCurve&)`); `GeomBSplineCurve::copy_of(&curve)?`.
@@ -217,3 +225,7 @@ fn weights_equal(own: &BSplineState, theirs: &BSplineState) -> Result<bool, Fail
     }
     Ok(true)
 }
+
+#[cfg(test)]
+#[path = "bspline_curve_pole_view_tests.rs"]
+mod pole_view_tests;

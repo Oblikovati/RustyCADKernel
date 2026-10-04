@@ -162,6 +162,14 @@ impl GeomBSplineSurface {
     pub fn poles(&self) -> Array2<'static, Point3> {
         self.state.read().poles.clone()
     }
+    /// Read the stored poles without copying while the surface read lock is held;
+    /// do not call a mutating surface method from `read` (`Poles()` const reference);
+    /// `surface.poles_array(|poles| poles[(1, 1)])`.
+    pub fn poles_array<R>(&self, read: impl FnOnce(&Array2<'static, Point3>) -> R) -> R {
+        let state = self.state.read();
+        let poles: &Array2<'static, Point3> = &state.poles;
+        read(poles)
+    }
     /// The U degree (`UDegree`); `s.u_degree()`.
     pub fn u_degree(&self) -> i32 {
         self.read_direction(true, |d| d.deg)
@@ -312,3 +320,7 @@ impl SurfaceState {
         self.iso(u, param, true)
     }
 }
+
+#[cfg(test)]
+#[path = "pole_view_tests.rs"]
+mod pole_view_tests;
