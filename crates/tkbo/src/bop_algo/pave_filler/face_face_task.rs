@@ -39,6 +39,10 @@ impl Default for BOPAlgoFaceFaceTask<'_> {
 }
 
 impl<'a> BOPAlgoFaceFaceTask<'a> {
+    pub(crate) fn set_run_parallel(&mut self, enabled: bool) {
+        self.parallel.options_mut().set_run_parallel(enabled);
+    }
+
     pub(crate) fn set_indices(&mut self, first: i32, second: i32) {
         self.indices = [first, second];
     }
@@ -63,6 +67,7 @@ impl<'a> BOPAlgoFaceFaceTask<'a> {
         self.tolerance
     }
 
+    #[cfg(test)]
     pub(crate) fn trsf(&self) -> &Transform3 {
         &self.transform
     }

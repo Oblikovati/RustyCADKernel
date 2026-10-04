@@ -124,13 +124,6 @@ mod points;
 mod restriction;
 mod surface_policy;
 mod tolerance;
-#[cfg_attr(
-    not(test),
-    expect(
-        dead_code,
-        reason = "BOPAlgo_FaceFace wrapper calls this in its follow-on PerformFF wiring"
-    )
-)]
 mod transform_results;
 mod walking;
 mod walking_fit;

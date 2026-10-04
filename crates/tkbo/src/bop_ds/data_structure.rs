@@ -248,9 +248,21 @@ impl DataStructure {
         &mut self.interf_ee
     }
 
+    /// Borrows edge/edge interference records used to prepare Face/Face seeds.
+    /// `ds.interf_ee_records().iter()`.
+    pub fn interf_ee_records(&self) -> &DynamicArray<InterfEE> {
+        &self.interf_ee
+    }
+
     /// Mutably borrows edge/face records; `ds.interf_ef().append(InterfEF::default())`.
     pub fn interf_ef(&mut self) -> &mut DynamicArray<InterfEF> {
         &mut self.interf_ef
+    }
+
+    /// Borrows edge/face interference records for downstream face seeding.
+    /// `ds.interf_ef_records().iter()`.
+    pub fn interf_ef_records(&self) -> &DynamicArray<InterfEF> {
+        &self.interf_ef
     }
 
     /// Mutably borrows face/face records; `ds.interf_ff().append(InterfFF::default())`.
