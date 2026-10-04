@@ -225158,7 +225158,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Shared-face/seam/multiple-face/drop/angle/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Shared-face/seam/multiple-face/drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wireframe::MergeSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool, const double)",
@@ -225167,7 +225167,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Shared-face/seam/multiple-face/drop/angle/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Shared-face/seam/multiple-face/drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ChFiDS_TypeOfConcavity",
@@ -225501,6 +225501,42 @@
       "rust_item": "rustycad_tkfillet::chfi3d::same_side",
       "status": "implemented",
       "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Face &, const double, const bool, const GeomAbs_JoinType)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::from_face",
+      "status": "partial",
+      "notes": "Regular non-seam identity-location face initializer and bounded face/status/edge-history view. Exact OCC28131 face-stage surface, topology, UV bounds, area and invalidity match native. Singular/conical preprocessing, seams/locations, Created maps, nondefault options and full offset object variants remain unsupported. StandardOffset legacy regression remains unmapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Face() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::face",
+      "status": "partial",
+      "notes": "Regular non-seam identity-location face initializer and bounded face/status/edge-history view. Exact OCC28131 face-stage surface, topology, UV bounds, area and invalidity match native. Singular/conical preprocessing, seams/locations, Created maps, nondefault options and full offset object variants remain unsupported. StandardOffset legacy regression remains unmapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Status() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::status",
+      "status": "partial",
+      "notes": "Regular non-seam identity-location face initializer and bounded face/status/edge-history view. Exact OCC28131 face-stage surface, topology, UV bounds, area and invalidity match native. Singular/conical preprocessing, seams/locations, Created maps, nondefault options and full offset object variants remain unsupported. StandardOffset legacy regression remains unmapped."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Generated(const TopoDS_Shape &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
+      "status": "partial",
+      "notes": "Regular non-seam identity-location face initializer and bounded face/status/edge-history view. Exact OCC28131 face-stage surface, topology, UV bounds, area and invalidity match native. Singular/conical preprocessing, seams/locations, Created maps, nondefault options and full offset object variants remain unsupported. StandardOffset legacy regression remains unmapped."
     }
   ],
   "tests": [
