@@ -2,7 +2,7 @@
 use super::face_face_task::BOPAlgoFaceFaceTask;
 use super::{BOPAlgoPaveFiller, Glue};
 use crate::bop_algo::{AlertIntersectionFailed, ParallelAlgo};
-use crate::bop_ds::InterfFF;
+use crate::bop_ds::{DataStructure, InterfFF};
 use crate::int_tools::{Context, Curve};
 use rustycad_tkbrep::{brep::BRepTool, topods::Face};
 use rustycad_tkernel::{
@@ -174,14 +174,10 @@ impl BOPAlgoPaveFiller {
         let curves = task.intersector().lines()?.to_vec();
         let points = task.intersector().points().to_vec();
         let pair = task.indices();
+        let has_raw_results = raw_face_face_results_exist(curves.len(), points.len());
         let record = build_face_face_record(task, &curves, &points)?;
-        let has_results = record.curves().length() > 0 || record.points().length() > 0;
         let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
-        if has_results {
-            structure.add_interference(pair[0], pair[1]);
-        }
-        structure.interf_ff().append(record);
-        Ok(())
+        append_face_face_result(structure, pair, record, has_raw_results)
     }
 
     fn warn_failed_intersection(&self) {
@@ -257,6 +253,9 @@ fn append_face_face_curves(
     tolerance: f64,
     task: &BOPAlgoFaceFaceTask<'static>,
 ) -> Result<(), Failure> {
+    if curves.is_empty() {
+        return Ok(());
+    }
     let expansion = tolerance + maximum_face_vertex_tolerance(task)?;
     for curve in curves {
         let mut bounds = rustycad_tkmath::bnd::BoundingBox3::default();
@@ -269,6 +268,23 @@ fn append_face_face_curves(
         stored.set_box(&bounds);
         stored.set_tolerance(curve.tolerance().max(tolerance));
     }
+    Ok(())
+}
+
+pub(super) fn raw_face_face_results_exist(curves: usize, points: usize) -> bool {
+    curves > 0 || points > 0
+}
+
+pub(super) fn append_face_face_result(
+    structure: &mut DataStructure,
+    pair: [i32; 2],
+    record: InterfFF,
+    has_raw_results: bool,
+) -> Result<(), Failure> {
+    if has_raw_results {
+        structure.add_interference(pair[0], pair[1]);
+    }
+    structure.interf_ff().append(record);
     Ok(())
 }
 

@@ -14,6 +14,12 @@ producers have augmented it. This stage alone does not compare to the complete
 pipeline. EE-generated seam-shift points and EF-generated walking seeds return
 `Standard_NotImplemented` explicitly.
 
+Native source order at `BOPAlgo_PaveFiller_6.cxx:560-573` bases `AddInterf`
+on raw intersector `NbCurves`/`NbPoints`, before `IntTools_Tools::CheckCurve`
+can filter a thin curve out of `BOPDS_InterfFF`. Rust uses that raw-count
+predicate; a regression supplies a default invalid curve and checks that curve
+storage rejects it while the pair interference remains present.
+
 Build against the pinned local OCCT installation:
 
 ```sh

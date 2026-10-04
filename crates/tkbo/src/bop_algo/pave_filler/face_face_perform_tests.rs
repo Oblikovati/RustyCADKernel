@@ -1,5 +1,8 @@
 use super::{BOPAlgoPaveFiller, Glue};
-use crate::bop_ds::InterfEE;
+use crate::{
+    bop_ds::{DataStructure, InterfEE, InterfFF},
+    int_tools::{Curve, Tools},
+};
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkmath::gp::{Axis3, Cylinder3, Plane3};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace;
@@ -88,6 +91,25 @@ fn edge_face_seed_input_fails_explicitly_until_native_walking_is_ported() {
 
     let error = filler.perform_ff().unwrap_err();
     assert_eq!(error.exception_type(), "Standard_NotImplemented");
+}
+
+#[test]
+fn raw_invalid_section_curve_still_marks_face_pair_interference() {
+    let curve = Curve::default();
+    let mut bounds = rustycad_tkmath::bnd::BoundingBox3::default();
+    assert!(!Tools::check_curve(&curve, &mut bounds).unwrap());
+    let mut structure = DataStructure::default();
+    let raw_results = super::face_face_perform::raw_face_face_results_exist(1, 0);
+    super::face_face_perform::append_face_face_result(
+        &mut structure,
+        [0, 10],
+        InterfFF::default(),
+        raw_results,
+    )
+    .unwrap();
+    assert!(structure.has_interference_between(0, 10));
+    assert_eq!(structure.interf_ff().length(), 1);
+    assert!(!super::face_face_perform::raw_face_face_results_exist(0, 0));
 }
 
 fn configured_filler() -> BOPAlgoPaveFiller {
