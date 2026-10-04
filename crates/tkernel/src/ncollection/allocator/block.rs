@@ -1,6 +1,6 @@
 //! Value operations exposed by the protected native `NCollection_AccAllocator::Block` record.
 
-use super::{ACC_ALIGN, AccAlignedPtr, AccAlignedSize};
+use super::{AccAlignedPtr, AccAlignedSize};
 
 /// Safe value-level counterpart of protected `NCollection_AccAllocator::Block`.
 ///
@@ -41,7 +41,8 @@ impl AccBlock {
     /// Sets the native cursor to `address + size`, rounded down to four bytes.
     /// Example: `let mut b = AccBlock::new(0x1000, 8); b.set_free_size(13);`.
     pub fn set_free_size(&mut self, size: usize) {
-        let cursor = aligned_cursor(self.address, size);
+        let cursor = self.address.wrapping_add(size);
+        // The shared AlignedPtr constructor performs native SetFreeSize's four-byte rounding.
         self.alloc_start = AccAlignedPtr::from_ptr(cursor as *mut u8);
     }
 
@@ -69,9 +70,4 @@ impl AccBlock {
     pub const fn is_empty(&self) -> bool {
         self.alloc_count == 0
     }
-}
-
-/// Computes native `SetFreeSize`'s aligned cursor without dereferencing the address.
-pub(crate) fn aligned_cursor(address: usize, size: usize) -> usize {
-    address.wrapping_add(size) & !(ACC_ALIGN - 1)
 }
