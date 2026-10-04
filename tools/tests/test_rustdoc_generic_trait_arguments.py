@@ -33,6 +33,31 @@ class GenericTraitArgumentTests(unittest.TestCase):
             ["trait-impl:rustdoc_generic_trait_args::ConstOperation:unsupported-generic-arguments"],
         )
 
+    def test_default_and_explicit_self_follow_rustdoc_application(self) -> None:
+        inventory = normalized_fixture()
+        paths = declaration_paths(inventory)
+        default_path = f"{CRATE}::DefaultSelf::<core::ops::arith::Mul>::mul"
+        explicit_path = f"{CRATE}::ExplicitSelf::<core::ops::arith::Mul>::mul"
+        self.assertIn(default_path, paths)
+        self.assertIn(explicit_path, paths)
+        self.assertNotIn(f"{CRATE}::DefaultSelf::<core::ops::arith::Mul<{CRATE}::DefaultSelf>>::mul", paths)
+        self.assertIsNone(declaration(inventory, default_path)["impl_context"]["trait"]["args"])
+        self.assertIsNone(declaration(inventory, explicit_path)["impl_context"]["trait"]["args"])
+
+    def test_reference_and_collection_arguments_keep_compiler_paths(self) -> None:
+        inventory = normalized_fixture()
+        paths = declaration_paths(inventory)
+        reference = (
+            f"{CRATE}::ReferenceArgument::<core::ops::arith::Add<"
+            f"&'static {CRATE}::Matrix2>>::add"
+        )
+        collection = (
+            f"{CRATE}::CollectionArgument::<core::convert::From<"
+            f"alloc::vec::Vec<{CRATE}::Matrix2>>>::from"
+        )
+        self.assertIn(reference, paths)
+        self.assertIn(collection, paths)
+
     def test_trait_alias_renaming_preserves_generic_suffix(self) -> None:
         inventory = normalized_fixture()
         resolve_public_trait_paths([inventory])
@@ -65,6 +90,13 @@ def declarations(inventory: dict[str, JSONValue]) -> list[dict[str, JSONValue]]:
 
 def declaration_paths(inventory: dict[str, JSONValue]) -> set[str]:
     return {object_path(row) for row in declarations(inventory)}
+
+
+def declaration(inventory: dict[str, JSONValue], path: str) -> dict[str, JSONValue]:
+    matches = [row for row in declarations(inventory) if row.get("path") == path]
+    if len(matches) != 1:
+        raise AssertionError(f"expected one compiler path {path!r}, found {len(matches)}")
+    return matches[0]
 
 
 def object_path(value: JSONValue) -> str:

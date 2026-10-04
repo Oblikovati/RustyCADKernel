@@ -1,7 +1,10 @@
 # Generic trait argument capture
 
 This rustdoc JSON 61 fixture exercises distinct trait applications for two
-`Mul` implementations and a public generic trait reexport. It also includes a
+`Mul` implementations, default/explicit `Self` applications, reference and
+collection arguments, and a public generic trait reexport. Rustdoc records both
+`Mul` and explicit `Mul<Self>` with `args: null`; the normalizer preserves that
+compiler identity instead of guessing the defaulted argument. It also includes a
 const-generic trait whose argument renderer is intentionally unsupported so the
 normalizer must withhold that method path and report an unresolved item.
 
