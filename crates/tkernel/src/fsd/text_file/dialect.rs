@@ -18,9 +18,13 @@ pub trait TextDialect: Sized {
     /// impl TextDialect for DerivedCmp {
     ///     const MAGIC_NUMBER: &'static str = "CUSTOM";
     ///     const USE_CMP_TEXT_DEFAULTS: bool = true;
+    ///     const USE_CMP_OBJECT_DEFAULTS: bool = true;
     /// }
     /// ```
     const USE_CMP_TEXT_DEFAULTS: bool = false;
+
+    /// Selects `FSD_CmpFile` object-framing bodies for hooks this dialect does not override.
+    const USE_CMP_OBJECT_DEFAULTS: bool = false;
 
     /// Protected virtual `ReadLine`; `MyDialect::read_line(file)`.
     fn read_line(file: &mut TextFile<Self>) -> AsciiString {
@@ -91,17 +95,20 @@ pub trait TextDialect: Sized {
         reference: i32,
         type_number: i32,
     ) -> Result<(), Failure> {
-        file.stream.insert_bytes(b"\n#");
-        file.stream.insert_integer(i64::from(reference));
-        file.stream.insert_bytes(b"=%");
-        file.stream.insert_integer(i64::from(type_number));
-        file.check_written("FSD_File::WritePersistentObjectHeader")
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            cmp::write_object_header(file, reference, type_number)
+        } else {
+            file.write_fsd_object_header_base(reference, type_number)
+        }
     }
 
     /// `BeginWritePersistentObjectData` and `BeginWriteObjectData` (the same text).
     fn begin_write_object(file: &mut TextFile<Self>, member: &str) -> Result<(), Failure> {
-        file.stream.insert_bytes(b"( ");
-        file.check_written(member)
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            file.begin_cmp_write_object_base(member)
+        } else {
+            file.begin_fsd_write_object_base(member)
+        }
     }
 
     /// `EndWriteObjectData` (`last` false) and `EndWritePersistentObjectData` (`last` true).
@@ -110,8 +117,11 @@ pub trait TextDialect: Sized {
         last: bool,
         member: &str,
     ) -> Result<(), Failure> {
-        file.stream.insert_bytes(if last { b")" } else { b") " });
-        file.check_written(member)
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            file.end_cmp_write_object_base(last, member)
+        } else {
+            file.end_fsd_write_object_base(last, member)
+        }
     }
 
     /// `ReadPersistentObjectHeader`.
@@ -120,25 +130,29 @@ pub trait TextDialect: Sized {
         reference: &mut i32,
         type_number: &mut i32,
     ) -> Result<(), Failure> {
-        file.expect_marker(b'#')?;
-        file.extract_integer(reference, "FSD_File::ReadPersistentObjectHeader")?;
-        file.expect_marker(b'=')?;
-        file.expect_marker(b'%')?;
-        file.extract_integer(type_number, "FSD_File::ReadPersistentObjectHeader")
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            file.read_cmp_object_header_base(reference, type_number)
+        } else {
+            file.read_fsd_object_header_base(reference, type_number)
+        }
     }
 
     /// `BeginReadPersistentObjectData` and `BeginReadObjectData`.
     fn begin_read_object(file: &mut TextFile<Self>) -> Result<(), Failure> {
-        file.expect_marker(b'(')
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            file.begin_cmp_read_object_base()
+        } else {
+            file.begin_fsd_read_object_base()
+        }
     }
 
     /// `EndReadObjectData` (`last` false) and `EndReadPersistentObjectData` (`last` true).
     fn end_read_object(file: &mut TextFile<Self>, last: bool) -> Result<(), Failure> {
-        file.expect_marker(b')')?;
-        if last {
-            file.expect_line_end(false)?;
+        if Self::USE_CMP_OBJECT_DEFAULTS {
+            file.end_cmp_read_object_base(last)
+        } else {
+            file.end_fsd_read_object_base(last)
         }
-        Ok(())
     }
 }
 
@@ -159,51 +173,5 @@ pub struct CmpDialect;
 impl TextDialect for CmpDialect {
     const MAGIC_NUMBER: &'static str = "CMPFILE";
     const USE_CMP_TEXT_DEFAULTS: bool = true;
-
-    fn write_object_header(
-        file: &mut TextFile<Self>,
-        reference: i32,
-        type_number: i32,
-    ) -> Result<(), Failure> {
-        file.stream.insert_bytes(b"\n#");
-        file.stream.insert_integer(i64::from(reference));
-        file.stream.insert_bytes(b"%");
-        file.stream.insert_integer(i64::from(type_number));
-        file.stream.insert_bytes(b" ");
-        file.check_written("FSD_CmpFile::WritePersistentObjectHeader")
-    }
-
-    fn begin_write_object(file: &mut TextFile<Self>, member: &str) -> Result<(), Failure> {
-        file.check_written(member)
-    }
-
-    fn end_write_object(
-        file: &mut TextFile<Self>,
-        _last: bool,
-        member: &str,
-    ) -> Result<(), Failure> {
-        file.check_written(member)
-    }
-
-    fn read_object_header(
-        file: &mut TextFile<Self>,
-        reference: &mut i32,
-        type_number: &mut i32,
-    ) -> Result<(), Failure> {
-        file.expect_marker(b'#')?;
-        file.extract_integer(reference, "FSD_CmpFile::ReadPersistentObjectHeader")?;
-        file.expect_marker(b'%')?;
-        file.extract_integer(type_number, "FSD_CmpFile::ReadPersistentObjectHeader")
-    }
-
-    fn begin_read_object(_file: &mut TextFile<Self>) -> Result<(), Failure> {
-        Ok(())
-    }
-
-    fn end_read_object(file: &mut TextFile<Self>, last: bool) -> Result<(), Failure> {
-        if last {
-            file.expect_line_end(true)?;
-        }
-        Ok(())
-    }
+    const USE_CMP_OBJECT_DEFAULTS: bool = true;
 }
