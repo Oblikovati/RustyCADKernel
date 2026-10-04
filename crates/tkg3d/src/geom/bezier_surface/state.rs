@@ -103,17 +103,22 @@ impl SurfaceState {
     }
     // Geom_BezierSurface::init: one-based copies, rationality, unit weights otherwise,
     // cache flag and evaluation representation reset.
-    fn init(
+    pub(super) fn init(
         &mut self,
         poles: &Array2<'_, Point3>,
         weights: Option<&Array2<'_, f64>>,
     ) -> Result<(), Failure> {
         self.poles = rebased_grid(poles)?;
-        (self.u_rational, self.v_rational) = (false, false);
-        self.weights = self.unit_weights()?;
         if let Some(weights) = weights {
-            self.weights = rebased_grid(weights)?;
+            self.weights =
+                one_based_grid(self.poles.nb_rows() as i32, self.poles.nb_columns() as i32)?;
+            self.weights
+                .copy_values(weights)
+                .map_err(|error| error.into_failure("NCollection_Array2::CopyValues"))?;
             self.update_rationality()?;
+        } else {
+            (self.u_rational, self.v_rational) = (false, false);
+            self.weights = self.unit_weights()?;
         }
         self.max_deriv_inv_ok = false;
         self.eval_rep = Handle::default();

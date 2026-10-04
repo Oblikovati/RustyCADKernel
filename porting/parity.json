@@ -52381,6 +52381,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom_BezierSurface::init(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::init",
+      "status": "partial",
+      "notes": "Protected init exposed as a safe Rust reuse operation. Native oracle covers dimension-changing weighted initialization, zero and null weights, cache/representation invalidation, and partial state on exact-extent mismatch; see porting/audits/tkg3d-bezier-surface-protected-init.json. The pinned native library crashes for same-size weighted reinitialization from a nonrational instance; this observed failure domain is documented, not reproduced."
+    },
+    {
       "upstream_id": "Geom_BezierSurface::Geom_BezierSurface(const Geom_BezierSurface&)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
@@ -235197,16 +235205,16 @@
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.hxx",
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dBezierCurve::init",
-      "status": "implemented",
-      "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration a7ee7b91b7d70f86b935dbcfddc44fcaba16ffa0e8d6162dcd11da30d1aced06. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
+      "status": "partial",
+      "notes": "Reusable protected initialization is exposed and matches tested defined cases, including dimension-changing reinitialization and dimension failure ordering. The pinned native library segfaults for same-count weighted reinitialization from a nonrational object; Rust completes safely. This native failure is reproduced by tools/oracle/bezier_curve_reinit_crash.cxx and documented in porting/audits/bezier-curve-protected-init.json. Declaration a7ee7b91b7d70f86b935dbcfddc44fcaba16ffa0e8d6162dcd11da30d1aced06; legacy declaration count unchanged."
     },
     {
       "upstream_id": "Geom_BezierCurve::init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
       "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::init",
-      "status": "implemented",
-      "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
+      "status": "partial",
+      "notes": "Reusable protected initialization is exposed and matches tested defined cases, including dimension-changing reinitialization and dimension failure ordering. The pinned native library segfaults for same-count weighted reinitialization from a nonrational object; Rust completes safely. This native failure is reproduced by tools/oracle/bezier_curve_reinit_crash.cxx and documented in porting/audits/bezier-curve-protected-init.json. Declaration ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673; legacy declaration count unchanged."
     }
   ],
   "tests": [

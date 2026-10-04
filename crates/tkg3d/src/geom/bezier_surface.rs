@@ -92,6 +92,16 @@ impl GeomBezierSurface {
         let used: Option<&Array2<'_, f64>> = (u_rational || v_rational).then_some(weights);
         Ok(Self::stored(SurfaceState::initialized(poles, used)?))
     }
+    /// Reinitializes an existing surface through native protected `init`; constructor-only
+    /// pole/weight validation is bypassed, while native resize/copy failure ordering remains;
+    /// `surface.init(&new_poles, Some(&new_weights))?`.
+    pub fn init(
+        &self,
+        poles: &Array2<'_, Point3>,
+        weights: Option<&Array2<'_, f64>>,
+    ) -> Result<(), Failure> {
+        self.state.write().init(poles, weights)
+    }
     /// The native copy constructor (`Geom_BezierSurface(const Geom_BezierSurface&)`):
     /// unit weights for a non-rational surface, a deep-copied evaluation representation,
     /// and the cached resolution values kept but marked stale;
