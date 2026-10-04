@@ -53,6 +53,11 @@ impl PaveBlockIndexMap {
         self.0.find_key(index)
     }
 
+    /// Removes a one-based entry with OCCT's swap-last map behavior.
+    pub(crate) fn remove_from_index(&mut self, index: usize) -> Result<(), Failure> {
+        self.0.remove_from_index(index)
+    }
+
     /// Clears handles while retaining allocated bucket storage.
     pub fn clear(&mut self) {
         self.0.clear(false);

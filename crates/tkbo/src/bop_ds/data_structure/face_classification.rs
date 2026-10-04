@@ -125,4 +125,16 @@ impl DataStructure {
             "BOPDS_DS::FaceInfo",
         )
     }
+
+    /// Creates the map-overload record only when its shape has no pool reference.
+    pub(super) fn ensure_face_info_entry(&mut self, index: i32) -> Result<usize, Failure> {
+        if !self.has_face_info(index)? {
+            let slot = self.face_info_pool.len() as i32;
+            let mut info = FaceInfo::default();
+            info.set_index(index);
+            self.face_info_pool.push(info);
+            self.change_shape_info(index)?.set_reference(slot);
+        }
+        self.face_info_slot(index)
+    }
 }
