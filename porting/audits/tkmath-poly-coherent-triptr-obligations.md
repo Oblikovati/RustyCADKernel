@@ -35,8 +35,9 @@ allocation/free totals to three each.
 | Native declaration | Rust entry | Status |
 | --- | --- | --- |
 | `Poly_CoherentTriPtr(const Poly_CoherentTriangle&)` | `CoherentTriPtr::new(usize)`, `new_in(usize, BaseAllocator)` | Still stores triangle indexes because Rust triangulation storage is index-addressed. The custom allocator overload is implemented. |
+| protected `Poly_CoherentTriPtr(const Poly_CoherentTriangle*)` | `new_from_nullable_triangle(Option<usize>)`, `new_from_nullable_triangle_in(Option<usize>, BaseAllocator)` | Nullable lifecycle analogue is implemented as a partial mapping. The compiled declaration selector is `0b03943cf032772caf87cbcd6ec6be0322138699d082162b896da66ed68e38d0`; the Rust payload is still an index, not an OCCT pointer. |
 | `GetTriangle() -> const Poly_CoherentTriangle&` | `triangle(CoherentTriMember) -> Result<usize, Failure>` | Stable member ownership is represented; a Rust borrow into the separate triangulation array is not. |
-| `SetTriangle(const Poly_CoherentTriangle*)` | `set_member_triangle(CoherentTriMember, usize)` | Null pointers are intentionally not representable in safe Rust. |
+| `SetTriangle(const Poly_CoherentTriangle*)` | `set_triangle_nullable(Option<usize>)` | `None` stores the native null state; the triangle value remains an index, so pointer identity and ABI parity are partial. Compiled declaration selector: `8648f15839de4b481b68c5fdd217f00ca1531a1c5ec55628135e1fc123eec931`. |
 | `Next()`, `Previous()` return member references | `next_member`, `previous_member` | Stable token links are implemented; positional `next`/`previous` remain compatibility conveniences. |
 | `Append(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `append_member(member, triangle, allocator)` | Each member is a real `AllocatedBox` allocation from the supplied allocator. |
 | `Prepend(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `prepend_member(member, triangle, allocator)` | Each member is a real `AllocatedBox` allocation from the supplied allocator. |
@@ -50,7 +51,9 @@ Out-of-range positional lookups reject the index before walking the ring, includ
 
 The explicit removal methods currently validate `BaseAllocator` handle identity. That is a conservative ownership rule, not an exact model of every native `Free` combination: different native allocator objects can share a compatible heap backend. The node owner always frees through its creating Rust allocator, so this check prevents releasing memory through an incompatible arena. Exact native backend-compatibility semantics remain open.
 
-The subsequent [coherent allocator propagation slice](tkmath-coherent-allocator-propagation.md) adds explicit node allocator operations and retains/forwards the mesh allocator through construction, edits, cloning and destruction. That closes the missing forwarding path described by the initial audit. Backend compatibility and nullable triangle values remain partial, so this is still not a parity claim for the complete node or triangulation classes.
+The [nullable lifecycle probe](../../tools/oracle/tkmath_coherent_nullable_triptr.md) covers the protected null constructor, linking valid neighbors, resetting the head with `SetTriangle`, and removing a null-valued node without dereferencing it. The Rust nullable inspection, clone, equality, debug, and removal cases are supplemental and do not change the legacy declaration count. Native `Append` and `Prepend` dereference their input pointer while constructing a node, so passing null is undefined and is deliberately excluded from the Rust parity claim. Rust's ordinary value iterator explicitly panics on a null node; native iterator dereference there is undefined.
+
+The subsequent [coherent allocator propagation slice](tkmath-coherent-allocator-propagation.md) adds explicit node allocator operations and retains/forwards the mesh allocator through construction, edits, cloning and destruction. Nullable state can now be represented and manipulated, but triangle pointers are still indices, and backend compatibility across distinct allocator identities remains partial. This is not a parity claim for the complete node or triangulation classes.
 
 ## Reproduction
 
@@ -76,7 +79,9 @@ The expected output is in `tools/oracle/tkmath_coherent_triptr_alloc.expected`.
 | OCCT `Poly_CoherentTriPtr.cxx` | `94c8114cd73f61b4df39ab335ac530b0a4f1bd00390d553c0f772894bd4f7eba` |
 | OCCT `Poly_CoherentNode.hxx` | `43fb34c629691f23c8345f450a741238aa0a4e0947719e5406b789baf39ce254` |
 | OCCT `Poly_CoherentNode.cxx` | `03f46cb19ea098227ed6b4bbc1e0b396004774d1486c689dcf744fa73615fbb1` |
-| Rust `tri_ptr.rs` | `bae641cb69a9957b7fe429bca4222641eb286a681a649dd9bd996ac00eaa4a6b` |
+| Rust `tri_ptr.rs` | `161b506b541b71083e268bf4eba41385f5f8d29884bb08bdce67c592cdda1d8b` |
+| Rust `tri_ptr/nullable.rs` | `f0e72dcc87a7b05a51d51a94bb84ce1382a8fccc958eb2107a5bc8513ac55a17` |
 | Rust `node.rs` | `d677820448dd1cd95f8da4b6e547de7ba37286fe1db5c64075f1043829429ab2` |
 | Rust `allocator.rs` | `80060dbc92dc681ed324edea5739c5067cb18a6a31c3359715fbef8aec7d00c0` |
 | Native probe | `18eca46be5cf9b1c0c9dc61846eb407002339d2f272a17c5a1252cd9e31fc5cb` |
+| Nullable lifecycle probe | `65f50a3df56a3703a57b5eec341489b4a9102221f9402413fb282df03462c5d9` |

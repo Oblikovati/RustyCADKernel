@@ -38102,7 +38102,16 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtrIterator::member_token",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriPtr::Poly_CoherentTriPtr(const Poly_CoherentTriangle*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::new_from_nullable_triangle",
+      "status": "partial",
+      "notes": "Exact protected constructor selector: compiled OCCT declaration inventory ID 0b03943cf032772caf87cbcd6ec6be0322138699d082162b896da66ed68e38d0 (protected, const Poly_CoherentTriangle*). Rust exposes a safe nullable lifecycle analogue and the native probe covers null construction, linking, reset, and removal. The payload is a Rust triangle index, not an OCCT pointer, so pointer identity and ABI parity remain partial; allocator backend compatibility also remains open. See tools/oracle/tkmath_coherent_nullable_triptr.md.",
+      "source_sha256": "36c26272136fccf3f3e28a66536068d2b4859a855edf7cf01c1e5ffc91708387"
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Poly_CoherentTriPtr(const Poly_CoherentTriangle&)",
@@ -38124,9 +38133,10 @@
       "upstream_id": "Poly_CoherentTriPtr::SetTriangle(const Poly_CoherentTriangle*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::set_triangle",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::set_triangle_nullable",
+      "status": "partial",
+      "notes": "The compiled declaration inventory identifies this exact public pointer overload as 8648f15839de4b481b68c5fdd217f00ca1531a1c5ec55628135e1fc123eec931. set_triangle_nullable accepts and retains None, as native SetTriangle(nullptr) does. The stored Rust value is a triangle index rather than a Poly_CoherentTriangle pointer, so pointer identity and ABI parity remain partial; cross-allocator backend compatibility also remains open. See tools/oracle/tkmath_coherent_nullable_triptr.md.",
+      "source_sha256": "36c26272136fccf3f3e28a66536068d2b4859a855edf7cf01c1e5ffc91708387"
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Next() const",
@@ -38134,7 +38144,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::next_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Previous() const",
@@ -38142,7 +38152,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::previous_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Append(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38150,7 +38160,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::append_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "The Rust entry accepts a non-null triangle index and forwards the supplied allocator. Native Append dereferences its pointer argument, so null is outside defined behavior. Rust triangle indices do not preserve OCCT pointer identity; cross-allocator backend compatibility remains open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Prepend(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38158,7 +38168,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::prepend_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "The Rust entry accepts a non-null triangle index and forwards the supplied allocator. Native Prepend dereferences its pointer argument, so null is outside defined behavior. Rust triangle indices do not preserve OCCT pointer identity; cross-allocator backend compatibility remains open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Remove(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38166,7 +38176,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::RemoveList(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38174,7 +38184,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_list_in",
       "status": "partial",
-      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangle()",
