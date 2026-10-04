@@ -19,28 +19,51 @@
   ],
   "source_sha256": {
     "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx": "34ba42f8e0d82acd9721cdd63aa29877bb46e69c6ff1653e6cf70c3f8f886bca",
-    "src/FoundationClasses/TKernel/Storage/Storage_Schema.cxx": "7936e472284038427e49a18873aeac1ad1f87f17b0978e4dfd83582620142f64"
+    "src/FoundationClasses/TKernel/Storage/Storage_Schema.cxx": "7936e472284038427e49a18873aeac1ad1f87f17b0978e4dfd83582620142f64",
+    "src/FoundationClasses/TKernel/Storage/Storage_CallBack.hxx": "21f9a3b7507e745c6a7d8bc2d64d0aadac0ad1ee9ba6216fc1ac3b92151f61f9",
+    "src/FoundationClasses/TKernel/Storage/Storage_DefaultCallBack.hxx": "fb8de535e14a2aca3e1d3f7d7565b3fab8fc1ae73ff4578cf89a0b9d021f44d3",
+    "src/FoundationClasses/TKernel/Storage/Storage_DefaultCallBack.cxx": "08791dacf031d8ce534021e5178f28ce9e378bc9d261ac185c8883193df52472"
   },
-  "profile": "Linux x86_64 GCC C++17 -O2; sequential cross-schema write failure",
+  "profile": "Linux x86_64 GCC C++17 -O2; sequential cross-schema write failure and custom callback dispatch",
   "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_storage_schema_context.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-storage-schema-context",
   "run_command": "/tmp/tkernel-storage-schema-context <temporary-file-path>",
   "artifact_sha256": {
     "tools/oracle/tkernel_storage_schema_context.cxx": "137c059872807f0656d3088d237fec9032f0069536c7f1305cc2844f51969332",
-    "tools/oracle/tkernel_storage_schema_context.expected": "15d3c8e11ca049250fadb165da30c03178599e7372bc21c10d96f0e10d5dde6c"
+    "tools/oracle/tkernel_storage_schema_context.expected": "15d3c8e11ca049250fadb165da30c03178599e7372bc21c10d96f0e10d5dde6c",
+    "tools/oracle/tkernel_storage_schema_callback_dispatch.cxx": "2bbfc38e67f62483b9647cec384338c50c68436e6c9d64141d0e1324a1cd0370",
+    "tools/oracle/tkernel_storage_schema_callback_dispatch.expected": "0ad962a20af7d7553aacd0d05fc9c8c0875fc84e4f2ebbb599f65443b009c31c"
   },
   "legacy_declaration_count_changed": false,
   "full_api_parity_proven": false,
   "behavior_change": "Default schemas now share the process current-data slot rather than keeping one per instance. Constructors clear that shared slot, completed writes clear it, non-write exceptions leave it available to other schemas. Context injection preserves independent test/session state.",
   "limitations": [
     "Native null current-data dereference is replaced by Standard_NullObject.",
-    "Concurrent unsynchronized native access is not a behavioral equivalence claim; Rust synchronizes the slot.",
-    "Callbacks are Arc trait objects, not C++ subclass/RTTI representations."
+    "Rust callback implementations must satisfy Send + Sync because bindings are shared through Arc; native same-thread callbacks with thread-confined unsynchronized mutable state therefore have no direct Rust implementation. Unsynchronized concurrent native access is undefined and is not claimed."
   ],
   "validation": {
     "package_test_passed": 2621,
     "package_test_failed": 0,
     "strict_clippy_passed": true,
-    "supplemental_tests": 3,
-    "native_fixture_rows": 5
+    "supplemental_tests": 4,
+    "native_fixture_rows": 5,
+    "callback_dispatch_native_rows": 3,
+    "tkernel_all_targets_passed": 2418,
+    "tkernel_all_targets_failed": 0,
+    "workspace_all_target_check_passed": true,
+    "callback_dispatch_native_exact_output": true
+  },
+  "callback_rtti_fixture": {
+    "source": "tools/oracle/tkernel_storage_schema_callback_dispatch.cxx",
+    "expected": "tools/oracle/tkernel_storage_schema_callback_dispatch.expected",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_storage_schema_callback_dispatch.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-storage-schema-callback-dispatch",
+    "run_command": "/tmp/tkernel-storage-schema-callback-dispatch <temporary-file-path>",
+    "observations": [
+      "retrieved callback handle preserves identity",
+      "New/Add/Write/Read dispatch to custom overrides",
+      "DynamicType reports the custom callback class",
+      "IsKind reports Storage_CallBack ancestry",
+      "the Rust runtime descriptor projects the exact custom callback type, matching native down_cast availability"
+    ],
+    "rust_counterpart": "crates/tkernel/tests/storage_api_behavior/schema_context.rs::custom_callback_binding_preserves_rtti_identity_and_virtual_dispatch"
   }
 }

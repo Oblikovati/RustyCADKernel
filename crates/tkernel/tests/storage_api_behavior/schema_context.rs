@@ -1,10 +1,72 @@
 //! Cross-schema bindings share native current data; injected contexts isolate tests.
 use super::super::fakes::{FixedClock, ScriptedDriver};
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::standard::{Handle, RuntimeTyped, StandardPersistent, StandardTransient};
 use rustycad_tkernel::storage::{
-    CallBack, Data, DefaultCallBack, OpenMode, Schema, SchemaContext, StreamException,
+    BaseDriver, CallBack, Data, DefaultCallBack, OpenMode, Schema, SchemaContext, StreamException,
 };
-use std::{fmt::Write, sync::Arc};
+use std::{
+    any::TypeId,
+    fmt::Write,
+    sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    },
+};
+
+struct DispatchCallBack {
+    parent: StandardTransient,
+    calls: AtomicUsize,
+}
+
+rustycad_tkernel::impl_transient!(
+    DispatchCallBack,
+    "TestDispatchCallBack",
+    dyn CallBack,
+    parent,
+    interfaces: [dyn CallBack]
+);
+
+impl CallBack for DispatchCallBack {
+    fn new_persistent(&self) -> Handle<StandardPersistent> {
+        self.record_call();
+        Handle::new(StandardPersistent::default())
+    }
+
+    fn add(
+        &self,
+        _: &Handle<StandardPersistent>,
+        _: &Schema,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        self.record_call();
+        Ok(())
+    }
+
+    fn write(
+        &self,
+        _: &Handle<StandardPersistent>,
+        _: &mut dyn BaseDriver,
+        _: &Schema,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        self.record_call();
+        Ok(())
+    }
+
+    fn read(
+        &self,
+        _: &Handle<StandardPersistent>,
+        _: &mut dyn BaseDriver,
+        _: &Schema,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        self.record_call();
+        Ok(())
+    }
+}
+
+impl DispatchCallBack {
+    fn record_call(&self) {
+        self.calls.fetch_add(1, Ordering::Relaxed);
+    }
+}
 
 fn retained_write(schema: &Schema) -> Handle<Data> {
     let current = Handle::new(Data::default());
@@ -22,8 +84,8 @@ fn retained_write(schema: &Schema) -> Handle<Data> {
 
 fn binding_sequence(first: &Schema, second: &Schema) -> String {
     let current = retained_write(first);
-    let original: Arc<dyn CallBack> = Arc::new(DefaultCallBack);
-    let replacement: Arc<dyn CallBack> = Arc::new(DefaultCallBack);
+    let original: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
+    let replacement: Arc<dyn CallBack> = Arc::new(DefaultCallBack::default());
     let mut output = String::from("write raised\n");
     writeln!(
         output,
@@ -95,6 +157,42 @@ fn append_null_binding(
     .unwrap();
 }
 
+fn invoke_all_callback_overrides(bound: &Arc<dyn CallBack>, schema: &Schema) {
+    let persistent = bound.new_persistent();
+    let mut driver = ScriptedDriver::opened(OpenMode::Read);
+    bound.add(&persistent, schema).unwrap();
+    bound.write(&persistent, &mut driver, schema).unwrap();
+    bound.read(&persistent, &mut driver, schema).unwrap();
+    assert!(persistent.is_some());
+}
+
+fn bind_custom_callback(schema: &Schema, concrete: &Arc<DispatchCallBack>) -> Arc<dyn CallBack> {
+    let callback: Arc<dyn CallBack> = concrete.clone();
+    schema
+        .bind_type(&"dispatch".into(), Some(callback.clone()))
+        .unwrap();
+    schema.type_binding(&"dispatch".into()).unwrap().unwrap()
+}
+
+fn callback_runtime_report(bound: &Arc<dyn CallBack>) -> String {
+    format!(
+        "1 4\n{}\n{}\n",
+        bound.dynamic_type().name(),
+        i32::from(bound.is_kind(<dyn CallBack as RuntimeTyped>::static_type()))
+    )
+}
+
+fn assert_callback_runtime(bound: &Arc<dyn CallBack>, concrete: &DispatchCallBack) {
+    assert_eq!(bound.dynamic_type().name(), "TestDispatchCallBack");
+    assert!(bound.is_kind(<dyn CallBack as RuntimeTyped>::static_type()));
+    assert!(bound.is_kind(StandardTransient::static_type()));
+    let projected = bound.project(TypeId::of::<DispatchCallBack>()).unwrap();
+    assert!(std::ptr::eq(
+        projected.downcast_ref::<DispatchCallBack>().unwrap(),
+        concrete
+    ));
+}
+
 #[test]
 fn default_schemas_share_native_current_data_and_constructor_clears_it() {
     let first = Schema::with_clock(Arc::new(FixedClock));
@@ -149,5 +247,25 @@ fn completed_write_clears_the_shared_context_for_every_schema() {
             .unwrap()
             .exception_type(),
         "Standard_NullObject"
+    );
+}
+
+#[test]
+fn custom_callback_binding_preserves_rtti_identity_and_virtual_dispatch() {
+    let schema = Schema::with_context(Arc::new(FixedClock), SchemaContext::default());
+    let _current = retained_write(&schema);
+    let concrete = Arc::new(DispatchCallBack {
+        parent: StandardTransient::default(),
+        calls: AtomicUsize::new(0),
+    });
+    let bound = bind_custom_callback(&schema, &concrete);
+    let callback: Arc<dyn CallBack> = concrete.clone();
+    assert!(Arc::ptr_eq(&callback, &bound));
+    assert_callback_runtime(&bound, concrete.as_ref());
+    invoke_all_callback_overrides(&bound, &schema);
+    assert_eq!(concrete.calls.load(Ordering::Relaxed), 4);
+    assert_eq!(
+        callback_runtime_report(&bound),
+        include_str!("../../../../tools/oracle/tkernel_storage_schema_callback_dispatch.expected")
     );
 }

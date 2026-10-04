@@ -243,7 +243,8 @@ fn callback_script(input: &mut SplitWhitespace<'_>) -> String {
         let name = ascii(value);
         out += &format!(" {op}");
         match op {
-            "add" => schema.add_read_unknown_type_callback(&name, Some(Arc::new(DefaultCallBack))),
+            "add" => schema
+                .add_read_unknown_type_callback(&name, Some(Arc::new(DefaultCallBack::default()))),
             "addn" => schema.add_read_unknown_type_callback(&name, None),
             "rm" => schema.remove_read_unknown_type_callback(&name),
             "ls" => {

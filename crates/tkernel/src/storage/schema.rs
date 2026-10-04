@@ -156,7 +156,7 @@ impl Schema {
     /// `ResetDefaultCallBack`: back to a fresh `Storage_DefaultCallBack`.
     /// Example: `schema.reset_default_callback()`.
     pub fn reset_default_callback(&mut self) {
-        self.default_callback = Some(Arc::new(DefaultCallBack));
+        self.default_callback = Some(Arc::new(DefaultCallBack::default()));
     }
 
     /// `DefaultCallBack`; `schema.default_callback()`.
