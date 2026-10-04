@@ -227953,6 +227953,132 @@
       "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::value",
       "status": "partial",
       "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Init(const BRepAdaptor_Curve &, const BRepAdaptor_Surface &, const double, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::init_adaptors",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector(const BRepAdaptor_Curve &, const BRepAdaptor_Surface &, const double, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::from_adaptors",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::IsDone()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::is_done",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::SetContext(const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_context",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::perform",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::SetBeanParameters(const double, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_bean_parameters",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Init(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::init_shapes",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::MinimalSquareDistance()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::minimal_square_distance",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::SetSurfaceParameters(const double, const double, const double, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::set_surface_parameters",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Context()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::context",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Result(NCollection_Sequence<IntTools_Range> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::result_into",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::Result()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::result",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::new",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "IntTools_BeanFaceIntersector::IntTools_BeanFaceIntersector(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BeanFaceIntersector.hxx",
+      "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
+      "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::from_shapes",
+      "status": "partial",
+      "notes": "72 native line/plane constructor/tolerance/state/context/reset snapshots; tools/oracle/tkbo_bean_facade.md. Other Perform geometries explicitly unported; general stages, long overloads, shallow-copy/cache/allocator and full legacy/API parity remain unproven."
     }
   ],
   "tests": [
