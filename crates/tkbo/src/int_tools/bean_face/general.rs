@@ -3,11 +3,14 @@ use super::{Adaptor3dSurface, BeanFaceIntersector, Failure, Range, SurfaceType, 
 
 pub(super) fn compute(bean: &mut BeanFaceIntersector) -> Result<(), Failure> {
     if requires_localization(bean)? {
-        return Err(Failure::new(&format!(
-            "BeanFaceIntersector::Perform surface {:?} with bounds {:?} requires unported localization; expected nonlocalized surface",
-            bean.surface.get().expect("bean surface").get_type()?,
-            bean.bounds,
-        )));
+        return Err(Failure::with_message(
+            "Standard_NotImplemented",
+            &format!(
+                "BeanFaceIntersector::Perform surface {:?} with bounds {:?} requires unported localization; expected nonlocalized surface",
+                bean.surface.get().expect("bean surface").get_type()?,
+                bean.bounds,
+            ),
+        ));
     }
     super::exact_intersection::compute(bean)?;
     super::extremum::compute(bean)?;
