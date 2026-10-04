@@ -307,6 +307,7 @@ def checked_inventory(
     report: JSONObject, root: pathlib.Path, source: pathlib.Path
 ) -> JSONObject:
     """Validate report freshness and source revision; e.g. `checked_inventory(report, root, source)`."""
+    source = source.resolve()
     freshness = assess_report(report, root, source)
     if freshness["status"] in {"stale", "invalid"}:
         raise ValueError(
