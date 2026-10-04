@@ -12,8 +12,7 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Direction2, Line2, Point2, Vector2};
 
-// Native handles a seam by processing each chain occurrence in both edge orientations,
-// then stores the two resulting p-curves on the merged edge.
+// Native only enables its duplicate seam pass when the chain has one nonplanar support.
 
 /// Mirrors native support selection and p-curve union for each merged edge chain.
 pub(super) fn union_pcurves(

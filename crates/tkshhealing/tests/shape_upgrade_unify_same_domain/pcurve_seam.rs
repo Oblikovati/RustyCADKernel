@@ -1,18 +1,21 @@
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
-use rustycad_tkbrep::brep_tools::{WireExplorer, outer_wire};
+use rustycad_tkbrep::brep_tools::{ReShape, WireExplorer, outer_wire};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dTrimmedCurve};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
-use rustycad_tkmath::gp::Point2;
+use rustycad_tkmath::gp::{Axis2, Direction3, Point2, Point3, StandardDirection3};
 use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeCylinder, BRepPrimAPIMakeOneAxis};
+use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 
 const NATIVE_SEAM: &str =
     include_str!("../../../../tools/oracle/tkshhealing_unify_seam_pcurve.expected");
+const NATIVE_MULTI_SUPPORT: &str =
+    include_str!("../../../../tools/oracle/tkshhealing_unify_multi_support.expected");
 
 #[test]
 fn adjacent_segments_of_a_native_cylinder_seam_merge_back_to_one_seam() {
@@ -26,6 +29,135 @@ fn adjacent_segments_of_a_native_cylinder_seam_merge_back_to_one_seam() {
     assert_eq!(unique_edge_count(&result), native_value("result_edges"));
     assert!(is_valid(&result));
     assert_native_seam_pair(&result);
+}
+
+#[test]
+fn split_tangent_cylinder_boundary_merges_pcurves_on_both_supports() {
+    assert_eq!(native_support_row_count(), 2);
+    let input = tangent_cylinder_shell();
+    assert!(is_valid(&input));
+    assert_eq!(
+        unique_edge_count(&input),
+        native_value_from(NATIVE_MULTI_SUPPORT, "input_edges")
+    );
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, true);
+    unifier.build().unwrap();
+    let result = unifier.shape();
+    assert!(is_valid(&result));
+    assert_eq!(
+        unique_edge_count(&result),
+        native_value_from(NATIVE_MULTI_SUPPORT, "result_edges")
+    );
+    assert_two_support_seam_pcurves(&result);
+}
+
+fn native_support_row_count() -> usize {
+    NATIVE_MULTI_SUPPORT
+        .lines()
+        .filter(|line| line.starts_with("support "))
+        .count()
+}
+
+fn tangent_cylinder_shell() -> Shape {
+    let first = cylinder_face_at(Axis2::with_standard(
+        Point3::default(),
+        StandardDirection3::Z,
+    ));
+    let second_axes = Axis2::with_x_direction(
+        Point3::new(4.0, 0.0, 0.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+        Direction3::new(-1.0, 0.0, 0.0).unwrap(),
+    )
+    .unwrap();
+    let second = cylinder_face_at(second_axes);
+    let first_seam = seam_edge(&first).unwrap();
+    let second_seam = seam_edge(&second).unwrap();
+    let segments = split_edge_pair(&first_seam, &first).unwrap();
+    attach_split_pcurves(&segments, &second_seam, &second).unwrap();
+    let first_face = rebuild_lateral_face(&first, &first_seam, &segments).unwrap();
+    let second_face = rebuild_shared_vertex_face(&second, &second_seam, &segments).unwrap();
+    make_shell(&first_face, &second_face)
+}
+
+fn cylinder_face_at(axes: Axis2) -> Face {
+    let mut maker = BRepPrimAPIMakeCylinder::with_axes(axes, 2.0, 5.0);
+    maker.face().unwrap()
+}
+
+fn attach_split_pcurves(segments: &(Edge, Edge), seam: &Edge, face: &Face) -> Result<(), Failure> {
+    set_split_pcurves(&segments.0, seam, face, (0.0, 2.5))?;
+    set_split_pcurves(&segments.1, seam, face, (2.5, 5.0))
+}
+
+fn rebuild_shared_vertex_face(
+    source: &Face,
+    seam: &Edge,
+    segments: &(Edge, Edge),
+) -> Result<Face, Failure> {
+    let result = rebuild_lateral_face(source, seam, segments)?;
+    let (old_first, old_last) = rustycad_tkbrep::topexp::vertices(seam, false);
+    let (new_first, _) = rustycad_tkbrep::topexp::vertices(&segments.0, false);
+    let (_, new_last) = rustycad_tkbrep::topexp::vertices(&segments.1, false);
+    let reshaper = ShapeBuildReShape::new();
+    reshaper.replace(&old_first.into_shape(), &new_first.into_shape())?;
+    reshaper.replace(&old_last.into_shape(), &new_last.into_shape())?;
+    let changed = reshaper.apply(&result.into_shape(), ShapeEnum::Vertex)?;
+    rustycad_tkbrep::topods::face(&changed)
+}
+
+fn make_shell(first: &Face, second: &Face) -> Shape {
+    let builder = BRepBuilder::default();
+    let mut shell = rustycad_tkbrep::topods::Shell::default();
+    builder.make_shell(&mut shell);
+    builder
+        .add(&mut shell, &first.clone().into_shape())
+        .unwrap();
+    builder
+        .add(&mut shell, &second.clone().into_shape())
+        .unwrap();
+    shell.into_shape()
+}
+
+fn assert_two_support_seam_pcurves(shape: &Shape) {
+    let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)
+        .unwrap()
+        .map(|candidate| rustycad_tkbrep::topods::face(&candidate).unwrap())
+        .collect::<Vec<_>>();
+    assert_eq!(faces.len(), 2);
+    assert_distinct_cylinder_supports(&faces[0], &faces[1]);
+    let seams = faces
+        .iter()
+        .map(|face| seam_edge(face).unwrap())
+        .collect::<Vec<_>>();
+    assert!(seams[0].is_same(&seams[1]));
+    for (edge, face) in seams.iter().zip(&faces) {
+        assert_seam_matches_native(edge, face);
+    }
+}
+
+fn assert_distinct_cylinder_supports(first: &Face, second: &Face) {
+    let (first_surface, _) = BRepTool::surface_with_location(first).unwrap();
+    let (second_surface, _) = BRepTool::surface_with_location(second).unwrap();
+    assert!(first_surface != second_surface);
+}
+
+fn assert_seam_matches_native(edge: &Edge, face: &Face) {
+    assert!(BRepTool::is_closed_on_face(edge, face).unwrap());
+    let forward = BRepTool::curve_on_face(edge, face).unwrap();
+    let mut reversed = edge.clone();
+    reversed.reverse();
+    let backward = BRepTool::curve_on_face(&reversed, face).unwrap();
+    assert_curve_endpoints(&forward);
+    assert_curve_endpoints(&backward);
+    assert_eq!((forward.first, forward.last), (0.0, 5.0));
+}
+
+fn assert_curve_endpoints(curve: &rustycad_tkbrep::brep::EdgePCurve) {
+    let first = pcurve_value(curve, curve.first);
+    let last = pcurve_value(curve, curve.last);
+    assert_eq!((first.y(), last.y()), (5.0, 0.0));
+    assert!(is_native_seam_u(first.x()));
+    assert_eq!(first.x(), last.x());
 }
 
 fn split_cylinder_seam() -> Shape {
@@ -231,7 +363,11 @@ fn unique_edge_count(shape: &Shape) -> usize {
 }
 
 fn native_value(key: &str) -> usize {
-    NATIVE_SEAM
+    native_value_from(NATIVE_SEAM, key)
+}
+
+fn native_value_from(fixture: &str, key: &str) -> usize {
+    fixture
         .split_whitespace()
         .collect::<Vec<_>>()
         .windows(2)
