@@ -4,7 +4,9 @@
 use rustycad_tkgeombase::gce::{
     ErrorType, MakeCirc, MakeCirc2d, MakeDir, MakeMirror, MakeScale, Root,
 };
-use rustycad_tkmath::gp::{Circle2, Direction3, Plane3, Point2, Point3, Transform3, TransformForm};
+use rustycad_tkmath::gp::{
+    Circle2, Circle3, Direction3, Plane3, Point2, Point3, Transform3, TransformForm,
+};
 
 #[test]
 fn error_type_values_and_names_follow_the_native_enumeration() {
@@ -40,6 +42,15 @@ fn conversion_operators_return_the_value() {
     );
     let mirror = MakeMirror::from_point(Point3::new(1.0, 2.0, 3.0));
     assert_eq!(Transform3::from(&mirror).form(), TransformForm::PointMirror);
+}
+
+#[test]
+fn circle_conversion_operator_returns_the_native_value() {
+    let maker = MakeCirc::new(rustycad_tkmath::gp::Axis2::default(), 2.0).unwrap();
+    let converted = Circle3::try_from(&maker).unwrap();
+    let native_value = maker.operator().unwrap();
+    assert_eq!(converted.radius(), native_value.radius());
+    assert_eq!(converted.location(), native_value.location());
 }
 
 #[test]
