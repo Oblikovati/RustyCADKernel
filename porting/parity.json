@@ -356,12 +356,13 @@
       "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "Bnd_Range::Get() const",
+      "upstream_id": "Bnd_Range::Get() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::get",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
       "upstream_id": "Bnd_Range::GetIntermediatePoint(double,double&) const",
@@ -372,28 +373,31 @@
       "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "Bnd_Range::Center() const",
+      "upstream_id": "Bnd_Range::Center() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::center",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::Delta() const",
+      "upstream_id": "Bnd_Range::Delta() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::delta",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::IsVoid() const",
+      "upstream_id": "Bnd_Range::IsVoid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::is_void",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
       "upstream_id": "Bnd_Range::SetVoid()",
@@ -444,60 +448,67 @@
       "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "Bnd_Range::IsOut(double) const",
+      "upstream_id": "Bnd_Range::IsOut(double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::is_out",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::IsOut(const Bnd_Range&) const",
+      "upstream_id": "Bnd_Range::IsOut(const Bnd_Range&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::is_out_range",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::Contains(double) const",
+      "upstream_id": "Bnd_Range::Contains(double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::contains",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::Intersects(const Bnd_Range&) const",
+      "upstream_id": "Bnd_Range::Intersects(const Bnd_Range&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::intersects",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::Min() const",
+      "upstream_id": "Bnd_Range::Min() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::min",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::Max() const",
+      "upstream_id": "Bnd_Range::Max() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::max",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
-      "upstream_id": "Bnd_Range::operator==(const Bnd_Range&) const",
+      "upstream_id": "Bnd_Range::operator==(const Bnd_Range&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
       "rust_item": "rustycad_tkmath::bnd::Range1::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
+      "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending.",
+      "source_sha256": "23c7b0060757a0e1fd169a9a978aff0cde1e931c1c13dd3674d5629e7e9e9679"
     },
     {
       "upstream_id": "Bnd_Range::DumpJson(Standard_OStream&,int) const",
@@ -524,28 +535,31 @@
       "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Sphere::U() const",
+      "upstream_id": "Bnd_Sphere::U() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::u",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ae262ccca402260c7022d9df24332a41f40e74856036976651bd916a73ce5b3e"
     },
     {
-      "upstream_id": "Bnd_Sphere::V() const",
+      "upstream_id": "Bnd_Sphere::V() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::v",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ae262ccca402260c7022d9df24332a41f40e74856036976651bd916a73ce5b3e"
     },
     {
-      "upstream_id": "Bnd_Sphere::IsValid() const",
+      "upstream_id": "Bnd_Sphere::IsValid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::is_valid",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ae262ccca402260c7022d9df24332a41f40e74856036976651bd916a73ce5b3e"
     },
     {
       "upstream_id": "Bnd_Sphere::SetValid(bool)",
@@ -556,20 +570,22 @@
       "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Sphere::Center() const",
+      "upstream_id": "Bnd_Sphere::Center() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::center",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ae262ccca402260c7022d9df24332a41f40e74856036976651bd916a73ce5b3e"
     },
     {
-      "upstream_id": "Bnd_Sphere::Radius() const",
+      "upstream_id": "Bnd_Sphere::Radius() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::radius",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ae262ccca402260c7022d9df24332a41f40e74856036976651bd916a73ce5b3e"
     },
     {
       "upstream_id": "Bnd_Sphere::Distances(const gp_XYZ&,double&,double&) const",
@@ -1500,20 +1516,22 @@
       "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "PLib_JacobiPolynomial::WorkDegree() const",
+      "upstream_id": "PLib_JacobiPolynomial::WorkDegree() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
       "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::work_degree",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "bafa7209bf5ae06dfcc6dc0d9f6939803cbe570daa2498939f1c069a51d95bb7"
     },
     {
-      "upstream_id": "PLib_JacobiPolynomial::NivConstr() const",
+      "upstream_id": "PLib_JacobiPolynomial::NivConstr() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
       "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::niv_constr",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "bafa7209bf5ae06dfcc6dc0d9f6939803cbe570daa2498939f1c069a51d95bb7"
     },
     {
       "upstream_id": "PLib_HermitJacobi::PLib_HermitJacobi(int,GeomAbs_Shape)",
@@ -1588,20 +1606,22 @@
       "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "PLib_HermitJacobi::WorkDegree() const",
+      "upstream_id": "PLib_HermitJacobi::WorkDegree() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::work_degree",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "1c2bf48ff8950940fba027679ec01fe98d139e7e1da4f3333363d08ce28b6a16"
     },
     {
-      "upstream_id": "PLib_HermitJacobi::NivConstr() const",
+      "upstream_id": "PLib_HermitJacobi::NivConstr() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::niv_constr",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "1c2bf48ff8950940fba027679ec01fe98d139e7e1da4f3333363d08ce28b6a16"
     },
     {
       "upstream_id": "GeomAbs_Shape",
@@ -8100,12 +8120,13 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::IsValid() const",
+      "upstream_id": "BVH_Box::IsValid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::is_valid",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "source_sha256": "91e84c6faa8768d4f1133e5d6d2243854ddb21d27bc2e9d0830499c9cc5b44af"
     },
     {
       "upstream_id": "BVH_Box::Add(const BVH_VecNt&)",
@@ -8124,20 +8145,22 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::CornerMin() const",
+      "upstream_id": "BVH_Box::CornerMin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::corner_min",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "source_sha256": "91e84c6faa8768d4f1133e5d6d2243854ddb21d27bc2e9d0830499c9cc5b44af"
     },
     {
-      "upstream_id": "BVH_Box::CornerMax() const",
+      "upstream_id": "BVH_Box::CornerMax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::corner_max",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "source_sha256": "91e84c6faa8768d4f1133e5d6d2243854ddb21d27bc2e9d0830499c9cc5b44af"
     },
     {
       "upstream_id": "BVH_Box::CornerMin()",
@@ -11484,20 +11507,22 @@
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "BSplCLib_CacheParams::PeriodicNormalization(double) const",
+      "upstream_id": "BSplCLib_CacheParams::PeriodicNormalization(double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::CacheParams::periodic_normalization",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "714c908c1264ddff8c262b7a66d6db4954edb7d0a0b493fffa5b2ce7502c1123"
     },
     {
-      "upstream_id": "BSplCLib_CacheParams::IsCacheValid(double) const",
+      "upstream_id": "BSplCLib_CacheParams::IsCacheValid(double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::CacheParams::is_cache_valid",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "714c908c1264ddff8c262b7a66d6db4954edb7d0a0b493fffa5b2ce7502c1123"
     },
     {
       "upstream_id": "BSplCLib_CacheParams::LocateParameter(double&,const NCollection_Array1<double>&)",
@@ -12140,12 +12165,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::Coord(double&,double&) const",
+      "upstream_id": "gp_XY::Coord(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::X",
@@ -12204,36 +12230,40 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::Added(const gp_XY&) const",
+      "upstream_id": "gp_XY::Added(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Add>::add",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::operator+(const gp_XY&) const",
+      "upstream_id": "gp_XY::operator+(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Add>::add",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::Crossed(const gp_XY&) const",
+      "upstream_id": "gp_XY::Crossed(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::crossed",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::operator^(const gp_XY&) const",
+      "upstream_id": "gp_XY::operator^(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::bit::BitXor>::bitxor",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::CrossMagnitude",
@@ -12284,12 +12314,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::Dot(const gp_XY&) const",
+      "upstream_id": "gp_XY::Dot(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::dot",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::operator*(const gp_XY&) const",
@@ -12364,20 +12395,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::Multiplied(const gp_XY&) const",
+      "upstream_id": "gp_XY::Multiplied(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::multiplied_components",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::Multiplied(const gp_Mat2d&) const",
+      "upstream_id": "gp_XY::Multiplied(const gp_Mat2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::multiplied_matrix",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::operator*(const gp_Mat2d&) const",
@@ -12420,12 +12453,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::operator-() const",
+      "upstream_id": "gp_XY::operator-() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Neg>::neg",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::SetLinearForm(double,const gp_XY&,double,const gp_XY&)",
@@ -12476,20 +12510,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::Subtracted(const gp_XY&) const",
+      "upstream_id": "gp_XY::Subtracted(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Sub>::sub",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::operator-(const gp_XY&) const",
+      "upstream_id": "gp_XY::operator-(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Sub>::sub",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
       "upstream_id": "gp_XY::operator*(const gp_Mat2d&,const gp_XY&)",
@@ -12684,12 +12720,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat2d::Added(const gp_Mat2d&) const",
+      "upstream_id": "gp_Mat2d::Added(const gp_Mat2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Matrix2::added",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "36a2a6ad0f47b8a78308f1bef8706bd12094370d3c366dd9c66d159df2906747"
     },
     {
       "upstream_id": "gp_Mat2d::operator+(const gp_Mat2d&) const",
@@ -12748,12 +12785,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat2d::Multiplied(const gp_Mat2d&) const",
+      "upstream_id": "gp_Mat2d::Multiplied(const gp_Mat2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Matrix2::multiplied",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "36a2a6ad0f47b8a78308f1bef8706bd12094370d3c366dd9c66d159df2906747"
     },
     {
       "upstream_id": "gp_Mat2d::operator*(const gp_Mat2d&) const",
@@ -12780,12 +12818,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat2d::Multiplied(double) const",
+      "upstream_id": "gp_Mat2d::Multiplied(double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Matrix2::multiplied_scalar",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "36a2a6ad0f47b8a78308f1bef8706bd12094370d3c366dd9c66d159df2906747"
     },
     {
       "upstream_id": "gp_Mat2d::operator*(double) const",
@@ -12844,12 +12883,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat2d::Subtracted(const gp_Mat2d&) const",
+      "upstream_id": "gp_Mat2d::Subtracted(const gp_Mat2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Matrix2::subtracted",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "36a2a6ad0f47b8a78308f1bef8706bd12094370d3c366dd9c66d159df2906747"
     },
     {
       "upstream_id": "gp_Mat2d::operator-(const gp_Mat2d&) const",
@@ -13092,20 +13132,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Trsf2d::Transforms(double&,double&) const",
+      "upstream_id": "gp_Trsf2d::Transforms(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Trsf2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Transform2::transforms_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "e2f6737918be2ae2cac62007b8bba647c4765c50e7094b67b44213e7d25303cb"
     },
     {
-      "upstream_id": "gp_Trsf2d::Transforms(gp_XY&) const",
+      "upstream_id": "gp_Trsf2d::Transforms(gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Trsf2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Transform2::apply_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "e2f6737918be2ae2cac62007b8bba647c4765c50e7094b67b44213e7d25303cb"
     },
     {
       "upstream_id": "gp_Trsf2d::SetValues",
@@ -13308,28 +13350,31 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_GTrsf2d::Transforms(gp_XY&) const",
+      "upstream_id": "gp_GTrsf2d::Transforms(gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_GTrsf2d.hxx",
       "rust_item": "rustycad_tkmath::gp::GeneralTransform2::transforms",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "41d0e5f8f94abd8fcc15078c51b276ea230be81e77a1b8b4b54659558c924b84"
     },
     {
-      "upstream_id": "gp_GTrsf2d::Transformed(const gp_XY&) const",
+      "upstream_id": "gp_GTrsf2d::Transformed(const gp_XY&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_GTrsf2d.hxx",
       "rust_item": "rustycad_tkmath::gp::GeneralTransform2::transformed",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "41d0e5f8f94abd8fcc15078c51b276ea230be81e77a1b8b4b54659558c924b84"
     },
     {
-      "upstream_id": "gp_GTrsf2d::Transforms(double&,double&) const",
+      "upstream_id": "gp_GTrsf2d::Transforms(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_GTrsf2d.hxx",
       "rust_item": "rustycad_tkmath::gp::GeneralTransform2::transforms_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "41d0e5f8f94abd8fcc15078c51b276ea230be81e77a1b8b4b54659558c924b84"
     },
     {
       "upstream_id": "gp_GTrsf2d::Trsf2d",
@@ -13436,12 +13481,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Dir2d::Coord(double&,double&) const",
+      "upstream_id": "gp_Dir2d::Coord(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Direction2::xy",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "550cd6e64f7b4965d0632d5a73edb8e478ad37c90cb095b4caaf92b952648401"
     },
     {
       "upstream_id": "gp_Dir2d::X",
@@ -13700,12 +13746,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec2d::Coord(double&,double&) const",
+      "upstream_id": "gp_Vec2d::Coord(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector2::xy",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "3161c95751f9c82bbbf01b9748d72c7f1c86b80d5584852f813c583f60d40c0a"
     },
     {
       "upstream_id": "gp_Vec2d::X",
@@ -14204,12 +14251,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt2d::Coord(double&,double&) const",
+      "upstream_id": "gp_Pnt2d::Coord(double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Point2::xy",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9c645b3e03e4445cb67adc415a3eb5f9eb416de67f32d6a355906cd490fbe11f"
     },
     {
       "upstream_id": "gp_Pnt2d::X",
@@ -14236,12 +14284,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt2d::Coord() const",
+      "upstream_id": "gp_Pnt2d::Coord() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Point2::xy",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9c645b3e03e4445cb67adc415a3eb5f9eb416de67f32d6a355906cd490fbe11f"
     },
     {
       "upstream_id": "gp_Pnt2d::ChangeCoord",
@@ -14508,36 +14557,40 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin2d::Distance(const gp_Pnt2d&) const",
+      "upstream_id": "gp_Lin2d::Distance(const gp_Pnt2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Line2::distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "5d5e4237f41d88883f8a1c07be3d2956c8a404f02d2820ba297dbf3db84c7f01"
     },
     {
-      "upstream_id": "gp_Lin2d::Distance(const gp_Lin2d&) const",
+      "upstream_id": "gp_Lin2d::Distance(const gp_Lin2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Line2::distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "5d5e4237f41d88883f8a1c07be3d2956c8a404f02d2820ba297dbf3db84c7f01"
     },
     {
-      "upstream_id": "gp_Lin2d::SquareDistance(const gp_Pnt2d&) const",
+      "upstream_id": "gp_Lin2d::SquareDistance(const gp_Pnt2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Line2::square_distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "5d5e4237f41d88883f8a1c07be3d2956c8a404f02d2820ba297dbf3db84c7f01"
     },
     {
-      "upstream_id": "gp_Lin2d::SquareDistance(const gp_Lin2d&) const",
+      "upstream_id": "gp_Lin2d::SquareDistance(const gp_Lin2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin2d.hxx",
       "rust_item": "rustycad_tkmath::gp::Line2::square_distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "5d5e4237f41d88883f8a1c07be3d2956c8a404f02d2820ba297dbf3db84c7f01"
     },
     {
       "upstream_id": "gp_Lin2d::Normal",
@@ -16780,20 +16833,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XYZ::Coord(double&,double&,double&) const",
+      "upstream_id": "gp_XYZ::Coord(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "rustycad_tkmath::gp::Xyz::coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
     },
     {
-      "upstream_id": "gp_XYZ::GetData() const",
+      "upstream_id": "gp_XYZ::GetData() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "rustycad_tkmath::gp::Xyz::coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
     },
     {
       "upstream_id": "gp_XYZ::ChangeData()",
@@ -16900,12 +16955,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XYZ::Crossed(const gp_XYZ&) const",
+      "upstream_id": "gp_XYZ::Crossed(const gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "rustycad_tkmath::gp::Xyz::crossed",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
     },
     {
       "upstream_id": "gp_XYZ::operator^(const gp_XYZ&) const",
@@ -16980,12 +17036,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XYZ::Dot(const gp_XYZ&) const",
+      "upstream_id": "gp_XYZ::Dot(const gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "rustycad_tkmath::gp::Xyz::dot",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
     },
     {
       "upstream_id": "gp_XYZ::operator*(const gp_XYZ&) const",
@@ -17068,12 +17125,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XYZ::Multiplied(const gp_XYZ&) const",
+      "upstream_id": "gp_XYZ::Multiplied(const gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "rustycad_tkmath::gp::Xyz::multiplied_components",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
     },
     {
       "upstream_id": "gp_XYZ::Multiplied(const gp_Mat&) const",
@@ -17908,20 +17966,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Trsf::Transforms(double&,double&,double&) const",
+      "upstream_id": "gp_Trsf::Transforms(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
       "rust_item": "rustycad_tkmath::gp::Transform3::transforms_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "aa178cf741395353bec635152c363f717b47b0cc1a57dcd9f5c5338e93e1b626"
     },
     {
-      "upstream_id": "gp_Trsf::Transforms(gp_XYZ&) const",
+      "upstream_id": "gp_Trsf::Transforms(gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
       "rust_item": "rustycad_tkmath::gp::Transform3::apply_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "aa178cf741395353bec635152c363f717b47b0cc1a57dcd9f5c5338e93e1b626"
     },
     {
       "upstream_id": "gp_Trsf::GetMat4",
@@ -18156,20 +18216,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_GTrsf::Transforms(gp_XYZ&) const",
+      "upstream_id": "gp_GTrsf::Transforms(gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_GTrsf.hxx",
       "rust_item": "rustycad_tkmath::gp::GeneralTransform3::transforms",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9779fc0733120bf48aaeb649700520fa591fd696a3bedf3a025fc736e7dc0ac3"
     },
     {
-      "upstream_id": "gp_GTrsf::Transforms(double&,double&,double&) const",
+      "upstream_id": "gp_GTrsf::Transforms(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_GTrsf.hxx",
       "rust_item": "rustycad_tkmath::gp::GeneralTransform3::transforms_coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9779fc0733120bf48aaeb649700520fa591fd696a3bedf3a025fc736e7dc0ac3"
     },
     {
       "upstream_id": "gp_GTrsf::Trsf",
@@ -19476,12 +19538,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Ax2::Mirrored(const gp_Pnt&) const",
+      "upstream_id": "gp_Ax2::Mirrored(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
       "rust_item": "rustycad_tkmath::gp::Axis2::mirrored_point",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "1254b1d47dbd585e6e8f20edb2595f28e9f6199d1cd4f7e01d2f9bc2bedc7ac1"
     },
     {
       "upstream_id": "gp_Ax2::Rotated",
@@ -19508,12 +19571,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Ax2::Translated(const gp_Vec&) const",
+      "upstream_id": "gp_Ax2::Translated(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
       "rust_item": "rustycad_tkmath::gp::Axis2::translated",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "1254b1d47dbd585e6e8f20edb2595f28e9f6199d1cd4f7e01d2f9bc2bedc7ac1"
     },
     {
       "upstream_id": "gp_Ax3()",
@@ -19636,12 +19700,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Ax3::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Ax3::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Ax3.hxx",
       "rust_item": "rustycad_tkmath::gp::Axis3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ea44ed99d58c7c11a96a282d86c6c647f6390407e1d454c1c515fd7cba72eddf"
     },
     {
       "upstream_id": "gp_Ax3::Rotated",
@@ -19668,12 +19733,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Ax3::Translated(const gp_Vec&) const",
+      "upstream_id": "gp_Ax3::Translated(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Ax3.hxx",
       "rust_item": "rustycad_tkmath::gp::Axis3::translated",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "ea44ed99d58c7c11a96a282d86c6c647f6390407e1d454c1c515fd7cba72eddf"
     },
     {
       "upstream_id": "gp_Ax3::DumpJson",
@@ -19812,12 +19878,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Dir::Coord(double&,double&,double&) const",
+      "upstream_id": "gp_Dir::Coord(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
       "rust_item": "rustycad_tkmath::gp::Direction3::coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "a732ec1495f2f1b8482d08041b978b3c3e077de1ecf024ab8abeafda7c10d2ff"
     },
     {
       "upstream_id": "gp_Dir::X",
@@ -20004,12 +20071,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Dir::Mirrored(const gp_Dir&) const",
+      "upstream_id": "gp_Dir::Mirrored(const gp_Dir&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
       "rust_item": "rustycad_tkmath::gp::Direction3::mirrored_direction",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "a732ec1495f2f1b8482d08041b978b3c3e077de1ecf024ab8abeafda7c10d2ff"
     },
     {
       "upstream_id": "gp_Dir::Mirror(const gp_Ax1&)",
@@ -20020,12 +20088,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Dir::Mirrored(const gp_Ax1&) const",
+      "upstream_id": "gp_Dir::Mirrored(const gp_Ax1&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
       "rust_item": "rustycad_tkmath::gp::Direction3::mirrored_axis",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "a732ec1495f2f1b8482d08041b978b3c3e077de1ecf024ab8abeafda7c10d2ff"
     },
     {
       "upstream_id": "gp_Dir::Mirror(const gp_Ax2&)",
@@ -20036,12 +20105,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Dir::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Dir::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
       "rust_item": "rustycad_tkmath::gp::Direction3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "a732ec1495f2f1b8482d08041b978b3c3e077de1ecf024ab8abeafda7c10d2ff"
     },
     {
       "upstream_id": "gp_Dir::Rotate",
@@ -20196,12 +20266,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Distance(const gp_Pnt&) const",
+      "upstream_id": "gp_Lin::Distance(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Distance(const gp_Lin&) const",
@@ -20212,20 +20283,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::SquareDistance(const gp_Pnt&) const",
+      "upstream_id": "gp_Lin::SquareDistance(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::square_distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
-      "upstream_id": "gp_Lin::SquareDistance(const gp_Lin&) const",
+      "upstream_id": "gp_Lin::SquareDistance(const gp_Lin&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::square_distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Mirror(const gp_Pnt&)",
@@ -20236,12 +20309,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Mirrored(const gp_Pnt&) const",
+      "upstream_id": "gp_Lin::Mirrored(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::mirrored_point",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Mirror(const gp_Ax1&)",
@@ -20252,12 +20326,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Mirrored(const gp_Ax1&) const",
+      "upstream_id": "gp_Lin::Mirrored(const gp_Ax1&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::mirrored_axis",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Mirror(const gp_Ax2&)",
@@ -20268,12 +20343,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Lin::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Rotate",
@@ -20332,12 +20408,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Translated(const gp_Vec&) const",
+      "upstream_id": "gp_Lin::Translated(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::translated",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Lin::Translate(const gp_Pnt&,const gp_Pnt&)",
@@ -20348,12 +20425,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Lin::Translated(const gp_Pnt&,const gp_Pnt&) const",
+      "upstream_id": "gp_Lin::Translated(const gp_Pnt&,const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Lin.hxx",
       "rust_item": "rustycad_tkmath::gp::Line3::translated_between",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "341bcfa0ebcb293e6b2a3e9787af27b221fd0d3afa0396f8db9f504c8205e484"
     },
     {
       "upstream_id": "gp_Pln()",
@@ -20468,76 +20546,85 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Distance(const gp_Pnt&) const",
+      "upstream_id": "gp_Pln::Distance(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::Distance(const gp_Lin&) const",
+      "upstream_id": "gp_Pln::Distance(const gp_Lin&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::Distance(const gp_Pln&) const",
+      "upstream_id": "gp_Pln::Distance(const gp_Pln&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::distance_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SignedDistance(const gp_Pnt&) const",
+      "upstream_id": "gp_Pln::SignedDistance(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::signed_distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SignedDistance(const gp_Lin&) const",
+      "upstream_id": "gp_Pln::SignedDistance(const gp_Lin&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::signed_distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SignedDistance(const gp_Pln&) const",
+      "upstream_id": "gp_Pln::SignedDistance(const gp_Pln&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::signed_distance_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SquareDistance(const gp_Pnt&) const",
+      "upstream_id": "gp_Pln::SquareDistance(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::square_distance",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SquareDistance(const gp_Lin&) const",
+      "upstream_id": "gp_Pln::SquareDistance(const gp_Lin&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::square_distance_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::SquareDistance(const gp_Pln&) const",
+      "upstream_id": "gp_Pln::SquareDistance(const gp_Pln&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::square_distance_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::XAxis",
@@ -20556,20 +20643,22 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Contains(const gp_Pnt&,double) const",
+      "upstream_id": "gp_Pln::Contains(const gp_Pnt&,double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::contains",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
-      "upstream_id": "gp_Pln::Contains(const gp_Lin&,double,double) const",
+      "upstream_id": "gp_Pln::Contains(const gp_Lin&,double,double) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::contains_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::Mirror(const gp_Pnt&)",
@@ -20580,12 +20669,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Mirrored(const gp_Pnt&) const",
+      "upstream_id": "gp_Pln::Mirrored(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::mirrored_point",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::Mirror(const gp_Ax1&)",
@@ -20596,12 +20686,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Mirrored(const gp_Ax1&) const",
+      "upstream_id": "gp_Pln::Mirrored(const gp_Ax1&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::mirrored_axis",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::Mirror(const gp_Ax2&)",
@@ -20612,12 +20703,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Pln::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::Rotate",
@@ -20676,12 +20768,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Translated(const gp_Vec&) const",
+      "upstream_id": "gp_Pln::Translated(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::translated",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::Translate(const gp_Pnt&,const gp_Pnt&)",
@@ -20692,12 +20785,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pln::Translated(const gp_Pnt&,const gp_Pnt&) const",
+      "upstream_id": "gp_Pln::Translated(const gp_Pnt&,const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pln.hxx",
       "rust_item": "rustycad_tkmath::gp::Plane3::translated_between",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "88cacbf7cebeeb4350079fec4e1231af30689d791ebce477a28f686d6676492d"
     },
     {
       "upstream_id": "gp_Pln::DumpJson",
@@ -20788,12 +20882,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Coord(double&,double&,double&) const",
+      "upstream_id": "gp_Pnt::Coord(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::coordinates",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::X",
@@ -20828,12 +20923,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Coord() const",
+      "upstream_id": "gp_Pnt::Coord() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::xyz",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::ChangeCoord",
@@ -20884,12 +20980,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Mirrored(const gp_Pnt&) const",
+      "upstream_id": "gp_Pnt::Mirrored(const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::mirrored_point",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::Mirror(const gp_Ax1&)",
@@ -20900,12 +20997,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Mirrored(const gp_Ax1&) const",
+      "upstream_id": "gp_Pnt::Mirrored(const gp_Ax1&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::mirrored_axis",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::Mirror(const gp_Ax2&)",
@@ -20916,12 +21014,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Pnt::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::Rotate",
@@ -20980,12 +21079,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Translated(const gp_Vec&) const",
+      "upstream_id": "gp_Pnt::Translated(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::translated",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::Translate(const gp_Pnt&,const gp_Pnt&)",
@@ -20996,12 +21096,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Pnt::Translated(const gp_Pnt&,const gp_Pnt&) const",
+      "upstream_id": "gp_Pnt::Translated(const gp_Pnt&,const gp_Pnt&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
       "rust_item": "rustycad_tkmath::gp::Point3::translated_between",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "528547ce281c1bd222679156466039eea9fa8cb8913d879092c3207fac3716cc"
     },
     {
       "upstream_id": "gp_Pnt::DumpJson",
@@ -21172,12 +21273,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec::Coord(double&,double&,double&) const",
+      "upstream_id": "gp_Vec::Coord(double&,double&,double&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector3::xyz",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "c2f5d76495803ebb587ee81cd34a645f7c0177ba4ba681786c2af46bddaf717d"
     },
     {
       "upstream_id": "gp_Vec::X",
@@ -21580,12 +21682,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec::Mirrored(const gp_Vec&) const",
+      "upstream_id": "gp_Vec::Mirrored(const gp_Vec&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector3::mirrored_vector",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "c2f5d76495803ebb587ee81cd34a645f7c0177ba4ba681786c2af46bddaf717d"
     },
     {
       "upstream_id": "gp_Vec::Mirror(const gp_Ax1&)",
@@ -21596,12 +21699,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec::Mirrored(const gp_Ax1&) const",
+      "upstream_id": "gp_Vec::Mirrored(const gp_Ax1&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector3::mirrored_axis",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "c2f5d76495803ebb587ee81cd34a645f7c0177ba4ba681786c2af46bddaf717d"
     },
     {
       "upstream_id": "gp_Vec::Mirror(const gp_Ax2&)",
@@ -21612,12 +21716,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec::Mirrored(const gp_Ax2&) const",
+      "upstream_id": "gp_Vec::Mirrored(const gp_Ax2&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector3::mirrored_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "c2f5d76495803ebb587ee81cd34a645f7c0177ba4ba681786c2af46bddaf717d"
     },
     {
       "upstream_id": "gp_Vec::Rotate",
@@ -27412,76 +27517,85 @@
       "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_OBB::Center() const",
+      "upstream_id": "Bnd_OBB::Center() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::center",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::XDirection() const",
+      "upstream_id": "Bnd_OBB::XDirection() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::x_direction",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::YDirection() const",
+      "upstream_id": "Bnd_OBB::YDirection() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::y_direction",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::ZDirection() const",
+      "upstream_id": "Bnd_OBB::ZDirection() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::z_direction",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::XHSize() const",
+      "upstream_id": "Bnd_OBB::XHSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::x_h_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::YHSize() const",
+      "upstream_id": "Bnd_OBB::YHSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::y_h_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::ZHSize() const",
+      "upstream_id": "Bnd_OBB::ZHSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::z_h_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::GetHalfSizes() const",
+      "upstream_id": "Bnd_OBB::GetHalfSizes() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::half_sizes",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
-      "upstream_id": "Bnd_OBB::IsVoid() const",
+      "upstream_id": "Bnd_OBB::IsVoid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_void",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
       "upstream_id": "Bnd_OBB::SetVoid()",
@@ -27500,12 +27614,13 @@
       "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_OBB::IsAABox() const",
+      "upstream_id": "Bnd_OBB::IsAABox() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_aa_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
       "upstream_id": "Bnd_OBB::Enlarge(double)",
@@ -27524,12 +27639,13 @@
       "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_OBB::SquareExtent() const",
+      "upstream_id": "Bnd_OBB::SquareExtent() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
       "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::square_extent",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4"
     },
     {
       "upstream_id": "Bnd_OBB::IsOut(const Bnd_OBB&) const",
@@ -27788,20 +27904,22 @@
       "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOut(const Bnd_Box2d&,const gp_Trsf2d&) const",
+      "upstream_id": "Bnd_Box2d::IsOut(const Bnd_Box2d&,const gp_Trsf2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_transformed",
       "status": "implemented",
-      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOut(const gp_Trsf2d&,const Bnd_Box2d&,const gp_Trsf2d&) const",
+      "upstream_id": "Bnd_Box2d::IsOut(const gp_Trsf2d&,const Bnd_Box2d&,const gp_Trsf2d&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_both",
       "status": "implemented",
-      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::Dump() const",
@@ -29460,12 +29578,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::GetGap() const",
+      "upstream_id": "Bnd_Box::GetGap() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::gap",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::SetGap(double)",
@@ -29524,12 +29643,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenXmin() const",
+      "upstream_id": "Bnd_Box::IsOpenXmin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_xmin",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::OpenXmax()",
@@ -29540,12 +29660,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenXmax() const",
+      "upstream_id": "Bnd_Box::IsOpenXmax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_xmax",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::OpenYmin()",
@@ -29556,12 +29677,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenYmin() const",
+      "upstream_id": "Bnd_Box::IsOpenYmin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_ymin",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::OpenYmax()",
@@ -29572,12 +29694,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenYmax() const",
+      "upstream_id": "Bnd_Box::IsOpenYmax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_ymax",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::OpenZmin()",
@@ -29588,12 +29711,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenZmin() const",
+      "upstream_id": "Bnd_Box::IsOpenZmin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_zmin",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::OpenZmax()",
@@ -29604,12 +29728,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpenZmax() const",
+      "upstream_id": "Bnd_Box::IsOpenZmax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_zmax",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::IsXThin(double) const",
@@ -29636,28 +29761,31 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::IsOpen() const",
+      "upstream_id": "Bnd_Box::IsOpen() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
-      "upstream_id": "Bnd_Box::IsWhole() const",
+      "upstream_id": "Bnd_Box::IsWhole() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_whole",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
-      "upstream_id": "Bnd_Box::IsVoid() const",
+      "upstream_id": "Bnd_Box::IsVoid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_void",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::IsThin(double) const",
@@ -29788,28 +29916,31 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box::SquareExtent() const",
+      "upstream_id": "Bnd_Box::SquareExtent() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::square_extent",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
-      "upstream_id": "Bnd_Box::FinitePart() const",
+      "upstream_id": "Bnd_Box::FinitePart() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::finite_part",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
-      "upstream_id": "Bnd_Box::HasFinitePart() const",
+      "upstream_id": "Bnd_Box::HasFinitePart() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox3::has_finite_part",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "9cf14c296b0b5fcaa06ae6b1696d12b957579c5810ef354f791e8422b86fd654"
     },
     {
       "upstream_id": "Bnd_Box::DumpJson(Standard_OStream&,int) const",
@@ -29860,12 +29991,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::GetGap() const",
+      "upstream_id": "Bnd_Box2d::GetGap() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::gap",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::SetGap(double)",
@@ -29908,12 +30040,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOpenXmin() const",
+      "upstream_id": "Bnd_Box2d::IsOpenXmin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_xmin",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::OpenXmax()",
@@ -29924,12 +30057,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOpenXmax() const",
+      "upstream_id": "Bnd_Box2d::IsOpenXmax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_xmax",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::OpenYmin()",
@@ -29940,12 +30074,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOpenYmin() const",
+      "upstream_id": "Bnd_Box2d::IsOpenYmin() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_ymin",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::OpenYmax()",
@@ -29956,28 +30091,31 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::IsOpenYmax() const",
+      "upstream_id": "Bnd_Box2d::IsOpenYmax() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_ymax",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
-      "upstream_id": "Bnd_Box2d::IsWhole() const",
+      "upstream_id": "Bnd_Box2d::IsWhole() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_whole",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
-      "upstream_id": "Bnd_Box2d::IsVoid() const",
+      "upstream_id": "Bnd_Box2d::IsVoid() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_void",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Box2d::Transformed(const gp_Trsf2d&) const",
@@ -30068,12 +30206,13 @@
       "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_Box2d::SquareExtent() const",
+      "upstream_id": "Bnd_Box2d::SquareExtent() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundingBox2::square_extent",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending.",
+      "source_sha256": "b3dc3b0e812f88bdf609fb5b4b131022868074db403a6d5b2ef95eddce3eea3d"
     },
     {
       "upstream_id": "Bnd_Range::IntersectStatus",
@@ -37756,12 +37895,13 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_CoherentLink::IsEmpty() const",
+      "upstream_id": "Poly_CoherentLink::IsEmpty() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentLink.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentLink::is_empty",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "source_sha256": "82ebaf80128a8a162b6b57dc7239776ef4a47491f3c95226f1440287b9c92420"
     },
     {
       "upstream_id": "Poly_CoherentLink::Nullify()",
@@ -37852,12 +37992,13 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_CoherentNode::IsFreeNode() const",
+      "upstream_id": "Poly_CoherentNode::IsFreeNode() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::is_free_node",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "source_sha256": "43fb34c629691f23c8345f450a741238aa0a4e0947719e5406b789baf39ce254"
     },
     {
       "upstream_id": "Poly_CoherentNode::Clear(const occ::handle<NCollection_BaseAllocator>&)",
@@ -38060,12 +38201,13 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_CoherentTriangle::IsEmpty() const",
+      "upstream_id": "Poly_CoherentTriangle::IsEmpty() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangle.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriangle::is_empty",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "source_sha256": "7074be27059fd19c3d358c2cdf384c5109f47b015a5586f654b17356b0020475"
     },
     {
       "upstream_id": "Poly_CoherentTriangle::SetConnection(int,Poly_CoherentTriangle&)",
@@ -40508,12 +40650,13 @@
       "notes": "Excluded: C++ move constructor/assignment. Rust moves values by assignment; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "TopLoc_SListOfItemLocation::IsEmpty() const",
+      "upstream_id": "TopLoc_SListOfItemLocation::IsEmpty() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/TopLoc/TopLoc_SListOfItemLocation.hxx",
       "rust_item": "rustycad_tkmath::toploc::SListOfItemLocation::is_empty",
       "status": "implemented",
-      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself."
+      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself.",
+      "source_sha256": "7ddb88b915f91e123f2228df34453a9d800dadd2ae29d067c8b0605a719afdce"
     },
     {
       "upstream_id": "TopLoc_SListOfItemLocation::Clear()",
@@ -40564,12 +40707,13 @@
       "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself."
     },
     {
-      "upstream_id": "TopLoc_SListOfItemLocation::More() const",
+      "upstream_id": "TopLoc_SListOfItemLocation::More() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/TopLoc/TopLoc_SListOfItemLocation.hxx",
       "rust_item": "rustycad_tkmath::toploc::SListOfItemLocation::more",
       "status": "implemented",
-      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself."
+      "notes": "Explicit TopLoc mapping. Datums are shared through TKernel Handle, lists share tails through Handle nodes; FirstDatum/FirstPower on an empty location and composition with a singular datum return Failure errors; NextLocation of the identity is the identity itself.",
+      "source_sha256": "7ddb88b915f91e123f2228df34453a9d800dadd2ae29d067c8b0605a719afdce"
     },
     {
       "upstream_id": "TopLoc_SListOfItemLocation::Next()",
@@ -41356,68 +41500,76 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
-      "upstream_id": "math_DoubleTab::LowerRow() const",
+      "upstream_id": "math_DoubleTab::LowerRow() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::lower_row",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::UpperRow() const",
+      "upstream_id": "math_DoubleTab::UpperRow() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::upper_row",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::LowerCol() const",
+      "upstream_id": "math_DoubleTab::LowerCol() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::lower_col",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::UpperCol() const",
+      "upstream_id": "math_DoubleTab::UpperCol() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::upper_col",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::NbRows() const",
+      "upstream_id": "math_DoubleTab::NbRows() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::nb_rows",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::RowSize() const",
+      "upstream_id": "math_DoubleTab::RowSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::row_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::NbColumns() const",
+      "upstream_id": "math_DoubleTab::NbColumns() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::nb_columns",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
-      "upstream_id": "math_DoubleTab::ColSize() const",
+      "upstream_id": "math_DoubleTab::ColSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
       "rust_item": "rustycad_tkmath::math::DoubleTab::col_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "82cf7449bcb68d24ea439c80d588c54f0eb9757880b6d8d47ae4e74159cc4e51"
     },
     {
       "upstream_id": "math_DoubleTab::At(size_t,size_t) const",
@@ -42716,12 +42868,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
-      "upstream_id": "math_Matrix::RowSize() const",
+      "upstream_id": "math_Matrix::RowSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
       "rust_item": "rustycad_tkmath::math::Matrix::row_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "7a601339f7bf11000e13c3daa6a26e23dae0a5c859aecd3625c0e6c81a51c25a"
     },
     {
       "upstream_id": "math_Matrix::ColNumber() const",
@@ -42732,12 +42885,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
-      "upstream_id": "math_Matrix::ColSize() const",
+      "upstream_id": "math_Matrix::ColSize() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
       "rust_item": "rustycad_tkmath::math::Matrix::col_size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors.",
+      "source_sha256": "7a601339f7bf11000e13c3daa6a26e23dae0a5c859aecd3625c0e6c81a51c25a"
     },
     {
       "upstream_id": "math_Matrix::LowerRow() const",
@@ -44236,12 +44390,13 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Size() const",
+      "upstream_id": "math_VectorBase::Size() const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::size",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics.",
+      "source_sha256": "d68820c34a6cb97d0eeec2639b9c1948c9e0934ddc9cba5d88b22256c0f68369"
     },
     {
       "upstream_id": "math_VectorBase::Lower() const",
@@ -228279,7 +228434,7 @@
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ef",
       "status": "partial",
-      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Deferred common-block face membership, sampled tolerances and endpoint propagation have single-block/two-face native replays. Multi-block grouping, general new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and other curve/surface families remain incomplete or unverified. The flat Bezier-face native success now matches the Rust interference record and source/generated vertex coordinates after localized BeanFace integration. Supplemental fixtures do not map new legacy declarations. Fused generated-vertex projection before splitting now matches native IntersectVE(..., false), without VE records, for three nearby line/plane hits with fuzzy 0.0004; tools/oracle/tkbo_pave_filler_ef_new_vertices.md. Other projection domains and multi-block grouping remain unproven."
+      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Deferred common-block face membership, sampled tolerances and endpoint propagation have single-block/two-face native replays. Multi-block grouping, general new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and other curve/surface families remain incomplete or unverified. The flat Bezier-face native success now matches the Rust interference record and source/generated vertex coordinates after localized BeanFace integration. Supplemental fixtures do not map new legacy declarations. Fused generated-vertex projection before splitting now matches native IntersectVE(..., false), without VE records, for three nearby line/plane hits with fuzzy 0.0004; tools/oracle/tkbo_pave_filler_ef_new_vertices.md. Other projection domains and multi-block grouping remain unproven. Candidate tolerance is now retained for native strict-distance grouping; native fixtures cover three line/plane hits separated by 0.00041 at fuzzy 0.0004, a VE-split edge later block and a two-edge shared common block. See tools/oracle/tkbo_pave_filler_ef_candidate_tolerance.md, tkbo_pave_filler_ef_multiblock.md and tkbo_pave_filler_ef_common_group.md. Other solver families and broader grouping remain unverified."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetAnalyse() const",
@@ -228522,7 +228677,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::AsDes() const",
@@ -228531,7 +228686,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::as_des",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::BRepOffset_Inter3d(const occ::handle<BRepAlgo_AsDes> &, const TopAbs_State, const double)",
@@ -228540,7 +228695,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::FaceInter(const TopoDS_Face &, const TopoDS_Face &, const BRepAlgo_Image &)",
@@ -228549,7 +228704,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::face_inter",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::IsDone(const TopoDS_Face &, const TopoDS_Face &) const",
@@ -228558,7 +228713,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::is_done",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::NewEdges()",
@@ -228567,7 +228722,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::new_edges",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::SetDone(const TopoDS_Face &, const TopoDS_Face &)",
@@ -228576,7 +228731,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::set_done",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "BRepOffset_Inter3d::TouchedFaces()",
@@ -228585,7 +228740,7 @@
       "source_sha256": "92ba4a5595bf419325e57db25af4c224f19edd5d24dccd2773cf51ac469208ef",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::touched_faces",
       "status": "partial",
-      "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+      "notes": "Native state and unbounded/rectangular/triangular/straight-wire hole plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: curved or coincident trim boundaries, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
     },
     {
       "upstream_id": "HLRBRep_AreaLimit",
