@@ -1,0 +1,20 @@
+{
+  "scope": "Retain std::istream gcount across state-only operations",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "files_sha256": {
+    "crates/tkernel/src/standard/istream_stream.rs": "fa184bd26d3a472010bebde946fed29bbd28bb83ecdb9e04a484a6254ad15146",
+    "crates/tkernel/src/standard/istream_stream/count_tests.rs": "c0547724db0a7be7d2040a059f3b561ce8357356fefd05bc773f80a41866950a",
+    "tools/oracle/tkernel_istream_gcount_state.cxx": "3aca3d7b4ec0489601fd2b86f12ebe6927d23b931b55c28df9858e5445b26f04",
+    "tools/oracle/tkernel_istream_gcount_state.expected": "d77d1dc12e2283c87db1c6dd57fc810ee4bd099ebb607bd1d09c34474118f5fd"
+  },
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_executable_sha256": "cbd504369f34590d5298aa061fcb4169a1c3c130c582a61558e7c902cdc746ab",
+  "native_compile_command": "g++ -std=c++17 -O2 tools/oracle/tkernel_istream_gcount_state.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel-istream-gcount",
+  "native_run_command": "/tmp/tkernel-istream-gcount",
+  "native_output": "2/2/mask:2/clear:2/good:2/zero:0/0\n",
+  "rust_verification": "cargo test -p rustycad-tkernel --lib: 90 passed, 0 failed",
+  "supplemental_new_tests": 2,
+  "new_legacy_declarations": 0,
+  "regression": "Exception-mask and clear(state) failures previously reported zero despite the last native-protocol read counting two bytes. State-only operations now preserve that count; a new block read resets it before sentry processing.",
+  "scope_limit": "gcount tracks native-protocol read_block. The generic Rust Read convenience interface is not the exact std::istream protocol path."
+}

@@ -9,6 +9,7 @@ pub struct IstreamStream<R> {
     fail: bool,
     bad: bool,
     exceptions: IstreamExceptionMask,
+    last_gcount: usize,
 }
 
 impl<R: Read> IstreamStream<R> {
@@ -20,6 +21,7 @@ impl<R: Read> IstreamStream<R> {
             fail: false,
             bad: false,
             exceptions: IstreamExceptionMask::default(),
+            last_gcount: 0,
         }
     }
 
@@ -37,7 +39,8 @@ impl<R: Read> IstreamStream<R> {
         exceptions: IstreamExceptionMask,
     ) -> Result<(), IstreamException> {
         self.exceptions = exceptions;
-        self.masked_exception(0, None).map_or(Ok(()), Err)
+        self.masked_exception(self.last_gcount, None)
+            .map_or(Ok(()), Err)
     }
 
     /// Assigns stream flags before checking the exception mask; `stream.clear_state(false, true, false)?`.
@@ -48,12 +51,14 @@ impl<R: Read> IstreamStream<R> {
         bad: bool,
     ) -> Result<(), IstreamException> {
         self.set_status(eof, fail, bad);
-        self.masked_exception(0, None).map_or(Ok(()), Err)
+        self.masked_exception(self.last_gcount, None)
+            .map_or(Ok(()), Err)
     }
 
     /// Reads one native `istream::read` block and reports masked state without panicking;
     /// `let result = stream.read_block(&mut bytes)?`.
     pub fn read_block(&mut self, buffer: &mut [u8]) -> Result<IstreamReadResult, IstreamException> {
+        self.last_gcount = 0;
         if buffer.is_empty() && !self.has_error_state() {
             return Ok(self.result(0));
         }
@@ -61,6 +66,11 @@ impl<R: Read> IstreamStream<R> {
             return self.read_block_from_failed_state();
         }
         self.read_block_from_source(buffer)
+    }
+
+    /// Returns the last native-protocol block count, retained across state changes; `stream.gcount()`.
+    pub fn gcount(&self) -> usize {
+        self.last_gcount
     }
 
     /// Sets initial native-style status bits; `stream.set_status(false, true, false)`.
@@ -129,10 +139,12 @@ impl<R: Read> IstreamStream<R> {
                 Err(error) => return self.finish_bad_read(error),
             }
         }
+        self.last_gcount = count;
         Ok(self.result(count))
     }
 
     fn finish_short_read(&mut self, count: usize) -> Result<IstreamReadResult, IstreamException> {
+        self.last_gcount = count;
         self.eof = true;
         self.fail = true;
         if let Some(exception) = self.masked_exception(count, None) {
@@ -204,3 +216,7 @@ impl<R: Read> Read for IstreamStream<R> {
 #[cfg(test)]
 #[path = "istream_stream/tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "istream_stream/count_tests.rs"]
+mod count_tests;
