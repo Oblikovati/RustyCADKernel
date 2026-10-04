@@ -38004,25 +38004,25 @@
       "upstream_id": "Poly_CoherentNode::Clear(const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentNode::clear",
+      "rust_item": "rustycad_tkmath::poly::CoherentNode::clear_in",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentNode::AddTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentNode::add_triangle",
+      "rust_item": "rustycad_tkmath::poly::CoherentNode::add_triangle_in",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentNode::RemoveTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentNode::remove_triangle",
+      "rust_item": "rustycad_tkmath::poly::CoherentNode::remove_triangle_in",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentNode::TriangleIterator() const",
@@ -38349,17 +38349,17 @@
       "upstream_id": "Poly_CoherentTriangulation::Poly_CoherentTriangulation(const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::new",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::new_in",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Allocator-taking entry now retains and forwards the supplied allocator into actual node ring allocations. Native lifecycle probe covers constructor copy, edits, clone with separate allocator and destruction; Rust live-owner reset tests verify real allocation ownership. Default convenience methods use the common allocator. Surrounding ring backend compatibility remains partial; see porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangulation::Poly_CoherentTriangulation(const occ::handle<Poly_Triangulation>&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::from_triangulation",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::from_triangulation_in",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Allocator-taking entry now retains and forwards the supplied allocator into actual node ring allocations. Native lifecycle probe covers constructor copy, edits, clone with separate allocator and destruction; Rust live-owner reset tests verify real allocation ownership. Default convenience methods use the common allocator. Surrounding ring backend compatibility remains partial; see porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangulation::~Poly_CoherentTriangulation()",
@@ -38549,17 +38549,17 @@
       "upstream_id": "Poly_CoherentTriangulation::Allocator() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: the allocator only places the native triangle rings; the Rust rings live in Vec storage owned by the structure, so no allocator is kept to return."
+      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::allocator",
+      "status": "implemented",
+      "notes": "Returns the retained allocator by reference. Native allocator propagation probe and Rust constructor/clone identity tests cover the stored handle. See porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangulation::Clone(const occ::handle<NCollection_BaseAllocator>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::clone_triangulation",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::clone_triangulation_in",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Allocator-taking entry now retains and forwards the supplied allocator into actual node ring allocations. Native lifecycle probe covers constructor copy, edits, clone with separate allocator and destruction; Rust live-owner reset tests verify real allocation ownership. Default convenience methods use the common allocator. Surrounding ring backend compatibility remains partial; see porting/audits/tkmath-coherent-allocator-propagation.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangulation::Dump(Standard_OStream&) const",
