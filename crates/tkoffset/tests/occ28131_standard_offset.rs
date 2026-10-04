@@ -176,6 +176,7 @@ fn assert_fixed_result(shape: &Shape) {
     let fixer = ShapeFixShape::new(shape.clone());
     fixer.perform().unwrap();
     let result = fixer.shape();
+    assert!(!result.is_null());
     assert!(is_valid(&result));
     assert_near(max_tolerance(&result), 0.408, 0.408 * 0.01, "max tolerance");
     assert_near(
