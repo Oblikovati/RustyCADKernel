@@ -288,11 +288,14 @@ impl CoherentTriPtr {
     }
 
     fn member_at(&self, position: usize) -> Option<CoherentTriMember> {
+        if position >= self.length {
+            return None;
+        }
         let mut current = self.head?;
         for _ in 0..position {
             current = self.member(current).ok()?.next;
         }
-        (position < self.length).then_some(current)
+        Some(current)
     }
 
     fn position(&self, member: CoherentTriMember) -> Option<usize> {
