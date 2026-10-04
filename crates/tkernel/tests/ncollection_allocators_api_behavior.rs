@@ -269,6 +269,59 @@ fn accumulating_allocations_descend_rounded_to_four_bytes() {
 }
 
 #[test]
+fn accumulating_protected_extension_finds_and_adds_owned_blocks() {
+    let allocator = BaseAllocator::accumulating(4096).unwrap();
+    let original = allocator.allocate_raw(8).unwrap();
+    let allocation = assert_extension_lookup_and_allocate(&allocator, original);
+    // SAFETY: both pointers are live allocations of this allocator.
+    unsafe { allocator.free_raw(allocation) }.unwrap();
+    unsafe { allocator.free_raw(original) }.unwrap();
+    assert_eq!(allocator.accumulating_chain().len(), 1);
+}
+
+fn assert_extension_lookup_and_allocate(
+    allocator: &BaseAllocator,
+    original: NonNull<u8>,
+) -> NonNull<u8> {
+    let mut extension = allocator.accumulating_extension().unwrap();
+    let original_lookup = extension.find_block(address(original));
+    assert_eq!(original_lookup.block.unwrap().alloc_count, 1);
+    assert_eq!(
+        original_lookup.key.value(),
+        original_lookup.block.unwrap().address / 4096
+    );
+    let added = extension.allocate_new_block(4096).unwrap();
+    assert_eq!((added.free_size, added.alloc_count), (4096, 0));
+    let allocation = extension.allocate_from_block(added.address, 5).unwrap();
+    let lookup = extension.find_block(address(allocation));
+    assert_eq!(lookup.block.unwrap().alloc_count, 1);
+    assert_eq!(lookup.key.value(), lookup.block.unwrap().address / 4096);
+    allocation
+}
+
+#[test]
+fn accumulating_extension_rejects_other_allocator_kinds_and_block_overflow() {
+    let failure = match BaseAllocator::common().accumulating_extension() {
+        Ok(_) => panic!("common allocator unexpectedly allowed accumulating extensions"),
+        Err(failure) => failure,
+    };
+    assert_eq!(failure.exception_type(), "Standard_TypeMismatch");
+    assert!(failure.message().contains("NCollection_BaseAllocator"));
+    assert!(failure.message().contains("NCollection_AccAllocator"));
+    let allocator = BaseAllocator::accumulating(16).unwrap();
+    let mut extension = allocator.accumulating_extension().unwrap();
+    let block = extension.allocate_new_block(8).unwrap();
+    assert!(extension.allocate_from_block(block.address, 9).is_none());
+    let local = 0_u64;
+    let lookup = extension.find_block((&local as *const u64) as usize);
+    assert!(lookup.block.is_none());
+    assert_eq!(
+        lookup.key.value(),
+        ((&local as *const u64) as usize / 16).wrapping_sub(1)
+    );
+}
+
+#[test]
 fn accumulating_oversize_requests_get_a_dedicated_block_and_empty_blocks_are_freed() {
     let allocator = BaseAllocator::accumulating(64).unwrap();
     let small = allocator.allocate_raw(8).unwrap();

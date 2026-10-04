@@ -30,7 +30,9 @@ mod keys;
 mod owned;
 mod raw_heap;
 use accumulating::AccEngine;
-pub use accumulating::{ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockState};
+pub use accumulating::{
+    ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockLookup, AccBlockState,
+};
 pub use aligned::{AccAlignedPtr, AccAlignedSize};
 pub use block::AccBlock;
 use incremental::IncEngine;
@@ -45,6 +47,40 @@ use raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, mm_malloc_alignment};
 #[derive(Clone)]
 pub struct BaseAllocator {
     inner: Arc<AllocatorKind>,
+}
+
+/// A lock-scoped view of protected `NCollection_AccAllocator` extension operations.
+///
+/// The lock stays held for this value's lifetime; drop it before reentering the allocator.
+/// Example: `let mut a = BaseAllocator::accumulating(64)?; let mut x = a.accumulating_extension()?;`.
+pub struct AccAllocatorExtension<'a> {
+    engine: MutexGuard<'a, AccEngine>,
+}
+
+impl AccAllocatorExtension<'_> {
+    /// Finds the block and returns native's output key even on misses; `access.find_block(address)`.
+    pub fn find_block(&self, address: usize) -> AccBlockLookup {
+        let (key, found) = self.engine.lookup_block(address);
+        let block = found.map(|key| self.engine.block_state_for_key(key));
+        AccBlockLookup {
+            key: AccBlockKey::new(key),
+            block,
+        }
+    }
+
+    /// Adds a block using protected `allocateNewBlock`; `access.allocate_new_block(80)?`.
+    pub fn allocate_new_block(&mut self, size: usize) -> Result<AccBlockState, Failure> {
+        self.engine.allocate_new_block_state(size)
+    }
+
+    /// Allocates from an existing block; `access.allocate_from_block(block.address, 8)` returns `None` if it is full.
+    pub fn allocate_from_block(
+        &mut self,
+        block_address: usize,
+        size: usize,
+    ) -> Option<NonNull<u8>> {
+        self.engine.allocate_from_block(block_address, size)
+    }
 }
 
 /// The concrete NCollection allocator class behind a handle.
@@ -66,6 +102,16 @@ fn locked<T>(engine: &Mutex<T>) -> MutexGuard<'_, T> {
 }
 
 impl BaseAllocator {
+    fn kind_name(&self) -> &'static str {
+        match &*self.inner {
+            AllocatorKind::Common => "NCollection_BaseAllocator",
+            AllocatorKind::Heap => "NCollection_HeapAllocator",
+            AllocatorKind::Incremental(_) => "NCollection_IncAllocator",
+            AllocatorKind::Accumulating(_) => "NCollection_AccAllocator",
+            AllocatorKind::Aligned(_) => "NCollection_AlignedAllocator",
+        }
+    }
+
     fn with_kind(kind: AllocatorKind) -> Self {
         Self {
             inner: Arc::new(kind),
@@ -123,6 +169,22 @@ impl BaseAllocator {
         Ok(Self::with_kind(AllocatorKind::Accumulating(Mutex::new(
             engine,
         ))))
+    }
+
+    /// Borrows the shared engine under its mutex; `let mut access = allocator.accumulating_extension()?`.
+    pub fn accumulating_extension(&self) -> Result<AccAllocatorExtension<'_>, Failure> {
+        let AllocatorKind::Accumulating(engine) = &*self.inner else {
+            return Err(Failure::with_message(
+                "Standard_TypeMismatch",
+                &format!(
+                    "{} extension: expected NCollection_AccAllocator",
+                    self.kind_name()
+                ),
+            ));
+        };
+        Ok(AccAllocatorExtension {
+            engine: locked(engine),
+        })
     }
 
     /// A new aligned allocator (`NCollection_AlignedAllocator(theAlignment)`).

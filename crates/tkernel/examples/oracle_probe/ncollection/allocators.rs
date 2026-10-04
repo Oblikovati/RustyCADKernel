@@ -17,6 +17,7 @@ pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
     match op {
         "ncoll_allocators_inc" => Some(incremental(input)),
         "ncoll_allocators_acc" => Some(accumulating(input)),
+        "ncoll_allocators_acc_extension" => Some(accumulating_extension()),
         "ncoll_allocators_aligned" => Some(aligned(input)),
         "ncoll_allocators_buffer" => Some(buffer(input)),
         "ncoll_allocators_occ_eq" => Some(occ_equality()),
@@ -117,6 +118,76 @@ fn accumulating(input: &mut SplitWhitespace<'_>) -> String {
         out.push_str(&acc_chain(&allocator));
     }
     out
+}
+
+fn accumulating_extension() -> String {
+    let allocator = BaseAllocator::accumulating(4096).expect("block size");
+    let original = allocator.allocate_raw(8).expect("original allocation");
+    let mut extension = allocator
+        .accumulating_extension()
+        .expect("accumulator extension");
+    let (old, before, new, extended) = extension_allocations(&mut extension, original);
+    drop(extension);
+    free_extension_allocation(&allocator, extended);
+    let chain = acc_chain(&allocator);
+    let miss_text = extension_miss(&allocator);
+    free_extension_allocation(&allocator, original);
+    format!("{old} {before} {new} {chain} {miss_text}")
+}
+
+fn extension_allocations(
+    extension: &mut rustycad_tkernel::ncollection::AccAllocatorExtension<'_>,
+    original: NonNull<u8>,
+) -> (String, String, String, NonNull<u8>) {
+    let address = original.as_ptr() as usize;
+    let old = lookup_text(extension.find_block(address), address, 4096);
+    let block = extension.allocate_new_block(4096).expect("new block");
+    let before = format!("{}:{}", block.free_size, block.alloc_count);
+    let pointer = extension
+        .allocate_from_block(block.address, 5)
+        .expect("extension allocation");
+    let address = pointer.as_ptr() as usize;
+    let new = lookup_text(extension.find_block(address), address, 4096);
+    (old, before, new, pointer)
+}
+
+fn extension_miss(allocator: &BaseAllocator) -> String {
+    let local = 0_i32;
+    let lookup = allocator
+        .accumulating_extension()
+        .expect("accumulator extension")
+        .find_block((&local as *const i32) as usize);
+    if lookup.block.is_none() {
+        "miss:1"
+    } else {
+        "hit"
+    }
+    .to_owned()
+}
+
+fn free_extension_allocation(allocator: &BaseAllocator, allocation: NonNull<u8>) {
+    // SAFETY: this pointer is a live allocation tracked by this allocator exactly once.
+    unsafe { allocator.free_raw(allocation) }.expect("release extension block allocation");
+}
+
+fn lookup_text(
+    lookup: rustycad_tkernel::ncollection::AccBlockLookup,
+    address: usize,
+    size: usize,
+) -> String {
+    match lookup.block {
+        Some(block) => format!(
+            "hit:{}:{}:{}:{}",
+            u8::from(lookup.key.value() == block.address / size),
+            block.free_size,
+            block.alloc_count,
+            address - block.address
+        ),
+        None => format!(
+            "miss:{}",
+            u8::from(lookup.key.value() == address / size - 1)
+        ),
+    }
 }
 
 fn acc_free(allocator: &BaseAllocator, step: &str, addresses: &[NonNull<u8>]) -> String {

@@ -105,6 +105,34 @@ public:
     }
     return aText + "]";
   }
+
+  void ProbeExtension(std::ostream& out)
+  {
+    void* anOriginal = Allocate(8);
+    out << Lookup(anOriginal, 4096) << ' ';
+    Block* aBlock = allocateNewBlock(4096);
+    out << aBlock->FreeSize() << ':' << aBlock->allocCount << ' ';
+    void* anExtended = aBlock->Allocate(AlignedSize(5));
+    out << Lookup(anExtended, 4096) << ' ';
+    Free(anExtended);
+    out << Chain() << ' ';
+    int aLocal = 0;
+    out << Lookup(&aLocal, 4096);
+    Free(anOriginal);
+  }
+
+  std::string Lookup(void* theAddress, size_t theBlockSize)
+  {
+    Key    aKey;
+    Block* aBlock = findBlock(theAddress, aKey);
+    if (aBlock == nullptr)
+    {
+      return "miss:" + std::to_string(aKey.Value == (size_t)theAddress / theBlockSize - 1);
+    }
+    return "hit:" + std::to_string(aKey.Value == (size_t)aBlock->address / theBlockSize) + ":"
+           + std::to_string(aBlock->FreeSize()) + ":" + std::to_string(aBlock->allocCount) + ":"
+           + std::to_string((uint8_t*)theAddress - (uint8_t*)aBlock->address);
+  }
 };
 
 void probeAccumulating(std::istream& in, std::ostream& out)
@@ -140,6 +168,12 @@ void probeAccumulating(std::istream& in, std::ostream& out)
     }
     out << anAlloc.Chain();
   }
+}
+
+void probeAccumulatingExtension(std::ostream& out)
+{
+  AccProbe anAlloc(4096);
+  anAlloc.ProbeExtension(out);
 }
 
 void probeAligned(std::istream& in, std::ostream& out)
@@ -243,6 +277,8 @@ static bool ncollection_allocators_probe(const std::string& op, std::istream& in
     probeIncremental(in, out);
   else if (op == "ncoll_allocators_acc")
     probeAccumulating(in, out);
+  else if (op == "ncoll_allocators_acc_extension")
+    probeAccumulatingExtension(out);
   else if (op == "ncoll_allocators_aligned")
     probeAligned(in, out);
   else if (op == "ncoll_allocators_buffer")

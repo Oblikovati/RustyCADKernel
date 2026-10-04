@@ -3,7 +3,7 @@
 //! Blocks are found by `address / block_size` exactly as upstream; the map stores block
 //! descriptors by key and the `prevBlock` chain links keys instead of descriptor pointers.
 use super::raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_reallocate};
-use super::{AccAlignedSize, AccBlock};
+use super::{AccAlignedSize, AccBlock, AccBlockKey};
 use crate::standard::Failure;
 use std::{collections::HashMap, ptr::NonNull};
 
@@ -15,6 +15,12 @@ pub const ACC_DEFAULT_BLOCK_SIZE: usize = 24600;
 pub const ACC_MAX_LOOKUP_BLOCKS: i32 = 16;
 /// Native Free's message, including the whitespace its backslash-continued literal keeps.
 const INVALID_FREE: &str = "NCollection_AccAllocator::Free:                                 Trying to free an invalid address";
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum AccBlockCreationError {
+    OutOfMemory,
+    KeyCollision(usize),
+}
 
 /// Native `AlignedSize`: `(value + 3) & ~3`; `None` where the addition would wrap.
 fn aligned_size(value: usize) -> Option<usize> {
@@ -30,6 +36,15 @@ pub struct AccBlockState {
     pub free_size: usize,
     /// Live allocations in the block (`Block::allocCount`).
     pub alloc_count: i32,
+}
+
+/// Result of the protected `findBlock` operation; `key` retains the native output-key value.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct AccBlockLookup {
+    /// Key written by native `findBlock`, including its previous-key fallback on a miss.
+    pub key: AccBlockKey,
+    /// Snapshot of the matched block, if the address belongs to an allocated block.
+    pub block: Option<AccBlockState>,
 }
 
 /// Native `Block`: allocation grows down from `alloc_start` towards `address`.
@@ -173,28 +188,94 @@ impl AccEngine {
 
     /// `allocateNewBlock`: `Standard::Allocate` (zeroed) of the rounded size, bound by key.
     fn allocate_new_block(&mut self, size: usize) -> Option<usize> {
-        let rounded = aligned_size(size)?;
-        let address = heap_allocate(rounded, MALLOC_ALIGNMENT, true)?;
+        self.create_new_block(size).ok()
+    }
+
+    fn create_new_block(&mut self, size: usize) -> Result<usize, AccBlockCreationError> {
+        let rounded = aligned_size(size).ok_or(AccBlockCreationError::OutOfMemory)?;
+        let address = heap_allocate(rounded, MALLOC_ALIGNMENT, true)
+            .ok_or(AccBlockCreationError::OutOfMemory)?;
         let key = self.key(address.as_ptr() as usize);
+        if !self.bind_block(address, size, key) {
+            // SAFETY: this colliding allocation was never inserted into the engine map.
+            unsafe { heap_free(address) };
+            return Err(AccBlockCreationError::KeyCollision(key));
+        }
+        Ok(key)
+    }
+
+    fn bind_block(&mut self, address: NonNull<u8>, size: usize, key: usize) -> bool {
+        if self.blocks.contains_key(&key) {
+            return false;
+        }
         let block = AccBlockSlot::new(address, size, self.last_block);
         self.blocks.insert(key, block);
         self.last_block = Some(key);
-        Some(key)
+        true
     }
 
     /// `findBlock`: the block keyed by the address, or by the key before it.
     fn find_block(&self, address: usize) -> Option<usize> {
+        self.lookup_block(address).1
+    }
+
+    /// Mirrors both the native output key and returned block identity.
+    pub(super) fn lookup_block(&self, address: usize) -> (usize, Option<usize>) {
         let key = self.key(address);
         if self
             .blocks
             .get(&key)
             .is_some_and(|block| block.start() <= address)
         {
-            return Some(key);
+            return (key, Some(key));
         }
-        let previous = key.checked_sub(1)?;
-        let block = self.blocks.get(&previous)?;
-        (block.start().wrapping_add(self.block_size) > address).then_some(previous)
+        let previous = key.wrapping_sub(1);
+        let found = self
+            .blocks
+            .get(&previous)
+            .filter(|block| block.start().wrapping_add(self.block_size) > address)
+            .map(|_| previous);
+        (previous, found)
+    }
+
+    /// Allocates from the requested existing block while preserving its owned pointer provenance.
+    pub(super) fn allocate_from_block(
+        &mut self,
+        block_address: usize,
+        size: usize,
+    ) -> Option<NonNull<u8>> {
+        let size = aligned_size(size)?;
+        let key = self.find_block(block_address)?;
+        let block = self.blocks.get_mut(&key)?;
+        if size > block.free_size() {
+            return None;
+        }
+        block.allocate(size)
+    }
+
+    /// Reports the block created by native `allocateNewBlock` or a native out-of-memory failure.
+    pub(super) fn allocate_new_block_state(
+        &mut self,
+        size: usize,
+    ) -> Result<AccBlockState, Failure> {
+        let key = self.create_new_block(size).map_err(|error| match error {
+            AccBlockCreationError::OutOfMemory => Failure::with_type(
+                "Standard_OutOfMemory",
+                &format!("block of {size} bytes"),
+                "",
+            ),
+            AccBlockCreationError::KeyCollision(key) => Failure::with_type(
+                "Standard_ProgramError",
+                &format!("NCollection_AccAllocator block key {key} is already bound"),
+                "",
+            ),
+        })?;
+        Ok(self.blocks[&key].state())
+    }
+
+    /// Returns an internal block snapshot by its map key.
+    pub(super) fn block_state_for_key(&self, key: usize) -> AccBlockState {
+        self.blocks[&key].state()
     }
 
     /// The protected `findBlock` as observable state; `None` for a foreign address.
@@ -295,5 +376,29 @@ impl Drop for AccEngine {
             // SAFETY: each payload is owned by this engine and freed exactly once here.
             unsafe { heap_free(block.payload) };
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{ACC_ALIGN, AccBlockSlot, AccEngine};
+    use super::{MALLOC_ALIGNMENT, heap_allocate};
+    use std::{collections::HashMap, ptr::NonNull};
+
+    #[test]
+    fn duplicate_block_key_does_not_replace_or_relink_existing_block() {
+        let key = 17;
+        let existing_address = heap_allocate(16, MALLOC_ALIGNMENT, true).unwrap();
+        let existing = AccBlockSlot::new(existing_address, 16, None);
+        let mut engine = AccEngine {
+            block_size: 16,
+            last_block: Some(key),
+            blocks: HashMap::from([(key, existing)]),
+        };
+
+        assert!(!engine.bind_block(NonNull::dangling(), ACC_ALIGN * 2, key));
+        assert_eq!(engine.last_block, Some(key));
+        assert_eq!(engine.blocks.len(), 1);
+        assert_eq!(engine.blocks[&key].descriptor.alloc_count, 0);
     }
 }
