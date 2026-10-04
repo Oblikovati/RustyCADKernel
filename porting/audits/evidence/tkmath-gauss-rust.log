@@ -1,0 +1,48 @@
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling smallvec v1.16.2
+   Compiling allocator-api2 v0.4.0
+   Compiling bitflags v2.13.2
+   Compiling bytemuck v1.25.2
+   Compiling rustycad-cmath v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/cmath)
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling rustycad-tkernel v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkmath)
+   Compiling rustycad-tkg2d v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkg2d)
+   Compiling rustycad-tkg3d v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tktopalgo)
+   Compiling rustycad-tkprim v0.1.0 (/tmp/rustycad-tkmath-gauss-body-audit/crates/tkprim)
+    Finished `test` profile [unoptimized] target(s) in 29.77s
+     Running tests/gauss_behavior.rs (/tmp/rustycad-tkmath-gauss-audit-target/debug/deps/gauss_behavior-e2bd9ed26fe92c33)
+
+running 4 tests
+test diagonal_setter_preserves_declared_index_behavior ... ok
+test minimum_pivot_and_non_square_constructor_follow_native_rules ... ok
+test singular_solver_and_matrix_inverse_keep_distinct_failure_contracts ... ok
+test solver_checks_dimensions_and_preserves_destination_on_rejection ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/math_gauss.rs (/tmp/rustycad-tkmath-gauss-audit-target/debug/deps/math_gauss-dcd09e036f8369c4)
+
+running 12 tests
+test MathGaussTest__CustomMinPivot ... ok
+test MathGaussTest__CustomBounds ... ok
+test MathGaussTest__Determinant ... ok
+test MathGaussTest__DiagonalMatrix ... ok
+test MathGaussTest__DimensionCompatibility ... ok
+test MathGaussTest__IdentityMatrix ... ok
+test MathGaussTest__InPlaceSolve ... ok
+test MathGaussTest__LargerMatrix ... ok
+test MathGaussTest__MatrixInversion ... ok
+test MathGaussTest__SingularMatrix ... ok
+test MathGaussTest__SingularMatrixState ... ok
+test MathGaussTest__WellConditionedMatrix ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
