@@ -1,7 +1,7 @@
 // Rust translation of FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BVH_QuickSorter<T, N>`: centroid sort along one axis with `std::sort`.
-use super::set::BvhSet;
+use super::set::{BvhSet, BvhSharedSet};
 use super::sorter::BvhSorter;
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
@@ -49,18 +49,7 @@ impl<V: BvhVector> BvhSorter<V> for BvhQuickSorter<V> {
         start: i32,
         last: i32,
     ) -> Result<(), Failure> {
-        let size = last - start + 1;
-        if size <= 1 {
-            return Ok(());
-        }
-        let centers = (0..size)
-            .map(|offset| set.center(start + offset, self.axis))
-            .collect::<Result<Vec<V::Scalar>, Failure>>()?;
-        let mut indices: Vec<usize> = (0..size as usize).collect();
-        stl::sort_by(&mut indices, |first, second| {
-            centers[*first] < centers[*second]
-        });
-        apply_permutation(set, start, &indices)
+        sort_range(&mut MutableSortAccess(set), self.axis, start, last)
     }
     fn is_parallel(&self) -> bool {
         self.is_parallel
@@ -70,10 +59,68 @@ impl<V: BvhVector> BvhSorter<V> for BvhQuickSorter<V> {
     }
 }
 
-/// Moves element `indices[i]` to position `i` by following the cycles of the
-/// inverse permutation: at most `size` swaps, in the native swap order.
+/// Sorts a shared set by centroid through its synchronized read/swap methods.
+pub(crate) fn sort_range_shared<V: BvhVector>(
+    set: &dyn BvhSharedSet<V>,
+    axis: i32,
+    start: i32,
+    last: i32,
+) -> Result<(), Failure> {
+    sort_range(&mut SharedSortAccess(set), axis, start, last)
+}
+
+trait SortAccess<V: BvhVector> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure>;
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure>;
+}
+
+struct MutableSortAccess<'a, V: BvhVector>(&'a mut dyn BvhSet<V>);
+
+impl<V: BvhVector> SortAccess<V> for MutableSortAccess<'_, V> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure> {
+        self.0.center(index, axis)
+    }
+
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure> {
+        self.0.swap(first, second)
+    }
+}
+
+struct SharedSortAccess<'a, V: BvhVector>(&'a dyn BvhSharedSet<V>);
+
+impl<V: BvhVector> SortAccess<V> for SharedSortAccess<'_, V> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure> {
+        self.0.center(index, axis)
+    }
+
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure> {
+        self.0.swap(first, second)
+    }
+}
+
+fn sort_range<V: BvhVector>(
+    set: &mut dyn SortAccess<V>,
+    axis: i32,
+    start: i32,
+    last: i32,
+) -> Result<(), Failure> {
+    let size = last - start + 1;
+    if size <= 1 {
+        return Ok(());
+    }
+    let centers = (0..size)
+        .map(|offset| set.center(start + offset, axis))
+        .collect::<Result<Vec<V::Scalar>, Failure>>()?;
+    let mut indices: Vec<usize> = (0..size as usize).collect();
+    stl::sort_by(&mut indices, |first, second| {
+        centers[*first] < centers[*second]
+    });
+    apply_permutation(set, start, &indices)
+}
+
+/// Moves each sorted element to its destination in the native cycle order.
 fn apply_permutation<V: BvhVector>(
-    set: &mut dyn BvhSet<V>,
+    set: &mut dyn SortAccess<V>,
     start: i32,
     indices: &[usize],
 ) -> Result<(), Failure> {
