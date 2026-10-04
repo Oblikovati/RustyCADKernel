@@ -182,6 +182,7 @@ pub(super) fn build_binned_node_shared<V: BvhVector, const BINS: usize>(
     builder: &BvhBinnedBuilder<V, BINS>,
     set: &dyn BvhSharedSet<V>,
     snapshot: BvhNodeSnapshot<V>,
+    mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
 ) -> Result<BvhChildNodes<V>, Failure> {
     if snapshot.end - snapshot.begin < builder.transient.leaf_node_size() {
         return Ok(BvhChildNodes::default());
@@ -189,6 +190,7 @@ pub(super) fn build_binned_node_shared<V: BvhVector, const BINS: usize>(
     let node_box = BvhBox::from_corners(snapshot.minimum, snapshot.maximum);
     let access = SharedSetRead::new(set);
     let mut best = find_best_split(builder, &access, snapshot, &node_box)?;
+    mark_parent_inner()?;
     let middle =
         split_binned_range_shared::<V, BINS>(set, snapshot, &access, &node_box, &mut best)?;
     Ok(child_nodes(snapshot, &best, middle))

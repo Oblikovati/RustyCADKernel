@@ -50,3 +50,37 @@ impl<V: BvhVector, S: BvhSet<V>> BvhSharedSet<V> for BvhMutexSet<V, S> {
         self.lock().swap(first, second)
     }
 }
+
+pub(crate) struct BvhBorrowedMutexSet<'a, V: BvhVector> {
+    inner: Mutex<&'a mut dyn BvhSet<V>>,
+}
+
+impl<'a, V: BvhVector> BvhBorrowedMutexSet<'a, V> {
+    pub(crate) fn new(set: &'a mut dyn BvhSet<V>) -> Self {
+        Self {
+            inner: Mutex::new(set),
+        }
+    }
+
+    fn lock(&self) -> std::sync::MutexGuard<'_, &'a mut dyn BvhSet<V>> {
+        self.inner.lock().unwrap_or_else(PoisonError::into_inner)
+    }
+}
+
+impl<V: BvhVector> BvhSharedSet<V> for BvhBorrowedMutexSet<'_, V> {
+    fn size(&self) -> i32 {
+        self.lock().size()
+    }
+
+    fn element_box(&self, index: i32) -> Result<BvhBox<V>, Failure> {
+        self.lock().element_box(index)
+    }
+
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure> {
+        self.lock().center(index, axis)
+    }
+
+    fn swap(&self, first: i32, second: i32) -> Result<(), Failure> {
+        self.lock().swap(first, second)
+    }
+}
