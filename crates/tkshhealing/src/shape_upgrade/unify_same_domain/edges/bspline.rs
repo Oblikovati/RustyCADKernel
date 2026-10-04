@@ -255,6 +255,7 @@ fn replace_pair(
         curve.get().ok_or_else(null_bspline)?.last_parameter(),
     )?
     .edge()?;
+    super::pcurve_union::union_pcurves(shape, first, second, &edge)?;
     super::record_safe_vertex(
         options.context,
         &original_start,

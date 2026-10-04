@@ -20,6 +20,8 @@
 #include <TopoDS_Wire.hxx>
 #include <gp_Pnt.hxx>
 #include <Geom2d_Line.hxx>
+#include <Geom2d_BezierCurve.hxx>
+#include <Geom_BezierCurve.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <gp_Pnt2d.hxx>
 #include <gp_Dir2d.hxx>
@@ -91,6 +93,60 @@ static TopoDS_Face makeSplitCylinderPatch() {
   return BRepBuilderAPI_MakeFace(surface, wire.Wire(), true);
 }
 
+static occ::handle<Geom2d_Curve> makeBezier2d(gp_Pnt2d first, gp_Pnt2d control, gp_Pnt2d last) {
+  NCollection_Array1<gp_Pnt2d> poles(1, 3);
+  poles.SetValue(1, first);
+  poles.SetValue(2, control);
+  poles.SetValue(3, last);
+  return new Geom2d_BezierCurve(poles);
+}
+
+static TopoDS_Face makeSplitCylinderBezierPatch() {
+  const gp_Ax3 axis(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1));
+  occ::handle<Geom_Surface> surface = new Geom_CylindricalSurface(gp_Cylinder(axis, 2.0));
+  const TopoDS_Edge first = BRepBuilderAPI_MakeEdge(
+    makeBezier2d(gp_Pnt2d(0, 0), gp_Pnt2d(0, 0.5), gp_Pnt2d(0, 2)), surface, 0.0, 1.0);
+  const TopoDS_Edge second = BRepBuilderAPI_MakeEdge(
+    makeBezier2d(gp_Pnt2d(0, 2), gp_Pnt2d(0, 3.5), gp_Pnt2d(0, 4)), surface, 0.0, 1.0);
+  const TopoDS_Edge closing = makeCylinderPCurve(
+    surface, gp_Pnt2d(0, 4), gp_Dir2d(1, 0), 0, 1);
+  const TopoDS_Edge right = makeCylinderPCurve(surface, gp_Pnt2d(1, 4), gp_Dir2d(0, -1), 0, 4);
+  const TopoDS_Edge bottom = makeCylinderPCurve(
+    surface, gp_Pnt2d(1, 0), gp_Dir2d(-1, 0), 0, 1);
+  BRepBuilderAPI_MakeWire wire;
+  wire.Add(first);
+  wire.Add(second);
+  wire.Add(closing);
+  wire.Add(right);
+  wire.Add(bottom);
+  for (TopExp_Explorer edge(wire.Wire(), TopAbs_EDGE); edge.More(); edge.Next()) {
+    BRepLib::BuildCurve3d(TopoDS::Edge(edge.Current()));
+  }
+  return BRepBuilderAPI_MakeFace(surface, wire.Wire(), true);
+}
+
+static void emitBezierCylinderPcurve(const TopoDS_Face& face) {
+  ShapeUpgrade_UnifySameDomain unify(face, true, false, true);
+  unify.Build();
+  const TopoDS_Shape result = unify.Shape();
+  int edges = 0;
+  for (TopExp_Explorer item(result, TopAbs_EDGE); item.More(); item.Next()) ++edges;
+  std::cout << "cylinder_bezier_unified_edges " << edges << '\n';
+  std::cout << "cylinder_bezier_unified_valid "
+            << BRepCheck_Analyzer(result, true).IsValid() << '\n';
+  for (TopExp_Explorer item(result, TopAbs_EDGE); item.More(); item.Next()) {
+    const TopoDS_Edge edge = TopoDS::Edge(item.Current());
+    double first = 0.0, last = 0.0;
+    const occ::handle<Geom2d_Curve> pcurve = BRep_Tool::CurveOnSurface(edge, face, first, last);
+    if (pcurve.IsNull() || BRepAdaptor_Curve(edge).GetType() != GeomAbs_BSplineCurve
+        || Geom2dAdaptor_Curve(pcurve).GetType() != GeomAbs_BSplineCurve) continue;
+    const gp_Pnt2d middle = pcurve->Value((first + last) * 0.5);
+    std::cout << std::setprecision(17) << "cylinder_bezier_pcurve "
+              << Geom2dAdaptor_Curve(pcurve).GetType() << ' '
+              << first << ' ' << last << ' ' << middle.X() << ' ' << middle.Y() << '\n';
+  }
+}
+
 static void emitSplitCylinderPcurves(const TopoDS_Face& face) {
   ShapeUpgrade_UnifySameDomain unify(face, true, false, false);
   unify.Build();
@@ -145,4 +201,9 @@ int main() {
             << '\n';
   emit("cylinder_patch_split_lines", splitCylinder);
   emitSplitCylinderPcurves(splitCylinder);
+  const TopoDS_Face splitBezierCylinder = makeSplitCylinderBezierPatch();
+  std::cout << "cylinder_bezier_patch_input_valid "
+            << BRepCheck_Analyzer(splitBezierCylinder, true).IsValid() << '\n';
+  emit("cylinder_bezier_patch_split_curves", splitBezierCylinder);
+  emitBezierCylinderPcurve(splitBezierCylinder);
 }
