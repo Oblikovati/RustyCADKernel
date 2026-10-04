@@ -40141,17 +40141,19 @@
       "upstream_id": "Poly_Triangulation::LoadDeferredData(const occ::handle<OSD_FileSystem>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::poly::Triangulation::load_deferred_data",
+      "rust_item": "rustycad_tkmath::poly::Triangulation::load_deferred_data_with_file_system",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Native filesystem argument forwarding is supported, including null/default argument, shared filesystem identity, attached/detached destination identity, successful Loaded purpose bit and failure/no-data early returns. Existing no-argument Rust convenience methods pass None. Injected DeferredTriangulation storage replaces the native virtual extension point. Native replay: tools/oracle/poly_deferred_filesystem.md; supplemental only, no new legacy declaration.",
+      "source_sha256": "885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802"
     },
     {
       "upstream_id": "Poly_Triangulation::DetachedLoadDeferredData(const occ::handle<OSD_FileSystem>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::poly::Triangulation::detached_load_deferred_data",
+      "rust_item": "rustycad_tkmath::poly::Triangulation::detached_load_deferred_data_with_file_system",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Native filesystem argument forwarding is supported, including null/default argument, shared filesystem identity, attached/detached destination identity, successful Loaded purpose bit and failure/no-data early returns. Existing no-argument Rust convenience methods pass None. Injected DeferredTriangulation storage replaces the native virtual extension point. Native replay: tools/oracle/poly_deferred_filesystem.md; supplemental only, no new legacy declaration.",
+      "source_sha256": "885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802"
     },
     {
       "upstream_id": "Poly_Triangulation::UnloadDeferredData()",

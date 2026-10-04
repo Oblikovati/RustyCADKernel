@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "priority": "Complete base toolkits in dependency order before new higher-level expansion. Finish bounded correctness fixes already in flight; preserve other experiments.",
+  "ordered_toolkits": [
+    {
+      "toolkit": "TKernel",
+      "internal_dependencies": [],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKMath",
+      "internal_dependencies": [
+        "TKernel"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKG2d",
+      "internal_dependencies": [
+        "TKernel",
+        "TKMath"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKG3d",
+      "internal_dependencies": [
+        "TKMath",
+        "TKernel",
+        "TKG2d"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKGeomBase",
+      "internal_dependencies": [
+        "TKernel",
+        "TKMath",
+        "TKG2d",
+        "TKG3d"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKBRep",
+      "internal_dependencies": [
+        "TKMath",
+        "TKernel",
+        "TKG2d",
+        "TKG3d",
+        "TKGeomBase"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKGeomAlgo",
+      "internal_dependencies": [
+        "TKernel",
+        "TKMath",
+        "TKG3d",
+        "TKG2d",
+        "TKGeomBase",
+        "TKBRep"
+      ],
+      "completion_proven": false
+    },
+    {
+      "toolkit": "TKTopAlgo",
+      "internal_dependencies": [
+        "TKMath",
+        "TKernel",
+        "TKG2d",
+        "TKG3d",
+        "TKGeomBase",
+        "TKBRep",
+        "TKGeomAlgo"
+      ],
+      "completion_proven": false
+    }
+  ],
+  "acceptance_gates": [
+    "Enumerate every supported public API declaration/configuration; retain unresolved platform and parser gaps.",
+    "Resolve every declaration to a Rust implementation or explicitly justified upstream nonimplementation; a mapping is not behavioral proof.",
+    "Audit actual missing overloads, arguments and observable aliasing/virtual behavior, including APIs already marked implemented.",
+    "Port every original legacy declaration without removing assertions; compare native and Rust runtime outcomes for the same cases.",
+    "Preserve current pinned behavior, including only explicitly approved legacy skips.",
+    "Keep supplemental oracle probes separate from original legacy mappings."
+  ],
+  "current_work": {
+    "TKernel": "Audit unclaimed compiler callables/types and platform capabilities; do not infer completeness from existing parity rows.",
+    "TKMath": "Closed Poly_Triangulation filesystem argument forwarding; continue base API audit.",
+    "TKG2d/TKG3d": "Audit result records and remaining actual geometry capabilities; map existing records without adding naming-only aliases.",
+    "TKGeomBase/TKGeomAlgo": "Audit missing callable implementations and select dependency blockers."
+  },
+  "preserved_unfinished_work": [
+    {
+      "branch": "port/hlr-line-tool",
+      "worktree": "/tmp/rustycad-hlr-line-tool",
+      "status": "Uncommitted LineTool expansion; no tests/oracle yet; held for base toolkit priority. Do not merge as complete."
+    },
+    {
+      "branch": "port/tkoffset-boundary-next",
+      "worktree": "/tmp/rustycad-tkoffset-boundary-next",
+      "status": "Common-topology offset experiment held; owner instructed to preserve uncommitted work."
+    }
+  ]
+}
