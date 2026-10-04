@@ -10,6 +10,17 @@ fn address(pointer: NonNull<u8>) -> usize {
     pointer.as_ptr() as usize
 }
 
+fn spawn_incremental_worker(
+    allocator: std::sync::Arc<BaseAllocator>,
+    allocations: usize,
+) -> std::thread::JoinHandle<Vec<usize>> {
+    std::thread::spawn(move || {
+        (0..allocations)
+            .map(|_| address(allocator.allocate_raw(64).unwrap()))
+            .collect()
+    })
+}
+
 #[test]
 fn block_size_levels_grow_like_increase_block_size() {
     assert_eq!(IncBlockSizeLevel::of(2048), IncBlockSizeLevel::Min);
@@ -93,20 +104,26 @@ fn incremental_free_is_a_noop_and_reset_refuses_live_owners() {
 #[test]
 fn incremental_thread_safety_request_keeps_parallel_allocations_unique() {
     use std::sync::Arc;
-    use std::thread;
 
     const THREADS: usize = 4;
     const PER_THREAD: usize = 128;
     let allocator = Arc::new(BaseAllocator::incremental(4096));
     allocator.set_thread_safe(true).unwrap();
-    let handles: Vec<_> = (0..THREADS)
+    let addresses = allocate_parallel(Arc::clone(&allocator), THREADS, PER_THREAD);
+    assert_eq!(addresses.len(), THREADS * PER_THREAD);
+    allocator.set_thread_safe(false).unwrap();
+    allocator.reset(false).unwrap();
+    assert!(allocator.allocate_raw(1).is_some());
+}
+
+fn allocate_parallel(
+    allocator: std::sync::Arc<BaseAllocator>,
+    thread_count: usize,
+    allocations_per_thread: usize,
+) -> Vec<usize> {
+    let handles: Vec<_> = (0..thread_count)
         .map(|_| {
-            let allocator = Arc::clone(&allocator);
-            thread::spawn(move || {
-                (0..PER_THREAD)
-                    .map(|_| address(allocator.allocate_raw(64).unwrap()))
-                    .collect::<Vec<_>>()
-            })
+            spawn_incremental_worker(std::sync::Arc::clone(&allocator), allocations_per_thread)
         })
         .collect();
     let mut addresses: Vec<usize> = handles
@@ -115,18 +132,26 @@ fn incremental_thread_safety_request_keeps_parallel_allocations_unique() {
         .collect();
     addresses.sort_unstable();
     addresses.dedup();
-    assert_eq!(addresses.len(), THREADS * PER_THREAD);
-    allocator.set_thread_safe(false).unwrap();
-    allocator.reset(false).unwrap();
-    assert!(allocator.allocate_raw(1).is_some());
+    addresses
 }
 
 #[test]
 fn thread_safety_request_rejects_non_incremental_allocator() {
-    let error = BaseAllocator::common().set_thread_safe(true).unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_TypeMismatch");
-    assert!(error.message().contains("NCollection_BaseAllocator"));
-    assert!(error.message().contains("NCollection_IncAllocator"));
+    let allocators = [
+        (BaseAllocator::common(), "NCollection_BaseAllocator"),
+        (BaseAllocator::global_heap(), "NCollection_HeapAllocator"),
+        (
+            BaseAllocator::accumulating(64).unwrap(),
+            "NCollection_AccAllocator",
+        ),
+        (BaseAllocator::aligned(16), "NCollection_AlignedAllocator"),
+    ];
+    for (allocator, actual) in allocators {
+        let error = allocator.set_thread_safe(true).unwrap_err();
+        assert_eq!(error.exception_type(), "Standard_TypeMismatch");
+        assert!(error.message().contains(actual));
+        assert!(error.message().contains("NCollection_IncAllocator"));
+    }
 }
 
 #[test]
