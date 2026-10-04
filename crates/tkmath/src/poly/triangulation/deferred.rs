@@ -5,10 +5,10 @@
 //!
 //! A native subclass (for example RWMesh_TriangulationSource) overrides `NbDeferredNodes`,
 //! `NbDeferredTriangles`, `createNewEntity` and `loadDeferredData`. Here the subclass is a
-//! [`DeferredTriangulation`] injected with `Triangulation::with_deferred`. OSD_FileSystem is
-//! not ported, so the storage owns its input instead of taking a file system argument.
+//! [`DeferredTriangulation`] injected with `Triangulation::with_deferred`. The optional
+//! filesystem handle is forwarded unchanged, including native null/default arguments.
 use super::{Triangulation, mesh_purpose};
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::{osd::FileSystemHandle, standard::Handle};
 /// Deferred storage that can fill a triangulation later; `Triangulation::with_deferred(Box::new(storage))`.
 pub trait DeferredTriangulation: Send + Sync {
     /// Estimated deferred node count; `storage.nb_deferred_nodes()`.
@@ -28,7 +28,18 @@ pub trait DeferredTriangulation: Send + Sync {
         Handle::new(Triangulation::new())
     }
     /// Fills `destination` from the storage and reports success; `storage.load_deferred_data(&mesh)`.
-    fn load_deferred_data(&self, destination: &Triangulation) -> bool;
+    fn load_deferred_data(&self, _destination: &Triangulation) -> bool {
+        false
+    }
+    /// Loads with the caller's optional filesystem; `storage.load_deferred_data_with_file_system(None, &mesh)`.
+    /// The fallback preserves existing storage implementations that own their input.
+    fn load_deferred_data_with_file_system(
+        &self,
+        _file_system: Option<&FileSystemHandle>,
+        destination: &Triangulation,
+    ) -> bool {
+        self.load_deferred_data(destination)
+    }
 }
 impl Triangulation {
     /// Deferred node estimate, zero without storage; `triangulation.nb_deferred_nodes()`.
@@ -51,10 +62,17 @@ impl Triangulation {
     }
     /// Loads into this object and sets the `LOADED` purpose bit; `triangulation.load_deferred_data()`.
     pub fn load_deferred_data(&self) -> bool {
+        self.load_deferred_data_with_file_system(None)
+    }
+    /// Forwards the filesystem unchanged and marks successful loads; `mesh.load_deferred_data_with_file_system(Some(&fs))`.
+    pub fn load_deferred_data_with_file_system(
+        &self,
+        file_system: Option<&FileSystemHandle>,
+    ) -> bool {
         let Some(storage) = self.deferred.as_ref().filter(|s| s.has_deferred_data()) else {
             return false;
         };
-        if !storage.load_deferred_data(self) {
+        if !storage.load_deferred_data_with_file_system(file_system, self) {
             return false;
         }
         self.set_mesh_purpose(self.mesh_purpose() | mesh_purpose::LOADED);
@@ -63,11 +81,18 @@ impl Triangulation {
     /// Loads into a new object from `create_new_entity`, or returns a null handle;
     /// `triangulation.detached_load_deferred_data()`.
     pub fn detached_load_deferred_data(&self) -> Handle<Triangulation> {
+        self.detached_load_deferred_data_with_file_system(None)
+    }
+    /// Forwards the filesystem to the detached load; `mesh.detached_load_deferred_data_with_file_system(Some(&fs))`.
+    pub fn detached_load_deferred_data_with_file_system(
+        &self,
+        file_system: Option<&FileSystemHandle>,
+    ) -> Handle<Triangulation> {
         let Some(storage) = self.deferred.as_ref().filter(|s| s.has_deferred_data()) else {
             return Handle::default();
         };
         let result = storage.create_new_entity();
-        if !storage.load_deferred_data(&result) {
+        if !storage.load_deferred_data_with_file_system(file_system, &result) {
             return Handle::default();
         }
         result.set_mesh_purpose(result.mesh_purpose() | mesh_purpose::LOADED);
