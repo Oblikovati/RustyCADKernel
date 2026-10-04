@@ -7,6 +7,7 @@
 //! Win32 build of these classes (handles, ACL protections, `LockFileEx`) is not ported.
 mod calls;
 mod directory;
+mod directory_stream;
 mod file_io;
 mod file_node;
 mod iterators;
@@ -22,6 +23,7 @@ pub use calls::{
     SeekOrigin, native_calls,
 };
 pub use directory::Directory;
+pub use directory_stream::DirectoryEntries;
 pub use file_node::FileNode;
 pub use iterators::{DirectoryIterator, FileIterator, mask_matches};
 #[cfg(not(unix))]

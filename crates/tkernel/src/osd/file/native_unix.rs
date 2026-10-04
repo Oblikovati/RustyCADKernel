@@ -5,9 +5,11 @@ use super::calls::{
     AccessMode, CallResult, Errno, NodeStatus, NodeType, OpenFlags, PosixFileCalls, RecordLock,
     SeekOrigin,
 };
+use super::directory_stream::DirectoryEntries;
 use crate::osd::LocalTime;
 use crate::osd::OpenMode;
-use std::ffi::{CStr, CString};
+use std::ffi::CString;
+mod directory_cursor;
 
 /// The real POSIX calls; `NativePosixCalls.stat(b"/tmp")`.
 #[derive(Clone, Copy, Debug, Default)]
@@ -187,26 +189,11 @@ impl PosixFileCalls for NativePosixCalls {
         }
     }
     fn read_directory(&self, path: &[u8]) -> CallResult<Vec<Vec<u8>>> {
-        let name: CString = c_path(path);
-        // SAFETY: name is NUL-terminated and alive for the call.
-        let stream: *mut libc::DIR = unsafe { libc::opendir(name.as_ptr()) };
-        if stream.is_null() {
-            return Err(last_errno());
-        }
-        let mut names: Vec<Vec<u8>> = Vec::new();
-        loop {
-            // SAFETY: stream is an open DIR owned by this loop.
-            let entry: *mut libc::dirent = unsafe { libc::readdir(stream) };
-            if entry.is_null() {
-                break;
-            }
-            // SAFETY: readdir returned a valid entry whose d_name is NUL-terminated.
-            let entry_name: &CStr = unsafe { CStr::from_ptr((*entry).d_name.as_ptr()) };
-            names.push(entry_name.to_bytes().to_vec());
-        }
-        // SAFETY: stream is open and closed exactly once.
-        unsafe { libc::closedir(stream) };
-        Ok(names)
+        let mut cursor = self.open_directory(path)?;
+        Ok(std::iter::from_fn(|| cursor.next_name()).collect())
+    }
+    fn open_directory(&self, path: &[u8]) -> CallResult<Box<dyn DirectoryEntries>> {
+        directory_cursor::open_cursor(path)
     }
     fn local_time(&self, seconds: i64) -> Option<LocalTime> {
         let time: libc::time_t = seconds as libc::time_t;

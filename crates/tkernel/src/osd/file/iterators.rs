@@ -1,12 +1,13 @@
 //! `OSD_DirectoryIterator` and `OSD_FileIterator` of the non-`_WIN32` build: one
 //! `readdir` walk that keeps the entries of one type whose name matches a `*` mask.
+use super::directory_stream::SharedDirectoryEntries;
 use super::{
     Directory, File,
     calls::{NodeType, PosixFileCalls},
     native_calls,
 };
 use crate::osd::{CadPath, OsdError, OsdErrorAccess};
-use std::{collections::VecDeque, sync::Arc};
+use std::sync::Arc;
 
 /// `strcmp_joker`: `*` matches any run of bytes; every other byte matches itself.
 pub fn mask_matches(mask: &[u8], name: &[u8]) -> bool {
@@ -48,7 +49,7 @@ struct DirectoryWalk {
     kind: EntryKind,
     place: Vec<u8>,
     mask: Vec<u8>,
-    open: Option<VecDeque<Vec<u8>>>,
+    open: Option<SharedDirectoryEntries>,
     entry: Option<Vec<u8>>,
     flag: bool,
     init: bool,
@@ -83,8 +84,8 @@ impl DirectoryWalk {
     fn more(&mut self) -> bool {
         if self.init {
             self.init = false;
-            if let Ok(names) = self.calls.read_directory(&self.place) {
-                self.open = Some(names.into());
+            if let Ok(names) = self.calls.open_directory(&self.place) {
+                self.open = Some(SharedDirectoryEntries::new(names));
                 self.flag = true;
                 self.next();
             }
@@ -98,7 +99,11 @@ impl DirectoryWalk {
         // Natively a failing stat leaves the previous entry's stat buffer in place.
         let mut last_type: Option<NodeType> = None;
         loop {
-            let Some(name) = self.open.as_mut().and_then(VecDeque::pop_front) else {
+            let Some(name) = self
+                .open
+                .as_ref()
+                .and_then(SharedDirectoryEntries::next_name)
+            else {
                 self.entry = None;
                 self.open = None;
                 return;

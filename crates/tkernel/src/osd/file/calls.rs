@@ -3,6 +3,7 @@
 //! Every failure is the native `errno` value, which the OSD classes record in their
 //! `OSD_Error` exactly where the C++ code does. `NativePosixCalls` performs the real calls;
 //! tests inject a named fake.
+use super::directory_stream::{DirectoryEntries, buffered_directory_entries};
 use crate::osd::LocalTime;
 use std::sync::Arc;
 
@@ -129,6 +130,11 @@ pub trait PosixFileCalls: Send + Sync {
     fn mkdtemp(&self, template: &[u8]) -> CallResult<Vec<u8>>;
     /// `opendir` + every `readdir` name, in the order `readdir` returns them.
     fn read_directory(&self, path: &[u8]) -> CallResult<Vec<Vec<u8>>>;
+    /// Opens a lazy directory cursor; `calls.open_directory(b".")?` advances on demand.
+    /// Existing injected backends retain their buffered behavior by default.
+    fn open_directory(&self, path: &[u8]) -> CallResult<Box<dyn DirectoryEntries>> {
+        self.read_directory(path).map(buffered_directory_entries)
+    }
     /// `localtime(seconds)` (the shared `OSD_Process` broken-down time, millisecond 0), or
     /// `None` when the time cannot be broken down.
     fn local_time(&self, seconds: i64) -> Option<LocalTime>;
