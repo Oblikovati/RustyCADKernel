@@ -13,7 +13,9 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 mod analytic_adaptors;
+mod coincidence;
 mod distance;
+mod empty_range;
 mod fast_analytic;
 mod line_plane;
 mod range_walk;
@@ -169,7 +171,7 @@ impl BeanFaceIntersector {
         self.minimum_square_distance
     }
 
-    /// Resets results and runs the available analytic stage; `solver.perform()?`.
+    /// Resets results and runs the available analytic and coincidence stages; `solver.perform()?`.
     pub fn perform(&mut self) -> Result<(), Failure> {
         self.done = false;
         self.results.clear(None);
@@ -183,8 +185,23 @@ impl BeanFaceIntersector {
             self.done = true;
             return Ok(());
         }
+        self.perform_general(curve_type, surface_type)
+    }
+
+    fn perform_general(
+        &mut self,
+        curve_type: CurveType,
+        surface_type: SurfaceType,
+    ) -> Result<(), Failure> {
+        self.range_manager
+            .set_boundaries(self.range.first(), self.range.last(), 0);
+        if self.test_compute_coinside()? {
+            self.results.append(self.range);
+            self.done = true;
+            return Ok(());
+        }
         Err(Failure::new(&format!(
-            "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported analytic stage"
+            "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported analytic or coincident geometry"
         )))
     }
 

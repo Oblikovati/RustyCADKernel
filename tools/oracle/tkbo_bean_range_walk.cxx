@@ -18,6 +18,7 @@ void walk_case(int mode,int flags,double seed,bool increasing)
  }
  std::cout<<'\n';
 }
+#ifndef BEAN_RANGE_WALK_NO_MAIN
 int main()
 {
  std::cout<<std::fixed<<std::setprecision(12);
@@ -25,3 +26,5 @@ int main()
   for(double seed:{-.5,0.,.5,1.,1.5,2.,2.5})for(bool increasing:{false,true})walk_case(mode,flags,seed,increasing);
  return 0;
 }
+
+#endif
