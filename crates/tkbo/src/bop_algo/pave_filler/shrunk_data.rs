@@ -94,6 +94,16 @@ fn compute_block_range(
     analyze_shrunk_result(options, structure, edge, block, &shrunk)
 }
 
+pub(super) fn fill_shrunk_block(
+    structure: &DataStructure,
+    options: &Options,
+    context: &rustycad_tkernel::standard::Handle<crate::int_tools::Context>,
+    edge: &Edge,
+    block: &PaveBlockHandle,
+) -> Result<(), Failure> {
+    compute_block_range(structure, options, context, edge, block)
+}
+
 fn append_unique_edges(
     edges: &mut Vec<i32>,
     first_type: ShapeEnum,

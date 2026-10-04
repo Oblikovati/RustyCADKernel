@@ -1,6 +1,6 @@
 use super::BOPAlgoPaveFiller;
 use crate::bop_algo::{AlertIntersectionOfPairOfShapesFailed, Options};
-use crate::bop_ds::{DataStructure, InterfVE, Pave, PaveBlockHandle, ShapeInfo, pave_block_handle};
+use crate::bop_ds::{DataStructure, InterfVE, Pave, PaveBlockHandle, ShapeInfo};
 use crate::int_tools::Context;
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
@@ -175,29 +175,6 @@ impl BOPAlgoPaveFiller {
             append_vertex_edge_record(structure, *original, edge, new_vertex, parameter);
         }
     }
-
-    fn split_intersected_edges(&mut self, edges: &[i32]) -> Result<(), Failure> {
-        for edge in edges {
-            self.split_edge_blocks(*edge)?;
-        }
-        if !edges.is_empty() {
-            self.fill_shrunk_data(ShapeEnum::Vertex, ShapeEnum::Edge)?;
-        }
-        Ok(())
-    }
-
-    fn split_edge_blocks(&mut self, edge: i32) -> Result<(), Failure> {
-        let structure = self.data_structure.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
-        })?;
-        let source_blocks = structure.change_pave_blocks(edge)?.clone();
-        let mut replacement = Vec::new();
-        for block in source_blocks {
-            split_block(block, &mut replacement)?;
-        }
-        *structure.change_pave_blocks(edge)? = replacement;
-        Ok(())
-    }
 }
 
 fn append_vertex_edge_candidate(
@@ -357,18 +334,6 @@ fn expand_vertex_info(
     let bounds = structure.change_shape_info(index)?.change_box();
     bounds.add_point(point);
     bounds.set_gap(gap);
-    Ok(())
-}
-
-fn split_block(block: PaveBlockHandle, output: &mut Vec<PaveBlockHandle>) -> Result<(), Failure> {
-    let mut source = block.lock().expect("pave-block lock must not be poisoned");
-    if !source.is_to_update() {
-        output.push(Arc::clone(&block));
-        return Ok(());
-    }
-    let mut split = Vec::new();
-    source.update(&mut split, true);
-    output.extend(split.into_iter().map(pave_block_handle));
     Ok(())
 }
 
