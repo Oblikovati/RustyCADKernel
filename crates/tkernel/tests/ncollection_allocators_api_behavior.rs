@@ -2,7 +2,8 @@
 // The raw Free mirrors the native pointer API, which Rust marks unsafe.
 #![allow(unsafe_code)]
 use rustycad_tkernel::ncollection::{
-    ACC_DEFAULT_BLOCK_SIZE, BaseAllocator, INC_DEFAULT_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
+    ACC_DEFAULT_BLOCK_SIZE, AccAlignedPtr, AccAlignedSize, BaseAllocator, INC_DEFAULT_BLOCK_SIZE,
+    IncBlock, IncBlockSizeLevel,
 };
 use std::ptr::NonNull;
 
@@ -118,6 +119,51 @@ fn nullable_free_matches_native_null_behavior_for_every_allocator_kind() {
     let raw = accumulating.allocate_raw(8).unwrap();
     unsafe { accumulating.free_raw(raw) }.unwrap();
 }
+
+#[test]
+fn accumulating_protected_alignment_helpers_match_native_arithmetic() {
+    assert_acc_aligned_size_rounding();
+    assert_acc_aligned_pointer_views();
+    assert_acc_aligned_pointer_arithmetic();
+}
+
+fn assert_acc_aligned_size_rounding() {
+    assert_eq!(
+        [0, 1, 2, 3, 4, 5, usize::MAX].map(|size| AccAlignedSize::new(size).get()),
+        [0, 4, 4, 4, 4, 8, 0]
+    );
+}
+
+fn assert_acc_aligned_pointer_views() {
+    let mut storage = AlignedBytes([0; 16]);
+    let base = storage.0.as_mut_ptr();
+    let raw = base.wrapping_add(3);
+    let aligned = AccAlignedPtr::from_ptr(raw);
+    assert_eq!(aligned.as_ptr(), base);
+    assert_eq!(AccAlignedPtr::default().as_ptr(), std::ptr::null_mut());
+}
+
+fn assert_acc_aligned_pointer_arithmetic() {
+    let mut storage = AlignedBytes([0; 16]);
+    let base = storage.0.as_mut_ptr();
+    let aligned = AccAlignedPtr::from_ptr(base);
+    let size = AccAlignedSize::new(1);
+    assert_eq!((aligned + size).as_ptr(), base.wrapping_add(4));
+    assert_eq!(((aligned + size) - size).as_ptr(), base);
+    let mut moved = aligned;
+    assert_eq!(
+        moved.wrapping_add_assign(size).as_ptr(),
+        base.wrapping_add(4)
+    );
+    assert_eq!(moved.wrapping_sub_assign(size).as_ptr(), base);
+    moved += size;
+    moved += size;
+    moved -= size;
+    assert_eq!(moved.as_ptr(), base.wrapping_add(4));
+}
+
+#[repr(align(4))]
+struct AlignedBytes([u8; 16]);
 
 #[test]
 fn incremental_thread_safety_request_keeps_parallel_allocations_unique() {
