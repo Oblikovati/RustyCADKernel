@@ -179,10 +179,37 @@ impl Cache {
         }
     }
 
-    /// Derivatives up to `derivative` at a normalized parameter (`calculateDerivative`
-    /// after normalization); `cache.derivatives(0.5, 2)?`.
+    /// Derivatives up to `derivative` at the curve parameter
+    /// (`calculateDerivative`); `cache.derivatives(0.5, 2)?`.
     pub fn derivatives(&self, parameter: f64, derivative: i32) -> Result<[f64; 16], Failure> {
         self.derivatives_local(self.local_parameter(parameter), derivative)
+    }
+
+    /// Writes packed rows in curve-parameter units (`calculateDerivative`);
+    /// extra capacity stays unchanged;
+    /// `cache.derivatives_into(0.5, 1, &mut rows)?`.
+    pub fn derivatives_into(
+        &self,
+        parameter: f64,
+        derivative: i32,
+        output: &mut [f64],
+    ) -> Result<(), Failure> {
+        self.derivatives_local_into(self.local_parameter(parameter), derivative, output)
+    }
+
+    /// Writes packed rows for a normalized span parameter, scaled to curve-parameter
+    /// derivatives (`calculateDerivativeLocal`); extra capacity stays unchanged;
+    /// `cache.derivatives_local_into(0.25, 1, &mut rows)?`.
+    pub fn derivatives_local_into(
+        &self,
+        local_param: f64,
+        derivative: i32,
+        output: &mut [f64],
+    ) -> Result<(), Failure> {
+        let needed: usize = ensure_derivative_output_capacity(self, derivative, output.len())?;
+        let values: [f64; 16] = self.derivatives_local(local_param, derivative)?;
+        output[..needed].copy_from_slice(&values[..needed]);
+        Ok(())
     }
 
     // calculateDerivativeLocal: rows of `derivative_stride()` values.
@@ -220,4 +247,34 @@ impl Cache {
         rational_derivative(order, order, dim as i32 - 1, &polynomial, &mut result, true)?;
         Ok(result)
     }
+}
+
+fn ensure_derivative_output_capacity(
+    cache: &Cache,
+    derivative: i32,
+    actual: usize,
+) -> Result<usize, Failure> {
+    let expected: usize = derivative_output_length(cache, derivative)?;
+    if actual < expected {
+        return Err(Failure::with_type(
+            "Standard_DimensionMismatch",
+            &format!("BSplCLib_Cache output length {actual}; expected at least {expected}"),
+            "",
+        ));
+    }
+    Ok(expected)
+}
+
+fn derivative_output_length(cache: &Cache, derivative: i32) -> Result<usize, Failure> {
+    validate_derivative_order(derivative)?;
+    Ok((derivative as usize + 1) * cache.derivative_stride())
+}
+
+fn validate_derivative_order(derivative: i32) -> Result<(), Failure> {
+    if !(0..=3).contains(&derivative) {
+        return Err(Failure::out_of_range(&format!(
+            "BSplCLib_Cache derivative order {derivative}; expected 0..=3"
+        )));
+    }
+    Ok(())
 }
