@@ -228586,6 +228586,168 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInter3d::touched_faces",
       "status": "partial",
       "notes": "Native state and unbounded/bounded rectangular plane fixtures: tools/oracle/tkoffset_inter3d_state.md. Partial class: arbitrary trims, shared topology, nonplanes and general PaveFiller intersection branch remain unsupported. TouchedFaces/NewEdges expose read-only slices rather than native mutable indexed maps. No new legacy declaration mapped."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Clear()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::clear",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::EdgeAfter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::edge_after",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::EdgeAfter(const TopAbs_State)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_edge_after",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::EdgeBefore() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::edge_before",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::EdgeBefore(const TopAbs_State)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_edge_before",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::HLRBRep_AreaLimit(const HLRAlgo_Intersection &, const bool, const bool, const TopAbs_State, const TopAbs_State, const TopAbs_State, const TopAbs_State)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::new",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::IsBoundary() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::is_boundary",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::IsInterference() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::is_interference",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Next() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::next",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Next(const occ::handle<HLRBRep_AreaLimit> &)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_next",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Previous() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::previous",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Previous(const occ::handle<HLRBRep_AreaLimit> &)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_previous",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::StateAfter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::state_after",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::StateAfter(const TopAbs_State)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_state_after",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::StateBefore() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::state_before",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::StateBefore(const TopAbs_State)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::set_state_before",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
+    },
+    {
+      "upstream_id": "HLRBRep_AreaLimit::Vertex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
+      "source_sha256": "48de475f3031559c3c840b2f78f899007afaed2b68f2665ad53739e6e9ea8277",
+      "rust_item": "rustycad_tkhlr::hlr_brep::AreaLimit::vertex",
+      "status": "implemented",
+      "notes": "Source-defined state/link members ported with mutation through shared handles. Native fixture exercises copied vertex, both flags, all four state accessors and setters, null/neighbor/self links and repeated Clear preserving other state; tools/oracle/tkhlr_area_limit.md. Supplemental API replay only; no legacy declaration mapped, and no concurrency equivalence claim."
     }
   ],
   "tests": [
