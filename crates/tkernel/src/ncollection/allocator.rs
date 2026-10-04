@@ -126,6 +126,12 @@ impl BaseAllocator {
             .clone()
     }
 
+    /// Creates an independent common-policy allocator identity, like a derived native allocator.
+    /// Example: `BaseAllocator::fresh_common() != BaseAllocator::common()`.
+    pub fn fresh_common() -> Self {
+        Self::with_kind(AllocatorKind::Common)
+    }
+
     /// The process-wide malloc allocator (`GlobalHeapAllocator`), distinct from `common`.
     ///
     /// Example: `BaseAllocator::global_heap() != BaseAllocator::common()`.
@@ -133,6 +139,12 @@ impl BaseAllocator {
         static HEAP: OnceLock<BaseAllocator> = OnceLock::new();
         HEAP.get_or_init(|| Self::with_kind(AllocatorKind::Heap))
             .clone()
+    }
+
+    /// Creates an independent heap-policy identity, like a derived native heap allocator.
+    /// Example: `BaseAllocator::fresh_heap() != BaseAllocator::global_heap()`.
+    pub fn fresh_heap() -> Self {
+        Self::with_kind(AllocatorKind::Heap)
     }
 
     /// A new incremental allocator (`NCollection_IncAllocator(theBlockSize)`); sizes below
@@ -147,16 +159,15 @@ impl BaseAllocator {
     /// mutex remains enabled for Rust memory safety even when `is_thread_safe` is false.
     /// Example: `BaseAllocator::incremental(4096).set_thread_safe(true)?`.
     pub fn set_thread_safe(&self, _is_thread_safe: bool) -> Result<(), Failure> {
-        let actual = match &*self.inner {
-            AllocatorKind::Incremental(_) => return Ok(()),
-            AllocatorKind::Common => "NCollection_BaseAllocator",
-            AllocatorKind::Heap => "NCollection_HeapAllocator",
-            AllocatorKind::Accumulating(_) => "NCollection_AccAllocator",
-            AllocatorKind::Aligned(_) => "NCollection_AlignedAllocator",
-        };
+        if matches!(&*self.inner, AllocatorKind::Incremental(_)) {
+            return Ok(());
+        }
         Err(Failure::with_message(
             "Standard_TypeMismatch",
-            &format!("{actual} cannot set thread safety; expected NCollection_IncAllocator"),
+            &format!(
+                "{} cannot set thread safety; expected NCollection_IncAllocator",
+                self.kind_name()
+            ),
         ))
     }
 
@@ -314,6 +325,18 @@ impl BaseAllocator {
     /// Stable identity address of the shared allocator object (native `myAllocator.get()`).
     pub fn identity(&self) -> *const () {
         Arc::as_ptr(&self.inner).cast()
+    }
+
+    /// Whether this handle can release storage from `owner`; distinct common/common and heap/heap
+    /// handles share their native free backend, while arena identities remain distinct.
+    /// Example: `BaseAllocator::fresh_heap().can_free_from(&BaseAllocator::global_heap())`.
+    pub fn can_free_from(&self, owner: &Self) -> bool {
+        Arc::ptr_eq(&self.inner, &owner.inner)
+            || matches!(
+                (&*self.inner, &*owner.inner),
+                (AllocatorKind::Common, AllocatorKind::Common)
+                    | (AllocatorKind::Heap, AllocatorKind::Heap)
+            )
     }
 }
 

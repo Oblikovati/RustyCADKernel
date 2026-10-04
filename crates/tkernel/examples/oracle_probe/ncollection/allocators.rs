@@ -21,6 +21,7 @@ pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
         "ncoll_allocators_aligned" => Some(aligned(input)),
         "ncoll_allocators_buffer" => Some(buffer(input)),
         "ncoll_allocators_occ_eq" => Some(occ_equality()),
+        "ncoll_allocators_instance_identity" => Some(allocator_instance_identity()),
         _ => None,
     }
 }
@@ -314,4 +315,41 @@ fn occ_equality() -> String {
         u8::from(heap == BaseAllocator::global_heap()),
         u8::from(heap == BaseAllocator::common()),
     )
+}
+
+fn allocator_instance_identity() -> String {
+    let base_one = BaseAllocator::fresh_common();
+    let heap_one = BaseAllocator::fresh_heap();
+    free_probe_allocation(&base_one);
+    free_probe_allocation(&heap_one);
+    allocator_identity_flags()
+        .map(|flag| if flag { '1' } else { '0' })
+        .iter()
+        .collect()
+}
+
+fn allocator_identity_flags() -> [bool; 7] {
+    let common = BaseAllocator::common();
+    let heap = BaseAllocator::global_heap();
+    let fresh_common = BaseAllocator::fresh_common();
+    let second_common = BaseAllocator::fresh_common();
+    let fresh_heap = BaseAllocator::fresh_heap();
+    let second_heap = BaseAllocator::fresh_heap();
+    [
+        common == BaseAllocator::common(),
+        heap == BaseAllocator::global_heap(),
+        common != heap,
+        fresh_common != common,
+        fresh_common != second_common,
+        fresh_heap != heap,
+        fresh_heap != second_heap,
+    ]
+}
+
+fn free_probe_allocation(allocator: &BaseAllocator) {
+    let allocation = allocator
+        .allocate_raw(8)
+        .expect("fresh allocator allocation");
+    // SAFETY: this allocation came from the same heap-policy handle and is released once.
+    unsafe { allocator.free_raw(allocation) }.expect("release fresh allocator allocation");
 }

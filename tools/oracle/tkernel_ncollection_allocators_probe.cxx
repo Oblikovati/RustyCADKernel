@@ -21,6 +21,18 @@
 
 namespace
 {
+class BaseAllocatorInstance : public NCollection_BaseAllocator
+{
+public:
+  BaseAllocatorInstance() = default;
+};
+
+class HeapAllocatorInstance : public NCollection_HeapAllocator
+{
+public:
+  HeapAllocatorInstance() = default;
+};
+
 //! Labels incremental blocks by the order they appear; an allocation continues the block whose
 //! bump cursor it lands on, otherwise it starts a new block (payloads never touch).
 struct IncBlockLabels
@@ -269,6 +281,25 @@ void probeOccEquality(std::istream& in, std::ostream& out)
       << (NCollection_HeapAllocator::GlobalHeapAllocator().get()
           == NCollection_BaseAllocator::CommonBaseAllocator().get());
 }
+
+void probeAllocatorInstances(std::ostream& out)
+{
+  const auto& aCommon = NCollection_BaseAllocator::CommonBaseAllocator();
+  const auto& aGlobalHeap = NCollection_HeapAllocator::GlobalHeapAllocator();
+  occ::handle<NCollection_BaseAllocator> aBase1 = new BaseAllocatorInstance;
+  occ::handle<NCollection_BaseAllocator> aBase2 = new BaseAllocatorInstance;
+  occ::handle<NCollection_HeapAllocator> aHeap1 = new HeapAllocatorInstance;
+  occ::handle<NCollection_HeapAllocator> aHeap2 = new HeapAllocatorInstance;
+  out << (aCommon.get() == NCollection_BaseAllocator::CommonBaseAllocator().get())
+      << (aGlobalHeap.get() == NCollection_HeapAllocator::GlobalHeapAllocator().get())
+      << (aCommon.get() != aGlobalHeap.get()) << (aBase1.get() != aCommon.get())
+      << (aBase1.get() != aBase2.get()) << (aHeap1.get() != aGlobalHeap.get())
+      << (aHeap1.get() != aHeap2.get());
+  void* aBaseBytes = aBase1->Allocate(8);
+  void* aHeapBytes = aHeap1->Allocate(8);
+  aBase1->Free(aBaseBytes);
+  aHeap1->Free(aHeapBytes);
+}
 } // namespace
 
 static bool ncollection_allocators_probe(const std::string& op, std::istream& in, std::ostream& out)
@@ -285,6 +316,8 @@ static bool ncollection_allocators_probe(const std::string& op, std::istream& in
     probeBuffer(in, out);
   else if (op == "ncoll_allocators_occ_eq")
     probeOccEquality(in, out);
+  else if (op == "ncoll_allocators_instance_identity")
+    probeAllocatorInstances(out);
   else
     return false;
   return true;
