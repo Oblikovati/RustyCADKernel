@@ -275,7 +275,7 @@ def attach_or_report(
     if isinstance(error, str):
         report_gap(origin, error)
         return
-    owner, target = public_owner_target(candidate, aliases, crates)
+    owner, target = candidate_public_target(origin, candidate, aliases, crates)
     if target is None or owner is None:
         report_unreachable_owner(origin, candidate)
         return
@@ -285,6 +285,57 @@ def attach_or_report(
         return
     public_entry = rewrite_foreign_candidate(candidate, owner, local_aliases)
     append_foreign_member(target, public_entry, origin)
+
+
+def candidate_public_target(
+    origin: dict[str, JSONValue],
+    candidate: Mapping[str, JSONValue],
+    aliases: Mapping[tuple[str, str], set[str]],
+    crates: Sequence[dict[str, JSONValue]],
+) -> tuple[str | None, dict[str, JSONValue] | None]:
+    if candidate.get("foreign_impl_self_primitive") == "bool":
+        return public_bool_anchor_target(origin, candidate, aliases, crates)
+    return public_owner_target(candidate, aliases, crates)
+
+
+def public_bool_anchor_target(
+    origin: dict[str, JSONValue],
+    candidate: Mapping[str, JSONValue],
+    aliases: Mapping[tuple[str, str], set[str]],
+    crates: Sequence[dict[str, JSONValue]],
+) -> tuple[str | None, dict[str, JSONValue] | None]:
+    crate_name = string_value(origin.get("crate"), "origin crate")
+    canonical = candidate.get("foreign_impl_anchor_canonical")
+    if not isinstance(canonical, str):
+        return None, None
+    owners = aliases.get((crate_name, canonical), set())
+    target = next((crate for crate in crates if crate.get("crate") == crate_name), None)
+    if len(owners) != 1 or target is not origin:
+        return None, None
+    public_path = next(iter(owners))
+    if not bool_anchor_row_is_pinned(origin, candidate, public_path, canonical):
+        return None, None
+    return public_path, target
+
+
+def bool_anchor_row_is_pinned(
+    origin: Mapping[str, JSONValue],
+    candidate: Mapping[str, JSONValue],
+    public_path: str,
+    canonical: str,
+) -> bool:
+    matches = [
+        row for row in source_declaration_rows(origin)
+        if row.get("path") == public_path and row.get("canonical_type_path") == canonical
+    ]
+    if len(matches) != 1:
+        return False
+    anchor = matches[0]
+    return (
+        anchor.get("source_status") is None
+        and anchor.get("source_file") == candidate.get("foreign_impl_anchor_source_file")
+        and anchor.get("source_sha256") == candidate.get("foreign_impl_anchor_source_sha256")
+    )
 
 
 def public_owner_target(
@@ -339,17 +390,28 @@ def rewrite_foreign_candidate(
     local_aliases: Mapping[str, str],
 ) -> dict[str, JSONValue]:
     entry = dict(candidate)
-    canonical_owner = string_value(entry.get("foreign_impl_owner"), "foreign owner")
-    path = string_value(entry.get("path"), "foreign impl path")
-    entry["path"] = rewrite_path_identities(path, {canonical_owner: owner, **local_aliases})
-    entry["foreign_impl_owner"] = owner
-    entry["foreign_impl_owner_canonical"] = canonical_owner
+    rewrite_foreign_owner(entry, owner, local_aliases)
     trait_path = ufcs_trait_path(entry["path"])
     canonical_trait = candidate_trait_path(entry)
     if trait_path is not None and canonical_trait is not None:
         entry["foreign_impl_trait_path"] = trait_path
         entry["foreign_impl_trait_canonical"] = canonical_trait
     return entry
+
+
+def rewrite_foreign_owner(
+    entry: dict[str, JSONValue], owner: str, local_aliases: Mapping[str, str]
+) -> None:
+    canonical_owner = string_value(entry.get("foreign_impl_owner"), "foreign owner")
+    path = string_value(entry.get("path"), "foreign impl path")
+    identities = dict(local_aliases)
+    if entry.get("foreign_impl_self_primitive") == "bool":
+        entry["foreign_impl_anchor_path"] = owner
+    else:
+        identities[canonical_owner] = owner
+        entry["foreign_impl_owner"] = owner
+        entry["foreign_impl_owner_canonical"] = canonical_owner
+    entry["path"] = rewrite_path_identities(path, identities)
 
 
 def candidate_trait_path(entry: Mapping[str, JSONValue]) -> str | None:
@@ -414,6 +476,8 @@ def append_foreign_member(
     entry = dict(candidate)
     entry.pop("foreign_impl_id", None)
     entry["foreign_impl_origin_crate"] = origin.get("crate")
+    if entry.get("foreign_impl_self_primitive") == "bool":
+        entry["foreign_impl_api_owner"] = origin.get("crate")
     entry["declaration_sha256"] = declaration_digest(entry)
     declarations = array_value(target.get("declarations"), "declarations")
     declarations.append(entry)

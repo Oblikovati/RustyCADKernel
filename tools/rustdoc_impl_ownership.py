@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Protocol
 
 from api_inventory_json import JSONValue, array_value, integer_value
-from rustdoc_declarations import stable_path
+from rustdoc_declarations import file_hash, span_filename, stable_path
+from rustdoc_bool_foreign_impls import bool_foreign_impl_members
 from rustdoc_foreign_impls import foreign_impl_members
 
 
@@ -77,6 +78,8 @@ def render_linked_impl(
     impl_id: JSONValue, owner_id: str, path: str, impl: Mapping[str, JSONValue],
     state: ImplState, render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
+    if impl.get("for") == {"primitive": "bool"}:
+        return linked_bool_impl_entries(impl_id, owner_id, path, impl, state)
     impl_owner, owner_error = resolved_impl_owner(impl, state.items)
     if impl_owner is None:
         state.unresolved.append(f"impl:{impl_id}:{owner_error}")
@@ -87,6 +90,146 @@ def render_linked_impl(
     state.owned_impl_ids.add(str(impl_id))
     return render_impl(
         impl, path, state.items, state.paths, state.source_root, state.unresolved
+    )
+
+
+def linked_bool_impl_entries(
+    impl_id: JSONValue,
+    owner_id: str,
+    path: str,
+    impl: Mapping[str, JSONValue],
+    state: ImplState,
+) -> list[dict[str, JSONValue]]:
+    anchor_id = bool_from_local_anchor(impl, state.items, state.paths)
+    if anchor_id is None or anchor_id != owner_id:
+        anchor_path = bool_impl_anchor_path(impl, state.paths)
+        state.unresolved.append(f"impl:{impl_id}:unsupported-bool-anchor:{anchor_path}")
+        return []
+    capture_bool_impl(impl_id, anchor_id, path, impl, state)
+    return []
+
+
+def bool_impl_anchor_path(
+    impl: Mapping[str, JSONValue], paths: Mapping[str, JSONValue]
+) -> str:
+    trait = impl.get("trait")
+    argument = only_trait_type_argument(trait) if isinstance(trait, dict) else None
+    reference = argument.get("borrowed_ref") if isinstance(argument, dict) else None
+    reference_type = reference.get("type") if isinstance(reference, dict) else None
+    anchor_id = resolved_path_type_id(reference_type)
+    return stable_path(paths, anchor_id, "") if anchor_id is not None else "unknown"
+
+
+def capture_bool_impl(
+    impl_id: JSONValue,
+    anchor_id: str,
+    anchor_path: str,
+    impl: Mapping[str, JSONValue],
+    state: ImplState,
+) -> None:
+    provenance = bool_anchor_provenance(anchor_id, state)
+    if provenance is None:
+        state.unresolved.append(f"impl:{impl_id}:unverifiable-bool-anchor")
+        return
+    canonical, source_file, source_digest = provenance
+    identifier = str(impl_id)
+    state.foreign_impl_candidates.extend(
+        bool_foreign_impl_members(
+            impl, anchor_path, canonical, source_file, source_digest, identifier,
+            state.items, state.paths, state.source_root, state.unresolved,
+        )
+    )
+
+
+def bool_anchor_provenance(
+    anchor_id: str, state: ImplState
+) -> tuple[str, str, str] | None:
+    canonical = stable_path(state.paths, anchor_id, "")
+    source_file = span_filename(state.items[anchor_id])
+    source_digest, source_error = file_hash(state.source_root, source_file)
+    if not canonical or source_error is not None or source_digest is None:
+        return None
+    return canonical, source_file or "", source_digest
+
+
+def bool_from_local_anchor(
+    impl: Mapping[str, JSONValue],
+    items: Mapping[str, dict[str, JSONValue]],
+    paths: Mapping[str, JSONValue],
+) -> str | None:
+    if (
+        impl.get("for") != {"primitive": "bool"}
+        or impl.get("is_negative") is not False
+        or not empty_impl_generics(impl)
+    ):
+        return None
+    anchor_id = from_reference_anchor(impl, paths)
+    if anchor_id is None:
+        return None
+    anchor_path = paths.get(anchor_id)
+    anchor = items.get(anchor_id)
+    return anchor_id if public_nominal_anchor(anchor_path, anchor) else None
+
+
+def empty_impl_generics(impl: Mapping[str, JSONValue]) -> bool:
+    generics = impl.get("generics")
+    return (
+        isinstance(generics, dict)
+        and generics.get("params") == []
+        and generics.get("where_predicates") == []
+    )
+
+
+def from_reference_anchor(
+    impl: Mapping[str, JSONValue], paths: Mapping[str, JSONValue]
+) -> str | None:
+    trait = impl.get("trait")
+    if not isinstance(trait, dict):
+        return None
+    trait_id = trait.get("id")
+    if not isinstance(trait_id, (int, str)):
+        return None
+    if stable_path(paths, str(trait_id), "") != "core::convert::From":
+        return None
+    argument = only_trait_type_argument(trait)
+    reference = argument.get("borrowed_ref") if isinstance(argument, dict) else None
+    if not isinstance(reference, dict) or reference.get("is_mutable") is not False:
+        return None
+    if reference.get("lifetime") is not None:
+        return None
+    return resolved_nominal_id(reference.get("type"), paths)
+
+
+def only_trait_type_argument(trait: Mapping[str, JSONValue]) -> JSONValue | None:
+    arguments = trait.get("args")
+    angle = arguments.get("angle_bracketed") if isinstance(arguments, dict) else None
+    values = angle.get("args") if isinstance(angle, dict) else None
+    if not isinstance(values, list) or len(values) != 1 or angle.get("constraints") != []:
+        return None
+    value = values[0]
+    return value.get("type") if isinstance(value, dict) else None
+
+
+def resolved_nominal_id(
+    value: JSONValue | None, paths: Mapping[str, JSONValue]
+) -> str | None:
+    identifier = resolved_path_type_id(value)
+    if identifier is None:
+        return None
+    path = paths.get(identifier)
+    if not isinstance(path, dict) or path.get("kind") not in {"struct", "enum", "union"}:
+        return None
+    resolved = value.get("resolved_path") if isinstance(value, dict) else None
+    return identifier if isinstance(resolved, dict) and resolved.get("args") is None else None
+
+
+def public_nominal_anchor(
+    path: JSONValue | None, item: Mapping[str, JSONValue] | None
+) -> bool:
+    return (
+        isinstance(path, dict)
+        and path.get("kind") in {"struct", "enum", "union"}
+        and item is not None
     )
 
 
