@@ -1,0 +1,75 @@
+{
+  "scope": "Exact compiler selectors for existing DoubleMap implemented mappings; no behavior or legacy declaration count changes",
+  "changes": [
+    {
+      "old": "NCollection_DoubleMap::Iterator(const NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::Iterator::Iterator(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "3e3e44c6d626d7cf9efa0eddc7e9ebe45a76bb2455f801a6a8e7483ef77f1820",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMap::cursor",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMap::cursor"
+    },
+    {
+      "old": "NCollection_DoubleMap::Iterator::Initialize(const NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::Iterator::Initialize(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "40bdb47588002216c601e75f1c9aa0534543447455333e7e208ebd4c60068dd2",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMapIterator::initialize",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMapIterator::initialize"
+    },
+    {
+      "old": "NCollection_DoubleMap::Iterator::IsEqual(const Iterator&) const",
+      "new": "NCollection_DoubleMap::Iterator::IsEqual(const NCollection_DoubleMap::Iterator&) const",
+      "cpp_id": "601e618d7731875bf43b9bba6b5bd9d391607265e072bf46e36dc0d084eef8e3",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap::Iterator &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMapIterator::is_equal",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMapIterator::is_equal"
+    },
+    {
+      "old": "NCollection_DoubleMap(const NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::NCollection_DoubleMap(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "65dc48b52d37d0741d025c1247cd1983c32e881571ea68b162a919a2ad7fa7a3",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "<rustycad_tkernel::ncollection::DoubleMap as Clone>::clone",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMap::<core::clone::Clone>::clone"
+    },
+    {
+      "old": "NCollection_DoubleMap::Exchange(NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::Exchange(NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "004a30cce1942ebf70d715572f866fe2ef70eab1c87697043e27196891f8ca15",
+      "written_parameter_types": [
+        "NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMap::exchange",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMap::exchange"
+    },
+    {
+      "old": "NCollection_DoubleMap::Assign(const NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::Assign(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "f87080ab03b1437bf09f2e3a7aff1d8ebe3f19bb2784a0ef5fe7717f0cbc4ada",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMap::assign",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMap::assign"
+    },
+    {
+      "old": "NCollection_DoubleMap::operator=(const NCollection_DoubleMap&)",
+      "new": "NCollection_DoubleMap::operator=(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
+      "cpp_id": "5b875cc0826ada4bd0e93aa7f7aa20a51d8e163359bdd51cee4cc8d0a4221e74",
+      "written_parameter_types": [
+        "const NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2> &"
+      ],
+      "rust_item_before": "rustycad_tkernel::ncollection::DoubleMap::assign",
+      "rust_item_after": "rustycad_tkernel::ncollection::DoubleMap::assign"
+    }
+  ]
+}

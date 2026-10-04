@@ -78117,7 +78117,7 @@
       "notes": "Manual NCollection member mapping; A cursor attached to no map; More() is false. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::Iterator(const NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::Iterator::Iterator(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMap::cursor",
@@ -78141,7 +78141,7 @@
       "notes": "Manual NCollection member mapping;"
     },
     {
-      "upstream_id": "NCollection_DoubleMap::Iterator::Initialize(const NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::Iterator::Initialize(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMapIterator::initialize",
@@ -78157,7 +78157,7 @@
       "notes": "Manual NCollection member mapping; Restarts on the map given at construction; a default cursor stays past the end."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_DoubleMap::Iterator::IsEqual(const NCollection_DoubleMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMapIterator::is_equal",
@@ -78261,10 +78261,10 @@
       "notes": "Manual NCollection member mapping; Both default hash policies are passed explicitly. The int bucket-count overload raises Standard_OutOfRange for a negative count (nbBucketsFromInt); the Rust count is usize, and `buckets_from_int` performs that native check."
     },
     {
-      "upstream_id": "NCollection_DoubleMap(const NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::NCollection_DoubleMap(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DoubleMap as Clone>::clone",
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap::<core::clone::Clone>::clone",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hashers, then re-binds every pair in first-key bucket order."
     },
@@ -78277,7 +78277,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;`); ownership transfer has no callable counterpart, and the native moved-from map (zero buckets, empty) is inaccessible in Rust."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::Exchange(NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::Exchange(NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMap::exchange",
@@ -78285,7 +78285,7 @@
       "notes": "Manual NCollection member mapping; Swaps contents, both hashers and allocator."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::Assign(const NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::Assign(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMap::assign",
@@ -78293,7 +78293,7 @@
       "notes": "Manual NCollection member mapping; Keeps the destination hashers and allocator."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::operator=(const NCollection_DoubleMap&)",
+      "upstream_id": "NCollection_DoubleMap::operator=(const NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMap::assign",
@@ -235435,6 +235435,14 @@
       "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::update_v_knots",
       "status": "implemented",
       "notes": "Protected native recomputation operation; declaration ID e584fc476b1270fed8d9cb3dbf857e536dc66d03adcfb59a7a698bb5eda5ca9c, header SHA-256 d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079. Safe Rust counterpart recomputes V distribution, flat knots and smoothness, invalidates the shared resolution cache, and retains the evaluation representation; native derived probe and focused Rust tests: tools/oracle/bspline_surface_update_knots.md. Rust reports allocation/state failures with Result; only valid constructed surfaces are covered."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::ChangeValue() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::change_value",
+      "status": "implemented",
+      "notes": "Non-consuming mutation through a positioned stable node cursor; supplemental native fixture tools/oracle/tkernel_ncollection_list_cursor_change_value.cxx. Native undefined end/foreign-node dereference returns None. FunctionTemplate origin retained; no synthetic List method identity or new legacy declaration count."
     }
   ],
   "tests": [

@@ -1,0 +1,15 @@
+{
+  "scope": "Reclassify nested class-template access using described template visibility; preserve declaration identities",
+  "extractor_fix": "c1face5c",
+  "observed_api_before": 108357,
+  "observed_api_after": 108622,
+  "changed_visibility_rows": 265,
+  "newly_visible": 265,
+  "artifact": "nested-template-access-changes.jsonl.gz",
+  "artifact_sha256": "6c9d40766a87f3abac50d178c1772b3052e7e1aee401000806738ba894c3e9f2",
+  "limits": [
+    "Public aliases of private templates still need reachability evidence; see ncollection-flatmap-private-iterator-alias.md.",
+    "6 headers fail parsing and 28 lack compilation configuration; full inventory completeness remains false.",
+    "Visibility changes are inventory corrections, not new Rust implementations."
+  ]
+}
