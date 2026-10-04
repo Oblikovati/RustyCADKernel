@@ -21,3 +21,6 @@ mod shape_dimensions;
 pub use shape_dimensions::{dimension, dimensions, treat_compound};
 mod open_shell;
 pub use open_shell::is_open_shell;
+
+mod construction;
+pub use construction::{make_container, point_on_edge};

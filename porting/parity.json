@@ -226563,6 +226563,24 @@
       "rust_item": "rustycad_tkbo::bop_tools::dimensions",
       "status": "partial",
       "notes": "40 native dimension/compound fence cases and 32 shell occurrence/orientation cases pass. Located/shared-geometry arrangements, exceptional inputs and wider topology stress remain unproven; see tools/oracle/tkbo_shape_utilities.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeContainer(const TopAbs_ShapeEnum, TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_container",
+      "status": "implemented",
+      "notes": "Every enum switch branch and existing/null output preservation matches 18 native cases. See tools/oracle/tkbo_construction.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::PointOnEdge(const TopoDS_Edge &, const double, gp_Pnt &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::point_on_edge",
+      "status": "partial",
+      "notes": "15 native spatial curve endpoint/midpoint samples pass; located curves, broader splines and exceptional inputs remain unproven. See tools/oracle/tkbo_construction.md."
     }
   ],
   "tests": [
