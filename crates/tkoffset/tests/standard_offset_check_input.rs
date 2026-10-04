@@ -135,16 +135,64 @@ fn unsupported_join_mode_returns_a_named_partial_port_error() {
 }
 
 #[test]
-fn multi_face_solid_offset_requires_the_unported_vertex_closure_stage() {
+fn multi_face_solid_offset_builds_native_corner_spheres_and_history() {
     let mut source = BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0).unwrap();
     let shape = source.shape().unwrap().clone();
     let mut maker = initialized(&shape, 0.5);
 
-    let error = maker.make_offset_shape().unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("spherical vertex-closure stage"));
-    assert!(!maker.is_done());
-    assert!(maker.shape().is_null());
+    maker.make_offset_shape().unwrap();
+    assert_box_solid_result(&mut maker, &shape);
+}
+
+fn assert_box_solid_result(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
+    assert!(maker.is_done());
+    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert_eq!(maker.shape().shape_type().unwrap(), ShapeEnum::Solid);
+    assert_eq!(
+        Explorer::new(maker.shape(), ShapeEnum::Face, ShapeEnum::Shape)
+            .unwrap()
+            .count(),
+        26
+    );
+    assert_eq!(
+        Explorer::new(maker.shape(), ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .count(),
+        96
+    );
+    assert!(
+        BRepCheckAnalyzer::new(maker.shape(), true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
+    let mut properties = GProps::new();
+    BRepGProp::surface_properties(maker.shape(), &mut properties, false, false).unwrap();
+    assert!((properties.mass() - 43.991_148_576_407_51).abs() < 1.0e-8);
+    assert_box_generated_history(maker, source);
+    for face in Explorer::new(maker.shape(), ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
+        let analyzer = BRepCheckAnalyzer::new(&face, true, false, false).unwrap();
+        assert!(analyzer.is_valid().unwrap());
+    }
+}
+
+fn assert_box_generated_history(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
+    for face in Explorer::new(source, ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
+        assert!(maker.offset_faces_from_shapes().has_image(&face));
+    }
+    for edge in Explorer::new(source, ShapeEnum::Edge, ShapeEnum::Shape).unwrap() {
+        assert!(!maker.offset_edges_from_shapes().has_image(&edge));
+        assert_generated_face(maker, &edge);
+    }
+    for vertex in Explorer::new(source, ShapeEnum::Vertex, ShapeEnum::Shape).unwrap() {
+        assert_generated_face(maker, &vertex);
+    }
+}
+
+fn assert_generated_face(maker: &mut BRepOffsetMakeOffset, source: &Shape) {
+    let generated = maker.generated(source).unwrap();
+    assert_eq!(generated.len(), 1);
+    assert_eq!(generated[0].shape_type().unwrap(), ShapeEnum::Face);
 }
 
 fn assert_single_plane_offset(face: rustycad_tkbrep::topods::Face, offset: f64, z: f64) {

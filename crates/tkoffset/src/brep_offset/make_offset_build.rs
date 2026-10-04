@@ -45,7 +45,6 @@ impl BRepOffsetMakeOffset {
     fn build_multi_face_shell(&mut self) -> Result<(), Failure> {
         let config = self.configuration()?;
         reject_unsupported_build_options(config, self.closing_faces.len())?;
-        reject_solid_without_vertex_closures(&self.initial_shape)?;
         let faces = source_faces(&self.face_component)?;
         let analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
         let shared_support = faces_share_support_surface(&faces)?;
@@ -62,9 +61,20 @@ impl BRepOffsetMakeOffset {
                 config.offset,
             )?;
             self.record_join_histories(&joins);
-            joins.into_iter().map(|join| join.face).collect()
+            let spheres = super::make_offset_build_spheres::vertex_sphere_joins(
+                &faces,
+                &joins,
+                &analyzer,
+                config.offset,
+            )?;
+            self.record_vertex_sphere_histories(&spheres);
+            joins
+                .into_iter()
+                .map(|join| join.face)
+                .chain(spheres.into_iter().map(|join| join.face))
+                .collect()
         };
-        self.result_shape = shell_from_faces(&images, &patches)?;
+        self.result_shape = offset_result_shell(&self.initial_shape, &images, &patches)?;
         self.error = Some(BRepOffsetError::NoError);
         self.done = true;
         Ok(())
@@ -93,18 +103,24 @@ impl BRepOffsetMakeOffset {
     }
 }
 
-fn reject_solid_without_vertex_closures(shape: &Shape) -> Result<(), Failure> {
-    let kind = shape.shape_type()?;
-    if kind != ShapeEnum::Solid {
-        return Ok(());
+fn offset_result_shell(
+    source: &Shape,
+    images: &[BRepOffsetOffsetFace],
+    patches: &[Face],
+) -> Result<Shape, Failure> {
+    let shell = shell_from_faces(images, patches)?;
+    if source.shape_type()? != ShapeEnum::Solid {
+        return Ok(shell);
     }
-    Err(Failure::with_type(
-        "Standard_NotImplemented",
-        &format!(
-            "input shape type {kind:?}; expected a shell until the native spherical vertex-closure stage is ported"
-        ),
-        "BRepOffset_MakeOffset::MakeOffsetShape",
-    ))
+    solid_from_shell(&shell)
+}
+
+fn solid_from_shell(shell: &Shape) -> Result<Shape, Failure> {
+    let mut solid = rustycad_tkbrep::topods::Solid::default();
+    let builder = BRepBuilder::default();
+    builder.make_solid(&mut solid);
+    builder.add(&mut solid, shell)?;
+    Ok(solid.into_shape())
 }
 
 fn face_count(component: &Shape) -> Result<usize, Failure> {

@@ -62,6 +62,15 @@ impl BRepOffsetMakeOffset {
             .push((source.clone(), image.clone()));
     }
 
+    pub(super) fn record_vertex_sphere_histories(
+        &mut self,
+        joins: &[super::make_offset_build_spheres::SphericalVertexJoin],
+    ) {
+        for join in joins {
+            record_vertex_sphere(&mut self.generated_vertices, join);
+        }
+    }
+
     fn images_for(&self, source: &Shape) -> Result<Vec<Shape>, Failure> {
         match source.shape_type()? {
             ShapeEnum::Face => Ok(self.offset_faces.last_image(source)),
@@ -83,6 +92,15 @@ impl BRepOffsetMakeOffset {
             .map(|(_, image)| vec![image.clone()])
             .unwrap_or_default()
     }
+}
+
+fn record_vertex_sphere(
+    history: &mut Vec<(Shape, Shape)>,
+    join: &super::make_offset_build_spheres::SphericalVertexJoin,
+) {
+    let source = join.source_vertex.clone().into_shape();
+    history.retain(|(old, _)| !old.is_same(&source));
+    history.push((source, join.face.clone().into_shape()));
 }
 
 fn record_generated_vertices(

@@ -274,6 +274,9 @@ impl BRepOffsetOffset {
             return Shape::default();
         };
         let mut image = edge.clone().into_shape();
+        if index == 1 {
+            image = image.reversed();
+        }
         if self.wire_reversed {
             image = image.reversed();
         }
