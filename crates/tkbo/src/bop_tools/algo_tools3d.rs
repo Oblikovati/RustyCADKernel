@@ -43,3 +43,6 @@ pub fn get_normal_to_face_on_edge_at(
     *normal = first.crossed(second)?;
     Ok(())
 }
+
+mod near_edge;
+pub use near_edge::point_near_edge_step;

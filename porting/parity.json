@@ -225996,6 +225996,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::get_normal_to_face_on_edge_at",
       "status": "partial",
       "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::PointNearEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, const double, gp_Pnt2d &, gp_Pnt &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge_step",
+      "status": "partial",
+      "notes": "480 native explicit-step cases; see tools/oracle/tkbo_point_near_edge.md. Spherical/spline/location and singular domains pending; no legacy completion claim."
     }
   ],
   "tests": [

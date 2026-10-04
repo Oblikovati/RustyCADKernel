@@ -154,3 +154,5 @@ fn store_pcurve(fixture: &ProjectionFixture, edge: &Edge) {
         .range_on_face(edge, &fixture.face, fixture.range.0, fixture.range.1)
         .unwrap();
 }
+
+mod near_edge;
