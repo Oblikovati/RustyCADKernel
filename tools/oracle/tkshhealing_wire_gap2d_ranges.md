@@ -35,6 +35,13 @@ the source knot interval `[0,1]` and preserved B-spline representation.
 `tangent_parabola_line` checks a repeated/tangent intersection from a quadratic
 Bezier curve against a line; OCCT selects the common parameter `0.5` and trims
 both p-curves to that point.
+`tangent_bspline_line` repeats the tangency through a degree-two B-spline so
+the spline intersection path is exercised independently of Bezier dispatch.
+`parabola_line_extension_exception` records an upstream `StdFail_NotDone` from
+the analytic parabola fallback. OCCT has already created its reshape context,
+but leaves both p-curve ranges and DONE/FAIL status unchanged; the Rust test
+compares this failure class and retained state instead of counting the attempt
+as a successful repair.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
 fallback, finite-surface bounds handling, trimmed and offset wrappers, and

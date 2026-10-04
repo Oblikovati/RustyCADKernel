@@ -5,6 +5,7 @@ use rustycad_tkbrep::{brep::BRepTool, topods};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomRectangularTrimmedSurface, GeomSurface};
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
+use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
 use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixWire};
 use support::*;
 
@@ -271,4 +272,36 @@ fn tangent_bezier_and_line_intersection_is_selected() {
     assert!(tool.fix_gap_2d(2, false).unwrap());
     assert_bezier_pcurve(&tool, &face, 1, [0.0, 0.5]);
     assert_line_observation(&tool, &face, 2, [0.5, 1.0, 0.5, 0.25, 1.0, 0.25]);
+}
+
+#[test]
+fn tangent_bspline_and_line_intersection_is_selected() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.0, 0.25, 0.0), Point3::new(1.0, 0.25, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_tangent_bspline_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bspline_pcurve(&tool, &face, 1, [0.0, 0.5]);
+    assert_line_observation(&tool, &face, 2, [0.5, 1.0, 0.5, 0.25, 1.0, 0.25]);
+}
+
+#[test]
+fn parabolic_extension_retains_native_not_done_failure_state() {
+    let first = edge_between(Point3::new(0.04, 0.2, 0.0), Point3::new(0.01, 0.1, 0.0));
+    let second = edge_between(Point3::new(0.2, 0.0, 0.0), Point3::new(1.2, 0.0, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_parabola_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    let error = tool.fix_gap_2d(2, false).unwrap_err();
+    assert_eq!(error.exception_type(), "StdFail_NotDone");
+    assert!(!tool.context().is_null());
+    assert!(!tool.last_fix_status(ShapeExtendStatus::Done));
+    assert!(!tool.last_fix_status(ShapeExtendStatus::Fail));
+    assert_line_observation(&tool, &face, 1, [0.1, 0.2, 0.01, 0.1, 0.04, 0.2]);
+    assert_line_observation(&tool, &face, 2, [0.0, 1.0, 0.2, 0.0, 1.2, 0.0]);
 }
