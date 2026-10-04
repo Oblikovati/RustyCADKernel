@@ -49,6 +49,10 @@ impl<R: Read> FreadStream<R> {
         (count, !self.error)
     }
 
+    pub(crate) fn read_block_count(&mut self, buffer: &mut [u8]) -> usize {
+        self.read_block(buffer).0
+    }
+
     fn fill_block(&mut self, buffer: &mut [u8]) -> usize {
         let mut count = 0;
         while count < buffer.len() && self.read_more(buffer, &mut count) {}
