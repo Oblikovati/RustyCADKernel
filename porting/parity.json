@@ -687,7 +687,7 @@
       "upstream_id": "MathPoly::PolyResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_poly::PolyResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_poly::PolyResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
@@ -31810,7 +31810,7 @@
       "upstream_id": "MathUtils::ScalarResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::ScalarResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::ScalarResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -31858,7 +31858,7 @@
       "upstream_id": "MathUtils::PolyResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::PolyResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::PolyResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -31938,7 +31938,7 @@
       "upstream_id": "MathUtils::VectorResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::VectorResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::VectorResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -31986,7 +31986,7 @@
       "upstream_id": "MathUtils::LinearResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::LinearResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::LinearResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -32034,7 +32034,7 @@
       "upstream_id": "MathUtils::LinearMultipleResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::LinearMultipleResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::LinearMultipleResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -32090,7 +32090,7 @@
       "upstream_id": "MathUtils::EigenResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::EigenResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::EigenResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -32154,7 +32154,7 @@
       "upstream_id": "MathUtils::DecompResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::DecompResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::DecompResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -32226,7 +32226,7 @@
       "upstream_id": "MathUtils::IntegResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::IntegResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::IntegResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -32274,7 +32274,7 @@
       "upstream_id": "MathUtils::InverseResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::InverseResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_utils::InverseResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -33634,7 +33634,7 @@
       "upstream_id": "MathInteg::SetResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_Set.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_integ::SetResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_integ::SetResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathInteg namespace mapping; template Function/Func parameters are Rust generics over math::Function, math::FunctionSet or math::MultipleVarFunction, native default arguments are explicit parameters, math_IntegerVector orders are an NCollection Array1<i32>, and THE_* constants drop the THE_ prefix. Bit parity: modern_integ, modern_kronrod, modern_double_exp, modern_tensor and integ_lin_singular numeric probes."
     },
@@ -33674,7 +33674,7 @@
       "upstream_id": "MathLin::CroutResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::CroutResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::CroutResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -33722,7 +33722,7 @@
       "upstream_id": "MathLin::EigenResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::TridiagonalResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::TridiagonalResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -33810,7 +33810,7 @@
       "upstream_id": "MathLin::LUResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::LuResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::LuResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -33874,7 +33874,7 @@
       "upstream_id": "MathLin::QRResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::QrResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::QrResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -33978,7 +33978,7 @@
       "upstream_id": "MathLin::LeastSquaresResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::LeastSquaresResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::LeastSquaresResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -34034,7 +34034,7 @@
       "upstream_id": "MathLin::SVDResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_lin::SvdResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_lin::SvdResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
@@ -34698,7 +34698,7 @@
       "upstream_id": "MathOpt::UzawaResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Uzawa.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_opt::UzawaResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_opt::UzawaResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
@@ -34754,7 +34754,7 @@
       "upstream_id": "MathRoot::AllRootsResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_root::AllRootsResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_root::AllRootsResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -34866,7 +34866,7 @@
       "upstream_id": "MathRoot::MultipleResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_root::MultipleResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_root::MultipleResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -35138,7 +35138,7 @@
       "upstream_id": "MathRoot::TrigResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_root::TrigResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_root::TrigResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -35762,7 +35762,7 @@
       "upstream_id": "MathSys::SystemResult::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_sys::SystemResult>>::from",
+      "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_sys::SystemResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
     },
@@ -230018,7 +230018,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::derivatives_into",
       "status": "partial",
-      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed coordinate derivative rows in original curve-parameter units. Native probe covers 2D polynomial degree-below-order and rational 3D non-unit span, both global/local entrypoints; Rust rational comparison tolerance 1e-14. Current explicit derivative-order range 0..=3; higher requests and complete protected-surface parity remain unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only."
+      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Non-rational global requests support nonnegative orders fitting the buffer; native quartic order-5 probe confirms fourth derivative, cleared fifth row, and untouched tail. Rational requests remain bounded to 0..=3 (native fixed 16-value temporary); rational comparison tolerance 1e-14. Complete protected-surface parity remains unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only."
     },
     {
       "upstream_id": "BSplCLib_Cache::calculateDerivativeLocal(double,int,double*) const",
