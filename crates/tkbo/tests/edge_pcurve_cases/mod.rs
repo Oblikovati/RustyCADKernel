@@ -198,3 +198,5 @@ mod make_section_pcurve;
 mod wire_hole;
 
 mod block_face;
+
+mod shape_tolerances;

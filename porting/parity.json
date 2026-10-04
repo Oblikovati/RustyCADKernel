@@ -227340,6 +227340,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::make_connexity_block",
       "status": "partial",
       "notes": "Source translation and 20 native ordered frontier/avoidance/append/empty-input observations; tools/oracle/tkbo_face_connexity.md. Native allocator injection and general API/legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::CorrectShapeTolerances(const TopoDS_Shape &, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::correct_shape_tolerances",
+      "status": "partial",
+      "notes": "Source pass-order/avoidance translation, 48 native tolerance observations including one/two passes and both requested scheduling flags. Rust currently executes serially. tools/oracle/tkbo_shape_tolerances.md; general topology/concurrency and full legacy parity remain unproven."
     }
   ],
   "tests": [

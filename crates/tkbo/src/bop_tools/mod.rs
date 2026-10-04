@@ -75,3 +75,6 @@ pub use block_face::is_block_in_on_face;
 
 mod face_connexity;
 pub use face_connexity::make_connexity_block;
+
+mod shape_tolerances;
+pub use shape_tolerances::correct_shape_tolerances;
