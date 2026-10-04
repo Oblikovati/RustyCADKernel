@@ -4,7 +4,7 @@ use rustycad_tkernel::{
     resource::{FormatType, ResourceManager, ResourceUnicode},
     tcollection::ExtendedString,
 };
-use std::{path::PathBuf, rc::Rc};
+use std::{path::PathBuf, sync::Arc};
 
 /// 日 (U+65E5) and 本 (U+672C) in each legacy encoding.
 const NIHON: [u16; 2] = [0x65E5, 0x672C];
@@ -143,7 +143,7 @@ fn utf8_locale_and_unconverted_formats() {
 #[test]
 fn current_format_is_process_wide_and_read_from_charset() {
     let _serial = super::serial();
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     system.write_resource(&PathBuf::from("charset"), "CharSet", "FormatType", "EUC");
     system.set_environment("CSF_CharSetDefaults", PathBuf::from("charset"));
     ResourceUnicode::read_format_with(&system.host()).unwrap();

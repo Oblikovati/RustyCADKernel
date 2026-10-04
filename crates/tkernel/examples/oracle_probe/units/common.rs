@@ -59,10 +59,10 @@ impl ResourceConsole for Capture {
 
 /// The resource host of both probes: no variables, no files, the captured console.
 pub fn resource_host(capture: &Capture) -> ResourceHost {
-    let console = std::rc::Rc::new(capture.clone());
+    let console = std::sync::Arc::new(capture.clone());
     ResourceHost::new(
-        std::rc::Rc::new(NoResourceIo),
-        std::rc::Rc::new(EmptyEnvironment),
+        std::sync::Arc::new(NoResourceIo),
+        std::sync::Arc::new(EmptyEnvironment),
         console,
     )
 }

@@ -5,20 +5,18 @@ use rustycad_tkernel::resource::{ResourceConsole, ResourceEnvironment, ResourceH
 use rustycad_tkernel::units::{Units, UnitsDiagnostics};
 use rustycad_tkernel::units_api::UnitsApi;
 use std::{
-    cell::RefCell,
     collections::BTreeMap,
     io::{self, Write},
     path::{Path, PathBuf},
-    rc::Rc,
     sync::{Arc, Mutex},
 };
 
 /// Resource files and `CSF_*` variables held in memory.
 #[derive(Default)]
 pub struct InMemoryUnitsResources {
-    pub files: Rc<RefCell<BTreeMap<PathBuf, Vec<u8>>>>,
-    pub variables: RefCell<BTreeMap<String, PathBuf>>,
-    pub console: RefCell<Vec<u8>>,
+    pub files: Arc<Mutex<BTreeMap<PathBuf, Vec<u8>>>>,
+    pub variables: Mutex<BTreeMap<String, PathBuf>>,
+    pub console: Mutex<Vec<u8>>,
 }
 
 impl InMemoryUnitsResources {
@@ -27,30 +25,33 @@ impl InMemoryUnitsResources {
         let directory = PathBuf::from(directory);
         let variable = format!("CSF_{name}Defaults");
         self.variables
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .insert(variable, directory.clone());
         let path = directory.join(name);
         self.files
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .insert(path, text.as_bytes().to_vec());
     }
     /// Defines `CSF_<name>UserDefaults` as `directory`.
     pub fn define_user(&self, name: &str, directory: &str) {
         let variable = format!("CSF_{name}UserDefaults");
         self.variables
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .insert(variable, PathBuf::from(directory));
     }
 }
 
 struct InMemoryWriter {
-    files: Rc<RefCell<BTreeMap<PathBuf, Vec<u8>>>>,
+    files: Arc<Mutex<BTreeMap<PathBuf, Vec<u8>>>>,
     path: PathBuf,
 }
 
 impl Write for InMemoryWriter {
     fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
-        let mut files = self.files.borrow_mut();
+        let mut files = self.files.lock().unwrap();
         files
             .entry(self.path.clone())
             .or_default()
@@ -64,19 +65,19 @@ impl Write for InMemoryWriter {
 
 impl ResourceEnvironment for InMemoryUnitsResources {
     fn directory(&self, name: &str) -> Option<PathBuf> {
-        self.variables.borrow().get(name).cloned()
+        self.variables.lock().unwrap().get(name).cloned()
     }
 }
 
 impl ResourceConsole for InMemoryUnitsResources {
     fn write(&self, bytes: &[u8]) {
-        self.console.borrow_mut().extend_from_slice(bytes);
+        self.console.lock().unwrap().extend_from_slice(bytes);
     }
 }
 
 impl ResourceIo for InMemoryUnitsResources {
     fn read(&self, path: &Path) -> io::Result<Vec<u8>> {
-        let files = self.files.borrow();
+        let files = self.files.lock().unwrap();
         files
             .get(path)
             .cloned()
@@ -87,7 +88,8 @@ impl ResourceIo for InMemoryUnitsResources {
     }
     fn open_write(&self, path: &Path) -> io::Result<Box<dyn Write>> {
         self.files
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .insert(path.to_path_buf(), Vec::new());
         let files = self.files.clone();
         let path = path.to_path_buf();
@@ -123,11 +125,11 @@ pub fn units_with(recorder: &RecordingUnitsDiagnostics) -> Arc<Units> {
 
 /// A `UnitsApi` over a fresh context and an empty resource store (no `CSF_*`).
 pub fn api() -> UnitsApi {
-    api_with(Rc::new(InMemoryUnitsResources::default()))
+    api_with(Arc::new(InMemoryUnitsResources::default()))
 }
 
 /// A `UnitsApi` over a fresh context and the given resource store.
-pub fn api_with(resources: Rc<InMemoryUnitsResources>) -> UnitsApi {
+pub fn api_with(resources: Arc<InMemoryUnitsResources>) -> UnitsApi {
     let units = units_with(&RecordingUnitsDiagnostics::default());
     let host = ResourceHost::new(resources.clone(), resources.clone(), resources);
     UnitsApi::new(units, host)

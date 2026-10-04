@@ -3,11 +3,11 @@ use crate::common::{guarded, hex, next, next_bytes};
 use rustycad_tkernel::plugin::{PluginLoader, StaticPluginLibraries};
 use rustycad_tkernel::resource::{ResourceEnvironment, ResourceIo};
 use rustycad_tkernel::standard::{Guid, Handle, StandardTransient};
-use std::cell::RefCell;
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
-use std::rc::Rc;
 use std::str::SplitWhitespace;
+use std::sync::Arc;
+use std::sync::Mutex;
 
 const DIRECTORY: &str = "/probe/plugin";
 
@@ -40,10 +40,10 @@ impl ResourceEnvironment for ProbeEnvironment {
 
 /// Captures what the loader prints.
 #[derive(Clone, Default)]
-struct CapturedConsole(Rc<RefCell<Vec<u8>>>);
+struct CapturedConsole(Arc<Mutex<Vec<u8>>>);
 impl Write for CapturedConsole {
     fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
-        self.0.borrow_mut().extend_from_slice(bytes);
+        self.0.lock().unwrap().extend_from_slice(bytes);
         Ok(bytes.len())
     }
     fn flush(&mut self) -> io::Result<()> {
@@ -60,8 +60,8 @@ pub fn plugin_case(input: &mut SplitWhitespace<'_>) -> String {
     let libraries: StaticPluginLibraries<Handle<StandardTransient>> =
         StaticPluginLibraries::default();
     let mut loader = PluginLoader::new(
-        Rc::new(ProbeResources { file }),
-        Rc::new(ProbeEnvironment),
+        Arc::new(ProbeResources { file }),
+        Arc::new(ProbeEnvironment),
         Box::new(libraries),
         Box::new(console.clone()),
     );
@@ -70,6 +70,6 @@ pub fn plugin_case(input: &mut SplitWhitespace<'_>) -> String {
             .load(&guid, verbose)
             .map(|product| if product.is_null() { "null" } else { "product" }.to_owned()),
     );
-    let printed = console.0.borrow().clone();
+    let printed = console.0.lock().unwrap().clone();
     format!("{} {}", hex(result.as_bytes()), hex(&printed))
 }

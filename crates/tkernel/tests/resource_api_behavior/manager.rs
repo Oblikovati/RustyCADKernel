@@ -1,17 +1,17 @@
 //! Resource_Manager constructors, traces, lookups, assignments and paths.
 use super::support::FakeResourceSystem;
 use rustycad_tkernel::{resource::ResourceManager, tcollection::AsciiString};
-use std::{path::PathBuf, rc::Rc};
+use std::{path::PathBuf, sync::Arc};
 
-fn system_with(name: &str, content: &[u8]) -> Rc<FakeResourceSystem> {
-    let system: Rc<FakeResourceSystem> = Rc::default();
+fn system_with(name: &str, content: &[u8]) -> Arc<FakeResourceSystem> {
+    let system: Arc<FakeResourceSystem> = Arc::default();
     system.set_environment(&format!("CSF_{name}Defaults"), PathBuf::from("defaults"));
     let path = PathBuf::from(format!("defaults/{name}"));
-    system.files.borrow_mut().insert(path, content.to_vec());
+    system.files.lock().unwrap().insert(path, content.to_vec());
     system
 }
 fn console(system: &FakeResourceSystem) -> String {
-    String::from_utf8(system.console.borrow().clone()).unwrap()
+    String::from_utf8(system.console.lock().unwrap().clone()).unwrap()
 }
 
 #[test]
@@ -30,7 +30,7 @@ fn verbose_named_constructor_reports_loads_and_missing_variables() {
 #[test]
 fn resource_verbose_variable_forces_verbose_and_missing_file_is_reported() {
     let _serial = super::serial();
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     system.set_environment("CSF_ResourceVerbose", PathBuf::from("1"));
     system.set_environment("CSF_AppDefaults", PathBuf::from("nowhere"));
     let manager = ResourceManager::new("App", false, system.host()).unwrap();
@@ -97,7 +97,7 @@ fn fgets_chunks_hide_bytes_after_nul_and_reject_a_leading_nul() {
 #[test]
 fn empty_manager_lookups_assignments_and_maps() {
     let _serial = super::serial();
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     let mut manager = ResourceManager::empty(system.host());
     assert!(!manager.is_initialized());
     manager.set_resource("text", b"abc\0ignored");
@@ -122,25 +122,25 @@ fn empty_manager_lookups_assignments_and_maps() {
 #[test]
 fn save_without_variable_or_entries_follows_native_messages() {
     let _serial = super::serial();
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     let manager = ResourceManager::new("App", true, system.host()).unwrap();
-    system.console.borrow_mut().clear();
+    system.console.lock().unwrap().clear();
     assert!(!manager.save());
     assert_eq!(
         console(&system),
         "Resource Manager Warning: environment variable \"CSF_AppUserDefaults\" not set.  Cannot save resources.\n"
     );
     system.set_environment("CSF_AppUserDefaults", PathBuf::from("out"));
-    system.console.borrow_mut().clear();
+    system.console.lock().unwrap().clear();
     assert!(manager.save());
     assert!(system.has_file(&PathBuf::from("out/App")));
-    assert!(system.files.borrow()[&PathBuf::from("out/App")].is_empty());
+    assert!(system.files.lock().unwrap()[&PathBuf::from("out/App")].is_empty());
     assert!(console(&system).is_empty());
 }
 #[test]
 fn resource_path_follows_osd_path_rules() {
     let _serial = super::serial();
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     let path = |directory: &str, user: bool| {
         let variable = if user {
             "CSF_AppUserDefaults"

@@ -6,7 +6,6 @@ use rustycad_tkernel::units::{
     Dimensions, Explorer, Measurement, UnitSentence, Units, UnitsSystem,
 };
 use rustycad_tkernel::units_api::{SystemUnits, UnitsApi};
-use std::rc::Rc;
 use std::sync::Arc;
 use units_support::{InMemoryUnitsResources, RecordingUnitsDiagnostics, units_with};
 
@@ -171,7 +170,7 @@ fn shifted_active_unit_converts_to_si_with_the_native_formula() {
 
 #[test]
 fn current_units_come_from_the_injected_resources() {
-    let resources = Rc::new(InMemoryUnitsResources::default());
+    let resources = Arc::new(InMemoryUnitsResources::default());
     resources.define("CurrentUnits", "/defaults", "LENGTH : mm\n");
     resources.define_user("CurrentUnits", "/user");
     let mut api = units_support::api_with(resources.clone());
@@ -187,7 +186,8 @@ fn current_units_come_from_the_injected_resources() {
     assert!(api.save().unwrap());
     let saved = resources
         .files
-        .borrow()
+        .lock()
+        .unwrap()
         .get(std::path::Path::new("/user/CurrentUnits"))
         .cloned();
     assert!(String::from_utf8(saved.unwrap()).unwrap().contains("SPEED"));

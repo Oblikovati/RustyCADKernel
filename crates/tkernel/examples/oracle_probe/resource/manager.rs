@@ -8,54 +8,61 @@ use rustycad_tkernel::{
     },
     tcollection::{AsciiString, ExtendedString},
 };
-use std::{cell::RefCell, collections::BTreeMap, fs, path::PathBuf, rc::Rc, str::SplitWhitespace};
+use std::{
+    collections::BTreeMap,
+    fs,
+    path::PathBuf,
+    str::SplitWhitespace,
+    sync::{Arc, Mutex},
+};
 
 /// The variables the native probe exports with `setenv`.
 #[derive(Default)]
-struct ProbeEnvironment(RefCell<BTreeMap<String, PathBuf>>);
+struct ProbeEnvironment(Mutex<BTreeMap<String, PathBuf>>);
 impl ProbeEnvironment {
     fn set(&self, name: &str, value: &str) {
         self.0
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .insert(name.into(), PathBuf::from(value));
     }
     fn clear(&self, name: &str) {
-        self.0.borrow_mut().remove(name);
+        self.0.lock().unwrap().remove(name);
     }
 }
 impl ResourceEnvironment for ProbeEnvironment {
     fn directory(&self, name: &str) -> Option<PathBuf> {
-        self.0.borrow().get(name).cloned()
+        self.0.lock().unwrap().get(name).cloned()
     }
 }
 /// The `std::cout` capture of the native probe.
 #[derive(Default)]
-struct ProbeConsole(RefCell<Vec<u8>>);
+struct ProbeConsole(Mutex<Vec<u8>>);
 impl ResourceConsole for ProbeConsole {
     fn write(&self, bytes: &[u8]) {
-        self.0.borrow_mut().extend_from_slice(bytes);
+        self.0.lock().unwrap().extend_from_slice(bytes);
     }
 }
 struct ProbeHost {
-    environment: Rc<ProbeEnvironment>,
-    console: Rc<ProbeConsole>,
+    environment: Arc<ProbeEnvironment>,
+    console: Arc<ProbeConsole>,
 }
 impl ProbeHost {
     fn new() -> Self {
         Self {
-            environment: Rc::default(),
-            console: Rc::default(),
+            environment: Arc::default(),
+            console: Arc::default(),
         }
     }
     fn host(&self) -> ResourceHost {
         ResourceHost::new(
-            Rc::new(NativeResourceIo),
+            Arc::new(NativeResourceIo),
             self.environment.clone(),
             self.console.clone(),
         )
     }
     fn console(&self) -> String {
-        hex(&self.console.0.borrow())
+        hex(&self.console.0.lock().unwrap())
     }
 }
 fn write_file(directory: &str, name: &str, content: &str) {

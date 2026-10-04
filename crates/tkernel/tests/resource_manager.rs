@@ -1,13 +1,13 @@
 //! Complete Resource_Manager regressions using isolated filesystem/environment fixtures.
 #![allow(non_snake_case)]
 use rustycad_tkernel::resource::ResourceManager;
-use std::{path::PathBuf, rc::Rc};
+use std::{path::PathBuf, sync::Arc};
 #[path = "resource_manager/support.rs"]
 mod support;
 use support::FakeResourceSystem;
 #[test]
 fn Resource_ManagerTest__OCC27849_PathsWithSpecialChars() {
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     for relative in [
         "path",
         "path.with.dots",
@@ -26,7 +26,7 @@ fn Resource_ManagerTest__OCC27849_PathsWithSpecialChars() {
 }
 #[test]
 fn Resource_ManagerTest__OCC181_SaveToExistingDirectory() {
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     let source: PathBuf = PathBuf::from("occt_resource_manager_test/source");
     let save: PathBuf = PathBuf::from("occt_resource_manager_test/save_flat");
     system.write_resource(&source, "OCC181", "test.key", "test_value");
@@ -39,7 +39,7 @@ fn Resource_ManagerTest__OCC181_SaveToExistingDirectory() {
 }
 #[test]
 fn Resource_ManagerTest__OCC181_SaveToNestedNonExistentDirectory() {
-    let system: Rc<FakeResourceSystem> = Rc::default();
+    let system: Arc<FakeResourceSystem> = Arc::default();
     let source: PathBuf = PathBuf::from("occt_resource_manager_test/source2");
     let save: PathBuf = PathBuf::from("occt_resource_manager_test/nested/deep/dir");
     system.write_resource(&source, "OCC181", "test.key", "test_value");

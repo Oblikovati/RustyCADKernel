@@ -10,15 +10,15 @@ use crate::resource::{
 use crate::standard::{Failure, Guid};
 use std::collections::BTreeMap;
 use std::io::Write;
-use std::rc::Rc;
+use std::sync::Arc;
 
 /// Loads plugin products by GUID; `loader.load(&guid, true)?`.
 ///
 /// Native code keeps one process-wide cache of factories; here the cache belongs to the
 /// loader, whose resource access, libraries and console are injected.
 pub struct PluginLoader<P> {
-    io: Rc<dyn ResourceIo>,
-    environment: Rc<dyn ResourceEnvironment>,
+    io: Arc<dyn ResourceIo>,
+    environment: Arc<dyn ResourceEnvironment>,
     libraries: Box<dyn PluginLibraries<P>>,
     console: Box<dyn Write>,
     factories: BTreeMap<String, PluginFactory<P>>,
@@ -28,8 +28,8 @@ impl<P> PluginLoader<P> {
     /// Builds a loader; pass `NativeResourceIo`/`NativeResourceEnvironment` and `std::io::stdout()`
     /// for native behavior; `PluginLoader::new(io, environment, Box::new(libraries), Box::new(stdout()))`.
     pub fn new(
-        io: Rc<dyn ResourceIo>,
-        environment: Rc<dyn ResourceEnvironment>,
+        io: Arc<dyn ResourceIo>,
+        environment: Arc<dyn ResourceEnvironment>,
         libraries: Box<dyn PluginLibraries<P>>,
         console: Box<dyn Write>,
     ) -> Self {
@@ -81,9 +81,9 @@ impl<P> PluginLoader<P> {
         let resource = format!("{id}.Location");
         // `new Resource_Manager("Plugin")`: its traces, when enabled, go to std::cout.
         let host = ResourceHost::new(
-            Rc::clone(&self.io),
-            Rc::clone(&self.environment),
-            Rc::new(NativeResourceConsole),
+            Arc::clone(&self.io),
+            Arc::clone(&self.environment),
+            Arc::new(NativeResourceConsole),
         );
         let catalog = ResourceManager::new("Plugin", false, host)?;
         if let Ok(value) = catalog.value(&resource) {
