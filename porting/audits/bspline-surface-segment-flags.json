@@ -1,0 +1,58 @@
+{
+  "audit": "Geom_BSplineSurface protected segment flags",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration": {
+    "id": "763f1abfca5bd6883d171a23291c4a507ed9b98fa963855c86647b8bbd9d1982",
+    "qualified_name": "Geom_BSplineSurface::segment",
+    "signature": "void (double, double, double, double, double, double, bool, bool)",
+    "access": "protected",
+    "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::segment_with_flags"
+  },
+  "source": {
+    "header": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+    "header_sha256": "d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079",
+    "implementation": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.cxx",
+    "implementation_sha256": "20abceaa2f4175d2933fba082fbee593fcdb2e3f3e3ea681a31289239039ead9",
+    "bounds_implementation": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface_1.cxx",
+    "bounds_implementation_sha256": "d4ebbc73640eeb4eea2f4b6c40da71f8a07331593084fde95f02319315e4894f"
+  },
+  "native_probe": {
+    "source": "tools/oracle/bspline_surface_segment_flags.cxx",
+    "source_sha256": "538483b08d29fd2bfc87fee7c458edad02e35b657798b47bd04cc65db69d7338",
+    "compiler": "c++ -std=c++17 -O0 -g0",
+    "link_arguments": ["-lTKG3d", "-lTKGeomBase", "-lTKMath", "-lTKernel"],
+    "executable_sha256": "5a6152d4e4cd3240966ac7af4d508f6f54dbe243e1a329d087a9d7b1c8248232",
+    "linked_libraries": {
+      "libTKG3d.so": "1513492fe8bda6bf051ee1a2aa0ab6c84047d4bb8cee40fdbab6e2ed5954e3a3",
+      "libTKGeomBase.so": "f2c685e230b5dc1de6e757b6dfb543c631877e17298be02c36147e5fb983b8b4",
+      "libTKMath.so": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "libTKernel.so": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    },
+    "expected_output": "tools/oracle/bspline_surface_segment_flags.expected",
+    "expected_output_sha256": "a32f858290df5a391e096b7333bef39bfe5504d646c0753aad0b543d36744bd3"
+  },
+  "rust_verification": {
+    "test_source": "crates/tkg3d/tests/geom_bspline_surface_segment_flags.rs",
+    "test_source_sha256": "a61f9ef5768fd4b02ed7ebebbfb9505c31cfa11821484972e22c215d347677bb",
+    "implementation_source_sha256": "79d687cc83939e26a75a368d8e1b287dbe173a3cf0ba15497addc7a30164f42b",
+    "focused_test_binary_sha256": "3d7ba055ccba2631420bf5526d8ef0d05c1419fb2b04684cba7db2b837608c23",
+    "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 cargo test -p rustycad-tkg3d --test geom_bspline_surface_segment_flags",
+    "result": "pass",
+    "package_test_command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 cargo test -p rustycad-tkg3d -q",
+    "package_test_result": "836 passed, 0 failed, 0 ignored across 62 test targets",
+    "strict_clippy_command": "CARGO_INCREMENTAL=0 cargo clippy -p rustycad-tkg3d --all-targets -- -D warnings",
+    "strict_clippy_result": "pass",
+    "native_output_diff": "exact"
+  },
+  "behavior": {
+    "flags_tested": [[false, false], [false, true], [true, false], [true, true]],
+    "checked": [
+      "per-direction knot and pole trimming",
+      "independent endpoint multiplicities",
+      "Bounds behavior including native reversed bounds when a segment flag is false",
+      "evaluation representation cleared",
+      "valid ordered input bounds"
+    ],
+    "scope_limit": "The wrapper follows the protected raw contract and forwards caller epsilons without public Segment/CheckAndSegment range validation. Invalid or unordered protected inputs are not covered."
+  }
+}
