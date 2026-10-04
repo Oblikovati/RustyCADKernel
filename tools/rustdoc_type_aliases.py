@@ -66,20 +66,20 @@ def alias_target_binding(
     state: TypeAliasState, read_inner: InnerReader,
 ) -> tuple[str, str, str] | None:
     kind, body = read_inner(target)
-    params = generic_parameters(body)
+    parameter = generic_parameter(body)
     generics = body.get("generics")
     concrete_id = alias_concrete_type_id(alias.get("type"))
     concrete = state.items.get(concrete_id or "")
-    if kind != "struct" or params is None or concrete_id is None:
+    if kind != "struct" or parameter is None or concrete_id is None:
         return None
     if concrete is None:
         state.unresolved.append(f"generic-type-alias:{path}:concrete-type-not-captured")
         return None
     if not alias_target_is_supported(path, generics, concrete, read_inner, state):
         return None
-    if not target_bounds_proven(target_id, params[0], concrete_id, body, state):
+    if not target_bounds_proven(target_id, parameter, concrete_id, body, state):
         return None
-    return target_id, params[0], concrete_id
+    return target_id, parameter, concrete_id
 
 
 def alias_target_is_supported(
@@ -115,7 +115,7 @@ def target_bounds_proven(
     return True
 
 
-def generic_parameters(body: Mapping[str, JSONValue]) -> tuple[str, ...] | None:
+def generic_parameter(body: Mapping[str, JSONValue]) -> str | None:
     generics = body.get("generics")
     params = generics.get("params") if isinstance(generics, dict) else None
     if not isinstance(params, list) or len(params) != 1:
@@ -125,7 +125,7 @@ def generic_parameters(body: Mapping[str, JSONValue]) -> tuple[str, ...] | None:
         return None
     if not isinstance(parameter.get("kind"), dict) or "type" not in parameter["kind"]:
         return None
-    return (parameter["name"],)
+    return parameter["name"]
 
 
 def target_type_bounds(body: Mapping[str, JSONValue], name: str) -> list[str] | None:
@@ -165,7 +165,7 @@ def concrete_type_is_closed(
 
 
 def render_specialized_alias_impls(
-    target_id: str, parameters: tuple[str, ...], concrete_id: str, path: str,
+    target_id: str, parameter: str, concrete_id: str, path: str,
     state: TypeAliasState, read_inner: InnerReader, render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
     target = state.items[target_id]
@@ -175,29 +175,29 @@ def render_specialized_alias_impls(
         impl = eligible_impl_body(impl_id, state.items, read_inner)
         if impl is not None:
             result.extend(alias_impl_entries(
-                impl_id, target_id, impl, parameters, concrete_id, path, state, render_impl
+                impl_id, target_id, impl, parameter, concrete_id, path, state, render_impl
             ))
     return result
 
 
 def alias_impl_entries(
-    impl_id: JSONValue, target_id: str, impl: Mapping[str, JSONValue], parameters: tuple[str, ...],
+    impl_id: JSONValue, target_id: str, impl: Mapping[str, JSONValue], parameter: str,
     concrete_id: str, path: str, state: TypeAliasState, render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
-    parameter = alias_impl_parameter(impl, target_id, parameters)
-    if parameter is None:
+    impl_parameter = alias_impl_parameter(impl, target_id, parameter)
+    if impl_parameter is None:
         return []
-    failure = unsupported_alias_impl(impl, parameter, concrete_id, state)
+    failure = unsupported_alias_impl(impl, impl_parameter, concrete_id, state)
     if failure is not None:
         state.unresolved.append(f"generic-type-alias:{path}:impl:{impl_id}:{failure}")
         return []
-    return emit_specialized_impl(impl, parameter, concrete_id, path, state, render_impl)
+    return emit_specialized_impl(impl, impl_parameter, concrete_id, path, state, render_impl)
 
 
 def alias_impl_parameter(
-    impl: Mapping[str, JSONValue], target_id: str, parameters: tuple[str, ...]
+    impl: Mapping[str, JSONValue], target_id: str, target_parameter: str
 ) -> str | None:
-    if not exact_generic_self(impl.get("for"), target_id, parameters):
+    if not exact_generic_self(impl.get("for"), target_id, target_parameter):
         return None
     generics = impl.get("generics")
     impl_params = generics.get("params") if isinstance(generics, dict) else None
@@ -205,11 +205,11 @@ def alias_impl_parameter(
         return None
     parameter = impl_params[0]
     name = parameter.get("name") if isinstance(parameter, dict) else None
-    return name if isinstance(name, str) and name == parameters[0] else None
+    return name if isinstance(name, str) and name == target_parameter else None
 
 
 def exact_generic_self(
-    value: JSONValue | None, target_id: str, parameters: tuple[str, ...]
+    value: JSONValue | None, target_id: str, parameter: str
 ) -> bool:
     resolved = value.get("resolved_path") if isinstance(value, dict) else None
     if not isinstance(resolved, dict) or str(resolved.get("id")) != target_id:
@@ -218,7 +218,7 @@ def exact_generic_self(
     angle = args.get("angle_bracketed") if isinstance(args, dict) else None
     entries = angle.get("args") if isinstance(angle, dict) else None
     generic = entries[0].get("type") if isinstance(entries, list) and len(entries) == 1 and isinstance(entries[0], dict) else None
-    return isinstance(generic, dict) and generic.get("generic") == parameters[0] and angle.get("constraints") == []
+    return isinstance(generic, dict) and generic.get("generic") == parameter and angle.get("constraints") == []
 
 
 def unsupported_alias_impl(
@@ -299,6 +299,8 @@ def concrete_trait_impl_id(
         return None
     if generics.get("params") != []:
         return None
+    if impl.get("is_negative") is not False:
+        return None
     owner = closed_self_type_id(impl.get("for"))
     trait_id = concrete_trait_id(impl.get("trait"))
     return trait_id if owner == concrete_id else None
@@ -313,6 +315,8 @@ def closed_self_type_id(value: JSONValue | None) -> str | None:
 
 def concrete_trait_id(value: JSONValue | None) -> str | None:
     trait_id = value.get("id") if isinstance(value, dict) else None
+    if not isinstance(value, dict) or value.get("args") is not None:
+        return None
     if isinstance(trait_id, (str, int)) and not isinstance(trait_id, bool):
         return str(trait_id)
     return None

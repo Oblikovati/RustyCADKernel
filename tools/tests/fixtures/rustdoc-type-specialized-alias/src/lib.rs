@@ -8,13 +8,13 @@ mod private {
 
     pub struct Text;
     pub struct Compatible;
-    pub struct Generic<D: Dialect>(pub PhantomData<D>);
+    pub struct Generic<DialectImplementationParameter: Dialect>(pub PhantomData<DialectImplementationParameter>);
 
     impl Dialect for Text {}
     impl Dialect for Compatible {}
     impl Fast for Text {}
 
-    impl<D: Dialect> Generic<D> {
+    impl<DialectImplementationParameter: Dialect> Generic<DialectImplementationParameter> {
         pub fn common(&self) -> &'static str {
             "common"
         }
@@ -24,21 +24,21 @@ mod private {
         fn open(&self) -> &'static str;
     }
 
-    impl<D: Dialect> Open for Generic<D> {
+    impl<DialectImplementationParameter: Dialect> Open for Generic<DialectImplementationParameter> {
         fn open(&self) -> &'static str {
             "open"
         }
     }
 
-    impl<D: Dialect + Fast> Generic<D> {
+    impl<DialectImplementationParameter: Dialect + Fast> Generic<DialectImplementationParameter> {
         pub fn fast_only(&self) -> &'static str {
             "fast"
         }
     }
 
-    impl<D: Dialect> Generic<D>
+    impl<DialectImplementationParameter: Dialect> Generic<DialectImplementationParameter>
     where
-        D: Clone,
+        DialectImplementationParameter: Clone,
     {
         pub fn where_bound(&self) -> &'static str {
             "where"

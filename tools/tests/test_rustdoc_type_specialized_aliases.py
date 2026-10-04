@@ -55,6 +55,24 @@ class TypeSpecializedAliasTests(unittest.TestCase):
         self.assertNotIn(f"{CRATE}::File::common", paths)
         self.assertNotIn(f"{CRATE}::CmpFile::common", paths)
 
+    def test_negative_trait_impl_does_not_prove_alias_bound(self) -> None:
+        document = fixture_document()
+        concrete_trait_impl(document, "Text", "Fast")["is_negative"] = True
+        self.assert_alias_fast_bound_is_unresolved(document)
+
+    def test_trait_impl_with_arguments_does_not_prove_zero_arg_bound(self) -> None:
+        document = fixture_document()
+        trait_impl = concrete_trait_impl(document, "Text", "Fast")
+        trait_impl["trait"]["args"] = {
+            "angle_bracketed": {"args": [{"type": {"primitive": "u8"}}], "constraints": []}
+        }
+        self.assert_alias_fast_bound_is_unresolved(document)
+
+    def assert_alias_fast_bound_is_unresolved(self, document: dict[str, JSONValue]) -> None:
+        inventory = normalize_document(document)
+        paths = declaration_paths(inventory)
+        self.assertNotIn(f"{CRATE}::File::fast_only", paths)
+
 
 def assert_alias_members(
     test: unittest.TestCase, inventory: dict[str, JSONValue], paths: set[str]
@@ -78,7 +96,9 @@ def assert_specialization(
     context = row.get("impl_context")
     test.assertIsInstance(specialization, dict)
     test.assertEqual(specialization.get("concrete_type_path"), f"{CRATE}::{concrete}")
-    test.assertEqual(specialization.get("impl_type_parameter"), "D")
+    test.assertEqual(
+        specialization.get("impl_type_parameter"), "DialectImplementationParameter"
+    )
     owner = context["for"]["resolved_path"]
     test.assertEqual(owner["resolved_item_path"], f"{CRATE}::private::Generic")
     test.assertEqual(context.get("trait"), None)
@@ -129,6 +149,21 @@ def impl_named_member(document: dict[str, JSONValue], name: str) -> dict[str, JS
         if any(items[str(member)].get("name") == name for member in members):
             return body
     raise AssertionError(f"no compiler fixture impl contains {name!r}")
+
+
+def concrete_trait_impl(
+    document: dict[str, JSONValue], owner: str, trait_name: str
+) -> dict[str, JSONValue]:
+    items = document["index"]
+    nominal = item_named(document, owner)
+    impl_ids = nominal.get("inner", {}).get("struct", {}).get("impls", [])
+    for impl_id in impl_ids:
+        impl_item = items[str(impl_id)]
+        impl = impl_item.get("inner", {}).get("impl")
+        trait = impl.get("trait") if isinstance(impl, dict) else None
+        if isinstance(trait, dict) and trait.get("path") == trait_name:
+            return impl
+    raise AssertionError(f"{owner} has no direct {trait_name} implementation")
 
 
 def declaration_paths(inventory: dict[str, JSONValue]) -> set[str]:
