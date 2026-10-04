@@ -1,5 +1,5 @@
 //! Native adaptive box pruning for bounded Bezier and high-degree spline faces.
-use super::{BeanFaceIntersector, Failure, boxes, grid, near_range_boundaries, ranges};
+use super::{BeanFaceIntersector, Failure, Range, boxes, grid, near_range_boundaries, ranges};
 use crate::int_tools::{
     CurveRangeLocalizeData, CurveRangeSample, SurfaceRangeLocalizeData, SurfaceRangeSample,
 };
@@ -15,6 +15,11 @@ use rustycad_tkgeombase::{
 use rustycad_tkmath::{bnd::BoundingBox3, elclib};
 
 mod localize_solutions;
+
+struct SamplingPlan {
+    ranges: [Range; 3],
+    allowed: [bool; 3],
+}
 
 pub(super) fn compute(bean: &mut BeanFaceIntersector) -> Result<bool, Failure> {
     let cached = surface_cache(bean)?;
@@ -124,6 +129,7 @@ fn compute_localized_ranges(
 ) -> Result<bool, Failure> {
     let mut curve_data = CurveRangeLocalizeData::new(3, 10. * bean.curve_resolution);
     curve_data.add_box(&CurveRangeSample::new(0), curve_box);
+    let sampling = sampling_plan(bean, &curve_data, cache);
     let mut solutions = Vec::new();
     let localized = localize_solutions::compute(
         bean,
@@ -137,20 +143,52 @@ fn compute_localized_ranges(
         cache.clear_grid();
         return Ok(false);
     }
-    evaluate_localized_solutions(bean, cache, &solutions)?;
-    insert_curve_ranges(bean, &curve_data)?;
+    evaluate_localized_solutions(bean, cache, &solutions, &sampling)?;
+    if sampling.allowed[0] {
+        insert_curve_ranges(bean, &curve_data)?;
+    }
     near_range_boundaries::compute(bean)?;
     cache.clear_grid();
     Ok(true)
+}
+
+fn sampling_plan(
+    bean: &BeanFaceIntersector,
+    curve_cache: &CurveRangeLocalizeData,
+    surface_cache: &SurfaceRangeLocalizeData,
+) -> SamplingPlan {
+    let curve = CurveRangeSample::new(0);
+    let surface = SurfaceRangeSample::default();
+    let ranges = [
+        curve.get_range(
+            bean.range.first(),
+            bean.range.last(),
+            curve_cache.get_nb_sample(),
+        ),
+        surface.get_range_u(
+            bean.bounds[0],
+            bean.bounds[1],
+            surface_cache.get_nb_sample_u(),
+        ),
+        surface.get_range_v(
+            bean.bounds[2],
+            bean.bounds[3],
+            surface_cache.get_nb_sample_v(),
+        ),
+    ];
+    let differences = std::array::from_fn(|axis| ranges[axis].last() - ranges[axis].first());
+    let allowed = ranges::check_sampling(curve, surface, curve_cache, surface_cache, differences);
+    SamplingPlan { ranges, allowed }
 }
 
 fn evaluate_localized_solutions(
     bean: &mut BeanFaceIntersector,
     cache: &SurfaceRangeLocalizeData,
     solutions: &[(CurveRangeSample, SurfaceRangeSample)],
+    sampling: &SamplingPlan,
 ) -> Result<(), Failure> {
     let (curves, surfaces) = sorted_samples(solutions)?;
-    evaluate_sorted_solutions(bean, cache, &curves, &surfaces)
+    evaluate_sorted_solutions(bean, cache, &curves, &surfaces, sampling)
 }
 
 fn sorted_samples(
@@ -168,13 +206,17 @@ fn evaluate_sorted_solutions(
     cache: &SurfaceRangeLocalizeData,
     curves: &[CurveRangeSample],
     surfaces: &[SurfaceRangeSample],
+    sampling: &SamplingPlan,
 ) -> Result<(), Failure> {
     let curve = bean.curve.get().expect("bean curve").shallow_copy()?;
     let surface = bean.surface.get().expect("bean surface").shallow_copy()?;
     let mut extrema = GenExtCS::new();
     let mut previous = SurfaceRangeSample::default();
     for (&curve_sample, &surface_sample) in curves.iter().zip(surfaces) {
-        let ranges = sampled_ranges(bean, cache, curve_sample, surface_sample);
+        let ranges = sampled_ranges(bean, cache, curve_sample, surface_sample, sampling);
+        if endpoint_span_is_already_found(bean, ranges[0])? {
+            continue;
+        }
         initialize_or_reuse_extrema(
             &mut extrema,
             surface.get().expect("bean surface copy"),
@@ -186,7 +228,7 @@ fn evaluate_sorted_solutions(
             bean,
             &mut extrema,
             curve.get().expect("bean curve copy"),
-            ranges[0],
+            ranges,
         )?;
     }
     Ok(())
@@ -197,11 +239,61 @@ fn sampled_ranges(
     cache: &SurfaceRangeLocalizeData,
     curve: CurveRangeSample,
     surface: SurfaceRangeSample,
+    sampling: &SamplingPlan,
 ) -> [super::Range; 3] {
-    let curve_range = curve.get_range(bean.range.first(), bean.range.last(), 3);
-    let u_range = surface.get_range_u(bean.bounds[0], bean.bounds[1], cache.get_nb_sample_u());
-    let v_range = surface.get_range_v(bean.bounds[2], bean.bounds[3], cache.get_nb_sample_v());
+    let curve_range = if sampling.allowed[0] {
+        curve.get_range(bean.range.first(), bean.range.last(), 3)
+    } else {
+        sampling.ranges[0]
+    };
+    let u_range = if sampling.allowed[1] {
+        surface.get_range_u(bean.bounds[0], bean.bounds[1], cache.get_nb_sample_u())
+    } else {
+        sampling.ranges[1]
+    };
+    let v_range = if sampling.allowed[2] {
+        surface.get_range_v(bean.bounds[2], bean.bounds[3], cache.get_nb_sample_v())
+    } else {
+        sampling.ranges[2]
+    };
     [curve_range, u_range, v_range]
+}
+
+fn endpoint_span_is_already_found(
+    bean: &mut BeanFaceIntersector,
+    range: Range,
+) -> Result<bool, Failure> {
+    let mut span = (bean.range_manager.length(), -1);
+    span = extend_span(bean, range.first(), span)?;
+    if contains_found_flag(bean, span)? {
+        return Ok(true);
+    }
+    if span.1 >= 0 {
+        span.0 = span.1;
+    }
+    span = extend_span(bean, range.last(), span)?;
+    contains_found_flag(bean, span)
+}
+
+fn extend_span(
+    bean: &mut BeanFaceIntersector,
+    parameter: f64,
+    mut span: (i32, i32),
+) -> Result<(i32, i32), Failure> {
+    for index in bean.range_manager.get_indices(parameter)?.iter().copied() {
+        span.0 = span.0.min(index);
+        span.1 = span.1.max(index);
+    }
+    Ok(span)
+}
+
+fn contains_found_flag(bean: &BeanFaceIntersector, span: (i32, i32)) -> Result<bool, Failure> {
+    for index in span.0..=span.1 {
+        if index > 0 && bean.range_manager.flag(index)? == 2 {
+            return Ok(true);
+        }
+    }
+    Ok(false)
 }
 
 fn initialize_or_reuse_extrema<'a>(
@@ -229,37 +321,39 @@ fn evaluate_curve_sample<'a>(
     bean: &mut BeanFaceIntersector,
     extrema: &mut GenExtCS<'a>,
     curve: &'a dyn Adaptor3dCurve,
-    range: super::Range,
+    ranges: [super::Range; 3],
 ) -> Result<(), Failure> {
+    let range = ranges[0];
     extrema.perform_range(
         curve,
         10,
         (range.first(), range.last()),
         precision::p_confusion(),
     )?;
-    handle_extrema(bean, extrema, range)
+    handle_extrema(bean, extrema, ranges)
 }
 
 fn handle_extrema(
     bean: &mut BeanFaceIntersector,
     extrema: &GenExtCS<'_>,
-    range: super::Range,
+    ranges: [super::Range; 3],
 ) -> Result<(), Failure> {
     if extrema.is_done() && extrema.nb_ext()? > 0 {
-        return seed_localized_extrema(bean, extrema);
+        return seed_localized_extrema(bean, extrema, ranges);
     }
     bean.range_manager
-        .insert_range(range.first(), range.last(), 0)?;
+        .insert_range(ranges[0].first(), ranges[0].last(), 0)?;
     Ok(())
 }
 
 fn seed_localized_extrema(
     bean: &mut BeanFaceIntersector,
     extrema: &GenExtCS<'_>,
+    ranges: [super::Range; 3],
 ) -> Result<(), Failure> {
     for index in 1..=extrema.nb_ext()? {
         if extrema.square_distance(index)? < bean.criteria * bean.criteria {
-            seed_localized_extremum(bean, extrema, index)?;
+            seed_localized_extremum(bean, extrema, index, ranges)?;
         }
     }
     Ok(())
@@ -269,10 +363,11 @@ fn seed_localized_extremum(
     bean: &mut BeanFaceIntersector,
     extrema: &GenExtCS<'_>,
     index: i32,
+    ranges: [super::Range; 3],
 ) -> Result<(), Failure> {
     let parameter = extrema.point_on_curve(index)?.parameter();
     let (u, v) = extrema.point_on_surface(index)?.parameter();
-    let (parameter, u, v) = periodic_parameters(bean, parameter, u, v)?;
+    let (parameter, u, v) = periodic_parameters(bean, ranges, parameter, u, v)?;
     let before = bean.range_manager.length();
     bean.compute_range_from_start_point(false, parameter, u, v)?;
     bean.compute_range_from_start_point(true, parameter, u, v)?;
@@ -284,6 +379,7 @@ fn seed_localized_extremum(
 
 fn periodic_parameters(
     bean: &BeanFaceIntersector,
+    ranges: [super::Range; 3],
     mut parameter: f64,
     mut u: f64,
     mut v: f64,
@@ -293,15 +389,23 @@ fn periodic_parameters(
     if curve.is_periodic()? {
         parameter = elclib::in_period(
             parameter,
-            bean.range.first(),
-            bean.range.first() + curve.period()?,
+            ranges[0].first(),
+            ranges[0].first() + curve.period()?,
         );
     }
     if surface.is_u_periodic()? {
-        u = elclib::in_period(u, bean.bounds[0], bean.bounds[0] + surface.u_period()?);
+        u = elclib::in_period(
+            u,
+            ranges[1].first(),
+            ranges[1].first() + surface.u_period()?,
+        );
     }
     if surface.is_v_periodic()? {
-        v = elclib::in_period(v, bean.bounds[2], bean.bounds[2] + surface.v_period()?);
+        v = elclib::in_period(
+            v,
+            ranges[2].first(),
+            ranges[2].first() + surface.v_period()?,
+        );
     }
     Ok((
         parameter,
