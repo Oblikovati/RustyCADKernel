@@ -27,6 +27,41 @@ private:
   int private_field;
 };
 
+struct TemplateAccessRoot {
+public:
+  template <typename T> struct PublicNestedTemplate {
+    void public_member();
+    template <typename U> U public_member_template(U value);
+  protected:
+    void protected_member();
+    template <typename U> U protected_member_template(U value);
+  private:
+    void private_member();
+    template <typename U> U private_member_template(U value);
+  };
+protected:
+  template <typename T> struct ProtectedNestedTemplate {
+    void public_member();
+    template <typename U> U public_member_template(U value);
+  };
+private:
+  template <typename T> struct PrivateNestedTemplate {
+  public:
+    void public_member();
+  };
+};
+
+class DefaultAccessRoot {
+  template <typename T> struct PrivateByDefaultTemplate {
+  public:
+    void public_member();
+  };
+public:
+  template <typename T> struct PublicNestedTemplate {
+    void public_member();
+  };
+};
+
 class PrivateOuter {
 private:
   struct SecretOuter {

@@ -87,6 +87,47 @@ def check_declarations(events):
     generated = one(events, "declaration", qualified_name="fixture::PublicType::from_macro")
     assert generated["macro_generated"]
     assert generated["spelling_location"] != generated["expansion_location"]
+    check_nested_class_template_access(events)
+
+
+def check_nested_class_template_access(events):
+    public = one(events, "declaration", qualified_name="fixture::TemplateAccessRoot::PublicNestedTemplate", kind="ClassTemplate")
+    protected = one(events, "declaration", qualified_name="fixture::TemplateAccessRoot::ProtectedNestedTemplate", kind="ClassTemplate")
+    assert public["api_visible"] and public["access"] == "public"
+    assert protected["api_visible"] and protected["access"] == "protected"
+    check_template_owned_pattern(events, public["qualified_name"], "public")
+    check_template_owned_pattern(events, protected["qualified_name"], "protected")
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::public_member", True)
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::protected_member", True)
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::private_member", False)
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::public_member_template", True, "FunctionTemplate")
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::protected_member_template", True, "FunctionTemplate")
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::PublicNestedTemplate::private_member_template", False, "FunctionTemplate")
+    assert_member_visibility(events, "fixture::TemplateAccessRoot::ProtectedNestedTemplate::public_member", True)
+    check_private_nested_templates(events)
+
+
+def check_template_owned_pattern(events, qualified_name, expected_access):
+    pattern = one(events, "declaration", qualified_name=qualified_name, kind="CXXRecord")
+    assert pattern["exclusion_reason"] == "template_owned_declaration"
+    assert pattern["access"] == expected_access
+
+
+def assert_member_visibility(events, qualified_name, visible, kind="CXXMethod"):
+    member = one(events, "declaration", qualified_name=qualified_name, kind=kind)
+    assert member["api_visible"] is visible, member
+    if not visible:
+        assert member["exclusion_reason"] == "private_access", member
+
+
+def check_private_nested_templates(events):
+    private = one(events, "declaration", qualified_name="fixture::TemplateAccessRoot::PrivateNestedTemplate", kind="ClassTemplate")
+    default_private = one(events, "declaration", qualified_name="fixture::DefaultAccessRoot::PrivateByDefaultTemplate", kind="ClassTemplate")
+    assert private["exclusion_reason"] == "private_access"
+    assert default_private["access"] == "private"
+    assert default_private["exclusion_reason"] == "private_access"
+    hidden_member = one(events, "declaration", qualified_name="fixture::TemplateAccessRoot::PrivateNestedTemplate::public_member", kind="CXXMethod")
+    assert hidden_member["exclusion_reason"] == "private_ancestor"
 
 
 def check_template_parameter_metadata(
