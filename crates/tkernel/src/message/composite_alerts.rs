@@ -71,8 +71,11 @@ impl CompositeAlerts {
         true
     }
     fn merge_live_alerts(&self, gravity: Gravity, alert: &AlertHandle) -> bool {
-        let kind = alert.dynamic_type();
         let mut cursor = AlertCursor::new(self, gravity);
+        if cursor.current_alert().is_none() {
+            return false;
+        }
+        let kind = alert.dynamic_type();
         while let Some(target) = cursor.current_alert() {
             if std::ptr::eq(kind, target.dynamic_type()) && alert.merge(&target) {
                 return true;

@@ -21,10 +21,16 @@ struct LiveMergeAlert {
     can_merge: bool,
     append_moment: Option<AppendMoment>,
     succeeds_on: &'static str,
-    events: Arc<Mutex<Vec<&'static str>>>,
-    support_calls: Arc<AtomicUsize>,
+    counters: Arc<MergeCounters>,
 }
 rustycad_tkernel::message_runtime_type!(LiveMergeAlert, "LiveMergeAlert", BaseAlert);
+
+#[derive(Default)]
+struct MergeCounters {
+    events: Mutex<Vec<&'static str>>,
+    support_calls: AtomicUsize,
+    dynamic_calls: AtomicUsize,
+}
 
 impl LiveMergeAlert {
     fn new(
@@ -33,8 +39,7 @@ impl LiveMergeAlert {
         can_merge: bool,
         append_moment: Option<AppendMoment>,
         succeeds_on: &'static str,
-        events: Arc<Mutex<Vec<&'static str>>>,
-        support_calls: Arc<AtomicUsize>,
+        counters: Arc<MergeCounters>,
     ) -> Arc<Self> {
         Arc::new(Self {
             label,
@@ -42,8 +47,7 @@ impl LiveMergeAlert {
             can_merge,
             append_moment,
             succeeds_on,
-            events,
-            support_calls,
+            counters,
         })
     }
 
@@ -51,26 +55,19 @@ impl LiveMergeAlert {
         let Some(composite) = self.composite.upgrade() else {
             return;
         };
-        let target = Self::new(
-            label,
-            &composite,
-            false,
-            None,
-            "",
-            self.events.clone(),
-            self.support_calls.clone(),
-        );
+        let target = Self::new(label, &composite, false, None, "", self.counters.clone());
         composite.add_alert(Gravity::Info, &(target as AlertHandle));
     }
 }
 
 impl Alert for LiveMergeAlert {
     fn dynamic_type(&self) -> &'static RuntimeType {
+        self.counters.dynamic_calls.fetch_add(1, Ordering::SeqCst);
         Self::static_type()
     }
 
     fn supports_merge(&self) -> bool {
-        self.support_calls.fetch_add(1, Ordering::SeqCst);
+        self.counters.support_calls.fetch_add(1, Ordering::SeqCst);
         if self.append_moment == Some(AppendMoment::SupportsMerge) {
             self.append_target("support-target");
         }
@@ -79,7 +76,7 @@ impl Alert for LiveMergeAlert {
 
     fn merge(&self, target: &AlertHandle) -> bool {
         let target = downcast_alert::<Self>(target).expect("matching runtime type");
-        self.events.lock().unwrap().push(target.label);
+        self.counters.events.lock().unwrap().push(target.label);
         if self.append_moment == Some(AppendMoment::MergeFirst) && target.label == "first" {
             self.append_target("late-target");
         }
@@ -100,38 +97,28 @@ fn target_labels(composite: &CompositeAlerts) -> Vec<&'static str> {
 fn supports_merge_appends_before_the_live_cursor_is_created() {
     let composite = Arc::new(CompositeAlerts::new());
     composite.add_alert(Gravity::Info, &named_alert("other type"));
-    let events = Arc::new(Mutex::new(Vec::new()));
-    let support_calls = Arc::new(AtomicUsize::new(0));
+    let counters = Arc::new(MergeCounters::default());
     let incoming = LiveMergeAlert::new(
         "incoming",
         &composite,
         true,
         Some(AppendMoment::SupportsMerge),
         "support-target",
-        events.clone(),
-        support_calls.clone(),
+        counters.clone(),
     );
 
     assert!(!composite.add_alert(Gravity::Info, &(incoming as AlertHandle)));
     assert_eq!(target_labels(&composite), ["support-target"]);
-    assert_eq!(*events.lock().unwrap(), ["support-target"]);
-    assert_eq!(support_calls.load(Ordering::SeqCst), 2);
+    assert_eq!(*counters.events.lock().unwrap(), ["support-target"]);
+    assert_eq!(counters.support_calls.load(Ordering::SeqCst), 2);
+    assert_eq!(counters.dynamic_calls.load(Ordering::SeqCst), 2);
 }
 
 #[test]
 fn merge_callback_appends_a_target_visited_by_the_same_cursor() {
     let composite = Arc::new(CompositeAlerts::new());
-    let events = Arc::new(Mutex::new(Vec::new()));
-    let support_calls = Arc::new(AtomicUsize::new(0));
-    let first = LiveMergeAlert::new(
-        "first",
-        &composite,
-        false,
-        None,
-        "",
-        events.clone(),
-        support_calls.clone(),
-    );
+    let counters = Arc::new(MergeCounters::default());
+    let first = LiveMergeAlert::new("first", &composite, false, None, "", counters.clone());
     composite.add_alert(Gravity::Info, &(first as AlertHandle));
     let incoming = LiveMergeAlert::new(
         "incoming",
@@ -139,12 +126,22 @@ fn merge_callback_appends_a_target_visited_by_the_same_cursor() {
         true,
         Some(AppendMoment::MergeFirst),
         "late-target",
-        events.clone(),
-        support_calls.clone(),
+        counters.clone(),
     );
 
     assert!(!composite.add_alert(Gravity::Info, &(incoming as AlertHandle)));
     assert_eq!(target_labels(&composite), ["first", "late-target"]);
-    assert_eq!(*events.lock().unwrap(), ["first", "late-target"]);
-    assert_eq!(support_calls.load(Ordering::SeqCst), 3);
+    assert_eq!(*counters.events.lock().unwrap(), ["first", "late-target"]);
+    assert_eq!(counters.support_calls.load(Ordering::SeqCst), 3);
+    assert_eq!(counters.dynamic_calls.load(Ordering::SeqCst), 3);
+}
+
+#[test]
+fn empty_list_skips_incoming_dynamic_type_query() {
+    let composite = Arc::new(CompositeAlerts::new());
+    let counters = Arc::new(MergeCounters::default());
+    let incoming = LiveMergeAlert::new("incoming", &composite, true, None, "", counters.clone());
+
+    assert!(composite.add_alert(Gravity::Info, &(incoming as AlertHandle)));
+    assert_eq!(counters.dynamic_calls.load(Ordering::SeqCst), 0);
 }

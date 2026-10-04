@@ -90411,7 +90411,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
       "rust_item": "rustycad_tkernel::message::CompositeAlerts::add_alert",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. `Alerts()` returns a snapshot; `AddAlert()` calls SupportsMerge before creating its live cursor, and merge callbacks can append targets visited by that cursor. See porting/audits/tkernel-composite-alert-live-merge.json. Removing the active native iterator node from a callback is outside the defined iterator domain. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
     },
     {
       "upstream_id": "Message_CompositeAlerts::RemoveAlert(Message_Gravity,const occ::handle<Message_Alert>&)",

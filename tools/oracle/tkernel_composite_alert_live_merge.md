@@ -6,6 +6,7 @@ Native source: `Message_CompositeAlerts::AddAlert`,
 The source calls `SupportsMerge()` before it constructs the NCollection list
 iterator. `Merge()` callbacks then append to the same live list; the iterator
 can see those appended entries while continuing forward.
+When the list is empty, short-circuit evaluation skips `DynamicType()` too.
 
 The first case starts with a different alert type. Incoming `SupportsMerge`
 appends a same-type alert that declines merging; AddAlert then visits it and
@@ -15,10 +16,21 @@ Both calls return `false` because incoming alerts merge instead of appending.
 This fixture does not remove the iterator's current list node from a callback;
 that mutation is outside the defined native iterator domain.
 
+The empty-list probe overrides `DynamicType()` with a counter and observes zero
+calls. Its two nonempty cases observe two and three custom-type calls,
+respectively.
+
 Pinned source SHA-256:
 `5d73be0b216a8d7f5c1c80efd9460cc6d45b15a7078930a369d0eaf4f8b1a3a7`.
 Probe SHA-256:
-`b424ef5f91ce234cc36da7c192361723fe199fd6516ce6a564e67118e4b1e077`.
+`cfdc55952327b60c374eaef258903123d56fbedcf52ec8e4b62d09efe80e4cce`.
+The exact expected output SHA-256 is
+`ff7d75ce374ae8926706b603c9b196aa0da55334cd373d256b72e2c598b5cf7e`.
+The probe was built with `c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0`.
+
+The source-bound test and build receipts, including the pre-fix red replay and
+full TKernel test totals, are in
+`porting/audits/tkernel-composite-alert-live-merge.json`.
 
 Build and replay from the repository root:
 
