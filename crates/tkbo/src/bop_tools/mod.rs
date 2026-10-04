@@ -98,3 +98,6 @@ pub use internal_solid_face::internal_face_in_solid;
 
 mod internal_face_list;
 pub use internal_face_list::internal_face_among;
+
+mod shape_set;
+pub use shape_set::ShapeSet;
