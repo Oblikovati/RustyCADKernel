@@ -1,0 +1,368 @@
+{
+  "scope": "Namespace-qualified parameter selectors for existing MathUtils, MathRoot and MathSys APIs",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "behavior_change": false,
+  "original_tests_added": 0,
+  "rule": "Change only namespace qualification of existing parameter names. After removing MathUtils::, MathRoot:: and MathSys:: prefixes, every normalized old/new parameter pair is identical. Each updated selector resolves to one API-visible compiler declaration; template declaration wrapper IDs are not counted as callable IDs.",
+  "claims": [
+    {
+      "previous_selector": "MathUtils::Utils::Limited(double,const MinBracketOptions&)",
+      "selector": "MathUtils::Utils::Limited(double,const MathUtils::MinBracketOptions &)",
+      "cpp_id": "c24337d0836cc522d27dfb8fb62cbc2be113a7566796c4e3a1f87bc53d9a0106",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "cpp_source_sha256": "1f68be7fd15f7ee023ef4453e67a9d1a387a24fe17e254d2a53d09fcb0872d44",
+      "rust_item": "rustycad_tkmath::math_utils::utils::limited",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathUtils::Utils::IsValid(const MinBracketOptions&)",
+      "selector": "MathUtils::Utils::IsValid(const MathUtils::MinBracketOptions &)",
+      "cpp_id": "f3cee49e2e8142341c53585a126b240c36dd80e00d5dab4a36376ab0eb82e1e3",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "cpp_source_sha256": "1f68be7fd15f7ee023ef4453e67a9d1a387a24fe17e254d2a53d09fcb0872d44",
+      "rust_item": "rustycad_tkmath::math_utils::utils::is_valid",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathUtils::BracketMinimum(Function&,double,double,const MinBracketOptions&)",
+      "selector": "MathUtils::BracketMinimum(Function &,double,double,const MathUtils::MinBracketOptions &)",
+      "cpp_id": "3fd6137428f21505efbdb372a9d71bd090872c267ecfb8e84e974ba313b922a4",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "cpp_source_sha256": "1f68be7fd15f7ee023ef4453e67a9d1a387a24fe17e254d2a53d09fcb0872d44",
+      "rust_item": "rustycad_tkmath::math_utils::bracket_minimum",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathUtils::IsConverged(double,double,double,const Config&)",
+      "selector": "MathUtils::IsConverged(double,double,double,const MathUtils::Config &)",
+      "cpp_id": "259e309509eb006b5b487d6e5c0c66a4e7c1b124a2640139de7789cda03357af",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "cpp_source_sha256": "cae147ab066c77244d4d468cf2a8cfdb031e9f5ec10fdad5055c57d352c6c86c",
+      "rust_item": "rustycad_tkmath::math_utils::is_converged",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathUtils::IsMinConverged(double,double,double,double,const Config&)",
+      "selector": "MathUtils::IsMinConverged(double,double,double,double,const MathUtils::Config &)",
+      "cpp_id": "eb80db2983e4badf1f4c5dcf08f9845d10ac1e89f601ad8d5ad24f39d43b4547",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "cpp_source_sha256": "cae147ab066c77244d4d468cf2a8cfdb031e9f5ec10fdad5055c57d352c6c86c",
+      "rust_item": "rustycad_tkmath::math_utils::is_min_converged",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathUtils::Domain1D::IsEqual(const Domain1D&,double) const",
+      "selector": "MathUtils::Domain1D::IsEqual(const MathUtils::Domain1D &,double)const",
+      "cpp_id": "94cd12d0c4020a0251b75325080da98de016203d7d8a410dafef776ab49adad7",
+      "cpp_source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "cpp_source_sha256": "068a54ad5f090dcfb8450365395c0493c2ee9c11fd8febe8b2eee9a8d0349dbd",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_equal",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::FindAllRoots(Function&,double,double,const MultipleConfig&)",
+      "selector": "MathRoot::FindAllRoots(Function &,double,double,const MathRoot::MultipleConfig &)",
+      "cpp_id": "f1bf78e38d01a2559cb61947a28fde584dfd2daa188c973de2d1aad5cbebee4d",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Multiple.hxx",
+      "cpp_source_sha256": "c226d20499a8cbec63ede4639b1694980669fbfad109d7743ec6c8db235facf8",
+      "rust_item": "rustycad_tkmath::math_root::find_all_roots",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::FindAllRootsWithDerivative(Function&,double,double,const MultipleConfig&)",
+      "selector": "MathRoot::FindAllRootsWithDerivative(Function &,double,double,const MathRoot::MultipleConfig &)",
+      "cpp_id": "0c3ddc78954c3572848cab1738a55c55650e9e5014cba6928524e729e7438881",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Multiple.hxx",
+      "cpp_source_sha256": "c226d20499a8cbec63ede4639b1694980669fbfad109d7743ec6c8db235facf8",
+      "rust_item": "rustycad_tkmath::math_root::find_all_roots_with_derivative",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::IsValidMultipleInput(double,double,const MultipleConfig&)",
+      "selector": "MathRoot::Utils::IsValidMultipleInput(double,double,const MathRoot::MultipleConfig &)",
+      "cpp_id": "328b8143075980c234565fa7ce72dbe3678a5d0bd1b6aad1106df3a8ee721d27",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::is_valid_multiple_input",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::SortRoots(MultipleResult&)",
+      "selector": "MathRoot::Utils::SortRoots(MathRoot::MultipleResult &)",
+      "cpp_id": "71742e127b22384ad92703226a03b7fb3d983e400408e424c77adaa8792a0596",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::sort_roots",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::AddRoot(MultipleResult&,double,double,double)",
+      "selector": "MathRoot::Utils::AddRoot(MathRoot::MultipleResult &,double,double,double)",
+      "cpp_id": "ecc58c959924d2c5c2bc11b514fe0c699396919e3a45e4ef8fc7ed90a5e721c1",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::add_root",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::RefineBracketedRoot(Function&,double,double,double,double,double,double,double,uint32_t,double,MultipleResult&)",
+      "selector": "MathRoot::Utils::RefineBracketedRoot(Function &,double,double,double,double,double,double,double,uint32_t,double,MathRoot::MultipleResult &)",
+      "cpp_id": "0a4b7229a9f04bc0f7c1e3654794c21d889a45ce27b8687fa436202dc1613283",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::refine_bracketed_root",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::FindAllRootsWithDerivativeImpl(Function&,double,double,const MultipleConfig&)",
+      "selector": "MathRoot::Utils::FindAllRootsWithDerivativeImpl(Function &,double,double,const MathRoot::MultipleConfig &)",
+      "cpp_id": "27c7a8f00b71b43a5814028cfb70d1f618524eff958a51c15c1564e24b48b725",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::find_all_roots_with_derivative_impl",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::FindAllRootsImpl(double,double,const MultipleConfig&,SampleFn,GetValueFn,BrentWrapperT&,GetRootValueFn,IntervalExtraFn)",
+      "selector": "MathRoot::Utils::FindAllRootsImpl(double,double,const MathRoot::MultipleConfig &,SampleFn,GetValueFn,BrentWrapperT &,GetRootValueFn,IntervalExtraFn)",
+      "cpp_id": "db16fc71efd715ef776d9472646c4a7a81d0e389c2ce07bdf96a4df052df2e65",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "cpp_source_sha256": "4ad6a47bc7a377535722b05fc84f34636985f06b666002c088033dabb2b9da3b",
+      "rust_item": "rustycad_tkmath::math_root::utils::find_all_roots_impl",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::AddDistinctTrigRoot(TrigResult&,double,double)",
+      "selector": "MathRoot::Utils::AddDistinctTrigRoot(MathRoot::TrigResult &,double,double)",
+      "cpp_id": "cae0474e2fd9cf944f21bc248ba5fd344d3506ea281cdbd65e2437317daf4207",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "cpp_source_sha256": "13e0b07c77c86148938a236d8cc94e73dbf18a8a0e9a247942f818bb2efb124d",
+      "rust_item": "rustycad_tkmath::math_root::utils::add_distinct_trig_root",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathRoot::Utils::AddPeriodicTrigRoot(TrigResult&,double,double,double,double)",
+      "selector": "MathRoot::Utils::AddPeriodicTrigRoot(MathRoot::TrigResult &,double,double,double,double)",
+      "cpp_id": "ebc1866b535d8769ee7a34e8dd635bf9107adb7125b95345cb398c690654a6ac",
+      "cpp_source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "cpp_source_sha256": "13e0b07c77c86148938a236d8cc94e73dbf18a8a0e9a247942f818bb2efb124d",
+      "rust_item": "rustycad_tkmath::math_root::utils::add_periodic_trig_root",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::FinishLM(FuncSetType&,const math_Vector&,size_t,const LMConfig&,double,const math_Vector*,const math_Vector*,SystemResult&)",
+      "selector": "MathSys::Utils::FinishLM(FuncSetType &,const math_Vector &,size_t,const MathSys::LMConfig &,double,const math_Vector *,const math_Vector *,MathSys::SystemResult &)",
+      "cpp_id": "25469b879279812cc5d563d421b100456cbafa75f48fa64494737e90dda65982",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "cpp_source_sha256": "549e79a87637ff78b8828c9114a117d0464e34afa249ee620e6124316b802ed1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::finish_lm",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::LMImpl(FuncSetType&,const math_Vector&,const LMConfig&,const math_Vector*,const math_Vector*)",
+      "selector": "MathSys::Utils::LMImpl(FuncSetType &,const math_Vector &,const MathSys::LMConfig &,const math_Vector *,const math_Vector *)",
+      "cpp_id": "1363e39c057c9b82b2a3910e497f54a8bb6a8dda4e807b84fa19f482f52c6d87",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "cpp_source_sha256": "549e79a87637ff78b8828c9114a117d0464e34afa249ee620e6124316b802ed1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::lm_impl",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::LevenbergMarquardt(FuncSetType&,const math_Vector&,const LMConfig&)",
+      "selector": "MathSys::LevenbergMarquardt(FuncSetType &,const math_Vector &,const MathSys::LMConfig &)",
+      "cpp_id": "acefaabd51050997c18f1c3e54fb41168b7858961083eb3ecfd48f6e9742ff88",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "cpp_source_sha256": "549e79a87637ff78b8828c9114a117d0464e34afa249ee620e6124316b802ed1",
+      "rust_item": "rustycad_tkmath::math_sys::levenberg_marquardt",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::LevenbergMarquardtBounded(FuncSetType&,const math_Vector&,const math_Vector&,const math_Vector&,const LMConfig&)",
+      "selector": "MathSys::LevenbergMarquardtBounded(FuncSetType &,const math_Vector &,const math_Vector &,const math_Vector &,const MathSys::LMConfig &)",
+      "cpp_id": "a0a3eaab2d46acdba2584ed8d95f7cf6a273293c0a05b344aa871ed38d9991b4",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "cpp_source_sha256": "549e79a87637ff78b8828c9114a117d0464e34afa249ee620e6124316b802ed1",
+      "rust_item": "rustycad_tkmath::math_sys::levenberg_marquardt_bounded",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::FinalizeSystemResult(FuncSetType&,const math_Vector&,size_t,double,SystemResult&)",
+      "selector": "MathSys::Utils::FinalizeSystemResult(FuncSetType &,const math_Vector &,size_t,double,MathSys::SystemResult &)",
+      "cpp_id": "5b4ff565abaea4d93e718b924cdc3cb7d39eed29d68b61a01c04fbdee6bf6022",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton.hxx",
+      "cpp_source_sha256": "09e65446a4c7e02c06348041666f89d58590e6f3367257e90cb7f97d6ad978a5",
+      "rust_item": "rustycad_tkmath::math_sys::utils::finalize_system_result",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsOptionsValid(const NewtonOptions&)",
+      "selector": "MathSys::Utils::IsOptionsValid(const MathSys::NewtonOptions &)",
+      "cpp_id": "54952f11a638134297d0c577888ca1a39fd2799ff9c752a0abb9ea741c49e47e",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_options_valid",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsBoundsValid2D(const NewtonBoundsN<2>&)",
+      "selector": "MathSys::Utils::IsBoundsValid2D(const MathSys::NewtonBoundsN<2> &)",
+      "cpp_id": "e45df29f81c0ecd1bb70432c363bd96b5119851045f8e884e67cdb3d335569a8",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_bounds_valid_2d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::MaxStep2D(const NewtonBoundsN<2>&,double)",
+      "selector": "MathSys::Utils::MaxStep2D(const MathSys::NewtonBoundsN<2> &,double)",
+      "cpp_id": "36824578efacbc455ae8a082f84beeaf1bb11265a3e0ffbec0585c6066eed2cc",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::utils::max_step_2d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::Clamp2D(std::array<double,2>&,const NewtonBoundsN<2>&,bool,double)",
+      "selector": "MathSys::Utils::Clamp2D(std::array<double, 2> &,const MathSys::NewtonBoundsN<2> &,bool,double)",
+      "cpp_id": "62f5220bc60792a6e06a130f00c393ef81fe4a81ed935ce40a816346a322e02d",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::utils::clamp_2d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Solve2D(const Function&,const std::array<double,2>&,const NewtonBoundsN<2>&,const NewtonOptions&)",
+      "selector": "MathSys::Solve2D(const Function &,const std::array<double, 2> &,const MathSys::NewtonBoundsN<2> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "57623ad7ac25458c74cee70b33e6572774e234bc14ed519798662426a2011930",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::solve_2d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Solve2DSymmetric(const Function&,const std::array<double,2>&,const NewtonBoundsN<2>&,const NewtonOptions&)",
+      "selector": "MathSys::Solve2DSymmetric(const Function &,const std::array<double, 2> &,const MathSys::NewtonBoundsN<2> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "c0eff6f1a5abe016ea0266502ae3579c8bf26ac5b2784db1b296d3d7a8058867",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
+      "cpp_source_sha256": "5321f316416e012277e564ac44cb5082b0e4d5023bf494fa312e6d6c552bb3c9",
+      "rust_item": "rustycad_tkmath::math_sys::solve_2d_symmetric",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsBoundsValid3D(const NewtonBoundsN<3>&)",
+      "selector": "MathSys::Utils::IsBoundsValid3D(const MathSys::NewtonBoundsN<3> &)",
+      "cpp_id": "569d0bfae065ad4c40b3b4fb921cd7824bb38ef606136835eeafbbcd0b4be58d",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_bounds_valid_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsOptionsValid3D(const NewtonOptions&)",
+      "selector": "MathSys::Utils::IsOptionsValid3D(const MathSys::NewtonOptions &)",
+      "cpp_id": "66b8ea3133b59f766e9cd6846b855dca1cb18f355543ab1b131763abfa768586",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_options_valid_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::MaxStep3D(const NewtonBoundsN<3>&,double)",
+      "selector": "MathSys::Utils::MaxStep3D(const MathSys::NewtonBoundsN<3> &,double)",
+      "cpp_id": "74c57a1a819034208ee148c07791ccb2b12d9404dba48038b318ac540dcd32d6",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::utils::max_step_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::Clamp3D(std::array<double,3>&,const NewtonBoundsN<3>&,bool,double)",
+      "selector": "MathSys::Utils::Clamp3D(std::array<double, 3> &,const MathSys::NewtonBoundsN<3> &,bool,double)",
+      "cpp_id": "625b4da027f9544b73907a2af451ca65edab6781cb4ffab9aa1088f8d859e4eb",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::utils::clamp_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Solve3D(const Function&,const std::array<double,3>&,const NewtonBoundsN<3>&,const NewtonOptions&)",
+      "selector": "MathSys::Solve3D(const Function &,const std::array<double, 3> &,const MathSys::NewtonBoundsN<3> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "edb0dbecc3a85d7426d8cdc02ee6296d4a4f6b944a57226372bf4d45987770a7",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::solve_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::SolveCurveSurfaceExtrema3D(const CurveEvaluator&,const SurfaceEvaluator&,const std::array<double,3>&,const NewtonBoundsN<3>&,const NewtonOptions&)",
+      "selector": "MathSys::SolveCurveSurfaceExtrema3D(const CurveEvaluator &,const SurfaceEvaluator &,const std::array<double, 3> &,const MathSys::NewtonBoundsN<3> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "37303ab4d1d6fcce89872f9edfd499c6e647ce1ea10d9e7894c8bbbb2eb2bbe8",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
+      "cpp_source_sha256": "cdfa1c9fefef1f7ce6c48284abc08c25e481e8e567d7611dd8d388d2801e7de8",
+      "rust_item": "rustycad_tkmath::math_sys::solve_curve_surface_extrema_3d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsBoundsValid4D(const NewtonBoundsN<4>&)",
+      "selector": "MathSys::Utils::IsBoundsValid4D(const MathSys::NewtonBoundsN<4> &)",
+      "cpp_id": "1e6e46b5093341a4a2d3a2994d05c5005a0abfe3020093f7cc19f61b7ad67b52",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_bounds_valid_4d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::IsOptionsValid4D(const NewtonOptions&)",
+      "selector": "MathSys::Utils::IsOptionsValid4D(const MathSys::NewtonOptions &)",
+      "cpp_id": "8ee7e63a681876245ab35b1a4838cc422c904381e954ba0a754f9007eec36213",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::is_options_valid_4d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::MaxStep4D(const NewtonBoundsN<4>&,double)",
+      "selector": "MathSys::Utils::MaxStep4D(const MathSys::NewtonBoundsN<4> &,double)",
+      "cpp_id": "c06490be746d336eeaf48eb75b0138e3d2bffb8ca4ef8eb54c090b33912d9e9a",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::max_step_4d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Utils::Clamp4D(std::array<double,4>&,const NewtonBoundsN<4>&,bool,double)",
+      "selector": "MathSys::Utils::Clamp4D(std::array<double, 4> &,const MathSys::NewtonBoundsN<4> &,bool,double)",
+      "cpp_id": "7da3486cd4f05051b30196077eef97bf97e4265244a61a6922398064de4bce8c",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::utils::clamp_4d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::Solve4D(const Function&,const std::array<double,4>&,const NewtonBoundsN<4>&,const NewtonOptions&)",
+      "selector": "MathSys::Solve4D(const Function &,const std::array<double, 4> &,const MathSys::NewtonBoundsN<4> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "91b83e0d8a9e6952df2e8b8b8b89041c4c70181f8e49c4ea05f109ce5767c5d9",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::solve_4d",
+      "resolution": "implemented"
+    },
+    {
+      "previous_selector": "MathSys::SolveSurfaceSurfaceExtrema4D(const SurfaceEvaluator1&,const SurfaceEvaluator2&,const std::array<double,4>&,const NewtonBoundsN<4>&,const NewtonOptions&)",
+      "selector": "MathSys::SolveSurfaceSurfaceExtrema4D(const SurfaceEvaluator1 &,const SurfaceEvaluator2 &,const std::array<double, 4> &,const MathSys::NewtonBoundsN<4> &,const MathSys::NewtonOptions &)",
+      "cpp_id": "42f117930cab9c4676b77f5cc18d3670d40d75fdf0fbcafe02348bf5722b9142",
+      "cpp_source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
+      "cpp_source_sha256": "e782051c55af5616c691ce79339ce51e671e66ec1ee3d73ce7c1d91a62dd2af1",
+      "rust_item": "rustycad_tkmath::math_sys::solve_surface_surface_extrema_4d",
+      "resolution": "implemented"
+    }
+  ],
+  "validation": {
+    "unique_native_matches": 39,
+    "crosswalk_statuses": {
+      "implemented": 39
+    },
+    "command": "python3 tools/api_coverage_report.py --output /tmp/math-qualified-selectors-report.json",
+    "limitations": "Only native selector identity is corrected here. Existing Rust target gaps, if any, remain unresolved."
+  }
+}
