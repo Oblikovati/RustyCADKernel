@@ -24,16 +24,18 @@ LD_LIBRARY_PATH="$OCCT_BUILD/lin64/gcc/libi" /tmp/tkbo_edge_face
 ```
 
 Rust replay: `cargo test -p rustycad-tkbo --test int_tools_edge_face` now covers
-all four public probe cases: crossing, quick coincidence, line/cylinder tangency,
-and circle/plane tangency. The tangent replay checks every emitted field against
+all five public probe cases: crossing, quick coincidence, line/cylinder tangency,
+circle/plane tangency, and a translated line/cylinder tangency. The tangent replay checks every emitted field against
 the native output with absolute numeric tolerance `1e-12`; it is not a bitwise
 proof. It verifies one cylinder common part and two circle seam common parts,
 including the native minimum-distance value of `2` in the circle case.
 
 Additional unit regressions exercise the exact-intersection fallback on a
 line/plane crossing and `CheckTouchVertex` refinement. Those remain helper
-fixtures. Bounded-adaptor behavior in the HInter fallback and arbitrary
-surface/curve domains remain proof gaps. These supplemental fixtures do not
+fixtures. The touch stages now construct bounded, transformed geometric adaptors as in
+the native source. CheckTouch uses face bounds while CheckTouchVertex uses the
+underlying surface bounds; a regression checks this distinction. Arbitrary
+surface/curve domains and additional fallback cases remain proof gaps. These supplemental fixtures do not
 map additional legacy declarations or establish full EdgeFace parity.
 
 `tkbo_edge_face_state.cxx` adds seven native state snapshots, replayed by

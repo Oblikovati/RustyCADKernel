@@ -65,3 +65,37 @@ fn configured_intersector(edge: &rustycad_tkbrep::topods::Edge, face: &Face) -> 
     intersector.criteria = 3e-7;
     intersector
 }
+
+#[test]
+fn touch_adaptors_preserve_interval_and_distinct_surface_bounds() {
+    use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
+    let edge =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(0., 0., -1.), Point3::new(0., 0., 1.))
+            .unwrap()
+            .edge()
+            .unwrap();
+    let face = BRepBuilderAPIMakeFace::from_plane_bounds(Plane3::default(), (-2., 2., -3., 3.))
+        .unwrap()
+        .face()
+        .unwrap();
+    let solver = configured_intersector(&edge, &face);
+    let (curve, bounded) = super::touch_adaptors(&solver, 0.25, 1.5, true).unwrap();
+    assert_eq!(
+        (
+            curve.first_parameter().unwrap(),
+            curve.last_parameter().unwrap()
+        ),
+        (0.25, 1.5)
+    );
+    assert_eq!(
+        super::surface_bounds(&bounded).unwrap(),
+        ((-2., 2.), (-3., 3.))
+    );
+    let (_, full) = super::touch_adaptors(&solver, 0.25, 1.5, false).unwrap();
+    assert!(rustycad_tkernel::precision::is_infinite(
+        full.first_u_parameter().unwrap()
+    ));
+    assert!(rustycad_tkernel::precision::is_infinite(
+        full.last_v_parameter().unwrap()
+    ));
+}

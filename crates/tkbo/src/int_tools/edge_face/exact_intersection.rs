@@ -17,6 +17,9 @@ pub(super) fn exact_intersection_parameter(
     let surface = surface.shallow_copy()?.cast();
     let mut intersector = HInter::new();
     intersector.perform(&curve, &surface)?;
+    if !intersector.is_done() {
+        return Ok(None);
+    }
     last_intersection_parameter(&intersector, first, last)
 }
 

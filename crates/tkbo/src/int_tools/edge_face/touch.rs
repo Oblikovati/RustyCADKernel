@@ -1,9 +1,10 @@
 //! EdgeFace touch classification using the native Extrema_ExtCS primitive.
 use super::EdgeFace;
 use super::exact_intersection::exact_intersection_parameter;
-use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkernel::{precision, standard::Failure};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
+use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkgeombase::extrema::ExtCS;
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 use rustycad_tkmath::gp::{Line3, Point3};
@@ -64,21 +65,47 @@ fn extrema_candidate(
     first: f64,
     last: f64,
 ) -> Result<Option<(f64, f64)>, Failure> {
-    let curve = edge_face.curve.get().expect("initialized edge-face curve");
-    let surface = edge_face
-        .surface
-        .get()
-        .expect("initialized edge-face surface");
-    let (u, v) = surface_bounds(surface)?;
+    let (curve, surface) = touch_adaptors(edge_face, first, last, true)?;
+    let (u, v) = surface_bounds(&surface)?;
     let mut extrema = ExtCS::new();
     extrema.initialize_range(
-        surface,
+        &surface,
         u,
         v,
         (precision::p_confusion(), precision::p_confusion()),
     )?;
-    extrema.perform(curve, first, last)?;
-    extrema_candidate_result(&extrema, curve, surface, first, last)
+    extrema.perform(&curve, first, last)?;
+    extrema_candidate_result(&extrema, &curve, &surface, first, last)
+}
+
+fn touch_adaptors(
+    edge_face: &EdgeFace,
+    first: f64,
+    last: f64,
+    use_face_bounds: bool,
+) -> Result<(GeomAdaptorCurve, GeomAdaptorSurface), Failure> {
+    let curve = BRepTool::curve(&edge_face.edge)?.0;
+    Ok((
+        GeomAdaptorCurve::with_range(&curve, first, last)?,
+        touch_surface(edge_face, use_face_bounds)?,
+    ))
+}
+
+fn touch_surface(
+    edge_face: &EdgeFace,
+    use_face_bounds: bool,
+) -> Result<GeomAdaptorSurface, Failure> {
+    let surface = BRepTool::surface(&edge_face.face)?;
+    if !use_face_bounds {
+        // CheckTouchVertex uses the underlying surface bounds; CheckTouch uses face bounds.
+        return GeomAdaptorSurface::with_surface(&surface);
+    }
+    let adaptor = edge_face
+        .surface
+        .get()
+        .expect("initialized edge-face surface");
+    let (u, v) = surface_bounds(adaptor)?;
+    GeomAdaptorSurface::with_bounds(&surface, (u.0, u.1, v.0, v.1))
 }
 
 fn extrema_candidate_result(
@@ -103,7 +130,7 @@ fn extrema_candidate_result(
     ))
 }
 
-fn surface_bounds(surface: &BRepAdaptorSurface) -> Result<SurfaceBounds, Failure> {
+fn surface_bounds(surface: &impl Adaptor3dSurface) -> Result<SurfaceBounds, Failure> {
     Ok((
         (surface.first_u_parameter()?, surface.last_u_parameter()?),
         (surface.first_v_parameter()?, surface.last_v_parameter()?),
@@ -209,19 +236,16 @@ fn vertex_extrema_minimum(
     first: f64,
     last: f64,
 ) -> Result<Option<(f64, f64)>, Failure> {
-    let curve_handle = edge_face.curve.clone();
-    let surface_handle = edge_face.surface.clone();
-    let curve = curve_handle.get().expect("initialized edge-face curve");
-    let surface = surface_handle.get().expect("initialized edge-face surface");
+    let (curve, surface) = touch_adaptors(edge_face, first, last, false)?;
     let mut extrema = ExtCS::new();
-    let (u, v) = surface_bounds(surface)?;
+    let (u, v) = surface_bounds(&surface)?;
     extrema.initialize_range(
-        surface,
+        &surface,
         u,
         v,
         (precision::p_confusion(), precision::p_confusion()),
     )?;
-    extrema.perform(curve, first, last)?;
+    extrema.perform(&curve, first, last)?;
     if !extrema.is_done() || extrema.is_parallel()? || extrema.nb_ext()? == 0 {
         return Ok(None);
     }

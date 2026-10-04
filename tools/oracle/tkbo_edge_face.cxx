@@ -51,5 +51,10 @@ int main() {
   run("quick-contained", contained, face, 0, 1, true);
   run("line-cylinder-touch", cylinderTouch, cylinderFace, 0, 4);
   run("circle-plane-touch", circleTouch, tangentFace, 0, 6.283185307179586);
+  gp_Trsf transform;transform.SetTranslation(gp_Vec(10,20,30));
+  const TopLoc_Location location(transform);
+  TopoDS_Edge locatedEdge=cylinderTouch;locatedEdge.Location(location);
+  TopoDS_Face locatedFace=cylinderFace;locatedFace.Location(location);
+  run("located-cylinder-touch",locatedEdge,locatedFace,0,4);
   return 0;
 }

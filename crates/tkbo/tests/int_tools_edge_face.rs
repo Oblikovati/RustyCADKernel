@@ -135,15 +135,7 @@ fn common_part_snapshot(part: &rustycad_tkbo::int_tools::CommonPrt) -> String {
 
 #[test]
 fn tangent_curve_surface_cases_match_native_public_results() {
-    let (line, cylinder) = tangent_cylinder_pair();
-    let mut rows = tangent_snapshots("line-cylinder-touch", &line, &cylinder, 4.);
-    let (circle, plane) = tangent_circle_pair();
-    rows.push_str(&tangent_snapshots(
-        "circle-plane-touch",
-        &circle,
-        &plane,
-        std::f64::consts::TAU,
-    ));
+    let rows = all_tangent_snapshots();
     let native = include_str!("../../../tools/oracle/tkbo_edge_face.expected");
     let expected = &native[native.find("line-cylinder-touch").unwrap()..];
     assert_native_tokens(&rows, expected);
@@ -163,4 +155,35 @@ fn assert_native_tokens(rows: &str, expected: &str) {
             assert_eq!(*actual, expected);
         }
     }
+}
+
+fn located_tangent_pair() -> (Edge, Face) {
+    use rustycad_tkmath::{
+        gp::{Transform3, Vector3},
+        toploc::Location,
+    };
+    let (mut edge, mut face) = tangent_cylinder_pair();
+    let mut transform = Transform3::default();
+    transform.set_translation(Vector3::new(10., 20., 30.));
+    let location = Location::new(transform);
+    edge.set_location(&location, true).unwrap();
+    face.set_location(&location, true).unwrap();
+    (edge, face)
+}
+
+fn all_tangent_snapshots() -> String {
+    let cases = [
+        ("line-cylinder-touch", tangent_cylinder_pair(), 4.),
+        (
+            "circle-plane-touch",
+            tangent_circle_pair(),
+            std::f64::consts::TAU,
+        ),
+        ("located-cylinder-touch", located_tangent_pair(), 4.),
+    ];
+    let mut rows = String::new();
+    for (label, (edge, face), last) in cases {
+        rows.push_str(&tangent_snapshots(label, &edge, &face, last));
+    }
+    rows
 }
