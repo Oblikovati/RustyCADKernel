@@ -226878,6 +226878,42 @@
       "rust_item": "rustycad_tkbo::bop_tools::is_inverted_solid",
       "status": "partial",
       "notes": "16 native box/cylinder/sphere/empty solid orientation cases pass. Multi-shell, located, self-intersecting and spline solids and exceptional input states remain unproven; see tools/oracle/tkbo_solid_orientation.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeEdge(const IntTools_Curve &, const TopoDS_Vertex &, const double, const TopoDS_Vertex &, const double, const double, TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_edge",
+      "status": "partial",
+      "notes": "Source translation; 40 copy/split and 12 section native observations cover line/circle identity, orientations, ranges, null endpoints and failure-side tolerance mutation. See tools/oracle/tkbo_edge_construction.md; supplemental fixtures, not complete legacy/API parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeSplitEdge(const TopoDS_Edge &, const TopoDS_Vertex &, const double, const TopoDS_Vertex &, const double, TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_split_edge",
+      "status": "partial",
+      "notes": "Source translation; 40 copy/split and 12 section native observations cover line/circle identity, orientations, ranges, null endpoints and failure-side tolerance mutation. See tools/oracle/tkbo_edge_construction.md; supplemental fixtures, not complete legacy/API parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeSectEdge(const IntTools_Curve &, const TopoDS_Vertex &, const double, const TopoDS_Vertex &, const double, TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_section_edge",
+      "status": "partial",
+      "notes": "Source translation; 40 copy/split and 12 section native observations cover line/circle identity, orientations, ranges, null endpoints and failure-side tolerance mutation. See tools/oracle/tkbo_edge_construction.md; supplemental fixtures, not complete legacy/API parity."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::CopyEdge(const TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::copy_edge",
+      "status": "partial",
+      "notes": "Source translation; 40 copy/split and 12 section native observations cover line/circle identity, orientations, ranges, null endpoints and failure-side tolerance mutation. See tools/oracle/tkbo_edge_construction.md; supplemental fixtures, not complete legacy/API parity."
     }
   ],
   "tests": [

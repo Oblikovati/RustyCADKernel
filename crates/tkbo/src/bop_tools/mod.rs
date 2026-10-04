@@ -45,3 +45,6 @@ pub use curve_tolerance::compute_curve_tolerance;
 
 mod solid_orientation;
 pub use solid_orientation::is_inverted_solid;
+
+mod edge_construction;
+pub use edge_construction::{copy_edge, make_edge, make_section_edge, make_split_edge};

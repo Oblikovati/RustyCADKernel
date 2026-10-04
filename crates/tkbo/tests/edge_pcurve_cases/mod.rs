@@ -188,3 +188,5 @@ mod face_relations;
 mod vertex_tools;
 
 mod curve_tolerance;
+
+mod edge_construction;
