@@ -225168,6 +225168,150 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
       "status": "partial",
       "notes": "Native null/no-op/compound orchestration, empty merge-map false case, and single free-wire 3D small-edge BSpline join validated by topology occurrences and curve geometry. Face-linked/pcurve/seam/drop/angle/multiple-group/NM/warning branches remain explicit errors. Partial; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_TypeOfConcavity",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_Concave",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::Concave",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_Convex",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::Convex",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_Tangential",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::Tangential",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_FreeBound",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::FreeBound",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_Other",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::Other",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ChFiDS_Mixed",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiDS/ChFiDS_TypeOfConcavity.hxx",
+      "source_sha256": "1faeb1424759dce1449aabf8fb0ecf3166d578bd32ff3dbac6ab8e4a99a5a216",
+      "rust_item": "rustycad_tkfillet::chfi_ds::TypeOfConcavity::Mixed",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval",
+      "status": "partial",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::BRepOffset_Interval()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::default",
+      "status": "partial",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::BRepOffset_Interval(const double, const double, const ChFiDS_TypeOfConcavity)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::new",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::First(const double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::set_first",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::Last(const double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::set_last",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::Type(const ChFiDS_TypeOfConcavity)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::set_type",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::First() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::first",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::Last() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::last",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Interval::Type() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Interval.hxx",
+      "source_sha256": "192271cc63b16e686ef311d5d14123be321b27f5e0ec23589f878072fab81f41",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::get_type",
+      "status": "implemented",
+      "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
     }
   ],
   "tests": [

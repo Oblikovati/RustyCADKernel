@@ -1,5 +1,7 @@
 //! BRep offset geometry helpers.
 mod collapse_singularities;
+mod interval;
+pub use interval::BRepOffsetInterval;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
