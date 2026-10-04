@@ -59,6 +59,7 @@
 #include "tkgeombase_probe_advapp2var_eval.cxx"
 #include "tkgeombase_probe_advapp2var_f2var.cxx"
 #include "tkgeombase_probe_advapp2var_f2var2.cxx"
+#include "tkgeombase_probe_advapp2var_mutable.cxx"
 #include "tkgeombase_probe_advapp2var_class.cxx"
 #include "tkgeombase_probe_geom2dconvert.cxx"
 #include "tkgeombase_probe_extrema_el.cxx"
@@ -287,6 +288,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"aa_mma2ds1", gb_aa_mma2ds1_case},
  {"aa_mma2ce1", gb_aa_mma2ce1_case},
  {"aa_mma2fnc", gb_aa_mma2fnc_case},
+ {"aa_mma2fnc_mut_order", gb_aa_mma2fnc_mut_order_case},
  {"aa_mma2fx6", gb_aa_mma2fx6_case},
  // AdvApp2Var classes (tkgeombase_probe_advapp2var_class.cxx)
  {"aa_context", gb_aa_context_case},

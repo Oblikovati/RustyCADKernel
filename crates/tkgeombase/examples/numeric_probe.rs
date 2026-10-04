@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_def as ad,
-    app_par_curves as apc, approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el,
+    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, adv_mutable_eval, app_cont as acc,
+    app_def as ad, app_par_curves as apc, approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el,
     extrema_el_surf, extrema_pc, extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts,
     geom_convert as gcv, geom_lib as gl, geom_proj_lib as gpl, geom_tools, geom2d_convert as g2c,
     gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d, proj_lib as pl,
@@ -222,6 +222,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("aa_mma2ds1", adv_f2var::mma2ds1_case),
     ("aa_mma2ce1", adv_f2var2::mma2ce1_case),
     ("aa_mma2fnc", adv_f2var2::mma2fnc_case),
+    (
+        "aa_mma2fnc_mut_order",
+        adv_mutable_eval::mma2fnc_mut_order_case,
+    ),
     ("aa_mma2fx6", adv_f2var2::mma2fx6_case),
     // AdvApp2Var classes (gb_probe/adv_class.rs)
     ("aa_context", adv_class::context_case),

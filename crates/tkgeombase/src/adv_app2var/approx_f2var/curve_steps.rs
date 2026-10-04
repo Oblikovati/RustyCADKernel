@@ -4,9 +4,8 @@
 //! with `mma1fer_`, `mmaperm_` and `mma1noc_` in the `curve_errors` module.
 use super::bases::{mma1her_, mmapptt_};
 use super::curve::IsoApproxRequest;
-use crate::adv_app2var::evaluator::{AdvApp2VarEvaluation, AdvApp2VarEvaluatorFunc2Var};
 use crate::adv_app2var::f2c::{F2cArray, F2cArrayMut};
-use crate::adv_app2var::math_base::{mmmpocur_, pow__di};
+use crate::adv_app2var::math_base::mmmpocur_;
 
 /// `mma1nop_`: the `nbroot + 2` parameters of the iso sampling into `ttable`: the
 /// interval ends around the roots mapped on the non-constant parameter of `uvfonc`
@@ -39,168 +38,9 @@ pub(super) fn mma1nop_(
     ttable[(nbroot + 1) as usize] = ends[1];
 }
 
-/// The per-piece tables of `mma1fdi_`, `mma1cdi_` and `mma1cnt_`: the sums and
-/// differences `(0:nbroot/2, ndimen)` and the end constraints `(ndimen, iordre+1)`.
-pub(super) struct PieceTables<'a> {
-    pub(super) somtab: &'a mut [f64],
-    pub(super) diftab: &'a mut [f64],
-    pub(super) contr1: &'a mut [f64],
-    pub(super) contr2: &'a mut [f64],
-}
-
-/// `mma1fdi_`: samples the derivative `ideriv` of the function across the iso at
-/// the parameters `ttable` into `fpntab`, folds the samples into sums and
-/// differences and reads the end constraints up to order `iordre`, all scaled to
-/// [-1,1]. `iercod` is the evaluator code plus 100 when it stops the sampling.
-pub(super) fn mma1fdi_(
-    req: &IsoApproxRequest<'_>,
-    uvfonc: &[f64; 4],
-    foncnp: &dyn AdvApp2VarEvaluatorFunc2Var,
-    ttable: &[f64],
-    fpntab: &mut [f64],
-    piece: &mut PieceTables<'_>,
-    iercod: &mut i32,
-) {
-    *iercod = 0;
-    sample_iso(req, uvfonc, foncnp, ttable, fpntab, piece, iercod);
-    if *iercod > 0 {
-        *iercod += 100;
-    }
-}
-
-fn sample_iso(
-    req: &IsoApproxRequest<'_>,
-    uvfonc: &[f64; 4],
-    foncnp: &dyn AdvApp2VarEvaluatorFunc2Var,
-    ttable: &[f64],
-    fpntab: &mut [f64],
-    piece: &mut PieceTables<'_>,
-    iercod: &mut i32,
-) {
-    let (ndimen, nbroot, iordre) = (req.ndimen, req.nbroot, req.iordre);
-    let (ideb, ifin) = if iordre >= 0 {
-        (0, nbroot + 1)
-    } else {
-        (1, nbroot)
-    };
-    let (u_axis, span) = if req.isofav == 1 {
-        (true, uvfonc[1] - uvfonc[0])
-    } else {
-        (false, uvfonc[3] - uvfonc[2])
-    };
-    let renor: f64 = pow__di(span / 2., req.ideriv);
-    let orders = |d: i32| if u_axis { (d, 0) } else { (0, d) };
-    let (ideru, iderv) = orders(req.ideriv);
-    let call = |params: &[f64],
-                nbp: i32,
-                (u_order, v_order): (i32, i32),
-                out: &mut [f64],
-                code: &mut i32| {
-        let request = AdvApp2VarEvaluation {
-            dimension: ndimen,
-            u_start_end: [uvfonc[0], uvfonc[1]],
-            v_start_end: [uvfonc[2], uvfonc[3]],
-            favor_iso: req.isofav,
-            const_param: req.tconst,
-            nb_params: nbp,
-            parameters: params,
-            u_order,
-            v_order,
-        };
-        foncnp.evaluate(&request, out, code);
-    };
-    let fd1: i32 = ndimen;
-    call(
-        &ttable[ideb as usize..],
-        ifin - ideb + 1,
-        (ideru, iderv),
-        &mut fpntab[(ideb * fd1) as usize..],
-        iercod,
-    );
-    if *iercod > 0 {
-        return;
-    }
-    fold_samples(req, renor, fpntab, piece);
-    if iordre < 0 {
-        return;
-    }
-    let fpnt = F2cArray::new(fpntab, 1);
-    let mut c1 = F2cArrayMut::new(piece.contr1, fd1 + 1);
-    let mut c2 = F2cArrayMut::new(piece.contr2, fd1 + 1);
-    for nd in 1..=ndimen {
-        c1[nd + fd1] = renor * fpnt[nd];
-        c2[nd + fd1] = renor * fpnt[nd + (nbroot + 1) * fd1];
-    }
-    // The cross derivatives at both ends, in the native order: all of contr1, then contr2.
-    let cross = |d: i32| {
-        if u_axis {
-            (req.ideriv, d)
-        } else {
-            (d, req.ideriv)
-        }
-    };
-    for (table, parameter) in [(&mut c1, 0usize), (&mut c2, (nbroot + 1) as usize)] {
-        for order in 1..=iordre {
-            call(
-                &ttable[parameter..],
-                1,
-                cross(order),
-                table.tail_mut((order + 1) * fd1 + 1),
-                iercod,
-            );
-            if *iercod > 0 {
-                return;
-            }
-        }
-    }
-    let bid1: f64 = if u_axis {
-        (uvfonc[3] - uvfonc[2]) / 2.
-    } else {
-        (uvfonc[1] - uvfonc[0]) / 2.
-    };
-    let mut bid2: f64 = renor;
-    for ii in 1..=iordre {
-        bid2 *= bid1;
-        for nd in 1..=ndimen {
-            c1[nd + (ii + 1) * fd1] *= bid2;
-            c2[nd + (ii + 1) * fd1] *= bid2;
-        }
-    }
-}
-
-/// The folding of `mma1fdi_`: sums and differences of the samples at `+t` and
-/// `-t`, times `renor`, and the middle sample of an odd count.
-fn fold_samples(
-    req: &IsoApproxRequest<'_>,
-    renor: f64,
-    fpntab: &[f64],
-    piece: &mut PieceTables<'_>,
-) {
-    let (ndimen, nbroot) = (req.ndimen, req.nbroot);
-    let fpnt = F2cArray::new(fpntab, 1);
-    let sd1: i32 = nbroot / 2 + 1;
-    let mut som = F2cArrayMut::new(piece.somtab, sd1);
-    let mut dif = F2cArrayMut::new(piece.diftab, sd1);
-    let nroo2: i32 = nbroot / 2;
-    for nd in 1..=ndimen {
-        for ii in 1..=nroo2 {
-            let iip: i32 = (nbroot + 1) / 2 + ii;
-            let iim: i32 = nroo2 - ii + 1;
-            let (bid1, bid2) = (fpnt[nd + iim * ndimen], fpnt[nd + iip * ndimen]);
-            som[ii + nd * sd1] = renor * (bid2 + bid1);
-            dif[ii + nd * sd1] = renor * (bid2 - bid1);
-        }
-    }
-    for nd in 1..=ndimen {
-        let middle: f64 = if nbroot % 2 == 1 {
-            renor * fpnt[nd + (nroo2 + 1) * ndimen]
-        } else {
-            0.
-        };
-        som[nd * sd1] = middle;
-        dif[nd * sd1] = middle;
-    }
-}
+#[path = "curve_sampling.rs"]
+mod sampling;
+pub(super) use sampling::{PieceTables, mma1fdi_};
 
 /// `mma1cdi_`: subtracts from the folded samples the Hermite interpolation of the
 /// end constraints, sampled at the roots into `fpntab` with the basis `hermit`.

@@ -7,6 +7,7 @@ pub mod adv_f2var;
 pub mod adv_f2var2;
 pub mod adv_math;
 pub mod adv_math2;
+pub mod adv_mutable_eval;
 pub mod app_cont;
 pub mod app_def;
 pub mod app_par_curves;
