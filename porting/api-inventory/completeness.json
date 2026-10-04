@@ -3,13 +3,13 @@
   "artifacts": {
     "api-crosswalk": {
       "path": "api-crosswalk.json.gz",
-      "sha256": "13fd463462c6e57043735394f4d9b68ae39e4e743cd403237b11bf868d9dd02b",
-      "uncompressed_sha256": "68e70782ab9a848aa608b5cb2658a4fd464a8b3db9ea227960fc3c4e70e68a66"
+      "sha256": "adf7af02f403c1457ee4c009bc446e6904eea62e5ed5f83a3254c9cb94f6c83d",
+      "uncompressed_sha256": "26da44843db2d94a7bb9ea2b5f54544161ccdbee5e5f68ee3c9de5e5145e4ffd"
     },
     "rust-api": {
       "path": "rust-api.json.gz",
-      "sha256": "70a8b5039d1eebd820101ed38b5e05b9189205cce112a2018df0f602188bdbff",
-      "uncompressed_sha256": "f9b939bf00bea660525f4554183950a81a5dec0c23ee6303948777cb3dd83119"
+      "sha256": "3f18a41f5c5eda42c191c9ed11b224bfa6268d8cc609257f0e4035be3328b63e",
+      "uncompressed_sha256": "6987f93647c66926da1a46f605f079be20f48a7a12469b35c8b4d3dd3c1e40e0"
     }
   },
   "behavioral_equivalence_proven": false,
@@ -27,13 +27,13 @@
     "cpp": "cf6938854274e724f2c654713c633827ed19f6930cb0f8c21ce0bd10aaa912c3",
     "cpp_manifest": "e932ffe239a7f5deed5f08f217f81cb08315c4d1c2fa527d5bae5fc2d1bd0859",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "ab21a1f2dc8d168e306600680fd682bf153886a0448b428f73ac4ae678550faf",
-    "rust": "f9b939bf00bea660525f4554183950a81a5dec0c23ee6303948777cb3dd83119"
+    "parity": "02b24d30c91b8b23a905873e6463d794223492e8948505a9ff09f3b5c01d9ee4",
+    "rust": "6987f93647c66926da1a46f605f079be20f48a7a12469b35c8b4d3dd3c1e40e0"
   },
   "matched_declared_mappings": 20673,
   "observed_cpp_api_declarations": 110134,
-  "parity_api_rows": 28263,
-  "partial_mappings": 489,
+  "parity_api_rows": 28266,
+  "partial_mappings": 492,
   "proof_gaps": [
     "cxx_configuration_matrix_incomplete",
     "cxx_declaration_inventory_incomplete",
@@ -46,20 +46,20 @@
     "unsupported_cpp_inventory_records:5224"
   ],
   "rust_capture_inputs": {
-    "cargo_metadata_sha256": "123d2f1a5319d197c30faa5212522f1d1c297970adda93b2675ffe635aa80af4",
+    "cargo_metadata_sha256": "47d537b88df447eab07ae889e5567ce7040764436656d045a3e09c62b8956536",
     "tool_versions": {
       "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
       "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
       "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
     },
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
-    "workspace_file_count": 7368,
-    "workspace_inputs_sha256": "de56447421bb6df851eef0317fe4caef8992648932545082fa6a1ea7ec34cf90",
-    "workspace_revision": "146c7220239397bd531fb5ef8d61c34333454670"
+    "workspace_file_count": 7385,
+    "workspace_inputs_sha256": "44d1bc3f6f4ea2dd747f619bb87a11c79c76d1b25782ca899ccc41d40f598aea",
+    "workspace_revision": "21175e9a5f02c4d89142612ad5a87833ee26ceb8"
   },
-  "rust_capture_revision": "146c7220239397bd531fb5ef8d61c34333454670",
+  "rust_capture_revision": "21175e9a5f02c4d89142612ad5a87833ee26ceb8",
   "rust_crates": 20,
-  "rust_public_paths": 55765,
+  "rust_public_paths": 55778,
   "schema_version": 1,
   "tool_implementation_sha256": {
     "api_crosswalk": {
@@ -88,9 +88,9 @@
       "excluded": 1,
       "implemented": 604,
       "observed_cpp_api": 2686,
-      "parity_rows": 907,
-      "partial": 214,
-      "unclaimed_cpp_api": 1788,
+      "parity_rows": 910,
+      "partial": 217,
+      "unclaimed_cpp_api": 1785,
       "unresolved": 87,
       "upstream_unimplemented": 1
     },
@@ -898,7 +898,7 @@
       "upstream_unimplemented": 0
     }
   },
-  "unclaimed_cpp_count": 84887,
+  "unclaimed_cpp_count": 84884,
   "unresolved_row_count": 6786,
   "upstream_unimplemented": 2
 }
