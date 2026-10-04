@@ -42,3 +42,41 @@ impl ConstOperation<2> for Flag {
         2
     }
 }
+
+pub struct DefaultSelf;
+
+impl core::ops::Mul for DefaultSelf {
+    type Output = DefaultSelf;
+
+    fn mul(self, _right: Self) -> Self::Output {
+        DefaultSelf
+    }
+}
+
+pub struct ExplicitSelf;
+
+impl core::ops::Mul<Self> for ExplicitSelf {
+    type Output = ExplicitSelf;
+
+    fn mul(self, _right: Self) -> Self::Output {
+        ExplicitSelf
+    }
+}
+
+pub struct ReferenceArgument;
+
+impl core::ops::Add<&'static Matrix2> for ReferenceArgument {
+    type Output = ReferenceArgument;
+
+    fn add(self, _right: &'static Matrix2) -> Self::Output {
+        ReferenceArgument
+    }
+}
+
+pub struct CollectionArgument;
+
+impl core::convert::From<Vec<Matrix2>> for CollectionArgument {
+    fn from(_value: Vec<Matrix2>) -> Self {
+        CollectionArgument
+    }
+}
