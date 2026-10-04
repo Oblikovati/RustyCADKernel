@@ -14,7 +14,7 @@ use crate::{
     bnd::BoundingBox3,
     gp::{Point2, Point3},
 };
-pub use deferred::DeferredTriangulation;
+pub use deferred::{DeferredTriangulation, TriangulationHooks};
 use rustycad_tkernel::{
     ncollection::{Array1, Vec3},
     standard::{
@@ -53,7 +53,7 @@ pub struct Triangulation {
     fields: SharedState<TriangulationFields>,
     // myCachedMinMax and its shared mutex.
     cached_min_max: SharedState<Option<BoundingBox3>>,
-    deferred: Option<Box<dyn DeferredTriangulation>>,
+    hooks: Option<Box<dyn TriangulationHooks>>,
 }
 rustycad_tkernel::impl_transient!(Triangulation, "Poly_Triangulation", StandardTransient, base);
 impl Default for Triangulation {
@@ -71,7 +71,7 @@ impl Triangulation {
             base: StandardTransient::default(),
             fields: SharedState::new(fields),
             cached_min_max: SharedState::new(None),
-            deferred: None,
+            hooks: None,
         }
     }
     /// Allocates nodes, triangles and optionally UV nodes and normals;
@@ -145,11 +145,19 @@ impl Triangulation {
         }
         Ok(triangulation)
     }
-    /// Attaches a deferred storage, the Rust form of a subclass overriding the late-load
-    /// interface; `Triangulation::with_deferred(Box::new(storage))`.
+    /// Attaches virtual hooks, the Rust form of a derived `Poly_Triangulation`;
+    /// `Triangulation::with_hooks(Box::new(storage))`.
+    pub fn with_hooks(hooks: Box<dyn TriangulationHooks>) -> Self {
+        Self {
+            hooks: Some(hooks),
+            ..Self::default()
+        }
+    }
+    /// Attaches deferred storage; this preserves the original API;
+    /// `Triangulation::with_deferred(Box::new(storage))`.
     pub fn with_deferred(storage: Box<dyn DeferredTriangulation>) -> Self {
         Self {
-            deferred: Some(storage),
+            hooks: Some(storage),
             ..Self::default()
         }
     }

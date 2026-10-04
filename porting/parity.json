@@ -234997,6 +234997,30 @@
       "rust_item": "rustycad_tkmath::poly::Triangulation::unset_cached_min_max",
       "status": "implemented",
       "notes": "Existing public analogue now covered directly against the protected native operation. Clearing empty/cached/populated/repeated states preserves nodes and restores node-derived bounds. Clang candidate 0b263b88682ea78b498adddd9266c08fc499491a0a84cfa33a689eea6cde8d2e. Supplemental evidence: porting/audits/tkmath-protected-bounds.json; no legacy mapping count increase."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::computeBoundingBox(const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::compute_bounding_box",
+      "status": "partial",
+      "notes": "Protected virtual ID db11afad80b78af44ee5910400477dac690eebd1196f8e8109cb3b67b5562a29. `MinMax` and the direct Rust virtual analogue dispatch to the injected hook; `compute_bounding_box_base` provides the native base-qualified implementation. Native derived probe verifies direct dispatch, base delegation, accurate rotated MinMax, cached MinMax bypass, and copy-constructor slicing. C++ inheritance, object layout, and RTTI are represented by an explicit Rust hook strategy, not reproduced. Probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; native header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::createNewEntity() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::create_new_entity",
+      "status": "partial",
+      "notes": "Protected virtual ID 8f12e5e5972126cd2cddc406e105f690893390f7efcb2e38cc59e45d4e5d27e1. Detached loading invokes this factory; the derived native probe returns a custom subclass and the Rust probe returns a hook-configured Triangulation whose custom bounds are exercised after detaching. Rust dynamic class identity/RTTI is not reproduced. Probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; native header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::loadDeferredData(const occ::handle<OSD_FileSystem>&,const occ::handle<Poly_Triangulation>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TriangulationHooks::load_deferred_data_with_file_system",
+      "status": "partial",
+      "notes": "Protected virtual ID 3280aca5d10a3bbcd19dee694fcfa6c2d3c9a7915c2b5591b4d45acefb8609cb. Existing loader tests cover filesystem forwarding and failure; the derived hook probe verifies destination creation/loading composes with custom factory output. Hook dispatch is represented through Rust traits rather than C++ inheritance/RTTI. Native header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
     }
   ],
   "tests": [

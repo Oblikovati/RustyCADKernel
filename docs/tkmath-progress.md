@@ -1589,7 +1589,10 @@ triangulation built from a null handle has deflection 0 (natively uninitialized)
 repeat a step that consumes no start link (seen when a helper still lists a link that
 `ReplaceLink` swapped), the port raises Standard_ProgramError instead of looping.
 `Poly::Read*` reject a token that libstdc++ extraction refuses (natively the fields stay
-uninitialized). OSD_FileSystem is not ported, so a `DeferredTriangulation` owns its input;
+uninitialized). Deferred loading forwards the optional `OSD_FileSystem` handle through
+`TriangulationHooks` (`DeferredTriangulation` remains a compatibility alias). The protected
+virtual bounding-box path is injectable and has explicit base-qualified delegation; Rust does
+not reproduce C++ subclass layout or RTTI.
 the allocator arguments of the coherent classes are not kept (`Allocator` is an excluded
 row). `Poly_Polygon3D::Parameters` without parameters and `TopLoc_Location::Powered(INT_MIN)`
 on a multi-item chain raise Standard_NullObject and Standard_OutOfRange where native code

@@ -49,8 +49,20 @@ impl Triangulation {
         true
     }
     /// Protected `computeBoundingBox`: the box of every (transformed) node;
-    /// `triangulation.compute_bounding_box(Transform3::default())`.
+    /// dispatches custom hooks; `triangulation.compute_bounding_box(Transform3::default())`.
     pub fn compute_bounding_box(&self, transform: Transform3) -> BoundingBox3 {
+        if let Some(bounds) = self
+            .hooks
+            .as_ref()
+            .and_then(|hooks| hooks.compute_bounding_box(self, transform))
+        {
+            return bounds;
+        }
+        self.compute_bounding_box_base(transform)
+    }
+    /// Explicit base-qualified equivalent of `Poly_Triangulation::computeBoundingBox`;
+    /// `triangulation.compute_bounding_box_base(transform)`.
+    pub fn compute_bounding_box_base(&self, transform: Transform3) -> BoundingBox3 {
         let fields = self.fields.read();
         let mut range = BoundingBox3::default();
         let identity = transform.form() == TransformForm::Identity;
