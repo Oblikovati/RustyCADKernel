@@ -39793,7 +39793,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
       "rust_item": "rustycad_tkmath::poly::Triangulation::has_geometry",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. The base rule requires nodes and triangles; TriangulationHooks::has_geometry provides source-equivalent virtual override dispatch, and has_geometry_base provides qualified base behavior. The derived edge-backed fixture validates the override-driven accurate MinMax cache decision only; it does not model edge topology."
     },
     {
       "upstream_id": "Poly_Triangulation::NbNodes() const",

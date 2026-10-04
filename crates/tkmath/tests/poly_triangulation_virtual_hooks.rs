@@ -25,6 +25,14 @@ impl TriangulationHooks for ExpandedBounds {
     }
 }
 
+struct EdgeBackedGeometry(usize);
+
+impl TriangulationHooks for EdgeBackedGeometry {
+    fn has_geometry(&self, base: &Triangulation) -> Option<bool> {
+        Some(base.nb_nodes() > 0 && (base.nb_triangles() > 0 || self.0 > 0))
+    }
+}
+
 fn degenerate_triangle_mesh(hooks: Box<dyn TriangulationHooks>) -> Triangulation {
     let mesh = Triangulation::with_hooks(hooks);
     mesh.resize_nodes(3, false).unwrap();
@@ -119,4 +127,42 @@ fn detached_factory_can_return_an_object_with_its_own_hooks() {
     assert_eq!(detached.mesh_purpose(), mesh_purpose::LOADED);
     let bounds = detached.compute_bounding_box(Transform3::default());
     assert_eq!(bounds.get().unwrap(), [2.0, 3.0, 4.0, 6.0, 7.0, 8.0]);
+}
+
+#[test]
+fn virtual_geometry_hook_controls_accurate_minmax_cache_use() {
+    let mesh = edge_backed_mesh();
+    assert!(!mesh.has_geometry_base());
+    assert!(mesh.has_geometry());
+    assert_rotated_minmax_ignores_cache(&mesh);
+}
+
+fn edge_backed_mesh() -> Triangulation {
+    let mesh = Triangulation::with_hooks(Box::new(EdgeBackedGeometry(1)));
+    mesh.resize_nodes(3, false).unwrap();
+    for index in 1..=3 {
+        mesh.set_node(index, Point3::new(1.0, 2.0, 3.0)).unwrap();
+    }
+    mesh
+}
+
+fn assert_rotated_minmax_ignores_cache(mesh: &Triangulation) {
+    mesh.set_cached_min_max(&BoundingBox3::new(
+        Point3::new(-5.0, -5.0, -5.0),
+        Point3::new(5.0, 5.0, 5.0),
+    ));
+    let rotation = Transform3::rotation(Axis1::new(Point3::default(), Direction3::Z), 0.5).unwrap();
+    let mut result = BoundingBox3::default();
+    assert!(mesh.min_max(&mut result, rotation, true));
+    assert_eq!(
+        box_values(&result),
+        [
+            -0.08126851531803325,
+            2.2345906623849485,
+            3.0,
+            -0.08126851531803325,
+            2.2345906623849485,
+            3.0,
+        ]
+    );
 }
