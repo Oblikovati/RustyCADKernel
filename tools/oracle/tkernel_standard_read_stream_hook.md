@@ -24,5 +24,5 @@ c++ -std=c++17 -O2 -I"$occt_build/include/opencascade" \
 The protected hook is not virtual, so derived classes can call it but cannot
 override its dispatch. The Rust callable counterpart accepts `Read` and safely
 rejects lengths larger than its allocation; that out-of-range case is outside
-the native method's defined buffer domain. The distinct `FILE*` overload is
-not covered by this fixture or mapping.
+the native method's defined buffer domain. The `FILE*` overload has its own
+fixture, adapter, and API mapping in `tkernel_standard_read_file_stream.md`.
