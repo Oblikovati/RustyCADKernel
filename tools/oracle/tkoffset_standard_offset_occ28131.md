@@ -22,3 +22,8 @@ The captured output is `tkoffset_standard_offset_occ28131.expected.txt`. The Rus
 face-stage regression is `cargo test -p rustycad-tkoffset --test
 occ28131_offset_face`. The separate legacy GTest is
 `GeomFill_BSplineCurvesTest.OCC28131_StandardOffsetOfFilledFace`.
+
+Each `edge-topology` row records a face-local edge index, its orientation, its
+degenerated flag, and the endpoint coordinates after applying that orientation.
+These rows preserve evidence that the corrected offset edge shares endpoint
+vertices with the neighboring offset edges and the spherical patch boundary.

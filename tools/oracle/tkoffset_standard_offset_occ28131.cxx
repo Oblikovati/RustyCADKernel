@@ -18,6 +18,7 @@
 #include <Precision.hxx>
 #include <ShapeFix_Shape.hxx>
 #include <TopExp_Explorer.hxx>
+#include <TopExp.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS.hxx>
 #include <iostream>
@@ -86,6 +87,8 @@ double area(const TopoDS_Shape& shape) {
   return properties.Mass();
 }
 
+void dumpEdgeTopology(int faceIndex, const TopoDS_Face& face);
+
 void dump(const char* label, const TopoDS_Shape& shape) {
   int faces = 0, edges = 0, vertices = 0;
   for (TopExp_Explorer it(shape, TopAbs_FACE); it.More(); it.Next()) ++faces;
@@ -94,7 +97,9 @@ void dump(const char* label, const TopoDS_Shape& shape) {
   std::cout << label << ' ' << int(shape.ShapeType()) << ' ' << faces << ' ' << edges << ' '
             << vertices << ' ' << BRepCheck_Analyzer(shape, true).IsValid() << ' '
             << maxTolerance(shape) << ' ' << area(shape) << '\n';
+  int faceIndex = 0;
   for (TopExp_Explorer it(shape, TopAbs_FACE); it.More(); it.Next()) {
+    ++faceIndex;
     TopLoc_Location location;
     occ::handle<Geom_Surface> surface = BRep_Tool::Surface(TopoDS::Face(it.Current()), location);
     double u1, u2, v1, v2;
@@ -105,6 +110,22 @@ void dump(const char* label, const TopoDS_Shape& shape) {
     std::cout << "face-surface " << surface->DynamicType()->Name() << ' ' << faceEdges << ' '
               << faceVertices << ' ' << u1 << ' ' << u2 << ' ' << v1 << ' ' << v2 << ' '
               << area(it.Current()) << '\n';
+    dumpEdgeTopology(faceIndex, TopoDS::Face(it.Current()));
+  }
+}
+
+void dumpEdgeTopology(int faceIndex, const TopoDS_Face& face) {
+  int edgeIndex = 0;
+  for (TopExp_Explorer it(face, TopAbs_EDGE); it.More(); it.Next()) {
+    const TopoDS_Edge edge = TopoDS::Edge(it.Current());
+    TopoDS_Vertex first, last;
+    TopExp::Vertices(edge, first, last, true);
+    const gp_Pnt firstPoint = BRep_Tool::Pnt(first);
+    const gp_Pnt lastPoint = BRep_Tool::Pnt(last);
+    std::cout << "edge-topology " << faceIndex << ' ' << ++edgeIndex << ' '
+              << int(edge.Orientation()) << ' ' << BRep_Tool::Degenerated(edge) << ' '
+              << firstPoint.X() << ' ' << firstPoint.Y() << ' ' << firstPoint.Z() << ' '
+              << lastPoint.X() << ' ' << lastPoint.Y() << ' ' << lastPoint.Z() << '\n';
   }
 }
 } // namespace
