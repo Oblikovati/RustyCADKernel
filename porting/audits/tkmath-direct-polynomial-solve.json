@@ -30,7 +30,31 @@
       "Fresh native overflow constructors leave myNbSol indeterminate; no result is asserted for that undefined state.",
       "The oracle covers selected transition cases, not all floating-point inputs or platform profiles."
     ],
-    "source_sha256": "7eac1d37d3040ba6c3df3bc41a964d9d56f0a7adfea68d1839d8e9f987c172e8"
+    "source_sha256": "7eac1d37d3040ba6c3df3bc41a964d9d56f0a7adfea68d1839d8e9f987c172e8",
+    "additional_native_replay_profiles": [
+      {
+        "profile_name": "root modeling-full linked replay",
+        "configuration": "target/occt-modeling-full",
+        "executable_path": "/tmp/tkmath-direct-roots-solve-reuse-main",
+        "executable_sha256": "36f2c306ca2df224b77e9894a5596e0431340fcf45f8a0496fc7f250e3eb0f57",
+        "captured_output_path": "/tmp/tkmath-direct-roots-solve-reuse-main.out",
+        "captured_output_sha256": "912e7e1444fd6b9df5e71cb0a36f890be30b2855c332363fdd77f17226bda",
+        "linked_native_libraries": [
+          {
+            "path": "target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0",
+            "sha256": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8"
+          },
+          {
+            "path": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+            "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+          }
+        ],
+        "compile_command": "Not retained by replay owner; ldd confirms links to the recorded target/occt-modeling-full TKMath/TKernel shared libraries.",
+        "replay_command": "LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi /tmp/tkmath-direct-roots-solve-reuse-main > /tmp/tkmath-direct-roots-solve-reuse-main.out",
+        "comparison": "captured output is byte-for-byte identical to tools/oracle/tkmath_direct_roots_solve_reuse.expected",
+        "source_of_profile": "root native replay on integrated main; retained executable and output inspected in this task"
+      }
+    ]
   },
   "selectors": [
     {
