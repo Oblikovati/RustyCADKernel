@@ -17,6 +17,49 @@ fn initialize_corrects_page_count_and_rounds_cell_size() {
 }
 
 #[test]
+fn mapped_system_regions_round_to_pages_and_are_zeroed() {
+    let mut opt = manager(true, true);
+    let mut size = opt.page_size() + 1;
+    let block = opt.allocate_system_memory(&mut size).unwrap();
+    assert_eq!(size, 2 * opt.page_size());
+    assert_ne!(block.address().get(), 0);
+    assert_eq!(block.allocated_size(), size);
+    assert!(
+        opt.system_memory_bytes(&block)
+            .unwrap()
+            .iter()
+            .all(|b| *b == 0)
+    );
+    opt.system_memory_bytes_mut(&block).unwrap()[0] = 7;
+    assert_eq!(opt.system_memory_bytes(&block).unwrap()[0], 7);
+    opt.free_system_memory(&block, size).unwrap();
+    assert!(opt.system_memory_bytes(&block).is_err());
+}
+
+#[test]
+fn heap_system_regions_keep_size_and_reject_inexact_or_foreign_frees() {
+    let mut opt = manager(true, false);
+    let mut other = manager(true, false);
+    let mut size = 37;
+    let block = opt.allocate_system_memory(&mut size).unwrap();
+    assert_eq!(size, 37);
+    assert_eq!(block.allocated_size(), 37);
+    assert!(
+        opt.system_memory_bytes(&block)
+            .unwrap()
+            .iter()
+            .all(|b| *b == 0)
+    );
+    assert_program_error(opt.free_system_memory(&block, 36).unwrap_err());
+    assert_program_error(other.free_system_memory(&block, size).unwrap_err());
+    opt.free_system_memory(&block, size).unwrap();
+}
+
+fn assert_program_error(failure: rustycad_tkernel::standard::Failure) {
+    assert_eq!(failure.exception_type(), "Standard_ProgramError");
+}
+
+#[test]
 fn small_blocks_are_carved_contiguously_with_an_eight_byte_header() {
     let mut opt = manager(true, true);
     let first = opt.allocate(10).unwrap().get();
