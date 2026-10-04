@@ -27,13 +27,13 @@ impl BOPAlgoBuilder {
         Ok(())
     }
 
-    fn append_image(&mut self, source: &Shape, representative: &Shape) {
+    pub(super) fn append_image(&mut self, source: &Shape, representative: &Shape) {
         self.images
             .try_bound(source.clone(), List::default())
             .append(representative.clone());
     }
 
-    fn append_origin(&mut self, representative: &Shape, source: &Shape) {
+    pub(super) fn append_origin(&mut self, representative: &Shape, source: &Shape) {
         self.origins
             .try_bound(representative.clone(), List::default())
             .append(source.clone());
