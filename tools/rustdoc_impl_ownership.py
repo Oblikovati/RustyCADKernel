@@ -10,6 +10,7 @@ from api_inventory_json import JSONValue, array_value, integer_value
 from rustdoc_declarations import file_hash, span_filename, stable_path
 from rustdoc_bool_foreign_impls import bool_foreign_impl_members
 from rustdoc_foreign_impls import foreign_impl_members
+from rustdoc_const_aliases import const_specialized_alias_members, eligible_impl_body
 
 
 class ImplState(Protocol):
@@ -47,7 +48,9 @@ def inherent_members(
     read_inner: InnerReader,
     render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
-    _, body = read_inner(item)
+    kind, body = read_inner(item)
+    if kind == "type_alias":
+        return const_specialized_alias_members(item, path, state, read_inner, render_impl)
     owner_id = str(integer_value(item.get("id"), "impl owner id"))
     return [
         entry
@@ -246,20 +249,6 @@ def capture_foreign_impl(
             state.source_root, state.unresolved,
         )
     )
-
-
-def eligible_impl_body(
-    impl_id: JSONValue,
-    items: Mapping[str, dict[str, JSONValue]],
-    read_inner: InnerReader,
-) -> dict[str, JSONValue] | None:
-    impl = items.get(str(impl_id))
-    if impl is None:
-        return None
-    impl_kind, impl_body = read_inner(impl)
-    if impl_kind != "impl" or impl_body.get("is_synthetic") is True:
-        return None
-    return None if impl_body.get("blanket_impl") is not None else impl_body
 
 
 def resolved_impl_owner(
