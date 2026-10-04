@@ -225573,6 +225573,51 @@
       "rust_item": "rustycad_tkfillet::chfi3d::is_tangent_faces",
       "status": "partial",
       "notes": "Pinned source translation. Native differential fixture covers 288 planar/missing-pcurve/same-face cases, G1/C2/G2 orders and edge/face orientations. Partial: stored-continuity shortcut, real seams, curved/located/spline domains need native fixtures. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse",
+      "status": "partial",
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Perform(const TopoDS_Shape &, const double, const Message_ProgressRange &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::perform",
+      "status": "partial",
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Type(const TopoDS_Edge &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
+      "status": "partial",
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Ancestors(const TopoDS_Shape &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::ancestors",
+      "status": "partial",
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::TangentEdges(const TopoDS_Edge &, const TopoDS_Vertex &, NCollection_List<TopoDS_Shape> &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
+      "status": "partial",
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired spline surfaces explicitly unsupported pending mixed-continuity translation; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
     }
   ],
   "tests": [

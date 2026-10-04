@@ -37,3 +37,5 @@ pub use surface::{BRepOffsetStatus, surface};
 pub use offset_face::BRepOffsetOffsetFace;
 pub use simple_offset_wall::build_simple_offset_wall;
 pub use sphere_join::build_vertex_arc_join;
+mod analyse;
+pub use analyse::BRepOffsetAnalyse;
