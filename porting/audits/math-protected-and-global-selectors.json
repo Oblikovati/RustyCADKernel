@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "source_revision": "e8c694734cb06ac7841157e84d404a35ab1476d3",
+  "kind": "exact_declaration_binding_audit",
+  "new_behavior_implemented": false,
+  "legacy_test_count_change": 0,
+  "rows": [
+    {
+      "old_selector": "math_Recipes::LU_Solve(const math_Matrix&,const math_IntegerVector&,math_Vector&)",
+      "selector": "LU_Solve(const math_Matrix&,const math_IntegerVector&,math_Vector&)",
+      "cpp_id": "a51548521f6369e8c6c48ee02d718d105bbeb70362d508fcc7298a5ed4a73312",
+      "rust_target": "rustycad_tkmath::math::recipes::lu_solve",
+      "rust_source": "crates/tkmath/src/math/recipes/lu.rs",
+      "rust_source_sha256": "c10398b48ae2beecc71d9fa8061fe5ad7ed8085557ef888e85d6ce57f576cbfb"
+    },
+    {
+      "old_selector": "math_Recipes::LU_Invert(math_Matrix&)",
+      "selector": "LU_Invert(math_Matrix&)",
+      "cpp_id": "0b1013e556ee74bd28289ea29ffde161947556ff37ed25eeaae48d196b9056e5",
+      "rust_target": "rustycad_tkmath::math::recipes::lu_invert",
+      "rust_source": "crates/tkmath/src/math/recipes/lu.rs",
+      "rust_source_sha256": "c10398b48ae2beecc71d9fa8061fe5ad7ed8085557ef888e85d6ce57f576cbfb"
+    },
+    {
+      "old_selector": "math_Recipes::SVD_Decompose(math_Matrix&,math_Vector&,math_Matrix&)",
+      "selector": "SVD_Decompose(math_Matrix&,math_Vector&,math_Matrix&)",
+      "cpp_id": "19f03a5e2e249750ff4f2919a878d39bf646bc90df095d33a202076ffc641473",
+      "rust_target": "rustycad_tkmath::math::recipes::svd_decompose",
+      "rust_source": "crates/tkmath/src/math/recipes/svd.rs",
+      "rust_source_sha256": "0e7d2d9ad9e6161c0e51dff467fe11296d331e8411173c483874dee1840403be"
+    },
+    {
+      "old_selector": "math_Recipes::SVD_Decompose(math_Matrix&,math_Vector&,math_Matrix&,math_Vector&)",
+      "selector": "SVD_Decompose(math_Matrix&,math_Vector&,math_Matrix&,math_Vector&)",
+      "cpp_id": "e83db24ba4df782505be3f17d3123201ff4b3f5acd8c1dc149d7aadfafd712bf",
+      "rust_target": "rustycad_tkmath::math::recipes::svd_decompose_with_work",
+      "rust_source": "crates/tkmath/src/math/recipes/svd.rs",
+      "rust_source_sha256": "0e7d2d9ad9e6161c0e51dff467fe11296d331e8411173c483874dee1840403be"
+    },
+    {
+      "old_selector": "math_Recipes::SVD_Solve(const math_Matrix&,const math_Vector&,const math_Matrix&,const math_Vector&,math_Vector&)",
+      "selector": "SVD_Solve(const math_Matrix&,const math_Vector&,const math_Matrix&,const math_Vector&,math_Vector&)",
+      "cpp_id": "c5e704dff7048ae5254bca00c7fd156e5e3dd05722ea00468918617b550bfce0",
+      "rust_target": "rustycad_tkmath::math::recipes::svd_solve",
+      "rust_source": "crates/tkmath/src/math/recipes/svd.rs",
+      "rust_source_sha256": "0e7d2d9ad9e6161c0e51dff467fe11296d331e8411173c483874dee1840403be"
+    },
+    {
+      "old_selector": "math_Recipes::DACTCL_Decompose(math_Vector&,const math_IntegerVector&,double)",
+      "selector": "DACTCL_Decompose(math_Vector&,const math_IntegerVector&,double)",
+      "cpp_id": "d36b7160fc3f5f208051e237dffbce6002a54db6ff42ed69ca7b5b3250782fff",
+      "rust_target": "rustycad_tkmath::math::recipes::dactcl_decompose",
+      "rust_source": "crates/tkmath/src/math/recipes/dactcl.rs",
+      "rust_source_sha256": "0b973c600c4f177ed5e15e2f6c54d553e4f41574871f15bf7d69ba72f96c9cf5"
+    },
+    {
+      "old_selector": "math_Recipes::DACTCL_Solve(const math_Vector&,math_Vector&,const math_IntegerVector&,double)",
+      "selector": "DACTCL_Solve(const math_Vector&,math_Vector&,const math_IntegerVector&,double)",
+      "cpp_id": "6f7a616e642c5d4d89daf22cc0347c9f64284d1f185244f7349469b28fdc26ef",
+      "rust_target": "rustycad_tkmath::math::recipes::dactcl_solve",
+      "rust_source": "crates/tkmath/src/math/recipes/dactcl.rs",
+      "rust_source_sha256": "0b973c600c4f177ed5e15e2f6c54d553e4f41574871f15bf7d69ba72f96c9cf5"
+    },
+    {
+      "old_selector": "math_Recipes::Jacobi(math_Matrix&,math_Vector&,math_Matrix&,int&)",
+      "selector": "Jacobi(math_Matrix&,math_Vector&,math_Matrix&,int&)",
+      "cpp_id": "b794140bf7f387f2530b092a8ce5799c61bf20de743aaffc2c9244d188077d06",
+      "rust_target": "rustycad_tkmath::math::recipes::jacobi",
+      "rust_source": "crates/tkmath/src/math/recipes/jacobi.rs",
+      "rust_source_sha256": "69b82c913f770cfc8f73e6eeb7a467ac750ea1240edd39d191ba14c44da2530b"
+    },
+    {
+      "old_selector": "math_Recipes::LU_Decompose(math_Matrix&,math_IntegerVector&,double&,double,const Message_ProgressRange&)",
+      "selector": "LU_Decompose(math_Matrix&,math_IntegerVector&,double&,double,const Message_ProgressRange&)",
+      "cpp_id": "422f53c7f9628575c96fae71398b6b473fa006c71deaafd9a771e373f31d0852",
+      "rust_target": "rustycad_tkmath::math::recipes::lu_decompose_with_progress",
+      "rust_source": "crates/tkmath/src/math/recipes/lu.rs",
+      "rust_source_sha256": "c10398b48ae2beecc71d9fa8061fe5ad7ed8085557ef888e85d6ce57f576cbfb"
+    },
+    {
+      "old_selector": "math_Recipes::LU_Decompose(math_Matrix&,math_IntegerVector&,double&,math_Vector&,double,const Message_ProgressRange&)",
+      "selector": "LU_Decompose(math_Matrix&,math_IntegerVector&,double&,math_Vector&,double,const Message_ProgressRange&)",
+      "cpp_id": "ae51d5c5d3a431e75fcf99ac754b870545ebf1064e2c452251268d632af3feb6",
+      "rust_target": "rustycad_tkmath::math::recipes::lu_decompose_with_scales_and_progress",
+      "rust_source": "crates/tkmath/src/math/recipes/lu.rs",
+      "rust_source_sha256": "c10398b48ae2beecc71d9fa8061fe5ad7ed8085557ef888e85d6ce57f576cbfb"
+    },
+    {
+      "selector": "math_Uzawa::Perform(const math_Matrix &,const math_Vector &,const math_Vector &,const int,const int,const double,const double,const int)",
+      "cpp_id": "7a9f958f0af81941429b56205c2e066e84381bebdb6d348efef13ea3cccab8ca",
+      "rust_target": "rustycad_tkmath::math::Uzawa::perform",
+      "rust_source": "crates/tkmath/src/math/uzawa.rs",
+      "rust_source_sha256": "a20934480bdefeb10cc6547e44b3be4a080ef8dd8523d596707a5acef61cb65a"
+    },
+    {
+      "selector": "math_TrigonometricFunctionRoots::Perform(const double,const double,const double,const double,const double,const double,const double)",
+      "cpp_id": "6838fa4f85a686609a5deec936188048cb37a6da0d6955fce02881071d891a7f",
+      "rust_target": "rustycad_tkmath::math::TrigonometricRoots::perform",
+      "rust_source": "crates/tkmath/src/math/trigonometric_roots.rs",
+      "rust_source_sha256": "8388c48c1351074ce148f9d7b707be64b37c5b9e8366e78e852ba80f87dc43e3"
+    }
+  ]
+}

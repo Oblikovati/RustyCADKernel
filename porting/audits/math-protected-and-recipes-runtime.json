@@ -1,0 +1,33 @@
+{
+  "kind": "supplemental_native_differential",
+  "source_revision": "d15a1f7a51f5f203f763689b92df0922c21b1490",
+  "cases_passed": 1202,
+  "operations": {
+    "uzawa": 257,
+    "trig": 520,
+    "recipes_lu": 105,
+    "recipes_svd": 69,
+    "recipes_jacobi": 67,
+    "recipes_dactcl": 82,
+    "progress_lu": 102
+  },
+  "native_binary_sha256": "102df8d575f72e18516977530d43bb3d8fa0a5611dad145259142679dcd0b3e3",
+  "rust_binary_sha256": "f67a690dec981639b157695a66d3635d34d4cfccf7b172b22c7f732559df4a42",
+  "comparator": "Existing TKMath exact finite/infinity/signed-zero bits; NaN classification comparator",
+  "raw_output_differences": 0,
+  "artifacts": {
+    "inputs": {
+      "path": "math-protected-and-recipes-inputs.txt.gz",
+      "sha256": "1c48be97a951e4dbc7ddd6688cb59e17deb95ae6ed873c6722310d96458e5f14"
+    },
+    "native": {
+      "path": "math-protected-and-recipes-native.txt.gz",
+      "sha256": "faa54c81b2639ceb49ece3f2fc8ef922e29b1211df501212f1199c3c6b10fb8b"
+    },
+    "rust": {
+      "path": "math-protected-and-recipes-rust.txt.gz",
+      "sha256": "faa54c81b2639ceb49ece3f2fc8ef922e29b1211df501212f1199c3c6b10fb8b"
+    }
+  },
+  "legacy_test_count_change": 0
+}
