@@ -15,7 +15,7 @@ use crate::{
 use candidates::{
     configured_edge_face, edge_face_candidates, initialize_glued_faces, selected_edge_face_pairs,
 };
-use common_blocks::append_face_common_block;
+use common_blocks::{PendingCommonFace, apply_pending_common_faces, common_block_vertices};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topods::{Compound, Edge, Face, Vertex},
@@ -44,6 +44,25 @@ struct PendingEFVertex {
     parameter: f64,
 }
 
+#[derive(Default)]
+struct PendingEFResults {
+    edges: Vec<i32>,
+    faces: Map<i32>,
+    vertices: Vec<PendingEFVertex>,
+    common_faces: Vec<PendingCommonFace>,
+}
+
+fn collect_edge_face_results(
+    filler: &mut BOPAlgoPaveFiller,
+    candidates: Vec<EdgeFaceCandidate>,
+    results: &mut PendingEFResults,
+) -> Result<(), Failure> {
+    for candidate in candidates {
+        filler.intersect_edge_face_candidate(candidate, results)?;
+    }
+    Ok(())
+}
+
 impl BOPAlgoPaveFiller {
     /// Intersects edge/face candidates and records supported vertex common parts.
     /// `filler.perform_ef()?` executes the prepared Edge/Face stage.
@@ -61,46 +80,54 @@ impl BOPAlgoPaveFiller {
         &mut self,
         candidates: Vec<EdgeFaceCandidate>,
     ) -> Result<(), Failure> {
-        let mut changed_edges = Vec::new();
-        let mut changed_faces = Map::default();
-        let mut pending = Vec::new();
-        for candidate in candidates {
-            self.intersect_edge_face_candidate(candidate, &mut pending, &mut changed_faces)?;
-        }
-        self.commit_pending_vertices(pending, &mut changed_edges, &mut changed_faces)?;
-        self.split_intersected_edges(&changed_edges)?;
+        let mut results = PendingEFResults::default();
+        collect_edge_face_results(self, candidates, &mut results)?;
+        self.apply_common_faces(&results.common_faces)?;
+        self.update_vertices_of_common_blocks()?;
+        self.commit_pending_vertices(results.vertices, &mut results.edges, &mut results.faces)?;
+        self.split_intersected_edges(&results.edges)?;
         self.structure_mut()?
-            .update_face_info_in_map(&changed_faces)
+            .update_face_info_in_map(&results.faces)
     }
 
     fn intersect_edge_face_candidate(
         &mut self,
         candidate: EdgeFaceCandidate,
-        pending: &mut Vec<PendingEFVertex>,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
-        let mut solver = configured_edge_face(self, &candidate);
+        let Some(solver) = self.try_edge_face_solver(&candidate)? else {
+            return Ok(());
+        };
+        self.process_edge_face_parts(&candidate, &solver, results)
+    }
+
+    fn try_edge_face_solver(
+        &self,
+        candidate: &EdgeFaceCandidate,
+    ) -> Result<Option<EdgeFace>, Failure> {
+        let mut solver = configured_edge_face(self, candidate);
         if let Err(error) = solver.perform() {
             if error.exception_type() == "Standard_NotImplemented" {
                 return Err(error);
             }
-            return self.warn_edge_face(&candidate);
+            self.warn_edge_face(candidate)?;
+            return Ok(None);
         }
         if !solver.is_done() {
-            return self.warn_edge_face(&candidate);
+            self.warn_edge_face(candidate)?;
+            return Ok(None);
         }
-        self.process_edge_face_parts(&candidate, &solver, pending, changed_faces)
+        Ok(Some(solver))
     }
 
     fn process_edge_face_parts(
         &mut self,
         candidate: &EdgeFaceCandidate,
         solver: &EdgeFace,
-        pending: &mut Vec<PendingEFVertex>,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
         for common in solver.common_parts().iter() {
-            self.accept_edge_face_common(candidate, common, pending, changed_faces)?;
+            self.accept_edge_face_common(candidate, common, results)?;
         }
         Ok(())
     }
@@ -162,14 +189,11 @@ impl BOPAlgoPaveFiller {
         &mut self,
         candidate: &EdgeFaceCandidate,
         common: &CommonPrt,
-        pending: &mut Vec<PendingEFVertex>,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
         match common.shape_type() {
-            ShapeEnum::Vertex => {
-                self.accept_vertex_common(candidate, common, pending, changed_faces)
-            }
-            ShapeEnum::Edge => self.accept_edge_common(candidate, common, changed_faces),
+            ShapeEnum::Vertex => self.accept_vertex_common(candidate, common, results),
+            ShapeEnum::Edge => self.accept_edge_common(candidate, common, results),
             shape_type => Err(unsupported_common_part(shape_type)),
         }
     }
@@ -178,33 +202,31 @@ impl BOPAlgoPaveFiller {
         &mut self,
         candidate: &EdgeFaceCandidate,
         common: &CommonPrt,
-        pending: &mut Vec<PendingEFVertex>,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
         if self.process_endpoint_common(candidate, common)? {
             return Ok(());
         }
-        self.process_interior_vertex_common(candidate, common, pending, changed_faces)
+        self.process_interior_vertex_common(candidate, common, results)
     }
 
     fn process_interior_vertex_common(
         &mut self,
         candidate: &EdgeFaceCandidate,
         common: &CommonPrt,
-        pending: &mut Vec<PendingEFVertex>,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
         let parameter = common.vertex_parameter1();
         let Some(vertex) = self.make_edge_face_vertex(candidate, parameter)? else {
             return Ok(());
         };
-        pending.push(PendingEFVertex {
+        results.vertices.push(PendingEFVertex {
             candidate: candidate.clone(),
             common: common.clone(),
             vertex,
             parameter,
         });
-        changed_faces.add(candidate.face_index);
+        results.faces.add(candidate.face_index);
         Ok(())
     }
 
@@ -237,17 +259,20 @@ impl BOPAlgoPaveFiller {
         &mut self,
         candidate: &EdgeFaceCandidate,
         common: &CommonPrt,
-        changed_faces: &mut Map<i32>,
+        results: &mut PendingEFResults,
     ) -> Result<(), Failure> {
         let endpoints_on_face = self.block_endpoints_on_face(candidate)?;
         let mut record = InterfEF::default();
         record.set_indices(candidate.edge_index, candidate.face_index);
         if endpoints_on_face {
             record.set_common_part(common);
-            self.bind_face_common_block(candidate)?;
+            results.common_faces.push(PendingCommonFace::new(
+                Arc::clone(&candidate.block),
+                candidate.face_index,
+            ));
         }
         self.append_interference_record(record, candidate.edge_index, candidate.face_index);
-        changed_faces.add(candidate.face_index);
+        results.faces.add(candidate.face_index);
         Ok(())
     }
 
@@ -262,16 +287,21 @@ impl BOPAlgoPaveFiller {
             && self.face_has_vertex(candidate.face_index, last)?)
     }
 
-    fn bind_face_common_block(&mut self, candidate: &EdgeFaceCandidate) -> Result<(), Failure> {
+    fn apply_common_faces(&mut self, pending: &[PendingCommonFace]) -> Result<(), Failure> {
         let context = self.context.clone();
-        let (tolerance, endpoints) = append_face_common_block(
-            self.structure_mut()?,
-            &candidate.block,
-            candidate.face_index,
+        let structure = self.structure_mut()?;
+        apply_pending_common_faces(
+            structure,
+            pending,
             context.get().expect("initialized EF context"),
-        )?;
-        let _ = self.update_vertex(endpoints.0, tolerance)?;
-        let _ = self.update_vertex(endpoints.1, tolerance)?;
+        )
+    }
+
+    fn update_vertices_of_common_blocks(&mut self) -> Result<(), Failure> {
+        let vertices = common_block_vertices(self.structure_mut()?);
+        for (vertex, tolerance) in vertices {
+            let _ = self.update_vertex(vertex, tolerance)?;
+        }
         Ok(())
     }
 

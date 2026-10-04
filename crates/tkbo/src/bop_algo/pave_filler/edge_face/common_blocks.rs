@@ -15,34 +15,108 @@ use std::sync::Arc;
 
 type CurveSample = (Handle<dyn GeomCurve>, (f64, f64));
 
-pub(super) fn append_face_common_block(
+pub(super) struct PendingCommonFace {
+    block: PaveBlockHandle,
+    face: i32,
+}
+
+impl PendingCommonFace {
+    pub(super) fn new(block: PaveBlockHandle, face: i32) -> Self {
+        Self { block, face }
+    }
+}
+
+pub(super) fn apply_pending_common_faces(
+    structure: &mut DataStructure,
+    pending: &[PendingCommonFace],
+    context: &Context,
+) -> Result<(), Failure> {
+    for (block, faces) in grouped_faces(pending) {
+        apply_common_face_group(structure, &block, &faces, context)?;
+    }
+    Ok(())
+}
+
+fn grouped_faces(pending: &[PendingCommonFace]) -> Vec<(PaveBlockHandle, Vec<i32>)> {
+    let mut groups: Vec<(PaveBlockHandle, Vec<i32>)> = Vec::new();
+    for item in pending {
+        let Some((_, faces)) = groups
+            .iter_mut()
+            .find(|(block, _)| Arc::ptr_eq(block, &item.block))
+        else {
+            groups.push((Arc::clone(&item.block), vec![item.face]));
+            continue;
+        };
+        if !faces.contains(&item.face) {
+            faces.push(item.face);
+        }
+    }
+    groups
+}
+
+fn apply_common_face_group(
     structure: &mut DataStructure,
     block: &PaveBlockHandle,
-    face: i32,
+    faces: &[i32],
     context: &Context,
-) -> Result<(f64, (i32, i32)), Failure> {
+) -> Result<(), Failure> {
     let common = find_or_create_common_block(structure, block);
-    append_new_face(&common, face);
+    for face in faces {
+        append_new_face(&common, *face);
+    }
     structure.set_common_block(block, &common);
     let tolerance = compute_common_block_tolerance(structure, &common, context)?;
     common
         .lock()
         .expect("common-block lock must not be poisoned")
         .set_tolerance(tolerance);
-    let endpoint_indices = common_block_endpoints(&common)?;
-    Ok((tolerance, endpoint_indices))
+    Ok(())
 }
 
-fn common_block_endpoints(common: &CommonBlockHandle) -> Result<(i32, i32), Failure> {
+pub(super) fn common_block_vertices(structure: &DataStructure) -> Vec<(i32, f64)> {
+    let mut visited: Vec<PaveBlockHandle> = Vec::new();
+    let mut vertices = Vec::new();
+    for blocks in structure.pave_blocks_pool() {
+        for block in blocks {
+            collect_common_block_vertices(structure, block, &mut visited, &mut vertices);
+        }
+    }
+    vertices
+}
+
+fn collect_common_block_vertices(
+    structure: &DataStructure,
+    block: &PaveBlockHandle,
+    visited: &mut Vec<PaveBlockHandle>,
+    vertices: &mut Vec<(i32, f64)>,
+) {
+    let Some(common) = structure.common_block(block) else {
+        return;
+    };
+    let Some((real, first, last, tolerance)) = common_block_vertex_data(&common) else {
+        return;
+    };
+    if visited.iter().any(|seen| Arc::ptr_eq(seen, &real)) {
+        return;
+    }
+    visited.push(real);
+    if tolerance > 0.0 {
+        vertices.extend([(first, tolerance), (last, tolerance)]);
+    }
+}
+
+fn common_block_vertex_data(
+    common: &CommonBlockHandle,
+) -> Option<(PaveBlockHandle, i32, i32, f64)> {
     let common = common
         .lock()
         .expect("common-block lock must not be poisoned");
-    let block = common.pave_block1()?;
-    let endpoints = block
+    let real = Arc::clone(common.pave_block1().ok()?);
+    let (first, last) = real
         .lock()
         .expect("pave-block lock must not be poisoned")
         .indices();
-    Ok(endpoints)
+    Some((real, first, last, common.tolerance()))
 }
 
 fn find_or_create_common_block(
@@ -71,24 +145,16 @@ fn compute_common_block_tolerance(
     common: &CommonBlockHandle,
     context: &Context,
 ) -> Result<f64, Failure> {
-    let (first_block, blocks, faces) = common_block_snapshot(common)?;
-    let edge = block_edge(structure, &first_block)?;
+    let snapshot = common_block_snapshot(common)?;
+    let edge = block_edge(structure, &snapshot.first_block)?;
     let tolerance = BRepTool::edge_tolerance(&edge)?;
-    if blocks.len() == 1 && faces.is_empty() {
-        return Ok(tolerance);
-    }
-    sample_block_tolerance(
-        structure,
-        &edge,
-        &first_block,
-        &blocks,
-        &faces,
-        context,
-        tolerance,
-    )
+    sample_block_tolerance(structure, &edge, &snapshot, context, tolerance)
 }
 
-fn block_edge(structure: &DataStructure, block: &PaveBlockHandle) -> Result<Edge, Failure> {
+pub(super) fn block_edge(
+    structure: &DataStructure,
+    block: &PaveBlockHandle,
+) -> Result<Edge, Failure> {
     let index = block
         .lock()
         .expect("pave-block lock must not be poisoned")
@@ -96,31 +162,55 @@ fn block_edge(structure: &DataStructure, block: &PaveBlockHandle) -> Result<Edge
     Ok(Edge::unchecked(structure.shape(index)?.clone()))
 }
 
-fn common_block_snapshot(
-    common: &CommonBlockHandle,
-) -> Result<(PaveBlockHandle, Vec<PaveBlockHandle>, Vec<i32>), Failure> {
+struct CommonBlockSnapshot {
+    first_block: PaveBlockHandle,
+    blocks: Vec<PaveBlockHandle>,
+    faces: Vec<i32>,
+}
+
+fn common_block_snapshot(common: &CommonBlockHandle) -> Result<CommonBlockSnapshot, Failure> {
     let common = common
         .lock()
         .expect("common-block lock must not be poisoned");
-    Ok((
-        Arc::clone(common.pave_block1()?),
-        common.pave_blocks().to_vec(),
-        common.faces().to_vec(),
-    ))
+    Ok(CommonBlockSnapshot {
+        first_block: Arc::clone(common.pave_block1()?),
+        blocks: common.pave_blocks().to_vec(),
+        faces: common.faces().to_vec(),
+    })
 }
 
 fn sample_block_tolerance(
     structure: &DataStructure,
     edge: &Edge,
-    block: &PaveBlockHandle,
-    blocks: &[PaveBlockHandle],
-    faces: &[i32],
+    snapshot: &CommonBlockSnapshot,
     context: &Context,
     initial: f64,
 ) -> Result<f64, Failure> {
-    let (curve, range) = sample_curve_range(edge, block)?;
-    let maximum = sample_edge_group(structure, blocks, block, &curve, range, initial, context)?;
-    sample_face_group(structure, faces, &curve, range, maximum, context)
+    if snapshot.blocks.len() == 1 && snapshot.faces.is_empty() {
+        return Ok(initial);
+    }
+    let (curve, range) = sample_curve_range(edge, &snapshot.first_block)?;
+    sample_block_entities(structure, &curve, range, snapshot, context, initial)
+}
+
+fn sample_block_entities(
+    structure: &DataStructure,
+    curve: &Handle<dyn GeomCurve>,
+    range: (f64, f64),
+    snapshot: &CommonBlockSnapshot,
+    context: &Context,
+    initial: f64,
+) -> Result<f64, Failure> {
+    let maximum = sample_edge_group(
+        structure,
+        &snapshot.blocks,
+        &snapshot.first_block,
+        curve,
+        range,
+        initial,
+        context,
+    )?;
+    sample_face_group(structure, &snapshot.faces, curve, range, maximum, context)
 }
 
 fn sample_curve_range(edge: &Edge, block: &PaveBlockHandle) -> Result<CurveSample, Failure> {
@@ -175,18 +265,10 @@ fn sample_other_edge(
     if Arc::ptr_eq(other, source) {
         return Ok(maximum);
     }
-    let edge = other_block_edge(structure, other)?;
+    let edge = block_edge(structure, other)?;
     let tolerance = BRepTool::edge_tolerance(&edge)?;
     let projector = context.proj_pc(&edge)?;
     project_edge_samples(&projector, curve, sample, tolerance, maximum)
-}
-
-fn other_block_edge(structure: &DataStructure, block: &PaveBlockHandle) -> Result<Edge, Failure> {
-    let index = block
-        .lock()
-        .expect("pave-block lock must not be poisoned")
-        .original_edge();
-    Ok(Edge::unchecked(structure.shape(index)?.clone()))
 }
 
 fn project_edge_samples(
