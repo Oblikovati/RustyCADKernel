@@ -1587,7 +1587,11 @@
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::d1",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Separate output arrays use the original method; overlapping output arrays use d0123_overlapping with derivative order 0..3, caller storage and row starts. OCCT computes independent intermediates, then publishes complete rows in order 0,1,2,3. All/shared/partly overlapping/reverse-offset/disjoint rows and retained canaries match 2304 native f64 bit patterns across 48 cases. Invalid buffer spans and derivative orders outside native defined 0..3 return Failure. See porting/audits/hermit-jacobi-overlapping-outputs.json; supplemental cases do not add original legacy declarations.",
+      "rust_items": [
+        "rustycad_tkmath::plib::HermitJacobi::d1",
+        "rustycad_tkmath::plib::HermitJacobi::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_HermitJacobi::D2(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
@@ -1595,7 +1599,11 @@
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::d2",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Separate output arrays use the original method; overlapping output arrays use d0123_overlapping with derivative order 0..3, caller storage and row starts. OCCT computes independent intermediates, then publishes complete rows in order 0,1,2,3. All/shared/partly overlapping/reverse-offset/disjoint rows and retained canaries match 2304 native f64 bit patterns across 48 cases. Invalid buffer spans and derivative orders outside native defined 0..3 return Failure. See porting/audits/hermit-jacobi-overlapping-outputs.json; supplemental cases do not add original legacy declarations.",
+      "rust_items": [
+        "rustycad_tkmath::plib::HermitJacobi::d2",
+        "rustycad_tkmath::plib::HermitJacobi::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_HermitJacobi::D3(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
@@ -1603,7 +1611,11 @@
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::d3",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Separate output arrays use the original method; overlapping output arrays use d0123_overlapping with derivative order 0..3, caller storage and row starts. OCCT computes independent intermediates, then publishes complete rows in order 0,1,2,3. All/shared/partly overlapping/reverse-offset/disjoint rows and retained canaries match 2304 native f64 bit patterns across 48 cases. Invalid buffer spans and derivative orders outside native defined 0..3 return Failure. See porting/audits/hermit-jacobi-overlapping-outputs.json; supplemental cases do not add original legacy declarations.",
+      "rust_items": [
+        "rustycad_tkmath::plib::HermitJacobi::d3",
+        "rustycad_tkmath::plib::HermitJacobi::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_HermitJacobi::WorkDegree() const noexcept",
@@ -235225,8 +235237,12 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::d0123",
-      "status": "partial",
-      "notes": "Protected declaration inventory ID 6c57344e4188f9fc9f72941650ff29888c4bed879e9a190d619cd312326a8018. Exposed as a Rust-safe borrowed BasisRows method and bit-checked against pinned native initialized-buffer calls for NDeriv=0..3 with nonzero lower bounds. Distinct mutable slices cannot alias one native NCollection_Array1 across argument positions; short buffers return Standard_OutOfRange instead of native out-of-bounds access. Orders outside 0..3 are rejected because native constructs derivative-sized local arrays from NDeriv. Probe: tools/oracle/tkmath_plib_d0123.cxx."
+      "status": "implemented",
+      "notes": "Separate output arrays use the original method; overlapping output arrays use d0123_overlapping with derivative order 0..3, caller storage and row starts. OCCT computes independent intermediates, then publishes complete rows in order 0,1,2,3. All/shared/partly overlapping/reverse-offset/disjoint rows and retained canaries match 2304 native f64 bit patterns across 48 cases. Invalid buffer spans and derivative orders outside native defined 0..3 return Failure. See porting/audits/hermit-jacobi-overlapping-outputs.json; supplemental cases do not add original legacy declarations.",
+      "rust_items": [
+        "rustycad_tkmath::plib::HermitJacobi::d0123",
+        "rustycad_tkmath::plib::HermitJacobi::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "Bnd_OBB::ProcessOnePoint(const gp_Pnt&)",
