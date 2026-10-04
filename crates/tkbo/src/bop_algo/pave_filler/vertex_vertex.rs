@@ -25,7 +25,7 @@ impl BOPAlgoPaveFiller {
         Ok(())
     }
 
-    fn initialize_vertex_pave_blocks(&mut self) -> Result<(), Failure> {
+    pub(super) fn initialize_vertex_pave_blocks(&mut self) -> Result<(), Failure> {
         let structure = self.data_structure.as_mut().ok_or_else(|| {
             Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized data structure")
         })?;
@@ -75,7 +75,7 @@ impl BOPAlgoPaveFiller {
         Ok(connected_groups(&connections))
     }
 
-    fn make_same_domain_vertices(&mut self, group: &[i32]) -> Result<(), Failure> {
+    pub(super) fn make_same_domain_vertices(&mut self, group: &[i32]) -> Result<(), Failure> {
         let structure = self.data_structure.as_mut().ok_or_else(|| {
             Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized data structure")
         })?;

@@ -299,6 +299,15 @@ impl DataStructure {
         valid_shrunk_endpoints(self, &locked)
     }
 
+    /// Replaces split endpoints by same-domain representatives; `ds.update_pave_block_with_sd_vertices(&block)`.
+    pub fn update_pave_block_with_sd_vertices(&self, block: &PaveBlockHandle) {
+        let mut block = block.lock().expect("pave-block lock must not be poisoned");
+        let first = block.pave1();
+        let last = block.pave2();
+        block.set_pave1(resolve_pave_vertex(self, first));
+        block.set_pave2(resolve_pave_vertex(self, last));
+    }
+
     /// Finds edges sharing a source vertex in native insertion order.
     /// `ds.edges_at_vertex(vertex_index)`.
     pub fn edges_at_vertex(&self, index: i32) -> &[i32] {
@@ -872,6 +881,11 @@ fn valid_shrunk_endpoints(structure: &DataStructure, block: &PaveBlock) -> Resul
         }
     }
     Ok(true)
+}
+
+fn resolve_pave_vertex(structure: &DataStructure, pave: Pave) -> Pave {
+    let index = structure.shape_sd(pave.index()).unwrap_or(pave.index());
+    Pave::new(index, pave.parameter())
 }
 
 fn valid_shrunk_endpoint(
