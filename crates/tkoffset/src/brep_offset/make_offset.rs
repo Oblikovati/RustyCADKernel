@@ -14,6 +14,7 @@ pub struct BRepOffsetMakeOffset {
     pub(super) offset_faces: BRepAlgoImage,
     pub(super) offset_edges: BRepAlgoImage,
     pub(super) generated_vertices: Vec<(Shape, Shape)>,
+    pub(super) generated_edge_faces: Vec<(Shape, Shape)>,
     pub(super) result_shape: Shape,
     pub(super) closing_faces: Vec<Face>,
     pub(super) face_offsets: Vec<(Face, f64)>,
@@ -60,6 +61,7 @@ impl BRepOffsetMakeOffset {
             offset_faces: BRepAlgoImage::new(),
             offset_edges: BRepAlgoImage::new(),
             generated_vertices: Vec::new(),
+            generated_edge_faces: Vec::new(),
             result_shape: Shape::default(),
             closing_faces: Vec::new(),
             face_offsets: Vec::new(),
@@ -192,6 +194,7 @@ impl BRepOffsetMakeOffset {
         self.offset_faces.clear();
         self.offset_edges.clear();
         self.generated_vertices.clear();
+        self.generated_edge_faces.clear();
         self.closing_faces.clear();
         self.face_offsets.clear();
     }
