@@ -275,3 +275,46 @@ fn distance_shapes(mode: i32) -> (Edge, Face) {
     .unwrap();
     (edge, face)
 }
+
+fn coincident_curve_edge(mode: i32) -> Edge {
+    use rustycad_tkernel::ncollection::Array1;
+    use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve};
+    use rustycad_tkmath::gp::{Axis2, Circle3, Direction3};
+    if mode == 0 {
+        let axis = Axis2::new(Point3::default(), Direction3::new(0., 0., -1.).unwrap()).unwrap();
+        return BRepBuilderAPIMakeEdge::from_circ_params(Circle3::new(axis, 0.5).unwrap(), 0., 1.)
+            .unwrap()
+            .edge()
+            .unwrap();
+    }
+    let points = [
+        Point3::new(-0.5, 0., 0.),
+        Point3::new(0., 0.5, 0.),
+        Point3::new(0.5, 0., 0.),
+    ];
+    let poles = Array1::from_shared(&points, 1);
+    let curve: Handle<dyn GeomCurve> = Handle::new(GeomBezierCurve::new(&poles).unwrap()).cast();
+    BRepBuilderAPIMakeEdge::from_curve_params(&curve, 0., 1.)
+        .unwrap()
+        .edge()
+        .unwrap()
+}
+
+#[test]
+fn general_coincidence_matches_native_reversed_circle_and_bezier() {
+    let mut rows = String::new();
+    for mode in 0..2 {
+        let mut solver =
+            BeanFaceIntersector::from_shapes(&coincident_curve_edge(mode), &source_face()).unwrap();
+        solver.set_bean_parameters(0., 1.);
+        for pass in 0..2 {
+            solver.perform().unwrap();
+            snapshot(&solver, mode, 0, pass, &mut rows);
+        }
+    }
+    assert_eq!(rows.lines().count(), 4);
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_bean_coincident_curves.expected")
+    );
+}

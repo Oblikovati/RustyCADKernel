@@ -1,25 +1,11 @@
 //! Private BeanFace range helpers from OCCT 3d097a0.
 use crate::int_tools::{
-    CurveRangeLocalizeData, CurveRangeSample, MarkedRangeSet, SurfaceRangeLocalizeData,
-    SurfaceRangeSample,
+    CurveRangeLocalizeData, CurveRangeSample, SurfaceRangeLocalizeData, SurfaceRangeSample,
 };
 use rustycad_tkernel::{ncollection::IndexedMap, standard::Failure};
-pub(super) fn set_empty_result(
-    parameter: f64,
-    ranges: &mut MarkedRangeSet,
-) -> Result<bool, Failure> {
-    let indices = ranges.get_indices(parameter)?.to_vec();
-    if indices.is_empty() {
-        return Ok(false);
-    }
-    for index in indices {
-        if ranges.flag(index)? == 2 {
-            return Ok(false);
-        }
-    }
-    ranges.insert_range(parameter, parameter, 2)?;
-    Ok(true)
-}
+#[path = "empty_range.rs"]
+mod empty_range;
+pub(crate) use empty_range::set_empty_result;
 pub(super) fn merge_samples(
     curves: &[CurveRangeSample],
     surfaces: &[SurfaceRangeSample],
