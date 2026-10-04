@@ -151,7 +151,10 @@ impl GeomAdaptorTransformedSurface {
             let source = self.state.read();
             TransformedState {
                 trsf: source.trsf,
-                transformed: source.transformed.clone(),
+                transformed: source
+                    .transformed
+                    .as_ref()
+                    .map(|adaptor| Handle::new(adaptor.copy_value())),
             }
         };
         Ok(Self::from_parts(surf, state))

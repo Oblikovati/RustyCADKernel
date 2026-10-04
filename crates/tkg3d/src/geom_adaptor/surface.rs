@@ -133,6 +133,10 @@ impl GeomAdaptorSurface {
             state: SharedState::new(state),
         }
     }
+    /// Copies C++ value members while retaining nested OCCT handle identities.
+    pub(crate) fn copy_value(&self) -> Self {
+        Self::from_state(state::copy_value(&self.state.read()))
+    }
     /// The protected state, for the derived adaptors.
     pub(crate) fn cell(&self) -> &SharedState<SurfaceState> {
         &self.state

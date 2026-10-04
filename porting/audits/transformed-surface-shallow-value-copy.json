@@ -1,0 +1,60 @@
+{
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "GeomAdaptor_TransformedSurface::ShallowCopy value-copy semantics",
+  "native_sources": {
+    "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx": "ff2b2e383e3902bf87b20f374d1fdefd2f203749770c2bf0760889c9faea5bea",
+    "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.cxx": "d8390b9a286f14874cd6e218db1f1bca5022b8195b68b27d1bd32df151b511e2",
+    "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx": "eff24d657fc2e7b39ed3887bb000b22278ef685a04add8d5c94bde5d635a6891",
+    "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.cxx": "8b04435c1702dd1ae9763a0585206cc635dfe630bf0041ea6cc541315ecbcef2"
+  },
+  "native_behavior": [
+    "ShallowCopy invokes mySurf.ShallowCopy(), then assigns that GeomAdaptor_Surface value into the destination member.",
+    "The optional myTransformedAdaptor is assigned by value, so the containing adaptor state is independent.",
+    "GeomAdaptor_Surface's cached spline evaluator is an occ::handle<BSplSLib_Cache>; the value assignment retains that nested handle identity."
+  ],
+  "rust_sources": {
+    "crates/tkg3d/src/geom_adaptor/transformed_surface.rs": "f3cd02f862108459162d976e0461f7c099cffdb0f18f646d7db16f7cb7e6aba7",
+    "crates/tkg3d/src/geom_adaptor/surface.rs": "67e81b2e81b79d5a455f29b56da4233d3f46e87f696a6148d161fd9e818635f2",
+    "crates/tkg3d/src/geom_adaptor/surface_state.rs": "4e1c7d010f48a4d05d159fea4ffcb612066dcd61b82f7541dee09b6ffcb8497e",
+    "crates/tkg3d/src/geom_adaptor/surface_state_copy.rs": "de3f0885379188ceda42f7dcdd635aef1ab01a23d6d376332eb20a51c42162df",
+    "crates/tkg3d/src/geom_adaptor/surface_eval.rs": "1e779b0647ba4340e2edeae309d8ab99a43aed2930bb021231d4288de7ad476e",
+    "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs": "56f3b3dcbd16c88e72b55998f67e3d3cbff287d971491a45a2aec47b1caa045e"
+  },
+  "rust_behavior": [
+    "The original surf member still uses GeomAdaptorSurface::shallow_adaptor, which creates independent adaptor state and resets its caches as native ShallowCopy does.",
+    "The transformed optional is copied into a new GeomAdaptorSurface state; its Geometry handles and SharedBSplineSurfaceCache handles are cloned, not its adaptor wrapper.",
+    "The cache identity unit test verifies a copied BSpline/Bezier SurfaceState shares the same cache object."
+  ],
+  "native_probe": {
+    "source": "tools/oracle/transformed_surface_shallow_value_copy.cxx",
+    "source_sha256": "4e35935e0f947ca9ff764cf1965295432ddf4334f8c243ecaceda89e961415b0",
+    "expected": "tools/oracle/transformed_surface_shallow_value_copy.expected",
+    "expected_sha256": "7a47186880fd2dda736b079fcaabd654c26193b76ccb36a0ec8e94f902b5534e",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/transformed_surface_shallow_value_copy.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG3d -lTKG2d -lTKMath -lTKernel -o /tmp/transformed_surface_shallow_value_copy",
+    "execution": "/tmp/transformed_surface_shallow_value_copy",
+    "output_matches_expected": true,
+    "observations": [
+      "distinct-adaptor 1",
+      "cached-state-independent 1 1",
+      "original-state-independent 1 1"
+    ],
+    "libraries": {
+      "libTKG3d.so.8.1.0": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+      "libTKernel.so.8.1.0": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    }
+  },
+  "rust_validation": {
+    "focused": "cargo +1.98.1 test -p rustycad-tkg3d --test geom_adaptor_transformed_surface",
+    "focused_passed": 13,
+    "unit": "cargo +1.98.1 test -p rustycad-tkg3d --lib value_copy_shares_the_native_spline_cache_handle",
+    "unit_passed": 1,
+    "package": "cargo +1.98.1 test -p rustycad-tkg3d --lib --tests",
+    "package_exit_code": 0,
+    "clippy": "cargo +1.98.1 clippy -p rustycad-tkg3d --all-targets -- -D warnings",
+    "clippy_exit_code": 0
+  },
+  "limitations": [
+    "The supplemental probe is not an additional translated legacy test declaration.",
+    "The OCCT nested cache handle identity is established from native member declarations and generated value assignment; its private identity is not read directly from the probe because the contained GeomAdaptor_Surface is a base subobject, not an exposed derived probe object."
+  ]
+}
