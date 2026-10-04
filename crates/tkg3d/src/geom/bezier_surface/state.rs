@@ -110,8 +110,7 @@ impl SurfaceState {
     ) -> Result<(), Failure> {
         self.poles = rebased_grid(poles)?;
         if let Some(weights) = weights {
-            self.weights =
-                one_based_grid(self.poles.nb_rows() as i32, self.poles.nb_columns() as i32)?;
+            self.resize_weights_for_init()?;
             self.weights
                 .copy_values(weights)
                 .map_err(|error| error.into_failure("NCollection_Array2::CopyValues"))?;
@@ -122,6 +121,15 @@ impl SurfaceState {
         }
         self.max_deriv_inv_ok = false;
         self.eval_rep = Handle::default();
+        Ok(())
+    }
+    fn resize_weights_for_init(&mut self) -> Result<(), Failure> {
+        let rows: usize = self.poles.nb_rows();
+        let columns: usize = self.poles.nb_columns();
+        if (self.weights.nb_rows(), self.weights.nb_columns()) == (rows, columns) {
+            return Ok(());
+        }
+        self.weights = one_based_grid(rows as i32, columns as i32)?;
         Ok(())
     }
     /// `Rational(myWeights, ...)` then unit weights when neither direction is rational,

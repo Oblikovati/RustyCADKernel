@@ -112,6 +112,28 @@ void probe_same_count_weighted_crash()
   std::cerr << "after-same-count-init\n";
 }
 
+void probe_same_extent_copy_failure()
+{
+  const auto initial_poles = make_poles(2, 2, 1.);
+  const auto initial_weights = make_weights(2, 2, 1., 2.);
+  const auto changed_poles = make_poles(2, 2, 5.);
+  const auto wrong_weights = make_weights(1, 4, 1., 2.);
+  InitSurface surface(initial_poles, initial_weights);
+  try
+  {
+    surface.init(changed_poles, &wrong_weights);
+  }
+  catch (const Standard_Failure& error)
+  {
+    std::cout << "SameExtent " << error.ExceptionType() << '\n';
+  }
+  const auto& retained_weights = surface.WeightsArray();
+  std::cout << "SameExtentState " << surface.Poles()(1, 1).X() << ' '
+            << retained_weights(1, 1) << ' ' << retained_weights(1, 2) << ' '
+            << retained_weights(2, 1) << ' ' << retained_weights(2, 2) << ' '
+            << surface.IsURational() << ' ' << surface.IsVRational() << '\n';
+}
+
 void probe_dimension_failure()
 {
   const auto initial_poles = make_poles(2, 2, 1.);
@@ -146,4 +168,5 @@ int main(int argc, char** argv)
   probe_successful_reuse();
   probe_null_weights();
   probe_dimension_failure();
+  probe_same_extent_copy_failure();
 }

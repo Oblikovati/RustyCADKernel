@@ -98,3 +98,18 @@ fn protected_init_keeps_native_partial_state_on_dimension_error() {
     assert!(surface.has_eval_representation());
     assert_eq!(surface.resolution(1.).unwrap(), before);
 }
+
+#[test]
+fn same_extent_copy_error_retains_native_weight_storage() {
+    let surface =
+        GeomBezierSurface::with_weights(&poles(2, 2, 1.), &weights(2, 2, 1., 2.)).unwrap();
+    attach_plane_representation(&surface);
+    let error = surface
+        .init(&poles(2, 2, 5.), Some(&weights(1, 4, 1., 2.)))
+        .unwrap_err();
+    assert_eq!(error.exception_type(), "Standard_DimensionMismatch");
+    assert_eq!(surface.pole(1, 1).unwrap(), Point3::new(5., 5., 0.));
+    assert_eq!(surface.weights().unwrap().as_slice(), &[1., 2., 1., 2.]);
+    assert!(surface.is_u_rational() && !surface.is_v_rational());
+    assert!(surface.has_eval_representation());
+}

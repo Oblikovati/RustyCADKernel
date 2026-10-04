@@ -52386,7 +52386,7 @@
       "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
       "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::init",
       "status": "partial",
-      "notes": "Protected init exposed as a safe Rust reuse operation. Native oracle covers dimension-changing weighted initialization, zero and null weights, cache/representation invalidation, and partial state on exact-extent mismatch; see porting/audits/tkg3d-bezier-surface-protected-init.json. The pinned native library crashes for same-size weighted reinitialization from a nonrational instance; this observed failure domain is documented, not reproduced."
+      "notes": "Protected init exposed as a safe Rust reuse operation. Native oracle covers dimension-changing weighted initialization, zero and null weights, cache/representation invalidation, and partial state on exact-extent mismatches with both retained and resized weight storage; see porting/audits/tkg3d-bezier-surface-protected-init.json. The pinned native library crashes for same-size weighted reinitialization from a nonrational instance; this observed failure domain is documented, not reproduced."
     },
     {
       "upstream_id": "Geom_BezierSurface::Geom_BezierSurface(const Geom_BezierSurface&)",

@@ -9,9 +9,13 @@
   "native_probe": "tools/oracle/tkg3d_bezier_surface_init.cxx",
   "expected": "tools/oracle/tkg3d_bezier_surface_init.expected",
   "artifact_sha256": {
-    "tools/oracle/tkg3d_bezier_surface_init.cxx": "44535904999afa9c74487d6d656913d25fce98a4abc2cd05aabda9bfa058c0ba",
-    "tools/oracle/tkg3d_bezier_surface_init.expected": "92f9fbbcd8a67eabb12eb92fa3b97836c95b6d4efa15b66ae213976fd8a57819",
-    "crates/tkg3d/tests/bezier_surface_protected_init.rs": "2219caac47be6462556cbcbfd3c99ba1322d59194020dd94fe97548a32785f68"
+    "tools/oracle/tkg3d_bezier_surface_init.cxx": "98d9e4bfa74de8a6acbe667234f3fb46b0cd9208887857c971e06b446ec26167",
+    "tools/oracle/tkg3d_bezier_surface_init.expected": "8ba5f593685b1da17f55d6ff52925a2046f8b1dcce8e79f76001d42b232b569a",
+    "crates/tkg3d/tests/bezier_surface_protected_init.rs": "1918556b184c969d3a8c50e6ad8a10ec973ea4d40f690f4b129d8b8004ec272a"
+  },
+  "rust_source_sha256": {
+    "crates/tkg3d/src/geom/bezier_surface.rs": "5eac257daf8e12c27c6fa5069437450ae3c6dea899122411fc13dd53c52261a6",
+    "crates/tkg3d/src/geom/bezier_surface/state.rs": "f68a52f19c4ffc4617755402f08baef347054c110b7f7f1931ba93add29aab08"
   },
   "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkg3d_bezier_surface_init.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG3d -lTKMath -lTKernel -o /tmp/tkg3d_bezier_surface_init_probe",
   "native_profile": "Linux x86_64 GCC C++17 -O2 against the pinned modeling library",
@@ -22,12 +26,13 @@
   },
   "native_output_matches_expected": true,
   "rust_test": "crates/tkg3d/tests/bezier_surface_protected_init.rs",
-  "rust_cases": 4,
+  "rust_cases": 5,
   "verified_cases": [
     "constructor rejection and protected-init acceptance of equal zero weights",
     "dimension-changing weighted init, rationality recomputation, resolution cache invalidation, and evaluation representation clearing",
     "null weight pointer resets rationality and clears evaluation representation",
-    "same-total-size but mismatched 3x2 and 2x3 arrays raise Standard_DimensionMismatch after pole replacement, retaining prior rational flags, cached resolution and representation"
+    "same-total-size but mismatched 3x2 and 2x3 arrays raise Standard_DimensionMismatch after pole replacement, retaining prior rational flags, cached resolution and representation",
+    "same-sized destination storage is retained when incompatible 1x4 weights fail to copy into an existing 2x2 rational surface"
   ],
   "native_failure_domain": "Run `/tmp/tkg3d_bezier_surface_init_probe same-count-crash` after compiling the probe. It prints `before-same-count-init` and exits by SIGSEGV (shell status 139) when a nonrational 2x2 surface is reinitialized with same-size rational weights. Equivalent 2D and 3D Bezier curve probes also crash; see porting/audits/bezier-curve-protected-init.json. Rust safely completes these calls, so this input sequence remains an explicit behavior divergence.",
   "limitations": [
@@ -37,7 +42,7 @@
   ],
   "validation": {
     "focused_test": "cargo test -p rustycad-tkg3d --test bezier_surface_protected_init",
-    "focused_tests_passed": 4,
+    "focused_tests_passed": 5,
     "strict_clippy": "cargo clippy -p rustycad-tkg3d --all-targets -- -D warnings: passed"
   }
 }

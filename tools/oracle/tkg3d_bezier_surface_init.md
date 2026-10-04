@@ -5,7 +5,9 @@ validation with direct reinitialization, rationality and resolution changes, eva
 representation clearing, null-weight initialization, and partial state after a dimension
 exception. The 3x2 poles and 2x3 weights have the same total element count; OCCT checks
 both array extents and raises `Standard_DimensionMismatch` after resizing/copying poles.
-The post-failure probe reads only initialized fields, never the resized weight cells.
+The post-failure probes cover both a resized 3x2 weight array (whose cells are not read)
+and an unchanged 2x2 rational weight array (whose prior values are retained). The former
+reads only initialized fields, never the resized weight cells.
 
 Pinned OCCT revision: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 Header SHA-256: `f2f8352da27bbfdb7b5c86a1852fd19a119fcb3dc6662c2be0e7b04de73fa8c2`.
