@@ -62,6 +62,58 @@ fn generated_endpoint_images_are_connector_edges() -> Result<(), rustycad_tkerne
     Ok(())
 }
 
+#[test]
+fn supplied_endpoint_edges_are_reused_and_populated()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let path = edge((0.0, 0.0, 0.0), (0.0, 0.0, 10.0))?;
+    let rail1 = edge((1.0, 0.0, 0.0), (1.0, 0.0, 10.0))?;
+    let rail2 = edge((0.0, 1.0, 0.0), (0.0, 1.0, 10.0))?;
+    let (start1, _) = rustycad_tkbrep::topexp::vertices(&rail1, false);
+    let (start2, _) = rustycad_tkbrep::topexp::vertices(&rail2, false);
+    let (_, end1) = rustycad_tkbrep::topexp::vertices(&rail1, false);
+    let (_, end2) = rustycad_tkbrep::topexp::vertices(&rail2, false);
+    let first = BRepBuilderAPIMakeEdge::from_vertices(&start2, &start1)?.edge()?;
+    let last = BRepBuilderAPIMakeEdge::from_vertices(&end1, &end2)?.edge()?;
+    let offset = BRepOffsetOffset::from_edges_with_connectors(
+        &path,
+        &rail1,
+        &rail2,
+        0.5,
+        &first,
+        &last,
+        false,
+        1.0e-4,
+        Continuity::C1,
+    )?;
+    let (path_start, path_end) = rustycad_tkbrep::topexp::vertices(&path, false);
+    assert!(
+        offset
+            .generated(&path_start.into_shape())
+            .is_same(&first.clone().into_shape())
+    );
+    assert!(
+        offset
+            .generated(&path_end.into_shape())
+            .is_same(&last.clone().into_shape())
+    );
+    let face = offset.face();
+    for connector in [&first, &last] {
+        assert!(contains(
+            &face.clone().into_shape(),
+            &connector.clone().into_shape()
+        )?);
+        assert!(BRepTool::curve_on_face(connector, face)?.is_stored);
+        assert!(BRepTool::curve_with_location(connector)?.curve.is_some());
+    }
+    let face_shape = face.clone().into_shape();
+    assert_eq!(count(&face_shape, ShapeEnum::Edge), 4);
+    assert!(BRepCheckAnalyzer::new(&face_shape, true, false, false)?.is_valid()?);
+    let mut properties = GProps::default();
+    BRepGProp::surface_properties(&face_shape, &mut properties, false, false)?;
+    assert!((properties.mass() - 7.853_981_633_974_483).abs() < 1.0e-10);
+    Ok(())
+}
+
 fn edge(
     first: (f64, f64, f64),
     last: (f64, f64, f64),

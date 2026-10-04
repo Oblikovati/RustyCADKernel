@@ -3,7 +3,7 @@ use super::offset_rails::PipeFaceOptions;
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topexp::vertices,
-    topods::{Edge, Face, Wire},
+    topods::{Edge, Face, Vertex, Wire},
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
@@ -59,6 +59,12 @@ fn attach_pipe_wire(
 
 pub(super) type Bounds = (f64, f64, f64, f64);
 pub(super) type RailRanges = ((f64, f64), (f64, f64));
+
+struct ConnectorGeometry<'a> {
+    curve: &'a Handle<dyn Geom2dCurve>,
+    range: (f64, f64),
+    index: usize,
+}
 
 pub(super) fn install_rail_pcurves(
     builder: &BRepBuilder,
@@ -153,16 +159,24 @@ fn set_rail_pcurve(
 }
 
 pub(super) fn make_connectors(
-    surface: &Handle<dyn GeomSurface>,
+    face: &Face,
     edges: [&Edge; 2],
-    exchange_uv: bool,
     bounds: Bounds,
-    tolerance: f64,
+    path_tolerance: f64,
+    options: &PipeFaceOptions<'_>,
 ) -> Result<Vec<Edge>, Failure> {
     let endpoints = connector_endpoints(edges);
-    let (curves, range) = connector_geometry(exchange_uv, bounds);
+    let (curves, range) = connector_geometry(options.exchange_uv, bounds);
     let builder = BRepBuilder::default();
-    make_connector_pair(&builder, surface, &curves, endpoints, range, tolerance)
+    make_connector_pair(
+        &builder,
+        face,
+        &curves,
+        endpoints,
+        range,
+        path_tolerance,
+        options,
+    )
 }
 
 fn connector_endpoints(edges: [&Edge; 2]) -> [[rustycad_tkbrep::topods::Vertex; 2]; 2] {
@@ -173,27 +187,36 @@ fn connector_endpoints(edges: [&Edge; 2]) -> [[rustycad_tkbrep::topods::Vertex; 
 
 fn make_connector_pair(
     builder: &BRepBuilder,
-    surface: &Handle<dyn GeomSurface>,
+    face: &Face,
     curves: &[Handle<dyn Geom2dCurve>; 2],
     endpoints: [[rustycad_tkbrep::topods::Vertex; 2]; 2],
     range: (f64, f64),
-    tolerance: f64,
+    path_tolerance: f64,
+    options: &PipeFaceOptions<'_>,
 ) -> Result<Vec<Edge>, Failure> {
     let start = make_connector(
         builder,
-        &curves[0],
-        surface,
+        face,
         [&endpoints[0][0], &endpoints[0][1]],
-        range,
-        tolerance,
+        path_tolerance,
+        options,
+        ConnectorGeometry {
+            curve: &curves[0],
+            range,
+            index: 0,
+        },
     )?;
     let end = make_connector(
         builder,
-        &curves[1],
-        surface,
+        face,
         [&endpoints[1][0], &endpoints[1][1]],
-        range,
-        tolerance,
+        path_tolerance,
+        options,
+        ConnectorGeometry {
+            curve: &curves[1],
+            range,
+            index: 1,
+        },
     )?;
     Ok([start, end].into())
 }
@@ -222,16 +245,104 @@ fn connector_geometry(
 
 fn make_connector(
     builder: &BRepBuilder,
-    pcurve: &Handle<dyn Geom2dCurve>,
-    surface: &Handle<dyn GeomSurface>,
+    face: &Face,
     vertices: [&rustycad_tkbrep::topods::Vertex; 2],
-    range: (f64, f64),
-    tolerance: f64,
+    path_tolerance: f64,
+    options: &PipeFaceOptions<'_>,
+    geometry: ConnectorGeometry<'_>,
 ) -> Result<Edge, Failure> {
+    let supplied = options.supplied_connectors[geometry.index];
+    if let Some((edge, reversed)) = supplied_connector(supplied, vertices)? {
+        let curve = reverse_connector_curve(geometry.curve, reversed)?;
+        let range = reverse_connector_range(geometry.range, reversed);
+        return update_supplied_connector(
+            builder,
+            edge,
+            &curve,
+            face,
+            range,
+            path_tolerance,
+            options,
+        );
+    }
     let mut edge = Edge::default();
     builder.make_edge(&mut edge)?;
     add_connector_vertices(builder, &mut edge, vertices)?;
-    attach_connector_geometry(builder, &edge, pcurve, surface, range, tolerance)?;
+    attach_connector_geometry(
+        builder,
+        &edge,
+        geometry.curve,
+        options.surface,
+        geometry.range,
+        path_tolerance,
+    )?;
+    Ok(edge)
+}
+
+fn supplied_connector(
+    supplied: Option<&Edge>,
+    endpoints: [&Vertex; 2],
+) -> Result<Option<(Edge, bool)>, Failure> {
+    let Some(edge) = supplied else {
+        return Ok(None);
+    };
+    if !edge.location().is_identity() {
+        return Err(unsupported_edge("Connector"));
+    }
+    let (first, last) = vertices(edge, false);
+    if first.is_same(endpoints[0]) && last.is_same(endpoints[1]) {
+        return Ok(Some((
+            Edge::unchecked(edge.oriented(Orientation::Forward)),
+            false,
+        )));
+    }
+    if first.is_same(endpoints[1]) && last.is_same(endpoints[0]) {
+        return Ok(Some((
+            Edge::unchecked(edge.oriented(Orientation::Reversed)),
+            true,
+        )));
+    }
+    Ok(None)
+}
+
+fn reverse_connector_curve(
+    curve: &Handle<dyn Geom2dCurve>,
+    reverse: bool,
+) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+    if reverse {
+        curve.reversed()
+    } else {
+        Ok(curve.clone())
+    }
+}
+
+fn reverse_connector_range(range: (f64, f64), reverse: bool) -> (f64, f64) {
+    if reverse { (-range.1, -range.0) } else { range }
+}
+
+fn update_supplied_connector(
+    builder: &BRepBuilder,
+    edge: Edge,
+    pcurve: &Handle<dyn Geom2dCurve>,
+    face: &Face,
+    range: (f64, f64),
+    path_tolerance: f64,
+    options: &PipeFaceOptions<'_>,
+) -> Result<Edge, Failure> {
+    builder.update_edge_pcurve(
+        &edge,
+        pcurve,
+        options.surface,
+        &Location::default(),
+        path_tolerance,
+        None,
+    )?;
+    builder.range_on_face(&edge, face, range.0, range.1)?;
+    build_curve3d(&edge, path_tolerance, Continuity::C1, 11, 30)?;
+    builder.same_range(&edge, false)?;
+    builder.same_parameter(&edge, false)?;
+    same_range(&edge, path_tolerance)?;
+    same_parameter_edge(&edge, options.tolerance)?;
     Ok(edge)
 }
 

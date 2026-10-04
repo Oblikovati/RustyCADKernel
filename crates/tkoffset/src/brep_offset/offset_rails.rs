@@ -39,6 +39,7 @@ pub(super) struct PipeFaceOptions<'a> {
     pub(super) exchange_uv: bool,
     pub(super) error: f64,
     pub(super) tolerance: f64,
+    pub(super) supplied_connectors: [Option<&'a Edge>; 2],
 }
 
 impl Default for BRepOffsetOffset {
@@ -76,6 +77,35 @@ impl BRepOffsetOffset {
         let mut result = Self::new();
         result.init_edges(
             path, edge1, edge2, offset, polynomial, tolerance, continuity,
+        )?;
+        Ok(result)
+    }
+
+    /// Builds the rail face with caller-supplied endpoint connector edges.
+    /// `BRepOffsetOffset::from_edges_with_connectors(&path, &a, &b, 0.5, &start, &end, false, 1e-4, Continuity::C1)?`.
+    #[allow(clippy::too_many_arguments)]
+    pub fn from_edges_with_connectors(
+        path: &Edge,
+        edge1: &Edge,
+        edge2: &Edge,
+        offset: f64,
+        first_connector: &Edge,
+        last_connector: &Edge,
+        polynomial: bool,
+        tolerance: f64,
+        continuity: Continuity,
+    ) -> Result<Self, Failure> {
+        let mut result = Self::new();
+        result.init_edges_with_connectors(
+            path,
+            edge1,
+            edge2,
+            offset,
+            first_connector,
+            last_connector,
+            polynomial,
+            tolerance,
+            continuity,
         )?;
         Ok(result)
     }
@@ -139,6 +169,57 @@ impl BRepOffsetOffset {
         tolerance: f64,
         continuity: Continuity,
     ) -> Result<(), Failure> {
+        self.initialize_rails(
+            path,
+            edge1,
+            edge2,
+            offset,
+            polynomial,
+            tolerance,
+            continuity,
+            [None, None],
+        )
+    }
+
+    /// Reinitializes using supplied start/end connector edges, mutating all p-curves natively.
+    /// `offset.init_edges_with_connectors(&path, &a, &b, 0.5, &start, &end, false, 1e-4, Continuity::C1)?`.
+    #[allow(clippy::too_many_arguments)]
+    pub fn init_edges_with_connectors(
+        &mut self,
+        path: &Edge,
+        edge1: &Edge,
+        edge2: &Edge,
+        offset: f64,
+        first_connector: &Edge,
+        last_connector: &Edge,
+        polynomial: bool,
+        tolerance: f64,
+        continuity: Continuity,
+    ) -> Result<(), Failure> {
+        self.initialize_rails(
+            path,
+            edge1,
+            edge2,
+            offset,
+            polynomial,
+            tolerance,
+            continuity,
+            [Some(first_connector), Some(last_connector)],
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn initialize_rails(
+        &mut self,
+        path: &Edge,
+        edge1: &Edge,
+        edge2: &Edge,
+        offset: f64,
+        polynomial: bool,
+        tolerance: f64,
+        continuity: Continuity,
+        supplied_connectors: [Option<&Edge>; 2],
+    ) -> Result<(), Failure> {
         self.initial = path.clone().into_shape();
         self.status = BRepOffsetStatus::Good;
         self.face_image = None;
@@ -152,7 +233,7 @@ impl BRepOffsetOffset {
         self.install_result(
             path,
             [edge1, edge2],
-            pipe_face_options(&pipe, &surface, tolerance),
+            pipe_face_options(&pipe, &surface, tolerance, supplied_connectors),
         )
     }
 
@@ -221,12 +302,14 @@ fn pipe_face_options<'a>(
     pipe: &GeomFillPipe,
     surface: &'a Handle<dyn GeomSurface>,
     tolerance: f64,
+    supplied_connectors: [Option<&'a Edge>; 2],
 ) -> PipeFaceOptions<'a> {
     PipeFaceOptions {
         surface,
         exchange_uv: pipe.exchange_uv(),
         error: pipe.error_on_surf(),
         tolerance,
+        supplied_connectors,
     }
 }
 
@@ -254,13 +337,7 @@ fn build_pipe_boundaries(
     let bounds = options.surface.bounds();
     let path_tolerance = BRepTool::edge_tolerance(path)?;
     install_rail_pcurves(builder, face, rails, options, path_tolerance)?;
-    make_connectors(
-        options.surface,
-        rails,
-        options.exchange_uv,
-        bounds,
-        path_tolerance,
-    )
+    make_connectors(face, rails, bounds, path_tolerance, options)
 }
 
 fn new_pipe_face(path: &Edge, surface: &Handle<dyn GeomSurface>) -> Result<Face, Failure> {
