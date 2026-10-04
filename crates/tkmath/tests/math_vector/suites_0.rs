@@ -73,9 +73,9 @@ fn MathVectorTest__InitAndAccess() {
     assert_eq!(aVec[2], 15.0);
 
     // Test Value method
-    aVec[3] = 25.0;
+    *aVec.change_value(3).unwrap() = 25.0;
     assert_eq!(aVec[3], 25.0);
-    assert_eq!(aVec[3], 25.0);
+    assert_eq!(*aVec.value(3).unwrap(), 25.0);
 }
 
 // Tests for vector properties
