@@ -19,12 +19,13 @@ mod purge;
 /// `MMgrOpt::set_call_back_function(Some(log))`.
 pub type OptCallBack = fn(bool, StorageAddress, usize, usize);
 
-/// Opaque memory returned by the protected `AllocMemory` hook; `block.allocated_size()`.
-/// Its address is only a numeric capability and cannot be dereferenced by safe Rust.
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+/// Opaque memory returned by protected `AllocMemory`; `block.allocated_size()`.
+/// Its address cannot be dereferenced by safe Rust; successful release marks this handle spent.
+#[derive(Debug, Eq, PartialEq)]
 pub struct MMgrOptSystemBlock {
     address: StorageAddress,
     allocated_size: usize,
+    released: bool,
 }
 
 impl MMgrOptSystemBlock {
@@ -131,6 +132,7 @@ impl MMgrOpt {
         Ok(MMgrOptSystemBlock {
             address,
             allocated_size,
+            released: false,
         })
     }
 
@@ -153,12 +155,12 @@ impl MMgrOpt {
             .ok_or_else(|| invalid_system_block(block.address, block.allocated_size))
     }
 
-    /// Releases a raw region with its exact returned size; `manager.free_system_memory(&block, size)?`.
+    /// Releases a raw region with its exact returned size; `manager.free_system_memory(&mut block, size)?`.
     /// Native `FreeMemory` permits smaller mapped sizes that partially unmap a region; this safe
     /// facade rejects those calls because its `AddressSpace` owns complete regions.
     pub fn free_system_memory(
         &mut self,
-        block: &MMgrOptSystemBlock,
+        block: &mut MMgrOptSystemBlock,
         size: usize,
     ) -> Result<(), Failure> {
         if size != block.allocated_size {
@@ -170,11 +172,14 @@ impl MMgrOpt {
         }
         self.validate_system_block(block)?;
         self.free_memory(block.address.get());
+        block.released = true;
         Ok(())
     }
 
     fn validate_system_block(&self, block: &MMgrOptSystemBlock) -> Result<(), Failure> {
-        if self.space.region_len(block.address.get()) == Some(block.allocated_size) {
+        if !block.released
+            && self.space.region_len(block.address.get()) == Some(block.allocated_size)
+        {
             return Ok(());
         }
         Err(invalid_system_block(block.address, block.allocated_size))

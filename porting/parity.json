@@ -83040,6 +83040,30 @@
       "notes": "Runs Initialize: fewer than 100 pages means 1000, the cell size is rounded up to 16, free-list max = ROUNDUP8(threshold - 1) >> 3 with wrapping, mapping needs a non-zero OS page size. Default implements the header's default arguments. The manager keeps OCCT's intrusive 8-byte headers and free-list links inside real heap regions addressed by their numeric start, so rounded sizes, pool offsets, reuse order and Purge counts match the native class. The differential probe (services_ operations) compares it with the native kernel."
     },
     {
+      "upstream_id": "Standard_MMgrOpt::Initialize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::new",
+      "status": "partial",
+      "notes": "Protected initialization runs from the Rust constructor, which applies the tested page-size, page-count, free-list, mapping and cell-size setup. The independent protected call has no safe equivalent: native reinitialization replaces free-list/mapping resources while retaining cursor state. Candidate c:@S@Standard_MMgrOpt@F@Initialize#, header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::AllocMemory(size_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::allocate_system_memory",
+      "status": "partial",
+      "notes": "Safe opaque-region facade reuses AddressSpace and preserves the size_t& output: mapped allocations page-align, heap allocations retain the request, and clear=true zeroes bytes. Native candidate id ffad98e5defb56342ecf33107051752086a17add375e72d949c15c895e5c8730 / USR c:@S@Standard_MMgrOpt@F@AllocMemory#&l#; header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22. The safe backing zeroes heap contents even with clear=false; non-Linux backends remain unverified."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::FreeMemory(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::free_system_memory",
+      "status": "partial",
+      "notes": "The safe facade validates the region and releases it with the exact size returned by AllocMemory. It marks the non-Copy token released after success; validation uses the current region base and size, without a generation identifier. Native FreeMemory uses PAGE_ALIGN(theSize), so a smaller size can validly unmap only a prefix; Rust rejects that transition because AddressSpace tracks whole regions. Native candidate id fa1d13d431ed54bf5519fee6aafdc78a32cb578bb0b790e27857a766b219d599 / USR c:@S@Standard_MMgrOpt@F@FreeMemory#*v#l#; header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22."
+    },
+    {
       "upstream_id": "Standard_MMgrOpt::~Standard_MMgrOpt()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",

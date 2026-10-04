@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "scope": "Standard_MMgrOpt protected allocation hooks",
+  "tested_rust_base_revision": "9710f98f4f0c072ef94303a38bf1e1ce4847a01b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_files": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "declaration_ids": {
+    "Initialize": "d3af4a958200e39e65136deafddc037d5bdbd84edfa67227f518cd98aec6bcb0",
+    "AllocMemory": "ffad98e5defb56342ecf33107051752086a17add375e72d949c15c895e5c8730",
+    "FreeMemory": "fa1d13d431ed54bf5519fee6aafdc78a32cb578bb0b790e27857a766b219d599"
+  },
+  "native_probe": {
+    "path": "tools/oracle/tkernel_mmgr_alloc_memory.cxx",
+    "sha256": "5778495de1fcc189123d3cf2120da7c4729baf164addd34472e63db81799172a",
+    "expected_path": "tools/oracle/tkernel_mmgr_alloc_memory.expected",
+    "expected_sha256": "dd80ade39c628ff91e1d9de14f18ea5842414903a8d30c9a7344765f63485977",
+    "native_library_sha256": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b",
+    "observed": "page=4096 mapped_size=1 mapped_zero=1 partial_tail=1 malloc_size=1 malloc_zero=1"
+  },
+  "rust_validation": {
+    "command": "cargo test -p rustycad-tkernel --test standard_services_api_behavior mmgr -- --nocapture",
+    "passed": 16,
+    "failed": 0,
+    "compressed_log": "porting/runtime-evidence/tkernel-mmgr-alloc-memory-rust-tests.log.gz",
+    "compressed_log_sha256": "d1a1c00dc7ca4befe1218f5fc9885423b25fa1e96559ea488b47c782b8368b5a",
+    "rust_source_sha256": "893d09620ba371314979a461accdceda86e594906cfcc60756748d5bb4649e7b",
+    "address_space_sha256": "c900b270179d1e14649a74f92c5374426a585c5a74cde8dc0dd7c94f3d124b9f",
+    "test_source_sha256": "2aeb6c0c10e70bf7943b94be8878eaf6ee74f38ab9f18a51315e57c3080cfbca",
+    "parity_ledger_sha256": "608fd3977737d71bf768544ef8cc5a7ad62355043eda355480a690968ed13fe6"
+  },
+  "rust_targets": {
+    "MMgrOpt::allocate_system_memory": "partial: exact AllocMemory size output, page alignment, and byte access are covered; clear=false heap bytes are safely zero-initialized",
+    "MMgrOpt::free_system_memory": "partial: exact-size region free is covered; native smaller sizes can partially unmap and remain unsupported",
+    "MMgrOpt::new": "partial for protected Initialize: constructor invokes equivalent initialization; standalone reinitialization is not exposed"
+  }
+}
