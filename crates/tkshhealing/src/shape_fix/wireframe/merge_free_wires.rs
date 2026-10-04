@@ -1,8 +1,12 @@
+mod candidates;
+pub(super) use candidates::MergePolicy;
+use candidates::{CandidatePair, candidate_pair, linked_face_order_allows_join};
+
 use super::{
     FixRoot, ShapeFixWireframe, join_3d::join_edges_3d, repair::unported_small_edge_merge,
 };
 use crate::{
-    shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire},
+    shape_analysis::ShapeAnalysisWire,
     shape_build::ShapeBuildReShape,
     shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData},
     shape_fix::{ShapeFix, ShapeFixWire},
@@ -10,63 +14,13 @@ use crate::{
 use rustycad_tkbrep::{
     brep_tools::ReShape,
     topexp::Explorer,
-    topods::{self, Edge, Face, Wire},
+    topods::{self, Edge, Wire},
     toptools::MapOfShape,
 };
 use rustycad_tkernel::{
     message::ProgressRange,
-    precision,
     standard::{Failure, Handle},
 };
-use rustycad_tkg3d::{geom::GeomCurve, top_abs::Orientation};
-use rustycad_tkmath::gp::Vector3;
-
-struct CandidatePair {
-    first: Edge,
-    second: Edge,
-    middle_index: i32,
-    previous_index: i32,
-    next_index: i32,
-    take_next: bool,
-    faces: Vec<Face>,
-    minimum_angle: f64,
-}
-
-struct PairIndexes {
-    middle: i32,
-    previous: i32,
-    next: i32,
-}
-
-struct CandidateEdges {
-    before: Edge,
-    middle: Edge,
-    after: Edge,
-}
-
-pub(super) struct MergePolicy {
-    faces: Vec<Face>,
-    angle_limit: Option<f64>,
-    drop_mode: bool,
-}
-
-impl MergePolicy {
-    pub(super) fn free(angle_limit: Option<f64>, drop_mode: bool) -> Self {
-        Self {
-            faces: Vec::new(),
-            angle_limit,
-            drop_mode,
-        }
-    }
-
-    pub(super) fn face(face: &Face, angle_limit: Option<f64>) -> Self {
-        Self {
-            faces: vec![face.clone()],
-            angle_limit,
-            drop_mode: false,
-        }
-    }
-}
 
 pub(super) fn merge_small_edges(
     fixer: &ShapeFixWireframe,
@@ -78,13 +32,14 @@ pub(super) fn merge_small_edges(
     if !multiple.is_empty() {
         return Err(unported_small_edge_merge());
     }
-    merge_free_wire_candidates(fixer, small, &MergePolicy::free(angle_limit, drop_mode))
+    let mut policy = MergePolicy::free(angle_limit, drop_mode);
+    merge_free_wire_candidates(fixer, small, &mut policy)
 }
 
 fn merge_free_wire_candidates(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
     let context = fixer.context();
     let mut changed = false;
@@ -107,7 +62,7 @@ fn merge_one_free_wire(
     source: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
     let applied = ReShape::apply(
         &**context,
@@ -124,7 +79,7 @@ pub(super) fn merge_wire_with_faces(
     wire: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
     let tool = prepared_wire_fixer(wire, context)?;
     let wire_data = tool.wire_data()?;
@@ -148,7 +103,7 @@ fn merge_wire_data(
     source: &Wire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
     let changed = merge_wire_candidates(fixer, wire_data, small, policy)?;
     if changed {
@@ -194,7 +149,7 @@ fn merge_wire_candidates(
     fixer: &ShapeFixWireframe,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
     let mut index = 1;
     let mut changed = false;
@@ -237,148 +192,16 @@ fn merge_small_at_index(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     index: i32,
-    policy: &MergePolicy,
+    policy: &mut MergePolicy,
 ) -> Result<Option<i32>, Failure> {
     let count = wire_data.nb_edges();
     let previous = if index == 1 { count } else { index - 1 };
     let next = if index == count { 1 } else { index + 1 };
-    let pair = candidate_pair(wire_data, small, index, previous, next, policy)?;
+    let pair = candidate_pair(wire_data, small, index, previous, next, &*policy)?;
     let Some(pair) = pair else {
         return Ok(None);
     };
-    merge_candidate_pair(fixer, wire_data, small, &pair)
-}
-
-fn candidate_pair(
-    wire_data: &Handle<ShapeExtendWireData>,
-    small: &MapOfShape,
-    index: i32,
-    previous: i32,
-    next: i32,
-    policy: &MergePolicy,
-) -> Result<Option<CandidatePair>, Failure> {
-    let Some(edges) = candidate_edges(wire_data, small, index, previous, next)? else {
-        return Ok(None);
-    };
-    let indexes = PairIndexes {
-        middle: index,
-        previous,
-        next,
-    };
-    limited_candidate_pair(edges, indexes, policy)
-}
-
-fn limited_candidate_pair(
-    edges: CandidateEdges,
-    indexes: PairIndexes,
-    policy: &MergePolicy,
-) -> Result<Option<CandidatePair>, Failure> {
-    let pair = select_candidate_pair(edges, indexes, &policy.faces)?;
-    if exceeds_pair_angle_limit(&pair, policy.angle_limit) {
-        return Ok(None);
-    }
-    Ok(Some(pair))
-}
-
-fn candidate_edges(
-    wire_data: &Handle<ShapeExtendWireData>,
-    small: &MapOfShape,
-    index: i32,
-    previous: i32,
-    next: i32,
-) -> Result<Option<CandidateEdges>, Failure> {
-    let middle = wire_data.edge(index)?;
-    if !is_mergeable_middle(small, &middle, index, previous, next) {
-        return Ok(None);
-    }
-    Ok(Some(CandidateEdges {
-        before: wire_data.edge(previous)?,
-        middle,
-        after: wire_data.edge(next)?,
-    }))
-}
-
-fn exceeds_pair_angle_limit(pair: &CandidatePair, limit: Option<f64>) -> bool {
-    limit.is_some_and(|maximum| pair.minimum_angle > maximum)
-}
-
-fn select_candidate_pair(
-    edges: CandidateEdges,
-    indexes: PairIndexes,
-    faces: &[Face],
-) -> Result<CandidatePair, Failure> {
-    let (take_next, minimum_angle) = choose_next_pair(&edges.before, &edges.middle, &edges.after)?;
-    let (first, second) = selected_pair_edges(edges, take_next);
-    Ok(CandidatePair {
-        first,
-        second,
-        middle_index: indexes.middle,
-        previous_index: indexes.previous,
-        next_index: indexes.next,
-        take_next,
-        faces: faces.to_vec(),
-        minimum_angle,
-    })
-}
-
-fn selected_pair_edges(edges: CandidateEdges, take_next: bool) -> (Edge, Edge) {
-    if take_next {
-        (edges.middle, edges.after)
-    } else {
-        (edges.before, edges.middle)
-    }
-}
-
-fn is_mergeable_middle(
-    small: &MapOfShape,
-    middle: &Edge,
-    index: i32,
-    previous: i32,
-    next: i32,
-) -> bool {
-    small.contains(&middle.clone().into_shape())
-        && index != previous
-        && index != next
-        && previous != next
-}
-
-fn choose_next_pair(before: &Edge, middle: &Edge, after: &Edge) -> Result<(bool, f64), Failure> {
-    let angle_before = adjacent_angle(before, middle)?;
-    let angle_after = adjacent_angle(middle, after)?;
-    if (angle_after - angle_before).abs() > precision::angular() {
-        return Ok((angle_after < angle_before, angle_before.min(angle_after)));
-    }
-    Ok((false, angle_before.min(angle_after)))
-}
-
-fn adjacent_angle(first: &Edge, second: &Edge) -> Result<f64, Failure> {
-    let (first_curve, _, first_last) = ShapeAnalysisEdge::new().curve_3d(first, true)?;
-    let (second_curve, second_first, _) = ShapeAnalysisEdge::new().curve_3d(second, true)?;
-    let first_tangent = tangent_at(&first_curve, first_last)?;
-    let second_tangent = tangent_at(&second_curve, second_first)?;
-    let first_tangent = oriented_tangent(first_tangent, first.orientation());
-    let second_tangent = oriented_tangent(second_tangent, second.orientation());
-    angle_or_right_angle(first_tangent, second_tangent)
-}
-
-fn tangent_at(curve: &Handle<dyn GeomCurve>, parameter: f64) -> Result<Vector3, Failure> {
-    Ok(curve.d1(parameter)?.1)
-}
-
-fn oriented_tangent(tangent: Vector3, orientation: Orientation) -> Vector3 {
-    if orientation == Orientation::Reversed {
-        return -tangent;
-    }
-    tangent
-}
-
-fn angle_or_right_angle(first: Vector3, second: Vector3) -> Result<f64, Failure> {
-    if first.square_magnitude() < precision::square_confusion()
-        || second.square_magnitude() < precision::square_confusion()
-    {
-        return Ok(std::f64::consts::FRAC_PI_2);
-    }
-    Ok(first.angle(second)?.abs())
+    merge_candidate_pair(fixer, wire_data, small, &pair, policy)
 }
 
 fn merge_candidate_pair(
@@ -386,10 +209,16 @@ fn merge_candidate_pair(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     pair: &CandidatePair,
+    policy: &mut MergePolicy,
 ) -> Result<Option<i32>, Failure> {
+    if !linked_face_order_allows_join(fixer, pair, policy)? {
+        fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Fail1);
+        return Ok(None);
+    }
     let Some(joined) = join_edges_3d(&pair.first, &pair.second, &pair.faces)? else {
         return Ok(None);
     };
+    remember_joined_edge(policy, pair, &joined.edge);
     install_joined_edge(fixer, wire_data, small, pair, joined)?;
     fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Done1);
     Ok(Some(if pair.take_next {
@@ -397,6 +226,18 @@ fn merge_candidate_pair(
     } else {
         pair.middle_index.max(1)
     }))
+}
+
+fn remember_joined_edge(policy: &mut MergePolicy, pair: &CandidatePair, joined: &Edge) {
+    if policy.edge_faces.is_empty() {
+        return;
+    }
+    let faces = pair
+        .faces
+        .iter()
+        .map(|face| face.clone().into_shape())
+        .collect();
+    policy.edge_faces.push((joined.clone().into_shape(), faces));
 }
 
 fn install_joined_edge(

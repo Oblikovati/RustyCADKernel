@@ -1,26 +1,24 @@
-use crate::{shape_analysis::ShapeAnalysisEdge, shape_construct::ShapeConstructCurve};
+use crate::shape_construct::ShapeConstructCurveJoin2dRequest;
+use crate::{
+    shape_analysis::ShapeAnalysisEdge,
+    shape_construct::{ShapeConstructCurve, ShapeConstructCurveJoin3d},
+};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topods::{Builder, Edge, Face},
 };
-use rustycad_tkernel::{
-    precision,
-    standard::{Failure, Handle},
-};
-use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBoundedCurve, Geom2dCurve};
-use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBoundedCurve, GeomCurve};
+use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
+use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::Orientation;
-use rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve;
-use rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve as CompCurve2d;
-use rustycad_tkmath::{convert::ParameterisationType, gp::Point3};
 
 pub(super) struct JoinedEdge3d {
     pub edge: Edge,
     pub replace_first: bool,
 }
 
-type JoinedCurve3d = (Handle<GeomBSplineCurve>, (f64, f64), bool);
-type JoinedCurve2d = (Handle<Geom2dBSplineCurve>, (f64, f64));
+type JoinedCurve3d = (Handle<GeomBSplineCurve>, (f64, f64), bool, bool, bool);
+type JoinedCurve2d = (Handle<Geom2dBSplineCurve>, (f64, f64), bool);
 
 pub(super) fn join_edges_3d(
     first: &Edge,
@@ -30,11 +28,20 @@ pub(super) fn join_edges_3d(
     if has_seam(first, second, faces)? {
         return Ok(None);
     }
-    let Some((curve, range, replace_first)) = joined_curve(first, second)? else {
+    let Some((curve, range, mut replace_first, reverse_first, reverse_second)) =
+        joined_curve(first, second)?
+    else {
         return Ok(None);
     };
     let mut edge = make_joined_edge(first, second, &curve, range)?;
-    if !append_face_pcurves(&mut edge, first, second, faces)? {
+    if !append_face_pcurves(
+        &mut edge,
+        first,
+        second,
+        faces,
+        (reverse_first, reverse_second),
+        &mut replace_first,
+    )? {
         return Ok(None);
     }
     Ok(Some(JoinedEdge3d {
@@ -58,9 +65,11 @@ fn append_face_pcurves(
     first: &Edge,
     second: &Edge,
     faces: &[Face],
+    reversed_3d: (bool, bool),
+    replace_first: &mut bool,
 ) -> Result<bool, Failure> {
     for face in faces {
-        if !append_face_pcurve(joined, first, second, face)? {
+        if !append_face_pcurve(joined, first, second, face, reversed_3d, replace_first)? {
             return Ok(false);
         }
     }
@@ -72,10 +81,16 @@ fn append_face_pcurve(
     first: &Edge,
     second: &Edge,
     face: &Face,
+    reversed_3d: (bool, bool),
+    replace_first: &mut bool,
 ) -> Result<bool, Failure> {
-    let Some((curve, range)) = joined_pcurve(first, second, face)? else {
+    let Some((curve, range, reversed_first)) = joined_pcurve(first, second, face, reversed_3d)?
+    else {
         return Ok(false);
     };
+    if reversed_first {
+        *replace_first = false;
+    }
     install_face_pcurve(joined, face, &curve, range)?;
     Ok(true)
 }
@@ -84,6 +99,7 @@ fn joined_pcurve(
     first: &Edge,
     second: &Edge,
     face: &Face,
+    reversed_3d: (bool, bool),
 ) -> Result<Option<JoinedCurve2d>, Failure> {
     let analysis = ShapeAnalysisEdge::new();
     let first_curve = analysis.pcurve_on_face(first, face, false)?;
@@ -91,61 +107,38 @@ fn joined_pcurve(
     if first_curve.0.is_null() || second_curve.0.is_null() {
         return Ok(None);
     }
-    let first_curve = oriented_pcurve(first, first_curve)?;
-    let second_curve = oriented_pcurve(second, second_curve)?;
-    compose_pcurves(first_curve, second_curve)
-}
-
-fn oriented_pcurve(
-    edge: &Edge,
-    (curve, mut first, mut last): (Handle<dyn Geom2dCurve>, f64, f64),
-) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
-    let copy: Handle<dyn Geom2dCurve> = curve.copy()?.cast();
-    if edge.orientation() == Orientation::Reversed {
-        (first, last) = reversed_pcurve_range(&curve, first, last)?;
-        copy.reverse()?;
-    }
-    ShapeConstructCurve.convert_to_bspline_2d(&copy, first, last, precision::confusion())
-}
-
-fn reversed_pcurve_range(
-    curve: &Handle<dyn Geom2dCurve>,
-    first: f64,
-    last: f64,
-) -> Result<(f64, f64), Failure> {
-    Ok((
-        curve.reversed_parameter(last)?,
-        curve.reversed_parameter(first)?,
-    ))
-}
-
-fn compose_pcurves(
-    first: Handle<Geom2dBSplineCurve>,
-    second: Handle<Geom2dBSplineCurve>,
-) -> Result<Option<JoinedCurve2d>, Failure> {
-    let ranges = (
-        (first.first_parameter(), first.last_parameter()),
-        (second.first_parameter(), second.last_parameter()),
-    );
-    let curve = append_pcurve_bspline(&first, &second)?;
-    Ok(curve.map(|curve| (curve, composed_pcurve_range(ranges.0, ranges.1))))
-}
-
-fn append_pcurve_bspline(
-    first: &Handle<Geom2dBSplineCurve>,
-    second: &Handle<Geom2dBSplineCurve>,
-) -> Result<Option<Handle<Geom2dBSplineCurve>>, Failure> {
-    let bounded = first.cast::<dyn Geom2dBoundedCurve>();
-    let mut builder = CompCurve2d::with_curve(&bounded, ParameterisationType::TgtThetaOver2)?;
-    let added = builder.add(
-        &second.cast::<dyn Geom2dBoundedCurve>(),
-        precision::confusion(),
-        true,
-    )?;
-    if !added {
+    let mut request = ShapeConstructCurveJoin2dRequest {
+        first: first_curve.0,
+        second: second_curve.0,
+        first_orientation: effective_orientation(first, reversed_3d.0),
+        second_orientation: effective_orientation(second, reversed_3d.1),
+        first_range: (first_curve.1, first_curve.2),
+        second_range: (second_curve.1, second_curve.2),
+        is_error: joined_same_vertex(first, second),
+    };
+    let result = ShapeConstructCurve.join_curves_2d(&mut request)?;
+    let Some(result) = result else {
         return Ok(None);
+    };
+    Ok(Some((
+        result.curve,
+        composed_pcurve_range(request.first_range, request.second_range),
+        result.reversed_first,
+    )))
+}
+
+fn effective_orientation(edge: &Edge, reversed_3d: bool) -> Orientation {
+    if (edge.orientation() == Orientation::Reversed) != reversed_3d {
+        return Orientation::Reversed;
     }
-    Ok(Some(builder.bspline_curve()))
+    Orientation::Forward
+}
+
+fn joined_same_vertex(first: &Edge, second: &Edge) -> bool {
+    let analysis = ShapeAnalysisEdge::new();
+    let first_vertices = (analysis.first_vertex(first), analysis.last_vertex(first));
+    let second_vertices = (analysis.first_vertex(second), analysis.last_vertex(second));
+    first_vertices.0.is_same(&first_vertices.1) || second_vertices.1.is_same(&second_vertices.0)
 }
 
 fn composed_pcurve_range(first: (f64, f64), second: (f64, f64)) -> (f64, f64) {
@@ -166,130 +159,56 @@ fn install_face_pcurve(
 }
 
 fn joined_curve(first: &Edge, second: &Edge) -> Result<Option<JoinedCurve3d>, Failure> {
+    let Some((first_curve, second_curve, mut first_range, mut second_range)) =
+        input_curves_3d(first, second)?
+    else {
+        return Ok(None);
+    };
+    let result = ShapeConstructCurve.join_curves_3d(
+        &first_curve,
+        &second_curve,
+        first.orientation(),
+        second.orientation(),
+        &mut first_range,
+        &mut second_range,
+    )?;
+    Ok(result.map(|result| joined_curve_data(result, first_range, second_range)))
+}
+
+type InputCurves3d = (
+    Handle<dyn GeomCurve>,
+    Handle<dyn GeomCurve>,
+    (f64, f64),
+    (f64, f64),
+);
+
+fn input_curves_3d(first: &Edge, second: &Edge) -> Result<Option<InputCurves3d>, Failure> {
     let analysis = ShapeAnalysisEdge::new();
     let first_curve = analysis.curve_3d(first, false)?;
     let second_curve = analysis.curve_3d(second, false)?;
     if first_curve.0.is_null() || second_curve.0.is_null() {
         return Ok(None);
     }
-    let first_curve = oriented_bspline(first, first_curve)?;
-    let second_curve = oriented_bspline(second, second_curve)?;
-    compose_curves(first_curve, second_curve)
+    Ok(Some((
+        first_curve.0,
+        second_curve.0,
+        (first_curve.1, first_curve.2),
+        (second_curve.1, second_curve.2),
+    )))
 }
 
-fn oriented_bspline(
-    edge: &Edge,
-    (curve, mut first, mut last): (Handle<dyn GeomCurve>, f64, f64),
-) -> Result<Handle<GeomBSplineCurve>, Failure> {
-    let copy: Handle<dyn GeomCurve> = curve.copy()?.cast();
-    if edge.orientation() == Orientation::Reversed {
-        (first, last) = reversed_range(&curve, first, last)?;
-        copy.reverse()?;
-    }
-    ShapeConstructCurve.convert_to_bspline(&copy, first, last, precision::confusion())
-}
-
-fn reversed_range(
-    curve: &Handle<dyn GeomCurve>,
-    first: f64,
-    last: f64,
-) -> Result<(f64, f64), Failure> {
-    Ok((
-        curve.reversed_parameter(last)?,
-        curve.reversed_parameter(first)?,
-    ))
-}
-
-fn compose_curves(
-    first: Handle<GeomBSplineCurve>,
-    second: Handle<GeomBSplineCurve>,
-) -> Result<Option<JoinedCurve3d>, Failure> {
-    let reversals = endpoint_reversals(&first, &second)?;
-    reverse_bspline_if(&first, reversals.0)?;
-    reverse_bspline_if(&second, reversals.1)?;
-    join_bspline_pair(first, second, reversals.0)
-}
-
-fn endpoint_reversals(
-    first: &GeomBSplineCurve,
-    second: &GeomBSplineCurve,
-) -> Result<(bool, bool), Failure> {
-    let p11 = first.pole(1)?;
-    let p12 = first.pole(first.nb_poles())?;
-    let p21 = second.pole(1)?;
-    let p22 = second.pole(second.nb_poles())?;
-    nearest_endpoint_pair(p11, p12, p21, p22)
-}
-
-fn nearest_endpoint_pair(
-    p11: Point3,
-    p12: Point3,
-    p21: Point3,
-    p22: Point3,
-) -> Result<(bool, bool), Failure> {
-    let d11 = p11.distance(&p21);
-    let d21 = p12.distance(&p21);
-    let d12 = p11.distance(&p22);
-    let d22 = p22.distance(&p12);
-    let min1 = d11.min(d21);
-    let min2 = d12.min(d22);
-    if (min1 - min2).abs() <= precision::confusion() || min2 > min1 {
-        return Ok((d11 < d21, false));
-    }
-    Ok((d12 < d22, true))
-}
-
-fn reverse_bspline_if(curve: &GeomBSplineCurve, reverse: bool) -> Result<(), Failure> {
-    if reverse {
-        curve.reverse()?;
-    }
-    Ok(())
-}
-
-fn join_bspline_pair(
-    first: Handle<GeomBSplineCurve>,
-    second: Handle<GeomBSplineCurve>,
-    reverse_first: bool,
-) -> Result<Option<JoinedCurve3d>, Failure> {
-    let first_last = first.nb_poles();
-    let midpoint = pole_midpoint(first.pole(first_last)?, second.pole(1)?);
-    first.set_pole(first_last, midpoint)?;
-    second.set_pole(1, midpoint)?;
-    let first_range = (first.first_parameter(), first.last_parameter());
-    let second_range = (second.first_parameter(), second.last_parameter());
-    let Some(curve) = append_bspline(&first, &second)? else {
-        return Ok(None);
-    };
-    let last = first_range.1 + second_range.1 - second_range.0;
-    Ok(Some((curve, (first_range.0, last), !reverse_first)))
-}
-
-fn append_bspline(
-    first: &Handle<GeomBSplineCurve>,
-    second: &Handle<GeomBSplineCurve>,
-) -> Result<Option<Handle<GeomBSplineCurve>>, Failure> {
-    let mut builder = CompCurveToBSplineCurve::with_curve(
-        &first.cast::<dyn GeomBoundedCurve>(),
-        ParameterisationType::TgtThetaOver2,
-    )?;
-    let added = builder.add(
-        &second.cast::<dyn GeomBoundedCurve>(),
-        precision::confusion(),
-        true,
-        false,
-        0,
-    )?;
-    if !added {
-        return Ok(None);
-    }
-    Ok(Some(builder.bspline_curve()))
-}
-
-fn pole_midpoint(first: Point3, second: Point3) -> Point3 {
-    Point3::new(
-        0.5 * (first.x() + second.x()),
-        0.5 * (first.y() + second.y()),
-        0.5 * (first.z() + second.z()),
+fn joined_curve_data(
+    result: ShapeConstructCurveJoin3d,
+    first_range: (f64, f64),
+    second_range: (f64, f64),
+) -> JoinedCurve3d {
+    let range = composed_pcurve_range(first_range, second_range);
+    (
+        result.curve,
+        range,
+        !result.reversed_first,
+        result.reversed_first,
+        result.reversed_second,
     )
 }
 
