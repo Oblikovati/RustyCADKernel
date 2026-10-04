@@ -36,6 +36,8 @@ the candidate intersection changes both range endpoints without replacing the
 Bezier dynamic type.
 `bspline_line_pcurves` provides the matching degree-one B-spline case, including
 the source knot interval `[0,1]` and preserved B-spline representation.
+`multispan_bspline_line_pcurves` adds a quadratic spline with an internal knot
+at `0.5`; its selected crossing lies before the knot at `0.4436491673`.
 `tangent_parabola_line` checks a repeated/tangent intersection from a quadratic
 Bezier curve against a line; OCCT selects the common parameter `0.5` and trims
 both p-curves to that point.

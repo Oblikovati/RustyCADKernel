@@ -275,6 +275,25 @@ fn intersecting_bspline_pcurves_use_their_full_knot_domains() {
 }
 
 #[test]
+fn multispan_bspline_intersection_respects_internal_knot() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.0, 0.1, 0.0), Point3::new(1.0, 0.1, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_multispan_bspline_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bspline_pcurve(&tool, &face, 1, [0.0, 0.44364916731037085]);
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [0.44364916731037085, 1.0, 0.44364916731037085, 0.1, 1.0, 0.1],
+    );
+}
+
+#[test]
 fn tangent_bezier_and_line_intersection_is_selected() {
     let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
     let second = edge_between(Point3::new(0.0, 0.25, 0.0), Point3::new(1.0, 0.25, 0.0));
