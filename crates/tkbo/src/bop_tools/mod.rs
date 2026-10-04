@@ -27,3 +27,6 @@ pub use construction::{make_container, point_on_edge};
 
 mod correct_range;
 pub use correct_range::{correct_range_edges, correct_range_face};
+
+mod micro_edge;
+pub use micro_edge::is_micro_edge;

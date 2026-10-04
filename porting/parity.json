@@ -226599,6 +226599,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::correct_range_edges",
       "status": "partial",
       "notes": "96 native line/circle/Bezier range/tolerance cases pass, including zero derivative and per-endpoint reset behavior. BSpline/offset/other curves, locations, exceptional states and further numerical boundaries remain unproven; see tools/oracle/tkbo_correct_range.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsMicroEdge(const TopoDS_Edge &, const occ::handle<IntTools_Context> &, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_micro_edge",
+      "status": "partial",
+      "notes": "192 native empty/degenerated/short-line tolerance, orientation, context and splittability cases match. Curved/located edges, missing endpoints, pcurve-only geometry and wider ShrunkRange behavior remain unproven; see tools/oracle/tkbo_micro_edge.md."
     }
   ],
   "tests": [

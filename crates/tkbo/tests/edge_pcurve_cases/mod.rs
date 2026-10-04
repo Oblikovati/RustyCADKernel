@@ -180,3 +180,5 @@ mod shape_utilities;
 mod construction;
 
 mod correct_range;
+
+mod micro_edge;
