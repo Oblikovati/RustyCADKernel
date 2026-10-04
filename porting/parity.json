@@ -225312,6 +225312,15 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetInterval::get_type",
       "status": "implemented",
       "notes": "Pinned native interval/concavity oracle: all six classifications, unsorted bounds, independent assignment, signed zero, infinity and NaN preserved. Default native interval fields are uninitialized; Rust rejects unset reads explicitly, without claiming C++ undefined behavior parity. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "BRepOffset_Offset::Init(const TopoDS_Vertex &, const NCollection_List<TopoDS_Shape> &, const double, const bool, const double, const GeomAbs_Shape)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Offset.hxx",
+      "source_sha256": "b856732117ff95933f77830a13cc8da8c0036486a875e6597a0e5fa9e9d6e4bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::build_vertex_arc_join",
+      "status": "partial",
+      "notes": "Default spherical vertex-join geometry exposed as a face-building helper, with positive/negative native frame/topology/orientation/validity/mass evidence. Full BRepOffset_Offset object state/history, polynomial parameters and wider geometric domains remain unported/unproven. Does not map or close StandardOffset OCC28131."
     }
   ],
   "tests": [
