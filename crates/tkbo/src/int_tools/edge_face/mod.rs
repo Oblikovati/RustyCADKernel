@@ -1,6 +1,8 @@
 //! Edge/face common-part construction, with unsupported intersection families explicit.
 mod classify;
+mod exact_intersection;
 mod perform;
+mod postprocess;
 mod quick_coincidence;
 mod touch;
 

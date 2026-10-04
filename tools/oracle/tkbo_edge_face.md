@@ -23,8 +23,16 @@ g++ -std=c++17 -O0 -g0 -I"$OCCT_BUILD/include/opencascade" \
 LD_LIBRARY_PATH="$OCCT_BUILD/lin64/gcc/libi" /tmp/tkbo_edge_face
 ```
 
-Rust replay: `cargo test -p rustycad-tkbo --test int_tools_edge_face`.
-The independent check-touch path uses the existing `ExtCS` port. The no-extrema
-exact-intersector fallback, `DistanceFunction` special cases for cylinder/cone/
-torus, `CheckTouchVertex`, and line/cylinder or circle/plane postprocessing are
-still unported and must remain explicit parity gaps.
+Rust replay: `cargo test -p rustycad-tkbo --test int_tools_edge_face` covers the
+currently supported line/plane end-to-end paths. The native probe also records
+line/cylinder and circle/plane tangent cases. Those are helper-level evidence
+only: `BeanFaceIntersector` does not yet support those pairs, so the Rust
+`EdgeFace::perform` path cannot reach the postprocessing code for them.
+
+Unit regressions exercise the exact-intersection fallback on a line/plane
+crossing, `CheckTouchVertex` refinement for a line/cylinder tangent interval,
+and preservation of endpoint parameters for circle/plane seam parts. These
+validate the helpers with native-captured inputs; they do not establish the
+full EdgeFace pipeline for those pair types. The remaining exactness gaps are
+the bounded-adaptor behavior in HInter fallback and broader surface/curve
+domains beyond the checked helper fixtures.

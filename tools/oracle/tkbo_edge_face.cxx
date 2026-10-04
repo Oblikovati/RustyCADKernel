@@ -1,6 +1,10 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <IntTools_EdgeFace.hxx>
+#include <gp_Ax2.hxx>
+#include <gp_Circ.hxx>
+#include <gp_Cylinder.hxx>
+#include <gp_Dir.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Pnt.hxx>
 #include <iomanip>
@@ -33,8 +37,18 @@ static void run(const char* label, const TopoDS_Edge& edge, const TopoDS_Face& f
 int main() {
   std::cout << std::setprecision(17);
   const TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), -5, 5, -5, 5).Face();
+  const gp_Cylinder cylinder(gp_Ax3(), 1.0);
+  const TopoDS_Face cylinderFace =
+      BRepBuilderAPI_MakeFace(cylinder, -3.141592653589793, 3.141592653589793, -2, 2).Face();
+  const gp_Pln tangentPlane(gp_Pnt(1, 0, 0), gp_Dir(1, 0, 0));
+  const TopoDS_Face tangentFace = BRepBuilderAPI_MakeFace(tangentPlane, -2, 2, -2, 2).Face();
   const TopoDS_Edge crossing = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, -1), gp_Pnt(0, 0, 1)).Edge();
   const TopoDS_Edge contained = BRepBuilderAPI_MakeEdge(gp_Pnt(-1, 0, 0), gp_Pnt(1, 0, 0)).Edge();
+  const TopoDS_Edge cylinderTouch = BRepBuilderAPI_MakeEdge(gp_Pnt(-2, 1, 0), gp_Pnt(2, 1, 0)).Edge();
+  const gp_Circ circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 1.0);
+  const TopoDS_Edge circleTouch = BRepBuilderAPI_MakeEdge(circle).Edge();
   run("crossing", crossing, face, 0, 1);
   run("quick-contained", contained, face, 0, 1, true);
+  run("line-cylinder-touch", cylinderTouch, cylinderFace, 0, 4);
+  run("circle-plane-touch", circleTouch, tangentFace, 0, 6.283185307179586);
 }
