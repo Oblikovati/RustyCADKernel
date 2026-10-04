@@ -139,6 +139,18 @@ fn accumulating_protected_key_hasher_matches_native_hash_and_equality() {
     }
 }
 
+#[test]
+fn accumulating_protected_key_value_mutation_changes_hash_and_equality() {
+    let hasher = AccBlockKeyHasher;
+    let mut key = AccBlockKey::new(41);
+    assert_eq!(hasher.hash(key), 41);
+    key.set_value(42);
+    assert_eq!(key.value(), 42);
+    assert_eq!(hasher.hash(key), 42);
+    assert!(hasher.equal(key, AccBlockKey::new(42)));
+    assert!(!hasher.equal(key, AccBlockKey::new(41)));
+}
+
 fn assert_acc_aligned_size_rounding() {
     assert_eq!(
         [0, 1, 2, 3, 4, 5, usize::MAX].map(|size| AccAlignedSize::new(size).get()),

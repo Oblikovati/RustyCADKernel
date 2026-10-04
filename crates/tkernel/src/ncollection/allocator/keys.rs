@@ -14,6 +14,11 @@ impl AccBlockKey {
     pub const fn value(self) -> usize {
         self.0
     }
+
+    /// Updates public native `Key::Value`; `let mut key = AccBlockKey::new(1); key.set_value(2)`.
+    pub fn set_value(&mut self, value: usize) {
+        self.0 = value;
+    }
 }
 
 /// `NCollection_AccAllocator::Hasher`, which hashes a key to its stored value.

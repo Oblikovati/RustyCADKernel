@@ -9,9 +9,10 @@ types, then invokes both native hasher call operators. OCCT source revision is
 
 Native `Hasher(Key)` returns `Key::Value` unchanged. Its two-key overload compares those values.
 The fixture checks zero, ordinary values, and `SIZE_MAX`; the final distinct-key comparison uses
-defined unsigned wraparound. Rust exposes equivalent `AccBlockKey` and `AccBlockKeyHasher` value
-types with explicit hash/equality methods. They do not provide allocator subclassing, access to
-the native block map, or the protected `getKey` implementation.
+defined unsigned wraparound. A second case mutates the public `Key::Value` member and hashes and
+compares that same key instance. Rust exposes equivalent `AccBlockKey` and `AccBlockKeyHasher`
+value types with explicit hash/equality methods and a mutable-value setter. They do not provide
+allocator subclassing, access to the native block map, or the protected `getKey` implementation.
 
 Reproduce from the repository root with:
 
