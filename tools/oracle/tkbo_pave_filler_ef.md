@@ -11,7 +11,8 @@ Reproduce all native snapshots with the modeling build used by adjacent TKBO pro
 for name in tkbo_pave_filler_ef tkbo_pave_filler_ef_endpoint \
   tkbo_pave_filler_ef_coplanar tkbo_pave_filler_ef_repeat \
   tkbo_pave_filler_ef_fused tkbo_pave_filler_ef_near \
-  tkbo_pave_filler_ef_bezier tkbo_pave_filler_ef_commonblock; do
+  tkbo_pave_filler_ef_bezier tkbo_pave_filler_ef_commonblock \
+  tkbo_pave_filler_ef_multiface; do
   g++ -std=c++17 -O0 -g0 -I"$OCCT_BUILD/include/opencascade" \
     "tools/oracle/$name.cxx" -L"$OCCT_BUILD/lin64/gcc/libi" \
     -Wl,-rpath,"$OCCT_BUILD/lin64/gcc/libi" -Wl,--no-as-needed \
@@ -23,7 +24,7 @@ for name in tkbo_pave_filler_ef tkbo_pave_filler_ef_endpoint \
 done
 ```
 
-Rust differential tests: `cargo test -p rustycad-tkbo --test bop_algo_pave_filler_ef`. The near-hit fixture uses points at Y = 0, 0.0003, and 0.0006 with fuzzy 0.0004; OCCT transitively groups the endpoints even though their separation exceeds fuzzy, and the test checks center, tolerance, block ordering, and shared indices. The CommonBlock fixture seeds both endpoint classifications and raises face tolerance to 0.001; it checks face membership, sampled common tolerance, unchanged `PaveBlocksOn`, and endpoint tolerance updates. The Bezier probe records native success (`InterfEF` contains the crossing); the Rust replay now matches its interference record and all source/generated vertex coordinates after integrating finite-domain BeanFace localization. This flat Bezier fixture does not establish general curved-surface parity.
+Rust differential tests: `cargo test -p rustycad-tkbo --test bop_algo_pave_filler_ef`. The near-hit fixture uses points at Y = 0, 0.0003, and 0.0006 with fuzzy 0.0004; OCCT transitively groups the endpoints even though their separation exceeds fuzzy, and the test checks center, tolerance, block ordering, and shared indices. The CommonBlock fixture seeds both endpoint classifications and raises face tolerance to 0.001; it checks face membership, sampled common tolerance, unchanged `PaveBlocksOn`, and endpoint tolerance updates. The multiface fixture seeds the same block on two coplanar faces and verifies face-list order, maximum sampled tolerance, and endpoint tolerance after the deferred post-candidate merge. The Bezier probe records native success (`InterfEF` contains the crossing); the Rust replay now matches its interference record and all source/generated vertex coordinates after integrating finite-domain BeanFace localization. This flat Bezier fixture does not establish general curved-surface parity.
 
 The EF edge-common-part face-list and sampled-tolerance path plus endpoint tolerance updates are ported for a single block; merging multiple blocks/faces into existing groups remains incomplete. The general `PerformNewVertices`/`IntersectVE` post-treatment and complete endpoint/vertex common-part branch conditions also remain outstanding. Error/alert ordering, user-break handling, distant transforms, and other curve/surface pairs are unimplemented or unverified; passing fixtures do not claim full `PerformEF` parity.
 
