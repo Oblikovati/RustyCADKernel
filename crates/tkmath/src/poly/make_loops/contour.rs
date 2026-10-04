@@ -64,7 +64,7 @@ impl<W: LoopWay> MakeLoops<W> {
             [first, ..] if Some(first) == candidates.last() => *first,
             _ => self
                 .way
-                .choose_left_way(&self.links, last, segment, &candidates),
+                .choose_left_way(&self.links, last, segment, &candidates)?,
         })
     }
     // Where the loop starts when `segment` ends the search: an open end, a link met again

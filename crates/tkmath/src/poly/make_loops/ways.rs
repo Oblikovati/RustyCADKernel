@@ -5,7 +5,15 @@
 //! tangent, measured around the surface normal (3D) or in the plane (2D).
 use super::{Link, LinkTable, LoopWay, MakeLoops, MakeLoopsHelper, get_link};
 use crate::gp::{Direction2, Direction3, Xyz};
+use rustycad_tkernel::standard::Failure;
 use std::f64::consts::PI;
+
+fn first_candidate(candidates: &[i32]) -> Result<i32, Failure> {
+    candidates
+        .first()
+        .copied()
+        .ok_or_else(|| Failure::with_message("Standard_NoSuchObject", "NCollection_List::First"))
+}
 /// `Poly_MakeLoops3D::Helper`: tangents and normals; `None` when undefined.
 pub trait MakeLoops3DHelper: MakeLoopsHelper {
     /// Tangent at the first node of a link; `helper.get_first_tangent(&link)`.
@@ -46,10 +54,13 @@ fn projected(normal: Direction3, tangent: Direction3) -> Option<Direction3> {
     Direction3::from_xyz(projection).ok()
 }
 // Keeps the candidate with the smallest angle; an angle near -PI counts as PI.
-fn smallest_turn(candidates: &[i32], mut angle_of: impl FnMut(i32) -> Option<f64>) -> i32 {
+fn smallest_turn(
+    candidates: &[i32],
+    mut angle_of: impl FnMut(i32) -> Result<Option<f64>, Failure>,
+) -> Result<i32, Failure> {
     let mut best = (PI * 2.0, 0);
     for &candidate in candidates {
-        let Some(mut angle) = angle_of(candidate) else {
+        let Some(mut angle) = angle_of(candidate)? else {
             continue;
         };
         if angle < 1e-4 - PI {
@@ -59,7 +70,26 @@ fn smallest_turn(candidates: &[i32], mut angle_of: impl FnMut(i32) -> Option<f64
             best = (angle, candidate);
         }
     }
-    if best.1 == 0 { candidates[0] } else { best.1 }
+    if best.1 == 0 {
+        return first_candidate(candidates);
+    }
+    Ok(best.1)
+}
+fn turn_angle_3d(
+    helper: &dyn MakeLoops3DHelper,
+    links: &LinkTable,
+    normal: Direction3,
+    reference: Direction3,
+    candidate: i32,
+) -> Result<Option<f64>, Failure> {
+    let candidate_link = get_link(links, candidate)?;
+    let Some(tangent) = helper.get_first_tangent(&candidate_link) else {
+        return Ok(None);
+    };
+    let Some(projected_tangent) = projected(normal, tangent) else {
+        return Ok(None);
+    };
+    Ok(Some(projected_tangent.angle_with_ref(reference, normal)))
 }
 impl LoopWay for LeftWay3D<'_> {
     fn helper(&self) -> &dyn MakeLoopsHelper {
@@ -71,20 +101,19 @@ impl LoopWay for LeftWay3D<'_> {
         node: i32,
         segment: i32,
         candidates: &[i32],
-    ) -> i32 {
+    ) -> Result<i32, Failure> {
         let Some(normal) = self.helper.get_normal(node) else {
-            return candidates[0];
+            return first_candidate(candidates);
         };
         let reference = self
             .helper
-            .get_last_tangent(&get_link(links, segment))
+            .get_last_tangent(&get_link(links, segment)?)
             .and_then(|tangent| projected(normal, tangent));
         let Some(reference) = reference else {
-            return candidates[0];
+            return first_candidate(candidates);
         };
         smallest_turn(candidates, |candidate| {
-            let tangent = self.helper.get_first_tangent(&get_link(links, candidate))?;
-            Some(projected(normal, tangent)?.angle_with_ref(reference, normal))
+            turn_angle_3d(self.helper, links, normal, reference, candidate)
         })
     }
 }
@@ -93,6 +122,20 @@ impl LoopWay for LeftWay3D<'_> {
 pub struct LeftWay2D<'h> {
     right_way: bool,
     helper: &'h dyn MakeLoops2DHelper,
+}
+fn turn_angle_2d(
+    helper: &dyn MakeLoops2DHelper,
+    links: &LinkTable,
+    reference: Direction2,
+    right_way: bool,
+    candidate: i32,
+) -> Result<Option<f64>, Failure> {
+    let candidate_link = get_link(links, candidate)?;
+    let Some(tangent) = helper.get_first_tangent(&candidate_link) else {
+        return Ok(None);
+    };
+    let angle = tangent.angle(reference);
+    Ok(Some(if right_way { -angle } else { angle }))
 }
 impl<'h> LeftWay2D<'h> {
     /// Wraps a 2D helper; `LeftWay2D::new(true, &helper)`.
@@ -113,14 +156,13 @@ impl LoopWay for LeftWay2D<'_> {
         _node: i32,
         segment: i32,
         candidates: &[i32],
-    ) -> i32 {
-        let Some(reference) = self.helper.get_last_tangent(&get_link(links, segment)) else {
-            return candidates[0];
+    ) -> Result<i32, Failure> {
+        let segment_link = get_link(links, segment)?;
+        let Some(reference) = self.helper.get_last_tangent(&segment_link) else {
+            return first_candidate(candidates);
         };
         smallest_turn(candidates, |candidate| {
-            let tangent = self.helper.get_first_tangent(&get_link(links, candidate))?;
-            let angle = tangent.angle(reference);
-            Some(if self.right_way { -angle } else { angle })
+            turn_angle_2d(self.helper, links, reference, self.right_way, candidate)
         })
     }
 }

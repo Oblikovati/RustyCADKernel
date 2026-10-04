@@ -138,24 +138,25 @@ pub trait LoopWay {
     /// The helper that lists adjacent links; `way.helper()`.
     fn helper(&self) -> &dyn MakeLoopsHelper;
     /// Picks the continuation among `candidates` (signed link indices) after `segment` at
-    /// `node`; 0 means none; `way.choose_left_way(&links, node, segment, &candidates)`.
+    /// `node`; 0 means none; `way.choose_left_way(&links, node, segment, &candidates)?`.
     fn choose_left_way(
         &self,
         links: &LinkTable,
         node: i32,
         segment: i32,
         candidates: &[i32],
-    ) -> i32;
+    ) -> Result<i32, rustycad_tkernel::standard::Failure>;
 }
-/// The link of a signed index, reversed for a negative index, as `getLink`; a missing
-/// index gives the null link; `get_link(&links, -2)`.
-pub fn get_link(links: &LinkTable, segment: i32) -> Link {
-    let mut link = links
-        .find_key(segment.unsigned_abs() as usize)
-        .copied()
-        .unwrap_or_default();
+/// The link at a signed native map index, reversed for negative indices; invalid indices
+/// return `Standard_OutOfRange`, while `i32::MIN` is excluded because native `abs` overflows.
+/// Example: `get_link(&links, -1)?`.
+pub fn get_link(
+    links: &LinkTable,
+    segment: i32,
+) -> Result<Link, rustycad_tkernel::standard::Failure> {
+    let mut link = *links.find_key(segment.unsigned_abs() as usize)?;
     if segment < 0 {
         link.reverse();
     }
-    link
+    Ok(link)
 }
