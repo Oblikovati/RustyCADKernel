@@ -227610,6 +227610,87 @@
       "rust_item": "rustycad_tkbo::bop_tools::ShapeSet::is_equal",
       "status": "partial",
       "notes": "392 native occurrence/count/asymmetric equality/copy/assignment/clear/hash-formula observations; tools/oracle/tkbo_shape_set.md. Custom/null allocators, platform extremes, arbitrary locations and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::PerformEE(const Message_ProgressRange &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ee",
+      "status": "partial",
+      "notes": "Native crossing-line and coincident shared-endpoint fixtures; tools/oracle/tkbo_pave_filler_ee.md. Endpoint VE, multi-result fusion, tolerance adjustment, transforms, scheduling and full Boolean/legacy parity incomplete."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::clear",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::RejectNode(const BOPTools_BoxSelector::BVH_VecNd &, const BOPTools_BoxSelector::BVH_VecNd &, bool &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::reject_node",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::RejectElement(const int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::reject_element",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::AcceptMetric(const bool &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::accept_metric",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::SetBox(const BVH_Box<double, BOPTools_BoxSelector::Dimension> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::set_box",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::Indices()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::indices",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::BOPTools_BoxSelector<Dimension>()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::default",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector::Accept(const int, const bool &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::accept",
+      "status": "partial",
+      "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
     }
   ],
   "tests": [

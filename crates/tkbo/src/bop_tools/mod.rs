@@ -101,3 +101,6 @@ pub use internal_face_list::internal_face_among;
 
 mod shape_set;
 pub use shape_set::ShapeSet;
+
+mod box_selector;
+pub use box_selector::BoxSelector;
