@@ -185,6 +185,33 @@ impl Cache {
         self.derivatives_local(self.local_parameter(parameter), derivative)
     }
 
+    /// Writes packed coordinate derivative rows into caller storage
+    /// (`calculateDerivative`); extra capacity stays unchanged;
+    /// `cache.derivatives_into(0.5, 1, &mut rows)?`.
+    pub fn derivatives_into(
+        &self,
+        parameter: f64,
+        derivative: i32,
+        output: &mut [f64],
+    ) -> Result<(), Failure> {
+        self.derivatives_local_into(self.local_parameter(parameter), derivative, output)
+    }
+
+    /// Writes packed coordinate rows for a normalized span parameter without wrapping;
+    /// extra capacity stays unchanged
+    /// (`calculateDerivativeLocal`); `cache.derivatives_local_into(0.25, 1, &mut rows)?`.
+    pub fn derivatives_local_into(
+        &self,
+        local_param: f64,
+        derivative: i32,
+        output: &mut [f64],
+    ) -> Result<(), Failure> {
+        let needed: usize = ensure_derivative_output_capacity(self, derivative, output.len())?;
+        let values: [f64; 16] = self.derivatives_local(local_param, derivative)?;
+        output[..needed].copy_from_slice(&values[..needed]);
+        Ok(())
+    }
+
     // calculateDerivativeLocal: rows of `derivative_stride()` values.
     fn derivatives_local(&self, local_param: f64, derivative: i32) -> Result<[f64; 16], Failure> {
         let dim: usize = self.row_length;
@@ -220,4 +247,26 @@ impl Cache {
         rational_derivative(order, order, dim as i32 - 1, &polynomial, &mut result, true)?;
         Ok(result)
     }
+}
+
+fn ensure_derivative_output_capacity(
+    cache: &Cache,
+    derivative: i32,
+    actual: usize,
+) -> Result<usize, Failure> {
+    if !(0..=3).contains(&derivative) {
+        return Err(Failure::out_of_range(&format!(
+            "BSplCLib_Cache derivative order {derivative}; expected 0..=3"
+        )));
+    }
+    let stride: usize = cache.derivative_stride();
+    let expected: usize = (derivative as usize + 1) * stride;
+    if actual < expected {
+        return Err(Failure::with_type(
+            "Standard_DimensionMismatch",
+            &format!("BSplCLib_Cache output length {actual}; expected at least {expected}"),
+            "",
+        ));
+    }
+    Ok(expected)
 }
