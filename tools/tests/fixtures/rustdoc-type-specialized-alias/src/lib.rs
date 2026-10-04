@@ -18,15 +18,39 @@ mod private {
         pub fn common(&self) -> &'static str {
             "common"
         }
+
+        pub fn conditional(&self) -> &'static str
+        where
+            DialectImplementationParameter: Fast,
+        {
+            "conditional"
+        }
     }
 
     pub trait Open {
         fn open(&self) -> &'static str;
     }
 
+    pub trait SizedCall {
+        fn sized(&self) -> &'static str
+        where
+            Self: Sized;
+    }
+
     impl<DialectImplementationParameter: Dialect> Open for Generic<DialectImplementationParameter> {
         fn open(&self) -> &'static str {
             "open"
+        }
+    }
+
+    impl<DialectImplementationParameter: Dialect> SizedCall
+        for Generic<DialectImplementationParameter>
+    {
+        fn sized(&self) -> &'static str
+        where
+            Self: Sized,
+        {
+            "sized"
         }
     }
 
@@ -46,6 +70,6 @@ mod private {
     }
 }
 
-pub use private::{Compatible, Dialect, Fast, Generic as TextFile, Open, Text};
+pub use private::{Compatible, Dialect, Fast, Generic as TextFile, Open, SizedCall, Text};
 pub type File = TextFile<Text>;
 pub type CmpFile = TextFile<Compatible>;
