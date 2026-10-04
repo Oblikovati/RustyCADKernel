@@ -8,15 +8,26 @@
 mod float;
 mod integer;
 
-/// One variadic argument; the conversion reads it the way C's `va_arg` would.
+/// One typed argument for the supported C `printf` conversions.
 #[derive(Clone, Copy, Debug)]
-pub(crate) enum CArg<'a> {
+pub enum FormatArg<'a> {
     /// An `int` argument.
     Int(i32),
+    /// An `unsigned int` argument.
+    UInt(u32),
     /// A `double` argument.
     Real(f64),
-    /// A NUL-free `const char*` argument.
+    /// A byte string used as a `const char*`, truncated at the first NUL.
     Text(&'a [u8]),
+}
+pub(crate) use FormatArg as CArg;
+
+/// A format directive outside the faithfully supported argument and conversion subset.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(crate) struct FormatError {
+    pub(crate) offset: usize,
+    pub(crate) conversion: u8,
+    pub(crate) expected: &'static str,
 }
 
 /// Parsed flags, width, precision and length modifier of one conversion.
@@ -50,6 +61,117 @@ pub(crate) fn c_sprintf(format: &[u8], args: &[CArg<'_>]) -> Vec<u8> {
         render(&spec, &mut arguments, &format[..end], &mut output);
     }
     output
+}
+
+/// Checks supported conversions before using the shared renderer.
+pub(crate) fn checked_sprintf(
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> Result<Vec<u8>, FormatError> {
+    validate_format(format, args)?;
+    Ok(c_sprintf(format, args))
+}
+
+fn validate_format(format: &[u8], args: &[FormatArg<'_>]) -> Result<(), FormatError> {
+    let mut index: usize = 0;
+    let mut argument_index: usize = 0;
+    while index < format.len() {
+        if format[index] != b'%' {
+            index += 1;
+            continue;
+        }
+        let offset = index;
+        let (spec, end) = parse_spec(format, index + 1);
+        validate_spec(spec, args, argument_index, offset)?;
+        argument_index += usize::from(spec.conversion != b'%');
+        index = end;
+    }
+    Ok(())
+}
+
+fn validate_spec(
+    spec: Spec,
+    args: &[FormatArg<'_>],
+    argument_index: usize,
+    offset: usize,
+) -> Result<(), FormatError> {
+    let expected: &'static str = expected_argument(spec, offset)?;
+    if spec.conversion == b'%' {
+        if has_percent_modifiers(spec) {
+            return Err(format_error(spec, offset, "an unmodified %% directive"));
+        }
+        return Ok(());
+    }
+    validate_argument(spec, args.get(argument_index), expected, offset)
+}
+
+fn validate_argument(
+    spec: Spec,
+    argument: Option<&FormatArg<'_>>,
+    expected: &'static str,
+    offset: usize,
+) -> Result<(), FormatError> {
+    let Some(argument) = argument else {
+        return Err(format_error(spec, offset, expected));
+    };
+    if !matches_argument(argument, spec) {
+        return Err(format_error(spec, offset, expected));
+    }
+    Ok(())
+}
+
+fn has_percent_modifiers(spec: Spec) -> bool {
+    spec.left
+        || spec.plus
+        || spec.space
+        || spec.alternate
+        || spec.zero
+        || spec.width != 0
+        || spec.precision.is_some()
+        || spec.length != 0
+}
+
+fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatError> {
+    match spec.conversion {
+        b'%' => Ok("no argument"),
+        b'd' | b'i' if spec.length >= -2 && spec.length <= 0 => {
+            Ok("an Int argument (length modifiers hh/h/no modifier)")
+        }
+        b'o' | b'u' | b'x' | b'X' if spec.length == 0 => Ok("a UInt argument"),
+        b'o' | b'u' | b'x' | b'X' if spec.length == -2 || spec.length == -1 => {
+            Ok("an Int argument (length modifiers hh/h)")
+        }
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' if spec.length == 0 || spec.length == 1 => {
+            Ok("a Real argument")
+        }
+        b's' if spec.length == 0 => Ok("a Text argument"),
+        _ => Err(format_error(
+            spec,
+            offset,
+            "a supported %d/%i/%o/%u/%x/%X/%f/%e/%g/%s directive",
+        )),
+    }
+}
+
+fn matches_argument(argument: &FormatArg<'_>, spec: Spec) -> bool {
+    match spec.conversion {
+        b'd' | b'i' => matches!(argument, FormatArg::Int(_)),
+        b'o' | b'u' | b'x' | b'X' if spec.length == 0 => {
+            matches!(argument, FormatArg::UInt(_))
+        }
+        b'o' | b'u' | b'x' | b'X' => matches!(argument, FormatArg::Int(_)),
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' => matches!(argument, FormatArg::Real(_)),
+        b's' => matches!(argument, FormatArg::Text(_)),
+        _ => false,
+    }
+}
+
+fn format_error(spec: Spec, offset: usize, expected: &'static str) -> FormatError {
+    FormatError {
+        offset,
+        conversion: spec.conversion,
+        expected,
+    }
 }
 
 fn render(
@@ -119,6 +241,10 @@ fn text(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
         Some(CArg::Text(bytes)) => bytes,
         _ => b"(null)",
     };
+    let bytes = &bytes[..bytes
+        .iter()
+        .position(|&byte| byte == 0)
+        .unwrap_or(bytes.len())];
     let shown = spec
         .precision
         .map_or(bytes, |limit| &bytes[..limit.min(bytes.len())]);

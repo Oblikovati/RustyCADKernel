@@ -29,10 +29,7 @@ fn magnitude_digits(magnitude: u128, conversion: u8) -> Vec<u8> {
 
 /// Formats one integer conversion; a missing or non-integer argument formats as 0.
 pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
-    let raw = match argument {
-        Some(CArg::Int(value)) => *value,
-        _ => 0,
-    };
+    let raw = integer_bits(argument);
     let signed = matches!(spec.conversion, b'd' | b'i');
     let value = widened(raw, spec, signed);
     let mut digits = magnitude_digits(value.unsigned_abs(), spec.conversion);
@@ -45,6 +42,14 @@ pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
     }
     let prefix = integer_prefix(spec, value, &mut digits, signed);
     pad(spec, prefix, digits, spec.precision.is_none())
+}
+
+fn integer_bits(argument: Option<&CArg<'_>>) -> i32 {
+    match argument {
+        Some(CArg::Int(value)) => *value,
+        Some(CArg::UInt(value)) => *value as i32,
+        _ => 0,
+    }
 }
 
 fn integer_prefix(spec: &Spec, value: i128, digits: &mut Vec<u8>, signed: bool) -> Vec<u8> {

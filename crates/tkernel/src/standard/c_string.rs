@@ -5,9 +5,16 @@
 //!
 //! A C string is a byte slice read up to its first NUL (or its end), so embedded NULs
 //! end the string exactly as `strlen`/`strcmp` do. `Strtod` is [`crate::standard::strtod`].
+//!
+//! The formatting wrappers support `%d/%i/%o/%u/%x/%X/%f/%F/%e/%E/%g/%G/%s/%%`,
+//! numeric width and precision, and the private formatter's flags. They require typed
+//! [`FormatArg`] values and injected sinks; they do not expose C varargs or `FILE*`.
 
 use super::hashing::{HashWord, fnv_hash, hash_bytes};
+pub use crate::c_format::FormatArg;
+use crate::c_format::checked_sprintf;
 use crate::ncollection::HashPolicy;
+use std::io::{self, Write};
 
 /// The bytes `strlen` would count: everything before the first NUL.
 fn c_str_prefix(text: &[u8]) -> &[u8] {
@@ -39,6 +46,82 @@ pub fn atof(text: &str) -> f64 {
 /// `Atof(const char*)` for arbitrary C-string bytes; `atof_bytes(b"1.25\xff") == 1.25`.
 pub fn atof_bytes(text: &[u8]) -> f64 {
     super::strtod_bytes(text).0
+}
+
+/// `Printf` with typed arguments and an injected writer; `printf_to(&mut out, b"%d", &[FormatArg::Int(4)])`.
+/// Returns bytes written and propagates sink errors; C stdout behavior remains partial.
+pub fn printf_to(
+    output: &mut impl Write,
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    write_format(output, format, args)
+}
+
+/// `Fprintf` with an injected writer instead of a process-owned `FILE*`;
+/// `fprintf_to(&mut file, b"%s", &[FormatArg::Text(b"shape")])`.
+/// Returns bytes written; C `FILE*` locking and error-state behavior remain partial.
+pub fn fprintf_to(
+    output: &mut impl Write,
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    write_format(output, format, args)
+}
+
+/// `Sprintf` into caller-owned growable storage, including the terminating NUL;
+/// `sprintf_into(&mut buffer, b"%04d", &[FormatArg::Int(7)])` returns 4.
+/// The `Vec` is replaced, so fixed-buffer tail bytes and C `int` count overflow are partial.
+pub fn sprintf_into(
+    output: &mut Vec<u8>,
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    let rendered = render_format(format, args)?;
+    let count = rendered.len();
+    output.clear();
+    output.extend_from_slice(&rendered);
+    output.push(0);
+    Ok(count)
+}
+
+/// Typed `Vsprintf` counterpart; `vsprintf_into(&mut b, b"%s", &[FormatArg::Text(b"edge")])` writes `edge\0`.
+/// `va_list`, fixed-buffer tail bytes, and C `int` count overflow remain partial.
+pub fn vsprintf_into(
+    output: &mut Vec<u8>,
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    sprintf_into(output, format, args)
+}
+
+fn write_format(
+    output: &mut impl Write,
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    let rendered = render_format(format, args)?;
+    output.write_all(&rendered)?;
+    Ok(rendered.len())
+}
+
+fn render_format(format: &[u8], args: &[FormatArg<'_>]) -> io::Result<Vec<u8>> {
+    checked_sprintf(c_str_prefix(format), args).map_err(format_error)
+}
+
+fn format_error(error: crate::c_format::FormatError) -> io::Error {
+    let conversion = if error.conversion == 0 {
+        "end-of-format".to_owned()
+    } else {
+        format!("'{}'", char::from(error.conversion))
+    };
+    io::Error::new(
+        io::ErrorKind::InvalidInput,
+        format!(
+            "format conversion {conversion} at byte {}: expected {}",
+            error.offset, error.expected
+        ),
+    )
 }
 
 /// `Standard_CStringHasher`: the hash/equality policy for C-string keys.

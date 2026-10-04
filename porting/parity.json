@@ -82188,33 +82188,33 @@
       "upstream_id": "Standard_CString::Printf(const char* const,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+      "rust_item": "rustycad_tkernel::standard::c_string::printf_to",
+      "status": "partial",
+      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; exact native count/output fixtures cover the listed conversions. C varargs, unsupported conversions, process stdout details, and C int count overflow are not exposed, so this remains partial. See tools/oracle/tkernel_c_string_format.md."
     },
     {
       "upstream_id": "Standard_CString::Fprintf(FILE*,const char*,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+      "rust_item": "rustycad_tkernel::standard::c_string::fprintf_to",
+      "status": "partial",
+      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; fixture checks native count and bytes. C FILE* buffering, locking, stream error state, varargs, and C int count overflow remain partial. See tools/oracle/tkernel_c_string_format.md."
     },
     {
       "upstream_id": "Standard_CString::Sprintf(char*,const char*,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+      "rust_item": "rustycad_tkernel::standard::c_string::sprintf_into",
+      "status": "partial",
+      "notes": "Typed `FormatArg` slice and growable byte buffer reuse the existing c_format engine; native return count and terminating NUL are checked. This replaces Vec contents and does not accept a raw fixed caller buffer, model untouched tail bytes, varargs, or C int count overflow; unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md."
     },
     {
       "upstream_id": "Standard_CString::Vsprintf(char*,const char*,va_list)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+      "rust_item": "rustycad_tkernel::standard::c_string::vsprintf_into",
+      "status": "partial",
+      "notes": "The safe analogue accepts a typed `FormatArg` slice rather than `va_list`; it reuses the existing c_format engine and writes a trailing NUL. Native format/count cases are checked, but ABI/va_list behavior, fixed-buffer tail semantics, C int count overflow, and unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md."
     },
     {
       "upstream_id": "Standard_CStringHasher::operator()(const char* const) const noexcept",
