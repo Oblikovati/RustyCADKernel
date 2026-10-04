@@ -1,4 +1,4 @@
-//! Stateful BeanFace facade; analytic stages precede the remaining general solver port.
+//! Stateful BeanFace intersections; surface localization remains a separate porting obligation.
 use super::{Context, MarkedRangeSet, Range};
 use rustycad_tkbrep::{
     brep::BRepTool,
@@ -18,7 +18,9 @@ mod coincidence;
 mod distance;
 mod empty_range;
 mod exact_intersection;
+mod extremum;
 mod fast_analytic;
+mod general;
 mod line_plane;
 mod near_range_boundaries;
 mod range_walk;
@@ -174,7 +176,7 @@ impl BeanFaceIntersector {
         self.minimum_square_distance
     }
 
-    /// Resets results and runs the available analytic and coincidence stages; `solver.perform()?`.
+    /// Resets results and runs intersection stages for supported surfaces; `solver.perform()?`.
     pub fn perform(&mut self) -> Result<(), Failure> {
         self.done = false;
         self.results.clear(None);
@@ -188,14 +190,10 @@ impl BeanFaceIntersector {
             self.done = true;
             return Ok(());
         }
-        self.perform_general(curve_type, surface_type)
+        self.perform_general()
     }
 
-    fn perform_general(
-        &mut self,
-        curve_type: CurveType,
-        surface_type: SurfaceType,
-    ) -> Result<(), Failure> {
+    fn perform_general(&mut self) -> Result<(), Failure> {
         self.range_manager
             .set_boundaries(self.range.first(), self.range.last(), 0);
         if self.test_compute_coinside()? {
@@ -203,11 +201,7 @@ impl BeanFaceIntersector {
             self.done = true;
             return Ok(());
         }
-        exact_intersection::compute(self)?;
-        near_range_boundaries::compute(self)?;
-        Err(Failure::new(&format!(
-            "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported analytic or coincident geometry"
-        )))
+        general::compute(self)
     }
 
     /// Appends a line/plane result without clearing earlier ranges; `solver.compute_line_plane()?`.
