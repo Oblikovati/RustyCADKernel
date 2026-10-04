@@ -34,7 +34,7 @@
   "limitations": [
     "Native null current-data dereference is replaced by Standard_NullObject.",
     "Concurrent unsynchronized native access is not a behavioral equivalence claim; Rust synchronizes the slot.",
-    "Callbacks are Arc trait objects, not C++ subclass/RTTI representations."
+    "Callbacks use Arc<dyn CallBack + Send + Sync>; the Arc owner is not an owning Handle<dyn CallBack> over an embedded StandardTransient object. Cloning it does not update GetRefCount, and StandardTransient::This/base-handle projection is unavailable. These are observable identity/count differences in addition to the Send + Sync restriction; C++ ABI compatibility is not claimed."
   ],
   "validation": {
     "package_test_passed": 2621,
