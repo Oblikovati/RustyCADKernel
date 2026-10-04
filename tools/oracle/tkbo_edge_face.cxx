@@ -51,4 +51,5 @@ int main() {
   run("quick-contained", contained, face, 0, 1, true);
   run("line-cylinder-touch", cylinderTouch, cylinderFace, 0, 4);
   run("circle-plane-touch", circleTouch, tangentFace, 0, 6.283185307179586);
+  return 0;
 }

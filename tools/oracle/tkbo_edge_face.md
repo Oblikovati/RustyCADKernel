@@ -35,3 +35,12 @@ line/plane crossing and `CheckTouchVertex` refinement. Those remain helper
 fixtures. Bounded-adaptor behavior in the HInter fallback and arbitrary
 surface/curve domains remain proof gaps. These supplemental fixtures do not
 map additional legacy declarations or establish full EdgeFace parity.
+
+`tkbo_edge_face_state.cxx` adds seven native state snapshots, replayed by
+`int_tools_edge_face_state.rs`: default state, repeated successful `Perform`,
+a degenerated edge, a geometry-free edge, negative fuzzy input, and recovery
+through quick coincidence with a reset context. The comparison checks all 49
+numeric state fields exactly. Native results accumulate across repeated calls;
+invalid edge checks retain prior completion and results. The degenerated-edge
+case finishes with error 3 because the subsequent geometric check overrides
+error 2. This is additional lifecycle evidence, not a new legacy declaration.
