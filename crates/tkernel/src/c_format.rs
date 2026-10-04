@@ -132,24 +132,30 @@ fn has_percent_modifiers(spec: Spec) -> bool {
 }
 
 fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatError> {
-    match spec.conversion {
-        b'%' => Ok("no argument"),
-        b'd' | b'i' if spec.length >= -2 && spec.length <= 0 => {
-            Ok("an Int argument (length modifiers hh/h/no modifier)")
-        }
-        b'o' | b'u' | b'x' | b'X' if spec.length == 0 => Ok("a UInt argument"),
-        b'o' | b'u' | b'x' | b'X' if spec.length == -2 || spec.length == -1 => {
-            Ok("an Int argument (length modifiers hh/h)")
-        }
-        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' if spec.length == 0 || spec.length == 1 => {
-            Ok("a Real argument")
-        }
-        b's' if spec.length == 0 => Ok("a Text argument"),
-        _ => Err(format_error(
+    supported_argument_kind(spec).ok_or_else(|| {
+        format_error(
             spec,
             offset,
             "a supported %d/%i/%o/%u/%x/%X/%f/%e/%g/%s directive",
-        )),
+        )
+    })
+}
+
+fn supported_argument_kind(spec: Spec) -> Option<&'static str> {
+    match spec.conversion {
+        b'%' => Some("no argument"),
+        b'd' | b'i' if (-2..=0).contains(&spec.length) => {
+            Some("an Int argument (hh/h/no modifier)")
+        }
+        b'o' | b'u' | b'x' | b'X' if spec.length == 0 => Some("a UInt argument"),
+        b'o' | b'u' | b'x' | b'X' if spec.length == -2 || spec.length == -1 => {
+            Some("an Int argument (hh/h)")
+        }
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' if spec.length == 0 || spec.length == 1 => {
+            Some("a Real argument")
+        }
+        b's' if spec.length == 0 => Some("a Text argument"),
+        _ => None,
     }
 }
 
