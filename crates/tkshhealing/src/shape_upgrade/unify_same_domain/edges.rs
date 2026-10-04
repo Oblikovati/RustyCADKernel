@@ -3,6 +3,7 @@ mod bspline;
 mod containers;
 mod global_context;
 mod global_merge;
+mod pcurve_union;
 mod safe_input;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildReShape;
@@ -222,6 +223,7 @@ fn replace_line_pair(
     let start = safe_merge_vertex(&start, safe_input_mode)?;
     let end = safe_merge_vertex(&end, safe_input_mode)?;
     let edge = make_line_edge(start.clone(), end.clone())?;
+    pcurve_union::union_single_face_line(shape, first, second, &edge)?;
     record_safe_vertex(context, &original_start, &start, safe_input_mode)?;
     record_safe_vertex(context, &original_end, &end, safe_input_mode)?;
     context.merge(
