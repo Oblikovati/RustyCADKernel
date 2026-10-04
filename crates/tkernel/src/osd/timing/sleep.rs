@@ -108,6 +108,15 @@ mod tests {
     #[derive(Default)]
     struct RecordingSleeper(Mutex<Vec<SleepRequest>>);
 
+    #[derive(Default)]
+    struct FiniteOnlySleeper(Mutex<Vec<Duration>>);
+
+    impl Sleeper for FiniteOnlySleeper {
+        fn sleep(&self, duration: Duration) {
+            self.0.lock().unwrap().push(duration);
+        }
+    }
+
     impl Sleeper for RecordingSleeper {
         fn sleep(&self, duration: Duration) {
             self.0.lock().unwrap().push(SleepRequest::Finite(duration));
@@ -143,11 +152,8 @@ mod tests {
 
     #[test]
     fn finite_dispatch_uses_the_legacy_sleeper_duration_method() {
-        let sleeper = RecordingSleeper::default();
+        let sleeper = FiniteOnlySleeper::default();
         sleep_milliseconds_with_platform(&sleeper, 17, true);
-        assert_eq!(
-            *sleeper.0.lock().unwrap(),
-            [SleepRequest::Finite(Duration::from_millis(17))]
-        );
+        assert_eq!(*sleeper.0.lock().unwrap(), [Duration::from_millis(17)]);
     }
 }
