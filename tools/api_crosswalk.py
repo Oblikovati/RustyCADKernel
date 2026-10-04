@@ -165,6 +165,8 @@ def cpp_candidates(
             if leaf_name(key) == name
             for row in rows
         ]
+    if params is not None:
+        candidates = constructor_candidates(name, candidates, by_name)
     candidates = [
         row
         for row in candidates
@@ -193,6 +195,21 @@ def cpp_candidates(
         else candidate_status(candidates)
     )
     return status, candidates
+
+
+def constructor_candidates(
+    name: str,
+    candidates: list[dict[str, JSONValue]],
+    by_name: dict[str, list[dict[str, JSONValue]]],
+) -> list[dict[str, JSONValue]]:
+    """Resolve Class(args) only through its exact record; `constructor_candidates(name, rows, index)`."""
+    records = [row for row in candidates if row.get("kind") == "CXXRecord"]
+    if not any(row.get("qualified_name") == name for row in records):
+        return candidates
+    constructors = by_name.get(f"{name}::{leaf_name(name)}", [])
+    return [row for row in candidates if row not in records] + [
+        row for row in constructors if row.get("kind") == "CXXConstructor"
+    ]
 
 
 def candidate_status(candidates: list[dict[str, JSONValue]]) -> str:
