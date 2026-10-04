@@ -11,6 +11,7 @@ from rustdoc_declarations import file_hash, span_filename, stable_path
 from rustdoc_bool_foreign_impls import bool_foreign_impl_members
 from rustdoc_foreign_impls import foreign_impl_members
 from rustdoc_const_aliases import const_specialized_alias_members, eligible_impl_body
+from rustdoc_type_aliases import specialized_type_alias_members
 
 
 class ImplState(Protocol):
@@ -50,7 +51,10 @@ def inherent_members(
 ) -> list[dict[str, JSONValue]]:
     kind, body = read_inner(item)
     if kind == "type_alias":
-        return const_specialized_alias_members(item, path, state, read_inner, render_impl)
+        return [
+            *const_specialized_alias_members(item, path, state, read_inner, render_impl),
+            *specialized_type_alias_members(item, path, state, read_inner, render_impl),
+        ]
     owner_id = str(integer_value(item.get("id"), "impl owner id"))
     return [
         entry
