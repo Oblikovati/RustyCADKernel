@@ -228000,7 +228000,7 @@
       "source_sha256": "68cc5b28910da7367d3aac81076ac90c89987f29e3d79b5f6233aca0bd751cdd",
       "rust_item": "rustycad_tkbo::int_tools::BeanFaceIntersector::perform",
       "status": "partial",
-      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. Coincidence stage additionally has 24 private range-state and four public Perform snapshots (tools/oracle/tkbo_bean_coincidence.md); these are supplemental, not mapped legacy declarations. Explicit bounds overloads have separate partial mappings. Exact-intersection/extrema/boundary stages now have 12 public Perform snapshots (tools/oracle/tkbo_bean_general_facade.md), including a located near-tangent regression. Localization remains explicitly unported; full legacy/API parity unproven."
+      "notes": "72 native line/plane state and 20 analytic fast-path snapshots plus 5661 private-helper numeric comparisons; tools/oracle/tkbo_bean_facade.md. Coincidence stage additionally has 24 private range-state and four public Perform snapshots (tools/oracle/tkbo_bean_coincidence.md); these are supplemental, not mapped legacy declarations. Explicit bounds overloads have separate partial mappings. Exact-intersection/extrema/boundary stages now have 12 public Perform snapshots (tools/oracle/tkbo_bean_general_facade.md), including a located near-tangent regression. Adaptive localization is integrated with native Bezier (29 ranges) and cubic B-spline (17 ranges) helper replays, cache lifecycle checks and a public EF flat-Bezier replay (tools/oracle/tkbo_bean_localized.md). General curved/located surface coverage and full legacy/API parity remain unproven."
     },
     {
       "upstream_id": "IntTools_BeanFaceIntersector::SetBeanParameters(const double, const double)",
@@ -228279,7 +228279,7 @@
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ef",
       "status": "partial",
-      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Native common-block/new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and non-line/plane families remain incomplete or unverified. A Bezier-face native success remains an explicit Standard_NotImplemented in Rust until localization is ported; this is a tracked negative regression, not parity evidence. Supplemental fixtures do not map new legacy declarations."
+      "notes": "Native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings and a transitive near-hit chain with nonzero fused tolerance; tools/oracle/tkbo_pave_filler_ef.md. Native common-block/new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and non-line/plane families remain incomplete or unverified. The flat Bezier-face native success now matches the Rust interference record and source/generated vertex coordinates after localized BeanFace integration. Supplemental fixtures do not map new legacy declarations."
     },
     {
       "upstream_id": "BRepOffset_MakeOffset::GetAnalyse() const",
@@ -228289,6 +228289,15 @@
       "rust_item": null,
       "status": "upstream_unimplemented",
       "notes": "Pinned OCCT declares this exported method but has no source definition or native library symbol; its minimal call probe fails to link. Evidence and hashes: tools/oracle/tkoffset_get_analyse_gap.json and tools/oracle/tkoffset_get_analyse_unimplemented.md. No Rust implementation or successful port is claimed; this remains an explicit inventory obligation."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::MakeThickSolid(const Message_ProgressRange &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_thick_solid",
+      "status": "partial",
+      "notes": "No-closing-face branch delegates to MakeOffsetShape and reverses completed positive offsets. Pinned native positive, negative and zero-offset fixtures compare completion, errors, nullness, result and face orientations; tools/oracle/tkoffset_make_thick_solid_no_caps.md. Closing-face quilting is explicitly unsupported. Supplemental fixtures do not map legacy declarations or establish complete API parity."
     }
   ],
   "tests": [
