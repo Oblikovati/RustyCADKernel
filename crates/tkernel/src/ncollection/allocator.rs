@@ -91,6 +91,23 @@ impl BaseAllocator {
         ))))
     }
 
+    /// Accepts the native thread-safety request for an incremental allocator; its internal
+    /// mutex remains enabled for Rust memory safety even when `is_thread_safe` is false.
+    /// Example: `BaseAllocator::incremental(4096).set_thread_safe(true)?`.
+    pub fn set_thread_safe(&self, _is_thread_safe: bool) -> Result<(), Failure> {
+        let actual = match &*self.inner {
+            AllocatorKind::Incremental(_) => return Ok(()),
+            AllocatorKind::Common => "NCollection_BaseAllocator",
+            AllocatorKind::Heap => "NCollection_HeapAllocator",
+            AllocatorKind::Accumulating(_) => "NCollection_AccAllocator",
+            AllocatorKind::Aligned(_) => "NCollection_AlignedAllocator",
+        };
+        Err(Failure::with_message(
+            "Standard_TypeMismatch",
+            &format!("{actual} cannot set thread safety; expected NCollection_IncAllocator"),
+        ))
+    }
+
     /// A new accumulating allocator (`NCollection_AccAllocator(theBlockSize)`), which allocates
     /// its first block at once. A zero size, which divides by zero natively, is refused.
     ///
