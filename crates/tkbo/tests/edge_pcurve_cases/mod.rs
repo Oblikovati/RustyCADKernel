@@ -166,3 +166,5 @@ mod approx_normal;
 mod surface_normal;
 
 mod seam;
+
+mod utilities;

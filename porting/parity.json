@@ -226428,6 +226428,60 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::split_seam_from_origin",
       "status": "partial",
       "notes": "384 native seam pair reconstruction cases; tools/oracle/tkbo_split_seam.md. Trimmed-surface/spline/location/exception branches still need evidence; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::CurveOnSurface(const TopoDS_Edge &, const TopoDS_Face &, occ::handle<Geom2d_Curve> &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::curve_on_surface_simple",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnFace(const TopoDS_Face &, const occ::handle<Geom_Curve> &, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::adjust_pcurve_for_curve",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::BuildPCurveForEdgeOnFace(const TopoDS_Edge &, const TopoDS_Face &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::build_pcurve_for_edge_on_face",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::IntermediatePoint(const double, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::intermediate_point",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::IsEdgeIsoline(const TopoDS_Edge &, const TopoDS_Face &, bool &, bool &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::is_edge_isoline",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::PointOnSurface(const TopoDS_Edge &, const TopoDS_Face &, const double, double &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::point_on_surface",
+      "status": "partial",
+      "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
     }
   ],
   "tests": [

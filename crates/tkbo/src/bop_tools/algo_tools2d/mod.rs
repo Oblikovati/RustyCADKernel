@@ -11,3 +11,9 @@ pub use edge_pcurve::{
 
 mod tangent;
 pub use tangent::edge_tangent;
+
+mod edge_utilities;
+pub use edge_utilities::{
+    adjust_pcurve_for_curve, build_pcurve_for_edge_on_face, curve_on_surface_simple,
+    intermediate_point, is_edge_isoline, point_on_surface,
+};
