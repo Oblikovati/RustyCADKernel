@@ -8,3 +8,6 @@ pub use edge_pcurve::{
     curve_on_surface, has_curve_on_surface, has_curve_on_surface_simple,
     intermediate_point_on_edge, make_2d,
 };
+
+mod tangent;
+pub use tangent::edge_tangent;
