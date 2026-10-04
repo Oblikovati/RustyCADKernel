@@ -91619,7 +91619,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::dump",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json."
     },
     {
       "upstream_id": "Message_Report::Dump(Standard_OStream&,Message_Gravity)",
@@ -91627,7 +91627,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::dump_gravity",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json."
     },
     {
       "upstream_id": "Message_Report::SendMessages(const occ::handle<Message_Messenger>&)",

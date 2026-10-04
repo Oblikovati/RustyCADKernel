@@ -3,6 +3,7 @@ use super::Report;
 use crate::message::{AlertExtended, CompositeAlerts, Gravity, Messenger, downcast_alert, json};
 use crate::standard::RuntimeTyped;
 use crate::standard::dump::DumpStream;
+use crate::tcollection::c_string_prefix;
 use std::io::{self, Write};
 use std::sync::Arc;
 
@@ -75,7 +76,8 @@ fn dump_messages(
     composite: &CompositeAlerts,
 ) -> io::Result<()> {
     for alert in composite.alerts(gravity) {
-        output.write_all(alert.get_message_key().as_bytes())?;
+        // OCCT 3d097a0 streams GetMessageKey() as const char*, even for a length-bearing attribute.
+        output.write_all(c_string_prefix(alert.get_message_key().as_bytes()))?;
         output.write_all(b"\n")?;
         if let Some(children) = children(&alert) {
             dump_messages(output, gravity, &children)?;

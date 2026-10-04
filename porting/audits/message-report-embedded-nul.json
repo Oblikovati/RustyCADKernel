@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "native_behavior_regression",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "59fb1f7a",
+  "native_profile": "GCC C++17 -O2; Linux; target/occt-modeling-full TKernel",
+  "native_binary_sha256": "5e62fec5795523fb93847fa8a7cd5397f873fde0c3f544ea6267f19adfc4f2ac",
+  "behavior": "OCCT streams GetMessageKey() as const char*: each parent/child key stops at its first NUL, including a leading NUL key. Rust previously wrote the full stored byte span.",
+  "native_input_construction": "TCollection_AsciiString(length, NUL), then SetValue for nonzero bytes; no cast-away-const or invalid SetValue(NUL) call.",
+  "test_command": "cargo test -p rustycad-tkernel --locked --test message_report_embedded_nul --test message_api_behavior",
+  "regressions_failed_before_fix": 2,
+  "passed_after_fix": 37,
+  "failed_after_fix": 0,
+  "logs": {
+    "red": {
+      "path": "message-report-embedded-nul-red.log.gz",
+      "sha256": "967ec9e9f8a4aa970454862384a7efad281972d81a8fe4c4fbe1f4aff66e5482"
+    },
+    "green": {
+      "path": "message-report-embedded-nul-green.log.gz",
+      "sha256": "400e21c2f4b25aa01d0d59f0dc9fd6ba60a9b0a7878fafc0de97dfea285344a1"
+    }
+  },
+  "source_sha256": {
+    "tools/oracle/tkernel_report_embedded_nul.cxx": "6de9bace7886a70a12bdc6b03630a19cb370fd73bb140d83097b2354e7e24189",
+    "tools/oracle/tkernel_report_embedded_nul.expected": "af3e9376d7e714eb96390b219487473f64c06ceb086b28dca32653c8b6154305",
+    "crates/tkernel/src/message/report/output.rs": "5cc0707de6182e7830ddefbf73cfe54ca2f78a38a237c3907478c86cf3f857c3",
+    "crates/tkernel/tests/message_report_embedded_nul.rs": "00cc9a98bca4566fc2a0e8cd3fecf49c0495a37a475c4f63cdb5aecd5fc3a014"
+  },
+  "legacy_declaration_count_change": 0,
+  "full_api_parity_proven": false
+}
