@@ -59,3 +59,24 @@ fn external_writes_and_assignment_preserve_destination_bounds() {
     }
     assert_eq!(values, [9.0, 4.0, 4.0]);
 }
+#[test]
+fn external_buffer_aliases_changes_in_both_directions() {
+    let mut values = [1.0, 2.0];
+    let mut vector = Vector::from_buffer(&mut values, 3, 4).unwrap();
+    vector[3] = 8.0;
+    vector[4] = 9.0;
+    assert_eq!((vector[3], vector[4]), (8.0, 9.0));
+    drop(vector);
+    assert_eq!(values, [8.0, 9.0]);
+}
+#[test]
+fn changing_lower_bound_relabels_inline_and_heap_values() {
+    for length in [3, 33] {
+        let mut vector = Vector::with_size_filled(length, 2.5);
+        vector[0] = 3.0;
+        vector[length as i32 - 1] = 9.0;
+        vector.set_lower(-4);
+        assert_eq!((vector.lower(), vector.upper()), (-4, length as i32 - 5));
+        assert_eq!((vector[-4], vector[length as i32 - 5]), (3.0, 9.0));
+    }
+}
