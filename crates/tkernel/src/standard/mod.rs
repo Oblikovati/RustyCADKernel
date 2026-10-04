@@ -2,7 +2,11 @@
 mod guid;
 pub use guid::{GUID_SIZE, GUID_SIZE_ALLOC, Guid, Uuid};
 mod array_stream_buffer;
+mod array_stream_hooks;
+mod array_stream_state;
 pub use array_stream_buffer::ArrayStreamBuffer;
+pub use array_stream_hooks::{ArrayStreamBufferHooks, NativeArrayStreamBufferHooks};
+pub use array_stream_state::{ArrayStreamBufferState, ArrayStreamSeekDirection};
 mod failure;
 pub use failure::Failure;
 pub mod exceptions;

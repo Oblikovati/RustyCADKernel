@@ -83110,15 +83110,17 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::init",
       "status": "partial",
-      "notes": "Replaces the borrowed bytes and rewinds. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel. Concrete reinitialization is implemented; native virtual overriding/subclass dispatch is not represented. See porting/audits/array-stream-override-surface.md."
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "Concrete Init is overridable through ArrayStreamBufferHooks::init over the shared borrowed state. The Rust lifetime requires the replacement bytes to live for the adapter lifetime; this is a safe Rust adapter, not a C++ ABI/vtable. Derived dispatch receipt: tools/oracle/array_stream_override_dispatch.expected."
     },
     {
       "upstream_id": "Standard_ArrayStreamBuffer::xsgetn(char*,std::streamsize)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::xsgetn",
-      "status": "implemented",
-      "notes": "Copies min(count, available) bytes; the count is the destination slice length, so the native negative-count undefined behavior cannot occur. Read::read delegates to it. Related quirks kept in the protected overrides: put_back (pbackfail) compares the int_type with the previous char promoted to int, so a byte of 0x80 or more never matches where char is signed; seek_occt refuses the unchecked out-of-buffer positions native seekoff would store. The differential probe (services_ operations) compares it with the native kernel."
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "ArrayStreamBufferHooks::xsgetn is dynamically dispatched over the shared byte state and Read delegates to it. A Rust mutable slice admits only nonnegative counts; negative native streamsize requests and custom negative results are not represented. Derived dispatch receipt: tools/oracle/array_stream_override_dispatch.expected."
     },
     {
       "upstream_id": "Standard_JsonKey",
@@ -234440,9 +234442,55 @@
       "upstream_id": "Standard_ArrayStreamBuffer::pbackfail(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
-      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::put_back_integer",
-      "status": "implemented",
-      "notes": "Protected stream hook accepts the full i32 int_type domain, including negative signed-char promotions. EOF -1 unconditionally restores a previous byte; failure preserves position. Return EOF becomes None and unsigned character results become Some(u8). Native probe: tools/oracle/array_stream_integer_putback.cxx; supplemental tests only. Existing Option<u8> convenience delegates to this implementation."
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::pbackfail",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "The override callback and direct hook return i32, preserving native int_type results; put_back_integer remains an Option<u8> convenience. Default putback and derived custom-result dispatch are covered by tools/oracle/array_stream_integer_putback.expected and tools/oracle/array_stream_override_dispatch.expected. The Rust trait adapter does not reproduce C++ ABI/vtable subclassing."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::underflow()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::underflow",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "ArrayStreamBufferHooks::underflow dispatches with mutable shared state and i32 int_type, including custom values outside the byte range. Rust BufRead::fill_buf is explicitly a stored-byte adapter and does not dispatch this hook. Derived native fixture and Rust receipt test cover a state-mutating override returning 300."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::uflow()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::uflow_int",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "The native integer result and mutable state callback are available as uflow_int; the existing uflow() -> Option<u8> is a byte adapter. Derived dispatch receipt covers the hook; streamsize/int_type representations remain Rust adapters rather than C++ ABI types."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::showmanyc()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::showmanyc",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "The override receives mutable shared state and returns a signed count. available() remains a state inspector and does not call this hook. The derived fixture exercises an override that moves the shared cursor before returning. Rust isize is a bounded adapter for native std::streamsize."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::seekoff(off_type,std::ios_base::seekdir,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::seekoff",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "ArrayStreamSeekDirection represents begin/current/end and the source default no-op branch; openmode is omitted because native ignores it. io::Result<u64> represents bounded valid positions, not arbitrary C++ pos_type state. Negative pointer targets and beyond-end native pointer arithmetic remain unsupported undefined domains."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::seekpos(pos_type,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::seekpos",
+      "status": "partial",
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "The hook adapts a bounded absolute position and its default implementation dispatches through seekoff, verified by the derived hook count receipt. Rust does not model fpos state or the ignored openmode parameter; invalid native pointer domains remain unsupported."
     },
     {
       "upstream_id": "gp_Ax2::getPerpendicularXDir(gp_Dir::D) noexcept",
@@ -234477,7 +234525,8 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer",
       "status": "partial",
-      "notes": "Concrete bounded borrowed-buffer reading and seeking are implemented. Native virtual Init and protected std::streambuf hook overriding are not exposed through an equivalent Rust trait/base surface. The callable put_back_integer hook covers full native int requests, but does not implement subclass dispatch. See porting/audits/array-stream-override-surface.md."
+      "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
+      "notes": "Concrete bounded reads/seeks and a Rust ArrayStreamBufferHooks dispatch adapter are implemented. The adapter covers Init, all six protected hooks and xsgetn over shared state, but it is not C++ ABI/vtable subclassing and Rust streamsize/pos_type/input-count domains differ. See porting/audits/array-stream-override-surface.md."
     }
   ],
   "tests": [
