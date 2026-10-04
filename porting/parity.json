@@ -229561,6 +229561,249 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::fill_images_edges",
       "status": "partial",
       "notes": "Generic source-edge image/origin/ShapesSD construction with referenced-empty and common-block behavior verified in tools/oracle/tkbo_builder_edge_images.md. Explicit DS injection replaces the stored DS. Progress cancellation and full Builder execution remain missing; no legacy Fuse test is claimed."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::OffsetData",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::OffsetData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::OffsetData::BasisAdaptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::OffsetData::basis_adaptor",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::OffsetData::Offset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::OffsetData::offset",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::OffsetData::EvalRep",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::OffsetData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BezierData",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BezierData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BezierData::Curve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BezierData::curve",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BezierData::Cache",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BezierData::cache",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BezierData::EvalRep",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BezierData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BSplineData",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BSplineData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BSplineData::Curve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BSplineData::curve",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BSplineData::Cache",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BSplineData::cache",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BSplineData::EvalRep",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::BSplineData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::CurveDataVariant",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "source_sha256": "b78eb0d87fadfa6b64e3902e952e6ecdbafb87654c69be1443ee66c10f6925ad",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::CurveDataVariant",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveOffsetData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetData::BasisAdaptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveOffsetData::basis_adaptor",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetData::Offset",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveOffsetData::offset",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveOffsetData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetData::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveOffsetData::direction",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BezierData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBezierData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BezierData::Curve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBezierData::curve",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BezierData::Cache",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBezierData::cache",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BezierData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBezierData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BSplineData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBSplineData",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BSplineData::Curve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBSplineData::curve",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BSplineData::Cache",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBSplineData::cache",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BSplineData::EvalRep",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveBSplineData::eval_rep",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::CurveDataVariant",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "source_sha256": "3c97006c38c06a9e2158df0c5f8b7ba22d72aea8c5807555a59e9ccc707253dd",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::CurveDataVariant",
+      "status": "implemented",
+      "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg3d_adaptor_public_curve_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
     }
   ],
   "tests": [
