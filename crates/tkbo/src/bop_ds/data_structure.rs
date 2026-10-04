@@ -19,6 +19,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 mod face_classification;
+mod face_classification_in;
 mod same_domain;
 
 /// The shape and argument storage shared by Boolean operation algorithms.
