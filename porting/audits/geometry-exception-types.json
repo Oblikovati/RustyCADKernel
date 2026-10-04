@@ -1,0 +1,22 @@
+{
+  "scope": "Four generated geometry exception ExceptionType methods",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration_ids": [
+    "d545a3d190084d074721f2f36a81989f3dd39e91c7a1fe9da81ffb3c59b1ee9b",
+    "fb74ecc769a85e228907f0d6beb9e2ad8f69b2025c105546d2390c5bdeb46c7a",
+    "40c573526e7d802c486d3c8fd742124c1df2d1c319df22e007707c464402d094",
+    "073e0136a546fe4ab32e337dd4cfbf81ce13bd154c5abb2b1cc936ceb717ee57"
+  ],
+  "artifact_sha256": {
+    "tools/oracle/geometry_exception_types.cxx": "80a37acb8407c7e1d0086e27fbe6d61c84f40d92e3be4777bb0c0df205f2a714",
+    "tools/oracle/geometry_exception_types.expected": "e05d70c04ef37c2a5f74e8a7c30cd2fe8ab875ee7e745957ade6b43864beff4f",
+    "crates/tkg3d/tests/geometry_exception_types.rs": "8334ad83d3a4a32c7261f5ec0ddedd47377eb1f177afbcb35a9124f07863eaa6"
+  },
+  "compile_command": "g++ -std=c++17 tools/oracle/geometry_exception_types.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/geometry-exception-types",
+  "validation": "Native four-row output equals Rust constructor/clone exception_type receipt; cargo test -p rustycad-tkg3d --test geometry_exception_types: 1 passed",
+  "legacy_declaration_count_changed": false,
+  "scope_limits": [
+    "Only ExceptionType declarations are mapped by this receipt; allocation operators and remaining exception class surfaces are separate.",
+    "Rust carries exception identity in Failure metadata; no cross-language ABI claim."
+  ]
+}

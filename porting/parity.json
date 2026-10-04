@@ -235207,6 +235207,54 @@
       "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::init",
       "status": "implemented",
       "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
+    },
+    {
+      "upstream_id": "Geom2d_UndefinedDerivative::ExceptionType() const noexcept",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_UndefinedDerivative.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "rust_items": [
+        "rustycad_tkg2d::geom2d::errors::undefined_derivative",
+        "rustycad_tkernel::standard::Failure::exception_type"
+      ],
+      "status": "implemented",
+      "notes": "Existing typed geometry Failure factory plus shared exception_type preserves the native most-derived exception name through cloning. Native probe checks direct and Standard_Failure-reference virtual dispatch for all four geometry exception classes. Exact supplemental receipt tools/oracle/geometry_exception_types.expected; no legacy declaration count increase. Compiler declaration d545a3d190084d074721f2f36a81989f3dd39e91c7a1fe9da81ffb3c59b1ee9b."
+    },
+    {
+      "upstream_id": "Geom2d_UndefinedValue::ExceptionType() const noexcept",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_UndefinedValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "rust_items": [
+        "rustycad_tkg2d::geom2d::errors::undefined_value",
+        "rustycad_tkernel::standard::Failure::exception_type"
+      ],
+      "status": "implemented",
+      "notes": "Existing typed geometry Failure factory plus shared exception_type preserves the native most-derived exception name through cloning. Native probe checks direct and Standard_Failure-reference virtual dispatch for all four geometry exception classes. Exact supplemental receipt tools/oracle/geometry_exception_types.expected; no legacy declaration count increase. Compiler declaration fb74ecc769a85e228907f0d6beb9e2ad8f69b2025c105546d2390c5bdeb46c7a."
+    },
+    {
+      "upstream_id": "Geom_UndefinedDerivative::ExceptionType() const noexcept",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_UndefinedDerivative.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "rust_items": [
+        "rustycad_tkg3d::geom::errors::undefined_derivative",
+        "rustycad_tkernel::standard::Failure::exception_type"
+      ],
+      "status": "implemented",
+      "notes": "Existing typed geometry Failure factory plus shared exception_type preserves the native most-derived exception name through cloning. Native probe checks direct and Standard_Failure-reference virtual dispatch for all four geometry exception classes. Exact supplemental receipt tools/oracle/geometry_exception_types.expected; no legacy declaration count increase. Compiler declaration 40c573526e7d802c486d3c8fd742124c1df2d1c319df22e007707c464402d094."
+    },
+    {
+      "upstream_id": "Geom_UndefinedValue::ExceptionType() const noexcept",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_UndefinedValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "rust_items": [
+        "rustycad_tkg3d::geom::errors::undefined_value",
+        "rustycad_tkernel::standard::Failure::exception_type"
+      ],
+      "status": "implemented",
+      "notes": "Existing typed geometry Failure factory plus shared exception_type preserves the native most-derived exception name through cloning. Native probe checks direct and Standard_Failure-reference virtual dispatch for all four geometry exception classes. Exact supplemental receipt tools/oracle/geometry_exception_types.expected; no legacy declaration count increase. Compiler declaration 073e0136a546fe4ab32e337dd4cfbf81ce13bd154c5abb2b1cc936ceb717ee57."
     }
   ],
   "tests": [
