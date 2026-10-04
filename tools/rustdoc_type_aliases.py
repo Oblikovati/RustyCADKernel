@@ -326,12 +326,54 @@ def emit_specialized_impl(
     impl: Mapping[str, JSONValue], parameter: str, concrete_id: str, path: str,
     state: TypeAliasState, render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
-    rows = render_impl(impl, path, state.items, state.paths, state.source_root, state.unresolved)
+    filtered = omit_member_where_clauses(impl, path, state)
+    rows = render_impl(filtered, path, state.items, state.paths, state.source_root, state.unresolved)
     metadata = alias_specialization(path, parameter, concrete_id, state.paths)
     for row in rows:
         row["alias_specialization"] = metadata.copy()
         row["declaration_sha256"] = declaration_digest(row)
     return rows
+
+
+def omit_member_where_clauses(
+    impl: Mapping[str, JSONValue], path: str, state: TypeAliasState,
+) -> dict[str, JSONValue]:
+    member_ids = impl.get("items")
+    if not isinstance(member_ids, list):
+        state.unresolved.append(f"generic-type-alias:{path}:impl-member-list-unavailable")
+        return {**impl, "items": []}
+    trait_impl = impl.get("trait") is not None
+    retained = [
+        member_id for member_id in member_ids
+        if retain_member_without_where(member_id, path, trait_impl, state)
+    ]
+    return {**impl, "items": retained}
+
+
+def retain_member_without_where(
+    member_id: JSONValue, path: str, trait_impl: bool, state: TypeAliasState,
+) -> bool:
+    member = state.items.get(str(member_id))
+    if member is None:
+        state.unresolved.append(f"generic-type-alias:{path}:member:{member_id}:not-captured")
+        return False
+    if not trait_impl and member.get("visibility") != "public":
+        return True
+    if member_has_where_clause(member):
+        state.unresolved.append(
+            f"generic-type-alias:{path}:member:{member_id}:unsupported-member-where-predicates"
+        )
+        return False
+    return True
+
+
+def member_has_where_clause(member: Mapping[str, JSONValue]) -> bool:
+    inner = member.get("inner")
+    body = next(iter(inner.values()), None) if isinstance(inner, dict) else None
+    generics = body.get("generics") if isinstance(body, dict) else None
+    if generics is None:
+        return False
+    return not isinstance(generics, dict) or generics.get("where_predicates") != []
 
 
 def alias_specialization(

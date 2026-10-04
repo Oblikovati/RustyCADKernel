@@ -26,18 +26,48 @@ class TypeSpecializedAliasTests(unittest.TestCase):
         inventory = normalized_fixture()
         paths = declaration_paths(inventory)
         self.assertNotIn(f"{CRATE}::CmpFile::fast_only", paths)
+        impl_id = impl_id_named_member(fixture_document(), "fast_only")
         self.assertIn(
-            f"generic-type-alias:{CRATE}::CmpFile:impl:67:concrete-type-bound-unproven",
+            f"generic-type-alias:{CRATE}::CmpFile:impl:{impl_id}:concrete-type-bound-unproven",
             inventory["unresolved_links"],
         )
 
     def test_unsupported_where_predicate_is_explicit(self) -> None:
         inventory = normalized_fixture()
         self.assertNotIn(f"{CRATE}::File::where_bound", declaration_paths(inventory))
+        impl_id = impl_id_named_member(fixture_document(), "where_bound")
         self.assertIn(
-            f"generic-type-alias:{CRATE}::File:impl:69:unsupported-where-predicates",
+            f"generic-type-alias:{CRATE}::File:impl:{impl_id}:unsupported-where-predicates",
             inventory["unresolved_links"],
         )
+
+    def test_member_where_predicate_is_withheld_for_every_alias(self) -> None:
+        inventory = normalized_fixture()
+        paths = declaration_paths(inventory)
+        for alias in ("File", "CmpFile"):
+            self.assertNotIn(f"{CRATE}::{alias}::conditional", paths)
+        member_id = item_id_named(fixture_document(), "conditional")
+        for alias in ("File", "CmpFile"):
+            expected = (
+                f"generic-type-alias:{CRATE}::{alias}:member:{member_id}:"
+                "unsupported-member-where-predicates"
+            )
+            self.assertIn(expected, inventory["unresolved_links"])
+
+    def test_trait_impl_where_predicate_is_checked_despite_default_visibility(self) -> None:
+        document = fixture_document()
+        impl_id = impl_id_named_member(document, "sized")
+        member_id = impl_member_id(document, impl_id, "sized")
+        inventory = normalized_fixture()
+        rows = inventory["declarations"]
+        specialized = [row for row in rows if row.get("alias_specialization")]
+        self.assertFalse(any(row["path"].endswith("::sized") for row in specialized))
+        for alias in ("File", "CmpFile"):
+            expected = (
+                f"generic-type-alias:{CRATE}::{alias}:member:{member_id}:"
+                "unsupported-member-where-predicates"
+            )
+            self.assertIn(expected, inventory["unresolved_links"])
 
     def test_alias_without_resolved_concrete_argument_is_not_expanded(self) -> None:
         document = fixture_document()
@@ -149,6 +179,31 @@ def impl_named_member(document: dict[str, JSONValue], name: str) -> dict[str, JS
         if any(items[str(member)].get("name") == name for member in members):
             return body
     raise AssertionError(f"no compiler fixture impl contains {name!r}")
+
+
+def impl_id_named_member(document: dict[str, JSONValue], name: str) -> str:
+    items = document["index"]
+    for identifier, item in items.items():
+        body = item.get("inner", {}).get("impl") if isinstance(item, dict) else None
+        members = body.get("items", []) if isinstance(body, dict) else []
+        if any(items[str(member)].get("name") == name for member in members):
+            return identifier
+    raise AssertionError(f"no compiler fixture impl contains {name!r}")
+
+
+def impl_member_id(document: dict[str, JSONValue], impl_id: str, name: str) -> str:
+    impl = document["index"][impl_id]["inner"]["impl"]
+    for member_id in impl.get("items", []):
+        if document["index"][str(member_id)].get("name") == name:
+            return str(member_id)
+    raise AssertionError(f"impl {impl_id} has no member named {name!r}")
+
+
+def item_id_named(document: dict[str, JSONValue], name: str) -> str:
+    for identifier, item in document["index"].items():
+        if isinstance(item, dict) and item.get("name") == name:
+            return identifier
+    raise AssertionError(f"fixture has no item named {name!r}")
 
 
 def concrete_trait_impl(

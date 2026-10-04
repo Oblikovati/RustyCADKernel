@@ -2,9 +2,10 @@
 
 This crate models `File = TextFile<Text>` and `CmpFile = TextFile<Compatible>`.
 Its generic impls exercise inherited inherent methods, trait-qualified members,
-an extra concrete trait bound, an unsatisfied bound, and an unsupported `where`
-predicate. The normalizer must retain alias and trait identity and withhold cases
-whose constraints cannot be proven from rustdoc records.
+an extra concrete trait bound, an unsatisfied bound, an impl-level `where`
+predicate, and a method-level `where` predicate on the generic receiver. The
+normalizer must retain alias and trait identity and withhold cases whose
+constraints cannot be proven from rustdoc records.
 
 Capture with Rust `1.100.0-nightly (f7575a9da 2026-09-24)`:
 
