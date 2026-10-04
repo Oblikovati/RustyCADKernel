@@ -1,10 +1,9 @@
 mod candidates;
+mod non_manifold;
 pub(super) use candidates::MergePolicy;
 use candidates::{CandidatePair, candidate_pair, linked_face_order_allows_join};
 
-use super::{
-    FixRoot, ShapeFixWireframe, join_3d::join_edges_3d, repair::unported_small_edge_merge,
-};
+use super::{FixRoot, ShapeFixWireframe, join_3d::join_edges_3d};
 use crate::{
     shape_analysis::ShapeAnalysisWire,
     shape_build::ShapeBuildReShape,
@@ -29,10 +28,7 @@ pub(super) fn merge_small_edges(
     angle_limit: Option<f64>,
     drop_mode: bool,
 ) -> Result<bool, Failure> {
-    if !multiple.is_empty() {
-        return Err(unported_small_edge_merge());
-    }
-    let mut policy = MergePolicy::free(angle_limit, drop_mode);
+    let mut policy = MergePolicy::free(angle_limit, drop_mode, multiple.iter().cloned().collect());
     merge_free_wire_candidates(fixer, small, &mut policy)
 }
 
@@ -110,7 +106,7 @@ fn merge_wire_data(
         publish_changed_wire(fixer, wire_fixer, source, wire_data, true)?;
         return Ok(true);
     }
-    drop_single_small_edge(fixer, source, wire_data, small, policy.drop_mode)
+    drop_single_small_edge(fixer, source, wire_data, small, policy)
 }
 
 fn drop_single_small_edge(
@@ -118,16 +114,16 @@ fn drop_single_small_edge(
     source: &Wire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
-    drop_mode: bool,
+    policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
-    if !drop_mode || wire_data.nb_edges() != 1 {
+    if !policy.drop_mode || wire_data.nb_edges() != 1 {
         return Ok(false);
     }
     let edge = wire_data.edge(1)?;
     if !small.contains(&edge.clone().into_shape()) {
         return Ok(false);
     }
-    remove_dropped_wire_edge(fixer, source, &edge, small)?;
+    remove_dropped_wire_edge(fixer, source, &edge, small, policy)?;
     Ok(true)
 }
 
@@ -136,11 +132,15 @@ fn remove_dropped_wire_edge(
     source: &Wire,
     edge: &Edge,
     small: &mut MapOfShape,
+    policy: &mut MergePolicy,
 ) -> Result<(), Failure> {
     let context = fixer.context();
     ReShape::remove(&*context, &edge.clone().into_shape())?;
     ReShape::remove(&*context, &source.clone().into_shape())?;
     small.remove(&edge.clone().into_shape());
+    policy
+        .edge_faces
+        .retain(|(candidate, _)| !candidate.is_same(&edge.clone().into_shape()));
     fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
     Ok(())
 }
@@ -232,12 +232,19 @@ fn remember_joined_edge(policy: &mut MergePolicy, pair: &CandidatePair, joined: 
     if policy.edge_faces.is_empty() {
         return;
     }
+    policy.face_small_changed = true;
     let faces = pair
         .faces
         .iter()
         .map(|face| face.clone().into_shape())
         .collect();
-    policy.edge_faces.push((joined.clone().into_shape(), faces));
+    let joined_shape = joined.clone().into_shape();
+    policy.edge_faces.retain(|(edge, _)| {
+        !edge.is_same(&pair.first.clone().into_shape())
+            && !edge.is_same(&pair.second.clone().into_shape())
+            && !edge.is_same(&joined_shape)
+    });
+    policy.edge_faces.push((joined_shape, faces));
 }
 
 fn install_joined_edge(
@@ -247,6 +254,8 @@ fn install_joined_edge(
     pair: &CandidatePair,
     joined: super::join_3d::JoinedEdge3d,
 ) -> Result<(), Failure> {
+    let mut joined = joined;
+    non_manifold::copy_pair_vertices(fixer, pair, &mut joined.edge)?;
     replace_pair_in_context(fixer, pair, &joined)?;
     register_joined_edge(
         wire_data,

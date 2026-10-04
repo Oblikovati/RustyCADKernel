@@ -42,16 +42,24 @@ struct CandidateEdges {
 
 pub(in crate::shape_fix::wireframe) struct MergePolicy {
     pub(super) faces: Vec<Face>,
-    pub(super) edge_faces: Vec<(Shape, Vec<Shape>)>,
+    pub(in crate::shape_fix::wireframe) edge_faces: Vec<(Shape, Vec<Shape>)>,
+    pub(in crate::shape_fix::wireframe) face_small_changed: bool,
+    pub(super) multiple_edges: Vec<Shape>,
     pub(super) angle_limit: Option<f64>,
     pub(super) drop_mode: bool,
 }
 
 impl MergePolicy {
-    pub(in crate::shape_fix::wireframe) fn free(angle_limit: Option<f64>, drop_mode: bool) -> Self {
+    pub(in crate::shape_fix::wireframe) fn free(
+        angle_limit: Option<f64>,
+        drop_mode: bool,
+        multiple_edges: Vec<Shape>,
+    ) -> Self {
         Self {
             faces: Vec::new(),
             edge_faces: Vec::new(),
+            face_small_changed: false,
+            multiple_edges,
             angle_limit,
             drop_mode,
         }
@@ -61,12 +69,16 @@ impl MergePolicy {
         face: &Face,
         edge_faces: Vec<(Shape, Vec<Shape>)>,
         angle_limit: Option<f64>,
+        multiple_edges: Vec<Shape>,
+        drop_mode: bool,
     ) -> Self {
         Self {
             faces: vec![face.clone()],
             edge_faces,
+            face_small_changed: false,
+            multiple_edges,
             angle_limit,
-            drop_mode: false,
+            drop_mode,
         }
     }
 }
@@ -82,12 +94,22 @@ pub(super) fn candidate_pair(
     let Some(edges) = candidate_edges(wire_data, small, index, previous, next)? else {
         return Ok(None);
     };
+    let angle_choice = choose_next_pair(&edges.before, &edges.middle, &edges.after)?;
+    if contains_multiple_edge(policy, &edges.before, &edges.middle) {
+        return Ok(None);
+    }
     let indexes = PairIndexes {
         middle: index,
         previous,
         next,
     };
-    limited_candidate_pair(wire_data, edges, indexes, policy)
+    limited_candidate_pair(wire_data, edges, indexes, policy, angle_choice)
+}
+
+fn contains_multiple_edge(policy: &MergePolicy, previous: &Edge, middle: &Edge) -> bool {
+    policy.multiple_edges.iter().any(|edge| {
+        edge.is_same(&previous.clone().into_shape()) || edge.is_same(&middle.clone().into_shape())
+    })
 }
 
 fn limited_candidate_pair(
@@ -95,11 +117,12 @@ fn limited_candidate_pair(
     edges: CandidateEdges,
     indexes: PairIndexes,
     policy: &MergePolicy,
+    angle_choice: (bool, f64),
 ) -> Result<Option<CandidatePair>, Failure> {
     let Some((faces, forced_next)) = candidate_face_set(wire_data, &edges, indexes, policy) else {
         return Ok(None);
     };
-    let pair = select_candidate_pair(edges, indexes, &faces, forced_next)?;
+    let pair = select_candidate_pair(edges, indexes, &faces, forced_next, angle_choice);
     if exceeds_pair_angle_limit(&pair, policy.angle_limit) {
         return Ok(None);
     }
@@ -162,11 +185,25 @@ fn candidate_edges(
     if !is_mergeable_middle(small, &middle, index, previous, next) {
         return Ok(None);
     }
+    if repeats_pair_edge(wire_data, &middle, previous, next)? {
+        return Ok(None);
+    }
     Ok(Some(CandidateEdges {
         before: wire_data.edge(previous)?,
         middle,
         after: wire_data.edge(next)?,
     }))
+}
+
+fn repeats_pair_edge(
+    wire_data: &Handle<ShapeExtendWireData>,
+    middle: &Edge,
+    previous: i32,
+    next: i32,
+) -> Result<bool, Failure> {
+    let before = wire_data.edge(previous)?;
+    let after = wire_data.edge(next)?;
+    Ok(middle.is_same(&before) || middle.is_same(&after))
 }
 
 fn exceeds_pair_angle_limit(pair: &CandidatePair, limit: Option<f64>) -> bool {
@@ -178,11 +215,12 @@ fn select_candidate_pair(
     indexes: PairIndexes,
     faces: &[Face],
     forced_next: Option<bool>,
-) -> Result<CandidatePair, Failure> {
-    let (angle_next, minimum_angle) = choose_next_pair(&edges.before, &edges.middle, &edges.after)?;
+    angle_choice: (bool, f64),
+) -> CandidatePair {
+    let (angle_next, minimum_angle) = angle_choice;
     let take_next = forced_next.unwrap_or(angle_next);
     let (first, second) = selected_pair_edges(edges, take_next);
-    Ok(CandidatePair {
+    CandidatePair {
         first,
         second,
         middle_index: indexes.middle,
@@ -191,7 +229,7 @@ fn select_candidate_pair(
         take_next,
         faces: faces.to_vec(),
         minimum_angle,
-    })
+    }
 }
 
 fn selected_pair_edges(edges: CandidateEdges, take_next: bool) -> (Edge, Edge) {

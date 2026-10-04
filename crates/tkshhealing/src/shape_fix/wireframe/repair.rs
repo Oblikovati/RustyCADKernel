@@ -110,7 +110,7 @@ impl ShapeFixWireframe {
             -1.,
         )
     }
-    /// Merge the supported unlinked 3D edge map; `tool.merge_small_edges(&mut small,&mut edge_faces,&mut face_small,&mut multiple,false,-1.0)?`.
+    /// Merge marked wire edges while updating face-link maps; `tool.merge_small_edges(&mut small,&mut edge_faces,&mut face_small,&mut multiple,false,-1.0)?`.
     pub fn merge_small_edges(
         &self,
         small: &mut MapOfShape,
@@ -124,15 +124,16 @@ impl ShapeFixWireframe {
         if small.is_empty() {
             return Ok(false);
         }
-        if drop_mode && !face_small.is_empty() {
-            return Err(unported_small_edge_merge());
-        }
-        if !multiple.is_empty() {
-            return Err(unported_small_edge_merge());
-        }
         let angle_limit = effective_angle_limit(limit_angle, self.limit_angle());
-        let face_changed =
-            merge_faces::merge_face_small_edges(self, small, edge_faces, face_small, angle_limit)?;
+        let face_changed = merge_faces::merge_face_small_edges(
+            self,
+            small,
+            edge_faces,
+            face_small,
+            multiple,
+            angle_limit,
+            drop_mode,
+        )?;
         merge_free_wires::merge_small_edges(self, small, multiple, angle_limit, drop_mode)
             .map(|free_changed| face_changed || free_changed)
     }
