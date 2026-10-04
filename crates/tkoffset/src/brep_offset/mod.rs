@@ -4,6 +4,7 @@ mod collapse_singularities;
 pub use classification::{BRepOffsetError, BRepOffsetMode};
 mod interval;
 pub use interval::BRepOffsetInterval;
+mod make_offset;
 mod offset_face;
 mod simple_offset;
 mod simple_offset_angle;
@@ -19,6 +20,7 @@ mod surface_analytic;
 
 pub use crate::brep_offset_api::BRepOffsetAPIMakeOffsetShape;
 pub use collapse_singularities::collapse_singularities;
+pub use make_offset::{BRepOffsetMakeOffset, BRepOffsetMakeOffsetConfiguration};
 pub use simple_offset::BRepOffsetSimpleOffset;
 pub use simple_offset_angle::{
     compute_simple_offset_max_angle, compute_simple_offset_safe_distance,
