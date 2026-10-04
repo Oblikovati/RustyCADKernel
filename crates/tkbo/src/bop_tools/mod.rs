@@ -30,3 +30,6 @@ pub use correct_range::{correct_range_edges, correct_range_face};
 
 mod micro_edge;
 pub use micro_edge::is_micro_edge;
+
+mod face_relations;
+pub use face_relations::{are_faces_same_domain, get_edge_off, get_edge_on_face};

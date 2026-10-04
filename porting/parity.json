@@ -226608,6 +226608,33 @@
       "rust_item": "rustycad_tkbo::bop_tools::is_micro_edge",
       "status": "partial",
       "notes": "192 native empty/degenerated/short-line tolerance, orientation, context and splittability cases match. Curved/located edges, missing endpoints, pcurve-only geometry and wider ShrunkRange behavior remain unproven; see tools/oracle/tkbo_micro_edge.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::AreFacesSameDomain(const TopoDS_Face &, const TopoDS_Face &, const occ::handle<IntTools_Context> &, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::are_faces_same_domain",
+      "status": "partial",
+      "notes": "150 native face-domain and 160 edge-occurrence lookup cases pass, including two translated supports, tolerance scales and retained outputs. Complex nesting, holes, spline domains, exceptional states and other transforms remain unproven; see tools/oracle/tkbo_face_relations.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::GetEdgeOnFace(const TopoDS_Edge &, const TopoDS_Face &, TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::get_edge_on_face",
+      "status": "partial",
+      "notes": "150 native face-domain and 160 edge-occurrence lookup cases pass, including two translated supports, tolerance scales and retained outputs. Complex nesting, holes, spline domains, exceptional states and other transforms remain unproven; see tools/oracle/tkbo_face_relations.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::GetEdgeOff(const TopoDS_Edge &, const TopoDS_Face &, TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::get_edge_off",
+      "status": "partial",
+      "notes": "150 native face-domain and 160 edge-occurrence lookup cases pass, including two translated supports, tolerance scales and retained outputs. Complex nesting, holes, spline domains, exceptional states and other transforms remain unproven; see tools/oracle/tkbo_face_relations.md."
     }
   ],
   "tests": [
