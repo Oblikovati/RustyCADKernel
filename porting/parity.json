@@ -225150,6 +225150,24 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d_mode",
       "status": "implemented",
       "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::FixSmallEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_small_edges",
+      "status": "partial",
+      "notes": "Native null/no-op/compound orchestration, empty merge-map false case, and single free-wire 3D small-edge BSpline join validated by topology occurrences and curve geometry. Face-linked/pcurve/seam/drop/angle/multiple-group/NM/warning branches remain explicit errors. Partial; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::MergeSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool, const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
+      "status": "partial",
+      "notes": "Native null/no-op/compound orchestration, empty merge-map false case, and single free-wire 3D small-edge BSpline join validated by topology occurrences and curve geometry. Face-linked/pcurve/seam/drop/angle/multiple-group/NM/warning branches remain explicit errors. Partial; no legacy mapping increase."
     }
   ],
   "tests": [
