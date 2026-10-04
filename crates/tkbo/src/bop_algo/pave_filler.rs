@@ -1,4 +1,6 @@
 //! Native `BOPAlgo_PaveFiller::Init` state and broad-phase preparation.
+#[path = "pave_filler/vertex_vertex.rs"]
+mod vertex_vertex;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options};
 use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
 use rustycad_tkbrep::topods::Shape;
