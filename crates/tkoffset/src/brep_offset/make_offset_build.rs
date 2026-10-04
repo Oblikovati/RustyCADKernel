@@ -1,5 +1,5 @@
 //! The source-face-only branch of `BRepOffset_MakeOffset::MakeOffsetShape`.
-use super::{BRepOffsetAnalyse, BRepOffsetError, BRepOffsetMakeOffset};
+use super::{BRepOffsetAnalyse, BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetOffsetFace};
 use rustycad_tkbrep::{
     brep::BRepTool,
     brep_tools::Quilt,
@@ -33,7 +33,7 @@ impl BRepOffsetMakeOffset {
         let analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
         reject_tangent_edges(&analyzer, &face)?;
         let offset = face_offset(&self.face_offsets, &face, config.offset);
-        let image = offset_plane_face(&face, offset)?;
+        let image = offset_face(&face, offset)?;
         self.result_shape = shell_from_face(&image)?;
         self.error = Some(BRepOffsetError::NoError);
         self.done = true;
@@ -107,18 +107,20 @@ fn face_offset(offsets: &[(Face, f64)], face: &Face, global: f64) -> f64 {
         .map_or(global, |(_, offset)| *offset)
 }
 
-fn offset_plane_face(face: &Face, offset: f64) -> Result<Face, Failure> {
+fn offset_face(face: &Face, offset: f64) -> Result<Face, Failure> {
     let (surface, location) = BRepTool::surface_with_location(face)?;
     if !location.is_identity() {
-        return Err(not_implemented(
-            "single-plane face has a nonidentity location",
-        ));
+        return Err(not_implemented("single face has a nonidentity location"));
     }
-    let plane = surface.cast::<GeomPlane>();
-    let Some(plane) = plane.get() else {
-        return Err(not_implemented("single-face path requires a plane surface"));
-    };
-    translate_plane_face(face, plane, offset)
+    if let Some(plane) = surface.cast::<GeomPlane>().get() {
+        return translate_plane_face(face, plane, offset);
+    }
+    regular_offset_face(face, offset)
+}
+
+fn regular_offset_face(face: &Face, offset: f64) -> Result<Face, Failure> {
+    let offset_face = BRepOffsetOffsetFace::from_face(face, offset)?;
+    Ok(offset_face.face().clone())
 }
 
 fn translate_plane_face(face: &Face, plane: &GeomPlane, offset: f64) -> Result<Face, Failure> {

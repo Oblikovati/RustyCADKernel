@@ -4,11 +4,14 @@
 #include <BRepOffset_MakeOffset.hxx>
 #include <GProp_GProps.hxx>
 #include <Geom_Plane.hxx>
+#include <Geom_CylindricalSurface.hxx>
 #include <Precision.hxx>
 #include <BRep_Tool.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
 #include <gp_Pln.hxx>
+#include <gp_Cylinder.hxx>
+#include <gp_Ax3.hxx>
 #include <iostream>
 
 void probe(const char* label, const TopoDS_Face& face, double offset) {
@@ -35,4 +38,8 @@ int main() {
   probe("forward-positive", face, 2.0);
   probe("reversed-positive", TopoDS::Face(face.Reversed()), 2.0);
   probe("forward-negative", face, -2.0);
+  const gp_Cylinder cylinder(gp_Ax3(), 5.0);
+  const TopoDS_Face cylinderFace =
+      BRepBuilderAPI_MakeFace(cylinder, 0.0, M_PI / 2.0, 0.0, 2.0).Face();
+  probe("cylinder-positive", cylinderFace, 2.0);
 }

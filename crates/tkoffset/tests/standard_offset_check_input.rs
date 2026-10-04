@@ -8,7 +8,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::{
     geom_abs::JoinType,
-    gp::{Direction3, Plane3, Point3},
+    gp::{Axis3, Cylinder3, Direction3, Plane3, Point3},
 };
 use rustycad_tkoffset::brep_offset::{BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetMode};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
@@ -55,6 +55,38 @@ fn disconnected_faces_fail_during_standard_offset_precheck() {
 #[test]
 fn one_plane_face_offset_builds_the_native_open_shell() {
     assert_single_plane_offset(plane_face(0.0), 2.0, 2.0);
+}
+
+#[test]
+fn cylindrical_face_offset_preserves_oriented_boundary_vertices() {
+    let cylinder = Cylinder3::new(Axis3::default(), 5.0).unwrap();
+    let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+        cylinder,
+        (0.0, std::f64::consts::FRAC_PI_2, 0.0, 2.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap();
+    assert_cylinder_offset(&face);
+}
+
+fn assert_cylinder_offset(face: &rustycad_tkbrep::topods::Face) {
+    let mut maker = initialized(&face.clone().into_shape(), 2.0);
+
+    maker.make_offset_shape().unwrap();
+
+    assert!(maker.is_done());
+    assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
+    assert_shell_topology(maker.shape());
+    let mut properties = GProps::new();
+    BRepGProp::surface_properties(maker.shape(), &mut properties, false, false).unwrap();
+    assert!((properties.mass() - 7.0 * std::f64::consts::PI).abs() < 1.0e-9);
+    assert!(
+        BRepCheckAnalyzer::new(maker.shape(), true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
 }
 
 #[test]
