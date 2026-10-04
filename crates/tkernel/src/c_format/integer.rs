@@ -51,6 +51,8 @@ fn integer_value(argument: Option<&CArg<'_>>, spec: &Spec, signed: bool) -> i128
         Some(CArg::ULong(value)) => i128::from(*value),
         Some(CArg::LongLong(value)) => i128::from(*value),
         Some(CArg::ULongLong(value)) => i128::from(*value),
+        Some(CArg::SignedSize(value)) | Some(CArg::PtrDiff(value)) => *value as i128,
+        Some(CArg::Size(value)) | Some(CArg::UnsignedPtrDiff(value)) => *value as i128,
         _ => 0,
     }
 }

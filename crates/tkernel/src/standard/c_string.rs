@@ -7,7 +7,7 @@
 //! end the string exactly as `strlen`/`strcmp` do. `Strtod` is [`crate::standard::strtod`].
 //!
 //! The formatting wrappers support `%c`, `%d/%i/%o/%u/%x/%X/%f/%F/%e/%E/%g/%G/%s/%%`,
-//! literal or `*` width/precision, and the private formatter's flags. They require typed
+//! integer `hh/h/l/ll/z/t` lengths, literal or `*` width/precision, and the private formatter's flags. They require typed
 //! [`FormatArg`] values and injected sinks; they do not expose C varargs or `FILE*`. Vec
 //! buffer variants replace storage; caller-slice variants preserve bytes after the final NUL.
 
