@@ -112,6 +112,8 @@ def record_entry(
         entry["impl_context"] = impl_context
     if kind == "trait":
         entry["canonical_trait_path"] = stable_path(paths, item_id, path)
+    if kind in {"struct", "enum", "union", "type_alias"}:
+        entry["canonical_type_path"] = stable_path(paths, item_id, path)
     entry["declaration_sha256"] = declaration_digest(entry)
     return entry
 

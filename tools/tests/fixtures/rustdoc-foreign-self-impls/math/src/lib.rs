@@ -1,4 +1,8 @@
 pub mod gp {
-    pub struct Circle3(pub f64);
-    pub struct Ellipse3(pub f64);
+    mod circle {
+        pub struct Circle3(pub f64);
+        pub struct GenericCircle<T>(pub T);
+    }
+
+    pub use circle::{Circle3, GenericCircle};
 }

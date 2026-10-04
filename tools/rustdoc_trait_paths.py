@@ -34,6 +34,8 @@ def renamed_trait_member(
 ) -> dict[str, JSONValue]:
     """Keep implementation provenance when renaming; `renamed_trait_member(row, alias)`."""
     path = string_value(entry.get("path"), "implementation path")
+    if path.startswith("<"):
+        return renamed_ufcs_trait_member(entry, path, trait)
     owner, separator, tail = path.rpartition("::<")
     _, member_separator, member = tail.rpartition(">::")
     if not separator or not member_separator:
@@ -46,13 +48,34 @@ def renamed_trait_member(
     return renamed
 
 
+def renamed_ufcs_trait_member(
+    entry: dict[str, JSONValue], path: str, trait: str
+) -> dict[str, JSONValue]:
+    prefix, separator, member = path[1:].rpartition(">::")
+    owner, trait_separator, trait_application = prefix.partition(" as ")
+    canonical = implementation_trait(entry)
+    current = entry.get("foreign_impl_trait_path")
+    recorded = entry.get("foreign_impl_trait_canonical")
+    if not separator or not trait_separator or canonical is None:
+        raise ValueError(f"implementation path {path!r}; expected <Self as Trait>::member")
+    current_trait, separator, suffix = trait_application.partition("<")
+    suffix = f"<{suffix}" if separator else ""
+    if current_trait != current or canonical != recorded:
+        raise ValueError(f"implementation path {path!r}; expected recorded foreign trait identity")
+    renamed = dict(entry)
+    renamed["path"] = f"<{owner} as {trait}{suffix}>::{member}"
+    renamed["foreign_impl_trait_path"] = trait
+    renamed["declaration_sha256"] = declaration_digest(renamed)
+    return renamed
+
+
 def resolved_trait_members(
     entry: dict[str, JSONValue],
     catalog: dict[str, set[str]],
     captured: set[str],
     unresolved: list[JSONValue],
 ) -> list[dict[str, JSONValue]]:
-    """Expand public trait aliases or record the gap; `resolved_trait_members(row, catalog, names, gaps)`."""
+    """Expand public trait aliases or record a reachability gap."""
     canonical = implementation_trait(entry)
     if canonical is None or canonical.split("::", 1)[0] not in captured:
         return [entry]

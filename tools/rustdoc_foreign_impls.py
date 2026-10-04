@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from pathlib import Path
+import re
 
 from api_inventory_json import JSONValue, array_value, declaration_digest, string_value
 from api_inventory_reexports import source_hashes
@@ -21,13 +22,21 @@ def foreign_impl_members(
 ) -> list[dict[str, JSONValue]]:
     trait = impl.get("trait")
     trait_path = display_trait(trait, paths)
-    if not owner_path or trait_path is None:
-        error = f"impl:{impl_id}:unsupported-foreign-identity"
+    if not owner_path or trait_path is None or self_type_is_parameterized(impl):
+        error = f"impl:{impl_id}:unsupported-foreign-owner-or-trait"
         unresolved.append(error)
         return [unsupported_foreign_candidate(impl_id, owner_path, error)]
     return render_foreign_members(
         impl, owner_path, trait_path, impl_id, items, paths, source_root, unresolved
     )
+
+
+def self_type_is_parameterized(impl: Mapping[str, JSONValue]) -> bool:
+    self_type = impl.get("for")
+    if not isinstance(self_type, dict) or len(self_type) != 1:
+        return True
+    kind, value = next(iter(self_type.items()))
+    return kind != "resolved_path" or not isinstance(value, dict) or value.get("args") is not None
 
 
 def unsupported_foreign_candidate(
@@ -186,11 +195,10 @@ def foreign_member(
 
 
 def resolve_foreign_impl_candidates(crates: list[dict[str, JSONValue]]) -> None:
-    catalog = public_type_catalog(crates)
-    public_paths = public_identity_paths(crates)
-    candidates = foreign_candidate_rows(crates)
+    aliases = public_identity_aliases(crates)
+    candidates = unique_foreign_candidate_rows(crates)
     for origin, candidate in candidates:
-        attach_or_report(origin, candidate, catalog, public_paths, crates)
+        attach_or_report(origin, candidate, aliases, crates)
     for crate in crates:
         crate["source_files"] = source_hashes(source_declaration_rows(crate))
 
@@ -204,101 +212,168 @@ def source_declaration_rows(
     return [value for value in values if isinstance(value, dict)]
 
 
-def public_type_catalog(
+def public_identity_aliases(
     crates: Sequence[Mapping[str, JSONValue]],
-) -> dict[str, dict[str, JSONValue]]:
-    catalog: dict[str, dict[str, JSONValue]] = {}
+) -> dict[tuple[str, str], set[str]]:
+    aliases: dict[tuple[str, str], set[str]] = {}
     for crate in crates:
+        crate_name = string_value(crate.get("crate"), "crate name")
         for raw in array_value(crate.get("declarations"), "declarations"):
-            if not isinstance(raw, dict):
-                continue
-            if raw.get("kind") not in {"struct", "enum", "union", "type_alias"}:
-                continue
-            path = raw.get("path")
-            if isinstance(path, str):
-                catalog[path] = raw
-    return catalog
+            add_public_identity_alias(aliases, crate_name, raw)
+    return aliases
 
 
-def public_identity_paths(
-    crates: Sequence[Mapping[str, JSONValue]],
-) -> dict[str, set[str]]:
-    accepted = {"struct", "enum", "union", "type_alias", "trait"}
-    paths: dict[str, set[str]] = {}
-    for crate in crates:
-        name = string_value(crate.get("crate"), "crate name")
-        paths[name] = {
-            path
-            for raw in array_value(crate.get("declarations"), "declarations")
-            if isinstance(raw, dict) and raw.get("kind") in accepted
-            for path in [raw.get("path")]
-            if isinstance(path, str)
-        }
-    return paths
+def add_public_identity_alias(
+    aliases: dict[tuple[str, str], set[str]], crate: str, value: JSONValue
+) -> None:
+    if not isinstance(value, dict):
+        return
+    kind = value.get("kind")
+    key = "canonical_trait_path" if kind == "trait" else "canonical_type_path"
+    if kind not in {"struct", "enum", "union", "type_alias", "trait"}:
+        return
+    canonical, public_path = value.get(key), value.get("path")
+    if isinstance(canonical, str) and isinstance(public_path, str):
+        aliases.setdefault((crate, canonical), set()).add(public_path)
 
 
-def foreign_candidate_rows(
+def unique_foreign_candidate_rows(
     crates: Sequence[dict[str, JSONValue]],
 ) -> list[tuple[dict[str, JSONValue], dict[str, JSONValue]]]:
     rows = []
+    seen: set[tuple[str, str, str]] = set()
     for crate in crates:
         values = crate.pop("foreign_impl_candidates", [])
         for value in array_value(values, "foreign impl candidates"):
-            if isinstance(value, dict):
-                rows.append((crate, value))
+            if not isinstance(value, dict):
+                continue
+            key = foreign_candidate_key(crate, value)
+            if key in seen:
+                continue
+            seen.add(key)
+            rows.append((crate, value))
     return rows
+
+
+def foreign_candidate_key(
+    crate: Mapping[str, JSONValue], candidate: Mapping[str, JSONValue]
+) -> tuple[str, str, str]:
+    return (
+        string_value(crate.get("crate"), "origin crate"),
+        str(candidate.get("foreign_impl_id", "")),
+        str(candidate.get("path", candidate.get("foreign_impl_error", ""))),
+    )
 
 
 def attach_or_report(
     origin: dict[str, JSONValue],
     candidate: Mapping[str, JSONValue],
-    catalog: Mapping[str, dict[str, JSONValue]],
-    public_paths: Mapping[str, set[str]],
+    aliases: Mapping[tuple[str, str], set[str]],
     crates: list[dict[str, JSONValue]],
 ) -> None:
     error = candidate.get("foreign_impl_error")
     if isinstance(error, str):
         report_gap(origin, error)
         return
-    target = reachable_owner_crate(candidate, catalog, crates)
-    if target is None:
+    owner, target = public_owner_target(candidate, aliases, crates)
+    if target is None or owner is None:
         report_unreachable_owner(origin, candidate)
         return
-    context_error = foreign_context_error(origin, candidate, public_paths)
-    if context_error is not None:
+    local_aliases, context_error = local_context_aliases(origin, candidate, aliases)
+    if local_aliases is None:
         report_gap(origin, context_error)
         return
-    append_foreign_member(target, candidate, origin)
+    public_entry = rewrite_foreign_candidate(candidate, owner, local_aliases)
+    append_foreign_member(target, public_entry, origin)
 
 
-def reachable_owner_crate(
+def public_owner_target(
     candidate: Mapping[str, JSONValue],
-    catalog: Mapping[str, dict[str, JSONValue]],
+    aliases: Mapping[tuple[str, str], set[str]],
     crates: Sequence[dict[str, JSONValue]],
-) -> dict[str, JSONValue] | None:
+) -> tuple[str | None, dict[str, JSONValue] | None]:
     owner = candidate.get("foreign_impl_owner")
-    if not isinstance(owner, str) or owner not in catalog:
-        return None
+    if not isinstance(owner, str):
+        return None, None
     crate_name = owner.split("::", 1)[0].replace("-", "_")
-    return next((crate for crate in crates if crate.get("crate") == crate_name), None)
+    public_owners = aliases.get((crate_name, owner), set())
+    if len(public_owners) != 1:
+        return None, None
+    target = next((crate for crate in crates if crate.get("crate") == crate_name), None)
+    return next(iter(public_owners)), target
 
 
-def foreign_context_error(
+def local_context_aliases(
     origin: Mapping[str, JSONValue],
     candidate: Mapping[str, JSONValue],
-    public_paths: Mapping[str, set[str]],
-) -> str | None:
+    aliases: Mapping[tuple[str, str], set[str]],
+) -> tuple[dict[str, str] | None, str | None]:
     context = candidate.get("impl_context")
     paths, unresolved = context_references(context)
     if unresolved:
-        return f"foreign-impl-unresolved-context:{candidate.get('path')}"
+        return None, f"foreign-impl-unresolved-context:{candidate.get('path')}"
     crate = string_value(origin.get("crate"), "origin crate")
     local = [path for path in paths if path.startswith(f"{crate}::")]
     if not local:
-        return f"foreign-impl-no-local-public-anchor:{candidate.get('path')}"
-    allowed = public_paths.get(crate, set())
-    missing = sorted({path for path in local if path not in allowed})
-    return None if not missing else f"foreign-impl-unreachable-local-type:{missing[0]}"
+        return None, f"foreign-impl-no-local-public-anchor:{candidate.get('path')}"
+    return resolve_local_aliases(crate, local, aliases)
+
+
+def resolve_local_aliases(
+    crate: str,
+    local_paths: Sequence[str],
+    aliases: Mapping[tuple[str, str], set[str]],
+) -> tuple[dict[str, str] | None, str | None]:
+    resolved: dict[str, str] = {}
+    for canonical in sorted(set(local_paths)):
+        choices = aliases.get((crate, canonical), set())
+        if len(choices) != 1:
+            return None, f"foreign-impl-unreachable-local-type:{canonical}"
+        resolved[canonical] = next(iter(choices))
+    return resolved, None
+
+
+def rewrite_foreign_candidate(
+    candidate: Mapping[str, JSONValue],
+    owner: str,
+    local_aliases: Mapping[str, str],
+) -> dict[str, JSONValue]:
+    entry = dict(candidate)
+    canonical_owner = string_value(entry.get("foreign_impl_owner"), "foreign owner")
+    path = string_value(entry.get("path"), "foreign impl path")
+    entry["path"] = rewrite_path_identities(path, {canonical_owner: owner, **local_aliases})
+    entry["foreign_impl_owner"] = owner
+    entry["foreign_impl_owner_canonical"] = canonical_owner
+    trait_path = ufcs_trait_path(entry["path"])
+    canonical_trait = candidate_trait_path(entry)
+    if trait_path is not None and canonical_trait is not None:
+        entry["foreign_impl_trait_path"] = trait_path
+        entry["foreign_impl_trait_canonical"] = canonical_trait
+    return entry
+
+
+def candidate_trait_path(entry: Mapping[str, JSONValue]) -> str | None:
+    context = entry.get("impl_context")
+    trait = context.get("trait") if isinstance(context, dict) else None
+    path = trait.get("resolved_item_path") if isinstance(trait, dict) else None
+    return path if isinstance(path, str) else None
+
+
+def ufcs_trait_path(path: str) -> str | None:
+    if not path.startswith("<"):
+        return None
+    prefix, separator, _member = path[1:].rpartition(">::")
+    _owner, trait_separator, application = prefix.partition(" as ")
+    if not separator or not trait_separator:
+        return None
+    return application.split("<", 1)[0]
+
+
+def rewrite_path_identities(path: str, aliases: Mapping[str, str]) -> str:
+    for canonical in sorted(aliases, key=len, reverse=True):
+        pattern = re.compile(re.escape(canonical) + r"(?=$|[^A-Za-z0-9_])")
+        path = pattern.sub(lambda _match: aliases[canonical], path)
+    return path
 
 
 def context_references(value: JSONValue | None) -> tuple[list[str], bool]:
@@ -337,6 +412,7 @@ def append_foreign_member(
     origin: Mapping[str, JSONValue],
 ) -> None:
     entry = dict(candidate)
+    entry.pop("foreign_impl_id", None)
     entry["foreign_impl_origin_crate"] = origin.get("crate")
     entry["declaration_sha256"] = declaration_digest(entry)
     declarations = array_value(target.get("declarations"), "declarations")
