@@ -1,13 +1,12 @@
-//! Native line-domain intersection behavior for `ShapeFix_Wire::FixGap2d(..., false)`.
-use rustycad_tkbrep::{
-    brep::{BRepBuilder, BRepTool},
-    topods::{self, Face, Wire},
-};
+//! Native p-curve range repair behavior for `ShapeFix_Wire::FixGap2d(..., false)`.
+#[path = "support/wire_gap2d_ranges.rs"]
+mod support;
+use rustycad_tkbrep::{brep::BRepTool, topods};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomRectangularTrimmedSurface, GeomSurface};
-use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Ellipse3, Point3};
+use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
 use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixWire};
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+use support::*;
 
 #[test]
 fn intersecting_line_pcurves_extend_only_to_the_shared_parameter() {
@@ -133,96 +132,129 @@ fn one_edge_elliptical_pcurve_expands_both_parameter_ends() {
     );
 }
 
-fn crossing_line_wire() -> (Face, Wire) {
+#[test]
+fn intersecting_circle_pcurves_use_full_conic_domains() {
+    let (face, wire) = intersecting_circle_wire();
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_line_observation(
+        &tool,
+        &face,
+        1,
+        [0.0, 0.1, 1.0, 0.0, 0.9950041652780258, 0.09983341664682815],
+    );
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [
+            3.0415926525847725,
+            3.241592653589793,
+            0.8049958348223092,
+            0.09983341764682793,
+            0.8049958347219745,
+            -0.09983341664682809,
+        ],
+    );
+}
+
+#[test]
+fn disjoint_circular_pcurves_use_extrema_when_ginter_has_no_hit() {
+    let normal = Direction3::new(0.0, 0.0, 1.0).unwrap();
+    let first = circle_arc(Point3::default(), normal, 0.05, 0.1);
+    let second = circle_arc(
+        Point3::new(2.1, 0.0, 0.0),
+        normal,
+        std::f64::consts::PI - 0.1,
+        std::f64::consts::PI - 0.05,
+    );
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_line_observation(
+        &tool,
+        &face,
+        1,
+        [
+            0.05,
+            std::f64::consts::TAU,
+            0.9987502603949663,
+            0.04997916927067833,
+            1.0,
+            0.0,
+        ],
+    );
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [
+            -std::f64::consts::PI,
+            std::f64::consts::PI - 0.05,
+            1.1,
+            0.0,
+            1.1012497396050338,
+            0.049979169270678275,
+        ],
+    );
+}
+
+#[test]
+fn intersecting_trimmed_pcurves_keep_trimmed_curve_wrappers() {
     let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
     let second = edge_between(Point3::new(1.0, 0.2, 0.0), Point3::new(2.0, 1.2, 0.0));
-    wire_with_disconnected_edges(&first, &second)
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_trimmed_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_trimmed_pcurve(&tool, &face, 1, [0.0, 0.8]);
+    assert_trimmed_pcurve(&tool, &face, 2, [-0.28284271247461906, 2.0_f64.sqrt()]);
 }
 
-fn one_circular_arc_wire() -> (Face, Wire) {
-    let circle = Circle3::new(Axis2::default(), 1.0).unwrap();
-    let edge = BRepBuilderAPIMakeEdge::from_circ_params(circle, 0.0, 1.0)
-        .unwrap()
-        .edge()
-        .unwrap();
-    one_arc_wire(edge)
+#[test]
+fn intersecting_offset_pcurves_keep_offset_curve_wrappers() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(1.0, 0.2, 0.0), Point3::new(2.0, 1.2, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_offset_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_offset_pcurve(&tool, &face, 1, [0.0, 0.7828427124746191]);
+    assert_offset_pcurve(&tool, &face, 2, [0.482_842_712_474_619_1, 2.0_f64.sqrt()]);
 }
 
-fn one_elliptical_arc_wire() -> (Face, Wire) {
-    let ellipse = Ellipse3::new(Axis2::default(), 3.0, 1.0).unwrap();
-    let edge = BRepBuilderAPIMakeEdge::from_elips_params(ellipse, 0.0, 1.0)
-        .unwrap()
-        .edge()
-        .unwrap();
-    one_arc_wire(edge)
+#[test]
+fn intersecting_bezier_pcurves_use_their_finite_parameter_domains() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.3, -0.2, 0.0), Point3::new(1.3, 0.8, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_bezier_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bezier_pcurve(&tool, &face, 1, [0.0, 0.5]);
+    assert_bezier_pcurve(&tool, &face, 2, [0.2, 1.0]);
 }
 
-fn one_arc_wire(edge: rustycad_tkbrep::topods::Edge) -> (Face, Wire) {
-    let builder = BRepBuilder::default();
-    let mut wire = Wire::default();
-    builder.make_wire(&mut wire);
-    builder.add(&mut wire, &edge.into_shape()).unwrap();
-    let mut face = Face::default();
-    let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-    builder
-        .make_face_on_surface(&mut face, &plane, 1e-7)
-        .unwrap();
-    builder.add(&mut face, &wire).unwrap();
-    (face, wire)
-}
-
-fn edge_between(first: Point3, last: Point3) -> rustycad_tkbrep::topods::Edge {
-    BRepBuilderAPIMakeEdge::from_points(first, last)
-        .unwrap()
-        .edge()
-        .unwrap()
-}
-
-fn wire_with_disconnected_edges(
-    first: &rustycad_tkbrep::topods::Edge,
-    second: &rustycad_tkbrep::topods::Edge,
-) -> (Face, Wire) {
-    let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-    wire_with_surface(first, second, &surface)
-}
-
-fn wire_with_surface(
-    first: &rustycad_tkbrep::topods::Edge,
-    second: &rustycad_tkbrep::topods::Edge,
-    surface: &Handle<dyn GeomSurface>,
-) -> (Face, Wire) {
-    let builder = BRepBuilder::default();
-    let mut wire = Wire::default();
-    builder.make_wire(&mut wire);
-    builder.add(&mut wire, &first.clone().into_shape()).unwrap();
-    builder
-        .add(&mut wire, &second.clone().into_shape())
-        .unwrap();
-    let mut face = Face::default();
-    builder
-        .make_face_on_surface(&mut face, surface, 1e-7)
-        .unwrap();
-    builder.add(&mut face, &wire).unwrap();
-    (face, wire)
-}
-
-fn assert_line_observation(tool: &ShapeFixWire, face: &Face, index: i32, expected: [f64; 6]) {
-    let edge = topods::edge(&tool.wire_data().unwrap().edge(index).unwrap().into_shape()).unwrap();
-    let curve = BRepTool::curve_on_face(&edge, face).unwrap();
-    let start = curve.pcurve.value(curve.first).unwrap();
-    let end = curve.pcurve.value(curve.last).unwrap();
-    let observed = [
-        curve.first,
-        curve.last,
-        start.x(),
-        start.y(),
-        end.x(),
-        end.y(),
-    ];
-    for (actual, expected) in observed.into_iter().zip(expected) {
-        assert!(
-            (actual - expected).abs() < 1e-12,
-            "line p-curve observation {actual} differs from native value {expected}"
-        );
-    }
+#[test]
+fn intersecting_bspline_pcurves_use_their_full_knot_domains() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.3, -0.2, 0.0), Point3::new(1.3, 0.8, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_bspline_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bspline_pcurve(&tool, &face, 1, [0.0, 0.5]);
+    assert_bspline_pcurve(&tool, &face, 2, [0.2, 1.0]);
 }

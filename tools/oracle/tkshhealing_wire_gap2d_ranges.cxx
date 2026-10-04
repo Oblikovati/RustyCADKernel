@@ -2,6 +2,11 @@
 #include <BRep_Tool.hxx>
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <Geom_Line.hxx>
+#include <Geom2d_Line.hxx>
+#include <Geom2d_BezierCurve.hxx>
+#include <Geom2d_BSplineCurve.hxx>
+#include <Geom2d_OffsetCurve.hxx>
+#include <Geom2d_TrimmedCurve.hxx>
 #include <Geom_Plane.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
 #include <ShapeFix_Wire.hxx>
@@ -16,6 +21,7 @@
 #include <TopExp_Explorer.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Elips.hxx>
+#include <NCollection_Array1.hxx>
 #include <iomanip>
 #include <iostream>
 
@@ -130,6 +136,148 @@ void run_single_elliptical_arc() {
   print_result("single_elliptical_arc", tool, tool.FixGap2d(1, false));
 }
 
+void run_intersecting_circles() {
+  BRep_Builder builder;
+  gp_Dir normal(0, 0, 1);
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(0, 0, 0), normal), 1.0), 0.0, 0.1);
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(1.8, 0, 0), normal), 1.0), M_PI, M_PI + 0.1);
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("intersecting_circles", tool, tool.FixGap2d(2, false));
+}
+
+void run_disjoint_circles_extrema() {
+  BRep_Builder builder;
+  gp_Dir normal(0, 0, 1);
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(0, 0, 0), normal), 1.0), 0.05, 0.1);
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(2.1, 0, 0), normal), 1.0), M_PI - 0.1, M_PI - 0.05);
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("disjoint_circles_extrema", tool, tool.FixGap2d(2, false));
+}
+
+void run_trimmed_line_pcurves() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0.2, 0), gp_Pnt(2, 1.2, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  Handle(Geom2d_Curve) firstLine = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0, 0), gp_Dir2d(1, 0)));
+  Handle(Geom2d_Curve) secondLine = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(1, 0.2), gp_Dir2d(1, 1)));
+  builder.UpdateEdge(first, new Geom2d_TrimmedCurve(firstLine, 0., 1.), face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  builder.UpdateEdge(second, new Geom2d_TrimmedCurve(secondLine, 0., 1.4142135623730951), face, 1e-7);
+  builder.Range(second, face, 0., 1.4142135623730951);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("trimmed_line_pcurves", tool, tool.FixGap2d(2, false));
+}
+
+void run_offset_line_pcurves() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0.2, 0), gp_Pnt(2, 1.2, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  Handle(Geom2d_Curve) firstBase = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0, 0.2), gp_Dir2d(1, 0)));
+  Handle(Geom2d_Curve) secondBase = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0.3, -0.2), gp_Dir2d(1, 1)));
+  Handle(Geom2d_Curve) firstCurve = new Geom2d_OffsetCurve(firstBase, 0.2, false);
+  Handle(Geom2d_Curve) secondCurve = new Geom2d_OffsetCurve(secondBase, 0.2, false);
+  builder.UpdateEdge(first, firstCurve, face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  builder.UpdateEdge(second, secondCurve, face, 1e-7);
+  builder.Range(second, face, 0., 1.4142135623730951);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("offset_line_pcurves", tool, tool.FixGap2d(2, false));
+}
+
+void run_bezier_line_pcurves() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(0.3, -0.2, 0), gp_Pnt(1.3, 0.8, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  NCollection_Array1<gp_Pnt2d> firstPoles(1, 2), secondPoles(1, 2);
+  firstPoles.SetValue(1, gp_Pnt2d(0, 0));
+  firstPoles.SetValue(2, gp_Pnt2d(1, 0));
+  secondPoles.SetValue(1, gp_Pnt2d(0.3, -0.2));
+  secondPoles.SetValue(2, gp_Pnt2d(1.3, 0.8));
+  builder.UpdateEdge(first, new Geom2d_BezierCurve(firstPoles), face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  builder.UpdateEdge(second, new Geom2d_BezierCurve(secondPoles), face, 1e-7);
+  builder.Range(second, face, 0., 1.);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("bezier_line_pcurves", tool, tool.FixGap2d(2, false));
+}
+
+void run_bspline_line_pcurves() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(0.3, -0.2, 0), gp_Pnt(1.3, 0.8, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  NCollection_Array1<gp_Pnt2d> firstPoles(1, 2), secondPoles(1, 2);
+  NCollection_Array1<double> knots(1, 2);
+  NCollection_Array1<int> multiplicities(1, 2);
+  firstPoles.SetValue(1, gp_Pnt2d(0, 0));
+  firstPoles.SetValue(2, gp_Pnt2d(1, 0));
+  secondPoles.SetValue(1, gp_Pnt2d(0.3, -0.2));
+  secondPoles.SetValue(2, gp_Pnt2d(1.3, 0.8));
+  knots.SetValue(1, 0.);
+  knots.SetValue(2, 1.);
+  multiplicities.SetValue(1, 2);
+  multiplicities.SetValue(2, 2);
+  builder.UpdateEdge(first, new Geom2d_BSplineCurve(firstPoles, knots, multiplicities, 1), face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  builder.UpdateEdge(second, new Geom2d_BSplineCurve(secondPoles, knots, multiplicities, 1), face, 1e-7);
+  builder.Range(second, face, 0., 1.);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("bspline_line_pcurves", tool, tool.FixGap2d(2, false));
+}
+
 void run_trimmed_surface_clip() {
   BRep_Builder builder;
   TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
@@ -154,6 +302,12 @@ int main() {
   run_reversed_crossing_lines();
   run_single_circular_arc();
   run_single_elliptical_arc();
+  run_intersecting_circles();
+  run_disjoint_circles_extrema();
+  run_trimmed_line_pcurves();
+  run_offset_line_pcurves();
+  run_bezier_line_pcurves();
+  run_bspline_line_pcurves();
   run_parallel_projection();
   run_trimmed_surface_clip();
 }

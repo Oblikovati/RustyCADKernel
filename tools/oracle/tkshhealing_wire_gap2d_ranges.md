@@ -17,11 +17,26 @@ parameter domain.
 
 `single_circular_arc` and `single_elliptical_arc` cover OCCT's same-edge conic
 branch, which expands both parameter ends by `PI - gap/2`; the circular case's
-separate WireData and Wire rows agree.
+separate WireData and Wire rows agree. `intersecting_circles` exercises the full
+`[0,2π]` conic search domains and the asymmetric nearest-endpoint selection.
+`disjoint_circles_extrema` exercises the fallback path after the conics have no
+intersection: `Extrema_ExtCC` finds their nearest points, then the periodic
+parameter adjustment chooses OCCT's wrapped ranges.
+`trimmed_line_pcurves` confirms that range replacement unwraps trimmed line
+bases for intersection, then retains the trimmed wrappers on both updated
+p-curves. `offset_line_pcurves` checks the corresponding offset-curve path with
+nonzero offsets; the selected intersection is interior to both parameter
+ranges, so both existing ranges move inward while the wrappers remain offsets.
+`bezier_line_pcurves` covers OCCT's bounded Bezier domains and verifies that
+the candidate intersection changes both range endpoints without replacing the
+Bezier dynamic type.
+`bspline_line_pcurves` provides the matching degree-one B-spline case, including
+the source knot interval `[0,1]` and preserved B-spline representation.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
-fallback, finite-surface bounds handling and copied-edge/context replacement
-paths. Actual boundary crossing and non-line domain choices remain uncovered.
+fallback, finite-surface bounds handling, trimmed and offset wrappers, and
+copied-edge/context replacement paths. Higher-degree spline and boundary-crossing
+cases remain uncovered.
 
 Rebuild with:
 
