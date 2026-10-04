@@ -5,7 +5,7 @@
 #[path = "osd_files/fake_calls.rs"]
 mod fake_calls;
 
-use fake_calls::{EACCES, EINVAL, ENOENT, FakeNode, FakePosixCalls};
+use fake_calls::{EACCES, EINVAL, EIO, ENOENT, FakeNode, FakePosixCalls};
 use rustycad_tkernel::{
     osd::{
         CadPath, Directory, DirectoryIterator, File, FileIterator, FromWhere, KindFile, LockType,
@@ -134,6 +134,42 @@ fn read_line_at_end_is_sticky_until_rewind() {
     target.rewind();
     assert!(target.read_last_line(&mut line, 0, 1).unwrap());
     assert_eq!(line.as_bytes(), b"xyz");
+}
+
+#[test]
+fn read_line_output_count_updates_on_line_and_eof() {
+    let calls = Arc::new(FakePosixCalls::new().with_file("/w/lines", b"line\n"));
+    let mut target = file(&calls, "/w/lines");
+    target.open(OpenMode::ReadOnly, &Protection::new()).unwrap();
+    let mut line = AsciiString::new("old");
+    let mut count = -7;
+    target
+        .read_line_with_count(&mut line, 100, &mut count)
+        .unwrap();
+    assert_eq!((line.as_bytes(), count), (b"line\n".as_slice(), 5));
+    target
+        .read_line_with_count(&mut line, 100, &mut count)
+        .unwrap();
+    assert_eq!((line.as_bytes(), count), (b"".as_slice(), 0));
+}
+
+#[test]
+fn read_line_output_count_and_buffer_survive_read_error() {
+    let calls = Arc::new(
+        FakePosixCalls::new()
+            .with_file("/w/broken", b"unused")
+            .with_read_error(EIO),
+    );
+    let mut target = file(&calls, "/w/broken");
+    target.open(OpenMode::ReadOnly, &Protection::new()).unwrap();
+    let mut line = AsciiString::new("keep");
+    let mut count = 73;
+    target
+        .read_line_with_count(&mut line, 100, &mut count)
+        .unwrap();
+    assert_eq!((line.as_bytes(), count), (b"keep".as_slice(), 73));
+    assert!(target.failed());
+    assert_eq!(target.osd_error().errno(), EIO);
 }
 
 #[test]

@@ -19,6 +19,7 @@ pub const EEXIST: i32 = 17;
 pub const ENOTDIR: i32 = 20;
 pub const EISDIR: i32 = 21;
 pub const EINVAL: i32 = 22;
+pub const EIO: i32 = 5;
 pub const ENOTEMPTY: i32 = 39;
 
 #[derive(Clone, Debug)]
@@ -53,6 +54,7 @@ pub struct FakePosixCalls {
     /// `st_blksize` reported for every node (the stdio buffer size).
     pub block_size: u64,
     pub directory_counts: Option<Arc<DirectoryCounts>>,
+    read_error: Option<Errno>,
 }
 
 /// Resolves `//`, `.` and `..` the way the kernel's path walk does.
@@ -100,6 +102,11 @@ impl FakePosixCalls {
             block_size,
             ..Self::new()
         }
+    }
+    /// Makes descriptor reads fail with one errno; `FakePosixCalls::new().with_read_error(5)`.
+    pub fn with_read_error(mut self, errno: i32) -> Self {
+        self.read_error = Some(Errno(errno));
+        self
     }
     pub fn add(&self, path: &[u8], node: FakeNode, mode: u32) {
         self.state
@@ -254,6 +261,9 @@ impl PosixFileCalls for FakePosixCalls {
         state.descriptors.remove(&fd).map(drop).ok_or(Errno(EBADF))
     }
     fn read(&self, fd: i32, buffer: &mut [u8]) -> CallResult<usize> {
+        if let Some(error) = self.read_error {
+            return Err(error);
+        }
         let mut state = self.state.lock().unwrap();
         let descriptor: FakeDescriptor = state.descriptor(fd)?.clone();
         if descriptor.access == OpenMode::WriteOnly {
