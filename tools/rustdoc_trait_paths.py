@@ -42,8 +42,13 @@ def renamed_trait_member(
         raise ValueError(
             f"implementation path {path!r}; expected Owner::<Trait>::member"
         )
+    application = tail.rpartition(">::")[0]
+    current_trait, separator, arguments = application.partition("<")
+    suffix = f"<{arguments}" if separator else ""
+    if not current_trait:
+        raise ValueError(f"implementation path {path!r}; expected a trait application")
     renamed = dict(entry)
-    renamed["path"] = f"{owner}::<{trait}>::{member}"
+    renamed["path"] = f"{owner}::<{trait}{suffix}>::{member}"
     renamed["declaration_sha256"] = declaration_digest(renamed)
     return renamed
 

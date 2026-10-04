@@ -6,6 +6,7 @@ import pathlib
 from collections.abc import Mapping
 from api_inventory_json import JSONValue, array_value, declaration_digest, object_value
 from api_inventory_json import sha256_bytes, string_value
+from rustdoc_generic_arguments import stable_path, trait_arguments
 
 
 def item_index(document: Mapping[str, JSONValue]) -> dict[str, dict[str, JSONValue]]:
@@ -25,18 +26,6 @@ def item_inner(item: Mapping[str, JSONValue]) -> tuple[str, dict[str, JSONValue]
     if isinstance(value, str):
         return kind, {"source": value}
     return kind, object_value(value, f"rustdoc item {kind}")
-
-
-def stable_path(
-    path_table: Mapping[str, JSONValue], item_id: str, fallback: str
-) -> str:
-    raw = path_table.get(item_id)
-    if not isinstance(raw, dict):
-        return fallback
-    parts = raw.get("path")
-    if not isinstance(parts, list) or not all(isinstance(part, str) for part in parts):
-        return fallback
-    return "::".join(parts)
 
 
 def stable_signature(
@@ -244,6 +233,8 @@ def visible_impl_items(
     output = []
     trait = impl.get("trait")
     trait_path = trait_impl_path(trait, paths, unresolved)
+    if trait is not None and trait_path is None:
+        return []
     context_value = {
         "for": impl.get("for"),
         "generics": impl.get("generics"),
@@ -279,9 +270,19 @@ def trait_impl_path(
 ) -> str | None:
     if trait is None:
         return None
+    if not isinstance(trait, dict):
+        unresolved.append("trait-impl:malformed-trait-record")
+        return None
     normalized = stable_signature(trait, paths, unresolved)
     if not isinstance(normalized, dict):
+        unresolved.append("trait-impl:malformed-trait-record")
         return None
-    return string_value(
-        normalized.get("resolved_item_path", normalized.get("path")), "trait path"
-    )
+    path_value = normalized.get("resolved_item_path", normalized.get("path"))
+    if not isinstance(path_value, str) or not path_value:
+        unresolved.append("trait-impl:unresolved-trait-path")
+        return None
+    arguments = trait_arguments(trait.get("args"), paths)
+    if arguments is None:
+        unresolved.append(f"trait-impl:{path_value}:unsupported-generic-arguments")
+        return None
+    return path_value + arguments
