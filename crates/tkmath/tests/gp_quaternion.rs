@@ -75,8 +75,10 @@ fn assert_axis_rotation(order: E, name: &str, angle_index: usize) {
     quaternion.set_euler_angles(order, angles[0], angles[1], angles[2]);
     let mut vector = Xyz::default();
     vector.set_coord(axis + 1, 1.0).unwrap();
-    let transformation = Transform3::from_quaternion(quaternion);
-    let transformed = transformation.apply_coordinates(vector);
+    let mut transformation = Transform3::default();
+    transformation.set_rotation_quaternion(quaternion);
+    let mut transformed = vector;
+    transformation.transforms(&mut transformed);
     assert!(
         (vector - transformed).square_modulus() <= 1e-7 * 1e-7,
         "Rotation around axis should not move a point on that axis. Sequence: {name}, angle index: {angle_index}"

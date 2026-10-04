@@ -11,6 +11,14 @@ fn z_axis(x: f64) -> Axis1 {
 }
 
 #[test]
+fn trsf_transforms_mutates_coordinates_using_scale_and_location() {
+    let transform = Transform3::scaling(Point3::new(1.0, 0.0, 0.0), 2.0).unwrap();
+    let mut coordinates = Xyz::new(2.0, 3.0, 4.0);
+    transform.transforms(&mut coordinates);
+    assert_eq!(coordinates, Xyz::new(3.0, 6.0, 8.0));
+}
+
+#[test]
 fn mirrors_store_native_forms() {
     let point = Transform3::mirror_point(Point3::new(1.0, 2.0, 3.0));
     assert_eq!(

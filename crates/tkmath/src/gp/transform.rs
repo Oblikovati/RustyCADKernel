@@ -251,6 +251,10 @@ impl Transform3 {
         }
         result + self.offset
     }
+    /// Mutates coordinates with `gp_Trsf::Transforms(gp_XYZ&)`; `transform.transforms(&mut xyz)`.
+    pub fn transforms(&self, coordinates: &mut Xyz) {
+        *coordinates = self.apply_coordinates(*coordinates);
+    }
     /// gp_Trsf::Transforms(double&,double&,double&); `transform.transforms_coordinates(1.0,2.0,3.0)`.
     pub fn transforms_coordinates(self, x: f64, y: f64, z: f64) -> (f64, f64, f64) {
         let result = self.apply_coordinates(Xyz::new(x, y, z));
