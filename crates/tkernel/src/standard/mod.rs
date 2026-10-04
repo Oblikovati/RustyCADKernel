@@ -7,7 +7,7 @@ mod failure;
 pub use failure::Failure;
 pub mod exceptions;
 mod strtod;
-pub use strtod::strtod;
+pub use strtod::{strtod, strtod_bytes};
 
 pub mod character;
 
