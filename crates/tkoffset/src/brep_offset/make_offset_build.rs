@@ -7,10 +7,7 @@ use rustycad_tkbrep::{
     topods::{Face, Shape, Shell},
 };
 use rustycad_tkernel::{precision, standard::Failure};
-use rustycad_tkg3d::geom::GeomPlane;
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::Transform3;
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 impl BRepOffsetMakeOffset {
     /// Builds the parallel shell for one face with no shared edges or caps.
@@ -34,7 +31,8 @@ impl BRepOffsetMakeOffset {
         reject_tangent_edges(&analyzer, &face)?;
         let offset = face_offset(&self.face_offsets, &face, config.offset);
         let image = offset_face(&face, offset)?;
-        self.result_shape = shell_from_face(&image)?;
+        self.record_offset_history(&face, &image)?;
+        self.result_shape = shell_from_face(image.face())?;
         self.error = Some(BRepOffsetError::NoError);
         self.done = true;
         Ok(())
@@ -107,48 +105,16 @@ fn face_offset(offsets: &[(Face, f64)], face: &Face, global: f64) -> f64 {
         .map_or(global, |(_, offset)| *offset)
 }
 
-fn offset_face(face: &Face, offset: f64) -> Result<Face, Failure> {
-    let (surface, location) = BRepTool::surface_with_location(face)?;
+fn offset_face(face: &Face, offset: f64) -> Result<BRepOffsetOffsetFace, Failure> {
+    let (_, location) = BRepTool::surface_with_location(face)?;
     if !location.is_identity() {
         return Err(not_implemented("single face has a nonidentity location"));
-    }
-    if let Some(plane) = surface.cast::<GeomPlane>().get() {
-        return translate_plane_face(face, plane, offset);
     }
     regular_offset_face(face, offset)
 }
 
-fn regular_offset_face(face: &Face, offset: f64) -> Result<Face, Failure> {
-    let offset_face = BRepOffsetOffsetFace::from_face(face, offset)?;
-    Ok(offset_face.face().clone())
-}
-
-fn translate_plane_face(face: &Face, plane: &GeomPlane, offset: f64) -> Result<Face, Failure> {
-    let normal = plane.pln().position().direction();
-    let translation = plane_translation(normal, oriented_offset(face, offset));
-    let mut moved = rustycad_tktopalgo::brep_builder_api::BRepBuilderAPITransform::with_shape(
-        &face.clone().into_shape(),
-        translation,
-        true,
-        false,
-    )?;
-    Ok(Face::unchecked(moved.shape()?.clone()))
-}
-
-fn oriented_offset(face: &Face, offset: f64) -> f64 {
-    if face.orientation() == rustycad_tkg3d::top_abs::Orientation::Reversed {
-        -offset
-    } else {
-        offset
-    }
-}
-
-fn plane_translation(normal: rustycad_tkmath::gp::Direction3, offset: f64) -> Transform3 {
-    Transform3::translation([
-        normal.x() * offset,
-        normal.y() * offset,
-        normal.z() * offset,
-    ])
+fn regular_offset_face(face: &Face, offset: f64) -> Result<BRepOffsetOffsetFace, Failure> {
+    BRepOffsetOffsetFace::from_face(face, offset)
 }
 
 fn shell_from_face(face: &Face) -> Result<Shape, Failure> {

@@ -13,6 +13,7 @@
 #include <gp_Cylinder.hxx>
 #include <gp_Ax3.hxx>
 #include <iostream>
+#include <vector>
 
 void probe(const char* label, const TopoDS_Face& face, double offset) {
   BRepOffset_MakeOffset maker;
@@ -31,6 +32,31 @@ void probe(const char* label, const TopoDS_Face& face, double offset) {
             << static_cast<int>(maker.Shape().ShapeType()) << ' ' << faces << ' ' << shells << ' '
             << properties.Mass() << ' ' << sampleZ << ' '
             << BRepCheck_Analyzer(maker.Shape(), true).IsValid() << '\n';
+  int edgeImages = 0, vertexImages = 0, generatedEdges = 0;
+  for (TopExp_Explorer it(face, TopAbs_EDGE); it.More(); it.Next()) {
+    edgeImages += maker.OffsetEdgesFromShapes().HasImage(it.Current());
+    generatedEdges += maker.Generated(it.Current()).Extent();
+  }
+  std::vector<TopoDS_Shape> uniqueVertices;
+  for (TopExp_Explorer it(face, TopAbs_VERTEX); it.More(); it.Next()) {
+    vertexImages += maker.OffsetEdgesFromShapes().HasImage(it.Current());
+    bool isKnown = false;
+    for (const TopoDS_Shape& vertex : uniqueVertices) {
+      isKnown = isKnown || vertex.IsSame(it.Current());
+    }
+    if (!isKnown) uniqueVertices.push_back(it.Current());
+  }
+  int generatedVertices = 0;
+  for (const TopoDS_Shape& vertex : uniqueVertices) {
+    generatedVertices += maker.Generated(vertex).Extent();
+  }
+  const int generatedCount = maker.Generated(face).Extent();
+  const int modifiedCount = maker.Modified(face).Extent();
+  const bool deleted = maker.IsDeleted(face);
+  std::cout << label << "-history " << maker.OffsetFacesFromShapes().HasImage(face) << ' '
+            << edgeImages << ' ' << vertexImages << ' ' << generatedCount << ' '
+            << modifiedCount << ' ' << deleted << ' ' << generatedEdges << ' '
+            << generatedVertices << '\n';
 }
 
 int main() {
