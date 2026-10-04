@@ -16,5 +16,7 @@ cp /tmp/target-rustdoc-const-alias/doc/rustdoc_const_specialized_alias.json \
   tools/tests/fixtures/rustdoc-const-specialized-alias/rustdoc-61.json
 ```
 
-The test mutates copies of this compiler output to verify rejection of
-non-literal alias const arguments and unrelated const-specialized impls.
+The test verifies rejection of const-dependent `where` clauses and mutates
+copies of this compiler output to verify rejection of non-literal alias const
+arguments and unrelated const-specialized impls. Accepted method rows retain
+the alias, target, and generic-to-const binding that justified the path.

@@ -24,16 +24,34 @@ class ConstSpecializedAliasTests(unittest.TestCase):
             self.assertIn(path, paths)
             self.assertEqual(declaration_count(inventory, path), 1)
             row = declaration_by_path(inventory, path)
-            self.assertEqual(row.get("source_file"), "src/lib.rs")
-            self.assertEqual(row.get("source_sha256"), fixture_source_hash())
-        self.assertTrue(inventory["unresolved_links"] == [])
+            self.assert_alias_specialization(row, path)
+        self.assertEqual(
+            inventory["unresolved_links"],
+            ["const-specialized-alias:rustdoc_const_specialized_alias::BoundedBox2:unsupported-impl-where-predicates"],
+        )
+
+    def assert_alias_specialization(
+        self, row: dict[str, JSONValue], path: str
+    ) -> None:
+        specialization = row.get("alias_specialization")
+        self.assertEqual(row.get("source_file"), "src/lib.rs")
+        self.assertEqual(row.get("source_sha256"), fixture_source_hash())
+        self.assertIsInstance(specialization, dict)
+        expected_const = 2 if "CompactBox2" in path else 3
+        self.assertEqual(specialization.get("const_value"), expected_const)
+        self.assertIsNone(specialization.get("impl_const_parameter"))
+        self.assertEqual(specialization.get("alias_path"), path.rsplit("::", 1)[0])
+        self.assertEqual(specialization.get("alias_type_parameter"), "T")
+        self.assertEqual(specialization.get("impl_type_parameter"), "T")
+        self.assertEqual(specialization.get("target_path"), "rustdoc_const_specialized_alias::CompactBounds")
 
     def test_nonliteral_const_alias_is_reported_and_not_expanded(self) -> None:
         document = fixture_document()
         replace_alias_const(document, "CompactBox2", "1 + 1", False)
         inventory = normalize_document(document)
         paths = declaration_paths(inventory)
-        self.assertTrue(all("CompactBox2::" + name not in paths for name in METHODS))
+        box2_paths = alias_method_paths("rustdoc_const_specialized_alias")[: len(METHODS)]
+        self.assertTrue(all(path not in paths for path in box2_paths))
         box3_paths = alias_method_paths("rustdoc_const_specialized_alias")[-len(METHODS) :]
         self.assertTrue(all(path in paths for path in box3_paths))
         self.assertIn(
@@ -41,12 +59,32 @@ class ConstSpecializedAliasTests(unittest.TestCase):
             inventory["unresolved_links"],
         )
 
+    def test_const_dependent_where_clause_is_unresolved(self) -> None:
+        inventory = normalize_fixture()
+        bounded_path = "rustdoc_const_specialized_alias::BoundedBox2::constrained"
+        self.assertNotIn(bounded_path, declaration_paths(inventory))
+        self.assertIn(
+            "const-specialized-alias:rustdoc_const_specialized_alias::BoundedBox2:unsupported-impl-where-predicates",
+            inventory["unresolved_links"],
+        )
+
+    def test_generic_impl_row_records_const_binding(self) -> None:
+        inventory = normalize_fixture()
+        path = "rustdoc_const_specialized_alias::GenericBox2::compare_generic_dist"
+        row = declaration_by_path(inventory, path)
+        specialization = row.get("alias_specialization")
+        self.assertIsInstance(specialization, dict)
+        self.assertEqual(specialization.get("const_value"), 2)
+        self.assertEqual(specialization.get("impl_const_parameter"), "N")
+
     def test_methods_for_other_const_impl_do_not_leak_into_aliases(self) -> None:
         document = fixture_document()
         replace_impl_const(document, 4)
         inventory = normalize_document(document)
         paths = declaration_paths(inventory)
-        self.assertTrue(all(path not in paths for path in alias_method_paths("rustdoc_const_specialized_alias")))
+        aliases = alias_method_paths("rustdoc_const_specialized_alias")
+        self.assertTrue(all(path not in paths for path in aliases[: len(METHODS)]))
+        self.assertTrue(all(path in paths for path in aliases[-len(METHODS) :]))
 
 
 def normalize_fixture() -> dict[str, JSONValue]:
