@@ -23,6 +23,13 @@ struct FaceMergeSettings {
     drop_mode: bool,
 }
 
+struct FaceMergeState<'a> {
+    small: &'a mut MapOfShape,
+    edge_faces: &'a mut Vec<(Shape, Vec<Shape>)>,
+    small_entries: &'a mut Vec<(Shape, Vec<Shape>)>,
+    face_small: &'a mut ShapeFixWireframeShapeLists,
+}
+
 pub(super) fn merge_face_small_edges(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
@@ -37,8 +44,14 @@ pub(super) fn merge_face_small_edges(
     }
     let settings = face_merge_settings(multiple, angle_limit, drop_mode);
     let mut links = edge_face_entries(edge_faces);
-    let (changed, face_small_changed) =
-        merge_face_groups(fixer, small, face_small, &mut links, &settings)?;
+    let mut small_entries = face_small_entries(face_small);
+    let mut state = FaceMergeState {
+        small,
+        edge_faces: &mut links,
+        small_entries: &mut small_entries,
+        face_small,
+    };
+    let (changed, face_small_changed) = merge_face_groups(fixer, &mut state, &settings)?;
     publish_face_maps(
         edge_faces,
         face_small,
@@ -52,16 +65,13 @@ pub(super) fn merge_face_small_edges(
 
 fn merge_face_groups(
     fixer: &ShapeFixWireframe,
-    small: &mut MapOfShape,
-    face_small: &ShapeFixWireframeShapeLists,
-    links: &mut Vec<(Shape, Vec<Shape>)>,
+    state: &mut FaceMergeState<'_>,
     settings: &FaceMergeSettings,
 ) -> Result<(bool, bool), Failure> {
     let mut changed = false;
     let mut face_small_changed = false;
     for source in source_faces(fixer)? {
-        let (group_changed, group_map_changed) =
-            merge_face_group(fixer, small, &source, links, face_small, settings)?;
+        let (group_changed, group_map_changed) = merge_face_group(fixer, &source, state, settings)?;
         changed |= group_changed;
         face_small_changed |= group_map_changed;
     }
@@ -103,19 +113,17 @@ fn source_faces(fixer: &ShapeFixWireframe) -> Result<Vec<Shape>, Failure> {
 
 fn merge_face_group(
     fixer: &ShapeFixWireframe,
-    small: &mut MapOfShape,
     source: &Shape,
-    links: &mut Vec<(Shape, Vec<Shape>)>,
-    face_small: &ShapeFixWireframeShapeLists,
+    state: &mut FaceMergeState<'_>,
     settings: &FaceMergeSettings,
 ) -> Result<(bool, bool), Failure> {
-    let Ok(edges) = face_small.find(source) else {
+    let Ok(edges) = state.face_small.find(source) else {
         return Ok((false, false));
     };
     if edges.is_empty() {
         return Ok((false, false));
     }
-    merge_one_face(fixer, small, source, links, settings)
+    merge_one_face(fixer, source, state, settings)
 }
 
 fn replace_edge_face_entries(
@@ -187,11 +195,27 @@ fn edge_face_entries(edge_faces: &ShapeFixWireframeShapeLists) -> Vec<(Shape, Ve
         .collect()
 }
 
+fn face_small_entries(face_small: &ShapeFixWireframeShapeLists) -> Vec<(Shape, Vec<Shape>)> {
+    face_small
+        .items()
+        .map(|(face, edges)| (face.clone(), edges.iter().cloned().collect()))
+        .collect()
+}
+
+fn replace_face_small_entries(
+    face_small: &mut ShapeFixWireframeShapeLists,
+    entries: &[(Shape, Vec<Shape>)],
+) {
+    face_small.clear(false);
+    for (face, edges) in entries {
+        face_small.bind(face.clone(), shape_list(edges));
+    }
+}
+
 fn merge_one_face(
     fixer: &ShapeFixWireframe,
-    small: &mut MapOfShape,
     source: &Shape,
-    edge_faces: &mut Vec<(Shape, Vec<Shape>)>,
+    state: &mut FaceMergeState<'_>,
     settings: &FaceMergeSettings,
 ) -> Result<(bool, bool), Failure> {
     let context = fixer.context();
@@ -199,8 +223,7 @@ fn merge_one_face(
         return Err(unported_small_edge_merge());
     }
     let face = applied_face(source, &context)?;
-    let (mut changed, map_changed) =
-        merge_face_wires(fixer, &face, &context, small, edge_faces, settings)?;
+    let (mut changed, map_changed) = merge_face_wires(fixer, &face, &context, state, settings)?;
     changed |= remove_empty_face(fixer, source, &context)?;
     Ok((changed, map_changed))
 }
@@ -209,15 +232,14 @@ fn merge_face_wires(
     fixer: &ShapeFixWireframe,
     face: &Face,
     context: &Handle<ShapeBuildReShape>,
-    small: &mut MapOfShape,
-    edge_faces: &mut Vec<(Shape, Vec<Shape>)>,
+    state: &mut FaceMergeState<'_>,
     settings: &FaceMergeSettings,
 ) -> Result<(bool, bool), Failure> {
     let mut changed = false;
     let mut map_changed = false;
     for wire in face_wires(face)? {
         let (wire_changed, wire_map_changed) =
-            merge_face_wire(fixer, face, &wire, context, small, edge_faces, settings)?;
+            merge_face_wire(fixer, face, &wire, context, state, settings)?;
         changed |= wire_changed;
         map_changed |= wire_map_changed;
     }
@@ -263,26 +285,32 @@ fn merge_face_wire(
     face: &Face,
     wire: &Wire,
     context: &Handle<ShapeBuildReShape>,
-    small: &mut MapOfShape,
-    edge_faces: &mut Vec<(Shape, Vec<Shape>)>,
+    state: &mut FaceMergeState<'_>,
     settings: &FaceMergeSettings,
 ) -> Result<(bool, bool), Failure> {
     let source = wire.clone();
     let current = applied_wire(&source, context)?;
-    let mut policy = face_merge_policy(face, edge_faces, settings);
-    let changed = merge_wire_with_faces(fixer, &source, &current, context, small, &mut policy)?;
-    *edge_faces = policy.edge_faces;
+    let mut policy = face_merge_policy(face, state.edge_faces, state.small_entries, settings);
+    let changed =
+        merge_wire_with_faces(fixer, &source, &current, context, state.small, &mut policy)?;
+    *state.edge_faces = policy.edge_faces;
+    *state.small_entries = policy.face_small_entries;
+    if policy.face_small_exact_changed {
+        replace_face_small_entries(state.face_small, state.small_entries);
+    }
     Ok((changed, policy.face_small_changed))
 }
 
 fn face_merge_policy(
     face: &Face,
     edge_faces: &[(Shape, Vec<Shape>)],
+    face_small_entries: &[(Shape, Vec<Shape>)],
     settings: &FaceMergeSettings,
 ) -> MergePolicy {
     MergePolicy::face(
         face,
         edge_faces.to_vec(),
+        face_small_entries.to_vec(),
         settings.angle_limit,
         settings.multiple_edges.clone(),
         settings.drop_mode,

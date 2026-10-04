@@ -140,9 +140,27 @@ fn bind_applied_edge(
     if small.contains(source) {
         small.remove(source);
         small.add(applied.clone());
+        replace_small_neighbor_entries(policy, &faces, source, &applied);
     }
     policy.edge_faces.push((applied, faces));
     Ok(())
+}
+
+fn replace_small_neighbor_entries(
+    policy: &mut MergePolicy,
+    linked_faces: &[Shape],
+    old_edge: &Shape,
+    new_edge: &Shape,
+) {
+    for (face, edges) in &mut policy.face_small_entries {
+        if !linked_faces.iter().any(|linked| linked.is_same(face)) {
+            continue;
+        }
+        if let Some(edge) = edges.iter_mut().find(|edge| edge.is_same(old_edge)) {
+            *edge = new_edge.clone();
+            policy.face_small_exact_changed = true;
+        }
+    }
 }
 
 fn send_drop_warning(fixer: &ShapeFixWireframe, edge: &Shape) {

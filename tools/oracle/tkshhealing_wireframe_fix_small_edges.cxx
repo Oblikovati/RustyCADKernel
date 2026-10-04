@@ -22,6 +22,7 @@
 
 static TopoDS_Wire single_tiny_wire();
 static TopoDS_Wire tiny_wire();
+static TopoDS_Wire unit_wire();
 static int count_edges(const TopoDS_Shape& shape);
 static bool boundary_vertices_match(const TopoDS_Shape& shape);
 
@@ -189,6 +190,86 @@ static void merge_face_drop_connected_case(const char* label, double tolerance) 
             << count_edges(result) << ' ' << fixer.StatusSmallEdges(ShapeExtend_DONE3) << ' '
             << fixer.StatusSmallEdges(ShapeExtend_FAIL) << ' '
             << registrator->MapShape().Extent() << ' ' << boundary_vertices_match(result) << '\n';
+}
+
+static bool list_contains(const NCollection_List<TopoDS_Shape>& shapes, const TopoDS_Shape& target) {
+  for (NCollection_List<TopoDS_Shape>::Iterator it(shapes); it.More(); it.Next()) {
+    if (it.Value().IsSame(target)) return true;
+  }
+  return false;
+}
+
+static void merge_drop_updates_small_neighbor_map() {
+  const TopoDS_Face faceA = BRepBuilderAPI_MakeFace(gp_Pln(), tiny_wire(), true).Face();
+  const TopoDS_Face faceB = BRepBuilderAPI_MakeFace(gp_Pln(), unit_wire(), true).Face();
+  const TopoDS_Face faceC = BRepBuilderAPI_MakeFace(gp_Pln(), unit_wire(), true).Face();
+  TopExp_Explorer edges(faceA, TopAbs_EDGE);
+  const TopoDS_Shape smallEdge = edges.Current();
+  edges.Next();
+  const TopoDS_Shape smallNeighbor = edges.Current();
+  edges.Next();
+  edges.Next();
+  const TopoDS_Shape before = edges.Current();
+  ShapeFix_Wireframe fixer(faceA);
+  fixer.SetPrecision(0.1);
+  fixer.SetContext(new ShapeBuild_ReShape);
+  NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> small, multiple;
+  NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>
+      edge_faces, face_small;
+  small.Add(smallEdge);
+  small.Add(smallNeighbor);
+  multiple.Add(smallNeighbor);
+  NCollection_List<TopoDS_Shape> faceAList, faceBList, faceCList, faceASmall, faceCSmall;
+  faceAList.Append(faceA);
+  faceBList.Append(faceB);
+  faceCList.Append(faceC);
+  faceASmall.Append(smallEdge);
+  faceCSmall.Append(smallNeighbor);
+  edge_faces.Bind(smallEdge, faceAList);
+  edge_faces.Bind(smallNeighbor, faceCList);
+  edge_faces.Bind(before, faceBList);
+  face_small.Bind(faceA, faceASmall);
+  face_small.Bind(faceC, faceCSmall);
+  const bool changed = fixer.MergeSmallEdges(small, edge_faces, face_small, multiple, true, -1.0);
+  const TopoDS_Shape result = fixer.Context()->Apply(faceA);
+  const TopoDS_Shape newNeighbor = fixer.Context()->Apply(smallNeighbor);
+  const bool neighborMapped = face_small.IsBound(faceC)
+                              && list_contains(face_small(faceC), newNeighbor);
+  std::cout << "drop_small_neighbor_map " << changed << ' ' << small.Extent() << ' '
+            << small.Contains(newNeighbor) << ' ' << edge_faces.Extent() << ' '
+            << face_small.Extent() << ' ' << neighborMapped << ' '
+            << list_contains(face_small(faceA), smallEdge) << ' ' << count_edges(result) << ' '
+            << fixer.StatusSmallEdges(ShapeExtend_DONE3) << '\n';
+}
+
+static void merge_checks_linked_face_wire_order(const char* label, bool reverse_linked_wire) {
+  const TopoDS_Wire wire = tiny_wire();
+  const TopoDS_Wire linked_wire = reverse_linked_wire ? TopoDS::Wire(wire.Reversed()) : wire;
+  const TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire, true).Face();
+  const TopoDS_Face linked_face = BRepBuilderAPI_MakeFace(gp_Pln(), linked_wire, true).Face();
+  TopExp_Explorer edges(face, TopAbs_EDGE);
+  const TopoDS_Shape small_edge = edges.Current();
+  ShapeFix_Wireframe fixer(face);
+  fixer.SetPrecision(0.1);
+  fixer.SetContext(new ShapeBuild_ReShape);
+  NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> small, multiple;
+  NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>
+      edge_faces, face_small;
+  small.Add(small_edge);
+  NCollection_List<TopoDS_Shape> linked_faces, small_edges;
+  linked_faces.Append(face);
+  linked_faces.Append(linked_face);
+  small_edges.Append(small_edge);
+  for (TopExp_Explorer all_edges(face, TopAbs_EDGE); all_edges.More(); all_edges.Next())
+  {
+    edge_faces.Bind(all_edges.Current(), linked_faces);
+  }
+  face_small.Bind(face, small_edges);
+  const bool changed = fixer.MergeSmallEdges(small, edge_faces, face_small, multiple, false, -1.0);
+  const TopoDS_Shape result = fixer.Context()->Apply(face);
+  std::cout << label << ' ' << changed << ' ' << count_edges(result) << ' '
+            << fixer.StatusSmallEdges(ShapeExtend_DONE) << ' '
+            << fixer.StatusSmallEdges(ShapeExtend_FAIL1) << '\n';
 }
 
 static void merge_preserves_internal_vertex() {
@@ -412,5 +493,8 @@ int main() {
   merge_face_drop_single_edge();
   merge_face_drop_connected_case("face_drop_connected", 0.1);
   merge_face_drop_connected_case("face_drop_unconnected", 0.001);
+  merge_drop_updates_small_neighbor_map();
+  merge_checks_linked_face_wire_order("linked_wire_forward", false);
+  merge_checks_linked_face_wire_order("linked_wire_reversed", true);
   merge_preserves_internal_vertex();
 }
