@@ -1,4 +1,4 @@
-//! C-locale fallback; non-Unix system code-page conversion remains unported.
+//! C-locale fallback for non-Unix/non-Windows targets without a locale API adapter.
 use crate::ncollection::WideChar;
 /// The C-locale `mblen(text, MB_CUR_MAX)`: 0 for an empty string, 1 for ASCII, -1 otherwise.
 fn c_locale_mblen(text: &[u8]) -> i32 {
