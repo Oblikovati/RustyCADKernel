@@ -31,3 +31,13 @@ and reference-count increments. The existing `SharedBSplineSurfaceCache`
 remains the separate mutable shared-cache wrapper used by adaptors; this change
 adds native runtime identity to the cache value without replacing that
 mutation path.
+
+## Shared cache owner follow-up
+
+The current wrapper stores an owning `Handle<BSplSLib_Cache>` and the cache
+keeps its embedded `Standard_Transient` outside the payload mutex. The expanded
+probe `tools/oracle/tkmath_bspline_cache_shared_handle.cxx` verifies copied
+owner and base projection identity together; the reference count is `3` while
+the concrete owner, alias, and projected base handle coexist. The remaining
+descriptor gap is that `RuntimeType` values are static Rust references rather
+than owning OCCT `Standard_Type` handles.

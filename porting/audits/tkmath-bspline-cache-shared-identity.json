@@ -11,18 +11,20 @@
     "source": "tools/oracle/tkmath_bspline_cache_shared_handle.cxx",
     "expected": "tools/oracle/tkmath_bspline_cache_shared_handle.expected",
     "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_bspline_cache_shared_handle.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath-bspline-cache-shared-handle-new",
-    "run_command": "/tmp/tkmath-bspline-cache-shared-handle",
+    "run_command": "/tmp/tkmath-bspline-cache-shared-handle-new",
     "observed": [
       "Both cache classes report their native dynamic type.",
       "IsInstance recognizes the concrete cache class and IsKind recognizes Standard_Transient ancestry.",
       "A copied cache handle and an owning Standard_Transient base handle share one native object address.",
-      "The embedded native reference count is three while concrete owner, copied owner, and base projection coexist."
+      "The embedded native reference count is three while concrete owner, copied owner, and base projection coexist.",
+      "The recorded run used the `-new` executable; its output was byte-compared to the expected fixture."
     ],
     "sha256": {
       "tools/oracle/tkmath_bspline_cache_shared_handle.cxx": "3ee55d6276d1b05c892da0e460832a112ce37a5ab148fc66a53ad867cca28b61",
       "tools/oracle/tkmath_bspline_cache_shared_handle.expected": "abc2c7b9491e47c7aebb0460af4ef2c3bb11f99967239725f421ab1e4321b660"
     },
-    "output_sha256": "abc2c7b9491e47c7aebb0460af4ef2c3bb11f99967239725f421ab1e4321b660"
+    "output_sha256": "abc2c7b9491e47c7aebb0460af4ef2c3bb11f99967239725f421ab1e4321b660",
+    "executable_sha256": "6007f83f421e0cb0deb7e6bda1fd5fc8bab19bf8de810f00cb6d38751380f748"
   },
   "rust_fixture": {
     "test": "crates/tkmath/tests/bspline_cache_shared_handle.rs::mutable_shared_cache_owners_match_native_handle_identity_and_type",
