@@ -1669,8 +1669,11 @@ spheres with the primitive builders, run `BRepMesh_IncrementalMesh`, and query t
 resulting triangulations. The native suite passes all three pinned declarations.
 
 The sphere fixture exposed missing interior nodes in the production sphere range
-splitter. `crates/tkmesh/src/brep_mesh/sphere_nodes.rs` now follows the pinned
-`BRepMesh_SphereRangeSplitter` sampling, including its alternating half-step rows.
-The optimized focused Rust test passes in about 45 seconds; the regular debug test
-takes about 253 seconds. This remains a mesher performance cost to address without
-changing the fixture's deflection or node ordering.
+splitter. `crates/tkmesh/src/brep_mesh/planar_face_discret/sphere_nodes.rs` follows
+the pinned `BRepMesh_SphereRangeSplitter` sampling, including alternating half-step rows.
+The subsequent native-order Delaunay candidate reuse reduced the optimized sphere test
+from 44.60 to 12.16 seconds and the ordinary-profile test from 252.72 to 54.33 seconds.
+The integrated main test passed all three cases in 57.05 seconds. Deflection, ordering,
+and assertion tolerances are unchanged. See
+`porting/audits/tkmesh-delaun-circle-selection-performance.md` for source and validation
+scope; these timings do not establish full mesher parity.
