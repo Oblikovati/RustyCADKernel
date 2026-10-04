@@ -29107,8 +29107,8 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Clean prebuilt BVH parallel execution is source-tested, and dirty-tree requests fall back to the native serial traversal. Pinned native parallel probes on dirty lazy-BVH inputs crashed, timed out, or produced one differing voxel result, so exact dirty-tree parallel behavior remains unsupported rather than being treated as parity. See porting/audits/tkmath-distance-field-parallel.json and its 48-case receipt."
     },
     {
       "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry<T,N>&,int,int)",

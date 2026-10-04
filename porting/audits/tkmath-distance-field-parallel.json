@@ -27,15 +27,19 @@
       "-o",
       "/tmp/distance-field-native-probe"
     ],
-    "per_case_timeout_seconds": 10
+    "per_case_timeout_seconds": 10,
+    "compiler_identity": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "binary_sha256": "42dab64d3951daee43c277d7ace138f68296c7104d8d1b09397238e65b9483d4"
   },
   "rust_probe": {
-    "source_revision": "dfd4acbf717e349c9161add04f2889a533c2158e",
     "build_command": "cargo build -p rustycad-tkmath --example rustycad-tkmath-numeric-probe (dev profile)",
     "source_sha256_distance_field": "80914e8e8aa9c2ec7e1eae3e2646bfd1e28b26f19a373a57f55617851a4c8a65",
     "source_sha256_parallel_module": "5765af6009eff6a46e3fbc1945c89a1e72ee646910bca7cf8a12675a4f440117",
     "source_sha256_square_distance": "8ff64941f13c2f3e377e811a8a780a67fb6bc1aa6183253d8187eeec8a903bab",
-    "test_sha256": "4aaed747217cb17525a702390b8fe39fd768ba6b436b3679ff1084cf97f11e60"
+    "test_sha256": "4aaed747217cb17525a702390b8fe39fd768ba6b436b3679ff1084cf97f11e60",
+    "base_revision": "dfd4acbf717e349c9161add04f2889a533c2158e",
+    "build_tree_note": "The probe was built from the uncommitted working-tree sources identified by the content hashes below, based on base_revision.",
+    "current_integration_base": "a5c1277b5ee1dc689972f5272cb086c16fc52a59"
   },
   "summary": {
     "native_parallel_returned": 30,
@@ -76,7 +80,9 @@
     "full_ignored": 0,
     "strict_clippy_command": "cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
     "strict_clippy_exit_code": 0,
-    "full_log_gzip_path": "/tmp/distance-field-cargo-test-tkmath.log.gz",
-    "full_log_gzip_sha256": "0596058316b65c17342a206d54df31ea6631a74acb13a9540ea825b5127aeadd"
+    "full_log_gzip_path": "porting/audits/tkmath-distance-field-parallel-cargo-test.log.gz",
+    "full_log_gzip_sha256": "0596058316b65c17342a206d54df31ea6631a74acb13a9540ea825b5127aeadd",
+    "rustc_identity": "rustc 1.98.1 (48a229cea 2026-09-01); LLVM 22.1.8",
+    "cargo_identity": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
   }
 }
