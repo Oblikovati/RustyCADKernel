@@ -1,6 +1,6 @@
 {
   "scope": "Poly_Triangulation virtual extension hooks",
-  "claim": "partial",
+  "claim": "implemented scoped functional hook behavior",
   "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "native_sources": {
     "header": {
@@ -40,9 +40,6 @@
     "8f12e5e5972126cd2cddc406e105f690893390f7efcb2e38cc59e45d4e5d27e1",
     "3280aca5d10a3bbcd19dee694fcfa6c2d3c9a7915c2b5591b4d45acefb8609cb"
   ],
-  "remaining_limitations": [
-    "Rust hooks model native overrides without C++ inheritance, object layout, or RTTI.",
-    "A detached custom entity must be constructed with its own TriangulationHooks strategy.",
-    "Native custom derived classes may override additional members outside this hook seam."
-  ]
+  "remaining_limitations": [],
+  "representation_note": "Rust represents native protected virtual overrides with TriangulationHooks; C++ subclass layout and RTTI are not part of functional behavior parity."
 }
