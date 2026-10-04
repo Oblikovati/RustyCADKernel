@@ -22,8 +22,8 @@ use rustycad_tkmath::gp::{self, Point3, Vector3};
 use rustycad_tktopalgo::brep_lib::same_parameter_edge;
 
 impl BRepOffsetInter3d {
-    /// Intersects unshared, untrimmed planar images and stores their section edge; bounded faces
-    /// and common-topology cases return `Standard_NotImplemented` pending native branches.
+    /// Intersects unshared planar images and stores their section edge; common-topology cases
+    /// return `Standard_NotImplemented` pending native branches.
     /// Example: `intersections.face_inter(&f1, &f2, &images)?`.
     pub fn face_inter(
         &mut self,
@@ -63,8 +63,8 @@ impl BRepOffsetInter3d {
         let second_source = images.image_from(second)?;
         rustycad_tkbrep::topods::face(&first_source)?;
         rustycad_tkbrep::topods::face(&second_source)?;
-        require_unbounded_plane_face(first)?;
-        require_unbounded_plane_face(second)?;
+        require_plane_face(first)?;
+        require_plane_face(second)?;
         self.reject_shared_topology(first, second)
     }
 
@@ -110,7 +110,7 @@ fn intersect_planar_faces(first: &Face, second: &Face) -> Result<Vec<Curve>, Fai
     Ok(intersection.lines()?.to_vec())
 }
 
-fn require_unbounded_plane_face(face: &Face) -> Result<(), Failure> {
+fn require_plane_face(face: &Face) -> Result<(), Failure> {
     let surface = BRepTool::surface(face)?;
     if surface.cast::<GeomPlane>().is_null() {
         let actual = surface
@@ -119,13 +119,6 @@ fn require_unbounded_plane_face(face: &Face) -> Result<(), Failure> {
         return Err(Failure::with_message(
             "Standard_NotImplemented",
             &format!("unsupported face surface {actual}; expected Geom_Plane"),
-        ));
-    }
-    let has_boundary = !shapes_of_type(face, ShapeEnum::Edge)?.is_empty()
-        || !shapes_of_type(face, ShapeEnum::Vertex)?.is_empty();
-    if has_boundary {
-        return Err(not_implemented(
-            "bounded planar face; expected an untrimmed plane face",
         ));
     }
     Ok(())
@@ -386,7 +379,7 @@ mod tests {
     }
 
     #[test]
-    fn trimmed_plane_pair_stays_outside_unbounded_perform_planes_slice() {
+    fn bounded_plane_pair_intersection_matches_native_section_and_store() {
         let first_source = finite_plane_face(Point3::new(0.0, 0.0, 2.0), Direction3::Z);
         let second_source = finite_plane_face(Point3::new(0.0, 2.0, 0.0), Direction3::Y);
         let first_offset = finite_plane_face(Point3::default(), Direction3::Z);
@@ -397,15 +390,17 @@ mod tests {
         let as_des = Handle::new(BRepAlgoAsDes::new());
         let mut intersections = BRepOffsetInter3d::new(&as_des, State::In, 1e-7);
 
-        let result = intersections.face_inter(&first_offset, &second_offset, &images);
+        intersections
+            .face_inter(&first_offset, &second_offset, &images)
+            .unwrap();
 
-        assert_eq!(
-            result.unwrap_err().exception_type(),
-            "Standard_NotImplemented"
-        );
-        assert!(intersections.touched_faces().is_empty());
-        assert!(intersections.new_edges().is_empty());
-        assert!(!intersections.is_done(&first_offset, &second_offset));
+        assert_eq!(intersections.touched_faces().len(), 2);
+        assert_eq!(intersections.new_edges().len(), 1);
+        assert!(intersections.is_done(&first_offset, &second_offset));
+        assert!(intersections.is_done(&second_offset, &first_offset));
+        assert_eq!(as_des.get().unwrap().descendant(&first_offset).count(), 1);
+        assert_eq!(as_des.get().unwrap().descendant(&second_offset).count(), 1);
+        assert_bounded_section_geometry(&intersections, &as_des, &second_offset);
     }
 
     fn plane_face(origin: Point3, normal: Direction3) -> Face {
@@ -448,5 +443,23 @@ mod tests {
         assert_eq!(first_point, Point3::new(2.0e100, 0.0, 0.0));
         assert_eq!(last_point, Point3::new(-2.0e100, 0.0, 0.0));
         assert!(intersections.is_done(first, second));
+    }
+
+    fn assert_bounded_section_geometry(
+        intersections: &BRepOffsetInter3d,
+        as_des: &Handle<BRepAlgoAsDes>,
+        second: &Face,
+    ) {
+        let section = edge(&intersections.new_edges()[0]).unwrap();
+        let second_edges = as_des.get().unwrap().descendant(second).collect::<Vec<_>>();
+        assert_eq!(section.orientation(), Orientation::Reversed);
+        assert_eq!(
+            edge(&second_edges[0]).unwrap().orientation(),
+            Orientation::Forward
+        );
+        assert_eq!(BRepTool::range(&section).unwrap(), (-1.0, 1.0));
+        let (curve, _, _) = BRepTool::curve(&section).unwrap();
+        assert_eq!(curve.eval_d0(-1.0).unwrap(), Point3::new(1.0, 0.0, 0.0));
+        assert_eq!(curve.eval_d0(1.0).unwrap(), Point3::new(-1.0, 0.0, 0.0));
     }
 }

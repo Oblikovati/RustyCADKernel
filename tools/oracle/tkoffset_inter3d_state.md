@@ -1,16 +1,18 @@
 # BRepOffset_Inter3d stored intersection state
 
 Pinned OCCT source baseline: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
-The probe exercises `FaceInter` on intersecting unbounded plane faces, then checks
-the resulting symmetric done state, touched faces, unique new edge map, both
-`BRepAlgo_AsDes` descendant lists, section parameter range, endpoint coordinates,
-and the two face-specific edge orientations. It also checks repeated explicit
-`SetDone`.
+The probe exercises `FaceInter` on intersecting unbounded planes and a bounded
+plane pair. For each it checks the symmetric done state, touched faces, unique
+new edge map, both `BRepAlgo_AsDes` descendant lists, section parameter range,
+endpoint coordinates, and face-specific edge orientations. It also checks
+repeated explicit `SetDone`.
 
-The Rust `FaceInter` slice matches this unbounded plane case through the existing
-`IntTools_FaceFace`, section-edge builder, `OrientSection` vector rule, and `Store`
-state. Trimmed faces and shared subshapes return `Standard_NotImplemented`; they
-remain on the native PaveFiller/common-topology branches and are not claimed.
+The Rust `FaceInter` slice matches the unbounded and bounded perpendicular-plane
+fixtures through `IntTools_FaceFace`, section-edge construction, the native
+`OrientSection` vector rule, and `Store`. The bounded fixture's exact section is
+`[-1, 1]`, with endpoints `(1, 0, 0)` and `(-1, 0, 0)`. Shared-subshape and
+non-plane branches still return `Standard_NotImplemented`; general PaveFiller
+intersection behavior is not claimed.
 
 Build against the pinned native modeling install:
 
@@ -25,6 +27,7 @@ g++ -std=c++17 -I"$occt/include/opencascade" \
 /tmp/tkoffset-inter3d-state
 ```
 
-Rust covers the native `SetDone`/`IsDone` state and reproduces the private `Store`
-state transition with explicit section-edge lists. `FaceInter` itself is still
-unimplemented, so this slice does not close the finite trimmed-plane offset gap.
+Rust covers native `SetDone`/`IsDone`, the private `Store` transition, and the
+two listed plane intersection fixtures. This does not yet close the negative
+adjacent-face offset path: its boundary trimming and shared-topology behavior
+still require the remaining `BRepOffset_Tool::Inter3D`/PaveFiller branches.
