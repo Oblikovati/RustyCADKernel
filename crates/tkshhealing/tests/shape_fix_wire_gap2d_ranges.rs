@@ -233,6 +233,20 @@ fn intersecting_offset_pcurves_keep_offset_curve_wrappers() {
 }
 
 #[test]
+fn trimmed_offsets_keep_both_native_curve_wrappers() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(1.0, 0.2, 0.0), Point3::new(2.0, 1.2, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_trimmed_offset_line_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_trimmed_offset_pcurve(&tool, &face, 1, [0.0, 0.7828427124746191]);
+    assert_trimmed_offset_pcurve(&tool, &face, 2, [0.4828427124746191, 2.0_f64.sqrt()]);
+}
+
+#[test]
 fn intersecting_bezier_pcurves_use_their_finite_parameter_domains() {
     let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
     let second = edge_between(Point3::new(0.3, -0.2, 0.0), Point3::new(1.3, 0.8, 0.0));

@@ -29,6 +29,8 @@ bases for intersection, then retains the trimmed wrappers on both updated
 p-curves. `offset_line_pcurves` checks the corresponding offset-curve path with
 nonzero offsets; the selected intersection is interior to both parameter
 ranges, so both existing ranges move inward while the wrappers remain offsets.
+`trimmed_offset_line_pcurves` nests those wrappers and confirms replacement
+preserves both the trimmed outer curve and its offset basis.
 `bezier_line_pcurves` covers OCCT's bounded Bezier domains and verifies that
 the candidate intersection changes both range endpoints without replacing the
 Bezier dynamic type.

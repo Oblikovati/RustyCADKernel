@@ -204,6 +204,35 @@ pub(super) fn set_offset_line_pcurves(
     set_pcurve_range(&builder, second_edge, face, &second, 2.0_f64.sqrt());
 }
 
+pub(super) fn set_trimmed_offset_line_pcurves(
+    face: &Face,
+    first_edge: &rustycad_tkbrep::topods::Edge,
+    second_edge: &rustycad_tkbrep::topods::Edge,
+) {
+    let builder = BRepBuilder::default();
+    let first = trimmed_offset_line(
+        Point2::new(0.0, 0.2),
+        Direction2::new(1.0, 0.0).unwrap(),
+        1.0,
+    );
+    let second = trimmed_offset_line(
+        Point2::new(0.3, -0.2),
+        Direction2::new(1.0, 1.0).unwrap(),
+        2.0_f64.sqrt(),
+    );
+    set_pcurve_range(&builder, first_edge, face, &first, 1.0);
+    set_pcurve_range(&builder, second_edge, face, &second, 2.0_f64.sqrt());
+}
+
+fn trimmed_offset_line(
+    origin: Point2,
+    direction: Direction2,
+    last: f64,
+) -> Handle<dyn Geom2dCurve> {
+    let offset = offset_line(origin, direction);
+    Handle::new(Geom2dTrimmedCurve::new(&offset, 0.0, last, true, true).unwrap()).cast()
+}
+
 pub(super) fn offset_line(origin: Point2, direction: Direction2) -> Handle<dyn Geom2dCurve> {
     let basis: Handle<dyn Geom2dCurve> =
         Handle::new(Geom2dLine::new(Axis2d::new(origin, direction))).cast();
@@ -219,6 +248,28 @@ pub(super) fn assert_offset_pcurve(
     let edge = topods::edge(&tool.wire_data().unwrap().edge(index).unwrap().into_shape()).unwrap();
     let curve = BRepTool::curve_on_face(&edge, face).unwrap();
     assert!(!curve.pcurve.cast::<Geom2dOffsetCurve>().is_null());
+    assert!((curve.first - expected[0]).abs() < 1e-12);
+    assert!((curve.last - expected[1]).abs() < 1e-12);
+}
+
+pub(super) fn assert_trimmed_offset_pcurve(
+    tool: &ShapeFixWire,
+    face: &Face,
+    index: i32,
+    expected: [f64; 2],
+) {
+    let edge = topods::edge(&tool.wire_data().unwrap().edge(index).unwrap().into_shape()).unwrap();
+    let curve = BRepTool::curve_on_face(&edge, face).unwrap();
+    let trimmed = curve.pcurve.cast::<Geom2dTrimmedCurve>();
+    assert!(!trimmed.is_null());
+    assert!(
+        !trimmed
+            .get()
+            .unwrap()
+            .basis_curve()
+            .cast::<Geom2dOffsetCurve>()
+            .is_null()
+    );
     assert!((curve.first - expected[0]).abs() < 1e-12);
     assert!((curve.last - expected[1]).abs() < 1e-12);
 }
