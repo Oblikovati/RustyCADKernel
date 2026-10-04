@@ -41,8 +41,9 @@ impl PrinterToReport {
     fn take_name(&self) -> AsciiString {
         std::mem::take(&mut *locked(&self.name))
     }
-    /// `sendMetricAlert`: an alert holding a meter named by the value.
-    fn send_metric_alert(&self, value: &AsciiString, gravity: Gravity) {
+    /// Adds a named meter even without active metrics, preserving any pending stream name.
+    /// Example: `printer.send_metric_alert(&AsciiString::new("step"), Gravity::Info)`.
+    pub fn send_metric_alert(&self, value: &AsciiString, gravity: Gravity) {
         let meter = Arc::new(AttributeMeter::new(value));
         AlertExtended::add_alert(&self.report(), Some(meter), gravity);
     }
