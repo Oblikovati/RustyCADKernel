@@ -226491,6 +226491,42 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::attach_existing_pcurve",
       "status": "partial",
       "notes": "100 native projection/reversal/rejection/missing/tolerance-increase cases, eight seam cases and a direct static-helper fixture pass. Preserves the pinned seam predicate traversal restart. Located/general spline domains, statuses 2/3/5/6, exceptional mutation cases remain unproven; see tools/oracle/tkbo_attach_existing.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::Sense(const TopoDS_Face &, const TopoDS_Face &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::face_sense",
+      "status": "partial",
+      "notes": "240 exact native shared/independent-support and boundaryless-face orientation/status cases pass. Located/general spline geometry, projection/singular-normal failures, successful boundary fallback and exceptional output state remain unproven; see tools/oracle/tkbo_face_orientation.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsSplitToReverse(const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<IntTools_Context> &, int *)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_split_shape_to_reverse",
+      "status": "partial",
+      "notes": "240 exact native shared/independent-support and boundaryless-face orientation/status cases pass. Located/general spline geometry, projection/singular-normal failures, successful boundary fallback and exceptional output state remain unproven; see tools/oracle/tkbo_face_orientation.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsSplitToReverse(const TopoDS_Face &, const TopoDS_Face &, const occ::handle<IntTools_Context> &, int *)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_split_face_to_reverse",
+      "status": "partial",
+      "notes": "240 exact native shared/independent-support and boundaryless-face orientation/status cases pass. Located/general spline geometry, projection/singular-normal failures, successful boundary fallback and exceptional output state remain unproven; see tools/oracle/tkbo_face_orientation.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsSplitToReverseWithWarn(const TopoDS_Shape &, const TopoDS_Shape &, const occ::handle<IntTools_Context> &, const occ::handle<Message_Report> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_split_to_reverse_with_warning",
+      "status": "partial",
+      "notes": "Six native success/failure optional-report cases compare repeated warning counts, message keys and compound child identity/order. Underlying orientation comparison remains partial; see tools/oracle/tkbo_face_orientation.md."
     }
   ],
   "tests": [

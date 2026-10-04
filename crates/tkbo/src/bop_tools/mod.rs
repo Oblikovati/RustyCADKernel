@@ -10,3 +10,9 @@ pub mod algo_tools3d;
 
 mod split_reverse;
 pub use split_reverse::is_split_edge_to_reverse;
+
+mod face_orientation;
+pub use face_orientation::{face_sense, is_split_face_to_reverse, is_split_shape_to_reverse};
+
+mod orientation_warning;
+pub use orientation_warning::is_split_to_reverse_with_warning;

@@ -170,3 +170,7 @@ mod seam;
 mod utilities;
 
 mod attach;
+
+mod face_orientation;
+
+mod orientation_warning;
