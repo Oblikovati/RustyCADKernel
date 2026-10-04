@@ -45,17 +45,16 @@ fn parse_prefix(bytes: &[u8], start: usize) -> (f64, usize) {
     {
         return hexadecimal::parse_hexadecimal(bytes, digits, negative);
     }
+    parse_decimal_prefix(bytes, start, digits)
+}
+
+fn parse_decimal_prefix(bytes: &[u8], start: usize, digits: usize) -> (f64, usize) {
     let end = decimal_end(bytes, digits);
     if end == digits {
         return (0.0, 0);
     }
-    let value = parse_decimal(bytes, start, end);
-    (value, end)
-}
-
-fn parse_decimal(bytes: &[u8], start: usize, end: usize) -> f64 {
     let token = std::str::from_utf8(&bytes[start..end]).expect("validated ASCII decimal prefix");
-    token.parse::<f64>().expect("validated decimal prefix")
+    (token.parse::<f64>().expect("validated decimal prefix"), end)
 }
 fn decimal_end(bytes: &[u8], start: usize) -> usize {
     let mut cursor = start;

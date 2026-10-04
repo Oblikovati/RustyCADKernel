@@ -82169,20 +82169,20 @@
       "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it."
     },
     {
-      "upstream_id": "Standard_CString::Atof(const char*)",
+      "upstream_id": "Atof(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": "rustycad_tkernel::standard::c_string::atof",
+      "rust_item": "rustycad_tkernel::standard::c_string::atof_bytes",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Strtod(text, nullptr): the C-locale numeric prefix, 0 when none. Takes &str; the probe compares ASCII inputs."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Strtod(text, nullptr): the C-locale numeric prefix, 0 when none. Takes &str; the probe compares ASCII inputs. Byte-slice entrypoint accepts the full C-string byte domain including non-UTF-8 suffixes; NUL terminates input. Native fixture: tools/oracle/strtod_bytes.md."
     },
     {
-      "upstream_id": "Standard_CString::Strtod(const char*,char**)",
+      "upstream_id": "Strtod(const char*,char**)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "rust_item": "rustycad_tkernel::standard::strtod",
+      "rust_item": "rustycad_tkernel::standard::strtod_bytes",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The end pointer becomes the returned byte offset of the parsed prefix; an embedded NUL ends the input as in C."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The end pointer becomes the returned byte offset of the parsed prefix; an embedded NUL ends the input as in C. Byte-slice entrypoint preserves numeric-prefix end offsets for arbitrary C-string bytes; NUL terminates input. Native fixture: tools/oracle/strtod_bytes.md."
     },
     {
       "upstream_id": "Standard_CString::Printf(const char* const,...)",
@@ -230195,6 +230195,82 @@
       "rust_item": "rustycad_tkernel::ncollection::AccAlignedPtr::wrapping_sub_assign",
       "status": "implemented",
       "notes": "Protected subclass value helper. Preserves four-byte alignment, unsigned size rounding including SIZE_MAX wrap, and in-allocation pointer arithmetic; compound methods return the updated pointer. Native probe uses one aligned array to avoid undefined pointer operations. See tools/oracle/ncollection_acc_aligned_helpers.md. Does not establish allocator inheritance or protected Block internals; supplemental evidence only."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Key",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKey",
+      "status": "implemented",
+      "notes": "Protected subclass key/hasher value type; native identity hashing and equality follow stored size_t value, including after mutation. See tools/oracle/ncollection_acc_key_hasher.md. Does not establish allocator inheritance or block-map access; supplemental evidence only."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Hasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKeyHasher",
+      "status": "implemented",
+      "notes": "Protected subclass key/hasher value type; native identity hashing and equality follow stored size_t value, including after mutation. See tools/oracle/ncollection_acc_key_hasher.md. Does not establish allocator inheritance or block-map access; supplemental evidence only."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Hasher::operator()(NCollection_AccAllocator::Key) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKeyHasher::hash",
+      "status": "implemented",
+      "notes": "Protected subclass key/hasher value type; native identity hashing and equality follow stored size_t value, including after mutation. See tools/oracle/ncollection_acc_key_hasher.md. Does not establish allocator inheritance or block-map access; supplemental evidence only."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Hasher::operator()(NCollection_AccAllocator::Key,NCollection_AccAllocator::Key) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKeyHasher::equal",
+      "status": "implemented",
+      "notes": "Protected subclass key/hasher value type; native identity hashing and equality follow stored size_t value, including after mutation. See tools/oracle/ncollection_acc_key_hasher.md. Does not establish allocator inheritance or block-map access; supplemental evidence only."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Key::Value",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKey::value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AccBlockKey::value",
+        "rustycad_tkernel::ncollection::AccBlockKey::set_value"
+      ],
+      "status": "partial",
+      "notes": "Read/write value behavior covered by getter/setter and native mutation/hash probe. Direct borrowed field-address access is not exposed. See tools/oracle/ncollection_acc_key_hasher.md."
+    },
+    {
+      "upstream_id": "Bnd_B2::compareDist(const RealType*,const RealType*) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::compare_dist",
+      "status": "implemented",
+      "notes": "Protected subclass comparison hook. Preserves strict absolute-distance comparison, NaN false comparisons, and double-coordinate precision for f32 storage. Native derived probe and supplemental tests: tools/oracle/tkmath_bnd_compare_dist.md. Template/alias inventory resolution is tracked separately; no added legacy declaration."
+    },
+    {
+      "upstream_id": "Bnd_B2::compareDistD(const gp_XY&,const gp_XY&) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::compare_dist_d",
+      "status": "implemented",
+      "notes": "Protected subclass comparison hook. Preserves strict absolute-distance comparison, NaN false comparisons, and double-coordinate precision for f32 storage. Native derived probe and supplemental tests: tools/oracle/tkmath_bnd_compare_dist.md. Template/alias inventory resolution is tracked separately; no added legacy declaration."
+    },
+    {
+      "upstream_id": "Bnd_B3::compareDist(const RealType*,const RealType*) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::compare_dist",
+      "status": "implemented",
+      "notes": "Protected subclass comparison hook. Preserves strict absolute-distance comparison, NaN false comparisons, and double-coordinate precision for f32 storage. Native derived probe and supplemental tests: tools/oracle/tkmath_bnd_compare_dist.md. Template/alias inventory resolution is tracked separately; no added legacy declaration."
+    },
+    {
+      "upstream_id": "Bnd_B3::compareDistD(const gp_XYZ&,const gp_XYZ&) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::compare_dist_d",
+      "status": "implemented",
+      "notes": "Protected subclass comparison hook. Preserves strict absolute-distance comparison, NaN false comparisons, and double-coordinate precision for f32 storage. Native derived probe and supplemental tests: tools/oracle/tkmath_bnd_compare_dist.md. Template/alias inventory resolution is tracked separately; no added legacy declaration."
     }
   ],
   "tests": [
