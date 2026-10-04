@@ -1,5 +1,5 @@
 //! Exact curve-surface hits seed native BeanFace ranges before distance localization.
-use super::{BeanFaceIntersector, Failure, ranges};
+use super::{BeanFaceIntersector, Failure, empty_range};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::real;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
@@ -70,7 +70,7 @@ fn record_exact_point(
     parameter: f64,
 ) -> Result<(), Failure> {
     if count_before == bean.range_manager.length() {
-        ranges::set_empty_result(parameter, &mut bean.range_manager)?;
+        empty_range::set_empty_result(parameter, &mut bean.range_manager)?;
     } else {
         bean.minimum_square_distance = 0.0;
     }

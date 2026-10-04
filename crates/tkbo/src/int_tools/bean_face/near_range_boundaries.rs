@@ -1,5 +1,5 @@
 //! Exact endpoint projection seeds short native overlap ranges.
-use super::{BeanFaceIntersector, Failure, ranges};
+use super::{BeanFaceIntersector, Failure, empty_range};
 
 pub(super) fn compute(bean: &mut BeanFaceIntersector) -> Result<(), Failure> {
     let (mut u, mut v) = (bean.bounds[0], bean.bounds[2]);
@@ -83,7 +83,7 @@ fn set_empty_if_unchanged(
     parameter: f64,
 ) -> Result<(), Failure> {
     if bean.range_manager.length() == count_before {
-        ranges::set_empty_result(parameter, &mut bean.range_manager)?;
+        empty_range::set_empty_result(parameter, &mut bean.range_manager)?;
     }
     Ok(())
 }
