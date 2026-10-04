@@ -1,6 +1,7 @@
 //! Contiguous Robin Hood hash keys preserving native growth and displacement behavior.
 use super::flat_table::{FlatItems, FlatTable};
 use super::{DefaultHashPolicy, HashPolicy};
+use crate::standard::{Failure, exceptions};
 /// An open-addressed hash set; `FlatMap::<i32>::default().add(42)`.
 pub struct FlatMap<K, H = DefaultHashPolicy> {
     table: FlatTable<K, (), H>,
@@ -8,6 +9,27 @@ pub struct FlatMap<K, H = DefaultHashPolicy> {
 /// Shared keys in contiguous slot order; `map.iter()`.
 pub struct FlatMapIter<'a, K> {
     items: FlatItems<'a, K, ()>,
+}
+impl<'a, K> FlatMapIter<'a, K> {
+    /// Inspects the legacy cursor without consuming a key; `cursor.more()`.
+    pub fn more(&self) -> bool {
+        self.items.more()
+    }
+    /// Moves the legacy cursor one slot forward; `cursor.advance()`.
+    pub fn advance(&mut self) {
+        self.items.advance();
+    }
+    /// Borrows the current key or reports native exhaustion; `cursor.key()?`.
+    pub fn key(&self) -> Result<&'a K, Failure> {
+        self.items
+            .current()
+            .map(|(key, ())| key)
+            .ok_or_else(|| exceptions::out_of_range("NCollection_FlatMap::Iterator::Key"))
+    }
+    /// Borrows the same key as the native Value alias; `cursor.value()?`.
+    pub fn value(&self) -> Result<&'a K, Failure> {
+        self.key()
+    }
 }
 impl<K, H: HashPolicy<K>> FlatMap<K, H> {
     /// Injects hash/equality policy and an element-capacity hint; `FlatMap::with_hasher(policy,10)`.

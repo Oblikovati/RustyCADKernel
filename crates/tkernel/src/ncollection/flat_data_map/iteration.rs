@@ -1,6 +1,32 @@
 use super::{
     Debug, FlatDataItems, FlatDataMap, FlatDataValues, FlatDataValuesMut, FlatItems, HashPolicy,
 };
+use crate::standard::{Failure, exceptions};
+
+impl<'a, K, V> FlatDataItems<'a, K, V> {
+    /// Inspects the legacy cursor without consuming a pair; `cursor.more()`.
+    pub fn more(&self) -> bool {
+        self.inner.more()
+    }
+    /// Advances the legacy cursor without returning its old pair; `cursor.advance()`.
+    pub fn advance(&mut self) {
+        self.inner.advance();
+    }
+    /// Borrows the current key or reports native exhaustion; `cursor.key()?`.
+    pub fn key(&self) -> Result<&'a K, Failure> {
+        self.inner
+            .current()
+            .map(|(key, _)| key)
+            .ok_or_else(|| exceptions::out_of_range("NCollection_FlatDataMap::Iterator::Key"))
+    }
+    /// Borrows the current value or reports native exhaustion; `cursor.value()?`.
+    pub fn value(&self) -> Result<&'a V, Failure> {
+        self.inner
+            .current()
+            .map(|(_, value)| value)
+            .ok_or_else(|| exceptions::out_of_range("NCollection_FlatDataMap::Iterator::Value"))
+    }
+}
 impl<K: Debug, V, H: HashPolicy<K>> FlatDataMap<K, V, H> {
     /// Borrows values in slot order; `map.iter().min()`.
     pub fn iter(&self) -> FlatDataValues<'_, K, V> {

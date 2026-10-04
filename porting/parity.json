@@ -73281,64 +73281,64 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items_mut",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Rust supports immutable cursor inspection through items and consuming mutable iteration through items_mut; a complete mutable legacy cursor and native shared mutable cursor aliases remain unported. See porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator(const NCollection_FlatDataMap&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Rust supports immutable cursor inspection through items and consuming mutable iteration through items_mut; a complete mutable legacy cursor and native shared mutable cursor aliases remain unported. See porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::More() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatDataItems as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::more",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Next()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatDataItems as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::advance",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Key() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatDataItems as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::key",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::Value() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatDataItems as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::value",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::ChangeValue() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items_mut",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "items_mut provides consuming mutable iteration, but the native non-consuming ChangeValue cursor operation and shared mutable cursor aliases are not yet ported. The new FlatDataItems Key/Value/More/Next path is read-only. See porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Iterator::IsEqual(const Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatDataItems as PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "notes": "Native end equality uses !More() on both cursors, including after Next on an exhausted cursor; otherwise compare slot identity and index. See porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatDataMap()",
@@ -73808,41 +73808,41 @@
       "upstream_id": "NCollection_FlatMap::Iterator::More() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMapIter as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::more",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatMap::Iterator::Next()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMapIter as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::advance",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatMap::Iterator::Key() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMapIter as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::key",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatMap::Iterator::Value() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMapIter as Iterator>::next",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::value",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. The native More()/Next()/Key() protocol collapses into Iterator::next returning Option: None replaces More()==false and the exception Key/Value raise on an exhausted iterator."
+      "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatMap::Iterator::IsEqual(const Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMapIter as PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "notes": "Native end equality uses !More() on both cursors, including after Next on an exhausted cursor; otherwise compare slot identity and index. See porting/audits/flat-legacy-cursor.json."
     },
     {
       "upstream_id": "NCollection_FlatMap()",

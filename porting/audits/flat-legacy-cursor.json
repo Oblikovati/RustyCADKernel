@@ -1,0 +1,35 @@
+{
+  "scope": "NCollection flat set and flat data map non-consuming legacy cursor protocol",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_parent_revision": "70ea10c74008e491542dd0709651aca26ea9303b",
+  "files_sha256": {
+    "crates/tkernel/src/ncollection/flat_table/iteration.rs": "47e3418371f8d39220354138f853a799855f1880914664dc43f20fd1dffbe658",
+    "crates/tkernel/src/ncollection/flat_map.rs": "8d8e40b577505e006e804951188cbccda42c028ef132c22990b74057c2a60466",
+    "crates/tkernel/src/ncollection/flat_data_map/iteration.rs": "70b7c365c24cfb05dd09b366faff9fbbd953dc76ec7ae125e817796f1106337a",
+    "crates/tkernel/tests/flat_legacy_cursor.rs": "0d737db4cfff5a153861188da4b9a74fa468e8594b5ecd011b1b86fea0afcb4e",
+    "tools/oracle/tkernel_flat_legacy_cursor.cxx": "1608d1376f18058643db775900efe94e4a954d36ff041c06fa623dbd9e468b29",
+    "tools/oracle/tkernel_flat_legacy_cursor.expected": "d686ee2562df8bc23da3db20e515988e787c7e2c787b30cce696732f33adad84",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx": "8453a03cd0622c96cf944cf1d756341cca9dd58824b1e21f5ba56c77046ac3b8",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx": "c358fca1c8a1d3a141bbff7793250173b6eedd475f41f91f1e8d489c2346cf51"
+  },
+  "native_executable_sha256": "8f4c8f4f299d56c40a45b6c3f2b2d0f6e13e1d35ebb452d82abd953547800fad",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_compile_command": "g++ -std=c++17 -O2 tools/oracle/tkernel_flat_legacy_cursor.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel-flat-legacy-cursor",
+  "native_run_command": "/tmp/tkernel-flat-legacy-cursor",
+  "native_output_matches_expected": true,
+  "rust_test_command": "cargo test -p rustycad-tkernel --test flat_legacy_cursor --test ncollection_flat_map --test ncollection_flat_data_map --test flat_map_supplemental --test flat_data_supplemental --test ncollection_flat_maps_api_behavior",
+  "rust_cases_passed": 82,
+  "supplemental_new_cases": 3,
+  "new_legacy_declarations": 0,
+  "behaviors": [
+    "Repeated More, Key and Value do not move the cursor.",
+    "Advance follows the native slot scan and does not return the prior item.",
+    "Exhausted Key/Value errors preserve Standard_OutOfRange and native method-specific messages.",
+    "Next after exhaustion remains equal to a default/end cursor.",
+    "Rust Iterator::next and the legacy methods use the same cursor position."
+  ],
+  "remaining_limits": [
+    "FlatDataItems is immutable; native non-consuming ChangeValue and shared mutable cursor aliases remain missing. The two native data iterator constructor rows and ChangeValue remain partial.",
+    "This focused receipt is supplemental and does not replace original legacy test declarations."
+  ]
+}
