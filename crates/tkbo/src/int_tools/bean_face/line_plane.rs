@@ -14,13 +14,30 @@ pub(super) fn intersect_line_plane(
     bounds: [f64; 4],
     tolerances: [f64; 2],
 ) -> Result<Option<Range>, Failure> {
+    intersect_with_criteria(
+        line,
+        plane,
+        range,
+        bounds,
+        tolerances,
+        tolerances[0] + tolerances[1],
+    )
+}
+
+pub(super) fn intersect_with_criteria(
+    line: Line3,
+    plane: Plane3,
+    range: Range,
+    bounds: [f64; 4],
+    tolerances: [f64; 2],
+    criteria: f64,
+) -> Result<Option<Range>, Failure> {
     let coefficients = plane.coefficients()?;
     let direction = line.direction();
     let slope = coefficients[0] * direction.x()
         + coefficients[1] * direction.y()
         + coefficients[2] * direction.z();
     let distance = signed_distance(coefficients, line.location());
-    let criteria = tolerances[0] + tolerances[1];
     let parallel = slope.abs() < 1e-9;
     if contained(line, range, coefficients, criteria, parallel, distance) {
         return Ok(Some(range));
