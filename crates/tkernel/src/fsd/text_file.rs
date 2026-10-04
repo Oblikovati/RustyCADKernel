@@ -12,6 +12,7 @@ use crate::tcollection::AsciiString;
 use std::marker::PhantomData;
 use std::rc::Rc;
 mod dialect;
+mod hooks;
 mod lines;
 mod objects;
 mod scalars;
