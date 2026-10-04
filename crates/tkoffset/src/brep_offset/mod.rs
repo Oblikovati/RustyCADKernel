@@ -12,6 +12,7 @@ mod make_offset_history;
 mod offset_face;
 mod offset_rails;
 mod offset_rails_geometry;
+mod offset_tube;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
