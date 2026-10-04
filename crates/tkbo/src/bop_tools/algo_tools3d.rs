@@ -62,3 +62,6 @@ mod approx_normal;
 pub use approx_normal::{
     approx_normal_on_edge, approx_normal_with_context_step, approx_normal_with_step,
 };
+
+mod empty_shape;
+pub use empty_shape::is_empty_shape;

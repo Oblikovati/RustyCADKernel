@@ -226392,6 +226392,15 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_safe_input_mode",
       "status": "partial",
       "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::IsEmptyShape(const TopoDS_Shape &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::is_empty_shape",
+      "status": "partial",
+      "notes": "14 native geometry/topology/representation cases including native Polygon3D dispatch exception; tools/oracle/tkbo_empty_shape.md. Broader shared/located topology and polygon subtypes need coverage. No legacy completion claim."
     }
   ],
   "tests": [
