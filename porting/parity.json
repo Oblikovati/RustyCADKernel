@@ -92758,7 +92758,7 @@
       "notes": "Exact enum constant mapping; all four values are checked against the pinned OCCT enum declarations by the status enum-value test."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_sjis_to_unicode(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_sjis_to_unicode(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::sjis_to_unicode",
@@ -92766,7 +92766,7 @@
       "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_sjis(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_unicode_to_sjis(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_sjis",
@@ -92774,7 +92774,7 @@
       "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_euc(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_unicode_to_euc(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_euc",
@@ -92782,7 +92782,7 @@
       "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_euc_to_unicode(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_euc_to_unicode(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::euc_to_unicode",
@@ -92790,7 +92790,7 @@
       "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_gb_to_unicode(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_gb_to_unicode(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::gb_to_unicode",
@@ -92798,7 +92798,7 @@
       "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     },
     {
-      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_gb(unsigned int*,unsigned int*)",
+      "upstream_id": "Resource_unicode_to_gb(unsigned int*,unsigned int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
       "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_gb",
@@ -95102,7 +95102,7 @@
       "notes": "FILE* becomes Option<std::fs::File> (None for NULL). Linux converts the name to UTF-8 and parses the mode as glibc fopen does ('r'/'w'/'a' then up to six modifiers: '+' update, 'x' exclusive, others ignored; a write-only append stream starts at the end). The extern \"C\" OSD_OpenFile(const char*, const char*) is open_file_utf8. Windows: _wfopen accepts the MSVC mode letters (e.g. 't', 'ccs='); the Rust parser keeps the glibc rules on every host. Probe osd_fs_fopen (22 modes)."
     },
     {
-      "upstream_id": "OSD_OpenFile::OSD_FileStatCTime(const char*)",
+      "upstream_id": "OSD_FileStatCTime(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
       "rust_item": "rustycad_tkernel::osd::file_stat_ctime",
@@ -95110,7 +95110,7 @@
       "notes": "stat().st_ctime in seconds, 0 when stat fails. Linux/macOS: status-change time (MetadataExt::ctime); Windows: _wstat64 st_ctime is the creation time, read from Metadata::created. Probe osd_fs_ctime."
     },
     {
-      "upstream_id": "OSD_OpenFile::OSD_OpenFileDescriptor(const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "upstream_id": "OSD_OpenFileDescriptor(const TCollection_ExtendedString&,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
       "rust_item": "rustycad_tkernel::osd::open_file_descriptor",
@@ -95118,7 +95118,7 @@
       "notes": "The descriptor becomes Option<std::fs::File> (None for -1). Native quirk kept: any mode with out is O_WRONLY|O_CREAT|O_TRUNC (+O_APPEND with app) even with in or without trunc, since O_RDONLY is 0; no out opens read-only; created files get 0600. Windows: _wsopen_s with the same flags; its text-mode translation (no binary) is not reproduced. Probe osd_fs_fd covers all 64 modes."
     },
     {
-      "upstream_id": "OSD_OpenFile::OSD_OpenStream(std::filebuf&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "upstream_id": "OSD_OpenStream(std::filebuf&,const TCollection_ExtendedString&,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
       "rust_item": "rustycad_tkernel::osd::open_stream",
@@ -95126,7 +95126,7 @@
       "notes": "std::filebuf is FileBuffer: the libstdc++ openmode table (binary ignored, invalid combinations refused, ate seeks to the end), glibc's end start for write-only append, unbuffered reads and the libstdc++ put area (pending small writes; pubseekoff(0, cur) adds them to the file offset). Windows/MinGW open the same modes through std. Probe osd_fs_filebuf covers all 64 modes."
     },
     {
-      "upstream_id": "OSD_OpenFile::OSD_OpenStream(T&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "upstream_id": "OSD_OpenStream(T&,const TCollection_ExtendedString&,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
       "rust_item": "rustycad_tkernel::osd::open_file_stream",
@@ -95134,7 +95134,7 @@
       "notes": "The template over std::ifstream/ofstream/fstream becomes FileStream (input/output/input_output adds in/out/nothing); open failure sets failbit, success clears the state. Probe osd_fs_fstream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
     {
-      "upstream_id": "OSD_OpenFile::OSD_OpenStream(T&,const char*,std::ios_base::openmode)",
+      "upstream_id": "OSD_OpenStream(T&,const char*,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
       "rust_item": "rustycad_tkernel::osd::open_file_stream_utf8",
