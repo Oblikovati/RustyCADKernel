@@ -101853,6 +101853,26 @@
       "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
     },
     {
+      "upstream_id": "GeomGridEval_Curve::initialization(const Adaptor3d_Curve&)",
+      "selector_id": "c337872628e5c344b05e57de949197bc03354b10c195887ffd0aaafd8f1194da",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "source_sha256": "279d9f6ef2c25b11ae3197db302ff2d6bceae3a950218d59f8e499619ec5d8e0",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::initialization_adaptor",
+      "status": "partial",
+      "notes": "Public Rust counterpart of protected native reinitialization. The pinned native transition fixture covers replacement, null clearing, concrete and fallback adaptors, and GetType failure preservation. Rust enforces fallback-adaptor lifetime; native subclass layout and raw-reference ABI are not reproduced. See porting/audits/tkg3d-grid-eval-curve-init.json."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::initialization(const occ::handle<Geom_Curve>&)",
+      "selector_id": "e3df0da63867ae0480f01cca197e70b6eb13db124d404f23fff08ffd9509f156",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "source_sha256": "279d9f6ef2c25b11ae3197db302ff2d6bceae3a950218d59f8e499619ec5d8e0",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::initialization_curve",
+      "status": "partial",
+      "notes": "Public Rust counterpart of protected native reinitialization. The pinned native transition fixture covers replacement, null clearing, concrete and fallback adaptors, and GetType failure preservation. Rust enforces fallback-adaptor lifetime; native subclass layout and raw-reference ABI are not reproduced. See porting/audits/tkg3d-grid-eval-curve-init.json."
+    },
+    {
       "upstream_id": "GeomGridEval_Curve::EvaluateGrid(const NCollection_Array1<double>&) const",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
