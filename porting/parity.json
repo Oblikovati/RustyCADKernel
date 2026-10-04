@@ -228271,6 +228271,15 @@
       "rust_item": "rustycad_tkbo::int_tools::EdgeFace::minimal_distance",
       "status": "partial",
       "notes": "Partial IntTools_EdgeFace port. Public state accessors and bounded line/plane Perform paths are present. Native-backed Rust fixtures cover line/plane crossing, quick coincidence, line/cylinder tangency and circle/plane tangency (tools/oracle/tkbo_edge_face.md); tangent numeric fields match at absolute tolerance 1e-12. Helper tests cover CheckTouchVertex and line/plane HInter fallback. Seven additional native lifecycle snapshots check 49 state fields exactly across repeated Perform, invalid edges, fuzzy clamping and context reset. Supplemental evidence does not map new legacy declarations. Broader curve/surface families, arbitrary lifecycle histories, and additional bounded HInter fallback cases remain unproven. Touch stages now use transformed geometric adaptors, with native curve intervals and distinct face/underlying surface bounds; a translated tangency replay also passes."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::PerformEF(const Message_ProgressRange &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ef",
+      "status": "partial",
+      "notes": "Five native probes and Rust replays cover line/plane interior crossing with generated vertex and split blocks, endpoint contact, coplanar overlap, repeated destructive/non-destructive/fuzzy calls, and three fused crossings; tools/oracle/tkbo_pave_filler_ef.md. Native common-block/new-vertex/IntersectVE post-treatment, complete branch conditions, warning/error ordering, progress/cancellation and non-line/plane families remain incomplete or unverified. Supplemental fixtures do not map new legacy declarations."
     }
   ],
   "tests": [
