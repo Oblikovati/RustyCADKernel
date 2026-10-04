@@ -36,6 +36,12 @@ def all_paths() -> set[str]:
 
 
 class ToolImplementationHashTests(unittest.TestCase):
+    def test_crosswalk_hashes_template_selector_rules(self) -> None:
+        self.assertIn(
+            "tools/api_template_selectors.py",
+            IMPLEMENTATION_FILES["api_crosswalk"],
+        )
+
     def test_normalizer_rejects_capture_without_private_item_policy(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             capture = Path(directory)
