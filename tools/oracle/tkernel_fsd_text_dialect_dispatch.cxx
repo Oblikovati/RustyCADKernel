@@ -66,6 +66,21 @@ protected:
   }
 };
 
+class BaseWordFile final : public FSD_File
+{
+public:
+  int readWordCalls = 0;
+
+  void directReadWord(TCollection_AsciiString& theBuffer) { ReadWord(theBuffer); }
+
+protected:
+  void ReadWord(TCollection_AsciiString& theBuffer) override
+  {
+    ++readWordCalls;
+    FSD_File::ReadWord(theBuffer);
+  }
+};
+
 int main()
 {
   const char* aPath = "/tmp/tkernel-fsd-text-dialect-dispatch.txt";
@@ -102,5 +117,18 @@ int main()
   std::cout << (aFile.directFindTag("absent") == Storage_VSSectionNotFound) << ' '
             << aFile.findTagCalls << ' ' << aFile.readStringCalls << '\n';
   aFile.Close();
+
+  const char* aWordPath = "/tmp/tkernel-fsd-qualified-word.txt";
+  {
+    std::ofstream aWordFile(aWordPath);
+    aWordFile << "native-word remainder\n";
+  }
+  BaseWordFile aWordReader;
+  aWordReader.Open(aWordPath, Storage_VSRead);
+  TCollection_AsciiString aWord;
+  aWordReader.directReadWord(aWord);
+  std::cout << aWordReader.readWordCalls << ' ' << aWord.ToCString() << '\n';
+  aWordReader.Close();
   std::remove(aPath);
+  std::remove(aWordPath);
 }

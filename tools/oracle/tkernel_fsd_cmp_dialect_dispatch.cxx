@@ -10,6 +10,10 @@ class DerivedCmpFile final : public FSD_CmpFile
 {
 public:
   int flushCalls = 0;
+  int lineCalls = 0;
+  int stringCalls = 0;
+  int extendedReadCalls = 0;
+  int extendedWriteCalls = 0;
 
   void directReadLine(TCollection_AsciiString& theBuffer) { ReadLine(theBuffer); }
   void directReadString(TCollection_AsciiString& theBuffer) { ReadString(theBuffer); }
@@ -23,6 +27,30 @@ public:
   }
 
 protected:
+  void ReadLine(TCollection_AsciiString& theBuffer) override
+  {
+    ++lineCalls;
+    FSD_CmpFile::ReadLine(theBuffer);
+  }
+
+  void ReadString(TCollection_AsciiString& theBuffer) override
+  {
+    ++stringCalls;
+    FSD_CmpFile::ReadString(theBuffer);
+  }
+
+  void ReadExtendedLine(TCollection_ExtendedString& theBuffer) override
+  {
+    ++extendedReadCalls;
+    FSD_CmpFile::ReadExtendedLine(theBuffer);
+  }
+
+  void WriteExtendedLine(const TCollection_ExtendedString& theBuffer) override
+  {
+    ++extendedWriteCalls;
+    FSD_CmpFile::WriteExtendedLine(theBuffer);
+  }
+
   void FlushEndOfLine() override
   {
     ++flushCalls;
@@ -44,11 +72,13 @@ int main()
   TCollection_AsciiString aLine;
   aReader.directReadLine(aLine);
   std::cout << aLine.ToCString() << '\n';
+  std::cout << aReader.lineCalls << ' ' << aReader.stringCalls << '\n';
   aReader.directReadString(aLine);
   std::cout << aLine.ToCString() << '\n';
   TCollection_ExtendedString anExtended;
   aReader.directReadExtendedLine(anExtended);
   std::cout << aReader.flushCalls << '\n';
+  std::cout << aReader.extendedReadCalls << ' ' << aReader.lineCalls << '\n';
   aReader.directReadLine(aLine);
   std::cout << aLine.ToCString() << '\n';
   aReader.Close();
@@ -56,6 +86,7 @@ int main()
   DerivedCmpFile aWriter;
   aWriter.Open(aWritePath, Storage_VSWrite);
   aWriter.directWriteExtendedLine(TCollection_ExtendedString(u"AB"));
+  std::cout << aWriter.extendedWriteCalls << '\n';
   aWriter.Close();
   std::ifstream aOutput(aWritePath, std::ios::binary);
   std::cout << aOutput.rdbuf();

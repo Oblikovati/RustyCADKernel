@@ -27,7 +27,7 @@ pub trait TextDialect: Sized {
         if Self::USE_CMP_TEXT_DEFAULTS {
             cmp::read_line(file)
         } else {
-            file.fsd_read_line()
+            file.read_fsd_line_base()
         }
     }
 
@@ -36,18 +36,18 @@ pub trait TextDialect: Sized {
         if Self::USE_CMP_TEXT_DEFAULTS {
             cmp::read_string(file)
         } else {
-            file.fsd_read_string()
+            file.read_fsd_string_base()
         }
     }
 
     /// Protected virtual `ReadChar`; `MyDialect::read_char(file, 4)` reads up to four bytes.
     fn read_char(file: &mut TextFile<Self>, size: usize) -> AsciiString {
-        file.fsd_read_char(size)
+        file.read_fsd_char_base(size)
     }
 
     /// Protected virtual `ReadWord`; `MyDialect::read_word(file)` reads the next word.
     fn read_word(file: &mut TextFile<Self>) -> AsciiString {
-        file.fsd_read_word()
+        file.read_fsd_word_base()
     }
 
     /// Protected virtual `ReadExtendedLine`.
@@ -58,7 +58,7 @@ pub trait TextDialect: Sized {
         if Self::USE_CMP_TEXT_DEFAULTS {
             cmp::read_extended_line(file, text)
         } else {
-            file.fsd_read_extended_line(text)
+            file.read_fsd_extended_line_base(text)
         }
     }
 
@@ -70,19 +70,19 @@ pub trait TextDialect: Sized {
         if Self::USE_CMP_TEXT_DEFAULTS {
             cmp::write_extended_line(file, text)
         } else {
-            file.fsd_write_extended_line(text);
+            file.write_fsd_extended_line_base(text);
             Ok(())
         }
     }
 
     /// Protected virtual `FlushEndOfLine`; `MyDialect::flush_end_of_line(file)`.
     fn flush_end_of_line(file: &mut TextFile<Self>) {
-        Self::read_line(file);
+        file.flush_fsd_end_of_line_base();
     }
 
     /// Protected virtual `FindTag`; `MyDialect::find_tag(file, "BEGIN_INFO_SECTION")`.
     fn find_tag(file: &mut TextFile<Self>, tag: &str) -> crate::storage::StorageError {
-        file.find_tag_c_string(tag.as_bytes())
+        file.find_fsd_tag_base(tag)
     }
 
     /// `WritePersistentObjectHeader`.

@@ -5,6 +5,35 @@ use crate::standard::Failure;
 use crate::storage::DriverPrimitives;
 use crate::tcollection::{AsciiString, ExtendedString};
 
+impl<D: TextDialect> TextFile<D> {
+    /// Calls qualified Cmp `ReadLine` behavior without redispatching this hook.
+    /// Example: `file.read_cmp_line_base()`.
+    pub fn read_cmp_line_base(&mut self) -> AsciiString {
+        read_line(self)
+    }
+
+    /// Calls qualified Cmp `ReadString` behavior without redispatching this hook.
+    /// Example: `file.read_cmp_string_base()`.
+    pub fn read_cmp_string_base(&mut self) -> AsciiString {
+        read_string(self)
+    }
+
+    /// Calls qualified Cmp extended-line reading and retains virtual flush dispatch.
+    /// Example: `file.read_cmp_extended_line_base(&mut text)`.
+    pub fn read_cmp_extended_line_base(
+        &mut self,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
+        read_extended_line(self, text)
+    }
+
+    /// Calls qualified Cmp extended-line writing without redispatching this hook.
+    /// Example: `file.write_cmp_extended_line_base(&text)`.
+    pub fn write_cmp_extended_line_base(&mut self, text: &ExtendedString) -> Result<(), Failure> {
+        write_extended_line(self, text)
+    }
+}
+
 /// Reads through the base FSD reader, then removes native CR/LF suffix bytes.
 pub(super) fn read_line<D: TextDialect>(file: &mut TextFile<D>) -> AsciiString {
     trim_line_end(file.fsd_read_line())

@@ -8,6 +8,8 @@ inherited callers: `BeginReadInfoSection` dispatches `ReadChar` and `FindTag`
 `FlushEndOfLine` (which dispatches `ReadLine`), and `ReadRoot` dispatches
 `ReadWord`. The captured output is in
 `tkernel_fsd_text_dialect_dispatch.expected`.
+`BaseWordFile` separately overrides `ReadWord`, increments its counter, and
+delegates to the qualified `FSD_File::ReadWord` implementation.
 The first output row checks `FSD_File::IsGoodFileType`: despite being invoked
 through the derived type, this static method constructs a base `FSD_File`, so
 the derived `ReadChar` counter stays unchanged.
@@ -26,14 +28,15 @@ g++ -std=c++17 tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx \
 Source hashes: `FSD_File.hxx` `175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69`,
 `FSD_File.cxx` `52a2a856d67b53ddf027af9fb73f4ba9c7e17538e019237397df345bbd8053a5`,
 `FSD_CmpFile.hxx` `a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4`,
-and the fixture `d37c4f1d0b00a7bcbca24871330b43e00168e8f5782505b08f139b63f34405b5`.
+and the fixture `329a6f7a2a14a8ab80f802da44a2ff0dee5d38b5f178158c7e366734300dcf36`.
 The linked `libTKernel.so` hash is
 `6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee`.
 
 Rust `TextFile::with_dialect` stores an independent dialect value per driver.
-`TextDialect` defaults now implement FSD behavior; `ReadChar`, `ReadWord`,
-`FlushEndOfLine`, and `FindTag` are overridable and are used by both direct and
-internal operations. Existing `File` and `CmpFile` use the stateless constructor
+`TextDialect` defaults now implement FSD behavior. Qualified-base helper methods
+let custom overrides count and reuse an FSD body without redispatching that
+hook; nested calls from `FlushEndOfLine` to `ReadLine` and `FindTag` to
+`ReadString` remain virtual. Existing `File` and `CmpFile` use the stateless constructor
 and retain their established formats. The generic dialect's magic number remains
 a Rust format extension: native `MagicNumber()` is static and not virtual, so a
 custom dialect must use the intended file magic explicitly when comparing to
