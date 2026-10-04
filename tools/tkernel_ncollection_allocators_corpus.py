@@ -83,4 +83,4 @@ def cases() -> list[str]:
     """Deterministic allocators requests: normal, degenerate and boundary inputs."""
     rng = random.Random(20020412)
     return (incremental_cases(rng) + accumulating_cases(rng) + aligned_cases() + buffer_cases()
-            + ["ncoll_allocators_occ_eq"])
+            + ["ncoll_allocators_occ_eq", "ncoll_allocators_instance_identity"])

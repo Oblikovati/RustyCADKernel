@@ -80675,6 +80675,14 @@
       "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The singleton is a process-wide OnceLock, never destroyed, as upstream's leaked static."
     },
     {
+      "upstream_id": "NCollection_BaseAllocator::NCollection_BaseAllocator() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::fresh_common",
+      "status": "partial",
+      "notes": "Rust creates a distinct common-policy allocator identity with the same Standard::Allocate/Free behavior. OCCT's constructor is protected and is exercised through a derived native probe; Rust does not claim native subclassing or RTTI. Native identity/allocation probe: tools/oracle/tkernel_acc_allocator_instances.md; header SHA-256 dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e."
+    },
+    {
       "upstream_id": "NCollection_BaseAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_BaseAllocator,Standard_Transient)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
@@ -80793,6 +80801,14 @@
       "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::global_heap",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The heap policy rounds sizes up to 4 bytes before malloc, as upstream. The singleton is distinct from CommonBaseAllocator, as natively."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::NCollection_HeapAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::fresh_heap",
+      "status": "partial",
+      "notes": "Rust creates a distinct heap-policy allocator identity with malloc/Free behavior and native 4-byte request rounding. OCCT's constructor is protected and is exercised through a derived native probe; Rust does not claim native subclassing or RTTI. Native identity/allocation probe: tools/oracle/tkernel_acc_allocator_instances.md; header SHA-256 5a478d96d94cb53a89b1ea737a2ce1b8a0c392f2c57060efdfeb87e7d6466f5b."
     },
     {
       "upstream_id": "NCollection_HeapAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_HeapAllocator,NCollection_BaseAllocator)",

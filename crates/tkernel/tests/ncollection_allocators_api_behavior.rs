@@ -239,7 +239,9 @@ fn allocate_parallel(
 fn thread_safety_request_rejects_non_incremental_allocator() {
     let allocators = [
         (BaseAllocator::common(), "NCollection_BaseAllocator"),
+        (BaseAllocator::fresh_common(), "NCollection_BaseAllocator"),
         (BaseAllocator::global_heap(), "NCollection_HeapAllocator"),
+        (BaseAllocator::fresh_heap(), "NCollection_HeapAllocator"),
         (
             BaseAllocator::accumulating(64).unwrap(),
             "NCollection_AccAllocator",
@@ -398,6 +400,47 @@ fn heap_and_common_allocators_are_distinct_singletons() {
         // SAFETY: raw is a live allocation of this allocator.
         unsafe { allocator.free_raw(raw) }.unwrap();
     }
+}
+
+#[test]
+fn fresh_common_and_heap_handles_have_distinct_policy_identities() {
+    let common = BaseAllocator::common();
+    let heap = BaseAllocator::global_heap();
+    let fresh_common = BaseAllocator::fresh_common();
+    let second_common = BaseAllocator::fresh_common();
+    let fresh_heap = BaseAllocator::fresh_heap();
+    let second_heap = BaseAllocator::fresh_heap();
+    assert_ne!(fresh_common, common);
+    assert_ne!(fresh_common, second_common);
+    assert_ne!(fresh_heap, heap);
+    assert_ne!(fresh_heap, second_heap);
+    assert_backend_release_compatibility(&fresh_common, &common, &fresh_heap, &heap);
+    assert_probe_allocation(&fresh_common);
+    assert_probe_allocation(&fresh_heap);
+}
+
+fn assert_backend_release_compatibility(
+    fresh_common: &BaseAllocator,
+    common: &BaseAllocator,
+    fresh_heap: &BaseAllocator,
+    heap: &BaseAllocator,
+) {
+    assert!(fresh_common.can_free_from(common));
+    assert!(fresh_heap.can_free_from(heap));
+    assert!(!fresh_common.can_free_from(fresh_heap));
+    assert!(!BaseAllocator::incremental(4096).can_free_from(&BaseAllocator::incremental(4096)));
+    assert!(
+        !BaseAllocator::accumulating(64)
+            .unwrap()
+            .can_free_from(&BaseAllocator::accumulating(64).unwrap())
+    );
+    assert!(!BaseAllocator::aligned(16).can_free_from(&BaseAllocator::aligned(16)));
+}
+
+fn assert_probe_allocation(allocator: &BaseAllocator) {
+    let allocation = allocator.allocate_raw(8).unwrap();
+    // SAFETY: the probe allocation is released once through its originating allocator.
+    unsafe { allocator.free_raw(allocation) }.unwrap();
 }
 
 #[test]

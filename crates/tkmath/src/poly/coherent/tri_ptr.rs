@@ -95,7 +95,7 @@ impl CoherentTriPtr {
         Ok(added)
     }
 
-    /// Unlinks a stable member through its creating allocator; `ring.remove_member(m, &arena)?`.
+    /// Removes a member when the allocator has a compatible release backend; `ring.remove_member(m, &arena)?`.
     pub fn remove_member(
         &mut self,
         member: CoherentTriMember,
@@ -106,10 +106,10 @@ impl CoherentTriPtr {
         Ok(())
     }
 
-    /// Frees every node only when all were made by the supplied allocator; `ring.remove_list_in(&arena)?`.
+    /// Removes nodes when the supplied allocator can release each backend; `ring.remove_list_in(&arena)?`.
     pub fn remove_list_in(&mut self, allocator: &BaseAllocator) -> Result<(), Failure> {
         for (member, allocation) in &self.members {
-            if allocation.allocator != *allocator {
+            if !allocator.can_free_from(&allocation.allocator) {
                 return Err(allocator_mismatch(*member));
             }
         }
@@ -274,7 +274,7 @@ impl CoherentTriPtr {
             .members
             .get(&member)
             .ok_or_else(|| missing_member(member))?;
-        if &allocation.allocator == allocator {
+        if allocator.can_free_from(&allocation.allocator) {
             return Ok(());
         }
         Err(allocator_mismatch(member))

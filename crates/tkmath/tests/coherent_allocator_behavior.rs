@@ -108,6 +108,39 @@ fn node_clear_rejects_mismatch_then_resets_geometry_with_matching_allocator() {
     allocator.reset(false).unwrap();
 }
 
+#[test]
+fn common_policy_instances_can_remove_each_others_ring_members() {
+    let owner = BaseAllocator::fresh_common();
+    let remover = BaseAllocator::fresh_common();
+    let mut ring = rustycad_tkmath::poly::CoherentTriPtr::new_in(7, owner.clone());
+    let member = ring.head_member().unwrap();
+    ring.remove_member(member, &remover).unwrap();
+    assert!(ring.is_empty());
+    assert_ne!(owner, remover);
+}
+
+#[test]
+fn heap_policy_instances_can_remove_each_others_ring_lists() {
+    let owner = BaseAllocator::fresh_heap();
+    let remover = BaseAllocator::fresh_heap();
+    let mut ring = rustycad_tkmath::poly::CoherentTriPtr::new_in(9, owner.clone());
+    ring.remove_list_in(&remover).unwrap();
+    assert!(ring.is_empty());
+    assert_ne!(owner, remover);
+}
+
+#[test]
+fn separate_arena_instances_remain_incompatible_until_owner_removal() {
+    let owner = BaseAllocator::incremental(4096);
+    let other = BaseAllocator::incremental(4096);
+    let mut ring = rustycad_tkmath::poly::CoherentTriPtr::new_in(11, owner.clone());
+    let member = ring.head_member().unwrap();
+    assert!(ring.remove_member(member, &other).is_err());
+    assert_allocator_has_live_members(&owner);
+    ring.remove_member(member, &owner).unwrap();
+    owner.reset(false).unwrap();
+}
+
 fn assert_allocator_rejection(node: &mut CoherentNode, triangle: usize, wrong: &BaseAllocator) {
     let error = node.remove_triangle_in(triangle, wrong).unwrap_err();
     assert_eq!(error.exception_type(), "Standard_ProgramError");
