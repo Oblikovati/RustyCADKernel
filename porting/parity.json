@@ -230232,13 +230232,9 @@
       "upstream_id": "NCollection_AccAllocator::Key::Value",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::AccBlockKey::value",
-      "rust_items": [
-        "rustycad_tkernel::ncollection::AccBlockKey::value",
-        "rustycad_tkernel::ncollection::AccBlockKey::set_value"
-      ],
-      "status": "partial",
-      "notes": "Read/write value behavior covered by getter/setter and native mutation/hash probe. Direct borrowed field-address access is not exposed. See tools/oracle/ncollection_acc_key_hasher.md."
+      "rust_item": "rustycad_tkernel::ncollection::AccBlockKey::key_value",
+      "status": "implemented",
+      "notes": "Public usize field supports direct reads, writes and shared/exclusive borrowing of the same key storage. Existing value()/set_value() conveniences remain. Native field-address, mutation, hash and equality probe: tools/oracle/ncollection_acc_key_hasher.md. This field mapping does not establish allocator subclassing or complete toolkit parity."
     },
     {
       "upstream_id": "Bnd_B2::compareDist(const RealType*,const RealType*) noexcept",

@@ -11,7 +11,9 @@ Native `Hasher(Key)` returns `Key::Value` unchanged. Its two-key overload compar
 The fixture checks zero, ordinary values, and `SIZE_MAX`; the final distinct-key comparison uses
 defined unsigned wraparound. A second case mutates the public `Key::Value` member and hashes and
 compares that same key instance. Rust exposes equivalent `AccBlockKey` and `AccBlockKeyHasher`
-value types with explicit hash/equality methods and a mutable-value setter. They do not provide
+value types with explicit hash/equality methods and a public `usize` value field. The final
+case borrows that field, mutates through its reference and verifies address identity plus
+hash/equality after mutation. The getter/setter conveniences remain available. They do not provide
 allocator subclassing, access to the native block map, or the protected `getKey` implementation.
 
 Reproduce from the repository root with:
@@ -24,3 +26,8 @@ c++ -std=c++17 -O2 -Itarget/occt-tkernel-full/include/opencascade \
   -o /tmp/ncollection_acc_key_hasher
 /tmp/ncollection_acc_key_hasher
 ```
+
+The borrowed-field extension was replayed with GCC 13.3.0 at `-O2` against
+`target/occt-modeling-full` on Linux x86_64. Its additional row is `42,1,42,1`.
+The corresponding Rust regression is `accumulating_key_field_borrow_updates_same_storage`;
+this is supplemental coverage and adds no original legacy declaration mappings.

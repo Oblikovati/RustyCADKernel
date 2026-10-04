@@ -35,6 +35,16 @@ public:
     std::cout << key.Value << ',' << hashKey(key) << ',' << equalKeys(key, Key{42}) << ','
               << equalKeys(key, Key{41}) << '\n';
   }
+
+  static void borrowedValue()
+  {
+    Key key{41};
+    size_t& value = key.Value;
+    value += 1;
+    const size_t* address = &value;
+    std::cout << *address << ',' << (address == &key.Value) << ',' << hashKey(key) << ','
+              << equalKeys(key, Key{42}) << '\n';
+  }
 };
 
 int main()
@@ -47,4 +57,5 @@ int main()
               << AccAllocatorKeyProbe::equal(value, value + 1) << '\n';
   }
   AccAllocatorKeyProbe::mutableValue();
+  AccAllocatorKeyProbe::borrowedValue();
 }

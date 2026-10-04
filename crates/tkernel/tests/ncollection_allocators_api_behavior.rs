@@ -151,6 +151,18 @@ fn accumulating_protected_key_value_mutation_changes_hash_and_equality() {
     assert!(!hasher.equal(key, AccBlockKey::new(41)));
 }
 
+#[test]
+fn accumulating_key_field_borrow_updates_same_storage() {
+    let mut key = AccBlockKey::new(41);
+    let value: &mut usize = &mut key.key_value;
+    *value += 1;
+    let address: *const usize = value;
+    assert_eq!(*value, 42);
+    assert!(std::ptr::eq(address, &key.key_value));
+    assert_eq!(AccBlockKeyHasher.hash(key), 42);
+    assert!(AccBlockKeyHasher.equal(key, AccBlockKey::new(42)));
+}
+
 fn assert_acc_aligned_size_rounding() {
     assert_eq!(
         [0, 1, 2, 3, 4, 5, usize::MAX].map(|size| AccAlignedSize::new(size).get()),
