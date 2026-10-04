@@ -38006,7 +38006,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::clear_in",
       "status": "partial",
-      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md. Common/Heap cross-policy release is now covered for the pinned native process-heap configuration; see porting/audits/tkmath-coherent-cross-backend-free.md. Other allocator subclasses/configurations and remaining pointer semantics are not established."
     },
     {
       "upstream_id": "Poly_CoherentNode::AddTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38014,7 +38014,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::add_triangle_in",
       "status": "partial",
-      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md. Common/Heap cross-policy release is now covered for the pinned native process-heap configuration; see porting/audits/tkmath-coherent-cross-backend-free.md. Other allocator subclasses/configurations and remaining pointer semantics are not established."
     },
     {
       "upstream_id": "Poly_CoherentNode::RemoveTriangle(const Poly_CoherentTriangle&,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38022,7 +38022,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentNode::remove_triangle_in",
       "status": "partial",
-      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md."
+      "notes": "The supplied allocator now owns node ring members and is checked on removal/clear. Native and Rust probes cover defined allocation lifecycles, mismatch non-mutation, and owner release. Backend compatibility across distinct allocator identities and native null/dangling triangle states remain unrepresented. See porting/audits/tkmath-coherent-allocator-propagation.md. Common/Heap cross-policy release is now covered for the pinned native process-heap configuration; see porting/audits/tkmath-coherent-cross-backend-free.md. Other allocator subclasses/configurations and remaining pointer semantics are not established."
     },
     {
       "upstream_id": "Poly_CoherentNode::TriangleIterator() const",
@@ -38176,7 +38176,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_member",
       "status": "partial",
-      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md. Common/Heap cross-policy release is now covered for the pinned native process-heap configuration; see porting/audits/tkmath-coherent-cross-backend-free.md. Other allocator subclasses/configurations and remaining pointer semantics are not established."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::RemoveList(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
@@ -38184,7 +38184,7 @@
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_list_in",
       "status": "partial",
-      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
+      "notes": "Allocator-owned stable ring nodes and nullable lifecycle are covered by the native probes and supplemental Rust tests. Rust stores triangle indices rather than Poly_CoherentTriangle pointers, so this remains partial; cross-allocator backend compatibility is also open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md. Common/Heap cross-policy release is now covered for the pinned native process-heap configuration; see porting/audits/tkmath-coherent-cross-backend-free.md. Other allocator subclasses/configurations and remaining pointer semantics are not established."
     },
     {
       "upstream_id": "Poly_CoherentTriangle()",
