@@ -125,6 +125,14 @@ fn triangle_connections_and_rings_follow_native_rules() {
     assert_eq!(ring.get_triangle(), 9);
 }
 #[test]
+fn coherent_ring_rejects_out_of_range_positions_before_traversal() {
+    let ring = CoherentTriPtr::new(7);
+    for position in [1, usize::MAX] {
+        assert_eq!(ring.triangle_at(position), None);
+        assert!(!ring.iter_from(position).more());
+    }
+}
+#[test]
 fn ring_member_tokens_survive_edits_and_allocator_mismatch_is_rejected() {
     let arena = rustycad_tkernel::ncollection::BaseAllocator::incremental(4096);
     let wrong = rustycad_tkernel::ncollection::BaseAllocator::incremental(4096);
