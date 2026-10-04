@@ -3,6 +3,7 @@ mod classify;
 mod grouping;
 mod mixed;
 mod queries;
+mod tangent_faces;
 use super::BRepOffsetInterval;
 use rustycad_tkbrep::{
     topods::{Edge, Shape},
@@ -19,6 +20,8 @@ pub struct BRepOffsetAnalyse {
     done: bool,
     intervals: ShapeBindings<Vec<BRepOffsetInterval>>,
     ancestors: ShapeBindings<Vec<Shape>>,
+    ancestor_order: Vec<Shape>,
+    face_offsets: ShapeBindings<f64>,
     new_faces: Vec<Shape>,
     descendants: ShapeBindings<Vec<Shape>>,
     generated: ShapeBindings<Shape>,
@@ -29,7 +32,7 @@ impl BRepOffsetAnalyse {
     pub fn new() -> Self {
         Self::default()
     }
-    /// Analyse uniform-offset connectivity; `analysis.perform(&shape, 0.01)?`.
+    /// Analyse connectivity and artificial faces for differing offsets; `analysis.perform(&shape, 0.01)?`.
     pub fn perform(&mut self, shape: &Shape, angle: f64) -> Result<(), Failure> {
         self.shape = shape.clone();
         self.angle = angle;
@@ -38,7 +41,9 @@ impl BRepOffsetAnalyse {
         self.generated.clear(false);
         self.replacements.clear(false);
         self.build_ancestors()?;
-        self.classify_edges()?;
+        let tangent_edges = self.classify_edges()?;
+        self.treat_tangent_faces(&tangent_edges)?;
+        self.rebuild_descendants()?;
         self.done = true;
         Ok(())
     }
@@ -56,22 +61,28 @@ impl BRepOffsetAnalyse {
     pub fn set_offset_value(&mut self, offset: f64) {
         self.offset = offset;
     }
+    /// Copy per-face offsets used for artificial tangent faces; `analysis.set_face_offset_map(&offsets)`.
+    pub fn set_face_offset_map(&mut self, offsets: &ShapeBindings<f64>) {
+        self.face_offsets = offsets.clone();
+    }
     /// Clear topology and results, retaining angle and offset; `analysis.clear()`.
     pub fn clear(&mut self) {
         self.done = false;
         self.shape = Shape::default();
         self.intervals.clear(false);
         self.ancestors.clear(false);
+        self.ancestor_order.clear();
+        self.face_offsets.clear(false);
         self.new_faces.clear();
         self.descendants.clear(false);
         self.generated.clear(false);
         self.replacements.clear(false);
     }
-    /// Read artificial tangent faces; uniform offsets create none; `analysis.new_faces()`.
+    /// Read artificial tangent faces between differently offset supports; `analysis.new_faces()`.
     pub fn new_faces(&self) -> &[Shape] {
         &self.new_faces
     }
-    /// Check generated-face bindings; uniform offsets create none; `analysis.has_generated(&edge)`.
+    /// Check generated face or side-edge bindings; `analysis.has_generated(&edge)`.
     pub fn has_generated(&self, shape: &Shape) -> bool {
         self.generated.is_bound(shape)
     }

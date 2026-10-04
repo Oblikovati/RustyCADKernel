@@ -9,6 +9,16 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkfillet::chfi_ds::TypeOfConcavity;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 impl BRepOffsetAnalyse {
+    pub(super) fn rebuild_descendants(&mut self) -> Result<(), Failure> {
+        self.descendants.clear(false);
+        for child in self.ancestor_order.clone() {
+            for parent in self.ancestors.find(&child)?.clone() {
+                self.bind_descendant(&parent, &child)?;
+            }
+        }
+        Ok(())
+    }
+
     pub(super) fn bind_descendant(&mut self, parent: &Shape, child: &Shape) -> Result<(), Failure> {
         if !self.descendants.is_bound(parent) {
             self.descendants.bind(parent.clone(), Vec::new());

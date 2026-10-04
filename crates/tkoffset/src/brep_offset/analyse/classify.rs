@@ -30,15 +30,10 @@ impl BRepOffsetAnalyse {
                 false,
             )?;
         }
-        self.descendants.clear(false);
-        for index in 1..=native.extent() {
-            let child = native.find_key(index)?;
-            for parent in native.find_from_index(index)?.iter() {
-                self.bind_descendant(parent, child)?;
-            }
-        }
         self.ancestors.clear(false);
+        self.ancestor_order.clear();
         for index in 1..=native.extent() {
+            self.ancestor_order.push(native.find_key(index)?.clone());
             self.ancestors.bind(
                 native.find_key(index)?.clone(),
                 native.find_from_index(index)?.iter().cloned().collect(),
@@ -46,7 +41,8 @@ impl BRepOffsetAnalyse {
         }
         Ok(())
     }
-    pub(super) fn classify_edges(&mut self) -> Result<(), Failure> {
+    pub(super) fn classify_edges(&mut self) -> Result<Vec<topods::Shape>, Failure> {
+        let mut tangent_edges = Vec::new();
         let shape = self.shape.oriented(Orientation::Forward);
         for shape in Explorer::new(&shape, ShapeEnum::Edge, ShapeEnum::Shape)? {
             if self.intervals.is_bound(&shape) {
@@ -58,13 +54,16 @@ impl BRepOffsetAnalyse {
             let parents = self.ancestors(&shape)?;
             let interval = classify_incidence(&edge, parents, self.angle.sin().abs())?;
             if let Some(interval) = interval {
+                if parents.len() == 2 && interval.get_type()? == TypeOfConcavity::Tangential {
+                    tangent_edges.push(shape.clone());
+                }
                 self.intervals.change_find(&shape)?.push(interval);
             }
         }
-        Ok(())
+        Ok(tangent_edges)
     }
 }
-fn classify_incidence(
+pub(super) fn classify_incidence(
     edge: &Edge,
     parents: &[topods::Shape],
     sin_tolerance: f64,
