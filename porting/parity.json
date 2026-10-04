@@ -225158,7 +225158,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty merge-map false case, and single free-wire 3D small-edge BSpline join validated by topology occurrences and curve geometry. Face-linked/pcurve/seam/drop/angle/multiple-group/NM/warning branches remain explicit errors. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Shared-face/seam/multiple-face/drop/angle/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wireframe::MergeSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool, const double)",
@@ -225167,7 +225167,7 @@
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
       "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty merge-map false case, and single free-wire 3D small-edge BSpline join validated by topology occurrences and curve geometry. Face-linked/pcurve/seam/drop/angle/multiple-group/NM/warning branches remain explicit errors. Partial; no legacy mapping increase."
+      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Shared-face/seam/multiple-face/drop/angle/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
     },
     {
       "upstream_id": "ChFiDS_TypeOfConcavity",
@@ -225465,6 +225465,42 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::MixedConnectivity",
       "status": "implemented",
       "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "ChFi3d::DefineConnectType(const TopoDS_Edge &, const TopoDS_Face &, const TopoDS_Face &, const double, const bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "source_sha256": "a9442577a929311d9397de845bf4d6e5480376a4f16a26a2dab8140229ab242e",
+      "rust_item": "rustycad_tkfillet::chfi3d::define_connect_type",
+      "status": "partial",
+      "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "ChFi3d::NextSide(TopAbs_Orientation &, TopAbs_Orientation &, const TopAbs_Orientation, const TopAbs_Orientation, const int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "source_sha256": "a9442577a929311d9397de845bf4d6e5480376a4f16a26a2dab8140229ab242e",
+      "rust_item": "rustycad_tkfillet::chfi3d::next_side",
+      "status": "implemented",
+      "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "ChFi3d::NextSide(TopAbs_Orientation &, const TopAbs_Orientation, const TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "source_sha256": "a9442577a929311d9397de845bf4d6e5480376a4f16a26a2dab8140229ab242e",
+      "rust_item": "rustycad_tkfillet::chfi3d::next_side_on_face",
+      "status": "implemented",
+      "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "ChFi3d::SameSide(const TopAbs_Orientation, const TopAbs_Orientation, const TopAbs_Orientation, const TopAbs_Orientation, const TopAbs_Orientation)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "source_sha256": "a9442577a929311d9397de845bf4d6e5480376a4f16a26a2dab8140229ab242e",
+      "rust_item": "rustycad_tkfillet::chfi3d::same_side",
+      "status": "implemented",
+      "notes": "Pinned source translation. Native fixtures cover 192 connection classifications and 5440 side-propagation cases. DefineConnectType still needs curved/located/seam/spline correction native coverage. NextSide excludes the C++ abs(INT_MIN) undefined case from its equivalence claim. No fillet toolkit or legacy completion claim."
     }
   ],
   "tests": [

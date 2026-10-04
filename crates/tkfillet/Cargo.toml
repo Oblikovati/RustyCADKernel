@@ -9,3 +9,14 @@ publish.workspace = true
 
 [lints]
 workspace = true
+
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkbo = { path = "../tkbo" }
+
+[dev-dependencies]
+rustycad-tktopalgo = { path = "../tktopalgo" }
