@@ -5,3 +5,4 @@ pub use connexity::{
     make_connexity_blocks, make_connexity_blocks_from_shapes, make_connexity_compounds,
 };
 pub use connexity_block::ConnexityBlock;
+pub mod algo_tools2d;

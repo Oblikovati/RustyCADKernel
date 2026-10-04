@@ -225753,6 +225753,168 @@
       "rust_item": "rustycad_tkbo::bop_tools::make_connexity_blocks_from_shapes",
       "status": "partial",
       "notes": "Source translated, native output/order/identity/orientation/regularity comparison for box, face wire, empty and disconnected input. Existing outputs and repeated ancestor-map entries are preserved. External prepopulated ancestor maps and broader shape-kind combinations need native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::BRepOffset_MakeOffset()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::new",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Initialize(const TopoDS_Shape &, const double, const double, const BRepOffset_Mode, const bool, const bool, const GeomAbs_JoinType, const bool, const bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::initialize",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Clear()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::clear",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::AllowLinearization(const bool)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::allow_linearization",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::AddFace(const TopoDS_Face &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::add_face",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::SetOffsetOnFace(const TopoDS_Face &, const double)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::set_offset_on_face",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::MakeOffsetShape(const Message_ProgressRange &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_offset_shape",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::CheckInputData(const Message_ProgressRange &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::check_input_data",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::IsDone() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_done",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Shape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::shape",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::InitShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::init_shape",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Error() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::error",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::GetJoinType() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::join_type",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::ClosingFaces() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::closing_faces",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::GetBadShape() const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::bad_shape",
+      "status": "partial",
+      "notes": "Native configuration/state and input-validation fixtures plus identity-located single planar face open-shell construction match the recorded oracle. Uninitialized C++ scalars use explicit Rust Option/error boundaries. General face-component selection, nonplanar/shared geometry, histories, intersections, caps/thickening and progress cancellation remain incomplete. Full OCC28131 standard-offset regression is not mapped."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnSurf(const BRepAdaptor_Surface &, const double, const double, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::adjust_pcurve_on_surface",
+      "status": "partial",
+      "notes": "140 native plane/cylinder/torus cases compare periodic translation, curve identity and unchanged input; cached and uncached Rust adaptors agree. Source preserves adjusted-u plus du classifier ordering. Broader periodic spline/located/exceptional and irregular-domain cases still need native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::AdjustPCurveOnFace(const TopoDS_Face &, const double, const double, const occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::adjust_pcurve_on_face",
+      "status": "partial",
+      "notes": "140 native plane/cylinder/torus cases compare periodic translation, curve identity and unchanged input; cached and uncached Rust adaptors agree. Source preserves adjusted-u plus du classifier ordering. Broader periodic spline/located/exceptional and irregular-domain cases still need native evidence. No legacy completion claim."
     }
   ],
   "tests": [
