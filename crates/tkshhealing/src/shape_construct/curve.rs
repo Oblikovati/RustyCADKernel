@@ -8,6 +8,9 @@
 mod adjust;
 mod convert_2d;
 mod convert_3d;
+mod join_2d;
+mod join_3d;
+mod join_math;
 mod knots;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
@@ -31,6 +34,9 @@ use rustycad_tkernel::standard::Failure;
 /// ```
 #[derive(Clone, Copy, Debug, Default)]
 pub struct ShapeConstructCurve;
+
+pub use join_2d::{ShapeConstructCurveJoin2d, ShapeConstructCurveJoin2dRequest};
+pub use join_3d::ShapeConstructCurveJoin3d;
 
 fn null_curve(member: &str) -> Failure {
     Failure::with_message(

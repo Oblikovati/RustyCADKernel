@@ -28,20 +28,15 @@ pub(super) fn merge_face_small_edges(
     }
     let (source, edges) = single_face_entry(face_small)?;
     validate_face_edge_links(&source, edges, edge_faces)?;
-    validate_no_shared_edges(&source, edge_faces)?;
-    merge_one_face(fixer, small, &source, angle_limit)
+    let links = edge_face_entries(edge_faces);
+    merge_one_face(fixer, small, &source, &links, angle_limit)
 }
 
-fn validate_no_shared_edges(
-    face: &Shape,
-    edge_faces: &ShapeFixWireframeShapeLists,
-) -> Result<(), Failure> {
-    for (_, faces) in edge_faces.items() {
-        if faces.len() > 1 && faces.iter().any(|linked| linked.is_same(face)) {
-            return Err(unported_small_edge_merge());
-        }
-    }
-    Ok(())
+fn edge_face_entries(edge_faces: &ShapeFixWireframeShapeLists) -> Vec<(Shape, Vec<Shape>)> {
+    edge_faces
+        .items()
+        .map(|(edge, faces)| (edge.clone(), faces.iter().cloned().collect()))
+        .collect()
 }
 
 fn single_face_entry(
@@ -63,14 +58,14 @@ fn validate_face_edge_links(
     edge_faces: &ShapeFixWireframeShapeLists,
 ) -> Result<(), Failure> {
     for edge in edges.iter() {
-        if !is_single_face_link(face, edge, edge_faces)? {
+        if !contains_face_link(face, edge, edge_faces)? {
             return Err(unported_small_edge_merge());
         }
     }
     Ok(())
 }
 
-fn is_single_face_link(
+fn contains_face_link(
     face: &Shape,
     edge: &Shape,
     edge_faces: &ShapeFixWireframeShapeLists,
@@ -78,13 +73,14 @@ fn is_single_face_link(
     let Ok(faces) = edge_faces.find(edge) else {
         return Ok(false);
     };
-    Ok(faces.len() == 1 && faces.iter().any(|linked| linked.is_same(face)))
+    Ok(faces.iter().any(|linked| linked.is_same(face)))
 }
 
 fn merge_one_face(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
     source: &Shape,
+    edge_faces: &[(Shape, Vec<Shape>)],
     angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let context = fixer.context();
@@ -94,7 +90,15 @@ fn merge_one_face(
     let face = applied_face(source, &context)?;
     let mut changed = false;
     for wire in face_wires(&face)? {
-        changed |= merge_face_wire(fixer, &face, &wire, &context, small, angle_limit)?;
+        changed |= merge_face_wire(
+            fixer,
+            &face,
+            &wire,
+            &context,
+            small,
+            edge_faces,
+            angle_limit,
+        )?;
     }
     if !changed {
         return Ok(false);
@@ -122,18 +126,13 @@ fn merge_face_wire(
     wire: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
+    edge_faces: &[(Shape, Vec<Shape>)],
     angle_limit: Option<f64>,
 ) -> Result<bool, Failure> {
     let source = wire.clone();
     let current = applied_wire(&source, context)?;
-    merge_wire_with_faces(
-        fixer,
-        &source,
-        &current,
-        context,
-        small,
-        &MergePolicy::face(face, angle_limit),
-    )
+    let mut policy = MergePolicy::face(face, edge_faces.to_vec(), angle_limit);
+    merge_wire_with_faces(fixer, &source, &current, context, small, &mut policy)
 }
 
 fn applied_wire(source: &Wire, context: &Handle<ShapeBuildReShape>) -> Result<Wire, Failure> {
