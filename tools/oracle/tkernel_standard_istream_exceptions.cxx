@@ -23,6 +23,8 @@ public:
   }
   const char* ReadLine(std::istream& theStream, std::size_t& theLength, std::int64_t& theCount)
   { return Standard_ReadLineBuffer::ReadLine(theStream, theLength, theCount); }
+  const char* ReadLine(std::istream& theStream, std::size_t& theLength)
+  { return Standard_ReadLineBuffer::ReadLine(theStream, theLength); }
 };
 
 class ThrowAfterBytes : public std::streambuf
@@ -64,10 +66,15 @@ static void probe_bad_read(ExposedLineBuffer& theBuffer)
   aStream.exceptions(std::ios::badbit);
   std::size_t aCount = 77;
   bool didThrow = false;
+  bool caughtOriginal = false;
+  std::string aMessage;
   try { theBuffer.Read(aStream, 4, aCount); }
+  catch (const std::runtime_error& anError)
+  { didThrow = true; caughtOriginal = true; aMessage = anError.what(); }
   catch (const std::exception&) { didThrow = true; }
   std::cout << "badread=" << aCount << '/' << aStream.gcount() << '/' << aStream.bad()
-            << '/' << aStream.fail() << '/' << didThrow << '/' << hex(theBuffer.Bytes(4)) << '\n';
+            << '/' << aStream.fail() << '/' << didThrow << '/' << caughtOriginal << '/' << aMessage
+            << '/' << hex(theBuffer.Bytes(4)) << '\n';
 }
 
 static void probe_unmasked_read(ExposedLineBuffer& theBuffer)
@@ -160,6 +167,21 @@ static void probe_line_state()
             << '/' << didThrow << '\n';
 }
 
+static void probe_unaccounted_line_state()
+{
+  ExposedLineBuffer aLine(4);
+  ThrowAfterBytes aSource("xy", 2);
+  std::istream aStream(&aSource);
+  aStream.exceptions(std::ios::badbit);
+  std::size_t aLength = 55;
+  aLine.SeedState();
+  bool didThrow = false;
+  try { aLine.ReadLine(aStream, aLength); }
+  catch (const std::exception&) { didThrow = true; }
+  std::cout << "line_no_count=" << aLength << '/' << aLine.LastRead() << '/' << aLine.Position()
+            << '/' << hex(aLine.Bytes(4)) << '/' << aStream.gcount() << '/' << didThrow << '\n';
+}
+
 int main()
 {
   std::cout << std::unitbuf;
@@ -171,4 +193,5 @@ int main()
   probe_mask_changes();
   probe_zero_length_failure();
   probe_line_state();
+  probe_unaccounted_line_state();
 }

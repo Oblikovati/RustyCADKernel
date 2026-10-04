@@ -17,6 +17,25 @@ impl Read for ErrorThenBytes {
     }
 }
 
+#[derive(Debug)]
+struct InjectedSourceFault(&'static str);
+
+impl std::fmt::Display for InjectedSourceFault {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str(self.0)
+    }
+}
+
+impl std::error::Error for InjectedSourceFault {}
+
+struct PayloadFailure;
+
+impl Read for PayloadFailure {
+    fn read(&mut self, _target: &mut [u8]) -> io::Result<usize> {
+        Err(io::Error::other(InjectedSourceFault("native payload")))
+    }
+}
+
 #[test]
 fn badbit_stays_sticky_until_clear() {
     let source = ErrorThenBytes {
@@ -150,4 +169,21 @@ fn zero_length_read_checks_existing_masked_state() {
     let error = stream.read_block(&mut []).unwrap_err();
     assert!(error.bad() && error.fail());
     assert!(stream.is_fail());
+}
+
+#[test]
+fn masked_badbit_retains_the_source_error_payload() {
+    use crate::standard::IstreamExceptionMask;
+    let mut stream = IstreamStream::new(PayloadFailure);
+    stream
+        .set_exceptions(IstreamExceptionMask::new(false, false, true))
+        .unwrap();
+    let mut byte = [0];
+    let error = stream.read_block(&mut byte).unwrap_err();
+    let original = error
+        .source_error()
+        .and_then(std::io::Error::get_ref)
+        .and_then(|source| source.downcast_ref::<InjectedSourceFault>());
+    assert_eq!(original.map(|fault| fault.0), Some("native payload"));
+    assert!(std::error::Error::source(&error).is_some());
 }

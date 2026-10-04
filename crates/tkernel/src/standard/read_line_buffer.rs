@@ -160,6 +160,17 @@ impl ReadLineBuffer {
         Ok(span.map(|span| self.line_for_span(span)))
     }
 
+    /// Reads without exposing the block-byte count, matching the simpler native overload;
+    /// `let line = buffer.read_line_istream_unaccounted(&mut stream, &mut length)?`.
+    pub fn read_line_istream_unaccounted<R: Read>(
+        &mut self,
+        stream: &mut IstreamStream<R>,
+        line_length: &mut usize,
+    ) -> Result<Option<&[u8]>, IstreamException> {
+        let mut ignored_read_data = 0;
+        self.read_line_istream(stream, line_length, &mut ignored_read_data)
+    }
+
     /// Reads a C-file-style block, preserving its sticky EOF/error indicators;
     /// `buffer.read_stream_file(&mut file, 4, &mut count)`.
     pub fn read_stream_file<R: Read>(

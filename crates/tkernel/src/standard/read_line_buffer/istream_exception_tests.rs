@@ -69,6 +69,29 @@ fn exception_mask_reuses_native_line_state_when_fetch_throws() {
 }
 
 #[test]
+fn exception_mask_propagates_through_the_unaccounted_line_overload() {
+    let mut lines = ReadLineBuffer::new(4);
+    lines.read_buffer.copy_from_slice(b"prev");
+    lines.position = 4;
+    lines.last_read = 4;
+    let source = WriteThenError {
+        prefix: b"xy",
+        failed: false,
+    };
+    let mut stream = IstreamStream::new(source);
+    stream
+        .set_exceptions(IstreamExceptionMask::new(false, false, true))
+        .unwrap();
+    let mut length = usize::MAX;
+    let error = lines
+        .read_line_istream_unaccounted(&mut stream, &mut length)
+        .unwrap_err();
+    assert!(error.bad());
+    assert_eq!((length, lines.position, lines.last_read), (0, 4, 4));
+    assert_eq!(&lines.read_buffer[..], b"xyev");
+}
+
+#[test]
 fn unmasked_badbit_keeps_zero_gcount_after_partial_buffer_write() {
     let source = WriteThenError {
         prefix: b"ab",
