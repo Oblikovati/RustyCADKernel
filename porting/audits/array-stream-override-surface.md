@@ -25,7 +25,8 @@ byte-storage adapter and does not dispatch virtual underflow/showmanyc. Native
 `streamsize`/`pos_type` have platform-specific representation; the implemented
 hook surface uses Rust `usize`/`isize` and `u64`/`io::Result` adapters for bounded
 valid-position calls. It does not claim exact subclasses that return arbitrary
-position state or negative bulk-read counts. Input pointer arithmetic outside the
+position state. Signed bulk-read requests/results are now covered by
+`xsgetn_signed`; see `array-stream-signed-reads.json`. Input pointer arithmetic outside the
 backing range remains unsupported because the native implementation has undefined
 behavior there (`.cxx:94–116,137–151`).
 

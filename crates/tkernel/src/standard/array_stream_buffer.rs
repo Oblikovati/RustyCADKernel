@@ -116,9 +116,20 @@ impl<'a, H: ArrayStreamBufferHooks> ArrayStreamBuffer<'a, H> {
         seek_occt(self, offset)
     }
 
-    /// Calls virtual `xsgetn`; `buffer.xsgetn(&mut destination)`.
+    /// Byte-count adapter for virtual `xsgetn`; `buffer.xsgetn(&mut destination)`.
+    /// Negative custom results and errors become zero; use `xsgetn_signed` to preserve them.
     pub fn xsgetn(&mut self, destination: &mut [u8]) -> usize {
-        self.hooks.xsgetn(&mut self.state, destination)
+        self.xsgetn_signed(destination, destination.len() as isize)
+            .ok()
+            .and_then(|count| usize::try_from(count).ok())
+            .unwrap_or(0)
+    }
+
+    /// Dispatches signed native `xsgetn` counts/results; `buffer.xsgetn_signed(&mut output, 2)?`.
+    /// Custom overrides receive the exact count; the default rejects invalid memory reads.
+    pub fn xsgetn_signed(&mut self, destination: &mut [u8], count: isize) -> io::Result<isize> {
+        self.hooks
+            .xsgetn_signed(&mut self.state, destination, count)
     }
 }
 
@@ -128,7 +139,14 @@ fn byte_result(result: i32) -> Option<u8> {
 
 impl<H: ArrayStreamBufferHooks> Read for ArrayStreamBuffer<'_, H> {
     fn read(&mut self, destination: &mut [u8]) -> io::Result<usize> {
-        Ok(self.xsgetn(destination).min(destination.len()))
+        let result = self.xsgetn_signed(destination, destination.len() as isize)?;
+        let copied = usize::try_from(result).map_err(|_| {
+            io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("read result {result}: expected nonnegative byte count for Rust Read"),
+            )
+        })?;
+        Ok(copied.min(destination.len()))
     }
 }
 

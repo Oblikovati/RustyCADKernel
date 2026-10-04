@@ -1,0 +1,33 @@
+{
+  "scope": "Standard_ArrayStreamBuffer signed virtual bulk reads",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_profile": "Linux x86_64 GCC 13.3 C++17; signed 64-bit streamsize",
+  "artifact_sha256": {
+    "tools/oracle/array_stream_signed_reads.cxx": "638e3f82d9d9e90e62bb469efd827b320e052240b75b71455fba72605a154e16",
+    "tools/oracle/array_stream_signed_reads.expected": "fda7d1c5622e78272db8e5b90aacafcc1e5518c183c5e0370b3f3feb76e86651",
+    "crates/tkernel/tests/array_stream_signed_reads.rs": "ce9b5a7f63191afc8d0a55f09c975b08e26a4043b4e446ff844d6a02e48cb900"
+  },
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_compile_command": "g++ -std=c++17 tools/oracle/array_stream_signed_reads.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/array-stream-signed-reads",
+  "native_output_matches_expected": true,
+  "legacy_declaration_count_changed": false,
+  "defined_behavior": [
+    "Custom xsgetn receives counts -3, 0, 2 through std::streambuf::sgetn and returns -7, -11, 2.",
+    "Positive qualified-base delegation copies AB and leaves cursor at C.",
+    "Existing unsigned hook implementations remain reachable through default signed dispatch."
+  ],
+  "rust_adapter_policy": [
+    "The explicit signed interface preserves override results.",
+    "Rust Read reports InvalidData for negative custom results; unsigned convenience maps negative/error to zero.",
+    "Default reads validate nonnegative counts and sufficient output capacity before consuming."
+  ],
+  "remaining_scope": [
+    "This probe does not establish configuration-wide parity or arbitrary fpos/seek override state.",
+    "Negative base reads and native invalid pointer arithmetic have no defined memory-safe behavior to reproduce."
+  ],
+  "validation": {
+    "focused_test_command": "cargo test -p rustycad-tkernel --test array_stream_signed_reads --test array_stream_hook_dispatch --test array_stream_integer_putback --test standard_array_stream_buffer",
+    "focused_test_result": "32 passed, 0 failed",
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed"
+  }
+}

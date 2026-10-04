@@ -58,6 +58,33 @@ pub trait ArrayStreamBufferHooks {
     fn xsgetn(&mut self, state: &mut ArrayStreamBufferState<'_>, output: &mut [u8]) -> usize {
         state.xsgetn(output)
     }
+
+    /// Preserves signed native requests and override results; `hooks.xsgetn_signed(state, output, -2)`.
+    /// The default bridges the bounded hook, rejecting reads outside valid source/destination memory.
+    fn xsgetn_signed(
+        &mut self,
+        state: &mut ArrayStreamBufferState<'_>,
+        output: &mut [u8],
+        count: isize,
+    ) -> io::Result<isize> {
+        let requested =
+            usize::try_from(count).map_err(|_| invalid_read_count(count, output.len()))?;
+        if requested.min(state.available()) > output.len() {
+            return Err(invalid_read_count(count, output.len()));
+        }
+        let bounded = requested.min(output.len());
+        let copied = self.xsgetn(state, &mut output[..bounded]);
+        isize::try_from(copied).map_err(|_| invalid_read_count(count, output.len()))
+    }
+}
+
+fn invalid_read_count(count: isize, capacity: usize) -> io::Error {
+    io::Error::new(
+        io::ErrorKind::InvalidInput,
+        format!(
+            "read count {count}: expected nonnegative read fitting destination capacity {capacity}"
+        ),
+    )
 }
 
 /// Default callbacks reproducing the concrete OCCT stream-buffer behavior.

@@ -83207,10 +83207,10 @@
       "upstream_id": "Standard_ArrayStreamBuffer::xsgetn(char*,std::streamsize)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
-      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::xsgetn",
-      "status": "partial",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::xsgetn_signed",
+      "status": "implemented",
       "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
-      "notes": "ArrayStreamBufferHooks::xsgetn is dynamically dispatched over the shared byte state and Read delegates to it. A Rust mutable slice admits only nonnegative counts; negative native streamsize requests and custom negative results are not represented. Derived dispatch receipt: tools/oracle/array_stream_override_dispatch.expected."
+      "notes": "Signed native count/result dispatch via ArrayStreamBufferHooks::xsgetn_signed. Default implementation preserves bounded concrete reads and existing unsigned overrides; custom overrides receive negative/zero/positive counts and may return negative results. Native derived streambuf probe and exact Rust fixture: tools/oracle/array_stream_signed_reads.expected. Rust Read rejects negative custom results; xsgetn is a byte-count convenience. Invalid native memory operations remain outside defined behavior, with Rust checked errors. Validated Linux x86_64 streamsize/isize profile; no original legacy declaration count increase."
     },
     {
       "upstream_id": "Standard_JsonKey",
