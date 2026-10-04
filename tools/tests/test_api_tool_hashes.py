@@ -6,6 +6,7 @@ import tempfile
 import unittest
 
 from api_inventory_json import JSONValue, sha256_bytes
+from api_inventory_capture import capture_files
 from api_tool_hashes import (
     IMPLEMENTATION_FILES,
     implementation_hashes,
@@ -35,6 +36,16 @@ def all_paths() -> set[str]:
 
 
 class ToolImplementationHashTests(unittest.TestCase):
+    def test_normalizer_rejects_capture_without_private_item_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            capture = Path(directory)
+            (capture / "capture-manifest.json").write_text(json.dumps({
+                "raw_capture_complete": True,
+                "normalized_public_inventory": False,
+            }))
+            with self.assertRaisesRegex(ValueError, "document-private-items"):
+                capture_files(capture)
+
     def test_changed_tool_invalidates_recorded_hashes(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             fixture = ToolHashFixture(Path(directory))
@@ -85,6 +96,11 @@ class ToolImplementationHashTests(unittest.TestCase):
                 result["tool_implementation_sha256"],
                 {"rust_normalizer": stage_hashes(ROOT, "rust_normalizer")},
             )
+            self.assertEqual(
+                result["visibility_policy"],
+                "public-reachable-from-private-item-capture-v1",
+            )
+            self.assertEqual(result["rustdoc_item_policy"], "document-private-items-v1")
             self.assertNotEqual(
                 result["tool_implementation_sha256"]["rust_normalizer"],
                 stage_hashes(fixture.root, "rust_normalizer"),
@@ -142,12 +158,15 @@ def capture_manifest(record: dict[str, JSONValue]) -> dict[str, JSONValue]:
     return {
         "raw_capture_complete": True,
         "normalized_public_inventory": False,
+        "rustdoc_item_policy": "document-private-items-v1",
         "rustdoc_json_format_version": 61,
         "workspace_library_count": 1,
         "rustdoc_json": [record],
         "inputs": {"workspace_revision": "fixture-revision"},
         "feature_policy": {"mode": "all-features"},
-        "cargo_arguments": [],
+        "cargo_arguments": [
+            "-- --document-private-items --output-format json -Z unstable-options"
+        ],
     }
 
 

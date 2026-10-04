@@ -12,6 +12,7 @@ ToolHashMap: TypeAlias = dict[str, dict[str, str]]
 IMPLEMENTATION_FILES: dict[str, tuple[str, ...]] = {
     "rust_normalizer": (
         "tools/normalize_rustdoc_inventory.py",
+        "tools/capture_rustdoc_json.py",
         "tools/api_inventory_capture.py",
         "tools/api_inventory_json.py",
         "tools/api_inventory_reexports.py",

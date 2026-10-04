@@ -1,22 +1,30 @@
 # Const-specialized generic alias fixture
 
-This fixture records rustdoc JSON format 61 for public aliases that bind the
-const parameter of a two-parameter generic struct. It checks that only methods
-from the exact specialized inherent impl are reachable from each alias.
+This compiler fixture places `CompactBounds` and its implementation in private
+modules, then reexports only `CompactBox2` and `CompactBox3`. It records both
+default rustdoc output and output captured with private items. The normalizer
+must use private target impl metadata to resolve methods through those public
+aliases while emitting no private module paths.
 
 Capture with Rust `1.100.0-nightly (f7575a9da 2026-09-24)`:
 
 ```sh
-PATH=/home/vmiguel/.cargo/bin:$PATH \
-CARGO_TARGET_DIR=/tmp/target-rustdoc-const-alias \
-cargo +nightly-2026-09-25 rustdoc \
-  --manifest-path tools/tests/fixtures/rustdoc-const-specialized-alias/Cargo.toml \
+FIXTURE=tools/tests/fixtures/rustdoc-const-specialized-alias
+PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/target-rustdoc-alias-private \
+  cargo +nightly-2026-09-25 rustdoc --manifest-path "$FIXTURE/Cargo.toml" \
+  --lib -- -Zunstable-options --document-private-items --output-format json
+cp /tmp/target-rustdoc-alias-private/doc/rustdoc_const_specialized_alias.json \
+  "$FIXTURE/rustdoc-61.json"
+PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/target-rustdoc-alias-default \
+  cargo +nightly-2026-09-25 rustdoc --manifest-path "$FIXTURE/Cargo.toml" \
   --lib -- -Zunstable-options --output-format json
-cp /tmp/target-rustdoc-const-alias/doc/rustdoc_const_specialized_alias.json \
-  tools/tests/fixtures/rustdoc-const-specialized-alias/rustdoc-61.json
+cp /tmp/target-rustdoc-alias-default/doc/rustdoc_const_specialized_alias.json \
+  "$FIXTURE/rustdoc-61-default.json"
 ```
 
-The test verifies rejection of const-dependent `where` clauses and mutates
-copies of this compiler output to verify rejection of non-literal alias const
-arguments and unrelated const-specialized impls. Accepted method rows retain
-the alias, target, and generic-to-const binding that justified the path.
+Without private-item capture, rustdoc omits the private target's inherent impl
+index. The normalizer reports that missing evidence as unresolved instead of
+claiming the alias has no methods. With private-item capture, only methods
+reachable through public aliases are emitted. The fixture also checks exact
+const binding, rejects const-dependent `where` clauses, and mutates compiler
+output to reject nonliteral aliases and unrelated const-specialized impls.

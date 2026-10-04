@@ -17,7 +17,21 @@ def capture_files(directory: pathlib.Path) -> tuple[dict[str, JSONValue], pathli
         raise ValueError("capture manifest does not declare a complete raw capture")
     if manifest.get("normalized_public_inventory") is not False:
         raise ValueError("capture manifest must not claim normalized inventory completeness")
+    require_private_item_policy(manifest)
     return manifest, manifest_path
+
+
+def require_private_item_policy(manifest: Mapping[str, JSONValue]) -> None:
+    """Require the rustdoc item policy used to expose private alias targets.
+
+    Call before normalization so older captures cannot silently omit impl metadata.
+    """
+    arguments = manifest.get("cargo_arguments")
+    if manifest.get("rustdoc_item_policy") != "document-private-items-v1":
+        raise ValueError("capture manifest lacks document-private-items rustdoc policy")
+    expected = "-- --document-private-items --output-format json -Z unstable-options"
+    if not isinstance(arguments, list) or expected not in arguments:
+        raise ValueError("capture manifest arguments omit --document-private-items")
 
 
 def index_records(manifest: Mapping[str, JSONValue]) -> dict[str, dict[str, JSONValue]]:
