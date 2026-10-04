@@ -6,11 +6,13 @@
 #include <Geom_BSplineCurve.hxx>
 #include <ShapeFix_Wireframe.hxx>
 #include <ShapeBuild_ReShape.hxx>
+#include <ShapeExtend_MsgRegistrator.hxx>
 #include <NCollection_DataMap.hxx>
 #include <NCollection_List.hxx>
 #include <NCollection_Map.hxx>
 #include <TopTools_ShapeMapHasher.hxx>
 #include <TopExp_Explorer.hxx>
+#include <TopExp.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Iterator.hxx>
 #include <gp_Pln.hxx>
@@ -21,6 +23,7 @@
 static TopoDS_Wire single_tiny_wire();
 static TopoDS_Wire tiny_wire();
 static int count_edges(const TopoDS_Shape& shape);
+static bool boundary_vertices_match(const TopoDS_Shape& shape);
 
 static void merge_empty() {
   ShapeFix_Wireframe fixer;
@@ -140,6 +143,8 @@ static void merge_face_drop_single_edge() {
   ShapeFix_Wireframe fixer(face);
   fixer.SetPrecision(0.1);
   fixer.SetContext(new ShapeBuild_ReShape);
+  occ::handle<ShapeExtend_MsgRegistrator> registrator = new ShapeExtend_MsgRegistrator;
+  fixer.SetMsgRegistrator(registrator);
   NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> small, multiple;
   NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>
       edge_faces, face_small;
@@ -155,7 +160,35 @@ static void merge_face_drop_single_edge() {
   const TopoDS_Shape result = fixer.Context()->Apply(face);
   std::cout << "face_drop_single " << changed << ' ' << small.Extent() << ' '
             << edge_faces.Extent() << ' ' << face_small.Extent() << ' ' << result.IsNull() << ' '
-            << count_edges(result) << ' ' << fixer.StatusSmallEdges(ShapeExtend_DONE2) << '\n';
+            << count_edges(result) << ' ' << fixer.StatusSmallEdges(ShapeExtend_DONE2) << ' '
+            << registrator->MapShape().Extent() << '\n';
+}
+
+static void merge_face_drop_connected_case(const char* label, double tolerance) {
+  const TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), tiny_wire(), true).Face();
+  ShapeFix_Wireframe fixer(face);
+  fixer.SetPrecision(tolerance);
+  fixer.SetContext(new ShapeBuild_ReShape);
+  occ::handle<ShapeExtend_MsgRegistrator> registrator = new ShapeExtend_MsgRegistrator;
+  fixer.SetMsgRegistrator(registrator);
+  NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> small, multiple;
+  NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>
+      edge_faces, face_small;
+  TopExp_Explorer edges(face, TopAbs_EDGE);
+  const TopoDS_Shape small_edge = edges.Current();
+  small.Add(small_edge);
+  NCollection_List<TopoDS_Shape> linked_face, small_edges;
+  linked_face.Append(face);
+  small_edges.Append(small_edge);
+  edge_faces.Bind(small_edge, linked_face);
+  face_small.Bind(face, small_edges);
+  const bool changed = fixer.MergeSmallEdges(small, edge_faces, face_small, multiple, true, -1.0);
+  const TopoDS_Shape result = fixer.Context()->Apply(face);
+  std::cout << label << ' ' << changed << ' ' << small.Extent() << ' '
+            << edge_faces.Extent() << ' ' << face_small.Extent() << ' '
+            << count_edges(result) << ' ' << fixer.StatusSmallEdges(ShapeExtend_DONE3) << ' '
+            << fixer.StatusSmallEdges(ShapeExtend_FAIL) << ' '
+            << registrator->MapShape().Extent() << ' ' << boundary_vertices_match(result) << '\n';
 }
 
 static void merge_preserves_internal_vertex() {
@@ -245,6 +278,16 @@ static int count_edges(const TopoDS_Shape& shape) {
   int count = 0;
   for (TopExp_Explorer it(shape, TopAbs_EDGE); it.More(); it.Next()) ++count;
   return count;
+}
+
+static bool boundary_vertices_match(const TopoDS_Shape& shape) {
+  TopoDS_Edge first, last;
+  for (TopExp_Explorer edges(shape, TopAbs_EDGE); edges.More(); edges.Next()) {
+    if (first.IsNull()) first = TopoDS::Edge(edges.Current());
+    last = TopoDS::Edge(edges.Current());
+  }
+  if (first.IsNull() || last.IsNull()) return false;
+  return TopExp::LastVertex(last).IsSame(TopExp::FirstVertex(first));
 }
 
 static int count_vertices(const TopoDS_Shape& shape) {
@@ -367,5 +410,7 @@ int main() {
   merge_two_face_groups();
   merge_repeated_edge_guard();
   merge_face_drop_single_edge();
+  merge_face_drop_connected_case("face_drop_connected", 0.1);
+  merge_face_drop_connected_case("face_drop_unconnected", 0.001);
   merge_preserves_internal_vertex();
 }
