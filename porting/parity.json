@@ -80684,9 +80684,9 @@
       "upstream_id": "NCollection_IncAllocator::SetThreadSafe(bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: Rust allocator handles are Send + Sync, so the incremental engine is always guarded by its Mutex; the opt-in shared_mutex switch has no counterpart because safe Rust cannot share an unsynchronized arena."
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::set_thread_safe",
+      "status": "partial",
+      "notes": "Previously excluded because the Rust engine is always synchronized; an explicit incremental-allocator request API now exists. Native declaration d6ec298e5904985abd70e7dc60e62ec54a8d43efdcd175b32c4bc0d69a1a77f8. The 512 concurrent allocations and reset outcomes match the pinned native probe. Rust retains its Mutex for both flag values, so native lock creation/removal and default disabled synchronization remain unmatched. Other allocator variants report Standard_TypeMismatch. See tools/oracle/tkernel_inc_allocator_thread_safe.md. Supplemental evidence only; no legacy test mapping added."
     },
     {
       "upstream_id": "NCollection_IncAllocator::Allocate(size_t)",
