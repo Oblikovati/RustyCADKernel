@@ -102,6 +102,24 @@ fn incremental_free_is_a_noop_and_reset_refuses_live_owners() {
 }
 
 #[test]
+fn nullable_free_matches_native_null_behavior_for_every_allocator_kind() {
+    unsafe { BaseAllocator::common().free_raw_nullable(std::ptr::null_mut()) }.unwrap();
+    unsafe { BaseAllocator::global_heap().free_raw_nullable(std::ptr::null_mut()) }.unwrap();
+    unsafe { BaseAllocator::incremental(0).free_raw_nullable(std::ptr::null_mut()) }.unwrap();
+    unsafe { BaseAllocator::aligned(16).free_raw_nullable(std::ptr::null_mut()) }.unwrap();
+    let accumulating = BaseAllocator::accumulating(64).unwrap();
+    let failure = unsafe { accumulating.free_raw_nullable(std::ptr::null_mut()) }.unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_ProgramError");
+    assert!(
+        failure
+            .message()
+            .ends_with("Trying to free an invalid address")
+    );
+    let raw = accumulating.allocate_raw(8).unwrap();
+    unsafe { accumulating.free_raw(raw) }.unwrap();
+}
+
+#[test]
 fn incremental_thread_safety_request_keeps_parallel_allocations_unique() {
     use std::sync::Arc;
 

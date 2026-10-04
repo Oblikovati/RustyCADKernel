@@ -149,14 +149,27 @@ impl BaseAllocator {
     /// be freed yet; for the accumulating allocator a foreign address is detected, but a double
     /// free may release a block other allocations still use.
     pub unsafe fn free_raw(&self, address: NonNull<u8>) -> Result<(), Failure> {
+        // SAFETY: the non-null pointer has the same origin/ownership requirements.
+        unsafe { self.free_raw_nullable(address.as_ptr()) }
+    }
+
+    /// Raw nullable `Free(theAddress)`, including native allocator behavior for null.
+    /// Example: `unsafe { allocator.free_raw_nullable(std::ptr::null_mut()) }?`.
+    ///
+    /// # Safety
+    /// A non-null address must come from this allocator and still be live. Null is valid input;
+    /// the accumulating allocator reports it as `Standard_ProgramError`.
+    pub unsafe fn free_raw_nullable(&self, address: *mut u8) -> Result<(), Failure> {
         match &*self.inner {
             // SAFETY: forwarded from this function's contract.
             AllocatorKind::Common | AllocatorKind::Heap | AllocatorKind::Aligned(_) => unsafe {
-                heap_free(address);
+                if let Some(address) = NonNull::new(address) {
+                    heap_free(address);
+                }
                 Ok(())
             },
             AllocatorKind::Incremental(_) => Ok(()),
-            AllocatorKind::Accumulating(engine) => locked(engine).free(address.as_ptr() as usize),
+            AllocatorKind::Accumulating(engine) => locked(engine).free(address as usize),
         }
     }
 
