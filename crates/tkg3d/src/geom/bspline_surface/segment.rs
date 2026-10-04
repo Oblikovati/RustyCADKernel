@@ -200,7 +200,42 @@ fn sub_grid<T: Copy + Default>(
     Ok(result)
 }
 
+fn raw_segment_requests(
+    u: (f64, f64),
+    v: (f64, f64),
+    epsilons: (f64, f64),
+    flags: (bool, bool),
+) -> (SegmentRequest, SegmentRequest) {
+    let u_request = SegmentRequest {
+        p1: u.0,
+        p2: u.1,
+        eps: epsilons.0,
+        segment: flags.0,
+    };
+    let v_request = SegmentRequest {
+        p1: v.0,
+        p2: v.1,
+        eps: epsilons.1,
+        segment: flags.1,
+    };
+    (u_request, v_request)
+}
+
 impl GeomBSplineSurface {
+    /// Segment while independently selecting whether each direction receives clamped
+    /// endpoint multiplicities (`Geom_BSplineSurface::segment` protected overload);
+    /// `surface.segment_with_flags((0.25, 0.75), (0.25, 0.75), (1e-12, 1e-12), (true, false))?`.
+    pub fn segment_with_flags(
+        &self,
+        u: (f64, f64),
+        v: (f64, f64),
+        epsilons: (f64, f64),
+        segment_directions: (bool, bool),
+    ) -> Result<(), Failure> {
+        let (u_request, v_request) = raw_segment_requests(u, v, epsilons, segment_directions);
+        self.state.write().segment(u_request, v_request)
+    }
+
     /// Restrict to `[u1, u2] x [v1, v2]`; Standard_DomainError for reversed bounds
     /// (`Segment`); `surface.segment(0.2, 0.8, 0.1, 0.9, 1e-9, 1e-9)?`.
     pub fn segment(

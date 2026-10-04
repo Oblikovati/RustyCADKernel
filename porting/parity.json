@@ -53221,6 +53221,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom_BSplineSurface::segment(double,double,double,double,double,double,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::segment_with_flags",
+      "status": "implemented",
+      "notes": "Protected overload declaration ID 763f1abfca5bd6883d171a23291c4a507ed9b98fa963855c86647b8bbd9d1982 (header SHA-256 d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079). Exposes independent U/V segment switches and passes raw epsilons; unlike higher-level Segment/CheckAndSegment, it adds no range validation. Native-derived probe and four-flag Rust comparisons cover trimmed knot/pole ranges, endpoint multiplicities, reversed Bounds in false-flag directions, cache invalidation and eval-representation clearing. See tools/oracle/bspline_surface_segment_flags.md."
+    },
+    {
       "upstream_id": "Geom_BSplineSurface::CheckAndSegment",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
