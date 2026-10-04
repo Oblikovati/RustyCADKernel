@@ -42,8 +42,9 @@
   "package_tests": {
     "command": "cargo test -p rustycad-tkgeombase",
     "result": "1221 passed, 0 failed, 19 ignored across 91 test-result groups",
-    "log": "porting/audits/advapp2var-mma2ds2-package-tests.log",
-    "log_sha256": "4bd3fe8e19ead09c82e23eb63cdd3c8c344da5b041f2a54b7db124e61f21633b"
+    "log": "porting/audits/advapp2var-mma2ds2-package-tests.log.gz",
+    "log_sha256": "051ae0a095864c581e37b81aafc12ecdac576c515373a9dee7f7003e9880027a",
+    "log_uncompressed_sha256": "4bd3fe8e19ead09c82e23eb63cdd3c8c344da5b041f2a54b7db124e61f21633b"
   },
   "strict_clippy": "cargo clippy -p rustycad-tkgeombase --all-targets -- -D warnings: passed",
   "scope_limit": "This covers reusable mutation inside mma2ds2_ when observed through the iso=2 mma2ds1_ route. mma2ds1_ external caller copy-back, callback mutation under all iso paths, and in-callback visibility of aliased derivative-order pointers are not claimed; the input contract says not to modify these fields."
