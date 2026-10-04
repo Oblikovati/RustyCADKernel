@@ -1,13 +1,13 @@
 # `Standard_ReadLineBuffer` and `std::istream` exception-mask oracle
 
-Oracle probe SHA-256: `e8596e8e8de2e2879d2bd1e756110606b477f82ee3a08ddcfaef8708f166efd7`.
+Oracle probe SHA-256: `b75ad7e5477101a9c467bd71c5d1a7f7ba5c8d0db4d3efc650586dbcabeaee97`.
 
 Pinned OCCT source revision: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 `Standard_ReadLineBuffer.hxx` SHA-256: `346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449`.
 `Standard_ReadBuffer.hxx` SHA-256: `f343381ffd14894aa2b626e6be7d666510a820f43fc4ce0db5f79993fe946178`.
 Oracle `libTKernel.so` SHA-256: `d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b`.
 
-The fixture verifies nine transitions. Both masked and unmasked streambuf exceptions write two bytes into the supplied buffer. Native `gcount()` is zero in both cases; masked reads throw before `readStream` assigns its output count, while the unmasked hook returns false and assigns zero. A first badbit read under a `failbit`-only mask does not throw because badbit and failbit are separate rdstate bits; the next sentry adds failbit and throws before reading. A zero-length read still checks an already-failed stream state. A `failbit`-masked short read sets `eofbit|failbit`, exposes the two-byte `gcount()`, but also leaves the hook's output count untouched. Setting an exception mask over an already-set bit stores the mask before throwing. `clear(state)` similarly installs the state before throwing, while `clear()` to `goodbit` recovers without throwing. Finally, a thrown `ReadLine` read zeroes its output length/count first, preserves the reader's prior cursor/count state, and keeps partial buffer writes.
+The fixture verifies eleven transitions. Both masked and unmasked streambuf exceptions write two bytes into the supplied buffer. Native `gcount()` is zero in both cases; masked reads rethrow the original `std::runtime_error` payload before `readStream` assigns its output count, while the unmasked hook returns false and assigns zero. Rust keeps the original `io::Error` and its downcastable source inside `IstreamException`; the wrapper exposes the cause rather than pretending to be the original language exception type. A first badbit read under a `failbit`-only mask does not throw because badbit and failbit are separate rdstate bits; the next sentry adds failbit and throws before reading. A zero-length read still checks an already-failed stream state. A `failbit`-masked short read sets `eofbit|failbit`, exposes the two-byte `gcount()`, but also leaves the hook's output count untouched. Setting an exception mask over an already-set bit stores the mask before throwing. `clear(state)` similarly installs the state before throwing, while `clear()` to `goodbit` recovers without throwing. Finally, both `ReadLine` overloads zero their line-length output first, preserve the reader's prior cursor/count state, and keep partial buffer writes when a read throws.
 
 Reproduce with the pinned foundation profile:
 

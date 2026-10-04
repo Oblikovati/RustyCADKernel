@@ -37,7 +37,7 @@ impl<R: Read> IstreamStream<R> {
         exceptions: IstreamExceptionMask,
     ) -> Result<(), IstreamException> {
         self.exceptions = exceptions;
-        self.masked_exception(0).map_or(Ok(()), Err)
+        self.masked_exception(0, None).map_or(Ok(()), Err)
     }
 
     /// Assigns stream flags before checking the exception mask; `stream.clear_state(false, true, false)?`.
@@ -48,7 +48,7 @@ impl<R: Read> IstreamStream<R> {
         bad: bool,
     ) -> Result<(), IstreamException> {
         self.set_status(eof, fail, bad);
-        self.masked_exception(0).map_or(Ok(()), Err)
+        self.masked_exception(0, None).map_or(Ok(()), Err)
     }
 
     /// Reads one native `istream::read` block and reports masked state without panicking;
@@ -110,7 +110,7 @@ impl<R: Read> IstreamStream<R> {
         if self.eof || self.bad {
             self.fail = true;
         }
-        if let Some(exception) = self.masked_exception(0) {
+        if let Some(exception) = self.masked_exception(0, None) {
             return Err(exception);
         }
         Ok(self.result(0))
@@ -126,7 +126,7 @@ impl<R: Read> IstreamStream<R> {
                 Ok(0) => return self.finish_short_read(count),
                 Ok(read) => count += read,
                 Err(error) if error.kind() == ErrorKind::Interrupted => continue,
-                Err(_) => return self.finish_bad_read(),
+                Err(error) => return self.finish_bad_read(error),
             }
         }
         Ok(self.result(count))
@@ -135,21 +135,28 @@ impl<R: Read> IstreamStream<R> {
     fn finish_short_read(&mut self, count: usize) -> Result<IstreamReadResult, IstreamException> {
         self.eof = true;
         self.fail = true;
-        if let Some(exception) = self.masked_exception(count) {
+        if let Some(exception) = self.masked_exception(count, None) {
             return Err(exception);
         }
         Ok(self.result(count))
     }
 
-    fn finish_bad_read(&mut self) -> Result<IstreamReadResult, IstreamException> {
+    fn finish_bad_read(
+        &mut self,
+        source_error: std::io::Error,
+    ) -> Result<IstreamReadResult, IstreamException> {
         self.bad = true;
-        if let Some(exception) = self.masked_exception(0) {
+        if let Some(exception) = self.masked_exception(0, Some(source_error)) {
             return Err(exception);
         }
         Ok(self.result(0))
     }
 
-    fn masked_exception(&self, gcount: usize) -> Option<IstreamException> {
+    fn masked_exception(
+        &self,
+        gcount: usize,
+        source_error: Option<std::io::Error>,
+    ) -> Option<IstreamException> {
         let hits_eof = self.eof && self.exceptions.eof();
         let hits_fail = self.fail && self.exceptions.fail();
         let hits_bad = self.bad && self.exceptions.bad();
@@ -158,6 +165,7 @@ impl<R: Read> IstreamStream<R> {
             fail: self.fail,
             bad: self.bad,
             gcount,
+            source_error,
         })
     }
 
