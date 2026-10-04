@@ -227772,6 +227772,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::PairSelector::pairs",
       "status": "partial",
       "notes": "36 native ordered/sorted 3D shared/distinct BVH pair selections; tools/oracle/tkbo_pair_selector.md. Other specializations, custom builders, failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSet::BOPTools_BoxSet<NumType, Dimension, DataType>(const opencascade::handle<BVH_Builder<NumType, BOPTools_BoxSet::Dimension>> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxTree.hxx",
+      "source_sha256": "ec5c7b6bb19feaef139553b8a144e94dfd3c3ad0adaa7021c5d4a40d0738465d",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSet::new",
+      "status": "partial",
+      "notes": "Native linear-builder default with 30 ordered 2D/3D selections, supplied binned-builder replay and BOPDSIterator integration; tools/oracle/tkbo_bopds_iterator.md. Other dimensions/scalars/builders/failure and complete legacy/API parity unproven."
     }
   ],
   "tests": [

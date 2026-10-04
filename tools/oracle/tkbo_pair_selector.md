@@ -16,3 +16,13 @@ Partial: only the 3D specialization is ported; custom builders, varied layouts,
 allocation failures and full legacy/API parity remain unproven. Direct access
 without sets returns a Rust Standard_NullObject error rather than reproducing
 native undefined pointer access. The absent-set regression is Rust-only.
+
+## Native 2D specialization compile failure
+
+A GCC 13.3 C++17 probe instantiating the declared BOPTools_Box2dPairSelector alias
+fails against the pinned source. RejectNode hardcodes BVH_Box<double,3> and
+attempts to construct it from NCollection_Vec2<double> corners; no matching
+constructor exists. The minimal reproducer is
+`tkbo_pair_selector_2d_compile_failure.cxx`. This records an upstream template
+failure domain; it neither deletes the API obligation nor constitutes a passing
+runtime parity test.

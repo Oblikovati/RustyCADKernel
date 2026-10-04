@@ -122,43 +122,25 @@ impl BOPDSIterator {
     }
 
     fn candidate_pairs(&self, structure: &DataStructure) -> Result<Vec<Pair>, Failure> {
-        let mut pairs = Vec::new();
-        for first in 0..structure.nb_source_shapes() {
-            self.append_intersecting_pairs(structure, first, &mut pairs)?;
+        let mut boxes = crate::bop_tools::BoxSet::default();
+        boxes.set_size(structure.nb_source_shapes() as usize);
+        for index in 0..structure.nb_source_shapes() {
+            let info = structure.shape_info(index)?;
+            if info.has_brep() {
+                boxes.add(index, rustycad_tkmath::bnd::box3_to_bvh(info.box_bounds())?);
+            }
         }
-        pairs.sort_by_key(Pair::indices);
-        Ok(pairs)
-    }
-
-    fn append_intersecting_pairs(
-        &self,
-        structure: &DataStructure,
-        first: i32,
-        pairs: &mut Vec<Pair>,
-    ) -> Result<(), Failure> {
-        let first_info = structure.shape_info(first)?;
-        if !first_info.has_brep() {
-            return Ok(());
-        }
-        for second in first + 1..structure.nb_source_shapes() {
-            self.append_intersecting_pair(structure, first, second, pairs)?;
-        }
-        Ok(())
-    }
-
-    fn append_intersecting_pair(
-        &self,
-        structure: &DataStructure,
-        first: i32,
-        second: i32,
-        pairs: &mut Vec<Pair>,
-    ) -> Result<(), Failure> {
-        let first_info = structure.shape_info(first)?;
-        let second_info = structure.shape_info(second)?;
-        if second_info.has_brep() && first_info.box_bounds().intersects(second_info.box_bounds()) {
-            pairs.push(Pair::new(first, second));
-        }
-        Ok(())
+        boxes.build()?;
+        let mut selector = crate::bop_tools::PairSelector::default();
+        selector.set_shared_bvh_set(&mut boxes);
+        selector.set_same(true);
+        selector.select()?;
+        selector.sort();
+        Ok(selector
+            .pairs()
+            .iter()
+            .map(|pair| Pair::new(pair.id1, pair.id2))
+            .collect())
     }
 
     fn add_range_pairs(
@@ -227,7 +209,7 @@ impl BOPDSIterator {
         let first_type = structure.shape_info(first)?.shape_type();
         let second_type = structure.shape_info(second)?.shape_type();
         if let Some(index) = interference_index(first_type, second_type) {
-            self.lists[index].push(pair);
+            self.lists[index].push(Pair::new(first.min(second), first.max(second)));
         }
         Ok(())
     }

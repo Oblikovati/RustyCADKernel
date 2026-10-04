@@ -107,3 +107,6 @@ pub use box_selector::BoxSelector;
 
 mod pair_selector;
 pub use pair_selector::{PairIds, PairSelector};
+
+mod box_set;
+pub use box_set::BoxSet;

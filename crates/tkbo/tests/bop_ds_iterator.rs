@@ -152,3 +152,31 @@ fn expected() -> &'static str {
 fn expected_three_args() -> &'static str {
     include_str!("../../../tools/oracle/tkbo_bopds_iterator_three_args.expected")
 }
+
+#[test]
+fn iterator_bvh_reordering_and_obb_match_native() {
+    let mut actual = String::new();
+    for (layout, origins) in [[1., 0.5, 0.], [-1., 0., 0.5]].iter().enumerate() {
+        for obb in [false, true] {
+            let mut structure = DataStructure::default();
+            structure.set_arguments(
+                &origins
+                    .iter()
+                    .map(|x| box_shape(Point3::new(*x, 0., 0.)))
+                    .collect::<Vec<_>>(),
+            );
+            structure.init(1e-7).unwrap();
+            let context = rustycad_tkbo::int_tools::Context::default();
+            let mut iterator = BOPDSIterator::default();
+            iterator
+                .prepare_with_context(&structure, Some(&context), obb, 1e-7)
+                .unwrap();
+            actual.push_str(&format!("case {layout} {}\n", usize::from(obb)));
+            actual.push_str(&native_pair_output(&mut iterator));
+        }
+    }
+    assert_eq!(
+        actual,
+        include_str!("../../../tools/oracle/tkbo_bopds_iterator_bvh.expected")
+    );
+}
