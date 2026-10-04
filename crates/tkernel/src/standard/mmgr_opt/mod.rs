@@ -19,6 +19,26 @@ mod purge;
 /// `MMgrOpt::set_call_back_function(Some(log))`.
 pub type OptCallBack = fn(bool, StorageAddress, usize, usize);
 
+/// Opaque memory returned by the protected `AllocMemory` hook; `block.allocated_size()`.
+/// Its address is only a numeric capability and cannot be dereferenced by safe Rust.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct MMgrOptSystemBlock {
+    address: StorageAddress,
+    allocated_size: usize,
+}
+
+impl MMgrOptSystemBlock {
+    /// Returns the real allocation base as an opaque address; `block.address().get() != 0`.
+    pub fn address(&self) -> StorageAddress {
+        self.address
+    }
+
+    /// Returns the size written by native `AllocMemory(size_t&)`; `block.allocated_size() >= 37`.
+    pub fn allocated_size(&self) -> usize {
+        self.allocated_size
+    }
+}
+
 // Standard_MMgrOpt keeps the callback in one file-static pointer shared by every instance.
 static CALL_BACK: RwLock<Option<OptCallBack>> = RwLock::new(None);
 
@@ -93,6 +113,71 @@ impl MMgrOpt {
     /// The size from which blocks are no longer recycled; `manager.threshold() == 40000`.
     pub fn threshold(&self) -> usize {
         self.threshold
+    }
+
+    /// Exposes `AllocMemory` as a checked region; `let block = manager.allocate_system_memory(&mut size)?`.
+    /// Mapped requests are page-aligned and update `size`; heap requests retain it. Rust zeroes
+    /// heap storage even with `clear=false`, since reading uninitialized bytes is not safe.
+    pub fn allocate_system_memory(
+        &mut self,
+        size: &mut usize,
+    ) -> Result<MMgrOptSystemBlock, Failure> {
+        let (start, allocated_size) = self.alloc_memory(*size)?;
+        let Some(address) = StorageAddress::new(start) else {
+            self.free_memory(start);
+            return Err(header_overflow(start, *size));
+        };
+        *size = allocated_size;
+        Ok(MMgrOptSystemBlock {
+            address,
+            allocated_size,
+        })
+    }
+
+    /// Borrows the whole raw region; `manager.system_memory_bytes(&block)?[0]`.
+    pub fn system_memory_bytes(&self, block: &MMgrOptSystemBlock) -> Result<&[u8], Failure> {
+        self.validate_system_block(block)?;
+        self.space
+            .bytes(block.address.get(), block.allocated_size)
+            .ok_or_else(|| invalid_system_block(block.address, block.allocated_size))
+    }
+
+    /// Borrows the whole raw region for writing; `manager.system_memory_bytes_mut(&block)?[0] = 1`.
+    pub fn system_memory_bytes_mut(
+        &mut self,
+        block: &MMgrOptSystemBlock,
+    ) -> Result<&mut [u8], Failure> {
+        self.validate_system_block(block)?;
+        self.space
+            .bytes_mut(block.address.get(), block.allocated_size)
+            .ok_or_else(|| invalid_system_block(block.address, block.allocated_size))
+    }
+
+    /// Releases a raw region with its exact returned size; `manager.free_system_memory(&block, size)?`.
+    /// Native `FreeMemory` permits smaller mapped sizes that partially unmap a region; this safe
+    /// facade rejects those calls because its `AddressSpace` owns complete regions.
+    pub fn free_system_memory(
+        &mut self,
+        block: &MMgrOptSystemBlock,
+        size: usize,
+    ) -> Result<(), Failure> {
+        if size != block.allocated_size {
+            return Err(invalid_system_size(
+                block.address,
+                size,
+                block.allocated_size,
+            ));
+        }
+        self.validate_system_block(block)?;
+        self.free_memory(block.address.get());
+        Ok(())
+    }
+
+    fn validate_system_block(&self, block: &MMgrOptSystemBlock) -> Result<(), Failure> {
+        if self.space.region_len(block.address.get()) == Some(block.allocated_size) {
+            return Ok(());
+        }
+        Err(invalid_system_block(block.address, block.allocated_size))
     }
 
     /// Allocates `size` bytes, rounded up to 8; `manager.allocate(10)?` holds 16 usable bytes.
@@ -301,6 +386,20 @@ fn header_overflow(block: usize, round_size: usize) -> Failure {
     exceptions::program_error(&format!(
         "Standard_MMgrOpt: block {block:#x} cannot hold its header and {round_size} bytes; expected a system block of at least {} bytes",
         round_size.saturating_add(WORD)
+    ))
+}
+
+fn invalid_system_block(address: StorageAddress, size: usize) -> Failure {
+    exceptions::program_error(&format!(
+        "Standard_MMgrOpt: raw region {:#x} of {size} bytes is not live in this manager; expected its exact AllocMemory result",
+        address.get()
+    ))
+}
+
+fn invalid_system_size(address: StorageAddress, provided: usize, expected: usize) -> Failure {
+    exceptions::program_error(&format!(
+        "Standard_MMgrOpt: FreeMemory size {provided} for region {:#x} does not match its AllocMemory size; expected {expected}",
+        address.get()
     ))
 }
 

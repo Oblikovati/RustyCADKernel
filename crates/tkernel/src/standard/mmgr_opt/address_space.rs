@@ -45,6 +45,10 @@ impl AddressSpace {
     pub(super) fn release(&mut self, start: usize) -> bool {
         self.regions.remove(&start).is_some()
     }
+    /// Returns a region's complete mapped length only at its base address.
+    pub(super) fn region_len(&self, start: usize) -> Option<usize> {
+        self.regions.get(&start).map(|region| region.length)
+    }
     /// Borrows `length` bytes at `address` inside one region; `space.bytes(address, 8)`.
     pub(super) fn bytes(&self, address: usize, length: usize) -> Option<&[u8]> {
         let (start, region) = self.regions.range(..=address).next_back()?;

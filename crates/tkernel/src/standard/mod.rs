@@ -48,7 +48,7 @@ pub mod memory;
 mod mmgr_opt;
 mod mmgr_root;
 pub mod real;
-pub use mmgr_opt::{MMgrOpt, OptCallBack};
+pub use mmgr_opt::{MMgrOpt, MMgrOptSystemBlock, OptCallBack};
 pub use mmgr_root::{MMgrRoot, StorageAddress};
 pub mod condition;
 pub mod memory_utils;
