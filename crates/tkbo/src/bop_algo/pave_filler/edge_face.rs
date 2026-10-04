@@ -1,21 +1,21 @@
 //! Edge/face candidate preparation and generated-vertex bookkeeping.
 #[path = "edge_face/candidates.rs"]
 mod candidates;
+#[path = "edge_face/common_blocks.rs"]
+mod common_blocks;
 #[path = "edge_face/vertices.rs"]
 mod vertices;
 use super::{BOPAlgoPaveFiller, Glue};
 use crate::bop_algo::AlertIntersectionOfPairOfShapesFailed;
 use crate::{
-    bop_ds::{
-        CommonBlock, CommonBlockHandle, DataStructure, InterfEF, InterfVF, Pave, PaveBlockHandle,
-        ShapeInfo, common_block_handle,
-    },
+    bop_ds::{DataStructure, InterfEF, InterfVF, Pave, PaveBlockHandle, ShapeInfo},
     bop_tools::make_new_vertex_edge_face,
-    int_tools::{CommonPrt, Context, Range},
+    int_tools::{CommonPrt, Context, EdgeFace, Range},
 };
 use candidates::{
     configured_edge_face, edge_face_candidates, initialize_glued_faces, selected_edge_face_pairs,
 };
+use common_blocks::append_face_common_block;
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topods::{Compound, Edge, Face, Vertex},
@@ -89,8 +89,18 @@ impl BOPAlgoPaveFiller {
         if !solver.is_done() {
             return self.warn_edge_face(&candidate);
         }
+        self.process_edge_face_parts(&candidate, &solver, pending, changed_faces)
+    }
+
+    fn process_edge_face_parts(
+        &mut self,
+        candidate: &EdgeFaceCandidate,
+        solver: &EdgeFace,
+        pending: &mut Vec<PendingEFVertex>,
+        changed_faces: &mut Map<i32>,
+    ) -> Result<(), Failure> {
         for common in solver.common_parts().iter() {
-            self.accept_edge_face_common(&candidate, common, pending, changed_faces)?;
+            self.accept_edge_face_common(candidate, common, pending, changed_faces)?;
         }
         Ok(())
     }
@@ -253,16 +263,15 @@ impl BOPAlgoPaveFiller {
     }
 
     fn bind_face_common_block(&mut self, candidate: &EdgeFaceCandidate) -> Result<(), Failure> {
-        let mut common = CommonBlock::default();
-        common.set_pave_blocks(std::slice::from_ref(&candidate.block));
-        common.set_faces(&[candidate.face_index]);
-        let common: CommonBlockHandle = common_block_handle(common);
-        let structure = self.structure_mut()?;
-        structure.set_common_block(&candidate.block, &common);
-        structure
-            .change_face_info(candidate.face_index)?
-            .change_pave_blocks_on()
-            .add(Arc::clone(&candidate.block));
+        let context = self.context.clone();
+        let (tolerance, endpoints) = append_face_common_block(
+            self.structure_mut()?,
+            &candidate.block,
+            candidate.face_index,
+            context.get().expect("initialized EF context"),
+        )?;
+        let _ = self.update_vertex(endpoints.0, tolerance)?;
+        let _ = self.update_vertex(endpoints.1, tolerance)?;
         Ok(())
     }
 
