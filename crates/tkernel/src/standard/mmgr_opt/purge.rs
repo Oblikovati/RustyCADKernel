@@ -56,7 +56,7 @@ impl MMgrOpt {
     }
 
     /// Pools from the newest (`myAllocList`) to the oldest, following each pool's link word.
-    fn pool_chain(&self) -> Vec<usize> {
+    pub(super) fn pool_chain(&self) -> Vec<usize> {
         let mut pools = Vec::new();
         let mut pool = self.alloc_list;
         while pool != 0 {

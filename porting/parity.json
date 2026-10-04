@@ -83013,6 +83013,14 @@
       "notes": "Frees cached medium blocks and counts them. The pool-release scan is ported, but its tally of a fully free pool is P - 8, never P, so pools are never released (native quirk). The differential probe (services_ operations) compares it with the native kernel."
     },
     {
+      "upstream_id": "Standard_MMgrOpt::FreePools()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::free_pools",
+      "status": "implemented",
+      "notes": "Protected native hook, normally called only from destruction. Candidate c:@S@Standard_MMgrOpt@F@FreePools#, header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22. Native fixture tools/oracle/tkernel_mmgr_free_pools.cxx confirms it releases the small-block pool while medium allocations remain usable. The safe Rust method invalidates pool-backed StorageAddress values, removes pool free-list links, and resets the active cursor so later operations remain defined; native warns that freeing pools with outstanding small allocations is dangerous."
+    },
+    {
       "upstream_id": "Standard_MMgrOpt::SetCallBackFunction(TPCallBackFunc)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
