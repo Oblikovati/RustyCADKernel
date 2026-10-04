@@ -29,21 +29,25 @@ the saved member address is still found in the ring after both insertion and
 removal and still names triangle node `4`; and `RemoveList` brings the final
 allocation/free totals to three each.
 
-## Rust crosswalk and concrete gaps
+## Rust crosswalk and current coverage
 
-| Native declaration | Current Rust entry | Difference |
+| Native declaration | Rust entry | Status |
 | --- | --- | --- |
-| `Poly_CoherentTriPtr(const Poly_CoherentTriangle&)` | `CoherentTriPtr::new(usize)` | Rust stores a triangle index, not a triangle pointer. |
-| `GetTriangle() -> const Poly_CoherentTriangle&` | `CoherentTriPtr::get_triangle() -> usize` | No borrowed triangle identity is retained. |
-| `SetTriangle(const Poly_CoherentTriangle*)` | `CoherentTriPtr::set_triangle(usize)` | Rust accepts an index and cannot represent the native null pointer. |
-| `Next()`, `Previous()` return member references | `next(usize)`, `previous(usize)` return positions | Returned positions are not stable member identities. |
-| `Append(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `append(member_position, triangle_index)` | No allocator argument or allocator-backed member allocation. |
-| `Prepend(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `prepend(member_position, triangle_index)` | Same; insertion shifts later positional tokens. |
-| `Remove(Poly_CoherentTriPtr*, Handle(BaseAllocator))` | `remove(member_position)` | No allocator argument; vector removal shifts positions. |
-| `RemoveList(Poly_CoherentTriPtr*, Handle(BaseAllocator))` | `remove_list(self)` | No allocator argument; Rust drops the vector. |
-| `Iterator::PtrValue() -> const Poly_CoherentTriPtr&` | `ptr_value() -> Option<usize>` | Rust exposes the current numeric position, not a stable node token. |
+| `Poly_CoherentTriPtr(const Poly_CoherentTriangle&)` | `CoherentTriPtr::new(usize)`, `new_in(usize, BaseAllocator)` | Still stores triangle indexes because Rust triangulation storage is index-addressed. The custom allocator overload is implemented. |
+| `GetTriangle() -> const Poly_CoherentTriangle&` | `triangle(CoherentTriMember) -> Result<usize, Failure>` | Stable member ownership is represented; a Rust borrow into the separate triangulation array is not. |
+| `SetTriangle(const Poly_CoherentTriangle*)` | `set_member_triangle(CoherentTriMember, usize)` | Null pointers are intentionally not representable in safe Rust. |
+| `Next()`, `Previous()` return member references | `next_member`, `previous_member` | Stable token links are implemented; positional `next`/`previous` remain compatibility conveniences. |
+| `Append(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `append_member(member, triangle, allocator)` | Each member is a real `AllocatedBox` allocation from the supplied allocator. |
+| `Prepend(const Poly_CoherentTriangle*, Handle(BaseAllocator))` | `prepend_member(member, triangle, allocator)` | Each member is a real `AllocatedBox` allocation from the supplied allocator. |
+| `Remove(Poly_CoherentTriPtr*, Handle(BaseAllocator))` | `remove_member(member, &allocator)` | Unlinks stable token and frees its allocation; mismatched allocator is rejected safely. |
+| `RemoveList(Poly_CoherentTriPtr*, Handle(BaseAllocator))` | `remove_list_in(&allocator)` | Clears all nodes if all allocations match; ordinary `Drop` also frees each node through its recorded allocator. |
+| `Iterator::PtrValue() -> const Poly_CoherentTriPtr&` | `CoherentTriPtrIterator::member_token()` | Stable node identity is returned as an opaque token backed by the allocated node's stable address. |
 
-The production allocator wrappers in TKernel can allocate stable nodes (`BaseAllocator::allocate_value` and `AllocatedBox`), and `NCollection_List` already uses those wrappers. However, directly replacing this ring with a list would still require an explicit circular cursor/member API and allocator propagation from `CoherentNode::AddTriangle`, `RemoveTriangle`, and `Clear`. Adding allocator calls around the current `Vec<usize>` without making each ring member allocator-owned would only imitate counters and would not close pointer-identity semantics, so no such shim was added.
+`CoherentTriPtr` now owns actual allocator-backed nodes using `BaseAllocator::allocate_value` and `AllocatedBox`; each node contains stable next/previous member tokens. No unsafe pointers are dereferenced. Legacy positional methods still route through this circular node storage. The focused Rust poly test target passes all 9 tests, including token stability through insert/remove and rejecting a mismatched allocator before mutating the ring.
+
+The explicit removal methods currently validate `BaseAllocator` handle identity. That is a conservative ownership rule, not an exact model of every native `Free` combination: different native allocator objects can share a compatible heap backend. The node owner always frees through its creating Rust allocator, so this check prevents releasing memory through an incompatible arena. Exact native backend-compatibility semantics remain open.
+
+The broader native node/mesh allocator threading remains incomplete. `Poly_CoherentNode::AddTriangle`, `RemoveTriangle`, and `Clear` receive an allocator at each call, while existing Rust `CoherentNode` methods still use the default common allocator through compatibility methods. `Poly_CoherentTriangulation` also retains its constructor allocator in `myAlloc` and passes it to node operations; Rust does not yet expose this allocator constructor/propagation. Consequently this slice is not a parity claim for the surrounding node or triangulation classes.
 
 ## Reproduction
 
@@ -69,7 +73,7 @@ The expected output is in `tools/oracle/tkmath_coherent_triptr_alloc.expected`.
 | OCCT `Poly_CoherentTriPtr.cxx` | `94c8114cd73f61b4df39ab335ac530b0a4f1bd00390d553c0f772894bd4f7eba` |
 | OCCT `Poly_CoherentNode.hxx` | `43fb34c629691f23c8345f450a741238aa0a4e0947719e5406b789baf39ce254` |
 | OCCT `Poly_CoherentNode.cxx` | `03f46cb19ea098227ed6b4bbc1e0b396004774d1486c689dcf744fa73615fbb1` |
-| Rust `tri_ptr.rs` | `94b94a26094f1090e91b0edc2585639ed6df84dac37b00233ac1ce0ca5db0e90` |
+| Rust `tri_ptr.rs` | `3b0cd346e98ae35ffcd64bf65431037c1c161de1f19652754ba118ced7765501` |
 | Rust `node.rs` | `4c3f41755aa0502775cbbdca2c69144ddae8b494d623c178644ce222dcec061d` |
 | Rust `allocator.rs` | `42dc18b0a6ada3338b24bcaeac11008cb0cf326fc7fce9e340661fcf26e7b7c2` |
 | Native probe | `483f0ecfde319fbf0318640c5ffd79f5747382317da0b6ba419e6ebcf6547c2e` |

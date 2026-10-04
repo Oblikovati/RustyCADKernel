@@ -125,6 +125,25 @@ fn triangle_connections_and_rings_follow_native_rules() {
     assert_eq!(ring.get_triangle(), 9);
 }
 #[test]
+fn ring_member_tokens_survive_edits_and_allocator_mismatch_is_rejected() {
+    let arena = rustycad_tkernel::ncollection::BaseAllocator::incremental(4096);
+    let wrong = rustycad_tkernel::ncollection::BaseAllocator::incremental(4096);
+    let mut ring = CoherentTriPtr::new_in(1, arena.clone());
+    let head = ring.head_member().unwrap();
+    let second = ring.append_member(head, 2, arena.clone()).unwrap();
+    let third = ring.prepend_member(head, 3, arena.clone()).unwrap();
+    assert_eq!(ring.next_member(head).unwrap(), second);
+    assert_eq!(ring.iter().collect::<Vec<_>>(), [1, 2, 3]);
+    assert_eq!(ring.triangle(second).unwrap(), 2);
+    assert!(ring.remove_member(third, &wrong).is_err());
+    ring.remove_member(third, &arena).unwrap();
+    assert!(ring.triangle(third).is_err());
+    assert_eq!(ring.triangle(second).unwrap(), 2);
+    ring.remove_member(second, &arena).unwrap();
+    ring.remove_list_in(&arena).unwrap();
+    assert!(ring.is_empty());
+}
+#[test]
 fn merge_tool_merges_by_distance_and_counts_quads_like_native() {
     let mut tool = MergeNodesTool::new(0.0, 0.01, -1);
     let a = [
