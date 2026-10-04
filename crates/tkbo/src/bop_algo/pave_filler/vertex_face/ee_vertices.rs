@@ -1,7 +1,7 @@
 //! Sub-iterator selection for generated EE vertices and source faces.
 use super::{BOPAlgoPaveFiller, DataStructure, Failure, ShapeEnum, append_vf_record};
-use crate::bop_tools::{BoxSet, PairSelector};
-use rustycad_tkmath::{bnd::box3_to_bvh, bvh::BvhVec3d};
+use crate::bop_ds::BOPDSSubIterator;
+use rustycad_tkernel::ncollection::List;
 
 impl BOPAlgoPaveFiller {
     pub(super) fn treat_vertices_ee(&mut self) -> Result<(), Failure> {
@@ -54,57 +54,23 @@ fn generated_ee_vertices(ds: &mut DataStructure) -> Vec<i32> {
     vertices
 }
 
-fn subset_boxes(ds: &DataStructure, indices: &[i32]) -> Result<BoxSet<BvhVec3d>, Failure> {
-    let mut boxes = BoxSet::default();
-    boxes.set_size(indices.len());
-    for index in indices {
-        boxes.add(*index, box3_to_bvh(ds.shape_info(*index)?.box_bounds())?);
-    }
-    boxes.build()?;
-    Ok(boxes)
-}
-
 fn vertex_face_subset_pairs(
     ds: &DataStructure,
     vertices: &[i32],
     faces: &[i32],
 ) -> Result<Vec<(i32, i32)>, Failure> {
-    if vertices.is_empty() || faces.is_empty() {
-        return Ok(Vec::new());
+    let first: List<i32> = faces.iter().copied().collect();
+    let second: List<i32> = vertices.iter().copied().collect();
+    let mut iterator = BOPDSSubIterator::default();
+    iterator.set_ds(Some(ds));
+    iterator.set_subset1(&first);
+    iterator.set_subset2(&second);
+    iterator.prepare()?;
+    iterator.initialize();
+    let mut pairs = Vec::new();
+    while iterator.more() {
+        pairs.push(iterator.value()?);
+        iterator.next();
     }
-    let mut first = subset_boxes(ds, faces)?;
-    let mut second = subset_boxes(ds, vertices)?;
-    let mut selector = PairSelector::default();
-    selector.set_bvh_sets(&mut first, &mut second);
-    selector.select()?;
-    let mut pairs = selector
-        .pairs()
-        .iter()
-        .map(|pair| (pair.id1.min(pair.id2), pair.id1.max(pair.id2)))
-        .collect::<Vec<_>>();
-    pairs.sort();
-    pairs.dedup();
-    let mut output = Vec::new();
-    for (first, second) in pairs {
-        append_subset_pair(ds, first, second, &mut output)?;
-    }
-    Ok(output)
-}
-
-fn append_subset_pair(
-    ds: &DataStructure,
-    first: i32,
-    second: i32,
-    pairs: &mut Vec<(i32, i32)>,
-) -> Result<(), Failure> {
-    let first_type = ds.shape_info(first)?.shape_type();
-    let (vertex, face) = if first_type == ShapeEnum::Vertex {
-        (first, second)
-    } else {
-        (second, first)
-    };
-    if vertex != face && !ds.shape_info(face)?.has_sub_shape(vertex) {
-        pairs.push((vertex, face));
-    }
-    Ok(())
+    Ok(pairs)
 }

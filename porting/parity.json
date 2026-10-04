@@ -227816,6 +227816,141 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_vf",
       "status": "partial",
       "notes": "Nine native planar VF/VV/VE/EE/glue/repetition scenarios, 161 output rows; tools/oracle/tkbo_pave_filler_vf.md. Curved geometry, failure/cancellation/scheduling, allocator and complete legacy/API parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::ExpectedLength()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::expected_length",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::More()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::more",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::Intersect()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::intersect",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::SetSubSet2(const NCollection_List<int> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::set_subset2",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::SetDS(BOPDS_DS *const &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::set_ds",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::Prepare()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::prepare",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::BOPDS_SubIterator(const occ::handle<NCollection_BaseAllocator> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::with_allocator",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::DS()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::ds",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::SetSubSet1(const NCollection_List<int> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::set_subset1",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::Initialize()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::initialize",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::Next()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::next",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::BOPDS_SubIterator()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::new",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::SubSet1()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::subset1",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::SubSet2()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::subset2",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPDS_SubIterator::Value(int &, int &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
+      "source_sha256": "7d8579a25e9fbe6a41c2532f8b9a71c45d389b1e952edc0fe36c9fefebee3819",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSSubIterator::value",
+      "status": "partial",
+      "notes": "Fifty native subset-order, containment, duplicate/append and empty-input snapshots; tools/oracle/tkbo_sub_iterator.md. Rust borrows inputs, undefined native access is a failure; mutable aliasing/allocator/override and full legacy parity unproven."
     }
   ],
   "tests": [
