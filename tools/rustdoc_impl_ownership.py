@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Protocol
 
 from api_inventory_json import JSONValue, array_value, integer_value
+from rustdoc_declarations import stable_path
+from rustdoc_foreign_impls import foreign_impl_members
 
 
 class ImplState(Protocol):
@@ -15,6 +17,7 @@ class ImplState(Protocol):
     source_root: Path
     unresolved: list[str]
     foreign_impl_links: dict[str, set[str]]
+    foreign_impl_candidates: list[dict[str, JSONValue]]
     owned_impl_ids: set[str]
 
 
@@ -65,17 +68,40 @@ def linked_impl_entries(
     impl_body = eligible_impl_body(impl_id, state.items, read_inner)
     if impl_body is None:
         return []
-    impl_owner, owner_error = resolved_impl_owner(impl_body, state.items)
+    return render_linked_impl(
+        impl_id, owner_id, path, impl_body, state, render_impl
+    )
+
+
+def render_linked_impl(
+    impl_id: JSONValue, owner_id: str, path: str, impl: Mapping[str, JSONValue],
+    state: ImplState, render_impl: ImplRenderer,
+) -> list[dict[str, JSONValue]]:
+    impl_owner, owner_error = resolved_impl_owner(impl, state.items)
     if impl_owner is None:
         state.unresolved.append(f"impl:{impl_id}:{owner_error}")
         return []
     if impl_owner != owner_id:
-        # Rustdoc indexes trait implementations on local trait arguments too.
-        state.foreign_impl_links.setdefault(str(impl_id), set()).add(impl_owner)
+        capture_foreign_impl(impl_id, impl_owner, impl, state)
         return []
     state.owned_impl_ids.add(str(impl_id))
     return render_impl(
-        impl_body, path, state.items, state.paths, state.source_root, state.unresolved
+        impl, path, state.items, state.paths, state.source_root, state.unresolved
+    )
+
+
+def capture_foreign_impl(
+    impl_id: JSONValue, owner_id: str, impl: Mapping[str, JSONValue], state: ImplState
+) -> None:
+    # Rustdoc indexes foreign-Self trait implementations on their local arguments.
+    identifier = str(impl_id)
+    state.foreign_impl_links.setdefault(identifier, set()).add(owner_id)
+    owner_path = stable_path(state.paths, owner_id, "")
+    state.foreign_impl_candidates.extend(
+        foreign_impl_members(
+            impl, owner_path, identifier, state.items, state.paths,
+            state.source_root, state.unresolved,
+        )
     )
 
 

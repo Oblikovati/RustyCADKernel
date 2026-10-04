@@ -22,6 +22,7 @@ from api_inventory_json import read_json, sha256_bytes, string_value
 from api_inventory_reexports import resolve_cross_crate_reexports, source_hashes
 from api_tool_hashes import stage_hashes
 from rustdoc_impl_ownership import inherent_members, unresolved_impl_owner_links
+from rustdoc_foreign_impls import resolve_foreign_impl_candidates
 from rustdoc_trait_paths import resolve_public_trait_paths
 from rustdoc_declarations import (
     file_hash,
@@ -79,6 +80,7 @@ def make_reachable_inventory(
         },
         "unresolved_links": sorted(set(state.unresolved)),
         "source_files": source_hashes(state.entries),
+        "foreign_impl_candidates": state.foreign_impl_candidates,
     }
 
 
@@ -96,6 +98,7 @@ class WalkState:
         self.unresolved: list[str] = []
         self.seen: set[tuple[str, str]] = set()
         self.foreign_impl_links: dict[str, set[str]] = {}
+        self.foreign_impl_candidates: list[dict[str, JSONValue]] = []
         self.owned_impl_ids: set[str] = set()
 
 
@@ -345,6 +348,7 @@ def normalized_manifest(
         for name in sorted(records)
     ]
     resolve_cross_crate_reexports(crates)
+    resolve_foreign_impl_candidates(crates)
     resolve_public_trait_paths(crates)
     return {
         "schema_version": 1,

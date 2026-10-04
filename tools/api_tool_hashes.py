@@ -17,6 +17,7 @@ IMPLEMENTATION_FILES: dict[str, tuple[str, ...]] = {
         "tools/api_inventory_reexports.py",
         "tools/rustdoc_declarations.py",
         "tools/rustdoc_impl_ownership.py",
+        "tools/rustdoc_foreign_impls.py",
         "tools/rustdoc_trait_paths.py",
         "tools/api_tool_hashes.py",
     ),
