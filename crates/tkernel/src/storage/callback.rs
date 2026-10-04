@@ -104,7 +104,7 @@ struct TypedFields {
 ///
 /// ```
 /// use rustycad_tkernel::standard::Handle;
-/// use rustycad_tkernel::storage::{DefaultCallBack, TypedCallBack};
+/// use rustycad_tkernel::storage::{CallBack, DefaultCallBack, TypedCallBack};
 /// use rustycad_tkernel::tcollection::AsciiString;
 /// let callback = Handle::new(DefaultCallBack::default()).cast::<dyn CallBack>();
 /// let typed = TypedCallBack::new(&AsciiString::new("PDoc"), &callback);
