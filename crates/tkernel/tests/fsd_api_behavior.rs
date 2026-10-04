@@ -8,3 +8,5 @@ mod binary;
 mod fakes;
 #[path = "fsd_api_behavior/text.rs"]
 mod text;
+#[path = "fsd_api_behavior/text_hooks.rs"]
+mod text_hooks;

@@ -1,7 +1,7 @@
 //! The protected line, word and tag readers of `FSD_File`.
 use super::{TextDialect, TextFile};
 use crate::standard::Failure;
-use crate::storage::{StorageError, StreamException};
+use crate::storage::StreamException;
 use crate::tcollection::{AsciiString, ExtendedString};
 
 /// `getline` buffer size of the line readers (`char Buffer[8193]` read with 8192).
@@ -50,9 +50,9 @@ impl<D: TextDialect> TextFile<D> {
         buffer
     }
 
-    /// `FSD_File::ReadWord`: skips spaces and newlines, then reads to the next one. The
-    /// word is kept as C strings, so an embedded NUL cuts the chunk it is in.
-    pub(crate) fn read_word(&mut self) -> AsciiString {
+    /// Skips spaces/newlines and reads to the next delimiter; `file.read_word()`.
+    /// Embedded NUL bytes truncate each native C-string chunk.
+    pub fn read_word(&mut self) -> AsciiString {
         let mut byte = 0_u8;
         while !self.stream.eof() {
             self.stream.get(&mut byte);
@@ -77,8 +77,9 @@ impl<D: TextDialect> TextFile<D> {
         word
     }
 
-    /// Protected `ReadChar`: `size` single `get`s; a failed `get` appends the previous byte.
-    pub(crate) fn read_char(&mut self, size: usize) -> AsciiString {
+    /// Reads up to `size` characters from the current position; `file.read_char(4)`.
+    /// A failed `get` appends the previous byte, as the native method does.
+    pub fn read_char(&mut self, size: usize) -> AsciiString {
         let mut buffer = AsciiString::default();
         let mut byte = 0_u8;
         let mut count = 0;
@@ -88,25 +89,6 @@ impl<D: TextDialect> TextFile<D> {
             count += 1;
         }
         buffer
-    }
-
-    /// `FlushEndOfLine`: reads the rest of the line with the dialect's `ReadLine`.
-    pub(crate) fn flush_end_of_line(&mut self) {
-        D::read_line(self);
-    }
-
-    /// `FindTag`: reads strings until one equals `tag`. Reaching the end of the file, even
-    /// on the tag line itself, is `SectionNotFound`, as natively.
-    pub(crate) fn find_tag(&mut self, tag: &str) -> StorageError {
-        let mut line = D::read_string(self);
-        while line.as_bytes() != tag.as_bytes() && !self.stream.eof() {
-            line = D::read_string(self);
-        }
-        if self.stream.eof() {
-            StorageError::SectionNotFound
-        } else {
-            StorageError::Ok
-        }
     }
 }
 
