@@ -7,14 +7,13 @@ new edge map, both `BRepAlgo_AsDes` descendant lists, section parameter range,
 endpoint coordinates, and face-specific edge orientations. It also checks
 repeated explicit `SetDone`.
 
-The Rust `FaceInter` slice matches the unbounded and bounded perpendicular-plane
-fixtures through `IntTools_FaceFace`, section-edge construction, the native
-`OrientSection` vector rule, and `Store`. The bounded fixture's exact section is
-`[-1, 1]`, with endpoints `(1, 0, 0)` and `(-1, 0, 0)`. Shared-subshape and
-non-plane branches still return `Standard_NotImplemented`. OCCT also clips the
-triangle fixture to `[-1, 1]`; Rust deliberately rejects that nonrectangular
-trim because current face-face line clipping sees only the UV bounding box.
-General PaveFiller intersection behavior is not claimed.
+The Rust `FaceInter` slice matches unbounded, rectangular, triangular, and
+straight-edged hole fixtures through `IntTools_FaceFace`, boundary event
+clipping/classification, section-edge construction, the native `OrientSection`
+vector rule, and `Store`. The triangle clips to `[-1, 1]`; the hole produces two
+edges with ranges `[-3, -1]` and `[1, 3]`. Shared-subshape, non-plane, curved
+boundary, and coincident-boundary branches remain explicitly unsupported;
+general PaveFiller behavior is not claimed.
 
 Build against the pinned native modeling install:
 
