@@ -235037,6 +235037,22 @@
       "rust_item": "rustycad_tkmath::poly::TriangulationHooks::load_deferred_data_with_file_system",
       "status": "implemented",
       "notes": "Protected virtual ID 3280aca5d10a3bbcd19dee694fcfa6c2d3c9a7915c2b5591b4d45acefb8609cb. Existing tests verify optional filesystem forwarding and load failure; the derived probe verifies this hook composes with a custom detached factory and destination behavior. Native probe: tools/oracle/poly_triangulation_virtual_hooks.cxx; header SHA-256 885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802."
+    },
+    {
+      "upstream_id": "Geom2d_BezierCurve::init(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dBezierCurve::init",
+      "status": "implemented",
+      "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration a7ee7b91b7d70f86b935dbcfddc44fcaba16ffa0e8d6162dcd11da30d1aced06. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::init",
+      "status": "implemented",
+      "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
     }
   ],
   "tests": [

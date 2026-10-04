@@ -1,0 +1,35 @@
+{
+  "scope": "Protected 2D/3D Bezier curve initialization",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration_ids": [
+    "a7ee7b91b7d70f86b935dbcfddc44fcaba16ffa0e8d6162dcd11da30d1aced06",
+    "ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673"
+  ],
+  "native_source_sha256": {
+    "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.cxx": "e036ebe902e558a6bcbb416edb915ecb22fb797f34148aa6af8ebeea52c94775",
+    "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.cxx": "4e57081db0e392d91af9d57b2c8d2909e7647de916a5a904a268acbda6b577e3"
+  },
+  "artifact_sha256": {
+    "tools/oracle/bezier_curve_protected_init.cxx": "3cf529a08323e26628362ea5179bd2a30ef5122aa72a101b45be593c2c245e08",
+    "tools/oracle/bezier_curve_protected_init.expected": "a519eed7d67f5bef040c6ec993993b368fc1145e7fd41574bb00ea9d2aa37832",
+    "crates/tkg3d/tests/bezier_curve_protected_init.rs": "5cdbb3db6a45abc58300aa32faa2644cbd0df18300aaa8d7ee0b244cad89937b"
+  },
+  "compile_command": "g++ -std=c++17 tools/oracle/bezier_curve_protected_init.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG2d -lTKG3d -lTKMath -lTKernel -o /tmp/bezier-curve-protected-init",
+  "native_output_matches_expected": true,
+  "rust_fixture_test": "crates/tkg3d/tests/bezier_curve_protected_init.rs",
+  "native_fixture_rows": 16,
+  "legacy_declaration_count_changed": false,
+  "behavior_change": "Both curve classes expose protected init via their shared core. Mismatched weights now raise Standard_DimensionMismatch after pole/closure update and weight resize, retaining prior rationality and caches on failure. Former code silently accepted unequal lengths and reset rationality early.",
+  "scope_limits": [
+    "Native uninitialized floating-point weights after a failed resize are not read by the fixture. Rust initializes those slots deterministically.",
+    "Supplemental Rust tests verify derivative-cache invalidation on success and preservation on failure; the exact native receipt verifies public geometry/weight/error state.",
+    "This does not establish configuration-wide or complete toolkit API parity."
+  ],
+  "validation": {
+    "command": "cargo test -p rustycad-tkg2d -p rustycad-tkg3d",
+    "passed": 1431,
+    "failed": 0,
+    "ignored": 0,
+    "strict_clippy": "cargo clippy -p rustycad-tkg2d -p rustycad-tkg3d --all-targets -- -D warnings: passed"
+  }
+}

@@ -130,9 +130,9 @@ impl<K: BezierCurveKind> BezierCurveCore<K> {
         state.init(poles, weights)?;
         Ok(state)
     }
-    // `init`: closure flag, one-based copies, rationality, cache and evaluation
-    // representation reset.
-    fn init(
+    /// Reinitializes native protected state without constructor validation;
+    /// `core.init(&poles, Some(&weights))?` resets evaluation and derivative caches on success.
+    pub fn init(
         &mut self,
         poles: &Array1<'_, K::Point>,
         weights: Option<&Array1<'_, f64>>,
@@ -140,18 +140,28 @@ impl<K: BezierCurveKind> BezierCurveCore<K> {
         let (first, last) = (at(poles, poles.lower())?, at(poles, poles.upper())?);
         self.closed = K::point_distance(first, last) <= K::closure_tolerance();
         self.poles = rebased(poles)?;
-        self.rational = false;
-        self.weights = bsplclib::unit_weights(poles.len() as i32)?;
-        if let Some(weights) = weights {
-            let copied: Array1<'static, f64> = rebased(weights)?;
-            self.rational = bezier_rational(&copied)?;
-            if self.rational {
-                self.weights = copied;
-            }
-        }
+        self.init_weights(weights)?;
         self.max_deriv_inv = 0.0;
         self.max_deriv_inv_ok = false;
         self.eval_rep = K::EvalRep::default();
+        Ok(())
+    }
+    fn init_weights(&mut self, weights: Option<&Array1<'_, f64>>) -> Result<(), Failure> {
+        if let Some(weights) = weights {
+            // Native init mutates poles and resizes weights before CopyValues can fail.
+            self.weights
+                .resize_bounds(1, self.poles.len() as i32, false)
+                .map_err(|error| error.into_failure("NCollection_Array1::Resize"))?;
+            self.weights
+                .copy_values(weights)
+                .map_err(|error| error.into_failure("NCollection_Array1::CopyValues"))?;
+            self.rational = bezier_rational(&self.weights)?;
+        } else {
+            self.rational = false;
+        }
+        if !self.rational {
+            self.weights = bsplclib::unit_weights(self.poles.len() as i32)?;
+        }
         Ok(())
     }
     /// `Degree`: `NbPoles - 1`; `core.degree()`.

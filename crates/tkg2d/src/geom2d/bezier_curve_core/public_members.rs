@@ -11,6 +11,15 @@
 macro_rules! bezier_curve_members {
     ($point:ty) => {
         $crate::spline_pole_members!($point);
+        /// Reuses protected native `init`, bypassing constructor-only validation;
+        /// `curve.init(&poles, None)?` resets the evaluation representation on success.
+        pub fn init(
+            &self,
+            poles: &Array1<'_, $point>,
+            weights: Option<&Array1<'_, f64>>,
+        ) -> Result<(), Failure> {
+            self.state.write().init(poles, weights)
+        }
         /// Raise the degree (`Increase`); `curve.increase(5)?`.
         pub fn increase(&self, degree: i32) -> Result<(), Failure> {
             self.state.write().increase(degree)
