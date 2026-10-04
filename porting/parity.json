@@ -225618,6 +225618,51 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
       "status": "partial",
       "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Descendants(const TopoDS_Shape &, const bool) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::descendants",
+      "status": "partial",
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Generated(const TopoDS_Shape &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::generated",
+      "status": "partial",
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::EdgeReplacement(const TopoDS_Face &, const TopoDS_Edge &) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edge_replacement",
+      "status": "partial",
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode",
+      "status": "partial",
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity, const ChFiDS_TypeOfConcavity) const",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
+      "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode_two_types",
+      "status": "partial",
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim."
     }
   ],
   "tests": [

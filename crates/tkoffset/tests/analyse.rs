@@ -1,4 +1,5 @@
 //! Differential replay of BRepOffset_Analyse box, face and spline incidence.
+mod analyse_grouping;
 mod spline_fixture;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
@@ -52,6 +53,7 @@ fn fixture_shapes() -> Vec<Shape> {
 }
 fn replay_row(fields: &[&str], shape: &Shape, analysis: &BRepOffsetAnalyse) {
     match fields[0] {
+        "groups" => analyse_grouping::replay(fields, shape, analysis),
         "state" => {
             assert_eq!(analysis.is_done(), fields[2] == "1");
             assert_eq!(analysis.new_faces().len(), number(fields[3]));
@@ -92,10 +94,28 @@ fn replay_edge(fields: &[&str], shape: &Shape, analysis: &BRepOffsetAnalyse) {
             number(fields[7 + index * 3])
         );
     }
+    let history = 5 + intervals.len() * 3;
+    assert_eq!(analysis.has_generated(&edge), fields[history] == "1");
     assert_eq!(
-        analysis.has_generated(&edge),
-        *fields.last().unwrap() == "1"
+        analysis.generated(&edge).is_null(),
+        fields[history + 1] == "1"
     );
+    for update in [false, true] {
+        assert_eq!(
+            analysis
+                .descendants(&edge, update)
+                .map_or(0, <[Shape]>::len),
+            number(fields[history + 2 + usize::from(update)])
+        );
+    }
+    if let Some(face) = analysis.ancestors(&edge).unwrap().first() {
+        assert_eq!(
+            analysis
+                .edge_replacement(&topods::face(face).unwrap(), &edge)
+                .is_same(&edge),
+            fields[history + 4] == "1"
+        );
+    }
 }
 fn replay_vertex(fields: &[&str], shape: &Shape, analysis: &BRepOffsetAnalyse) {
     let vertex = Explorer::new(shape, ShapeEnum::Vertex, ShapeEnum::Shape)

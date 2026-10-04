@@ -8,6 +8,7 @@
 #include <TopoDS_Compound.hxx>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 #include <Geom_BezierSurface.hxx>
 #include <Geom2d_Line.hxx>
 #include <TopoDS_Wire.hxx>
@@ -26,6 +27,22 @@ TopoDS_Shape spline_pair(double slope){
  }
  return pair;
 }
+void groups(const TopoDS_Shape& shape,int kind,BRepOffset_Analyse& analysis){
+ std::vector<TopoDS_Shape> faces;
+ for(TopExp_Explorer ex(shape,TopAbs_FACE);ex.More();ex.Next())faces.push_back(ex.Current());
+ for(int first=0;first<6;first++)for(int second=-1;second<6;second++){
+  NCollection_List<TopoDS_Shape> result;
+  if(second<0)analysis.Explode(result,ChFiDS_TypeOfConcavity(first));
+  else analysis.Explode(result,ChFiDS_TypeOfConcavity(first),ChFiDS_TypeOfConcavity(second));
+  std::cout<<"groups "<<kind<<' '<<first<<' '<<second<<' '<<result.Extent();
+  for(NCollection_List<TopoDS_Shape>::Iterator it(result);it.More();it.Next()){
+   std::vector<int> members;
+   for(TopExp_Explorer ex(it.Value(),TopAbs_FACE);ex.More();ex.Next())for(unsigned i=0;i<faces.size();i++)if(faces[i].IsSame(ex.Current())){members.push_back(i);break;}
+   std::cout<<' '<<members.size();for(int member:members)std::cout<<' '<<member;
+  }
+  std::cout<<'\n';
+ }
+}
 void inspect(const TopoDS_Shape& shape,int kind){
  BRepOffset_Analyse analysis(shape,.01);
  std::cout<<"state "<<kind<<' '<<analysis.IsDone()<<' '<<analysis.NewFaces().Extent()<<'\n';
@@ -34,7 +51,9 @@ void inspect(const TopoDS_Shape& shape,int kind){
   auto edge=TopoDS::Edge(ex.Current());const auto& intervals=analysis.Type(edge);
   std::cout<<"edge "<<kind<<' '<<index++<<' '<<analysis.Ancestors(edge).Extent()<<' '<<intervals.Extent();
   for(NCollection_List<BRepOffset_Interval>::Iterator it(intervals);it.More();it.Next())std::cout<<' '<<it.Value().First()<<' '<<it.Value().Last()<<' '<<it.Value().Type();
-  std::cout<<' '<<analysis.HasGenerated(edge)<<'\n';
+  auto descendants=analysis.Descendants(edge);int before=descendants?descendants->Extent():0;descendants=analysis.Descendants(edge,true);int after=descendants?descendants->Extent():0;
+  bool unchanged=true;if(!analysis.Ancestors(edge).IsEmpty())unchanged=analysis.EdgeReplacement(TopoDS::Face(analysis.Ancestors(edge).First()),edge).IsSame(edge);
+  std::cout<<' '<<analysis.HasGenerated(edge)<<' '<<analysis.Generated(edge).IsNull()<<' '<<before<<' '<<after<<' '<<unchanged<<'\n';
  }
  index=0;
  for(TopExp_Explorer ex(shape,TopAbs_VERTEX);ex.More();ex.Next()){
@@ -54,6 +73,7 @@ void inspect(const TopoDS_Shape& shape,int kind){
   NCollection_List<TopoDS_Shape> edges;edges.Append(edge);analysis.TangentEdges(edge,vertex,edges);
   std::cout<<"tangent "<<kind<<' '<<index++<<' '<<edges.Extent()<<'\n';
  }
+ groups(shape,kind,analysis);
  analysis.Clear();std::cout<<"clear "<<kind<<' '<<analysis.IsDone()<<' '<<analysis.HasAncestor(shape)<<'\n';
 }
 int main(){

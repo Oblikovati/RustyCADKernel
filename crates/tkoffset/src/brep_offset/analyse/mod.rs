@@ -1,9 +1,13 @@
 //! BRepOffset_Analyse at OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 mod classify;
+mod grouping;
 mod mixed;
 mod queries;
 use super::BRepOffsetInterval;
-use rustycad_tkbrep::{topods::Shape, toptools::ShapeMapHasher};
+use rustycad_tkbrep::{
+    topods::{Edge, Shape},
+    toptools::ShapeMapHasher,
+};
 use rustycad_tkernel::{ncollection::DataMap, standard::Failure};
 type ShapeBindings<T> = DataMap<Shape, T, ShapeMapHasher>;
 /// Offset connectivity and identity-preserving incidence; `BRepOffsetAnalyse::new()`.
@@ -16,6 +20,9 @@ pub struct BRepOffsetAnalyse {
     intervals: ShapeBindings<Vec<BRepOffsetInterval>>,
     ancestors: ShapeBindings<Vec<Shape>>,
     new_faces: Vec<Shape>,
+    descendants: ShapeBindings<Vec<Shape>>,
+    generated: ShapeBindings<Shape>,
+    replacements: ShapeBindings<ShapeBindings<Edge>>,
 }
 impl BRepOffsetAnalyse {
     /// Create an idle analysis; `BRepOffsetAnalyse::new()`.
@@ -27,6 +34,9 @@ impl BRepOffsetAnalyse {
         self.shape = shape.clone();
         self.angle = angle;
         self.new_faces.clear();
+        self.descendants.clear(false);
+        self.generated.clear(false);
+        self.replacements.clear(false);
         self.build_ancestors()?;
         self.classify_edges()?;
         self.done = true;
@@ -53,13 +63,16 @@ impl BRepOffsetAnalyse {
         self.intervals.clear(false);
         self.ancestors.clear(false);
         self.new_faces.clear();
+        self.descendants.clear(false);
+        self.generated.clear(false);
+        self.replacements.clear(false);
     }
     /// Read artificial tangent faces; uniform offsets create none; `analysis.new_faces()`.
     pub fn new_faces(&self) -> &[Shape] {
         &self.new_faces
     }
     /// Check generated-face bindings; uniform offsets create none; `analysis.has_generated(&edge)`.
-    pub fn has_generated(&self, _shape: &Shape) -> bool {
-        false
+    pub fn has_generated(&self, shape: &Shape) -> bool {
+        self.generated.is_bound(shape)
     }
 }

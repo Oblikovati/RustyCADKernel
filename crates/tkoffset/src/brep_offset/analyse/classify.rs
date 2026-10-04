@@ -30,6 +30,13 @@ impl BRepOffsetAnalyse {
                 false,
             )?;
         }
+        self.descendants.clear(false);
+        for index in 1..=native.extent() {
+            let child = native.find_key(index)?;
+            for parent in native.find_from_index(index)?.iter() {
+                self.bind_descendant(parent, child)?;
+            }
+        }
         self.ancestors.clear(false);
         for index in 1..=native.extent() {
             self.ancestors.bind(

@@ -11,7 +11,10 @@ Uniform-offset incidence includes the 23-sample spline mixed-continuity check.
 The paired-patch slopes 0, 1 and 3 yield Tangential, Concave and Mixed respectively.
 Native C0Value() is a distance used with angle-like thresholds; this surprising
 source behavior is deliberately preserved and covered by the Mixed fixture. Different face offsets and generated tangent faces,
-progress cancellation, Explode, descendants and replacement/history queries are
-not implemented. No legacy regression is mapped by these supplemental fixtures.
+progress cancellation and artificial tangent-face construction remain incomplete.
+Explode/AddFaces are compared for all six single classifications and all 36 pairs
+on all eight fixture shapes, including face identity and traversal order.
+Descendants (both update flags), null Generated and unchanged EdgeReplacement
+are compared in the supported uniform-offset scope. No legacy regression is mapped by these supplemental fixtures.
 Native Perform retains old edge classifications across calls; only Clear removes
 them. Rust preserves that source behavior; a repeated-input oracle remains needed.
