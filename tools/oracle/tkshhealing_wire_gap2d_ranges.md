@@ -41,6 +41,9 @@ Bezier dynamic type.
 the source knot interval `[0,1]` and preserved B-spline representation.
 `multispan_bspline_line_pcurves` adds a quadratic spline with an internal knot
 at `0.5`; its selected crossing lies before the knot at `0.4436491673`.
+`cubic_bspline_line` exercises a degree-three single-span B-spline against a
+line; the selected crossing is `0.35429289186721818` and the spline handle is
+preserved after range repair.
 `tangent_parabola_line` checks a repeated/tangent intersection from a quadratic
 Bezier curve against a line; OCCT selects the common parameter `0.5` and trims
 both p-curves to that point.
@@ -54,8 +57,8 @@ as a successful repair.
 
 These fixtures cover the direct intersection, parallel-curve extrema/projection
 fallback, finite-surface bounds handling, trimmed and offset wrappers, and
-copied-edge/context replacement paths. Higher-degree spline cases remain
-uncovered.
+copied-edge/context replacement paths. Degree-four and higher spline behavior
+remains uncovered.
 
 Rebuild with:
 
