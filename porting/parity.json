@@ -226050,6 +226050,231 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::point_near_edge_with_step",
       "status": "partial",
       "notes": "1520 native hatching/context nearby-point cases; see tools/oracle/tkbo_point_in_face.md. Unbounded domains, holes, splines and exceptional state transitions need additional evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Image(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::image",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Filter(const TopoDS_Shape &, const TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::filter",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::OffsetEdgesFromShapes()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_edges_from_shapes",
+      "status": "partial",
+      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. General offset pipeline and legacy test pending."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::RemoveRoot(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::remove_root",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::ImageFrom(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::image_from",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "ShapeConstruct::JoinCurves(const occ::handle<Geom_Curve> &, const occ::handle<Geom_Curve> &, const TopAbs_Orientation, const TopAbs_Orientation, double &, double &, double &, double &, occ::handle<Geom_Curve> &, bool &, bool &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct.hxx",
+      "source_sha256": "aa2f5717e5c78c2de8f80a02cc5093b3de99a7aa9bc3f841b18f193cd1cf56ec",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::join_curves_3d",
+      "status": "partial",
+      "notes": "Native join fixtures and shared-face wireframe checks; tools/oracle/tkshhealing_shapeconstruct_join_curves.cxx. Broader rational/periodic/exceptional domains still require evidence; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::SetRoot(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::set_root",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::clear",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Remove(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::remove",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::LastImage(const TopoDS_Shape &, NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::last_image",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Compact()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::compact",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::IsImage(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::is_image",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::ReplaceRoot(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::replace_root",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "ShapeConstruct::JoinCurves(const occ::handle<Geom2d_Curve> &, const occ::handle<Geom2d_Curve> &, const TopAbs_Orientation, const TopAbs_Orientation, double &, double &, double &, double &, occ::handle<Geom2d_Curve> &, bool &, bool &, const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct.hxx",
+      "source_sha256": "aa2f5717e5c78c2de8f80a02cc5093b3de99a7aa9bc3f841b18f193cd1cf56ec",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::join_curves_2d",
+      "status": "partial",
+      "notes": "Native join fixtures and shared-face wireframe checks; tools/oracle/tkshhealing_shapeconstruct_join_curves.cxx. Broader rational/periodic/exceptional domains still require evidence; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Add(const TopoDS_Shape &, const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::add_many",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Generated(const TopoDS_Shape &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::generated",
+      "status": "partial",
+      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. General offset pipeline and legacy test pending."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::HasImage(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::has_image",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Roots()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::roots",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Add(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::add",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Root(const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::root",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Bind(const TopoDS_Shape &, const NCollection_List<TopoDS_Shape> &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::bind_many",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::IsDeleted(const TopoDS_Shape &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::is_deleted",
+      "status": "partial",
+      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. General offset pipeline and legacy test pending."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::Bind(const TopoDS_Shape &, const TopoDS_Shape &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "source_sha256": "ed54b3dacd9365fa5ecdbef78248d7b6d265175eb8e0c6cb9aeb70370c51f4f6",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::bind",
+      "status": "partial",
+      "notes": "Native-backed image graph operations, see tools/oracle/tkbool_brep_algo_image.md. Rust owned results are snapshots; native returned list references can observe subsequent mutation, including the shared fallback Image list. Broad alias/cycle/error semantics need further coverage; partial only."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::Modified(const TopoDS_Shape &)",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::modified",
+      "status": "partial",
+      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. General offset pipeline and legacy test pending."
+    },
+    {
+      "upstream_id": "BRepOffset_MakeOffset::OffsetFacesFromShapes()",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+      "source_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::offset_faces_from_shapes",
+      "status": "partial",
+      "notes": "Native-backed identity-located single-face open plane/cylinder Arc offset histories only; tools/oracle/tkoffset_make_offset_single_face.md. Generated/Modified owned snapshots differ from native reused-list aliasing. General offset pipeline and legacy test pending."
     }
   ],
   "tests": [
