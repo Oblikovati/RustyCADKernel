@@ -83257,16 +83257,24 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_chunk",
-      "status": "implemented",
-      "notes": "The template ReadChunk<Chunk_T> copies the chunk out as T: AnyBitPattern (it may be unaligned); a T larger than the chunk (native out-of-bounds read) raises Standard_ProgramError. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+      "rust_items": [
+        "rustycad_tkernel::standard::ReadBuffer::read_chunk",
+        "rustycad_tkernel::standard::ReadBuffer::read_chunk_file"
+      ],
+      "status": "partial",
+      "notes": "The template ReadChunk<Chunk_T> copies the chunk out as T: AnyBitPattern (it may be unaligned); a T larger than the chunk (native out-of-bounds read) raises Standard_ProgramError. The C++ template accepts std::istream and FILE*: Rust maps those behaviors to read_chunk and the count-based read_chunk_file respectively. IstreamStream supplies sticky default-mask eof/fail/bad state to Read-based readers. Nondefault std::istream exception masks can throw ios_base::failure, which the Rust adapter reports as io::Error; this defined exception behavior remains unmatched. Native fixtures: tools/oracle/tkernel_standard_istream_state.cxx and tools/oracle/tkernel_standard_read_buffer_file_stream.cxx."
     },
     {
       "upstream_id": "Standard_ReadBuffer::ReadDataChunk(Stream_T&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_data_chunk",
-      "status": "implemented",
-      "notes": "Returns the chunk as a slice or None; a short or failed read ends reading for good. A partial last chunk keeps the cache's previous bytes past the data, as natively. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+      "rust_items": [
+        "rustycad_tkernel::standard::ReadBuffer::read_data_chunk",
+        "rustycad_tkernel::standard::ReadBuffer::read_data_chunk_file"
+      ],
+      "status": "partial",
+      "notes": "Returns the chunk as a slice or None; a short or failed read ends reading for good. A partial last chunk keeps the cache's previous bytes past the data, as natively. The C++ template accepts std::istream and FILE*: Rust maps the stream paths to read_data_chunk and the count-based FILE path to read_data_chunk_file. IstreamStream supplies sticky default-mask eof/fail/bad state. Nondefault std::istream exception masks can throw ios_base::failure, which the Rust adapter reports as io::Error; this defined exception behavior remains unmatched. Native fixtures: tools/oracle/tkernel_standard_istream_state.cxx and tools/oracle/tkernel_standard_read_buffer_file_stream.cxx."
     },
     {
       "upstream_id": "Standard_ReadLineBuffer::Standard_ReadLineBuffer(size_t)",
@@ -83289,8 +83297,12 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_stream",
-      "status": "implemented",
-      "notes": "Clang candidate ebd7fa14a40405498cbe2e2ea362a98885eeec44dcc3245bbdf455ed5a7f89a0 (bool(std::istream&,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. Native hook is protected and non-virtual; the Read-generic Rust method matches full reads, short EOF reads, bad/error state, partial byte counts, and buffer mutation. The safe Rust surface rejects lengths beyond allocation; that request is outside the native method's defined buffer domain. Native derived-class fixture: tools/oracle/tkernel_standard_read_stream_hook.cxx."
+      "rust_items": [
+        "rustycad_tkernel::standard::ReadLineBuffer::read_stream",
+        "rustycad_tkernel::standard::IstreamStream"
+      ],
+      "status": "partial",
+      "notes": "Clang candidate ebd7fa14a40405498cbe2e2ea362a98885eeec44dcc3245bbdf455ed5a7f89a0 (bool(std::istream&,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. The protected non-virtual hook matches count, buffer, badbit, and EOF behavior when supplied IstreamStream; the adapter preserves default-mask sticky eof/fail/bad flags. Nondefault std::istream exception masks may throw ios_base::failure, which is not represented by the bool-returning Rust hook. Oversized spans remain safely rejected outside native's defined buffer domain. Native fixtures: tools/oracle/tkernel_standard_istream_state.cxx and tools/oracle/tkernel_standard_read_stream_hook.cxx."
     },
     {
       "upstream_id": "Standard_ReadLineBuffer::readStream(FILE*,size_t,size_t&)",

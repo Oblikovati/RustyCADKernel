@@ -41,7 +41,7 @@ impl<R: Read> IstreamStream<R> {
 
     /// Reports the native `fail()` state; `stream.is_fail()`.
     pub fn is_fail(&self) -> bool {
-        self.fail
+        self.fail || self.bad
     }
 
     /// Reports the native `bad()` state; `stream.is_bad()`.
@@ -78,6 +78,13 @@ impl<R: Read> Read for IstreamStream<R> {
             return Err(Error::other("istream badbit is set"));
         }
         if self.fail {
+            return Ok(0);
+        }
+        if self.eof {
+            self.fail = true;
+            return Ok(0);
+        }
+        if buffer.is_empty() {
             return Ok(0);
         }
         let result = self.source.read(buffer);

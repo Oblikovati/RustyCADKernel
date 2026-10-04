@@ -15,7 +15,7 @@ impl ReadBuffer {
         Some(&self.cache[start..start + self.chunk_len])
     }
 
-    /// Copies a typed chunk from an `fread`-style source; `buffer.read_chunk_file::<u32>(&mut file)?`.
+    /// Copies a typed chunk from an `fread`-style source; `buffer.read_chunk_file::<u32, _>(&mut file)?`.
     pub fn read_chunk_file<T: AnyBitPattern, R: Read>(
         &mut self,
         stream: &mut FreadStream<R>,
@@ -77,9 +77,11 @@ mod tests {
     fn typed_file_chunk_reads_only_the_requested_value_bytes() {
         let mut file = FreadStream::new(Cursor::new(0x1234_u32.to_ne_bytes().to_vec()));
         let mut chunks = ReadBuffer::new(4, 4, false).expect("valid chunk buffer");
+        let bytes = 0x1234_u32.to_ne_bytes();
+        let expected = u16::from_ne_bytes([bytes[0], bytes[1]]);
         assert_eq!(
             chunks.read_chunk_file::<u16, _>(&mut file).unwrap(),
-            Some(0x1234)
+            Some(expected)
         );
     }
 }

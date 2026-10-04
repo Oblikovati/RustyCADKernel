@@ -21,7 +21,8 @@ int main()
   aBadStream.setstate(std::ios::badbit);
   std::size_t aCount = 9;
   const bool isInitiallyBad = aBuffer.Read(aBadStream, 2, aCount);
-  std::cout << "bad=" << isInitiallyBad << '/' << aCount << '/' << aBadStream.bad();
+  std::cout << "bad=" << isInitiallyBad << '/' << aCount << '/' << aBadStream.bad() << '/'
+            << aBadStream.fail();
   aBadStream.clear();
   const bool isRecovered = aBuffer.Read(aBadStream, 2, aCount);
   std::cout << " recovered=" << isRecovered << '/' << aCount << '/' << aBadStream.good();
@@ -32,4 +33,15 @@ int main()
             << anEofStream.fail() << '/' << anEofStream.bad();
   const bool isRepeated = aBuffer.Read(anEofStream, 2, aCount);
   std::cout << " repeated=" << isRepeated << '/' << aCount << '/' << anEofStream.bad() << '\n';
+
+  std::istringstream aZeroLengthStream("z");
+  const bool isZeroLength = aBuffer.Read(aZeroLengthStream, 0, aCount);
+  std::cout << "zero=" << isZeroLength << '/' << aCount << '/' << aZeroLengthStream.good() << '/'
+            << aZeroLengthStream.eof() << '/' << aZeroLengthStream.fail() << '/'
+            << aZeroLengthStream.bad();
+  std::istringstream anEofBitStream("z");
+  anEofBitStream.setstate(std::ios::eofbit);
+  const bool isEofBitOnly = aBuffer.Read(anEofBitStream, 1, aCount);
+  std::cout << " eofbit=" << isEofBitOnly << '/' << aCount << '/' << anEofBitStream.eof() << '/'
+            << anEofBitStream.fail() << '/' << anEofBitStream.bad() << '\n';
 }
