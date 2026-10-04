@@ -1,0 +1,17 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_id": "FSD_BinaryFile::ReadCompleteInfo(Standard_IStream&,occ::handle<Storage_Data>&)",
+  "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::read_complete_info",
+  "previous_status": "implemented",
+  "status": "partial",
+  "source_sha256": {
+    "../OCCT/src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.cxx": "dbdb6afbd431429a73f4d4746a3ef5dda3bcc52cb40d6e69e79ec8987a49a4a3",
+    "crates/tkernel/src/fsd/binary_file/complete_info.rs": "37a32e6bf6320b440e7776108813325a747d355e1572859f2a0bcd95ccb11e80"
+  },
+  "native_behavior": "FSD_BinaryFile.cxx:669-751 loops while good and not EOF; tellg equal to bdata or an unmatched position below edata performs no read or seek and repeats.",
+  "rust_behavior": "complete_info.rs Section::Stuck returns Storage_StreamFormatError, so the Rust method returns where the native path makes no progress.",
+  "evidence_kind": "Source control-flow audit; no new native runtime equivalence claim.",
+  "remaining_work": "Port and verify the no-progress behavior using a bounded observer or isolated process harness without treating the Rust early error as native-equivalent.",
+  "legacy_mapping_count_changed": false,
+  "full_parity_proven": false
+}

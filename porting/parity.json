@@ -99985,8 +99985,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
       "rust_item": "rustycad_tkernel::fsd::BinaryFile::<rustycad_tkernel::storage::HeaderSections>::read_complete_info",
-      "status": "implemented",
-      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl."
+      "status": "partial",
+      "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target names the explicit public storage-trait implementation; see porting/audits/fsd-binary-trait-targets.jsonl. Completeness correction: the documented no-progress-loop divergence is a remaining behavioral gap, not an implemented parity claim. See porting/audits/fsd-complete-info-stalled-section.json."
     },
     {
       "upstream_id": "FSD_BinaryFile::EndReadInfoSection()",
