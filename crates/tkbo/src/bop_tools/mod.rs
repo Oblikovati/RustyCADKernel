@@ -24,3 +24,6 @@ pub use open_shell::is_open_shell;
 
 mod construction;
 pub use construction::{make_container, point_on_edge};
+
+mod correct_range;
+pub use correct_range::{correct_range_edges, correct_range_face};
