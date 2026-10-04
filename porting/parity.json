@@ -226482,6 +226482,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::point_on_surface",
       "status": "partial",
       "notes": "Source translation with 40 native projection/storage cases and eight directional isoline cases; see tools/oracle/tkbo_edge_utilities.md. Located geometry, general splines, degenerate derivative and exceptional paths remain unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::AttachExistingPCurve(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Face &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::attach_existing_pcurve",
+      "status": "partial",
+      "notes": "100 native projection/reversal/rejection/missing/tolerance-increase cases, eight seam cases and a direct static-helper fixture pass. Preserves the pinned seam predicate traversal restart. Located/general spline domains, statuses 2/3/5/6, exceptional mutation cases remain unproven; see tools/oracle/tkbo_attach_existing.md."
     }
   ],
   "tests": [

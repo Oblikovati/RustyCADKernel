@@ -17,3 +17,6 @@ pub use edge_utilities::{
     adjust_pcurve_for_curve, build_pcurve_for_edge_on_face, curve_on_surface_simple,
     intermediate_point, is_edge_isoline, point_on_surface,
 };
+
+mod attach_existing;
+pub use attach_existing::attach_existing_pcurve;

@@ -64,7 +64,7 @@ fn observe(row: &[f64], periodic: bool) -> Vec<f64> {
     }
     output
 }
-fn original_edges(face: &Face) -> (Edge, Edge) {
+pub(super) fn original_edges(face: &Face) -> (Edge, Edge) {
     let mut seam = Edge::default();
     let mut ordinary = Edge::default();
     for shape in Explorer::new(face, ShapeEnum::Edge, ShapeEnum::Shape).unwrap() {
@@ -79,7 +79,7 @@ fn original_edges(face: &Face) -> (Edge, Edge) {
     }
     (seam, ordinary)
 }
-fn split_edge(origin: &Edge, face: &Face, mode: usize) -> Edge {
+pub(super) fn split_edge(origin: &Edge, face: &Face, mode: usize) -> Edge {
     if mode == 4 {
         return topods::edge(&origin.empty_copied().unwrap()).unwrap();
     }

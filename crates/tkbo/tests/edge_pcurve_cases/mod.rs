@@ -168,3 +168,5 @@ mod surface_normal;
 mod seam;
 
 mod utilities;
+
+mod attach;
