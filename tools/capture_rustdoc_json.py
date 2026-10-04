@@ -16,6 +16,8 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TypeAlias
 
+from api_inventory_capture import require_private_item_policy
+
 
 JSONScalar: TypeAlias = None | bool | int | float | str
 JSONValue: TypeAlias = JSONScalar | Sequence["JSONValue"] | Mapping[str, "JSONValue"]
@@ -299,7 +301,8 @@ def capture_command(nightly: str, crate: LibraryCrate, build_dir: pathlib.Path) 
     return [
         "cargo", f"+{nightly}", "rustdoc", "--locked", "--manifest-path", str(ROOT / "Cargo.toml"),
         "--package", crate.package_name, "--lib", "--all-features", "--target-dir", str(build_dir),
-        "-Z", "unstable-options", "--", "--output-format", "json", "-Z", "unstable-options",
+        "-Z", "unstable-options", "--", "--document-private-items", "--output-format", "json",
+        "-Z", "unstable-options",
     ]
 
 
@@ -347,10 +350,12 @@ def capture_manifest(context: dict[str, JSONValue], records: list[dict[str, JSON
         "normalized_public_inventory": False,
         "workspace_library_count": len(records),
         "feature_policy": "all-features per workspace library package",
+        "rustdoc_item_policy": "document-private-items-v1",
         "rustdoc_json_format_version": expected_version,
         "cargo_arguments": [
             "rustdoc", "--locked", "--package {package}", "--lib", "--all-features",
-            "-Z unstable-options", "-- --output-format json -Z unstable-options",
+            "-Z unstable-options",
+            "-- --document-private-items --output-format json -Z unstable-options",
         ],
         "rustdoc_json": records,
         "inputs": context,
@@ -368,6 +373,7 @@ def validate_capture(directory: pathlib.Path, expected: list[LibraryCrate], cont
     manifest = json_object(read_json(directory / "capture-manifest.json"), "capture manifest")
     if manifest.get("normalized_public_inventory") is not False:
         raise ValueError("raw rustdoc capture must not claim normalized inventory completeness")
+    require_private_item_policy(manifest)
     actual_version = json_integer(manifest.get("rustdoc_json_format_version"), "capture format version")
     if actual_version != expected_version:
         raise ValueError(f"capture format version {actual_version} does not match configured {expected_version}")

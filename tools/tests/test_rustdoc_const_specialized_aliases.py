@@ -25,6 +25,7 @@ class ConstSpecializedAliasTests(unittest.TestCase):
             self.assertEqual(declaration_count(inventory, path), 1)
             row = declaration_by_path(inventory, path)
             self.assert_alias_specialization(row, path)
+        assert_no_private_paths(paths)
         self.assertEqual(
             inventory["unresolved_links"],
             ["const-specialized-alias:rustdoc_const_specialized_alias::BoundedBox2:unsupported-impl-where-predicates"],
@@ -43,7 +44,10 @@ class ConstSpecializedAliasTests(unittest.TestCase):
         self.assertEqual(specialization.get("alias_path"), path.rsplit("::", 1)[0])
         self.assertEqual(specialization.get("alias_type_parameter"), "T")
         self.assertEqual(specialization.get("impl_type_parameter"), "T")
-        self.assertEqual(specialization.get("target_path"), "rustdoc_const_specialized_alias::CompactBounds")
+        self.assertEqual(
+            specialization.get("target_path"),
+            "rustdoc_const_specialized_alias::compact::storage::CompactBounds",
+        )
 
     def test_nonliteral_const_alias_is_reported_and_not_expanded(self) -> None:
         document = fixture_document()
@@ -67,6 +71,20 @@ class ConstSpecializedAliasTests(unittest.TestCase):
             "const-specialized-alias:rustdoc_const_specialized_alias::BoundedBox2:unsupported-impl-where-predicates",
             inventory["unresolved_links"],
         )
+
+    def test_default_capture_reports_missing_private_impl_index(self) -> None:
+        inventory = normalize_document(fixture_document(document_private=False))
+        expected = (
+            "const-specialized-alias:rustdoc_const_specialized_alias::CompactBox2:"
+            "target-impl-index-missing"
+        )
+        self.assertIn(expected, inventory["unresolved_links"])
+        self.assertNotIn(alias_method_paths("rustdoc_const_specialized_alias")[0], declaration_paths(inventory))
+
+    def test_private_capture_does_not_publish_private_target_paths(self) -> None:
+        paths = declaration_paths(normalize_fixture())
+        self.assertFalse(any(path.endswith("CompactBounds") for path in paths))
+        assert_no_private_paths(paths)
 
     def test_generic_impl_row_records_const_binding(self) -> None:
         inventory = normalize_fixture()
@@ -95,8 +113,9 @@ def normalize_document(document: dict[str, JSONValue]) -> dict[str, JSONValue]:
     return make_reachable_inventory(document, FIXTURE_ROOT, "rustdoc_const_specialized_alias")
 
 
-def fixture_document() -> dict[str, JSONValue]:
-    path = FIXTURE_ROOT / "rustdoc-61.json"
+def fixture_document(document_private: bool = True) -> dict[str, JSONValue]:
+    artifact = "rustdoc-61.json" if document_private else "rustdoc-61-default.json"
+    path = FIXTURE_ROOT / artifact
     document = json.loads(path.read_text(encoding="utf-8"))
     if document.get("format_version") != 61:
         raise AssertionError("const alias fixture must use rustdoc JSON format 61")
@@ -108,6 +127,13 @@ def declaration_paths(inventory: dict[str, JSONValue]) -> set[str]:
     if not isinstance(rows, list):
         raise AssertionError("normalized declarations must be an array")
     return {row["path"] for row in rows if isinstance(row, dict) and isinstance(row.get("path"), str)}
+
+
+def assert_no_private_paths(paths: set[str]) -> None:
+    private_segments = ("::compact", "::storage", "::box2", "::box3")
+    for path in paths:
+        if any(segment in path for segment in private_segments):
+            raise AssertionError(f"private rustdoc path leaked into public inventory: {path}")
 
 
 def declaration_count(inventory: dict[str, JSONValue], path: str) -> int:

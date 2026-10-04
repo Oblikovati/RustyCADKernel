@@ -161,9 +161,13 @@ def alias_target_impl_members(
     if owner is None:
         return []
     _, body = read_inner(owner)
+    impl_ids = array_value(body.get("impls", []), "impls")
+    if not impl_ids:
+        state.unresolved.append(f"const-specialized-alias:{path}:target-impl-index-missing")
+        return []
     return [
         member
-        for impl_id in array_value(body.get("impls", []), "impls")
+        for impl_id in impl_ids
         for member in matching_alias_impl(
             impl_id, target_id, const_value, alias_type, path, state, read_inner, render_impl
         )

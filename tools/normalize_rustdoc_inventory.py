@@ -355,7 +355,8 @@ def normalized_manifest(
         "inventory_kind": "reachable-rust-public-surface",
         "cross_language_completeness_claim": False,
         "rustdoc_format_version": format_version,
-        "visibility_policy": "public-reachable-including-doc-hidden-v1",
+        "visibility_policy": "public-reachable-from-private-item-capture-v1",
+        "rustdoc_item_policy": manifest.get("rustdoc_item_policy"),
         "capture_manifest_sha256": sha256_bytes(manifest_path.read_bytes()),
         "capture_workspace_revision": capture_revision(manifest),
         "tool_implementation_sha256": {
@@ -366,6 +367,7 @@ def normalized_manifest(
         "capture_inputs": selected_capture_inputs(manifest),
         "crates": crates,
         "notes": [
+            "Private rustdoc items support alias resolution but are not emitted unless publicly reachable.",
             "Only reachable public Rust surfaces are listed.",
             "Unsupported rustdoc kinds and unresolved links are explicit per crate.",
             "This inventory is not an OCCT-to-Rust parity proof.",

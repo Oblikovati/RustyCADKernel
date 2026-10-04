@@ -8,6 +8,7 @@ from pathlib import Path
 
 from capture_rustdoc_json import (
     LibraryCrate,
+    capture_command,
     require_unchanged_inputs,
     validate_capture,
     digest_paths,
@@ -43,6 +44,12 @@ class WorkspaceLibraryTests(unittest.TestCase):
 
 
 class RustdocArtifactTests(unittest.TestCase):
+    def test_capture_command_requests_private_items(self):
+        crate = LibraryCrate("demo-id", "rustycad-demo", Path("Cargo.toml"), "demo", Path("."), ())
+        command = capture_command("nightly-2026-09-25", crate, Path("target"))
+        separator = command.index("--")
+        self.assertIn("--document-private-items", command[separator + 1 :])
+
     def test_artifact_requires_a_matching_root_and_index(self):
         document = {"root": 0, "index": {"0": {"name": "rustycad_demo"}},
                     "paths": {}, "format_version": 61}
@@ -81,6 +88,8 @@ class RustdocArtifactTests(unittest.TestCase):
             context = {"source": "pinned"}
             manifest = {"raw_capture_complete": True, "normalized_public_inventory": False,
                         "rustdoc_json_format_version": 61,
+                        "rustdoc_item_policy": "document-private-items-v1",
+                        "cargo_arguments": ["-- --document-private-items --output-format json -Z unstable-options"],
                         "inputs": context,
                         "rustdoc_json": [{"library_target": "rustycad_demo",
                                           "artifact": "crates/rustycad_demo.json",
@@ -91,6 +100,17 @@ class RustdocArtifactTests(unittest.TestCase):
                                  "rustycad_demo", root, ())
             with self.assertRaisesRegex(ValueError, "missing or changed"):
                 validate_capture(root, [crate], context, 61)
+
+    def test_capture_rejects_missing_private_item_policy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "capture-manifest.json").write_text(json.dumps({
+                "raw_capture_complete": True,
+                "normalized_public_inventory": False,
+                "rustdoc_json_format_version": 61,
+            }))
+            with self.assertRaisesRegex(ValueError, "document-private-items"):
+                validate_capture(root, [], {}, 61)
 
     def test_file_fingerprint_changes_when_an_input_changes(self):
         with tempfile.TemporaryDirectory() as directory:
