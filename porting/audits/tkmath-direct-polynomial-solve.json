@@ -38,7 +38,7 @@
         "executable_path": "/tmp/tkmath-direct-roots-solve-reuse-main",
         "executable_sha256": "36f2c306ca2df224b77e9894a5596e0431340fcf45f8a0496fc7f250e3eb0f57",
         "captured_output_path": "/tmp/tkmath-direct-roots-solve-reuse-main.out",
-        "captured_output_sha256": "912e7e1444fd6b9df5e71cb0a36f890be30b2855c332363fdd77f17226bda",
+        "captured_output_sha256": "912e7e1444fd6b9df5e71cb0a36f890be30b2855c332362363fdd77f17226bda",
         "linked_native_libraries": [
           {
             "path": "target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0",
@@ -49,10 +49,10 @@
             "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
           }
         ],
-        "compile_command": "Not retained by replay owner; ldd confirms links to the recorded target/occt-modeling-full TKMath/TKernel shared libraries.",
-        "replay_command": "LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi /tmp/tkmath-direct-roots-solve-reuse-main > /tmp/tkmath-direct-roots-solve-reuse-main.out",
+        "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_direct_roots_solve_reuse.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkmath-direct-roots-solve-reuse-main",
+        "replay_command": "/tmp/tkmath-direct-roots-solve-reuse-main > /tmp/tkmath-direct-roots-solve-reuse-main.out",
         "comparison": "captured output is byte-for-byte identical to tools/oracle/tkmath_direct_roots_solve_reuse.expected",
-        "source_of_profile": "root native replay on integrated main; retained executable and output inspected in this task"
+        "source_of_profile": "Root rebuilt and replayed after the 3d6d63ae base verifier runs, against the recorded current modeling-full libraries."
       }
     ]
   },
