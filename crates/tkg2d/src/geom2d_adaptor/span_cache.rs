@@ -84,7 +84,7 @@ pub fn bezier_span_cache<P: CurvePoint>(
 ) -> Result<Cache, Failure> {
     let knots: &'static [f64] = flat_bezier_knots(degree)?;
     let flat = Array1::from_shared(&knots[..2 * (degree as usize + 1)], 1);
-    let mut cache = Cache::new(degree, periodic, &flat, poles, weights)?;
+    let cache = Cache::new(degree, periodic, &flat, poles, weights)?;
     cache.build_cache(u, &flat, poles, weights)?;
     Ok(cache)
 }

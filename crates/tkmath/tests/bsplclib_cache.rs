@@ -81,7 +81,7 @@ fn BSplCLib_CacheTest__D0_NonRationalCurve3D() {
     let aDegree: i32 = 3;
 
     // Create cache
-    let mut aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
+    let aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
     aCache.build_cache(0.5, &aFlatKnots, &aPoles, None).unwrap();
 
     // Test at several parameter values
@@ -135,7 +135,7 @@ fn BSplCLib_CacheTest__D1_NonRationalCurve3D() {
     let aDegree: i32 = 3;
 
     // Create cache
-    let mut aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
+    let aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
     aCache.build_cache(0.5, &aFlatKnots, &aPoles, None).unwrap();
 
     // Test at several parameter values
@@ -212,7 +212,7 @@ fn BSplCLib_CacheTest__D2_NonRationalCurve3D() {
     let aDegree: i32 = 3;
 
     // Create cache
-    let mut aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
+    let aCache = Cache::new(aDegree, false, &aFlatKnots, &aPoles, None).unwrap();
     aCache.build_cache(0.5, &aFlatKnots, &aPoles, None).unwrap();
 
     // Test at several parameter values

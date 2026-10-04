@@ -56,7 +56,7 @@ impl BezierSurfaceArrays {
     fn cache(&self) -> Result<Cache, Failure> {
         let weights = self.weights.as_ref();
         let (u_flat, v_flat) = (&self.u_flat, &self.v_flat);
-        let mut cache: Cache = Cache::new(
+        let cache: Cache = Cache::new(
             self.u_degree,
             false,
             u_flat,

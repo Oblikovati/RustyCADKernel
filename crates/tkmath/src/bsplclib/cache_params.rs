@@ -8,7 +8,7 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 
 /// Span of a cached B-spline or Bezier parameterization (`BSplCLib_CacheParams`).
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct CacheParams {
     /// Degree of the B-spline (or Bezier).
     pub degree: i32,

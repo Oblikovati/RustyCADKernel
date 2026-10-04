@@ -98,7 +98,7 @@ fn class_cache<P: CurvePoint>(
     u: f64,
     params: &[f64],
 ) -> Result<(), Failure> {
-    let mut cache = Cache::new(c.deg, c.per, &c.k, poles, c.w())?;
+    let cache = Cache::new(c.deg, c.per, &c.k, poles, c.w())?;
     cache.build_cache(u, &c.k, poles, c.w())?;
     for &t in params {
         oi(i32::from(cache.is_cache_valid(t)));

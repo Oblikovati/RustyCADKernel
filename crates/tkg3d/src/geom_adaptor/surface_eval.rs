@@ -136,7 +136,7 @@ fn bezier_cache(surface: &GeomBezierSurface, (u, v): (f64, f64)) -> Result<Cache
     let (degree_u, degree_v) = (surface.u_degree(), surface.v_degree());
     let (flat_u, flat_v) = (bezier_knots(degree_u)?, bezier_knots(degree_v)?);
     let (poles, weights) = (surface.poles(), surface.weights());
-    let mut cache = Cache::new(
+    let cache = Cache::new(
         degree_u,
         surface.is_u_periodic(),
         &flat_u,

@@ -26,8 +26,7 @@ impl<P: CurvePoint + 'static> BezierCurveArrays<P> {
     /// `arrays.cache()?.d0::<Point3>(0.25)?`.
     pub fn cache(&self) -> Result<Cache, Failure> {
         let weights: Option<&Array1<'static, f64>> = self.weights.as_ref();
-        let mut cache: Cache =
-            Cache::new(self.degree, false, &self.flat_knots, &self.poles, weights)?;
+        let cache: Cache = Cache::new(self.degree, false, &self.flat_knots, &self.poles, weights)?;
         cache.build_cache(0.5, &self.flat_knots, &self.poles, weights)?;
         Ok(cache)
     }
