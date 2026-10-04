@@ -8,7 +8,7 @@ mod vertices;
 use super::{BOPAlgoPaveFiller, Glue};
 use crate::bop_algo::AlertIntersectionOfPairOfShapesFailed;
 use crate::{
-    bop_ds::{DataStructure, InterfEF, InterfVF, Pave, PaveBlockHandle, ShapeInfo},
+    bop_ds::{DataStructure, InterfEF, InterfVF, PaveBlockHandle, ShapeInfo},
     bop_tools::make_new_vertex_edge_face,
     int_tools::{CommonPrt, Context, EdgeFace, Range},
 };
@@ -23,7 +23,7 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::{message::AlertHandle, ncollection::Map, standard::Failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::Arc;
-use vertices::{append_pave, append_unique, fused_vertex, pending_vertex_groups};
+use vertices::{fused_vertex, pending_vertex_groups};
 
 #[derive(Clone)]
 pub(super) struct EdgeFaceCandidate {
@@ -41,7 +41,6 @@ struct PendingEFVertex {
     candidate: EdgeFaceCandidate,
     common: CommonPrt,
     vertex: Vertex,
-    parameter: f64,
 }
 
 #[derive(Default)]
@@ -84,7 +83,8 @@ impl BOPAlgoPaveFiller {
         collect_edge_face_results(self, candidates, &mut results)?;
         self.apply_common_faces(&results.common_faces)?;
         self.update_vertices_of_common_blocks()?;
-        self.commit_pending_vertices(results.vertices, &mut results.edges, &mut results.faces)?;
+        let associations = self.commit_pending_vertices(results.vertices, &mut results.faces)?;
+        results.edges = self.intersect_ef_generated_vertices(&associations)?;
         self.split_intersected_edges(&results.edges)?;
         self.structure_mut()?
             .update_face_info_in_map(&results.faces)
@@ -135,27 +135,27 @@ impl BOPAlgoPaveFiller {
     fn commit_pending_vertices(
         &mut self,
         pending: Vec<PendingEFVertex>,
-        changed_edges: &mut Vec<i32>,
         changed_faces: &mut Map<i32>,
-    ) -> Result<(), Failure> {
+    ) -> Result<Vec<(PaveBlockHandle, i32)>, Failure> {
         let groups = pending_vertex_groups(&pending, self.options.fuzzy_value())?;
+        let mut associations = Vec::new();
         for group in groups {
-            self.commit_vertex_group(&pending, &group, changed_edges, changed_faces)?;
+            self.commit_vertex_group(&pending, &group, &mut associations, changed_faces)?;
         }
-        Ok(())
+        Ok(associations)
     }
 
     fn commit_vertex_group(
         &mut self,
         pending: &[PendingEFVertex],
         group: &[usize],
-        changed_edges: &mut Vec<i32>,
+        associations: &mut Vec<(PaveBlockHandle, i32)>,
         changed_faces: &mut Map<i32>,
     ) -> Result<(), Failure> {
         let vertex = fused_vertex(pending, group)?;
         let index = self.append_generated_vertex(&vertex)?;
         for event in group {
-            self.commit_vertex_event(&pending[*event], index, changed_edges, changed_faces);
+            self.commit_vertex_event(&pending[*event], index, associations, changed_faces);
         }
         Ok(())
     }
@@ -164,12 +164,11 @@ impl BOPAlgoPaveFiller {
         &mut self,
         event: &PendingEFVertex,
         vertex: i32,
-        changed_edges: &mut Vec<i32>,
+        associations: &mut Vec<(PaveBlockHandle, i32)>,
         changed_faces: &mut Map<i32>,
     ) {
         self.append_edge_face_record(&event.candidate, &event.common, vertex);
-        append_pave(&event.candidate.block, Pave::new(vertex, event.parameter));
-        append_unique(changed_edges, event.candidate.edge_index);
+        associations.push((Arc::clone(&event.candidate.block), vertex));
         changed_faces.add(event.candidate.face_index);
     }
 
@@ -224,7 +223,6 @@ impl BOPAlgoPaveFiller {
             candidate: candidate.clone(),
             common: common.clone(),
             vertex,
-            parameter,
         });
         results.faces.add(candidate.face_index);
         Ok(())

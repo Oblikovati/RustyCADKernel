@@ -1,16 +1,8 @@
 //! Fuses coincident vertex hits into common topology for intersecting edge blocks.
 use super::PendingEFVertex;
-use crate::bop_ds::{Pave, PaveBlockHandle};
 use crate::bop_tools::{compute_vertices, make_vertex};
 use rustycad_tkbrep::topods::Vertex;
 use rustycad_tkernel::{ncollection::List, standard::Failure};
-
-pub(super) fn append_pave(block: &PaveBlockHandle, pave: Pave) {
-    block
-        .lock()
-        .expect("pave-block lock must not be poisoned")
-        .append_ext_pave1(pave);
-}
 
 pub(super) fn pending_vertex_groups(
     pending: &[PendingEFVertex],
@@ -77,10 +69,4 @@ pub(super) fn fused_vertex(
     let mut vertex = Vertex::default();
     make_vertex(&shapes, &mut vertex)?;
     Ok(vertex)
-}
-
-pub(super) fn append_unique(indices: &mut Vec<i32>, index: i32) {
-    if !indices.contains(&index) {
-        indices.push(index);
-    }
 }
