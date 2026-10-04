@@ -91,6 +91,45 @@ fn incremental_free_is_a_noop_and_reset_refuses_live_owners() {
 }
 
 #[test]
+fn incremental_thread_safety_request_keeps_parallel_allocations_unique() {
+    use std::sync::Arc;
+    use std::thread;
+
+    const THREADS: usize = 4;
+    const PER_THREAD: usize = 128;
+    let allocator = Arc::new(BaseAllocator::incremental(4096));
+    allocator.set_thread_safe(true).unwrap();
+    let handles: Vec<_> = (0..THREADS)
+        .map(|_| {
+            let allocator = Arc::clone(&allocator);
+            thread::spawn(move || {
+                (0..PER_THREAD)
+                    .map(|_| address(allocator.allocate_raw(64).unwrap()))
+                    .collect::<Vec<_>>()
+            })
+        })
+        .collect();
+    let mut addresses: Vec<usize> = handles
+        .into_iter()
+        .flat_map(|handle| handle.join().unwrap())
+        .collect();
+    addresses.sort_unstable();
+    addresses.dedup();
+    assert_eq!(addresses.len(), THREADS * PER_THREAD);
+    allocator.set_thread_safe(false).unwrap();
+    allocator.reset(false).unwrap();
+    assert!(allocator.allocate_raw(1).is_some());
+}
+
+#[test]
+fn thread_safety_request_rejects_non_incremental_allocator() {
+    let error = BaseAllocator::common().set_thread_safe(true).unwrap_err();
+    assert_eq!(error.exception_type(), "Standard_TypeMismatch");
+    assert!(error.message().contains("NCollection_BaseAllocator"));
+    assert!(error.message().contains("NCollection_IncAllocator"));
+}
+
+#[test]
 fn accumulating_allocations_descend_rounded_to_four_bytes() {
     let allocator = BaseAllocator::accumulating(64).unwrap();
     let chain = allocator.accumulating_chain();
