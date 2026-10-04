@@ -239,7 +239,9 @@ fn connected_circle_pair(
     let (first_start, first_end) = edge_vertices(&analysis, first);
     let (second_start, second_end) = edge_vertices(&analysis, second);
     if first_end.is_same(&second_start) {
-        ensure_same_circle_support(&first_circle, &second_circle, tolerance)?;
+        if !bspline::aligned_join(first, second, tolerance)? {
+            return Ok(None);
+        }
         if second_end.is_same(&first_start) {
             return Ok(Some((
                 first.clone(),
@@ -256,7 +258,9 @@ fn connected_circle_pair(
         )));
     }
     if second_end.is_same(&first_start) {
-        ensure_same_circle_support(&first_circle, &second_circle, tolerance)?;
+        if !bspline::aligned_join(second, first, tolerance)? {
+            return Ok(None);
+        }
         return Ok(Some((
             second.clone(),
             first.clone(),
@@ -276,30 +280,6 @@ fn circle_pair(first: &Edge, second: &Edge) -> Result<Option<(Circle3, Circle3)>
         return Ok(None);
     }
     Ok(Some((first_adaptor.circle()?, second_adaptor.circle()?)))
-}
-
-fn ensure_same_circle_support(
-    first: &Circle3,
-    second: &Circle3,
-    tolerance: f64,
-) -> Result<(), Failure> {
-    let same_radius = (first.radius() - second.radius()).abs() <= tolerance;
-    let same_plane = first
-        .position()
-        .direction()
-        .is_parallel(second.position().direction(), tolerance);
-    if same_radius && same_plane {
-        return Ok(());
-    }
-    Err(Failure::with_type(
-        "Standard_NotImplemented",
-        &format!(
-            "UnifySameDomain circle supports have radii {} and {}; expected equal radii and parallel axes",
-            first.radius(),
-            second.radius()
-        ),
-        "",
-    ))
 }
 
 fn replace_circle_pair(
