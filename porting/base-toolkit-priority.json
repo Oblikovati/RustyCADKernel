@@ -116,7 +116,7 @@
       "toolkit": "TKernel",
       "surface": "Standard_CString Printf/Fprintf/Sprintf/Vsprintf",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
-      "gap": "No Rust C-locale formatting API; Message_Msg, Standard_GUID and OSD consume these functions. Design typed arguments and output/writer interfaces preserving native percent-format behavior.",
+      "gap": "No public Standard_CString formatting API. Existing private crates/tkernel/src/c_format.rs already implements the subset consumed by Message/OSD; reuse and extend it rather than duplicating formatting logic. Expose typed arguments and output/writer interfaces preserving native percent-format behavior.",
       "audit_revision": "5b5912bd"
     },
     {
