@@ -2,20 +2,22 @@
 
 Pinned source: OCCT revision `3d097a0328e71b826377d4814ab05ec3c3d23871`;
 `BSplCLib_Cache.cxx` SHA-256 `ba74142b88030fc10b7e79a778c1303734e13a1991a9c800a893c377b4fabc59`;
-`BSplCLib_Cache.hxx` SHA-256 `a2fa139ecc1871424bf722abf3f8beb041cf4969b2670825c56ab9fe38362ad9`.
+`BSplCLib_Cache.hxx` SHA-256 `a2fa139ecc1871424bf722abf3f8beb041cf4969b2670825c56ab9fe38362ad9`;
+`PLib.cxx` SHA-256 `c408b3a963e5e2161934162ec47868779303f6f7033033beee929bc43acb9fe6`.
 
 The protected native helper is called through a derived `ExposedCache` in
 `tkmath_cache_derivatives.cxx`. It builds a degree-1 2D cache, evaluates local
 parameter `0.25` through derivative order 1 into six caller values initialized
 to `-77`, then requests order 3 from a degree-1 curve and prints all ten slots.
 It also evaluates a rational 3D curve on a non-unit `[2, 6]` span through both
-the global-parameter and local-parameter protected helpers.
+the global-parameter and local-parameter protected helpers. Finally it requests
+order 5 from the global helper for a non-rational quartic Bezier on `[2, 6]`.
 
 Compiler used for the checked-in output: `g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1)
-13.3.0`. The exact command below produced `/tmp/tkmath-cache-derivatives-pinned`;
+13.3.0`. The exact command below produced `/tmp/tkmath-cache-high-derivatives`;
 the checked-in expected file was copied from its stdout and verified with `cmp`.
-Binary SHA-256: `6fec632a0490fea53b6ebd13e2bcbc71e835b55b706e4bb84c684c07706f7ea7`;
-captured stdout SHA-256: `828831e58ea807ad2588a9feafaddba4804ba03aab8f4d86e42a21ecd9cad316`.
+Binary SHA-256: `c399226051c268d2715eeca02ba7fa545d0448cea28552975819416b71d9ef78`;
+captured stdout SHA-256: `0e4b9d07f048d7f30be71d3185ba6c42fac7d242114dc22bfdf353e311d741eb`.
 
 Reproduce against the pinned OCCT headers and libraries:
 
@@ -25,15 +27,15 @@ g++ -std=c++17 \
   tools/oracle/tkmath_cache_derivatives.cxx \
   -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
   -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
-  -lTKMath -lTKernel -o /tmp/tkmath-cache-derivatives-pinned
-/tmp/tkmath-cache-derivatives-pinned
+  -lTKMath -lTKernel -o /tmp/tkmath-cache-high-derivatives
+/tmp/tkmath-cache-high-derivatives
 ```
 
 To regenerate and check the expected output byte-for-byte, use:
 
 ```sh
-/tmp/tkmath-cache-derivatives-pinned > /tmp/tkmath-cache-derivatives-pinned.out
-cmp /tmp/tkmath-cache-derivatives-pinned.out tools/oracle/tkmath_cache_derivatives.expected
+/tmp/tkmath-cache-high-derivatives > /tmp/tkmath-cache-high-derivatives.out
+cmp /tmp/tkmath-cache-high-derivatives.out tools/oracle/tkmath_cache_derivatives.expected
 ```
 
 Observed OCCT output begins with `1 2 4 8 -77 -77`, then `1 2 4 8 0 0 0 0
@@ -44,6 +46,10 @@ returns derivatives in the original curve-parameter units.
 Both leave spare capacity alone. Rust exposes a bounded slice operation for
 this protected subclass contract; too-short slices return
 `Standard_DimensionMismatch` before changing any element. Its explicit order
-limit is 0..=3, matching the fixed four-row buffer; higher requests are outside
-this compatibility claim. Rust's rational result comparison uses absolute
+limit is 0..=3 for `calculateDerivativeLocal` (the header documents orders
+1..=3; order zero is also a defined value-only evaluation), and for rational
+global requests, matching the native fixed 16-value temporary.
+Non-rational global requests use caller storage and support higher orders: the
+order-5 quartic row confirms a nonzero fourth derivative, a cleared fifth row,
+and untouched spare slots. Rust's rational result comparison uses absolute
 tolerance `1e-14`; it does not assert bit-for-bit identity.

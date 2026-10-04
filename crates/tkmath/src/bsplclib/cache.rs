@@ -182,10 +182,12 @@ impl Cache {
     /// Derivatives up to `derivative` at the curve parameter
     /// (`calculateDerivative`); `cache.derivatives(0.5, 2)?`.
     pub fn derivatives(&self, parameter: f64, derivative: i32) -> Result<[f64; 16], Failure> {
+        validate_derivative_order(self.is_rational, false, derivative)?;
         self.derivatives_local(self.local_parameter(parameter), derivative)
     }
 
-    /// Writes packed rows in curve-parameter units (`calculateDerivative`);
+    /// Writes packed curve-parameter rows (`calculateDerivative`); non-rational caches
+    /// support any order that fits `output`;
     /// extra capacity stays unchanged;
     /// `cache.derivatives_into(0.5, 1, &mut rows)?`.
     pub fn derivatives_into(
@@ -194,7 +196,17 @@ impl Cache {
         derivative: i32,
         output: &mut [f64],
     ) -> Result<(), Failure> {
-        self.derivatives_local_into(self.local_parameter(parameter), derivative, output)
+        let local_param: f64 = self.local_parameter(parameter);
+        if !self.is_rational && derivative > 3 {
+            let needed: usize =
+                ensure_derivative_output_capacity(self, derivative, output.len(), true)?;
+            return self.derivatives_non_rational_local_into(
+                local_param,
+                derivative,
+                &mut output[..needed],
+            );
+        }
+        self.derivatives_local_into(local_param, derivative, output)
     }
 
     /// Writes packed rows for a normalized span parameter, scaled to curve-parameter
@@ -206,9 +218,30 @@ impl Cache {
         derivative: i32,
         output: &mut [f64],
     ) -> Result<(), Failure> {
-        let needed: usize = ensure_derivative_output_capacity(self, derivative, output.len())?;
+        let needed: usize =
+            ensure_derivative_output_capacity(self, derivative, output.len(), false)?;
         let values: [f64; 16] = self.derivatives_local(local_param, derivative)?;
         output[..needed].copy_from_slice(&values[..needed]);
+        Ok(())
+    }
+
+    fn derivatives_non_rational_local_into(
+        &self,
+        local_param: f64,
+        derivative: i32,
+        output: &mut [f64],
+    ) -> Result<(), Failure> {
+        let (degree, order) = non_rational_orders(self, derivative)?;
+        clear_uncomputed_derivative_rows(output, degree, derivative, self.row_length);
+        eval_polynomial(
+            local_param,
+            order,
+            degree,
+            self.row_length as i32,
+            &self.poles_weights,
+            output,
+        )?;
+        scale_derivative_rows(output, order, self.row_length, self.params.span_length);
         Ok(())
     }
 
@@ -233,14 +266,7 @@ impl Cache {
             &self.poles_weights,
             &mut polynomial,
         )?;
-        // Unnormalized by successive divisions, stabler than a precomputed inverse.
-        let mut factor: f64 = 1.0;
-        for row in 1..=order.max(0) as usize {
-            factor /= self.params.span_length;
-            for value in &mut polynomial[dim * row..dim * (row + 1)] {
-                *value *= factor;
-            }
-        }
+        scale_derivative_rows(&mut polynomial, order.max(0), dim, self.params.span_length);
         if !self.is_rational {
             return Ok(polynomial);
         }
@@ -253,8 +279,9 @@ fn ensure_derivative_output_capacity(
     cache: &Cache,
     derivative: i32,
     actual: usize,
+    allow_high_order: bool,
 ) -> Result<usize, Failure> {
-    let expected: usize = derivative_output_length(cache, derivative)?;
+    let expected: usize = derivative_output_length(cache, derivative, allow_high_order)?;
     if actual < expected {
         return Err(Failure::with_type(
             "Standard_DimensionMismatch",
@@ -265,16 +292,66 @@ fn ensure_derivative_output_capacity(
     Ok(expected)
 }
 
-fn derivative_output_length(cache: &Cache, derivative: i32) -> Result<usize, Failure> {
-    validate_derivative_order(derivative)?;
-    Ok((derivative as usize + 1) * cache.derivative_stride())
+fn derivative_output_length(
+    cache: &Cache,
+    derivative: i32,
+    allow_high_order: bool,
+) -> Result<usize, Failure> {
+    validate_derivative_order(cache.is_rational, allow_high_order, derivative)?;
+    let rows: usize = usize::try_from(derivative)
+        .ok()
+        .and_then(|value| value.checked_add(1))
+        .ok_or_else(|| Failure::out_of_range("BSplCLib_Cache derivative row count overflow"))?;
+    rows.checked_mul(cache.derivative_stride())
+        .ok_or_else(|| Failure::out_of_range("BSplCLib_Cache derivative output size overflow"))
 }
 
-fn validate_derivative_order(derivative: i32) -> Result<(), Failure> {
-    if !(0..=3).contains(&derivative) {
+fn validate_derivative_order(
+    is_rational: bool,
+    allow_high_order: bool,
+    derivative: i32,
+) -> Result<(), Failure> {
+    if derivative < 0 || (derivative > 3 && (is_rational || !allow_high_order)) {
         return Err(Failure::out_of_range(&format!(
-            "BSplCLib_Cache derivative order {derivative}; expected 0..=3"
+            "BSplCLib_Cache derivative order {derivative}; expected {}",
+            if is_rational || !allow_high_order {
+                "0..=3"
+            } else {
+                ">= 0"
+            }
         )));
     }
     Ok(())
+}
+
+fn clear_uncomputed_derivative_rows(
+    output: &mut [f64],
+    degree: i32,
+    request: i32,
+    dimension: usize,
+) {
+    if degree < request {
+        let start: usize = degree as usize * dimension;
+        output[start..].fill(0.0);
+    }
+}
+
+fn non_rational_orders(cache: &Cache, derivative: i32) -> Result<(i32, i32), Failure> {
+    let degree: i32 = cache.params.degree;
+    if degree < 0 {
+        return Err(Failure::out_of_range(&format!(
+            "BSplCLib_Cache degree {degree}; expected >= 0"
+        )));
+    }
+    Ok((degree, degree.min(derivative)))
+}
+
+fn scale_derivative_rows(values: &mut [f64], order: i32, dimension: usize, span_length: f64) {
+    let mut factor: f64 = 1.0;
+    for row in 1..=order as usize {
+        factor /= span_length;
+        for value in &mut values[dimension * row..dimension * (row + 1)] {
+            *value *= factor;
+        }
+    }
 }

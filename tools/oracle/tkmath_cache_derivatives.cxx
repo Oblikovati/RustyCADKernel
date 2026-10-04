@@ -1,5 +1,6 @@
 #include <BSplCLib_Cache.hxx>
 #include <NCollection_Array1.hxx>
+#include <algorithm>
 #include <gp_Pnt.hxx>
 #include <gp_Pnt2d.hxx>
 #include <iomanip>
@@ -69,8 +70,25 @@ void rational_3d()
   print_values(local, 8);
 }
 
+void non_rational_order_five_3d()
+{
+  NCollection_Array1<double> knots(1, 10);
+  for (int i = 1; i <= 5; ++i) knots.SetValue(i, 2.0);
+  for (int i = 6; i <= 10; ++i) knots.SetValue(i, 6.0);
+  NCollection_Array1<gp_Pnt> poles(1, 5);
+  for (int i = 1; i <= 4; ++i) poles.SetValue(i, gp_Pnt(0.0, 0.0, 0.0));
+  poles.SetValue(5, gp_Pnt(1.0, 0.0, 0.0));
+  ExposedCache cache(4, false, knots, poles);
+  cache.BuildCache(4.0, knots, poles, nullptr);
+  double output[20] = {};
+  std::fill(output, output + 20, -77.0);
+  cache.Evaluate(4.0, 5, output);
+  print_values(output, 20);
+}
+
 int main()
 {
   local_2d();
   rational_3d();
+  non_rational_order_five_3d();
 }
