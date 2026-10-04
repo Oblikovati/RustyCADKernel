@@ -1,4 +1,6 @@
 //! Native p-curve range repair behavior for `ShapeFix_Wire::FixGap2d(..., false)`.
+#[path = "support/wire_gap2d_cubic.rs"]
+mod cubic;
 #[path = "support/wire_gap2d_ranges.rs"]
 mod support;
 use rustycad_tkbrep::{brep::BRepTool, topods};
@@ -330,6 +332,32 @@ fn multispan_bspline_intersection_respects_internal_knot() {
         &face,
         2,
         [0.44364916731037085, 1.0, 0.44364916731037085, 0.1, 1.0, 0.1],
+    );
+}
+
+#[test]
+fn cubic_bspline_intersection_matches_native_parameter() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.0, 0.1, 0.0), Point3::new(1.0, 0.1, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    cubic::set_cubic_spline_and_line(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bspline_pcurve(&tool, &face, 1, [0.0, 0.354_292_891_867_218_2]);
+    assert_line_observation(
+        &tool,
+        &face,
+        2,
+        [
+            0.354_292_891_867_218_2,
+            1.0,
+            0.354_292_891_867_218_2,
+            0.1,
+            1.0,
+            0.1,
+        ],
     );
 }
 

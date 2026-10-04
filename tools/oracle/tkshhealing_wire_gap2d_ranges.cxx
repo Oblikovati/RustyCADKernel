@@ -473,7 +473,6 @@ void print_failure_state(const char* exception, ShapeFix_Wire& tool) {
   }
   std::cout << '\n';
 }
-
 #include "tkshhealing_wire_gap2d_ranges_boundary.inc"
 
 int main() {
@@ -490,6 +489,7 @@ int main() {
   run_bezier_line_pcurves();
   run_bspline_line_pcurves();
   run_multispan_bspline_line_pcurves();
+  run_cubic_bspline_line();
   run_tangent_parabola_line();
   run_tangent_bspline_line();
   run_parabola_line_extension();
