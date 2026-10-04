@@ -1,7 +1,7 @@
 //! Argument and result state inherited by General Fuse and Boolean builders.
 use super::{Glue, Options};
 use rustycad_tkbrep::{topods::Shape, toptools::MapOfShape};
-use rustycad_tkernel::{impl_transient, ncollection::List, standard::StandardTransient};
+use rustycad_tkernel::ncollection::List;
 
 /// The source-pinned argument and option state of `BOPAlgo_Builder`.
 /// Boolean execution is supplied by `BOPAlgo_PaveFiller` and is not part of this state slice.
@@ -12,7 +12,6 @@ use rustycad_tkernel::{impl_transient, ncollection::List, standard::StandardTran
 /// assert!(builder.arguments().is_empty());
 /// ```
 pub struct BOPAlgoBuilder {
-    parent: StandardTransient,
     options: Options,
     shape: Shape,
     arguments: List<Shape>,
@@ -22,8 +21,6 @@ pub struct BOPAlgoBuilder {
     check_inverted: bool,
     fill_history: bool,
 }
-
-impl_transient!(BOPAlgoBuilder, "BOPAlgo_Builder", StandardTransient, parent);
 
 impl Default for BOPAlgoBuilder {
     fn default() -> Self {
@@ -35,7 +32,6 @@ impl BOPAlgoBuilder {
     /// Creates builder state with OCCT defaults; `BOPAlgoBuilder::new()`.
     pub fn new() -> Self {
         Self {
-            parent: StandardTransient::default(),
             options: Options::new(),
             shape: Shape::default(),
             arguments: List::default(),
