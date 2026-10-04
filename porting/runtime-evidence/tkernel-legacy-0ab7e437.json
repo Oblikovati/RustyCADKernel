@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "source_bound_tkernel_legacy_runtime_join",
+  "source_revision": "0ab7e437be8da558a8c8954fb47d827a953a2d7a",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "profile": "linux-gcc-c-locale",
+  "declarations_mapped": 1316,
+  "native_runtime_cases_passed": 1521,
+  "native_runtime_cases_upstream_skipped": 1,
+  "rust_runtime_cases_passed": 1522,
+  "joined_declarations_passed": 1315,
+  "joined_declarations_upstream_skipped": 1,
+  "differential_cases_passed": 201890,
+  "unclaimed_runtime_cases": 0,
+  "archive": "tkernel-legacy-0ab7e437.tar.gz",
+  "archive_sha256": "692476bdf7fe8b58714a32f873dd1c338db4f95bca0fa3a4f2a32a4dc5e6ff15",
+  "archive_files": 192,
+  "report_sha256": "51f3bcb9413f8adeee2f65dd24077325f47c06b289a953248385a3c722df7e93",
+  "join_sha256": "318d21afa9e0764b04383190e47913ad437be81589232f2dedf83d6cd7047711",
+  "native_executable_sha256": "e6a153c60158f43077ab76f73270184fcc99e0b64d7619ed2db498ec3ee26ad5",
+  "full_occt_api_parity_proven": false,
+  "full_occt_legacy_runtime_parity_proven": false,
+  "limitations": [
+    "Counts distinguish source declarations, typed runtime expansions, and CTest registrations.",
+    "OCC23497 remains the approved upstream skip; Rust separately tests current behavior.",
+    "Full TKernel API, DRAW and configuration/platform acceptance remain incomplete.",
+    "Archive retains current-run text artifacts (from configure.log timestamp onward); compiled objects/binaries are omitted. Prior relocated-cache configuration failure is retained separately."
+  ],
+  "command": "python3 tools/verify_tkernel.py --source ../OCCT --jobs 4",
+  "cargo_target_directory": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target"
+}
