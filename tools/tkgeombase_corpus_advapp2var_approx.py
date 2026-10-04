@@ -76,6 +76,7 @@ def append_square_requests(requests: list[str], rng: Values) -> None:
         fid, iso, tconst, domain, order, ideriv, nbroot, ndgjac, ncflim, nbcrmx, eps = fields
         requests.append(line('aa_mma2fnc', fid, iso, tconst, domain, order, ideriv, nbroot, ndgjac, ncflim, nbcrmx, eps))
     append_fx6_requests(requests, rng)
+    requests.append(line('aa_mma2fnc_mut_order'))
 
 
 def append_fx6_requests(requests: list[str], rng: Values) -> None:

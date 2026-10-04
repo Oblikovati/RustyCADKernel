@@ -1,0 +1,41 @@
+{
+  "scope": "AdvApp2Var_EvaluatorFunc2Var mutable callback protocol in mma1fdi_",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_sources": {
+    "AdvApp2Var_EvaluatorFunc2Var.hxx": "2e345d4baa003214c058ab11c4532fdde7a6da414759ad011be6c2e95156dfa8",
+    "AdvApp2Var_ApproxF2var.cxx": "6245348d786f74c1bd85ef6142e4eec038a48cf685511c3b043607dd0a8c269e"
+  },
+  "native_call_evidence": [
+    "AdvApp2Var_ApproxF2var.cxx:596 mma1fdi_ receives pointers for callback state",
+    "AdvApp2Var_ApproxF2var.cxx:720 initial callback followed by reads through ndimen/isofav",
+    "AdvApp2Var_ApproxF2var.cxx:871-955 cross-derivative loops reuse ideru/iderv and increment callback-mutated loop variable"
+  ],
+  "supplemental_case": {
+    "request": "aa_mma2fnc_mut_order",
+    "callback": "sets theVOrder from 1 to 2 after writing within the provided result allocation",
+    "native_and_rust_output": "1 0 3 10 0 0 1 0 1 1 0 1",
+    "input_corpus_sha256": "bb2be5f6db7b70ae7daf9be94307decd26a17a7c6600ed74fc74eb1ccbb14697",
+    "native_output_sha256": "165c626f47d5b24791f37293d1f574aadd41183b3fb288baa950da725e668294",
+    "native_probe_sha256": "fb07d19aa93b999774c68c876bd22a9b23418a8e5fb9acd50d56370dcc205dd8"
+  },
+  "native_libraries": {
+    "TKGeomBase": "7689e777ccbc7051d8375dc5f909a89fda70e518500b1d64894e12e0e9a0a039",
+    "TKG3d": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+    "TKG2d": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce",
+    "TKMath": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "TKernel": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "verification": {
+    "command": "python3 tools/verify_tkgeombase_numeric.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --native-build /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full",
+    "result": "45634 numeric comparisons passed; exact finite bits, NaN classification",
+    "focused_rust_test": "cargo test -p rustycad-tkgeombase --lib mutable_v_order_is_incremented_after_the_callback_returns: passed",
+    "package_tests": "cargo test -p rustycad-tkgeombase: 1220 passed, 0 failed, 19 ignored across 91 test-result groups",
+    "strict_clippy": "cargo clippy -p rustycad-tkgeombase --all-targets -- -D warnings: passed",
+    "numeric_input_sha256": "bb2be5f6db7b70ae7daf9be94307decd26a17a7c6600ed74fc74eb1ccbb14697",
+    "numeric_native_output_sha256": "165c626f47d5b24791f37293d1f574aadd41183b3fb288baa950da725e668294",
+    "numeric_rust_output_sha256": "372f8576627b51f9b666546c6fac5435a8960515828b195706e519349b035cd1",
+    "package_test_log": "porting/audits/advapp2var-package-tests.log",
+    "package_test_log_sha256": "2dc4b9d17c3d68adcf974d50dfb426287c6f14bd58fcf78a9fadc78bc0563c66"
+  },
+  "scope_limit": "Mutable fields are exposed on every callback. This commit propagates reusable mutable state through mma1fdi_ only; mma2ds2_ and higher-level dimension/bounds copy-back remain unaudited and are not claimed complete."
+}
