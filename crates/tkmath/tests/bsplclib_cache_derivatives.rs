@@ -86,19 +86,21 @@ fn raw_derivatives_reject_short_buffers_without_writing() {
 }
 
 #[test]
-fn raw_derivatives_reject_orders_above_native_cache_capacity() {
+fn raw_derivatives_reject_orders_outside_native_cache_capacity() {
     let cache: Cache = cache_2d();
     let mut rows: [f64; 16] = [-77.0; 16];
 
-    let error = cache
-        .derivatives_local_into(0.25, 4, &mut rows)
-        .unwrap_err();
-
-    assert_eq!(error.exception_type(), "Standard_OutOfRange");
-    assert_eq!(rows, [-77.0; 16]);
+    for derivative in [-1, 4] {
+        let error = cache
+            .derivatives_local_into(0.25, derivative, &mut rows)
+            .unwrap_err();
+        assert_eq!(error.exception_type(), "Standard_OutOfRange");
+        assert_eq!(rows, [-77.0; 16]);
+    }
 }
 
 fn assert_near(actual: &[f64], expected: &[f64]) {
+    assert_eq!(actual.len(), expected.len());
     for (left, right) in actual.iter().zip(expected) {
         assert!((left - right).abs() <= 1.0e-14, "{left} != {right}");
     }
