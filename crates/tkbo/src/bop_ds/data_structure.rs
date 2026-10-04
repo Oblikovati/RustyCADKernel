@@ -3,11 +3,15 @@ use super::{
     CommonBlockHandle, FaceInfo, IndexRange, InterfEE, InterfEF, InterfFF, InterfVE, InterfVF,
     InterfVV, Pair, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet, pave_block_handle,
 };
-use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
+use rustycad_tkbrep::{
+    brep::{BRepBuilder, BRepTool},
+    brep_adaptor::BRepAdaptorCurve,
+};
 use rustycad_tkernel::ncollection::{DataMap, DynamicArray, Map};
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
@@ -266,6 +270,15 @@ impl DataStructure {
             "BOPDS_DS::PaveBlocks",
         )?;
         Ok(&self.pave_blocks_pool[slot])
+    }
+
+    /// Validates cached shrunk endpoints against the source edge; `ds.is_valid_shrunk_data(&block)?`.
+    pub fn is_valid_shrunk_data(&self, block: &PaveBlockHandle) -> Result<bool, Failure> {
+        let locked = block.lock().expect("pave-block lock must not be poisoned");
+        if !locked.has_shrunk_data() {
+            return Ok(false);
+        }
+        valid_shrunk_endpoints(self, &locked)
     }
 
     /// Finds edges sharing a source vertex in native insertion order.
@@ -827,6 +840,34 @@ fn compute_endpoint_parameter(vertex: &Vertex, edge: &Edge) -> Result<f64, Failu
         return Ok(last);
     }
     Ok(0.0)
+}
+
+fn valid_shrunk_endpoints(structure: &DataStructure, block: &PaveBlock) -> Result<bool, Failure> {
+    let edge = Edge::unchecked(structure.shape(block.original_edge())?.clone());
+    let curve = BRepAdaptorCurve::with_edge(&edge)?;
+    let epsilon = BRepTool::edge_tolerance(&edge)? * 0.01;
+    let (first, last, _, _) = block.shrunk_data();
+    let (first_vertex, last_vertex) = block.indices();
+    for (index, parameter) in [(first_vertex, first), (last_vertex, last)] {
+        if !valid_shrunk_endpoint(structure, &curve, index, parameter, epsilon)? {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+fn valid_shrunk_endpoint(
+    structure: &DataStructure,
+    curve: &BRepAdaptorCurve,
+    vertex_index: i32,
+    parameter: f64,
+    epsilon: f64,
+) -> Result<bool, Failure> {
+    let vertex = Vertex::unchecked(structure.shape(vertex_index)?.clone());
+    let tolerance = BRepTool::vertex_tolerance(&vertex)? + rustycad_tkernel::precision::confusion();
+    let vertex_point = BRepTool::pnt(&vertex)?;
+    let edge_point = curve.value(parameter)?;
+    Ok(tolerance - vertex_point.distance(&edge_point) <= epsilon)
 }
 
 fn checked_slot(index: i32, length: usize, operation: &str) -> Result<usize, Failure> {

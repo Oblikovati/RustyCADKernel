@@ -1,10 +1,12 @@
 //! Native `BOPAlgo_PaveFiller::Init` state and broad-phase preparation.
+#[path = "pave_filler/shrunk_data.rs"]
+mod shrunk_data;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options};
 use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::{message::AlertHandle, ncollection::List};
+use rustycad_tkernel::{message::AlertHandle, ncollection::List, standard::Handle};
 use std::sync::Arc;
 
 /// `BOPAlgo_PaveFiller` through data-structure and iterator preparation.
@@ -13,7 +15,7 @@ pub struct BOPAlgoPaveFiller {
     options: Options,
     arguments: List<Shape>,
     data_structure: Option<DataStructure>,
-    context: Option<Context>,
+    context: Handle<Context>,
     iterator: Option<BOPDSIterator>,
     non_destructive: bool,
     glue: Glue,
@@ -34,7 +36,7 @@ impl BOPAlgoPaveFiller {
             options: Options::new(),
             arguments: List::default(),
             data_structure: None,
-            context: None,
+            context: Handle::default(),
             iterator: None,
             non_destructive: false,
             glue: Glue::Off,
@@ -93,7 +95,7 @@ impl BOPAlgoPaveFiller {
     /// Borrows the geometric context created for broad-phase OBB checks.
     /// `filler.context().is_some()`.
     pub fn context(&self) -> Option<&Context> {
-        self.context.as_ref()
+        self.context.get()
     }
 
     /// Borrows prepared AABB/OBB candidates; `filler.iterator().is_some()`.
@@ -184,9 +186,9 @@ impl BOPAlgoPaveFiller {
     fn initialize_context_and_iterator(
         &mut self,
     ) -> Result<(), rustycad_tkernel::standard::Failure> {
-        self.context = Some(Context::default());
+        self.context = Handle::new(Context::default());
         self.iterator = Some(BOPDSIterator::default());
-        let context = self.context.as_ref().expect("created context");
+        let context = self.context.get().expect("created context");
         let structure = self
             .data_structure
             .as_ref()
