@@ -7,9 +7,11 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg3d::{adaptor3d::Adaptor3dCurve, geom_adaptor::GeomAdaptorCurve};
+use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, geom_adaptor::GeomAdaptorSurface};
 use rustycad_tkg3d::{geom::GeomSurface, top_abs::Orientation};
 use rustycad_tkmath::{
-    geom_abs::Shape as Continuity,
+    geom_abs::{CurveType, Shape as Continuity, SurfaceType},
     gp::{Direction2, Point2},
     toploc::Location,
 };
@@ -140,6 +142,7 @@ fn set_rail_pcurve(
     options: &PipeFaceOptions<'_>,
     path_tolerance: f64,
 ) -> Result<(), Failure> {
+    remove_degenerated_circle_curve(builder, edge)?;
     let tolerance = path_tolerance.max(BRepTool::edge_tolerance(edge)? + options.error);
     builder.update_edge_pcurve(
         edge,
@@ -158,6 +161,22 @@ fn set_rail_pcurve(
     Ok(())
 }
 
+fn remove_degenerated_circle_curve(builder: &BRepBuilder, edge: &Edge) -> Result<(), Failure> {
+    if !is_degenerated_circle(edge)? {
+        return Ok(());
+    }
+    builder.degenerated(edge, true)
+}
+
+fn is_degenerated_circle(edge: &Edge) -> Result<bool, Failure> {
+    let (curve, _, _) = BRepTool::curve(edge)?;
+    let adaptor = GeomAdaptorCurve::with_curve(&curve)?;
+    if adaptor.get_type()? != CurveType::Circle {
+        return Ok(false);
+    }
+    Ok(adaptor.circle()?.radius() < rustycad_tkernel::precision::confusion())
+}
+
 pub(super) fn make_connectors(
     face: &Face,
     edges: [&Edge; 2],
@@ -166,8 +185,23 @@ pub(super) fn make_connectors(
     options: &PipeFaceOptions<'_>,
 ) -> Result<Vec<Edge>, Failure> {
     let endpoints = connector_endpoints(edges);
-    let (curves, range) = connector_geometry(options.exchange_uv, bounds);
+    let (mut curves, range) = connector_geometry(options.exchange_uv, bounds);
     let builder = BRepBuilder::default();
+    if options.closed_path {
+        if options.exchange_uv {
+            curves.swap(0, 1);
+        }
+        let edge = super::offset_rails_closed::make_closed_connector(
+            &builder,
+            face,
+            [&curves[0], &curves[1]],
+            endpoints[0].clone(),
+            range,
+            path_tolerance,
+            options,
+        )?;
+        return Ok([edge.clone(), edge].into());
+    }
     make_connector_pair(
         &builder,
         face,
@@ -271,6 +305,7 @@ fn make_connector(
     attach_connector_geometry(
         builder,
         &edge,
+        face,
         geometry.curve,
         options.surface,
         geometry.range,
@@ -279,24 +314,21 @@ fn make_connector(
     Ok(edge)
 }
 
-fn supplied_connector(
+pub(super) fn supplied_connector(
     supplied: Option<&Edge>,
     endpoints: [&Vertex; 2],
 ) -> Result<Option<(Edge, bool)>, Failure> {
     let Some(edge) = supplied else {
         return Ok(None);
     };
-    if !edge.location().is_identity() {
-        return Err(unsupported_edge("Connector"));
-    }
-    let (first, last) = vertices(edge, false);
-    if first.is_same(endpoints[0]) && last.is_same(endpoints[1]) {
+    let (first, _) = vertices(edge, false);
+    if first.is_same(endpoints[0]) {
         return Ok(Some((
             Edge::unchecked(edge.oriented(Orientation::Forward)),
             false,
         )));
     }
-    if first.is_same(endpoints[1]) && last.is_same(endpoints[0]) {
+    if first.is_same(endpoints[1]) {
         return Ok(Some((
             Edge::unchecked(edge.oriented(Orientation::Reversed)),
             true,
@@ -305,7 +337,7 @@ fn supplied_connector(
     Ok(None)
 }
 
-fn reverse_connector_curve(
+pub(super) fn reverse_connector_curve(
     curve: &Handle<dyn Geom2dCurve>,
     reverse: bool,
 ) -> Result<Handle<dyn Geom2dCurve>, Failure> {
@@ -316,7 +348,7 @@ fn reverse_connector_curve(
     }
 }
 
-fn reverse_connector_range(range: (f64, f64), reverse: bool) -> (f64, f64) {
+pub(super) fn reverse_connector_range(range: (f64, f64), reverse: bool) -> (f64, f64) {
     if reverse { (-range.1, -range.0) } else { range }
 }
 
@@ -346,7 +378,7 @@ fn update_supplied_connector(
     Ok(edge)
 }
 
-fn add_connector_vertices(
+pub(super) fn add_connector_vertices(
     builder: &BRepBuilder,
     edge: &mut Edge,
     vertices: [&rustycad_tkbrep::topods::Vertex; 2],
@@ -358,16 +390,53 @@ fn add_connector_vertices(
 fn attach_connector_geometry(
     builder: &BRepBuilder,
     edge: &Edge,
+    face: &Face,
     pcurve: &Handle<dyn Geom2dCurve>,
     surface: &Handle<dyn GeomSurface>,
     range: (f64, f64),
     tolerance: f64,
 ) -> Result<(), Failure> {
-    builder.update_edge_pcurve(edge, pcurve, surface, &Location::default(), tolerance, None)?;
-    builder.range_on_surface(edge, surface, &Location::default(), range.0, range.1)?;
-    build_curve3d(edge, 1.0e-7, Continuity::C1, 11, 30)?;
-    same_parameter_edge(edge, 1.0e-7)?;
+    builder.update_edge_pcurve_on_face(edge, pcurve, face, tolerance)?;
+    builder.range_on_face(edge, face, range.0, range.1)?;
+    compute_native_connector_curve(edge, surface)
+}
+
+pub(super) fn compute_native_connector_curve(
+    edge: &Edge,
+    surface: &Handle<dyn GeomSurface>,
+) -> Result<(), Failure> {
+    let surface_type = GeomAdaptorSurface::with_surface(surface)?.get_type()?;
+    if supports_native_curve_image(surface_type) {
+        let _computed = build_curve3d(
+            edge,
+            rustycad_tkernel::precision::approximation(),
+            Continuity::C1,
+            11,
+            30,
+        )?;
+    }
     Ok(())
+}
+
+pub(super) fn reverse_connector_curves(
+    curves: [&Handle<dyn Geom2dCurve>; 2],
+    reverse: bool,
+) -> Result<[Handle<dyn Geom2dCurve>; 2], Failure> {
+    Ok([
+        reverse_connector_curve(curves[0], reverse)?,
+        reverse_connector_curve(curves[1], reverse)?,
+    ])
+}
+
+fn supports_native_curve_image(surface_type: SurfaceType) -> bool {
+    matches!(
+        surface_type,
+        SurfaceType::Plane
+            | SurfaceType::Cylinder
+            | SurfaceType::Cone
+            | SurfaceType::Sphere
+            | SurfaceType::Torus
+    )
 }
 
 pub(super) fn unsupported_edge(name: &str) -> Failure {

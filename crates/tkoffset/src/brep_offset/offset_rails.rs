@@ -40,6 +40,7 @@ pub(super) struct PipeFaceOptions<'a> {
     pub(super) error: f64,
     pub(super) tolerance: f64,
     pub(super) supplied_connectors: [Option<&'a Edge>; 2],
+    pub(super) closed_path: bool,
 }
 
 impl Default for BRepOffsetOffset {
@@ -233,7 +234,13 @@ impl BRepOffsetOffset {
         self.install_result(
             path,
             [edge1, edge2],
-            pipe_face_options(&pipe, &surface, tolerance, supplied_connectors),
+            pipe_face_options(
+                &pipe,
+                &surface,
+                tolerance,
+                supplied_connectors,
+                is_closed_path(path),
+            ),
         )
     }
 
@@ -303,6 +310,7 @@ fn pipe_face_options<'a>(
     surface: &'a Handle<dyn GeomSurface>,
     tolerance: f64,
     supplied_connectors: [Option<&'a Edge>; 2],
+    closed_path: bool,
 ) -> PipeFaceOptions<'a> {
     PipeFaceOptions {
         surface,
@@ -310,7 +318,13 @@ fn pipe_face_options<'a>(
         error: pipe.error_on_surf(),
         tolerance,
         supplied_connectors,
+        closed_path,
     }
+}
+
+fn is_closed_path(path: &Edge) -> bool {
+    let (first, last) = vertices(path, false);
+    first.is_same(&last)
 }
 
 fn build_pipe_face(
