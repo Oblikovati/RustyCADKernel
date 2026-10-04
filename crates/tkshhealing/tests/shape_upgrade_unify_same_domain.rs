@@ -10,6 +10,8 @@ mod controls;
 mod global_context;
 #[path = "shape_upgrade_unify_same_domain/nested.rs"]
 mod nested;
+#[path = "shape_upgrade_unify_same_domain/pcurve_circle.rs"]
+mod pcurve_circle;
 #[path = "shape_upgrade_unify_same_domain/pcurve_concat.rs"]
 mod pcurve_concat;
 #[path = "shape_upgrade_unify_same_domain/pcurve_seam.rs"]

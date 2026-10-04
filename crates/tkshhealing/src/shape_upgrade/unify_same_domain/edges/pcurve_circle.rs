@@ -1,16 +1,21 @@
 use super::pcurve_union::{MergedPCurve, OrientedPCurve};
+use crate::shape_construct::ShapeConstructProjectCurveOnSurface;
 use rustycad_tkbrep::brep::{BRepTool, EdgePCurve};
-use rustycad_tkbrep::topods::Edge;
+use rustycad_tkbrep::topods::{Edge, Face};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
-use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve};
+use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve, Geom2dTrimmedCurve};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::top_abs::Orientation;
+use rustycad_tkgeombase::geom2d_convert::curve_to_bspline_curve;
+use rustycad_tkmath::bsplclib;
+use rustycad_tkmath::convert::ParameterisationType;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{Circle2, Point2};
 
 pub(super) fn merge_same_support_circles(
+    face: &Face,
     merged: &Edge,
     first: &OrientedPCurve,
     second: &OrientedPCurve,
@@ -26,7 +31,7 @@ pub(super) fn merge_same_support_circles(
         first.edge_orientation,
     );
     let result = oriented_circle(first_circle, range, first.edge_orientation)?;
-    Ok(Some(reparameterize_circle(merged, result)?))
+    Ok(Some(reparameterize_circle(face, merged, result)?))
 }
 
 fn matching_circles(
@@ -80,9 +85,9 @@ fn mapped_range(circle: Circle2, endpoints: [Point2; 2]) -> Result<(f64, f64), F
 
 fn extend_range(first: (f64, f64), extension: (f64, f64), orientation: Orientation) -> (f64, f64) {
     if orientation == Orientation::Reversed {
-        return (first.0.min(extension.0), first.1);
+        return (extension.0, first.1);
     }
-    (first.0, first.1.max(extension.1))
+    (first.0, extension.1)
 }
 
 fn oriented_circle(
@@ -103,19 +108,58 @@ fn oriented_circle(
     Ok(MergedPCurve { curve, range })
 }
 
-fn reparameterize_circle(merged: &Edge, mut result: MergedPCurve) -> Result<MergedPCurve, Failure> {
-    let edge_range = BRepTool::range(merged)?;
+fn reparameterize_circle(
+    face: &Face,
+    merged: &Edge,
+    mut result: MergedPCurve,
+) -> Result<MergedPCurve, Failure> {
+    let (curve, first, last) = BRepTool::curve(merged)?;
     let tolerance = BRepTool::edge_tolerance(merged)?;
-    if range_matches(result.range, edge_range, tolerance) {
-        return Ok(result);
+    if (last - first - (result.range.1 - result.range.0)).abs() > tolerance {
+        if let Some(projected) = project_bad_range(face, &curve, (first, last))? {
+            return Ok(projected);
+        }
+        return reparameterized_spline(result, (first, last));
     }
+    let edge_range = (first, last);
     rotate_circle(&mut result.curve, result.range.0 - edge_range.0)?;
     result.range = edge_range;
     Ok(result)
 }
 
-fn range_matches(first: (f64, f64), second: (f64, f64), tolerance: f64) -> bool {
-    (first.0 - second.0).abs() <= tolerance && (first.1 - second.1).abs() <= tolerance
+fn reparameterized_spline(
+    result: MergedPCurve,
+    range: (f64, f64),
+) -> Result<MergedPCurve, Failure> {
+    let trimmed =
+        Geom2dTrimmedCurve::new(&result.curve, result.range.0, result.range.1, true, false)?;
+    let trimmed = Handle::new(trimmed).cast::<dyn Geom2dCurve>();
+    let spline = curve_to_bspline_curve(&trimmed, ParameterisationType::TgtThetaOver2)?;
+    let mut knots = spline.knots();
+    bsplclib::reparametrize(range.0, range.1, &mut knots)?;
+    spline.set_knots(&knots)?;
+    Ok(MergedPCurve {
+        curve: spline.cast(),
+        range,
+    })
+}
+
+fn project_bad_range(
+    face: &Face,
+    curve: &Handle<dyn rustycad_tkg3d::geom::GeomCurve>,
+    range: (f64, f64),
+) -> Result<Option<MergedPCurve>, Failure> {
+    let surface = BRepTool::surface(face)?;
+    let projector = ShapeConstructProjectCurveOnSurface::new();
+    projector.init(&surface, precision::confusion())?;
+    let mut projected = Handle::default();
+    if !projector.perform(curve, range, &mut projected, (-1.0, -1.0))? {
+        return Ok(None);
+    }
+    Ok(Some(MergedPCurve {
+        curve: projected,
+        range,
+    }))
 }
 
 fn rotate_circle(curve: &mut Handle<dyn Geom2dCurve>, offset: f64) -> Result<(), Failure> {
