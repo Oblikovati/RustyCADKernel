@@ -1,0 +1,268 @@
+{
+  "applied_against_revision": "2e766e5f8ce42948e2cb3f8740aae4103389c2cd",
+  "kind": "exact_declaration_binding_audit",
+  "legacy_test_count_change": 0,
+  "new_behavior_implemented": false,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "provenance": {
+    "api_coverage_report_sha256": "d0fd28569c0bf047e6f7594747fa7278c7ad32bf7e8af2bc5d74a8aa56862645",
+    "cpp_capture_raw_sha256": {
+      "23e64dc622a8f3fb435d828139939c6bbd5bd79df42bec899f172a5793f8d1d0.jsonl": "2b94069244c93d4602cb08985992431263cf13f391f660ef59196118781debc9",
+      "cd6207b834d2f459195926a5f7378dd5cd042a328befef8700c3f131cc866a31.jsonl": "ded4bd632194e6234beefd765b9467e7b5773b9f9f91c879ea8f09ca60987661"
+    },
+    "cpp_report_inputs": {
+      "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+      "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+      "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+      "parity": "c603d890a4cea2a59e2c73eee0ef813c32e43be1c379ba59580dacd32d1bc3bc",
+      "rust": "716e0d2201dcbb68ff3ff33c1aa8b109a155ef76686ebb319a99f7c1574a5657"
+    },
+    "native_header_sha256": {
+      "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa"
+    },
+    "runtime_evidence": {
+      "case_count": 28132,
+      "input_sha256": "bee9d98564976421db1344d7331e9cfded5c0f1ec6e5421a99af6a06169a4fc6",
+      "native_output_sha256": "b3bed854dd64e9c480dcec96221d775d06ffce3dbe941466c22d12d029e95913",
+      "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+      "native_rust_outputs_byte_equal": true,
+      "relevant_runtime_source_sha256": {
+        "crates/tkernel/examples/oracle_probe/osd/file_system/open_file_ops.rs": "74f30369ffc95f54320bec99a2587c551db7f7916aefe8e3d321e38a7bdd5ade",
+        "crates/tkernel/examples/oracle_probe/resource.rs": "6c9a77b08dcbc4a891453a802694ca137deab19caa111339488adc66f1bc61af",
+        "crates/tkernel/src/osd/file_system/open_file.rs": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+        "crates/tkernel/src/resource/convert_unicode.rs": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+        "crates/tkernel/tests/osd_file_system_local_api_behavior.rs": "fbb1e96ac3cf02aec8820d3a81d21e1735c49f946e2ed9e12784aa0316dc9877",
+        "crates/tkernel/tests/resource_api_behavior/unicode.rs": "08ed4fc2c1731af84e76517be6c37640bca24d77517eb464a410b5086af0d220",
+        "tools/oracle/tkernel_osd_file_system_open_file_probe.cxx": "a721b0c41a7e943d8c260c76a5132f620ed71e2de402974903f081be94c6559d",
+        "tools/oracle/tkernel_osd_file_system_probe.cxx": "7e4928f0fde5574d0de2e7f132ca93aa01dc7bb9666a27e5179761d4c6614b3b",
+        "tools/oracle/tkernel_resource_probe.cxx": "9d5bc2bf331b19776b34ddaf2fda6845b182ab4256a7def83fbcd3d6b5127d75",
+        "tools/tkernel_osd_file_system_corpus.py": "57f205d783f41bda438f83fa3e675e9c119a6fcbdd1f2b1ff5cd8c253196371a",
+        "tools/tkernel_resource_corpus.py": "ea2736f3a756d699b4acfb4dee70272379cf46c2cd1ef7254229684fcf523dab"
+      },
+      "runtime_input_manifest_sha256": "5d3139ac401b2e1b957ef9efca4ec40b0ea5fd261de5e3b5552b19a96583e128",
+      "runtime_report_sha256": "d40a004fec387219be2baac826ed2b16dd32e777becf8df45a8b2cb579d8e6ef",
+      "rust_output_sha256": "b3bed854dd64e9c480dcec96221d775d06ffce3dbe941466c22d12d029e95913",
+      "rust_revision": "e8c694734cb06ac7841157e84d404a35ab1476d3",
+      "rust_source_clean": true,
+      "scope_note": "Existing pinned probe corpus evidence; this selector-only audit did not rerun Cargo or the full native suite. Overall joined legacy toolkit proof remains false.",
+      "scoped_operation_counts": {
+        "osd_fs_ctime": 2,
+        "osd_fs_fd": 128,
+        "osd_fs_filebuf": 128,
+        "osd_fs_fstream": 78,
+        "res_big5": 140,
+        "res_decode": 486,
+        "res_encode": 3061,
+        "res_gbk": 234
+      }
+    },
+    "rust_capture_manifest_sha256": "85da28f39100186c49b2800487a0d4825ba6e559d4910e74bccab51f6f5d876c",
+    "rust_inventory_sha256": "b3776e8846d27e78116d8c2d07611cd67de34968859a49288b3aa78ca308b9d6"
+  },
+  "rows": [
+    {
+      "cpp_id": "95bc4a867fbe1a68bb9c90dea191dfad7026c4f4fa98e5121aeaf564391465f3",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_sjis_to_unicode(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::sjis_to_unicode",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_sjis_to_unicode(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "b64b41bc62a9796cb8080fff046f28e2a0cf490ac6e2fee58eea929ce15d5b1d",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_unicode_to_sjis(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_sjis",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_unicode_to_sjis(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "f0a92ba5547b26890a5cf3000a199e957dbf5ca5333f5a1b8979c245da7f3c87",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_unicode_to_euc(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_euc",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_unicode_to_euc(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "c56a63730e03a187f548142ba83b0bffdfebd3d2c41ade0d323d1c4109a3aa90",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_euc_to_unicode(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::euc_to_unicode",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_euc_to_unicode(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "24f504637015da09d2d33542145788356143bc67ba07f1e16b333343810c8033",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_gb_to_unicode(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::gb_to_unicode",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_gb_to_unicode(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "fbceecde015526dacc88d61d9cde2c9973ec8d18c1828be9eb0d6132041ac683",
+      "cpp_kind": "Function",
+      "cpp_signature": "void (unsigned int *, unsigned int *)",
+      "cpp_source_sha256": "403676c83d48fdcda9ff169ad5119dbecee3d6b9e38cc83b6dc2c7f2f5d126fa",
+      "cpp_written_parameter_types": [
+        "unsigned int *",
+        "unsigned int *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "Resource_ConvertUnicode::Resource_unicode_to_gb(unsigned int*,unsigned int*)",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_gb",
+      "rust_source": "crates/tkernel/src/resource/convert_unicode.rs",
+      "rust_source_sha256": "0a56c12d30f3fa457db527dbb6ff901d2dede080f697283c1ebfe3fd462c81e6",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "Resource_unicode_to_gb(unsigned int*,unsigned int*)"
+    },
+    {
+      "cpp_id": "7cac76dadaf09efd170f692a7bb515eea83f2cab470914bad4bfe43af0594950",
+      "cpp_kind": "Function",
+      "cpp_signature": "long (const char *)",
+      "cpp_source_sha256": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "cpp_written_parameter_types": [
+        "const char *"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "OSD_OpenFile::OSD_FileStatCTime(const char*)",
+      "rust_item": "rustycad_tkernel::osd::file_stat_ctime",
+      "rust_source": "crates/tkernel/src/osd/file_system/open_file.rs",
+      "rust_source_sha256": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "OSD_FileStatCTime(const char*)"
+    },
+    {
+      "cpp_id": "55a8526df20372e6681cd13733c7f8c1ba7335f279e67e9e83554f1aa32f130f",
+      "cpp_kind": "Function",
+      "cpp_signature": "int (const class TCollection_ExtendedString &, enum std::_Ios_Openmode)",
+      "cpp_source_sha256": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "cpp_written_parameter_types": [
+        "const TCollection_ExtendedString &",
+        "std::ios_base::openmode"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "OSD_OpenFile::OSD_OpenFileDescriptor(const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "rust_item": "rustycad_tkernel::osd::open_file_descriptor",
+      "rust_source": "crates/tkernel/src/osd/file_system/open_file.rs",
+      "rust_source_sha256": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "OSD_OpenFileDescriptor(const TCollection_ExtendedString&,std::ios_base::openmode)"
+    },
+    {
+      "cpp_id": "de59f278e8124fdaf0ec32b04532c89452f8445100a10d23704232d5b3d5e13a",
+      "cpp_kind": "Function",
+      "cpp_signature": "bool (class std::basic_filebuf<char> &, const class TCollection_ExtendedString &, enum std::_Ios_Openmode)",
+      "cpp_source_sha256": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "cpp_written_parameter_types": [
+        "std::filebuf &",
+        "const TCollection_ExtendedString &",
+        "const std::ios_base::openmode"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "OSD_OpenFile::OSD_OpenStream(std::filebuf&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "rust_item": "rustycad_tkernel::osd::open_stream",
+      "rust_source": "crates/tkernel/src/osd/file_system/open_file.rs",
+      "rust_source_sha256": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "OSD_OpenStream(std::filebuf&,const TCollection_ExtendedString&,std::ios_base::openmode)"
+    },
+    {
+      "cpp_id": "6a88a57aa4fe743bc6978cf5ac4ae4a1ead76e319b82128556fb597b511875fe",
+      "cpp_kind": "FunctionTemplate",
+      "cpp_signature": "void (type-parameter-0-0 &, const class TCollection_ExtendedString &, enum std::_Ios_Openmode)",
+      "cpp_source_sha256": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "cpp_written_parameter_types": [
+        "T &",
+        "const TCollection_ExtendedString &",
+        "const std::ios_base::openmode"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "OSD_OpenFile::OSD_OpenStream(T&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "rust_item": "rustycad_tkernel::osd::open_file_stream",
+      "rust_source": "crates/tkernel/src/osd/file_system/open_file.rs",
+      "rust_source_sha256": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "OSD_OpenStream(T&,const TCollection_ExtendedString&,std::ios_base::openmode)"
+    },
+    {
+      "cpp_id": "43c99c419279fd36276a9df02405d213375e10f097e34cb51fa8f6a21e45dc58",
+      "cpp_kind": "FunctionTemplate",
+      "cpp_signature": "void (type-parameter-0-0 &, const char *, enum std::_Ios_Openmode)",
+      "cpp_source_sha256": "47faf23d05d8c55e70d98c06ddacdf4a4ec159c343bb7e6de7b904f1ec519827",
+      "cpp_written_parameter_types": [
+        "T &",
+        "const char *",
+        "const std::ios_base::openmode"
+      ],
+      "crosswalk_status": "unique_cpp_and_rust",
+      "old_selector": "OSD_OpenFile::OSD_OpenStream(T&,const char*,std::ios_base::openmode)",
+      "rust_item": "rustycad_tkernel::osd::open_file_stream_utf8",
+      "rust_source": "crates/tkernel/src/osd/file_system/open_file.rs",
+      "rust_source_sha256": "5e2a49a189fadd53152763fae998957193a1ede3f7dbb2396497654146fd5564",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "status_preserved": "implemented",
+      "upstream_id": "OSD_OpenStream(T&,const char*,std::ios_base::openmode)"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Remove filename pseudo-namespaces from six Resource_ConvertUnicode extern-C globals and five OSD_OpenFile global overloads. Statuses and Rust items are unchanged.",
+  "source_revision": "2e766e5f8ce42948e2cb3f8740aae4103389c2cd"
+}
