@@ -15,9 +15,9 @@ fn MathMatrixTest__InitAndAccess() {
     aMatrix[(2, 2)] = 10.0;
     assert_eq!(aMatrix[(2, 2)], 10.0);
 
-    // Test Value method
-    aMatrix[(3, 3)] = 15.0;
-    assert_eq!(aMatrix[(3, 3)], 15.0);
+    // Test the native mutable and const Value overloads.
+    *aMatrix.change_value(3, 3).unwrap() = 15.0;
+    assert_eq!(*aMatrix.value(3, 3).unwrap(), 15.0);
 }
 
 // Tests for matrix operations

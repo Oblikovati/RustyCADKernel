@@ -1,0 +1,280 @@
+{
+  "body_finding": {
+    "corrected_rust_expression": "*aMatrix.change_value(3, 3).unwrap() = 15.0; assert_eq!(*aMatrix.value(3, 3).unwrap(), 15.0);",
+    "native_test": "MathMatrixTest.InitAndAccess",
+    "note": "Restores the explicit mutable and const Value accessor paths while preserving the following native operator() read assertion.",
+    "prior_rust_expression": "aMatrix[(3, 3)] = 15.0; assert_eq!(aMatrix[(3, 3)], 15.0);",
+    "source_expression": "aMatrix.Value(3, 3) = 15.0; EXPECT_EQ(aMatrix(3, 3), 15.0);"
+  },
+  "declarations": [
+    {
+      "native_line": 46,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "Constructors",
+      "rust_line": 3,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_0.rs",
+      "rust_test": "MathMatrixTest__Constructors"
+    },
+    {
+      "native_line": 76,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "InitAndAccess",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_1.rs",
+      "rust_test": "MathMatrixTest__InitAndAccess"
+    },
+    {
+      "native_line": 101,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "MatrixOperations",
+      "rust_line": 25,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_1.rs",
+      "rust_test": "MathMatrixTest__MatrixOperations"
+    },
+    {
+      "native_line": 177,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "MatrixMultiplication",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_2.rs",
+      "rust_test": "MathMatrixTest__MatrixMultiplication"
+    },
+    {
+      "native_line": 264,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "TransposeAndInverse",
+      "rust_line": 87,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_2.rs",
+      "rust_test": "MathMatrixTest__TransposeAndInverse"
+    },
+    {
+      "native_line": 319,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "Determinant",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_3.rs",
+      "rust_test": "MathMatrixTest__Determinant"
+    },
+    {
+      "native_line": 356,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "RowAndColumnOperations",
+      "rust_line": 39,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_3.rs",
+      "rust_test": "MathMatrixTest__RowAndColumnOperations"
+    },
+    {
+      "native_line": 428,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "SetDiag",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_4.rs",
+      "rust_test": "MathMatrixTest__SetDiag"
+    },
+    {
+      "native_line": 450,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "VectorMatrixOperations",
+      "rust_line": 24,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_4.rs",
+      "rust_test": "MathMatrixTest__VectorMatrixOperations"
+    },
+    {
+      "native_line": 504,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "InPlaceMatrixMultiplication",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_5.rs",
+      "rust_test": "MathMatrixTest__InPlaceMatrixMultiplication"
+    },
+    {
+      "native_line": 599,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx",
+      "native_suite": "MathMatrixTest",
+      "native_test": "MoveSemantics",
+      "rust_line": 97,
+      "rust_source": "crates/tkmath/tests/math_matrix/suites_5.rs",
+      "rust_test": "MathMatrixTest__MoveSemantics"
+    },
+    {
+      "native_line": 77,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "WellConditionedSquareMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_0.rs",
+      "rust_test": "MathSVDTest__WellConditionedSquareMatrix"
+    },
+    {
+      "native_line": 97,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "IdentityMatrix",
+      "rust_line": 22,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_0.rs",
+      "rust_test": "MathSVDTest__IdentityMatrix"
+    },
+    {
+      "native_line": 128,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "DiagonalMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_1.rs",
+      "rust_test": "MathSVDTest__DiagonalMatrix"
+    },
+    {
+      "native_line": 159,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "OverdeterminedSystem",
+      "rust_line": 33,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_1.rs",
+      "rust_test": "MathSVDTest__OverdeterminedSystem"
+    },
+    {
+      "native_line": 193,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "UnderdeterminedSystem",
+      "rust_line": 67,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_1.rs",
+      "rust_test": "MathSVDTest__UnderdeterminedSystem"
+    },
+    {
+      "native_line": 218,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "RankDeficientMatrix",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_2.rs",
+      "rust_test": "MathSVDTest__RankDeficientMatrix"
+    },
+    {
+      "native_line": 248,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "SingleRowMatrix",
+      "rust_line": 32,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_2.rs",
+      "rust_test": "MathSVDTest__SingleRowMatrix"
+    },
+    {
+      "native_line": 269,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "SingleColumnMatrix",
+      "rust_line": 53,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_2.rs",
+      "rust_test": "MathSVDTest__SingleColumnMatrix"
+    },
+    {
+      "native_line": 292,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "PseudoInverseMethod",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_3.rs",
+      "rust_test": "MathSVDTest__PseudoInverseMethod"
+    },
+    {
+      "native_line": 339,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "DimensionCompatibility",
+      "rust_line": 49,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_3.rs",
+      "rust_test": "MathSVDTest__DimensionCompatibility"
+    },
+    {
+      "native_line": 364,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "SingularValues",
+      "rust_line": 74,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_3.rs",
+      "rust_test": "MathSVDTest__SingularValues"
+    },
+    {
+      "native_line": 395,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "DifferentMatrixBounds",
+      "rust_line": 2,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_4.rs",
+      "rust_test": "MathSVDTest__DifferentMatrixBounds"
+    },
+    {
+      "native_line": 427,
+      "native_source": "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx",
+      "native_suite": "MathSVDTest",
+      "native_test": "LargerMatrix",
+      "rust_line": 34,
+      "rust_source": "crates/tkmath/tests/math_svd/suites_4.rs",
+      "rust_test": "MathSVDTest__LargerMatrix"
+    }
+  ],
+  "declarations_by_suite": {
+    "MathMatrixTest": 11,
+    "MathSVDTest": 13
+  },
+  "input_sha256": {
+    "crates/tkmath/tests/math_matrix.rs": "ea1d4b2dcf8408ce5187a1049f6199c12689c8efc01a6b44bc43d8d21100d247",
+    "crates/tkmath/tests/math_matrix/suites_0.rs": "62555386fcd6a5ba0a4395cc50ddb2e6d1a23645b34214b6c1769661724a114a",
+    "crates/tkmath/tests/math_matrix/suites_1.rs": "abe767a13990d1409217bfedd13f3b75d3d439e6dbe3505738fa0a9a8aadc175",
+    "crates/tkmath/tests/math_matrix/suites_2.rs": "a45853011c9b9d6c377185ae06af0420a602db1c4118ddcc1d0439c463a47269",
+    "crates/tkmath/tests/math_matrix/suites_3.rs": "b20f2f78dae17cb38c0722d2d10da22edb3b75816b20c7aca07b72fec22cbb8e",
+    "crates/tkmath/tests/math_matrix/suites_4.rs": "4507cc7436ee3369a367fe9db4ada73f55bf314a89031d0a6de01340468d1437",
+    "crates/tkmath/tests/math_matrix/suites_5.rs": "e553c3162efda3a4060364e74fddb740d3c2b4b90ad3bef77f720deeafa442ca",
+    "crates/tkmath/tests/math_svd.rs": "5a83c7d51f8b9c79a7612890c0aa2b3e7201fc312711620a08a024b17b472657",
+    "crates/tkmath/tests/math_svd/suites_0.rs": "a2962eefaaaeded37217f6ec86e624360966e724bab599f42f63a8131cdc0d6c",
+    "crates/tkmath/tests/math_svd/suites_1.rs": "dba914e5feef84f2a875299e4433d85528af38dc06c52143b8356f9a4af776a6",
+    "crates/tkmath/tests/math_svd/suites_2.rs": "6dcc62fd7f5521baf031230c664dce7762e708e002564c3795ecf1257f9b9a9d",
+    "crates/tkmath/tests/math_svd/suites_3.rs": "0fa7e6677d7dd9172cc25fe192f7fb93cb2427957569d1bdec45484f721720e7",
+    "crates/tkmath/tests/math_svd/suites_4.rs": "b0281196478e979e249133d3dd57e4cf2c2a6dc3944771ed95d0b98cf1735408",
+    "src/FoundationClasses/TKMath/GTests/math_Matrix_Test.cxx": "5dfad6d90a430d8e26389b28cc1a81253363795502976aadb494bfaa9f5b2329",
+    "src/FoundationClasses/TKMath/GTests/math_SVD_Test.cxx": "2e5e626742a4e9b5556e98b9ca79c40439eba92abc5f2e8a26eb78fcd446a064"
+  },
+  "native_build": {
+    "configuration": "target/occt-modeling-full",
+    "ctest_registration_sha256": "00546ab6a7d87537d0934a22348c2a6af18165b5a64ab2118e4a9607dc8c7bea",
+    "executable": "target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest",
+    "executable_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "native_declaration_count": 24,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_mapped_declaration_count": 24,
+  "rust_revision": "0c4e7a5df22afdf87e742d5ba5b891d0e4c83f65",
+  "schema": "tkmath-matrix-svd-body-audit-v1",
+  "scope": "Exact native/Rust declaration and source-body crosswalk for math_Matrix and math_SVD suites.",
+  "status": "The 24 native declaration names map one-to-one. No other assertion or data-case omission was identified in these two suites.",
+  "validation": [
+    {
+      "command": "ctest --test-dir target/occt-modeling-full --output-on-failure -R 'FoundationClasses::TKMath::(MathMatrixTest|MathSVDTest)\\.'",
+      "exit_code": 0,
+      "kind": "native_ctest",
+      "log": "porting/audits/evidence/tkmath-matrix-svd-native.log",
+      "log_sha256": "2a2c069efa7aaee2f421f538321f24909b91a52d3dfc3c653b68c18d2a21772e",
+      "result": "24/24 passed"
+    },
+    {
+      "command": "cargo +1.98.1 test -p rustycad-tkmath --test math_matrix --test math_svd",
+      "exit_code": 0,
+      "kind": "rust_cargo_test",
+      "log": "porting/audits/evidence/tkmath-matrix-svd-rust.log",
+      "log_sha256": "2f767356f388575b7ddfa686a9935730f536681e1b6ed2a562b03ba80331d529",
+      "result": "24 passed: 11 math_Matrix, 13 math_SVD",
+      "toolchain": "rustc 1.98.1"
+    }
+  ]
+}
