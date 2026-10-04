@@ -412,3 +412,43 @@ fn direction_to_nearest_point_accepts_edge_boundaries() {
         BvhVec3d::new(0.0, 0.0, 0.0)
     );
 }
+
+fn ready_triangle_geometry() -> BvhGeometry<BvhVec3d> {
+    let mut mesh = mesh(&[0.0]);
+    mesh.mark_dirty();
+    let mut geometry = BvhGeometry::<BvhVec3d>::default();
+    geometry.objects_mut().append(Some(Box::new(mesh)));
+    geometry.mark_dirty();
+    let _ = geometry.bvh().unwrap();
+    let object = geometry.objects_mut().change_value(0).unwrap();
+    object
+        .as_deref_mut()
+        .unwrap()
+        .triangulation_mut()
+        .unwrap()
+        .bvh()
+        .unwrap();
+    geometry
+}
+
+#[test]
+fn ready_distance_field_parallel_path_matches_serial_voxels() {
+    let mut geometry = ready_triangle_geometry();
+    let mut serial = BvhDistanceField::new(16, true).unwrap();
+    let mut parallel = BvhDistanceField::new(16, true).unwrap();
+    parallel.set_parallel(true);
+    assert!(serial.build(&mut geometry).unwrap());
+    assert!(parallel.build(&mut geometry).unwrap());
+    assert_eq!(parallel.packed_data(), serial.packed_data());
+}
+
+#[test]
+fn parallel_distance_field_with_zero_capacity_has_no_planes() {
+    let mut geometry = ready_triangle_geometry();
+    let mut field = BvhDistanceField::new(0, false).unwrap();
+    field.set_parallel(true);
+    assert!(field.build(&mut geometry).unwrap());
+    assert_eq!(field.dimension_x(), 0);
+    assert_eq!(field.dimension_y(), 0);
+    assert_eq!(field.dimension_z(), 0);
+}

@@ -1,0 +1,82 @@
+{
+  "title": "BVH_DistanceField serial/parallel audit",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source": {
+    "path": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+    "sha256": "19d4ef26fabb0ad59dde1b73e87f942b36a4996b1c70cca5c7db079bc2151bab",
+    "parallel_call_lines": "455-458",
+    "slice_worker_lines": "351-388"
+  },
+  "corpus": {
+    "generator": "tools/tkmath_bvh_query_corpus.py::append_field_requests(random.Random(20140911), requests)",
+    "probe_cases": 48,
+    "request_corpus_sha256": "55c769f075a191c039071d41a8c9304c15e92bfc154342ce0ba14f42820bf8a7",
+    "parallel_request_sha256": "d3f3b8d44330d6ae2ee8c3932d8065298a6a36dc925c097b6481f44ef58cbc15"
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkmath_probe.cxx (includes tools/oracle/tkmath_bvh_query_probe.cxx)",
+    "source_sha256": "7a91f2e45515fe712019bd7ee6b0e72d45b725b7cf28e8d73730269e83c0f360",
+    "compile_command": [
+      "c++",
+      "-std=c++17",
+      "-O2",
+      "-I<occt-build>/include/opencascade",
+      "tools/oracle/tkmath_probe.cxx",
+      "LINKED_TOOLKITS libraries",
+      "-Wl,-rpath,<occt-build>/lin64/gcc/libi",
+      "-o",
+      "/tmp/distance-field-native-probe"
+    ],
+    "per_case_timeout_seconds": 10
+  },
+  "rust_probe": {
+    "source_revision": "dfd4acbf717e349c9161add04f2889a533c2158e",
+    "build_command": "cargo build -p rustycad-tkmath --example rustycad-tkmath-numeric-probe (dev profile)",
+    "source_sha256_distance_field": "80914e8e8aa9c2ec7e1eae3e2646bfd1e28b26f19a373a57f55617851a4c8a65",
+    "source_sha256_parallel_module": "5765af6009eff6a46e3fbc1945c89a1e72ee646910bca7cf8a12675a4f440117",
+    "source_sha256_square_distance": "8ff64941f13c2f3e377e811a8a780a67fb6bc1aa6183253d8187eeec8a903bab",
+    "test_sha256": "4aaed747217cb17525a702390b8fe39fd768ba6b436b3679ff1084cf97f11e60"
+  },
+  "summary": {
+    "native_parallel_returned": 30,
+    "native_parallel_failed_or_timed_out": 18,
+    "successful_parallel_with_exact_whole_line_match": 27,
+    "successful_parallel_with_exact_voxel_match": 29,
+    "prebuilt_cases": 16,
+    "prebuilt_native_parallel_successes": 16,
+    "prebuilt_whole_line_matches": 16,
+    "prebuilt_active_voxel_matches": 16,
+    "rust_serial_matches_native_serial": 48,
+    "rust_parallel_flag_matches_native_serial": 48
+  },
+  "zero_capacity_probe": {
+    "request": "bvh_field 3 0 0 0 1 1 1 1 0 0 1 1 0 0 0 1 0 0 0 1 0",
+    "request_sha256": "4bc896d8374e6d971e2e7b97a6274b4dad05d168db3a9ec3965df4d509809a06",
+    "timeout_seconds": 10,
+    "native": {
+      "output": "1 0 0 0 4602678819172646912 4602678819172646912 0 4602678819172646912 4602678819172646912 0 18444492273895866368 18444492273895866368 18444492273895866368 0 0 0 1 0 1 0 0 0 0 0 0 4607182418800017408 4607182418800017408 0",
+      "output_sha256": "09084b5b4fa0104de81cdbe7e5c74caac50615aa53ec5d2b5a4ffcb54cc30e5c"
+    },
+    "rust": {
+      "output": "1 0 0 0 4602678819172646912 4602678819172646912 0 4602678819172646912 4602678819172646912 0 18444492273895866368 18444492273895866368 18444492273895866368 0 0 0 1 0 1 0 0 0 0 0 0 4607182418800017408 4607182418800017408 0",
+      "output_sha256": "09084b5b4fa0104de81cdbe7e5c74caac50615aa53ec5d2b5a4ffcb54cc30e5c"
+    },
+    "exact_output_match": true
+  },
+  "per_case_receipt": "tkmath-distance-field-parallel-cases.jsonl",
+  "sampling_note": "One native parallel invocation per corpus case is recorded; crash/timeout counts are observations, not stable rates. Bounded repeat samples for dirty cases 26 and 31 are embedded in their JSONL case records and show alternating SIGSEGV/success; successful outputs do not consistently match the serial whole line.",
+  "validation": {
+    "focused_command": "cargo test -p rustycad-tkmath --test bvh_query_behavior",
+    "focused_result": "17 passed, 0 failed",
+    "full_command": "cargo test -p rustycad-tkmath --quiet",
+    "full_exit_code": 0,
+    "full_result_groups": 245,
+    "full_passed": 2749,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "strict_clippy_command": "cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
+    "strict_clippy_exit_code": 0,
+    "full_log_gzip_path": "/tmp/distance-field-cargo-test-tkmath.log.gz",
+    "full_log_gzip_sha256": "0596058316b65c17342a206d54df31ea6631a74acb13a9540ea825b5127aeadd"
+  }
+}

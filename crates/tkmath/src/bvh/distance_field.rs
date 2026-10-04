@@ -7,9 +7,11 @@ use super::geometry::BvhGeometry;
 use super::scalar::{BvhScalar, std_max, std_min};
 use super::set::BvhSet;
 use super::vector::BvhVector;
+use parallel::{BvhDistanceGeometrySnapshot, parallel_slices};
 use rustycad_tkernel::ncollection::{Vec3, Vec4};
 use rustycad_tkernel::standard::Failure;
 mod nearest_point;
+mod parallel;
 mod square_distance;
 pub use nearest_point::{direction_to_nearest_point, distance_to_box};
 pub use square_distance::{
@@ -34,8 +36,8 @@ const MIN_DIMENSION: i32 = 16;
 /// triangle, negative inside when signing is enabled.
 ///
 /// The voxel buffer holds `maximum_size^3` values; upstream leaves them
-/// uninitialized, the port starts them at zero. A parallel field still builds
-/// its Z slices in order (see `build`).
+/// uninitialized, the port starts them at zero. Parallel construction uses
+/// immutable snapshots only after every relevant BVH is clean.
 /// Example: `let mut field = BvhDistanceField::<BvhVec3d>::new(32, true)?; field.build(&mut geometry)?;`.
 #[derive(Clone, Debug)]
 pub struct BvhDistanceField<V: BvhFieldVector> {
@@ -154,9 +156,9 @@ impl<V: BvhFieldVector> BvhDistanceField<V> {
     /// Each dimension is `maximum_size * side / longest side`, truncated, then
     /// raised to 16 and capped by the maximum size. The grid adds two voxels
     /// of margin per side. Upstream builds the Z slices with
-    /// `OSD_Parallel::For` when parallel; the slices only read the geometry,
-    /// except for its lazy tree builds, which race upstream. The port builds
-    /// them in order, which gives the same voxels.
+    /// `OSD_Parallel::For` when parallel. Dirty BVHs stay on the serial path:
+    /// OCCT workers lazily mutate those shared trees, and the pinned native
+    /// probes crash or produce differing voxel values in that case.
     /// Example: `field.build(&mut geometry)?`.
     pub fn build(&mut self, geometry: &mut BvhGeometry<V>) -> Result<bool, Failure> {
         if geometry.size() == 0 {
@@ -169,10 +171,34 @@ impl<V: BvhFieldVector> BvhDistanceField<V> {
         self.dimension_z = self.grid_dimension(size[2], longest);
         let bounding = geometry.cached_box()?;
         self.place_grid(bounding.corner_min(), bounding.corner_max(), &size);
+        if self.grid_has_no_voxels() {
+            return Ok(true);
+        }
+        if self.is_parallel
+            && let Some(snapshot) = BvhDistanceGeometrySnapshot::try_new(geometry)?
+        {
+            self.build_parallel(&snapshot)?;
+            return Ok(true);
+        }
         for slice in 0..self.dimension_z {
             self.build_slices(geometry, slice, slice + 1)?;
         }
         Ok(true)
+    }
+
+    fn build_parallel(&mut self, snapshot: &BvhDistanceGeometrySnapshot<V>) -> Result<(), Failure> {
+        let context = parallel::DistanceFieldParallelContext::new(
+            [self.dimension_x, self.dimension_y, self.dimension_z],
+            &self.corner_min,
+            &self.voxel_size,
+            self.compute_sign,
+            snapshot,
+        );
+        parallel_slices(&mut self.voxel_data, &context)
+    }
+
+    fn grid_has_no_voxels(&self) -> bool {
+        self.dimension_x <= 0 || self.dimension_y <= 0 || self.dimension_z <= 0
     }
 
     /// `static_cast<int>(myMaximumSize * side / longest)` clamped to

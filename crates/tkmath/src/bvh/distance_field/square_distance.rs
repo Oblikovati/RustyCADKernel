@@ -116,7 +116,7 @@ impl<V: BvhFieldVector> BvhSetTraverse<V> for BvhPointTriangulationSquareDistanc
 square_distance_rules!(BvhPointTriangulationSquareDistance);
 
 /// Cross product of the edges `v1 - v0` and `v2 - v0`; other components stay zero.
-fn triangle_normal<V: BvhFieldVector>(nodes: &[V; 3]) -> V {
+pub(super) fn triangle_normal<V: BvhFieldVector>(nodes: &[V; 3]) -> V {
     let (first, second) = (nodes[1] - nodes[0], nodes[2] - nodes[0]);
     let mut normal = V::default();
     normal[0] = first[1] * second[2] - first[2] * second[1];
