@@ -14,6 +14,9 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::Arc;
 
+#[path = "vertex_edge/force_interference.rs"]
+mod force_interference;
+
 struct CandidateGroup {
     block: PaveBlockHandle,
     vertices: Vec<i32>,
@@ -153,7 +156,7 @@ impl BOPAlgoPaveFiller {
         Ok((vertex, edge, self.context.clone()))
     }
 
-    fn update_vertex(&mut self, index: i32, tolerance: f64) -> Result<i32, Failure> {
+    pub(super) fn update_vertex(&mut self, index: i32, tolerance: f64) -> Result<i32, Failure> {
         let structure = self.data_structure.as_mut().ok_or_else(|| {
             Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
         })?;

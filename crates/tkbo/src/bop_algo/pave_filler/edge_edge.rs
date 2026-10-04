@@ -4,15 +4,19 @@ use crate::bop_ds::{CommonBlock, InterfEE, Pave, PaveBlockHandle, ShapeInfo};
 use crate::int_tools::{CommonPrt, EdgeEdge, Range, Tools};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
+    brep_adaptor::BRepAdaptorCurve,
     topods::{Edge, Shape, Vertex},
 };
 use rustycad_tkernel::{message::AlertHandle, precision, standard::Failure};
+use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use std::sync::Arc;
 
 #[path = "edge_edge/candidates.rs"]
 mod candidates;
+#[path = "edge_edge/vertex_fusion.rs"]
+mod vertex_fusion;
 
 pub(super) struct EdgeBlockPair {
     pub edge1: i32,
@@ -28,6 +32,12 @@ pub(super) struct EdgeVertexPart {
     pub common: CommonPrt,
 }
 
+struct PendingVertexPart {
+    event: EdgeVertexPart,
+    vertex: Vertex,
+    parameters: (f64, f64),
+}
+
 impl BOPAlgoPaveFiller {
     /// Intersects candidate edge pave blocks and splits interior vertex crossings.
     /// `filler.perform_ee()?` runs the ordinary edge/edge intersection stage.
@@ -39,9 +49,7 @@ impl BOPAlgoPaveFiller {
         for pair in candidates {
             self.intersect_edge_blocks(pair, &mut vertex_parts)?;
         }
-        for part in vertex_parts {
-            self.append_vertex_part(part, &mut modified_edges)?;
-        }
+        self.append_vertex_parts(vertex_parts, &mut modified_edges)?;
         self.split_intersected_edges(&modified_edges)
     }
 
@@ -130,41 +138,145 @@ impl BOPAlgoPaveFiller {
         Ok(())
     }
 
-    fn append_vertex_part(
+    fn append_vertex_parts(
+        &mut self,
+        events: Vec<EdgeVertexPart>,
+        modified_edges: &mut Vec<i32>,
+    ) -> Result<(), Failure> {
+        let mut pending = Vec::new();
+        for event in events {
+            if let Some(part) = self.prepare_vertex_part(event, modified_edges)? {
+                pending.push(part);
+            }
+        }
+        self.append_fused_vertex_parts(pending, modified_edges)
+    }
+
+    fn prepare_vertex_part(
         &mut self,
         event: EdgeVertexPart,
         modified_edges: &mut Vec<i32>,
-    ) -> Result<(), Failure> {
-        let (first_parameter, second_parameter) = vertex_parameters(&event.common)?;
-        if event_hits_existing_pave(&event, first_parameter, second_parameter)? {
-            return Ok(());
+    ) -> Result<Option<PendingVertexPart>, Failure> {
+        let mut parameters = vertex_parameters(&event.common)?;
+        let mut on_pave = event_on_paves(&event, parameters)?;
+        if cross_edge_endpoints(&on_pave) {
+            return Ok(None);
         }
-        let vertex = self.make_intersection_vertex(&event, first_parameter, second_parameter)?;
-        self.append_vertex_record(&event, vertex.0);
-        append_block_pave(&event.pair.block1, vertex.0, first_parameter);
-        append_block_pave(&event.pair.block2, vertex.0, second_parameter);
-        append_unique(modified_edges, event.pair.edge1);
-        append_unique(modified_edges, event.pair.edge2);
-        Ok(())
+        let existing = self.force_edge_endpoint_interferences(
+            &event,
+            &mut on_pave,
+            &mut parameters,
+            modified_edges,
+        )?;
+        let vertex = self.make_intersection_vertex(&event, parameters)?;
+        if existing && !intersection_points_agree(self, &event, parameters)? {
+            return Ok(None);
+        }
+        if existing {
+            self.extend_existing_intersection_vertices(&event, on_pave, &vertex)?;
+        }
+        Ok(Some(PendingVertexPart {
+            event,
+            vertex,
+            parameters,
+        }))
+    }
+
+    fn force_edge_endpoint_interferences(
+        &mut self,
+        event: &EdgeVertexPart,
+        on_pave: &mut [bool; 4],
+        parameters: &mut (f64, f64),
+        modified_edges: &mut Vec<i32>,
+    ) -> Result<bool, Failure> {
+        let endpoints = block_endpoints(&event.pair);
+        let mut existing = false;
+        for position in 0..4 {
+            if !on_pave[position] {
+                continue;
+            }
+            let block = endpoint_target_block(&event.pair, position);
+            on_pave[position] =
+                self.force_interference_vertex_edge(endpoints[position], block, modified_edges)?;
+            existing |= on_pave[position];
+        }
+        *parameters = vertex_parameters(&event.common)?;
+        Ok(existing)
     }
 
     fn make_intersection_vertex(
-        &mut self,
+        &self,
         event: &EdgeVertexPart,
-        first_parameter: f64,
-        second_parameter: f64,
-    ) -> Result<(i32, Vertex), Failure> {
+        parameters: (f64, f64),
+    ) -> Result<Vertex, Failure> {
         let (first, second) = self.edge_shapes(event.pair.edge1, event.pair.edge2)?;
         let mut vertex = Vertex::default();
         crate::bop_tools::make_new_vertex_edges(
             &first,
-            first_parameter,
+            parameters.0,
             &second,
-            second_parameter,
+            parameters.1,
             &mut vertex,
         )?;
-        let index = self.append_new_vertex(&vertex)?;
-        Ok((index, vertex))
+        Ok(vertex)
+    }
+
+    fn extend_existing_intersection_vertices(
+        &mut self,
+        event: &EdgeVertexPart,
+        on_pave: [bool; 4],
+        intersection: &Vertex,
+    ) -> Result<(), Failure> {
+        let endpoints = block_endpoints(&event.pair);
+        let point = BRepTool::pnt(intersection)?;
+        for index in 0..4 {
+            if on_pave[index] {
+                let vertex = self.vertex_at_index(endpoints[index])?;
+                let distance = BRepTool::pnt(&vertex)?.distance(&point);
+                self.update_vertex(endpoints[index], distance)?;
+                append_unique(&mut self.vertices_to_avoid_extension, endpoints[index]);
+            }
+        }
+        Ok(())
+    }
+
+    fn vertex_at_index(&self, index: i32) -> Result<Vertex, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(|| {
+            Failure::new("BOPAlgo_PaveFiller::PerformEE requires initialized data structure")
+        })?;
+        Ok(Vertex::unchecked(structure.shape(index)?.clone()))
+    }
+
+    fn append_fused_vertex_parts(
+        &mut self,
+        pending: Vec<PendingVertexPart>,
+        modified_edges: &mut Vec<i32>,
+    ) -> Result<(), Failure> {
+        let groups = vertex_fusion::connected_vertex_groups(&pending, self.options.fuzzy_value())?;
+        let mut vertex_indices = vec![-1; pending.len()];
+        for group in groups {
+            let vertex = vertex_fusion::merged_vertex(&pending, &group)?;
+            let index = self.append_new_vertex(&vertex)?;
+            for event_index in group {
+                vertex_indices[event_index] = index;
+            }
+        }
+        for (index, item) in pending.iter().enumerate() {
+            self.append_vertex_record(&item.event, vertex_indices[index]);
+            append_block_pave(
+                &item.event.pair.block1,
+                vertex_indices[index],
+                item.parameters.0,
+            );
+            append_block_pave(
+                &item.event.pair.block2,
+                vertex_indices[index],
+                item.parameters.1,
+            );
+            append_unique(modified_edges, item.event.pair.edge1);
+            append_unique(modified_edges, item.event.pair.edge2);
+        }
+        Ok(())
     }
 
     fn append_new_vertex(&mut self, vertex: &Vertex) -> Result<i32, Failure> {
@@ -238,11 +350,7 @@ fn shrunk_range(block: &PaveBlockHandle) -> Range {
     Range::new(first, last)
 }
 
-fn event_hits_existing_pave(
-    event: &EdgeVertexPart,
-    first: f64,
-    second: f64,
-) -> Result<bool, Failure> {
+fn event_on_paves(event: &EdgeVertexPart, parameters: (f64, f64)) -> Result<[bool; 4], Failure> {
     let range1 = block_range(&event.pair.block1);
     let range2 = block_range(&event.pair.block2);
     let shrunk1 = shrunk_range(&event.pair.block1);
@@ -253,31 +361,72 @@ fn event_hits_existing_pave(
     })?;
     let on_pave = [
         Tools::is_on_pave1(
-            first,
+            parameters.0,
             &Range::new(range1.first(), shrunk1.first()),
             tolerance,
         ) || Tools::is_on_pave1(shrunk1.first(), event.common.range1(), tolerance),
-        Tools::is_on_pave1(first, &Range::new(shrunk1.last(), range1.last()), tolerance)
-            || Tools::is_on_pave1(shrunk1.last(), event.common.range1(), tolerance),
         Tools::is_on_pave1(
-            second,
+            parameters.0,
+            &Range::new(shrunk1.last(), range1.last()),
+            tolerance,
+        ) || Tools::is_on_pave1(shrunk1.last(), event.common.range1(), tolerance),
+        Tools::is_on_pave1(
+            parameters.1,
             &Range::new(range2.first(), shrunk2.first()),
             tolerance,
         ) || Tools::is_on_pave1(shrunk2.first(), second_range, tolerance),
         Tools::is_on_pave1(
-            second,
+            parameters.1,
             &Range::new(shrunk2.last(), range2.last()),
             tolerance,
         ) || Tools::is_on_pave1(shrunk2.last(), second_range, tolerance),
     ];
-    Ok(on_pave.iter().any(|is_on_pave| *is_on_pave))
+    Ok(on_pave)
+}
+
+fn cross_edge_endpoints(on_pave: &[bool; 4]) -> bool {
+    (on_pave[0] && (on_pave[2] || on_pave[3])) || (on_pave[1] && (on_pave[2] || on_pave[3]))
+}
+
+fn block_endpoints(pair: &EdgeBlockPair) -> [i32; 4] {
+    let first = pair
+        .block1
+        .lock()
+        .expect("pave-block lock must not be poisoned")
+        .indices();
+    let second = pair
+        .block2
+        .lock()
+        .expect("pave-block lock must not be poisoned")
+        .indices();
+    [first.0, first.1, second.0, second.1]
+}
+
+fn endpoint_target_block(pair: &EdgeBlockPair, position: usize) -> &PaveBlockHandle {
+    if position < 2 {
+        return &pair.block2;
+    }
+    &pair.block1
+}
+
+fn intersection_points_agree(
+    filler: &BOPAlgoPaveFiller,
+    event: &EdgeVertexPart,
+    parameters: (f64, f64),
+) -> Result<bool, Failure> {
+    let (first, second) = filler.edge_shapes(event.pair.edge1, event.pair.edge2)?;
+    let first_point = BRepAdaptorCurve::with_edge(&first)?.value(parameters.0)?;
+    let second_point = BRepAdaptorCurve::with_edge(&second)?.value(parameters.1)?;
+    Ok(first_point.distance(&second_point) <= precision::intersection())
 }
 
 fn append_block_pave(block: &PaveBlockHandle, vertex: i32, parameter: f64) {
-    block
-        .lock()
-        .expect("pave-block lock must not be poisoned")
-        .append_ext_pave(Pave::new(vertex, parameter));
+    let mut block = block.lock().expect("pave-block lock must not be poisoned");
+    let (first, last) = block.range();
+    if parameter <= first || parameter >= last {
+        return;
+    }
+    block.append_ext_pave(Pave::new(vertex, parameter));
 }
 
 fn append_unique(indices: &mut Vec<i32>, value: i32) {

@@ -60,6 +60,42 @@ fn perform_ee_binds_identical_edge_parts_as_a_common_block() {
     );
 }
 
+#[test]
+fn perform_ee_forces_vertex_edge_interference_at_a_pave_endpoint() {
+    let first = edge_argument(Point3::new(0.0, 0.0, 0.0), Point3::new(2.0, 0.0, 0.0));
+    let second = edge_argument(Point3::new(0.0, -1.0, 0.0), Point3::new(0.0, 1.0, 0.0));
+    let mut filler = BOPAlgoPaveFiller::new();
+    filler.add_argument(&first);
+    filler.add_argument(&second);
+    filler.options_mut().set_fuzzy_value(1.0e-6);
+    filler.initialize().unwrap();
+    filler.perform_ee().unwrap();
+    assert_eq!(
+        endpoint_snapshot(&mut filler),
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ee.endpoint.expected").trim()
+    );
+}
+
+#[test]
+fn perform_ee_fuses_generated_vertices_shared_by_three_edges() {
+    let arguments = [
+        edge_argument(Point3::new(-1.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0)),
+        edge_argument(Point3::new(0.0, -1.0, 0.0), Point3::new(0.0, 1.0, 0.0)),
+        edge_argument(Point3::new(-1.0, -1.0, 0.0), Point3::new(1.0, 1.0, 0.0)),
+    ];
+    let mut filler = BOPAlgoPaveFiller::new();
+    for argument in &arguments {
+        filler.add_argument(argument);
+    }
+    filler.options_mut().set_fuzzy_value(1.0e-6);
+    filler.initialize().unwrap();
+    filler.perform_ee().unwrap();
+    assert_eq!(
+        multi_snapshot(&mut filler),
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ee.multi.expected").trim()
+    );
+}
+
 fn snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
     let structure = filler.data_structure_mut().unwrap();
     let (record_count, indices, new_index, kind, first_parameter, second_parameter) = {
@@ -89,6 +125,23 @@ fn snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
     append_blocks(&mut output, structure, 1);
     append_blocks(&mut output, structure, 5);
     output
+}
+
+fn append_endpoint_blocks(
+    output: &mut String,
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    edge: i32,
+) {
+    let blocks = structure.pave_blocks(edge).unwrap();
+    output.push_str(&format!("\nendpoint-edge {edge} {}", blocks.len()));
+    for handle in blocks {
+        let block = handle.lock().unwrap();
+        let (first, last) = block.range();
+        let (first_vertex, last_vertex) = block.indices();
+        output.push_str(&format!(
+            "\nendpoint-pb {first_vertex} {last_vertex} {first:.8} {last:.8}"
+        ));
+    }
 }
 
 fn append_blocks(output: &mut String, structure: &rustycad_tkbo::bop_ds::DataStructure, edge: i32) {
@@ -141,6 +194,89 @@ fn overlap_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
     append_common_blocks(&mut output, structure, 1);
     append_common_blocks(&mut output, structure, 5);
     output
+}
+
+fn endpoint_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
+    let protected_vertices = filler.vertices_to_avoid_extension().to_vec();
+    let structure = filler.data_structure_mut().unwrap();
+    let mut output = format!(
+        "endpoint {} {} {}",
+        structure.nb_shapes(),
+        structure.interf_ee().len(),
+        structure.interf_ve_records().len()
+    );
+    let ee = structure.interf_ee().value(0).unwrap();
+    output.push_str(&format!(
+        "\nendpoint-ee {} {} {} {:.8} {:.8}",
+        ee.index1(),
+        ee.index2(),
+        ee.index_new(),
+        ee.common_part().vertex_parameter1(),
+        ee.common_part().vertex_parameter2()
+    ));
+    for record in structure.interf_ve_records().iter() {
+        output.push_str(&format!(
+            "\nendpoint-ve {} {} {} {:.8}",
+            record.index1(),
+            record.index2(),
+            record.index_new(),
+            record.parameter()
+        ));
+    }
+    append_endpoint_blocks(&mut output, structure, 1);
+    append_endpoint_blocks(&mut output, structure, 5);
+    output.push_str("\nendpoint-avoid");
+    for vertex in &protected_vertices {
+        output.push_str(&format!(" {vertex}"));
+    }
+    output
+}
+
+fn multi_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
+    let structure = filler.data_structure_mut().unwrap();
+    let shape_count = structure.nb_shapes();
+    let record_lines = {
+        let records = structure.interf_ee();
+        let mut lines = String::new();
+        for record in records.iter() {
+            lines.push_str(&format!(
+                "\nmulti-record {} {} {} {:.8} {:.8}",
+                record.index1(),
+                record.index2(),
+                record.index_new(),
+                record.common_part().vertex_parameter1(),
+                record.common_part().vertex_parameter2()
+            ));
+        }
+        format!("multi {shape_count} {}{lines}", records.len())
+    };
+    let mut output = record_lines;
+    for edge in 0..shape_count {
+        if structure.shape_info(edge).unwrap().shape_type()
+            != rustycad_tkg3d::top_abs::ShapeEnum::Edge
+        {
+            continue;
+        }
+        append_multi_blocks(&mut output, structure, edge);
+    }
+    output
+}
+
+fn append_multi_blocks(
+    output: &mut String,
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    edge: i32,
+) {
+    let blocks = structure.pave_blocks(edge).unwrap();
+    output.push_str(&format!("\nmulti-edge {edge} {}", blocks.len()));
+    for handle in blocks {
+        let block = handle.lock().unwrap();
+        let (first, last) = block.range();
+        let (first_vertex, last_vertex) = block.indices();
+        output.push_str(&format!(
+            "\nmulti-pb {first_vertex} {last_vertex} {first:.8} {last:.8}"
+        ));
+    }
 }
 
 fn append_common_blocks(

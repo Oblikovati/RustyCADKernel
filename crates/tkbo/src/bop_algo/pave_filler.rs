@@ -27,6 +27,7 @@ pub struct BOPAlgoPaveFiller {
     glue: Glue,
     avoid_build_pcurve: bool,
     is_primary: bool,
+    vertices_to_avoid_extension: Vec<i32>,
 }
 
 impl Default for BOPAlgoPaveFiller {
@@ -48,6 +49,7 @@ impl BOPAlgoPaveFiller {
             glue: Glue::Off,
             avoid_build_pcurve: false,
             is_primary: true,
+            vertices_to_avoid_extension: Vec::new(),
         }
     }
 
@@ -153,6 +155,11 @@ impl BOPAlgoPaveFiller {
     /// Reads primary-operation status; `filler.is_primary()`.
     pub fn is_primary(&self) -> bool {
         self.is_primary
+    }
+
+    /// Reads vertices protected from later curve-end extension; `filler.vertices_to_avoid_extension()`.
+    pub fn vertices_to_avoid_extension(&self) -> &[i32] {
+        &self.vertices_to_avoid_extension
     }
 
     /// Borrows inherited algorithm options; `filler.options().fuzzy_value()`.
