@@ -1,7 +1,7 @@
 //! The `OSD` class: package statics on the native hosts and the global signal state.
 use super::{
-    NativeSignalHost, NativeSleeper, SignalState, Sleeper, milli_sec_sleep_duration, real_text,
-    sec_sleep_duration,
+    NativeSignalHost, NativeSleeper, SignalState, Sleeper, real_text, sec_sleep_duration,
+    sleep_milliseconds_with_platform,
 };
 use crate::{osd::SignalMode, standard::Failure};
 
@@ -51,7 +51,7 @@ impl Osd {
     }
     /// `MilliSecSleep` on an injected sleeper; `Osd::milli_sec_sleep_with(&sleeper, 5)`.
     pub fn milli_sec_sleep_with(sleeper: &dyn Sleeper, milliseconds: i32) {
-        sleeper.sleep(milli_sec_sleep_duration(milliseconds));
+        sleep_milliseconds_with_platform(sleeper, milliseconds, cfg!(windows));
     }
     /// `RealToCString(double, Standard_PCharacter&)`: the text written into the caller's
     /// buffer (the native `true` result is implied); `Osd::real_to_c_string(1e5) == "1e+05"`.
