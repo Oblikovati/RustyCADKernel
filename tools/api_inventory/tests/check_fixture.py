@@ -8,6 +8,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
 from api_inventory.merge import InventoryRecords, merge_declaration
+from api_inventory.inputs import JSONObject
 from api_inventory.template_identity import normalize_template_signature
 
 
@@ -47,8 +48,7 @@ def check_declarations(events):
     assert one(events, "declaration", qualified_name="LocalAlias")["exclusion_reason"] == "local_scope"
     assert one(events, "declaration", qualified_name="LocalRecord")["exclusion_reason"] == "local_scope"
     assert one(events, "declaration", qualified_name="local_value")["exclusion_reason"] == "local_variable"
-    template_parameters = [event for event in declarations if event.get("parent_usr") == template_function["usr"] and event.get("kind") == "TemplateTypeParm"]
-    assert len(template_parameters) == 1 and template_parameters[0]["api_visible"]
+    check_template_parameter_metadata(events, declarations, template_function)
     assert one(events, "declaration", kind="StaticAssert")["exclusion_reason"] == "static_assert"
     overloads = [event for event in declarations if event.get("qualified_name") == "fixture::PublicType::overload"]
     assert len(overloads) == 2 and overloads[0]["usr"] != overloads[1]["usr"]
@@ -89,6 +89,47 @@ def check_declarations(events):
     assert generated["spelling_location"] != generated["expansion_location"]
 
 
+def check_template_parameter_metadata(
+    events: list[JSONObject], declarations: list[JSONObject], template_function: JSONObject
+) -> None:
+    parameters = [
+        event for event in declarations
+        if event.get("parent_usr") == template_function["usr"]
+        and event.get("kind") == "TemplateTypeParm"
+    ]
+    assert len(parameters) == 1
+    assert parameters[0]["exclusion_reason"] == "template_parameter_metadata"
+    check_class_template_parameters(events, declarations)
+
+
+def check_class_template_parameters(
+    events: list[JSONObject], declarations: list[JSONObject]
+) -> None:
+    box = one(events, "declaration", qualified_name="fixture::Box", kind="ClassTemplate")
+    box_parameters = [
+        event for event in declarations
+        if event.get("parent_usr") == box["usr"]
+        and event.get("kind") in {"TemplateTypeParm", "NonTypeTemplateParm"}
+    ]
+    assert {event["kind"] for event in box_parameters} == {"TemplateTypeParm", "NonTypeTemplateParm"}
+    assert all(event["exclusion_reason"] == "template_parameter_metadata" for event in box_parameters)
+    check_template_wrapper_signatures(events, box)
+
+
+def check_template_wrapper_signatures(events: list[JSONObject], box: JSONObject) -> None:
+    assert box["api_visible"] and "unsigned int __template_param_1 = 2" in box["template_signature"]
+    pack = one(events, "declaration", qualified_name="fixture::Pack", kind="ClassTemplate")
+    assert "typename ...__template_param_0" in pack["template_signature"]
+    nested = one(events, "declaration", qualified_name="fixture::TemplateTemplateBox", kind="ClassTemplate")
+    assert "template <typename> typename __template_param_0" in nested["template_signature"]
+    constrained = one(events, "declaration", qualified_name="fixture::AssociatedTypeBox", kind="ClassTemplate")
+    assert "value_type" in constrained["template_signature"]
+    alias = one(events, "declaration", qualified_name="fixture::ElementAlias", kind="TypeAliasTemplate")
+    assert alias["api_visible"] and "__template_param_0" in alias["template_signature"]
+    assert one(events, "declaration", qualified_name="fixture::Scalar")["api_visible"]
+    assert one(events, "declaration", qualified_name="fixture::CountAlias")["api_visible"]
+
+
 def check_merged_template_metadata(events) -> None:
     plain = dict(one(events, "declaration", qualified_name="fixture::scaled"))
     assert plain["template_signature"] == ""
@@ -103,7 +144,7 @@ def check_merged_template_metadata(events) -> None:
         event["template_signature"]
         for event in events
         if event.get("event") == "declaration"
-        and event.get("kind") == "FunctionTemplate"
+        and event.get("kind") in {"FunctionTemplate", "ClassTemplate", "TypeAliasTemplate"}
     ]
     results = [normalize_template_signature(item) for item in templates]
     assert results and all(item.supported for item in results)

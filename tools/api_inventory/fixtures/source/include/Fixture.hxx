@@ -41,6 +41,11 @@ template <typename T, unsigned N = 2> struct Box {
   T value;
   T scale(T input) const;
 };
+template <typename... Elements> struct Pack {};
+template <template <typename> class Container> struct TemplateTemplateBox {};
+template <typename Element, typename = typename Element::value_type>
+struct AssociatedTypeBox {};
+template <typename Element> using ElementAlias = Box<Element>;
 
 template <typename T> T identity(T value);
 template <typename Defaulted = int> void default_template_parameter(Defaulted value);
