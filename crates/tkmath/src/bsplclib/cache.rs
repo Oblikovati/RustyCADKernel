@@ -223,8 +223,9 @@ impl Cache {
         self.derivatives_local_into(local_param, derivative, output)
     }
 
-    /// Writes packed rows for a normalized span parameter, scaled to curve-parameter
-    /// derivatives (`calculateDerivativeLocal`); extra capacity stays unchanged;
+    /// Writes normalized-span rows scaled to curve-parameter derivatives
+    /// (`calculateDerivativeLocal`); the native header documents order 1..=3,
+    /// and non-rational caches also support higher orders; extra capacity stays unchanged;
     /// `cache.derivatives_local_into(0.25, 1, &mut rows)?`.
     pub fn derivatives_local_into(
         &self,
@@ -232,6 +233,15 @@ impl Cache {
         derivative: i32,
         output: &mut [f64],
     ) -> Result<(), Failure> {
+        if !self.is_rational && derivative > 3 {
+            let needed: usize =
+                ensure_derivative_output_capacity(self, derivative, output.len(), true)?;
+            return self.derivatives_non_rational_local_into(
+                local_param,
+                derivative,
+                &mut output[..needed],
+            );
+        }
         let needed: usize =
             ensure_derivative_output_capacity(self, derivative, output.len(), false)?;
         let values: [f64; 16] = self.derivatives_local(local_param, derivative)?;

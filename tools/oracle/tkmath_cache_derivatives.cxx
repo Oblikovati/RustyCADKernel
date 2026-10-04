@@ -82,8 +82,12 @@ void non_rational_order_five_3d()
   cache.BuildCache(4.0, knots, poles, nullptr);
   double output[20] = {};
   std::fill(output, output + 20, -77.0);
+  double local[20] = {};
+  std::fill(local, local + 20, -77.0);
   cache.Evaluate(4.0, 5, output);
+  cache.EvaluateLocal(0.5, 5, local);
   print_values(output, 20);
+  print_values(local, 20);
 }
 
 int main()
