@@ -41384,6 +41384,46 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
+      "upstream_id": "math_DirectPolynomialRoots::Solve(double,double,double,double,double)",
+      "selector_id": "87b7c891b889080868d8978d5a6c80817560e9d853a5ea693a0fa57b9b653f7a",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
+      "source_sha256": "357604688545f0a238ef78607e5d5614a8dab2ec25150a5373c9e4a8f3da2bfc",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_quartic",
+      "status": "implemented",
+      "notes": "Protected native stateful overload; Rust exposes a public mutating counterpart. Verified repeated-call flag/count/root state against tools/oracle/tkmath_direct_roots_solve_reuse.expected; see porting/audits/tkmath-direct-polynomial-solve.json for scope and limits."
+    },
+    {
+      "upstream_id": "math_DirectPolynomialRoots::Solve(double,double,double,double)",
+      "selector_id": "c5bc978fe5471c48f9764e796fd390c6b7305642c8f85b485a4e915de20cd3c1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
+      "source_sha256": "357604688545f0a238ef78607e5d5614a8dab2ec25150a5373c9e4a8f3da2bfc",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_cubic",
+      "status": "implemented",
+      "notes": "Protected native stateful overload; Rust exposes a public mutating counterpart. Verified repeated-call flag/count/root state against tools/oracle/tkmath_direct_roots_solve_reuse.expected; see porting/audits/tkmath-direct-polynomial-solve.json for scope and limits."
+    },
+    {
+      "upstream_id": "math_DirectPolynomialRoots::Solve(double,double,double)",
+      "selector_id": "ce36484ec7e279d858f2db068119d67dba076b69c855c420d36a47b0f857252e",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
+      "source_sha256": "357604688545f0a238ef78607e5d5614a8dab2ec25150a5373c9e4a8f3da2bfc",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_quadratic",
+      "status": "implemented",
+      "notes": "Protected native stateful overload; Rust exposes a public mutating counterpart. Verified repeated-call flag/count/root state against tools/oracle/tkmath_direct_roots_solve_reuse.expected; see porting/audits/tkmath-direct-polynomial-solve.json for scope and limits."
+    },
+    {
+      "upstream_id": "math_DirectPolynomialRoots::Solve(double,double)",
+      "selector_id": "8bc56841c5b52e32d80f590c4f82082dabfbbbd4282fc89ca45d2fca0b7c4d1b",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
+      "source_sha256": "357604688545f0a238ef78607e5d5614a8dab2ec25150a5373c9e4a8f3da2bfc",
+      "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::solve_linear",
+      "status": "implemented",
+      "notes": "Protected native stateful overload; Rust exposes a public mutating counterpart. Verified repeated-call flag/count/root state against tools/oracle/tkmath_direct_roots_solve_reuse.expected; see porting/audits/tkmath-direct-polynomial-solve.json for scope and limits."
+    },
+    {
       "upstream_id": "math_DirectPolynomialRoots::IsDone() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
