@@ -81,3 +81,6 @@ pub use shape_tolerances::correct_shape_tolerances;
 
 mod point_curve_tolerance;
 pub use point_curve_tolerance::correct_point_on_curve;
+
+mod curve_surface_tolerance;
+pub use curve_surface_tolerance::{correct_curve_on_surface, correct_tolerances};

@@ -202,3 +202,5 @@ mod block_face;
 mod shape_tolerances;
 
 mod point_curve_tolerance;
+
+mod curve_surface_tolerances;

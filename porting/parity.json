@@ -227367,6 +227367,42 @@
       "rust_item": "rustycad_tkbo::bop_tools::correct_point_on_curve",
       "status": "partial",
       "notes": "Source curve-representation/point-parameter traversal and 162 native endpoint/internal, max-tolerance, avoidance and relative-location observations. tools/oracle/tkbo_point_curve_tolerance.md. Scheduling remains serial; arbitrary/multiple curves and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::FillShrunkData(const TopAbs_ShapeEnum, const TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::fill_shrunk_data",
+      "status": "partial",
+      "notes": "Typed candidate preparation with shared context; native midpoint shrink range, box, splittability and disjoint early return; tools/oracle/tkbo_pave_filler_shrunk.md. Complete geometry/failure/legacy parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::CorrectTolerances(const TopoDS_Shape &, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const double, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::correct_tolerances",
+      "status": "partial",
+      "notes": "Point-on-curve then curve-on-surface source pass order; 400 native observations shared with standalone stage; tools/oracle/tkbo_curve_surface_tolerances.md. Complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::PerformVE(const Message_ProgressRange &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ve",
+      "status": "partial",
+      "notes": "Ordinary vertex-edge stage with native destructive/non-destructive midpoint and micro-edge fixtures; tools/oracle/tkbo_pave_filler_ve.md. Common-block rebuilds, invalid interval unification, warnings, cancellation and scheduling remain incomplete."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::CorrectCurveOnSurface(const TopoDS_Shape &, const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, const double, const bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::correct_curve_on_surface",
+      "status": "partial",
+      "notes": "400 native tolerance observations; tools/oracle/tkbo_curve_surface_tolerances.md. Serial scheduling and untested representation/location/failure branches remain partial."
     }
   ],
   "tests": [

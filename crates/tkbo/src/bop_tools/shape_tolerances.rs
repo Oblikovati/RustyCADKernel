@@ -20,7 +20,7 @@ pub fn correct_shape_tolerances(
     }
     Ok(())
 }
-fn correct_vertices(edge: &Edge, avoided: &IndexedMapOfShape) -> Result<(), Failure> {
+pub(super) fn correct_vertices(edge: &Edge, avoided: &IndexedMapOfShape) -> Result<(), Failure> {
     let tolerance = BRepTool::edge_tolerance(edge)?;
     for shape in ShapeIterator::new(edge, true, true) {
         let vertex = Vertex::unchecked(shape);
@@ -61,7 +61,7 @@ fn update_wire_edges(
     }
     Ok(())
 }
-fn update_tolerance(
+pub(super) fn update_tolerance(
     shape: &Shape,
     tolerance: f64,
     avoided: &IndexedMapOfShape,
