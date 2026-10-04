@@ -3,6 +3,8 @@
 #include <BRep_Tool.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepBuilderAPI_MakePolygon.hxx>
+#include <BRepCheck_Analyzer.hxx>
+#include <BRepClass_FaceClassifier.hxx>
 #include <BRepOffset_Inter3d.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Edge.hxx>
@@ -16,9 +18,18 @@ static TopoDS_Face makeFace(const gp_Pln& plane)
   return BRepBuilderAPI_MakeFace(plane).Face();
 }
 
+static TopoDS_Face makeRectangularFace(const gp_Pln& plane,
+                                      double umin,
+                                      double umax,
+                                      double vmin,
+                                      double vmax)
+{
+  return BRepBuilderAPI_MakeFace(plane, umin, umax, vmin, vmax).Face();
+}
+
 static TopoDS_Face makeBoundedFace(const gp_Pln& plane)
 {
-  return BRepBuilderAPI_MakeFace(plane, -1.0, 1.0, -1.0, 1.0).Face();
+  return makeRectangularFace(plane, -1.0, 1.0, -1.0, 1.0);
 }
 
 static TopoDS_Face makeTriangleFace(double z)
@@ -30,6 +41,26 @@ static TopoDS_Face makeTriangleFace(double z)
                                                 true)
                        .Wire();
   return BRepBuilderAPI_MakeFace(plane, wire, true).Face();
+}
+
+static TopoDS_Face makeFaceWithHole(double z)
+{
+  gp_Pln plane(gp_Pnt(0, 0, z), gp_Dir(0, 0, 1));
+  TopoDS_Wire outer = BRepBuilderAPI_MakePolygon(gp_Pnt(-3, -2, z),
+                                                 gp_Pnt(3, -2, z),
+                                                 gp_Pnt(3, 2, z),
+                                                 gp_Pnt(-3, 2, z),
+                                                 true)
+                        .Wire();
+  BRepBuilderAPI_MakeFace face(plane, outer, true);
+  TopoDS_Wire hole = BRepBuilderAPI_MakePolygon(gp_Pnt(-1, -1, z),
+                                                gp_Pnt(1, -1, z),
+                                                gp_Pnt(1, 1, z),
+                                                gp_Pnt(-1, 1, z),
+                                                true)
+                       .Wire();
+  face.Add(TopoDS::Wire(hole.Reversed()));
+  return face.Face();
 }
 
 int main()
@@ -126,5 +157,45 @@ int main()
     std::cout << "triangle_section=" << triangleFirst << ',' << triangleLast << ' '
               << triangleStart.X() << ',' << triangleStart.Y() << ',' << triangleStart.Z() << ' '
               << triangleFinish.X() << ',' << triangleFinish.Y() << ',' << triangleFinish.Z() << '\n';
+  }
+
+  TopoDS_Face hf1 = makeFaceWithHole(0.0);
+  TopoDS_Face hf2 = makeRectangularFace(gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 1, 0)),
+                                        -1.0,
+                                        1.0,
+                                        -3.0,
+                                        3.0);
+  TopoDS_Face hs1 = makeFaceWithHole(2.0);
+  TopoDS_Face hs2 = makeRectangularFace(gp_Pln(gp_Pnt(0, 2, 0), gp_Dir(0, 1, 0)),
+                                        -1.0,
+                                        1.0,
+                                        -3.0,
+                                        3.0);
+  occ::handle<BRepAlgo_AsDes> holeAsDes = new BRepAlgo_AsDes();
+  BRepOffset_Inter3d holeIntersections(holeAsDes, TopAbs_IN, 1.0e-7);
+  BRepAlgo_Image holeImages;
+  holeImages.Bind(hs1, hf1);
+  holeImages.Bind(hs2, hf2);
+  holeIntersections.FaceInter(hf1, hf2, holeImages);
+  std::cout << "hole=" << holeIntersections.IsDone(hf1, hf2) << ','
+            << holeIntersections.NewEdges().Extent() << ','
+            << holeAsDes->Descendant(hf1).Extent() << ','
+            << holeAsDes->Descendant(hf2).Extent() << ','
+            << BRepCheck_Analyzer(hf1).IsValid() << ','
+            << BRepCheck_Analyzer(hf2).IsValid() << ','
+            << static_cast<int>(BRepClass_FaceClassifier(hf1, gp_Pnt2d(0, 0), 1e-7).State()) << ','
+            << static_cast<int>(BRepClass_FaceClassifier(hf1, gp_Pnt2d(2, 0), 1e-7).State()) << '\n';
+  for (int index = 1; index <= holeIntersections.NewEdges().Extent(); ++index)
+  {
+    const TopoDS_Edge& holeEdge = TopoDS::Edge(holeIntersections.NewEdges().FindKey(index));
+    TopLoc_Location holeLocation;
+    double holeFirst, holeLast;
+    occ::handle<Geom_Curve> holeCurve =
+      BRep_Tool::Curve(holeEdge, holeLocation, holeFirst, holeLast);
+    const gp_Pnt holeStart = holeCurve->Value(holeFirst);
+    const gp_Pnt holeFinish = holeCurve->Value(holeLast);
+    std::cout << "hole_section=" << holeFirst << ',' << holeLast << ' '
+              << holeStart.X() << ',' << holeStart.Y() << ',' << holeStart.Z() << ' '
+              << holeFinish.X() << ',' << holeFinish.Y() << ',' << holeFinish.Z() << '\n';
   }
 }

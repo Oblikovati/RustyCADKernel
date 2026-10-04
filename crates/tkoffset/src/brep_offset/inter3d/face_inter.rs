@@ -2,6 +2,7 @@
 mod domain;
 mod orientation;
 mod section_edge;
+mod trim_clip;
 use super::super::BRepOffsetInter3d;
 use rustycad_tkbo::int_tools::{Curve, FaceFace};
 use rustycad_tkbool::brep_algo::BRepAlgoImage;
@@ -29,6 +30,7 @@ impl BRepOffsetInter3d {
         }
         self.require_supported_pair(first, second, images)?;
         let curves = intersect_planar_faces(first, second)?;
+        let curves = trim_clip::clip_curves(&curves, first, second)?;
         self.store_curves(first, second, &curves)
     }
 
@@ -58,8 +60,8 @@ impl BRepOffsetInter3d {
         rustycad_tkbrep::topods::face(&second_source)?;
         require_plane_face(first)?;
         require_plane_face(second)?;
-        domain::require_supported_face_domain(first)?;
-        domain::require_supported_face_domain(second)?;
+        domain::validate_face_boundaries(first)?;
+        domain::validate_face_boundaries(second)?;
         self.reject_shared_topology(first, second)
     }
 
@@ -82,15 +84,18 @@ impl BRepOffsetInter3d {
         second: &Face,
         curves: &[Curve],
     ) -> Result<(), Failure> {
-        if curves.len() > 1 {
-            return Err(not_implemented("multiple planar section curves"));
-        }
-        let Some(curve) = curves.first() else {
-            return self.store(first, second, &[], &[]);
-        };
-        let section = make_section_edge(curve, first, second, self.side())?;
-        let first_edges = [section.0];
-        let second_edges = [section.1];
+        let sections = curves
+            .iter()
+            .map(|curve| make_section_edge(curve, first, second, self.side()))
+            .collect::<Result<Vec<_>, _>>()?;
+        let first_edges = sections
+            .iter()
+            .map(|section| section.0.clone())
+            .collect::<Vec<_>>();
+        let second_edges = sections
+            .iter()
+            .map(|section| section.1.clone())
+            .collect::<Vec<_>>();
         self.store(first, second, &first_edges, &second_edges)
     }
 }
@@ -214,7 +219,7 @@ mod tests {
     }
 
     #[test]
-    fn nonrectangular_planar_domain_fails_closed_until_boundary_clipping_is_ported() {
+    fn triangular_domains_clip_the_section_to_the_actual_wire() {
         let first_source = triangle_face(2.0);
         let second_source = finite_plane_face(Point3::new(0.0, 2.0, 0.0), Direction3::Y);
         let first_offset = triangle_face(0.0);
@@ -225,14 +230,37 @@ mod tests {
         let as_des = Handle::new(BRepAlgoAsDes::new());
         let mut intersections = BRepOffsetInter3d::new(&as_des, State::In, 1e-7);
 
-        let failure = intersections
+        intersections
             .face_inter(&first_offset, &second_offset, &images)
-            .unwrap_err();
+            .unwrap();
 
-        assert_eq!(failure.exception_type(), "Standard_NotImplemented");
-        assert!(intersections.touched_faces().is_empty());
-        assert!(intersections.new_edges().is_empty());
-        assert!(!intersections.is_done(&first_offset, &second_offset));
+        assert_eq!(intersections.touched_faces().len(), 2);
+        assert_eq!(intersections.new_edges().len(), 1);
+        assert!(intersections.is_done(&first_offset, &second_offset));
+        assert_bounded_section_geometry(&intersections, &as_des, &second_offset);
+    }
+
+    #[test]
+    fn hole_boundary_splits_one_candidate_into_native_section_edges() {
+        let first_source = face_with_hole(2.0);
+        let second_source = plane_bounds_y(2.0, (-1.0, 1.0, -3.0, 3.0));
+        let first_offset = face_with_hole(0.0);
+        let second_offset = plane_bounds_y(0.0, (-1.0, 1.0, -3.0, 3.0));
+        let mut images = BRepAlgoImage::new();
+        images.bind(&first_source, &first_offset).unwrap();
+        images.bind(&second_source, &second_offset).unwrap();
+        let as_des = Handle::new(BRepAlgoAsDes::new());
+        let mut intersections = BRepOffsetInter3d::new(&as_des, State::In, 1e-7);
+
+        intersections
+            .face_inter(&first_offset, &second_offset, &images)
+            .unwrap();
+
+        assert_eq!(intersections.touched_faces().len(), 2);
+        assert_eq!(intersections.new_edges().len(), 2);
+        assert_eq!(as_des.get().unwrap().descendant(&first_offset).count(), 2);
+        assert_eq!(as_des.get().unwrap().descendant(&second_offset).count(), 2);
+        assert_hole_sections(&intersections);
     }
 
     fn plane_face(origin: Point3, normal: Direction3) -> Face {
@@ -269,6 +297,45 @@ mod tests {
             Plane3::new(Point3::new(0.0, 0.0, z), Direction3::Z).unwrap(),
             &wire,
             true,
+        )
+        .unwrap()
+        .face()
+        .unwrap()
+    }
+
+    fn face_with_hole(z: f64) -> Face {
+        let plane = Plane3::new(Point3::new(0.0, 0.0, z), Direction3::Z).unwrap();
+        let outer = polygon_wire([
+            Point3::new(-3.0, -2.0, z),
+            Point3::new(3.0, -2.0, z),
+            Point3::new(3.0, 2.0, z),
+            Point3::new(-3.0, 2.0, z),
+        ]);
+        let hole = polygon_wire([
+            Point3::new(-1.0, -1.0, z),
+            Point3::new(1.0, -1.0, z),
+            Point3::new(1.0, 1.0, z),
+            Point3::new(-1.0, 1.0, z),
+        ]);
+        let reversed_hole = rustycad_tkbrep::topods::wire(&hole.reversed()).unwrap();
+        let mut maker = BRepBuilderAPIMakeFace::from_plane_wire(plane, &outer, true).unwrap();
+        maker.add(&reversed_hole).unwrap();
+        maker.face().unwrap()
+    }
+
+    fn polygon_wire(points: [Point3; 4]) -> rustycad_tkbrep::topods::Wire {
+        BRepBuilderAPIMakePolygon::from_four_points(
+            points[0], points[1], points[2], points[3], true,
+        )
+        .unwrap()
+        .wire()
+        .unwrap()
+    }
+
+    fn plane_bounds_y(y: f64, bounds: (f64, f64, f64, f64)) -> Face {
+        BRepBuilderAPIMakeFace::from_plane_bounds(
+            Plane3::new(Point3::new(0.0, y, 0.0), Direction3::Y).unwrap(),
+            bounds,
         )
         .unwrap()
         .face()
@@ -312,5 +379,36 @@ mod tests {
         let (curve, _, _) = BRepTool::curve(&section).unwrap();
         assert_eq!(curve.eval_d0(-1.0).unwrap(), Point3::new(1.0, 0.0, 0.0));
         assert_eq!(curve.eval_d0(1.0).unwrap(), Point3::new(-1.0, 0.0, 0.0));
+    }
+
+    fn assert_hole_sections(intersections: &BRepOffsetInter3d) {
+        let edges = intersections
+            .new_edges()
+            .iter()
+            .map(|shape| edge(shape).unwrap())
+            .collect::<Vec<_>>();
+        let ranges = edges
+            .iter()
+            .map(BRepTool::range)
+            .collect::<Result<Vec<_>, _>>()
+            .unwrap();
+        assert_eq!(ranges, vec![(-3.0, -1.0), (1.0, 3.0)]);
+        let points = edges
+            .iter()
+            .map(|edge| {
+                let (curve, _, _) = BRepTool::curve(edge).unwrap();
+                (
+                    curve.eval_d0(BRepTool::range(edge).unwrap().0).unwrap(),
+                    curve.eval_d0(BRepTool::range(edge).unwrap().1).unwrap(),
+                )
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(
+            points,
+            vec![
+                (Point3::new(3.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0)),
+                (Point3::new(-1.0, 0.0, 0.0), Point3::new(-3.0, 0.0, 0.0)),
+            ]
+        );
     }
 }
