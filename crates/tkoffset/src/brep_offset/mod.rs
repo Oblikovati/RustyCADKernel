@@ -10,6 +10,8 @@ mod make_offset_build;
 mod make_offset_check;
 mod make_offset_history;
 mod offset_face;
+mod offset_rails;
+mod offset_rails_geometry;
 mod simple_offset;
 mod simple_offset_angle;
 mod simple_offset_edge;
@@ -39,6 +41,7 @@ pub use simple_offset_vertex_map::{OffsetVertexData, build_simple_offset_vertice
 pub use surface::{BRepOffsetStatus, surface};
 
 pub use offset_face::BRepOffsetOffsetFace;
+pub use offset_rails::BRepOffsetOffset;
 pub use simple_offset_wall::build_simple_offset_wall;
 pub use sphere_join::build_vertex_arc_join;
 mod analyse;
