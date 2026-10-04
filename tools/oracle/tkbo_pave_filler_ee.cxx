@@ -14,6 +14,13 @@ class Probe final : public BOPAlgo_PaveFiller {
 public:
   void Run() { Init(Message_ProgressRange()); PerformEE(Message_ProgressRange()); }
   BOPDS_DS& DS() { return *myDS; }
+  void PrintVerticesToAvoidExtension() const {
+    std::cout << "endpoint-avoid";
+    for (auto it = myVertsToAvoidExtension.cbegin(); it != myVertsToAvoidExtension.cend(); ++it) {
+      std::cout << ' ' << *it;
+    }
+    std::cout << '\n';
+  }
 };
 
 static TopoDS_Compound edge_argument(const gp_Pnt& first, const gp_Pnt& last) {
@@ -58,6 +65,65 @@ int main() {
       std::cout << "pb " << v1 << ' ' << v2 << ' ' << t1 << ' ' << t2 << '\n';
     }
   }
+  Probe multi;
+  multi.AddArgument(edge_argument(gp_Pnt(-1, 0, 0), gp_Pnt(1, 0, 0)));
+  multi.AddArgument(edge_argument(gp_Pnt(0, -1, 0), gp_Pnt(0, 1, 0)));
+  multi.AddArgument(edge_argument(gp_Pnt(-1, -1, 0), gp_Pnt(1, 1, 0)));
+  multi.SetFuzzyValue(1.0e-6);
+  multi.Run();
+  auto& multiDS = multi.DS();
+  std::cout << "multi " << multiDS.NbShapes() << ' ' << multiDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < multiDS.InterfEE().Length(); ++i) {
+    const auto& record = multiDS.InterfEE().Value(i);
+    std::cout << "multi-record " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << record.CommonPart().VertexParameter1() << ' '
+              << record.CommonPart().VertexParameter2() << '\n';
+  }
+  for (int i = 0; i < multiDS.NbShapes(); ++i) {
+    if (multiDS.ShapeInfo(i).ShapeType() != TopAbs_EDGE) continue;
+    const auto& blocks = multiDS.PaveBlocks(i);
+    std::cout << "multi-edge " << i << ' ' << blocks.Extent() << '\n';
+    for (auto it = blocks.cbegin(); it != blocks.cend(); ++it) {
+      int firstIndex, lastIndex;
+      double first, last;
+      (*it)->Indices(firstIndex, lastIndex);
+      (*it)->Range(first, last);
+      std::cout << "multi-pb " << firstIndex << ' ' << lastIndex << ' '
+                << first << ' ' << last << '\n';
+    }
+  }
+  Probe endpoint;
+  endpoint.AddArgument(edge_argument(gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0)));
+  endpoint.AddArgument(edge_argument(gp_Pnt(0, -1, 0), gp_Pnt(0, 1, 0)));
+  endpoint.SetFuzzyValue(1.0e-6);
+  endpoint.Run();
+  auto& endpointDS = endpoint.DS();
+  std::cout << "endpoint " << endpointDS.NbShapes() << ' '
+            << endpointDS.InterfEE().Length() << ' ' << endpointDS.InterfVE().Length() << '\n';
+  for (int i = 0; i < endpointDS.InterfEE().Length(); ++i) {
+    const auto& record = endpointDS.InterfEE().Value(i);
+    std::cout << "endpoint-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << record.CommonPart().VertexParameter1() << ' '
+              << record.CommonPart().VertexParameter2() << '\n';
+  }
+  for (int i = 0; i < endpointDS.InterfVE().Length(); ++i) {
+    const auto& record = endpointDS.InterfVE().Value(i);
+    std::cout << "endpoint-ve " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << record.Parameter() << '\n';
+  }
+  for (int edge : {1, 5}) {
+    const auto& blocks = endpointDS.PaveBlocks(edge);
+    std::cout << "endpoint-edge " << edge << ' ' << blocks.Extent() << '\n';
+    for (auto it = blocks.cbegin(); it != blocks.cend(); ++it) {
+      int firstIndex, lastIndex;
+      double first, last;
+      (*it)->Indices(firstIndex, lastIndex);
+      (*it)->Range(first, last);
+      std::cout << "endpoint-pb " << firstIndex << ' ' << lastIndex << ' '
+                << first << ' ' << last << '\n';
+    }
+  }
+  endpoint.PrintVerticesToAvoidExtension();
   Probe overlap;
   BRep_Builder builder;
   TopoDS_Vertex start, end;
