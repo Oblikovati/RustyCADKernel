@@ -14,4 +14,4 @@ g++ -std=c++20 -O2 \
 timeout 10s /tmp/tkmath_bvh_queue_parallelism
 ```
 
-Expected output: `2 7`. In the current Rust `queue_build`, the shared mutex around the whole `build_node` and `add_children` callback serializes these same two child splits. The supplemental Rust test records that current limit; it is not a native parity pass. The general mutable-only Rust builder/set contract remains serial until an opt-in synchronized shared-set API can safely support parallel execution.
+Expected output: `2 7`. In the current Rust `queue_build`, the shared mutex around the whole `build_node` and `add_children` callback serializes these same two child splits. The supplemental Rust test records that current limit; it is not a native parity pass. The general mutable-only Rust builder/set contract remains serial. Rust now also has `parallel_queue_build` for builders implementing `BvhParallelQueueBuilder` over `BvhSharedSet`; the supplemental shared-path test reaches two simultaneous callbacks and constructs seven nodes. The binned builder uses this opt-in API through `BvhMutexSet`. The separate partition-failure probe records the remaining partial-tree-state divergence.

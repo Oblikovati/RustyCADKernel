@@ -26,6 +26,7 @@ mod radix_sorter;
 mod ray;
 mod scalar;
 mod set;
+mod shared_set;
 mod sorter;
 mod spatial_median_builder;
 mod sweep_plane_builder;
@@ -60,7 +61,8 @@ pub use primitive_set::{
 };
 pub use properties::{BvhProperties, BvhTransform, matrix_op_inverse, matrix_op_multiply};
 pub use queue_builder::{
-    BvhChildNodes, BvhPrimitiveRange, BvhQueueBuilder, add_queued_children, queue_build,
+    BvhChildNodes, BvhParallelQueueBuilder, BvhPrimitiveRange, BvhQueueBuilder,
+    add_queued_children, parallel_queue_build, queue_build,
 };
 pub use quick_sorter::BvhQuickSorter;
 pub use radix_sorter::{
@@ -69,7 +71,8 @@ pub use radix_sorter::{
 };
 pub use ray::BvhRay;
 pub use scalar::{BvhScalar, int_floor, std_max, std_min};
-pub use set::{BvhSet, combined_element_boxes};
+pub use set::{BvhSet, BvhSharedSet, combined_element_boxes};
+pub use shared_set::BvhMutexSet;
 pub use sorter::BvhSorter;
 pub use spatial_median_builder::BvhSpatialMedianBuilder;
 pub use sweep_plane_builder::BvhSweepPlaneBuilder;
@@ -77,7 +80,7 @@ pub use traverse::{
     BvhBaseTraverse, BvhNodeInStack, BvhPairNodesInStack, BvhPairSetTraverse, BvhPairTraverse,
     BvhSetTraverse, BvhTraverse, select_elements, select_pairs,
 };
-pub use tree::{BvhBinaryTree, BvhQuadTree, BvhTree};
+pub use tree::{BvhBinaryTree, BvhNodeSnapshot, BvhQuadTree, BvhTree};
 pub use tree_owner::BvhTreeOwner;
 pub use triangulation::BvhTriangulation;
 pub use vector::{

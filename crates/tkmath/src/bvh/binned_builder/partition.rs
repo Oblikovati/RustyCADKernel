@@ -3,13 +3,42 @@
 //! `BVH::SplitPrimitives` and `BVH::BVH_AxisSelector`.
 use crate::bvh::bounding_box::BvhBox;
 use crate::bvh::scalar::{BvhScalar, int_floor};
-use crate::bvh::set::BvhSet;
+use crate::bvh::set::{BvhSet, BvhSharedSet};
 use crate::bvh::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 
 /// Bin of a centroid along `axis` for `bins` slices of `[min, max]`, unclamped.
-fn bin_of<V: BvhVector>(
-    set: &dyn BvhSet<V>,
+trait PartitionAccess<V: BvhVector> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure>;
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure>;
+}
+
+struct MutableSetAccess<'a, V: BvhVector>(&'a mut dyn BvhSet<V>);
+
+impl<V: BvhVector> PartitionAccess<V> for MutableSetAccess<'_, V> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure> {
+        self.0.center(index, axis)
+    }
+
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure> {
+        self.0.swap(first, second)
+    }
+}
+
+struct SharedSetAccess<'a, V: BvhVector>(&'a dyn BvhSharedSet<V>);
+
+impl<V: BvhVector> PartitionAccess<V> for SharedSetAccess<'_, V> {
+    fn center(&self, index: i32, axis: i32) -> Result<V::Scalar, Failure> {
+        self.0.center(index, axis)
+    }
+
+    fn swap(&mut self, first: i32, second: i32) -> Result<(), Failure> {
+        self.0.swap(first, second)
+    }
+}
+
+fn bin_of<V: BvhVector, A: PartitionAccess<V>>(
+    set: &A,
     index: i32,
     axis: i32,
     min: V::Scalar,
@@ -23,6 +52,46 @@ fn bin_of<V: BvhVector>(
 /// Example: `split_primitives(set, &node_box, 0, 9, 3, 0, 32)?`.
 pub fn split_primitives<V: BvhVector>(
     set: &mut dyn BvhSet<V>,
+    bounding: &BvhBox<V>,
+    begin: i32,
+    end: i32,
+    bin: i32,
+    axis: i32,
+    bins: i32,
+) -> Result<i32, Failure> {
+    split_primitives_with(
+        &mut MutableSetAccess(set),
+        bounding,
+        begin,
+        end,
+        bin,
+        axis,
+        bins,
+    )
+}
+
+pub(super) fn split_primitives_shared<V: BvhVector>(
+    set: &dyn BvhSharedSet<V>,
+    bounding: &BvhBox<V>,
+    begin: i32,
+    end: i32,
+    bin: i32,
+    axis: i32,
+    bins: i32,
+) -> Result<i32, Failure> {
+    split_primitives_with(
+        &mut SharedSetAccess(set),
+        bounding,
+        begin,
+        end,
+        bin,
+        axis,
+        bins,
+    )
+}
+
+fn split_primitives_with<V: BvhVector, A: PartitionAccess<V>>(
+    set: &mut A,
     bounding: &BvhBox<V>,
     begin: i32,
     end: i32,
