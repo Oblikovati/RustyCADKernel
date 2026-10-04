@@ -103,20 +103,33 @@ impl SurfaceState {
     }
     // Geom_BezierSurface::init: one-based copies, rationality, unit weights otherwise,
     // cache flag and evaluation representation reset.
-    fn init(
+    pub(super) fn init(
         &mut self,
         poles: &Array2<'_, Point3>,
         weights: Option<&Array2<'_, f64>>,
     ) -> Result<(), Failure> {
         self.poles = rebased_grid(poles)?;
-        (self.u_rational, self.v_rational) = (false, false);
-        self.weights = self.unit_weights()?;
         if let Some(weights) = weights {
-            self.weights = rebased_grid(weights)?;
+            self.resize_weights_for_init()?;
+            self.weights
+                .copy_values(weights)
+                .map_err(|error| error.into_failure("NCollection_Array2::CopyValues"))?;
             self.update_rationality()?;
+        } else {
+            (self.u_rational, self.v_rational) = (false, false);
+            self.weights = self.unit_weights()?;
         }
         self.max_deriv_inv_ok = false;
         self.eval_rep = Handle::default();
+        Ok(())
+    }
+    fn resize_weights_for_init(&mut self) -> Result<(), Failure> {
+        let rows: usize = self.poles.nb_rows();
+        let columns: usize = self.poles.nb_columns();
+        if (self.weights.nb_rows(), self.weights.nb_columns()) == (rows, columns) {
+            return Ok(());
+        }
+        self.weights = one_based_grid(rows as i32, columns as i32)?;
         Ok(())
     }
     /// `Rational(myWeights, ...)` then unit weights when neither direction is rational,

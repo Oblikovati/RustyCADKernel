@@ -1,0 +1,48 @@
+{
+  "scope": "Protected Geom_BezierSurface::init reinitialization",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration_id": "442159fd3109881bebba2c78a2f05043a1a65f135894dcbfac8ee9d3aa152f84",
+  "native_source_sha256": {
+    "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx": "f2f8352da27bbfdb7b5c86a1852fd19a119fcb3dc6662c2be0e7b04de73fa8c2",
+    "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.cxx": "31313464caa8ff9080924d862861b72bd39225be0a96ea1a56c9facd60c4e864"
+  },
+  "native_probe": "tools/oracle/tkg3d_bezier_surface_init.cxx",
+  "expected": "tools/oracle/tkg3d_bezier_surface_init.expected",
+  "artifact_sha256": {
+    "tools/oracle/tkg3d_bezier_surface_init.cxx": "98d9e4bfa74de8a6acbe667234f3fb46b0cd9208887857c971e06b446ec26167",
+    "tools/oracle/tkg3d_bezier_surface_init.expected": "8ba5f593685b1da17f55d6ff52925a2046f8b1dcce8e79f76001d42b232b569a",
+    "crates/tkg3d/tests/bezier_surface_protected_init.rs": "1918556b184c969d3a8c50e6ad8a10ec973ea4d40f690f4b129d8b8004ec272a"
+  },
+  "rust_source_sha256": {
+    "crates/tkg3d/src/geom/bezier_surface.rs": "5eac257daf8e12c27c6fa5069437450ae3c6dea899122411fc13dd53c52261a6",
+    "crates/tkg3d/src/geom/bezier_surface/state.rs": "f68a52f19c4ffc4617755402f08baef347054c110b7f7f1931ba93add29aab08"
+  },
+  "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkg3d_bezier_surface_init.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG3d -lTKMath -lTKernel -o /tmp/tkg3d_bezier_surface_init_probe",
+  "native_profile": "Linux x86_64 GCC C++17 -O2 against the pinned modeling library",
+  "native_library_sha256": {
+    "TKG3d": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4",
+    "TKMath": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "TKernel": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "native_output_matches_expected": true,
+  "rust_test": "crates/tkg3d/tests/bezier_surface_protected_init.rs",
+  "rust_cases": 5,
+  "verified_cases": [
+    "constructor rejection and protected-init acceptance of equal zero weights",
+    "dimension-changing weighted init, rationality recomputation, resolution cache invalidation, and evaluation representation clearing",
+    "null weight pointer resets rationality and clears evaluation representation",
+    "same-total-size but mismatched 3x2 and 2x3 arrays raise Standard_DimensionMismatch after pole replacement, retaining prior rational flags, cached resolution and representation",
+    "same-sized destination storage is retained when incompatible 1x4 weights fail to copy into an existing 2x2 rational surface"
+  ],
+  "native_failure_domain": "Run `/tmp/tkg3d_bezier_surface_init_probe same-count-crash` after compiling the probe. It prints `before-same-count-init` and exits by SIGSEGV (shell status 139) when a nonrational 2x2 surface is reinitialized with same-size rational weights. Equivalent 2D and 3D Bezier curve probes also crash; see porting/audits/bezier-curve-protected-init.json. Rust safely completes these calls, so this input sequence remains an explicit behavior divergence.",
+  "limitations": [
+    "Post-exception resized weight cells are not read because OCCT leaves them uninitialized.",
+    "The native crash is recorded as an observed upstream failure, not emulated as a Rust process crash.",
+    "This does not establish complete TKG3d API or cross-platform parity."
+  ],
+  "validation": {
+    "focused_test": "cargo test -p rustycad-tkg3d --test bezier_surface_protected_init",
+    "focused_tests_passed": 5,
+    "strict_clippy": "cargo clippy -p rustycad-tkg3d --all-targets -- -D warnings: passed"
+  }
+}

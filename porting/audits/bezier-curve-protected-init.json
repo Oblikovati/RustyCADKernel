@@ -9,6 +9,15 @@
     "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.cxx": "e036ebe902e558a6bcbb416edb915ecb22fb797f34148aa6af8ebeea52c94775",
     "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.cxx": "4e57081db0e392d91af9d57b2c8d2909e7647de916a5a904a268acbda6b577e3"
   },
+  "same_count_weighted_reinitialization": {
+    "probe": "tools/oracle/bezier_curve_reinit_crash.cxx",
+    "probe_sha256": "df8be6133c1f833016da0acad4ac5e89482963e6114f0e4033a0267ca389f234",
+    "reproduction": "Both `2d` and `3d` subprocesses construct a nonrational three-pole curve, then call protected `init` with three poles and positive nonconstant weights. Each prints its `before-*` marker and exits by SIGSEGV (shell status 139), without printing the `after-*` marker.",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/bezier_curve_reinit_crash.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG2d -lTKG3d -lTKMath -lTKernel -o /tmp/bezier_curve_reinit_crash",
+    "run_commands": ["ulimit -c 0; /tmp/bezier_curve_reinit_crash 2d", "ulimit -c 0; /tmp/bezier_curve_reinit_crash 3d"],
+    "native_profile": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871 model library, Linux x86_64 GCC C++17 -O2",
+    "port_behavior": "Rust completes these same-count updates; parity is partial because the native library crashes for this valid-size call sequence."
+  },
   "artifact_sha256": {
     "tools/oracle/bezier_curve_protected_init.cxx": "3cf529a08323e26628362ea5179bd2a30ef5122aa72a101b45be593c2c245e08",
     "tools/oracle/bezier_curve_protected_init.expected": "a519eed7d67f5bef040c6ec993993b368fc1145e7fd41574bb00ea9d2aa37832",
