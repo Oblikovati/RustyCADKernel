@@ -10,7 +10,8 @@ Reproduce all native snapshots with the modeling build used by adjacent TKBO pro
 ```sh
 for name in tkbo_pave_filler_ef tkbo_pave_filler_ef_endpoint \
   tkbo_pave_filler_ef_coplanar tkbo_pave_filler_ef_repeat \
-  tkbo_pave_filler_ef_fused; do
+  tkbo_pave_filler_ef_fused tkbo_pave_filler_ef_near \
+  tkbo_pave_filler_ef_bezier; do
   g++ -std=c++17 -O0 -g0 -I"$OCCT_BUILD/include/opencascade" \
     "tools/oracle/$name.cxx" -L"$OCCT_BUILD/lin64/gcc/libi" \
     -Wl,-rpath,"$OCCT_BUILD/lin64/gcc/libi" -Wl,--no-as-needed \
@@ -22,6 +23,8 @@ for name in tkbo_pave_filler_ef tkbo_pave_filler_ef_endpoint \
 done
 ```
 
-Rust differential tests: `cargo test -p rustycad-tkbo --test bop_algo_pave_filler_ef`. This slice still lacks native post-treatment for `PerformCommonBlocks`, `UpdateVerticesOfCB`, `PerformNewVertices`, and complete endpoint/vertex/edge common-part branches. Error/alert ordering, user-break handling, distant transforms, and other curve/surface pairs remain unimplemented or unverified; the five fixtures do not claim full `PerformEF` parity.
+Rust differential tests: `cargo test -p rustycad-tkbo --test bop_algo_pave_filler_ef`. The near-hit fixture uses points at Y = 0, 0.0003, and 0.0006 with fuzzy 0.0004; OCCT transitively groups the endpoints even though their separation exceeds fuzzy, and the test checks center, tolerance, block ordering, and shared indices. The Bezier probe records native success (`InterfEF` contains the crossing); Rust intentionally returns `Standard_NotImplemented` because BeanFace's finite-domain surface localization is not ported. That test verifies the missing behavior stays explicit instead of being converted into a successful warning-only `PerformEF` call.
+
+This slice still lacks native post-treatment for `PerformCommonBlocks`, `UpdateVerticesOfCB`, `PerformNewVertices`, and complete endpoint/vertex/edge common-part branches. Error/alert ordering, user-break handling, distant transforms, and other curve/surface pairs remain unimplemented or unverified; passing fixtures do not claim full `PerformEF` parity.
 
 Additional pinned probes cover endpoint contact, coplanar edge overlap, repeat calls in destructive/non-destructive and fuzzy/zero-fuzzy modes, and three edge crossings fused to one shared vertex. The latter checks all three EF records, each split block's shared vertex index, face classification, and the generated vertex coordinates/tolerance. Source cases remain limited to straight line edges against one bounded plane face.

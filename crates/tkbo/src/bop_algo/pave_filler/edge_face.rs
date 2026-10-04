@@ -80,7 +80,13 @@ impl BOPAlgoPaveFiller {
         changed_faces: &mut Map<i32>,
     ) -> Result<(), Failure> {
         let mut solver = configured_edge_face(self, &candidate);
-        if solver.perform().is_err() || !solver.is_done() {
+        if let Err(error) = solver.perform() {
+            if error.exception_type() == "Standard_NotImplemented" {
+                return Err(error);
+            }
+            return self.warn_edge_face(&candidate);
+        }
+        if !solver.is_done() {
             return self.warn_edge_face(&candidate);
         }
         for common in solver.common_parts().iter() {

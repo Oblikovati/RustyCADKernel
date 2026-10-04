@@ -4,6 +4,8 @@ use rustycad_tkbrep::{
     brep::BRepTool,
     topods::{Shape, Vertex},
 };
+use rustycad_tkernel::{ncollection::Array2, standard::Handle};
+use rustycad_tkg3d::geom::{GeomBezierSurface, GeomSurface};
 use rustycad_tkmath::gp::{Plane3, Point3};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
 use std::fmt::Write;
@@ -47,6 +49,16 @@ fn perform_ef_endpoint_contact_keeps_the_source_block_unsplit() {
 }
 
 #[test]
+fn perform_ef_propagates_unported_bezier_localization() {
+    let edge = line_edge((0.5, 0.5, -1.0), (0.5, 0.5, 1.0));
+    let face = bezier_face();
+    let mut filler = configured_filler(&edge, &face, false, 1.0e-6);
+    let error = filler.perform_ef().unwrap_err();
+    assert_eq!(error.exception_type(), "Standard_NotImplemented");
+    assert!(error.message().contains("requires unported localization"));
+}
+
+#[test]
 fn perform_ef_records_coplanar_edge_without_a_generated_vertex() {
     let edge = coplanar_edge_argument();
     let face = face_argument();
@@ -78,6 +90,14 @@ fn fused_edge_arguments() -> [Shape; 3] {
     ]
 }
 
+fn near_edge_arguments() -> [Shape; 3] {
+    [
+        line_edge((-1.0, 0.0, -1.0), (1.0, 0.0, 1.0)),
+        line_edge((-1.0, 0.0003, -1.0), (1.0, 0.0003, 1.0)),
+        line_edge((-1.0, 0.0006, -1.0), (1.0, 0.0006, 1.0)),
+    ]
+}
+
 fn line_edge(first: (f64, f64, f64), last: (f64, f64, f64)) -> Shape {
     BRepBuilderAPIMakeEdge::from_points(
         Point3::new(first.0, first.1, first.2),
@@ -87,6 +107,22 @@ fn line_edge(first: (f64, f64, f64), last: (f64, f64, f64)) -> Shape {
     .edge()
     .unwrap()
     .into_shape()
+}
+
+fn bezier_face() -> Shape {
+    let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
+    for u in 1..=2 {
+        for v in 1..=2 {
+            *poles.change_value(u, v).unwrap() =
+                Point3::new(f64::from(u - 1), f64::from(v - 1), 0.0);
+        }
+    }
+    let surface = Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast::<dyn GeomSurface>();
+    BRepBuilderAPIMakeFace::from_surface_bounds(&surface, (0.0, 1.0, 0.0, 1.0), 1.0e-7)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
 }
 
 #[test]
@@ -106,7 +142,7 @@ fn perform_ef_repeated_calls_preserve_native_results_for_fuzzy_and_safe_modes() 
 fn perform_ef_fuses_three_intersections_and_shares_the_vertex_across_blocks() {
     let edges = fused_edge_arguments();
     let face = face_argument();
-    let (mut filler, indices, face_index) = fused_filler(&edges, &face);
+    let (mut filler, indices, face_index) = fused_filler(&edges, &face, 1.0e-6);
     filler.perform_ef().unwrap();
     let mut rows = String::new();
     append_fused_result(&mut filler, &indices, face_index, &mut rows);
@@ -116,11 +152,25 @@ fn perform_ef_fuses_three_intersections_and_shares_the_vertex_across_blocks() {
     );
 }
 
-fn fused_filler(edges: &[Shape], face: &Shape) -> (BOPAlgoPaveFiller, Vec<i32>, i32) {
+#[test]
+fn perform_ef_transitively_fuses_nearby_crossings_using_native_center_and_tolerance() {
+    let edges = near_edge_arguments();
+    let face = face_argument();
+    let (mut filler, indices, face_index) = fused_filler(&edges, &face, 4.0e-4);
+    filler.perform_ef().unwrap();
+    let mut rows = String::new();
+    append_fused_result(&mut filler, &indices, face_index, &mut rows);
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ef_near.expected")
+    );
+}
+
+fn fused_filler(edges: &[Shape], face: &Shape, fuzzy: f64) -> (BOPAlgoPaveFiller, Vec<i32>, i32) {
     let mut filler = BOPAlgoPaveFiller::new();
     edges.iter().for_each(|edge| filler.add_argument(edge));
     filler.add_argument(face);
-    filler.options_mut().set_fuzzy_value(1.0e-6);
+    filler.options_mut().set_fuzzy_value(fuzzy);
     filler.initialize().unwrap();
     let structure = filler.data_structure().unwrap();
     let edge_indices = edges.iter().map(|edge| structure.index(edge)).collect();
