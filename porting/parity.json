@@ -28832,8 +28832,8 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::queue_build",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "The root, queue, child registration, and serial execution path match the source. For configured worker counts above one, current Rust TypedBuildTool holds one Mutex across the entire mutable build_node/add_children callback, so all node splits are serialized. Native starts myNumOfThreads workers and the pinned two-child barrier probe reaches two simultaneous callbacks; see tools/oracle/tkmath_bvh_queue_parallelism.md. Mutable-only BvhSet/BvhTree implementations remain serial until a separate safe shared-set builder contract is available."
     },
     {
       "upstream_id": "BVH_QueueBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
