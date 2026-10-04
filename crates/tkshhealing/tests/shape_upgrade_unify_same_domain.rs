@@ -17,7 +17,7 @@ use rustycad_tkbrep::topods::{Shape, Shell, Wire};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Plane3, Point3};
-use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeBox, BRepPrimAPIMakeCylinder};
 use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape,

@@ -1,24 +1,25 @@
-use super::{ShapeUpgradeUnifySameDomain, face_wires};
+use super::ShapeUpgradeUnifySameDomain;
 mod bspline;
 mod containers;
 mod global_context;
+mod global_merge;
 mod safe_input;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildReShape;
 pub(super) use global_context::protected_shapes;
 use rustycad_tkbrep::brep::BRepTool;
-use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve, BRepAdaptorSurface};
+use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex, Wire};
+use rustycad_tkbrep::topods::{Edge, Shape, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
+use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine, GeomTrimmedCurve};
-use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkmath::geom_abs::CurveType;
 use rustycad_tkmath::gp::{Axis1, Axis2, Circle3, Direction3, Point3, Vector3};
-use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
+use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 use rustycad_tktopalgo::brep_lib::build_pcurve_for_edges_on_plane;
 use safe_input::{record_safe_vertex, safe_merge_vertex};
 
@@ -51,12 +52,7 @@ pub(super) fn merge_wire_edge_chains(
     };
     match shape.shape_type()? {
         ShapeEnum::Wire => merge_wire_chains(shape, true, &options),
-        ShapeEnum::Face => merge_planar_face_edges(shape, &options),
-        _ => {
-            let mut fields = fields;
-            fields.keep_shapes = protected;
-            containers::merge_nested_children(shape, &fields, &context)
-        }
+        _ => containers::merge_nested_children(shape, &options),
     }
 }
 
@@ -121,37 +117,6 @@ fn merge_wire_chains(
     Ok(result)
 }
 
-fn merge_planar_face_edges(
-    shape: &Shape,
-    options: &EdgeMergeOptions<'_>,
-) -> Result<Shape, Failure> {
-    let face = rustycad_tkbrep::topods::face(shape)?;
-    if BRepAdaptorSurface::with_face(&face, false)?.get_type()? != SurfaceType::Plane {
-        return Ok(shape.clone());
-    }
-    let wires = face_wires(&face)?;
-    if wires.len() != 1 {
-        return Ok(shape.clone());
-    }
-    merge_planar_wire_chain(shape, &face, &wires[0], options)
-}
-
-fn merge_planar_wire_chain(
-    original: &Shape,
-    face: &Face,
-    wire: &Wire,
-    options: &EdgeMergeOptions<'_>,
-) -> Result<Shape, Failure> {
-    let source = wire.clone().into_shape();
-    let before = wire_edges(&source)?.len();
-    let merged = merge_wire_chains(&source, false, options)?;
-    if wire_edges(&merged)?.len() == before {
-        return Ok(original.clone());
-    }
-    let rebuilt = rebuild_planar_face(face, &rustycad_tkbrep::topods::wire(&merged)?)?;
-    rebuild_planar_face_pcurves(&rebuilt)
-}
-
 pub(super) fn rebuild_planar_face_pcurves(shape: &Shape) -> Result<Shape, Failure> {
     let face = rustycad_tkbrep::topods::face(shape)?;
     let edges = wire_edges(shape)?;
@@ -200,7 +165,7 @@ fn connected_linear_pair(
     let analysis = ShapeAnalysisEdge::new();
     let (first_start, first_end) = edge_vertices(&analysis, first);
     let (second_start, second_end) = edge_vertices(&analysis, second);
-    if first_end.is_same(&second_start) {
+    if connected_vertex_occurrences(&first_end, &second_start) {
         return Ok(Some((
             first.clone(),
             second.clone(),
@@ -208,7 +173,7 @@ fn connected_linear_pair(
             second_end,
         )));
     }
-    if second_end.is_same(&first_start) {
+    if connected_vertex_occurrences(&second_end, &first_start) {
         return Ok(Some((
             second.clone(),
             first.clone(),
@@ -217,6 +182,15 @@ fn connected_linear_pair(
         )));
     }
     Ok(None)
+}
+
+pub(super) fn connected_vertex_occurrences(first: &Vertex, second: &Vertex) -> bool {
+    first.is_same(second)
+        && matches!(
+            (first.orientation(), second.orientation()),
+            (Orientation::Forward, Orientation::Reversed)
+                | (Orientation::Reversed, Orientation::Forward)
+        )
 }
 
 fn both_linear(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Failure> {
@@ -288,7 +262,7 @@ fn connected_circle_pair(
     let analysis = ShapeAnalysisEdge::new();
     let (first_start, first_end) = edge_vertices(&analysis, first);
     let (second_start, second_end) = edge_vertices(&analysis, second);
-    if first_end.is_same(&second_start) {
+    if connected_vertex_occurrences(&first_end, &second_start) {
         if !bspline::aligned_join(first, second, tolerance)? {
             return Ok(None);
         }
@@ -307,7 +281,7 @@ fn connected_circle_pair(
             second_end,
         )));
     }
-    if second_end.is_same(&first_start) {
+    if connected_vertex_occurrences(&second_end, &first_start) {
         if !bspline::aligned_join(second, first, tolerance)? {
             return Ok(None);
         }
@@ -481,13 +455,4 @@ fn wire_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
     Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?
         .map(|edge| rustycad_tkbrep::topods::edge(&edge))
         .collect()
-}
-
-fn rebuild_planar_face(face: &Face, wire: &Wire) -> Result<Shape, Failure> {
-    let surface = BRepTool::surface(face)?;
-    let mut rebuilt = BRepBuilderAPIMakeFace::from_surface_wire(&surface, wire, true)?
-        .face()?
-        .into_shape();
-    rebuilt.set_orientation(face.orientation());
-    Ok(rebuilt)
 }
