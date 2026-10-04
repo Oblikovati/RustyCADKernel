@@ -1,0 +1,573 @@
+{
+  "schema_version": 1,
+  "issue": "Empty compiler qualifier suffix was treated as unsupported, so the existing exact const/nonconst pair rule could not choose a plain nonconst member.",
+  "scope": "Correct absence-of-qualifiers to an empty set; keep unknown suffixes unresolved and name-only selectors ambiguous.",
+  "historical_crosswalk_sha256": "cd19488efdd95f00744c843a1f10f3108cb15c14a111954401e13b4b90cf6c33",
+  "candidate_rows_replayed": 64,
+  "rows_now_unique": 56,
+  "legacy_declarations_added": 0,
+  "fixture": "tools/tests/fixtures/cpp-plain-const-overloads.json",
+  "resolved_rows": [
+    {
+      "upstream_id": "BVH_TreeBase::MinPoint(int)",
+      "toolkit": "TKMath",
+      "selected_id": "7d2a2b7abf457372e786070a1ae7df6c0054138bd57d6d69d8a1b955fdd3a482",
+      "selected_signature": "BVH_Box<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt &(int)",
+      "previous_candidate_ids": [
+        "193013c0260d8427b128e6936131f32dea80238ae32bdbd6c67770e617bcbcc8",
+        "7d2a2b7abf457372e786070a1ae7df6c0054138bd57d6d69d8a1b955fdd3a482"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::MaxPoint(int)",
+      "toolkit": "TKMath",
+      "selected_id": "3af4cf30131fbf12434139c4349273747d05a8ddeeecd1e7a4cd308d5ff09a96",
+      "selected_signature": "BVH_Box<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt &(int)",
+      "previous_candidate_ids": [
+        "3af4cf30131fbf12434139c4349273747d05a8ddeeecd1e7a4cd308d5ff09a96",
+        "a202bd0d067d359212053777f2505d704f698028d2fdb2b4197b018b0b85dd65"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::BegPrimitive(int)",
+      "toolkit": "TKMath",
+      "selected_id": "c8443904aa400e45ca7f386e34a1d30ba149f1fa319083ecd4b80fd54f85cfca",
+      "selected_signature": "int &(int)",
+      "previous_candidate_ids": [
+        "808af73485a69959cd1361849eb521da0be36dfec786f600dc57fe85fb28358a",
+        "c8443904aa400e45ca7f386e34a1d30ba149f1fa319083ecd4b80fd54f85cfca"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::EndPrimitive(int)",
+      "toolkit": "TKMath",
+      "selected_id": "bff4d737df9c83bbccb40d2dc936c5a12c191cff1e6281edc27906b185c1c3b2",
+      "selected_signature": "int &(int)",
+      "previous_candidate_ids": [
+        "5f5fe14d2b0588058311521fa4ee7706484cc136ca6074d5d99689c3d4425dd4",
+        "bff4d737df9c83bbccb40d2dc936c5a12c191cff1e6281edc27906b185c1c3b2"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::Level(int)",
+      "toolkit": "TKMath",
+      "selected_id": "27e5e31e64fa24d3f650351fcfadb88fa62a895278ca00ca43558664d08abc53",
+      "selected_signature": "int &(int)",
+      "previous_candidate_ids": [
+        "27e5e31e64fa24d3f650351fcfadb88fa62a895278ca00ca43558664d08abc53",
+        "cc8032cc73c35520cde04c7106c7cf1893cc0c75c165589e486baab0faf851fb"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::NodeInfoBuffer()",
+      "toolkit": "TKMath",
+      "selected_id": "22a4b67f4184986d8a3c35ce278fc51080f282bb594239f15a6f9b74456612f3",
+      "selected_signature": "class NCollection_LinearVector<class NCollection_Vec4<int>> &()",
+      "previous_candidate_ids": [
+        "22a4b67f4184986d8a3c35ce278fc51080f282bb594239f15a6f9b74456612f3",
+        "4c28ae3207bcbe9d7324cc4821fba00e8e5350f3082b8031111ba4c3eb66f385"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::MinPointBuffer()",
+      "toolkit": "TKMath",
+      "selected_id": "b585b2b0df70498ff76c666f7aa86c6cee1e4a8b3760efef6e7f138def4a3bc8",
+      "selected_signature": "BVH::ArrayType<type-parameter-0-0, value-parameter-0-1>::Type &()",
+      "previous_candidate_ids": [
+        "b585b2b0df70498ff76c666f7aa86c6cee1e4a8b3760efef6e7f138def4a3bc8",
+        "f2707fceda54ef21e067a41ca2bd2b38555da848a8d691f214b666f56bea60cf"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TreeBase::MaxPointBuffer()",
+      "toolkit": "TKMath",
+      "selected_id": "5dd0e88f9923bbe23af6a7d4840ae4ca33712d76b1b944f65df365e7fd8618c9",
+      "selected_signature": "BVH::ArrayType<type-parameter-0-0, value-parameter-0-1>::Type &()",
+      "previous_candidate_ids": [
+        "5dd0e88f9923bbe23af6a7d4840ae4ca33712d76b1b944f65df365e7fd8618c9",
+        "ba52af35f3348f0993e6e09dd9e4a6c2cc5a1d5fdbae867ea8664be7ae730fc7"
+      ]
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Objects()",
+      "toolkit": "TKMath",
+      "selected_id": "a8d60c4df9eafe515afc5376fee0e294906f358475605a39a9b57ff9d709be85",
+      "selected_signature": "NCollection_DynamicArray<opencascade::handle<BVH_Object<type-parameter-0-0, value-parameter-0-1>>> &()",
+      "previous_candidate_ids": [
+        "617a2451fdb123e950d4b5776e0a0896701567380197ba38e949fce461b9c7c8",
+        "a8d60c4df9eafe515afc5376fee0e294906f358475605a39a9b57ff9d709be85"
+      ]
+    },
+    {
+      "upstream_id": "BVH_DistanceField::Voxel(int,int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "4ddb05dc3e7a796552c293998fe4ed0c8198fe11c865a555a63dc37720d1e3f5",
+      "selected_signature": "type-parameter-0-0 &(int, int, int)",
+      "previous_candidate_ids": [
+        "33f1245ce3e3ffc6a48ecd75320b6e49f264be30e8b2cd9c9439e7969adb5c8f",
+        "4ddb05dc3e7a796552c293998fe4ed0c8198fe11c865a555a63dc37720d1e3f5"
+      ]
+    },
+    {
+      "upstream_id": "gp_Mat2d::operator()(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "4d529351fe34d09354035ad4c3eb1efbf3e84e20e885affdccef5641ea8668b6",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "4d529351fe34d09354035ad4c3eb1efbf3e84e20e885affdccef5641ea8668b6",
+        "d634b3befb9db6de8c1f5907cc898972663a79c05152989c089ba68f8688d619"
+      ]
+    },
+    {
+      "upstream_id": "gp_Mat::operator()(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "986f84e71e0e86833d47dd8073503ddc2a3cc65a841e98c8457b0b15d2e20152",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "986f84e71e0e86833d47dd8073503ddc2a3cc65a841e98c8457b0b15d2e20152",
+        "a4dec157aa3b8ae3c1341a64c575cb5515ee377908a4bd48e29160d79a45e992"
+      ]
+    },
+    {
+      "upstream_id": "Poly_Triangle::operator()(int)",
+      "toolkit": "TKMath",
+      "selected_id": "c5cd799d4edb73670d3e4e1a819c0170258e2859f9652ac1b8b963416871aac1",
+      "selected_signature": "int &(int)",
+      "previous_candidate_ids": [
+        "16a7bf30b5b8efa073fa2642451507e356e6af3b1b1f9bb9fc5d2fcd5496e8a4",
+        "c5cd799d4edb73670d3e4e1a819c0170258e2859f9652ac1b8b963416871aac1"
+      ]
+    },
+    {
+      "upstream_id": "math_DoubleTab::Value(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "1f4451304da50bc37a52fddf31a1421ab7a1a9b38811af404c53630690227e00",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "1f4451304da50bc37a52fddf31a1421ab7a1a9b38811af404c53630690227e00",
+        "2fdbfa06ed6e7e8e27dcea54aa654565e1cb68ffbaf1accb90e92eab647fa00a"
+      ]
+    },
+    {
+      "upstream_id": "math_DoubleTab::operator()(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "7f136989f3db1fc48b8f3ed2c79bcd16aa396181faa548cb69d817e9105f772b",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "7015dcc582021321a00a785831b7ef70f19cee15c3b94771a45429e92b29db7b",
+        "7f136989f3db1fc48b8f3ed2c79bcd16aa396181faa548cb69d817e9105f772b"
+      ]
+    },
+    {
+      "upstream_id": "math_Matrix::Value(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "ba0af06df04f92875dd0a8002a6a13c4ecfe505d14951c740512d3acf1985286",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "3c37bc8a41411fb307ec6ec155c3829ed2154dc32024f676d6b429987aae2630",
+        "ba0af06df04f92875dd0a8002a6a13c4ecfe505d14951c740512d3acf1985286"
+      ]
+    },
+    {
+      "upstream_id": "math_Matrix::operator()(int,int)",
+      "toolkit": "TKMath",
+      "selected_id": "c24742542fd0bb4ee224fc9272d690b57711910e7cb4e4a16435b57cf4772bc8",
+      "selected_signature": "double &(int, int)",
+      "previous_candidate_ids": [
+        "5601154bbaf085bbd1109b8186da0e60e74ba74d4a1e3be6cd1bf7bc4d77475b",
+        "c24742542fd0bb4ee224fc9272d690b57711910e7cb4e4a16435b57cf4772bc8"
+      ]
+    },
+    {
+      "upstream_id": "math_VectorBase::Value(int)",
+      "toolkit": "TKMath",
+      "selected_id": "b68e23d0bf12cde9439aa3c2a38fe36f18eb535f3cf7c39f1e41df78bcb27fb3",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "b68e23d0bf12cde9439aa3c2a38fe36f18eb535f3cf7c39f1e41df78bcb27fb3",
+        "cbcd0e8eff61e6c4d32221545fb4b61b2f83d2f38cc26e289cc12f4df23e7084"
+      ]
+    },
+    {
+      "upstream_id": "math_VectorBase::operator()(int)",
+      "toolkit": "TKMath",
+      "selected_id": "5b0c29daa70fc6654f560f4db56271bd20ead5dbd1dfe3d5131243c5253d0757",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "5b0c29daa70fc6654f560f4db56271bd20ead5dbd1dfe3d5131243c5253d0757",
+        "d3184733ed11486313a1e1fd08e779f7062eb5f7f51b20d38a53eb81ff70c930"
+      ]
+    },
+    {
+      "upstream_id": "math_VectorBase::operator[](size_t)",
+      "toolkit": "TKMath",
+      "selected_id": "c609ed728c225b1e0c8a343ce6d3c43c2fa29de85074c948be069bbf631555e4",
+      "selected_signature": "type-parameter-0-0 &(unsigned long)",
+      "previous_candidate_ids": [
+        "2ce7ba47ca3283661485216d267497cdd1ff93453805da7bdec59159473b29ec",
+        "c609ed728c225b1e0c8a343ce6d3c43c2fa29de85074c948be069bbf631555e4"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator()(int)",
+      "toolkit": "TKernel",
+      "selected_id": "967d33d67774b4f6a6493a3ee32336396a5eac1fa4272d96dfeb087645847849",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "0c3c61411f600d8219c9ceb12f387d25b2b16e38bce99ae14509f7afd2020d0e",
+        "967d33d67774b4f6a6493a3ee32336396a5eac1fa4272d96dfeb087645847849"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator[](int)",
+      "toolkit": "TKernel",
+      "selected_id": "47541a159c43c323cc3f6c8aa134ac31ed884680b4584cb59086c9ca47761ba7",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "47541a159c43c323cc3f6c8aa134ac31ed884680b4584cb59086c9ca47761ba7",
+        "8455c412b4058caa56901b16cdc6155cf53b4cd6934fae43664f47a4d2a57a3e"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator()(int,int)",
+      "toolkit": "TKernel",
+      "selected_id": "1fc74606715b0a36ceef52f83ecf36fd5bb5603c329070e1c0cf3e12084c527f",
+      "selected_signature": "type-parameter-0-0 &(int, int)",
+      "previous_candidate_ids": [
+        "1fc74606715b0a36ceef52f83ecf36fd5bb5603c329070e1c0cf3e12084c527f",
+        "6e5e3a95b78d368909aec7a65309c4a865726594d7e2fe51709a109c89e64ca5"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::ToArray1()",
+      "toolkit": "TKernel",
+      "selected_id": "54cf7fd21b8e359aa6ca2d10eab0137ad169ee0a974635c3253f90766597f3dd",
+      "selected_signature": "NCollection_Array1<type-parameter-0-0> ()",
+      "previous_candidate_ids": [
+        "50cc50daa000177cce96c154d6d2069e80171287528936ed4ffe762ce2bc2dfd",
+        "54cf7fd21b8e359aa6ca2d10eab0137ad169ee0a974635c3253f90766597f3dd"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator()(size_t)",
+      "toolkit": "TKernel",
+      "selected_id": "70af7f9574b372ebeb51a317534658c04789a4dbf1e7aa4192f27c5024377f96",
+      "selected_signature": "type-parameter-0-0 &(unsigned long)",
+      "previous_candidate_ids": [
+        "70af7f9574b372ebeb51a317534658c04789a4dbf1e7aa4192f27c5024377f96",
+        "cc6338d4d1b5b4a39ce022d6d3b11dd5786f59c660d6b5a1d74564a61716b77e"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator[](size_t)",
+      "toolkit": "TKernel",
+      "selected_id": "bfe6c5b327b2b6dadf00b85dbfd4b8b7218bf108ba502aed18e689598ee27918",
+      "selected_signature": "type-parameter-0-0 &(unsigned long)",
+      "previous_candidate_ids": [
+        "5e67d2f14996f978a88252e9c14fca16b6cf4de311f1b418c2cbde0ae66622ab",
+        "bfe6c5b327b2b6dadf00b85dbfd4b8b7218bf108ba502aed18e689598ee27918"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ToArray1()",
+      "toolkit": "TKernel",
+      "selected_id": "a378768db50373d7a2f420d1c7d6d54fc51d6f6c0940b34a6f6ba1ae2f618cdc",
+      "selected_signature": "NCollection_Array1<type-parameter-0-0> ()",
+      "previous_candidate_ids": [
+        "2f78b4868468a3919cf540a1b3f834aadb2730892f31b05c0e7376456eb70cdf",
+        "a378768db50373d7a2f420d1c7d6d54fc51d6f6c0940b34a6f6ba1ae2f618cdc"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::operator()(size_t)",
+      "toolkit": "TKernel",
+      "selected_id": "d6532a0bda25fa0a6c62e7d63de357c91a9a065c4f02861976616e61bed2b441",
+      "selected_signature": "type-parameter-0-0 &(unsigned long)",
+      "previous_candidate_ids": [
+        "d6532a0bda25fa0a6c62e7d63de357c91a9a065c4f02861976616e61bed2b441",
+        "dd17d7fa22fdc56458e61ad42ad696dca0e23e96f2833f78667811199094dd92"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::operator()()",
+      "toolkit": "TKernel",
+      "selected_id": "99b006cef54f94982d8f6a70270f56a551a609c7be95e2974fb072c6c1fe3be8",
+      "selected_signature": "type-parameter-0-0 &()",
+      "previous_candidate_ids": [
+        "99b006cef54f94982d8f6a70270f56a551a609c7be95e2974fb072c6c1fe3be8",
+        "a70f73800051d506af51efda00812828945622f142d1de2b4f0387418f77a230"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_List::First()",
+      "toolkit": "TKernel",
+      "selected_id": "948d22e332c3dbde9dec41ec53ab68552e38735035607f8a25cbcb5630d0fb3f",
+      "selected_signature": "type-parameter-0-0 &()",
+      "previous_candidate_ids": [
+        "41904dbb8a260bc748b86a9ed917ee28ab2ede3221091a814c779b8306321ebe",
+        "948d22e332c3dbde9dec41ec53ab68552e38735035607f8a25cbcb5630d0fb3f"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_List::Last()",
+      "toolkit": "TKernel",
+      "selected_id": "22f84cadb5468d9eadad44def15dadea25ed3761d3d128cd6519e628a6c721d5",
+      "selected_signature": "type-parameter-0-0 &()",
+      "previous_candidate_ids": [
+        "22f84cadb5468d9eadad44def15dadea25ed3761d3d128cd6519e628a6c721d5",
+        "4c20daca25f6fe09b1168884fb23b08f90bb106b1e95ca87397e0f538b1239fe"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(size_t)",
+      "toolkit": "TKernel",
+      "selected_id": "ca63efd46e947b82fcee03aa8de9a31ed0f836af5f63d23801934b25ad3ed1f4",
+      "selected_signature": "type-parameter-0-0 &(unsigned long)",
+      "previous_candidate_ids": [
+        "b634b5a24a529e6a6c716e0c7102b1037397004ad521945b5c41d5904553afdd",
+        "ca63efd46e947b82fcee03aa8de9a31ed0f836af5f63d23801934b25ad3ed1f4"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(int)",
+      "toolkit": "TKernel",
+      "selected_id": "7c494b7dc59eddb9a8e0ddf254f4550c78edb9d42a63e8c3ebe68f6d6ece51f2",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "7c494b7dc59eddb9a8e0ddf254f4550c78edb9d42a63e8c3ebe68f6d6ece51f2",
+        "855ba75926f9d95fffd9d05c2ce505fdbaeb8c9cdc6b3f641bd3e5a1a8885144"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Contained(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "34ef5b22dc1f0d68c177852fa3def575592c29c73a2f75c1a50cb599216c4b46",
+      "selected_signature": "std::optional<std::pair<std::reference_wrapper<const type-parameter-0-0>, std::reference_wrapper<type-parameter-0-1>>> (const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "34ef5b22dc1f0d68c177852fa3def575592c29c73a2f75c1a50cb599216c4b46",
+        "a40d38fcc50730c298396e5ce32bb4f2b0d5c77d88f211fe9f4ae88c404a1529"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::operator()(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "41039002bb1be991abfa04232e00dfbf3e10b6468f0ecf92239f86515c7df510",
+      "selected_signature": "type-parameter-0-1 &(const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "41039002bb1be991abfa04232e00dfbf3e10b6468f0ecf92239f86515c7df510",
+        "99e71ec88e94be2747a3aaa6da23f8d2757e157440b7d4d6eebf214148393240"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Items()",
+      "toolkit": "TKernel",
+      "selected_id": "82d58635ad2362ea5810d16a686766c6a4fce504702470dd2de7593fd78b5593",
+      "selected_signature": "NCollection_ItemsView::View<NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, false>, struct NCollection_FlatDataMap::ItemsExtractor, false> ()",
+      "previous_candidate_ids": [
+        "82d58635ad2362ea5810d16a686766c6a4fce504702470dd2de7593fd78b5593",
+        "da96ff5906d96451933d6c760a263dca4e2afd253f7617924eec7062194744c0"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::Items()",
+      "toolkit": "TKernel",
+      "selected_id": "910931c17e39a800f22f4bee995615c1c188bc53b11790af39363172f06f2410",
+      "selected_signature": "NCollection_ItemsView::View<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, false>, struct NCollection_OrderedDataMap::ItemsExtractor, false> ()",
+      "previous_candidate_ids": [
+        "910931c17e39a800f22f4bee995615c1c188bc53b11790af39363172f06f2410",
+        "df44dc263ec76c336d400605cb7c8a49b1c3b1f839093de6abfd684fec5a153c"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::Contained(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "1c77f5a1917842d562428160650a11c1ed864eab9d9681156b25bce626b7a5d0",
+      "selected_signature": "std::optional<std::pair<std::reference_wrapper<const type-parameter-0-0>, std::reference_wrapper<type-parameter-0-1>>> (const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "1c77f5a1917842d562428160650a11c1ed864eab9d9681156b25bce626b7a5d0",
+        "de7d4bf4141fc0031e44cef40a0c006116a57d5a50ed74031ce680507b5b7035"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::operator()(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "8033f8b349008953915af8c84e64f0800406e7699c48a95598652b7c0b9b37cf",
+      "selected_signature": "type-parameter-0-1 &(const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "8033f8b349008953915af8c84e64f0800406e7699c48a95598652b7c0b9b37cf",
+        "e8edae5db1b4a1c47f34d463dcf0a6f7760f6db6ceae89f13328bf36d9bc7ede"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_DataMap::Items()",
+      "toolkit": "TKernel",
+      "selected_id": "ebee67231a5df21e660674120d444e42edefbf77fa7a861d0aed63a0b7e78f5d",
+      "selected_signature": "NCollection_ItemsView::View<NCollection_DataMap<TheKeyType, TheItemType, Hasher>, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, false>, struct NCollection_DataMap::ItemsExtractor, false> ()",
+      "previous_candidate_ids": [
+        "dc42561bf4122a9d9e4441e0cccd11e3976a82a532ced053be4a45c9b5e25c66",
+        "ebee67231a5df21e660674120d444e42edefbf77fa7a861d0aed63a0b7e78f5d"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_DataMap::Contained(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "2f9a50d8fac3d5539eda663808587fd0204569a3eef69b7ce2aba5cdfd8a5e21",
+      "selected_signature": "std::optional<std::pair<std::reference_wrapper<const type-parameter-0-0>, std::reference_wrapper<type-parameter-0-1>>> (const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "2f9a50d8fac3d5539eda663808587fd0204569a3eef69b7ce2aba5cdfd8a5e21",
+        "a749746c5bbfe2f76842348ead67cd6c54cad6bbcbedf9a6d2b95ad5c6d6e8fd"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_DataMap::operator()(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "9f41b76d6dd1bb7bfe322c963ee38d0bcf0510e145aadf4b0d36c94be016632d",
+      "selected_signature": "type-parameter-0-1 &(const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "9f41b76d6dd1bb7bfe322c963ee38d0bcf0510e145aadf4b0d36c94be016632d",
+        "acbecbda0519418ea0e65e937c673df4cfd56ea71086a9d1350429b2c2022f21"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::Items()",
+      "toolkit": "TKernel",
+      "selected_id": "f0dbb125b1190779828fc81e06cb47d40868ece3f5dcfcb8962fb8dc8f7dda5b",
+      "selected_signature": "NCollection_ItemsView::View<NCollection_IndexedDataMap<TheKeyType, TheItemType, Hasher>, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, false>, struct NCollection_IndexedDataMap::ItemsExtractor, false> ()",
+      "previous_candidate_ids": [
+        "dffce7b18ca0819cad49ca8e266805dce6dd68fdf9219ac1f873c80289ee553d",
+        "f0dbb125b1190779828fc81e06cb47d40868ece3f5dcfcb8962fb8dc8f7dda5b"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::IndexedItems()",
+      "toolkit": "TKernel",
+      "selected_id": "795224f8ce651c4016a8861fdfe92fa4dd2e5de00064027437c4a19c83dd64f4",
+      "selected_signature": "NCollection_ItemsView::View<NCollection_IndexedDataMap<TheKeyType, TheItemType, Hasher>, NCollection_ItemsView::KeyValueIndexRef<type-parameter-0-0, type-parameter-0-1, false>, struct NCollection_IndexedDataMap::IndexedItemsExtractor, false> ()",
+      "previous_candidate_ids": [
+        "795224f8ce651c4016a8861fdfe92fa4dd2e5de00064027437c4a19c83dd64f4",
+        "87d2b9914f9263cbb5641fc3a98e18fa97a23e799c5f652cd3c839499a0905d4"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::Contained(const TheKeyType&)",
+      "toolkit": "TKernel",
+      "selected_id": "c3184c1cd4e7d189f7c72662d31ac9ed39c5ed55c6cd8370d8c1d56c3541e903",
+      "selected_signature": "std::optional<std::pair<std::reference_wrapper<const type-parameter-0-0>, std::reference_wrapper<type-parameter-0-1>>> (const type-parameter-0-0 &)",
+      "previous_candidate_ids": [
+        "0bd5fbf5bba1431c4cc24a02cde24bb33d8f6990f82343cb52c18e5a143cc06a",
+        "c3184c1cd4e7d189f7c72662d31ac9ed39c5ed55c6cd8370d8c1d56c3541e903"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(size_t)",
+      "toolkit": "TKernel",
+      "selected_id": "e2d884c798c0caac76fe6ca81cb7654d877aae0df56d52306640398c3581613f",
+      "selected_signature": "type-parameter-0-1 &(unsigned long)",
+      "previous_candidate_ids": [
+        "3360d015f77a38d82792c386a52979c7bf9a538f11731c2473b1ecbd88c2f5ea",
+        "e2d884c798c0caac76fe6ca81cb7654d877aae0df56d52306640398c3581613f"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(int)",
+      "toolkit": "TKernel",
+      "selected_id": "37342fe31dc0e84bfaea3eca3010acd5d3f410c02fba2a1c04d4450282325094",
+      "selected_signature": "type-parameter-0-1 &(int)",
+      "previous_candidate_ids": [
+        "13ac72ca46654567a63a60dee9dc35ad3cc95df857dbdd71a9da3fe19fef8fcb",
+        "37342fe31dc0e84bfaea3eca3010acd5d3f410c02fba2a1c04d4450282325094"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph::Shapes()",
+      "toolkit": "TKBRep",
+      "selected_id": "a041df56596510d37c973a21fa9609ee0ce05b9e913ee1adb584c76192a37afe",
+      "selected_signature": "class BRepGraph::ShapesView &()",
+      "previous_candidate_ids": [
+        "a041df56596510d37c973a21fa9609ee0ce05b9e913ee1adb584c76192a37afe",
+        "ea964e5bbe11a31c99eca3e3bd249d94169a03f39366f10f1d0d0dbbc9cb6b0f"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph::Editor()",
+      "toolkit": "TKBRep",
+      "selected_id": "8bad3856e0f1c5d90700ed2f1a9ef9db10658057a7f4a89e1251abefbceb84fa",
+      "selected_signature": "class BRepGraph::EditorView &()",
+      "previous_candidate_ids": [
+        "4625c95ab11eb384f73d4a81a9e669dd9aa971bdbecffbe3d2674f7a73b97a23",
+        "8bad3856e0f1c5d90700ed2f1a9ef9db10658057a7f4a89e1251abefbceb84fa"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph::LayerRegistry()",
+      "toolkit": "TKBRep",
+      "selected_id": "1403472d85056ee1567521b5c7fae44ba754b2f9d6390e04562bf2c828d090d5",
+      "selected_signature": "class BRepGraph_LayerRegistry &()",
+      "previous_candidate_ids": [
+        "1403472d85056ee1567521b5c7fae44ba754b2f9d6390e04562bf2c828d090d5",
+        "973a0cd36b404fec98a3ddc891d2942b5ff5e81170086e2ca7e7e2574017ecd2"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph::CacheRegistry()",
+      "toolkit": "TKBRep",
+      "selected_id": "c7e5b56127499faae7ff658383c298e1a32a2943de955ed5f9b820806ad9e93b",
+      "selected_signature": "class BRepGraph_CacheRegistry &()",
+      "previous_candidate_ids": [
+        "3e45251c02d64d2d8ab83f764df380f88e682e4867c963e7cafc1b01ce555884",
+        "c7e5b56127499faae7ff658383c298e1a32a2943de955ed5f9b820806ad9e93b"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph::Mesh()",
+      "toolkit": "TKBRep",
+      "selected_id": "d5bae715394e0d7d30e2e8cc263fdabaa19163690e05b296350756822e95d0ba",
+      "selected_signature": "class BRepGraph::MeshView &()",
+      "previous_candidate_ids": [
+        "0588472889d569709d37839c6073efbbaa9d96be98ff346247483458e60825a1",
+        "d5bae715394e0d7d30e2e8cc263fdabaa19163690e05b296350756822e95d0ba"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::operator()(int)",
+      "toolkit": "TKGeomAlgo",
+      "selected_id": "f45739d97f89721bbfe9c6cbcc11cdc6c9ad9f0e3394d07d87b9a35981e31475",
+      "selected_signature": "class Geom2dHatch_Element &(int)",
+      "previous_candidate_ids": [
+        "62351f42a51edc0dbfb035184c3ecbf3e4fcbf2f57b8fd837d6b91379caa461a",
+        "f45739d97f89721bbfe9c6cbcc11cdc6c9ad9f0e3394d07d87b9a35981e31475"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Array::operator[](int)",
+      "toolkit": "TKGeomAlgo",
+      "selected_id": "56fa70fe927c9f40c722045610069e17f649f88e0d506829e9a167f6228ad814",
+      "selected_signature": "type-parameter-0-0 &(int)",
+      "previous_candidate_ids": [
+        "56fa70fe927c9f40c722045610069e17f649f88e0d506829e9a167f6228ad814",
+        "967ee2ce8fe37e5656c7abbb2425da1b4721ae68896a69179c76852b449cca21"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::operator[](int)",
+      "toolkit": "TKGeomAlgo",
+      "selected_id": "8707f04e8b0e7dfefedf5d8ed4208a6923983b4e615f89f35469455a6ff80ee8",
+      "selected_signature": "class IntPolyh_StartPoint &(int)",
+      "previous_candidate_ids": [
+        "2f86d0ac192ef1da023b7f5fe48cb366ea9fe614539c7d1de8b776edb5b1c8a9",
+        "8707f04e8b0e7dfefedf5d8ed4208a6923983b4e615f89f35469455a6ff80ee8"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Tensor::operator()(int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "selected_id": "be7a94a17c0a1217d69c49fb968dc6e78dc075628760ab067d517684616ce947",
+      "selected_signature": "double &(int, int, int)",
+      "previous_candidate_ids": [
+        "be7a94a17c0a1217d69c49fb968dc6e78dc075628760ab067d517684616ce947",
+        "c2f22e528975a3c88a8c77ec54e6e480b7ddd9fa8af33220dffd9876bd05dfaa"
+      ]
+    }
+  ],
+  "rust_implementation_changes": 0
+}

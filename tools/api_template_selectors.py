@@ -137,7 +137,10 @@ def qualifier_tokens(suffix: str) -> set[str] | None:
 
 def signature_qualifiers(signature: str) -> set[str] | None:
     parsed = parse_upstream_id(signature)
-    return None if parsed is None else qualifier_tokens(parsed[2])
+    if parsed is None:
+        return None
+    # An absent suffix is a known unqualified method, not an unsupported spelling.
+    return qualifier_tokens(parsed[2]) if parsed[2] else set()
 
 
 def qualifier_match(wanted: set[str], actual: set[str]) -> bool:

@@ -106,6 +106,44 @@ class TemplateSelectorTest(unittest.TestCase):
         self.assertEqual(status, "unique")
         self.assertEqual(selected, [mutable])
 
+    def test_plain_nonconst_pair_without_noexcept_resolves(self) -> None:
+        name = "sample::Table::Value"
+        mutable = row(name, "double &(int, int)", ["int", "int"])
+        immutable = row(name, "const double &(int, int) const", ["int", "int"])
+        status, selected = cpp_candidates(
+            name + "(int,int)", "TKFixture", indexed(mutable, immutable)
+        )
+        self.assertEqual(status, "unique")
+        self.assertEqual(selected, [mutable])
+
+    def test_ref_qualified_pair_without_selector_stays_ambiguous(self) -> None:
+        name = "sample::Table::Value"
+        mutable = row(name, "double &() &", [])
+        immutable = row(name, "const double &() const &&", [])
+        status, selected = cpp_candidates(name + "()", "TKFixture", indexed(mutable, immutable))
+        self.assertEqual(status, "ambiguous")
+        self.assertEqual(len(selected), 2)
+
+    def test_unknown_signature_suffix_is_not_an_empty_qualifier_set(self) -> None:
+        name = "sample::Table::Value"
+        unknown = row(name, "double &() unexpected", [])
+        immutable = row(name, "const double &() const", [])
+        self.assertEqual(prefer_nonconst_overload([unknown, immutable]), [unknown, immutable])
+
+    def test_captured_math_mutable_reference_overloads_resolve(self) -> None:
+        fixture = Path(__file__).parent / "fixtures/cpp-plain-const-overloads.json"
+        declarations = json.loads(fixture.read_text())["declarations"]
+        for declaration in declarations:
+            declaration["_toolkits"] = {"TKMath"}
+        for name in ("math_DoubleTab::Value", "math_Matrix::Value"):
+            with self.subTest(name=name):
+                status, selected = cpp_candidates(name + "(int,int)", "TKMath", indexed(*declarations))
+                self.assertEqual(status, "unique")
+                self.assertEqual(selected[0]["signature"], "double &(int, int)")
+                status, selected = cpp_candidates(name + "(int,int) const", "TKMath", indexed(*declarations))
+                self.assertEqual(status, "unique")
+                self.assertEqual(selected[0]["signature"], "const double &(int, int) const")
+
     def test_distinct_parameter_overloads_are_never_narrowed(self) -> None:
         name = "sample::Vector::scale"
         rows = [
