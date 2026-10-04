@@ -196,12 +196,13 @@ impl Cache {
     /// Derivatives up to `derivative` at the curve parameter
     /// (`calculateDerivative`); `cache.derivatives(0.5, 2)?`.
     pub fn derivatives(&self, parameter: f64, derivative: i32) -> Result<[f64; 16], Failure> {
-        validate_derivative_order(self.is_rational, false, derivative)?;
+        validate_derivative_order(self, false, derivative)?;
         self.derivatives_local(self.local_parameter(parameter), derivative)
     }
 
     /// Writes packed curve-parameter rows (`calculateDerivative`); non-rational caches
-    /// support any order that fits `output`;
+    /// support any order that fits `output`; rational 2D supports orders through four
+    /// and rational 3D through three (the native 16-value temporary);
     /// extra capacity stays unchanged;
     /// `cache.derivatives_into(0.5, 1, &mut rows)?`.
     pub fn derivatives_into(
@@ -216,7 +217,8 @@ impl Cache {
 
     /// Writes normalized-span rows scaled to curve-parameter derivatives
     /// (`calculateDerivativeLocal`); the native header documents order 1..=3,
-    /// and non-rational caches also support higher orders; extra capacity stays unchanged;
+    /// rational 2D also supports order four, and non-rational caches support higher orders;
+    /// extra capacity stays unchanged;
     /// `cache.derivatives_local_into(0.25, 1, &mut rows)?`.
     pub fn derivatives_local_into(
         &self,
@@ -312,7 +314,7 @@ fn derivative_output_length(
     derivative: i32,
     allow_high_order: bool,
 ) -> Result<usize, Failure> {
-    validate_derivative_order(cache.is_rational, allow_high_order, derivative)?;
+    validate_derivative_order(cache, allow_high_order, derivative)?;
     let rows: usize = usize::try_from(derivative)
         .ok()
         .and_then(|value| value.checked_add(1))
@@ -322,21 +324,25 @@ fn derivative_output_length(
 }
 
 fn validate_derivative_order(
-    is_rational: bool,
+    cache: &Cache,
     allow_high_order: bool,
     derivative: i32,
 ) -> Result<(), Failure> {
-    if derivative < 0 || (derivative > 3 && (is_rational || !allow_high_order)) {
+    let maximum = derivative_order_limit(cache, allow_high_order);
+    if derivative < 0 || derivative > maximum {
         return Err(Failure::out_of_range(&format!(
-            "BSplCLib_Cache derivative order {derivative}; expected {}",
-            if is_rational || !allow_high_order {
-                "0..=3"
-            } else {
-                ">= 0"
-            }
+            "BSplCLib_Cache derivative order {derivative}; expected 0..={maximum}"
         )));
     }
     Ok(())
+}
+
+fn derivative_order_limit(cache: &Cache, allow_high_order: bool) -> i32 {
+    if cache.is_rational {
+        // Five 2D homogeneous rows fit the native 16-value temporary; five 3D rows do not.
+        return (16 / cache.row_length) as i32 - 1;
+    }
+    if allow_high_order { i32::MAX } else { 3 }
 }
 
 fn clear_uncomputed_derivative_rows(

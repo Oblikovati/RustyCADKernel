@@ -90,9 +90,38 @@ void non_rational_order_five_3d()
   print_values(local, 20);
 }
 
+void fill_rational_poles(NCollection_Array1<gp_Pnt2d>& poles,
+                         NCollection_Array1<double>& weights)
+{
+  for (int i = 1; i <= 5; ++i) {
+    poles.SetValue(i, gp_Pnt2d(i - 1, (i - 1) * (i - 1)));
+    weights.SetValue(i, i);
+  }
+}
+
+void rational_order_four_2d()
+{
+  NCollection_Array1<double> knots(1, 10);
+  for (int i = 1; i <= 5; ++i) knots.SetValue(i, 2.0);
+  for (int i = 6; i <= 10; ++i) knots.SetValue(i, 6.0);
+  NCollection_Array1<gp_Pnt2d> poles(1, 5);
+  NCollection_Array1<double> weights(1, 5);
+  fill_rational_poles(poles, weights);
+  ExposedCache cache(4, false, knots, poles, &weights);
+  cache.BuildCache(3.0, knots, poles, &weights);
+  double global[12], local[12];
+  std::fill(global, global + 12, -77.0);
+  std::fill(local, local + 12, -77.0);
+  cache.Evaluate(3.0, 4, global);
+  cache.EvaluateLocal(0.25, 4, local);
+  print_values(global, 12);
+  print_values(local, 12);
+}
+
 int main()
 {
   local_2d();
   rational_3d();
   non_rational_order_five_3d();
+  rational_order_four_2d();
 }

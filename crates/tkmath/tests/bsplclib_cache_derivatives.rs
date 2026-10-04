@@ -43,6 +43,56 @@ fn quartic_cache_3d() -> Cache {
     cache
 }
 
+fn rational_quartic_cache_2d() -> Cache {
+    let mut knots = Array1::with_bounds(1, 10).unwrap();
+    knots.as_mut_slice()[..5].fill(2.0);
+    knots.as_mut_slice()[5..].fill(6.0);
+    let mut poles = Array1::with_bounds(1, 5).unwrap();
+    let mut weights = Array1::with_bounds(1, 5).unwrap();
+    for index in 1..=5 {
+        let coordinate = f64::from(index - 1);
+        poles[index] = Point2::new(coordinate, coordinate * coordinate);
+        weights[index] = f64::from(index);
+    }
+    let mut cache = Cache::new(4, false, &knots, &poles, Some(&weights)).unwrap();
+    cache
+        .build_cache(3.0, &knots, &poles, Some(&weights))
+        .unwrap();
+    cache
+}
+
+#[test]
+fn rational_2d_fourth_derivatives_match_native_and_preserve_tail() {
+    let cache = rational_quartic_cache_2d();
+    let mut global = [-77.0; 12];
+    let mut local = [-77.0; 12];
+    cache.derivatives_into(3.0, 4, &mut global).unwrap();
+    cache.derivatives_local_into(0.25, 4, &mut local).unwrap();
+    let expected = [
+        1.375, 2.6875, 1.0625, 3.21875, -0.3125, 0.90625, 0.46875, -0.234375, -0.9375, 0.46875,
+        -77.0, -77.0,
+    ];
+    assert_eq!(global, expected);
+    assert_eq!(local, expected);
+    let fixed = cache.derivatives(3.0, 4).unwrap();
+    assert_eq!(&fixed[..10], &expected[..10]);
+}
+
+#[test]
+fn rational_2d_rejects_temporary_overflow_and_short_output_before_writing() {
+    let cache = rational_quartic_cache_2d();
+    let mut output = [-77.0; 12];
+    let failure = cache.derivatives_into(3.0, 5, &mut output).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_OutOfRange");
+    assert!(failure.message().contains("0..=4"));
+    assert_eq!(output, [-77.0; 12]);
+    let failure = cache
+        .derivatives_local_into(0.25, 4, &mut output[..9])
+        .unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_DimensionMismatch");
+    assert_eq!(output, [-77.0; 12]);
+}
+
 #[test]
 fn local_raw_derivatives_match_native_and_preserve_extra_capacity() {
     let cache: Cache = cache_2d();

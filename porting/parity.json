@@ -230020,7 +230020,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::derivatives_into",
       "status": "partial",
-      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Non-rational global requests support nonnegative orders fitting the buffer; native quartic order-5 probe confirms fourth derivative, cleared fifth row, and untouched tail. Rational requests remain bounded to 0..=3 (native fixed 16-value temporary); rational comparison tolerance 1e-14. Complete protected-surface parity remains unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only."
+      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Non-rational global requests support nonnegative orders fitting the buffer; native quartic order-5 probe confirms fourth derivative, cleared fifth row, and untouched tail. Rational requests support 0..=4 in 2D and 0..=3 in 3D, bounded by the native fixed 16-value temporary; rational comparison tolerance 1e-14. Complete protected-surface parity remains unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only. A native rational 2D quartic order-4 fixture checks local/global output and unchanged tail; higher rational orders exceeding 16 homogeneous slots are rejected before mutation."
     },
     {
       "upstream_id": "BSplCLib_Cache::calculateDerivativeLocal(double,int,double*) const",
@@ -230028,7 +230028,7 @@
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplclib::Cache::derivatives_local_into",
       "status": "partial",
-      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Direct native local order-5 quartic probe confirms defined non-rational higher orders beyond the header-documented 1..=3. Rational requests remain bounded to 0..=3 (native fixed temporary), with rational comparison tolerance 1e-14. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only; complete protected-surface parity remains unproven."
+      "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed derivative rows in original curve-parameter units. Direct native local order-5 quartic probe confirms defined non-rational higher orders beyond the header-documented 1..=3. Rational requests support 0..=4 in 2D and 0..=3 in 3D, bounded by the native fixed temporary, with rational comparison tolerance 1e-14. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only; complete protected-surface parity remains unproven. A native rational 2D quartic order-4 fixture checks local/global output and unchanged tail; higher rational orders exceeding 16 homogeneous slots are rejected before mutation."
     },
     {
       "upstream_id": "math_Matrix::SetLowerRow(int) noexcept",
