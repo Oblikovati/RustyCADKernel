@@ -48,3 +48,13 @@
 
 - Structured JSON when logging for debugging / observability.
 - Plain text only for user-facing CLI output.
+
+## Integration workflow
+
+- Use `main` as the integration branch. Merge completed worktree branches directly
+  into `main`; do not create pull requests.
+- The coordinating agent serializes merges, resolves conflicts, and runs the
+  relevant checks. A subagent's work is complete only after its committed changes
+  are integrated into `main`.
+- Start new worktree branches from current `main`. Preserve unfinished work and
+  report its branch, worktree, and remaining failures during handoff.
