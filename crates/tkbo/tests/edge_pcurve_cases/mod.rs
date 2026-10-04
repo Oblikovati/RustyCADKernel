@@ -160,3 +160,7 @@ mod near_edge;
 mod point_in_face;
 
 mod orient_edge;
+
+mod approx_normal;
+
+mod surface_normal;

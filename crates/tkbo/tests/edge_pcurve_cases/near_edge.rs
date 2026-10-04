@@ -32,24 +32,7 @@ fn observe(
     tolerance: usize,
     mode: Option<usize>,
 ) -> [f64; 6] {
-    let (mut fixture, mut edge) = edge_fixture(if kind == 5 { 1 } else { kind });
-    if kind != 5 {
-        store_pcurve(&fixture, &edge);
-    }
-    let tolerance = [1e-7, 1e-5, 2e-5, 0.2, 5.][tolerance];
-    let builder = BRepBuilder::default();
-    builder.update_edge_tolerance(&edge, tolerance).unwrap();
-    builder
-        .update_face_tolerance(&fixture.face, 2. * tolerance)
-        .unwrap();
-    let orientations = [
-        Orientation::Forward,
-        Orientation::Reversed,
-        Orientation::Internal,
-        Orientation::External,
-    ];
-    edge.set_orientation(orientations[edge_orientation]);
-    fixture.face.set_orientation(orientations[face_orientation]);
+    let (fixture, edge) = prepare_fixture(kind, edge_orientation, face_orientation, tolerance);
     let mut uv = Point2::new(9., 8.);
     let mut point = Point3::new(7., 6., 5.);
     let context = rustycad_tkbo::int_tools::Context::default();
@@ -121,4 +104,34 @@ fn native_context_near_edge_matches() {
             );
         }
     }
+}
+
+pub(super) fn prepare_fixture(
+    kind: usize,
+    edge_orientation: usize,
+    face_orientation: usize,
+    tolerance: usize,
+) -> (
+    super::super::ProjectionFixture,
+    rustycad_tkbrep::topods::Edge,
+) {
+    let (mut fixture, mut edge) = edge_fixture(if kind == 5 { 1 } else { kind });
+    if kind != 5 {
+        store_pcurve(&fixture, &edge);
+    }
+    let tolerance = [1e-7, 1e-5, 2e-5, 0.2, 5.][tolerance];
+    let builder = BRepBuilder::default();
+    builder.update_edge_tolerance(&edge, tolerance).unwrap();
+    builder
+        .update_face_tolerance(&fixture.face, 2. * tolerance)
+        .unwrap();
+    let orientations = [
+        Orientation::Forward,
+        Orientation::Reversed,
+        Orientation::Internal,
+        Orientation::External,
+    ];
+    edge.set_orientation(orientations[edge_orientation]);
+    fixture.face.set_orientation(orientations[face_orientation]);
+    (fixture, edge)
 }

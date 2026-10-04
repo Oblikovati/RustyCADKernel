@@ -226320,6 +226320,78 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::set_face_offset_map",
       "status": "partial",
       "notes": "Copied native per-face offsets; 20 configurations and repeat/Clear lifecycle compare tangent-face insertion/history/classification counts. More complex side-face ancestry, curved/location/exception cases remain; tools/oracle/tkoffset_analyse_tangent.md. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetNormalToSurface(const occ::handle<Geom_Surface> &, const double, const double, gp_Dir &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::get_normal_to_surface",
+      "status": "partial",
+      "notes": "1497 native surface/approximate normal and sense cases; tools/oracle/tkbo_surface_normal.md. Singular/located/exceptional and broader topology domains remain unproven; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetApproxNormalToFaceOnEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, const double, gp_Pnt &, gp_Dir &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::approx_normal_with_context_step",
+      "status": "partial",
+      "notes": "1497 native surface/approximate normal and sense cases; tools/oracle/tkbo_surface_normal.md. Singular/located/exceptional and broader topology domains remain unproven; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetApproxNormalToFaceOnEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, gp_Pnt &, gp_Dir &, const double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::approx_normal_with_step",
+      "status": "partial",
+      "notes": "1497 native surface/approximate normal and sense cases; tools/oracle/tkbo_surface_normal.md. Singular/located/exceptional and broader topology domains remain unproven; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetApproxNormalToFaceOnEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, gp_Pnt &, gp_Dir &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::approx_normal_on_edge",
+      "status": "partial",
+      "notes": "1497 native surface/approximate normal and sense cases; tools/oracle/tkbo_surface_normal.md. Singular/located/exceptional and broader topology domains remain unproven; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::SenseFlag(const gp_Dir &, const gp_Dir &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::sense_flag",
+      "status": "partial",
+      "notes": "1497 native surface/approximate normal and sense cases; tools/oracle/tkbo_surface_normal.md. Singular/located/exceptional and broader topology domains remain unproven; no legacy completion claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::KeepShape(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::keep_shape",
+      "status": "partial",
+      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::KeepShapes(const NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::keep_shapes",
+      "status": "partial",
+      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::SetSafeInputMode(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_safe_input_mode",
+      "status": "partial",
+      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
     }
   ],
   "tests": [
