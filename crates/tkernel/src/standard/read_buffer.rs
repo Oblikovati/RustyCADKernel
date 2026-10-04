@@ -5,6 +5,7 @@ use super::stream_fill::fill_from;
 use super::{Failure, exceptions};
 use bytemuck::AnyBitPattern;
 use std::io::Read;
+mod file_chunks;
 
 /// Size of the native `myBuffer` cache.
 const CACHE: usize = 4096;
@@ -105,18 +106,31 @@ impl ReadBuffer {
 
     /// `readRawDataChunk`: advances within the cache or refills it; returns the chunk offset.
     fn next_chunk(&mut self, stream: &mut impl Read) -> Option<usize> {
+        self.next_chunk_with(|buffer| {
+            let filled = fill_from(stream, buffer);
+            (filled.count, !filled.failed)
+        })
+    }
+
+    fn next_chunk_with<F>(&mut self, mut read_block: F) -> Option<usize>
+    where
+        F: FnMut(&mut [u8]) -> (usize, bool),
+    {
         let advanced = self.position? + self.chunk_len;
         if advanced < self.end {
             self.position = Some(advanced);
             return Some(advanced);
         }
         self.position = None;
-        self.refill(stream)
+        self.refill(&mut read_block)
     }
 
     /// Reads as many whole chunks as the cache holds, or the data left; `None` at the end
     /// of data or after a short read.
-    fn refill(&mut self, stream: &mut impl Read) -> Option<usize> {
+    fn refill<F>(&mut self, read_block: &mut F) -> Option<usize>
+    where
+        F: FnMut(&mut [u8]) -> (usize, bool),
+    {
         let left = self.data_len - self.data_read;
         if left <= 0 {
             return None;
@@ -126,8 +140,8 @@ impl ReadBuffer {
         } else {
             self.buffer_len
         };
-        let filled = fill_from(stream, &mut self.cache[..to_read]);
-        if filled.failed || filled.count != to_read {
+        let (count, succeeded) = read_block(&mut self.cache[..to_read]);
+        if !succeeded || count != to_read {
             return None;
         }
         self.position = Some(0);
