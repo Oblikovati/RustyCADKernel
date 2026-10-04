@@ -7,6 +7,8 @@ mod shrunk_data;
 mod split_blocks;
 #[path = "pave_filler/vertex_edge.rs"]
 mod vertex_edge;
+#[path = "pave_filler/vertex_face.rs"]
+mod vertex_face;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options};
