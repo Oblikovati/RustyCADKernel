@@ -1,8 +1,8 @@
 //! The virtual members `FSD_CmpFile` overrides in `FSD_File`.
 use super::TextFile;
 use crate::standard::Failure;
-use crate::storage::DriverPrimitives;
 use crate::tcollection::{AsciiString, ExtendedString};
+mod cmp;
 
 /// The members that differ between `FSD_File` ([`FsdDialect`]) and `FSD_CmpFile`
 /// ([`CmpDialect`]); every other member of [`TextFile`] is shared.
@@ -10,14 +10,34 @@ pub trait TextDialect: Sized {
     /// `MagicNumber()`.
     const MAGIC_NUMBER: &'static str;
 
+    /// Selects the four `FSD_CmpFile` text bodies for hooks this dialect does not override.
+    ///
+    /// ```
+    /// use rustycad_tkernel::fsd::TextDialect;
+    /// struct DerivedCmp;
+    /// impl TextDialect for DerivedCmp {
+    ///     const MAGIC_NUMBER: &'static str = "CUSTOM";
+    ///     const USE_CMP_TEXT_DEFAULTS: bool = true;
+    /// }
+    /// ```
+    const USE_CMP_TEXT_DEFAULTS: bool = false;
+
     /// Protected virtual `ReadLine`; `MyDialect::read_line(file)`.
     fn read_line(file: &mut TextFile<Self>) -> AsciiString {
-        file.fsd_read_line()
+        if Self::USE_CMP_TEXT_DEFAULTS {
+            cmp::read_line(file)
+        } else {
+            file.fsd_read_line()
+        }
     }
 
     /// Protected virtual `ReadString`; `MyDialect::read_string(file)`.
     fn read_string(file: &mut TextFile<Self>) -> AsciiString {
-        file.fsd_read_string()
+        if Self::USE_CMP_TEXT_DEFAULTS {
+            cmp::read_string(file)
+        } else {
+            file.fsd_read_string()
+        }
     }
 
     /// Protected virtual `ReadChar`; `MyDialect::read_char(file, 4)` reads up to four bytes.
@@ -35,7 +55,11 @@ pub trait TextDialect: Sized {
         file: &mut TextFile<Self>,
         text: &mut ExtendedString,
     ) -> Result<(), Failure> {
-        file.fsd_read_extended_line(text)
+        if Self::USE_CMP_TEXT_DEFAULTS {
+            cmp::read_extended_line(file, text)
+        } else {
+            file.fsd_read_extended_line(text)
+        }
     }
 
     /// Protected virtual `WriteExtendedLine`.
@@ -43,8 +67,12 @@ pub trait TextDialect: Sized {
         file: &mut TextFile<Self>,
         text: &ExtendedString,
     ) -> Result<(), Failure> {
-        file.fsd_write_extended_line(text);
-        Ok(())
+        if Self::USE_CMP_TEXT_DEFAULTS {
+            cmp::write_extended_line(file, text)
+        } else {
+            file.fsd_write_extended_line(text);
+            Ok(())
+        }
     }
 
     /// Protected virtual `FlushEndOfLine`; `MyDialect::flush_end_of_line(file)`.
@@ -122,66 +150,15 @@ impl TextDialect for FsdDialect {
     const MAGIC_NUMBER: &'static str = "FSDFILE";
 }
 
-/// `FSD_CmpFile`'s overrides: carriage returns are tolerated at line ends, extended lines
+/// `FSD_CmpFile`'s defaults: carriage returns are tolerated at line ends, extended lines
 /// are written as a count and `PutExtCharacter` values, and objects are framed by their
 /// header alone.
 #[derive(Clone, Copy, Debug, Default)]
 pub struct CmpDialect;
 
-/// Drops trailing `\r` and `\n` bytes, as `FSD_CmpFile::ReadLine`/`ReadString` do.
-fn trim_line_end(text: AsciiString) -> AsciiString {
-    let bytes = text.as_bytes();
-    let keep = bytes
-        .iter()
-        .rposition(|byte| *byte != b'\r' && *byte != b'\n')
-        .map_or(0, |last| last + 1);
-    AsciiString::from_raw(&bytes[..keep])
-}
-
 impl TextDialect for CmpDialect {
     const MAGIC_NUMBER: &'static str = "CMPFILE";
-
-    fn read_line(file: &mut TextFile<Self>) -> AsciiString {
-        trim_line_end(file.fsd_read_line())
-    }
-
-    fn read_string(file: &mut TextFile<Self>) -> AsciiString {
-        trim_line_end(file.fsd_read_string())
-    }
-
-    /// Reads the unit count, then one `GetExtCharacter` per unit already in `text`, which
-    /// is not cleared: the native loop bound is `buffer.Length()`, so an empty buffer reads
-    /// no unit, and a non-empty one grows by each unit's decimal digits (`operator+=(int)`)
-    /// faster than the loop advances, reading until an exception ends it.
-    fn read_extended_line(
-        file: &mut TextFile<Self>,
-        text: &mut ExtendedString,
-    ) -> Result<(), Failure> {
-        let mut count = 0;
-        file.get_integer(&mut count)?;
-        let mut unit = 0_u16;
-        let mut index = 0;
-        while index < text.length() {
-            file.get_ext_character(&mut unit)?;
-            // `buffer += c` binds to `operator+=(const int)`: decimal digits are appended.
-            text.assign_cat(i32::from(unit));
-            index += 1;
-        }
-        file.flush_end_of_line();
-        Ok(())
-    }
-
-    fn write_extended_line(
-        file: &mut TextFile<Self>,
-        text: &ExtendedString,
-    ) -> Result<(), Failure> {
-        file.put_integer(text.length())?;
-        for unit in text.as_utf16() {
-            file.put_ext_character(*unit)?;
-        }
-        file.stream.insert_bytes(b"\n");
-        Ok(())
-    }
+    const USE_CMP_TEXT_DEFAULTS: bool = true;
 
     fn write_object_header(
         file: &mut TextFile<Self>,
