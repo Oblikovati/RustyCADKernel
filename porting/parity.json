@@ -228298,6 +228298,15 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMakeOffset::make_thick_solid",
       "status": "partial",
       "notes": "No-closing-face branch delegates to MakeOffsetShape and reverses completed positive offsets. Pinned native positive, negative and zero-offset fixtures compare completion, errors, nullness, result and face orientations; tools/oracle/tkoffset_make_thick_solid_no_caps.md. Closing-face quilting is explicitly unsupported. Supplemental fixtures do not map legacy declarations or establish complete API parity."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::CheckPlanes(const int, const int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::check_planes",
+      "status": "partial",
+      "notes": "Native lazy FaceInfo initialization, same-face call and eight In/On membership combinations replay exactly; preserves duplicate occurrence counting across the second face sets. tools/oracle/tkbo_pave_filler_check_planes.md. Rust needs mutable receiver because native const method mutates the pointed-to DS. Uninitialized Rust errors are safety evidence, not native parity. Full PerformFF integration and additional legacy coverage remain open."
     }
   ],
   "tests": [

@@ -408,9 +408,9 @@ impl BOPAlgoPaveFiller {
         structure.add_interference(candidate.edge_index, candidate.face_index);
     }
 
-    fn structure_mut(&mut self) -> Result<&mut DataStructure, Failure> {
+    pub(super) fn structure_mut(&mut self) -> Result<&mut DataStructure, Failure> {
         self.data_structure.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformEF requires initialized data structure")
+            Failure::new("BOPAlgo_PaveFiller data structure is None; expected initialize() to prepare source shapes")
         })
     }
 }
@@ -464,7 +464,9 @@ fn compute_forced_vf(
 }
 
 fn missing_ef_structure() -> Failure {
-    Failure::new("BOPAlgo_PaveFiller::PerformEF requires initialized data structure")
+    Failure::new(
+        "BOPAlgo_PaveFiller data structure is None; expected initialize() to prepare source shapes",
+    )
 }
 
 fn unsupported_common_part(shape_type: ShapeEnum) -> Failure {

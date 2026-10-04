@@ -3,6 +3,8 @@
 mod edge_edge;
 #[path = "pave_filler/edge_face.rs"]
 mod edge_face;
+#[path = "pave_filler/face_face_prepare.rs"]
+mod face_face_prepare;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
 #[path = "pave_filler/split_blocks.rs"]
