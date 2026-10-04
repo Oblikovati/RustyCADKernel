@@ -229534,6 +229534,33 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d3",
       "status": "implemented",
       "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "math_VectorBase::SetLower(int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
+      "source_sha256": "d68820c34a6cb97d0eeec2639b9c1948c9e0934ddc9cba5d88b22256c0f68369",
+      "rust_item": "rustycad_tkmath::math::VectorBase::set_lower",
+      "status": "implemented",
+      "notes": "Native protected/subclass-facing bound rebasing, exposed as an inherent Rust method. Inline and heap storage probes in porting/audits/tkmath-math-vectorbase-storage.md; values and storage are preserved."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::FillImagesVertices(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::fill_images_vertices",
+      "status": "partial",
+      "notes": "Generic source-vertex direct same-domain mapping verified against native in tools/oracle/tkbo_builder_vertex_images.md. Explicit DS injection replaces the stored DS. Progress cancellation and full Builder execution remain missing; no legacy Fuse test is claimed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::FillImagesEdges(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::fill_images_edges",
+      "status": "partial",
+      "notes": "Generic source-edge image/origin/ShapesSD construction with referenced-empty and common-block behavior verified in tools/oracle/tkbo_builder_edge_images.md. Explicit DS injection replaces the stored DS. Progress cancellation and full Builder execution remain missing; no legacy Fuse test is claimed."
     }
   ],
   "tests": [
