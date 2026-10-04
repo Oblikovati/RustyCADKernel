@@ -1,5 +1,6 @@
 use super::EdgeFace;
 use super::classify::{append_projectable_ranges, classify_common_parts};
+use super::postprocess::postprocess_touch_parts;
 use super::quick_coincidence::is_coincident;
 use crate::int_tools::{BeanFaceIntersector, CommonPrt};
 use rustycad_tkbrep::{brep::BRepTool, brep_adaptor::BRepAdaptorCurve};
@@ -93,7 +94,8 @@ impl EdgeFace {
             return Ok(());
         }
         append_projectable_ranges(self, intersector.result())?;
-        classify_common_parts(self)
+        classify_common_parts(self)?;
+        postprocess_touch_parts(self)
     }
 
     fn intersection_tolerances(&self) -> Result<(f64, f64), Failure> {
