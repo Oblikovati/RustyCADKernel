@@ -49,13 +49,30 @@ fn perform_ef_endpoint_contact_keeps_the_source_block_unsplit() {
 }
 
 #[test]
-fn perform_ef_propagates_unported_bezier_localization() {
+fn perform_ef_localizes_bezier_surface_and_records_native_vertex() {
     let edge = line_edge((0.5, 0.5, -1.0), (0.5, 0.5, 1.0));
     let face = bezier_face();
-    let mut filler = configured_filler(&edge, &face, false, 1.0e-6);
-    let error = filler.perform_ef().unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("requires unported localization"));
+    let mut filler = configured_filler(&edge, &face, false, 1.0e-7);
+    filler.perform_ef().unwrap();
+    let ds = filler.data_structure_mut().unwrap();
+    let mut rows = format!("after {} {}\n", ds.nb_shapes(), ds.interf_ef().len());
+    append_coplanar_record(ds, &mut rows);
+    append_bezier_vertices(ds, &mut rows);
+    assert_eq!(
+        rows,
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ef_bezier.expected")
+    );
+}
+
+fn append_bezier_vertices(ds: &rustycad_tkbo::bop_ds::DataStructure, rows: &mut String) {
+    for index in 0..ds.nb_shapes() {
+        let shape = ds.shape(index).unwrap();
+        if shape.shape_type().unwrap() != rustycad_tkg3d::top_abs::ShapeEnum::Vertex {
+            continue;
+        }
+        let point = BRepTool::pnt(&Vertex::unchecked(shape.clone())).unwrap();
+        writeln!(rows, "v {:.9} {:.9} {:.9}", point.x(), point.y(), point.z()).unwrap();
+    }
 }
 
 #[test]

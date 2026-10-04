@@ -1,4 +1,4 @@
-//! Stateful BeanFace intersections; surface localization remains a separate porting obligation.
+//! Stateful BeanFace intersections with native adaptive surface localization.
 use super::{Context, MarkedRangeSet, Range};
 use rustycad_tkbrep::{
     brep::BRepTool,
@@ -14,6 +14,7 @@ use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 mod analytic_adaptors;
 mod bounded_initialization;
+mod boxes;
 mod coincidence;
 mod distance;
 mod empty_range;
@@ -21,9 +22,12 @@ mod exact_intersection;
 mod extremum;
 mod fast_analytic;
 mod general;
+mod grid;
 mod line_plane;
+mod localization;
 mod near_range_boundaries;
 mod range_walk;
+mod ranges;
 
 /// Curve/face intersection ranges; `BeanFaceIntersector::from_shapes(&edge, &face)?`.
 pub struct BeanFaceIntersector {
