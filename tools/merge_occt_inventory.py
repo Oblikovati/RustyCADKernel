@@ -54,6 +54,10 @@ def inventory_tables(
         "declarations": sorted(
             records.declarations.values(), key=lambda row: str(row["id"])
         ),
+        "alias-reachability": sorted(
+            records.alias_reachability,
+            key=lambda row: (str(row.get("source")), str(row.get("alias_usr"))),
+        ),
         "macros": sorted(records.macros.values(), key=lambda row: str(row["id"])),
         "headers": headers,
         "diagnostics": records.diagnostics,

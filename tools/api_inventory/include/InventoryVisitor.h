@@ -15,12 +15,16 @@ public:
   bool hasUnhandledKinds() const;
 
 private:
+  void emitAliasReachability(const clang::Decl &declaration,
+                             const llvm::json::Object &event);
+
   clang::ASTContext &context_;
   const Config &config_;
   std::map<std::string, unsigned> dispositions_;
   std::map<std::string, unsigned> kinds_;
   std::set<std::string> unhandledKinds_;
   unsigned emitted_ = 0;
+  unsigned aliasReachabilityEvents_ = 0;
   unsigned externalDecls_ = 0;
   unsigned occtUnemittedDecls_ = 0;
 };

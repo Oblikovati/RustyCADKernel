@@ -50,7 +50,10 @@ class ContextReconciliationTests(unittest.TestCase):
         header.write_text("int a;")
         source.write_text('#include "a.hxx"')
         artifact.parent.mkdir()
-        artifact.write_text('{"event":"summary","complete_for_emit_scope":true}\n')
+        artifact.write_text(
+            '{"event":"summary","complete_for_emit_scope":true,'
+            '"alias_reachability_events":0}\n'
+        )
         row = {
             "path": "a.hxx",
             "status": "parsed_with_context",
@@ -119,7 +122,10 @@ class ContextReconciliationTests(unittest.TestCase):
         retry_directory = self.root / "retries"
         artifact = retry_directory / "artifacts" / "probe.jsonl"
         artifact.parent.mkdir(parents=True)
-        artifact.write_text('{"event":"summary","complete_for_emit_scope":true}\n')
+        artifact.write_text(
+            '{"event":"summary","complete_for_emit_scope":true,'
+            '"alias_reachability_events":0}\n'
+        )
         row = {
             "path": "a.hxx",
             "status": "parsed_with_context",
