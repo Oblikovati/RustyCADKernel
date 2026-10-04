@@ -235255,6 +235255,38 @@
       ],
       "status": "implemented",
       "notes": "Existing typed geometry Failure factory plus shared exception_type preserves the native most-derived exception name through cloning. Native probe checks direct and Standard_Failure-reference virtual dispatch for all four geometry exception classes. Exact supplemental receipt tools/oracle/geometry_exception_types.expected; no legacy declaration count increase. Compiler declaration 073e0136a546fe4ab32e337dd4cfbf81ce13bd154c5abb2b1cc936ceb717ee57."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::getLink(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::get_link",
+      "status": "implemented",
+      "notes": "Reusable protected operation and strategy hook. Signed indices preserve link orientation and raise Standard_OutOfRange for missing keys; turn strategies propagate failures and raise Standard_NoSuchObject for empty fallback candidates. Native probe plus differential Poly tests: tools/oracle/poly_make_loops_get_link.md. Compiler ID adc870a79b2da2fde3527c1fe3bf5da91647e64af854b68e7d7b8a9d7820b150. Native abs(INT_MIN) is undefined and not a parity input. This hook mapping does not claim null-helper constructor behavior or debug-only OnAddLink. No legacy declaration count increase."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::chooseLeftWay(int,int,const NCollection_List<int>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LoopWay::choose_left_way",
+      "status": "implemented",
+      "notes": "Reusable protected operation and strategy hook. Signed indices preserve link orientation and raise Standard_OutOfRange for missing keys; turn strategies propagate failures and raise Standard_NoSuchObject for empty fallback candidates. Native probe plus differential Poly tests: tools/oracle/poly_make_loops_get_link.md. Compiler ID f283f473b2f5801506053c24ebe80aa19a83f83365a987639b82f1ef05a8f9b2. Native abs(INT_MIN) is undefined and not a parity input. This hook mapping does not claim null-helper constructor behavior or debug-only OnAddLink. No legacy declaration count increase."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops2D::chooseLeftWay(int,int,const NCollection_List<int>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LeftWay2D::<rustycad_tkmath::poly::make_loops::LoopWay>::choose_left_way",
+      "status": "implemented",
+      "notes": "Reusable protected operation and strategy hook. Signed indices preserve link orientation and raise Standard_OutOfRange for missing keys; turn strategies propagate failures and raise Standard_NoSuchObject for empty fallback candidates. Native probe plus differential Poly tests: tools/oracle/poly_make_loops_get_link.md. Compiler ID 2ccb041e0a8c94668371fe011e3da1039c0c1c94d97ad1f2ca8522d993172016. Native abs(INT_MIN) is undefined and not a parity input. This hook mapping does not claim null-helper constructor behavior or debug-only OnAddLink. No legacy declaration count increase."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops3D::chooseLeftWay(int,int,const NCollection_List<int>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LeftWay3D::<rustycad_tkmath::poly::make_loops::LoopWay>::choose_left_way",
+      "status": "implemented",
+      "notes": "Reusable protected operation and strategy hook. Signed indices preserve link orientation and raise Standard_OutOfRange for missing keys; turn strategies propagate failures and raise Standard_NoSuchObject for empty fallback candidates. Native probe plus differential Poly tests: tools/oracle/poly_make_loops_get_link.md. Compiler ID 11d0429c11c3102dae015ad38867aad3a59db7f5749a99477ac9b0c12310034d. Native abs(INT_MIN) is undefined and not a parity input. This hook mapping does not claim null-helper constructor behavior or debug-only OnAddLink. No legacy declaration count increase."
     }
   ],
   "tests": [
