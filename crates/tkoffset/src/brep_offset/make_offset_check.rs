@@ -22,11 +22,10 @@ impl BRepOffsetMakeOffset {
         {
             return Ok(self.set_check_error(BRepOffsetError::NullOffset));
         }
-        let faces = face_component(&self.initial_shape)?;
-        if !is_connected_shell(&faces.clone().into_shape())? {
+        if !is_connected_shell(&self.face_component)? {
             return Ok(self.set_check_error(BRepOffsetError::NotConnectedShell));
         }
-        self.check_face_geometry(&faces.clone().into_shape())
+        self.check_face_geometry(&self.face_component.clone())
     }
 
     fn check_face_geometry(&mut self, faces: &Shape) -> Result<bool, Failure> {
@@ -136,7 +135,7 @@ fn has_face_offset(maker: &BRepOffsetMakeOffset, tolerance: f64) -> bool {
         .any(|(_, offset)| offset.abs() > tolerance)
 }
 
-fn face_component(shape: &Shape) -> Result<Compound, Failure> {
+pub(super) fn face_component(shape: &Shape) -> Result<Compound, Failure> {
     let mut faces = Compound::default();
     BRepBuilder::default().make_compound(&mut faces);
     if shape.is_null() {
