@@ -1,7 +1,7 @@
 //! The source-face-only branch of `BRepOffset_MakeOffset::MakeOffsetShape`.
 use super::{BRepOffsetAnalyse, BRepOffsetError, BRepOffsetMakeOffset, BRepOffsetOffsetFace};
 use rustycad_tkbrep::{
-    brep::BRepTool,
+    brep::{BRepBuilder, BRepTool},
     brep_tools::Quilt,
     topexp::Explorer,
     topods::{Face, Shape, Shell},
@@ -33,6 +33,7 @@ impl BRepOffsetMakeOffset {
         let image = offset_face(&face, offset)?;
         self.record_offset_history(&face, &image)?;
         self.result_shape = shell_from_face(image.face())?;
+        add_spherical_corrections(&mut self.result_shape, &image, offset)?;
         self.error = Some(BRepOffsetError::NoError);
         self.done = true;
         Ok(())
@@ -133,6 +134,20 @@ fn shell_from_face(face: &Face) -> Result<Shape, Failure> {
         ));
     }
     Ok(Shell::unchecked(shell).into_shape())
+}
+
+fn add_spherical_corrections(
+    result: &mut Shape,
+    image: &BRepOffsetOffsetFace,
+    offset: f64,
+) -> Result<(), Failure> {
+    let patches = super::correct_singular_face::correct_singular_face(image, offset)?;
+    let builder = BRepBuilder::default();
+    result.set_free(true)?;
+    for patch in patches {
+        builder.add(result, &patch.into_shape())?;
+    }
+    Ok(())
 }
 
 fn not_implemented(reason: &str) -> Failure {

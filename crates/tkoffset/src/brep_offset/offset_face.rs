@@ -53,6 +53,10 @@ impl BRepOffsetOffsetFace {
         &self.offset
     }
 
+    pub(super) fn edge_images(&self) -> &EdgeImages {
+        &self.edge_images
+    }
+
     /// Returns the status from `BRepOffset::Surface`; `offset.status()`.
     pub const fn status(&self) -> BRepOffsetStatus {
         self.status
