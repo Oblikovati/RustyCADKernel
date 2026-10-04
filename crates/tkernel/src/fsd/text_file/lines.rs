@@ -61,6 +61,7 @@ impl<D: TextDialect> TextFile<D> {
     }
 
     /// Base `FSD_File::ReadWord`, used by the default dialect hook.
+    /// Embedded NUL bytes truncate each native C-string chunk.
     pub(crate) fn fsd_read_word(&mut self) -> AsciiString {
         let mut byte = 0_u8;
         while !self.stream.eof() {
