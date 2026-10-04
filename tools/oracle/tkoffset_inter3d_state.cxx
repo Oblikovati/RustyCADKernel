@@ -1,0 +1,40 @@
+#include <BRepAlgo_AsDes.hxx>
+#include <BRepAlgo_Image.hxx>
+#include <BRepBuilderAPI_MakeFace.hxx>
+#include <BRepOffset_Inter3d.hxx>
+#include <TopoDS_Face.hxx>
+#include <gp_Pln.hxx>
+#include <iostream>
+
+static TopoDS_Face makeFace(const gp_Pln& plane)
+{
+  return BRepBuilderAPI_MakeFace(plane).Face();
+}
+
+int main()
+{
+  TopoDS_Face f1 = makeFace(gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)));
+  TopoDS_Face f2 = makeFace(gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 1, 0)));
+  TopoDS_Face source1 = makeFace(gp_Pln(gp_Pnt(0, 0, 2), gp_Dir(0, 0, 1)));
+  TopoDS_Face source2 = makeFace(gp_Pln(gp_Pnt(0, 2, 0), gp_Dir(0, 1, 0)));
+  occ::handle<BRepAlgo_AsDes> asDes = new BRepAlgo_AsDes();
+  BRepOffset_Inter3d intersections(asDes, TopAbs_IN, 1.0e-7);
+
+  std::cout << "before=" << intersections.IsDone(f1, f2) << '\n';
+  BRepAlgo_Image images;
+  images.Bind(source1, f1);
+  images.Bind(source2, f2);
+  intersections.FaceInter(f1, f2, images);
+  std::cout << "after=" << intersections.IsDone(f1, f2) << ','
+            << intersections.IsDone(f2, f1) << '\n';
+  std::cout << "touched=" << intersections.TouchedFaces().Extent()
+            << " new_edges=" << intersections.NewEdges().Extent()
+            << " descendants=" << asDes->Descendant(f1).Extent() << ','
+            << asDes->Descendant(f2).Extent() << '\n';
+
+  TopoDS_Face f3 = makeFace(gp_Pln(gp_Pnt(0, 0, 4), gp_Dir(0, 0, 1)));
+  intersections.SetDone(f1, f3);
+  intersections.SetDone(f1, f3);
+  std::cout << "explicit=" << intersections.IsDone(f1, f3) << ','
+            << intersections.IsDone(f3, f1) << '\n';
+}
