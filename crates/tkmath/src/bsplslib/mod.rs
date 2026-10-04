@@ -38,6 +38,8 @@ pub use iso::{is_rational, iso, reverse};
 pub use move_point::{MoveRange, move_point};
 pub use ops::{increase_degree, insert_knots, remove_knot, unperiodize};
 pub use poles::{get_poles, get_rational_poles, set_poles, set_rational_poles};
+/// Shared nullable handle semantics for the mutable `BSplSLib::Cache` value.
+pub type SharedBSplineSurfaceCache = crate::bsplclib::SharedCache<Cache>;
 pub use prepare::SurfaceSpan;
 pub use rational::rational_derivative;
 pub use resolution::{ResolutionDirection, resolution};

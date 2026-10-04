@@ -106,7 +106,7 @@ pub use prepare_insert::prepare_insert_knots;
 pub use remove::remove_knot_flat;
 pub use resolution::{resolution, resolution_flat};
 pub use scheme::{anti_boor_scheme, boor_scheme, derivative, eval};
-pub use shared_cache::SharedBSplineCache;
+pub use shared_cache::{SharedBSplineCache, SharedCache};
 pub use tang_extend::tang_extend_to_constraint;
 
 use crate::plib::PolePoint;
