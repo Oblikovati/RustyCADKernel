@@ -10,3 +10,7 @@ pub use progress::{Algo, PISteps};
 
 mod alerts;
 pub use alerts::*;
+mod builder;
+mod tools_provider;
+pub use builder::BOPAlgoBuilder;
+pub use tools_provider::BOPAlgoToolsProvider;
