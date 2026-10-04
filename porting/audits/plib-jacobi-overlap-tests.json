@@ -1,0 +1,16 @@
+{
+  "command": "cargo test -p rustycad-tkmath --quiet",
+  "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "result": {
+    "groups": 244,
+    "passed": 2738,
+    "failed": 0,
+    "ignored": 0
+  },
+  "log": "porting/audits/plib-jacobi-overlap-package-tests.log.gz",
+  "log_sha256": "a2ba36a53a11ed35672d7eada64f35bed79f8278ce60af3b88cbcfb36f5ec936",
+  "log_uncompressed_sha256": "92d5a6686cae6ab6d229ae107208f6dcd7ad52c94a5866de1a6598755f875f90",
+  "native_probe": "tools/oracle/tkmath_plib_jacobi_overlap.cxx",
+  "native_output_sha256": "ca0421e011ff45988353d1cc27b3cae7ed084525e4e44fbc580a970d1469780e",
+  "validation": "Focused Jacobi alias and protected D0123 fixtures pass; cargo clippy -p rustycad-tkmath --all-targets -- -D warnings passes."
+}

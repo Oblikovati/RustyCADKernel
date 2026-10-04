@@ -41,9 +41,10 @@ capture time:
 - Expected output: `38f3f7d28a1fe5abf6d50d4813a0166f8ca772c24c50e412519a468986e0caeb`
 
 The Rust wrappers expose borrowed slices instead of four `NCollection_Array1`
-objects; callers provide empty slices for unrequested rows. This cannot alias
-the same array into unused native parameters, but it preserves all defined
-output rows without unsafe aliasing. Short buffers return `Standard_OutOfRange`.
+objects; callers provide empty slices for unrequested rows. The `BasisRows`
+entry point uses disjoint slices, while Jacobi and HermitJacobi also expose
+`d0123_overlapping` with one mutable buffer and four offsets to preserve defined
+aliasing without unsafe references. Short buffers return `Standard_OutOfRange`.
 
 ## Modeling-full replay
 

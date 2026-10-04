@@ -1495,25 +1495,34 @@
       "upstream_id": "PLib_JacobiPolynomial::D1(double,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
-      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d1",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending. Callers sharing active output storage use d0123_overlapping with native order matching this overload (1); alias write-order behavior is checked against tools/oracle/tkmath_plib_jacobi_overlap.expected.",
+      "rust_items": [
+        "rustycad_tkmath::plib::JacobiPolynomial::d1",
+        "rustycad_tkmath::plib::JacobiPolynomial::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_JacobiPolynomial::D2(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
-      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d2",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending. Callers sharing active output storage use d0123_overlapping with native order matching this overload (2); alias write-order behavior is checked against tools/oracle/tkmath_plib_jacobi_overlap.expected.",
+      "rust_items": [
+        "rustycad_tkmath::plib::JacobiPolynomial::d2",
+        "rustycad_tkmath::plib::JacobiPolynomial::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_JacobiPolynomial::D3(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
-      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d3",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending. Callers sharing active output storage use d0123_overlapping with native order matching this overload (3); alias write-order behavior is checked against tools/oracle/tkmath_plib_jacobi_overlap.expected.",
+      "rust_items": [
+        "rustycad_tkmath::plib::JacobiPolynomial::d3",
+        "rustycad_tkmath::plib::JacobiPolynomial::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_JacobiPolynomial::WorkDegree() const noexcept",
@@ -235216,9 +235225,12 @@
       "upstream_id": "PLib_JacobiPolynomial::D0123(int,double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
-      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d0123",
-      "status": "partial",
-      "notes": "Protected declaration inventory ID 2894dc87d2d243a21acaa9cb8f72beccd085a72881f846886b7cf28579cce9b9. Exposed as a Rust-safe borrowed BasisRows method and bit-checked against pinned native initialized-buffer calls, including nonzero lower bounds, NDeriv=-1 and NDeriv=4. Distinct mutable slices cannot alias one native NCollection_Array1 across argument positions; short buffers return Standard_OutOfRange instead of native out-of-bounds access. Probe: tools/oracle/tkmath_plib_d0123.cxx."
+      "status": "implemented",
+      "notes": "Protected declaration inventory ID 2894dc87d2d243a21acaa9cb8f72beccd085a72881f846886b7cf28579cce9b9. The disjoint-slice target preserves NDeriv=-1, 0..3, and >3 initialized-buffer behavior; the overlapping target reproduces shared and offset output spans with the native seed, ascending recurrence, and index-then-row normalization order. Native probe covers same-array aliasing for orders -1, 0, 1, 2, 3, and 4 plus selected, offset, and disjoint spans: tools/oracle/tkmath_plib_jacobi_overlap.cxx. Short Rust spans are rejected before mutation because corresponding native access is outside the defined buffer domain.",
+      "rust_items": [
+        "rustycad_tkmath::plib::JacobiPolynomial::d0123",
+        "rustycad_tkmath::plib::JacobiPolynomial::d0123_overlapping"
+      ]
     },
     {
       "upstream_id": "PLib_HermitJacobi::D0123(int,double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
