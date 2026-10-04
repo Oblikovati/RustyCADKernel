@@ -51708,9 +51708,9 @@
       "upstream_id": "Geom_BSplineCurve::Poles() const",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
-      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::poles",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::poles_array",
+      "status": "partial",
+      "notes": "Scoped callback lends the actual stored array under a read lock; pointer identity regressions rule out hidden array copies. Native retained Poles references observe subsequent SetPole edits; Rust callbacks observe current state but cannot hold that reference across later mutation. Existing poles() remains an owned snapshot convenience. Full reference-lifetime parity is unproven. See tools/oracle/tkg3d_bspline_poles_alias.md."
     },
     {
       "upstream_id": "Geom_BSplineCurve::StartPoint",
@@ -53313,12 +53313,12 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Geom_BSplineSurface::Poles()",
+      "upstream_id": "Geom_BSplineSurface::Poles() const",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
-      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::poles",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::poles_array",
+      "status": "partial",
+      "notes": "Scoped callback lends the actual stored array under a read lock; pointer identity regressions rule out hidden array copies. Native retained Poles references observe subsequent SetPole edits; Rust callbacks observe current state but cannot hold that reference across later mutation. Existing poles() remains an owned snapshot convenience. Full reference-lifetime parity is unproven. See tools/oracle/tkg3d_bspline_poles_alias.md."
     },
     {
       "upstream_id": "Geom_BSplineSurface::UDegree",
