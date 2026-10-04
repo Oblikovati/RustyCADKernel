@@ -3,12 +3,13 @@
 mod edge_edge;
 #[path = "pave_filler/edge_face.rs"]
 mod edge_face;
+#[path = "pave_filler/face_face_perform.rs"]
+mod face_face_perform;
+#[cfg(test)]
+#[path = "pave_filler/face_face_perform_tests.rs"]
+mod face_face_perform_tests;
 #[path = "pave_filler/face_face_prepare.rs"]
 mod face_face_prepare;
-#[cfg_attr(
-    not(test),
-    expect(dead_code, reason = "PerformFF call site is a separate queued port")
-)]
 #[path = "pave_filler/face_face_task.rs"]
 mod face_face_task;
 #[cfg(test)]
