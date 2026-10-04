@@ -216,7 +216,7 @@ fn merge_same_support_lines(
     };
     let range = extend_native_range(first, extension, first.edge_orientation);
     let edge_range = BRepTool::range(merged)?;
-    let pcurve = reparameterized_line(first_line, range, edge_range);
+    let pcurve = native_oriented_line(first_line, range, edge_range, first.edge_orientation);
     Ok(Some(MergedPCurve {
         curve: Handle::new(pcurve).cast(),
         range: edge_range,
@@ -390,12 +390,24 @@ fn line_parameter(line: Line2, point: Point2) -> f64 {
         .dot(Vector2::new(line.direction().x(), line.direction().y()))
 }
 
-fn reparameterized_line(line: Line2, range: (f64, f64), edge_range: (f64, f64)) -> Geom2dLine {
-    let start = line.location().translated(Vector2::new(
+fn native_oriented_line(
+    mut line: Line2,
+    mut range: (f64, f64),
+    edge_range: (f64, f64),
+    orientation: Orientation,
+) -> Geom2dLine {
+    if orientation == Orientation::Reversed {
+        line.reverse();
+        range = (-range.1, -range.0);
+    }
+    if range == edge_range {
+        return Geom2dLine::from_lin2d(line);
+    }
+    let origin = line.location().translated(Vector2::new(
         line.direction().x() * (range.0 - edge_range.0),
         line.direction().y() * (range.0 - edge_range.0),
     ));
-    Geom2dLine::from_lin2d(Line2::new(start, line.direction()))
+    Geom2dLine::from_lin2d(Line2::new(origin, line.direction()))
 }
 
 #[cfg(test)]
