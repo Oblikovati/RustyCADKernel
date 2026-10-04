@@ -1,46 +1,102 @@
-// Rust translation of FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-
-//! Borrowed memory streams preserving OCCT's bounded seek behavior.
+// Rust translation of FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.cxx at
+// OCCT revision 3d097a0328e71b826377d4814ab05ec3c3d23871.
+//! Borrowed stream storage with overridable OCCT-style virtual hooks.
 use std::io::{self, BufRead, Read, Seek, SeekFrom};
 
-/// A non-owning readable buffer; `ArrayStreamBuffer::new(b"Hello")`.
-pub struct ArrayStreamBuffer<'a> {
-    bytes: &'a [u8],
-    position: usize,
+use super::array_stream_hooks::{ArrayStreamBufferHooks, NativeArrayStreamBufferHooks};
+use super::array_stream_state::{ArrayStreamBufferState, ArrayStreamSeekDirection};
+
+/// A borrowed stream buffer whose hook implementation can be specialized by a Rust type.
+pub struct ArrayStreamBuffer<'a, H = NativeArrayStreamBufferHooks> {
+    state: ArrayStreamBufferState<'a>,
+    hooks: H,
 }
 
-impl<'a> ArrayStreamBuffer<'a> {
+impl<'a> ArrayStreamBuffer<'a, NativeArrayStreamBufferHooks> {
     /// Borrows memory without copying; `ArrayStreamBuffer::new(b"ABC")`.
     pub const fn new(bytes: &'a [u8]) -> Self {
-        Self { bytes, position: 0 }
+        Self::with_hooks(bytes, NativeArrayStreamBufferHooks)
     }
-    /// Maps a null, zero-length C++ buffer to an empty slice; `ArrayStreamBuffer::from_optional(None)`.
+
+    /// Maps a null, zero-length native buffer to an empty slice; `ArrayStreamBuffer::from_optional(None)`.
     pub fn from_optional(bytes: Option<&'a [u8]>) -> Self {
         Self::new(bytes.unwrap_or_default())
     }
-    /// Replaces the borrowed buffer and resets its position; `buffer.init(b"replacement")`.
+}
+
+impl<'a, H: ArrayStreamBufferHooks> ArrayStreamBuffer<'a, H> {
+    /// Creates a stream adapter with custom virtual callbacks; `ArrayStreamBuffer::with_hooks(b"ABC", Hooks)`.
+    pub const fn with_hooks(bytes: &'a [u8], hooks: H) -> Self {
+        Self {
+            state: ArrayStreamBufferState::new(bytes),
+            hooks,
+        }
+    }
+
+    /// Exposes the hook implementation for stateful derived-style adapters; `buffer.hooks_mut()`.
+    pub fn hooks_mut(&mut self) -> &mut H {
+        &mut self.hooks
+    }
+
+    /// Calls virtual `Init` and resets state by default; `buffer.init(b"replacement")`.
     pub fn init(&mut self, bytes: &'a [u8]) {
-        self.bytes = bytes;
-        self.position = 0;
+        self.hooks.init(&mut self.state, bytes);
     }
-    /// Returns unread bytes; `ArrayStreamBuffer::new(b"ABC").available() == 3`.
+
+    /// Calls virtual `underflow`; example: `buffer.underflow() == 65`.
+    pub fn underflow(&mut self) -> i32 {
+        self.hooks.underflow(&mut self.state)
+    }
+
+    /// Calls virtual `uflow` and returns its native integer result; `buffer.uflow_int() == 65`.
+    pub fn uflow_int(&mut self) -> i32 {
+        self.hooks.uflow(&mut self.state)
+    }
+
+    /// Returns a byte-or-EOF adapter for virtual `uflow`; use `uflow_int` for custom integer results.
+    pub fn uflow(&mut self) -> Option<u8> {
+        byte_result(self.uflow_int())
+    }
+
+    /// Calls virtual `pbackfail`; example: `buffer.pbackfail(-1)` requests EOF.
+    pub fn pbackfail(&mut self, requested: i32) -> i32 {
+        self.hooks.pbackfail(&mut self.state, requested)
+    }
+
+    /// Calls virtual `showmanyc`; `buffer.showmanyc()` returns unread byte count.
+    pub fn showmanyc(&mut self) -> isize {
+        self.hooks.showmanyc(&mut self.state)
+    }
+
+    /// Calls virtual `seekoff`; `buffer.seekoff(2, ArrayStreamSeekDirection::Begin)?`.
+    pub fn seekoff(&mut self, offset: i64, direction: ArrayStreamSeekDirection) -> io::Result<u64> {
+        self.hooks.seekoff(&mut self.state, offset, direction)
+    }
+
+    /// Calls virtual `seekpos`; `buffer.seekpos(2)?`.
+    pub fn seekpos(&mut self, position: u64) -> io::Result<u64> {
+        self.hooks.seekpos(&mut self.state, position)
+    }
+
+    /// Returns unread bytes as a state inspection, without invoking virtual `showmanyc`.
     pub const fn available(&self) -> usize {
-        self.bytes.len() - self.position
+        self.state.available()
     }
-    /// Peeks without consuming; `ArrayStreamBuffer::new(b"ABC").peek() == Some(b'A')`.
+
+    /// Peeks at stored bytes without invoking virtual `underflow`.
     pub fn peek(&self) -> Option<u8> {
-        self.bytes.get(self.position).copied()
+        self.state.bytes().get(self.state.position()).copied()
     }
-    /// Backs up only for EOF or the matching previous byte (`pbackfail`); `buffer.put_back(Some(b'A'))`.
-    ///
-    /// Native code compares the nonnegative byte request with the previous `char`
-    /// promoted to `int`, so where `char` is signed a byte of 0x80 or more never matches.
-    /// Use `put_back_integer` to supply the negative promoted value directly.
+
+    /// Calls virtual `pbackfail` using Rust's unsigned-byte convenience request.
+    /// A high byte may not match on signed-`char` targets; pass its promoted value through
+    /// `put_back_integer` or call `pbackfail` for the native integer hook.
     pub fn put_back(&mut self, byte: Option<u8>) -> Option<u8> {
-        self.put_back_integer(byte.map_or(-1, i32::from))
+        byte_result(self.pbackfail(byte.map_or(-1, i32::from)))
     }
-    /// Calls native `pbackfail(int_type)`, including negative promoted character values.
-    /// The EOF request `-1` backs up regardless of the previous byte.
+
+    /// Calls virtual `pbackfail` with the promoted native character request.
+    /// `None` represents EOF/failure or a non-byte custom result; `pbackfail` retains exact `int_type`.
     ///
     /// ```
     /// use rustycad_tkernel::standard::ArrayStreamBuffer;
@@ -49,84 +105,100 @@ impl<'a> ArrayStreamBuffer<'a> {
     /// assert_eq!(buffer.put_back_integer(65), Some(b'A'));
     /// ```
     pub fn put_back_integer(&mut self, requested: i32) -> Option<u8> {
-        let previous = self.position.checked_sub(1)?;
-        let actual = self.bytes[previous];
-        let promoted = i32::from(actual as std::ffi::c_char);
-        if requested != -1 && requested != promoted {
-            return None;
-        }
-        self.position = previous;
-        Some(actual)
+        byte_result(self.pbackfail(requested))
     }
-    /// Matches OCCT seekoff, whose end offset is subtracted; `buffer.seek_occt(SeekFrom::End(3))?`.
-    /// Rust's `Seek` trait uses its conventional signed end-relative offset instead.
-    ///
-    /// Positions past the end clamp to the end for `Start`/`Current` and to the start for
-    /// `End`, as natively. Native code moves before the start (`Start`/`Current`) or past
-    /// the end (a negative `End` offset) without a check, after which reads are undefined;
-    /// the port refuses those seeks with `InvalidInput` and keeps the position.
+
+    /// Calls virtual `seekoff` using OCCT's end-offset convention.
+    /// `SeekFrom::End(distance)` means `end - distance`; standard Rust `Seek` keeps its
+    /// conventional end-relative meaning.
+    /// Native out-of-range pointer arithmetic is undefined; this method rejects those targets.
     pub fn seek_occt(&mut self, offset: SeekFrom) -> io::Result<u64> {
-        match offset {
-            SeekFrom::End(distance) if distance < 0 => Err(beyond_end(self.bytes.len(), distance)),
-            SeekFrom::End(distance) => {
-                self.set_position((self.bytes.len() as i128 - i128::from(distance)).max(0))
-            }
-            other => self.seek(other),
-        }
+        seek_occt(self, offset)
     }
-    /// `xsgetn`: copies up to `destination.len()` bytes and advances; `buffer.xsgetn(&mut out)`.
+
+    /// Calls virtual `xsgetn`; `buffer.xsgetn(&mut destination)`.
     pub fn xsgetn(&mut self, destination: &mut [u8]) -> usize {
-        let count = destination.len().min(self.available());
-        destination[..count].copy_from_slice(&self.bytes[self.position..self.position + count]);
-        self.position += count;
-        count
-    }
-    /// `uflow`: returns the current byte and advances, `None` at the end; `buffer.uflow()`.
-    pub fn uflow(&mut self) -> Option<u8> {
-        let byte = self.peek()?;
-        self.position += 1;
-        Some(byte)
-    }
-    fn set_position(&mut self, position: i128) -> io::Result<u64> {
-        if position < 0 {
-            return Err(io::Error::new(
-                io::ErrorKind::InvalidInput,
-                format!("position {position}: expected 0..={}", self.bytes.len()),
-            ));
-        }
-        self.position = position.min(self.bytes.len() as i128) as usize;
-        Ok(self.position as u64)
+        self.hooks.xsgetn(&mut self.state, destination)
     }
 }
 
-impl Read for ArrayStreamBuffer<'_> {
+fn byte_result(result: i32) -> Option<u8> {
+    u8::try_from(result).ok()
+}
+
+impl<H: ArrayStreamBufferHooks> Read for ArrayStreamBuffer<'_, H> {
     fn read(&mut self, destination: &mut [u8]) -> io::Result<usize> {
-        Ok(self.xsgetn(destination))
+        Ok(self.xsgetn(destination).min(destination.len()))
     }
 }
-fn beyond_end(length: usize, distance: i64) -> io::Error {
+
+impl<H: ArrayStreamBufferHooks> BufRead for ArrayStreamBuffer<'_, H> {
+    /// Exposes stored unread bytes; this Rust adapter does not emulate virtual `underflow`.
+    fn fill_buf(&mut self) -> io::Result<&[u8]> {
+        Ok(self.state.remaining())
+    }
+
+    fn consume(&mut self, amount: usize) {
+        let consumed = amount.min(self.state.available());
+        let next_position = self.state.position() + consumed;
+        self.state
+            .set_position(next_position)
+            .expect("clamped to buffer length");
+    }
+}
+
+impl<H: ArrayStreamBufferHooks> Seek for ArrayStreamBuffer<'_, H> {
+    fn seek(&mut self, offset: SeekFrom) -> io::Result<u64> {
+        seek_standard(self, offset)
+    }
+}
+
+fn seek_standard<H: ArrayStreamBufferHooks>(
+    buffer: &mut ArrayStreamBuffer<'_, H>,
+    offset: SeekFrom,
+) -> io::Result<u64> {
+    match offset {
+        SeekFrom::Start(position) => seek_start_clamped(buffer, position),
+        SeekFrom::Current(delta) => buffer.seekoff(delta, ArrayStreamSeekDirection::Current),
+        SeekFrom::End(delta) if delta >= 0 => {
+            seek_start_clamped(buffer, buffer.state.bytes().len() as u64)
+        }
+        SeekFrom::End(delta) => seek_end_relative(buffer, delta),
+    }
+}
+
+fn seek_start_clamped<H: ArrayStreamBufferHooks>(
+    buffer: &mut ArrayStreamBuffer<'_, H>,
+    position: u64,
+) -> io::Result<u64> {
+    let end_position = buffer.state.bytes().len() as u64;
+    buffer.seekpos(position.min(end_position))
+}
+
+fn seek_end_relative<H: ArrayStreamBufferHooks>(
+    buffer: &mut ArrayStreamBuffer<'_, H>,
+    delta: i64,
+) -> io::Result<u64> {
+    let native_offset = delta
+        .checked_neg()
+        .ok_or_else(|| invalid_seek_delta(delta))?;
+    buffer.seekoff(native_offset, ArrayStreamSeekDirection::End)
+}
+
+fn seek_occt<H: ArrayStreamBufferHooks>(
+    buffer: &mut ArrayStreamBuffer<'_, H>,
+    offset: SeekFrom,
+) -> io::Result<u64> {
+    match offset {
+        SeekFrom::Start(position) => seek_start_clamped(buffer, position),
+        SeekFrom::Current(delta) => buffer.seekoff(delta, ArrayStreamSeekDirection::Current),
+        SeekFrom::End(distance) => buffer.seekoff(distance, ArrayStreamSeekDirection::End),
+    }
+}
+
+fn invalid_seek_delta(delta: i64) -> io::Error {
     io::Error::new(
         io::ErrorKind::InvalidInput,
-        format!(
-            "end offset {distance} would place the position past the end of a {length}-byte buffer; expected 0..={length}"
-        ),
+        format!("end offset {delta}: expected a negatable native offset"),
     )
-}
-impl BufRead for ArrayStreamBuffer<'_> {
-    fn fill_buf(&mut self) -> io::Result<&[u8]> {
-        Ok(&self.bytes[self.position..])
-    }
-    fn consume(&mut self, amount: usize) {
-        self.position += amount.min(self.available());
-    }
-}
-impl Seek for ArrayStreamBuffer<'_> {
-    fn seek(&mut self, offset: SeekFrom) -> io::Result<u64> {
-        let position = match offset {
-            SeekFrom::Start(position) => i128::from(position),
-            SeekFrom::Current(delta) => self.position as i128 + i128::from(delta),
-            SeekFrom::End(delta) => self.bytes.len() as i128 + i128::from(delta),
-        };
-        self.set_position(position)
-    }
 }

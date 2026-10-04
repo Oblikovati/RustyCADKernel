@@ -137,7 +137,7 @@
       "toolkit": "TKernel",
       "surface": "Standard_ArrayStreamBuffer virtual override interface",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
-      "gap": "Concrete buffer behavior is implemented, including signed integer putback. Native virtual Init and protected stream hook overriding have no equivalent Rust trait/base surface. See porting/audits/array-stream-override-surface.md."
+      "gap": "A Rust trait adapter now dispatches Init and all native stream hooks over shared state, with a derived-class oracle. C++ ABI/vtable parity, platform-native streamsize/pos_type domains, and pointer-invalid native domains remain outside the bounded adapter. See porting/audits/array-stream-override-surface.md."
     }
   ]
 }
