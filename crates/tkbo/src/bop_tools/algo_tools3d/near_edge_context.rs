@@ -53,7 +53,7 @@ pub fn point_near_edge_at(
 ) -> Result<i32, Failure> {
     let surface = BRepTool::surface(face)?;
     let kind = GeomAdaptorSurface::with_surface(&surface)?.get_type()?;
-    let mut step = 10. * 1e-5;
+    let mut step = 10. * super::min_step_in_2d();
     if matches!(kind, SurfaceType::Cylinder | SurfaceType::Sphere) {
         step *= 10.;
     }

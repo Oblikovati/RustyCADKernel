@@ -226401,6 +226401,33 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::is_empty_shape",
       "status": "partial",
       "notes": "14 native geometry/topology/representation cases including native Polygon3D dispatch exception; tools/oracle/tkbo_empty_shape.md. Broader shared/located topology and polygon subtypes need coverage. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::DoSplitSEAMOnFace(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::split_seam_on_face",
+      "status": "partial",
+      "notes": "384 native seam pair reconstruction cases; tools/oracle/tkbo_split_seam.md. Trimmed-surface/spline/location/exception branches still need evidence; no legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::MinStepIn2d()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::min_step_in_2d",
+      "status": "implemented",
+      "notes": "Fixed native 1e-5 UV step, checked in doctest."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::DoSplitSEAMOnFace(const TopoDS_Edge &, const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::split_seam_from_origin",
+      "status": "partial",
+      "notes": "384 native seam pair reconstruction cases; tools/oracle/tkbo_split_seam.md. Trimmed-surface/spline/location/exception branches still need evidence; no legacy completion claim."
     }
   ],
   "tests": [

@@ -65,3 +65,14 @@ pub use approx_normal::{
 
 mod empty_shape;
 pub use empty_shape::is_empty_shape;
+
+mod seam;
+pub use seam::{split_seam_from_origin, split_seam_on_face};
+
+/// Return OCCT's fixed minimum UV step.
+/// ```
+/// assert_eq!(rustycad_tkbo::bop_tools::algo_tools3d::min_step_in_2d(), 1e-5);
+/// ```
+pub fn min_step_in_2d() -> f64 {
+    1e-5
+}
