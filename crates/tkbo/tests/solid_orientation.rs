@@ -46,3 +46,6 @@ mod state;
 
 #[path = "solid_orientation_cases/shell.rs"]
 mod shell;
+
+#[path = "solid_orientation_cases/connexity.rs"]
+mod connexity;

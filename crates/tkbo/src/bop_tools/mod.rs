@@ -72,3 +72,6 @@ pub use orient_shell::orient_faces_on_shell;
 
 mod block_face;
 pub use block_face::is_block_in_on_face;
+
+mod face_connexity;
+pub use face_connexity::make_connexity_block;

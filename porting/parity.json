@@ -227322,6 +227322,24 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffset::from_vertex",
       "status": "partial",
       "notes": "Default non-polynomial vertex constructor facade over source-derived spherical join; positive/negative native geometry and facade state/null-history checks in tools/oracle/tkoffset_vertex_arc_join.md. Nondefault Tol/Conti, polynomial mode and full API/legacy parity remain unproven."
+    },
+    {
+      "upstream_id": "BOPAlgo_PaveFiller::PerformVV(const Message_ProgressRange &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
+      "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_vv",
+      "status": "partial",
+      "notes": "Protected VV stage source translation: native close/disjoint/transitive and reused-SD fixtures compare points, tolerances, indices, mappings, interference and bounding boxes. tools/oracle/tkbo_pave_filler_vv.md. Warning ordering/cancellation and full PaveFiller Perform/legacy parity remain incomplete."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::MakeConnexityBlock(NCollection_List<TopoDS_Shape> &, NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_List<TopoDS_Shape> &, const occ::handle<NCollection_BaseAllocator> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::make_connexity_block",
+      "status": "partial",
+      "notes": "Source translation and 20 native ordered frontier/avoidance/append/empty-input observations; tools/oracle/tkbo_face_connexity.md. Native allocator injection and general API/legacy parity unproven."
     }
   ],
   "tests": [
