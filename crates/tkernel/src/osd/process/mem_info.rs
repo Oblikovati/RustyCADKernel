@@ -162,8 +162,9 @@ impl<S: MemInfoSource> MemInfo<S> {
             bytes => bytes as f64 / (1024.0 * 1024.0),
         }
     }
-    /// The protected `hasValue`: active and known.
-    fn has_value(&self, counter: MemCounter) -> bool {
+    /// Exposes protected `hasValue`: a counter must be active and known.
+    /// Example: `assert!(!MemInfo::new(false).has_value(MemCounter::HeapUsage));`.
+    pub fn has_value(&self, counter: MemCounter) -> bool {
         self.is_active(counter) && self.counters[counter as usize] != UNKNOWN
     }
     fn push_line(

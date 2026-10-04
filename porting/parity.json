@@ -235501,6 +235501,14 @@
       "rust_item": "rustycad_tkmath::math::TrigonometricRoots::perform",
       "status": "implemented",
       "notes": "Existing protected operation exposed through the Rust method; native derived-class probes explicitly call Perform again on existing storage. See tools/oracle/tkmath_trig_probe.cxx and porting/audits/math-protected-and-global-selectors.json. This adds an API declaration binding, not an original legacy test."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::hasValue(const OSD_MemInfo::Counter) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::has_value",
+      "status": "implemented",
+      "notes": "Exposes the protected active-and-known predicate through the existing shared implementation. Zero is valid; usize::MAX is unknown; disabling retains the sample for reactivation; Clear invalidates samples. Native Linux derived-class transition receipt plus deterministic injected-source tests. This predicate does not change the separately partial platform-specific Update implementation. See porting/audits/osd-mem-info-has-value.json."
     }
   ],
   "tests": [

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "protected_api_exposure",
+  "base_revision": "dfd4acbf",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "cpp_declaration_id": "c81c7c9c1617fe43056a5623df8e96353004edbc6bbd1a44aed7e852445d5467",
+  "rust_target": "rustycad_tkernel::osd::MemInfo::has_value",
+  "source_sha256": "b7c4ea5f76f7d246d29c1ce5077457057d4d778e4dd34cffc9444228eba0a7db",
+  "native_header_sha256": "83d5f5516726fe1612941807c05d6a88184e3c3f07e1c9c4bf30f2c1858b87e8",
+  "probe": "tools/oracle/tkernel_mem_info_has_value.cxx",
+  "probe_sha256": "93cd948a64e0df951c4cc6586da1c66ca2f7e655b438b364e846f3ea2da3263e",
+  "expected": "tools/oracle/tkernel_mem_info_has_value.expected",
+  "expected_sha256": "941a6d41ddb5a6e8ab78fca8f2959290d7ecee941510a0bb1fdb03d7b4402488",
+  "native_binary_sha256": "2641732ff8c77cb96df66fb4c340a8c5a0e9fbdb4a2db418029128d552d8ad86",
+  "native_profile": "GCC C++17 -O2; pinned occt-modeling-full TKernel; Linux",
+  "passed": 14,
+  "failed": 0,
+  "test_command": "cargo test -p rustycad-tkernel --locked --test osd_mem_info_has_value --test osd_process_resources_api_behavior",
+  "test_log": "osd-mem-info-has-value-tests.log.gz",
+  "test_log_sha256": "d989c44b514fc0cf4ed29f9cebc2bdc2766da3386dceb3185389ccb68b6290dc",
+  "legacy_test_count_change": 0,
+  "limitations": [
+    "Supplemental predicate tests; no additional original legacy declarations.",
+    "Linux native availability receipt does not establish Windows/macOS Update parity.",
+    "API inventory must recapture the newly public Rust method before granting a resolved mapping."
+  ]
+}
