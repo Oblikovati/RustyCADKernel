@@ -23,7 +23,7 @@ pub enum StandardDirection3 {
 impl StandardDirection3 {
     /// gp_Ax2/gp_Ax3::getPerpendicularXDir: the X direction of a frame with this main
     /// direction; `StandardDirection3::Z.perpendicular_x()`.
-    pub(in crate::gp) const fn perpendicular_x(self) -> Self {
+    pub const fn perpendicular_x(self) -> Self {
         match self {
             X | NegX => Y,
             Y | NegY => Z,
@@ -31,7 +31,7 @@ impl StandardDirection3 {
         }
     }
     /// gp_Ax2/gp_Ax3::getPerpendicularYDir: main x perpendicular X; `StandardDirection3::Z.perpendicular_y()`.
-    pub(in crate::gp) const fn perpendicular_y(self) -> Self {
+    pub const fn perpendicular_y(self) -> Self {
         match self {
             Z => Y,
             NegZ => NegY,
@@ -44,7 +44,7 @@ impl StandardDirection3 {
     /// gp_Ax2/gp_Ax3::crossStandardDir: `self x other`. Parallel pairs have no product and
     /// return the native fallback, so such a frame is not orthogonal;
     /// `StandardDirection3::Z.cross(StandardDirection3::X)`.
-    pub(in crate::gp) const fn cross(self, other: Self) -> Self {
+    pub const fn cross(self, other: Self) -> Self {
         match (self, other) {
             (X, Y) | (Y, NegX) | (NegX, NegY) | (NegY, X) => Z,
             (X, NegY) | (Y, X) | (NegX, Y) | (NegY, NegX) => NegZ,

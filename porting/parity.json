@@ -234443,6 +234443,33 @@
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::put_back_integer",
       "status": "implemented",
       "notes": "Protected stream hook accepts the full i32 int_type domain, including negative signed-char promotions. EOF -1 unconditionally restores a previous byte; failure preserves position. Return EOF becomes None and unsigned character results become Some(u8). Native probe: tools/oracle/array_stream_integer_putback.cxx; supplemental tests only. Existing Option<u8> convenience delegates to this implementation."
+    },
+    {
+      "upstream_id": "gp_Ax2::getPerpendicularXDir(gp_Dir::D) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "source_sha256": "1254b1d47dbd585e6e8f20edb2595f28e9f6199d1cd4f7e01d2f9bc2bedc7ac1",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::perpendicular_x",
+      "status": "implemented",
+      "notes": "Protected gp_Ax2 hook exposed through the public StandardDirection3 method. Native derived-class probe tools/oracle/tkmath_gp_standard_direction_hooks.cxx matches all six direction outputs in tools/oracle/tkmath_gp_standard_direction_hooks.expected; Rust exhaustive test is gp_standard_direction_hooks_match_all_native_axes."
+    },
+    {
+      "upstream_id": "gp_Ax2::getPerpendicularYDir(gp_Dir::D) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "source_sha256": "1254b1d47dbd585e6e8f20edb2595f28e9f6199d1cd4f7e01d2f9bc2bedc7ac1",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::perpendicular_y",
+      "status": "implemented",
+      "notes": "Protected gp_Ax2 hook exposed through the public StandardDirection3 method. Native derived-class probe tools/oracle/tkmath_gp_standard_direction_hooks.cxx matches all six direction outputs in tools/oracle/tkmath_gp_standard_direction_hooks.expected; Rust exhaustive test is gp_standard_direction_hooks_match_all_native_axes."
+    },
+    {
+      "upstream_id": "gp_Ax2::crossStandardDir(gp_Dir::D,gp_Dir::D) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "source_sha256": "1254b1d47dbd585e6e8f20edb2595f28e9f6199d1cd4f7e01d2f9bc2bedc7ac1",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::cross",
+      "status": "implemented",
+      "notes": "Protected gp_Ax2 hook exposed through the public StandardDirection3 method. Native derived-class probe tools/oracle/tkmath_gp_standard_direction_hooks.cxx matches all 36 direction pairs, including OCCT's parallel fallback; Rust exhaustive test is gp_ax2_cross_hook_matches_all_native_pairs_and_parallel_fallbacks."
     }
   ],
   "tests": [
