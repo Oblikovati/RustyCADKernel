@@ -14,8 +14,12 @@ criterion separately from the tolerances used to compute intersection width.
 Native Init clears results but retains IsDone and the explicitly selected curve
 range. Repeated Perform clears earlier ranges. These distinctions are preserved.
 
-The public facade currently supports the line/plane Perform path only; other
-curve/surface pairs return an explicit unported-stage failure. General localized,
+The public facade supports the line/plane path and the analytic fast paths
+covered by tkbo_bean_analytic_facade.cxx: circle/ellipse/hyperbola/parabola on
+planes, line/circle on cylinders, and separated lines outside spheres. The 20
+additional rows compare repeated completion and ranges. Remaining pairs return
+an explicit unported-stage failure. The previous private-helper corpus also
+passes 5,661 numeric comparisons (exact finite bits and NaN classification). General localized,
 extrema, boundary and coincidence stages and the long constructor/init overloads
 remain pending. Shallow adaptor copies and allocator/exception edge cases have
 not received full equivalence proof. No legacy declaration acceptance is added.
