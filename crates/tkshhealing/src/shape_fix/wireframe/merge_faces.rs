@@ -201,7 +201,7 @@ fn merge_one_face(
     let face = applied_face(source, &context)?;
     let (mut changed, map_changed) =
         merge_face_wires(fixer, &face, &context, small, edge_faces, settings)?;
-    changed |= remove_empty_face(source, &context)?;
+    changed |= remove_empty_face(fixer, source, &context)?;
     Ok((changed, map_changed))
 }
 
@@ -224,13 +224,24 @@ fn merge_face_wires(
     Ok((changed, map_changed))
 }
 
-fn remove_empty_face(source: &Shape, context: &Handle<ShapeBuildReShape>) -> Result<bool, Failure> {
+fn remove_empty_face(
+    fixer: &ShapeFixWireframe,
+    source: &Shape,
+    context: &Handle<ShapeBuildReShape>,
+) -> Result<bool, Failure> {
     let applied = ReShape::apply(&**context, source, ShapeEnum::Shape)?;
     if applied.is_null() || ShapeIterator::new(&applied, true, true).more() {
         return Ok(false);
     }
     ReShape::remove(&**context, &applied)?;
+    send_empty_face_warning(fixer, source);
     Ok(true)
+}
+
+fn send_empty_face_warning(fixer: &ShapeFixWireframe, source: &Shape) {
+    use rustycad_tkernel::{message::Msg, tcollection::AsciiString};
+    let key = AsciiString::from("FixWireframe.FixSmallEdges.MSG2");
+    fixer.send_warning(source, &Msg::from_key(&key));
 }
 
 fn applied_face(source: &Shape, context: &Handle<ShapeBuildReShape>) -> Result<Face, Failure> {

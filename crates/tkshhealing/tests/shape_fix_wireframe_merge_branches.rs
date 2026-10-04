@@ -9,7 +9,9 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::{ncollection::List, standard::Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Plane3, Point3};
+use rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
+use rustycad_tkshhealing::shape_extend::{BasicMsgRegistrator, ShapeExtendMsgRegistrator};
 use rustycad_tkshhealing::{
     shape_extend::ShapeExtendStatus,
     shape_fix::{FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists},
@@ -36,6 +38,22 @@ fn separate_face_groups_follow_shape_order_and_update_maps() {
 #[test]
 fn singleton_face_edge_drop_keeps_native_stale_face_map() {
     assert_eq!(face_drop_single_row(), expected("face_drop_single"));
+}
+
+#[test]
+fn linked_face_drop_repairs_the_new_neighbor_connection() {
+    assert_eq!(
+        face_drop_connected_row(0.1),
+        expected("face_drop_connected")
+    );
+}
+
+#[test]
+fn linked_face_drop_preserves_a_disconnected_neighbor_pair() {
+    assert_eq!(
+        face_drop_connected_row(0.001),
+        expected("face_drop_unconnected")
+    );
 }
 
 #[test]
@@ -163,6 +181,8 @@ fn face_drop_single_row() -> Vec<f64> {
     let shape = face.clone().into_shape();
     let fixer = configured_wireframe(&shape);
     fixer.set_precision(0.1);
+    let registrator = Handle::new(ShapeExtendMsgRegistrator::new());
+    fixer.set_msg_registrator(&registrator.cast::<dyn BasicMsgRegistrator>());
     let (mut small, mut edge_faces, mut face_small) = face_edge_maps(&[&face]);
     let mut multiple = MapOfShape::default();
     let changed = merge(
@@ -174,6 +194,16 @@ fn face_drop_single_row() -> Vec<f64> {
         true,
     );
     let result = applied_shape(&fixer, &shape);
+    let warnings = registrator.map_shape(|messages| {
+        messages
+            .values()
+            .flat_map(|list| list.iter().map(|message| message.original().to_utf8()))
+            .collect::<Vec<_>>()
+    });
+    assert_eq!(warnings.len(), 3);
+    assert!(warnings.iter().any(|message| message.contains("MSG0")));
+    assert!(warnings.iter().any(|message| message.contains("MSG1")));
+    assert!(warnings.iter().any(|message| message.contains("MSG2")));
     vec![
         f64::from(changed),
         small.extent() as f64,
@@ -182,6 +212,54 @@ fn face_drop_single_row() -> Vec<f64> {
         f64::from(result.is_null()),
         edge_count(&result),
         f64::from(fixer.status_small_edges(ShapeExtendStatus::Done2)),
+        warnings.len() as f64,
+    ]
+}
+
+fn face_drop_connected_row(tolerance: f64) -> Vec<f64> {
+    let face = plane_face(&tiny_wire());
+    let shape = face.clone().into_shape();
+    let fixer = configured_wireframe(&shape);
+    fixer.set_precision(tolerance);
+    let registrator = Handle::new(ShapeExtendMsgRegistrator::new());
+    fixer.set_msg_registrator(&registrator.cast::<dyn BasicMsgRegistrator>());
+    let edge = edge_shapes(&shape).remove(0);
+    let mut small = shape_map(&edge);
+    let mut edge_faces = ShapeFixWireframeShapeLists::default();
+    edge_faces.bind(edge.clone(), List::from_iter([shape.clone()]));
+    let mut face_small = ShapeFixWireframeShapeLists::default();
+    face_small.bind(shape.clone(), List::from_iter([edge]));
+    let mut multiple = MapOfShape::default();
+    let changed = merge(
+        &fixer,
+        &mut small,
+        &mut edge_faces,
+        &mut face_small,
+        &mut multiple,
+        true,
+    );
+    let result = applied_shape(&fixer, &shape);
+    let warnings = registrator.map_shape(|messages| {
+        messages
+            .values()
+            .flat_map(|list| list.iter().map(|message| message.original().to_utf8()))
+            .collect::<Vec<_>>()
+    });
+    assert_eq!(warnings.len(), usize::from(changed));
+    if changed {
+        assert!(warnings[0].contains("MSG0"));
+    }
+    let endpoints_match = boundary_vertices_match(&edges_from(&result));
+    vec![
+        f64::from(changed),
+        small.extent() as f64,
+        edge_faces.extent() as f64,
+        face_small.extent() as f64,
+        edge_count(&result),
+        f64::from(fixer.status_small_edges(ShapeExtendStatus::Done3)),
+        f64::from(fixer.status_small_edges(ShapeExtendStatus::Fail)),
+        warnings.len() as f64,
+        f64::from(endpoints_match),
     ]
 }
 
@@ -212,6 +290,26 @@ fn edge_shapes(shape: &Shape) -> Vec<Shape> {
     Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
         .unwrap()
         .collect()
+}
+
+fn edges_from(shape: &Shape) -> Vec<Edge> {
+    edge_shapes(shape)
+        .iter()
+        .map(|edge| topods::edge(edge).unwrap())
+        .collect()
+}
+
+fn boundary_vertices_match(edges: &[Edge]) -> bool {
+    let Some(first) = edges.first() else {
+        return false;
+    };
+    let Some(last) = edges.last() else {
+        return false;
+    };
+    let analyzer = ShapeAnalysisEdge::new();
+    analyzer
+        .last_vertex(last)
+        .is_same(&analyzer.first_vertex(first))
 }
 
 fn edge_count(shape: &Shape) -> f64 {

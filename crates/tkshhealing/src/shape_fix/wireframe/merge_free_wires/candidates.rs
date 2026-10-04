@@ -25,6 +25,7 @@ pub(super) struct CandidatePair {
     pub(super) take_next: bool,
     pub(super) faces: Vec<Face>,
     pub(super) minimum_angle: f64,
+    pub(super) drop_candidate: bool,
 }
 
 #[derive(Clone, Copy)]
@@ -119,11 +120,20 @@ fn limited_candidate_pair(
     policy: &MergePolicy,
     angle_choice: (bool, f64),
 ) -> Result<Option<CandidatePair>, Failure> {
-    let Some((faces, forced_next)) = candidate_face_set(wire_data, &edges, indexes, policy) else {
+    let Some((faces, forced_next, drop_candidate)) =
+        candidate_face_set(wire_data, &edges, indexes, policy)
+    else {
         return Ok(None);
     };
-    let pair = select_candidate_pair(edges, indexes, &faces, forced_next, angle_choice);
-    if exceeds_pair_angle_limit(&pair, policy.angle_limit) {
+    let pair = select_candidate_pair(
+        edges,
+        indexes,
+        &faces,
+        forced_next,
+        angle_choice,
+        drop_candidate,
+    );
+    if !pair.drop_candidate && exceeds_pair_angle_limit(&pair, policy.angle_limit) {
         return Ok(None);
     }
     Ok(Some(pair))
@@ -134,9 +144,9 @@ fn candidate_face_set(
     edges: &CandidateEdges,
     indexes: PairIndexes,
     policy: &MergePolicy,
-) -> Option<(Vec<Face>, Option<bool>)> {
+) -> Option<(Vec<Face>, Option<bool>, bool)> {
     if policy.edge_faces.is_empty() {
-        return Some((policy.faces.clone(), None));
+        return Some((policy.faces.clone(), None, false));
     }
     let middle = edge_faces(&edges.middle, &policy.edge_faces);
     let before = edge_faces(&edges.before, &policy.edge_faces);
@@ -146,9 +156,10 @@ fn candidate_face_set(
     let same_after = matching_faces(&middle, &after)
         && wire_data.is_seam(indexes.middle) == wire_data.is_seam(indexes.next);
     let forced_next = match (same_before, same_after) {
-        (true, true) => None,
-        (true, false) => Some(false),
-        (false, true) => Some(true),
+        (true, true) => (None, false),
+        (true, false) => (Some(false), false),
+        (false, true) => (Some(true), false),
+        (false, false) if policy.drop_mode => (None, true),
         (false, false) => return None,
     };
     let faces = middle
@@ -156,7 +167,7 @@ fn candidate_face_set(
         .map(topods::face)
         .collect::<Result<Vec<_>, _>>()
         .ok()?;
-    Some((faces, forced_next))
+    Some((faces, forced_next.0, forced_next.1))
 }
 
 fn edge_faces(edge: &Edge, links: &[(Shape, Vec<Shape>)]) -> Vec<Shape> {
@@ -216,6 +227,7 @@ fn select_candidate_pair(
     faces: &[Face],
     forced_next: Option<bool>,
     angle_choice: (bool, f64),
+    drop_candidate: bool,
 ) -> CandidatePair {
     let (angle_next, minimum_angle) = angle_choice;
     let take_next = forced_next.unwrap_or(angle_next);
@@ -229,6 +241,7 @@ fn select_candidate_pair(
         take_next,
         faces: faces.to_vec(),
         minimum_angle,
+        drop_candidate,
     }
 }
 

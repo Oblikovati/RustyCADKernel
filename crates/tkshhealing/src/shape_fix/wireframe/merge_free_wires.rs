@@ -1,4 +1,5 @@
 mod candidates;
+mod drop;
 mod non_manifold;
 pub(super) use candidates::MergePolicy;
 use candidates::{CandidatePair, candidate_pair, linked_face_order_allows_join};
@@ -13,7 +14,7 @@ use crate::{
 use rustycad_tkbrep::{
     brep_tools::ReShape,
     topexp::Explorer,
-    topods::{self, Edge, Wire},
+    topods::{self, Edge, Shape, Wire},
     toptools::MapOfShape,
 };
 use rustycad_tkernel::{
@@ -101,8 +102,11 @@ fn merge_wire_data(
     small: &mut MapOfShape,
     policy: &mut MergePolicy,
 ) -> Result<bool, Failure> {
-    let changed = merge_wire_candidates(fixer, wire_data, small, policy)?;
+    let changed = merge_wire_candidates(fixer, wire_fixer, wire_data, small, policy)?;
     if changed {
+        if drop_single_small_edge(fixer, source, wire_data, small, policy)? {
+            return Ok(true);
+        }
         publish_changed_wire(fixer, wire_fixer, source, wire_data, true)?;
         return Ok(true);
     }
@@ -135,18 +139,29 @@ fn remove_dropped_wire_edge(
     policy: &mut MergePolicy,
 ) -> Result<(), Failure> {
     let context = fixer.context();
-    ReShape::remove(&*context, &edge.clone().into_shape())?;
-    ReShape::remove(&*context, &source.clone().into_shape())?;
-    small.remove(&edge.clone().into_shape());
+    let edge_shape = edge.clone().into_shape();
+    ReShape::remove(&*context, &edge_shape)?;
+    send_drop_warning(fixer, &edge_shape, "MSG0");
+    small.remove(&edge_shape);
     policy
         .edge_faces
-        .retain(|(candidate, _)| !candidate.is_same(&edge.clone().into_shape()));
+        .retain(|(candidate, _)| !candidate.is_same(&edge_shape));
+    let wire_shape = source.clone().into_shape();
+    ReShape::remove(&*context, &wire_shape)?;
+    send_drop_warning(fixer, &wire_shape, "MSG1");
     fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
     Ok(())
 }
 
+fn send_drop_warning(fixer: &ShapeFixWireframe, shape: &Shape, suffix: &str) {
+    use rustycad_tkernel::{message::Msg, tcollection::AsciiString};
+    let key = format!("FixWireframe.FixSmallEdges.{suffix}");
+    fixer.send_warning(shape, &Msg::from_key(&AsciiString::from(key.as_str())));
+}
+
 fn merge_wire_candidates(
     fixer: &ShapeFixWireframe,
+    wire_fixer: &ShapeFixWire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     policy: &mut MergePolicy,
@@ -154,7 +169,8 @@ fn merge_wire_candidates(
     let mut index = 1;
     let mut changed = false;
     while index <= wire_data.nb_edges() && wire_data.nb_edges() > 1 {
-        let merged_index = merge_small_at_index(fixer, wire_data, small, index, policy)?;
+        let merged_index =
+            merge_small_at_index(fixer, wire_fixer, wire_data, small, index, policy)?;
         index = advance_merge_index(index, merged_index, &mut changed);
     }
     Ok(changed)
@@ -189,6 +205,7 @@ fn publish_changed_wire(
 
 fn merge_small_at_index(
     fixer: &ShapeFixWireframe,
+    wire_fixer: &ShapeFixWire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     index: i32,
@@ -201,16 +218,20 @@ fn merge_small_at_index(
     let Some(pair) = pair else {
         return Ok(None);
     };
-    merge_candidate_pair(fixer, wire_data, small, &pair, policy)
+    merge_candidate_pair(fixer, wire_fixer, wire_data, small, &pair, policy)
 }
 
 fn merge_candidate_pair(
     fixer: &ShapeFixWireframe,
+    wire_fixer: &ShapeFixWire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     pair: &CandidatePair,
     policy: &mut MergePolicy,
 ) -> Result<Option<i32>, Failure> {
+    if pair.drop_candidate {
+        return drop::drop_small_edge(fixer, wire_fixer, wire_data, small, pair, policy);
+    }
     if !linked_face_order_allows_join(fixer, pair, policy)? {
         fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Fail1);
         return Ok(None);
