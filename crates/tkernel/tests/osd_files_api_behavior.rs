@@ -402,3 +402,6 @@ fn mask_matching_follows_strcmp_joker() {
     assert!(mask_matches(b"a**", b"a"));
     assert!(mask_matches(b"?", b"?") && !mask_matches(b"?", b"x"));
 }
+
+#[path = "osd_files/lazy_directory.rs"]
+mod lazy_directory;

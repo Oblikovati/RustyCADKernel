@@ -4,7 +4,13 @@ use rustycad_tkernel::osd::{
     AccessMode, CallResult, Errno, LocalTime, NodeStatus, NodeType, OpenFlags, OpenMode,
     PosixFileCalls, RecordLock, SeekOrigin,
 };
-use std::{collections::BTreeMap, sync::Mutex};
+use std::{
+    collections::BTreeMap,
+    sync::{Arc, Mutex},
+};
+#[path = "fake_directory_cursor.rs"]
+pub mod fake_directory_cursor;
+use fake_directory_cursor::{DirectoryCounts, FakeDirectoryCursor};
 
 pub const ENOENT: i32 = 2;
 pub const EBADF: i32 = 9;
@@ -46,6 +52,7 @@ pub struct FakePosixCalls {
     state: Mutex<FakeState>,
     /// `st_blksize` reported for every node (the stdio buffer size).
     pub block_size: u64,
+    pub directory_counts: Option<Arc<DirectoryCounts>>,
 }
 
 /// Resolves `//`, `.` and `..` the way the kernel's path walk does.
@@ -416,6 +423,16 @@ impl PosixFileCalls for FakePosixCalls {
             }
         }
         Ok(names)
+    }
+    fn open_directory(
+        &self,
+        path: &[u8],
+    ) -> CallResult<Box<dyn rustycad_tkernel::osd::DirectoryEntries>> {
+        let names = self.read_directory(path)?;
+        Ok(Box::new(FakeDirectoryCursor::new(
+            names,
+            self.directory_counts.clone(),
+        )))
     }
     fn local_time(&self, seconds: i64) -> Option<LocalTime> {
         // 318000000 s after the epoch is 1980-01-29 13:20:00 UTC; the fake is in UTC.
