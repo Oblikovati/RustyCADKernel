@@ -1,5 +1,7 @@
 //! BRep offset geometry helpers.
+mod classification;
 mod collapse_singularities;
+pub use classification::{BRepOffsetError, BRepOffsetMode};
 mod interval;
 pub use interval::BRepOffsetInterval;
 mod simple_offset;

@@ -225321,6 +225321,150 @@
       "rust_item": "rustycad_tkoffset::brep_offset::build_vertex_arc_join",
       "status": "partial",
       "notes": "Default spherical vertex-join geometry exposed as a face-building helper, with positive/negative native frame/topology/orientation/validity/mass evidence. Full BRepOffset_Offset object state/history, polynomial parameters and wider geometric domains remain unported/unproven. Does not map or close StandardOffset OCC28131."
+    },
+    {
+      "upstream_id": "BRepOffset_Mode",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Mode.hxx",
+      "source_sha256": "087b875848711dc4c0cf7a2bbf4bce61ed2a5a481be9d3fcde9ac89381479b8e",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMode",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_Skin",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Mode.hxx",
+      "source_sha256": "087b875848711dc4c0cf7a2bbf4bce61ed2a5a481be9d3fcde9ac89381479b8e",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMode::Skin",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_Pipe",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Mode.hxx",
+      "source_sha256": "087b875848711dc4c0cf7a2bbf4bce61ed2a5a481be9d3fcde9ac89381479b8e",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMode::Pipe",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_RectoVerso",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Mode.hxx",
+      "source_sha256": "087b875848711dc4c0cf7a2bbf4bce61ed2a5a481be9d3fcde9ac89381479b8e",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetMode::RectoVerso",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_Error",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_NoError",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::NoError",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_UnknownError",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::UnknownError",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_BadNormalsOnGeometry",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::BadNormalsOnGeometry",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_C0Geometry",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::C0Geometry",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_NullOffset",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::NullOffset",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_NotConnectedShell",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::NotConnectedShell",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_CannotTrimEdges",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::CannotTrimEdges",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_CannotFuseVertices",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::CannotFuseVertices",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_CannotExtentEdge",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::CannotExtentEdge",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_UserBreak",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::UserBreak",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
+    },
+    {
+      "upstream_id": "BRepOffset_MixedConnectivity",
+      "toolkit": "TKOffset",
+      "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Error.hxx",
+      "source_sha256": "047c09f91c7a20c05640a8abca4873ee75e9b0ccfc9eb5f94ec6a3f2134e2ac4",
+      "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetError::MixedConnectivity",
+      "status": "implemented",
+      "notes": "All declared native enum discriminants match the pinned C++ header fixture. This exposes classification values only; it does not imply completion of offset construction or legacy tests."
     }
   ],
   "tests": [
