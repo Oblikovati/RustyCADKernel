@@ -104,3 +104,6 @@ pub use shape_set::ShapeSet;
 
 mod box_selector;
 pub use box_selector::BoxSelector;
+
+mod pair_selector;
+pub use pair_selector::{PairIds, PairSelector};
