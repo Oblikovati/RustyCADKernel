@@ -108,6 +108,10 @@ impl<'a, T: VectorItem> VectorBase<'a, T> {
     pub fn upper(&self) -> i32 {
         (i64::from(self.lower) + self.length as i64 - 1) as i32
     }
+    /// Changes declared indices without moving elements; `vector.set_lower(-3)`.
+    pub fn set_lower(&mut self, lower: i32) {
+        self.lower = lower;
+    }
     /// Reads a zero-based offset; `vector.at(0)?`.
     pub fn at(&self, index: usize) -> Result<&T, Failure> {
         self.values()
