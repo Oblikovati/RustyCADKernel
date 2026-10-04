@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "native_behavior_and_protected_api_port",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "2e766e5f8ce42948e2cb3f8740aae4103389c2cd",
+  "cpp_api_ids": [
+    "c0c998964c9c40b4ed26b55d91a944e870e22af202bb06dd3b3c0eee2547fdc2",
+    "43e232ff9d9598a15eb9677654140b4979627273bb124a9b465f16a8892e0ee0"
+  ],
+  "native_profile": "Linux GCC C++17 -O2; target/occt-modeling-full libTKernel.so",
+  "native_binary_sha256": "5c6ba9afadcaca64471abf92de392d5b9e23abcb21f423ce3cd20d0732c772c7",
+  "native_checks": [
+    "external parent/child output, selected gravity, null composite, read-only report inspection",
+    "public delivery callback reads report alerts",
+    "printer appends visited on same traversal",
+    "removing earlier node preserves remaining traversal and append",
+    "stream callback appends visited on same traversal"
+  ],
+  "rust_command": "cargo test -p rustycad-tkernel --locked",
+  "rust_results": {
+    "passed": 2703,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 154
+  },
+  "regressions_failed_before_fix": 2,
+  "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets --locked -- -D warnings",
+  "logs": {
+    "red": {
+      "path": "message-report-composite-hooks-red.log.gz",
+      "sha256": "bca0022fa9f2095f24e7256f063df845910371baa392058b6023ef83b7b91fae"
+    },
+    "green": {
+      "path": "message-report-composite-hooks-green.log.gz",
+      "sha256": "678fe0576cdf686ed7f6b13e90299fd3405cfc550cc346cd3d87c13b2e6b1039"
+    },
+    "clippy": {
+      "path": "message-report-composite-hooks-clippy.log.gz",
+      "sha256": "3bde813500680828cb261437385cb7566e4c14a2efa8f56738294416e0415f73"
+    }
+  },
+  "source_sha256": {
+    "crates/tkernel/src/message/composite_alerts.rs": "d047a87fb14cea6c8bb0312ce7dd059fc9ef757130af1376ed4fa7db3716a5c5",
+    "crates/tkernel/src/message/composite_alerts/cursor.rs": "76bc81357011003a0cf257949ff3d09c21598a55a23634fcf30f9d163ab78d6d",
+    "crates/tkernel/src/message/report/output.rs": "0acf1d148d4d6d20121ae1b17d776ffe70c20cfe10c9eae6feaa9f92208b6ffd",
+    "crates/tkernel/src/message/report/output/reentrant_tests.rs": "16a49c96b1dc6d5c5faaa5345e2fca333b904d7aab249f9bdda27e6753f8a879",
+    "crates/tkernel/tests/message_report_composite_hooks.rs": "da0b4b4f86714c576a249972327a90da6411421cc46569cb80741cc65ccd6d3e",
+    "crates/tkernel/tests/message_report_live_iteration.rs": "916cf2b2ac8caf8117311c826ada2c299ecb59af032efad14e8a4a85d4109437",
+    "crates/tkernel/tests/message_report_support/mod.rs": "b8b8d637d4937d20c5d7c2ca705898322067f264eb09d6404835c2594cb95ff5",
+    "tools/oracle/tkernel_report_composite_hooks.cxx": "5e7ac502775111ac2ce6b126092dfeee758e9718592ae24ed1356d1d97d6dd8b",
+    "tools/oracle/tkernel_report_composite_hooks.expected": "9064abdcfa1b5943647add47d3b249ef6f510618867dc8c8b26847c31fa44046"
+  },
+  "limits": [
+    "Deleting the current native list node invalidates its iterator; no behavioral parity is claimed for that domain.",
+    "The existing separately documented native ClearType mixed-type nontermination deviation is unchanged.",
+    "New protected Rust symbols require a fresh compiler capture before counting them as compiler-resolved mappings."
+  ],
+  "legacy_declaration_count_change": 0,
+  "full_api_parity_proven": false
+}

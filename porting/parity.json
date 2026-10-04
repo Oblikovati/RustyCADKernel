@@ -91619,7 +91619,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::dump",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json. Output callbacks run without holding report-state locks, and live list traversal observes callback appends/removal of other nodes. See porting/audits/message-report-composite-hooks.json."
     },
     {
       "upstream_id": "Message_Report::Dump(Standard_OStream&,Message_Gravity)",
@@ -91627,7 +91627,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::dump_gravity",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Embedded-NUL parent/child message keys now stop at the first NUL, matching native const-char-pointer streaming; see porting/audits/message-report-embedded-nul.json. Output callbacks run without holding report-state locks, and live list traversal observes callback appends/removal of other nodes. See porting/audits/message-report-composite-hooks.json."
     },
     {
       "upstream_id": "Message_Report::SendMessages(const occ::handle<Message_Messenger>&)",
@@ -91635,7 +91635,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::send_messages",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Output callbacks run without holding report-state locks, and live list traversal observes callback appends/removal of other nodes. See porting/audits/message-report-composite-hooks.json."
     },
     {
       "upstream_id": "Message_Report::SendMessages(const occ::handle<Message_Messenger>&,Message_Gravity)",
@@ -91643,7 +91643,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::send_messages_gravity",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk. Output callbacks run without holding report-state locks, and live list traversal observes callback appends/removal of other nodes. See porting/audits/message-report-composite-hooks.json."
     },
     {
       "upstream_id": "Message_Report::Merge(const occ::handle<Message_Report>&)",
@@ -235509,6 +235509,22 @@
       "rust_item": "rustycad_tkernel::osd::MemInfo::has_value",
       "status": "implemented",
       "notes": "Exposes the protected active-and-known predicate through the existing shared implementation. Zero is valid; usize::MAX is unknown; disabling retains the sample for reactivation; Clear invalidates samples. Native Linux derived-class transition receipt plus deterministic injected-source tests. This predicate does not change the separately partial platform-specific Update implementation. See porting/audits/osd-mem-info-has-value.json."
+    },
+    {
+      "upstream_id": "Message_Report::dumpMessages(Standard_OStream &,Message_Gravity,const occ::handle<Message_CompositeAlerts> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::dump_composite_messages",
+      "status": "implemented",
+      "notes": "Protected report operation over an explicitly supplied nullable composite; preserves child traversal at selected gravity, C-string keys, and native live-list append/unlink semantics during callbacks. Public dump/send routes release the report-state mutex before callback invocation. Native derived-class oracle and supplemental tests: porting/audits/message-report-composite-hooks.json. Native invalidation by deleting the current list node is outside the defined iterator domain."
+    },
+    {
+      "upstream_id": "Message_Report::sendMessages(const occ::handle<Message_Messenger> &,Message_Gravity,const occ::handle<Message_CompositeAlerts> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::send_composite_messages",
+      "status": "implemented",
+      "notes": "Protected report operation over an explicitly supplied nullable composite; preserves child traversal at selected gravity, C-string keys, and native live-list append/unlink semantics during callbacks. Public dump/send routes release the report-state mutex before callback invocation. Native derived-class oracle and supplemental tests: porting/audits/message-report-composite-hooks.json. Native invalidation by deleting the current list node is outside the defined iterator domain."
     }
   ],
   "tests": [
