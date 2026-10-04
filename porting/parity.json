@@ -93338,7 +93338,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
       "rust_item": "rustycad_tkernel::osd::Osd::milli_sec_sleep",
       "status": "implemented",
-      "notes": "Unix usleep(ms*1000) with the same wrapping (milli_sec_sleep_duration); Windows Sleep(ms), where INFINITE (-1) becomes a 49.7-day sleep instead of an endless one. Osd::milli_sec_sleep_with takes an injected Sleeper."
+      "notes": "Unix usleep(ms*1000) with the same wrapping (milli_sec_sleep_duration); Windows Sleep(ms), where INFINITE (-1) is represented as SleepRequest::Infinite and the native sleeper parks indefinitely. The duration helper retains the finite DWORD conversion for compatibility. Windows cross-compilation passes; Windows runtime remains unverified. Osd::milli_sec_sleep_with injects Sleeper."
     },
     {
       "upstream_id": "OSD::RealToCString(double,Standard_PCharacter&)",

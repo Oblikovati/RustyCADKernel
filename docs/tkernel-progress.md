@@ -1918,8 +1918,12 @@ Native quirks kept:
   `1.00000000000000006e-01`).
 - `CStringToReal` succeeds only when OCCT `Strtod` consumes the whole text. So `""`
   succeeds with 0, and `"1.5 "` fails.
-- `SecSleep`/`MilliSecSleep` compute the microsecond count in `int` (it wraps past 2147
+- Unix `SecSleep`/`MilliSecSleep` compute the microsecond count in `int` (it wraps past 2147
   seconds) and pass it to `usleep` as unsigned. So negative values sleep about 71 minutes.
+- Windows passes `SecSleep`'s wrapped millisecond product and `MilliSecSleep`'s argument as
+  `DWORD` to `Sleep`; `MilliSecSleep(-1)` is `INFINITE` and does not resume. The duration
+  conversion helper still returns the finite 49.7-day value for compatibility, while the
+  injected `Sleeper` path carries `SleepRequest::Infinite` separately.
 - `SetThisThreadOnly` on a running chronometer raises `Standard_ProgramError` with the
   native "SetThreadOnly" message. The Linux thread scope reports a system time of 0.
 - `SetSignalStackTraceLength` stores negative lengths unchanged.
@@ -1940,12 +1944,12 @@ On Windows, `CSF_DEBUG_MODE` handling, the console Ctrl-C/Ctrl-Break handler (wi
 `MessageBeep`; other events `exit(254)`) and the `_controlfp` traps are ported. The
 unhandled-exception filter and the SE/signal translators are not. The Windows and macOS
 branches compile (clippy-clean for `x86_64-pc-windows-gnu` and `aarch64-apple-darwin`) but
-have not been observed running.
+have not been observed running. Windows `Sleep(INFINITE)` dispatch is covered by a
+platform-independent injected-sleeper test; Windows runtime behavior remains unverified.
 
 Deliberate Rust deviations: `Show()` prints through `print!`. `Show(ostream)` returns the
 text (`show_to`). Output references become returned tuples. The C++ buffer of
 `RealToCString` becomes a returned `String` (the native `false` result cannot occur).
-Windows `MilliSecSleep(INFINITE)` sleeps 49.7 days instead of forever.
 
 Differential evidence: 500 `osd_*` timing requests, all identical to OCCT:
 - 66 `Timer::Reset(double)` values, comparing elapsed time, the `Show` tuple bit-for-bit and
