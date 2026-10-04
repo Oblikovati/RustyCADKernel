@@ -26,6 +26,8 @@ struct UnifyFields {
     unify_faces: bool,
     _concat_bspline_edges: bool,
     allow_internal_edges: bool,
+    safe_input_mode: bool,
+    keep_shapes: Vec<Shape>,
 }
 
 /// `ShapeUpgrade_UnifySameDomain` on shapes with no mergeable face or edge neighbors.
@@ -60,6 +62,8 @@ impl ShapeUpgradeUnifySameDomain {
                 unify_faces,
                 _concat_bspline_edges: concat_bspline_edges,
                 allow_internal_edges: false,
+                safe_input_mode: true,
+                keep_shapes: Vec::new(),
             }),
         }
     }
@@ -78,6 +82,7 @@ impl ShapeUpgradeUnifySameDomain {
         fields.unify_edges = unify_edges;
         fields.unify_faces = unify_faces;
         fields._concat_bspline_edges = concat_bspline_edges;
+        fields.keep_shapes.clear();
     }
 
     /// `SetLinearTolerance`; `unify.set_linear_tolerance(1e-5)`.
@@ -95,6 +100,38 @@ impl ShapeUpgradeUnifySameDomain {
         self.fields.write().allow_internal_edges = allow;
     }
 
+    /// `SetSafeInputMode` controls whether replacement edges copy source endpoints;
+    /// `unifier.set_safe_input_mode(false)` reuses the original endpoint vertices.
+    pub fn set_safe_input_mode(&self, enabled: bool) {
+        self.fields.write().safe_input_mode = enabled;
+    }
+
+    /// `KeepShape` protects an edge from face merging or a vertex from edge merging;
+    /// `unifier.keep_shape(&shared_edge.into_shape())?` preserves a face boundary.
+    pub fn keep_shape(&self, shape: &Shape) -> Result<(), Failure> {
+        self.add_keep_shape(shape)
+    }
+
+    /// `KeepShapes` adds supported edges and vertices to the protected set;
+    /// `unifier.keep_shapes(&[junction.into_shape()])?` stops a chain at that vertex.
+    pub fn keep_shapes(&self, shapes: &[Shape]) -> Result<(), Failure> {
+        for shape in shapes {
+            self.add_keep_shape(shape)?;
+        }
+        Ok(())
+    }
+
+    fn add_keep_shape(&self, shape: &Shape) -> Result<(), Failure> {
+        if !matches!(shape.shape_type()?, ShapeEnum::Edge | ShapeEnum::Vertex) {
+            return Ok(());
+        }
+        let mut fields = self.fields.write();
+        if !fields.keep_shapes.iter().any(|known| known.is_same(shape)) {
+            fields.keep_shapes.push(shape.clone());
+        }
+        Ok(())
+    }
+
     /// `Build` preserves the input when no enabled same-domain merge is possible.
     pub fn build(&self) -> Result<(), Failure> {
         let fields = self.fields.read().clone();
@@ -108,11 +145,12 @@ impl ShapeUpgradeUnifySameDomain {
         }
         let face_candidate = fields.unify_faces && first_coplanar_pair(&result, &fields)?.is_some();
         let edge_candidate = fields.unify_edges
-            && (has_collinear_edge_pair(&result, fields.angular_tolerance)?
+            && (has_collinear_edge_pair(&result, fields.angular_tolerance, &fields.keep_shapes)?
                 || edges::has_unported_spline_candidate(
                     &result,
                     fields.angular_tolerance,
                     fields._concat_bspline_edges,
+                    &fields.keep_shapes,
                 )?);
         let face_merge_completed = count_shapes(&result, ShapeEnum::Face)? < input_face_count;
         let has_candidate = face_candidate || edge_candidate && !face_merge_completed;
@@ -161,6 +199,10 @@ fn first_coplanar_pair(
         &mut edge_faces,
     )?;
     for index in 1..=edge_faces.extent() {
+        let edge = edge_faces.find_key(index)?;
+        if is_kept_shape(edge, &fields.keep_shapes) {
+            continue;
+        }
         let faces = edge_faces
             .find_from_index(index)?
             .iter()
@@ -317,10 +359,17 @@ fn has_no_internal_wires(face: &Face) -> Result<bool, Failure> {
 }
 
 /// Returns true when incident edge curves are not safely known to be non-collinear.
-fn has_collinear_edge_pair(shape: &Shape, angular_tolerance: f64) -> Result<bool, Failure> {
+fn has_collinear_edge_pair(
+    shape: &Shape,
+    angular_tolerance: f64,
+    keep_shapes: &[Shape],
+) -> Result<bool, Failure> {
     let mut vertex_edges = IndexedDataMapOfShapeListOfShape::default();
     topexp::map_shapes_and_ancestors(shape, ShapeEnum::Vertex, ShapeEnum::Edge, &mut vertex_edges)?;
     for index in 1..=vertex_edges.extent() {
+        if is_kept_shape(vertex_edges.find_key(index)?, keep_shapes) {
+            continue;
+        }
         let edges = vertex_edges
             .find_from_index(index)?
             .iter()
@@ -340,6 +389,10 @@ fn has_collinear_edge_pair(shape: &Shape, angular_tolerance: f64) -> Result<bool
         }
     }
     Ok(false)
+}
+
+fn is_kept_shape(shape: &Shape, keep_shapes: &[Shape]) -> bool {
+    keep_shapes.iter().any(|known| known.is_same(shape))
 }
 
 /// Tests collinearity only for line pairs; other curve classes have separate merge paths.

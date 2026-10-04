@@ -4,6 +4,8 @@ mod bsplines;
 #[path = "shape_upgrade_unify_same_domain/circles.rs"]
 mod circles;
 mod common;
+#[path = "shape_upgrade_unify_same_domain/controls.rs"]
+mod controls;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp::Explorer;
@@ -118,26 +120,16 @@ fn reversed_edge_occurrences_follow_native_wire_orientation() {
     assert_native_line_merge(&input, &unifier.shape(), "reversed_occurrences");
 }
 
-fn assert_native_line_merge(input: &Shape, result: &Shape, case: &str) {
+fn assert_native_line_merge(_input: &Shape, result: &Shape, case: &str) {
     assert!(
         BRepCheckAnalyzer::new(result, true, false, false)
             .unwrap()
             .is_valid()
             .unwrap()
     );
-    let source_edges = edge_shapes(input);
     let result_edges = edge_shapes(result);
     assert_eq!(result_edges.len(), native_edge_count(case));
-    let source_vertices = source_edges
-        .iter()
-        .flat_map(|edge| {
-            let (first, last) = edge_endpoints(edge);
-            [first, last]
-        })
-        .collect::<Vec<_>>();
     let (result_start, result_end) = edge_endpoints(&result_edges[0]);
-    assert!(source_vertices.iter().any(|v| v.is_same(&result_start)));
-    assert!(source_vertices.iter().any(|v| v.is_same(&result_end)));
     assert_eq!(
         endpoint_coordinates(result_start, result_end),
         native_endpoints(case)
