@@ -1,5 +1,6 @@
 //! Standard skin-offset maker configuration and persistent state.
 use super::{BRepOffsetError, BRepOffsetMode};
+use rustycad_tkbool::brep_algo::BRepAlgoImage;
 use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::geom_abs::JoinType;
@@ -10,6 +11,9 @@ pub struct BRepOffsetMakeOffset {
     allow_linearization: Option<bool>,
     pub(super) initial_shape: Shape,
     pub(super) face_component: Shape,
+    pub(super) offset_faces: BRepAlgoImage,
+    pub(super) offset_edges: BRepAlgoImage,
+    pub(super) generated_vertices: Vec<(Shape, Shape)>,
     pub(super) result_shape: Shape,
     pub(super) closing_faces: Vec<Face>,
     pub(super) face_offsets: Vec<(Face, f64)>,
@@ -53,6 +57,9 @@ impl BRepOffsetMakeOffset {
             allow_linearization: None,
             initial_shape: Shape::default(),
             face_component: Shape::default(),
+            offset_faces: BRepAlgoImage::new(),
+            offset_edges: BRepAlgoImage::new(),
+            generated_vertices: Vec::new(),
             result_shape: Shape::default(),
             closing_faces: Vec::new(),
             face_offsets: Vec::new(),
@@ -182,6 +189,9 @@ impl BRepOffsetMakeOffset {
 
     fn clear_run_data(&mut self) {
         self.result_shape = Shape::default();
+        self.offset_faces.clear();
+        self.offset_edges.clear();
+        self.generated_vertices.clear();
         self.closing_faces.clear();
         self.face_offsets.clear();
     }

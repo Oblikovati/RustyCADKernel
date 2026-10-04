@@ -13,12 +13,16 @@ use rustycad_tkg3d::{
 };
 use rustycad_tkmath::toploc::Location;
 
+type EdgeImages = Vec<(Edge, Edge)>;
+type VertexImages = Vec<(Vertex, Vertex)>;
+
 /// Result of the regular face branch of `BRepOffset_Offset`; `BRepOffsetOffsetFace::from_face(&face, 2.0)?`.
 pub struct BRepOffsetOffsetFace {
     initial: Face,
     offset: Face,
     status: BRepOffsetStatus,
-    edge_images: Vec<(Edge, Edge)>,
+    edge_images: EdgeImages,
+    vertex_images: VertexImages,
 }
 
 impl BRepOffsetOffsetFace {
@@ -32,7 +36,7 @@ impl BRepOffsetOffsetFace {
         let signed_offset = face_offset(face, offset);
         let (surface, status) = surface(&basis, signed_offset, false)?;
         let mut result = make_offset_face(&initial, &surface)?;
-        let edge_images = copy_face_boundaries(&initial, &mut result, &surface)?;
+        let (edge_images, vertex_images) = copy_face_boundaries(&initial, &mut result, &surface)?;
         result.set_orientation(face.orientation());
         update_face(&result)?;
         Ok(Self {
@@ -40,6 +44,7 @@ impl BRepOffsetOffsetFace {
             offset: result,
             status,
             edge_images,
+            vertex_images,
         })
     }
 
@@ -56,17 +61,26 @@ impl BRepOffsetOffsetFace {
     /// Returns the image of a source edge, or a null shape when no image exists.
     /// `offset.generated(&edge.clone().into_shape())`.
     pub fn generated(&self, source: &Shape) -> Shape {
-        let Some((_, image)) = self
-            .edge_images
-            .iter()
-            .find(|(edge, _)| edge.is_same(source))
-        else {
+        let Some(image) = self.image_for(source) else {
             return Shape::default();
         };
         if self.initial.orientation() == Orientation::Reversed {
             return image.reversed();
         }
-        image.clone().into_shape()
+        image
+    }
+
+    fn image_for(&self, source: &Shape) -> Option<Shape> {
+        self.edge_images
+            .iter()
+            .find(|(edge, _)| edge.is_same(source))
+            .map(|(_, image)| image.clone().into_shape())
+            .or_else(|| {
+                self.vertex_images
+                    .iter()
+                    .find(|(vertex, _)| vertex.is_same(source))
+                    .map(|(_, image)| image.clone().into_shape())
+            })
     }
 }
 
@@ -138,8 +152,9 @@ fn copy_face_boundaries(
     source: &Face,
     target: &mut Face,
     surface: &Handle<dyn GeomSurface>,
-) -> Result<Vec<(Edge, Edge)>, Failure> {
-    let mut images = Vec::new();
+) -> Result<(EdgeImages, VertexImages), Failure> {
+    let mut edge_images = Vec::new();
+    let mut vertex_images = Vec::new();
     let mut wires = Explorer::new(
         &source.clone().into_shape(),
         ShapeEnum::Wire,
@@ -147,11 +162,18 @@ fn copy_face_boundaries(
     )?;
     while wires.more() {
         let wire = Wire::unchecked(wires.current().clone());
-        let wire_image = copy_wire(source, target, &wire, surface, &mut images)?;
+        let wire_image = copy_wire(
+            source,
+            target,
+            &wire,
+            surface,
+            &mut edge_images,
+            &mut vertex_images,
+        )?;
         BRepBuilder::default().add(target, &wire_image.oriented(wire.orientation()))?;
         wires.next()?;
     }
-    Ok(images)
+    Ok((edge_images, vertex_images))
 }
 
 fn copy_wire(
@@ -159,11 +181,20 @@ fn copy_wire(
     target: &Face,
     wire: &Wire,
     surface: &Handle<dyn GeomSurface>,
-    images: &mut Vec<(Edge, Edge)>,
+    edge_images: &mut EdgeImages,
+    vertex_images: &mut VertexImages,
 ) -> Result<Wire, Failure> {
     let mut image = Wire::default();
     BRepBuilder::default().make_wire(&mut image);
-    copy_wire_edges(source, target, wire, surface, images, &mut image)?;
+    copy_wire_edges(
+        source,
+        target,
+        wire,
+        surface,
+        edge_images,
+        vertex_images,
+        &mut image,
+    )?;
     Ok(image)
 }
 
@@ -172,7 +203,8 @@ fn copy_wire_edges(
     target: &Face,
     wire: &Wire,
     surface: &Handle<dyn GeomSurface>,
-    images: &mut Vec<(Edge, Edge)>,
+    edge_images: &mut EdgeImages,
+    vertex_images: &mut VertexImages,
     image: &mut Wire,
 ) -> Result<(), Failure> {
     let mut edges = Explorer::new(
@@ -180,15 +212,14 @@ fn copy_wire_edges(
         ShapeEnum::Edge,
         ShapeEnum::Shape,
     )?;
-    let mut vertices = Vec::new();
     while edges.more() {
         let source_edge = Edge::unchecked(edges.current().clone());
         append_offset_edge(
             source,
             target,
             surface,
-            images,
-            &mut vertices,
+            edge_images,
+            vertex_images,
             image,
             &source_edge,
         )?;
@@ -201,12 +232,12 @@ fn append_offset_edge(
     source: &Face,
     target: &Face,
     surface: &Handle<dyn GeomSurface>,
-    images: &mut Vec<(Edge, Edge)>,
-    vertices: &mut Vec<(Vertex, Vertex)>,
+    edge_images: &mut EdgeImages,
+    vertex_images: &mut VertexImages,
     wire: &mut Wire,
     edge: &Edge,
 ) -> Result<(), Failure> {
-    let image = copy_edge(source, target, edge, surface, images, vertices)?;
+    let image = copy_edge(source, target, edge, surface, edge_images, vertex_images)?;
     BRepBuilder::default().add(wire, &image.oriented(edge.orientation()))
 }
 
@@ -215,12 +246,12 @@ fn copy_edge(
     target: &Face,
     edge: &Edge,
     surface: &Handle<dyn GeomSurface>,
-    images: &mut Vec<(Edge, Edge)>,
-    vertices: &mut Vec<(Vertex, Vertex)>,
+    edge_images: &mut Vec<(Edge, Edge)>,
+    vertex_images: &mut Vec<(Vertex, Vertex)>,
 ) -> Result<Edge, Failure> {
-    let image = make_edge_image(source, target, edge, surface, vertices)?;
+    let image = make_edge_image(source, target, edge, surface, vertex_images)?;
     build_image_curve(&image, edge)?;
-    images.push((edge.clone(), image.clone()));
+    edge_images.push((edge.clone(), image.clone()));
     Ok(image)
 }
 

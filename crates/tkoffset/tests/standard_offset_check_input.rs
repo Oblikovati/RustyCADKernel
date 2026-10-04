@@ -70,6 +70,21 @@ fn cylindrical_face_offset_preserves_oriented_boundary_vertices() {
     assert_cylinder_offset(&face);
 }
 
+#[test]
+fn clear_removes_offset_history_after_a_successful_build() {
+    let face = plane_face(0.0);
+    let source = face.clone().into_shape();
+    let mut maker = initialized(&source, 2.0);
+    maker.make_offset_shape().unwrap();
+
+    maker.clear();
+
+    assert!(!maker.offset_faces_from_shapes().has_image(&source));
+    assert!(!maker.offset_edges_from_shapes().has_image(&source));
+    assert!(maker.generated(&source).unwrap().is_empty());
+    assert!(maker.is_deleted(&source).unwrap());
+}
+
 fn assert_cylinder_offset(face: &rustycad_tkbrep::topods::Face) {
     let mut maker = initialized(&face.clone().into_shape(), 2.0);
 
@@ -133,7 +148,8 @@ fn multiple_faces_stop_at_the_explicit_single_face_boundary() {
 }
 
 fn assert_single_plane_offset(face: rustycad_tkbrep::topods::Face, offset: f64, z: f64) {
-    let mut maker = initialized(&face.into_shape(), offset);
+    let source = face.clone().into_shape();
+    let mut maker = initialized(&source, offset);
     maker.make_offset_shape().unwrap();
     assert!(maker.is_done());
     assert_eq!(maker.error(), Some(BRepOffsetError::NoError));
@@ -141,6 +157,63 @@ fn assert_single_plane_offset(face: rustycad_tkbrep::topods::Face, offset: f64, 
     let offset_face = first_face(maker.shape());
     assert_offset_sample(&offset_face, z);
     assert_shell_geometry(maker.shape(), &offset_face);
+    assert_offset_history(&mut maker, &source, &face);
+}
+
+fn assert_offset_history(
+    maker: &mut BRepOffsetMakeOffset,
+    source: &Shape,
+    face: &rustycad_tkbrep::topods::Face,
+) {
+    assert!(maker.offset_faces_from_shapes().has_image(source));
+    assert!(
+        maker
+            .generated(source)
+            .unwrap()
+            .first()
+            .unwrap()
+            .is_same(&first_face(maker.shape()).into_shape())
+    );
+    assert!(maker.modified(source).is_empty());
+    assert!(!maker.is_deleted(source).unwrap());
+    assert_mapped_subshapes(maker, face, ShapeEnum::Edge);
+    assert_mapped_subshapes(maker, face, ShapeEnum::Vertex);
+}
+
+fn assert_mapped_subshapes(
+    maker: &mut BRepOffsetMakeOffset,
+    face: &rustycad_tkbrep::topods::Face,
+    kind: ShapeEnum,
+) {
+    for source in Explorer::new(&face.clone().into_shape(), kind, ShapeEnum::Shape).unwrap() {
+        assert_eq!(
+            maker.offset_edges_from_shapes().has_image(&source),
+            kind == ShapeEnum::Edge
+        );
+        let generated = maker.generated(&source).unwrap();
+        assert_eq!(generated.len(), 1);
+        assert_edge_history_image(maker, kind, &source, &generated[0]);
+        assert!(!maker.is_deleted(&source).unwrap());
+    }
+}
+
+fn assert_edge_history_image(
+    maker: &BRepOffsetMakeOffset,
+    kind: ShapeEnum,
+    source: &Shape,
+    generated: &Shape,
+) {
+    if kind != ShapeEnum::Edge {
+        return;
+    }
+    assert!(
+        maker
+            .offset_edges_from_shapes()
+            .last_image(source)
+            .first()
+            .unwrap()
+            .is_same(generated)
+    );
 }
 
 fn assert_shell_topology(shape: &Shape) {
