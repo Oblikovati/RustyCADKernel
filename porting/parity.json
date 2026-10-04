@@ -234492,12 +234492,28 @@
       "notes": "Protected record value model only; Rust does not expose native allocator inheritance or its block map. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
     },
     {
-      "upstream_id": "NCollection_AccAllocator::Block::Block(void*,size_t,Block*) noexcept",
+      "upstream_id": "NCollection_AccAllocator::Block::Block(void*const,const size_t,NCollection_AccAllocator::Block*) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AccBlock::with_previous",
       "status": "partial",
-      "notes": "Construction preserves cursor alignment and count initialization; pointer identities are represented as usize and never dereferenced. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+      "notes": "Exact selector preserves the declaration's top-level const parameters and fully qualified nested pointer type. Construction preserves cursor alignment and count initialization; pointer identities are represented as usize and never dereferenced. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::findBlock(void*,NCollection_AccAllocator::Key&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccAllocatorExtension::find_block",
+      "status": "partial",
+      "notes": "The lock-scoped safe facade preserves the native output key on hits and misses and returns an immutable block-state snapshot. It does not expose the mutable native Block pointer or allocator map. Native derived probe: tools/oracle/tkernel_acc_allocator_extension.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::allocateNewBlock(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccAllocatorExtension::allocate_new_block",
+      "status": "partial",
+      "notes": "The safe facade creates an allocator-owned block and returns a state snapshot. It does not expose the mutable native Block pointer or allocator map; duplicate key collisions return Standard_ProgramError rather than risking map/chain corruption. Native derived probe: tools/oracle/tkernel_acc_allocator_extension.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
     },
     {
       "upstream_id": "NCollection_AccAllocator::Block::SetFreeSize(size_t) noexcept",
