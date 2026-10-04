@@ -5,6 +5,8 @@ mod correct_singular_face;
 pub use classification::{BRepOffsetError, BRepOffsetMode};
 mod interval;
 pub use interval::BRepOffsetInterval;
+mod inter3d;
+pub use inter3d::BRepOffsetInter3d;
 mod make_offset;
 mod make_offset_build;
 mod make_offset_build_adjacent;
