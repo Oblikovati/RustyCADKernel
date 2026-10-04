@@ -133,7 +133,7 @@ fn GeomAdaptor_TransformedSurfaceTest__BSplineCachePreservedByShallowCopy() {
 
 // Native optional<GeomAdaptor_Surface> copies value state while nested handles stay shared.
 #[test]
-fn GeomAdaptor_TransformedSurfaceTest__ShallowCopySeparatesCachedAdaptorState() {
+fn supplemental_shallow_copy_separates_cached_adaptor_state() {
     let spline: Handle<dyn GeomSurface> = createBSplineSurface().cast();
     let adaptor = Transformed(&spline, createTranslation(4.0, 0.0, 0.0));
     let source_cache = adaptor.adaptor_surface_transformed().unwrap();

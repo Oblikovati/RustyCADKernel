@@ -16,14 +16,15 @@
     "crates/tkg3d/src/geom_adaptor/transformed_surface.rs": "f3cd02f862108459162d976e0461f7c099cffdb0f18f646d7db16f7cb7e6aba7",
     "crates/tkg3d/src/geom_adaptor/surface.rs": "67e81b2e81b79d5a455f29b56da4233d3f46e87f696a6148d161fd9e818635f2",
     "crates/tkg3d/src/geom_adaptor/surface_state.rs": "4e1c7d010f48a4d05d159fea4ffcb612066dcd61b82f7541dee09b6ffcb8497e",
-    "crates/tkg3d/src/geom_adaptor/surface_state_copy.rs": "de3f0885379188ceda42f7dcdd635aef1ab01a23d6d376332eb20a51c42162df",
+    "crates/tkg3d/src/geom_adaptor/surface_state_copy.rs": "ed92f28bcc58aa05b3a2a85465e56cdec4f3cf8b1eb8ee191e589e0c3805a15c",
     "crates/tkg3d/src/geom_adaptor/surface_eval.rs": "1e779b0647ba4340e2edeae309d8ab99a43aed2930bb021231d4288de7ad476e",
-    "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs": "56f3b3dcbd16c88e72b55998f67e3d3cbff287d971491a45a2aec47b1caa045e"
+    "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs": "dd50c9c94e64637f440451c6188341fcd48fe28c7bead86d5a0b5bd70e3c10a0"
   },
   "rust_behavior": [
     "The original surf member still uses GeomAdaptorSurface::shallow_adaptor, which creates independent adaptor state and resets its caches as native ShallowCopy does.",
     "The transformed optional is copied into a new GeomAdaptorSurface state; its Geometry handles and SharedBSplineSurfaceCache handles are cloned, not its adaptor wrapper.",
-    "The cache identity unit test verifies a copied BSpline/Bezier SurfaceState shares the same cache object."
+    "The cache identity unit test verifies a copied BSpline/Bezier SurfaceState shares the same cache object.",
+    "Supplemental branch tests retain non-null extrusion/revolution curve and representation handles, both nested offset adaptors and its surface, and the B-spline shared cache."
   ],
   "native_probe": {
     "source": "tools/oracle/transformed_surface_shallow_value_copy.cxx",
@@ -46,12 +47,13 @@
   "rust_validation": {
     "focused": "cargo +1.98.1 test -p rustycad-tkg3d --test geom_adaptor_transformed_surface",
     "focused_passed": 13,
-    "unit": "cargo +1.98.1 test -p rustycad-tkg3d --lib value_copy_shares_the_native_spline_cache_handle",
-    "unit_passed": 1,
+    "unit": "cargo test -p rustycad-tkg3d --lib geom_adaptor::surface_state::copy",
+    "unit_passed": 5,
     "package": "cargo +1.98.1 test -p rustycad-tkg3d --lib --tests",
     "package_exit_code": 0,
     "clippy": "cargo +1.98.1 clippy -p rustycad-tkg3d --all-targets -- -D warnings",
-    "clippy_exit_code": 0
+    "clippy_exit_code": 0,
+    "supplemental_case": "supplemental_shallow_copy_separates_cached_adaptor_state"
   },
   "limitations": [
     "The supplemental probe is not an additional translated legacy test declaration.",
