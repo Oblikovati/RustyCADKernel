@@ -1,0 +1,24 @@
+{
+  "upstream_id": "BRepOffset_MakeOffset::GetAnalyse() const",
+  "status": "upstream_unimplemented",
+  "rust_item": null,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "header": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_MakeOffset.hxx",
+  "header_sha256": "73df05be4d5fb4de9d482ef03832009bfe348201daa23c851e00ffa7090ada18",
+  "source_search": {
+    "query": "GetAnalyse",
+    "scope": "src/ModelingAlgorithms/TKOffset",
+    "matches": [
+      "BRepOffset/BRepOffset_MakeOffset.hxx:92 declaration only"
+    ],
+    "definition_found": false
+  },
+  "native_link_probe": {
+    "source": "tools/oracle/tkoffset_get_analyse_link_probe.cxx",
+    "native_library": "target/occt-modeling-full/lin64/gcc/libi/libTKOffset.so",
+    "native_library_sha256": "60feb372f24d5d83e63c0b835385eeb57dfa03d5ae88b26602927f2b5295f2c0",
+    "symbol_found": false,
+    "diagnostic": "undefined reference to BRepOffset_MakeOffset::GetAnalyse() const"
+  },
+  "evidence": "tools/oracle/tkoffset_get_analyse_unimplemented.md"
+}
