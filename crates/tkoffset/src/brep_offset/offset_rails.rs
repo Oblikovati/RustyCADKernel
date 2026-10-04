@@ -2,12 +2,13 @@
 use super::offset_rails_geometry::{
     assemble_pipe_face, construction_error, install_rail_pcurves, make_connectors, unsupported_edge,
 };
+use super::sphere_join::build_vertex_arc_join;
 use super::{BRepOffsetOffsetFace, BRepOffsetStatus};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     brep_tools::update_face,
     topexp::vertices,
-    topods::{Edge, Face, Shape},
+    topods::{Edge, Face, Shape, Vertex},
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::{
@@ -28,6 +29,7 @@ pub struct BRepOffsetOffset {
     connectors: Vec<Edge>,
     wire_reversed: bool,
     face_image: Option<BRepOffsetOffsetFace>,
+    vertex_mode: bool,
 }
 
 pub(super) struct PipeFaceOptions<'a> {
@@ -53,6 +55,7 @@ impl BRepOffsetOffset {
             connectors: Vec::new(),
             wire_reversed: false,
             face_image: None,
+            vertex_mode: false,
         }
     }
 
@@ -85,6 +88,22 @@ impl BRepOffsetOffset {
             connectors: Vec::new(),
             wire_reversed: false,
             face_image: Some(image),
+            vertex_mode: false,
+        })
+    }
+
+    /// Builds the default spherical join for a vertex and its offset edges.
+    /// `BRepOffsetOffset::from_vertex(&vertex, &edges, 2.0)?`.
+    pub fn from_vertex(vertex: &Vertex, edges: &[Edge], offset: f64) -> Result<Self, Failure> {
+        let face = build_vertex_arc_join(vertex, edges, offset)?;
+        Ok(Self {
+            initial: vertex.clone().into_shape(),
+            face,
+            status: BRepOffsetStatus::Good,
+            connectors: Vec::new(),
+            wire_reversed: false,
+            face_image: None,
+            vertex_mode: true,
         })
     }
 
@@ -104,6 +123,7 @@ impl BRepOffsetOffset {
         self.initial = path.clone().into_shape();
         self.status = BRepOffsetStatus::Good;
         self.face_image = None;
+        self.vertex_mode = false;
         validate_edges(path, edge1, edge2)?;
         let pipe = build_ready_rail_pipe(
             path, edge1, edge2, offset, tolerance, polynomial, continuity,
@@ -134,6 +154,9 @@ impl BRepOffsetOffset {
     /// Returns a generated connector edge for a path endpoint, or a null shape.
     /// `offset.generated(&vertex.clone().into_shape())`.
     pub fn generated(&self, source: &Shape) -> Shape {
+        if self.vertex_mode {
+            return Shape::default();
+        }
         if let Some(image) = &self.face_image {
             return image.generated(source);
         }
