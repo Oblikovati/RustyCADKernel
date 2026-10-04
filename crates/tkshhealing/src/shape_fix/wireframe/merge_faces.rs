@@ -60,7 +60,7 @@ pub(super) fn merge_face_small_edges(
         changed,
         face_small_changed,
     );
-    finish_face_groups(fixer, changed)
+    Ok(changed)
 }
 
 fn merge_face_groups(
@@ -179,13 +179,6 @@ fn append_missing_edge(edges: &mut List<Shape>, edge: &Shape) {
     if !edges.iter().any(|existing| existing.is_same(edge)) {
         edges.append(edge.clone());
     }
-}
-
-fn finish_face_groups(fixer: &ShapeFixWireframe, changed: bool) -> Result<bool, Failure> {
-    if !changed {
-        return Ok(false);
-    }
-    super::merge_free_wires::finish_free_wire_merge(fixer, &fixer.context())
 }
 
 fn edge_face_entries(edge_faces: &ShapeFixWireframeShapeLists) -> Vec<(Shape, Vec<Shape>)> {

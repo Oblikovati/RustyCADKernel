@@ -12,6 +12,9 @@ use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 
+#[path = "join_3d_seam.rs"]
+mod seam;
+
 pub(super) struct JoinedEdge3d {
     pub edge: Edge,
     pub replace_first: bool,
@@ -25,14 +28,14 @@ pub(super) fn join_edges_3d(
     second: &Edge,
     faces: &[Face],
 ) -> Result<Option<JoinedEdge3d>, Failure> {
-    if has_seam(first, second, faces)? {
-        return Ok(None);
-    }
     let Some((curve, range, mut replace_first, reverse_first, reverse_second)) =
         joined_curve(first, second)?
     else {
         return Ok(None);
     };
+    if !compatible_orientation_classes(first, second) {
+        return Ok(None);
+    }
     let mut edge = make_joined_edge(first, second, &curve, range)?;
     if !append_face_pcurves(
         &mut edge,
@@ -44,20 +47,11 @@ pub(super) fn join_edges_3d(
     )? {
         return Ok(None);
     }
+    preserve_nonmanifold_orientation(&mut edge, first, second, replace_first);
     Ok(Some(JoinedEdge3d {
         edge,
         replace_first,
     }))
-}
-
-fn has_seam(first: &Edge, second: &Edge, faces: &[Face]) -> Result<bool, Failure> {
-    let analysis = ShapeAnalysisEdge::new();
-    for face in faces {
-        if analysis.is_seam_on_face(first, face)? || analysis.is_seam_on_face(second, face)? {
-            return Ok(true);
-        }
-    }
-    Ok(false)
 }
 
 fn append_face_pcurves(
@@ -69,6 +63,19 @@ fn append_face_pcurves(
     replace_first: &mut bool,
 ) -> Result<bool, Failure> {
     for face in faces {
+        let analysis = ShapeAnalysisEdge::new();
+        let first_seam = analysis.is_seam_on_face(first, face)?;
+        let second_seam = analysis.is_seam_on_face(second, face)?;
+        if first_seam != second_seam {
+            return Ok(false);
+        }
+        if first_seam {
+            if !seam::append_seam_pcurves(joined, first, second, face, reversed_3d, replace_first)?
+            {
+                return Ok(false);
+            }
+            continue;
+        }
         if !append_face_pcurve(joined, first, second, face, reversed_3d, replace_first)? {
             return Ok(false);
         }
@@ -127,11 +134,39 @@ fn joined_pcurve(
     )))
 }
 
-fn effective_orientation(edge: &Edge, reversed_3d: bool) -> Orientation {
+pub(super) fn effective_orientation(edge: &Edge, reversed_3d: bool) -> Orientation {
+    if !is_manifold_orientation(edge.orientation()) {
+        return edge.orientation();
+    }
     if (edge.orientation() == Orientation::Reversed) != reversed_3d {
         return Orientation::Reversed;
     }
     Orientation::Forward
+}
+
+pub(super) fn is_manifold_orientation(orientation: Orientation) -> bool {
+    matches!(orientation, Orientation::Forward | Orientation::Reversed)
+}
+
+fn compatible_orientation_classes(first: &Edge, second: &Edge) -> bool {
+    is_manifold_orientation(first.orientation()) == is_manifold_orientation(second.orientation())
+}
+
+fn preserve_nonmanifold_orientation(
+    joined: &mut Edge,
+    first: &Edge,
+    second: &Edge,
+    replace_first: bool,
+) {
+    if is_manifold_orientation(first.orientation()) {
+        return;
+    }
+    let orientation = if replace_first {
+        first.orientation()
+    } else {
+        second.orientation()
+    };
+    joined.set_orientation(orientation);
 }
 
 fn joined_same_vertex(first: &Edge, second: &Edge) -> bool {
@@ -245,4 +280,43 @@ fn add_joined_endpoints(edge: &mut Edge, first: &Edge, second: &Edge) -> Result<
     Builder.add(&mut shape, &endpoints.1.oriented(Orientation::Reversed))?;
     *edge = rustycad_tkbrep::topods::edge(&shape)?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{compatible_orientation_classes, preserve_nonmanifold_orientation};
+    use rustycad_tkbrep::topods::Edge;
+    use rustycad_tkg3d::top_abs::Orientation;
+
+    #[test]
+    fn join_accepts_matching_manifold_and_nonmanifold_classes() {
+        assert!(compatible_pair(Orientation::Forward, Orientation::Reversed));
+        assert!(compatible_pair(
+            Orientation::Internal,
+            Orientation::External
+        ));
+        assert!(!compatible_pair(
+            Orientation::Forward,
+            Orientation::Internal
+        ));
+    }
+
+    #[test]
+    fn nonmanifold_join_keeps_native_replacement_orientation() {
+        let first = oriented_edge(Orientation::Internal);
+        let second = oriented_edge(Orientation::External);
+        let mut joined = Edge::default();
+        preserve_nonmanifold_orientation(&mut joined, &first, &second, false);
+        assert_eq!(joined.orientation(), Orientation::External);
+    }
+
+    fn compatible_pair(first: Orientation, second: Orientation) -> bool {
+        compatible_orientation_classes(&oriented_edge(first), &oriented_edge(second))
+    }
+
+    fn oriented_edge(orientation: Orientation) -> Edge {
+        let mut edge = Edge::default();
+        edge.set_orientation(orientation);
+        edge
+    }
 }

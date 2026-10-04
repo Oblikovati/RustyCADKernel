@@ -7,7 +7,10 @@ mod repair;
 mod small_edges;
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
-use rustycad_tkbrep::{topods::Shape, toptools::ShapeMapHasher};
+use rustycad_tkbrep::{
+    topods::{Edge, Shape, Vertex},
+    toptools::ShapeMapHasher,
+};
 use rustycad_tkernel::{
     impl_transient,
     ncollection::{DataMap, List},
@@ -27,6 +30,7 @@ struct WireframeState {
     limit_angle: f64,
     gaps: i32,
     small: i32,
+    joined_vertices: Vec<(Vertex, Vertex)>,
 }
 impl Default for WireframeState {
     fn default() -> Self {
@@ -36,6 +40,7 @@ impl Default for WireframeState {
             limit_angle: -1.,
             gaps: 0,
             small: 0,
+            joined_vertices: Vec::new(),
         }
     }
 }
@@ -95,4 +100,53 @@ impl ShapeFixWireframe {
     pub fn limit_angle(&self) -> f64 {
         self.state.read().limit_angle
     }
+
+    pub(super) fn reset_joined_vertices(&self) {
+        self.state.write().joined_vertices.clear();
+    }
+
+    pub(super) fn record_joined_endpoints(
+        &self,
+        edge: &Edge,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        let analyzer = crate::shape_analysis::ShapeAnalysisEdge::new();
+        let endpoints = (analyzer.first_vertex(edge), analyzer.last_vertex(edge));
+        let copies = (
+            joined_vertex_copy(&endpoints.0)?,
+            joined_vertex_copy(&endpoints.1)?,
+        );
+        let mut state = self.state.write();
+        record_joined_vertex(&mut state.joined_vertices, &endpoints.0, copies.0);
+        record_joined_vertex(&mut state.joined_vertices, &endpoints.1, copies.1);
+        Ok(())
+    }
+
+    pub(super) fn apply_joined_vertex_replacements(
+        &self,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        let replacements = std::mem::take(&mut self.state.write().joined_vertices);
+        let context = self.context();
+        for (source, target) in replacements {
+            rustycad_tkbrep::brep_tools::ReShape::replace(
+                &*context,
+                &source,
+                &target.into_shape(),
+            )?;
+        }
+        Ok(())
+    }
+}
+
+fn record_joined_vertex(replacements: &mut Vec<(Vertex, Vertex)>, source: &Vertex, copy: Vertex) {
+    if replacements
+        .iter()
+        .any(|(original, _)| original.is_same(source))
+    {
+        return;
+    }
+    replacements.push((source.clone(), copy));
+}
+
+fn joined_vertex_copy(source: &Vertex) -> Result<Vertex, rustycad_tkernel::standard::Failure> {
+    rustycad_tkbrep::topods::vertex(&source.empty_copied()?)
 }

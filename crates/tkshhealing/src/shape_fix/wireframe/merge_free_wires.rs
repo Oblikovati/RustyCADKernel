@@ -51,7 +51,7 @@ fn merge_free_wire_candidates(
     if !changed {
         return Ok(false);
     }
-    finish_free_wire_merge(fixer, &context)
+    Ok(true)
 }
 
 fn merge_one_free_wire(
@@ -276,6 +276,7 @@ fn install_joined_edge(
     joined: super::join_3d::JoinedEdge3d,
 ) -> Result<(), Failure> {
     let mut joined = joined;
+    fixer.record_joined_endpoints(&joined.edge)?;
     non_manifold::copy_pair_vertices(fixer, pair, &mut joined.edge)?;
     replace_pair_in_context(fixer, pair, &joined)?;
     register_joined_edge(
