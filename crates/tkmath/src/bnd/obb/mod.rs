@@ -188,11 +188,12 @@ impl OrientedBoundingBox {
         let [x, y, z] = self.half_sizes;
         4.0 * (x * x + y * y + z * z)
     }
-    /// `ProcessOnePoint`: a zero-size axis-aligned box at the point.
-    fn process_one_point(&mut self, point: Xyz) {
+    /// `ProcessOnePoint`: replaces all box fields with a zero-size axis-aligned box.
+    /// Example: `obb.process_one_point(Point3::new(1.0, 2.0, 3.0))`.
+    pub fn process_one_point(&mut self, point: Point3) {
         self.is_aa_box = true;
         self.half_sizes = [0.0; 3];
         self.axes = [Direction3::X, Direction3::Y, Direction3::Z].map(Xyz::from);
-        self.center = point;
+        self.center = point.xyz();
     }
 }

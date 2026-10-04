@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": [
+    "Bnd_OBB::ProcessOnePoint",
+    "Poly_Triangulation::unsetCachedMinMax"
+  ],
+  "native_command": "c++ -std=c++17 -O2 -Itarget/occt-modeling-full/include/opencascade tools/oracle/tkmath_protected_bounds.cxx -Ltarget/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath-protected-bounds && /tmp/tkmath-protected-bounds > /tmp/tkmath-protected-bounds.out && cmp tools/oracle/tkmath_protected_bounds.expected /tmp/tkmath-protected-bounds.out",
+  "rust_command": "cargo test -p rustycad-tkmath --test protected_bounds_hooks --locked",
+  "native_output_rows": 8,
+  "sha256": {
+    "tools/oracle/tkmath_protected_bounds.cxx": "3a3b02833fe15f2768b0102813f8a689e37c3a0187e38468cac85eae4232c7bd",
+    "tools/oracle/tkmath_protected_bounds.expected": "8ccfea9e9cb4a1d7062b55f1450cb55fdcc9117e5bcce43bcee05fa0c78b67f6",
+    "../OCCT/src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx": "95d3b4061cccc045c3d1ebe09610938306f14e5a89b51cabd721e9acfa5b0ab4",
+    "../OCCT/src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx": "885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802",
+    "../OCCT/src/FoundationClasses/TKMath/Poly/Poly_Triangulation.cxx": "1d97cc0d54a4cd3c76758c2e9cfababad049ce70bebc937c161c09ffa0dc5a8e",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKMath.so": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "legacy_declarations_added": 0,
+  "limitations": [
+    "Supplemental direct-hook fixture; does not add original legacy test declarations.",
+    "Sequential Linux fixture does not establish concurrency or all-platform behavioral equivalence."
+  ]
+}

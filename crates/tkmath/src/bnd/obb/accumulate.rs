@@ -41,7 +41,7 @@ impl OrientedBoundingBox {
         points: &Array1<'_, Point3>,
         tolerances: Option<&Array1<'_, f64>>,
     ) -> Result<(), Failure> {
-        self.process_one_point(points.first().map_err(out_of_range)?.xyz());
+        self.process_one_point(*points.first().map_err(out_of_range)?);
         if let Some(tolerances) = tolerances {
             self.enlarge(*tolerances.first().map_err(out_of_range)?);
         }
@@ -78,7 +78,7 @@ impl OrientedBoundingBox {
         self.half_sizes[1] = radius;
         self.half_sizes[2] = radius;
         if length < precision::confusion() {
-            self.process_one_point(first);
+            self.process_one_point(Point3::from(first));
             self.enlarge(self.half_sizes[1] + precision::confusion());
             return Ok(());
         }

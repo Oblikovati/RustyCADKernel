@@ -234981,6 +234981,22 @@
       "rust_item": "rustycad_tkmath::plib::HermitJacobi::d0123",
       "status": "partial",
       "notes": "Protected declaration inventory ID 6c57344e4188f9fc9f72941650ff29888c4bed879e9a190d619cd312326a8018. Exposed as a Rust-safe borrowed BasisRows method and bit-checked against pinned native initialized-buffer calls for NDeriv=0..3 with nonzero lower bounds. Distinct mutable slices cannot alias one native NCollection_Array1 across argument positions; short buffers return Standard_OutOfRange instead of native out-of-bounds access. Orders outside 0..3 are rejected because native constructs derivative-sized local arrays from NDeriv. Probe: tools/oracle/tkmath_plib_d0123.cxx."
+    },
+    {
+      "upstream_id": "Bnd_OBB::ProcessOnePoint(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::process_one_point",
+      "status": "implemented",
+      "notes": "Exposes the protected nonvirtual reset operation. All fields are replaced using the existing native-order implementation; direct void/oriented/repeated transitions match the native probe. Clang candidate 0e1912c1fef294976c62061e79d58c810343753733127307eb0787b614e9d8a5. Supplemental evidence: porting/audits/tkmath-protected-bounds.json; no legacy mapping count increase."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::unsetCachedMinMax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::Triangulation::unset_cached_min_max",
+      "status": "implemented",
+      "notes": "Existing public analogue now covered directly against the protected native operation. Clearing empty/cached/populated/repeated states preserves nodes and restores node-derived bounds. Clang candidate 0b263b88682ea78b498adddd9266c08fc499491a0a84cfa33a689eea6cde8d2e. Supplemental evidence: porting/audits/tkmath-protected-bounds.json; no legacy mapping count increase."
     }
   ],
   "tests": [
