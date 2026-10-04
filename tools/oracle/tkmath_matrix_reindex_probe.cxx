@@ -4,7 +4,7 @@
 class ExposedMatrix : public math_Matrix {
 public:
   using math_Matrix::math_Matrix;
-  void Reindex(int row, int col) { SetLowerRow(row); SetLowerCol(col); }
+  void Reindex(int row, int col) { SetLower(row, col); }
 };
 int main() {
   ExposedMatrix matrix(1, 2, 1, 2);
