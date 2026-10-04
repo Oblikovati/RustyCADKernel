@@ -43,8 +43,9 @@ pub struct BvhSplitPlane<V: BvhVector> {
 
 /// Binned SAH builder; 32-48 bins give the best trees, 4-8 are 10-20% worse.
 ///
-/// Several threads require a thread-safe primitive set upstream; here node
-/// splits are serialized (see `queue_build`).
+/// With several threads, `build` adapts the mutable set through synchronized
+/// access and runs independent split ranges in parallel. Direct `queue_build`
+/// calls keep the safe serialized mutable-set path.
 /// Example: `BvhBinnedBuilder::<Vec3<f64>, 48>::new(5, 32, false, 1)`.
 #[derive(Debug)]
 pub struct BvhBinnedBuilder<V: BvhVector, const BINS: usize = NB_BINS_OPTIMAL> {
@@ -106,8 +107,9 @@ impl<V: BvhVector, const BINS: usize> BvhParallelQueueBuilder<V> for BvhBinnedBu
         &self,
         set: &dyn BvhSharedSet<V>,
         node: BvhNodeSnapshot<V>,
+        mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
     ) -> Result<BvhChildNodes<V>, Failure> {
-        split::build_binned_node_shared(self, set, node)
+        split::build_binned_node_shared(self, set, node, mark_parent_inner)
     }
 }
 impl<V: BvhVector, const BINS: usize> BvhBuilder<V> for BvhBinnedBuilder<V, BINS> {
@@ -120,6 +122,10 @@ impl<V: BvhVector, const BINS: usize> BvhBuilder<V> for BvhBinnedBuilder<V, BINS
         bvh: &mut BvhTree<V>,
         bounding: &BvhBox<V>,
     ) -> Result<(), Failure> {
-        queue_build(self, set, bvh, bounding)
+        if self.num_of_threads <= 1 {
+            return queue_build(self, set, bvh, bounding);
+        }
+        let shared = super::shared_set::BvhBorrowedMutexSet::new(set);
+        super::queue_builder::parallel_queue_build(self, &shared, bvh, bounding)
     }
 }

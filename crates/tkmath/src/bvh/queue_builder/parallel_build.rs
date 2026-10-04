@@ -22,11 +22,16 @@ impl<V: BvhVector, B: BvhParallelQueueBuilder<V> + ?Sized> BvhBuildTool
 {
     fn perform(&self, node: i32) -> Result<(), Failure> {
         let snapshot = self.snapshot(node)?;
-        let children = self.builder.build_node(self.set, snapshot)?;
+        let mut marked_inner = false;
+        let children = {
+            let mut mark_parent = || self.mark_parent_inner(node, &mut marked_inner);
+            self.builder
+                .build_node(self.set, snapshot, &mut mark_parent)?
+        };
         if !children.is_valid() {
             return Ok(());
         }
-        self.publish_children(node, &children)
+        self.publish_children(node, &children, marked_inner)
     }
 }
 
@@ -35,9 +40,22 @@ impl<V: BvhVector, B: BvhParallelQueueBuilder<V> + ?Sized> SharedBuildTool<'_, V
         self.lock_tree().node_snapshot(node)
     }
 
-    fn publish_children(&self, node: i32, children: &BvhChildNodes<V>) -> Result<(), Failure> {
+    fn mark_parent_inner(&self, node: i32, marked_inner: &mut bool) -> Result<(), Failure> {
+        self.lock_tree().set_inner(node)?;
+        *marked_inner = true;
+        Ok(())
+    }
+
+    fn publish_children(
+        &self,
+        node: i32,
+        children: &BvhChildNodes<V>,
+        marked_inner: bool,
+    ) -> Result<(), Failure> {
         let mut tree = self.lock_tree();
-        tree.set_inner(node)?;
+        if !marked_inner {
+            tree.set_inner(node)?;
+        }
         self.builder
             .add_children(&mut tree, self.queue, node, children)
     }

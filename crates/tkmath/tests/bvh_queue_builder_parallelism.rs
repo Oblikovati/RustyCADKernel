@@ -3,7 +3,7 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bvh::{
     BvhBinnedBuilder, BvhBox, BvhBoxSet, BvhBuilderTransient, BvhChildNodes, BvhMutexSet,
     BvhNodeSnapshot, BvhParallelQueueBuilder, BvhPrimitiveRange, BvhQueueBuilder, BvhSet,
-    BvhSharedSet, BvhTree, BvhVec3d, parallel_queue_build, queue_build,
+    BvhSharedSet, BvhSweepPlaneBuilder, BvhTree, BvhVec3d, parallel_queue_build, queue_build,
 };
 use rustycad_tkmath::bvh::{BvhBuildQueue, BvhBuildThread, BvhBuildTool};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -115,6 +115,7 @@ impl BvhParallelQueueBuilder<BvhVec3d> for RecordingBuilder {
         &self,
         _set: &dyn BvhSharedSet<BvhVec3d>,
         node: BvhNodeSnapshot<BvhVec3d>,
+        _mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
     ) -> Result<BvhChildNodes<BvhVec3d>, Failure> {
         self.record_enter();
         self.wait_for_pair(node.begin, node.end);
@@ -266,30 +267,44 @@ fn reverse_order_boxes() -> BvhBoxSet<BvhVec3d> {
 }
 
 #[test]
-fn parallel_split_failure_documents_partial_tree_state_difference() {
-    let serial_tree = failed_serial_tree();
+fn binned_split_failure_keeps_native_inner_parent_state() {
     let parallel_tree = failed_parallel_tree();
-
-    assert!(!serial_tree.is_outer(0).unwrap());
-    assert!(parallel_tree.is_outer(0).unwrap());
-}
-
-fn failed_serial_tree() -> BvhTree<BvhVec3d> {
-    let builder = BvhBinnedBuilder::<BvhVec3d, 4>::new(1, 8, false, 1);
-    let mut set = FailOnSwapSet {
-        inner: reverse_order_boxes(),
-    };
-    let mut tree = BvhTree::default();
-    assert!(queue_build(&builder, &mut set, &mut tree, &full_bounds()).is_err());
-    tree
+    assert!(!parallel_tree.is_outer(0).unwrap());
 }
 
 fn failed_parallel_tree() -> BvhTree<BvhVec3d> {
     let builder = BvhBinnedBuilder::<BvhVec3d, 4>::new(1, 8, false, 2);
-    let set = BvhMutexSet::new(FailOnSwapSet {
+    let mut set = FailOnSwapSet {
         inner: reverse_order_boxes(),
-    });
+    };
     let mut tree = BvhTree::default();
-    assert!(parallel_queue_build(&builder, &set, &mut tree, &full_bounds()).is_err());
+    assert!(
+        rustycad_tkmath::bvh::BvhBuilder::build(&builder, &mut set, &mut tree, &full_bounds(),)
+            .is_err()
+    );
     tree
+}
+
+#[test]
+fn binned_builder_build_uses_parallel_shared_set_when_configured() {
+    let builder = BvhBinnedBuilder::<BvhVec3d, 4>::new(1, 8, false, 2);
+    let mut set = set_with_four_boxes();
+    let mut tree = BvhTree::default();
+
+    rustycad_tkmath::bvh::BvhBuilder::build(&builder, &mut set, &mut tree, &full_bounds()).unwrap();
+
+    assert_eq!(tree.length(), 7);
+    assert_eq!(leaf_ranges(&tree).len(), 4);
+}
+
+#[test]
+fn sweep_builder_build_uses_parallel_shared_set_when_configured() {
+    let builder = BvhSweepPlaneBuilder::<BvhVec3d>::new(1, 8, 2);
+    let mut set = set_with_four_boxes();
+    let mut tree = BvhTree::default();
+
+    rustycad_tkmath::bvh::BvhBuilder::build(&builder, &mut set, &mut tree, &full_bounds()).unwrap();
+
+    assert_eq!(tree.length(), 7);
+    assert_eq!(leaf_ranges(&tree).len(), 4);
 }

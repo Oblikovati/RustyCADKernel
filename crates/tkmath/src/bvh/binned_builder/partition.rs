@@ -99,28 +99,71 @@ fn split_primitives_with<V: BvhVector, A: PartitionAccess<V>>(
     axis: i32,
     bins: i32,
 ) -> Result<i32, Failure> {
-    let min = bounding.corner_min().component(axis);
-    let max = bounding.corner_max().component(axis);
-    let inverse_step = V::Scalar::from_int(bins) / (max - min);
+    let (min, inverse_step) = partition_scale(bounding, axis, bins);
     let (mut left, mut right) = (begin, end);
     loop {
-        while bin_of(set, left, axis, min, inverse_step)? <= bin && left < end {
-            left += 1;
-        }
-        while bin_of(set, right, axis, min, inverse_step)? > bin && right > begin {
-            right -= 1;
-        }
+        left = scan_left(set, left, end, bin, axis, min, inverse_step)?;
+        right = scan_right(set, right, begin, bin, axis, min, inverse_step)?;
         if left <= right {
-            if left != right {
-                set.swap(left, right)?;
-            }
-            left += 1;
-            right -= 1;
+            swap_partition_items(set, &mut left, &mut right)?;
         }
         if left > right {
             return Ok(left);
         }
     }
+}
+
+fn partition_scale<V: BvhVector>(
+    bounding: &BvhBox<V>,
+    axis: i32,
+    bins: i32,
+) -> (V::Scalar, V::Scalar) {
+    let min = bounding.corner_min().component(axis);
+    let max = bounding.corner_max().component(axis);
+    (min, V::Scalar::from_int(bins) / (max - min))
+}
+
+fn scan_left<V: BvhVector, A: PartitionAccess<V>>(
+    set: &A,
+    mut left: i32,
+    end: i32,
+    bin: i32,
+    axis: i32,
+    min: V::Scalar,
+    inverse_step: V::Scalar,
+) -> Result<i32, Failure> {
+    while bin_of(set, left, axis, min, inverse_step)? <= bin && left < end {
+        left += 1;
+    }
+    Ok(left)
+}
+
+fn scan_right<V: BvhVector, A: PartitionAccess<V>>(
+    set: &A,
+    mut right: i32,
+    begin: i32,
+    bin: i32,
+    axis: i32,
+    min: V::Scalar,
+    inverse_step: V::Scalar,
+) -> Result<i32, Failure> {
+    while bin_of(set, right, axis, min, inverse_step)? > bin && right > begin {
+        right -= 1;
+    }
+    Ok(right)
+}
+
+fn swap_partition_items<V: BvhVector, A: PartitionAccess<V>>(
+    set: &mut A,
+    left: &mut i32,
+    right: &mut i32,
+) -> Result<(), Failure> {
+    if *left != *right {
+        set.swap(*left, *right)?;
+    }
+    *left += 1;
+    *right -= 1;
+    Ok(())
 }
 
 /// `BVH_AxisSelector::MainAxis`: the widest axis among X, Y (and Z), with the

@@ -1,6 +1,6 @@
 # Binned split failure state
 
-Pinned `BVH_BinnedBuilder::buildNode` marks its node inner before invoking `SplitPrimitives`; this probe makes the first primitive swap raise `Standard_Failure` and prints the swap count plus root leaf flag. The observed `1 0` confirms that the root stays inner after the failed split. The opt-in Rust shared-snapshot builder returns the error before publishing children, so its root remains a leaf. This defined error-state difference is covered by `parallel_split_failure_documents_partial_tree_state_difference` and prevents a full `Build` parity claim for that path.
+Pinned `BVH_BinnedBuilder::buildNode` marks its node inner before invoking `SplitPrimitives`; this probe makes the first primitive swap raise `Standard_Failure` and prints the swap count plus root leaf flag. The observed `1 0` confirms that the root stays inner after the failed split. Rust now marks the shared tree node inner at the same point before partitioning, and `binned_split_failure_keeps_native_inner_parent_state` checks that state. Generic custom `BvhQueueBuilder` builds remain serialized and retain their separate failure behavior.
 
 Run with the repository's configured OCCT build:
 

@@ -4,12 +4,15 @@
 use super::bounding_box::BvhBox;
 use super::builder::{BvhBuilder, BvhBuilderTransient};
 use super::constants::{LEAF_NODE_SIZE_DEFAULT, MAX_TREE_DEPTH, THE_NODE_MIN_SIZE};
-use super::queue_builder::{BvhChildNodes, BvhPrimitiveRange, BvhQueueBuilder, queue_build};
+use super::queue_builder::{
+    BvhChildNodes, BvhParallelQueueBuilder, BvhPrimitiveRange, BvhQueueBuilder,
+    parallel_queue_build, queue_build,
+};
 use super::quick_sorter::BvhQuickSorter;
 use super::scalar::BvhScalar;
-use super::set::BvhSet;
+use super::set::{BvhSet, BvhSharedSet};
 use super::sorter::BvhSorter;
-use super::tree::BvhTree;
+use super::tree::{BvhNodeSnapshot, BvhTree};
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 use std::marker::PhantomData;
@@ -59,36 +62,96 @@ impl<V: BvhVector> BvhSweepPlaneBuilder<V> {
     /// axis tried.
     fn find_best_split(
         &self,
-        set: &mut dyn BvhSet<V>,
-        bvh: &BvhTree<V>,
-        node: i32,
+        set: &mut dyn SweepSetAccess<V>,
+        node: BvhNodeSnapshot<V>,
         range: NodeRange,
     ) -> Result<SweepSplit, Failure> {
-        let mut best = SweepSplit {
-            axis: -1,
-            index: 0,
-            cost: f64::MAX,
-        };
-        let mut left_areas = vec![0.0_f64; range.count as usize];
-        let mut right_areas = vec![0.0_f64; range.count as usize];
+        let mut best = empty_split();
+        let (mut left_areas, mut right_areas) = split_area_buffers(range.count);
         for axis in 0..V::DIMENSION.min(3) as i32 {
-            let extent =
-                bvh.max_point(node)?.component(axis) - bvh.min_point(node)?.component(axis);
-            if extent.to_double() <= THE_NODE_MIN_SIZE {
+            if extent(node, axis).to_double() <= THE_NODE_MIN_SIZE {
                 continue;
             }
-            BvhQuickSorter::new(axis).perform_range(set, range.begin, range.end)?;
-            sweep_areas(&*set, range, &mut left_areas, &mut right_areas)?;
+            set.sort_range(axis, range.begin, range.end)?;
+            sweep_areas(set, range, &mut left_areas, &mut right_areas)?;
             choose_split(&left_areas, &right_areas, range.count, axis, &mut best);
         }
         Ok(best)
+    }
+
+    fn split_node_shared(
+        &self,
+        set: &dyn BvhSharedSet<V>,
+        node: BvhNodeSnapshot<V>,
+        mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
+    ) -> Result<BvhChildNodes<V>, Failure> {
+        let range = node_range(node);
+        if range.count <= self.transient.leaf_node_size() {
+            return Ok(BvhChildNodes::default());
+        }
+        let mut access = SharedSweepSetAccess(set);
+        let best = self.find_best_split(&mut access, node, range)?;
+        if best.axis == -1 {
+            return Ok(BvhChildNodes::default());
+        }
+        mark_parent_inner()?;
+        self.finish_split(&mut access, range, best)
+    }
+
+    fn finish_split(
+        &self,
+        set: &mut dyn SweepSetAccess<V>,
+        range: NodeRange,
+        best: SweepSplit,
+    ) -> Result<BvhChildNodes<V>, Failure> {
+        let last_axis = V::DIMENSION.min(3) as i32 - 1;
+        if best.axis != last_axis {
+            set.sort_range(best.axis, range.begin, range.end)?;
+        }
+        let middle = range.begin + best.index;
+        let (left, right) = split_boxes(set, range, middle)?;
+        Ok(BvhChildNodes::new(
+            left,
+            right,
+            BvhPrimitiveRange::new(range.begin, middle - 1),
+            BvhPrimitiveRange::new(middle, range.end),
+        ))
     }
 }
 
 /// Areas of the boxes of the first (left) and last (right) `k` primitives,
 /// for k in `1..count`, stored at index k as `double`.
+trait SweepSetAccess<V: BvhVector> {
+    fn element_box(&self, index: i32) -> Result<BvhBox<V>, Failure>;
+    fn sort_range(&mut self, axis: i32, begin: i32, end: i32) -> Result<(), Failure>;
+}
+
+struct MutableSweepSetAccess<'a, V: BvhVector>(&'a mut dyn BvhSet<V>);
+
+impl<V: BvhVector> SweepSetAccess<V> for MutableSweepSetAccess<'_, V> {
+    fn element_box(&self, index: i32) -> Result<BvhBox<V>, Failure> {
+        self.0.element_box(index)
+    }
+
+    fn sort_range(&mut self, axis: i32, begin: i32, end: i32) -> Result<(), Failure> {
+        BvhQuickSorter::new(axis).perform_range(self.0, begin, end)
+    }
+}
+
+struct SharedSweepSetAccess<'a, V: BvhVector>(&'a dyn BvhSharedSet<V>);
+
+impl<V: BvhVector> SweepSetAccess<V> for SharedSweepSetAccess<'_, V> {
+    fn element_box(&self, index: i32) -> Result<BvhBox<V>, Failure> {
+        self.0.element_box(index)
+    }
+
+    fn sort_range(&mut self, axis: i32, begin: i32, end: i32) -> Result<(), Failure> {
+        super::quick_sorter::sort_range_shared(self.0, axis, begin, end)
+    }
+}
+
 fn sweep_areas<V: BvhVector>(
-    set: &dyn BvhSet<V>,
+    set: &dyn SweepSetAccess<V>,
     range: NodeRange,
     left_areas: &mut [f64],
     right_areas: &mut [f64],
@@ -132,7 +195,7 @@ fn choose_split(
 /// Boxes of the primitives before and after the split, the right one grown
 /// from the last primitive down.
 fn split_boxes<V: BvhVector>(
-    set: &dyn BvhSet<V>,
+    set: &dyn SweepSetAccess<V>,
     range: NodeRange,
     middle: i32,
 ) -> Result<(BvhBox<V>, BvhBox<V>), Failure> {
@@ -145,6 +208,30 @@ fn split_boxes<V: BvhVector>(
         right.combine(&set.element_box(index)?);
     }
     Ok((left, right))
+}
+
+fn empty_split() -> SweepSplit {
+    SweepSplit {
+        axis: -1,
+        index: 0,
+        cost: f64::MAX,
+    }
+}
+
+fn split_area_buffers(count: i32) -> (Vec<f64>, Vec<f64>) {
+    (vec![0.0_f64; count as usize], vec![0.0_f64; count as usize])
+}
+
+fn extent<V: BvhVector>(node: BvhNodeSnapshot<V>, axis: i32) -> V::Scalar {
+    node.maximum.component(axis) - node.minimum.component(axis)
+}
+
+fn node_range<V: BvhVector>(node: BvhNodeSnapshot<V>) -> NodeRange {
+    NodeRange {
+        begin: node.begin,
+        end: node.end,
+        count: node.end - node.begin + 1,
+    }
 }
 
 impl<V: BvhVector> BvhQueueBuilder<V> for BvhSweepPlaneBuilder<V> {
@@ -163,33 +250,39 @@ impl<V: BvhVector> BvhQueueBuilder<V> for BvhSweepPlaneBuilder<V> {
         bvh: &mut BvhTree<V>,
         node: i32,
     ) -> Result<BvhChildNodes<V>, Failure> {
-        let (begin, end) = (bvh.beg_primitive(node)?, bvh.end_primitive(node)?);
-        let range = NodeRange {
-            begin,
-            end,
-            count: bvh.nb_primitives(node)?,
-        };
+        let snapshot = bvh.node_snapshot(node)?;
+        let range = node_range(snapshot);
         if range.count <= self.transient.leaf_node_size() {
             return Ok(BvhChildNodes::default());
         }
-        let best = self.find_best_split(set, bvh, node, range)?;
+        let mut access = MutableSweepSetAccess(set);
+        let best = self.find_best_split(&mut access, snapshot, range)?;
         if best.axis == -1 {
             return Ok(BvhChildNodes::default());
         }
         bvh.set_inner(node)?;
-        if best.axis != V::DIMENSION.min(3) as i32 - 1 {
-            BvhQuickSorter::new(best.axis).perform_range(set, begin, end)?;
-        }
-        let middle = begin + best.index;
-        let (left, right) = split_boxes(&*set, range, middle)?;
-        Ok(BvhChildNodes::new(
-            left,
-            right,
-            BvhPrimitiveRange::new(begin, middle - 1),
-            BvhPrimitiveRange::new(middle, end),
-        ))
+        self.finish_split(&mut access, range, best)
     }
 }
+impl<V: BvhVector> BvhParallelQueueBuilder<V> for BvhSweepPlaneBuilder<V> {
+    fn queue_builder_transient(&self) -> &BvhBuilderTransient {
+        &self.transient
+    }
+
+    fn num_of_threads(&self) -> i32 {
+        self.num_of_threads
+    }
+
+    fn build_node(
+        &self,
+        set: &dyn BvhSharedSet<V>,
+        node: BvhNodeSnapshot<V>,
+        mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
+    ) -> Result<BvhChildNodes<V>, Failure> {
+        self.split_node_shared(set, node, mark_parent_inner)
+    }
+}
+
 impl<V: BvhVector> BvhBuilder<V> for BvhSweepPlaneBuilder<V> {
     fn builder_transient(&self) -> &BvhBuilderTransient {
         &self.transient
@@ -200,6 +293,10 @@ impl<V: BvhVector> BvhBuilder<V> for BvhSweepPlaneBuilder<V> {
         bvh: &mut BvhTree<V>,
         bounding: &BvhBox<V>,
     ) -> Result<(), Failure> {
-        queue_build(self, set, bvh, bounding)
+        if self.num_of_threads <= 1 {
+            return queue_build(self, set, bvh, bounding);
+        }
+        let shared = super::shared_set::BvhBorrowedMutexSet::new(set);
+        parallel_queue_build(self, &shared, bvh, bounding)
     }
 }

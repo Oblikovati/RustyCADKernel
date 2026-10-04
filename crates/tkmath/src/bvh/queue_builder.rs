@@ -125,6 +125,7 @@ pub trait BvhParallelQueueBuilder<V: BvhVector>: Send + Sync {
         &self,
         set: &dyn BvhSharedSet<V>,
         node: BvhNodeSnapshot<V>,
+        mark_parent_inner: &mut dyn FnMut() -> Result<(), Failure>,
     ) -> Result<BvhChildNodes<V>, Failure>;
     /// Registers the computed children under the tree lock.
     fn add_children(
