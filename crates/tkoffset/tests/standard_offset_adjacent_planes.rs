@@ -21,7 +21,7 @@ use rustycad_tktopalgo::{
 fn adjacent_planes_gain_the_native_rounded_shared_edge_image()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let (input, faces, shared_edge) = adjacent_box_faces()?;
-    let mut maker = maker_for(&input);
+    let mut maker = maker_for_offset(&input, 0.5);
 
     maker.make_offset_shape()?;
 
@@ -57,10 +57,23 @@ fn adjacent_planes_gain_the_native_rounded_shared_edge_image()
 }
 
 #[test]
+fn negative_adjacent_plane_offset_fails_closed_until_boundaries_are_trimmed()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (input, _, _) = adjacent_box_faces()?;
+    let mut maker = maker_for_offset(&input, -0.5);
+    let failure = maker.make_offset_shape().unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+    assert!(failure.message().contains("Some(Convex)"));
+    assert!(failure.message().contains("Concave"));
+    assert!(!maker.is_done());
+    Ok(())
+}
+
+#[test]
 fn cylinder_and_planar_cap_gain_the_native_toroidal_join()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let (input, faces, shared_edge) = cylinder_cap_shell()?;
-    let mut maker = maker_for(&input);
+    let mut maker = maker_for_offset(&input, 0.5);
 
     maker.make_offset_shape()?;
 
@@ -91,7 +104,7 @@ fn cylinder_and_planar_cap_gain_the_native_toroidal_join()
 fn cylindrical_side_with_both_caps_builds_two_native_toroidal_joins()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let (input, faces) = cylinder_closed_shell()?;
-    let mut maker = maker_for(&input);
+    let mut maker = maker_for_offset(&input, 0.5);
 
     maker.make_offset_shape()?;
 
@@ -119,11 +132,11 @@ fn cylindrical_side_with_both_caps_builds_two_native_toroidal_joins()
     Ok(())
 }
 
-fn maker_for(input: &Shape) -> BRepOffsetMakeOffset {
+fn maker_for_offset(input: &Shape, offset: f64) -> BRepOffsetMakeOffset {
     let mut maker = BRepOffsetMakeOffset::new();
     maker.initialize(
         input,
-        0.5,
+        offset,
         1.0e-7,
         BRepOffsetMode::Skin,
         false,
