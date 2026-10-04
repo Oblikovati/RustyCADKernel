@@ -225564,6 +225564,15 @@
       "rust_item": "rustycad_tkbool::top_ope_brep_tool::nt",
       "status": "partial",
       "notes": "Native restricted surface normals and parameter spans translated. 80 differential cases cover all face orientations, planes, sphere poles, cone apex branches, tiny Bezier false returns/output preservation and collapsed Bezier ConstructionError. Broader located/general spline domains remain unproven; no toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "ChFi3d::IsTangentFaces(const TopoDS_Edge &, const TopoDS_Face &, const TopoDS_Face &, const GeomAbs_Shape)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "source_sha256": "a9442577a929311d9397de845bf4d6e5480376a4f16a26a2dab8140229ab242e",
+      "rust_item": "rustycad_tkfillet::chfi3d::is_tangent_faces",
+      "status": "partial",
+      "notes": "Pinned source translation. Native differential fixture covers 288 planar/missing-pcurve/same-face cases, G1/C2/G2 orders and edge/face orientations. Partial: stored-continuity shortcut, real seams, curved/located/spline domains need native fixtures. No legacy completion claim."
     }
   ],
   "tests": [
