@@ -39,3 +39,6 @@ pub use vertex_tools::{
     compute_vertex_point, compute_vertices, d_tolerance, make_new_vertex_edge_face,
     make_new_vertex_edges, make_new_vertex_pair, make_new_vertex_point, make_vertex,
 };
+
+mod curve_tolerance;
+pub use curve_tolerance::compute_curve_tolerance;
