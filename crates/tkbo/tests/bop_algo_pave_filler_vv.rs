@@ -45,6 +45,57 @@ fn perform_vv_creates_one_same_domain_vertex_and_interference() {
         separate_structure.interf_vv_records().len(),
         separate_structure.interferences().extent()
     ));
+    let mut chain = BOPAlgoPaveFiller::new();
+    for x in [0.0, 5.0e-7, 1.0e-6] {
+        chain.add_argument(&compound_vertex(x));
+    }
+    chain.options_mut().set_fuzzy_value(1.0e-6);
+    chain.initialize().unwrap();
+    chain.perform_vv().unwrap();
+    let chain_structure = chain.data_structure().unwrap();
+    actual.push_str(&format!(
+        "\nchain {} {} {}",
+        chain_structure.nb_shapes(),
+        chain_structure.interf_vv_records().len(),
+        chain_structure.shape_sd_items().count()
+    ));
+    for index in 0..chain_structure.interf_vv_records().len() {
+        let record = chain_structure.interf_vv_records().value(index).unwrap();
+        actual.push_str(&format!(
+            "\n{} {} {}",
+            record.index1(),
+            record.index2(),
+            record.index_new()
+        ));
+    }
+    chain
+        .data_structure_mut()
+        .unwrap()
+        .change_shape_info(6)
+        .unwrap()
+        .change_box()
+        .add_point(Point3::new(10.0, 0.0, 0.0));
+    chain.perform_vv().unwrap();
+    let chain_structure = chain.data_structure().unwrap();
+    let merged = Vertex::unchecked(chain_structure.shape(6).unwrap().clone());
+    actual.push_str(&format!(
+        "\nchain-repeat {} {} {} {:.8} {:.8}",
+        chain_structure.nb_shapes(),
+        chain_structure.interf_vv_records().len(),
+        chain_structure.shape_sd_items().count(),
+        BRepTool::pnt(&merged).unwrap().x(),
+        BRepTool::vertex_tolerance(&merged).unwrap()
+    ));
+    let bounds = chain_structure
+        .shape_info(6)
+        .unwrap()
+        .box_bounds()
+        .get()
+        .unwrap();
+    actual.push_str(&format!(
+        "\nchain-box {:.8} {:.8} {:.8} {:.8} {:.8} {:.8}",
+        bounds[0], bounds[1], bounds[2], bounds[3], bounds[4], bounds[5]
+    ));
     assert_eq!(
         actual,
         include_str!("../../../tools/oracle/tkbo_pave_filler_vv.expected").trim()

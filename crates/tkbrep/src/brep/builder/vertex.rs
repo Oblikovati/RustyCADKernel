@@ -110,6 +110,20 @@ impl BRepBuilder {
         Ok(())
     }
 
+    /// Sets the stored point and tolerance directly like `BRep_TVertex::Pnt/Tolerance`;
+    /// `builder.set_vertex_point_and_tolerance(&vertex, point, 1e-7)?`.
+    pub fn set_vertex_point_and_tolerance(
+        &self,
+        vertex: &Vertex,
+        point: Point3,
+        tolerance: f64,
+    ) -> Result<(), Failure> {
+        let tvertex = vertex_tshape(vertex, "BRep_TVertex::Pnt/Tolerance")?;
+        tvertex.set_pnt(point);
+        tvertex.set_tolerance(tolerance);
+        Ok(())
+    }
+
     /// `UpdateVertex(V, Par, E, Tol)`: a FORWARD or REVERSED vertex of the edge sets the
     /// first or last parameter of every parametric curve; another vertex gets a point
     /// representation on each 3D curve and p-curve;

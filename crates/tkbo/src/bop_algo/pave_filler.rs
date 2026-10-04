@@ -85,6 +85,11 @@ impl BOPAlgoPaveFiller {
         self.data_structure.as_ref()
     }
 
+    /// Mutably borrows the initialized DS as native `PDS()` does; `filler.data_structure_mut().unwrap()`.
+    pub fn data_structure_mut(&mut self) -> Option<&mut DataStructure> {
+        self.data_structure.as_mut()
+    }
+
     /// Borrows the geometric context created for broad-phase OBB checks.
     /// `filler.context().is_some()`.
     pub fn context(&self) -> Option<&Context> {

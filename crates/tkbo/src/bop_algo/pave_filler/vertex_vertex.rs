@@ -83,6 +83,7 @@ impl BOPAlgoPaveFiller {
         let mut merged = Vertex::default();
         make_vertex(&shapes, &mut merged)?;
         let representative = update_or_append_vertex(structure, group, &merged)?;
+        update_vertex_bounds(structure, representative)?;
         bind_group_interferences(structure, group, representative);
         Ok(())
     }
@@ -149,7 +150,7 @@ fn update_or_append_vertex(
 ) -> Result<i32, Failure> {
     if let Some(index) = group.iter().find_map(|source| structure.shape_sd(*source)) {
         let existing = Vertex::unchecked(structure.shape(index)?.clone());
-        BRepBuilder::default().update_vertex_point(
+        BRepBuilder::default().set_vertex_point_and_tolerance(
             &existing,
             BRepTool::pnt(merged)?,
             BRepTool::vertex_tolerance(merged)?,
@@ -157,6 +158,16 @@ fn update_or_append_vertex(
         return Ok(index);
     }
     append_merged_vertex(structure, merged)
+}
+
+fn update_vertex_bounds(structure: &mut DataStructure, index: i32) -> Result<(), Failure> {
+    let vertex = Vertex::unchecked(structure.shape(index)?.clone());
+    let point = BRepTool::pnt(&vertex)?;
+    let gap = BRepTool::vertex_tolerance(&vertex)? + precision::confusion();
+    let bounds = structure.change_shape_info(index)?.change_box();
+    bounds.add_point(point);
+    bounds.set_gap(gap);
+    Ok(())
 }
 
 fn append_merged_vertex(structure: &mut DataStructure, vertex: &Vertex) -> Result<i32, Failure> {
