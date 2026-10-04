@@ -100648,9 +100648,9 @@
       "upstream_id": "FSD_CmpFile::Open(const TCollection_AsciiString&,Storage_OpenMode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::open",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::BaseDriver>::open",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::IsGoodFileType(const TCollection_AsciiString&)",
@@ -100664,97 +100664,97 @@
       "upstream_id": "FSD_CmpFile::BeginWriteInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_write_info_section",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::HeaderSections>::begin_write_info_section",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::BeginReadInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_read_info_section",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::HeaderSections>::begin_read_info_section",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::WritePersistentObjectHeader(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::write_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::write_persistent_object_header",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::BeginWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::begin_write_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::BeginWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::begin_write_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::EndWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::end_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::end_write_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::EndWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::end_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::end_write_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::ReadPersistentObjectHeader(int&,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::read_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::read_persistent_object_header",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::BeginReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::begin_read_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::BeginReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::begin_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::begin_read_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::EndReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::end_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::end_read_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::EndReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile::end_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile::<rustycad_tkernel::storage::DataSections>::end_read_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_CmpFile is TextFile<CmpDialect>, sharing the FSD_File members and overriding the dialect ones; ReadExtendedLine keeps the native loop bound on the output length. Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_CmpFile::Destroy()",
@@ -100800,25 +100800,25 @@
       "upstream_id": "FSD_File::Open(const TCollection_AsciiString&,Storage_OpenMode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::open",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::BaseDriver>::open",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::IsEnd()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::is_end",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::BaseDriver>::is_end",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::Tell()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::tell",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::BaseDriver>::tell",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::IsGoodFileType(const TCollection_AsciiString&)",
@@ -100832,537 +100832,537 @@
       "upstream_id": "FSD_File::BeginWriteInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_info_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::begin_write_info_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WriteInfo(int,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const TCollection_AsciiString&,const TCollection_ExtendedString&,const NCollection_Sequence<TCollection_AsciiString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_info",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::write_info",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_info_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::end_write_info_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_info_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::begin_read_info_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadInfo(int&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_ExtendedString&,TCollection_AsciiString&,TCollection_ExtendedString&,NCollection_Sequence<TCollection_AsciiString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_info",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::read_info",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadCompleteInfo(Standard_IStream&,occ::handle<Storage_Data>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_complete_info",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::read_complete_info",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadInfoSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_info_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::end_read_info_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::begin_write_comment_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WriteComment(const NCollection_Sequence<TCollection_ExtendedString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_comment",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::write_comment",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::end_write_comment_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::begin_read_comment_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadComment(NCollection_Sequence<TCollection_ExtendedString>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_comment",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::read_comment",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadCommentSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_comment_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::HeaderSections>::end_read_comment_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_type_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_write_type_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::SetTypeSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::set_type_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::set_type_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WriteTypeInformations(int,const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_type_informations",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::write_type_informations",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_type_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_write_type_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_type_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_read_type_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::TypeSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::type_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::type_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadTypeInformations(int&,TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_type_informations",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::read_type_informations",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadTypeSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_type_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_read_type_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_root_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_write_root_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::SetRootSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::set_root_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::set_root_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WriteRoot(const TCollection_AsciiString&,int,const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_root",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::write_root",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_root_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_write_root_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_root_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_read_root_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::RootSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::root_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::root_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadRoot(TCollection_AsciiString&,int&,TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_root",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::read_root",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadRootSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_root_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_read_root_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_write_ref_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::SetRefSectionSize(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::set_ref_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::set_ref_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WriteReferenceType(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_reference_type",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::write_reference_type",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_write_ref_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::begin_read_ref_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::RefSectionSize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::ref_section_size",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::ref_section_size",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadReferenceType(int&,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_reference_type",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::read_reference_type",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadRefSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_ref_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::TableSections>::end_read_ref_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_data_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_write_data_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::WritePersistentObjectHeader(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::write_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::write_persistent_object_header",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_write_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_write_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_write_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWritePersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_write_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndWriteDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_write_data_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_write_data_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_data_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_read_data_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::ReadPersistentObjectHeader(int&,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::read_persistent_object_header",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::read_persistent_object_header",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_read_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::BeginReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::begin_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::begin_read_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_read_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadPersistentObjectData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_persistent_object_data",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_read_persistent_object_data",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::EndReadDataSection()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::end_read_data_section",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DataSections>::end_read_data_section",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::SkipObject()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::skip_object",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::BaseDriver>::skip_object",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutReference(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_reference",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_reference",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutCharacter(char)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_character",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_character",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutExtCharacter(char16_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_ext_character",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_ext_character",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutInteger(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_integer",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_integer",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutBoolean(bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_boolean",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_boolean",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutReal(double)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_real",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_real",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::PutShortReal(float)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::put_short_real",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::put_short_real",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetReference(int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_reference",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_reference",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetCharacter(char&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_character",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_character",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetExtCharacter(char16_t&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_ext_character",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_ext_character",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetInteger(int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_integer",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_integer",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetBoolean(bool&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_boolean",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_boolean",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetReal(double&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_real",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_real",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::GetShortReal(float&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::get_short_real",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::DriverPrimitives>::get_short_real",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::Close()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File::close",
+      "rust_item": "rustycad_tkernel::fsd::File::<rustycad_tkernel::storage::BaseDriver>::close",
       "status": "implemented",
-      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py. Rust target uses the unique public TKernel trait-qualified alias specialization proven by rustdoc for its exact File/CmpFile concrete type."
     },
     {
       "upstream_id": "FSD_File::Destroy()",

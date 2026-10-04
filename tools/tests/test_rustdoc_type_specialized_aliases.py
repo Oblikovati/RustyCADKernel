@@ -1,0 +1,149 @@
+"""Resolve exact concrete type arguments through public aliases."""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import json
+import unittest
+from pathlib import Path
+
+from api_inventory_json import JSONValue
+from normalize_rustdoc_inventory import make_reachable_inventory
+from rustdoc_trait_paths import resolve_public_trait_paths
+
+FIXTURE_ROOT = Path(__file__).parent / "fixtures/rustdoc-type-specialized-alias"
+CRATE = "rustdoc_type_specialized_alias"
+
+
+class TypeSpecializedAliasTests(unittest.TestCase):
+    def test_alias_members_preserve_concrete_and_trait_identity(self) -> None:
+        inventory = normalized_fixture()
+        paths = declaration_paths(inventory)
+        assert_alias_members(self, inventory, paths)
+
+    def test_unsatisfied_extra_bound_is_withheld(self) -> None:
+        inventory = normalized_fixture()
+        paths = declaration_paths(inventory)
+        self.assertNotIn(f"{CRATE}::CmpFile::fast_only", paths)
+        self.assertIn(
+            f"generic-type-alias:{CRATE}::CmpFile:impl:67:concrete-type-bound-unproven",
+            inventory["unresolved_links"],
+        )
+
+    def test_unsupported_where_predicate_is_explicit(self) -> None:
+        inventory = normalized_fixture()
+        self.assertNotIn(f"{CRATE}::File::where_bound", declaration_paths(inventory))
+        self.assertIn(
+            f"generic-type-alias:{CRATE}::File:impl:69:unsupported-where-predicates",
+            inventory["unresolved_links"],
+        )
+
+    def test_alias_without_resolved_concrete_argument_is_not_expanded(self) -> None:
+        document = fixture_document()
+        alias = item_named(document, "File")
+        alias["inner"]["type_alias"]["type"]["resolved_path"]["args"] = None
+        inventory = normalize_document(document)
+        self.assertNotIn(f"{CRATE}::File::common", declaration_paths(inventory))
+
+    def test_generic_self_owner_must_match_target_type(self) -> None:
+        document = fixture_document()
+        common_impl = impl_named_member(document, "common")
+        common_impl["for"]["resolved_path"]["id"] = "0"
+        inventory = normalize_document(document)
+        paths = declaration_paths(inventory)
+        self.assertNotIn(f"{CRATE}::File::common", paths)
+        self.assertNotIn(f"{CRATE}::CmpFile::common", paths)
+
+
+def assert_alias_members(
+    test: unittest.TestCase, inventory: dict[str, JSONValue], paths: set[str]
+) -> None:
+    file_common = f"{CRATE}::File::common"
+    cmp_common = f"{CRATE}::CmpFile::common"
+    file_open = f"{CRATE}::File::<{CRATE}::Open>::open"
+    cmp_open = f"{CRATE}::CmpFile::<{CRATE}::Open>::open"
+    test.assertTrue({file_common, cmp_common, file_open, cmp_open} <= paths)
+    test.assertIn(f"{CRATE}::File::fast_only", paths)
+    test.assertNotIn(f"{CRATE}::CmpFile::fast_only", paths)
+    assert_specialization(test, inventory, file_common, "private::Text")
+    assert_specialization(test, inventory, cmp_common, "private::Compatible")
+
+
+def assert_specialization(
+    test: unittest.TestCase, inventory: dict[str, JSONValue], path: str, concrete: str
+) -> None:
+    row = declaration_by_path(inventory, path)
+    specialization = row.get("alias_specialization")
+    context = row.get("impl_context")
+    test.assertIsInstance(specialization, dict)
+    test.assertEqual(specialization.get("concrete_type_path"), f"{CRATE}::{concrete}")
+    test.assertEqual(specialization.get("impl_type_parameter"), "D")
+    owner = context["for"]["resolved_path"]
+    test.assertEqual(owner["resolved_item_path"], f"{CRATE}::private::Generic")
+    test.assertEqual(context.get("trait"), None)
+    test.assertEqual(row.get("source_file"), "src/lib.rs")
+    test.assertEqual(row.get("source_sha256"), source_hash())
+
+
+def source_hash() -> str:
+    data = (FIXTURE_ROOT / "src/lib.rs").read_bytes()
+    digest = hashlib.sha256(data)
+    return digest.hexdigest()
+
+
+def normalized_fixture() -> dict[str, JSONValue]:
+    inventory = normalize_document(fixture_document())
+    resolve_public_trait_paths([inventory])
+    return inventory
+
+
+def normalize_document(document: dict[str, JSONValue]) -> dict[str, JSONValue]:
+    if document.get("format_version") != 61:
+        raise AssertionError("type alias fixture must use rustdoc JSON format 61")
+    inventory = make_reachable_inventory(document, FIXTURE_ROOT, CRATE)
+    return inventory
+
+
+def fixture_document() -> dict[str, JSONValue]:
+    path = FIXTURE_ROOT / "rustdoc-61.json"
+    document = json.loads(path.read_text(encoding="utf-8"))
+    if document.get("format_version") != 61:
+        raise AssertionError("type alias fixture must use rustdoc JSON format 61")
+    return copy.deepcopy(document)
+
+
+def item_named(document: dict[str, JSONValue], name: str) -> dict[str, JSONValue]:
+    items = document["index"]
+    for item in items.values():
+        if isinstance(item, dict) and item.get("name") == name:
+            return item
+    raise AssertionError(f"fixture has no item named {name!r}")
+
+
+def impl_named_member(document: dict[str, JSONValue], name: str) -> dict[str, JSONValue]:
+    items = document["index"]
+    for item in items.values():
+        body = item.get("inner", {}).get("impl") if isinstance(item, dict) else None
+        members = body.get("items", []) if isinstance(body, dict) else []
+        if any(items[str(member)].get("name") == name for member in members):
+            return body
+    raise AssertionError(f"no compiler fixture impl contains {name!r}")
+
+
+def declaration_paths(inventory: dict[str, JSONValue]) -> set[str]:
+    rows = inventory.get("declarations")
+    if not isinstance(rows, list):
+        return set()
+    return {row["path"] for row in rows if isinstance(row, dict) and isinstance(row.get("path"), str)}
+
+
+def declaration_by_path(
+    inventory: dict[str, JSONValue], path: str
+) -> dict[str, JSONValue]:
+    rows = inventory.get("declarations")
+    if isinstance(rows, list):
+        for row in rows:
+            if isinstance(row, dict) and row.get("path") == path:
+                return row
+    raise AssertionError(f"declaration {path!r} is absent from normalized fixture")
