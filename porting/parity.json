@@ -12082,7 +12082,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": "rustycad_tkmath::bsplslib::Cache",
       "status": "excluded",
-      "notes": "BSplSLib_Cache derives from Standard_Transient only so that adaptors can share it by handle; the Rust Cache is a plain value owned by its user (Geom2dAdaptorCurve keeps it in its locked state), so there is no runtime type descriptor to register."
+      "notes": "Macro spelling is not a callable; runtime descriptor and Standard_Transient projection now provided by impl_transient! on bsplslib::Cache. Native/Rust handle identity evidence: tools/oracle/tkmath_bsplslib_cache_rtti.md. Existing mutable SharedBSplineSurfaceCache wrapper remains separate; complete cache handle/mutation parity is not claimed."
     },
     {
       "upstream_id": "BSplSLib_EvaluatorFunction::Evaluate(int,double,double,double&,int&) const",
@@ -28967,7 +28967,7 @@
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+      "notes": "Macro spelling is not a callable; runtime descriptor and Standard_Transient projection now provided by impl_transient! on bsplslib::Cache. Native/Rust handle identity evidence: tools/oracle/tkmath_bsplslib_cache_rtti.md. Existing mutable SharedBSplineSurfaceCache wrapper remains separate; complete cache handle/mutation parity is not claimed."
     },
     {
       "upstream_id": "BSplSLib_EvaluatorFunction()",
@@ -230027,6 +230027,22 @@
       "rust_item": "rustycad_tkmath::bsplclib::Cache::derivatives_local_into",
       "status": "partial",
       "notes": "Protected caller-buffer operation exposed as a checked Rust slice. Preserves spare elements and writes packed coordinate derivative rows in original curve-parameter units. Native probe covers 2D polynomial degree-below-order and rational 3D non-unit span, both global/local entrypoints; Rust rational comparison tolerance 1e-14. Current explicit derivative-order range 0..=3; higher requests and complete protected-surface parity remain unproven. See tools/oracle/tkmath_cache_derivatives.md. Supplemental tests only."
+    },
+    {
+      "upstream_id": "math_Matrix::SetLowerRow(int) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
+      "rust_item": "rustycad_tkmath::math::Matrix::set_lower_row",
+      "status": "implemented",
+      "notes": "Protected subclass reindex hook exposed as a Rust method. Reassigns declared bounds without moving or altering positional cells. Derived-class native probe and supplemental Rust regressions in tools/oracle/tkmath_matrix_reindex_probe.cxx and crates/tkmath/tests/math_matrix_reindex.rs; no added legacy declaration."
+    },
+    {
+      "upstream_id": "math_Matrix::SetLowerCol(int) noexcept",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
+      "rust_item": "rustycad_tkmath::math::Matrix::set_lower_col",
+      "status": "implemented",
+      "notes": "Protected subclass reindex hook exposed as a Rust method. Reassigns declared bounds without moving or altering positional cells. Derived-class native probe and supplemental Rust regressions in tools/oracle/tkmath_matrix_reindex_probe.cxx and crates/tkmath/tests/math_matrix_reindex.rs; no added legacy declaration."
     }
   ],
   "tests": [
