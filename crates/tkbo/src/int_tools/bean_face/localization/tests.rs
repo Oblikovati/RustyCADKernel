@@ -16,6 +16,8 @@ mod cache_state_tests;
 mod periodic_origin_tests;
 #[path = "public_perform_tests.rs"]
 mod public_perform_tests;
+#[path = "surface_family_tests.rs"]
+mod surface_family_tests;
 
 #[test]
 fn localized_flat_bezier_matches_native_recursive_ranges() {
