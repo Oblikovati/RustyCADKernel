@@ -225590,7 +225590,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::perform",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Type(const TopoDS_Edge &) const",
@@ -225599,7 +225599,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::type_of",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Ancestors(const TopoDS_Shape &) const",
@@ -225608,7 +225608,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::ancestors",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::TangentEdges(const TopoDS_Edge &, const TopoDS_Vertex &, NCollection_List<TopoDS_Shape> &) const",
@@ -225617,7 +225617,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::tangent_edges",
       "status": "partial",
-      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Uniform-offset initial analysis. Native box/reversed-box/single-face/free-edge/empty fixtures match incidence, intervals, vertex/face concavity selection and tangent-edge counts. Paired Bezier slopes 0/1/3 match Tangential/Concave/Mixed, preserving the native C0Value distance threshold; differing face offsets, cancellation, generated-face treatment and graph/history queries incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Descendants(const TopoDS_Shape &, const bool) const",
@@ -225626,7 +225626,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::descendants",
       "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Generated(const TopoDS_Shape &) const",
@@ -225635,7 +225635,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::generated",
       "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::EdgeReplacement(const TopoDS_Face &, const TopoDS_Edge &) const",
@@ -225644,7 +225644,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::edge_replacement",
       "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity) const",
@@ -225653,7 +225653,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode",
       "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BRepOffset_Analyse::Explode(NCollection_List<TopoDS_Shape> &, const ChFiDS_TypeOfConcavity, const ChFiDS_TypeOfConcavity) const",
@@ -225662,7 +225662,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::explode_two_types",
       "status": "partial",
-      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 12 configurations plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
+      "notes": "Native differential fixtures compare six single-type and 36 paired-type groupings across eight shapes, including face identity and traversal order; both descendants update flags and null/unchanged history match the uniform-offset scope. Different-offset artificial faces, cancellation and broader geometry domains remain incomplete. No legacy completion claim. Differing-offset tangent-face construction now translated and compared in 20 configurations including side-face ancestry/orientation plus repeat/Clear lifecycle; see tools/oracle/tkoffset_analyse_tangent.md for remaining scope."
     },
     {
       "upstream_id": "BOPTools_ConnexityBlock",
@@ -226319,7 +226319,7 @@
       "source_sha256": "6c82d49d07e1228ee877ce1aaa20b516bc0d5e0bd449d55ebb379c1f7e5761bb",
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetAnalyse::set_face_offset_map",
       "status": "partial",
-      "notes": "Copied native per-face offsets; 12 configurations and repeat/Clear lifecycle compare tangent-face insertion/history/classification counts. Additional side-face ancestry, curved/location/exception cases remain; tools/oracle/tkoffset_analyse_tangent.md. No legacy completion claim."
+      "notes": "Copied native per-face offsets; 20 configurations and repeat/Clear lifecycle compare tangent-face insertion/history/classification counts. More complex side-face ancestry, curved/location/exception cases remain; tools/oracle/tkoffset_analyse_tangent.md. No legacy completion claim."
     }
   ],
   "tests": [

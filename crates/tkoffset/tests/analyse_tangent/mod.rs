@@ -10,7 +10,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkoffset::brep_offset::BRepOffsetAnalyse;
 #[test]
 fn native_differing_offset_tangent_faces_match() {
-    let actual: Vec<String> = (0..3)
+    let actual: Vec<String> = (0..5)
         .flat_map(|kind| (0..4).map(move |mode| observe(kind, mode)))
         .collect();
     assert_eq!(
@@ -22,7 +22,7 @@ fn observe(kind: usize, mode: usize) -> String {
     let shape = if kind == 0 {
         spline_fixture::pair(0.)
     } else {
-        rectangles::pair(kind == 2)
+        rectangles::pair(kind == 2 || kind == 4, kind >= 3)
     };
     let faces: Vec<Shape> = Explorer::new(&shape, ShapeEnum::Face, ShapeEnum::Shape)
         .unwrap()
@@ -33,9 +33,13 @@ fn observe(kind: usize, mode: usize) -> String {
     analysis.set_offset_value(1.);
     analysis.set_face_offset_map(&offsets);
     analysis.perform(&shape, 0.01).unwrap();
-    let edge = Explorer::new(&shape, ShapeEnum::Edge, ShapeEnum::Shape)
+    let edge = Explorer::new(&faces[0], ShapeEnum::Edge, ShapeEnum::Shape)
         .unwrap()
-        .find(|edge| analysis.ancestors(edge).unwrap().len() == 2)
+        .find(|edge| {
+            Explorer::new(&faces[1], ShapeEnum::Edge, ShapeEnum::Shape)
+                .unwrap()
+                .any(|other| other.is_same(edge))
+        })
         .unwrap();
     let edge = topods::edge(&edge).unwrap();
     let mut row = vec![
@@ -47,7 +51,7 @@ fn observe(kind: usize, mode: usize) -> String {
         analysis.ancestors(&edge).unwrap().len(),
         analysis.type_of(&edge).unwrap()[0].get_type().unwrap() as usize,
     ];
-    for face in &faces {
+    for face in &faces[..2] {
         row.push(usize::from(
             analysis
                 .edge_replacement(&topods::face(face).unwrap(), &edge)
@@ -59,6 +63,19 @@ fn observe(kind: usize, mode: usize) -> String {
             usize::from(analysis.has_generated(&vertex)),
             analysis.ancestors(&vertex).unwrap().len(),
         ]);
+        if analysis.has_generated(&vertex) {
+            let generated = analysis.generated(&vertex);
+            row.extend([
+                analysis
+                    .ancestors(&vertex)
+                    .unwrap()
+                    .last()
+                    .unwrap()
+                    .orientation() as usize,
+                generated.orientation() as usize,
+                analysis.ancestors(&generated).unwrap().len(),
+            ]);
+        }
     }
     for face in analysis.new_faces() {
         append_face(&mut row, &analysis, face);
