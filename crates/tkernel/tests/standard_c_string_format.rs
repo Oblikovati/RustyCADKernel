@@ -13,6 +13,8 @@ fn standard_c_string_sprintf_matches_native_fixture() {
     assert_buffer_row("sprintf_c_text", format_c_text());
     assert_buffer_row("sprintf_unsigned", format_unsigned());
     assert_buffer_row("sprintf_uppercase", format_uppercase());
+    assert_buffer_row("sprintf_star", format_star_width_precision());
+    assert_buffer_row("sprintf_char", format_char());
     assert_buffer_row("vsprintf", format_variadic_slice());
 }
 
@@ -29,6 +31,14 @@ fn standard_c_string_formatter_rejects_unsupported_and_mismatched_arguments() {
     assert_format_error(b"%u", &[FormatArg::Int(3)]);
     assert_format_error(b"%5%", &[]);
     assert_format_error(b"%l%", &[]);
+    assert_format_error(b"%*d", &[FormatArg::UInt(3), FormatArg::Int(4)]);
+    assert_format_error(
+        b"%.*s",
+        &[FormatArg::Text(b"bad"), FormatArg::Text(b"value")],
+    );
+    assert_format_error(b"%.1c", &[FormatArg::Int(65)]);
+    assert_format_error(b"%*d", &[FormatArg::Int(4)]);
+    assert_format_error(b"%+c", &[FormatArg::Int(65)]);
 }
 
 fn format_integer() -> (Vec<u8>, usize) {
@@ -76,6 +86,28 @@ fn format_uppercase() -> (Vec<u8>, usize) {
             FormatArg::Real(0.0000125),
             FormatArg::Real(12345.67),
         ],
+    )
+}
+
+fn format_star_width_precision() -> (Vec<u8>, usize) {
+    format_buffer(
+        b"%*.*f|%*d|%.*s",
+        &[
+            FormatArg::Int(-8),
+            FormatArg::Int(2),
+            FormatArg::Real(1.25),
+            FormatArg::Int(5),
+            FormatArg::Int(-7),
+            FormatArg::Int(-2),
+            FormatArg::Text(b"native"),
+        ],
+    )
+}
+
+fn format_char() -> (Vec<u8>, usize) {
+    format_buffer(
+        b"%cX%3c|%-4c",
+        &[FormatArg::Int(0), FormatArg::Int(65), FormatArg::Int(-1)],
     )
 }
 

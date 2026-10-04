@@ -80,10 +80,19 @@ static void format_writer_cases(char* theBuffer)
   capture_fprintf(theBuffer);
 }
 
+static void format_star_char_cases(char* theBuffer)
+{
+  const int aStarCount = Sprintf(theBuffer, "%*.*f|%*d|%.*s", -8, 2, 1.25, 5, -7, -2, "native");
+  record("sprintf_star", aStarCount, theBuffer);
+  const int aCharCount = Sprintf(theBuffer, "%cX%3c|%-4c", 0, 65, -1);
+  record("sprintf_char", aCharCount, theBuffer);
+}
+
 int main()
 {
   char aBuffer[256] = {};
   format_buffer_cases(aBuffer);
+  format_star_char_cases(aBuffer);
   format_writer_cases(aBuffer);
   return 0;
 }

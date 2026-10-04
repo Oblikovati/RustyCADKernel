@@ -1,17 +1,14 @@
-//! The subset of C `sprintf` used by `Message_Msg::Arg`, `Message::FillTime` and the OSD
-//! timing classes (`OSD::RealToCString`, `OSD_Timer`/`OSD_Chronometer` stream output).
+//! Shared C-style formatting engine used by Message helpers and safe `Standard_CString` wrappers.
 //!
-//! Message formats are user data (`%-10.3f`, `%05d`, `%s`), passed verbatim to `Sprintf`,
-//! so their output must follow glibc: flags `-+ #0`, width, precision, the `h`/`hh`/`l`/`ll`
-//! length modifiers and the conversions `d i o u x X f F e E g G s`. Rust's float formatting
-//! is exact (like glibc's), so only the C layout rules are implemented here.
+//! It implements literal and dynamic width/precision, `c_format` numeric/text conversions,
+//! and glibc layout rules. The public wrappers validate a narrower defined subset before render.
 mod float;
 mod integer;
 
 /// One typed argument for the supported C `printf` conversions.
 #[derive(Clone, Copy, Debug)]
 pub enum FormatArg<'a> {
-    /// An `int` argument.
+    /// An `int` conversion, dynamic width/precision, or `%c` argument.
     Int(i32),
     /// An `unsigned int` argument.
     UInt(u32),
@@ -39,7 +36,9 @@ pub(crate) struct Spec {
     pub(crate) alternate: bool,
     pub(crate) zero: bool,
     pub(crate) width: usize,
+    pub(crate) dynamic_width: bool,
     pub(crate) precision: Option<usize>,
+    pub(crate) dynamic_precision: bool,
     /// Length modifier: -2 `hh`, -1 `h`, 0 none, 1 `l`, 2 `ll`.
     pub(crate) length: i8,
     pub(crate) conversion: u8,
@@ -58,6 +57,7 @@ pub(crate) fn c_sprintf(format: &[u8], args: &[CArg<'_>]) -> Vec<u8> {
         }
         let (spec, end) = parse_spec(format, index + 1);
         index = end;
+        let spec = resolve_dimensions(spec, &mut arguments);
         render(&spec, &mut arguments, &format[..end], &mut output);
     }
     output
@@ -82,8 +82,7 @@ fn validate_format(format: &[u8], args: &[FormatArg<'_>]) -> Result<(), FormatEr
         }
         let offset = index;
         let (spec, end) = parse_spec(format, index + 1);
-        validate_spec(spec, args, argument_index, offset)?;
-        argument_index += usize::from(spec.conversion != b'%');
+        argument_index = validate_spec(spec, args, argument_index, offset)?;
         index = end;
     }
     Ok(())
@@ -94,15 +93,56 @@ fn validate_spec(
     args: &[FormatArg<'_>],
     argument_index: usize,
     offset: usize,
-) -> Result<(), FormatError> {
+) -> Result<usize, FormatError> {
+    let argument_index = validate_dynamic_arguments(spec, args, argument_index, offset)?;
     let expected: &'static str = expected_argument(spec, offset)?;
     if spec.conversion == b'%' {
         if has_percent_modifiers(spec) {
             return Err(format_error(spec, offset, "an unmodified %% directive"));
         }
+        return Ok(argument_index);
+    }
+    validate_argument(spec, args.get(argument_index), expected, offset)?;
+    Ok(argument_index + 1)
+}
+
+fn validate_dynamic_arguments(
+    spec: Spec,
+    args: &[FormatArg<'_>],
+    mut argument_index: usize,
+    offset: usize,
+) -> Result<usize, FormatError> {
+    if spec.dynamic_width {
+        validate_star_argument(
+            spec,
+            args.get(argument_index),
+            "an Int for dynamic width",
+            offset,
+        )?;
+        argument_index += 1;
+    }
+    if spec.dynamic_precision {
+        validate_star_argument(
+            spec,
+            args.get(argument_index),
+            "an Int for dynamic precision",
+            offset,
+        )?;
+        argument_index += 1;
+    }
+    Ok(argument_index)
+}
+
+fn validate_star_argument(
+    spec: Spec,
+    argument: Option<&FormatArg<'_>>,
+    expected: &'static str,
+    offset: usize,
+) -> Result<(), FormatError> {
+    if matches!(argument, Some(FormatArg::Int(_))) {
         return Ok(());
     }
-    validate_argument(spec, args.get(argument_index), expected, offset)
+    Err(format_error(spec, offset, expected))
 }
 
 fn validate_argument(
@@ -127,7 +167,9 @@ fn has_percent_modifiers(spec: Spec) -> bool {
         || spec.alternate
         || spec.zero
         || spec.width != 0
+        || spec.dynamic_width
         || spec.precision.is_some()
+        || spec.dynamic_precision
         || spec.length != 0
 }
 
@@ -136,7 +178,7 @@ fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatEr
         format_error(
             spec,
             offset,
-            "a supported %d/%i/%o/%u/%x/%X/%f/%e/%g/%s directive",
+            "a supported %c/%d/%i/%o/%u/%x/%X/%f/%e/%g/%s directive",
         )
     })
 }
@@ -155,8 +197,19 @@ fn supported_argument_kind(spec: Spec) -> Option<&'static str> {
             Some("a Real argument")
         }
         b's' if spec.length == 0 => Some("a Text argument"),
+        b'c' if character_format_is_supported(spec) => Some("an Int argument"),
         _ => None,
     }
+}
+
+fn character_format_is_supported(spec: Spec) -> bool {
+    spec.length == 0
+        && spec.precision.is_none()
+        && !spec.dynamic_precision
+        && !spec.plus
+        && !spec.space
+        && !spec.alternate
+        && !spec.zero
 }
 
 fn matches_argument(argument: &FormatArg<'_>, spec: Spec) -> bool {
@@ -168,6 +221,7 @@ fn matches_argument(argument: &FormatArg<'_>, spec: Spec) -> bool {
         b'o' | b'u' | b'x' | b'X' => matches!(argument, FormatArg::Int(_)),
         b'f' | b'F' | b'e' | b'E' | b'g' | b'G' => matches!(argument, FormatArg::Real(_)),
         b's' => matches!(argument, FormatArg::Text(_)),
+        b'c' => matches!(argument, FormatArg::Int(_)),
         _ => false,
     }
 }
@@ -191,6 +245,7 @@ fn render(
         b'd' | b'i' | b'o' | b'u' | b'x' | b'X' => integer::format(spec, arguments.next()),
         b'f' | b'F' | b'e' | b'E' | b'g' | b'G' => float::format(spec, arguments.next()),
         b's' => text(spec, arguments.next()),
+        b'c' => character(spec, arguments.next()),
         // An invalid conversion is undefined behavior in C; glibc echoes the directive.
         _ => consumed[consumed.iter().rposition(|&byte| byte == b'%').unwrap_or(0)..].to_vec(),
     };
@@ -210,15 +265,71 @@ fn parse_spec(format: &[u8], mut index: usize) -> (Spec, usize) {
         }
         index += 1;
     }
-    (spec.width, index) = digits(format, index);
+    index = parse_width(format, index, &mut spec);
     if format.get(index) == Some(&b'.') {
-        let (precision, end) = digits(format, index + 1);
-        spec.precision = Some(precision);
-        index = end;
+        index = parse_precision(format, index + 1, &mut spec);
     }
     (spec.length, index) = length_modifier(format, index);
     spec.conversion = format.get(index).copied().unwrap_or(0);
     (spec, (index + 1).min(format.len()))
+}
+
+fn parse_width(format: &[u8], index: usize, spec: &mut Spec) -> usize {
+    if format.get(index) == Some(&b'*') {
+        spec.dynamic_width = true;
+        return index + 1;
+    }
+    let (width, end) = digits(format, index);
+    spec.width = width;
+    end
+}
+
+fn parse_precision(format: &[u8], index: usize, spec: &mut Spec) -> usize {
+    if format.get(index) == Some(&b'*') {
+        spec.dynamic_precision = true;
+        return index + 1;
+    }
+    let (precision, end) = digits(format, index);
+    spec.precision = Some(precision);
+    end
+}
+
+fn resolve_dimensions(mut spec: Spec, arguments: &mut std::slice::Iter<'_, FormatArg<'_>>) -> Spec {
+    if spec.dynamic_width {
+        spec = apply_dynamic_width(spec, next_int(arguments));
+    }
+    if spec.dynamic_precision {
+        spec = apply_dynamic_precision(spec, next_int(arguments));
+    }
+    spec
+}
+
+fn next_int(arguments: &mut std::slice::Iter<'_, FormatArg<'_>>) -> i32 {
+    match arguments.next() {
+        Some(FormatArg::Int(value)) => *value,
+        _ => 0,
+    }
+}
+
+fn apply_dynamic_width(mut spec: Spec, width: i32) -> Spec {
+    spec.dynamic_width = false;
+    spec.width = width.unsigned_abs() as usize;
+    spec.left |= width < 0;
+    spec
+}
+
+fn apply_dynamic_precision(mut spec: Spec, precision: i32) -> Spec {
+    spec.dynamic_precision = false;
+    spec.precision = (precision >= 0).then_some(precision as usize);
+    spec
+}
+
+fn character(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
+    let byte = match argument {
+        Some(CArg::Int(value)) => *value as u8,
+        _ => 0,
+    };
+    pad(spec, Vec::new(), vec![byte], false)
 }
 
 fn digits(format: &[u8], mut index: usize) -> (usize, usize) {
