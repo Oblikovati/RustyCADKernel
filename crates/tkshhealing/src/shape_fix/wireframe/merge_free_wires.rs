@@ -44,22 +44,47 @@ struct CandidateEdges {
     after: Edge,
 }
 
+pub(super) struct MergePolicy {
+    faces: Vec<Face>,
+    angle_limit: Option<f64>,
+    drop_mode: bool,
+}
+
+impl MergePolicy {
+    pub(super) fn free(angle_limit: Option<f64>, drop_mode: bool) -> Self {
+        Self {
+            faces: Vec::new(),
+            angle_limit,
+            drop_mode,
+        }
+    }
+
+    pub(super) fn face(face: &Face, angle_limit: Option<f64>) -> Self {
+        Self {
+            faces: vec![face.clone()],
+            angle_limit,
+            drop_mode: false,
+        }
+    }
+}
+
 pub(super) fn merge_small_edges(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
     multiple: &mut MapOfShape,
     angle_limit: Option<f64>,
+    drop_mode: bool,
 ) -> Result<bool, Failure> {
     if !multiple.is_empty() {
         return Err(unported_small_edge_merge());
     }
-    merge_free_wire_candidates(fixer, small, angle_limit)
+    merge_free_wire_candidates(fixer, small, &MergePolicy::free(angle_limit, drop_mode))
 }
 
 fn merge_free_wire_candidates(
     fixer: &ShapeFixWireframe,
     small: &mut MapOfShape,
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<bool, Failure> {
     let context = fixer.context();
     let mut changed = false;
@@ -69,7 +94,7 @@ fn merge_free_wire_candidates(
         rustycad_tkg3d::top_abs::ShapeEnum::Face,
     )? {
         let wire = topods::wire(&source)?;
-        changed |= merge_one_free_wire(fixer, &wire, &context, small, angle_limit)?;
+        changed |= merge_one_free_wire(fixer, &wire, &context, small, policy)?;
     }
     if !changed {
         return Ok(false);
@@ -82,7 +107,7 @@ fn merge_one_free_wire(
     source: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<bool, Failure> {
     let applied = ReShape::apply(
         &**context,
@@ -90,7 +115,7 @@ fn merge_one_free_wire(
         rustycad_tkg3d::top_abs::ShapeEnum::Shape,
     )?;
     let wire = topods::wire(&applied)?;
-    merge_wire_with_faces(fixer, source, &wire, context, small, &[], angle_limit)
+    merge_wire_with_faces(fixer, source, &wire, context, small, policy)
 }
 
 pub(super) fn merge_wire_with_faces(
@@ -99,12 +124,11 @@ pub(super) fn merge_wire_with_faces(
     wire: &Wire,
     context: &Handle<ShapeBuildReShape>,
     small: &mut MapOfShape,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<bool, Failure> {
     let tool = prepared_wire_fixer(wire, context)?;
     let wire_data = tool.wire_data()?;
-    merge_wire_data(fixer, &tool, source, &wire_data, small, faces, angle_limit)
+    merge_wire_data(fixer, &tool, source, &wire_data, small, policy)
 }
 
 fn prepared_wire_fixer(
@@ -124,26 +148,58 @@ fn merge_wire_data(
     source: &Wire,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<bool, Failure> {
-    let changed = merge_wire_candidates(fixer, wire_data, small, faces, angle_limit)?;
-    publish_changed_wire(fixer, wire_fixer, source, wire_data, changed)?;
-    Ok(changed)
+    let changed = merge_wire_candidates(fixer, wire_data, small, policy)?;
+    if changed {
+        publish_changed_wire(fixer, wire_fixer, source, wire_data, true)?;
+        return Ok(true);
+    }
+    drop_single_small_edge(fixer, source, wire_data, small, policy.drop_mode)
+}
+
+fn drop_single_small_edge(
+    fixer: &ShapeFixWireframe,
+    source: &Wire,
+    wire_data: &Handle<ShapeExtendWireData>,
+    small: &mut MapOfShape,
+    drop_mode: bool,
+) -> Result<bool, Failure> {
+    if !drop_mode || wire_data.nb_edges() != 1 {
+        return Ok(false);
+    }
+    let edge = wire_data.edge(1)?;
+    if !small.contains(&edge.clone().into_shape()) {
+        return Ok(false);
+    }
+    remove_dropped_wire_edge(fixer, source, &edge, small)?;
+    Ok(true)
+}
+
+fn remove_dropped_wire_edge(
+    fixer: &ShapeFixWireframe,
+    source: &Wire,
+    edge: &Edge,
+    small: &mut MapOfShape,
+) -> Result<(), Failure> {
+    let context = fixer.context();
+    ReShape::remove(&*context, &edge.clone().into_shape())?;
+    ReShape::remove(&*context, &source.clone().into_shape())?;
+    small.remove(&edge.clone().into_shape());
+    fixer.state.write().small |= ShapeExtend::encode_status(ShapeExtendStatus::Done2);
+    Ok(())
 }
 
 fn merge_wire_candidates(
     fixer: &ShapeFixWireframe,
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<bool, Failure> {
     let mut index = 1;
     let mut changed = false;
     while index <= wire_data.nb_edges() && wire_data.nb_edges() > 1 {
-        let merged_index =
-            merge_small_at_index(fixer, wire_data, small, index, faces, angle_limit)?;
+        let merged_index = merge_small_at_index(fixer, wire_data, small, index, policy)?;
         index = advance_merge_index(index, merged_index, &mut changed);
     }
     Ok(changed)
@@ -181,13 +237,12 @@ fn merge_small_at_index(
     wire_data: &Handle<ShapeExtendWireData>,
     small: &mut MapOfShape,
     index: i32,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<Option<i32>, Failure> {
     let count = wire_data.nb_edges();
     let previous = if index == 1 { count } else { index - 1 };
     let next = if index == count { 1 } else { index + 1 };
-    let pair = candidate_pair(wire_data, small, index, previous, next, faces, angle_limit)?;
+    let pair = candidate_pair(wire_data, small, index, previous, next, policy)?;
     let Some(pair) = pair else {
         return Ok(None);
     };
@@ -200,8 +255,7 @@ fn candidate_pair(
     index: i32,
     previous: i32,
     next: i32,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<Option<CandidatePair>, Failure> {
     let Some(edges) = candidate_edges(wire_data, small, index, previous, next)? else {
         return Ok(None);
@@ -211,17 +265,16 @@ fn candidate_pair(
         previous,
         next,
     };
-    limited_candidate_pair(edges, indexes, faces, angle_limit)
+    limited_candidate_pair(edges, indexes, policy)
 }
 
 fn limited_candidate_pair(
     edges: CandidateEdges,
     indexes: PairIndexes,
-    faces: &[Face],
-    angle_limit: Option<f64>,
+    policy: &MergePolicy,
 ) -> Result<Option<CandidatePair>, Failure> {
-    let pair = select_candidate_pair(edges, indexes, faces)?;
-    if exceeds_pair_angle_limit(&pair, angle_limit) {
+    let pair = select_candidate_pair(edges, indexes, &policy.faces)?;
+    if exceeds_pair_angle_limit(&pair, policy.angle_limit) {
         return Ok(None);
     }
     Ok(Some(pair))
