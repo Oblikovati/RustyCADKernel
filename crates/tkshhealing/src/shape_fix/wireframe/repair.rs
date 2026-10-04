@@ -121,21 +121,31 @@ impl ShapeFixWireframe {
         limit_angle: f64,
     ) -> Result<bool, Failure> {
         let drop_mode = mode_drop || self.mode_drop_small_edges();
-        let has_angle_limit = limit_angle > -1.0 || self.limit_angle() > -1.0;
         if small.is_empty() {
             return Ok(false);
         }
-        if drop_mode || has_angle_limit {
+        if drop_mode {
             return Err(unported_small_edge_merge());
         }
         if !multiple.is_empty() {
             return Err(unported_small_edge_merge());
         }
+        let angle_limit = effective_angle_limit(limit_angle, self.limit_angle());
         let face_changed =
-            merge_faces::merge_face_small_edges(self, small, edge_faces, face_small)?;
-        merge_free_wires::merge_small_edges(self, small, multiple)
+            merge_faces::merge_face_small_edges(self, small, edge_faces, face_small, angle_limit)?;
+        merge_free_wires::merge_small_edges(self, small, multiple, angle_limit)
             .map(|free_changed| face_changed || free_changed)
     }
+}
+
+fn effective_angle_limit(explicit: f64, configured: f64) -> Option<f64> {
+    if !(explicit > -1.0 || configured > -1.0) {
+        return None;
+    }
+    if explicit < configured {
+        return Some(configured);
+    }
+    Some(explicit)
 }
 
 pub(super) fn unported_small_edge_merge() -> Failure {
