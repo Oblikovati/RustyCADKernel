@@ -14,6 +14,9 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::Arc;
 
+#[path = "vertex_edge/generated_vertices.rs"]
+mod generated_vertices;
+
 #[path = "vertex_edge/force_interference.rs"]
 mod force_interference;
 
@@ -28,6 +31,13 @@ struct SharedVertexCandidate {
 }
 
 impl BOPAlgoPaveFiller {
+    pub(super) fn intersect_ef_generated_vertices(
+        &mut self,
+        associations: &[(PaveBlockHandle, i32)],
+    ) -> Result<Vec<i32>, Failure> {
+        generated_vertices::intersect(self, associations)
+    }
+
     /// Performs the defined ordinary vertex/edge intersection path; `filler.perform_ve()?`.
     pub fn perform_ve(&mut self) -> Result<(), Failure> {
         self.fill_shrunk_data(ShapeEnum::Vertex, ShapeEnum::Edge)?;
