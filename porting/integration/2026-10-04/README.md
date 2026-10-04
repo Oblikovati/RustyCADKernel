@@ -25,3 +25,14 @@ workspace at that revision; full OCCT API and legacy runtime parity remain open.
 
 `AGENTS.md` now requires completed agent work to merge directly into `main`, with
 serialized integration and relevant checks. New worktree branches start from main.
+
+## Recovered uncommitted resource work
+
+The follow-up dirty-worktree review is in `dirty-worktree-review.json.gz`.
+The substantive TKernel candidate was validated and merged from `4fb52c5f`.
+`ResourceManager::clone` preserves independent resource maps, matching the copy
+construction used by native ShapeProcess_Context. Resource host services and
+PluginLoader injection now accept `Arc` and require `Send + Sync`; existing Rust
+callers using `Rc` must adapt. These injected host traits are Rust-specific and
+the stronger bounds are not a claim about OCCT thread safety or extra API parity.
+The remaining abandoned source snapshots are already represented or superseded.

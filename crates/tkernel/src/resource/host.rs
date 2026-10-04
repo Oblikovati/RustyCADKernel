@@ -69,9 +69,9 @@ impl ResourceConsole for NativeResourceConsole {
         let _ = io::stdout().write_all(bytes);
     }
 }
-/// The three host seams a Resource_Manager uses, shared across threads (a
-/// Resource_Manager is a Standard_Transient natively and ShapeProcess keeps one in its
-/// transient context); `ResourceHost::native()`.
+/// Shareable host services for cloned resource contexts; `ResourceHost::native()`.
+/// Native ShapeProcess copies Resource_Manager; Arc and Send + Sync express the
+/// Rust host-service contract without asserting native manager thread safety.
 #[derive(Clone)]
 pub struct ResourceHost {
     /// File access for Load and Save.
