@@ -18,6 +18,7 @@ use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
 use std::collections::HashMap;
 use std::sync::Arc;
 
+mod face_classification;
 mod same_domain;
 
 /// The shape and argument storage shared by Boolean operation algorithms.

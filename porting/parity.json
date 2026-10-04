@@ -218585,28 +218585,31 @@
       "notes": "Borrows the initialized face-state pool."
     },
     {
-      "upstream_id": "BOPDS_DS::HasFaceInfo(int) const",
+      "upstream_id": "BOPDS_DS::HasFaceInfo(const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_face_info",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 36-row lazy face pool and boundary refresh replay; tools/oracle/tkbo_face_info.md. Internal vertices/common blocks, allocation and invalid access parity remain unproven; no legacy declaration acceptance claim.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::FaceInfo(int) const",
+      "upstream_id": "BOPDS_DS::FaceInfo(const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::face_info",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 36-row lazy face pool and boundary refresh replay; tools/oracle/tkbo_face_info.md. Internal vertices/common blocks, allocation and invalid access parity remain unproven; no legacy declaration acceptance claim.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::ChangeFaceInfo(int)",
+      "upstream_id": "BOPDS_DS::ChangeFaceInfo(const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_face_info",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 36-row lazy face pool and boundary refresh replay; tools/oracle/tkbo_face_info.md. Internal vertices/common blocks, allocation and invalid access parity remain unproven; no legacy declaration acceptance claim.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdateFaceInfoIn(int)",
@@ -218625,12 +218628,13 @@
       "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
     },
     {
-      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(int)",
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_face_info_on",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 36-row lazy face pool and boundary refresh replay; tools/oracle/tkbo_face_info.md. Internal vertices/common blocks, allocation and invalid access parity remain unproven; no legacy declaration acceptance claim.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const NCollection_Map<int>&)",
@@ -218641,12 +218645,13 @@
       "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
     },
     {
-      "upstream_id": "BOPDS_DS::FaceInfoOn(int,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<int>&)",
+      "upstream_id": "BOPDS_DS::FaceInfoOn(const int, NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>> &, NCollection_Map<int> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::face_info_on",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 36-row lazy face pool and boundary refresh replay; tools/oracle/tkbo_face_info.md. Internal vertices/common blocks, allocation and invalid access parity remain unproven; no legacy declaration acceptance claim.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::FaceInfoIn(int,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<int>&)",
@@ -218705,28 +218710,31 @@
       "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
     },
     {
-      "upstream_id": "BOPDS_DS::AddShapeSD(int,int)",
+      "upstream_id": "BOPDS_DS::AddShapeSD(const int, const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::add_shape_sd",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 18-row chain, self-bind, rebind and output-sentinel replay; tools/oracle/tkbo_same_domain.md. Cyclic input nontermination and full legacy parity unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::HasShapeSD(int,int&) const",
+      "upstream_id": "BOPDS_DS::HasShapeSD(const int, int &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_shape_sd_into",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 18-row chain, self-bind, rebind and output-sentinel replay; tools/oracle/tkbo_same_domain.md. Cyclic input nontermination and full legacy parity unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
-      "upstream_id": "BOPDS_DS::GetSameDomainIndex(int) const",
+      "upstream_id": "BOPDS_DS::GetSameDomainIndex(const int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::same_domain_index",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Native 18-row chain, self-bind, rebind and output-sentinel replay; tools/oracle/tkbo_same_domain.md. Cyclic input nontermination and full legacy parity unproven.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::InterfVV()",
