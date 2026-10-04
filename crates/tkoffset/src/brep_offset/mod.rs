@@ -7,6 +7,7 @@ mod interval;
 pub use interval::BRepOffsetInterval;
 mod make_offset;
 mod make_offset_build;
+mod make_offset_build_adjacent;
 mod make_offset_check;
 mod make_offset_history;
 mod offset_face;

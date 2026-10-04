@@ -46,13 +46,23 @@ impl BRepOffsetMakeOffset {
         let config = self.configuration()?;
         reject_unsupported_build_options(config, self.closing_faces.len())?;
         let faces = source_faces(&self.face_component)?;
-        let _analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
-        reject_unsupported_tangent_faces(&faces)?;
-        let images = offset_face_images(&faces, config.offset)?;
+        let analyzer = analyze_face(&self.face_component, config.offset, config.tolerance)?;
+        let shared_support = faces_share_support_surface(&faces)?;
+        let images = offset_face_images(&faces, config.offset, shared_support)?;
         self.record_face_histories(&faces, &images)?;
-        let image_refs = images.iter().collect::<Vec<_>>();
-        let patches =
-            super::correct_singular_face::correct_singular_faces(&image_refs, config.offset)?;
+        let patches = if shared_support {
+            let image_refs = images.iter().collect::<Vec<_>>();
+            super::correct_singular_face::correct_singular_faces(&image_refs, config.offset)?
+        } else {
+            let joins = super::make_offset_build_adjacent::arc_patches_for_adjacent_planes(
+                &faces,
+                &images,
+                &analyzer,
+                config.offset,
+            )?;
+            self.record_join_histories(&joins);
+            joins.into_iter().map(|join| join.face).collect()
+        };
         self.result_shape = shell_from_faces(&images, &patches)?;
         self.error = Some(BRepOffsetError::NoError);
         self.done = true;
@@ -69,6 +79,17 @@ impl BRepOffsetMakeOffset {
         }
         Ok(())
     }
+
+    fn record_join_histories(
+        &mut self,
+        joins: &[super::make_offset_build_adjacent::AdjacentPlanarJoin],
+    ) {
+        for join in joins {
+            let source = join.source_edge.clone().into_shape();
+            let image = join.face.clone().into_shape();
+            self.record_join_generated_face(&source, &image);
+        }
+    }
 }
 
 fn face_count(component: &Shape) -> Result<usize, Failure> {
@@ -78,15 +99,6 @@ fn face_count(component: &Shape) -> Result<usize, Failure> {
 fn source_faces(component: &Shape) -> Result<Vec<Face>, Failure> {
     Explorer::new(component, ShapeEnum::Face, ShapeEnum::Shape)
         .map(|faces| faces.map(Face::unchecked).collect())
-}
-
-fn reject_unsupported_tangent_faces(faces: &[Face]) -> Result<(), Failure> {
-    if !faces_share_support_surface(faces)? {
-        return Err(not_implemented(
-            "multi-face offset requires a shared support surface",
-        ));
-    }
-    Ok(())
 }
 
 fn faces_share_support_surface(faces: &[Face]) -> Result<bool, Failure> {
@@ -106,7 +118,30 @@ fn faces_share_support_surface(faces: &[Face]) -> Result<bool, Failure> {
     Ok(true)
 }
 
-fn offset_face_images(faces: &[Face], offset: f64) -> Result<Vec<BRepOffsetOffsetFace>, Failure> {
+fn offset_face_images(
+    faces: &[Face],
+    offset: f64,
+    share_created_edges: bool,
+) -> Result<Vec<BRepOffsetOffsetFace>, Failure> {
+    if share_created_edges {
+        return offset_faces_with_shared_edges(faces, offset);
+    }
+    faces
+        .iter()
+        .map(|face| {
+            BRepOffsetOffsetFace::from_face_with_created(
+                face,
+                offset,
+                &mut super::offset_face::FaceCreatedImages::default(),
+            )
+        })
+        .collect()
+}
+
+fn offset_faces_with_shared_edges(
+    faces: &[Face],
+    offset: f64,
+) -> Result<Vec<BRepOffsetOffsetFace>, Failure> {
     let mut created = super::offset_face::FaceCreatedImages::default();
     faces
         .iter()

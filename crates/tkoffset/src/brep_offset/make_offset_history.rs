@@ -56,15 +56,32 @@ impl BRepOffsetMakeOffset {
         record_generated_vertices(&mut self.generated_vertices, source, image)
     }
 
+    pub(super) fn record_join_generated_face(&mut self, source: &Shape, image: &Shape) {
+        self.offset_edges.remove_root(source);
+        self.generated_edge_faces
+            .push((source.clone(), image.clone()));
+    }
+
     fn images_for(&self, source: &Shape) -> Result<Vec<Shape>, Failure> {
         match source.shape_type()? {
             ShapeEnum::Face => Ok(self.offset_faces.last_image(source)),
-            ShapeEnum::Edge => Ok(self.offset_edges.last_image(source)),
+            ShapeEnum::Edge => Ok(self.edge_images(source)),
             ShapeEnum::Vertex => Ok(vertex_image(&self.generated_vertices, source)
                 .into_iter()
                 .collect()),
             _ => Ok(Vec::new()),
         }
+    }
+
+    fn edge_images(&self, source: &Shape) -> Vec<Shape> {
+        if self.offset_edges.has_image(source) {
+            return self.offset_edges.last_image(source);
+        }
+        self.generated_edge_faces
+            .iter()
+            .find(|(edge, _)| edge.is_same(source))
+            .map(|(_, image)| vec![image.clone()])
+            .unwrap_or_default()
     }
 }
 
