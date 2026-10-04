@@ -1,0 +1,58 @@
+{
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Four protected GeomAdaptor_TransformedSurface cache operations",
+  "native_declarations": [
+    {
+      "id": "05dd9be4f524e4bd2e2ae652cbc6e4068ad78e8128e4ed915b79b6f89692ec69",
+      "name": "GeomAdaptor_TransformedSurface::initTransformedCache() const",
+      "signature": "void () const",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::init_transformed_cache"
+    },
+    {
+      "id": "5614126550b61f264888334654d5982b985a64dc565346c0c4b7918225150131",
+      "name": "GeomAdaptor_TransformedSurface::invalidateTransformedCache()",
+      "signature": "void ()",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::invalidate_transformed_cache"
+    },
+    {
+      "id": "5ef4365c93332b5fe649b622c0e2fed59e0d4f4ce92bece8d38fe8d0394a3e46",
+      "name": "GeomAdaptor_TransformedSurface::ensureTransformedCache() const",
+      "signature": "void () const",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::ensure_transformed_cache"
+    },
+    {
+      "id": "81f087bfb13a42962e091568b49dc1c5940bdbb14539dde90464612fa0b21f9f",
+      "name": "GeomAdaptor_TransformedSurface::transformedAdaptor() const",
+      "signature": "const class GeomAdaptor_Surface &() const",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::transformed_adaptor"
+    }
+  ],
+  "sha256": {
+    "crates/tkg3d/src/geom_adaptor/transformed_surface.rs": "fadbe826ded38899cf03a2e39c5da698918b2c1c00324f512e4516eec59e8beb",
+    "crates/tkg3d/tests/transformed_surface_cache.rs": "ab62aa9e2043ad419c88111825314b3e7d93bc2e6aae3fa5de14b7a92875b637",
+    "tools/oracle/transformed_surface_cache.cxx": "27e78d82f6c1a7857d8119f7edb50351701442ee5a730a276a213a988ae71200",
+    "tools/oracle/transformed_surface_cache.expected": "c31d5877fa95b59e19af995592116521a369b12954bec01eb45369584e74c36d",
+    "../OCCT/src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx": "ff2b2e383e3902bf87b20f374d1fdefd2f203749770c2bf0760889c9faea5bea",
+    "../OCCT/src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.cxx": "d8390b9a286f14874cd6e218db1f1bca5022b8195b68b27d1bd32df151b511e2",
+    "/tmp/transformed-surface-cache": "4a79af9b15ece33e7a7bbdfe9ccc099e29723c0ec0dec838a6f802e0e20c100a"
+  },
+  "native_probe": {
+    "command": "g++ -std=c++17 tools/oracle/transformed_surface_cache.cxx -I target/occt-modeling-full/include/opencascade -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKG3d -lTKG2d -lTKMath -lTKernel -o /tmp/transformed-surface-cache",
+    "execution": "/tmp/transformed-surface-cache",
+    "output_matches_expected": true
+  },
+  "rust_validation": {
+    "command": "cargo test -p rustycad-tkg3d --test transformed_surface_cache --test geom_adaptor_transformed_surface",
+    "passed": 13,
+    "failed": 0
+  },
+  "limitations": [
+    "Supplemental probe does not add an original legacy declaration.",
+    "Native original adaptor caches elementary gp geometry: mutating the underlying plane does not update subsequent transformed cache rebuilds. Both implementations preserve that behavior.",
+    "This claim covers the four cache operations; it does not establish blanket shallow-copy ownership equivalence."
+  ]
+}

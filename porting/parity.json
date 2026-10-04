@@ -235319,6 +235319,38 @@
       "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::init",
       "status": "partial",
       "notes": "Protected init exposed as a safe Rust reuse operation. Native oracle covers dimension-changing weighted initialization, zero and null weights, cache/representation invalidation, and partial state on exact-extent mismatches with both retained and resized weight storage; see porting/audits/tkg3d-bezier-surface-protected-init.json. The pinned native library crashes for same-size weighted reinitialization from a nonrational instance; this observed failure domain is documented, not reproduced."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::initTransformedCache() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::init_transformed_cache",
+      "status": "implemented",
+      "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::invalidateTransformedCache()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::invalidate_transformed_cache",
+      "status": "implemented",
+      "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::ensureTransformedCache() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::ensure_transformed_cache",
+      "status": "implemented",
+      "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::transformedAdaptor() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::transformed_adaptor",
+      "status": "implemented",
+      "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
     }
   ],
   "tests": [

@@ -164,19 +164,50 @@ impl GeomAdaptorTransformedSurface {
     pub fn tolerance_v(&self) -> f64 {
         self.surf.tolerance_v()
     }
-    // transformedAdaptor: the original adaptor for an identity, else the cached
-    // adaptor on the transformed surface (ensureTransformedCache).
-    fn transformed_adaptor(&self) -> Result<Handle<GeomAdaptorSurface>, Failure> {
+    /// Invalidates the protected transformed cache; `adaptor.invalidate_transformed_cache()`.
+    pub fn invalidate_transformed_cache(&self) {
+        self.state.write().transformed = None;
+    }
+    /// Builds a missing nonidentity cache; `adaptor.ensure_transformed_cache()?`.
+    pub fn ensure_transformed_cache(&self) -> Result<(), Failure> {
+        self.ensure_cached_state(&mut self.state.write())
+    }
+    /// Rebuilds the protected cache even for identity transforms; `adaptor.init_transformed_cache()?`.
+    pub fn init_transformed_cache(&self) -> Result<(), Failure> {
+        self.initialize_cached_state(&mut self.state.write())
+    }
+    /// Inspects protected cached surface state without initializing it; `adaptor.cached_transformed_surface()`.
+    /// `None` means absent; `Some(null)` means an initialized empty adaptor.
+    pub fn cached_transformed_surface(&self) -> Option<Handle<dyn GeomSurface>> {
+        self.state
+            .read()
+            .transformed
+            .as_ref()
+            .map(|adaptor| adaptor.surface())
+    }
+    fn ensure_cached_state(&self, state: &mut TransformedState) -> Result<(), Failure> {
+        if state.trsf.form() == TransformForm::Identity || state.transformed.is_some() {
+            return Ok(());
+        }
+        self.initialize_cached_state(state)
+    }
+    fn initialize_cached_state(&self, state: &mut TransformedState) -> Result<(), Failure> {
+        state.transformed = Some(Handle::new(self.build_transformed(state.trsf)?));
+        Ok(())
+    }
+    /// The protected adaptor accessor: original for identity, otherwise lazily cached;
+    /// `adaptor.transformed_adaptor()?`.
+    pub fn transformed_adaptor(&self) -> Result<Handle<GeomAdaptorSurface>, Failure> {
         let mut state = self.state.write();
         if state.trsf.form() == TransformForm::Identity {
             return Ok(self.surf.clone());
         }
-        if let Some(adaptor) = &state.transformed {
-            return Ok(adaptor.clone());
-        }
-        let adaptor: Handle<GeomAdaptorSurface> = Handle::new(self.build_transformed(state.trsf)?);
-        state.transformed = Some(adaptor.clone());
-        Ok(adaptor)
+        self.ensure_cached_state(&mut state)?;
+        Ok(state
+            .transformed
+            .as_ref()
+            .expect("initialized nonidentity cache")
+            .clone())
     }
     // initTransformedCache: elementary kinds are rebuilt from their transformed gp
     // geometry, the others are transformed copies; bounds and tolerances are kept.
@@ -185,7 +216,22 @@ impl GeomAdaptorTransformedSurface {
         if original.is_null() {
             return Ok(GeomAdaptorSurface::default());
         }
-        let surface: Handle<dyn GeomSurface> = match self.surf.get_type()? {
+        let surface = self.transformed_geometry(original, trsf)?;
+        let range: LoadRange = (
+            self.surf.bounds()?,
+            (self.tolerance_u(), self.tolerance_v()),
+        );
+        GeomAdaptorSurface::with_range(&surface, range)
+    }
+    fn transformed_geometry(
+        &self,
+        original: Handle<dyn GeomSurface>,
+        trsf: Transform3,
+    ) -> Result<Handle<dyn GeomSurface>, Failure> {
+        if trsf.form() == TransformForm::Identity {
+            return Ok(original);
+        }
+        Ok(match self.surf.get_type()? {
             SurfaceType::Plane => {
                 Handle::new(GeomPlane::from_pln(self.surf.plane()?.transformed(trsf))).cast()
             }
@@ -193,6 +239,15 @@ impl GeomAdaptorTransformedSurface {
                 self.surf.cylinder()?.transformed(trsf),
             ))
             .cast(),
+            _ => self.transformed_curved_geometry(original, trsf)?,
+        })
+    }
+    fn transformed_curved_geometry(
+        &self,
+        original: Handle<dyn GeomSurface>,
+        trsf: Transform3,
+    ) -> Result<Handle<dyn GeomSurface>, Failure> {
+        Ok(match self.surf.get_type()? {
             SurfaceType::Cone => Handle::new(GeomConicalSurface::from_cone(
                 self.surf.cone()?.transformed(trsf),
             ))
@@ -206,12 +261,7 @@ impl GeomAdaptorTransformedSurface {
             ))
             .cast(),
             _ => original.transformed(trsf)?.cast(),
-        };
-        let range: LoadRange = (
-            self.surf.bounds()?,
-            (self.tolerance_u(), self.tolerance_v()),
-        );
-        GeomAdaptorSurface::with_range(&surface, range)
+        })
     }
     // Apply the transformation to an evaluation unless it is the identity.
     fn transformed_by<T>(&self, value: T, apply: impl Fn(T, Transform3) -> T) -> T {
