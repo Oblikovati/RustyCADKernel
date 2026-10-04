@@ -1,4 +1,5 @@
 //! BRepOffset_Inter3d::FaceInter for unshared planar face pairs.
+mod domain;
 use super::super::BRepOffsetInter3d;
 use rustycad_tkbo::int_tools::{Curve, FaceFace};
 use rustycad_tkbool::brep_algo::BRepAlgoImage;
@@ -65,6 +66,8 @@ impl BRepOffsetInter3d {
         rustycad_tkbrep::topods::face(&second_source)?;
         require_plane_face(first)?;
         require_plane_face(second)?;
+        domain::require_supported_face_domain(first)?;
+        domain::require_supported_face_domain(second)?;
         self.reject_shared_topology(first, second)
     }
 
@@ -352,6 +355,7 @@ mod tests {
     use rustycad_tkg3d::top_abs::Orientation;
     use rustycad_tkmath::gp::{Direction3, Plane3};
     use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace;
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakePolygon;
 
     #[test]
     fn unbounded_plane_face_intersection_matches_native_store_state() {
@@ -403,6 +407,28 @@ mod tests {
         assert_bounded_section_geometry(&intersections, &as_des, &second_offset);
     }
 
+    #[test]
+    fn nonrectangular_planar_domain_fails_closed_until_boundary_clipping_is_ported() {
+        let first_source = triangle_face(2.0);
+        let second_source = finite_plane_face(Point3::new(0.0, 2.0, 0.0), Direction3::Y);
+        let first_offset = triangle_face(0.0);
+        let second_offset = finite_plane_face(Point3::default(), Direction3::Y);
+        let mut images = BRepAlgoImage::new();
+        images.bind(&first_source, &first_offset).unwrap();
+        images.bind(&second_source, &second_offset).unwrap();
+        let as_des = Handle::new(BRepAlgoAsDes::new());
+        let mut intersections = BRepOffsetInter3d::new(&as_des, State::In, 1e-7);
+
+        let failure = intersections
+            .face_inter(&first_offset, &second_offset, &images)
+            .unwrap_err();
+
+        assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+        assert!(intersections.touched_faces().is_empty());
+        assert!(intersections.new_edges().is_empty());
+        assert!(!intersections.is_done(&first_offset, &second_offset));
+    }
+
     fn plane_face(origin: Point3, normal: Direction3) -> Face {
         let frame = Plane3::new(origin, normal).unwrap().position();
         let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(frame)).cast();
@@ -418,6 +444,25 @@ mod tests {
         BRepBuilderAPIMakeFace::from_plane_bounds(
             Plane3::new(origin, normal).unwrap(),
             (-1.0, 1.0, -1.0, 1.0),
+        )
+        .unwrap()
+        .face()
+        .unwrap()
+    }
+
+    fn triangle_face(z: f64) -> Face {
+        let polygon = BRepBuilderAPIMakePolygon::from_three_points(
+            Point3::new(-2.0, -1.0, z),
+            Point3::new(2.0, -1.0, z),
+            Point3::new(0.0, 1.0, z),
+            true,
+        )
+        .unwrap();
+        let wire = polygon.wire().unwrap();
+        BRepBuilderAPIMakeFace::from_plane_wire(
+            Plane3::new(Point3::new(0.0, 0.0, z), Direction3::Z).unwrap(),
+            &wire,
+            true,
         )
         .unwrap()
         .face()

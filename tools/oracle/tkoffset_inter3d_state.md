@@ -11,8 +11,10 @@ The Rust `FaceInter` slice matches the unbounded and bounded perpendicular-plane
 fixtures through `IntTools_FaceFace`, section-edge construction, the native
 `OrientSection` vector rule, and `Store`. The bounded fixture's exact section is
 `[-1, 1]`, with endpoints `(1, 0, 0)` and `(-1, 0, 0)`. Shared-subshape and
-non-plane branches still return `Standard_NotImplemented`; general PaveFiller
-intersection behavior is not claimed.
+non-plane branches still return `Standard_NotImplemented`. OCCT also clips the
+triangle fixture to `[-1, 1]`; Rust deliberately rejects that nonrectangular
+trim because current face-face line clipping sees only the UV bounding box.
+General PaveFiller intersection behavior is not claimed.
 
 Build against the pinned native modeling install:
 
