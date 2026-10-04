@@ -2,8 +2,11 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::{ReShape, WireExplorer, outer_wire};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex, Wire};
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dTrimmedCurve};
+use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
+use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Axis2, Direction3, Point2, Point3, StandardDirection3};
 use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeCylinder, BRepPrimAPIMakeOneAxis};
@@ -36,6 +39,10 @@ fn split_tangent_cylinder_boundary_merges_pcurves_on_both_supports() {
     assert_eq!(native_support_row_count(), 2);
     let input = tangent_cylinder_shell();
     assert!(is_valid(&input));
+    assert_eq!(
+        tangent_input_bspline_pcurve_count(&input),
+        native_value_from(NATIVE_MULTI_SUPPORT, "input_bspline_pcurves")
+    );
     assert_eq!(
         unique_edge_count(&input),
         native_value_from(NATIVE_MULTI_SUPPORT, "input_edges")
@@ -73,7 +80,8 @@ fn tangent_cylinder_shell() -> Shape {
     let first_seam = seam_edge(&first).unwrap();
     let second_seam = seam_edge(&second).unwrap();
     let segments = split_edge_pair(&first_seam, &first).unwrap();
-    attach_split_pcurves(&segments, &second_seam, &second).unwrap();
+    attach_split_bspline_pcurves(&segments, &first_seam, &first).unwrap();
+    attach_split_bspline_pcurves(&segments, &second_seam, &second).unwrap();
     let first_face = rebuild_lateral_face(&first, &first_seam, &segments).unwrap();
     let second_face = rebuild_shared_vertex_face(&second, &second_seam, &segments).unwrap();
     make_shell(&first_face, &second_face)
@@ -84,9 +92,95 @@ fn cylinder_face_at(axes: Axis2) -> Face {
     maker.face().unwrap()
 }
 
-fn attach_split_pcurves(segments: &(Edge, Edge), seam: &Edge, face: &Face) -> Result<(), Failure> {
-    set_split_pcurves(&segments.0, seam, face, (0.0, 2.5))?;
-    set_split_pcurves(&segments.1, seam, face, (2.5, 5.0))
+fn attach_split_bspline_pcurves(
+    segments: &(Edge, Edge),
+    seam: &Edge,
+    face: &Face,
+) -> Result<(), Failure> {
+    set_split_bspline_pcurves(&segments.0, seam, face, (0.0, 2.5))?;
+    set_split_bspline_pcurves(&segments.1, seam, face, (2.5, 5.0))
+}
+
+fn set_split_bspline_pcurves(
+    segment: &Edge,
+    source: &Edge,
+    face: &Face,
+    range: (f64, f64),
+) -> Result<(), Failure> {
+    let mut reversed = source.clone();
+    reversed.reverse();
+    let first = linear_bspline(&BRepTool::curve_on_face(source, face)?.pcurve, range)?;
+    let second = linear_bspline(&BRepTool::curve_on_face(&reversed, face)?.pcurve, range)?;
+    update_bspline_pcurve_pair(segment, (&first, &second), face, range)
+}
+
+fn linear_bspline(
+    source: &Handle<dyn Geom2dCurve>,
+    range: (f64, f64),
+) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+    let poles = [source.eval_d0(range.0)?, source.eval_d0(range.1)?];
+    let knots = [range.0, range.1];
+    let multiplicities = [2, 2];
+    let poles = Array1::from_shared(&poles, 1);
+    let knots = Array1::from_shared(&knots, 1);
+    let multiplicities = Array1::from_shared(&multiplicities, 1);
+    let curve = Geom2dBSplineCurve::new(&poles, &knots, &multiplicities, 1, false)?;
+    Ok(Handle::new(curve).cast())
+}
+
+fn update_bspline_pcurve_pair(
+    edge: &Edge,
+    pcurves: (&Handle<dyn Geom2dCurve>, &Handle<dyn Geom2dCurve>),
+    face: &Face,
+    range: (f64, f64),
+) -> Result<(), Failure> {
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurves_on_face(edge, pcurves, face, BRepTool::edge_tolerance(edge)?)?;
+    let (surface, location) = BRepTool::surface_with_location(face)?;
+    builder.range_on_surface(edge, &surface, &location, range.0, range.1)
+}
+
+fn tangent_input_bspline_pcurve_count(shape: &Shape) -> usize {
+    let mut count = 0;
+    for face_shape in Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
+        let face = rustycad_tkbrep::topods::face(&face_shape).unwrap();
+        let mut visited = Vec::new();
+        for candidate in Explorer::new(
+            &face.clone().into_shape(),
+            ShapeEnum::Edge,
+            ShapeEnum::Shape,
+        )
+        .unwrap()
+        {
+            let edge = rustycad_tkbrep::topods::edge(&candidate).unwrap();
+            if !BRepTool::is_closed_on_face(&edge, &face).unwrap()
+                || visited.iter().any(|known: &Edge| known.is_same(&edge))
+            {
+                continue;
+            }
+            visited.push(edge.clone());
+            count += linear_bspline_pair_count(&edge, &face);
+        }
+    }
+    count
+}
+
+fn linear_bspline_pair_count(edge: &Edge, face: &Face) -> usize {
+    let forward = BRepTool::curve_on_face(edge, face).unwrap();
+    let adaptor = Geom2dAdaptorCurve::with_curve(&forward.pcurve).unwrap();
+    assert_eq!(
+        adaptor.get_type().unwrap(),
+        rustycad_tkmath::geom_abs::CurveType::BSplineCurve
+    );
+    let mut reversed = edge.clone();
+    reversed.reverse();
+    let backward = BRepTool::curve_on_face(&reversed, face).unwrap();
+    let adaptor = Geom2dAdaptorCurve::with_curve(&backward.pcurve).unwrap();
+    assert_eq!(
+        adaptor.get_type().unwrap(),
+        rustycad_tkmath::geom_abs::CurveType::BSplineCurve
+    );
+    2
 }
 
 fn rebuild_shared_vertex_face(
@@ -149,7 +243,17 @@ fn assert_seam_matches_native(edge: &Edge, face: &Face) {
     let backward = BRepTool::curve_on_face(&reversed, face).unwrap();
     assert_curve_endpoints(&forward);
     assert_curve_endpoints(&backward);
+    assert_line_curve(&forward.pcurve);
+    assert_line_curve(&backward.pcurve);
     assert_eq!((forward.first, forward.last), (0.0, 5.0));
+}
+
+fn assert_line_curve(curve: &Handle<dyn Geom2dCurve>) {
+    let adaptor = Geom2dAdaptorCurve::with_curve(curve).unwrap();
+    assert_eq!(
+        adaptor.get_type().unwrap(),
+        rustycad_tkmath::geom_abs::CurveType::Line
+    );
 }
 
 fn assert_curve_endpoints(curve: &rustycad_tkbrep::brep::EdgePCurve) {

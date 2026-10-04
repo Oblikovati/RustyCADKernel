@@ -8,11 +8,13 @@
 #include <BRepTools_WireExplorer.hxx>
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
+#include <Geom2d_BSplineCurve.hxx>
 #include <Geom2d_TrimmedCurve.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
 #include <TopExp.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
+#include <NCollection_Array1.hxx>
 
 #include <algorithm>
 #include <iomanip>
@@ -75,8 +77,19 @@ static void addPcurve(const TopoDS_Edge& edge, const TopoDS_Edge& seam,
   const auto pcurve2 = BRep_Tool::CurveOnSurface(reversed, face, rf, rl);
   TopLoc_Location location;
   const auto surface = BRep_Tool::Surface(face, location);
-  const auto firstPart = new Geom2d_TrimmedCurve(pcurve1, first, last);
-  const auto secondPart = new Geom2d_TrimmedCurve(pcurve2, first, last);
+  NCollection_Array1<gp_Pnt2d> firstPoles(1, 2), secondPoles(1, 2);
+  firstPoles(1) = pcurve1->Value(first);
+  firstPoles(2) = pcurve1->Value(last);
+  secondPoles(1) = pcurve2->Value(first);
+  secondPoles(2) = pcurve2->Value(last);
+  NCollection_Array1<double> knots(1, 2);
+  knots(1) = first;
+  knots(2) = last;
+  NCollection_Array1<int> mults(1, 2);
+  mults(1) = 2;
+  mults(2) = 2;
+  const auto firstPart = new Geom2d_BSplineCurve(firstPoles, knots, mults, 1);
+  const auto secondPart = new Geom2d_BSplineCurve(secondPoles, knots, mults, 1);
   BRep_Builder().UpdateEdge(edge, firstPart, secondPart, surface, location,
                             BRep_Tool::Tolerance(seam));
   BRep_Builder().Range(edge, first, last);
@@ -150,6 +163,32 @@ static void emitSeams(const TopoDS_Shape& shape)
   }
 }
 
+static int countFaceBSplinePCurves(const TopoDS_Edge& edge, const TopoDS_Face& face);
+
+static int countInputBSplinePCurves(const TopoDS_Shape& shape)
+{
+  int count = 0;
+  for (const auto& edge : uniqueEdges(shape))
+  {
+    for (TopExp_Explorer faces(shape, TopAbs_FACE); faces.More(); faces.Next())
+      count += countFaceBSplinePCurves(edge, TopoDS::Face(faces.Current()));
+  }
+  return count;
+}
+
+static int countFaceBSplinePCurves(const TopoDS_Edge& edge, const TopoDS_Face& face)
+{
+  if (!BRep_Tool::IsClosed(edge, face))
+    return 0;
+  double first = 0.0, last = 0.0;
+  const auto pcurve1 = BRep_Tool::CurveOnSurface(edge, face, first, last);
+  TopoDS_Edge reversed = edge;
+  reversed.Reverse();
+  const auto pcurve2 = BRep_Tool::CurveOnSurface(reversed, face, first, last);
+  return (pcurve1->IsKind(STANDARD_TYPE(Geom2d_BSplineCurve)) ? 1 : 0)
+         + (pcurve2->IsKind(STANDARD_TYPE(Geom2d_BSplineCurve)) ? 1 : 0);
+}
+
 static void emitObservation(int faceIndex, double axisX, double first, double last,
                             const occ::handle<Geom2d_Curve>& pcurve1, double reverseFirst,
                             double reverseLast, const occ::handle<Geom2d_Curve>& pcurve2);
@@ -177,7 +216,8 @@ static void emitObservation(int faceIndex, double axisX, double first, double la
   std::cout << "support " << faceIndex << " axis_x " << axisX << " seam " << first << ' ' << last
             << ' ' << forwardStart.X() << ' ' << forwardStart.Y() << ' ' << forwardEnd.X() << ' '
             << forwardEnd.Y() << ' ' << reverseStart.X() << ' ' << reverseStart.Y() << ' '
-            << reverseEnd.X() << ' ' << reverseEnd.Y() << '\n';
+            << reverseEnd.X() << ' ' << reverseEnd.Y() << " types "
+            << pcurve1->DynamicType()->Name() << ' ' << pcurve2->DynamicType()->Name() << '\n';
 }
 
 static TopoDS_Shell buildTangentCylinderShell()
@@ -208,7 +248,8 @@ int main()
   std::cout << std::setprecision(17);
   const auto input = buildTangentCylinderShell();
   std::cout << "input_valid " << BRepCheck_Analyzer(input, true).IsValid() << " input_faces 2 input_edges "
-            << uniqueEdges(input).size() << '\n';
+            << uniqueEdges(input).size() << " input_bspline_pcurves "
+            << countInputBSplinePCurves(input) << '\n';
   ShapeUpgrade_UnifySameDomain unifier(input, true, false, true);
   unifier.Build();
   const auto result = unifier.Shape();
