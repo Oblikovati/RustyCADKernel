@@ -3,6 +3,7 @@
 #include <BRepGProp.hxx>
 #include <BRepTools.hxx>
 #include <BRepOffset_MakeOffset.hxx>
+#include <BRepOffset_Offset.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom2dAPI_Interpolate.hxx>
 #include <Geom2d_BSplineCurve.hxx>
@@ -17,8 +18,10 @@
 #include <Precision.hxx>
 #include <ShapeFix_Shape.hxx>
 #include <TopExp_Explorer.hxx>
+#include <TopoDS_Edge.hxx>
 #include <TopoDS.hxx>
 #include <iostream>
+#include <iomanip>
 
 namespace {
 TopoDS_Shape occ28131Face() {
@@ -107,7 +110,16 @@ void dump(const char* label, const TopoDS_Shape& shape) {
 } // namespace
 
 int main() {
+  std::cout << std::setprecision(17);
   const TopoDS_Shape face = occ28131Face();
+  for (TopExp_Explorer edge(face, TopAbs_EDGE); edge.More(); edge.Next()) {
+    const TopoDS_Edge sourceEdge = TopoDS::Edge(edge.Current());
+    std::cout << "input-edge " << BRep_Tool::Degenerated(sourceEdge) << ' '
+              << BRep_Tool::IsClosed(sourceEdge, TopoDS::Face(face)) << '\n';
+  }
+  BRepOffset_Offset offsetFace(TopoDS::Face(face), 10.0, true, GeomAbs_Arc);
+  std::cout << "offset-face-status " << offsetFace.Status() << '\n';
+  dump("offset-face", offsetFace.Face());
   BRepOffset_MakeOffset maker;
   maker.Initialize(face, 10.0, Precision::Confusion(), BRepOffset_Skin, false, false, GeomAbs_Arc);
   maker.MakeOffsetShape();
