@@ -124,6 +124,7 @@ impl ShapeFixWireframe {
         if small.is_empty() {
             return Ok(false);
         }
+        self.reset_joined_vertices();
         let angle_limit = effective_angle_limit(limit_angle, self.limit_angle());
         let face_changed = merge_faces::merge_face_small_edges(
             self,
@@ -134,8 +135,14 @@ impl ShapeFixWireframe {
             angle_limit,
             drop_mode,
         )?;
-        merge_free_wires::merge_small_edges(self, small, multiple, angle_limit, drop_mode)
-            .map(|free_changed| face_changed || free_changed)
+        let free_changed =
+            merge_free_wires::merge_small_edges(self, small, multiple, angle_limit, drop_mode)?;
+        let changed = face_changed || free_changed;
+        self.apply_joined_vertex_replacements()?;
+        if !changed {
+            return Ok(false);
+        }
+        merge_free_wires::finish_free_wire_merge(self, &self.context())
     }
 }
 
