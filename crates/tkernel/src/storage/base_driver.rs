@@ -256,6 +256,16 @@ pub trait BaseDriver: HeaderSections + TableSections + DataSections + DriverPrim
     /// Mutable protected state, for `SetName`/`SetOpenMode`; `driver.driver_base_mut()`.
     fn driver_base_mut(&mut self) -> &mut DriverBase;
 
+    /// `Storage_BaseDriver::SetName`; `driver.set_name(&AsciiString::new("doc.fsd"))`.
+    fn set_name(&mut self, name: &AsciiString) {
+        self.driver_base_mut().set_name(name);
+    }
+
+    /// `Storage_BaseDriver::SetOpenMode`; `driver.set_open_mode(OpenMode::Read)`.
+    fn set_open_mode(&mut self, mode: OpenMode) {
+        self.driver_base_mut().set_open_mode(mode);
+    }
+
     /// `Name`; `driver.name()`.
     fn name(&self) -> AsciiString {
         self.driver_base().name()
