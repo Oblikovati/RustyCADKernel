@@ -1,52 +1,60 @@
 # Elementary surface conversion storage
 
 This slice exposes a safe Rust construction path for the protected storage protocol
-of `Convert_ElementarySurfaceToBSplineSurface`. It is an extension API for Rust
-callers implementing new conversions, not an implementation of C++ subclass ABI or
-inheritance. The mutable array views retain Rust bounds and ownership.
+of `Convert_ElementarySurfaceToBSplineSurface`. It lets Rust callers implement new
+conversions without C++ subclass ABI or layout compatibility.
 
 ## Verified behavior
 
-The native derived-class probe initializes every array cell, changes the protected
-active pole/knot counts, and calls `Finalize`. It checks 2D pole/weight positions,
-the retained knots/multiplicities, and output dimensions. Calling `Finalize` a
-second time leaves the state unchanged. A negative U-knot count fails after poles
-and weights have already been trimmed and before U/V knot arrays change. Native
-reports `Standard_OutOfMemory`; Rust reports the same exception class and preserves
-the same earlier trims. Rust's message describes the invalid `[1, -1]` bounds,
-while this pinned native allocator reports its failed `realloc` message. Custom
-memory-manager diagnostics are not covered.
+The derived-class native probe initializes every array cell, changes active counts,
+and calls `Finalize`. It verifies 2D pole/weight positions, knots and multiplicities,
+output dimensions, idempotence, and the native mutation order when a negative U-knot
+count fails. Both implementations trim poles and weights before failing at the U-knot
+array. Both expose zero-capacity construction. One malformed input differs: native
+accepts a negative pole capacity and reports `NbRows() == -1`; Rust rejects that
+invalid bound with `Standard_OutOfMemory`. The negative-count diagnostic also differs:
+Rust reports the invalid bounds, while the pinned native allocator reports a failed
+`realloc`. These invalid-capacity/error-message cases remain partial.
 
-Focused Rust evidence is `crates/tkmath/tests/convert_elementary_surface_storage.rs`.
-It writes the complete capacities, then asserts final counts, degrees, periodicity,
-retained array values, idempotence, and state at the ordered failure point. The
-native output is captured in `tools/oracle/tkmath_elementary_surface_finalize.expected`.
+A derived native fixture rebases all protected arrays without changing their extents.
+`Pole(1, 1)` and `UKnot(1)` then raise `Standard_OutOfRange` from the underlying
+NCollection array. Rust accessors now perform the same active-count checks first, then
+use checked array reads and return `Standard_OutOfRange` with the requested index and
+actual stored bounds; they no longer panic. The native and Rust diagnostic strings
+are different, but the exception class and ordering match. The safe mutable array
+accessors can create these rebased states, so this is part of their tested behavior.
+
+The test covers all six scalar accessors under custom lower bounds, plus a too-short
+pole extent and an index that fails the active-count check before touching storage.
+It verifies that `Finalize` restores one-based bounds when trimming is required. It also covers array trimming,
+retained initialized values, idempotence, zero capacity, and the ordered Finalize
+failure point. Rust initializes allocated cells because uninitialized C++ storage has
+no defined values to preserve; this is not treated as an observable parity gap.
+C++ exceptions are represented by Rust `Failure` results and are not a parity gap.
+Custom OCCT memory-manager diagnostic text is not covered.
+
+Rust evidence is `crates/tkmath/tests/convert_elementary_surface_storage.rs`.
+Native output is captured in `tools/oracle/tkmath_elementary_surface_finalize.expected`.
 
 ## Callable crosswalk records
 
-The compiler inventory IDs below are exact candidates from the pinned
-`occt-declarations.jsonl.gz`. The protected constructor and `Finalize` are exposed
-as the safe Rust `with_capacity` and `finalize` entrypoints. Protected fields are
-represented with typed mutable accessors and state setters for Rust subclass-like
-construction, but no field mapping is claimed because Rust exposes methods rather
-than layout-compatible protected fields.
+The constructor and `Finalize()` mappings are partial for the invalid-capacity and
+allocator-diagnostic differences described above. Protected state fields are mapped
+to public typed getters/setters or immutable/mutable array accessors, which provide
+read/write behavior without exposing C++ layout. These field mappings apply to valid
+capacities and initialized values. Their compiler IDs are retained in the source
+inventory; the callable IDs for constructor and `Finalize()` are listed below.
 
 | Native declaration ID | Native member | Rust counterpart |
 | --- | --- | --- |
 | `7ad17411e0bbe391a2f184bb21d9c9818b8ee5b7f17e182db1222e27cd829173` | protected six-argument constructor | `ElementarySurfaceToBSplineSurface::with_capacity` |
 | `da07de0f77704c07687378f79e76954b88b8648029fb42534ee1fa7be95749e6` | protected `Finalize()` | `ElementarySurfaceToBSplineSurface::finalize` |
 
-These two mappings are partial: the Rust constructor is fallible and uses owned
-initialized arrays, and the negative-count Finalize diagnostic differs from the
-pinned native allocator message. The tested values, array dimensions, trimming
-order, mutation-before-failure, and exception class match. This does not establish
-general subclass ABI or field-reference lifetime parity.
-
 ## Reproduction
 
 ```sh
 occt=target/occt-tkernel-full
-c++ -std=c++17 -O2 -I"$occt/include/opencascade" \
+c++ -std=c++17 -O2 -Wno-deprecated-declarations -I"$occt/include/opencascade" \
   tools/oracle/tkmath_elementary_surface_finalize.cxx \
   -L"$occt/lin64/gcc/libi" -Wl,-rpath,"$occt/lin64/gcc/libi" \
   -lTKMath -lTKernel -o /tmp/tkmath_elementary_surface_finalize
@@ -59,4 +67,4 @@ c++ -std=c++17 -O2 -I"$occt/include/opencascade" \
 | --- | --- |
 | OCCT `Convert_ElementarySurfaceToBSplineSurface.hxx` | `cbc1a0515a106bae9212de10ba32cbb18c4d93071855e28d6387ae37270f7cef` |
 | OCCT `Convert_ElementarySurfaceToBSplineSurface.cxx` | `7cd6847b7aa64c6c97f1748359efe8fc878dd2d37c8194e018e42328e5dc2571` |
-| Native probe | `18e269dc52d6dfb0cedaa96de82170f41f3f4d930bf8cddd47f6080e69c43300` |
+| Native probe | `9f43da7f2e52a9a0bea386dacca49fa950b48cfe3e68f53c7715641c3b8705a0` |

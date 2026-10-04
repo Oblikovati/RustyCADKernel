@@ -74,6 +74,12 @@ fn out_of_range(accessor: &str, index: i32, count: i32) -> Failure {
     ))
 }
 
+fn storage_access(accessor: &str, error: ArrayError) -> Failure {
+    error.into_failure(&format!(
+        "Convert_ElementarySurfaceToBSplineSurface::{accessor}"
+    ))
+}
+
 fn checked(accessor: &str, index: i32, count: i32) -> Result<(), Failure> {
     if index < 1 || index > count {
         return Err(out_of_range(accessor, index, count));
@@ -253,38 +259,56 @@ impl ElementarySurfaceToBSplineSurface {
     pub fn pole(&self, u_index: i32, v_index: i32) -> Result<Point3, Failure> {
         checked("Pole", u_index, self.nb_u_poles)?;
         checked("Pole", v_index, self.nb_v_poles)?;
-        Ok(self.poles[(u_index, v_index)])
+        self.poles
+            .value(u_index, v_index)
+            .copied()
+            .map_err(|error| storage_access("Pole", error))
     }
 
     /// Weight of one-based indices (deprecated `Weight`); `surface.weight(1, 1)?`.
     pub fn weight(&self, u_index: i32, v_index: i32) -> Result<f64, Failure> {
         checked("Weight", u_index, self.nb_u_poles)?;
         checked("Weight", v_index, self.nb_v_poles)?;
-        Ok(self.weights[(u_index, v_index)])
+        self.weights
+            .value(u_index, v_index)
+            .copied()
+            .map_err(|error| storage_access("Weight", error))
     }
 
     /// U knot of one-based index (deprecated `UKnot`); `surface.u_knot(1)?`.
     pub fn u_knot(&self, u_index: i32) -> Result<f64, Failure> {
         checked("UKnot", u_index, self.nb_u_knots)?;
-        Ok(self.u_knots[u_index])
+        self.u_knots
+            .value(u_index)
+            .copied()
+            .map_err(|error| storage_access("UKnot", error))
     }
 
     /// V knot of one-based index (deprecated `VKnot`); `surface.v_knot(1)?`.
     pub fn v_knot(&self, v_index: i32) -> Result<f64, Failure> {
         checked("VKnot", v_index, self.nb_v_knots)?;
-        Ok(self.v_knots[v_index])
+        self.v_knots
+            .value(v_index)
+            .copied()
+            .map_err(|error| storage_access("VKnot", error))
     }
 
     /// U multiplicity of one-based index (deprecated `UMultiplicity`); `surface.u_multiplicity(1)?`.
     pub fn u_multiplicity(&self, u_index: i32) -> Result<i32, Failure> {
         checked("UMultiplicity", u_index, self.nb_u_knots)?;
-        Ok(self.u_mults[u_index])
+        self.u_mults
+            .value(u_index)
+            .copied()
+            .map_err(|error| storage_access("UMultiplicity", error))
     }
 
     /// V multiplicity of one-based index (deprecated `VMultiplicity`); `surface.v_multiplicity(1)?`.
     pub fn v_multiplicity(&self, v_index: i32) -> Result<i32, Failure> {
         checked("VMultiplicity", v_index, self.nb_v_knots)?;
-        Ok(self.v_mults[v_index])
+        self.v_mults
+            .value(v_index)
+            .copied()
+            .map_err(|error| storage_access("VMultiplicity", error))
     }
 
     /// All poles, rows along U; `surface.poles()[(1, 1)]`.

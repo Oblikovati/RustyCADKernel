@@ -18999,7 +18999,7 @@
       "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
       "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::with_capacity",
       "status": "partial",
-      "notes": "Protected storage constructor exposed as a safe Rust capacity initializer. The derived-class fixture fills all arrays before observation; C++ subclass ABI and protected layout are not represented. Compiler declaration ID 7ad17411e0bbe391a2f184bb21d9c9818b8ee5b7f17e182db1222e27cd829173; evidence: porting/audits/tkmath-elementary-surface-storage.md."
+      "notes": "Protected storage constructor exposed as a safe Rust capacity initializer. Zero-capacity construction matches; native accepts a negative pole count and reports a negative array extent, while Rust rejects the invalid bound with Standard_OutOfMemory. This invalid-capacity edge remains partial; C++ subclass ABI is not required. Compiler declaration ID 7ad17411e0bbe391a2f184bb21d9c9818b8ee5b7f17e182db1222e27cd829173; native evidence: porting/audits/tkmath-elementary-surface-storage.md."
     },
     {
       "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Finalize()",
@@ -19007,7 +19007,161 @@
       "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
       "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::finalize",
       "status": "partial",
-      "notes": "Native ordered array trimming, retained initialized values, idempotence, prior mutation on failure, and Standard_OutOfMemory class match the pinned derived-class fixture. The negative-count diagnostic text differs because Rust rejects invalid array bounds before the native allocator fails; the custom memory-manager message is unproven. Compiler declaration ID da07de0f77704c07687378f79e76954b88b8648029fb42534ee1fa7be95749e6; evidence: porting/audits/tkmath-elementary-surface-storage.md."
+      "notes": "Native ordered trimming, retained initialized values, idempotence, prior mutation on failure, and Standard_OutOfMemory class match. The negative-count diagnostic differs: Rust reports invalid bounds while the pinned allocator reports realloc failure. C++ exceptions are transported as Rust Failure results; this representation is not a parity gap. Compiler declaration ID da07de0f77704c07687378f79e76954b88b8648029fb42534ee1fa7be95749e6; native evidence: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myUDegree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_degree",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_degrees"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myUDegree` (i32) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myVDegree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_degree",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_degrees"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myVDegree` (i32) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myIsVPeriodic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::is_v_periodic",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_periodicity"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myIsVPeriodic` (bool) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myUKnots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_knots",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_knots_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myUKnots` (NCollection_Array1<double>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myVMults",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_multiplicities",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_multiplicities_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myVMults` (NCollection_Array1<int>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myIsUPeriodic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::is_u_periodic",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_periodicity"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myIsUPeriodic` (bool) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myNbUKnots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_u_knots",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_actual_counts"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myNbUKnots` (int) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myVKnots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_knots",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_knots_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myVKnots` (NCollection_Array1<double>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myNbUPoles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_u_poles",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_actual_counts"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myNbUPoles` (int) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myUMults",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_multiplicities",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_multiplicities_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myUMults` (NCollection_Array1<int>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myNbVKnots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_v_knots",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_actual_counts"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myNbVKnots` (int) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myNbVPoles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_v_poles",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::set_actual_counts"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myNbVPoles` (int) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myWeights",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::weights",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::weights_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myWeights` (NCollection_Array2<double>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::myPoles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_items": [
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::poles",
+        "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::poles_mut"
+      ],
+      "status": "implemented",
+      "notes": "Protected `myPoles` (NCollection_Array2<gp_Pnt>) read/write behavior is represented by the listed public value and mutation APIs for initialized valid-capacity states; Rust exposes safe accessors rather than a layout-compatible field. Native fixture and Rust storage regression: porting/audits/tkmath-elementary-surface-storage.md."
     },
     {
       "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UDegree() const",
