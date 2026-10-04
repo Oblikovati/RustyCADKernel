@@ -43,6 +43,26 @@ fn list_cursor_edits_follow_native_positions() {
     assert_eq!(list.length(), 3);
 }
 #[test]
+fn list_cursor_change_value_mutates_without_consuming() {
+    let mut list: List<i32> = [10, 20].into_iter().collect();
+    let mut cursor = list.cursor();
+    assert_eq!(cursor.value(&list), Some(&10));
+    *cursor.change_value(&mut list).unwrap() = 11;
+    assert_eq!(cursor.value(&list), Some(&11));
+    assert!(cursor.more());
+    cursor.next(&list);
+    assert_eq!(cursor.value(&list), Some(&20));
+    *cursor.change_value(&mut list).unwrap() = 21;
+    assert_eq!(items(&list), [11, 21]);
+    cursor.next(&list);
+    assert!(!cursor.more());
+    assert!(cursor.change_value(&mut list).is_none());
+
+    let other: List<i32> = [30].into_iter().collect();
+    let foreign = other.cursor();
+    assert!(foreign.change_value(&mut list).is_none());
+}
+#[test]
 fn list_insert_list_after_splices_or_appends_at_end() {
     let mut list: List<i32> = [1, 4].into_iter().collect();
     let mut source: List<i32> = [2, 3].into_iter().collect();
