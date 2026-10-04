@@ -27,12 +27,12 @@
   },
   "rust_probe": {
     "source": "crates/tkmath/tests/poly_triangulation_virtual_hooks.rs",
-    "source_sha256": "5aac24cc0023ed239fcaf79116ddb9edc022721e73208106e191ff2042221071",
+    "source_sha256": "00129b9b7daca9d97567b62656787e754137f833996a80e015fa1c8e9fce5724",
     "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-poly-tri-deferred-target cargo test -p rustycad-tkmath --test poly_triangulation_virtual_hooks --test poly_deferred_filesystem --test poly_triangulation_behavior",
-    "result": "12 passed, 0 failed"
+    "result": "13 passed, 0 failed"
   },
   "strict_lint": {
-    "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-poly-tri-deferred-target cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
+    "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-tkmath-protected-next-target cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
     "result": "passed"
   },
   "mapped_declarations": [

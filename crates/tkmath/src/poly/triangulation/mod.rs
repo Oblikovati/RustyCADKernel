@@ -156,10 +156,7 @@ impl Triangulation {
     /// Attaches deferred storage; this preserves the original API;
     /// `Triangulation::with_deferred(Box::new(storage))`.
     pub fn with_deferred(storage: Box<dyn DeferredTriangulation>) -> Self {
-        Self {
-            hooks: Some(storage),
-            ..Self::default()
-        }
+        Self::with_hooks(storage)
     }
     /// Deep copy with copied parameters and cached range, as `Copy()`; `triangulation.copy()`.
     pub fn copy(&self) -> Handle<Self> {

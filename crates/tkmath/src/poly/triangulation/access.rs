@@ -8,8 +8,19 @@ use crate::{
 };
 use rustycad_tkernel::{ncollection::Vec3, standard::Failure};
 impl Triangulation {
-    /// True when both nodes and triangles exist; `triangulation.has_geometry()`.
+    /// True under this triangulation's virtual geometry rule; `triangulation.has_geometry()`.
     pub fn has_geometry(&self) -> bool {
+        if let Some(result) = self
+            .hooks
+            .as_ref()
+            .and_then(|hooks| hooks.has_geometry(self))
+        {
+            return result;
+        }
+        self.has_geometry_base()
+    }
+    /// Explicit base-qualified `Poly_Triangulation::HasGeometry`; `triangulation.has_geometry_base()`.
+    pub fn has_geometry_base(&self) -> bool {
         let fields = self.fields.read();
         !fields.nodes.is_empty() && !fields.triangles.is_empty()
     }

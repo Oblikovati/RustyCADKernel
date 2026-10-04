@@ -1,0 +1,44 @@
+{
+  "scope": "Poly_Triangulation::HasGeometry virtual override dispatch",
+  "claim": "implemented scoped behavior; base and hook override paths validated",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration": {
+    "id": "264355d314f87b67d865f75cda1c3e11ba88a5820c10bee7a15141c5da6e56ed",
+    "signature": "bool () const",
+    "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+    "source_sha256": "885f46dcacaf7f3260c347f87ff9de1a4929362671229fcf0080bf8e89d8f802",
+    "rust_item": "rustycad_tkmath::poly::Triangulation::has_geometry",
+    "base_rust_item": "rustycad_tkmath::poly::Triangulation::has_geometry_base"
+  },
+  "native_probe": {
+    "source": "tools/oracle/poly_triangulation_has_geometry.cxx",
+    "source_sha256": "11c2050fad73bff2a75dfd889fe6701f1310a83d941fe91777afe90172737c95",
+    "expected": "tools/oracle/poly_triangulation_has_geometry.expected",
+    "expected_sha256": "03d74b805722a66524bd8a8d2bb1e4487fe5bacf092f39dc8cedf13254411858",
+    "executable_sha256": "60cfbbdaedb257a4ef3428524827b87da98b03622e2fe132d6216f2919155c7b",
+    "command": "c++ -std=c++17 -O0 -g0 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/poly_triangulation_has_geometry.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKMath -lTKernel -o /tmp/poly-triangulation-has-geometry",
+    "output_matches_expected": true,
+    "output": "base_nodes 0\\nvirtual_nodes 0\\nvirtual_edge 1\\nrotated -0.081268515318033252 2.2345906623849485 3 -0.081268515318033252 2.2345906623849485 3\\n",
+    "linked_libraries": {
+      "libTKMath.so.8.0.0": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "libTKernel.so.8.0.0": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    },
+    "source_dependencies": {
+      "src/Visualization/TKService/RWMesh/RWMesh_TriangulationSource.hxx": "27912dd0f6c5e76346a574d56773254a97678e351b58ac7f38cca733cc84203b"
+    }
+  },
+  "rust_probe": {
+    "source": "crates/tkmath/tests/poly_triangulation_virtual_hooks.rs",
+    "source_sha256": "00129b9b7daca9d97567b62656787e754137f833996a80e015fa1c8e9fce5724",
+    "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-tkmath-protected-next-target cargo test -p rustycad-tkmath --test poly_triangulation_virtual_hooks --test poly_deferred_filesystem --test poly_triangulation_behavior",
+    "result": "13 passed, 0 failed"
+  },
+  "strict_lint": {
+    "command": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_TARGET_DIR=/tmp/rustycad-tkmath-protected-next-target cargo clippy -p rustycad-tkmath --all-targets -- -D warnings",
+    "result": "passed"
+  },
+  "limitations": [
+    "The derived probe reproduces the edge-backed HasGeometry predicate from RWMesh_TriangulationSource but does not model RWMesh edge topology.",
+    "The test covers the effect of virtual HasGeometry on the accurate MinMax cache branch; it does not establish parity for every custom override."
+  ]
+}

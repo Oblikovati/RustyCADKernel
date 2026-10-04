@@ -14,6 +14,11 @@ use rustycad_tkernel::{osd::FileSystemHandle, standard::Handle};
 /// Rust override hooks for native `Poly_Triangulation` virtual members.
 /// `Triangulation::with_hooks(Box::new(storage))`.
 pub trait TriangulationHooks: Send + Sync {
+    /// Overrides virtual `HasGeometry`; return `None` for node-and-triangle base semantics.
+    /// `Some(base.has_geometry_base())` explicitly calls the native base implementation.
+    fn has_geometry(&self, _base: &Triangulation) -> Option<bool> {
+        None
+    }
     /// Estimated deferred node count; `storage.nb_deferred_nodes()`.
     fn nb_deferred_nodes(&self) -> i32 {
         0
@@ -27,7 +32,7 @@ pub trait TriangulationHooks: Send + Sync {
         self.nb_deferred_triangles() > 0
     }
     /// Overrides protected virtual `computeBoundingBox`; return `None` to call the base implementation.
-    /// `Some(self.compute_bounding_box_base(mesh, transform))` explicitly delegates to the native base.
+    /// `Some(mesh.compute_bounding_box_base(transform))` explicitly delegates to the native base.
     fn compute_bounding_box(
         &self,
         _base: &Triangulation,
