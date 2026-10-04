@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "source_bound_base_legacy_runtime_joins",
+  "source_revision": "355f00e84f43891d6b0ed069dd154ff8b098e37a",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "results": [
+    {
+      "toolkit": "TKMath",
+      "native_cases_passed": 2023,
+      "rust_cases_passed": 2023,
+      "joined_declarations_passed": 2023,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkmath-legacy-355f00e8.tar.gz",
+      "archive_sha256": "ea138d8e3874e0b4148e74c5fc9feb55485247744a1dc6f249546e6870c23d34",
+      "report_sha256": "52d761537431a336e94aedcca780ad50e30b8e5e03b2069cdfb35b26b2d0fd4e",
+      "join_sha256": "6f2a438d6ecbe22911612a9f387e688f955e5cb80fea4ff455630613ba2050ac"
+    },
+    {
+      "toolkit": "TKG2d",
+      "native_cases_passed": 523,
+      "rust_cases_passed": 523,
+      "joined_declarations_passed": 523,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkg2d-legacy-355f00e8.tar.gz",
+      "archive_sha256": "60ff3f230db7a39e52a59fbae8626684ee3057c2dcc62ef6962ea8c11cef4e0a",
+      "report_sha256": "c6347e0d1cf097279eb9361269297a96afceef17fbedc51abb0b4b8c34960e20",
+      "join_sha256": "8c6e1d0db537facb2017091831ce991f982b7312c55393ffe487824777ed01a6"
+    },
+    {
+      "toolkit": "TKG3d",
+      "native_cases_passed": 794,
+      "rust_cases_passed": 794,
+      "joined_declarations_passed": 794,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkg3d-legacy-355f00e8.tar.gz",
+      "archive_sha256": "985239b5f561b0db0272a7740fa14d6899072fdfc1cd91667dba9f5dc3fb5555",
+      "report_sha256": "1afa18e0e678ef865435183823f28ded67405bedc1c38a805ee9a2793f9d8666",
+      "join_sha256": "b731a77b31c9295cd0dcdaabf12a0dcbf1afd080ec4ce15d8909dfe7b1f4d8e7"
+    }
+  ],
+  "full_occt_api_parity_proven": false,
+  "full_occt_legacy_runtime_parity_proven": false,
+  "limitations": [
+    "Mapped GoogleTest cases only; API, DRAW, platform/configuration and behavioral acceptance remain incomplete.",
+    "Reports are historical and source-bound; rerun verifiers after changes to their hashed inputs."
+  ],
+  "reproduce": "Run tools/verify_tkmath_legacy.py with each toolkit, then tools/join_legacy_runtime_evidence.py with an absolute --occt-source path. Archives retain native build/list/XML/logs, Rust target logs, source hashes, and exact declaration joins."
+}
