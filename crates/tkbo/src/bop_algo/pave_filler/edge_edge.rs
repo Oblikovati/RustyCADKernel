@@ -13,6 +13,8 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use std::sync::Arc;
 
+#[path = "edge_edge/analytical_tolerance.rs"]
+mod analytical_tolerance;
 #[path = "edge_edge/candidates.rs"]
 mod candidates;
 #[path = "edge_edge/vertex_fusion.rs"]
@@ -36,6 +38,7 @@ struct PendingVertexPart {
     event: EdgeVertexPart,
     vertex: Vertex,
     parameters: (f64, f64),
+    tolerance: f64,
 }
 
 impl BOPAlgoPaveFiller {
@@ -168,7 +171,7 @@ impl BOPAlgoPaveFiller {
             &mut parameters,
             modified_edges,
         )?;
-        let vertex = self.make_intersection_vertex(&event, parameters)?;
+        let (vertex, tolerance) = self.make_intersection_vertex(&event, parameters)?;
         if existing && !intersection_points_agree(self, &event, parameters)? {
             return Ok(None);
         }
@@ -179,6 +182,7 @@ impl BOPAlgoPaveFiller {
             event,
             vertex,
             parameters,
+            tolerance,
         }))
     }
 
@@ -208,7 +212,7 @@ impl BOPAlgoPaveFiller {
         &self,
         event: &EdgeVertexPart,
         parameters: (f64, f64),
-    ) -> Result<Vertex, Failure> {
+    ) -> Result<(Vertex, f64), Failure> {
         let (first, second) = self.edge_shapes(event.pair.edge1, event.pair.edge2)?;
         let mut vertex = Vertex::default();
         crate::bop_tools::make_new_vertex_edges(
@@ -218,7 +222,9 @@ impl BOPAlgoPaveFiller {
             parameters.1,
             &mut vertex,
         )?;
-        Ok(vertex)
+        let tolerance =
+            analytical_tolerance::intersection_tolerance(event, &first, &second, &vertex)?;
+        Ok((vertex, tolerance))
     }
 
     fn extend_existing_intersection_vertices(

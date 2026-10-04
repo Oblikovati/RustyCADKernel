@@ -1,5 +1,5 @@
 use super::PendingVertexPart;
-use rustycad_tkbrep::topods::Vertex;
+use rustycad_tkbrep::{brep::BRepTool, topods::Vertex};
 use rustycad_tkernel::standard::Failure;
 
 pub(super) fn connected_vertex_groups(
@@ -10,7 +10,7 @@ pub(super) fn connected_vertex_groups(
     for current in 0..pending.len() {
         let mut joined = Vec::new();
         for (group_index, group) in groups.iter().enumerate() {
-            if vertex_group_interferes(&pending[current].vertex, group, pending, fuzzy)? {
+            if vertex_group_interferes(&pending[current], group, pending, fuzzy)? {
                 joined.push(group_index);
             }
         }
@@ -20,17 +20,38 @@ pub(super) fn connected_vertex_groups(
 }
 
 fn vertex_group_interferes(
-    vertex: &Vertex,
+    current: &PendingVertexPart,
     group: &[usize],
     pending: &[PendingVertexPart],
     fuzzy: f64,
 ) -> Result<bool, Failure> {
     for index in group {
-        if crate::bop_tools::compute_vertices(vertex, &pending[*index].vertex, fuzzy)? == 0 {
+        if vertices_interfere(current, &pending[*index], fuzzy)? {
             return Ok(true);
         }
     }
     Ok(false)
+}
+
+fn vertices_interfere(
+    first: &PendingVertexPart,
+    second: &PendingVertexPart,
+    fuzzy: f64,
+) -> Result<bool, Failure> {
+    let first_tolerance = selected_tolerance(first)?;
+    let second_tolerance = selected_tolerance(second)?;
+    let sum = first_tolerance + second_tolerance + fuzzy;
+    let distance = BRepTool::pnt(&first.vertex)?.square_distance(&BRepTool::pnt(&second.vertex)?);
+    Ok(distance < sum * sum)
+}
+
+fn selected_tolerance(candidate: &PendingVertexPart) -> Result<f64, Failure> {
+    let geometric = BRepTool::vertex_tolerance(&candidate.vertex)?;
+    Ok(if candidate.tolerance > geometric {
+        candidate.tolerance
+    } else {
+        geometric
+    })
 }
 
 fn merge_vertex_group(groups: &mut Vec<Vec<usize>>, current: usize, joined: &[usize]) {

@@ -4,9 +4,12 @@
 #include <BOPDS_PaveBlock.hxx>
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRep_Builder.hxx>
+#include <BRep_Tool.hxx>
+#include <gp_Circ.hxx>
 #include <Message_ProgressRange.hxx>
 #include <TopoDS_Compound.hxx>
 #include <TopoDS_Edge.hxx>
+#include <TopoDS.hxx>
 #include <iostream>
 #include <iomanip>
 
@@ -124,6 +127,82 @@ int main() {
     }
   }
   endpoint.PrintVerticesToAvoidExtension();
+  Probe lineCircle;
+  const TopoDS_Edge line = BRepBuilderAPI_MakeEdge(gp_Pnt(-2, 0, 0), gp_Pnt(2, 0, 0)).Edge();
+  const TopoDS_Edge circle = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 1.0)).Edge();
+  lineCircle.AddArgument(edge_argument(line));
+  lineCircle.AddArgument(edge_argument(circle));
+  lineCircle.SetFuzzyValue(1.0e-6);
+  lineCircle.Run();
+  auto& lineCircleDS = lineCircle.DS();
+  std::cout << "line-circle " << lineCircleDS.NbShapes() << ' '
+            << lineCircleDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < lineCircleDS.InterfEE().Length(); ++i) {
+    const auto& record = lineCircleDS.InterfEE().Value(i);
+    const auto& part = record.CommonPart();
+    const auto& range2 = part.Ranges2().First();
+    const auto& vertex = TopoDS::Vertex(lineCircleDS.Shape(record.IndexNew()));
+    std::cout << "line-circle-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << part.Range1().First() << ' '
+              << part.Range1().Last() << ' ' << range2.First() << ' ' << range2.Last() << ' '
+              << BRep_Tool::Tolerance(vertex) << '\n';
+  }
+  Probe nearLineCircle;
+  nearLineCircle.AddArgument(edge_argument(line));
+  nearLineCircle.AddArgument(edge_argument(circle));
+  nearLineCircle.AddArgument(edge_argument(
+    gp_Pnt(1.0000005, -1, 0), gp_Pnt(1.0000005, 1, 0)));
+  nearLineCircle.SetFuzzyValue(0.0);
+  nearLineCircle.Run();
+  auto& nearDS = nearLineCircle.DS();
+  std::cout << "near-line-circle " << nearDS.NbShapes() << ' '
+            << nearDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < nearDS.InterfEE().Length(); ++i) {
+    const auto& record = nearDS.InterfEE().Value(i);
+    const auto& vertex = TopoDS::Vertex(nearDS.Shape(record.IndexNew()));
+    const gp_Pnt point = BRep_Tool::Pnt(vertex);
+    std::cout << "near-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << point.X() << ' ' << point.Y() << ' '
+              << point.Z() << ' ' << BRep_Tool::Tolerance(vertex) << '\n';
+  }
+  Probe reversedLineCircle;
+  reversedLineCircle.AddArgument(edge_argument(circle));
+  reversedLineCircle.AddArgument(edge_argument(line));
+  reversedLineCircle.AddArgument(edge_argument(
+    gp_Pnt(1.0000005, -1, 0), gp_Pnt(1.0000005, 1, 0)));
+  reversedLineCircle.SetFuzzyValue(0.0);
+  reversedLineCircle.Run();
+  auto& reversedDS = reversedLineCircle.DS();
+  std::cout << "near-circle-line " << reversedDS.NbShapes() << ' '
+            << reversedDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < reversedDS.InterfEE().Length(); ++i) {
+    const auto& record = reversedDS.InterfEE().Value(i);
+    const auto& vertex = TopoDS::Vertex(reversedDS.Shape(record.IndexNew()));
+    const gp_Pnt point = BRep_Tool::Pnt(vertex);
+    std::cout << "reversed-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << point.X() << ' ' << point.Y() << ' '
+              << point.Z() << ' ' << BRep_Tool::Tolerance(vertex) << '\n';
+  }
+  Probe farOrigin;
+  farOrigin.AddArgument(edge_argument(
+    gp_Pnt(1.0e12 - 1, -2.0e12, 3.0e12),
+    gp_Pnt(1.0e12 + 1, -2.0e12, 3.0e12)));
+  farOrigin.AddArgument(edge_argument(
+    gp_Pnt(1.0e12, -2.0e12 - 1, 3.0e12),
+    gp_Pnt(1.0e12, -2.0e12 + 1, 3.0e12)));
+  farOrigin.SetFuzzyValue(1.0e-6);
+  farOrigin.Run();
+  auto& farDS = farOrigin.DS();
+  std::cout << "far-origin " << farDS.NbShapes() << ' '
+            << farDS.InterfEE().Length() << '\n';
+  for (int i = 0; i < farDS.InterfEE().Length(); ++i) {
+    const auto& record = farDS.InterfEE().Value(i);
+    const auto& vertex = TopoDS::Vertex(farDS.Shape(record.IndexNew()));
+    const gp_Pnt point = BRep_Tool::Pnt(vertex);
+    std::cout << "far-ee " << record.Index1() << ' ' << record.Index2() << ' '
+              << record.IndexNew() << ' ' << point.X() << ' ' << point.Y() << ' '
+              << point.Z() << ' ' << BRep_Tool::Tolerance(vertex) << '\n';
+  }
   Probe overlap;
   BRep_Builder builder;
   TopoDS_Vertex start, end;

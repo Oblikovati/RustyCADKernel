@@ -1,10 +1,10 @@
 //! Native differential coverage for the ordinary edge/edge vertex crossing path.
 use rustycad_tkbo::bop_algo::BOPAlgoPaveFiller;
 use rustycad_tkbrep::{
-    brep::BRepBuilder,
+    brep::{BRepBuilder, BRepTool},
     topods::{Compound, Shape, Vertex},
 };
-use rustycad_tkmath::gp::Point3;
+use rustycad_tkmath::gp::{Axis2, Circle3, Point3, StandardDirection3};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 #[test]
@@ -93,6 +93,68 @@ fn perform_ee_fuses_generated_vertices_shared_by_three_edges() {
     assert_eq!(
         multi_snapshot(&mut filler),
         include_str!("../../../tools/oracle/tkbo_pave_filler_ee.multi.expected").trim()
+    );
+}
+
+#[test]
+fn perform_ee_uses_line_circle_common_range_to_fuse_near_intersections() {
+    let line = edge_argument(Point3::new(-2.0, 0.0, 0.0), Point3::new(2.0, 0.0, 0.0));
+    let circle = circle_argument();
+    let near_crossing = edge_argument(
+        Point3::new(1.0000005, -1.0, 0.0),
+        Point3::new(1.0000005, 1.0, 0.0),
+    );
+    let mut filler = BOPAlgoPaveFiller::new();
+    for argument in [&line, &circle, &near_crossing] {
+        filler.add_argument(argument);
+    }
+    filler.initialize().unwrap();
+    filler.perform_ee().unwrap();
+    assert_eq!(
+        near_line_circle_snapshot(&mut filler),
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ee.near_line_circle.expected").trim()
+    );
+}
+
+#[test]
+fn perform_ee_uses_second_common_range_when_circle_is_first() {
+    let circle = circle_argument();
+    let line = edge_argument(Point3::new(-2.0, 0.0, 0.0), Point3::new(2.0, 0.0, 0.0));
+    let near_crossing = edge_argument(
+        Point3::new(1.0000005, -1.0, 0.0),
+        Point3::new(1.0000005, 1.0, 0.0),
+    );
+    let mut filler = BOPAlgoPaveFiller::new();
+    for argument in [&circle, &line, &near_crossing] {
+        filler.add_argument(argument);
+    }
+    filler.initialize().unwrap();
+    filler.perform_ee().unwrap();
+    assert_eq!(
+        near_circle_line_snapshot(&mut filler),
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ee.near_circle_line.expected").trim()
+    );
+}
+
+#[test]
+fn perform_ee_constructs_intersection_at_far_origin() {
+    let first = edge_argument(
+        Point3::new(1.0e12 - 1.0, -2.0e12, 3.0e12),
+        Point3::new(1.0e12 + 1.0, -2.0e12, 3.0e12),
+    );
+    let second = edge_argument(
+        Point3::new(1.0e12, -2.0e12 - 1.0, 3.0e12),
+        Point3::new(1.0e12, -2.0e12 + 1.0, 3.0e12),
+    );
+    let mut filler = BOPAlgoPaveFiller::new();
+    filler.add_argument(&first);
+    filler.add_argument(&second);
+    filler.options_mut().set_fuzzy_value(1.0e-6);
+    filler.initialize().unwrap();
+    filler.perform_ee().unwrap();
+    assert_eq!(
+        far_origin_snapshot(&mut filler),
+        include_str!("../../../tools/oracle/tkbo_pave_filler_ee.far_origin.expected").trim()
     );
 }
 
@@ -260,6 +322,83 @@ fn multi_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
         append_multi_blocks(&mut output, structure, edge);
     }
     output
+}
+
+fn near_line_circle_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
+    near_vertex_records(filler, "near-line-circle", "near-ee")
+}
+
+fn near_circle_line_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
+    near_vertex_records(filler, "near-circle-line", "reversed-ee")
+}
+
+fn near_vertex_records(filler: &mut BOPAlgoPaveFiller, header: &str, prefix: &str) -> String {
+    let structure = filler.data_structure_mut().unwrap();
+    let shape_count = structure.nb_shapes();
+    let records = copy_record_indices(structure);
+    let mut output = format!("{header} {shape_count} {}", records.len());
+    for (first, second, new_vertex) in records {
+        let vertex = Vertex::unchecked(structure.shape(new_vertex).unwrap().clone());
+        let point = BRepTool::pnt(&vertex).unwrap();
+        let tolerance = BRepTool::vertex_tolerance(&vertex).unwrap();
+        output.push_str(&format!(
+            "\n{prefix} {first} {second} {new_vertex} {:.8} {:.8} {:.8} {:.8}",
+            point.x(),
+            point.y(),
+            point.z(),
+            tolerance
+        ));
+    }
+    output
+}
+
+fn copy_record_indices(
+    structure: &mut rustycad_tkbo::bop_ds::DataStructure,
+) -> Vec<(i32, i32, i32)> {
+    structure
+        .interf_ee()
+        .iter()
+        .map(|record| (record.index1(), record.index2(), record.index_new()))
+        .collect()
+}
+
+fn circle_argument() -> Shape {
+    let circle = Circle3::new(Axis2::from_standard(StandardDirection3::Z), 1.0).unwrap();
+    let edge = BRepBuilderAPIMakeEdge::from_circ(circle)
+        .unwrap()
+        .edge()
+        .unwrap();
+    edge_argument_shape(edge.into_shape())
+}
+
+fn far_origin_snapshot(filler: &mut BOPAlgoPaveFiller) -> String {
+    let structure = filler.data_structure_mut().unwrap();
+    let shape_count = structure.nb_shapes();
+    let (record_count, first, second, new_vertex) = {
+        let records = structure.interf_ee();
+        let record = records.value(0).unwrap();
+        (
+            records.len(),
+            record.index1(),
+            record.index2(),
+            record.index_new(),
+        )
+    };
+    let vertex = Vertex::unchecked(structure.shape(new_vertex).unwrap().clone());
+    let point = BRepTool::pnt(&vertex).unwrap();
+    let tolerance = BRepTool::vertex_tolerance(&vertex).unwrap();
+    format!(
+        "far-origin {} {}\nfar-ee {} {} {} {:.8} {:.8} {:.8} {:.8}",
+        shape_count,
+        record_count,
+        first,
+        second,
+        new_vertex,
+        point.x(),
+        point.y(),
+        point.z(),
+        tolerance
+    )
 }
 
 fn append_multi_blocks(
