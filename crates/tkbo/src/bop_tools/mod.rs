@@ -95,3 +95,6 @@ pub use internal_face::internal_face_between;
 
 mod internal_solid_face;
 pub use internal_solid_face::internal_face_in_solid;
+
+mod internal_face_list;
+pub use internal_face_list::internal_face_among;

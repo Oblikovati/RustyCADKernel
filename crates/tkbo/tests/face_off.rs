@@ -152,8 +152,60 @@ fn native_internal_face_pair_classification_matches() {
             bop_tools::internal_face_between(&first, &edge, &faces[0], last, &Context::default());
         assert_eq!(
             vec![if result.is_ok() { 0 } else { -1 }, result.unwrap_or(-99)],
-            row[9..],
+            row[9..11],
             "{line}"
         );
     }
+}
+
+#[test]
+fn native_internal_face_list_classification_matches() {
+    let fixture = include_str!("../../../tools/oracle/tkbo_internal_face_list.expected");
+    assert_eq!(fixture.lines().count(), 160);
+    for line in fixture.lines() {
+        let row: Vec<i32> = line
+            .split_whitespace()
+            .map(|s| s.parse().unwrap())
+            .collect();
+        let (faces, edge, first) = self::fixture(&row);
+        let supports = classification_supports(&faces, &edge, row[2]);
+        let result = bop_tools::internal_face_among(&first, &edge, &supports, &Context::default());
+        assert_eq!(
+            vec![
+                if result.is_ok() { 0 } else { -1 },
+                result.unwrap_or(-99),
+                supports.extent()
+            ],
+            row[11..],
+            "{line}"
+        );
+    }
+}
+fn classification_supports(
+    faces: &[Face],
+    edge: &Edge,
+    mode: i32,
+) -> List<rustycad_tkbrep::topods::Shape> {
+    let mut occurrence = Edge::default();
+    let other = faces[1..]
+        .iter()
+        .find(|face| bop_tools::get_edge_on_face(edge, face, &mut occurrence).unwrap())
+        .unwrap_or(&faces[0]);
+    let mut supports = List::default();
+    if mode != 0 {
+        supports.append(faces[0].clone().into_shape());
+        supports.append(
+            if mode == 3 {
+                faces[0].clone()
+            } else {
+                other.clone()
+            }
+            .into_shape(),
+        );
+    }
+    for _ in 0..if mode == 4 { 2 } else { i32::from(mode == 2) } {
+        supports.append(faces[0].clone().into_shape());
+        supports.append(other.clone().into_shape());
+    }
+    supports
 }
