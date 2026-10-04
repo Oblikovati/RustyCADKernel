@@ -15,10 +15,7 @@ fn iterator_prepare_matches_native_overlapping_box_pairs() {
     structure.init(1.0e-7).unwrap();
     let mut iterator = BOPDSIterator::default();
     iterator.prepare(&structure).unwrap();
-    assert_eq!(
-        native_pair_output(&mut iterator, &structure).trim(),
-        expected().trim()
-    );
+    assert_eq!(native_pair_output(&mut iterator).trim(), expected().trim());
 }
 
 #[test]
@@ -60,7 +57,7 @@ fn box_shape(point: Point3) -> rustycad_tkbrep::topods::Shape {
     maker.shape().unwrap().clone()
 }
 
-fn native_pair_output(iterator: &mut BOPDSIterator, structure: &DataStructure) -> String {
+fn native_pair_output(iterator: &mut BOPDSIterator) -> String {
     let types = [
         ShapeEnum::Vertex,
         ShapeEnum::Edge,
@@ -73,7 +70,7 @@ fn native_pair_output(iterator: &mut BOPDSIterator, structure: &DataStructure) -
     let mut output = String::new();
     for first in types {
         for second in types {
-            append_type_pairs(&mut output, iterator, structure, first, second);
+            append_type_pairs(&mut output, iterator, first, second);
         }
     }
     output
@@ -82,14 +79,13 @@ fn native_pair_output(iterator: &mut BOPDSIterator, structure: &DataStructure) -
 fn append_type_pairs(
     output: &mut String,
     iterator: &mut BOPDSIterator,
-    structure: &DataStructure,
     first: ShapeEnum,
     second: ShapeEnum,
 ) {
     iterator.initialize(first, second);
     output.push_str(&format!("{},{}:", first as i32, second as i32));
     while iterator.more() {
-        let (left, right) = iterator.value(structure).unwrap();
+        let (left, right) = iterator.value().unwrap();
         output.push_str(&format!("{left}-{right},"));
         iterator.next();
     }

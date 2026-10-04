@@ -1,5 +1,6 @@
 //! AABB candidate-pair preparation for Boolean interference algorithms.
 use super::{DataStructure, IndexRange, Pair};
+use crate::int_tools::Context;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
@@ -9,6 +10,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 pub struct BOPDSIterator {
     lists: [Vec<Pair>; 10],
     active_pairs: Vec<Pair>,
+    shape_types: Vec<ShapeEnum>,
     position: usize,
     length: i32,
     run_parallel: bool,
@@ -18,11 +20,24 @@ impl BOPDSIterator {
     /// Builds source-range-filtered AABB candidates from an initialized data structure.
     /// `iterator.prepare(&ds)?`.
     pub fn prepare(&mut self, structure: &DataStructure) -> Result<(), Failure> {
+        self.prepare_with_context(structure, None, false, 0.0)
+    }
+
+    /// Applies the optional cached OBB rejection used by the native iterator.
+    /// `iterator.prepare_with_context(&ds, Some(&context), true, fuzzy)?`.
+    pub fn prepare_with_context(
+        &mut self,
+        structure: &DataStructure,
+        context: Option<&Context>,
+        check_obb: bool,
+        fuzzy: f64,
+    ) -> Result<(), Failure> {
         self.clear_lists();
+        self.shape_types = source_types(structure)?;
         let candidates = self.candidate_pairs(structure)?;
         for range_index in 0..structure.nb_ranges() {
             let range = structure.range(range_index)?;
-            self.add_range_pairs(structure, range, &candidates)?;
+            self.add_range_pairs(structure, range, &candidates, context, check_obb, fuzzy)?;
         }
         Ok(())
     }
@@ -51,12 +66,12 @@ impl BOPDSIterator {
 
     /// Reads the current source indices or reports iterator exhaustion.
     /// `let (first, second) = iterator.value()?`.
-    pub fn value(&self, structure: &DataStructure) -> Result<(i32, i32), Failure> {
+    pub fn value(&self) -> Result<(i32, i32), Failure> {
         let pair = self
             .active_pairs
             .get(self.position)
             .ok_or_else(|| Failure::new("BOPDS_Iterator::Value called without a current pair"))?;
-        orient_pair(structure, *pair)
+        orient_pair(&self.shape_types, *pair)
     }
 
     /// Reads the selected pair count; `iterator.expected_length()`.
@@ -138,18 +153,46 @@ impl BOPDSIterator {
         structure: &DataStructure,
         range: &IndexRange,
         candidates: &[Pair],
+        context: Option<&Context>,
+        check_obb: bool,
+        fuzzy: f64,
     ) -> Result<(), Failure> {
         for pair in candidates {
             let (first, second) = pair.indices();
             if !range.contains(first) {
                 break;
             }
-            if range.contains(second) || self.is_contained_pair(structure, first, second)? {
+            if range.contains(second)
+                || self.is_contained_pair(structure, first, second)?
+                || self.is_out_obb(structure, first, second, context, check_obb, fuzzy)?
+            {
                 continue;
             }
             self.add_typed_pair(structure, *pair)?;
         }
         Ok(())
+    }
+
+    fn is_out_obb(
+        &self,
+        structure: &DataStructure,
+        first: i32,
+        second: i32,
+        context: Option<&Context>,
+        check_obb: bool,
+        fuzzy: f64,
+    ) -> Result<bool, Failure> {
+        if !check_obb {
+            return Ok(false);
+        }
+        let Some(context) = context else {
+            return Ok(false);
+        };
+        let first_shape = structure.shape(first)?;
+        let second_shape = structure.shape(second)?;
+        let first_box = context.obb(first_shape, fuzzy)?;
+        let second_box = context.obb(second_shape, fuzzy)?;
+        Ok(first_box.read().is_out_box(&second_box.read()))
     }
 
     fn is_contained_pair(
@@ -179,14 +222,29 @@ impl BOPDSIterator {
     }
 }
 
-fn orient_pair(structure: &DataStructure, pair: Pair) -> Result<(i32, i32), Failure> {
+fn orient_pair(types: &[ShapeEnum], pair: Pair) -> Result<(i32, i32), Failure> {
     let (first, second) = pair.indices();
-    let first_type = structure.shape_info(first)?.shape_type();
-    let second_type = structure.shape_info(second)?.shape_type();
+    let first_type = stored_shape_type(types, first)?;
+    let second_type = stored_shape_type(types, second)?;
     if shape_rank(first_type) < shape_rank(second_type) {
         return Ok((second, first));
     }
     Ok((first, second))
+}
+
+fn source_types(structure: &DataStructure) -> Result<Vec<ShapeEnum>, Failure> {
+    (0..structure.nb_source_shapes())
+        .map(|index| structure.shape_info(index).map(|info| info.shape_type()))
+        .collect()
+}
+
+fn stored_shape_type(types: &[ShapeEnum], index: i32) -> Result<ShapeEnum, Failure> {
+    types.get(index as usize).copied().ok_or_else(|| {
+        Failure::new(&format!(
+            "BOPDS_Iterator::Value source index {index} is outside type table length {}",
+            types.len()
+        ))
+    })
 }
 
 fn interference_index(first: ShapeEnum, second: ShapeEnum) -> Option<usize> {
