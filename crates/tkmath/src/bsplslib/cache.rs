@@ -11,15 +11,17 @@ use crate::bsplclib::CacheParams;
 use crate::gp::{Point3, Vector3};
 use crate::plib::{eval_polynomial, no_derivative_eval_polynomial};
 use rustycad_tkernel::ncollection::{Array1, Array2};
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::standard::{Failure, StandardTransient};
 
 /// Cached Taylor coefficients of the patch last located (`BSplSLib_Cache`).
 pub struct Cache {
+    base: StandardTransient,
     is_rational: bool,
     params_u: CacheParams,
     params_v: CacheParams,
     poles_weights: Array2<'static, f64>,
 }
+rustycad_tkernel::impl_transient!(Cache, "BSplSLib_Cache", StandardTransient, base);
 
 impl Cache {
     /// Prepares an empty cache of `(max degree + 1) x (3 or 4)*(min degree + 1)` values;
@@ -40,6 +42,7 @@ impl Cache {
             Array2::with_bounds(1, max_degree + 1, 1, columns)
                 .map_err(|error| Failure::out_of_range(&format!("BSplSLib_Cache: {error}")))?;
         Ok(Self {
+            base: StandardTransient::default(),
             is_rational,
             params_u: CacheParams::new(degree_u, periodic_u, flat_knots_u)?,
             params_v: CacheParams::new(degree_v, periodic_v, flat_knots_v)?,
