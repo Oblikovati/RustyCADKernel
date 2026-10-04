@@ -2,8 +2,8 @@
 // The raw Free mirrors the native pointer API, which Rust marks unsafe.
 #![allow(unsafe_code)]
 use rustycad_tkernel::ncollection::{
-    ACC_DEFAULT_BLOCK_SIZE, AccAlignedPtr, AccAlignedSize, BaseAllocator, INC_DEFAULT_BLOCK_SIZE,
-    IncBlock, IncBlockSizeLevel,
+    ACC_DEFAULT_BLOCK_SIZE, AccAlignedPtr, AccAlignedSize, AccBlockKey, AccBlockKeyHasher,
+    BaseAllocator, INC_DEFAULT_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
 use std::ptr::NonNull;
 
@@ -125,6 +125,18 @@ fn accumulating_protected_alignment_helpers_match_native_arithmetic() {
     assert_acc_aligned_size_rounding();
     assert_acc_aligned_pointer_views();
     assert_acc_aligned_pointer_arithmetic();
+}
+
+#[test]
+fn accumulating_protected_key_hasher_matches_native_hash_and_equality() {
+    let hasher = AccBlockKeyHasher;
+    for value in [0, 1, 42, usize::MAX] {
+        let key = AccBlockKey::new(value);
+        assert_eq!(key.value(), value);
+        assert_eq!(hasher.hash(key), value);
+        assert!(hasher.equal(key, AccBlockKey::new(value)));
+        assert!(!hasher.equal(key, AccBlockKey::new(value.wrapping_add(1))));
+    }
 }
 
 fn assert_acc_aligned_size_rounding() {

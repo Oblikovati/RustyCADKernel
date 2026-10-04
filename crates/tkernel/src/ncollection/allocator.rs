@@ -25,6 +25,7 @@ use std::{
 mod accumulating;
 mod aligned;
 mod incremental;
+mod keys;
 mod owned;
 mod raw_heap;
 use accumulating::AccEngine;
@@ -34,6 +35,7 @@ use incremental::IncEngine;
 pub use incremental::{
     INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
+pub use keys::{AccBlockKey, AccBlockKeyHasher};
 pub use owned::{AllocatedArray, AllocatedBox, AllocatedBytes};
 use raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, mm_malloc_alignment};
 
