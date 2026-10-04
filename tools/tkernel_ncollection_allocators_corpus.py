@@ -60,7 +60,7 @@ def accumulating_cases(rng: random.Random) -> list[str]:
         for _ in range(8):
             steps = accumulating_walk(rng, rng.randrange(1, 200))
             lines.append(f"ncoll_allocators_acc {block_size} {len(steps)} {' '.join(steps)}")
-    return lines
+    return lines + ["ncoll_allocators_acc_extension"]
 
 
 def aligned_cases() -> list[str]:
