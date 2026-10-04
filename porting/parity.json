@@ -234599,22 +234599,22 @@
       "notes": "The override receives mutable shared state and returns a signed count. available() remains a state inspector and does not call this hook. The derived fixture exercises an override that moves the shared cursor before returning. Rust isize is a bounded adapter for native std::streamsize."
     },
     {
-      "upstream_id": "Standard_ArrayStreamBuffer::seekoff(off_type,std::ios_base::seekdir,std::ios_base::openmode)",
+      "upstream_id": "Standard_ArrayStreamBuffer::seekoff(std::basic_streambuf<char>::off_type,std::ios_base::seekdir,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::seekoff",
       "status": "partial",
       "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
-      "notes": "ArrayStreamSeekDirection represents begin/current/end and the source default no-op branch; openmode is omitted because native ignores it. io::Result<u64> represents bounded valid positions, not arbitrary C++ pos_type state. Negative pointer targets and beyond-end native pointer arithmetic remain unsupported undefined domains."
+      "notes": "Selector uses the exact written parameter types from the pinned header. ArrayStreamSeekDirection represents begin/current/end and the source default no-op branch; openmode is omitted because native ignores it. io::Result<u64> represents bounded valid positions, not arbitrary C++ pos_type state. Negative pointer targets and beyond-end native pointer arithmetic remain unsupported undefined domains."
     },
     {
-      "upstream_id": "Standard_ArrayStreamBuffer::seekpos(pos_type,std::ios_base::openmode)",
+      "upstream_id": "Standard_ArrayStreamBuffer::seekpos(std::basic_streambuf<char>::pos_type,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::seekpos",
       "status": "partial",
       "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
-      "notes": "The hook adapts a bounded absolute position and its default implementation dispatches through seekoff, verified by the derived hook count receipt. Rust does not model fpos state or the ignored openmode parameter; invalid native pointer domains remain unsupported."
+      "notes": "Selector uses the exact written parameter types from the pinned header. The hook adapts a bounded absolute position and its default implementation dispatches through seekoff, verified by the derived hook count receipt. Rust does not model fpos state or the ignored openmode parameter; invalid native pointer domains remain unsupported."
     }
   ],
   "tests": [

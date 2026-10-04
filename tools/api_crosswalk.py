@@ -6,6 +6,13 @@ from collections import defaultdict
 import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
+from api_template_selectors import (
+    constructor_candidates,
+    declaration_template_owner,
+    prefer_nonconst_overload,
+    suffix_matches,
+    template_parameter_match,
+)
 
 
 def row_list(document: dict[str, JSONValue], field: str) -> list[dict[str, JSONValue]]:
@@ -73,16 +80,11 @@ def cpp_indexes(
     return dict(by_name), sorted(duplicates), malformed
 
 
-def suffix_matches(identity_suffix: str, declaration: dict[str, JSONValue]) -> bool:
-    if not identity_suffix:
-        return True
-    signature = declaration.get("signature")
-    if not isinstance(signature, str):
-        return False
-    return norm_cpp(signature).endswith(identity_suffix)
-
-
-def parameter_match(params: list[str], declaration: dict[str, JSONValue]) -> bool:
+def parameter_match(
+    params: list[str],
+    declaration: dict[str, JSONValue],
+    template_owner: str | None = None,
+) -> bool:
     fixed = fixed_selector_parameters(params, declaration)
     if fixed is None:
         return False
@@ -96,6 +98,9 @@ def parameter_match(params: list[str], declaration: dict[str, JSONValue]) -> boo
             choice = [canonical_parameter_type(item) for item in value]
             if all(item is not None for item in choice):
                 choices.append(choice)
+                if field == "parameter_types" and template_owner:
+                    if template_parameter_match(expected, choice, template_owner):
+                        return True
     return expected in choices
 
 
@@ -201,29 +206,20 @@ def cpp_candidates(
             return "unstable_cpp_identity", unresolved
         return "unresolved_member_target", unresolved
     if params is not None:
-        candidates = [row for row in candidates if parameter_match(params, row)]
+        candidates = [
+            row
+            for row in candidates
+            if parameter_match(params, row, declaration_template_owner(row, by_name))
+        ]
     candidates = [row for row in candidates if suffix_matches(suffix, row)]
+    if params is not None and not suffix:
+        candidates = prefer_nonconst_overload(candidates)
     status = (
         "conflicting_inventory"
         if any(row.get("inventory_conflict") for row in candidates)
         else candidate_status(candidates)
     )
     return status, candidates
-
-
-def constructor_candidates(
-    name: str,
-    candidates: list[dict[str, JSONValue]],
-    by_name: dict[str, list[dict[str, JSONValue]]],
-) -> list[dict[str, JSONValue]]:
-    """Resolve Class(args) only through its exact record; `constructor_candidates(name, rows, index)`."""
-    records = [row for row in candidates if row.get("kind") == "CXXRecord"]
-    if not any(row.get("qualified_name") == name for row in records):
-        return candidates
-    constructors = by_name.get(f"{name}::{leaf_name(name)}", [])
-    return [row for row in candidates if row not in records] + [
-        row for row in constructors if row.get("kind") == "CXXConstructor"
-    ]
 
 
 def candidate_status(candidates: list[dict[str, JSONValue]]) -> str:
