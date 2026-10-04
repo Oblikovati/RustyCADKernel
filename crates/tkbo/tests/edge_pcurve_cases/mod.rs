@@ -192,3 +192,5 @@ mod curve_tolerance;
 mod edge_construction;
 
 mod vertex_update;
+
+mod make_section_pcurve;

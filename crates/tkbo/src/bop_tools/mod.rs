@@ -51,3 +51,6 @@ pub use edge_construction::{copy_edge, make_edge, make_section_edge, make_split_
 
 mod vertex_update;
 pub use vertex_update::{update_vertex_curve, update_vertex_edge, update_vertex_pair};
+
+mod make_pcurve;
+pub use make_pcurve::make_pcurve;
