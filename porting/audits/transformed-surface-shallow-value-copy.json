@@ -18,7 +18,8 @@
     "crates/tkg3d/src/geom_adaptor/surface_state.rs": "4e1c7d010f48a4d05d159fea4ffcb612066dcd61b82f7541dee09b6ffcb8497e",
     "crates/tkg3d/src/geom_adaptor/surface_state_copy.rs": "ed92f28bcc58aa05b3a2a85465e56cdec4f3cf8b1eb8ee191e589e0c3805a15c",
     "crates/tkg3d/src/geom_adaptor/surface_eval.rs": "1e779b0647ba4340e2edeae309d8ab99a43aed2930bb021231d4288de7ad476e",
-    "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs": "dd50c9c94e64637f440451c6188341fcd48fe28c7bead86d5a0b5bd70e3c10a0"
+    "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs": "a45f1f99d6afd733b0a0a68adfdae39561e25d05f5563e264bd69fc29915d8e7",
+    "crates/tkg3d/tests/transformed_surface_shallow_copy.rs": "9001662b9b85a05fd291b78df74eed356bc0e36ba241146a1a6d3cc41ecb3740"
   },
   "rust_behavior": [
     "The original surf member still uses GeomAdaptorSurface::shallow_adaptor, which creates independent adaptor state and resets its caches as native ShallowCopy does.",
@@ -45,7 +46,7 @@
     }
   },
   "rust_validation": {
-    "focused": "cargo +1.98.1 test -p rustycad-tkg3d --test geom_adaptor_transformed_surface",
+    "focused": "cargo test -p rustycad-tkg3d --test transformed_surface_shallow_copy --test geom_adaptor_transformed_surface",
     "focused_passed": 13,
     "unit": "cargo test -p rustycad-tkg3d --lib geom_adaptor::surface_state::copy",
     "unit_passed": 5,
@@ -53,10 +54,13 @@
     "package_exit_code": 0,
     "clippy": "cargo +1.98.1 clippy -p rustycad-tkg3d --all-targets -- -D warnings",
     "clippy_exit_code": 0,
-    "supplemental_case": "supplemental_shallow_copy_separates_cached_adaptor_state"
+    "supplemental_case": "protected_shallow_copy_matches_native_member_isolation",
+    "legacy_target_passed": 12,
+    "supplemental_target_passed": 1
   },
   "limitations": [
     "The supplemental probe is not an additional translated legacy test declaration.",
-    "The OCCT nested cache handle identity is established from native member declarations and generated value assignment; its private identity is not read directly from the probe because the contained GeomAdaptor_Surface is a base subobject, not an exposed derived probe object."
+    "The OCCT nested cache handle identity is established from native member declarations and generated value assignment; its private identity is not read directly from the probe because the contained GeomAdaptor_Surface is a base subobject, not an exposed derived probe object.",
+    "The supplemental native Bezier fixture has a separate Rust test target. The original legacy target is byte-identical to the pre-fix twelve-declaration translation, so strict legacy passed-set validation cannot count this probe as an original declaration."
   ]
 }

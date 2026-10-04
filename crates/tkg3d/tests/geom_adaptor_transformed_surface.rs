@@ -131,51 +131,6 @@ fn GeomAdaptor_TransformedSurfaceTest__BSplineCachePreservedByShallowCopy() {
     assert!(aCopy.bspline().unwrap() == aBSpline);
 }
 
-// Native optional<GeomAdaptor_Surface> copies value state while nested handles stay shared.
-#[test]
-fn supplemental_shallow_copy_separates_cached_adaptor_state() {
-    let spline: Handle<dyn GeomSurface> = createBSplineSurface().cast();
-    let adaptor = Transformed(&spline, createTranslation(4.0, 0.0, 0.0));
-    let source_cache = adaptor.adaptor_surface_transformed().unwrap();
-    source_cache.eval_d0(0.25, 0.5).unwrap();
-    let copy = TransformedCopy(&adaptor);
-    let copied_cache = copy.adaptor_surface_transformed().unwrap();
-    let plane = PlaneXOY();
-
-    assert_cached_adaptor_value_copy(source_cache, copied_cache, &plane);
-    assert_original_adaptor_value_copy(adaptor, copy, &plane);
-}
-
-fn assert_cached_adaptor_value_copy(
-    source_cache: Handle<GeomAdaptorSurface>,
-    copied_cache: Handle<GeomAdaptorSurface>,
-    plane: &Handle<dyn GeomSurface>,
-) {
-    assert!(source_cache != copied_cache);
-    assert!(source_cache.surface() == copied_cache.surface());
-    source_cache.load(plane).unwrap();
-    assert_eq!(source_cache.get_type().unwrap(), SurfaceType::Plane);
-    assert_eq!(
-        copied_cache.get_type().unwrap(),
-        SurfaceType::BSplineSurface
-    );
-}
-
-fn assert_original_adaptor_value_copy(
-    adaptor: GeomAdaptorTransformedSurface,
-    copy: Handle<GeomAdaptorTransformedSurface>,
-    plane: &Handle<dyn GeomSurface>,
-) {
-    let original = adaptor.adaptor_surface_original();
-    let copied_original = copy.adaptor_surface_original();
-    original.load(plane).unwrap();
-    assert_eq!(original.get_type().unwrap(), SurfaceType::Plane);
-    assert_eq!(
-        copied_original.get_type().unwrap(),
-        SurfaceType::BSplineSurface
-    );
-}
-
 //=================================================================================================
 
 #[test]
