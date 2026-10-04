@@ -11,13 +11,14 @@ parameter `0.25` through derivative order 1 into six caller values initialized
 to `-77`, then requests order 3 from a degree-1 curve and prints all ten slots.
 It also evaluates a rational 3D curve on a non-unit `[2, 6]` span through both
 the global-parameter and local-parameter protected helpers. Finally it requests
-order 5 from the global helper for a non-rational quartic Bezier on `[2, 6]`.
+order 5 from both protected helpers for a non-rational quartic Bezier on
+`[2, 6]`; the local probe supplies normalized parameter `0.5` directly.
 
 Compiler used for the checked-in output: `g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1)
 13.3.0`. The exact command below produced `/tmp/tkmath-cache-high-derivatives`;
 the checked-in expected file was copied from its stdout and verified with `cmp`.
-Binary SHA-256: `c399226051c268d2715eeca02ba7fa545d0448cea28552975819416b71d9ef78`;
-captured stdout SHA-256: `0e4b9d07f048d7f30be71d3185ba6c42fac7d242114dc22bfdf353e311d741eb`.
+Binary SHA-256: `6211398fb1b0c668cc1bd778a8a81cacda5f2c3663585bdc3c3a107cfdb3d1f0`;
+captured stdout SHA-256: `9b54774b793538c308db039cc8fa53c8ec95abd622d42be5ae389fd26ec2e513`.
 
 Reproduce against the pinned OCCT headers and libraries:
 
@@ -45,11 +46,12 @@ inverse span length. The local helper accepts a normalized span parameter but
 returns derivatives in the original curve-parameter units.
 Both leave spare capacity alone. Rust exposes a bounded slice operation for
 this protected subclass contract; too-short slices return
-`Standard_DimensionMismatch` before changing any element. Its explicit order
-limit is 0..=3 for `calculateDerivativeLocal` (the header documents orders
-1..=3; order zero is also a defined value-only evaluation), and for rational
-global requests, matching the native fixed 16-value temporary.
-Non-rational global requests use caller storage and support higher orders: the
-order-5 quartic row confirms a nonzero fourth derivative, a cleared fifth row,
-and untouched spare slots. Rust's rational result comparison uses absolute
-tolerance `1e-14`; it does not assert bit-for-bit identity.
+`Standard_DimensionMismatch` before changing any element. The 0..=3 limit stays
+for rational requests, matching the native fixed 16-value temporary. For
+non-rational global and local requests, the implementation uses caller storage
+and `PLib::EvalPolynomial`'s general-order path. Although the header documents
+local orders 1..=3, its implementation supports these higher orders: order-5
+quartic rows confirm a nonzero fourth derivative, a cleared fifth row, and
+untouched spare slots; the direct Local and global rows match. Rust's rational
+result comparison uses absolute tolerance `1e-14`; it does not assert bit-for-bit
+identity.

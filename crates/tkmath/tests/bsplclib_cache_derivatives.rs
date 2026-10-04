@@ -76,17 +76,20 @@ fn raw_derivatives_clear_rows_above_curve_degree() {
 #[test]
 fn non_rational_cache_writes_defined_order_five_rows() {
     let cache: Cache = quartic_cache_3d();
-    let mut rows: [f64; 20] = [-77.0; 20];
+    let mut global: [f64; 20] = [-77.0; 20];
+    let mut local: [f64; 20] = [-77.0; 20];
 
-    cache.derivatives_into(4.0, 5, &mut rows).unwrap();
+    cache.derivatives_into(4.0, 5, &mut global).unwrap();
+    cache.derivatives_local_into(0.5, 5, &mut local).unwrap();
 
     assert_eq!(
-        rows,
+        global,
         [
             0.0625, 0.0, 0.0, 0.125, 0.0, 0.0, 0.1875, 0.0, 0.0, 0.1875, 0.0, 0.0, 0.09375, 0.0,
             0.0, 0.0, 0.0, 0.0, -77.0, -77.0,
         ]
     );
+    assert_eq!(local, global);
 }
 
 #[test]
@@ -116,8 +119,8 @@ fn raw_derivatives_reject_short_buffers_without_writing() {
 }
 
 #[test]
-fn local_raw_derivatives_reject_orders_outside_native_documented_range() {
-    let cache: Cache = cache_2d();
+fn local_rational_derivatives_reject_orders_above_fixed_native_capacity() {
+    let cache: Cache = rational_cache_3d();
     let mut rows: [f64; 16] = [-77.0; 16];
 
     for derivative in [-1, 4] {
@@ -156,12 +159,18 @@ fn rational_cache_keeps_four_row_temporary_limit() {
 #[test]
 fn high_order_global_output_requires_all_rows_before_writing() {
     let cache: Cache = quartic_cache_3d();
-    let mut rows: [f64; 17] = [-77.0; 17];
+    let mut global: [f64; 17] = [-77.0; 17];
+    let mut local: [f64; 17] = [-77.0; 17];
 
-    let error = cache.derivatives_into(4.0, 5, &mut rows).unwrap_err();
+    let error = cache.derivatives_into(4.0, 5, &mut global).unwrap_err();
+    let local_error = cache
+        .derivatives_local_into(0.5, 5, &mut local)
+        .unwrap_err();
 
     assert_eq!(error.exception_type(), "Standard_DimensionMismatch");
-    assert_eq!(rows, [-77.0; 17]);
+    assert_eq!(local_error.exception_type(), "Standard_DimensionMismatch");
+    assert_eq!(global, [-77.0; 17]);
+    assert_eq!(local, [-77.0; 17]);
 }
 
 #[test]
