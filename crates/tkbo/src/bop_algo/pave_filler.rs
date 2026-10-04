@@ -5,6 +5,15 @@ mod edge_edge;
 mod edge_face;
 #[path = "pave_filler/face_face_prepare.rs"]
 mod face_face_prepare;
+#[cfg_attr(
+    not(test),
+    expect(dead_code, reason = "PerformFF call site is a separate queued port")
+)]
+#[path = "pave_filler/face_face_task.rs"]
+mod face_face_task;
+#[cfg(test)]
+#[path = "pave_filler/face_face_task_tests.rs"]
+mod face_face_task_tests;
 #[cfg(test)]
 #[path = "pave_filler/section_attribute_tests.rs"]
 mod section_attribute_tests;
