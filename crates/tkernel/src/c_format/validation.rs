@@ -108,7 +108,7 @@ fn expected_argument(spec: Spec, offset: usize) -> Result<&'static str, FormatEr
         format_error(
             spec,
             offset,
-            "a supported %c/%d/%i/%o/%u/%x/%X/%z/%t/%l/%ll/%f/%e/%g/%s directive",
+            "a supported %c/%d/%i/%o/%u/%x/%X/%z/%t/%l/%ll/%a/%A/%f/%e/%g/%s directive",
         )
     })
 }
@@ -117,7 +117,9 @@ fn supported_argument_kind(spec: Spec) -> Option<&'static str> {
     match spec.conversion {
         b'%' => Some("no argument"),
         b'd' | b'i' | b'o' | b'u' | b'x' | b'X' => integer_argument_kind(spec),
-        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' if spec.length == 0 || spec.length == 1 => {
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' | b'a' | b'A'
+            if spec.length == 0 || spec.length == 1 =>
+        {
             Some("a Real argument")
         }
         b's' if spec.length == 0 => Some("a Text argument"),
@@ -156,7 +158,9 @@ fn character_format_is_supported(spec: Spec) -> bool {
 fn matches_argument(argument: &FormatArg<'_>, spec: Spec) -> bool {
     match spec.conversion {
         b'd' | b'i' | b'o' | b'u' | b'x' | b'X' => integer_argument_matches(argument, spec),
-        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' => matches!(argument, FormatArg::Real(_)),
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' | b'a' | b'A' => {
+            matches!(argument, FormatArg::Real(_))
+        }
         b's' => matches!(argument, FormatArg::Text(_)),
         b'c' => matches!(argument, FormatArg::Int(_)),
         _ => false,

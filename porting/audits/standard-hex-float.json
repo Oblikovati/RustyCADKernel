@@ -1,0 +1,32 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "profile": "Linux x86_64 glibc 2.39 C locale; default nearest/even rounding",
+  "cases": 1312,
+  "source_sha256": {
+    "tools/oracle/tkernel_hex_float.cxx": "7404c26a50626d690638eea1fc1cb39320b9450733babc82b50bb548597957ff",
+    "tools/oracle/tkernel_hex_float.expected": "0b6626f9287022296b74b8310d884340b8037b9a62fa50eb93b9f670a6f3c929",
+    "../OCCT/src/FoundationClasses/TKernel/Standard/Standard_CString.cxx": "37462215d76cf69012c70e4a9a958a8610c7373cb6bed85208a03ccf3c3f690f",
+    "target/occt-foundation/lin64/gcc/libi/libTKernel.so": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b"
+  },
+  "rust_test": "standard_hex_float::hexadecimal_double_formats_match_pinned_native_rows",
+  "native_build": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-Itarget/occt-foundation/include/opencascade",
+    "tools/oracle/tkernel_hex_float.cxx",
+    "target/occt-foundation/lin64/gcc/libi/libTKernel.so",
+    "-Wl,-rpath,target/occt-foundation/lin64/gcc/libi",
+    "-o",
+    "/tmp/tkernel-hex-float"
+  ],
+  "native_run": [
+    "/tmp/tkernel-hex-float"
+  ],
+  "limitations": [
+    "Supplemental corpus only; no original legacy declaration count increase.",
+    "Other C libraries, nondefault floating-point rounding modes, and long double are unproven.",
+    "Typed arguments and injected output sinks do not reproduce C varargs or FILE state.",
+    "No full API or behavioral equivalence claim."
+  ]
+}

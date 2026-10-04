@@ -1,4 +1,4 @@
-//! Floating conversions `f F e E g G` of the C `sprintf` subset.
+//! Floating conversions `f F e E g G a A` of the C `sprintf` subset.
 use super::{CArg, Spec, pad, sign_prefix};
 
 /// Formats one floating conversion; a missing or non-real argument formats as 0.0.
@@ -7,20 +7,38 @@ pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
         Some(CArg::Real(value)) => *value,
         _ => 0.0,
     };
-    let upper = spec.conversion.is_ascii_uppercase();
     let prefix = sign_prefix(spec, value.is_sign_negative());
     if !value.is_finite() {
-        // glibc pads infinities and NaNs with spaces even under the `0` flag.
-        let word = if value.is_nan() { "nan" } else { "inf" };
-        return pad(spec, prefix, cased(word.as_bytes().to_vec(), upper), false);
+        return nonfinite(spec, value, prefix);
     }
-    let magnitude = value.abs();
+    finite(spec, value.abs(), prefix)
+}
+
+fn nonfinite(spec: &Spec, value: f64, prefix: Vec<u8>) -> Vec<u8> {
+    // glibc pads infinities and NaNs with spaces even under the `0` flag.
+    let word = if value.is_nan() { "nan" } else { "inf" };
+    let digits = cased(
+        word.as_bytes().to_vec(),
+        spec.conversion.is_ascii_uppercase(),
+    );
+    pad(spec, prefix, digits, false)
+}
+
+fn finite(spec: &Spec, magnitude: f64, prefix: Vec<u8>) -> Vec<u8> {
+    if matches!(spec.conversion, b'a' | b'A') {
+        return super::hexadecimal::format(spec, magnitude, prefix);
+    }
     let digits = match spec.conversion.to_ascii_lowercase() {
         b'f' => fixed(magnitude, spec.precision.unwrap_or(6), spec.alternate),
         b'e' => exponential(magnitude, spec.precision.unwrap_or(6), spec.alternate),
         _ => general(magnitude, spec),
     };
-    pad(spec, prefix, cased(digits, upper), true)
+    pad(
+        spec,
+        prefix,
+        cased(digits, spec.conversion.is_ascii_uppercase()),
+        true,
+    )
 }
 
 fn cased(mut bytes: Vec<u8>, upper: bool) -> Vec<u8> {

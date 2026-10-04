@@ -6,6 +6,7 @@
 //! It implements literal and dynamic width/precision, `c_format` numeric/text conversions,
 //! and glibc layout rules. The public wrappers validate a narrower defined subset before render.
 mod float;
+mod hexadecimal;
 mod integer;
 mod validation;
 
@@ -94,7 +95,9 @@ fn render(
     let body = match spec.conversion {
         b'%' => vec![b'%'],
         b'd' | b'i' | b'o' | b'u' | b'x' | b'X' => integer::format(spec, arguments.next()),
-        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' => float::format(spec, arguments.next()),
+        b'f' | b'F' | b'e' | b'E' | b'g' | b'G' | b'a' | b'A' => {
+            float::format(spec, arguments.next())
+        }
         b's' => text(spec, arguments.next()),
         b'c' => character(spec, arguments.next()),
         // An invalid conversion is undefined behavior in C; glibc echoes the directive.
