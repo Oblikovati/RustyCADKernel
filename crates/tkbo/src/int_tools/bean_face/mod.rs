@@ -13,6 +13,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 mod analytic_adaptors;
+mod distance;
 mod fast_analytic;
 mod line_plane;
 
@@ -21,6 +22,7 @@ pub struct BeanFaceIntersector {
     curve: Handle<BRepAdaptorCurve>,
     surface: Handle<BRepAdaptorSurface>,
     context: Handle<Context>,
+    transformed_surface: Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
     range: Range,
     bounds: [f64; 4],
     tolerances: [f64; 2],
@@ -37,6 +39,7 @@ impl Default for BeanFaceIntersector {
             curve: Handle::new(BRepAdaptorCurve::default()),
             surface: Handle::new(BRepAdaptorSurface::default()),
             context: Handle::default(),
+            transformed_surface: Handle::default(),
             range: Range::new(0., 0.),
             bounds: [0.; 4],
             tolerances: [0.; 2],
@@ -108,6 +111,12 @@ impl BeanFaceIntersector {
     }
 
     fn finish_initialization(&mut self) -> Result<(), Failure> {
+        self.transformed_surface = self
+            .surface
+            .get()
+            .expect("bean surface")
+            .transformed_surface()
+            .geom_surface_transformed()?;
         self.curve_resolution = self
             .curve
             .get()

@@ -23,6 +23,7 @@ TopoDS_Face analytic_face(int mode)
  if(mode==6)return BRepBuilderAPI_MakeFace(gp_Sphere(gp_Ax3(),1.),0.,6.283185307179586,-1.,1.).Face();
  return BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(),1.),0.,6.283185307179586,-1.,1.).Face();
 }
+#ifndef BEAN_ANALYTIC_NO_MAIN
 int main()
 {
  std::cout<<std::fixed<<std::setprecision(12);
@@ -32,3 +33,5 @@ int main()
   solver.Perform();output(solver,mode,0,0);solver.Perform();output(solver,mode,0,1);
  }
 }
+
+#endif
