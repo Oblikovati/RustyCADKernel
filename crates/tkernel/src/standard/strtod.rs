@@ -5,12 +5,34 @@ mod special;
 /// Parses a C-locale numeric prefix and returns its byte end offset; `strtod(" 1.5tail") == (1.5,4)`.
 /// No conversion returns `(0.0, 0)`; embedded NUL terminates input as in C.
 pub fn strtod(input: &str) -> (f64, usize) {
-    let input = input.split('\0').next().unwrap_or_default();
-    let bytes = input.as_bytes();
-    let start = bytes
+    strtod_bytes(input.as_bytes())
+}
+
+/// Parses the numeric prefix of a NUL-terminated byte string, including arbitrary suffix bytes;
+/// `strtod_bytes(b" 1.5\xfftail") == (1.5, 4)`.
+///
+/// Native `Strtod(const char*, char**)` accepts byte strings that cannot be represented by `&str`.
+pub fn strtod_bytes(input: &[u8]) -> (f64, usize) {
+    let bytes = c_prefix(input);
+    parse_prefix(bytes, leading_space_end(bytes))
+}
+
+fn c_prefix(input: &[u8]) -> &[u8] {
+    let end = input
         .iter()
-        .position(|b| !matches!(*b, b' ' | b'\t' | b'\n' | b'\r' | 11 | 12))
-        .unwrap_or(bytes.len());
+        .position(|byte| *byte == 0)
+        .unwrap_or(input.len());
+    &input[..end]
+}
+
+fn leading_space_end(bytes: &[u8]) -> usize {
+    bytes
+        .iter()
+        .position(|byte| !matches!(*byte, b' ' | b'\t' | b'\n' | b'\r' | 11 | 12))
+        .unwrap_or(bytes.len())
+}
+
+fn parse_prefix(bytes: &[u8], start: usize) -> (f64, usize) {
     let signed = matches!(bytes.get(start), Some(b'+') | Some(b'-'));
     let digits = start + usize::from(signed);
     let negative = bytes.get(start) == Some(&b'-');
@@ -27,10 +49,13 @@ pub fn strtod(input: &str) -> (f64, usize) {
     if end == digits {
         return (0.0, 0);
     }
-    let value = input[start..end]
-        .parse::<f64>()
-        .expect("validated decimal prefix");
+    let value = parse_decimal(bytes, start, end);
     (value, end)
+}
+
+fn parse_decimal(bytes: &[u8], start: usize, end: usize) -> f64 {
+    let token = std::str::from_utf8(&bytes[start..end]).expect("validated ASCII decimal prefix");
+    token.parse::<f64>().expect("validated decimal prefix")
 }
 fn decimal_end(bytes: &[u8], start: usize) -> usize {
     let mut cursor = start;

@@ -36,6 +36,11 @@ pub fn atof(text: &str) -> f64 {
     super::strtod(text).0
 }
 
+/// `Atof(const char*)` for arbitrary C-string bytes; `atof_bytes(b"1.25\xff") == 1.25`.
+pub fn atof_bytes(text: &[u8]) -> f64 {
+    super::strtod_bytes(text).0
+}
+
 /// `Standard_CStringHasher`: the hash/equality policy for C-string keys.
 ///
 /// Strings shorter than four bytes use FNV-1a over their bytes (so the empty string
