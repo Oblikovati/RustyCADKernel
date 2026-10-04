@@ -79841,20 +79841,22 @@
       "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Contains with *this as the first map."
     },
     {
-      "upstream_id": "NCollection_Map::Union(const NCollection_Map&,const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Union(const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::union",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Union with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Union with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Unite(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Unite(const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::unite",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Unite with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Unite with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
       "upstream_id": "NCollection_Map::HasIntersection(const NCollection_Map&) const",
@@ -79865,52 +79867,58 @@
       "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::HasIntersection with *this as the first map."
     },
     {
-      "upstream_id": "NCollection_Map::Intersection(const NCollection_Map&,const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Intersection(const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::intersection",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Intersection with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Intersection with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Intersect(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Intersect(const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::intersect",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Intersect with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Intersect with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Subtraction(const NCollection_Map&,const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Subtraction(const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::subtraction",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Subtraction with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Subtraction with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Subtract(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Subtract(const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::subtract",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Subtract with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Subtract with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Difference(const NCollection_Map&,const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Difference(const NCollection_Map<TheKeyType, Hasher> &, const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::difference",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Difference with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Difference with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::Differ(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Differ(const NCollection_Map<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::differ",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Differ with *this as the first map."
+      "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Differ with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
+      "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
       "upstream_id": "NCollection_MapAlgo::Union(MapType&,const MapType&,const MapType&)",
@@ -228914,6 +228922,420 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoPaveFiller::perform_ff",
       "status": "partial",
       "notes": "Bounded stage prepares FaceInfo, schedules ordinary face/face tasks, honors section settings and Glue, and stores InterfFF geometry. Native plane/cylinder isolated-stage replay checks indices, face info, curve range, tolerance and box; tools/oracle/tkbo_perform_ff.md. Native full pipeline preceding VF/EF creates additional state and is not claimed equivalent by the isolated replay. EE seam shifts and EF seed inputs currently return NotImplemented; progress/cancellation, parallel task dispatch and downstream MakeBlocks remain unported. Supplemental probe maps no original legacy declaration."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD1",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD1::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD1::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD1::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD1::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD2::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD2::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD2::D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::d2",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD3::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD3::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD3::D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d2",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2d_Curve::ResD3::D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "source_sha256": "10acfa30ab73a5e909698a3341e1ea44d03ca75179ac2c29a4d9d3ad82b3adc0",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d3",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD1",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD1::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD1::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD1::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD1::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD2",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD2::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD2::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD2::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD2::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD2::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD2::d2",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD3",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD3::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD3::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD3::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD3::d1",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD3::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD3::d2",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Curve::ResD3::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Curve.hxx",
+      "source_sha256": "ce5664c892dfa7d5a76479a451b83fdd3a05a4d189672a1317af8df6a4f82e66",
+      "rust_item": "rustycad_tkg3d::geom::GeomCurveD3::d3",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD1",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD1::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD1::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD1::D1U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD1::d1u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD1::D1V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD1::d1v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::D1U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::d1u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::D1V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::d1v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::D2U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::d2u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::D2V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::d2v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD2::D2UV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD2::d2uv",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3",
+      "status": "implemented",
+      "notes": "same public derivative result record; idiomatic Rust name. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::Point",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::point",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D1U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d1u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D1V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d1v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D2U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d2u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D2V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d2v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D2UV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d2uv",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D3U",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d3u",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D3V",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d3v",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D3UUV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d3uuv",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom_Surface::ResD3::D3UVV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Surface.hxx",
+      "source_sha256": "c9cdf46839d73189d65c6545e3de4977549722e3d4e0ec4c8c0ccc01e3efeeaa",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d3uvv",
+      "status": "implemented",
+      "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
     }
   ],
   "tests": [
