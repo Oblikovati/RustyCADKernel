@@ -50858,7 +50858,7 @@
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
       "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
       "status": "implemented",
-      "notes": "The value-style `evaluate` adapter covers ordinary callbacks; `evaluate_native` plus AdvApproxEvaluation preserves mutation of Dimension, StartEnd, Parameter, DerivativeRequest, Result, and ErrorCode across native sampling calls. The result slice remains the originally allocated dimension; increasing Dimension beyond that storage is undefined in native OCCT and cannot be made memory-safe as an equivalent operation. The mutable protocol was replayed through AdvApprox_SimpleApprox against the pinned OCCT probe."
+      "notes": "The value-style `evaluate` adapter covers ordinary callbacks; `evaluate_native` plus AdvApproxEvaluation preserves mutation of Dimension, StartEnd, Parameter, DerivativeRequest, Result, and ErrorCode across native sampling calls. Dimension may change while Rust keeps the result slice at its original allocation length; native callbacks that access beyond that allocation are undefined. Native/Rust replay includes a defined dimension downshift after a full write and confirms that the unwritten component retains its prior initialized value."
     },
     {
       "upstream_id": "AdvApprox_EvaluatorFunction::operator()(int*,double*,double*,int*,double*,int*)",
@@ -50866,7 +50866,7 @@
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
       "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
       "status": "implemented",
-      "notes": "The function-call shortcut delegates to the same Rust mutable callback protocol (`evaluate_native`/AdvApproxEvaluation); the value-style adapter remains available for ordinary evaluators. The backing result slice is bounded by its original allocation, so a native callback that enlarges Dimension beyond that storage remains outside the safe parity domain."
+      "notes": "The function-call shortcut delegates to the same Rust mutable callback protocol (`evaluate_native`/AdvApproxEvaluation); value-style adapters remain available. Dimension mutation is supported while the result slice remains bounded by its original allocation, matching the caller-owned storage without permitting out-of-bounds access."
     },
     {
       "upstream_id": "AdvApprox_PrefAndRec::AdvApprox_PrefAndRec(const NCollection_Array1<double>&,const NCollection_Array1<double>&,double)",

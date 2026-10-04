@@ -28,7 +28,7 @@
     },
     "probe": {
       "path": "tools/oracle/tkg3d_probe_advapprox.cxx",
-      "sha256": "0c99e576f49ec5153d7af9fab2833c8fbdc0a4f361a148197d8fe9f622dce34a"
+      "sha256": "cd672b47324a94ece5db3d1f20b227e4fa6119c4788898470060a3af16f9900a"
     },
     "corpus": {
       "path": "tools/tkg3d_corpus_advapprox.py",
@@ -36,7 +36,7 @@
     },
     "rust_trait": {
       "path": "crates/tkg3d/src/adv_approx/evaluator.rs",
-      "sha256": "4ee864faf30a4abb06eb5261ef3328937af8e5344bb4499f8f6d8ce418f88c5c"
+      "sha256": "018035828f6aff5d84206203f5c77ac10f59d3e7015ec27c924161985096907f"
     },
     "rust_caller": {
       "path": "crates/tkg3d/src/adv_approx/simple_approx.rs",
@@ -48,7 +48,7 @@
     },
     "rust_probe": {
       "path": "crates/tkg3d/examples/g3_probe/advapprox.rs",
-      "sha256": "dd2798b312ef774d6e11d8a249b2fa2c62fbd0ef474384605e63ae16ed7a3d87"
+      "sha256": "db12ed403197ed62cfd506f663ef7fa5860f12ae7d857af8324103b068bcc7f6"
     },
     "inputs": {
       "path": "target/oracle-tkg3d/numeric/inputs.txt",
@@ -56,28 +56,28 @@
     },
     "native_output": {
       "path": "target/oracle-tkg3d/numeric/native.txt",
-      "sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+      "sha256": "35416654ea0a615722daf0c1912066fb9c2816c427d744bd7ca6c657fe33e362"
     },
     "rust_output": {
       "path": "target/oracle-tkg3d/numeric/rust.txt",
-      "sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+      "sha256": "35416654ea0a615722daf0c1912066fb9c2816c427d744bd7ca6c657fe33e362"
     },
     "numeric_report": {
       "path": "target/oracle-tkg3d/numeric/report.json",
-      "sha256": "c6bd2c39a2313e47c9e5afdc3daf5031b68d4654a53e607d3b6747e76d56bbe1"
+      "sha256": "5b5b671e67eb826a271b0d3d0dc49331ecf1571f68e9db6ff31ba89c6c417652"
     }
   },
   "probe_case": {
     "request": "g3_advapprox_simple 0 3 0 1 2 1 1 13 0.0 1.0 13 1e-06",
-    "behavior": "The first callback changes Parameter and StartEnd; the first Gauss callback changes DerivativeRequest. Later callbacks observe those mutated values. Dimension stays within allocated result storage.",
+    "behavior": "The first callback changes Parameter and StartEnd; the first Gauss callback changes DerivativeRequest, fills the full result buffer, then lowers Dimension. Later callbacks observe the lower Dimension and leave the previously initialized second result component untouched.",
     "native_rust_output_identical": true,
-    "native_output_sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+    "native_output_sha256": "35416654ea0a615722daf0c1912066fb9c2816c427d744bd7ca6c657fe33e362"
   },
   "verification": {
     "numeric": "4695 TKG3d comparisons exact finite bits and NaN classification",
     "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-tkgeombase-callable-gap-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 python3 tools/verify_tkg3d_numeric.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --native-build /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full",
-    "tests": "cargo test -p rustycad-tkg3d -q passed; strict all-target clippy passed",
-    "defined_domain": "Mutation of dimension beyond the original result allocation remains excluded because the native callback can write out of bounds."
+    "tests": "cargo test -p rustycad-tkg3d -q passed; strict all-target clippy passed; mutable-protocol test asserts dimension downshift and retained result slot.",
+    "defined_domain": "Dimension can mutate; Rust preserves the original result allocation as a bounded slice. The differential case verifies a downward change and partial subsequent writes. Native callbacks accessing beyond the original allocation are undefined and excluded."
   },
   "resolved_selectors": {
     "AdvApprox_EvaluatorFunction::Evaluate(int*,double*,double*,int*,double*,int*)": "6d010d570fc5592102b5a406f1cd1e3c27f55b8c49b2fdc566f6c161e0382547",

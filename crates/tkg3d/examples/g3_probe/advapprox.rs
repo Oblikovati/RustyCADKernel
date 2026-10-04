@@ -104,12 +104,16 @@ impl AdvApproxEvaluatorFunction for Evaluator {
         if self.mode == 3 && self.calls == 4 {
             *call.derivative_request = 1;
         }
+        let dimension = *call.dimension;
         *call.error_code = self.evaluate_values(
-            *call.dimension,
+            dimension,
             *call.parameter,
             *call.derivative_request,
             call.result,
         );
+        if self.mode == 3 && self.calls == 5 {
+            *call.dimension = 1;
+        }
     }
 }
 

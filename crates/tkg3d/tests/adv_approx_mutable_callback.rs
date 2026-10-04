@@ -8,9 +8,11 @@ use rustycad_tkmath::plib::{self, JacobiPolynomial};
 
 #[derive(Debug, PartialEq)]
 struct CallRecord {
+    dimension: i32,
     start_end: [f64; 2],
     parameter: f64,
     derivative: i32,
+    result: Vec<f64>,
 }
 
 struct MutatingEvaluator {
@@ -25,8 +27,10 @@ impl AdvApproxEvaluatorFunction for MutatingEvaluator {
     fn evaluate_native(&mut self, call: &mut AdvApproxEvaluation<'_>) {
         self.mutate_first_endpoint(call);
         self.mutate_gauss_derivative(call);
-        self.record(call);
         self.write_linear_values(call);
+        let dimension = *call.dimension;
+        self.record(call, dimension);
+        self.mutate_dimension_after_full_sample(call);
     }
 }
 
@@ -44,12 +48,20 @@ impl MutatingEvaluator {
         }
     }
 
-    fn record(&mut self, call: &AdvApproxEvaluation<'_>) {
+    fn record(&mut self, call: &AdvApproxEvaluation<'_>, dimension: i32) {
         self.calls.push(CallRecord {
+            dimension,
             start_end: *call.start_end,
             parameter: *call.parameter,
             derivative: *call.derivative_request,
+            result: call.result.to_vec(),
         });
+    }
+
+    fn mutate_dimension_after_full_sample(&self, call: &mut AdvApproxEvaluation<'_>) {
+        if self.calls.len() == 5 {
+            *call.dimension = 1;
+        }
     }
 
     fn write_linear_values(&self, call: &mut AdvApproxEvaluation<'_>) {
@@ -90,4 +102,6 @@ fn assert_mutations_reach_later_samples(calls: &[CallRecord]) {
     assert_eq!(calls[1].start_end, [0.0, 2.0]);
     assert_eq!(calls[4].derivative, 1);
     assert_eq!(calls[5].derivative, 1);
+    assert_eq!((calls[4].dimension, calls[5].dimension), (2, 1));
+    assert_eq!(calls[4].result[1], calls[5].result[1]);
 }
