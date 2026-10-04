@@ -13,6 +13,8 @@ mod bean_line_plane;
 mod bean_private;
 #[path = "../src/int_tools/bean_face/ranges.rs"]
 mod bean_ranges;
+#[path = "../src/int_tools/bean_face/empty_range.rs"]
+mod empty_range;
 use std::io::{self, BufRead};
 fn main() {
     for line in io::stdin().lock().lines() {

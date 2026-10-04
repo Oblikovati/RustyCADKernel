@@ -1,11 +1,9 @@
 //! Private BeanFace range helpers from OCCT 3d097a0.
+pub(crate) use super::empty_range::set_empty_result;
 use crate::int_tools::{
     CurveRangeLocalizeData, CurveRangeSample, SurfaceRangeLocalizeData, SurfaceRangeSample,
 };
 use rustycad_tkernel::{ncollection::IndexedMap, standard::Failure};
-#[path = "empty_range.rs"]
-mod empty_range;
-pub(crate) use empty_range::set_empty_result;
 pub(super) fn merge_samples(
     curves: &[CurveRangeSample],
     surfaces: &[SurfaceRangeSample],

@@ -7,7 +7,7 @@ use rustycad_tkgeombase::extrema::ExtCS;
 
 pub(super) fn compute(bean: &mut BeanFaceIntersector) -> Result<(), Failure> {
     let edge: Edge = bean.curve.get().expect("bean curve").edge();
-    let curve = BRepTool::curve_with_location(&edge)?.curve;
+    let (curve, _, _) = BRepTool::curve(&edge)?;
     let periodic = curve.get().expect("bean edge curve").is_periodic();
     process_ranges(bean, curve, periodic)
 }
