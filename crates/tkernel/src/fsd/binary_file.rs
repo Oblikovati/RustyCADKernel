@@ -98,7 +98,9 @@ impl BinaryFile {
 
     /// Protected `ReadChar`: up to `size` single-byte `fread`s while not at end of file.
     /// A failed read appends the previous byte again, as the native loop does.
-    pub(crate) fn read_char(&mut self, size: usize) -> Result<AsciiString, Failure> {
+    /// The native first read at EOF uses an uninitialized byte; Rust starts with zero.
+    /// Example: `driver.read_char(7)?`.
+    pub fn read_char(&mut self, size: usize) -> Result<AsciiString, Failure> {
         let mut buffer = AsciiString::default();
         let mut byte = [0_u8];
         let mut count = 0;

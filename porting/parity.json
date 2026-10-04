@@ -234729,6 +234729,62 @@
       "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::initialization_surface",
       "status": "partial",
       "notes": "Protected native hook exposed for Rust reuse. Adaptor initialization clears transformation before fallible queries; handle initialization retains it, including null. Supplemental native fixture covers replacement, clearing, exception side effects, restoring transformed/plain adaptors, and stripped trimming. Raw subclass ABI is not reproduced; borrowed adaptor lifetime is explicit. See porting/audits/tkg3d-surface-reinitialization.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::WriteExtendedString(Standard_OStream &,const TCollection_ExtendedString &,const bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_extended_string_stream",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::ReadString(TCollection_AsciiString &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_string",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::WriteString(const TCollection_AsciiString &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_string",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::WriteString(Standard_OStream &,const TCollection_AsciiString &,const bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_string_stream",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::ReadExtendedString(TCollection_ExtendedString &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_extended_string",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::ReadChar(TCollection_AsciiString &,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_char",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::WriteExtendedString(const TCollection_ExtendedString &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_extended_string",
+      "status": "partial",
+      "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
     }
   ],
   "tests": [

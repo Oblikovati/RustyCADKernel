@@ -39,7 +39,8 @@ impl BinaryFile {
     }
 
     /// Protected `WriteString`: the length, then the bytes when not empty.
-    pub(crate) fn write_string(&mut self, text: &AsciiString) -> Result<(), Failure> {
+    /// Example: `driver.write_string(&AsciiString::new("part"))?`.
+    pub fn write_string(&mut self, text: &AsciiString) -> Result<(), Failure> {
         self.put_integer(text.length())?;
         if text.is_empty() {
             return Ok(());
@@ -48,8 +49,8 @@ impl BinaryFile {
     }
 
     /// Protected `ReadString`: a short read raises `Storage_StreamWriteError`, as natively;
-    /// the text stops at its first NUL (`aString = c`).
-    pub(crate) fn read_string(&mut self, text: &mut AsciiString) -> Result<(), Failure> {
+    /// the text stops at its first NUL (`aString = c`). Example: `driver.read_string(&mut text)?`.
+    pub fn read_string(&mut self, text: &mut AsciiString) -> Result<(), Failure> {
         let mut size = 0;
         self.get_integer(&mut size)?;
         if size <= 0 {
@@ -64,7 +65,8 @@ impl BinaryFile {
     }
 
     /// Protected `WriteExtendedString`: the unit count, then native-order units.
-    pub(crate) fn write_extended_string(&mut self, text: &ExtendedString) -> Result<(), Failure> {
+    /// Example: `driver.write_extended_string(&ExtendedString::new("part"))?`.
+    pub fn write_extended_string(&mut self, text: &ExtendedString) -> Result<(), Failure> {
         self.put_integer(text.length())?;
         if text.is_empty() {
             return Ok(());
@@ -74,10 +76,8 @@ impl BinaryFile {
     }
 
     /// Protected `ReadExtendedString`: as `ReadString`, the text stops at its first zero unit.
-    pub(crate) fn read_extended_string(
-        &mut self,
-        text: &mut ExtendedString,
-    ) -> Result<(), Failure> {
+    /// Example: `driver.read_extended_string(&mut text)?`.
+    pub fn read_extended_string(&mut self, text: &mut ExtendedString) -> Result<(), Failure> {
         let mut size = 0;
         self.get_integer(&mut size)?;
         if size <= 0 {

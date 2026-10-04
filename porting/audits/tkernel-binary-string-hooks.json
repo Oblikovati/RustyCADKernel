@@ -1,0 +1,66 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "selectors": [
+    {
+      "cpp_id": "1829e3c8ab5ecb5d08dfe0753a9c14e0965d607a627801852fecc5755217263a",
+      "upstream_id": "FSD_BinaryFile::WriteExtendedString(Standard_OStream &,const TCollection_ExtendedString &,const bool)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_extended_string_stream"
+    },
+    {
+      "cpp_id": "21c32dd1befde886c8073a94b31db5ccb37e39147dc01b035c674d2fe66de11c",
+      "upstream_id": "FSD_BinaryFile::ReadString(TCollection_AsciiString &)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_string"
+    },
+    {
+      "cpp_id": "42c12d0cf5013bd23bdc5a21db8b2a7ec74232133540294820974b7a17cbd029",
+      "upstream_id": "FSD_BinaryFile::WriteString(const TCollection_AsciiString &)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_string"
+    },
+    {
+      "cpp_id": "85ef4e25b7f24effe746f7803926df27b277c7aba2028aa6bdbce0efa5549f56",
+      "upstream_id": "FSD_BinaryFile::WriteString(Standard_OStream &,const TCollection_AsciiString &,const bool)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_string_stream"
+    },
+    {
+      "cpp_id": "a3b20dfa1db174da136d2b2d2177a81ab5ddda8656758f63159123915089727e",
+      "upstream_id": "FSD_BinaryFile::ReadExtendedString(TCollection_ExtendedString &)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_extended_string"
+    },
+    {
+      "cpp_id": "a745df984fd7b4eeac5d5b3c94a970396f42fbae0090c75b5ff5acfebeeaf1d9",
+      "upstream_id": "FSD_BinaryFile::ReadChar(TCollection_AsciiString &,const size_t)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::read_char"
+    },
+    {
+      "cpp_id": "dbdfabbc9de0f528096567629fd342552f8b8e60aea3ab0b17ee436e7b13d101",
+      "upstream_id": "FSD_BinaryFile::WriteExtendedString(const TCollection_ExtendedString &)",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_extended_string"
+    }
+  ],
+  "source_sha256": {
+    "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx": "7503360fa3cface7d8e1ec8959b35fc5c097f6bfbb8e975706f6f4804cef8893",
+    "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.cxx": "dbdb6afbd431429a73f4d4746a3ef5dda3bcc52cb40d6e69e79ec8987a49a4a3"
+  },
+  "profile": "Linux x86_64 GCC C++17 -O2; native byte order; non-inverted binary driver",
+  "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_binary_string_hooks.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-binary-string-hooks",
+  "run_command": "/tmp/tkernel-binary-string-hooks <temporary-file-path>",
+  "artifact_sha256": {
+    "tools/oracle/tkernel_binary_string_hooks.cxx": "4b7d699581f66d4f29d3d4862c0b8df9cbf14d3f2082cb0ac9e6e962b3b8e232",
+    "tools/oracle/tkernel_binary_string_hooks.expected": "eaf3f8eff46b6ba75e899f314321c62deae686ec69cdb5bfdbb0cb6694692dd3"
+  },
+  "legacy_declaration_count_changed": false,
+  "full_api_parity_proven": false,
+  "limitations": [
+    "Closed native FILE pointers and a first ReadChar read at EOF have undefined behavior; no equivalence is asserted there.",
+    "Rust returns a value for ReadChar rather than mutating a caller string.",
+    "Rust reads large strings in bounded steps; native allocation failure and leaked buffers after short read are not reproduced.",
+    "Solaris/IRIX inverted encoding profiles are not established by this fixture."
+  ],
+  "validation": {
+    "package_test_passed": 2614,
+    "package_test_failed": 0,
+    "strict_clippy_passed": true,
+    "supplemental_tests": 3,
+    "native_fixture_rows": 13
+  }
+}
