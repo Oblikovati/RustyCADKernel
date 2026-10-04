@@ -235351,6 +235351,22 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::transformed_adaptor",
       "status": "implemented",
       "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
+    },
+    {
+      "upstream_id": "Geom_BSplineSurface::updateUKnots()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::update_u_knots",
+      "status": "implemented",
+      "notes": "Protected native recomputation operation; declaration ID 4ad6a510bc2234c0e39d7044a01d52634201becc72b2faf6546f364a78fb5e42, header SHA-256 d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079. Safe Rust counterpart recomputes U distribution, flat knots and smoothness, invalidates the shared resolution cache, and retains the evaluation representation; native derived probe and focused Rust tests: tools/oracle/bspline_surface_update_knots.md. Rust reports allocation/state failures with Result; only valid constructed surfaces are covered."
+    },
+    {
+      "upstream_id": "Geom_BSplineSurface::updateVKnots()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::update_v_knots",
+      "status": "implemented",
+      "notes": "Protected native recomputation operation; declaration ID e584fc476b1270fed8d9cb3dbf857e536dc66d03adcfb59a7a698bb5eda5ca9c, header SHA-256 d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079. Safe Rust counterpart recomputes V distribution, flat knots and smoothness, invalidates the shared resolution cache, and retains the evaluation representation; native derived probe and focused Rust tests: tools/oracle/bspline_surface_update_knots.md. Rust reports allocation/state failures with Result; only valid constructed surfaces are covered."
     }
   ],
   "tests": [
