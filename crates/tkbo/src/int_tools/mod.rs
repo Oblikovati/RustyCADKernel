@@ -49,3 +49,6 @@ pub use algorithms::IntTools;
 
 mod bean_face;
 pub use bean_face::BeanFaceIntersector;
+
+mod edge_face;
+pub use edge_face::EdgeFace;
