@@ -99,10 +99,10 @@ class RustdocReachabilityTests(unittest.TestCase):
             result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
         paths = {entry["path"] for entry in result["declarations"]}
         self.assertIn(
-            "rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add", paths
+            "rustycad_tkernel::quantity::Date::<core::ops::arith::Add<rustycad_tkernel::quantity::period::Period>>::add", paths
         )
         self.assertNotIn(
-            "rustycad_tkernel::quantity::Period::<core::ops::arith::Add>::add", paths
+            "rustycad_tkernel::quantity::Period::<core::ops::arith::Add<rustycad_tkernel::quantity::period::Period>>::add", paths
         )
         self.assertEqual(result["unresolved_links"], [])
 
@@ -131,8 +131,8 @@ class RustdocReachabilityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
         paths = {entry["path"] for entry in result["declarations"]}
-        self.assertIn("rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add", paths)
-        self.assertNotIn("rustycad_tkernel::quantity::Period::<core::ops::arith::Add>::add", paths)
+        self.assertIn("rustycad_tkernel::quantity::Date::<core::ops::arith::Add<rustycad_tkernel::quantity::period::Period>>::add", paths)
+        self.assertNotIn("rustycad_tkernel::quantity::Period::<core::ops::arith::Add<rustycad_tkernel::quantity::period::Period>>::add", paths)
         self.assertEqual(result["unresolved_links"], [])
 
     def test_unresolved_alias_impl_target_is_reported_explicitly(

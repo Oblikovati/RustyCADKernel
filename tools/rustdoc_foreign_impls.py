@@ -9,6 +9,7 @@ import re
 from api_inventory_json import JSONValue, array_value, declaration_digest, string_value
 from api_inventory_reexports import source_hashes
 from rustdoc_declarations import record_entry, stable_path, stable_signature
+from rustdoc_generic_arguments import trait_arguments
 
 
 def foreign_impl_members(
@@ -63,79 +64,6 @@ def display_trait(
     path = stable_path(paths, str(trait_id), trait_name)
     arguments = trait_arguments(trait.get("args"), paths)
     return None if arguments is None else path + arguments
-
-
-def trait_arguments(value: JSONValue | None, paths: Mapping[str, JSONValue]) -> str | None:
-    if value is None:
-        return ""
-    if not isinstance(value, dict):
-        return None
-    angle = value.get("angle_bracketed")
-    if not isinstance(angle, dict):
-        return None
-    arguments = angle.get("args")
-    if not isinstance(arguments, list):
-        return None
-    rendered = [display_generic_argument(argument, paths) for argument in arguments]
-    if any(argument is None for argument in rendered):
-        return None
-    constraints = angle.get("constraints")
-    if constraints != []:
-        return None
-    return "<" + ", ".join(argument for argument in rendered if argument) + ">"
-
-
-def display_generic_argument(
-    value: JSONValue, paths: Mapping[str, JSONValue]
-) -> str | None:
-    if not isinstance(value, dict) or len(value) != 1:
-        return None
-    kind, body = next(iter(value.items()))
-    return display_type(body, paths) if kind == "type" else None
-
-
-def display_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
-    if not isinstance(value, dict) or len(value) != 1:
-        return None
-    kind, body = next(iter(value.items()))
-    if kind == "resolved_path":
-        return display_resolved_path(body, paths)
-    if kind == "borrowed_ref":
-        return display_borrowed_ref(body, paths)
-    if kind in {"generic", "primitive"} and isinstance(body, str):
-        return body
-    return None
-
-
-def display_resolved_path(
-    value: JSONValue, paths: Mapping[str, JSONValue]
-) -> str | None:
-    if not isinstance(value, dict):
-        return None
-    identifier, fallback = value.get("id"), value.get("path")
-    if not isinstance(identifier, (int, str)) or not isinstance(fallback, str):
-        return None
-    if str(identifier) not in paths:
-        return None
-    path = stable_path(paths, str(identifier), fallback)
-    arguments = trait_arguments(value.get("args"), paths)
-    return None if arguments is None else path + arguments
-
-
-def display_borrowed_ref(
-    value: JSONValue, paths: Mapping[str, JSONValue]
-) -> str | None:
-    if not isinstance(value, dict) or not isinstance(value.get("is_mutable"), bool):
-        return None
-    inner = display_type(value.get("type"), paths)
-    if inner is None:
-        return None
-    lifetime = value.get("lifetime")
-    if lifetime is not None and not isinstance(lifetime, str):
-        return None
-    lifetime_text = f"{lifetime} " if isinstance(lifetime, str) else ""
-    mutability = "mut " if value["is_mutable"] else ""
-    return f"&{lifetime_text}{mutability}{inner}"
 
 
 def render_foreign_members(
