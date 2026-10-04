@@ -340,6 +340,41 @@ void run_bspline_line_pcurves() {
   print_result("bspline_line_pcurves", tool, tool.FixGap2d(2, false));
 }
 
+void run_multispan_bspline_line_pcurves() {
+  BRep_Builder builder;
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0.1, 0), gp_Pnt(1, 0.1, 0));
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, first);
+  builder.Add(wire, second);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  NCollection_Array1<gp_Pnt2d> poles(1, 4);
+  NCollection_Array1<double> knots(1, 3);
+  NCollection_Array1<int> multiplicities(1, 3);
+  poles.SetValue(1, gp_Pnt2d(0, 0));
+  poles.SetValue(2, gp_Pnt2d(0.25, 0.5));
+  poles.SetValue(3, gp_Pnt2d(0.75, -0.5));
+  poles.SetValue(4, gp_Pnt2d(1, 0));
+  knots.SetValue(1, 0.);
+  knots.SetValue(2, 0.5);
+  knots.SetValue(3, 1.);
+  multiplicities.SetValue(1, 3);
+  multiplicities.SetValue(2, 1);
+  multiplicities.SetValue(3, 3);
+  builder.UpdateEdge(first, new Geom2d_BSplineCurve(poles, knots, multiplicities, 2), face, 1e-7);
+  builder.Range(first, face, 0., 1.);
+  Handle(Geom2d_Curve) line = new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0, 0.1), gp_Dir2d(1, 0)));
+  builder.UpdateEdge(second, line, face, 1e-7);
+  builder.Range(second, face, 0., 1.);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("multispan_bspline_line_pcurves", tool, tool.FixGap2d(2, false));
+}
+
 void run_tangent_parabola_line() {
   BRep_Builder builder;
   TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
@@ -472,6 +507,7 @@ int main() {
   run_trimmed_offset_line_pcurves();
   run_bezier_line_pcurves();
   run_bspline_line_pcurves();
+  run_multispan_bspline_line_pcurves();
   run_tangent_parabola_line();
   run_tangent_bspline_line();
   run_parabola_line_extension();
