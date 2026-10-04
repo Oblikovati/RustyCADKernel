@@ -83109,8 +83109,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::init",
-      "status": "implemented",
-      "notes": "Replaces the borrowed bytes and rewinds. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel."
+      "status": "partial",
+      "notes": "Replaces the borrowed bytes and rewinds. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel. Concrete reinitialization is implemented; native virtual overriding/subclass dispatch is not represented. See porting/audits/array-stream-override-surface.md."
     },
     {
       "upstream_id": "Standard_ArrayStreamBuffer::xsgetn(char*,std::streamsize)",
@@ -234470,6 +234470,14 @@
       "rust_item": "rustycad_tkmath::gp::StandardDirection3::cross",
       "status": "implemented",
       "notes": "Protected gp_Ax2 hook exposed through the public StandardDirection3 method. Native derived-class probe tools/oracle/tkmath_gp_standard_direction_hooks.cxx matches all 36 direction pairs, including OCCT's parallel fallback; Rust exhaustive test is gp_ax2_cross_hook_matches_all_native_pairs_and_parallel_fallbacks."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer",
+      "status": "partial",
+      "notes": "Concrete bounded borrowed-buffer reading and seeking are implemented. Native virtual Init and protected std::streambuf hook overriding are not exposed through an equivalent Rust trait/base surface. The callable put_back_integer hook covers full native int requests, but does not implement subclass dispatch. See porting/audits/array-stream-override-surface.md."
     }
   ],
   "tests": [
