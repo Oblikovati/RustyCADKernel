@@ -1,21 +1,30 @@
 #include <Standard_CString.hxx>
 #include <cstdarg>
 #include <cstdio>
+#include <cstring>
 #include <iostream>
 #include <string>
 #include <unistd.h>
 #include <vector>
 
-static void record(const char* theName, int theCount, const char* theBuffer)
+static void record_bytes(const char* theName,
+                        int theCount,
+                        const char* theBuffer,
+                        size_t theLength)
 {
   std::cout << theName << ' ' << theCount << ' ';
   const unsigned char* aBytes = reinterpret_cast<const unsigned char*>(theBuffer);
-  for (int anIndex = 0; anIndex < theCount; ++anIndex)
+  for (size_t anIndex = 0; anIndex < theLength; ++anIndex)
   {
     static const char* aHex = "0123456789abcdef";
     std::cout << aHex[aBytes[anIndex] >> 4] << aHex[aBytes[anIndex] & 15];
   }
   std::cout << '\n';
+}
+
+static void record(const char* theName, int theCount, const char* theBuffer)
+{
+  record_bytes(theName, theCount, theBuffer, static_cast<size_t>(theCount));
 }
 
 static int format_variadic(char* theBuffer, const char* theFormat, ...)
@@ -88,11 +97,24 @@ static void format_star_char_cases(char* theBuffer)
   record("sprintf_char", aCharCount, theBuffer);
 }
 
+static void format_fixed_buffer_cases()
+{
+  char aSprintfBuffer[16];
+  std::memset(aSprintfBuffer, 0xa5, sizeof(aSprintfBuffer));
+  const int aSprintfCount = Sprintf(aSprintfBuffer, "%c:%04d", 0, 7);
+  record_bytes("sprintf_slice_tail", aSprintfCount, aSprintfBuffer, sizeof(aSprintfBuffer));
+  char aVsprintfBuffer[16];
+  std::memset(aVsprintfBuffer, 0xa5, sizeof(aVsprintfBuffer));
+  const int aVsprintfCount = format_variadic(aVsprintfBuffer, "%c:%04d", 0, 7);
+  record_bytes("vsprintf_slice_tail", aVsprintfCount, aVsprintfBuffer, sizeof(aVsprintfBuffer));
+}
+
 int main()
 {
   char aBuffer[256] = {};
   format_buffer_cases(aBuffer);
   format_star_char_cases(aBuffer);
+  format_fixed_buffer_cases();
   format_writer_cases(aBuffer);
   return 0;
 }

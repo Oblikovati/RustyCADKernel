@@ -8,7 +8,8 @@
 //!
 //! The formatting wrappers support `%c`, `%d/%i/%o/%u/%x/%X/%f/%F/%e/%E/%g/%G/%s/%%`,
 //! literal or `*` width/precision, and the private formatter's flags. They require typed
-//! [`FormatArg`] values and injected sinks; they do not expose C varargs or `FILE*`.
+//! [`FormatArg`] values and injected sinks; they do not expose C varargs or `FILE*`. Vec
+//! buffer variants replace storage; caller-slice variants preserve bytes after the final NUL.
 
 use super::hashing::{HashWord, fnv_hash, hash_bytes};
 pub use crate::c_format::FormatArg;
@@ -85,6 +86,17 @@ pub fn sprintf_into(
     Ok(count)
 }
 
+/// `Sprintf` into a fixed caller slice; `sprintf_into_slice(&mut b, b"%s", &[FormatArg::Text(b"edge")])`.
+/// The slice must fit the bytes plus final NUL; remaining bytes are left untouched.
+pub fn sprintf_into_slice(
+    output: &mut [u8],
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    let rendered = render_format(format, args)?;
+    write_formatted_slice(output, &rendered)
+}
+
 /// Typed `Vsprintf` counterpart; `vsprintf_into(&mut b, b"%s", &[FormatArg::Text(b"edge")])` writes `edge\0`.
 /// `va_list`, fixed-buffer tail bytes, and C `int` count overflow remain partial.
 pub fn vsprintf_into(
@@ -95,6 +107,16 @@ pub fn vsprintf_into(
     sprintf_into(output, format, args)
 }
 
+/// Typed `Vsprintf` into a fixed caller slice; `vsprintf_into_slice(&mut b, b"%s", &[FormatArg::Text(b"edge")])`.
+/// `va_list` is replaced by `FormatArg` values; short slices return an error without mutation.
+pub fn vsprintf_into_slice(
+    output: &mut [u8],
+    format: &[u8],
+    args: &[FormatArg<'_>],
+) -> io::Result<usize> {
+    sprintf_into_slice(output, format, args)
+}
+
 fn write_format(
     output: &mut impl Write,
     format: &[u8],
@@ -103,6 +125,34 @@ fn write_format(
     let rendered = render_format(format, args)?;
     output.write_all(&rendered)?;
     Ok(rendered.len())
+}
+
+fn write_formatted_slice(output: &mut [u8], rendered: &[u8]) -> io::Result<usize> {
+    let required = required_slice_capacity(rendered.len())?;
+    ensure_slice_capacity(output.len(), required)?;
+    write_slice_contents(output, rendered);
+    Ok(rendered.len())
+}
+
+fn required_slice_capacity(rendered_length: usize) -> io::Result<usize> {
+    rendered_length
+        .checked_add(1)
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "formatted length overflow"))
+}
+
+fn ensure_slice_capacity(actual: usize, required: usize) -> io::Result<()> {
+    if actual >= required {
+        return Ok(());
+    }
+    Err(io::Error::new(
+        io::ErrorKind::InvalidInput,
+        format!("formatted result needs {required} bytes; caller buffer has {actual}"),
+    ))
+}
+
+fn write_slice_contents(output: &mut [u8], rendered: &[u8]) {
+    output[..rendered.len()].copy_from_slice(rendered);
+    output[rendered.len()] = 0;
 }
 
 fn render_format(format: &[u8], args: &[FormatArg<'_>]) -> io::Result<Vec<u8>> {
