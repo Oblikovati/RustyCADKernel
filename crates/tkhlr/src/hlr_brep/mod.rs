@@ -5,3 +5,7 @@ pub use b_curve_tool::BCurveTool;
 
 mod b_surface_tool;
 pub use b_surface_tool::BSurfaceTool;
+
+// Consumed by the remaining HLRBRep_Data port; not a public OCCT declaration.
+#[cfg_attr(not(test), expect(dead_code))]
+mod rejection_cache;
