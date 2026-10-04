@@ -235207,6 +235207,22 @@
       "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::init",
       "status": "implemented",
       "notes": "Reusable protected initialization, independent of constructor count/weight validation. Shared BezierCurveCore preserves closure, rebased poles/weights, rationality collapse, and cache reset. CopyValues dimension failures occur after pole replacement and weight resize, before rational/cache changes. Native derived 2D/3D probe covers mismatched lengths, negative/equal-zero weights, singleton poles, empty-array failure and dimension-specific closure tolerances. Declaration ee875ec7a3129a26c298b6e16ee88b78c3604dcfce6472f7001369b495bda673. Supplemental evidence: porting/audits/bezier-curve-protected-init.json; legacy declaration count unchanged."
+    },
+    {
+      "upstream_id": "Geom2d_BSplineCurve::updateKnots()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dBSplineCurve::update_knots",
+      "status": "implemented",
+      "notes": "Protected native recomputation operation; exact API inventory declaration ID 37e8f4e0e9311971ef3086c10a9d7481bc144d7244ca08d384f5cb3f330c4cea (header SHA-256 d473e585a73f3556aed96de8a21715e0d0afddddc50d01d8a38abca78bf738ee). Exposed as a safe Rust method forwarding to shared BSplineCurveCore::update_knots. Native derived probe validates nonuniform C0 knot metadata, resolution-cache invalidation, and evaluation-representation retention; see tools/oracle/bspline_update_knots.md."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::updateKnots()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::update_knots",
+      "status": "implemented",
+      "notes": "Protected native recomputation operation; exact API inventory declaration ID 83cbb4d19db71a1cbede583ac9f2729044838938feacc708fc43842d1f5bb491 (header SHA-256 6070421a76816696d9c116dc0b184e6a4afe9c63c77240b709ec0d2a690409b8). Exposed as a safe Rust method forwarding to shared BSplineCurveCore::update_knots. Native derived probe validates periodic uniform C2 knot metadata, resolution-cache invalidation, and evaluation-representation retention; see tools/oracle/bspline_update_knots.md."
     }
   ],
   "tests": [
