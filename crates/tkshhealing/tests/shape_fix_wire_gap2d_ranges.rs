@@ -258,3 +258,17 @@ fn intersecting_bspline_pcurves_use_their_full_knot_domains() {
     assert_bspline_pcurve(&tool, &face, 1, [0.0, 0.5]);
     assert_bspline_pcurve(&tool, &face, 2, [0.2, 1.0]);
 }
+
+#[test]
+fn tangent_bezier_and_line_intersection_is_selected() {
+    let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
+    let second = edge_between(Point3::new(0.0, 0.25, 0.0), Point3::new(1.0, 0.25, 0.0));
+    let (face, wire) = wire_with_disconnected_edges(&first, &second);
+    set_tangent_pcurves(&face, &first, &second);
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(2, false).unwrap());
+    assert_bezier_pcurve(&tool, &face, 1, [0.0, 0.5]);
+    assert_line_observation(&tool, &face, 2, [0.5, 1.0, 0.5, 0.25, 1.0, 0.25]);
+}
