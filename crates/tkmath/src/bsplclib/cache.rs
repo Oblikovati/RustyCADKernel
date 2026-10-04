@@ -7,6 +7,7 @@ use super::point::{CurveD3, CurvePoint};
 use crate::plib::{eval_polynomial, no_derivative_eval_polynomial, rational_derivative};
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
+use std::sync::{Mutex, MutexGuard};
 
 /// Cached Taylor coefficients of the span last located (`BSplCLib_Cache`).
 ///
@@ -14,6 +15,11 @@ use rustycad_tkernel::standard::{Failure, StandardTransient};
 /// rational; the row length is fixed by the pole type given at construction.
 pub struct Cache {
     base: StandardTransient,
+    state: Mutex<CacheState>,
+}
+
+#[derive(Debug)]
+pub(super) struct CacheState {
     is_rational: bool,
     params: CacheParams,
     row_length: usize,
@@ -25,18 +31,15 @@ impl std::fmt::Debug for Cache {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
             .debug_struct("Cache")
-            .field("is_rational", &self.is_rational)
-            .field("params", &self.params)
-            .field("row_length", &self.row_length)
-            .field("poles_weights", &self.poles_weights)
+            .field("state", &self.lock_state())
             .finish()
     }
 }
 
-impl Cache {
+impl CacheState {
     /// Prepares an empty cache for a curve of `degree` on flat knots; `poles` only
     /// select the 2D or 3D layout; `Cache::new(3, false, &flat, &poles, None)?`.
-    pub fn new<P: CurvePoint>(
+    fn new<P: CurvePoint>(
         degree: i32,
         periodic: bool,
         flat_knots: &Array1<'_, f64>,
@@ -45,7 +48,6 @@ impl Cache {
     ) -> Result<Self, Failure> {
         let is_rational: bool = weights.is_some();
         Ok(Self {
-            base: StandardTransient::default(),
             is_rational,
             params: CacheParams::new(degree, periodic, flat_knots)?,
             row_length: P::DIMENSION + usize::from(is_rational),
@@ -54,8 +56,8 @@ impl Cache {
     }
 
     /// The span bookkeeping; `cache.params().span_index`.
-    pub fn params(&self) -> &CacheParams {
-        &self.params
+    pub fn params(&self) -> CacheParams {
+        self.params.clone()
     }
 
     /// Tests whether `parameter` lies in the cached span (`IsCacheValid`);
@@ -293,7 +295,7 @@ impl Cache {
 }
 
 fn ensure_derivative_output_capacity(
-    cache: &Cache,
+    cache: &CacheState,
     derivative: i32,
     actual: usize,
     allow_high_order: bool,
@@ -310,7 +312,7 @@ fn ensure_derivative_output_capacity(
 }
 
 fn derivative_output_length(
-    cache: &Cache,
+    cache: &CacheState,
     derivative: i32,
     allow_high_order: bool,
 ) -> Result<usize, Failure> {
@@ -324,7 +326,7 @@ fn derivative_output_length(
 }
 
 fn validate_derivative_order(
-    cache: &Cache,
+    cache: &CacheState,
     allow_high_order: bool,
     derivative: i32,
 ) -> Result<(), Failure> {
@@ -337,7 +339,7 @@ fn validate_derivative_order(
     Ok(())
 }
 
-fn derivative_order_limit(cache: &Cache, allow_high_order: bool) -> i32 {
+fn derivative_order_limit(cache: &CacheState, allow_high_order: bool) -> i32 {
     if cache.is_rational {
         // Five 2D homogeneous rows fit the native 16-value temporary; five 3D rows do not.
         return (16 / cache.row_length) as i32 - 1;
@@ -357,7 +359,7 @@ fn clear_uncomputed_derivative_rows(
     }
 }
 
-fn non_rational_orders(cache: &Cache, derivative: i32) -> Result<(i32, i32), Failure> {
+fn non_rational_orders(cache: &CacheState, derivative: i32) -> Result<(i32, i32), Failure> {
     let degree: i32 = cache.params.degree;
     if degree < 0 {
         return Err(Failure::out_of_range(&format!(
@@ -376,3 +378,28 @@ fn scale_derivative_rows(values: &mut [f64], order: i32, dimension: usize, span_
         }
     }
 }
+
+impl Cache {
+    /// Creates a mutable spline cache; `Cache::new(3, false, &flat, &poles, None)?`.
+    pub fn new<P: CurvePoint>(
+        degree: i32,
+        periodic: bool,
+        flat_knots: &Array1<'_, f64>,
+        poles: &Array1<'_, P>,
+        weights: Option<&Array1<'_, f64>>,
+    ) -> Result<Self, Failure> {
+        let state = CacheState::new(degree, periodic, flat_knots, poles, weights)?;
+        Ok(Self {
+            base: StandardTransient::default(),
+            state: Mutex::new(state),
+        })
+    }
+
+    pub(super) fn lock_state(&self) -> MutexGuard<'_, CacheState> {
+        self.state
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+    }
+}
+
+mod api;

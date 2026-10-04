@@ -307,7 +307,7 @@ fn cache_matches_direct_evaluation_on_a_periodic_curve() {
         Array1::with_bounds(1, bsplclib::knot_sequence_length(&mults, 2, true).unwrap()).unwrap();
     bsplclib::knot_sequence_with_degree(&knots, &mults, 2, true, &mut flat).unwrap();
     assert_eq!(flat.as_slice(), &[-2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0]);
-    let mut cache = bsplclib::Cache::new(2, true, &flat, &poles, None).unwrap();
+    let cache = bsplclib::Cache::new(2, true, &flat, &poles, None).unwrap();
     for u in [0.25, 1.5, 2.9, 4.2, -0.7] {
         cache.build_cache(u, &flat, &poles, None).unwrap();
         let cached: Point3 = cache.d0(u).unwrap();

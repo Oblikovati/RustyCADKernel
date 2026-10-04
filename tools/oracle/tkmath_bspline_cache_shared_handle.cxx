@@ -8,10 +8,13 @@
 
 template<class T> void print_cache(const occ::handle<T>& cache) {
   occ::handle<T> alias = cache;
+  occ::handle<Standard_Transient> base(cache.get());
   std::cout << cache->DynamicType()->Name() << ' '
             << cache->IsInstance(STANDARD_TYPE(T)) << ' '
             << (cache == alias) << ' '
-            << cache->IsKind(STANDARD_TYPE(Standard_Transient)) << '\n';
+            << cache->IsKind(STANDARD_TYPE(Standard_Transient)) << ' '
+            << (base.get() == cache.get()) << ' '
+            << cache->GetRefCount() << '\n';
 }
 
 int main() {

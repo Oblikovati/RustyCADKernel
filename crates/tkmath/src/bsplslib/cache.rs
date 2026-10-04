@@ -12,10 +12,15 @@ use crate::gp::{Point3, Vector3};
 use crate::plib::{eval_polynomial, no_derivative_eval_polynomial};
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
+use std::sync::{Mutex, MutexGuard};
 
 /// Cached Taylor coefficients of the patch last located (`BSplSLib_Cache`).
 pub struct Cache {
     base: StandardTransient,
+    state: Mutex<CacheState>,
+}
+
+pub(super) struct CacheState {
     is_rational: bool,
     params_u: CacheParams,
     params_v: CacheParams,
@@ -23,10 +28,10 @@ pub struct Cache {
 }
 rustycad_tkernel::impl_transient!(Cache, "BSplSLib_Cache", StandardTransient, base);
 
-impl Cache {
+impl CacheState {
     /// Prepares an empty cache of `(max degree + 1) x (3 or 4)*(min degree + 1)` values;
     /// `Cache::new(3, false, &u_flat, 2, false, &v_flat, None)?`.
-    pub fn new(
+    fn new(
         degree_u: i32,
         periodic_u: bool,
         flat_knots_u: &Array1<'_, f64>,
@@ -42,7 +47,6 @@ impl Cache {
             Array2::with_bounds(1, max_degree + 1, 1, columns)
                 .map_err(|error| Failure::out_of_range(&format!("BSplSLib_Cache: {error}")))?;
         Ok(Self {
-            base: StandardTransient::default(),
             is_rational,
             params_u: CacheParams::new(degree_u, periodic_u, flat_knots_u)?,
             params_v: CacheParams::new(degree_v, periodic_v, flat_knots_v)?,
@@ -269,3 +273,38 @@ fn divided(vector: Vector3, divisor: f64) -> Vector3 {
 }
 
 mod polynomials;
+
+impl Cache {
+    /// Creates a mutable surface cache; `Cache::new(3, false, &u, 2, false, &v, None)?`.
+    pub fn new(
+        degree_u: i32,
+        periodic_u: bool,
+        flat_knots_u: &Array1<'_, f64>,
+        degree_v: i32,
+        periodic_v: bool,
+        flat_knots_v: &Array1<'_, f64>,
+        weights: Option<&Array2<'_, f64>>,
+    ) -> Result<Self, Failure> {
+        let state = CacheState::new(
+            degree_u,
+            periodic_u,
+            flat_knots_u,
+            degree_v,
+            periodic_v,
+            flat_knots_v,
+            weights,
+        )?;
+        Ok(Self {
+            base: StandardTransient::default(),
+            state: Mutex::new(state),
+        })
+    }
+
+    pub(super) fn lock_state(&self) -> MutexGuard<'_, CacheState> {
+        self.state
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+    }
+}
+
+mod api;

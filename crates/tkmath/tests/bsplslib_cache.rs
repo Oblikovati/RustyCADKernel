@@ -103,7 +103,7 @@ fn new_cache(
     aPoles: &Array2<'_, Point3>,
     aWeights: Option<&Array2<'_, f64>>,
 ) -> Cache {
-    let mut aCache = Cache::new(
+    let aCache = Cache::new(
         du.degree, false, &du.flat, dv.degree, false, &dv.flat, aWeights,
     )
     .unwrap();

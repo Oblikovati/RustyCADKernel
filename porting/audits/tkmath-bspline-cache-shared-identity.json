@@ -6,40 +6,61 @@
     "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx": "d6e54cfaa813f8d8c9e6fccd0ae5747e6b65f100c2b1a4cd4d41436c6e28a23e",
     "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.cxx": "00643cffe1811a98c2da02eb6eed6a3242eae7e5ca9f62e91c37acea60b913a3"
   },
-  "scope": "Supplemental runtime-type and identity behavior of the mutable Rust cache owners used by geometry adaptors; no legacy declaration or test mapping count changes.",
+  "scope": "Supplemental owning Handle semantics and shared mutable payload identity for BSplCLib_Cache / BSplSLib_Cache; no legacy declaration or test mapping count changes.",
   "native_fixture": {
     "source": "tools/oracle/tkmath_bspline_cache_shared_handle.cxx",
     "expected": "tools/oracle/tkmath_bspline_cache_shared_handle.expected",
-    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_bspline_cache_shared_handle.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath-bspline-cache-shared-handle",
+    "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkmath_bspline_cache_shared_handle.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel -o /tmp/tkmath-bspline-cache-shared-handle-new",
     "run_command": "/tmp/tkmath-bspline-cache-shared-handle",
     "observed": [
       "Both cache classes report their native dynamic type.",
-      "IsInstance recognizes the concrete cache class.",
-      "A copied handle preserves native object identity.",
-      "IsKind recognizes Standard_Transient ancestry."
+      "IsInstance recognizes the concrete cache class and IsKind recognizes Standard_Transient ancestry.",
+      "A copied cache handle and an owning Standard_Transient base handle share one native object address.",
+      "The embedded native reference count is three while concrete owner, copied owner, and base projection coexist."
     ],
     "sha256": {
-      "tools/oracle/tkmath_bspline_cache_shared_handle.cxx": "d2adb055946f3b3d4c5681d5d1256d7a0699523f6bd84201299906cb0502c840",
-      "tools/oracle/tkmath_bspline_cache_shared_handle.expected": "60939020479888adcc3459f4fd6d7212eaf22dcfea67ee9da74cb9f3c4d02715"
-    }
+      "tools/oracle/tkmath_bspline_cache_shared_handle.cxx": "3ee55d6276d1b05c892da0e460832a112ce37a5ab148fc66a53ad867cca28b61",
+      "tools/oracle/tkmath_bspline_cache_shared_handle.expected": "abc2c7b9491e47c7aebb0460af4ef2c3bb11f99967239725f421ab1e4321b660"
+    },
+    "output_sha256": "abc2c7b9491e47c7aebb0460af4ef2c3bb11f99967239725f421ab1e4321b660"
   },
   "rust_fixture": {
     "test": "crates/tkmath/tests/bspline_cache_shared_handle.rs::mutable_shared_cache_owners_match_native_handle_identity_and_type",
-    "target": "crates/tkmath/src/bsplclib/shared_cache.rs::SharedCache<T: Transient>",
-    "validation": "cargo +1.98.1 test -p rustycad-tkmath --test bspline_cache_shared_handle"
+    "target": "crates/tkmath/src/bsplclib/shared_cache.rs::SharedCache<T> backed by Handle<T>; Cache payloads use independent Mutex<CacheState>.",
+    "validation": "cargo test -p rustycad-tkmath -p rustycad-tkg2d -p rustycad-tkg3d; cargo clippy -p rustycad-tkmath -p rustycad-tkg2d -p rustycad-tkg3d --all-targets -- -D warnings",
+    "ownership_regression": "bsplclib::shared_cache::tests::owning_casts_update_embedded_count_without_taking_payload_lock",
+    "semantic_changes": [
+      "SharedCache<T> now owns Handle<T> directly and supports owning base projections/refcount queries.",
+      "Cache with_mut callback now borrows the cache object; build_cache uses interior mutability.",
+      "BSplCLib CacheParams accessor now returns an owned snapshot."
+    ],
+    "sha256": {
+      "crates/tkmath/src/bsplclib/shared_cache.rs": "b29f9b86115aea679168015ead97719ac2eb40053f6cbda74d5e669c0ea0a900",
+      "crates/tkmath/src/bsplclib/cache.rs": "d200b076a439659efe3a6f7bd6fd6b204b31139764a8eb4fc2ee61037a0160e4",
+      "crates/tkmath/src/bsplslib/cache.rs": "ae77d275072380c767668b6fa22b7da58f4c6aa2aa84496b569109616dc25fb6",
+      "crates/tkmath/tests/bspline_cache_shared_handle.rs": "dbef276c5d57a4f0d7fecf0029467599aad3f8ac4ec1959fd9d6c7b9ab474d29"
+    }
   },
   "limitations": [
-    "SharedCache clones use Arc<Mutex<T>> ownership and do not increment the embedded StandardTransient counter; the regression records that it stays zero where native copied Handles increment GetRefCount.",
-    "SharedCache exposes borrowed access to the cache and no owning Standard_Transient base-handle projection.",
-    "get_type_descriptor and DynamicType return Rust static RuntimeType references rather than owning Standard_Type Handles, so native descriptor-handle reference-count behavior remains unrepresented."
+    "Runtime Standard_Type descriptors remain Rust static RuntimeType references rather than owning native Standard_Type handles.",
+    "The Rust base projection reproduces object ownership/counting, but class descriptors do not model native descriptor-handle reference counts.",
+    "BSplCLib_Cache::params returns a copied CacheParams snapshot because a borrowed reference cannot safely escape the payload mutex; field values are unchanged."
   ],
   "legacy_declaration_count_changed": false,
   "full_api_parity_proven": false,
   "validation": {
     "focused_tests_passed": 3,
-    "tkmath_all_targets_passed": 2699,
-    "tkmath_all_targets_failed": 0,
     "strict_clippy_passed": true,
-    "native_output_byte_match": true
+    "native_output_byte_match": true,
+    "tkmath_tkg2d_tkg3d_target_groups": 353,
+    "tkmath_tkg2d_tkg3d_passed": 4197,
+    "tkmath_tkg2d_tkg3d_failed": 0,
+    "full_test_log": "porting/audits/tkmath-bspline-cache-shared-identity-tests.log.gz",
+    "full_test_log_sha256": "863cf9b148c6cba4ec4e4a3c26f1883cb6514aac42ec4eb769d20f10456a8188",
+    "native_library_sha256": {
+      "libTKMath.so": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+      "libTKernel.so": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    },
+    "focused_owning_lock_test_passed": 1
   }
 }

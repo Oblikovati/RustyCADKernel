@@ -36,24 +36,30 @@ fn flat_poles() -> Array1<'static, Point3> {
 fn curve_shared_report() -> String {
     let cache = SharedBSplineCache::new(curve_cache());
     let alias = cache.clone();
+    let base = cache.handle().cast::<StandardTransient>();
     format!(
-        "{} {} {} {}\n",
+        "{} {} {} {} {} {}\n",
         cache.dynamic_type().unwrap().name(),
         i32::from(cache.is_instance(CurveCache::static_type())),
         i32::from(cache.is_same(&alias)),
-        i32::from(cache.is_kind(StandardTransient::static_type()))
+        i32::from(cache.is_kind(StandardTransient::static_type())),
+        i32::from(cache.object_address() == base.object_address()),
+        cache.ref_count()
     )
 }
 
 fn surface_shared_report() -> String {
     let cache = SharedBSplineSurfaceCache::new(surface_cache());
     let alias = cache.clone();
+    let base = cache.handle().cast::<StandardTransient>();
     format!(
-        "{} {} {} {}\n",
+        "{} {} {} {} {} {}\n",
         cache.dynamic_type().unwrap().name(),
         i32::from(cache.is_instance(SurfaceCache::static_type())),
         i32::from(cache.is_same(&alias)),
-        i32::from(cache.is_kind(StandardTransient::static_type()))
+        i32::from(cache.is_kind(StandardTransient::static_type())),
+        i32::from(cache.object_address() == base.object_address()),
+        cache.ref_count()
     )
 }
 
@@ -76,8 +82,7 @@ fn null_shared_cache_has_no_dynamic_object() {
 }
 
 #[test]
-fn shared_owner_aliases_do_not_increment_the_embedded_transient_counter() {
-    // This exposes the current difference from native Handles, which update this counter.
+fn shared_owner_aliases_increment_the_embedded_transient_counter() {
     let cache = SharedBSplineCache::new(curve_cache());
     let alias = cache.clone();
     assert!(cache.is_same(&alias));
@@ -85,6 +90,6 @@ fn shared_owner_aliases_do_not_increment_the_embedded_transient_counter() {
         cache
             .with(|value| value.transient_base().ref_count())
             .unwrap(),
-        0
+        2
     );
 }

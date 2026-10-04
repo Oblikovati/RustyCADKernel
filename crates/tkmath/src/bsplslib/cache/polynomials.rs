@@ -1,10 +1,10 @@
 // Rust translation of FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.cxx (EvaluatePolynomials) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Evaluation of the cached bivariate polynomial and its derivatives.
-use super::{Cache, eval_polynomial, no_derivative_eval_polynomial, rational_derivative};
+use super::{eval_polynomial, no_derivative_eval_polynomial, rational_derivative};
 use rustycad_tkernel::standard::Failure;
 
-impl Cache {
+impl super::CacheState {
     /// Derivatives up to (`[u, v]` orders) at normalized parameters, row by row along
     /// the max-degree direction, `(min order + 1)` points per row (rational ones
     /// converted to Cartesian derivatives); non-rational rows skip derivatives the

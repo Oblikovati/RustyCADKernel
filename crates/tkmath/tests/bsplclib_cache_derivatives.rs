@@ -9,7 +9,7 @@ fn cache_2d() -> Cache {
     let mut poles: Array1<'static, Point2> = Array1::with_bounds(1, 2).unwrap();
     poles[1] = Point2::new(0.0, 0.0);
     poles[2] = Point2::new(4.0, 8.0);
-    let mut cache: Cache = Cache::new(1, false, &knots, &poles, None).unwrap();
+    let cache: Cache = Cache::new(1, false, &knots, &poles, None).unwrap();
     cache.build_cache(0.5, &knots, &poles, None).unwrap();
     cache
 }
@@ -22,7 +22,7 @@ fn rational_cache_3d() -> Cache {
     poles[2] = Point3::new(4.0, 8.0, 12.0);
     let mut weights: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
     weights.as_mut_slice().copy_from_slice(&[1.0, 2.0]);
-    let mut cache: Cache = Cache::new(1, false, &knots, &poles, Some(&weights)).unwrap();
+    let cache: Cache = Cache::new(1, false, &knots, &poles, Some(&weights)).unwrap();
     cache
         .build_cache(3.0, &knots, &poles, Some(&weights))
         .unwrap();
@@ -38,7 +38,7 @@ fn quartic_cache_3d() -> Cache {
         poles[index] = Point3::new(0.0, 0.0, 0.0);
     }
     poles[5] = Point3::new(1.0, 0.0, 0.0);
-    let mut cache: Cache = Cache::new(4, false, &knots, &poles, None).unwrap();
+    let cache: Cache = Cache::new(4, false, &knots, &poles, None).unwrap();
     cache.build_cache(4.0, &knots, &poles, None).unwrap();
     cache
 }
@@ -54,7 +54,7 @@ fn rational_quartic_cache_2d() -> Cache {
         poles[index] = Point2::new(coordinate, coordinate * coordinate);
         weights[index] = f64::from(index);
     }
-    let mut cache = Cache::new(4, false, &knots, &poles, Some(&weights)).unwrap();
+    let cache = Cache::new(4, false, &knots, &poles, Some(&weights)).unwrap();
     cache
         .build_cache(3.0, &knots, &poles, Some(&weights))
         .unwrap();
