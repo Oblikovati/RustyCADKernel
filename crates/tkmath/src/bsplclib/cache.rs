@@ -6,18 +6,31 @@ use super::cache_params::CacheParams;
 use super::point::{CurveD3, CurvePoint};
 use crate::plib::{eval_polynomial, no_derivative_eval_polynomial, rational_derivative};
 use rustycad_tkernel::ncollection::{Array1, Array2};
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::standard::{Failure, StandardTransient};
 
 /// Cached Taylor coefficients of the span last located (`BSplCLib_Cache`).
 ///
 /// Rows of the cache hold the point coordinates, then the weight when the curve is
 /// rational; the row length is fixed by the pole type given at construction.
-#[derive(Debug)]
 pub struct Cache {
+    base: StandardTransient,
     is_rational: bool,
     params: CacheParams,
     row_length: usize,
     poles_weights: [f64; 128],
+}
+rustycad_tkernel::impl_transient!(Cache, "BSplCLib_Cache", StandardTransient, base);
+
+impl std::fmt::Debug for Cache {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Cache")
+            .field("is_rational", &self.is_rational)
+            .field("params", &self.params)
+            .field("row_length", &self.row_length)
+            .field("poles_weights", &self.poles_weights)
+            .finish()
+    }
 }
 
 impl Cache {
@@ -32,6 +45,7 @@ impl Cache {
     ) -> Result<Self, Failure> {
         let is_rational: bool = weights.is_some();
         Ok(Self {
+            base: StandardTransient::default(),
             is_rational,
             params: CacheParams::new(degree, periodic, flat_knots)?,
             row_length: P::DIMENSION + usize::from(is_rational),
