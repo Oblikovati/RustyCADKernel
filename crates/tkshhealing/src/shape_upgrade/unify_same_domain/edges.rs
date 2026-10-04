@@ -1,5 +1,6 @@
 use super::{ShapeUpgradeUnifySameDomain, face_wires};
 mod bspline;
+mod safe_input;
 use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepTool;
@@ -16,6 +17,7 @@ use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 use rustycad_tkmath::gp::{Axis1, Axis2, Circle3, Direction3, Point3, Vector3};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
 use rustycad_tktopalgo::brep_lib::build_pcurve_for_edges_on_plane;
+use safe_input::{record_safe_vertex, safe_merge_vertex};
 
 /// Merges supported wire and planar-face chains, restoring missing planar p-curves.
 pub(super) fn merge_wire_edge_chains(
@@ -32,11 +34,15 @@ pub(super) fn merge_wire_edge_chains(
             fields.angular_tolerance,
             true,
             fields._concat_bspline_edges,
+            &fields.keep_shapes,
+            fields.safe_input_mode,
         ),
         ShapeEnum::Face => merge_planar_face_edges(
             shape,
             fields.angular_tolerance,
             fields._concat_bspline_edges,
+            &fields.keep_shapes,
+            fields.safe_input_mode,
         ),
         _ => Ok(shape.clone()),
     }
@@ -46,11 +52,12 @@ pub(super) fn has_unported_spline_candidate(
     shape: &Shape,
     angular_tolerance: f64,
     concat_bspline_edges: bool,
+    keep_shapes: &[Shape],
 ) -> Result<bool, Failure> {
     if !concat_bspline_edges {
         return Ok(false);
     }
-    bspline::has_candidate(shape, angular_tolerance)
+    bspline::has_candidate(shape, angular_tolerance, keep_shapes)
 }
 
 fn merge_wire_chains(
@@ -58,23 +65,34 @@ fn merge_wire_chains(
     angular_tolerance: f64,
     unify_circles: bool,
     concat_bspline_edges: bool,
+    keep_shapes: &[Shape],
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
     let mut result = shape.clone();
     let limit = wire_edges(shape)?.len();
     for _ in 0..limit {
         let edges = wire_edges(&result)?;
-        if let Some((first, second, start, end)) = first_linear_pair(&edges, angular_tolerance)? {
-            result = replace_line_pair(&result, &first, &second, start, end)?;
+        if let Some((first, second, start, end)) =
+            first_linear_pair(&edges, angular_tolerance, keep_shapes)?
+        {
+            result = replace_line_pair(&result, &first, &second, start, end, safe_input_mode)?;
             continue;
         }
         if unify_circles
-            && let Some((first, second, start, end)) = first_circle_pair(&edges, angular_tolerance)?
+            && let Some((first, second, start, end)) =
+                first_circle_pair(&edges, angular_tolerance, keep_shapes)?
         {
-            result = replace_circle_pair(&result, &first, &second, start, end)?;
+            result = replace_circle_pair(&result, &first, &second, start, end, safe_input_mode)?;
             continue;
         }
         if concat_bspline_edges
-            && let Some(joined) = bspline::merge_first_pair(&result, &edges, angular_tolerance)?
+            && let Some(joined) = bspline::merge_first_pair(
+                &result,
+                &edges,
+                angular_tolerance,
+                keep_shapes,
+                safe_input_mode,
+            )?
         {
             result = joined;
             continue;
@@ -88,6 +106,8 @@ fn merge_planar_face_edges(
     shape: &Shape,
     angular_tolerance: f64,
     concat_bspline_edges: bool,
+    keep_shapes: &[Shape],
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
     let face = rustycad_tkbrep::topods::face(shape)?;
     if BRepAdaptorSurface::with_face(&face, false)?.get_type()? != SurfaceType::Plane {
@@ -103,6 +123,8 @@ fn merge_planar_face_edges(
         &wires[0],
         angular_tolerance,
         concat_bspline_edges,
+        keep_shapes,
+        safe_input_mode,
     )
 }
 
@@ -112,10 +134,19 @@ fn merge_planar_wire_chain(
     wire: &Wire,
     angular_tolerance: f64,
     concat_bspline_edges: bool,
+    keep_shapes: &[Shape],
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
     let source = wire.clone().into_shape();
     let before = wire_edges(&source)?.len();
-    let merged = merge_wire_chains(&source, angular_tolerance, false, concat_bspline_edges)?;
+    let merged = merge_wire_chains(
+        &source,
+        angular_tolerance,
+        false,
+        concat_bspline_edges,
+        keep_shapes,
+        safe_input_mode,
+    )?;
     if wire_edges(&merged)?.len() == before {
         return Ok(original.clone());
     }
@@ -138,15 +169,26 @@ fn rebuild_planar_face_pcurves(shape: &Shape) -> Result<Shape, Failure> {
 fn first_linear_pair(
     edges: &[Edge],
     tolerance: f64,
+    keep_shapes: &[Shape],
 ) -> Result<Option<(Edge, Edge, Vertex, Vertex)>, Failure> {
     for i in 0..edges.len() {
         for j in i + 1..edges.len() {
-            if let Some(pair) = connected_linear_pair(&edges[i], &edges[j], tolerance)? {
+            if let Some(pair) = connected_linear_pair(&edges[i], &edges[j], tolerance)?
+                && !keeps_join_vertex(&pair.0, keep_shapes)
+            {
                 return Ok(Some(pair));
             }
         }
     }
     Ok(None)
+}
+
+pub(super) fn keeps_join_vertex(first: &Edge, keep_shapes: &[Shape]) -> bool {
+    let analysis = ShapeAnalysisEdge::new();
+    let join = analysis.last_vertex(first);
+    keep_shapes
+        .iter()
+        .any(|kept| kept.is_same(&join.clone().into_shape()))
 }
 
 fn connected_linear_pair(
@@ -200,9 +242,16 @@ fn replace_line_pair(
     second: &Edge,
     start: Vertex,
     end: Vertex,
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
-    let edge = make_line_edge(start, end)?;
+    let original_start = start.clone();
+    let original_end = end.clone();
+    let start = safe_merge_vertex(&start, safe_input_mode)?;
+    let end = safe_merge_vertex(&end, safe_input_mode)?;
+    let edge = make_line_edge(start.clone(), end.clone())?;
     let context = Handle::new(ShapeBuildReShape::new());
+    record_safe_vertex(&context, &original_start, &start, safe_input_mode)?;
+    record_safe_vertex(&context, &original_end, &end, safe_input_mode)?;
     context.merge(
         &[first.clone().into_shape(), second.clone().into_shape()],
         &edge.into_shape(),
@@ -213,10 +262,13 @@ fn replace_line_pair(
 fn first_circle_pair(
     edges: &[Edge],
     tolerance: f64,
+    keep_shapes: &[Shape],
 ) -> Result<Option<(Edge, Edge, Vertex, Vertex)>, Failure> {
     for i in 0..edges.len() {
         for j in i + 1..edges.len() {
-            if let Some(pair) = connected_circle_pair(&edges[i], &edges[j], tolerance)? {
+            if let Some(pair) = connected_circle_pair(&edges[i], &edges[j], tolerance)?
+                && !keeps_join_vertex(&pair.0, keep_shapes)
+            {
                 return Ok(Some(pair));
             }
         }
@@ -288,13 +340,27 @@ fn replace_circle_pair(
     second: &Edge,
     start: Vertex,
     end: Vertex,
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
-    let edge = if start.is_same(&end) {
+    let closed = start.is_same(&end);
+    let original_start = start.clone();
+    let original_end = end.clone();
+    let start = safe_merge_vertex(&start, safe_input_mode)?;
+    let end = if closed {
+        start.clone()
+    } else {
+        safe_merge_vertex(&end, safe_input_mode)?
+    };
+    let edge = if closed {
         make_closed_circle_edge(first, &start)?
     } else {
-        make_merged_circle_edge(first, &start, &end)?
+        make_merged_circle_edge(first, &original_start, &original_end, &start, &end)?
     };
     let context = Handle::new(ShapeBuildReShape::new());
+    record_safe_vertex(&context, &original_start, &start, safe_input_mode)?;
+    if !closed {
+        record_safe_vertex(&context, &original_end, &end, safe_input_mode)?;
+    }
     context.merge(
         &[first.clone().into_shape(), second.clone().into_shape()],
         &edge.into_shape(),
@@ -321,12 +387,18 @@ fn make_closed_circle_edge(first: &Edge, vertex: &Vertex) -> Result<Edge, Failur
     .edge()
 }
 
-fn make_merged_circle_edge(first: &Edge, start: &Vertex, end: &Vertex) -> Result<Edge, Failure> {
+fn make_merged_circle_edge(
+    first: &Edge,
+    source_start: &Vertex,
+    source_end: &Vertex,
+    start: &Vertex,
+    end: &Vertex,
+) -> Result<Edge, Failure> {
     let adaptor = BRepAdaptorCurve::with_edge(first)?;
     let source = adaptor.circle()?;
-    let first_point = BRepTool::pnt(start)?;
-    let last_point = BRepTool::pnt(end)?;
-    let reference = circle_reference_point(first, start, &adaptor)?;
+    let first_point = BRepTool::pnt(source_start)?;
+    let last_point = BRepTool::pnt(source_end)?;
+    let reference = circle_reference_point(first, source_start, &adaptor)?;
     let circle = merged_circle(source, first_point, reference)?;
     let angle = merged_circle_angle(circle.location(), first_point, last_point, reference)?;
     let curve = trimmed_circle(circle, angle)?;

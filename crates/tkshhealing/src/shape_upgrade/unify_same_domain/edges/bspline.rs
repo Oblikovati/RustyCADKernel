@@ -21,28 +21,38 @@ pub(super) fn merge_first_pair(
     shape: &Shape,
     edges: &[Edge],
     angular_tolerance: f64,
+    keep_shapes: &[Shape],
+    safe_input_mode: bool,
 ) -> Result<Option<Shape>, Failure> {
-    let Some((first, second, start, end)) = first_pair(edges, angular_tolerance)? else {
+    let Some((first, second, start, end)) = first_pair(edges, angular_tolerance, keep_shapes)?
+    else {
         return Ok(None);
     };
     let curve = concatenate_curves(&first, &second)?;
-    replace_pair(shape, &first, &second, &start, &end, curve).map(Some)
+    replace_pair(shape, &first, &second, &start, &end, curve, safe_input_mode).map(Some)
 }
 
-pub(super) fn has_candidate(shape: &Shape, tolerance: f64) -> Result<bool, Failure> {
+pub(super) fn has_candidate(
+    shape: &Shape,
+    tolerance: f64,
+    keep_shapes: &[Shape],
+) -> Result<bool, Failure> {
     let edges = Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?
         .map(|edge| rustycad_tkbrep::topods::edge(&edge))
         .collect::<Result<Vec<_>, _>>()?;
-    Ok(first_pair(&edges, tolerance)?.is_some())
+    Ok(first_pair(&edges, tolerance, keep_shapes)?.is_some())
 }
 
 fn first_pair(
     edges: &[Edge],
     tolerance: f64,
+    keep_shapes: &[Shape],
 ) -> Result<Option<(Edge, Edge, Vertex, Vertex)>, Failure> {
     for (index, first) in edges.iter().enumerate() {
         for second in edges.iter().skip(index + 1) {
-            if let Some(pair) = compatible_pair(first, second, tolerance)? {
+            if let Some(pair) = compatible_pair(first, second, tolerance)?
+                && !super::keeps_join_vertex(&pair.0, keep_shapes)
+            {
                 return Ok(Some(pair));
             }
         }
@@ -227,29 +237,34 @@ fn replace_pair(
     start: &Vertex,
     end: &Vertex,
     curve: Handle<rustycad_tkg3d::geom::GeomBSplineCurve>,
+    safe_input_mode: bool,
 ) -> Result<Shape, Failure> {
     let geometry: Handle<dyn GeomCurve> = curve.cast();
+    let closed = start.is_same(end);
+    let original_start = start.clone();
+    let original_end = end.clone();
+    let start = super::safe_merge_vertex(start, safe_input_mode)?;
+    let end = if closed {
+        start.clone()
+    } else {
+        super::safe_merge_vertex(end, safe_input_mode)?
+    };
     let edge = BRepBuilderAPIMakeEdge::from_curve_vertices_params(
         &geometry,
-        start,
-        end,
+        &start,
+        &end,
         curve.get().ok_or_else(null_bspline)?.first_parameter(),
         curve.get().ok_or_else(null_bspline)?.last_parameter(),
     )?
     .edge()?;
-    apply_replacement(shape, first, second, &edge)
-}
-
-fn apply_replacement(
-    shape: &Shape,
-    first: &Edge,
-    second: &Edge,
-    edge: &Edge,
-) -> Result<Shape, Failure> {
     let context = Handle::new(ShapeBuildReShape::new());
+    super::record_safe_vertex(&context, &original_start, &start, safe_input_mode)?;
+    if !closed {
+        super::record_safe_vertex(&context, &original_end, &end, safe_input_mode)?;
+    }
     context.merge(
         &[first.clone().into_shape(), second.clone().into_shape()],
-        &edge.clone().into_shape(),
+        &edge.into_shape(),
     )?;
     context.apply(shape, ShapeEnum::Shape)
 }
