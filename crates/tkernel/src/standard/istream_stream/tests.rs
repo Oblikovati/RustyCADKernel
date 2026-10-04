@@ -58,6 +58,39 @@ fn manually_set_failbit_blocks_reads_without_setting_badbit() {
     assert_read(&mut lines, &mut stream, true, 2);
 }
 
+#[test]
+fn manually_set_badbit_also_reports_native_fail() {
+    let mut stream = IstreamStream::new(Cursor::new(b"z".to_vec()));
+    stream.set_status(false, false, true);
+    assert!(stream.is_fail() && stream.is_bad());
+    let mut byte = [0];
+    assert!(stream.read(&mut byte).is_err());
+}
+
+#[test]
+fn zero_length_read_does_not_set_eof_or_touch_the_source() {
+    let mut stream = IstreamStream::new(Cursor::new(Vec::<u8>::new()));
+    assert_eq!(stream.read(&mut []).unwrap(), 0);
+    assert!(!stream.is_eof() && !stream.is_fail() && !stream.is_bad());
+    let mut byte = [0];
+    assert_eq!(stream.read(&mut byte).unwrap(), 0);
+    assert!(stream.is_eof() && stream.is_fail());
+}
+
+#[test]
+fn eofbit_only_sets_fail_on_the_next_nonzero_read() {
+    let mut stream = IstreamStream::new(Cursor::new(b"z".to_vec()));
+    stream.set_status(true, false, false);
+    assert!(stream.is_eof());
+    assert!(!stream.is_fail());
+    let mut byte = [0];
+    assert_eq!(stream.read(&mut byte).unwrap(), 0);
+    assert!(stream.is_eof() && stream.is_fail());
+    stream.clear();
+    assert_eq!(stream.read(&mut byte).unwrap(), 1);
+    assert_eq!(byte, [b'z']);
+}
+
 fn assert_read(
     lines: &mut ReadLineBuffer,
     stream: &mut impl Read,
