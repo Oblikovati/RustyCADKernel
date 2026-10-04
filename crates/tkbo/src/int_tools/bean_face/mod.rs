@@ -1,5 +1,5 @@
 //! Stateful BeanFace facade; analytic stages precede the remaining general solver port.
-use super::{Context, Range};
+use super::{Context, MarkedRangeSet, Range};
 use rustycad_tkbrep::{
     brep::BRepTool,
     brep_adaptor::{BRepAdaptorCurve, BRepAdaptorSurface},
@@ -16,6 +16,7 @@ mod analytic_adaptors;
 mod distance;
 mod fast_analytic;
 mod line_plane;
+mod range_walk;
 
 /// Curve/face intersection ranges; `BeanFaceIntersector::from_shapes(&edge, &face)?`.
 pub struct BeanFaceIntersector {
@@ -31,6 +32,7 @@ pub struct BeanFaceIntersector {
     done: bool,
     minimum_square_distance: f64,
     results: Sequence<Range>,
+    range_manager: MarkedRangeSet,
 }
 
 impl Default for BeanFaceIntersector {
@@ -48,6 +50,7 @@ impl Default for BeanFaceIntersector {
             done: false,
             minimum_square_distance: f64::MAX,
             results: Sequence::default(),
+            range_manager: MarkedRangeSet::default(),
         }
     }
 }
@@ -214,3 +217,6 @@ impl BeanFaceIntersector {
         }
     }
 }
+
+#[cfg(test)]
+mod range_walk_tests;

@@ -12,6 +12,7 @@
 #define BEAN_ANALYTIC_NO_MAIN
 #include "tkbo_bean_analytic_facade.cxx"
 #undef BEAN_ANALYTIC_NO_MAIN
+#ifndef BEAN_DISTANCE_NO_MAIN
 int main()
 {
  std::cout<<std::fixed<<std::setprecision(12);
@@ -35,3 +36,5 @@ int main()
  std::cerr<<"fallback_count "<<fallbackCount<<"\n";
  return 0;
 }
+
+#endif
