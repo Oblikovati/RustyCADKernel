@@ -1,6 +1,6 @@
 use super::pcurve_union::OrientedPCurve;
-use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
-use rustycad_tkbrep::topods::{Edge, Face};
+use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -13,21 +13,23 @@ use rustycad_tkgeombase::geom2d_convert::{
 };
 use rustycad_tkmath::convert::ParameterisationType;
 
-/// Builds and stores the native C1 concatenation result for two stored p-curves.
-pub(super) fn union_general_curves(
-    face: &Face,
+/// Builds the native C1 concatenation result for two stored p-curves.
+pub(super) fn concatenate_general_curves(
     merged: &Edge,
     first: &OrientedPCurve,
     second: &OrientedPCurve,
-) -> Result<(), Failure> {
+) -> Result<Option<Handle<Geom2dBSplineCurve>>, Failure> {
     if !has_two_stored_curves(first, second) {
-        return Ok(());
+        return Ok(None);
     }
     let curves = c1_curve_pair(first, second)?;
     let vertex_tolerance = common_vertex_tolerance(first, second)?;
     let max_tolerance = max_pcurve_tolerance(merged, vertex_tolerance)?;
-    let result = concatenate_pcurves(curves, vertex_tolerance, max_tolerance)?;
-    store_bspline_pcurve(face, merged, result)
+    Ok(Some(concatenate_pcurves(
+        curves,
+        vertex_tolerance,
+        max_tolerance,
+    )?))
 }
 
 fn has_two_stored_curves(first: &OrientedPCurve, second: &OrientedPCurve) -> bool {
@@ -165,17 +167,6 @@ fn concatenate_groups(
         }
     }
     Ok(combined.bspline_curve())
-}
-
-fn store_bspline_pcurve(
-    face: &Face,
-    merged: &Edge,
-    spline: Handle<Geom2dBSplineCurve>,
-) -> Result<(), Failure> {
-    let curve: Handle<dyn Geom2dCurve> = spline.cast();
-    let (surface, location) = BRepTool::surface_with_location(face)?;
-    let tolerance = BRepTool::edge_tolerance(merged)?;
-    BRepBuilder::default().update_edge_pcurve(merged, &curve, &surface, &location, tolerance, None)
 }
 
 fn null_spline() -> Failure {
