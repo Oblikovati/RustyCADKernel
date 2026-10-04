@@ -98,6 +98,19 @@ class TemplateSelectorTest(unittest.TestCase):
         self.assertEqual(status, "ambiguous")
         self.assertEqual(len(selected), 2)
 
+    def test_template_pattern_record_does_not_hide_constructor(self) -> None:
+        template = row("sample::Box", "Box<T>", [], "ClassTemplate")
+        template["usr"] = "template:sample::Box"
+        pattern = {**template, "kind": "CXXRecord", "api_visible": False,
+                   "exclusion_reason": "template_owned_declaration"}
+        ctor = row("sample::Box::Box<T>", "Box()", [], "CXXConstructor")
+        ctor["parent_usr"] = template["usr"]
+        status, selected = cpp_candidates(
+            "sample::Box()", "TKFixture", indexed(template, pattern, ctor)
+        )
+        self.assertEqual(status, "unique")
+        self.assertEqual(selected, [ctor])
+
     def test_explicit_empty_parameter_list_selects_nonconst_pair_member(self) -> None:
         name = "sample::Vector::x"
         mutable = row(name, "double () noexcept", [])
