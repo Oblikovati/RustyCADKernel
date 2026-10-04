@@ -10,6 +10,7 @@ mod curve_query;
 mod curve_shape;
 mod curve_state;
 pub use curve::GeomAdaptorCurve;
+mod public_surface_data;
 mod surface;
 mod surface_eval;
 mod surface_eval_order;
@@ -17,6 +18,12 @@ mod surface_query;
 mod surface_shape;
 mod surface_span;
 mod surface_state;
+pub use public_surface_data::SurfaceDataVariant as GeomAdaptorSurfaceDataVariant;
+pub use public_surface_data::{
+    BSplineData as GeomAdaptorSurfaceBSplineData, BezierData as GeomAdaptorSurfaceBezierData,
+    ExtrusionData as GeomAdaptorSurfaceExtrusionData, OffsetData as GeomAdaptorSurfaceOffsetData,
+    RevolutionData as GeomAdaptorSurfaceRevolutionData, SurfaceDataVariant,
+};
 pub use surface::GeomAdaptorSurface;
 pub use surface_state::LoadRange as GeomAdaptorSurfaceRange;
 mod extrusion_kind;
