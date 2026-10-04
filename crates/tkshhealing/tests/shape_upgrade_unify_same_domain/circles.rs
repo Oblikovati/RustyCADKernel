@@ -43,6 +43,41 @@ fn two_circle_arcs_form_the_native_closed_circle_edge() {
     );
 }
 
+#[test]
+fn near_equal_circle_radii_merge_using_the_first_native_support() {
+    let frame = Axis2::default();
+    let first = BRepBuilderAPIMakeEdge::from_circ_params(
+        Circle3::new(frame, 2.0).unwrap(),
+        0.0,
+        std::f64::consts::FRAC_PI_2,
+    )
+    .unwrap()
+    .edge()
+    .unwrap();
+    let second = BRepBuilderAPIMakeEdge::from_circ_params(
+        Circle3::new(frame, 2.0 + 5e-8).unwrap(),
+        std::f64::consts::FRAC_PI_2,
+        std::f64::consts::PI,
+    )
+    .unwrap()
+    .edge()
+    .unwrap();
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    wire.add_edge(&first).unwrap();
+    wire.add_edge(&second).unwrap();
+    let input = wire.wire().unwrap().into_shape();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+
+    unifier.build().unwrap();
+
+    let edges = edge_shapes(&unifier.shape());
+    assert_eq!(edges.len(), 1);
+    let curve = BRepAdaptorCurve::with_edge(&edges[0]).unwrap();
+    assert_eq!(curve.circle().unwrap().radius(), 2.0);
+    assert_eq!(curve.first_parameter().unwrap(), 0.0);
+    assert_eq!(curve.last_parameter().unwrap(), std::f64::consts::PI);
+}
+
 fn assert_native_circle_merge(input: &Shape, case: &str) {
     let unifier = ShapeUpgradeUnifySameDomain::new(input, true, false, false);
     unifier.build().unwrap();

@@ -103,7 +103,7 @@ fn edge_vertices(first: &Edge, second: &Edge) -> Option<(Vertex, Vertex, Vertex,
     Some((first_start, first_end, second_start, second_end))
 }
 
-fn aligned_join(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Failure> {
+pub(super) fn aligned_join(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Failure> {
     let first_tangent = tangent_at(first, true)?;
     let second_tangent = tangent_at(second, false)?;
     Ok(first_tangent.angle(second_tangent)? <= tolerance)
