@@ -78,5 +78,9 @@
     "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-tkgeombase-callable-gap-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 python3 tools/verify_tkg3d_numeric.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --native-build /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full",
     "tests": "cargo test -p rustycad-tkg3d -q passed; strict all-target clippy passed",
     "defined_domain": "Mutation of dimension beyond the original result allocation remains excluded because the native callback can write out of bounds."
+  },
+  "resolved_selectors": {
+    "AdvApprox_EvaluatorFunction::Evaluate(int*,double*,double*,int*,double*,int*)": "6d010d570fc5592102b5a406f1cd1e3c27f55b8c49b2fdc566f6c161e0382547",
+    "AdvApprox_EvaluatorFunction::operator()(int*,double*,double*,int*,double*,int*)": "e89f840fe8ddff1e9d1ed250f7a752dc9e93103dcd216ef0d58f92d14f288b5b"
   }
 }

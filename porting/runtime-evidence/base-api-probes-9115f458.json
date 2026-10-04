@@ -1,0 +1,423 @@
+{
+  "scope": "Supplemental base toolkit API probes replayed against the pinned modeling build",
+  "source_revision": "9115f458413f78886462da5782945ac29b0afa62",
+  "source_clean": true,
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "libraries": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKMath.so.8.1.0": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKG2d.so.8.1.0": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4"
+  },
+  "probes": [
+    {
+      "probe": "transformed_surface_cache",
+      "source": "tools/oracle/transformed_surface_cache.cxx",
+      "source_sha256": "27e78d82f6c1a7857d8119f7edb50351701442ee5a730a276a213a988ae71200",
+      "expected": "tools/oracle/transformed_surface_cache.expected",
+      "expected_sha256": "c31d5877fa95b59e19af995592116521a369b12954bec01eb45369584e74c36d",
+      "output_sha256": "c31d5877fa95b59e19af995592116521a369b12954bec01eb45369584e74c36d",
+      "executable_sha256": "73920b98f254ddcd17fa26194c5f3fd0a6f448897c22e6db70cf89940862944f",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/transformed_surface_cache.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/transformed_surface_cache"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/transformed_surface_cache"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "bspline_update_knots",
+      "source": "tools/oracle/bspline_update_knots.cxx",
+      "source_sha256": "c983dc4bf02f613d39783d67673bfaeca881f4ca1fff0dc94d7a7a0acf051111",
+      "expected": "tools/oracle/bspline_update_knots.expected",
+      "expected_sha256": "ab3146f9f8bdb4953ba919d5bc720987f73adaba85495248c30f1640ba0eb2cb",
+      "output_sha256": "ab3146f9f8bdb4953ba919d5bc720987f73adaba85495248c30f1640ba0eb2cb",
+      "executable_sha256": "3e528261f9e6494a7d2c554469eb205e20c2f11233eb1a67fe382fe1b5190c1f",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/bspline_update_knots.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/bspline_update_knots"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/bspline_update_knots"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "bspline_surface_update_knots",
+      "source": "tools/oracle/bspline_surface_update_knots.cxx",
+      "source_sha256": "4429cab1ddc686715f34a4ea810d7485e7df71f8877c33a10e7f6d680241a538",
+      "expected": "tools/oracle/bspline_surface_update_knots.expected",
+      "expected_sha256": "1b9aca2c8d9ae8196076f05806280bc7196b02ec6efb06bd01dc19e3273aa9a3",
+      "output_sha256": "1b9aca2c8d9ae8196076f05806280bc7196b02ec6efb06bd01dc19e3273aa9a3",
+      "executable_sha256": "3fcd0b98a9eb12a190011ad2fafdfae9b84a0f3ad2616df45c423a8e148f98e9",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/bspline_surface_update_knots.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/bspline_surface_update_knots"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/bspline_surface_update_knots"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "bspline_surface_segment_flags",
+      "source": "tools/oracle/bspline_surface_segment_flags.cxx",
+      "source_sha256": "538483b08d29fd2bfc87fee7c458edad02e35b657798b47bd04cc65db69d7338",
+      "expected": "tools/oracle/bspline_surface_segment_flags.expected",
+      "expected_sha256": "a32f858290df5a391e096b7333bef39bfe5504d646c0753aad0b543d36744bd3",
+      "output_sha256": "a32f858290df5a391e096b7333bef39bfe5504d646c0753aad0b543d36744bd3",
+      "executable_sha256": "0a66c05e1434844c4cf46e5c97266f256808243752008c0b412eddbcb8d2f7c8",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/bspline_surface_segment_flags.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/bspline_surface_segment_flags"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/bspline_surface_segment_flags"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "transformed_surface_shallow_value_copy",
+      "source": "tools/oracle/transformed_surface_shallow_value_copy.cxx",
+      "source_sha256": "4e35935e0f947ca9ff764cf1965295432ddf4334f8c243ecaceda89e961415b0",
+      "expected": "tools/oracle/transformed_surface_shallow_value_copy.expected",
+      "expected_sha256": "7a47186880fd2dda736b079fcaabd654c26193b76ccb36a0ec8e94f902b5534e",
+      "output_sha256": "7a47186880fd2dda736b079fcaabd654c26193b76ccb36a0ec8e94f902b5534e",
+      "executable_sha256": "58273749ecbc897f55986da7033a4952d1db2a309125a41fd62f3f11283b12c2",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/transformed_surface_shallow_value_copy.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/transformed_surface_shallow_value_copy"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/transformed_surface_shallow_value_copy"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "tkernel_standard_read_file_stream",
+      "source": "tools/oracle/tkernel_standard_read_file_stream.cxx",
+      "source_sha256": "60189b4e42d5bf21a00e08e7732916e2503adcfdde035aaf43f000a703b97ecc",
+      "expected": "tools/oracle/tkernel_standard_read_file_stream.expected",
+      "expected_sha256": "59a89c8c5c021cc1d1ad7d4c79216a8ceb2c673d547889c8dba70f20f36d85c5",
+      "output_sha256": "59a89c8c5c021cc1d1ad7d4c79216a8ceb2c673d547889c8dba70f20f36d85c5",
+      "executable_sha256": "699b7381823ddbdbe95241bcf8f00fb383a24459cb02ba6de136e7d20ae920d8",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/tkernel_standard_read_file_stream.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/tkernel_standard_read_file_stream"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/tkernel_standard_read_file_stream"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "tkernel_standard_istream_state",
+      "source": "tools/oracle/tkernel_standard_istream_state.cxx",
+      "source_sha256": "dfed0cd691d9012b9452e07b792aeba70c678ade24664b042c5f2bb4a8e583a4",
+      "expected": "tools/oracle/tkernel_standard_istream_state.expected",
+      "expected_sha256": "833f13952cbb824d0a4ffbf2ac9134f8efcd71580902cf29935f9fce7d7f8a2f",
+      "output_sha256": "833f13952cbb824d0a4ffbf2ac9134f8efcd71580902cf29935f9fce7d7f8a2f",
+      "executable_sha256": "e164cb2d612c6bee84be1e2c47a2794dd5dd215c41c6989c72f2c0b445eba389",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/tkernel_standard_istream_state.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/tkernel_standard_istream_state"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/tkernel_standard_istream_state"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "tkernel_standard_read_buffer_file_stream",
+      "source": "tools/oracle/tkernel_standard_read_buffer_file_stream.cxx",
+      "source_sha256": "31f7ad531d4f27a9c9d477e0616342398dcb9c49d1b105bdbf3be1f958a83124",
+      "expected": "tools/oracle/tkernel_standard_read_buffer_file_stream.expected",
+      "expected_sha256": "aeba2b1a796c468c6577a8e37ecb905c1e665d61747c9f3705a9c11b9535e3b0",
+      "output_sha256": "aeba2b1a796c468c6577a8e37ecb905c1e665d61747c9f3705a9c11b9535e3b0",
+      "executable_sha256": "c1ee1b26d4931632649c43b3ccac7c5e274c0b36aa51f738b32b376a17d1f0f4",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/tkernel_standard_read_buffer_file_stream.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/tkernel_standard_read_buffer_file_stream"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/tkernel_standard_read_buffer_file_stream"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "geometry_exception_types",
+      "source": "tools/oracle/geometry_exception_types.cxx",
+      "source_sha256": "80a37acb8407c7e1d0086e27fbe6d61c84f40d92e3be4777bb0c0df205f2a714",
+      "expected": "tools/oracle/geometry_exception_types.expected",
+      "expected_sha256": "e05d70c04ef37c2a5f74e8a7c30cd2fe8ab875ee7e745957ade6b43864beff4f",
+      "output_sha256": "e05d70c04ef37c2a5f74e8a7c30cd2fe8ab875ee7e745957ade6b43864beff4f",
+      "executable_sha256": "136681af4fcb7de632bbcf4bb3c7b9f2a528e30baddbd89bc6bc4022cb15b1f0",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/geometry_exception_types.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/geometry_exception_types"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/geometry_exception_types"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "tkernel_mmgr_free_pools",
+      "source": "tools/oracle/tkernel_mmgr_free_pools.cxx",
+      "source_sha256": "3b28077e74faece9f5e6e76a9830c7fee19642818f425e957f1e3e3c2a6356eb",
+      "expected": "tools/oracle/tkernel_mmgr_free_pools.expected",
+      "expected_sha256": "f74555425971a2c8ffeafd95a062d842eca5198f054f8fe54fc20d1a38decf0d",
+      "output_sha256": "f74555425971a2c8ffeafd95a062d842eca5198f054f8fe54fc20d1a38decf0d",
+      "executable_sha256": "27ffb7ca00efd4266eb12a60ae3bf3bf846e37b1d54da400e9bc5e046b32dea3",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/tkernel_mmgr_free_pools.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/tkernel_mmgr_free_pools"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/tkernel_mmgr_free_pools"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "bezier_curve_protected_init",
+      "source": "tools/oracle/bezier_curve_protected_init.cxx",
+      "source_sha256": "3cf529a08323e26628362ea5179bd2a30ef5122aa72a101b45be593c2c245e08",
+      "expected": "tools/oracle/bezier_curve_protected_init.expected",
+      "expected_sha256": "a519eed7d67f5bef040c6ec993993b368fc1145e7fd41574bb00ea9d2aa37832",
+      "output_sha256": "a519eed7d67f5bef040c6ec993993b368fc1145e7fd41574bb00ea9d2aa37832",
+      "executable_sha256": "05d93b79a81cd14b632892fdfdab61a68c10237acf92416d2ec511a28b394abe",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/bezier_curve_protected_init.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/bezier_curve_protected_init"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/bezier_curve_protected_init"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "tkg3d_bezier_surface_init",
+      "source": "tools/oracle/tkg3d_bezier_surface_init.cxx",
+      "source_sha256": "98d9e4bfa74de8a6acbe667234f3fb46b0cd9208887857c971e06b446ec26167",
+      "expected": "tools/oracle/tkg3d_bezier_surface_init.expected",
+      "expected_sha256": "8ba5f593685b1da17f55d6ff52925a2046f8b1dcce8e79f76001d42b232b569a",
+      "output_sha256": "8ba5f593685b1da17f55d6ff52925a2046f8b1dcce8e79f76001d42b232b569a",
+      "executable_sha256": "abe03283dfc073aa07dd55cefc5c631e45e72c18d4ff69cfbc400e579c39ebb0",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/tkg3d_bezier_surface_init.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/tkg3d_bezier_surface_init"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/tkg3d_bezier_surface_init"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    },
+    {
+      "probe": "poly_make_loops_get_link",
+      "source": "tools/oracle/poly_make_loops_get_link.cxx",
+      "source_sha256": "f202d1e114fc573185575ea381d527f967c0c1b4dbbb82058c3b95a341b2ec1d",
+      "expected": "tools/oracle/poly_make_loops_get_link.expected",
+      "expected_sha256": "4f9b06cb10f602ba1746fe3a38c48508a3ffeed19bae32003167a899f9b6bced",
+      "output_sha256": "4f9b06cb10f602ba1746fe3a38c48508a3ffeed19bae32003167a899f9b6bced",
+      "executable_sha256": "59aec798fe5ed3cdce282068bffc9ab14071bb608d2c0c994e9497cc23bc97af",
+      "compile_command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "tools/oracle/poly_make_loops_get_link.cxx",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKG3d",
+        "-lTKG2d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-api-probes-9115f458/poly_make_loops_get_link"
+      ],
+      "execution": [
+        "/tmp/base-api-probes-9115f458/poly_make_loops_get_link"
+      ],
+      "exit_code": 0,
+      "exact_output_match": true
+    }
+  ],
+  "limitations": [
+    "Supplemental probes do not add original legacy test declarations.",
+    "Only each probe default passing mode was replayed here; documented native crash and nontermination domains remain separate partial-parity evidence.",
+    "Native profile is Linux x86_64 GCC with the existing pinned modeling build; this does not validate missing platform/configuration profiles."
+  ]
+}

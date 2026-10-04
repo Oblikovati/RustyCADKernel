@@ -1,0 +1,29 @@
+{
+  "source_revision": "9115f458413f78886462da5782945ac29b0afa62",
+  "source_clean_at_execution": true,
+  "command": "python3 tools/verify_tkg3d_numeric.py --source ../OCCT --native-build target/occt-modeling-full",
+  "report": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKG3d",
+    "cases_passed": 4695,
+    "input_sha256": "e927d9afec44c22c99ae37fe7c659e1e4764dc6ca61992142574222d7e569e6d",
+    "output_sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0
+  },
+  "archive": "tkg3d-numeric-9115f458.tar.gz",
+  "archive_sha256": "b43a44c1b36bde56344a08f9e7e4bb51dfc6805d8c0ece03d194c31e9f01d441",
+  "files": {
+    "inputs.txt": "e927d9afec44c22c99ae37fe7c659e1e4764dc6ca61992142574222d7e569e6d",
+    "native.txt": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc",
+    "rust.txt": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc",
+    "report.json": "c6bd2c39a2313e47c9e5afdc3daf5031b68d4654a53e607d3b6747e76d56bbe1",
+    "compile.log": "987e836b27a5237e94bea2faab3ed884defc0c3166b151d95cbe3159762c239b",
+    "rust-build.log": "96b37bb2d3475d1a81c9a88bbeb9dcae5ebbdde7d55a591f46a401224b1d7fbc"
+  },
+  "executable_sha256": {
+    "native-probe": "a9d594833feb6cdf270d7078b29bf51dc95198c910cb82f868acfccc3bdbff58",
+    "rust-probe": "6d7728df56ede6b56fd62a44650c0463868cb1ba28c3e5a230354e278a09871a"
+  },
+  "classification": "supplemental differential comparisons; no new legacy declarations"
+}

@@ -50853,7 +50853,7 @@
       "notes": "C++-only syntax: an abstract-class constructor or virtual destructor has no Rust counterpart."
     },
     {
-      "upstream_id": "AdvApprox_EvaluatorFunction::Evaluate(int*,double StartEnd [2],double*,int*,double*,int*)",
+      "upstream_id": "AdvApprox_EvaluatorFunction::Evaluate(int*,double*,double*,int*,double*,int*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
       "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
@@ -50861,7 +50861,7 @@
       "notes": "The value-style `evaluate` adapter covers ordinary callbacks; `evaluate_native` plus AdvApproxEvaluation preserves mutation of Dimension, StartEnd, Parameter, DerivativeRequest, Result, and ErrorCode across native sampling calls. The result slice remains the originally allocated dimension; increasing Dimension beyond that storage is undefined in native OCCT and cannot be made memory-safe as an equivalent operation. The mutable protocol was replayed through AdvApprox_SimpleApprox against the pinned OCCT probe."
     },
     {
-      "upstream_id": "AdvApprox_EvaluatorFunction::operator()(int*,double StartEnd [2],double*,int*,double*,int*)",
+      "upstream_id": "AdvApprox_EvaluatorFunction::operator()(int*,double*,double*,int*,double*,int*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
       "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate_native",
