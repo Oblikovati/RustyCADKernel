@@ -239,7 +239,7 @@ def rust_candidates(
 ) -> tuple[str, list[dict[str, JSONValue]]]:
     if not isinstance(rust_item, str) or not rust_item:
         return "no_rust_target_declared", []
-    prefix, separator, _path = rust_item.partition("::")
+    prefix, separator = rust_target_prefix(rust_item)
     if not separator or prefix not in crates:
         return "unknown_rust_crate", []
     candidates = crates[prefix].get(rust_item, [])
@@ -247,6 +247,15 @@ def rust_candidates(
     if status == "unique" and not rust_source_is_pinned(candidates[0]):
         return "unverifiable_source", candidates
     return status, candidates
+
+
+def rust_target_prefix(target: str) -> tuple[str, bool]:
+    if target.startswith("<"):
+        owner, separator, _rest = target[1:].partition(" as ")
+        prefix, path_separator, _tail = owner.partition("::")
+        return prefix, bool(separator and path_separator)
+    prefix, separator, _path = target.partition("::")
+    return prefix, bool(separator)
 
 
 def row_rust_candidates(
