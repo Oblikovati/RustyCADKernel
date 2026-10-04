@@ -42,3 +42,6 @@ pub use vertex_tools::{
 
 mod curve_tolerance;
 pub use curve_tolerance::compute_curve_tolerance;
+
+mod solid_orientation;
+pub use solid_orientation::is_inverted_solid;

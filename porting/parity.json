@@ -226869,6 +226869,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::compute_curve_tolerance",
       "status": "partial",
       "notes": "15 native projected/missing/shifted pcurve cases pass, including NullObject propagation and retained outputs. Seams, locations, wider curve geometry and other checker failure paths remain unproven; see tools/oracle/tkbo_curve_tolerance.md."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools::IsInvertedSolid(const TopoDS_Solid &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
+      "source_sha256": "4461edd23226a1f5d3090e9851ecea710ee90f3bfab59cdec64e2cffa95329ed",
+      "rust_item": "rustycad_tkbo::bop_tools::is_inverted_solid",
+      "status": "partial",
+      "notes": "16 native box/cylinder/sphere/empty solid orientation cases pass. Multi-shell, located, self-intersecting and spline solids and exceptional input states remain unproven; see tools/oracle/tkbo_solid_orientation.md."
     }
   ],
   "tests": [
