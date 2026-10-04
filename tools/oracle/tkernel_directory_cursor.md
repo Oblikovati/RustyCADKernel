@@ -45,3 +45,12 @@ Validation:
   Output SHA-256: `4c27f7c4642a730c294238a2308ed57990b5b33c60b1bf4347d2aef59db99423`.
 
 These are supplemental checks; no legacy test declarations were added or skipped.
+
+## Retained lifecycle difference
+
+The pinned Unix destructors call `Destroy`, which is a no-op, so abandoning an
+iterator before EOF leaves its directory stream open. The supplemental probe's
+`drop_keeps_native_stream 1` records this and explicitly closes that leaked native
+stream afterward. Rust's owned cursor closes on last drop. This resource-lifetime
+difference is recorded as partial destructor parity, not silently counted as
+matching behavior. Windows `Destroy` also remains outside this Unix implementation.

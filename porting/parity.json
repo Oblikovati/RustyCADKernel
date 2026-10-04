@@ -95421,16 +95421,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
       "rust_item": "rustycad_tkernel::osd::DirectoryIterator::destroy",
-      "status": "implemented",
-      "notes": "A no-op on the Unix build (kept for Windows compatibility), as natively. Host independent."
+      "status": "partial",
+      "notes": "Unix no-op matches pinned native Destroy. Windows native iterator resource teardown is not implemented; this is not host-independent behavior."
     },
     {
       "upstream_id": "OSD_DirectoryIterator::~OSD_DirectoryIterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor that only calls the no-op Destroy; Rust drops the state through Drop glue."
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator",
+      "status": "partial",
+      "notes": "Rust drops its owned directory cursor on final owner release. Pinned Unix destructor calls no-op Destroy and leaks an abandoned open stream; native observation in tools/oracle/tkernel_directory_cursor.md. Windows teardown also remains unported. This lifecycle difference is not an accounted parity exclusion."
     },
     {
       "upstream_id": "OSD_DirectoryIterator::Initialize(const OSD_Path&,const TCollection_AsciiString&)",
@@ -95517,16 +95517,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
       "rust_item": "rustycad_tkernel::osd::FileIterator::destroy",
-      "status": "implemented",
-      "notes": "A no-op on the Unix build (kept for Windows compatibility), as natively. Host independent."
+      "status": "partial",
+      "notes": "Unix no-op matches pinned native Destroy. Windows native iterator resource teardown is not implemented; this is not host-independent behavior."
     },
     {
       "upstream_id": "OSD_FileIterator::~OSD_FileIterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor that only calls the no-op Destroy; Rust drops the state through Drop glue."
+      "rust_item": "rustycad_tkernel::osd::FileIterator",
+      "status": "partial",
+      "notes": "Rust drops its owned directory cursor on final owner release. Pinned Unix destructor calls no-op Destroy and leaks an abandoned open stream; native observation in tools/oracle/tkernel_directory_cursor.md. Windows teardown also remains unported. This lifecycle difference is not an accounted parity exclusion."
     },
     {
       "upstream_id": "OSD_FileIterator::Initialize(const OSD_Path&,const TCollection_AsciiString&)",

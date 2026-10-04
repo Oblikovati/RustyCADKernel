@@ -11,11 +11,13 @@
 #include <string>
 
 static int opened = 0, reads = 0, closed = 0;
+static DIR* lastStream = nullptr;
 extern "C" DIR* opendir(const char* path) {
   using Function = DIR* (*)(const char*);
   static Function original = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "opendir"));
   ++opened;
-  return original(path);
+  lastStream = original(path);
+  return lastStream;
 }
 extern "C" dirent* readdir(DIR* stream) {
   using Function = dirent* (*)(DIR*);
@@ -55,6 +57,10 @@ int main() {
   std::cout << ' ' << (closed == 1);
   files.Initialize(path, "*");
   std::cout << ' ' << (closed == 2 && opened == 2) << '\n';
+  const int beforeDrop = closed;
+  { OSD_FileIterator early(path, "*"); early.More(); }
+  std::cout << "drop_keeps_native_stream " << (closed == beforeDrop) << '\n';
+  closedir(lastStream); // Clean up the pinned Unix destructor leak after observing it.
   unlink(first.c_str());
   unlink(second.c_str());
   rmdir(directory);
