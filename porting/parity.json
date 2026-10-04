@@ -82161,12 +82161,12 @@
       "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Byte-level char/char16_t conversions (zero extension, low byte), not Unicode transcoding."
     },
     {
-      "upstream_id": "Standard_CString::IsEqual(const char* const,const char* const)",
+      "upstream_id": "IsEqual(const char* const,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
       "rust_item": "rustycad_tkernel::standard::c_string::is_equal",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
       "upstream_id": "Atof(const char*)",
@@ -82185,36 +82185,36 @@
       "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The end pointer becomes the returned byte offset of the parsed prefix; an embedded NUL ends the input as in C. Byte-slice entrypoint preserves numeric-prefix end offsets for arbitrary C-string bytes; NUL terminates input. Native fixture: tools/oracle/strtod_bytes.md."
     },
     {
-      "upstream_id": "Standard_CString::Printf(const char* const,...)",
+      "upstream_id": "Printf(const char* const,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
       "rust_item": "rustycad_tkernel::standard::c_string::printf_to",
       "status": "partial",
-      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; exact native count/output fixtures cover the listed conversions. C varargs, unsupported conversions, process stdout details, and C int count overflow are not exposed, so this remains partial. See tools/oracle/tkernel_c_string_format.md."
+      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; exact native count/output fixtures cover the listed conversions. C varargs, unsupported conversions, process stdout details, and C int count overflow are not exposed, so this remains partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_CString::Fprintf(FILE*,const char*,...)",
+      "upstream_id": "Fprintf(FILE*,const char*,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
       "rust_item": "rustycad_tkernel::standard::c_string::fprintf_to",
       "status": "partial",
-      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; fixture checks native count and bytes. C FILE* buffering, locking, stream error state, varargs, and C int count overflow remain partial. See tools/oracle/tkernel_c_string_format.md."
+      "notes": "Typed `FormatArg` slice and injected `Write` sink reuse the existing c_format engine; fixture checks native count and bytes. C FILE* buffering, locking, stream error state, varargs, and C int count overflow remain partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_CString::Sprintf(char*,const char*,...)",
+      "upstream_id": "Sprintf(char*,const char*,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
       "rust_item": "rustycad_tkernel::standard::c_string::sprintf_into",
       "status": "partial",
-      "notes": "Typed `FormatArg` slice and growable byte buffer reuse the existing c_format engine; native return count and terminating NUL are checked. This replaces Vec contents and does not accept a raw fixed caller buffer, model untouched tail bytes, varargs, or C int count overflow; unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md."
+      "notes": "Typed `FormatArg` slice and growable byte buffer reuse the existing c_format engine; native return count and terminating NUL are checked. This replaces Vec contents and does not accept a raw fixed caller buffer, model untouched tail bytes, varargs, or C int count overflow; unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_CString::Vsprintf(char*,const char*,va_list)",
+      "upstream_id": "Vsprintf(char*,const char*,struct __va_list_tag*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
       "rust_item": "rustycad_tkernel::standard::c_string::vsprintf_into",
       "status": "partial",
-      "notes": "The safe analogue accepts a typed `FormatArg` slice rather than `va_list`; it reuses the existing c_format engine and writes a trailing NUL. Native format/count cases are checked, but ABI/va_list behavior, fixed-buffer tail semantics, C int count overflow, and unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md."
+      "notes": "The safe analogue accepts a typed `FormatArg` slice rather than `va_list`; it reuses the existing c_format engine and writes a trailing NUL. Native format/count cases are checked, but ABI/va_list behavior, fixed-buffer tail semantics, C int count overflow, and unsupported conversions remain partial. See tools/oracle/tkernel_c_string_format.md. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl. The va_list parameter selector uses its adjusted Linux compiler type; other platform configurations remain unproven."
     },
     {
       "upstream_id": "Standard_CStringHasher::operator()(const char* const) const noexcept",
@@ -82481,12 +82481,12 @@
       "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). hashBytes over the 16-byte field image (int, three char16_t with Data4[0..2] packed high byte first, six uint8_t) in native byte order; the Hash impl feeds this value to the hasher."
     },
     {
-      "upstream_id": "Standard_Time::IsEqual(TheTimeType,TheTimeType)",
+      "upstream_id": "IsEqual(TheTimeType,TheTimeType)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Time.hxx",
       "rust_item": "rustycad_tkernel::standard::time::is_equal",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template is enabled only for std::time_t, which is the signed 64-bit TimeT alias on the supported profiles."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template is enabled only for std::time_t, which is the signed 64-bit TimeT alias on the supported profiles. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
       "upstream_id": "Standard_Time",
@@ -82505,28 +82505,28 @@
       "notes": "OCCT typedefs Standard_WideChar to wchar_t. Rust WideChar is cfg-selected as u32 on Unix and u16 on Windows, following the native wchar_t width on those supported profiles."
     },
     {
-      "upstream_id": "Standard_Atomic::Standard_Atomic_Increment(volatile int*)",
+      "upstream_id": "Standard_Atomic_Increment(volatile int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": "rustycad_tkernel::standard::atomic::atomic_increment",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_Atomic::Standard_Atomic_Decrement(volatile int*)",
+      "upstream_id": "Standard_Atomic_Decrement(volatile int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": "rustycad_tkernel::standard::atomic::atomic_decrement",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_Atomic::Standard_Atomic_CompareAndSwap(volatile int*,int,int)",
+      "upstream_id": "Standard_Atomic_CompareAndSwap(volatile int*,int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": "rustycad_tkernel::standard::atomic::atomic_compare_and_swap",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function. Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
       "upstream_id": "Standard_Atomic::_InterlockedIncrement(volatile long*)",
@@ -82553,44 +82553,44 @@
       "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
     },
     {
-      "upstream_id": "Standard_VersionInfo::OCCT_DevelopmentVersion()",
+      "upstream_id": "OCCT_DevelopmentVersion()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
       "rust_item": "rustycad_tkernel::standard::version_info::occt_development_version",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328). Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_VersionInfo::OCCT_Version_Double()",
+      "upstream_id": "OCCT_Version_Double()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
       "rust_item": "rustycad_tkernel::standard::version_info::occt_version_double",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328). Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_VersionInfo::OCCT_Version_String()",
+      "upstream_id": "OCCT_Version_String()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
       "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328). Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_VersionInfo::OCCT_Version_String_Complete()",
+      "upstream_id": "OCCT_Version_String_Complete()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
       "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string_complete",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328). Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
-      "upstream_id": "Standard_VersionInfo::OCCT_Version_String_Extended()",
+      "upstream_id": "OCCT_Version_String_Extended()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
       "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string_extended",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328). Corrected the former file-name pseudo-namespace to the native global function. See porting/audits/standard-global-function-selectors.jsonl."
     },
     {
       "upstream_id": "Standard::AllocatorType",

@@ -83,7 +83,10 @@ def suffix_matches(identity_suffix: str, declaration: dict[str, JSONValue]) -> b
 
 
 def parameter_match(params: list[str], declaration: dict[str, JSONValue]) -> bool:
-    expected = [canonical_parameter_type(item) for item in params]
+    fixed = fixed_selector_parameters(params, declaration)
+    if fixed is None:
+        return False
+    expected = [canonical_parameter_type(item) for item in fixed]
     if any(item is None for item in expected):
         return False
     choices = []
@@ -94,6 +97,17 @@ def parameter_match(params: list[str], declaration: dict[str, JSONValue]) -> boo
             if all(item is not None for item in choice):
                 choices.append(choice)
     return expected in choices
+
+
+def fixed_selector_parameters(
+    params: list[str], declaration: dict[str, JSONValue]
+) -> list[str] | None:
+    """Require an exact variadic contract; e.g. `['const char*', '...']` for Printf."""
+    variadic = bool(params) and params[-1].strip() == "..."
+    if declaration.get("variadic", False) is not variadic:
+        return None
+    fixed = params[:-1] if variadic else params
+    return None if any(item.strip() == "..." for item in fixed) else fixed
 
 
 def canonical_parameter_type(text: str) -> str | None:
