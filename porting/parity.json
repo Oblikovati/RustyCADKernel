@@ -229336,6 +229336,204 @@
       "rust_item": "rustycad_tkg3d::geom::GeomSurfaceD3::d3uvv",
       "status": "implemented",
       "notes": "same public derivative component. Existing implementation; record/field audit in porting/audits/tkg2d_tkg3d_derivative_result_records.proposed.json. Mapping correction only, not new derivative code or legacy tests."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "class descriptor base, represented as an object-safe trait. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Full",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull",
+      "status": "implemented",
+      "notes": "concrete full descriptor. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded",
+      "status": "implemented",
+      "notes": "concrete derivative-bounded descriptor. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped",
+      "status": "implemented",
+      "notes": "concrete mapped descriptor. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Map1d",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Map1d",
+      "status": "implemented",
+      "notes": "affine parameter map value record. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Domain1d",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Domain1d",
+      "status": "implemented",
+      "notes": "parameter domain value record. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Map1d::Scale",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Map1d::scale",
+      "status": "implemented",
+      "notes": "public affine scale field. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Map1d::Offset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Map1d::offset",
+      "status": "implemented",
+      "notes": "public affine offset field. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Domain1d::First",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Domain1d::first",
+      "status": "implemented",
+      "notes": "public first-bound field. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Domain1d::Last",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::Domain1d::last",
+      "status": "implemented",
+      "notes": "public last-bound field. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::Kind::Full",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveKind::Full",
+      "status": "implemented",
+      "notes": "enum variant. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::Kind::DerivBounded",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveKind::DerivBounded",
+      "status": "implemented",
+      "notes": "enum variant. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::Kind::Mapped",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "source_sha256": "ec1058ba1274fe5ddc6c9898b03bec2012a322f40e297d0f07e523904ae8b483",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveKind::Mapped",
+      "status": "implemented",
+      "notes": "enum variant. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD1::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD1::point",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD1::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD1::d1",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD2::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::point",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD2::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::d1",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD2::D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD2::d2",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD3::Point",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::point",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD3::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d1",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD3::D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d2",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD3::D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "source_sha256": "4d70fbd74ff355e55e9c188b4656d6b764d23c57377fc29777cebf3ce34e37bd",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d3",
+      "status": "implemented",
+      "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
     }
   ],
   "tests": [
