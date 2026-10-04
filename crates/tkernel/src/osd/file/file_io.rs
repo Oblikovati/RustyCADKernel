@@ -127,18 +127,22 @@ impl File {
             return Ok(None);
         };
         let Some(line) = stream.fgets(calls.as_ref(), count) else {
-            if !stream.eof() {
-                let errno: i32 = stream.last_errno();
-                self.node.record(Errno(errno), IAM, "ReadLine");
-                return Ok(None);
-            }
-            self.at_end = true;
-            *buffer = AsciiString::default();
-            return Ok(Some(0));
+            return Ok(self.record_stdio_line_end(buffer));
         };
         let text: &[u8] = c_text(&line);
         *buffer = AsciiString::from_raw(text);
         Ok(Some(text.len() as i32))
+    }
+    fn record_stdio_line_end(&mut self, buffer: &mut AsciiString) -> Option<i32> {
+        let stream = self.stream.as_ref()?;
+        if !stream.eof() {
+            let errno: i32 = stream.last_errno();
+            self.node.record(Errno(errno), IAM, "ReadLine");
+            return None;
+        }
+        self.at_end = true;
+        *buffer = AsciiString::default();
+        Some(0)
     }
     /// `Write(buffer, nbyte)` of a string: writes its first `count` bytes, the terminating
     /// NUL included when `count` is its length plus one; `file.write(&text, text.length())?`.

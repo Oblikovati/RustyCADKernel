@@ -95196,9 +95196,9 @@
       "upstream_id": "OSD_File::ReadLine(TCollection_AsciiString&,int,int&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
-      "rust_item": "rustycad_tkernel::osd::File::read_line",
+      "rust_item": "rustycad_tkernel::osd::File::read_line_with_count",
       "status": "partial",
-      "notes": "fgets on the fdopen'd FILE*, modelled on glibc 2.28+ stdio (st_blksize read-ahead buffer shared with raw Read/Seek, unknown initial offset, sticky end of file); both overloads return the byte count. On a read error native leaves the outputs unassigned; Rust keeps the buffer and returns 0. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+      "notes": "fgets on the fdopen'd FILE*, modelled on glibc 2.28+ stdio (st_blksize read-ahead buffer shared with raw Read/Seek, unknown initial offset, sticky end of file); both overloads return the byte count. On a read error native leaves the outputs unassigned; Rust keeps the buffer and returns 0. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux. Explicit count-output overload now preserves both caller outputs on POSIX fgets error, and updates them on success/EOF. Native probe and named-fake Rust tests cover those paths; see tools/oracle/tkernel_osd_readline_output.md. Windows behavior remains unported; no legacy mapping added."
     },
     {
       "upstream_id": "OSD_File::ReadLine(TCollection_AsciiString&,int)",
