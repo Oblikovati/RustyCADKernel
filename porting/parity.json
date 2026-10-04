@@ -38100,9 +38100,9 @@
       "upstream_id": "Poly_CoherentTriPtr::Iterator::PtrValue() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtrIterator::ptr_value",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtrIterator::member_token",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Poly_CoherentTriPtr(const Poly_CoherentTriangle&)",
@@ -38132,49 +38132,49 @@
       "upstream_id": "Poly_CoherentTriPtr::Next() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::next",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::next_member",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Previous() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::previous",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::previous_member",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Append(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::append",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::append_member",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Prepend(const Poly_CoherentTriangle*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::prepend",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::prepend_member",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::Remove(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_member",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriPtr::RemoveList(Poly_CoherentTriPtr*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriPtr.hxx",
-      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_list",
+      "rust_item": "rustycad_tkmath::poly::CoherentTriPtr::remove_list_in",
       "status": "partial",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value. Audit correction: porting/audits/tkmath-poly-coherent-triptr-obligations.md proves missing allocator forwarding/allocator-owned ring storage and stable member identity. Existing positional ring tests establish traversal only; this row is not full behavioral parity."
+      "notes": "Allocator-owned stable ring members now replace positional storage. Native probe verifies allocation/free counts, surviving identity and removal order; supplemental Rust tests cover stable links and bounds. Full parity remains partial: triangle pointers are indices, nullable triangle values and cross-allocator backend compatibility remain open. See porting/audits/tkmath-poly-coherent-triptr-obligations.md."
     },
     {
       "upstream_id": "Poly_CoherentTriangle()",
@@ -59100,9 +59100,9 @@
       "upstream_id": "gce_MakeCirc::operator gp_Circ() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/gce/gce_MakeCirc.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Circle3 as TryFrom<&rustycad_tkgeombase::gce::MakeCirc>>::try_from",
+      "rust_item": "<rustycad_tkmath::gp::Circle3 as core::convert::TryFrom<&rustycad_tkgeombase::gce::MakeCirc>>::try_from",
       "status": "implemented",
-      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+      "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers). Public foreign-Self implementation identity is captured by rustdoc normalization; exact core::convert::TryFrom path replaces the abbreviated trait spelling."
     },
     {
       "upstream_id": "gce_MakeCirc2d::gce_MakeCirc2d(const gp_Ax2d&,double,bool)",
