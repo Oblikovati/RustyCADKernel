@@ -2,23 +2,21 @@
 use rustycad_tkernel::plugin::{PluginLoader, StaticPluginLibraries, library_file_name};
 use rustycad_tkernel::resource::{ResourceEnvironment, ResourceIo};
 use rustycad_tkernel::standard::Guid;
-use std::cell::{Cell, RefCell};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
-use std::rc::Rc;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 
 const GUID: &str = "f69e10e5-9a4e-11d4-8b8c-0060b0ee281b";
 
 /// A "Plugin" resource file in memory that counts how often it is read.
 struct FakePluginResources {
     file: String,
-    reads: Cell<usize>,
+    reads: AtomicUsize,
 }
 impl ResourceIo for FakePluginResources {
     fn read(&self, path: &Path) -> io::Result<Vec<u8>> {
-        self.reads.set(self.reads.get() + 1);
+        self.reads.fetch_add(1, Ordering::SeqCst);
         if path == Path::new("/fake/Plugin") {
             return Ok(self.file.clone().into_bytes());
         }
@@ -40,10 +38,10 @@ impl ResourceEnvironment for FakePluginEnvironment {
 }
 
 #[derive(Clone, Default)]
-struct FakeConsole(Rc<RefCell<Vec<u8>>>);
+struct FakeConsole(Arc<Mutex<Vec<u8>>>);
 impl Write for FakeConsole {
     fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
-        self.0.borrow_mut().extend_from_slice(bytes);
+        self.0.lock().unwrap().extend_from_slice(bytes);
         Ok(bytes.len())
     }
     fn flush(&mut self) -> io::Result<()> {
@@ -54,15 +52,15 @@ impl Write for FakeConsole {
 fn plugin_loader(
     file: &str,
     libraries: StaticPluginLibraries<String>,
-) -> (PluginLoader<String>, Rc<FakePluginResources>, FakeConsole) {
-    let resources = Rc::new(FakePluginResources {
+) -> (PluginLoader<String>, Arc<FakePluginResources>, FakeConsole) {
+    let resources = Arc::new(FakePluginResources {
         file: file.to_owned(),
-        reads: Cell::new(0),
+        reads: AtomicUsize::new(0),
     });
     let console = FakeConsole::default();
     let loader = PluginLoader::new(
         resources.clone(),
-        Rc::new(FakePluginEnvironment),
+        Arc::new(FakePluginEnvironment),
         Box::new(libraries),
         Box::new(console.clone()),
     );
@@ -88,10 +86,10 @@ fn a_registered_factory_is_resolved_once_and_called_every_time() {
         loader.load(&guid, true).unwrap(),
         format!("driver for {GUID}")
     );
-    let reads_after_first = resources.reads.get();
+    let reads_after_first = resources.reads.load(Ordering::SeqCst);
     loader.load(&guid, true).unwrap();
     assert_eq!(
-        resources.reads.get(),
+        resources.reads.load(Ordering::SeqCst),
         reads_after_first,
         "the factory is cached"
     );
@@ -108,10 +106,10 @@ fn a_missing_resource_is_reported_and_printed_when_verbose() {
         failure.message(),
         format!("could not find the resource:{GUID}.Location\n")
     );
-    assert!(console.0.borrow().is_empty());
+    assert!(console.0.lock().unwrap().is_empty());
     loader.load(&guid, true).unwrap_err();
     assert_eq!(
-        console.0.borrow().as_slice(),
+        console.0.lock().unwrap().as_slice(),
         format!("could not find the resource:{GUID}.Location\n").as_bytes()
     );
 }
@@ -132,13 +130,13 @@ fn libraries_that_do_not_open_or_lack_a_factory_fail_without_caching() {
         )
     );
     assert!(
-        console.0.borrow().is_empty(),
+        console.0.lock().unwrap().is_empty(),
         "the factory failure is not printed"
     );
-    let reads = resources.reads.get();
+    let reads = resources.reads.load(Ordering::SeqCst);
     loader.load(&guid, false).unwrap_err();
     assert!(
-        resources.reads.get() > reads,
+        resources.reads.load(Ordering::SeqCst) > reads,
         "failures are looked up again"
     );
     let (mut missing, _, _) = plugin_loader(

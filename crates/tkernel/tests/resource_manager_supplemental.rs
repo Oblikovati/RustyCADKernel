@@ -1,15 +1,16 @@
 //! Parser and persistence edge cases from Resource_Manager.cxx.
 use rustycad_tkernel::resource::ResourceManager;
-use std::{path::PathBuf, rc::Rc};
+use std::{path::PathBuf, sync::Arc};
 #[path = "resource_manager/support.rs"]
 mod support;
 use support::FakeResourceSystem;
-fn fixture(bytes: &[u8]) -> (Rc<FakeResourceSystem>, ResourceManager) {
-    let system: Rc<FakeResourceSystem> = Rc::default();
+fn fixture(bytes: &[u8]) -> (Arc<FakeResourceSystem>, ResourceManager) {
+    let system: Arc<FakeResourceSystem> = Arc::default();
     system.set_environment("CSF_AppDefaults", PathBuf::from("defaults"));
     system
         .files
-        .borrow_mut()
+        .lock()
+        .unwrap()
         .insert(PathBuf::from("defaults/App"), bytes.to_vec());
     let catalog = ResourceManager::new("App", false, system.host()).unwrap();
     (system, catalog)
@@ -43,7 +44,7 @@ fn user_defaults_override_reference_but_save_only_explicit_overrides() {
     system.write_resource(&PathBuf::from("user"), "App", "key", "user");
     system.set_environment("CSF_AppUserDefaults", PathBuf::from("user"));
     assert!(catalog.save());
-    assert!(system.files.borrow()[&PathBuf::from("user/App")].is_empty());
+    assert!(system.files.lock().unwrap()[&PathBuf::from("user/App")].is_empty());
     system.write_resource(&PathBuf::from("user"), "App", "key", "user");
     catalog = ResourceManager::new("App", false, system.host()).unwrap();
     assert_eq!(catalog.value("key").unwrap().as_bytes(), b"user");
@@ -58,7 +59,7 @@ fn user_defaults_override_reference_but_save_only_explicit_overrides() {
     system.set_environment("CSF_AppUserDefaults", PathBuf::from("new/nested"));
     assert!(catalog.save());
     assert_eq!(
-        system.files.borrow()[&PathBuf::from("new/nested/App")],
+        system.files.lock().unwrap()[&PathBuf::from("new/nested/App")],
         b"a:\t\\ leading\nempty:\t\nm:\t\\\ttab\nz:\t\\\\path\n"
     );
     assert!(system.has_file(&PathBuf::from("new/nested/App")));
@@ -83,10 +84,22 @@ fn numeric_conversion_missing_resources_and_missing_save_path() {
     assert!(!catalog.save());
     catalog.set_resource_integer("int", 123);
     assert_eq!(catalog.integer("int").unwrap(), 123);
-    let missing = Rc::new(FakeResourceSystem::default());
+    let missing = Arc::new(FakeResourceSystem::default());
     assert!(
         !ResourceManager::new("missing", false, missing.host())
             .unwrap()
             .is_initialized()
     );
+}
+
+#[test]
+fn clone_copies_resource_maps_before_independent_updates() {
+    let (_, original) = fixture(b"key: original\n");
+    let mut copied = original.clone();
+    copied.set_resource("key", b"copy");
+    copied.set_resource("new", b"copy-only");
+    assert_eq!(original.value("key").unwrap().as_bytes(), b"original");
+    assert!(!original.find("new"));
+    assert_eq!(copied.value("key").unwrap().as_bytes(), b"copy");
+    assert_eq!(copied.value("new").unwrap().as_bytes(), b"copy-only");
 }

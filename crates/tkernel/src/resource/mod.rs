@@ -38,6 +38,10 @@ static DEBUG: AtomicBool = AtomicBool::new(false);
 /// manager.set_resource("key", b"value");
 /// assert_eq!(manager.value("key").unwrap().as_bytes(), b"value");
 /// ```
+///
+/// `Clone` is the implicit C++ copy constructor (`new Resource_Manager(*other)`, which
+/// ShapeProcess_Context uses): the name, the three maps, the flags and the host.
+#[derive(Clone)]
 pub struct ResourceManager {
     name: AsciiString,
     reference: DataMap<AsciiString, AsciiString>,
