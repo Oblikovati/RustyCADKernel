@@ -225537,6 +225537,33 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetOffsetFace::generated",
       "status": "partial",
       "notes": "Regular non-seam identity-location face initializer and bounded face/status/edge-history view. Exact OCC28131 face-stage surface, topology, UV bounds, area and invalidity match native. Singular/conical preprocessing, seams/locations, Created maps, nondefault options and full offset object variants remain unsupported. StandardOffset legacy regression remains unmapped."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::minDUV(const TopoDS_Face &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "source_sha256": "ef1cc76b51d15eb0bb2968f2182d290e9c34a988554d5a6e488a17fc01341102",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::min_duv",
+      "status": "implemented",
+      "notes": "Native restricted surface normals and parameter spans translated. 80 differential cases cover all face orientations, planes, sphere poles, cone apex branches, tiny Bezier false returns/output preservation and collapsed Bezier ConstructionError. Broader located/general spline domains remain unproven; no toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::NggeomF(const gp_Pnt2d &, const TopoDS_Face &, gp_Vec &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "source_sha256": "ef1cc76b51d15eb0bb2968f2182d290e9c34a988554d5a6e488a17fc01341102",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::nggeom_f",
+      "status": "partial",
+      "notes": "Native restricted surface normals and parameter spans translated. 80 differential cases cover all face orientations, planes, sphere poles, cone apex branches, tiny Bezier false returns/output preservation and collapsed Bezier ConstructionError. Broader located/general spline domains remain unproven; no toolkit or legacy completion claim."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::Nt(const gp_Pnt2d &, const TopoDS_Face &, gp_Dir &)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "source_sha256": "ef1cc76b51d15eb0bb2968f2182d290e9c34a988554d5a6e488a17fc01341102",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::nt",
+      "status": "partial",
+      "notes": "Native restricted surface normals and parameter spans translated. 80 differential cases cover all face orientations, planes, sphere poles, cone apex branches, tiny Bezier false returns/output preservation and collapsed Bezier ConstructionError. Broader located/general spline domains remain unproven; no toolkit or legacy completion claim."
     }
   ],
   "tests": [
