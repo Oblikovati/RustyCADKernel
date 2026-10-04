@@ -333063,5 +333063,18 @@
       ],
       "notes": "Exact original fixture and all legacy assertions pass through standard BRepOffset_MakeOffset followed by ShapeFix_Shape. Pinned native GTest passes. Supplemental raw-result area, topology and shared endpoint identity checks also pass. General multi-face offset, intersection and conical branches remain partial."
     }
+,
+    {
+      "upstream_id": "BRepAlgoAPI_BuilderAlgoTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_algo_api_noncopy_legacy",
+      "rust_test": "not_copy_constructible",
+      "rust_source": "crates/tkbo/tests/brep_algo_api_noncopy_legacy.rs",
+      "status": "translated",
+      "profiles": ["linux-gcc-c-locale"]
+    }
   ]
 }
