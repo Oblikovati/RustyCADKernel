@@ -17978,9 +17978,9 @@
       "upstream_id": "gp_Trsf::Transforms(gp_XYZ&) const noexcept",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
-      "rust_item": "rustycad_tkmath::gp::Transform3::apply_coordinates",
+      "rust_item": "rustycad_tkmath::gp::Transform3::transforms",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending.",
+      "notes": "In-place XYZ overload delegates to the same native-order matrix/scale/offset calculation. The original OCC25574 quaternion test now invokes SetRotation then the mutating Transforms operation, matching the native call sequence. Supplemental test covers scaling about a nonzero center. Other coordinate overload retains its returned tuple translation.",
       "source_sha256": "aa178cf741395353bec635152c363f717b47b0cc1a57dcd9f5c5338e93e1b626"
     },
     {
