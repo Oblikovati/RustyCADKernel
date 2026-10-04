@@ -1,0 +1,46 @@
+{
+  "scope": "Exact compiler selectors for previously unqualified flat cursor constructors and comparisons",
+  "changes": [
+    {
+      "old": "NCollection_FlatDataMap::Iterator(NCollection_FlatDataMap&)",
+      "new": "NCollection_FlatDataMap::Iterator::Iterator(NCollection_FlatDataMap<TheKeyType,TheItemType,Hasher>&)",
+      "cpp_id": "8ea1b9f44beb43dfcb77700b6ca2a3f9ceaf1748731c77c1b868630a79954d51",
+      "written_parameter_types": [
+        "NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &"
+      ]
+    },
+    {
+      "old": "NCollection_FlatDataMap::Iterator(const NCollection_FlatDataMap&)",
+      "new": "NCollection_FlatDataMap::Iterator::Iterator(const NCollection_FlatDataMap<TheKeyType,TheItemType,Hasher>&)",
+      "cpp_id": "3e72c4b72049ce51452c884eabbfb7a4d734d974cdc77a9df4b1b605a8c810be",
+      "written_parameter_types": [
+        "const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &"
+      ]
+    },
+    {
+      "old": "NCollection_FlatDataMap::Iterator::IsEqual(const Iterator&) const",
+      "new": "NCollection_FlatDataMap::Iterator::IsEqual(const NCollection_FlatDataMap::Iterator&) const",
+      "cpp_id": "1c96cecf74b92074fc0b64c09d7a31e64ecc73d80b385c2efa159e82d97e8add",
+      "written_parameter_types": [
+        "const NCollection_FlatDataMap::Iterator &"
+      ]
+    },
+    {
+      "old": "NCollection_FlatMap::Iterator(const NCollection_FlatMap&)",
+      "new": "NCollection_FlatMap::Iterator::Iterator(const NCollection_FlatMap<TheKeyType,Hasher>&)",
+      "cpp_id": "32b1715619b267af3a27bd5bcd689ddc86a5d4b4d2158447387438d0e5d81bc8",
+      "written_parameter_types": [
+        "const NCollection_FlatMap<TheKeyType, Hasher> &"
+      ]
+    },
+    {
+      "old": "NCollection_FlatMap::Iterator::IsEqual(const Iterator&) const",
+      "new": "NCollection_FlatMap::Iterator::IsEqual(const NCollection_FlatMap::Iterator&) const",
+      "cpp_id": "d1527c771c66a23031719613bbe333936b17503012ce29d906d9cd006629d1c5",
+      "written_parameter_types": [
+        "const NCollection_FlatMap::Iterator &"
+      ]
+    }
+  ],
+  "classification": "Metadata correction only; existing statuses and legacy declaration counts preserved"
+}

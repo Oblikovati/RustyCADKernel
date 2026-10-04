@@ -73274,10 +73274,14 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataItems::<core::default::Default>::default",
+        "rustycad_tkernel::ncollection::FlatDataCursorMut::<core::default::Default>::default"
+      ]
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Iterator(NCollection_FlatDataMap&)",
+      "upstream_id": "NCollection_FlatDataMap::Iterator::Iterator(NCollection_FlatDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::cursor_mut",
@@ -73285,7 +73289,7 @@
       "notes": "Exclusive mutable legacy cursor starts at the first occupied slot and supports More/Next/Key/Value/ChangeValue/IsEqual. Native copied mutable aliases remain unported. See porting/audits/flat-data-mutable-cursor.json."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Iterator(const NCollection_FlatDataMap&)",
+      "upstream_id": "NCollection_FlatDataMap::Iterator::Iterator(const NCollection_FlatDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::items",
@@ -73349,7 +73353,7 @@
       "notes": "Non-consuming mutable value access and exact exhausted Standard_OutOfRange behavior are ported for an exclusively borrowed map. Native mutable cursor aliases and mutation through a const map are not yet represented. See porting/audits/flat-data-mutable-cursor.json."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_FlatDataMap::Iterator::IsEqual(const NCollection_FlatDataMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataItems::<core::cmp::PartialEq>::eq",
@@ -73817,7 +73821,7 @@
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_FlatMap::Iterator(const NCollection_FlatMap&)",
+      "upstream_id": "NCollection_FlatMap::Iterator::Iterator(const NCollection_FlatMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::iter",
@@ -73857,7 +73861,7 @@
       "notes": "Explicit non-consuming legacy cursor protocol; More/Key/Value preserve position, Next advances independently, and exhausted access returns Standard_OutOfRange with the native message. Shared slot state preserves interoperability with Rust Iterator::next. Native differential receipt and supplemental regressions: porting/audits/flat-legacy-cursor.json."
     },
     {
-      "upstream_id": "NCollection_FlatMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_FlatMap::Iterator::IsEqual(const NCollection_FlatMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMapIter::<core::cmp::PartialEq>::eq",
