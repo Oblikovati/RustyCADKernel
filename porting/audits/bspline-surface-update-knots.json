@@ -1,0 +1,62 @@
+{
+  "audit": "Geom_BSplineSurface protected updateUKnots/updateVKnots",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declarations": [
+    {
+      "id": "4ad6a510bc2234c0e39d7044a01d52634201becc72b2faf6546f364a78fb5e42",
+      "qualified_name": "Geom_BSplineSurface::updateUKnots",
+      "signature": "void ()",
+      "access": "protected",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::update_u_knots"
+    },
+    {
+      "id": "e584fc476b1270fed8d9cb3dbf857e536dc66d03adcfb59a7a698bb5eda5ca9c",
+      "qualified_name": "Geom_BSplineSurface::updateVKnots",
+      "signature": "void ()",
+      "access": "protected",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::update_v_knots"
+    }
+  ],
+  "source": {
+    "header": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+    "header_sha256": "d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079",
+    "implementation": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.cxx",
+    "implementation_sha256": "20abceaa2f4175d2933fba082fbee593fcdb2e3f3e3ea681a31289239039ead9"
+  },
+  "native_probe": {
+    "source": "tools/oracle/bspline_surface_update_knots.cxx",
+    "source_sha256": "4429cab1ddc686715f34a4ea810d7485e7df71f8877c33a10e7f6d680241a538",
+    "compiler": "c++ -std=c++17 -O0 -g0",
+    "link_arguments": ["-lTKG3d", "-lTKGeomBase", "-lTKMath", "-lTKernel"],
+    "executable_sha256": "a5afb32d6f52dd6963ea82c75efd255c44c5bd88b46cc63134837fae7663b605",
+    "linked_libraries": {
+      "libTKG3d.so": "1513492fe8bda6bf051ee1a2aa0ab6c84047d4bb8cee40fdbab6e2ed5954e3a3",
+      "libTKGeomBase.so": "f2c685e230b5dc1de6e757b6dfb543c631877e17298be02c36147e5fb983b8b4",
+      "libTKMath.so": "5f025e85993b07b460d483a161ca4c6e2a9052009974ad02ab6da1ea2381943a",
+      "libTKernel.so": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87"
+    },
+    "expected_output": "tools/oracle/bspline_surface_update_knots.expected",
+    "expected_output_sha256": "1b9aca2c8d9ae8196076f05806280bc7196b02ec6efb06bd01dc19e3273aa9a3"
+  },
+  "rust_verification": {
+    "test_source": "crates/tkg3d/tests/geom_bspline_surface_update_knots.rs",
+    "test_source_sha256": "e99bc8f2d67d425df05e5e50febd1532426f7242c2c39b193ec2fe577ffe6b86",
+    "implementation_sha256": "09071d5bd85b37188337aacc95e6409aa102384caad0780366857a70b60899c7",
+    "command": "CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0 cargo test -p rustycad-tkg3d",
+    "focused_test_binary_sha256": "c8c91e0b5dabc41e66ab1b6a2ae32c3b301dad670fa535e28b4ef54879fc1b0f",
+    "result": "pass",
+    "strict_clippy_command": "CARGO_INCREMENTAL=0 cargo clippy -p rustycad-tkg3d --all-targets -- -D warnings",
+    "strict_clippy_result": "pass"
+  },
+  "behavior": {
+    "checked": [
+      "nonuniform U knot distribution and C0 smoothness",
+      "periodic uniform V knot distribution and C2 smoothness",
+      "flat knot sequences after each direction refresh",
+      "shared resolution cache invalidated by each refresh",
+      "evaluation representation retained by each refresh",
+      "opposite direction metadata retained"
+    ],
+    "scope_limit": "Valid constructed surfaces only. Native methods are void; Rust wrappers return Result to expose allocation/state errors. No corrupt private-knot state was synthesized."
+  }
+}

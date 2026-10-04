@@ -80,6 +80,18 @@ fn rebased_grid<T: Copy + Default>(source: &Array2<'_, T>) -> Result<Array2<'sta
 }
 
 impl GeomBSplineSurface {
+    /// Rebuild U flat knots, distribution and smoothness; this invalidates only the
+    /// shared resolution cache and retains the evaluation representation;
+    /// `surface.update_u_knots()?`.
+    pub fn update_u_knots(&self) -> Result<(), Failure> {
+        self.state.write().update_knots(true)
+    }
+    /// Rebuild V flat knots, distribution and smoothness; this invalidates only the
+    /// shared resolution cache and retains the evaluation representation;
+    /// `surface.update_v_knots()?`.
+    pub fn update_v_knots(&self) -> Result<(), Failure> {
+        self.state.write().update_knots(false)
+    }
     fn from_state(state: SurfaceState) -> Self {
         Self {
             parent: StandardTransient::default(),
