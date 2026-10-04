@@ -4,7 +4,6 @@ use std::{
     cmp::Ordering,
     hash::{Hash, Hasher},
     ops::Deref,
-    sync::Arc,
 };
 impl<T: ?Sized + RuntimeTyped> Deref for Handle<T> {
     type Target = T;
@@ -16,7 +15,7 @@ impl<T: ?Sized + RuntimeTyped> Deref for Handle<T> {
 impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>> for Handle<T> {
     fn eq(&self, other: &Handle<U>) -> bool {
         match (&self.owner, &other.owner) {
-            (Some(left), Some(right)) => Arc::ptr_eq(left, right),
+            (Some(left), Some(right)) => left.address() == right.address(),
             (None, None) => true,
             _ => false,
         }

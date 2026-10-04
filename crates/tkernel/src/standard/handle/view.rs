@@ -1,19 +1,19 @@
-use super::{Handle, RuntimeTyped, Transient};
-use std::{marker::PhantomData, sync::Arc};
+use super::{Handle, Owner, RuntimeTyped, Transient};
+use std::marker::PhantomData;
 /// A const handle reference projected to a base type, with no extra owning reference.
 pub struct HandleView<'a, T: ?Sized + RuntimeTyped> {
-    owner: Option<&'a Arc<dyn Transient>>,
+    owner: Option<&'a Owner>,
     projected: PhantomData<T>,
 }
 impl<'a, T: ?Sized + RuntimeTyped> HandleView<'a, T> {
-    pub(super) fn new(owner: Option<&'a Arc<dyn Transient>>) -> Self {
+    pub(super) fn new(owner: Option<&'a Owner>) -> Self {
         Self {
-            owner: owner.filter(|owner| T::project_from(owner.as_ref()).is_some()),
+            owner: owner.filter(|owner| T::project_from(owner.get()).is_some()),
             projected: PhantomData,
         }
     }
     /// The viewed owner, for building a new owning handle from this view.
-    pub(super) fn owner(&self) -> Option<&'a Arc<dyn Transient>> {
+    pub(super) fn owner(&self) -> Option<&'a Owner> {
         self.owner
     }
     /// Check a borrowed null handle; `view.is_null()`.
@@ -22,7 +22,7 @@ impl<'a, T: ?Sized + RuntimeTyped> HandleView<'a, T> {
     }
     /// Borrow the projected subobject or interface view; `view.get()`.
     pub fn get(&self) -> Option<&T> {
-        T::project_from(self.owner?.as_ref())
+        T::project_from(self.owner?.get())
     }
 }
 impl<T: RuntimeTyped> HandleView<'_, T> {
@@ -35,7 +35,7 @@ impl<'a, T: ?Sized + RuntimeTyped> HandleView<'a, T> {
     /// Borrow the viewed object as a transient, as a `const Standard_Transient*`;
     /// `occ::is_kind::<Base>(view.transient())`.
     pub fn transient(&self) -> Option<&'a dyn Transient> {
-        self.owner.map(|owner| owner.as_ref())
+        self.owner.map(|owner| owner.get())
     }
 }
 impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>>
@@ -43,7 +43,7 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>>
 {
     fn eq(&self, other: &Handle<U>) -> bool {
         match (self.owner, other.owner.as_ref()) {
-            (Some(left), Some(right)) => Arc::ptr_eq(left, right),
+            (Some(left), Some(right)) => left.address() == right.address(),
             (None, None) => true,
             _ => false,
         }

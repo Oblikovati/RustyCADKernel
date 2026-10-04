@@ -1,0 +1,62 @@
+{
+  "objective": "Preserve borrowed RuntimeType APIs while adding owning handles for class static descriptors and parent links.",
+  "base_revision": "2e766e5f",
+  "native_occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_probe": {
+    "source": "tools/oracle/tkernel_runtime_type_owners_probe.cxx",
+    "source_sha256": "9fd0b305c282f0ff630913b2f4832e688a7c6d6b9be7e648481b80ae4ef16e40",
+    "binary_sha256": "d3b24e0bc904c268a4ef0e61b50224d3a530427562be52660b3f096236b09df8",
+    "libTKernel_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "expected_output": "tools/oracle/tkernel_runtime_type_owners.expected",
+    "expected_sha256": "2b8accb228e67d80878727ea323f0ab5d028fa94a914d579caf9ed4b57c2686d",
+    "observations": {
+      "class_descriptor_static_handle_count": 1,
+      "child_descriptor_parent_reference_delta": 1,
+      "copy_and_release_counts": [2, 1],
+      "concurrent_first_registration_child_parent_counts": [1, 2],
+      "raw_register_descriptor_count": 0
+    }
+  },
+  "rust_tests": {
+    "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "tkernel_command": "cargo +1.98.1 test -p rustycad-tkernel",
+    "tkernel_result_groups": 153,
+    "tkernel_passed": 2702,
+    "tkernel_failed": 0,
+    "tkernel_ignored": 0,
+    "tkernel_raw_log_sha256": "2edeee69f7427db08582f145abec79ebdc0ae9478526b70249f8d2bdf831afc8",
+    "tkernel_compressed_log": "porting/audits/runtime-type-owning-descriptors-tkernel-tests.log.gz",
+    "tkernel_compressed_log_sha256": "730a6a6483707f9dd569f213e60ff5e3f61296c609014915fc5e937f639a8af5",
+    "tktopalgo_command": "cargo +1.98.1 test -p rustycad-tktopalgo",
+    "tktopalgo_result_groups": 48,
+    "tktopalgo_passed": 433,
+    "tktopalgo_failed": 0,
+    "tktopalgo_ignored": 0,
+    "tktopalgo_raw_log_sha256": "9311db7ebcbacb67ae736737cc2b3dc6fe7aadb6608c9a2bd9327757dd94d8a9",
+    "tktopalgo_compressed_log": "porting/audits/runtime-type-owning-descriptors-tktopalgo-tests.log.gz",
+    "tktopalgo_compressed_log_sha256": "4cad23da2d8ba948f8315ddd710b061938df691718a1ecbc048380fb48a46bfb",
+    "strict_clippy_command": "cargo +1.98.1 clippy -p rustycad-tkernel -p rustycad-tktopalgo --all-targets -- -D warnings",
+    "strict_clippy": "passed"
+  },
+  "implementation_sha256": {
+    "crates/tkernel/src/standard/runtime_type.rs": "e80f6a17538ea31e2e4eb077ba7291a5ef75e4fef15a56b151fa2478ce024d38",
+    "crates/tkernel/src/standard/handle.rs": "f4f796c8cf63dbc963cd66b88367fa99e6601ba6c1e1b837daecb16fa0e02ceb",
+    "crates/tkernel/src/standard/handle/casts.rs": "0acea1a08f1638a44c53a2e5c70283a9d1613e6ab914340dea5932517e5eee78",
+    "crates/tkernel/src/standard/handle/traits.rs": "fd657ffe06545e01e998ab9c63e9586225c21ebbce96650b15e1a67d55e692cd",
+    "crates/tkernel/src/standard/handle/view.rs": "4dc936240756ec8be895645847a7d51af91419d7ea185fb733ff3d5c568fde0d",
+    "crates/tkernel/src/standard/handle/weak.rs": "98db0a8d70be03779a97ef922688a5c421e97678bb2ebefe3fd7291e7967f53d",
+    "crates/tkernel/src/standard/transient.rs": "b0393b4c20a4a3e7fd516091f70ae6a80e322fe07eeb5562a90dad801d13b498",
+    "crates/tkernel/src/message/mod.rs": "3d4f8395d5ba7aa474c64436f9ae1e53e7f2216cb4d4e4498427464755c45e41",
+    "crates/tkernel/src/ncollection/generic_transient.rs": "999e38d780406a7a254b98fb41714a116498d6c4373ac0863f24c43d7653756f",
+    "crates/tkernel/tests/runtime_type_owning_handles.rs": "5f26204229fee1c672a9d5e3215e017cad799b23076dff4a42b773086e687400",
+    "crates/tktopalgo/src/mat/tlist/mod.rs": "4e359d068b95715a5c615bc281fc856c03a1c125f59b8a8eb26a45ba0d30c2aa",
+    "crates/tktopalgo/src/mat/tlist/node.rs": "ebe9a0237a525043fba6fdbbaeadd10750b7fad7429c6dbd6a022f76e8ba08e4"
+  },
+  "scope_and_limits": [
+    "Registry entries remain raw leaked descriptor pointers; raw RuntimeType::register calls do not create an owning handle for the new descriptor.",
+    "Each macro-backed RuntimeTyped class keeps a static owning handle, and each registered child descriptor owns one handle to its parent.",
+    "Generic NCollection H-array/H-sequence and MAT list/node descriptor specializations use a separate TypeId-keyed static owner cache; the Standard_Type registry remains raw.",
+    "Handle::from_static and static_type_handle/dynamic_type_handle provide explicit owning paths while preserving static_type and dynamic_type borrowed return types.",
+    "This does not reproduce native descriptor destruction or explicit registration lifetime semantics: Rust registry descriptors are leaked to retain stable addresses."
+  ]
+}

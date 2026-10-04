@@ -2,7 +2,7 @@
 //! `T*` fields that some OCCT classes keep beside their handles (MAT_Arc, MAT_Node
 //! and MAT_BasicElt of TKTopAlgo) so that a graph of transients has no reference
 //! cycle.
-use super::{Handle, RuntimeTyped, Transient};
+use super::{Handle, Owner, RuntimeTyped, Transient};
 use std::{
     marker::PhantomData,
     sync::{Arc, Weak},
@@ -23,8 +23,13 @@ use std::{
 /// assert!(WeakHandle::<StandardTransient>::default().is_null());
 /// ```
 pub struct WeakHandle<T: ?Sized + RuntimeTyped> {
-    owner: Option<Weak<dyn Transient>>,
+    owner: Option<WeakOwner>,
     projected: PhantomData<T>,
+}
+#[derive(Clone)]
+enum WeakOwner {
+    Shared(Weak<dyn Transient>),
+    Static(&'static dyn Transient),
 }
 impl<T: ?Sized + RuntimeTyped> Default for WeakHandle<T> {
     fn default() -> Self {
@@ -51,10 +56,16 @@ impl<T: ?Sized + RuntimeTyped> WeakHandle<T> {
     /// A new owning handle to the pointed object, or a null handle when the pointer
     /// is null or the object is gone; `let arc: Handle<T> = pointer.upgrade();`.
     pub fn upgrade(&self) -> Handle<T> {
-        let Some(owner) = self.owner.as_ref().and_then(Weak::upgrade) else {
-            return Handle::default();
-        };
-        Handle::adopt(Some(&owner))
+        match self.owner.as_ref() {
+            Some(WeakOwner::Shared(owner)) => {
+                let Some(owner) = owner.upgrade() else {
+                    return Handle::default();
+                };
+                Handle::adopt(Some(&Owner::Shared(owner)))
+            }
+            Some(WeakOwner::Static(owner)) => Handle::adopt(Some(&Owner::Static(*owner))),
+            None => Handle::default(),
+        }
     }
 }
 impl<T: ?Sized + RuntimeTyped> Handle<T> {
@@ -62,7 +73,10 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
     /// change the reference count; `let pointer = handle.downgrade();`.
     pub fn downgrade(&self) -> WeakHandle<T> {
         WeakHandle {
-            owner: self.owner.as_ref().map(Arc::downgrade),
+            owner: self.owner.as_ref().map(|owner| match owner {
+                Owner::Shared(owner) => WeakOwner::Shared(Arc::downgrade(owner)),
+                Owner::Static(owner) => WeakOwner::Static(*owner),
+            }),
             projected: PhantomData,
         }
     }
@@ -73,7 +87,10 @@ impl<T: ?Sized + RuntimeTyped> WeakHandle<T> {
     pub fn object_address(&self) -> *const () {
         self.owner
             .as_ref()
-            .map_or(std::ptr::null(), |owner| owner.as_ptr() as *const ())
+            .map_or(std::ptr::null(), |owner| match owner {
+                WeakOwner::Shared(owner) => owner.as_ptr() as *const (),
+                WeakOwner::Static(owner) => std::ptr::from_ref(*owner).cast::<()>(),
+            })
     }
 }
 impl<T: ?Sized + RuntimeTyped> PartialEq for WeakHandle<T> {

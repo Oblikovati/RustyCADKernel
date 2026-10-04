@@ -9,16 +9,22 @@ macro_rules! message_runtime_type {
         impl $crate::standard::RuntimeTyped for $class {
             const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                // One cached registry lookup per class, as the C++ function-local static handle.
-                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
-                    std::sync::OnceLock::new();
-                DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::register::<Self>(
-                        $name,
-                        std::mem::size_of::<Self>(),
-                        Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
-                    )
-                })
+                // Keep the class-level C++ static descriptor handle alive for process lifetime.
+                static DESCRIPTOR: std::sync::OnceLock<
+                    $crate::standard::Handle<$crate::standard::RuntimeType>,
+                > = std::sync::OnceLock::new();
+                DESCRIPTOR
+                    .get_or_init(|| {
+                        $crate::standard::Handle::from_static(
+                            $crate::standard::RuntimeType::register::<Self>(
+                                $name,
+                                std::mem::size_of::<Self>(),
+                                Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                            ),
+                        )
+                    })
+                    .get()
+                    .expect("registered descriptor")
             }
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
                 $crate::standard::project_concrete::<Self>(object)
