@@ -1,0 +1,12 @@
+{
+  "scope": "Correct plain trait paths to unique compiler-recorded Rust method paths in TKernel/TKMath; explicit generic trait arguments are not rewritten",
+  "changed_targets": 128,
+  "artifact": "base-trait-path-targets.jsonl.gz",
+  "sha256": "6a59970b3ad920d6e26ad19a71996a50ba471c5d088b8c89528b68dd52a9c0f7",
+  "rust_capture_revision": "af2e3cfdf780bd3408fae741194ff4995a66999e",
+  "validation": "Each replacement has exactly one reachable Rust declaration and matching current source-file hash. Native selectors and implementation statuses are unchanged.",
+  "limits": [
+    "Metadata correction only; does not add behavior or original legacy tests.",
+    "Unresolved native overload selectors remain unresolved."
+  ]
+}
