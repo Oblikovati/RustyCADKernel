@@ -3,12 +3,14 @@
 #include <Poly_CoherentTriangle.hxx>
 #include <Standard.hxx>
 #include <iostream>
+#include <vector>
 
 class CountingAllocator final : public NCollection_BaseAllocator
 {
 public:
   size_t allocations = 0;
   size_t frees = 0;
+  std::vector<int> freedTriangles;
   void* Allocate(const size_t size) override
   {
     ++allocations;
@@ -22,6 +24,7 @@ public:
   void Free(void* address) override
   {
     ++frees;
+    freedTriangles.push_back(reinterpret_cast<Poly_CoherentTriPtr*>(address)->GetTriangle().Node(0));
     Standard::Free(address);
   }
 };
@@ -52,6 +55,11 @@ void probe_ring(const occ::handle<CountingAllocator>& counter,
             << secondMember->GetTriangle().Node(0) << '\n';
   Poly_CoherentTriPtr::RemoveList(head, allocator);
   std::cout << counter->allocations << ' ' << counter->frees << '\n';
+  for (size_t index = 0; index < counter->freedTriangles.size(); ++index)
+  {
+    std::cout << (index == 0 ? "" : " ") << counter->freedTriangles[index];
+  }
+  std::cout << '\n';
 }
 
 int main()

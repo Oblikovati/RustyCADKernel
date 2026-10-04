@@ -22,8 +22,8 @@ mod polygon_on_triangulation;
 mod triangle;
 mod triangulation;
 pub use coherent::{
-    CoherentLink, CoherentNode, CoherentTriPtr, CoherentTriPtrIterator, CoherentTriangle,
-    CoherentTriangulation, TwoIntegers,
+    CoherentLink, CoherentNode, CoherentTriMember, CoherentTriPtr, CoherentTriPtrIterator,
+    CoherentTriangle, CoherentTriangulation, TwoIntegers,
 };
 pub use connect::Connect;
 pub use io::{
