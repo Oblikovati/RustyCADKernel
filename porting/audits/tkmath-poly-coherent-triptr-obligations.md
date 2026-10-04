@@ -43,7 +43,7 @@ allocation/free totals to three each.
 | `RemoveList(Poly_CoherentTriPtr*, Handle(BaseAllocator))` | `remove_list_in(&allocator)` | Clears all nodes if all allocations match; ordinary `Drop` also frees each node through its recorded allocator. |
 | `Iterator::PtrValue() -> const Poly_CoherentTriPtr&` | `CoherentTriPtrIterator::member_token()` | Stable node identity is returned as an opaque token backed by the allocated node's stable address. |
 
-`CoherentTriPtr` now owns actual allocator-backed nodes using `BaseAllocator::allocate_value` and `AllocatedBox`; each node contains stable next/previous member tokens. No unsafe pointers are dereferenced. Legacy positional methods still route through this circular node storage. The focused Rust poly test target passes all 9 tests, including token stability through insert/remove and rejecting a mismatched allocator before mutating the ring.
+`CoherentTriPtr` now owns actual allocator-backed nodes using `BaseAllocator::allocate_value` and `AllocatedBox`; each node contains stable next/previous member tokens. No unsafe pointers are dereferenced. Legacy positional methods still route through this circular node storage. The Rust poly test target covers stable tokens, previous/set/iterator operations, dead-token errors, mismatched-allocator non-mutation, and independent empty/populated clones. A focused unit test verifies bulk removal drains head-then-next like native. The native allocator probe records frees as `7 1 4`: explicit removal of triangle 7, then `RemoveList` traversing the remaining head and its next member.
 
 The explicit removal methods currently validate `BaseAllocator` handle identity. That is a conservative ownership rule, not an exact model of every native `Free` combination: different native allocator objects can share a compatible heap backend. The node owner always frees through its creating Rust allocator, so this check prevents releasing memory through an incompatible arena. Exact native backend-compatibility semantics remain open.
 
@@ -73,7 +73,7 @@ The expected output is in `tools/oracle/tkmath_coherent_triptr_alloc.expected`.
 | OCCT `Poly_CoherentTriPtr.cxx` | `94c8114cd73f61b4df39ab335ac530b0a4f1bd00390d553c0f772894bd4f7eba` |
 | OCCT `Poly_CoherentNode.hxx` | `43fb34c629691f23c8345f450a741238aa0a4e0947719e5406b789baf39ce254` |
 | OCCT `Poly_CoherentNode.cxx` | `03f46cb19ea098227ed6b4bbc1e0b396004774d1486c689dcf744fa73615fbb1` |
-| Rust `tri_ptr.rs` | `3b0cd346e98ae35ffcd64bf65431037c1c161de1f19652754ba118ced7765501` |
+| Rust `tri_ptr.rs` | `515943a848bfb43d1a5328d7f356153786552e205f9928b53679a356412795b9` |
 | Rust `node.rs` | `4c3f41755aa0502775cbbdca2c69144ddae8b494d623c178644ce222dcec061d` |
 | Rust `allocator.rs` | `42dc18b0a6ada3338b24bcaeac11008cb0cf326fc7fce9e340661fcf26e7b7c2` |
-| Native probe | `483f0ecfde319fbf0318640c5ffd79f5747382317da0b6ba419e6ebcf6547c2e` |
+| Native probe | `18eca46be5cf9b1c0c9dc61846eb407002339d2f272a17c5a1252cd9e31fc5cb` |

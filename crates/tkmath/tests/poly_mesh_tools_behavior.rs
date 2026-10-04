@@ -138,10 +138,35 @@ fn ring_member_tokens_survive_edits_and_allocator_mismatch_is_rejected() {
     assert!(ring.remove_member(third, &wrong).is_err());
     ring.remove_member(third, &arena).unwrap();
     assert!(ring.triangle(third).is_err());
+    assert_eq!(
+        ring.remove_member(third, &arena)
+            .unwrap_err()
+            .exception_type(),
+        "Standard_NoSuchObject"
+    );
     assert_eq!(ring.triangle(second).unwrap(), 2);
+    assert_eq!(ring.previous_member(head).unwrap(), second);
+    ring.set_member_triangle(second, 20).unwrap();
+    assert_eq!(ring.iter_from_member(second).member_token(), Some(second));
+    assert_eq!(ring.triangle(second).unwrap(), 20);
     ring.remove_member(second, &arena).unwrap();
     ring.remove_list_in(&arena).unwrap();
     assert!(ring.is_empty());
+}
+#[test]
+fn coherent_ring_clone_has_independent_allocator_owned_members() {
+    let mut ring = CoherentTriPtr::new(4);
+    ring.append(0, 5);
+    let mut clone = ring.clone();
+    assert_ne!(ring.head_member(), clone.head_member());
+    clone.set_triangle(9);
+    assert_eq!(ring.get_triangle(), 4);
+    assert_eq!(clone.get_triangle(), 9);
+    let arena = rustycad_tkernel::ncollection::BaseAllocator::common();
+    ring.remove_list_in(&arena).unwrap();
+    assert_eq!(clone.iter().collect::<Vec<_>>(), [9, 5]);
+    let empty = ring.clone();
+    assert!(empty.is_empty());
 }
 #[test]
 fn merge_tool_merges_by_distance_and_counts_quads_like_native() {

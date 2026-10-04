@@ -124,9 +124,7 @@ impl CoherentTriPtr {
                 return Err(allocator_mismatch(*member));
             }
         }
-        self.members.clear();
-        self.head = None;
-        self.length = 0;
+        while self.drain_next().is_some() {}
         Ok(())
     }
 
@@ -267,12 +265,23 @@ impl CoherentTriPtr {
         self.length -= 1;
     }
 
+    fn drain_next(&mut self) -> Option<usize> {
+        let head = self.head?;
+        let triangle = self.member(head).ok()?.triangle;
+        self.unlink_member(head);
+        Some(triangle)
+    }
+
     fn check_allocator(
         &self,
         member: CoherentTriMember,
         allocator: &BaseAllocator,
     ) -> Result<(), Failure> {
-        if &self.allocation(member).allocator == allocator {
+        let allocation = self
+            .members
+            .get(&member)
+            .ok_or_else(|| missing_member(member))?;
+        if &allocation.allocator == allocator {
             return Ok(());
         }
         Err(allocator_mismatch(member))
@@ -347,6 +356,12 @@ impl PartialEq for CoherentTriPtr {
     }
 }
 impl Eq for CoherentTriPtr {}
+impl Drop for CoherentTriPtr {
+    fn drop(&mut self) {
+        while self.drain_next().is_some() {}
+    }
+}
+
 impl fmt::Debug for CoherentTriPtr {
     fn fmt(&self, output: &mut fmt::Formatter<'_>) -> fmt::Result {
         output.debug_list().entries(self.iter()).finish()
@@ -414,4 +429,23 @@ fn missing_member(member: CoherentTriMember) -> Failure {
 fn allocator_mismatch(member: CoherentTriMember) -> Failure {
     let message = format!("allocator does not own coherent ring member {member:?}");
     Failure::with_type("Standard_ProgramError", &message, "")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::CoherentTriPtr;
+    use rustycad_tkernel::ncollection::BaseAllocator;
+
+    #[test]
+    fn list_drain_follows_the_native_head_then_next_order() {
+        let allocator = BaseAllocator::common();
+        let mut ring = CoherentTriPtr::new_in(1, allocator.clone());
+        let head = ring.head_member().unwrap();
+        ring.append_member(head, 2, allocator.clone()).unwrap();
+        ring.prepend_member(head, 3, allocator).unwrap();
+        assert_eq!(
+            std::iter::from_fn(|| ring.drain_next()).collect::<Vec<_>>(),
+            [1, 2, 3]
+        );
+    }
 }
