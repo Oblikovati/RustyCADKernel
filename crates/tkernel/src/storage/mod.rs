@@ -36,7 +36,7 @@ pub use root::Root;
 pub use root_data::RootData;
 pub use schema::{
     CreationDateSource, MigrationFile, MigrationSource, NativeCreationDate, NativeMigrationSource,
-    Schema, TypeMigration,
+    Schema, SchemaContext, TypeMigration,
 };
 pub use status::SectionStatus;
 pub use stream::{IoStream, StreamDevice, format_general, state};

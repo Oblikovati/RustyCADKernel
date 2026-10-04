@@ -2,14 +2,14 @@
 use super::fakes::{FixedClock, ScriptedDriver, TableFile, UnreadableTable};
 use rustycad_tkernel::standard::{Handle, StandardPersistent};
 use rustycad_tkernel::storage::{
-    CallBack, Data, DefaultCallBack, OpenMode, Schema, StorageError, StreamException,
-    TypeMigration, TypedCallBack,
+    CallBack, Data, DefaultCallBack, OpenMode, Schema, SchemaContext, StorageError,
+    StreamException, TypeMigration, TypedCallBack,
 };
 use rustycad_tkernel::tcollection::AsciiString;
 use std::sync::Arc;
 
 fn schema() -> Schema {
-    let mut schema = Schema::with_clock(Arc::new(FixedClock));
+    let mut schema = Schema::with_context(Arc::new(FixedClock), SchemaContext::default());
     schema.set_name(&"Std".into());
     schema.set_version(&"2".into());
     schema
@@ -201,3 +201,6 @@ fn long_table_lines_are_read_in_79_byte_pieces() {
     assert!(renamed.is_empty(), "the value is on the next piece");
     assert!(table.check(&"v\n".into(), &mut renamed));
 }
+
+#[path = "schema_context.rs"]
+mod context;

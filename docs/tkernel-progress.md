@@ -2084,8 +2084,10 @@ Native behaviour kept (all probe-compared unless noted):
 
 Deliberate deviations:
 
-- The current data set of `Storage_Schema` is kept per schema instead of in a process-wide
-  static; the protected bindings return `Standard_NullObject` outside a write.
+- The original per-schema current-data deviation was corrected by the shared-context
+  regression in `porting/audits/tkernel-storage-schema-context.json`. Default schemas
+  now use OCCT's process-wide slot; an explicit `SchemaContext` permits isolated sessions.
+  Protected bindings still return `Standard_NullObject` when the native slot is null.
 - `Storage_Data` starts with `Storage_VSOk`; natively the status is uninitialised.
 - Calls on a closed binary driver, a null callback or a null object return
   `Standard_NullObject` instead of dereferencing null.

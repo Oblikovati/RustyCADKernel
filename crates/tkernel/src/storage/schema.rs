@@ -1,15 +1,17 @@
 //! `Storage_Schema`: the storage algorithm and its callback registry.
 //!
 //! The native `ICurrentData` is a process-wide static that `Write` sets and clears and that
-//! `AddPersistent`, `PersistentToAdd` and the type bindings read. Rust keeps that slot per
-//! schema, so two schemas no longer share it; within one schema the lifetime is the same.
+//! `AddPersistent`, `PersistentToAdd` and the type bindings read. Default Rust schemas
+//! share that slot too. An injected `SchemaContext` supports independent storage sessions.
 use super::{CallBack, Data, DefaultCallBack, InternalData, TypedCallBack};
 use crate::ncollection::{DataMap, HSequence};
 use crate::standard::{Failure, Handle, StandardTransient};
 use crate::tcollection::AsciiString;
-use std::sync::{Arc, Mutex, MutexGuard, PoisonError};
+use std::sync::{Arc, MutexGuard};
 mod binding;
+mod context;
 mod creation_date;
+pub use context::SchemaContext;
 mod migration;
 mod write;
 pub use creation_date::{CreationDateSource, NativeCreationDate};
@@ -31,7 +33,7 @@ pub struct Schema {
     default_callback: Option<Arc<dyn CallBack>>,
     name: AsciiString,
     version: AsciiString,
-    current: Mutex<Handle<Data>>,
+    current: SchemaContext,
     clock: Arc<dyn CreationDateSource>,
 }
 
@@ -44,6 +46,13 @@ impl Default for Schema {
 impl Schema {
     /// `Storage_Schema()` with an injected creation-date clock; `Schema::with_clock(clock)`.
     pub fn with_clock(clock: Arc<dyn CreationDateSource>) -> Self {
+        Self::with_context(clock, SchemaContext::process_shared())
+    }
+
+    /// Construct using an injected clock and current-write context. Like native
+    /// construction, this clears the supplied context's current data.
+    /// Example: `Schema::with_context(clock, SchemaContext::default())`.
+    pub fn with_context(clock: Arc<dyn CreationDateSource>, context: SchemaContext) -> Self {
         let mut schema = Self {
             parent: StandardTransient::default(),
             callbacks: DataMap::default(),
@@ -51,7 +60,7 @@ impl Schema {
             default_callback: None,
             name: AsciiString::default(),
             version: AsciiString::default(),
-            current: Mutex::new(Handle::default()),
+            current: context,
             clock,
         };
         schema.clear();
@@ -159,7 +168,7 @@ impl Schema {
 impl Schema {
     /// `ICurrentData()`.
     fn current(&self) -> MutexGuard<'_, Handle<Data>> {
-        self.current.lock().unwrap_or_else(PoisonError::into_inner)
+        self.current.lock()
     }
 
     /// Runs `action` on the current data set and its internal data. The native code

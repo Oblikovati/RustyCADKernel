@@ -1,0 +1,46 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "selectors": [
+    {
+      "cpp_id": "69b895f3f703b35d128166c30009c765956f1383653b4750cec762d438601ea8",
+      "upstream_id": "Storage_Schema::TypeBinding(const TCollection_AsciiString &) const",
+      "rust_item": "rustycad_tkernel::storage::Schema::type_binding"
+    },
+    {
+      "cpp_id": "707915189b4e0f0fc8b717b350f62e1e7e79abe8486bea2245f0edd6e3d6deb7",
+      "upstream_id": "Storage_Schema::HasTypeBinding(const TCollection_AsciiString &) const",
+      "rust_item": "rustycad_tkernel::storage::Schema::has_type_binding"
+    },
+    {
+      "cpp_id": "c9ebb4380f222986c4ecde54c9afa7093d4777eea0f99cd07cc05a32b401fe83",
+      "upstream_id": "Storage_Schema::BindType(const TCollection_AsciiString &,const occ::handle<Storage_CallBack> &) const",
+      "rust_item": "rustycad_tkernel::storage::Schema::bind_type"
+    }
+  ],
+  "source_sha256": {
+    "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx": "34ba42f8e0d82acd9721cdd63aa29877bb46e69c6ff1653e6cf70c3f8f886bca",
+    "src/FoundationClasses/TKernel/Storage/Storage_Schema.cxx": "7936e472284038427e49a18873aeac1ad1f87f17b0978e4dfd83582620142f64"
+  },
+  "profile": "Linux x86_64 GCC C++17 -O2; sequential cross-schema write failure",
+  "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_storage_schema_context.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkernel-storage-schema-context",
+  "run_command": "/tmp/tkernel-storage-schema-context <temporary-file-path>",
+  "artifact_sha256": {
+    "tools/oracle/tkernel_storage_schema_context.cxx": "137c059872807f0656d3088d237fec9032f0069536c7f1305cc2844f51969332",
+    "tools/oracle/tkernel_storage_schema_context.expected": "15d3c8e11ca049250fadb165da30c03178599e7372bc21c10d96f0e10d5dde6c"
+  },
+  "legacy_declaration_count_changed": false,
+  "full_api_parity_proven": false,
+  "behavior_change": "Default schemas now share the process current-data slot rather than keeping one per instance. Constructors clear that shared slot, completed writes clear it, non-write exceptions leave it available to other schemas. Context injection preserves independent test/session state.",
+  "limitations": [
+    "Native null current-data dereference is replaced by Standard_NullObject.",
+    "Concurrent unsynchronized native access is not a behavioral equivalence claim; Rust synchronizes the slot.",
+    "Callbacks are Arc trait objects, not C++ subclass/RTTI representations."
+  ],
+  "validation": {
+    "package_test_passed": 2621,
+    "package_test_failed": 0,
+    "strict_clippy_passed": true,
+    "supplemental_tests": 3,
+    "native_fixture_rows": 5
+  }
+}

@@ -99426,7 +99426,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::with_clock",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::SetVersion(const TCollection_AsciiString&)",
@@ -99434,7 +99434,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::set_version",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::Version() const",
@@ -99442,7 +99442,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::version",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::SetName(const TCollection_AsciiString&)",
@@ -99450,7 +99450,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::set_name",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::Name() const",
@@ -99458,7 +99458,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::name",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::Write(const occ::handle<Storage_BaseDriver>&,const occ::handle<Storage_Data>&) const",
@@ -99466,7 +99466,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::write",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::ICreationDate()",
@@ -99474,7 +99474,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::i_creation_date",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::CheckTypeMigration(const TCollection_AsciiString&,TCollection_AsciiString&)",
@@ -99482,7 +99482,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::check_type_migration",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::AddReadUnknownTypeCallBack(const TCollection_AsciiString&,const occ::handle<Storage_CallBack>&)",
@@ -99490,7 +99490,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::add_read_unknown_type_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::RemoveReadUnknownTypeCallBack(const TCollection_AsciiString&)",
@@ -99498,7 +99498,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::remove_read_unknown_type_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::InstalledCallBackList() const",
@@ -99506,7 +99506,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::installed_callback_list",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::ClearCallBackList()",
@@ -99514,7 +99514,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::clear_callback_list",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::UseDefaultCallBack()",
@@ -99522,7 +99522,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::use_default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::DontUseDefaultCallBack()",
@@ -99530,7 +99530,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::dont_use_default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::IsUsingDefaultCallBack() const",
@@ -99538,7 +99538,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::is_using_default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::SetDefaultCallBack(const occ::handle<Storage_CallBack>&)",
@@ -99546,7 +99546,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::set_default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::ResetDefaultCallBack()",
@@ -99554,7 +99554,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::reset_default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::DefaultCallBack() const",
@@ -99562,7 +99562,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::default_callback",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::WritePersistentObjectHeader(const occ::handle<Standard_Persistent>&,const occ::handle<Storage_BaseDriver>&)",
@@ -99570,7 +99570,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::write_persistent_object_header",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::WritePersistentReference(const occ::handle<Standard_Persistent>&,const occ::handle<Storage_BaseDriver>&)",
@@ -99578,7 +99578,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::write_persistent_reference",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::AddPersistent(const occ::handle<Standard_Persistent>&,const char* const) const",
@@ -99586,7 +99586,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::add_persistent",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::PersistentToAdd(const occ::handle<Standard_Persistent>&) const",
@@ -99594,7 +99594,7 @@
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
       "rust_item": "rustycad_tkernel::storage::Schema::persistent_to_add",
       "status": "implemented",
-      "notes": "The process-wide ICurrentData slot is kept per schema (Write sets and clears it); the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+      "notes": "The default ICurrentData slot is process-wide as natively (construction and completed Write clear it; other exceptions retain it). SchemaContext can be injected for independent sessions; the protected bindings fail with Standard_NullObject outside a Write instead of dereferencing null. ICreationDate reads the injected CreationDateSource; CheckTypeMigration loads its table once through NativeMigrationSource (TypeMigration::load takes an injected source). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
       "upstream_id": "Storage_Schema::DEFINE_STANDARD_RTTIEXT(Storage_Schema,Standard_Transient)",
@@ -234813,6 +234813,30 @@
       "rust_item": "rustycad_tkernel::fsd::BinaryFile::write_extended_string",
       "status": "partial",
       "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
+    },
+    {
+      "upstream_id": "Storage_Schema::TypeBinding(const TCollection_AsciiString &) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
+      "rust_item": "rustycad_tkernel::storage::Schema::type_binding",
+      "status": "partial",
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixture confirms cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings and unbound lookup. Rust uses Arc callbacks and synchronized access; native callback subclass/RTTI ABI and concurrent calls are not proven. See porting/audits/tkernel-storage-schema-context.json."
+    },
+    {
+      "upstream_id": "Storage_Schema::HasTypeBinding(const TCollection_AsciiString &) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
+      "rust_item": "rustycad_tkernel::storage::Schema::has_type_binding",
+      "status": "partial",
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixture confirms cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings and unbound lookup. Rust uses Arc callbacks and synchronized access; native callback subclass/RTTI ABI and concurrent calls are not proven. See porting/audits/tkernel-storage-schema-context.json."
+    },
+    {
+      "upstream_id": "Storage_Schema::BindType(const TCollection_AsciiString &,const occ::handle<Storage_CallBack> &) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
+      "rust_item": "rustycad_tkernel::storage::Schema::bind_type",
+      "status": "partial",
+      "notes": "Protected schema binding hook with default process-shared current write context. Native fixture confirms cross-schema visibility, duplicate binding retaining original callback/type index, null callback bindings and unbound lookup. Rust uses Arc callbacks and synchronized access; native callback subclass/RTTI ABI and concurrent calls are not proven. See porting/audits/tkernel-storage-schema-context.json."
     }
   ],
   "tests": [
