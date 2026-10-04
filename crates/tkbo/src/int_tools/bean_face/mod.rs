@@ -16,8 +16,10 @@ mod analytic_adaptors;
 mod coincidence;
 mod distance;
 mod empty_range;
+mod exact_intersection;
 mod fast_analytic;
 mod line_plane;
+mod near_range_boundaries;
 mod range_walk;
 
 /// Curve/face intersection ranges; `BeanFaceIntersector::from_shapes(&edge, &face)?`.
@@ -200,6 +202,8 @@ impl BeanFaceIntersector {
             self.done = true;
             return Ok(());
         }
+        exact_intersection::compute(self)?;
+        near_range_boundaries::compute(self)?;
         Err(Failure::new(&format!(
             "BeanFaceIntersector::Perform unsupported pair {curve_type:?}/{surface_type:?}; expected ported analytic or coincident geometry"
         )))

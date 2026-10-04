@@ -1,5 +1,5 @@
 //! Exact curve-surface hits seed native BeanFace ranges before distance localization.
-use super::{BeanFaceIntersector, Failure, ranges};
+use super::{BeanFaceIntersector, Failure, empty_range};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::real;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
@@ -70,7 +70,7 @@ fn record_exact_point(
     parameter: f64,
 ) -> Result<(), Failure> {
     if count_before == bean.range_manager.length() {
-        ranges::set_empty_result(parameter, &mut bean.range_manager)?;
+        empty_range::set_empty_result(parameter, &mut bean.range_manager)?;
     } else {
         bean.minimum_square_distance = 0.0;
     }
@@ -94,10 +94,7 @@ fn corrected_parameters(
     if !valid {
         return Ok(None);
     }
-    Ok(Some((
-        native_clamp(u, umin, umax),
-        native_clamp(v, vmin, vmax),
-    )))
+    Ok(Some((u, v)))
 }
 
 fn correct_u(bean: &BeanFaceIntersector, u: f64) -> Result<(f64, bool, bool), Failure> {
@@ -119,17 +116,14 @@ fn correct_v(bean: &BeanFaceIntersector, v: f64) -> Result<(f64, bool), Failure>
 }
 
 fn adjust_parameter(value: f64, minimum: f64, maximum: f64, period: f64) -> f64 {
-    let epsilon = real::epsilon(period);
-    if minimum - value > epsilon || value - maximum > epsilon {
-        let distance = if minimum - value > epsilon {
-            maximum - value
-        } else {
-            minimum - value
-        };
-        let periods = (distance / period).trunc();
-        return value + periods * period;
-    }
-    value
+    rustycad_tkgeomalgo::geom_int::adjust_periodic(
+        value,
+        minimum,
+        maximum,
+        period,
+        real::epsilon(period),
+    )
+    .1
 }
 
 fn process_exact_segments(
@@ -160,10 +154,6 @@ fn record_exact_segment(
 
 fn inside(value: f64, minimum: f64, maximum: f64) -> bool {
     minimum <= value && value <= maximum
-}
-
-fn native_clamp(value: f64, minimum: f64, maximum: f64) -> f64 {
-    native_min(native_max(minimum, value), maximum)
 }
 
 fn native_min(first: f64, second: f64) -> f64 {

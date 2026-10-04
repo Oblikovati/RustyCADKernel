@@ -56,3 +56,14 @@ fn assert_range(bean: &BeanFaceIntersector, index: i32, expected: (f64, f64)) {
     assert!((range.first() - expected.0).abs() < 1e-12);
     assert!((range.last() - expected.1).abs() < 1e-12);
 }
+
+#[test]
+fn periodic_correction_retains_native_outside_trim_parameter() {
+    let mut bean = initialized_bean(&crossing_edge(), &sphere_face());
+    bean.set_surface_parameters(0.0, 1.0, -0.5, 0.5);
+    // OCCT accepts periodic correction without clamping to a narrower trim.
+    assert_eq!(
+        super::corrected_parameters(&bean, 2.0, 0.0).unwrap(),
+        Some((2.0, 0.0))
+    );
+}
