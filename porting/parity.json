@@ -234641,6 +234641,22 @@
       "status": "partial",
       "source_sha256": "a12154585fee20870cdb197435c92cf02ca715f33e2a30433700a14e057db6f4",
       "notes": "Selector uses the exact written parameter types from the pinned header. The hook adapts a bounded absolute position and its default implementation dispatches through seekoff, verified by the derived hook count receipt. Rust does not model fpos state or the ignored openmode parameter; invalid native pointer domains remain unsupported."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::initialization(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::initialization_adaptor",
+      "status": "partial",
+      "notes": "Public Rust counterpart of protected native reinitialization. Supplemental native transition fixture covers line/circle/trimmed/null, bounded concrete and fallback adaptors, and GetType exception preservation. Existing grid algorithms are reused. Borrowed adaptor lifetime is enforced by Rust; C++ subclass layout/raw-reference ABI is not reproduced. See porting/audits/tkg2d-curve-reinitialization.json."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::initialization(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::initialization_curve",
+      "status": "partial",
+      "notes": "Public Rust counterpart of protected native reinitialization. Supplemental native transition fixture covers line/circle/trimmed/null, bounded concrete and fallback adaptors, and GetType exception preservation. Existing grid algorithms are reused. Borrowed adaptor lifetime is enforced by Rust; C++ subclass layout/raw-reference ABI is not reproduced. See porting/audits/tkg2d-curve-reinitialization.json."
     }
   ],
   "tests": [

@@ -1,0 +1,29 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx": "7ec7eb4a86c1cda4ba0e263d7a501db87698af8064e09600a15764b64ed73c50",
+    "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.cxx": "78f4c4d6afabce36d015f4f99d48de6dea85775526b913636633321687519fd2"
+  },
+  "probe": "tools/oracle/tkg2d_curve_reinitialization.cxx",
+  "expected": "tools/oracle/tkg2d_curve_reinitialization.expected",
+  "rust_test": "crates/tkg2d/tests/geom2d_curve_reinitialization.rs",
+  "native_profile": "Linux x86_64 GCC C++17 -O2",
+  "compile_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkg2d_curve_reinitialization.cxx -L target/occt-modeling-full/lin64/gcc/libi -lTKG2d -lTKMath -lTKernel -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -o /tmp/tkg2d-curve-reinitialization",
+  "legacy_declaration_count_changed": false,
+  "full_api_parity_proven": false,
+  "artifact_sha256": {
+    "tools/oracle/tkg2d_curve_reinitialization.cxx": "1263c41c1645dcdb79276bf9aebab1006e7d397460a971b51927a6dd153ac52a",
+    "tools/oracle/tkg2d_curve_reinitialization.expected": "b07bcdb37e3fdedf9c3a65d0a98b87f70a613444858e33213e352b42c572bfa6"
+  },
+  "library_sha256": {
+    "TKG2d": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce",
+    "TKMath": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "TKernel": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "validation": {
+    "package_test_passed": 606,
+    "package_test_failed": 0,
+    "supplemental_tests": 2,
+    "native_fixture_rows": 8
+  }
+}
