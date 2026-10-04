@@ -3,6 +3,8 @@ mod clipping;
 mod convert;
 mod domains;
 mod fallback;
+mod intersections;
+mod projection;
 mod ranges;
 mod replace;
 use super::{FixRoot, ShapeFixWire};
