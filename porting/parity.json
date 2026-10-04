@@ -83107,6 +83107,14 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
+      "upstream_id": "Standard_ReadLineBuffer::readStream(std::istream&,size_t,size_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_stream",
+      "status": "partial",
+      "notes": "Clang candidate ebd7fa14a40405498cbe2e2ea362a98885eeec44dcc3245bbdf455ed5a7f89a0 (bool(std::istream&,unsigned long,unsigned long&)); header SHA-256 346f21ca3b3e42bff10428aeb4f20c25ec10e5965e90bc532f28d27d1e60c449. Native hook is protected and non-virtual; Rust exposes the same operation as a callable Read-generic method and reuses the line reader's fill logic. It preserves count and buffer contents on a preexisting stream error. The safe Rust surface rejects lengths beyond allocation, which are outside native's defined buffer domain. Native derived-class fixture: tools/oracle/tkernel_standard_read_stream_hook.cxx; FILE* overload remains unmapped."
+    },
+    {
       "upstream_id": "Standard_ReadLineBuffer::Clear()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",

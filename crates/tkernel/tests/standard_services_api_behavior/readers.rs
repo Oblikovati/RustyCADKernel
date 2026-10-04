@@ -15,6 +15,14 @@ impl Read for BrokenStream {
     }
 }
 
+struct BadStream;
+
+impl Read for BadStream {
+    fn read(&mut self, _: &mut [u8]) -> io::Result<usize> {
+        Err(io::Error::other("stream is already bad"))
+    }
+}
+
 fn lines(buffer: &mut ReadLineBuffer, text: &[u8]) -> Vec<Vec<u8>> {
     let mut stream = Cursor::new(text.to_vec());
     let mut lines = Vec::new();
@@ -177,6 +185,28 @@ fn read_counts_report_the_last_block_of_the_call() {
     assert_eq!(read, 2);
     assert_eq!(buffer.read_line_counted(&mut stream, &mut read), None);
     assert_eq!(read, 0);
+}
+
+#[test]
+fn protected_native_stream_hook_is_callable_with_read_streams() {
+    let mut buffer = ReadLineBuffer::new(4);
+    let mut stream = Cursor::new(b"abcdef".to_vec());
+    assert_stream_read(&mut buffer, &mut stream, 4, true);
+    assert_stream_read(&mut buffer, &mut stream, 2, true);
+    assert_stream_read(&mut buffer, &mut stream, 0, true);
+    let mut failed = BadStream;
+    assert_stream_read(&mut buffer, &mut failed, 0, false);
+}
+
+fn assert_stream_read(
+    buffer: &mut ReadLineBuffer,
+    stream: &mut impl Read,
+    expected_count: usize,
+    expected_result: bool,
+) {
+    let mut count = usize::MAX;
+    assert_eq!(buffer.read_stream(stream, 4, &mut count), expected_result);
+    assert_eq!(count, expected_count);
 }
 
 #[test]
