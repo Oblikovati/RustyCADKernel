@@ -21,8 +21,10 @@ class G3AdvEvaluator : public AdvApprox_EvaluatorFunction{
 public:
  int kind,mode,failAt,calls=0;
  G3AdvEvaluator(int k,int m,int f):kind(k),mode(m),failAt(f){}
- void Evaluate(int* Dimension,double[2],double* Parameter,int* DerivativeRequest,double* Result,int* ErrorCode) override{
+ void Evaluate(int* Dimension,double StartEnd[2],double* Parameter,int* DerivativeRequest,double* Result,int* ErrorCode) override{
   ++calls;*ErrorCode=0;
+  if(mode==3&&calls==1){StartEnd[1]=2.0;*Parameter=0.25;}
+  if(mode==3&&calls==5){*DerivativeRequest=1;}
   if((mode==1&&*DerivativeRequest==2)||(mode==2&&calls==failAt)){*ErrorCode=1;return;}
   for(int c=0;c<*Dimension;++c)Result[c]=g3_aa_value(kind,c,*Parameter,*DerivativeRequest);
  }

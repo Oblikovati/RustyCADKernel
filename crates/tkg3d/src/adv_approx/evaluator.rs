@@ -4,10 +4,9 @@
 //!
 //! The native virtual `Evaluate(int* Dimension, double StartEnd[2], double* Parameter,
 //! int* DerivativeRequest, double* Result, int* ErrorCode)` passes every argument
-//! through a pointer, but no caller in AdvApprox reads an input back after the call.
-//! The trait therefore takes the inputs by value, fills `result` (`Dimension`
-//! values) and returns the native `ErrorCode` (0 on success; any other value makes
-//! the approximation stop without a result). `operator()` is the same call.
+//! through a pointer. The value-style method keeps ordinary evaluators concise;
+//! `evaluate_native` exposes mutable input storage for callbacks whose writes affect
+//! subsequent samples. Its default adapter writes the returned value to ErrorCode.
 
 /// A function of one parameter with values in a space of `dimension` reals.
 ///
@@ -26,6 +25,36 @@ pub trait AdvApproxEvaluatorFunction {
         derivative_request: i32,
         result: &mut [f64],
     ) -> i32;
+
+    /// Receives the native mutable callback protocol, including its error output.
+    /// Existing value-style implementations use the default adapter;
+    /// `fn evaluate_native(&mut self, call: &mut AdvApproxEvaluation<'_>)` can
+    /// override it when callback mutations must affect later samples.
+    fn evaluate_native(&mut self, call: &mut AdvApproxEvaluation<'_>) {
+        *call.error_code = self.evaluate(
+            *call.dimension,
+            *call.start_end,
+            *call.parameter,
+            *call.derivative_request,
+            call.result,
+        );
+    }
+}
+
+/// Borrowed inputs and outputs of native `Evaluate`.
+pub struct AdvApproxEvaluation<'a> {
+    /// Native `Dimension`; result storage still has the caller's allocated length.
+    pub dimension: &'a mut i32,
+    /// Native mutable interval pair, reused by `AdvApprox_SimpleApprox::Perform`.
+    pub start_end: &'a mut [f64; 2],
+    /// Native parameter, whose lifetime follows the caller's local variable.
+    pub parameter: &'a mut f64,
+    /// Native derivative request, whose lifetime follows the caller's local variable.
+    pub derivative_request: &'a mut i32,
+    /// Result storage allocated for the original total dimension.
+    pub result: &'a mut [f64],
+    /// Native `ErrorCode` output; nonzero stops the current approximation.
+    pub error_code: &'a mut i32,
 }
 
 impl<F> AdvApproxEvaluatorFunction for F

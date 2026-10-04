@@ -98,6 +98,7 @@ def append_simple_requests(rng: random.Random, requests: list[str]) -> None:
                                                      rng.uniform(-1, 0), rng.uniform(0.3, 2.0),
                                                      rng.choice([1, 5, 13]), rng.choice([1e-3, 1e-8]), ]))
     requests.append('g3_advapprox_simple ' + fmt([0, 0, 0, 1, 1, 3, 1, 13, 0.0, 1.0, 13, 1e-6]))
+    requests.append('g3_advapprox_simple ' + fmt([0, 3, 0, 1, 2, 1, 1, 13, 0.0, 1.0, 13, 1e-6]))
 
 
 def append_cut_requests(rng: random.Random, requests: list[str]) -> None:

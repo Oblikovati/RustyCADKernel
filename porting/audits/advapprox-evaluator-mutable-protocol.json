@@ -1,0 +1,82 @@
+{
+  "scope": "AdvApprox_EvaluatorFunction mutable callback protocol",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "evidence": {
+    "cpp_header": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
+      "sha256": "3e372e0a6814e27e3ebe0a2b072a09a46e1777ad050e1eb79dae15e34a1c02fa"
+    },
+    "cpp_caller": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.cxx",
+      "sha256": "2124ff707e8903ffe838be2c5b10f942b65c735eb192fe8eb4e8be5efc72cdca"
+    },
+    "libTKG3d": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKG3d.so",
+      "sha256": "d2a97b6904ce5c80b63da669e68e99b3f240269dec51a262a4746b9b236584f4"
+    },
+    "libTKG2d": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKG2d.so",
+      "sha256": "994da30dc1348ee9427b8bb453417ea4a3c4a6c6856fb2c0ab5c36bf816046ce"
+    },
+    "libTKMath": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKMath.so",
+      "sha256": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8"
+    },
+    "libTKernel": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKernel.so",
+      "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    },
+    "probe": {
+      "path": "tools/oracle/tkg3d_probe_advapprox.cxx",
+      "sha256": "0c99e576f49ec5153d7af9fab2833c8fbdc0a4f361a148197d8fe9f622dce34a"
+    },
+    "corpus": {
+      "path": "tools/tkg3d_corpus_advapprox.py",
+      "sha256": "103d45eb1cd9d610146cd94e37e2b7693d19a887c346a46c1927258202da605f"
+    },
+    "rust_trait": {
+      "path": "crates/tkg3d/src/adv_approx/evaluator.rs",
+      "sha256": "4ee864faf30a4abb06eb5261ef3328937af8e5344bb4499f8f6d8ce418f88c5c"
+    },
+    "rust_caller": {
+      "path": "crates/tkg3d/src/adv_approx/simple_approx.rs",
+      "sha256": "ad154aa13452bab414764fe1691b981cd4fa66b4ca35a6b336112a66d73992f3"
+    },
+    "rust_state": {
+      "path": "crates/tkg3d/src/adv_approx/simple_approx/evaluation.rs",
+      "sha256": "34d90530dbb91263cb8d18f9a2022f8b6d068624a224252434936bf049ac74ac"
+    },
+    "rust_probe": {
+      "path": "crates/tkg3d/examples/g3_probe/advapprox.rs",
+      "sha256": "dd2798b312ef774d6e11d8a249b2fa2c62fbd0ef474384605e63ae16ed7a3d87"
+    },
+    "inputs": {
+      "path": "target/oracle-tkg3d/numeric/inputs.txt",
+      "sha256": "e927d9afec44c22c99ae37fe7c659e1e4764dc6ca61992142574222d7e569e6d"
+    },
+    "native_output": {
+      "path": "target/oracle-tkg3d/numeric/native.txt",
+      "sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+    },
+    "rust_output": {
+      "path": "target/oracle-tkg3d/numeric/rust.txt",
+      "sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+    },
+    "numeric_report": {
+      "path": "target/oracle-tkg3d/numeric/report.json",
+      "sha256": "c6bd2c39a2313e47c9e5afdc3daf5031b68d4654a53e607d3b6747e76d56bbe1"
+    }
+  },
+  "probe_case": {
+    "request": "g3_advapprox_simple 0 3 0 1 2 1 1 13 0.0 1.0 13 1e-06",
+    "behavior": "The first callback changes Parameter and StartEnd; the first Gauss callback changes DerivativeRequest. Later callbacks observe those mutated values. Dimension stays within allocated result storage.",
+    "native_rust_output_identical": true,
+    "native_output_sha256": "56e72f2fa77f3027b8d513a72e8bd6d91b54dcce30e3690f600ff11c0c2164fc"
+  },
+  "verification": {
+    "numeric": "4695 TKG3d comparisons exact finite bits and NaN classification",
+    "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-tkgeombase-callable-gap-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 python3 tools/verify_tkg3d_numeric.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --native-build /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full",
+    "tests": "cargo test -p rustycad-tkg3d -q passed; strict all-target clippy passed",
+    "defined_domain": "Mutation of dimension beyond the original result allocation remains excluded because the native callback can write out of bounds."
+  }
+}
