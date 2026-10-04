@@ -2,6 +2,7 @@
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <Geom_BezierSurface.hxx>
 #include <Geom_BSplineSurface.hxx>
+#include <Geom_Surface.hxx>
 #include <IntTools_BeanFaceIntersector.hxx>
 #include <NCollection_Array1.hxx>
 #include <NCollection_Array2.hxx>
@@ -60,6 +61,68 @@ static TopoDS_Face MakeBSplineFace(bool located)
   return face;
 }
 
+static NCollection_Array2<gp_Pnt> MakeCurvedBezierPoles()
+{
+  NCollection_Array2<gp_Pnt> poles(1, 3, 1, 3);
+  for (int u = 1; u <= 3; ++u)
+  {
+    for (int v = 1; v <= 3; ++v)
+    {
+      const double x = static_cast<double>(u - 1) / 2.;
+      const double y = static_cast<double>(v - 1) / 2.;
+      const double z = u == 2 ? 0.3 : 0.;
+      poles.SetValue(u, v, gp_Pnt(x, y, z));
+    }
+  }
+  return poles;
+}
+
+static NCollection_Array2<gp_Pnt> MakeCurvedBSplinePoles()
+{
+  NCollection_Array2<gp_Pnt> poles(1, 6, 1, 6);
+  for (int u = 1; u <= 6; ++u)
+  {
+    for (int v = 1; v <= 6; ++v)
+    {
+      const double x = static_cast<double>(u - 1) / 5.;
+      const double y = static_cast<double>(v - 1) / 5.;
+      const double z = 0.24 * x * y + 0.12 * x * x + 0.08 * y * y;
+      poles.SetValue(u, v, gp_Pnt(x, y, z));
+    }
+  }
+  return poles;
+}
+
+static TopoDS_Face MakeLocatedFace(const occ::handle<Geom_Surface>& surface, bool located)
+{
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(surface, 0., 1., 0., 1., 1.e-7);
+  if (!located)
+  {
+    return face;
+  }
+  gp_Trsf transform;
+  transform.SetTranslation(gp_Vec(10., -4., 3.));
+  face.Location(TopLoc_Location(transform));
+  return face;
+}
+
+static TopoDS_Face MakeCurvedBezierFace(bool located)
+{
+  occ::handle<Geom_BezierSurface> surface = new Geom_BezierSurface(MakeCurvedBezierPoles());
+  return MakeLocatedFace(surface, located);
+}
+
+static TopoDS_Face MakeCurvedBSplineFace(bool located)
+{
+  NCollection_Array1<double> knots(1, 3);
+  NCollection_Array1<int> mults(1, 3);
+  knots.SetValue(1, 0.); knots.SetValue(2, 0.5); knots.SetValue(3, 1.);
+  mults.SetValue(1, 4); mults.SetValue(2, 2); mults.SetValue(3, 4);
+  occ::handle<Geom_BSplineSurface> surface = new Geom_BSplineSurface(
+    MakeCurvedBSplinePoles(), knots, knots, mults, mults, 3, 3, false, false);
+  return MakeLocatedFace(surface, located);
+}
+
 static TopoDS_Edge MakeCrossingEdge(bool located)
 {
   const gp_Vec offset = located ? gp_Vec(10., -4., 3.) : gp_Vec(0., 0., 0.);
@@ -93,5 +156,9 @@ int main()
   Run("bezier_located", MakeBezierFace(true), true);
   Run("bspline", MakeBSplineFace(false), false);
   Run("bspline_located", MakeBSplineFace(true), true);
+  Run("bezier_curved", MakeCurvedBezierFace(false), false);
+  Run("bezier_curved_located", MakeCurvedBezierFace(true), true);
+  Run("bspline_curved", MakeCurvedBSplineFace(false), false);
+  Run("bspline_curved_located", MakeCurvedBSplineFace(true), true);
   return 0;
 }

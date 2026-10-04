@@ -11,7 +11,7 @@ use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAP
 
 #[test]
 fn public_perform_matches_curved_surface_native_ranges_and_repeat_calls() {
-    for surface in ["bezier", "bspline"] {
+    for surface in ["bezier", "bspline", "bezier_curved", "bspline_curved"] {
         for located in [false, true] {
             assert_public_case(surface, located);
         }
@@ -87,10 +87,11 @@ fn crossing_edge(located: bool) -> Edge {
 }
 
 fn curved_face(surface: &str, located: bool) -> Face {
-    let geometry = if surface == "bezier" {
-        bezier_surface()
-    } else {
-        bspline_surface()
+    let geometry = match surface {
+        "bezier" => bezier_surface(),
+        "bspline" => bspline_surface(),
+        "bezier_curved" => curved_bezier_surface(),
+        _ => curved_bspline_surface(),
     };
     let mut face =
         BRepBuilderAPIMakeFace::from_surface_bounds(&geometry, (0.0, 1.0, 0.0, 1.0), 1e-7)
@@ -121,6 +122,41 @@ fn bspline_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface> {
             let x = f64::from(u - 1) / 5.0;
             let y = f64::from(v - 1) / 5.0;
             poles[(u, v)] = Point3::new(x, y, 0.08 * x * y);
+        }
+    }
+    let (knots, multiplicities) = cubic_knots();
+    let spline = GeomBSplineSurface::new(
+        &poles,
+        (&knots, &multiplicities),
+        (&knots, &multiplicities),
+        (3, 3),
+        (false, false),
+    )
+    .unwrap();
+    rustycad_tkernel::standard::Handle::new(spline).cast()
+}
+
+fn curved_bezier_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface> {
+    let mut poles = Array2::with_bounds(1, 3, 1, 3).unwrap();
+    for u in 1..=3 {
+        for v in 1..=3 {
+            let x = f64::from(u - 1) / 2.0;
+            let y = f64::from(v - 1) / 2.0;
+            let z = if u == 2 { 0.3 } else { 0.0 };
+            poles[(u, v)] = Point3::new(x, y, z);
+        }
+    }
+    rustycad_tkernel::standard::Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
+}
+
+fn curved_bspline_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface> {
+    let mut poles = Array2::with_bounds(1, 6, 1, 6).unwrap();
+    for u in 1..=6 {
+        for v in 1..=6 {
+            let x = f64::from(u - 1) / 5.0;
+            let y = f64::from(v - 1) / 5.0;
+            let z = 0.24 * x * y + 0.12 * x * x + 0.08 * y * y;
+            poles[(u, v)] = Point3::new(x, y, z);
         }
     }
     let (knots, multiplicities) = cubic_knots();
