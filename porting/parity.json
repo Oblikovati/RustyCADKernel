@@ -83061,7 +83061,7 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
       "rust_item": "rustycad_tkernel::standard::MMgrOpt::free_system_memory",
       "status": "partial",
-      "notes": "The safe facade validates the region and releases it with the exact size returned by AllocMemory. It marks the non-Copy token released after success; validation uses the current region base and size, without a generation identifier. Native FreeMemory uses PAGE_ALIGN(theSize), so a smaller size can validly unmap only a prefix; Rust rejects that transition because AddressSpace tracks whole regions. Native candidate id fa1d13d431ed54bf5519fee6aafdc78a32cb578bb0b790e27857a766b219d599 / USR c:@S@Standard_MMgrOpt@F@FreeMemory#*v#l#; header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22."
+      "notes": "The checked facade matches heap mode by ignoring size and mapped mode by page-aligning the requested prefix, rekeying any remaining suffix, and marking the non-Copy token released when all tracked bytes are gone. Prefix trimming is logical: the Vec backing remains allocated until the suffix is released. It rejects a mapped range that would extend beyond its tracked region because AddressSpace cannot model collateral release of adjacent mappings. Validation uses the current region base and size, without a generation identifier. Native candidate id fa1d13d431ed54bf5519fee6aafdc78a32cb578bb0b790e27857a766b219d599 / USR c:@S@Standard_MMgrOpt@F@FreeMemory#*v#l#; header SHA-256 9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22."
     },
     {
       "upstream_id": "Standard_MMgrOpt::~Standard_MMgrOpt()",

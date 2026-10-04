@@ -45,6 +45,26 @@ impl AddressSpace {
     pub(super) fn release(&mut self, start: usize) -> bool {
         self.regions.remove(&start).is_some()
     }
+    /// Unmaps a prefix and relocates the tracked suffix; `space.trim_prefix(base, 4096)`.
+    pub(super) fn trim_prefix(&mut self, start: usize, length: usize) -> Option<(usize, usize)> {
+        let region_length = self.region_len(start)?;
+        if length > region_length {
+            return None;
+        }
+        if length == 0 {
+            return Some((start, region_length));
+        }
+        let mut region = self.regions.remove(&start)?;
+        if length == region_length {
+            return Some((0, 0));
+        }
+        region.offset += length;
+        region.length -= length;
+        let suffix = start + length;
+        let suffix_length = region.length;
+        self.regions.insert(suffix, region);
+        Some((suffix, suffix_length))
+    }
     /// Returns a region's complete mapped length only at its base address.
     pub(super) fn region_len(&self, start: usize) -> Option<usize> {
         self.regions.get(&start).map(|region| region.length)

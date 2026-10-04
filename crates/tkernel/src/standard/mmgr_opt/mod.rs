@@ -155,25 +155,68 @@ impl MMgrOpt {
             .ok_or_else(|| invalid_system_block(block.address, block.allocated_size))
     }
 
-    /// Releases a raw region with its exact returned size; `manager.free_system_memory(&mut block, size)?`.
-    /// Native `FreeMemory` permits smaller mapped sizes that partially unmap a region; this safe
-    /// facade rejects those calls because its `AddressSpace` owns complete regions.
+    /// Releases memory with native size semantics; `manager.free_system_memory(&mut block, size)?`.
+    /// Heap mode ignores `size`; mapped mode unmaps its page-rounded prefix and moves `block` to any
+    /// surviving suffix. Oversized ranges are rejected if they would cross this tracked region.
     pub fn free_system_memory(
         &mut self,
         block: &mut MMgrOptSystemBlock,
         size: usize,
     ) -> Result<(), Failure> {
-        if size != block.allocated_size {
+        self.validate_system_block(block)?;
+        if !self.mmap {
+            self.free_heap_system_block(block);
+            return Ok(());
+        }
+        self.free_mapped_system_prefix(block, size)?;
+        Ok(())
+    }
+
+    fn free_heap_system_block(&mut self, block: &mut MMgrOptSystemBlock) {
+        self.free_memory(block.address.get());
+        block.released = true;
+    }
+
+    fn free_mapped_system_prefix(
+        &mut self,
+        block: &mut MMgrOptSystemBlock,
+        size: usize,
+    ) -> Result<(), Failure> {
+        if size > block.allocated_size {
             return Err(invalid_system_size(
                 block.address,
                 size,
                 block.allocated_size,
             ));
         }
-        self.validate_system_block(block)?;
-        self.free_memory(block.address.get());
-        block.released = true;
+        let length = page_align(size, self.page_size);
+        if length > block.allocated_size {
+            return Err(invalid_system_size(
+                block.address,
+                size,
+                block.allocated_size,
+            ));
+        }
+        let (suffix, remaining) = self
+            .space
+            .trim_prefix(block.address.get(), length)
+            .ok_or_else(|| invalid_system_block(block.address, block.allocated_size))?;
+        self.update_system_block_after_unmap(block, suffix, remaining);
         Ok(())
+    }
+
+    fn update_system_block_after_unmap(
+        &self,
+        block: &mut MMgrOptSystemBlock,
+        suffix: usize,
+        remaining: usize,
+    ) {
+        if remaining == 0 {
+            block.released = true;
+            return;
+        }
+        block.address = StorageAddress::new(suffix).expect("a live suffix address is nonzero");
+        block.allocated_size = remaining;
     }
 
     fn validate_system_block(&self, block: &MMgrOptSystemBlock) -> Result<(), Failure> {
@@ -403,7 +446,7 @@ fn invalid_system_block(address: StorageAddress, size: usize) -> Failure {
 
 fn invalid_system_size(address: StorageAddress, provided: usize, expected: usize) -> Failure {
     exceptions::program_error(&format!(
-        "Standard_MMgrOpt: FreeMemory size {provided} for region {:#x} does not match its AllocMemory size; expected {expected}",
+        "Standard_MMgrOpt: FreeMemory size {provided} for region {:#x} exceeds its mapped size; expected at most {expected}",
         address.get()
     ))
 }

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "scope": "Standard_MMgrOpt::FreeMemory size-driven release",
+  "tested_rust_base_revision": "aa1f4d65383e4229a1895ee788ea45d11b7613a9",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_files": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "declaration_id": "fa1d13d431ed54bf5519fee6aafdc78a32cb578bb0b790e27857a766b219d599",
+  "native_probe": {
+    "path": "tools/oracle/tkernel_mmgr_alloc_memory.cxx",
+    "sha256": "ae5587e97507502f81ea67debe9a17032891758b2964657a1d4523d93a6f17a6",
+    "expected_path": "tools/oracle/tkernel_mmgr_alloc_memory.expected",
+    "expected_sha256": "18707b23f156e5bc1771750b5a352b8cb22b493bc36fc879c8f8bcf6e2b230a7",
+    "native_library_sha256": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b",
+    "observed": "page=4096 mapped_size=1 mapped_zero=1 partial_tail=1 zero_size_noop=1 malloc_size=1 malloc_zero=1 heap_free_size_ignored=1"
+  },
+  "rust_validation": {
+    "command": "cargo test -p rustycad-tkernel --test standard_services_api_behavior mmgr -- --nocapture",
+    "passed": 19,
+    "failed": 0,
+    "compressed_log": "porting/runtime-evidence/tkernel-mmgr-free-memory-rust-tests.log.gz",
+    "compressed_log_sha256": "cb890d70075a011479055fd00ebffd317313493bf1190eda2f01956ac2d3142a",
+    "rust_source_sha256": "3c1ae15155b16701a5e3cf1f304fd155dd71c93813660113edd07b24e355a1a7",
+    "address_space_sha256": "53f08d64a7cfcb55060bbf7c5826d3c9c71c1f3cffb834282431ac50ef93f579",
+    "test_source_sha256": "77c877d486e3cd92f3300ff836deb81e0570705048cbecb9e8c75af59f8d0578",
+    "parity_ledger_sha256": "b93c3b79f8a05c5b0761f91ca452023c0b35846d4a954d8b36185661813e7ac0"
+  },
+  "supported_transitions": [
+    "Mapped size is rounded up to a page before releasing a prefix.",
+    "Mapped size zero is a no-op because native munmap rejects zero and FreeMemory ignores its result.",
+    "A smaller mapped free rekeys the tracked suffix and adjusts the opaque token.",
+    "Heap mode ignores its size argument and frees the whole region."
+  ],
+  "remaining_limits": [
+    "Mapped sizes that extend beyond the tracked region are rejected; native may release adjacent mappings.",
+    "Prefix trimming is logical and retains the Vec backing allocation until the tracked suffix is released.",
+    "Heap clear=false contents are safely zero-initialized, and non-Linux mapping backends remain unverified."
+  ]
+}
