@@ -12,18 +12,20 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Direction2, Line2, Point2, Vector2};
 
-// The native `UnionPCurves` also has seam-aware duplicate support passes. This port
-// handles each distinct support independently and leaves seam occurrences untouched.
+// Native handles a seam by processing each chain occurrence in both edge orientations,
+// then stores the two resulting p-curves on the merged edge.
 
-/// Mirrors native same-support and C1 concatenation branches for non-seam faces.
+/// Mirrors native support selection and p-curve union for each merged edge chain.
 pub(super) fn union_pcurves(
     shape: &Shape,
     first: &Edge,
     second: &Edge,
     merged: &Edge,
 ) -> Result<(), Failure> {
-    for face in nonplanar_supports(shape, first)? {
-        union_pcurves_on_face(&face, first, second, merged)?;
+    let supports = nonplanar_supports(shape, first)?;
+    let detect_seam = supports.len() == 1;
+    for face in supports {
+        union_pcurves_on_face(&face, first, second, merged, detect_seam)?;
     }
     Ok(())
 }
@@ -69,35 +71,73 @@ fn union_pcurves_on_face(
     first: &Edge,
     second: &Edge,
     merged: &Edge,
+    detect_seam: bool,
 ) -> Result<(), Failure> {
-    if is_seam_pair(first, second, face)? {
-        return Ok(());
+    let seam = detect_seam && is_seam_pair(first, face)?;
+    let primary = merged_pcurve_pass(face, merged, first, second, false)?;
+    if !seam {
+        return store_single_pcurve(face, merged, &primary);
     }
-    let first = stored_oriented_pcurve(first, face)?;
-    let second = stored_oriented_pcurve(second, face)?;
-    union_supported_pair(face, merged, &first, &second)
+    let secondary = merged_pcurve_pass(face, merged, first, second, true)?;
+    store_seam_pcurves(face, merged, &primary, &secondary)
 }
 
-fn union_supported_pair(
+fn store_single_pcurve(face: &Face, merged: &Edge, result: &MergedPCurve) -> Result<(), Failure> {
+    let (surface, location) = BRepTool::surface_with_location(face)?;
+    let tolerance = BRepTool::edge_tolerance(merged)?;
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurve(merged, &result.curve, &surface, &location, tolerance, None)?;
+    builder.range_on_surface(merged, &surface, &location, result.range.0, result.range.1)
+}
+
+fn store_seam_pcurves(
     face: &Face,
+    merged: &Edge,
+    primary: &MergedPCurve,
+    secondary: &MergedPCurve,
+) -> Result<(), Failure> {
+    let (surface, location) = BRepTool::surface_with_location(face)?;
+    let tolerance = BRepTool::edge_tolerance(merged)?;
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurves(
+        merged,
+        (&primary.curve, &secondary.curve),
+        &surface,
+        &location,
+        tolerance,
+        None,
+    )?;
+    builder.range_on_surface(
+        merged,
+        &surface,
+        &location,
+        primary.range.0,
+        primary.range.1,
+    )
+}
+
+fn merged_pcurve_pass(
+    face: &Face,
+    merged: &Edge,
+    first: &Edge,
+    second: &Edge,
+    reverse_occurrences: bool,
+) -> Result<MergedPCurve, Failure> {
+    let first = stored_oriented_pcurve(first, face, reverse_occurrences)?;
+    let second = stored_oriented_pcurve(second, face, reverse_occurrences)?;
+    if let Some(result) = merge_same_support_lines(merged, &first, &second)? {
+        return Ok(result);
+    }
+    merge_matching_or_general_curve(merged, &first, &second)
+}
+
+fn merge_matching_or_general_curve(
     merged: &Edge,
     first: &OrientedPCurve,
     second: &OrientedPCurve,
-) -> Result<(), Failure> {
-    if union_same_support_lines(face, merged, first, second)? {
-        return Ok(());
-    }
-    union_matching_or_general_curve(face, merged, first, second)
-}
-
-fn union_matching_or_general_curve(
-    face: &Face,
-    merged: &Edge,
-    first: &OrientedPCurve,
-    second: &OrientedPCurve,
-) -> Result<(), Failure> {
+) -> Result<MergedPCurve, Failure> {
     if same_pcurve_handle(first, second) {
-        return store_single_pcurve(face, merged, first);
+        return single_pcurve_result(first);
     }
     if has_one_stored_curve(first, second) {
         let source = if first.pcurve.is_stored {
@@ -105,9 +145,50 @@ fn union_matching_or_general_curve(
         } else {
             second
         };
-        return store_single_pcurve(face, merged, source);
+        return single_pcurve_result(source);
     }
-    super::pcurve_concat::union_general_curves(face, merged, first, second)
+    general_pcurve_result(merged, first, second)
+}
+
+fn general_pcurve_result(
+    merged: &Edge,
+    first: &OrientedPCurve,
+    second: &OrientedPCurve,
+) -> Result<MergedPCurve, Failure> {
+    let Some(spline) = super::pcurve_concat::concatenate_general_curves(merged, first, second)?
+    else {
+        return single_pcurve_result(first);
+    };
+    let first_parameter = spline.first_parameter();
+    let last_parameter = spline.last_parameter();
+    Ok(MergedPCurve {
+        curve: spline.cast(),
+        range: (first_parameter, last_parameter),
+    })
+}
+
+struct MergedPCurve {
+    curve: Handle<dyn Geom2dCurve>,
+    range: (f64, f64),
+}
+
+fn single_pcurve_result(source: &OrientedPCurve) -> Result<MergedPCurve, Failure> {
+    let curve = source.pcurve.pcurve.copy()?.cast::<dyn Geom2dCurve>();
+    let mut range = (source.pcurve.first, source.pcurve.last);
+    if source.edge_orientation == Orientation::Reversed {
+        range = (
+            curve
+                .get()
+                .ok_or_else(null_pcurve)?
+                .reversed_parameter(range.1)?,
+            curve
+                .get()
+                .ok_or_else(null_pcurve)?
+                .reversed_parameter(range.0)?,
+        );
+        curve.get().ok_or_else(null_pcurve)?.reverse()?;
+    }
+    Ok(MergedPCurve { curve, range })
 }
 
 fn has_one_stored_curve(first: &OrientedPCurve, second: &OrientedPCurve) -> bool {
@@ -118,39 +199,24 @@ fn same_pcurve_handle(first: &OrientedPCurve, second: &OrientedPCurve) -> bool {
     !first.pcurve.pcurve.is_null() && first.pcurve.pcurve == second.pcurve.pcurve
 }
 
-fn store_single_pcurve(face: &Face, merged: &Edge, source: &OrientedPCurve) -> Result<(), Failure> {
-    let curve = source.pcurve.pcurve.copy()?.cast::<dyn Geom2dCurve>();
-    reverse_single_pcurve(source, &curve)?;
-    let (surface, location) = BRepTool::surface_with_location(face)?;
-    let tolerance = BRepTool::edge_tolerance(merged)?;
-    BRepBuilder::default().update_edge_pcurve(merged, &curve, &surface, &location, tolerance, None)
-}
-
-fn reverse_single_pcurve(
-    source: &OrientedPCurve,
-    curve: &Handle<dyn Geom2dCurve>,
-) -> Result<(), Failure> {
-    if source.edge_orientation == Orientation::Reversed {
-        curve.get().ok_or_else(null_pcurve)?.reverse()?;
-    }
-    Ok(())
-}
-
-fn union_same_support_lines(
-    face: &Face,
+fn merge_same_support_lines(
     merged: &Edge,
     first: &OrientedPCurve,
     second: &OrientedPCurve,
-) -> Result<bool, Failure> {
+) -> Result<Option<MergedPCurve>, Failure> {
     let Some((first_line, _)) = line_pair(first, second)? else {
-        return Ok(false);
+        return Ok(None);
     };
     let Some(extension) = joined_line_range(second, first_line)? else {
-        return Ok(false);
+        return Ok(None);
     };
     let range = extend_native_range(first, extension, first.edge_orientation);
-    store_reparameterized_line(face, merged, first_line, range)?;
-    Ok(true)
+    let edge_range = BRepTool::range(merged)?;
+    let pcurve = reparameterized_line(first_line, range, edge_range);
+    Ok(Some(MergedPCurve {
+        curve: Handle::new(pcurve).cast(),
+        range: edge_range,
+    }))
 }
 
 fn null_pcurve() -> Failure {
@@ -161,8 +227,14 @@ fn null_pcurve() -> Failure {
     )
 }
 
-fn is_seam_pair(first: &Edge, second: &Edge, face: &Face) -> Result<bool, Failure> {
-    Ok(BRepTool::is_closed_on_face(first, face)? || BRepTool::is_closed_on_face(second, face)?)
+fn is_seam_pair(first: &Edge, face: &Face) -> Result<bool, Failure> {
+    let mut support = face.clone();
+    support.set_orientation(Orientation::Forward);
+    let forward = BRepTool::curve_on_face(first, &support)?;
+    let mut reversed_occurrence = first.clone();
+    reversed_occurrence.reverse();
+    let reversed = BRepTool::curve_on_face(&reversed_occurrence, &support)?;
+    Ok(forward.pcurve != reversed.pcurve)
 }
 
 pub(super) struct OrientedPCurve {
@@ -171,13 +243,21 @@ pub(super) struct OrientedPCurve {
     pub(super) pcurve: rustycad_tkbrep::brep::EdgePCurve,
 }
 
-fn stored_oriented_pcurve(edge: &Edge, face: &Face) -> Result<OrientedPCurve, Failure> {
+fn stored_oriented_pcurve(
+    edge: &Edge,
+    face: &Face,
+    reverse_occurrence: bool,
+) -> Result<OrientedPCurve, Failure> {
     let mut support = face.clone();
     support.set_orientation(Orientation::Forward);
+    let mut occurrence = edge.clone();
+    if reverse_occurrence {
+        occurrence.reverse();
+    }
     Ok(OrientedPCurve {
         source_edge: edge.clone(),
         edge_orientation: edge.orientation(),
-        pcurve: BRepTool::curve_on_face(edge, &support)?,
+        pcurve: BRepTool::curve_on_face(&occurrence, &support)?,
     })
 }
 
@@ -306,26 +386,53 @@ fn line_parameter(line: Line2, point: Point2) -> f64 {
         .dot(Vector2::new(line.direction().x(), line.direction().y()))
 }
 
-fn store_reparameterized_line(
-    face: &Face,
-    merged: &Edge,
-    line: Line2,
-    range: (f64, f64),
-) -> Result<(), Failure> {
-    let (surface, location) = BRepTool::surface_with_location(face)?;
-    let (first_3d, last_3d) = BRepTool::range(merged)?;
-    let pcurve = reparameterized_line(line, range, (first_3d, last_3d));
-    let curve: Handle<dyn Geom2dCurve> = Handle::new(pcurve).cast();
-    let tolerance = BRepTool::edge_tolerance(merged)?;
-    let builder = BRepBuilder::default();
-    builder.update_edge_pcurve(merged, &curve, &surface, &location, tolerance, None)?;
-    builder.range_on_surface(merged, &surface, &location, first_3d, last_3d)
-}
-
 fn reparameterized_line(line: Line2, range: (f64, f64), edge_range: (f64, f64)) -> Geom2dLine {
     let start = line.location().translated(Vector2::new(
         line.direction().x() * (range.0 - edge_range.0),
         line.direction().y() * (range.0 - edge_range.0),
     ));
     Geom2dLine::from_lin2d(Line2::new(start, line.direction()))
+}
+
+#[cfg(test)]
+mod tests {
+    use rustycad_tkbrep::topods::{Face, Shape};
+    use rustycad_tkbrep::{brep::BRepTool, topexp::Explorer};
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder;
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+
+    #[test]
+    fn current_rust_cylinder_primitive_lacks_native_seam_representation() {
+        let shape = make_cylinder_shape();
+        // This records a fixture prerequisite gap; it does not exercise seam union.
+        assert!(!contains_seam_edge(&shape));
+    }
+
+    fn make_cylinder_shape() -> Shape {
+        let mut cylinder = BRepPrimAPIMakeCylinder::new(2.0, 5.0);
+        cylinder.shape().unwrap().clone()
+    }
+
+    fn contains_seam_edge(shape: &Shape) -> bool {
+        for candidate in Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
+            let face = rustycad_tkbrep::topods::face(&candidate).unwrap();
+            if face_contains_seam_edge(&face) {
+                return true;
+            }
+        }
+        false
+    }
+
+    fn face_contains_seam_edge(face: &Face) -> bool {
+        for candidate in
+            Explorer::new(&face.clone().into_shape(), ShapeEnum::Edge, ShapeEnum::Face).unwrap()
+        {
+            let edge = rustycad_tkbrep::topods::edge(&candidate).unwrap();
+            if BRepTool::is_closed_on_face(&edge, face).unwrap() {
+                return true;
+            }
+        }
+        false
+    }
 }
