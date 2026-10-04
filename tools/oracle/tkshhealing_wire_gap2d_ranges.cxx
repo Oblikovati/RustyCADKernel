@@ -15,6 +15,7 @@
 #include <TopoDS_Wire.hxx>
 #include <TopExp_Explorer.hxx>
 #include <gp_Pln.hxx>
+#include <gp_Elips.hxx>
 #include <iomanip>
 #include <iostream>
 
@@ -114,6 +115,21 @@ void run_single_circular_arc() {
   print_result("single_circular_arc", tool, changed);
 }
 
+void run_single_elliptical_arc() {
+  BRep_Builder builder;
+  TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Elips(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 3.0, 1.0), 0.0, 1.0);
+  TopoDS_Wire wire;
+  builder.MakeWire(wire);
+  builder.Add(wire, edge);
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Pln()), 1e-7);
+  builder.Add(face, wire);
+  ShapeFix_Wire tool;
+  tool.Load(wire);
+  tool.SetFace(face);
+  print_result("single_elliptical_arc", tool, tool.FixGap2d(1, false));
+}
+
 void run_trimmed_surface_clip() {
   BRep_Builder builder;
   TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0));
@@ -137,6 +153,7 @@ int main() {
   run_crossing_lines();
   run_reversed_crossing_lines();
   run_single_circular_arc();
+  run_single_elliptical_arc();
   run_parallel_projection();
   run_trimmed_surface_clip();
 }

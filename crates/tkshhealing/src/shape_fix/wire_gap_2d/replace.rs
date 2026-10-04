@@ -40,29 +40,33 @@ pub(super) fn replace_pcurves_with_ranges(
     entries: (&PcurveGap, &PcurveGap),
     curves: (&Option<CurveRepair>, &Option<CurveRepair>),
 ) -> Result<(), Failure> {
+    let (before, after) = neighboring_vertices(tool, entries)?;
+    let first_vertices = (&Vertex::default(), &before);
+    let second_vertices = (&after, &Vertex::default());
+    replace_entry(tool, face, entries.0, curves.0, first_vertices)?;
+    replace_entry(tool, face, entries.1, curves.1, second_vertices)
+}
+
+fn neighboring_vertices(
+    tool: &ShapeFixWire,
+    entries: (&PcurveGap, &PcurveGap),
+) -> Result<(Vertex, Vertex), Failure> {
     let analysis = ShapeAnalysisEdge::new();
     let first = analysis.last_vertex(&entries.0.edge);
     let last = analysis.first_vertex(&entries.1.edge);
     let after = copy_gap_vertex(tool, &last)?;
-    let before = if first.is_same(&last) {
-        topods::vertex(&after.oriented(Orientation::Reversed))?
-    } else {
-        copy_gap_vertex(tool, &first)?
-    };
-    replace_pcurve(
-        tool,
-        face,
-        entries.0,
-        curves.0,
-        (&Vertex::default(), &before),
-    )?;
-    replace_pcurve(
-        tool,
-        face,
-        entries.1,
-        curves.1,
-        (&after, &Vertex::default()),
-    )
+    let before = clone_other_end(tool, &first, &last, &after)?;
+    Ok((before, after))
+}
+
+fn replace_entry(
+    tool: &ShapeFixWire,
+    face: &Face,
+    entry: &PcurveGap,
+    curve: &Option<CurveRepair>,
+    vertices: (&Vertex, &Vertex),
+) -> Result<(), Failure> {
+    replace_pcurve(tool, face, entry, curve, vertices)
 }
 
 pub(super) fn replace_single_pcurve_range(
@@ -72,11 +76,18 @@ pub(super) fn replace_single_pcurve_range(
     curve: &Handle<dyn Geom2dCurve>,
     range: (f64, f64),
 ) -> Result<(), Failure> {
-    let analysis = ShapeAnalysisEdge::new();
-    let first = analysis.last_vertex(&entry.edge);
-    let last = analysis.first_vertex(&entry.edge);
-    let after = copy_gap_vertex(tool, &last)?;
-    let before = clone_other_end(tool, &first, &last, &after)?;
+    let (before, _) = neighboring_vertices(tool, (entry, entry))?;
+    replace_single_curve(tool, face, entry, curve, range, &before)
+}
+
+fn replace_single_curve(
+    tool: &ShapeFixWire,
+    face: &Face,
+    entry: &PcurveGap,
+    curve: &Handle<dyn Geom2dCurve>,
+    range: (f64, f64),
+    before: &Vertex,
+) -> Result<(), Failure> {
     replace_pcurve(
         tool,
         face,
@@ -86,7 +97,7 @@ pub(super) fn replace_single_pcurve_range(
             first: range.0,
             last: range.1,
         }),
-        (&Vertex::default(), &before),
+        (&Vertex::default(), before),
     )
 }
 
@@ -113,13 +124,21 @@ fn replace_pcurve(
     };
     let mut replacement =
         ShapeBuildEdge.copy_replace_vertices(&entry.edge, vertices.0, vertices.1)?;
+    update_replacement_pcurve(&mut replacement, face, curve)?;
+    preserve_gap_nonmanifold(tool, &entry.edge, &mut replacement)?;
+    ReShape::replace(&*tool.context(), &entry.edge, &replacement)?;
+    tool.wire_data()?.set(&replacement, entry.index)
+}
+
+fn update_replacement_pcurve(
+    replacement: &mut rustycad_tkbrep::topods::Edge,
+    face: &Face,
+    curve: &CurveRepair,
+) -> Result<(), Failure> {
     let forward = topods::edge(&replacement.oriented(Orientation::Forward))?;
     let builder = BRepBuilder::default();
     builder.update_edge_pcurve_on_face(&forward, &curve.curve, face, 0.)?;
     builder.range_on_face(&forward, face, curve.first, curve.last)?;
-    ShapeFixShapeTolerance.set_tolerance(&replacement, precision::confusion(), ShapeEnum::Edge)?;
-    builder.same_range(&replacement, false)?;
-    preserve_gap_nonmanifold(tool, &entry.edge, &mut replacement)?;
-    ReShape::replace(&*tool.context(), &entry.edge, &replacement)?;
-    tool.wire_data()?.set(&replacement, entry.index)
+    ShapeFixShapeTolerance.set_tolerance(replacement, precision::confusion(), ShapeEnum::Edge)?;
+    builder.same_range(replacement, false)
 }

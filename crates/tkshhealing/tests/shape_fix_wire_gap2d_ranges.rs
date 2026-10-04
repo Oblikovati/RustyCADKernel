@@ -5,7 +5,7 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomRectangularTrimmedSurface, GeomSurface};
-use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Point3};
+use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Ellipse3, Point3};
 use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixWire};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
@@ -111,6 +111,28 @@ fn one_edge_circular_pcurve_expands_both_parameter_ends() {
     );
 }
 
+#[test]
+fn one_edge_elliptical_pcurve_expands_both_parameter_ends() {
+    let (face, wire) = one_elliptical_arc_wire();
+    let tool = ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    tool.set_face(&face).unwrap();
+    assert!(tool.fix_gap_2d(1, false).unwrap());
+    assert_line_observation(
+        &tool,
+        &face,
+        1,
+        [
+            -2.641592653589793,
+            3.641592653589793,
+            -2.6327476856711183,
+            -0.479425538604203,
+            -2.6327476856711183,
+            -0.4794255386042027,
+        ],
+    );
+}
+
 fn crossing_line_wire() -> (Face, Wire) {
     let first = edge_between(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0));
     let second = edge_between(Point3::new(1.0, 0.2, 0.0), Point3::new(2.0, 1.2, 0.0));
@@ -123,6 +145,19 @@ fn one_circular_arc_wire() -> (Face, Wire) {
         .unwrap()
         .edge()
         .unwrap();
+    one_arc_wire(edge)
+}
+
+fn one_elliptical_arc_wire() -> (Face, Wire) {
+    let ellipse = Ellipse3::new(Axis2::default(), 3.0, 1.0).unwrap();
+    let edge = BRepBuilderAPIMakeEdge::from_elips_params(ellipse, 0.0, 1.0)
+        .unwrap()
+        .edge()
+        .unwrap();
+    one_arc_wire(edge)
+}
+
+fn one_arc_wire(edge: rustycad_tkbrep::topods::Edge) -> (Face, Wire) {
     let builder = BRepBuilder::default();
     let mut wire = Wire::default();
     builder.make_wire(&mut wire);

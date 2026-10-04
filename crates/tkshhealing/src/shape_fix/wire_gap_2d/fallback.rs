@@ -22,24 +22,14 @@ pub(super) fn find(
     first_domain: (f64, f64),
     second_domain: (f64, f64),
 ) -> Result<Option<PairParameters>, Failure> {
-    let extrema = extrema_candidate(
+    if let Some(candidate) = accepted_extrema(
         first,
         second,
         first_curve,
         second_curve,
         first_domain,
         second_domain,
-    )?;
-    if let Some(candidate) = extrema
-        && acceptable(
-            first,
-            second,
-            first_curve,
-            second_curve,
-            candidate.first,
-            candidate.second,
-        )?
-    {
+    )? {
         return Ok(Some(candidate));
     }
     projection_candidate(
@@ -52,6 +42,46 @@ pub(super) fn find(
     )
 }
 
+fn accepted_extrema(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    first_domain: (f64, f64),
+    second_domain: (f64, f64),
+) -> Result<Option<PairParameters>, Failure> {
+    let Some(candidate) = extrema_candidate(
+        first,
+        second,
+        first_curve,
+        second_curve,
+        first_domain,
+        second_domain,
+    )?
+    else {
+        return Ok(None);
+    };
+    retain_if_acceptable(first, second, first_curve, second_curve, candidate)
+}
+
+fn retain_if_acceptable(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    candidate: PairParameters,
+) -> Result<Option<PairParameters>, Failure> {
+    let acceptable = accept_pair(
+        first,
+        second,
+        first_curve,
+        second_curve,
+        candidate.first,
+        candidate.second,
+    )?;
+    Ok(acceptable.then_some(candidate))
+}
+
 fn extrema_candidate(
     first: &PcurveGap,
     second: &PcurveGap,
@@ -60,20 +90,34 @@ fn extrema_candidate(
     first_domain: (f64, f64),
     second_domain: (f64, f64),
 ) -> Result<Option<PairParameters>, Failure> {
-    let extrema = ExtremaCurveCurve::new(
-        first_curve,
-        second_curve,
-        first_domain.0,
-        first_domain.1,
-        second_domain.0,
-        second_domain.1,
-    )?;
+    let extrema = curve_extrema(first_curve, second_curve, (first_domain, second_domain))?;
+    let Some(parameters) = extrema_parameters(&extrema)? else {
+        return Ok(None);
+    };
+    let parameters = adjust_pair(first, second, first_curve, second_curve, parameters)?;
+    candidate_from_parameters(first_curve, second_curve, parameters)
+}
+
+fn curve_extrema(
+    first: &Handle<dyn Geom2dCurve>,
+    second: &Handle<dyn Geom2dCurve>,
+    domains: ((f64, f64), (f64, f64)),
+) -> Result<ExtremaCurveCurve, Failure> {
+    ExtremaCurveCurve::new(
+        first,
+        second,
+        domains.0.0,
+        domains.0.1,
+        domains.1.0,
+        domains.1.1,
+    )
+}
+
+fn extrema_parameters(extrema: &ExtremaCurveCurve) -> Result<Option<(f64, f64)>, Failure> {
     if extrema.nb_extrema() == 0 {
         return Ok(None);
     }
-    let parameters = extrema.lower_distance_parameters()?;
-    let parameters = adjust_pair(first, second, first_curve, second_curve, parameters)?;
-    candidate_from_parameters(first_curve, second_curve, parameters)
+    Ok(Some(extrema.lower_distance_parameters()?))
 }
 
 fn projection_candidate(
@@ -84,7 +128,7 @@ fn projection_candidate(
     first_domain: (f64, f64),
     second_domain: (f64, f64),
 ) -> Result<Option<PairParameters>, Failure> {
-    let mut pair = project_endpoints(
+    let pair = project_and_select_endpoints(
         first,
         second,
         first_curve,
@@ -92,19 +136,6 @@ fn projection_candidate(
         first_domain,
         second_domain,
     )?;
-    adjust_initial_pair(first, second, first_curve, second_curve, &mut pair)?;
-    if projections_cross_original_ends(first, second, pair.first, pair.second) {
-        pair = project_midpoint(
-            first,
-            second,
-            first_curve,
-            second_curve,
-            first_domain,
-            second_domain,
-        )?;
-    } else {
-        retain_nearer_endpoint(first, second, &mut pair);
-    }
     let parameters = adjust_pair(
         first,
         second,
@@ -112,7 +143,17 @@ fn projection_candidate(
         second_curve,
         (pair.first, pair.second),
     )?;
-    if !acceptable(
+    accepted_projection(first, second, first_curve, second_curve, parameters)
+}
+
+fn accepted_projection(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    parameters: (f64, f64),
+) -> Result<Option<PairParameters>, Failure> {
+    if !accept_pair(
         first,
         second,
         first_curve,
@@ -125,6 +166,49 @@ fn projection_candidate(
     candidate_from_parameters(first_curve, second_curve, parameters)
 }
 
+fn project_and_select_endpoints(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    first_domain: (f64, f64),
+    second_domain: (f64, f64),
+) -> Result<ProjectionPair, Failure> {
+    let mut pair = project_endpoints(
+        first,
+        second,
+        first_curve,
+        second_curve,
+        first_domain,
+        second_domain,
+    )?;
+    adjust_initial_pair(first, second, first_curve, second_curve, &mut pair)?;
+    select_projection_pair(
+        first,
+        second,
+        first_curve,
+        second_curve,
+        pair,
+        (first_domain, second_domain),
+    )
+}
+
+fn select_projection_pair(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    mut pair: ProjectionPair,
+    domains: ((f64, f64), (f64, f64)),
+) -> Result<ProjectionPair, Failure> {
+    if projections_cross_original_ends(first, second, pair.first, pair.second) {
+        return project_midpoint(first, second, first_curve, second_curve, domains);
+    }
+    retain_nearer_endpoint(first, second, &mut pair);
+    Ok(pair)
+}
+
+#[derive(Clone, Copy)]
 struct ProjectionPair {
     first_point: Point2,
     second_point: Point2,
@@ -140,27 +224,70 @@ fn project_endpoints(
     first_domain: (f64, f64),
     second_domain: (f64, f64),
 ) -> Result<ProjectionPair, Failure> {
-    let mut pair = ProjectionPair {
-        first_point: first.point,
-        second_point: second.point,
+    project_pair(
+        first.point,
+        second.point,
+        first,
+        second,
+        first_curve,
+        second_curve,
+        (first_domain, second_domain),
+    )
+}
+
+fn project_pair(
+    first_point: Point2,
+    second_point: Point2,
+    first: &PcurveGap,
+    second: &PcurveGap,
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    domains: ((f64, f64), (f64, f64)),
+) -> Result<ProjectionPair, Failure> {
+    let mut pair = initial_projection_pair(first_point, second_point, first, second);
+    project_endpoints_into_pair(
+        &mut pair,
+        (first, second),
+        (first_curve, second_curve),
+        domains,
+    )?;
+    Ok(pair)
+}
+
+fn initial_projection_pair(
+    first_point: Point2,
+    second_point: Point2,
+    first: &PcurveGap,
+    second: &PcurveGap,
+) -> ProjectionPair {
+    ProjectionPair {
+        first_point,
+        second_point,
         first: native_end_parameter(first),
         second: native_start_parameter(second),
-    };
+    }
+}
+
+fn project_endpoints_into_pair(
+    pair: &mut ProjectionPair,
+    entries: (&PcurveGap, &PcurveGap),
+    curves: (&Handle<dyn Geom2dCurve>, &Handle<dyn Geom2dCurve>),
+    domains: ((f64, f64), (f64, f64)),
+) -> Result<(), Failure> {
     project_point(
-        second.point,
-        first_curve,
-        first_domain,
+        entries.1.point,
+        curves.0,
+        domains.0,
         &mut pair.first_point,
         &mut pair.first,
     )?;
     project_point(
-        first.point,
-        second_curve,
-        second_domain,
+        entries.0.point,
+        curves.1,
+        domains.1,
         &mut pair.second_point,
         &mut pair.second,
-    )?;
-    Ok(pair)
+    )
 }
 
 fn project_point(
@@ -202,29 +329,32 @@ fn projections_cross_original_ends(
     first_parameter: f64,
     second_parameter: f64,
 ) -> bool {
-    let first_end = native_end_parameter(first);
-    let second_start = native_start_parameter(second);
-    let first_inside = if first.reversed {
-        first_parameter > first_end
-    } else {
-        first_parameter < first_end
-    };
-    let second_inside = if second.reversed {
-        second_parameter < second_start
-    } else {
-        second_parameter > second_start
-    };
-    let first_outside = if first.reversed {
-        first_parameter < first_end
-    } else {
-        first_parameter > first_end
-    };
-    let second_outside = if second.reversed {
-        second_parameter > second_start
-    } else {
-        second_parameter < second_start
-    };
+    let first_inside = on_gap_side(first, first_parameter, native_end_parameter(first), true);
+    let second_inside = on_gap_side(
+        second,
+        second_parameter,
+        native_start_parameter(second),
+        false,
+    );
+    let first_outside = off_gap_side(first, first_parameter, native_end_parameter(first), true);
+    let second_outside = off_gap_side(
+        second,
+        second_parameter,
+        native_start_parameter(second),
+        false,
+    );
     first_inside && second_inside || first_outside && second_outside
+}
+
+fn on_gap_side(entry: &PcurveGap, parameter: f64, endpoint: f64, first_edge: bool) -> bool {
+    if entry.reversed == first_edge {
+        return parameter > endpoint;
+    }
+    parameter < endpoint
+}
+
+fn off_gap_side(entry: &PcurveGap, parameter: f64, endpoint: f64, first_edge: bool) -> bool {
+    parameter != endpoint && !on_gap_side(entry, parameter, endpoint, first_edge)
 }
 
 fn project_midpoint(
@@ -232,34 +362,32 @@ fn project_midpoint(
     second: &PcurveGap,
     first_curve: &Handle<dyn Geom2dCurve>,
     second_curve: &Handle<dyn Geom2dCurve>,
-    first_domain: (f64, f64),
-    second_domain: (f64, f64),
+    domains: ((f64, f64), (f64, f64)),
 ) -> Result<ProjectionPair, Failure> {
-    let midpoint = Point2::new(
-        (first.point.x() + second.point.x()) * 0.5,
-        (first.point.y() + second.point.y()) * 0.5,
-    );
-    let mut pair = ProjectionPair {
-        first_point: first.point,
-        second_point: second.point,
-        first: native_end_parameter(first),
-        second: native_start_parameter(second),
-    };
+    let midpoint = midpoint(first.point, second.point);
+    let mut pair = initial_projection_pair(first.point, second.point, first, second);
     project_point(
         midpoint,
         first_curve,
-        first_domain,
+        domains.0,
         &mut pair.first_point,
         &mut pair.first,
     )?;
     project_point(
         midpoint,
         second_curve,
-        second_domain,
+        domains.1,
         &mut pair.second_point,
         &mut pair.second,
     )?;
     Ok(pair)
+}
+
+fn midpoint(first: Point2, second: Point2) -> Point2 {
+    Point2::new(
+        (first.x() + second.x()) * 0.5,
+        (first.y() + second.y()) * 0.5,
+    )
 }
 
 fn retain_nearer_endpoint(first: &PcurveGap, second: &PcurveGap, pair: &mut ProjectionPair) {
@@ -325,7 +453,7 @@ fn periodic_shift(first: f64, period: f64) -> f64 {
     shift
 }
 
-fn acceptable(
+fn accept_pair(
     first: &PcurveGap,
     second: &PcurveGap,
     first_curve: &Handle<dyn Geom2dCurve>,
@@ -333,19 +461,36 @@ fn acceptable(
     first_parameter: f64,
     second_parameter: f64,
 ) -> Result<bool, Failure> {
-    let point1 = first_curve.value(first_parameter)?;
-    let point2 = second_curve.value(second_parameter)?;
-    let gap = first.point.distance(second.point);
-    let endpoints_moved = (native_start_parameter(first) - first_parameter).abs()
-        > precision::p_confusion()
-        && (native_end_parameter(second) - second_parameter).abs() > precision::p_confusion();
-    let interior = strictly_inside((first.first, first.last), first_parameter)
-        || strictly_inside((second.first, second.last), second_parameter);
-    Ok(point1.distance(point2) <= gap
-        && endpoints_moved
+    let points = (
+        first_curve.value(first_parameter)?,
+        second_curve.value(second_parameter)?,
+    );
+    let limits = (first.point.distance(second.point), precision::p_confusion());
+    Ok(close_enough(
+        first,
+        second,
+        points,
+        limits,
+        (first_parameter, second_parameter),
+    ))
+}
+
+fn close_enough(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    points: (Point2, Point2),
+    limits: (f64, f64),
+    parameters: (f64, f64),
+) -> bool {
+    let moved = (native_start_parameter(first) - parameters.0).abs() > limits.1
+        && (native_end_parameter(second) - parameters.1).abs() > limits.1;
+    let interior = strictly_inside((first.first, first.last), parameters.0)
+        || strictly_inside((second.first, second.last), parameters.1);
+    points.0.distance(points.1) <= limits.0
+        && moved
         && (interior
-            || first.point.distance(point1) <= gap
-            || second.point.distance(point2) <= gap))
+            || first.point.distance(points.0) <= limits.0
+            || second.point.distance(points.1) <= limits.0)
 }
 
 fn strictly_inside(bounds: (f64, f64), parameter: f64) -> bool {

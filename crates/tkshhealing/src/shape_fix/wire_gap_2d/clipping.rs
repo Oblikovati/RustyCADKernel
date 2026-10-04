@@ -61,10 +61,14 @@ fn fill_infinite_bounds(
         return Ok(());
     }
     let face_bounds = uv_bounds(face)?;
-    replace_infinite(umin, face_bounds.0 - precision::p_confusion());
-    replace_infinite(umax, face_bounds.1 + precision::p_confusion());
-    replace_infinite(vmin, face_bounds.2 - precision::p_confusion());
-    replace_infinite(vmax, face_bounds.3 + precision::p_confusion());
+    fill_axis_bounds((umin, umax), (face_bounds.0, face_bounds.1))?;
+    fill_axis_bounds((vmin, vmax), (face_bounds.2, face_bounds.3))?;
+    Ok(())
+}
+
+fn fill_axis_bounds(bounds: (&mut f64, &mut f64), face_bounds: (f64, f64)) -> Result<(), Failure> {
+    replace_infinite(bounds.0, face_bounds.0 - precision::p_confusion());
+    replace_infinite(bounds.1, face_bounds.1 + precision::p_confusion());
     Ok(())
 }
 
@@ -143,19 +147,40 @@ fn intersect_boundary(
     let line = boundary_line(boundary)?;
     let first = entry_parameter(entry, first_edge);
     let last = edge_parameter(pair, first_edge);
-    let curve_domain = make_domain(curve, first.min(last), first.max(last))?;
-    let line_domain = make_domain(&line, 0.0, boundary.0.distance(boundary.1))?;
-    let a_line = Geom2dAdaptorCurve::with_curve(&line)?;
-    let a_curve = Geom2dAdaptorCurve::with_curve(curve)?;
-    let intersections = GInter::with_domains(
-        &a_line,
-        &line_domain,
-        &a_curve,
-        &curve_domain,
-        precision::p_confusion(),
-        precision::p_confusion(),
-    )?;
+    let intersections = solve_boundary(curve, &line, boundary, (first, last))?;
     closest_boundary_hit(entry, &intersections, first_edge, first, curve)
+}
+
+fn solve_boundary(
+    curve: &Handle<dyn Geom2dCurve>,
+    line: &Handle<dyn Geom2dCurve>,
+    boundary: (Point2, Point2),
+    limits: (f64, f64),
+) -> Result<GInter, Failure> {
+    let domains = boundary_domains(curve, line, boundary, limits)?;
+    let adaptors = (
+        Geom2dAdaptorCurve::with_curve(line)?,
+        Geom2dAdaptorCurve::with_curve(curve)?,
+    );
+    GInter::with_domains(
+        &adaptors.0,
+        &domains.0,
+        &adaptors.1,
+        &domains.1,
+        precision::p_confusion(),
+        precision::p_confusion(),
+    )
+}
+
+fn boundary_domains(
+    curve: &Handle<dyn Geom2dCurve>,
+    line: &Handle<dyn Geom2dCurve>,
+    boundary: (Point2, Point2),
+    limits: (f64, f64),
+) -> Result<(Domain, Domain), Failure> {
+    let curve_domain = make_domain(curve, limits.0.min(limits.1), limits.0.max(limits.1))?;
+    let line_domain = make_domain(line, 0.0, boundary.0.distance(boundary.1))?;
+    Ok((line_domain, curve_domain))
 }
 
 fn boundary_line(boundary: (Point2, Point2)) -> Result<Handle<dyn Geom2dCurve>, Failure> {
@@ -184,23 +209,48 @@ fn closest_boundary_hit(
     parameter: f64,
     curve: &Handle<dyn Geom2dCurve>,
 ) -> Result<Option<(f64, Point2)>, Failure> {
+    let points = closest_intersection_points(intersections, parameter)?;
+    let best = closest_intersection_segments(intersections, parameter, points)?;
+    adjusted_hit(entry, first_edge, best, curve)
+}
+
+fn closest_intersection_points(
+    intersections: &GInter,
+    parameter: f64,
+) -> Result<Option<(f64, Point2)>, Failure> {
     let mut best = None;
     for index in 1..=intersections.nb_points()? {
         let point = intersections.point(index)?;
         best = nearer_boundary_hit(best, point.param_on_second(), point.value(), parameter);
     }
+    Ok(best)
+}
+
+fn closest_intersection_segments(
+    intersections: &GInter,
+    parameter: f64,
+    mut best: Option<(f64, Point2)>,
+) -> Result<Option<(f64, Point2)>, Failure> {
     for index in 1..=intersections.nb_segments()? {
-        let segment = intersections.segment(index)?;
-        if segment.has_first_point() {
-            let point = segment.first_point()?;
-            best = nearer_boundary_hit(best, point.param_on_second(), point.value(), parameter);
-        }
-        if segment.has_last_point() {
-            let point = segment.last_point()?;
-            best = nearer_boundary_hit(best, point.param_on_second(), point.value(), parameter);
-        }
+        best = segment_endpoint_hit(intersections.segment(index)?, parameter, best)?;
     }
-    adjusted_hit(entry, first_edge, best, curve)
+    Ok(best)
+}
+
+fn segment_endpoint_hit(
+    segment: rustycad_tkgeomalgo::int_res2d::IntersectionSegment,
+    parameter: f64,
+    mut best: Option<(f64, Point2)>,
+) -> Result<Option<(f64, Point2)>, Failure> {
+    if segment.has_first_point() {
+        let point = segment.first_point()?;
+        best = nearer_boundary_hit(best, point.param_on_second(), point.value(), parameter);
+    }
+    if segment.has_last_point() {
+        let point = segment.last_point()?;
+        best = nearer_boundary_hit(best, point.param_on_second(), point.value(), parameter);
+    }
+    Ok(best)
 }
 
 fn nearer_boundary_hit(
@@ -224,19 +274,17 @@ fn adjusted_hit(
     let Some((parameter, point)) = hit else {
         return Ok(None);
     };
-    let take_first = if first_edge {
-        entry.reversed
-    } else {
-        !entry.reversed
-    };
-    let endpoint = if first_edge {
-        native_start(entry)
-    } else {
-        native_end(entry)
-    };
+    let (take_first, endpoint) = adjustment_reference(entry, first_edge);
     let bounds = (endpoint.min(parameter), endpoint.max(parameter));
     let adjusted = super::fallback::adjust_periodic(curve, take_first, bounds, parameter)?;
     Ok(Some((adjusted, point)))
+}
+
+fn adjustment_reference(entry: &PcurveGap, first_edge: bool) -> (bool, f64) {
+    if first_edge {
+        return (entry.reversed, native_start(entry));
+    }
+    (!entry.reversed, native_end(entry))
 }
 
 fn pair_at(

@@ -19,6 +19,20 @@ struct LineIntersection {
     second_parameter: f64,
 }
 
+struct RangeCurves {
+    first: Handle<dyn Geom2dCurve>,
+    second: Handle<dyn Geom2dCurve>,
+}
+
+impl RangeCurves {
+    fn from_entries(first: &PcurveGap, second: &PcurveGap) -> Result<Self, Failure> {
+        Ok(Self {
+            first: convert::basic_gap_curve(&first.curve)?,
+            second: convert::basic_gap_curve(&second.curve)?,
+        })
+    }
+}
+
 impl From<fallback::PairParameters> for LineIntersection {
     fn from(candidate: fallback::PairParameters) -> Self {
         Self {
@@ -30,54 +44,71 @@ impl From<fallback::PairParameters> for LineIntersection {
     }
 }
 
+impl From<clipping::ClippedPair> for fallback::PairParameters {
+    fn from(candidate: clipping::ClippedPair) -> Self {
+        Self {
+            point: candidate.first_point,
+            second_point: candidate.second_point,
+            first: candidate.first_parameter,
+            second: candidate.second_parameter,
+        }
+    }
+}
+
 pub(super) fn repair_range(
     tool: &ShapeFixWire,
     face: &Face,
     first: &PcurveGap,
     second: &PcurveGap,
 ) -> Result<bool, Failure> {
-    let first_curve = convert::basic_gap_curve(&first.curve)?;
-    let second_curve = convert::basic_gap_curve(&second.curve)?;
-    if same_edge_conic(first, second, &first_curve) {
-        return extend_same_edge_conic(tool, face, first, &first_curve);
+    let curves = RangeCurves::from_entries(first, second)?;
+    if same_edge_conic(first, second, &curves.first) {
+        return extend_same_edge_conic(tool, face, first, &curves.first);
     }
-    let bounds = domains::for_pair(first, second, &first_curve, &second_curve);
-    let intersection = curve_intersection(first, second, &first_curve, &second_curve)?;
-    let candidate = choose_candidate(
-        first,
-        second,
-        (&first_curve, &second_curve),
-        intersection,
-        (bounds.first, bounds.second),
-    )?;
+    let candidate = candidate_for_pair(first, second, &curves)?;
     let Some(candidate) = candidate else {
         return Ok(false);
     };
-    let candidate = clipped_candidate(face, first, second, &first_curve, &second_curve, candidate)?;
-    apply_range_candidate(
-        tool,
-        face,
+    let candidate = clipped_candidate(face, first, second, &curves, candidate)?;
+    apply_range_candidate(tool, face, first, second, &curves, candidate)
+}
+
+fn candidate_for_pair(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    curves: &RangeCurves,
+) -> Result<Option<fallback::PairParameters>, Failure> {
+    let bounds = domains::for_pair(first, second, &curves.first, &curves.second);
+    let intersection = curve_intersection(first, second, &curves.first, &curves.second)?;
+    choose_candidate(
         first,
         second,
-        &first_curve,
-        &second_curve,
-        candidate,
+        curves,
+        intersection,
+        (bounds.first, bounds.second),
     )
 }
 
 fn choose_candidate(
     first: &PcurveGap,
     second: &PcurveGap,
-    curves: (&Handle<dyn Geom2dCurve>, &Handle<dyn Geom2dCurve>),
+    curves: &RangeCurves,
     intersection: Option<LineIntersection>,
     bounds: ((f64, f64), (f64, f64)),
 ) -> Result<Option<fallback::PairParameters>, Failure> {
     if let Some(candidate) = intersection
-        && acceptable(first, second, &candidate, curves.0, curves.1)
+        && acceptable(first, second, &candidate, &curves.first, &curves.second)
     {
         return Ok(Some(pair_parameters(candidate)));
     }
-    fallback::find(first, second, curves.0, curves.1, bounds.0, bounds.1)
+    fallback::find(
+        first,
+        second,
+        &curves.first,
+        &curves.second,
+        bounds.0,
+        bounds.1,
+    )
 }
 
 fn pair_parameters(candidate: LineIntersection) -> fallback::PairParameters {
@@ -94,19 +125,10 @@ fn apply_range_candidate(
     face: &Face,
     first: &PcurveGap,
     second: &PcurveGap,
-    first_curve: &Handle<dyn Geom2dCurve>,
-    second_curve: &Handle<dyn Geom2dCurve>,
+    curves: &RangeCurves,
     candidate: fallback::PairParameters,
 ) -> Result<bool, Failure> {
-    replace_intersection(
-        tool,
-        face,
-        first,
-        second,
-        first_curve,
-        second_curve,
-        &LineIntersection::from(candidate),
-    )?;
+    replace_intersection(tool, face, first, second, curves, &candidate.into())?;
     tool.set_last_fix_status(ShapeExtendStatus::Done1);
     Ok(true)
 }
@@ -133,27 +155,32 @@ fn clipped_candidate(
     face: &Face,
     first: &PcurveGap,
     second: &PcurveGap,
-    first_curve: &Handle<dyn Geom2dCurve>,
-    second_curve: &Handle<dyn Geom2dCurve>,
+    curves: &RangeCurves,
     candidate: fallback::PairParameters,
 ) -> Result<fallback::PairParameters, Failure> {
     if !requires_surface_clip(first, second, &candidate) {
         return Ok(candidate);
     }
+    let parameters = clipped_parameters(face, first, second, curves, candidate)?;
+    Ok(parameters)
+}
+
+fn clipped_parameters(
+    face: &Face,
+    first: &PcurveGap,
+    second: &PcurveGap,
+    curves: &RangeCurves,
+    candidate: fallback::PairParameters,
+) -> Result<fallback::PairParameters, Failure> {
     let clipped = clipping::apply(
         face,
         first,
         second,
-        first_curve,
-        second_curve,
+        &curves.first,
+        &curves.second,
         (candidate.first, candidate.second),
     )?;
-    Ok(fallback::PairParameters {
-        point: clipped.first_point,
-        second_point: clipped.second_point,
-        first: clipped.first_parameter,
-        second: clipped.second_parameter,
-    })
+    Ok(clipped.into())
 }
 
 fn curve_intersection(
@@ -163,6 +190,15 @@ fn curve_intersection(
     second_curve: &Handle<dyn Geom2dCurve>,
 ) -> Result<Option<LineIntersection>, Failure> {
     let bounds = domains::for_pair(first, second, first_curve, second_curve);
+    let intersections = find_intersections(first_curve, second_curve, bounds)?;
+    closest_line_intersection(first, second, first_curve, second_curve, &intersections)
+}
+
+fn find_intersections(
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    bounds: domains::SearchDomains,
+) -> Result<GInter, Failure> {
     let first_domain = make_domain(first_curve, bounds.first)?;
     let second_domain = make_domain(second_curve, bounds.second)?;
     let first_adaptor = Geom2dAdaptorCurve::with_curve(first_curve)?;
@@ -175,7 +211,7 @@ fn curve_intersection(
         precision::p_confusion(),
         precision::p_confusion(),
     )?;
-    closest_line_intersection(first, second, first_curve, second_curve, &intersections)
+    Ok(intersections)
 }
 
 fn make_domain(curve: &Handle<dyn Geom2dCurve>, bounds: (f64, f64)) -> Result<Domain, Failure> {
@@ -203,28 +239,36 @@ fn closest_line_intersection(
         second_curve,
         intersection_candidates(intersections)?,
     )?;
-    let mut first_choice = None;
-    let mut second_choice = None;
-    for candidate in candidates {
-        choose_endpoint_candidate(
-            &mut first_choice,
-            candidate,
-            native_start_parameter(first),
-            false,
-        );
-        choose_endpoint_candidate(
-            &mut second_choice,
-            candidate,
-            native_end_parameter(second),
-            true,
-        );
-    }
+    let (first_choice, second_choice) = endpoint_choices(first, second, candidates);
     Ok(select_closest_to_mean(
         first,
         second,
         first_choice,
         second_choice,
     ))
+}
+
+fn endpoint_choices(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    candidates: Vec<LineIntersection>,
+) -> (Option<LineIntersection>, Option<LineIntersection>) {
+    let mut choices = (None, None);
+    for candidate in candidates {
+        choose_endpoint_candidate(
+            &mut choices.0,
+            candidate,
+            native_start_parameter(first),
+            false,
+        );
+        choose_endpoint_candidate(
+            &mut choices.1,
+            candidate,
+            native_end_parameter(second),
+            true,
+        );
+    }
+    choices
 }
 
 fn normalize_candidates(
@@ -354,30 +398,50 @@ fn acceptable(
     second_curve: &Handle<dyn Geom2dCurve>,
 ) -> bool {
     let gap = first.point.distance(second.point);
-    if first_curve
-        .value(candidate.first_parameter)
-        .ok()
-        .is_none_or(|p| {
-            second_curve
-                .value(candidate.second_parameter)
-                .ok()
-                .is_none_or(|q| p.distance(q) > gap)
-        })
-    {
+    candidate_points_within_gap(first_curve, second_curve, candidate, gap)
+        && candidate_moves_both(first, second, candidate)
+        && candidate_is_acceptable(first, second, candidate, gap)
+}
+
+fn candidate_points_within_gap(
+    first_curve: &Handle<dyn Geom2dCurve>,
+    second_curve: &Handle<dyn Geom2dCurve>,
+    candidate: &LineIntersection,
+    gap: f64,
+) -> bool {
+    let Ok(first) = first_curve.value(candidate.first_parameter) else {
         return false;
-    }
-    if (native_start_parameter(first) - candidate.first_parameter).abs() <= precision::p_confusion()
-        || (native_end_parameter(second) - candidate.second_parameter).abs()
-            <= precision::p_confusion()
-    {
+    };
+    let Ok(second) = second_curve.value(candidate.second_parameter) else {
         return false;
-    }
-    candidate.first_parameter >= first.first.min(first.last)
-        && candidate.first_parameter <= first.first.max(first.last)
-        || candidate.second_parameter >= second.first.min(second.last)
-            && candidate.second_parameter <= second.first.max(second.last)
+    };
+    first.distance(second) <= gap
+}
+
+fn candidate_moves_both(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    candidate: &LineIntersection,
+) -> bool {
+    let threshold = precision::p_confusion();
+    (native_start_parameter(first) - candidate.first_parameter).abs() > threshold
+        && (native_end_parameter(second) - candidate.second_parameter).abs() > threshold
+}
+
+fn candidate_is_acceptable(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    candidate: &LineIntersection,
+    gap: f64,
+) -> bool {
+    parameter_inside(first, candidate.first_parameter)
+        || parameter_inside(second, candidate.second_parameter)
         || first.point.distance(candidate.point) <= gap
         || second.point.distance(candidate.point) <= gap
+}
+
+fn parameter_inside(entry: &PcurveGap, parameter: f64) -> bool {
+    parameter >= entry.first.min(entry.last) && parameter <= entry.first.max(entry.last)
 }
 
 fn native_start_parameter(entry: &PcurveGap) -> f64 {
@@ -413,20 +477,24 @@ fn replace_intersection(
     face: &Face,
     first: &PcurveGap,
     second: &PcurveGap,
-    first_curve: &Handle<dyn Geom2dCurve>,
-    second_curve: &Handle<dyn Geom2dCurve>,
+    curves: &RangeCurves,
     intersection: &LineIntersection,
 ) -> Result<(), Failure> {
     let first_range = updated_range(first, intersection.first_parameter, true);
     let second_range = updated_range(second, intersection.second_parameter, false);
-    let first_repair = range_repair(first, first_curve, first_range, true)?;
-    let second_repair = range_repair(second, second_curve, second_range, false)?;
-    replace::replace_pcurves_with_ranges(
-        tool,
-        face,
-        (first, second),
-        (&first_repair, &second_repair),
-    )
+    let repairs = range_repairs(first, second, curves, (first_range, second_range))?;
+    replace::replace_pcurves_with_ranges(tool, face, (first, second), (&repairs.0, &repairs.1))
+}
+
+fn range_repairs(
+    first: &PcurveGap,
+    second: &PcurveGap,
+    curves: &RangeCurves,
+    ranges: ((f64, f64), (f64, f64)),
+) -> Result<(Option<replace::CurveRepair>, Option<replace::CurveRepair>), Failure> {
+    let first_repair = range_repair(first, &curves.first, ranges.0, true)?;
+    let second_repair = range_repair(second, &curves.second, ranges.1, false)?;
+    Ok((first_repair, second_repair))
 }
 
 fn updated_range(entry: &PcurveGap, parameter: f64, first_edge: bool) -> (f64, f64) {
