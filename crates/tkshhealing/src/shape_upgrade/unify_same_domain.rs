@@ -144,14 +144,7 @@ impl ShapeUpgradeUnifySameDomain {
             result = edges::merge_wire_edge_chains(self, &result)?;
         }
         let face_candidate = fields.unify_faces && first_coplanar_pair(&result, &fields)?.is_some();
-        let edge_candidate = fields.unify_edges
-            && (has_collinear_edge_pair(&result, fields.angular_tolerance, &fields.keep_shapes)?
-                || edges::has_unported_spline_candidate(
-                    &result,
-                    fields.angular_tolerance,
-                    fields._concat_bspline_edges,
-                    &fields.keep_shapes,
-                )?);
+        let edge_candidate = has_edge_candidate(&result, &fields)?;
         let face_merge_completed = count_shapes(&result, ShapeEnum::Face)? < input_face_count;
         let has_candidate = face_candidate || edge_candidate && !face_merge_completed;
         if has_candidate {
@@ -171,6 +164,22 @@ impl ShapeUpgradeUnifySameDomain {
     pub fn shape(&self) -> Shape {
         self.fields.read().result.clone()
     }
+}
+
+fn has_edge_candidate(shape: &Shape, fields: &UnifyFields) -> Result<bool, Failure> {
+    if !fields.unify_edges {
+        return Ok(false);
+    }
+    let protected = edges::protected_shapes(shape, &fields.keep_shapes)?;
+    Ok(
+        has_collinear_edge_pair(shape, fields.angular_tolerance, &protected)?
+            || edges::has_unported_spline_candidate(
+                shape,
+                fields.angular_tolerance,
+                fields._concat_bspline_edges,
+                &protected,
+            )?,
+    )
 }
 
 /// Merges planar face pairs until no supported adjacent pair remains.
