@@ -51,6 +51,8 @@ int main() {
   std::cout << "remove-root " << replacement.Roots().Extent() << ' '
             << replacement.HasImage(newRoot) << ' ' << replacement.IsImage(image) << '\n';
   BRepAlgo_Image fallback;
-  std::cout << "unbound " << fallback.Image(source).Extent() << ' '
-            << fallback.Image(middle).Extent() << '\n';
+  const NCollection_List<TopoDS_Shape>& held = fallback.Image(source);
+  const int secondFallbackExtent = fallback.Image(middle).Extent();
+  std::cout << "unbound " << held.Extent() << ' ' << secondFallbackExtent << ' '
+            << held.First().IsSame(source) << '\n';
 }
