@@ -232,7 +232,7 @@ fn approximate_piece(
         req,
         uvpav,
         foncnp,
-        &work.ttable,
+        &mut work.ttable,
         &mut work.fpntab,
         &mut piece,
         iercod,

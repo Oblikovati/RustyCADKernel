@@ -42,7 +42,7 @@ pub mod sys_base;
 pub use approx_a_func2var::AdvApp2VarApproxAFunc2Var;
 pub use context::{AdvApp2VarContext, FrontierTolerances, SubspaceTolerances};
 pub use criterion::{AdvApp2VarCriterion, AdvApp2VarCriterionRepartition, AdvApp2VarCriterionType};
-pub use evaluator::{AdvApp2VarEvaluation, AdvApp2VarEvaluatorFunc2Var};
+pub use evaluator::{AdvApp2VarEvaluation, AdvApp2VarEvaluationMut, AdvApp2VarEvaluatorFunc2Var};
 pub use framework::{AdvApp2VarFramework, AdvApp2VarIsoStrip};
 pub use iso::AdvApp2VarIso;
 pub use network::AdvApp2VarNetwork;

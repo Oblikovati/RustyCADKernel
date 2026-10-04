@@ -1,0 +1,1804 @@
+   Compiling rustycad-tkgeombase v0.1.0 (/tmp/rustycad-advapp2var-mutable-evaluator/crates/tkgeombase)
+warning: unused imports: `AdvApp2VarEvaluationMut` and `AdvApp2VarEvaluatorFunc2Var`
+ --> crates/tkgeombase/src/adv_app2var/approx_f2var/curve_steps.rs:7:37
+  |
+7 | use crate::adv_app2var::evaluator::{AdvApp2VarEvaluationMut, AdvApp2VarEvaluatorFunc2Var};
+  |                                     ^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `pow__di`
+ --> crates/tkgeombase/src/adv_app2var/approx_f2var/curve_steps.rs:9:48
+  |
+9 | use crate::adv_app2var::math_base::{mmmpocur_, pow__di};
+  |                                                ^^^^^^^
+
+warning: `rustycad-tkgeombase` (lib test) generated 2 warnings (2 duplicates)
+warning: `rustycad-tkgeombase` (lib) generated 2 warnings (run `cargo fix --lib -p rustycad-tkgeombase` to apply 2 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 10.15s
+     Running unittests src/lib.rs (/tmp/target-advapp2var-mutable/debug/deps/rustycad_tkgeombase-37a6c192da660141)
+
+running 54 tests
+test adv_app2var::approx_f2var::bases::tests::hermite_bases_fill_their_columns ... ok
+test adv_app2var::approx_f2var::bases::tests::projection_tables_check_their_arguments ... ok
+test adv_app2var::approx_f2var::degree::tests::negligible_constraint_rows_are_dropped_down_to_two ... ok
+test adv_app2var::approx_f2var::bases::tests::roots_are_symmetric ... ok
+test adv_app2var::approx_f2var::curve_steps::sampling::tests::mutable_v_order_is_incremented_after_the_callback_returns ... ok
+test adv_app2var::data::tests::first_and_last_literals_match_the_pxx_files ... ok
+test adv_app2var::data::tests::blocks_have_the_native_member_lengths ... ok
+test adv_app2var::evaluator::tests::closures_are_evaluators_and_may_leave_the_error_code ... ok
+test adv_app2var::f2c::tests::shifted_views_keep_the_fortran_subscripts ... ok
+test adv_app2var::f2c::tests::the_power_loop_inverts_negative_exponents ... ok
+test adv_app2var::math_base::approx_errors::tests::jacobi_bounds_use_the_shared_maxima_and_refuse_high_orders ... ok
+test adv_app2var::math_base::approx_errors::tests::legendre_bound_sums_the_dropped_coefficients ... ok
+test adv_app2var::f2c::tests::a_subscript_before_the_start_panics_with_the_subscript - should panic ... ok
+test adv_app2var::math_base::bases::tests::c0_basis_starts_with_the_two_hermite_functions ... ok
+test adv_app2var::math_base::derivatives::tests::derivatives_of_a_cubic ... ok
+test adv_app2var::math_base::bases::tests::hermite_jacobi_conversion_refuses_long_curves ... ok
+test adv_app2var::math_base::evaluation::tests::curves_evaluate_with_every_shortcut ... ok
+test adv_app2var::math_base::derivatives::tests::end_values_at_minus_and_plus_one ... ok
+test adv_app2var::math_base::gauss::tests::an_invalid_rule_index_stops_at_the_first_silent_evaluation ... ok
+test adv_app2var::math_base::gauss::tests::gauss_rules_integrate_polynomials ... ok
+test adv_app2var::math_base::gauss::tests::lengths_of_a_segment ... ok
+test adv_app2var::math_base::jacobi::tests::a_constant_jacobi_polynomial_stays_constant ... ok
+test adv_app2var::math_base::jacobi::tests::curves_convert_column_by_column ... ok
+test adv_app2var::math_base::hermite::tests::c0_hermite_basis_on_minus_one_one ... ok
+test adv_app2var::math_base::hermite::tests::invalid_orders_and_intervals_are_refused ... ok
+test adv_app2var::math_base::linear::tests::end_conditions_give_the_interpolating_line ... ok
+test adv_app2var::math_base::linear::tests::a_two_by_two_system_is_solved_with_pivoting ... ok
+test adv_app2var::math_base::sorting::tests::bisection_finds_the_interval_and_its_ends ... ok
+test adv_app2var::math_base::sorting::tests::both_sorts_order_columns_by_the_key_row ... ok
+test adv_app2var::math_base::sorting::tests::lines_are_inserted_in_order_once ... ok
+test adv_app2var::math_base::sparse::tests::a_tridiagonal_system_with_one_constraint ... ok
+test adv_app2var::math_base::tests::norms_scale_by_the_largest_component ... ok
+test adv_app2var::math_base::tests::powers_and_factorials_follow_the_integer_loops ... ok
+test adv_app2var::math_base::tests::the_default_precision_is_the_static_initialiser ... ok
+test adv_app2var::math_base::truncation::tests::jacobi_truncation_drops_negligible_constraint_coefficients ... ok
+test adv_app2var::math_base::truncation::tests::legendre_truncation_stops_at_the_first_large_tail ... ok
+test adv_app2var::math_base::vectors::tests::a_non_collinear_vector_is_found ... ok
+test adv_app2var::math_base::vectors::tests::distances_and_unit_vectors ... ok
+test adv_app2var::sys_base::allocation::tests::a_request_is_recorded_until_released ... ok
+test adv_app2var::sys_base::allocation::tests::invalid_units_full_tables_and_unknown_zones_are_refused ... ok
+test adv_app2var::sys_base::allocation::tests::typed_wrappers_allocate_only_beyond_the_local_capacity ... ok
+test adv_app2var::sys_base::memory::tests::maitbr8_fills_blocks_and_the_remainder ... ok
+test adv_app2var::sys_base::memory::tests::overlapping_fills_move_like_memmove ... ok
+test adv_app2var::sys_base::messages::tests::trace_hooks_do_nothing_and_the_precision_is_17_digits ... ok
+test adv_app2var::sys_base::memory::tests::partial_elements_are_refused - should panic ... ok
+test adv_app2var::sys_base::messages::tests::macinit_sets_defaults_and_forces_one_unit_per_mode ... ok
+test array_access::tests::grid_access_uses_one_based_native_bounds ... ok
+test geom_convert::conv_type::tests::enumerators_keep_the_native_values ... ok
+test proj_lib::polar::initial::tests::into_range_shifts_by_whole_periods ... ok
+test proj_lib::polar::initial::tests::into_range_refuses_the_shifts_that_never_end ... ok
+test adv_app2var::sys_base::memory::tests::fills_copy_and_zero_whole_elements ... ok
+test scan_step::tests::increments_that_move_are_kept_bit_for_bit ... ok
+test geom2d_convert::approx_arcs_segments::biarcs::tests::calculate_lines_joins_the_scan_parameters_farther_apart_than_the_tolerance ... ok
+test scan_step::tests::stalls_are_refused_and_nan_ends_the_scan ... ok
+
+test result: ok. 54 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_behavior-7869be3b7b917117)
+
+running 6 tests
+test patch_cut_sense_follows_the_criterion_type ... ok
+test approximation_refuses_continuities_above_c2 ... ok
+test approximation_getters_raise_outside_one_3d_surface ... ok
+test dump_reports_the_tolerance_and_the_knots ... ok
+test approximation_of_a_plane_is_one_exact_patch ... ok
+test a_criterion_never_satisfied_cuts_until_the_patch_budget ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_context.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_context-feb650f0a4477a15)
+
+running 1 test
+test AdvApp2Var_ContextTest__Tolerances_AreAggregatedAndRescaledForBorderConstraints ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_framework.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_framework-6b8ec88e9bf46c7b)
+
+running 3 tests
+test AdvApp2Var_FrameworkTest__NodeIndexMapping_UsesGridLayout ... ok
+test AdvApp2Var_FrameworkTest__IsoLookup_ReturnsMatchingIso ... ok
+test AdvApp2Var_FrameworkTest__UpdateInU_InsertsCutIsoAndNodes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_iso.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_iso-4bc9d5322b20af82)
+
+running 1 test
+test AdvApp2Var_IsoTest__ConstructorWithOrders_AssignsOrdersByIsoType ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_network.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_network-35da99848ec92f3e)
+
+running 2 tests
+test AdvApp2Var_NetworkTest__UpdateInV_PreservesPatchOrdersPerColumn ... ok
+test AdvApp2Var_NetworkTest__UpdateInU_PreservesPatchOrdersPerRow ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adv_app2var_node.rs (/tmp/target-advapp2var-mutable/debug/deps/adv_app2var_node-57a825b21a52c4ae)
+
+running 1 test
+test AdvApp2Var_NodeTest__Constructor_InitializesValuesToZero ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app_cont_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/app_cont_behavior-98c09eef9064fff2)
+
+running 15 tests
+test a_first_sample_alone_before_a_wrap_is_moved_by_one_period ... ok
+test a_fixed_end_without_pole_row_is_refused_instead_of_panicking ... ok
+test degree_one_with_two_pass_points_has_no_free_pole ... ok
+test a_periodic_end_pole_is_brought_back_next_to_the_samples ... ok
+test function_base_starts_at_minus_one_and_is_not_periodic ... ok
+test empty_ranges_fit_over_empty_tables_as_natively ... ok
+test a_failing_derivative_turns_tangency_into_pass ... ok
+test offsets_follow_the_block_layout ... ok
+test a_singular_end_takes_the_limit_from_inside ... ok
+test free_fit_reproduces_a_cubic_but_reports_not_done ... ok
+test mixed_constraints_invert_the_normal_matrix ... ok
+test v_bernstein_at_classe_one_is_refused_instead_of_reading_before_the_table ... ok
+test native_exceptions_become_failures ... ok
+test pass_points_fix_the_end_poles_and_mark_the_fit_done ... ok
+test tangency_points_set_the_second_poles_from_the_derivatives ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app_cont_cont_matrices.rs (/tmp/target-advapp2var-mutable/debug/deps/app_cont_cont_matrices-72b9dfb9c02413c4)
+
+running 9 tests
+test AppCont_ContMatricesTest__VBernstein_PartitionOfUnity ... ok
+test AppCont_ContMatricesTest__LegacyRangeLimits ... ok
+test AppCont_ContMatricesTest__MMatrix_Symmetric ... ok
+test AppCont_ContMatricesTest__IBPMatrix_Symmetric ... ok
+test AppCont_ContMatricesTest__IBTMatrix_Symmetric ... ok
+test AppCont_ContMatricesTest__InvMMatrix_IsInverse ... ok
+test AppCont_ContMatricesTest__InvMMatrix_Symmetric ... ok
+test AppCont_ContMatricesTest__MMatrix_MatchesFormula ... ok
+test AppCont_ContMatricesTest__VBernstein_MatchesBernsteinEval ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app_def_behavior/main.rs (/tmp/target-advapp2var-mutable/debug/deps/app_def_behavior-1d9b6f2a5587ca02)
+
+running 25 tests
+test containers::a_failing_setter_still_allocates_its_array ... ok
+test containers::an_empty_line_raises_on_its_first_multipoint ... ok
+test containers::copies_share_allocated_arrays_only ... ok
+test containers::line_copies_share_their_multipoints ... ok
+test containers::reading_vectors_never_set_is_a_null_object_error ... ok
+test containers::the_default_line_has_no_array ... ok
+test containers::the_line_tool_never_cuts_the_line ... ok
+test containers::the_line_tool_writes_from_the_lower_bound_and_checks_the_size ... ok
+test containers::vector_constructors_refuse_mismatched_counts ... ok
+test criteria::a_wrapped_point_range_is_out_of_memory ... ok
+test criteria::members_needing_the_curve_are_domain_errors_before_set_curve ... ok
+test criteria::set_curve_of_a_null_first_curve_is_a_null_object_error ... ok
+test criteria::weights_are_normalized_and_checked ... ok
+test variational::bad_arguments_are_refused_by_the_constructor ... ok
+test variational::degenerate_point_sets_raise ... ok
+test criteria::dimensions_outside_the_line_are_domain_errors ... ok
+test criteria::a_gradient_before_any_cache_on_an_empty_element_is_a_null_object_error ... ok
+test criteria::quality_values_raise_the_estimations_of_underestimated_criteria ... ok
+test variational::constraints_before_the_last_point_read_past_the_table ... ok
+test variational::dump_prints_the_stream_flags_before_the_tolerance ... ok
+test variational::the_over_constrained_flag_is_never_cleared ... ok
+test variational::a_c0_element_of_degree_one_has_no_second_derivative ... ok
+test variational::set_parameters_takes_the_bounds_of_its_argument ... ok
+test variational::results_need_an_approximation ... ok
+test variational::setters_keep_the_done_flag_and_the_old_knots_handle ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/app_def_reference_cache.rs (/tmp/target-advapp2var-mutable/debug/deps/app_def_reference_cache-e863348947ec01de)
+
+running 1 test
+test a_degree_above_the_reference_integrals_depends_on_the_cached_order ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app_par_curves_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/app_par_curves_behavior-4fb798c4c0a93dcb)
+
+running 10 tests
+test bernstein_needs_two_poles ... ok
+test multi_bsp_curve_set_nb_poles_keeps_the_degree ... ok
+test multi_curve_pole_checks_both_indexes_with_and ... ok
+test multi_point_dimension_zero_is_3d_and_copies_share_points ... ok
+test point_constraint_falls_back_to_the_last_couple ... ok
+test function_error_reads_the_constrained_branch_only ... ok
+test least_square_errors_and_distance_quirk ... ok
+test resol_constraint_reads_2d_pass_points_at_the_pass_index ... ok
+test gradient_without_inner_constraints_reports_null_errors ... ok
+test resol_constraint_derivative_writes_the_ratio_rows_into_cont ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/approx_behavior/main.rs (/tmp/target-advapp2var-mutable/debug/deps/approx_behavior-0f244da244ed87c7)
+
+running 39 tests
+test curves::curve_on_surface_refuses_only_3d_and_only_2d ... ok
+test curves::curvlin_func_measures_and_maps_a_segment ... ok
+test curves::curvlin_func_evaluates_only_its_own_case ... ok
+test curves::curvlin_func_rejects_abscissas_outside_the_unit_range ... ok
+test curves::curve3d_approximates_a_segment ... ok
+test curves::curve2d_approximates_a_segment ... ok
+test curves::curve_on_surface_only_2d_leaves_the_3d_curve_null ... ok
+test curves::curvilinear_parameter_reparametrizes_a_segment ... ok
+test drivers::bspl_compute_line_parameters_before_perform_raise ... ok
+test drivers::bspl_compute_line_interpolates_two_points_as_a_segment ... ok
+test curves::same_parameter_keeps_a_pcurve_that_already_matches ... ok
+test curves::curve_on_surface_builds_both_curves ... ok
+test drivers::compute_c_line_defaults_are_the_native_ones ... ok
+test drivers::compute_c_line_out_of_range_pieces_raise ... ok
+test drivers::compute_line_defaults_and_empty_accessors ... ok
+test drivers::compute_c_line_stores_the_best_uncut_fit_when_the_tolerance_fails ... ok
+test drivers::compute_line_refuses_lines_marked_no_approximation ... ok
+test drivers::bspl_compute_line_curvature_request_keeps_tangent_ends ... ok
+test drivers::bspl_compute_line_uses_the_given_knots ... ok
+test drivers::enumerations_keep_the_native_values ... ok
+test drivers::line_tool_answers_of_the_appdef_semantics ... ok
+test drivers::compute_c_line_cutting_stops_at_the_segment_cap ... ok
+test drivers::mcurves_join_raises_on_an_empty_sequence ... ok
+test sweep::sweep_accessors_raise_before_perform ... ok
+test sweep::sweep_c1_raises_the_default_d1 ... ok
+test drivers::mcurves_join_raises_curves_to_the_common_degree ... ok
+test drivers::compute_line_fits_a_parabola_line ... ok
+test sweep::sweep_function_defaults_raise_not_implemented ... ok
+test drivers::compute_line_given_parameters_start_the_first_piece ... ok
+test drivers::compute_line_recurses_on_refined_lines ... ok
+test drivers::compute_line_squares_skips_the_parameter_optimization ... ok
+test sweep::sweep_c2_uses_the_given_derivatives ... ok
+test sweep::sweep_without_2d_curves_raises_on_the_2d_accessors ... ok
+test sweep::sweep_c0_approximates_the_ruled_section ... ok
+test drivers::compute_c_line_fits_a_cubic_in_one_piece ... ok
+test sweep::sweep_eval_answers_2_beyond_the_second_order ... ok
+test sweep::sweep_perform_appends_the_2d_poles_across_runs ... ok
+test drivers::compute_c_line_perform_appends_to_the_previous_pieces ... ok
+test curves::same_parameter_reparametrizes_a_non_uniform_pcurve ... ok
+
+test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/bnd_lib.rs (/tmp/target-advapp2var-mutable/debug/deps/bnd_lib-56f002f9927fdc3d)
+
+running 63 tests
+test BndLibTest__Circle_RotatedAxis ... ok
+test BndLibTest__Circle_Arc_FirstQuadrant ... ok
+test BndLibTest__Circle_Full ... ok
+test BndLibTest__Circle2d_Full ... ok
+test BndLibTest__Circle_WithTolerance ... ok
+test BndLibTest__Cone_FinitePatch ... ok
+test BndLibTest__Cone_NegativeV ... ok
+test BndLibTest__Cone_InfiniteV ... ok
+test BndLibTest__Cylinder_InfiniteV ... ok
+test BndLibTest__Cylinder_PartialU ... ok
+test BndLibTest__Cylinder_FinitePatch ... ok
+test BndLibTest__Ellipse2d_Full ... ok
+test BndLibTest__Ellipse_Full ... ok
+test BndLibTest__Ellipse_Arc ... ok
+test BndLibTest__Hyperbola2d_SimpleArc ... ok
+test BndLibTest__Hyperbola_InfiniteParameter ... ok
+test BndLibTest__Hyperbola_Rotated_MultipleExtrema ... ok
+test BndLibTest__Hyperbola_SimpleArc ... ok
+test BndLibTest__Line2d_FiniteSegment ... ok
+test BndLibTest__Line_DiagonalDirection_BothInfinite ... ok
+test BndLibTest__Line_FiniteSegment ... ok
+test BndLibTest__Line_NegativeDirection_NegativeInfinite ... ok
+test BndLibTest__Line_NegativeDirection_PositiveInfinite ... ok
+test BndLibTest__Line_PositiveDirection_NegativeInfinite ... ok
+test BndLibTest__Parabola2d_FiniteArc ... ok
+test BndLibTest__Parabola_FiniteArc ... ok
+test BndLibTest__Parabola_InfiniteParameter ... ok
+test BndLibTest__Sphere_Full ... ok
+test BndLibTest__Sphere_Patch ... ok
+test BndLibTest__Sphere_Translated ... ok
+test BndLibTest__Sphere_WithTolerance ... ok
+test BndLibTest__Torus_Full ... ok
+test BndLibTest__Torus_LargeNegativeVParameter ... ok
+test BndLibTest__Torus_NegativeVParameter ... ok
+test BndLibTest__Torus_Patch ... ok
+test BndLibTest__Torus_Translated ... ok
+test BndLib_Add2dCurveTest__AddOptimal_Ellipse ... ok
+test BndLib_Add2dCurveTest__Ellipse_Full ... ok
+test BndLib_Add2dCurveTest__Circle_Full ... ok
+test BndLib_Add2dCurveTest__Circle_Arc ... ok
+test BndLib_Add2dCurveTest__Line_Segment ... ok
+test BndLib_Add2dCurveTest__Adaptor_Circle ... ok
+test BndLib_Add3dCurveTest__AddOptimal_Circle ... ok
+test BndLib_Add2dCurveTest__BezierCurve ... ok
+test BndLib_Add3dCurveTest__BSplineCurve ... ok
+test BndLib_AddSurfaceTest__Cylinder_Full ... ok
+test BndLib_AddSurfaceTest__Sphere_Patch ... ok
+test BndLib_Add3dCurveTest__Circle_Arc ... ok
+test BndLib_AddSurfaceTest__Torus_Full ... ok
+test BndLib_Add3dCurveTest__BezierCurve ... ok
+test BndLib_Add3dCurveTest__Ellipse_Full ... ok
+test BndLib_AddSurfaceTest__AddOptimal_Sphere ... ok
+test BndLib_AddSurfaceTest__Cylinder_Translated ... ok
+test BndLib_Add3dCurveTest__Circle_Rotated ... ok
+test BndLib_AddSurfaceTest__Cone_Full ... ok
+test BndLib_AddSurfaceTest__Plane ... ok
+test BndLib_Add3dCurveTest__Circle_Full ... ok
+test BndLib_AddSurfaceTest__LargeParameters_PrecisionTest ... ok
+test BndLib_AddSurfaceTest__Plane_Tilted ... ok
+test BndLib_AddSurfaceTest__OffsetSurface_ParameterPrecision ... ok
+test BndLib_Add3dCurveTest__Line_Segment ... ok
+test BndLib_AddSurfaceTest__Sphere_Full ... ok
+test BndLib_AddSurfaceTest__BezierSurface ... ok
+
+test result: ok. 63 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bnd_lib_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/bnd_lib_behavior-5b2fa73a4c1c87ac)
+
+running 10 tests
+test bndlib_circle_arc_widens_the_box_it_is_given ... ok
+test bndlib_hyperbola2d_skips_the_coordinate_extrema ... ok
+test equal_infinite_ends_raise_standard_failure ... ok
+test doubly_infinite_line_adds_the_origin_point_and_opens_its_axis ... ok
+test null_geometry_raises_standard_null_object ... ok
+test bezier_sample_count_shrinks_on_a_short_range ... ok
+test torus_patch_beyond_int_range_returns_a_void_box ... ok
+test tilted_infinite_plane_is_the_whole_space_without_enlarge ... ok
+test trimmed_offset_curve_uses_the_offset_evaluator ... ok
+test offset_surface_fallback_enlarges_by_the_larger_of_offset_and_tolerance ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_behavior-65e5f82115ef34b4)
+
+running 13 tests
+test ext_el_ss_sphere_pairs_are_done_then_not_implemented ... ok
+test ext_el_cs_line_cone_is_not_implemented ... ok
+test ext_p_el_c2d_marks_both_circle_extrema_as_minima_and_no_ellipse_extremum ... ok
+test ext_cs_parallel_case_has_a_distance_but_no_point ... ok
+test func_ext_ss_saves_every_state ... ok
+test func_ext_cs_merges_states_by_curve_parameter_only ... ok
+test func_ps_norm_merges_states_within_p_confusion_in_uv ... ok
+test gen_ext_ps_needs_two_samples_in_each_direction ... ok
+test ext_ps_trimmed_distances_are_never_computed ... ok
+test glob_opt_func_conic_s_without_conic_is_a_null_object ... ok
+test glob_opt_func_c_quadric_on_another_surface_returns_u_bounds ... ok
+test ext_ss_keeps_the_parallel_flag_of_an_earlier_perform ... ok
+test ext_p_rev_s_reinitialized_on_the_same_handle_takes_the_grid_search ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/extrema_ext_pc.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_ext_pc-8c0d8565d88c4aab)
+
+running 1 test
+test Extrema_ExtPC_Test__Bug24945_CylinderParameterNormalization ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d-78bc60c4145532b9)
+
+running 6 tests
+test ExtremaPC2dTest__ClosedPeriodicDomainValidation ... ok
+test ExtremaPC2dTest__EndpointClassificationAndModes ... ok
+test ExtremaPC2dTest__EndpointClassificationUsesLocalBehavior ... ok
+test ExtremaPC2dTest__Result_DefaultClearAndTraits ... ok
+test ExtremaPC2dTest__SingletonAndClosedEndpointBehavior ... ok
+test ExtremaPC2dTest__ToleranceAndFiniteParameterValidation ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_bezier_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_bezier_curve-c8a48a319ed2713e)
+
+running 8 tests
+test ExtremaPC2d_BezierCurveTest__DegenerateCurveHasInfiniteSolutions ... ok
+test ExtremaPC2d_BezierCurveTest__RationalArcHasConstantDistance ... ok
+test ExtremaPC2d_BezierCurveTest__LinearProjectionIsExact ... ok
+test ExtremaPC2d_BezierCurveTest__SingletonInvalidNullAndOwnership ... ok
+test ExtremaPC2d_BezierCurveTest__SymmetricQuadraticHasCentralMinimum ... ok
+test ExtremaPC2d_BezierCurveTest__MutationIsObserved ... ok
+test ExtremaPC2d_BezierCurveTest__SearchModesAndEndpoints ... ok
+test ExtremaPC2d_BezierCurveTest__MaxDegreeRationalWorkspaceHandlesConstantCurve ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/extrema_pc2d_bspline_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_bspline_curve-e4b4cdfd12ce1a05)
+
+running 7 tests
+test ExtremaPC2d_BSplineCurveTest__DegenerateCurveHasInfiniteSolutions ... ok
+test ExtremaPC2d_BSplineCurveTest__SingletonInvalidNullAndOwnership ... ok
+test ExtremaPC2d_BSplineCurveTest__LinearProjectionIsExact ... ok
+test ExtremaPC2d_BSplineCurveTest__PartialDomainUsesEndpointWhenRequested ... ok
+test ExtremaPC2d_BSplineCurveTest__C1JunctionPointIsFound ... ok
+test ExtremaPC2d_BSplineCurveTest__PoleMutationIsObserved ... ok
+test ExtremaPC2d_BSplineCurveTest__SearchModesFilterExtrema ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_circle.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_circle-d029bb34008bdfc4)
+
+running 12 tests
+test ExtremaPC2d_CircleTest__CenterAndZeroRadiusHaveInfiniteSolutions ... ok
+test ExtremaPC2d_CircleTest__AccessorsAndValueMatchGeometry ... ok
+test ExtremaPC2d_CircleTest__IndirectOrientationPreservesSense ... ok
+test ExtremaPC2d_CircleTest__HalfCircleClassifiesInteriorAndEndpoints ... ok
+test ExtremaPC2d_CircleTest__LargeToleranceDoesNotExpandDomain ... ok
+test ExtremaPC2d_CircleTest__NonFiniteQueryIsRejected ... ok
+test ExtremaPC2d_CircleTest__MultiplePeriodsReturnAllParameterExtrema ... ok
+test ExtremaPC2d_CircleTest__OutsideAndInsidePointsHaveOppositeExtrema ... ok
+test ExtremaPC2d_CircleTest__SearchModesReturnExactSubsets ... ok
+test ExtremaPC2d_CircleTest__SingletonAndInvalidInput ... ok
+test ExtremaPC2d_CircleTest__ShiftedFullPeriodHasUniqueRepresentatives ... ok
+test ExtremaPC2d_CircleTest__UnrepresentablePeriodicStepReportsNumericalError ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_curve-8472f6089f494240)
+
+running 10 tests
+test ExtremaPC2d_CurveTest__NullCurveIsUninitializedAndNotDone ... ok
+test ExtremaPC2d_CurveTest__AnalyticalDispatchCopiesPrimitiveGeometry ... ok
+test ExtremaPC2d_CurveTest__ExplicitBoundsIntersectTrimmedBounds ... ok
+test ExtremaPC2d_CurveTest__TrimmedCurveUsesTrimBounds ... ok
+test ExtremaPC2d_CurveTest__GeneralCurveDispatchMatchesSpecialist ... ok
+test ExtremaPC2d_CurveTest__BezierMutationFlowsThroughAggregator ... ok
+test ExtremaPC2d_CurveTest__OffsetDispatchAndSearchModes ... ok
+test ExtremaPC2d_CurveTest__NumericalHandleDispatchMatchesSpecialists ... ok
+test ExtremaPC2d_CurveTest__ResultStorageIsEvaluatorLocal ... ok
+test ExtremaPC2d_CurveTest__AnalyticalAdaptorDispatchMatchesSpecialists ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/extrema_pc2d_distance_function.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_distance_function-42cab612ab84977f)
+
+running 4 tests
+test ExtremaPC2d_DistanceFunctionTest__LineValuesAreExact ... ok
+test ExtremaPC2d_DistanceFunctionTest__CircleNormalizedFormulaIsExact ... ok
+test ExtremaPC2d_DistanceFunctionTest__DerivativeMatchesCenteredDifference ... ok
+test ExtremaPC2d_DistanceFunctionTest__ZeroSpeedReturnsDefinedZeros ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_ellipse.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_ellipse-f53a3c14a654e929)
+
+running 9 tests
+test ExtremaPC2d_EllipseTest__CircularEllipseCenterIsInfinite ... ok
+test ExtremaPC2d_EllipseTest__IndirectOrientationMapsLocalAxes ... ok
+test ExtremaPC2d_EllipseTest__MajorAxisOutsideHasTwoExtrema ... ok
+test ExtremaPC2d_EllipseTest__MultiplePeriodsReturnAllParameterExtrema ... ok
+test ExtremaPC2d_EllipseTest__CenterHasFourAxisExtrema ... ok
+test ExtremaPC2d_EllipseTest__SearchModesAtCenterReturnSubsets ... ok
+test ExtremaPC2d_EllipseTest__SingletonInvalidAndAccessors ... ok
+test ExtremaPC2d_EllipseTest__ShiftedPeriodAndHalfArcEndpoints ... ok
+test ExtremaPC2d_EllipseTest__PointOnCurveHasZeroDistanceMinimum ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_grid_evaluator.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_grid_evaluator-0b91cf45b73696c7)
+
+running 7 tests
+test ExtremaPC2d_GridEvaluatorTest__ConstantCircleDistanceHasInfiniteSolutions ... ok
+test ExtremaPC2d_GridEvaluatorTest__UniformParamsRejectInvalidSampleCount ... ok
+test ExtremaPC2d_GridEvaluatorTest__UniformParamsCoverDomainExactly ... ok
+test ExtremaPC2d_GridEvaluatorTest__InvalidPartitionAndToleranceAreRejected ... ok
+test ExtremaPC2d_GridEvaluatorTest__ConstantCurveHasInfiniteSolutions ... ok
+test ExtremaPC2d_GridEvaluatorTest__ShortOpenCurveIsNotClosed ... ok
+test ExtremaPC2d_GridEvaluatorTest__QuadraticCurveFindsCentralMinimum ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_hyperbola.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_hyperbola-ceaf11ff19bb3b3a)
+
+running 9 tests
+test ExtremaPC2d_HyperbolaTest__CenterHasVertexMinimum ... ok
+test ExtremaPC2d_HyperbolaTest__SingletonInvalidAndValueAccessor ... ok
+test ExtremaPC2d_HyperbolaTest__ZeroAxesDegeneracies ... ok
+test ExtremaPC2d_HyperbolaTest__PointOnCurveHasZeroDistanceMinimum ... ok
+test ExtremaPC2d_HyperbolaTest__IndirectOrientationPreservesSignedParameters ... ok
+test ExtremaPC2d_HyperbolaTest__BoundedArcAddsEndpointMinima ... ok
+test ExtremaPC2d_HyperbolaTest__MajorAxisPointHasThreeExtrema ... ok
+test ExtremaPC2d_HyperbolaTest__RootWithinParameterToleranceIsClampedToBoundary ... ok
+test ExtremaPC2d_HyperbolaTest__SearchModesReturnExactClasses ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/extrema_pc2d_line.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_line-7f0d883eb97e6d30)
+
+running 8 tests
+test ExtremaPC2d_LineTest__BoundaryProjectionIsNotDuplicated ... ok
+test ExtremaPC2d_LineTest__BoundedProjectionAndEndpointsAreClassified ... ok
+test ExtremaPC2d_LineTest__InvalidInputAndAccessors ... ok
+test ExtremaPC2d_LineTest__ProjectionOutsideDomainUsesEndpointsOnlyWhenRequested ... ok
+test ExtremaPC2d_LineTest__ReversedAndDiagonalDirectionsPreserveParameter ... ok
+test ExtremaPC2d_LineTest__SearchModesFilterInteriorProjection ... ok
+test ExtremaPC2d_LineTest__SingletonDomainHonorsModes ... ok
+test ExtremaPC2d_LineTest__UnboundedProjectionIsExact ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_offset_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_offset_curve-2cb195efe42339f7)
+
+running 7 tests
+test ExtremaPC2d_OffsetCurveTest__OffsetLineProjectionIsExact ... ok
+test ExtremaPC2d_OffsetCurveTest__InvalidDomainAndTolerance ... ok
+test ExtremaPC2d_OffsetCurveTest__CenterHasConstantDistance ... ok
+test ExtremaPC2d_OffsetCurveTest__NegativeOffsetUsesCorrectSide ... ok
+test ExtremaPC2d_OffsetCurveTest__OffsetCircleFindsExactMinAndMax ... ok
+test ExtremaPC2d_OffsetCurveTest__PartialArcAndSearchModes ... ok
+test ExtremaPC2d_OffsetCurveTest__EndpointPathRefreshesPartitionAfterMutation ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_other_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_other_curve-2ae2a9f92e0ae872)
+
+running 5 tests
+test ExtremaPC2d_OtherCurveTest__NaturalAndInvalidDomains ... ok
+test ExtremaPC2d_OtherCurveTest__SineWaveFindsOriginMinimum ... ok
+test ExtremaPC2d_OtherCurveTest__EndpointsAndModesAreForwarded ... ok
+test ExtremaPC2d_OtherCurveTest__MultipleWavesReturnMultipleExtrema ... ok
+test ExtremaPC2d_OtherCurveTest__EndpointPathRefreshesPartitionAfterMutation ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc2d_parabola.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc2d_parabola-70eefa21550bf8ad)
+
+running 10 tests
+test ExtremaPC2d_ParabolaTest__ZeroFocalMatchesMirrorAxisLine ... ok
+test ExtremaPC2d_ParabolaTest__PointOnCurveHasZeroDistanceMinimum ... ok
+test ExtremaPC2d_ParabolaTest__SingletonInvalidAndValueAccessor ... ok
+test ExtremaPC2d_ParabolaTest__VertexAndBehindVertexHaveUniqueMinimum ... ok
+test ExtremaPC2d_ParabolaTest__IndirectOrientationPreservesParameterSense ... ok
+test ExtremaPC2d_ParabolaTest__AxisPointAheadHasThreeExtrema ... ok
+test ExtremaPC2d_ParabolaTest__RootWithinParameterToleranceIsClampedToBoundary ... ok
+test ExtremaPC2d_ParabolaTest__BoundedArcAddsEndpointMinima ... ok
+test ExtremaPC2d_ParabolaTest__KnownCubicHasThreeRoots ... ok
+test ExtremaPC2d_ParabolaTest__SearchModesReturnExactClasses ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/extrema_pc_bezier_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_bezier_curve-a4554da180e4dae0)
+
+running 31 tests
+test ExtremaPC_BezierCurveTest__DegenerateBezier_AllPolesSame ... ok
+test ExtremaPC_BezierCurveTest__BoundedRange_ExtremumAtBound ... ok
+test ExtremaPC_BezierCurveTest__CubicBezier_3D_HelixLike ... ok
+test ExtremaPC_BezierCurveTest__CubicBezier_SCurve ... ok
+test ExtremaPC_BezierCurveTest__ClosedCurve_SeamHasSingleRepresentative ... ok
+test ExtremaPC_BezierCurveTest__LinearBezier_PointAtPole ... ok
+test ExtremaPC_BezierCurveTest__CubicBezier_MultipleExtrema ... ok
+test ExtremaPC_BezierCurveTest__LinearBezier_PointBeforeStart ... ok
+test ExtremaPC_BezierCurveTest__CubicBezier_3D_PointOnCurve ... ok
+test ExtremaPC_BezierCurveTest__CubicBezier_LoopedCurve ... ok
+test ExtremaPC_BezierCurveTest__ConsistentDistanceCalculation ... ok
+test ExtremaPC_BezierCurveTest__BoundedRange_ExtremumInside ... ok
+test ExtremaPC_BezierCurveTest__LinearBezier_PointProjection ... ok
+test ExtremaPC_BezierCurveTest__PointOnCurve_AtEnd ... ok
+test ExtremaPC_BezierCurveTest__PointOnCurve_AtStart ... ok
+test ExtremaPC_BezierCurveTest__PointVeryCloseButNotOn ... ok
+test ExtremaPC_BezierCurveTest__QuadraticBezier_AsymmetricArc ... ok
+test ExtremaPC_BezierCurveTest__PlanarDelegation_PreservesOffPlaneExtrema ... ok
+test ExtremaPC_BezierCurveTest__QuadraticBezier_PointBelowApex ... ok
+test ExtremaPC_BezierCurveTest__PlanarDelegation_ReprojectsMutationPerCall ... ok
+test ExtremaPC_BezierCurveTest__QuarticBezier_WavyCurve ... ok
+test ExtremaPC_BezierCurveTest__PointOnCurve_AtMiddle ... ok
+test ExtremaPC_BezierCurveTest__PointFarFromCurve ... ok
+test ExtremaPC_BezierCurveTest__RationalQuadratic_CircularArc ... ok
+test ExtremaPC_BezierCurveTest__SingletonDomain_ReturnsSolePoint ... ok
+test ExtremaPC_BezierCurveTest__QuadraticBezier_SymmetricArc ... ok
+test ExtremaPC_BezierCurveTest__QuarticBezier_PointOnCurve ... ok
+test ExtremaPC_BezierCurveTest__SmallNonConstantCurveIsNotPromotedToInfinite ... ok
+test ExtremaPC_BezierCurveTest__RepeatedEndpointPole_DoesNotFailNumerically ... ok
+test ExtremaPC_BezierCurveTest__VerifyExtremumCondition ... ok
+test ExtremaPC_BezierCurveTest__RationalQuadratic_HighWeight ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_bspline_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_bspline_curve-7d5f43babf75945a)
+
+running 27 tests
+test ExtremaPC_BSplineCurveTest__GridUtilitiesRejectInvalidSamplesAndShortOpenClosure ... ok
+test ExtremaPC_BSplineCurveTest__LinearBSpline_PointOffLine ... ok
+test ExtremaPC_BSplineCurveTest__LinearBSpline_PointOnLine ... ok
+test ExtremaPC_BSplineCurveTest__PartialRange_FirstHalf ... ok
+test ExtremaPC_BSplineCurveTest__BSpline3D_PointOn ... ok
+test ExtremaPC_BSplineCurveTest__BSpline3D_PointNear ... ok
+test ExtremaPC_BSplineCurveTest__MultiSpanBSpline_MultipleExtrema ... ok
+test ExtremaPC_BSplineCurveTest__PartialRange_SecondHalf ... ok
+test ExtremaPC_BSplineCurveTest__C1Junction_PointOnCurve_FindsMinimum ... ok
+test ExtremaPC_BSplineCurveTest__PointNearCurve_OutOfPlane ... ok
+test ExtremaPC_BSplineCurveTest__PlanarDelegation_NonPlanarCurveUses3dFallback ... ok
+test ExtremaPC_BSplineCurveTest__MultiSpanBSpline_PointNear ... ok
+test ExtremaPC_BSplineCurveTest__PointNearCurve_Below ... ok
+test ExtremaPC_BSplineCurveTest__HighDegreeSpline_RefinementHelps ... ok
+test ExtremaPC_BSplineCurveTest__PointNearCurve_Above ... ok
+test ExtremaPC_BSplineCurveTest__PointOnCurve_Start ... ok
+test ExtremaPC_BSplineCurveTest__QuadraticBSpline_PointNear ... ok
+test ExtremaPC_BSplineCurveTest__SingletonDomain_ReturnsSolePoint ... ok
+test ExtremaPC_BSplineCurveTest__QuadraticBSpline_PointOnApex ... ok
+test ExtremaPC_BSplineCurveTest__PointOnCurve_End ... ok
+test ExtremaPC_BSplineCurveTest__RefinementConfig_DisableRefinement ... ok
+test ExtremaPC_BSplineCurveTest__ClusteredC0Junctions_FindsBothExtrema ... ok
+test ExtremaPC_BSplineCurveTest__VerifyDistanceConsistency ... ok
+test ExtremaPC_BSplineCurveTest__PointOnCurve_Middle ... ok
+test ExtremaPC_BSplineCurveTest__VerifyProjectedPoint ... ok
+test ExtremaPC_BSplineCurveTest__PlanarDelegation_RationalCurvePreservesDomainAndEndpoints ... ok
+test ExtremaPC_BSplineCurveTest__ShiftedMultiPeriodNonPlanarCurveFindsEveryMinimum ... ok
+
+test result: ok. 27 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_circle.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_circle-7a4664a03015a86f)
+
+running 26 tests
+test ExtremaPC_CircleTest__CircleInXZPlane ... ok
+test ExtremaPC_CircleTest__CircleWithOffset ... ok
+test ExtremaPC_CircleTest__CircleInYZPlane ... ok
+test ExtremaPC_CircleTest__LargeRadius ... ok
+test ExtremaPC_CircleTest__NonFiniteQueryIsRejected ... ok
+test ExtremaPC_CircleTest__LargeTolerance_PreservesOppositeExtrema ... ok
+test ExtremaPC_CircleTest__MoreThanOnePeriod_RetainsConstrainedEndpoint ... ok
+test ExtremaPC_CircleTest__PartialArc_ExtremaOutsideRange ... ok
+test ExtremaPC_CircleTest__PartialArc_FirstQuadrant ... ok
+test ExtremaPC_CircleTest__PartialArc_SecondQuadrant ... ok
+test ExtremaPC_CircleTest__PointAbovePlane ... ok
+test ExtremaPC_CircleTest__PlanarDelegation_PreservesParameterAndHeight ... ok
+test ExtremaPC_CircleTest__PointAtCenter_Degenerate ... ok
+test ExtremaPC_CircleTest__PointBelowPlane ... ok
+test ExtremaPC_CircleTest__PointInside_NearCenter ... ok
+test ExtremaPC_CircleTest__PointInside_OnXAxis ... ok
+test ExtremaPC_CircleTest__PointInside_OnYAxis ... ok
+test ExtremaPC_CircleTest__PointNearCenter_NotDegenerate ... ok
+test ExtremaPC_CircleTest__PointOnAxis_Degenerate ... ok
+test ExtremaPC_CircleTest__PointOnCircle ... ok
+test ExtremaPC_CircleTest__PointOnCircle_AtPi ... ok
+test ExtremaPC_CircleTest__PointOutside_Diagonal ... ok
+test ExtremaPC_CircleTest__PointOutside_OnYAxis ... ok
+test ExtremaPC_CircleTest__PointOutside_OnXAxis ... ok
+test ExtremaPC_CircleTest__SmallRadius ... ok
+test ExtremaPC_CircleTest__ShiftedFullPeriod_UniqueRepresentatives ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_comparison.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_comparison-7cc94015264d1685)
+
+running 17 tests
+test ExtremaPC_ComparisonTest__Circle_PointOffPlane ... ok
+test ExtremaPC_ComparisonTest__Circle_PointOutside ... ok
+test ExtremaPC_ComparisonTest__Circle_PointInside ... ok
+test ExtremaPC_ComparisonTest__Line_PointOffLine ... ok
+test ExtremaPC_ComparisonTest__Ellipse_PointOnMajorAxis ... ok
+test ExtremaPC_ComparisonTest__Line_PointOnLine ... ok
+test ExtremaPC_ComparisonTest__PointOnCurve_Circle ... ok
+test ExtremaPC_ComparisonTest__Bezier_CubicCurve ... ok
+test ExtremaPC_ComparisonTest__BSpline_CubicCurve ... ok
+test ExtremaPC_ComparisonTest__BSpline_MultiSpan ... ok
+test ExtremaPC_ComparisonTest__PointOnCurve_BSpline ... ok
+test ExtremaPC_ComparisonTest__OffsetCircle ... ok
+test ExtremaPC_ComparisonTest__Parabola_PointNearVertex ... ok
+test ExtremaPC_ComparisonTest__Circle_RandomPoints ... ok
+test ExtremaPC_ComparisonTest__Ellipse_PointGeneral ... ok
+test ExtremaPC_ComparisonTest__Hyperbola_PointNearBranch ... ok
+test ExtremaPC_ComparisonTest__BSpline_RandomPoints ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/extrema_pc_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_curve-8c282afb3db5f736)
+
+running 47 tests
+test ExtremaPC_CurveTest__Aggregator_IsInitialized ... ok
+test ExtremaPC_CurveTest__Aggregator_Ellipse ... ok
+test ExtremaPC_CurveTest__Aggregator_Circle ... ok
+test ExtremaPC_CurveTest__Aggregator_BSpline ... ok
+test ExtremaPC_CurveTest__Aggregator_Line ... ok
+test ExtremaPC_CurveTest__Aggregator_Bezier ... ok
+test ExtremaPC_CurveTest__Aggregator_BSpline_SearchMode_Min ... ok
+test ExtremaPC_CurveTest__Aggregator_PointOnCurve ... ok
+test ExtremaPC_CurveTest__Aggregator_SearchMode_Max ... ok
+test ExtremaPC_CurveTest__Circle_PointAtCenter_Degenerate ... ok
+test ExtremaPC_CurveTest__Circle_PointInside ... ok
+test ExtremaPC_CurveTest__Aggregator_SearchMode_Min ... ok
+test ExtremaPC_CurveTest__Circle_PointOutside ... ok
+test ExtremaPC_CurveTest__Aggregator_TrimmedCurve ... ok
+test ExtremaPC_CurveTest__Circle_SearchMode_Min ... ok
+test ExtremaPC_CurveTest__Circle_SearchMode_Max ... ok
+test ExtremaPC_CurveTest__Circle_SearchMode_MinMax ... ok
+test ExtremaPC_CurveTest__Line_PointOffLine ... ok
+test ExtremaPC_CurveTest__Line_ProjectionOutsideBounds ... ok
+test ExtremaPC_CurveTest__Result_Empty ... ok
+test ExtremaPC_CurveTest__Result_MaxSquareDistance ... ok
+test ExtremaPC_CurveTest__Result_MinSquareDistance ... ok
+test ExtremaPC_CurveTest__Aggregator_OffsetCurve ... ok
+test ExtremaPC_CurveTest__TransformedCurve_CompoundScale_LinePreservesParameter ... ok
+test ExtremaPC_CurveTest__TransformedCurve_DomainLimited_Constructor ... ok
+test ExtremaPC_CurveTest__TransformedCurve_DomainLimited_Circle ... ok
+test ExtremaPC_CurveTest__Line_PointOnLine ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Identity_LineMatchesNonTransformed ... ok
+test ExtremaPC_CurveTest__Aggregator_Parabola ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Rotation_Line ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Translation_Line ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Translation_Circle ... ok
+test ExtremaPC_CurveTest__TransformedCurve_SearchMode_Min ... ok
+test ExtremaPC_CurveTest__TransformedCurve_SearchMode_Max ... ok
+test ExtremaPC_CurveTest__TransformedCurve_PerformWithEndpoints_ScaledBSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Translation_BSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_PerformWithEndpoints_BSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Compound_Bezier ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Identity_BSplineMatchesNonTransformed ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Scale_BSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Compound_BSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Scale_Bezier ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Translation_OffsetCurve ... ok
+test ExtremaPC_CurveTest__TransformedCurve_CompoundScale_ParabolaPreservesParameter ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Rotation_BSpline ... ok
+test ExtremaPC_CurveTest__TransformedCurve_Translation_Bezier ... ok
+test ExtremaPC_CurveTest__Aggregator_Hyperbola ... ok
+
+test result: ok. 47 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/extrema_pc_ellipse.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_ellipse-8694ee0a780e0fa0)
+
+running 30 tests
+test ExtremaPC_EllipseTest__EllipseInYZPlane ... ok
+test ExtremaPC_EllipseTest__EllipseWithOffset ... ok
+test ExtremaPC_EllipseTest__PartialArc_FirstQuadrant ... ok
+test ExtremaPC_EllipseTest__NearlyCircularEllipse ... ok
+test ExtremaPC_EllipseTest__PartialArc_SecondHalf ... ok
+test ExtremaPC_EllipseTest__PointAbovePlane ... ok
+test ExtremaPC_EllipseTest__PointAtCenter_Degenerate ... ok
+test ExtremaPC_EllipseTest__PointBelowPlane ... ok
+test ExtremaPC_EllipseTest__PointOnEllipse_MajorVertex ... ok
+test ExtremaPC_EllipseTest__PointOnEllipse_MinorVertex ... ok
+test ExtremaPC_EllipseTest__PointOnMajorAxis_NegativeSide ... ok
+test ExtremaPC_EllipseTest__PointOnMajorAxis_Inside ... ok
+test ExtremaPC_EllipseTest__PointOnMajorAxis_Outside ... ok
+test ExtremaPC_EllipseTest__ShiftedFullPeriod_UniqueRepresentatives ... ok
+test ExtremaPC_EllipseTest__SingletonDomain_InvalidTolerance ... ok
+test ExtremaPC_EllipseTest__PointOnMinorAxis_Inside ... ok
+test ExtremaPC_EllipseTest__PointOnMinorAxis_Outside ... ok
+test ExtremaPC_EllipseTest__TwoExtrema_PointOnAxis ... ok
+test ExtremaPC_EllipseTest__VeryFlatEllipse ... ok
+test ExtremaPC_EllipseTest__PointInFirstQuadrant ... ok
+test ExtremaPC_EllipseTest__NarrowRange_MediumSmall ... ok
+test ExtremaPC_EllipseTest__PointInSecondQuadrant ... ok
+test ExtremaPC_EllipseTest__PointInFourthQuadrant ... ok
+test ExtremaPC_EllipseTest__PointInThirdQuadrant ... ok
+test ExtremaPC_EllipseTest__NarrowRange_VerySmall ... ok
+test ExtremaPC_EllipseTest__NarrowRange_TinyArc ... ok
+test ExtremaPC_EllipseTest__LargeRange_FullCircle ... ok
+test ExtremaPC_EllipseTest__PlanarDelegation_PreservesParameterAndHeight ... ok
+test ExtremaPC_EllipseTest__PointOnEllipse_General ... ok
+test ExtremaPC_EllipseTest__FourExtrema_PointInsideEllipse ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/extrema_pc_extended_geometry.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_extended_geometry-739c100ab3ee1329)
+
+running 40 tests
+test ExtremaPC_ExtendedGeometryTest__CircleArc_FirstQuadrant ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_Arbitrary_Orientation ... ok
+test ExtremaPC_ExtendedGeometryTest__CircleArc_ThirdQuadrant ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_Rotated_XY_Plane ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_Rotated_XZ_Plane ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_Rotated_YZ_Plane ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_VerySmall ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_Translated ... ok
+test ExtremaPC_ExtendedGeometryTest__Circle_VeryLarge ... ok
+test ExtremaPC_ExtendedGeometryTest__EllipseArc_SemiEllipse ... ok
+test ExtremaPC_ExtendedGeometryTest__Ellipse_Translated ... ok
+test ExtremaPC_ExtendedGeometryTest__Line_Arbitrary ... ok
+test ExtremaPC_ExtendedGeometryTest__Line_Diagonal ... ok
+test ExtremaPC_ExtendedGeometryTest__BSpline_Linear ... ok
+test ExtremaPC_ExtendedGeometryTest__Line_PointOnLine ... ok
+test ExtremaPC_ExtendedGeometryTest__Bezier_Quadratic ... ok
+test ExtremaPC_ExtendedGeometryTest__Bezier_HighDegree ... ok
+test ExtremaPC_ExtendedGeometryTest__BSpline_Quadratic ... ok
+test ExtremaPC_ExtendedGeometryTest__Bezier_3D_SCurve ... ok
+test ExtremaPC_ExtendedGeometryTest__BSpline_3D_Helix ... ok
+test ExtremaPC_ExtendedGeometryTest__Point_ExactlyOnCurve_Circle ... ok
+test ExtremaPC_ExtendedGeometryTest__Point_VeryFar ... ok
+test ExtremaPC_ExtendedGeometryTest__Point_VeryClose ... ok
+test ExtremaPC_ExtendedGeometryTest__Point_ExactlyOnCurve_BSpline ... ok
+test ExtremaPC_ExtendedGeometryTest__OffsetBezier ... ok
+test ExtremaPC_ExtendedGeometryTest__OffsetEllipse ... ok
+test ExtremaPC_ExtendedGeometryTest__Parabola_LargeFocalLength ... ok
+test ExtremaPC_ExtendedGeometryTest__Parabola_InXZPlane ... ok
+test ExtremaPC_ExtendedGeometryTest__OffsetNegative ... ok
+test ExtremaPC_ExtendedGeometryTest__Parabola_Translated ... ok
+test ExtremaPC_ExtendedGeometryTest__Parabola_SmallFocalLength ... ok
+test ExtremaPC_ExtendedGeometryTest__Random_Circle_100Points ... ok
+test ExtremaPC_ExtendedGeometryTest__Hyperbola_InXZPlane ... ok
+test ExtremaPC_ExtendedGeometryTest__Ellipse_NearlyCircular ... ok
+test ExtremaPC_ExtendedGeometryTest__Ellipse_Rotated ... ok
+test ExtremaPC_ExtendedGeometryTest__Hyperbola_Translated ... ok
+test ExtremaPC_ExtendedGeometryTest__Ellipse_HighEccentricity ... ok
+test ExtremaPC_ExtendedGeometryTest__Hyperbola_HighEccentricity ... ok
+test ExtremaPC_ExtendedGeometryTest__Random_Parabola_100Points ... ok
+test ExtremaPC_ExtendedGeometryTest__Random_Ellipse_100Points ... ok
+
+test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.46s
+
+     Running tests/extrema_pc_hyperbola.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_hyperbola-ccd1097a42a88f45)
+
+running 24 tests
+test ExtremaPC_HyperbolaTest__HyperbolaInXZPlane ... ok
+test ExtremaPC_HyperbolaTest__BoundsPositive ... ok
+test ExtremaPC_HyperbolaTest__BoundsNegative ... ok
+test ExtremaPC_HyperbolaTest__PointOnMajorAxis_BetweenBranches ... ok
+test ExtremaPC_HyperbolaTest__HyperbolaWithOffset ... ok
+test ExtremaPC_HyperbolaTest__PointOffAxis_FirstQuadrant ... ok
+test ExtremaPC_HyperbolaTest__LargeSemiAxes ... ok
+test ExtremaPC_HyperbolaTest__PointOffAxis_FourthQuadrant ... ok
+test ExtremaPC_HyperbolaTest__PointOnHyperbola_AtVertex ... ok
+test ExtremaPC_HyperbolaTest__PointOnMajorAxis_AtVertex ... ok
+test ExtremaPC_HyperbolaTest__NearlyRectangular ... ok
+test ExtremaPC_HyperbolaTest__HyperbolaInYZPlane ... ok
+test ExtremaPC_HyperbolaTest__PointOnHyperbola_Positive ... ok
+test ExtremaPC_HyperbolaTest__NarrowBounds ... ok
+test ExtremaPC_HyperbolaTest__PointBelowPlane ... ok
+test ExtremaPC_HyperbolaTest__PointOnHyperbola_Negative ... ok
+test ExtremaPC_HyperbolaTest__PointOnMajorAxis_Outside ... ok
+test ExtremaPC_HyperbolaTest__VerifyDistanceConsistency ... ok
+test ExtremaPC_HyperbolaTest__VerifyProjectedPoint ... ok
+test ExtremaPC_HyperbolaTest__PointInsideAsymptotes ... ok
+test ExtremaPC_HyperbolaTest__PointAbovePlane ... ok
+test ExtremaPC_HyperbolaTest__HyperbolaWithOffset_PointOff ... ok
+test ExtremaPC_HyperbolaTest__SmallSemiAxes ... ok
+test ExtremaPC_HyperbolaTest__PlanarDelegation_PreservesParameterAndHeight ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/extrema_pc_line.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_line-a5c162c832dfe9d8)
+
+running 31 tests
+test ExtremaPC_LineTest__EffectivelyUnboundedDomain_DoesNotAddEndpoints ... ok
+test ExtremaPC_LineTest__EndpointsAsMaxima ... ok
+test ExtremaPC_LineTest__LargeCoordinates ... ok
+test ExtremaPC_LineTest__LineAlongY ... ok
+test ExtremaPC_LineTest__LineAlongZ ... ok
+test ExtremaPC_LineTest__LineDiagonal_XYZ ... ok
+test ExtremaPC_LineTest__LineDiagonal_XY ... ok
+test ExtremaPC_LineTest__LineWithOffset_XAxis ... ok
+test ExtremaPC_LineTest__LineWithOffset_PointOff ... ok
+test ExtremaPC_LineTest__NarrowBounds ... ok
+test ExtremaPC_LineTest__LowerBoundedDomain_PreservesFiniteEndpoint ... ok
+test ExtremaPC_LineTest__NegativeBoundsClamp ... ok
+test ExtremaPC_LineTest__NegativeParameters ... ok
+test ExtremaPC_LineTest__PlanarDelegation_PreservesParameterAndHeight ... ok
+test ExtremaPC_LineTest__PointOffLine_YOffset ... ok
+test ExtremaPC_LineTest__PointOffLine_YZOffset ... ok
+test ExtremaPC_LineTest__PointOffLine_ZOffset ... ok
+test ExtremaPC_LineTest__PointOnLine_AtOrigin ... ok
+test ExtremaPC_LineTest__PointOnLine_Negative ... ok
+test ExtremaPC_LineTest__ProjectionAtLowerBound ... ok
+test ExtremaPC_LineTest__PointOnLine_Positive ... ok
+test ExtremaPC_LineTest__ProjectionAtUpperBound ... ok
+test ExtremaPC_LineTest__ProjectionOutsideBounds_Left ... ok
+test ExtremaPC_LineTest__ProjectionOutsideBounds_Right ... ok
+test ExtremaPC_LineTest__ReversedDomain_IsInvalidInput ... ok
+test ExtremaPC_LineTest__SingletonDomain_IsMinimumAndMaximum ... ok
+test ExtremaPC_LineTest__SingletonProjection_IsMinimumAndMaximum ... ok
+test ExtremaPC_LineTest__SmallCoordinates ... ok
+test ExtremaPC_LineTest__UpperBoundedDomain_PreservesFiniteEndpoint ... ok
+test ExtremaPC_LineTest__VerifyDistanceConsistency ... ok
+test ExtremaPC_LineTest__VerifyProjectedPoint ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_offset_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_offset_curve-890d3675adad38ae)
+
+running 13 tests
+test ExtremaPC_OffsetCurveTest__OffsetLine_PointNear ... ok
+test ExtremaPC_OffsetCurveTest__ScaledTransformedOffsetUsesParameterSafeFallback ... ok
+test ExtremaPC_OffsetCurveTest__OffsetCircle_PointInside ... ok
+test ExtremaPC_OffsetCurveTest__OffsetCircle_PointOnOffsetCurve ... ok
+test ExtremaPC_OffsetCurveTest__OffsetCircle_PointOutOfPlane ... ok
+test ExtremaPC_OffsetCurveTest__PartialRange_FirstQuadrant ... ok
+test ExtremaPC_OffsetCurveTest__PlanarDelegation_PreservesNormalDirectionSign ... ok
+test ExtremaPC_OffsetCurveTest__VerifyDistanceConsistency ... ok
+test ExtremaPC_OffsetCurveTest__OffsetCircle_PointOutside ... ok
+test ExtremaPC_OffsetCurveTest__OffsetCircle_NegativeOffset ... ok
+test ExtremaPC_OffsetCurveTest__VerifyExtremumCondition ... ok
+test ExtremaPC_OffsetCurveTest__OffsetEllipse_PointOutside ... ok
+test ExtremaPC_OffsetCurveTest__OffsetEllipse_PointOnMinorAxis ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_parabola.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_parabola-0286d9cb8f519b71)
+
+running 24 tests
+test ExtremaPC_ParabolaTest__PointOnAxis_Positive ... ok
+test ExtremaPC_ParabolaTest__ZeroFocal_DegeneratesToLine ... ok
+test ExtremaPC_ParabolaTest__BoundsNegative ... ok
+test ExtremaPC_ParabolaTest__ParabolaWithOffset ... ok
+test ExtremaPC_ParabolaTest__LargeFocalLength ... ok
+test ExtremaPC_ParabolaTest__PointOnAxis_AtVertex ... ok
+test ExtremaPC_ParabolaTest__PointOffAxis_Negative ... ok
+test ExtremaPC_ParabolaTest__ParabolaInXZPlane ... ok
+test ExtremaPC_ParabolaTest__ParabolaInYZPlane ... ok
+test ExtremaPC_ParabolaTest__ParabolaWithOffset_PointOff ... ok
+test ExtremaPC_ParabolaTest__PointBelowPlane ... ok
+test ExtremaPC_ParabolaTest__PointAbovePlane ... ok
+test ExtremaPC_ParabolaTest__NarrowBounds ... ok
+test ExtremaPC_ParabolaTest__BoundsPositive ... ok
+test ExtremaPC_ParabolaTest__SmallFocalLength ... ok
+test ExtremaPC_ParabolaTest__PointOnAxis_Negative ... ok
+test ExtremaPC_ParabolaTest__VerifyDistanceConsistency ... ok
+test ExtremaPC_ParabolaTest__PointOnParabola_AtVertex ... ok
+test ExtremaPC_ParabolaTest__PointOnParabola_Positive ... ok
+test ExtremaPC_ParabolaTest__PointOffAxis_LargeY ... ok
+test ExtremaPC_ParabolaTest__PointOffAxis_Positive ... ok
+test ExtremaPC_ParabolaTest__VerifyProjectedPoint ... ok
+test ExtremaPC_ParabolaTest__PointOnParabola_Negative ... ok
+test ExtremaPC_ParabolaTest__PlanarDelegation_PreservesParameterAndHeight ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/extrema_pc_search_mode.rs (/tmp/target-advapp2var-mutable/debug/deps/extrema_pc_search_mode-efdf75486a22bd08)
+
+running 30 tests
+test ExtremaPC_SearchModeTest__Circle_MaxMode_PointInside ... ok
+test ExtremaPC_SearchModeTest__Circle_MinMaxMode ... ok
+test ExtremaPC_SearchModeTest__Circle_MinMode_PointInside ... ok
+test ExtremaPC_SearchModeTest__Circle_MaxMode_PointOutside ... ok
+test ExtremaPC_SearchModeTest__Circle_PartialArc_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Circle_MinMode_PointOutside ... ok
+test ExtremaPC_SearchModeTest__Circle_PartialArc_MinMode ... ok
+test ExtremaPC_SearchModeTest__Ellipse_MaxMode_OnMajorAxis ... ok
+test ExtremaPC_SearchModeTest__Ellipse_MinMode_OnMajorAxis ... ok
+test ExtremaPC_SearchModeTest__Line_MaxMode ... ok
+test ExtremaPC_SearchModeTest__BSpline_MaxMode ... ok
+test ExtremaPC_SearchModeTest__BSpline_MinMaxMode ... ok
+test ExtremaPC_SearchModeTest__Line_MinMaxMode ... ok
+test ExtremaPC_SearchModeTest__Bezier_MinMode ... ok
+test ExtremaPC_SearchModeTest__Line_MinMode ... ok
+test ExtremaPC_SearchModeTest__BSpline_MinMode ... ok
+test ExtremaPC_SearchModeTest__Bezier_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Circle_RandomPoints_MinMode ... ok
+test ExtremaPC_SearchModeTest__OffsetCircle_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Circle_RandomPoints_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Parabola_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Parabola_MinMode_OffAxis ... ok
+test ExtremaPC_SearchModeTest__OffsetCircle_MinMode ... ok
+test ExtremaPC_SearchModeTest__Parabola_MinMode_AtVertex ... ok
+test ExtremaPC_SearchModeTest__Ellipse_MinMode_General ... ok
+test ExtremaPC_SearchModeTest__Ellipse_MinMaxMode ... ok
+test ExtremaPC_SearchModeTest__BSpline_RandomPoints_MinMode ... ok
+test ExtremaPC_SearchModeTest__Hyperbola_MaxMode ... ok
+test ExtremaPC_SearchModeTest__Hyperbola_MinMode ... ok
+test ExtremaPC_SearchModeTest__Ellipse_RandomPoints_MinMode ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running tests/fem_tool_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/fem_tool_behavior-94b8ea2b4cde1543)
+
+running 12 tests
+test criteria_refuse_shapes_other_than_c0_c1_c2 ... ok
+test assembly_checks_the_dependence_and_the_solution_state ... ok
+test curve_get_element_rescales_the_columns_lower_col_to_dimension ... ok
+test assembly_prepends_a_constraint_segment_compared_with_the_last_match ... ok
+test profile_matrix_entries_outside_the_profile_alias_stored_ones ... ok
+test profile_matrix_solves_only_after_decompose_and_has_no_iterative_solver ... ok
+test curve_d1_scales_every_entry_of_the_output ... ok
+test elements_of_ref_matrix_checks_the_order_and_the_output_length ... ok
+test curve_checks_degrees_elements_and_length_bounds ... ok
+test criteria_without_coefficients_raise_domain_error_or_null_object ... ok
+test tension_dependence_table_uses_one_based_indexes ... ok
+test flexion_hessian_writes_from_index_zero_jerk_from_the_lower_bounds ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fem_tool_reference_cache.rs (/tmp/target-advapp2var-mutable/debug/deps/fem_tool_reference_cache-655731c0ef9b778b)
+
+running 1 test
+test a_cached_order_skips_the_work_degree_check ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_behavior-c33a77a449b977a3)
+
+running 11 tests
+test conversion_operators_share_the_handle ... ok
+test cylinder_at_a_distance_subtracts_it ... ok
+test arc_through_coincident_points_raises_from_the_equal_trim_bounds ... ok
+test ellipse_with_inverted_radii_reports_invert_axis ... ok
+test gce2d_aliases_name_the_gc_classes ... ok
+test null_scale_factor_raises ... ok
+test nearly_parallel_tangent_centers_the_3d_arc_at_the_origin ... ok
+test segment_between_confused_points_raises_through_the_line_conversion ... ok
+test tangent_along_the_chord_leaves_confused_points_in_2d ... ok
+test value_of_a_failed_construction_raises_not_done ... ok
+test tangent_arc_2d_raises_for_confused_points_and_null_tangents ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_arc_of_circle.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_arc_of_circle-e41b45c6221ac8dd)
+
+running 3 tests
+test GC_MakeArcOfCircleTest__FromPointsAndTangent_Done ... ok
+test GC_MakeArcOfCircleTest__FromThreePoints_Done ... ok
+test GC_MakeArcOfCircleTest__FromPointsAndTangent_ConfusionScale_Done ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_circle2d.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_circle2d-6d0318c58db5294d)
+
+running 3 tests
+test GC_MakeCircle2dTest__FromCircAndPoint_Done ... ok
+test GC_MakeCircle2dTest__FromCircAndDist_Done ... ok
+test GC_MakeCircle2dTest__FromCircAndPoint_AtCenter_DoneZeroRadius ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_conical_surface.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_conical_surface-acc7a60355f7f32b)
+
+running 2 tests
+test GC_MakeConicalSurfaceTest__FromAxis_AngleBelowResolution_BadAngle ... ok
+test GC_MakeConicalSurfaceTest__FromAxis_ValidAngle_Done ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_parabola2d.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_parabola2d-a7b251af25d9fa0b)
+
+running 3 tests
+test GC_MakeParabola2d_Test__OCC26747_1_ParabolaOpeningRight ... ok
+test GC_MakeParabola2d_Test__OCC26747_2_ParabolaOpeningLeft ... ok
+test GC_MakeParabola2d_Test__OCC26747_3_DegenerateParabola ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_plane.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_plane-1280e1004aa0d957)
+
+running 3 tests
+test GC_MakePlaneTest__FromAxis_Done ... ok
+test GC_MakePlaneTest__FromPlaneAndDist_Done ... ok
+test GC_MakePlaneTest__FromPlaneAndPoint_Done ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gc_make_segment2d.rs (/tmp/target-advapp2var-mutable/debug/deps/gc_make_segment2d-0467a5aac30a5a7e)
+
+running 6 tests
+test GC_MakeSegment2dTest__FromPointDir_AtResolutionParameter_ConfusedPoints ... ok
+test GC_MakeSegment2dTest__FromPointDir_BelowResolutionParameter_ConfusedPoints ... ok
+test GC_MakeSegment2dTest__FromPoints_AtResolution_ConfusedPoints ... ok
+test GC_MakeSegment2dTest__FromPointDir_AboveResolutionParameter_Done ... ok
+test GC_MakeSegment2dTest__FromPoints_AboveResolution_Done ... ok
+test GC_MakeSegment2dTest__FromPoints_BelowResolution_ConfusedPoints ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_behavior-d71ea4ec8fc645ce)
+
+running 8 tests
+test center_plane_circle_raises_not_done_for_a_negative_radius ... ok
+test circle_conversion_operator_returns_the_native_value ... ok
+test coincident_points_give_a_null_circle_with_the_zeroed_status ... ok
+test conversion_operators_return_the_value ... ok
+test error_type_values_and_names_follow_the_native_enumeration ... ok
+test null_scale_factor_raises_through_gp ... ok
+test collinear_points_in_2d_keep_the_default_circle ... ok
+test value_of_a_failed_construction_raises_not_done_with_the_status ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_make_circ2d.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_make_circ2d-276179e3bed135ab)
+
+running 3 tests
+test gce_MakeCirc2dTest__ThreePoints_AllCoincidentWithinResolution_DoneZeroRadius ... ok
+test gce_MakeCirc2dTest__ThreePoints_SmallDistinct_Done ... ok
+test gce_MakeCirc2dTest__ThreePoints_OneNearCoincidentPair_Done ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_make_cone.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_make_cone-0ad6c0da21805abf)
+
+running 9 tests
+test gce_MakeConeTest__FromConeAndDist_TooNegative_NegativeRadius ... ok
+test gce_MakeConeTest__FromConeAndDist_Valid_Done ... ok
+test gce_MakeConeTest__FromConeAndPoint_NoValidParallelCone_NegativeRadius ... ok
+test gce_MakeConeTest__FromConeAndPoint_Valid_Done ... ok
+test gce_MakeConeTest__FromFourPoints_YBranch_DoneAndOrthogonalXAxis ... ok
+test gce_MakeConeTest__FromConeAndPoint_TwoCandidates_ChoosesNearestToBaseCone ... ok
+test gce_MakeConeTest__FromFourPoints_ZBranch_DoneAndOrthogonalXAxis ... ok
+test gce_MakeConeTest__FromTwoPointsAndTwoRadii_YBranch_DoneAndOrthogonalXAxis ... ok
+test gce_MakeConeTest__FromTwoPointsAndTwoRadii_ZBranch_DoneAndOrthogonalXAxis ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_make_cylinder.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_make_cylinder-07b0040d33ee4f0c)
+
+running 3 tests
+test gce_MakeCylinderTest__FromAxis_NegativeRadius_NegativeRadius ... ok
+test gce_MakeCylinderTest__FromAxis_YBranch_DoneAndOrthogonalXAxis ... ok
+test gce_MakeCylinderTest__FromPoints_ZBranch_DoneAndOrthogonalXAxis ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_make_elips.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_make_elips-b129406f6558e97e)
+
+running 3 tests
+test gce_MakeElipsTest__FromPoints_Collinear_InvertAxis ... ok
+test gce_MakeElipsTest__FromPoints_TinyScale_NullAxis ... ok
+test gce_MakeElipsTest__FromPoints_Valid_Done ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gce_make_hypr.rs (/tmp/target-advapp2var-mutable/debug/deps/gce_make_hypr-8f68fdb2edd23510)
+
+running 24 tests
+test gce_MakeHypr2dTest__FromAx22d_NegativeRadius_NegativeRadius ... ok
+test gce_MakeHypr2dTest__FromAx22d_ValidRadii_Done ... ok
+test gce_MakeHypr2dTest__FromMajorAxis_MajorLessThanMinor_Done ... ok
+test gce_MakeHypr2dTest__FromMajorAxis_NegativeRadius_NegativeRadius ... ok
+test gce_MakeHypr2dTest__FromMajorAxis_ValidRadii_Done ... ok
+test gce_MakeHypr2dTest__FromPoints_Collinear_ColinearPoints ... ok
+test gce_MakeHypr2dTest__FromPoints_ConfusedS2Center_ConfusedPoints ... ok
+test gce_MakeHypr2dTest__FromPoints_ConfusedS1Center_ConfusedPoints ... ok
+test gce_MakeHypr2dTest__FromPoints_MajorLessThanMinor_Done ... ok
+test gce_MakeHypr2dTest__FromPoints_Valid_Done ... ok
+test gce_MakeHyprTest__FromAxis_BothNegative_NegativeRadius ... ok
+test gce_MakeHyprTest__FromAxis_EqualRadii_Done ... ok
+test gce_MakeHyprTest__FromAxis_MajorLessThanMinor_Done ... ok
+test gce_MakeHyprTest__FromAxis_NegativeMajor_NegativeRadius ... ok
+test gce_MakeHyprTest__FromAxis_NegativeMinor_NegativeRadius ... ok
+test gce_MakeHyprTest__FromAxis_ValidRadii_Done ... ok
+test gce_MakeHyprTest__FromAxis_ZeroRadii_Done ... ok
+test gce_MakeHyprTest__FromPoints_Collinear_ColinearPoints ... ok
+test gce_MakeHyprTest__FromPoints_ConfusedS1Center_ConfusedPoints ... ok
+test gce_MakeHyprTest__FromPoints_ConfusedS1S2_ConfusedPoints ... ok
+test gce_MakeHyprTest__FromPoints_ConfusedS2Center_ConfusedPoints ... ok
+test gce_MakeHyprTest__FromPoints_MajorLessThanMinor_Done ... ok
+test gce_MakeHyprTest__FromPoints_TinyScale_ConfusedPoints ... ok
+test gce_MakeHyprTest__FromPoints_Valid_Done ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gcpnts_abscissa_point.rs (/tmp/target-advapp2var-mutable/debug/deps/gcpnts_abscissa_point-56c78c905669a5d7)
+
+running 5 tests
+test GCPnts_AbscissaPointTest__LineLength ... ok
+test GCPnts_AbscissaPointTest__CircleArcLength ... ok
+test GCPnts_AbscissaPointTest__FullCircleLength ... ok
+test GCPnts_AbscissaPointTest__ParameterAtAbscissa_Line ... ok
+test GCPnts_AbscissaPointTest__ParameterAtAbscissa_Circle ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gcpnts_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/gcpnts_behavior-72ac4896eef798d9)
+
+running 11 tests
+test an_empty_gauss_function_fails_with_a_null_object ... ok
+test an_empty_uniform_deflection_iterator_has_no_point ... ok
+test a_null_deflection_on_a_circle_is_done_without_points ... ok
+test a_curve_shorter_than_confusion_gives_u0_done ... ok
+test add_point_inserts_in_order_and_replaces_within_p_confusion ... ok
+test pnts_curve_lifts_2d_results_to_the_plane_z_0 ... ok
+test dist_function_copies_and_rejects_parameters_outside_its_range ... ok
+test adaptor_failures_in_the_root_function_propagate ... ok
+test tangential_deflection_refuses_a_zero_deflection_and_keeps_its_points ... ok
+test uniform_abscissa_reuses_its_parameter_array ... ok
+test quasi_uniform_abscissa_raises_when_the_uniform_abscissa_fails ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gcpnts_quasi_uniform_deflection.rs (/tmp/target-advapp2var-mutable/debug/deps/gcpnts_quasi_uniform_deflection-8be9d85abb3a7d5d)
+
+running 1 test
+test GCPnts_QuasiUniformDeflectionTest__ModDataBug_33828_StablePointCounts ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom2d_convert_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/geom2d_convert_behavior-f5c594b9f5f66f1b)
+
+running 8 tests
+test knot_splitting_rejects_a_negative_range ... ok
+test ppoint_comparisons_are_both_false_for_nan_parameters ... ok
+test split_by_knots_reports_equal_and_out_of_range_indices ... ok
+test untrimmed_lines_are_not_convertible ... ok
+test concatenation_normalizes_the_weights_of_the_callers_curves ... ok
+test separated_curves_raise_the_native_continuity_failure ... ok
+test split_by_parameters_ignores_the_parametric_tolerance ... ok
+test approx_curve_dump_prints_the_native_text ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom2d_convert_comp_curve_to_bspline_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/geom2d_convert_comp_curve_to_bspline_curve-55d91f2b4e148e28)
+
+running 1 test
+test Geom2dConvert_CompCurveToBSplineCurveTest__OCC30747_ClosedContourFromCircleArcs ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_curve-d4120a60267538a4)
+
+running 25 tests
+test GeomBndLib_CurveTest__AddOptimal_Circle ... ok
+test GeomBndLib_CurveTest__AdaptorConstructor_Circle ... ok
+test GeomBndLib_CurveTest__AddOptimal_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__AdaptorConstructor_TrimmedRangeUsedForFullAdd ... ok
+test GeomBndLib_CurveTest__Circle_Arc ... ok
+test GeomBndLib_CurveTest__BSplineCurve_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__BSplineCurve_Simple ... ok
+test GeomBndLib_CurveTest__BezierCurve_Simple ... ok
+test GeomBndLib_CurveTest__BezierCurve_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Circle_Full ... ok
+test GeomBndLib_CurveTest__Circle_Arc_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Circle_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__BSplineCurve_TrimmedRange_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Ellipse_Arc_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Ellipse_Full ... ok
+test GeomBndLib_CurveTest__Ellipse_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Hyperbola_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Hyperbola_FiniteArc ... ok
+test GeomBndLib_CurveTest__Line_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Line_FiniteSegment ... ok
+test GeomBndLib_CurveTest__Parabola_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__Parabola_FiniteArc ... ok
+test GeomBndLib_CurveTest__TrimmedCurveHandle_Fallback_CompareWithBndLib ... ok
+test GeomBndLib_CurveTest__TrimmedCurveHandle_UsesBasisSpecialization ... ok
+test GeomBndLib_CurveTest__SamplingHelpers3d_MatchesLegacyPolicy ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_curve2d.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_curve2d-b48f373cafbd3193)
+
+running 21 tests
+test GeomBndLib_Curve2dTest__AddOptimal_Circle ... ok
+test GeomBndLib_Curve2dTest__AdaptorConstructor_Circle ... ok
+test GeomBndLib_Curve2dTest__AdaptorConstructor_TrimmedRangeUsedForFullAdd ... ok
+test GeomBndLib_Curve2dTest__BSplineCurve_Simple ... ok
+test GeomBndLib_Curve2dTest__BezierCurve_Simple ... ok
+test GeomBndLib_Curve2dTest__BezierCurve_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__BSplineCurve_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Circle_Arc ... ok
+test GeomBndLib_Curve2dTest__Circle_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Circle_Full ... ok
+test GeomBndLib_Curve2dTest__Ellipse_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Ellipse_Full ... ok
+test GeomBndLib_Curve2dTest__Hyperbola_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Hyperbola_FiniteArc ... ok
+test GeomBndLib_Curve2dTest__Line_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Line_FiniteSegment ... ok
+test GeomBndLib_Curve2dTest__Parabola_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__Parabola_FiniteArc ... ok
+test GeomBndLib_Curve2dTest__TrimmedCurveHandle_Fallback_CompareWithBndLib ... ok
+test GeomBndLib_Curve2dTest__TrimmedCurveHandle_UsesBasisSpecialization ... ok
+test GeomBndLib_Curve2dTest__SamplingHelpers2d_MatchesLegacyPolicy ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_offset_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_offset_curve-d8029868f827c194)
+
+running 14 tests
+test GeomBndLib_OffsetCurveTest__CircleOffsetY_Full_Containment ... ok
+test GeomBndLib_OffsetCurveTest__CircleOffsetX_Arc_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__CircleOffsetX_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__CircleOffsetZ_Arc_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__CircleNegativeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__EllipseOffsetX_Arc_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__EllipseOffsetZ_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__InfiniteRange_OpennessPreserved ... ok
+test GeomBndLib_OffsetCurveTest__LargeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__CircleOffsetZ_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__LineOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__TiltedCircle_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__CircleOffsetDiagonal_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurveTest__BSplineOffset_CompareWithBndLib ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_offset_curve2d.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_offset_curve2d-cf2e8ef0d22fb131)
+
+running 10 tests
+test GeomBndLib_OffsetCurve2dTest__Circle_NegativeOffset_Arc_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Circle_PositiveOffset_Arc_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__LargeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Circle_PositiveOffset_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Circle_NegativeOffset_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Line_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__OffCenterCircle_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Ellipse_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__Ellipse_Arc_OptimalCompareWithBndLib ... ok
+test GeomBndLib_OffsetCurve2dTest__BSpline_OptimalCompareWithBndLib ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_offset_surface.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_offset_surface-2c1dc9d90332b30e)
+
+running 15 tests
+test GeomBndLib_OffsetSurfaceTest__Plane_PositiveOffset_Patch_IsNotArtificiallyThickenedInZ ... ok
+test GeomBndLib_OffsetSurfaceTest__Plane_NegativeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Plane_BoxOptimal_TighterThanBox ... ok
+test GeomBndLib_OffsetSurfaceTest__Cylinder_Patch_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Plane_PositiveOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Sphere_PositiveOffset_Patch_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Cylinder_NegativeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Cylinder_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Torus_Patch_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Sphere_LargeOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Sphere_BoxOptimal_ContainsSurface ... ok
+test GeomBndLib_OffsetSurfaceTest__Sphere_NegativeOffset_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Sphere_PositiveOffset_Full_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Torus_PositiveOffset_CompareWithBndLib ... ok
+test GeomBndLib_OffsetSurfaceTest__Torus_BoxOptimal_ContainsSurface ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/geom_bnd_lib_surface.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_surface-b8cfa94f6cd61e28)
+
+running 24 tests
+test GeomBndLib_SurfaceTest__AddOptimal_Sphere ... ok
+test GeomBndLib_SurfaceTest__BezierSurface_Simple ... ok
+test GeomBndLib_SurfaceTest__AdaptorConstructor_Sphere ... ok
+test GeomBndLib_SurfaceTest__BezierSurface_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__BSplineSurface_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__AdaptorConstructor_TrimmedRangeUsedForFullAdd ... ok
+test GeomBndLib_SurfaceTest__AddOptimal_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Cone_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Cylinder_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Cone_Patch ... ok
+test GeomBndLib_SurfaceTest__Plane_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Plane_FinitePatch ... ok
+test GeomBndLib_SurfaceTest__Cylinder_Patch ... ok
+test GeomBndLib_SurfaceTest__Sphere_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__RectangularTrimmedSurface_UsesBasisSpecialization ... ok
+test GeomBndLib_SurfaceTest__Sphere_Patch ... ok
+test GeomBndLib_SurfaceTest__Sphere_Full ... ok
+test GeomBndLib_SurfaceTest__Sphere_Patch_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Torus_Full ... ok
+test GeomBndLib_SurfaceTest__TrimmedSurfaceHandle_Fallback_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Torus_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Torus_Patch_CompareWithBndLib ... ok
+test GeomBndLib_SurfaceTest__Torus_NegativeVMin_NoUnderBounding ... ok
+test GeomBndLib_SurfaceTest__AddOptimal_Torus_TiltedBetterThanFast ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/geom_bnd_lib_surface_of_extrusion.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_surface_of_extrusion-9875457e90cefbd3)
+
+running 11 tests
+test GeomBndLib_ExtrusionTest__InfiniteU_OpenInExtrusionBasisDirection ... ok
+test GeomBndLib_ExtrusionTest__CircleAlongZ_Arc_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__LineAlongDiagonal_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__LineAlongZ_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__EllipseAlongZ_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__EllipseAlongZ_Arc_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__CircleNegativeV_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__CircleAlongZ_Full_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__CircleAlongDiagonal_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__BSplineAlongDiagonal_CompareWithBndLib ... ok
+test GeomBndLib_ExtrusionTest__BSplineAlongZ_CompareWithBndLib ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_bnd_lib_surface_of_revolution.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_bnd_lib_surface_of_revolution-73d5180663af0c39)
+
+running 15 tests
+test GeomBndLib_RevolutionTest__InfiniteV_OpenInAxisDirection ... ok
+test GeomBndLib_RevolutionTest__LineAroundZ_HalfTurn_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineAroundZ_QuarterTurn_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineAroundZ_PartialV_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineAroundTiltedAxis_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineAroundZ_Full_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineAroundX_Full_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineSmallRadius_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__LineLargeRadius_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__BSplineAroundZ_HalfTurn_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__ParabolaAroundZ_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__CircleAroundZ_HalfTurn_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__BSplineAroundZ_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__CircleAroundZ_Full_CompareWithBndLib ... ok
+test GeomBndLib_RevolutionTest__EllipseAroundZ_CompareWithBndLib ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_convert.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_convert-af0be9a726a532da)
+
+running 3 tests
+test GeomConvertTest__LineToBSpline ... ok
+test GeomConvertTest__PlaneToBSplineSurface ... ok
+test GeomConvertTest__CircleToBSpline ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_convert_comp_curve_to_bspline_curve.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_convert_comp_curve_to_bspline_curve-8947f33e2ec26e75)
+
+running 8 tests
+test GeomConvert_CompCurveToBSplineCurveTest__EmptyInitialCurve ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__ClearAndReuse ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__FailsForDisjointCurves ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__ConcatenateNonClampedBSpline_Bug30007 ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__ConcatenateWithReversal ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__PrependCurve ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__ConcatenateClampedBSplines ... ok
+test GeomConvert_CompCurveToBSplineCurveTest__ConcatenateTrimmedCircleArcs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_lib.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_lib-03d1df5b035d9beb)
+
+running 15 tests
+test GeomLibTest__DensifyArray_ConstantRangeInitializesEveryValue ... ok
+test GeomLibTest__FuseIntervals_AdjustsMatchesToFirstInput ... ok
+test GeomLibTest__FuseIntervals_SupportsArbitraryLowerBounds ... ok
+test GeomLibTest__GTransformLine_UsesExactVectorialDirection ... ok
+test GeomLibTest__NormEstim_HandlesRegularAndPoleParameters ... ok
+test GeomLibTest__IsIsoLine_AcceptsShortNonDegenerateLinearBezier ... ok
+test GeomLibTest__ParameterArrays_SupportArbitraryLowerBounds ... ok
+test GeomLibTest__AdjustExtremity_ReachesEndpointsAndTangentDirections ... ok
+test GeomLibTest__To3d_PreservesRationalBezierGeometry ... ok
+test GeomLibTest__RationalBezierClosedness_AccountsForWeights ... ok
+test GeomLibTest__RationalBSplineClosedness_UsesCompleteHomogeneousPoles ... ok
+test GeomLibTest__ExtendCurveToPoint_ReachesTargetAndPreservesInitialEnd ... ok
+test GeomLibTest__CancelDenominatorDerivative_IdempotentCallPreservesParameterRange ... ok
+test GeomLibTest__ExtendSurfByLength_CoversAllDirectionsAndRationality ... ok
+test GeomLibTest__CancelDenominatorDerivative_PreservesSurfaceGeometry ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_lib_check_curve_on_surface.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_lib_check_curve_on_surface-126ba3313310c16d)
+
+running 7 tests
+test GeomLib_CheckCurveOnSurfaceTest__LineOnPlane_ReportsZeroDeviation ... ok
+test GeomLib_CheckCurveOnSurfaceTest__AnalyticDeviating_ReportsActualDeviation ... ok
+test GeomLib_CheckCurveOnSurfaceTest__DeviatingLines_ReportsEndpointMaximum ... ok
+test GeomLib_CheckCurveOnSurfaceTest__AnalyticCoincident_ReportsZeroDeviation ... ok
+test GeomLib_CheckCurveOnSurfaceTest__NegativeTrim_ReportsInteriorMaximum ... ok
+test GeomLib_CheckCurveOnSurfaceTest__CircleAndEllipse_ReportsAnalyticMaximum ... ok
+test GeomLib_CheckCurveOnSurfaceTest__AnalyticAliasing_ReportsActualDeviation ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_lprop_clprops2d.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_lprop_clprops2d-8981f6bbf7378003)
+
+running 18 tests
+test GeomLProp_CLProps2dTest__Circle_CentreOfCurvature ... ok
+test GeomLProp_CLProps2dTest__Circle_CentreOfCurvature_AtPiHalf ... ok
+test GeomLProp_CLProps2dTest__Circle_Curvature ... ok
+test GeomLProp_CLProps2dTest__Circle_CurvatureConstant ... ok
+test GeomLProp_CLProps2dTest__Circle_SetParameter ... ok
+test GeomLProp_CLProps2dTest__Circle_Normal ... ok
+test GeomLProp_CLProps2dTest__Circle_TangentAtZero ... ok
+test GeomLProp_CLProps2dTest__Circle_TangentDefined ... ok
+test GeomLProp_CLProps2dTest__Circle_Value ... ok
+test GeomLProp_CLProps2dTest__D1_Circle ... ok
+test GeomLProp_CLProps2dTest__D2_Circle ... ok
+test GeomLProp_CLProps2dTest__Ellipse_CurvatureAtMajorVertex ... ok
+test GeomLProp_CLProps2dTest__Ellipse_CurvatureAtMinorVertex ... ok
+test GeomLProp_CLProps2dTest__Line_CentreOfCurvature_Throws ... ok
+test GeomLProp_CLProps2dTest__Line_CurvatureIsZero ... ok
+test GeomLProp_CLProps2dTest__Line_Tangent ... ok
+test GeomLProp_CLProps2dTest__Line_TangentDefined ... ok
+test GeomLProp_CLProps2dTest__SetCurve ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_lprop_cur_and_inf2d.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_lprop_cur_and_inf2d-04c2e267262110fe)
+
+running 13 tests
+test GeomLProp_CurAndInf2dTest__Circle_PerformCurExt_NoExtrema ... ok
+test GeomLProp_CurAndInf2dTest__Circle_Perform_NoInflections ... ok
+test GeomLProp_CurAndInf2dTest__Circle_PerformInf_NoInflections ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_HasExtrema ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_CurvatureExtremaAtExpectedParameters ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_Parameters ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_Types ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_PerformInf_NoInflections ... ok
+test GeomLProp_CurAndInf2dTest__Ellipse_Perform_CombinedResult ... ok
+test GeomLProp_CurAndInf2dTest__Hyperbola_PerformCurExt_VertexOnly ... ok
+test GeomLProp_CurAndInf2dTest__Hyperbola_PerformInf_NoInflections ... ok
+test GeomLProp_CurAndInf2dTest__Parabola_PerformCurExt_VertexOnly ... ok
+test GeomLProp_CurAndInf2dTest__PerformInf_ClearsPreviousExtrema ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_proj_lib.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_proj_lib-186e966ca236206a)
+
+running 2 tests
+test GeomProjLibTest__OCC31661_2_ProjectHyperbolaOnPlane ... ok
+test GeomProjLibTest__OCC31661_1_ProjectParabolaOnPlane ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_proj_lib_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_proj_lib_behavior-2f94887c74312891)
+
+running 9 tests
+test curve2d_of_null_inputs_is_a_null_object ... ok
+test project_on_a_plane_keeps_the_3d_trim_parameters ... ok
+test project_on_plane_refuses_a_trimmed_line_along_a_direction_in_the_plane ... ok
+test curve2d_of_a_circle_on_a_plane_is_a_circle_with_the_tolerance_raised ... ok
+test curve2d_refuses_the_zero_length_segment_of_a_line_on_a_sphere_or_a_cylinder ... ok
+test curve2d_trims_by_the_3d_trim_and_clamps_a_bounded_result ... ok
+test curve2d_bounded_overloads_restrict_the_surface ... ok
+test project_on_plane_keeps_the_parametrization_when_asked ... ok
+test project_on_a_cylinder_is_an_approximated_bspline ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geom_tools_behavior/main.rs (/tmp/target-advapp2var-mutable/debug/deps/geom_tools_behavior-59104f7e1cd266b0)
+
+running 32 tests
+test reads::a_boolean_other_than_zero_or_one_fails_the_stream ... ok
+test handler::the_debug_dump_names_what_it_found ... ok
+test reads::a_null_direction_stops_the_record_where_it_is_read ... ok
+test reads::a_record_that_fails_to_build_reads_as_null_after_its_radius ... ok
+test handler::a_custom_handler_writes_and_reads_a_class_geomtools_does_not_know ... ok
+test handler::a_failing_handler_read_is_caught_as_a_null_curve ... ok
+test reads::a_circle_round_trips_through_the_2d_and_3d_readers_independently ... ok
+test reads::a_bspline_round_trips_bit_for_bit_at_precision_17 ... ok
+test handler::a_null_handler_is_ignored ... ok
+test reads::an_indirect_surface_frame_is_restored_from_its_y_direction ... ok
+test handler::the_base_handler_dumps_to_the_stream_and_prints_compact_lines_to_the_console ... ok
+test reads::a_trimmed_curve_on_a_null_basis_reads_as_null ... ok
+test reads::get_real_reads_one_word_and_converts_its_numeric_prefix ... ok
+test reads::an_unknown_type_code_reads_nothing_more ... ok
+test reads::get_real_returns_zero_at_end_of_file_without_touching_the_stream ... ok
+test reads::get_real_splits_a_word_longer_than_thirty_characters_and_restores_the_width ... ok
+test sets::a_failed_record_is_stored_once_as_a_null_curve ... ok
+test sets::a_breaking_progress_indicator_stops_the_write_after_its_limit ... ok
+test sets::a_wrong_tag_reports_on_the_console_and_reads_nothing ... ok
+test sets::curve2d_and_surface_sets_store_a_null_handle_like_any_element ... ok
+test sets::curve_set_indexes_by_identity_and_refuses_null_handles ... ok
+test texts::a_null_handle_is_refused_where_the_native_code_dereferences_it ... ok
+test sets::read_appends_to_the_set_instead_of_clearing_it ... ok
+test sets::dump_numbers_each_element_and_write_tags_the_table ... ok
+test texts::circle_dump_prints_the_frame_and_radius ... ok
+test texts::geomtools_write_keeps_the_stream_precision_while_the_set_uses_17_and_restores_it ... ok
+test texts::line_dump_labels_every_field_and_compact_writes_the_type_code ... ok
+test texts::numbers_follow_printf_g_at_the_stream_precision ... ok
+test texts::offset_curve_dump_has_no_newline_after_its_tag ... ok
+test texts::torus_dump_separates_its_radii_without_a_comma ... ok
+test texts::three_d_bspline_dump_puts_two_spaces_before_each_knot ... ok
+test texts::two_d_bspline_dump_runs_knots_into_poles_and_uses_one_space_before_knots ... ok
+
+test result: ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gprop_pequation.rs (/tmp/target-advapp2var-mutable/debug/deps/gprop_pequation-3c36454b6f3c0b8b)
+
+running 4 tests
+test GProp_PEquationTest__CoincidentPoints ... ok
+test GProp_PEquationTest__CoplanarPoints ... ok
+test GProp_PEquationTest__CollinearPoints ... ok
+test GProp_PEquationTest__SpacePoints ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/gprop_pgprops.rs (/tmp/target-advapp2var-mutable/debug/deps/gprop_pgprops-75430d5ed54d99a1)
+
+running 7 tests
+test GProp_PGPropsTest__EmptySet ... ok
+test GProp_PGPropsTest__ArrayConstructor ... ok
+test GProp_PGPropsTest__SinglePoint ... ok
+test GProp_PGPropsTest__MatrixOfInertia_SymmetricPoints ... ok
+test GProp_PGPropsTest__StaticBarycentre ... ok
+test GProp_PGPropsTest__TwoPoints_Barycentre ... ok
+test GProp_PGPropsTest__WeightedPoints ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/hermit.rs (/tmp/target-advapp2var-mutable/debug/deps/hermit-360f86811bf95d24)
+
+running 11 tests
+test HermitTest__Solution3D_DistinctWeights_ReturnsValidCurve ... ok
+test HermitTest__Solution2D_HighWeightRatio_Endpoint ... ok
+test HermitTest__Solution3D_PositivePoles ... ok
+test HermitTest__Solution2D_UniformWeights_ReturnsValidCurve ... ok
+test HermitTest__Solution2D_DistinctWeights_ReturnsValidCurve ... ok
+test HermitTest__Solution3D_HighWeightRatio_Endpoint ... ok
+test HermitTest__Solution3D_ReversedWeightRatio_Endpoint ... ok
+test HermitTest__Solution3D_Symmetric_WeightsProduceSymmetricResult ... ok
+test HermitTest__Solution3D_UniformWeights_ReturnsValidCurve ... ok
+test HermitTest__Solutionbis_DistinctWeights_ReturnsValidKnots ... ok
+test HermitTest__Solutionbis_UniformWeights_KnotsUnchanged ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/int_ana_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/int_ana_behavior-5116bf218a164cd6)
+
+running 8 tests
+test coincident_points_lose_their_second_parameter ... ok
+test curve_domain_errors ... ok
+test empty_algorithms_raise_not_done ... ok
+test cylinder_curves_are_never_linked ... ok
+test identical_lines_are_not_empty_and_have_no_point ... ok
+test line_plane_and_plane_torus_results ... ok
+test parabola_conic_is_always_done ... ok
+test quadric_special_points_accumulate ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/int_ana_int_quad_quad.rs (/tmp/target-advapp2var-mutable/debug/deps/int_ana_int_quad_quad-cf6437c65fa54b33)
+
+running 10 tests
+test IntAna2d_AnaIntersectionTest__ModDataBug_23939_TangentCircleParameters ... ok
+test IntAna2d_AnaIntersectionTest__ModDataBug_24375_NearlyCoincidentCircleParameters ... ok
+test IntAna_IntQuadQuad_Test__CylinderCylinderNonTangent_HasTwoLines ... ok
+test IntAna_IntQuadQuad_Test__CylinderCylinderNearTangent_CollapsesToSingleLine ... ok
+test IntAna_IntQuadQuad_Test__ConnectedCurvesScenario ... ok
+test IntAna_IntQuadQuad_Test__CylinderCylinderSkewExternallyTangent_HasPoint ... ok
+test IntAna_IntQuadQuad_Test__CylinderVsSphereIntersection ... ok
+test IntAna_IntQuadQuad_Test__IndexingConsistencyTest ... ok
+test IntAna_IntQuadQuad_Test__NextCurveBoundaryConditions ... ok
+test IntAna_IntQuadQuad_Test__NextCurveMethodCorrectness ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/local_props_behavior.rs (/tmp/target-advapp2var-mutable/debug/deps/local_props_behavior-8a6e040ab128f512)
+
+running 7 tests
+test cur_and_inf_drops_a_parameter_equal_to_the_last_one ... ok
+test pequation_axis_index_is_checked ... ok
+test pgprops_barycentre_of_no_point_is_out_of_range ... ok
+test continuity_refuses_curves_that_do_not_meet ... ok
+test slprops_curvature_getters_return_the_value_read_before_the_computation ... ok
+test clprops_curvature_is_real_last_where_the_first_derivative_vanishes ... ok
+test slprops_first_tangent_u_orients_the_second_derivative ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/locate_owned.rs (/tmp/target-advapp2var-mutable/debug/deps/locate_owned-556cb122942f14c1)
+
+running 3 tests
+test null_owned_adaptor_rejected_without_resetting_previous_state ... ok
+test owned_projector_retains_adaptor_after_caller_release ... ok
+test repeated_projection_and_reinitialization_match_borrowed ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/lprop_cur_and_inf.rs (/tmp/target-advapp2var-mutable/debug/deps/lprop_cur_and_inf-98954e492ca79680)
+
+running 10 tests
+test LProp_CurAndInfTest__AddExtCur_Minimum ... ok
+test LProp_CurAndInfTest__AddExtCur_Maximum ... ok
+test LProp_CurAndInfTest__AddInflection ... ok
+test LProp_CurAndInfTest__Clear ... ok
+test LProp_CurAndInfTest__Clear_ThenRefill ... ok
+test LProp_CurAndInfTest__DefaultConstructor_IsEmpty ... ok
+test LProp_CurAndInfTest__MultiplePoints_CorrectTypes ... ok
+test LProp_CurAndInfTest__MultiplePoints_SortedByParameter ... ok
+test LProp_CurAndInfTest__Parameter_OutOfRange_Throws ... ok
+test LProp_CurAndInfTest__Type_OutOfRange_Throws ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/proj_lib_behavior/main.rs (/tmp/target-advapp2var-mutable/debug/deps/proj_lib_behavior-abfccaaf35cf5909)
+
+running 32 tests
+test approximations::comp_projected_curve_default_has_a_null_sequence ... ok
+test approximations::project_on_plane_defaults_to_x_onto_xoy ... ok
+test approximations::project_on_plane_of_a_parabola_along_its_axis_is_a_null_object ... ok
+test approximations::project_on_plane_refuses_a_kept_line_along_a_direction_in_the_plane ... ok
+test approximations::project_on_plane_keeps_a_circle_a_circle ... ok
+test approximations::polar_projection_has_no_initial_curve_on_a_plane ... ok
+test approximations::projected_curve_gives_the_analytic_line_on_a_cylinder ... ok
+test approximations::projected_curve_evaluators_are_not_implemented ... ok
+test degenerate_ranges::compute_approx_refuses_a_zero_length_range_on_every_scanned_surface ... ok
+test degenerate_ranges::compute_approx_refuses_a_range_below_the_rounding_step ... ok
+test elementary::base_project_sets_other_curve ... ok
+test degenerate_ranges::projected_curve_reports_the_refused_zero_length_range ... ok
+test elementary::cone_line_through_the_apex_uses_the_next_point ... ok
+test elementary::cone_rejected_circle_keeps_the_line_type ... ok
+test degenerate_ranges::projected_curve_refuses_a_one_ulp_surface_range_in_the_pole_check ... ok
+test elementary::cylinder_projects_generatrices_and_parallels_only ... ok
+test degenerate_ranges::projected_curve_refuses_a_zero_width_surface_range_in_the_pole_check ... ok
+test elementary::frames_translate_line_results_by_periods ... ok
+test elementary::plane_projector_is_periodic_for_closed_conics ... ok
+test elementary::is_ana_surf_names_the_five_elementary_kinds ... ok
+test elementary::plane_projects_conics_in_plane_coordinates ... ok
+test elementary::projector_default_is_an_undone_bspline_with_null_curves ... ok
+test elementary::sphere_meridian_is_moved_into_bounds ... ok
+test elementary::sphere_neither_iso_keeps_its_type_and_the_default_line ... ok
+test elementary::torus_u_iso_with_the_centre_on_the_axis_raises ... ok
+test elementary::prj_func_rejects_a_bad_fixed_index_and_evaluates ... ok
+test approximations::compute_approx_fits_a_circle_on_a_sphere ... ok
+test approximations::polar_projection_on_a_cylinder_is_done ... ok
+test approximations::projected_curve_without_a_part_keeps_the_null_bspline ... ok
+test degenerate_ranges::compute_approx_keeps_a_short_range_whose_scan_advances ... ok
+test approximations::comp_projected_curve_raises_on_high_orders_and_g1 ... ok
+test approximations::comp_projected_curve_second_init_appends_the_parts ... ok
+
+test result: ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/proj_lib_compute_approx_on_polar_surface.rs (/tmp/target-advapp2var-mutable/debug/deps/proj_lib_compute_approx_on_polar_surface-7d8be7fbd732074b)
+
+running 1 test
+test ProjLib_ComputeApproxOnPolarSurfaceTest__BuildInitialCurveAndProjectOnCylinder_Done ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/proj_lib_cone.rs (/tmp/target-advapp2var-mutable/debug/deps/proj_lib_cone-2b478bbf66b5c05b)
+
+running 3 tests
+test ProjLib_ConeTest__ProjectCircle_NonParallelAxes_NotDone ... ok
+test ProjLib_ConeTest__ProjectCircle_ParallelAxes_DoneLine ... ok
+test ProjLib_ConeTest__ProjectCircle_OppositeNormal_DoneLineWithNegativeDirection ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rustycad_tkgeombase
+
+running 85 tests
+test crates/tkgeombase/src/app_cont/least_square.rs - app_cont::least_square::LeastSquare (line 44) ... ignored
+test crates/tkgeombase/src/approx/compute_c_line.rs - approx::compute_c_line::ComputeCLine (line 61) ... ignored
+test crates/tkgeombase/src/approx/curve_2d.rs - approx::curve_2d::Curve2d (line 20) ... ignored
+test crates/tkgeombase/src/approx/curve_3d.rs - approx::curve_3d::Curve3d (line 22) ... ignored
+test crates/tkgeombase/src/approx/curve_on_surface/mod.rs - approx::curve_on_surface::CurveOnSurface (line 35) ... ignored
+test crates/tkgeombase/src/approx/curvilinear_parameter/mod.rs - approx::curvilinear_parameter::CurvilinearParameter (line 45) ... ignored
+test crates/tkgeombase/src/approx/curvlin_func/mod.rs - approx::curvlin_func::CurvlinFunc (line 50) ... ignored
+test crates/tkgeombase/src/approx/mcurves_to_bsp_curve.rs - approx::mcurves_to_bsp_curve::MCurvesToBSpCurve (line 24) ... ignored
+test crates/tkgeombase/src/approx/same_parameter/mod.rs - approx::same_parameter::SameParameter (line 31) ... ignored
+test crates/tkgeombase/src/approx/sweep_approximation/mod.rs - approx::sweep_approximation::SweepApproximation (line 61) ... ignored
+test crates/tkgeombase/src/approx/sweep_function.rs - approx::sweep_function::SweepFunction (line 55) ... ignored
+test crates/tkgeombase/src/app_cont/cont_tables.rs - app_cont::cont_tables::ContMatrixTable (line 10) ... ok
+test crates/tkgeombase/src/app_cont/function.rs - app_cont::function::Function (line 75) ... ok
+test crates/tkgeombase/src/app_cont/cont_matrices.rs - app_cont::cont_matrices::m_matrix (line 105) ... ok
+test crates/tkgeombase/src/app_def/my_line_tool.rs - app_def::my_line_tool::MultiLine (line 50) ... ok
+test crates/tkgeombase/src/app_cont/cont_matrices.rs - app_cont::cont_matrices::v_bernstein (line 173) ... ok
+test crates/tkgeombase/src/app_def/linear_criteria/mod.rs - app_def::linear_criteria::LinearCriteria (line 43) ... ok
+test crates/tkgeombase/src/app_def/multi_point_constraint.rs - app_def::multi_point_constraint::MultiPointConstraint (line 22) ... ok
+test crates/tkgeombase/src/app_cont/function.rs - app_cont::function::FunctionBase (line 13) ... ok
+test crates/tkgeombase/src/app_def/smooth_criterion.rs - app_def::smooth_criterion::SmoothCriterion (line 38) ... ok
+test crates/tkgeombase/src/geom_proj_lib/mod.rs - geom_proj_lib::curve2d_range_bounds_tolerance (line 45) ... ignored
+test crates/tkgeombase/src/app_cont/least_square.rs - app_cont::least_square::PeriodicityInfo (line 22) ... ok
+test crates/tkgeombase/src/app_par_curves/constraint.rs - app_par_curves::constraint::ConstraintCouple (line 44) ... ok
+test crates/tkgeombase/src/app_par_curves/bsp_function.rs - app_par_curves::bsp_function::BSpFunction (line 26) ... ok
+test crates/tkgeombase/src/app_def/multi_line.rs - app_def::multi_line::MultiLine (line 19) ... ok
+test crates/tkgeombase/src/app_def/variational/mod.rs - app_def::variational::VariationalOptions (line 35) ... ok
+test crates/tkgeombase/src/app_par_curves/least_square.rs - app_par_curves::least_square::LeastSquare (line 34) ... ok
+test crates/tkgeombase/src/app_par_curves/function.rs - app_par_curves::function::Function (line 29) ... ok
+test crates/tkgeombase/src/app_par_curves/gradient.rs - app_par_curves::gradient::Gradient (line 28) ... ok
+test crates/tkgeombase/src/approx/compute_c_line.rs - approx::compute_c_line::ComputeCLineOptions (line 21) ... ok
+test crates/tkgeombase/src/app_par_curves/line_tool.rs - app_par_curves::line_tool::LineTool (line 24) ... ok
+test crates/tkgeombase/src/app_par_curves/bsp_gradient.rs - app_par_curves::bsp_gradient::BSpGradient (line 28) ... ok
+test crates/tkgeombase/src/app_par_curves/multi_bsp_curve.rs - app_par_curves::multi_bsp_curve::MultiBSpCurve (line 19) ... ok
+test crates/tkgeombase/src/app_par_curves/multi_curve.rs - app_par_curves::multi_curve::MultiCurve (line 42) ... ok
+test crates/tkgeombase/src/geom_lprop/cur_and_inf2d.rs - geom_lprop::cur_and_inf2d::CurAndInf2d (line 25) ... ok
+test crates/tkgeombase/src/fem_tool/profile_matrix.rs - fem_tool::profile_matrix::ProfileMatrix (line 30) ... ok
+test crates/tkgeombase/src/app_par_curves/gradient_bfgs.rs - app_par_curves::gradient_bfgs::GradientBfgs (line 24) ... ok
+test crates/tkgeombase/src/fem_tool/elementary_criterion.rs - fem_tool::elementary_criterion::ElementaryCriterion (line 62) ... ok
+test crates/tkgeombase/src/proj_lib/comp_projected/mod.rs - proj_lib::comp_projected::CompProjectedCurve (line 138) ... ignored
+test crates/tkgeombase/src/proj_lib/compute_approx/mod.rs - proj_lib::compute_approx::ComputeApprox (line 31) ... ignored
+test crates/tkgeombase/src/geom_tools/console.rs - geom_tools::console::ConsoleOutput (line 12) ... ok
+test crates/tkgeombase/src/geom_tools/mod.rs - geom_tools::set_undefined_type_handler (line 133) ... ok
+test crates/tkgeombase/src/geom_tools/surface_set.rs - geom_tools::surface_set::SurfaceSet (line 24) ... ok
+test crates/tkgeombase/src/proj_lib/polar/mod.rs - proj_lib::polar::ComputeApproxOnPolarSurface (line 29) ... ignored
+test crates/tkgeombase/src/proj_lib/prj_func.rs - proj_lib::prj_func::PrjFunc (line 19) ... ignored
+test crates/tkgeombase/src/proj_lib/prj_resolve.rs - proj_lib::prj_resolve::PrjResolve (line 32) ... ignored
+test crates/tkgeombase/src/proj_lib/project_on_plane/mod.rs - proj_lib::project_on_plane::ProjectOnPlane (line 97) ... ignored
+test crates/tkgeombase/src/proj_lib/projected_curve/mod.rs - proj_lib::projected_curve::ProjectedCurve (line 57) ... ignored
+test crates/tkgeombase/src/geom_tools/undefined_type_handler.rs - geom_tools::undefined_type_handler::UndefinedTypeHandlerBase (line 123) ... ok
+test crates/tkgeombase/src/geom_tools/debug_dump.rs - geom_tools::debug_dump::geom_tools_dump (line 21) ... ok
+test crates/tkgeombase/src/gprop/sel_gprops.rs - gprop::sel_gprops::SelGProps (line 14) ... ok
+test crates/tkgeombase/src/gprop/cel_gprops.rs - gprop::cel_gprops::CelGProps (line 16) ... ok
+test crates/tkgeombase/src/lprop/cur_and_inf.rs - lprop::cur_and_inf::CurAndInf (line 10) ... ok
+test crates/tkgeombase/src/gprop/gprops.rs - gprop::gprops::GProps (line 18) ... ok
+test crates/tkgeombase/src/proj_lib/cylinder.rs - proj_lib::cylinder::Cylinder (line 18) ... ok
+test crates/tkgeombase/src/proj_lib/plane.rs - proj_lib::plane::Plane (line 16) ... ok
+test crates/tkgeombase/src/proj_lib/projector.rs - proj_lib::projector::Project (line 180) ... ok
+test crates/tkgeombase/src/proj_lib/torus.rs - proj_lib::torus::Torus (line 20) ... ok
+test crates/tkgeombase/src/proj_lib/sphere.rs - proj_lib::sphere::Sphere (line 20) ... ok
+test crates/tkgeombase/src/scan_step.rs - scan_step::next_scan_parameter (line 39) ... ok
+test crates/tkgeombase/src/app_def/variational/approximate.rs - app_def::variational::approximate::Variational::approximate (line 56) ... ok
+test crates/tkgeombase/src/app_def/variational/mod.rs - app_def::variational::Variational (line 128) ... ok
+test crates/tkgeombase/src/scan_step.rs - scan_step::advanced_scan_parameter (line 23) ... ok
+test crates/tkgeombase/src/geom_tools/curve2d_set.rs - geom_tools::curve2d_set::Curve2dSet (line 24) ... ok
+test crates/tkgeombase/src/gprop/vel_gprops.rs - gprop::vel_gprops::VelGProps (line 16) ... ok
+test crates/tkgeombase/src/gprop/principal_props.rs - gprop::principal_props::PrincipalProps (line 14) ... ok
+test crates/tkgeombase/src/geom_tools/curve_set.rs - geom_tools::curve_set::CurveSet (line 23) ... ok
+test crates/tkgeombase/src/gprop/pgprops.rs - gprop::pgprops::PGProps (line 14) ... ok
+test crates/tkgeombase/src/fem_tool/curve.rs - fem_tool::curve::Curve (line 22) ... ok
+test crates/tkgeombase/src/geom_lprop/slprops.rs - geom_lprop::slprops::SLPropsBase (line 23) ... ok
+test crates/tkgeombase/src/proj_lib/projector.rs - proj_lib::projector::Projector (line 22) ... ok
+test crates/tkgeombase/src/gprop/pequation.rs - gprop::pequation::PEquation (line 33) ... ok
+test crates/tkgeombase/src/approx/compute_line/mod.rs - approx::compute_line::ComputeLineOptions (line 24) ... ok
+test crates/tkgeombase/src/fem_tool/elements_of_ref_matrix.rs - fem_tool::elements_of_ref_matrix::ElementsOfRefMatrix (line 15) ... ok
+test crates/tkgeombase/src/fem_tool/sparse_matrix.rs - fem_tool::sparse_matrix::SparseMatrix (line 38) ... ok
+test crates/tkgeombase/src/fem_tool/assembly.rs - fem_tool::assembly::Assembly (line 27) ... ok
+test crates/tkgeombase/src/geom_tools/text_in.rs - geom_tools::text_in::get_real (line 21) ... ok
+test crates/tkgeombase/src/fem_tool/linear_kinds.rs - fem_tool::linear_kinds::LinearFlexion (line 67) ... ok
+test crates/tkgeombase/src/proj_lib/cone.rs - proj_lib::cone::Cone (line 20) ... ok
+test crates/tkgeombase/src/geom_lprop/clprops.rs - geom_lprop::clprops::CLPropsBase (line 22) ... ok
+test crates/tkgeombase/src/app_par_curves/multi_point.rs - app_par_curves::multi_point::MultiPoint (line 19) ... ok
+test crates/tkgeombase/src/geom_tools/undefined_type_handler.rs - geom_tools::undefined_type_handler::UndefinedTypeHandler (line 28) ... ok
+test crates/tkgeombase/src/app_par_curves/resol_constraint.rs - app_par_curves::resol_constraint::ResolConstraint (line 29) ... ok
+test crates/tkgeombase/src/approx/compute_line/mod.rs - approx::compute_line::ComputeLine (line 71) ... ok
+test crates/tkgeombase/src/approx/bspl_compute_line/mod.rs - approx::bspl_compute_line::BSplComputeLine (line 26) ... ok
+
+test result: ok. 66 passed; 0 failed; 19 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+all doctests ran in 0.68s; merged doctests compilation took 0.55s
