@@ -1,13 +1,16 @@
 //! Native FixSmallEdges orchestration for empty repair sets.
 use rustycad_tkbrep::{
     brep::BRepTool,
+    brep_tools::ReShape,
     topexp::Explorer,
     topods::{self, Builder, Compound, Shape, ShapeIterator, Wire},
     toptools::MapOfShape,
 };
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Plane3, Point3};
+use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::{
     shape_extend::ShapeExtendStatus,
     shape_fix::{FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists},
@@ -68,6 +71,13 @@ fn angled_tiny_wire() -> Wire {
     }
     maker.close().unwrap();
     maker.wire().unwrap()
+}
+
+fn single_tiny_wire() -> Wire {
+    BRepBuilderAPIMakePolygon::from_two_points(Point3::new(0., 0., 0.), Point3::new(0.01, 0., 0.))
+        .unwrap()
+        .wire()
+        .unwrap()
 }
 
 fn report(name: &str, tool: &ShapeFixWireframe, changed: bool) -> Vec<f64> {
@@ -243,6 +253,42 @@ fn adjacent_small_edges_join_into_one_native_face_curve() {
         expected("face_pair")
     );
     assert_eq!(curves, expected_rows("face_pair_pcurve"));
+}
+
+#[test]
+fn merge_small_edges_drop_mode_removes_single_marked_wire_edge() {
+    let wire = single_tiny_wire().into_shape();
+    let fixer = ShapeFixWireframe::from_shape(&wire);
+    fixer.set_context(&Handle::new(ShapeBuildReShape::new()));
+    let explorer = Explorer::new(&wire, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+    let edge = explorer.current().clone();
+    let mut small = MapOfShape::default();
+    small.add(edge.clone());
+    let mut edge_faces = ShapeFixWireframeShapeLists::default();
+    let mut face_small = ShapeFixWireframeShapeLists::default();
+    let mut multiple = MapOfShape::default();
+    let changed = fixer
+        .merge_small_edges(
+            &mut small,
+            &mut edge_faces,
+            &mut face_small,
+            &mut multiple,
+            true,
+            -1.0,
+        )
+        .unwrap();
+    let result = ReShape::apply(&*fixer.context(), &wire, ShapeEnum::Shape).unwrap();
+    assert_eq!(
+        vec![
+            f64::from(changed),
+            f64::from(result.is_null()),
+            Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape)
+                .unwrap()
+                .count() as f64,
+            f64::from(fixer.status_small_edges(ShapeExtendStatus::Done)),
+        ],
+        expected("drop_single_merge")
+    );
 }
 
 fn face_edge_curves(face: &rustycad_tkbrep::topods::Face) -> (usize, Vec<Vec<f64>>) {

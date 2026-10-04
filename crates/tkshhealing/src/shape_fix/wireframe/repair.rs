@@ -124,7 +124,7 @@ impl ShapeFixWireframe {
         if small.is_empty() {
             return Ok(false);
         }
-        if drop_mode {
+        if drop_mode && !face_small.is_empty() {
             return Err(unported_small_edge_merge());
         }
         if !multiple.is_empty() {
@@ -133,7 +133,7 @@ impl ShapeFixWireframe {
         let angle_limit = effective_angle_limit(limit_angle, self.limit_angle());
         let face_changed =
             merge_faces::merge_face_small_edges(self, small, edge_faces, face_small, angle_limit)?;
-        merge_free_wires::merge_small_edges(self, small, multiple, angle_limit)
+        merge_free_wires::merge_small_edges(self, small, multiple, angle_limit, drop_mode)
             .map(|free_changed| face_changed || free_changed)
     }
 }

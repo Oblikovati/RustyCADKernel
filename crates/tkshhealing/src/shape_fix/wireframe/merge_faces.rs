@@ -1,5 +1,6 @@
 use super::{
-    ShapeFixWireframe, ShapeFixWireframeShapeLists, merge_free_wires::merge_wire_with_faces,
+    ShapeFixWireframe, ShapeFixWireframeShapeLists,
+    merge_free_wires::{MergePolicy, merge_wire_with_faces},
     repair::unported_small_edge_merge,
 };
 use crate::shape_build::ShapeBuildReShape;
@@ -131,8 +132,7 @@ fn merge_face_wire(
         &current,
         context,
         small,
-        std::slice::from_ref(face),
-        angle_limit,
+        &MergePolicy::face(face, angle_limit),
     )
 }
 
