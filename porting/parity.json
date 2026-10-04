@@ -225915,6 +225915,87 @@
       "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::adjust_pcurve_on_face",
       "status": "partial",
       "notes": "140 native plane/cylinder/torus cases compare periodic translation, curve identity and unchanged input; cached and uncached Rust adaptors agree. Source preserves adjusted-u plus du classifier ordering. Broader periodic spline/located/exceptional and irregular-domain cases still need native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::Make2D(const TopoDS_Edge &, const TopoDS_Face &, occ::handle<Geom2d_Curve> &, double &, double &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::make_2d",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::IntermediatePoint(const TopoDS_Edge &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::intermediate_point_on_edge",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::MakePCurveOnFace(const TopoDS_Face &, const occ::handle<Geom_Curve> &, const double, const double, occ::handle<Geom2d_Curve> &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::make_pcurve_on_face",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetNormalToFaceOnEdge(const TopoDS_Edge &, const TopoDS_Face &, gp_Dir &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::get_normal_to_face_on_edge",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::HasCurveOnSurface(const TopoDS_Edge &, const TopoDS_Face &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::has_curve_on_surface_simple",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::CurveOnSurface(const TopoDS_Edge &, const TopoDS_Face &, occ::handle<Geom2d_Curve> &, double &, double &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::curve_on_surface",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::MakePCurveOnFace(const TopoDS_Face &, const occ::handle<Geom_Curve> &, occ::handle<Geom2d_Curve> &, double &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::make_pcurve_full_curve",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools2D::HasCurveOnSurface(const TopoDS_Edge &, const TopoDS_Face &, occ::handle<Geom2d_Curve> &, double &, double &, double &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools2D.hxx",
+      "source_sha256": "6ca7f0a97ede4fbae7b4430a9ed37b1c07bdf832dfcfa858cc08e1872d554b3b",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools2d::has_curve_on_surface",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
+    },
+    {
+      "upstream_id": "BOPTools_AlgoTools3D::GetNormalToFaceOnEdge(const TopoDS_Edge &, const TopoDS_Face &, const double, gp_Dir &, const occ::handle<IntTools_Context> &)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools3D.hxx",
+      "source_sha256": "3551137d6b22563c0176381470e032630a32e008ace9395d2f44e7a7d4338f2a",
+      "rust_item": "rustycad_tkbo::bop_tools::algo_tools3d::get_normal_to_face_on_edge_at",
+      "status": "partial",
+      "notes": "Source translation with 100 projection and 56 edge lookup/normal oracle cases; see tools/oracle/tkbo_make_pcurve.md and tkbo_edge_pcurve.md. General splines, locations, seams, singular/error domains and projection retry branches require additional native evidence. No legacy completion claim."
     }
   ],
   "tests": [

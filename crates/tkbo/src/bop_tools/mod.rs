@@ -6,3 +6,4 @@ pub use connexity::{
 };
 pub use connexity_block::ConnexityBlock;
 pub mod algo_tools2d;
+pub mod algo_tools3d;

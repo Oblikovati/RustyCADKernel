@@ -1,0 +1,45 @@
+//! BOPTools_AlgoTools3D face normals at the pinned OCCT revision.
+use super::algo_tools2d;
+use crate::int_tools::{Context, Tools};
+use rustycad_tkbrep::{
+    brep::BRepTool,
+    topods::{Edge, Face},
+};
+use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg3d::top_abs::Orientation;
+use rustycad_tkmath::gp::Direction3;
+/// Sample the native asymmetric pcurve midpoint and apply face reversal; `get_normal_to_face_on_edge(&edge,&face,&mut normal,None)?`.
+pub fn get_normal_to_face_on_edge(
+    edge: &Edge,
+    face: &Face,
+    normal: &mut Direction3,
+    context: Option<&Context>,
+) -> Result<(), Failure> {
+    let curve = BRepTool::curve_on_face(edge, face)?;
+    let parameter = Tools::intermediate_point(curve.first, curve.last);
+    get_normal_to_face_on_edge_at(edge, face, parameter, normal, context)?;
+    if face.orientation() == Orientation::Reversed {
+        normal.reverse();
+    }
+    Ok(())
+}
+/// Compute the unoriented surface normal at an edge parameter; `get_normal_to_face_on_edge_at(&edge,&face,0.5,&mut normal,None)?`.
+pub fn get_normal_to_face_on_edge_at(
+    edge: &Edge,
+    face: &Face,
+    parameter: f64,
+    normal: &mut Direction3,
+    context: Option<&Context>,
+) -> Result<(), Failure> {
+    let surface = BRepTool::surface(face)?;
+    let mut curve = Handle::default();
+    let mut range = (0., 0.);
+    let mut tolerance = 0.;
+    algo_tools2d::curve_on_surface(edge, face, &mut curve, &mut range, &mut tolerance, context)?;
+    let uv = curve.value(parameter)?;
+    let derivatives = surface.d1(uv.x(), uv.y())?;
+    let first = Direction3::from_vector(derivatives.d1u)?;
+    let second = Direction3::from_vector(derivatives.d1v)?;
+    *normal = first.crossed(second)?;
+    Ok(())
+}
