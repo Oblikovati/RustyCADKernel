@@ -2,7 +2,7 @@
 
 use super::{CoherentTriPtr, CoherentTriangle};
 use crate::gp::Xyz;
-use rustycad_tkernel::precision;
+use rustycad_tkernel::{ncollection::BaseAllocator, precision, standard::Failure};
 use std::io::{self, Write};
 /// `Poly_CoherentNode`: a point (it derefs to `gp_XYZ`), UV, normal, original index and the
 /// ring of incident triangles; `CoherentNode::new(Xyz::new(0.0, 0.0, 0.0))`.
@@ -84,39 +84,71 @@ impl CoherentNode {
     /// Drops the triangles and resets point, UV and normal, keeping the index; `node.clear()`.
     pub fn clear(&mut self) {
         self.triangles = None;
+        self.reset_geometry();
+    }
+    /// Clears the incident ring using its native allocator argument; `node.clear_in(&arena)?`.
+    pub fn clear_in(&mut self, allocator: &BaseAllocator) -> Result<(), Failure> {
+        if let Some(ring) = &mut self.triangles {
+            ring.remove_list_in(allocator)?;
+        }
+        self.triangles = None;
+        self.reset_geometry();
+        Ok(())
+    }
+    fn reset_geometry(&mut self) {
         self.uv = [precision::infinite(); 2];
         self.normal = [0.0; 3];
         self.point = Xyz::new(0., 0., 0.);
     }
     /// Adds a triangle last in the ring, as `AddTriangle`; `node.add_triangle(4)`.
     pub fn add_triangle(&mut self, triangle: usize) {
+        self.add_triangle_in(triangle, BaseAllocator::common())
+            .expect("coherent node triangle ring has a live head");
+    }
+    /// Adds a triangle member through the supplied allocator; `node.add_triangle_in(4, arena)?`.
+    pub fn add_triangle_in(
+        &mut self,
+        triangle: usize,
+        allocator: BaseAllocator,
+    ) -> Result<(), Failure> {
         match &mut self.triangles {
-            None => self.triangles = Some(CoherentTriPtr::new(triangle)),
-            Some(ring) => ring.prepend(0, triangle),
+            None => self.triangles = Some(CoherentTriPtr::new_in(triangle, allocator)),
+            Some(ring) => {
+                let head = ring.head_member().ok_or_else(missing_triangle_ring)?;
+                ring.prepend_member(head, triangle, allocator)?;
+            }
         }
+        Ok(())
     }
     /// Removes the head or the first later occurrence of a triangle; a free node reports
     /// false (natively a null dereference); `node.remove_triangle(4)`.
     pub fn remove_triangle(&mut self, triangle: usize) -> bool {
+        self.remove_triangle_using(triangle, None).unwrap_or(false)
+    }
+    /// Removes a triangle member with the supplied allocator; `node.remove_triangle_in(4, &arena)?`.
+    pub fn remove_triangle_in(
+        &mut self,
+        triangle: usize,
+        allocator: &BaseAllocator,
+    ) -> Result<bool, Failure> {
+        self.remove_triangle_using(triangle, Some(allocator))
+    }
+    fn remove_triangle_using(
+        &mut self,
+        triangle: usize,
+        allocator: Option<&BaseAllocator>,
+    ) -> Result<bool, Failure> {
         let Some(ring) = &mut self.triangles else {
-            return false;
+            return Ok(false);
         };
-        let found = if ring.get_triangle() == triangle {
-            Some(0)
-        } else {
-            ring.iter()
-                .skip(1)
-                .position(|t| t == triangle)
-                .map(|p| p + 1)
+        let Some((member, position)) = member_of_triangle(ring, triangle) else {
+            return Ok(false);
         };
-        let Some(member) = found else {
-            return false;
-        };
-        ring.remove(member);
+        remove_ring_member(ring, member, position, allocator)?;
         if ring.is_empty() {
             self.triangles = None;
         }
-        true
+        Ok(true)
     }
     /// The ring of incident triangles, `None` for a free node, as `TriangleIterator`;
     /// `node.triangle_iterator()`.
@@ -143,6 +175,36 @@ impl CoherentNode {
         }
         Ok(())
     }
+}
+fn member_of_triangle(
+    ring: &CoherentTriPtr,
+    triangle: usize,
+) -> Option<(super::CoherentTriMember, usize)> {
+    for (position, current) in ring.iter().enumerate() {
+        if current == triangle {
+            return Some((ring.iter_from(position).member_token()?, position));
+        }
+    }
+    None
+}
+fn remove_ring_member(
+    ring: &mut CoherentTriPtr,
+    member: super::CoherentTriMember,
+    position: usize,
+    allocator: Option<&BaseAllocator>,
+) -> Result<(), Failure> {
+    if let Some(allocator) = allocator {
+        return ring.remove_member(member, allocator);
+    }
+    ring.remove(position);
+    Ok(())
+}
+fn missing_triangle_ring() -> Failure {
+    Failure::with_type(
+        "Standard_NoSuchObject",
+        "CoherentNode has no live triangle-ring member; expected a ring member",
+        "",
+    )
 }
 /// `printf("%9.4f")` in the C locale; `fixed4(1.0) == "   1.0000"`.
 fn fixed4(value: f64) -> String {

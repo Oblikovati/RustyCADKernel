@@ -5,14 +5,17 @@
 //!
 //! Triangles, nodes and links live in growable arrays and are named by their index, where
 //! the native API hands out references or pointers into its `NCollection_DynamicArray`s.
-//! Removed triangles and links stay in place with negative nodes. The allocator argument
-//! of the native constructors only places the triangle rings, so it is not kept.
+//! Removed triangles and links stay in place with negative nodes. The native allocator
+//! is retained for incident triangle rings on every node.
 mod edit;
 mod export;
 mod links;
 use super::{CoherentLink, CoherentNode, CoherentTriangle};
 use crate::{gp::Xyz, poly::Triangulation};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::{
+    ncollection::BaseAllocator,
+    standard::{Failure, Handle, StandardTransient},
+};
 /// A removed node and the node the mesh was reconnected to, as `TwoIntegers`;
 /// `TwoIntegers::new(4, 2)`.
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -38,6 +41,7 @@ pub struct CoherentTriangulation {
     // a triangle that still refers to a cleared link reads (and writes) the old slot.
     pub(super) links: Vec<CoherentLink>,
     pub(super) link_count: usize,
+    allocator: BaseAllocator,
     deflection: f64,
 }
 rustycad_tkernel::impl_transient!(
@@ -51,27 +55,52 @@ impl CoherentTriangulation {
     pub fn new() -> Self {
         Self::default()
     }
+    /// Creates an empty structure whose incident rings use `allocator`;
+    /// `CoherentTriangulation::new_in(arena)`.
+    pub fn new_in(allocator: BaseAllocator) -> Self {
+        Self {
+            base: StandardTransient::default(),
+            triangles: Vec::new(),
+            nodes: Vec::new(),
+            links: Vec::new(),
+            link_count: 0,
+            allocator,
+            deflection: 0.0,
+        }
+    }
     /// Copies nodes, non-degenerate triangles, UV nodes, normals and deflection; links are
     /// not built. A null handle gives an empty structure (natively the deflection is then
     /// left uninitialized); `CoherentTriangulation::from_triangulation(&mesh)?`.
     pub fn from_triangulation(triangulation: &Handle<Triangulation>) -> Result<Self, Failure> {
-        let mut result = Self::default();
+        Self::from_triangulation_in(triangulation, BaseAllocator::common())
+    }
+    /// Copies a mesh using `allocator` for each incident triangle ring;
+    /// `CoherentTriangulation::from_triangulation_in(&mesh, arena)?`.
+    pub fn from_triangulation_in(
+        triangulation: &Handle<Triangulation>,
+        allocator: BaseAllocator,
+    ) -> Result<Self, Failure> {
+        let mut result = Self::new_in(allocator);
         let Some(mesh) = triangulation.get() else {
             return Ok(result);
         };
+        result.copy_from_mesh(mesh)?;
+        Ok(result)
+    }
+    fn copy_from_mesh(&mut self, mesh: &Triangulation) -> Result<(), Failure> {
         for offset in 0..mesh.nb_nodes() {
-            let new_index = result.set_node(mesh.node(offset + 1)?.xyz(), offset);
-            result.change_node(new_index)?.set_index(offset + 1);
+            let new_index = self.set_node(mesh.node(offset + 1)?.xyz(), offset);
+            self.change_node(new_index)?.set_index(offset + 1);
         }
         for index in 1..=mesh.nb_triangles() {
             let (a, b, c) = mesh.triangle(index)?.get();
             if a != b && b != c && c != a {
-                result.add_triangle(a - 1, b - 1, c - 1)?;
+                self.add_triangle(a - 1, b - 1, c - 1)?;
             }
         }
-        result.copy_uv_and_normals(mesh)?;
-        result.deflection = mesh.deflection();
-        Ok(result)
+        self.copy_uv_and_normals(mesh)?;
+        self.deflection = mesh.deflection();
+        Ok(())
     }
     fn copy_uv_and_normals(&mut self, mesh: &Triangulation) -> Result<(), Failure> {
         let count = mesh.nb_nodes();
@@ -105,6 +134,10 @@ impl CoherentTriangulation {
     /// The deflection, 0 unless set or copied; `mesh.deflection()`.
     pub const fn deflection(&self) -> f64 {
         self.deflection
+    }
+    /// Allocator passed to native `Allocator()`; `mesh.allocator() == &arena`.
+    pub fn allocator(&self) -> &BaseAllocator {
+        &self.allocator
     }
     /// Appends a node for a negative index, else replaces (growing with default nodes)
     /// the node at `index`; returns the node index; `mesh.set_node(point, -1)`.
@@ -191,6 +224,13 @@ impl CoherentTriangulation {
             .iter()
             .enumerate()
             .filter(|(_, link)| !link.is_empty())
+    }
+}
+impl Drop for CoherentTriangulation {
+    fn drop(&mut self) {
+        for node in &mut self.nodes {
+            let _ = node.clear_in(&self.allocator);
+        }
     }
 }
 pub(super) fn out_of_range(member: &str, index: i32, count: usize) -> Failure {
