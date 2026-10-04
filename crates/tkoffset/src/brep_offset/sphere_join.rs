@@ -30,7 +30,8 @@ pub fn build_vertex_arc_join(
     edges: &[Edge],
     offset: f64,
 ) -> Result<Face, Failure> {
-    let sphere = sphere_for_vertex(vertex, edges, offset)?;
+    let wire = fixed_wire(wire_of_edges(edges)?)?;
+    let sphere = sphere_for_wire(vertex, &wire, offset)?;
     let mut face = Face::default();
     let builder = BRepBuilder::default();
     let surface = sphere.cast();
@@ -40,17 +41,16 @@ pub fn build_vertex_arc_join(
     Ok(face)
 }
 
-fn sphere_for_vertex(
+fn sphere_for_wire(
     vertex: &Vertex,
-    edges: &[Edge],
+    wire: &Wire,
     offset: f64,
 ) -> Result<Handle<GeomSphericalSurface>, Failure> {
     let origin = BRepTool::pnt(vertex)?;
-    let wire = fixed_wire(wire_of_edges(edges)?)?;
     let mut properties = GProps::new();
     BRepGProp::linear_properties(&wire.clone().into_shape(), &mut properties, false, false)?;
     let center = properties.centre_of_mass();
-    let farthest = farthest_vertex(&wire)?;
+    let farthest = farthest_vertex(wire)?;
     let normal = frame_normal(origin, center, farthest)?;
     let x_direction = Direction3::new(
         origin.x() - center.x(),

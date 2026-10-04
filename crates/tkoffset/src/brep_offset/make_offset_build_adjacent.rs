@@ -2,8 +2,8 @@
 use super::{BRepOffsetAnalyse, BRepOffsetOffset, BRepOffsetOffsetFace};
 use rustycad_tkbrep::{
     brep_adaptor::BRepAdaptorSurface,
-    topexp::Explorer,
-    topods::{Edge, Face, Shape},
+    topexp::{Explorer, vertices},
+    topods::{Edge, Face, Shape, Vertex},
 };
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkfillet::chfi_ds::TypeOfConcavity;
@@ -13,6 +13,7 @@ use rustycad_tkmath::geom_abs::Shape as Continuity;
 pub(super) struct SharedSupportJoin {
     pub(super) source_edge: Edge,
     pub(super) face: Face,
+    pub(super) endpoint_connectors: Vec<(Vertex, Edge)>,
 }
 
 pub(super) fn arc_patches_for_supported_faces(
@@ -54,10 +55,11 @@ fn append_shared_edge_join(
     }
     require_supported_ancestors(faces, ancestors)?;
     require_offset_join(analysis, &edge, offset)?;
-    let patch = offset_patch(faces, images, analysis, &edge, offset)?;
+    let (patch, endpoint_connectors) = offset_patch(faces, images, analysis, &edge, offset)?;
     joins.push(SharedSupportJoin {
         source_edge: edge,
         face: patch,
+        endpoint_connectors,
     });
     Ok(())
 }
@@ -155,13 +157,40 @@ fn offset_patch(
     analysis: &BRepOffsetAnalyse,
     edge: &Edge,
     offset: f64,
-) -> Result<Face, Failure> {
+) -> Result<(Face, Vec<(Vertex, Edge)>), Failure> {
     let order = analysis.ancestors(&edge.clone().into_shape())?;
     let rail1 = image_edge(faces, images, order.first(), edge)?;
     let rail2 = image_edge(faces, images, order.last(), edge)?;
     let offset_image =
         BRepOffsetOffset::from_edges(edge, &rail1, &rail2, offset, false, 1.0e-4, Continuity::C1)?;
-    Ok(offset_image.face().clone())
+    let endpoint_connectors = endpoint_connectors(&offset_image, edge)?;
+    Ok((offset_image.face().clone(), endpoint_connectors))
+}
+
+fn endpoint_connectors(
+    offset: &BRepOffsetOffset,
+    source: &Edge,
+) -> Result<Vec<(Vertex, Edge)>, Failure> {
+    let (first, last) = vertices(source, false);
+    let mut connectors = Vec::new();
+    append_endpoint_connector(offset, first, &mut connectors)?;
+    append_endpoint_connector(offset, last, &mut connectors)?;
+    Ok(connectors)
+}
+
+fn append_endpoint_connector(
+    offset: &BRepOffsetOffset,
+    vertex: Vertex,
+    connectors: &mut Vec<(Vertex, Edge)>,
+) -> Result<(), Failure> {
+    let image = offset.generated(&vertex.clone().into_shape());
+    if image.is_null() {
+        return Err(not_implemented(
+            "offset edge has no generated endpoint connector",
+        ));
+    }
+    connectors.push((vertex, Edge::unchecked(image)));
+    Ok(())
 }
 
 fn image_edge(

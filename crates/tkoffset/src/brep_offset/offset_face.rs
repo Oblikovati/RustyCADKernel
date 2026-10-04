@@ -26,6 +26,7 @@ struct FaceBoundaryCopy<'a> {
     surface: &'a Handle<dyn GeomSurface>,
     created: &'a mut FaceCreatedImages,
     edge_images: EdgeImages,
+    generated_edge_images: EdgeImages,
     vertex_images: VertexImages,
 }
 
@@ -35,6 +36,7 @@ pub struct BRepOffsetOffsetFace {
     offset: Face,
     status: BRepOffsetStatus,
     edge_images: EdgeImages,
+    generated_edge_images: EdgeImages,
     vertex_images: VertexImages,
 }
 
@@ -56,7 +58,7 @@ impl BRepOffsetOffsetFace {
         let signed_offset = face_offset(face, offset);
         let (surface, status) = surface(&basis, signed_offset, false)?;
         let mut result = make_offset_face(&initial, &surface)?;
-        let (edge_images, vertex_images) =
+        let (edge_images, generated_edge_images, vertex_images) =
             copy_face_boundaries(&initial, &mut result, &surface, created)?;
         result.set_orientation(face.orientation());
         update_face(&result)?;
@@ -65,6 +67,7 @@ impl BRepOffsetOffsetFace {
             offset: result,
             status,
             edge_images,
+            generated_edge_images,
             vertex_images,
         })
     }
@@ -96,7 +99,7 @@ impl BRepOffsetOffsetFace {
     }
 
     fn image_for(&self, source: &Shape) -> Option<Shape> {
-        self.edge_images
+        self.generated_edge_images
             .iter()
             .find(|(edge, _)| edge.is_same(source))
             .map(|(_, image)| image.clone().into_shape())
@@ -148,7 +151,7 @@ fn copy_face_boundaries(
     target: &mut Face,
     surface: &Handle<dyn GeomSurface>,
     created: &mut FaceCreatedImages,
-) -> Result<(EdgeImages, VertexImages), Failure> {
+) -> Result<(EdgeImages, EdgeImages, VertexImages), Failure> {
     let target_view = target.clone();
     let mut copy = FaceBoundaryCopy {
         source,
@@ -156,6 +159,7 @@ fn copy_face_boundaries(
         surface,
         created,
         edge_images: Vec::new(),
+        generated_edge_images: Vec::new(),
         vertex_images: Vec::new(),
     };
     let mut wires = Explorer::new(
@@ -169,7 +173,11 @@ fn copy_face_boundaries(
         BRepBuilder::default().add(target, &wire_image.oriented(wire.orientation()))?;
         wires.next()?;
     }
-    Ok((copy.edge_images, copy.vertex_images))
+    Ok((
+        copy.edge_images,
+        copy.generated_edge_images,
+        copy.vertex_images,
+    ))
 }
 
 impl FaceBoundaryCopy<'_> {
@@ -206,6 +214,8 @@ impl FaceBoundaryCopy<'_> {
             self.created.bind_edge(edge, &image);
         }
         self.edge_images.push((edge.clone(), image.clone()));
+        let generated = Edge::unchecked(image.oriented(edge.orientation()));
+        self.generated_edge_images.push((edge.clone(), generated));
         Ok(image)
     }
 }

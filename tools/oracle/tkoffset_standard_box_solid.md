@@ -1,10 +1,17 @@
-# Solid box offset and vertex closure gap
+# Solid box offset and vertex closure
 
-Pinned OCCT successfully offsets a `1 x 2 x 3` box as a solid. Its 26 faces include
-six shifted planes, twelve edge-join cylinders, and eight spherical vertex closures.
-The Rust skin builder currently lacks the final spherical closure stage. It returns a
-named `Standard_NotImplemented` failure for this solid input so it cannot report the
-partial 18-face shell as a completed solid offset. This is an explicit remaining gap.
+Pinned OCCT offsets a `1 x 2 x 3` box as a solid. The Rust builder now produces the
+same 26-face, 96-edge topology: six shifted planes, twelve edge-join cylinders, and
+eight spherical vertex closures. Whole-solid and per-face `BRepCheck_Analyzer`
+validation pass, and source face/edge/vertex history counts match this fixture.
+
+Surface area still differs slightly. OCCT reports `43.991148576` at the fixture's
+stable nine-digit precision; Rust reports `43.99114858034269`, a `3.94e-9` excess
+against the full-precision native run. The eight Rust spherical faces are each about
+`4.9e-10` larger than their native counterparts; plane and cylinder areas agree at
+the printed precision. The Rust test uses `1e-8` only to keep this topology fixture
+stable. Numerical parity for spherical pcurves remains unresolved, so this result is
+not evidence of full `BRepOffset_MakeOffset` parity.
 
 OCCT source baseline: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
