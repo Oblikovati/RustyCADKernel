@@ -18,10 +18,10 @@ pub fn is_split_to_reverse_with_warning(
 ) -> Result<bool, Failure> {
     let mut error = 0;
     let reverse = is_split_shape_to_reverse(split, original, context, &mut error)?;
-    if error != 0 {
-        if let Some(report) = report {
-            append_orientation_warning(split, original, report)?;
-        }
+    if error != 0
+        && let Some(report) = report
+    {
+        append_orientation_warning(split, original, report)?;
     }
     Ok(reverse)
 }
