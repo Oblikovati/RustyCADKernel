@@ -1,6 +1,7 @@
-//! Native callback-pointer mutation coverage for `mma1fdi_`.
-use super::adv_math::fill;
-use super::common::{end, int};
+//! Native callback-pointer mutation coverage for the AdvApp2Var samplers.
+use super::adv_f2var::{Square, roots};
+use super::adv_math::{fill, print};
+use super::common::{end, int, real};
 use rustycad_tkgeombase::adv_app2var::approx_f2var::{
     self as f2, IsoApproxOutput, IsoApproxRequest, mma2roo_,
 };
@@ -61,6 +62,39 @@ pub fn mma2fnc_mut_order_case(_: &[f64]) {
     int(ier);
     int(output.nbcrbe);
     print_calls(&function.calls.borrow());
+    end();
+}
+
+pub fn mma2ds1_mut_state_case(_: &[f64]) {
+    let (nu, nv, nd) = (3, 3, 2);
+    let (ur, vr) = roots(nu, nv);
+    let mut square = Square::new(nu, nv, nd, 0.25);
+    let (mut fp, mut tt, mut ier) = (fill(nd * nu), fill(nu), -1);
+    let request = f2::SampledSquare {
+        ndimen: nd,
+        uintfn: [0., 1.],
+        vintfn: [0., 1.],
+        nbpntu: nu,
+        nbpntv: nv,
+        urootb: &ur,
+        vrootb: &vr,
+        isofav: 2,
+    };
+    let function = MutatingSquareState::default();
+    f2::mma2ds1_(
+        &request,
+        &function,
+        &mut square.tables(),
+        &mut fp,
+        &mut tt,
+        &mut ier,
+    );
+    int(ier);
+    print_square_calls(&function.calls.borrow());
+    print(&square.soso);
+    print(&square.diso);
+    print(&square.sodi);
+    print(&square.didi);
     end();
 }
 
@@ -132,5 +166,86 @@ fn print_calls(calls: &[[i32; 3]]) {
         for value in call {
             int(*value);
         }
+    }
+}
+
+#[derive(Default)]
+struct MutatingSquareState {
+    calls: RefCell<Vec<SquareCall>>,
+}
+
+#[derive(Clone, Copy)]
+struct SquareCall {
+    ints: [i32; 3],
+    reals: [f64; 5],
+}
+
+impl AdvApp2VarEvaluatorFunc2Var for MutatingSquareState {
+    fn evaluate(&self, _: &AdvApp2VarEvaluation<'_>, _: &mut [f64], _: &mut i32) {
+        unreachable!("native mutable callback must dispatch through evaluate_native")
+    }
+
+    fn evaluate_native(
+        &self,
+        call: &mut AdvApp2VarEvaluationMut<'_>,
+        result: &mut [f64],
+        error: &mut i32,
+    ) {
+        self.record_and_write(call, result);
+        self.mutate_first_call(call);
+        *error = 0;
+    }
+}
+
+impl MutatingSquareState {
+    fn record_and_write(&self, call: &AdvApp2VarEvaluationMut<'_>, result: &mut [f64]) {
+        self.record(call);
+        for point in 0..*call.nb_params as usize {
+            write_square_value(call, result, point);
+        }
+    }
+
+    fn record(&self, call: &AdvApp2VarEvaluationMut<'_>) {
+        self.calls.borrow_mut().push(SquareCall {
+            ints: [*call.dimension, *call.favor_iso, *call.nb_params],
+            reals: [
+                call.u_start_end[0],
+                call.u_start_end[1],
+                call.v_start_end[0],
+                call.v_start_end[1],
+                *call.parameters.first().unwrap_or(&0.),
+            ],
+        });
+    }
+
+    fn mutate_first_call(&self, call: &mut AdvApp2VarEvaluationMut<'_>) {
+        if self.calls.borrow().len() != 1 {
+            return;
+        }
+        *call.dimension = 1;
+        *call.favor_iso = 1;
+        *call.nb_params = 2;
+        call.u_start_end[0] = -0.5;
+        call.v_start_end[1] = 0.75;
+        call.parameters[0] += 0.125;
+    }
+}
+
+fn write_square_value(call: &AdvApp2VarEvaluationMut<'_>, result: &mut [f64], point: usize) {
+    for component in 0..*call.dimension as usize {
+        let index = point * *call.dimension as usize + component;
+        result[index] = 10. * *call.const_param
+            + call.parameters[point]
+            + call.u_start_end[0]
+            + 3. * call.v_start_end[1]
+            + 100. * component as f64;
+    }
+}
+
+fn print_square_calls(calls: &[SquareCall]) {
+    int(calls.len() as i32);
+    for call in calls {
+        call.ints.iter().for_each(|value| int(*value));
+        call.reals.iter().for_each(|value| real(*value));
     }
 }
