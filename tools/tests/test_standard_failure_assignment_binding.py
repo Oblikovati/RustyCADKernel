@@ -78,7 +78,14 @@ class FailureAssignmentBindingTest(unittest.TestCase):
         self.assertEqual(
             matches[0]["rust_item"], "rustycad_tkernel::standard::Failure::assign_base"
         )
-        self.assertEqual(matches[0]["status"], "partial")
+        self.assertEqual(matches[0]["status"], "implemented")
+        self.assertEqual(
+            matches[0]["rust_items"],
+            [
+                "rustycad_tkernel::standard::Failure::assign_base",
+                "rustycad_tkernel::standard::Failure::assign_base_self",
+            ],
+        )
 
     def test_base_copy_slices_derived_identity(self) -> None:
         selector = "Standard_Failure(const Standard_Failure&)"

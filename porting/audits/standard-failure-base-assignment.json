@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "purpose": "Model Standard_Failure base assignment without overwriting dynamic exception identity or derived storage.",
+  "purpose": "Model Standard_Failure base assignment, including its defined self-assignment no-op, without overwriting dynamic exception identity or derived storage.",
   "rust_base_revision": "68a04bcc35e2bc362ef2a4135c1e88e2c19e31b1",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "native_sources": {
@@ -11,8 +11,9 @@
     "src/FoundationClasses/TKernel/Standard/Standard_DefineException.hxx": "718d83d7d37b327bf991526be73f0cf41ba6b745cbfbd0ed7398d114c5cf1d8a"
   },
   "rust_sources": {
-    "crates/tkernel/src/standard/failure.rs": "796f04f54d366f436ff10fa9381b508f54b5cab4f55503440d9561f34700c2a4",
-    "crates/tkernel/tests/standard_failure_base_assignment.rs": "9984b85a496657e8c7c101e841105190e0c2f9e4d4a59a116ed5f75864847bc9"
+    "crates/tkernel/src/standard/failure.rs": "3d15ce9fd5e47fcab6516e1072d412881166eb10dbf479881a7fbcd4f80f357d",
+    "crates/tkernel/tests/standard_failure_base_assignment.rs": "9984b85a496657e8c7c101e841105190e0c2f9e4d4a59a116ed5f75864847bc9",
+    "crates/tkernel/tests/standard_failure_base_self_assignment.rs": "f94dab168beb8bce0cfffc8bc01228dbbc6070c270d9963129d79775d2b2dc77"
   },
   "compiler_binding": {
     "rustdoc_json_sha256": "d734329c5c70776b408eaf01772b77f9d6bcb8a27bbc39ed64ea77744370eebc",
@@ -98,15 +99,14 @@
     "Standard_OutOfMemory owns a separate buffer: base assignment neither overwrites a destination buffer nor reads the virtual source what() as its base message."
   ],
   "limitations": [
-    "The safe Rust borrowed signature cannot directly express native self-assignment, which is a no-op; the row remains partial.",
     "Supplemental probes add no original legacy declarations.",
-    "Clone remains a Rust whole-value operation and is no longer the binding for native base assignment."
+    "Clone remains a Rust whole-value operation and is not the binding for native base assignment."
   ],
   "native_probe": {
     "source": "tools/oracle/tkernel_failure_base_assignment.cxx",
-    "source_sha256": "214630e5951f43643ffd4aff876ca3f188d70b5f07c583c195510e24bf467545",
+    "source_sha256": "2b110ca3b7461d6d02f4eba62eda308c89fa0b66d239918e84f575af50a8d177",
     "expected": "tools/oracle/tkernel_failure_base_assignment.expected",
-    "expected_sha256": "cd17dab168412faf2ebe09311dbe4b0f4df9bf7005b6cd4fc67b0737b7fb4e0f",
+    "expected_sha256": "3770ae4e6169747060c176cd6dabe2b32fd6a42a6dad27f45ec16164df8679d0",
     "compiler": "g++ 13.3.0",
     "flags": [
       "-std=c++17",
@@ -115,10 +115,11 @@
     "include": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
     "library": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
     "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
-    "binary_sha256": "0773dbbdc3e16a87963606570b8c2bda0e0b075865648793f527629bebc96c58",
+    "binary_sha256": "5eb2cf3339977bfea7940de5cd7287a16e75ec6f64d973b08d41e43559aed821",
     "exit_code": 0,
     "comparison_exit_code": 0,
-    "output": "1 1 1\nStandard_DomainError: newtrace\nreserved\nStandard_OutOfMemory: basestack\n1 1 reserved\nStandard_DomainError\n"
+    "output": "1 1 1\nStandard_DomainError: newtrace\nreserved\nStandard_OutOfMemory: basestack\n1 1 reserved\nStandard_DomainError\n1 1 1 Standard_OutOfMemory reserved\n",
+    "self_assignment_case": "Standard_OutOfMemory assigned through Standard_Failure& to itself; return address, base and derived message pointers, dynamic type, and derived buffer remain unchanged."
   },
   "validation": {
     "red": {
@@ -164,6 +165,20 @@
       "exit_code": 0,
       "log": "porting/runtime-evidence/failure-base-rustdoc.log.gz",
       "log_sha256": "8b643a57dc094d4f5460a7a3a479eaf5d7799d299924c6933624b5045e5d4ab4"
+    },
+    "self_assignment_followup": {
+      "rust_test_command": "cargo test --locked -p rustycad-tkernel --test standard_failure_base_assignment --test standard_failure_base_self_assignment",
+      "rust_exit_code": 0,
+      "rust_tests_passed": 4,
+      "rust_tests_failed": 0,
+      "strict_clippy_command": "cargo clippy --locked -p rustycad-tkernel --test standard_failure_base_assignment --test standard_failure_base_self_assignment -- -D warnings",
+      "strict_clippy_exit_code": 0,
+      "binding_test_command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_standard_failure_assignment_binding",
+      "binding_test_exit_code": 0,
+      "native_output_diff_exit_code": 0,
+      "cargo_target_dir": "/tmp/rustycad-failure-self-target",
+      "source_revision": "c25c0a4e4f3e12bf854eff5c11bb3aaad8ba0283",
+      "base_revision": "3805260c1de3d690b42e66544e3aea0b9adc83f6"
     }
   },
   "environment": {
@@ -172,5 +187,14 @@
     "CARGO_PROFILE_TEST_DEBUG": "0",
     "CARGO_BUILD_JOBS": "4",
     "CARGO_TARGET_DIR": "/tmp/rustycad-failure-base-target"
-  }
+  },
+  "tool_sources": {
+    "tools/tests/test_standard_failure_assignment_binding.py": "bea2807fe23e5a81b9b71b2baed79360e1dc7660c5fb5b055ee4045db78e54f2"
+  },
+  "followup_base_revision": "3805260c1de3d690b42e66544e3aea0b9adc83f6",
+  "followup_source_revision": "c25c0a4e4f3e12bf854eff5c11bb3aaad8ba0283",
+  "provenance_notes": [
+    "The compiler_binding and preexisting validation records describe the earlier assign_base API capture and are retained as historical evidence.",
+    "The self-assignment followup was rebuilt after rebasing onto followup_base_revision; its Rust source hashes are in rust_sources and its dedicated target is recorded below."
+  ]
 }

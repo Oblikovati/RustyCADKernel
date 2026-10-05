@@ -33,9 +33,22 @@ static void bufferedSource()
   std::cout << base.ExceptionType() << '\n';
 }
 
+static void selfAssignment()
+{
+  Standard_OutOfMemory target("reserved");
+  Standard_Failure& base = target;
+  const char* aMessage = base.what();
+  const char* aStack = base.GetStackString();
+  std::cout << (&(base = base) == &base) << ' '
+            << (base.what() == aMessage) << ' '
+            << (base.GetStackString() == aStack) << ' '
+            << base.ExceptionType() << ' ' << base.what() << '\n';
+}
+
 int main()
 {
   derivedTarget();
   bufferedTarget();
   bufferedSource();
+  selfAssignment();
 }

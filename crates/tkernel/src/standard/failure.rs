@@ -85,6 +85,11 @@ impl Failure {
         self.stack = source.stack.clone();
         self
     }
+    /// Models the defined self-assignment branch without aliasing `&mut self`.
+    /// `failure.assign_base_self()` returns the same failure without changing its state.
+    pub fn assign_base_self(&mut self) -> &mut Self {
+        self
+    }
     /// Replaces the message while preserving copies; `failure.set_message("updated")`.
     pub fn set_message(&mut self, message: &str) {
         self.message = c_string(message);

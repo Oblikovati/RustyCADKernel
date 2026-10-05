@@ -84637,8 +84637,12 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
       "rust_item": "rustycad_tkernel::standard::Failure::assign_base",
-      "status": "partial",
-      "notes": "Explicit base assignment shares source message and stack, preserves destination exception type and OutOfMemory buffer, and returns the destination. Native/Rust supplemental probe covers base and derived source/destination cases. Safe borrowing does not express native self-assignment; that native branch is a no-op."
+      "status": "implemented",
+      "notes": "Explicit base assignment shares source message and stack, preserves destination exception type and OutOfMemory buffer, and returns the destination. The named safe self-assignment adapter matches the native no-op branch without aliasing a mutable reference.",
+      "rust_items": [
+        "rustycad_tkernel::standard::Failure::assign_base",
+        "rustycad_tkernel::standard::Failure::assign_base_self"
+      ]
     },
     {
       "upstream_id": "Standard_Failure::~Standard_Failure()",
