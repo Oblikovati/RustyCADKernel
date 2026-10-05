@@ -4,6 +4,31 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::exceptions::{self, exception_parent};
 use rustycad_tkernel::{osd, plugin, std_fail};
 
+const OSD_NATIVE_PARENTS: &[(&str, &str)] = &[
+    ("OSD_Exception", "Standard_Failure"),
+    ("OSD_Exception_ACCESS_VIOLATION", "OSD_Exception"),
+    ("OSD_Exception_ARRAY_BOUNDS_EXCEEDED", "OSD_Exception"),
+    ("OSD_Exception_CTRL_BREAK", "OSD_Exception"),
+    ("OSD_Exception_ILLEGAL_INSTRUCTION", "OSD_Exception"),
+    ("OSD_Exception_IN_PAGE_ERROR", "OSD_Exception"),
+    ("OSD_Exception_INT_OVERFLOW", "OSD_Exception"),
+    ("OSD_Exception_INVALID_DISPOSITION", "OSD_Exception"),
+    ("OSD_Exception_NONCONTINUABLE_EXCEPTION", "OSD_Exception"),
+    ("OSD_Exception_PRIV_INSTRUCTION", "OSD_Exception"),
+    ("OSD_Exception_STACK_OVERFLOW", "OSD_Exception"),
+    ("OSD_Exception_STATUS_NO_MEMORY", "OSD_Exception"),
+    ("OSD_Signal", "Standard_Failure"),
+    ("OSD_SIGBUS", "OSD_Signal"),
+    ("OSD_SIGHUP", "OSD_Signal"),
+    ("OSD_SIGILL", "OSD_Signal"),
+    ("OSD_SIGINT", "OSD_Signal"),
+    ("OSD_SIGKILL", "OSD_Signal"),
+    ("OSD_SIGQUIT", "OSD_Signal"),
+    ("OSD_SIGSEGV", "OSD_Signal"),
+    ("OSD_SIGSYS", "OSD_Signal"),
+    ("OSD_OSDError", "Standard_Failure"),
+];
+
 #[test]
 fn constructors_carry_the_class_name_and_message() {
     let failure = exceptions::negative_value("length -1");
@@ -63,24 +88,76 @@ fn classes_of_other_toolkits_are_still_failures() {
 
 #[test]
 fn osd_macro_exception_chains_follow_native_bases() {
-    for name in osd::OSD_EXCEPTION_TYPES {
-        let parent =
-            exception_parent(name).unwrap_or_else(|| panic!("missing OSD parent for {name}"));
-        let failure = Failure::with_type(name, "probe", "");
+    assert_eq!(osd_macro_names(), osd::OSD_EXCEPTION_TYPES);
+    assert_eq!(OSD_NATIVE_PARENTS.len(), 22);
+    for &(name, parent) in OSD_NATIVE_PARENTS {
+        assert_native_parent_and_catch_chain(name, parent);
+        assert_unrelated_osd_types_are_not_caught(name);
+    }
+}
+
+fn osd_macro_names() -> Vec<&'static str> {
+    OSD_NATIVE_PARENTS
+        .iter()
+        .filter_map(|(name, _)| (*name != "OSD_OSDError").then_some(*name))
+        .collect()
+}
+
+fn assert_native_parent_and_catch_chain(name: &'static str, parent: &'static str) {
+    assert_eq!(
+        exception_parent(name),
+        Some(parent),
+        "wrong native parent for {name}"
+    );
+    let failure = Failure::with_type(name, "probe", "");
+    assert!(failure.is_kind(name));
+    assert_osd_ancestors_are_catchable(&failure, name);
+}
+
+fn assert_osd_ancestors_are_catchable(failure: &Failure, name: &str) {
+    let mut current = name;
+    while let Some(parent) = expected_osd_parent(current) {
         assert!(
             failure.is_kind(parent),
             "{name} should be caught as {parent}"
         );
-        assert!(
-            failure.is_kind("Standard_Failure"),
-            "{name} must derive from Standard_Failure"
-        );
+        current = parent;
     }
-    assert_eq!(
-        Some("OSD_Exception"),
-        exception_parent("OSD_Exception_ACCESS_VIOLATION")
+    assert!(
+        failure.is_kind("Standard_Failure"),
+        "{name} must be a failure"
     );
-    assert_eq!(Some("OSD_Signal"), exception_parent("OSD_SIGSEGV"));
+}
+
+fn expected_osd_parent(name: &str) -> Option<&'static str> {
+    OSD_NATIVE_PARENTS
+        .iter()
+        .find(|(native_name, _)| *native_name == name)
+        .map(|(_, parent)| *parent)
+}
+
+fn assert_unrelated_osd_types_are_not_caught(name: &'static str) {
+    let failure = Failure::with_type(name, "probe", "");
+    for candidate in ["OSD_Exception", "OSD_Signal", "OSD_OSDError"] {
+        if name != candidate && !expected_osd_chain_contains(name, candidate) {
+            assert!(
+                !failure.is_kind(candidate),
+                "{name} is unrelated to {candidate}"
+            );
+        }
+    }
+    assert!(!failure.is_kind("Standard_DomainError"));
+}
+
+fn expected_osd_chain_contains(name: &str, candidate: &str) -> bool {
+    let mut current = name;
+    while let Some(parent) = expected_osd_parent(current) {
+        if parent == candidate {
+            return true;
+        }
+        current = parent;
+    }
+    false
 }
 
 #[test]
