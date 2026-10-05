@@ -2,6 +2,7 @@
 use super::{
     ExtendedString,
     errors::{int_length, leading_units, offset, out_of_range},
+    utf,
 };
 use crate::standard::Failure;
 impl ExtendedString {
@@ -143,6 +144,12 @@ impl ExtendedString {
         self.terminated.clear();
         self.terminated.extend_from_slice(units.as_ref());
         self.terminated.push(0);
+    }
+    /// Copies a bounded UTF-16 C string through its first NUL; `text.copy_c_units(Some(&[65, 0, 66]))`.
+    /// `None` and an empty prefix clear the string, as the native pointer overload does.
+    pub fn copy_c_units(&mut self, units: Option<&[u16]>) -> &mut Self {
+        self.copy(units.map_or(&[][..], utf::c_units_prefix));
+        self
     }
     /// The (pointer, length) Copy: a null pointer or a length <= 0 empties the string;
     /// `text.copy_span(None, 3)`.

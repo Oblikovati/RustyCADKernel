@@ -1,0 +1,79 @@
+{
+  "scope": "ExtendedString UTF-16 pointer Copy and assignment overloads",
+  "base_commit": "9cc140c4d8970dbd9ed9cdf2c1678f7075317386",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "crosswalk_report_sha256": "cd77726709326ee8fdc6a6bc08c0d51e2160ac76ca3b64d8b7716017add1e190",
+  "native_sources": {
+    "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+    "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+    "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c",
+    "behavior": "The one-argument Copy wrapper calls extStringLen then the core. Null or nonpositive length empties a nonempty receiver. Copy(pointer,length) copies all named units, including zero units. Pointer assignment delegates to Copy and returns *this."
+  },
+  "mappings": [
+    {
+      "cpp_id": "11104692a437ba79a96a27efe85eca0c95191d4c3c9a51e8e9f96003e92fde7f",
+      "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const)",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "ff01b78c9d5113b091dea8f685a8407a7e7aa64431eafd67e14c1fc2550d0759",
+      "upstream_id": "TCollection_ExtendedString::operator=(const char16_t* const)",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    }
+  ],
+  "rustdoc": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "raw_capture": "rustdoc-target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "42eefd3383199282ccf44941fae66b552ee427baa85c39c71a8d219c93fff8b2",
+    "normalized_capture": "rustdoc-target/extended-copy-rustdoc-inventory.json",
+    "normalized_capture_sha256": "904805b5dbaf769ed3fbf621a1cb500218cf6798158f344587581677eb315d95",
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "source": "crates/tkernel/src/tcollection/extended_string/editing.rs",
+    "source_sha256": "d7f440058076c04bccee25a849fd095f7bc8fae0673e4310894b7ede76073a3a",
+    "policy": "Private TKernel-only Rustdoc capture normalized with make_reachable_inventory; copy_c_units occurs exactly once. No global snapshot was regenerated."
+  },
+  "native_evidence": {
+    "fixture": "tools/oracle/tkernel_extended_string_c_units_copy.cxx",
+    "fixture_sha256": "030130136bb2d29af7e18d1b54e2817be31df39c99216e18d42a7fd36c99c960",
+    "expected": "tools/oracle/tkernel_extended_string_c_units_copy.expected",
+    "expected_sha256": "e11230c6a57f78a9f508afd218fe6ac0acbd61ff09bfe50d27263085bd835215",
+    "library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "executable_sha256": "5d7220103d3c6ce53b8141b58f07953ac3dfea1a18ba9027410c57ff75ef1f82",
+    "matches_expected": true,
+    "cases": [
+      "Embedded NUL pointer input copies only A.",
+      "Explicit length copies A, NUL, B.",
+      "Pointer assignment truncates and returns the receiver reference.",
+      "Null and empty pointer input clear an existing value."
+    ]
+  },
+  "rust_evidence": {
+    "regression": "crates/tkernel/tests/extended_string_c_units_copy.rs",
+    "regression_sha256": "cb740b97ba14638dba19f2ad4b41c1b2742a3a014621300ef1364672c33424ff",
+    "focused_command": "cargo test -p rustycad-tkernel --test extended_string_c_units_copy --test tcollection_extended_string",
+    "focused_log": "porting/runtime-evidence/extended-string-c-units-copy-focused-tests.log.gz",
+    "focused_log_sha256": "5c6886275f1229904eab350ff52b748b84d36286433ce517c916c3d0d03a94c9",
+    "focused_passed": 107,
+    "focused_failed": 0,
+    "focused_groups": 2,
+    "full_command": "cargo test --locked -p rustycad-tkernel",
+    "full_log": "porting/runtime-evidence/extended-string-c-units-copy-full-tests.log.gz",
+    "full_log_sha256": "6a9781dedf7aa19e1f850be918099c7c665b514428a5ace731fd8bd8926e2301",
+    "full_passed": 2831,
+    "full_failed": 0,
+    "full_groups": 183,
+    "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-c-units-copy-clippy.log.gz",
+    "clippy_log_sha256": "823d2eb8385cfd867d1d557e7c9f19479f4eb379e1cc33b8f3fa307e9860b102",
+    "clippy_exit_code": 0
+  },
+  "parity_sha256": "87d3c0ec0fc84c30f5e90317136faee584c3e8ecdd649163996627bd9ee173df",
+  "limits": "Option<&[u16]> models null or a bounded readable source, not invalid or dangling pointers or reads beyond the slice. The adapter returns &mut Self so the assignment mapping preserves native assignment-result identity; callers of Copy may ignore the Rust return value."
+}
