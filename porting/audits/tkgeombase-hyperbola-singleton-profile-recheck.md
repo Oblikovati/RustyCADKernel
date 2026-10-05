@@ -95,3 +95,9 @@ reruns on the current main-based isolated worktree both pass the original exact 
 The standard OCCT exact test therefore remains failing and the TKGeomBase module remains un-green. Passing it would require changing the original exact assertion or compiling that test with nonstandard math flags; neither preserves the currently pinned native test behavior.
 
 The broad TKGeomBase runtime receipt must therefore continue to record 838 native passes and this one failure among 839 declarations. This file is evidence only; it does not authorize a skip or claim full toolkit parity.
+
+## Additional full Debug-profile join (2026-10-05)
+
+A fresh CMake `Debug` build was configured from the same pinned OCCT revision and compiled its native test and toolkit libraries with GCC 13.3.0. The test TU flags were `-fexceptions -fPIC -Wall -Wextra -g -std=gnu++17` (no `-O2`, no `-DNDEBUG`). With that separate profile, the focused `SingletonInvalidAndValueAccessor` test passes unchanged. The TKGeomBase verifier also joined all 839 mapped cases: 839 native tests, 839 Rust translations, and 839 Rust runtime cases passed. The verifier still reports `toolkit_complete: false`; this is the mapped subset, not full toolkit acceptance.
+
+This does not replace or rewrite the standard `RelWithDebInfo` receipt above: its 838/839 result and one-ULP exact-zero failure remain intact. The full Debug profile uses Debug-built libraries as well as Debug-built tests, while the focused standalone `-O0` probe against the existing optimized libraries isolates the caller-TU optimization effect. See `porting/runtime-evidence/tkgeombase-debug-profile-0fcfd33.json` for CMake options, source/build fingerprints, exact command, and joined-case counts.

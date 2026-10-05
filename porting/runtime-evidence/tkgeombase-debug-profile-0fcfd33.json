@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "additional-native-profile-runtime-join",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_revision": "0fcfd33dcfb82a22fea7042055ab8db5c343889c",
+  "rust_source_clean": true,
+  "profile": {
+    "cmake_build_type": "Debug",
+    "cmake_build_type_cache_entry": "CMAKE_BUILD_TYPE:STRING=Debug",
+    "test_translation_unit_flags": "-fexceptions -fPIC -Wall -Wextra -g -std=gnu++17",
+    "native_test_and_toolkit_libraries": "Debug build; linked libraries reside under lin64/gcc/libd",
+    "compiler": "/usr/bin/c++ (GCC 13.3.0)",
+    "enabled_modules": [
+      "FoundationClasses",
+      "ModelingData",
+      "ModelingAlgorithms"
+    ],
+    "disabled_modules": [
+      "Visualization",
+      "ApplicationFramework",
+      "DataExchange",
+      "Draw"
+    ]
+  },
+  "focused_test": {
+    "name": "ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor",
+    "result": "passed",
+    "command": "OpenCascadeGTest --gtest_filter=ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor",
+    "output_sha256": "727914b9120aa21028c7cabc93fc73fddcd9be84ae74b4cfdf6f00392080e1de"
+  },
+  "mapped_case_join": {
+    "toolkit": "TKGeomBase",
+    "declarations_mapped": 839,
+    "native_legacy_tests_passed": 839,
+    "rust_translations_passed": 839,
+    "rust_runtime_cases_passed": 839,
+    "toolkit_complete": false,
+    "scope": "Mapped TKGeomBase cases only; declaration and toolkit acceptance remain pending"
+  },
+  "native_provenance": {
+    "cmake_cache_sha256": "3a5af58a05d0d3bfdfad76d7af2744cd71bc3da09c216617093dcf4a726295b5",
+    "native_binary_sha256": "ba18c6d47bc6e9ea0ff3cbdb3a54f8d59abb3db009847b0e115ea0760aeb7456",
+    "linked_libraries_sha256": {
+      "lin64/gcc/libd/libTKBO.so.8.1.0": "abcb3c9baba32e9d26a3c7fa5634b3b2f2f99df67fae734b4355e319efb70e21",
+      "lin64/gcc/libd/libTKBRep.so.8.1.0": "4003956759b319db7bf8bde27d07d29d6f5a03df36dd689eb015ef5b41e10fca",
+      "lin64/gcc/libd/libTKBool.so.8.1.0": "102c01154b77488b8352e6a3c1bd3836a196cdae8dc2f4ad6533252fd7550a26",
+      "lin64/gcc/libd/libTKExpress.so.8.1.0": "133d0223eb26d52d742eec8561431b0023fafc36992249898ec7eb604e54dfb4",
+      "lin64/gcc/libd/libTKFillet.so.8.1.0": "bb3bb1ede359fc043e3ab32d2a513374342fe74463a18b6fe3ec9d8e002a7b62",
+      "lin64/gcc/libd/libTKG2d.so.8.1.0": "2a1f75de3f2b26309c566ace5d1ad228a0684720643c22be564bf56b5e6ded3a",
+      "lin64/gcc/libd/libTKG3d.so.8.1.0": "fed4cb4dff4c87e7ff20950244e1815b90beea5583a4553cd567fbcf6a5d95b0",
+      "lin64/gcc/libd/libTKGeomAlgo.so.8.1.0": "161a31d881b0f68ff42f8b604ab2a2421de48314e6d08a01f25ed9b2d049f25e",
+      "lin64/gcc/libd/libTKGeomBase.so.8.1.0": "5e2203086117d7d911c0cd4fbff3f0721297ed0014abeab5a7f4a6325f3f1f97",
+      "lin64/gcc/libd/libTKHLR.so.8.1.0": "d61b65475244051c6d038c10dd164685019e5dc8365cf833d2432e758c4faaff",
+      "lin64/gcc/libd/libTKHelix.so.8.1.0": "8468d1cabf368a53267dfbf4daca4f62eff740752c174eb0a3565232ede0b383",
+      "lin64/gcc/libd/libTKMath.so.8.1.0": "ba921139b63bf473f1995a265b73c9c34a60b65e0f6a5981cfc8c5756478122c",
+      "lin64/gcc/libd/libTKMesh.so.8.1.0": "be3402a00055e21ad7ec074eab06cf633cccdfcb09c39c8dde2af7de4156db3a",
+      "lin64/gcc/libd/libTKOffset.so.8.1.0": "54805426aa09a81626b46cadbc9517e5f51945db4871f23014051ded0e1278c7",
+      "lin64/gcc/libd/libTKPrim.so.8.1.0": "56bab47bd4e70e32f1a000973e1494908dd514f5b587bc756391ecf377b9d9c8",
+      "lin64/gcc/libd/libTKShHealing.so.8.1.0": "dc3554dffc5eee5c36c840a1affd5c26fa7483e2ef7fd187aad7beeda763fc83",
+      "lin64/gcc/libd/libTKTopAlgo.so.8.1.0": "3baca80082a10bc8df6b74d62bb00017046fb1dd58a9f43623c939e7664f1956",
+      "lin64/gcc/libd/libTKernel.so.8.1.0": "7e16f9f2e71360dcd3cabb689d85d2f8aa4aed3da00f2e669c0498e800ed4012",
+      "lin64/gcc/libd/libgtest.so.1.16.0": "dbc5cded36ef9ebfb18638916208eab949a9516dd9b4ee674dfe86dc69966f39",
+      "lin64/gcc/libd/libgtest_main.so.1.16.0": "b3a7e02c8017a920eb690ad30950e4ee1b0f2543df2080562afca24006f758a6"
+    },
+    "required_base_libraries": {
+      "libTKG2d.so.8.1.0": "2a1f75de3f2b26309c566ace5d1ad228a0684720643c22be564bf56b5e6ded3a",
+      "libTKG3d.so.8.1.0": "fed4cb4dff4c87e7ff20950244e1815b90beea5583a4553cd567fbcf6a5d95b0",
+      "libTKGeomBase.so.8.1.0": "5e2203086117d7d911c0cd4fbff3f0721297ed0014abeab5a7f4a6325f3f1f97",
+      "libTKMath.so.8.1.0": "ba921139b63bf473f1995a265b73c9c34a60b65e0f6a5981cfc8c5756478122c",
+      "libTKernel.so.8.1.0": "7e16f9f2e71360dcd3cabb689d85d2f8aa4aed3da00f2e669c0498e800ed4012"
+    },
+    "full_verifier_report_sha256": "1f409e4d48c14e37ce1e79460e4c5563e6031db1d8f23962e18fae7e37b42718",
+    "verifier_source_hashes": {
+      "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+      "crates/tkgeombase/Cargo.toml": "7ae5d02dab58f2a28a75fe72344399729a97b97a4524eabcda9f247339a7c046",
+      "crates/tkgeombase/tests/extrema_pc2d_hyperbola.rs": "21769b749930960e8f638dabe2e246e0384c62f99e6f358f5beb89bae1f6f18c",
+      "crates/tkgeombase/src/extrema_pc2d/hyperbola.rs": "9ffca9630779cb1fc5cd2f1fa7fd28ca725605fe71e6339a6b845f267fae9451"
+    }
+  },
+  "default_profile_failure_preserved": {
+    "receipt": "tkgeombase-native-failure-cd3d9305.json",
+    "native_tests_passed": 838,
+    "native_tests_failed": 1,
+    "failure": "ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor",
+    "native_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+    "meaning": "Debug is a separate CMake profile, not a replacement for the pinned RelWithDebInfo result."
+  },
+  "verifier_command": "PATH=/home/vmiguel/.cargo/bin:$PATH python3 tools/verify_tkmath_legacy.py --toolkit TKGeomBase --source /home/vmiguel/git/oblikovati-workspace/OCCT --build-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/occt-modeling-tkgeombase-debug --output /tmp/rustycad-tkgeombase-hyperbola-profile/target/oracle-tkgeombase-debug-profile --cargo-target-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/cargo-debug-profile --jobs 8"
+}
