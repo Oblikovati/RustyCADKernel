@@ -1,0 +1,137 @@
+{
+  "base_revision": "53db08add0c36cce10d4e2ead6f633dc7817d78d",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "kind": "supplemental-native-matrix-scalar-operator-paths",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/square_matrix.rs": "140f09d0bb9f3ccaafcec3e5b50ed76f43b45c183dd4d73c74f7d7572296ddbf",
+    "crates/tkernel/tests/matrix_generic_scalar.rs": "8b8b6cdb37e256d49f4cb6ff4c9e777be6cf4ae997687b73bbcef834a08e6341",
+    "tools/oracle/tkernel_matrix_scalar_paths.cxx": "6004d37cf1297985d27f5e4bdc472925614fd44d74d669ae1ef0beed2969160b",
+    "tools/oracle/tkernel_matrix_scalar_paths.expected": "da9df24fe2568e3fa77ffc02c0fc7994b7bb07967c966a74d3899a0def8d8c6d",
+    "porting/parity.json": "4e90cb4edb918c8829d781cfd53f6cb1ad2a938899021c4be25a8fcbe1a514f2"
+  },
+  "native_header_sha256": {
+    "NCollection_Mat3.hxx": "332c91310cf02480226c7ef1187e63bc85e1d991ea14a9a547e55d02904df6e0",
+    "NCollection_Mat4.hxx": "e531f559c88bc17fa91b15e1b4d7c826e314f6ee9bdfae3257aff06eaf539ab9"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "aa8ffa9da0438e7bbe449bb26145052bc3ecfe3949b1635d00398d87e461223a",
+  "native_actual_sha256": "da9df24fe2568e3fa77ffc02c0fc7994b7bb07967c966a74d3899a0def8d8c6d",
+  "native_output_matches_expected": true,
+  "native_cases": 12,
+  "initial_regression_exit_code": 101,
+  "rust_test_summary": {
+    "passed": 2781,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 168,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "compiler_verified_bindings": [
+    {
+      "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Mul<T>>::mul",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+      "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+      "declaration_sha256": "8481d2f662b4812caecba9d1948666fc25208a07f9b51b802b5e325309b23505"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::MulAssign<T>>::mul_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+      "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+      "declaration_sha256": "d1415f4b55d0e28290bd5f8ec16b389a99066008904fb5ca346ecc0805e8e254"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Div<T>>::div",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+      "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+      "declaration_sha256": "37c7944111aacf0829bb0851a632eef4c750bdeca37c7f403bc6c3f17d563ebe"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::DivAssign<T>>::div_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+      "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+      "declaration_sha256": "120a606db629eefc0543fd5c3f50f32bf5ded306e2cfc03bb06ab2c18612ba4c"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Mul<T>>::mul",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+      "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+      "declaration_sha256": "6c9a4e386c2ff56090ec480dc1436d065f829eab0041ce20fd6c0acee70c6c1c"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::MulAssign<T>>::mul_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+      "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+      "declaration_sha256": "81746b9cbc9439880411822c6858bf0528ece83c5d6bb7d736bf0a28acecebae"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Div<T>>::div",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+      "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+      "declaration_sha256": "500b379b1a99c2f59c6752c31b5f2e04ae36e28a48a454635b4da7b92a8507e5"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::DivAssign<T>>::div_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+      "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+      "declaration_sha256": "e0a8062a8d3290cab276aea39eee3b1da93b2239d1f62dd772fbb27439af1ba7"
+    }
+  ],
+  "updated_mappings": [
+    "NCollection_Mat3::Multiply(Element_t)",
+    "NCollection_Mat3::operator*=(Element_t)",
+    "NCollection_Mat3::operator*(Element_t) const",
+    "NCollection_Mat3::Multiplied(Element_t) const noexcept",
+    "NCollection_Mat3::Divide(Element_t)",
+    "NCollection_Mat3::operator/=(Element_t)",
+    "NCollection_Mat3::Divided(Element_t) const",
+    "NCollection_Mat3::operator/(Element_t) const",
+    "NCollection_Mat4::Multiply(Element_t)",
+    "NCollection_Mat4::operator*=(Element_t)",
+    "NCollection_Mat4::operator*(Element_t) const",
+    "NCollection_Mat4::Multiplied(Element_t) const noexcept",
+    "NCollection_Mat4::Divide(Element_t)",
+    "NCollection_Mat4::operator/=(Element_t)",
+    "NCollection_Mat4::Divided(Element_t) const",
+    "NCollection_Mat4::operator/(Element_t) const"
+  ],
+  "logs": {
+    "red": {
+      "path": "porting/runtime-evidence/matrix-scalar-red.log.gz",
+      "sha256": "74dc4b3181dd88c0535ccf74ad020bcd71fb84e229899c651895634cdc0dd358"
+    },
+    "focused": {
+      "path": "porting/runtime-evidence/matrix-scalar-focused.log.gz",
+      "sha256": "1af19edea180ad790d62779601f8c76ffbbf04f89275f9ac6f5f4257473d3b1a"
+    },
+    "full": {
+      "path": "porting/runtime-evidence/matrix-scalar-full.log.gz",
+      "sha256": "6a6ab176eb0245f52f084ebd39948c8e618935fa52c261ec5c83ee30a5c80fcd"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/matrix-scalar-clippy.log.gz",
+      "sha256": "5546841c06da1d5b77cd1efd847d7dd06dc85e1eda17268dc6b8ed0c6e399dde"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/matrix-scalar-rustdoc.log.gz",
+      "sha256": "cb557f7cfbd3344ce0d9485269e89de009014d8d4f7d18494c945c5b4121ab7d"
+    }
+  },
+  "full_api_parity": false,
+  "limitations": [
+    "Compiler bindings are a standalone private-item TKernel rustdoc capture on nightly-2026-09-25.",
+    "Fresh combined workspace crosswalk publication remains pending.",
+    "Supplemental cases add no legacy declarations.",
+    "Defined nonthrowing Copy element domain only; non-Copy lifecycle and noexcept termination are not established."
+  ]
+}

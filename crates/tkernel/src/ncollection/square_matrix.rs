@@ -1,6 +1,6 @@
 //! The members NCollection_Mat3 and NCollection_Mat4 share. Both store `N*N` elements in
 //! column-major order, so `columns[c][r]` is native `myMat[c * N + r]`.
-use std::ops::{Add, Div, Mul, Sub};
+use std::ops::{Add, Div, DivAssign, Mul, MulAssign, Sub};
 /// Element types with the arithmetic the matrices use (`float`, `double`); `f64: MatrixScalar`.
 pub trait MatrixScalar:
     Copy
@@ -10,6 +10,8 @@ pub trait MatrixScalar:
     + Sub<Output = Self>
     + Mul<Output = Self>
     + Div<Output = Self>
+    + MulAssign
+    + DivAssign
 {
 }
 impl MatrixScalar for f32 {}
@@ -179,26 +181,6 @@ macro_rules! square_matrix_arithmetic {
             pub fn multiplied(&self, other: &Self) -> Self {
                 Self::product(self, other)
             }
-            /// Multiplies every element, as `Multiply(Element_t)`; `matrix.multiply_scalar(2.0)`.
-            pub fn multiply_scalar(&mut self, factor: T) {
-                self.columns = self.columns.map(|column| column.map(|value| value * factor));
-            }
-            /// Returns a scaled copy, as `Multiplied(Element_t)`; `matrix.multiplied_scalar(2.0)`.
-            pub fn multiplied_scalar(&self, factor: T) -> Self {
-                let mut copy: Self = *self;
-                copy.multiply_scalar(factor);
-                copy
-            }
-            /// Divides every element (no reciprocal), as `Divide`; `matrix.divide(2.0)`.
-            pub fn divide(&mut self, divisor: T) {
-                self.columns = self.columns.map(|column| column.map(|value| value / divisor));
-            }
-            /// Returns a divided copy, as `Divided`; `matrix.divided(2.0)`.
-            pub fn divided(&self, divisor: T) -> Self {
-                let mut copy: Self = *self;
-                copy.divide(divisor);
-                copy
-            }
             /// Adds element-wise, as `Add`; `matrix.add(&other)`.
             pub fn add(&mut self, other: &Self) {
                 self.zip_assign(other, |a, b| a + b);
@@ -239,10 +221,14 @@ macro_rules! square_matrix_arithmetic {
         impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> $matrix<T> {
             /// Negates every element, as `Negated`/unary `operator-`; `matrix.negated()`.
             pub fn negated(&self) -> Self {
-                Self { columns: self.columns.map(|column| column.map(|value| -value)) }
+                Self {
+                    columns: self.columns.map(|column| column.map(|value| -value)),
+                }
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> std::ops::Neg for $matrix<T> {
+        impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> std::ops::Neg
+            for $matrix<T>
+        {
             type Output = Self;
             fn neg(self) -> Self {
                 self.negated()
@@ -287,29 +273,60 @@ macro_rules! square_matrix_arithmetic {
                 self.subtract(&right);
             }
         }
-        square_matrix_arithmetic!(@scalar $matrix, f32);
-        square_matrix_arithmetic!(@scalar $matrix, f64);
+        $crate::ncollection::square_matrix::square_matrix_scalar!($matrix);
     };
-    (@scalar $matrix:ident, $scalar:ty) => {
-        impl std::ops::Mul<$scalar> for $matrix<$scalar> {
+}
+
+// OCCT Mat3/Mat4 scalar paths delegate to element *= and /=, including copied results.
+macro_rules! square_matrix_scalar {
+    ($matrix:ident) => {
+        impl<T: Copy + std::ops::MulAssign> $matrix<T> {
+            /// Scales each element in storage order; `matrix.multiply_scalar(2)`.
+            pub fn multiply_scalar(&mut self, factor: T) {
+                for value in self.columns.iter_mut().flatten() {
+                    *value *= factor;
+                }
+            }
+            /// Returns a scaled copy, as `Multiplied`; `matrix.multiplied_scalar(2)`.
+            pub fn multiplied_scalar(&self, factor: T) -> Self {
+                let mut result = *self;
+                result.multiply_scalar(factor);
+                result
+            }
+        }
+        impl<T: Copy + std::ops::DivAssign> $matrix<T> {
+            /// Divides each element without a reciprocal; `matrix.divide(2)`.
+            pub fn divide(&mut self, divisor: T) {
+                for value in self.columns.iter_mut().flatten() {
+                    *value /= divisor;
+                }
+            }
+            /// Returns a divided copy, as `Divided`; `matrix.divided(2)`.
+            pub fn divided(&self, divisor: T) -> Self {
+                let mut result = *self;
+                result.divide(divisor);
+                result
+            }
+        }
+        impl<T: Copy + std::ops::MulAssign> std::ops::Mul<T> for $matrix<T> {
             type Output = Self;
-            fn mul(self, factor: $scalar) -> Self {
+            fn mul(self, factor: T) -> Self {
                 self.multiplied_scalar(factor)
             }
         }
-        impl std::ops::MulAssign<$scalar> for $matrix<$scalar> {
-            fn mul_assign(&mut self, factor: $scalar) {
+        impl<T: Copy + std::ops::MulAssign> std::ops::MulAssign<T> for $matrix<T> {
+            fn mul_assign(&mut self, factor: T) {
                 self.multiply_scalar(factor);
             }
         }
-        impl std::ops::Div<$scalar> for $matrix<$scalar> {
+        impl<T: Copy + std::ops::DivAssign> std::ops::Div<T> for $matrix<T> {
             type Output = Self;
-            fn div(self, divisor: $scalar) -> Self {
+            fn div(self, divisor: T) -> Self {
                 self.divided(divisor)
             }
         }
-        impl std::ops::DivAssign<$scalar> for $matrix<$scalar> {
-            fn div_assign(&mut self, divisor: $scalar) {
+        impl<T: Copy + std::ops::DivAssign> std::ops::DivAssign<T> for $matrix<T> {
+            fn div_assign(&mut self, divisor: T) {
                 self.divide(divisor);
             }
         }
@@ -335,4 +352,6 @@ macro_rules! square_matrix_dump {
         }
     };
 }
-pub(crate) use {square_matrix_access, square_matrix_arithmetic, square_matrix_dump};
+pub(crate) use {
+    square_matrix_access, square_matrix_arithmetic, square_matrix_dump, square_matrix_scalar,
+};

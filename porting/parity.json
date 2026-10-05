@@ -16445,23 +16445,23 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::multiply_scalar",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::operator*=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as MulAssign<T>>::mul_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::MulAssign<T>>::mul_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::operator*(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as Mul<T>>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Mul<T>>::mul",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::Multiplied(Element_t) const noexcept",
@@ -16469,7 +16469,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::multiplied_scalar",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::Divide(Element_t)",
@@ -16477,15 +16477,15 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::divide",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::DivAssign<T>>::div_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::Divided(Element_t) const",
@@ -16493,15 +16493,15 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::divided",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as Div<T>>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Div<T>>::div",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat3::Negated() const noexcept",
@@ -16637,23 +16637,23 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::multiply_scalar",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::operator*=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as MulAssign<T>>::mul_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::MulAssign<T>>::mul_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::operator*(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as Mul<T>>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Mul<T>>::mul",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::Multiplied(Element_t) const noexcept",
@@ -16661,7 +16661,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::multiplied_scalar",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::Divide(Element_t)",
@@ -16669,15 +16669,15 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::divide",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::DivAssign<T>>::div_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::Divided(Element_t) const",
@@ -16685,15 +16685,15 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::divided",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as Div<T>>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Div<T>>::div",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar arithmetic now requires Copy and the corresponding assignment operator, without the MatrixScalar bound; every value and assignment path uses element *= or /= in column-major order. Native tagged-element fixture: porting/audits/matrix-generic-scalar.json."
     },
     {
       "upstream_id": "NCollection_Mat4::Negated() const noexcept",
@@ -94197,7 +94197,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -94229,7 +94229,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -216966,7 +216966,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
