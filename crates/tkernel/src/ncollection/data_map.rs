@@ -144,11 +144,15 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         if self.buckets.is_empty() {
             return None;
         }
+        let (bucket, index) = self.lookup_with_bucket(key);
+        index.map(|index| (bucket, index))
+    }
+    fn lookup_with_bucket(&self, key: &K) -> (usize, Option<usize>) {
         let bucket = self.hasher.hash(key) % self.bucket_count + 1;
-        self.buckets[bucket]
+        let index = self.buckets[bucket]
             .iter()
-            .position(|node| self.hasher.equal(&node.key, key))
-            .map(|index| (bucket, index))
+            .position(|node| self.hasher.equal(&node.key, key));
+        (bucket, index)
     }
     fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> (bool, &mut V) {
         if self.is_empty() || self.count > self.bucket_count {

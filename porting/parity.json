@@ -77574,9 +77574,9 @@
       "upstream_id": "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DataMap::bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Replaces the item of an existing key and returns false. The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::bind_ref",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping. `bind_ref` searches the original borrowed key, then clones value before key on insertion; replacement clones a temporary then assigns into the existing slot and returns false. User-defined C++ move-assignment/destructor hooks, self-aliasing, and exception behavior are not fully modeled."
     },
     {
       "upstream_id": "NCollection_DataMap::Bind(TheKeyType&&,const TheItemType&)",
