@@ -1,0 +1,110 @@
+{
+  "source_base_revision": "5174de938e30a3d946d84246ef88a8d323698a50",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_build": {
+    "compiler": "g++ 13.3.0",
+    "flags": ["-std=c++17", "-O2"],
+    "library": "occt-install/lib/libTKernel.so.8.0.0",
+    "library_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+    "header_sha256": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",
+    "legacy_test": "src/FoundationClasses/TKernel/GTests/NCollection_LinearVector_Test.cxx",
+    "legacy_test_sha256": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31"
+  },
+  "compiler_inventory": {
+    "declarations_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "selector_test": "tools/tests/test_tkernel_linear_vector_selectors.py",
+    "selection_rule": "Each corrected selector resolves to exactly one api_visible TKernel declaration with the listed ID, signature, and source header."
+  },
+  "selector_repairs": [
+    {
+      "old": "NCollection_LinearVector(const NCollection_LinearVector&)",
+      "selector": "NCollection_LinearVector(const NCollection_LinearVector<TheItemType>&)",
+      "compiler_id": "78f3a1d2dae89b2d22901d45b252ac9890e5a49c9f85c3bb11bcc31e4e0b0c6c",
+      "signature": "void (const NCollection_LinearVector<TheItemType> &)",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::clone::Clone>::clone"
+    },
+    {
+      "old": "NCollection_LinearVector(NCollection_LinearVector&&)",
+      "selector": "NCollection_LinearVector(NCollection_LinearVector<TheItemType>&&)",
+      "compiler_id": "98acd105a8505fe1b4a20474d6f3651f8aaa3bf826e455ede63479a0fb019bb9",
+      "signature": "void (NCollection_LinearVector<TheItemType> &&) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from"
+    },
+    {
+      "old": "NCollection_LinearVector::operator=(const NCollection_LinearVector&)",
+      "selector": "NCollection_LinearVector::operator=(const NCollection_LinearVector<TheItemType>&)",
+      "compiler_id": "89f01bbf71284e3279ec7ce1f8257d279384cebe1332b41ddd7fe344e3b1ee27",
+      "signature": "NCollection_LinearVector<TheItemType> &(const NCollection_LinearVector<TheItemType> &)",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign"
+    },
+    {
+      "old": "NCollection_LinearVector::operator=(NCollection_LinearVector&&)",
+      "selector": "NCollection_LinearVector::operator=(NCollection_LinearVector<TheItemType>&&)",
+      "compiler_id": "c801644c4c70988b579335d314c2fee74348414c441c0d9d562af7801c301d99",
+      "signature": "NCollection_LinearVector<TheItemType> &(NCollection_LinearVector<TheItemType> &&) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from"
+    },
+    {
+      "old": "NCollection_LinearVector::EmplaceAppend(Args&&)",
+      "selector": "NCollection_LinearVector::EmplaceAppend(Args&&...)",
+      "compiler_id": "ae297df4aa7a28d7067bd7ea4cc3906b3f33dcc614e57363c7d6f9ad97381b06",
+      "signature": "type-parameter-0-0 &(type-parameter-1-0 &&...)",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::emplace_append"
+    }
+  ],
+  "native_probes": [
+    {
+      "source": "tools/oracle/tkernel_linear_vector_move_if_noexcept.cxx",
+      "source_sha256": "af29a13875f06ed7f1e3cfa5467abe678a78831aaeeb7f07923947469aebd4d4",
+      "expected": "tools/oracle/tkernel_linear_vector_move_if_noexcept.expected",
+      "expected_sha256": "08ca3f5616c1e654dbda329625aac1a93488860a1ee08d359e2aed4c74184ec0",
+      "output": "1 0 1 42",
+      "compile_and_diff_exit_code": 0,
+      "finding": "Potentially throwing move plus available copy selects the native copy constructor during Reserve growth."
+    },
+    {
+      "source": "tools/oracle/tkernel_linear_vector_exception_state.cxx",
+      "source_sha256": "e83a5baa8733b312a95e92567abc3e3a3d6c0076c37719e2c6b97973eeb0656b",
+      "expected": "tools/oracle/tkernel_linear_vector_exception_state.expected",
+      "expected_sha256": "9f6f28905630b5b9c303ce33f456f70afd3799d0c40b271fa25f04ec774b4b33",
+      "output": "1 42 2\n1 10 2 1",
+      "compile_and_diff_exit_code": 0,
+      "finding": "Failed growth keeps the prior published size and prior common-item assignment. Native leaves successfully constructed but untracked tail values to raw-storage cleanup; Rust's rollback guard drops them."
+    }
+  ],
+  "rust_validation": {
+    "toolchain": "1.98.1",
+    "package_test": {
+      "command": "cargo +1.98.1 test -p rustycad-tkernel",
+      "exit_code": 0,
+      "result_groups": 189,
+      "passed": 2847,
+      "failed": 0,
+      "ignored": 0,
+      "compressed_log": "porting/audits/linear-vector-tkernel-tests.log.gz",
+      "compressed_log_sha256": "d66beaa79fe706f431e248edd505eff5925dc08e44bce7e6798d41eca00f0b9c",
+      "raw_log_sha256": "6802075aeedc455bbdfd695590a12751ed1f4e5f77e981ff6902fc4e1ee2b129"
+    },
+    "legacy_vector_target": "49 passed; original names preserved",
+    "supplemental_target": "ncollection_linear_vector_exception_state: 4 passed",
+    "selector_test": "PYTHONPATH=tools python3 -m unittest tools.tests.test_tkernel_linear_vector_selectors -v; 3 passed; exit 0",
+    "strict_clippy": {
+      "command": "cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "porting/audits/linear-vector-tkernel-clippy.log",
+      "log_sha256": "1f53c0db4c6d5d2b1e4166cebc316ac345a59cbbea8036acacbd19342f57e0a7"
+    },
+    "rust_source_sha256": "af25b91c8868c7d3413f0f4b050d283843ef1a6e92348eb3fb07381c87357fb9",
+    "rust_test_sha256": "fc3a4c75dcedab8a16fce55c22202ce5bcd77c0d697e9fdde66f103bc3a77ad9",
+    "rust_harness_sha256": "f94092b0a32df1d5602bc91e3c7f74551307aa4349de580fe553155ac8c74049",
+    "selector_test_sha256": "fa9d3d51d3e0570db259038e988b32d2b606415ef597c249075e63e817eb7ebd"
+  },
+  "remaining_behavior_gaps": [
+    "std::move_if_noexcept constructor dispatch during buffer growth is observable for user-defined element types and is not represented by Rust Vec relocation.",
+    "Rust cleans partially constructed tail values after panic; pinned OCCT leaves these objects untracked in raw storage.",
+    "Appended and EmplaceAppend construct their Rust value before append can grow, whereas OCCT grows before construction; panic-time capacity state needs a separate direct regression.",
+    "The native const ToArray1 returns a mutable buffer alias; Rust's shared Array1 view detaches on mutation."
+  ]
+}
