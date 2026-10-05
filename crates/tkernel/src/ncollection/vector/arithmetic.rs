@@ -236,17 +236,21 @@ macro_rules! divide_by_reciprocal {
         }
     };
 }
-macro_rules! scalar_operators {
-    ($scalar:ty) => {
-        divide_each!(Vec2, $scalar, [x, y]);
-    };
-}
 scalar_multiplication!(Vec2);
 scalar_multiplication!(Vec3);
 scalar_multiplication!(Vec4);
-scalar_operators!(f32);
-scalar_operators!(f64);
-scalar_operators!(i32);
+impl<T: Copy + DivAssign<T>> DivAssign<T> for Vec2<T> {
+    fn div_assign(&mut self, divisor: T) {
+        self.x /= divisor;
+        self.y /= divisor;
+    }
+}
+impl<T: Copy + Div<Output = T>> Div<T> for Vec2<T> {
+    type Output = Self;
+    fn div(self, divisor: T) -> Self {
+        Self::new(self.x / divisor, self.y / divisor)
+    }
+}
 divide_by_reciprocal!(Vec3, f32);
 divide_by_reciprocal!(Vec3, f64);
 divide_by_reciprocal!(Vec4, f32);
