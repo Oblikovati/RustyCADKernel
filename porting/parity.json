@@ -95002,7 +95002,7 @@
       "upstream_id": "OSD_LocalFileSystem::IsSupportedPath(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_supported_path",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::<rustycad_tkernel::osd::FileSystem>::is_supported_path",
       "status": "implemented",
       "notes": "!OSD_Path::IsRemoteProtocolPath (CadPath::is_remote_protocol_path). Probe osd_fs_supported. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95010,7 +95010,7 @@
       "upstream_id": "OSD_LocalFileSystem::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_open_istream",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::<rustycad_tkernel::osd::FileSystem>::is_open_istream",
       "status": "implemented",
       "notes": "True only for an IStreamBuffer (not an IoStreamBuffer or another IStream) whose buffer is an open FileBuffer (std::filebuf). Probe osd_fs_istream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95018,7 +95018,7 @@
       "upstream_id": "OSD_LocalFileSystem::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_open_ostream",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::<rustycad_tkernel::osd::FileSystem>::is_open_ostream",
       "status": "implemented",
       "notes": "True only for an OStreamBuffer over an open FileBuffer. Probe osd_fs_ostream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95026,7 +95026,7 @@
       "upstream_id": "OSD_LocalFileSystem::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::open_stream_buffer",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::<rustycad_tkernel::osd::FileSystem>::open_stream_buffer",
       "status": "implemented",
       "notes": "Opens a FileBuffer on the URL converted through TCollection_ExtendedString (UTF-8 on Linux); with a size output and in, reports the size and refuses an offset lseek rejects (size 0); otherwise seeks only for offset > 0; a negative offset raises Standard_ProgramError. Probe osd_fs_local_buffer covers all 64 openmode combinations. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95066,7 +95066,7 @@
       "upstream_id": "OSD_CachedFileSystem::IsSupportedPath(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_supported_path",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::is_supported_path",
       "status": "implemented",
       "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95074,7 +95074,7 @@
       "upstream_id": "OSD_CachedFileSystem::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_open_istream",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::is_open_istream",
       "status": "implemented",
       "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95082,7 +95082,7 @@
       "upstream_id": "OSD_CachedFileSystem::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_open_ostream",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::is_open_ostream",
       "status": "implemented",
       "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95090,7 +95090,7 @@
       "upstream_id": "OSD_CachedFileSystem::OpenIStream(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,const std::shared_ptr<std::istream>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_istream",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::open_istream",
       "status": "implemented",
       "notes": "Ignores the caller's old stream; switches the cache on a new URL, offers the cached stream to the linked OpenIStream and caches its result (a failed open clears it; a raise leaves it). Probe osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95098,7 +95098,7 @@
       "upstream_id": "OSD_CachedFileSystem::OpenOStream(const TCollection_AsciiString&,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_ostream",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::open_ostream",
       "status": "implemented",
       "notes": "Delegates without caching. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95106,7 +95106,7 @@
       "upstream_id": "OSD_CachedFileSystem::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_stream_buffer",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::open_stream_buffer",
       "status": "implemented",
       "notes": "Modes with out pass through; others switch the cache on a new URL and cache the linked buffer. Probe osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95146,7 +95146,7 @@
       "upstream_id": "OSD_FileSystemSelector::IsSupportedPath(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_supported_path",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::is_supported_path",
       "status": "implemented",
       "notes": "Any protocol supporting the URL, tested lazily in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95154,7 +95154,7 @@
       "upstream_id": "OSD_FileSystemSelector::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_open_istream",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::is_open_istream",
       "status": "implemented",
       "notes": "Only an IStreamBuffer: the first protocol supporting its URL and reporting it open. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95162,7 +95162,7 @@
       "upstream_id": "OSD_FileSystemSelector::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_open_ostream",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::is_open_ostream",
       "status": "implemented",
       "notes": "Only an OStreamBuffer: the first protocol supporting its URL and reporting it open. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95170,7 +95170,7 @@
       "upstream_id": "OSD_FileSystemSelector::OpenIStream(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,const std::shared_ptr<std::istream>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_istream",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::open_istream",
       "status": "implemented",
       "notes": "The first stream a supporting protocol opens, in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95178,7 +95178,7 @@
       "upstream_id": "OSD_FileSystemSelector::OpenOStream(const TCollection_AsciiString&,std::ios_base::openmode)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_ostream",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::open_ostream",
       "status": "implemented",
       "notes": "The first stream a supporting protocol opens, in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
@@ -95186,7 +95186,7 @@
       "upstream_id": "OSD_FileSystemSelector::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_stream_buffer",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::<rustycad_tkernel::osd::FileSystem>::open_stream_buffer",
       "status": "implemented",
       "notes": "The first buffer a supporting protocol opens; each attempt receives the size output. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
