@@ -85382,7 +85382,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_c_units",
       "status": "implemented",
-      "notes": "The bounded adapter matches the pointer overload for non-aliased inputs. Self-aliasing is outside the native-defined domain: the pointer wrapper calls the explicit-length overload, which reallocates before reading that pointer."
+      "notes": "The bounded adapter matches the pointer overload for non-aliased inputs. Nonempty self-aliasing is outside the native-defined domain: the explicit-length overload returns for empty input; otherwise it reallocates before reading that pointer."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Insert(int,const TCollection_ExtendedString&)",

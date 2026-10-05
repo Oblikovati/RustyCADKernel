@@ -125,9 +125,9 @@
     "fmt": "cargo fmt --all -- --check",
     "fmt_exit_code": 0
   },
-  "parity_sha256": "ddc69d6fe4526210d139153c5c5681a34904ee42778e26cf42a5614bf8e890a0",
+  "parity_sha256": "d07ebf6589dba71eec153a4ae5380c45b6e98396cf33d943561f350dde8ebddb",
   "limitations": [
-    "Insert same-object self aliasing is excluded because the native implementation reallocates before reading its source pointer; no output from an invalidated pointer is used as an oracle.",
+    "Nonempty Insert same-object self aliasing is excluded because native reallocates before reading its source pointer; empty self input returns before reallocation and follows the bounded empty-input behavior.",
     "The self SetValue offset API accepts source offsets in the current logical code-unit storage, including the terminator, and refuses an operation that would extend the old Length. External pointer buffers remain modeled by Option<&[u16]>.",
     "The Rust NotImplemented error for a growing self-alias is a safe refusal for a native undefined domain, not a reproduced OCCT exception."
   ],
