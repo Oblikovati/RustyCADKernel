@@ -936,8 +936,12 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
       "rust_item": "rustycad_tkmath::cslib::Class2d::assign_returning",
-      "status": "partial",
-      "notes": "The adapter returns the destination and deep-copies polygon plus completed grid state. Safe Rust borrowing cannot express native self-copy assignment; see porting/audits/cslib-class2d-assignment-returns.md."
+      "status": "implemented",
+      "notes": "Distinct-object assignment returns the receiver and preserves native copy/move state behavior. assign_self models the native early-return no-op for both self-copy and self-move. Paired adapters cover these valid alias cases without overlapping Rust borrows; see porting/audits/cslib-class2d-self-assignment.json.",
+      "rust_items": [
+        "rustycad_tkmath::cslib::Class2d::assign_returning",
+        "rustycad_tkmath::cslib::Class2d::assign_self"
+      ]
     },
     {
       "upstream_id": "CSLib_Class2d::CSLib_Class2d(CSLib_Class2d&&)",
@@ -952,8 +956,12 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
       "rust_item": "rustycad_tkmath::cslib::Class2d::move_from_returning",
-      "status": "partial",
-      "notes": "The adapter returns the destination and transfers the polygon and ready grid while resetting source classification. Safe Rust borrowing cannot express native self-move assignment; see porting/audits/cslib-class2d-assignment-returns.md."
+      "status": "implemented",
+      "notes": "Distinct-object assignment returns the receiver and preserves native copy/move state behavior. assign_self models the native early-return no-op for both self-copy and self-move. Paired adapters cover these valid alias cases without overlapping Rust borrows; see porting/audits/cslib-class2d-self-assignment.json.",
+      "rust_items": [
+        "rustycad_tkmath::cslib::Class2d::move_from_returning",
+        "rustycad_tkmath::cslib::Class2d::assign_self"
+      ]
     },
     {
       "upstream_id": "CSLib_Class2d::SiDans(const gp_Pnt2d&) const",

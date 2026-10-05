@@ -53,3 +53,27 @@ fn move_assignment_returns_target_and_resets_source() {
         Class2dResult::Uncertain
     );
 }
+
+#[test]
+fn self_assignment_keeps_completed_grid_and_returns_receiver() {
+    let mut target = classifier();
+    complete_grid(&target);
+    let address = &mut target as *mut Class2d;
+    assert!(std::ptr::eq(target.assign_self(), address));
+    assert_eq!(target.si_dans(Point2::new(0.5, 0.5)), Class2dResult::Inside);
+    assert_eq!(
+        target.si_dans(Point2::new(1.2, 0.5)),
+        Class2dResult::Outside
+    );
+}
+
+#[test]
+fn empty_self_assignment_keeps_the_empty_classifier() {
+    let mut target = Class2d::default();
+    let address = &mut target as *mut Class2d;
+    assert!(std::ptr::eq(target.assign_self(), address));
+    assert_eq!(
+        target.si_dans(Point2::new(0.5, 0.5)),
+        Class2dResult::Uncertain
+    );
+}
