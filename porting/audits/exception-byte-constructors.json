@@ -350,5 +350,15 @@
     "crates/tkernel/src/standard/exceptions.rs": "ee529a89f655ac2f3a4f6b326a0218daf5466b73de559d59ff5f21a1631334a5",
     "crates/tkernel/src/storage/mod.rs": "12ebd2391c9a35eddb1d9e5056be885ad7c1404d976d702390f2e68c08fb064b",
     "crates/tkernel/tests/standard_exception_byte_constructors.rs": "de1f36f7dd447896b7df94d52591d85323cfc883aee106e0b0c68a85efb4fa6d"
+  },
+  "supplemental_assertion_refactor": {
+    "intent": "Share byte/type/parent assertions across the same 38 supplemental cases. Prior full-package receipt and source hashes describe the pre-refactor b4bda793 source.",
+    "source": "crates/tkernel/tests/standard_exception_byte_constructors.rs",
+    "source_sha256": "455b19683511b93c188a1ed366200a419ddd9bc44798af4cc8ea3cc0586be5d6",
+    "command": "cargo test -p rustycad-tkernel --test standard_exception_byte_constructors",
+    "exit_code": 0,
+    "passed": 38,
+    "log": "porting/runtime-evidence/exception-byte-shared-assertions.log.gz",
+    "log_sha256": "8db1d2af5ee42b9ea18f2bc66a37d626d760dd2f576b639ef2e4ebb25aa246c4"
   }
 }
