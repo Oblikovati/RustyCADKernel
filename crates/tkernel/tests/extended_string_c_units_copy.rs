@@ -10,7 +10,7 @@ fn pointer_copy_truncates_but_explicit_spans_preserve_embedded_nul() {
     assert_eq!(value.as_utf16(), &[65]);
     value.copy_span(Some(&[65, 0, 66]), 3);
     assert_eq!(value.as_utf16(), &[65, 0, 66]);
-    value.copy(&[66, 0, 65]);
+    value.copy([66, 0, 65]);
     assert_eq!(value.as_utf16(), &[66, 0, 65]);
 }
 
