@@ -83784,9 +83784,9 @@
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
-      "rust_item": "rustycad_tkernel::standard::exceptions::domain_error",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::domain_error",
       "status": "implemented",
-      "notes": "Explicit-message calls use domain_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_domain_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
+      "notes": "Explicit-message calls use domain_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_domain_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor. String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
     },
     {
       "upstream_id": "Standard_ImmutableObject",
@@ -83856,9 +83856,9 @@
       "upstream_id": "Standard_NotImplemented::Standard_NotImplemented(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_NotImplemented.hxx",
-      "rust_item": "rustycad_tkernel::standard::exceptions::not_implemented",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::not_implemented",
       "status": "implemented",
-      "notes": "Explicit-message calls use not_implemented(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_not_implemented(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
+      "notes": "Explicit-message calls use not_implemented(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_not_implemented(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor. String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
     },
     {
       "upstream_id": "Standard_NullObject",
@@ -83920,9 +83920,9 @@
       "upstream_id": "Standard_RangeError::Standard_RangeError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_RangeError.hxx",
-      "rust_item": "rustycad_tkernel::standard::exceptions::range_error",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::range_error",
       "status": "implemented",
-      "notes": "Explicit-message calls use range_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_range_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor."
+      "notes": "Explicit-message calls use range_error(message); the native default-message call uses rustycad_tkernel::standard::exceptions::default_range_error(). Both preserve exception type, message, base-class membership and Print behavior. Default arguments are checked by tools/oracle/tkernel_exception_defaults.cxx and standard_exception_defaults Rust tests against pinned OCCT; automatic stack capture delegates to the existing Failure constructor. String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
     },
     {
       "upstream_id": "Standard_TypeMismatch",
@@ -235665,6 +235665,286 @@
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::convert::From<&[u8; N]>>::from",
       "status": "implemented",
       "notes": "Native char-array constructor stops at its first NUL. Rust const-generic array From implementation delegates to the same bounded C-string-prefix constructor. Exact compiler-derived array trait path now resolves after lossless slice/array rendering; native behavior evidence: tools/oracle/tkernel_ascii_string_view_surface.cxx. See porting/audits/rustdoc-array-trait-paths.json."
+    },
+    {
+      "upstream_id": "Standard_AbortiveTransaction::Standard_AbortiveTransaction(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_AbortiveTransaction.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::abortive_transaction",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_ConstructionError::Standard_ConstructionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ConstructionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::construction_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_DimensionError::Standard_DimensionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::dimension_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_DimensionMismatch::Standard_DimensionMismatch(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionMismatch.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::dimension_mismatch",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_DivideByZero::Standard_DivideByZero(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DivideByZero.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::divide_by_zero",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_ImmutableObject::Standard_ImmutableObject(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ImmutableObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::immutable_object",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_LicenseError::Standard_LicenseError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::license_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_LicenseNotFound::Standard_LicenseNotFound(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseNotFound.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::license_not_found",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_MultiplyDefined::Standard_MultiplyDefined(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MultiplyDefined.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::multiply_defined",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NegativeValue::Standard_NegativeValue(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NegativeValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::negative_value",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NoMoreObject::Standard_NoMoreObject(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoMoreObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::no_more_object",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NoSuchObject::Standard_NoSuchObject(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoSuchObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::no_such_object",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NullObject::Standard_NullObject(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NullObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::null_object",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NullValue::Standard_NullValue(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NullValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::null_value",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_NumericError::Standard_NumericError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NumericError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::numeric_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_OutOfRange::Standard_OutOfRange(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfRange.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::out_of_range",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_Overflow::Standard_Overflow(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Overflow.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::overflow",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_ProgramError::Standard_ProgramError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ProgramError.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::program_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_TypeMismatch::Standard_TypeMismatch(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeMismatch.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::type_mismatch",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_Underflow::Standard_Underflow(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Underflow.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_bytes::underflow",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "StdFail_InfiniteSolutions::StdFail_InfiniteSolutions(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_InfiniteSolutions.hxx",
+      "rust_item": "rustycad_tkernel::std_fail::exception_bytes::infinite_solutions",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "StdFail_NotDone::StdFail_NotDone(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_NotDone.hxx",
+      "rust_item": "rustycad_tkernel::std_fail::exception_bytes::not_done",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "StdFail_Undefined::StdFail_Undefined(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_Undefined.hxx",
+      "rust_item": "rustycad_tkernel::std_fail::exception_bytes::undefined",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "StdFail_UndefinedDerivative::StdFail_UndefinedDerivative(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedDerivative.hxx",
+      "rust_item": "rustycad_tkernel::std_fail::exception_bytes::undefined_derivative",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "StdFail_UndefinedValue::StdFail_UndefinedValue(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedValue.hxx",
+      "rust_item": "rustycad_tkernel::std_fail::exception_bytes::undefined_value",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Plugin_Failure::Plugin_Failure(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Plugin/Plugin_Failure.hxx",
+      "rust_item": "rustycad_tkernel::plugin::exception_bytes::failure",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamExtCharParityError::Storage_StreamExtCharParityError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamExtCharParityError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_ext_char_parity_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamFormatError::Storage_StreamFormatError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamFormatError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_format_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamModeError::Storage_StreamModeError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamModeError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_mode_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamReadError::Storage_StreamReadError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamReadError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_read_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamTypeMismatchError::Storage_StreamTypeMismatchError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamTypeMismatchError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_type_mismatch_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamUnknownTypeError::Storage_StreamUnknownTypeError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamUnknownTypeError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_unknown_type_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Storage_StreamWriteError::Storage_StreamWriteError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamWriteError.hxx",
+      "rust_item": "rustycad_tkernel::storage::exception_bytes::stream_write_error",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Units_NoSuchType::Units_NoSuchType(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchType.hxx",
+      "rust_item": "rustycad_tkernel::units::exception_bytes::no_such_type",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
+    },
+    {
+      "upstream_id": "Units_NoSuchUnit::Units_NoSuchUnit(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::exception_bytes::no_such_unit",
+      "status": "implemented",
+      "notes": "String and byte inputs construct the named OCCT exception, preserving arbitrary bytes until the first NUL, type identity and parent membership. Empty bytes represent the native default/null message. Automatic stack capture delegates to Failure::with_message_bytes. Supplemental source-bound native evidence: porting/audits/exception-byte-constructors.json."
     }
   ],
   "tests": [

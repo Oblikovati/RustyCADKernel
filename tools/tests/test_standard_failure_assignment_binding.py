@@ -106,3 +106,18 @@ class FailureAssignmentBindingTest(unittest.TestCase):
                 method,
             )
             self.assertEqual(by_selector[selector]["status"], parity_status)
+
+    def test_generated_byte_constructors_bind_exact_declarations(self) -> None:
+        receipt = json.loads(
+            (ROOT / "porting/audits/exception-byte-constructors.json").read_text()
+        )
+        rows = json.loads((ROOT / "porting/parity.json").read_text())["api"]
+        by_selector = {row["upstream_id"]: row for row in rows}
+        self.assertEqual(len(receipt["bindings"]), 38)
+        for binding in receipt["bindings"]:
+            selector = binding["selector"]
+            status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
+            self.assertEqual(status, "unique", selector)
+            self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
+            self.assertEqual(by_selector[selector]["rust_item"], binding["rust_item"])
+            self.assertEqual(by_selector[selector]["status"], "implemented")
