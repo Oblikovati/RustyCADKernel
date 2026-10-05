@@ -85636,7 +85636,7 @@
       "upstream_id": "TCollection_ExtendedString::operator!=(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
       "status": "implemented",
       "notes": "Operator form (PartialEq; Ord compares unsigned units like OCCT's loop)."
     },
@@ -85676,7 +85676,7 @@
       "upstream_id": "TCollection_ExtendedString::operator<(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialOrd>::lt",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
       "status": "implemented",
       "notes": "Operator form (PartialOrd; Ord compares unsigned units like OCCT's loop)."
     },
@@ -85716,7 +85716,7 @@
       "upstream_id": "TCollection_ExtendedString::operator>(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialOrd>::gt",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
       "status": "implemented",
       "notes": "Operator form (PartialOrd; Ord compares unsigned units like OCCT's loop)."
     },
@@ -85980,7 +85980,7 @@
       "upstream_id": "std::hash<TCollection_ExtendedString>::operator()(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
       "status": "implemented",
       "notes": "The std::hash specialization is the NCollection HashKey impl returning hash_code()."
     },
