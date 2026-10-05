@@ -9192,12 +9192,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec2::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec2::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec2::maxComp() const noexcept",
@@ -15396,12 +15396,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec3::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec3::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec3::operator*=(Element_t)",
@@ -15770,12 +15770,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec4::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec4::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec4::operator*=(Element_t)",
@@ -69036,12 +69036,14 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_Array1::Init(const_reference)",
+      "upstream_id": "NCollection_Array1::Init(NCollection_Array1::const_reference)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+      "rust_item": "rustycad_tkernel::ncollection::Array1::init_ref",
+      "status": "partial",
+      "notes": "Borrowed initialization invokes Clone::clone_from for each slot in storage order, matching native copy assignment for owned/exclusively borrowed storage. Custom-element native probe verifies every assignment and no copy construction. Partial: native source/destination aliases are not representable under Rust exclusive borrowing; Shared storage detaches on mutation instead of writing through a native const-cast view.",
+      "selector_id": "cef5d50c162b31eac7705ece05b222fd0372826fe7a49f79f8ccf8b5ff7613a3",
+      "source_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
     },
     {
       "upstream_id": "NCollection_Array1::Assign(const NCollection_Array1&)",
@@ -85288,9 +85290,9 @@
       "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded pointer adapter copies through the first NUL. Null and empty input clear the receiver, matching Copy(pointer) through its zero-length core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Copy(const TCollection_ExtendedString&)",
@@ -85312,9 +85314,9 @@
       "upstream_id": "TCollection_ExtendedString::operator=(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
       "status": "implemented",
-      "notes": "Assignment is the named copy method. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps pointer assignment to the bounded copy adapter; embedded NUL truncates, and null/empty input clears the receiver."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Move(TCollection_ExtendedString&&)",

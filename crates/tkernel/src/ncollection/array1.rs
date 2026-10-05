@@ -284,7 +284,14 @@ impl<T> Array1<'_, T> {
 impl<T: Clone> Array1<'_, T> {
     /// Fills the existing range; `Array1::<i32>::with_size(3).init(42)`.
     pub fn init(&mut self, value: T) {
-        self.as_mut_slice().fill(value);
+        self.init_ref(&value);
+    }
+
+    /// Assigns from a borrowed value in storage order; `array.init_ref(&42)`.
+    pub fn init_ref(&mut self, value: &T) {
+        for slot in self.as_mut_slice() {
+            slot.clone_from(value);
+        }
     }
 }
 

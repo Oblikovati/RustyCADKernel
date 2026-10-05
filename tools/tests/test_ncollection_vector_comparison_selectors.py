@@ -54,6 +54,21 @@ ROWS = (
         "447655af81f0293242af81e0788fad582d8a578f5b7f5fd11ef8c1c7df1b7b88",
         "rustycad_tkernel::ncollection::Vec4::<core::cmp::PartialEq>::ne",
     ),
+    (
+        "NCollection_Vec2::cwiseAbs() const noexcept",
+        "5de584606263c9f9042a3cb9b1f9449d339ecd9b8a7d2ca34ef4fe6cec4a0e2b",
+        "rustycad_tkernel::ncollection::Vec2::cwise_abs",
+    ),
+    (
+        "NCollection_Vec3::cwiseAbs() const noexcept",
+        "057bb1b6f52489c0e31259666575f0af0f2c0694fee98dacf6877a8559a23cf9",
+        "rustycad_tkernel::ncollection::Vec3::cwise_abs",
+    ),
+    (
+        "NCollection_Vec4::cwiseAbs() const noexcept",
+        "02dfb755d19d25eadfeb450831222ff5d5421a5e98b4627d3fa837bd281bdc5e",
+        "rustycad_tkernel::ncollection::Vec4::cwise_abs",
+    ),
 )
 
 
@@ -72,7 +87,7 @@ class VectorComparisonSelectorTest(unittest.TestCase):
         parity = json.loads((ROOT / "porting/parity.json").read_text())
         cls.parity_rows = {row["upstream_id"]: row for row in parity["api"]}
 
-    def test_comparison_selectors_are_exact(self) -> None:
+    def test_comparison_and_cwise_abs_selectors_are_exact(self) -> None:
         for selector, compiler_id, rust_item in ROWS:
             status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
             self.assertEqual(status, "unique", selector)

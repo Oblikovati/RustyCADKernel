@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "objective": "Expose signed integer cwiseAbs for vector element widths accepted by the pinned standard-library overload set.",
+  "source_revision": {
+    "occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "rust_base": "bb7b7862b51b41be850c2c4e8d4f03df8dc9af08",
+    "comparison_followup": "9eadcaaa1972092cec5027548e67371683238be5"
+  },
+  "native_behavior": {
+    "rule": "Each cwiseAbs component invokes std::abs and stores the result as Element_t. signed char/short promote to int then narrow; int/long/long long use their matching overloads.",
+    "header_hashes": {
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66"
+    },
+    "limits": "std::abs(int/long/long long minimum) is undefined. For int8_t/int16_t, abs promotes to int then narrows; that narrowing is implementation-defined, so minimum-value rows record only pinned GCC 13.3.0 Linux x86-64 behavior. i128 has no corresponding standard C++ abs overload."
+  },
+  "rust_implementation": {
+    "source": "crates/tkernel/src/ncollection/vector/float.rs",
+    "source_sha256": "073cf52df3e53af2fe5781cf4eb408b968e1d4db33c044c3dc3ccb482a83fc4e",
+    "types_added": [
+      "i8",
+      "i16",
+      "i64",
+      "isize"
+    ],
+    "existing_types": [
+      "i32",
+      "f32",
+      "f64"
+    ],
+    "minimum_policy": "wrapping_abs defines Rust behavior for signed minima. Native int8_t/int16_t minimum rows match the pinned GCC x86-64 narrowing result; that conversion is implementation-defined elsewhere. int32/int64/isize minimums are excluded because the native signed abs result is undefined."
+  },
+  "native_probe": {
+    "source": "tools/oracle/ncollection_vector_signed_abs.cxx",
+    "source_sha256": "9d36be60745b1f2f9c293b04a2c779d23844054fc6f7f1508308bff19a66dc39",
+    "compiler": "g++ 13.3.0",
+    "language": "C++17",
+    "profile": "Linux x86-64",
+    "command": "g++ -std=c++17 -O2 -I/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade -I<all 20 subdirectories of OCCT/src/FoundationClasses/TKernel> tools/oracle/ncollection_vector_signed_abs.cxx -o /tmp/ncollection_vector_signed_abs",
+    "binary_sha256": "c72d31f7d30561041e502237cbb08bad5b244e38576f3c44a628ef881b7cf899",
+    "output": "porting/runtime-evidence/ncollection-vector-signed-abs-native.out",
+    "output_sha256": "6826d15d3c4c5a289f7fc52b5ea4cf463af9e91d64376c8304c2814c4663761f",
+    "coverage": "Vec2, Vec3, and Vec4 for int8_t, int16_t, int64_t, and long; ordinary values cover each width and dimension. Vec2 int8_t/int16_t minima record pinned GCC narrowing only."
+  },
+  "selector_bindings": {
+    "declaration_inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "selector_regression": "tools/tests/test_ncollection_vector_comparison_selectors.py verifies each exact no-parameter cwiseAbs selector and compiler ID. cwiseAbs selectors do not include a fabricated Element_t parameter.",
+    "selector_regression_sha256": "fba8637aec9848203d0907be77851496f8f06b52e6441075aa9c4e5cf6f8d0dd",
+    "parity_source_sha256": "c1accd3a1fc7430f926377889d99d761aba473ea166b57ce0c7ec38421b09270",
+    "declarations": [
+      {
+        "selector": "NCollection_Vec2::cwiseAbs() const noexcept",
+        "compiler_id": "5de584606263c9f9042a3cb9b1f9449d339ecd9b8a7d2ca34ef4fe6cec4a0e2b",
+        "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_abs"
+      },
+      {
+        "selector": "NCollection_Vec3::cwiseAbs() const noexcept",
+        "compiler_id": "057bb1b6f52489c0e31259666575f0af0f2c0694fee98dacf6877a8559a23cf9",
+        "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_abs"
+      },
+      {
+        "selector": "NCollection_Vec4::cwiseAbs() const noexcept",
+        "compiler_id": "02dfb755d19d25eadfeb450831222ff5d5421a5e98b4627d3fa837bd281bdc5e",
+        "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_abs"
+      }
+    ]
+  },
+  "verification": {
+    "rust_source_hashes": {
+      "crates/tkernel/tests/ncollection_vector_signed_abs.rs": "9c7b0fcd19199d1f0564c39e7407643260c02a28c00f354660629060963e9992",
+      "crates/tkernel/tests/ncollection_vec_api_behavior.rs": "8a6e76c8cbf2a678c867928fefd6a75d0b0f11c2f63da64ecf5c66aef2904a40",
+      "crates/tkernel/tests/fixtures/ncollection_vector_signed_abs.expected": "6826d15d3c4c5a289f7fc52b5ea4cf463af9e91d64376c8304c2814c4663761f"
+    },
+    "rust_tests": "cargo test -p rustycad-tkernel --test ncollection_vector_signed_abs --test ncollection_vec_api_behavior --test ncollection_vector_comparison_dispatch: 7 passed",
+    "selectors": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_ncollection_vector_comparison_selectors.py: 1 passed",
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed",
+    "logs": {
+      "rust": {
+        "path": "porting/runtime-evidence/ncollection-vector-signed-abs-rust-tests.log.gz",
+        "sha256": "3b91b9482b709600f1f63599f29c9210b5b04387ab76f1379ddfe009bd94979c"
+      },
+      "clippy": {
+        "path": "porting/runtime-evidence/ncollection-vector-signed-abs-clippy.log.gz",
+        "sha256": "aab6113fde7e8d4edbd8cbd943770a554297fa9689f5182e2df2c96b8bf95711"
+      },
+      "selectors": {
+        "path": "porting/runtime-evidence/ncollection-vector-signed-abs-selectors.log.gz",
+        "sha256": "8ef59121c57b2ccf880736e4b7f6837800f8d178b42b567874ef9a42195051b6"
+      }
+    }
+  }
+}
