@@ -4,7 +4,7 @@
 //! through the narrow FFI module below. The Windows build (`LoadLibraryExW`,
 //! `GetProcAddress`) needs loader bindings the crate does not link yet: there `dl_open`
 //! fails and `dl_error` says so.
-use crate::osd::LoadMode;
+use crate::{osd::LoadMode, standard::c_prefix};
 use std::{ffi::c_void, ptr::NonNull};
 
 /// The address `DlSymb` returns (`OSD_Function`, a C function pointer); callers cast it to
@@ -44,7 +44,7 @@ impl SharedLibrary {
     /// `library.set_name(Some("libm.so.6\0ignored"))` stores `libm.so.6` like native `strlen`.
     pub fn set_name(&mut self, name: Option<&str>) {
         if let Some(name) = name {
-            self.name = Some(c_string_prefix(name).to_string());
+            self.name = Some(c_prefix(name).to_string());
         }
     }
     /// `OSD_SharedLibrary::Name`: the stored name, `None` for none; `library.name()`.
@@ -68,7 +68,7 @@ impl SharedLibrary {
         if self.closed {
             return None;
         }
-        NonNull::new(ffi::symbol(self.handle, c_string_prefix(name)))
+        NonNull::new(ffi::symbol(self.handle, c_prefix(name)))
     }
     /// `OSD_SharedLibrary::DlClose`: unloads the library once; `library.dl_close()`.
     ///
@@ -93,10 +93,6 @@ impl SharedLibrary {
         self.handle = std::ptr::null_mut();
         self.closed = false;
     }
-}
-
-fn c_string_prefix(value: &str) -> &str {
-    value.find('\0').map_or(value, |end| &value[..end])
 }
 
 #[cfg(unix)]

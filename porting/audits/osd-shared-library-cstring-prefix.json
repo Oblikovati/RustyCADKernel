@@ -31,7 +31,7 @@
       "exit_code": 0
     },
     "focused_log": "porting/runtime-evidence/tkernel-osd-shlib-cstring-prefix-focused.log.gz",
-    "focused_log_sha256": "2467c88e6f6a6b1afb384151e26e99f43fe2ed0d542c58aeafe5c95e945d82ae",
+    "focused_log_sha256": "c9c87de40b009ff288d3730e95cb512bb9a11180f7c37112d397598cc181d50f",
     "full_package": {
       "command": "cargo test -p rustycad-tkernel",
       "passed": 2739,
@@ -41,18 +41,28 @@
       "exit_code": 0
     },
     "full_log": "porting/runtime-evidence/tkernel-osd-shlib-cstring-prefix-full-package.log.gz",
-    "full_log_sha256": "50a652262b43be7a4c6b9c88c324de798b39c6454a89d02da3a21ac0bb88603c",
+    "full_log_sha256": "bb9f0ee5a91fa80329ee6f0223e7b8e3d348de0fa73ab831c2046006850733a8",
     "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings (passed)",
     "format": "cargo fmt --check (passed)",
     "rust_sources": {
       "shared_library.rs": {
         "path": "crates/tkernel/src/osd/process/shared_library.rs",
-        "sha256": "f5eac0d2b25d15fd82c09f2545211ec2f6606a3ae8885d8789d12f2648e6f0d5"
+        "sha256": "d42472756459c6a1a6209552bd61b98e254dea88a73c861dea3c965cf368f8d3"
       },
       "integration_test.rs": {
         "path": "crates/tkernel/tests/osd_process_resources_api_behavior.rs",
         "sha256": "1e1e97d2a702498f08d6a286bf51ef6332883f3bc3855ae77563c2b3ca871d02"
+      },
+      "standard_mod.rs": {
+        "path": "crates/tkernel/src/standard/mod.rs",
+        "sha256": "33eef7166621d0b0f2c30130ee18b95281adea4fe8ebc625b40b71266bec63e9"
       }
+    },
+    "followup": {
+      "focus": "12 passed, 0 failed; log rerun after sharing standard::c_prefix",
+      "full": "2739 passed across 161 result groups, 0 failed; log rerun after sharing standard::c_prefix",
+      "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings (passed after refactor)",
+      "format": "cargo fmt --check (passed after refactor)"
     }
   },
   "behavior": [
