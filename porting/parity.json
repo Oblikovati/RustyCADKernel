@@ -70863,7 +70863,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; extends with default values like SetValue. Construction-order gap: Rust invokes the closure before default-constructing intermediate elements; pinned OCCT EmplaceValue constructs those elements first. Exception and replacement-constructor semantics remain unaudited."
+      "notes": "Manual NCollection member mapping; extends with default values like SetValue. Gap defaults now run before the requested constructor, including the throwing first-default regression (dynamic-array-default-constructor-order.json). Still partial: native reserves all blocks before construction and retains the old length on later constructor failure; Rust grows storage and length progressively. Replacement and destructor behavior remain unproven for arbitrary element types."
     },
     {
       "upstream_id": "NCollection_DynamicArray::EmplaceValue(int,Args&&)",
@@ -70871,7 +70871,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; a negative int index is an ArrayError. Construction-order gap: Rust invokes the closure before default-constructing intermediate elements; pinned OCCT EmplaceValue constructs those elements first. Exception and replacement-constructor semantics remain unaudited."
+      "notes": "Manual NCollection member mapping; a negative int index is an ArrayError. Gap defaults now run before the requested constructor, including the throwing first-default regression (dynamic-array-default-constructor-order.json). Still partial: native reserves all blocks before construction and retains the old length on later constructor failure; Rust grows storage and length progressively. Replacement and destructor behavior remain unproven for arbitrary element types."
     },
     {
       "upstream_id": "NCollection_DynamicArray::operator()(size_t) const",
