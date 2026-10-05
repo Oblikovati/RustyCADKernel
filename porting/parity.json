@@ -84262,6 +84262,54 @@
       "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
     },
     {
+      "upstream_id": "Standard_Type::get_type_name()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Compiler inventory ID 0086cd9da5ba50f7fe1dd5717389f9b7fa20d80d72c73804e2a64a76e6c342f8 is the method materialized by DEFINE_STANDARD_RTTIEXT. Rust exposes the class spelling as the associated const; this accessor does not register or copy a descriptor."
+    },
+    {
+      "upstream_id": "Standard_Type::get_type_descriptor()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Compiler inventory ID eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82 returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor; RuntimeTyped::static_type_handle() explicitly clones an owning Handle when callers need one. The descriptor keeps its static owner. Rust does not expose a borrowed Handle wrapper, so the exact C++ return type is not reproduced."
+    },
+    {
+      "upstream_id": "Standard_Type::DynamicType() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Compiler inventory ID 3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784 returns const handle<Standard_Type>& for the dynamic class. Rust returns the same static descriptor by borrow; Transient::dynamic_type_handle() makes an owning copy. RuntimeType's class descriptor has the native-style static baseline owner. Rust does not expose the borrowed C++ Handle wrapper type."
+    },
+    {
+      "upstream_id": "Standard_Persistent::get_type_name()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Compiler inventory ID 4332b9125d397e65a69503f1e216016dea4ea5bfe5968db985caadee8cc43e70 is materialized by DEFINE_STANDARD_RTTIEXT. The Rust associated const returns the same user-facing class name without descriptor registration."
+    },
+    {
+      "upstream_id": "Standard_Persistent::get_type_descriptor()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Compiler inventory ID ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor, and RuntimeTyped::static_type_handle() explicitly clones an owner when needed; the descriptor's static owner also owns one handle to Standard_Transient. Rust does not expose the borrowed C++ Handle wrapper type."
+    },
+    {
+      "upstream_id": "Standard_Persistent::DynamicType() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Compiler inventory ID f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174 returns const handle<Standard_Type>&. Rust dynamically selects and borrows this descriptor; Transient::dynamic_type_handle() provides an explicit owning copy with the same identity. Rust does not expose the borrowed C++ Handle wrapper type."
+    },
+    {
       "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
