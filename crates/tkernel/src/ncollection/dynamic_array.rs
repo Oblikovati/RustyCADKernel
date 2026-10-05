@@ -20,6 +20,7 @@ impl<T> Default for DynamicArray<T> {
         Self::with_increment(256)
     }
 }
+mod emplacement;
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
     pub fn with_increment(increment: usize) -> Self {
@@ -91,6 +92,12 @@ impl<T> DynamicArray<T> {
         }
         self.used += 1;
         &mut self.blocks[block][offset]
+    }
+    fn ensure_storage_for_index(&mut self, index: usize) {
+        let final_block = index / self.increment;
+        while self.blocks.len() <= final_block {
+            self.add_block();
+        }
     }
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
@@ -223,17 +230,6 @@ impl<T: Default> DynamicArray<T> {
         let slot = self.change_value(index)?;
         *slot = value;
         Ok(slot)
-    }
-    /// Constructs gap defaults before the requested value, as OCCT EmplaceValue;
-    /// `array.emplace_value(5,||42)?`.
-    pub fn emplace_value<I: TryInto<usize> + Copy + Debug>(
-        &mut self,
-        index: I,
-        construct: impl FnOnce() -> T,
-    ) -> Result<&mut T, ArrayError> {
-        let index = checked_index(index)?;
-        self.fill_default_gap(index);
-        self.set_value(index, construct())
     }
     /// Inserts before an existing index; `array.insert_before(1,42)?`.
     pub fn insert_before<I: TryInto<usize> + Copy + Debug>(
