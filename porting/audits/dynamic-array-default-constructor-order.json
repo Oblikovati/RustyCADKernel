@@ -1,0 +1,52 @@
+{
+  "base_revision": "95981d76aba506d7d8557132a2adc286656819df",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Default gap constructor runs before requested constructor in EmplaceValue",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "d2977ed769aa318db7c252c61c45d931ee73d610871ca2ecffcb57e5377eceb3",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs": "55d8b39b9bf49775105782556ed1a89e62c26190c95c3a2ead36f768ae943a32",
+    "tools/oracle/tkernel_dynamic_default_order.cxx": "b56c11ab2db55c9eae8c7c0a5b57e05062db44adaffd63c068ef973cd7369abb",
+    "tools/oracle/tkernel_dynamic_default_order.expected": "113b46bd1f9da31eaff0b10a52106ad337ae846616965cf80c834dfd74e68aaa",
+    "tools/oracle/tkernel_dynamic_default_order.md": "565d7721250edcb90497081de97e8d43c4e0340bc3984be244c924c67987dce6"
+  },
+  "native_header_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_executable_sha256": "277237bdc7c8615de281c6aa53aab6129da50c1d30952156bd917f4446651d68",
+  "native_actual_sha256": "113b46bd1f9da31eaff0b10a52106ad337ae846616965cf80c834dfd74e68aaa",
+  "native_matches_expected": true,
+  "validation": {
+    "initial_rust_exit_code": 101,
+    "focused_rust_exit_code": 0,
+    "focused_passed": 54,
+    "full_package_exit_code": 0,
+    "full_package_passed": 2763,
+    "full_package_result_groups": 165,
+    "strict_clippy_exit_code": 0
+  },
+  "logs": {
+    "red": {
+      "path": "porting/runtime-evidence/dynamic-default-red.log.gz",
+      "sha256": "334d3fc8095de67403c95fc6f6f938401cc7255d0ff06cf3d72d39c081b1a0ba"
+    },
+    "focused": {
+      "path": "porting/runtime-evidence/dynamic-default-focused.log.gz",
+      "sha256": "4a58bc2114e4fae35581fcf0b21542d33e8dfa7926f6f10239ffe6256443ed35"
+    },
+    "full": {
+      "path": "porting/runtime-evidence/dynamic-default-full.log.gz",
+      "sha256": "e67a641deee59d418dcea706dab4c7aebbfcb14d3e3828d40c02b0684f2f929b"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/dynamic-default-clippy.log.gz",
+      "sha256": "14bf18a740d7ea5b6e0b4197a1391bc206310f41e298a8f9297ea0016c0e9d00"
+    }
+  },
+  "legacy_declaration_count_change": 0,
+  "affected_rows_remain_partial": true,
+  "limitations": [
+    "Only the first gap default failing is compared natively here; no blanket exception guarantee.",
+    "Native reserves all storage before constructing gaps; Rust grows storage progressively.",
+    "Native commits used length after requested construction; Rust advances after each default, so later constructor failure differs.",
+    "Arbitrary replacement, move-assignment and destructor contracts are not proven equivalent."
+  ]
+}

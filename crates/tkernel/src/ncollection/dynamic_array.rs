@@ -216,9 +216,7 @@ impl<T: Default> DynamicArray<T> {
         value: T,
     ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
-        while self.used < index {
-            self.appended();
-        }
+        self.fill_default_gap(index);
         if self.used == index {
             return Ok(self.append(value));
         }
@@ -226,13 +224,15 @@ impl<T: Default> DynamicArray<T> {
         *slot = value;
         Ok(slot)
     }
-    /// Constructs a replacement or extends the logical range; `array.emplace_value(5,||42)?`.
+    /// Constructs gap defaults before the requested value, as OCCT EmplaceValue;
+    /// `array.emplace_value(5,||42)?`.
     pub fn emplace_value<I: TryInto<usize> + Copy + Debug>(
         &mut self,
         index: I,
         construct: impl FnOnce() -> T,
     ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
+        self.fill_default_gap(index);
         self.set_value(index, construct())
     }
     /// Inserts before an existing index; `array.insert_before(1,42)?`.
@@ -260,6 +260,11 @@ impl<T: Default> DynamicArray<T> {
         }
         self.insert_at(index + 1, value);
         self.change_value(index + 1)
+    }
+    fn fill_default_gap(&mut self, index: usize) {
+        while self.used < index {
+            self.appended();
+        }
     }
     fn insert_at(&mut self, index: usize, value: T) {
         self.append(value);
