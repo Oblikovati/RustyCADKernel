@@ -1,0 +1,163 @@
+{
+  "base_revision": "9b52b0d61e1ed4a1a6fe82894a074094940f4c3c",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Native += accumulation and generic Copy elements for Mat3/4 matrix products",
+  "legacy_declaration_count_delta": 0,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/square_matrix.rs": "90133fc57271d030ab2ebe982fc6310607340271a19ac598711a47993c22f4db",
+    "crates/tkernel/tests/matrix_product_assignment.rs": "b53d05e40f447dd6ba5b1c44d7abaf8c0f4fd4acdc660611733903eddb1befa1",
+    "tools/oracle/tkernel_matrix_product_assignment.cxx": "b5025bfd4240cff0f6065fb1c472f0fd56a9c1e8aabe5401c7f58847a11bc48e",
+    "tools/oracle/tkernel_matrix_product_assignment.expected": "e1bc01eb335167ae8ab2660651fa0fe757b628886ef42e42535cf31eef61cd45",
+    "porting/parity.json": "3f06d7e7a06940c3a50e9cc3c2e60b7da7d18c8235d7be87307422f0cba6c685"
+  },
+  "native_header_sha256": {
+    "NCollection_Mat3.hxx": "332c91310cf02480226c7ef1187e63bc85e1d991ea14a9a547e55d02904df6e0",
+    "NCollection_Mat4.hxx": "e531f559c88bc17fa91b15e1b4d7c826e314f6ee9bdfae3257aff06eaf539ab9"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "e4464bea23e37cd47f1a539d13607c4aef58855eaacbbd935376fe49b3d80e2d",
+  "native_actual_sha256": "e1bc01eb335167ae8ab2660651fa0fe757b628886ef42e42535cf31eef61cd45",
+  "native_output_matches_expected": true,
+  "initial_regression_exit_code": 101,
+  "rust_test_summary": {
+    "passed": 2807,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 174,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "compiler_bindings": [
+    {
+      "old_selector": "NCollection_Mat3::Multiply(const NCollection_Mat3&,const NCollection_Mat3&)",
+      "cpp_selector": "NCollection_Mat3::Multiply(const NCollection_Mat3<Element_t>&,const NCollection_Mat3<Element_t>&)",
+      "cpp_id": "7c8876a84929b3b82d145d5a80da3e29d72b93f18f217638602d2b94edb23251",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::product",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "b45daeaf4b8d7990f10e1767f6de011a896f547adbefb961031f4a08de322ee9"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat3::Multiply(const NCollection_Mat3&)",
+      "cpp_selector": "NCollection_Mat3::Multiply(const NCollection_Mat3<Element_t>&)",
+      "cpp_id": "f2ec17a6ed5ec2aa5e5e2dea9ccf617320c08669c5bd93121bb3775684db1dfa",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::multiply",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "92a007a668601fcd8d100d4f0ca438a54873e907a32eecd0600bbc4569179b07"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat3::operator*=(const NCollection_Mat3&)",
+      "cpp_selector": "NCollection_Mat3::operator*=(const NCollection_Mat3<Element_t>&)",
+      "cpp_id": "6edddd8ea39ba838c8923d6bdd4bc4f648c37543699dd5facff48669c0507cc9",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::MulAssign>::mul_assign",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "92a7dfeb661d95769e096847f075c959b142dd2d6cc213919ccf696c349e3418"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat3::operator*(const NCollection_Mat3&) const",
+      "cpp_selector": "NCollection_Mat3::operator*(const NCollection_Mat3<Element_t>&) const",
+      "cpp_id": "a00b9593f39c0c354b303d33de2d1ceeb1e28b1e081ce5345089846823607f4b",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Mul>::mul",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "c6ab31f808e44f2f01364086e4bbf1121472cef8953e0f7eedcba3cabb6ba7d0"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat3::Multiplied(const NCollection_Mat3&) const",
+      "cpp_selector": "NCollection_Mat3::Multiplied(const NCollection_Mat3<Element_t>&) const",
+      "cpp_id": "8f7006290dfdfaaa6c5ef63a7fe2f4777e0880c1b99878a35e3b0bbfc87c400d",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::multiplied",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "3c8f60b3ed9cda52395636fe9cbfbb1bfa7bc08be999219dc371eefcf8f0be7d"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat4::Multiply(const NCollection_Mat4&,const NCollection_Mat4&)",
+      "cpp_selector": "NCollection_Mat4::Multiply(const NCollection_Mat4<Element_t>&,const NCollection_Mat4<Element_t>&)",
+      "cpp_id": "1deb0945b9744a67d65e4ae4f4ba4b4a762c028d35f3ec2d074580c7c6a4bcca",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::product",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "763bc173cca50df9d5a17d44b09b1772f55c8ac7315f38ebcad5d2156cf633df"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat4::Multiply(const NCollection_Mat4&)",
+      "cpp_selector": "NCollection_Mat4::Multiply(const NCollection_Mat4<Element_t>&)",
+      "cpp_id": "562133fc0711be010326c39b6af8d82a972e9876e4eeb47a44c928c4ad95b647",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::multiply",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "d508f212e7d4bba09a5d96cf3cc40f8a4cbb03d26345fecd4a821822b9d2cd53"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat4::operator*=(const NCollection_Mat4&)",
+      "cpp_selector": "NCollection_Mat4::operator*=(const NCollection_Mat4<Element_t>&)",
+      "cpp_id": "3e11e917771f0f504966d9544c58b3084270e8c3284acbbf4b2912458ce6d98a",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::MulAssign>::mul_assign",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "96782f36517d0e70f5ac2262d804d065f35a3b7cd2e342d211e0688d842fd55e"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat4::operator*(const NCollection_Mat4&) const",
+      "cpp_selector": "NCollection_Mat4::operator*(const NCollection_Mat4<Element_t>&) const",
+      "cpp_id": "c5117559bb1a34c91acc0ad4a51c077dd683f5098322781253e52fbe22e0cb3d",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Mul>::mul",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "6c31bcf9d6a6dff6e074edff65fa4dd038da48676210038a8f5ad900bdad72f8"
+      }
+    },
+    {
+      "old_selector": "NCollection_Mat4::Multiplied(const NCollection_Mat4&) const",
+      "cpp_selector": "NCollection_Mat4::Multiplied(const NCollection_Mat4<Element_t>&) const",
+      "cpp_id": "1728858d1e4eb25dff65403994e5b7082c6fc60ec1a80a6a0c5fd5e94ab86b0e",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::multiplied",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "3d3286d153cbfd09217529142d0ca9299ddfe6136cce9ee46fe8e123f75e57ca"
+      }
+    }
+  ],
+  "raw_logs": {
+    "porting/runtime-evidence/matrix-product-red.log.gz": "beaac583e8a64376ad030b2c8d583d1be2af5a47d9b7a7305159823ee32613a6",
+    "porting/runtime-evidence/matrix-product-full.log.gz": "7e53850182fea7d25652284605bf287988fba72e3fa506749a4fd9dd53c73e9b",
+    "porting/runtime-evidence/matrix-product-clippy.log.gz": "74b3eac0712859a670a477199cb62f66d3cc6072abe6f5b0fb7a77e9147356ec",
+    "porting/runtime-evidence/matrix-product-rustdoc.log.gz": "4a858e8794eb77efa04b5dd7c78bdba7be0cb5b1e1e34710dd2fb00a7fbea46c"
+  },
+  "limits": [
+    "Copy + From<u8> + Mul + AddAssign element domain. No non-Copy constructor/destructor equivalence claim. Signed overflow outside defined native arithmetic."
+  ]
+}

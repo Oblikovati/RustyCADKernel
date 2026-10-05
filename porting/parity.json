@@ -68074,44 +68074,44 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Mat3::Multiply(const NCollection_Mat3&,const NCollection_Mat3&)",
+      "upstream_id": "NCollection_Mat3::Multiply(const NCollection_Mat3<Element_t>&,const NCollection_Mat3<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::product",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat3::Multiply(const NCollection_Mat3&)",
+      "upstream_id": "NCollection_Mat3::Multiply(const NCollection_Mat3<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::multiply",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat3::operator*=(const NCollection_Mat3&)",
+      "upstream_id": "NCollection_Mat3::operator*=(const NCollection_Mat3<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat3::operator*(const NCollection_Mat3&) const",
+      "upstream_id": "NCollection_Mat3::operator*(const NCollection_Mat3<Element_t>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as Mul>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Mul>::mul",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat3::Multiplied(const NCollection_Mat3&) const",
+      "upstream_id": "NCollection_Mat3::Multiplied(const NCollection_Mat3<Element_t>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::multiplied",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
       "upstream_id": "NCollection_Mat3::Add(const NCollection_Mat3<Element_t>&)",
@@ -68282,44 +68282,44 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Mat4::Multiply(const NCollection_Mat4&,const NCollection_Mat4&)",
+      "upstream_id": "NCollection_Mat4::Multiply(const NCollection_Mat4<Element_t>&,const NCollection_Mat4<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::product",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat4::Multiply(const NCollection_Mat4&)",
+      "upstream_id": "NCollection_Mat4::Multiply(const NCollection_Mat4<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::multiply",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat4::operator*=(const NCollection_Mat4&)",
+      "upstream_id": "NCollection_Mat4::operator*=(const NCollection_Mat4<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat4::operator*(const NCollection_Mat4&) const",
+      "upstream_id": "NCollection_Mat4::operator*(const NCollection_Mat4<Element_t>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as Mul>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Mul>::mul",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
-      "upstream_id": "NCollection_Mat4::Multiplied(const NCollection_Mat4&) const",
+      "upstream_id": "NCollection_Mat4::Multiplied(const NCollection_Mat4<Element_t>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::multiplied",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native zero-initialized product accumulation uses element += in column-major result order. Generic Copy + From<u8> + Mul + AddAssign domain includes signed integers and custom assignment-only accumulation. Supplemental native fixture: tools/oracle/tkernel_matrix_product_assignment.cxx. No non-Copy lifecycle or undefined overflow equivalence claim."
     },
     {
       "upstream_id": "NCollection_Mat4::Add(const NCollection_Mat4<Element_t>&)",

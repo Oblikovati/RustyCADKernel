@@ -1,12 +1,13 @@
 //! The members NCollection_Mat3 and NCollection_Mat4 share. Both store `N*N` elements in
 //! column-major order, so `columns[c][r]` is native `myMat[c * N + r]`.
-use std::ops::{Add, Div, DivAssign, Mul, MulAssign, Sub};
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub};
 /// Element types with the arithmetic the matrices use (`float`, `double`); `f64: MatrixScalar`.
 pub trait MatrixScalar:
     Copy
     + From<u8>
     + PartialEq
     + Add<Output = Self>
+    + AddAssign
     + Sub<Output = Self>
     + Mul<Output = Self>
     + Div<Output = Self>
@@ -28,6 +29,23 @@ pub(super) fn zip_matrix_elements<T, const N: usize>(
             update(left_value, right_value);
         }
     }
+}
+
+/// Accumulates one native product entry with `+=`; e.g. `product_entry(&left, &right, 0, 0)`.
+pub(super) fn product_entry<T, const N: usize>(
+    left: &[[T; N]; N],
+    right: &[[T; N]; N],
+    row: usize,
+    column: usize,
+) -> T
+where
+    T: Copy + From<u8> + Mul<Output = T> + AddAssign,
+{
+    let mut sum = T::from(0);
+    for (left_column, right_entry) in left.iter().zip(&right[column]) {
+        sum += left_column[row] * *right_entry;
+    }
+    sum
 }
 
 /// Access, identity/zero and comparison members.
@@ -173,15 +191,18 @@ macro_rules! square_matrix_access {
 /// Products, scalar operations, sums and negation.
 macro_rules! square_matrix_arithmetic {
     ($matrix:ident, $n:literal, $vector:ident) => {
-        impl<T: $crate::ncollection::MatrixScalar> $matrix<T> {
+        impl<T: Copy + From<u8> + std::ops::Mul<Output = T> + std::ops::AddAssign> $matrix<T> {
             /// The static `Multiply(A, B)`: each element starts at 0 and adds `A(r,k)*B(k,c)`
             /// for increasing k; `Mat4::product(&a, &b)`.
             pub fn product(left: &Self, right: &Self) -> Self {
                 let columns = std::array::from_fn(|column| {
                     std::array::from_fn(|row| {
-                        (0..$n).fold(T::from(0), |sum, k| {
-                            sum + left.columns[k][row] * right.columns[column][k]
-                        })
+                        $crate::ncollection::square_matrix::product_entry(
+                            &left.columns,
+                            &right.columns,
+                            row,
+                            column,
+                        )
                     })
                 });
                 Self { columns }
@@ -194,6 +215,8 @@ macro_rules! square_matrix_arithmetic {
             pub fn multiplied(&self, other: &Self) -> Self {
                 Self::product(self, other)
             }
+        }
+        impl<T: $crate::ncollection::MatrixScalar> $matrix<T> {
             /// Applies the matrix to a column vector, summing row products left to right.
             fn apply(&self, vector: $vector<T>) -> $vector<T> {
                 let values = vector.data();
@@ -256,13 +279,17 @@ macro_rules! square_matrix_arithmetic {
                 self.apply(vector)
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::Mul for $matrix<T> {
+        impl<T: Copy + From<u8> + std::ops::Mul<Output = T> + std::ops::AddAssign> std::ops::Mul
+            for $matrix<T>
+        {
             type Output = Self;
             fn mul(self, right: Self) -> Self {
                 Self::product(&self, &right)
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::MulAssign for $matrix<T> {
+        impl<T: Copy + From<u8> + std::ops::Mul<Output = T> + std::ops::AddAssign>
+            std::ops::MulAssign for $matrix<T>
+        {
             fn mul_assign(&mut self, right: Self) {
                 self.multiply(&right);
             }
