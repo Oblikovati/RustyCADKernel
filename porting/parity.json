@@ -9435,9 +9435,9 @@
       "upstream_id": "NCollection_Mat4::GetData() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::as_slice",
+      "status": "partial",
+      "notes": "Borrowed contiguous column-major storage now replaces the earlier copied GetData mapping. Safe shared/exclusive slice lifetimes preserve address and element access for valid borrow scopes. Native raw-pointer aliasing across later mutations remains unrepresented; native/Rust storage probe: tools/oracle/tkernel_matrix_storage.cxx."
     },
     {
       "upstream_id": "NCollection_Mat4::Map(const Element_t*)",
@@ -16427,17 +16427,17 @@
       "upstream_id": "NCollection_Mat3::GetData() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::as_slice",
+      "status": "partial",
+      "notes": "Borrowed contiguous column-major storage now replaces the earlier copied GetData mapping. Safe shared/exclusive slice lifetimes preserve address and element access for valid borrow scopes. Native raw-pointer aliasing across later mutations remains unrepresented; native/Rust storage probe: tools/oracle/tkernel_matrix_storage.cxx."
     },
     {
       "upstream_id": "NCollection_Mat3::ChangeData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::as_mut_slice",
+      "status": "partial",
+      "notes": "Borrowed contiguous column-major storage now replaces the earlier copied GetData mapping. Safe shared/exclusive slice lifetimes preserve address and element access for valid borrow scopes. Native raw-pointer aliasing across later mutations remains unrepresented; native/Rust storage probe: tools/oracle/tkernel_matrix_storage.cxx."
     },
     {
       "upstream_id": "NCollection_Mat3::Multiply(Element_t)",
@@ -16627,9 +16627,9 @@
       "upstream_id": "NCollection_Mat4::ChangeData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::as_mut_slice",
+      "status": "partial",
+      "notes": "Borrowed contiguous column-major storage now replaces the earlier copied GetData mapping. Safe shared/exclusive slice lifetimes preserve address and element access for valid borrow scopes. Native raw-pointer aliasing across later mutations remains unrepresented; native/Rust storage probe: tools/oracle/tkernel_matrix_storage.cxx."
     },
     {
       "upstream_id": "NCollection_Mat4::Multiply(Element_t)",

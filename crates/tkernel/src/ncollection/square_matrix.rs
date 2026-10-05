@@ -114,6 +114,14 @@ macro_rules! square_matrix_access {
             }
         }
         impl<T> $matrix<T> {
+            /// Borrows flat column-major storage, as `GetData`; `matrix.as_slice()[0]`.
+            pub fn as_slice(&self) -> &[T] {
+                self.columns.as_flattened()
+            }
+            /// Borrows flat storage writably, as `ChangeData`; `matrix.as_mut_slice()[0] = value`.
+            pub fn as_mut_slice(&mut self) -> &mut [T] {
+                self.columns.as_flattened_mut()
+            }
             /// Borrows the column-major storage writably, as `ChangeData`;
             /// `matrix.change_data()[3][0] = 1.0` sets the element at row 0, column 3.
             pub fn change_data(&mut self) -> &mut [[T; $n]; $n] {
@@ -133,7 +141,7 @@ macro_rules! square_matrix_access {
                 });
                 Self { columns }
             }
-            /// Copies the column-major storage, as `GetData`; `matrix.data()`.
+            /// Copies column-major storage; `matrix.data()`. Use `as_slice` for native borrowing.
             pub fn data(&self) -> [T; $nn] {
                 std::array::from_fn(|index| self.columns[index / $n][index % $n])
             }
