@@ -43,6 +43,25 @@ fn probe(identity: usize, value: i32, counts: &Rc<Counts>) -> Probe {
     }
 }
 
+fn assert_probe(probe: &Probe, identity: usize, value: i32) {
+    assert_eq!((probe.identity, probe.value), (identity, value));
+}
+
+fn assert_index_error(result: Result<(), ArrayError>, index: i64) {
+    assert_eq!(
+        result,
+        Err(ArrayError::Index {
+            index,
+            lower: 0,
+            upper: 0
+        })
+    );
+}
+
+fn assert_same_target(actual: &Probe, expected: *const Probe) {
+    assert_eq!(actual as *const Probe, expected);
+}
+
 #[test]
 fn array1_borrowed_set_assigns_in_place_and_keeps_source() {
     let counts = Rc::new(Counts::default());
@@ -52,15 +71,9 @@ fn array1_borrowed_set_assigns_in_place_and_keeps_source() {
     array.update_lower_bound(-1);
     let target = array.change_value(0).unwrap() as *const Probe;
     array.set_value_ref(0, &source).unwrap();
-    assert_eq!(array.change_value(0).unwrap() as *const Probe, target);
-    assert_eq!(
-        (
-            array.value(0).unwrap().identity,
-            array.value(0).unwrap().value
-        ),
-        (2, 99)
-    );
-    assert_eq!((source.identity, source.value), (3, 99));
+    assert_same_target(array.value(0).unwrap(), target);
+    assert_probe(array.value(0).unwrap(), 2, 99);
+    assert_probe(&source, 3, 99);
     assert_counts(&counts, 1, 0);
 }
 
@@ -70,14 +83,7 @@ fn array1_borrowed_set_checks_index_before_assignment() {
     let mut buffer = [probe(1, 10, &counts)];
     let source = probe(2, 20, &counts);
     let mut array = Array1::from_slice(&mut buffer);
-    assert_eq!(
-        array.set_value_ref(2, &source),
-        Err(ArrayError::Index {
-            index: 2,
-            lower: 0,
-            upper: 0
-        })
-    );
+    assert_index_error(array.set_value_ref(2, &source), 2);
     assert_counts(&counts, 0, 0);
 }
 
@@ -89,15 +95,9 @@ fn array2_borrowed_set_assigns_in_place_and_keeps_source() {
     let mut array = Array2::from_buffer(&mut buffer, 1, 2).unwrap();
     let target = array.change_value(0, 1).unwrap() as *const Probe;
     array.set_value_ref(0, 1, &source).unwrap();
-    assert_eq!(array.change_value(0, 1).unwrap() as *const Probe, target);
-    assert_eq!(
-        (
-            array.value(0, 1).unwrap().identity,
-            array.value(0, 1).unwrap().value
-        ),
-        (2, 99)
-    );
-    assert_eq!((source.identity, source.value), (3, 99));
+    assert_same_target(array.value(0, 1).unwrap(), target);
+    assert_probe(array.value(0, 1).unwrap(), 2, 99);
+    assert_probe(&source, 3, 99);
     assert_counts(&counts, 1, 0);
 }
 
@@ -107,22 +107,8 @@ fn array2_borrowed_set_checks_both_indices_before_assignment() {
     let mut buffer = [probe(1, 10, &counts)];
     let source = probe(2, 20, &counts);
     let mut array = Array2::from_buffer(&mut buffer, 1, 1).unwrap();
-    assert_eq!(
-        array.set_value_ref(1, 0, &source),
-        Err(ArrayError::Index {
-            index: 1,
-            lower: 0,
-            upper: 0
-        })
-    );
-    assert_eq!(
-        array.set_value_ref(0, 1, &source),
-        Err(ArrayError::Index {
-            index: 1,
-            lower: 0,
-            upper: 0
-        })
-    );
+    assert_index_error(array.set_value_ref(1, 0, &source), 1);
+    assert_index_error(array.set_value_ref(0, 1, &source), 1);
     assert_counts(&counts, 0, 0);
 }
 

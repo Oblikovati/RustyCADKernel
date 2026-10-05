@@ -49,9 +49,9 @@
   },
   "rust_probe": {
     "test": "crates/tkernel/tests/ncollection_array_set_value_ref.rs",
-    "test_sha256": "cfc88452bb3eae57d7f4eee32d22a6b7989aebfa1725fa2d04c6a944bcbfead9",
-    "array1_source_sha256": "2dbf0cf7a471c83456d5811ad35cce2969bd8a7fc8c2124eade2f36424d7d88d",
-    "array2_source_sha256": "044d6d9d3372c439a4af0340de43d72ed1a7c8ad3cabafa51265d205da7e816a",
+    "test_sha256": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "array1_source_sha256": "eec2b68c9bd6480087e4ba3fba95812083043d0669ead3743fdea3a87aaab4eb",
+    "array2_source_sha256": "1ccdf7540b69192c53da5abb798331774408ea57fd7ff56c27d6770098d43854",
     "assertions": "Four focused tests prove in-place assignment, no Clone::clone construction, source availability, and no assignment after invalid Array1 index or Array2 row/column errors."
   },
   "verification": {
@@ -62,9 +62,9 @@
     "selector_test": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_ncollection_array_set_value_ref_binding.py: 1 passed.",
     "logs": {
       "rust_tests": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-tkernel-tests.log.gz", "sha256": "1b877ea20abab7bebc74ce304ea29fc8595519610c21e2d9346c49cf3b7227e1"},
-      "clippy": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-clippy.log.gz", "sha256": "8214ed7daa2d3a30aca42c44fbc816538b398615c7a463e0a7c0d0df4a73dd5d"},
+      "clippy": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-clippy.log.gz", "sha256": "44d48371b1bc885feacca21a2634b56c2e2c2df0ef54dface46ba46e3756a179"},
       "selector_test": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-binding.log.gz", "sha256": "2895497bcc8cbae678fa66bee1f2f61a322c9624a65dadf6cdcc390aa9f2862b"}
     }
   },
-  "parity_json_sha256": "e40746cc26f4daa19f7e071f396dd05f91b2ec6872fa6ae650b7283b68e9c8c4"
+  "parity_json_sha256": "ea9613e4579b79f9ea8221729e0655855ba782219107f8a444a55766854dc3bf"
 }

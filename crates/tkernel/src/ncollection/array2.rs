@@ -208,7 +208,7 @@ impl<'a, T> Array2<'a, T> {
 }
 
 impl<'a, T: Clone> Array2<'a, T> {
-    /// Assigns from a borrowed value without replacing the target object; `array.set_value_ref(1,1,&value)?`.
+    /// Assigns borrowed data in owned or mutable-buffer storage; `array.set_value_ref(1,1,&value)?`.
     pub fn set_value_ref(&mut self, row: i32, col: i32, value: &T) -> Result<(), ArrayError> {
         self.change_value(row, col)?.clone_from(value);
         Ok(())
