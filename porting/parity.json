@@ -85723,9 +85723,9 @@
       "upstream_id": "TCollection_ExtendedString::Search(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Bounded Rust equivalent scans to the first zero; None maps the native null pointer to -1. Embedded-zero prefix and reverse search match the pinned native fixture."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Search(const TCollection_ExtendedString&) const",
@@ -85747,9 +85747,9 @@
       "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Bounded Rust equivalent scans to the first zero before reverse search; None maps the native null pointer to -1. Empty prefix and last-match indexing match the pinned native fixture."
     },
     {
       "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const TCollection_ExtendedString&) const",
