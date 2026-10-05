@@ -57,6 +57,7 @@ impl<T: Default, const N: usize> LocalArray<T, N> {
     }
 
     /// Grows or shrinks with OCCT's inline and retention rules; `array.reallocate(16, true)`.
+    /// Replacement growth without copying preserves the old array if `Default` panics.
     pub fn reallocate(&mut self, size: usize, copy: bool) {
         if size <= self.len() {
             self.elements.truncate(size);
@@ -64,12 +65,20 @@ impl<T: Default, const N: usize> LocalArray<T, N> {
         }
         let stays_inline = !self.elements.spilled() && size <= N;
         if !copy && !stays_inline {
-            self.elements = SmallVec::with_capacity(size);
+            self.replace_without_copy(size);
+            return;
         }
         if self.elements.spilled() && size <= N {
             self.elements.shrink_to_fit();
         }
         self.elements.resize_with(size, T::default);
+    }
+
+    fn replace_without_copy(&mut self, size: usize) {
+        let mut replacement = SmallVec::with_capacity(size);
+        replacement.resize_with(size, T::default);
+        // OCCT publishes the replacement pointer only after construction completes.
+        self.elements = replacement;
     }
 }
 
@@ -137,5 +146,34 @@ impl<T, const N: usize> LocalArray<T, N> {
     /// Releases all elements and returns to inline storage; `array.deallocate()`.
     pub fn deallocate(&mut self) {
         self.elements = SmallVec::new();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::LocalArray;
+    use smallvec::SmallVec;
+
+    struct PanickingDefault {
+        value: i32,
+    }
+
+    impl Default for PanickingDefault {
+        fn default() -> Self {
+            panic!("replacement default constructor failure");
+        }
+    }
+
+    #[test]
+    fn replacement_growth_keeps_old_values_when_default_panics() {
+        let elements = SmallVec::from_vec(vec![PanickingDefault { value: 42 }]);
+        let mut array = LocalArray::<PanickingDefault, 2> { elements };
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            array.reallocate(3, false);
+        }));
+
+        assert!(result.is_err());
+        assert_eq!(array.len(), 1);
+        assert_eq!(array[0].value, 42);
     }
 }

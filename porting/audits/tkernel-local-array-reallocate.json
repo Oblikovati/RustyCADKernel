@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "purpose": "Source-bound LocalArray replacement and const ToArray1 behavior audit",
+  "rust_base_commit": "4e7578e744b804f758d1818869efd7ba2d964f93",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "occt_header": {
+    "path": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+    "sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
+  },
+  "occt_gtest_source": {
+    "path": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray_Test.cxx",
+    "sha256": "d24eb586570d9f970f864f655ec071b07351a66517059b86d0fcaddf1100a864"
+  },
+  "native_probes": [
+    {
+      "source": "tools/oracle/tkernel_local_array_reallocate_exception.cxx",
+      "expected": "tools/oracle/tkernel_local_array_reallocate_exception.expected",
+      "observed_output": "1 42",
+      "command": "g++ -std=c++17 -O2 -I<OCCT>/src/FoundationClasses/TKernel/NCollection -I<occt-install>/include/opencascade <source> -L<occt-install>/lib -Wl,-rpath,<occt-install>/lib -lTKernel -o <binary>; run binary; cmp expected output",
+      "result": "byte_exact"
+    },
+    {
+      "source": "tools/oracle/tkernel_local_array_const_to_array1.cxx",
+      "expected": "tools/oracle/tkernel_local_array_const_to_array1.expected",
+      "observed_output": "12 77",
+      "command": "g++ -std=c++17 -O2 -I<OCCT>/src/FoundationClasses/TKernel/NCollection -I<occt-install>/include/opencascade <source> -L<occt-install>/lib -Wl,-rpath,<occt-install>/lib -lTKernel -o <binary>; run binary; cmp expected output",
+      "result": "byte_exact"
+    }
+  ],
+  "rust_validation": {
+    "command": "CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_TARGET_DIR=/tmp/rustycad-local-array-target cargo +1.98.1 test -p rustycad-tkernel",
+    "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01), LLVM 22.1.8",
+    "test_groups": 185,
+    "passed": 2837,
+    "failed": 0,
+    "ignored": 0,
+    "log_gzip": "porting/runtime-evidence/tkernel-local-array-tests-full.log.gz",
+    "log_sha256": "5410650067872e2c036db748fc5228c9897021a25c02673c3a58f267ba3d5772",
+    "fmt": "cargo +1.98.1 fmt --all -- --check passed",
+    "clippy": "CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_TARGET_DIR=/tmp/rustycad-local-array-target cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings passed"
+  },
+  "behavior": {
+    "replacement_growth": "Rust builds the replacement SmallVec before publishing it. A panicking T::default preserves the previous size and value. Pinned native does the same, but leaks its partially constructed raw replacement buffer; Rust drops that partial allocation, so this exception path remains partial.",
+    "const_to_array1": "Pinned native const ToArray1 returns a mutable Array1 alias to the original buffer (12 77 after alias mutation). Rust exposes a safe copy-on-write view; mutation detaches and leaves the LocalArray unchanged. This remains partial rather than using unsafe aliasing."
+  },
+  "no_legacy_declaration_count_change": true
+}
