@@ -5,6 +5,12 @@ mod compact {
         pub struct GenericBounds<T, const N: usize>(pub [T; N]);
 
         pub struct BoundedBounds<T, const N: usize>(pub [T; N]);
+
+        impl<T, const N: usize> Default for CompactBounds<T, N> {
+            fn default() -> Self {
+                Self(unimplemented!())
+            }
+        }
     }
 
     mod box2 {

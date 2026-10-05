@@ -104,6 +104,35 @@ class ConstSpecializedAliasTests(unittest.TestCase):
         self.assertTrue(all(path not in paths for path in aliases[: len(METHODS)]))
         self.assertTrue(all(path in paths for path in aliases[-len(METHODS) :]))
 
+    def test_compiler_decimal_const_without_literal_flag_matches_exact_alias(self) -> None:
+        document = fixture_document()
+        replace_impl_const(document, 2, is_literal=False)
+        paths = declaration_paths(normalize_document(document))
+        aliases = alias_method_paths("rustdoc_const_specialized_alias")
+        self.assertTrue(all(path in paths for path in aliases))
+
+    def test_default_trait_impl_is_attached_to_exact_alias(self) -> None:
+        inventory = normalize_fixture()
+        for alias, const_value in (("CompactBox2", 2), ("CompactBox3", 3)):
+            path = default_alias_path(alias)
+            row = declaration_by_path(inventory, path)
+            specialization = row.get("alias_specialization")
+            self.assertIsInstance(specialization, dict)
+            self.assertEqual(specialization.get("const_value"), const_value)
+
+    def test_negative_default_impl_is_not_published(self) -> None:
+        document = fixture_document()
+        mark_default_impl_negative(document)
+        paths = declaration_paths(normalize_document(document))
+        self.assertNotIn(default_alias_path("CompactBox2"), paths)
+
+    def test_default_impl_for_other_dimension_does_not_match_alias(self) -> None:
+        document = fixture_document()
+        replace_default_impl_const(document, 4)
+        paths = declaration_paths(normalize_document(document))
+        self.assertNotIn(default_alias_path("CompactBox2"), paths)
+        self.assertNotIn(default_alias_path("CompactBox3"), paths)
+
 
 def normalize_fixture() -> dict[str, JSONValue]:
     return normalize_document(fixture_document())
@@ -161,6 +190,10 @@ def alias_method_paths(crate: str) -> tuple[str, ...]:
     return tuple(f"{crate}::{alias}::{method}" for alias in ("CompactBox2", "CompactBox3") for method in METHODS)
 
 
+def default_alias_path(alias: str) -> str:
+    return f"rustdoc_const_specialized_alias::{alias}::<core::default::Default>::default"
+
+
 def replace_alias_const(document: dict[str, JSONValue], name: str, expr: str, literal: bool) -> None:
     alias = item_by_name(document, name)
     target = alias.get("inner", {}).get("type_alias", {}).get("type", {}).get("resolved_path", {})
@@ -169,11 +202,13 @@ def replace_alias_const(document: dict[str, JSONValue], name: str, expr: str, li
     args[1]["const"]["is_literal"] = literal
 
 
-def replace_impl_const(document: dict[str, JSONValue], value: int) -> None:
+def replace_impl_const(
+    document: dict[str, JSONValue], value: int, is_literal: bool = True
+) -> None:
     impl = item_by_name(document, "CompactBounds")["inner"]["struct"]["impls"][0]
     body = document["index"][str(impl)]["inner"]["impl"]
     body["for"]["resolved_path"]["args"]["angle_bracketed"]["args"][1]["const"] = {
-        "expr": str(value), "value": None, "is_literal": True
+        "expr": str(value), "value": None, "is_literal": is_literal
     }
 
 
@@ -185,6 +220,30 @@ def item_by_name(document: dict[str, JSONValue], name: str) -> dict[str, JSONVal
         if isinstance(item, dict) and item.get("name") == name:
             return item
     raise AssertionError(f"rustdoc item {name!r} is absent")
+
+
+def mark_default_impl_negative(document: dict[str, JSONValue]) -> None:
+    index = document["index"]
+    for item in index.values():
+        body = item.get("inner", {}).get("impl", {}) if isinstance(item, dict) else {}
+        trait = body.get("trait") if isinstance(body, dict) else None
+        if isinstance(trait, dict) and trait.get("path") == "Default":
+            body["is_negative"] = True
+            return
+    raise AssertionError("compiler fixture must contain Default impl")
+
+
+def replace_default_impl_const(document: dict[str, JSONValue], value: int) -> None:
+    index = document["index"]
+    for item in index.values():
+        body = item.get("inner", {}).get("impl", {}) if isinstance(item, dict) else {}
+        trait = body.get("trait") if isinstance(body, dict) else None
+        if not isinstance(trait, dict) or trait.get("path") != "Default":
+            continue
+        arguments = body["for"]["resolved_path"]["args"]["angle_bracketed"]["args"]
+        arguments[1]["const"] = {"expr": str(value), "value": None, "is_literal": True}
+        return
+    raise AssertionError("compiler fixture must contain Default impl")
 
 
 if __name__ == "__main__":
