@@ -89112,9 +89112,41 @@
       "upstream_id": "Quantity_DateDefinitionError",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::ErrorKind::DateDefinition",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
       "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The exception class is the Error kind whose exception_type() is Quantity_DateDefinitionError."
+      "notes": "DEFINE_STANDARD_EXCEPTION mapping: the byte constructor preserves native C-string messages, and the default helper covers its default empty argument. The string and explicit-stack constructor families are available too. exception_parent and Failure::is_kind model the Standard_DomainError catch chain. Date's existing Error converts with its name/message but no original native stack; see porting/audits/quantity-definition-errors.md.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_date_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError::Quantity_DateDefinitionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound one-argument constructor. The C++ default argument is represented by the explicit Rust helper; both preserve native C-string truncation semantics.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_date_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError::Quantity_DateDefinitionError(const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_stacks::date_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound explicit message and stack constructor; C-string inputs are consumed through their first NUL byte."
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "Exact compiler-bound macro-generated exception type query; the Rust Failure stores and returns the concrete exception name."
     },
     {
       "upstream_id": "Quantity_NameOfColor",
@@ -89168,9 +89200,41 @@
       "upstream_id": "Quantity_PeriodDefinitionError",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
-      "rust_item": "rustycad_tkernel::ErrorKind::PeriodDefinition",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
       "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The exception class is the Error kind whose exception_type() is Quantity_PeriodDefinitionError."
+      "notes": "DEFINE_STANDARD_EXCEPTION mapping: the byte constructor preserves native C-string messages, and the default helper covers its default empty argument. The string and explicit-stack constructor families are available too. exception_parent and Failure::is_kind model the Standard_DomainError catch chain. Period's existing Error converts with its name/message but no original native stack; see porting/audits/quantity-definition-errors.md.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_period_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::Quantity_PeriodDefinitionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound one-argument constructor. The C++ default argument is represented by the explicit Rust helper; both preserve native C-string truncation semantics.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_period_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::Quantity_PeriodDefinitionError(const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_stacks::period_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound explicit message and stack constructor; C-string inputs are consumed through their first NUL byte."
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "Exact compiler-bound macro-generated exception type query; the Rust Failure stores and returns the concrete exception name."
     },
     {
       "upstream_id": "Quantity_TypeOfColor",

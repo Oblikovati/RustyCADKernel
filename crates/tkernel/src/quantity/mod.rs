@@ -2,6 +2,7 @@
 mod period;
 pub use period::Period;
 mod date;
+pub mod exceptions;
 pub use date::Date;
 mod color_names;
 pub use color_names::NamedColor;
