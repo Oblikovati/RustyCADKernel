@@ -93683,7 +93683,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
       "rust_item": "rustycad_tkernel::osd::Osd::sec_sleep",
       "status": "implemented",
-      "notes": "std::thread::sleep of the native request: Unix usleep(seconds*1000*1000) with the int product wrapping and read as unsigned useconds_t (sec_sleep_duration), Windows Sleep(seconds*1000) ms. Osd::sec_sleep_with takes an injected Sleeper."
+      "notes": "Default Osd::sec_sleep dispatches to NativeSleeper: Unix calls usleep(seconds*1000*1000) and ignores its return, so EINTR ends the sleep early; Windows calls Sleep(seconds*1000) ms (cross-compiled, not runtime tested). Osd::sec_sleep_with(custom, ...) remains injectable and defaults to the legacy Duration conversion. Native signed overflow for large seconds is undefined; parity is claimed only for inputs whose int multiplication is defined."
     },
     {
       "upstream_id": "OSD::MilliSecSleep(int)",
