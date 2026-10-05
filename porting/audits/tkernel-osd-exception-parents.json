@@ -3,7 +3,7 @@
     "crates/tkernel/src/osd/exceptions.rs": "9b87f42dceb39e6057bed4dc990d7fe5b558f40d784cf95bab0e11580ac2b00f",
     "crates/tkernel/src/osd/mod.rs": "cf5c05b3a62fd4982750b13b4090b38cfb2a029fdd56f66cca604740f611b6a3",
     "crates/tkernel/src/standard/exceptions.rs": "6f800cdfeb51194279bbb959482fabaa49e38e9a87444e62c0a4703ace2f87eb",
-    "crates/tkernel/tests/standard_exceptions_behavior.rs": "70c3f4f8b2eb2e2369e8f4d2e0a7fbd40897210d1f5b0c9e3cea7945bb6280aa",
+    "crates/tkernel/tests/standard_exceptions_behavior.rs": "24a8dbae7c5346486aa83c3772583519ed9ef6f77acf802743806137b5dbe03b",
     "tools/oracle/tkernel_osd_exception_parent.expected": "a05406f545694bd39d4496a537f815ab3f7ec8c8d542d57a9a55b4d76568d15e",
     "tools/oracle/tkernel_osd_exception_parent.md": "f3f57101fc57e3748f4bf83a61a7ec4f7cbb5c386e23d8f096221f2fa1b8edb0",
     "tools/oracle/tkernel_osd_exception_parent_probe.cxx": "4e627e03d04afc98a62c725935cc405189daad6574d0cbcc7bffc3d2bddae006"
@@ -217,7 +217,10 @@
     "command": "cargo +1.98.1 test -p rustycad-tkernel --test standard_exceptions_behavior",
     "fmt_command": "cargo +1.98.1 fmt --all --check",
     "fmt_result": "passed",
-    "result": "6 passed, 0 failed"
+    "result": "6 passed, 0 failed",
+    "independent_native_parent_cases": 22,
+    "independent_parent_table_source": "crates/tkernel/tests/standard_exceptions_behavior.rs",
+    "assertions": "Each class is checked against an explicit direct-parent table, its transitive catch chain, and unrelated OSD/Standard families."
   },
   "scope_limit": "No parity row is added: this correction restores catch hierarchy for existing exception classes rather than adding RTTI callables. Descriptor registration and ownership are not native behaviors for these non-transient exception classes."
 }
