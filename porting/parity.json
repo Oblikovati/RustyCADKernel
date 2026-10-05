@@ -9195,9 +9195,10 @@
       "upstream_id": "NCollection_Vec2::GetData() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "fe31cbad2fadfaef93b938357a8a830cbea82e86b156f0bc89364d3fb45d06fb"
     },
     {
       "upstream_id": "NCollection_Vec2::cwiseAbs() const noexcept",
@@ -15201,25 +15202,28 @@
       "upstream_id": "NCollection_Vec2::ChangeData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "358561a947d4102d9644e6e0815a8cf4128a593f270ba1eb5e2a16e5c9d4c194"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator const Element_t*() const",
+      "upstream_id": "NCollection_Vec2::operator const type-parameter-0-0 *() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "d27300a0fee53c9ed93d5729934fb7a72170579d08a8e0f7a86a6eb0951f4e8b"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator Element_t*()",
+      "upstream_id": "NCollection_Vec2::operator type-parameter-0-0 *()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "541792b044cfc37a4ce9f5e598374a78f2d91320975a8a1b22c5172ae1693f5d"
     },
     {
       "upstream_id": "NCollection_Vec2::operator-() const",
@@ -15360,33 +15364,37 @@
       "upstream_id": "NCollection_Vec3::GetData() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "4681cfd415ff1b6e7dbb20203bb987eb20cf3994976e92e35dd8d07a158d45fc"
     },
     {
       "upstream_id": "NCollection_Vec3::ChangeData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "d66abed5078422432a68069b1f1a9c1d20a846dabbbc5e871b37e16141268b76"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator const Element_t*() const",
+      "upstream_id": "NCollection_Vec3::operator const type-parameter-0-0 *() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "47f424b8442c5f9c5d14a5624c12c7da52cc43d78f14dd008ef49a47480fbd3a"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator Element_t*()",
+      "upstream_id": "NCollection_Vec3::operator type-parameter-0-0 *()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "ef78eec5e097e0c2df619432904b44a6e0bdb5698d956725a2accc7f6f758994"
     },
     {
       "upstream_id": "NCollection_Vec3::operator-() const",
@@ -15739,33 +15747,37 @@
       "upstream_id": "NCollection_Vec4::GetData() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "98c3c077f5305cbd19a7d385a1ce3af171b537d8f5e672299fedeb4d89180912"
     },
     {
       "upstream_id": "NCollection_Vec4::ChangeData()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "7f3d0d0ecea1f7b33f631c32c5b59b827eed364fe1e2619b2dcee7c4b4c7ca21"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator const Element_t*() const",
+      "upstream_id": "NCollection_Vec4::operator const type-parameter-0-0 *() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "88535c333eff28f5941c417eee30e9d404c75b2cec881d1f5218eb90413bacc3"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator Element_t*()",
+      "upstream_id": "NCollection_Vec4::operator type-parameter-0-0 *()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::change_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components_mut",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Native storage is now a borrowed homogeneous array with source-bound repr(C) layout, address, mutation, over-alignment and constexpr checks. C++ implicit pointer conversions and arbitrary aliases spanning exclusive Rust borrows remain partial; see porting/audits/vector-storage-contracts.json.",
+      "cpp_declaration_id": "c2b72f71aaf151f21f203472911de6a6536c1487c6eda3b43894fe6944a6f525"
     },
     {
       "upstream_id": "NCollection_Vec4::operator-() const",

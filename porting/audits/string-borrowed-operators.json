@@ -196,5 +196,10 @@
       "Null ASCII byte operands now use bounded optional-buffer methods; existing UTF-16 pointer adapters are unchanged."
     ]
   },
-  "compiler_evidence_status": "pending fresh clean-revision capture"
+  "compiler_evidence_status": "pending fresh clean-revision capture",
+  "crosswalk_receiver_regression": {
+    "before_fix": "3 of 5 reference-target regressions fail with the prior crate-prefix parser",
+    "after_fix": "26 focused crosswalk tests pass",
+    "limitations": "Bindings require exact compiler-observed receiver paths and pinned source; no owned/reference fallback."
+  }
 }

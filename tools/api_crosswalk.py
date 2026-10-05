@@ -7,6 +7,7 @@ import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
 from api_rust_kind import select_rust_kind
+from api_rust_reference_targets import nominal_reference_owner
 from api_scoped_alias_selectors import qualify_member_aliases
 from api_template_selectors import (
     constructor_candidates,
@@ -323,7 +324,7 @@ def normalized_origin(item: dict[str, JSONValue]) -> str | None:
 def rust_target_prefix(target: str) -> tuple[str, bool]:
     if target.startswith("<"):
         owner, separator, _rest = target[1:].partition(" as ")
-        prefix, path_separator, _tail = owner.partition("::")
+        prefix, path_separator, _tail = nominal_reference_owner(owner).partition("::")
         return prefix, bool(separator and path_separator)
     prefix, separator, _path = target.partition("::")
     return prefix, bool(separator)

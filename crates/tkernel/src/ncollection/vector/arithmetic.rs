@@ -109,7 +109,7 @@ macro_rules! componentwise_arithmetic {
                 self.$first = $first;
                 $(self.$rest = $rest;)*
             }
-            /// Copies components in storage order, as `GetData`; `Vec2::new(1,2).data() == [1,2]`.
+            /// Copies components in storage order; native `GetData` uses `as_components`. `Vec2::new(1,2).data() == [1,2]`.
             pub const fn data(&self) -> [T; $count] {
                 [self.$first $(, self.$rest)*]
             }

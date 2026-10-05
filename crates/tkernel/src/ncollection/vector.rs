@@ -1,17 +1,20 @@
 //! NCollection_Vec2/Vec3/Vec4: small vector primitives with OCCT's evaluation order.
 //!
 //! The native classes store an array; here the components are public fields, so the
-//! non-const `x()` reference overloads are field access and `ChangeData` returns an array
-//! of component references.
+//! non-const `x()` reference overloads are field access and `ChangeData` can borrow the
+//! contiguous component array. The earlier `change_data` component-reference adapter
+//! stays available for existing callers.
 mod arithmetic;
 mod conversion;
 mod float;
 mod scalar_division;
+mod storage;
 mod swizzle;
 pub use conversion::ElementCast;
 pub use scalar_division::VectorScalarDivision;
 
 /// Two scalar components; `Vec2::new(1.0_f64,2.0)`.
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Vec2<T> {
     /// First component; `vector.x = 1.0`.
@@ -20,6 +23,7 @@ pub struct Vec2<T> {
     pub y: T,
 }
 /// Three scalar components; `Vec3::new(1.0_f64,2.0,3.0)`.
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Vec3<T> {
     /// First component; `vector.x = 1.0`.
@@ -30,6 +34,7 @@ pub struct Vec3<T> {
     pub z: T,
 }
 /// Four scalar components; `Vec4::new(1.0_f64,2.0,3.0,1.0)`.
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Vec4<T> {
     /// First component; `vector.x = 1.0`.

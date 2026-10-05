@@ -1,0 +1,156 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Vec2/3/4 contiguous borrowed component storage; no original legacy-count increase",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "NCollection_Vec2::GetData() const noexcept",
+      "original_selector": "NCollection_Vec2::GetData() const noexcept",
+      "cpp_id": "fe31cbad2fadfaef93b938357a8a830cbea82e86b156f0bc89364d3fb45d06fb",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec2::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::ChangeData()",
+      "original_selector": "NCollection_Vec2::ChangeData()",
+      "cpp_id": "358561a947d4102d9644e6e0815a8cf4128a593f270ba1eb5e2a16e5c9d4c194",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec2::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components_mut",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::operator const type-parameter-0-0 *() const",
+      "original_selector": "NCollection_Vec2::operator const Element_t*() const",
+      "cpp_id": "d27300a0fee53c9ed93d5729934fb7a72170579d08a8e0f7a86a6eb0951f4e8b",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec2::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::operator type-parameter-0-0 *()",
+      "original_selector": "NCollection_Vec2::operator Element_t*()",
+      "cpp_id": "541792b044cfc37a4ce9f5e598374a78f2d91320975a8a1b22c5172ae1693f5d",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec2::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::as_components_mut",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::GetData() const noexcept",
+      "original_selector": "NCollection_Vec3::GetData() const noexcept",
+      "cpp_id": "4681cfd415ff1b6e7dbb20203bb987eb20cf3994976e92e35dd8d07a158d45fc",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec3::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::ChangeData()",
+      "original_selector": "NCollection_Vec3::ChangeData()",
+      "cpp_id": "d66abed5078422432a68069b1f1a9c1d20a846dabbbc5e871b37e16141268b76",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec3::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components_mut",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::operator const type-parameter-0-0 *() const",
+      "original_selector": "NCollection_Vec3::operator const Element_t*() const",
+      "cpp_id": "47f424b8442c5f9c5d14a5624c12c7da52cc43d78f14dd008ef49a47480fbd3a",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec3::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::operator type-parameter-0-0 *()",
+      "original_selector": "NCollection_Vec3::operator Element_t*()",
+      "cpp_id": "ef78eec5e097e0c2df619432904b44a6e0bdb5698d956725a2accc7f6f758994",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec3::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::as_components_mut",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::GetData() const noexcept",
+      "original_selector": "NCollection_Vec4::GetData() const noexcept",
+      "cpp_id": "98c3c077f5305cbd19a7d385a1ce3af171b537d8f5e672299fedeb4d89180912",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec4::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::ChangeData()",
+      "original_selector": "NCollection_Vec4::ChangeData()",
+      "cpp_id": "7f3d0d0ecea1f7b33f631c32c5b59b827eed364fe1e2619b2dcee7c4b4c7ca21",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec4::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components_mut",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::operator const type-parameter-0-0 *() const",
+      "original_selector": "NCollection_Vec4::operator const Element_t*() const",
+      "cpp_id": "88535c333eff28f5941c417eee30e9d404c75b2cec881d1f5218eb90413bacc3",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec4::data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::operator type-parameter-0-0 *()",
+      "original_selector": "NCollection_Vec4::operator Element_t*()",
+      "cpp_id": "c2b72f71aaf151f21f203472911de6a6536c1487c6eda3b43894fe6944a6f525",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "original_rust_item": "rustycad_tkernel::ncollection::Vec4::change_data",
+      "original_status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::as_components_mut",
+      "status": "partial"
+    }
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/vector.rs": "46aa1001405ccf20fc101173824df9da810865607fbfbc3608298201982a9146",
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "0e78cb783788c6a597995713f264eca29d588e497e4446516f227735a07831f9",
+    "crates/tkernel/src/ncollection/vector/storage.rs": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+    "crates/tkernel/tests/vector_storage_contracts.rs": "2792a7e0c6f14995ee7d09e227729913360a49c1601c61dffdf32c7bbf3a96f1",
+    "tools/oracle/tkernel_vector_storage_contracts.cxx": "20f4e23aec0f0d8e499d6008a2c3cbb6e69ca0251d2d73920a3b139b911db3b3",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66",
+    "tools/oracle/tkernel_vector_storage_contracts.expected": "9540cf78f7d000e57a657603d2aef479eaf29443334f116dfbeebe64cdc955c9"
+  },
+  "behavior": {
+    "native_compile_exit": 0,
+    "native_runtime_exit": 0,
+    "native_output_rows": 4,
+    "native_constexpr_assertions": 1,
+    "supplemental_rust_cases": 8,
+    "rust_runtime_exit": 0,
+    "miri_exit": 0,
+    "regression": "New tests fail before the storage API with missing methods. Initial implementation was rejected by the workspace unsafe-code deny lint; the two repr(C) cast seams now have narrowly scoped allowances and documented whole-object provenance.",
+    "limitations": [
+      "Safe exclusive Rust borrows do not grant the arbitrary overlapping aliases allowed by native raw pointers.",
+      "Implicit native pointer conversions use explicit Rust array-borrow methods.",
+      "Zero-sized Rust scalars are a Rust extension and receive no native parity credit."
+    ],
+    "miri_toolchain": "nightly-2026-09-25",
+    "expected_provenance": "Native output reviewed against independent Rust size, alignment, address and mutation assertions."
+  },
+  "compiler_evidence_status": "pending fresh clean-revision capture"
+}

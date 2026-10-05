@@ -143,6 +143,14 @@ class FlatCopyBindingsTest(unittest.TestCase):
             self.assertEqual(self.rows[selector][key], binding[key])
             self.assertEqual(self.rows[selector]["status"], "partial")
 
+    def test_twelve_vector_storage_selectors_keep_pointer_alias_limits(self) -> None:
+        audit = json.loads(
+            (ROOT / "porting/audits/vector-storage-contracts.json").read_text()
+        )
+        self.assert_native_binding_contracts(audit["bindings"], 12)
+        self.assertEqual(len({row["cpp_id"] for row in audit["bindings"]}), 12)
+        self.assertEqual(len({row["rust_item"] for row in audit["bindings"]}), 6)
+
     def test_twenty_one_string_operator_bindings_keep_unique_native_identities(
         self,
     ) -> None:
