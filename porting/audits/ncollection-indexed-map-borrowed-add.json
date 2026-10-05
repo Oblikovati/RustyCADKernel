@@ -5,14 +5,19 @@
   "implementation_base_revision": "9175a2fd8982fa15569b01dfa2be7414888eb178",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "source_hashes": {
-    "crates/tkernel/src/ncollection/indexed_map.rs": "ed08ed72e5eefca9ac7f81c117d53b9bee4c06df230440289521e3da19a0de82",
-    "crates/tkernel/tests/indexed_map_borrowed_add.rs": "97101eab87348e703569d1ea3f4e816a78b6dd44498aa56ed03ef5c5d54dae30",
+    "crates/tkernel/src/ncollection/indexed_map.rs": "80fb69ce3d2159d8032cc14de2924f3974849e139f0e85f49e184ca73a311661",
+    "crates/tkernel/tests/indexed_map_borrowed_add.rs": "ac6932fd254a104f53a4e18b2d2f3da6b2d6e74d179c022150421e4e5d57a48a",
     "tools/oracle/ncollection_indexed_map_borrowed_add.cxx": "1d85d13c1599ea152580fcea1e1a407d439c8212b6190536524b13daf558dbe2",
     "tools/oracle/ncollection_indexed_map_borrowed_add.expected": "c88cc960ffe723cafea48fd92b33cd809df5b8f97bfc5fbdfaf54f11c3c892de",
     "tools/oracle/ncollection_indexed_map_borrowed_add.actual": "c88cc960ffe723cafea48fd92b33cd809df5b8f97bfc5fbdfaf54f11c3c892de",
-    "tools/oracle/ncollection_indexed_map_borrowed_add.md": "410f884f8037f5f220690148e46a01a44481d25cbc118a7fc1cbfd822fb74f69",
-    "tools/tests/test_indexed_map_borrowed_add.py": "64471ac75c4e4b4fcd3fbc1f61a80fa099ab863b9ba2141974e7b03f1d447da2",
-    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e"
+    "tools/oracle/ncollection_indexed_map_borrowed_add.md": "37de5467dc126271db077247d71b9f95143240367155e6e8649cc81578eeb75e",
+    "tools/tests/test_indexed_map_borrowed_add.py": "a8cc3c830458119c077dfb174b0f6c1f1c655f3998973ade35d15643a623a1a7",
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "tools/oracle/ncollection_indexed_map_borrowed_add_allocation.expected": "6068b9b78fad45fe93dbfd6d894f0bd8ddac650fa49d3c823f9f0fa5806f6ea1",
+    "tools/oracle/ncollection_indexed_map_borrowed_add_allocation.actual": "6068b9b78fad45fe93dbfd6d894f0bd8ddac650fa49d3c823f9f0fa5806f6ea1",
+    "tools/oracle/ncollection_indexed_map_borrowed_add_allocation.cxx": "2985ab3d3d20c4815b93d4df519296986920ee6464f7f01edeab0860e6dcbc2c",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "b2c6e7b8f502d1e85ec808f19f48661dd9d0b95105fef2b438e290627f7ea715",
+    "tools/oracle/ncollection_indexed_map_borrowed_add_allocation.md": "ade11fa0c149c315d56e97d1f4bea178408d689e35b670ebd1dc328c8b5faabd"
   },
   "native_declaration": {
     "id": "3139d3af57aa3ab1c74eac365b9dadf2a17aafb33f22513aa3682d8df3d4cc4a",
@@ -27,27 +32,33 @@
       371,
       637,
       686
+    ],
+    "allocation_macro": "src/FoundationClasses/TKernel/NCollection/NCollection_DefineAlloc.hxx",
+    "allocation_macro_sha256": "c74fa4624723646574d22b4fcfb60c5bd38d72023b88adcb80e1fe11d6aef75f",
+    "allocation_source_lines": [
+      20,
+      29
     ]
   },
   "rust_target": {
     "path": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
     "kind": "function",
     "source_file": "crates/tkernel/src/ncollection/indexed_map.rs",
-    "source_sha256": "ed08ed72e5eefca9ac7f81c117d53b9bee4c06df230440289521e3da19a0de82",
-    "declaration_sha256": "7d33cc0ef84364d5fe5c1c292fb831d729218cb3e2b0693d380f22b711fded7f",
+    "source_sha256": "80fb69ce3d2159d8032cc14de2924f3974849e139f0e85f49e184ca73a311661",
+    "declaration_sha256": "e42fba99bf2649e537efcc750549f88add46609078f4724ee073a3f32e7617a1",
     "unique_in_private_capture": true,
     "capture_command": "cargo +nightly-2026-09-25 rustdoc -p rustycad-tkernel --lib --all-features -- -Z unstable-options --output-format json --document-private-items",
     "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)",
     "rustdoc_gzip": {
-      "path": "porting/runtime-evidence/indexed-map-borrowed-add-rustdoc.json.gz",
-      "sha256": "4ae0f9653bd1cb1242eab7952f3b648ada635744003cb8f11849b7c12a875810"
+      "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-rustdoc.json.gz",
+      "sha256": "222a4153e1a6f654ceb6e64bf4954b55ac52b3fde2f2f18f5b979f7888f17fb1"
     },
-    "rustdoc_uncompressed_sha256": "145300de2a23a0a80f3c488e98c85b200bd02056dff0463828677b3348a4a02b",
+    "rustdoc_uncompressed_sha256": "f3743f1542466afb53c8b46fde06be48e32ec0e5fbaa57feec0dfc6b9744fc1b",
     "rustdoc_log": {
-      "path": "porting/runtime-evidence/indexed-map-borrowed-add-rustdoc.log.gz",
-      "sha256": "16b5cd445a66eaf723211e777a8d45553d715819ada916771aa723d4064de353"
+      "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-rustdoc.log.gz",
+      "sha256": "150df0c86d359d6c76e595a6c15a2855c10fcd62a494cc3ea03930e31b8eb014"
     },
-    "normalized_public_path_count": 7545
+    "normalized_public_path_count": 7548
   },
   "native_behavior": {
     "expected_rows": [
@@ -55,13 +66,22 @@
       "existing=1 events=HE stored=7"
     ],
     "insert": "OCCT rehashes if needed, hashes/searches the original key, and copies only after a miss. The fixture sees hash then key-copy construction.",
-    "hit": "The existing one-based index is returned after hash/equality with no key copy."
+    "hit": "The existing one-based index is returned after hash/equality with no key copy.",
+    "allocation_order_followup": {
+      "native_rows": [
+        "inserted=1 events=HAK stored=7",
+        "existing=1 events=HE stored=7",
+        "failed=1 events=HAKF extent=0"
+      ],
+      "meaning": "The placement node allocation occurs after lookup and before key copy. A duplicate performs no node allocation or key copy. If key copy throws, the matching placement delete calls Free and the map remains empty.",
+      "rust_result": "Rust allocates Box<MaybeUninit<IndexedNode<K>>> before invoking the Clone closure; Box::write initializes it. The uninitialized owner drops and frees on Clone panic."
+    }
   },
   "parity_row": {
     "selector": "NCollection_IndexedMap::Add(const TheKeyType&)",
     "rust_target": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
     "status": "partial",
-    "parity_json_sha256": "e7816005261112aaf3247b38ae7194feb8ec7a19a58779bb44b440824932d7a6"
+    "parity_json_sha256": "f446daf0a350ad7a212739708b00f0ee67ee0be700b4842f02bc80e6c537fc71"
   },
   "inputs_sha256": {
     "occt_declarations_jsonl_gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
@@ -107,12 +127,54 @@
       "sha256": "248eef6d1bfe1c9116ac80fca1b9ab14a54e78eea87fa0d876a1b950b9e8006b"
     },
     "formatting": "cargo fmt --all -- --check; git diff --check; Black passed.",
-    "target": "/tmp/rustycad-indexed-map-target with CARGO_INCREMENTAL=0 and debug=0"
+    "target": "/tmp/rustycad-indexed-map-target with CARGO_INCREMENTAL=0 and debug=0",
+    "allocation_order_followup": {
+      "native_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/ncollection_indexed_map_borrowed_add_allocation.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/ncollection_indexed_map_borrowed_add_allocation",
+      "native_binary_sha256": "a3be11adaf0f18765d6fe1a00893b87a03479759c5454d3bc207ab51006b0a6f",
+      "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+      "native_output_sha256": "6068b9b78fad45fe93dbfd6d894f0bd8ddac650fa49d3c823f9f0fa5806f6ea1",
+      "native_compile_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-native-compile.log.gz",
+        "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+      },
+      "native_output_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-native-output.log.gz",
+        "sha256": "1b0982c503df74364b07fc8a388d87bf53eb548627dc583aedb98783499bd5ae"
+      },
+      "rust_command": "cargo test -p rustycad-tkernel --test indexed_map_borrowed_add --test ncollection_indexed_map --test indexed_map_supplemental --test indexed_data_map_borrowed_add --test indexed_data_supplemental --test ncollection_indexed_data_map --test ncollection_base_allocator --test ncollection_allocators_api_behavior",
+      "rust_result": "124 passed, 0 failed across 8 test targets",
+      "rust_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-cross-map.log.gz",
+        "sha256": "a5871be3fcbd20d0715ed8bbce53f6db0183791dfb3d09681da9c73ceafa783b"
+      },
+      "doctest_command": "cargo test -p rustycad-tkernel --doc add_ref",
+      "doctest_result": "2 passed, 0 failed",
+      "doctest_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-doc.log.gz",
+        "sha256": "6070477ff433383b3d6ac5d5e27a32ef7570e4b29ba08e45f8bccb5a4b763707"
+      },
+      "strict_clippy_command": "cargo clippy -p rustycad-tkernel --test indexed_map_borrowed_add -- -D warnings",
+      "strict_clippy_result": "passed",
+      "strict_clippy_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-clippy.log.gz",
+        "sha256": "acc45fa51a3df1028a9b5274822bd4b08dc36de9c77c271e90b2cf03faf8b7ca"
+      },
+      "selector_test_command": "PYTHONPATH=.. python3 -m unittest test_indexed_map_borrowed_add (from tools/tests)",
+      "selector_test_result": "2 passed, 0 failed",
+      "selector_test_log": {
+        "path": "porting/runtime-evidence/indexed-map-alloc-before-clone-selector.log.gz",
+        "sha256": "3432be4b628429b3210f94d62460cbf2702631669977e9953ec3315f3f7e7177"
+      },
+      "formatting": "cargo fmt --all -- --check; git diff --check; Black passed.",
+      "target": "/tmp/rustycad-indexed-map-alloc-before-clone-target with CARGO_INCREMENTAL=0 and debug=0"
+    }
   },
   "limitations": [
-    "OCCT placement allocation happens before key construction; Rust clones the key before its separate allocator call, so allocation and failed-construction side effects differ.",
-    "Rust stores a key node in a separate vector-backed allocation, unlike OCCT’s indexed node allocation; allocator callback ordering/counts are not equivalent.",
-    "Arbitrary C++ copy-constructor, allocator-failure, and destructor effects are not modeled; self-aliasing is outside the tested borrowing domain.",
+    "Rust now performs the node allocation before Clone and releases uninitialized storage if Clone panics, matching OCCT placement-new/placement-delete ordering for this value-semantic fixture.",
+    "Rust bucket arrays use Rust Vec storage rather than OCCT BaseAllocator arrays, so bucket allocation callbacks and capacity-growth effects remain different.",
+    "C++ constructs the key directly in the IndexedMapNode base subobject; Rust Clone returns a complete key value that is then moved into the node. Address-sensitive C++ constructors and arbitrary subobject/destructor effects are not modeled.",
+    "Allocator failure behavior, self-aliasing, and custom C++ constructor side effects beyond this trace are not proven.",
     "The checked-in Rust API snapshot predates add_ref; the retained private rustdoc capture resolves the path uniquely."
-  ]
+  ],
+  "allocation_order_followup_base_revision": "612d9b284870ac88b3192c676ecdeda326a8e44b"
 }

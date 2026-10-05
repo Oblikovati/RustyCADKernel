@@ -172,11 +172,15 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         self.append_new_at_bucket(key, bucket)
     }
     pub(super) fn append_new_at_bucket(&mut self, key: K, bucket: usize) -> usize {
+        self.append_new_at_bucket_with(bucket, || key)
+    }
+    fn append_new_at_bucket_with(&mut self, bucket: usize, construct: impl FnOnce() -> K) -> usize {
         let index = self.len();
-        self.nodes.push(
-            self.resource
-                .allocate_value(IndexedNode { key, _identity: 0 }),
-        );
+        let node = self.resource.allocate_value_with(|| IndexedNode {
+            key: construct(),
+            _identity: 0,
+        });
+        self.nodes.push(node);
         self.buckets[bucket].insert(0, index);
         index + 1
     }
@@ -200,7 +204,7 @@ impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
         if index != 0 {
             return index;
         }
-        self.append_new_at_bucket(key.clone(), bucket)
+        self.append_new_at_bucket_with(bucket, || key.clone())
     }
 }
 impl<K: Debug, H: HashPolicy<K> + Default> IndexedMap<K, H> {
