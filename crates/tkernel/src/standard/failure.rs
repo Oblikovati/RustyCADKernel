@@ -75,6 +75,16 @@ impl Failure {
     pub fn stack_string(&self) -> &str {
         &self.stack
     }
+    /// Copies only the base exception state, as C++ base copy construction does;
+    /// `Failure::copy_base(&derived).exception_type() == "Standard_Failure"`.
+    pub fn copy_base(source: &Self) -> Self {
+        Self {
+            exception_type: "Standard_Failure",
+            message: Arc::clone(&source.message),
+            stack: Arc::clone(&source.stack),
+            own_buffer: None,
+        }
+    }
     /// Assigns the base message and stack while preserving the destination exception type
     /// and derived message buffer; `target.assign_base(&source)` returns `target`.
     pub fn assign_base(&mut self, source: &Self) -> &mut Self {
