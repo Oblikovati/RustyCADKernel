@@ -86,28 +86,13 @@ fn comparison_rows(
     equal: impl FnOnce() -> bool,
     not_equal: impl FnOnce() -> bool,
 ) -> Vec<String> {
-    let is_equal = record_comparison(
-        &format!("{case} IsEqual"),
-        expected,
-        calls,
-        counts,
-        is_equal,
-    );
-    let equal = record_comparison(
-        &format!("{case} operator=="),
-        expected,
-        calls,
-        counts,
-        equal,
-    );
-    let not_equal = record_comparison(
-        &format!("{case} operator!="),
-        !expected,
-        calls,
-        counts,
-        not_equal,
-    );
-    vec![is_equal, equal, not_equal]
+    let native_label = format!("{case} IsEqual");
+    let equal_label = format!("{case} operator==");
+    let unequal_label = format!("{case} operator!=");
+    let native = record_comparison(&native_label, expected, calls, counts, is_equal);
+    let equal = record_comparison(&equal_label, expected, calls, counts, equal);
+    let unequal = record_comparison(&unequal_label, !expected, calls, counts, not_equal);
+    vec![native, equal, unequal]
 }
 
 fn mat3_case(case: &str, mismatch: Option<usize>) -> Vec<String> {
@@ -185,27 +170,28 @@ fn mat4_equality_dispatch_matches_native() {
     assert_eq!(actual.join("\n"), expected);
 }
 
+const MATRIX_OPERATOR_BINDINGS: [(&str, &str); 4] = [
+    (
+        "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
+        "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
+    ),
+    (
+        "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
+        "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
+    ),
+    (
+        "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
+        "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
+    ),
+    (
+        "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
+        "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
+    ),
+];
+
 #[test]
 fn parity_selects_the_matching_matrix_trait_methods() {
-    let pairs = [
-        (
-            "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
-            "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
-        ),
-        (
-            "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
-            "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
-        ),
-        (
-            "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
-            "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
-        ),
-        (
-            "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
-            "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
-        ),
-    ];
-    for (selector, expected) in pairs {
+    for (selector, expected) in MATRIX_OPERATOR_BINDINGS {
         assert_eq!(parity_rust_item(selector), expected, "{selector}");
     }
 }
