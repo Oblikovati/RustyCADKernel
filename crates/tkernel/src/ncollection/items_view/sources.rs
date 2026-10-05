@@ -71,3 +71,15 @@ impl<K: Debug, H: HashPolicy<K>> ItemsSource<KeyIndexItems> for IndexedMap<K, H>
         self.is_empty()
     }
 }
+
+impl<K: Debug, V, H: HashPolicy<K>> ItemsSourceMut<KeyValueIndexItems> for IndexedDataMap<K, V, H> {
+    type ItemMut<'a>
+        = (&'a K, &'a mut V, usize)
+    where
+        Self: 'a;
+
+    /// Preserves writable values and one-based indices; `view.begin()`.
+    fn items_begin_mut(&mut self) -> impl Iterator<Item = Self::ItemMut<'_>> {
+        self.indexed_items_mut()
+    }
+}
