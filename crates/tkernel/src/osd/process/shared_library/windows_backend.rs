@@ -3,7 +3,10 @@ use crate::{
     osd::{CadPath, PathSyntax},
     tcollection::{AsciiString, ExtendedString},
 };
-use std::{ffi::c_void, sync::atomic::AtomicU32};
+use std::{
+    ffi::c_void,
+    sync::{Mutex, atomic::AtomicU32},
+};
 
 pub(super) trait WindowsCalls {
     fn module_handle(&self, name: &[u16]) -> *mut c_void;
@@ -11,7 +14,8 @@ pub(super) trait WindowsCalls {
     fn symbol(&self, handle: *mut c_void, name: &[u8]) -> *mut c_void;
     fn close(&self, handle: *mut c_void);
     fn last_error_code(&self) -> u32;
-    fn format_error(&self, code: u32, name: Option<&[u8]>) -> Vec<u8>;
+    fn format_message(&self, code: u32, name: Option<&[u8]>, target: &mut [u16]) -> bool;
+    fn convert_message(&self, wide: &[u16], target: &mut [u8]) -> bool;
 }
 
 pub(super) fn module_cache_with(calls: &impl WindowsCalls, path: &[u8]) -> *mut c_void {
@@ -64,9 +68,63 @@ pub(super) fn close_with(calls: &impl WindowsCalls, handle: *mut c_void) {
 pub(super) fn error_with(
     calls: &impl WindowsCalls,
     last_error: &AtomicU32,
+    buffers: &Mutex<WindowsErrorBuffers>,
     name: Option<&[u8]>,
 ) -> Vec<u8> {
-    calls.format_error(last_error.load(std::sync::atomic::Ordering::Relaxed), name)
+    let mut current = lock_error_buffers(buffers);
+    update_wide_buffer(calls, &mut current, last_error, name);
+    update_utf8_buffer(calls, &mut current);
+    buffer_content(&current.utf8).to_vec()
+}
+
+fn lock_error_buffers(
+    buffers: &Mutex<WindowsErrorBuffers>,
+) -> std::sync::MutexGuard<'_, WindowsErrorBuffers> {
+    buffers
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+}
+
+fn update_wide_buffer(
+    calls: &impl WindowsCalls,
+    buffers: &mut WindowsErrorBuffers,
+    last_error: &AtomicU32,
+    name: Option<&[u8]>,
+) {
+    let mut attempt: [u16; 1024] = buffers.wide;
+    let code: u32 = last_error.load(std::sync::atomic::Ordering::Relaxed);
+    if calls.format_message(code, name, &mut attempt) {
+        buffers.wide = attempt;
+    }
+}
+
+fn update_utf8_buffer(calls: &impl WindowsCalls, buffers: &mut WindowsErrorBuffers) {
+    let mut attempt: [u8; 1024] = buffers.utf8;
+    if calls.convert_message(&buffers.wide, &mut attempt) {
+        buffers.utf8 = attempt;
+    }
+}
+
+pub(super) struct WindowsErrorBuffers {
+    wide: [u16; 1024],
+    utf8: [u8; 1024],
+}
+
+impl WindowsErrorBuffers {
+    pub(super) const fn new() -> Self {
+        Self {
+            wide: [0; 1024],
+            utf8: [0; 1024],
+        }
+    }
+}
+
+fn buffer_content(buffer: &[u8]) -> &[u8] {
+    let end: usize = buffer
+        .iter()
+        .position(|byte| *byte == 0)
+        .unwrap_or(buffer.len());
+    &buffer[..end]
 }
 
 fn module_basename_wide(path: &[u8]) -> Vec<u16> {
@@ -113,8 +171,12 @@ impl WindowsCalls for SystemWindowsCalls {
         unsafe { system::last_error_code() }
     }
 
-    fn format_error(&self, code: u32, name: Option<&[u8]>) -> Vec<u8> {
-        system::format_error(code, name)
+    fn format_message(&self, code: u32, name: Option<&[u8]>, target: &mut [u16]) -> bool {
+        system::format_message(code, name, target)
+    }
+
+    fn convert_message(&self, wide: &[u16], target: &mut [u8]) -> bool {
+        system::convert_message(wide, target)
     }
 }
 
@@ -167,222 +229,40 @@ mod system {
         unsafe { GetLastError() }
     }
 
-    pub fn format_error(code: u32, name: Option<&[u8]>) -> Vec<u8> {
+    pub fn format_message(code: u32, name: Option<&[u8]>, target: &mut [u16]) -> bool {
         let name = name.and_then(|bytes| CString::new(bytes).ok());
         let mut argument = name.as_ref().map_or(std::ptr::null(), |text| text.as_ptr());
         let arguments = &mut argument as *mut *const i8 as *const *const i8;
-        let wide = formatted_message(code, arguments);
-        to_utf8(&wide)
-    }
-
-    fn formatted_message(code: u32, arguments: *const *const i8) -> Vec<u16> {
-        let mut buffer: Vec<u16> = vec![0; 1024];
-        let written = unsafe {
+        let written: u32 = unsafe {
             FormatMessageW(
                 FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY,
                 std::ptr::null(),
                 code,
                 0,
-                buffer.as_mut_ptr(),
-                buffer.len() as u32,
+                target.as_mut_ptr(),
+                target.len() as u32,
                 arguments,
             )
-        } as usize;
-        buffer.truncate(written.saturating_add(1).min(buffer.len()));
-        buffer
+        };
+        written > 0
     }
 
-    fn to_utf8(wide: &[u16]) -> Vec<u8> {
-        if wide.is_empty() {
-            return Vec::new();
-        }
-        let mut buffer: Vec<u8> = vec![0; 1024];
-        let written: i32 = convert_wide(wide, &mut buffer);
-        if written <= 0 {
-            return Vec::new();
-        }
-        buffer.truncate(written as usize - 1);
-        buffer
-    }
-
-    fn convert_wide(wide: &[u16], buffer: &mut [u8]) -> i32 {
-        unsafe {
+    pub fn convert_message(wide: &[u16], target: &mut [u8]) -> bool {
+        let written: i32 = unsafe {
             WideCharToMultiByte(
                 CP_UTF8,
                 0,
                 wide.as_ptr(),
                 -1,
-                buffer.as_mut_ptr(),
-                buffer.len() as i32,
+                target.as_mut_ptr(),
+                target.len() as i32,
                 std::ptr::null(),
                 std::ptr::null_mut(),
             )
-        }
+        };
+        written > 0
     }
 }
 
 #[cfg(test)]
-mod tests {
-    use super::{WindowsCalls, close_with, error_with, module_cache_with, open_with, symbol_with};
-    use std::{cell::RefCell, ffi::c_void, sync::atomic::AtomicU32};
-
-    #[derive(Default)]
-    struct FakeWindowsCalls {
-        cache: *mut c_void,
-        load: *mut c_void,
-        symbol: *mut c_void,
-        error: u32,
-        module_names: RefCell<Vec<Vec<u16>>>,
-        load_names: RefCell<Vec<Vec<u16>>>,
-        symbols: RefCell<Vec<Vec<u8>>>,
-        closes: RefCell<Vec<usize>>,
-        formatted: RefCell<Vec<(u32, Option<Vec<u8>>)>>,
-    }
-
-    impl WindowsCalls for FakeWindowsCalls {
-        fn module_handle(&self, name: &[u16]) -> *mut c_void {
-            self.module_names.borrow_mut().push(name.to_vec());
-            self.cache
-        }
-        fn load_library(&self, path: &[u16]) -> *mut c_void {
-            self.load_names.borrow_mut().push(path.to_vec());
-            self.load
-        }
-        fn symbol(&self, _handle: *mut c_void, name: &[u8]) -> *mut c_void {
-            self.symbols.borrow_mut().push(name.to_vec());
-            self.symbol
-        }
-        fn close(&self, handle: *mut c_void) {
-            self.closes.borrow_mut().push(handle as usize);
-        }
-        fn last_error_code(&self) -> u32 {
-            self.error
-        }
-        fn format_error(&self, code: u32, name: Option<&[u8]>) -> Vec<u8> {
-            self.formatted
-                .borrow_mut()
-                .push((code, name.map(<[u8]>::to_vec)));
-            format!("win32:{code}").into_bytes()
-        }
-    }
-
-    #[test]
-    fn set_name_uses_windows_path_basename_for_module_cache() {
-        let calls: FakeWindowsCalls = FakeWindowsCalls::default();
-        module_cache_with(&calls, b"C:\\Windows\\System32\\kernel32.dll");
-        assert_eq!(
-            calls.module_names.borrow()[0],
-            "kernel32.dll\0".encode_utf16().collect::<Vec<_>>()
-        );
-    }
-
-    #[test]
-    fn opening_reuses_cached_module_before_loading() {
-        let cached: *mut c_void = 5_usize as *mut c_void;
-        let calls: FakeWindowsCalls = FakeWindowsCalls {
-            cache: cached,
-            ..Default::default()
-        };
-        let result = open_with(&calls, Some(b"new.dll"), cached, &AtomicU32::new(0));
-        assert_eq!(result, cached);
-        assert!(calls.load_names.borrow().is_empty());
-    }
-
-    #[test]
-    fn uncached_open_converts_path_and_returns_loaded_handle() {
-        let loaded: *mut c_void = 9_usize as *mut c_void;
-        let calls: FakeWindowsCalls = FakeWindowsCalls {
-            load: loaded,
-            ..Default::default()
-        };
-        let handle = open_with(
-            &calls,
-            Some("C:\\CAD\\插件.dll".as_bytes()),
-            std::ptr::null_mut(),
-            &AtomicU32::new(0),
-        );
-        assert_eq!(handle, loaded);
-        assert_eq!(
-            calls.load_names.borrow()[0],
-            "C:\\CAD\\插件.dll\0".encode_utf16().collect::<Vec<_>>()
-        );
-    }
-
-    #[test]
-    fn failed_open_retains_native_error_code_and_formats_name() {
-        let calls: FakeWindowsCalls = FakeWindowsCalls {
-            error: 126,
-            ..Default::default()
-        };
-        let last_error: AtomicU32 = AtomicU32::new(0);
-        assert!(
-            open_with(
-                &calls,
-                Some(b"missing.dll"),
-                std::ptr::null_mut(),
-                &last_error
-            )
-            .is_null()
-        );
-        assert_error_details(&calls, &last_error, b"missing.dll", 126);
-    }
-
-    fn assert_error_details(
-        calls: &FakeWindowsCalls,
-        last_error: &AtomicU32,
-        name: &[u8],
-        code: u32,
-    ) {
-        let expected: String = format!("win32:{code}");
-        assert_eq!(
-            error_with(calls, last_error, Some(name)),
-            expected.as_bytes()
-        );
-        assert_eq!(calls.formatted.borrow()[0], (code, Some(name.to_vec())));
-        assert_eq!(last_error.load(std::sync::atomic::Ordering::Relaxed), code);
-    }
-
-    #[test]
-    fn failed_symbol_uses_c_prefix_and_records_native_error() {
-        let calls: FakeWindowsCalls = FakeWindowsCalls {
-            error: 127,
-            ..Default::default()
-        };
-        let last_error: AtomicU32 = AtomicU32::new(0);
-        let result: *mut c_void =
-            symbol_with(&calls, std::ptr::null_mut(), b"bad\0suffix", &last_error);
-        assert!(result.is_null());
-        assert_eq!(calls.symbols.borrow()[0], b"bad");
-        assert_eq!(last_error.load(std::sync::atomic::Ordering::Relaxed), 127);
-    }
-
-    #[test]
-    fn successful_load_does_not_clear_the_previous_windows_error_code() {
-        let last_error: AtomicU32 = AtomicU32::new(126);
-        let loaded: *mut c_void = 11_usize as *mut c_void;
-        let calls: FakeWindowsCalls = FakeWindowsCalls {
-            load: loaded,
-            error: 0,
-            ..Default::default()
-        };
-        let result: *mut c_void = open_with(
-            &calls,
-            Some(b"present.dll"),
-            std::ptr::null_mut(),
-            &last_error,
-        );
-        assert_eq!(result, loaded);
-        assert_eq!(
-            error_with(&calls, &last_error, Some(b"present.dll")),
-            b"win32:126"
-        );
-    }
-
-    #[test]
-    fn close_forwards_the_cached_or_loaded_handle() {
-        let calls: FakeWindowsCalls = FakeWindowsCalls::default();
-        let handle: *mut c_void = 7_usize as *mut c_void;
-        close_with(&calls, handle);
-        assert_eq!(calls.closes.borrow().as_slice(), &[7]);
-    }
-}
+mod tests;

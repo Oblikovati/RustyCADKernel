@@ -25,16 +25,18 @@ native null-pointer conversion exception. Rust `Destroy` clears its owned name
 instead of leaving the native dangling pointer, and closed handles are guarded
 from later symbol lookup.
 
-Rust source hashes for this implementation are:
+Rust source hashes after the static-buffer follow-up are:
 
-- `shared_library.rs`: `3c6a63101d30d1c541392941f04fc656c17d4d22e17f46c374b68377a87d8c21`
-- `shared_library/windows_backend.rs`: `add9a86a3468908062b4d75adb16d620006ee2a13d9511a35d9885d58147d176`
+- `shared_library.rs`: `4d141d003ad2c4f24319bd8bb9babafcb492fa4610eeb985b6c0545ccdc4b0a7`
+- `shared_library/windows_backend.rs`: `326f093f201553ac944f37d009714632887381eda9d312af54c7e03610617bce`
+- `shared_library/windows_backend/tests.rs`: `caf6953da17851aa0610e4fafcb15b90997d9b10ba8609c09aca566775baf414`
 - `crates/tkernel/Cargo.toml`: `1e3bb49bd7104209041bffc9ad419edf888b8766d03bd31b014971d23b4d904c`
 
-Validation used Rust 1.98.1. `cargo test -p rustycad-tkernel` aggregated 2,748
-passes across 161 result groups with zero failures or ignored tests. The seven
+Validation used Rust 1.98.1. `cargo test -p rustycad-tkernel` aggregated 2,757
+passes across 162 result groups with zero failures or ignored tests. The ten
 Windows fake tests also passed directly. Host strict Clippy and Windows GNU
-`cargo check` plus strict Clippy passed. Commands:
+`cargo check` plus strict Clippy passed. Raw logs and a source-bound receipt are
+stored under `porting/evidence/tkernel-osd-shlib-windows/`. Commands:
 
 ```sh
 cargo test -p rustycad-tkernel
@@ -46,10 +48,11 @@ cargo clippy -p rustycad-tkernel --target x86_64-pc-windows-gnu --lib -- -D warn
 OCCT's alternate `OCCT_UWP` loader branch (`LoadPackagedLibrary`) is not
 implemented or cross-compiled here.
 
-Two Windows details remain outside exact parity. Native error formatting uses
-static buffers and leaves old text in place when `FormatMessageW` or UTF-8
-conversion fails; the Rust adapter returns an empty byte vector on those
-failures. Native `Destroy` leaves its name pointer dangling and `DlClose`
-retains its handle value; Rust avoids dangling memory and tracks the closed
-state. These differences and the missing native Windows runtime evidence keep
-the affected ledger rows partial.
+The later error-buffer follow-up stores the 1024-wide-unit and 1024-byte output
+buffers behind a mutex. Formatting and conversion run against temporary copies,
+so failed calls preserve the same preceding contents as the native static
+buffers. Named fake tests cover successive success/failure calls and buffer
+capacity boundaries. Native `Destroy` still leaves its name pointer dangling
+and `DlClose` retains its handle value; Rust avoids dangling memory and tracks
+the closed state. Windows runtime evidence is still unavailable, and UWP remains
+unimplemented, so the affected ledger rows stay partial.
