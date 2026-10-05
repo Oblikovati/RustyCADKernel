@@ -1,0 +1,109 @@
+{
+  "scope": "Correct exact C++ compiler selectors for two existing base-list cursor equality mappings; no implementation or original test declaration changes.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "capture_source_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b",
+  "rust_binding": {
+    "declaration_sha256": "140febe47029a763170853957761442618954f80edc6c7b49546ff8694e75058",
+    "impl_context": {
+      "for": {
+        "resolved_path": {
+          "args": null,
+          "path": "ListCursor",
+          "resolved_item_path": "rustycad_tkernel::ncollection::list::ListCursor"
+        }
+      },
+      "generics": {
+        "params": [],
+        "where_predicates": []
+      },
+      "trait": {
+        "args": null,
+        "path": "PartialEq",
+        "resolved_item_path": "core::cmp::PartialEq"
+      }
+    },
+    "kind": "function",
+    "path": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
+    "signature": {
+      "default_unstable": null,
+      "generics": {
+        "params": [],
+        "where_predicates": []
+      },
+      "has_body": true,
+      "header": {
+        "abi": "Rust",
+        "is_async": false,
+        "is_const": false,
+        "is_unsafe": false
+      },
+      "sig": {
+        "inputs": [
+          [
+            "self",
+            {
+              "borrowed_ref": {
+                "is_mutable": false,
+                "lifetime": null,
+                "type": {
+                  "generic": "Self"
+                }
+              }
+            }
+          ],
+          [
+            "other",
+            {
+              "borrowed_ref": {
+                "is_mutable": false,
+                "lifetime": null,
+                "type": {
+                  "generic": "Self"
+                }
+              }
+            }
+          ]
+        ],
+        "is_c_variadic": false,
+        "output": {
+          "primitive": "bool"
+        }
+      }
+    },
+    "source_file": "crates/tkernel/src/ncollection/list.rs",
+    "source_sha256": "245661ec3159866bbb32c64bf546f1d6ade153a6485ee277b4db0d4c2753f018",
+    "source_status": null
+  },
+  "native_contract": "Iterator equality compares myCurrent only; IsEqual delegates to operator==. ListCursor derived equality compares its sole address field.",
+  "native_source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+  "changes": [
+    {
+      "old": "NCollection_BaseList::Iterator::operator==(const Iterator&) const",
+      "new": "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept",
+      "cpp_id": "1ea4eb28cc74bffb0498a53af80854ee310c5f008b3d805650d3bf8e8881a7e5"
+    },
+    {
+      "old": "NCollection_BaseList::Iterator::IsEqual(const Iterator&) const",
+      "new": "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept",
+      "cpp_id": "d07c339f7869fe0440be0d3330a93aad911e7d0a71e9bc9092b8c854401c2e09"
+    }
+  ],
+  "legacy_declaration_delta": 0,
+  "validation": [
+    {
+      "stage": "red",
+      "exit_code": 1,
+      "log": "porting/audits/base-list-selector-red.log.gz",
+      "log_sha256": "bb0c8692ea29e7b9c1e80290bb6964172f15669bf3b1d103c48f3de6ccbb9d60",
+      "uncompressed_log_sha256": "c611dc08dbc053060a574721edbc26fda8126a911841436e53c3d7fe0cfc866f"
+    },
+    {
+      "stage": "green",
+      "exit_code": 0,
+      "log": "porting/audits/base-list-selector-green.log.gz",
+      "log_sha256": "666acb82f79cb04142ddb6ce5203c4c071049aee44c0beba273f30e3617e1119",
+      "uncompressed_log_sha256": "db328c0f5398be5c9be45b726b2c4cc8ae30a17f85facab36dab5a073fef8869"
+    }
+  ],
+  "native_source_sha256": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43"
+}

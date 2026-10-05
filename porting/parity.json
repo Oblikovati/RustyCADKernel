@@ -72316,7 +72316,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::operator==(const Iterator&) const",
+      "upstream_id": "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
@@ -72324,7 +72324,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
