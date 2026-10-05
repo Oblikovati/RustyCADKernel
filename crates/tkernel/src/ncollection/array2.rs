@@ -51,19 +51,19 @@ impl<'a, T: Default> Array2<'a, T> {
 }
 
 impl<'a, T> Array2<'a, T> {
-    /// Borrows exactly the requested rectangle; `Array2::from_buffer(&mut [1,2],1,2)?`.
+    /// Borrows the required prefix of a row-major buffer; `Array2::from_buffer(&mut [1,2,3],1,2)?`.
     pub fn from_buffer(buffer: &'a mut [T], rows: usize, cols: usize) -> Result<Self, ArrayError> {
         let length = rows
             .checked_mul(cols)
             .expect("array dimensions overflow usize");
-        if buffer.len() != length {
+        if buffer.len() < length {
             return Err(ArrayError::DimensionMismatch {
                 expected: length,
                 actual: buffer.len(),
             });
         }
         Ok(Self {
-            elements: Array1::from_slice(buffer),
+            elements: Array1::from_slice(&mut buffer[..length]),
             row_lower: 0,
             col_lower: 0,
             rows,

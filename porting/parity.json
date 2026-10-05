@@ -69403,7 +69403,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::from_buffer",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; a non-owning zero-based view of a mutable row-major slice whose length must equal rows*cols."
+      "notes": "Non-owning zero-based row-major view over the required prefix of a mutable slice. Native records only pointer and rows\u00d7columns; Rust rejects a short slice safely, accepts extra capacity, and leaves its suffix untouched. Supplemental native/Rust probe: porting/audits/ncollection-array2-buffer-prefix.json."
     },
     {
       "upstream_id": "NCollection_Array2::Size() const noexcept",
@@ -69498,8 +69498,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+      "status": "partial",
+      "notes": "Fills elements in storage order through Array1::init_ref; custom-element assignment count and row-major coverage are probed in porting/audits/ncollection-array2-buffer-prefix.json. Partial: Rust read-only shared views detach on mutation, and Rust init does not model native self/source aliasing."
     },
     {
       "upstream_id": "NCollection_Array2::First() const noexcept",

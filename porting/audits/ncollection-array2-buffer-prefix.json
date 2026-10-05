@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "objective": "Match the safe mutable Array2 slice constructor to the native row-major pointer-prefix contract and retain explicit partial coverage for Init.",
+  "source_revision": {
+    "occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "rust_base": "b5920724de6d26e7f189128b289692ed6233e91e",
+    "array1_init_dependency": "391c1a1d"
+  },
+  "native_behavior": {
+    "buffer_constructor": "NCollection_Array2(pointer, rows, cols) stores a non-owning row-major pointer view of exactly rows*cols elements; pointer constructor has no backing-buffer length and therefore ignores later storage.",
+    "init": "NCollection_Array2::Init(const_reference) delegates to Array1::Init and assigns the source value to each flat slot in order.",
+    "limits": "Rust requires a real mutable slice and returns DimensionMismatch when shorter than rows*cols; native invalid/null/undersized pointers are not modeled. Surplus capacity is valid and untouched. Rust shared read-only views detach on mutation; native pointer alias/self-source edge cases are not claimed.",
+    "header_hashes": {
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+    }
+  },
+  "compiler_bindings": {
+    "inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "test": "tools/tests/test_ncollection_array2_prefix_binding.py resolves selectors against the pinned declaration inventory and parity target.",
+    "rows": [
+      {
+        "selector": "NCollection_Array2(NCollection_Array2::pointer,const size_t,const size_t)",
+        "id": "702822f81a31e600b7883b9bbc5679ad680a647e13b73388e547b56df0b4d8fd",
+        "rust_item": "rustycad_tkernel::ncollection::Array2::from_buffer"
+      },
+      {
+        "selector": "NCollection_Array2::Init(NCollection_Array2::const_reference)",
+        "id": "aa6064b6be6ecf62190be44bb2e418f1912f1c57bfd9cf64be05d1bb7e7314a3",
+        "rust_item": "rustycad_tkernel::ncollection::Array2::init",
+        "status": "partial"
+      }
+    ]
+  },
+  "native_probe": {
+    "source": "tools/oracle/ncollection_array2_buffer_prefix.cxx",
+    "source_sha256": "a859f2bf1f9c8cda8bd586531dedc4e2ca85b5d7d63c375549ceb0b2aae716e1",
+    "compiler": "g++ 13.3.0",
+    "profile": "Linux x86-64",
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/occt-build/include/opencascade -I<all 20 subdirectories of OCCT/src/FoundationClasses/TKernel> tools/oracle/ncollection_array2_buffer_prefix.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -lTKernel -o /tmp/ncollection_array2_buffer_prefix",
+    "binary_sha256": "1f5619152eb244d6373e2304b5e2e01a6dab5ddfa026b454249a565ca69171ad",
+    "linked_tkernel_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "output": "porting/runtime-evidence/ncollection-array2-buffer-prefix-native.out",
+    "output_sha256": "c03217bbae8ef30c3f8a4b774a353326e20dd93be0d13d965a3c5a4cc833e326",
+    "expected": "crates/tkernel/tests/fixtures/ncollection_array2_buffer_prefix.expected",
+    "expected_sha256": "c03217bbae8ef30c3f8a4b774a353326e20dd93be0d13d965a3c5a4cc833e326"
+  },
+  "rust_probe": {
+    "test": "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs",
+    "test_sha256": "c3cf1133e3fe649a0be6884f114d79e6a015ad6f68fc5894a268f5de3bca012f",
+    "implementation": "crates/tkernel/src/ncollection/array2.rs",
+    "implementation_sha256": "343177a190c956223891d1c662f249da954da7227a7df316846935a12ce1ead7",
+    "array1_init_dependency_sha256": "0648f5d92c5c8c83a8c14394c44ad2f54262ff9ced707fe41453ac89aed0670a",
+    "assertions": "The four-cell fill invokes clone_from four times, updates only the 2x2 prefix, and preserves the two unused tail values."
+  },
+  "parity_json_sha256": "5bda633dd6000d3b0bbb7878154527fe307e5e7860f268d87c3a9b30575d5793",
+  "selector_test_sha256": "ac15d19397676543776d4ce237140e015f1e1f7e4edb38271796ac3160963e62",
+  "verification": {
+    "full_tkernel": "cargo test -p rustycad-tkernel: 2842 passed, 0 failed, 0 ignored across 189 test-result groups.",
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed.",
+    "selector_test": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_ncollection_array2_prefix_binding.py: 1 passed.",
+    "logs": {
+      "rust_tests": {
+        "path": "porting/runtime-evidence/ncollection-array2-full-tkernel-tests.log.gz",
+        "sha256": "8a3da292098c986c4289e5c8c8701c77ba677512f81fcf72ae733fc8937e1640"
+      },
+      "clippy": {
+        "path": "porting/runtime-evidence/ncollection-array2-tkernel-clippy.log.gz",
+        "sha256": "2b47fffe524463d4ff18dcc7854a5a99eb9e3b3c75347efd7b4b7f7ae0597d5f"
+      },
+      "selector_test": {
+        "path": "porting/runtime-evidence/ncollection-array2-selector-tests.log.gz",
+        "sha256": "009efcbf642dc2a943f2395a281aea160024d2d43b907382dc99213fd53352d3"
+      }
+    }
+  }
+}
