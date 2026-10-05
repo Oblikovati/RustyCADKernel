@@ -107,10 +107,8 @@ class FailureAssignmentBindingTest(unittest.TestCase):
             )
             self.assertEqual(by_selector[selector]["status"], parity_status)
 
-    def test_generated_byte_constructors_bind_exact_declarations(self) -> None:
-        receipt = json.loads(
-            (ROOT / "porting/audits/exception-byte-constructors.json").read_text()
-        )
+    def _assert_generated_constructor_bindings(self, audit_name: str) -> None:
+        receipt = json.loads((ROOT / "porting/audits" / audit_name).read_text())
         rows = json.loads((ROOT / "porting/parity.json").read_text())["api"]
         by_selector = {row["upstream_id"]: row for row in rows}
         self.assertEqual(len(receipt["bindings"]), 38)
@@ -121,3 +119,9 @@ class FailureAssignmentBindingTest(unittest.TestCase):
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
             self.assertEqual(by_selector[selector]["rust_item"], binding["rust_item"])
             self.assertEqual(by_selector[selector]["status"], "implemented")
+
+    def test_generated_byte_constructors_bind_exact_declarations(self) -> None:
+        self._assert_generated_constructor_bindings("exception-byte-constructors.json")
+
+    def test_generated_stack_constructors_bind_exact_declarations(self) -> None:
+        self._assert_generated_constructor_bindings("exception-stack-constructors.json")

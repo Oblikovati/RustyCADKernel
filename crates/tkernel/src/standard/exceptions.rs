@@ -28,6 +28,15 @@ macro_rules! define_standard_exceptions {
                 }
             )*
         }
+        /// Constructors with explicit byte messages and stack traces.
+        pub mod exception_stacks {
+            $(
+                #[doc = concat!("Constructs `", $name, "` with explicit stack bytes; `", stringify!($function), "(b\"message\", b\"stack\")`.")]
+                pub fn $function(message: &[u8], stack: &[u8]) -> $crate::standard::Failure {
+                    $crate::standard::Failure::with_type_bytes($name, message, stack)
+                }
+            )*
+        }
         /// Every class this module declares, with its direct base class.
         pub(crate) const $table: &[(&str, &str)] = &[$(($name, $parent)),*];
     };

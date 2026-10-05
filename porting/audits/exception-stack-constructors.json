@@ -1,0 +1,344 @@
+{
+  "purpose": "Explicit message and stack byte constructors for 38 TKernel DEFINE_STANDARD_EXCEPTION declarations.",
+  "rust_base_revision": "a889cc079159842c04dcb7bbfa1b26ed8397697e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "Standard_AbortiveTransaction::Standard_AbortiveTransaction(const char*,const char*)",
+      "cpp_id": "04f5d927cb8e371a3ff15bbd18880f06c2d8deb1cc1aabedba9c0f2daac8b990",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::abortive_transaction",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_AbortiveTransaction.hxx",
+      "cpp_source_sha256": "6a181a02f3c55ee35ae0751597916dcbceb386c2945419b1bc7231595b901963"
+    },
+    {
+      "selector": "Standard_ConstructionError::Standard_ConstructionError(const char*,const char*)",
+      "cpp_id": "173483b5c992c06fb706867129da8f331ffc0fe022e9d8fca90ba16e7f7c79e6",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::construction_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_ConstructionError.hxx",
+      "cpp_source_sha256": "64b7c18fd72b5a89aef2dcc77420154e0d5a5c8c8f68edbfc4e17dafc279a401"
+    },
+    {
+      "selector": "Standard_DimensionError::Standard_DimensionError(const char*,const char*)",
+      "cpp_id": "1be55f5a82a8150466f818299de675c7f5ffd31104d33aa9df5cda1137494398",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::dimension_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionError.hxx",
+      "cpp_source_sha256": "f537ba259040980b03fc50df4959afc8366a9aef89532a158efc75b5ba2a0ff6"
+    },
+    {
+      "selector": "Standard_DimensionMismatch::Standard_DimensionMismatch(const char*,const char*)",
+      "cpp_id": "470631ef62ac3c350699bb9b27475b19c89d56f83c2f6ddde9f793c9652880fd",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::dimension_mismatch",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionMismatch.hxx",
+      "cpp_source_sha256": "cd79a2a719301852e7edd2bea130e617145c3a0f43dce64fca3463c17aeba763"
+    },
+    {
+      "selector": "Standard_DivideByZero::Standard_DivideByZero(const char*,const char*)",
+      "cpp_id": "fa9f53f925b697b6f05cf7a7900714b14767bcbaae5ce954ea578fb8e3544abb",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::divide_by_zero",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_DivideByZero.hxx",
+      "cpp_source_sha256": "843c726e598605f2a82a6be3c520fbd05eec913021398602eee798d6c6dda3f0"
+    },
+    {
+      "selector": "Standard_DomainError::Standard_DomainError(const char*,const char*)",
+      "cpp_id": "e78e1e26c1a5fbda29be5d25129155a7850ca4d280ac34598b67316623770c78",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::domain_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
+      "cpp_source_sha256": "84587c36e62e644e1a5f6cc431eaefc3ad5275aecf5bc4178504967f30917164"
+    },
+    {
+      "selector": "Standard_ImmutableObject::Standard_ImmutableObject(const char*,const char*)",
+      "cpp_id": "399b0409ec9d4340bebcc8a0f0d603aad2a7d829f008a7124c60a1a4c99fec52",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::immutable_object",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_ImmutableObject.hxx",
+      "cpp_source_sha256": "b3e7cfc6f5ab0865811a65d063e10a44adc85aabbf722a1f4f23bcdf1d6af692"
+    },
+    {
+      "selector": "Standard_LicenseError::Standard_LicenseError(const char*,const char*)",
+      "cpp_id": "f86f29e569320706529e44ec42921e176fb7dd00715d7f31262ae7bf6632709c",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::license_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseError.hxx",
+      "cpp_source_sha256": "310097d770758ee261ee675ff19058929b5e3987ef4e47b8221c098e6aa88a27"
+    },
+    {
+      "selector": "Standard_LicenseNotFound::Standard_LicenseNotFound(const char*,const char*)",
+      "cpp_id": "58d1c29cf2912245af0bc8c7c40d55796040b69cfcdeea9b0cd2f822f4c94fd3",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::license_not_found",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseNotFound.hxx",
+      "cpp_source_sha256": "704a0a6df50e34cecda4bf07207e8f5b2b3c870ff97eb3487b0236552b960847"
+    },
+    {
+      "selector": "Standard_MultiplyDefined::Standard_MultiplyDefined(const char*,const char*)",
+      "cpp_id": "5d603398e31d2618829b39f09d3100dce85d8e7b919d29f6ed350cf124ee1c02",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::multiply_defined",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_MultiplyDefined.hxx",
+      "cpp_source_sha256": "ace7a8f62de0d98d43a609f3a52b449b7ca71817804bbedb653dc0f397941fae"
+    },
+    {
+      "selector": "Standard_NegativeValue::Standard_NegativeValue(const char*,const char*)",
+      "cpp_id": "a00135171115b38a225022022ec3358b1dfd4c316aa52ebb689a67590146eb39",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::negative_value",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NegativeValue.hxx",
+      "cpp_source_sha256": "3e14e55a86b332e4511e43ce21222630a45b9158100b0e6007ce6bcfad5fc119"
+    },
+    {
+      "selector": "Standard_NoMoreObject::Standard_NoMoreObject(const char*,const char*)",
+      "cpp_id": "035fb2e0a9ce0d087df17771330ca4d7a6e2e9047f81378180921e1141be7b6b",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::no_more_object",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NoMoreObject.hxx",
+      "cpp_source_sha256": "9cfdccd6f4434925e268042f2943ee5f3375fc38fe90639acec13534bae497ef"
+    },
+    {
+      "selector": "Standard_NoSuchObject::Standard_NoSuchObject(const char*,const char*)",
+      "cpp_id": "231686e155f07632c6d0719d043b387e92c31840f618578fa28ee294dc96ae9b",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::no_such_object",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NoSuchObject.hxx",
+      "cpp_source_sha256": "c2b7dae2dd3313939ca1638f0744302a2ad713e31995a505aec5e702961f26a0"
+    },
+    {
+      "selector": "Standard_NotImplemented::Standard_NotImplemented(const char*,const char*)",
+      "cpp_id": "33c79b42658448503d88ef4b30989a30857656b34de7862358041e6259c77544",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::not_implemented",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NotImplemented.hxx",
+      "cpp_source_sha256": "677cc3d23f6411bb644d7e4389853fa2838aeed6b4c33857bb2576afad787a53"
+    },
+    {
+      "selector": "Standard_NullObject::Standard_NullObject(const char*,const char*)",
+      "cpp_id": "ecea38e9f935e554807a2c79f3e76770fc1ea171e22614985fa23b5294b412a6",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::null_object",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NullObject.hxx",
+      "cpp_source_sha256": "0839868840c1725bd04fc73776c9425b3ca040cf56113c9c8c2646ed78721365"
+    },
+    {
+      "selector": "Standard_NullValue::Standard_NullValue(const char*,const char*)",
+      "cpp_id": "eaf66bd2320fe0f3e5bd3027b766e603832b9b18d3d68df9c4e19a2b7cec2653",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::null_value",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NullValue.hxx",
+      "cpp_source_sha256": "d7124183f9559c2e2ec922c0c69099b8813db5c3ccd5ad55f7f25de6dfe4aa17"
+    },
+    {
+      "selector": "Standard_NumericError::Standard_NumericError(const char*,const char*)",
+      "cpp_id": "52292324ada29851e133e49efb3e118c3622fe1450d6a5aa9bf853774a892341",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::numeric_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_NumericError.hxx",
+      "cpp_source_sha256": "1d7edad18ea44a9e87350fe3b2c5542e3d95f11b219604f20a2ef2c072788a23"
+    },
+    {
+      "selector": "Standard_OutOfRange::Standard_OutOfRange(const char*,const char*)",
+      "cpp_id": "9a820896f555d34473522b0703b7e36aabe526284a4eeea92f7bb42e53484ee9",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::out_of_range",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfRange.hxx",
+      "cpp_source_sha256": "74a442241944fe3e5a16ec75d7b10b972796eadbaf8b3ecc364a8f96541f0cd9"
+    },
+    {
+      "selector": "Standard_Overflow::Standard_Overflow(const char*,const char*)",
+      "cpp_id": "73145f1c3199eea0a8f306e3b8861cd401f653dc6151c377e9b9dc7930bcfce8",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::overflow",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_Overflow.hxx",
+      "cpp_source_sha256": "1fc4cc130b67ee38aed729b4e9a0c9c113a678207c9eb1f8848ed8ccfd1f2923"
+    },
+    {
+      "selector": "Standard_ProgramError::Standard_ProgramError(const char*,const char*)",
+      "cpp_id": "e3cc0df844fc3a8d1d054378b91fce98bd47ec50f1692c014400cba82b4e9722",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::program_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_ProgramError.hxx",
+      "cpp_source_sha256": "4e92f1ed751959341e82df93aedc4454d32d59e831fb5eb6ff7ded80d3d5ab44"
+    },
+    {
+      "selector": "Standard_RangeError::Standard_RangeError(const char*,const char*)",
+      "cpp_id": "4db7c979c267653e03668a1c6598ec9b900bb17146449d0aca7582305721aa68",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::range_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_RangeError.hxx",
+      "cpp_source_sha256": "6da79bf74b303ce7cb2f05f14528a609242cda046ef812717bb59d9ad89a9ee2"
+    },
+    {
+      "selector": "Standard_TypeMismatch::Standard_TypeMismatch(const char*,const char*)",
+      "cpp_id": "869a4fd2504774743411047c0f52b082b04c97c03272e07a961cc409b18bdf4c",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::type_mismatch",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_TypeMismatch.hxx",
+      "cpp_source_sha256": "829306be1f07053fb489ceba7798e4f5acd0a6488dfe8fada6a4b62d28be5e60"
+    },
+    {
+      "selector": "Standard_Underflow::Standard_Underflow(const char*,const char*)",
+      "cpp_id": "78d9e8f14251bc95210dd4a4f2f93f34db6ba4c6d29e61b521f707eb75d255ea",
+      "rust_item": "rustycad_tkernel::standard::exceptions::exception_stacks::underflow",
+      "cpp_source": "src/FoundationClasses/TKernel/Standard/Standard_Underflow.hxx",
+      "cpp_source_sha256": "17bbadf550b6a2c281e6f24f3d233837843194327504893ed6f321ac2f9c8158"
+    },
+    {
+      "selector": "StdFail_InfiniteSolutions::StdFail_InfiniteSolutions(const char*,const char*)",
+      "cpp_id": "9dbbf98f80e2433d1bc6c1c99fe0091866b3cb374f26ede2432848a8a2b140a4",
+      "rust_item": "rustycad_tkernel::std_fail::exception_stacks::infinite_solutions",
+      "cpp_source": "src/FoundationClasses/TKernel/StdFail/StdFail_InfiniteSolutions.hxx",
+      "cpp_source_sha256": "131a5ffb6aa65b8795e7488879ce1a5a0b589e25c0b36686a1bdb958e1c2cdb6"
+    },
+    {
+      "selector": "StdFail_NotDone::StdFail_NotDone(const char*,const char*)",
+      "cpp_id": "3ce0c5fe9640bf827dbae931ecbebbccd7742dbd75a8a3f5c266da8ecdec596a",
+      "rust_item": "rustycad_tkernel::std_fail::exception_stacks::not_done",
+      "cpp_source": "src/FoundationClasses/TKernel/StdFail/StdFail_NotDone.hxx",
+      "cpp_source_sha256": "0c10791a31fd933d9c7a704906e5569e484f3a6ce7bbc2eaa0d72c86298207ae"
+    },
+    {
+      "selector": "StdFail_Undefined::StdFail_Undefined(const char*,const char*)",
+      "cpp_id": "3a87c45df1cdf176a5bda13c9f06545b771289394929b53b643f4688cc4143be",
+      "rust_item": "rustycad_tkernel::std_fail::exception_stacks::undefined",
+      "cpp_source": "src/FoundationClasses/TKernel/StdFail/StdFail_Undefined.hxx",
+      "cpp_source_sha256": "85cf6663dd58dcaaad56ba6fddca7d137f36d88fb1fbf6b989a74490a83e0f3a"
+    },
+    {
+      "selector": "StdFail_UndefinedDerivative::StdFail_UndefinedDerivative(const char*,const char*)",
+      "cpp_id": "a4c0f9da50e795c7e5b5e772f00fe1ea89ed609ae1e51972ff2c107242685b81",
+      "rust_item": "rustycad_tkernel::std_fail::exception_stacks::undefined_derivative",
+      "cpp_source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedDerivative.hxx",
+      "cpp_source_sha256": "c0e7fe13f0ad33cae403359d672c10c3108e946c8603a5d97cfa153757f58ba8"
+    },
+    {
+      "selector": "StdFail_UndefinedValue::StdFail_UndefinedValue(const char*,const char*)",
+      "cpp_id": "e951bf6e6911218371519a42ed791f6970f25a31fa135421fae41a148b913287",
+      "rust_item": "rustycad_tkernel::std_fail::exception_stacks::undefined_value",
+      "cpp_source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedValue.hxx",
+      "cpp_source_sha256": "d6ccde81bd620ed8f82dc0aea948350dba4df59ddb2ad7363ea2ba560292089d"
+    },
+    {
+      "selector": "Plugin_Failure::Plugin_Failure(const char*,const char*)",
+      "cpp_id": "e9d2354888c08d53c04d3d581e232d50ed4c7fb38be0a185c727685876aff3be",
+      "rust_item": "rustycad_tkernel::plugin::exception_stacks::failure",
+      "cpp_source": "src/FoundationClasses/TKernel/Plugin/Plugin_Failure.hxx",
+      "cpp_source_sha256": "74c46b244f31336259c8832eac1fc2b4d604b14c9c4110cb367c30d9408164fa"
+    },
+    {
+      "selector": "Storage_StreamExtCharParityError::Storage_StreamExtCharParityError(const char*,const char*)",
+      "cpp_id": "35b200d57aef371773192ae9f5904e1b0f141fa9e1ba1d75b8226a33228424ca",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_ext_char_parity_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamExtCharParityError.hxx",
+      "cpp_source_sha256": "183062138abd842ce41bb05a66f763ba846758272b3866015826d9ac3d142310"
+    },
+    {
+      "selector": "Storage_StreamFormatError::Storage_StreamFormatError(const char*,const char*)",
+      "cpp_id": "ef9d62abf94fecf99e04791e9d58b45b637cc490375a84868209dcd4c1d6f041",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_format_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamFormatError.hxx",
+      "cpp_source_sha256": "a5283d762248bfcec3bb3b91f89b031242f513d29e08f62f8dc2660be58baee4"
+    },
+    {
+      "selector": "Storage_StreamModeError::Storage_StreamModeError(const char*,const char*)",
+      "cpp_id": "43639d6d6305930af1ca155fba5f95cd0b36505c7245dde480419b249199610a",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_mode_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamModeError.hxx",
+      "cpp_source_sha256": "75f2757fa707d3086d29f8b9193813bef004362edc8a1ed40bce72fdeb949de9"
+    },
+    {
+      "selector": "Storage_StreamReadError::Storage_StreamReadError(const char*,const char*)",
+      "cpp_id": "0f1b3997fe282de1711b9e8a544b674540c12aed4834553a094724cb269e7c4d",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_read_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamReadError.hxx",
+      "cpp_source_sha256": "84158b09aa8d980aee71c5fc38175305d550cc0732ce8b970433c056a66f0839"
+    },
+    {
+      "selector": "Storage_StreamTypeMismatchError::Storage_StreamTypeMismatchError(const char*,const char*)",
+      "cpp_id": "b3e0d22ee19ba78e0ba5dcca5e5f7d71354d3f6790f84955f4e13450bff3e2b4",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_type_mismatch_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamTypeMismatchError.hxx",
+      "cpp_source_sha256": "519299f99c3574c6a7ae0b5dffb03562bd8ba827dee83cb646beaf5ca0ca680f"
+    },
+    {
+      "selector": "Storage_StreamUnknownTypeError::Storage_StreamUnknownTypeError(const char*,const char*)",
+      "cpp_id": "a434416954e22ad83ca85072bbef1ddc2ba3331b1b4ca379c6d40200a5bbecfe",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_unknown_type_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamUnknownTypeError.hxx",
+      "cpp_source_sha256": "3b3c46a06541d63e0a0a70749de8ae6794c236f3af88dfc38306f72b22970396"
+    },
+    {
+      "selector": "Storage_StreamWriteError::Storage_StreamWriteError(const char*,const char*)",
+      "cpp_id": "0218a2cfdfde80df8a34ecd0cd0bf0a189213a99fcd9d7fbdf4abf90dee574a6",
+      "rust_item": "rustycad_tkernel::storage::exception_stacks::stream_write_error",
+      "cpp_source": "src/FoundationClasses/TKernel/Storage/Storage_StreamWriteError.hxx",
+      "cpp_source_sha256": "dba782a82246cfed76bca1107c2793be7b1cbbf0e0b1651bdf87d96663bc5e6f"
+    },
+    {
+      "selector": "Units_NoSuchType::Units_NoSuchType(const char*,const char*)",
+      "cpp_id": "5176a5bef5ab4f95b78ca554327bbbf6d59a121db19205e30781a0aa581286ca",
+      "rust_item": "rustycad_tkernel::units::exception_stacks::no_such_type",
+      "cpp_source": "src/FoundationClasses/TKernel/Units/Units_NoSuchType.hxx",
+      "cpp_source_sha256": "6a107956151e8ba09cf868f88a9f06e6f3edc26c1c939c9ed04c528fab321550"
+    },
+    {
+      "selector": "Units_NoSuchUnit::Units_NoSuchUnit(const char*,const char*)",
+      "cpp_id": "b679fd4e17b35e78ca075e3ffbe2b698b0bf2550802b7edd1412505dd0796d48",
+      "rust_item": "rustycad_tkernel::units::exception_stacks::no_such_unit",
+      "cpp_source": "src/FoundationClasses/TKernel/Units/Units_NoSuchUnit.hxx",
+      "cpp_source_sha256": "19edd44cd249147a969a2d426c7fa73800edf66e365a18b040596e60430713d7"
+    }
+  ],
+  "rustdoc_json_sha256": "1ae852af42385588c53e4ca2431a77db84f6f68b95b5d3b497013a92639b515d",
+  "legacy_declaration_delta": 0,
+  "status": "implemented",
+  "notes": [
+    "Named exception_stacks functions model the native two-argument constructor; existing string and one-argument byte constructors remain available.",
+    "Native probe verifies byte message, byte stack and null inputs for every generated class; Rust supplemental tests also check type and parent membership.",
+    "Both input slices stop at their first NUL. Empty slices represent the native null/empty inputs; the explicit stack overload does not capture the default stack."
+  ],
+  "native": {
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": [
+      "-std=c++17",
+      "-O2"
+    ],
+    "source": "tools/oracle/tkernel_exception_stack_constructors.cxx",
+    "expected": "tools/oracle/tkernel_exception_stack_constructors.expected",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "binary_sha256": "a800196d139961caa2721c8c8c0a146d0666f7d61f2589bbc23d75c52d48c60d",
+    "compile_run_diff_exit_code": 0,
+    "output": "Standard_AbortiveTransaction ff6d fe73 empty=1\nStandard_ConstructionError ff6d fe73 empty=1\nStandard_DimensionError ff6d fe73 empty=1\nStandard_DimensionMismatch ff6d fe73 empty=1\nStandard_DivideByZero ff6d fe73 empty=1\nStandard_DomainError ff6d fe73 empty=1\nStandard_ImmutableObject ff6d fe73 empty=1\nStandard_LicenseError ff6d fe73 empty=1\nStandard_LicenseNotFound ff6d fe73 empty=1\nStandard_MultiplyDefined ff6d fe73 empty=1\nStandard_NegativeValue ff6d fe73 empty=1\nStandard_NoMoreObject ff6d fe73 empty=1\nStandard_NoSuchObject ff6d fe73 empty=1\nStandard_NotImplemented ff6d fe73 empty=1\nStandard_NullObject ff6d fe73 empty=1\nStandard_NullValue ff6d fe73 empty=1\nStandard_NumericError ff6d fe73 empty=1\nStandard_OutOfRange ff6d fe73 empty=1\nStandard_Overflow ff6d fe73 empty=1\nStandard_ProgramError ff6d fe73 empty=1\nStandard_RangeError ff6d fe73 empty=1\nStandard_TypeMismatch ff6d fe73 empty=1\nStandard_Underflow ff6d fe73 empty=1\nStdFail_InfiniteSolutions ff6d fe73 empty=1\nStdFail_NotDone ff6d fe73 empty=1\nStdFail_Undefined ff6d fe73 empty=1\nStdFail_UndefinedDerivative ff6d fe73 empty=1\nStdFail_UndefinedValue ff6d fe73 empty=1\nPlugin_Failure ff6d fe73 empty=1\nStorage_StreamExtCharParityError ff6d fe73 empty=1\nStorage_StreamFormatError ff6d fe73 empty=1\nStorage_StreamModeError ff6d fe73 empty=1\nStorage_StreamReadError ff6d fe73 empty=1\nStorage_StreamTypeMismatchError ff6d fe73 empty=1\nStorage_StreamUnknownTypeError ff6d fe73 empty=1\nStorage_StreamWriteError ff6d fe73 empty=1\nUnits_NoSuchType ff6d fe73 empty=1\nUnits_NoSuchUnit ff6d fe73 empty=1\n",
+    "source_sha256": "6e95d7d5abae79155b95a7c64aebec4841e56d643557f0f4114f65d227263213",
+    "expected_sha256": "1b11e076a80fdca05a013e6c23699f5d9b2cf1d0bce31b28f356d41d6bcf857b"
+  },
+  "validation": {
+    "red": {
+      "exit_code": 101,
+      "log": "porting/runtime-evidence/exception-stack-red.log.gz",
+      "log_sha256": "a1aba3c227c927f2a191a9ab1107d8c9027ce36db6ea2a4333a0e042c4904c35"
+    },
+    "rustdoc": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/exception-stack-rustdoc.log.gz",
+      "log_sha256": "65c7d5ae5b348f48c846ccb054ebd8e468405e9619605d7247ef69106c81e149"
+    },
+    "package": {
+      "command": "cargo test -p rustycad-tkernel",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/exception-stack-package.log.gz",
+      "log_sha256": "06d8b66eb08c7444de876a7a349a006c17722d2e694278cfea5fda26fb794343",
+      "summary": {
+        "passed": 2976,
+        "failed": 0,
+        "ignored": 0,
+        "result_groups": 200,
+        "failed_result_groups": 0,
+        "command_exit_code": 0,
+        "command_succeeded": true
+      }
+    },
+    "clippy": {
+      "command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/exception-stack-clippy.log.gz",
+      "log_sha256": "7f8a52529e631f6dabca82f8f44f817f29b356102c4257fc56e8d0ac6a9556e9"
+    },
+    "selectors": {
+      "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_standard_failure_assignment_binding",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/exception-stack-selectors.log.gz",
+      "log_sha256": "667865515973ae3671f089797b1c3a4afd2403a657f58758414d011a49ffbeaa"
+    }
+  },
+  "compiler_bindings": {
+    "path": "porting/runtime-evidence/exception-stack-compiler-bindings.json.gz",
+    "sha256": "a541fad98302df5505edbbfb5a8033d3e0301a2b6987c7bc8c2017483efe4731"
+  },
+  "rust_sources": {
+    "crates/tkernel/src/standard/exceptions.rs": "da1f7adb547897cd14b27176c445f2b4dc64ef7ec3e448607ae6b3f23a79433d",
+    "crates/tkernel/src/storage/mod.rs": "78dab76c56ffe0665429c90bce9dbc08bc1fdabff4b15ba30cb4f198704095de",
+    "crates/tkernel/tests/standard_exception_stack_constructors.rs": "eb00f01c63cfa02791f5cd4bbcae536abca012c70048f3987dd62f26cd78a74f"
+  }
+}
