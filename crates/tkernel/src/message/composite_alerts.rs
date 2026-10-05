@@ -71,11 +71,11 @@ impl CompositeAlerts {
         true
     }
     fn merge_live_alerts(&self, gravity: Gravity, alert: &AlertHandle) -> bool {
-        let mut cursor = AlertCursor::new(self, gravity);
-        if cursor.current_alert().is_none() {
+        if !self.has_alerts(gravity) {
             return false;
         }
         let kind = alert.dynamic_type();
+        let mut cursor = AlertCursor::new(self, gravity);
         while let Some(target) = cursor.current_alert() {
             if std::ptr::eq(kind, target.dynamic_type()) && alert.merge(&target) {
                 return true;
@@ -83,6 +83,11 @@ impl CompositeAlerts {
             cursor.advance();
         }
         false
+    }
+    fn has_alerts(&self, gravity: Gravity) -> bool {
+        let lists = self.lists();
+        let list = &lists[gravity.index()];
+        !list.is_empty()
     }
     fn append_entry(&self, gravity: Gravity, alert: &AlertHandle) {
         let mut lists = self.lists();

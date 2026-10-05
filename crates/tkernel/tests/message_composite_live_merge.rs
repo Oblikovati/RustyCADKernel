@@ -13,6 +13,7 @@ use support::named_alert;
 enum AppendMoment {
     SupportsMerge,
     MergeFirst,
+    RemoveFirst,
 }
 
 struct LiveMergeAlert {
@@ -58,11 +59,30 @@ impl LiveMergeAlert {
         let target = Self::new(label, &composite, false, None, "", self.counters.clone());
         composite.add_alert(Gravity::Info, &(target as AlertHandle));
     }
+
+    fn remove_target(&self, label: &'static str) {
+        let Some(composite) = self.composite.upgrade() else {
+            return;
+        };
+        let target = composite
+            .alerts(Gravity::Info)
+            .iter()
+            .find_map(downcast_alert::<LiveMergeAlert>)
+            .filter(|alert| alert.label == label);
+        let Some(target) = target else {
+            return;
+        };
+        let target: AlertHandle = target;
+        composite.remove_alert(Gravity::Info, &target);
+    }
 }
 
 impl Alert for LiveMergeAlert {
     fn dynamic_type(&self) -> &'static RuntimeType {
         self.counters.dynamic_calls.fetch_add(1, Ordering::SeqCst);
+        if self.append_moment == Some(AppendMoment::RemoveFirst) {
+            self.remove_target("first");
+        }
         Self::static_type()
     }
 
@@ -144,4 +164,27 @@ fn empty_list_skips_incoming_dynamic_type_query() {
 
     assert!(composite.add_alert(Gravity::Info, &(incoming as AlertHandle)));
     assert_eq!(counters.dynamic_calls.load(Ordering::SeqCst), 0);
+}
+
+#[test]
+fn dynamic_type_removal_happens_before_cursor_creation() {
+    let composite = Arc::new(CompositeAlerts::new());
+    let counters = Arc::new(MergeCounters::default());
+    let first = LiveMergeAlert::new("first", &composite, false, None, "", counters.clone());
+    let second = LiveMergeAlert::new("second", &composite, false, None, "", counters.clone());
+    composite.add_alert(Gravity::Info, &(first as AlertHandle));
+    composite.add_alert(Gravity::Info, &(second as AlertHandle));
+    let incoming = LiveMergeAlert::new(
+        "incoming",
+        &composite,
+        true,
+        Some(AppendMoment::RemoveFirst),
+        "first",
+        counters.clone(),
+    );
+
+    assert!(composite.add_alert(Gravity::Info, &(incoming as AlertHandle)));
+    assert_eq!(target_labels(&composite), ["second", "incoming"]);
+    assert_eq!(*counters.events.lock().unwrap(), ["second"]);
+    assert_eq!(counters.dynamic_calls.load(Ordering::SeqCst), 2);
 }

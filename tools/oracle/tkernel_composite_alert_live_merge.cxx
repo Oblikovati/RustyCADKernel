@@ -14,17 +14,21 @@ public:
                  bool theCanMerge,
                  bool theAppendOnSupports,
                  bool theAppendOnFirstMerge,
+                 bool theRemoveFirstOnDynamicType,
                  const std::string& theSucceedOn,
                  std::vector<std::string>* theEvents,
-                 int* theDynamicCalls)
+                 int* theDynamicCalls,
+                 const occ::handle<Message_Alert>& theRemoveTarget = {})
       : myComposite(theComposite),
         myLabel(theLabel),
         myCanMerge(theCanMerge),
         myAppendOnSupports(theAppendOnSupports),
         myAppendOnFirstMerge(theAppendOnFirstMerge),
+        myRemoveFirstOnDynamicType(theRemoveFirstOnDynamicType),
         mySucceedOn(theSucceedOn),
         myEvents(theEvents),
-        myDynamicCalls(theDynamicCalls)
+        myDynamicCalls(theDynamicCalls),
+        myRemoveTarget(theRemoveTarget)
   {
   }
 
@@ -59,6 +63,8 @@ public:
   const occ::handle<Standard_Type>& DynamicType() const override
   {
     ++*myDynamicCalls;
+    if (myRemoveFirstOnDynamicType && !myRemoveTarget.IsNull())
+      myComposite->RemoveAlert(Message_Info, myRemoveTarget);
     return get_type_descriptor();
   }
 
@@ -68,6 +74,7 @@ private:
     myComposite->AddAlert(Message_Info,
                           new LiveMergeAlert(myComposite,
                                              theLabel,
+                                             false,
                                              false,
                                              false,
                                              false,
@@ -81,9 +88,11 @@ private:
   bool myCanMerge;
   bool myAppendOnSupports;
   bool myAppendOnFirstMerge;
+  bool myRemoveFirstOnDynamicType;
   std::string mySucceedOn;
   std::vector<std::string>* myEvents;
   int* myDynamicCalls;
+  occ::handle<Message_Alert> myRemoveTarget;
 };
 
 static void print_events(const std::vector<std::string>& theEvents)
@@ -99,7 +108,7 @@ static void supports_append_case()
   std::vector<std::string> anEvents;
   int aDynamicCalls = 0;
   occ::handle<LiveMergeAlert> anIncoming = new LiveMergeAlert(
-    aComposite.get(), "incoming", true, true, false, "support-target", &anEvents, &aDynamicCalls);
+    aComposite.get(), "incoming", true, true, false, false, "support-target", &anEvents, &aDynamicCalls);
   const bool isAdded = aComposite->AddAlert(Message_Info, anIncoming);
   std::cout << "supports_append:events=";
   print_events(anEvents);
@@ -114,10 +123,10 @@ static void merge_append_case()
   std::vector<std::string> anEvents;
   int aDynamicCalls = 0;
   occ::handle<LiveMergeAlert> aFirst = new LiveMergeAlert(
-    aComposite.get(), "first", false, false, false, "", &anEvents, &aDynamicCalls);
+    aComposite.get(), "first", false, false, false, false, "", &anEvents, &aDynamicCalls);
   aComposite->AddAlert(Message_Info, aFirst);
   occ::handle<LiveMergeAlert> anIncoming = new LiveMergeAlert(
-    aComposite.get(), "incoming", true, false, true, "late-target", &anEvents, &aDynamicCalls);
+    aComposite.get(), "incoming", true, false, true, false, "late-target", &anEvents, &aDynamicCalls);
   const bool isAdded = aComposite->AddAlert(Message_Info, anIncoming);
   std::cout << "merge_append:events=";
   print_events(anEvents);
@@ -132,11 +141,40 @@ static void empty_list_case()
   std::vector<std::string> anEvents;
   int aDynamicCalls = 0;
   occ::handle<LiveMergeAlert> anIncoming = new LiveMergeAlert(
-    aComposite.get(), "incoming", true, false, false, "", &anEvents, &aDynamicCalls);
+    aComposite.get(), "incoming", true, false, false, false, "", &anEvents, &aDynamicCalls);
   const bool isAdded = aComposite->AddAlert(Message_Info, anIncoming);
   std::cout << "empty_list:added=" << isAdded << ";size="
             << aComposite->Alerts(Message_Info).Size() << ";dynamic_calls=" << aDynamicCalls
             << '\n';
+}
+
+static void dynamic_type_removal_case()
+{
+  occ::handle<Message_CompositeAlerts> aComposite = new Message_CompositeAlerts;
+  std::vector<std::string> anEvents;
+  int aDynamicCalls = 0;
+  occ::handle<LiveMergeAlert> aFirst = new LiveMergeAlert(
+    aComposite.get(), "first", false, false, false, false, "", &anEvents, &aDynamicCalls);
+  occ::handle<LiveMergeAlert> aSecond = new LiveMergeAlert(
+    aComposite.get(), "second", false, false, false, false, "", &anEvents, &aDynamicCalls);
+  aComposite->AddAlert(Message_Info, aFirst);
+  aComposite->AddAlert(Message_Info, aSecond);
+  occ::handle<LiveMergeAlert> anIncoming = new LiveMergeAlert(aComposite.get(),
+                                                              "incoming",
+                                                              true,
+                                                              false,
+                                                              false,
+                                                              true,
+                                                              "first",
+                                                              &anEvents,
+                                                              &aDynamicCalls,
+                                                              aFirst);
+  const bool isAdded = aComposite->AddAlert(Message_Info, anIncoming);
+  std::cout << "dynamic_type_removal:events=";
+  print_events(anEvents);
+  std::cout << ";added=" << isAdded << ";size=" << aComposite->Alerts(Message_Info).Size()
+            << ";has_incoming=" << aComposite->HasAlert(anIncoming)
+            << ";dynamic_calls=" << aDynamicCalls << '\n';
 }
 
 int main()
@@ -144,4 +182,5 @@ int main()
   supports_append_case();
   merge_append_case();
   empty_list_case();
+  dynamic_type_removal_case();
 }
