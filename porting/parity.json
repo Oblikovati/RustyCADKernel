@@ -85267,9 +85267,9 @@
       "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded pointer adapter copies through the first NUL. Null and empty input clear the receiver, matching Copy(pointer) through its zero-length core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Copy(const TCollection_ExtendedString&)",
@@ -85291,9 +85291,9 @@
       "upstream_id": "TCollection_ExtendedString::operator=(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_c_units",
       "status": "implemented",
-      "notes": "Assignment is the named copy method. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps pointer assignment to the bounded copy adapter; embedded NUL truncates, and null/empty input clears the receiver."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Move(TCollection_ExtendedString&&)",
