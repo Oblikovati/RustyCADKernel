@@ -64,13 +64,15 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> DataMap<K, V, H> {
         false
     }
     fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> bool {
-        let copied_value = value.clone();
-        let copied_key = key.clone();
-        let entry = super::Entry {
-            key: copied_key,
-            value: copied_value,
-        };
-        self.buckets[bucket].insert(0, self.resource.allocate_value(entry));
+        let entry = self.resource.allocate_value_with(|| {
+            let copied_value = value.clone();
+            let copied_key = key.clone();
+            super::Entry {
+                key: copied_key,
+                value: copied_value,
+            }
+        });
+        self.buckets[bucket].insert(0, entry);
         self.count += 1;
         true
     }

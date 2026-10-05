@@ -10,23 +10,30 @@
   "implementation_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b",
   "implementation_source_sha256": {
     "crates/tkernel/src/ncollection/data_map.rs": "0a06d2cc070bbce27df26a4416aae1cec6972404519484a88ce0c3e43047621b",
-    "crates/tkernel/src/ncollection/data_map/operations.rs": "faac257fbeff77eaafa45ddd52b2dd13b23956f309376d9edf3c76a0e72c285d",
+    "crates/tkernel/src/ncollection/data_map/operations.rs": "c6cd1393128857cc0dda4c8ef34cbf053f6993ddf71e42776698186861298a0a",
     "crates/tkernel/tests/ncollection_data_map_bind_ref.rs": "68961c0d190843a8162c61eae88d801e68e09776a3efe59aa2f479be0dd99167",
     "tools/oracle/ncollection_data_map_bind_ref.cxx": "1e6e24963c5654320b929983077555c430fdf4510aa4b27de7826271c3d59a1e",
     "tools/oracle/ncollection_data_map_bind_ref.expected": "74d0fa047b283b984184f6b68934127eaa8a7ddbabf51730502bd3ad6fbe99af",
-    "tools/oracle/ncollection_data_map_bind_ref.md": "635506ef6e203569d9da0a7741647ec6ec9164977c4710c159d6b3420af1b600",
-    "tools/tests/test_datamap_borrowed_bind.py": "c881e613432650e0b345f9221d9f8f82930468a0cd652f488e289683616d3a95"
+    "tools/oracle/ncollection_data_map_bind_ref.md": "f19ecf548108fae5e8410516e769315887a39d2c6d5d10c841d9adb21385d3ad",
+    "tools/tests/test_datamap_borrowed_bind.py": "c881e613432650e0b345f9221d9f8f82930468a0cd652f488e289683616d3a95",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "b2c6e7b8f502d1e85ec808f19f48661dd9d0b95105fef2b438e290627f7ea715",
+    "crates/tkernel/src/ncollection/data_map/queries.rs": "379dd38590c542603a177d7e1249d3b1a557e6d8e81a327f7eee91373deb1510",
+    "crates/tkernel/tests/ncollection_data_map_bind_ref_allocation.rs": "9c349d1322ce9d1aa2afe6078944d8338b749d3b34e123efaed0cb4219238a92",
+    "tools/oracle/ncollection_data_map_bind_ref_allocation.cxx": "f44ae93b96f308983995606ba3ab9d13a0b5585977cfc14784b0300ef14683ce",
+    "tools/oracle/ncollection_data_map_bind_ref_allocation.expected": "6ec7cdbfcd8cfb324c9b8b4c8e6d6f46a629b4913106d8c18641e5bd75392b16",
+    "tools/oracle/ncollection_data_map_bind_ref_allocation.actual": "6ec7cdbfcd8cfb324c9b8b4c8e6d6f46a629b4913106d8c18641e5bd75392b16",
+    "tools/oracle/ncollection_data_map_bind_ref_allocation.md": "eb51b28a090b0c198b56f81533fda7045b3b90cbec375c03780d6a63a2c686d1"
   },
   "inputs_sha256": {
     "api_header_manifest_json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
     "occt_declarations_jsonl_gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
-    "parity_json": "32e791866e8b49382bf4189a8ee1ffa73d976f8bcfbd2db665222096e114215d",
+    "parity_json": "0ea429b8f9acea3c32426073cd9e6ae9f1e49e9b0994d440b8029ec85e41a9d8",
     "rust_api_json_gz": "ab8a0ef0bac7a3284fe36cf4b9f1ce67c71353877bf4290f54ac52bd0ff0add2"
   },
   "limitations": [
-    "The checked-in global Rust API inventory is from the parent main revision and predates this new method. The retained private TKernel rustdoc capture resolves the path uniquely; refresh the global snapshot before relying on generated global crosswalk output.",
     "Rust assignment into an existing slot drops the old Rust value and moves the cloned temporary. It cannot reproduce arbitrary user-defined C++ move-assignment/destructor hook side effects.",
-    "Safe borrowing does not expose native source/key self-aliasing behavior; C++ exception and allocation-failure side effects are not claimed."
+    "The safe borrowed API does not expose native source/key self-aliasing. Allocation-before-copy and key-copy failure cleanup are covered for the Rust node owner, but Rust panic behavior and native exception classes/subobject side effects are not interchangeable.",
+    "Rust represents the entry as an allocator-owned Entry rather than OCCT\u2019s combined list node, while bucket-table storage follows a different allocator path."
   ],
   "native_declaration": {
     "header": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
@@ -42,7 +49,7 @@
   },
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "parity_row": {
-    "parity_sha256": "d474f2f25ab3bdda15e49f4c8299b7c7632134e3a48a08e248730f7ac8ff28fb",
+    "parity_sha256": "0ea429b8f9acea3c32426073cd9e6ae9f1e49e9b0994d440b8029ec85e41a9d8",
     "selector": "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)",
     "status": "partial",
     "target": "rustycad_tkernel::ncollection::DataMap::bind_ref"
@@ -67,7 +74,7 @@
     },
     "rustdoc_target_present_in_capture": true,
     "source_file": "crates/tkernel/src/ncollection/data_map/operations.rs",
-    "source_sha256": "faac257fbeff77eaafa45ddd52b2dd13b23956f309376d9edf3c76a0e72c285d"
+    "source_sha256": "c6cd1393128857cc0dda4c8ef34cbf053f6993ddf71e42776698186861298a0a"
   },
   "schema_version": 1,
   "scope": "One existing const-key/const-item legacy declaration; no legacy declaration or test count added.",
@@ -105,5 +112,75 @@
       "log_sha256": "4f720c28b0702071fb0cdbef7cfd7ff18218bb9eb9e324a5eb2060733af8ad45",
       "result": "passed"
     }
+  },
+  "allocation_before_clone_followup": {
+    "scope": "Allocation-before-copy behavior for the existing DataMap::bind_ref target only; no legacy declaration added.",
+    "native_order": {
+      "source_order": "resizable check, one hash/lookup on the original key, placement node allocation, base TListNode item copy, derived key copy; hit constructs item temporary then move-assigns.",
+      "native_output": [
+        "inserted=1 events=HAVK stored=9",
+        "replaced=0 events=HEVMD stored=9",
+        "failed=1 events=HAVKDF extent=0"
+      ],
+      "native_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/ncollection_data_map_bind_ref_allocation.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/ncollection_data_map_bind_ref_allocation",
+      "native_binary_sha256": "8d36f7b55b311675c4a1105e6a7f6c8d9d5f63b3baca1f1ff83e8caf1aee35ca",
+      "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+      "native_source_hashes": {
+        "NCollection_DataMap.hxx": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+        "NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13",
+        "NCollection_TListNode.hxx": "4a1f63179b98ce73e104101fbea4942b430244ddb13153155a17f1bd13aa1296",
+        "NCollection_DefineAlloc.hxx": "c74fa4624723646574d22b4fcfb60c5bd38d72023b88adcb80e1fe11d6aef75f",
+        "NCollection_BaseAllocator.hxx": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+        "NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0"
+      },
+      "expected_output_sha256": "6ec7cdbfcd8cfb324c9b8b4c8e6d6f46a629b4913106d8c18641e5bd75392b16"
+    },
+    "rust": {
+      "implementation": "BaseAllocator::allocate_value_with allocates Entry storage before running the closure; closure clones value then key to match native base-before-member order.",
+      "tests_command": "cargo test -p rustycad-tkernel --test ncollection_data_map_bind_ref_allocation --test ncollection_data_map_bind_ref --test ncollection_data_map --test ncollection_base_allocator",
+      "tests_result": "48 passed, 0 failed across 4 test targets",
+      "clippy_command": "cargo clippy -p rustycad-tkernel --test ncollection_data_map_bind_ref_allocation -- -D warnings",
+      "clippy_result": "passed",
+      "evidence": {
+        "native_compile": {
+          "path": "porting/runtime-evidence/datamap-bind-ref-allocation-native-compile.log.gz",
+          "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+        },
+        "native_diff": {
+          "path": "porting/runtime-evidence/datamap-bind-ref-allocation-native-diff.log.gz",
+          "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+        },
+        "focused_rust": {
+          "path": "porting/runtime-evidence/datamap-bind-ref-allocation-focused.log.gz",
+          "sha256": "1565a410dff2831f0af2ad5e2a1c1eba2d7f35bcd439efc1d28f703479d39542"
+        },
+        "strict_clippy": {
+          "path": "porting/runtime-evidence/datamap-bind-ref-allocation-clippy.log.gz",
+          "sha256": "be5aeed5445c9329b02db4fa3ff4d7515a1f4f50eafee2e17bbd462d1b93866c"
+        }
+      },
+      "target": "/tmp/rustycad-data-map-alloc-before-clone-target; CARGO_INCREMENTAL=0, test/dev debug=0",
+      "toolchain": "rustc 1.98.1"
+    },
+    "implementation_source_sha256": {
+      "crates/tkernel/src/ncollection/allocator/owned.rs": "b2c6e7b8f502d1e85ec808f19f48661dd9d0b95105fef2b438e290627f7ea715",
+      "crates/tkernel/src/ncollection/data_map.rs": "0a06d2cc070bbce27df26a4416aae1cec6972404519484a88ce0c3e43047621b",
+      "crates/tkernel/src/ncollection/data_map/operations.rs": "c6cd1393128857cc0dda4c8ef34cbf053f6993ddf71e42776698186861298a0a",
+      "crates/tkernel/src/ncollection/data_map/queries.rs": "379dd38590c542603a177d7e1249d3b1a557e6d8e81a327f7eee91373deb1510",
+      "crates/tkernel/tests/ncollection_data_map_bind_ref.rs": "68961c0d190843a8162c61eae88d801e68e09776a3efe59aa2f479be0dd99167",
+      "crates/tkernel/tests/ncollection_data_map_bind_ref_allocation.rs": "9c349d1322ce9d1aa2afe6078944d8338b749d3b34e123efaed0cb4219238a92",
+      "tools/oracle/ncollection_data_map_bind_ref.cxx": "1e6e24963c5654320b929983077555c430fdf4510aa4b27de7826271c3d59a1e",
+      "tools/oracle/ncollection_data_map_bind_ref.expected": "74d0fa047b283b984184f6b68934127eaa8a7ddbabf51730502bd3ad6fbe99af",
+      "tools/oracle/ncollection_data_map_bind_ref.md": "f19ecf548108fae5e8410516e769315887a39d2c6d5d10c841d9adb21385d3ad",
+      "tools/oracle/ncollection_data_map_bind_ref_allocation.cxx": "f44ae93b96f308983995606ba3ab9d13a0b5585977cfc14784b0300ef14683ce",
+      "tools/oracle/ncollection_data_map_bind_ref_allocation.expected": "6ec7cdbfcd8cfb324c9b8b4c8e6d6f46a629b4913106d8c18641e5bd75392b16",
+      "tools/oracle/ncollection_data_map_bind_ref_allocation.actual": "6ec7cdbfcd8cfb324c9b8b4c8e6d6f46a629b4913106d8c18641e5bd75392b16",
+      "tools/oracle/ncollection_data_map_bind_ref_allocation.md": "eb51b28a090b0c198b56f81533fda7045b3b90cbec375c03780d6a63a2c686d1"
+    },
+    "limits": [
+      "Rust allocates an Entry rather than OCCT base-list-node plus key as one concrete node; bucket array allocations use the global allocator.",
+      "The native allocator trace proves placement delete frees storage after key-copy failure. Rust panic unwinding drops the uninitialized owner and staged value; exception classes and arbitrary throwing/destructor side effects are not equated.",
+      "Existing-slot replacement still cannot model arbitrary C++ move-assignment/destructor hook effects or self-aliasing."
+    ]
   }
 }
