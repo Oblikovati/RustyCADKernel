@@ -4,7 +4,7 @@ use super::{Mat3, MatrixScalar, Vec3, Vec4};
 use std::ops::Neg;
 mod inverse;
 /// Sixteen elements in column-major order, identity by default; `Mat4::<f64>::identity()`.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug)]
 pub struct Mat4<T> {
     columns: [[T; 4]; 4],
 }

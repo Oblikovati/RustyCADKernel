@@ -3,7 +3,7 @@ use super::square_matrix::{square_matrix_access, square_matrix_arithmetic, squar
 use super::{MatrixScalar, Vec3};
 use crate::standard::Failure;
 /// Nine elements in column-major order, identity by default; `Mat3::<f64>::identity()`.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug)]
 pub struct Mat3<T> {
     columns: [[T; 3]; 3],
 }
