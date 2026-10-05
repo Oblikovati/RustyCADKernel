@@ -6,7 +6,10 @@ use std::cell::Cell;
 #[test]
 fn mat3_const_view_tracks_interior_mutation() {
     let values: [Cell<i32>; 9] = std::array::from_fn(|index| Cell::new(index as i32));
+    let backing = values.as_ptr();
     let view = Mat3::map(&values);
+    assert_eq!(view.as_slice().as_ptr(), backing);
+    assert_eq!(view.as_slice().len(), 9);
     assert_eq!(view.element(1, 2).get(), 7);
     values[7].set(41);
     assert_eq!(view.element(1, 2).get(), 41);
@@ -27,7 +30,10 @@ fn mat3_mut_view_writes_column_major_storage() {
 #[test]
 fn mat4_const_view_tracks_interior_mutation() {
     let values: [Cell<i32>; 16] = std::array::from_fn(|index| Cell::new(index as i32));
+    let backing = values.as_ptr();
     let view = Mat4::map(&values);
+    assert_eq!(view.as_slice().as_ptr(), backing);
+    assert_eq!(view.as_slice().len(), 16);
     assert_eq!(view.element(1, 2).get(), 9);
     values[9].set(52);
     assert_eq!(view.element(1, 2).get(), 52);

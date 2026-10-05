@@ -78,5 +78,19 @@
     "package_log_sha256": "00f58e46ce709eec091cf8d8e30a298955822c624fa3d74a4a9eba4468886d78",
     "package_log_uncompressed_sha256": "eeb07c4cc16b503a1988311c1a33abc290f0eeebd0e64e219a4613c642a5d34b",
     "scope": "Direct regression coverage for MatrixViewMut::as_mut_slice; from_data doc correction is owned by the comparator worktree."
+  },
+  "const_slice_followup": {
+    "base_revision": "31a6983621333407801f4d8311610c4ecd2ea49a",
+    "test_sha256": "221a6944a625cc10e1d8470c6d8512b9569a21632a760985de7b94ae1c1401db",
+    "test_command": "cargo +1.98.1 test -p rustycad-tkernel --test ncollection_matrix_map",
+    "test_result": "4 passed; 0 failed; 0 ignored",
+    "assertions": "Const Mat3 and Mat4 views expose their original backing pointer and exact flat slice length."
+  },
+  "combined_followups": {
+    "test_sha256": "60feff925076ea4c6f96a4e338f338faa68a452ac0fd37f4a618ff564d586490",
+    "result": "4 passed; 0 failed; 0 ignored; actual Cargo exit 0",
+    "log": "porting/runtime-evidence/matrix-map-merged-tests.log.gz",
+    "log_sha256": "793773572881fac05b88f5b618678c00acb6f039044aee4b3554b3c5647b4891",
+    "scope": "Combined mutable and immutable slice regressions; earlier source-bound receipts preserved."
   }
 }
