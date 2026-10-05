@@ -1,6 +1,6 @@
 //! Borrowed `IndexedMap::Add` keeps native lookup and key-copy ordering.
-use rustycad_tkernel::ncollection::{HashPolicy, IndexedMap};
-use std::cell::RefCell;
+use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, IndexedMap};
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 
 #[derive(Debug)]
@@ -62,4 +62,79 @@ fn borrowed_add_hit_does_not_clone_the_key() {
     assert_eq!(map.add_ref(&incoming), 1);
     assert_eq!(*events.borrow(), ['H', 'E']);
     assert_eq!(map.len(), 1);
+}
+
+#[derive(Debug)]
+struct AllocationKey {
+    value: i32,
+    allocator: BaseAllocator,
+    clones: Rc<Cell<usize>>,
+    saw_live_allocation: Rc<Cell<bool>>,
+    should_panic: Rc<Cell<bool>>,
+}
+
+impl Clone for AllocationKey {
+    fn clone(&self) -> Self {
+        self.clones.set(self.clones.get() + 1);
+        self.saw_live_allocation
+            .set(self.allocator.reset(false).is_err());
+        assert!(!self.should_panic.get(), "injected key clone panic");
+        Self {
+            value: self.value,
+            allocator: self.allocator.clone(),
+            clones: Rc::clone(&self.clones),
+            saw_live_allocation: Rc::clone(&self.saw_live_allocation),
+            should_panic: Rc::clone(&self.should_panic),
+        }
+    }
+}
+
+struct AllocationPolicy;
+
+impl HashPolicy<AllocationKey> for AllocationPolicy {
+    fn hash(&self, key: &AllocationKey) -> usize {
+        key.value as usize
+    }
+
+    fn equal(&self, left: &AllocationKey, right: &AllocationKey) -> bool {
+        left.value == right.value
+    }
+}
+
+fn allocation_key(allocator: &BaseAllocator, should_panic: bool) -> AllocationKey {
+    AllocationKey {
+        value: 7,
+        allocator: allocator.clone(),
+        clones: Rc::new(Cell::new(0)),
+        saw_live_allocation: Rc::new(Cell::new(false)),
+        should_panic: Rc::new(Cell::new(should_panic)),
+    }
+}
+
+#[test]
+fn borrowed_add_allocates_before_clone_and_hit_adds_no_live_node() {
+    let arena = BaseAllocator::incremental(128);
+    let key = allocation_key(&arena, false);
+    let mut map = IndexedMap::with_allocator(AllocationPolicy, 101, arena.clone());
+
+    assert_eq!(map.add_ref(&key), 1);
+    assert!(key.saw_live_allocation.get());
+    assert_eq!(key.clones.get(), 1);
+    let live_nodes = arena.reset(false).unwrap_err().message().to_owned();
+    assert_eq!(map.add_ref(&key), 1);
+    assert_eq!(key.clones.get(), 1);
+    assert_eq!(arena.reset(false).unwrap_err().message(), live_nodes);
+}
+
+#[test]
+fn borrowed_add_clone_panic_releases_uninitialized_node() {
+    let arena = BaseAllocator::incremental(128);
+    let key = allocation_key(&arena, true);
+    let mut map = IndexedMap::with_allocator(AllocationPolicy, 101, arena.clone());
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| map.add_ref(&key)));
+
+    assert!(result.is_err());
+    assert!(key.saw_live_allocation.get());
+    assert!(map.is_empty());
+    arena.reset(false).unwrap();
 }

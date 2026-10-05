@@ -13,7 +13,7 @@ SELECTOR = "NCollection_IndexedMap::Add(const TheKeyType&)"
 RUST_TARGET = "rustycad_tkernel::ncollection::IndexedMap::add_ref"
 CPP_INVENTORY = ROOT / "porting/api-inventory/occt-declarations.jsonl.gz"
 RUSTDOC_CAPTURE = (
-    ROOT / "porting/runtime-evidence/indexed-map-borrowed-add-rustdoc.json.gz"
+    ROOT / "porting/runtime-evidence/indexed-map-alloc-before-clone-rustdoc.json.gz"
 )
 
 

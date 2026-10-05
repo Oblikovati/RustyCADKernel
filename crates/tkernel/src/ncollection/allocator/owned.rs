@@ -57,6 +57,14 @@ impl BaseAllocator {
         }
     }
 
+    pub(crate) fn allocate_value_with<T>(&self, construct: impl FnOnce() -> T) -> AllocatedBox<T> {
+        let storage = AllocBox::<T, BaseAllocator>::new_uninit_in(self.clone());
+        let value = construct();
+        AllocatedBox {
+            storage: AllocBox::write(storage, value),
+        }
+    }
+
     /// Constructs contiguous elements with this allocator; `allocator.allocate_array(5, |i| i)`.
     pub fn allocate_array<T>(
         &self,

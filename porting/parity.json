@@ -79568,7 +79568,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
       "status": "partial",
-      "notes": "Manual NCollection member mapping. add_ref searches and hashes the borrowed key before cloning only on a miss; an existing key returns its index without cloning. Rust clones before its separate node allocation, unlike OCCT placement allocation followed by key construction, so allocator and arbitrary C++ construction-failure effects are not modeled."
+      "notes": "Manual NCollection member mapping. add_ref searches and hashes the borrowed key before allocation and Clone on a miss; a hit returns the existing index without key cloning or node allocation. Rust allocates node storage before Clone and releases it if Clone panics. Bucket-array allocator callbacks, constructing directly into the native key-subobject address, and arbitrary C++ subobject/destructor behavior remain partial."
     },
     {
       "upstream_id": "NCollection_IndexedMap::Add(TheKeyType&&)",
