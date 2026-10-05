@@ -40,14 +40,7 @@ impl ExtendedString {
     /// Inserts units from a bounded null-terminated UTF-16 buffer; the index is validated
     /// before null or empty input is ignored. `text.insert_c_units(1, Some(&[65, 0, 66]))?`.
     pub fn insert_c_units(&mut self, index: i32, units: Option<&[u16]>) -> Result<(), Failure> {
-        self.check_insert_position(index)?;
-        let Some(units) = units else {
-            return Ok(());
-        };
-        let at = offset(index);
-        self.terminated
-            .splice(at..at, utf::c_units_prefix(units).iter().copied());
-        Ok(())
+        self.insert(index, units.map_or(&[][..], utf::c_units_prefix))
     }
     /// Replaces one code unit at a one-based position in 1..=len; `text.set_value(6, 0x67)?`.
     pub fn set_value(&mut self, index: i32, unit: u16) -> Result<(), Failure> {
