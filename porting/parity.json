@@ -68042,28 +68042,28 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Mat3::IsEqual(const NCollection_Mat3&) const",
+      "upstream_id": "NCollection_Mat3::IsEqual(const NCollection_Mat3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::is_equal",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Compiler inventory confirms bool (const NCollection_Mat3<Element_t> &) const noexcept. Rust IsEqual dispatches through the PartialEq implementation, which compares column-major elements with != and short-circuits at the first mismatch; native call-count probe matches."
     },
     {
-      "upstream_id": "NCollection_Mat3::operator==(const NCollection_Mat3&) const",
+      "upstream_id": "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Compiler inventory confirms bool (const NCollection_Mat3<Element_t> &) const noexcept. The Rust PartialEq::eq path dispatches each element's != in native column-major order; native call-count probe matches."
+    },
+    {
+      "upstream_id": "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "NCollection_Mat3::operator!=(const NCollection_Mat3&) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat3 as PartialEq>::ne",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "The matrix explicitly implements PartialEq::ne as !self.eq(other), matching native operator!= calling !IsEqual. The eq implementation dispatches element != in native column-major order; native call-count probe matches. The new ne rustdoc path is pending compiler-inventory recapture."
     },
     {
       "upstream_id": "NCollection_Mat3::operator*(const NCollection_Vec3<Element_t>&) const",
@@ -68250,28 +68250,28 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Mat4::IsEqual(const NCollection_Mat4&) const",
+      "upstream_id": "NCollection_Mat4::IsEqual(const NCollection_Mat4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::is_equal",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Compiler inventory confirms bool (const NCollection_Mat4<Element_t> &) const noexcept. Rust IsEqual dispatches through the PartialEq implementation, which compares column-major elements with != and short-circuits at the first mismatch; native call-count probe matches."
     },
     {
-      "upstream_id": "NCollection_Mat4::operator==(const NCollection_Mat4&) const",
+      "upstream_id": "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Compiler inventory confirms bool (const NCollection_Mat4<Element_t> &) const noexcept. The Rust PartialEq::eq path dispatches each element's != in native column-major order; native call-count probe matches."
+    },
+    {
+      "upstream_id": "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "NCollection_Mat4::operator!=(const NCollection_Mat4&) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Mat4 as PartialEq>::ne",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "The matrix explicitly implements PartialEq::ne as !self.eq(other), matching native operator!= calling !IsEqual. The eq implementation dispatches element != in native column-major order; native call-count probe matches. The new ne rustdoc path is pending compiler-inventory recapture."
     },
     {
       "upstream_id": "NCollection_Mat4::operator*(const NCollection_Vec4<Element_t>&) const",

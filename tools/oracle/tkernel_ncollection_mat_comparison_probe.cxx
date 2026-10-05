@@ -5,61 +5,61 @@
 struct ComparisonProbe
 {
   int value;
-  static inline int equalCalls = 0;
-  static inline int notEqualCalls = 0;
+  int* equalCalls;
+  int* notEqualCalls;
 
-  constexpr ComparisonProbe(int theValue = 0) : value(theValue) {}
+  constexpr ComparisonProbe(int theValue = 0, int* theEqualCalls = nullptr, int* theNotEqualCalls = nullptr)
+      : value(theValue), equalCalls(theEqualCalls), notEqualCalls(theNotEqualCalls) {}
   bool operator==(const ComparisonProbe& theOther) const
   {
-    ++equalCalls;
+    ++*equalCalls;
     return value == theOther.value;
   }
   bool operator!=(const ComparisonProbe& theOther) const
   {
-    ++notEqualCalls;
+    ++*notEqualCalls;
     return value != theOther.value;
-  }
-  static void Reset()
-  {
-    equalCalls = 0;
-    notEqualCalls = 0;
   }
 };
 
 template <class Matrix>
-void FillPair(Matrix& theFirst, Matrix& theSecond, int theSize, int theMismatch)
+void FillPair(Matrix& theFirst, Matrix& theSecond, int theSize, int theMismatch, int* theEqualCalls, int* theNotEqualCalls)
 {
   for (int anIndex = 0; anIndex < theSize * theSize; ++anIndex)
   {
     const size_t aRow = size_t(anIndex % theSize);
     const size_t aCol = size_t(anIndex / theSize);
-    theFirst.SetValue(aRow, aCol, ComparisonProbe(1));
-    theSecond.SetValue(aRow, aCol, ComparisonProbe(anIndex == theMismatch ? 2 : 1));
+    theFirst.SetValue(aRow, aCol, ComparisonProbe(1, theEqualCalls, theNotEqualCalls));
+    theSecond.SetValue(aRow, aCol, ComparisonProbe(anIndex == theMismatch ? 2 : 1, theEqualCalls, theNotEqualCalls));
   }
 }
 
 template <class Matrix>
-void ReportOperation(const char* theName, const char* theOperation, bool theResult, int theSize)
+void ReportOperation(const char* theName, const char* theOperation, bool theResult, int theExpectedCalls, int theEqualCalls, int theNotEqualCalls)
 {
   std::cout << theName << ' ' << theOperation << ' ' << theResult << " eq="
-            << ComparisonProbe::equalCalls << " ne=" << ComparisonProbe::notEqualCalls
-            << " expected-ne=" << theSize << '\n';
+            << theEqualCalls << " ne=" << theNotEqualCalls
+            << " expected-ne=" << theExpectedCalls << '\n';
 }
 
 template <class Matrix>
 void RunMatrix(const char* theName, int theSize, int theMismatch)
 {
   Matrix aFirst, aSecond;
-  FillPair(aFirst, aSecond, theSize, theMismatch);
-  ComparisonProbe::Reset();
+  int anEqualCalls = 0;
+  int aNotEqualCalls = 0;
+  FillPair(aFirst, aSecond, theSize, theMismatch, &anEqualCalls, &aNotEqualCalls);
+  const int anExpectedCalls = theMismatch < 0 ? theSize * theSize : theMismatch + 1;
   const bool anIsEqual = aFirst.IsEqual(aSecond);
-  ReportOperation<Matrix>(theName, "IsEqual", anIsEqual, theMismatch < 0 ? theSize * theSize : theMismatch + 1);
-  ComparisonProbe::Reset();
+  ReportOperation<Matrix>(theName, "IsEqual", anIsEqual, anExpectedCalls, anEqualCalls, aNotEqualCalls);
+  anEqualCalls = 0;
+  aNotEqualCalls = 0;
   const bool anOperatorEqual = aFirst == aSecond;
-  ReportOperation<Matrix>(theName, "operator==", anOperatorEqual, theMismatch < 0 ? theSize * theSize : theMismatch + 1);
-  ComparisonProbe::Reset();
+  ReportOperation<Matrix>(theName, "operator==", anOperatorEqual, anExpectedCalls, anEqualCalls, aNotEqualCalls);
+  anEqualCalls = 0;
+  aNotEqualCalls = 0;
   const bool anOperatorNotEqual = aFirst != aSecond;
-  ReportOperation<Matrix>(theName, "operator!=", anOperatorNotEqual, theMismatch < 0 ? theSize * theSize : theMismatch + 1);
+  ReportOperation<Matrix>(theName, "operator!=", anOperatorNotEqual, anExpectedCalls, anEqualCalls, aNotEqualCalls);
 }
 
 int main()

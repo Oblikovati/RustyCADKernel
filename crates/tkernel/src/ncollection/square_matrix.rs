@@ -29,6 +29,12 @@ macro_rules! square_matrix_access {
                     .zip(other.columns.iter().flatten())
                     .any(|(left, right)| left != right)
             }
+
+            #[allow(clippy::partialeq_ne_impl)] // Native operator!= explicitly negates IsEqual.
+            fn ne(&self, other: &Self) -> bool {
+                let are_equal = self.eq(other);
+                !are_equal
+            }
         }
         impl<T: Copy + From<u8>> Default for $matrix<T> {
             /// The native default constructor builds the identity.
@@ -60,6 +66,12 @@ macro_rules! square_matrix_access {
                 *self = Self::default();
             }
         }
+        impl<T: PartialEq> $matrix<T> {
+            /// Compares every element with `!=`, as `IsEqual`; `a.is_equal(&b)`.
+            pub fn is_equal(&self, other: &Self) -> bool {
+                self == other
+            }
+        }
         impl<T: Copy + From<u8> + PartialEq> $matrix<T> {
             /// Compares every element with `!=` against zero, as `IsZero`; `matrix.is_zero()`.
             pub fn is_zero(&self) -> bool {
@@ -68,10 +80,6 @@ macro_rules! square_matrix_access {
             /// Compares every element with `!=` against identity, as `IsIdentity`; `matrix.is_identity()`.
             pub fn is_identity(&self) -> bool {
                 *self == Self::default()
-            }
-            /// Compares every element with `!=`, as `IsEqual` (NaN is never equal); `a.is_equal(&b)`.
-            pub fn is_equal(&self, other: &Self) -> bool {
-                self == other
             }
         }
         impl<T> $matrix<T> {
@@ -86,7 +94,8 @@ macro_rules! square_matrix_access {
             }
         }
         impl<T: Copy> $matrix<T> {
-            /// Builds a matrix from column-major values, as `Map`; `Mat4::from_data([0.0; 16])`.
+            /// Builds owned column-major storage; `Mat4::from_data([0.0; 16])`.
+            /// Use `Mat4::map` or `Mat4::map_mut` to borrow an existing slice instead.
             pub fn from_data(data: [T; $nn]) -> Self {
                 let columns = std::array::from_fn(|column| {
                     std::array::from_fn(|row| data[column * $n + row])

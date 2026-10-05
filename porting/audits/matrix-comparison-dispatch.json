@@ -5,8 +5,8 @@
   "native": {
     "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
     "probe": "tools/oracle/tkernel_ncollection_mat_comparison_probe.cxx",
-    "probe_sha256": "8f717e5f4deb3f71df190c997d709d8e4ca9a718f098ab6e5aa195347b2acefc",
-    "executable_sha256": "0c8a85cf1fab896f6c6f76e7ecf47fe4d32597d0d2b087751b5d8e54c5eca4a1",
+    "probe_sha256": "cad231a394cab6d07784f7b005299f97b9d5fea1538de761aa02add1bc21f0c9",
+    "executable_sha256": "d951a3a90acee682cd690a073fe7c4500ae0cebcbd81d4c65892f2d594cf76f8",
     "headers": [
       {
         "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
@@ -19,7 +19,7 @@
         "lines": "254-276"
       }
     ],
-    "compile_command": "c++ -std=c++20 -I$OCCT/src/FoundationClasses/TKernel/NCollection -I$OCCT/src/FoundationClasses/TKernel/Standard -I$OCCT_BUILD/include/opencascade tools/oracle/tkernel_ncollection_mat_comparison_probe.cxx -o /tmp/tkernel_ncollection_mat_comparison_probe",
+    "compile_command": "c++ -std=c++20 -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Standard -I/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade tools/oracle/tkernel_ncollection_mat_comparison_probe.cxx -o /tmp/tkernel_ncollection_mat_comparison_probe",
     "observation": "IsEqual scans flat column-major storage using element != and stops at the first mismatch. operator== delegates to IsEqual; operator!= negates it."
   },
   "rust": {
@@ -36,11 +36,11 @@
       },
       {
         "path": "crates/tkernel/src/ncollection/square_matrix.rs",
-        "sha256": "b0651b8393c5d340166816a112d49a9797b3d6e71546847f175e552faf9a8595"
+        "sha256": "ac58ca604e1666e091df303691349c0aae18edd5324bdc3380b1f71ee31336a8"
       },
       {
         "path": "crates/tkernel/tests/ncollection_mat_comparison_paths.rs",
-        "sha256": "b53d3d0dd38c0f419edf9d3417a544319b2b55847f90ac0e96024fb5f5242fd2"
+        "sha256": "3de9b9059146f57619e00f115d629448e452d21051183799d4d9928bb260a92b"
       },
       {
         "path": "crates/tkernel/tests/fixtures/ncollection_mat_comparison.expected",
@@ -51,16 +51,51 @@
       "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-mat-comparisons-target CARGO_INCREMENTAL=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_PROFILE_DEV_DEBUG=0 cargo test -p rustycad-tkernel --test ncollection_mat_comparison_paths",
       "result": "2 passed; 0 failed",
       "additional_matrix_test": "cargo test -p rustycad-tkernel --test matrix_generic_scalar: 5 passed; 0 failed",
-      "clippy": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-mat-comparisons-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed"
+      "clippy": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-mat-comparisons-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed",
+      "compressed_log": "porting/audits/matrix-comparison-dispatch-validation.log.gz",
+      "compressed_log_sha256": "28efae34f8eb3a19bc79b851765ea86d1fd64ae6607eb270970a3fbd2b1fcb15"
     }
   },
-  "exact_mappings_already_present": [
-    ["NCollection_Mat3::IsEqual(const NCollection_Mat3&) const", "rustycad_tkernel::ncollection::Mat3::is_equal"],
-    ["NCollection_Mat3::operator==(const NCollection_Mat3&) const", "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq"],
-    ["NCollection_Mat3::operator!=(const NCollection_Mat3&) const", "<rustycad_tkernel::ncollection::Mat3 as PartialEq>::ne"],
-    ["NCollection_Mat4::IsEqual(const NCollection_Mat4&) const", "rustycad_tkernel::ncollection::Mat4::is_equal"],
-    ["NCollection_Mat4::operator==(const NCollection_Mat4&) const", "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq"],
-    ["NCollection_Mat4::operator!=(const NCollection_Mat4&) const", "<rustycad_tkernel::ncollection::Mat4 as PartialEq>::ne"]
-  ],
+  "compiler_inventory": {
+    "rust_capture_revision": "68414cb48f443176e98deb6d66b05709aadc119b",
+    "rust_capture_did_not_include_new_explicit_ne_method": true,
+    "rust_inventory_sha256": "04221eea11d15578b2ca8ce5b5d50f6d3ca1d56e344e066c58f6d05e50d81fe1",
+    "mat3_header_inventory_sha256": "0ebf1b52504569c3f79d3d23ee8934601c21201787212a0f67dd3ccd7f4f132a",
+    "mat4_header_inventory_sha256": "d4e2abf14ab8cb37e075e9e976526a2c891ad09a0c6def6022206fc483a1a83a",
+    "selectors": [
+      {
+        "upstream_id": "NCollection_Mat3::IsEqual(const NCollection_Mat3<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat3@F@IsEqual#&1>@ST>1#T@NCollection_Mat31t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat3::is_equal"
+      },
+      {
+        "upstream_id": "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat3@F@operator==#&1>@ST>1#T@NCollection_Mat31t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq"
+      },
+      {
+        "upstream_id": "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat3@F@operator!=#&1>@ST>1#T@NCollection_Mat31t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
+        "resolution": "This explicit source method was added after the archived capture; refresh rustdoc inventory before treating the normalized path as compiler-confirmed."
+      },
+      {
+        "upstream_id": "NCollection_Mat4::IsEqual(const NCollection_Mat4<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat4@F@IsEqual#&1>@ST>1#T@NCollection_Mat41t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat4::is_equal"
+      },
+      {
+        "upstream_id": "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat4@F@operator==#&1>@ST>1#T@NCollection_Mat41t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq"
+      },
+      {
+        "upstream_id": "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat4@F@operator!=#&1>@ST>1#T@NCollection_Mat41t0.0#1",
+        "rust_path": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
+        "resolution": "This explicit source method was added after the archived capture; refresh rustdoc inventory before treating the normalized path as compiler-confirmed."
+      }
+    ]
+  },
   "result_fixture_sha256": "30ea9a74fbb9edbfbe37e60ddd0f6083e2150250c2b99e04439eb50b65c32b2f"
 }
