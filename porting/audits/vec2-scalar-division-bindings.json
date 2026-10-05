@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "purpose": "Correct two already implemented Vec2 scalar division Rust compiler bindings, preserving distinction from vector/vector overloads.",
+  "capture_source_revision": "356b8c02479f20984a66bf3ce80f071157307512",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rustdoc_json_sha256": "e2c3edd29d495f84a77b8245a8801b97f7b8cc12c0d6bb25d25d5c7f3e592b03",
+  "bindings": [
+    {
+      "upstream_id": "NCollection_Vec2::operator/=(Element_t)",
+      "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::DivAssign<T>>::div_assign",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "divisor",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "45466848569ed1458531c6d3ba31901b9d1591cefa382d728edd2a511650f0b0"
+    },
+    {
+      "upstream_id": "NCollection_Vec2::operator/(Element_t) const",
+      "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Div<T>>::div",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ],
+            [
+              "divisor",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "45466848569ed1458531c6d3ba31901b9d1591cefa382d728edd2a511650f0b0"
+    }
+  ],
+  "native_probe": {
+    "source": "tools/oracle/tkernel_vec2_scalar_division_paths.cxx",
+    "expected": "tools/oracle/tkernel_vec2_scalar_division_paths.expected",
+    "command": "g++ -std=c++17 -I <MAIN>/target/occt-modeling-full/include/opencascade tools/oracle/tkernel_vec2_scalar_division_paths.cxx -o /tmp/vec2-bindings-native; execute; compare expected bytes",
+    "exit_code": 0,
+    "output": "1023 1043\n2023 2043\n"
+  },
+  "behavioral_evidence": "porting/audits/vec2-scalar-division.json",
+  "limits": [
+    "No new Rust behavior or original legacy declarations.",
+    "Compiler path recovery is not proof of complete toolkit or cross-language parity."
+  ],
+  "red": {
+    "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_ncollection_vector_comparison_selectors",
+    "exit_code": 1,
+    "log": "porting/runtime-evidence/vec2-bindings-red.log.gz",
+    "log_sha256": "49229b720fe743fb47e55b0f2e611854408fb003ea4750b034e76b0e714ce23d"
+  },
+  "green": {
+    "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_ncollection_vector_comparison_selectors",
+    "exit_code": 0,
+    "log": "porting/runtime-evidence/vec2-bindings-green.log.gz",
+    "log_sha256": "d7c6ebe4b1bc5ac9ec40ad8078e435794a6ab88f4bef13822ceee827fd7f788b"
+  }
+}
