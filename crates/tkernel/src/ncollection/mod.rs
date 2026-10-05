@@ -15,7 +15,7 @@ pub use harray::{HArray1, HArray2};
 mod linear_vector;
 pub use linear_vector::LinearVector;
 mod vector;
-pub use vector::{ElementCast, Vec2, Vec3, Vec4};
+pub use vector::{ElementCast, Vec2, Vec3, Vec4, VectorScalarDivision};
 mod square_matrix;
 pub use square_matrix::MatrixScalar;
 mod mat3;

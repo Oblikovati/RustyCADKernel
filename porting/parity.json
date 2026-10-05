@@ -15413,9 +15413,9 @@
       "upstream_id": "NCollection_Vec3::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::DivAssign<T>>::div_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
     },
     {
       "upstream_id": "NCollection_Vec3::operator*(Element_t) const",
@@ -15787,9 +15787,9 @@
       "upstream_id": "NCollection_Vec4::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::DivAssign<T>>::div_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
     },
     {
       "upstream_id": "NCollection_Vec4::operator*(Element_t) const",
@@ -68517,9 +68517,9 @@
       "upstream_id": "NCollection_Vec3::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as Div<T>>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Div<T>>::div",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
     },
     {
       "upstream_id": "NCollection_Vec3(const NCollection_Vec2<Element_t>&,Element_t)",
@@ -68661,9 +68661,9 @@
       "upstream_id": "NCollection_Vec4::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as Div<T>>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Div<T>>::div",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
     },
     {
       "upstream_id": "NCollection_Vec4(const NCollection_Vec3<Element_t>&,Element_t)",

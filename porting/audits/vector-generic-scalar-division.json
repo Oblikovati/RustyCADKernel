@@ -1,0 +1,126 @@
+{
+  "base_revision": "e704eead661dd2cf0bb2be70832b210884011158",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Generic Vec3/4 scalar division with native element assignment and floating reciprocal dispatch.",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/vector/scalar_division.rs": "e3ce6eb985390663e200a100871d4ef2254094e0eb727b9eccdebac9ee578ea9",
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "edd167910902c9c7d090beed00aed0bd16fd483c6390df2a4f53706315aede5e",
+    "crates/tkernel/src/ncollection/vector.rs": "28220d3e2e958d2a7c6843a16c5634daa5ab45d5c926a2e25160323306fb359e",
+    "crates/tkernel/src/ncollection/mod.rs": "4926bfd9950793a953dd06023b96dc9ece3d0ec5d9fb821ae3266dbf6188ba12",
+    "crates/tkernel/tests/vector_generic_scalar_division.rs": "5ec6d3a6afa67278c563806be76fc8d7ccaa8e4820d47ff502cfcbbf853da615",
+    "tools/oracle/tkernel_vector_scalar_division.cxx": "55912f4695ff324779d6be3477e5eb97da391b7b7b63ab71f186999e8c9afa9f",
+    "tools/oracle/tkernel_vector_scalar_division.expected": "988ccc2ee1b0e6f1e52ce9ed3297258d8b7ca9a3754529477f0cfb0099dacf3f",
+    "porting/parity.json": "2883c303484c03d74eb4ce1653736edf7a040ab012136a0993a63836744a1e35"
+  },
+  "native_header_sha256": {
+    "NCollection_Vec3.hxx": "c9a566448dc8d4c1098561dc4a1fdda3274413a50eb8e1ab325eb4443b6ad405",
+    "NCollection_Vec4.hxx": "ae9fe46a65511c85f4cfdb0b9af1870f58a1a364f067a36a4fd2153bb3d4ec72"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "64d19131f7bb87f2d7c819dc7af820ef9bdfe39fffb797ba5294c9a0b8d12e4d",
+  "native_actual_sha256": "988ccc2ee1b0e6f1e52ce9ed3297258d8b7ca9a3754529477f0cfb0099dacf3f",
+  "native_output_matches_expected": true,
+  "native_fixture_rows": 6,
+  "rust_test_summary": {
+    "passed": 2798,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 170,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "initial_compile_regression_exit_code": 101,
+  "intermediate_full_run_exit_code": 101,
+  "intermediate_failure_resolution": "The first refactor accidentally removed existing min/max component methods; those methods were restored unchanged before the final complete package pass.",
+  "cpp_bindings": [
+    {
+      "selector": "NCollection_Vec3::operator/=(Element_t)",
+      "cpp_ids": [
+        "24c5c5d482d6af90cbf1a9e275d9207e456a236d5ec6f3def1f0148613e4a547"
+      ]
+    },
+    {
+      "selector": "NCollection_Vec4::operator/=(Element_t)",
+      "cpp_ids": [
+        "75d50136a7c8f243f3fb135beacf56027c78180450c54d775d03592376d6032a"
+      ]
+    },
+    {
+      "selector": "NCollection_Vec3::operator/(Element_t) const",
+      "cpp_ids": [
+        "d8e60a469d375763931d6b0f9610f4736b7cef9e1131073f4b10f44fba61268e"
+      ]
+    },
+    {
+      "selector": "NCollection_Vec4::operator/(Element_t) const",
+      "cpp_ids": [
+        "54d36745521e3da7b99f94113406778d47fba5c03eacb59171f47416d898f089"
+      ]
+    }
+  ],
+  "compiler_verified_rust_bindings": [
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Div<T>>::div",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+      "source_sha256": "e3ce6eb985390663e200a100871d4ef2254094e0eb727b9eccdebac9ee578ea9",
+      "declaration_sha256": "8318760b1cbc1c3d69f882b70edf8507cb6fb0f9e0b296298bfd13728c3d638f"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::DivAssign<T>>::div_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+      "source_sha256": "e3ce6eb985390663e200a100871d4ef2254094e0eb727b9eccdebac9ee578ea9",
+      "declaration_sha256": "6900ea2fc349b5872b01bea301c817511f1a9ea970b63a602d54c46ee9994d72"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Div<T>>::div",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+      "source_sha256": "e3ce6eb985390663e200a100871d4ef2254094e0eb727b9eccdebac9ee578ea9",
+      "declaration_sha256": "92076ad5cd703200c24dfa6985d692069137872e8be7f92d065e2ae18fd8fc07"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::DivAssign<T>>::div_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+      "source_sha256": "e3ce6eb985390663e200a100871d4ef2254094e0eb727b9eccdebac9ee578ea9",
+      "declaration_sha256": "787a8e2c487295a20cc8179391869b8ec819cd73c98b919daa644371233a5535"
+    }
+  ],
+  "logs": {
+    "red": {
+      "path": "porting/runtime-evidence/vector-division-red.log.gz",
+      "sha256": "a5de0846982e2453daa7af43bef415df06f88e0c1209251ff4834baa187c575e"
+    },
+    "focused": {
+      "path": "porting/runtime-evidence/vector-division-focused.log.gz",
+      "sha256": "9e376d3476a98b9c4455e024ed811a33d31993ea4b778fa1f606b6bb0061e350"
+    },
+    "first-full-failure": {
+      "path": "porting/runtime-evidence/vector-division-first-full-failure.log.gz",
+      "sha256": "99bbc8385fddc8bfa4cc62ec7ec5ce5413323ffffcbec2d9a16ea9b22301cc94"
+    },
+    "full": {
+      "path": "porting/runtime-evidence/vector-division-full.log.gz",
+      "sha256": "8fecd8d1adbe2ecb9abe70b85a330fc2205ce46b159d3d197298f5057e516af6"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/vector-division-clippy.log.gz",
+      "sha256": "260fe99b6902fff978e682fadb7dbd99cccc15b9e036e95b65d905db558cebe6"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/vector-division-rustdoc.log.gz",
+      "sha256": "2fe68ff42b9963ee78105ae567a92219b0807697e8e2600c1a57ce24453047e9"
+    }
+  },
+  "full_api_parity": false,
+  "limitations": [
+    "Custom elements opt into VectorScalarDivision; its default delegates to element DivAssign.",
+    "Defined nonthrowing Copy element arithmetic only; native integer overflow/division by zero and non-Copy lifecycle are outside the fixture.",
+    "Standalone private-item nightly-2026-09-25 compiler capture verifies targets; combined workspace crosswalk publication remains pending.",
+    "Supplemental cases add no original legacy declarations."
+  ]
+}

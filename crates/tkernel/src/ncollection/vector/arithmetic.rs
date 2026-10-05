@@ -202,40 +202,6 @@ impl<T: Copy + Mul<Output = T>> Mul<T> for Vec2<T> {
 scalar_copy_multiplication!(Vec3);
 scalar_copy_multiplication!(Vec4);
 
-macro_rules! divide_each {
-    ($vector:ident, $scalar:ty, [$($field:ident),+]) => {
-        impl DivAssign<$scalar> for $vector<$scalar> {
-            fn div_assign(&mut self, divisor: $scalar) {
-                $(self.$field = self.$field / divisor;)+
-            }
-        }
-        impl Div<$scalar> for $vector<$scalar> {
-            type Output = Self;
-            fn div(mut self, divisor: $scalar) -> Self {
-                self /= divisor;
-                self
-            }
-        }
-    };
-}
-macro_rules! divide_by_reciprocal {
-    ($vector:ident, $scalar:ty) => {
-        impl DivAssign<$scalar> for $vector<$scalar> {
-            fn div_assign(&mut self, divisor: $scalar) {
-                // NCollection_Vec3/Vec4 specialize float/double division as one
-                // reciprocal followed by Multiply; Vec2 has no such specialization.
-                self.multiply(1.0 / divisor);
-            }
-        }
-        impl Div<$scalar> for $vector<$scalar> {
-            type Output = Self;
-            fn div(mut self, divisor: $scalar) -> Self {
-                self /= divisor;
-                self
-            }
-        }
-    };
-}
 scalar_multiplication!(Vec2);
 scalar_multiplication!(Vec3);
 scalar_multiplication!(Vec4);
@@ -251,12 +217,6 @@ impl<T: Copy + Div<Output = T>> Div<T> for Vec2<T> {
         Self::new(self.x / divisor, self.y / divisor)
     }
 }
-divide_by_reciprocal!(Vec3, f32);
-divide_by_reciprocal!(Vec3, f64);
-divide_by_reciprocal!(Vec4, f32);
-divide_by_reciprocal!(Vec4, f64);
-divide_each!(Vec3, i32, [x, y, z]);
-divide_each!(Vec4, i32, [x, y, z, w]);
 
 impl<T: Copy + PartialOrd> Vec2<T> {
     /// Returns the larger component, preferring y on ties; `Vec2::new(1,2).max_comp() == 2`.
