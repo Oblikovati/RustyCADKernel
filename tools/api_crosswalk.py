@@ -6,6 +6,7 @@ from collections import defaultdict
 import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
+from api_rust_kind import select_rust_kind
 from api_template_selectors import (
     constructor_candidates,
     declaration_template_owner,
@@ -312,6 +313,11 @@ def row_rust_candidates(
     crates: dict[str, dict[str, list[dict[str, JSONValue]]]],
 ) -> tuple[str, list[dict[str, JSONValue]]]:
     """Require all accessor targets; e.g. `row_rust_candidates(row, crates)`."""
+    if "rust_kind" in row:
+        selected = select_rust_kind(crates, row["rust_kind"])
+        if selected is None:
+            return "invalid_rust_kind", []
+        crates = selected
     if "rust_items" not in row:
         return rust_candidates(row.get("rust_item"), crates)
     targets = paired_rust_targets(row)
@@ -372,6 +378,7 @@ def match_api_row(
         "cpp_ids": [item.get("id") for item in cpp],
         "cpp_matches": [declaration_summary(item) for item in cpp],
         "rust_status": rust_status,
+        "declared_rust_kind": row.get("rust_kind"),
         "declared_rust_paths": row.get("rust_items", [row.get("rust_item")]),
         "rust_paths": [item.get("path") for item in rust_rows],
         "rust_matches": [rust_summary(item) for item in rust_rows],
