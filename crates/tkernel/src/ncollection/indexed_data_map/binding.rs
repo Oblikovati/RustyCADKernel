@@ -4,6 +4,46 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     pub fn add(&mut self, key: K, value: V) -> usize {
         self.place(key, || value, false)
     }
+}
+impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
+    /// Adds borrowed values only when the key is absent; `map.add_ref(&key,&value)`.
+    ///
+    /// This hashes and looks up the original key once. Existing bindings are returned without
+    /// cloning either argument; a new binding clones the item before the key, matching OCCT's
+    /// node construction order for value-semantic types.
+    ///
+    /// # Example
+    /// ```
+    /// use rustycad_tkernel::ncollection::IndexedDataMap;
+    /// let mut map = IndexedDataMap::<i32, i32>::default();
+    /// assert_eq!(map.add_ref(&1, &42), 1);
+    /// assert_eq!(map.add_ref(&1, &99), 1);
+    /// assert_eq!(map.find_from_index(1), Ok(&42));
+    /// ```
+    pub fn add_ref(&mut self, key: &K, value: &V) -> usize {
+        self.prepare_borrowed_add();
+        let (index, bucket) = self.keys.lookup_with_bucket(key);
+        if index != 0 {
+            return index;
+        }
+        self.insert_borrowed(key, value, bucket)
+    }
+    fn prepare_borrowed_add(&mut self) {
+        if self.is_empty() || self.len() > self.bucket_count() {
+            self.resize(self.len());
+        }
+    }
+    fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> usize {
+        let stored_value = self.allocator().allocate_value(IndexedValue {
+            value: value.clone(),
+            _identity: 0,
+        });
+        let index = self.keys.append_new_at_bucket(key.clone(), bucket);
+        self.values.push(stored_value);
+        index
+    }
+}
+impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Inserts or replaces a value, reporting new-key insertion; `map.bind(1,42)`.
     pub fn bind(&mut self, key: K, value: V) -> bool {
         let old_len = self.len();

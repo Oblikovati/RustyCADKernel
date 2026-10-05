@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "title": "IndexedDataMap borrowed Add behavior",
+  "scope": "Implements a borrowed input path for the existing const-key/const-item Add declaration; no legacy declaration or test count added.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "implementation_base_revision": "15e2d38b56b80897dd2b5d8b408a15862644d169",
+  "implementation_source_sha256": {
+    "crates/tkernel/src/ncollection/indexed_map.rs": "b40e33bc792c21c9fb6290674c5ee9425c98b575d58fffacea435ecc9ade24bb",
+    "crates/tkernel/src/ncollection/indexed_data_map.rs": "8298736f6fa257a144c2d458d30435d3190ede75afd51e03d8713d51374622fe",
+    "crates/tkernel/src/ncollection/indexed_data_map/binding.rs": "74cb64e887051f2ec40f9d32280e3fd49706d492f911ae620d30f97f7e439b4b",
+    "crates/tkernel/tests/indexed_data_map_borrowed_add.rs": "04f4894cd45b9dd4c1179f8f9d38682805b94c4ed60080e5ecb3be726eeb0b3a",
+    "tools/oracle/ncollection_indexed_data_map_borrowed_add.cxx": "986094f3438deff675d4cbe3a127b48357067f69dfd2fa2131191e586dec2161",
+    "tools/oracle/ncollection_indexed_data_map_borrowed_add.expected": "6609cf70b5aba68500b38b7033553850b32fdc524a374c6b21c7b391459b2ed2",
+    "tools/oracle/ncollection_indexed_data_map_borrowed_add.md": "f3a71b8c04849ef10addc1f21bd762bbe489e02f194421d4108c23a8cdba7908",
+    "tools/tests/test_indexed_data_map_borrowed_add.py": "45712623758eb358191a36cd463414d49d9b7d7751be8ddf166008c3f16f95b6"
+  },
+  "native_declaration": {
+    "id": "995e70f21b7807ced267919d9ca8d9eba57088eeb5826d7b60eac2a5301f450a",
+    "usr": "c:@ST>3#T#T#T@NCollection_IndexedDataMap@F@Add#&1t0.0#&1t0.1#",
+    "selector": "NCollection_IndexedDataMap::Add(const TheKeyType&,const TheItemType&)",
+    "signature": "int (const type-parameter-0-0 &, const type-parameter-0-1 &)",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+    "source_hashes": {
+      "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx": "521dbd7622a7feba8161e5327469ba9d6d8ad72615ab447b4d5148ff11ff92e3",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx": "eea4906c372580299332dde5c308b9732d58c96147fc7e08a2f69bc907ff72c8"
+    },
+    "source_locations": [
+      "NCollection_IndexedDataMap.hxx:505",
+      "NCollection_IndexedDataMap.hxx:1063",
+      "NCollection_IndexedDataMap.hxx:1031"
+    ]
+  },
+  "rust_target": {
+    "path": "rustycad_tkernel::ncollection::IndexedDataMap::add_ref",
+    "kind": "function",
+    "source_file": "crates/tkernel/src/ncollection/indexed_data_map/binding.rs",
+    "source_sha256": "74cb64e887051f2ec40f9d32280e3fd49706d492f911ae620d30f97f7e439b4b",
+    "declaration_sha256": "02483554492753fa3a67262cb90000c03039c7eb910338536cd1155f716dced3",
+    "unique_in_private_capture": true,
+    "private_rustdoc_capture": {
+      "command": "cargo +nightly-2026-09-25 rustdoc -p rustycad-tkernel --lib --all-features -- -Z unstable-options --output-format json --document-private-items",
+      "raw_json_gzip": "porting/runtime-evidence/indexed-data-map-borrowed-add-rustdoc.json.gz",
+      "raw_json_gzip_sha256": "21daca7b6b882666371586cf7481552422fc4a69ded125a246bcce13eb93101d",
+      "raw_json_uncompressed_sha256": "d1ddd9b993805c6ab4dd70bb4fede180612621add9f37cb7d48e11080a0ca836",
+      "rustdoc_log": "porting/runtime-evidence/indexed-data-map-borrowed-add-rustdoc.log.gz",
+      "rustdoc_log_sha256": "b66395b24b05955d6cc17460888e9631fe24e4c6d9fb5d936bf17ab0c44efd72",
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)",
+      "normalized_public_path_count": 7501,
+      "unresolved_links": 68,
+      "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e"
+    }
+  },
+  "behavior": {
+    "native_probe_rows": [
+      "inserted=1 events=HVK stored=42",
+      "existing=1 events=HE stored=42"
+    ],
+    "insert": "Original key hash/search occurs before copies; on a miss item copy construction precedes key copy construction and the original key bucket is reused.",
+    "hit": "Original key hash/equality occurs, existing one-based index is returned, and neither argument is copied or replaced."
+  },
+  "limitations": [
+    "OCCT stores key and item in one allocator-owned node; the Rust IndexedDataMap representation allocates separate key and value nodes, so allocator callback counts/order and allocation-failure side effects differ.",
+    "Rust Clone reproduces value-copy order for tested value-semantic types but not arbitrary C++ copy-constructor exceptions or destructor effects.",
+    "Self-aliasing and allocation/exception side effects are outside the verified safe borrowing domain.",
+    "The checked-in global Rust API snapshot predates add_ref; the retained standalone private capture resolves the path uniquely. No global inventory snapshot was changed."
+  ],
+  "parity_row": {
+    "selector": "NCollection_IndexedDataMap::Add(const TheKeyType&,const TheItemType&)",
+    "rust_target": "rustycad_tkernel::ncollection::IndexedDataMap::add_ref",
+    "status": "partial",
+    "notes": "Manual NCollection member mapping. add_ref hashes and searches the borrowed original key once; a hit returns the existing index without cloning. A miss clones the item before the key and links using the original key's bucket. Arbitrary C++ copy-constructor exception and allocator-failure side effects are not modeled.",
+    "parity_json_sha256": "85a3610d897007dc4ca421f55bd24afaf5f203daf072bb6bc155d55bbb565783",
+    "target": "rustycad_tkernel::ncollection::IndexedDataMap::add_ref"
+  },
+  "inputs_sha256": {
+    "occt_declarations_jsonl_gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "api_header_manifest_json": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+    "checked_in_rust_api_json_gz": "157e587ac3d8c8562fbcfaacfde7d8e52aca115881ec697298625de5ed58cc84"
+  },
+  "validation": {
+    "native_command": "c++ -std=c++17 -O2 -I /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/ncollection_indexed_data_map_borrowed_add.cxx -L /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/ncollection_indexed_data_map_borrowed_add",
+    "native_binary_sha256": "557ffb563ca565f306367773aabd9c99b9745568428335a7398f607bd01d50a2",
+    "native_linked_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "native_output_sha256": "6609cf70b5aba68500b38b7033553850b32fdc524a374c6b21c7b391459b2ed2",
+    "native_log": {
+      "path": "porting/runtime-evidence/indexed-data-map-borrowed-add-native.log.gz",
+      "sha256": "aaf7d3a0fcead56bc15cfe214924ce5ca07b033f7e013387968811387bab7c78"
+    },
+    "focused_rust": {
+      "command": "cargo test -p rustycad-tkernel --test indexed_data_map_borrowed_add --test indexed_data_supplemental --test ncollection_indexed_data_map --test ncollection_indexed_map --test indexed_map_supplemental",
+      "result": "91 passed, 0 failed",
+      "log": "porting/runtime-evidence/indexed-data-map-borrowed-add-focused.log.gz",
+      "log_sha256": "574ba592d87d295f718fffe94844ccdaea852672e47eb16823fee5ad69621752"
+    },
+    "doctest": {
+      "command": "cargo test -p rustycad-tkernel --doc add_ref",
+      "result": "1 passed",
+      "log": "porting/runtime-evidence/indexed-data-map-borrowed-add-doc.log.gz",
+      "log_sha256": "26cbcc50aa8ebf9f9853ad619e6259b77a80315b78dcc00391c0f79cfc91e6e1"
+    },
+    "strict_clippy": {
+      "command": "cargo clippy -p rustycad-tkernel --test indexed_data_map_borrowed_add -- -D warnings",
+      "result": "passed",
+      "log": "porting/runtime-evidence/indexed-data-map-borrowed-add-clippy.log.gz",
+      "log_sha256": "2b2baf3e1346c1fedbc99503c07a9f0af1ffad447e630fc288a0f0526115fa18"
+    },
+    "selector_test": {
+      "command": "PYTHONPATH=..:../api_inventory:. python3 -m unittest test_indexed_data_map_borrowed_add",
+      "result": "2 passed",
+      "log": "porting/runtime-evidence/indexed-data-map-borrowed-add-selector.log.gz",
+      "log_sha256": "e0f59548494ad781ef1050141a467399cf62f9c957ca57e29e9b0cf1e7bd1681"
+    },
+    "formatting": "cargo fmt --all -- --check and Black completed; git diff --check passed.",
+    "target": "/tmp/rustycad-indexed-map-target with CARGO_INCREMENTAL=0 and profile debug=0"
+  }
+}

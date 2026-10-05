@@ -85,10 +85,15 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         if self.is_empty() {
             return 0;
         }
-        self.buckets[self.hash_bucket(key)]
+        self.lookup_with_bucket(key).0
+    }
+    pub(super) fn lookup_with_bucket(&self, key: &K) -> (usize, usize) {
+        let bucket = self.hash_bucket(key);
+        let index = self.buckets[bucket]
             .iter()
             .find(|&&index| self.hasher.equal(&self.nodes[index].key, key))
-            .map_or(0, |index| index + 1)
+            .map_or(0, |index| index + 1);
+        (index, bucket)
     }
     /// Checks membership through the injected policy; `map.contains(&42)`.
     pub fn contains(&self, key: &K) -> bool {
@@ -161,6 +166,9 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     }
     fn append_new(&mut self, key: K) -> usize {
         let bucket = self.hash_bucket(&key);
+        self.append_new_at_bucket(key, bucket)
+    }
+    pub(super) fn append_new_at_bucket(&mut self, key: K, bucket: usize) -> usize {
         let index = self.len();
         self.nodes.push(
             self.resource
