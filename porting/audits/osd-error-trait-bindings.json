@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "purpose": "Repair 24 existing OSD error forwards without manufacturing redundant inherent methods.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler_capture_source_revision": "223d849e60c9dd11734d219e43f7f29cfda55234",
+  "bindings": [
+    {
+      "selector": "OSD_Process::Failed() const",
+      "cpp_id": "98b3a839a764a1a96267b1a2c28df651f71d95bf0a3a79894ac869c3a731e726",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_Process::Reset()",
+      "cpp_id": "25806a8d419d9dfa324818c72e64a978343a892a9cb68e94fe4fdeb37a8b6ef6",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Process::Perror()",
+      "cpp_id": "32a9317c54873bcd1d8d503ba68eb95d50f1bed2ad1e6184c9cc53860d91f9c3",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Process::Error() const",
+      "cpp_id": "78a9789875e64fee00ed1f5ee04ac5f769e091de12ef1b0abf5dda668da7ae3e",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_Host::Failed() const",
+      "cpp_id": "4286de365631620dab268e87e76fac7c8680f3e209beb76ae79a42b995a0d7d4",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_Host::Reset()",
+      "cpp_id": "3073e6dbbf3bda985a3f06f93c999da4c6939e373618e105e3d30d83ca33a71d",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Host::Perror()",
+      "cpp_id": "20b8a06e39cf09e2369de19fe457bbbbf6081ebd115bbbfa45c5060a49cef52f",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Host::Error() const",
+      "cpp_id": "5f102c02d70d82ec917bb5a495461024655d979fce162f49755f7f362f127b8b",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_Environment::Failed() const",
+      "cpp_id": "b04a6e8c1c8136d18b46ffff5d66d5d1bc0db2c6db168da4b42b8f824aec17f6",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_Environment::Reset()",
+      "cpp_id": "24c82a37db5df0642c61066da0fe2acd93b681d1af1dede06f4a942faf17f917",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Environment::Perror()",
+      "cpp_id": "4b6fef5c5ed5fbdc5e49b360f547c608df1f424b50564c6219228f002318236d",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_Environment::Error() const",
+      "cpp_id": "f795bf4c155450c68966ccdaa3e6d9dcf227424e5b1d0e3c6a59c28dbcbe87cc",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_FileNode::Failed() const",
+      "cpp_id": "fbd076e0dfec4caf5f69779883c5e9c0f1d4ce5b5428f7207451c4e6408dc3f2",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_FileNode::Reset()",
+      "cpp_id": "dace9300947bb0813fc617d3c8f977a090fa730a26d010a6f22e3e32f93703cf",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_FileNode::Perror()",
+      "cpp_id": "05c0c57194f926e5ee8718accb9bc796f36200cb70cf88aa8c568dff395e864b",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_FileNode::Error() const",
+      "cpp_id": "b9bb16bfdd18b1b0b5d4e0f1191b9e057ad08cb26aafadac26744c37ed59d7b2",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_DirectoryIterator::Failed() const",
+      "cpp_id": "b6630934c63b7ce48f24539ab25efcb09038e7b5e0d490ff3fa1ad196945361e",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_DirectoryIterator::Reset()",
+      "cpp_id": "c8dc23c6d3882bd62c3556e07cb2af4c33611a02093fa4ac7f7e8d06218d312f",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_DirectoryIterator::Perror()",
+      "cpp_id": "02b0dbed15f3d5a433aab8e198e4f3205a3b968cf804556e3806aee90a7f1f9d",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_DirectoryIterator::Error() const",
+      "cpp_id": "fcbf39a3778976ea09eb2850bdc05e346c7b9f770e546f6dfcfe1f8b0d382200",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_FileIterator::Failed() const",
+      "cpp_id": "077141bde40e41b5cdb1a660053645abbd87855b4d57d8a0f30ce177f44968c5",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    },
+    {
+      "selector": "OSD_FileIterator::Reset()",
+      "cpp_id": "0fa48aab0e8aa363e5b17a4244f805a06a51542fdb47f98e9ff73b5cbe6a085f",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_FileIterator::Perror()",
+      "cpp_id": "4df03b957e3d0cea85da4f86271630988784dddee727d934eecf76f1a78e2618",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ]
+    },
+    {
+      "selector": "OSD_FileIterator::Error() const",
+      "cpp_id": "9ed1bd16020785da0258ca6cddb4bc97a19d62e1ac093fc2cd8019609f949811",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ]
+    }
+  ],
+  "compiled_targets": [
+    {
+      "path": "rustycad_tkernel::osd::OsdErrorAccess::failed",
+      "source_file": "crates/tkernel/src/osd/error.rs",
+      "source_sha256": "9c8ce991b062a6908e8dbb02408542932c9280ed998723d33e6acbed5feba0ff",
+      "declaration_sha256": "4be62416ed137ca2aae2340fd587b6ea81ef187a0e90372fc5e0d109cad622c6"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/process.rs",
+      "source_sha256": "28ed34d50f5e6906b7a904d18f9e1bf19615daa0215a51a71c260b1ec07e9582",
+      "declaration_sha256": "21000768fc96b9f094989c81de416a545f0915b7966ababe46b3b148702bd6d9"
+    },
+    {
+      "path": "rustycad_tkernel::osd::OsdErrorAccess::reset",
+      "source_file": "crates/tkernel/src/osd/error.rs",
+      "source_sha256": "9c8ce991b062a6908e8dbb02408542932c9280ed998723d33e6acbed5feba0ff",
+      "declaration_sha256": "bee12d141f5b95da7b24aeb9d8ea8f81ffb46589011a9d1eb45f29a38d2650b1"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/process.rs",
+      "source_sha256": "28ed34d50f5e6906b7a904d18f9e1bf19615daa0215a51a71c260b1ec07e9582",
+      "declaration_sha256": "e8328673a26e1c3b41581fb8b33510628cf365e5d73aa8c2c53783930ce0087a"
+    },
+    {
+      "path": "rustycad_tkernel::osd::OsdErrorAccess::perror",
+      "source_file": "crates/tkernel/src/osd/error.rs",
+      "source_sha256": "9c8ce991b062a6908e8dbb02408542932c9280ed998723d33e6acbed5feba0ff",
+      "declaration_sha256": "bb5d0a8ec87914774405fba29ee503769bc6ab01598219e087b4c264b38beda8"
+    },
+    {
+      "path": "rustycad_tkernel::osd::OsdErrorAccess::error",
+      "source_file": "crates/tkernel/src/osd/error.rs",
+      "source_sha256": "9c8ce991b062a6908e8dbb02408542932c9280ed998723d33e6acbed5feba0ff",
+      "declaration_sha256": "731226bc93b0c6083e9a604bcc926f142e94de2933f780ebca35d834cb1b2f2b"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/process/host.rs",
+      "source_sha256": "ef791014d9f4fb60e72aed484d33f2d5a2c40d0c03028e5702e0dbf897dcd00b",
+      "declaration_sha256": "cfb3ec28fd571902db7c785f45a03f248ef87ee165f958ae6b7a513f62c7c10a"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/process/host.rs",
+      "source_sha256": "ef791014d9f4fb60e72aed484d33f2d5a2c40d0c03028e5702e0dbf897dcd00b",
+      "declaration_sha256": "37caf016bc80a487f5529542dc07dbcde125da4da1c6dc4f9c9618a29bf7a3a5"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/process/environment.rs",
+      "source_sha256": "71ca5fae81875e1b8a9705737df5a9deb6ba8bfa235ab162ffa54c5202399298",
+      "declaration_sha256": "5298d5c35ec34c6092b061d66b62985c74c4badafac9073f271802a8fa7e1f6a"
+    },
+    {
+      "path": "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/process/environment.rs",
+      "source_sha256": "71ca5fae81875e1b8a9705737df5a9deb6ba8bfa235ab162ffa54c5202399298",
+      "declaration_sha256": "f1a7901bc2ddac658f6ead755a79cfa46d6b98afe01b36a8228eabea269a7613"
+    },
+    {
+      "path": "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/file/file_node.rs",
+      "source_sha256": "15e9de5d07cce417bf3d939829c5db1819743ded5787a26170be684c182558a7",
+      "declaration_sha256": "0cb41719913c85d1bf747dfa06d6ff7215eee35263f162d597b6d59c4980f3c2"
+    },
+    {
+      "path": "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/file/file_node.rs",
+      "source_sha256": "15e9de5d07cce417bf3d939829c5db1819743ded5787a26170be684c182558a7",
+      "declaration_sha256": "95a3c10700f8e2b1a80a49225d18b9f94058deb18f6ad26c75fea78f3f85387e"
+    },
+    {
+      "path": "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/file/iterators.rs",
+      "source_sha256": "38d30366e1c15c6f7f174ee6c608884aabcab1d4875c0cfc3b242d5b63f560a7",
+      "declaration_sha256": "df2e3b584044fda0563385f6462c63c8c90b1d079342cd562630ac2423d1aa27"
+    },
+    {
+      "path": "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/file/iterators.rs",
+      "source_sha256": "38d30366e1c15c6f7f174ee6c608884aabcab1d4875c0cfc3b242d5b63f560a7",
+      "declaration_sha256": "03bd2d47123a92ac0924889da24b2d0769ccc559cf938aa595240dd8ddaff2d6"
+    },
+    {
+      "path": "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error",
+      "source_file": "crates/tkernel/src/osd/file/iterators.rs",
+      "source_sha256": "38d30366e1c15c6f7f174ee6c608884aabcab1d4875c0cfc3b242d5b63f560a7",
+      "declaration_sha256": "5face6b7b40021ddffa9e3a048d6e2bdc0031c074d942bc6afc8bbc91f61aa6f"
+    },
+    {
+      "path": "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut",
+      "source_file": "crates/tkernel/src/osd/file/iterators.rs",
+      "source_sha256": "38d30366e1c15c6f7f174ee6c608884aabcab1d4875c0cfc3b242d5b63f560a7",
+      "declaration_sha256": "b59a9d3d6acaed8367316fd36de6653dc4ea46381d3d5b81af4b84e420a4c301"
+    }
+  ],
+  "limits": [
+    "This is compiler binding recovery; behavior and original declaration counts are unchanged.",
+    "Native Windows execution and complete toolkit parity are not established."
+  ],
+  "validation": {
+    "focused_rust_passes": 44,
+    "binding_python_passes": 2,
+    "inherited_workspace_green_source_revision": "223d849e60c9dd11734d219e43f7f29cfda55234",
+    "inherited_workspace_passes": 13447,
+    "inherited_workspace_receipt": "porting/runtime-evidence/cargo-workspace-223d849e.json",
+    "inherited_native_foundation_receipt": "porting/runtime-evidence/base-legacy-223d849e.json"
+  },
+  "validation_logs": [
+    {
+      "path": "porting/runtime-evidence/osd-error-bindings-python.gz",
+      "sha256": "1bf64bba277e5e89b699be3111609d63fb2928d4fe4e937789d3ce6a2cb7bf47",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/osd-error-bindings-rust.gz",
+      "sha256": "3b1cba89784a925237bddbdf665c758892af8b9ae1c449207fc895b8d7f3e445",
+      "exit_code": 0
+    }
+  ]
+}

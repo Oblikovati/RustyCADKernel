@@ -94304,33 +94304,53 @@
       "upstream_id": "OSD_Process::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
-      "rust_item": "rustycad_tkernel::osd::Process::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "98b3a839a764a1a96267b1a2c28df651f71d95bf0a3a79894ac869c3a731e726"
     },
     {
       "upstream_id": "OSD_Process::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
-      "rust_item": "rustycad_tkernel::osd::Process::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "25806a8d419d9dfa324818c72e64a978343a892a9cb68e94fe4fdeb37a8b6ef6"
     },
     {
       "upstream_id": "OSD_Process::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
-      "rust_item": "rustycad_tkernel::osd::Process::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "32a9317c54873bcd1d8d503ba68eb95d50f1bed2ad1e6184c9cc53860d91f9c3"
     },
     {
       "upstream_id": "OSD_Process::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
-      "rust_item": "rustycad_tkernel::osd::Process::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Process::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "78a9789875e64fee00ed1f5ee04ac5f769e091de12ef1b0abf5dda668da7ae3e"
     },
     {
       "upstream_id": "OSD_Host::OSD_Host()",
@@ -94392,33 +94412,53 @@
       "upstream_id": "OSD_Host::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
-      "rust_item": "rustycad_tkernel::osd::Host::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "4286de365631620dab268e87e76fac7c8680f3e209beb76ae79a42b995a0d7d4"
     },
     {
       "upstream_id": "OSD_Host::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
-      "rust_item": "rustycad_tkernel::osd::Host::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "3073e6dbbf3bda985a3f06f93c999da4c6939e373618e105e3d30d83ca33a71d"
     },
     {
       "upstream_id": "OSD_Host::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
-      "rust_item": "rustycad_tkernel::osd::Host::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "20b8a06e39cf09e2369de19fe457bbbbf6081ebd115bbbfa45c5060a49cef52f"
     },
     {
       "upstream_id": "OSD_Host::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
-      "rust_item": "rustycad_tkernel::osd::Host::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Host::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "5f102c02d70d82ec917bb5a495461024655d979fce162f49755f7f362f127b8b"
     },
     {
       "upstream_id": "OSD_Environment::OSD_Environment()",
@@ -94496,33 +94536,53 @@
       "upstream_id": "OSD_Environment::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
-      "rust_item": "rustycad_tkernel::osd::Environment::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "b04a6e8c1c8136d18b46ffff5d66d5d1bc0db2c6db168da4b42b8f824aec17f6"
     },
     {
       "upstream_id": "OSD_Environment::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
-      "rust_item": "rustycad_tkernel::osd::Environment::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "24c82a37db5df0642c61066da0fe2acd93b681d1af1dede06f4a942faf17f917"
     },
     {
       "upstream_id": "OSD_Environment::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
-      "rust_item": "rustycad_tkernel::osd::Environment::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "4b6fef5c5ed5fbdc5e49b360f547c608df1f424b50564c6219228f002318236d"
     },
     {
       "upstream_id": "OSD_Environment::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
-      "rust_item": "rustycad_tkernel::osd::Environment::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError). Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::Environment::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "f795bf4c155450c68966ccdaa3e6d9dcf227424e5b1d0e3c6a59c28dbcbe87cc"
     },
     {
       "upstream_id": "OSD_SharedLibrary::OSD_SharedLibrary()",
@@ -95712,33 +95772,53 @@
       "upstream_id": "OSD_FileNode::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileNode::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "fbd076e0dfec4caf5f69779883c5e9c0f1d4ce5b5428f7207451c4e6408dc3f2"
     },
     {
       "upstream_id": "OSD_FileNode::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileNode::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "dace9300947bb0813fc617d3c8f977a090fa730a26d010a6f22e3e32f93703cf"
     },
     {
       "upstream_id": "OSD_FileNode::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileNode::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "05c0c57194f926e5ee8718accb9bc796f36200cb70cf88aa8c568dff395e864b"
     },
     {
       "upstream_id": "OSD_FileNode::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileNode::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::FileNode::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "b9bb16bfdd18b1b0b5d4e0f1191b9e057ad08cb26aafadac26744c37ed59d7b2"
     },
     {
       "upstream_id": "OSD_File::OSD_File()",
@@ -96072,33 +96152,53 @@
       "upstream_id": "OSD_DirectoryIterator::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "b6630934c63b7ce48f24539ab25efcb09038e7b5e0d490ff3fa1ad196945361e"
     },
     {
       "upstream_id": "OSD_DirectoryIterator::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "c8dc23c6d3882bd62c3556e07cb2af4c33611a02093fa4ac7f7e8d06218d312f"
     },
     {
       "upstream_id": "OSD_DirectoryIterator::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "02b0dbed15f3d5a433aab8e198e4f3205a3b968cf804556e3806aee90a7f1f9d"
     },
     {
       "upstream_id": "OSD_DirectoryIterator::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::DirectoryIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "fcbf39a3778976ea09eb2850bdc05e346c7b9f770e546f6dfcfe1f8b0d382200"
     },
     {
       "upstream_id": "OSD_FileIterator::OSD_FileIterator()",
@@ -96168,33 +96268,53 @@
       "upstream_id": "OSD_FileIterator::Failed() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileIterator::failed",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::failed",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::failed",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "077141bde40e41b5cdb1a660053645abbd87855b4d57d8a0f30ce177f44968c5"
     },
     {
       "upstream_id": "OSD_FileIterator::Reset()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileIterator::reset",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::reset",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::reset",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "0fa48aab0e8aa363e5b17a4244f805a06a51542fdb47f98e9ff73b5cbe6a085f"
     },
     {
       "upstream_id": "OSD_FileIterator::Perror()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileIterator::perror",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::perror",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::perror",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error_mut"
+      ],
+      "selector_id": "4df03b957e3d0cea85da4f86271630988784dddee727d934eecf76f1a78e2618"
     },
     {
       "upstream_id": "OSD_FileIterator::Error() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileIterator::error",
+      "rust_item": "rustycad_tkernel::osd::OsdErrorAccess::error",
       "status": "implemented",
-      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent. Compiler proof pairs the public default method with this concrete class error accessor implementation. This repair resolves the existing trait forwarding; it does not add behavior or original declarations. Native Windows runtime is not validated here. See porting/audits/osd-error-trait-bindings.json.",
+      "rust_items": [
+        "rustycad_tkernel::osd::OsdErrorAccess::error",
+        "rustycad_tkernel::osd::FileIterator::<rustycad_tkernel::osd::OsdErrorAccess>::osd_error"
+      ],
+      "selector_id": "9ed1bd16020785da0258ca6cddb4bc97a19d62e1ac093fc2cd8019609f949811"
     },
     {
       "upstream_id": "Units::UnitsFile(const char* const)",
