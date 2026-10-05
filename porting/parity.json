@@ -69036,12 +69036,14 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_Array1::Init(const_reference)",
+      "upstream_id": "NCollection_Array1::Init(NCollection_Array1::const_reference)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+      "rust_item": "rustycad_tkernel::ncollection::Array1::init_ref",
+      "status": "partial",
+      "notes": "Borrowed initialization invokes Clone::clone_from for each slot in storage order, matching native copy assignment for owned/exclusively borrowed storage. Custom-element native probe verifies every assignment and no copy construction. Partial: native source/destination aliases are not representable under Rust exclusive borrowing; Shared storage detaches on mutation instead of writing through a native const-cast view.",
+      "selector_id": "cef5d50c162b31eac7705ece05b222fd0372826fe7a49f79f8ccf8b5ff7613a3",
+      "source_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
     },
     {
       "upstream_id": "NCollection_Array1::Assign(const NCollection_Array1&)",

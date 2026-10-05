@@ -1,0 +1,68 @@
+{
+  "base_revision": "aa933573668fb4a8c17210bd756ccaa0b8adf6c9",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Array1 borrowed Init uses per-slot Clone::clone_from instead of moving the supplied value into the final slot",
+  "legacy_declaration_count_delta": 0,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/array1.rs": "0648f5d92c5c8c83a8c14394c44ad2f54262ff9ced707fe41453ac89aed0670a",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "tools/oracle/tkernel_array1_borrowed_init.cxx": "6b714a785e0566d4c8d8e50c67d37041dcfacb7657165b9613953498b9b8e8d9",
+    "tools/oracle/tkernel_array1_borrowed_init.expected": "76d6f0b0cf24ed4f3a554d4a1928b24ab180e635aa5bfd57481c2984c3610605",
+    "porting/parity.json": "8b7730ee574af892f8f0a996fbdc827cde459acdbc9d29d1ee06c21843f4c3e8"
+  },
+  "native_header_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+  "native_executable_sha256": "c07ba9b1af0d088b80bc80c781a99580f20220955985d5734f354d2290911f90",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_observations": [
+    "Each of three slots is copy-assigned in storage order; copy construction would throw and is never called.",
+    "Bounds remain -1..1 and the source remains unchanged.",
+    "Empty array leaves source untouched and performs no assignment."
+  ],
+  "initial_regression_exit_code": 101,
+  "rust_test_summary": {
+    "passed": 2840,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 187,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "integration_lint_fix": "4c393177 corrects a needless borrowed generic array argument in the prior UTF-16 copy test; cherry-picked as aa933573 before final tests.",
+  "cpp_binding": {
+    "selector": "NCollection_Array1::Init(NCollection_Array1::const_reference)",
+    "id": "cef5d50c162b31eac7705ece05b222fd0372826fe7a49f79f8ccf8b5ff7613a3",
+    "signature": "void (const type-parameter-0-0 &)"
+  },
+  "rust_binding": {
+    "path": "rustycad_tkernel::ncollection::Array1::init_ref",
+    "source_file": "crates/tkernel/src/ncollection/array1.rs",
+    "source_sha256": "0648f5d92c5c8c83a8c14394c44ad2f54262ff9ced707fe41453ac89aed0670a",
+    "declaration_sha256": "3c676e7cb2821aae6be7102ec6526644325e0c9113c919abf57e6f737fcdbeac"
+  },
+  "logs": {
+    "porting/runtime-evidence/array1-init-red.log.gz": {
+      "sha256": "76e744a78cc2e2cb14ff3566b25125a85b85847b1e144f55f914581027d3b58c",
+      "uncompressed_sha256": "753b617dce1f7027a649d70e02c1ee16f3cbc39343323981c3dabb73e9c0ccd0"
+    },
+    "porting/runtime-evidence/array1-init-full.log.gz": {
+      "sha256": "bfc30106842e8df8a7cf6ac650491c63a7556ec6159d96e7f9c865fc39ca6e82",
+      "uncompressed_sha256": "8aa06979c783a488098273f9b7e5141b066359f6f1bf6d33584885236aaae953"
+    },
+    "porting/runtime-evidence/array1-init-clippy.log.gz": {
+      "sha256": "47a662732a5bb7da140e8084896f47c4b93be1cca5b22e379e93b8e47187b5ec",
+      "uncompressed_sha256": "1be7ca6024c9f0206dd8177c8806a920c91ee301706c08541424e144a98082c5"
+    },
+    "porting/runtime-evidence/array1-init-rustdoc.log.gz": {
+      "sha256": "63836895583dee8dc52dd2c7861bfdb674c7ef067106efd2ccb872c0f6c1d1de",
+      "uncompressed_sha256": "0174236b14c1caf095105f2f4cf2834f90fefdae1f1354ea242c6504915d71bb"
+    }
+  },
+  "limitations": [
+    "The mapping is partial: source/destination aliases cannot be passed through Rust exclusive borrows; Shared storage detaches while native aliases remain writable.",
+    "Native copy assignment corresponds to Rust Clone::clone_from; no claim is made about arbitrary unrelated element implementations.",
+    "This supplemental test and compiler binding do not add original legacy declarations or prove full Array1 parity."
+  ]
+}
