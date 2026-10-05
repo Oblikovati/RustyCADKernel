@@ -1,0 +1,32 @@
+"""Keep base exception assignment bound to its native declaration."""
+
+import gzip
+import json
+import unittest
+from pathlib import Path
+
+from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
+
+ROOT = Path(__file__).resolve().parents[2]
+SELECTOR = "Standard_Failure::operator=(const Standard_Failure&)"
+COMPILER_ID = "b94cc1f21b3fd499940427c345ffce659a5a091901b8a6c02d53c6508582151a"
+
+
+class FailureAssignmentBindingTest(unittest.TestCase):
+    def test_base_assignment_uses_explicit_rust_operation(self) -> None:
+        with gzip.open(
+            ROOT / "porting/api-inventory/occt-declarations.jsonl.gz", "rt"
+        ) as stream:
+            declarations = [json.loads(line) for line in stream]
+        manifest = json.loads((ROOT / "porting/api-header-manifest.json").read_text())
+        by_name, _, _ = cpp_indexes(declarations, header_owners(manifest))
+        status, candidates = cpp_candidates(SELECTOR, "TKernel", by_name)
+        self.assertEqual(status, "unique")
+        self.assertEqual([row["id"] for row in candidates], [COMPILER_ID])
+        rows = json.loads((ROOT / "porting/parity.json").read_text())["api"]
+        matches = [row for row in rows if row["upstream_id"] == SELECTOR]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(
+            matches[0]["rust_item"], "rustycad_tkernel::standard::Failure::assign_base"
+        )
+        self.assertEqual(matches[0]["status"], "partial")

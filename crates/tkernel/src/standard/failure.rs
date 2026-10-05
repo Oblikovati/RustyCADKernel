@@ -75,6 +75,14 @@ impl Failure {
     pub fn stack_string(&self) -> &str {
         &self.stack
     }
+    /// Assigns the base message and stack while preserving the destination exception type
+    /// and derived message buffer; `target.assign_base(&source)` returns `target`.
+    pub fn assign_base(&mut self, source: &Self) -> &mut Self {
+        // Standard_Failure::operator= does not assign a derived exception's fields.
+        self.message = Arc::clone(&source.message);
+        self.stack = Arc::clone(&source.stack);
+        self
+    }
     /// Replaces the message while preserving copies; `failure.set_message("updated")`.
     pub fn set_message(&mut self, message: &str) {
         self.message = c_string(message);
