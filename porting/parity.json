@@ -77133,7 +77133,7 @@
       "upstream_id": "NCollection_BaseMap::NbBuckets() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::nb_buckets",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::nb_buckets",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Zero until the first insertion when constructed with zero buckets, and kept by Clear(true)."
     },
@@ -77157,7 +77157,7 @@
       "upstream_id": "NCollection_BaseMap::Extent() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::extent",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::extent",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Narrowed to int like the native static_cast."
     },
@@ -77165,7 +77165,7 @@
       "upstream_id": "NCollection_BaseMap::Length() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::length",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::length",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Narrowed to int like the native static_cast."
     },
@@ -77173,7 +77173,7 @@
       "upstream_id": "NCollection_BaseMap::Size() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::size",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::size",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
     },
@@ -77181,7 +77181,7 @@
       "upstream_id": "NCollection_BaseMap::IsEmpty() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::is_empty",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::is_empty",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
     },
@@ -77189,7 +77189,7 @@
       "upstream_id": "NCollection_BaseMap::Allocator() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "<M as rustycad_tkernel::ncollection::BaseMap>::allocator",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::allocator",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
     },
@@ -77813,23 +77813,23 @@
       "upstream_id": "NCollection_DefaultHasher::operator()(const TheKeyType&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The primary template hashes with std::hash (enums with static_cast<size_t>); Rust keys provide the same value through HashKey (libstdc++ hash<double> for f64, the OCCT string hashes for AsciiString/ExtendedString). Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
+      "status": "partial",
+      "notes": "Maps the generic C++ std::hash/equal_to operation to Rust HashPolicy<K>; the blanket DefaultHashPolicy implementation requires K: HashKey + PartialEq. It does not cover every type supported by arbitrary C++ std::hash specializations."
     },
     {
       "upstream_id": "NCollection_DefaultHasher::operator()(const TheKeyType&,const TheKeyType&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; std::equal_to becomes PartialEq."
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
+      "status": "partial",
+      "notes": "Maps the generic C++ std::hash/equal_to operation to Rust HashPolicy<K>; the blanket DefaultHashPolicy implementation requires K: HashKey + PartialEq. It does not cover every type supported by arbitrary C++ std::hash specializations."
     },
     {
       "upstream_id": "NCollection_DefaultHasher<bool>::operator()(bool) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<bool>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(bool): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for bool, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77837,7 +77837,7 @@
       "upstream_id": "NCollection_DefaultHasher<bool>::operator()(bool,bool) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<bool>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(bool): operator== via PartialEq for bool."
     },
@@ -77845,7 +77845,7 @@
       "upstream_id": "NCollection_DefaultHasher<char>::operator()(char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i8>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i8, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77853,7 +77853,7 @@
       "upstream_id": "NCollection_DefaultHasher<char>::operator()(char,char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i8>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char): operator== via PartialEq for i8."
     },
@@ -77861,7 +77861,7 @@
       "upstream_id": "NCollection_DefaultHasher<signed char>::operator()(signed char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i8>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(signed char): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i8, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77869,7 +77869,7 @@
       "upstream_id": "NCollection_DefaultHasher<signed char>::operator()(signed char,signed char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i8>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(signed char): operator== via PartialEq for i8."
     },
@@ -77877,7 +77877,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned char>::operator()(unsigned char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u8>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned char): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u8, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77885,7 +77885,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned char>::operator()(unsigned char,unsigned char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u8>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned char): operator== via PartialEq for u8."
     },
@@ -77893,7 +77893,7 @@
       "upstream_id": "NCollection_DefaultHasher<wchar_t>::operator()(wchar_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i32>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(wchar_t): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i32, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77901,7 +77901,7 @@
       "upstream_id": "NCollection_DefaultHasher<wchar_t>::operator()(wchar_t,wchar_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i32>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(wchar_t): operator== via PartialEq for i32."
     },
@@ -77909,7 +77909,7 @@
       "upstream_id": "NCollection_DefaultHasher<char16_t>::operator()(char16_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u16>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char16_t): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u16, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77917,7 +77917,7 @@
       "upstream_id": "NCollection_DefaultHasher<char16_t>::operator()(char16_t,char16_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u16>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char16_t): operator== via PartialEq for u16."
     },
@@ -77925,7 +77925,7 @@
       "upstream_id": "NCollection_DefaultHasher<char32_t>::operator()(char32_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u32>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char32_t): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u32, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77933,7 +77933,7 @@
       "upstream_id": "NCollection_DefaultHasher<char32_t>::operator()(char32_t,char32_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u32>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(char32_t): operator== via PartialEq for u32."
     },
@@ -77941,7 +77941,7 @@
       "upstream_id": "NCollection_DefaultHasher<short>::operator()(short) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i16>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(short): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i16, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77949,7 +77949,7 @@
       "upstream_id": "NCollection_DefaultHasher<short>::operator()(short,short) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i16>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(short): operator== via PartialEq for i16."
     },
@@ -77957,7 +77957,7 @@
       "upstream_id": "NCollection_DefaultHasher<int>::operator()(int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i32>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(int): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i32, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77965,7 +77965,7 @@
       "upstream_id": "NCollection_DefaultHasher<int>::operator()(int,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i32>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(int): operator== via PartialEq for i32."
     },
@@ -77973,7 +77973,7 @@
       "upstream_id": "NCollection_DefaultHasher<long>::operator()(long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i64>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(long): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i64, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77981,7 +77981,7 @@
       "upstream_id": "NCollection_DefaultHasher<long>::operator()(long,long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i64>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(long): operator== via PartialEq for i64."
     },
@@ -77989,7 +77989,7 @@
       "upstream_id": "NCollection_DefaultHasher<long long>::operator()(long long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i64>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(long long): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for i64, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -77997,7 +77997,7 @@
       "upstream_id": "NCollection_DefaultHasher<long long>::operator()(long long,long long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<i64>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(long long): operator== via PartialEq for i64."
     },
@@ -78005,7 +78005,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned short>::operator()(unsigned short) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u16>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned short): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u16, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -78013,7 +78013,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned short>::operator()(unsigned short,unsigned short) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u16>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned short): operator== via PartialEq for u16."
     },
@@ -78021,7 +78021,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned int>::operator()(unsigned int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u32>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned int): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u32, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -78029,7 +78029,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned int>::operator()(unsigned int,unsigned int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u32>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned int): operator== via PartialEq for u32."
     },
@@ -78037,7 +78037,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned long>::operator()(unsigned long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u64>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned long): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u64, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -78045,7 +78045,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned long>::operator()(unsigned long,unsigned long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u64>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned long): operator== via PartialEq for u64."
     },
@@ -78053,7 +78053,7 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned long long>::operator()(unsigned long long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u64>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned long long): static_cast<size_t> of the value (sign-extended for signed types) via HashKey for u64, on the Linux LP64 profile. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
@@ -78061,25 +78061,25 @@
       "upstream_id": "NCollection_DefaultHasher<unsigned long long>::operator()(unsigned long long,unsigned long long) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<u64>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; DEFINE_DEFAULT_HASHER_PURE(unsigned long long): operator== via PartialEq for u64."
     },
     {
-      "upstream_id": "NCollection_DefaultHasher<TheKeyType*>::operator()(const TheKeyType*) const",
+      "upstream_id": "NCollection_DefaultHasher<type-parameter-0-0 *>::operator()(const type-parameter-0-0 *) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<*const T>>::hash",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::hash",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Pointer keys hash their address (HashKey for *const T and *mut T)."
+      "notes": "Compiler identity for the pointer partial specialization, resolved against the pinned TKernel declaration inventory. Rust DefaultHashPolicy maps to HashPolicy<K> for pointer K through generic HashKey implementations; native profile remains Linux LP64."
     },
     {
-      "upstream_id": "NCollection_DefaultHasher<TheKeyType*>::operator()(const TheKeyType*,const TheKeyType*) const",
+      "upstream_id": "NCollection_DefaultHasher<type-parameter-0-0 *>::operator()(const type-parameter-0-0 *,const type-parameter-0-0 *) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::DefaultHashPolicy as rustycad_tkernel::ncollection::HashPolicy<*const T>>::equal",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<K>>::equal",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; Pointer keys compare by address."
+      "notes": "Compiler identity for the pointer partial specialization, resolved against the pinned TKernel declaration inventory. Rust DefaultHashPolicy maps to HashPolicy<K> for pointer K through generic HashKey implementations; native profile remains Linux LP64."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode(const TheKey1Type&,const TheKey2Type&,NCollection_ListNode*,NCollection_ListNode*)",
