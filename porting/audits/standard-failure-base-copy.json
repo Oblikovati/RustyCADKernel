@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "purpose": "Model native Standard_Failure copy construction with derived-to-base slicing.",
+  "rust_base_revision": "eaeaf870b08691638be797c201adefdfef368b4c",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_sources": {
+    "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx": "4ecf579b7f80cfc908c41c84f1862d4361b7ab01f74cd858689d319eb7b639d5",
+    "src/FoundationClasses/TKernel/Standard/Standard_Failure.cxx": "b9e8a22017f38fc43a7588460c1472e0e38e3962951cf84c1424cd302f0954d9",
+    "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx": "5fcb70381dcb186158569bc44bb425c9cb6f258562b55ba5bc0f42d7b5fb888c",
+    "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.cxx": "46603f5ec764595fc5e4db31760c5e104bc57e73d4240402dba145839721dd9d",
+    "src/FoundationClasses/TKernel/Standard/Standard_DefineException.hxx": "718d83d7d37b327bf991526be73f0cf41ba6b745cbfbd0ed7398d114c5cf1d8a"
+  },
+  "rust_sources": {
+    "crates/tkernel/src/standard/failure.rs": "ace9c66e29ea612655045a500f76e076f8a2ec54f807759689d1c1e6ec772106",
+    "crates/tkernel/tests/standard_failure_base_copy.rs": "267f34eeaa1e348437f77d4946870dbfdfbc42cff2bca5bcdbb36ebd95121f6c"
+  },
+  "compiler_binding": {
+    "rustdoc_json_sha256": "41406ba9d401814a47c67d56b7cd538e6a4af10bfe23c86dce589015b7a87573",
+    "target": {
+      "path": "rustycad_tkernel::standard::Failure::copy_base",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "source",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/standard/failure.rs",
+      "source_sha256": "ace9c66e29ea612655045a500f76e076f8a2ec54f807759689d1c1e6ec772106",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "Failure",
+            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "08a231b64eee537883073025f9f299f948315b0d7476b48f7cc20ad2261a9474"
+    }
+  },
+  "cpp_id": "c72444b328de71bc61f432cb717bba784d9c25ac7ea8ee0965162d3a0f96c909",
+  "behavior": [
+    "Copy construction shares the source base message and stack without recapturing a stack trace.",
+    "The constructed object has Standard_Failure identity even when the source is a derived exception.",
+    "The constructed object omits Standard_OutOfMemory private storage and uses the source base message, not its virtual what() value."
+  ],
+  "limitations": [
+    "Pinned native source messages can contain arbitrary nonzero bytes. A native-only diagnostic roundtrips byte 0xff with shared message storage; Rust Failure base fields are Arc<str> and cannot represent that state. The row stays partial.",
+    "Two Rust supplemental tests cover the representable derived-source cases. The native-only byte diagnostic is not counted as a passing Rust parity case.",
+    "Ordinary Clone remains whole-value Rust copying; the copy constructor maps to explicit copy_base.",
+    "No original legacy declarations added."
+  ],
+  "native_probe": {
+    "source": "tools/oracle/tkernel_failure_base_copy.cxx",
+    "source_sha256": "09062d4464860848781d623e7035ef1e227b76c64f3d85e43a00a578cc390190",
+    "expected": "tools/oracle/tkernel_failure_base_copy.expected",
+    "expected_sha256": "bb6bb846b0418d169088e84931bed142b6402b1252be6422742703ef502d09c1",
+    "compiler": "g++ 13.3.0",
+    "flags": [
+      "-std=c++17",
+      "-O2"
+    ],
+    "include": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+    "library": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "binary_sha256": "c13a352d63a6eafbdb0192682672707aae2f6b42a48c55cece24484ddf8b0e0d",
+    "exit_code": 0,
+    "comparison_exit_code": 0,
+    "output": "Standard_Failure: messagestack\nStandard_DomainError\n1 1\nStandard_Failure 1 1\nprivate trace\n255 1\n"
+  },
+  "validation": {
+    "red": {
+      "exit_code": 101,
+      "log": "porting/runtime-evidence/failure-copy-red.log.gz",
+      "log_sha256": "059a67b356df0d4ae7a9c86bab3c170471220e4ee2ce4739a75acb072e0e9b01",
+      "reason": "The explicit copy_base operation did not exist."
+    },
+    "selector": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-copy-selector.log.gz",
+      "log_sha256": "33bd3cf6a5837ec6fbce534fbec5895c66706d30b26ae7de6b7e9075a2f4044c",
+      "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_standard_failure_assignment_binding"
+    },
+    "clippy": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-copy-clippy.log.gz",
+      "log_sha256": "c591ee4552b94bcf2bb0f65047018720cd9f33cb26a1dae44acc66fc49d6683b",
+      "command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings"
+    },
+    "full": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-copy-full.log.gz",
+      "log_sha256": "401252ea1d2f4ac401e6acbbf6afc6882491109ba0b1499562d42de67d9ca386",
+      "command": "cargo test -p rustycad-tkernel",
+      "summary": {
+        "passed": 2865,
+        "failed": 0,
+        "ignored": 0,
+        "result_groups": 195,
+        "failed_result_groups": 0,
+        "command_exit_code": 0,
+        "command_succeeded": true
+      }
+    },
+    "rustdoc": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-copy-rustdoc.log.gz",
+      "log_sha256": "5c4aa280ef1ccac542920998ce71337be8183fb8d223be20bc1d806595afa072"
+    }
+  },
+  "environment": {
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_BUILD_JOBS": "4",
+    "CARGO_TARGET_DIR": "/tmp/rustycad-failure-base-target"
+  }
+}

@@ -84594,9 +84594,9 @@
       "upstream_id": "Standard_Failure(const Standard_Failure&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::<core::clone::Clone>::clone",
-      "status": "implemented",
-      "notes": "Copies share the message and stack strings (Arc), as the reference-counted StringRef. Compared by the runtime_failure probe. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
+      "rust_item": "rustycad_tkernel::standard::Failure::copy_base",
+      "status": "partial",
+      "notes": "Explicit base copy construction shares message/stack, produces Standard_Failure identity and omits derived OutOfMemory storage. Native and Rust probes cover derived source slicing. Rust Failure still represents base message/stack as UTF-8 strings, so arbitrary non-UTF-8 native message states remain outside its input domain; ordinary Clone remains whole-value Rust copying."
     },
     {
       "upstream_id": "Standard_Failure::Standard_Failure(const char*)",
