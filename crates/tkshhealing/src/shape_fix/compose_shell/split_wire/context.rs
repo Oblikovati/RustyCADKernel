@@ -105,7 +105,7 @@ fn split_edge_starts(
             let (first, last) = BRepTool::range_on_face(&edge, face)?;
             Ok(if reversed { last } else { first })
         })
-        .collect::<Result<Vec<_>, _>>()?;
+        .collect::<Result<Vec<_>, Failure>>()?;
     Ok((parameters, reversed))
 }
 

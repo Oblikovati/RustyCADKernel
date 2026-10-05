@@ -244,8 +244,8 @@ impl AreaSplitInput {
         let u = fields.u_values.get().ok_or_else(missing_split_values)?;
         let v = fields.v_values.get().ok_or_else(missing_split_values)?;
         let bounds = (
-            u.sequence(|values| Ok((*values.value(1)?, *values.value(2)?)))?,
-            v.sequence(|values| Ok((*values.value(1)?, *values.value(2)?)))?,
+            u.sequence(|values| Ok::<_, Failure>((*values.value(1)?, *values.value(2)?)))?,
+            v.sequence(|values| Ok::<_, Failure>((*values.value(1)?, *values.value(2)?)))?,
         );
         Ok(Self {
             surface: fields.surface.clone(),

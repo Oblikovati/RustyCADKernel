@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "failed_source_revision": "c90e1361701ed92e240ac471bf2a44d04f9175e2",
+  "cause": "From<Error> for Failure added a second viable error conversion during inference for existing generic closures.",
+  "fix": "Explicit Failure error parameters in three existing closure/collection results; intended runtime behavior is unchanged.",
+  "regression": "Workspace compilation and existing split-wire and surface-area tests exercise these expressions. Integrated green evidence is recorded separately at its actual source revision.",
+  "failed_runs": {
+    "quantity-conversion-workspace-red": {
+      "path": "porting/runtime-evidence/quantity-conversion-workspace-red.log.gz",
+      "sha256": "e896d2176eebfaa7ca1546e13b37b44c0ce1261f53292aebfa8c6c01c3c22a59",
+      "exit_code": 101
+    },
+    "quantity-conversion-rustdoc-red": {
+      "path": "porting/runtime-evidence/quantity-conversion-rustdoc-red.log.gz",
+      "sha256": "09a122ba8164087ddd99b92c6251773b008deb1a6bc92f8cfd13c549c45cc292",
+      "exit_code": 2
+    }
+  },
+  "original_declaration_delta": 0
+}
