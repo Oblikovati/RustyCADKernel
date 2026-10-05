@@ -20,6 +20,40 @@ impl<T> Default for DynamicArray<T> {
         Self::with_increment(256)
     }
 }
+struct EmplaceValueStage<'a, T> {
+    array: &'a mut DynamicArray<T>,
+    old_used: usize,
+    index: usize,
+    next_index: usize,
+    committed: bool,
+}
+impl<T: Default> EmplaceValueStage<'_, T> {
+    fn construct(mut self, construct: impl FnOnce() -> T) -> usize {
+        self.append_gap_defaults();
+        self.append_requested_value(construct());
+        self.array.used = self.index + 1;
+        self.committed = true;
+        self.index
+    }
+    fn append_gap_defaults(&mut self) {
+        while self.next_index < self.index {
+            let index = self.next_index;
+            self.array.push_staged_value(index, T::default());
+            self.next_index += 1;
+        }
+    }
+    fn append_requested_value(&mut self, value: T) {
+        self.array.push_staged_value(self.index, value);
+    }
+}
+impl<T> Drop for EmplaceValueStage<'_, T> {
+    fn drop(&mut self) {
+        if !self.committed {
+            // OCCT leaves constructed gaps beyond UsedSize when either constructor throws.
+            self.array.forget_staged_storage(self.old_used);
+        }
+    }
+}
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
     pub fn with_increment(increment: usize) -> Self {
@@ -91,6 +125,26 @@ impl<T> DynamicArray<T> {
         }
         self.used += 1;
         &mut self.blocks[block][offset]
+    }
+    fn ensure_storage_for_index(&mut self, index: usize) {
+        let final_block = index / self.increment;
+        while self.blocks.len() <= final_block {
+            self.add_block();
+        }
+    }
+    fn push_staged_value(&mut self, index: usize, value: T) {
+        self.blocks[index / self.increment].push(value);
+    }
+    fn forget_staged_storage(&mut self, length: usize) {
+        for (block_index, block) in self.blocks.iter_mut().enumerate().rev() {
+            let block_start = block_index * self.increment;
+            let keep = length.saturating_sub(block_start).min(self.increment);
+            while block.len() > keep {
+                if let Some(value) = block.pop() {
+                    std::mem::forget(value);
+                }
+            }
+        }
     }
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
@@ -232,8 +286,23 @@ impl<T: Default> DynamicArray<T> {
         construct: impl FnOnce() -> T,
     ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
-        self.fill_default_gap(index);
-        self.set_value(index, construct())
+        self.ensure_storage_for_index(index);
+        if index < self.used {
+            let value = construct();
+            let slot = self.change_value(index)?;
+            *slot = value;
+            return Ok(slot);
+        }
+        let old_used = self.used;
+        let final_index = EmplaceValueStage {
+            array: self,
+            old_used,
+            index,
+            next_index: old_used,
+            committed: false,
+        }
+        .construct(construct);
+        self.change_value(final_index)
     }
     /// Inserts before an existing index; `array.insert_before(1,42)?`.
     pub fn insert_before<I: TryInto<usize> + Copy + Debug>(

@@ -19,9 +19,11 @@ cargo test -p rustycad-tkernel --test dynamic_array_default_constructor_order \
   --test ncollection_dynamic_array --test dynamic_array_emplace_allocation_order --locked
 ```
 
-Both `EmplaceValue` mappings remain partial. Native reserves all requested
-storage before constructing any gaps and publishes the new logical length only
-after the requested constructor succeeds. Rust allocates progressively and
-increments length after each completed default. Thus later constructor failure,
-allocation side effects, replacement and destructor behavior are not all proven
-equivalent. This regression adds no original legacy declaration.
+The original two `EmplaceValue` mappings remain partial for replacement
+semantics outside the exercised types. A follow-up now reserves all destination
+blocks first, stages gap defaults with the prior logical length, and commits the
+new length only after the requested constructor returns. On unwind it forgets
+the staged values because the pinned native implementation leaves those
+placement-constructed objects outside `UsedSize` and does not destroy them.
+See `tkernel_dynamic_emplace_value_order.md` for native evidence and remaining
+exception-domain limits. No original legacy declaration was added.
