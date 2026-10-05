@@ -236253,6 +236253,310 @@
       "rust_item": "rustycad_tkernel::units::exception_stacks::no_such_unit",
       "status": "implemented",
       "notes": "Explicit byte message and stack constructors preserve both native C strings through their first NUL and bind the declared exception identity. Empty slices represent native null/empty input. This overload does not capture an automatic stack. Source-bound native probe: porting/audits/exception-stack-constructors.json."
+    },
+    {
+      "upstream_id": "Standard_AbortiveTransaction::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_AbortiveTransaction.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_ConstructionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ConstructionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_DimensionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_DimensionMismatch::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DimensionMismatch.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_DivideByZero::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DivideByZero.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_DomainError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_ImmutableObject::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ImmutableObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_LicenseError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_LicenseNotFound::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_LicenseNotFound.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_MultiplyDefined::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MultiplyDefined.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NegativeValue::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NegativeValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NoMoreObject::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoMoreObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NoSuchObject::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoSuchObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NotImplemented::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NotImplemented.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NullObject::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NullObject.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NullValue::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NullValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_NumericError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_NumericError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_OutOfRange::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfRange.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_Overflow::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Overflow.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_ProgramError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ProgramError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_RangeError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_RangeError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_TypeMismatch::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeMismatch.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_Underflow::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Underflow.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "StdFail_InfiniteSolutions::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_InfiniteSolutions.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "StdFail_NotDone::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_NotDone.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "StdFail_Undefined::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_Undefined.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "StdFail_UndefinedDerivative::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedDerivative.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "StdFail_UndefinedValue::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/StdFail/StdFail_UndefinedValue.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Plugin_Failure::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Plugin/Plugin_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamExtCharParityError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamExtCharParityError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamFormatError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamFormatError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamModeError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamModeError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamReadError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamReadError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamTypeMismatchError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamTypeMismatchError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamUnknownTypeError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamUnknownTypeError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Storage_StreamWriteError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_StreamWriteError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Units_NoSuchType::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchType.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Units_NoSuchUnit::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchUnit.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
     }
   ],
   "tests": [
