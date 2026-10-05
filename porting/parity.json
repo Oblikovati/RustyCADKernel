@@ -84618,9 +84618,9 @@
       "upstream_id": "Standard_Failure::operator=(const Standard_Failure&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Failure as Clone>::clone_from",
-      "status": "implemented",
-      "notes": "Shares the other failure's strings. Compared by the runtime_failure probe."
+      "rust_item": "rustycad_tkernel::standard::Failure::assign_base",
+      "status": "partial",
+      "notes": "Explicit base assignment shares source message and stack, preserves destination exception type and OutOfMemory buffer, and returns the destination. Native/Rust supplemental probe covers base and derived source/destination cases. Safe borrowing does not express native self-assignment; that native branch is a no-op."
     },
     {
       "upstream_id": "Standard_Failure::~Standard_Failure()",
