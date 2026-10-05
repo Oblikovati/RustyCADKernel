@@ -69,6 +69,10 @@ impl From<Error> for crate::standard::Failure {
     }
 }
 
+pub(crate) fn seconds_i32(value: i64) -> Result<i32, Error> {
+    i32::try_from(value).map_err(|_| Error::new(ErrorKind::NumericOverflow, "32-bit time overflow"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::{Error, ErrorKind};
@@ -80,8 +84,4 @@ mod tests {
         let failure = Failure::from(error);
         assert_eq!(failure.message(), "before");
     }
-}
-
-pub(crate) fn seconds_i32(value: i64) -> Result<i32, Error> {
-    i32::try_from(value).map_err(|_| Error::new(ErrorKind::NumericOverflow, "32-bit time overflow"))
 }
