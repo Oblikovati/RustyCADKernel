@@ -44754,7 +44754,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Set(int,int,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Set(int,int,const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set",
@@ -44842,7 +44842,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Add(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Add(const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::add",
@@ -44858,7 +44858,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Added(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::Added(const math_VectorBase<T>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::added",
@@ -44874,7 +44874,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Multiply(const math_VectorBase&,const math_Matrix&)",
+      "upstream_id": "math_VectorBase::Multiply(const math_VectorBase<T>&,const class math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_vector_matrix",
@@ -44882,7 +44882,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Multiply(const math_Matrix&,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Multiply(const class math_Matrix&,const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_matrix_vector",
@@ -44890,7 +44890,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::TMultiply(const math_Matrix&,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::TMultiply(const class math_Matrix&,const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_transpose_matrix_vector",
@@ -44898,7 +44898,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::TMultiply(const math_VectorBase&,const math_Matrix&)",
+      "upstream_id": "math_VectorBase::TMultiply(const math_VectorBase<T>&,const class math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_vector_transpose_matrix",
@@ -44906,7 +44906,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Add(const math_VectorBase&,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Add(const math_VectorBase<T>&,const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_sum",
@@ -44914,7 +44914,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Subtract(const math_VectorBase&,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Subtract(const math_VectorBase<T>&,const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_difference",
@@ -44986,7 +44986,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. Zero-based operator[] is VectorBase::change_at; Rust indexing is reserved for the declared-bound operator()."
     },
     {
-      "upstream_id": "math_VectorBase::Initialized(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Initialized(const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::initialized",
@@ -44994,7 +44994,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator=(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::operator=(const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::initialized",
@@ -45010,7 +45010,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Multiplied(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::Multiplied(const math_VectorBase<T>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::dot",
@@ -45058,7 +45058,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Subtract(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Subtract(const math_VectorBase<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::subtract",
@@ -45074,7 +45074,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::Subtracted(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::Subtracted(const math_VectorBase<T>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::subtracted",
