@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "title": "DataMap assignment return, alias, and borrowed-copy contracts",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "validation_base_revision": "2426a845f8fd90f6b942011734de91116779c0b5",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/data_map.rs": "1ebb9aea5e2471110c8e4b725568f3040d89b98c20351bbc3dfccef7ccbeb266",
+    "crates/tkernel/src/ncollection/data_map/operations.rs": "240e74df2f22f4445115ff1d545da6a178069e5e7f20096179fceefa94675447",
+    "crates/tkernel/src/ncollection/data_map/assignment.rs": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc",
+    "crates/tkernel/tests/ncollection_data_map_assignment.rs": "db5367985e0b5eaeb287bfeb5614b1f68de8f49ac47aaebee37b50ca3c2dc55a",
+    "tools/oracle/ncollection_data_map_assignment.cxx": "b86bfcdf933e3c3e67bb16e55033e43be84a1c456a1b9e2538640589509fcb0f",
+    "tools/oracle/ncollection_data_map_assignment.expected": "e9c710e30d1919ef70a44852e6d127df968211d8f7f929786e1c4011e37fd197",
+    "tools/oracle/ncollection_data_map_assignment.md": "324fb58537e1c04eaaadd5869d20872d5fd2f2d7db64a1b18910ac192a1ec19a",
+    "tools/tests/test_datamap_assignment_bindings.py": "a94cdf61d13f1c5e35be9186c5f428778645878bf56619d7c13d02868671c0ef"
+  },
+  "native_header_sha256": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_binary_sha256": "6416b8a419f3babde9ff018110bfad7729eeadc73666c0432bdde72158347b1b",
+  "bindings": [
+    {
+      "old_selector": "NCollection_DataMap::Assign(const NCollection_DataMap&)",
+      "selector": "NCollection_DataMap::Assign(const NCollection_DataMap<TheKeyType, TheItemType, Hasher> &)",
+      "cpp_id": "a256da3d2787a69761138522360112c85ee87b1a2c1f241d1bf41bcce940c46e",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::assign_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ],
+      "status": "partial",
+      "rustdoc_paths": [
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::assign_self",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        }
+      ]
+    },
+    {
+      "old_selector": "NCollection_DataMap::operator=(const NCollection_DataMap&)",
+      "selector": "NCollection_DataMap::operator=(const NCollection_DataMap<TheKeyType, TheItemType, Hasher> &)",
+      "cpp_id": "3841024661195064f7dac70b8cc31404f25303889652c11701bdf3eb6cfd8cc7",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::assign_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ],
+      "status": "partial",
+      "rustdoc_paths": [
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::assign_self",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        }
+      ]
+    },
+    {
+      "old_selector": "NCollection_DataMap::operator=(NCollection_DataMap&&)",
+      "selector": "NCollection_DataMap::operator=(NCollection_DataMap<TheKeyType, TheItemType, Hasher> &&)",
+      "cpp_id": "f64f3b01f3906c156b6829a7518551ae41c774c73af0b98ef15ae56672b542b0",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::move_from_returning",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::move_from_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ],
+      "status": "partial",
+      "rustdoc_paths": [
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::move_from_returning",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DataMap::assign_self",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/data_map/assignment.rs",
+          "source_sha256": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc"
+        }
+      ]
+    }
+  ],
+  "rustdoc_capture": {
+    "path": "porting/runtime-evidence/datamap-assignment-rustdoc.json.gz",
+    "sha256": "72120a7100ba0557e1823c93fd85d908ce079c59f76a754b33414e2c638019f6",
+    "compiler": "nightly-2026-09-25",
+    "format_version": 61,
+    "warnings": "Three existing TKernel documentation link/HTML warnings; capture succeeded."
+  },
+  "validation_logs": {
+    "focused": {
+      "path": "porting/runtime-evidence/datamap-assignment-focused.log.gz",
+      "sha256": "cb8ed2c16d874c90cdcf22de3942f33b45683e19da31c18663de13d22dbcc94f",
+      "uncompressed_sha256": "884b32943d755fe6c7c944d58c04036f1d840b95aff63db348401c41b8854468",
+      "exit_code": 0
+    },
+    "tkernel": {
+      "path": "porting/runtime-evidence/datamap-assignment-tkernel.log.gz",
+      "sha256": "ac8c31a5590708b5d1f4d4c9a1a9a35cafccd275f613accea56dff7dd8d46ba0",
+      "uncompressed_sha256": "fc6361dca50f9acc2a1625bb3e1540b80d2d8f5668d245ca91927031f37e4123",
+      "exit_code": 0
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/datamap-assignment-clippy.log.gz",
+      "sha256": "cf5c371b682b3661498da2e9df4f793a7e81e2a30b53502c1b906732925a1364",
+      "uncompressed_sha256": "b769fef9705d44e40652ceabd2682f33ecfaa415cf6211e332bbafc692c2e989",
+      "exit_code": 0
+    },
+    "final-test-clippy": {
+      "path": "porting/runtime-evidence/datamap-assignment-final-test-clippy.log.gz",
+      "sha256": "a6db331e7a72434b0db41e42e29df587f4c24049b68f4782368e54075e244381",
+      "uncompressed_sha256": "b928c9a411c0d65c0e3bf02cf40a9b4118db993c556f33306fad22735d280471",
+      "exit_code": 0
+    },
+    "doc": {
+      "path": "porting/runtime-evidence/datamap-assignment-doc.log.gz",
+      "sha256": "859f7b47f8be68bd552f982559f8d37d16d86b0c4b2cdf88ea3d1f644ec90da9",
+      "uncompressed_sha256": "3ec5d636e0e1a7dc493973b093f960ae7071e47654c472c70f4812b7b745e8e5",
+      "exit_code": 0
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/datamap-assignment-rustdoc.log.gz",
+      "sha256": "2d70012ea649d6145aa2562ab15ede89410e036196020023d9a9984e6ceb45f4",
+      "uncompressed_sha256": "e0976f24dbd9f3a232f8233ab8eb902aac92df222625b16151d60e527b257800",
+      "exit_code": 0
+    },
+    "bindings": {
+      "path": "porting/runtime-evidence/datamap-assignment-bindings.log.gz",
+      "sha256": "4c55e35550a65e2cf21b801d4f85b082ecaa5c5f6ec8916f2c74404ecd2ef294",
+      "uncompressed_sha256": "d56b604c9f96a9bab38af5610bbf1db525b722c297152d5fe359e5b90d4b2566",
+      "exit_code": 0
+    },
+    "native-compile": {
+      "path": "porting/runtime-evidence/datamap-assignment-native-compile.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "native-diff": {
+      "path": "porting/runtime-evidence/datamap-assignment-native-diff.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "native-output": {
+      "path": "porting/runtime-evidence/datamap-assignment-native.log.gz",
+      "sha256": "ca89c4a24052776c717be66f8cde15c72c2b31ae6166e06db1c614c4a3fb8922",
+      "exit_code": 0
+    }
+  },
+  "focused_tests": {
+    "passed": 48,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 4,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "tkernel_tests": {
+    "passed": 3012,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 208,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "supplemental_tests_added": 7,
+  "original_test_declarations_added": 0,
+  "original_test_mapping_changes": 0,
+  "limitations": [
+    "Three assignment mappings are partial: Rust Entry storage differs from native combined-node subobjects and bucket arrays.",
+    "Arbitrary address-sensitive C++ copy and destructor/swap hooks and allocation failure categories are not reproduced by generic Rust Clone/Drop.",
+    "The retained compiler capture binds this exact source; the published global inventory must be refreshed after commit."
+  ]
+}

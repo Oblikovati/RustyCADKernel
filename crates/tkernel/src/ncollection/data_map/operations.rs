@@ -77,27 +77,3 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> DataMap<K, V, H> {
         true
     }
 }
-impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> DataMap<K, V, H> {
-    /// Copies bindings while preserving the destination hasher and allocator; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
-        self.clear(true);
-        if source.is_empty() {
-            return;
-        }
-        self.resize(source.len() - 1);
-        for (key, value) in source.items() {
-            self.bind(key.clone(), value.clone());
-        }
-    }
-}
-impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for DataMap<K, V, H> {
-    fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(
-            self.hasher.clone(),
-            self.bucket_count,
-            self.resource.clone(),
-        );
-        copy.assign(self);
-        copy
-    }
-}

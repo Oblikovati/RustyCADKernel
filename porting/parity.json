@@ -77539,28 +77539,40 @@
       "notes": "Manual NCollection member mapping; Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_DataMap::Assign(const NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Assign(const NCollection_DataMap<TheKeyType, TheItemType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Keeps the destination hasher and allocator; self-assignment is impossible under Rust borrowing."
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+      "status": "partial",
+      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, allocate, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::assign_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ]
     },
     {
-      "upstream_id": "NCollection_DataMap::operator=(const NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::operator=(const NCollection_DataMap<TheKeyType, TheItemType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; operator= forwards to Assign."
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
+      "status": "partial",
+      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, allocate, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::assign_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ]
     },
     {
-      "upstream_id": "NCollection_DataMap::operator=(NCollection_DataMap&&)",
+      "upstream_id": "NCollection_DataMap::operator=(NCollection_DataMap<TheKeyType, TheItemType, Hasher> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DataMap::exchange",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; OCCT's move assignment swaps the two maps (contents, hasher, allocator), which `exchange` reproduces; plain Rust `a = b` is the ownership-transfer form."
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::move_from_returning",
+      "status": "partial",
+      "notes": "Explicit return-reference and self-assignment adapters. Move exchanges contents, hasher, and allocator with stable nodes; Rust swaps do not run arbitrary C++ hasher swap hooks. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DataMap::move_from_returning",
+        "rustycad_tkernel::ncollection::DataMap::assign_self"
+      ]
     },
     {
       "upstream_id": "NCollection_DataMap::ReSize(size_t)",

@@ -187,6 +187,7 @@ fn missing_key<K: Debug>(key: &K) -> Failure {
         "",
     )
 }
+mod assignment;
 mod iteration;
 mod operations;
 
