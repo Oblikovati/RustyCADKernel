@@ -10,8 +10,12 @@ pub struct Mat3<T> {
 square_matrix_access!(Mat3, 3, 9, Vec3);
 square_matrix_arithmetic!(Mat3, 3, Vec3);
 square_matrix_dump!(Mat3, 3, "NCollection_Mat3");
-impl<T: MatrixScalar> Mat3<T> {
-    /// Rule of Sarrus in the native term order, as `Determinant`; `matrix.determinant()`.
+impl<T> Mat3<T>
+where
+    T: Copy + std::ops::Mul<Output = T> + std::ops::Add<Output = T> + std::ops::Sub<Output = T>,
+{
+    /// Rule of Sarrus in native term order, as `Determinant`;
+    /// `Mat3::<i32>::from_data([2,0,0,1,11,0,0,0,1]).determinant()`.
     pub fn determinant(&self) -> T {
         let v = |row: usize, column: usize| self.get_value(row, column);
         (v(0, 0) * v(1, 1) * v(2, 2) + v(0, 1) * v(1, 2) * v(2, 0) + v(0, 2) * v(1, 0) * v(2, 1))
@@ -19,6 +23,9 @@ impl<T: MatrixScalar> Mat3<T> {
                 + v(0, 0) * v(1, 2) * v(2, 1)
                 + v(0, 1) * v(1, 0) * v(2, 2))
     }
+}
+
+impl<T: MatrixScalar> Mat3<T> {
     /// Rows are the cross products of the other two rows, as `Adjoint`; `matrix.adjoint()`.
     pub fn adjoint(&self) -> Self {
         let rows: [Vec3<T>; 3] = std::array::from_fn(|row| self.get_row(row));

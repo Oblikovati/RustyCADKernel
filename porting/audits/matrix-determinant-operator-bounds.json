@@ -1,0 +1,74 @@
+{
+  "schema": "rustycad-native-parity-receipt-v1",
+  "scope": "NCollection_Mat3::Determinant and NCollection_Mat4::DeterminantMat3 arithmetic bounds",
+  "legacy_declaration_count_delta": 0,
+  "native": {
+    "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "headers": [
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+        "sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51",
+        "line": 442,
+        "declaration": "Determinant() const noexcept"
+      },
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+        "sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0",
+        "line": 615,
+        "declaration": "DeterminantMat3() const noexcept"
+      }
+    ],
+    "probe": "tools/oracle/tkernel_ncollection_matrix_determinant_bounds.cxx",
+    "probe_sha256": "20e8085a887440cede8fbd67f3793e9175869c0696b3d1ccc3a895e9c35c7194",
+    "executable_sha256": "245e333255ee3217e3f0530e1735add9a9aba28aedbbaf0d7f3706b47ccd4a7b",
+    "compile_command": "c++ -std=c++20 -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Standard -I/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade tools/oracle/tkernel_ncollection_matrix_determinant_bounds.cxx -o /tmp/tkernel_ncollection_matrix_determinant_bounds_probe",
+    "native_result": "Mat3 and Mat4 upper-left 3x3 determinants return 22 for signed int and a custom type with only binary +, -, * operations."
+  },
+  "compiler_inventory": {
+    "rust_capture_revision": "31a6983621333407801f4d8311610c4ecd2ea49a",
+    "rust_inventory_sha256": "899ae9759107a90b1addecb68fda56e733b10e6d92214e5676efb9c1ed70571f",
+    "mat3_header_inventory_sha256": "0ebf1b52504569c3f79d3d23ee8934601c21201787212a0f67dd3ccd7f4f132a",
+    "mat4_header_inventory_sha256": "d4e2abf14ab8cb37e075e9e976526a2c891ad09a0c6def6022206fc483a1a83a",
+    "selectors": [
+      {
+        "upstream_id": "NCollection_Mat3::Determinant() const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat3@F@Determinant#1",
+        "signature": "type-parameter-0-0 () const noexcept",
+        "rust_path": "rustycad_tkernel::ncollection::Mat3::determinant"
+      },
+      {
+        "upstream_id": "NCollection_Mat4::DeterminantMat3() const noexcept",
+        "cpp_usr": "c:@ST>1#T@NCollection_Mat4@F@DeterminantMat3#1",
+        "signature": "type-parameter-0-0 () const noexcept",
+        "rust_path": "rustycad_tkernel::ncollection::Mat4::determinant_mat3"
+      }
+    ],
+    "note": "Archived Rust inventory confirms the callable paths before the bound relaxation; refresh rustdoc after merge to capture the new method impl bounds."
+  },
+  "rust": {
+    "base_revision": "bc1792de140d0f1bdb3fbe2e1ce331971e92c56f",
+    "parity_file_sha256": "d76b1fcbe7eed03eecf8f1c1bba0fe5296f557000edb5ae5ed60828c8d960185",
+    "focused_tests": "matrix_determinant_operator_bounds: 2 passed; ncollection_mat_api_behavior: 5 passed",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed",
+    "validation_log": "porting/audits/matrix-determinant-operator-bounds-validation.log.gz",
+    "validation_log_sha256": "fee431daa01d1d8a39b8d2370f937e7cd2d9e3d02029766f1c3cbb7cfe923add",
+    "files": [
+      {
+        "path": "crates/tkernel/src/ncollection/mat3.rs",
+        "sha256": "94d4ea30f22aac7d3c20208288028bae2987d36c6148f5657d3d328c298711a5"
+      },
+      {
+        "path": "crates/tkernel/src/ncollection/mat4.rs",
+        "sha256": "320b9512915fe346ddabf467a1b8b984f7297a9c8b93e465fc4044bfe4b50a9c"
+      },
+      {
+        "path": "crates/tkernel/tests/matrix_determinant_operator_bounds.rs",
+        "sha256": "5b79a0137d93633f81d7dcb52ffd25eeb21abd49aee26cc33916ff1640d99d5d"
+      },
+      {
+        "path": "crates/tkernel/tests/fixtures/matrix_determinant_operator_bounds.expected",
+        "sha256": "6af4f17c73ca9c8378b4eb559957378c3754b9ae8c99ecb8a8f8f42a8ceffd24"
+      }
+    ]
+  }
+}
