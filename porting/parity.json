@@ -78886,9 +78886,9 @@
       "upstream_id": "NCollection_IndexedDataMap::Add(const TheKeyType&,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::add",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Returns the index of the new or existing key; an existing item is kept. The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::add_ref",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping. add_ref hashes and searches the borrowed original key once; a hit returns the existing index without cloning. A miss clones the item before the key and links using the original key's bucket. Arbitrary C++ copy-constructor exception and allocator-failure side effects are not modeled."
     },
     {
       "upstream_id": "NCollection_IndexedDataMap::Add(TheKeyType&&,const TheItemType&)",
