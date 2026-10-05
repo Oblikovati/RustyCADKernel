@@ -80074,9 +80074,9 @@
       "upstream_id": "NCollection_Map::Add(const TheKeyType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Map::add",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; An equivalent stored key is kept. The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
+      "rust_item": "rustycad_tkernel::ncollection::Map::add_ref",
+      "status": "partial",
+      "notes": "Borrowed original-key lookup once; allocate node before key clone on miss, no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
     },
     {
       "upstream_id": "NCollection_Map::Add(TheKeyType&&)",
@@ -80090,9 +80090,9 @@
       "upstream_id": "NCollection_Map::Added(const TheKeyType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Map::added",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
+      "rust_item": "rustycad_tkernel::ncollection::Map::added_ref",
+      "status": "partial",
+      "notes": "Borrowed original-key lookup once; allocate node before key clone on miss, no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
     },
     {
       "upstream_id": "NCollection_Map::Added(TheKeyType&&)",
