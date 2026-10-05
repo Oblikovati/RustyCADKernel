@@ -4,14 +4,30 @@ use std::ops::{
     Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
 };
 
-macro_rules! componentwise_operator {
-    ($vector:ident, $trait:ident, $method:ident, $assign:ident, $assign_method:ident, $op:tt, [$($field:ident),+]) => {
-        impl<T: Copy + $trait<Output = T>> $assign for $vector<T> {
+macro_rules! componentwise_assignment {
+    ($vector:ident, $assign:ident, $assign_method:ident, $op_assign:tt, [$($field:ident),+]) => {
+        impl<T: Copy + $assign> $assign for $vector<T> {
             fn $assign_method(&mut self, right: Self) {
-                $(self.$field = self.$field $op right.$field;)+
+                $(self.$field $op_assign right.$field;)+
             }
         }
+    };
+}
+
+macro_rules! componentwise_value_direct {
+    ($vector:ident, $trait:ident, $method:ident, $op:tt, [$first:ident $(, $rest:ident)*]) => {
         impl<T: Copy + $trait<Output = T>> $trait for $vector<T> {
+            type Output = Self;
+            fn $method(self, right: Self) -> Self {
+                Self { $first: self.$first $op right.$first $(, $rest: self.$rest $op right.$rest)* }
+            }
+        }
+    };
+}
+
+macro_rules! componentwise_value_via_assignment {
+    ($vector:ident, $trait:ident, $method:ident, $assign:ident, $assign_method:ident) => {
+        impl<T: Copy + $assign> $trait for $vector<T> {
             type Output = Self;
             fn $method(mut self, right: Self) -> Self {
                 self.$assign_method(right);
@@ -21,12 +37,13 @@ macro_rules! componentwise_operator {
     };
 }
 
-macro_rules! vector_arithmetic {
+// OCCT Vec2 spells value operations directly; Vec3/4 implement them through +=, -=, *=, /=.
+macro_rules! componentwise_arithmetic {
     ($vector:ident, $count:literal, [$first:ident $(, $rest:ident)*]) => {
-        componentwise_operator!($vector, Add, add, AddAssign, add_assign, +, [$first $(, $rest)*]);
-        componentwise_operator!($vector, Sub, sub, SubAssign, sub_assign, -, [$first $(, $rest)*]);
-        componentwise_operator!($vector, Mul, mul, MulAssign, mul_assign, *, [$first $(, $rest)*]);
-        componentwise_operator!($vector, Div, div, DivAssign, div_assign, /, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, AddAssign, add_assign, +=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, SubAssign, sub_assign, -=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, MulAssign, mul_assign, *=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, DivAssign, div_assign, /=, [$first $(, $rest)*]);
         impl<T: Copy + Neg<Output = T>> Neg for $vector<T> {
             type Output = Self;
             fn neg(self) -> Self {
@@ -115,9 +132,30 @@ macro_rules! vector_arithmetic {
         }
     };
 }
-vector_arithmetic!(Vec2, 2, [x, y]);
-vector_arithmetic!(Vec3, 3, [x, y, z]);
-vector_arithmetic!(Vec4, 4, [x, y, z, w]);
+macro_rules! direct_values {
+    ($vector:ident, [$first:ident $(, $rest:ident)*]) => {
+        componentwise_value_direct!($vector, Add, add, +, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Sub, sub, -, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Mul, mul, *, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Div, div, /, [$first $(, $rest)*]);
+    };
+}
+
+macro_rules! values_via_assignment {
+    ($vector:ident) => {
+        componentwise_value_via_assignment!($vector, Add, add, AddAssign, add_assign);
+        componentwise_value_via_assignment!($vector, Sub, sub, SubAssign, sub_assign);
+        componentwise_value_via_assignment!($vector, Mul, mul, MulAssign, mul_assign);
+        componentwise_value_via_assignment!($vector, Div, div, DivAssign, div_assign);
+    };
+}
+
+componentwise_arithmetic!(Vec2, 2, [x, y]);
+componentwise_arithmetic!(Vec3, 3, [x, y, z]);
+componentwise_arithmetic!(Vec4, 4, [x, y, z, w]);
+direct_values!(Vec2, [x, y]);
+values_via_assignment!(Vec3);
+values_via_assignment!(Vec4);
 
 // Scalar operators previously used primitive stamps to avoid a suspected coherence
 // overlap. Scalar T and vector VecN<T> RHS types are disjoint; generic impls preserve
