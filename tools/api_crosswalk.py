@@ -7,6 +7,7 @@ import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
 from api_rust_kind import select_rust_kind
+from api_scoped_alias_selectors import qualify_member_aliases
 from api_template_selectors import (
     constructor_candidates,
     declaration_template_owner,
@@ -116,6 +117,19 @@ def fixed_selector_parameters(
     return None if any(item.strip() == "..." for item in fixed) else fixed
 
 
+def scoped_parameter_match(
+    parameters: list[str],
+    declaration: dict[str, JSONValue],
+    by_name: dict[str, list[dict[str, JSONValue]]],
+) -> bool:
+    """Match exact types or proven local aliases; e.g. `Buffer::Init(value_type&)`."""
+    owner = declaration_template_owner(declaration, by_name)
+    if parameter_match(parameters, declaration, owner):
+        return True
+    qualified = qualify_member_aliases(parameters, declaration, by_name)
+    return qualified != parameters and parameter_match(qualified, declaration, owner)
+
+
 def is_simple_array_reference(text: str) -> bool:
     """Recognize exact array references, e.g. `const char(&)[N]`, without decay."""
     element = r"[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*(?: [A-Za-z_]\w*)*"
@@ -217,9 +231,7 @@ def cpp_candidates(
         return "unresolved_member_target", unresolved
     if params is not None:
         candidates = [
-            row
-            for row in candidates
-            if parameter_match(params, row, declaration_template_owner(row, by_name))
+            row for row in candidates if scoped_parameter_match(params, row, by_name)
         ]
     candidates = [row for row in candidates if suffix_matches(suffix, row)]
     if params is not None and not suffix:
