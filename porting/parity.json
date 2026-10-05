@@ -73674,164 +73674,184 @@
       "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType &,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "4a501b54c96ac9bf5ee3593e38037d11a72b40ae4f5e6a48df78018bb6c9ecef"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType &,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "7d2705b34057e008e565afd045c9cc4725a6dfa474dfb511bff2faf2eef7af97"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType&&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType &&,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "624a184d98caedcc79b2e513a7a3322a3859fe97c566f802a4509fba97b68803"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType&&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType &&,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "9febf022a99ebb5f0f166ad5510c08e0b4eabbebb451bec420947f783f0628aa"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType &,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "89348a58e709a312165a0249bf95880f26a45075ae40f817e4bf9880953ef336"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType &,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "4993606eedb22aa34a780f5e8f513987b54050938c998ea10befecef219923bc"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType&&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType &&,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "0838a7a1447f9f7e66b813d146caabd497b355748faab1687398d557d4fee96c"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType&&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType &&,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "6f56f981de7640c4b8d4abcf34b4365272bd45a0139fd04f954525ae5cf6167c"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType &,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "7448087fc4abe4e91c8b82c3412e551a8806642d1a598ed696844ca259b2d6af"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType &,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "14865be22385bd0861389cf66341ca981222dc0b1016cc22e351d6342bc1d7fb"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType&&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType &&,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "2e856a523061d5ef39c1f4a59e7b84e8f9a0f7e17449187b78ec4574b27f67ac"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType&&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType &&,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "38adddee05181fa6d459937529971a9cb59a798b5273e67ae88363b51c71266a"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType &,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "babe7bf717962df1b1a549c982ed7329a6de9843f2e19704edc7c1744337aa48"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType &,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "a5914affc43e6b7730557c9069841d64530ff993acda6d480754d08619f444e8"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType&&,const TheItemType&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType &&,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "293708161b39a43746bf1fc1f4529cd4856d82ec675fe029d337b00d59ff2e17"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType&&,TheItemType&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType &&,TheItemType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "4be247eb19a581fb92ce18ce59411b2eecffe76ade9bfd7b7bf980d35e284add"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Emplace(K&&,Args&&)",
+      "upstream_id": "NCollection_FlatDataMap::Emplace(K &&,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplace",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "41ef7484236e9e2b523d2215a9280113686288195e6377aa4567689324853518"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Emplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_FlatDataMap::Emplaced(K &&,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplaced",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "eeadbdc890e6d8b7850c34877f79c10200f91b9e340269fa28997da9a24313ce"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryEmplace(K&&,Args&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryEmplace(K &&,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplace",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "dbf15ab40574e5ad250fa7c9379efa38e96b2965265ff24fd07067b22656a704"
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::TryEmplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_FlatDataMap::TryEmplaced(K &&,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplaced",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "7ab64b69c2d70bd929449d149238c2e2395fe3b2ce1b2778bc9a14ab64be7d0b"
     },
     {
       "upstream_id": "NCollection_FlatDataMap::UnBind(const TheKeyType&)",
@@ -74140,68 +74160,76 @@
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
     },
     {
-      "upstream_id": "NCollection_FlatMap::Add(const TheKeyType&)",
+      "upstream_id": "NCollection_FlatMap::Add(const TheKeyType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::add",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "d0208612715b512aadf732b66e55856553795f6511fcc46e940bfe43f915769c"
     },
     {
-      "upstream_id": "NCollection_FlatMap::Add(TheKeyType&&)",
+      "upstream_id": "NCollection_FlatMap::Add(TheKeyType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::add",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "bad5c5c25752f7f68b26aa204791bb400e8aaee9896361bd8eed97d84fbcd092"
     },
     {
-      "upstream_id": "NCollection_FlatMap::Added(const TheKeyType&)",
+      "upstream_id": "NCollection_FlatMap::Added(const TheKeyType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::added",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "ca655226e2f32fcefeba54f9677e534339cb8db1b67009a6b91d1ddfa00140e0"
     },
     {
-      "upstream_id": "NCollection_FlatMap::Added(TheKeyType&&)",
+      "upstream_id": "NCollection_FlatMap::Added(TheKeyType &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::added",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "41b38501b0ebd40829fdfb76f423823785b3349c06e26e358f91471f2edbb897"
     },
     {
-      "upstream_id": "NCollection_FlatMap::Emplace(Args&&)",
+      "upstream_id": "NCollection_FlatMap::Emplace(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplace",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "f4b56ed3d3d9ebbaaee5d65e76b8cad94761a4778af9d6ab290c268f7f94e33f"
     },
     {
-      "upstream_id": "NCollection_FlatMap::Emplaced(Args&&)",
+      "upstream_id": "NCollection_FlatMap::Emplaced(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplaced",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "b089afc4252d0ac9ee7ad07be3280cfeb9d6f2d33d025e1b5787714c2460b1c3"
     },
     {
-      "upstream_id": "NCollection_FlatMap::TryEmplace(Args&&)",
+      "upstream_id": "NCollection_FlatMap::TryEmplace(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplace",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "a5e808d56baf36b4d9098e510bc71d88cf2a95e0071383bccab011b5f5ee3f16"
     },
     {
-      "upstream_id": "NCollection_FlatMap::TryEmplaced(Args&&)",
+      "upstream_id": "NCollection_FlatMap::TryEmplaced(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplaced",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
+      "selector_id": "23d25fe717c507a933549160008131ac07f69a7941c97abd3f4bbf03dd008d95"
     },
     {
       "upstream_id": "NCollection_FlatMap::Remove(const TheKeyType&)",

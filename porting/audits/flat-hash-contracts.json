@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "purpose": "Port single-hash flat insertion and hash-before-constructor ordering across owned and lazy entry points.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "836e12771bf9cdfe5237b53ec900591e1220cb1b",
+  "baseline_red_provenance": "Fourteen new supplemental regression cases failed in the baseline worktree before production edits; the baseline is not a clean test-only commit.",
+  "bindings": [
+    {
+      "selector": "NCollection_FlatDataMap::Bind(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "4a501b54c96ac9bf5ee3593e38037d11a72b40ae4f5e6a48df78018bb6c9ecef",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bind(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "7d2705b34057e008e565afd045c9cc4725a6dfa474dfb511bff2faf2eef7af97",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bind(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "624a184d98caedcc79b2e513a7a3322a3859fe97c566f802a4509fba97b68803",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bind(TheKeyType &&,TheItemType &&)",
+      "cpp_id": "9febf022a99ebb5f0f166ad5510c08e0b4eabbebb451bec420947f783f0628aa",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "89348a58e709a312165a0249bf95880f26a45075ae40f817e4bf9880953ef336",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "4993606eedb22aa34a780f5e8f513987b54050938c998ea10befecef219923bc",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "0838a7a1447f9f7e66b813d146caabd497b355748faab1687398d557d4fee96c",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(TheKeyType &&,TheItemType &&)",
+      "cpp_id": "6f56f981de7640c4b8d4abcf34b4365272bd45a0139fd04f954525ae5cf6167c",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "7448087fc4abe4e91c8b82c3412e551a8806642d1a598ed696844ca259b2d6af",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "14865be22385bd0861389cf66341ca981222dc0b1016cc22e351d6342bc1d7fb",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "2e856a523061d5ef39c1f4a59e7b84e8f9a0f7e17449187b78ec4574b27f67ac",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(TheKeyType &&,TheItemType &&)",
+      "cpp_id": "38adddee05181fa6d459937529971a9cb59a798b5273e67ae88363b51c71266a",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "babe7bf717962df1b1a549c982ed7329a6de9843f2e19704edc7c1744337aa48",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "a5914affc43e6b7730557c9069841d64530ff993acda6d480754d08619f444e8",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "293708161b39a43746bf1fc1f4529cd4856d82ec675fe029d337b00d59ff2e17",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(TheKeyType &&,TheItemType &&)",
+      "cpp_id": "4be247eb19a581fb92ce18ce59411b2eecffe76ade9bfd7b7bf980d35e284add",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Emplace(K &&,Args &&...)",
+      "cpp_id": "41ef7484236e9e2b523d2215a9280113686288195e6377aa4567689324853518",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplace",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Emplaced(K &&,Args &&...)",
+      "cpp_id": "eeadbdc890e6d8b7850c34877f79c10200f91b9e340269fa28997da9a24313ce",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplaced",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryEmplace(K &&,Args &&...)",
+      "cpp_id": "dbf15ab40574e5ad250fa7c9379efa38e96b2965265ff24fd07067b22656a704",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplace",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryEmplaced(K &&,Args &&...)",
+      "cpp_id": "7ab64b69c2d70bd929449d149238c2e2395fe3b2ce1b2778bc9a14ab64be7d0b",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplaced",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Add(const TheKeyType &)",
+      "cpp_id": "d0208612715b512aadf732b66e55856553795f6511fcc46e940bfe43f915769c",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::add",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Add(TheKeyType &&)",
+      "cpp_id": "bad5c5c25752f7f68b26aa204791bb400e8aaee9896361bd8eed97d84fbcd092",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::add",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Added(const TheKeyType &)",
+      "cpp_id": "ca655226e2f32fcefeba54f9677e534339cb8db1b67009a6b91d1ddfa00140e0",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::added",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Added(TheKeyType &&)",
+      "cpp_id": "41b38501b0ebd40829fdfb76f423823785b3349c06e26e358f91471f2edbb897",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::added",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Emplace(Args &&...)",
+      "cpp_id": "f4b56ed3d3d9ebbaaee5d65e76b8cad94761a4778af9d6ab290c268f7f94e33f",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplace",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Emplaced(Args &&...)",
+      "cpp_id": "b089afc4252d0ac9ee7ad07be3280cfeb9d6f2d33d025e1b5787714c2460b1c3",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplaced",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::TryEmplace(Args &&...)",
+      "cpp_id": "a5e808d56baf36b4d9098e510bc71d88cf2a95e0071383bccab011b5f5ee3f16",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplace",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::TryEmplaced(Args &&...)",
+      "cpp_id": "23d25fe717c507a933549160008131ac07f69a7941c97abd3f4bbf03dd008d95",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplaced",
+      "status": "partial"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/flat-hash-red.gz",
+      "sha256": "1a23007a451d3a3dbed7ca3a4cc92bb76565965228b4387c0e10f1c3343caeaf",
+      "exit_code": 101
+    },
+    {
+      "path": "porting/runtime-evidence/flat-hash-fixture-error.gz",
+      "sha256": "8e888f71c2a3c870d3b5937c00994bacc9d9154c0518f39a5f156f56c9ea0277",
+      "exit_code": 101
+    },
+    {
+      "path": "porting/runtime-evidence/flat-hash-green.gz",
+      "sha256": "415b50d70d4bb43b805d6e39ab2b2de9c420d8b76a50dfce428707c1cbfa52ed",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-hash-native.actual.gz",
+      "sha256": "c2a8d44cd4d997b0d807566221afdb5f719b667a335f58d516eba2487805df09",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-hash-python.gz",
+      "sha256": "960561857a32ca17b1e3173e70d7c4a6fc265d09c0b99d5ca41f1d66c99e3a63",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-hash-clippy.gz",
+      "sha256": "041ce7f4f622bc73b4ceb191f4b4d9de4e8e69e007295e675b5938c94f722159",
+      "exit_code": 0
+    }
+  ],
+  "focused_rust_tests_passed": 110,
+  "fixture_setup_errors": [
+    "An added empty-query fixture used nonexistent Contains/contains methods instead of IsBound/is_bound. Native compilation exited 1 and Rust compilation exited 101. Both were corrected before successful validation."
+  ],
+  "limits": [
+    "Generic const-reference copies and forwarded key constructors are not modeled by owned Rust entry points.",
+    "Native C++ move and assignment hooks, physical slot layout, allocation failure and exception unwinding remain unproven.",
+    "Nineteen supplemental Rust cases and nineteen native output rows do not increase original OCCT declaration counts."
+  ],
+  "native_expected": "tools/oracle/tkernel_flat_hash_contracts.expected",
+  "native_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_flat_hash_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/flat-hash-native"
+}

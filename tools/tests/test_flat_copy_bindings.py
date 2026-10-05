@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes, header_owners
+from api_inventory.inputs import JSONValue
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -26,15 +27,33 @@ class FlatCopyBindingsTest(unittest.TestCase):
         cls.audit = json.loads(
             (ROOT / "porting/audits/flat-copy-contracts.json").read_text()
         )
+        cls.hash_audit = json.loads(
+            (ROOT / "porting/audits/flat-hash-contracts.json").read_text()
+        )
 
     def test_four_copy_selectors_are_unique_and_keep_generic_limits(self) -> None:
-        self.assertEqual(len(self.audit["bindings"]), 4)
-        for binding in self.audit["bindings"]:
+        self.assert_native_binding_contracts(self.audit["bindings"], 4)
+
+    def test_twenty_eight_hash_selectors_keep_generic_limits(self) -> None:
+        self.assert_native_binding_contracts(self.hash_audit["bindings"], 28)
+
+    def test_all_eight_variadic_insertion_selectors_preserve_the_pack(self) -> None:
+        packs = [row for row in self.hash_audit["bindings"] if "..." in row["selector"]]
+        self.assertEqual(len(packs), 8)
+        for binding in packs:
+            self.assertTrue(binding["selector"].endswith("Args &&...)"))
+
+    def assert_native_binding_contracts(
+        self, bindings: list[dict[str, JSONValue]], count: int
+    ) -> None:
+        self.assertEqual(len(bindings), count)
+        for binding in bindings:
             selector = binding["selector"]
             status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
-            self.assertEqual(self.rows[selector]["rust_items"], binding["rust_items"])
+            key = "rust_items" if "rust_items" in binding else "rust_item"
+            self.assertEqual(self.rows[selector][key], binding[key])
             self.assertEqual(self.rows[selector]["status"], "partial")
 
     def test_both_assignment_bindings_cover_return_and_self_entry_points(self) -> None:

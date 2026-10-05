@@ -17,6 +17,15 @@ pub(super) struct Inserted {
     pub original: usize,
     pub last: usize,
 }
+impl Inserted {
+    pub fn occupied_slot(index: usize) -> Self {
+        Self {
+            is_new: false,
+            original: index,
+            last: index,
+        }
+    }
+}
 pub(super) struct FlatItems<'a, K, V> {
     pub slots: &'a [Option<FlatSlot<K, V>>],
     pub index: usize,
@@ -48,8 +57,10 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
         if self.count == 0 {
             return None;
         }
-        let hash = self.hasher.hash(key);
-        let mask = self.slots.len() - 1;
+        self.find_cached_hash_slot(key, self.hasher.hash(key))
+    }
+    pub fn find_cached_hash_slot(&self, key: &K, hash: usize) -> Option<usize> {
+        let mask: usize = self.slots.len().checked_sub(1)?;
         let mut index = hash & mask;
         let mut probe = 0;
         loop {
@@ -66,7 +77,9 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
     }
     pub fn insert(&mut self, key: K, value: V, replace_key: bool, replace_value: bool) -> Inserted {
         self.prepare();
-        if let Some(index) = self.lookup(&key) {
+        // OCCT retains aHash through lookup and displacement; stateful policies see one call.
+        let hash: usize = self.hasher.hash(&key);
+        if let Some(index) = self.find_cached_hash_slot(&key, hash) {
             let slot = self.slots[index].as_mut().unwrap();
             if replace_key {
                 slot.key = key;
@@ -74,13 +87,12 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
             if replace_value {
                 slot.value = value;
             }
-            return Inserted {
-                is_new: false,
-                original: index,
-                last: index,
-            };
+            return Inserted::occupied_slot(index);
         }
-        let hash = self.hasher.hash(&key);
+        self.insert_prehashed(key, value, hash)
+    }
+    /// Requires prepared capacity; lazy construction must retain the hash computed before it.
+    pub fn insert_prehashed(&mut self, key: K, value: V, hash: usize) -> Inserted {
         self.insert_unchecked(FlatSlot {
             key,
             value,

@@ -38,17 +38,14 @@ impl<K: Debug, V, H: HashPolicy<K>> FlatDataMap<K, V, H> {
     }
     fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> Inserted {
         self.table.prepare();
-        if let Some(index) = self.table.lookup(&key) {
+        let hash: usize = self.table.hasher.hash(&key);
+        if let Some(index) = self.table.find_cached_hash_slot(&key, hash) {
             if replace {
                 *self.value_at(index) = construct();
             }
-            return Inserted {
-                is_new: false,
-                original: index,
-                last: index,
-            };
+            return Inserted::occupied_slot(index);
         }
-        self.table.insert(key, construct(), false, false)
+        self.table.insert_prehashed(key, construct(), hash)
     }
     fn value_at(&mut self, index: usize) -> &mut V {
         &mut self.table.slots[index]
