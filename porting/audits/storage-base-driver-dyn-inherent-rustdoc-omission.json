@@ -1,0 +1,86 @@
+{
+  "schema": "rustycad.rustdoc-capture-gap.v1",
+  "scope": "Public inherent methods implemented on dyn Storage_BaseDriver",
+  "base_commit": "c90e1361701ed92e240ac471bf2a44d04f9175e2",
+  "rustdoc": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "format_version": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked --package rustycad-tkernel --lib --all-features -- -Zunstable-options --output-format json --document-private-items",
+    "crate_capture_sha256": "e2a0bd11403f7563df633cbe6258c03d4a9a7362226da7b8eb95a7595e0f8dc7",
+    "fixture_source": "tools/tests/fixtures/rustdoc-dyn-inherent/lib.rs",
+    "fixture_source_sha256": "ceb595f06a28249d70abff876f9acaab5e8e0716b13251e36088d501db5d4ea7",
+    "fixture_capture": "tools/tests/fixtures/rustdoc-dyn-inherent/rustdoc-61.json.gz",
+    "fixture_capture_sha256": "e2a39b50e69a8dbef5fd728241d5988aa08a0fa0ddc4e855c21dd49e6c588396",
+    "fixture_uncompressed_sha256": "1ba499d776fb608b9c0372410a7ce34022c7821c4117064a2dc73bc6a90e3cb4",
+    "fixture_behavior": "Fixture compiles a public function that calls both inherent dyn methods; rustdoc JSON contains that function but no inherent impl record or put/get items.",
+    "normalization_result": {
+      "normalized_declaration_count": 7561,
+      "dyn_put_get_paths": [],
+      "related_trait_paths": [
+        "rustycad_tkernel::storage::DriverPrimitives::put_integer",
+        "rustycad_tkernel::storage::DriverPrimitives::get_integer"
+      ],
+      "method_path_policy": "No path is synthesized from source text because rustdoc omitted the inherent impl."
+    }
+  },
+  "rust_source": {
+    "path": "crates/tkernel/src/storage/base_driver/scalars.rs",
+    "sha256": "fd9e57ac629e8141a1f36b8fc3f1090b0ffb3553ff9d34d2dd4b6c28883f08d1",
+    "impl_self_type": "dyn BaseDriver + '_",
+    "methods": [
+      {
+        "name": "put",
+        "return": "Result<&mut Self, Failure>",
+        "generic": "V: DriverValue"
+      },
+      {
+        "name": "get",
+        "return": "Result<&mut Self, Failure>",
+        "generic": "V: DriverValue"
+      }
+    ],
+    "separate_from_trait_methods": [
+      "BaseDriver::put_character",
+      "BaseDriver::get_character",
+      "DriverPrimitives::put_integer",
+      "DriverPrimitives::get_integer"
+    ]
+  },
+  "compiler_inventory": {
+    "path": "porting/api-inventory/api-crosswalk.json.gz",
+    "sha256": "10edcbfc6984a15f8b6a195d58d96a6e74abda5a2ec8c7d356ff7a17dbe7d7c4",
+    "rows": 12,
+    "resolution_for_each": "missing_rust_target",
+    "cpp_ids": [
+      "f1533d06f80dcc0865784cea8214edf03f1cb37c04df30e2acb5666547e8aad6",
+      "665a602d9d810cf12b4ccd17838a0414c6214f10b3a8b4e56d6cb8ac3b542f3e",
+      "8fc56278df367b0e6ca2fd0c43b1f796f44d7ece86c05087bb564cdc9b7b31d6",
+      "e249f5721c482229954d72d7bedcbba2be708d6728bc1d8b39b1e1f3d129cfec",
+      "099a39f548120083dbaec02578989f568682a68b4960171be8c2c9405eb32f67",
+      "1a9fc8d27bca0f7dcab687f4f702d66ddad8d8ef64bb4c64d9e365487227516f",
+      "96524704c03eca0eb2adbe002612fccc38508413484a0653abb77de2ab43188c",
+      "2b846d3ce0ea3bc159770293f67badb9b9d5cbfff3a56fc63c2326b5419a4e53",
+      "d3079aae871ed5a1ab344725acdaca2f14ea913d019edb1b4c1fa480d5443092",
+      "bcc3a457446969f2bc6da60b650b483771a2be8fd290b6b5888e748721d6d4ef",
+      "47d1762cf84dce5434a6720ffd9dff48e67fd2b2ae8f7072559de6fe8217c434",
+      "db7a79e87bf958d7ad5577daa95a5c667a2da0532b10ca583274b500f06cce59"
+    ],
+    "declared_rust_targets_not_verified_by_capture": [
+      "rustycad_tkernel::storage::BaseDriver::put",
+      "rustycad_tkernel::storage::BaseDriver::get"
+    ],
+    "status_changes": 0
+  },
+  "normalizer_regression": {
+    "test": "tools/tests/test_rustdoc_dyn_inherent_methods.py",
+    "assertions": [
+      "The compiled callable example remains in raw rustdoc output.",
+      "The fixture raw output has no dyn inherent impl item.",
+      "The normalized trait paths remain put_integer/get_integer and DriverValue::write/read.",
+      "The normalizer does not fabricate BaseDriver::put/get trait method paths."
+    ],
+    "focused_command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_rustdoc_dyn_inherent_methods -v",
+    "focused_result": "1 passed"
+  },
+  "conclusion": "Rust methods are callable and tested, but the pinned compiler capture omits their dyn inherent impl. No source-text supplement is counted as compiler-resolved inventory, and no ledger row is promoted by this audit."
+}
