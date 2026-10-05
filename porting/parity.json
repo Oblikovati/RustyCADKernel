@@ -85515,8 +85515,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
-      "status": "partial",
-      "notes": "The bounded adapter scans to the first zero and treats null/empty input as a no-op. It covers non-aliased external buffers; the native overload has a dedicated self-aliasing path, which remains unmodeled."
+      "status": "implemented",
+      "notes": "Valid bounded external C-string input is handled by prepend_c_units; receiver-alias input is handled by prepend_c_units_from_self(start), which scans from the aliased receiver offset through the first zero, including the terminator boundary. Native and Rust probes cover the split adapter paths."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Prepend(const TCollection_ExtendedString&)",

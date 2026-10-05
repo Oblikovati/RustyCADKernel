@@ -1,0 +1,75 @@
+{
+  "scope": "TCollection_ExtendedString::Prepend(const char16_t* const) receiver-alias branch",
+  "base_commit": "837fa853",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "crosswalk_report_sha256": "0612041f692c9e9bf86467b8f9dd840a1fa9bd01bee263c9786e2eca809aba92",
+  "cpp_declaration": {
+    "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const)",
+    "cpp_id": "f1516967fcbb92848c2732e411c2ff96336cc129912503c4350066c9f9477f26",
+    "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+    "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+    "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+  },
+  "native_behavior": {
+    "summary": "The pointer wrapper scans through the first zero. The implementation detects pointers into the receiver's active character range, stores the offset before reallocate, shifts existing contents, then copies from the shifted source. The terminator pointer yields an empty prefix. The allocator may preserve or move the backing address; that identity is not asserted.",
+    "fixture": "tools/oracle/tkernel_extended_string_c_units_prepend_self.cxx",
+    "fixture_sha256": "0e6281092e06c6da6d1d3db007a8911369c90d23bba1861a408d25d121460ba2",
+    "expected": "tools/oracle/tkernel_extended_string_c_units_prepend_self.expected",
+    "expected_sha256": "a6246c23e802e9aa17fa735dadd946c57b9cab001cf5fec7cc75043366269a40",
+    "executable_sha256": "298881f41f9f5f11e0eff000289047b405b4f58a83824f35fe89939d68ae5edf",
+    "linked_library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "linked_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "cases": [
+      "Interior receiver suffix is prepended before original contents.",
+      "Receiver suffix after an embedded zero is scanned to its next zero.",
+      "Whole receiver buffer can be used as the prefix while aliasing across reallocate.",
+      "Pointer at the receiver terminator contributes an empty prefix."
+    ]
+  },
+  "rust_targets": [
+    "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
+    "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units_from_self"
+  ],
+  "rustdoc": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "raw_capture": "target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "6825ce179f82bca0154988e83fe360dd8f8510434fb5951581bd4304b7bbcb5d",
+    "normalized_capture": "target/extended-prepend-self-rustdoc.json",
+    "normalized_capture_sha256": "4725369f70c6fefd5d4739b51e2ca0aee869ca998db1d06ff0e05fb96a5a60a3",
+    "source": "crates/tkernel/src/tcollection/extended_string/append.rs",
+    "source_sha256": "2fb45391d3ab32ca185b653de748ee0779731b99f8c990bb87ebc1607800dda4",
+    "each_target_count": 1,
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e"
+  },
+  "parity": {
+    "ledger": "porting/parity.json",
+    "ledger_sha256": "070e54cff33ec9feed2718baa9210b58d004b4e031f6c834a3d1824949ee55e3",
+    "status": "implemented",
+    "notes": "External bounded UTF-16 input uses prepend_c_units; receiver aliases use prepend_c_units_from_self(start). The previous cstring-mutations audit remains a historical receipt for the earlier external-only slice."
+  },
+  "rust_evidence": {
+    "regression": "crates/tkernel/tests/extended_string_c_units_mutations.rs",
+    "regression_sha256": "fa3f7fffc443a54a1a18e2b3b2c4c16013b92e0e177d0a870021f2b5b8dbedfc",
+    "focused_log": "porting/runtime-evidence/extended-string-prepend-self-focused.log.gz",
+    "focused_log_sha256": "d0349fc8e72b175a73fd449eac98ce34526602bbc39fa58000d695578d7bb7f0",
+    "focused_passed": 6,
+    "full_command": "cargo test --locked -p rustycad-tkernel",
+    "full_log": "porting/runtime-evidence/extended-string-prepend-self-tkernel-tests.log.gz",
+    "full_log_sha256": "198fc721ee266da00405ffe85b8912c5244ba4b50ef7cd16b1fbe96586b0d8a3",
+    "full_passed": 2850,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "full_result_groups": 190,
+    "clippy_command": "cargo clippy --locked -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-prepend-self-clippy.log.gz",
+    "clippy_log_sha256": "3652b03d2fa51254936d5ab95d4b05f9ea52fdb721a2036bafab28a732d29ade",
+    "clippy_exit_code": 0
+  },
+  "limits": [
+    "Rust models valid null-terminated input through bounded slices and offsets; invalid native pointers are outside the safe API domain.",
+    "Allocator address identity is not observable contract and is not compared.",
+    "Insert and SetValue self-aliasing overload cases remain outside this receipt and retain their separate partial statuses."
+  ]
+}
