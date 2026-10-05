@@ -1,0 +1,19 @@
+{
+  "source_revision": "56b278c6c841092754397b2ab45d2197a9e46351",
+  "command": "python3 tools/verify_tkernel.py --jobs 4",
+  "command_exit_code": 1,
+  "result": "failed",
+  "log": "porting/runtime-evidence/tkernel-local-array-registration-failed-56b278c6.log.gz",
+  "log_sha256": "c190db8752c2c76a766d2f83be46505c2e6621cd4c00251c2d9a4cc480878eea",
+  "cause": "A supplemental const-view test was registered in the original legacy target: 34 Rust tests passed but only 33 original declarations were expected. The strict declaration join correctly rejected the unmapped extra test.",
+  "fix": "Move the supplemental case into the independent local_array_shared_view integration target. Do not alter original declarations or loosen the verifier.",
+  "legacy_declaration_count_delta": 0,
+  "fix_validation": {
+    "command": "cargo test -p rustycad-tkernel --test ncollection_local_array --test local_array_shared_view",
+    "exit_code": 0,
+    "original_cases_passed": 33,
+    "supplemental_cases_passed": 1,
+    "log": "porting/runtime-evidence/local-array-registration-tests.log.gz",
+    "log_sha256": "5062f02d72671dd8aecf14648abb1e792430e743f9627694b37147dd6b180811"
+  }
+}
