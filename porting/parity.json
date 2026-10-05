@@ -70028,9 +70028,12 @@
       "upstream_id": "NCollection_LinearVector(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::LinearVector::with_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::with_value_ref",
+        "rustycad_tkernel::ncollection::LinearVector::with_value"
+      ],
+      "status": "partial",
+      "notes": "with_value_ref copies every requested slot through Resize and preserves the native capacity rule; with_value is the owned-value adapter. If fill copying throws during construction, native does not run the incomplete vector destructor and leaks its raw buffer/untracked tail; Rust drops completed copies and deallocates storage. See tools/oracle/tkernel_linear_vector_with_value_ref.expected."
     },
     {
       "upstream_id": "NCollection_LinearVector(const NCollection_LinearVector<TheItemType>&)",

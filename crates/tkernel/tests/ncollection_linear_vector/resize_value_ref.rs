@@ -127,3 +127,71 @@ fn owned_fill_wrapper_clones_new_slots_through_the_borrowed_path() {
     assert_eq!(control.attempts.get(), 2);
     assert_values(&vector, &[1, 9, 9]);
 }
+
+#[test]
+fn borrowed_fill_constructor_keeps_native_empty_and_growth_capacities() {
+    let control = Rc::new(CloneControl::default());
+    let fill = CloneProbe {
+        value: 9,
+        control: Rc::clone(&control),
+    };
+    let empty = LinearVector::with_value_ref(0, &fill);
+    assert_eq!(empty.capacity(), 0);
+    assert_eq!(control.attempts.get(), 0);
+    let one = LinearVector::with_value_ref(1, &fill);
+    assert_eq!(one.capacity(), 2);
+    let many = LinearVector::with_value_ref(3, &fill);
+    assert_eq!(many.capacity(), 3);
+    assert_eq!(control.attempts.get(), 4);
+    assert_values(&one, &[9]);
+    assert_values(&many, &[9, 9, 9]);
+}
+
+#[test]
+fn borrowed_fill_constructor_panic_drops_completed_rust_tail() {
+    let control = Rc::new(CloneControl::default());
+    control.panic_at.set(2);
+    let fill = CloneProbe {
+        value: 9,
+        control: Rc::clone(&control),
+    };
+    let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        LinearVector::with_value_ref(4, &fill)
+    }));
+    assert!(failure.is_err());
+    assert_eq!(control.attempts.get(), 2);
+    assert_eq!(control.drops.get(), 1);
+    drop(fill);
+    assert_eq!(control.drops.get(), 2);
+}
+
+#[test]
+fn owned_fill_constructor_uses_the_borrowed_native_capacity_path() {
+    let control = Rc::new(CloneControl::default());
+    let vector = LinearVector::with_value(
+        1,
+        CloneProbe {
+            value: 9,
+            control: Rc::clone(&control),
+        },
+    );
+    assert_eq!(vector.capacity(), 2);
+    assert_eq!(control.attempts.get(), 1);
+    assert_values(&vector, &[9]);
+}
+
+#[test]
+fn borrowed_fill_constructor_drops_every_successful_copy() {
+    let control = Rc::new(CloneControl::default());
+    let fill = CloneProbe {
+        value: 9,
+        control: Rc::clone(&control),
+    };
+    let vector = LinearVector::with_value_ref(3, &fill);
+    assert_eq!(control.attempts.get(), 3);
+    assert_eq!(control.drops.get(), 0);
+    drop(vector);
+    assert_eq!(control.drops.get(), 3);
+    drop(fill);
+    assert_eq!(control.drops.get(), 4);
+}
