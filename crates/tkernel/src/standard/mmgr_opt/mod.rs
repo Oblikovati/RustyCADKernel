@@ -10,6 +10,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::sync::RwLock;
 mod address_space;
 mod free_pools;
+mod mapped_region;
 mod os_page;
 mod pools;
 mod purge;
