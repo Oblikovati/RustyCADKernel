@@ -146,6 +146,13 @@ impl Guid {
         *self = other;
     }
 
+    /// Assigns a GUID and returns this value for chained assignment-style calls;
+    /// `guid.assign_returning(other).assign_returning(Guid::new())`.
+    pub const fn assign_returning(&mut self, other: Self) -> &mut Self {
+        self.assign(other);
+        self
+    }
+
     /// `Assign(const Standard_UUID&)` / `operator=(const Standard_UUID&)`: copies UUID fields.
     ///
     /// ```
@@ -156,6 +163,13 @@ impl Guid {
     /// ```
     pub const fn assign_uuid(&mut self, uuid: Uuid) {
         self.0 = uuid;
+    }
+
+    /// Assigns UUID fields and returns this GUID, matching native `operator=(Standard_UUID)`;
+    /// `guid.assign_uuid_returning(uuid).assign_returning(other)`.
+    pub const fn assign_uuid_returning(&mut self, uuid: Uuid) -> &mut Self {
+        self.assign_uuid(uuid);
+        self
     }
 
     /// The 16-byte image of the C++ fields in declaration order, native byte order.

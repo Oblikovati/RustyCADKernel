@@ -1,0 +1,129 @@
+{
+  "scope": "Exact Standard_GUID C++ to Rust target-selector repairs; no behavior changes",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "cpp_report": "target/api-proof/api-coverage-report.json",
+  "cpp_report_sha256": "5520b1e5d77ffcea468a8944447074a362872cc5c43de778e0bd0d1ed9f54361",
+  "rust_inventory": "target/api-proof/rust-api-inventory.json",
+  "rust_inventory_sha256": "e2e40beb7b8c53b2ab2ae78409f6a823dbdc2540dc5c84613b1cd57e76b0b633",
+  "parity": "porting/parity.json",
+  "parity_sha256": "14b48b9580a2684ec9e4320367091d52824fcacf33ffb685cc3d1932c236c838",
+  "native_header": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+  "native_header_sha256": "0456a72d6ee8e71c02622ef808c361074d1a062883e207832d6b059b61da97fb",
+  "native_implementation": "src/FoundationClasses/TKernel/Standard/Standard_GUID.cxx",
+  "native_implementation_sha256": "62511ac7f0833abe77387ded293977dbead8b2b6939872999618c5cd6e8c5e7d",
+  "rust_sources": {
+    "crates/tkernel/src/standard/guid.rs": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb",
+    "crates/tkernel/src/standard/guid/text.rs": "161bf90264a7acd43728582dc258ca899ade3b99eeec032701d5baadea13ba42"
+  },
+  "existing_behavior_evidence": {
+    "rust_test": "crates/tkernel/tests/standard_values_api_behavior/guid.rs",
+    "native_probe": "tools/oracle/tkernel_standard_values_probe.cxx",
+    "corpus_generator": "tools/tkernel_standard_values_corpus.py",
+    "scope": "Existing 99-case GUID differential corpus covers text, UTF-16, components, comparisons, UUID conversion, assignment, formatting, hashing, NUL-terminated and malformed inputs; no implementation changed in this audit."
+  },
+  "corrections": [
+    {
+      "upstream_id": "Standard_GUID()",
+      "cpp_id": "dd95220921d09b4bb9e9f6e7d4e0cf33041c91a0111d8e81af654fcc258f8260",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void () noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid::new / Default",
+      "rust_item": "rustycad_tkernel::standard::Guid::new",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "Standard_GUID(const char* const)",
+      "cpp_id": "0fe72d8aeed7995a35e25a94bab24dacc91eacd1e27f8d57b22e34f38a4562fb",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (const char *)",
+      "old_rust_item": "rustycad_tkernel::standard::Guid::from_ascii / FromStr",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_ascii",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid/text.rs",
+      "rust_source_sha256": "161bf90264a7acd43728582dc258ca899ade3b99eeec032701d5baadea13ba42"
+    },
+    {
+      "upstream_id": "Standard_GUID(const Standard_UUID&)",
+      "cpp_id": "df5bbeea6320927648a4d6e5866ad039fb2824f78bc36fdb74200d195a1df44d",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (const struct Standard_UUID &) noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid::from_uuid / From<Uuid>",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_uuid",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "Standard_GUID(const Standard_GUID&)",
+      "cpp_id": "1400ef9975e7e57f5eaab21d6e8abade71e8b6c145a5fb9754fcf9307261b810",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (const class Standard_GUID &) noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid: Copy",
+      "rust_item": "rustycad_tkernel::standard::Guid::<core::clone::Clone>::clone",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "Standard_GUID::ToUUID() const",
+      "cpp_id": "6d0525d6a859f86934a5cbead69213ee36aac174ad51448b8cf55ae4de0085c0",
+      "cpp_kind": "CXXMethod",
+      "cpp_signature": "struct Standard_UUID () const noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid::to_uuid / From<Guid> for Uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::to_uuid",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "Standard_GUID::operator!=(const Standard_GUID&) const",
+      "cpp_id": "571bd1d73124da11ccb59c68213e732048664f907f8f7f5f20604048e6da515c",
+      "cpp_kind": "CXXMethod",
+      "cpp_signature": "bool (const class Standard_GUID &) const noexcept",
+      "old_rust_item": "<rustycad_tkernel::standard::Guid as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_not_same",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "Standard_GUID::operator=(const Standard_GUID&)",
+      "cpp_id": "850adb2183b3d5f2973926eac1613366c2e41f32bf4d75af3fa8939d055ed7b1",
+      "cpp_kind": "CXXMethod",
+      "cpp_signature": "class Standard_GUID &(const class Standard_GUID &) noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid: Copy assignment",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    },
+    {
+      "upstream_id": "std::hash<Standard_GUID>::operator()(const Standard_GUID&) const",
+      "cpp_id": "55b0024649b4130cd74a04226456ec58a642e6db4fb2f7387e601a06aa966fce",
+      "cpp_kind": "CXXMethod",
+      "cpp_signature": "unsigned long (const class Standard_GUID &) const noexcept",
+      "old_rust_item": "rustycad_tkernel::standard::Guid::hash_code / Hash",
+      "rust_item": "rustycad_tkernel::standard::Guid::hash_code",
+      "rust_path_count": 1,
+      "rust_kind": "function",
+      "rust_source": "crates/tkernel/src/standard/guid.rs",
+      "rust_source_sha256": "7fad1757ae373b3a30edbe462ef29c9fc7e91189b1a735ce38756009d55abafb"
+    }
+  ],
+  "domain_notes": [
+    "from_ascii accepts a borrowed byte slice and scans to its first NUL. Native null char* is defined to produce Standard_RangeError; Rust empty input produces the same error result, but no raw nullable pointer API is claimed.",
+    "from_utf16 is used only for at-least-36-unit valid storage. Native null or short UTF-16 pointers are outside defined input behavior because the constructor reads 36 units unconditionally.",
+    "Clone::clone is the exact Rust method available for producing an owned copy; Guid also derives Copy, so ordinary Rust value copying needs no explicit call.",
+    "operator= maps to Guid::assign, whose body copies the same UUID fields; Rust assignment of Guid itself is also available because Guid is Copy.",
+    "The native std::hash specialization returns hash_code directly; the Rust Hash trait implementation is not treated as an equivalent hash-value target."
+  ]
+}

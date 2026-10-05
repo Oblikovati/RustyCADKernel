@@ -82668,7 +82668,7 @@
       "upstream_id": "Standard_GUID()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::new / Default",
+      "rust_item": "rustycad_tkernel::standard::Guid::new",
       "status": "implemented",
       "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
@@ -82676,9 +82676,9 @@
       "upstream_id": "Standard_GUID(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::from_ascii / FromStr",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_ascii",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Invalid text returns Err(Failure) of class Standard_RangeError with the native message \"Invalid format of GUID\". The byte slice is read as a C string (up to the first NUL); a null pointer has no slice form."
+      "notes": "Invalid text returns Standard_RangeError with native message \"Invalid format of GUID\". The borrowed byte slice is scanned through the first NUL. Native nullptr is also defined to produce that same error; the safe Rust entry uses an empty slice to produce the same outcome and does not expose raw pointers."
     },
     {
       "upstream_id": "Standard_GUID::Standard_GUID(const char16_t* const)",
@@ -82694,23 +82694,23 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::from_components",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
+      "notes": "The ten components preserve the signed first field's bits; the fourth field supplies Data4[0..1] high byte first, followed by the six byte arguments."
     },
     {
       "upstream_id": "Standard_GUID(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::from_uuid / From<Uuid>",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_uuid",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
+      "notes": "The native constructor copies UUID fields from a const reference; Rust takes Uuid by value because Uuid is Copy. Both use the same field layout."
     },
     {
       "upstream_id": "Standard_GUID(const Standard_GUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid: Copy",
+      "rust_item": "rustycad_tkernel::standard::Guid::<core::clone::Clone>::clone",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). The copy constructor is the Copy impl."
+      "notes": "The copy constructor's owned-value result is Guid::clone; Guid derives both Clone and Copy, so ordinary Rust value copying also preserves the native field image without an explicit call. The standard_values probe compares UUID fields, text, and hashing against OCCT."
     },
     {
       "upstream_id": "Standard_GUID::ToCString(Standard_PCharacter) const",
@@ -82732,9 +82732,9 @@
       "upstream_id": "Standard_GUID::ToUUID() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::to_uuid / From<Guid> for Uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::to_uuid",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
+      "notes": "Returns the UUID field value. The native GUID differential probe also checks the returned fields and their round trip."
     },
     {
       "upstream_id": "Standard_GUID::IsSame(const Standard_GUID&) const noexcept",
@@ -82764,9 +82764,9 @@
       "upstream_id": "Standard_GUID::operator!=(const Standard_GUID&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Guid as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_not_same",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Operator mapped to the derived PartialEq; is_not_same serves const contexts."
+      "notes": "The explicit Rust is_not_same method is the unique direct counterpart; PartialEq supplies Rust operator syntax. Const behavior is covered separately by the constexpr-equivalent Rust test."
     },
     {
       "upstream_id": "Standard_GUID::Assign(const Standard_GUID&)",
@@ -82780,9 +82780,9 @@
       "upstream_id": "Standard_GUID::operator=(const Standard_GUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid: Copy assignment",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_returning",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Plain `=` assignment of the Copy type; assign is the named form."
+      "notes": "Returns &mut Self like native operator=. `assign` remains the void counterpart for native Assign; the native probe checks returned-object identity and chained calls."
     },
     {
       "upstream_id": "Standard_GUID::Assign(const Standard_UUID&)",
@@ -82796,9 +82796,9 @@
       "upstream_id": "Standard_GUID::operator=(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid_returning",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Rust has no cross-type assignment operator: `guid = uuid.into()` or assign_uuid."
+      "notes": "Returns &mut Self like native operator=(Standard_UUID). `assign_uuid` remains the void counterpart for native Assign; the native probe checks returned-object identity and chained calls."
     },
     {
       "upstream_id": "Standard_GUID::ShallowDump(Standard_OStream&) const",
@@ -82820,9 +82820,9 @@
       "upstream_id": "std::hash<Standard_GUID>::operator()(const Standard_GUID&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::hash_code / Hash",
+      "rust_item": "rustycad_tkernel::standard::Guid::hash_code",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). hashBytes over the 16-byte field image (int, three char16_t with Data4[0..2] packed high byte first, six uint8_t) in native byte order; the Hash impl feeds this value to the hasher."
+      "notes": "Returns OCCT's std::hash value from hashBytes over the 16-byte field image (int, three char16_t with Data4[0..2] packed high byte first, six uint8_t) in native byte order. Rust's Hash trait impl is separate because it feeds this usize into a caller-selected hasher."
     },
     {
       "upstream_id": "IsEqual(TheTimeType,TheTimeType)",

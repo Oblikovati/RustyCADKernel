@@ -54,3 +54,17 @@ fn components_uuid_and_assignment_round_trip() {
         "80000000".encode_utf16().collect::<Vec<_>>()[..]
     );
 }
+
+#[test]
+fn assignment_adapters_return_the_assigned_guid_for_chaining() {
+    let mut guid = Guid::new();
+    let source = Guid::from_components(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    let returned_address = guid.assign_returning(source) as *mut Guid;
+    assert_eq!(returned_address, &mut guid as *mut Guid);
+    let uuid = source.to_uuid();
+    let returned_address = guid.assign_uuid_returning(uuid) as *mut Guid;
+    assert_eq!(returned_address, &mut guid as *mut Guid);
+    guid.assign_returning(Guid::new())
+        .assign_uuid_returning(uuid);
+    assert_eq!(guid.to_uuid(), uuid);
+}

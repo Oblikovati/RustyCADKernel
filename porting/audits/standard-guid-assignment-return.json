@@ -1,0 +1,59 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Standard_GUID assignment operator return references",
+  "occt": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "header": "src/Standard/Standard_GUID.hxx",
+    "header_sha256": "0456a72d6ee8e71c02622ef808c361074d1a062883e207832d6b059b61da97fb",
+    "implementation": "src/Standard/Standard_GUID.cxx",
+    "implementation_sha256": "62511ac7f0833abe77387ded293977dbead8b2b6939872999618c5cd6e8c5e7d",
+    "native_library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "declarations": [
+    {
+      "id": "850adb2183b3d5f2973926eac1613366c2e41f32bf4d75af3fa8939d055ed7b1",
+      "selector": "Standard_GUID::operator=(const Standard_GUID&)",
+      "native_signature": "Standard_GUID& operator=(const Standard_GUID&) noexcept",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_returning"
+    },
+    {
+      "id": "7e7386613522ec16c81b728cd1fc1986966e556aac6bbe28995d98e993937468",
+      "selector": "Standard_GUID::operator=(const Standard_UUID&)",
+      "native_signature": "Standard_GUID& operator=(const Standard_UUID&) noexcept",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid_returning"
+    }
+  ],
+  "rust": {
+    "revision": "1d9ffd0c",
+    "source": "crates/tkernel/src/standard/guid.rs",
+    "source_sha256": "b07143beaf81b7434b8d7a0068be2b6ad908207c2612c5485608b1e8429e981a",
+    "test": "crates/tkernel/tests/standard_values_api_behavior/guid.rs",
+    "test_sha256": "417bf0e071edc5bf116f8e9ae8fa8d62a9e697601d7cbd56290ff3760db9bf34"
+  },
+  "probe": {
+    "source": "tools/oracle/tkernel_standard_guid_assignment_ref.cxx",
+    "source_sha256": "95354e2f46d2b88cc7d9cbeef325715f99a4796f120f9444baa0d923e2471c51",
+    "expected": "tools/oracle/tkernel_standard_guid_assignment_ref.expected",
+    "expected_sha256": "d101d70223d0f3cc12d6895b8ea71ee0b9b65e4aeee383680a3de9785014f1da",
+    "binary_sha256": "949a457958b1973729574a6f618d18e6e63b663b0d7de0899333e2de06f4a0b6",
+    "result": "Both native operators return the receiver; chained assignments preserve the assigned GUID values."
+  },
+  "validation": {
+    "rust_tests": "cargo test -p rustycad-tkernel --test standard_guid --test standard_values_api_behavior",
+    "rust_test_result": "39 passed, 0 failed",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_exit_code": 0,
+    "fmt": "cargo fmt --all -- --check",
+    "fmt_exit_code": 0,
+    "focused_log_gzip": "porting/runtime-evidence/standard-guid-assign-return-focused.log.gz",
+    "focused_log_sha256": "6adc0e9d3766d15bfb103bc8676b366553481f8d33142a00f2d9195ca130f03f",
+    "clippy_log_gzip": "porting/runtime-evidence/standard-guid-assign-return-clippy.log.gz",
+    "clippy_log_sha256": "e40c38e6712b4623c64f915e6d1ea6003b9b460725ac0897897afaafa1948eeb",
+    "parity_sha256": "fa093042c89bbdb10615c1c9b91a2587fab6f7b691314607c3805a4e6c40d055"
+  },
+  "limitations": [
+    "The adapter models the operator's mutable-reference return contract; it does not claim C++ ABI or overload resolution parity.",
+    "The existing Assign declarations remain separately mapped to the void-returning Rust assign methods."
+  ]
+}
