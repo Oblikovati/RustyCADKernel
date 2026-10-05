@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "kind": "source_bound_base_legacy_runtime_joins",
+  "source_revision": "68414cb48f443176e98deb6d66b05709aadc119b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "results": [
+    {
+      "toolkit": "TKernel",
+      "declarations_mapped": 1316,
+      "native_runtime_cases_passed": 1521,
+      "native_runtime_cases_upstream_skipped": 1,
+      "rust_runtime_cases_passed": 1522,
+      "joined_declarations_passed": 1315,
+      "joined_declarations_upstream_skipped": 1,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkernel-legacy-68414cb4.tar.gz",
+      "archive_sha256": "33f2cffdc1c54058ad3ced695cc1e8e8b4787d48b7fed9d82c90fca70c3747bd",
+      "archive_files": 216,
+      "report_sha256": "5720a6d46384e108618b12fedbd8cb6b4df4ae2d2ff9161f9099041337e5fb36",
+      "join_sha256": "8c958ac3e3a5db26b2687910a5d3d7ab66a0c47aa43fccfba38583b7daa3482d",
+      "differential_cases_passed": 201892,
+      "native_executable_sha256": "e6a153c60158f43077ab76f73270184fcc99e0b64d7619ed2db498ec3ee26ad5"
+    },
+    {
+      "toolkit": "TKMath",
+      "declarations_mapped": 2023,
+      "native_runtime_cases_passed": 2023,
+      "native_runtime_cases_upstream_skipped": 0,
+      "rust_runtime_cases_passed": 2023,
+      "joined_declarations_passed": 2023,
+      "joined_declarations_upstream_skipped": 0,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkmath-legacy-68414cb4.tar.gz",
+      "archive_sha256": "d918a24ba365a38b783f76ddfa3c59062f739390448f2bdf366e804e039761f6",
+      "archive_files": 125,
+      "report_sha256": "34f489adde89b7092033345be9c99392d03bab8b345556611aed5bede787e399",
+      "join_sha256": "f1a21918b3c8653dda4b232326b1c1ca99f428bef7e71b29b48d9c60c5ddf934"
+    },
+    {
+      "toolkit": "TKG2d",
+      "declarations_mapped": 523,
+      "native_runtime_cases_passed": 523,
+      "native_runtime_cases_upstream_skipped": 0,
+      "rust_runtime_cases_passed": 523,
+      "joined_declarations_passed": 523,
+      "joined_declarations_upstream_skipped": 0,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkg2d-legacy-68414cb4.tar.gz",
+      "archive_sha256": "701e7929b5346e2f4283e651d9025031c3840b9dbdd34bad60ec5f70006d8dd6",
+      "archive_files": 35,
+      "report_sha256": "df8ea057ae58f451485e26089680d80776764494726ab3c909fbb6fef53f5a27",
+      "join_sha256": "9f3d1d47843e0686ede75674e0cf949d54be681822bd88723bcd03492acb572f"
+    },
+    {
+      "toolkit": "TKG3d",
+      "declarations_mapped": 794,
+      "native_runtime_cases_passed": 794,
+      "native_runtime_cases_upstream_skipped": 0,
+      "rust_runtime_cases_passed": 794,
+      "joined_declarations_passed": 794,
+      "joined_declarations_upstream_skipped": 0,
+      "unclaimed_runtime_cases": 0,
+      "archive": "tkg3d-legacy-68414cb4.tar.gz",
+      "archive_sha256": "c5415cb35af266e9a6d79689d91747b16c52b00ba6066c03147ecb96f2a7c377",
+      "archive_files": 51,
+      "report_sha256": "dc3b0b2a24a8da76c6b38ed0157deba09fd32ac24b2bd455652179ec0d04fe80",
+      "join_sha256": "4a788bddf02f12e8e8233d398040ac25c250138aadf8bd87957acb7fe5ee21df"
+    }
+  ],
+  "full_occt_api_parity_proven": false,
+  "full_occt_legacy_runtime_parity_proven": false,
+  "limitations": [
+    "Mapped GoogleTest declarations and explicit typed runtime expansions only; API, DRAW, and configuration/platform acceptance remain incomplete.",
+    "OCC23497 remains an upstream skip, with a separate Rust current-behavior regression.",
+    "Every report and exact join is source-bound to 68414cb4; archives retain current-run text artifacts and omit compiled binaries/objects."
+  ],
+  "reproduce": "Run verify_tkernel.py and verify_tkmath_legacy.py for TKMath/TKG2d/TKG3d, then join_legacy_runtime_evidence.py with --occt-source ../OCCT (relative paths now supported). Commands, source hashes, linked libraries, native outputs and per-target Rust logs are retained."
+}
