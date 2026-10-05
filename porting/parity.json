@@ -87197,7 +87197,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The view operator is the named method."
+      "notes": "Retain the readable std::string_view selector; parser now resolves symbolic operator angles without confusing parameter template types. Full byte-span comparison is implemented. Supplemental native/compiler evidence: porting/audits/ascii-string-view-surface-proposed-rows.json. Original legacy declaration count unchanged."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsLess(const char(&)[N]) const",
@@ -87269,7 +87269,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The view operator is the named method."
+      "notes": "Retain the readable std::string_view selector; parser now resolves symbolic operator angles without confusing parameter template types. Full byte-span comparison is implemented. Supplemental native/compiler evidence: porting/audits/ascii-string-view-surface-proposed-rows.json. Original legacy declaration count unchanged."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsGreater(const char(&)[N]) const",
@@ -87656,12 +87656,12 @@
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The NUL-terminated buffer as a byte slice."
     },
     {
-      "upstream_id": "TCollection_AsciiString::operator std::string_view() const",
+      "upstream_id": "TCollection_AsciiString::operator basic_string_view() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::as_bytes",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The explicit conversion is the full-length byte slice, embedded NULs included."
+      "notes": "Exposes complete stored byte span, including embedded NULs. Supplemental native/compiler evidence: porting/audits/ascii-string-view-surface-proposed-rows.json. Original legacy declaration count unchanged."
     },
     {
       "upstream_id": "TCollection_AsciiString::Token(const char* const,int) const",
@@ -235624,6 +235624,14 @@
       "rust_item": "rustycad_tkernel::message::PrinterToReport::send_metric_alert",
       "status": "implemented",
       "notes": "Exposes protected meter insertion through the shared implementation. Inserts an AttributeMeter even with no active metrics, leaves the pending stream name untouched, and targets the selected report. Source-bound native probe and four supplemental boundary tests: porting/audits/message-printer-report-meter-hook.json. The stream C-string prefix behavior was already correct through AsciiString::from_bytes; it is tested without claiming a new bug fix."
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::TCollection_AsciiString(const char(&)[N])",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::from_bytes",
+      "status": "implemented",
+      "notes": "The literal constructor uses strlen and stops at the first NUL, matching AsciiString::from_bytes. Supplemental native/compiler evidence: porting/audits/ascii-string-view-surface-proposed-rows.json. Original legacy declaration count unchanged. Exact const-generic From trait identity is not captured; source adapter delegates to this compiler-visible constructor."
     }
   ],
   "tests": [
