@@ -41,6 +41,19 @@ impl ExtendedString {
         };
         self.prepend(utf::c_units_prefix(units));
     }
+    /// Prepends a NUL-terminated suffix of this string, preserving OCCT's aliased-pointer case;
+    /// `text.prepend_c_units_from_self(2)?`.
+    pub fn prepend_c_units_from_self(&mut self, start: usize) -> Result<(), Failure> {
+        let Some(suffix) = self.as_utf16().get(start..) else {
+            return Err(out_of_range(
+                "TCollection_ExtendedString::Prepend : self code-unit offset",
+                format_args!("start {start}; expected 0..={}", self.len()),
+            ));
+        };
+        let prefix_length = utf::c_units_prefix(suffix).len();
+        self.prepend_self(start..start + prefix_length);
+        Ok(())
+    }
     /// The (pointer, length) AssignCat: a null pointer or a length <= 0 appends nothing;
     /// `text.assign_cat_span(Some(&[65, 66]), 1)`.
     pub fn assign_cat_span(&mut self, units: Option<&[u16]>, length: i32) {

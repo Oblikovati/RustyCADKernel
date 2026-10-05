@@ -1,0 +1,7 @@
+# ExtendedString self-aliasing UTF-16 Prepend oracle
+
+OCCT's `Prepend(pointer,length)` explicitly detects a pointer inside its own `myString` buffer. It records the pointer offset before `reallocate`, shifts the original contents, then copies the selected source units from the shifted location. The one-argument pointer wrapper measures only through the next NUL, including when the source begins inside the receiver.
+
+The fixture compares four valid self-pointer cases against the safe Rust `prepend_c_units_from_self(start)` adapter: an interior suffix, a suffix beginning after an embedded NUL, a whole-buffer prefix, and a pointer to the terminator. Native `Prepend` calls `reallocate` on its aliased branch; that allocator may preserve or move the address, while the Rust `Vec::splice` path likewise handles either capacity case. Address identity is allocator-dependent and is not asserted. The adapter obtains a bounded suffix, truncates it at the first zero, and delegates to the existing range-based `prepend_self` copy-before-mutation path. An offset beyond the string is rejected with `Standard_OutOfRange`-style `Failure` and an explicit expected range; no native pointer exists for that Rust-only invalid domain.
+
+Build against the pinned modeling-full TKernel library using the command in the fixture's sibling mutation audit. Native source revision and header/source/library hashes are recorded in `porting/audits/extended-string-cstring-prepend-self.json`.

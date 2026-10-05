@@ -67,3 +67,37 @@ fn insert_and_set_validate_position_before_null_input() {
     assert!(set_error.to_string().contains("theWhere 0"));
     assert_eq!(value.as_utf16(), &[88, 89]);
 }
+
+#[test]
+fn prepend_self_scans_suffix_and_preserves_embedded_zero() {
+    let mut value = ExtendedString::new("ABC");
+    value.prepend_c_units_from_self(1).unwrap();
+    assert_eq!(value.as_utf16(), &[66, 67, 65, 66, 67]);
+
+    let mut embedded = ExtendedString::from_raw(&[65, 66, 0, 67, 68]);
+    embedded.prepend_c_units_from_self(3).unwrap();
+    assert_eq!(embedded.as_utf16(), &[67, 68, 65, 66, 0, 67, 68]);
+}
+
+#[test]
+fn prepend_self_from_zero_copies_full_text_and_end_is_empty() {
+    let mut value = ExtendedString::new("ABCDEFGH");
+    value.prepend_c_units_from_self(0).unwrap();
+    assert_eq!(
+        value.as_utf16(),
+        "ABCDEFGHABCDEFGH".encode_utf16().collect::<Vec<_>>()
+    );
+    let unchanged = value.clone();
+    let end = value.len();
+    value.prepend_c_units_from_self(end).unwrap();
+    assert_eq!(value, unchanged);
+}
+
+#[test]
+fn prepend_self_rejects_offsets_beyond_the_terminator() {
+    let mut value = ExtendedString::new("ABC");
+    let error = value.prepend_c_units_from_self(4).unwrap_err();
+    assert!(error.to_string().contains("start 4"));
+    assert!(error.to_string().contains("expected 0..=3"));
+    assert_eq!(value.as_utf16(), &[65, 66, 67]);
+}
