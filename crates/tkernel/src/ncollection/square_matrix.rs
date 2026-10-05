@@ -17,6 +17,7 @@ pub trait MatrixScalar:
 impl MatrixScalar for f32 {}
 impl MatrixScalar for f64 {}
 
+/// Mutates matching entries in native column-major order; e.g. `zip_matrix_elements(&mut left, &right, |a, b| *a += *b)`.
 pub(super) fn zip_matrix_elements<T, const N: usize>(
     left: &mut [[T; N]; N],
     right: &[[T; N]; N],
