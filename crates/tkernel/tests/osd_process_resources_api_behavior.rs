@@ -176,6 +176,77 @@ fn shared_library_empty_c_string_prefix_stays_empty() {
     assert_eq!(set.name(), Some(""));
 }
 
+#[cfg(target_os = "linux")]
+#[test]
+fn shared_library_preserves_non_utf8_names_symbols_and_loader_errors() {
+    use std::os::unix::ffi::OsStrExt;
+
+    let (directory, link, target) = non_utf8_libm_link();
+    let path_bytes = link.as_os_str().as_bytes();
+    let mut library = SharedLibrary::named_bytes(Some(path_bytes));
+    assert_eq!(library.name_bytes(), Some(path_bytes));
+    assert_eq!(library.name(), None, "invalid UTF-8 has no str view");
+    assert!(library.dl_open(LoadMode::RtldNow));
+    assert_non_utf8_symbol_error(&library, target.as_os_str().as_bytes());
+    library.dl_close();
+    std::fs::remove_file(link).expect("remove symlink");
+    std::fs::remove_dir(directory).expect("remove temporary directory");
+}
+
+#[cfg(target_os = "linux")]
+fn assert_non_utf8_symbol_error(library: &SharedLibrary, library_path: &[u8]) {
+    let cosine = library.dl_symb_bytes(b"cos").expect("libm exports cos");
+    assert_eq!(library.dl_symb_bytes(b"cos\0ignored"), Some(cosine));
+    assert!(library.dl_symb_bytes(b"missing_\xff_symbol").is_none());
+    assert_eq!(
+        library.dl_error_bytes().as_deref(),
+        Some(expected_symbol_error(library_path).as_slice())
+    );
+    assert!(
+        library.dl_error_bytes().is_none(),
+        "dlerror clears after a read"
+    );
+}
+
+#[cfg(target_os = "linux")]
+fn expected_symbol_error(library_path: &[u8]) -> Vec<u8> {
+    [library_path, b": undefined symbol: missing_\xff_symbol"].concat()
+}
+
+#[test]
+fn shared_library_byte_setter_keeps_first_nul_prefix_and_null_is_noop() {
+    let mut library = SharedLibrary::new();
+    library.set_name_bytes(Some(b"lib\xff.so\0ignored"));
+    assert_eq!(library.name_bytes(), Some(b"lib\xff.so".as_slice()));
+    assert_eq!(library.name(), None);
+    library.set_name_bytes(None);
+    assert_eq!(library.name_bytes(), Some(b"lib\xff.so".as_slice()));
+}
+
+#[cfg(target_os = "linux")]
+fn non_utf8_libm_link() -> (std::path::PathBuf, std::path::PathBuf, std::path::PathBuf) {
+    use std::{ffi::OsString, os::unix::ffi::OsStringExt, os::unix::fs::symlink};
+
+    let target = [
+        "/lib/x86_64-linux-gnu/libm.so.6",
+        "/lib/aarch64-linux-gnu/libm.so.6",
+        "/lib64/libm.so.6",
+    ]
+    .iter()
+    .find(|candidate| std::path::Path::new(candidate).exists())
+    .map(std::path::PathBuf::from)
+    .expect("host libm path");
+    let nonce = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    let directory = std::env::temp_dir().join(format!("rustycad-shlib-{nonce}"));
+    std::fs::create_dir(&directory).expect("unique temporary directory");
+    let link = directory.join(OsString::from_vec(b"libm-\xff.so".to_vec()));
+    symlink(&target, &link).expect("temporary non-UTF8 symlink");
+    (directory, link, target)
+}
+
 /// Fixed memory figures standing for mallinfo2, procfs and task_info.
 struct FakeMemInfo {
     status: Option<&'static str>,
