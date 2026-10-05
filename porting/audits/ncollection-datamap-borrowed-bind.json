@@ -1,0 +1,109 @@
+{
+  "behavior": {
+    "native_probe_rows": [
+      "inserted=1 keycopies=1 valuecopies=1 copyassigns=0 moveassigns=0 destructions=0 hashes=1 events=VK value=7",
+      "replaced=0 keycopies=0 valuecopies=1 copyassigns=0 moveassigns=1 destructions=1 hashes=1 events=VMD stable=1 value=9"
+    ],
+    "on_hit": "No key copy. Construct a replacement temporary from the borrowed item, replace in the same value slot, and return false.",
+    "on_miss": "Hash/search uses the original key. Item copy construction occurs before key copy construction; bool is true."
+  },
+  "implementation_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b",
+  "implementation_source_sha256": {
+    "crates/tkernel/src/ncollection/data_map.rs": "0035169ebb8c0ad79d251fffd172397cf179c6d3a73ca7baa2f5fdb84b680c3d",
+    "crates/tkernel/src/ncollection/data_map/operations.rs": "faac257fbeff77eaafa45ddd52b2dd13b23956f309376d9edf3c76a0e72c285d",
+    "crates/tkernel/tests/ncollection_data_map_bind_ref.rs": "68961c0d190843a8162c61eae88d801e68e09776a3efe59aa2f479be0dd99167",
+    "tools/oracle/ncollection_data_map_bind_ref.cxx": "1e6e24963c5654320b929983077555c430fdf4510aa4b27de7826271c3d59a1e",
+    "tools/oracle/ncollection_data_map_bind_ref.expected": "74d0fa047b283b984184f6b68934127eaa8a7ddbabf51730502bd3ad6fbe99af",
+    "tools/oracle/ncollection_data_map_bind_ref.md": "635506ef6e203569d9da0a7741647ec6ec9164977c4710c159d6b3420af1b600",
+    "tools/tests/test_datamap_borrowed_bind.py": "c881e613432650e0b345f9221d9f8f82930468a0cd652f488e289683616d3a95"
+  },
+  "inputs_sha256": {
+    "api_header_manifest_json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "occt_declarations_jsonl_gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "parity_json": "32e791866e8b49382bf4189a8ee1ffa73d976f8bcfbd2db665222096e114215d",
+    "rust_api_json_gz": "ab8a0ef0bac7a3284fe36cf4b9f1ce67c71353877bf4290f54ac52bd0ff0add2"
+  },
+  "limitations": [
+    "The checked-in global Rust API inventory is from the parent main revision and predates this new method. The retained private TKernel rustdoc capture resolves the path uniquely; refresh the global snapshot before relying on generated global crosswalk output.",
+    "Rust assignment into an existing slot drops the old Rust value and moves the cloned temporary. It cannot reproduce arbitrary user-defined C++ move-assignment/destructor hook side effects.",
+    "Safe borrowing does not expose native source/key self-aliasing behavior; C++ exception and allocation-failure side effects are not claimed."
+  ],
+  "native_declaration": {
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+    "id": "a5f48fb286110250b400b7c10f88e6e51ac50f96f25230b85c37f876df86ac12",
+    "selector": "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)",
+    "signature": "bool (const type-parameter-0-0 &, const type-parameter-0-1 &)",
+    "source_hashes": {
+      "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx": "4a1f63179b98ce73e104101fbea4942b430244ddb13153155a17f1bd13aa1296"
+    },
+    "usr": "c:@ST>3#T#T#T@NCollection_DataMap@F@Bind#&1t0.0#&1t0.1#"
+  },
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "parity_row": {
+    "parity_sha256": "d474f2f25ab3bdda15e49f4c8299b7c7632134e3a48a08e248730f7ac8ff28fb",
+    "selector": "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)",
+    "status": "partial",
+    "target": "rustycad_tkernel::ncollection::DataMap::bind_ref"
+  },
+  "rust_target": {
+    "declaration_sha256": "a1055f63a428e088c85193122d75a9272cf5eb9630e4a3ae8a41b90621b3a320",
+    "kind": "function",
+    "path": "rustycad_tkernel::ncollection::DataMap::bind_ref",
+    "published_rust_api_inventory_revision": "eaeaf870b08691638be797c201adefdfef368b4c",
+    "rustdoc_private_capture": {
+      "command": "cargo +nightly-2026-09-25 rustdoc -p rustycad-tkernel --lib --all-features -- -Z unstable-options --output-format json --document-private-items",
+      "log": "porting/runtime-evidence/datamap-borrowed-bind-rustdoc.log.gz",
+      "log_sha256": "f34263546c5e358f6a8f0ac8b22f2391110ee302970bf3c295e8ec7e44b9c153",
+      "normalized_crate_public_paths": 7452,
+      "normalized_unresolved_links": 68,
+      "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+      "raw_json_gzip": "porting/runtime-evidence/datamap-borrowed-bind-tkernel-rustdoc.json.gz",
+      "raw_json_gzip_sha256": "fcbf5a0aacdae48bfafa00282697e15afa988f458c57b954403bb67f20d014e3",
+      "raw_json_uncompressed_sha256": "6be11eeddeb173c16fdbe0f8c11d361b10bff2a18607e6f5b3fb4faf4f9d3ee2",
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)",
+      "working_tree_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b"
+    },
+    "rustdoc_target_present_in_capture": true,
+    "source_file": "crates/tkernel/src/ncollection/data_map/operations.rs",
+    "source_sha256": "faac257fbeff77eaafa45ddd52b2dd13b23956f309376d9edf3c76a0e72c285d"
+  },
+  "schema_version": 1,
+  "scope": "One existing const-key/const-item legacy declaration; no legacy declaration or test count added.",
+  "title": "NCollection_DataMap borrowed Bind semantics",
+  "validation": {
+    "native_binary_sha256": "d60f494452d7b9505b9cc8acff54d975f0bbdc48d4fcca7ca4d5053ebc481533",
+    "native_command": "c++ -std=c++17 -O2 -I /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/ncollection_data_map_bind_ref.cxx -L /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/ncollection_data_map_bind_ref",
+    "native_linked_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "native_log": {
+      "path": "porting/runtime-evidence/datamap-borrowed-bind-native.log.gz",
+      "sha256": "5bf62a0f58d94814d5fdbb6e934751a5beb7608b011c755feb6ee4773be8e0c4"
+    },
+    "native_output_sha256": "74d0fa047b283b984184f6b68934127eaa8a7ddbabf51730502bd3ad6fbe99af",
+    "rust_doc_test": {
+      "command": "cargo test -p rustycad-tkernel --doc bind_ref",
+      "log": "porting/runtime-evidence/datamap-borrowed-bind-doctest.log.gz",
+      "log_sha256": "01c40dc1b467e6c1f66f610f20d688f24d4acc9a89bf9983df18c44d6efe4827",
+      "result": "1 passed"
+    },
+    "rust_focused_tests": {
+      "command": "cargo test -p rustycad-tkernel --test ncollection_data_map --test ncollection_data_map_bind_ref",
+      "log": "porting/runtime-evidence/datamap-borrowed-bind-focused.log.gz",
+      "log_sha256": "ca144b005b459cce0c1bfa3f145780d6e8fd4bb489870bfac48b98a9a09869ed",
+      "result": "39 passed, 0 failed"
+    },
+    "selector_test": {
+      "command": "python3 -m unittest test_datamap_borrowed_bind",
+      "log": "porting/runtime-evidence/datamap-borrowed-bind-selector.log.gz",
+      "log_sha256": "d7f2e15a34668549ad173ad7e3c3d57996ae656bc264e6f4ded4826535bab2a8",
+      "result": "1 passed"
+    },
+    "strict_clippy": {
+      "command": "cargo clippy -p rustycad-tkernel --test ncollection_data_map_bind_ref -- -D warnings",
+      "log": "porting/runtime-evidence/datamap-borrowed-bind-clippy.log.gz",
+      "log_sha256": "4f720c28b0702071fb0cdbef7cfd7ff18218bb9eb9e324a5eb2060733af8ad45",
+      "result": "passed"
+    }
+  }
+}

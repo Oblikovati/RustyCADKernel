@@ -29,6 +29,52 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         self.place(key, construct, false).1
     }
 }
+impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> DataMap<K, V, H> {
+    /// Binds borrowed values, cloning only after lookup; `map.bind_ref(&key,&value)`.
+    ///
+    /// This preserves source values and the existing slot address. It follows OCCT's
+    /// construct-then-replace value path; user-defined C++ move-assignment hooks are not modeled.
+    ///
+    /// # Example
+    /// ```
+    /// use rustycad_tkernel::ncollection::DataMap;
+    /// let mut map = DataMap::<i32, i32>::default();
+    /// assert!(map.bind_ref(&1, &42));
+    /// assert!(!map.bind_ref(&1, &43));
+    /// assert_eq!(*map.find(&1).unwrap(), 43);
+    /// ```
+    pub fn bind_ref(&mut self, key: &K, value: &V) -> bool {
+        if self.count == 0 || self.count > self.bucket_count {
+            self.resize(self.count);
+        }
+        let (bucket, index) = self.lookup_with_bucket(key);
+        self.replace_or_insert_borrowed(key, value, bucket, index)
+    }
+    fn replace_or_insert_borrowed(
+        &mut self,
+        key: &K,
+        value: &V,
+        bucket: usize,
+        index: Option<usize>,
+    ) -> bool {
+        let Some(index) = index else {
+            return self.insert_borrowed(key, value, bucket);
+        };
+        self.buckets[bucket][index].value = value.clone();
+        false
+    }
+    fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> bool {
+        let copied_value = value.clone();
+        let copied_key = key.clone();
+        let entry = super::Entry {
+            key: copied_key,
+            value: copied_value,
+        };
+        self.buckets[bucket].insert(0, self.resource.allocate_value(entry));
+        self.count += 1;
+        true
+    }
+}
 impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> DataMap<K, V, H> {
     /// Copies bindings while preserving the destination hasher and allocator; `map.assign(&source)`.
     pub fn assign(&mut self, source: &Self) {
