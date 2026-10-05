@@ -1,0 +1,67 @@
+{
+  "schema": "runtime-evidence-v1",
+  "subject": "NCollection_Mat3/Mat4::Map",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "inputs": {
+    "declaration_inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "mat3_header_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51",
+    "mat4_header_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+  },
+  "declarations": [
+    {
+      "selector": "NCollection_Mat3::Map(Element_t*)",
+      "compiler_id": "5e585163596ae7b4ae99893e33d04cc3f5a3924208df7dcaf46888b0aa143281",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map_mut"
+    },
+    {
+      "selector": "NCollection_Mat3::Map(const Element_t*)",
+      "compiler_id": "d08d3990fe85e9a8ca758ffd72072e2c3f830e605288f88e703da5c8dbc74fd2",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map"
+    },
+    {
+      "selector": "NCollection_Mat4::Map(Element_t*)",
+      "compiler_id": "3460dbd18af0689c543a4636660cddbde649ca7f0a73c48b700637b0af1079b5",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map_mut"
+    },
+    {
+      "selector": "NCollection_Mat4::Map(const Element_t*)",
+      "compiler_id": "03389096a229d7a2e0b9f394b0a8fefbc41c7e2d23e37849aed35c4339cb8092",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map"
+    }
+  ],
+  "native_probe": {
+    "source": "tools/oracle/tkernel_matrix_map.cxx",
+    "source_sha256": "e6501ee471e7f2665f564f8a8a47bb68c9adfb169820e6d18e3122119a5955cf",
+    "expected": "tools/oracle/tkernel_matrix_map.expected",
+    "expected_sha256": "858a5d95239f1dcede31adf8587f4c96ce9f5e5baae4ac30cafe3ea576b313f1",
+    "compiler": "g++ 13.3.0",
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/tkernel_matrix_map.cxx -o /tmp/tkernel_matrix_map && /tmp/tkernel_matrix_map > /tmp/tkernel_matrix_map.out && diff -u tools/oracle/tkernel_matrix_map.expected /tmp/tkernel_matrix_map.out"
+  },
+  "rust_probe": {
+    "test": "crates/tkernel/tests/ncollection_matrix_map.rs",
+    "result": "passed",
+    "source_sha256": "dd57207bad6be158be854d2b39c45ce604a4b036c1064700b2a74bc13ed2e4ae",
+    "test_sha256": "443284cdbb7c501cd1d3d51e9c8eaec5d834268f8eeaff3a17b73d37545856f0",
+    "toolchain": "rustc 1.98.1 (48a229ceaefd4985c50990b14116b6d856af0985)",
+    "focused_command": "cargo +1.98.1 test -p rustycad-tkernel --test ncollection_matrix_map",
+    "package_command": "cargo +1.98.1 test -p rustycad-tkernel",
+    "package_result_groups": 172,
+    "package_passed": 2804,
+    "package_failed": 0,
+    "package_ignored": 0,
+    "strict_clippy_command": "cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "strict_clippy_result": "passed",
+    "format_command": "cargo +1.98.1 fmt --all -- --check",
+    "format_result": "passed",
+    "package_log": "porting/runtime-evidence/tkernel-matrix-map-full.log.gz",
+    "package_log_sha256": "7f60127ee2ccdae7ed9d70bcf45f9110ec12925a6577f1f5a10afa67c0ec4147",
+    "package_log_uncompressed_sha256": "e02aad98ddee09dc9e7788594c90beb4ffc02cfd3a281a93df850d9e879fbb4d",
+    "base_revision": "eabfd77821cde8aff5b337cf1420d96c6aaf5644",
+    "selector_test": "PYTHONPATH=tools python3 -m unittest tools.tests.test_tkmath_matrix_selectors",
+    "selector_test_result": "2 passed; all four Map selectors unique in pinned inventory",
+    "focused_passed": 4,
+    "selector_test_source_sha256": "887fece82313b87bee5cac03903446fe91b6043267af6671f420a26ad0f12b9d"
+  },
+  "scope": "The borrowed views preserve column-major element aliasing for correctly sized safe Rust arrays. They do not expose all Mat3/Mat4 methods or permit aliases that violate Rust borrowing rules; native object reinterpretation and arbitrary pointer alignment/lifetime cases are not modeled."
+}

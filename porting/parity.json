@@ -9443,9 +9443,9 @@
       "upstream_id": "NCollection_Mat4::Map(const Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::from_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map",
+      "status": "partial",
+      "notes": "Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat4::Transposed() const noexcept",
@@ -16563,17 +16563,17 @@
       "upstream_id": "NCollection_Mat3::Map(Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::from_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map_mut",
+      "status": "partial",
+      "notes": "Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat3::Map(const Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::from_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::map",
+      "status": "partial",
+      "notes": "Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat3::DumpJson",
@@ -16739,9 +16739,9 @@
       "upstream_id": "NCollection_Mat4::Map(Element_t*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::from_data",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::map_mut",
+      "status": "partial",
+      "notes": "Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
       "upstream_id": "NCollection_Mat4::DumpJson",
