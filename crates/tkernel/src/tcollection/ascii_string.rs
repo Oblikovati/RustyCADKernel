@@ -89,6 +89,7 @@ pub(crate) fn c_string_length(bytes: &[u8]) -> usize {
 pub(crate) fn c_string_prefix(bytes: &[u8]) -> &[u8] {
     &bytes[..c_string_length(bytes)]
 }
+mod c_string_comparison;
 mod case_adjust;
 mod comparison;
 mod concatenation;

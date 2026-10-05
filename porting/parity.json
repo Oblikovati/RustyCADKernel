@@ -87027,17 +87027,17 @@
       "upstream_id": "TCollection_AsciiString::IsEqual(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator==(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::cmp::PartialEq<&str>>::eq",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsEqual(const std::string_view&) const",
@@ -87059,17 +87059,17 @@
       "upstream_id": "TCollection_AsciiString::IsEqual(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator==(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The literal operator is the named method."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsDifferent(const char* const,int) const",
@@ -87099,17 +87099,17 @@
       "upstream_id": "TCollection_AsciiString::IsDifferent(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator!=(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as PartialEq<&str>>::ne",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsDifferent(const std::string_view&) const",
@@ -87131,17 +87131,17 @@
       "upstream_id": "TCollection_AsciiString::IsDifferent(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator!=(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The literal operator is the named method."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsLess(const char* const,int) const",
@@ -87171,17 +87171,17 @@
       "upstream_id": "TCollection_AsciiString::IsLess(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator<(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. operator< and operator> with a C string are the named methods."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsLess(const std::string_view&) const",
@@ -87203,17 +87203,17 @@
       "upstream_id": "TCollection_AsciiString::IsLess(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator<(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The literal operator is the named method."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsGreater(const char* const,int) const",
@@ -87243,17 +87243,17 @@
       "upstream_id": "TCollection_AsciiString::IsGreater(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator>(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. operator< and operator> with a C string are the named methods."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsGreater(const std::string_view&) const",
@@ -87275,17 +87275,17 @@
       "upstream_id": "TCollection_AsciiString::IsGreater(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator>(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first. The literal operator is the named method."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::StartsWith(const char* const,int) const",
@@ -87307,9 +87307,9 @@
       "upstream_id": "TCollection_AsciiString::StartsWith(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::starts_with",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::starts_with_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::StartsWith(const std::string_view&) const",
@@ -87323,9 +87323,9 @@
       "upstream_id": "TCollection_AsciiString::StartsWith(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::starts_with",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::starts_with_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::EndsWith(const char* const,int) const",
@@ -87355,9 +87355,9 @@
       "upstream_id": "TCollection_AsciiString::EndsWith(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::ends_with",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::ends_with_literal",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
+      "notes": "C-string and char-array overloads stop at the first NUL; nullable pointer comparison behavior is preserved separately from full byte-span/string-view operations. Native 20-case comparison matrix plus literal/view/suffix regression: ascii-c-string-comparisons.json. Char-array selectors remain subject to compiler crosswalk resolution."
     },
     {
       "upstream_id": "TCollection_AsciiString::IntegerValue() const",

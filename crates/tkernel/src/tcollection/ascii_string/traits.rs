@@ -31,7 +31,7 @@ impl From<f64> for AsciiString {
 }
 impl PartialEq<&str> for AsciiString {
     fn eq(&self, other: &&str) -> bool {
-        self.is_equal(other)
+        self.is_equal_c_string(Some(other.as_bytes()))
     }
 }
 impl PartialOrd for AsciiString {
