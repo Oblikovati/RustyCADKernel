@@ -17,6 +17,19 @@ pub trait MatrixScalar:
 impl MatrixScalar for f32 {}
 impl MatrixScalar for f64 {}
 
+/// Mutates matching entries in native column-major order; e.g. `zip_matrix_elements(&mut left, &right, |a, b| *a += *b)`.
+pub(super) fn zip_matrix_elements<T, const N: usize>(
+    left: &mut [[T; N]; N],
+    right: &[[T; N]; N],
+    mut update: impl FnMut(&mut T, &T),
+) {
+    for (left_column, right_column) in left.iter_mut().zip(right) {
+        for (left_value, right_value) in left_column.iter_mut().zip(right_column) {
+            update(left_value, right_value);
+        }
+    }
+}
+
 /// Access, identity/zero and comparison members.
 macro_rules! square_matrix_access {
     ($matrix:ident, $n:literal, $nn:literal, $vector:ident) => {
@@ -181,33 +194,6 @@ macro_rules! square_matrix_arithmetic {
             pub fn multiplied(&self, other: &Self) -> Self {
                 Self::product(self, other)
             }
-            /// Adds element-wise, as `Add`; `matrix.add(&other)`.
-            pub fn add(&mut self, other: &Self) {
-                self.zip_assign(other, |a, b| a + b);
-            }
-            /// Returns the element-wise sum, as `Added`; `matrix.added(&other)`.
-            pub fn added(&self, other: &Self) -> Self {
-                let mut copy: Self = *self;
-                copy.add(other);
-                copy
-            }
-            /// Subtracts element-wise, as `Subtract`; `matrix.subtract(&other)`.
-            pub fn subtract(&mut self, other: &Self) {
-                self.zip_assign(other, |a, b| a - b);
-            }
-            /// Returns the element-wise difference, as `Subtracted`; `matrix.subtracted(&other)`.
-            pub fn subtracted(&self, other: &Self) -> Self {
-                let mut copy: Self = *self;
-                copy.subtract(other);
-                copy
-            }
-            fn zip_assign(&mut self, other: &Self, combine: fn(T, T) -> T) {
-                for (column, other_column) in self.columns.iter_mut().zip(&other.columns) {
-                    for (value, &other_value) in column.iter_mut().zip(other_column) {
-                        *value = combine(*value, other_value);
-                    }
-                }
-            }
             /// Applies the matrix to a column vector, summing row products left to right.
             fn apply(&self, vector: $vector<T>) -> $vector<T> {
                 let values = vector.data();
@@ -216,6 +202,38 @@ macro_rules! square_matrix_arithmetic {
                         sum + self.columns[k][row] * values[k]
                     })
                 }))
+            }
+        }
+        impl<T: Copy + std::ops::AddAssign> $matrix<T> {
+            /// Adds each stored element with its native assignment operation; `matrix.add(&rhs)`.
+            pub fn add(&mut self, other: &Self) {
+                $crate::ncollection::square_matrix::zip_matrix_elements(
+                    &mut self.columns,
+                    &other.columns,
+                    |value, other| *value += *other,
+                );
+            }
+            /// Copies then applies `Add`, as `Added`; `matrix.added(&rhs)`.
+            pub fn added(&self, other: &Self) -> Self {
+                let mut copy = *self;
+                copy.add(other);
+                copy
+            }
+        }
+        impl<T: Copy + std::ops::SubAssign> $matrix<T> {
+            /// Subtracts each stored element with its native assignment operation; `matrix.subtract(&rhs)`.
+            pub fn subtract(&mut self, other: &Self) {
+                $crate::ncollection::square_matrix::zip_matrix_elements(
+                    &mut self.columns,
+                    &other.columns,
+                    |value, other| *value -= *other,
+                );
+            }
+            /// Copies then applies `Subtract`, as `Subtracted`; `matrix.subtracted(&rhs)`.
+            pub fn subtracted(&self, other: &Self) -> Self {
+                let mut copy = *self;
+                copy.subtract(other);
+                copy
             }
         }
         impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> $matrix<T> {
@@ -251,24 +269,24 @@ macro_rules! square_matrix_arithmetic {
                 self.multiply(&right);
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::Add for $matrix<T> {
+        impl<T: Copy + std::ops::AddAssign> std::ops::Add for $matrix<T> {
             type Output = Self;
             fn add(self, right: Self) -> Self {
                 self.added(&right)
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::AddAssign for $matrix<T> {
+        impl<T: Copy + std::ops::AddAssign> std::ops::AddAssign for $matrix<T> {
             fn add_assign(&mut self, right: Self) {
                 $matrix::add(self, &right);
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::Sub for $matrix<T> {
+        impl<T: Copy + std::ops::SubAssign> std::ops::Sub for $matrix<T> {
             type Output = Self;
             fn sub(self, right: Self) -> Self {
                 self.subtracted(&right)
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::SubAssign for $matrix<T> {
+        impl<T: Copy + std::ops::SubAssign> std::ops::SubAssign for $matrix<T> {
             fn sub_assign(&mut self, right: Self) {
                 self.subtract(&right);
             }

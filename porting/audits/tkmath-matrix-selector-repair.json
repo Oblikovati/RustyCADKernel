@@ -1,0 +1,145 @@
+{
+  "purpose": "Repair selectors for existing Mat3/Mat4 elementwise arithmetic rows; no declaration rows added.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "inputs": {
+    "declaration_inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "parity_before_sha256": "017f6183d3a31cefe59b1d371d2cb93e2bde027adf141dc8edf155a0674eb538",
+    "parity_after_sha256": "ca0a8b3f9093744836e2fadb45e6becab811a627d0b6717231ebaa55ec0f2877"
+  },
+  "verification": {
+    "selector_count": 16,
+    "unique_candidates": 16,
+    "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_tkmath_matrix_selectors"
+  },
+  "declarations": [
+    {
+      "method": "NCollection_Mat3::Add",
+      "old_selector": "NCollection_Mat3::Add(const NCollection_Mat3&)",
+      "new_selector": "NCollection_Mat3::Add(const NCollection_Mat3<Element_t>&)",
+      "compiler_id": "ae7844c8d1988eb2ede85bda79dbed4e54ddfb19d414a7fb0e66336c37d56eaa",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::operator+=",
+      "old_selector": "NCollection_Mat3::operator+=(const NCollection_Mat3&)",
+      "new_selector": "NCollection_Mat3::operator+=(const NCollection_Mat3<Element_t>&)",
+      "compiler_id": "31efdf711633072fb214aa416a3ec49e9ca32e8cc00b63a91cbfb860a0eef499",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::Subtract",
+      "old_selector": "NCollection_Mat3::Subtract(const NCollection_Mat3&)",
+      "new_selector": "NCollection_Mat3::Subtract(const NCollection_Mat3<Element_t>&)",
+      "compiler_id": "8c8fd3187b88f9896578e8b3058d949669f77833d84109fcbd291dc610333bf0",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::operator-=",
+      "old_selector": "NCollection_Mat3::operator-=(const NCollection_Mat3&)",
+      "new_selector": "NCollection_Mat3::operator-=(const NCollection_Mat3<Element_t>&)",
+      "compiler_id": "81c5ebe34d460cba1023299b164631c0f8614ffd42b8aebe302600b5da98dbc9",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::Added",
+      "old_selector": "NCollection_Mat3::Added(const NCollection_Mat3&) const",
+      "new_selector": "NCollection_Mat3::Added(const NCollection_Mat3<Element_t>&) const",
+      "compiler_id": "7937c9575c2a259e3a9cc12861f8974127300140bad708343beb59f832ec4204",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::operator+",
+      "old_selector": "NCollection_Mat3::operator+(const NCollection_Mat3&) const",
+      "new_selector": "NCollection_Mat3::operator+(const NCollection_Mat3<Element_t>&) const",
+      "compiler_id": "e57fc296fdd957a69d739a3fe69cbb8ebd7ad391fc9595375344c741bcf85423",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::Subtracted",
+      "old_selector": "NCollection_Mat3::Subtracted(const NCollection_Mat3&) const",
+      "new_selector": "NCollection_Mat3::Subtracted(const NCollection_Mat3<Element_t>&) const",
+      "compiler_id": "746d16826c5db7d53ca274d7d97cb13d79794eadb90b00a9c2eb02658d2cd11f",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat3::operator-",
+      "old_selector": "NCollection_Mat3::operator-(const NCollection_Mat3&) const",
+      "new_selector": "NCollection_Mat3::operator-(const NCollection_Mat3<Element_t>&) const",
+      "compiler_id": "10e2e596af19504b6abf6ffc4c23931c4a965fac1b664b37c2bdb7dee888d9b0",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "method": "NCollection_Mat4::Add",
+      "old_selector": "NCollection_Mat4::Add(const NCollection_Mat4&)",
+      "new_selector": "NCollection_Mat4::Add(const NCollection_Mat4<Element_t>&)",
+      "compiler_id": "1cfdf792459a42becbc27a478188aff2500a2790c8f12b0289053f557436128c",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::operator+=",
+      "old_selector": "NCollection_Mat4::operator+=(const NCollection_Mat4&)",
+      "new_selector": "NCollection_Mat4::operator+=(const NCollection_Mat4<Element_t>&)",
+      "compiler_id": "43f49b6c346fffcd399641d28acd1d83bafaa24fa71c817e7533086bf03e9e5b",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::Subtract",
+      "old_selector": "NCollection_Mat4::Subtract(const NCollection_Mat4&)",
+      "new_selector": "NCollection_Mat4::Subtract(const NCollection_Mat4<Element_t>&)",
+      "compiler_id": "7d004d9a1beb257002bd5b85198dcab926f72db60f3f3572fcf857e6b974cd4e",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::operator-=",
+      "old_selector": "NCollection_Mat4::operator-=(const NCollection_Mat4&)",
+      "new_selector": "NCollection_Mat4::operator-=(const NCollection_Mat4<Element_t>&)",
+      "compiler_id": "a384cd65fbef8d3b09fee8ef34271749efe5d0d5fdc75e0d5d3e81cc1a626b5b",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::Added",
+      "old_selector": "NCollection_Mat4::Added(const NCollection_Mat4&) const",
+      "new_selector": "NCollection_Mat4::Added(const NCollection_Mat4<Element_t>&) const",
+      "compiler_id": "ea65066a23af417b474b58c57472faad8524978cea1c965f6b64f1503850b297",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::operator+",
+      "old_selector": "NCollection_Mat4::operator+(const NCollection_Mat4&) const",
+      "new_selector": "NCollection_Mat4::operator+(const NCollection_Mat4<Element_t>&) const",
+      "compiler_id": "b7315099d50050e5cb46ba48f4b1727b522505e13287e1f1172a4bac8167a279",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::Subtracted",
+      "old_selector": "NCollection_Mat4::Subtracted(const NCollection_Mat4&) const",
+      "new_selector": "NCollection_Mat4::Subtracted(const NCollection_Mat4<Element_t>&) const",
+      "compiler_id": "0c47f613bc3f82681d3312838c3eaaf04f93ae7ef0459d88f92f31660c87c51b",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "method": "NCollection_Mat4::operator-",
+      "old_selector": "NCollection_Mat4::operator-(const NCollection_Mat4&) const",
+      "new_selector": "NCollection_Mat4::operator-(const NCollection_Mat4<Element_t>&) const",
+      "compiler_id": "08796bbd20ff656ab7aa7e21a239f9f5d1ada9853bae2a8896ac82a8402121b6",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    }
+  ]
+}
