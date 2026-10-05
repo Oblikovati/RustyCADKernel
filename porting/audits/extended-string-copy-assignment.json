@@ -1,0 +1,110 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "TCollection_ExtendedString copy assignment return identity, chaining, and self assignment",
+  "base_commit": "f8413c7f38359e99895b6c4a7e8c7f6ef3669ba8",
+  "occt": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "header": {
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+      "lines": "384-400"
+    },
+    "implementation": {
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+      "sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c",
+      "lines": "515-533"
+    },
+    "declaration_inventory": {
+      "path": "porting/api-inventory/occt-declarations.jsonl.gz",
+      "sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+      "candidate": {
+        "id": "76da98156fadd2fd9fec1fbe852232f70f3aa5293893b60945c516b03f9387e6",
+        "qualified_name": "TCollection_ExtendedString::operator=",
+        "signature": "class TCollection_ExtendedString &(const class TCollection_ExtendedString &)",
+        "source_line": 397,
+        "api_visible": true
+      }
+    },
+    "build_flags": {
+      "path": "target/occt-modeling-full/src/FoundationClasses/TKernel/CMakeFiles/TKernel.dir/flags.make",
+      "sha256": "856b97d4694fe98933433da341e1742abefce30e09ca4d65ebff19dc4bc2abcd"
+    },
+    "library": {
+      "path": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+      "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    },
+    "behavior": "operator=(const TCollection_ExtendedString&) delegates to Copy and returns *this. Copy is a no-op for the same object; otherwise it empties on empty source or reallocates to source length and copies all UTF-16 units."
+  },
+  "rust": {
+    "implementation": "crates/tkernel/src/tcollection/extended_string/editing.rs",
+    "implementation_sha256": "9fdcc7c911325c245840d60cc2231f64a7989becf5cadb241e6d74bb7ecd8c8f",
+    "items": [
+      {
+        "path": "rustycad_tkernel::tcollection::ExtendedString::copy_assign",
+        "raw_rustdoc_item_id": "19500",
+        "status": "public"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::ExtendedString::copy_assign_self",
+        "raw_rustdoc_item_id": "19501",
+        "status": "public"
+      }
+    ],
+    "rustdoc": {
+      "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+      "format_version": 61,
+      "capture": "/tmp/rustycad-extended-string-copy-assignment-target/doc/rustycad_tkernel.json",
+      "capture_sha256": "aa75564a61d31ebc5500bb0bee9c8746206edac79d97a0c77f2a54fed33458cf"
+    },
+    "supplemental_tests": {
+      "path": "crates/tkernel/tests/extended_string_copy_assignment.rs",
+      "sha256": "974d62aee918ebe75e37014e8f38f63102421ea885bd48ea81a0f88f71525ead",
+      "cases": 4
+    }
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_extended_string_copy_assignment.cxx",
+    "source_sha256": "4497e7a51325375d52e0df76b6677892d3dcbca3bb812aeb694a493718b8f528",
+    "expected": "tools/oracle/tkernel_extended_string_copy_assignment.expected",
+    "expected_sha256": "f3431d3980f7d82353ec200ef2597cd46c8e1751388f64830aea8465668b5235",
+    "executable_sha256": "108611d54bdad2493804b56eacc0be932f5678f8d70024d1c72a0f6924b1bf22",
+    "log": "porting/runtime-evidence/extended-string-copy-assignment-native-probe.log.gz",
+    "log_sha256": "de7caec8ae0f67191b0c6be26d854e14d7c30c0ce0387e7ead288ea822a1d338",
+    "matches_expected": true,
+    "native_gtest": {
+      "filter": "TCollection_ExtendedStringTest.*",
+      "executable_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+      "log": "porting/runtime-evidence/extended-string-copy-assignment-native-gtest.log.gz",
+      "log_sha256": "1ad9c279e418ccb3a99af5c8a20136cd9ec65d0d72a0f2a52c0f8aa2d36b01e3",
+      "result": "105 passed, 0 failed"
+    }
+  },
+  "rust_validation": {
+    "focused_command": "cargo test -p rustycad-tkernel --test tcollection_extended_string --test extended_string_copy_assignment",
+    "focused_log": "porting/runtime-evidence/extended-string-copy-assignment-focused.log.gz",
+    "focused_log_sha256": "8196323f211ec7b333c939e41f2576f78c627bc2ff5f62591bf30d778ecbefd2",
+    "focused_result": "109 passed, 0 failed across 2 result groups",
+    "full_command": "cargo test -p rustycad-tkernel",
+    "full_log": "porting/runtime-evidence/extended-string-copy-assignment-tkernel.log.gz",
+    "full_log_sha256": "b106d158c80d7942243efd134816c5ee7a1b9c7ccdd8ca3805c5f43bb1d1bb78",
+    "full_result": {
+      "passed": 2986,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 202,
+      "command_exit_code": 0
+    },
+    "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-copy-assignment-clippy.log.gz",
+    "clippy_log_sha256": "0998b7b63548d5e74f00d823349563142bd674001e642150cdb32c2f75415cdf",
+    "clippy_exit_code": 0,
+    "fmt_command": "cargo fmt --all -- --check",
+    "fmt_exit_code": 0
+  },
+  "parity": {
+    "path": "porting/parity.json",
+    "sha256": "2a7277b941474b5d2944fc81e936fba255c018bb190074ae93658d47d2f6e06f",
+    "status": "partial",
+    "reason": "Caller-visible copy value, returned receiver, chaining, empty source, and self-assignment behavior are represented. OCCT allocator and internal buffer identity behavior are not reproduced."
+  }
+}
