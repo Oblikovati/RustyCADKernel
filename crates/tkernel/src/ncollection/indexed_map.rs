@@ -152,9 +152,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         Ok(())
     }
     fn place(&mut self, key: K, replace: bool) -> usize {
-        if self.is_empty() || self.len() > self.bucket_count {
-            self.resize(self.len());
-        }
+        self.prepare_add();
         let index = self.find_index(&key);
         if index != 0 {
             if replace {
@@ -163,6 +161,11 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
             return index;
         }
         self.append_new(key)
+    }
+    fn prepare_add(&mut self) {
+        if self.is_empty() || self.len() > self.bucket_count {
+            self.resize(self.len());
+        }
     }
     fn append_new(&mut self, key: K) -> usize {
         let bucket = self.hash_bucket(&key);
@@ -176,6 +179,28 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         );
         self.buckets[bucket].insert(0, index);
         index + 1
+    }
+}
+impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
+    /// Adds a borrowed key without cloning when an equivalent key is already present.
+    ///
+    /// Native `Add(const Key&)` hashes and searches the borrowed key before copying it on a
+    /// miss. Rust follows that behavior for value-semantic keys; allocator-failure effects differ.
+    ///
+    /// # Example
+    /// ```
+    /// use rustycad_tkernel::ncollection::IndexedMap;
+    /// let mut map = IndexedMap::<i32>::default();
+    /// assert_eq!(map.add_ref(&42), 1);
+    /// assert_eq!(map.add_ref(&42), 1);
+    /// ```
+    pub fn add_ref(&mut self, key: &K) -> usize {
+        self.prepare_add();
+        let (index, bucket) = self.lookup_with_bucket(key);
+        if index != 0 {
+            return index;
+        }
+        self.append_new_at_bucket(key.clone(), bucket)
     }
 }
 impl<K: Debug, H: HashPolicy<K> + Default> IndexedMap<K, H> {
