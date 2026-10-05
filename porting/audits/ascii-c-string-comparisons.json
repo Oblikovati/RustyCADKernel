@@ -1,0 +1,156 @@
+{
+  "base_revision": "8c7380a39af76a36917a33cd7f34c7baf451f131",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Distinct C-string and full-span comparison overloads",
+  "source_hashes": {
+    "crates/tkernel/src/tcollection/ascii_string.rs": "f0e4ce8c9ae1dd742e5b4ef33ff652debb5c9a10712c5ae4c7988046d9c1d99b",
+    "crates/tkernel/src/tcollection/ascii_string/c_string_comparison.rs": "2669f740b9ac2d51a07d457a08a0d229ba1e43d8dad768dfbb6c8635563a9496",
+    "crates/tkernel/src/tcollection/ascii_string/traits.rs": "b360ceef155d8c9218c13c89449e085992a42097c97da96b9705566e2e700e40",
+    "crates/tkernel/tests/ascii_c_string_comparisons.rs": "3571808d0c456fe0daa7817166448e2e19b03c39b79b90973a487b37c3b90a12",
+    "tools/oracle/tkernel_ascii_cstring_comparisons.cxx": "ae4a2a20e261c331c8a6718d9c4fe28c97459564917aba7178b268adb9f3714e",
+    "tools/oracle/tkernel_ascii_cstring_comparisons.expected": "6e11c13b8688a96aeea1bdeecc10a4f99fd7074aaa912c905482857a8cf8acb4",
+    "tools/oracle/tkernel_ascii_cstring_comparisons.md": "af20688bce148133f323a1891451e0ff2f536b014e8e5dce37dfd0ffd10e92c6"
+  },
+  "native_source_hashes": {
+    "TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a"
+  },
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_executable_sha256": "80eaf36f718e8771b7ef3353625a11d9496a394b318561a1c39933eb10685a8c",
+  "native_actual_sha256": "6e11c13b8688a96aeea1bdeecc10a4f99fd7074aaa912c905482857a8cf8acb4",
+  "native_matches_expected": true,
+  "native_matrix_cases": 20,
+  "native_comparisons_per_case": 5,
+  "validation": {
+    "initial_rust_exit_code": 101,
+    "focused_rust_exit_code": 0,
+    "focused_passed": 3,
+    "full_package_exit_code": 0,
+    "full_package_passed": 2769,
+    "full_package_result_groups": 167,
+    "strict_clippy_exit_code": 0
+  },
+  "logs": {
+    "red": {
+      "path": "porting/runtime-evidence/ascii-cstring-red.log.gz",
+      "sha256": "9eacfd203fd190fcb619df77910f75f14217e87647bcbfe0d9b822ff96cf8e46"
+    },
+    "focused": {
+      "path": "porting/runtime-evidence/ascii-cstring-focused.log.gz",
+      "sha256": "8dabc25edba74b9e53b300391aad058dc66712b1c65de54fb23331bed0ff40a4"
+    },
+    "full": {
+      "path": "porting/runtime-evidence/ascii-cstring-full.log.gz",
+      "sha256": "699e4787f50aceb609cdbe2a9ee009dc3474948911cd94bceb17cec02427d30e"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/ascii-cstring-clippy.log.gz",
+      "sha256": "b3157d864cecfdb9f538beb9eabe5462d38e4dd29eeb4c43e55321983f302e38"
+    }
+  },
+  "mapping_updates": [
+    {
+      "upstream_id": "TCollection_AsciiString::IsEqual(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator==(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::<core::cmp::PartialEq<&str>>::eq",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsEqual(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator==(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsDifferent(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator!=(const char* const) const",
+      "before": "<rustycad_tkernel::tcollection::AsciiString as PartialEq<&str>>::ne",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsDifferent(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator!=(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_different",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsLess(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator<(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsLess(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator<(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsGreater(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator>(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::IsGreater(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::operator>(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "after": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::StartsWith(const char* const) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::starts_with",
+      "after": "rustycad_tkernel::tcollection::AsciiString::starts_with_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::StartsWith(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::starts_with",
+      "after": "rustycad_tkernel::tcollection::AsciiString::starts_with_c_string"
+    },
+    {
+      "upstream_id": "TCollection_AsciiString::EndsWith(const char(&)[N]) const",
+      "before": "rustycad_tkernel::tcollection::AsciiString::ends_with",
+      "after": "rustycad_tkernel::tcollection::AsciiString::ends_with_literal"
+    }
+  ],
+  "legacy_declaration_count_change": 0,
+  "limitations": [
+    "Nineteen existing ledger rows are redirected; fresh compiler crosswalk publication remains pending.",
+    "Char-array C++ selector resolution is an independent inventory obligation, not established by the runtime probe.",
+    "Unterminated native char arrays are outside strlen-defined input; safe Rust reads are bounded by the byte span.",
+    "No complete AsciiString or toolkit behavior claim."
+  ]
+}
