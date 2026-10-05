@@ -1,8 +1,5 @@
 //! The `OSD` class: package statics on the native hosts and the global signal state.
-use super::{
-    NativeSignalHost, NativeSleeper, SignalState, Sleeper, real_text, sec_sleep_duration,
-    sleep_milliseconds_with_platform,
-};
+use super::{NativeSignalHost, NativeSleeper, SignalState, Sleeper, real_text};
 use crate::{osd::SignalMode, standard::Failure};
 
 /// `OSD`: operating-system dependent statics; `Osd::real_to_c_string(1.5) == "1.5"`.
@@ -37,21 +34,22 @@ impl Osd {
         use super::SignalHost;
         NativeSignalHost.to_catch_floating_signals()
     }
-    /// `SecSleep(int)` (see [`sec_sleep_duration`]); `Osd::sec_sleep(1)`.
+    /// Native `usleep`/`Sleep` preserves interruption; injected sleepers record
+    /// [`super::sleep::sec_sleep_duration`]; `Osd::sec_sleep(1)`.
     pub fn sec_sleep(seconds: i32) {
         Self::sec_sleep_with(&NativeSleeper, seconds);
     }
     /// `SecSleep` on an injected sleeper; `Osd::sec_sleep_with(&sleeper, 1)`.
     pub fn sec_sleep_with(sleeper: &dyn Sleeper, seconds: i32) {
-        sleeper.sleep(sec_sleep_duration(seconds));
+        sleeper.sleep_seconds(seconds);
     }
-    /// `MilliSecSleep(int)` (see [`milli_sec_sleep_duration`]); `Osd::milli_sec_sleep(5)`.
+    /// `MilliSecSleep(int)` (see [`super::sleep::milli_sec_sleep_duration`]); `Osd::milli_sec_sleep(5)`.
     pub fn milli_sec_sleep(milliseconds: i32) {
         Self::milli_sec_sleep_with(&NativeSleeper, milliseconds);
     }
     /// `MilliSecSleep` on an injected sleeper; `Osd::milli_sec_sleep_with(&sleeper, 5)`.
     pub fn milli_sec_sleep_with(sleeper: &dyn Sleeper, milliseconds: i32) {
-        sleep_milliseconds_with_platform(sleeper, milliseconds, cfg!(windows));
+        sleeper.sleep_milliseconds(milliseconds);
     }
     /// `RealToCString(double, Standard_PCharacter&)`: the text written into the caller's
     /// buffer (the native `true` result is implied); `Osd::real_to_c_string(1e5) == "1e+05"`.

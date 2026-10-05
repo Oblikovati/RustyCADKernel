@@ -1,4 +1,6 @@
 //! `OSD::SecSleep` and `OSD::MilliSecSleep`, with the native integer arithmetic.
+mod native;
+
 use std::time::Duration;
 
 /// A finite request or the native Windows `INFINITE` sentinel; `SleepRequest::Infinite`.
@@ -15,6 +17,16 @@ pub trait Sleeper {
     /// Sleeps for `duration`; `sleeper.sleep(Duration::from_millis(5))`.
     fn sleep(&self, duration: Duration);
 
+    /// Preserves native seconds for specialized sleepers; `sleeper.sleep_seconds(2)`.
+    fn sleep_seconds(&self, seconds: i32) {
+        self.sleep(sec_sleep_duration(seconds));
+    }
+
+    /// Preserves native milliseconds for finite-only sleepers; `sleeper.sleep_milliseconds(5)`.
+    fn sleep_milliseconds(&self, milliseconds: i32) {
+        sleep_milliseconds_with_platform(self, milliseconds, cfg!(windows));
+    }
+
     /// Accepts the native sentinel while retaining existing finite-only implementations;
     /// `sleeper.sleep_request(SleepRequest::Finite(Duration::from_millis(5)))`.
     fn sleep_request(&self, request: SleepRequest) {
@@ -27,7 +39,8 @@ pub trait Sleeper {
     }
 }
 
-/// Finite delays use `std::thread::sleep`; `Infinite` parks and re-parks, `NativeSleeper`.
+/// Generic duration requests use `std::thread::sleep`; OSD seconds requests call the host API.
+/// `Infinite` parks and re-parks, `NativeSleeper`.
 #[derive(Clone, Copy, Debug, Default)]
 pub struct NativeSleeper;
 impl Sleeper for NativeSleeper {
@@ -41,6 +54,12 @@ impl Sleeper for NativeSleeper {
             SleepRequest::Infinite => sleep_forever(),
         }
     }
+    fn sleep_seconds(&self, seconds: i32) {
+        native::sec_sleep(seconds);
+    }
+    fn sleep_milliseconds(&self, milliseconds: i32) {
+        native::milli_sec_sleep(milliseconds);
+    }
 }
 
 fn sleep_forever() {
@@ -49,13 +68,11 @@ fn sleep_forever() {
     }
 }
 
-/// The duration `OSD::SecSleep(seconds)` requests from the host;
-/// `sec_sleep_duration(2) == Duration::from_secs(2)`.
+/// Converts seconds for an injected finite-only sleeper; `sec_sleep_duration(2) == Duration::from_secs(2)`.
 ///
-/// Unix computes `seconds * 1000 * 1000` in `int` (wrapping past 2147 s, the
-/// two's-complement result of the undefined overflow) and passes it to `usleep` as an
-/// unsigned `useconds_t`, so negative values sleep ~71 minutes. Windows computes
-/// `seconds * 1000` milliseconds as a `DWORD`.
+/// Injected sleepers receive the native integer conversion. The default `Osd::sec_sleep`
+/// calls `usleep`/`Sleep` directly so native EINTR and invalid-delay behavior is retained;
+/// `Osd::sec_sleep_with(&fake, 2)` records this duration without blocking.
 pub fn sec_sleep_duration(seconds: i32) -> Duration {
     if cfg!(windows) {
         return milli_sec_sleep_duration(seconds.wrapping_mul(1000));
@@ -86,7 +103,7 @@ pub(crate) fn milli_sec_sleep_request(milliseconds: i32, is_windows: bool) -> Sl
 
 /// Routes milliseconds through an explicit platform policy so sentinel handling is testable.
 pub(crate) fn sleep_milliseconds_with_platform(
-    sleeper: &dyn Sleeper,
+    sleeper: &(impl Sleeper + ?Sized),
     milliseconds: i32,
     is_windows: bool,
 ) {
