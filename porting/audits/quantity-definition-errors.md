@@ -68,19 +68,26 @@ diff -u tools/oracle/quantity_definition_errors.expected /tmp/quantity_definitio
 Pinned Rust `1.98.1`, with incremental compilation and debug symbols disabled:
 
 ```sh
-cargo test --locked -p rustycad-tkernel --test quantity_definition_errors \
+$HOME/.cargo/bin/cargo test --locked -p rustycad-tkernel --lib \
+  --test quantity_definition_errors \
   --test standard_exceptions_behavior --test boundaries \
   --test quantity_api_behavior --test osd_process_api_behavior
-cargo clippy --locked -p rustycad-tkernel --test quantity_definition_errors \
+$HOME/.cargo/bin/cargo clippy --locked -p rustycad-tkernel --lib \
+  --test quantity_definition_errors \
   --test standard_exceptions_behavior --test boundaries \
   --test quantity_api_behavior --test osd_process_api_behavior -- -D warnings
+$HOME/.cargo/bin/cargo test --locked --doc -p rustycad-tkernel
+PYTHONPATH=tools python3 -m unittest tools.tests.test_quantity_definition_error_bindings
 ```
 
-The test command passed 44 tests across the five targets. The separate new test
-target covers string, default, byte, explicit-stack, and existing Date/Period
-`Error` conversion behavior; original test targets and names are unchanged. Clippy with
-warnings denied passes, and `cargo test --locked --doc -p rustycad-tkernel`
-passes all 249 doc tests. The new exception module source has SHA256
+The Rust test command passed 106 library tests and 44 tests across the five
+integration targets. The new test target covers string, default, byte,
+explicit-stack, and existing Date/Period `Error` conversion behavior; original
+test targets and names are unchanged. Strict Clippy passed, the doc-test command
+passed 250 tests, and the compiler-binding regression passed. The new exception
+module source has SHA256
 `8f7fc4bf69d4805287705421388a396770b998a73585faf16955ce6ec68167ac` and its
 supplemental test source has SHA256
-`42ad2abc8e8f87ba55f790c05d82b87081f0c6ec8e3c42a584978ad74dd7f563`.
+`2042be20c5e7c32ae7cb18d560d56e38fddf3dac1f88c4b722aab3b744a67d60`;
+the selector regression source has SHA256
+`81ff9496f66801496a9463333f5fcffb3aa917b1c7d4e6aae4799541f809310d`.
