@@ -94379,25 +94379,25 @@
       "upstream_id": "OSD_SharedLibrary(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
-      "rust_item": "rustycad_tkernel::osd::SharedLibrary::named",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::named_bytes",
       "status": "partial",
-      "notes": "A null name is Option::None and leaves the object like the default constructor (native leaves the name uninitialized); non-null valid UTF-8 names store the prefix before the first NUL, checked by the pinned Linux probe. Arbitrary non-UTF-8 char* bytes remain unrepresented. Unix stores the name only; Windows additionally probes GetModuleHandleW, and loader support remains pending."
+      "notes": "The byte constructor preserves arbitrary non-NUL bytes and truncates at the first NUL like native strlen; valid UTF-8 callers retain the named convenience method. A null name is Option::None (native leaves the name uninitialized). Unix behavior is covered by tkernel_osd_shlib_bytes; Windows additionally probes GetModuleHandleW and loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::SetName(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
-      "rust_item": "rustycad_tkernel::osd::SharedLibrary::set_name",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::set_name_bytes",
       "status": "partial",
-      "notes": "A null name keeps the current one; valid UTF-8 names truncate at the first NUL as native strlen/strcpy do (pinned Linux probe). Arbitrary non-UTF-8 char* bytes remain unrepresented. Replacing an old native name leaks that allocation; Rust replaces it safely. Windows loader support remains pending."
+      "notes": "The byte setter preserves arbitrary non-NUL bytes, truncates at the first NUL, and treats null as no-op; the string setter remains a UTF-8 convenience. Replacing an old native name leaks that allocation; Rust replaces it safely. Unix byte behavior is covered by tkernel_osd_shlib_bytes; Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Name() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
-      "rust_item": "rustycad_tkernel::osd::SharedLibrary::name",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::name_bytes",
       "status": "implemented",
-      "notes": "The stored name, None for a null name. Every host."
+      "notes": "Returns the stored native bytes, including non-UTF-8 names; None for a null name. The string convenience name() returns None for invalid UTF-8."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlOpen(OSD_LoadMode)",
@@ -94405,15 +94405,15 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_open",
       "status": "partial",
-      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW; stored names have native C-string prefix semantics including the empty prefix, checked by tkernel_osd_shlib_nul. Arbitrary non-UTF-8 path bytes remain unrepresented. Existing osd_shlib probe covers system libraries, the main program and missing files. Windows loader support remains pending."
+      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW; stored byte names preserve arbitrary non-NUL bytes and native first-NUL semantics. Probes cover C-string prefixes and a non-UTF-8 path. Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlSymb(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
-      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_symb",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_symb_bytes",
       "status": "partial",
-      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Valid UTF-8 symbol names use native prefix-before-NUL semantics, including a leading-NUL lookup, checked by tkernel_osd_shlib_nul; arbitrary non-UTF-8 symbol bytes remain unrepresented. Before DlOpen a null handle is RTLD_DEFAULT on glibc. After DlClose native retains a dangling handle (subsequent lookup is undefined); Rust answers None. Windows loader support remains pending."
+      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Byte symbol names preserve arbitrary non-NUL bytes and truncate at NUL. Before DlOpen a null handle is RTLD_DEFAULT on glibc. After DlClose native retains a dangling handle (subsequent lookup is undefined); Rust answers None. Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlClose() const",
@@ -94427,9 +94427,9 @@
       "upstream_id": "OSD_SharedLibrary::DlError() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
-      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error_bytes",
       "status": "partial",
-      "notes": "Unix dlerror text (consumed by the read), None when there is none. Probe osd_shlib compares the loader messages. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "Unix dlerror bytes are copied before the next loader call and consumed by the read; None when there is no error. dl_error() remains a lossy UTF-8 convenience. Byte diagnostics are checked against a non-UTF-8 dlsym failure. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Destroy()",

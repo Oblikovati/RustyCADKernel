@@ -7,10 +7,11 @@ NUL. On the pinned Linux build, the probe checks a `libm.so.6\0ignored` path, a
 the main program on this glibc build. The ordinary `libm.so.6`/`cos` case is the no-NUL
 control.
 
-Rust exposes UTF-8 `&str` inputs, so the change preserves prefix behavior for valid UTF-8
-names; arbitrary non-UTF-8 C strings remain outside the adapter's representable input.
-Windows loader behavior remains unimplemented. The separate `DlSymb`-after-`DlClose` state
-is undefined in native code and remains a safe Rust `None` result.
+This probe covers valid UTF-8 inputs and embedded-NUL prefix behavior. Arbitrary non-UTF-8
+names, symbols, and loader diagnostics are covered separately by
+[`tkernel_osd_shlib_bytes.md`](tkernel_osd_shlib_bytes.md). Windows loader behavior remains
+unimplemented. The separate `DlSymb`-after-`DlClose` state is undefined in native code and
+remains a safe Rust `None` result.
 
 Pinned OCCT revision: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 Source: `FoundationClasses/TKernel/OSD/OSD_SharedLibrary.cxx`.

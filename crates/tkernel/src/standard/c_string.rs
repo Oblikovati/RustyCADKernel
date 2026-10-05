@@ -18,7 +18,7 @@ use crate::ncollection::HashPolicy;
 use std::io::{self, Write};
 
 /// The bytes `strlen` would count: everything before the first NUL.
-fn c_str_prefix(text: &[u8]) -> &[u8] {
+pub(crate) fn c_str_prefix(text: &[u8]) -> &[u8] {
     let length: usize = text
         .iter()
         .position(|&byte| byte == 0)
