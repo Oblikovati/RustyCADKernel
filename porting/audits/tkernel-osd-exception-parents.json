@@ -1,0 +1,223 @@
+{
+  "changed_source_sha256": {
+    "crates/tkernel/src/osd/exceptions.rs": "9b87f42dceb39e6057bed4dc990d7fe5b558f40d784cf95bab0e11580ac2b00f",
+    "crates/tkernel/src/osd/mod.rs": "cf5c05b3a62fd4982750b13b4090b38cfb2a029fdd56f66cca604740f611b6a3",
+    "crates/tkernel/src/standard/exceptions.rs": "6f800cdfeb51194279bbb959482fabaa49e38e9a87444e62c0a4703ace2f87eb",
+    "crates/tkernel/tests/standard_exceptions_behavior.rs": "70c3f4f8b2eb2e2369e8f4d2e0a7fbd40897210d1f5b0c9e3cea7945bb6280aa",
+    "tools/oracle/tkernel_osd_exception_parent.expected": "a05406f545694bd39d4496a537f815ab3f7ec8c8d542d57a9a55b4d76568d15e",
+    "tools/oracle/tkernel_osd_exception_parent.md": "f3f57101fc57e3748f4bf83a61a7ec4f7cbb5c386e23d8f096221f2fa1b8edb0",
+    "tools/oracle/tkernel_osd_exception_parent_probe.cxx": "4e627e03d04afc98a62c725935cc405189daad6574d0cbcc7bffc3d2bddae006"
+  },
+  "descriptor_owner_audit": {
+    "evidence": "Standard_Failure and OSD exception roots are std::exception classes, not Standard_Transient descendants; OSD_EXCEPTION* and OSD_SIG* are declared with DEFINE_STANDARD_EXCEPTION and no DEFINE_STANDARD_RTTI* accessor.",
+    "native_probe_static_asserts": "Standard_Failure, OSD_Exception, OSD_Signal, and OSD_OSDError are not Standard_Transient base classes.",
+    "result": "not_applicable"
+  },
+  "exception_class_count": 22,
+  "exception_classes": [
+    {
+      "name": "OSD_Exception",
+      "native_direct_parent": "Standard_Failure",
+      "native_header": "OSD/OSD_Exception.hxx",
+      "native_header_sha256": "783b603c27a8d76ee8dafa3e8d77abc6ee6aa207e0637850c6395bb7210b502d",
+      "parent_match": true,
+      "rust_direct_parent": "Standard_Failure"
+    },
+    {
+      "name": "OSD_Exception_ACCESS_VIOLATION",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_ACCESS_VIOLATION.hxx",
+      "native_header_sha256": "ebb4460d2be0a0f3a3882c5f77c61110b6a0470292f635c2af7f4b5925a425dc",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_ARRAY_BOUNDS_EXCEEDED",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_ARRAY_BOUNDS_EXCEEDED.hxx",
+      "native_header_sha256": "215b6f14af4c2541a3929362033213eee9527f48a7942b4b2e3e92b1f3cd3015",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_CTRL_BREAK",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_CTRL_BREAK.hxx",
+      "native_header_sha256": "d2e7d006fd1c49af3236c7ef08e91f291daf84936e5cc3fd0382dbfff66f135d",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_ILLEGAL_INSTRUCTION",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_ILLEGAL_INSTRUCTION.hxx",
+      "native_header_sha256": "a2714bf7ebedd32630b83b1d638aa54f1c498df699d9e1797ae06d5c00ff0773",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_INT_OVERFLOW",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_INT_OVERFLOW.hxx",
+      "native_header_sha256": "8871ccc1f65e3a0f1132ceb54f2179e85b029822ff7a97e9efc169a2794d8a72",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_INVALID_DISPOSITION",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_INVALID_DISPOSITION.hxx",
+      "native_header_sha256": "ab6681653576b0b6cb40ad7606921953107068c6b2656ee74a38b7160e96f659",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_IN_PAGE_ERROR",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_IN_PAGE_ERROR.hxx",
+      "native_header_sha256": "5409c243bc8d32119d553b6e85c035dccc187391953fc4bd9c9bf3ed1eb4a90b",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_NONCONTINUABLE_EXCEPTION",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_NONCONTINUABLE_EXCEPTION.hxx",
+      "native_header_sha256": "76af376f27f265f0ef5b8a0060bde2cb3017e89014b52999ad31835cdab2f4a5",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_PRIV_INSTRUCTION",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_PRIV_INSTRUCTION.hxx",
+      "native_header_sha256": "fd5f1dfeae063bf74fc957c37d5c8eb4e655b880b4684443037dbfd08260cf93",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_STACK_OVERFLOW",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_STACK_OVERFLOW.hxx",
+      "native_header_sha256": "d24d11fdc054083ec76ffc687d9da6e074703cdc4fb0da06d3f549656640c9fc",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_Exception_STATUS_NO_MEMORY",
+      "native_direct_parent": "OSD_Exception",
+      "native_header": "OSD/OSD_Exception_STATUS_NO_MEMORY.hxx",
+      "native_header_sha256": "7111e01343c92e7b5e8a69e623e0c7fc95be5d760c7853e63bf5673a2da1f4d0",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Exception"
+    },
+    {
+      "name": "OSD_OSDError",
+      "native_direct_parent": "Standard_Failure",
+      "native_header": "OSD/OSD_OSDError.hxx",
+      "native_header_sha256": "408179c1ff2496b62d58ad411b11bebad84b55b6c8578e91bda9a2824e6f9c45",
+      "parent_match": true,
+      "rust_direct_parent": "Standard_Failure"
+    },
+    {
+      "name": "OSD_SIGBUS",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGBUS.hxx",
+      "native_header_sha256": "992d957bddc957e9b88e8881dc5268de6fd986921fb8721ef7e82a277afda89a",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGHUP",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGHUP.hxx",
+      "native_header_sha256": "3279e373a260bbf31b28615c355079c92402e6ab875f0edfb65838d62031457e",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGILL",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGILL.hxx",
+      "native_header_sha256": "3a3623c184d8a3f2a49f234370d3b882410f40f9d033a95dd9af027f269cacf1",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGINT",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGINT.hxx",
+      "native_header_sha256": "c770a1b69fb6570c49e5ab11d52ec83f7979a6a7550c7db8355494fba3261eda",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGKILL",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGKILL.hxx",
+      "native_header_sha256": "5af6c5aef647385df86f85c459d71bc0d70d8361f4c82ebbf9e6246ea4d5d690",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGQUIT",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGQUIT.hxx",
+      "native_header_sha256": "8f35c182df1930da122e7d7032aad78d01409812672f37c90366f827e8916f20",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGSEGV",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGSEGV.hxx",
+      "native_header_sha256": "d8bbe36fdff44fab021806f8a0ef303de3ce82b3d11ba47d09e0203e39f8450c",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_SIGSYS",
+      "native_direct_parent": "OSD_Signal",
+      "native_header": "OSD/OSD_SIGSYS.hxx",
+      "native_header_sha256": "edea2ee01248a147bf82dab100e04749e44de35670ad5e5e421b50847dc80b2d",
+      "parent_match": true,
+      "rust_direct_parent": "OSD_Signal"
+    },
+    {
+      "name": "OSD_Signal",
+      "native_direct_parent": "Standard_Failure",
+      "native_header": "OSD/OSD_Signal.hxx",
+      "native_header_sha256": "45c91da283ea81f64dc444821139bd7f29d7fe6fc1d21dbb3c42c49dd58c31f2",
+      "parent_match": true,
+      "rust_direct_parent": "Standard_Failure"
+    }
+  ],
+  "native_libTKernel_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_probe": {
+    "binary_sha256": "80e91db99bddecd7df03a3cdb22d10d24fd213788fb70631617f8d8cf44b039a",
+    "compile_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_osd_exception_parent_probe.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,$PWD/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_osd_exception_parent_probe",
+    "expected": "tools/oracle/tkernel_osd_exception_parent.expected",
+    "expected_sha256": "a05406f545694bd39d4496a537f815ab3f7ec8c8d542d57a9a55b4d76568d15e",
+    "output": "seh OSD_Exception_ACCESS_VIOLATION OSD_Exception\nsignal OSD_SIGSEGV OSD_Signal\nosd_error OSD_OSDError Standard_Failure\nstandard_transient_base 0\n",
+    "result": "exact expected-output match",
+    "source": "tools/oracle/tkernel_osd_exception_parent_probe.cxx",
+    "source_sha256": "4e627e03d04afc98a62c725935cc405189daad6574d0cbcc7bffc3d2bddae006"
+  },
+  "native_support_source_sha256": {
+    "src/FoundationClasses/TKernel/Standard/Standard_DefineException.hxx": "718d83d7d37b327bf991526be73f0cf41ba6b745cbfbd0ed7398d114c5cf1d8a",
+    "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx": "4ecf579b7f80cfc908c41c84f1862d4361b7ab01f74cd858689d319eb7b639d5",
+    "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7"
+  },
+  "objective": "Restore source-defined OSD exception catch-by-base behavior and audit whether OSD failure types participate in Standard_Type ownership.",
+  "parent_table_comparison": "All 22 native OSD exception declarations have one Rust direct-parent row with an identical parent; includes 21 macro constructors and OSD_OSDError.",
+  "rust_validation": {
+    "clippy_command": "cargo +1.98.1 clippy -p rustycad-tkernel --test standard_exceptions_behavior -- -D warnings",
+    "clippy_result": "passed",
+    "command": "cargo +1.98.1 test -p rustycad-tkernel --test standard_exceptions_behavior",
+    "fmt_command": "cargo +1.98.1 fmt --all --check",
+    "fmt_result": "passed",
+    "result": "6 passed, 0 failed"
+  },
+  "scope_limit": "No parity row is added: this correction restores catch hierarchy for existing exception classes rather than adding RTTI callables. Descriptor registration and ownership are not native behaviors for these non-transient exception classes."
+}

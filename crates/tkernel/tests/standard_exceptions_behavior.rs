@@ -2,7 +2,7 @@
 //! and the catch-by-base question that C++ answers with `catch (Base&)`.
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::exceptions::{self, exception_parent};
-use rustycad_tkernel::{plugin, std_fail};
+use rustycad_tkernel::{osd, plugin, std_fail};
 
 #[test]
 fn constructors_carry_the_class_name_and_message() {
@@ -59,4 +59,35 @@ fn classes_of_other_toolkits_are_still_failures() {
     assert!(failure.is_kind("math_NotSquare"));
     assert!(failure.is_kind("Standard_Failure"));
     assert!(!failure.is_kind("Standard_DomainError"));
+}
+
+#[test]
+fn osd_macro_exception_chains_follow_native_bases() {
+    for name in osd::OSD_EXCEPTION_TYPES {
+        let parent =
+            exception_parent(name).unwrap_or_else(|| panic!("missing OSD parent for {name}"));
+        let failure = Failure::with_type(name, "probe", "");
+        assert!(
+            failure.is_kind(parent),
+            "{name} should be caught as {parent}"
+        );
+        assert!(
+            failure.is_kind("Standard_Failure"),
+            "{name} must derive from Standard_Failure"
+        );
+    }
+    assert_eq!(
+        Some("OSD_Exception"),
+        exception_parent("OSD_Exception_ACCESS_VIOLATION")
+    );
+    assert_eq!(Some("OSD_Signal"), exception_parent("OSD_SIGSEGV"));
+}
+
+#[test]
+fn osd_error_is_a_standard_failure_without_an_intermediate_osd_base() {
+    let failure = osd::osd_osd_error("native system error");
+    assert_eq!(Some("Standard_Failure"), exception_parent("OSD_OSDError"));
+    assert!(failure.is_kind("Standard_Failure"));
+    assert!(!failure.is_kind("OSD_Exception"));
+    assert!(!failure.is_kind("OSD_Signal"));
 }

@@ -13,6 +13,7 @@ mod error;
 pub use error::*;
 mod exceptions;
 pub use exceptions::*;
+pub(crate) use exceptions::{OSD_EXCEPTION_HIERARCHY, OSD_OSD_ERROR_PARENT};
 mod protection;
 pub use protection::*;
 
