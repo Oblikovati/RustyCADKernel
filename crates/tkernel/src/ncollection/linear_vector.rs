@@ -1,6 +1,35 @@
 //! Contiguous growable storage matching NCollection_LinearVector.
 use super::{Array1, ArrayError};
 
+struct LengthRollback<'a, T> {
+    elements: &'a mut Vec<T>,
+    previous_len: usize,
+    committed: bool,
+}
+
+impl<'a, T> LengthRollback<'a, T> {
+    fn new(elements: &'a mut Vec<T>, previous_len: usize) -> Self {
+        Self {
+            elements,
+            previous_len,
+            committed: false,
+        }
+    }
+
+    fn commit(&mut self) {
+        debug_assert!(!self.committed);
+        self.committed = true;
+    }
+}
+
+impl<T> Drop for LengthRollback<'_, T> {
+    fn drop(&mut self) {
+        if !self.committed {
+            self.elements.truncate(self.previous_len);
+        }
+    }
+}
+
 /// A zero-based growable collection; `LinearVector::<i32>::with_capacity(10)`.
 #[derive(Debug)]
 pub struct LinearVector<T> {
@@ -168,8 +197,15 @@ impl<T: Default> LinearVector<T> {
     }
     /// Resizes, default-constructing new values; `vector.resize(10)`.
     pub fn resize(&mut self, size: usize) {
+        if size < self.len() {
+            self.elements.truncate(size);
+            return;
+        }
         self.reserve(size);
-        self.elements.resize_with(size, T::default);
+        let previous_len = self.len();
+        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
+        rollback.elements.resize_with(size, T::default);
+        rollback.commit();
     }
     /// Overwrites or extends to an index, returning the stored slot as natively;
     /// `*vector.set_value(5, 42) += 1`.
@@ -207,12 +243,40 @@ impl<T: Clone> LinearVector<T> {
             *self = source.clone();
             return;
         }
-        self.elements.clone_from(&source.elements);
+        let previous_len = self.len();
+        let common_len = previous_len.min(source.len());
+        self.clone_common_items(source, common_len);
+        self.finish_assignment_tail(source, common_len, previous_len);
+    }
+
+    fn clone_common_items(&mut self, source: &Self, common_len: usize) {
+        for index in 0..common_len {
+            self.elements[index].clone_from(&source.elements[index]);
+        }
+    }
+
+    fn finish_assignment_tail(&mut self, source: &Self, common_len: usize, previous_len: usize) {
+        if source.len() < previous_len {
+            self.elements.truncate(source.len());
+            return;
+        }
+        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
+        for item in &source.elements[common_len..] {
+            rollback.elements.push(item.clone());
+        }
+        rollback.commit();
     }
     /// Resizes, copying the fill value only into new slots; `vector.resize_with_value(5,-1)`.
     pub fn resize_with_value(&mut self, size: usize, value: T) {
+        if size < self.len() {
+            self.elements.truncate(size);
+            return;
+        }
         self.reserve(size);
-        self.elements.resize(size, value);
+        let previous_len = self.len();
+        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
+        rollback.elements.resize(size, value);
+        rollback.commit();
     }
 }
 impl<T> std::ops::Index<usize> for LinearVector<T> {

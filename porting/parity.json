@@ -70033,7 +70033,7 @@
       "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
     },
     {
-      "upstream_id": "NCollection_LinearVector(const NCollection_LinearVector&)",
+      "upstream_id": "NCollection_LinearVector(const NCollection_LinearVector<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::clone::Clone>::clone",
@@ -70041,7 +70041,7 @@
       "notes": "Manual NCollection member mapping; the copy's capacity equals the source size, as natively."
     },
     {
-      "upstream_id": "NCollection_LinearVector(NCollection_LinearVector&&)",
+      "upstream_id": "NCollection_LinearVector(NCollection_LinearVector<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from",
@@ -70057,15 +70057,15 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_LinearVector::operator=(const NCollection_LinearVector&)",
+      "upstream_id": "NCollection_LinearVector::operator=(const NCollection_LinearVector<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; storage is reused when the source fits the capacity, otherwise replaced by an exact-size copy."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; storage is reused when the source fits the capacity, otherwise replaced by an exact-size copy. Native copy-constructs a growth tail before publishing Size; Rust rolls back and drops that partial tail if Clone panics. See porting/audits/linear-vector-contract.json."
     },
     {
-      "upstream_id": "NCollection_LinearVector::operator=(NCollection_LinearVector&&)",
+      "upstream_id": "NCollection_LinearVector::operator=(NCollection_LinearVector<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from",
@@ -70141,24 +70141,24 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::reserve",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Capacity behavior is mapped, but native grow() uses std::move_if_noexcept and observably copy-constructs existing non-trivial elements when move may throw; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::Resize(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native grow() uses std::move_if_noexcept for existing values; Rust Vec relocation does not invoke Clone. On constructor panic, Rust drops partial tail values while native leaves them untracked. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::Resize(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize_with_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native grow() uses std::move_if_noexcept for existing values; Rust Vec relocation does not invoke Clone. If fill construction panics, Rust drops completed tail values while native leaves them untracked. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::Value(size_t) const",
@@ -70245,80 +70245,80 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::append",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native growth relocates non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::Append(TheItemType&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::append",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+      "status": "partial",
+      "notes": "Native growth relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::Appended()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::appended",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native grows before default-constructing the new element; Rust evaluates Default before append can grow. Existing-value relocation also differs for non-trivial types because native uses std::move_if_noexcept. See porting/audits/linear-vector-contract.json."
     },
     {
-      "upstream_id": "NCollection_LinearVector::EmplaceAppend(Args&&)",
+      "upstream_id": "NCollection_LinearVector::EmplaceAppend(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::emplace_append",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the constructor arguments become a constructing closure."
+      "status": "partial",
+      "notes": "Native grows before forwarding construction arguments; Rust evaluates the construction closure before append can grow. Existing-value relocation also differs for non-trivial types because native uses std::move_if_noexcept. See porting/audits/linear-vector-contract.json."
     },
     {
       "upstream_id": "NCollection_LinearVector::SetValue(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; extends with default values past the end and returns the stored slot."
+      "status": "partial",
+      "notes": "Extending can call native grow(), which relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::SetValue(size_t,TheItemType&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+      "status": "partial",
+      "notes": "Extending can call native grow(), which relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::InsertBefore(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_before",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native growth relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::InsertAfter(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native growth relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::InsertBefore(size_t,TheItemType&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_before",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native growth relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::InsertAfter(size_t,TheItemType&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+      "status": "partial",
+      "notes": "Native growth relocates existing non-trivial values with std::move_if_noexcept; Rust Vec relocation does not invoke Clone. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
     },
     {
       "upstream_id": "NCollection_LinearVector::EraseLast()",
@@ -70365,8 +70365,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::to_array1_view",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches on first write."
+      "status": "partial",
+      "notes": "The native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches on first write. See porting/audits/linear-vector-contract.json."
     },
     {
       "upstream_id": "NCollection_LinearVector::begin()",
