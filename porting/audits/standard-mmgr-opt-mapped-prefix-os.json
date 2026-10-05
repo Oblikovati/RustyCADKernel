@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "scope": "Standard_MMgrOpt mapped FreeMemory releases the physical Unix prefix",
+  "closes_prior_limit": "The earlier partial-free audit documented logical-only prefix trimming with Vec backing retained; Unix prefixes now call munmap and Linux mincore verifies release.",
+  "related_prior_audit": "porting/audits/standard-mmgr-opt-partial-free.json",
+  "base_revision": "4d9a254544dc063320adcbd4484040e21a3c37fb",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_files": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "native_probe": {
+    "path": "tools/oracle/tkernel_mmgr_alloc_memory.cxx",
+    "sha256": "40be043390e0e2d818b8f3aa1929afa93af000c729bd4180ec4442ae348748c4",
+    "expected_path": "tools/oracle/tkernel_mmgr_alloc_memory.expected",
+    "expected_sha256": "8f13d891971bfda5764f97f97a8c2bbcedb5c9e29d4c2b80d4cf65b6736c9ed0",
+    "native_library_sha256": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b",
+    "observed": "page=4096 mapped_size=1 mapped_zero=1 partial_tail=1 zero_size_noop=1 malloc_size=1 malloc_zero=1 heap_free_size_ignored=1 prefix_unmapped=1 tail_mapped=1"
+  },
+  "rust_validation": {
+    "commands": [
+      "cargo test -p rustycad-tkernel --test standard_mapped_region_behavior -- --nocapture",
+      "cargo test -p rustycad-tkernel --test standard_services_api_behavior mmgr -- --nocapture",
+      "cargo test -p rustycad-tkernel",
+      "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "cargo fmt --check",
+      "cargo check -p rustycad-tkernel --target x86_64-pc-windows-gnu"
+    ],
+    "passed_tests": 21,
+    "failed_tests": 0,
+    "compressed_log": "porting/runtime-evidence/tkernel-mapped-prefix-rust-tests.log.gz",
+    "compressed_log_sha256": "38123185827961cd4a0e8113de00eaeb2aaf5496088d74391594c078d90d868f",
+    "full_package_tests": {
+      "passed": 245,
+      "failed": 0,
+      "compressed_log": "porting/runtime-evidence/tkernel-mapped-prefix-full-package.log.gz",
+      "compressed_log_sha256": "f949fc8788f0e9202c110f4ce341ac979fcf33b9a38af811d46698e371a6af0c"
+    },
+    "rust_sources": {
+      "address_space.rs": "55b841dd17d857d4e459512796525a45bef75ba35c3a89971cb211a569d6307f",
+      "mapped_region.rs": "337705bc4a01e99f91e9d92ec39a3d3914101ace0134ac0fae064521e50383f3",
+      "pools.rs": "48b5c0ab33e9c919143655e151751ab28dbd65ac4511e1d880f2619f1aa54042",
+      "mod.rs": "7485bb70a044284c74f388488db9a0b0cdd65b14afbe59f3699b9ed670d8cdb0",
+      "test.rs": "bcc884b8e6e2b11fac5a738144953184b370a5c34adae095dd7e765240f88a54"
+    }
+  },
+  "validated_behavior": [
+    "A request to free page_size + 1 bytes releases exactly two pages on the pinned Linux build.",
+    "mincore reports the released prefix as unmapped and the remaining suffix as mapped.",
+    "The suffix remains readable and writable until its final release.",
+    "Dropping or fully releasing the owned mapping calls munmap for the remaining range."
+  ],
+  "remaining_limits": [
+    "Non-Unix targets retain the existing aligned heap-backed fallback; physical mapping parity is not claimed there.",
+    "Heap allocations remain Vec-backed and do not claim malloc allocator identity.",
+    "Rust rejects oversized free ranges instead of reproducing native behavior that may unmap adjacent mappings.",
+    "OS allocation and munmap failure details beyond the tested valid-range path remain unverified."
+  ]
+}

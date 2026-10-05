@@ -101,7 +101,7 @@ impl MMgrOpt {
             return Err(out_of_memory(&os_error_text(EINVAL)));
         }
         self.space
-            .reserve(aligned, self.page_size)
+            .reserve_mapped(aligned, self.page_size)
             .map(|block| (block, aligned))
             .ok_or_else(|| out_of_memory(&os_error_text(ENOMEM)))
     }

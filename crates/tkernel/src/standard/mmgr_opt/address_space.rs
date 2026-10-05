@@ -1,26 +1,54 @@
 //! Real heap regions addressed by their numeric start, so the manager can keep OCCT's
 //! intrusive headers and free-list links inside the memory it hands out.
+#[cfg(unix)]
+use super::mapped_region::MappedRegion;
 use std::collections::BTreeMap;
+
+enum RegionStorage {
+    Heap {
+        bytes: Vec<u8>,
+        offset: usize,
+    },
+    #[cfg(unix)]
+    Mapped(MappedRegion),
+}
 
 /// One system allocation: `malloc`/`calloc` or an anonymous mapping.
 struct Region {
-    storage: Vec<u8>,
-    offset: usize,
+    storage: RegionStorage,
     length: usize,
 }
 impl Region {
     fn bytes(&self) -> &[u8] {
-        &self.storage[self.offset..self.offset + self.length]
+        match &self.storage {
+            RegionStorage::Heap { bytes, offset } => &bytes[*offset..*offset + self.length],
+            #[cfg(unix)]
+            RegionStorage::Mapped(mapping) => mapping.bytes(),
+        }
     }
     fn bytes_mut(&mut self) -> &mut [u8] {
-        &mut self.storage[self.offset..self.offset + self.length]
+        match &mut self.storage {
+            RegionStorage::Heap { bytes, offset } => &mut bytes[*offset..*offset + self.length],
+            #[cfg(unix)]
+            RegionStorage::Mapped(mapping) => mapping.bytes_mut(),
+        }
+    }
+    fn release_prefix(&mut self, length: usize) -> bool {
+        match &mut self.storage {
+            RegionStorage::Heap { offset, .. } => {
+                *offset += length;
+                true
+            }
+            #[cfg(unix)]
+            RegionStorage::Mapped(mapping) => mapping.release_prefix(length),
+        }
     }
 }
 
 /// Every region a manager obtained from the system, keyed by start address; `space.reserve(64, 16)`.
 ///
-/// Each region is a zero-filled heap buffer that never moves while it lives, so its start
-/// address is a stable, real address. Words are stored in native byte order, as `size_t`.
+/// Each region keeps stable owned backing, either a zeroed heap buffer or OS mapping. Words are
+/// stored in native byte order, as `size_t`.
 #[derive(Default)]
 pub(super) struct AddressSpace {
     regions: BTreeMap<usize, Region>,
@@ -31,15 +59,45 @@ impl AddressSpace {
         let storage = crate::standard::memory::zeroed_bytes(length.checked_add(alignment - 1)?)?;
         let address = storage.as_ptr() as usize;
         let offset = (alignment - address % alignment) % alignment;
+        let address = address + offset;
         self.regions.insert(
-            address + offset,
+            address,
             Region {
-                storage,
-                offset,
+                storage: RegionStorage::Heap {
+                    bytes: storage,
+                    offset,
+                },
                 length,
             },
         );
-        Some(address + offset)
+        Some(address)
+    }
+    /// Obtains page-aligned bytes with an OS mapping where supported.
+    pub(super) fn reserve_mapped(&mut self, length: usize, alignment: usize) -> Option<usize> {
+        #[cfg(unix)]
+        {
+            self.insert_mapped(length, alignment)
+        }
+        #[cfg(not(unix))]
+        {
+            self.reserve(length, alignment)
+        }
+    }
+    #[cfg(unix)]
+    fn insert_mapped(&mut self, length: usize, alignment: usize) -> Option<usize> {
+        let mapping = MappedRegion::new(length)?;
+        let address = mapping.address();
+        if address % alignment != 0 {
+            return None;
+        }
+        self.regions.insert(
+            address,
+            Region {
+                storage: RegionStorage::Mapped(mapping),
+                length,
+            },
+        );
+        Some(address)
     }
     /// Returns a region to the system; `space.release(start)`.
     pub(super) fn release(&mut self, start: usize) -> bool {
@@ -54,11 +112,22 @@ impl AddressSpace {
         if length == 0 {
             return Some((start, region_length));
         }
-        let mut region = self.regions.remove(&start)?;
-        if length == region_length {
+        let region = self.regions.remove(&start)?;
+        self.trim_region(start, region, length)
+    }
+    fn trim_region(
+        &mut self,
+        start: usize,
+        mut region: Region,
+        length: usize,
+    ) -> Option<(usize, usize)> {
+        if length == region.length {
             return Some((0, 0));
         }
-        region.offset += length;
+        if !region.release_prefix(length) {
+            self.regions.insert(start, region);
+            return None;
+        }
         region.length -= length;
         let suffix = start + length;
         let suffix_length = region.length;
