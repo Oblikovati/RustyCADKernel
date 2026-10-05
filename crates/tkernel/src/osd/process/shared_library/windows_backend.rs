@@ -72,8 +72,10 @@ pub(super) fn error_with(
     name: Option<&[u8]>,
 ) -> Vec<u8> {
     let mut current = lock_error_buffers(buffers);
-    update_wide_buffer(calls, &mut current, last_error, name);
-    update_utf8_buffer(calls, &mut current);
+    let code: u32 = last_error.load(std::sync::atomic::Ordering::Relaxed);
+    let _format_succeeded: bool = calls.format_message(code, name, &mut current.wide);
+    let wide: [u16; 1024] = current.wide;
+    let _conversion_succeeded: bool = calls.convert_message(&wide, &mut current.utf8);
     buffer_content(&current.utf8).to_vec()
 }
 
@@ -83,26 +85,6 @@ fn lock_error_buffers(
     buffers
         .lock()
         .unwrap_or_else(std::sync::PoisonError::into_inner)
-}
-
-fn update_wide_buffer(
-    calls: &impl WindowsCalls,
-    buffers: &mut WindowsErrorBuffers,
-    last_error: &AtomicU32,
-    name: Option<&[u8]>,
-) {
-    let mut attempt: [u16; 1024] = buffers.wide;
-    let code: u32 = last_error.load(std::sync::atomic::Ordering::Relaxed);
-    if calls.format_message(code, name, &mut attempt) {
-        buffers.wide = attempt;
-    }
-}
-
-fn update_utf8_buffer(calls: &impl WindowsCalls, buffers: &mut WindowsErrorBuffers) {
-    let mut attempt: [u8; 1024] = buffers.utf8;
-    if calls.convert_message(&buffers.wide, &mut attempt) {
-        buffers.utf8 = attempt;
-    }
 }
 
 pub(super) struct WindowsErrorBuffers {

@@ -47,23 +47,19 @@ impl WindowsCalls for FakeWindowsCalls {
         self.formatted
             .borrow_mut()
             .push((code, name.map(<[u8]>::to_vec)));
-        if self.format_fails.get() {
-            return false;
-        }
         let message: Vec<u16> = self
             .format_override
             .borrow()
             .clone()
             .unwrap_or_else(|| format!("win32:{code}").encode_utf16().collect());
-        write_wide_buffer(target, &message)
+        let fits: bool = write_wide_buffer(target, &message);
+        fits && !self.format_fails.get()
     }
 
     fn convert_message(&self, wide: &[u16], target: &mut [u8]) -> bool {
-        if self.convert_fails.get() {
-            return false;
-        }
         let text: String = String::from_utf16_lossy(wide_c_prefix(wide));
-        write_utf8_buffer(target, text.as_bytes())
+        let fits: bool = write_utf8_buffer(target, text.as_bytes());
+        fits && !self.convert_fails.get()
     }
 }
 
@@ -76,21 +72,17 @@ fn wide_c_prefix(wide: &[u16]) -> &[u16] {
 }
 
 fn write_wide_buffer(target: &mut [u16], text: &[u16]) -> bool {
-    if text.len() >= target.len() {
-        return false;
-    }
     target.fill(0);
-    target[..text.len()].copy_from_slice(text);
-    true
+    let count: usize = text.len().min(target.len().saturating_sub(1));
+    target[..count].copy_from_slice(&text[..count]);
+    text.len() < target.len()
 }
 
 fn write_utf8_buffer(target: &mut [u8], text: &[u8]) -> bool {
-    if text.len() >= target.len() {
-        return false;
-    }
     target.fill(0);
-    target[..text.len()].copy_from_slice(text);
-    true
+    let count: usize = text.len().min(target.len().saturating_sub(1));
+    target[..count].copy_from_slice(&text[..count]);
+    text.len() < target.len()
 }
 
 #[test]
@@ -207,20 +199,21 @@ fn successful_load_does_not_clear_the_previous_windows_error_code() {
 }
 
 #[test]
-fn formatting_failure_reuses_the_previous_static_text() {
+fn failed_format_call_keeps_its_partial_wide_write() {
     let calls: FakeWindowsCalls = FakeWindowsCalls::default();
     let buffers: Mutex<WindowsErrorBuffers> = Mutex::new(WindowsErrorBuffers::new());
     let last_error: AtomicU32 = AtomicU32::new(120);
     let first: Vec<u8> = error_with(&calls, &last_error, &buffers, Some(b"first.dll"));
+    *calls.format_override.borrow_mut() = Some("partial write".encode_utf16().collect());
     calls.format_fails.set(true);
     last_error.store(126, std::sync::atomic::Ordering::Relaxed);
     let second: Vec<u8> = error_with(&calls, &last_error, &buffers, Some(b"second.dll"));
     assert_eq!(first, b"win32:120");
-    assert_eq!(second, first);
+    assert_eq!(second, b"partial write");
 }
 
 #[test]
-fn conversion_failure_keeps_previous_utf8_while_wide_text_changes() {
+fn failed_conversion_exposes_its_partial_utf8_write() {
     let calls: FakeWindowsCalls = FakeWindowsCalls::default();
     let buffers: Mutex<WindowsErrorBuffers> = Mutex::new(WindowsErrorBuffers::new());
     let last_error: AtomicU32 = AtomicU32::new(120);
@@ -228,14 +221,15 @@ fn conversion_failure_keeps_previous_utf8_while_wide_text_changes() {
     *calls.format_override.borrow_mut() = Some("new message".encode_utf16().collect());
     calls.convert_fails.set(true);
     let stale: Vec<u8> = error_with(&calls, &last_error, &buffers, Some(b"new.dll"));
-    assert_eq!(first, stale);
+    assert_eq!(first, b"win32:120");
+    assert_eq!(stale, b"new message");
     calls.convert_fails.set(false);
     let updated: Vec<u8> = error_with(&calls, &last_error, &buffers, Some(b"new.dll"));
     assert_eq!(updated, b"new message");
 }
 
 #[test]
-fn fixed_buffers_truncate_wide_messages_and_preserve_output_on_utf8_overflow() {
+fn fixed_buffer_failures_keep_their_partial_output_writes() {
     let calls: FakeWindowsCalls = FakeWindowsCalls::default();
     let buffers: Mutex<WindowsErrorBuffers> = Mutex::new(WindowsErrorBuffers::new());
     let last_error: AtomicU32 = AtomicU32::new(1);
@@ -244,19 +238,10 @@ fn fixed_buffers_truncate_wide_messages_and_preserve_output_on_utf8_overflow() {
     assert_eq!(truncated.len(), 1023);
     *calls.format_override.borrow_mut() = Some("b".repeat(1024).encode_utf16().collect());
     let wide_overflow: Vec<u8> = error_with(&calls, &last_error, &buffers, None);
-    assert_eq!(wide_overflow, truncated);
+    assert_eq!(wide_overflow, b"b".repeat(1023));
     *calls.format_override.borrow_mut() = Some("€".repeat(600).encode_utf16().collect());
-    assert_conversion_overflow_retains_output(&calls, &last_error, &buffers, &truncated);
-}
-
-fn assert_conversion_overflow_retains_output(
-    calls: &FakeWindowsCalls,
-    last_error: &AtomicU32,
-    buffers: &Mutex<WindowsErrorBuffers>,
-    expected: &[u8],
-) {
-    let retained: Vec<u8> = error_with(calls, last_error, buffers, None);
-    assert_eq!(retained, expected);
+    let encoding_overflow: Vec<u8> = error_with(&calls, &last_error, &buffers, None);
+    assert_eq!(encoding_overflow, "€".repeat(600).as_bytes()[..1023]);
 }
 
 #[test]

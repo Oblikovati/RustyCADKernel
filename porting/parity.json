@@ -94429,7 +94429,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error_bytes",
       "status": "partial",
-      "notes": "Unix dlerror bytes are copied before the next loader call and consumed; None when no error. Windows uses persistent 1024-element wide and UTF-8 buffers; failed formatting/conversion retains prior content like the native static arrays. This state is mutex-protected and fake-tested at capacity boundaries; Windows runtime remains unverified (tools/oracle/tkernel_osd_shlib_windows.md)."
+      "notes": "Unix dlerror bytes are copied before the next loader call and consumed; None when no error. Windows passes persistent 1024-unit and 1024-byte buffers directly to FormatMessageW/WideCharToMultiByte and ignores both return codes, retaining any writes made before failure. Rust serializes access with a mutex; fake tests cover partial writes and capacity boundaries. Native Windows runtime remains unverified (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Destroy()",
