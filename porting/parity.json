@@ -15227,7 +15227,7 @@
       "upstream_id": "NCollection_Vec2::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::DivAssign<T>>::div_assign",
       "status": "implemented",
       "notes": "The generic Rust DivAssign<T> implementation calls T::div_assign for x and y; custom-element native/Rust evidence distinguishes it from value division. Built-in scalar and template dispatch remain covered; see vector-scalar-division audit."
     },
@@ -68415,7 +68415,7 @@
       "upstream_id": "NCollection_Vec2::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as Div<T>>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Div<T>>::div",
       "status": "implemented",
       "notes": "The generic Rust Div<T> implementation applies T::div independently to x and y, matching native direct division rather than assignment. Custom-element native/Rust evidence distinguishes it from operator/=. See vector-scalar-division audit."
     },

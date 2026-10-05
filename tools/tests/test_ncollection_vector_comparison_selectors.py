@@ -10,6 +10,16 @@ from api_crosswalk import cpp_candidates, cpp_indexes
 ROOT = Path(__file__).resolve().parents[2]
 ROWS = (
     (
+        "NCollection_Vec2::operator/=(Element_t)",
+        "a6ae7bcd5ef27366f8deb58284ddba3d457c64e6c47712eeb7be01f99e3ca12b",
+        "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::DivAssign<T>>::div_assign",
+    ),
+    (
+        "NCollection_Vec2::operator/(Element_t) const",
+        "60a0937797d0505fa36bcc48ee600957cfd769d40d6d5e70f4dd52a8b8aa97c6",
+        "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Div<T>>::div",
+    ),
+    (
         "NCollection_Vec2::IsEqual(const NCollection_Vec2<Element_t> &) const noexcept",
         "d2be3fe5cbb3e9ca62d20769951a860b3f5f65e111bdc5a7cb12bc90ca7ecdff",
         "rustycad_tkernel::ncollection::Vec2::is_equal",
@@ -87,7 +97,7 @@ class VectorComparisonSelectorTest(unittest.TestCase):
         parity = json.loads((ROOT / "porting/parity.json").read_text())
         cls.parity_rows = {row["upstream_id"]: row for row in parity["api"]}
 
-    def test_comparison_and_cwise_abs_selectors_are_exact(self) -> None:
+    def test_vector_operation_selectors_are_exact(self) -> None:
         for selector, compiler_id, rust_item in ROWS:
             status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
             self.assertEqual(status, "unique", selector)
