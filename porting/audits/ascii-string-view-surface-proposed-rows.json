@@ -1,0 +1,182 @@
+{
+  "scope": "TCollection_AsciiString literal and std::string_view overload selector corrections",
+  "base_commit": "68414cb48f443176e98deb6d66b05709aadc119b",
+  "policy": "Proposed parity row edits only; no ledger/snapshot file is modified in this worktree.",
+  "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_hashes": {
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a"
+  },
+  "updates": [
+    {
+      "action": "replace_upstream_id_and_note",
+      "old_upstream_id": "TCollection_AsciiString::operator<(const std::string_view&) const",
+      "new_upstream_id": "TCollection_AsciiString::operator<(const std::string_view&) const",
+      "compiler_declaration_id": "0a8b4065e36d0044872bccd7c6439f9a840c518e1bf2c91c36bdbf14692fc3c4",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
+      "status": "implemented",
+      "behavior": "Retain the readable std::string_view selector; parser now resolves symbolic operator angles without confusing parameter template types. Full byte-span comparison is implemented."
+    },
+    {
+      "action": "replace_upstream_id_and_note",
+      "old_upstream_id": "TCollection_AsciiString::operator>(const std::string_view&) const",
+      "new_upstream_id": "TCollection_AsciiString::operator>(const std::string_view&) const",
+      "compiler_declaration_id": "254df2d93ed9a4b8e3e7c945c74238f090a31d8464f71340c61d4a37fd17a34a",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
+      "status": "implemented",
+      "behavior": "Retain the readable std::string_view selector; parser now resolves symbolic operator angles without confusing parameter template types. Full byte-span comparison is implemented."
+    },
+    {
+      "action": "replace_upstream_id_and_note",
+      "old_upstream_id": "TCollection_AsciiString::operator std::string_view() const",
+      "new_upstream_id": "TCollection_AsciiString::operator basic_string_view() const",
+      "compiler_declaration_id": "1f6bc11c9ffa8a93999e2256ed6859faa74de171c74327447f94c10109c9cae9",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::as_bytes",
+      "status": "implemented",
+      "behavior": "Exposes complete stored byte span, including embedded NULs."
+    },
+    {
+      "action": "add_row",
+      "upstream_id": "TCollection_AsciiString::TCollection_AsciiString(const char(&)[N])",
+      "compiler_declaration_id": "24a0789028de235f351e03f59ff76cbe50cddaff94d103db93bf7cadd79c8def",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::from_bytes",
+      "status": "implemented",
+      "behavior": "The literal constructor uses strlen and stops at the first NUL, matching AsciiString::from_bytes."
+    }
+  ],
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_ascii_string_view_surface.cxx",
+    "source_sha256": "2da3f31b074ec99771fe410a2e2e0848c0b96c7335e592455fe8cb9569cc2768",
+    "expected": "tools/oracle/tkernel_ascii_string_view_surface.expected",
+    "expected_sha256": "c9532cafd138f314970fd69dcc3704f5bf7e52ee03572a12e64ba4672cc49a6c",
+    "rust_test": "crates/tkernel/tests/ascii_string_view_surface.rs",
+    "rust_test_sha256": "2219c40d8a1dd70acabaed827b6a32cea45125e0b37ef2cee087d94c5dc6d74a",
+    "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "output": [
+      "literal 2 6162",
+      "view_constructor 1 61",
+      "converted 3 41007a",
+      "less 0",
+      "greater 1"
+    ],
+    "native_build_command": "g++ -std=c++17 -O2 -I<modeling-full>/include/opencascade tools/oracle/tkernel_ascii_string_view_surface.cxx <modeling-full>/lin64/gcc/libi/libTKernel.so.8.1.0 -Wl,-rpath,<modeling-full>/lin64/gcc/libi -o /tmp/tkernel_ascii_string_view_surface",
+    "linked_library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "constructor_view_existing_row_note": "The existing std::string_view constructor mapping remains from_view. Pinned native cxx scans the explicit-length input to the first NUL; the view syntax does not imply full-span copy for this constructor.",
+  "parser_fix": {
+    "file": "tools/api_identity.py",
+    "behavior": "Detect only the symbolic operator token angle characters. Namespace and nested-template angle brackets in parameter types remain part of signature parsing.",
+    "tests": "tools/tests/test_api_identity_operator_angles.py",
+    "test_cases": [
+      "operator< with namespace-qualified nested template type",
+      "operator> with namespace-qualified nested template type",
+      "operator<<",
+      "operator>>",
+      "conversion operator to std::basic_string_view<char>",
+      "operator() with std::array<int,3>",
+      "name-only operator without parameter list"
+    ]
+  },
+  "tooling": {
+    "implementation": "tools/api_identity.py",
+    "implementation_sha256": "0f28536332ac78b14f7f1cb2d6b6cc48b241cf248f9f119062e005789212d5ed",
+    "regression_test": "tools/tests/test_api_identity_operator_angles.py",
+    "regression_test_sha256": "75099821f44b844acc6fef98976a5f65aa15119330ad6aa9006d120e3fc002a4",
+    "full_python_test_command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests",
+    "full_python_test_log": "target/python-tools-tests.log",
+    "full_python_test_result": "603 passed",
+    "full_crosswalk_report": "target/ascii-string-view-proposed-report.json",
+    "crosswalk_summary": {
+      "operator_less_cpp_id": "0a8b4065e36d0044872bccd7c6439f9a840c518e1bf2c91c36bdbf14692fc3c4",
+      "operator_greater_cpp_id": "254df2d93ed9a4b8e3e7c945c74238f090a31d8464f71340c61d4a37fd17a34a",
+      "view_conversion_cpp_id": "1f6bc11c9ffa8a93999e2256ed6859faa74de171c74327447f94c10109c9cae9",
+      "literal_ctor_cpp_id": "24a0789028de235f351e03f59ff76cbe50cddaff94d103db93bf7cadd79c8def",
+      "all_four_rows": "unique C++ / unique Rust / implemented"
+    },
+    "crosswalk_report_sha256": "c4f013d22ae6fc82977b99c686311c1f875ea701765ae2eace7e698b212d01fa",
+    "crosswalk_input_sha256": {
+      "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+      "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+      "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+      "parity": "865518f4d6a3d7378b761944954b974614aa7c2e6e7e57d4a19f1ee36df6fb69",
+      "rust": "04221eea11d15578b2ca8ce5b5d50f6d3ca1d56e344e066c58f6d05e50d81fe1"
+    },
+    "committed_evidence": {
+      "ascii-string-view-tkernel-tests.log.gz": "5333f7c5544a2e14d89e653135968c270297849b48fcb1c1dbc1685bcaaf173e",
+      "ascii-string-view-python-tests.log.gz": "2907a0742a5ea36a889328a2a65e5fe55e178edc581d189b355bb4b3529869f3",
+      "ascii-string-view-clippy.log": "492249c9f550482a9a491739745144c5a474b15b27fd7de5717f8cd83c68916d"
+    },
+    "tkernel_test_summary": {
+      "passed": 2795,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 170,
+      "exit_code": 0
+    },
+    "python_test_summary": {
+      "passed": 603,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "strict_clippy_exit_code": 0,
+    "constructor_surface_limit": "The crosswalk target is from_bytes because normalized rustdoc omits the const-generic From<&[u8; N]> impl. Source traits.rs confirms that array impl delegates to from_bytes; both truncate at NUL. The target has functional C-string prefix parity, but the exact trait impl identity is not represented by this capture.",
+    "crosswalk_rows_compact": [
+      {
+        "upstream_id": "TCollection_AsciiString::TCollection_AsciiString(const char(&)[N])",
+        "cpp_id": "24a0789028de235f351e03f59ff76cbe50cddaff94d103db93bf7cadd79c8def",
+        "cpp_kind": "FunctionTemplate",
+        "cpp_signature": "void (const char (&)[N])",
+        "cpp_status": "unique",
+        "rust_paths": [
+          "rustycad_tkernel::tcollection::AsciiString::from_bytes"
+        ],
+        "rust_status": "unique",
+        "resolution": "implemented"
+      },
+      {
+        "upstream_id": "TCollection_AsciiString::operator<(const std::string_view&) const",
+        "cpp_id": "0a8b4065e36d0044872bccd7c6439f9a840c518e1bf2c91c36bdbf14692fc3c4",
+        "cpp_kind": "CXXMethod",
+        "cpp_signature": "bool (const class std::basic_string_view<char> &) const",
+        "cpp_status": "unique",
+        "rust_paths": [
+          "rustycad_tkernel::tcollection::AsciiString::is_less"
+        ],
+        "rust_status": "unique",
+        "resolution": "implemented"
+      },
+      {
+        "upstream_id": "TCollection_AsciiString::operator>(const std::string_view&) const",
+        "cpp_id": "254df2d93ed9a4b8e3e7c945c74238f090a31d8464f71340c61d4a37fd17a34a",
+        "cpp_kind": "CXXMethod",
+        "cpp_signature": "bool (const class std::basic_string_view<char> &) const",
+        "cpp_status": "unique",
+        "rust_paths": [
+          "rustycad_tkernel::tcollection::AsciiString::is_greater"
+        ],
+        "rust_status": "unique",
+        "resolution": "implemented"
+      },
+      {
+        "upstream_id": "TCollection_AsciiString::operator basic_string_view() const",
+        "cpp_id": "1f6bc11c9ffa8a93999e2256ed6859faa74de171c74327447f94c10109c9cae9",
+        "cpp_kind": "CXXConversion",
+        "cpp_signature": "class std::basic_string_view<char> () const",
+        "cpp_status": "unique",
+        "rust_paths": [
+          "rustycad_tkernel::tcollection::AsciiString::as_bytes"
+        ],
+        "rust_status": "unique",
+        "resolution": "implemented"
+      }
+    ]
+  },
+  "source_notes": {
+    "array_from_impl": "crates/tkernel/src/tcollection/ascii_string/traits.rs::From<&[u8; N]> delegates to from_bytes; source_sha256=eac39057dd656685ca6fde647a98418b8554a346bf573fd96085bf3274e651ba",
+    "constructor_behavior": "Native char-array and explicit-length/view constructors both stop at first NUL; conversion/comparison on stored strings consume full Length()."
+  }
+}
