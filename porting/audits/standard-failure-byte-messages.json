@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "purpose": "Preserve arbitrary failure message/stack bytes through construction, base copy/assignment, and byte stream output.",
+  "rust_base_revision": "5871011059732f1df2de16df2932abc26188dcdc",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_sources": {
+    "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx": "4ecf579b7f80cfc908c41c84f1862d4361b7ab01f74cd858689d319eb7b639d5",
+    "src/FoundationClasses/TKernel/Standard/Standard_Failure.cxx": "b9e8a22017f38fc43a7588460c1472e0e38e3962951cf84c1424cd302f0954d9",
+    "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx": "5fcb70381dcb186158569bc44bb425c9cb6f258562b55ba5bc0f42d7b5fb888c",
+    "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.cxx": "46603f5ec764595fc5e4db31760c5e104bc57e73d4240402dba145839721dd9d",
+    "src/FoundationClasses/TKernel/Standard/Standard_DefineException.hxx": "718d83d7d37b327bf991526be73f0cf41ba6b745cbfbd0ed7398d114c5cf1d8a"
+  },
+  "rust_sources": {
+    "crates/tkernel/src/standard/failure.rs": "367dff678faf943991f273439ce2ae9ef59a2381e7bf1d105037d35ae71c66e3",
+    "crates/tkernel/src/standard/failure/text.rs": "06c6b7399b008b4c1329c159c7783fc84dec64fd350492602f6e54cd0acae8f9",
+    "crates/tkernel/src/standard/failure/byte_messages.rs": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+    "crates/tkernel/src/standard/failure/out_of_memory.rs": "1d6012f3f3558cb773b3f83ecc725e2b4d66ea45dfe7853e3336055fbdd5ee62",
+    "crates/tkernel/src/standard/failure/stack_capture.rs": "c08e75febf05f660148dd6cd838ae474701d4a2216580c23e55e1f67ee1474b9",
+    "crates/tkernel/src/standard/exceptions.rs": "5fa63f08e76028fc5be5dc8ddbe4e7e8fce8aac8e54904627e22759208642f71",
+    "crates/tkernel/tests/standard_failure_byte_messages.rs": "717d78d4484b62acaf9efd457059acdb2754760ca2c4021766309f600e19f0b9"
+  },
+  "behavior": [
+    "FailureText retains the original bytes through first NUL, sharing their storage on copy and assignment. UTF-8 text accessors and Display are presentation views; byte getters and print_to preserve original bytes.",
+    "Base copy construction now supports the prior native-only 0xff case, retains Standard_Failure identity and excludes derived private buffer storage.",
+    "OutOfMemory byte constructor/setter preserve native first-NUL and 1023-byte truncation semantics, with copies unchanged after replacing the source buffer.",
+    "Stream insertion returns the original Rust writer; byte printing propagates Rust I/O errors."
+  ],
+  "limitations": [
+    "The native probe includes padded ostream output and pre-set badbit as native-only diagnostics. Generic Rust Write does not implement these C++ stream state semantics, so Print and operator<< stay partial.",
+    "Native OutOfMemory stores its message in an embedded fixed buffer to avoid allocating while reporting memory exhaustion. Rust Arc buffer creation/replacement allocates, so its constructor/setter stay partial despite matching byte contents.",
+    "The base-assignment safe-borrow self-alias limitation remains separately recorded.",
+    "Supplemental tests and native diagnostics do not add original legacy declarations."
+  ],
+  "native_probe": {
+    "source": "tools/oracle/tkernel_failure_byte_messages.cxx",
+    "source_sha256": "bb1b912cf40cb073b1197715ffed4157e04a850ab6bb33362a1f07669c4bb97a",
+    "expected": "tools/oracle/tkernel_failure_byte_messages.expected",
+    "expected_sha256": "d6007aeb69197ad6626730a6de9c8e434e7007a42b3502490b3eba3f7f304d27",
+    "compiler": "g++ 13.3.0",
+    "flags": [
+      "-std=c++17",
+      "-O2"
+    ],
+    "include": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+    "library": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "binary_sha256": "3860917cccade6b17285ff56576bdd7555b9b785e02b48dbacb10eec5573b197",
+    "exit_code": 0,
+    "comparison_exit_code": 0,
+    "output": "message: 255 65\nstack: 254\nprint: 83 116 97 110 100 97 114 100 95 70 97 105 108 117 114 101 58 32 255 65 254\n1 1 Standard_DomainError\n0 0 Standard_Failure\npadded: 95 95 95 95 83 116 97 110 100 97 114 100 95 70 97 105 108 117 114 101 58 32 255\nbad_state 1 1\noom_size 1023\noom_replaced: 254\noom_copy 1023 255\n"
+  },
+  "validation": {
+    "red": {
+      "exit_code": 101,
+      "log": "porting/runtime-evidence/failure-bytes-red.log.gz",
+      "log_sha256": "80408d78cd365dee71dddaf69dd2c858899653b65777fcbecdb9c66df2cbfc05",
+      "reason": "Byte-oriented failure methods did not exist."
+    },
+    "selector-initial": {
+      "exit_code": 1,
+      "log": "porting/runtime-evidence/failure-bytes-selector-initial.log.gz",
+      "log_sha256": "0b20f7f5e9c25b636caa7bf54d93798fa354ed0b6c839817dd9f4a4899716b1d",
+      "reason": "Regression used a top-level-const constructor selector spelling absent from the ledger; corrected to exact existing ledger spelling and rechecked pinned C++ identity."
+    },
+    "selectors": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-bytes-selectors.log.gz",
+      "log_sha256": "a0d1e9fc2d8ef489856370029125dac4a810b7749def53ee79b3116e4b09901a",
+      "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_standard_failure_assignment_binding"
+    },
+    "clippy": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-bytes-clippy.log.gz",
+      "log_sha256": "c4efb878e3704262b1406f399a19ada3597fe8d6db1e755f8ca3faab3e0b43aa",
+      "command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings"
+    },
+    "full": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-bytes-full.log.gz",
+      "log_sha256": "199e83cfcc25f3771ba07734016956cdd7d96c2536cdf6464c87ce191895d4aa",
+      "command": "cargo test -p rustycad-tkernel",
+      "summary": {
+        "passed": 2875,
+        "failed": 0,
+        "ignored": 0,
+        "result_groups": 196,
+        "failed_result_groups": 0,
+        "command_exit_code": 0,
+        "command_succeeded": true
+      }
+    },
+    "rustdoc": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/failure-bytes-rustdoc.log.gz",
+      "log_sha256": "8834b374e0569d16e1670f8a706918718a7bda1028daa8ad41e10a6200ecb9c2"
+    }
+  },
+  "environment": {
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_BUILD_JOBS": "4",
+    "CARGO_TARGET_DIR": "/tmp/rustycad-failure-base-target"
+  },
+  "compiler_bindings": {
+    "rustdoc_json_sha256": "65969dd253a173e7f5d2efd72e2a72603028a09197d2dd5ca73a0c33136a57e4",
+    "targets": [
+      {
+        "path": "rustycad_tkernel::standard::Failure::from_message_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "ee2d14a68edec618627ffb0daca0c17cf1746b41b65ffb61bad3dd6ceb4fd4cf"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::with_message_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "8fc41ca45feeb16928fa3f66a5ee89d57793a3210d830ccd73bf4ca3556090b5"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::with_type_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "b7b559cad7d5f2399c3ac4c1ea64a5d717cc15b750182d59aff1f68f20b95142"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::message_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "46e2849f475f81cc48edc8f34d919c9875e0f8078d4fda277cc4b4d89c0e087a"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::stack_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "46e2849f475f81cc48edc8f34d919c9875e0f8078d4fda277cc4b4d89c0e087a"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::print_to",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "98ae2b95e67f2cf62e50b105d13cb0170dc3c47178d8d104bc159d9f5dbf4b37"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::insert_into",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/byte_messages.rs",
+        "source_sha256": "42e219d9d355aeb5d41c4fadd17eb48d6a9fc026bd5cfbdb1a05911c56bcaf78",
+        "signature_sha256": "19eb353660dd5b45bc7369b7597eb238f9d0f9570de3c0a8266a131ec46e72d9"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::copy_base",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure.rs",
+        "source_sha256": "367dff678faf943991f273439ce2ae9ef59a2381e7bf1d105037d35ae71c66e3",
+        "signature_sha256": "ec02f79c755d36c1049f92b7093927afba5a5f069c5ba8de3ff90a4423e8973b"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::assign_base",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure.rs",
+        "source_sha256": "367dff678faf943991f273439ce2ae9ef59a2381e7bf1d105037d35ae71c66e3",
+        "signature_sha256": "9ddd0646657f358c5c46201835b341efe6e5cb6d7db9fefb60cef33aeb01c4b1"
+      },
+      {
+        "path": "rustycad_tkernel::standard::Failure::set_message_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/out_of_memory.rs",
+        "source_sha256": "1d6012f3f3558cb773b3f83ecc725e2b4d66ea45dfe7853e3336055fbdd5ee62",
+        "signature_sha256": "ec01c67542723f1ca2b48598c87c2a81d23576a154cc0d2419ad6b48b3918c7d"
+      },
+      {
+        "path": "rustycad_tkernel::standard::exceptions::out_of_memory_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/standard/failure/out_of_memory.rs",
+        "source_sha256": "1d6012f3f3558cb773b3f83ecc725e2b4d66ea45dfe7853e3336055fbdd5ee62",
+        "signature_sha256": "60c47148683d3cac94f260ac350a87c2d0dbfea4327ae6a6f02c3b11298a83de"
+      }
+    ]
+  },
+  "cpp_bindings": [
+    {
+      "selector": "Standard_OutOfMemory::Standard_OutOfMemory(const char* const)",
+      "compiler_id": "fa68bfd8d5e7473ba997452a2bdc683175e4d320fbe21734c9e6d08c1410ef59",
+      "rust_path": "rustycad_tkernel::standard::exceptions::out_of_memory_bytes",
+      "status": "partial"
+    },
+    {
+      "selector": "Standard_OutOfMemory::SetMessageString(const char* const)",
+      "compiler_id": "a8a461b6141372aeab77344619d3c685fb1a12d56317b4bef706a88be6c8f527",
+      "rust_path": "rustycad_tkernel::standard::Failure::set_message_bytes",
+      "status": "partial"
+    },
+    {
+      "selector": "Standard_Failure::Standard_Failure(const char*)",
+      "compiler_id": "b1fe29956a4bac2d98fc7223b486fc2be85e2f49c5666ae4855d35f4cdd6803c",
+      "rust_path": "rustycad_tkernel::standard::Failure::from_message_bytes",
+      "status": "implemented"
+    },
+    {
+      "selector": "Standard_Failure::Standard_Failure(const char* const,const char* const)",
+      "compiler_id": "63a3ce0ae9241c03704ccb8caeb48cc3eb41a6b1d94368c75071f52a7065f91a",
+      "rust_path": "rustycad_tkernel::standard::Failure::with_type_bytes",
+      "status": "implemented"
+    },
+    {
+      "selector": "Standard_Failure::GetStackString() const",
+      "compiler_id": "b0c1b4dd328e5a608942c749b205a2832183404699f942d228134d6a1a92b078",
+      "rust_path": "rustycad_tkernel::standard::Failure::stack_bytes",
+      "status": "implemented"
+    },
+    {
+      "selector": "Standard_Failure::Print(Standard_OStream&) const",
+      "compiler_id": "5674c27025f511e5def0959207dfe252931588a1f190941d53e0228fc1b3fb13",
+      "rust_path": "rustycad_tkernel::standard::Failure::print_to",
+      "status": "partial"
+    },
+    {
+      "selector": "operator<<(Standard_OStream&,const Standard_Failure&)",
+      "compiler_id": "42056e82762cb2000cab50f68c286f3e36062dc56cefcd92448a25c787e8ce78",
+      "rust_path": "rustycad_tkernel::standard::Failure::insert_into",
+      "status": "partial"
+    }
+  ]
+}
