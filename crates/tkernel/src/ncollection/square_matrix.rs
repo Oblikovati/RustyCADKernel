@@ -216,7 +216,7 @@ macro_rules! square_matrix_arithmetic {
                 Self::product(self, other)
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> $matrix<T> {
+        impl<T: Copy + std::ops::Add<Output = T> + std::ops::Mul<Output = T>> $matrix<T> {
             /// Applies the matrix to a column vector, summing row products left to right.
             fn apply(&self, vector: $vector<T>) -> $vector<T> {
                 let values = vector.data();
@@ -273,7 +273,9 @@ macro_rules! square_matrix_arithmetic {
                 self.negated()
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar> std::ops::Mul<$vector<T>> for $matrix<T> {
+        impl<T: Copy + std::ops::Add<Output = T> + std::ops::Mul<Output = T>>
+            std::ops::Mul<$vector<T>> for $matrix<T>
+        {
             type Output = $vector<T>;
             fn mul(self, vector: $vector<T>) -> $vector<T> {
                 self.apply(vector)
