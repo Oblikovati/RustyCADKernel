@@ -85,5 +85,123 @@
       "sha256": "c73c1f526d5171d74decfac28fed311333308cfdc2126a85e6ac29e1cb007141",
       "exit_code": 0
     }
-  ]
+  ],
+  "borrowed_rgb_signature": {
+    "default_unstable": null,
+    "generics": {
+      "params": [],
+      "where_predicates": []
+    },
+    "has_body": true,
+    "header": {
+      "abi": "Rust",
+      "is_async": false,
+      "is_const": true,
+      "is_unsafe": false
+    },
+    "sig": {
+      "inputs": [
+        [
+          "self",
+          {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          }
+        ]
+      ],
+      "is_c_variadic": false,
+      "output": {
+        "borrowed_ref": {
+          "is_mutable": false,
+          "lifetime": null,
+          "type": {
+            "array": {
+              "len": "3",
+              "type": {
+                "primitive": "f32"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "integrated_compiler_validation": {
+    "source_revision": "c65c1e9062a44395be7f495fdb07f012fedfef66",
+    "bindings": [
+      {
+        "path": "rustycad_tkernel::quantity::Color::<core::default::Default>::default",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color.rs",
+        "source_sha256": "bf045f54e9dcef58b1f105d4a18c048c3259bde5208bffd6436ec59d0fb610a4",
+        "declaration_sha256": "c7c134d4ae9bb74a03100de90bd5107f34ba69a97588a2224a7d3e7cba49fd7c"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::rgb_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color.rs",
+        "source_sha256": "bf045f54e9dcef58b1f105d4a18c048c3259bde5208bffd6436ec59d0fb610a4",
+        "declaration_sha256": "bf1846efa4fe18fdfe3b149de3828f87a457083565a8e26d93c0244a26668cc9"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_encoding.rs",
+        "source_sha256": "28b016bb0fa16af2a5f28e87cefec081950f0d5d9e33ab93a808b195bdc429fa",
+        "declaration_sha256": "143cae6e52c0ec64c9180a003c724b6df9f88c3291bb952c8deaffe3f2395c88"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3_f32",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_encoding.rs",
+        "source_sha256": "28b016bb0fa16af2a5f28e87cefec081950f0d5d9e33ab93a808b195bdc429fa",
+        "declaration_sha256": "988369a1c752f3641430d6ed09f087bec308df2d35902db5f41527303c75aa8c"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_encoding.rs",
+        "source_sha256": "28b016bb0fa16af2a5f28e87cefec081950f0d5d9e33ab93a808b195bdc429fa",
+        "declaration_sha256": "31089124b93e26c5954c615c57606d3599d6d430a57ddd8ffe6c239581474e8f"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3_f32",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_encoding.rs",
+        "source_sha256": "28b016bb0fa16af2a5f28e87cefec081950f0d5d9e33ab93a808b195bdc429fa",
+        "declaration_sha256": "a8942e60bf01fcda0e96ab9146cbffa5e79666a0833bb81143e0843021b221c9"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_codec.rs",
+        "source_sha256": "98e2ba3f43b51839a68cf6a62432f8a4cc429ff01ad52abbaa3050895e548ac9",
+        "declaration_sha256": "5433cf488d66a83b2769f57364835855899c71430b29fc84cd8a0b0bb65b1feb"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::ColorRgba::<core::default::Default>::default",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_rgba.rs",
+        "source_sha256": "e5b7899283fcd7dd21557ab85fc6da4bbd039be21d7611516669ae39fae8d685",
+        "declaration_sha256": "6cc0a7e1d0751c2f5c4898c0fe98c70d71da62d91820f5425f33eaebce3067bc"
+      },
+      {
+        "path": "rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/quantity/color_rgba_codec.rs",
+        "source_sha256": "3235e474457881742d9498fb4b9135b3cb40a8370cf051f4bd3fbf8599e69c5e",
+        "declaration_sha256": "49784f7dfdb2097890f0a96f72b68f3f562259c25bffa1f5791735056ce3bacc"
+      }
+    ],
+    "inventory_sha256": "05dd68c0412e5e18964ef6454a222d2a2ae3a87de27c18f04412d0c60691ddb7"
+  },
+  "native_fixture_sha256": "2307508acea416df5fed9e51f37649a72ca26ce5e06db16341b0b2863a69f597",
+  "native_expected_sha256": "5ab9314d54cbdd5a5bb39ff7f40347ee242d9f6f433ee37cde0675f2bf05175d",
+  "native_command": "g++ -std=c++17 -O2 -ffp-contract=off -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_color_borrowed_rgb.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/color-borrow-native",
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
 }
