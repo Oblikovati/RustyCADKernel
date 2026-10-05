@@ -15,7 +15,6 @@ pub use clocks::{CpuTimes, NativeCpuTimes, NativeWallClock, WallClock};
 pub use osd_statics::Osd;
 pub use real_text::{c_string_to_real, real_to_c_string};
 pub use signals::{NativeSignalHost, SignalHost, SignalState};
-pub(crate) use sleep::sleep_milliseconds_with_platform;
 pub use sleep::{
     NativeSleeper, SleepRequest, Sleeper, milli_sec_sleep_duration, sec_sleep_duration,
 };

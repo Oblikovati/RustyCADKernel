@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "scope": "Unix OSD::SecSleep returns when native usleep is interrupted",
+  "base_revision": "0fbd0e2190590fb79d4181a8eb4307fcbc9adc48",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source": {
+    "OSD.cxx": "af393d2669e99070b06e6251b13ecaf587b48bef336cdac60fe1b9e80c3ed6bc",
+    "OSD.hxx": "8ad909da352efe2c6cb6a6c34ed40f2e7243e9e9378716a7651fd93d8805ee7f"
+  },
+  "native_probe": {
+    "path": "tools/oracle/tkernel_osd_sec_sleep.cxx",
+    "sha256": "e76de2be126315ea075b00c844ba18a0f344ccd8fee61c0d2e09a14a15348223",
+    "expected_path": "tools/oracle/tkernel_osd_sec_sleep.expected",
+    "expected_sha256": "c9a8a3109d103690fe38d01878504c1106cf1ffeae20f2c3fe92388a862496a6",
+    "native_library_sha256": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b",
+    "observed": "positive_errno=4 alarm=1 returned=1; negative_errno=4 alarm=1 returned=1"
+  },
+  "rust_validation": {
+    "focused_commands": [
+      "cargo test -p rustycad-tkernel --test osd_sec_sleep_signal -- --nocapture",
+      "cargo test -p rustycad-tkernel --test osd_timing_api_behavior"
+    ],
+    "focused_passed": 15,
+    "focused_failed": 0,
+    "focused_log": "porting/runtime-evidence/tkernel-osd-sec-sleep-focused.log.gz",
+    "focused_log_sha256": "b64d3e872f012e0e2f1ff0b271ef246fcc5d4cf349f25fbc34ed102353eecd8e",
+    "full_package": {
+      "command": "cargo test -p rustycad-tkernel",
+      "groups": 160,
+      "passed": 2730,
+      "failed": 0,
+      "ignored": 0,
+      "log": "porting/runtime-evidence/tkernel-osd-sec-sleep-full-package.log.gz",
+      "log_sha256": "83b48e5ea6d5ed31f758545557e2c25702eab105817f036215a34acf94bbff81"
+    },
+    "checks": [
+      "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "cargo fmt --check",
+      "cargo check -p rustycad-tkernel --target x86_64-pc-windows-gnu"
+    ],
+    "rust_sources": {
+      "sleep.rs": "b830ec28aab47b8341f49fda840065d71f4eb3dbb8213974cf26996bd8b7e61c",
+      "native.rs": "a8c8f85a2847d2a18f9f2dc79f1f5f943bfe4f20e82920c0a6faaca7aab40c9b",
+      "osd_statics.rs": "aecc105ca3c40e3a25da8fce6969a1afa738f71b9ccc578a9389ffbf4ab0d36a",
+      "signal_test.rs": "142b0447059f67ed44e796a1d196dacf080a5b4e0de48349e1908eebe28bf698"
+    }
+  },
+  "behavior": [
+    "Pinned Unix OSD::SecSleep calls usleep with the native integer product and ignores its result.",
+    "A signal directed to the sleeping thread interrupts the native call and returns early.",
+    "The Rust NativeSleeper now uses usleep on Unix; injected Sleeper implementations keep their existing Duration callback.",
+    "The Windows Sleep implementation was cross-compiled but not runtime tested."
+  ],
+  "limits": [
+    "Only the positive 30-second input is the defined regression; signed integer overflow inputs are not claimed.",
+    "The negative -1 native sample is exploratory pinned-glibc evidence for a useconds_t value outside the POSIX range.",
+    "Osd::sec_sleep_with(custom_sleeper, ...) remains a Rust injection surface and does not model signals unless that sleeper chooses to."
+  ]
+}
