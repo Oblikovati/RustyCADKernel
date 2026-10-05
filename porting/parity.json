@@ -85091,33 +85091,33 @@
       "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
       "status": "implemented",
-      "notes": "The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Bounded Rust equivalent scans to the first zero; None models the native null-pointer no-op. Verified with the pinned UTF-16 pointer fixture."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
       "status": "implemented",
-      "notes": "Operator form (std::ops::AddAssign). The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Bounded Rust equivalent scans to the first zero; None models the native null-pointer no-op. Verified with the pinned UTF-16 pointer fixture."
     },
     {
       "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
       "status": "implemented",
-      "notes": "The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
+      "notes": "Bounded Rust equivalent scans the array to the first zero, matching extStringLen in the native array-template body. Verified with embedded-zero and trailing-zero fixture input."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
       "status": "implemented",
-      "notes": "Operator form (std::ops::AddAssign). The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
+      "notes": "Bounded Rust equivalent scans the array to the first zero, matching extStringLen in the native array-template body. Verified with embedded-zero and trailing-zero fixture input."
     },
     {
       "upstream_id": "TCollection_ExtendedString::AssignCat(const std::u16string_view&)",
@@ -85155,9 +85155,9 @@
       "upstream_id": "TCollection_ExtendedString::operator+(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_c_units",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Bounded Rust equivalent scans to the first zero; None models native extStringLen(nullptr)==0 and yields an unchanged copy. Verified with the pinned pointer fixture."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Cat(int) const",

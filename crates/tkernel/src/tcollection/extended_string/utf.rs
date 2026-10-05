@@ -83,11 +83,7 @@ pub(super) fn utf32_to_utf16(values: &[u32]) -> Vec<u16> {
 /// Converts UTF-16 up to the first zero unit to UTF-8 like `ToUTF8CString`: pairs combine,
 /// unpaired surrogates are dropped; `utf16_to_utf8(&[0xD83D, 0xDE00])`.
 pub(super) fn utf16_to_utf8(units: &[u16]) -> String {
-    let end = units
-        .iter()
-        .position(|&unit| unit == 0)
-        .unwrap_or(units.len());
-    char::decode_utf16(units[..end].iter().copied())
+    char::decode_utf16(c_units_prefix(units).iter().copied())
         .filter_map(Result::ok)
         .collect()
 }
@@ -99,6 +95,16 @@ pub(super) fn c_string_prefix(bytes: &[u8]) -> &[u8] {
         .position(|&byte| byte == 0)
         .unwrap_or(bytes.len());
     &bytes[..end]
+}
+
+/// Returns the part read by an OCCT `const char16_t*` overload;
+/// `c_units_prefix(&[65, 0, 66]) == &[65]`.
+pub(super) fn c_units_prefix(units: &[u16]) -> &[u16] {
+    let end = units
+        .iter()
+        .position(|&unit| unit == 0)
+        .unwrap_or(units.len());
+    &units[..end]
 }
 
 #[cfg(test)]

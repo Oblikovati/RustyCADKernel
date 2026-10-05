@@ -1,0 +1,95 @@
+{
+  "scope": "ExtendedString UTF-16 null-terminated concatenation overloads",
+  "base_commit": "9b52b0d61e1ed4a1a6fe82894a074094940f4c3c",
+  "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_hashes": {
+    "TCollection_ExtendedString.hxx": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "TCollection_ExtendedString.cxx": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+  },
+  "mappings": [
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t* const)",
+      "cpp_id": "bc52df4f05bf03391e24a04d9a84b4af3c4bae7807f6c9d486c369b6338ce2e4",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
+      "status": "implemented",
+      "reason": "Native pointer overload ignores null and otherwise copies through extStringLen's first zero. The Rust bounded Option<&[u16]> adapter matches both behaviors."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t(&)[N])",
+      "cpp_id": "3f89447645c41dcbc8adf49f2371e99ca6dfd5556c8c64a7cf24098e348f1350",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
+      "status": "implemented",
+      "reason": "The native array template calls extStringLen; the bounded Rust slice adapter stops at the first zero."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(const char16_t* const) const",
+      "cpp_id": "90e5d662c94bf6004c901b2ab169a4ba748d8c9ed54cb407d98c6aae2c468f06",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_c_units",
+      "status": "implemented",
+      "reason": "The pointer overload uses extStringLen and Cat(pointer, length); a null pointer has length zero and returns an unchanged copy."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t* const)",
+      "cpp_id": "e7e51a7c75b0f935e1de25c98898901879a243d3a9cf389fcfaee49df69e2c57",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
+      "status": "implemented",
+      "reason": "Native pointer AssignCat ignores null and copies to the first zero; None expresses its null no-op."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t(&)[N])",
+      "cpp_id": "d2383556dedbf35b3dc2701b3b226356a358a35563bf850297bd340495abdcd1",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_c_units",
+      "status": "implemented",
+      "reason": "The native array template calls extStringLen; the bounded Rust adapter stops at the first zero."
+    }
+  ],
+  "behavior": {
+    "nul_terminated_inputs": "All pointer and array paths stop at first zero.",
+    "null_pointer": "operator+= is a no-op; operator+ returns an unchanged copy.",
+    "explicit_span": "The separate std::u16string_view overload preserves embedded zero units. Rust's slice-based assign_cat/cat keeps that full-span behavior.",
+    "rust_api_limit": "Pointer inputs are safely represented as Option<&[u16]>; the caller supplies the readable bound. Reading an unterminated native pointer beyond accessible storage is not modeled."
+  },
+  "native_evidence": {
+    "fixture": "tools/oracle/tkernel_extended_string_c_units.cxx",
+    "fixture_sha256": "ea3ce588264047f3a66b1e613a07e08281555ebd8a2eb1be6b8ca10a8ee7dbb8",
+    "expected": "tools/oracle/tkernel_extended_string_c_units.expected",
+    "expected_sha256": "ee67d249054e0922a8654a852dba6fba63601d6b957af7fead4015fe460a3b21",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "output_matches_expected": true,
+    "output": [
+      "array_append 2 00580041",
+      "pointer_append 2 00580041",
+      "assign_array 2 00580041",
+      "assign_pointer 2 00580041",
+      "view_append 4 0058004100000042",
+      "array_plus 2 00580041",
+      "plain_append 3 005800420043",
+      "null_append 1 0058",
+      "null_plus 1 0058"
+    ]
+  },
+  "rust_evidence": {
+    "regression": "crates/tkernel/tests/extended_string_c_units.rs",
+    "regression_sha256": "1eb50b1e6c6cbf4ba67325fb5e785fdbff8a41b629339c58762c7f05f0cb5c05",
+    "legacy_suite": "cargo test -p rustycad-tkernel --test tcollection_extended_string",
+    "legacy_suite_passed": 105,
+    "supplemental_passed": 4,
+    "doctests_passed": 245,
+    "aggregate_tests_passed": 354,
+    "aggregate_tests_failed": 0,
+    "aggregate_test_groups": 3,
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "strict_clippy_exit_code": 0,
+    "test_log": "porting/runtime-evidence/extended-string-c-units-tests.log.gz",
+    "test_log_sha256": "fd6ab458db58da968505e72bd8cbfb77606b90d1c31f9bdd250ac7a59e05fad1",
+    "clippy_log": "porting/runtime-evidence/extended-string-c-units-clippy.log",
+    "clippy_log_sha256": "5f2bc0f578cdc0add62c44db23fef210a3411b1179c4e5a660f4ccba7e22b746"
+  },
+  "implementation_hashes": {
+    "append_rs": "dfbe3003fb5561cbd70cdc8c40b1d9954379384ba710fd9e8e406c07b2b8b265",
+    "utf_rs": "86495b7e57a9a0428bbfd3e2f84f1b91bb94311e4bb0585e792c75b4959a5a01",
+    "extended_string_rs": "baafd0c1e4ac976a4ad99aff8cdb0e88c3cf83ffd472f55cf4c3751a96807809"
+  },
+  "inventory_policy": "Only the five listed parity rows are retargeted in this isolated branch; no inventory capture or global snapshot is edited. A fresh rustdoc capture is needed to validate unique Rust-path matching for the new methods.",
+  "parity_sha256": "1fa9291f87bb1a0a90fc564f8a9b9d6e7960adb288496b7e5d56cc5ede20a926"
+}
