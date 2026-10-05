@@ -1,0 +1,135 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "ExtendedString pointer SetValue defined self-overlap and Insert self-alias boundary",
+  "base_commit": "be75f8c78fd6a3c361ca5fb3b1dc84c5595ce452",
+  "occt": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "header": {
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda"
+    },
+    "implementation": {
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+      "sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+    },
+    "standard_reallocate": {
+      "path": "src/FoundationClasses/TKernel/Standard/Standard.cxx",
+      "sha256": "7c50331e36a64ca1aaff7005536bb7b98cb627060edb2049362418d2c7a0dfee"
+    },
+    "allocation_configuration": "Pinned modeling-full TKernel flags define no OCCT_MMGT_OPT_* allocator override; Standard::Reallocate therefore uses the source default realloc path.",
+    "library": {
+      "path": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+      "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    },
+    "source_behavior": {
+      "SetValue": "The pointer wrapper computes extStringLen before calling SetValue(where,pointer,length). The implementation does not reallocate when where-1+length <= myLength and copies one unit at a time in increasing index order, so self-overlap can change later source reads.",
+      "Insert": "The pointer wrapper computes extStringLen and delegates to the explicit-length overload. That implementation calls reallocate(myLength+length) before reading/copying the source pointer; same-object alias input is not a defined behavior contract after reallocation.",
+      "Standard::Reallocate": "The pinned build uses Standard::Reallocate default branch backed by realloc; successful reallocation invalidates old pointer values, so no native self-alias output is asserted for Insert or growing SetValue."
+    },
+    "source_lines": {
+      "Insert_pointer_wrapper": "TCollection_ExtendedString.hxx:451-454",
+      "Insert_explicit_length": "TCollection_ExtendedString.cxx:602-634",
+      "SetValue_pointer_wrapper": "TCollection_ExtendedString.hxx:725-728",
+      "SetValue_explicit_length": "TCollection_ExtendedString.cxx:958-980",
+      "reallocate": "TCollection_ExtendedString.cxx:1231-1255",
+      "Standard_Reallocate": "Standard.cxx:427-449"
+    },
+    "build_flags": {
+      "path": "target/occt-modeling-full/src/FoundationClasses/TKernel/CMakeFiles/TKernel.dir/flags.make",
+      "sha256": "856b97d4694fe98933433da341e1742abefce30e09ca4d65ebff19dc4bc2abcd",
+      "cxx_defines": "-DOCC_CONVERT_SIGNALS -DTKernel_EXPORTS"
+    }
+  },
+  "declarations": [
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const)",
+      "compiler_id": "2ea7152ae677864928857c5314e16a597eb0a038b8c9c9ccb7752d72e5d64a3a",
+      "rust_items": [
+        "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units",
+        "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units_from_self"
+      ],
+      "status": "implemented",
+      "scope_note": "The bounded-slice adapter covers null and external-pointer paths. The offset adapter reproduces non-growing self-pointer calls, including forward-overlap effects. A self-pointer write that would extend Length is rejected as Standard_NotImplemented because native SetValue reallocates before reading that pointer; this is a native undefined domain, not claimed behavior."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const)",
+      "compiler_id": "489cde68dc85ea884fd94eee89846c415d2aca38cbd075be4df422c95f522788",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_c_units",
+      "status": "implemented",
+      "scope_note": "The bounded-slice adapter covers the null and external-pointer paths. Self-pointer calls are excluded: native Insert reallocates before reading the pointer, which invalidates a same-object source under the pinned allocator contract."
+    }
+  ],
+  "rustdoc": {
+    "toolchain": "nightly-2026-09-25",
+    "raw_capture": "target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "292e0d35296e3f49c62d3b61deb7739486d02fd1890455fed40520189e31a10f",
+    "format_version": 61,
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "reachable_candidates": {
+      "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units": 1,
+      "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units_from_self": 1,
+      "rustycad_tkernel::tcollection::ExtendedString::insert_c_units": 1
+    },
+    "raw_item_ids": {
+      "set_value_c_units": "19439",
+      "set_value_c_units_from_self": "19440",
+      "insert_c_units": "19435"
+    },
+    "implementation_sha256": "ba14ea483e10c61ba90126e94b07b3318705a226d5499522b93b16b29a572f1e",
+    "supplemental_target": "extended_string_c_units_mutations",
+    "supplemental_test_source_sha256": "f822f05451007d939606ae7b9d67e9cbdb1c20aa4ab83304819c2d58bdca5ecd"
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_extended_string_self_setvalue.cxx",
+    "source_sha256": "a760e980960b5e38baf003ae2bb83bb40b568b475bb2675457cd173ec1ed9b9d",
+    "expected": "tools/oracle/tkernel_extended_string_self_setvalue.expected",
+    "expected_sha256": "5a16166725432b77b34018877c1550d400731736f2fdcd1e0330749801a437dc",
+    "binary_sha256": "58a277b296ac741f6f6e9fcdafcc19addf692636ac98f546cd58febcc642e04e",
+    "probe_log": "porting/runtime-evidence/extended-string-self-setvalue-native-probe.log.gz",
+    "probe_log_sha256": "4e71d842c6ed04c2d4e523a6f937d60ae8e288669561232e0c24af36f06203c3",
+    "original_gtest_filter": "TCollection_ExtendedStringTest.*",
+    "original_gtest_log": "porting/runtime-evidence/extended-string-self-setvalue-native-gtest.log.gz",
+    "original_gtest_log_sha256": "a295972010550ffba61d41bd1bde093ac3e4695b6c54f0d236e4c94fc812265d",
+    "original_gtest_result": "105 passed, 0 failed",
+    "observations": [
+      "Self SetValue writes target-after-source overlap in increasing index order; earlier writes are subsequently observed as source units.",
+      "Self SetValue target-before-source overlap copies the original suffix without altering later source values.",
+      "A pointer at the receiver terminator is an empty input and leaves the string unchanged when index is valid.",
+      "An empty source pointer still reaches native index validation first and invalid index 0 raises Standard_OutOfRange with the pinned message.",
+      "No output was collected for self-alias Insert or growing self-alias SetValue because the native source reallocates before using the old pointer."
+    ],
+    "test_executable_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "rust_validation": {
+    "focused_command": "cargo test -p rustycad-tkernel --test tcollection_extended_string --test extended_string_c_units_mutations",
+    "focused_log": "porting/runtime-evidence/extended-string-self-setvalue-focused.log.gz",
+    "focused_log_sha256": "d1004441eb621f9187382fe96aac896e5e5f13768deaa2c97d8bdce6be62da48",
+    "focused_result": "114 passed (105 original-mapped test cases plus 9 supplemental tests), 0 failed",
+    "full_command": "cargo test -p rustycad-tkernel",
+    "full_log": "porting/runtime-evidence/extended-string-self-setvalue-tkernel-tests.log.gz",
+    "full_log_sha256": "cb4286807e39407227a48e43b6e500d3cbace98a9a3ccdf4a8358910cba476d9",
+    "full_summary": {
+      "passed": 2937,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 198,
+      "failed_result_groups": 0,
+      "command_exit_code": 0,
+      "command_succeeded": true
+    },
+    "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-self-setvalue-clippy.log.gz",
+    "clippy_log_sha256": "702c3e5940b888e69c4ceba67a14e4592bf8c46a73f1384cef3135af3ffe631d",
+    "clippy_exit_code": 0,
+    "fmt": "cargo fmt --all -- --check",
+    "fmt_exit_code": 0
+  },
+  "parity_sha256": "ddc69d6fe4526210d139153c5c5681a34904ee42778e26cf42a5614bf8e890a0",
+  "limitations": [
+    "Insert same-object self aliasing is excluded because the native implementation reallocates before reading its source pointer; no output from an invalidated pointer is used as an oracle.",
+    "The self SetValue offset API accepts source offsets in the current logical code-unit storage, including the terminator, and refuses an operation that would extend the old Length. External pointer buffers remain modeled by Option<&[u16]>.",
+    "The Rust NotImplemented error for a growing self-alias is a safe refusal for a native undefined domain, not a reproduced OCCT exception."
+  ],
+  "supersedes_previous_assessment": "porting/audits/extended-string-cstring-mutations.json: its Insert and SetValue self-aliasing limitation notes predate this defined SetValue adapter and the source audit that excludes reallocating self-alias calls."
+}

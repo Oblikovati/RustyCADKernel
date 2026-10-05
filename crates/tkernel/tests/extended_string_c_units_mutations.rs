@@ -101,3 +101,45 @@ fn prepend_self_rejects_offsets_beyond_the_terminator() {
     assert!(error.to_string().contains("expected 0..=3"));
     assert_eq!(value.as_utf16(), &[65, 66, 67]);
 }
+
+#[test]
+fn set_value_self_preserves_native_forward_overlap_order() {
+    let mut target_after_source = embedded_self_source();
+    target_after_source
+        .set_value_c_units_from_self(2, 0)
+        .unwrap();
+    assert_eq!(target_after_source.as_utf16(), &[97, 97, 97, 97, 97, 101]);
+
+    let mut target_before_source = embedded_self_source();
+    target_before_source
+        .set_value_c_units_from_self(1, 2)
+        .unwrap();
+    assert_eq!(target_before_source.as_utf16(), &[99, 100, 99, 100, 0, 101]);
+}
+
+#[test]
+fn set_value_self_accepts_terminator_and_rejects_invalid_positions() {
+    let mut value = embedded_self_source();
+    let unchanged = value.clone();
+    value.set_value_c_units_from_self(7, 6).unwrap();
+    assert_eq!(value, unchanged);
+
+    let failure = value.set_value_c_units_from_self(0, 6).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_OutOfRange");
+    assert!(failure.message().contains("theWhere 0"));
+}
+
+#[test]
+fn set_value_self_rejects_native_reallocation_alias_domain() {
+    let mut value = embedded_self_source();
+    let failure = value.set_value_c_units_from_self(4, 0).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+    assert!(failure.message().contains("end <= Length() 6"));
+    assert_eq!(value.as_utf16(), &[97, 98, 99, 100, 0, 101]);
+}
+
+fn embedded_self_source() -> ExtendedString {
+    let mut value = ExtendedString::default();
+    value.copy([97, 98, 99, 100, 0, 101]);
+    value
+}

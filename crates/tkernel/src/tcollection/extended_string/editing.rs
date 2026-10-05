@@ -57,13 +57,7 @@ impl ExtendedString {
     /// replacement runs past its end; `text.set_value_units(2, &[65, 66])?`.
     pub fn set_value_units(&mut self, index: i32, units: impl AsRef<[u16]>) -> Result<(), Failure> {
         let units = units.as_ref();
-        if index < 1 || index > self.length() + 1 {
-            return Err(out_of_range(
-                "TCollection_ExtendedString::SetValue : parameter theWhere",
-                format_args!("theWhere {index}; expected 1..={}", self.len() + 1),
-            ));
-        }
-        let at = offset(index);
+        let at = self.set_value_position(index)?;
         let end = (at + units.len()).max(self.len());
         self.terminated.resize(end + 1, 0);
         self.terminated[at..at + units.len()].copy_from_slice(units);
@@ -89,6 +83,26 @@ impl ExtendedString {
             return self.set_value_units(index, []);
         };
         self.set_value_units(index, utf::c_units_prefix(units))
+    }
+    /// Replays native forward overlap from a receiver offset when the write stays within `Length()`;
+    /// `text.set_value_c_units_from_self(2, 0)?` on `[65, 66, 0, 67]`.
+    /// Extending self-alias writes are refused because native `SetValue` reallocates first.
+    pub fn set_value_c_units_from_self(
+        &mut self,
+        index: i32,
+        source_start: usize,
+    ) -> Result<(), Failure> {
+        let target_start = self.set_value_position(index)?;
+        let source_length = self.self_c_units_length(source_start)?;
+        let target_end = target_start + source_length;
+        if target_end > self.len() {
+            return Err(crate::standard::exceptions::not_implemented(&format!(
+                "TCollection_ExtendedString::SetValue self range {target_start}..{target_end}; expected end <= Length() {}",
+                self.len()
+            )));
+        }
+        self.copy_self_units_in_order(target_start, source_start, source_length);
+        Ok(())
     }
     /// Erases `count` units from a one-based position; the position must be in 1..=len and
     /// the range must end inside the string; `text.remove(2, 2)?`.
@@ -195,6 +209,32 @@ impl ExtendedString {
                 self.len() + 1
             ),
         )
+    }
+    fn set_value_position(&self, index: i32) -> Result<usize, Failure> {
+        if index < 1 || index > self.length() + 1 {
+            return Err(out_of_range(
+                "TCollection_ExtendedString::SetValue : parameter theWhere",
+                format_args!("theWhere {index}; expected 1..={}", self.len() + 1),
+            ));
+        }
+        Ok(offset(index))
+    }
+    fn self_c_units_length(&self, source_start: usize) -> Result<usize, Failure> {
+        let Some(source) = self.terminated.get(source_start..=self.len()) else {
+            return Err(out_of_range(
+                "TCollection_ExtendedString::SetValue self source",
+                format_args!("start {source_start}; expected 0..={}", self.len()),
+            ));
+        };
+        Ok(source
+            .iter()
+            .position(|&unit| unit == 0)
+            .unwrap_or(source.len()))
+    }
+    fn copy_self_units_in_order(&mut self, target_start: usize, source_start: usize, count: usize) {
+        for index in 0..count {
+            self.terminated[target_start + index] = self.terminated[source_start + index];
+        }
     }
     /// Checks Insert's position in the order OCCT raises: too big, then below one.
     fn check_insert_position(&self, index: i32) -> Result<(), Failure> {
