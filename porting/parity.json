@@ -86707,17 +86707,17 @@
       "upstream_id": "TCollection_AsciiString::Copy(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy_c_string",
+      "status": "implemented",
+      "notes": "Copies the nullable C-string prefix; null clears the destination, and embedded NUL truncates the copy."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator=(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). operator= is the named method copy. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy_c_string",
+      "status": "implemented",
+      "notes": "Named Rust equivalent of Copy/assignment from a nullable C string; null clears and embedded NUL truncates."
     },
     {
       "upstream_id": "TCollection_AsciiString::Copy(const std::string_view&)",
@@ -86739,17 +86739,17 @@
       "upstream_id": "TCollection_AsciiString::Copy(const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy_literal",
+      "status": "implemented",
+      "notes": "Matches the array overload using strlen: copies through the first NUL, including when it appears before the array terminator."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator=(const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). operator= is the named method copy. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy_literal",
+      "status": "implemented",
+      "notes": "Named Rust equivalent of assignment from a char array; copies the C-string prefix through its first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::Copy(const TCollection_AsciiString&)",
@@ -86891,9 +86891,9 @@
       "upstream_id": "TCollection_AsciiString::Insert(int,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_c_string",
+      "status": "implemented",
+      "notes": "A null C-string pointer is a no-op before position validation; a non-null pointer inserts only its prefix before the first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::Insert(int,const std::string_view&)",
@@ -86907,9 +86907,9 @@
       "upstream_id": "TCollection_AsciiString::Insert(int,const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_literal",
+      "status": "implemented",
+      "notes": "Matches the array overload using strlen; only the prefix before the first NUL is inserted."
     },
     {
       "upstream_id": "TCollection_AsciiString::InsertAfter(int,const char* const,int)",
@@ -86931,9 +86931,9 @@
       "upstream_id": "TCollection_AsciiString::InsertAfter(int,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_after",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_after_c_string",
+      "status": "implemented",
+      "notes": "A null pointer is a no-op before index validation; a non-null C string inserts only the prefix before its first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::InsertAfter(int,const std::string_view&)",
@@ -86947,9 +86947,9 @@
       "upstream_id": "TCollection_AsciiString::InsertAfter(int,const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_after",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_after_literal",
+      "status": "implemented",
+      "notes": "Matches the array overload using strlen; only the prefix before the first NUL is inserted."
     },
     {
       "upstream_id": "TCollection_AsciiString::InsertBefore(int,const char* const,int)",
@@ -86971,9 +86971,9 @@
       "upstream_id": "TCollection_AsciiString::InsertBefore(int,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_before",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_before_c_string",
+      "status": "implemented",
+      "notes": "A null pointer is a no-op before index validation; a non-null C string inserts only the prefix before its first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::InsertBefore(int,const std::string_view&)",
@@ -86987,9 +86987,9 @@
       "upstream_id": "TCollection_AsciiString::InsertBefore(int,const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_before",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_before_literal",
+      "status": "implemented",
+      "notes": "Matches the array overload using strlen; only the prefix before the first NUL is inserted."
     },
     {
       "upstream_id": "TCollection_AsciiString::IsEmpty() const",
