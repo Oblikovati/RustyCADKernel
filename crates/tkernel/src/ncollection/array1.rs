@@ -283,6 +283,14 @@ impl<T> Array1<'_, T> {
 }
 
 impl<T: Clone> Array1<'_, T> {
+    /// Assigns borrowed data in owned or mutable-buffer storage; `array.set_value_ref(1, &value)?`.
+    pub fn set_value_ref(&mut self, index: i32, value: &T) -> Result<(), super::ArrayError> {
+        self.change_value(index)?.clone_from(value);
+        Ok(())
+    }
+}
+
+impl<T: Clone> Array1<'_, T> {
     /// Fills the existing range; `Array1::<i32>::with_size(3).init(42)`.
     pub fn init(&mut self, value: T) {
         self.init_ref(&value);
