@@ -49,6 +49,11 @@ impl From<&[u8]> for AsciiString {
         Self::from_raw(bytes)
     }
 }
+impl<const N: usize> From<&[u8; N]> for AsciiString {
+    fn from(bytes: &[u8; N]) -> Self {
+        Self::from_raw(super::c_string_prefix(bytes))
+    }
+}
 /// `std::hash<TCollection_AsciiString>` feeds [`AsciiString::hash_code`] to the hasher.
 impl std::hash::Hash for AsciiString {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {

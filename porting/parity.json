@@ -86500,16 +86500,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The overloads collapse to one item taking impl Into<AsciiString>: &str converts as a C string (through its first NUL), a byte slice as an explicit span, an AsciiString as its full span, u8 as a char (NUL appends nothing), i32 as %d, f64 as %g and &ExtendedString as UTF-8. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "status": "implemented",
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator+=(const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<T>>::add_assign",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "status": "implemented",
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
     },
     {
       "upstream_id": "TCollection_AsciiString::Capitalize()",
@@ -86660,16 +86660,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "status": "implemented",
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator+(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
-      "status": "partial",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. C-string/literal byte-domain gap: the current byte-span adapter can retain bytes after NUL where native strlen truncates them. Array-reference selector matching does not establish behavioral equivalence; explicit prefix adapters remain pending."
+      "status": "implemented",
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
     },
     {
       "upstream_id": "TCollection_AsciiString::Center(int,char)",

@@ -1,5 +1,5 @@
 //! `AssignCat`, `Cat`, `Prepend` and their operators.
-use super::AsciiString;
+use super::{AsciiString, c_string_prefix};
 use crate::tcollection::ExtendedString;
 
 impl AsciiString {
@@ -75,7 +75,7 @@ cat_through_assign!(
 );
 impl<const N: usize> CatOperand for &[u8; N] {
     fn cat_onto(self, base: &AsciiString) -> AsciiString {
-        self.as_slice().cat_onto(base)
+        base.cat(c_string_prefix(self.as_slice()))
     }
 }
 impl<T: CatOperand> std::ops::Add<T> for &AsciiString {
