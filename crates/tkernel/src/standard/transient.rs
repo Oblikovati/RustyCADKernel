@@ -91,11 +91,11 @@ impl RuntimeTyped for StandardTransient {
         static DESCRIPTOR: OnceLock<Handle<RuntimeType>> = OnceLock::new();
         DESCRIPTOR
             .get_or_init(|| {
-                Handle::from_static(RuntimeType::register::<Self>(
+                RuntimeType::register_owned::<Self>(
                     Self::TYPE_NAME,
                     std::mem::size_of::<Self>(),
                     None,
-                ))
+                )
             })
             .get()
             .expect("registered descriptor")
@@ -136,11 +136,10 @@ macro_rules! impl_transient {
                 static DESCRIPTOR: std::sync::OnceLock<$crate::standard::Handle<$crate::standard::RuntimeType>> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::Handle::from_static(
-                        $crate::standard::RuntimeType::register_with_interfaces::<Self>(
+                    $crate::standard::RuntimeType::register_owned_with_interfaces::<Self>(
                             $name,
                             std::mem::size_of::<Self>(),
-                            Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                            Some(<$parent as $crate::standard::RuntimeTyped>::static_type_handle()),
                             vec![$($crate::standard::InterfaceEntry::new(
                                 $crate::standard::InterfaceCaster::<$interface>::new(|object| {
                                     let concrete: &$class =
@@ -148,8 +147,7 @@ macro_rules! impl_transient {
                                     Some(concrete as &$interface)
                                 }),
                             )),*],
-                        ),
-                    )
+                        )
                 }).get().expect("registered descriptor")
             }
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
@@ -191,14 +189,13 @@ macro_rules! impl_transient_interface {
                 > = std::sync::OnceLock::new();
                 DESCRIPTOR
                     .get_or_init(|| {
-                        let parent: &'static $crate::standard::RuntimeType =
-                            <$parent as $crate::standard::RuntimeTyped>::static_type();
-                        $crate::standard::Handle::from_static(
-                            $crate::standard::RuntimeType::register::<Self>(
-                                $name,
-                                parent.size(),
-                                Some(parent),
-                            ),
+                        let parent =
+                            <$parent as $crate::standard::RuntimeTyped>::static_type_handle();
+                        let size = parent.get().expect("parent descriptor").size();
+                        $crate::standard::RuntimeType::register_owned::<Self>(
+                            $name,
+                            size,
+                            Some(parent),
                         )
                     })
                     .get()

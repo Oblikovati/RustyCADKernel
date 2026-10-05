@@ -84469,15 +84469,15 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::register",
       "status": "partial",
-      "notes": "The raw registry remains first-registration-wins, keyed by Rust TypeId (C++ keys by typeid name), and copies names up to NUL. Register itself does not own the new descriptor; class static handles provide the baseline count, and each descriptor owns its parent handle. Rust leaks registry descriptors to keep stable addresses, so explicit registration/destruction lifetime parity remains partial. See porting/audits/runtime-type-owning-descriptors.json."
+      "notes": "The legacy borrowed Rust register path preserves first-registration-wins by TypeId, NUL-clipped names and native raw refcount zero; it pins storage for process lifetime for safe static borrows. Additional register_owned/register_owned_with_interfaces APIs reproduce owned registration: live first registration wins, final handle drop unbinds, and parent handles release with the descriptor. The C++ raw-pointer signature and legacy borrowed destruction remain partial. See porting/audits/runtime-type-register-owned-lifecycle.json."
     },
     {
       "upstream_id": "Standard_Type::~Standard_Type()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
-      "rust_item": null,
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::drop",
       "status": "partial",
-      "notes": "Native destruction unregisters and releases the descriptor. Rust currently leaks descriptors to preserve stable registry addresses and does not reproduce explicit destruction/unregistration. Static class handles and parent ownership counts are covered; full lifetime parity is not. See porting/audits/runtime-type-owning-descriptors.json."
+      "notes": "Owned descriptors remove only their own registry entry on final drop and release their parent handle; native owned destruction/re-registration is probed. Legacy borrowed descriptors stay pinned, and native destructor is unsynchronized with lookup while Rust protects the registry. Static class descriptors remain process-lived. See porting/audits/runtime-type-register-owned-lifecycle.json."
     },
     {
       "upstream_id": "Standard_Type::DEFINE_STANDARD_RTTIEXT(Standard_Type,Standard_Transient)",

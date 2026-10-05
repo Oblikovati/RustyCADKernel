@@ -74,6 +74,13 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
             projected: PhantomData,
         }
     }
+    /// Clone shared storage without changing the embedded OCCT reference count.
+    pub(super) fn clone_storage_owner(&self) -> Option<Arc<dyn Transient>> {
+        match self.owner.as_ref()? {
+            Owner::Shared(owner) => Some(Arc::clone(owner)),
+            Owner::Static(_) => None,
+        }
+    }
     /// Check for absent ownership; `handle.is_null()`.
     pub fn is_null(&self) -> bool {
         self.owner.is_none()

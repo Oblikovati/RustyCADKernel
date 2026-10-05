@@ -12,11 +12,10 @@
 use super::{Handle, StandardTransient, Transient};
 use std::{
     any::{Any, TypeId},
-    collections::HashMap,
     fmt,
     io::{self, Write},
-    sync::{Mutex, OnceLock, PoisonError},
 };
+mod registry;
 /// Safe view change from a live object to an interface that it implements.
 ///
 /// The concrete class supplies the function, normally through `impl_transient!`;
@@ -53,35 +52,23 @@ impl InterfaceEntry {
 /// the interface casters of its abstract ancestors.
 pub struct RuntimeType {
     base: StandardTransient,
-    system_name: &'static str,
-    name: &'static str,
+    system_name: String,
+    name: String,
     size: usize,
     rust_type: TypeId,
-    parent: Option<&'static RuntimeType>,
-    _parent_handle: Option<Handle<RuntimeType>>,
+    parent: Option<Handle<RuntimeType>>,
     interfaces: Vec<InterfaceEntry>,
 }
 crate::impl_transient!(RuntimeType, "Standard_Type", StandardTransient, base);
-/// The process-wide registry behind `Standard_Type::Register`.
-type Registry = Mutex<HashMap<TypeId, &'static RuntimeType>>;
-/// Static owners for generic Rust classes whose monomorphized methods cannot share a local static.
-type StaticOwners = Mutex<HashMap<TypeId, Handle<RuntimeType>>>;
-fn registry() -> &'static Registry {
-    static REGISTRY: OnceLock<Registry> = OnceLock::new();
-    REGISTRY.get_or_init(Registry::default)
-}
-fn static_owners() -> &'static StaticOwners {
-    static OWNERS: OnceLock<StaticOwners> = OnceLock::new();
-    OWNERS.get_or_init(StaticOwners::default)
-}
 /// The bytes a C string argument holds: everything before the first NUL.
 pub(crate) fn c_prefix(text: &str) -> &str {
     text.split('\0').next().unwrap_or_default()
 }
 impl RuntimeType {
-    /// Returns the existing descriptor of `T`, or registers a new one with a deep copy
-    /// of `name` (up to its first NUL). As in C++, a second registration of the same class
-    /// returns the first descriptor unchanged, whatever name, size or parent it passes.
+    /// Return `T`'s borrowed descriptor, or register a deep copy of `name` through its first NUL.
+    /// Repeated calls keep the first metadata. Storage is pinned for this compatibility API
+    /// because its return type promises a process-long borrow; use `register_owned` when the
+    /// descriptor must unbind at final handle drop. Example: `RuntimeType::register::<T>("T", 8, None)`.
     /// `T` can be a trait object (`dyn MyTrait`) that stands for an abstract class.
     /// `RuntimeType::register::<MyClass>("MyClass", size_of::<MyClass>(), Some(parent))`.
     pub fn register<T: ?Sized + 'static>(
@@ -89,20 +76,24 @@ impl RuntimeType {
         size: usize,
         parent: Option<&'static RuntimeType>,
     ) -> &'static RuntimeType {
-        Self::register_with_interfaces::<T>(name, size, parent, Vec::new())
+        Self::register_legacy_borrowed::<T>(name, size, parent, Vec::new())
     }
     /// Keep one class-style owner for a descriptor registered by a generic Rust class;
     /// `RuntimeType::retain_class_descriptor::<MyGeneric<u32>>(descriptor)`.
     pub fn retain_class_descriptor<T: ?Sized + 'static>(
         descriptor: &'static RuntimeType,
     ) -> &'static RuntimeType {
-        let mut owners = static_owners()
-            .lock()
-            .unwrap_or_else(PoisonError::into_inner);
-        owners
-            .entry(TypeId::of::<T>())
-            .or_insert_with(|| Handle::from_static(descriptor));
-        descriptor
+        registry::retain_class_descriptor::<T>(descriptor)
+    }
+    /// Register or reuse an owned descriptor; final owner drop unbinds it unless a borrowed
+    /// compatibility call has pinned storage. Example: `RuntimeType::register_owned::<T>("T", 8, None)`.
+    /// `RuntimeType::register_owned::<T>("T", size_of::<T>(), Some(parent_handle))`.
+    pub fn register_owned<T: ?Sized + 'static>(
+        name: &str,
+        size: usize,
+        parent: Option<Handle<RuntimeType>>,
+    ) -> Handle<RuntimeType> {
+        Self::register_owned_with_interfaces::<T>(name, size, parent, Vec::new())
     }
     /// [`RuntimeType::register`] for a concrete class that also carries the interface
     /// casters of its abstract ancestors; a repeated registration ignores `interfaces`
@@ -114,24 +105,48 @@ impl RuntimeType {
         parent: Option<&'static RuntimeType>,
         interfaces: Vec<InterfaceEntry>,
     ) -> &'static RuntimeType {
-        let mut registered = registry().lock().unwrap_or_else(PoisonError::into_inner);
-        if let Some(existing) = registered.get(&TypeId::of::<T>()) {
-            return existing;
-        }
-        // The registry stores a raw descriptor pointer; class-level handles own its baseline.
-        let parent_handle = parent.map(Handle::from_static);
-        let descriptor: &'static RuntimeType = Box::leak(Box::new(Self {
+        Self::register_legacy_borrowed::<T>(name, size, parent, interfaces)
+    }
+    /// `register_owned` with interface casts for abstract class projections;
+    /// `RuntimeType::register_owned_with_interfaces::<T>("T", size_of::<T>(), None, Vec::new())`.
+    pub fn register_owned_with_interfaces<T: ?Sized + 'static>(
+        name: &str,
+        size: usize,
+        parent: Option<Handle<RuntimeType>>,
+        interfaces: Vec<InterfaceEntry>,
+    ) -> Handle<RuntimeType> {
+        registry::register_owned::<T>(name, size, parent, interfaces)
+    }
+    /// Pin an owned registration for `static_type()` compatibility and return its static borrow;
+    /// `RuntimeType::retain_class_descriptor_handle::<MyGeneric<u32>>(descriptor)`.
+    pub fn retain_class_descriptor_handle<T: ?Sized + 'static>(
+        descriptor: Handle<RuntimeType>,
+    ) -> &'static RuntimeType {
+        registry::retain_class_handle::<T>(descriptor)
+    }
+    pub(super) fn new<T: ?Sized + 'static>(
+        name: &str,
+        size: usize,
+        parent: Option<Handle<RuntimeType>>,
+        interfaces: Vec<InterfaceEntry>,
+    ) -> Self {
+        Self {
             base: StandardTransient::default(),
-            system_name: std::any::type_name::<T>(),
-            name: Box::leak(c_prefix(name).into()),
+            system_name: std::any::type_name::<T>().to_owned(),
+            name: c_prefix(name).to_owned(),
             size,
             rust_type: TypeId::of::<T>(),
             parent,
-            _parent_handle: parent_handle,
             interfaces,
-        }));
-        registered.insert(TypeId::of::<T>(), descriptor);
-        descriptor
+        }
+    }
+    fn register_legacy_borrowed<T: ?Sized + 'static>(
+        name: &str,
+        size: usize,
+        parent: Option<&'static RuntimeType>,
+        interfaces: Vec<InterfaceEntry>,
+    ) -> &'static RuntimeType {
+        registry::register_legacy_borrowed::<T>(name, size, parent, interfaces)
     }
     /// The descriptor of a registered class, as `Standard_Type::Instance<T>()`;
     /// `RuntimeType::instance::<StandardTransient>().name() == "Standard_Transient"`.
@@ -140,12 +155,12 @@ impl RuntimeType {
     }
     /// Rust's name of the registered type (C++ reports the mangled `typeid` name);
     /// `descriptor.system_name()`.
-    pub fn system_name(&self) -> &'static str {
-        self.system_name
+    pub fn system_name(&self) -> &str {
+        &self.system_name
     }
     /// Read the native spelling; `descriptor.name()`.
-    pub fn name(&self) -> &'static str {
-        self.name
+    pub fn name(&self) -> &str {
+        &self.name
     }
     /// Size in bytes of one instance of the Rust type; `descriptor.size()`.
     pub fn size(&self) -> usize {
@@ -156,8 +171,12 @@ impl RuntimeType {
         self.rust_type
     }
     /// Borrow the direct parent, if any; `descriptor.parent()`.
-    pub fn parent(&self) -> Option<&'static Self> {
-        self.parent
+    pub fn parent(&self) -> Option<&Self> {
+        self.parent.as_ref().and_then(Handle::get)
+    }
+    /// Borrow the native parent handle; `descriptor.parent_handle().map(Handle::get)`.
+    pub fn parent_handle(&self) -> Option<&Handle<RuntimeType>> {
+        self.parent.as_ref()
     }
     /// Find the caster that this class registered for interface `I`;
     /// `descriptor.interface_caster::<dyn MyTrait>()`.
@@ -197,6 +216,11 @@ impl RuntimeType {
     /// Writes the descriptor address and name, as `Print`; `descriptor.print(&mut out)?`.
     pub fn print(&self, stream: &mut impl Write) -> io::Result<()> {
         write!(stream, "{self}")
+    }
+}
+impl Drop for RuntimeType {
+    fn drop(&mut self) {
+        registry::remove_owned(self.rust_type, std::ptr::from_ref(self).cast());
     }
 }
 /// `Print` / `operator<<` format: `0x<descriptor address> : <name>`.
