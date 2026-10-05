@@ -160,6 +160,20 @@ impl<K: Clone, H: Clone> Clone for FlatMap<K, H> {
             table: self.table.clone(),
         }
     }
+    fn clone_from(&mut self, source: &Self) {
+        self.assign_returning(source);
+    }
+}
+impl<K: Clone, H: Clone> FlatMap<K, H> {
+    /// Copies after releasing destination keys and returns it, as `operator=`; `map.assign_returning(&source)`.
+    pub fn assign_returning(&mut self, source: &Self) -> &mut Self {
+        self.table.clone_from(&source.table);
+        self
+    }
+    /// Preserves self-assignment without creating aliased Rust borrows; `map.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
+    }
 }
 impl<'a, K> Iterator for FlatMapIter<'a, K> {
     type Item = &'a K;

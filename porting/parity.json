@@ -73520,12 +73520,16 @@
       "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap(const NCollection_FlatDataMap&)",
+      "upstream_id": "NCollection_FlatDataMap(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Copy event order now follows pinned OCCT: policy construction before slot copies; copy assignment destroys destination entries, assigns the retained policy, and copies cached slot metadata without rehashing. Native reference returns and self-assignment have safe Rust entry points. Generic address/layout, reentrant aliases, allocation failure and C++ exception unwinding remain unproven; see porting/audits/flat-copy-contracts.json.",
+      "selector_id": "f481f6a9ec307cd6a1cc61d3c0e9de4a1be18cca04ce547f108b7699c9fc759c",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap(NCollection_FlatDataMap&&)",
@@ -73544,12 +73548,18 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::operator=(const NCollection_FlatDataMap&)",
+      "upstream_id": "NCollection_FlatDataMap::operator=(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::assign_returning",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count. Copy event order now follows pinned OCCT: policy construction before slot copies; copy assignment destroys destination entries, assigns the retained policy, and copies cached slot metadata without rehashing. Native reference returns and self-assignment have safe Rust entry points. Generic address/layout, reentrant aliases, allocation failure and C++ exception unwinding remain unproven; see porting/audits/flat-copy-contracts.json.",
+      "selector_id": "b5d45326df45a023658b35a5a374fb7390c8d7f46915ce3b80c72dd376a959f3",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::assign_returning",
+        "rustycad_tkernel::ncollection::FlatDataMap::assign_self",
+        "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone_from"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::operator=(NCollection_FlatDataMap&&)",
@@ -74024,12 +74034,16 @@
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
     },
     {
-      "upstream_id": "NCollection_FlatMap(const NCollection_FlatMap&)",
+      "upstream_id": "NCollection_FlatMap(const NCollection_FlatMap<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Copy event order now follows pinned OCCT: policy construction before slot copies; copy assignment destroys destination entries, assigns the retained policy, and copies cached slot metadata without rehashing. Native reference returns and self-assignment have safe Rust entry points. Generic address/layout, reentrant aliases, allocation failure and C++ exception unwinding remain unproven; see porting/audits/flat-copy-contracts.json.",
+      "selector_id": "7ac2da92ae1460d3356e30bbaa075621d98cf90e90e75d30f5d4ba0a21d9be7d",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap(NCollection_FlatMap&&)",
@@ -74048,12 +74062,18 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_FlatMap::operator=(const NCollection_FlatMap&)",
+      "upstream_id": "NCollection_FlatMap::operator=(const NCollection_FlatMap<TheKeyType, Hasher> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::FlatMap as Clone>::clone_from",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::assign_returning",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Copy event order now follows pinned OCCT: policy construction before slot copies; copy assignment destroys destination entries, assigns the retained policy, and copies cached slot metadata without rehashing. Native reference returns and self-assignment have safe Rust entry points. Generic address/layout, reentrant aliases, allocation failure and C++ exception unwinding remain unproven; see porting/audits/flat-copy-contracts.json.",
+      "selector_id": "25474e2024c8e4848f16368b4e7dbdb2223075c8a4671dad958c9f4dab5a1b69",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::assign_returning",
+        "rustycad_tkernel::ncollection::FlatMap::assign_self",
+        "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone_from"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::operator=(NCollection_FlatMap&&)",

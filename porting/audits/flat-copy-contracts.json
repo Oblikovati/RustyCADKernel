@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "purpose": "Port flat set/dictionary copy construction and assignment policy/element event order and reference return contracts.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "eb7b512002b08478b82b5c18617704c47ac50211",
+  "baseline_red_provenance": "Four new supplemental regression tests added to the baseline worktree failed before production code edits; the baseline is not a clean test-only commit.",
+  "bindings": [
+    {
+      "selector": "NCollection_FlatDataMap(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
+      "cpp_id": "f481f6a9ec307cd6a1cc61d3c0e9de4a1be18cca04ce547f108b7699c9fc759c",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::operator=(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
+      "cpp_id": "b5d45326df45a023658b35a5a374fb7390c8d7f46915ce3b80c72dd376a959f3",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::assign_returning",
+        "rustycad_tkernel::ncollection::FlatDataMap::assign_self",
+        "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone_from"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap(const NCollection_FlatMap<TheKeyType, Hasher> &)",
+      "cpp_id": "7ac2da92ae1460d3356e30bbaa075621d98cf90e90e75d30f5d4ba0a21d9be7d",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::operator=(const NCollection_FlatMap<TheKeyType, Hasher> &)",
+      "cpp_id": "25474e2024c8e4848f16368b4e7dbdb2223075c8a4671dad958c9f4dab5a1b69",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::assign_returning",
+        "rustycad_tkernel::ncollection::FlatMap::assign_self",
+        "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone_from"
+      ],
+      "status": "partial"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/flat-copy-red.gz",
+      "sha256": "6e4147628f8d61259b3a3e6e39a126aec63447ae2585649b86a1a3494a3d5969",
+      "exit_code": 101
+    },
+    {
+      "path": "porting/runtime-evidence/flat-copy-green.gz",
+      "sha256": "c0c6a7aba6c67301fd4cd1d82121ce80b8282972805023f3310ed70ede7023b6",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-copy-native.actual.gz",
+      "sha256": "14bfdbf185a535b1f2bf17affd78c0c6c15a6b3ba0484303758a7d42c5f3fff9",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-copy-python.gz",
+      "sha256": "74a440f2255622fa6deed2099e062cc14124a89880fc1a281962213b132e3e30",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-copy-clippy.gz",
+      "sha256": "aa6e3d32b6f76fceefb98813e31f7405ae939fe102b6a6b50f165421e3ff2878",
+      "exit_code": 0
+    }
+  ],
+  "limits": [
+    "Generic C++ object address/layout and one native contiguous allocation are not reproduced by Rust Option slot storage.",
+    "Allocation failure, panic cleanup, and C++ exception unwinding are not equivalent.",
+    "C++ reentrant mutation/inspection through aliased references is outside Rust borrow contracts.",
+    "These eight supplemental Rust tests and ten native trace rows do not increase original OCCT test declaration counts."
+  ],
+  "native_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_flat_copy_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/flat-copy-native",
+  "native_expected": "tools/oracle/tkernel_flat_copy_contracts.expected",
+  "focused_rust_tests_passed": 91
+}

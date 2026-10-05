@@ -130,16 +130,6 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
             next = (next + 1) & mask;
         }
     }
-    pub fn clear(&mut self, release: bool) {
-        self.count = 0;
-        if release {
-            self.slots = Vec::new();
-            return;
-        }
-        for slot in &mut self.slots {
-            *slot = None;
-        }
-    }
     fn rehash(&mut self, capacity: usize) {
         let fresh = (0..capacity).map(|_| None).collect();
         let previous = std::mem::replace(&mut self.slots, fresh);
@@ -158,17 +148,42 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
         iter
     }
 }
+impl<K, V, H> FlatTable<K, V, H> {
+    pub fn clear(&mut self, release: bool) {
+        self.count = 0;
+        if release {
+            self.slots = Vec::new();
+            return;
+        }
+        for slot in &mut self.slots {
+            *slot = None;
+        }
+    }
+}
+impl<K: Clone, V: Clone, H: Clone> FlatTable<K, V, H> {
+    fn cloned_slots(&self) -> Vec<Option<FlatSlot<K, V>>> {
+        if self.count == 0 {
+            return Vec::new();
+        }
+        self.slots.clone()
+    }
+}
 impl<K: Clone, V: Clone, H: Clone> Clone for FlatTable<K, V, H> {
     fn clone(&self) -> Self {
+        // OCCT constructs myHasher before allocating and copying the occupied slots.
+        let hasher: H = self.hasher.clone();
         Self {
-            slots: if self.count == 0 {
-                Vec::new()
-            } else {
-                self.slots.clone()
-            },
+            slots: self.cloned_slots(),
             count: self.count,
-            hasher: self.hasher.clone(),
+            hasher,
         }
+    }
+    fn clone_from(&mut self, source: &Self) {
+        // Pinned OCCT 3d097a0 copy assignment clears before the policy assignment hook.
+        self.clear(true);
+        self.hasher.clone_from(&source.hasher);
+        self.slots = source.cloned_slots();
+        self.count = source.count;
     }
 }
 fn capacity_for(count: usize) -> usize {

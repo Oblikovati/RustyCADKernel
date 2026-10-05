@@ -117,7 +117,16 @@ impl<K: Debug, V, H: HashPolicy<K> + Default> Default for FlatDataMap<K, V, H> {
 impl<K: Clone, V: Clone, H: Clone> FlatDataMap<K, V, H> {
     /// Copies storage layout and hash policy; `map.assign(&source)`.
     pub fn assign(&mut self, source: &Self) {
-        self.table = source.table.clone();
+        self.assign_returning(source);
+    }
+    /// Copies after releasing destination pairs and returns it, as `operator=`; `map.assign_returning(&source)`.
+    pub fn assign_returning(&mut self, source: &Self) -> &mut Self {
+        self.table.clone_from(&source.table);
+        self
+    }
+    /// Preserves self-assignment without creating aliased Rust borrows; `map.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
     }
 }
 impl<K: Clone, V: Clone, H: Clone> Clone for FlatDataMap<K, V, H> {
@@ -125,6 +134,9 @@ impl<K: Clone, V: Clone, H: Clone> Clone for FlatDataMap<K, V, H> {
         Self {
             table: self.table.clone(),
         }
+    }
+    fn clone_from(&mut self, source: &Self) {
+        self.assign(source);
     }
 }
 impl<K: Debug, V, H: HashPolicy<K>> std::ops::Index<&K> for FlatDataMap<K, V, H> {
