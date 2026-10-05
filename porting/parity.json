@@ -84595,24 +84595,24 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
       "rust_item": "rustycad_tkernel::standard::Failure::copy_base",
-      "status": "partial",
-      "notes": "Explicit base copy construction shares message/stack, produces Standard_Failure identity and omits derived OutOfMemory storage. Native and Rust probes cover derived source slicing. Rust Failure still represents base message/stack as UTF-8 strings, so arbitrary non-UTF-8 native message states remain outside its input domain; ordinary Clone remains whole-value Rust copying."
+      "status": "implemented",
+      "notes": "Base copy construction shares raw message/stack bytes, produces Standard_Failure identity and omits derived OutOfMemory storage. Byte-oriented constructors close the previous non-UTF-8 input limitation."
     },
     {
       "upstream_id": "Standard_Failure::Standard_Failure(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::new",
+      "rust_item": "rustycad_tkernel::standard::Failure::from_message_bytes",
       "status": "implemented",
-      "notes": "The message ends at its first NUL. Captures a stack trace through standard::stack_trace when Failure::default_stack_trace_length() is > 0 (runtime_stack_length probe). Compared by the runtime_failure probe."
+      "notes": "Bounded C-string bytes stop at NUL and preserve arbitrary non-UTF-8 bytes; captures configured stack. Empty slice models native null or empty input."
     },
     {
       "upstream_id": "Standard_Failure::Standard_Failure(const char* const,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
+      "rust_item": "rustycad_tkernel::standard::Failure::with_type_bytes",
       "status": "implemented",
-      "notes": "Explicit stack, no capture; with_type(\"Standard_Failure\", message, stack). Each DEFINE_STANDARD_EXCEPTION class's two-argument constructor is the same function with its class name. Compared by the runtime_failure_stack probe."
+      "notes": "Use Standard_Failure type identity with explicit bounded message/stack bytes; no stack capture, both stop at NUL, including arbitrary non-UTF-8 bytes."
     },
     {
       "upstream_id": "Standard_Failure::operator=(const Standard_Failure&)",
@@ -84658,17 +84658,17 @@
       "upstream_id": "Standard_Failure::GetStackString() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::stack_string",
+      "rust_item": "rustycad_tkernel::standard::Failure::stack_bytes",
       "status": "implemented",
-      "notes": "Empty when none. Compared by the runtime_failure probe."
+      "notes": "Borrowed byte view preserves the original native stack bytes without UTF-8 conversion; empty when absent."
     },
     {
       "upstream_id": "Standard_Failure::Print(Standard_OStream&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::<core::fmt::Display>::fmt",
-      "status": "implemented",
-      "notes": "Type, then \": \" and the base message when it is not empty, then the stack; write! it to a stream. Compared by the runtime_failure probe."
+      "rust_item": "rustycad_tkernel::standard::Failure::print_to",
+      "status": "partial",
+      "notes": "Writes original type/message/stack bytes to a Rust Write stream. Native ostream formatting flags and badbit/failbit state are not modeled by Write; Rust propagates io::Error."
     },
     {
       "upstream_id": "Standard_Failure::DefaultStackTraceLength()",
@@ -84687,20 +84687,20 @@
       "notes": "Process-wide atomic; values <= 0 disable capture. The trace buffer is clamp(length*200, 2048, 65536) bytes, with saturation where C++ int multiplication would overflow. Compared by the runtime_stack_length probe."
     },
     {
-      "upstream_id": "Standard_Failure::operator<<(Standard_OStream&,const Standard_Failure&)",
+      "upstream_id": "operator<<(Standard_OStream&,const Standard_Failure&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::<core::fmt::Display>::fmt",
-      "status": "implemented",
-      "notes": "Same text as Print. Compared by the runtime_failure probe."
+      "rust_item": "rustycad_tkernel::standard::Failure::insert_into",
+      "status": "partial",
+      "notes": "Writes original bytes and returns the same stream for chaining. Native ostream formatting flags and badbit/failbit state remain outside the Rust Write adapter."
     },
     {
       "upstream_id": "Standard_OutOfMemory::Standard_OutOfMemory(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
-      "rust_item": "rustycad_tkernel::standard::exceptions::out_of_memory",
-      "status": "implemented",
-      "notes": "The message goes to a buffer of 1024 bytes, cut to 1023 (possibly inside a UTF-8 sequence) and at a NUL; nullptr and \"\" both give an empty buffer. The base message stays empty, so Display (operator<<) prints only \"Standard_OutOfMemory\" and any stack trace. Catches as Standard_ProgramError. Compared by the runtime_out_of_memory probe."
+      "rust_item": "rustycad_tkernel::standard::exceptions::out_of_memory_bytes",
+      "status": "partial",
+      "notes": "Preserves arbitrary C-string bytes through first NUL and truncates to 1023 bytes. Rust uses Arc storage and therefore does not reproduce the native allocation-free fixed-buffer failure path."
     },
     {
       "upstream_id": "Standard_OutOfMemory::what() const noexcept",
@@ -84722,9 +84722,9 @@
       "upstream_id": "Standard_OutOfMemory::SetMessageString(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
-      "rust_item": "rustycad_tkernel::standard::Failure::set_message_string",
-      "status": "implemented",
-      "notes": "Replaces the buffer with the first 1023 bytes; a failure of another class has no buffer and is refused with Standard_TypeMismatch (C++ has no such member there). Compared by the runtime_out_of_memory probe."
+      "rust_item": "rustycad_tkernel::standard::Failure::set_message_bytes",
+      "status": "partial",
+      "notes": "Replaces the private message with original bytes through first NUL, truncated to 1023 bytes, preserving copies. Rust allocates Arc storage while native writes its fixed buffer without allocation."
     },
     {
       "upstream_id": "Standard_ErrorHandler::Standard_ErrorHandler()",

@@ -1,10 +1,7 @@
 //! `Standard_Failure::captureStackTrace` and its process-wide default length.
-use super::c_string;
+use super::{c_string, text::FailureText};
 use crate::standard::stack_trace;
-use std::sync::{
-    Arc,
-    atomic::{AtomicI32, Ordering},
-};
+use std::sync::atomic::{AtomicI32, Ordering};
 
 /// `Standard_Failure_DefaultStackTraceLength`: 0 means no stack trace.
 static DEFAULT_STACK_TRACE_LENGTH: AtomicI32 = AtomicI32::new(0);
@@ -20,10 +17,10 @@ pub(super) fn set_default_length(length: i32) {
     DEFAULT_STACK_TRACE_LENGTH.store(length, Ordering::SeqCst);
 }
 /// The trace a message constructor stores, empty when capture is off or fails.
-pub(super) fn capture_stack_trace() -> Arc<str> {
+pub(super) fn capture_stack_trace() -> FailureText {
     let length: i32 = default_length();
     if length <= 0 {
-        return Arc::from("");
+        return c_string("");
     }
     // C++ multiplies in int; saturation replaces its overflow for huge lengths.
     let buffer_size: i32 = length
@@ -32,7 +29,7 @@ pub(super) fn capture_stack_trace() -> Arc<str> {
     let mut trace: String = String::new();
     // Skip one more frame, the constructor's, as the C++ passes theNbTopSkip = 1.
     if !stack_trace(&mut trace, buffer_size, length, 1) {
-        return Arc::from("");
+        return c_string("");
     }
     c_string(&trace)
 }
