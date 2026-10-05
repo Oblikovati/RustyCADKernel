@@ -1,15 +1,18 @@
 //! `OSD_SharedLibrary`: load a shared library at run time and look up its symbols.
 //!
 //! The Unix build is a thin layer over `dlopen`/`dlsym`/`dlclose`/`dlerror`, reached
-//! through the narrow FFI module below. The Windows build (`LoadLibraryExW`,
-//! `GetProcAddress`) needs loader bindings the crate does not link yet: there `dl_open`
-//! fails and `dl_error` says so. Byte methods preserve Unix loader names and errors that
-//! are not valid UTF-8; string methods are convenience views.
+//! through narrow platform modules below. Windows uses the OCCT `GetModuleHandleW` cache,
+//! `LoadLibraryExW`, and system-error formatter; its runtime behavior is cross-compile and
+//! fake-tested here but not executed on Windows. Byte methods preserve Unix loader names
+//! and errors that are not valid UTF-8; string methods are convenience views.
 use crate::{
     osd::LoadMode,
     standard::{c_prefix, c_string::c_str_prefix},
 };
 use std::{ffi::c_void, ptr::NonNull};
+
+#[cfg(any(windows, test))]
+mod windows_backend;
 
 /// The address `DlSymb` returns (`OSD_Function`, a C function pointer); callers cast it to
 /// the real signature with `std::mem::transmute`.
@@ -29,7 +32,9 @@ impl Default for SharedLibrary {
     }
 }
 impl SharedLibrary {
-    /// `OSD_SharedLibrary()`: no name; opening it yields the main program; `SharedLibrary::new()`.
+    /// `OSD_SharedLibrary()`: no name and a null handle; `SharedLibrary::new()`.
+    /// Opening a null name is platform-specific (Unix `dlopen(NULL)`; OCCT Windows passes
+    /// the missing name into its wide-string conversion path).
     pub const fn new() -> Self {
         Self {
             name: None,
@@ -58,6 +63,11 @@ impl SharedLibrary {
     pub fn set_name_bytes(&mut self, name: Option<&[u8]>) {
         if let Some(name) = name {
             self.name = Some(c_str_prefix(name).to_vec());
+            #[cfg(windows)]
+            {
+                self.handle = ffi::cached_handle(self.name.as_deref().unwrap_or_default());
+                self.closed = false;
+            }
         }
     }
     /// Returns a UTF-8 view of the name, or `None` for null/invalid bytes; `library.name()`.
@@ -73,8 +83,17 @@ impl SharedLibrary {
     /// `OSD_SharedLibrary::DlOpen`: loads the library (`RTLD_LAZY` or `RTLD_NOW`) and
     /// tells whether a handle was obtained; `library.dl_open(LoadMode::RtldLazy)`.
     pub fn dl_open(&mut self, mode: LoadMode) -> bool {
-        self.handle = ffi::open(self.name.as_deref(), mode);
-        self.closed = false;
+        #[cfg(windows)]
+        let was_closed: bool = self.closed;
+        self.handle = ffi::open(self.name.as_deref(), mode, self.handle);
+        #[cfg(not(windows))]
+        {
+            self.closed = false;
+        }
+        #[cfg(windows)]
+        {
+            self.closed = was_closed;
+        }
         !self.handle.is_null()
     }
     /// `OSD_SharedLibrary::DlSymb`: the address of a symbol, `None` when absent;
@@ -104,22 +123,27 @@ impl SharedLibrary {
         ffi::close(self.handle);
         self.closed = true;
     }
-    /// Returns the consumed loader error as lossy UTF-8; use `dl_error_bytes()` for raw
-    /// diagnostics. Example: `library.dl_error()`.
+    /// Returns loader diagnostics as lossy UTF-8; use `dl_error_bytes()` for raw bytes.
+    /// Unix consumes its pending loader error; Windows formats the retained last error code.
+    /// Example: `library.dl_error()`.
     pub fn dl_error(&self) -> Option<String> {
         self.dl_error_bytes()
             .map(|error| String::from_utf8_lossy(&error).into_owned())
     }
-    /// Reads and consumes loader error bytes; `library.dl_error_bytes()` preserves them.
+    /// Reads loader error bytes; `library.dl_error_bytes()` preserves non-UTF-8 diagnostics.
+    /// Unix consumes its pending error, while Windows retains the last error code.
     pub fn dl_error_bytes(&self) -> Option<Vec<u8>> {
-        ffi::last_error()
+        ffi::last_error(self.name.as_deref())
     }
     /// `OSD_SharedLibrary::Destroy` (also the destructor): forgets the name and the handle
     /// without unloading the library; `library.destroy()`.
     pub fn destroy(&mut self) {
         self.name = None;
-        self.handle = std::ptr::null_mut();
-        self.closed = false;
+        #[cfg(not(windows))]
+        {
+            self.handle = std::ptr::null_mut();
+            self.closed = false;
+        }
     }
 }
 
@@ -130,7 +154,7 @@ mod ffi {
     use crate::standard::c_string::c_str_prefix;
     use std::ffi::{CStr, CString, c_void};
 
-    pub(super) fn open(name: Option<&[u8]>, mode: LoadMode) -> *mut c_void {
+    pub(super) fn open(name: Option<&[u8]>, mode: LoadMode, _current: *mut c_void) -> *mut c_void {
         let flags: i32 = match mode {
             LoadMode::RtldLazy => libc::RTLD_LAZY,
             LoadMode::RtldNow => libc::RTLD_NOW,
@@ -160,7 +184,7 @@ mod ffi {
         unsafe { libc::dlclose(handle) };
     }
 
-    pub(super) fn last_error() -> Option<Vec<u8>> {
+    pub(super) fn last_error(_name: Option<&[u8]>) -> Option<Vec<u8>> {
         // SAFETY: dlerror returns null or a NUL-terminated message owned by the loader,
         // copied before any other loader call on this thread.
         let text: *const libc::c_char = unsafe { libc::dlerror() };
@@ -169,19 +193,51 @@ mod ffi {
     }
 }
 
-#[cfg(not(unix))]
+#[cfg(windows)]
+mod ffi {
+    use super::windows_backend::{
+        SystemWindowsCalls, close_with, error_with, module_cache_with, open_with, symbol_with,
+    };
+    use crate::osd::LoadMode;
+    use std::{ffi::c_void, sync::atomic::AtomicU32};
+
+    static CALLS: SystemWindowsCalls = SystemWindowsCalls;
+    static LAST_DLL_ERROR: AtomicU32 = AtomicU32::new(0);
+
+    pub(super) fn cached_handle(name: &[u8]) -> *mut c_void {
+        module_cache_with(&CALLS, name)
+    }
+    pub(super) fn open(name: Option<&[u8]>, _mode: LoadMode, current: *mut c_void) -> *mut c_void {
+        open_with(&CALLS, name, current, &LAST_DLL_ERROR)
+    }
+    pub(super) fn symbol(handle: *mut c_void, name: &[u8]) -> *mut c_void {
+        symbol_with(&CALLS, handle, name, &LAST_DLL_ERROR)
+    }
+    pub(super) fn close(handle: *mut c_void) {
+        close_with(&CALLS, handle);
+    }
+    pub(super) fn last_error(name: Option<&[u8]>) -> Option<Vec<u8>> {
+        Some(error_with(&CALLS, &LAST_DLL_ERROR, name))
+    }
+}
+
+#[cfg(not(any(unix, windows)))]
 mod ffi {
     use crate::osd::LoadMode;
     use std::ffi::c_void;
 
-    pub(super) fn open(_name: Option<&[u8]>, _mode: LoadMode) -> *mut c_void {
+    pub(super) fn open(
+        _name: Option<&[u8]>,
+        _mode: LoadMode,
+        _current: *mut c_void,
+    ) -> *mut c_void {
         std::ptr::null_mut()
     }
     pub(super) fn symbol(_handle: *mut c_void, _name: &[u8]) -> *mut c_void {
         std::ptr::null_mut()
     }
     pub(super) fn close(_handle: *mut c_void) {}
-    pub(super) fn last_error() -> Option<Vec<u8>> {
+    pub(super) fn last_error(_name: Option<&[u8]>) -> Option<Vec<u8>> {
         Some(b"OSD_SharedLibrary: the Windows loader is not ported".to_vec())
     }
 }
