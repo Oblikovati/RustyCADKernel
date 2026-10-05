@@ -68053,7 +68053,7 @@
       "upstream_id": "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
       "status": "implemented",
       "notes": "Compiler inventory confirms bool (const NCollection_Mat3<Element_t> &) const noexcept. The Rust PartialEq::eq path dispatches each element's != in native column-major order; native call-count probe matches."
     },
@@ -68061,7 +68061,7 @@
       "upstream_id": "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
       "status": "implemented",
       "notes": "The matrix explicitly implements PartialEq::ne as !self.eq(other), matching native operator!= calling !IsEqual. The eq implementation dispatches element != in native column-major order; native call-count probe matches. The new ne rustdoc path is pending compiler-inventory recapture."
     },
@@ -68261,7 +68261,7 @@
       "upstream_id": "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
       "status": "implemented",
       "notes": "Compiler inventory confirms bool (const NCollection_Mat4<Element_t> &) const noexcept. The Rust PartialEq::eq path dispatches each element's != in native column-major order; native call-count probe matches."
     },
@@ -68269,7 +68269,7 @@
       "upstream_id": "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
       "status": "implemented",
       "notes": "The matrix explicitly implements PartialEq::ne as !self.eq(other), matching native operator!= calling !IsEqual. The eq implementation dispatches element != in native column-major order; native call-count probe matches. The new ne rustdoc path is pending compiler-inventory recapture."
     },

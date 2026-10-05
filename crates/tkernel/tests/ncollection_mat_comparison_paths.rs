@@ -146,6 +146,21 @@ fn mat4_case(case: &str, mismatch: Option<usize>) -> Vec<String> {
     )
 }
 
+fn parity_rust_item(upstream_id: &str) -> &'static str {
+    let mappings = include_str!("../../../porting/parity.json");
+    let marker = format!("\"upstream_id\": \"{upstream_id}\"");
+    let row = mappings
+        .split(&marker)
+        .nth(1)
+        .expect("mapping selector exists");
+    let row_end = row.find("\n    },").expect("mapping row ends");
+    row[..row_end]
+        .lines()
+        .find_map(|line| line.trim().strip_prefix("\"rust_item\": \""))
+        .and_then(|item| item.strip_suffix("\","))
+        .expect("mapping row has one Rust target")
+}
+
 #[test]
 fn mat3_equality_dispatch_matches_native() {
     let mut actual = mat3_case("Mat3-equal", None);
@@ -168,4 +183,29 @@ fn mat4_equality_dispatch_matches_native() {
         .collect::<Vec<_>>()
         .join("\n");
     assert_eq!(actual.join("\n"), expected);
+}
+
+#[test]
+fn parity_selects_the_matching_matrix_trait_methods() {
+    let pairs = [
+        (
+            "NCollection_Mat3::operator==(const NCollection_Mat3<Element_t> &) const noexcept",
+            "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq",
+        ),
+        (
+            "NCollection_Mat3::operator!=(const NCollection_Mat3<Element_t> &) const noexcept",
+            "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::ne",
+        ),
+        (
+            "NCollection_Mat4::operator==(const NCollection_Mat4<Element_t> &) const noexcept",
+            "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq",
+        ),
+        (
+            "NCollection_Mat4::operator!=(const NCollection_Mat4<Element_t> &) const noexcept",
+            "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::ne",
+        ),
+    ];
+    for (selector, expected) in pairs {
+        assert_eq!(parity_rust_item(selector), expected, "{selector}");
+    }
 }
