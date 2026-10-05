@@ -18,3 +18,4 @@ include!("ascii_string_api_behavior/editing.rs");
 include!("ascii_string_api_behavior/queries.rs");
 include!("ascii_string_api_behavior/c_string_search.rs");
 include!("ascii_string_api_behavior/handles.rs");
+include!("ascii_string_api_behavior/concatenation_arrays.rs");
