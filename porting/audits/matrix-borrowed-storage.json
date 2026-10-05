@@ -1,0 +1,92 @@
+{
+  "base_revision": "bc1792de140d0f1bdb3fbe2e1ce331971e92c56f",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Borrowed column-major matrix storage replaces copy-only GetData mapping; raw pointer alias contracts remain partial",
+  "legacy_declaration_count_delta": 0,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/square_matrix.rs": "166c84e975ed1f6a13147c9cfaf610de84c8ebe20c4dc090259cc5cf43717a00",
+    "crates/tkernel/tests/matrix_borrowed_storage.rs": "9105f0b5971583f3eb5ed3af79984a48a109bfcb9f734f980effd70bb83f6052",
+    "tools/oracle/tkernel_matrix_storage.cxx": "f0b9f3e801cf56b15dd244ee0091b0e7a81f262b66e56845ef6322344118f124",
+    "tools/oracle/tkernel_matrix_storage.expected": "b25c98a4d36574cb21416ef5bd4525070e3116f5dd795eec9d99378f3fad8267",
+    "porting/parity.json": "2a282a754cf6bb1d1921d0b5325405a0d5d8dcd3f6da651f9899709484603702"
+  },
+  "native_header_sha256": {
+    "NCollection_Mat3.hxx": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51",
+    "NCollection_Mat4.hxx": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "821402fa34b050a7ef90ab8d79a21de6fadf46625cec8cce4d2c926ab2a70c5b",
+  "native_actual_sha256": "b25c98a4d36574cb21416ef5bd4525070e3116f5dd795eec9d99378f3fad8267",
+  "native_output_matches_expected": true,
+  "initial_regression_exit_code": 101,
+  "rust_test_summary": {
+    "passed": 2816,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 177,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "compiler_bindings": [
+    {
+      "cpp_selector": "NCollection_Mat4::GetData() const noexcept",
+      "cpp_id": "8fb8c2122df3bcb5465067e9d249e9bb1342061a0b5a45f4c4c25d44026b495e",
+      "status": "partial",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::as_slice",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "da1f045b67ef33e2fca3e4c4446ee3e2317dc723e523ba45d28366fe0f859f66",
+        "declaration_sha256": "91eb73e13d3639291c3af0e389c3028a5f5475bcc0c08a3e6280e929b0e1ce4d"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat3::GetData() const noexcept",
+      "cpp_id": "9db283d113fd5e4fa0b39cadb7fc2e23c1b9b46766aadbc07ed9ee374e70d827",
+      "status": "partial",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::as_slice",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "c774fd2f00a382a57c49e47160b5b393fe40f5dd224405d2ed16853ad1a1197c",
+        "declaration_sha256": "da37b4c63f9ae719342b4fc3e1d8d47dab50bc403e9922fdacf52a232fc533ab"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat3::ChangeData()",
+      "cpp_id": "34ad48a5e98ce4ddeeb6a049e5b7ffbba57e5f46554cf98b700df0ddbcbb6acd",
+      "status": "partial",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::as_mut_slice",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "c774fd2f00a382a57c49e47160b5b393fe40f5dd224405d2ed16853ad1a1197c",
+        "declaration_sha256": "e10bf85210007a6657f706c4ec3c8725d3b5fd72d458649bd5a9900098edced3"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat4::ChangeData()",
+      "cpp_id": "b5dd92f5f3689a9735ef414004d35e2a5c9f78242999fc1cd3998252de85d22a",
+      "status": "partial",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::as_mut_slice",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "da1f045b67ef33e2fca3e4c4446ee3e2317dc723e523ba45d28366fe0f859f66",
+        "declaration_sha256": "7cc9a4787f8786d9c5bfb802ede2651552d409ee9084ef88b866728e8587907f"
+      }
+    }
+  ],
+  "raw_logs": {
+    "porting/runtime-evidence/matrix-storage-red.log.gz": "2430284147c07a8864a3c71dc9e2ac8870efc647405380733eed0cab9f1c3804",
+    "porting/runtime-evidence/matrix-storage-full.log.gz": "a16b665efe72e6b37a55b039b6fafc786be75604ab90a303b2cd0b880c50d416",
+    "porting/runtime-evidence/matrix-storage-clippy.log.gz": "ff0739b8bf042518d0e218e90dc1953c8fa3750942efae8b6e88c3c9aa818c9f",
+    "porting/runtime-evidence/matrix-storage-rustdoc.log.gz": "794f88d3c7e27ea452f1000e8cbc776abedc9e2fd9d21f881c098cbe487ca07a"
+  },
+  "limits": [
+    "Native callers can retain raw pointers across matrix mutations. Rust borrows require nonoverlapping mutable/shared lifetimes; all four API rows remain partial.",
+    "Native pointer length is implicit; Rust exposes exactly 9 or 16 elements through slices."
+  ]
+}
