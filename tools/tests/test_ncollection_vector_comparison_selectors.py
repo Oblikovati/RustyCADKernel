@@ -22,7 +22,7 @@ ROWS = (
     (
         "NCollection_Vec2::operator/=(Element_t)",
         "a6ae7bcd5ef27366f8deb58284ddba3d457c64e6c47712eeb7be01f99e3ca12b",
-        "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::DivAssign<T>>::div_assign",
+        "rustycad_tkernel::ncollection::Vec2::divide_scalar_returning",
     ),
     (
         "NCollection_Vec2::operator/(Element_t) const",

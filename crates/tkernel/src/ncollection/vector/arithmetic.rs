@@ -182,7 +182,14 @@ macro_rules! scalar_multiplication {
     ($vector:ident) => {
         impl<T: Copy + MulAssign> MulAssign<T> for $vector<T> {
             fn mul_assign(&mut self, factor: T) {
+                self.multiply_scalar_returning(factor);
+            }
+        }
+        impl<T: Copy + MulAssign> $vector<T> {
+            /// Scales in OCCT component order and returns the destination; `vector.multiply_scalar_returning(2)`.
+            pub fn multiply_scalar_returning(&mut self, factor: T) -> &mut Self {
                 self.multiply(factor);
+                self
             }
         }
     };
@@ -225,8 +232,15 @@ scalar_multiplication!(Vec3);
 scalar_multiplication!(Vec4);
 impl<T: Copy + DivAssign<T>> DivAssign<T> for Vec2<T> {
     fn div_assign(&mut self, divisor: T) {
+        self.divide_scalar_returning(divisor);
+    }
+}
+impl<T: Copy + DivAssign<T>> Vec2<T> {
+    /// Divides each component directly and returns the destination; `vector.divide_scalar_returning(3)`.
+    pub fn divide_scalar_returning(&mut self, divisor: T) -> &mut Self {
         self.x /= divisor;
         self.y /= divisor;
+        self
     }
 }
 impl<T: Copy + Div<Output = T>> Div<T> for Vec2<T> {

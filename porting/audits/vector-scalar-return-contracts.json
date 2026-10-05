@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "NCollection_Vec2::operator*=(Element_t)",
+      "cpp_id": "23e77fb2709488ca1f04d456bf5eada5360035b8bdef624cdf6478af1eab82e7",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::multiply_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator/=(Element_t)",
+      "cpp_id": "24c5c5d482d6af90cbf1a9e275d9207e456a236d5ec6f3def1f0148613e4a547",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec3<float>::operator/=(float)",
+      "cpp_id": "2cb760e7df1643e7e2cfba31532b36ba9c8eaad06372a63e9302edcc72d807cb",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator*=(Element_t)",
+      "cpp_id": "2e88e882593884d26069f774fe4ebce6f5eecf13da76ee668d92a2b9737d1239",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::multiply_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec3<double>::operator/=(double)",
+      "cpp_id": "64be70ef703d2b37d4a745282789f2edfeed9965040c59fb1d95870f677ec1ec",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator/=(Element_t)",
+      "cpp_id": "75d50136a7c8f243f3fb135beacf56027c78180450c54d775d03592376d6032a",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec4<float>::operator/=(float)",
+      "cpp_id": "8fc5821b9b5dfff085fbc593c361b4508c818b0820c4f9021ac7c7c8d784d70c",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec4<double>::operator/=(double)",
+      "cpp_id": "982a2700dcfa395aba36bc793839cf487fe59cb4b7ac655d0570f8a08ceed294",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator*=(Element_t)",
+      "cpp_id": "a5069a1ac989a02eb13cf89867ae24010b59ae956479023b6c2b0a3743537a63",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::multiply_scalar_returning"
+    },
+    {
+      "selector": "NCollection_Vec2::operator/=(Element_t)",
+      "cpp_id": "a6ae7bcd5ef27366f8deb58284ddba3d457c64e6c47712eeb7be01f99e3ca12b",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::divide_scalar_returning"
+    }
+  ],
+  "limits": [
+    "Ten scalar declarations remain partial for generic element lifetime/copy and floating environment contracts.",
+    "Four explicit native float specializations map to the existing Rust division strategy, not four new Rust methods.",
+    "Supplemental tests do not add original OCCT test declarations."
+  ],
+  "behavioral_evidence": {
+    "native_source": "tools/oracle/tkernel_vector_scalar_returns.cxx",
+    "native_expected": "tools/oracle/tkernel_vector_scalar_returns.expected",
+    "rust_tests": "crates/tkernel/tests/ncollection_vector_scalar_returns.rs",
+    "focused_rust_passes": 18,
+    "python_binding_passes": 4,
+    "strict_all_target_clippy_exit_code": 0
+  },
+  "validation_logs": [
+    {
+      "path": "porting/runtime-evidence/vector-scalar-rust.gz",
+      "sha256": "36c3da61a1953be1d0fdd762b0fb1a35fd8549f5dccb8544d3335737bcdde22a",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-scalar-python.gz",
+      "sha256": "7dc3cfb63f0a849379800a9e3b06bb3651c04ceecc7e5ac447b848ef88502d55",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-scalar-clippy.gz",
+      "sha256": "0016906bf5bc151656dcffce5e65c28d8d9c95037c47580e522888fb8425ea0f",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-scalar-native.actual.gz",
+      "sha256": "5cf024497b1b104f1455228cc537ad772474651cbfc00e98a9609d3519757619",
+      "exit_code": 0
+    }
+  ]
+}

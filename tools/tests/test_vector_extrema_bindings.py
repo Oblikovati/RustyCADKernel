@@ -29,12 +29,18 @@ class VectorExtremaBindingsTest(unittest.TestCase):
         cls.assignment_audit = json.loads(
             (ROOT / "porting/audits/vector-assignment-returns.json").read_text()
         )
+        cls.scalar_audit = json.loads(
+            (ROOT / "porting/audits/vector-scalar-return-contracts.json").read_text()
+        )
 
     def test_all_six_selectors_resolve_to_the_pinned_declarations(self) -> None:
         self.assert_exact_bindings(self.audit["bindings"], 6, "implemented")
 
     def test_all_twelve_returning_assignments_keep_partial_limits(self) -> None:
         self.assert_exact_bindings(self.assignment_audit["bindings"], 12, "partial")
+
+    def test_scalar_returns_and_float_specializations_keep_partial_limits(self) -> None:
+        self.assert_exact_bindings(self.scalar_audit["bindings"], 10, "partial")
 
     def assert_exact_bindings(
         self, bindings: list[dict[str, str]], count: int, mapping_status: str

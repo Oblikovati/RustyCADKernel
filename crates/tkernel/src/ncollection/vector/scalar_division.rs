@@ -40,7 +40,15 @@ macro_rules! scalar_vector_operators {
     ($vector:ident) => {
         impl<T: VectorScalarDivision> DivAssign<T> for $vector<T> {
             fn div_assign(&mut self, divisor: T) {
+                self.divide_scalar_returning(divisor);
+            }
+        }
+        impl<T: VectorScalarDivision> $vector<T> {
+            /// Returns the destination after native scalar division; `vector.divide_scalar_returning(3.0)`.
+            /// OCCT 3d097a03 specializes f32/f64 to multiply by one reciprocal.
+            pub fn divide_scalar_returning(&mut self, divisor: T) -> &mut Self {
                 divisor.divide_components(self.change_data());
+                self
             }
         }
         impl<T: VectorScalarDivision> Div<T> for $vector<T> {

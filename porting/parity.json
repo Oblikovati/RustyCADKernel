@@ -15227,17 +15227,19 @@
       "upstream_id": "NCollection_Vec2::operator*=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::MulAssign<T>>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::multiply_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "23e77fb2709488ca1f04d456bf5eada5360035b8bdef624cdf6478af1eab82e7"
     },
     {
       "upstream_id": "NCollection_Vec2::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::DivAssign<T>>::div_assign",
-      "status": "implemented",
-      "notes": "The generic Rust DivAssign<T> implementation calls T::div_assign for x and y; custom-element native/Rust evidence distinguishes it from value division. Built-in scalar and template dispatch remain covered; see vector-scalar-division audit."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::divide_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "a6ae7bcd5ef27366f8deb58284ddba3d457c64e6c47712eeb7be01f99e3ca12b"
     },
     {
       "upstream_id": "NCollection_Vec2::operator*(Element_t) const",
@@ -15415,17 +15417,19 @@
       "upstream_id": "NCollection_Vec3::operator*=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::MulAssign<T>>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::multiply_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "2e88e882593884d26069f774fe4ebce6f5eecf13da76ee668d92a2b9737d1239"
     },
     {
       "upstream_id": "NCollection_Vec3::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::DivAssign<T>>::div_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "24c5c5d482d6af90cbf1a9e275d9207e456a236d5ec6f3def1f0148613e4a547"
     },
     {
       "upstream_id": "NCollection_Vec3::operator*(Element_t) const",
@@ -15789,17 +15793,19 @@
       "upstream_id": "NCollection_Vec4::operator*=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::MulAssign<T>>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::multiply_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "a5069a1ac989a02eb13cf89867ae24010b59ae956479023b6c2b0a3743537a63"
     },
     {
       "upstream_id": "NCollection_Vec4::operator/=(Element_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::DivAssign<T>>::div_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Generic scalar division uses the public VectorScalarDivision strategy: default element /= for custom opt-in and integer types; one reciprocal followed by element *= for f32/f64, matching native specialization. Supplemental native/custom-element and floating bit fixtures: porting/audits/vector-generic-scalar-division.json."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+      "status": "partial",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json.",
+      "selector_id": "75d50136a7c8f243f3fb135beacf56027c78180450c54d775d03592376d6032a"
     },
     {
       "upstream_id": "NCollection_Vec4::operator*(Element_t) const",
@@ -236671,6 +236677,42 @@
       "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
       "status": "implemented",
       "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "NCollection_Vec3<float>::operator/=(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+      "status": "partial",
+      "selector_id": "2cb760e7df1643e7e2cfba31532b36ba9c8eaad06372a63e9302edcc72d807cb",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_Vec3<double>::operator/=(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+      "status": "partial",
+      "selector_id": "64be70ef703d2b37d4a745282789f2edfeed9965040c59fb1d95870f677ec1ec",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_Vec4<float>::operator/=(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+      "status": "partial",
+      "selector_id": "8fc5821b9b5dfff085fbc593c361b4508c818b0820c4f9021ac7c7c8d784d70c",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_Vec4<double>::operator/=(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+      "status": "partial",
+      "selector_id": "982a2700dcfa395aba36bc793839cf487fe59cb4b7ac655d0570f8a08ceed294",
+      "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
     }
   ],
   "tests": [
