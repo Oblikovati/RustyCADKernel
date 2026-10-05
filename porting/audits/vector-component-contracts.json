@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "purpose": "Consolidate vector scalar entry points and port native narrow-integer promotion and division dispatch.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "f4b79041a648b940528baa01fc8afce52738f8ac",
+  "baseline_red_provenance": "Two narrow squared-magnitude regressions failed with overflow before the square-policy correction, during an uncommitted scalar-refactor worktree. The squared-magnitude production body still matched the baseline; this is not a clean test-only baseline commit.",
+  "bindings": [
+    {
+      "selector": "NCollection_Vec2::cwiseAbs() const noexcept",
+      "cpp_id": "5de584606263c9f9042a3cb9b1f9449d339ecd9b8a7d2ca34ef4fe6cec4a0e2b",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_abs",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::Modulus() const",
+      "cpp_id": "67975378c996e6dc7f13bce74bd90fdf5c144dbb15e93af9abcae8a2853b2a45",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::modulus",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::Modulus() const",
+      "cpp_id": "773569715a9ee8350ccea2dc7bbe541d21fbfccc6325019c70ff7ca7300977bb",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::modulus",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::Normalize()",
+      "cpp_id": "49f421225bb0318cd0b0019e3450a7f71f9f38b720210a1aa57250924a609eb7",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::normalize",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::Normalized() const",
+      "cpp_id": "27810dec8e7cecf461b0af4b0c7375a8b3350ad2a09a3c00da2b3ece0c0f617e",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::normalized",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::DumpJson(Standard_OStream &,int) const",
+      "cpp_id": "9643127bd9bd71ab00157052da3c5493409a53cd46156910e764a07c3e69ebe6",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::dump_json",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::cwiseAbs() const noexcept",
+      "cpp_id": "057bb1b6f52489c0e31259666575f0af0f2c0694fee98dacf6877a8559a23cf9",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_abs",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::DumpJson(Standard_OStream &,int) const",
+      "cpp_id": "4670a18936c4921a778dc5b0064279b0c4913b655f9cf4ccba767641a8eb5308",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::dump_json",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::cwiseAbs() const noexcept",
+      "cpp_id": "02dfb755d19d25eadfeb450831222ff5d5421a5e98b4627d3fa837bd281bdc5e",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_abs",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec4::DumpJson(Standard_OStream &,int) const",
+      "cpp_id": "9ff257915d177d029b35da278c4b1e420bfdc53363fb28b6fcc93615c22a3a05",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::dump_json",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Mat3::DumpJson(Standard_OStream &,int) const",
+      "cpp_id": "6a2bfb6f6b1da3aa393087098d8b6bc9c3a7aec254502306807ca6148d2756f3",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3::dump_json",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Mat4::DumpJson(Standard_OStream &,int) const",
+      "cpp_id": "b8c62641e0640adb6d8a3a1d9279c73fe06e36c4a45cd38ae282741cb969e851",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4::dump_json",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec2::SquareModulus() const noexcept",
+      "cpp_id": "5dcbac9848f1547bf74879497deeb920810b3be8c3d3077a93035ba5a1103773",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::square_modulus",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_Vec3::SquareModulus() const noexcept",
+      "cpp_id": "50c20b3e4c851afd90f3ca0da75abe371a309cf8dff43c607c107c351428b123",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::square_modulus",
+      "status": "partial"
+    }
+  ],
+  "supplemental_rust_cases": 21,
+  "native_output_rows": 29,
+  "native_expected": "tools/oracle/tkernel_vector_component_contracts.expected",
+  "expected_provenance": "Expected output was generated from the first successful pinned OCCT fixture execution, then reviewed against independent Rust literal assertions.",
+  "fixture_setup_errors": [
+    "The first native dump fixture omitted the mandatory int argument for matrix DumpJson; compilation exited 1. It was corrected to pass -1 before successful validation."
+  ],
+  "limits": [
+    "Only the tested primitive policies and selected custom division type have native evidence; unsupported element types and arbitrary custom callbacks remain partial.",
+    "Signed overflow, signed-minimum abs, out-of-range float-to-integer casts and integer DumpJson invoke undefined or implementation-specific native behavior; general parity is not claimed for them.",
+    "Native constexpr evaluation, layout, reentrant aliases and arbitrary C++ constructor/exception lifetimes remain unproven.",
+    "The Rust zero-length scalar policy seam is supplemental and has no original vector declaration counterpart.",
+    "Twenty-one supplemental Rust cases and twenty-nine native rows do not increase original OCCT test declaration counts."
+  ],
+  "focused_rust_tests_passed": 66,
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/vector-component-red.gz",
+      "sha256": "6c40a7f8f00a384a658af881a37731baa222e25fa14ec80d9fd0fa589b6540be",
+      "exit_code": 101
+    },
+    {
+      "path": "porting/runtime-evidence/vector-component-green.gz",
+      "sha256": "5d8a47a50114da6caf3c7fa56a0eafbd616380f18e827378058999992f788f67",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-component-python.gz",
+      "sha256": "095d7ed70ed78ed12f572a263f066c4e49dd28ae00e615219f8cf86ec86cc491",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-component-clippy.gz",
+      "sha256": "d856e4697c36c27cf7b7fc5d86baa31834280ff2d32a1510d00d3c0a70137d89",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-component-native.actual.gz",
+      "sha256": "e02d14a2654a407afb6741074048a3f7c79f56c3789b3c54901884bcf6d339da",
+      "exit_code": 0
+    }
+  ]
+}

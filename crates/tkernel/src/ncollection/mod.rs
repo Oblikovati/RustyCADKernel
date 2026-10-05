@@ -14,6 +14,10 @@ mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
 pub use linear_vector::LinearVector;
+mod vector_component;
+pub use vector_component::{
+    VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
+};
 mod vector;
 pub use vector::{ElementCast, Vec2, Vec3, Vec4, VectorScalarDivision};
 mod square_matrix;

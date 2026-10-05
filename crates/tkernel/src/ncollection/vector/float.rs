@@ -4,16 +4,16 @@ use crate::standard::dump::{self, DumpOutput};
 use std::io;
 use std::ops::{Add, Mul, Sub};
 
-impl<T: Copy + Add<Output = T> + Mul<Output = T>> Vec2<T> {
+impl<T: super::super::VectorSquareComponent> Vec2<T> {
     /// Evaluates x*x+y*y in upstream order; `Vec2::new(3,4).square_modulus() == 25`.
     pub fn square_modulus(&self) -> T {
-        self.x * self.x + self.y * self.y
+        T::vector_component_square([self.x, self.y])
     }
 }
-impl<T: Copy + Add<Output = T> + Mul<Output = T>> Vec3<T> {
+impl<T: super::super::VectorSquareComponent> Vec3<T> {
     /// Evaluates x*x+y*y+z*z in upstream order; `Vec3::new(3,4,0).square_modulus() == 25`.
     pub fn square_modulus(&self) -> T {
-        self.x * self.x + self.y * self.y + self.z * self.z
+        T::vector_component_square([self.x, self.y, self.z])
     }
 }
 impl<T: Copy + Sub<Output = T> + Mul<Output = T>> Vec3<T> {
@@ -60,112 +60,83 @@ where
         *from * (T::from(1) - parameter) + *to * parameter
     }
 }
-/// `Modulus`, `Normalize` and `Normalized` for one element type; `$sqrt` is the
-/// native `std::sqrt(x*x + ...)` returned as the element type.
-macro_rules! magnitude_members {
-    ($scalar:ty, $zero:expr, |$square:ident| $sqrt:expr) => {
-        impl Vec2<$scalar> {
-            /// Returns `std::sqrt(x*x+y*y)` as the element type, as `Modulus`; `Vec2::new(3.0,4.0).modulus()`.
-            pub fn modulus(&self) -> $scalar {
-                let $square: $scalar = self.square_modulus();
-                $sqrt
-            }
+// OCCT returns the element type after sqrt, and Normalize uses / followed by assignment.
+impl<T: super::super::VectorMagnitudeComponent> Vec2<T> {
+    /// Returns native square-root magnitude with integral promotions; `Vec2::new(3_i16, 4).modulus() == 5`.
+    pub fn modulus(&self) -> T {
+        T::vector_component_modulus([self.x, self.y])
+    }
+}
+impl<T: super::super::VectorMagnitudeComponent> Vec3<T> {
+    /// Returns native square-root magnitude; `Vec3::new(3.0_f64, 4.0, 0.0).modulus() == 5.0`.
+    pub fn modulus(&self) -> T {
+        T::vector_component_modulus([self.x, self.y, self.z])
+    }
+    /// Divides each component by its magnitude unless zero; `vector.normalize()`.
+    pub fn normalize(&mut self) {
+        let modulus: T = self.modulus();
+        if modulus != T::from(0) {
+            self.x = self.x / modulus;
+            self.y = self.y / modulus;
+            self.z = self.z / modulus;
         }
-        impl Vec3<$scalar> {
-            /// Returns `std::sqrt(x*x+y*y+z*z)` as the element type, as `Modulus`.
-            pub fn modulus(&self) -> $scalar {
-                let $square: $scalar = self.square_modulus();
-                $sqrt
-            }
-            /// Divides each component by the modulus unless it is zero, as `Normalize`.
-            pub fn normalize(&mut self) {
-                let modulus: $scalar = self.modulus();
-                // Upstream divides component by component, not by a reciprocal.
-                if modulus != $zero {
-                    self.x /= modulus;
-                    self.y /= modulus;
-                    self.z /= modulus;
-                }
-            }
-            /// Returns a normalized copy, as `Normalized`; `vector.normalized()`.
-            pub fn normalized(&self) -> Self {
-                let mut copy: Self = *self;
-                copy.normalize();
-                copy
-            }
-        }
-    };
+    }
+    /// Returns a normalized copy; `vector.normalized()`.
+    pub fn normalized(&self) -> Self {
+        let mut copy: Self = *self;
+        copy.normalize();
+        copy
+    }
 }
 /// Implements componentwise `cwiseAbs` with the native element operation supplied per type.
-macro_rules! cwise_abs_members {
-    ($scalar:ty, |$value:ident| $abs:expr) => {
-        impl Vec2<$scalar> {
-            /// Returns componentwise absolute values; `Vec2::new(-1.0, 2.0).cwise_abs()`.
+macro_rules! generic_absolute_members {
+    ($vector:ident, $($component:ident),+) => {
+        impl<T: super::super::VectorAbsoluteComponent> $vector<T> {
+            /// Returns componentwise absolute values; `vector.cwise_abs()`.
             pub fn cwise_abs(&self) -> Self {
-                Self::new(
-                    {
-                        let $value = self.x;
-                        $abs
-                    },
-                    {
-                        let $value = self.y;
-                        $abs
-                    },
-                )
-            }
-        }
-        impl Vec3<$scalar> {
-            /// Returns componentwise absolute values; `Vec3::new(-1.0, 2.0, -3.0).cwise_abs()`.
-            pub fn cwise_abs(&self) -> Self {
-                let abs = |$value: $scalar| -> $scalar { $abs };
-                Self::new(abs(self.x), abs(self.y), abs(self.z))
-            }
-        }
-        impl Vec4<$scalar> {
-            /// Returns componentwise absolute values; `Vec4::new(-1.0, 2.0, -3.0, 4.0).cwise_abs()`.
-            pub fn cwise_abs(&self) -> Self {
-                let abs = |$value: $scalar| -> $scalar { $abs };
-                Self::new(abs(self.x), abs(self.y), abs(self.z), abs(self.w))
+                Self::new($(self.$component.vector_component_abs()),+)
             }
         }
     };
 }
-magnitude_members!(f32, 0.0, |square| square.sqrt());
-magnitude_members!(f64, 0.0, |square| square.sqrt());
-cwise_abs_members!(f32, |value| value.abs());
-cwise_abs_members!(f64, |value| value.abs());
-cwise_abs_members!(i8, |value| value.wrapping_abs());
-cwise_abs_members!(i16, |value| value.wrapping_abs());
-cwise_abs_members!(i32, |value| value.wrapping_abs());
-cwise_abs_members!(i64, |value| value.wrapping_abs());
-cwise_abs_members!(isize, |value| value.wrapping_abs());
-// std::sqrt(int) computes in double and the int return value truncates it; `wrapping_abs`
-// defines Rust behavior for i32::MIN, where native std::abs has undefined behavior.
-magnitude_members!(i32, 0, |square| f64::from(square).sqrt() as i32);
+generic_absolute_members!(Vec2, x, y);
+generic_absolute_members!(Vec3, x, y, z);
+generic_absolute_members!(Vec4, x, y, z, w);
 /// `DumpJson` through `OCCT_DUMP_FIELD_VALUES_NUMERICAL`. The macro reads each argument as
 /// a `double`, so float components are promoted exactly; integer instantiations would read
 /// an int as a double, which is undefined natively, and have no `dump_json`.
 macro_rules! dump_members {
-    ($scalar:ty) => {
-        impl Vec2<$scalar> {
+    () => {
+        impl<T: super::super::VectorDumpComponent> Vec2<T> {
             /// Writes `"Vec2": [x, y]`; `vector.dump_json(&mut stream)?`.
             pub fn dump_json(&self, output: &mut impl DumpOutput) -> io::Result<()> {
-                dump::dump_vector(output, "Vec2", &self.data().map(f64::from))
+                dump::dump_vector(
+                    output,
+                    "Vec2",
+                    &self.data().map(|value| value.promote_vector_dump()),
+                )
             }
         }
-        impl Vec3<$scalar> {
+        impl<T: super::super::VectorDumpComponent> Vec3<T> {
             /// Writes `"Vec3": [x, y, z]`; `vector.dump_json(&mut stream)?`.
             pub fn dump_json(&self, output: &mut impl DumpOutput) -> io::Result<()> {
-                dump::dump_vector(output, "Vec3", &self.data().map(f64::from))
+                dump::dump_vector(
+                    output,
+                    "Vec3",
+                    &self.data().map(|value| value.promote_vector_dump()),
+                )
             }
         }
-        impl Vec4<$scalar> {
+        impl<T: super::super::VectorDumpComponent> Vec4<T> {
             /// Writes `"Vec4": [x, y, z, w]`; `vector.dump_json(&mut stream)?`.
             pub fn dump_json(&self, output: &mut impl DumpOutput) -> io::Result<()> {
-                dump::dump_vector(output, "Vec4", &self.data().map(f64::from))
+                dump::dump_vector(
+                    output,
+                    "Vec4",
+                    &self.data().map(|value| value.promote_vector_dump()),
+                )
             }
         }
     };
 }
-dump_members!(f32);
-dump_members!(f64);
+dump_members!();

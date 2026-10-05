@@ -43,6 +43,10 @@ class FlatCopyBindingsTest(unittest.TestCase):
             (ROOT / "porting/audits/flat-key-construction.json").read_text()
         )
 
+        cls.component_audit = json.loads(
+            (ROOT / "porting/audits/vector-component-contracts.json").read_text()
+        )
+
     def test_four_copy_selectors_are_unique_and_keep_generic_limits(self) -> None:
         self.assert_native_binding_contracts(self.audit["bindings"], 4)
 
@@ -113,6 +117,18 @@ class FlatCopyBindingsTest(unittest.TestCase):
         self.assertEqual({row["rust_item"] for row in retargets}, targets)
         for row in retargets:
             self.assertEqual(row["rust_item"], row["original_rust_item"] + "_with")
+
+    def test_fourteen_vector_component_selectors_keep_generic_limits(self) -> None:
+        self.assert_native_binding_contracts(self.component_audit["bindings"], 14)
+
+    def test_vector_component_bindings_keep_one_primary_target_per_declaration(
+        self,
+    ) -> None:
+        bindings = self.component_audit["bindings"]
+        self.assertEqual(len({row["cpp_id"] for row in bindings}), 14)
+        self.assertEqual(len({row["rust_item"] for row in bindings}), 14)
+        squares = [row for row in bindings if "::SquareModulus" in row["selector"]]
+        self.assertEqual(len(squares), 2)
 
     def assert_native_binding_contracts(
         self, bindings: list[dict[str, JSONValue]], count: int

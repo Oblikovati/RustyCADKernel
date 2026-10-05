@@ -417,18 +417,14 @@ macro_rules! square_matrix_scalar {
 /// `DumpJson`: the elements in row order under the class name, read as doubles.
 macro_rules! square_matrix_dump {
     ($matrix:ident, $n:literal, $name:literal) => {
-        square_matrix_dump!(@one $matrix, $n, $name, f32);
-        square_matrix_dump!(@one $matrix, $n, $name, f64);
-    };
-    (@one $matrix:ident, $n:literal, $name:literal, $scalar:ty) => {
-        impl $matrix<$scalar> {
+        impl<T: $crate::ncollection::VectorDumpComponent> $matrix<T> {
             #[doc = concat!("Writes `\"", $name, "\": [...]` in row order; `matrix.dump_json(&mut stream)?`.")]
             pub fn dump_json(
                 &self,
                 output: &mut impl $crate::standard::dump::DumpOutput,
             ) -> std::io::Result<()> {
                 let values: [f64; $n * $n] =
-                    std::array::from_fn(|index| f64::from(self.get_value(index / $n, index % $n)));
+                    std::array::from_fn(|index| self.get_value(index / $n, index % $n).promote_vector_dump());
                 $crate::standard::dump::dump_vector(output, $name, &values)
             }
         }

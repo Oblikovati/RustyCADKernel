@@ -9204,8 +9204,9 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_abs",
-      "status": "implemented",
-      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "5de584606263c9f9042a3cb9b1f9449d339ecd9b8a7d2ca34ef4fe6cec4a0e2b"
     },
     {
       "upstream_id": "NCollection_Vec2::maxComp() const noexcept",
@@ -9228,16 +9229,18 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::modulus",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "67975378c996e6dc7f13bce74bd90fdf5c144dbb15e93af9abcae8a2853b2a45"
     },
     {
       "upstream_id": "NCollection_Vec2::SquareModulus() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::square_modulus",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "5dcbac9848f1547bf74879497deeb920810b3be8c3d3077a93035ba5a1103773"
     },
     {
       "upstream_id": "NCollection_Vec2::Multiply(Element_t)",
@@ -9300,24 +9303,27 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::modulus",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "773569715a9ee8350ccea2dc7bbe541d21fbfccc6325019c70ff7ca7300977bb"
     },
     {
       "upstream_id": "NCollection_Vec3::Normalize()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::normalize",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "49f421225bb0318cd0b0019e3450a7f71f9f38b720210a1aa57250924a609eb7"
     },
     {
       "upstream_id": "NCollection_Vec3::Normalized() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::normalized",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "27810dec8e7cecf461b0af4b0c7375a8b3350ad2a09a3c00da2b3ece0c0f617e"
     },
     {
       "upstream_id": "NCollection_Vec4::NCollection_Vec4(Element_t)",
@@ -15250,12 +15256,13 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec2::DumpJson",
+      "upstream_id": "NCollection_Vec2::DumpJson(Standard_OStream &,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::dump_json",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "9643127bd9bd71ab00157052da3c5493409a53cd46156910e764a07c3e69ebe6"
     },
     {
       "upstream_id": "NCollection_Vec2::x() const",
@@ -15410,8 +15417,9 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_abs",
-      "status": "implemented",
-      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "057bb1b6f52489c0e31259666575f0af0f2c0694fee98dacf6877a8559a23cf9"
     },
     {
       "upstream_id": "NCollection_Vec3::operator*=(Element_t)",
@@ -15440,12 +15448,13 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec3::DumpJson",
+      "upstream_id": "NCollection_Vec3::DumpJson(Standard_OStream &,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::dump_json",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "4670a18936c4921a778dc5b0064279b0c4913b655f9cf4ccba767641a8eb5308"
     },
     {
       "upstream_id": "NCollection_Vec3::x() const",
@@ -15658,8 +15667,9 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::square_modulus",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "50c20b3e4c851afd90f3ca0da75abe371a309cf8dff43c607c107c351428b123"
     },
     {
       "upstream_id": "NCollection_Vec3::DX()",
@@ -15786,8 +15796,9 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_abs",
-      "status": "implemented",
-      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "02dfb755d19d25eadfeb450831222ff5d5421a5e98b4627d3fa837bd281bdc5e"
     },
     {
       "upstream_id": "NCollection_Vec4::operator*=(Element_t)",
@@ -15816,12 +15827,13 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec4::DumpJson",
+      "upstream_id": "NCollection_Vec4::DumpJson(Standard_OStream &,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::dump_json",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "9ff257915d177d029b35da278c4b1e420bfdc53363fb28b6fcc93615c22a3a05"
     },
     {
       "upstream_id": "NCollection_Vec4::x() const",
@@ -16596,12 +16608,13 @@
       "notes": "Safe borrowed MatrixView preserves native column-major alias reads for a caller-borrowed [T; 9] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat3 method surface, and Rust borrowing prevents ordinary external mutation during the borrow. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
-      "upstream_id": "NCollection_Mat3::DumpJson",
+      "upstream_id": "NCollection_Mat3::DumpJson(Standard_OStream &,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::dump_json",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "6a2bfb6f6b1da3aa393087098d8b6bc9c3a7aec254502306807ca6148d2756f3"
     },
     {
       "upstream_id": "NCollection_Mat3::Determinant() const noexcept",
@@ -16766,12 +16779,13 @@
       "notes": "Safe borrowed MatrixViewMut preserves native column-major alias read/write behavior for a caller-borrowed [T; 16] buffer. It intentionally exposes only element and slice access, not the full NCollection_Mat4 method surface, and Rust borrowing forbids aliases that violate exclusive access. Native probe and limitations: porting/runtime-evidence/tkernel-matrix-map.md."
     },
     {
-      "upstream_id": "NCollection_Mat4::DumpJson",
+      "upstream_id": "NCollection_Mat4::DumpJson(Standard_OStream &,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::dump_json",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "One generic Rust implementation now delegates primitive operations to project-owned scalar policies. Narrow integer squared products are promoted before summing and narrowing; magnitude takes sqrt before the final element cast. Normalize uses division followed by assignment without requiring DivAssign. Floating abs bits and floating JSON promotion match the pinned native fixture. C++ constexpr evaluation, unsupported element types, overflow/out-of-range undefined cases, generic layout and reentrant aliasing remain unproven; see porting/audits/vector-component-contracts.json.",
+      "selector_id": "b8c62641e0640adb6d8a3a1d9279c73fe06e36c4a45cd38ae282741cb969e851"
     },
     {
       "upstream_id": "NCollection_Mat4::Rows()",
