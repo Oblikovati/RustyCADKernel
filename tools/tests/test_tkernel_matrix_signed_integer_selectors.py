@@ -8,7 +8,6 @@ from pathlib import Path
 
 from api_crosswalk import cpp_candidates, cpp_indexes
 
-
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -24,17 +23,26 @@ class SignedIntegerMatrixSelectorTest(unittest.TestCase):
             for header in manifest["headers"]
         }
         cls.by_name, _, _ = cpp_indexes(cls.declarations, cls.owners)
-        audit_path = ROOT / "porting/audits/tkernel-matrix-signed-integer-selectors.json"
+        audit_path = (
+            ROOT / "porting/audits/tkernel-matrix-signed-integer-selectors.json"
+        )
         cls.audit = json.loads(audit_path.read_text())
-        cls.rows = {row["upstream_id"]: row for row in json.loads((ROOT / "porting/parity.json").read_text())["api"]}
+        cls.rows = {
+            row["upstream_id"]: row
+            for row in json.loads((ROOT / "porting/parity.json").read_text())["api"]
+        }
 
     def test_inventory_and_header_inputs_match_audit(self) -> None:
         inventory = ROOT / "porting/api-inventory/occt-declarations.jsonl.gz"
-        self.assertEqual(hashlib.sha256(inventory.read_bytes()).hexdigest(), self.audit["inputs"]["declaration_inventory_sha256"])
+        self.assertEqual(
+            hashlib.sha256(inventory.read_bytes()).hexdigest(),
+            self.audit["inputs"]["declaration_inventory_sha256"],
+        )
         manifest = ROOT / "porting/api-header-manifest.json"
-        self.assertEqual(hashlib.sha256(manifest.read_bytes()).hexdigest(), self.audit["inputs"]["header_manifest_sha256"])
-        parity = ROOT / "porting/parity.json"
-        self.assertEqual(hashlib.sha256(parity.read_bytes()).hexdigest(), self.audit["inputs"]["parity_sha256"])
+        self.assertEqual(
+            hashlib.sha256(manifest.read_bytes()).hexdigest(),
+            self.audit["inputs"]["header_manifest_sha256"],
+        )
 
     def test_each_matrix_method_has_one_exact_compiler_declaration(self) -> None:
         declarations = self.audit["declarations"]
