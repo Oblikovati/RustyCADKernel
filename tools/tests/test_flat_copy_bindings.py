@@ -31,6 +31,10 @@ class FlatCopyBindingsTest(unittest.TestCase):
             (ROOT / "porting/audits/flat-hash-contracts.json").read_text()
         )
 
+        cls.borrow_audit = json.loads(
+            (ROOT / "porting/audits/flat-borrowed-insertion.json").read_text()
+        )
+
     def test_four_copy_selectors_are_unique_and_keep_generic_limits(self) -> None:
         self.assert_native_binding_contracts(self.audit["bindings"], 4)
 
@@ -42,6 +46,23 @@ class FlatCopyBindingsTest(unittest.TestCase):
         self.assertEqual(len(packs), 8)
         for binding in packs:
             self.assertTrue(binding["selector"].endswith("Args &&...)"))
+
+    def test_fourteen_borrowed_selectors_keep_generic_limits(self) -> None:
+        self.assert_native_binding_contracts(self.borrow_audit["bindings"], 14)
+
+    def test_borrowed_retargeting_preserves_historical_owned_bindings(self) -> None:
+        targets = {row["rust_item"] for row in self.borrow_audit["bindings"]}
+        retargets = [
+            row for row in self.hash_audit["bindings"] if "original_rust_item" in row
+        ]
+        self.assertEqual(len(targets), 14)
+        self.assertEqual({row["rust_item"] for row in retargets}, targets)
+        for row in retargets:
+            self.assertNotEqual(row["rust_item"], row["original_rust_item"])
+            self.assertEqual(
+                row["binding_retarget_audit"],
+                "porting/audits/flat-borrowed-insertion.json",
+            )
 
     def assert_native_binding_contracts(
         self, bindings: list[dict[str, JSONValue]], count: int

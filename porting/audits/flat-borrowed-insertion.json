@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "purpose": "Port explicit borrowed flat insertion overloads with native hash/copy/equality ordering.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "d7e33866",
+  "bindings": [
+    {
+      "selector": "NCollection_FlatDataMap::Bind(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "4a501b54c96ac9bf5ee3593e38037d11a72b40ae4f5e6a48df78018bb6c9ecef",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bind(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "7d2705b34057e008e565afd045c9cc4725a6dfa474dfb511bff2faf2eef7af97",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_key",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bind(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "624a184d98caedcc79b2e513a7a3322a3859fe97c566f802a4509fba97b68803",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_value",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "89348a58e709a312165a0249bf95880f26a45075ae40f817e4bf9880953ef336",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "4993606eedb22aa34a780f5e8f513987b54050938c998ea10befecef219923bc",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_key",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBind(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "0838a7a1447f9f7e66b813d146caabd497b355748faab1687398d557d4fee96c",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_value",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "7448087fc4abe4e91c8b82c3412e551a8806642d1a598ed696844ca259b2d6af",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "14865be22385bd0861389cf66341ca981222dc0b1016cc22e351d6342bc1d7fb",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_key",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::Bound(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "2e856a523061d5ef39c1f4a59e7b84e8f9a0f7e17449187b78ec4574b27f67ac",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_value",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(const TheKeyType &,const TheItemType &)",
+      "cpp_id": "babe7bf717962df1b1a549c982ed7329a6de9843f2e19704edc7c1744337aa48",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(const TheKeyType &,TheItemType &&)",
+      "cpp_id": "a5914affc43e6b7730557c9069841d64530ff993acda6d480754d08619f444e8",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_key",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::TryBound(TheKeyType &&,const TheItemType &)",
+      "cpp_id": "293708161b39a43746bf1fc1f4529cd4856d82ec675fe029d337b00d59ff2e17",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_value",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Add(const TheKeyType &)",
+      "cpp_id": "d0208612715b512aadf732b66e55856553795f6511fcc46e940bfe43f915769c",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::add_ref",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Added(const TheKeyType &)",
+      "cpp_id": "ca655226e2f32fcefeba54f9677e534339cb8db1b67009a6b91d1ddfa00140e0",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::added_ref",
+      "status": "partial"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/flat-borrow-green.gz",
+      "sha256": "e471ff48b6de796d414a91b0ac0aee35457bd4a9c7f0d2bcb9794f4af567e5ec",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-borrow-native.actual.gz",
+      "sha256": "8b3c9c703a74892500029c6faa32087dd5073c37999e56b131e384f904770129",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-borrow-python.gz",
+      "sha256": "d43d5d24746542b20dd20c533636eb01a53b2f8faeeb980be70bbf1d2b808098",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-borrow-clippy.gz",
+      "sha256": "b6b2cbf7e256279880f82b533237d81446864437977e4092cde286616bdb321b",
+      "exit_code": 0
+    }
+  ],
+  "focused_rust_tests_passed": 124,
+  "supplemental_rust_cases": 14,
+  "native_output_rows": 14,
+  "native_expected": "tools/oracle/tkernel_flat_borrow_contracts.expected",
+  "limits": [
+    "Clone models borrowed copies; C++ move, assignment and destruction callbacks remain unproven.",
+    "Slot layout, allocation failure, exception unwinding and arbitrary aliasing remain partial.",
+    "These supplemental cases do not increase original OCCT declaration counts."
+  ]
+}

@@ -3,6 +3,7 @@ use super::flat_table::{FlatItems, FlatSlot, FlatTable, Inserted};
 use super::{DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
 use std::fmt::Debug;
+mod borrowed_binding;
 /// A contiguous Robin Hood key/value map; `FlatDataMap::<i32,i32>::default().bind(1,42)`.
 pub struct FlatDataMap<K, V, H = DefaultHashPolicy> {
     table: FlatTable<K, V, H>,

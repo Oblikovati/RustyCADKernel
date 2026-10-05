@@ -134,6 +134,17 @@ impl<K, H: HashPolicy<K>> FlatMap<K, H> {
         }
     }
 }
+impl<K: Clone, H: HashPolicy<K>> FlatMap<K, H> {
+    /// Hashes before copying a borrowed key, including on hits; `map.add_ref(&key)`.
+    pub fn add_ref(&mut self, key: &K) -> bool {
+        self.table.insert_copied_key(key, (), false).is_new
+    }
+    /// Copies a borrowed key and returns the retained key, as `Added(const&)`; `map.added_ref(&key)`.
+    pub fn added_ref(&mut self, key: &K) -> &K {
+        let result = self.table.insert_copied_key(key, (), false);
+        &self.table.slots[result.original].as_ref().unwrap().key
+    }
+}
 impl<K, H: HashPolicy<K> + Default> FlatMap<K, H> {
     /// Selects capacity with a default policy; `FlatMap::<i32>::new(10)`.
     pub fn new(hint: usize) -> Self {

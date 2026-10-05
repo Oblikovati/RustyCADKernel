@@ -53,6 +53,11 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
             self.rehash((self.slots.len() * 2).max(8));
         }
     }
+    /// Reserves before caller-visible callbacks, as OCCT 3d097a0; `table.reserve_then_hash(&key)`.
+    pub fn reserve_then_hash(&mut self, key: &K) -> usize {
+        self.prepare();
+        self.hasher.hash(key)
+    }
     pub fn lookup(&self, key: &K) -> Option<usize> {
         if self.count == 0 {
             return None;
@@ -76,9 +81,18 @@ impl<K, V, H: HashPolicy<K>> FlatTable<K, V, H> {
         }
     }
     pub fn insert(&mut self, key: K, value: V, replace_key: bool, replace_value: bool) -> Inserted {
-        self.prepare();
         // OCCT retains aHash through lookup and displacement; stateful policies see one call.
-        let hash: usize = self.hasher.hash(&key);
+        let hash: usize = self.reserve_then_hash(&key);
+        self.insert_prepared(key, value, hash, replace_key, replace_value)
+    }
+    pub fn insert_prepared(
+        &mut self,
+        key: K,
+        value: V,
+        hash: usize,
+        replace_key: bool,
+        replace_value: bool,
+    ) -> Inserted {
         if let Some(index) = self.find_cached_hash_slot(&key, hash) {
             let slot = self.slots[index].as_mut().unwrap();
             if replace_key {
@@ -207,4 +221,5 @@ fn capacity_for(count: usize) -> usize {
         .checked_next_power_of_two()
         .expect("flat map capacity exceeds address space")
 }
+mod copy_insertion;
 mod iteration;
