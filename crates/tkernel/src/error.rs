@@ -55,6 +55,13 @@ impl std::fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
+impl From<Error> for crate::standard::Failure {
+    /// Preserves the exception name and message; [`Error`] has no original native stack trace.
+    fn from(error: Error) -> Self {
+        Self::with_message(error.exception_type(), error.message())
+    }
+}
+
 pub(crate) fn seconds_i32(value: i64) -> Result<i32, Error> {
     i32::try_from(value).map_err(|_| Error::new(ErrorKind::NumericOverflow, "32-bit time overflow"))
 }
