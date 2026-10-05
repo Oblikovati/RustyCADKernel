@@ -34360,7 +34360,7 @@
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
     },
     {
-      "upstream_id": "MathOpt::BFGS(Function&,const math_Vector&,const Config&)",
+      "upstream_id": "MathOpt::BFGS(Function &,const math_Vector &,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_BFGS.hxx",
       "rust_item": "rustycad_tkmath::math_opt::bfgs",
@@ -34368,7 +34368,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::BFGSNumerical(Function&,const math_Vector&,double,const Config&)",
+      "upstream_id": "MathOpt::BFGSNumerical(Function &,const math_Vector &,double,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_BFGS.hxx",
       "rust_item": "rustycad_tkmath::math_opt::bfgs_numerical",
@@ -34376,7 +34376,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::LBFGS(Function&,const math_Vector&,size_t,const Config&)",
+      "upstream_id": "MathOpt::LBFGS(Function &,const math_Vector &,size_t,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_BFGS.hxx",
       "rust_item": "rustycad_tkmath::math_opt::lbfgs",
@@ -34384,7 +34384,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::BFGSBounded(Function&,const math_Vector&,const math_Vector&,const math_Vector&,const Config&)",
+      "upstream_id": "MathOpt::BFGSBounded(Function &,const math_Vector &,const math_Vector &,const math_Vector &,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_BFGS.hxx",
       "rust_item": "rustycad_tkmath::math_opt::bfgs_bounded",
@@ -34392,7 +34392,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::Brent(Function&,double,double,const Config&)",
+      "upstream_id": "MathOpt::Brent(Function &,double,double,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Brent.hxx",
       "rust_item": "rustycad_tkmath::math_opt::brent",
@@ -34400,7 +34400,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::Golden(Function&,double,double,const Config&)",
+      "upstream_id": "MathOpt::Golden(Function &,double,double,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Brent.hxx",
       "rust_item": "rustycad_tkmath::math_opt::golden",
@@ -34408,7 +34408,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::BrentWithBracket(Function&,double,double,const Config&)",
+      "upstream_id": "MathOpt::BrentWithBracket(Function &,double,double,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Brent.hxx",
       "rust_item": "rustycad_tkmath::math_opt::brent_with_bracket",
@@ -34456,7 +34456,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::FRPR(Function&,const math_Vector&,const FRPRConfig&)",
+      "upstream_id": "MathOpt::FRPR(Function &,const math_Vector &,const MathOpt::FRPRConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_FRPR.hxx",
       "rust_item": "rustycad_tkmath::math_opt::frpr",
@@ -34464,7 +34464,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::FRPRNumerical(Function&,const math_Vector&,double,const FRPRConfig&)",
+      "upstream_id": "MathOpt::FRPRNumerical(Function &,const math_Vector &,double,const MathOpt::FRPRConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_FRPR.hxx",
       "rust_item": "rustycad_tkmath::math_opt::frpr_numerical",
@@ -34496,7 +34496,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa). Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "MathOpt::GlobalConfig(GlobalStrategy,uint32_t)",
+      "upstream_id": "MathOpt::GlobalConfig(MathOpt::GlobalStrategy,uint32_t)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
       "rust_item": "rustycad_tkmath::math_opt::GlobalConfig::new",
@@ -34504,7 +34504,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::DifferentialEvolution(Function&,const math_Vector&,const math_Vector&,const GlobalConfig&)",
+      "upstream_id": "MathOpt::DifferentialEvolution(Function &,const math_Vector &,const math_Vector &,const MathOpt::GlobalConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
       "rust_item": "rustycad_tkmath::math_opt::differential_evolution",
@@ -34512,7 +34512,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::MultiStart(Function&,const math_Vector&,const math_Vector&,const GlobalConfig&)",
+      "upstream_id": "MathOpt::MultiStart(Function &,const math_Vector &,const math_Vector &,const MathOpt::GlobalConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
       "rust_item": "rustycad_tkmath::math_opt::multi_start",
@@ -34520,7 +34520,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::GlobalMinimum(Function&,const math_Vector&,const math_Vector&,const GlobalConfig&)",
+      "upstream_id": "MathOpt::GlobalMinimum(Function &,const math_Vector &,const math_Vector &,const MathOpt::GlobalConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
       "rust_item": "rustycad_tkmath::math_opt::global_minimum",
@@ -34528,7 +34528,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::GlobalMinimum(Function&,const math_Vector&,const math_Vector&,const GlobalConfig&,const PSOConfig*,const NCollection_DynamicArray<PSOSeedParticle>*,PSOStats*)",
+      "upstream_id": "MathOpt::GlobalMinimum(Function &,const math_Vector &,const math_Vector &,const MathOpt::GlobalConfig &,const MathOpt::PSOConfig *,const NCollection_DynamicArray<MathOpt::PSOSeedParticle> *,MathOpt::PSOStats *)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
       "rust_item": "rustycad_tkmath::math_opt::global_minimum_with_pso",
@@ -34568,7 +34568,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::Newton(Function&,const math_Vector&,const NewtonConfig&)",
+      "upstream_id": "MathOpt::Newton(Function &,const math_Vector &,const MathOpt::NewtonConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
       "rust_item": "rustycad_tkmath::math_opt::newton",
@@ -34576,7 +34576,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::NewtonModified(Function&,const math_Vector&,const NewtonConfig&)",
+      "upstream_id": "MathOpt::NewtonModified(Function &,const math_Vector &,const MathOpt::NewtonConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
       "rust_item": "rustycad_tkmath::math_opt::newton_modified",
@@ -34584,7 +34584,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::NewtonNumericalHessian(Function&,const math_Vector&,double,const NewtonConfig&)",
+      "upstream_id": "MathOpt::NewtonNumericalHessian(Function &,const math_Vector &,double,const MathOpt::NewtonConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
       "rust_item": "rustycad_tkmath::math_opt::newton_numerical_hessian",
@@ -34592,7 +34592,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::NewtonNumerical(Function&,const math_Vector&,double,double,const NewtonConfig&)",
+      "upstream_id": "MathOpt::NewtonNumerical(Function &,const math_Vector &,double,double,const MathOpt::NewtonConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
       "rust_item": "rustycad_tkmath::math_opt::newton_numerical",
@@ -34600,7 +34600,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::NewtonBounded(Function&,const math_Vector&,const math_Vector&,const math_Vector&,const NewtonConfig&)",
+      "upstream_id": "MathOpt::NewtonBounded(Function &,const math_Vector &,const math_Vector &,const math_Vector &,const MathOpt::NewtonConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
       "rust_item": "rustycad_tkmath::math_opt::newton_bounded",
@@ -34696,7 +34696,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::PSO(Function&,const math_Vector&,const math_Vector&,const PSOConfig&,const NCollection_DynamicArray<PSOSeedParticle>*,PSOStats*)",
+      "upstream_id": "MathOpt::PSO(Function &,const math_Vector &,const math_Vector &,const MathOpt::PSOConfig &,const NCollection_DynamicArray<MathOpt::PSOSeedParticle> *,MathOpt::PSOStats *)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_PSO.hxx",
       "rust_item": "rustycad_tkmath::math_opt::pso_seeded",
@@ -34704,7 +34704,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::PSO(Function&,const math_Vector&,const math_Vector&,const PSOConfig&)",
+      "upstream_id": "MathOpt::PSO(Function &,const math_Vector &,const math_Vector &,const MathOpt::PSOConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_PSO.hxx",
       "rust_item": "rustycad_tkmath::math_opt::pso",
@@ -34712,7 +34712,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::Powell(Function&,const math_Vector&,const Config&)",
+      "upstream_id": "MathOpt::Powell(Function &,const math_Vector &,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Powell.hxx",
       "rust_item": "rustycad_tkmath::math_opt::powell",
@@ -34720,7 +34720,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::PowellWithDirections(Function&,const math_Vector&,const math_Matrix&,const Config&)",
+      "upstream_id": "MathOpt::PowellWithDirections(Function &,const math_Vector &,const math_Matrix &,const MathUtils::Config &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Powell.hxx",
       "rust_item": "rustycad_tkmath::math_opt::powell_with_directions",
@@ -34952,7 +34952,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::Uzawa(const math_Matrix&,const math_Vector&,const math_Vector&,size_t,size_t,const UzawaConfig&)",
+      "upstream_id": "MathOpt::Uzawa(const math_Matrix &,const math_Vector &,const math_Vector &,size_t,size_t,const MathOpt::UzawaConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Uzawa.hxx",
       "rust_item": "rustycad_tkmath::math_opt::uzawa",
@@ -34960,7 +34960,7 @@
       "notes": "Explicit MathOpt namespace mapping; MathOpt::Utils is public as math_opt::utils. Function templates map to generics over the math MultipleVarFunction/Function/HessianFunction traits, config structs deriving MathUtils::Config/NDimConfig hold it as a `solver`/`base` field, overloads get distinct names, optional pointer arguments become Option, and NCollection_DynamicArray seeds become slices. Differential probes: modern_opt, modern_frpr, modern_newton, modern_lbfgs, scalar_opt, modern_global, modern_swarm and mathopt_* (utils, polish, uzawa)."
     },
     {
-      "upstream_id": "MathOpt::UzawaEquality(const math_Matrix&,const math_Vector&,const math_Vector&,const UzawaConfig&)",
+      "upstream_id": "MathOpt::UzawaEquality(const math_Matrix &,const math_Vector &,const math_Vector &,const MathOpt::UzawaConfig &)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Uzawa.hxx",
       "rust_item": "rustycad_tkmath::math_opt::uzawa_equality",
