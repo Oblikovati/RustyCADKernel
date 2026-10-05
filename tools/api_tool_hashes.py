@@ -31,6 +31,7 @@ IMPLEMENTATION_FILES: dict[str, tuple[str, ...]] = {
         "tools/api_crosswalk.py",
         "tools/api_rust_kind.py",
         "tools/api_template_selectors.py",
+        "tools/api_scoped_alias_selectors.py",
         "tools/api_identity.py",
         "tools/api_report_inputs.py",
         "tools/api_inventory/__init__.py",
