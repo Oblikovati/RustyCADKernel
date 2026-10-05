@@ -216,5 +216,116 @@
     "Nineteen supplemental Rust cases and nineteen native output rows do not increase original OCCT declaration counts."
   ],
   "native_expected": "tools/oracle/tkernel_flat_hash_contracts.expected",
-  "native_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_flat_hash_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/flat-hash-native"
+  "native_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_flat_hash_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/flat-hash-native",
+  "integrated_compiler_validation": {
+    "source_revision": "f5ab79bb3f9317de4d2ad03b1a2aa0a7941f811b",
+    "bindings": [
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bind",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "a96e4cc041eefb0372983e9eb25f6a2c813d3a6a5dfc1ff1348870f5b5e38717"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bind",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "4e71b3d25fd52b6334bdd2070add425cd2edbb5b0d84875f69458f959423f3dc"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bound",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "333be133604c402deb392d8f9fa1e027e7df55b27c66477a14224608976c9cd7"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bound",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "8bd572d923d856698cbd279953e19e48ebb0823cf26ce91e902c5d85ac54e13c"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::emplace",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "c294f7c7c17334b94399e1dcb3a51dfe3829253d84cb09616b1005ee1bcab7f8"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::emplaced",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "26ad7bd9bd4765f21a5ec1b32ba2533a3ea8df44de9a94f127643ec19aedcbf8"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_emplace",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "8f460342a4196b2647d0e9eaec42c84a93301ce02e0c4cd1f769da1b6ce445cb"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_emplaced",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/binding.rs",
+        "source_sha256": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b",
+        "declaration_sha256": "a19552a4b7733f1b749fac806e2a61712f82ab133a2a5549980a1250eccaea39"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::add",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "70490a3babc0d5fdc8c0c75163f06fae537a585fe7a6fd91dadac26a552a65c1"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::added",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "d64c11c01919ae39058330ac074aca18c4718e036141fcbe5eb239b876e0b164"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::emplace",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "65202a64eb2e6cdfd67adfcd053867e6a51a26cab867e4c325e99a6cdd09910f"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::emplaced",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "3a183be550edcb3c14230ca0875b1162824938aeb49709f254e637a488eb106d"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::try_emplace",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "f45d6719db9767f7fad3f1c6aaacbf2290175930fddc7a9fcb17ecaa0f6a7e88"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::try_emplaced",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "24d23b78998ff3b44f5ad5dbeb329973cc8b615fa65534d8a1b77cc57ed6a142",
+        "declaration_sha256": "e4a2e8970f3e4dff3416dd43f4c65ead18d7491976493449a457db67803a0f97"
+      }
+    ],
+    "inventory_sha256": "b29857bad1a56b5a37b5d1939a383b2690fbb58f1b22616c6a5045d1f61dde84"
+  },
+  "production_source_sha256": {
+    "crates/tkernel/src/ncollection/flat_table.rs": "a1a60fcf1f109fd165805f1c1aa3b1bb310bb22ea41a3afc49b8ea8950c9c3bc",
+    "crates/tkernel/src/ncollection/flat_data_map/binding.rs": "1c274b2e4aa2e4a6fede69eff13c8e5975637cccdd508be9c688a1355263df4b"
+  },
+  "native_fixture_sha256": "b305cd97d41aae2651ecc994e0b8b79b0c3681199572fc18069d9641479116e0",
+  "native_expected_sha256": "97a7ddb97c3d85dd78cdd2a311fe5e4bdb3cdc545a2432d38e9f80b663c0df90",
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
 }
