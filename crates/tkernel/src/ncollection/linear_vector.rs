@@ -277,8 +277,15 @@ impl<T: Clone> LinearVector<T> {
         }
         rollback.commit();
     }
-    /// Resizes, copying the fill value only into new slots; `vector.resize_with_value(5,-1)`.
-    pub fn resize_with_value(&mut self, size: usize, value: T) {
+    /// Resizes by cloning `value` into each new slot:
+    ///
+    /// ```
+    /// let mut vector = rustycad_tkernel::ncollection::LinearVector::<i32>::default();
+    /// let fill = -1;
+    /// vector.resize_with_value_ref(5, &fill);
+    /// assert_eq!(vector[4], -1);
+    /// ```
+    pub fn resize_with_value_ref(&mut self, size: usize, value: &T) {
         if size < self.len() {
             self.elements.truncate(size);
             return;
@@ -286,8 +293,15 @@ impl<T: Clone> LinearVector<T> {
         self.reserve(size);
         let previous_len = self.len();
         let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
-        rollback.elements.resize(size, value);
+        while rollback.elements.len() < size {
+            rollback.elements.push(value.clone());
+        }
         rollback.commit();
+    }
+
+    /// Resizes, cloning `value` into new slots; `vector.resize_with_value(5, -1)`.
+    pub fn resize_with_value(&mut self, size: usize, value: T) {
+        self.resize_with_value_ref(size, &value);
     }
 }
 impl<T> std::ops::Index<usize> for LinearVector<T> {

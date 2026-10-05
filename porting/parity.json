@@ -70156,9 +70156,12 @@
       "upstream_id": "NCollection_LinearVector::Resize(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize_with_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::resize_with_value_ref",
+        "rustycad_tkernel::ncollection::LinearVector::resize_with_value"
+      ],
       "status": "partial",
-      "notes": "Native grow() uses std::move_if_noexcept for existing values; Rust Vec relocation does not invoke Clone. If fill construction panics, Rust drops completed tail values while native leaves them untracked. See tools/oracle/tkernel_linear_vector_move_if_noexcept.md."
+      "notes": "resize_with_value_ref clones each added slot, matching native copy construction; resize_with_value is the owned-value adapter. Native failure keeps Size unchanged but leaves completed untracked tail objects for raw-storage cleanup, while Rust drops them. Safe Rust borrowing cannot pass an element borrowed from this same vector while mutably resizing it, even where native in-capacity alias use is defined. See tools/oracle/tkernel_linear_vector_resize_value_ref.expected."
     },
     {
       "upstream_id": "NCollection_LinearVector::Value(size_t) const",
