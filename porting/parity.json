@@ -85170,9 +85170,9 @@
       "upstream_id": "TCollection_ExtendedString::Cat(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_c_units",
       "status": "implemented",
-      "notes": "The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded C-string adapter scans to the first zero. None models native extStringLen(nullptr)==0 and yields an unchanged copy."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator+(const char16_t* const) const",
@@ -85370,9 +85370,9 @@
       "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert",
-      "status": "implemented",
-      "notes": "Generic over Into<ExtendedString>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_c_units",
+      "status": "partial",
+      "notes": "The bounded adapter scans to the first zero and validates the index before null/empty input. It covers non-aliased external buffers; the native pointer overload also accepts self-aliasing pointers, whose reallocation behavior is not modeled by this safe adapter."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Insert(int,const TCollection_ExtendedString&)",
@@ -85426,9 +85426,9 @@
       "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_units",
-      "status": "implemented",
-      "notes": "Overwrites and grows. Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units",
+      "status": "partial",
+      "notes": "The bounded adapter scans to the first zero and validates the index before null/empty input. It covers non-aliased external buffers; self-aliasing pointer behavior is not modeled by this safe adapter."
     },
     {
       "upstream_id": "TCollection_ExtendedString::SetValue(int,const TCollection_ExtendedString&)",
@@ -85514,9 +85514,9 @@
       "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend",
-      "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
+      "status": "partial",
+      "notes": "The bounded adapter scans to the first zero and treats null/empty input as a no-op. It covers non-aliased external buffers; the native overload has a dedicated self-aliasing path, which remains unmodeled."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Prepend(const TCollection_ExtendedString&)",
