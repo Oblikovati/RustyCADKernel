@@ -695,9 +695,9 @@
       "upstream_id": "MathPoly::PolyResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
-      "rust_item": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index<usize>>::index",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending. Exact compiler Index<usize> selector; native physical-root-storage indexing preserves IEEE bits independently of root count (porting/audits/polyresult-index-bindings.json)."
     },
     {
       "upstream_id": "MathPoly::PolyResult::NbRealRootsWithMultiplicity() const",
@@ -32089,9 +32089,9 @@
       "upstream_id": "MathUtils::PolyResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index<usize>>::index",
       "status": "implemented",
-      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded. Exact compiler Index<usize> selector; native physical-root-storage indexing preserves IEEE bits independently of root count (porting/audits/polyresult-index-bindings.json)."
     },
     {
       "upstream_id": "MathUtils::VectorResult",

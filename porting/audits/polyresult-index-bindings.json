@@ -1,0 +1,82 @@
+{
+  "base_revision": "68414cb48f443176e98deb6d66b05709aadc119b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Repair two exact Index<usize> compiler selectors and verify defined physical root storage reads; runtime implementation unchanged.",
+  "bindings": [
+    {
+      "upstream_id": "MathPoly::PolyResult::operator[](size_t) const",
+      "old_rust_item": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index>::index",
+      "new_rust_item": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index<usize>>::index",
+      "cpp_ids": [
+        "d5fa65c96ca6443f0c03d64320af91df3fcd0b6ac57349ea4818d64b6a48c3db"
+      ],
+      "rust_declaration": {
+        "path": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index<usize>>::index",
+        "kind": "function",
+        "source_file": "crates/tkmath/src/math_poly/mod.rs",
+        "source_sha256": "1977951b12346db1716e4eb303c5c466c2fa317a2828a3cfc7cb214e5815f9f8",
+        "declaration_sha256": "d5b22a10f7b01337363c0b10563f2659a8fffc987eff816a1454b13f6cce5d0a"
+      }
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::operator[](size_t) const",
+      "old_rust_item": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index>::index",
+      "new_rust_item": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index<usize>>::index",
+      "cpp_ids": [
+        "5c5a5536a965fad9db00d309a69eb1715be76fe37caca439d0c32320cf460e23"
+      ],
+      "rust_declaration": {
+        "path": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index<usize>>::index",
+        "kind": "function",
+        "source_file": "crates/tkmath/src/math_utils/types.rs",
+        "source_sha256": "4b6379360ea572532baf893d66450a45fc21cdfab1372fc496e758381a17757e",
+        "declaration_sha256": "2353f7d417a0f4788a3bf6fcb7bb7d3fbe5d7b40aaa3778a9013c9f9416d0e21"
+      }
+    }
+  ],
+  "source_sha256": {
+    "porting/parity.json": "04681bad5552ef361491355fce08bccd71c1b8d914fea7dad7dc6bb12ec862d0",
+    "crates/tkmath/tests/poly_result_index_behavior.rs": "5a057a52b6a8e3e20ec047b7b45b391384d8053836f6a1de26d3395c5e6c3952",
+    "tools/oracle/tkmath_poly_result_index.cxx": "4c4b136b00b2d39021600b2cf6c34a168174a8a15be2c1c6463b72e734e6ce14",
+    "tools/oracle/tkmath_poly_result_index.expected": "519478792087ba0612d578f80b1f233f59b1194233f082e429c3a380955b6cc4",
+    "porting/api-inventory/rust-api.json.gz": "302520f92d722378a765f0aff6dea3d0264ca8c6b3a292a99ab04be54b4ecc68",
+    "porting/api-inventory/api-crosswalk.json.gz": "3bc50a6ebca28daba945c570c311fcece793c4bbfecc9f75c7af7992ec340d6b"
+  },
+  "native_header_sha256": {
+    "MathPoly_Types.hxx": "dbe011375ca9e5ae1870cef9aa9e710494063cc65746ae15a7d7cbd6d550ca9b",
+    "MathUtils_Types.hxx": "48a35394f88bc81faf3c5e3bb98ac771cb212c7ab7d2c01014f42ec0f7951a96"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_compile_command": "g++ -std=c++17 -I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/tkmath_poly_result_index.cxx -o /tmp/tkmath-poly-result-index",
+  "native_executable_sha256": "cfa05a4e3e4aba88cadfc7c7501f6cfb018457053155a07924e5b5baa8e99aa1",
+  "native_actual_sha256": "519478792087ba0612d578f80b1f233f59b1194233f082e429c3a380955b6cc4",
+  "native_output_matches_expected": true,
+  "rust_test_command": "cargo test -p rustycad-tkmath --test poly_result_index_behavior --locked",
+  "rust_test_summary": {
+    "passed": 2,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 1,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_targeted_clippy_exit_code": 0,
+  "logs": {
+    "focused": {
+      "path": "porting/runtime-evidence/polyresult-index-focused.log.gz",
+      "sha256": "e572ef7b0ba6a1c967e448df89d61debe4adb34f504837e3b4798418ff8a0ec0"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/polyresult-index-clippy.log.gz",
+      "sha256": "c38c7f7d7ddb67874c5ee10f35cfe61dc1013f46b8c753f4ad0ccf1859b50147"
+    }
+  },
+  "complete_api_parity": false,
+  "limitations": [
+    "Native defined indices only: 0..20 for MathPoly, 0..4 for MathUtils; no out-of-array C++ access.",
+    "The existing published compiler capture predates this branch; selected Rust source hashes are checked unchanged.",
+    "New fixtures are supplemental, not new legacy declarations.",
+    "Only focused Rust tests and targeted Clippy were run on this metadata/test-only branch."
+  ]
+}
