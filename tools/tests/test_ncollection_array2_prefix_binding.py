@@ -19,7 +19,7 @@ ROWS = (
         "NCollection_Array2::Init(NCollection_Array2::const_reference)",
         "aa6064b6be6ecf62190be44bb2e418f1912f1c57bfd9cf64be05d1bb7e7314a3",
         "NCollection_Array2::Init(const_reference)",
-        "rustycad_tkernel::ncollection::Array2::init",
+        "rustycad_tkernel::ncollection::Array2::init_ref",
     ),
 )
 

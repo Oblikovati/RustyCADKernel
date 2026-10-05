@@ -69497,9 +69497,9 @@
       "upstream_id": "NCollection_Array2::Init(const_reference)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array2::init",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::init_ref",
       "status": "partial",
-      "notes": "Fills elements in storage order through Array1::init_ref; custom-element assignment count and row-major coverage are probed in porting/audits/ncollection-array2-buffer-prefix.json. Partial: Rust read-only shared views detach on mutation, and Rust init does not model native self/source aliasing."
+      "notes": "Borrowed row-major fill delegates to Array1::init_ref; a source-lifetime test proves four assignments occur without clone construction. Partial: read-only shared views detach on mutation, and native self/source aliasing remains unmodeled."
     },
     {
       "upstream_id": "NCollection_Array2::First() const noexcept",

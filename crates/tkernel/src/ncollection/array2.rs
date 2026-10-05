@@ -245,7 +245,13 @@ impl<'a, T: Clone> Array2<'a, T> {
 impl<T: Clone> Array2<'_, T> {
     /// Fills the rectangle; `array.init(42)`.
     pub fn init(&mut self, value: T) {
-        self.elements.init(value);
+        // The native loop assigns from one borrowed value rather than cloning a temporary per slot.
+        self.init_ref(&value);
+    }
+    /// Assigns from a borrowed value in row-major order; `array.init_ref(&fill_value)`.
+    pub fn init_ref(&mut self, value: &T) {
+        // Keep the borrowed contract so custom elements can assign without copy construction.
+        self.elements.init_ref(value);
     }
     /// Assigns bounds and contents, reusing equal-size storage; `dest.assign(&source)`.
     pub fn assign(&mut self, source: &Array2<'_, T>) {
