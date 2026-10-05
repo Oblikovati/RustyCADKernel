@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "scope": "Four existing Storage_DefaultCallBack implementations: compiler path repair only.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_inventory_revision": "f8413c7f38359e99895b6c4a7e8c7f6ef3669ba8",
+  "bindings": [
+    {
+      "selector": "Storage_DefaultCallBack::New() const",
+      "cpp_id": "b5cf7df6a9c44ffe387ce283cee384023a60e11705862ea8a75d6fd31e94760d",
+      "rust_path": "rustycad_tkernel::storage::DefaultCallBack::<rustycad_tkernel::storage::CallBack>::new_persistent",
+      "source_file": "crates/tkernel/src/storage/callback.rs",
+      "source_sha256": "717f46b7d72ac0701908df1f48786dbc7149034e45d8d72a41f4a3bb70c5d164",
+      "previous_status": "implemented"
+    },
+    {
+      "selector": "Storage_DefaultCallBack::Add(const occ::handle<Standard_Persistent>&,const occ::handle<Storage_Schema>&) const",
+      "cpp_id": "e0d0624a38fbfb0a70cc60844fd12db1ec5aa7d82a2a72dc5cbc9b3111686e53",
+      "rust_path": "rustycad_tkernel::storage::DefaultCallBack::<rustycad_tkernel::storage::CallBack>::add",
+      "source_file": "crates/tkernel/src/storage/callback.rs",
+      "source_sha256": "717f46b7d72ac0701908df1f48786dbc7149034e45d8d72a41f4a3bb70c5d164",
+      "previous_status": "implemented"
+    },
+    {
+      "selector": "Storage_DefaultCallBack::Write(const occ::handle<Standard_Persistent>&,const occ::handle<Storage_BaseDriver>&,const occ::handle<Storage_Schema>&) const",
+      "cpp_id": "01d194b7ee759e50ea856a3e8632f18c6e31f9c28608e23800dd5d3e256044f5",
+      "rust_path": "rustycad_tkernel::storage::DefaultCallBack::<rustycad_tkernel::storage::CallBack>::write",
+      "source_file": "crates/tkernel/src/storage/callback.rs",
+      "source_sha256": "717f46b7d72ac0701908df1f48786dbc7149034e45d8d72a41f4a3bb70c5d164",
+      "previous_status": "implemented"
+    },
+    {
+      "selector": "Storage_DefaultCallBack::Read(const occ::handle<Standard_Persistent>&,const occ::handle<Storage_BaseDriver>&,const occ::handle<Storage_Schema>&) const",
+      "cpp_id": "75ad351abcbe7c8fe67beb413e4ac8388870c5df6fd06b8632eea35426bafc6f",
+      "rust_path": "rustycad_tkernel::storage::DefaultCallBack::<rustycad_tkernel::storage::CallBack>::read",
+      "source_file": "crates/tkernel/src/storage/callback.rs",
+      "source_sha256": "717f46b7d72ac0701908df1f48786dbc7149034e45d8d72a41f4a3bb70c5d164",
+      "previous_status": "implemented"
+    }
+  ],
+  "source_review": "Pinned Storage_DefaultCallBack.cxx creates a plain persistent instance; Add and Write are no-ops; Read delegates SkipObject. Rust callback.rs matches these operations. Existing storage_api_behavior/schema.rs covers creation and skipping.",
+  "limitations": [
+    "No new native replay or behavior claim; existing parity statuses preserved.",
+    "Original legacy declaration count unchanged."
+  ],
+  "validation": {
+    "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_storage_default_callback_bindings",
+    "exit_code": 0,
+    "passed": 1,
+    "log": "porting/runtime-evidence/storage-default-callback-selectors.log.gz",
+    "log_sha256": "e53ae63ec4b8e8fb9e897d4db7cf93c726d9f00616ff7f73e10926adaa1e58d7"
+  }
+}
