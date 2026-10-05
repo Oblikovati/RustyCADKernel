@@ -94381,7 +94381,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::named",
       "status": "partial",
-      "notes": "A null name is Option::None and leaves the object like the default constructor (native leaves the name uninitialized). Unix stores the name only; Windows additionally probes GetModuleHandleW. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "A null name is Option::None and leaves the object like the default constructor (native leaves the name uninitialized); non-null valid UTF-8 names store the prefix before the first NUL, checked by the pinned Linux probe. Arbitrary non-UTF-8 char* bytes remain unrepresented. Unix stores the name only; Windows additionally probes GetModuleHandleW, and loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::SetName(const char* const)",
@@ -94389,7 +94389,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::set_name",
       "status": "partial",
-      "notes": "A null name keeps the current one, as natively on Unix (native leaks the old buffer; Rust drops it). Windows also probes GetModuleHandleW. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "A null name keeps the current one; valid UTF-8 names truncate at the first NUL as native strlen/strcpy do (pinned Linux probe). Arbitrary non-UTF-8 char* bytes remain unrepresented. Replacing an old native name leaks that allocation; Rust replaces it safely. Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Name() const",
@@ -94405,7 +94405,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_open",
       "status": "partial",
-      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW through a narrow libc FFI module; true when a handle was obtained. Probe osd_shlib covers system libraries, the main program and missing files. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW; stored names have native C-string prefix semantics including the empty prefix, checked by tkernel_osd_shlib_nul. Arbitrary non-UTF-8 path bytes remain unrepresented. Existing osd_shlib probe covers system libraries, the main program and missing files. Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlSymb(const char* const) const",
@@ -94413,7 +94413,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_symb",
       "status": "partial",
-      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Before DlOpen the null handle is RTLD_DEFAULT on glibc, as natively; after dl_close Rust answers None where native code uses a dangling handle. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Valid UTF-8 symbol names use native prefix-before-NUL semantics, including a leading-NUL lookup, checked by tkernel_osd_shlib_nul; arbitrary non-UTF-8 symbol bytes remain unrepresented. Before DlOpen a null handle is RTLD_DEFAULT on glibc. After DlClose native retains a dangling handle (subsequent lookup is undefined); Rust answers None. Windows loader support remains pending."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlClose() const",
