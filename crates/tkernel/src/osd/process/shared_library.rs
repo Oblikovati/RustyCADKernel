@@ -196,13 +196,18 @@ mod ffi {
 #[cfg(windows)]
 mod ffi {
     use super::windows_backend::{
-        SystemWindowsCalls, close_with, error_with, module_cache_with, open_with, symbol_with,
+        SystemWindowsCalls, WindowsErrorBuffers, close_with, error_with, module_cache_with,
+        open_with, symbol_with,
     };
     use crate::osd::LoadMode;
-    use std::{ffi::c_void, sync::atomic::AtomicU32};
+    use std::{
+        ffi::c_void,
+        sync::{Mutex, atomic::AtomicU32},
+    };
 
     static CALLS: SystemWindowsCalls = SystemWindowsCalls;
     static LAST_DLL_ERROR: AtomicU32 = AtomicU32::new(0);
+    static ERROR_BUFFERS: Mutex<WindowsErrorBuffers> = Mutex::new(WindowsErrorBuffers::new());
 
     pub(super) fn cached_handle(name: &[u8]) -> *mut c_void {
         module_cache_with(&CALLS, name)
@@ -217,7 +222,7 @@ mod ffi {
         close_with(&CALLS, handle);
     }
     pub(super) fn last_error(name: Option<&[u8]>) -> Option<Vec<u8>> {
-        Some(error_with(&CALLS, &LAST_DLL_ERROR, name))
+        Some(error_with(&CALLS, &LAST_DLL_ERROR, &ERROR_BUFFERS, name))
     }
 }
 

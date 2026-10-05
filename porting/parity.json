@@ -94381,7 +94381,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::named_bytes",
       "status": "partial",
-      "notes": "The byte constructor preserves arbitrary non-NUL bytes and native first-NUL prefix semantics; valid UTF-8 callers retain the named convenience method. Null name is Option::None; native leaves its name uninitialized and Windows conversion may fail. Unix behavior is covered by tkernel_osd_shlib_bytes. Windows loader is implemented and fake-tested, but native runtime is unverified; Windows FormatMessage failure-buffer behavior remains partial (tools/oracle/tkernel_osd_shlib_windows.md)."
+      "notes": "The byte constructor preserves arbitrary non-NUL bytes and native first-NUL prefix semantics; valid UTF-8 callers retain the named convenience method. Null name is Option::None; native leaves its name uninitialized and Windows conversion may fail. Unix behavior is covered by tkernel_osd_shlib_bytes. Windows loader is implemented and fake-tested, but native runtime is unverified (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::SetName(const char* const)",
@@ -94429,7 +94429,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error_bytes",
       "status": "partial",
-      "notes": "Unix dlerror bytes are copied before the next loader call and consumed; None when no error. Windows formats the retained GetLastError code through FormatMessageW and WideCharToMultiByte; fake-tested and cross-compiled, not runtime-verified. Native static buffers retain prior text if formatting/conversion fails, while Rust returns empty bytes; see tools/oracle/tkernel_osd_shlib_windows.md."
+      "notes": "Unix dlerror bytes are copied before the next loader call and consumed; None when no error. Windows passes persistent 1024-unit and 1024-byte buffers directly to FormatMessageW/WideCharToMultiByte and ignores both return codes, retaining any writes made before failure. Rust serializes access with a mutex; fake tests cover partial writes and capacity boundaries. Native Windows runtime remains unverified (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Destroy()",

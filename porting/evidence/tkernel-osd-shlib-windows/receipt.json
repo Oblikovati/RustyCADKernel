@@ -1,0 +1,89 @@
+{
+  "implementation_commits": [
+    "9250a814f03c40e4c1f695377906b8944ffdfc18",
+    "179aa2062594f3482db376eebb899fb8d306810e",
+    "4fda5dd1999e04198d3a536938a91e74c2529fe9"
+  ],
+  "known_limits": [
+    "Native Windows runtime is unavailable; only Linux fake calls and Windows GNU compile checks were run.",
+    "OCCT_UWP LoadPackagedLibrary branch is not implemented.",
+    "Safe Rust null-name behavior returns failure instead of reproducing native null-pointer conversion failure.",
+    "Native dangling-name and closed-handle states are represented safely rather than reproduced."
+  ],
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "occt_source_hashes": {
+    "OSD_Path.cxx": "431435518fb608b406a24f1d62efee553fc2aaf77e39d2d71e8e039c6fb0d5fc",
+    "OSD_SharedLibrary.cxx": "c1db312f5f4e1214ed25ed2a15d1b81fc9b86ff003bc49b7d8b5436b50cfbcb2",
+    "OSD_SharedLibrary.hxx": "7056c7ca0d05c5b787569bba3a4b95b1049465a30c094a6d854f17dbb428799e",
+    "TCollection_ExtendedString.cxx": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+  },
+  "rust_source_sha256": {
+    "crates/tkernel/Cargo.toml": "1e3bb49bd7104209041bffc9ad419edf888b8766d03bd31b014971d23b4d904c",
+    "crates/tkernel/src/osd/process/shared_library.rs": "4d141d003ad2c4f24319bd8bb9babafcb492fa4610eeb985b6c0545ccdc4b0a7",
+    "crates/tkernel/src/osd/process/shared_library/windows_backend.rs": "252c6a0bc07d7c87cc42166080dc05c1d975365ef8cc11a0bb14d79d282fad99",
+    "crates/tkernel/src/osd/process/shared_library/windows_backend/tests.rs": "5414bf6fad83dede188cc5d26b01656a6ef9467c48597e9a0c8ef228433b14e8",
+    "porting/parity.json": "cd9ed6d01c7ed31214c40f85377f4999591f3f31539ac76ef935c7b9cc40c69a",
+    "tools/oracle/tkernel_osd_shlib_windows.md": "5ee7dd83c056759ff6c0a39b105ab02c0e8a5e5a526ee17329a98fb2512dc999"
+  },
+  "schema_version": 1,
+  "scope": "Windows OSD_SharedLibrary loader, persistent static error buffers, and source-bound validation",
+  "toolchain": {
+    "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)"
+  },
+  "validation": {
+    "cargo_test_summary": {
+      "command_exit_code": 0,
+      "command_succeeded": true,
+      "failed": 0,
+      "failed_result_groups": 0,
+      "ignored": 0,
+      "passed": 2757,
+      "result_groups": 162
+    },
+    "host_clippy_strict_exit_code": 0,
+    "logs": [
+      {
+        "command": "cargo test -p rustycad-tkernel",
+        "exit_code": 0,
+        "gzip_sha256": "b425ad4f2303e960a6a8f36cc5bbadf4996d4ddcf958f15ea8141c6b6d47be58",
+        "path": "cargo-test.log.gz",
+        "raw_bytes": 222441,
+        "raw_sha256": "7fc024ff181dfce3eb65e4224ec4dde8fd59999449cb1b8fc9334204874839cb"
+      },
+      {
+        "command": "cargo clippy -p rustycad-tkernel --tests -- -D warnings",
+        "exit_code": 0,
+        "gzip_sha256": "56e28766c3d32d7b27e795426171141faaec4651907309dba932e5a1f35c7897",
+        "path": "host-clippy.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "ae71aae68047f1fa82f6c470c5e3bb3d54e4af081cd94713f52efa63dfd516c3"
+      },
+      {
+        "command": "cargo check -p rustycad-tkernel --target x86_64-pc-windows-gnu",
+        "exit_code": 0,
+        "gzip_sha256": "89d2dd5267ab6f7eb89fc77ef5e39e5e9ef561e8ec9bd629feb036277d576e2a",
+        "path": "windows-check.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "551ab49c30361a126af3257f0660c2e00084f4c8ab03420ea6a94e8e61ce6cde"
+      },
+      {
+        "command": "cargo clippy -p rustycad-tkernel --target x86_64-pc-windows-gnu --lib -- -D warnings",
+        "exit_code": 0,
+        "gzip_sha256": "c76e6c44041b87bc021a6efe2b2611f7131b3c570d424f58494472894c7c718a",
+        "path": "windows-clippy.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "3642cddf35541dc9d68c80e575dd7ffd3f43f3dd904da5fe1623561eeaf0311f"
+      }
+    ],
+    "native_windows_runtime_tested": false,
+    "windows_error_buffer_fake_tests": [
+      "failed_format_call_keeps_its_partial_wide_write",
+      "failed_conversion_exposes_its_partial_utf8_write",
+      "fixed_buffer_failures_keep_their_partial_output_writes"
+    ],
+    "windows_fake_test_count": 10,
+    "windows_gnu_check_exit_code": 0,
+    "windows_gnu_clippy_strict_exit_code": 0
+  }
+}
