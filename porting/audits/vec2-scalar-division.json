@@ -1,0 +1,63 @@
+{
+  "schema": "rustycad.native-behavior-receipt.v1",
+  "scope": "Generic NCollection_Vec2 scalar operator/ and operator/= dispatch",
+  "upstream": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+    "header_sha256": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+    "evidence_lines": {
+      "operator/=(Element_t)": "217-222: invokes element /= on x then y",
+      "operator/(Element_t) const": "238-242: constructs result from x / divisor and y / divisor"
+    }
+  },
+  "compiler_selectors": {
+    "rustdoc_command": "RUSTC_BOOTSTRAP=1 cargo rustdoc -p rustycad-tkernel --lib -- -Z unstable-options --output-format json",
+    "rustdoc_json_sha256": "2984658f1b569d73cc8641903fb13a155d34bac3baedebccd1b68d978a2b9f09",
+    "upstream_rows": [
+      "NCollection_Vec2::operator/=(Element_t)",
+      "NCollection_Vec2::operator/(Element_t) const"
+    ],
+    "rustdoc_items": [
+      {
+        "item_id": 3689,
+        "path": "<rustycad_tkernel::ncollection::Vec2 as DivAssign<T>>::div_assign",
+        "signature": "(&mut Vec2<T>, divisor: T) -> ()",
+        "source": "crates/tkernel/src/ncollection/vector/arithmetic.rs:243-246"
+      },
+      {
+        "item_id": 3692,
+        "path": "<rustycad_tkernel::ncollection::Vec2 as Div<T>>::div",
+        "signature": "(Vec2<T>, divisor: T) -> Vec2<T>",
+        "source": "crates/tkernel/src/ncollection/vector/arithmetic.rs:250-252"
+      }
+    ],
+    "overload_distinction": "The vector/vector Div and DivAssign implementations have separate rustdoc items with RHS Self; scalar rows use divisor T."
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_vec2_scalar_division_paths.cxx",
+    "source_sha256": "30156cfb64ddb7d5b20cddfc754e0151f6ccee6f1057c3383fcbd8b9f4520805",
+    "expected": "tools/oracle/tkernel_vec2_scalar_division_paths.expected",
+    "expected_sha256": "b59b93d49a7b91f88d7d5afdb130295cd3041de4bb07c7ac9776d45625882add",
+    "binary_sha256": "17f6311ac4864883e4a6b00366a70bd067796546ba07c7473e1b3c13e5b3dff3",
+    "compiler": "g++ 13.3.0",
+    "command": "c++ -std=c++17 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_vec2_scalar_division_paths.cxx -o /tmp/vector-vec2-scalar-division && /tmp/vector-vec2-scalar-division > /tmp/vector-vec2-scalar-division.actual",
+    "result": "native output matched expected exactly: 1023 1043, then 2023 2043"
+  },
+  "rust": {
+    "implementation": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+    "implementation_sha256": "6370cfda09bdd050095c96c243f988d473a53cd406988ef80560cc2f66fc8fd8",
+    "test": "crates/tkernel/tests/ncollection_vec2_generic_scalar_division.rs",
+    "test_sha256": "3314b24ec775f225d66b6c0c497740c85f1efcb4c970beb9c3956d42ca93da9c",
+    "focused_result": "3 passed, 0 failed",
+    "package_test": "cargo test -p rustycad-tkernel",
+    "package_result": "164 result groups, 2764 passed, 0 failed, 0 ignored",
+    "package_log": "porting/audits/vec2-scalar-division-tkernel-tests.log.gz",
+    "package_log_sha256": "b95f60b37a0ef825ac8eb69bdd6674c8548e7e4e47c516a36605da667caa8fb6",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_result": "passed"
+  },
+  "limits": [
+    "Supplemental custom-element evidence does not add legacy declarations.",
+    "Vec3/Vec4 reciprocal scalar division is unchanged and outside this change."
+  ]
+}
