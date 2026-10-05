@@ -85,5 +85,28 @@
     "native_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
     "meaning": "Debug is a separate CMake profile, not a replacement for the pinned RelWithDebInfo result."
   },
-  "verifier_command": "PATH=/home/vmiguel/.cargo/bin:$PATH python3 tools/verify_tkmath_legacy.py --toolkit TKGeomBase --source /home/vmiguel/git/oblikovati-workspace/OCCT --build-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/occt-modeling-tkgeombase-debug --output /tmp/rustycad-tkgeombase-hyperbola-profile/target/oracle-tkgeombase-debug-profile --cargo-target-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/cargo-debug-profile --jobs 8"
+  "verifier_command": "PATH=/home/vmiguel/.cargo/bin:$PATH python3 tools/verify_tkmath_legacy.py --toolkit TKGeomBase --source /home/vmiguel/git/oblikovati-workspace/OCCT --build-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/occt-modeling-tkgeombase-debug --output /tmp/rustycad-tkgeombase-hyperbola-profile/target/oracle-tkgeombase-debug-profile --cargo-target-dir /tmp/rustycad-tkgeombase-hyperbola-profile/target/cargo-debug-profile --jobs 8",
+  "raw_archive": {
+    "path": "tkgeombase-debug-profile-0fcfd33.tar.gz",
+    "sha256": "395a251f2ab30d339ac4d94a749f170a4ba23715033377e1adfd7f8023e3f4f4",
+    "bytes": 1583133,
+    "contents": "verifier report, declaration join, native GTest XML and logs, all Rust runtime logs, focused test output, per-file manifest"
+  },
+  "declaration_join": {
+    "tool": "tools/join_legacy_runtime_evidence.py",
+    "command": "python3 tools/join_legacy_runtime_evidence.py target/oracle-tkgeombase-debug-profile/report.json --root . --occt-source /home/vmiguel/git/oblikovati-workspace/OCCT --output target/oracle-tkgeombase-debug-profile/joined-report.json",
+    "source_revision": "0fcfd33dcfb82a22fea7042055ab8db5c343889c",
+    "source_clean_at_capture": true,
+    "report_sha256": "a35139d6a1c803bcf2def5e5222fa89e6354195a571e9dc18d05c58f39ddbbd1",
+    "overall_counts": {
+      "declared": 8648,
+      "passed": 839,
+      "unverified": 7809,
+      "upstream_skipped": 0
+    },
+    "tkgeombase_passed": 839,
+    "mapping_anomalies": 0,
+    "unclaimed_runtime_cases": 0,
+    "runtime_proof": false
+  }
 }
