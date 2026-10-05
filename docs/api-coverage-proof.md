@@ -245,3 +245,21 @@ ambiguous, unpinned, or malformed companion targets prevent that result. The
 row still claims one C++ declaration; multiple Rust targets do not multiply
 upstream coverage. This correspondence check does not prove reference aliasing
 or runtime behavior.
+
+## Rust fields and methods sharing a name
+
+A ledger row may declare `rust_kind: "function"` or
+`rust_kind: "struct_field"` when its path names both a field and a method.
+For example, `Vec2::x` names a copied getter and a public component field:
+the const C++ accessor maps to the function; the mutable-reference accessor
+maps to borrowing the field. See
+`porting/audits/vector-component-declaration-kinds.json` for the source and
+native probe evidence for all 18 vector component overloads.
+
+The selector filters compiler-observed declarations before the usual unique
+match and source-hash checks. It cannot resolve duplicate same-kind items or
+fall back to a different kind. Invalid selectors remain unresolved. When
+`rust_items` is present, the kind applies to every listed target. Omitting the
+selector preserves the existing ambiguity checks. Reports retain the declared
+kind alongside the matched declaration kind; this selection does not establish
+behavioral parity by itself.
