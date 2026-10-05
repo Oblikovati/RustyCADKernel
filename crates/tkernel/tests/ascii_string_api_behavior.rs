@@ -17,4 +17,5 @@ include!("ascii_string_api_behavior/construction.rs");
 include!("ascii_string_api_behavior/editing.rs");
 include!("ascii_string_api_behavior/queries.rs");
 include!("ascii_string_api_behavior/c_string_search.rs");
+include!("ascii_string_api_behavior/c_string_editing.rs");
 include!("ascii_string_api_behavior/handles.rs");
