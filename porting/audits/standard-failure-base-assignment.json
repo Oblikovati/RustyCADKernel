@@ -175,7 +175,10 @@
       "strict_clippy_exit_code": 0,
       "binding_test_command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_standard_failure_assignment_binding",
       "binding_test_exit_code": 0,
-      "native_output_diff_exit_code": 0
+      "native_output_diff_exit_code": 0,
+      "cargo_target_dir": "/tmp/rustycad-failure-self-target",
+      "source_revision": "c25c0a4e4f3e12bf854eff5c11bb3aaad8ba0283",
+      "base_revision": "3805260c1de3d690b42e66544e3aea0b9adc83f6"
     }
   },
   "environment": {
@@ -187,5 +190,11 @@
   },
   "tool_sources": {
     "tools/tests/test_standard_failure_assignment_binding.py": "bea2807fe23e5a81b9b71b2baed79360e1dc7660c5fb5b055ee4045db78e54f2"
-  }
+  },
+  "followup_base_revision": "3805260c1de3d690b42e66544e3aea0b9adc83f6",
+  "followup_source_revision": "c25c0a4e4f3e12bf854eff5c11bb3aaad8ba0283",
+  "provenance_notes": [
+    "The compiler_binding and preexisting validation records describe the earlier assign_base API capture and are retained as historical evidence.",
+    "The self-assignment followup was rebuilt after rebasing onto followup_base_revision; its Rust source hashes are in rust_sources and its dedicated target is recorded below."
+  ]
 }
