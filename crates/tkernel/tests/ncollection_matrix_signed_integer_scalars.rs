@@ -25,13 +25,8 @@ fn mat3_unit_inverse<T: MatrixScalar + Debug>() {
     assert_eq!(determinant, T::from(1));
     assert_eq!(inverse.data(), identity.data());
     assert!(identity.inverted_to(&mut inverse));
-    assert_eq!(
-        identity
-            .inverted()
-            .expect("unit matrix is invertible")
-            .data(),
-        identity.data()
-    );
+    let returned = identity.inverted().expect("unit matrix is invertible");
+    assert_eq!(returned.data(), identity.data());
 }
 
 fn mat3_negative_inverse<T: MatrixScalar + Debug + Neg<Output = T>>() {
@@ -87,13 +82,8 @@ fn mat4_unit_inverse<T: MatrixScalar + Debug + Neg<Output = T>>() {
     );
     assert_eq!(inverse.data(), identity.data());
     assert!(identity.inverted_to(&mut inverse));
-    assert_eq!(
-        identity
-            .inverted()
-            .expect("unit matrix is invertible")
-            .data(),
-        identity.data()
-    );
+    let returned = identity.inverted().expect("unit matrix is invertible");
+    assert_eq!(returned.data(), identity.data());
 }
 
 fn mat4_negative_inverse<T: MatrixScalar + Debug + Neg<Output = T>>() {
