@@ -1,0 +1,79 @@
+{
+  "known_limits": [
+    "Native Windows runtime is unavailable; only Linux fake calls and Windows GNU compile checks were run.",
+    "OCCT_UWP LoadPackagedLibrary branch is not implemented.",
+    "Safe Rust null-name behavior returns failure instead of reproducing native null-pointer conversion failure.",
+    "Native dangling-name and closed-handle states are represented safely rather than reproduced."
+  ],
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "occt_source_hashes": {
+    "OSD_Path.cxx": "431435518fb608b406a24f1d62efee553fc2aaf77e39d2d71e8e039c6fb0d5fc",
+    "OSD_SharedLibrary.cxx": "c1db312f5f4e1214ed25ed2a15d1b81fc9b86ff003bc49b7d8b5436b50cfbcb2",
+    "OSD_SharedLibrary.hxx": "7056c7ca0d05c5b787569bba3a4b95b1049465a30c094a6d854f17dbb428799e",
+    "TCollection_ExtendedString.cxx": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+  },
+  "rust_source_sha256": {
+    "crates/tkernel/Cargo.toml": "1e3bb49bd7104209041bffc9ad419edf888b8766d03bd31b014971d23b4d904c",
+    "crates/tkernel/src/osd/process/shared_library.rs": "4d141d003ad2c4f24319bd8bb9babafcb492fa4610eeb985b6c0545ccdc4b0a7",
+    "crates/tkernel/src/osd/process/shared_library/windows_backend.rs": "326f093f201553ac944f37d009714632887381eda9d312af54c7e03610617bce",
+    "crates/tkernel/src/osd/process/shared_library/windows_backend/tests.rs": "caf6953da17851aa0610e4fafcb15b90997d9b10ba8609c09aca566775baf414",
+    "porting/parity.json": "337cf6b44e61143805e2afaa31d12a4956fc8d2d64986a38eab9b50c995c49ab"
+  },
+  "schema_version": 1,
+  "scope": "Windows OSD_SharedLibrary backend and persistent FormatMessage/UTF-8 error buffers",
+  "source_commit": "179aa2062594f3482db376eebb899fb8d306810e",
+  "toolchain": {
+    "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)"
+  },
+  "validation": {
+    "cargo_test_summary": {
+      "command_exit_code": 0,
+      "command_succeeded": true,
+      "failed": 0,
+      "failed_result_groups": 0,
+      "ignored": 0,
+      "passed": 2757,
+      "result_groups": 162
+    },
+    "host_clippy_strict_exit_code": 0,
+    "logs": [
+      {
+        "command": "cargo test -p rustycad-tkernel",
+        "exit_code": 0,
+        "gzip_sha256": "781207a863828a9efd6de919fae06ae4c3fbd293952632ce8453b5b000eb6a88",
+        "path": "cargo-test.log.gz",
+        "raw_bytes": 222477,
+        "raw_sha256": "8893e101984576a48988dd3b7f8fa36ec433f95d8cb1855b9562b1c3cd66505f"
+      },
+      {
+        "command": "cargo clippy -p rustycad-tkernel --tests -- -D warnings",
+        "exit_code": 0,
+        "gzip_sha256": "bff939380813124e0874f6d2bc8402b9ae229705f1fac3d5bbfc054c1c439857",
+        "path": "host-clippy.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "00235bd58d009eedec37cc0c4a917447c58469af21d2c7bb59e537c561d1ea24"
+      },
+      {
+        "command": "cargo check -p rustycad-tkernel --target x86_64-pc-windows-gnu",
+        "exit_code": 0,
+        "gzip_sha256": "12e6a1c1ef8b16b4ff977c3949fecd71d270dbe899915e47f42cf1634b55bd42",
+        "path": "windows-check.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "ffbff1bb764297fe654f5bbfdc5814120431645d46610f9d41bb6d0acda77e94"
+      },
+      {
+        "command": "cargo clippy -p rustycad-tkernel --target x86_64-pc-windows-gnu --lib -- -D warnings",
+        "exit_code": 0,
+        "gzip_sha256": "7d76d8349b03ba1e8d1e95a71a54bb3b18fcb0bb85009907fde3c28fabfe2dd2",
+        "path": "windows-clippy.log.gz",
+        "raw_bytes": 155,
+        "raw_sha256": "a5292713e9212e27a401034ad119d9b67cdab36cb5a9f32bb5589deb418ba7cc"
+      }
+    ],
+    "native_windows_runtime_tested": false,
+    "windows_fake_test_count": 10,
+    "windows_gnu_check_exit_code": 0,
+    "windows_gnu_clippy_strict_exit_code": 0
+  }
+}
