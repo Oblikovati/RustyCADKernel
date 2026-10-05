@@ -82780,9 +82780,9 @@
       "upstream_id": "Standard_GUID::operator=(const Standard_GUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::assign",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_returning",
       "status": "implemented",
-      "notes": "Guid::assign copies the UUID fields as the native operator delegates to Assign; Rust's built-in `=` assignment is also available because Guid is Copy."
+      "notes": "Returns &mut Self like native operator=. `assign` remains the void counterpart for native Assign; the native probe checks returned-object identity and chained calls."
     },
     {
       "upstream_id": "Standard_GUID::Assign(const Standard_UUID&)",
@@ -82796,9 +82796,9 @@
       "upstream_id": "Standard_GUID::operator=(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid_returning",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Rust has no cross-type assignment operator: `guid = uuid.into()` or assign_uuid."
+      "notes": "Returns &mut Self like native operator=(Standard_UUID). `assign_uuid` remains the void counterpart for native Assign; the native probe checks returned-object identity and chained calls."
     },
     {
       "upstream_id": "Standard_GUID::ShallowDump(Standard_OStream&) const",
