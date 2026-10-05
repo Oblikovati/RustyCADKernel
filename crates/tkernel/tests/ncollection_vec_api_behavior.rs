@@ -59,7 +59,7 @@ fn element_conversion_matches_static_cast_on_x86_64() {
 fn integer_magnitudes_truncate_through_double() {
     assert_eq!(Vec2::new(1, 1).modulus(), 1, "sqrt(2) truncates");
     assert_eq!(Vec3::new(2, 3, 6).modulus(), 7);
-    assert_eq!(Vec3::new(-2, 3, -6).cwise_abs(), Vec3::new(2, 3, 6));
+    assert_eq!(Vec3::new(-2_i32, 3, -6).cwise_abs(), Vec3::new(2, 3, 6));
     assert_eq!(
         Vec4::new(i32::MIN, -1, 0, 1).cwise_abs(),
         Vec4::new(i32::MIN, 1, 0, 1)

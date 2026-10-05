@@ -9192,12 +9192,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec2::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec2::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec2::maxComp() const noexcept",
@@ -15396,12 +15396,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec3::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec3::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec3::operator*=(Element_t)",
@@ -15770,12 +15770,12 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Vec4::cwiseAbs() const",
+      "upstream_id": "NCollection_Vec4::cwiseAbs() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_abs",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native std::abs supports signed integer widths; Rust provides i8/i16/i32/i64/isize and existing f32/f64 implementations. int32/int64/isize minima are excluded because native std::abs is undefined there. int8/int16 minimum conversions are implementation-defined; the pinned GCC 13.3 Linux x86-64 probe records their narrowing results only for that profile. Other tested values cover every width and dimension."
     },
     {
       "upstream_id": "NCollection_Vec4::operator*=(Element_t)",
