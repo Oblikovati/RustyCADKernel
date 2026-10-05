@@ -69193,9 +69193,9 @@
       "upstream_id": "NCollection_Array1::SetValue(int,const value_type&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+      "rust_item": "rustycad_tkernel::ncollection::Array1::set_value_ref",
+      "status": "partial",
+      "notes": "Borrowed Rust API calls Clone::clone_from after checked access, matching native copy assignment for non-aliasing defined inputs. Safe borrowing excludes native self-alias calls."
     },
     {
       "upstream_id": "NCollection_Array1::SetValue(int,value_type&&)",
@@ -69689,9 +69689,9 @@
       "upstream_id": "NCollection_Array2::SetValue(int,int,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array2::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+      "rust_item": "rustycad_tkernel::ncollection::Array2::set_value_ref",
+      "status": "partial",
+      "notes": "Borrowed Rust API calls Clone::clone_from after checked row/column access, matching native copy assignment for non-aliasing defined inputs. Safe borrowing excludes native self-alias calls."
     },
     {
       "upstream_id": "NCollection_Array2::SetValue(int,int,TheItemType&&)",

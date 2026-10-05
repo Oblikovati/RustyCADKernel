@@ -208,6 +208,12 @@ impl<'a, T> Array2<'a, T> {
 }
 
 impl<'a, T: Clone> Array2<'a, T> {
+    /// Assigns from a borrowed value without replacing the target object; `array.set_value_ref(1,1,&value)?`.
+    pub fn set_value_ref(&mut self, row: i32, col: i32, value: &T) -> Result<(), ArrayError> {
+        self.change_value(row, col)?.clone_from(value);
+        Ok(())
+    }
+
     /// Views the leading `rows * cols` values of a read-only buffer with inclusive
     /// bounds, as the native `NCollection_Array2(const_reference, ...)` constructor
     /// does. The first mutable access detaches a private copy (see

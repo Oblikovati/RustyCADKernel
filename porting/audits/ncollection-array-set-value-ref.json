@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "objective": "Port Array1/Array2 const-reference SetValue as copy assignment into the checked existing slot.",
+  "source_revision": {
+    "occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "rust_base": "56b278c6"
+  },
+  "native_behavior": {
+    "array1": "NCollection_Array1::SetValue(const value_type&) evaluates offsetOf(index, SetValue) before copy assignment.",
+    "array2": "NCollection_Array2::SetValue(const TheItemType&) evaluates offsetOf(row, col, SetValue) before copy assignment.",
+    "observed": "Both valid calls retain the target address and perform one assignment; invalid row/column calls raise Standard_OutOfRange before assignment. The probe observes 2 total assignments and 0 copy constructions.",
+    "rust_equivalent": "set_value_ref validates with change_value then dispatches Clone::clone_from on the existing slot; moved-value set_value remains separate.",
+    "limits": "The safe Rust borrow signature cannot pass an element of the mutably borrowed array as its own source. Native self-alias calls and Rust shared-view copy-on-write interactions are not claimed as identical."
+  },
+  "compiler_bindings": {
+    "inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "native_headers": {
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a"
+    },
+    "rows": [
+      {
+        "selector": "NCollection_Array1::SetValue(int,const NCollection_Array1::value_type&)",
+        "compiler_id": "26a0fb19212cab88e4a6ec79a5d954a4ebeea29921ac14ef4a17f7fd9c01b30c",
+        "parity_id": "NCollection_Array1::SetValue(int,const value_type&)",
+        "rust_item": "rustycad_tkernel::ncollection::Array1::set_value_ref"
+      },
+      {
+        "selector": "NCollection_Array2::SetValue(int,int,const TheItemType&)",
+        "compiler_id": "d6b4a993b415266d4a853fc447e23f9b6b0f016c897d5d0e861c33695a227677",
+        "parity_id": "NCollection_Array2::SetValue(int,int,const TheItemType&)",
+        "rust_item": "rustycad_tkernel::ncollection::Array2::set_value_ref"
+      }
+    ],
+    "selector_test": "tools/tests/test_ncollection_array_set_value_ref_binding.py"
+  },
+  "native_probe": {
+    "source": "tools/oracle/ncollection_array_set_value_ref.cxx",
+    "source_sha256": "5089fc789a03955a7ecbbd870602bbd15bf01ea3d0fbfe99aee75f2dbdb6a228",
+    "compiler": "g++ 13.3.0",
+    "command": "c++ -std=c++17 -O2 -I target/occt-tkernel-full/include/opencascade tools/oracle/ncollection_array_set_value_ref.cxx -L /home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -lTKernel -o /tmp/ncollection_array_set_value_ref",
+    "binary_sha256": "e1581deaac8ae2979a4e5992053335137807301f4e7b1e619bd11ec792be010f",
+    "linked_tkernel_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "output": "porting/runtime-evidence/ncollection-array-set-value-ref-native.out",
+    "output_sha256": "86bb17b4e5378a657aed7adce4480857c2fc6126ac93beb6d0eadd612b992f4f",
+    "expected": "tools/oracle/ncollection_array_set_value_ref.expected",
+    "expected_sha256": "86bb17b4e5378a657aed7adce4480857c2fc6126ac93beb6d0eadd612b992f4f"
+  },
+  "rust_probe": {
+    "test": "crates/tkernel/tests/ncollection_array_set_value_ref.rs",
+    "test_sha256": "cfc88452bb3eae57d7f4eee32d22a6b7989aebfa1725fa2d04c6a944bcbfead9",
+    "array1_source_sha256": "2dbf0cf7a471c83456d5811ad35cce2969bd8a7fc8c2124eade2f36424d7d88d",
+    "array2_source_sha256": "044d6d9d3372c439a4af0340de43d72ed1a7c8ad3cabafa51265d205da7e816a",
+    "assertions": "Four focused tests prove in-place assignment, no Clone::clone construction, source availability, and no assignment after invalid Array1 index or Array2 row/column errors."
+  },
+  "verification": {
+    "rust_toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "targeted_test": "cargo test -p rustycad-tkernel --test ncollection_array_set_value_ref: 4 passed.",
+    "full_tkernel": "cargo test -p rustycad-tkernel: 2853 passed, 0 failed, 0 ignored across 191 result groups.",
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed.",
+    "selector_test": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_ncollection_array_set_value_ref_binding.py: 1 passed.",
+    "logs": {
+      "rust_tests": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-tkernel-tests.log.gz", "sha256": "1b877ea20abab7bebc74ce304ea29fc8595519610c21e2d9346c49cf3b7227e1"},
+      "clippy": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-clippy.log.gz", "sha256": "8214ed7daa2d3a30aca42c44fbc816538b398615c7a463e0a7c0d0df4a73dd5d"},
+      "selector_test": {"path": "porting/runtime-evidence/ncollection-array-set-value-ref-binding.log.gz", "sha256": "2895497bcc8cbae678fa66bee1f2f61a322c9624a65dadf6cdcc390aa9f2862b"}
+    }
+  },
+  "parity_json_sha256": "e40746cc26f4daa19f7e071f396dd05f91b2ec6872fa6ae650b7283b68e9c8c4"
+}
