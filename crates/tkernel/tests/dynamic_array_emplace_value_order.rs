@@ -62,6 +62,35 @@ fn emplace_value_allocates_every_target_block_before_gap_constructors() {
 }
 
 #[derive(Default)]
+struct IndexedSlot(usize);
+
+#[test]
+fn emplace_value_replaces_an_initialized_index_mut_tail_in_place() {
+    let mut array = DynamicArray::<IndexedSlot>::with_increment(4);
+    array.append(IndexedSlot(10));
+    array[3].0 = 30;
+    array.emplace_value(2, || IndexedSlot(20)).unwrap();
+    assert_eq!(array.len(), 3);
+    assert_eq!(array[2].0, 20);
+    assert_eq!(array[3].0, 30);
+}
+
+#[test]
+fn failed_emplace_preserves_preinitialized_index_mut_tail() {
+    let mut array = DynamicArray::<IndexedSlot>::with_increment(4);
+    array.append(IndexedSlot(10));
+    array[3].0 = 30;
+    let failure = catch_unwind(AssertUnwindSafe(|| {
+        let _ = array.emplace_value(2, || panic!("requested constructor failure"));
+    }));
+    assert!(failure.is_err());
+    assert_eq!(array.len(), 1);
+    assert_eq!(array[1].0, 0);
+    assert_eq!(array[2].0, 0);
+    assert_eq!(array[3].0, 30);
+}
+
+#[derive(Default)]
 struct GapProbe;
 
 #[test]

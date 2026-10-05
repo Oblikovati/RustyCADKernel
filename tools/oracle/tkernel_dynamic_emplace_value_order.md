@@ -11,6 +11,12 @@ gap objects remain undestroyed. The Rust stage reserves all destination blocks
 before either constructor, commits `used` last, and forgets staged values on
 unwind to preserve that observable destructor behavior without unsafe code.
 
+Rust's safe `IndexMut` can initialize slots beyond `used`, unlike native access
+to unconstructed storage. A regression covers that state: successful
+EmplaceValue overwrites only the requested prefix and preserves later
+initialized slots; a constructor panic leaves those slots unchanged. This is a
+Rust storage-safety guarantee and is not counted as native parity evidence.
+
 The caught-constructor path intentionally leaks resources held by staged gap
 values, as the pinned native implementation does. Re-emplacing into those
 indices after a caught panic is outside the verified parity domain: native
