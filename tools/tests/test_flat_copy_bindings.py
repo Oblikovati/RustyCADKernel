@@ -35,6 +35,14 @@ class FlatCopyBindingsTest(unittest.TestCase):
             (ROOT / "porting/audits/flat-borrowed-insertion.json").read_text()
         )
 
+        cls.transfer_audit = json.loads(
+            (ROOT / "porting/audits/flat-policy-transfer.json").read_text()
+        )
+
+        cls.construction_audit = json.loads(
+            (ROOT / "porting/audits/flat-key-construction.json").read_text()
+        )
+
     def test_four_copy_selectors_are_unique_and_keep_generic_limits(self) -> None:
         self.assert_native_binding_contracts(self.audit["bindings"], 4)
 
@@ -53,7 +61,10 @@ class FlatCopyBindingsTest(unittest.TestCase):
     def test_borrowed_retargeting_preserves_historical_owned_bindings(self) -> None:
         targets = {row["rust_item"] for row in self.borrow_audit["bindings"]}
         retargets = [
-            row for row in self.hash_audit["bindings"] if "original_rust_item" in row
+            row
+            for row in self.hash_audit["bindings"]
+            if row.get("binding_retarget_audit")
+            == "porting/audits/flat-borrowed-insertion.json"
         ]
         self.assertEqual(len(targets), 14)
         self.assertEqual({row["rust_item"] for row in retargets}, targets)
@@ -63,6 +74,45 @@ class FlatCopyBindingsTest(unittest.TestCase):
                 row["binding_retarget_audit"],
                 "porting/audits/flat-borrowed-insertion.json",
             )
+
+    def test_eight_policy_transfer_selectors_keep_generic_limits(self) -> None:
+        self.assert_native_binding_contracts(self.transfer_audit["bindings"], 8)
+
+    def test_move_assignments_cover_injected_returning_self_and_unit_paths(
+        self,
+    ) -> None:
+        assignments = [
+            row
+            for row in self.transfer_audit["bindings"]
+            if "::operator=" in row["selector"]
+        ]
+        self.assertEqual(len(assignments), 2)
+        for binding in assignments:
+            names = [path.rsplit("::", 1)[-1] for path in binding["rust_items"]]
+            self.assertEqual(
+                names,
+                [
+                    "move_assign_with",
+                    "move_assign_returning",
+                    "move_assign_self",
+                    "move_assign",
+                ],
+            )
+
+    def test_four_key_construction_selectors_keep_generic_limits(self) -> None:
+        self.assert_native_binding_contracts(self.construction_audit["bindings"], 4)
+
+    def test_constructor_retargeting_preserves_historical_owned_paths(self) -> None:
+        targets = {row["rust_item"] for row in self.construction_audit["bindings"]}
+        retargets = [
+            row
+            for row in self.hash_audit["bindings"]
+            if row.get("binding_retarget_audit")
+            == "porting/audits/flat-key-construction.json"
+        ]
+        self.assertEqual({row["rust_item"] for row in retargets}, targets)
+        for row in retargets:
+            self.assertEqual(row["rust_item"], row["original_rust_item"] + "_with")
 
     def assert_native_binding_contracts(
         self, bindings: list[dict[str, JSONValue]], count: int

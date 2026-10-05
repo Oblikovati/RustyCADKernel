@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "purpose": "Port native capacity-before-key-construction ordering, failure state and displacement reference returns.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "7ddef28a9138887ab8c4c9266212d8a27e752c5f",
+  "bindings": [
+    {
+      "selector": "NCollection_FlatMap::Emplace(Args &&...)",
+      "cpp_id": "f4b56ed3d3d9ebbaaee5d65e76b8cad94761a4778af9d6ab290c268f7f94e33f",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplace_with",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::Emplaced(Args &&...)",
+      "cpp_id": "b089afc4252d0ac9ee7ad07be3280cfeb9d6f2d33d025e1b5787714c2460b1c3",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplaced_with",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::TryEmplace(Args &&...)",
+      "cpp_id": "a5e808d56baf36b4d9098e510bc71d88cf2a95e0071383bccab011b5f5ee3f16",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplace_with",
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::TryEmplaced(Args &&...)",
+      "cpp_id": "23d25fe717c507a933549160008131ac07f69a7941c97abd3f4bbf03dd008d95",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplaced_with",
+      "status": "partial"
+    }
+  ],
+  "supplemental_rust_cases": 10,
+  "native_output_rows": 10,
+  "native_expected": "tools/oracle/tkernel_flat_key_construction.expected",
+  "focused_rust_tests_passed": 150,
+  "limits": [
+    "Constructor closures model the tested key construction; arbitrary C++ forwarded argument and move/assignment callbacks remain partial.",
+    "The failed-constructor check covers retained capacity and absence of hashing; general C++ exception unwinding and Rust panic cleanup are not proven equivalent.",
+    "Slot layout, reentrant aliasing and physical storage identity across implementations remain unproven.",
+    "Supplemental regressions do not increase original OCCT declaration counts."
+  ],
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-green.gz",
+      "sha256": "754a72d6b02c2a1e1dd161fadb88c2b86e3b78fa5524a9ae78abb498f4966f42",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-python.gz",
+      "sha256": "9402b1600f4a3de46a42f5bad38924b9f881c265635688d043968895c6b16d74",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-clippy.gz",
+      "sha256": "d7b9532f125f8f97b87890b50c421a3c2e045aa3d2111f0addabcbf8ba96d66e",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-key-native.actual.gz",
+      "sha256": "f655eed1f90e9483aad470be000fe53add0f5fde2ff33ad2213c7958ce300b8a",
+      "exit_code": 0
+    }
+  ]
+}

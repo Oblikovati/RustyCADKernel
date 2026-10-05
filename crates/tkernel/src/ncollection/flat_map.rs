@@ -152,12 +152,12 @@ impl<K, H: HashPolicy<K> + Default> FlatMap<K, H> {
     }
     /// Moves storage and leaves an empty source; `FlatMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
-        std::mem::take(source)
+        Self::move_from_with(source, std::mem::take)
     }
     /// Native move assignment: releases this storage, then takes the source's and leaves
     /// the source empty with no slots; `map.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
-        *self = Self::move_from(source);
+        self.move_assign_returning(source);
     }
 }
 impl<K, H: HashPolicy<K> + Default> Default for FlatMap<K, H> {
@@ -220,3 +220,5 @@ impl<'a, K, H: HashPolicy<K>> IntoIterator for &'a FlatMap<K, H> {
         self.iter()
     }
 }
+mod construction;
+mod transfer;

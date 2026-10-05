@@ -103,11 +103,11 @@ impl<K: Debug, V, H: HashPolicy<K> + Default> FlatDataMap<K, V, H> {
     }
     /// Moves storage and leaves an empty source; `FlatDataMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
-        std::mem::take(source)
+        Self::move_from_with(source, std::mem::take)
     }
     /// Replaces storage with a moved source; `map.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
-        *self = Self::move_from(source);
+        self.move_assign_returning(source);
     }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> Default for FlatDataMap<K, V, H> {
@@ -164,3 +164,4 @@ mod binding;
 mod cursor;
 mod iteration;
 pub use cursor::FlatDataCursorMut;
+mod transfer;

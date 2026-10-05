@@ -223,3 +223,4 @@ fn capacity_for(count: usize) -> usize {
 }
 mod copy_insertion;
 mod iteration;
+mod transfer;

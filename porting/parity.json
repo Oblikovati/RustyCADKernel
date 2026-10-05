@@ -73504,20 +73504,29 @@
       "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap(const Hasher&,size_t)",
+      "upstream_id": "NCollection_FlatDataMap(const Hasher &,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::with_hasher",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_ref",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "36b994eac4728e4984f8419c9fd04453b3958deca07cf3ff8f4963ae0f37e2bd",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_ref"
+      ]
     },
     {
-      "upstream_id": "NCollection_FlatDataMap(Hasher&&,size_t)",
+      "upstream_id": "NCollection_FlatDataMap(Hasher &&,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::with_hasher",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_move_from",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "ae24b42a86edde8ceb0346e87cc312aea7a6a21cc04e68eb7fb990018d21a158",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_move_from",
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
@@ -73532,12 +73541,17 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatDataMap(NCollection_FlatDataMap&&)",
+      "upstream_id": "NCollection_FlatDataMap(NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::move_from",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::move_from_with",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "9807799191e38d9a066801ebe117433d08556eff1f861ee89aa803eaf8e190ff",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::move_from_with",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_from"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::~NCollection_FlatDataMap()",
@@ -73562,12 +73576,19 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::operator=(NCollection_FlatDataMap&&)",
+      "upstream_id": "NCollection_FlatDataMap::operator=(NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::move_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::move_assign_with",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "526c5c22b0b581bdc8507b14b575e839d05587b145249a2fa46fecc0d5a527ae",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_with",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_returning",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_self",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatDataMap::Size() const noexcept",
@@ -74038,20 +74059,29 @@
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
     },
     {
-      "upstream_id": "NCollection_FlatMap(const Hasher&,size_t)",
+      "upstream_id": "NCollection_FlatMap(const Hasher &,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::with_hasher",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::with_hasher_ref",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "3a44286031bc13485fc118020cab11463e9ea3632b75c5825e8949c1c267c2db",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher_ref"
+      ]
     },
     {
-      "upstream_id": "NCollection_FlatMap(Hasher&&,size_t)",
+      "upstream_id": "NCollection_FlatMap(Hasher &&,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::with_hasher",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::with_hasher_move_from",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "4e47e831ab73c8dd2ac726fc82979184d18bc5622e65fbb5e48e1f4822f30b6b",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher_move_from",
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap(const NCollection_FlatMap<TheKeyType, Hasher> &)",
@@ -74066,12 +74096,17 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatMap(NCollection_FlatMap&&)",
+      "upstream_id": "NCollection_FlatMap(NCollection_FlatMap<TheKeyType, Hasher> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::move_from",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::move_from_with",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "3535c033a892c2a7dab458b86164f1f2a39c110411f170dc47a0ae5ac662e566",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::move_from_with",
+        "rustycad_tkernel::ncollection::FlatMap::move_from"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::~NCollection_FlatMap()",
@@ -74096,12 +74131,19 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatMap::operator=(NCollection_FlatMap&&)",
+      "upstream_id": "NCollection_FlatMap::operator=(NCollection_FlatMap<TheKeyType, Hasher> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::move_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::move_assign_with",
+      "status": "partial",
+      "notes": "Borrowed policy construction uses Clone before reservation. Explicit injected move callbacks support non-Default policies and preserve the donor policy state; native move assignment clears destination entries, transfers slots, then assigns the policy. Returning and self-move entry points are covered. Default convenience methods replace the donor policy with Default; arbitrary C++ moves require the injected paths. Generic layout, allocation, exception and aliasing behavior remain unproven; see porting/audits/flat-policy-transfer.json.",
+      "selector_id": "0dd269dec209990936832d0e9b98c98c638265de86d7e4a37d1d66d211e93d9b",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_with",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_returning",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_self",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::Size() const noexcept",
@@ -74199,37 +74241,53 @@
       "upstream_id": "NCollection_FlatMap::Emplace(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplace",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplace_with",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
-      "selector_id": "f4b56ed3d3d9ebbaaee5d65e76b8cad94761a4778af9d6ab290c268f7f94e33f"
+      "notes": "The constructor closure runs after reserving capacity and before hashing, including on hits. Try variants construct temporary keys but retain existing entries. Failed construction retains the prepared capacity without hashing. Reference-returning variants preserve native final displaced-slot behavior. C++ forwarding/move/assignment hooks, allocation layout and general exception/aliasing behavior remain partial; see porting/audits/flat-key-construction.json.",
+      "selector_id": "f4b56ed3d3d9ebbaaee5d65e76b8cad94761a4778af9d6ab290c268f7f94e33f",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::emplace_with",
+        "rustycad_tkernel::ncollection::FlatMap::emplace"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::Emplaced(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplaced",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::emplaced_with",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
-      "selector_id": "b089afc4252d0ac9ee7ad07be3280cfeb9d6f2d33d025e1b5787714c2460b1c3"
+      "notes": "The constructor closure runs after reserving capacity and before hashing, including on hits. Try variants construct temporary keys but retain existing entries. Failed construction retains the prepared capacity without hashing. Reference-returning variants preserve native final displaced-slot behavior. C++ forwarding/move/assignment hooks, allocation layout and general exception/aliasing behavior remain partial; see porting/audits/flat-key-construction.json.",
+      "selector_id": "b089afc4252d0ac9ee7ad07be3280cfeb9d6f2d33d025e1b5787714c2460b1c3",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::emplaced_with",
+        "rustycad_tkernel::ncollection::FlatMap::emplaced"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::TryEmplace(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplace",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplace_with",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
-      "selector_id": "a5e808d56baf36b4d9098e510bc71d88cf2a95e0071383bccab011b5f5ee3f16"
+      "notes": "The constructor closure runs after reserving capacity and before hashing, including on hits. Try variants construct temporary keys but retain existing entries. Failed construction retains the prepared capacity without hashing. Reference-returning variants preserve native final displaced-slot behavior. C++ forwarding/move/assignment hooks, allocation layout and general exception/aliasing behavior remain partial; see porting/audits/flat-key-construction.json.",
+      "selector_id": "a5e808d56baf36b4d9098e510bc71d88cf2a95e0071383bccab011b5f5ee3f16",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::try_emplace_with",
+        "rustycad_tkernel::ncollection::FlatMap::try_emplace"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::TryEmplaced(Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplaced",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::try_emplaced_with",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Shared insertion now computes the key hash once and retains it through probing, displacement, and lazy value construction. Exact native signatures are pinned in porting/audits/flat-hash-contracts.json. Generic const-reference copies, forwarded key/element construction, C++ moves/assignment hooks, allocation layout, and exception unwinding remain unproven.",
-      "selector_id": "23d25fe717c507a933549160008131ac07f69a7941c97abd3f4bbf03dd008d95"
+      "notes": "The constructor closure runs after reserving capacity and before hashing, including on hits. Try variants construct temporary keys but retain existing entries. Failed construction retains the prepared capacity without hashing. Reference-returning variants preserve native final displaced-slot behavior. C++ forwarding/move/assignment hooks, allocation layout and general exception/aliasing behavior remain partial; see porting/audits/flat-key-construction.json.",
+      "selector_id": "23d25fe717c507a933549160008131ac07f69a7941c97abd3f4bbf03dd008d95",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::try_emplaced_with",
+        "rustycad_tkernel::ncollection::FlatMap::try_emplaced"
+      ]
     },
     {
       "upstream_id": "NCollection_FlatMap::Remove(const TheKeyType&)",

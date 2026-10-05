@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "purpose": "Port policy-copy and policy-move constructors plus native storage transfer and move assignment order.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "baseline_revision": "7ddef28a9138887ab8c4c9266212d8a27e752c5f",
+  "bindings": [
+    {
+      "selector": "NCollection_FlatMap(const Hasher &,size_t)",
+      "cpp_id": "3a44286031bc13485fc118020cab11463e9ea3632b75c5825e8949c1c267c2db",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher_ref"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap(Hasher &&,size_t)",
+      "cpp_id": "4e47e831ab73c8dd2ac726fc82979184d18bc5622e65fbb5e48e1f4822f30b6b",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher_move_from",
+        "rustycad_tkernel::ncollection::FlatMap::with_hasher"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap(NCollection_FlatMap<TheKeyType, Hasher> &&)",
+      "cpp_id": "3535c033a892c2a7dab458b86164f1f2a39c110411f170dc47a0ae5ac662e566",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::move_from_with",
+        "rustycad_tkernel::ncollection::FlatMap::move_from"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatMap::operator=(NCollection_FlatMap<TheKeyType, Hasher> &&)",
+      "cpp_id": "0dd269dec209990936832d0e9b98c98c638265de86d7e4a37d1d66d211e93d9b",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_with",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_returning",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign_self",
+        "rustycad_tkernel::ncollection::FlatMap::move_assign"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap(const Hasher &,size_t)",
+      "cpp_id": "36b994eac4728e4984f8419c9fd04453b3958deca07cf3ff8f4963ae0f37e2bd",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_ref"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap(Hasher &&,size_t)",
+      "cpp_id": "ae24b42a86edde8ceb0346e87cc312aea7a6a21cc04e68eb7fb990018d21a158",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher_move_from",
+        "rustycad_tkernel::ncollection::FlatDataMap::with_hasher"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap(NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &&)",
+      "cpp_id": "9807799191e38d9a066801ebe117433d08556eff1f861ee89aa803eaf8e190ff",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::move_from_with",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_from"
+      ],
+      "status": "partial"
+    },
+    {
+      "selector": "NCollection_FlatDataMap::operator=(NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &&)",
+      "cpp_id": "526c5c22b0b581bdc8507b14b575e839d05587b145249a2fa46fecc0d5a527ae",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_with",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_returning",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign_self",
+        "rustycad_tkernel::ncollection::FlatDataMap::move_assign"
+      ],
+      "status": "partial"
+    }
+  ],
+  "supplemental_rust_cases": 16,
+  "native_output_rows": 32,
+  "focused_rust_tests_passed": 150,
+  "native_expected": "tools/oracle/tkernel_flat_move_contracts.expected",
+  "fixture_setup_errors": [
+    "The first native fixture attempted Value() on the standard dictionary iterator, which only supports dereference. Compilation exited 1; the fixture was corrected before successful validation."
+  ],
+  "limits": [
+    "The selected custom hasher defines explicit injected move callbacks; Rust ownership transfer alone cannot reproduce arbitrary C++ move callbacks or donor state.",
+    "Default convenience methods reset the donor policy to Default and replace the destination policy; the injected path preserves native assignment of an existing policy.",
+    "Arbitrary allocation layout, exception unwinding, callback reentrant aliasing and C++ destructor behavior remain unproven.",
+    "Supplemental cases do not increase original OCCT declaration counts."
+  ],
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-green.gz",
+      "sha256": "754a72d6b02c2a1e1dd161fadb88c2b86e3b78fa5524a9ae78abb498f4966f42",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-python.gz",
+      "sha256": "9402b1600f4a3de46a42f5bad38924b9f881c265635688d043968895c6b16d74",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-policy-construction-clippy.gz",
+      "sha256": "d7b9532f125f8f97b87890b50c421a3c2e045aa3d2111f0addabcbf8ba96d66e",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/flat-move-native.actual.gz",
+      "sha256": "1b59f98d41bc47ddc327f96992b4bd2614068952c2283227d12273abe70f0df8",
+      "exit_code": 0
+    }
+  ]
+}

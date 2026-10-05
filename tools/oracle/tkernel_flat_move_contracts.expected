@@ -1,0 +1,32 @@
+set copy 0 C 0 0 7 7
+set copy 1 C 0 8 7 7
+set copy 13 C 0 16 7 7
+set copy 14 C 0 32 7 7
+set copy 40 C 0 64 7 7
+data copy 0 C 0 0 7 7
+data copy 1 C 0 8 7 7
+data copy 13 C 0 16 7 7
+data copy 14 C 0 32 7 7
+data copy 40 C 0 64 7 7
+set policy-move 0 M 0 0 7 -1
+set policy-move 1 M 0 8 7 -1
+set policy-move 13 M 0 16 7 -1
+set policy-move 14 M 0 32 7 -1
+set policy-move 40 M 0 64 7 -1
+data policy-move 0 M 0 0 7 -1
+data policy-move 1 M 0 8 7 -1
+data policy-move 13 M 0 16 7 -1
+data policy-move 14 M 0 32 7 -1
+data policy-move 40 M 0 64 7 -1
+set construct 0 M 0 0 -1 1 64 7
+data construct 0 M 0 0 -1 1 64 7
+set assign 0 kA 1 0 0 -1 1 64 7
+data assign 0 kvA 1 0 0 -1 1 64 7
+set construct 1 M 0 0 -1 0 64 7
+data construct 1 M 0 0 -1 0 64 7
+set assign 1 kA 1 0 0 -1 0 64 7
+data assign 1 kvA 1 0 0 -1 0 64 7
+set self 1 1 1 64 7
+data self 1 1 1 64 7
+set default 1 0 0 1 64 1
+data default 1 0 0 1 64 1
