@@ -20,6 +20,8 @@ mod square_matrix;
 pub use square_matrix::MatrixScalar;
 mod mat3;
 pub use mat3::Mat3;
+mod matrix_view;
+pub use matrix_view::{MatrixView, MatrixViewMut};
 mod lerp;
 mod mat4;
 pub use lerp::Lerp;
