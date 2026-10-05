@@ -172,6 +172,16 @@ impl ExtendedString {
         self.terminated.extend_from_slice(units.as_ref());
         self.terminated.push(0);
     }
+    /// Copies another value and returns this receiver for assignment chaining; `target.copy_assign(&source).clear()`.
+    /// Rust borrowing prevents passing the same value as both receiver and source.
+    pub fn copy_assign(&mut self, source: &Self) -> &mut Self {
+        self.clone_from(source);
+        self
+    }
+    /// Models the native self-assignment no-op and returns this receiver; `text.copy_assign_self()`.
+    pub fn copy_assign_self(&mut self) -> &mut Self {
+        self
+    }
     /// Copies a bounded UTF-16 C string through its first NUL; `text.copy_c_units(Some(&[65, 0, 66]))`.
     /// `None` and an empty prefix clear the string, as the native pointer overload does.
     pub fn copy_c_units(&mut self, units: Option<&[u16]>) -> &mut Self {

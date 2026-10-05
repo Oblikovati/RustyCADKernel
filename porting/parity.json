@@ -85316,9 +85316,13 @@
       "upstream_id": "TCollection_ExtendedString::operator=(const TCollection_ExtendedString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as Clone>::clone_from",
-      "status": "implemented",
-      "notes": "Copy assignment."
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_assign",
+      "status": "partial",
+      "notes": "copy_assign returns the receiver by mutable reference and matches value-copy/chaining behavior; copy_assign_self exposes the native self-assignment no-op. Partial: Rust Vec storage does not reproduce OCCT internal allocator/buffer identity behavior. Caller-visible value and receiver identity are covered.",
+      "rust_items": [
+        "rustycad_tkernel::tcollection::ExtendedString::copy_assign",
+        "rustycad_tkernel::tcollection::ExtendedString::copy_assign_self"
+      ]
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator=(const char16_t* const)",
