@@ -1,18 +1,20 @@
-# `OSD::SecSleep` interrupted-call oracle
+# `OSD::SecSleep` and `OSD::MilliSecSleep` interrupted-call oracle
 
-The pinned Unix implementation computes `seconds * 1000 * 1000` as an `int`, calls
-`usleep`, and ignores its return. The C++ probe arms a 100 ms timer before each call; both
-the defined positive `SecSleep(30)` and an exploratory `SecSleep(-1)` return when the signal
-interrupts `usleep` (`errno=EINTR`). The negative sample is outside the POSIX `useconds_t`
-range and is recorded only as pinned glibc behavior; integer overflow cases are not claimed.
+The pinned Unix implementations compute `seconds * 1000 * 1000` and
+`milliseconds * 1000` as `int`, call `usleep`, and ignore its return. The C++ probe arms a
+100 ms timer before each call; the defined positive `SecSleep(30)` and `MilliSecSleep(30000)`
+return when the signal interrupts `usleep` (`errno=EINTR`). An exploratory `SecSleep(-1)`
+sample also returns, but that value is outside the POSIX `useconds_t` range and is recorded
+only as pinned glibc behavior; integer overflow cases are not claimed.
 
-The Rust regression targets SIGALRM specifically to the thread blocked in
-`Osd::sec_sleep(30)`. It runs in a child test process and the parent kills that child after
-two seconds, so an implementation that retries the interrupted sleep cannot hang the suite.
-Injected `Sleeper` implementations retain the existing duration callback behavior.
+The Rust regression repeatedly targets SIGALRM to the sleeping thread until it returns,
+covering both seconds and milliseconds calls. Each case runs in a child test process; the
+parent kills that child after two seconds, so an implementation that retries interruptions
+cannot hang the suite. Injected `Sleeper` implementations retain the duration callback.
 
 Pinned OCCT revision: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
-The source function is `FoundationClasses/TKernel/OSD/OSD.cxx` (`OSD::SecSleep`).
+The source functions are `FoundationClasses/TKernel/OSD/OSD.cxx` (`OSD::SecSleep` and
+`OSD::MilliSecSleep`).
 Expected output is in `tkernel_osd_sec_sleep.expected`.
 
 ```sh

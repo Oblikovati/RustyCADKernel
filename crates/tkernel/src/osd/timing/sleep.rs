@@ -57,6 +57,9 @@ impl Sleeper for NativeSleeper {
     fn sleep_seconds(&self, seconds: i32) {
         native::sec_sleep(seconds);
     }
+    fn sleep_milliseconds(&self, milliseconds: i32) {
+        native::milli_sec_sleep(milliseconds);
+    }
 }
 
 fn sleep_forever() {

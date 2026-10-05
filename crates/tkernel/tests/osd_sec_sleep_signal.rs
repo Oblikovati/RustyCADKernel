@@ -11,30 +11,46 @@ use std::{
 };
 
 static ALARM_CAUGHT: AtomicBool = AtomicBool::new(false);
-const CHILD_MARKER: &str = "RUSTYCAD_SEC_SLEEP_SIGNAL_CHILD";
+static SLEEP_RETURNED: AtomicBool = AtomicBool::new(false);
+const CHILD_MARKER: &str = "RUSTYCAD_SLEEP_SIGNAL_CHILD";
 
 #[test]
 fn sec_sleep_returns_when_signal_interrupts_usleep() {
-    let mut child = spawn_sleep_child();
+    let mut child = spawn_sleep_child("seconds");
     assert!(child_exits_before_timeout(&mut child));
 }
 
 #[test]
-fn sec_sleep_child() {
+fn milli_sec_sleep_returns_when_signal_interrupts_usleep() {
+    let mut child = spawn_sleep_child("milliseconds");
+    assert!(child_exits_before_timeout(&mut child));
+}
+
+#[test]
+fn sleep_signal_child() {
     if std::env::var_os(CHILD_MARKER).is_none() {
         return;
     }
     let sleeper_thread = install_alarm();
-    let signaler = thread::spawn(move || send_alarm(sleeper_thread));
-    Osd::sec_sleep(30);
+    let signaler = thread::spawn(move || repeat_alarm_until_return(sleeper_thread));
+    run_requested_sleep();
+    SLEEP_RETURNED.store(true, Ordering::Release);
     assert!(ALARM_CAUGHT.load(Ordering::Relaxed));
     signaler.join().expect("signal delivery thread");
 }
 
-fn spawn_sleep_child() -> Child {
+fn run_requested_sleep() {
+    match std::env::var(CHILD_MARKER).as_deref() {
+        Ok("seconds") => Osd::sec_sleep(30),
+        Ok("milliseconds") => Osd::milli_sec_sleep(30_000),
+        other => panic!("unexpected child sleep mode: {other:?}"),
+    }
+}
+
+fn spawn_sleep_child(mode: &str) -> Child {
     Command::new(std::env::current_exe().expect("test executable path"))
-        .args(["--exact", "sec_sleep_child"])
-        .env(CHILD_MARKER, "1")
+        .args(["--exact", "sleep_signal_child"])
+        .env(CHILD_MARKER, mode)
         .stdout(Stdio::null())
         .stderr(Stdio::null())
         .spawn()
@@ -56,6 +72,7 @@ fn child_exits_before_timeout(child: &mut Child) -> bool {
 
 fn install_alarm() -> libc::pthread_t {
     ALARM_CAUGHT.store(false, Ordering::Relaxed);
+    SLEEP_RETURNED.store(false, Ordering::Relaxed);
     let mut action: libc::sigaction = unsafe { std::mem::zeroed() };
     action.sa_sigaction = catch_alarm as *const () as usize;
     action.sa_flags = 0;
@@ -68,11 +85,13 @@ fn install_alarm() -> libc::pthread_t {
     unsafe { libc::pthread_self() }
 }
 
-fn send_alarm(thread_id: libc::pthread_t) {
-    thread::sleep(Duration::from_millis(100));
-    // SAFETY: the child test's sleeper thread remains alive while blocked in OSD::SecSleep.
-    let result = unsafe { libc::pthread_kill(thread_id, libc::SIGALRM) };
-    assert_eq!(result, 0);
+fn repeat_alarm_until_return(thread_id: libc::pthread_t) {
+    while !SLEEP_RETURNED.load(Ordering::Acquire) {
+        // SAFETY: the child test's sleeper thread remains alive until it sets SLEEP_RETURNED.
+        let result = unsafe { libc::pthread_kill(thread_id, libc::SIGALRM) };
+        assert_eq!(result, 0);
+        thread::sleep(Duration::from_millis(10));
+    }
 }
 
 extern "C" fn catch_alarm(_: libc::c_int) {
