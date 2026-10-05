@@ -94372,8 +94372,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::new",
-      "status": "implemented",
-      "notes": "No name and a null handle; opening it yields the main program (dlopen(NULL)). Every host."
+      "status": "partial",
+      "notes": "No name and a null handle. Unix DlOpen(NULL) selects the main program; native Windows converts the missing name through TCollection_ExtendedString and may raise. Rust returns false for that null-name case. Windows calls are implemented behind Win32 bindings but runtime-unverified; see tools/oracle/tkernel_osd_shlib_windows.md."
     },
     {
       "upstream_id": "OSD_SharedLibrary(const char* const)",
@@ -94381,7 +94381,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::named_bytes",
       "status": "partial",
-      "notes": "The byte constructor preserves arbitrary non-NUL bytes and truncates at the first NUL like native strlen; valid UTF-8 callers retain the named convenience method. A null name is Option::None (native leaves the name uninitialized). Unix behavior is covered by tkernel_osd_shlib_bytes; Windows additionally probes GetModuleHandleW and loader support remains pending."
+      "notes": "The byte constructor preserves arbitrary non-NUL bytes and native first-NUL prefix semantics; valid UTF-8 callers retain the named convenience method. Null name is Option::None; native leaves its name uninitialized and Windows conversion may fail. Unix behavior is covered by tkernel_osd_shlib_bytes. Windows loader is implemented and fake-tested, but native runtime is unverified; Windows FormatMessage failure-buffer behavior remains partial (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::SetName(const char* const)",
@@ -94389,7 +94389,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::set_name_bytes",
       "status": "partial",
-      "notes": "The byte setter preserves arbitrary non-NUL bytes, truncates at the first NUL, and treats null as no-op; the string setter remains a UTF-8 convenience. Replacing an old native name leaks that allocation; Rust replaces it safely. Unix byte behavior is covered by tkernel_osd_shlib_bytes; Windows loader support remains pending."
+      "notes": "The byte setter preserves arbitrary non-NUL bytes, truncates at the first NUL, and treats null as no-op; string setter is a UTF-8 convenience. Replacing an old native name leaks that allocation; Rust replaces it safely. Unix bytes are covered by tkernel_osd_shlib_bytes. Windows loader is implemented and fake-tested, but runtime-unverified; native Destroy leaves a dangling name pointer while Rust clears it safely (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Name() const",
@@ -94405,7 +94405,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_open",
       "status": "partial",
-      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW; stored byte names preserve arbitrary non-NUL bytes and native first-NUL semantics. Probes cover C-string prefixes and a non-UTF-8 path. Windows loader support remains pending."
+      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW; byte names preserve arbitrary non-NUL bytes and first-NUL semantics. Windows follows GetModuleHandleW cache then LoadLibraryExW with LOAD_WITH_ALTERED_SEARCH_PATH; LoadMode is ignored natively. Fake-tested and Windows GNU cross-compiled, but native runtime unverified; null-name exception behavior remains different. See tools/oracle/tkernel_osd_shlib_windows.md."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlSymb(const char* const) const",
@@ -94413,7 +94413,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_symb_bytes",
       "status": "partial",
-      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Byte symbol names preserve arbitrary non-NUL bytes and truncate at NUL. Before DlOpen a null handle is RTLD_DEFAULT on glibc. After DlClose native retains a dangling handle (subsequent lookup is undefined); Rust answers None. Windows loader support remains pending."
+      "notes": "OSD_Function becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Byte names preserve non-NUL bytes and truncate at NUL. Unix null handle is RTLD_DEFAULT on glibc. Windows uses GetProcAddress and is fake-tested/cross-compiled, not runtime-verified. Rust rejects lookup after close instead of using native dangling handle state; see tools/oracle/tkernel_osd_shlib_windows.md."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlClose() const",
@@ -94421,7 +94421,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_close",
       "status": "partial",
-      "notes": "Unix dlclose; takes &mut self to remember the close. Native dlclose(NULL) and double closes are undefined; Rust ignores them. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+      "notes": "Unix dlclose; takes &mut self to remember close. Native dlclose(NULL) and double closes are undefined; Rust ignores them. Windows calls FreeLibrary but keeps native handle state; Rust tracks closed state and safely rejects subsequent lookup. Windows fake-tested and cross-compiled, native runtime unverified (tools/oracle/tkernel_osd_shlib_windows.md)."
     },
     {
       "upstream_id": "OSD_SharedLibrary::DlError() const",
@@ -94429,15 +94429,15 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error_bytes",
       "status": "partial",
-      "notes": "Unix dlerror bytes are copied before the next loader call and consumed by the read; None when there is no error. dl_error() remains a lossy UTF-8 convenience. Byte diagnostics are checked against a non-UTF-8 dlsym failure. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet."
+      "notes": "Unix dlerror bytes are copied before the next loader call and consumed; None when no error. Windows formats the retained GetLastError code through FormatMessageW and WideCharToMultiByte; fake-tested and cross-compiled, not runtime-verified. Native static buffers retain prior text if formatting/conversion fails, while Rust returns empty bytes; see tools/oracle/tkernel_osd_shlib_windows.md."
     },
     {
       "upstream_id": "OSD_SharedLibrary::Destroy()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
       "rust_item": "rustycad_tkernel::osd::SharedLibrary::destroy",
-      "status": "implemented",
-      "notes": "Forgets the name and the handle without unloading the library, as natively. Every host."
+      "status": "partial",
+      "notes": "Forgets the name and handle without unloading the library on Unix. Windows native Destroy frees the name but leaves its pointer dangling and keeps the handle value; Rust safely clears its owned name and preserves the handle field, while closed-state tracking prevents later lookup. Windows runtime is unverified; see tools/oracle/tkernel_osd_shlib_windows.md."
     },
     {
       "upstream_id": "OSD_SharedLibrary::~OSD_SharedLibrary()",
