@@ -72,7 +72,18 @@
     "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
     "clippy_log": "porting/runtime-evidence/extended-string-c-units-copy-clippy.log.gz",
     "clippy_log_sha256": "823d2eb8385cfd867d1d557e7c9f19479f4eb379e1cc33b8f3fa307e9860b102",
-    "clippy_exit_code": 0
+    "clippy_exit_code": null,
+    "clippy_followup": {
+      "fix_commit": "4c3931778a8650d4f3254aca70319a0fe57e6e52",
+      "fix": "Change the generic Copy regression call from a needless borrowed array to the direct array argument required by strict Clippy.",
+      "passing_all_targets_receipt": "porting/runtime-evidence/tkernel-array-integration-e1fe85e3.json",
+      "passing_all_targets_receipt_sha256": "100858417666c209d8bc41e41186e67e9dc240fced17e9a865baa36a648eb7f7",
+      "passing_all_targets_log": "porting/runtime-evidence/tkernel-array-integration-clippy-e1fe85e3.log.gz",
+      "passing_all_targets_log_sha256": "973f823605ee3d674fef94505f6c89d163faed17a7b5960714054a35a870b3cd",
+      "passing_source_revision": "e1fe85e378bf4648c1ca2253d3975b73569bac98",
+      "note": "The original copy-slice Clippy log records an all-target failure before this fix; its process exit code was not captured. The separate post-fix TKernel integration receipt records strict all-target Clippy exit code 0."
+    },
+    "clippy_result": "failed; archived log records a Clippy compiler error, but the process exit code was not captured"
   },
   "parity_sha256": "87d3c0ec0fc84c30f5e90317136faee584c3e8ecdd649163996627bd9ee173df",
   "limits": "Option<&[u16]> models null or a bounded readable source, not invalid or dangling pointers or reads beyond the slice. The adapter returns &mut Self so the assignment mapping preserves native assignment-result identity; callers of Copy may ignore the Rust return value."
