@@ -70726,7 +70726,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::clone::Clone>::clone",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; copies increment, allocator and values."
+      "notes": "Copies logical values, increment, allocator and the allocated block layout; a clone panic drops its uncommitted Rust object."
     },
     {
       "upstream_id": "NCollection_DynamicArray(NCollection_DynamicArray&&)",
@@ -70748,33 +70748,37 @@
       "upstream_id": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray&,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_returning",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::assign_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_default_returning"
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; theOwnAllocator false adopts the source allocator."
+      "notes": "Copies according to theOwnAllocator (default true) and returns destination; paired Rust methods preserve explicit/default calls. Probe checks identity, allocator retention/adoption, and complete-block state after caught copy exceptions."
     },
     {
       "upstream_id": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
       "status": "implemented",
-      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+      "notes": "Transfers blocks and allocator, leaves source empty with its increment and null allocator, and returns destination; native probe checks identity/state."
     },
     {
       "upstream_id": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; copy assignment is Assign(theOther, false): call assign(source, false)."
+      "notes": "Uses copy assignment allocator policy (adopt source allocator) and returns destination; native probe checks identity, chain result, and values."
     },
     {
       "upstream_id": "NCollection_DynamicArray::operator=(NCollection_DynamicArray&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
       "status": "implemented",
-      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+      "notes": "Transfers blocks and allocator and returns destination; native probe checks identity and the moved-from state."
     },
     {
       "upstream_id": "NCollection_DynamicArray::Append(const TheItemType&)",
