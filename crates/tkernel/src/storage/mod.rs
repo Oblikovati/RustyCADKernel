@@ -26,12 +26,12 @@ pub use data::Data;
 pub use header_data::{HeaderData, HeaderFields};
 pub use internal_data::{InternalData, ReadArray};
 pub(crate) use kinds::STORAGE_HIERARCHY;
-pub use kinds::exception_bytes;
 pub use kinds::{
     OpenMode, Position, SolveMode, StorageError, StreamException, stream_ext_char_parity_error,
     stream_format_error, stream_mode_error, stream_read_error, stream_type_mismatch_error,
     stream_unknown_type_error, stream_write_error,
 };
+pub use kinds::{exception_bytes, exception_stacks};
 pub(crate) use numbers::PersistentNumbers;
 pub use root::Root;
 pub use root_data::RootData;
