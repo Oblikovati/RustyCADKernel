@@ -73,12 +73,17 @@ impl<T> DynamicArray<T> {
     }
     /// Appends without moving existing elements; `array.append(42)`.
     pub fn append(&mut self, value: T) -> &mut T {
+        self.emplace_append(|| value)
+    }
+    /// Reserves storage before constructing the appended value; `array.emplace_append(||42)`.
+    pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
         let index = self.used;
         let block = index / self.increment;
         let offset = index % self.increment;
         if block == self.blocks.len() {
             self.add_block();
         }
+        let value = construct();
         if offset < self.blocks[block].len() {
             self.blocks[block][offset] = value;
         } else {
@@ -86,10 +91,6 @@ impl<T> DynamicArray<T> {
         }
         self.used += 1;
         &mut self.blocks[block][offset]
-    }
-    /// Constructs an appended value; `array.emplace_append(||42)`.
-    pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
-        self.append(construct())
     }
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {

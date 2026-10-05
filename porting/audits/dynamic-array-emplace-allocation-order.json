@@ -1,0 +1,58 @@
+{
+  "base_revision": "3e4a9e63cb138e6b9471693f99f95a77ce848bd5",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "EmplaceAppend element-block allocation before constructor invocation",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "c773cc93c659cd2ff70588d28a3838e12cf0b23d17d0cbe8bd5511913884975f",
+    "crates/tkernel/tests/dynamic_array_emplace_allocation_order.rs": "ef722d17af1eb4b9b18dd0f988963bcd6fc5a21d191687f59a2c3a6902544f1a",
+    "tools/oracle/tkernel_dynamic_emplace_order.cxx": "2f3d1ead5f8aa0a7b4bedba963092414ff30012a591e10e365054679a22d8c82",
+    "tools/oracle/tkernel_dynamic_emplace_order.expected": "2b10d9f4690a9c730ef04de0bbeb575c46d4397993237af61550d49d7f2163b4"
+  },
+  "native_header_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_executable_sha256": "af41fe28fcb2a87bd06716f1fe81955f46449a20735b17d7bec4b2ae0edf9d31",
+  "native_actual_sha256": "2b10d9f4690a9c730ef04de0bbeb575c46d4397993237af61550d49d7f2163b4",
+  "native_matches_expected": true,
+  "selector_repair": {
+    "before": "NCollection_DynamicArray::EmplaceAppend(Args&&)",
+    "after": "NCollection_DynamicArray::EmplaceAppend(Args&&...)",
+    "compiler_id": "caa107e170713012529b043d7c54fc95426c6281550d37bb823e62611b0b3969",
+    "before_candidate_status": "missing",
+    "after_candidate_status": "unique",
+    "full_updated_crosswalk_pending": true
+  },
+  "validation": {
+    "initial_rust_exit_code": 101,
+    "focused_rust_exit_code": 0,
+    "focused_passed": 53,
+    "full_package_exit_code": 0,
+    "full_package_passed": 2748,
+    "full_package_result_groups": 163,
+    "strict_clippy_exit_code": 0
+  },
+  "logs": {
+    "initial-regression-failure": {
+      "path": "porting/runtime-evidence/dynamic-emplace-initial-regression-failure.log.gz",
+      "sha256": "c415de01578b57bc079f9b3cddd1149a05f1e178efbedaac79fd3ea927cee496"
+    },
+    "focused": {
+      "path": "porting/runtime-evidence/dynamic-emplace-focused.log.gz",
+      "sha256": "ddb39a144ae7dc2f18ae83ccf3f1d523484aee1d04ec66761d4855945e4986d3"
+    },
+    "full-package": {
+      "path": "porting/runtime-evidence/dynamic-emplace-full-package.log.gz",
+      "sha256": "509db4d18c25cf230d37235d86135fa5417af30935e0f5396efb8efb53fad5a7"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/dynamic-emplace-clippy.log.gz",
+      "sha256": "6ac3fc902394d8b44a5a0f7e94cadb5a2995feef2f8ca19537c913cb247f8328"
+    }
+  },
+  "original_legacy_declaration_count_change": 0,
+  "known_remaining_gap": "Both EmplaceValue overloads marked partial after source inspection: the Rust constructor precedes intermediate default constructors, while native executes them first. No claim for replacement or throwing constructor behavior.",
+  "limitations": [
+    "The supplemental address-order comparison uses a single 4096-byte incremental block and eight-byte elements; it does not assert arbitrary heap address ordering.",
+    "EmplaceAppend closure construction is a Rust adaptation, not C++ variadic argument forwarding.",
+    "This slice does not establish full DynamicArray or TKernel parity."
+  ]
+}
