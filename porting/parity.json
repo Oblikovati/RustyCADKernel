@@ -85515,17 +85515,17 @@
       "upstream_id": "TCollection_ExtendedString::IsEqual(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded C-string adapter truncates at the first NUL; a null pointer supplies zero length, matching the native core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator==(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_c_units",
       "status": "implemented",
-      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps the pointer operator alias to the same bounded predicate; embedded NUL and null inputs follow the native zero-terminated overload."
     },
     {
       "upstream_id": "TCollection_ExtendedString::IsEqual(const TCollection_ExtendedString&) const",
@@ -85555,17 +85555,17 @@
       "upstream_id": "TCollection_ExtendedString::IsDifferent(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded C-string adapter truncates at the first NUL; a null pointer supplies zero length, matching the native core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator!=(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_c_units",
       "status": "implemented",
-      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps the pointer operator alias to the same bounded predicate; embedded NUL and null inputs follow the native zero-terminated overload."
     },
     {
       "upstream_id": "TCollection_ExtendedString::IsDifferent(const TCollection_ExtendedString&) const",
@@ -85595,17 +85595,17 @@
       "upstream_id": "TCollection_ExtendedString::IsLess(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded C-string adapter truncates at the first NUL; a null pointer supplies zero length, matching the native core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator<(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_c_units",
       "status": "implemented",
-      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps the pointer operator alias to the same bounded predicate; embedded NUL and null inputs follow the native zero-terminated overload."
     },
     {
       "upstream_id": "TCollection_ExtendedString::IsLess(const TCollection_ExtendedString&) const",
@@ -85635,17 +85635,17 @@
       "upstream_id": "TCollection_ExtendedString::IsGreater(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded C-string adapter truncates at the first NUL; a null pointer supplies zero length, matching the native core."
     },
     {
       "upstream_id": "TCollection_ExtendedString::operator>(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_c_units",
       "status": "implemented",
-      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "Maps the pointer operator alias to the same bounded predicate; embedded NUL and null inputs follow the native zero-terminated overload."
     },
     {
       "upstream_id": "TCollection_ExtendedString::IsGreater(const TCollection_ExtendedString&) const",
@@ -85675,9 +85675,9 @@
       "upstream_id": "TCollection_ExtendedString::StartsWith(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded prefix adapter truncates at the first NUL; null maps to zero length, which matches the native empty-prefix result."
     },
     {
       "upstream_id": "TCollection_ExtendedString::StartsWith(const TCollection_ExtendedString&) const",
@@ -85699,9 +85699,9 @@
       "upstream_id": "TCollection_ExtendedString::EndsWith(const char16_t* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with_c_units",
       "status": "implemented",
-      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+      "notes": "The bounded suffix adapter truncates at the first NUL; null maps to zero length, which matches the native empty-suffix result."
     },
     {
       "upstream_id": "TCollection_ExtendedString::EndsWith(const TCollection_ExtendedString&) const",

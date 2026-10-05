@@ -1,0 +1,130 @@
+{
+  "scope": "ExtendedString UTF-16 pointer predicate overloads and operator aliases",
+  "base_commit": "9cc140c4d8970dbd9ed9cdf2c1678f7075317386",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "crosswalk_report_sha256": "cd77726709326ee8fdc6a6bc08c0d51e2160ac76ca3b64d8b7716017add1e190",
+  "native_sources": {
+    "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+    "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+    "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c",
+    "semantics": "The inline one-argument pointer wrappers compute extStringLen and delegate. Pointer inputs stop at the first NUL. Null supplies length zero; each comparison/affix core then applies its own zero-length behavior."
+  },
+  "mappings": [
+    {
+      "cpp_id": "25742873651709ed68cd2e17703d231ea7dcc4a569800b9cc7989755afa0ef68",
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "2a06c6cc0081064097d8b5e21612b24da49d898e6022c59880f7038b1db05f78",
+      "upstream_id": "TCollection_ExtendedString::operator==(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "ff46130a80a99d5985d383a841b9a004b61b1a38728e04878986fcd7ead384cb",
+      "upstream_id": "TCollection_ExtendedString::IsDifferent(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "f99327c49f8e22024bbb0574bd4ab677151765a521b86095465e2b43671ec3bb",
+      "upstream_id": "TCollection_ExtendedString::operator!=(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "8eab4e22260875f6bf597fcafded0b0b07de511deed78616a6a0e9a8aec36c76",
+      "upstream_id": "TCollection_ExtendedString::IsLess(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "c228cbc991b3c163413cfeb747f1326091568794f16926c6d63afe5fa7086f5d",
+      "upstream_id": "TCollection_ExtendedString::operator<(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "66e192eca2e733799efa29da62973feab67978cc9f4d6b5b1fefb0be2319b6ac",
+      "upstream_id": "TCollection_ExtendedString::IsGreater(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "8ceac8d1048b30d4fdf494aa6bdaf07bf503cd08113f550993ee148bc1d12dbb",
+      "upstream_id": "TCollection_ExtendedString::operator>(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "28eb93b2dfeeed303a7f09ca95c88eaaa3d4b8f0abd3eeb6daa032e19f4c7e65",
+      "upstream_id": "TCollection_ExtendedString::StartsWith(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "b1d026825b56b5dfd62d093030f5f83543022859f3a98893b152ddfedb53de7d",
+      "upstream_id": "TCollection_ExtendedString::EndsWith(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    }
+  ],
+  "rustdoc": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "raw_capture": "rustdoc-target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "62f164e8fb104cc17c87e36c0b79dc458f55b45ef7b3414187271d75bf71c76d",
+    "normalized_capture": "rustdoc-target/extended-predicates-rustdoc-inventory.json",
+    "normalized_capture_sha256": "97411c975048ad9935770bf2c1badd69c98858b031bbff3361d6a98d94140973",
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "source_file": "crates/tkernel/src/tcollection/extended_string/comparison.rs",
+    "source_sha256": "ed8f154064e1bdaef797d2f9e7cf8423c37d0b4991f83542291670e653ee6b59",
+    "policy": "Private TKernel-only capture normalized with make_reachable_inventory. Each exact target occurs once. No global inventory snapshot was regenerated."
+  },
+  "native_evidence": {
+    "fixture": "tools/oracle/tkernel_extended_string_c_units_comparison.cxx",
+    "fixture_sha256": "16cf68fd11968e22649309efad4c30272c6128f2e400d7aca388c950e2ddca7c",
+    "expected": "tools/oracle/tkernel_extended_string_c_units_comparison.expected",
+    "expected_sha256": "761d9401f3190ce49a0e2846d8b99d2b5567209e7697101caf42528c256ec00a",
+    "library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "executable_sha256": "e8a86bc9a0067bec1f6dcd1be94b50dd23be2a83eec4a7817be11fe11d7428d4",
+    "matches_expected": true,
+    "cases": [
+      "Embedded NUL truncates each pointer predicate.",
+      "Operator aliases match their named pointer predicates.",
+      "Explicit-length methods include the embedded zero and tail.",
+      "Equal-prefix extra-tail ordering, prefix and suffix results are checked.",
+      "Null-pointer results are checked on empty and nonempty receivers."
+    ]
+  },
+  "rust_evidence": {
+    "regression": "crates/tkernel/tests/extended_string_c_units_comparison.rs",
+    "regression_sha256": "bff696b3a79c3cb1dd6702376d13e09bb0ff4199eb9ef27f088aab71c91a08d0",
+    "test_command": "cargo test -p rustycad-tkernel --test extended_string_c_units_comparison --test tcollection_extended_string",
+    "test_log": "porting/runtime-evidence/extended-string-c-units-comparison-tests.log.gz",
+    "test_log_sha256": "88f88554786ffaea1fc374a0ec30e218ae6371b0a7751bd00771f9e00b6ae427",
+    "passed": 107,
+    "failed": 0,
+    "groups": 2,
+    "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-c-units-comparison-clippy.log.gz",
+    "clippy_log_sha256": "96b9f747d373de0349161f474f8cc1e91263d7d5f38fcad08eac809859c7fa16",
+    "clippy_exit_code": 0
+  },
+  "parity_sha256": "bcfc2ef86dbfb6d8e87f894299aa3107a833126cd999b889aede7c1e69336336",
+  "limits": "The safe pointer facade is Option<&[u16]>: it models null versus bounded readable storage but not invalid/dangling pointers or reads beyond the supplied slice. Existing explicit-span methods remain unchanged."
+}
