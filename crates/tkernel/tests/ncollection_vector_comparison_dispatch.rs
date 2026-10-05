@@ -70,18 +70,8 @@ fn vec3_ne_row() -> String {
 
 fn vec4_is_equal_row() -> String {
     let four_events = RefCell::new(Vec::new());
-    let four_left = Vec4::new(
-        probe(1, &four_events),
-        probe(2, &four_events),
-        probe(3, &four_events),
-        probe(4, &four_events),
-    );
-    let four_right = Vec4::new(
-        probe(1, &four_events),
-        probe(2, &four_events),
-        probe(3, &four_events),
-        probe(9, &four_events),
-    );
+    let four_left = Vec4::from_array([1, 2, 3, 4].map(|value| probe(value, &four_events)));
+    let four_right = Vec4::from_array([1, 2, 3, 9].map(|value| probe(value, &four_events)));
     comparison_row(
         "vec4_is_equal",
         four_left.is_equal(&four_right),
