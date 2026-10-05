@@ -1,0 +1,63 @@
+{
+  "rust_base_revision": "eaeaf870b08691638be797c201adefdfef368b4c",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": [
+    "NCollection_LinearVector::Appended() growth-before-default-construction state",
+    "NCollection_LinearVector::EmplaceAppend(Args&&...) growth-before-forwarded-construction state"
+  ],
+  "native": {
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": ["-std=c++17", "-O2"],
+    "compile_and_compare_exit_code": 0,
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/tkernel_linear_vector_append_order.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKernel -o /tmp/tkernel_linear_vector_append_order && /tmp/tkernel_linear_vector_append_order > /tmp/tkernel_linear_vector_append_order.out && diff -u tools/oracle/tkernel_linear_vector_append_order.expected /tmp/tkernel_linear_vector_append_order.out",
+    "source": "tools/oracle/tkernel_linear_vector_append_order.cxx",
+    "source_sha256": "db9b23eed2a88a595825c49e9033d7c4650036ff8540d2684d119b16d989e512",
+    "expected": "tools/oracle/tkernel_linear_vector_append_order.expected",
+    "expected_sha256": "846ea22e18f6c97a806ca01399b43cd2f97638c92468e30b073db2a08476b907",
+    "output_sha256": "846ea22e18f6c97a806ca01399b43cd2f97638c92468e30b073db2a08476b907",
+    "library": "occt-install/lib/libTKernel.so.8.0.0",
+    "library_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+    "header_sha256": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",
+    "original_test": "src/FoundationClasses/TKernel/GTests/NCollection_LinearVector_Test.cxx",
+    "original_test_sha256": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31",
+    "finding": "The pinned implementation calls grow(mySize + 1) before constructAt for both operations. When construction throws, capacity growth remains visible while Size and existing values remain unchanged."
+  },
+  "rust": {
+    "toolchain": "cargo 1.98.1; rustc 1.98.1 (48a229ceaefd4985c50990b14116b6d856af0985)",
+    "test_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-linear-vector-append-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=4 cargo +1.98.1 test -p rustycad-tkernel",
+    "test_exit_code": 0,
+    "test_groups": 194,
+    "passed": 2869,
+    "failed": 0,
+    "ignored": 0,
+    "full_log": "porting/audits/linear-vector-append-order-tkernel-tests.log.gz",
+    "full_log_gzip_sha256": "9052cb8c7847fe2370d2feea00617b5342a803744002d225391bd5dad7aa9d6c",
+    "original_legacy_target": {
+      "name": "ncollection_linear_vector",
+      "passed": 49,
+      "failed": 0,
+      "test_names_changed": false
+    },
+    "supplemental_target": {
+      "name": "ncollection_linear_vector_exception_state",
+      "passed": 10,
+      "failed": 0,
+      "new_append_order_cases": 6
+    },
+    "clippy": {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-linear-vector-append-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=4 cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "porting/audits/linear-vector-append-order-tkernel-clippy.log.gz",
+      "log_gzip_sha256": "b7a5f724aba050517080fce9bf0c8e244c98dbf969c373c2b2fe3bc3a0cabdd0"
+    },
+    "source_sha256": "17dbebdd12aefb7c9f1f84b772e92b4475c68454cd8d19e25c805d9e959a8c50",
+    "test_sha256": "e4200d95caa6576fcd4cbbe7e98fb47bb8b009d908993fedc4d80abaa3de09fd",
+    "harness_sha256": "5e65d1e83c027af172b4968f5658ca4e789415c7a02a465087903781a950da00"
+  },
+  "remaining_gaps": [
+    "Rust Vec relocation does not expose native std::move_if_noexcept constructor dispatch for user-defined element types.",
+    "Rust panic cleanup drops partially constructed tail objects; the native raw-storage implementation leaves those untracked objects behind.",
+    "The legacy API is functionally covered for the observed cases, but this change does not establish parity for arbitrary element constructor side effects or allocator failures."
+  ]
+}

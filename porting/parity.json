@@ -70262,7 +70262,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::appended",
       "status": "partial",
-      "notes": "Native grows before default-constructing the new element; Rust evaluates Default before append can grow. Existing-value relocation also differs for non-trivial types because native uses std::move_if_noexcept. See porting/audits/linear-vector-contract.json."
+      "notes": "Rust now reserves before default construction, matching native size/capacity state when construction panics; existing-value relocation still differs for non-trivial types because native uses std::move_if_noexcept. See tools/oracle/tkernel_linear_vector_append_order.expected."
     },
     {
       "upstream_id": "NCollection_LinearVector::EmplaceAppend(Args&&...)",
@@ -70270,7 +70270,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::emplace_append",
       "status": "partial",
-      "notes": "Native grows before forwarding construction arguments; Rust evaluates the construction closure before append can grow. Existing-value relocation also differs for non-trivial types because native uses std::move_if_noexcept. See porting/audits/linear-vector-contract.json."
+      "notes": "Rust now reserves before running the construction closure, matching native size/capacity state when construction panics; existing-value relocation still differs for non-trivial types because native uses std::move_if_noexcept. See tools/oracle/tkernel_linear_vector_append_order.expected."
     },
     {
       "upstream_id": "NCollection_LinearVector::SetValue(size_t,const TheItemType&)",
