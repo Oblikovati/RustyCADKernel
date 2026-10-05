@@ -1,7 +1,15 @@
 //! The members NCollection_Mat3 and NCollection_Mat4 share. Both store `N*N` elements in
 //! column-major order, so `columns[c][r]` is native `myMat[c * N + r]`.
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub};
-/// Element types with the arithmetic the matrices use (`float`, `double`); `f64: MatrixScalar`.
+/// Element types with the arithmetic used by matrix adjoint and inverse operations.
+/// `f64: MatrixScalar`; signed integer implementations match native defined arithmetic only.
+/// Signed integer parity applies only when intermediates stay in range; C++ signed overflow is undefined.
+///
+/// ```
+/// use rustycad_tkernel::ncollection::Mat3;
+/// let identity = Mat3::<i32>::identity();
+/// assert!(identity.inverted().unwrap().is_identity());
+/// ```
 pub trait MatrixScalar:
     Copy
     + From<u8>
@@ -17,6 +25,8 @@ pub trait MatrixScalar:
 }
 impl MatrixScalar for f32 {}
 impl MatrixScalar for f64 {}
+impl MatrixScalar for i32 {}
+impl MatrixScalar for i64 {}
 
 /// Mutates matching entries in native column-major order; e.g. `zip_matrix_elements(&mut left, &right, |a, b| *a += *b)`.
 pub(super) fn zip_matrix_elements<T, const N: usize>(
