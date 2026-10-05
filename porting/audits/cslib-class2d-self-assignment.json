@@ -1,0 +1,296 @@
+{
+  "purpose": "Model the native early return for self-copy and self-move using a safe explicit alias adapter.",
+  "rust_base_revision": "f8413c7f38359e99895b6c4a7e8c7f6ef3669ba8",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "cpp_bindings": [
+    {
+      "selector": "CSLib_Class2d::operator=(const CSLib_Class2d&)",
+      "cpp_id": "efbbdb6527234127b296047e18a2601f9f7ba3e0c74ba0e8a5244402c901efce",
+      "rust_items": [
+        "rustycad_tkmath::cslib::Class2d::assign_returning",
+        "rustycad_tkmath::cslib::Class2d::assign_self"
+      ]
+    },
+    {
+      "selector": "CSLib_Class2d::operator=(CSLib_Class2d&&)",
+      "cpp_id": "1c9030ad493f244a0c674649f3f955fc1724dde8f29141518bd44be50c71f892",
+      "rust_items": [
+        "rustycad_tkmath::cslib::Class2d::move_from_returning",
+        "rustycad_tkmath::cslib::Class2d::assign_self"
+      ]
+    }
+  ],
+  "rust_bindings": [
+    {
+      "path": "rustycad_tkmath::cslib::Class2d::assign_returning",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "source",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkmath/src/cslib/class2d.rs",
+      "source_sha256": "b2009eb8b2f9fa5a5747f71bf19650792b97a74a6f5681b6c6cb0d5234cba3a2",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "Class2d",
+            "resolved_item_path": "rustycad_tkmath::cslib::class2d::Class2d",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "ec5ec1463c0c88645689ced3ad8ff776aef76e6d8ba3083faf92c95f1a364f2d"
+    },
+    {
+      "path": "rustycad_tkmath::cslib::Class2d::move_from_returning",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "source",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkmath/src/cslib/class2d.rs",
+      "source_sha256": "b2009eb8b2f9fa5a5747f71bf19650792b97a74a6f5681b6c6cb0d5234cba3a2",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "Class2d",
+            "resolved_item_path": "rustycad_tkmath::cslib::class2d::Class2d",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "7927fbb3fc349352c5caf1cf05718a73b66bb4e0920cef0b6ae6d5b62cac7e0d"
+    },
+    {
+      "path": "rustycad_tkmath::cslib::Class2d::assign_self",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkmath/src/cslib/class2d.rs",
+      "source_sha256": "b2009eb8b2f9fa5a5747f71bf19650792b97a74a6f5681b6c6cb0d5234cba3a2",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "Class2d",
+            "resolved_item_path": "rustycad_tkmath::cslib::class2d::Class2d",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "357308bb65f456a3b1d15aee31430a0560a2cf5bea5b19827d2c69ed5e7feedc"
+    }
+  ],
+  "rustdoc_json_sha256": "3905e57ad991786f932c9b9ec0ef7e6b1f15a9335018e9979337f320842de4bd",
+  "source_hashes": {
+    "crates/tkmath/src/cslib/class2d.rs": "b2009eb8b2f9fa5a5747f71bf19650792b97a74a6f5681b6c6cb0d5234cba3a2",
+    "crates/tkmath/tests/class2d_assignment_returns.rs": "9f498710ef0f360dd783311345ae0d85855e067bf5b394511aea235f4ab5711f",
+    "tools/oracle/cslib_class2d_self_assignment.cxx": "4a509749084d9057d0ac0519386a6370543a5f128aae7f5837111feea25ad2e1",
+    "tools/oracle/cslib_class2d_self_assignment.expected": "91b31b6bd709d2f444125bcd73e9fa8d85bb70b0a9795328872420c9a7514a22",
+    "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx": "990f1b31b97b5d797c6ee6a767428a6f72dfd1f158ae4a03b2600194f71d5302",
+    "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.cxx": "5dd2a866a9e5c6f7670b5382966dcefcea7d1f2dbdecabc38025edbbf955265f"
+  },
+  "native_probe": {
+    "source": "tools/oracle/cslib_class2d_self_assignment.cxx",
+    "expected": "tools/oracle/cslib_class2d_self_assignment.expected",
+    "compiler": "g++ 13.3.0",
+    "flags": [
+      "-std=c++17",
+      "-O2"
+    ],
+    "library_sha256": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8",
+    "binary_sha256": "774a153b42c47e656178bebcbfdc8537eba364b55008895065e4a1fb7a26740e",
+    "exit_code": 0,
+    "output": "1 0 1 0\n1 1 1 1\n"
+  },
+  "legacy_declaration_delta": 0,
+  "supersedes": "The self-alias limitation in porting/audits/cslib-class2d-assignment-returns.md is closed by assign_self paired with each distinct-object adapter. Native self-assignment does not copy, move, clear or allocate; both operators return early when this == &theOther.",
+  "validation": {
+    "red": {
+      "exit_code": 101,
+      "log": "porting/runtime-evidence/class2d-self-red.log.gz",
+      "log_sha256": "501f835a1a29491be684d2f7ad5e980195d4036138a68f4723707467273ec602"
+    },
+    "focused": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/class2d-self-focused.log.gz",
+      "log_sha256": "cb7e703519235f81a4f3bc4b2597e793469d80f56a4d71a91dbe968ac99f0af0",
+      "summary": {
+        "passed": 52,
+        "failed": 0,
+        "ignored": 0,
+        "result_groups": 3,
+        "failed_result_groups": 0,
+        "command_exit_code": 0,
+        "command_succeeded": true
+      }
+    },
+    "clippy": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/class2d-self-clippy.log.gz",
+      "log_sha256": "22eab848c76ccb5e5ade3a175545f0f14636361c94bd28403aae762d4438db26"
+    },
+    "rustdoc": {
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/class2d-self-rustdoc.log.gz",
+      "log_sha256": "a1a89307772ee8a2022151400d8c0931334cb5d31df9158529cfec9504ea5592"
+    },
+    "selectors": {
+      "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_class2d_assignment_bindings",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/class2d-self-selectors.log.gz",
+      "log_sha256": "23b5e6a53ba3dcfc491476dc0db283170ca78a23d9de589f698e066727ea1734"
+    }
+  }
+}
