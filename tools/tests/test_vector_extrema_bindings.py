@@ -32,6 +32,9 @@ class VectorExtremaBindingsTest(unittest.TestCase):
         cls.scalar_audit = json.loads(
             (ROOT / "porting/audits/vector-scalar-return-contracts.json").read_text()
         )
+        cls.products_audit = json.loads(
+            (ROOT / "porting/audits/vector-products-order.json").read_text()
+        )
 
     def test_all_six_selectors_resolve_to_the_pinned_declarations(self) -> None:
         self.assert_exact_bindings(self.audit["bindings"], 6, "implemented")
@@ -41,6 +44,9 @@ class VectorExtremaBindingsTest(unittest.TestCase):
 
     def test_scalar_returns_and_float_specializations_keep_partial_limits(self) -> None:
         self.assert_exact_bindings(self.scalar_audit["bindings"], 10, "partial")
+
+    def test_product_formulas_keep_generic_and_constexpr_limits(self) -> None:
+        self.assert_exact_bindings(self.products_audit["bindings"], 5, "partial")
 
     def assert_exact_bindings(
         self, bindings: list[dict[str, str]], count: int, mapping_status: str

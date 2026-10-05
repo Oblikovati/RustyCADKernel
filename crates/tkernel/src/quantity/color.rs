@@ -86,6 +86,10 @@ impl Color {
     pub const fn rgb(self) -> [f32; 3] {
         self.rgb
     }
+    /// Borrows stored linear components, as `Rgb()`; `Color::default().rgb_ref()[0] == 1.0`.
+    pub const fn rgb_ref(&self) -> &[f32; 3] {
+        &self.rgb
+    }
     /// `Rgb()` and the `NCollection_Vec3<float>` conversion operator; `color.rgb_vec3().x()`.
     pub const fn rgb_vec3(self) -> Vec3<f32> {
         Vec3::new(self.rgb[0], self.rgb[1], self.rgb[2])

@@ -68452,12 +68452,13 @@
       "selector_id": "4459a2ffd813451446c6d79769a623490fc9dc029515590ca744e6787cd19977"
     },
     {
-      "upstream_id": "NCollection_Vec2::Dot(const NCollection_Vec2&) const",
+      "upstream_id": "NCollection_Vec2::Dot(const NCollection_Vec2<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::dot",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler binding recovered against pinned OCCT. Primitive runtime formula checks pass; arbitrary C++ element copy/operation lifetimes and constexpr callability are not established. See porting/audits/vector-products-order.json.",
+      "selector_id": "65b9e8ab260a7e255819d76a952c6d35c6421ec485aa96f3aa4d5c891e1f84c9"
     },
     {
       "upstream_id": "NCollection_Vec2::IsEqual(const NCollection_Vec2<Element_t> &) const noexcept",
@@ -68586,28 +68587,31 @@
       "selector_id": "019e51f43ac11c469ea1c65e658bcaa44439b557b0250fd1691dbbed3e9059a8"
     },
     {
-      "upstream_id": "NCollection_Vec3::Dot(const NCollection_Vec3&) const",
+      "upstream_id": "NCollection_Vec3::Dot(const NCollection_Vec3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::dot",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler binding recovered against pinned OCCT. Primitive runtime formula checks pass; arbitrary C++ element copy/operation lifetimes and constexpr callability are not established. See porting/audits/vector-products-order.json.",
+      "selector_id": "4132877692106e3e3273677237bd7a6e1e151b3ce9f415f7e165f21379546afa"
     },
     {
-      "upstream_id": "NCollection_Vec3::Cross(const NCollection_Vec3&,const NCollection_Vec3&)",
+      "upstream_id": "NCollection_Vec3::Cross(const NCollection_Vec3<Element_t> &,const NCollection_Vec3<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cross",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler binding recovered against pinned OCCT. Primitive runtime formula checks pass; arbitrary C++ element copy/operation lifetimes and constexpr callability are not established. See porting/audits/vector-products-order.json.",
+      "selector_id": "c332a9d90d066e59f45c08205ad6fd7002e3dcae8f78ae8c2c77670712ace38f"
     },
     {
-      "upstream_id": "NCollection_Vec3::GetLERP(const NCollection_Vec3&,const NCollection_Vec3&,Element_t)",
+      "upstream_id": "NCollection_Vec3::GetLERP(const NCollection_Vec3<Element_t> &,const NCollection_Vec3<Element_t> &,const Element_t) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::lerp",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler binding recovered against pinned OCCT. Primitive runtime formula checks pass; arbitrary C++ element copy/operation lifetimes and constexpr callability are not established. See porting/audits/vector-products-order.json.",
+      "selector_id": "e5947a051a74acf18284e52ac9ee6e48e15a63f794b422c3d3d95de2411c5c08"
     },
     {
       "upstream_id": "NCollection_Vec3::IsEqual(const NCollection_Vec3<Element_t> &) const noexcept",
@@ -68736,12 +68740,13 @@
       "selector_id": "824d570573d51ac857e755a684c86234888f3a1a29cb2ba2fe7e93daeb3f4fc2"
     },
     {
-      "upstream_id": "NCollection_Vec4::Dot(const NCollection_Vec4&) const",
+      "upstream_id": "NCollection_Vec4::Dot(const NCollection_Vec4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::dot",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "status": "partial",
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler binding recovered against pinned OCCT. Primitive runtime formula checks pass; arbitrary C++ element copy/operation lifetimes and constexpr callability are not established. See porting/audits/vector-products-order.json.",
+      "selector_id": "46e98f6b55b2d3a8860bd9f6418997dcf3d0373ad735d3f6203ea9258a9185e4"
     },
     {
       "upstream_id": "NCollection_Vec4::IsEqual(const NCollection_Vec4<Element_t> &) const noexcept",
@@ -88464,9 +88469,13 @@
       "upstream_id": "Quantity_Color()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Color::default (Default)",
+      "rust_item": "rustycad_tkernel::quantity::Color::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Yellow, as the native default."
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Yellow, as the native default. Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::Color::<core::default::Default>::default"
+      ],
+      "selector_id": "ef6d32b1ef73854200ae6896f35b8c09de9a1875168d3bbeb928b334bbffa6af"
     },
     {
       "upstream_id": "Quantity_Color::Quantity_Color(Quantity_NameOfColor)",
@@ -88509,12 +88518,16 @@
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
     },
     {
-      "upstream_id": "Quantity_Color::Rgb() const",
+      "upstream_id": "Quantity_Color::Rgb() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Color::rgb / rgb_vec3",
-      "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+      "rust_item": "rustycad_tkernel::quantity::Color::rgb_ref",
+      "status": "partial",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::Color::rgb_ref"
+      ],
+      "selector_id": "5302af6c8e77e449980e28128d88a69f6e6b1e5883e876d15f4629f46f175906"
     },
     {
       "upstream_id": "Quantity_Color::Values(double&,double&,double&,Quantity_TypeOfColor) const",
@@ -88821,20 +88834,30 @@
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
     },
     {
-      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB(const NCollection_Vec3<T>&)",
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB(const NCollection_Vec3<T> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3 / linear_to_srgb_vec3_f32",
-      "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations."
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3",
+      "status": "partial",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations. Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3",
+        "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3_f32"
+      ],
+      "selector_id": "b9dc9aaf6c95a37f52ba78a4b7d72fafa9f12b3f8f4c2a0695df5603ffb50b77"
     },
     {
-      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB(const NCollection_Vec3<T>&)",
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB(const NCollection_Vec3<T> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3 / srgb_to_linear_vec3_f32",
-      "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations."
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3",
+      "status": "partial",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations. Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3",
+        "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3_f32"
+      ],
+      "selector_id": "cc66448b88d69cd12de583a9b3edd52d916ea7b4d23549fea842cf79d42d7636"
     },
     {
       "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB_approx22(float)",
@@ -88917,20 +88940,28 @@
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirk kept: the caller's stream position is never advanced."
     },
     {
-      "upstream_id": "std::hash<Quantity_Color>::operator()(const Quantity_Color&) const",
+      "upstream_id": "std::hash<Quantity_Color>::operator()(const Quantity_Color&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Color as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "rust_item": "rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
       "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over unsigned char(255 * channel)."
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over unsigned char(255 * channel). Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash"
+      ],
+      "selector_id": "a617dbee801e3e7ec4dda48a3419e75b5bdfe98a4090c0251f2dc8088bae6efd"
     },
     {
       "upstream_id": "Quantity_ColorRGBA()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
-      "rust_item": "rustycad_tkernel::quantity::ColorRgba::default (Default)",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::ColorRgba::<core::default::Default>::default"
+      ],
+      "selector_id": "1e52b5620acc9cbf5a46c01165c6ac9ad118dd31795a3a6084ff2b4da10253b4"
     },
     {
       "upstream_id": "Quantity_ColorRGBA::Quantity_ColorRGBA(const Quantity_Color&)",
@@ -89101,12 +89132,16 @@
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirks kept: the caller's position is never advanced; out-of-range RGB terminates OCCT (noexcept SetValues) and is a Failure in Rust."
     },
     {
-      "upstream_id": "std::hash<Quantity_ColorRGBA>::operator()(const Quantity_ColorRGBA&) const",
+      "upstream_id": "std::hash<Quantity_ColorRGBA>::operator()(const Quantity_ColorRGBA&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::ColorRgba as rustycad_tkernel::ncollection::HashKey>::occt_hash",
-      "status": "implemented",
-      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over {100*alpha, 255*r, 255*g, 255*b} as unsigned char; alpha outside [0; 2.55] is undefined natively (Rust saturates)."
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "partial",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over {100*alpha, 255*r, 255*g, 255*b} as unsigned char; alpha outside [0; 2.55] is undefined natively (Rust saturates). Exact native selector and public Rust compiler paths recorded in porting/audits/quantity-color-bindings.json. The borrowed RGB view follows Rust borrowing rules; C++ mutation through concurrent aliases is not modeled. Conversion templates cover float/double only; RGBA hash retains native-undefined alpha conversion limits.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash"
+      ],
+      "selector_id": "e4c4d633e472230a0d3d5340d9d83b035104b2523e1efae956b36e2cd0961ec3"
     },
     {
       "upstream_id": "Quantity_Date::operator-(const Quantity_Period&)",

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "purpose": "Bind vector product formulas to five exact native declarations and test runtime evaluation order.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler_capture_source_revision": "0cb509ecdc6e1f5de3376a72edc5b01b70792c53",
+  "bindings": [
+    {
+      "selector": "NCollection_Vec2::Dot(const NCollection_Vec2<Element_t> &) const noexcept",
+      "cpp_id": "65b9e8ab260a7e255819d76a952c6d35c6421ec485aa96f3aa4d5c891e1f84c9",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::dot"
+    },
+    {
+      "selector": "NCollection_Vec3::Dot(const NCollection_Vec3<Element_t> &) const noexcept",
+      "cpp_id": "4132877692106e3e3273677237bd7a6e1e151b3ce9f415f7e165f21379546afa",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::dot"
+    },
+    {
+      "selector": "NCollection_Vec3::Cross(const NCollection_Vec3<Element_t> &,const NCollection_Vec3<Element_t> &) noexcept",
+      "cpp_id": "c332a9d90d066e59f45c08205ad6fd7002e3dcae8f78ae8c2c77670712ace38f",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::cross"
+    },
+    {
+      "selector": "NCollection_Vec3::GetLERP(const NCollection_Vec3<Element_t> &,const NCollection_Vec3<Element_t> &,const Element_t) noexcept",
+      "cpp_id": "e5947a051a74acf18284e52ac9ee6e48e15a63f794b422c3d3d95de2411c5c08",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::lerp"
+    },
+    {
+      "selector": "NCollection_Vec4::Dot(const NCollection_Vec4<Element_t> &) const noexcept",
+      "cpp_id": "46e98f6b55b2d3a8860bd9f6418997dcf3d0373ad735d3f6203ea9258a9185e4",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::dot"
+    }
+  ],
+  "compiled_targets": [
+    {
+      "path": "rustycad_tkernel::ncollection::Vec2::dot",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+      "declaration_sha256": "f4d65fff109d3304ff118a876043af9f1b428623cacc0fca822746eb6c7c5796"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::dot",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+      "declaration_sha256": "a740b8e714c15dff910b31ee2c180822eb2c2c2a3cc581a1dcb4c2d87fac5799"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::cross",
+      "source_file": "crates/tkernel/src/ncollection/vector/float.rs",
+      "source_sha256": "073cf52df3e53af2fe5781cf4eb408b968e1d4db33c044c3dc3ccb482a83fc4e",
+      "declaration_sha256": "b033860129fb232a7cfde63842b23430a2c2fa43e4c9772c0be6b7559af15aa5"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::lerp",
+      "source_file": "crates/tkernel/src/ncollection/vector/float.rs",
+      "source_sha256": "073cf52df3e53af2fe5781cf4eb408b968e1d4db33c044c3dc3ccb482a83fc4e",
+      "declaration_sha256": "5dcfbc418ef2903731de31175dbf83597f0459d0598d9046f21fa7f5d3e64131"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec4::dot",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+      "declaration_sha256": "53e5b932b24f770c02c79ed1386b2673c161e2e2b3e2fb1b9d48b004bb6df14d"
+    }
+  ],
+  "limits": [
+    "Arbitrary C++ element construction, copying, and overloaded operator lifetimes remain unproven.",
+    "Rust generic methods do not provide native constexpr callability.",
+    "These six supplemental Rust cases do not increase original OCCT test declaration counts."
+  ],
+  "native_command": "g++ -std=c++17 -O2 -ffp-contract=off -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_vector_products_order.cxx -o /tmp/vector-products-native",
+  "native_expected": "tools/oracle/tkernel_vector_products_order.expected",
+  "evidence": [
+    {
+      "path": "porting/runtime-evidence/vector-products-rust.gz",
+      "sha256": "5c624611dcd474c0932ec52fcedb5d82a7f0189fcd4c859e9e4b481c6d15fd06",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-products-native.actual.gz",
+      "sha256": "1d02d0edb472c61bd2443861c17c783dc65d4282976fde8c011605f3c64edc94",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-products-order-python.gz",
+      "sha256": "774a39d7b8424e7a3e8543061e3eaa68f09e611282a6140e8821069d4fe81fd0",
+      "exit_code": 0
+    }
+  ]
+}
