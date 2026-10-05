@@ -43,4 +43,6 @@ fn mat4_mut_view_writes_column_major_storage() {
     view.set_value(1, 2, 52);
     assert_eq!(view.as_slice()[9], 52);
     assert_eq!(view.as_view().get_value(1, 2), 52);
+    view.as_mut_slice()[10] = 74;
+    assert_eq!(view.get_value(2, 2), 74);
 }
