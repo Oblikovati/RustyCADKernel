@@ -1,0 +1,87 @@
+{
+  "base_revision": "eabfd77821cde8aff5b337cf1420d96c6aaf5644",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Generic Copy element unary negation for Mat3 and Mat4; supplemental cases only",
+  "legacy_declaration_count_delta": 0,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/square_matrix.rs": "77015ba9e843c53d852b029003a1f093860f141a6e27468299d0bc3574211843",
+    "crates/tkernel/tests/matrix_generic_negation.rs": "aed4e1ff254fbc718ad49bf80aa026608dc8205c96e22b6c0859c8f1a3e73224",
+    "tools/oracle/tkernel_matrix_negation.cxx": "0656af7809e7573130e2f28f3fce03fc2b5a9c142242bd0bbb842926f2983d36",
+    "tools/oracle/tkernel_matrix_negation.expected": "f8f71ced84abcae5fd453eb0b9000765b47a2dc47b234bf4310200f54fb65e47",
+    "porting/parity.json": "652a9ef271606cd54d584fd063c2c02b9b55efd57e3e1bfd68540725949c1f77"
+  },
+  "native_header_sha256": {
+    "NCollection_Mat3.hxx": "332c91310cf02480226c7ef1187e63bc85e1d991ea14a9a547e55d02904df6e0",
+    "NCollection_Mat4.hxx": "e531f559c88bc17fa91b15e1b4d7c826e314f6ee9bdfae3257aff06eaf539ab9"
+  },
+  "native_compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "c0f7ba616af651a273c723966ccb4dde244da6a0094c7c62a8570ce6a920c54e",
+  "native_actual_sha256": "f8f71ced84abcae5fd453eb0b9000765b47a2dc47b234bf4310200f54fb65e47",
+  "native_output_matches_expected": true,
+  "initial_regression_exit_code": 101,
+  "rust_test_summary": {
+    "passed": 2803,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 172,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "strict_clippy_exit_code": 0,
+  "compiler_bindings": [
+    {
+      "cpp_selector": "NCollection_Mat3::Negated() const noexcept",
+      "cpp_id": "56fff3332869fd189addd6aef45a8169f04c7936e4e93da6562db210232a20a2",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::negated",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "e0c922d368b8829a6114b03443b04a459320ee4c3851d927e701ce151c9a4a24"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat3::operator-() const",
+      "cpp_id": "3a11d26d9e9eb5534d5d90e83f982cf57b4f38098b6d3492120a62f3cb659eb9",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Neg>::neg",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat3.rs",
+        "source_sha256": "56f7ffba8c139964cf63494b2f5b8145a341e39c89b512f53d69652aa506df63",
+        "declaration_sha256": "3dad416512af97eb038a7fbf1eb35bcdbf7baf3d8872f109a0495ac4c04f0219"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat4::Negated() const noexcept",
+      "cpp_id": "d6d248aa63e8783901c2c95e9545a12ffc35b055cab0a2dcd1c613b8c3ee9d41",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::negated",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "d3fd750fe270589e92fa79c49a941e88fbd94e91bd8f2086e9bf3984645ab13f"
+      }
+    },
+    {
+      "cpp_selector": "NCollection_Mat4::operator-() const",
+      "cpp_id": "a8e2d70f66aad02b48a3be36a4346e76a5858fa3c26e26b81b5b36cf110c8e56",
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Neg>::neg",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/mat4.rs",
+        "source_sha256": "b8c02d2aeb793bce8d6e6a2b59caad61694b4f6103525a352f4d0d79abbef3f0",
+        "declaration_sha256": "1be528f12709840b2e64ee50c2261585a24af6461b0d4dafcd4c7a60d1d4a135"
+      }
+    }
+  ],
+  "raw_logs": {
+    "porting/runtime-evidence/matrix-negation-red.log.gz": "8dc0461ba960d0814a73dde2df2ef64e8b326ab46a92b66f6261b60074c988ec",
+    "porting/runtime-evidence/matrix-negation-full.log.gz": "dd741ada12614be168b5bd2e4f80e3fedef77f136b96b94f9a707be3cf8a4e77",
+    "porting/runtime-evidence/matrix-negation-clippy.log.gz": "1aa011a61abdce77f32720a68ae29cd64f70a94e65132208846422e23282e383",
+    "porting/runtime-evidence/matrix-negation-rustdoc.log.gz": "c64a9268efaedb583cbc861bb9472eda185bb312f43727e011783330aa4fa556"
+  },
+  "limits": [
+    "No non-Copy lifecycle equivalence claim. Signed overflow is outside defined native arithmetic. Floating sign-bit regression is supplemental Rust validation."
+  ]
+}

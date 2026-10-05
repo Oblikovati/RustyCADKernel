@@ -16509,7 +16509,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::negated",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Native unary element negation in column-major order; Copy + Neg elements include signed integers and custom unary-only elements. Supplemental probe: tools/oracle/tkernel_matrix_negation.cxx. Defined element operations only; non-Copy lifecycle behavior is outside this slice."
     },
     {
       "upstream_id": "NCollection_Mat3::operator-() const",
@@ -16517,7 +16517,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Neg>::neg",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native unary element negation in column-major order; Copy + Neg elements include signed integers and custom unary-only elements. Supplemental probe: tools/oracle/tkernel_matrix_negation.cxx. Defined element operations only; non-Copy lifecycle behavior is outside this slice."
     },
     {
       "upstream_id": "NCollection_Mat3::Transposed() const noexcept",
@@ -16701,7 +16701,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::negated",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Native unary element negation in column-major order; Copy + Neg elements include signed integers and custom unary-only elements. Supplemental probe: tools/oracle/tkernel_matrix_negation.cxx. Defined element operations only; non-Copy lifecycle behavior is outside this slice."
     },
     {
       "upstream_id": "NCollection_Mat4::operator-() const",
@@ -16709,7 +16709,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Neg>::neg",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Native unary element negation in column-major order; Copy + Neg elements include signed integers and custom unary-only elements. Supplemental probe: tools/oracle/tkernel_matrix_negation.cxx. Defined element operations only; non-Copy lifecycle behavior is outside this slice."
     },
     {
       "upstream_id": "NCollection_Mat4::Transpose()",

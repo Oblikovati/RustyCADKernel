@@ -236,7 +236,7 @@ macro_rules! square_matrix_arithmetic {
                 copy
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> $matrix<T> {
+        impl<T: Copy + std::ops::Neg<Output = T>> $matrix<T> {
             /// Negates every element, as `Negated`/unary `operator-`; `matrix.negated()`.
             pub fn negated(&self) -> Self {
                 Self {
@@ -244,9 +244,7 @@ macro_rules! square_matrix_arithmetic {
                 }
             }
         }
-        impl<T: $crate::ncollection::MatrixScalar + std::ops::Neg<Output = T>> std::ops::Neg
-            for $matrix<T>
-        {
+        impl<T: Copy + std::ops::Neg<Output = T>> std::ops::Neg for $matrix<T> {
             type Output = Self;
             fn neg(self) -> Self {
                 self.negated()
