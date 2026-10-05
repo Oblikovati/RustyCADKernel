@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "scope": "OSD_SharedLibrary observes only the prefix before the first NUL for const-char name and symbol inputs",
+  "rust_base_revision": "b45942b81e56a2226c9074f727e3abaa0d5cceda",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "occt_sources": {
+    "OSD_SharedLibrary.cxx": {
+      "path": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.cxx",
+      "sha256": "c1db312f5f4e1214ed25ed2a15d1b81fc9b86ff003bc49b7d8b5436b50cfbcb2"
+    },
+    "OSD_SharedLibrary.hxx": {
+      "path": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "sha256": "7056c7ca0d05c5b787569bba3a4b95b1049465a30c094a6d854f17dbb428799e"
+    }
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_osd_shlib_nul.cxx",
+    "source_sha256": "0db172ecc7d38cfdd2cd250e50559d78e8794cea42ace235a4cdd66f3964e5e0",
+    "expected": "tools/oracle/tkernel_osd_shlib_nul.expected",
+    "expected_sha256": "252c5cf555e1339837737e13cc1950f804a2a9131e5dca1e14c35553f504c3dc",
+    "linked_library_sha256": "d63309c5c80b99ea9a95baf9ed549fa2dd417f159c5f0cbe598cb4a282bd995b",
+    "observed": "constructor=1 set_name=1 open=1 plain_symbol=1 symbol=1 empty_symbol=0 empty=1 empty_open=1 empty_main_symbol=1"
+  },
+  "rust_validation": {
+    "test": "cargo test -p rustycad-tkernel --test osd_process_resources_api_behavior",
+    "focused_result": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 1,
+      "exit_code": 0
+    },
+    "focused_log": "porting/runtime-evidence/tkernel-osd-shlib-cstring-prefix-focused.log.gz",
+    "focused_log_sha256": "c9c87de40b009ff288d3730e95cb512bb9a11180f7c37112d397598cc181d50f",
+    "full_package": {
+      "command": "cargo test -p rustycad-tkernel",
+      "passed": 2739,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 161,
+      "exit_code": 0
+    },
+    "full_log": "porting/runtime-evidence/tkernel-osd-shlib-cstring-prefix-full-package.log.gz",
+    "full_log_sha256": "bb9f0ee5a91fa80329ee6f0223e7b8e3d348de0fa73ab831c2046006850733a8",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings (passed)",
+    "format": "cargo fmt --check (passed)",
+    "rust_sources": {
+      "shared_library.rs": {
+        "path": "crates/tkernel/src/osd/process/shared_library.rs",
+        "sha256": "d42472756459c6a1a6209552bd61b98e254dea88a73c861dea3c965cf368f8d3"
+      },
+      "integration_test.rs": {
+        "path": "crates/tkernel/tests/osd_process_resources_api_behavior.rs",
+        "sha256": "1e1e97d2a702498f08d6a286bf51ef6332883f3bc3855ae77563c2b3ca871d02"
+      },
+      "standard_mod.rs": {
+        "path": "crates/tkernel/src/standard/mod.rs",
+        "sha256": "33eef7166621d0b0f2c30130ee18b95281adea4fe8ebc625b40b71266bec63e9"
+      }
+    },
+    "followup": {
+      "focus": "12 passed, 0 failed; log rerun after sharing standard::c_prefix",
+      "full": "2739 passed across 161 result groups, 0 failed; log rerun after sharing standard::c_prefix",
+      "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings (passed after refactor)",
+      "format": "cargo fmt --check (passed after refactor)"
+    }
+  },
+  "behavior": [
+    "Constructor and SetName store only the valid-UTF-8 prefix before an embedded NUL, matching native strlen/strcpy.",
+    "DlSymb searches using only the valid-UTF-8 prefix before an embedded NUL; a leading NUL searches the empty symbol.",
+    "The pinned glibc probe confirms dlopen of an empty filename prefix resolves the main program on this host."
+  ],
+  "limits": [
+    "The Rust API accepts UTF-8 str values only; arbitrary non-UTF-8 native char* paths and symbol names remain unrepresented.",
+    "The Windows shared-library loader remains unimplemented and was not part of this Linux runtime probe.",
+    "Native DlSymb after DlClose uses a dangling handle and is undefined; Rust continues to return None safely."
+  ]
+}

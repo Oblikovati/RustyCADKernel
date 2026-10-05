@@ -150,6 +150,32 @@ fn native_shared_library_failures_and_the_main_program() {
     main.dl_close();
 }
 
+#[cfg(target_os = "linux")]
+#[test]
+fn shared_library_strings_truncate_at_embedded_nul() {
+    let mut library = SharedLibrary::named(Some("libm.so.6\0ignored"));
+    assert_eq!(library.name(), Some("libm.so.6"));
+    library.set_name(Some("libm.so.6\0replaced"));
+    assert_eq!(library.name(), Some("libm.so.6"));
+    assert!(library.dl_open(LoadMode::RtldNow));
+    let plain = library.dl_symb("cos").expect("libm exports cos");
+    assert_eq!(library.dl_symb("cos\0ignored"), Some(plain));
+    assert!(library.dl_symb("\0cos").is_none());
+    library.dl_close();
+}
+
+#[cfg(target_os = "linux")]
+#[test]
+fn shared_library_empty_c_string_prefix_stays_empty() {
+    let mut constructed = SharedLibrary::named(Some("\0libm.so.6"));
+    assert_eq!(constructed.name(), Some(""));
+    assert!(constructed.dl_open(LoadMode::RtldNow));
+    assert!(constructed.dl_symb("malloc").is_some());
+    let mut set = SharedLibrary::new();
+    set.set_name(Some("\0ignored"));
+    assert_eq!(set.name(), Some(""));
+}
+
 /// Fixed memory figures standing for mallinfo2, procfs and task_info.
 struct FakeMemInfo {
     status: Option<&'static str>,
