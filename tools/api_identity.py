@@ -25,16 +25,29 @@ def split_parameters(text: str) -> list[str]:
     return [*parts, final] if final else parts
 
 
+def operator_angle_span(text: str) -> tuple[int, int] | None:
+    offset = text.rfind("operator")
+    if offset < 0:
+        return None
+    start = offset + len("operator")
+    suffix = text[start:]
+    match = re.match(r"\s*(<=>|<<=|>>=|<=|>=|<<|>>|<|>)", suffix)
+    if match is None:
+        return None
+    symbol_start = start + match.start(1)
+    return symbol_start, symbol_start + len(match.group(1))
+
+
 def signature_open(text: str) -> int:
     offset = text.find("operator()")
     if offset >= 0:
         return text.find("(", offset + len("operator()"))
-    operator = text.rfind("operator")
-    is_operator_symbol = operator > text.rfind("::")
+    symbol_span = operator_angle_span(text)
     angle_depth = 0
     for index, char in enumerate(text):
-        if not (is_operator_symbol and char in "<>"):
-            angle_depth += (char == "<") - (char == ">")
+        if symbol_span and symbol_span[0] <= index < symbol_span[1]:
+            continue
+        angle_depth += (char == "<") - (char == ">")
         if char == "(" and angle_depth == 0:
             return index
     return -1
