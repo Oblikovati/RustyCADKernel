@@ -1,4 +1,9 @@
 {
+  "implementation_commits": [
+    "9250a814f03c40e4c1f695377906b8944ffdfc18",
+    "179aa2062594f3482db376eebb899fb8d306810e",
+    "4fda5dd1999e04198d3a536938a91e74c2529fe9"
+  ],
   "known_limits": [
     "Native Windows runtime is unavailable; only Linux fake calls and Windows GNU compile checks were run.",
     "OCCT_UWP LoadPackagedLibrary branch is not implemented.",
@@ -15,13 +20,13 @@
   "rust_source_sha256": {
     "crates/tkernel/Cargo.toml": "1e3bb49bd7104209041bffc9ad419edf888b8766d03bd31b014971d23b4d904c",
     "crates/tkernel/src/osd/process/shared_library.rs": "4d141d003ad2c4f24319bd8bb9babafcb492fa4610eeb985b6c0545ccdc4b0a7",
-    "crates/tkernel/src/osd/process/shared_library/windows_backend.rs": "326f093f201553ac944f37d009714632887381eda9d312af54c7e03610617bce",
-    "crates/tkernel/src/osd/process/shared_library/windows_backend/tests.rs": "caf6953da17851aa0610e4fafcb15b90997d9b10ba8609c09aca566775baf414",
-    "porting/parity.json": "337cf6b44e61143805e2afaa31d12a4956fc8d2d64986a38eab9b50c995c49ab"
+    "crates/tkernel/src/osd/process/shared_library/windows_backend.rs": "252c6a0bc07d7c87cc42166080dc05c1d975365ef8cc11a0bb14d79d282fad99",
+    "crates/tkernel/src/osd/process/shared_library/windows_backend/tests.rs": "5414bf6fad83dede188cc5d26b01656a6ef9467c48597e9a0c8ef228433b14e8",
+    "porting/parity.json": "cd9ed6d01c7ed31214c40f85377f4999591f3f31539ac76ef935c7b9cc40c69a",
+    "tools/oracle/tkernel_osd_shlib_windows.md": "5ee7dd83c056759ff6c0a39b105ab02c0e8a5e5a526ee17329a98fb2512dc999"
   },
   "schema_version": 1,
-  "scope": "Windows OSD_SharedLibrary backend and persistent FormatMessage/UTF-8 error buffers",
-  "source_commit": "179aa2062594f3482db376eebb899fb8d306810e",
+  "scope": "Windows OSD_SharedLibrary loader, persistent static error buffers, and source-bound validation",
   "toolchain": {
     "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
     "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)"
@@ -41,37 +46,42 @@
       {
         "command": "cargo test -p rustycad-tkernel",
         "exit_code": 0,
-        "gzip_sha256": "781207a863828a9efd6de919fae06ae4c3fbd293952632ce8453b5b000eb6a88",
+        "gzip_sha256": "b425ad4f2303e960a6a8f36cc5bbadf4996d4ddcf958f15ea8141c6b6d47be58",
         "path": "cargo-test.log.gz",
-        "raw_bytes": 222477,
-        "raw_sha256": "8893e101984576a48988dd3b7f8fa36ec433f95d8cb1855b9562b1c3cd66505f"
+        "raw_bytes": 222441,
+        "raw_sha256": "7fc024ff181dfce3eb65e4224ec4dde8fd59999449cb1b8fc9334204874839cb"
       },
       {
         "command": "cargo clippy -p rustycad-tkernel --tests -- -D warnings",
         "exit_code": 0,
-        "gzip_sha256": "bff939380813124e0874f6d2bc8402b9ae229705f1fac3d5bbfc054c1c439857",
+        "gzip_sha256": "56e28766c3d32d7b27e795426171141faaec4651907309dba932e5a1f35c7897",
         "path": "host-clippy.log.gz",
         "raw_bytes": 155,
-        "raw_sha256": "00235bd58d009eedec37cc0c4a917447c58469af21d2c7bb59e537c561d1ea24"
+        "raw_sha256": "ae71aae68047f1fa82f6c470c5e3bb3d54e4af081cd94713f52efa63dfd516c3"
       },
       {
         "command": "cargo check -p rustycad-tkernel --target x86_64-pc-windows-gnu",
         "exit_code": 0,
-        "gzip_sha256": "12e6a1c1ef8b16b4ff977c3949fecd71d270dbe899915e47f42cf1634b55bd42",
+        "gzip_sha256": "89d2dd5267ab6f7eb89fc77ef5e39e5e9ef561e8ec9bd629feb036277d576e2a",
         "path": "windows-check.log.gz",
         "raw_bytes": 155,
-        "raw_sha256": "ffbff1bb764297fe654f5bbfdc5814120431645d46610f9d41bb6d0acda77e94"
+        "raw_sha256": "551ab49c30361a126af3257f0660c2e00084f4c8ab03420ea6a94e8e61ce6cde"
       },
       {
         "command": "cargo clippy -p rustycad-tkernel --target x86_64-pc-windows-gnu --lib -- -D warnings",
         "exit_code": 0,
-        "gzip_sha256": "7d76d8349b03ba1e8d1e95a71a54bb3b18fcb0bb85009907fde3c28fabfe2dd2",
+        "gzip_sha256": "c76e6c44041b87bc021a6efe2b2611f7131b3c570d424f58494472894c7c718a",
         "path": "windows-clippy.log.gz",
         "raw_bytes": 155,
-        "raw_sha256": "a5292713e9212e27a401034ad119d9b67cdab36cb5a9f32bb5589deb418ba7cc"
+        "raw_sha256": "3642cddf35541dc9d68c80e575dd7ffd3f43f3dd904da5fe1623561eeaf0311f"
       }
     ],
     "native_windows_runtime_tested": false,
+    "windows_error_buffer_fake_tests": [
+      "failed_format_call_keeps_its_partial_wide_write",
+      "failed_conversion_exposes_its_partial_utf8_write",
+      "fixed_buffer_failures_keep_their_partial_output_writes"
+    ],
     "windows_fake_test_count": 10,
     "windows_gnu_check_exit_code": 0,
     "windows_gnu_clippy_strict_exit_code": 0
