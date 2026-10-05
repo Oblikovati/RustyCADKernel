@@ -106,17 +106,11 @@ macro_rules! vector_arithmetic {
                 self.$first * other.$first $(+ self.$rest * other.$rest)*
             }
         }
-        impl<T: Copy + Mul<Output = T>> $vector<T> {
+        impl<T: Copy + MulAssign> $vector<T> {
             /// Scales each component in place, as `Multiply`; `vector.multiply(2.0)`.
             pub fn multiply(&mut self, factor: T) {
-                self.$first = self.$first * factor;
-                $(self.$rest = self.$rest * factor;)*
-            }
-            /// Returns a scaled copy, as `Multiplied`; `vector.multiplied(2.0)`.
-            pub fn multiplied(&self, factor: T) -> Self {
-                let mut copy = *self;
-                copy.multiply(factor);
-                copy
+                self.$first *= factor;
+                $(self.$rest *= factor;)*
             }
         }
     };
@@ -125,23 +119,51 @@ vector_arithmetic!(Vec2, 2, [x, y]);
 vector_arithmetic!(Vec3, 3, [x, y, z]);
 vector_arithmetic!(Vec4, 4, [x, y, z, w]);
 
-// Scalar operators are stamped per element type: a generic `Mul<T>` would overlap
-// with the per-component `Mul<Self>` impl under Rust's coherence rules.
+// Scalar operators previously used primitive stamps to avoid a suspected coherence
+// overlap. Scalar T and vector VecN<T> RHS types are disjoint; generic impls preserve
+// OCCT template support. Vec2 copies use *, while Vec3/4 copies use *=, as upstream.
 macro_rules! scalar_multiplication {
-    ($vector:ident, $scalar:ty) => {
-        impl MulAssign<$scalar> for $vector<$scalar> {
-            fn mul_assign(&mut self, factor: $scalar) {
+    ($vector:ident) => {
+        impl<T: Copy + MulAssign> MulAssign<T> for $vector<T> {
+            fn mul_assign(&mut self, factor: T) {
                 self.multiply(factor);
             }
         }
-        impl Mul<$scalar> for $vector<$scalar> {
+    };
+}
+macro_rules! scalar_copy_multiplication {
+    ($vector:ident) => {
+        impl<T: Copy + MulAssign> $vector<T> {
+            /// Returns a scaled copy, as `Multiplied`; `vector.multiplied(2.0)`.
+            pub fn multiplied(&self, factor: T) -> Self {
+                let mut result = *self;
+                result.multiply(factor);
+                result
+            }
+        }
+        impl<T: Copy + MulAssign> Mul<T> for $vector<T> {
             type Output = Self;
-            fn mul(self, factor: $scalar) -> Self {
+            fn mul(self, factor: T) -> Self {
                 self.multiplied(factor)
             }
         }
     };
 }
+impl<T: Copy + Mul<Output = T>> Vec2<T> {
+    /// Returns a scaled copy, as `Multiplied`; `Vec2::new(1, 2).multiplied(3)`.
+    pub fn multiplied(&self, factor: T) -> Self {
+        Self::new(self.x * factor, self.y * factor)
+    }
+}
+impl<T: Copy + Mul<Output = T>> Mul<T> for Vec2<T> {
+    type Output = Self;
+    fn mul(self, factor: T) -> Self {
+        self.multiplied(factor)
+    }
+}
+scalar_copy_multiplication!(Vec3);
+scalar_copy_multiplication!(Vec4);
+
 macro_rules! divide_each {
     ($vector:ident, $scalar:ty, [$($field:ident),+]) => {
         impl DivAssign<$scalar> for $vector<$scalar> {
@@ -178,12 +200,12 @@ macro_rules! divide_by_reciprocal {
 }
 macro_rules! scalar_operators {
     ($scalar:ty) => {
-        scalar_multiplication!(Vec2, $scalar);
-        scalar_multiplication!(Vec3, $scalar);
-        scalar_multiplication!(Vec4, $scalar);
         divide_each!(Vec2, $scalar, [x, y]);
     };
 }
+scalar_multiplication!(Vec2);
+scalar_multiplication!(Vec3);
+scalar_multiplication!(Vec4);
 scalar_operators!(f32);
 scalar_operators!(f64);
 scalar_operators!(i32);

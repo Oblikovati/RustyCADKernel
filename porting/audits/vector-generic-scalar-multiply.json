@@ -1,0 +1,94 @@
+{
+  "base_revision": "59c604d0d470e11623b3224ee808124d323945f6",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "kind": "supplemental-native-generic-scalar-behavior",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+    "crates/tkernel/tests/vector_generic_scalar_multiply.rs": "f173c241f90d4370acbe65780b2d7f102a4e96b978c9cad408d28e80429b44a7",
+    "tools/oracle/tkernel_vector_generic_scalar.cxx": "cc9324bae94bd150a5ba87ed8424447a6b76c5baa0c09ddf51345f386d8361f9",
+    "tools/oracle/tkernel_vector_generic_scalar.expected": "8ad89f508a1871676664857ae4bc7a11d7c72c9a9b6490525ba73cf9c21e5072"
+  },
+  "native_header_hashes": {
+    "NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+    "NCollection_Vec3.hxx": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f",
+    "NCollection_Vec4.hxx": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66"
+  },
+  "native_compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_executable_sha256": "e95eef685439e8a59f40853e19d09061066b54504ffb0842705892113b19621e",
+  "native_actual_sha256": "8ad89f508a1871676664857ae4bc7a11d7c72c9a9b6490525ba73cf9c21e5072",
+  "native_output_matches_expected": true,
+  "rust_test_summary": {
+    "passed": 2742,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 162,
+    "command_exit_code": 0
+  },
+  "strict_clippy_exit_code": 0,
+  "compiler_verified_rust_bindings": [
+    {
+      "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Mul<T>>::mul",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "dea2c56d6243ac7c28886f1f9af03a82c0223be268e0fe74f3a432178e3d1f9e"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::MulAssign<T>>::mul_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "dcd1a515f4ec17b55e61d7aaa5556e37995230b14951698df50b0d15047588d3"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Mul<T>>::mul",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "7c508a71fc2fb42af7ef2647d1dc83a4a96dae6ae91c37b8d048843f03d168cd"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::MulAssign<T>>::mul_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "6859627f55f8f09db89298adc9db8d711afa2fc1fa02b97eb9df6b527bda2dd6"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Mul<T>>::mul",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "665fa37622502fb48a2868fbdbbdb47ca8a820519dde1fd51c7598c72e0cc04d"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::MulAssign<T>>::mul_assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+      "source_sha256": "db8bf317ba5f0a5f2785e6d8b430e596f26321c9408b6fff4917f690ae1294b3",
+      "declaration_sha256": "5c3187ae9f3f57fadc7b8bbb17d61a2784e636953df38bd22f8767715a3b7352"
+    }
+  ],
+  "compiler_scope": "Standalone TKernel nightly-2026-09-25 rustdoc JSON with private items, normalized with make_reachable_inventory. Full crosswalk publication pending integration.",
+  "logs": {
+    "tests": {
+      "path": "porting/runtime-evidence/vector-generic-scalar-tests.log.gz",
+      "sha256": "c994bf5801c2016ce67279f7e29c40f718f460d901c3da97fe97bb35d65e6723"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/vector-generic-scalar-clippy.log.gz",
+      "sha256": "e0bc3939081bd585026ab10c6e68ee49643518d4b6901cba4666f20c6b7cc4ae"
+    },
+    "initial-compile-failure": {
+      "path": "porting/runtime-evidence/vector-generic-scalar-initial-compile-failure.log.gz",
+      "sha256": "46b31bdf659fe2493e3c5b52f73677aa011f423b83a176993bac305ff20b6efa"
+    }
+  },
+  "legacy_declaration_count_change": 0,
+  "limitations": [
+    "Supplemental probes cover non-overflowing i64 and a Copy custom element with distinct multiplication and multiplication-assignment semantics.",
+    "Generic support delegates arithmetic and overflow behavior to Rust element operators; this is not proof of every possible C++ template instantiation.",
+    "Vector/vector element operator semantics and scalar division are outside this change.",
+    "Original legacy declaration inventory and overall completeness are unchanged."
+  ]
+}
