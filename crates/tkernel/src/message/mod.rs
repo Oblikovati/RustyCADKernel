@@ -15,12 +15,10 @@ macro_rules! message_runtime_type {
                 > = std::sync::OnceLock::new();
                 DESCRIPTOR
                     .get_or_init(|| {
-                        $crate::standard::Handle::from_static(
-                            $crate::standard::RuntimeType::register::<Self>(
-                                $name,
-                                std::mem::size_of::<Self>(),
-                                Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
-                            ),
+                        $crate::standard::RuntimeType::register_owned::<Self>(
+                            $name,
+                            std::mem::size_of::<Self>(),
+                            Some(<$parent as $crate::standard::RuntimeTyped>::static_type_handle()),
                         )
                     })
                     .get()

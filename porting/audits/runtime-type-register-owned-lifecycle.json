@@ -1,0 +1,65 @@
+{
+  "objective": "Add a safe owning registration path for Standard_Type descriptors while preserving the borrowed legacy API and one shared TypeId registry.",
+  "base_revision": "b45942b81e56a2226c9074f727e3abaa0d5cceda",
+  "native_occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_sources": {
+    "src/FoundationClasses/TKernel/Standard/Standard_Type.cxx": "d7111b5eaf398fe61420b3ec90193f6a1b32575cdd7533397cc9ed1198cf9394",
+    "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx": "9d486666c6f05674aec2b3180eba8147e2c7c6396e5fea9dcf82d4d85ac94674"
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_runtime_type_owned_probe.cxx",
+    "source_sha256": "0bd325860d25bef42bbb3301afc4c1abb0ff7d7842d006df8d744436418b27ca",
+    "binary_sha256": "3aee0dab9dd086fc1f24a549cb17e51689355fdbd6e32f4cfb2ac7abbe6af8f0",
+    "libTKernel_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "expected_output": "tools/oracle/tkernel_runtime_type_owned.expected",
+    "expected_sha256": "f0247d8eb8ed5807419b8f9975bdbef1898c4f34aa0c90aa5468264c5332af19",
+    "build_command": "g++ -std=c++17 -pthread -I/home/vmiguel/git/oblikovati-workspace/occt-build/include/opencascade tools/oracle/tkernel_runtime_type_owned_probe.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib -lTKernel -o /tmp/tkernel_runtime_type_owned_probe",
+    "replay_command": "/tmp/tkernel_runtime_type_owned_probe",
+    "observations": [
+      "Raw Register returns descriptor count 0 and increments the parent once.",
+      "Two live handles share first-registration metadata; releasing both destroys and unbinds the descriptor, restoring parent count.",
+      "Registering the same type_info after destruction yields replacement name and size.",
+      "Twelve concurrent Register calls while an anchor handle keeps the descriptor alive share one identity and produce count 13; releasing them and the anchor restores parent count."
+    ]
+  },
+  "rust_validation": {
+    "toolchain": "rustc 1.98.1",
+    "private_target_dir": "/tmp/rustycad-tkernel-owned-runtime-type-target",
+    "tkernel_command": "cargo test -p rustycad-tkernel",
+    "tkernel_result_groups": 161,
+    "tkernel_passed": 2740,
+    "tkernel_failed": 0,
+    "tkernel_ignored": 0,
+    "tkernel_raw_log_sha256": "dda99a5f49bd82efdba3a9153b41cd4919379b5d6f549c0e1f2e27345d0b2748",
+    "tkernel_compressed_log": "porting/audits/runtime-type-register-owned-tkernel-tests.log.gz",
+    "tkernel_compressed_log_sha256": "5ced4cc034d1af4a1e2918d24974326fc7ff4c693dff8bd11ac3abda7c04f870",
+    "tktopalgo_command": "cargo test -p rustycad-tktopalgo",
+    "tktopalgo_result_groups": 48,
+    "tktopalgo_passed": 433,
+    "tktopalgo_failed": 0,
+    "tktopalgo_ignored": 0,
+    "tktopalgo_raw_log_sha256": "a4bdb4cb87feb47e191a203f74b5389cd6948f71dea1afb53145791a57b36c1b",
+    "tktopalgo_compressed_log": "porting/audits/runtime-type-register-owned-tktopalgo-tests.log.gz",
+    "tktopalgo_compressed_log_sha256": "3d42d407968106fbb0036ff721ef73a80e4f30c805250011a32f71f244e32d7d",
+    "strict_clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "strict_clippy": "passed",
+    "format_check": "cargo fmt --check passed"
+  },
+  "implementation_sha256": {
+    "crates/tkernel/src/standard/runtime_type.rs": "71e00e26962daab41db6b8418a1d5e54c973cbfb586a0b9d08b5c3faaf201aaf",
+    "crates/tkernel/src/standard/runtime_type/registry.rs": "8746355473bfa5a0e9b8ea003259e45aca1254cd0fe92ccbe4d3b7af28f84ad7",
+    "crates/tkernel/src/standard/handle.rs": "836aa4b1d5e6c364f258589c9ef9d270f456eab1c9dd29f2a0985e7ff05ba7a5",
+    "crates/tkernel/src/standard/transient.rs": "8b6966604c858cedd2d8e5b7b04d030e40842493a27b539baaba0f7aef30cbef",
+    "crates/tkernel/src/message/mod.rs": "f4baddbc35595d8f68083e51043c35ff07a117c03499162984dcd66a8a815f71",
+    "crates/tkernel/src/ncollection/generic_transient.rs": "812d319cb8dce111ba131b53fb40cd6d39862772525d782513feb4d2684c2fec",
+    "crates/tkernel/tests/runtime_type_owning_handles.rs": "3dbae12d21e21489ced9876206cb9b4bdbe3b57dc0d1c8aec1059f95eff70e7d",
+    "porting/parity.json": "041a3a01c3d529f07d17a5df1eb23d60e09f5eb710840111b3cd825eb473f485"
+  },
+  "scope_and_limits": [
+    "RuntimeType::register_owned and register_owned_with_interfaces share the registry with legacy register, preserve first-live-registration metadata, own the parent handle, and unbind only their own registry entry at final drop.",
+    "Class macros retain one owned descriptor handle in their static OnceLock; generic class descriptors retain one handle in the static owner cache.",
+    "The legacy borrowed register path preserves zero initial descriptor count but pins its allocation for process lifetime; this compatibility path does not reproduce raw-pointer destruction.",
+    "The registry uses Rust TypeId rather than C++ type_info name strings; cross-module TypeId identity is not separately proven here.",
+    "Native destructor lookup races are not probed because OCCT's destructor unbind is not protected by the registration mutex; Rust registry mutation is synchronized."
+  ]
+}
