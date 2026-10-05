@@ -1,4 +1,4 @@
-"""Keep primitive extrema mappings attached to exact compiler declarations."""
+"""Keep vector extrema and returning assignments attached to compiler declarations."""
 
 from __future__ import annotations
 
@@ -26,15 +26,27 @@ class VectorExtremaBindingsTest(unittest.TestCase):
         cls.audit = json.loads(
             (ROOT / "porting/audits/vector-extrema-bindings.json").read_text()
         )
+        cls.assignment_audit = json.loads(
+            (ROOT / "porting/audits/vector-assignment-returns.json").read_text()
+        )
 
     def test_all_six_selectors_resolve_to_the_pinned_declarations(self) -> None:
-        self.assertEqual(len(self.audit["bindings"]), 6)
-        for binding in self.audit["bindings"]:
+        self.assert_exact_bindings(self.audit["bindings"], 6, "implemented")
+
+    def test_all_twelve_returning_assignments_keep_partial_limits(self) -> None:
+        self.assert_exact_bindings(self.assignment_audit["bindings"], 12, "partial")
+
+    def assert_exact_bindings(
+        self, bindings: list[dict[str, str]], count: int, mapping_status: str
+    ) -> None:
+        self.assertEqual(len(bindings), count)
+        for binding in bindings:
             selector = binding["selector"]
             status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
             self.assertEqual(self.rows[selector]["rust_item"], binding["rust_item"])
+            self.assertEqual(self.rows[selector]["status"], mapping_status)
 
 
 if __name__ == "__main__":

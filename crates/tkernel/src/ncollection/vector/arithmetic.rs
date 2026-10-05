@@ -5,10 +5,18 @@ use std::ops::{
 };
 
 macro_rules! componentwise_assignment {
-    ($vector:ident, $assign:ident, $assign_method:ident, $op_assign:tt, [$($field:ident),+]) => {
+    ($vector:ident, $assign:ident, $assign_method:ident, $returning:ident, $op_assign:tt, [$($field:ident),+]) => {
         impl<T: Copy + $assign> $assign for $vector<T> {
             fn $assign_method(&mut self, right: Self) {
+                self.$returning(&right);
+            }
+        }
+        impl<T: Copy + $assign> $vector<T> {
+            #[doc = concat!("Applies component assignment in OCCT storage order and returns the destination. ",
+                "Usage: `vector.", stringify!($returning), "(&right)` permits chaining.")]
+            pub fn $returning(&mut self, right: &Self) -> &mut Self {
                 $(self.$field $op_assign right.$field;)+
+                self
             }
         }
     };
@@ -40,10 +48,10 @@ macro_rules! componentwise_value_via_assignment {
 // OCCT Vec2 spells value operations directly; Vec3/4 implement them through +=, -=, *=, /=.
 macro_rules! componentwise_arithmetic {
     ($vector:ident, $count:literal, [$first:ident $(, $rest:ident)*]) => {
-        componentwise_assignment!($vector, AddAssign, add_assign, +=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, SubAssign, sub_assign, -=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, MulAssign, mul_assign, *=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, DivAssign, div_assign, /=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, AddAssign, add_assign, add_assign_returning, +=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, SubAssign, sub_assign, sub_assign_returning, -=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, MulAssign, mul_assign, mul_assign_returning, *=, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, DivAssign, div_assign, div_assign_returning, /=, [$first $(, $rest)*]);
         impl<T: Copy + Neg<Output = T>> Neg for $vector<T> {
             type Output = Self;
             fn neg(self) -> Self {

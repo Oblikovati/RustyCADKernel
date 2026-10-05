@@ -68478,36 +68478,40 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec2::operator+=(const NCollection_Vec2&)",
+      "upstream_id": "NCollection_Vec2::operator+=(const NCollection_Vec2<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::AddAssign>::add_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::add_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "89021aac88630c613dac5d74da2296e040b9d636a4bbfda42ff44eae8c0d21b4"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator-=(const NCollection_Vec2&)",
+      "upstream_id": "NCollection_Vec2::operator-=(const NCollection_Vec2<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::SubAssign>::sub_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::sub_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "98368a18c34db0e7404591c50ddeaf2e02326c271fb7341952bd88a2756486fd"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator*=(const NCollection_Vec2&)",
+      "upstream_id": "NCollection_Vec2::operator*=(const NCollection_Vec2<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as MulAssign>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::mul_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "e1f749ffe44a7fb040759a57116baa629da648a9b7ce794e4f1ee182003cb6e7"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator/=(const NCollection_Vec2&)",
+      "upstream_id": "NCollection_Vec2::operator/=(const NCollection_Vec2<Element_t> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as DivAssign>::div_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::div_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "887e0cc382b7d82fb7742593e2a1feb271acaa4bfcce4c53c6b3c0cfe11878a5"
     },
     {
       "upstream_id": "NCollection_Vec2::operator/(const NCollection_Vec2&,const NCollection_Vec2&)",
@@ -68624,36 +68628,40 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec3::operator+=(const NCollection_Vec3&)",
+      "upstream_id": "NCollection_Vec3::operator+=(const NCollection_Vec3<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::AddAssign>::add_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::add_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "97daa4cd7aa7bfd179d66ab51702941a8468d6684533135774f6e0ec390dbc63"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator-=(const NCollection_Vec3&)",
+      "upstream_id": "NCollection_Vec3::operator-=(const NCollection_Vec3<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::SubAssign>::sub_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::sub_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "fc37a9a1db3fba826b7204f45d59c64e9be8f17326503517a52e20c6a6c98221"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator*=(const NCollection_Vec3&)",
+      "upstream_id": "NCollection_Vec3::operator*=(const NCollection_Vec3<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as MulAssign>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::mul_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "af8fac1627b762f283e9f030434c59f3c773f2d57177e4a65e82d4ad750c5d99"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator/=(const NCollection_Vec3&)",
+      "upstream_id": "NCollection_Vec3::operator/=(const NCollection_Vec3<Element_t> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as DivAssign>::div_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::div_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "dc0f9a5eabba6a797f7ca639b1f3dad8d9474b3cf251becede1ecb976e08d1ec"
     },
     {
       "upstream_id": "NCollection_Vec3::operator/(const NCollection_Vec3&,const NCollection_Vec3&)",
@@ -68754,36 +68762,40 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec4::operator+=(const NCollection_Vec4&)",
+      "upstream_id": "NCollection_Vec4::operator+=(const NCollection_Vec4<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::AddAssign>::add_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::add_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "a0a580c77fe45ab1db9b70eb4b7855f920a6a98157f35e0ed297d46d88d476a6"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator-=(const NCollection_Vec4&)",
+      "upstream_id": "NCollection_Vec4::operator-=(const NCollection_Vec4<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::SubAssign>::sub_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::sub_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "d86c886318cbf8a6b2d6ebf7e9e5add2ef43057892b81ff0ada05c8503cf85a8"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator*=(const NCollection_Vec4&)",
+      "upstream_id": "NCollection_Vec4::operator*=(const NCollection_Vec4<Element_t> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as MulAssign>::mul_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::mul_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "9ad58bb1ed6ebf5810f3420f006f2d3701cfb659efb4540c55aaa7d623ec0b63"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator/=(const NCollection_Vec4&)",
+      "upstream_id": "NCollection_Vec4::operator/=(const NCollection_Vec4<Element_t> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as DivAssign>::div_assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::div_assign_returning",
+      "status": "partial",
+      "notes": "Borrowed returning adapter preserves destination identity and primitive component order; safe Rust requires distinct references. Arbitrary C++ element copy/assignment side effects and aliased self operands remain unproven. See porting/audits/vector-assignment-returns.json.",
+      "selector_id": "dd4017badec63d41c5551ce7662979813b21b4af473153cef5f4440b2827739f"
     },
     {
       "upstream_id": "NCollection_Vec4::operator/(const NCollection_Vec4&,const NCollection_Vec4&)",

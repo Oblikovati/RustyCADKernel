@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "NCollection_Vec2::operator/=(const NCollection_Vec2<Element_t> &)",
+      "cpp_id": "887e0cc382b7d82fb7742593e2a1feb271acaa4bfcce4c53c6b3c0cfe11878a5",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::div_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec2::operator+=(const NCollection_Vec2<Element_t> &) noexcept",
+      "cpp_id": "89021aac88630c613dac5d74da2296e040b9d636a4bbfda42ff44eae8c0d21b4",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::add_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator+=(const NCollection_Vec3<Element_t> &) noexcept",
+      "cpp_id": "97daa4cd7aa7bfd179d66ab51702941a8468d6684533135774f6e0ec390dbc63",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::add_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec2::operator-=(const NCollection_Vec2<Element_t> &) noexcept",
+      "cpp_id": "98368a18c34db0e7404591c50ddeaf2e02326c271fb7341952bd88a2756486fd",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::sub_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator*=(const NCollection_Vec4<Element_t> &) noexcept",
+      "cpp_id": "9ad58bb1ed6ebf5810f3420f006f2d3701cfb659efb4540c55aaa7d623ec0b63",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::mul_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator+=(const NCollection_Vec4<Element_t> &) noexcept",
+      "cpp_id": "a0a580c77fe45ab1db9b70eb4b7855f920a6a98157f35e0ed297d46d88d476a6",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::add_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator*=(const NCollection_Vec3<Element_t> &) noexcept",
+      "cpp_id": "af8fac1627b762f283e9f030434c59f3c773f2d57177e4a65e82d4ad750c5d99",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::mul_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator-=(const NCollection_Vec4<Element_t> &) noexcept",
+      "cpp_id": "d86c886318cbf8a6b2d6ebf7e9e5add2ef43057892b81ff0ada05c8503cf85a8",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::sub_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator/=(const NCollection_Vec3<Element_t> &)",
+      "cpp_id": "dc0f9a5eabba6a797f7ca639b1f3dad8d9474b3cf251becede1ecb976e08d1ec",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::div_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec4::operator/=(const NCollection_Vec4<Element_t> &)",
+      "cpp_id": "dd4017badec63d41c5551ce7662979813b21b4af473153cef5f4440b2827739f",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::div_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec2::operator*=(const NCollection_Vec2<Element_t> &) noexcept",
+      "cpp_id": "e1f749ffe44a7fb040759a57116baa629da648a9b7ce794e4f1ee182003cb6e7",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::mul_assign_returning"
+    },
+    {
+      "selector": "NCollection_Vec3::operator-=(const NCollection_Vec3<Element_t> &) noexcept",
+      "cpp_id": "fc37a9a1db3fba826b7204f45d59c64e9be8f17326503517a52e20c6a6c98221",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::sub_assign_returning"
+    }
+  ],
+  "limits": [
+    "All twelve mappings remain partial for arbitrary element and alias contracts.",
+    "Supplemental adapter tests do not add original OCCT test declarations."
+  ],
+  "behavioral_evidence": {
+    "native_source": "tools/oracle/tkernel_vector_assignment_returns.cxx",
+    "expected": "tools/oracle/tkernel_vector_assignment_returns.expected",
+    "rust_tests": "crates/tkernel/tests/ncollection_vector_assignment_returns.rs",
+    "focused_rust_passes": 13,
+    "native_exit_code": 0
+  },
+  "validation_logs": [
+    {
+      "path": "porting/runtime-evidence/vector-assignment-rust.gz",
+      "sha256": "9a8505a891274fa9c149f3e0d636873d187e9150b8f7fa7e1cce0b03c836774f",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-assignment-python.gz",
+      "sha256": "91e8073ec79a646b8ad1677cf3ca98a6e6e2cb09551271243cc2526a53d26bc8",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-assignment-clippy.gz",
+      "sha256": "655e2028bcc85443e95050c2c6d96b8ada8032f0dd5bfb99f0b9d24c5cd8d246",
+      "exit_code": 0
+    },
+    {
+      "path": "porting/runtime-evidence/vector-assignment-native.actual.gz",
+      "sha256": "2b8f2babfed4aa3c1763cab9a2730e942d4bd91118fca185146899198ff04c56",
+      "exit_code": 0
+    }
+  ],
+  "python_binding_passes": 3,
+  "strict_all_target_clippy_exit_code": 0
+}
