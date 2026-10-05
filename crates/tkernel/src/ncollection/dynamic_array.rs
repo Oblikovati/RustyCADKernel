@@ -285,9 +285,7 @@ impl<T: Default> DynamicArray<T> {
 impl<T: Clone> Clone for DynamicArray<T> {
     fn clone(&self) -> Self {
         let mut copy = Self::with_allocator(self.increment, self.allocator.clone());
-        for value in self.iter() {
-            copy.append(value.clone());
-        }
+        copy.copy_blocks_from(self);
         copy
     }
 }
@@ -299,9 +297,45 @@ impl<T: Clone> DynamicArray<T> {
         if !own_allocator {
             self.allocator = source.allocator.clone();
         }
-        for value in source.iter() {
-            self.append(value.clone());
+        self.copy_blocks_from(source);
+    }
+
+    /// Copies values and returns the destination for native `Assign`-style chaining; `dest.assign_returning(&source,false)`.
+    pub fn assign_returning(&mut self, source: &Self, own_allocator: bool) -> &mut Self {
+        self.assign(source, own_allocator);
+        self
+    }
+
+    /// Uses native `Assign`'s default allocator policy and returns this array; `dest.assign_default_returning(&source)`.
+    pub fn assign_default_returning(&mut self, source: &Self) -> &mut Self {
+        self.assign_returning(source, true)
+    }
+
+    /// Copies values and adopts the source allocator, matching copy `operator=`; `dest.assign_operator_returning(&source)`.
+    pub fn assign_operator_returning(&mut self, source: &Self) -> &mut Self {
+        self.assign_returning(source, false)
+    }
+
+    fn copy_blocks_from(&mut self, source: &Self) {
+        let mut remaining = source.used;
+        for source_block in &source.blocks {
+            let count = remaining.min(self.increment);
+            let mut block = AllocVec::with_capacity_in(
+                self.increment,
+                self.allocator.clone().unwrap_or_default(),
+            );
+            block.extend(source_block.iter().take(count).cloned());
+            self.blocks.push(block);
+            self.used += count;
+            remaining -= count;
         }
+    }
+}
+impl<T> DynamicArray<T> {
+    /// Transfers blocks and returns the destination for native move-assignment chaining; `dest.move_from_returning(&mut source)`.
+    pub fn move_from_returning(&mut self, source: &mut Self) -> &mut Self {
+        self.move_from(source);
+        self
     }
 }
 impl<T: Ord> DynamicArray<T> {

@@ -1,0 +1,117 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_DynamicArray copy/move assignment return references and block-copy failure state",
+  "occt": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+    "header_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "built_header_sha256": "1f2fcb0d67395dcef9425cb5c59ecf1d6bdcfc8fe3c861b7502556ee17e966a0",
+    "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "native_test_executable_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "declarations": [
+    {
+      "selector": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray&,bool)",
+      "compiler_usr": "c:@ST>1#T@NCollection_DynamicArray@F@Assign#&1>@ST>1#T@NCollection_DynamicArray1t0.0#b#",
+      "header_line": 509,
+      "signature": "NCollection_DynamicArray& Assign(const NCollection_DynamicArray&, bool)",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_returning"
+    },
+    {
+      "selector": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
+      "compiler_usr": "c:@ST>1#T@NCollection_DynamicArray@F@Assign#&&>@ST>1#T@NCollection_DynamicArray1t0.0#",
+      "header_line": 522,
+      "signature": "NCollection_DynamicArray& Assign(NCollection_DynamicArray&&)",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning"
+    },
+    {
+      "selector": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray&)",
+      "compiler_usr": "c:@ST>1#T@NCollection_DynamicArray@F@operator=#&1>@ST>1#T@NCollection_DynamicArray1t0.0#",
+      "header_line": 540,
+      "signature": "NCollection_DynamicArray& operator=(const NCollection_DynamicArray&)",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning"
+    },
+    {
+      "selector": "NCollection_DynamicArray::operator=(NCollection_DynamicArray&&)",
+      "compiler_usr": "c:@ST>1#T@NCollection_DynamicArray@F@operator=#&&>@ST>1#T@NCollection_DynamicArray1t0.0#",
+      "header_line": 546,
+      "signature": "NCollection_DynamicArray& operator=(NCollection_DynamicArray&&) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning"
+    }
+  ],
+  "rustdoc": {
+    "capture_toolchain": "nightly-2026-09-25",
+    "raw_json_sha256": "e716616191d4a9069c0e7c7ff1b597563dcb2c56abc17ba5fe34f712d5f998ef",
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "reachable_candidates": {
+      "rustycad_tkernel::ncollection::DynamicArray::assign_returning": 1,
+      "rustycad_tkernel::ncollection::DynamicArray::assign_default_returning": 1,
+      "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning": 1,
+      "rustycad_tkernel::ncollection::DynamicArray::move_from_returning": 1
+    },
+    "source": "crates/tkernel/src/ncollection/dynamic_array.rs",
+    "source_sha256": "d4b3a64439ade63b8dc4a3054c60a949811dc9448297a811ec3df42f5199d747",
+    "test_sources": {
+      "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+      "crates/tkernel/tests/ncollection_dynamic_array/basic.rs": "585b61713888ed825672bee602f618f1282705641a6172f61c6b49c4e713dcf3",
+      "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs": "2709f289827412be11a3f7f78d0e9d0240f20cd4c8cd0402d85ce73a81e6cf3d"
+    },
+    "raw_json_item_evidence": {
+      "format_version": 61,
+      "public_dynamic_array_methods": {
+        "assign_returning": 1,
+        "assign_default_returning": 1,
+        "assign_operator_returning": 1,
+        "move_from_returning": 1
+      }
+    },
+    "supplemental_test_target": "ncollection_dynamic_array_assignment_behavior"
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_dynamic_array_assignment_ref.cxx",
+    "source_sha256": "7d62704860dc64789a9c992d70b3a7a9929fe457e7349885b10f7e0e237008da",
+    "expected": "tools/oracle/tkernel_dynamic_array_assignment_ref.expected",
+    "expected_sha256": "6a2a2e0b2f7b759b9a766fe27e6b3d2798291a6935b2029f26a491f23befc9f8",
+    "binary_sha256": "89e70dcdc3be06095f77bef8da19c280cca0ed708fed11aca0c28b9b370cd2e5",
+    "output_log_gzip": "porting/runtime-evidence/dynamic-array-assignment-ref-native-probe.log.gz",
+    "output_log_sha256": "2d367628b27c25431e593196857c5d73bf5b7bc40126b4373f566496b9c88fa8",
+    "legacy_tests": [
+      "NCollection_DynamicArrayTest.CopyConstructor",
+      "NCollection_DynamicArrayTest.AssignmentOperator",
+      "NCollection_DynamicArrayTest.Move"
+    ],
+    "legacy_test_result": "3 passed, 0 failed",
+    "native_observations": [
+      "Assign(copy) and both copy/move assignment operators return the receiver; copy assignment chains to the last source values.",
+      "Direct move Assign and move operator both return the receiver.",
+      "Assign(source, true) preserves a null destination allocator; Assign(source, false) adopts the source allocator.",
+      "Move assignment transfers allocator and blocks, leaving source empty with null allocator.",
+      "Caught copy exception in the first block leaves Size() zero; failure in a later block retains the prior complete block."
+    ]
+  },
+  "validation": {
+    "rust_target": "cargo test -p rustycad-tkernel --test ncollection_dynamic_array --test ncollection_dynamic_array_assignment_behavior",
+    "rust_result": "52 original legacy tests + 3 supplemental tests passed, 0 failed",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_exit_code": 0,
+    "fmt": "cargo fmt --all -- --check",
+    "fmt_exit_code": 0,
+    "full_tkernel_result": "2,875 passed, 0 failed, 0 ignored across 196 result groups; process exit 0",
+    "full_tkernel_log_gzip": "porting/runtime-evidence/dynamic-array-tkernel-package.log.gz",
+    "full_tkernel_log_sha256": "a3a0fb3086a4f601aa68dda4f5e08a7b7214bc3596162dc49d136f76456d5a98",
+    "native_gtest_log_gzip": "porting/runtime-evidence/dynamic-array-assignment-ref-native-gtest.log.gz",
+    "native_gtest_log_sha256": "417ad6da9bf6e3991cbb08a06f5e46e47f9cb7e9d75a67782f405c4d61b9e751",
+    "rust_test_log_gzip": "porting/runtime-evidence/dynamic-array-assignment-ref-focused.log.gz",
+    "rust_test_log_sha256": "9886bddfa7b508b7c89f61993be51851a0839694a5bb2d8d301ab00a481f6016",
+    "clippy_log_gzip": "porting/runtime-evidence/dynamic-array-assignment-ref-clippy.log.gz",
+    "clippy_log_sha256": "fb34629eb4e395629232162d9fb0b9fe4f88836625b9c1cb3b3b1ab54eee071e",
+    "parity_sha256": "2ff85c851e476d7ec4b53c9f1e945d535788824b6e93b6620c990ad261c9b13b",
+    "native_probe_log_gzip": "porting/runtime-evidence/dynamic-array-assignment-ref-native-probe.log.gz",
+    "native_probe_log_sha256": "2d367628b27c25431e593196857c5d73bf5b7bc40126b4373f566496b9c88fa8"
+  },
+  "limitations": [
+    "Rust drops a partially cloned scratch block after panic; native copyDate leaks the unlinked block/constructed prefix. The observable logical size/prefix is matched, but allocation leak behavior and C++ exception type are not reproduced.",
+    "C++ self-assignment is an explicit no-op; safe Rust borrowing cannot pass one DynamicArray as both mutable destination and shared source, so no equivalent call is claimed."
+  ]
+}
