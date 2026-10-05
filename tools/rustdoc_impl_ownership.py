@@ -12,6 +12,7 @@ from rustdoc_bool_foreign_impls import bool_foreign_impl_members
 from rustdoc_foreign_impls import foreign_impl_members
 from rustdoc_const_aliases import const_specialized_alias_members, eligible_impl_body
 from rustdoc_type_aliases import specialized_type_alias_members
+from rustdoc_reference_impls import reference_self_target
 
 
 class ImplState(Protocol):
@@ -52,7 +53,9 @@ def inherent_members(
     kind, body = read_inner(item)
     if kind == "type_alias":
         return [
-            *const_specialized_alias_members(item, path, state, read_inner, render_impl),
+            *const_specialized_alias_members(
+                item, path, state, read_inner, render_impl
+            ),
             *specialized_type_alias_members(item, path, state, read_inner, render_impl),
         ]
     owner_id = str(integer_value(item.get("id"), "impl owner id"))
@@ -76,14 +79,16 @@ def linked_impl_entries(
     impl_body = eligible_impl_body(impl_id, state.items, read_inner)
     if impl_body is None:
         return []
-    return render_linked_impl(
-        impl_id, owner_id, path, impl_body, state, render_impl
-    )
+    return render_linked_impl(impl_id, owner_id, path, impl_body, state, render_impl)
 
 
 def render_linked_impl(
-    impl_id: JSONValue, owner_id: str, path: str, impl: Mapping[str, JSONValue],
-    state: ImplState, render_impl: ImplRenderer,
+    impl_id: JSONValue,
+    owner_id: str,
+    path: str,
+    impl: Mapping[str, JSONValue],
+    state: ImplState,
+    render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
     if impl.get("for") == {"primitive": "bool"}:
         return linked_bool_impl_entries(impl_id, owner_id, path, impl, state)
@@ -142,8 +147,16 @@ def capture_bool_impl(
     identifier = str(impl_id)
     state.foreign_impl_candidates.extend(
         bool_foreign_impl_members(
-            impl, anchor_path, canonical, source_file, source_digest, identifier,
-            state.items, state.paths, state.source_root, state.unresolved,
+            impl,
+            anchor_path,
+            canonical,
+            source_file,
+            source_digest,
+            identifier,
+            state.items,
+            state.paths,
+            state.source_root,
+            state.unresolved,
         )
     )
 
@@ -211,7 +224,11 @@ def only_trait_type_argument(trait: Mapping[str, JSONValue]) -> JSONValue | None
     arguments = trait.get("args")
     angle = arguments.get("angle_bracketed") if isinstance(arguments, dict) else None
     values = angle.get("args") if isinstance(angle, dict) else None
-    if not isinstance(values, list) or len(values) != 1 or angle.get("constraints") != []:
+    if (
+        not isinstance(values, list)
+        or len(values) != 1
+        or angle.get("constraints") != []
+    ):
         return None
     value = values[0]
     return value.get("type") if isinstance(value, dict) else None
@@ -224,10 +241,18 @@ def resolved_nominal_id(
     if identifier is None:
         return None
     path = paths.get(identifier)
-    if not isinstance(path, dict) or path.get("kind") not in {"struct", "enum", "union"}:
+    if not isinstance(path, dict) or path.get("kind") not in {
+        "struct",
+        "enum",
+        "union",
+    }:
         return None
     resolved = value.get("resolved_path") if isinstance(value, dict) else None
-    return identifier if isinstance(resolved, dict) and resolved.get("args") is None else None
+    return (
+        identifier
+        if isinstance(resolved, dict) and resolved.get("args") is None
+        else None
+    )
 
 
 def public_nominal_anchor(
@@ -246,11 +271,19 @@ def capture_foreign_impl(
     # Rustdoc indexes foreign-Self trait implementations on their local arguments.
     identifier = str(impl_id)
     state.foreign_impl_links.setdefault(identifier, set()).add(owner_id)
+    # A reference impl indexed on an argument must wait for its reachable nominal Self.
+    if reference_self_target(impl) is not None:
+        return
     owner_path = stable_path(state.paths, owner_id, "")
     state.foreign_impl_candidates.extend(
         foreign_impl_members(
-            impl, owner_path, identifier, state.items, state.paths,
-            state.source_root, state.unresolved,
+            impl,
+            owner_path,
+            identifier,
+            state.items,
+            state.paths,
+            state.source_root,
+            state.unresolved,
         )
     )
 
@@ -258,7 +291,8 @@ def capture_foreign_impl(
 def resolved_impl_owner(
     impl: Mapping[str, JSONValue], items: Mapping[str, dict[str, JSONValue]]
 ) -> tuple[str | None, str]:
-    owner_id = resolved_path_type_id(impl.get("for"))
+    receiver = reference_self_target(impl)
+    owner_id = resolved_path_type_id(impl.get("for") if receiver is None else receiver)
     if owner_id is None:
         return None, "unknown-self-type"
     resolved, alias_unknown = resolve_alias_owner(owner_id, items, set())

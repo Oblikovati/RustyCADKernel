@@ -19,6 +19,7 @@ IMPLEMENTATION_FILES: dict[str, tuple[str, ...]] = {
         "tools/rustdoc_declarations.py",
         "tools/rustdoc_generic_arguments.py",
         "tools/rustdoc_impl_ownership.py",
+        "tools/rustdoc_reference_impls.py",
         "tools/rustdoc_const_aliases.py",
         "tools/rustdoc_type_aliases.py",
         "tools/rustdoc_bool_foreign_impls.py",

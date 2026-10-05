@@ -7,6 +7,7 @@ from collections.abc import Mapping
 from api_inventory_json import JSONValue, array_value, declaration_digest, object_value
 from api_inventory_json import sha256_bytes, string_value
 from rustdoc_generic_arguments import stable_path, trait_arguments
+from rustdoc_reference_impls import annotate_reference_trait, implementation_member_path
 
 
 def item_index(document: Mapping[str, JSONValue]) -> dict[str, dict[str, JSONValue]]:
@@ -246,20 +247,20 @@ def visible_impl_items(
         if member is None or (trait is None and member.get("visibility") != "public"):
             continue
         name = string_value(member.get("name"), "impl member name")
-        member_path = (
-            f"{path}::{name}"
-            if trait_path is None
-            else f"{path}::<{trait_path}>::{name}"
-        )
+        member_path = implementation_member_path(path, name, trait_path, impl)
         output.append(
-            record_entry(
-                member_path,
-                str(member_id),
-                member,
-                source_root,
-                paths,
-                unresolved,
-                context,
+            annotate_reference_trait(
+                record_entry(
+                    member_path,
+                    str(member_id),
+                    member,
+                    source_root,
+                    paths,
+                    unresolved,
+                    context,
+                ),
+                trait_path,
+                impl,
             )
         )
     return output

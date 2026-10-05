@@ -1,0 +1,200 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Borrowed string compiler bindings and nullable ASCII C-buffer concatenation; no original legacy-count increase",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "TCollection_ExtendedString::operator+(int) const",
+      "signature": "class TCollection_ExtendedString (int) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "421885fe2075e9668aaee4f30e68dd386978f789447c3428dd27f3ee0799bf31"
+    },
+    {
+      "selector": "TCollection_ExtendedString::operator+(double) const",
+      "signature": "class TCollection_ExtendedString (double) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "429fe7d3319660ac8dc4bd947472e4d392cf1e557e5792137e994f12b1d3e206"
+    },
+    {
+      "selector": "TCollection_ExtendedString::operator+(char) const",
+      "signature": "class TCollection_ExtendedString (char) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "658b694e2052be73f6ca4358d3753008c148aef5d1921d0fd68a527a2daea7dd"
+    },
+    {
+      "selector": "TCollection_ExtendedString::operator+(char16_t) const",
+      "signature": "class TCollection_ExtendedString (char16_t) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "2bd9876a68ef1c694044857de0658d64f6122c1d40b9900b637a49ae25600d31"
+    },
+    {
+      "selector": "TCollection_ExtendedString::operator+(const TCollection_ExtendedString&) const",
+      "signature": "class TCollection_ExtendedString (const class TCollection_ExtendedString &) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "1f76a94fd04fa1cad565e5053c11a4047923be6a4eb60fe6b2a9e6dc0fb96b08"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(char)",
+      "signature": "void (char)",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<u8>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "cpp_id": "0247268b83c1166e17f9196f5ebb8fb9e1562b701a7e00609c35be86fb643180"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(int)",
+      "signature": "void (int)",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<i32>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "cpp_id": "0ef54c30d321fd76b858f66b1eb09d7b26b078ad611600235409048e48cd0729"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(double)",
+      "signature": "void (double)",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<f64>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "cpp_id": "5b5b1d2f456f5724a8f0b12495cdd67d269a436a4a7cef035890c945e7681106"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(const TCollection_ExtendedString&)",
+      "signature": "void (const class TCollection_ExtendedString &)",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<&ExtendedString>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "cpp_id": "da0b1f2483c9145f2b6f7932ae1ff5d278699e508f41cbb7e3f037f36ca72fa2"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(const char(&)[N])",
+      "signature": "void (const char (&)[N])",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<T>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "cpp_id": "e44be8e49b7aee4f5ea7cd78b33decc35ae6aa30d330817281c99319dcf2ef25"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(char) const",
+      "signature": "class TCollection_AsciiString (char) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<u8>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "1fabccb4718fa56adf82868c95942406738b4684d7ca2b0a4d8bbdd3dd615cef"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(int) const",
+      "signature": "class TCollection_AsciiString (int) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<i32>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "2a773621f5def423e7f6b8eb2a454e097b6f400d2a19575df51c294146479466"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(double) const",
+      "signature": "class TCollection_AsciiString (double) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<f64>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "18147c2e238feb6b8189158bc6cded77647f28183b618d7871452db3754a9f8b"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const TCollection_ExtendedString&) const",
+      "signature": "class TCollection_AsciiString (const class TCollection_ExtendedString &) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<&ExtendedString>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "7afabaf22f8dc9861329c9d43e5ed27703f382881b407b464942b5ad56de90f7"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const TCollection_AsciiString&) const",
+      "signature": "class TCollection_AsciiString (const class TCollection_AsciiString &) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "110f2a696bf792502e58a8613d793172d7366e134926206135119757e4c2a561"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const char* const) const",
+      "signature": "class TCollection_AsciiString (const char *) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat_c_bytes",
+      "status": "implemented",
+      "cpp_id": "a2427ee16e4c3de726954b6bd208fd4e1dc6e979fe5834a2156b01425c14a5a9"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const std::string_view&) const",
+      "signature": "class TCollection_AsciiString (const class std::basic_string_view<char> &) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "8972730ce28115c20aa9241b08cf95eb4a3b15062e4ae5a48c9f3515b2e1b895"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const char(&)[N]) const",
+      "signature": "class TCollection_AsciiString (const char (&)[N]) const",
+      "previous_rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+      "status": "implemented",
+      "cpp_id": "bcf83acd57b86cac71619a3c85dc8b739ec389a2a74be387f4fe195a9c10bcf2"
+    },
+    {
+      "selector": "TCollection_AsciiString::AssignCat(const char* const)",
+      "signature": "void (const char *)",
+      "previous_rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat_c_bytes",
+      "cpp_id": "46be4ec188e873923fc65aa4e62bcca2bd5383a76a4a4e672f7af5d84a119c8a"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(const char* const)",
+      "signature": "void (const char *)",
+      "previous_rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat_c_bytes",
+      "cpp_id": "28197cf5204a793aaa3540aaccabd5a1ab87c37e9cd3f8ee838f6432c77a2448"
+    },
+    {
+      "selector": "TCollection_AsciiString::Cat(const char* const) const",
+      "signature": "class TCollection_AsciiString (const char *) const",
+      "previous_rust_item": "rustycad_tkernel::tcollection::AsciiString::cat",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat_c_bytes",
+      "cpp_id": "16f1f71c781d0cfaff36d8e885b1bd5407356f3c3458e00717b8bd649bd987c4"
+    }
+  ],
+  "sources": {
+    "tools/oracle/tkernel_string_borrowed_operators.cxx": "7985408bdb15a59399133b12d008bc2b163d76ace39900356ef6acbf4318112a",
+    "crates/tkernel/tests/string_borrowed_operators.rs": "c9d01d179ab2ee23fc0324505f798f3f044ff76e979112b4c422c1464fc8ad77",
+    "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
+    "crates/tkernel/src/tcollection/ascii_string/concatenation.rs": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+    "tools/oracle/tkernel_string_borrowed_operators.expected": "513ef467e21159a6274a46a2625d4a027605406cfa33a8aa819ff620eb0353b6",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda"
+  },
+  "behavior": {
+    "native_compile_exit": 0,
+    "native_runtime_exit": 0,
+    "native_output_rows": 19,
+    "rust_test_exit": 0,
+    "supplemental_rust_cases": 9,
+    "expected_provenance": "Native output reviewed against independent literal Rust assertions. First draft constructed AsciiString from string_view, which intentionally stops at NUL; fixture corrected to build embedded operand using operator+= string_view before comparison. No production behavior change.",
+    "limitations": [
+      "Arbitrary native allocation failures and pointer lifetimes are not modeled by these safe adapters.",
+      "Native arrays without an in-bounds NUL are outside the verified domain.",
+      "Null ASCII byte operands now use bounded optional-buffer methods; existing UTF-16 pointer adapters are unchanged."
+    ]
+  },
+  "compiler_evidence_status": "pending fresh clean-revision capture"
+}

@@ -59,17 +59,24 @@ def renamed_ufcs_trait_member(
     prefix, separator, member = path[1:].rpartition(">::")
     owner, trait_separator, trait_application = prefix.partition(" as ")
     canonical = implementation_trait(entry)
-    current = entry.get("foreign_impl_trait_path")
-    recorded = entry.get("foreign_impl_trait_canonical")
+    provenance = (
+        "reference_impl" if "reference_impl_trait_path" in entry else "foreign_impl"
+    )
+    current = entry.get(f"{provenance}_trait_path")
+    recorded = entry.get(f"{provenance}_trait_canonical")
     if not separator or not trait_separator or canonical is None:
-        raise ValueError(f"implementation path {path!r}; expected <Self as Trait>::member")
+        raise ValueError(
+            f"implementation path {path!r}; expected <Self as Trait>::member"
+        )
     current_trait, separator, suffix = trait_application.partition("<")
     suffix = f"<{suffix}" if separator else ""
     if current_trait != current or canonical != recorded:
-        raise ValueError(f"implementation path {path!r}; expected recorded foreign trait identity")
+        raise ValueError(
+            f"implementation path {path!r}; expected recorded foreign trait identity"
+        )
     renamed = dict(entry)
     renamed["path"] = f"<{owner} as {trait}{suffix}>::{member}"
-    renamed["foreign_impl_trait_path"] = trait
+    renamed[f"{provenance}_trait_path"] = trait
     renamed["declaration_sha256"] = declaration_digest(renamed)
     return renamed
 

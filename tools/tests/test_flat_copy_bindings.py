@@ -143,6 +143,21 @@ class FlatCopyBindingsTest(unittest.TestCase):
             self.assertEqual(self.rows[selector][key], binding[key])
             self.assertEqual(self.rows[selector]["status"], "partial")
 
+    def test_twenty_one_string_operator_bindings_keep_unique_native_identities(
+        self,
+    ) -> None:
+        audit = json.loads(
+            (ROOT / "porting/audits/string-borrowed-operators.json").read_text()
+        )
+        self.assertEqual(len(audit["bindings"]), 21)
+        for binding in audit["bindings"]:
+            selector = binding["selector"]
+            status, candidates = cpp_candidates(selector, "TKernel", self.by_name)
+            self.assertEqual(status, "unique", selector)
+            self.assertEqual([row["id"] for row in candidates], [binding["cpp_id"]])
+            self.assertEqual(self.rows[selector]["rust_item"], binding["rust_item"])
+            self.assertEqual(self.rows[selector]["status"], binding["status"])
+
     def test_both_assignment_bindings_cover_return_and_self_entry_points(self) -> None:
         assignments = [
             binding

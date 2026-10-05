@@ -85377,9 +85377,10 @@
       "upstream_id": "TCollection_ExtendedString::operator+(int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "421885fe2075e9668aaee4f30e68dd386978f789447c3428dd27f3ee0799bf31"
     },
     {
       "upstream_id": "TCollection_ExtendedString::Cat(double) const",
@@ -85393,9 +85394,10 @@
       "upstream_id": "TCollection_ExtendedString::operator+(double) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "429fe7d3319660ac8dc4bd947472e4d392cf1e557e5792137e994f12b1d3e206"
     },
     {
       "upstream_id": "TCollection_ExtendedString::Cat(char) const",
@@ -85409,9 +85411,10 @@
       "upstream_id": "TCollection_ExtendedString::operator+(char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "658b694e2052be73f6ca4358d3753008c148aef5d1921d0fd68a527a2daea7dd"
     },
     {
       "upstream_id": "TCollection_ExtendedString::Cat(char16_t) const",
@@ -85425,9 +85428,10 @@
       "upstream_id": "TCollection_ExtendedString::operator+(char16_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "2bd9876a68ef1c694044857de0658d64f6122c1d40b9900b637a49ae25600d31"
     },
     {
       "upstream_id": "TCollection_ExtendedString::Cat(const TCollection_ExtendedString&) const",
@@ -85441,9 +85445,10 @@
       "upstream_id": "TCollection_ExtendedString::operator+(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Operator form of cat (std::ops::Add on &ExtendedString)."
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "1f76a94fd04fa1cad565e5053c11a4047923be6a4eb60fe6b2a9e6dc0fb96b08"
     },
     {
       "upstream_id": "TCollection_ExtendedString::ChangeAll(char16_t,char16_t)",
@@ -86589,9 +86594,10 @@
       "upstream_id": "TCollection_AsciiString::operator+=(char)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<u8>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "0247268b83c1166e17f9196f5ebb8fb9e1562b701a7e00609c35be86fb643180"
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(int)",
@@ -86605,9 +86611,10 @@
       "upstream_id": "TCollection_AsciiString::operator+=(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<i32>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "0ef54c30d321fd76b858f66b1eb09d7b26b078ad611600235409048e48cd0729"
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(double)",
@@ -86621,9 +86628,10 @@
       "upstream_id": "TCollection_AsciiString::operator+=(double)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<f64>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "5b5b1d2f456f5724a8f0b12495cdd67d269a436a4a7cef035890c945e7681106"
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(const TCollection_ExtendedString&,char)",
@@ -86637,9 +86645,10 @@
       "upstream_id": "TCollection_AsciiString::operator+=(const TCollection_ExtendedString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<&ExtendedString>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. The ExtendedString converts to UTF-8."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. The ExtendedString converts to UTF-8. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "da0b1f2483c9145f2b6f7932ae1ff5d278699e508f41cbb7e3f037f36ca72fa2"
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(const wchar_t*)",
@@ -86685,17 +86694,19 @@
       "upstream_id": "TCollection_AsciiString::AssignCat(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat_c_bytes",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The overloads collapse to one item taking impl Into<AsciiString>: &str converts as a C string (through its first NUL), a byte slice as an explicit span, an AsciiString as its full span, u8 as a char (NUL appends nothing), i32 as %d, f64 as %g and &ExtendedString as UTF-8."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The overloads collapse to one item taking impl Into<AsciiString>: &str converts as a C string (through its first NUL), a byte slice as an explicit span, an AsciiString as its full span, u8 as a char (NUL appends nothing), i32 as %d, f64 as %g and &ExtendedString as UTF-8. Bounded Option<&[u8]> adapter explicitly covers native nullptr and first-NUL scan; supplemental native fixture verifies null, empty and embedded-NUL operands.",
+      "cpp_declaration_id": "46be4ec188e873923fc65aa4e62bcca2bd5383a76a4a4e672f7af5d84a119c8a"
     },
     {
       "upstream_id": "TCollection_AsciiString::operator+=(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat_c_bytes",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. operator+= is impl AddAssign<T: Into<AsciiString>> for AsciiString, i.e. AssignCat. Bounded Option<&[u8]> adapter explicitly covers native nullptr and first-NUL scan; supplemental native fixture verifies null, empty and embedded-NUL operands.",
+      "cpp_declaration_id": "28197cf5204a793aaa3540aaccabd5a1ab87c37e9cd3f8ee838f6432c77a2448"
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(const std::string_view&)",
@@ -86725,9 +86736,10 @@
       "upstream_id": "TCollection_AsciiString::operator+=(const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<T>>::add_assign",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
       "status": "implemented",
-      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "e44be8e49b7aee4f5ea7cd78b33decc35ae6aa30d330817281c99319dcf2ef25"
     },
     {
       "upstream_id": "TCollection_AsciiString::Capitalize()",
@@ -86757,9 +86769,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(char) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<u8>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "1fabccb4718fa56adf82868c95942406738b4684d7ca2b0a4d8bbdd3dd615cef"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(int) const",
@@ -86773,9 +86786,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<i32>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "2a773621f5def423e7f6b8eb2a454e097b6f400d2a19575df51c294146479466"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(double) const",
@@ -86789,9 +86803,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(double) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<f64>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "18147c2e238feb6b8189158bc6cded77647f28183b618d7871452db3754a9f8b"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(const TCollection_ExtendedString&,char) const",
@@ -86805,9 +86820,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(const TCollection_ExtendedString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<&ExtendedString>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "7afabaf22f8dc9861329c9d43e5ed27703f382881b407b464942b5ad56de90f7"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(const wchar_t*) const",
@@ -86837,25 +86853,28 @@
       "upstream_id": "TCollection_AsciiString::operator+(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "110f2a696bf792502e58a8613d793172d7366e134926206135119757e4c2a561"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat_c_bytes",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Bounded Option<&[u8]> adapter explicitly covers native nullptr and first-NUL scan; supplemental native fixture verifies null, empty and embedded-NUL operands.",
+      "cpp_declaration_id": "16f1f71c781d0cfaff36d8e885b1bd5407356f3c3458e00717b8bd649bd987c4"
     },
     {
       "upstream_id": "TCollection_AsciiString::operator+(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat_c_bytes",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json. Bounded Option<&[u8]> adapter explicitly covers native nullptr and first-NUL scan; supplemental native fixture verifies null, empty and embedded-NUL operands.",
+      "cpp_declaration_id": "a2427ee16e4c3de726954b6bd208fd4e1dc6e979fe5834a2156b01425c14a5a9"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(const std::string_view&) const",
@@ -86869,9 +86888,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(const std::string_view&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString."
+      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. Cat and operator+ take impl CatOperand (one impl per overload: &str is a C string, byte slices and AsciiString are spans, u8 is Cat(char) which appends even a NUL byte, i32 %d, f64 %g, &ExtendedString UTF-8); operator+ is impl Add<T: CatOperand> for &AsciiString. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "8972730ce28115c20aa9241b08cf95eb4a3b15062e4ae5a48c9f3515b2e1b895"
     },
     {
       "upstream_id": "TCollection_AsciiString::Cat(const char(&)[N]) const",
@@ -86885,9 +86905,10 @@
       "upstream_id": "TCollection_AsciiString::operator+(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add",
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
       "status": "implemented",
-      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md."
+      "notes": "The native inline overloads call strlen: valid NUL-terminated arrays append only the prefix before NUL. Rust uses From<&[u8; N]> for AssignCat/operator+= and CatOperand<&[u8; N]> for Cat/operator+; both stop at the first NUL. Explicit &[u8] operands retain their exact span, including NUL. The Rust adapter bounds scanning by N; native arrays without an in-bounds NUL are outside this verified domain. Source-pinned native differential: tools/oracle/tkernel_ascii_array_concat.md. Compiler receiver and generic trait identity verified by the borrowed-Self inventory regression and pinned operator probe; see porting/audits/string-borrowed-operators.json.",
+      "cpp_declaration_id": "bcf83acd57b86cac71619a3c85dc8b739ec389a2a74be387f4fe195a9c10bcf2"
     },
     {
       "upstream_id": "TCollection_AsciiString::Center(int,char)",

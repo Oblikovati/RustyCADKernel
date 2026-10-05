@@ -14,6 +14,21 @@ impl AsciiString {
     pub fn cat(&self, input: impl CatOperand) -> Self {
         input.cat_onto(self)
     }
+    /// Appends a bounded C byte buffer up to its first NUL; `text.assign_cat_c_bytes(Some(b"x\0y"))`.
+    /// `None` preserves the native null-pointer no-op.
+    pub fn assign_cat_c_bytes(&mut self, bytes: Option<&[u8]>) {
+        let Some(bytes) = bytes else {
+            return;
+        };
+        self.append_bytes(c_string_prefix(bytes));
+    }
+    /// Copies the string and appends a bounded C buffer; `text.cat_c_bytes(None)`.
+    /// Bounding the scan permits safe Rust callers without a raw-pointer lifetime contract.
+    pub fn cat_c_bytes(&self, bytes: Option<&[u8]>) -> Self {
+        let mut result = self.clone();
+        result.assign_cat_c_bytes(bytes);
+        result
+    }
     /// `Cat(char)`/`operator+(char)`: appends exactly one byte, NUL included; `text.cat_char(b'!')`.
     pub fn cat_char(&self, byte: u8) -> Self {
         Self::joined_with_char(self, byte)
