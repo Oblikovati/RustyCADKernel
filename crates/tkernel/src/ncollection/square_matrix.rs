@@ -20,6 +20,16 @@ impl MatrixScalar for f64 {}
 /// Access, identity/zero and comparison members.
 macro_rules! square_matrix_access {
     ($matrix:ident, $n:literal, $nn:literal, $vector:ident) => {
+        impl<T: PartialEq> std::cmp::PartialEq for $matrix<T> {
+            fn eq(&self, other: &Self) -> bool {
+                !self
+                    .columns
+                    .iter()
+                    .flatten()
+                    .zip(other.columns.iter().flatten())
+                    .any(|(left, right)| left != right)
+            }
+        }
         impl<T: Copy + From<u8>> Default for $matrix<T> {
             /// The native default constructor builds the identity.
             fn default() -> Self {

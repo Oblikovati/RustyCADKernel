@@ -1,0 +1,66 @@
+{
+  "schema": "rustycad-native-parity-receipt-v1",
+  "scope": "Mat3 and Mat4 equality dispatch and early-exit order",
+  "legacy_declaration_count_delta": 0,
+  "native": {
+    "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "probe": "tools/oracle/tkernel_ncollection_mat_comparison_probe.cxx",
+    "probe_sha256": "8f717e5f4deb3f71df190c997d709d8e4ca9a718f098ab6e5aa195347b2acefc",
+    "executable_sha256": "0c8a85cf1fab896f6c6f76e7ecf47fe4d32597d0d2b087751b5d8e54c5eca4a1",
+    "headers": [
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+        "sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51",
+        "lines": "190-212"
+      },
+      {
+        "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+        "sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0",
+        "lines": "254-276"
+      }
+    ],
+    "compile_command": "c++ -std=c++20 -I$OCCT/src/FoundationClasses/TKernel/NCollection -I$OCCT/src/FoundationClasses/TKernel/Standard -I$OCCT_BUILD/include/opencascade tools/oracle/tkernel_ncollection_mat_comparison_probe.cxx -o /tmp/tkernel_ncollection_mat_comparison_probe",
+    "observation": "IsEqual scans flat column-major storage using element != and stops at the first mismatch. operator== delegates to IsEqual; operator!= negates it."
+  },
+  "rust": {
+    "base_revision": "b4aa7b316e75135d8b2b3910cc88e2812a384682",
+    "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "files": [
+      {
+        "path": "crates/tkernel/src/ncollection/mat3.rs",
+        "sha256": "c774fd2f00a382a57c49e47160b5b393fe40f5dd224405d2ed16853ad1a1197c"
+      },
+      {
+        "path": "crates/tkernel/src/ncollection/mat4.rs",
+        "sha256": "da1f045b67ef33e2fca3e4c4446ee3e2317dc723e523ba45d28366fe0f859f66"
+      },
+      {
+        "path": "crates/tkernel/src/ncollection/square_matrix.rs",
+        "sha256": "b0651b8393c5d340166816a112d49a9797b3d6e71546847f175e552faf9a8595"
+      },
+      {
+        "path": "crates/tkernel/tests/ncollection_mat_comparison_paths.rs",
+        "sha256": "b53d3d0dd38c0f419edf9d3417a544319b2b55847f90ac0e96024fb5f5242fd2"
+      },
+      {
+        "path": "crates/tkernel/tests/fixtures/ncollection_mat_comparison.expected",
+        "sha256": "30ea9a74fbb9edbfbe37e60ddd0f6083e2150250c2b99e04439eb50b65c32b2f"
+      }
+    ],
+    "tests": {
+      "command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-mat-comparisons-target CARGO_INCREMENTAL=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_PROFILE_DEV_DEBUG=0 cargo test -p rustycad-tkernel --test ncollection_mat_comparison_paths",
+      "result": "2 passed; 0 failed",
+      "additional_matrix_test": "cargo test -p rustycad-tkernel --test matrix_generic_scalar: 5 passed; 0 failed",
+      "clippy": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-mat-comparisons-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed"
+    }
+  },
+  "exact_mappings_already_present": [
+    ["NCollection_Mat3::IsEqual(const NCollection_Mat3&) const", "rustycad_tkernel::ncollection::Mat3::is_equal"],
+    ["NCollection_Mat3::operator==(const NCollection_Mat3&) const", "rustycad_tkernel::ncollection::Mat3::<core::cmp::PartialEq>::eq"],
+    ["NCollection_Mat3::operator!=(const NCollection_Mat3&) const", "<rustycad_tkernel::ncollection::Mat3 as PartialEq>::ne"],
+    ["NCollection_Mat4::IsEqual(const NCollection_Mat4&) const", "rustycad_tkernel::ncollection::Mat4::is_equal"],
+    ["NCollection_Mat4::operator==(const NCollection_Mat4&) const", "rustycad_tkernel::ncollection::Mat4::<core::cmp::PartialEq>::eq"],
+    ["NCollection_Mat4::operator!=(const NCollection_Mat4&) const", "<rustycad_tkernel::ncollection::Mat4 as PartialEq>::ne"]
+  ],
+  "result_fixture_sha256": "30ea9a74fbb9edbfbe37e60ddd0f6083e2150250c2b99e04439eb50b65c32b2f"
+}
