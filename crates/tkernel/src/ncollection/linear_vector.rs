@@ -244,9 +244,19 @@ impl<T: Clone> LinearVector<T> {
     }
     /// Constructs repeated values; `LinearVector::with_value(3,42)`.
     pub fn with_value(size: usize, value: T) -> Self {
-        Self {
-            elements: vec![value; size],
-        }
+        Self::with_value_ref(size, &value)
+    }
+    /// Constructs repeated copies while retaining OCCT's growth capacity rule:
+    ///
+    /// ```
+    /// let fill = 42;
+    /// let vector = rustycad_tkernel::ncollection::LinearVector::with_value_ref(3, &fill);
+    /// assert_eq!(vector.as_slice(), &[42, 42, 42]);
+    /// ```
+    pub fn with_value_ref(size: usize, value: &T) -> Self {
+        let mut vector = Self::default();
+        vector.resize_with_value_ref(size, value);
+        vector
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
     pub fn assign(&mut self, source: &Self) {

@@ -1,0 +1,62 @@
+{
+  "rust_base_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_declaration": {
+    "selector": "NCollection_LinearVector(size_t,const TheItemType&)",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+    "header_sha256": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",
+    "source": "NCollection_LinearVector(size, value) delegates directly to Resize(size, value), which grows before copy-constructing every slot.",
+    "original_test": "src/FoundationClasses/TKernel/GTests/NCollection_LinearVector_Test.cxx",
+    "original_test_sha256": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "flags": ["-std=c++17", "-O2"],
+    "library": "occt-install/lib/libTKernel.so.8.0.0",
+    "library_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "probe": "tools/oracle/tkernel_linear_vector_with_value_ref.cxx",
+    "probe_sha256": "a4dd38510944199f220ef3117baed28fcf302d555f80e06e7948964200f6f294",
+    "expected": "tools/oracle/tkernel_linear_vector_with_value_ref.expected",
+    "expected_sha256": "8b5fe996ea7e09b8068971298bffaf7fc78d4101a2c6c7274a8b033537acf006",
+    "compile_and_diff_command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/tkernel_linear_vector_with_value_ref.cxx -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib -lTKernel -o /tmp/tkernel_linear_vector_with_value_ref && /tmp/tkernel_linear_vector_with_value_ref > /tmp/tkernel_linear_vector_with_value_ref.out && diff -u tools/oracle/tkernel_linear_vector_with_value_ref.expected /tmp/tkernel_linear_vector_with_value_ref.out",
+    "compile_and_diff_exit_code": 0,
+    "observations": [
+      "size 0: capacity 0, no fill copy.",
+      "size 1: capacity 2, one copy and no move.",
+      "size 3: capacity 3, three copies and no moves.",
+      "Second-copy failure: the incomplete vector construction does not run its destructor. The external fill value is destroyed, but the first copied tail object remains undestroyed in the raw allocation."
+    ]
+  },
+  "rust_mapping": {
+    "paths": [
+      "rustycad_tkernel::ncollection::LinearVector::with_value_ref",
+      "rustycad_tkernel::ncollection::LinearVector::with_value"
+    ],
+    "source": "crates/tkernel/src/ncollection/linear_vector.rs",
+    "source_sha256": "d5c922c94fa71d625cbb580dd6e37fd659b69fff348c86a1d08fb41c202acb4a",
+    "tests": "crates/tkernel/tests/ncollection_linear_vector/resize_value_ref.rs",
+    "tests_sha256": "835cb4b5438f29df5f779615b54a45d5f9a50c47d0eb1e502604012c69adddc6",
+    "harness": "crates/tkernel/tests/ncollection_linear_vector_exception_state.rs",
+    "harness_sha256": "33315bb986a9c108f2d96803a94e8764597a1452b6eaf18b5c2a122b9cb07d10",
+    "status": "partial",
+    "behavior": "with_value_ref constructs an empty vector and delegates to resize_with_value_ref; with_value is the owned adapter. Successful sizes 0, 1, and 3 have matching capacity, element values, and copy/move counts.",
+    "known_gap": "On a fill Clone panic, Rust drops any successfully cloned tail and deallocates partial vector storage; native leaves the incomplete constructor's raw storage and untracked constructed tail without cleanup."
+  },
+  "rust_validation": {
+    "toolchain": "cargo 1.98.1; rustc 1.98.1 (48a229ceaefd4985c50990b14116b6d856af0985)",
+    "full_test_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-linear-vector-with-value-ref-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=4 cargo +1.98.1 test -p rustycad-tkernel",
+    "full_test_exit_code": 0,
+    "test_groups": 196,
+    "passed": 2892,
+    "failed": 0,
+    "ignored": 0,
+    "original_linear_vector_tests": 49,
+    "supplemental_exception_state_tests": 18,
+    "doctests_passed": 248,
+    "full_log": "porting/audits/linear-vector-with-value-constructor-tkernel-tests.log.gz",
+    "full_log_gzip_sha256": "52db525ddcad7952d9028a52221d5d9b606f9eeecac99b0da19a422e4d8e9d97",
+    "clippy_command": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_TARGET_DIR=/tmp/rustycad-linear-vector-with-value-ref-target CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=4 cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_exit_code": 0,
+    "clippy_log": "porting/audits/linear-vector-with-value-constructor-tkernel-clippy.log.gz",
+    "clippy_log_gzip_sha256": "21322f763dbab520a29f63d43f7dd6ec270d25d26e4644a8236519772832f489",
+    "format_check_exit_code": 0
+  }
+}
