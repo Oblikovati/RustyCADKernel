@@ -70062,7 +70062,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; storage is reused when the source fits the capacity, otherwise replaced by an exact-size copy. Native copy-constructs a growth tail before publishing Size; Rust rolls back and drops that partial tail if Clone panics. See porting/audits/linear-vector-contract.json."
+      "notes": "Manual NCollection member mapping; storage is reused when the source fits the capacity, otherwise replaced by an exact-size copy. Native copy-constructs a growth tail before publishing Size; Rust rolls back and drops that partial tail if Clone panics. The tail-assignment exception probe records the exact cleanup difference in porting/audits/linear-vector-assign-tail-exception.json; broader contract notes are in porting/audits/linear-vector-contract.json."
     },
     {
       "upstream_id": "NCollection_LinearVector::operator=(NCollection_LinearVector<TheItemType>&&)",
