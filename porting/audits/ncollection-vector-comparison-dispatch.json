@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "objective": "Verify NCollection_Vec2/3/4 equality dispatch and bind exact template selectors.",
+  "source_revision": {
+    "occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "rust": "bb7b7862b51b41be850c2c4e8d4f03df8dc9af08"
+  },
+  "comparison_findings": [
+    {
+      "native_rule": "IsEqual compares component == from index 0 upward with short-circuit; operator== calls IsEqual; operator!= returns !IsEqual.",
+      "native_headers": [
+        {"path": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx", "lines": "96-110", "sha256": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9"},
+        {"path": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx", "lines": "163-177", "sha256": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f"},
+        {"path": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx", "lines": "170-185", "sha256": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66"}
+      ],
+      "rust_implementation": "Explicit PartialEq::eq compares the fields in component order; explicit ne negates eq. This gives rustdoc a concrete ne member instead of relying on the default trait method.",
+      "rust_source_sha256": {
+        "crates/tkernel/src/ncollection/vector.rs": "99dbd7963634f0fe39472ecb14bcc033054d10162f7418ba9f7b43bee6475918",
+        "crates/tkernel/src/ncollection/vector/arithmetic.rs": "45466848569ed1458531c6d3ba31901b9d1591cefa382d728edd2a511650f0b0"
+      },
+      "native_probe": {
+        "source": "tools/oracle/ncollection_vector_comparison_dispatch.cxx",
+        "source_sha256": "8a363e26ec2178f316dca7f25633b889358d4e3ec541cb66d691c9a5e98c393f",
+        "compiler": "g++ 13.3.0",
+        "language": "C++17",
+        "command": "g++ -std=c++17 -O2 -I/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade -I<all 20 subdirectories of OCCT/src/FoundationClasses/TKernel> tools/oracle/ncollection_vector_comparison_dispatch.cxx -o /tmp/ncollection_vector_comparison_dispatch",
+        "binary_sha256": "21fc88848bfdd46c4fde7dba2d1f5c0e58f26dda159989603eaa2cde80c5fdf7",
+        "output": "porting/runtime-evidence/ncollection-vector-comparison-native.out",
+        "output_sha256": "c3756dfdedac3d15a564cb8f1515094c25e140de3b04a1bada2129de71c32e60"
+      }
+    }
+  ],
+  "compiler_selectors": {
+    "declaration_inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "rust_inventory_sha256": "ce69a436d3b8694c8a29a8ecb17e54232beb21b98d00f66c3912db5716e7291f",
+    "rust_inventory_revision": "41c2988af0d3fa2cf5d5cad573885c604fed8bc2",
+    "note": "The previous Rust capture indexed derived Vec PartialEq::eq, but not default ne. Explicit ne source is newer than that capture and awaits the next compiler inventory run.",
+    "declarations": [
+      {"selector": "NCollection_Vec2::IsEqual(const NCollection_Vec2<Element_t> &) const noexcept", "compiler_id": "d2be3fe5cbb3e9ca62d20769951a860b3f5f65e111bdc5a7cb12bc90ca7ecdff", "rust_item": "rustycad_tkernel::ncollection::Vec2::is_equal"},
+      {"selector": "NCollection_Vec2::operator==(const NCollection_Vec2<Element_t> &) const noexcept", "compiler_id": "9b94bb4debe68a6b05e55b940fb5859eca1ae4cc74932633aa166cb68afbd0e8", "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::cmp::PartialEq>::eq"},
+      {"selector": "NCollection_Vec2::operator!=(const NCollection_Vec2<Element_t> &) const noexcept", "compiler_id": "87ce66c57d5b0fc146ba0b64b2f4bc38f6fdacd26872e67c7a838d52be4ca5b5", "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::cmp::PartialEq>::ne"},
+      {"selector": "NCollection_Vec3::IsEqual(const NCollection_Vec3<Element_t> &) const noexcept", "compiler_id": "606b858c5d4a00f85b4f90fb30679e222c8dd23e84aae7f6e8c2568808c27c15", "rust_item": "rustycad_tkernel::ncollection::Vec3::is_equal"},
+      {"selector": "NCollection_Vec3::operator==(const NCollection_Vec3<Element_t> &) const noexcept", "compiler_id": "cf14b7e8a3296ceb34fdc54747f1304a2da76c687334d62594a92d4d9c23cc67", "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::cmp::PartialEq>::eq"},
+      {"selector": "NCollection_Vec3::operator!=(const NCollection_Vec3<Element_t> &) const noexcept", "compiler_id": "bd74fcd108abf8219a921261447dd875872c77784e24044c524aff53c5470f04", "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::cmp::PartialEq>::ne"},
+      {"selector": "NCollection_Vec4::IsEqual(const NCollection_Vec4<Element_t> &) const noexcept", "compiler_id": "2c709053114afdf66d6b364d93224c6277bf5e312e41413d815579620a05f5a1", "rust_item": "rustycad_tkernel::ncollection::Vec4::is_equal"},
+      {"selector": "NCollection_Vec4::operator==(const NCollection_Vec4<Element_t> &) const noexcept", "compiler_id": "afe8c8ba2b404fd56a82e2fe60133a35910e38a6a3e1f8f0aca958f7af478c99", "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::cmp::PartialEq>::eq"},
+      {"selector": "NCollection_Vec4::operator!=(const NCollection_Vec4<Element_t> &) const noexcept", "compiler_id": "447655af81f0293242af81e0788fad582d8a578f5b7f5fd11ef8c1c7df1b7b88", "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::cmp::PartialEq>::ne"}
+    ]
+  },
+  "verification": {
+    "rust_tests": "cargo test -p rustycad-tkernel --test ncollection_vector_comparison_dispatch --test ncollection_vector_operator_paths: 8 passed",
+    "python_selector_regression": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_ncollection_vector_comparison_selectors.py: 1 passed",
+    "strict_clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings: passed",
+    "logs": {
+      "rust": {"path": "porting/runtime-evidence/ncollection-vector-comparison-rust-tests.log.gz", "sha256": "d34ca5066b786c249d2cff44f23666e714e3ac3019f2a60eb61dd951680f63b1"},
+      "clippy": {"path": "porting/runtime-evidence/ncollection-vector-comparison-clippy.log.gz", "sha256": "7c2a409ce653164a6da303be4424c1cdabf66a17c040782cabd7876dee28b23e"},
+      "selectors": {"path": "porting/runtime-evidence/ncollection-vector-comparison-selectors.log.gz", "sha256": "7aaf74fc5bbf78e6b92c87b75932e33f59868f83b2845453cede7b55ffa2cc3e"}
+    }
+  }
+}
