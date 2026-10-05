@@ -1,3 +1,4 @@
+//! Supplemental LocalArray const-view copy-on-write behavior.
 use rustycad_tkernel::ncollection::LocalArray;
 
 #[test]
