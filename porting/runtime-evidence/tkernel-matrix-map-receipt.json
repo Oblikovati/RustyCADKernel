@@ -63,5 +63,12 @@
     "focused_passed": 4,
     "selector_test_source_sha256": "887fece82313b87bee5cac03903446fe91b6043267af6671f420a26ad0f12b9d"
   },
-  "scope": "The borrowed views preserve column-major element aliasing for correctly sized safe Rust arrays. They do not expose all Mat3/Mat4 methods or permit aliases that violate Rust borrowing rules; native object reinterpretation and arbitrary pointer alignment/lifetime cases are not modeled."
+  "scope": "The borrowed views preserve column-major element aliasing for correctly sized safe Rust arrays. They do not expose all Mat3/Mat4 methods or permit aliases that violate Rust borrowing rules; native object reinterpretation and arbitrary pointer alignment/lifetime cases are not modeled.",
+  "const_slice_followup": {
+    "base_revision": "31a6983621333407801f4d8311610c4ecd2ea49a",
+    "test_sha256": "221a6944a625cc10e1d8470c6d8512b9569a21632a760985de7b94ae1c1401db",
+    "test_command": "cargo +1.98.1 test -p rustycad-tkernel --test ncollection_matrix_map",
+    "test_result": "4 passed; 0 failed; 0 ignored",
+    "assertions": "Const Mat3 and Mat4 views expose their original backing pointer and exact flat slice length."
+  }
 }
