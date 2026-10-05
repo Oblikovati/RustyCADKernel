@@ -85,6 +85,16 @@ macro_rules! componentwise_arithmetic {
                 self == other
             }
         }
+        impl<T: PartialEq> PartialEq for $vector<T> {
+            fn eq(&self, other: &Self) -> bool {
+                self.$first == other.$first $( && self.$rest == other.$rest )*
+            }
+            #[allow(clippy::partialeq_ne_impl)] // Native operator!= negates IsEqual.
+            fn ne(&self, other: &Self) -> bool {
+                let are_equal = self.eq(other);
+                !are_equal
+            }
+        }
         impl<T: Copy> $vector<T> {
             /// Assigns every component in storage order; `vector.set_values(1, 2, ...)`.
             pub fn set_values(&mut self, $first: T $(, $rest: T)*) {

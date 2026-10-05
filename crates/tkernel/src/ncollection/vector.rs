@@ -12,7 +12,7 @@ pub use conversion::ElementCast;
 pub use scalar_division::VectorScalarDivision;
 
 /// Two scalar components; `Vec2::new(1.0_f64,2.0)`.
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct Vec2<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
@@ -20,7 +20,7 @@ pub struct Vec2<T> {
     pub y: T,
 }
 /// Three scalar components; `Vec3::new(1.0_f64,2.0,3.0)`.
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct Vec3<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
@@ -30,7 +30,7 @@ pub struct Vec3<T> {
     pub z: T,
 }
 /// Four scalar components; `Vec4::new(1.0_f64,2.0,3.0,1.0)`.
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct Vec4<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
