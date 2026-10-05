@@ -89105,6 +89105,34 @@
       ]
     },
     {
+      "upstream_id": "Quantity_DateDefinitionError::Quantity_DateDefinitionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound one-argument constructor. The C++ default argument is represented by the explicit Rust helper; both preserve native C-string truncation semantics.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::date_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_date_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError::Quantity_DateDefinitionError(const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_stacks::date_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound explicit message and stack constructor; C-string inputs are consumed through their first NUL byte."
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "Exact compiler-bound macro-generated exception type query; the Rust Failure stores and returns the concrete exception name."
+    },
+    {
       "upstream_id": "Quantity_NameOfColor",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_NameOfColor.hxx",
@@ -89163,6 +89191,34 @@
         "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
         "rustycad_tkernel::quantity::exceptions::default_period_definition_error"
       ]
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::Quantity_PeriodDefinitionError(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound one-argument constructor. The C++ default argument is represented by the explicit Rust helper; both preserve native C-string truncation semantics.",
+      "rust_items": [
+        "rustycad_tkernel::quantity::exceptions::exception_bytes::period_definition_error",
+        "rustycad_tkernel::quantity::exceptions::default_period_definition_error"
+      ]
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::Quantity_PeriodDefinitionError(const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::quantity::exceptions::exception_stacks::period_definition_error",
+      "status": "implemented",
+      "notes": "Exact compiler-bound explicit message and stack constructor; C-string inputs are consumed through their first NUL byte."
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError::ExceptionType() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "Exact compiler-bound macro-generated exception type query; the Rust Failure stores and returns the concrete exception name."
     },
     {
       "upstream_id": "Quantity_TypeOfColor",

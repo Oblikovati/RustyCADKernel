@@ -7,8 +7,22 @@ counterparts now use the shared exception macro under `quantity::exceptions`;
 the hierarchy table feeds `exception_parent` and `Failure::is_kind`.
 
 Date and Period continue returning the existing `Error` type. Conversion from
-`Error` to `Failure` preserves the exception name and message. `Error` does not
-carry the native throw-site stack, so this conversion cannot restore it.
+`Error` to `Failure` preserves the exception name and C-string message. An
+embedded NUL terminates that message as it does in the native constructor.
+`Error` does not carry the native throw-site stack, so this conversion cannot
+restore it.
+
+## Compiler-bound declarations
+
+The parity ledger includes the six macro-generated members separately from the
+class rows: each one-argument constructor (including its Rust default helper),
+each explicit message/stack constructor, and each `ExceptionType() const
+noexcept` query. `tools/tests/test_quantity_definition_error_bindings.py`
+checks that every selector resolves to exactly one captured TKernel declaration
+and the expected Rust path. The captured declaration IDs are `0a3c56d6` /
+`8ecc720c` for one-argument constructors, `b81d2db7` / `d311f8da` for explicit
+stack constructors, and `629b0b41` / `cfd81e71` for exception type queries
+(Date / Period respectively).
 
 ## Native probe
 

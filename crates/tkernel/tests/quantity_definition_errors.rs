@@ -35,12 +35,18 @@ fn default_constructors_use_the_native_empty_message() {
 
 #[test]
 fn byte_and_stack_constructors_are_generated_for_both_classes() {
-    let date = exceptions::exception_bytes::date_definition_error(b"d\0ignored");
-    let period = exceptions::exception_stacks::period_definition_error(b"p", b"trace");
-    assert_quantity_domain_error(&date, "Quantity_DateDefinitionError");
-    assert_quantity_domain_error(&period, "Quantity_PeriodDefinitionError");
-    assert_eq!(date.what(), b"d");
-    assert_eq!(period.stack_bytes(), b"trace");
+    let date_bytes = exceptions::exception_bytes::date_definition_error(b"\xff\0ignored");
+    let period_bytes = exceptions::exception_bytes::period_definition_error(b"\xfe\0ignored");
+    let date_stack = exceptions::exception_stacks::date_definition_error(b"date", b"\xff");
+    let period_stack = exceptions::exception_stacks::period_definition_error(b"period", b"\xfe");
+    assert_quantity_domain_error(&date_bytes, "Quantity_DateDefinitionError");
+    assert_quantity_domain_error(&period_bytes, "Quantity_PeriodDefinitionError");
+    assert_quantity_domain_error(&date_stack, "Quantity_DateDefinitionError");
+    assert_quantity_domain_error(&period_stack, "Quantity_PeriodDefinitionError");
+    assert_eq!(date_bytes.what(), b"\xff");
+    assert_eq!(period_bytes.what(), b"\xfe");
+    assert_eq!(date_stack.stack_bytes(), b"\xff");
+    assert_eq!(period_stack.stack_bytes(), b"\xfe");
 }
 
 #[test]

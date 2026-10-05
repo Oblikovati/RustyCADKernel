@@ -56,9 +56,29 @@ impl std::fmt::Display for Error {
 impl std::error::Error for Error {}
 
 impl From<Error> for crate::standard::Failure {
-    /// Preserves the exception name and message; [`Error`] has no original native stack trace.
+    /// Preserves the exception name and C-string message; [`Error`] has no original native stack trace.
+    ///
+    /// ```
+    /// use rustycad_tkernel::quantity::Date;
+    /// use rustycad_tkernel::standard::Failure;
+    /// let failure = Failure::from(Date::new(0, 1, 2000, 0, 0, 0, 0, 0).unwrap_err());
+    /// assert!(failure.is_kind("Standard_DomainError"));
+    /// ```
     fn from(error: Error) -> Self {
         Self::with_message(error.exception_type(), error.message())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{Error, ErrorKind};
+    use crate::standard::Failure;
+
+    #[test]
+    fn error_conversion_stops_at_the_native_c_string_terminator() {
+        let error = Error::new(ErrorKind::DateDefinition, "before\0after");
+        let failure = Failure::from(error);
+        assert_eq!(failure.message(), "before");
     }
 }
 
