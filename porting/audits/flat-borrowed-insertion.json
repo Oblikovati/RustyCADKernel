@@ -2,7 +2,7 @@
   "schema_version": 1,
   "purpose": "Port explicit borrowed flat insertion overloads with native hash/copy/equality ordering.",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
-  "baseline_revision": "d7e33866",
+  "baseline_revision": "d7e338665ec23d3bfaf50a7e35d2c8ca30993748",
   "bindings": [
     {
       "selector": "NCollection_FlatDataMap::Bind(const TheKeyType &,const TheItemType &)",
@@ -119,5 +119,125 @@
     "Clone models borrowed copies; C++ move, assignment and destruction callbacks remain unproven.",
     "Slot layout, allocation failure, exception unwinding and arbitrary aliasing remain partial.",
     "These supplemental cases do not increase original OCCT declaration counts."
-  ]
+  ],
+  "integrated_compiler_validation": {
+    "source_revision": "3e2f5ccaddbf78956b920aed1fd39d5ac4a12a77",
+    "bindings": [
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "8c38db4161255ccc9efb5609df7e1baab35423b3c1ae2e7319fa3cde6a1f0781"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_key",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "e75e9107a83fda7c2bbed6b2866cec6deb0a5f96a245f7a162ef0d15a35dd337"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_value",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "ea974c2b4c67a3db99ddb8f9af000d8ea9376a2d7adda99b7de80920bc71a61b"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "49375ab246e115ef15acb7e80a4fccec8ce0a2ff7df99d13836995ec64a9466b"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_key",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "b226496d5aa39addb034c6fcb074df1a298567e01189a183cde8d450be179763"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_value",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "0f2bf964e2a5967c3fc994556e5e0676800ea778028878661a06b0f571d7366a"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "a93fbde7b73fc01937f9186846c6a6551fec6081b376f7bc9f2dd0a7a146be02"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_key",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "c07a8a594fd162c571ef861771fbb1a26db1772840c417d136f0bc98c4373be7"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_value",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "4eb4f47644156ab5c3b655ddfbf61092b9d84284e7102d74b1b059bdd0dba17a"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "579c87240374e6ff3a0ae366a2405a0f600da3621e0749f3d3223f89862ec20e"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_key",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "4addb0a87277fbae46ee24f201f077f5fb43bfadb00faff80377dede6a9c21c2"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_value",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs",
+        "source_sha256": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2",
+        "declaration_sha256": "fdbad4d1fe27ff098a36670cc08eeffcb99f1227c53f741f357b97d0121050c3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::add_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "ffe3375162ba8ef8ee45257c8b3a85d30647d0755895d4cd905f96d649a56329",
+        "declaration_sha256": "041139a734d935334ebafefe3077c6088a18d6a6ef7d343db96728e240d8c02d"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::FlatMap::added_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/flat_map.rs",
+        "source_sha256": "ffe3375162ba8ef8ee45257c8b3a85d30647d0755895d4cd905f96d649a56329",
+        "declaration_sha256": "3ea24f23cdb60444c7130fd562bdae8137e6255591ae471399dd77bbcd0be902"
+      }
+    ],
+    "inventory_sha256": "48e5a9f9e5c8ffef770796b4ce60c89c7f28f3a1177dc67da20629f3cd9f9618"
+  },
+  "production_source_sha256": {
+    "crates/tkernel/src/ncollection/flat_table.rs": "42c90c7b975ea1b747544f9048fa572eaf7fdc7a7ab4b79e2bd01ebaafc6bb3d",
+    "crates/tkernel/src/ncollection/flat_table/copy_insertion.rs": "26b2311b636359a1626349465e8a8946e385acf11705fc31cf6d3964dd2d0c6c",
+    "crates/tkernel/src/ncollection/flat_map.rs": "ffe3375162ba8ef8ee45257c8b3a85d30647d0755895d4cd905f96d649a56329",
+    "crates/tkernel/src/ncollection/flat_data_map/borrowed_binding.rs": "a2ca3d5c6f78bcc31706d0bb112720e919395a31bee75de6411c8b9b95c536d2"
+  },
+  "native_fixture_sha256": "59adfd61e70bc763188e4afe0256841b603bc0014470f03bd8a83b362dc9116c",
+  "native_expected_sha256": "5f80664097f8ac2942744691dc61f2d480e9f479b6cb1b21c7690fe4e56f2311",
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "integrated_runtime_validation": {
+    "source_revision": "3e2f5ccaddbf78956b920aed1fd39d5ac4a12a77",
+    "workspace_receipt": "porting/runtime-evidence/cargo-workspace-3e2f5cca.json",
+    "tooling_receipt": "porting/runtime-evidence/proof-tools-3e2f5cca.json",
+    "foundation_receipt": "porting/runtime-evidence/base-legacy-3e2f5cca.json",
+    "clippy_receipt": "porting/runtime-evidence/tkernel-clippy-3e2f5cca.json"
+  }
 }
