@@ -79558,9 +79558,9 @@
       "upstream_id": "NCollection_IndexedMap::Add(const TheKeyType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::add",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; Returns the one-based index as usize. The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
+      "status": "partial",
+      "notes": "Manual NCollection member mapping. add_ref searches and hashes the borrowed key before cloning only on a miss; an existing key returns its index without cloning. Rust clones before its separate node allocation, unlike OCCT placement allocation followed by key construction, so allocator and arbitrary C++ construction-failure effects are not modeled."
     },
     {
       "upstream_id": "NCollection_IndexedMap::Add(TheKeyType&&)",

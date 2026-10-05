@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "title": "IndexedMap borrowed Add behavior",
+  "scope": "Adds a borrowed input path for the existing const-key Add declaration; legacy test and declaration totals are unchanged.",
+  "implementation_base_revision": "9175a2fd8982fa15569b01dfa2be7414888eb178",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/indexed_map.rs": "ed08ed72e5eefca9ac7f81c117d53b9bee4c06df230440289521e3da19a0de82",
+    "crates/tkernel/tests/indexed_map_borrowed_add.rs": "97101eab87348e703569d1ea3f4e816a78b6dd44498aa56ed03ef5c5d54dae30",
+    "tools/oracle/ncollection_indexed_map_borrowed_add.cxx": "1d85d13c1599ea152580fcea1e1a407d439c8212b6190536524b13daf558dbe2",
+    "tools/oracle/ncollection_indexed_map_borrowed_add.expected": "c88cc960ffe723cafea48fd92b33cd809df5b8f97bfc5fbdfaf54f11c3c892de",
+    "tools/oracle/ncollection_indexed_map_borrowed_add.actual": "c88cc960ffe723cafea48fd92b33cd809df5b8f97bfc5fbdfaf54f11c3c892de",
+    "tools/oracle/ncollection_indexed_map_borrowed_add.md": "410f884f8037f5f220690148e46a01a44481d25cbc118a7fc1cbfd822fb74f69",
+    "tools/tests/test_indexed_map_borrowed_add.py": "64471ac75c4e4b4fcd3fbc1f61a80fa099ab863b9ba2141974e7b03f1d447da2",
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e"
+  },
+  "native_declaration": {
+    "id": "3139d3af57aa3ab1c74eac365b9dadf2a17aafb33f22513aa3682d8df3d4cc4a",
+    "usr": "c:@ST>2#T#T@NCollection_IndexedMap@F@Add#&1t0.0#",
+    "selector": "NCollection_IndexedMap::Add(const TheKeyType&)",
+    "signature": "int (const type-parameter-0-0 &)",
+    "header": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+    "header_sha256": "986806b3bd709e74d0a5b0e9fa7ea1af1bda20faf37f0edb813a66d3c7ca133a",
+    "base_header": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+    "base_header_sha256": "eea4906c372580299332dde5c308b9732d58c96147fc7e08a2f69bc907ff72c8",
+    "source_lines": [
+      371,
+      637,
+      686
+    ]
+  },
+  "rust_target": {
+    "path": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
+    "kind": "function",
+    "source_file": "crates/tkernel/src/ncollection/indexed_map.rs",
+    "source_sha256": "ed08ed72e5eefca9ac7f81c117d53b9bee4c06df230440289521e3da19a0de82",
+    "declaration_sha256": "7d33cc0ef84364d5fe5c1c292fb831d729218cb3e2b0693d380f22b711fded7f",
+    "unique_in_private_capture": true,
+    "capture_command": "cargo +nightly-2026-09-25 rustdoc -p rustycad-tkernel --lib --all-features -- -Z unstable-options --output-format json --document-private-items",
+    "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "rustdoc_gzip": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-rustdoc.json.gz",
+      "sha256": "4ae0f9653bd1cb1242eab7952f3b648ada635744003cb8f11849b7c12a875810"
+    },
+    "rustdoc_uncompressed_sha256": "145300de2a23a0a80f3c488e98c85b200bd02056dff0463828677b3348a4a02b",
+    "rustdoc_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-rustdoc.log.gz",
+      "sha256": "16b5cd445a66eaf723211e777a8d45553d715819ada916771aa723d4064de353"
+    },
+    "normalized_public_path_count": 7545
+  },
+  "native_behavior": {
+    "expected_rows": [
+      "inserted=1 events=HK stored=7",
+      "existing=1 events=HE stored=7"
+    ],
+    "insert": "OCCT rehashes if needed, hashes/searches the original key, and copies only after a miss. The fixture sees hash then key-copy construction.",
+    "hit": "The existing one-based index is returned after hash/equality with no key copy."
+  },
+  "parity_row": {
+    "selector": "NCollection_IndexedMap::Add(const TheKeyType&)",
+    "rust_target": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
+    "status": "partial",
+    "parity_json_sha256": "e7816005261112aaf3247b38ae7194feb8ec7a19a58779bb44b440824932d7a6"
+  },
+  "inputs_sha256": {
+    "occt_declarations_jsonl_gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "occt_manifest_json": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+    "checked_in_rust_api_json_gz": "157e587ac3d8c8562fbcfaacfde7d8e52aca115881ec697298625de5ed58cc84"
+  },
+  "validation": {
+    "native_command": "c++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/ncollection_indexed_map_borrowed_add.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/ncollection_indexed_map_borrowed_add",
+    "native_compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "native_binary_sha256": "896f87134273e41c81a62caeaea7a39cf47e168d3f65052722e22d65a386f7dd",
+    "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "native_output_sha256": "c88cc960ffe723cafea48fd92b33cd809df5b8f97bfc5fbdfaf54f11c3c892de",
+    "native_compile_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-native-compile.log.gz",
+      "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+    },
+    "native_output_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-native-output.log.gz",
+      "sha256": "a6bdc608d60db02020d7f2d89ec680e2310f3f8fd7793994b550a02b5135bd86"
+    },
+    "rust_command": "cargo test -p rustycad-tkernel --test indexed_map_borrowed_add --test ncollection_indexed_map --test indexed_map_supplemental",
+    "rust_result": "38 passed, 0 failed",
+    "rust_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-focused.log.gz",
+      "sha256": "a1dcaff4ddddd22dad9be7fb316317eb434093e2e3f10e8f241f2310d4eb37ec"
+    },
+    "doctest_command": "cargo test -p rustycad-tkernel --doc add_ref",
+    "doctest_result": "2 passed, 0 failed",
+    "doctest_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-doc.log.gz",
+      "sha256": "47c2ba2e20825744b8869270cc332dc63163c4e13c78543badff17840ff705b5"
+    },
+    "clippy_command": "cargo clippy -p rustycad-tkernel --test indexed_map_borrowed_add -- -D warnings",
+    "clippy_result": "passed",
+    "clippy_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-clippy.log.gz",
+      "sha256": "58532789632202aa7c11adb5d4f42b1096e55979c5f9b56254bbc5ac82cdacea"
+    },
+    "selector_command": "PYTHONPATH=.. python3 -m unittest test_indexed_map_borrowed_add (from tools/tests)",
+    "selector_result": "2 passed, 0 failed",
+    "selector_log": {
+      "path": "porting/runtime-evidence/indexed-map-borrowed-add-selector.log.gz",
+      "sha256": "248eef6d1bfe1c9116ac80fca1b9ab14a54e78eea87fa0d876a1b950b9e8006b"
+    },
+    "formatting": "cargo fmt --all -- --check; git diff --check; Black passed.",
+    "target": "/tmp/rustycad-indexed-map-target with CARGO_INCREMENTAL=0 and debug=0"
+  },
+  "limitations": [
+    "OCCT placement allocation happens before key construction; Rust clones the key before its separate allocator call, so allocation and failed-construction side effects differ.",
+    "Rust stores a key node in a separate vector-backed allocation, unlike OCCT’s indexed node allocation; allocator callback ordering/counts are not equivalent.",
+    "Arbitrary C++ copy-constructor, allocator-failure, and destructor effects are not modeled; self-aliasing is outside the tested borrowing domain.",
+    "The checked-in Rust API snapshot predates add_ref; the retained private rustdoc capture resolves the path uniquely."
+  ]
+}
