@@ -68428,20 +68428,22 @@
       "notes": "The generic Rust Div<T> implementation applies T::div independently to x and y, matching native direct division rather than assignment. Custom-element native/Rust evidence distinguishes it from operator/=. See vector-scalar-division audit."
     },
     {
-      "upstream_id": "NCollection_Vec2::cwiseMin(const NCollection_Vec2&) const",
+      "upstream_id": "NCollection_Vec2::cwiseMin(const NCollection_Vec2<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_min",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "39ba5aeaf21115871a54ff87ac7957627311e2020d40aea813a2889081a1442c"
     },
     {
-      "upstream_id": "NCollection_Vec2::cwiseMax(const NCollection_Vec2&) const",
+      "upstream_id": "NCollection_Vec2::cwiseMax(const NCollection_Vec2<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::cwise_max",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "4459a2ffd813451446c6d79769a623490fc9dc029515590ca744e6787cd19977"
     },
     {
       "upstream_id": "NCollection_Vec2::Dot(const NCollection_Vec2&) const",
@@ -68556,20 +68558,22 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec3::cwiseMin(const NCollection_Vec3&) const",
+      "upstream_id": "NCollection_Vec3::cwiseMin(const NCollection_Vec3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_min",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "dc4fe8c248d2141556f5593ddc046087f16babda90e4e3d94b93324bef9605be"
     },
     {
-      "upstream_id": "NCollection_Vec3::cwiseMax(const NCollection_Vec3&) const",
+      "upstream_id": "NCollection_Vec3::cwiseMax(const NCollection_Vec3<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::cwise_max",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "019e51f43ac11c469ea1c65e658bcaa44439b557b0250fd1691dbbed3e9059a8"
     },
     {
       "upstream_id": "NCollection_Vec3::Dot(const NCollection_Vec3&) const",
@@ -68700,20 +68704,22 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Vec4::cwiseMin(const NCollection_Vec4&) const",
+      "upstream_id": "NCollection_Vec4::cwiseMin(const NCollection_Vec4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_min",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "8934b0f6c3819688ab76ba70bd3636e2228f3cb3ad8c71565f11c37a3713ea0e"
     },
     {
-      "upstream_id": "NCollection_Vec4::cwiseMax(const NCollection_Vec4&) const",
+      "upstream_id": "NCollection_Vec4::cwiseMax(const NCollection_Vec4<Element_t> &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::cwise_max",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact extrema selector reconciliation and primitive edge-case evidence: porting/audits/vector-extrema-bindings.json.",
+      "selector_id": "824d570573d51ac857e755a684c86234888f3a1a29cb2ba2fe7e93daeb3f4fc2"
     },
     {
       "upstream_id": "NCollection_Vec4::Dot(const NCollection_Vec4&) const",
