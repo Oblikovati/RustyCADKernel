@@ -185,9 +185,25 @@ def matching_alias_impl(
     render_impl: ImplRenderer,
 ) -> list[dict[str, JSONValue]]:
     impl = eligible_impl_body(impl_id, state.items, read_inner)
-    if impl is None or impl.get("trait") is not None:
+    if impl is None or not alias_trait_is_supported(impl, state):
         return []
     return alias_impl_members(impl, target_id, const_value, alias_type, path, state, render_impl)
+
+
+def alias_trait_is_supported(
+    impl: Mapping[str, JSONValue], state: AliasState
+) -> bool:
+    if impl.get("is_negative") is not False:
+        return False
+    trait = impl.get("trait")
+    if trait is None:
+        return True
+    if not isinstance(trait, dict) or trait.get("args") is not None:
+        return False
+    trait_id = trait.get("id")
+    if isinstance(trait_id, bool) or not isinstance(trait_id, (int, str)):
+        return False
+    return stable_path(state.paths, str(trait_id), "") == "core::default::Default"
 
 
 def alias_impl_members(
@@ -298,7 +314,18 @@ def matching_const_parameter(
     if literal is not None:
         return None if literal == const_value else False
     name = const_generic_argument_name(argument)
-    return name if name is not None and has_named_const_parameter(params, name) else False
+    if name is not None and has_named_const_parameter(params, name):
+        return name
+    expression = const_expression(argument)
+    return None if expression == const_value else False
+
+
+def const_expression(argument: JSONValue) -> int | None:
+    value = argument.get("const") if isinstance(argument, dict) else None
+    expression = value.get("expr") if isinstance(value, dict) else None
+    if not isinstance(expression, str) or not expression.isascii() or not expression.isdecimal():
+        return None
+    return int(expression)
 
 
 def const_generic_argument_name(argument: JSONValue) -> str | None:

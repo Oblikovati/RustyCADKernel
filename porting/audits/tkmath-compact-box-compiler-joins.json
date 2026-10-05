@@ -1,0 +1,439 @@
+{
+  "capture_inputs": {
+    "fresh_crosswalk_output_path": "/tmp/tkmath-compact-box-crosswalk.json (exact final parity.json inputs)",
+    "fresh_crosswalk_sha256": "ab493d9871c9bbda150ca94a56c31cd85781d2aaae6402894257efc90e849af6",
+    "native_api_coverage_report_sha256": "a52d435306b27f547b2e5942db9027c259d4d017817cde45a6074befd75579b5",
+    "normalized_inventory_sha256": "5a502b9f27faa4651a4abeb0faa14d783b34bba851529d621db5c262b218ba06",
+    "rust_capture_manifest_sha256": "d2e336747197f0aba9785d034b5770564d6e6dd82dcd72be54e9f5d0ea280fca",
+    "rustycad_tkmath_raw_rustdoc_sha256": "820e23412856b64253fb001c6e8fa3535627de0ca84d14f8531909c1ffed23bd"
+  },
+  "coverage": {
+    "all_cpp_selectors_unique": true,
+    "new_declarations": 0,
+    "new_legacy_test_mappings": 0,
+    "remaining_limit": "Default is mapped through its exact core trait impl; other trait impls on the hidden CompactBounds alias target are deliberately not expanded by this bounded normalizer change.",
+    "rows": 13
+  },
+  "existing_rust_test_sources": {
+    "crates/tkmath/tests/bnd_b2.rs": "1f61e36619a900b9db797e750dc62236f512c7933134b8da86d8d90e36862e8a",
+    "crates/tkmath/tests/bnd_b3.rs": "a46f414ef743aaceebd474665d29b1df1172488fcb7ffeb131d8e93f34a6c811",
+    "crates/tkmath/tests/bnd_members_behavior.rs": "12fcf0c1bf6eec0380c11febd63f7e3f6573cc86ba5af7795ed0df713e7412f0"
+  },
+  "fixture_capture": {
+    "command": "rustup run nightly-2026-09-25 rustdoc --edition=2024 --crate-name rustdoc_const_specialized_alias --crate-type lib --document-private-items src/lib.rs -Z unstable-options --output-format json -o /tmp/const-alias-rustdoc",
+    "format_version": 61,
+    "raw_fixture_sha256": "dc284d201c9f3f187289f8866dd909b764fd1ab17c44057c2665d6af572b7c7f",
+    "rustdoc": "1.100.0-nightly (f7575a9da 2026-09-24)",
+    "source_sha256": "8c7e8426f72485e301fa76624f99b996ad8d44f9ef17e496dbc35b7ad4c34f49"
+  },
+  "native_test_sources": {
+    "src/FoundationClasses/TKMath/GTests/Bnd_B2_Test.cxx": "caf48ef3022df1e141edc00a1216d7479c26dfb18fd79d7652bd6b5e5b660411",
+    "src/FoundationClasses/TKMath/GTests/Bnd_B3_Test.cxx": "6731beb469158ce17fea0f805f3652a281729c6cf891fadaa303e605cb92e069"
+  },
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "purpose": "Compiler-derived repair evidence for existing Bnd_B2/Bnd_B3 mappings; no legacy declaration rows or test counts added.",
+  "rows": [
+    {
+      "cpp": {
+        "id": "d6eb976768ff3b0edda7baeb57ebc4639947b9409d9e16e420db87bd63c37eed",
+        "kind": "CXXConstructor",
+        "qualified_name": "Bnd_B2::Bnd_B2<RealType>",
+        "signature": "void () noexcept",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": "N",
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::<core::default::Default>::default",
+        "source": "crates/tkmath/src/bnd/compact/storage.rs",
+        "source_sha256": "17ef48b39cf380dca044b76eb5a6831c83c3da79172f887642d8d64496321444"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::Bnd_B2()"
+    },
+    {
+      "cpp": {
+        "id": "7aac26af34a0ebbed04b58907fe0906e93e3417ef8febb0040b736565c78ea0c",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::IsIn",
+        "signature": "bool (const Bnd_B2<RealType> &, const class gp_Trsf2d &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::is_in_transformed_box",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::IsIn(const Bnd_B2<RealType>&,const gp_Trsf2d&) const"
+    },
+    {
+      "cpp": {
+        "id": "9f42794a35a2e16e53e1641d81626f93852b6be9ec02623f66a5453cc7a8cb92",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::IsOut",
+        "signature": "bool (const Bnd_B2<RealType> &, const class gp_Trsf2d &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::is_out_transformed_box",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::IsOut(const Bnd_B2<RealType>&,const gp_Trsf2d&) const"
+    },
+    {
+      "cpp": {
+        "id": "85b8a40616faaf54120b5c2cbd024f68928328e32b0e43d86fe1423cd0049146",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::IsOut",
+        "signature": "bool (const class gp_Ax2d &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::is_out_line",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::IsOut(const gp_Ax2d&) const"
+    },
+    {
+      "cpp": {
+        "id": "7385a20d29d384c4156947bc96053d08d4883ec30706e2e8ea8494cff5db8c1b",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::IsOut",
+        "signature": "bool (const class gp_XY &, const class gp_XY &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::is_out_segment",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::IsOut(const gp_XY&,const gp_XY&) const"
+    },
+    {
+      "cpp": {
+        "id": "29acbe1ca668622e078b810c551a8a26ff6e47906e35e8e4175b390a108d4421",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::IsOut",
+        "signature": "bool (const class gp_XY &, double, bool) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::is_out_circle",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::IsOut(const gp_XY&,double,bool) const"
+    },
+    {
+      "cpp": {
+        "id": "b087a6cede7a4f3a52f36f47d66a0576d5e1c79d2e9ca3b09e604a504d665ec2",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B2::Transformed",
+        "signature": "Bnd_B2<RealType> (const class gp_Trsf2d &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+        "source_sha256": "4c84ee209f2d0ba66be7148fb897047a43e80bd256d78bd909365d950332d418"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox2",
+          "alias_type_parameter": "T",
+          "const_value": 2,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox2::transformed",
+        "source": "crates/tkmath/src/bnd/compact/box2/queries.rs",
+        "source_sha256": "02cf9db3b4924fd084e98097c63ffc7375068d17ae161da7b6da3f87c66b7fe3"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B2::Transformed(const gp_Trsf2d&) const"
+    },
+    {
+      "cpp": {
+        "id": "0a9d220f545242cc63b34f358607b18f0c2ee559c55375ed49692016d86b63c2",
+        "kind": "CXXConstructor",
+        "qualified_name": "Bnd_B3::Bnd_B3<RealType>",
+        "signature": "void () noexcept",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": "N",
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::<core::default::Default>::default",
+        "source": "crates/tkmath/src/bnd/compact/storage.rs",
+        "source_sha256": "17ef48b39cf380dca044b76eb5a6831c83c3da79172f887642d8d64496321444"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::Bnd_B3()"
+    },
+    {
+      "cpp": {
+        "id": "4a49d402c465ea751f4769de4df5973840c8f370e92622ec1ca8d5f4cf938dc4",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B3::IsIn",
+        "signature": "bool (const Bnd_B3<RealType> &, const class gp_Trsf &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::is_in_transformed_box",
+        "source": "crates/tkmath/src/bnd/compact/box3/queries.rs",
+        "source_sha256": "b79eae2daf350f79fc594b324d87a16e3ca1a61148b33781a79caa410ab38a04"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::IsIn(const Bnd_B3<RealType>&,const gp_Trsf&) const"
+    },
+    {
+      "cpp": {
+        "id": "3157f385726c6027d3c6226668dc81fadb0eb651b2c5d589a870830fb36530de",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B3::IsOut",
+        "signature": "bool (const Bnd_B3<RealType> &, const class gp_Trsf &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::is_out_transformed_box",
+        "source": "crates/tkmath/src/bnd/compact/box3/queries.rs",
+        "source_sha256": "b79eae2daf350f79fc594b324d87a16e3ca1a61148b33781a79caa410ab38a04"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::IsOut(const Bnd_B3<RealType>&,const gp_Trsf&) const"
+    },
+    {
+      "cpp": {
+        "id": "1f217f904ddbad5d7013453605dc93588da559f945352e762056cae5e413afa8",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B3::IsOut",
+        "signature": "bool (const class gp_Ax1 &, bool, double) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::is_out_line",
+        "source": "crates/tkmath/src/bnd/compact/box3/queries.rs",
+        "source_sha256": "b79eae2daf350f79fc594b324d87a16e3ca1a61148b33781a79caa410ab38a04"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::IsOut(const gp_Ax1&,bool,double) const"
+    },
+    {
+      "cpp": {
+        "id": "f6683cd8505d085fafc10ea5071ee88d28e5fbc8806a8ef89161d90f195f480a",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B3::IsOut",
+        "signature": "bool (const class gp_Ax3 &) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::is_out_plane",
+        "source": "crates/tkmath/src/bnd/compact/box3/queries.rs",
+        "source_sha256": "b79eae2daf350f79fc594b324d87a16e3ca1a61148b33781a79caa410ab38a04"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::IsOut(const gp_Ax3&) const"
+    },
+    {
+      "cpp": {
+        "id": "b3eea7ce24fb11021c7b16f66a6105558c78399cc71b7bc405b4f09f7ccf7c91",
+        "kind": "CXXMethod",
+        "qualified_name": "Bnd_B3::IsOut",
+        "signature": "bool (const class gp_XYZ &, double, bool) const",
+        "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+        "source_sha256": "fa515b61a58d232c5f6e5631bdd48b3716d22aa2c93d66a81b0984de47800fad"
+      },
+      "rust": {
+        "alias_specialization": {
+          "alias_path": "rustycad_tkmath::bnd::CompactBox3",
+          "alias_type_parameter": "T",
+          "const_value": 3,
+          "impl_const_parameter": null,
+          "impl_type_parameter": "T",
+          "target_item_id": "434",
+          "target_path": "rustycad_tkmath::bnd::compact::storage::CompactBounds"
+        },
+        "kind": "function",
+        "path": "rustycad_tkmath::bnd::CompactBox3::is_out_sphere",
+        "source": "crates/tkmath/src/bnd/compact/box3/queries.rs",
+        "source_sha256": "b79eae2daf350f79fc594b324d87a16e3ca1a61148b33781a79caa410ab38a04"
+      },
+      "status": "implemented",
+      "upstream_id": "Bnd_B3::IsOut(const gp_XYZ&,double,bool) const"
+    }
+  ],
+  "rust_capture_revision": "06e1bea86048db2d4a44ed98c1a69c19f01fc28a",
+  "rustdoc_format_version": 61,
+  "schema_version": 1,
+  "tool_changes": {
+    "path": "tools/rustdoc_const_aliases.py",
+    "scope": "Accept exact decimal const expressions emitted with is_literal=false for specialized impl matching, and publish only the reachable core::default::Default specialization for generic const aliases; all other trait impls remain withheld.",
+    "sha256": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a"
+  },
+  "validation": {
+    "crosswalk": "Fresh Rust normalization plus API crosswalk reproduced all 13 Bnd_B2/B3 rows as unique C++ selector + unique Rust path, status implemented.",
+    "existing_native_test_sources": [
+      "src/FoundationClasses/TKMath/GTests/Bnd_B2_Test.cxx",
+      "src/FoundationClasses/TKMath/GTests/Bnd_B3_Test.cxx"
+    ],
+    "existing_rust_translation_tests": [
+      "crates/tkmath/tests/bnd_b2.rs",
+      "crates/tkmath/tests/bnd_b3.rs",
+      "crates/tkmath/tests/bnd_members_behavior.rs"
+    ],
+    "focused_normalizer_tests": "PYTHONPATH=tools python3 -m unittest tools.tests.test_rustdoc_const_specialized_aliases (11 passed)",
+    "fresh_crosswalk": "13/13 targeted Bnd_B2/B3 parity rows resolved implemented with unique C++ and Rust selectors; overall report remains incomplete.",
+    "fresh_crosswalk_metrics": {
+      "declaration_crosswalk_proof": false,
+      "matched_declared_mappings": 23253,
+      "unclaimed_cpp_count": 81393,
+      "unresolved_row_count": 4816
+    },
+    "full_tool_suite": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests (594 passed)",
+    "native_bnd_tests": {
+      "binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+      "command": "OpenCascadeGTest --gtest_filter=Bnd_B2dTest.*:Bnd_B2fTest.*:Bnd_B3dTest.*:Bnd_B3fTest.*",
+      "compiler": "GCC 13.3.0",
+      "result": {
+        "failed": 0,
+        "native_suites": 4,
+        "native_tests": 39
+      },
+      "tkmath_library_sha256": "7afac5368e0ea361b8a60d2227bc3a1bbe34f9b71ec6c97447bc6957d9f007f8"
+    },
+    "no_test_count_change": true,
+    "rust_bnd_tests": {
+      "command": "cargo test --locked -p rustycad-tkmath --test bnd_b2 --test bnd_b3 --test bnd_members_behavior",
+      "result": {
+        "bnd_b2": 18,
+        "bnd_b3": 21,
+        "bnd_members_behavior": 6,
+        "failed": 0
+      },
+      "toolchain": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
+    }
+  }
+}

@@ -29300,9 +29300,9 @@
       "upstream_id": "Bnd_B2::Bnd_B2()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
-      "rust_item": "rustycad_tkmath::bnd::CompactBox2::default",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived mapping: the zero-argument Bnd constructor maps to the Default implementation on the public CompactBox alias; exact alias const dimension is recorded by rustdoc normalization."
     },
     {
       "upstream_id": "Bnd_B2::Bnd_B2(const gp_XY&,const gp_XY&)",
@@ -29406,7 +29406,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::transformed",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B2::IsOut(const gp_XY&) const",
@@ -29422,7 +29422,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_circle",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B2::IsOut(const Bnd_B2<RealType>&) const",
@@ -29438,7 +29438,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B2::IsIn(const Bnd_B2<RealType>&) const",
@@ -29454,7 +29454,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_in_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B2::SetCenter(const gp_XY&)",
@@ -29510,7 +29510,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B2::IsOut(const gp_XY&,const gp_XY&) const",
@@ -29518,15 +29518,15 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_segment",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B3::Bnd_B3()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
-      "rust_item": "rustycad_tkmath::bnd::CompactBox3::default",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived mapping: the zero-argument Bnd constructor maps to the Default implementation on the public CompactBox alias; exact alias const dimension is recorded by rustdoc normalization."
     },
     {
       "upstream_id": "Bnd_B3::Bnd_B3(const gp_XYZ&,const gp_XYZ&)",
@@ -29646,7 +29646,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_sphere",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B3::IsOut(const Bnd_B3<RealType>&) const",
@@ -29662,7 +29662,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B3::IsIn(const Bnd_B3<RealType>&) const",
@@ -29678,7 +29678,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_in_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B3::SetCenter(const gp_XYZ&)",
@@ -29734,7 +29734,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_line",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_B3::IsOut(const gp_Ax3&) const",
@@ -29742,7 +29742,7 @@
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_plane",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+      "notes": "Compiler-derived unique declaration join recorded in porting/audits/tkmath-compact-box-compiler-joins.json; the Rust path is reachable through the public CompactBox alias with its exact const dimension. Existing native and Rust runtime tests remain the behavioral evidence."
     },
     {
       "upstream_id": "Bnd_Box::Bnd_Box()",
@@ -37850,8 +37850,8 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
       "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::move_from",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "The owned target receives the source buffer, but Rust empties the source because safe mutable slices cannot alias the moved allocation. Native NCollection_AliasedArray::Move retains the source range and makes it a non-owning view of the target's buffer; native mutation through either view is visible through the other. This is a defined behavior gap, not C++ ABI parity. Native fixture: tools/oracle/tkmath_poly_node_move_alias.cxx; diagnostic Rust tests: crates/tkmath/tests/poly_node_move_alias_gap.rs."
     },
     {
       "upstream_id": "Poly_ArrayOfNodes::operator=(const Poly_ArrayOfNodes&)",
@@ -37994,8 +37994,8 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
       "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::move_from",
-      "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "status": "partial",
+      "notes": "The owned target receives the source buffer, but Rust empties the source because safe mutable slices cannot alias the moved allocation. Native NCollection_AliasedArray::Move retains the source range and makes it a non-owning view of the target's buffer; native mutation through either view is visible through the other. This is a defined behavior gap, not C++ ABI parity. Native fixture: tools/oracle/tkmath_poly_node_move_alias.cxx; diagnostic Rust tests: crates/tkmath/tests/poly_node_move_alias_gap.rs."
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes::operator=(const Poly_ArrayOfUVNodes&)",
