@@ -235629,9 +235629,9 @@
       "upstream_id": "TCollection_AsciiString::TCollection_AsciiString(const char(&)[N])",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::from_bytes",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::convert::From<&[u8; N]>>::from",
       "status": "implemented",
-      "notes": "The literal constructor uses strlen and stops at the first NUL, matching AsciiString::from_bytes. Supplemental native/compiler evidence: porting/audits/ascii-string-view-surface-proposed-rows.json. Original legacy declaration count unchanged. Exact const-generic From trait identity is not captured; source adapter delegates to this compiler-visible constructor."
+      "notes": "Native char-array constructor stops at its first NUL. Rust const-generic array From implementation delegates to the same bounded C-string-prefix constructor. Exact compiler-derived array trait path now resolves after lossless slice/array rendering; native behavior evidence: tools/oracle/tkernel_ascii_string_view_surface.cxx. See porting/audits/rustdoc-array-trait-paths.json."
     }
   ],
   "tests": [

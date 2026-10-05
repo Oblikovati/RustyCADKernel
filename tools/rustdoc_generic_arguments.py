@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+import re
 
 from api_inventory_json import JSONValue
 
@@ -20,7 +21,9 @@ def stable_path(
     return "::".join(parts)
 
 
-def trait_arguments(value: JSONValue | None, paths: Mapping[str, JSONValue]) -> str | None:
+def trait_arguments(
+    value: JSONValue | None, paths: Mapping[str, JSONValue]
+) -> str | None:
     """Render captured angle arguments; `trait_arguments(args, path_table)`."""
     if value is None:
         return ""
@@ -55,9 +58,28 @@ def display_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None
         return display_resolved_path(body, paths)
     if kind == "borrowed_ref":
         return display_borrowed_ref(body, paths)
+    if kind == "slice":
+        element = display_type(body, paths)
+        return None if element is None else f"[{element}]"
+    if kind == "array":
+        return display_array_type(body, paths)
     if kind in {"generic", "primitive"} and isinstance(body, str):
         return body
     return None
+
+
+def display_array_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Preserve a captured array type; `display_array_type(array, paths)`."""
+    if not isinstance(value, dict) or set(value) != {"type", "len"}:
+        return None
+    length = value["len"]
+    if not isinstance(length, str) or length == "_":
+        return None
+    # Rustdoc expressions require a separate identity policy; never guess their value.
+    if re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*|[0-9]+", length) is None:
+        return None
+    element = display_type(value["type"], paths)
+    return None if element is None else f"[{element}; {length}]"
 
 
 def display_resolved_path(

@@ -1,0 +1,44 @@
+{
+  "base_revision": "bb7b7862b51b41be850c2c4e8d4f03df8dc9af08",
+  "scope": "Lossless trait type arguments for slices and arrays with captured decimal or simple const-name lengths",
+  "source_sha256": {
+    "tools/rustdoc_generic_arguments.py": "0be5e5a5555aa507d7d23591529b842e5b0ddfa049df63b4343e32ff67f1ba3d",
+    "tools/tests/test_rustdoc_array_arguments.py": "f8adb8036586428b145a964d2e6f37454ab571707c90526579423f632f0cd001",
+    "tools/tests/test_rustdoc_array_trait_capture.py": "184dbf88f256dcdc9162529c08f02496ea503ea78fee3bdb2563a8f9a828d13f",
+    "tools/tests/fixtures/rustdoc-array-traits/lib.rs": "477dd3f7d4de6fa3aeecce8e56babbd3170c2334e7619d6be442cb34fae5bcee",
+    "tools/tests/fixtures/rustdoc-array-traits/rustdoc-61.json": "f65a7dd9b709d4c0748471b6f1d50e91ca10d136b44a70e72096e2ac6e9e238a",
+    "porting/parity.json": "2abe885e1ad6e4e9a2c5667d0a78b23e1235646feca339179fc9ea5400a0feaf"
+  },
+  "fixture_capture": "tools/tests/fixtures/rustdoc-array-traits/capture.json",
+  "tkernel_rustdoc_sha256": "81e5777729da459eef04c64f6808c1681ad4438edfc307d2f1d4504376cb021f",
+  "tkernel_capture_command": "cargo +nightly-2026-09-25 rustdoc -p rustycad-tkernel --lib -- -Z unstable-options --output-format json --document-private-items",
+  "compiler_binding": {
+    "cpp_selector": "TCollection_AsciiString::TCollection_AsciiString(const char(&)[N])",
+    "cpp_id": "24a0789028de235f351e03f59ff76cbe50cddaff94d103db93bf7cadd79c8def",
+    "cpp_status": "unique",
+    "rust": {
+      "path": "rustycad_tkernel::tcollection::AsciiString::<core::convert::From<&[u8; N]>>::from",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/tcollection/ascii_string/traits.rs",
+      "source_sha256": "eac39057dd656685ca6fde647a98418b8554a346bf573fd96085bf3274e651ba",
+      "declaration_sha256": "eee36191e5ad9b35f5500d9f2533be5ad04848439fdd1a62b5fbc8300872cdb0"
+    }
+  },
+  "initial_regressions_exit_code": 1,
+  "focused_tests_passed": 8,
+  "full_python_tests_passed": 613,
+  "full_python_exit_code": 0,
+  "original_occt_declaration_count_delta": 0,
+  "runtime_implementation_changed": false,
+  "limits": [
+    "Const expressions, qualified associated constants, inferred lengths and unsupported element type shapes remain unresolved.",
+    "This retargets one existing literal-constructor mapping to its exact compiler-derived From trait method; other newly rendered paths receive no automatic parity credit."
+  ],
+  "raw_logs": {
+    "porting/runtime-evidence/rustdoc-array-red.log.gz": "2d2a9927015e508680cc932f7e48132922f5775b3dc9821cadc0db1a15fb0895",
+    "porting/runtime-evidence/rustdoc-array-focused.log.gz": "7ef5d528b451170b10dc4b96c5f3546bbaf268fede71eb0986129316f9437790",
+    "porting/runtime-evidence/rustdoc-array-tools-full.log.gz": "10b13c1ee598a092180cbdd317e9bbfee9821290a7c5330a6806d76ee889fa10",
+    "porting/runtime-evidence/rustdoc-array-tkernel.log.gz": "99398ce77fe8b01a8102f69164a5a8da4be2b3c094b2583eb8e97578a45f802a",
+    "porting/runtime-evidence/rustdoc-array-fixture.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+  }
+}
