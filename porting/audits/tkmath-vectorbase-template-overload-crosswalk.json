@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "pinned_occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Exact compiler selector repairs for 14 existing VectorBase API rows. This does not add Rust behavior, broaden behavioral coverage, or change declaration/test counts.",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1), -std=c++17",
+  "header_sha256": "d68820c34a6cb97d0eeec2639b9c1948c9e0934ddc9cba5d88b22256c0f68369",
+  "implementation_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+  "native_probe": {
+    "source": "tools/oracle/tkmath_vectorbase_unclaimed.cxx",
+    "source_sha256": "9faec46283c62e0710f506d98ba3eb1bcedb3dba2385db18d2c0f6350fcd391b",
+    "expected": "tools/oracle/tkmath_vectorbase_unclaimed.expected",
+    "expected_sha256": "5619c4fa70db5c341f6a7f31150034d2762e2996899f18b7dd71fcc0f6243894",
+    "comparison": "byte-for-byte cmp passes",
+    "instructions_sha256": "56507e03106ccd1a0b1e86cb929d82796b620bc0ddf72c5e06f209765e27c1c0",
+    "compiler_version": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "command": "g++ -std=c++17 -I<workspace>/target/occt-modeling-full/include/opencascade tools/oracle/tkmath_vectorbase_unclaimed.cxx -L<workspace>/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,<workspace>/target/occt-modeling-full/lin64/gcc/libi -lTKMath -lTKernel"
+  },
+  "rust_regression": {
+    "path": "crates/tkmath/tests/vectorbase_compiler_selector_mapping.rs",
+    "sha256": "66627d89163071dea7e99e009a3c30821b0170948f7ca3b9d1f3c3f3562623e2",
+    "passes": 1
+  },
+  "validation": {
+    "cargo_toolchain": "1.98.1",
+    "full_tkmath_command": "cargo +1.98.1 test -p rustycad-tkmath",
+    "full_tkmath_exit": 0,
+    "full_tkmath_result_groups": {
+      "result_groups": 246,
+      "passed": 2752,
+      "failed": 0,
+      "ignored": 0
+    },
+    "strict_clippy_command": "cargo +1.98.1 clippy -p rustycad-tkmath --all-targets -- -D warnings",
+    "strict_clippy_exit": 0,
+    "native_instructions": {
+      "path": "tools/oracle/tkmath_vectorbase_unclaimed.md",
+      "sha256": "56507e03106ccd1a0b1e86cb929d82796b620bc0ddf72c5e06f209765e27c1c0"
+    },
+    "cargo_log": {
+      "path": "porting/audits/tkmath-vectorbase-cargo-test.log.gz",
+      "sha256": "7dc5e6e2241ab9c78f1c77b954e51672034e70877ed80f9f0e25486f813cb6d3"
+    },
+    "strict_clippy_log_sha256": "249c7f2cf2383ec6eae09d67af284ae9e7a5cf88be400f5b7ea75d725cd24e17",
+    "tested_rust_revision": "b19491ba66ff649a6c894111fb8af6963a1349bf",
+    "rebased_integration_base": "5236416ea7f62a3cc1adb0c7bb0ed53080461a2e",
+    "original_worktree_base": "e8b00116b46edfb699b93817d67cd4a833f8fe04",
+    "rust_toolchain_detail": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
+  },
+  "mappings": [
+    {
+      "selector": "math_VectorBase::Add(const math_VectorBase<T>&)",
+      "compiler_id": "0e005583a022c609c992d46cf9ada25c2ceb36334295c55c4d1bdbcd329cf54e",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::add"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Add(const math_VectorBase<T>&,const math_VectorBase<T>&)",
+      "compiler_id": "4949900f71be4269c320e2178ca53284ccd05c16538098a5c6e882623daca309",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &, const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_sum"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Added(const math_VectorBase<T>&) const",
+      "compiler_id": "3c1ed2616fc04e0b67862dbb4f9505792c8d9413484dc84a23991b250003bd2a",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "math_VectorBase<T> (const math_VectorBase<T> &) const",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::added"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Initialized(const math_VectorBase<T>&)",
+      "compiler_id": "06d6fa9ca55043cb5dc5021790e86a33ec98d79c28cb1c018e9963332bb1f90e",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "math_VectorBase<T> &(const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::initialized"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector.rs",
+          "sha256": "75540d94db723d1fc3f9c50165fa69be4d522049cda8dc590a33c1f430dc333f"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Multiplied(const math_VectorBase<T>&) const",
+      "compiler_id": "766d8ebd589d741e5ed5ced9b2cc05b7e71572b063a5d5c75d3fd5ead2f3c41e",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "type-parameter-0-0 (const math_VectorBase<T> &) const",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::dot"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Multiply(const class math_Matrix&,const math_VectorBase<T>&)",
+      "compiler_id": "4e643a2ff12cc2ef711bdefeb72651d5bca509ee1d6cbfdfd1d26a20832bf744",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const class math_Matrix &, const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_matrix_vector"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/matrix.rs",
+          "sha256": "8d716c71dfa51ef301b2728fd932148f2e435e358234fa54e6dcba040ac643cd"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Multiply(const math_VectorBase<T>&,const class math_Matrix&)",
+      "compiler_id": "9e71f9561682d9f3b6d0b45813677238f6afaacbb6e348b9d1d83cdcf8d62a2d",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &, const class math_Matrix &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_vector_matrix"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/matrix.rs",
+          "sha256": "8d716c71dfa51ef301b2728fd932148f2e435e358234fa54e6dcba040ac643cd"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Set(int,int,const math_VectorBase<T>&)",
+      "compiler_id": "a38d67e9bbedfe32ef65a49e423816cb6a9180254e56b51cf430292872c73497",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (int, int, const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Subtract(const math_VectorBase<T>&)",
+      "compiler_id": "a78b4a5898daf7555e3c512e43780ef1e1da5e085ca00f5a07c3b7868fce1637",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::subtract"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Subtract(const math_VectorBase<T>&,const math_VectorBase<T>&)",
+      "compiler_id": "c5a06cc9890d8fc1c12fce1c8b94f0f25fe043088e1f1e240bfbf678ca51b71c",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &, const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_difference"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::Subtracted(const math_VectorBase<T>&) const",
+      "compiler_id": "f7366b8e8fbd468934d2714612a68a67b0c5ce36cecb8f0c9f54f44eec913815",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "math_VectorBase<T> (const math_VectorBase<T> &) const",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::subtracted"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/algebra.rs",
+          "sha256": "73f2a4b9a990a12e903e6801621b1f52c2f7d4d14aa98ec67b3c913839747c30"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::TMultiply(const class math_Matrix&,const math_VectorBase<T>&)",
+      "compiler_id": "2b6ce59901f4616e4b6dad0294e8d895b99b1ceca293f50d681d70a2d0a5fa36",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const class math_Matrix &, const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_transpose_matrix_vector"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/matrix.rs",
+          "sha256": "8d716c71dfa51ef301b2728fd932148f2e435e358234fa54e6dcba040ac643cd"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::TMultiply(const math_VectorBase<T>&,const class math_Matrix&)",
+      "compiler_id": "97871c21718ff15a7d1e65fe8e32df161159e94b5af2a1cfc765e158ed3a454a",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "void (const math_VectorBase<T> &, const class math_Matrix &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.lxx",
+      "native_source_sha256": "d14b14d7cab257576b442bc9612e2bb3c0781c2efa0ff0dcb0cb129a808ad46c",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::set_vector_transpose_matrix"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector/matrix.rs",
+          "sha256": "8d716c71dfa51ef301b2728fd932148f2e435e358234fa54e6dcba040ac643cd"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "selector": "math_VectorBase::operator=(const math_VectorBase<T>&)",
+      "compiler_id": "b713bd8b9f5bca9160b258ce636efd5c6009c486d23c5b30a683c0fb7faf03ab",
+      "compiler_kind": "CXXMethod",
+      "compiler_signature": "math_VectorBase<T> &(const math_VectorBase<T> &)",
+      "native_source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
+      "native_source_sha256": "d68820c34a6cb97d0eeec2639b9c1948c9e0934ddc9cba5d88b22256c0f68369",
+      "rust_targets": [
+        "rustycad_tkmath::math::VectorBase::initialized"
+      ],
+      "rust_sources": [
+        {
+          "path": "crates/tkmath/src/math/vector.rs",
+          "sha256": "75540d94db723d1fc3f9c50165fa69be4d522049cda8dc590a33c1f430dc333f"
+        }
+      ],
+      "before": "missing_cpp",
+      "after": "implemented",
+      "scope_note": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    }
+  ],
+  "crosswalk_current_report": "/tmp/vectorbase-api-report-current.json (against local committed compiler/Rust inventory; not a published snapshot)"
+}
