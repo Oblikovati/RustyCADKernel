@@ -1,33 +1,40 @@
 {
   "base_revision": "0b15f01376f8e41a61dd2ea20c0c04c81dabf0e3",
-  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "native": {
-    "compiler": "g++ 13.3.0",
     "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade tools/oracle/tkernel_matrix_vector_products.cxx -o /tmp/tkernel-matrix-vector-products-native",
-    "output_matches_expected": true,
+    "compiler": "g++ 13.3.0",
+    "compiler_declaration_ids": [
+      "305bb133dd11aaa54fc1801b4aa52289e9484d4b724174a8219764586c5d2b34",
+      "92efda460c7060fc03de3dd553826b026890916919c6d895b8c4f5de777f6567"
+    ],
     "expected_sha256": "92fe8f29493926fea791169eb5ff97dfa4b07bfbab3b516eefba0b51bb17a712",
     "header_sha256": {
       "NCollection_Mat3.hxx": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51",
       "NCollection_Mat4.hxx": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
-    "compiler_declaration_ids": [
-      "305bb133dd11aaa54fc1801b4aa52289e9484d4b724174a8219764586c5d2b34",
-      "92efda460c7060fc03de3dd553826b026890916919c6d895b8c4f5de777f6567"
-    ]
+    "output_matches_expected": true
   },
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "rust": {
-    "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)",
-    "test_command": "cargo +1.98.1 test -p rustycad-tkernel",
-    "test_groups": 176,
-    "passed": 2813,
-    "failed": 0,
-    "ignored": 0,
     "clippy_command": "cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
     "clippy_passed": true,
+    "failed": 0,
+    "fresh_rustdoc_json_sha256": "e1223e151746ad25bbe4df5c23be36a4e1495ab15defa684759676801d8fee43",
+    "ignored": 0,
     "log_gzip": "tkernel-matrix-vector-products-full.log.gz",
+    "normalized_paths": [
+      "rustycad_tkernel::ncollection::Mat3::<core::ops::arith::Mul<rustycad_tkernel::ncollection::vector::Vec3<T>>>::mul",
+      "rustycad_tkernel::ncollection::Mat4::<core::ops::arith::Mul<rustycad_tkernel::ncollection::vector::Vec4<T>>>::mul"
+    ],
+    "passed": 2814,
+    "published_normalized_inventory_sha256": "8819de64e814bddeaafbb9fc343fd25bf45b8ac725df500507f209e077b2e8fc",
     "source_sha256": {
       "crates/tkernel/src/ncollection/square_matrix.rs": "ec2c76454408e4b543878c28d8c78942d3d1acc809dcfc0f102cb2b7b74f7462",
-      "crates/tkernel/tests/ncollection_matrix_vector_products.rs": "0f19b61c23cc5fa540cf89038b6ef3dd8b6bcb36a27b22b7aad3db17910efbeb"
-    }
+      "crates/tkernel/tests/ncollection_matrix_vector_products.rs": "53329104aa0995880d6be06303b2c9a8e7ab79f532d5cea03755dfa6adf07a99",
+      "porting/parity.json": "2a60dec2c06f4dffe54d5a6ad5e18551c129f5e934242d27bab5f7c26f1344f5"
+    },
+    "test_command": "cargo +1.98.1 test -p rustycad-tkernel",
+    "test_groups": 176,
+    "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)"
   }
 }

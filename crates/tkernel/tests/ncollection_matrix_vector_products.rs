@@ -33,6 +33,19 @@ fn mat3_vector_product_uses_only_copy_add_and_multiply() {
 }
 
 #[test]
+fn mat4_vector_product_uses_only_copy_add_and_multiply() {
+    let matrix = Mat4::from_data(std::array::from_fn(|index| BinaryOnly(index as i32 + 1)));
+    let vector = Vec4::new(BinaryOnly(1), BinaryOnly(2), BinaryOnly(3), BinaryOnly(4));
+
+    let product = matrix * vector;
+
+    assert_eq!(
+        [product.x.0, product.y.0, product.z.0, product.w.0],
+        [90, 100, 110, 120]
+    );
+}
+
+#[test]
 fn signed_integer_products_preserve_native_column_major_order() {
     let mat3 = Mat3::from_data(std::array::from_fn(|index| index as i32 + 1));
     let mat4 = Mat4::from_data(std::array::from_fn(|index| index as i32 + 1));
