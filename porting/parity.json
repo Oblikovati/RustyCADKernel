@@ -85381,8 +85381,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_c_units",
-      "status": "partial",
-      "notes": "The bounded adapter scans to the first zero and validates the index before null/empty input. It covers non-aliased external buffers; the native pointer overload also accepts self-aliasing pointers, whose reallocation behavior is not modeled by this safe adapter."
+      "status": "implemented",
+      "notes": "The bounded adapter matches the pointer overload for non-aliased inputs. Nonempty self-aliasing is outside the native-defined domain: the explicit-length overload returns for empty input; otherwise it reallocates before reading that pointer."
     },
     {
       "upstream_id": "TCollection_ExtendedString::Insert(int,const TCollection_ExtendedString&)",
@@ -85437,8 +85437,12 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units",
-      "status": "partial",
-      "notes": "The bounded adapter scans to the first zero and validates the index before null/empty input. It covers non-aliased external buffers; self-aliasing pointer behavior is not modeled by this safe adapter."
+      "status": "implemented",
+      "notes": "The bounded adapter covers non-aliased inputs; set_value_c_units_from_self models the defined in-place overlap path when the write stays within Length(). Self-alias writes that grow the string are refused because native reallocation invalidates the pointer before it is read.",
+      "rust_items": [
+        "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units",
+        "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units_from_self"
+      ]
     },
     {
       "upstream_id": "TCollection_ExtendedString::SetValue(int,const TCollection_ExtendedString&)",
