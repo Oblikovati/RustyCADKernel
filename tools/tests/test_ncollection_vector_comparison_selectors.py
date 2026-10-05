@@ -1,4 +1,4 @@
-"""Bind vector comparison selectors to exact declarations."""
+"""Bind collection comparison selectors to exact declarations."""
 
 import gzip
 import json
@@ -9,6 +9,16 @@ from api_crosswalk import cpp_candidates, cpp_indexes
 
 ROOT = Path(__file__).resolve().parents[2]
 ROWS = (
+    (
+        "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept",
+        "1ea4eb28cc74bffb0498a53af80854ee310c5f008b3d805650d3bf8e8881a7e5",
+        "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
+    ),
+    (
+        "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept",
+        "d07c339f7869fe0440be0d3330a93aad911e7d0a71e9bc9092b8c854401c2e09",
+        "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
+    ),
     (
         "NCollection_Vec2::operator/=(Element_t)",
         "a6ae7bcd5ef27366f8deb58284ddba3d457c64e6c47712eeb7be01f99e3ca12b",
