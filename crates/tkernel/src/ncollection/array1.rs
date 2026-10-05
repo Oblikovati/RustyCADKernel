@@ -111,9 +111,10 @@ impl<'a, T> Array1<'a, T> {
     /// Views a read-only buffer with the given lower bound, as the native
     /// `NCollection_Array1(const_reference, lower, upper)` constructor does.
     ///
-    /// The view does not own its storage (`is_deletable()` is false). Native code
-    /// must not write through such a view; here the first mutable access copies
-    /// the values into owned storage instead, so the shared buffer never changes;
+    /// The view does not own its storage (`is_deletable()` is false). The native
+    /// overload can create a writable alias when the original buffer is mutable.
+    /// Rust's shared borrow instead copies on first mutable access, so the original
+    /// buffer never changes;
     /// `Array1::from_shared(&[1.0, 1.0], 1).upper() == 2`.
     pub fn from_shared(buffer: &'a [T], lower: i32) -> Self
     where
