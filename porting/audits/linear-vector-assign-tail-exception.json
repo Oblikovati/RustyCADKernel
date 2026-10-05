@@ -1,0 +1,38 @@
+{
+  "base_revision": "618b8d769bb441c2d79d17cff1a257485a5d249b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "declaration": "NCollection_LinearVector::operator=(const NCollection_LinearVector<TheItemType>&)",
+  "native_behavior": {
+    "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+    "source_sha256": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",
+    "legacy_test_source_sha256": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31",
+    "probe": "tools/oracle/tkernel_linear_vector_assign_tail_exception.cxx",
+    "probe_sha256": "ec916a7d7ef0eb9c14f11a7c9f942ea260bfcf82f8742e26bce4c9a0f32eeff4",
+    "expected": "tools/oracle/tkernel_linear_vector_assign_tail_exception.expected",
+    "expected_sha256": "385213a1aca4b674e9297ecea6009d49f94b3afd939e3e5970d58549c06dafb9",
+    "compiler": "g++ 13.3.0",
+    "flags": ["-std=c++17", "-O2"],
+    "linked_library": "libTKernel.so.8.0.0",
+    "linked_library_sha256": "78221dc495f8316c2a28e4fd9202920efdd17e056549006646ffd81bd0ddcc87",
+    "command_exit_code": 0,
+    "output": "assignment_failure 4 1 2 1 0 0 10\nafter_destruction 2 1 0 4",
+    "finding": "The common prefix assignment remains visible and Size remains 1 after tail copy #2 throws. Copy #1 completed construction but is not counted as destroyed after the vector leaves scope; the throwing construction itself is not completed."
+  },
+  "rust_behavior": {
+    "source": "crates/tkernel/src/ncollection/linear_vector.rs",
+    "source_sha256": "0783d152df4556f404249788f4368838e057537ae5e3bfb8d7896ef36374860a",
+    "test": "crates/tkernel/tests/ncollection_linear_vector/assign_tail.rs",
+    "test_sha256": "dd55f9e0877ffee3cc41a995af5cac672e660c1efe4bab539f6a6372d0e5e8df",
+    "harness": "crates/tkernel/tests/ncollection_linear_vector_exception_state.rs",
+    "harness_sha256": "fe4999d1a7371ff2d57625baf3a2c35b7efb70d61a1f0a45437d93e2f2a9a86d",
+    "command": "cargo +1.98.1 test -p rustycad-tkernel --test ncollection_linear_vector_exception_state",
+    "rustc": "rustc 1.98.1 (797e8a9bc 2026-08-05)",
+    "exit_code": 0,
+    "result": "15 passed; 0 failed; 0 ignored",
+    "strict_clippy_command": "cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "strict_clippy_exit_code": 0,
+    "finding": "Rust preserves the common assignment and prior logical length, then drops the successfully cloned tail slot during rollback. After source and destination drops, the tracked drop count is 5, one higher than native."
+  },
+  "parity": "partial",
+  "limitation": "Rust unwinds and destroys the successfully constructed tail value; OCCT leaves it untracked in raw storage after the copy constructor throws. The functional values and published size agree for this fixture, but cleanup behavior differs."
+}

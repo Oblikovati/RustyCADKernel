@@ -8,3 +8,6 @@ mod append_order;
 
 #[path = "ncollection_linear_vector/resize_value_ref.rs"]
 mod resize_value_ref;
+
+#[path = "ncollection_linear_vector/assign_tail.rs"]
+mod assign_tail;
