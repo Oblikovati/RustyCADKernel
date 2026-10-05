@@ -2,6 +2,7 @@
 use super::{
     ExtendedString,
     errors::{int_length, offset, out_of_range},
+    utf,
 };
 use crate::standard::Failure;
 impl ExtendedString {
@@ -17,6 +18,14 @@ impl ExtendedString {
             .position(|window| window == what)
             .map_or(-1, |start| int_length(start + 1))
     }
+    /// Searches a bounded UTF-16 C string, stopping at NUL; `text.search_c_units(Some(&[65, 0, 66]))`.
+    /// A null pointer is represented by `None` and returns `-1`.
+    pub fn search_c_units(&self, what: Option<&[u16]>) -> i32 {
+        let Some(what) = what else {
+            return -1;
+        };
+        self.search(utf::c_units_prefix(what))
+    }
     /// One-based start of the last occurrence, or -1; `ExtendedString::new("hello").search_from_end(&[108]) == 4`.
     pub fn search_from_end(&self, what: impl AsRef<[u16]>) -> i32 {
         let what = what.as_ref();
@@ -27,6 +36,14 @@ impl ExtendedString {
             .windows(what.len())
             .rposition(|window| window == what)
             .map_or(-1, |start| int_length(start + 1))
+    }
+    /// Searches a bounded UTF-16 C string from the end, stopping at NUL;
+    /// `text.search_from_end_c_units(Some(&[65, 0, 66]))`.
+    pub fn search_from_end_c_units(&self, what: Option<&[u16]>) -> i32 {
+        let Some(what) = what else {
+            return -1;
+        };
+        self.search_from_end(utf::c_units_prefix(what))
     }
     /// Copies the inclusive one-based range `from..=to`, zero units included;
     /// `ExtendedString::new("abcdefg").sub_string(3, 6)?`.

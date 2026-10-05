@@ -1,0 +1,72 @@
+{
+  "scope": "TCollection_ExtendedString UTF-16 null-terminated search overloads",
+  "base_commit": "567edc787ce43bd101f3cfe0ad1f7fa76197a5f8",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source": {
+    "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+    "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+    "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c",
+    "native_behavior": "The inline pointer overload computes extStringLen and delegates to the explicit-length implementation. Null and zero-length needles return -1; nonempty searches return one-based first/last positions or -1."
+  },
+  "mappings": [
+    {
+      "cpp_id": "9ff3f4edd949ea7a0c90e570c89f02270c483ce599e8be256d4107b49f883df0",
+      "upstream_id": "TCollection_ExtendedString::Search(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_c_units",
+      "rustdoc_path_count": 1,
+      "rust_source": "crates/tkernel/src/tcollection/extended_string/search.rs",
+      "rust_source_sha256": "7c040826a75e4303fa7e05aead5d75b285e33fdb0edbdc432d0a5346203926c9",
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "791645a5b502f310474a37b9601cf95e3be1650d6e03c2e62d30890087cdfc16",
+      "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end_c_units",
+      "rustdoc_path_count": 1,
+      "rust_source": "crates/tkernel/src/tcollection/extended_string/search.rs",
+      "rust_source_sha256": "7c040826a75e4303fa7e05aead5d75b285e33fdb0edbdc432d0a5346203926c9",
+      "status": "implemented"
+    }
+  ],
+  "rustdoc_validation": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "raw_capture": "rustdoc-target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "908e361321a9b193c2815ea48ad88c364842ce6473ed1f0fddf5b1a840c521ae",
+    "normalized_capture": "target/extended-search-rustdoc-inventory.json",
+    "normalized_capture_sha256": "50ca8188332773e1c7810458f872097bf91b934ee7a31a2cb3675c243e82d9fe",
+    "policy": "Private TKernel-only capture and reachability normalization; no published/global inventory snapshot was regenerated. Both exact public Rust paths occur once and point to the recorded source hash."
+  },
+  "native_evidence": {
+    "fixture": "tools/oracle/tkernel_extended_string_c_units_search.cxx",
+    "fixture_sha256": "eeef86d0a2595b0cfab4a1fe25990b23e888d822e3f2a84b2470cd98cb850398",
+    "expected": "tools/oracle/tkernel_extended_string_c_units_search.expected",
+    "expected_sha256": "fa1c1d1f8f81a5b17db6965e50b1621c13a0e2fc63ee6e7b80e5d68a5e023036",
+    "library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "output_matches_expected": true,
+    "cases": [
+      "Embedded NUL truncates the pointer search before the later B unit.",
+      "Explicit-length search preserves the complete three-unit span and does not match.",
+      "Forward and reverse search return first and last one-based matches.",
+      "Empty and null pointer inputs return -1."
+    ],
+    "executable_sha256": "4efbdf20466ca8112d7ecdbb2efc95a62f2f1f89717cb6e8b5b8535746dacf70"
+  },
+  "rust_evidence": {
+    "supplemental_test": "crates/tkernel/tests/extended_string_c_units_search.rs",
+    "supplemental_test_sha256": "e877f03bfa4a050facfc14aaba8124feeadec2c4b6ce288c996066bc592ccf6b",
+    "test_command": "cargo test -p rustycad-tkernel --test extended_string_c_units_search --test tcollection_extended_string",
+    "test_log": "porting/runtime-evidence/extended-string-c-units-search-tests.log.gz",
+    "test_log_sha256": "8a324f18687e31b4d9cc396ee4e4281678572711173036a081496629276967d8",
+    "passed": 107,
+    "failed": 0,
+    "groups": 2,
+    "clippy_command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-c-units-search-clippy.log",
+    "clippy_log_sha256": "65bf9b65a05d14503c221706455171f7a5728f5b3c7c24d3f8211710b11808bf",
+    "clippy_exit_code": 0
+  },
+  "parity_file_sha256": "61d6ae40888c5108c345a419778fb97f20c9a3d27d6b225e1111bd2ff9129112",
+  "limits": "Option<&[u16]> safely models null versus bounded readable UTF-16 storage; it does not model an invalid/dangling native pointer or scan beyond the caller-provided slice. Explicit-span Rust search methods remain unchanged."
+}
