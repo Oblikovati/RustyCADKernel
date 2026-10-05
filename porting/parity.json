@@ -85515,6 +85515,10 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
+      "rust_items": [
+        "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
+        "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units_from_self"
+      ],
       "status": "implemented",
       "notes": "Valid bounded external C-string input is handled by prepend_c_units; receiver-alias input is handled by prepend_c_units_from_self(start), which scans from the aliased receiver offset through the first zero, including the terminator boundary. Native and Rust probes cover the split adapter paths."
     },
