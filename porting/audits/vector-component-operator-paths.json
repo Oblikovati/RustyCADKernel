@@ -1,0 +1,46 @@
+{
+  "schema": "rustycad.native-behavior-receipt.v1",
+  "scope": "NCollection_Vec2/Vec3/Vec4 componentwise element operator dispatch",
+  "upstream": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "headers": {
+      "NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+      "NCollection_Vec3.hxx": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f",
+      "NCollection_Vec4.hxx": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66"
+    },
+    "source_evidence": {
+      "Vec2": "operator+= through operator/=: direct per-element value operators and per-element compound assignments",
+      "Vec3": "operator+= through operator/=: value operators copy the vector then invoke matching compound assignment",
+      "Vec4": "operator+= through operator/=: value operators copy the vector then invoke matching compound assignment"
+    }
+  },
+  "native_probe": {
+    "source": "tools/oracle/tkernel_vector_component_operator_paths.cxx",
+    "source_sha256": "efe0d5f69034f595345bf01f465c4d4e06bd1447b9d55b85aab2dec3c6676a91",
+    "expected": "tools/oracle/tkernel_vector_component_operator_paths.expected",
+    "expected_sha256": "6c07ae9522f8795b8b1814251c9ada0b27321b6006a3dd40617ddbac89f1ed23",
+    "binary_sha256": "b0c8601542682526f979b7d1eb7a74c96ad6140d156248989261dbdf46a9609c",
+    "compiler": "g++ 13.3.0",
+    "command": "c++ -std=c++17 -I /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/tkernel_vector_component_operator_paths.cxx -o /tmp/vector-component-operator-paths && /tmp/vector-component-operator-paths > /tmp/vector-component-operator-paths.actual",
+    "result": "captured output matches expected exactly"
+  },
+  "rust": {
+    "implementation": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+    "implementation_sha256": "a95812c808e9dd6e2f4d4036a452f993161417a6d15e4c095775f4374323e270",
+    "test": "crates/tkernel/tests/ncollection_vector_operator_paths.rs",
+    "test_sha256": "0249e97f3aaa78ec720d9f904289bdf169048ae6faa1f1ce4679aff49dbd48dc",
+    "focused_test": "cargo test -p rustycad-tkernel --test ncollection_vector_operator_paths",
+    "focused_result": "6 passed, 0 failed",
+    "package_test": "cargo test -p rustycad-tkernel",
+    "package_result": "163 result groups, 2751 passed, 0 failed, 0 ignored",
+    "package_log_sha256": "ee2f39306490c01c279d5c960d3afeb2654be05c0f18acc940928b37af960768",
+    "clippy": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_result": "passed",
+    "package_log": "porting/audits/vector-component-operator-paths-tkernel-tests.log.gz"
+  },
+  "limits": [
+    "This supplements template behavior evidence and does not add legacy-test declarations.",
+    "Undefined or overflowing custom element operators are outside the validated domain.",
+    "Scalar division, including Vec3/Vec4 reciprocal specializations, is outside this change."
+  ]
+}
