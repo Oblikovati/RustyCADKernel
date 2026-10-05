@@ -1,0 +1,127 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "ExtendedString comparison operators and std::hash compiler crosswalk repair",
+  "base_commit": "612d9b284870ac88b3192c676ecdeda326a8e44b",
+  "occt": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "source": {
+      "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+      "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+      "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c"
+    },
+    "compiler_inventory": {
+      "path": "porting/api-inventory/occt-declarations.jsonl.gz",
+      "sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095"
+    },
+    "crosswalk_before_fix": {
+      "path": "porting/api-inventory/api-crosswalk.json.gz",
+      "sha256": "10edcbfc6984a15f8b6a195d58d96a6e74abda5a2ec8c7d356ff7a17dbe7d7c4",
+      "resolution": "missing_rust_target for all four declarations"
+    },
+    "build_flags": {
+      "path": "target/occt-modeling-full/src/FoundationClasses/TKernel/CMakeFiles/TKernel.dir/flags.make",
+      "sha256": "856b97d4694fe98933433da341e1742abefce30e09ca4d65ebff19dc4bc2abcd"
+    },
+    "library": {
+      "path": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+      "sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+    },
+    "declarations": [
+      {
+        "id": "4c619292b04dd03b03df0d490ae49a04ed7f5fe401bf7c946c05e86499f2890a",
+        "selector": "TCollection_ExtendedString::operator!=(const TCollection_ExtendedString&) const",
+        "signature": "bool (const class TCollection_ExtendedString &) const",
+        "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different"
+      },
+      {
+        "id": "c6b1bdb1671dd4ffb9b038a006442d5000cae136e27cac6b2a2ccd410accaac7",
+        "selector": "TCollection_ExtendedString::operator<(const TCollection_ExtendedString&) const",
+        "signature": "bool (const class TCollection_ExtendedString &) const",
+        "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less"
+      },
+      {
+        "id": "23df593f438773748dc30ae17bd221a3cdc9f7ad158da38c1099d7e78d9efff6",
+        "selector": "TCollection_ExtendedString::operator>(const TCollection_ExtendedString&) const",
+        "signature": "bool (const class TCollection_ExtendedString &) const",
+        "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater"
+      },
+      {
+        "id": "38b3b8581c25cc9dc0ca8a72977f0d08dcff5f3258babc2e55b750fba0def16e",
+        "selector": "std::hash<TCollection_ExtendedString>::operator()(const TCollection_ExtendedString&) const",
+        "signature": "unsigned long (const class TCollection_ExtendedString &) const",
+        "rust_item": "rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash"
+      }
+    ],
+    "behavior_evidence": {
+      "probe": "tools/oracle/tkernel_extended_string_operator_traits.cxx",
+      "probe_sha256": "bfcc3966a2c5ac5f76169c76da481e18df6de6cf36ddc5803ffe997ad2e19ce0",
+      "expected": "tools/oracle/tkernel_extended_string_operator_traits.expected",
+      "expected_sha256": "80adc6768a1f8fd9c01ab83b66ddcc87f542c217533b866ffca62700b3a0738a",
+      "executable_sha256": "616dd5b24999bf5a0a0d4cc9405e24403d85d71444f0d6f1d825b8c4c6722337",
+      "probe_log": "porting/runtime-evidence/extended-string-operator-traits-native-probe.log.gz",
+      "probe_log_sha256": "59040cac21f129138d06c64e0664c2daa0925c24b71f18eb3d88c631a64f65e8",
+      "probe_matches_expected": true,
+      "gtest_filter": "TCollection_ExtendedStringTest.Comparison:TCollection_ExtendedStringTest.HashCode",
+      "gtest_result": "2 passed, 0 failed",
+      "gtest_log": "porting/runtime-evidence/extended-string-operator-traits-native-gtest.log.gz",
+      "gtest_log_sha256": "7bc10dec6b41d3220592d6eadb673b5eff177a5ee21d8fc71a488ac9a398a993",
+      "cases": "Embedded-zero strings compare all UTF-16 units; prefix ordering and unsigned high-unit ordering match. std::hash returns HashCode for empty, non-ASCII, multi-unit, embedded-zero, and high-unit inputs."
+    }
+  },
+  "rust": {
+    "inventory": {
+      "path": "porting/api-inventory/rust-api.json.gz",
+      "sha256": "6f413d157634f8066a0eeb9c3da9d0e8b0668d878a336aa59201b89548829a22",
+      "unique_path_counts": {
+        "rustycad_tkernel::tcollection::ExtendedString::is_different": 1,
+        "rustycad_tkernel::tcollection::ExtendedString::is_less": 1,
+        "rustycad_tkernel::tcollection::ExtendedString::is_greater": 1,
+        "rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash": 1
+      }
+    },
+    "source_hashes": {
+      "crates/tkernel/src/tcollection/extended_string.rs": "baafd0c1e4ac976a4ad99aff8cdb0e88c3cf83ffd472f55cf4c3751a96807809",
+      "crates/tkernel/src/tcollection/extended_string/conversion.rs": "4b094b9dc6d800248d7135b33a10b4befbce08ccf1d72dcc410e811561c3e33d",
+      "crates/tkernel/src/tcollection/extended_string/traits.rs": "d05fd8de9a1e196a965285b8336187eff91f84caa69a25e9a73e17c54c90c96b"
+    },
+    "rustdoc": {
+      "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+      "format_version": 61,
+      "raw_capture_sha256": "a3d309227ff1c7e99e3faee770905ca685ddf0614aa0680c7ac1d542c4e29e94",
+      "compressed_capture": "porting/runtime-evidence/extended-string-operator-traits-rustdoc.json.gz",
+      "compressed_capture_sha256": "4c63a961cddcbc8d13936dfbea539b6eadb6f4d48b77796d569f2afc2cae6824",
+      "log": "porting/runtime-evidence/extended-string-operator-traits-rustdoc.log.gz",
+      "log_sha256": "1ccb0237d617e362a0e87b33b8e7b349c1fc23960fc509ae8d3d8bdf8948d705",
+      "raw_item_ids": {
+        "is_different": "19455",
+        "is_less": "19457",
+        "is_greater": "19459",
+        "occt_hash": "7037"
+      }
+    },
+    "supplemental_tests": {
+      "path": "crates/tkernel/tests/extended_string_operator_traits.rs",
+      "sha256": "1ebf8cd58f2d5a10f3f8a1355ee643305fbfd75afdf6212eec6fbb7546beca85",
+      "cases": 2,
+      "command": "cargo test -p rustycad-tkernel --test tcollection_extended_string --test extended_string_operator_traits",
+      "result": "107 passed, 0 failed across 2 result groups",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/extended-string-operator-traits-focused.log.gz",
+      "log_sha256": "38ee5cd4b940cc8fbd44482a201fb4edfcdd5db36539bc6af9eaad1a3b60c81c2"
+    },
+    "clippy": {
+      "command": "cargo clippy -p rustycad-tkernel --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "porting/runtime-evidence/extended-string-operator-traits-clippy.log.gz",
+      "log_sha256": "03967ab939568be64f844da5bd34b41a1f5c887f74acb763a5b3b5c5ec40533b"
+    },
+    "fmt_exit_code": 0
+  },
+  "parity": {
+    "path": "porting/parity.json",
+    "sha256": "91b8b04875812fa90c01697f1c629a193eef9ec7f3e7c688a1677b882cb1c5d8",
+    "statuses_unchanged": true,
+    "original_legacy_test_declaration_count_changed": false
+  }
+}
