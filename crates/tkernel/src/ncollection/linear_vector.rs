@@ -87,15 +87,13 @@ impl<T> LinearVector<T> {
     }
     /// Appends an owned value; `vector.append(42)`.
     pub fn append(&mut self, value: T) -> &mut T {
-        self.reserve(self.len() + 1);
-        self.elements.push(value);
-        self.elements
-            .last_mut()
-            .expect("append constructed the last element")
+        self.reserve_next_item();
+        self.push_reserved_item(value)
     }
     /// Constructs the next value from arguments captured by a closure; `vector.emplace_append(|| 42)`.
     pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
-        self.append(construct())
+        self.reserve_next_item();
+        self.push_reserved_item(construct())
     }
     /// Reads a checked zero-based index; `vector.value(0)?`.
     pub fn value(&self, index: usize) -> Result<&T, ArrayError> {
@@ -189,11 +187,24 @@ impl<T> LinearVector<T> {
             upper: self.len() as i64 - 1,
         }
     }
+
+    fn reserve_next_item(&mut self) {
+        let next_size = self.len() + 1;
+        self.reserve(next_size);
+    }
+
+    fn push_reserved_item(&mut self, value: T) -> &mut T {
+        self.elements.push(value);
+        self.elements
+            .last_mut()
+            .expect("reserved append constructed the last element")
+    }
 }
 impl<T: Default> LinearVector<T> {
     /// Appends a default value; `*vector.appended() = 42`.
     pub fn appended(&mut self) -> &mut T {
-        self.append(T::default())
+        self.reserve_next_item();
+        self.push_reserved_item(T::default())
     }
     /// Resizes, default-constructing new values; `vector.resize(10)`.
     pub fn resize(&mut self, size: usize) {
