@@ -2,6 +2,7 @@
 use super::{
     ExtendedString,
     errors::{leading_units, out_of_range},
+    utf,
 };
 use crate::standard::Failure;
 impl ExtendedString {
@@ -11,10 +12,25 @@ impl ExtendedString {
         let input = input.into();
         self.append_units(input.as_utf16());
     }
+    /// Appends a bounded null-terminated UTF-16 buffer; `text.assign_cat_c_units(Some(&[65, 0, 66]))`.
+    /// A null pointer is represented by `None` and appends nothing.
+    pub fn assign_cat_c_units(&mut self, units: Option<&[u16]>) {
+        let Some(units) = units else {
+            return;
+        };
+        self.append_units(utf::c_units_prefix(units));
+    }
     /// Returns a copy with converted input appended; `text.cat(b'!')`.
     pub fn cat(&self, input: impl Into<Self>) -> Self {
         let mut copy = self.clone();
         copy.assign_cat(input);
+        copy
+    }
+    /// Returns a copy with a bounded null-terminated UTF-16 buffer appended;
+    /// `text.cat_c_units(Some(&[65, 0, 66]))`. A null pointer uses `None`.
+    pub fn cat_c_units(&self, units: Option<&[u16]>) -> Self {
+        let mut copy = self.clone();
+        copy.assign_cat_c_units(units);
         copy
     }
     /// The (pointer, length) AssignCat: a null pointer or a length <= 0 appends nothing;

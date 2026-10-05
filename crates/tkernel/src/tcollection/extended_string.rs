@@ -18,11 +18,7 @@ impl ExtendedString {
     /// Copies UTF-16 through the first zero code unit (the `const char16_t*` constructor);
     /// `ExtendedString::from_utf16(&[0x20AC, 0])`.
     pub fn from_utf16(units: &[u16]) -> Self {
-        let end = units
-            .iter()
-            .position(|&unit| unit == 0)
-            .unwrap_or(units.len());
-        Self::from_raw(&units[..end])
+        Self::from_raw(utf::c_units_prefix(units))
     }
     /// Returns the stored code units without the terminator; `text.as_utf16()`.
     pub fn as_utf16(&self) -> &[u16] {
