@@ -56,7 +56,8 @@
   "limits": [
     "Ten scalar declarations remain partial for generic element lifetime/copy and floating environment contracts.",
     "Four explicit native float specializations map to the existing Rust division strategy, not four new Rust methods.",
-    "Supplemental tests do not add original OCCT test declarations."
+    "Supplemental tests do not add original OCCT test declarations.",
+    "Native constexpr callability is not reproduced by the generic Rust operator-trait methods."
   ],
   "behavioral_evidence": {
     "native_source": "tools/oracle/tkernel_vector_scalar_returns.cxx",
@@ -87,5 +88,81 @@
       "sha256": "5cf024497b1b104f1455228cc537ad772474651cbfc00e98a9609d3519757619",
       "exit_code": 0
     }
-  ]
+  ],
+  "integrated_compiler_validation": {
+    "source_revision": "223d849e60c9dd11734d219e43f7f29cfda55234",
+    "bindings": [
+      {
+        "path": "rustycad_tkernel::ncollection::Vec2::multiply_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+        "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+        "declaration_sha256": "7d5bce84d1a9518b3d3bdda1f0c75f70b99ad9dd359daa922a8a26caf11c1077"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "244fdf6f6e17aa52d8f3ab2432f98c630f51523b3349d51276a7a4e1299552c3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "244fdf6f6e17aa52d8f3ab2432f98c630f51523b3349d51276a7a4e1299552c3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::multiply_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+        "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+        "declaration_sha256": "dd6a0dd32a1d3ec342b5a3cdac7eae0bbd2bf17d173bb596ddfcd71d14c2bd7b"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "244fdf6f6e17aa52d8f3ab2432f98c630f51523b3349d51276a7a4e1299552c3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "4b4440db1539faae929772246576871720ca81cd644f5e3b7a65a435606211e3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "4b4440db1539faae929772246576871720ca81cd644f5e3b7a65a435606211e3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/scalar_division.rs",
+        "source_sha256": "6cef71b6c0dcebaddf108aac19231a31f61e0d085c22b19d20c4949cd15c191e",
+        "declaration_sha256": "4b4440db1539faae929772246576871720ca81cd644f5e3b7a65a435606211e3"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::multiply_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+        "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+        "declaration_sha256": "3b9f9cd7393bfb06c7c703c8e4ac9ab8505fc7f97a15f5c47510efe429c76624"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec2::divide_scalar_returning",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/arithmetic.rs",
+        "source_sha256": "bf2b655fcba5cb94868b5d7666489c0da8448e12300bf4088d3d03802875709b",
+        "declaration_sha256": "1de1717efde8ca1ad44d779517305d7157a0c2970d75905166277132a88680ef"
+      }
+    ],
+    "inventory_sha256": "d8e6983243a0a41cc76cd3d67ddaabd8be944b4fcc27597205c851f43aa285c3"
+  }
 }
