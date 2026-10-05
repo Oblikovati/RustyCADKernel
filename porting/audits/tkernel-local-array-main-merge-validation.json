@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "validated_commit": "fb2980021336eeb72a07b3cefd17a94b31810b28",
+  "main_commit_merged": "e1fe85e3",
+  "purpose": "TKernel validation after merging the Array1 borrowed-initializer dependency",
+  "command": "CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_TARGET_DIR=/tmp/rustycad-local-array-target cargo +1.98.1 test -p rustycad-tkernel",
+  "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01), LLVM 22.1.8",
+  "test_groups": 188,
+  "passed": 2843,
+  "failed": 0,
+  "ignored": 0,
+  "log_gzip": "porting/runtime-evidence/tkernel-local-array-main-merge-tests.log.gz",
+  "uncompressed_log_sha256": "99da2a89a68cc9490b4660d5c88909d1fb0e2250be2144f2f366e31dc3a83ce5",
+  "fmt": "cargo +1.98.1 fmt --all -- --check passed",
+  "clippy": "CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_TARGET_DIR=/tmp/rustycad-local-array-target cargo +1.98.1 clippy -p rustycad-tkernel --all-targets -- -D warnings passed",
+  "native_probe_receipts": "porting/audits/tkernel-local-array-reallocate.json"
+}

@@ -69890,16 +69890,18 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::allocate",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+      "status": "partial",
+      "notes": "Rust preserves original array state when replacement default construction panics. Native constructs replacement before publishing it but leaks the partially constructed raw buffer on a throwing element constructor; Rust drops that partial replacement. Successful allocation/retention behavior remains covered by the original LocalArray tests. See tools/oracle/tkernel_local_array_reallocate_exception.md.",
+      "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
       "upstream_id": "NCollection_LocalArray::Reallocate(size_t,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::reallocate",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; shrinking keeps storage, inline growth keeps the old elements even without copy, and heap moves copy only when requested, as natively; new slots are T::default()."
+      "status": "partial",
+      "notes": "Rust preserves original array state when no-copy replacement default construction panics. Native constructs replacement before publishing it but leaks the partially constructed raw buffer on a throwing element constructor; Rust drops that partial replacement. Successful copy, retention, shrink and growth cases remain covered by the original LocalArray tests. See tools/oracle/tkernel_local_array_reallocate_exception.md.",
+      "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
       "upstream_id": "NCollection_LocalArray::Size() const noexcept",
@@ -70002,8 +70004,9 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::to_array1_view",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches a private copy on first write."
+      "status": "partial",
+      "notes": "Rust returns a safe shared Array1 view that detaches on first write. The native const overload returns a mutable alias over the LocalArray buffer, so writes through that view mutate the original even when the LocalArray is const. Rust intentionally does not emulate that aliasing. See tools/oracle/tkernel_local_array_const_to_array1.md.",
+      "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
       "upstream_id": "NCollection_LinearVector()",
