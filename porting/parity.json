@@ -16589,7 +16589,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::determinant",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Compiler inventory confirms type-parameter-0-0 () const noexcept. The Rust determinant method requires only Copy + Mul + Add + Sub, not MatrixScalar; native arithmetic-only and signed-integer probes both return 22."
     },
     {
       "upstream_id": "NCollection_Mat4::NCollection_Mat4()",
@@ -16789,7 +16789,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::determinant_mat3",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Compiler inventory confirms type-parameter-0-0 () const noexcept. The Rust upper-left 3x3 determinant requires only Copy + Mul + Add + Sub, not MatrixScalar; native arithmetic-only and signed-integer probes both return 22."
     },
     {
       "upstream_id": "NCollection_Mat4::Convert(const NCollection_Mat4<Other_t>&)",

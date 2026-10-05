@@ -56,8 +56,14 @@ impl<T: MatrixScalar> Mat4<T> {
         translation.set_column3(3, offset);
         self.multiply(&translation);
     }
+}
+
+impl<T> Mat4<T>
+where
+    T: Copy + std::ops::Mul<Output = T> + std::ops::Add<Output = T> + std::ops::Sub<Output = T>,
+{
     /// Determinant of the upper-left 3x3 block by the rule of Sarrus, as `DeterminantMat3`;
-    /// `matrix.determinant_mat3()`.
+    /// `Mat4::<i32>::from_data([2,0,0,0,1,11,0,0,0,0,1,0,0,0,0,1]).determinant_mat3()`.
     pub fn determinant_mat3(&self) -> T {
         let v = |row: usize, column: usize| self.get_value(row, column);
         (v(0, 0) * v(1, 1) * v(2, 2) + v(0, 1) * v(1, 2) * v(2, 0) + v(0, 2) * v(1, 0) * v(2, 1))
