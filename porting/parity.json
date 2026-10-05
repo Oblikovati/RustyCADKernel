@@ -86805,7 +86805,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "The pointer+length overload uses the full set span; null pointer with zero set length short-circuits to 0 before bounds checking."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationInSet(const TCollection_AsciiString&,int,int) const",
@@ -86813,7 +86813,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "Uses the complete AsciiString set bytes, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationInSet(const std::string_view&,int,int) const",
@@ -86821,15 +86821,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "Uses the complete string-view set span, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationInSet(const char(&)[N],int,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set_literal",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT. The literal overload uses N - 1 bytes, embedded NULs included, i.e. the span."
+      "notes": "Matches the array template span of N-1 bytes; interior NUL bytes are retained, and only the final array element is excluded."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationNotInSet(const char* const,int,int,int) const",
@@ -86837,7 +86837,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "The pointer+length overload uses the full set span; null pointer with zero set length short-circuits to 0 before bounds checking."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationNotInSet(const TCollection_AsciiString&,int,int) const",
@@ -86845,7 +86845,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "Uses the complete AsciiString set bytes, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationNotInSet(const std::string_view&,int,int) const",
@@ -86853,15 +86853,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT."
+      "notes": "Uses the complete string-view set span, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::FirstLocationNotInSet(const char(&)[N],int,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set_literal",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty string or set gives 0 before the range check, as in OCCT. The literal overload uses N - 1 bytes, embedded NULs included, i.e. the span."
+      "notes": "Matches the array template span of N-1 bytes; interior NUL bytes are retained, and only the final array element is excluded."
     },
     {
       "upstream_id": "TCollection_AsciiString::Insert(int,char)",
@@ -87517,7 +87517,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty needle gives -1."
+      "notes": "The pointer+length overload searches the complete supplied byte span; Rust search accepts impl AsRef<[u8]>."
     },
     {
       "upstream_id": "TCollection_AsciiString::Search(const TCollection_AsciiString&) const",
@@ -87525,15 +87525,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Searches the full bytes held by the AsciiString, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::Search(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Matches the native nullable C-string overload: null and an empty prefix return -1; non-null input is truncated at its first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::Search(const std::string_view&) const",
@@ -87541,15 +87541,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Searches the complete string-view byte span, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::Search(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Matches the char-array template: strlen truncates at the first NUL, including arrays with an interior NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::SearchFromEnd(const char* const,int) const",
@@ -87557,7 +87557,7 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). An empty needle gives -1."
+      "notes": "The pointer+length overload searches the complete supplied byte span; Rust search_from_end accepts impl AsRef<[u8]>."
     },
     {
       "upstream_id": "TCollection_AsciiString::SearchFromEnd(const TCollection_AsciiString&) const",
@@ -87565,15 +87565,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Searches the full bytes held by the AsciiString, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::SearchFromEnd(const char* const) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Matches the native nullable C-string overload: null and an empty prefix return -1; non-null input is truncated at its first NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::SearchFromEnd(const std::string_view&) const",
@@ -87581,15 +87581,15 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Searches the complete string-view byte span, including embedded NUL bytes."
     },
     {
       "upstream_id": "TCollection_AsciiString::SearchFromEnd(const char(&)[N]) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end_c_string",
       "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart)."
+      "notes": "Matches the char-array template: strlen truncates at the first NUL, including arrays with an interior NUL."
     },
     {
       "upstream_id": "TCollection_AsciiString::SetValue(int,char)",

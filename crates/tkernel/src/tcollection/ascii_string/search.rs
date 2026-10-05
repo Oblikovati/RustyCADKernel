@@ -16,6 +16,14 @@ impl AsciiString {
             .position(|part| part == needle)
             .map_or(-1, |index| index as i32 + 1)
     }
+    /// `Search(const char*)`: searches only through the first NUL; `text.search_c_string(Some(b"part\0ignored"))`.
+    pub fn search_c_string(&self, what: Option<&[u8]>) -> i32 {
+        let Some(needle) = what else {
+            return -1;
+        };
+        let length: usize = c_string_length(needle);
+        self.search(&needle[..length])
+    }
     /// `SearchFromEnd`: one-based start of the last occurrence, or -1;
     /// `AsciiString::new("abcabc").search_from_end("ab") == 4`.
     pub fn search_from_end(&self, what: impl AsRef<[u8]>) -> i32 {
@@ -27,6 +35,14 @@ impl AsciiString {
             .windows(needle.len())
             .rposition(|part| part == needle)
             .map_or(-1, |index| index as i32 + 1)
+    }
+    /// `SearchFromEnd(const char*)`: searches the NUL-terminated prefix; `text.search_from_end_c_string(Some(b"part\0ignored"))`.
+    pub fn search_from_end_c_string(&self, what: Option<&[u8]>) -> i32 {
+        let Some(needle) = what else {
+            return -1;
+        };
+        let length: usize = c_string_length(needle);
+        self.search_from_end(&needle[..length])
     }
     /// `Location(const TCollection_AsciiString&, int, int)`: OCCT's scan for `what` inside
     /// `from..=to`, 0 when not found; `AsciiString::new("This is").location("is", 1, 7)? == 3`.
@@ -76,6 +92,16 @@ impl AsciiString {
     ) -> Result<i32, Failure> {
         self.first_location_matching("FirstLocationInSet", set.as_ref(), from, to, true)
     }
+    /// `FirstLocationInSet(const char(&)[N])`: searches the array span excluding its last byte;
+    /// `text.first_location_in_set_literal(b"aeiou\0", 1, text.length())?`.
+    pub fn first_location_in_set_literal<const N: usize>(
+        &self,
+        set: &[u8; N],
+        from: i32,
+        to: i32,
+    ) -> Result<i32, Failure> {
+        self.first_location_in_set(&set[..N.saturating_sub(1)], from, to)
+    }
     /// `FirstLocationNotInSet`: first position in `from..=to` holding no byte of `set`, 0 if
     /// none; `text.first_location_not_in_set(" \t", 1, text.length())?`.
     pub fn first_location_not_in_set(
@@ -85,6 +111,16 @@ impl AsciiString {
         to: i32,
     ) -> Result<i32, Failure> {
         self.first_location_matching("FirstLocationNotInSet", set.as_ref(), from, to, false)
+    }
+    /// `FirstLocationNotInSet(const char(&)[N])`: searches the array span excluding its last byte;
+    /// `text.first_location_not_in_set_literal(b" \t\0", 1, text.length())?`.
+    pub fn first_location_not_in_set_literal<const N: usize>(
+        &self,
+        set: &[u8; N],
+        from: i32,
+        to: i32,
+    ) -> Result<i32, Failure> {
+        self.first_location_not_in_set(&set[..N.saturating_sub(1)], from, to)
     }
     fn first_location_matching(
         &self,
