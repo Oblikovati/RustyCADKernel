@@ -1,0 +1,249 @@
+{
+  "rust_parent_revision": "58e14038be0b384bdea64f44662b57f2f5a280a8",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Exact simple C++ array-reference selector matching, retaining cv, reference kind, dimensions and symbolic bounds.",
+  "complete_api_parity": false,
+  "compiler_binding_changes": [
+    {
+      "selector": "TCollection_AsciiString::AssignCat(const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "fd6ed680724a4a16619f77a1118ad204ea2237da4067a7fe6c7a87b6baab917b"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::assign_cat"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+=(const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "e44be8e49b7aee4f5ea7cd78b33decc35ae6aa30d330817281c99319dcf2ef25"
+      ],
+      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as AddAssign<T>>::add_assign"
+    },
+    {
+      "selector": "TCollection_AsciiString::Cat(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "645aaf521b4fe71ce9857e90dfef785431d9edc933f6af1c2bd91004cb8dc9dd"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::cat"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator+(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "bcf83acd57b86cac71619a3c85dc8b739ec389a2a74be387f4fe195a9c10bcf2"
+      ],
+      "rust_item": "<&rustycad_tkernel::tcollection::AsciiString as Add<T>>::add"
+    },
+    {
+      "selector": "TCollection_AsciiString::Copy(const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "7fbbb82795341c773eeb93aa242a9acda4204973ab28705c4881aeef5bb34a8a"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator=(const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "d5f3ee9311e841a5c6eecd9ef6ba3fa3225055299aee704bcda53501eae18cf2"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::copy"
+    },
+    {
+      "selector": "TCollection_AsciiString::FirstLocationInSet(const char(&)[N],int,int) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "498dbe7021a87fddaa206e0265db601e83c98d19e67de224158e3846b2306c7c"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_in_set"
+    },
+    {
+      "selector": "TCollection_AsciiString::FirstLocationNotInSet(const char(&)[N],int,int) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "6b53315733daabdcd3f79f10972782b0d058462c777f0dc3b5cdba9ea17ab024"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::first_location_not_in_set"
+    },
+    {
+      "selector": "TCollection_AsciiString::Insert(int,const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "712bb2243d2358251068af010250e57294dfe0b640727d0f1ff9cb2addb9aaef"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert"
+    },
+    {
+      "selector": "TCollection_AsciiString::InsertAfter(int,const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "67ac5f7fcda5b1966079629de5c49cebe68d9a77f994862c8e473bb27fe6e327"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_after"
+    },
+    {
+      "selector": "TCollection_AsciiString::InsertBefore(int,const char(&)[N])",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "19615ee40e69972044ca54554d02833f1f194741e80727dd5945389939c6904a"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::insert_before"
+    },
+    {
+      "selector": "TCollection_AsciiString::IsEqual(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "779d961374b8951807761912b84284cc602e4e10757879a7b5773c1f1981d9fd"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator==(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "addecffe886ad482204c20568cd10f1b4e143576aeeb7536e789077aabd18660"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::IsDifferent(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "9c49b4c37e3663ab50660f668c8bac90fda0931147c1f304a102365f94d034e9"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator!=(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "97d8d5e23d2ad3331a2f356f430105cc15ae9245db113b68280f215026a6e5f1"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::IsLess(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "53eba32e447ae5384ffcbfef6ff287d23b94dcf3e85750725f88a851f15d972c"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator<(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "5e1cdfbf4f9cb5611c5a36078261d8f7f32b3f85fa671be190b6a0a6c6c11bbb"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::IsGreater(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "a37db51ce181768fbbd1e93411dd622a525b0342f116e68ede2a67e352ef5865"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::operator>(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "5d6df0c6d76b6240ea342289eedd9e4d045fee5c27fc13dfc1d99eb5ab55ac0c"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::StartsWith(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "f0c92320b6fa55ba7a6a7f4f9e63ea4b21f129a974083a000cb1a4f0d7f02e88"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::starts_with_c_string"
+    },
+    {
+      "selector": "TCollection_AsciiString::EndsWith(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "d3f4ca9df2d9f21c36d8d18516b65d992b784e633bea8778d1aa3a5b0d2077da"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::ends_with_literal"
+    },
+    {
+      "selector": "TCollection_AsciiString::Search(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "04a6d4f1938a27ec67b0327128755669beee81445f11d68d044a0cfe6cd59d76"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search"
+    },
+    {
+      "selector": "TCollection_AsciiString::SearchFromEnd(const char(&)[N]) const",
+      "before_cpp_status": "missing",
+      "after_cpp_status": "unique",
+      "cpp_ids": [
+        "9d655702b6759c09ec9bba34d0e8f7c392afea020263198a1f637b3dae55d955"
+      ],
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::search_from_end"
+    }
+  ],
+  "behavior_rows_marked_partial": [
+    "TCollection_AsciiString::AssignCat(const char(&)[N])",
+    "TCollection_AsciiString::operator+=(const char(&)[N])",
+    "TCollection_AsciiString::Cat(const char(&)[N]) const",
+    "TCollection_AsciiString::operator+(const char(&)[N]) const",
+    "TCollection_AsciiString::Copy(const char* const)",
+    "TCollection_AsciiString::operator=(const char* const)",
+    "TCollection_AsciiString::Copy(const char(&)[N])",
+    "TCollection_AsciiString::operator=(const char(&)[N])",
+    "TCollection_AsciiString::Insert(int,const char* const)",
+    "TCollection_AsciiString::Insert(int,const char(&)[N])",
+    "TCollection_AsciiString::InsertAfter(int,const char* const)",
+    "TCollection_AsciiString::InsertAfter(int,const char(&)[N])",
+    "TCollection_AsciiString::InsertBefore(int,const char* const)",
+    "TCollection_AsciiString::InsertBefore(int,const char(&)[N])"
+  ],
+  "limitations": [
+    "Matching declarations does not prove behavioral equivalence.",
+    "Complex parenthesized declarators remain unsupported.",
+    "Fresh combined Rust/API inventory publication is pending."
+  ],
+  "validation": {
+    "command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests",
+    "passed": 595,
+    "exit_code": 0,
+    "red_fixture_exit_code": 1
+  },
+  "input_sha256": {
+    "tools/api_crosswalk.py": "2f58fa7246c782234882a912dfdfeb0a2df5af396870eb7b5e0f7a1a2e0f8fb0",
+    "tools/tests/test_cpp_array_reference_selectors.py": "d452baf6e27e55a63168d5ddef5e59fe9245d249ddb7c37a14e9941a5b33d02f",
+    "porting/parity.json": "046a5a11e8971619d782ea46fed16df2c2ad04398ed5c30425063dad539e2a6c",
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/runtime-evidence/cpp-array-reference-tools.log.gz": "4ac77a41c47b6a106bd23d5aa50f79471c2b17572253eda930f58f56254eb24f"
+  }
+}

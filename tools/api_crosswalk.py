@@ -116,15 +116,24 @@ def fixed_selector_parameters(
     return None if any(item.strip() == "..." for item in fixed) else fixed
 
 
+def is_simple_array_reference(text: str) -> bool:
+    """Recognize exact array references, e.g. `const char(&)[N]`, without decay."""
+    element = r"[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*(?: [A-Za-z_]\w*)*"
+    bounds = r"(?:\[(?:[A-Za-z_]\w*|[0-9]+)\])+"
+    return re.fullmatch(rf"{element}\(&&?\){bounds}", text) is not None
+
+
 def canonical_parameter_type(text: str) -> str | None:
     # C++ function types discard only top-level cv on by-value parameters.
     normalized = norm_cpp(text)
+    if is_simple_array_reference(normalized):
+        return normalized
     tokens = top_level_type_tokens(normalized)
     if tokens is None:
         return None
     if any(token in {"&", "&&"} for token, _, _ in tokens):
         return normalized
-    # Parenthesized declarators need a full declarator parser before matching.
+    # Other parenthesized declarators still need a full parser before matching.
     if any(token in {"(", ")", "[", "]"} for token, _, _ in tokens):
         return None
     stars = [end for token, _, end in tokens if token == "*"]
