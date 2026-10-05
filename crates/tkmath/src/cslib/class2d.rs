@@ -160,6 +160,26 @@ impl Class2d {
         *self = Self::moved_from(source);
     }
 
+    /// Move-assigns `source` and returns the mutated destination.
+    ///
+    /// The returned reference mirrors the native assignment expression for
+    /// distinct objects. Borrowing prevents expressing native self-move here.
+    /// `let destination = target.move_from_returning(&mut source);`.
+    pub fn move_from_returning(&mut self, source: &mut Self) -> &mut Self {
+        self.move_from(source);
+        self
+    }
+
+    /// Deep-copy assigns `source` and returns the mutated destination.
+    ///
+    /// A completed grid cache is copied with the polygon. Safe borrowing does
+    /// not allow native self-copy assignment through this method.
+    /// `let destination = target.assign_returning(&source);`.
+    pub fn assign_returning(&mut self, source: &Self) -> &mut Self {
+        Clone::clone_from(self, source);
+        self
+    }
+
     // Every non-owning field, with an empty polygon and a fresh grid.
     fn scalars(&self) -> Self {
         Self {
