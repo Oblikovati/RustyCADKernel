@@ -6,8 +6,10 @@
 mod arithmetic;
 mod conversion;
 mod float;
+mod scalar_division;
 mod swizzle;
 pub use conversion::ElementCast;
+pub use scalar_division::VectorScalarDivision;
 
 /// Two scalar components; `Vec2::new(1.0_f64,2.0)`.
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
