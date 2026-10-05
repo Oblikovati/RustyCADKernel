@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "title": "Map borrowed insertion and single-hash owned insertion",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "validation_base_revision": "05444ac1e7898b835ff5b2cc8686bb2d84cdd5ee",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/data_map/keys.rs": "f87cb12858195e12c883e25b95c3052055fea2b820408c891fb8f01aa25be448",
+    "crates/tkernel/src/ncollection/map.rs": "e86c960820a320183c7f4296fdd34a69e6eb2a7ca8ac36ad9f5eb33f93a3f372",
+    "crates/tkernel/src/ncollection/map/borrowed.rs": "89c763f21e0f3c1160d9d0623ffab7432011ae2d4ccc0048e5eb921a98fed9ca",
+    "crates/tkernel/tests/ncollection_map_borrowed_add.rs": "ae1049b4acb1679181b8473bff719f462d1c6a5ed3765a7d155db3e77493984d",
+    "tools/oracle/ncollection_map_borrowed_add.cxx": "176b611721d30114d3b71be1828976c444ae9cf24d9f6631c2a480c873e037ed",
+    "tools/oracle/ncollection_map_borrowed_add.expected": "72f5013cb9751f8c78cf0a145b2fa4617528517c7e247cdf6349a8925a204699",
+    "tools/oracle/ncollection_map_borrowed_add.md": "ff603e7558cb714af175a00f92161ca1188dd37511e8849c5b1bd762b41c6413",
+    "tools/tests/test_map_borrowed_add_bindings.py": "6a0acc63c0a1e6fef00ea711e66500a159e928c5ffa11600551f8f9212e6f036"
+  },
+  "native_header_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162",
+  "native_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+  "native_binary_sha256": "6300409ca6a015d5e782748977c6a7de3b1164088bd0339df50cd95ec8454af1",
+  "bindings": [
+    {
+      "selector": "NCollection_Map::Add(const TheKeyType&)",
+      "cpp_id": "f5e261df5c18910fcc5d9e20d93fc7572c5acf5900defa5b7b75c9d9ac900a26",
+      "rust_item": "rustycad_tkernel::ncollection::Map::add_ref",
+      "status": "partial",
+      "rustdoc_path": {
+        "path": "rustycad_tkernel::ncollection::Map::add_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/map/borrowed.rs",
+        "source_sha256": "89c763f21e0f3c1160d9d0623ffab7432011ae2d4ccc0048e5eb921a98fed9ca"
+      }
+    },
+    {
+      "selector": "NCollection_Map::Added(const TheKeyType&)",
+      "cpp_id": "5f0d3defed1217050d30069bbf56ff8882d4c58303f5bbca7dd0b0f62de610c5",
+      "rust_item": "rustycad_tkernel::ncollection::Map::added_ref",
+      "status": "partial",
+      "rustdoc_path": {
+        "path": "rustycad_tkernel::ncollection::Map::added_ref",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/map/borrowed.rs",
+        "source_sha256": "89c763f21e0f3c1160d9d0623ffab7432011ae2d4ccc0048e5eb921a98fed9ca"
+      }
+    }
+  ],
+  "rustdoc_capture": {
+    "path": "porting/runtime-evidence/map-borrowed-add-rustdoc.json.gz",
+    "sha256": "12b7d8cfcbb9edaa10a9ece55b534fa073a05a2c006c695451dad40d5c0a2557",
+    "compiler": "nightly-2026-09-25",
+    "format_version": 61
+  },
+  "validation_logs": {
+    "focused": {
+      "path": "porting/runtime-evidence/map-borrowed-add-focused.log.gz",
+      "sha256": "6aea35045b6fd417e712c8b07a6a91af088a45cc0c383eeac180a9485ca6a39b",
+      "uncompressed_sha256": "3cd7078afb90d7163b904bc77d3a1079ce99654506e4a010134fb9ebe1237363",
+      "exit_code": 0
+    },
+    "tkernel": {
+      "path": "porting/runtime-evidence/map-borrowed-add-tkernel.log.gz",
+      "sha256": "0251cb4a4d6841d83e03531950f6642cf522d44d11b96399889882a63d9178c0",
+      "uncompressed_sha256": "366bb88e01b48692b2aab1474a64dc6643dba92d299062f874becf88564a5111",
+      "exit_code": 0
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/map-borrowed-add-clippy.log.gz",
+      "sha256": "8d69f3995e8398b3bb0d38592382f524a647d65f4b5f778c63f9a9bb189afa49",
+      "uncompressed_sha256": "2d847c26299f4a4c826f0fa6afbaa1519e3e9b1a06786db2ebcbf06be63d6596",
+      "exit_code": 0
+    },
+    "doc": {
+      "path": "porting/runtime-evidence/map-borrowed-add-doc.log.gz",
+      "sha256": "0acfcc8447e2e658cefcc84434d5139fea3ef3778bbb6cba83123e3aaf97a8ce",
+      "uncompressed_sha256": "dd487840ff2accc797c907410ac1a5c9a620e04e12084c3b03d7677cd689700f",
+      "exit_code": 0
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/map-borrowed-add-rustdoc.log.gz",
+      "sha256": "57b3a5feb70b869d8d3958e9fc1c82066c5e3748cf287dfd9c7000c0b2e611bd",
+      "uncompressed_sha256": "b2381e3d57bd246e370b47002b04e595a3c05c68573ada8d6e12fd22865100c2",
+      "exit_code": 0
+    },
+    "bindings": {
+      "path": "porting/runtime-evidence/map-borrowed-add-bindings.log.gz",
+      "sha256": "f7583c74a718749ab26dcb3b5cf309b23166e6b4d9b53d7ff46ffdb0d129e3ea",
+      "uncompressed_sha256": "9d851b369cc1c1d8b8359e363fae27f74222606c7469afec298b6b8f249f14bc",
+      "exit_code": 0
+    },
+    "native-compile": {
+      "path": "porting/runtime-evidence/map-borrowed-add-native-compile.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "native-diff": {
+      "path": "porting/runtime-evidence/map-borrowed-add-native-diff.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "invalid-target": {
+      "path": "porting/runtime-evidence/map-borrowed-add-invalid-target.log.gz",
+      "sha256": "d3f69645b043f5fe29248cdc78b2a6e1b9e6dce553563e2a2e370c26b3cc9264",
+      "uncompressed_sha256": "e97ecccb7a8ba7fb1acf584cb9203b49b891d2429294ad1344a2fb7e195cad5e",
+      "exit_code": 101
+    },
+    "native-output": {
+      "path": "porting/runtime-evidence/map-borrowed-add-native.log.gz",
+      "sha256": "e2e0f9b3ca5e8b7bc57872f5e4abfcee5b0d44562e582b6df43cfce57d29aedb",
+      "exit_code": 0
+    }
+  },
+  "focused_tests": {
+    "passed": 91,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 5,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "tkernel_tests": {
+    "passed": 3018,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 209,
+    "failed_result_groups": 0,
+    "command_exit_code": 0,
+    "command_succeeded": true
+  },
+  "supplemental_tests_added": 4,
+  "original_test_declarations_added": 0,
+  "original_test_mapping_changes": 0,
+  "limitations": [
+    "Two borrowed overloads remain partial: Rust Entry/bucket storage differs from OCCT MapNode and global bucket allocation.",
+    "Generic Clone cannot reproduce arbitrary C++ address-sensitive subobject construction, move/destructor hooks or allocation failure categories.",
+    "The first focused command named a nonexistent ncollection_allocator test target and exited 101 before compilation; the corrected five-target command and full TKernel command passed.",
+    "Private compiler capture binds this source; refresh the global inventory after integration."
+  ]
+}

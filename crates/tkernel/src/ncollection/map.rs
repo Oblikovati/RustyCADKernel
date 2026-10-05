@@ -158,5 +158,6 @@ impl<K> PartialEq for MapIter<'_, K> {
 }
 impl<K> Eq for MapIter<'_, K> {}
 
+mod borrowed;
 mod cursor;
 pub use cursor::MapIterator;
