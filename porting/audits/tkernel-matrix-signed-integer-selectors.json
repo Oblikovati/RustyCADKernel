@@ -1,0 +1,92 @@
+{
+  "purpose": "Pin existing Mat3/Mat4 adjoint, inversion, and translation ledger rows to unique compiler declarations; no new API or test declarations.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "inputs": {
+    "declaration_inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "header_manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "parity_sha256": "2103d5cd601c99429ece57faff7904b930a1a29cc53fd49c4509668f879d66e5"
+  },
+  "verification": {
+    "selector_count": 9,
+    "unique_candidates": 9,
+    "command": "PYTHONPATH=tools python3 -m unittest tools.tests.test_tkernel_matrix_signed_integer_selectors"
+  },
+  "declarations": [
+    {
+      "selector": "NCollection_Mat3::Inverted() const",
+      "old_selector": "NCollection_Mat3::Inverted() const",
+      "compiler_id": "a48eb0807cfa273ebcaf830facde7c3af7a1e5133075edba29535c936c7249c2",
+      "compiler_signature": "NCollection_Mat3<Element_t> () const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "selector": "NCollection_Mat3::Inverted(NCollection_Mat3<Element_t>&,Element_t&) const",
+      "old_selector": "NCollection_Mat3::Inverted(NCollection_Mat3&,Element_t&) const",
+      "compiler_id": "a8fad9289182e516cd82526a04e1cd1c116779b638dcfe4e7d976d09ffd106d6",
+      "compiler_signature": "bool (NCollection_Mat3<Element_t> &, type-parameter-0-0 &) const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "selector": "NCollection_Mat3::Inverted(NCollection_Mat3<Element_t>&) const",
+      "old_selector": "NCollection_Mat3::Inverted(NCollection_Mat3&) const",
+      "compiler_id": "8bbab8dc8f079ad88a800ae126826bccd8539a72bd5e666293bd6ba9a2493a4d",
+      "compiler_signature": "bool (NCollection_Mat3<Element_t> &) const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "selector": "NCollection_Mat3::Adjoint() const noexcept",
+      "old_selector": "NCollection_Mat3::Adjoint() const noexcept",
+      "compiler_id": "0e993e6017d11e4dd9b078e37c2bf577c44e3d734f1619069a52105645531fef",
+      "compiler_signature": "NCollection_Mat3<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
+    },
+    {
+      "selector": "NCollection_Mat4::Inverted() const",
+      "old_selector": "NCollection_Mat4::Inverted() const",
+      "compiler_id": "a0bc2e31a46bf6aa7d46e9c62a8cd03f103f72ba6aedad2d50f7b1410c8d1138",
+      "compiler_signature": "NCollection_Mat4<Element_t> () const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "selector": "NCollection_Mat4::Inverted(NCollection_Mat4<Element_t>&,Element_t&) const",
+      "old_selector": "NCollection_Mat4::Inverted(NCollection_Mat4<Element_t>&,Element_t&) const",
+      "compiler_id": "a81fd510c129e0b53db59deeaad5c2e2e20297bc79df9d9ce3169a075d66c499",
+      "compiler_signature": "bool (NCollection_Mat4<Element_t> &, type-parameter-0-0 &) const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "selector": "NCollection_Mat4::Inverted(NCollection_Mat4<Element_t>&) const",
+      "old_selector": "NCollection_Mat4::Inverted(NCollection_Mat4<Element_t>&) const",
+      "compiler_id": "9315549b8e18fddab863e60e207513131c26aaf1ae7d2a7bd223ca7ed2c34c64",
+      "compiler_signature": "bool (NCollection_Mat4<Element_t> &) const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "selector": "NCollection_Mat4::Adjoint() const noexcept",
+      "old_selector": "NCollection_Mat4::Adjoint() const noexcept",
+      "compiler_id": "6435dfe8042459b3ee59912a4840b0692733bd85318e3fd41ddf2e490afd7eae",
+      "compiler_signature": "NCollection_Mat4<Element_t> () const noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    },
+    {
+      "selector": "NCollection_Mat4::Translate(const NCollection_Vec3<Element_t>&)",
+      "old_selector": "NCollection_Mat4::Translate(const NCollection_Vec3<Element_t>&)",
+      "compiler_id": "1e1bf30aefd613c664928cd2598e6cddf7549ec3c2ca11bc353d46058e812e30",
+      "compiler_signature": "void (const NCollection_Vec3<type-parameter-0-0> &) noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
+    }
+  ],
+  "previously_unresolved": [
+    "NCollection_Mat3::Inverted(NCollection_Mat3&,Element_t&) const",
+    "NCollection_Mat3::Inverted(NCollection_Mat3&) const"
+  ]
+}

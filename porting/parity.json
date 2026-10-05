@@ -9461,7 +9461,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::inverted",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "a0bc2e31a46bf6aa7d46e9c62a8cd03f103f72ba6aedad2d50f7b1410c8d1138",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
       "upstream_id": "BVH_LinearBuilder::BVH_LinearBuilder(int,int)",
@@ -16541,7 +16543,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::inverted",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "a48eb0807cfa273ebcaf830facde7c3af7a1e5133075edba29535c936c7249c2",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
     },
     {
       "upstream_id": "NCollection_Mat3::Adjoint() const noexcept",
@@ -16549,7 +16553,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::adjoint",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "0e993e6017d11e4dd9b078e37c2bf577c44e3d734f1619069a52105645531fef",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
     },
     {
       "upstream_id": "NCollection_Mat3::ConvertFrom(const NCollection_Mat3<Other_t>&)",
@@ -16725,7 +16731,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::adjoint",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json). Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "6435dfe8042459b3ee59912a4840b0692733bd85318e3fd41ddf2e490afd7eae",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
       "upstream_id": "NCollection_Mat4::ConvertFrom(const NCollection_Mat4<Other_t>&)",
@@ -16781,7 +16789,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::translate",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "1e1bf30aefd613c664928cd2598e6cddf7549ec3c2ca11bc353d46058e812e30",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
       "upstream_id": "NCollection_Mat4::DeterminantMat3() const noexcept",
@@ -68178,20 +68188,24 @@
       "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "NCollection_Mat3::Inverted(NCollection_Mat3&,Element_t&) const",
+      "upstream_id": "NCollection_Mat3::Inverted(NCollection_Mat3<Element_t>&,Element_t&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::inverted_into",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "a8fad9289182e516cd82526a04e1cd1c116779b638dcfe4e7d976d09ffd106d6",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
     },
     {
-      "upstream_id": "NCollection_Mat3::Inverted(NCollection_Mat3&) const",
+      "upstream_id": "NCollection_Mat3::Inverted(NCollection_Mat3<Element_t>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat3::inverted_to",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "8bbab8dc8f079ad88a800ae126826bccd8539a72bd5e666293bd6ba9a2493a4d",
+      "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
     },
     {
       "upstream_id": "NCollection_Mat4::SetRow(size_t,const NCollection_Vec3<Element_t>&)",
@@ -68247,7 +68261,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::inverted_into",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "a81fd510c129e0b53db59deeaad5c2e2e20297bc79df9d9ce3169a075d66c499",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
       "upstream_id": "NCollection_Mat4::IsEqual(const NCollection_Mat4<Element_t> &) const noexcept",
@@ -68391,7 +68407,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Mat4::inverted_to",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending."
+      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. Exact compiler declaration is pinned by selector_id and source_sha256; signed integer behavior verified for i32/i64 on non-overflowing inputs in tools/oracle/tkernel_matrix_signed_integer_scalars.expected.",
+      "selector_id": "9315549b8e18fddab863e60e207513131c26aaf1ae7d2a7bd223ca7ed2c34c64",
+      "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
       "upstream_id": "NCollection_Vec2::operator/(Element_t) const",
