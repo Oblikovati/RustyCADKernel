@@ -33,6 +33,14 @@ impl ExtendedString {
         copy.assign_cat_c_units(units);
         copy
     }
+    /// Prepends the portion of a bounded null-terminated UTF-16 buffer before its first zero;
+    /// `text.prepend_c_units(Some(&[65, 0, 66]))`. A null pointer uses `None`.
+    pub fn prepend_c_units(&mut self, units: Option<&[u16]>) {
+        let Some(units) = units else {
+            return;
+        };
+        self.prepend(utf::c_units_prefix(units));
+    }
     /// The (pointer, length) AssignCat: a null pointer or a length <= 0 appends nothing;
     /// `text.assign_cat_span(Some(&[65, 66]), 1)`.
     pub fn assign_cat_span(&mut self, units: Option<&[u16]>, length: i32) {

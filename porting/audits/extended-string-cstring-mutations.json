@@ -1,0 +1,89 @@
+{
+  "scope": "ExtendedString UTF-16 C-string Cat, Insert, SetValue, and Prepend",
+  "base_commit": "efafe1d231f528bcd13953b471d5c78d47641f35",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "crosswalk_report_sha256": "0612041f692c9e9bf86467b8f9dd840a1fa9bd01bee263c9786e2eca809aba92",
+  "native_sources": {
+    "header": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+    "header_sha256": "5a483b0daeb75b79e50cdb43cfe53fa7da87a3f477779d3aaece10e96d36acda",
+    "implementation": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.cxx",
+    "implementation_sha256": "bdcbe42ede4a95a5b1928ad37cc7388e9d5ce2fb84f32f78e24a62c7681fc22c",
+    "library": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so.8.1.0",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "behavior": "The one-argument wrappers determine input length with extStringLen, stopping at the first NUL. Insert checks theWhere before null/empty input; SetValue checks 1..=Length()+1 before null/empty input. Cat returns a copy. Prepend treats null/empty input as a no-op and has a native special case for pointers into the receiver."
+  },
+  "mappings": [
+    {
+      "cpp_id": "366c13b12cd792e258cca392f3df8e0e5919d5510daeeabb40a8965a8af8319b",
+      "upstream_id": "TCollection_ExtendedString::Cat(const char16_t* const) const",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_c_units",
+      "rustdoc_path_count": 1,
+      "status": "implemented"
+    },
+    {
+      "cpp_id": "489cde68dc85ea884fd94eee89846c415d2aca38cbd075be4df422c95f522788",
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const)",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_c_units",
+      "rustdoc_path_count": 1,
+      "status": "partial"
+    },
+    {
+      "cpp_id": "2ea7152ae677864928857c5314e16a597eb0a038b8c9c9ccb7752d72e5d64a3a",
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const)",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_c_units",
+      "rustdoc_path_count": 1,
+      "status": "partial"
+    },
+    {
+      "cpp_id": "f1516967fcbb92848c2732e411c2ff96336cc129912503c4350066c9f9477f26",
+      "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const)",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_c_units",
+      "rustdoc_path_count": 1,
+      "status": "partial"
+    }
+  ],
+  "rustdoc": {
+    "toolchain": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)",
+    "raw_capture": "target/doc/rustycad_tkernel.json",
+    "raw_capture_sha256": "524936449c2c22f0c1330f865b7690793281cca018096bdfae7e77b6e4b4f6c3",
+    "normalized_capture": "target/extended-cstring-rustdoc-inventory.json",
+    "normalized_capture_sha256": "e8dd94e3264f08e613b7bd2a964f9fa12c2cc8f9cb296909a36c179b597d349e",
+    "normalizer": "tools/normalize_rustdoc_inventory.py",
+    "normalizer_sha256": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "source_sha256": {
+      "crates/tkernel/src/tcollection/extended_string/append.rs": "e3be9aec2436b19e2356760a526034ffdc0be88a9f8bb2b8a548ec17c0d2d8ec",
+      "crates/tkernel/src/tcollection/extended_string/editing.rs": "55a7c8e944642c03fe5c02a99004257623878e449c76ba1a6577a2e673214776"
+    },
+    "policy": "Private TKernel-only capture normalized with make_reachable_inventory. Each named target resolves uniquely. Global inventory snapshots were not regenerated."
+  },
+  "native_evidence": {
+    "fixture": "tools/oracle/tkernel_extended_string_c_units_mutations.cxx",
+    "fixture_sha256": "d294dd04e7d20b5e4fb82f65801067ca50323f131f1d8cee44f415f46e8d1410",
+    "expected": "tools/oracle/tkernel_extended_string_c_units_mutations.expected",
+    "expected_sha256": "43b6fe89b294d3d95d9655a34bed8e6625772bc26b812eb7423fb25d7858ba11",
+    "executable_sha256": "b3f37e512d642bafaa4798f7d78297642b5db98ab03147c5cc940848ad9c3413",
+    "matches_expected": true,
+    "cases": [
+      "Pointer Cat, Insert, SetValue, and Prepend truncate A-NUL-B to A.",
+      "Null and empty pointer arguments leave receiver contents unchanged.",
+      "Invalid Insert and SetValue positions throw Standard_OutOfRange before null-pointer handling, with pinned native messages."
+    ]
+  },
+  "rust_evidence": {
+    "regression": "crates/tkernel/tests/extended_string_c_units_mutations.rs",
+    "regression_sha256": "c2f0af7ad0dbdc52aada5b9a869194ecdc7d2bfa962206c542973f905593fe42",
+    "full_command": "cargo test --locked -p rustycad-tkernel",
+    "full_log": "porting/runtime-evidence/extended-string-cstring-mutations-tkernel-tests.log.gz",
+    "full_log_sha256": "2339977eca04195f468a8ec70a57ae8f6d6498e6dcf45da3cef279b8eadea3bb",
+    "full_passed": 2846,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "full_groups": 189,
+    "clippy_command": "cargo clippy --locked -p rustycad-tkernel --all-targets -- -D warnings",
+    "clippy_log": "porting/runtime-evidence/extended-string-cstring-mutations-clippy.log.gz",
+    "clippy_log_sha256": "d5c7a83a63393cf1924363c6ab7f649ffeb5d91260bb6b5f1aa6275d557930fc",
+    "clippy_exit_code": 0
+  },
+  "parity_sha256": "e4fb81d0aaa29ecbda78855ad83d7851f1579071e168410863e44e841dcc53b0",
+  "limits": "Rust Option<&[u16]> models a readable bounded non-aliased buffer and None models null. Insert and SetValue self-aliasing pointer calls are not represented; Prepend also has native self-aliasing behavior. Their legacy declaration rows remain partial."
+}
