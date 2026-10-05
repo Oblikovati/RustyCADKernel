@@ -10,14 +10,24 @@ use super::Failure;
 ///
 /// Each constructor is the macro's `C1(const char* theMessage = "")`; the two-argument
 /// `C1(theMessage, theStackTrace)` is `Failure::with_type(name, message, stack)`.
+/// Byte and string inputs both stop at the native C-string terminator; arbitrary bytes survive.
 macro_rules! define_standard_exceptions {
     ($table:ident; $($function:ident => $name:literal : $parent:literal;)*) => {
         $(
             #[doc = concat!("Constructs `", $name, "` (a `", $parent, "`); `", stringify!($function), "(\"message\")`.")]
             pub fn $function(message: &str) -> $crate::standard::Failure {
-                $crate::standard::Failure::with_message($name, message)
+                exception_bytes::$function(message.as_bytes())
             }
         )*
+        /// Constructors for native byte messages; string constructors remain in the parent module.
+        pub mod exception_bytes {
+            $(
+                #[doc = concat!("Constructs `", $name, "` from NUL-terminated bytes; `", stringify!($function), "(b\"message\")`.")]
+                pub fn $function(message: &[u8]) -> $crate::standard::Failure {
+                    $crate::standard::Failure::with_message_bytes($name, message)
+                }
+            )*
+        }
         /// Every class this module declares, with its direct base class.
         pub(crate) const $table: &[(&str, &str)] = &[$(($name, $parent)),*];
     };
