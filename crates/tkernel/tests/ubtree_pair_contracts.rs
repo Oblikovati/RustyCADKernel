@@ -1,4 +1,6 @@
 //! Actual paired allocation and complete native borrowed Gemmate callback phases.
+#[path = "support/ubtree_allocation_trace.rs"]
+pub mod allocation_trace;
 #[path = "ubtree_pair_contracts/fixture.rs"]
 mod fixture;
 use fixture::*;

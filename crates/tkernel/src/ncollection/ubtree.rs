@@ -6,6 +6,7 @@
 use super::BaseAllocator;
 mod storage;
 use storage::TreeArena;
+mod borrowed_insertion;
 mod destruction;
 mod insertion;
 mod navigation;
@@ -185,9 +186,6 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     }
     fn node_mut(&mut self, index: usize) -> &mut BoundingNode<T, B> {
         self.nodes[index].as_deref_mut().unwrap()
-    }
-    fn allocate_node(&mut self, node: BoundingNode<T, B>) -> usize {
-        self.nodes.push_single(self.resource.allocate_value(node))
     }
 }
 mod method_contracts;
