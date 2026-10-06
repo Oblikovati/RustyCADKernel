@@ -1,0 +1,179 @@
+{
+  "schema": "rustycad.explicit-specialization-binding-transaction.v1",
+  "status": "partial_bindings_pending_integration",
+  "base_commit": "72e52d58a62167bf2cbfd6401308fc8caadfcd64",
+  "branch": "port/api-specialization-selectors",
+  "scope": "Add precise optional Rust declaration/impl selectors and independent multi-body proof replay; add a named BasicIterator inequality adapter; add fifteen independently verified partial native bindings. No Vec ledger changes and no implemented promotions.",
+  "production_change": "BaseMapBasicIterator::is_not_equal delegates node-identity negation. Existing PartialEq default already supported !=; this named adapter supplies a directly selectable compiler body for the native inequality declaration.",
+  "selector_schema": {
+    "field": "rust_declaration_selectors",
+    "required_object_fields": [
+      "path",
+      "declaration_sha256",
+      "impl_context"
+    ],
+    "path_coverage": "Ordered first-occurrence paths must equal rust_items, or the singleton rust_item. Multiple distinct declarations may share a path.",
+    "identity": "Digest and complete impl_context must match the same unique compiler declaration. Repeated path/digest pairs, missing/ambiguous matches and unpinned sources fail.",
+    "absence": "Existing path-only behavior remains unchanged, including ambiguity. No fallback to a first specialization.",
+    "status": "All fifteen mappings remain partial; identity selection does not prove behavioral equivalence."
+  },
+  "verified_native_ids": 15,
+  "current_public_body_bindings": 24,
+  "unique_rust_public_paths": 16,
+  "partial_rows_added": 15,
+  "implemented_row_delta": 0,
+  "legacy_mapping_credit_delta": 0,
+  "compiler_capture": {
+    "toolchain": "nightly-2026-09-25",
+    "format_version": 61,
+    "source_base": "72e52d58a62167bf2cbfd6401308fc8caadfcd64",
+    "source_tree": "Isolated checkout plus source-hashed named inequality adapter below. No raw compiler edits.",
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "exit_code": 0,
+    "preexisting_doc_warnings": 6,
+    "raw_artifact": "porting/runtime-evidence/base-map-specialization-rustdoc.json.gz"
+  },
+  "compiler_fixture": {
+    "artifact": "tools/tests/fixtures/rust-specialization-selectors.json.gz",
+    "scope": "Ten actual previously captured compiler bodies: Vec2::dot generic/bool; BasicIterator new readonly/mutable; three Key and three dereference policies. Historical fixture tests selection, not current Vec behavior or completeness."
+  },
+  "policy_translation": {
+    "MUTABLE": "Rust M is inverse of native IsConstant. K and O retain native IsKeyOnly and IsOrdered.",
+    "Key": "Mapped and ordered-keyonly policies call map_key; unordered-keyonly calls map_value. Associated key/value types must agree with the native instantiation.",
+    "dereference_arrow": "Readonly mapped and all key-only policies call Value adapters; mutable mapped calls ChangeValue adapter. All three bodies for each operation are pinned separately.",
+    "container_and_node_construction": "Readonly and mutable specializations each have their own selected public body.",
+    "copy_assignment": "assign and assign_self both bound; no claim that safe Rust permits aliased mutable references.",
+    "arrow_native_selector": "Unique qualified name used because current parameter parser does not accept operator->() spelling; independent replay still checks exact compiler ID and complete signature."
+  },
+  "original_evidence": {
+    "inherited_receipt": "porting/audits/base-map-basic-iterator-method-contracts.json",
+    "inherited_receipt_sha256": "dd36d56bce51f22a7c1c1be04f3b43d4cb2ec2d3d608e912beb68741de8caac9",
+    "scope": "No direct native BaseMap BasicIterator GTest declarations. Replayed all163 prior concrete-map declarations and their existing Rust translations as regressions; concrete iterators are not automatically migrated to this generic cursor. No newly translated original declaration.",
+    "original_join_archive": "porting/runtime-evidence/base-map-specialization-original-joins.json.gz",
+    "joins": 163,
+    "assertion_scope": "Current named test results are joined exactly. Earlier method-contract receipt carries original port audit; this batch does not assert a new full assertion-by-assertion audit of every derived-map test."
+  },
+  "native_fixture": {
+    "rows": 15,
+    "prior_rows_preserved_exactly": 14,
+    "new_row": "inequality 0 1 0 0 1",
+    "new_row_domain": "Same-node different-table, cross-const nonnull/null, null/null and reciprocal identity negation. Rust row executes named adapter; no node getters are called.",
+    "compile_exit": 0,
+    "run_exit": 0,
+    "stdout_compare_exit": 0
+  },
+  "checks": {
+    "rust_regressions_passed": 204,
+    "native_originals_passed": 163,
+    "strict_provenance_miri_passed": 10,
+    "python_api_tests_passed": 144,
+    "new_selector_tests": 17,
+    "new_multi_body_replay_tests": 9,
+    "strict_scoped_clippy_exit": 0,
+    "cargo_fmt_check_exit": 0,
+    "black_check_exit": 0,
+    "replay": {
+      "native_ids": 15,
+      "public_bodies": 24,
+      "partial_rows_added": 15,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    },
+    "compatibility": {
+      "old_rows_candidate_semantics_unchanged": 29450,
+      "old_status_matrix_cells_unchanged": 640,
+      "new_selector_rows_excluded_from_comparison": 15
+    }
+  },
+  "native_defects": [
+    {
+      "id": "192bcad3617b93ac0bae128bb3ecb4bd5cfe806735450ed4520bd90d8847d5e9",
+      "kind": "FunctionTemplate",
+      "qualified_name": "NCollection_BaseMap::BasicIterator::operator=",
+      "signature": "NCollection_BaseMap::BasicIterator<TheContainer, TheNode, TheKey, TheValue, NCollection_BaseMap::BasicIterator::IsKeyOnly, NCollection_BaseMap::BasicIterator::IsConstant, NCollection_BaseMap::BasicIterator::IsOrdered> &(const NCollection_BaseMap::BasicIterator<type-parameter-0-0, type-parameter-0-1, type-parameter-0-2, type-parameter-0-3, value-parameter-0-4, false, value-parameter-0-6> &) noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "uncredited native ill-formed conversion",
+      "compile_exit": 1,
+      "scope": "Pinned native nested State belongs to a different enclosing template specialization; conversion constructor or assignment does not compile. Rust from_mutable/as_const/assign_from_mutable are documented extensions, not parity credit."
+    },
+    {
+      "id": "66be3d11d76a3c7cca28007416999be563e2982c51478890f65a792a0a94310e",
+      "kind": "FunctionTemplate",
+      "qualified_name": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>",
+      "signature": "void (const NCollection_BaseMap::BasicIterator<type-parameter-0-0, type-parameter-0-1, type-parameter-0-2, type-parameter-0-3, value-parameter-0-4, false, value-parameter-0-6> &) noexcept",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "uncredited native ill-formed conversion",
+      "compile_exit": 1,
+      "scope": "Pinned native nested State belongs to a different enclosing template specialization; conversion constructor or assignment does not compile. Rust from_mutable/as_const/assign_from_mutable are documented extensions, not parity credit."
+    }
+  ],
+  "remaining_limits": [
+    "Partial typed adapter domain only: arbitrary C++ inheritance, object/ABI layout and multiple-inheritance pointer adjustment are not represented. MapLinkNode must be a repr(C) prefix.",
+    "Raw node traversal/dereference requires live aligned readable/writable nodes and explicit reference alias exclusions; borrowed tables cannot resize while attached. Native invalidation/null dereference/noexcept termination are not claimed.",
+    "BasicMapNode requires explicit key/value/bucket/order hooks even where an unused native template branch would not instantiate a hook.",
+    "Native aliases, generic class layout, all derived map cursor adoption and BaseMap IndexedIterator callable forms remain outside this slice.",
+    "No whole-class, whole-toolkit, original test parity or whole-workspace completion claim."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/base-map-specialization-replay.py.gz > /tmp/replay-base-map-specializations.py && python3 /tmp/replay-base-map-specializations.py \"$PWD\"",
+  "original_transaction": {
+    "candidate_ledger_blob": "a123cf265f05113ccdb5f1da8a98906b917970f7",
+    "integrity": "Immutable candidate ledger must equal base plus exactly15 additions. Current main must contain each exact owned row once; unrelated later class changes are allowed. Fresh normalization of pinned raw compiler rechecks selected signatures, impl/declaration identities and current source hashes without requiring unrelated source files to stay frozen."
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/basic_iterator.rs": "47d131dc0249e3d845acff5f6a4ce7b9d84b86a5852e6953bbb2ffdaf1d82fbf",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/access.rs": "078574530f97f4333b6eecba70893069ec8b431e6609b4c04a63f331c7586e77",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/construction.rs": "c9d2daaad2613fd951d922a7a02318d3e880906140edb9a2f84a77c8f86a638e",
+    "crates/tkernel/src/ncollection/base_map/basic_node.rs": "f5aac544222f58a3ae6b9c61ff33c360a16d77b88bbf11782cf7a53f909822e2",
+    "crates/tkernel/src/ncollection/base_map/bucket_scan.rs": "ecdea6a9303ff3ce75c2a1d4bd230121eb2494c105147ed09505ae15f756c9fc",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts.rs": "af43cf6e180a17cc6ecd365ea163cb7918650fe0e5e6e8107a95101e49449187",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts/oracle_rows.rs": "4f257ff8a0974dcfb2a6b0d91363431688f2b52662fe181f8ff04096d831f33c",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts/support.rs": "55b05ee4b05371e633e0ccc42257d1ab7317397cacd7c73ad82aface91c1d6c6",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "tools/api_tool_hashes.py": "69e12f9629869f8697603c265201f6d4b8e52d69e994085fc3c611986014ab20",
+    "tools/oracle/tkernel_base_map_basic_iterator_const_conversion.cxx": "c139596d1dacc064525a9d0ae6cf08372323282b047cfecadf9f5a53bb6c44da",
+    "tools/oracle/tkernel_base_map_basic_iterator_contracts.cxx": "76f9aece97a68fdde9ccda595b556145018f5b477241ea8ac4ec4ddf551f1879",
+    "tools/oracle/tkernel_base_map_basic_iterator_contracts.expected": "004a9a3afc453021912ed830778be7adb03c8cbd3c773bc507d9c42a659ae460",
+    "tools/tests/test_api_binding_specializations.py": "665c5f02955daa6355a2741d882453509d58b0d2ab6210303a50f0ebd5fe0c73",
+    "tools/tests/test_api_rust_declaration_selectors.py": "88ed50e1b6596cdb8ca7d1e47e87054f7b84e76aa70ef19f8a43b604bc7f895d"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "tools/tests/fixtures/rust-specialization-selectors.json.gz": "158e2baacb6c9ba7e04fa7cf9db65a7523cee9dcf5bb897f0b98fc6d9e9d6a0a"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-specialization-bindings.json.gz": "f1aa328d6731d2b85a4417ec45879c80430717dc5771ba8e7d2b3534458f127f",
+    "porting/runtime-evidence/base-map-specialization-black.log.gz": "50503b00e7dae78303a33c04448a1a8095704776379a6a334942caa1644b96c4",
+    "porting/runtime-evidence/base-map-specialization-clippy.log.gz": "bfe2fbba7315f849255dbcf3c6389de9a91167391907fe62e8d98e963d3cb891",
+    "porting/runtime-evidence/base-map-specialization-compatibility.log.gz": "41937285977bed1c88a5ac5bff3debe0a0106e8c26031131de8e25c61e073b47",
+    "porting/runtime-evidence/base-map-specialization-compatibility.py.gz": "9efa299e6abdbdae75b2e7b6bedae9648dae6b42a910e1fb8749127077c1f9c0",
+    "porting/runtime-evidence/base-map-specialization-compiler.log.gz": "c542d4e1276a67280616b5b10fcc8e292541654f4f88c3318ffa478078e16557",
+    "porting/runtime-evidence/base-map-specialization-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-specialization-miri.log.gz": "80cbf19c459b4c06b5e31e1064caf9de90ca6809e76d8ae05ba87336e2ab76d1",
+    "porting/runtime-evidence/base-map-specialization-native-originals.log.gz": "d3944942f3e0a1496e452d947d298a42ac78db57e8d183ef9aa2fd704e3a9a39",
+    "porting/runtime-evidence/base-map-specialization-native.stdout.gz": "96af391f869ca1092280a9e858a15866a67fc952a652812164091c193142c8fb",
+    "porting/runtime-evidence/base-map-specialization-negative-assignment.log.gz": "047dbec6c394d764c84269da75107fc85978e75e287e39c67ddb3772a0473355",
+    "porting/runtime-evidence/base-map-specialization-negative-constructor.log.gz": "1e8d26766b1c2b966596b069d954dc0fc135dd00767c08bf70bbbfb09d36f615",
+    "porting/runtime-evidence/base-map-specialization-normalized.json.gz": "ee9861b5a76e1da939726a67a30c2f64834bc0403f3d2e1f111eaa5aad8044ce",
+    "porting/runtime-evidence/base-map-specialization-original-joins.json.gz": "5d5a1bea7cb2cdb99465864d05f7fc8da847a7292dcfacd0637a0c2a22b802d6",
+    "porting/runtime-evidence/base-map-specialization-python-tests.log.gz": "751037d97ca26b0affa3fbdb7b0fd14fac0c13232d9768098b05d8c9ddcedc3a",
+    "porting/runtime-evidence/base-map-specialization-replay.log.gz": "b53555e9cd3c105f846168ee589058c948e77dcb2eb1bb8082255ee6873eeaea",
+    "porting/runtime-evidence/base-map-specialization-replay.py.gz": "02cfcc096cbbd83aa446fa6746b110732e2d4e5227313685d9921c3b1506b6d0",
+    "porting/runtime-evidence/base-map-specialization-rust-regressions.log.gz": "0543f7b5227b9f8e4384ccd2404dd5fa3c60aa9031946702822faa56bbd08271",
+    "porting/runtime-evidence/base-map-specialization-rustdoc.json.gz": "c6cf330198dbf4a89812b19c33e8747884d396b635874c01f3141286f3560c79",
+    "porting/runtime-evidence/base-map-specialization-transaction.json.gz": "482bfa08412e43d273d8806d59926d3c9d58c6ff4c971bfdfa240148bb21ffd8"
+  }
+}

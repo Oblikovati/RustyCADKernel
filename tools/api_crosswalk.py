@@ -7,6 +7,7 @@ import re
 from api_inventory.inputs import JSONValue
 from api_identity import leaf_name, norm_cpp, parse_upstream_id
 from api_rust_kind import select_rust_kind
+from api_rust_declaration_selectors import selected_rust_candidates, SELECTION_FAILURES
 from api_rust_reference_targets import nominal_reference_owner
 from api_scoped_alias_selectors import qualify_member_aliases
 from api_template_selectors import (
@@ -340,11 +341,25 @@ def row_rust_candidates(
         if selected is None:
             return "invalid_rust_kind", []
         crates = selected
+    return rust_target_candidates(row, crates)
+
+
+def rust_target_candidates(
+    row: dict[str, JSONValue],
+    crates: dict[str, dict[str, list[dict[str, JSONValue]]]],
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Resolve path-only or explicit declarations; `rust_target_candidates(row, crates)`."""
     if "rust_items" not in row:
+        if "rust_declaration_selectors" in row:
+            target = row.get("rust_item")
+            paths = [target] if isinstance(target, str) else []
+            return selected_rust_candidates(row, paths, crates, rust_candidates)
         return rust_candidates(row.get("rust_item"), crates)
     targets = paired_rust_targets(row)
     if targets is None:
         return "invalid_rust_targets", []
+    if "rust_declaration_selectors" in row:
+        return selected_rust_candidates(row, targets, crates, rust_candidates)
     matches = [rust_candidates(target, crates) for target in targets]
     status = next((status for status, _ in matches if status != "unique"), "unique")
     return status, [item for _, candidates in matches for item in candidates]
@@ -401,6 +416,7 @@ def match_api_row(
         "cpp_matches": [declaration_summary(item) for item in cpp],
         "rust_status": rust_status,
         "declared_rust_kind": row.get("rust_kind"),
+        "declared_rust_selectors": row.get("rust_declaration_selectors"),
         "declared_rust_paths": row.get("rust_items", [row.get("rust_item")]),
         "rust_paths": [item.get("path") for item in rust_rows],
         "rust_matches": [rust_summary(item) for item in rust_rows],
@@ -409,6 +425,8 @@ def match_api_row(
 
 
 def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) -> str:
+    if rust in SELECTION_FAILURES:
+        return rust
     if parity == "excluded" and cpp == "missing":
         return "unmatched_exclusion" if source_known else "stale_exclusion"
     if cpp == "conflicting_inventory":
@@ -456,6 +474,8 @@ def rust_summary(row: dict[str, JSONValue]) -> dict[str, JSONValue]:
             "path",
             "kind",
             "signature",
+            "impl_context",
+            "declaration_sha256",
             "source_file",
             "source_status",
             "source_sha256",

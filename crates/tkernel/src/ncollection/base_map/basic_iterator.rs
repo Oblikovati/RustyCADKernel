@@ -62,6 +62,13 @@ impl<'a, N: BasicMapNode, const M: bool, const K: bool, const O: bool>
     ) -> bool {
         self.node == other.node
     }
+    /// Negates node identity across const policies; `left.is_not_equal(&right)`.
+    pub fn is_not_equal<const OTHER: bool>(
+        &self,
+        other: &BaseMapBasicIterator<'_, N, OTHER, K, O>,
+    ) -> bool {
+        !self.is_equal(other)
+    }
     /// Copies native iterator state and returns the destination; `target.assign(&source)`.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         *self = *source;

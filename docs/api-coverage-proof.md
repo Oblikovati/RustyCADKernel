@@ -263,3 +263,37 @@ fall back to a different kind. Invalid selectors remain unresolved. When
 selector preserves the existing ambiguity checks. Reports retain the declared
 kind alongside the matched declaration kind; this selection does not establish
 behavioral parity by itself.
+
+## Rust specialization bodies sharing a public path
+
+An optional `rust_declaration_selectors` array selects compiler declarations by
+all three fields: `path`, `declaration_sha256`, and `impl_context`. Copy the
+complete compiler context, including `null` for a declaration without an impl;
+a context summary or a guessed digest is insufficient. For example, after
+reviewing the three compiler records for `BaseMapBasicIterator::key`:
+
+```python
+row["rust_declaration_selectors"] = [
+    {field: body[field] for field in ("path", "declaration_sha256", "impl_context")}
+    for body in reviewed_key_bodies
+]
+row["status"] = "partial"
+```
+
+The array must be nonempty, and each object must contain exactly those fields.
+Digests are 64 lowercase hexadecimal characters. Its distinct paths, in first
+occurrence order, must equal the declared `rust_items`, or the single
+`rust_item` when no list is present. Several selectors may choose distinct
+bodies at one path. Repeated path/digest pairs are rejected. Every selector must
+identify exactly one source-pinned compiler declaration; a missing digest,
+mismatched impl context, or duplicate matching compiler record remains
+unresolved. `rust_kind`, when present, filters candidates before this selection.
+
+Omitting the array preserves path-only resolution and its ambiguity failures.
+There is no fallback to the first specialization. Reports retain the selectors,
+matched compiler digests, and full impl contexts. Independent partial-binding
+receipts use `rust_bodies` to check each selected body, signature, impl context,
+and current source hash; existing single `rust_body` receipts retain their
+semantics. Selecting several Rust bodies still claims only one native
+declaration. These identities establish correspondence, not behavioral parity;
+the BasicIterator mappings remain explicitly partial and no Vec status changes.

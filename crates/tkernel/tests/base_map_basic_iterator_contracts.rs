@@ -158,3 +158,23 @@ mod oracle_rows;
 fn native_basic_iterator_rows_match() {
     oracle_rows::compare_all_rows();
 }
+
+#[test]
+fn explicit_inequality_matches_partial_eq_without_node_access() {
+    with_nodes(|nodes, calls| {
+        let first = Write::from_node(nodes[0]);
+        let same = Read::from_node(nodes[0]);
+        let second = Read::from_node(nodes[1]);
+        let empty = Read::default();
+        calls.reset();
+        assert!(!first.is_not_equal(&same));
+        assert!(first.is_not_equal(&second));
+        assert!(first.is_not_equal(&empty));
+        assert!(!empty.is_not_equal(&Write::default()));
+        assert_eq!(first.is_not_equal(&second), first != second);
+        assert_eq!(
+            (calls.reads.get(), calls.writes.get(), calls.keys.get()),
+            (0, 0, 0)
+        );
+    });
+}

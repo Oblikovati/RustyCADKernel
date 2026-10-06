@@ -82,5 +82,7 @@ int main() {
   other.Buckets()[40] = &a;
   Const same_node(other);
   std::cout << "shared_node_equality " << (same_node == old) << ' ' << (same_node != empty) << '\n';
+  std::cout << "inequality " << (same_node != old) << ' ' << (same_node != empty) << ' '
+            << (empty != empty2) << ' ' << (old != same_node) << ' ' << (old != cursor) << '\n';
   return 0;
 }
