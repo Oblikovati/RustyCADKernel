@@ -1,0 +1,59 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "a7b1881f351c4e15c6d4a5308493ca0ecc763678",
+  "focused_rust_passed": 223,
+  "focused_integration_passed": 68,
+  "tkernel_unit_passed": 155,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "aliased_array_method_contracts",
+    "aliased_array_stride_narrowing",
+    "aliased_array_supplemental",
+    "ebtree_method_contracts",
+    "ncollection_aliased_array",
+    "ncollection_ubtree",
+    "ubtree_fallible",
+    "ubtree_method_contracts",
+    "ubtree_payload_contracts",
+    "ubtree_supplemental"
+  ],
+  "strict_tkernel_all_tests_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/ubtree-aliased-root-rust.gz",
+      "sha256": "e00331715a1b438608ccd89cfd644df66e9e519fc2368a1b1d461407e61b2fed"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/ubtree-aliased-root-unit.gz",
+      "sha256": "c93dfdb0d7f28f37c5e921f903248e4373052142584582e8d006d55ecc71166a"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/ubtree-aliased-root-clippy.gz",
+      "sha256": "d4f653caf9dd3aaed74382eb95bd33bd7498eb7b20aba393e74436f7a33e3226"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/ubtree-aliased-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "ea1dce3277d40ac5afb7bf63af5a4c533a5adb77",
+      "deleted_worktree": "/tmp/rustycad-ubtree-payload-methods",
+      "deleted_branch": "port/ubtree-payload-methods",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "106d2dd0bd70b03c77245de74dfaae1b343c6c5d",
+      "deleted_worktree": "/tmp/rustycad-aliased-stride-narrowing",
+      "deleted_branch": "port/aliased-stride-narrowing",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
