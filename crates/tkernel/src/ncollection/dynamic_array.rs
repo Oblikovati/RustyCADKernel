@@ -28,6 +28,8 @@ mod copy_date;
 mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
+#[allow(unsafe_code)]
+mod erase_phase;
 mod insertion;
 mod internal_append;
 mod internal_insertion;
