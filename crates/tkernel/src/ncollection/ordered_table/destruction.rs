@@ -1,41 +1,35 @@
-//! OCCT destroys ordered maps in hash-chain order, independently of insertion order.
-use super::{OrderedNode, OrderedTable};
-
-impl<K, V, H> OrderedTable<K, V, H> {
-    pub(super) fn unlink_order(&mut self, slot: usize, node: &OrderedNode<K, V>) {
-        if let Some(previous) = node.previous {
-            self.slots[previous].as_mut().unwrap().next = node.next;
-        } else {
-            self.first = node.next;
-        }
-        if let Some(next) = node.next {
-            self.slots[next].as_mut().unwrap().previous = node.previous;
-        } else {
-            self.last = node.previous;
-        }
-        self.free.push(slot);
-    }
-
+//! Native bucket destruction order; Rust unwinding finishes every allocation before resuming.
+use super::*;
+use crate::ncollection::{
+    destructor_unwind::DeferredDestructorPanic, node_release::release_typed_node,
+};
+impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn clear(&mut self, release: bool) {
-        // BaseMap::destroy visits increasing buckets and head-to-tail chains before
-        // resetting extent; slots may have been reused after arbitrary removals.
-        for bucket in &mut self.buckets {
-            for slot in bucket.drain(..) {
-                drop(self.slots[slot].take());
+        let mut panics = DeferredDestructorPanic::default();
+        for head in self.base.bucket_slots_mut() {
+            let mut node = *head;
+            while !node.is_null() {
+                // SAFETY: cache the next live link before destroying only this node.
+                let next = unsafe { (*node).next() };
+                panics.capture(|| unsafe { release_typed_node(node.cast::<N>(), &self.resource) });
+                node = next;
             }
+            *head = std::ptr::null_mut();
         }
+        self.finish_clear(release);
+        panics.finish(Ok(()));
+    }
+    fn finish_clear(&mut self, release: bool) {
+        self.base.finish_destroy(release);
         self.slots.clear();
         self.free.clear();
+        self.identities.clear();
         self.first = None;
         self.last = None;
         self.count = 0;
-        if release {
-            self.buckets.clear();
-        }
     }
 }
-
-impl<K, V, H> Drop for OrderedTable<K, V, H> {
+impl<K, V, H, N: StorageNode<K, V>> Drop for OrderedTable<K, V, H, N> {
     fn drop(&mut self) {
         self.clear(true);
     }

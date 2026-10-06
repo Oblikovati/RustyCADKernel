@@ -9,8 +9,10 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         }
     }
     fn cursor_node_identity(&self, slot: Option<usize>) -> *const () {
-        self.node(slot)
-            .map_or(std::ptr::null(), |node| std::ptr::from_ref(node).cast())
+        self.checked_node_slot(slot)
+            .map_or(std::ptr::null(), |slot| {
+                self.table.node_pointer(slot).cast_const().cast()
+            })
     }
 }
 impl OrderedDataCursor {
@@ -40,14 +42,18 @@ impl OrderedDataCursor {
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a K, Failure> {
-        Ok(&map.node(self.checked_slot(map)?)?.key)
+        Ok(map
+            .table
+            .key(map.checked_node_slot(self.checked_slot(map)?)?))
     }
     /// Borrows the current value from its map; `cursor.value(&map)?`.
     pub fn value<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a V, Failure> {
-        Ok(&map.node(self.checked_slot(map)?)?.value)
+        Ok(map
+            .table
+            .value(map.checked_node_slot(self.checked_slot(map)?)?))
     }
     /// Borrows the current value exclusively; `*cursor.change_value(&mut map)?=42`.
     pub fn change_value<'a, K, V, H: HashPolicy<K>>(
@@ -55,14 +61,15 @@ impl OrderedDataCursor {
         map: &'a mut OrderedDataMap<K, V, H>,
     ) -> Result<&'a mut V, Failure> {
         let slot = self.checked_slot(map)?;
-        Ok(&mut map.node_mut(slot)?.value)
+        let slot = map.checked_node_slot(slot)?;
+        Ok(map.table.value_mut(slot))
     }
     /// Advances through insertion-order links; `cursor.advance(&map)`.
     pub fn advance<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
         self.slot = self
             .checked_slot(map)
             .ok()
-            .and_then(|slot| map.node(slot).ok()?.next);
+            .and_then(|slot| map.table.next_slot(map.checked_node_slot(slot).ok()?));
         self.node = map.cursor_node_identity(self.slot);
     }
 

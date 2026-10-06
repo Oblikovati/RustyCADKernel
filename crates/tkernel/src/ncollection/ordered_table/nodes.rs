@@ -1,84 +1,72 @@
-//! Views of insertion-order nodes: the Rust spelling of `FirstNode()` and `OrderNext()`.
-//!
-//! Native maps hand out raw node pointers; here a view borrows the map's node slots and
-//! follows the same insertion-order links, so traversal cannot outlive the map.
-use super::OrderedNode;
-use crate::ncollection::AllocatedBox;
-
-type NodeSlot<K, V> = Option<AllocatedBox<OrderedNode<K, V>>>;
-
-/// A shared view of one ordered-map node; `map.first_node().unwrap().key()`.
+//! Lifetime-bound safe views over the actual native nodes and insertion-order links.
+use super::*;
+/// Shared ordered node view; `map.first_node().unwrap().key()`.
 pub struct OrderedNodeRef<'a, K, V> {
-    slots: &'a [NodeSlot<K, V>],
-    slot: usize,
+    inner: OrderedItems<'a, K, V>,
 }
-
-/// An exclusive view of one ordered-data-map node; `*map.first_node_mut().unwrap().change_value() = 7`.
+/// Exclusive ordered-data node view; `*map.first_node_mut().unwrap().change_value()=7`.
 pub struct OrderedNodeMut<'a, K, V> {
-    slots: &'a mut [NodeSlot<K, V>],
-    slot: usize,
+    inner: OrderedItems<'a, K, V>,
+    exclusive: PhantomData<&'a mut V>,
 }
-
+impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+    pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, V>> {
+        let inner = self.items();
+        inner.current?;
+        Some(OrderedNodeRef { inner })
+    }
+}
+impl<K, V, H> OrderedTable<K, V, H> {
+    pub fn first_node_mut(&mut self) -> Option<OrderedNodeMut<'_, K, V>> {
+        let inner = self.items();
+        inner.current?;
+        Some(OrderedNodeMut {
+            inner,
+            exclusive: PhantomData,
+        })
+    }
+}
 impl<'a, K, V> OrderedNodeRef<'a, K, V> {
-    /// A view of `slot`, or `None` for the null link that ends the order.
-    pub(in crate::ncollection) fn at(
-        slots: &'a [NodeSlot<K, V>],
-        slot: Option<usize>,
-    ) -> Option<Self> {
-        Some(Self { slots, slot: slot? })
-    }
-    /// Borrows the node's key; `node.key()`.
+    /// Borrows the actual stored key; `node.key()`.
     pub fn key(&self) -> &'a K {
-        &self.node().key
+        self.inner.current_pair().unwrap().0
     }
-    /// Borrows the node's item (`()` for a key-only map); `node.value()`.
+    /// Borrows the item (unit for the retained set-view adaptation); `node.value()`.
     pub fn value(&self) -> &'a V {
-        &self.node().value
+        self.inner.current_pair().unwrap().1
     }
-    /// The next node in insertion order, `None` after the last; `node.order_next()`.
+    /// Follows the actual insertion-order link; `node.order_next()`.
     pub fn order_next(&self) -> Option<Self> {
-        Self::at(self.slots, self.node().next)
-    }
-    fn node(&self) -> &'a OrderedNode<K, V> {
-        // Only live slots are ever linked into the insertion order.
-        self.slots[self.slot]
-            .as_deref()
-            .expect("an insertion-order link names a live node")
+        let mut inner = self.inner.clone();
+        inner.advance();
+        inner.current?;
+        Some(Self { inner })
     }
 }
-
-impl<'a, K, V> OrderedNodeMut<'a, K, V> {
-    /// A view of `slot`, or `None` for the null link that ends the order.
-    pub(in crate::ncollection) fn at(
-        slots: &'a mut [NodeSlot<K, V>],
-        slot: Option<usize>,
-    ) -> Option<Self> {
-        Some(Self { slots, slot: slot? })
-    }
-    /// Borrows the node's key; keys stay immutable as in native `Key() const`; `node.key()`.
+impl<K, V> OrderedNodeMut<'_, K, V> {
+    /// Borrows the immutable key; `node.key()`.
     pub fn key(&self) -> &K {
-        &self.node().key
+        // SAFETY: this view keeps the node live and projects only its key.
+        unsafe { &*(self.inner.key)(self.inner.current.unwrap()) }
     }
-    /// Borrows the node's item; `node.value()`.
+    /// Borrows the current value; `node.value()`.
     pub fn value(&self) -> &V {
-        &self.node().value
+        // SAFETY: the view's shared borrow excludes its exclusive accessor.
+        unsafe { &*(self.inner.value)(self.inner.current.unwrap()) }
     }
-    /// Borrows the node's item exclusively; `*node.change_value() = 7`.
+    /// Edits only the current value; `*node.change_value()=7`.
     pub fn change_value(&mut self) -> &mut V {
-        let slot = self.slot;
-        &mut self.slots[slot]
-            .as_deref_mut()
-            .expect("an insertion-order link names a live node")
-            .value
+        // SAFETY: only data maps create exclusive views; the exclusive view borrow prevents aliasing.
+        unsafe { &mut *(self.inner.value)(self.inner.current.unwrap()).cast_mut() }
     }
-    /// Moves the exclusive view to the next node in insertion order; `node.order_next()`.
-    pub fn order_next(self) -> Option<Self> {
-        let next = self.node().next;
-        Self::at(self.slots, next)
-    }
-    fn node(&self) -> &OrderedNode<K, V> {
-        self.slots[self.slot]
-            .as_deref()
-            .expect("an insertion-order link names a live node")
+    /// Consumes this view and follows the native order link; `node.order_next()`.
+    pub fn order_next(mut self) -> Option<Self> {
+        self.inner.advance();
+        self.inner.current?;
+        Some(self)
     }
 }
+// SAFETY: exclusive values transfer with the unique view, while keys stay shared.
+unsafe impl<K: Sync, V: Send> Send for OrderedNodeMut<'_, K, V> {}
+// SAFETY: shared view access never permits value mutation.
+unsafe impl<K: Sync, V: Sync> Sync for OrderedNodeMut<'_, K, V> {}

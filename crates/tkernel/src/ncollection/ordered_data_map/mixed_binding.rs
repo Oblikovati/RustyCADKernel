@@ -9,7 +9,7 @@ impl<K: Clone, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Copies an absent key and returns item storage; `*map.bound_key_ref(&1, 42) = 7`.
     pub fn bound_key_ref(&mut self, key: &K, value: V) -> &mut V {
         let (_, slot) = self.table.place_key_ref(key, || value, true);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
     /// Copies a key only for a new binding, retaining existing items; `map.try_bind_key_ref(&1, 42)`.
     pub fn try_bind_key_ref(&mut self, key: &K, value: V) -> bool {
@@ -18,7 +18,7 @@ impl<K: Clone, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Returns an existing item or copies a new key; `map.try_bound_key_ref(&1, 42)`.
     pub fn try_bound_key_ref(&mut self, key: &K, value: V) -> &mut V {
         let (_, slot) = self.table.place_key_ref(key, || value, false);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
 }
 impl<K, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
@@ -29,7 +29,7 @@ impl<K, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Transfers an absent key and returns copied item storage; `*map.bound_value_ref(1, &42) = 7`.
     pub fn bound_value_ref(&mut self, key: K, value: &V) -> &mut V {
         let (_, slot) = self.table.place(key, || value.clone(), false, true);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
     /// Transfers a key and copies the item only on insertion; `map.try_bind_value_ref(1, &42)`.
     pub fn try_bind_value_ref(&mut self, key: K, value: &V) -> bool {
@@ -38,6 +38,6 @@ impl<K, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Returns an existing item or copies a new item; `map.try_bound_value_ref(1, &42)`.
     pub fn try_bound_value_ref(&mut self, key: K, value: &V) -> &mut V {
         let (_, slot) = self.table.place(key, || value.clone(), false, false);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
 }

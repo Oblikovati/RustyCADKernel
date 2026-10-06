@@ -1,5 +1,5 @@
 //! Ownership-specific key inputs share native allocation, hashing and construction phases.
-use super::{HashPolicy, OrderedNode, OrderedTable};
+use super::{HashPolicy, OrderedTable, StorageNode};
 
 trait KeyArgument<K> {
     fn lookup_key(&self) -> &K;
@@ -23,7 +23,7 @@ impl<K: Clone> KeyArgument<K> for BorrowedKey<'_, K> {
         self.0.clone()
     }
 }
-impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
+impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn place(
         &mut self,
         key: K,
@@ -58,12 +58,18 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         replace_key: bool,
         replace_value: bool,
     ) {
-        let node = self.slots[slot].as_mut().unwrap();
+        let node = self.node_pointer(slot);
         if replace_key {
-            node.key = key.construct_key();
+            // SAFETY: only set insertion enables key replacement under exclusive table access.
+            unsafe {
+                *N::key(node) = key.construct_key();
+            }
         }
         if replace_value {
-            node.value = construct();
+            // SAFETY: only data-map insertion enables value replacement; fields are disjoint.
+            unsafe {
+                *N::value(node) = construct();
+            }
         }
     }
     fn append_argument<I: KeyArgument<K>>(
@@ -72,20 +78,17 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         construct: impl FnOnce() -> V,
         hash: usize,
     ) -> usize {
-        let node = self.resource.allocate_value_with(|| {
-            // OCCT 3d097a03 constructs the base value before the derived key.
-            let value = construct();
-            OrderedNode {
-                key: key.construct_key(),
-                value,
-                previous: self.last,
-                next: None,
-            }
-        });
+        // Native allocation precedes value then key construction, including clone failures.
+        let node = N::allocate(
+            &self.resource,
+            self.base.bucket_slots()[hash],
+            || key.construct_key(),
+            construct,
+        );
         self.append_allocated(node, hash)
     }
 }
-impl<K: Clone, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
+impl<K: Clone, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn place_key_ref(
         &mut self,
         key: &K,

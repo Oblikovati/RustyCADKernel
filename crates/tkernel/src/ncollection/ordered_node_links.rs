@@ -4,8 +4,8 @@ use super::MapLinkNode;
 #[derive(Default)]
 #[repr(C)]
 pub(super) struct OrderedNodeLinks {
-    previous: *mut MapLinkNode,
-    next: *mut MapLinkNode,
+    pub(super) previous: *mut MapLinkNode,
+    pub(super) next: *mut MapLinkNode,
 }
 impl OrderedNodeLinks {
     pub(super) fn previous<N>(&self) -> *mut N {

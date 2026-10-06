@@ -23,7 +23,7 @@ impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Copies a binding and borrows the stored item; `*map.bound_ref(&1, &42) = 7`.
     pub fn bound_ref(&mut self, key: &K, value: &V) -> &mut V {
         let (_, slot) = self.table.place_borrowed(key, value, true);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
 
     /// Copies key and item only for an absent binding; `map.try_bind_ref(&1, &42)`.
@@ -34,6 +34,6 @@ impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Returns the existing item or copies a new binding; `map.try_bound_ref(&1, &42)`.
     pub fn try_bound_ref(&mut self, key: &K, value: &V) -> &mut V {
         let (_, slot) = self.table.place_borrowed(key, value, false);
-        &mut self.table.slots[slot].as_mut().unwrap().value
+        self.table.value_mut(slot)
     }
 }

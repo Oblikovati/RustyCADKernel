@@ -1,7 +1,6 @@
 //! Key/value hash nodes threaded in insertion order with stable entry storage.
 use super::ordered_table::{
-    OrderedItems, OrderedItemsMut, OrderedNode, OrderedNodeMut, OrderedNodeRef, OrderedTable,
-    buckets_from_int,
+    OrderedItems, OrderedItemsMut, OrderedNodeMut, OrderedNodeRef, OrderedTable, buckets_from_int,
 };
 use super::{BaseAllocator, DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
@@ -118,14 +117,13 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     }
     /// Borrows the stored key/value pair; `map.contained(&42)`.
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
-        let node = self.table.slots[self.table.lookup(key)?].as_ref()?;
-        Some((&node.key, &node.value))
+        let slot = self.table.lookup(key)?;
+        Some((self.table.key(slot), self.table.value(slot)))
     }
     /// Borrows the key immutably and value exclusively; `map.contained_mut(&42)`.
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
         let slot = self.table.lookup(key)?;
-        let node = &mut **self.table.slots[slot].as_mut()?;
-        Some((&node.key, &mut node.value))
+        Some(self.table.pair_mut(slot))
     }
     /// Unlinks a pair while retaining all other positions; `map.unbind(&42)`.
     pub fn unbind(&mut self, key: &K) -> bool {
