@@ -3,6 +3,10 @@
 use super::BaseAllocator;
 use std::{cell::UnsafeCell, ffi::c_void, rc::Rc};
 mod allocation;
+mod basic_iterator;
+pub use basic_iterator::{
+    BaseSparseArrayBasicIterator, BasicSparseArraySource, BasicSparseArraySourceMut,
+};
 mod assignment;
 mod block;
 mod cursor;
