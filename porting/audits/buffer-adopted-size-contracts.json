@@ -1,0 +1,89 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_Buffer constructor adopted logical size",
+  "base_revision": "4b2171c9539bd41b6524961474cc4107545af318",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "Committed candidate; root integration/check/deletion pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/buffer.rs": "727ad8b01cd5ad7552f1d9ffab51be1c83d0506dbe128214a69243aa9630b9e9",
+    "crates/tkernel/src/ncollection/allocator.rs": "d99c8a8b20e19bf105abd4e16dbac580b5586436f9449b0472f07760694c38cd",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "259b870a1627baa5c14d130e036c29a4dc0a5cdcbd4d5fb4cccbe940effe0c78",
+    "crates/tkernel/src/ncollection/buffer/pointers.rs": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+    "crates/tkernel/src/ncollection/buffer/adoption.rs": "3358d3204c66088b128fa25b644a890940f3a7b8f3403933a9cb0653bf81911f",
+    "crates/tkernel/tests/buffer_adopted_size_contracts.rs": "6227dd5c2115a081e42eb37e1ddb206d62ff1c7452a17ec6a93edd2d8ead684f",
+    "crates/tkernel/tests/buffer_pointer_contracts.rs": "062b799cfc66e602451d08baaa7d25393dc77be9bf722f217bd769fa547451c1",
+    "crates/tkernel/tests/ncollection_buffer.rs": "e8a3744e60bc8620a6575d08b230eeee1f790cbaf0836346a6f945a64d3b28c1",
+    "tools/oracle/tkernel_buffer_adopted_size.cxx": "6278a8acfdea6bdccb89b11672c82c84f04cf4d43f3bf65b5dd7b27ab6a2d950",
+    "tools/oracle/tkernel_buffer_adopted_size.expected": "ce8651e5a4ab4bf2fbeb8716d66a68de76dd87e6b3680c90c7b3e521c8e313c2"
+  },
+  "source_scope": "Buffer source, ownership adapter and focused fixtures; not full compiler dependency closure.",
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx": "e8d90ce2745f5ef78f2bfbf502cb278b56e825b485c64c80512a425907080da9"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-rust.gz",
+      "sha256": "4be3af6bcfbd5517dc132c0327b54e516775036f358a1483f297f4d1e1332b81"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-miri.gz",
+      "sha256": "6cde1a49f14edf636a3342219cbe384f0fe7be39985b02395a349d0a43ac3616"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-clippy.gz",
+      "sha256": "6f5afa82d9b84f702013d37345a5d42c2312a98872b06083be51727cd738fd38"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-native-original.gz",
+      "sha256": "d667d34f5286becab6e8306cbda373a12ff8d3c0f829857830ccd621218d4bec"
+    },
+    "initial-rust": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-initial-rust.gz",
+      "sha256": "45ea818e43c9b6f55b9d00720021a1d844784ffae5f5b6b9e0b5653c49614ce2"
+    },
+    "initial-miri": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-initial-miri.gz",
+      "sha256": "9c3e146fb7bfdde04b0a2bce9cfe44978a2274fb85ac5b9ff10b21e48d0dee94"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/buffer-adopted-size-source.tar.gz",
+      "sha256": "96474ac1bb81498f1edb069ba5d4d870bc890ec95da88d8979ef75a3297063e4"
+    }
+  },
+  "rust_integration_passed": 47,
+  "new_regression_tests": 5,
+  "strict_provenance_miri_passed": 12,
+  "native_original_passed": 1,
+  "original_runtime_names": [
+    "NCollection_BufferTest.EmptyRange"
+  ],
+  "native_probe_rows": 4,
+  "clippy_exit": 0,
+  "fmt_exit": 0,
+  "method_bindings": [
+    {
+      "cpp": "NCollection_Buffer(theAlloc,theSize,theData)",
+      "rust": "rustycad_tkernel::ncollection::Buffer::with_data_size",
+      "domain": "initialized owned data, 0 <= logical size <= allocation extent"
+    }
+  ],
+  "observations": [
+    "Adopted logical size is independent from allocation extent; zero-sized adoption keeps the non-null allocation identity.",
+    "Data slices, mutable slices, pointer endpoints, Size and DumpJson use the logical extent. Allocation ownership remains whole and is released exactly once.",
+    "Free, Allocate and SetAllocator update the same logical extent; full-size with_data behavior is preserved.",
+    "Four native rows compare byte count, non-null identity, endpoint offsets and prefix writes.",
+    "Initial Rust/Miri compilation rejected the fixture Vec output: switched test to the project DumpStream; production behavior was unchanged by that correction."
+  ],
+  "remaining_gaps": [
+    "Safe adoption retains original allocator ownership; null-selected native leaked storage and incompatible selected/free allocator behavior are not reproduced.",
+    "Native raw/uninitialized/adopted external pointers, throw-time requested-size observation and destructor exception behavior remain outside this adapter.",
+    "Native probe ran x86_64 Linux; no all-platform object-layout or complete class equivalence proof."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "class_status": "partial"
+}

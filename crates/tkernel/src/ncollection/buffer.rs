@@ -6,6 +6,7 @@ use crate::standard::{
 };
 use std::io;
 
+mod adoption;
 mod pointers;
 
 /// Owned buffer with explicit allocation state; `Buffer::new(Some(allocator), 16)`.
@@ -17,6 +18,7 @@ pub struct Buffer {
     parent: StandardTransient,
     allocator: Option<BaseAllocator>,
     storage: Option<AllocatedBytes>,
+    logical_size: usize,
 }
 
 impl Buffer {
@@ -30,6 +32,7 @@ impl Buffer {
             parent: StandardTransient::default(),
             allocator,
             storage: None,
+            logical_size: 0,
         };
         buffer.allocate(size)?;
         Ok(buffer)
@@ -44,6 +47,7 @@ impl Buffer {
         Self {
             parent: StandardTransient::default(),
             allocator,
+            logical_size: data.as_slice().len(),
             storage: Some(data),
         }
     }
@@ -60,6 +64,10 @@ impl Buffer {
             .allocator
             .as_ref()
             .and_then(|allocator| allocator.allocate(size));
+        self.logical_size = self
+            .storage
+            .as_ref()
+            .map_or(0, |bytes| bytes.as_slice().len());
         Ok(self.storage.is_some())
     }
 
@@ -72,6 +80,7 @@ impl Buffer {
             allocator.check_free(self.data_ptr())?;
         }
         self.storage = None;
+        self.logical_size = 0;
         Ok(())
     }
 
@@ -80,21 +89,23 @@ impl Buffer {
         self.storage.is_none()
     }
 
-    /// Returns the allocated byte count (`Size`); `buffer.size() == 16`.
+    /// Returns the logical byte count (`Size`); `buffer.size() == 16`.
     pub fn size(&self) -> usize {
-        self.as_slice().len()
+        self.logical_size
     }
 
     /// Borrows buffer bytes (`Data`); empty when unallocated. Example: `buffer.as_slice().iter()`.
     pub fn as_slice(&self) -> &[u8] {
-        self.storage.as_ref().map_or(&[], AllocatedBytes::as_slice)
+        self.storage
+            .as_ref()
+            .map_or(&[], |bytes| &bytes.as_slice()[..self.logical_size])
     }
 
     /// Borrows mutable buffer bytes (`ChangeData`); `buffer.as_mut_slice().fill(42)`.
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
-        self.storage
-            .as_mut()
-            .map_or(&mut [], AllocatedBytes::as_mut_slice)
+        self.storage.as_mut().map_or(&mut [], |bytes| {
+            &mut bytes.as_mut_slice()[..self.logical_size]
+        })
     }
 
     /// The data address, null when unallocated (native `Data()` pointer); `buffer.data_ptr()`.
