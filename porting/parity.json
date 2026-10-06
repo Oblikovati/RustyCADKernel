@@ -74138,14 +74138,6 @@
       "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
     },
     {
-      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T>&,std::enable_if<std::is_base_of<NCollection_HSequence,T>::value>::type*)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_handle",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. Takes Handle<HSequence<T>> (Rust has no derived HSequence types); moves the source's items, a self-append is a no-op as in Sequence::Append, and a null handle reports Standard_NullObject where C++ dereferences it."
-    },
-    {
       "upstream_id": "NCollection_HSequence::DEFINE_STANDARD_RTTI_INLINE(NCollection_HSequence,Standard_Transient)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
@@ -245622,6 +245614,174 @@
       ],
       "status": "partial",
       "notes": "Exact partial fill-constructor domain: default all matrix cells, then assign borrowed donor in row-major order. Explicit callback supports non-Clone assignment-only types; Clone convenience dispatches clone_from, not clone. Assignment failure drops all initialized elements in native forward order; donor remains caller-owned. Owned with_value remains a consuming Rust convenience. Shared wrapper requires Send+Sync+static and guarded base access; allocation/default-constructor failure, arbitrary C++ lifetime/address hooks, primitive uninitialized defaults and invalid range handling and full inherited surface remain outside this proof. See porting/audits/harray2-borrowed-initialization.json."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T> &,typename std::enable_if<std::is_base_of<NCollection_HSequence<TheItemType>, T>::value>::type *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_handle",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::HSequence::append_handle",
+        "rustycad_tkernel::ncollection::HSequence::append_handle_projected"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::append_handle",
+          "declaration_sha256": "f954ca8340b3512db2683e82894ea29ebe9af61f5eb2d795ed44cdb54a5597b3",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::append_handle_projected",
+          "declaration_sha256": "a32c988b95b79ab44e2c3ee7672f4a71998c9d586bd62bb27016325399985f19",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial derived-handle Append domain: explicit Rust projection selects the source wrapper corresponding to native derived ChangeSequence lookup; it runs before self/empty tests. The callback is a Rust adapter capability, not a native callback. Existing identity adapter delegates unchanged. Same allocator transfers nodes, different allocator copies and clears only after successful copies; failure retains donor and published target prefix. Native hidden getter redirection/throw observations are covered only through explicit policy. Null rejection is a safe Rust extension over native null dereference. Clone+Send+Sync+static, lock/reentrancy, arbitrary getter aliasing and native template inheritance constraints remain narrower/different; see porting/audits/hsequence-projected-append.json."
     }
   ],
   "tests": [
