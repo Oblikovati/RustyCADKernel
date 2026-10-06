@@ -3,7 +3,9 @@
 //! Native `TreeNode*` links become node ids into the tree's arena: `UBTree::root_id`,
 //! `BoundingNode::child_id` and `BoundingNode::parent_id` name nodes, and the tree resolves
 //! them (`UBTree::child`, `UBTree::change_child`, ...).
-use super::{AllocatedBox, BaseAllocator};
+use super::BaseAllocator;
+mod storage;
+use storage::TreeArena;
 mod destruction;
 mod insertion;
 mod navigation;
@@ -82,7 +84,7 @@ impl<T, B> BoundingNode<T, B> {
 }
 /// OCCT UBTree insertion and selection; `UBTree::<i32, Bounds>::default()`.
 pub struct UBTree<T: Clone + Default, B: BoundingVolume> {
-    nodes: Vec<Option<AllocatedBox<BoundingNode<T, B>>>>,
+    nodes: TreeArena<BoundingNode<T, B>>,
     root: Option<usize>,
     last: Option<usize>,
     resource: BaseAllocator,
@@ -96,7 +98,7 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     /// Own nodes in an injected allocator; `UBTree::with_allocator(arena)`.
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
-            nodes: Vec::new(),
+            nodes: TreeArena::new(),
             root: None,
             last: None,
             resource,
@@ -185,9 +187,13 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         self.nodes[index].as_deref_mut().unwrap()
     }
     fn allocate_node(&mut self, node: BoundingNode<T, B>) -> usize {
-        let index: usize = self.nodes.len();
-        self.nodes.push(Some(self.resource.allocate_value(node)));
-        index
+        self.nodes.push_single(self.resource.allocate_value(node))
     }
 }
 mod method_contracts;
+
+impl<T: Clone + Default, B: BoundingVolume> Drop for UBTree<T, B> {
+    fn drop(&mut self) {
+        self.clear_owned_nodes();
+    }
+}

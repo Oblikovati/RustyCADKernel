@@ -34,18 +34,49 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     /// `new_bounds` and a default object. Returns the new leaf's id, `None` for a dead id.
     /// Example: `tree.gemmate(root, union, 7, bounds)`.
     pub fn gemmate(&mut self, id: usize, new_bounds: B, object: T, bounds: B) -> Option<usize> {
-        let previous: BoundingNode<T, B> = self.node_by_id(id)?.clone();
-        let first: usize = self.allocate_node(previous);
+        let previous = self.node_by_id(id)?.clone();
+        let mut children = [Some(previous), Some(BoundingNode::new(object, bounds))];
+        let pair = super::storage::TreeArena::allocate_pair(&self.resource, |index| {
+            children[index].take().unwrap()
+        });
+        let first = self.nodes.insert_pair(pair);
+        Some(self.finish_gemmate(id, first, &new_bounds))
+    }
+    fn finish_gemmate(&mut self, id: usize, first: usize, new_bounds: &B) -> usize {
+        let second = first + 1;
         self.node_mut(first).parent = Some(id);
-        let second: usize = self.allocate_node(BoundingNode::new(object, bounds));
         self.node_mut(second).parent = Some(id);
         self.reparent_children(first);
-        let node: &mut BoundingNode<T, B> = self.node_mut(id);
+        let node = self.node_mut(id);
         node.children = Some([first, second]);
         // OCCT 3d097a0328 assigns retained parent payloads after publishing child links.
-        node.bounds.clone_from(&new_bounds);
+        node.bounds.clone_from(new_bounds);
         // Native `myObject = TheObjType()` nullifies the branch object.
         node.object.clone_from(&T::default());
-        Some(second)
+        second
+    }
+}
+impl<T: Clone + Default, B: BoundingVolume + Default> UBTree<T, B> {
+    /// Default-constructs paired children and assigns borrowed inputs in native Gemmate order.
+    /// Example: `tree.gemmate_ref(root, &union, &object, &bounds)`.
+    /// Before publication, Rust cleans constructed children if a callback panics.
+    pub fn gemmate_ref(
+        &mut self,
+        id: usize,
+        new_bounds: &B,
+        object: &T,
+        bounds: &B,
+    ) -> Option<usize> {
+        let previous = self.node_by_id(id)?;
+        let pair =
+            super::storage::TreeArena::allocate_pair(&self.resource, |_| BoundingNode::default());
+        let pair = pair.edit(|children| {
+            children.node_mut(0).clone_from(previous);
+            let child = children.node_mut(1);
+            child.object.clone_from(object);
+            child.bounds.clone_from(bounds);
+        });
+        let first = self.nodes.insert_pair(pair);
+        Some(self.finish_gemmate(id, first, new_bounds))
     }
 }
