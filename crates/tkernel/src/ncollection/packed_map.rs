@@ -6,6 +6,7 @@ mod iteration;
 mod legacy_algebra;
 mod node;
 mod node_cursor;
+mod object_storage;
 mod protected_helpers;
 pub use node::PackedMapNode;
 mod queries;
