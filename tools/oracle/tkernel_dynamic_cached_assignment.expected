@@ -1,0 +1,20 @@
+moved_empty_init more=0
+assign value=2 target=1 returned=1 self=1 unchanged=1
+const_assign value=2 same=1 returned=1
+same_owner_new_pointer eq=1 ne=0 lt=0 gt=0 le=1 ge=1
+different_owner_same_pointer eq=0 ne=1 lt=0 gt=0 le=1 ge=1
+assigned_end mutable=0 constant=0 difference=-2
+init_mutable value=101 source=1
+initialize_other value=1 target=1
+init_const_argument write=201
+initialize_const_argument write=301
+const_init value=301
+const_initialize value=1
+initialized_end more=0 difference=-1
+reinitialized_end more=1 value=107
+empty_init more=0 same=1
+cross_owner_zero eq=0 ne=1 lt=0 gt=0 le=1 ge=1
+cross_const_before eq=0 ne=1 lt=1 gt=0 le=1 ge=0
+cross_const_after eq=0 ne=1 lt=0 gt=1 le=0 ge=1
+signed_min_left lt=1 ge=0
+signed_min_right gt=1 le=0

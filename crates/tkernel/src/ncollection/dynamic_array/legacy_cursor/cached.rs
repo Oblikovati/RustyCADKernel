@@ -1,6 +1,8 @@
 //! Native iterator pointers survive block ownership transfer; reloads still consult the old owner.
 use super::{DynamicArray, DynamicArrayIterator, Failure};
+mod assignment;
 mod capture;
+mod comparison;
 mod navigation;
 mod operations;
 
