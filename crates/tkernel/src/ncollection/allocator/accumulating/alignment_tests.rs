@@ -33,5 +33,7 @@ fn fresh_small_block_honors_strict_alignment_without_extra_count() {
             .sum::<i32>(),
         1
     );
-    // The owner graph frees both raw blocks on drop; native findBlock has only a two-key window.
+    // Native findBlock has only a two-key window; owned release uses the retained block extent.
+    engine.free_owned(pointer.as_ptr().addr()).unwrap();
+    assert_eq!(engine.chain().len(), 1);
 }

@@ -2,7 +2,9 @@
 //!
 //! Blocks are found by `address / block_size` exactly as upstream; the map stores block
 //! descriptors by key and the `prevBlock` chain links keys instead of descriptor pointers.
-use super::raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_reallocate};
+use super::raw_heap::{
+    MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_payload_size, heap_reallocate,
+};
 use super::{AccAlignedSize, AccBlock, AccBlockKey};
 use crate::standard::Failure;
 use std::{collections::HashMap, ptr::NonNull};
@@ -77,6 +79,11 @@ impl AccBlockSlot {
             free_size: self.free_size(),
             alloc_count: self.descriptor.alloc_count,
         }
+    }
+    fn contains_owned(&self, address: usize) -> bool {
+        // SAFETY: this slot retains the live original raw_heap pointer, including its header.
+        let capacity = unsafe { heap_payload_size(self.payload) };
+        address >= self.start() && address - self.start() <= capacity
     }
     fn reservation(&self, size: usize, align: usize) -> Option<usize> {
         let cursor = self.descriptor.alloc_start.as_ptr().addr();
@@ -312,17 +319,38 @@ impl AccEngine {
     /// owners free exactly once, and `BaseAllocator::free_raw` is `unsafe`.
     pub(super) fn free(&mut self, address: usize) -> Result<(), Failure> {
         let key = self.freeable_block(address)?;
+        self.release_counted_block(key);
+        Ok(())
+    }
+
+    /// Rust-owned pointers may exceed native findBlock's window or equal a zero-byte endpoint.
+    pub(super) fn free_owned(&mut self, address: usize) -> Result<(), Failure> {
+        let key = self
+            .find_block(address)
+            .filter(|key| self.blocks[key].contains_owned(address));
+        let key = key
+            .or_else(|| {
+                self.blocks
+                    .iter()
+                    .find_map(|(&key, slot)| slot.contains_owned(address).then_some(key))
+            })
+            .filter(|key| self.blocks[key].descriptor.alloc_count != 0)
+            .ok_or_else(|| Failure::with_type("Standard_ProgramError", INVALID_FREE, ""))?;
+        self.release_counted_block(key);
+        Ok(())
+    }
+
+    fn release_counted_block(&mut self, key: usize) {
         let block = self.blocks.get_mut(&key).expect("found block is bound");
         block.descriptor.free();
         if block.descriptor.alloc_count != 0 {
-            return Ok(());
+            return;
         }
         if self.blocks.len() > 1 {
             self.release_block(key);
         } else {
             self.shrink_sole_block(key);
         }
-        Ok(())
     }
 
     /// Frees an empty block and unlinks it from the `prevBlock` chain.

@@ -398,9 +398,10 @@ impl BaseAllocator {
         match &*self.inner {
             AllocatorKind::Incremental(engine) => locked(engine).release(),
             AllocatorKind::Accumulating(engine) => {
-                // Only a zero-size byte allocation at a fresh block's end can fail: upstream's
-                // Free raises there and the allocation stays counted, which Drop cannot report.
-                let _ = locked(engine).free(address.as_ptr() as usize);
+                // Owned layouts can exceed native lookup windows; actual block extents retain them.
+                locked(engine)
+                    .free_owned(address.as_ptr().addr())
+                    .expect("owned accumulating allocation must retain its counted block");
             }
             // SAFETY: forwarded from this function's contract.
             _ => unsafe { heap_free(address) },
