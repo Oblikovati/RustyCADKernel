@@ -1,0 +1,476 @@
+{
+  "api_denominator_complete": false,
+  "artifacts": [
+    {
+      "path": "tools/oracle/tkernel_returned_type_obligations.cxx",
+      "sha256": "5ce72d71c3b64aed597ca56e6e0222921c9846427c120e255b6f32717d8bd3c5"
+    },
+    {
+      "path": "porting/staged-api-inventory/effective-obligations-v1/native-access.json",
+      "sha256": "c260df6616d62f817244c988f94a67f87afcd72f969c72844b0d628da883b0b6"
+    },
+    {
+      "path": "porting/runtime-evidence/effective-obligations-rust-inventory-v1.json.gz",
+      "sha256": "ae116d0af7812cb7610b29f0e440243433cc06594edd896faa001310cf50eb35"
+    },
+    {
+      "path": "porting/audits/sparse-base-remaining-methods.json",
+      "sha256": "8909bd8515725ddecc64a6d79ca11d9ff0db36d54e2605729b96ea807d6719f7"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+      "sha256": "e7517e913f9b4011ae150d46851108bc0b902b1682fcb326c023a845b795e6dd"
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel.rs",
+      "sha256": "07d3eb48ff62c3d13f9335b2817c601c6b34e15589c01316c3e12b546d4a6cdd"
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/loops.rs",
+      "sha256": "d532f34cc3040a642f5f27cf50acabd735b9346287041d3fa8b912df1701a9a7"
+    }
+  ],
+  "declarations": [
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "clear index 3 and observe old mask 8"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "0870d478a8e6fd878358e4955e51e0fceebbfeb948c7bbb4465328b8482489d4",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Unset",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::unset"
+      },
+      "signature": "unsigned char (unsigned long) noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "set index 3 twice and observe 1 then 0"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "0c7cbcf710a249742e49c4a0566c40efecc9b08a2d57c5c4c5b81bf4552903b1",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Set",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::set"
+      },
+      "signature": "unsigned char (unsigned long) noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "compare pointer against bitmap offset"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "Field",
+      "native_control": "positive",
+      "native_id": "165885a026ce0219cd49e4b3e7c3e20271225a621cbba55d43bbc23a2a3c4d23",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Bits",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "struct_field",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits"
+      },
+      "signature": "unsigned char *"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "delete two derived instances through inferred interface pointers and observe both destructors"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "CXXDestructor",
+      "native_control": "positive",
+      "native_id": "16d5bbbbd936907652ea188c129320d1a5bb508efcb437fb4c9d07b960fe9187",
+      "private_name_accessible": false,
+      "qualified_name": "OSD_Parallel::IteratorInterface::~IteratorInterface",
+      "reconciliation_status": "missing_rust_customization_surface",
+      "remaining_gaps": [
+        "No Rust public trait or equivalent for the inferred polymorphic interface; Parallel loop APIs bypass this protected customization contract.",
+        "Design type-erased equality, clone ownership, mutable increment and virtual-drop adaptation before mapping; native IteratorWrapper and UniversalIterator remain separate obligations."
+      ],
+      "role": "inferred_public_member",
+      "signature": "void () noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "evaluate constexpr allocation size for 9 slots of stride 4"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "1d7ae5088b00bca7419740baaba85fe24ed79557cb2446298d7e99cdfc9de9be",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Size",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity.",
+        "Rust size is not const; usize checked overflow and div_ceil differ from C++ unsigned wraparound on overflowing size arguments."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::size"
+      },
+      "signature": "unsigned long (unsigned long, unsigned long) noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "call with address, slot count and stride; compare returned array address"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "279f93c7a26021fe1ad9f256993ec647f8bea7d2de05c50d909a48fe2cdf4707",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::ToArray",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity.",
+        "Rust to_array omits the two ignored native size arguments and returns void-pointer rather than char-pointer."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::to_array"
+      },
+      "signature": "char *(void *, unsigned long, unsigned long) noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "call constant expression cell width"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "54b98f566a0a6fe07e38af4fa1e3934f67ed60f9645a04d15eb0643ad98ad13a",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::bitsPerCell",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits_per_cell"
+      },
+      "signature": "unsigned long () noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "dispatch custom derived equality through inferred interface reference"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "5c5d4874acac7d6f2e0c7bdd7ef82d2f85ca72f5d86b6e204b926de72d47933e",
+      "private_name_accessible": false,
+      "qualified_name": "OSD_Parallel::IteratorInterface::IsEqual",
+      "reconciliation_status": "missing_rust_customization_surface",
+      "remaining_gaps": [
+        "No Rust public trait or equivalent for the inferred polymorphic interface; Parallel loop APIs bypass this protected customization contract.",
+        "Design type-erased equality, clone ownership, mutable increment and virtual-drop adaptation before mapping; native IteratorWrapper and UniversalIterator remain separate obligations."
+      ],
+      "role": "inferred_public_member",
+      "signature": "bool (const class OSD_Parallel::IteratorInterface &) const"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "observe mask 8 after set and 0 after unset"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "688f29a04b90d1c8a1839c9609ebc22c4854ffb30b4a5fe8ce4e691edbd99182",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::IsSet",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::is_set"
+      },
+      "signature": "unsigned char (unsigned long) noexcept"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "write and read initialized usize header through field"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "Field",
+      "native_control": "positive",
+      "native_id": "6d05171ccc57384af1a02bf19856ad8bebfcbb901913ed9ba7877c5b83b9813a",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Count",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "struct_field",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::count"
+      },
+      "signature": "unsigned long *"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "dispatch custom derived increment through inferred interface pointer"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "793dfe52a42f718d541f97c99bfea46ec4a0c7211d244caab1ae67b5bb6978f5",
+      "private_name_accessible": false,
+      "qualified_name": "OSD_Parallel::IteratorInterface::Increment",
+      "reconciliation_status": "missing_rust_customization_surface",
+      "remaining_gaps": [
+        "No Rust public trait or equivalent for the inferred polymorphic interface; Parallel loop APIs bypass this protected customization contract.",
+        "Design type-erased equality, clone ownership, mutable increment and virtual-drop adaptation before mapping; native IteratorWrapper and UniversalIterator remain separate obligations."
+      ],
+      "role": "inferred_public_member",
+      "signature": "void ()"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "infer return type with decltype without evaluating producer",
+        "construct non-owning block projection on aligned initialized storage",
+        "use static methods and public members through inferred type"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXRecord",
+      "native_control": "positive",
+      "native_id": "7ad6ed61ec3da6dcac19dce231e8aa29c8e81f19d4877d939e031064c54f0f10",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity.",
+        "Rust layout lacks repr(C); native derivation/copy and layout/type traits are not fully reconciled."
+      ],
+      "role": "inferred_record",
+      "rust_target": {
+        "kind": "struct",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock"
+      },
+      "signature": ""
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "compare pointer against header offset"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "Field",
+      "native_control": "positive",
+      "native_id": "848de59b092288f468d26055bc6ff056b14a3efad9a5bdff42a7e300a445bacb",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Array",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "struct_field",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::array"
+      },
+      "signature": "void *"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "construct pointer projection on aligned 46-byte storage for 9 slots of stride 4"
+      ],
+      "existing_evidence": [
+        "porting/audits/sparse-base-remaining-methods.json",
+        "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+        "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+        "crates/tkernel/tests/sparse_array_base_contracts.rs"
+      ],
+      "implementation_credit": false,
+      "kind": "CXXConstructor",
+      "native_control": "positive",
+      "native_id": "aebfbc8c201e2d1b0a9febfa2015bebe57382709df6316e51f917cabb1f3943e",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Block",
+      "reconciliation_status": "partial_existing_rust_surface",
+      "remaining_gaps": [
+        "Valid aligned initialized buffer and pointer-lifetime domains only; Rust safety, naming and ABI adaptations do not establish full native type/method parity."
+      ],
+      "role": "inferred_public_member",
+      "rust_target": {
+        "kind": "function",
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::new"
+      },
+      "signature": "void (void *, unsigned long, unsigned long)"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "dispatch custom derived clone through inferred interface pointer"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "CXXMethod",
+      "native_control": "positive",
+      "native_id": "aff25714175baefbf7a8faaee7fe5e3d5da034306bb87c224222f4efd183e534",
+      "private_name_accessible": false,
+      "qualified_name": "OSD_Parallel::IteratorInterface::Clone",
+      "reconciliation_status": "missing_rust_customization_surface",
+      "remaining_gaps": [
+        "No Rust public trait or equivalent for the inferred polymorphic interface; Parallel loop APIs bypass this protected customization contract.",
+        "Design type-erased equality, clone ownership, mutable increment and virtual-drop adaptation before mapping; native IteratorWrapper and UniversalIterator remain separate obligations."
+      ],
+      "role": "inferred_public_member",
+      "signature": "class OSD_Parallel::IteratorInterface *() const"
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "infer pointee through derived exposure of protected UniversalIterator value_type alias",
+        "derive concrete user implementation without private qualified name",
+        "confirm abstractness and virtual destructor",
+        "use polymorphic references and pointers"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "CXXRecord",
+      "native_control": "positive",
+      "native_id": "f697b9de13f82b7605a0f04424f9132607c5f5c65715b658b176662440d132b2",
+      "private_name_accessible": false,
+      "qualified_name": "OSD_Parallel::IteratorInterface",
+      "reconciliation_status": "missing_rust_customization_surface",
+      "remaining_gaps": [
+        "No Rust public trait or equivalent for the inferred polymorphic interface; Parallel loop APIs bypass this protected customization contract.",
+        "Design type-erased equality, clone ownership, mutable increment and virtual-drop adaptation before mapping; native IteratorWrapper and UniversalIterator remain separate obligations."
+      ],
+      "role": "inferred_record",
+      "signature": ""
+    },
+    {
+      "callability_domain": "C++17 Linux x86_64; only expressions in tkernel_returned_type_obligations.cxx",
+      "demonstrated_operations": [
+        "name inferred nested Cell alias and prove unsigned char identity"
+      ],
+      "existing_evidence": [],
+      "implementation_credit": false,
+      "kind": "Typedef",
+      "native_control": "positive",
+      "native_id": "f6ea4e750b4dd5e811c6a93a2bb059d6fc67dc11c88ef8e05af4d25df7f901c3",
+      "private_name_accessible": false,
+      "qualified_name": "NCollection_SparseArrayBase::Block::Cell",
+      "reconciliation_status": "missing_rust_alias",
+      "remaining_gaps": [
+        "u8 is used in pointer fields and method results, but no named public alias corresponds to inferred Block::Cell."
+      ],
+      "role": "inferred_public_member",
+      "signature": "unsigned char"
+    }
+  ],
+  "fixture": "tools/oracle/tkernel_returned_type_obligations.cxx",
+  "fixture_sha256": "5ce72d71c3b64aed597ca56e6e0222921c9846427c120e255b6f32717d8bd3c5",
+  "implementation_credit": false,
+  "native_report": "porting/staged-api-inventory/effective-obligations-v1/native-access.json",
+  "rust_inventory": "porting/runtime-evidence/effective-obligations-rust-inventory-v1.json.gz",
+  "schema": "rustycad.effective-api-access-contracts.v1"
+}
