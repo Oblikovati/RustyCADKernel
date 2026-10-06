@@ -48,3 +48,68 @@ impl<T> Array1<'_, T> {
         }
     }
 }
+
+impl<T> Array1<'_, T> {
+    /// Assigns from a live internal const donor, dispatching same-element assignment separately.
+    /// Source bounds are checked before target bounds, as in `SetValue(target, Value(source))`.
+    /// `array.set_value_from_index_with_assignment(0, 1, |t, s| *t = *s, |_| {})?`.
+    pub fn set_value_from_index_with_assignment(
+        &mut self,
+        index: i32,
+        source_index: i32,
+        assign: impl FnOnce(&mut T, &T),
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), ArrayError> {
+        self.set_value_moved_from_index_with_assignment(
+            index,
+            source_index,
+            |t, s| assign(t, s),
+            assign_self,
+        )
+    }
+
+    /// Assigns from a live internal mutable donor without constructing a temporary.
+    /// Self movement has its own callback; source bounds precede target bounds.
+    /// `array.set_value_moved_from_index_with_assignment(0, 1, std::mem::swap, |_| {})?`.
+    pub fn set_value_moved_from_index_with_assignment(
+        &mut self,
+        index: i32,
+        source_index: i32,
+        assign: impl FnOnce(&mut T, &mut T),
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), ArrayError> {
+        let source = self.offset(source_index)?;
+        let target = self.offset(index)?;
+        self.set_value_from_offsets_with_assignment(target, source, assign, assign_self)
+    }
+
+    pub(in crate::ncollection) fn set_value_from_offsets_with_assignment(
+        &mut self,
+        target: usize,
+        source: usize,
+        assign: impl FnOnce(&mut T, &mut T),
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), ArrayError> {
+        self.at(source)?;
+        self.at(target)?;
+        if target == source {
+            assign_self(self.change_at(target)?);
+            return Ok(());
+        }
+        let (slot, donor) = disjoint_assignment_slots(self.as_mut_slice(), target, source);
+        assign_donor(Ok(slot), donor, assign)
+    }
+}
+
+fn disjoint_assignment_slots<T>(
+    values: &mut [T],
+    target: usize,
+    source: usize,
+) -> (&mut T, &mut T) {
+    if target < source {
+        let (before, after) = values.split_at_mut(source);
+        return (&mut before[target], &mut after[0]);
+    }
+    let (before, after) = values.split_at_mut(target);
+    (&mut after[0], &mut before[source])
+}

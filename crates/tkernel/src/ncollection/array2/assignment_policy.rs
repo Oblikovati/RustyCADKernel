@@ -36,3 +36,41 @@ impl<T> Array2<'_, T> {
         self.elements.init_ref_with_assignment(donor, assign);
     }
 }
+
+impl<T> Array2<'_, T> {
+    /// Assigns from an internal const donor with a separate same-cell callback.
+    /// Source row/column validation precedes target validation.
+    /// `array.set_value_from_index_with_assignment((0, 0), (0, 1), |t, s| *t = *s, |_| {})?`.
+    pub fn set_value_from_index_with_assignment(
+        &mut self,
+        target: (i32, i32),
+        source: (i32, i32),
+        assign: impl FnOnce(&mut T, &T),
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), ArrayError> {
+        self.set_value_moved_from_index_with_assignment(
+            target,
+            source,
+            |t, s| assign(t, s),
+            assign_self,
+        )
+    }
+
+    /// Assigns directly from a mutable internal donor while retaining both cell lifetimes.
+    /// Self movement dispatches separately; source indices precede target indices.
+    /// `array.set_value_moved_from_index_with_assignment((0, 0), (0, 1), std::mem::swap, |_| {})?`.
+    pub fn set_value_moved_from_index_with_assignment(
+        &mut self,
+        target: (i32, i32),
+        source: (i32, i32),
+        assign: impl FnOnce(&mut T, &mut T),
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), ArrayError> {
+        let (source_row, source_col) = self.bounded_offsets(source.0, source.1)?;
+        let (target_row, target_col) = self.bounded_offsets(target.0, target.1)?;
+        let source = self.offset(source_row, source_col)?;
+        let target = self.offset(target_row, target_col)?;
+        self.elements
+            .set_value_from_offsets_with_assignment(target, source, assign, assign_self)
+    }
+}
