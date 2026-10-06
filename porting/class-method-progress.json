@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation native-storage checkpoint validated on frozen committed main source; receipt commit recorded separately.",
+  "integration_status": "Foundation native-storage checkpoint committed; full API and original-test parity remain incomplete.",
   "classes": [
     {
       "batch_order": 1,
@@ -174,26 +174,6 @@
   "latest_foundation_run_note": "Historical class entries remain scoped evidence; current_integrated_checkpoint records the latest frozen workspace validation. Subsequent source edits require a new checkpoint.",
   "additional_allocator_miri_passes": 3,
   "current_integrated_checkpoint": {
-    "commit": "0d27fa8a10e3d29c5e910f5c2b84b028dc19bca8",
-    "receipt": "porting/audits/foundation-policy-callbacks-checkpoint.json",
-    "sha256": "f041d63761f6ed748c3d7b38dc7f5fd8062f0dac12a27a96b562f274ee3aaae3",
-    "workspace_passed": 15401,
-    "workspace_failed": 0,
-    "workspace_ignored": 70,
-    "miri_passes_total": 1029,
-    "strict_provenance_miri_passes": 1029,
-    "joined_original_runtime_cases": 1066,
-    "python_tools_exit": 0,
-    "python_tools_tests_passed": 787
-  },
-  "latest_scoped_integration": {
-    "receipt": "porting/audits/foundation-policy-callbacks-merge-cleanup.json",
-    "sha256": "8a3f9210d5718e5e75b0f6cf86a869f2811f29f68271faed1d76b31729bf6647",
-    "validated_source_revision": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
-    "workspace_passed": 15401,
-    "strict_provenance_miri_passed": 1029
-  },
-  "current_draft_checkpoint": {
     "receipt": "porting/audits/foundation-native-storage-checkpoint.json",
     "sha256": "294b7ba5613a1336c0193dbe7fcacc537899cc0e44898f9736af91658c1ccceb",
     "runtime": {
@@ -228,6 +208,14 @@
       "python_tools_exit": 0,
       "joined_original_runtime_cases": 1066,
       "new_original_runtime_joins": 0
-    }
+    },
+    "commit": "d49161deb59d73e869b56fa233fbeed10844a158"
+  },
+  "latest_scoped_integration": {
+    "receipt": "porting/audits/foundation-policy-callbacks-merge-cleanup.json",
+    "sha256": "8a3f9210d5718e5e75b0f6cf86a869f2811f29f68271faed1d76b31729bf6647",
+    "validated_source_revision": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+    "workspace_passed": 15401,
+    "strict_provenance_miri_passed": 1029
   }
 }
