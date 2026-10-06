@@ -1,0 +1,44 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "4f27883100678b1a4937a565f81cdaebf4dad8a7",
+  "focused_rust_passed": 32,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "--lib ncollection::cell_filter",
+    "cell_filter_method_contracts",
+    "cell_filter_fallible",
+    "cell_filter_supplemental",
+    "ncollection_cell_filter"
+  ],
+  "strict_tkernel_all_tests_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "unit": {
+      "path": "porting/runtime-evidence/cell-range-root-unit.gz",
+      "sha256": "9c73b8d6deddb17119c5910458c432735a86f5cfb234a56a6fc856ede1dc0b8c"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/cell-range-root-rust.gz",
+      "sha256": "b93e2fbcbda6fd53a46b89345db80f556f65003ddfaba5cfa72f6ff7839e883b"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/cell-range-root-clippy.gz",
+      "sha256": "0ba615e68ac3ef31f4638cedbc582d7e5be9f7f020634bb279859db536e062e0"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/cell-range-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "57361a612bc6add37c5d8e9faae7143eb6ee555d",
+      "deleted_worktree": "/tmp/rustycad-cell-index-ranges",
+      "deleted_branch": "port/cell-index-ranges",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
