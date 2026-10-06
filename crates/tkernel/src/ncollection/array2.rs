@@ -215,8 +215,7 @@ impl<'a, T> Array2<'a, T> {
 impl<'a, T: Clone> Array2<'a, T> {
     /// Assigns borrowed data in owned or mutable-buffer storage; `array.set_value_ref(1,1,&value)?`.
     pub fn set_value_ref(&mut self, row: i32, col: i32, value: &T) -> Result<(), ArrayError> {
-        self.change_value(row, col)?.clone_from(value);
-        Ok(())
+        self.set_value_ref_with_assignment(row, col, value, T::clone_from)
     }
 
     /// Views the leading `rows * cols` values of a read-only buffer with inclusive
@@ -262,7 +261,7 @@ impl<T: Clone> Array2<'_, T> {
     /// Assigns from a borrowed value in row-major order; `array.init_ref(&fill_value)`.
     pub fn init_ref(&mut self, value: &T) {
         // Keep the borrowed contract so custom elements can assign without copy construction.
-        self.elements.init_ref(value);
+        self.init_ref_with_assignment(value, T::clone_from);
     }
     /// Assigns bounds and contents, reusing equal-size storage; `dest.assign(&source)`.
     pub fn assign(&mut self, source: &Array2<'_, T>) -> &mut Self {
