@@ -2,6 +2,7 @@ use super::{IndexedCursorSource, IndexedCursorSourceMut};
 use crate::standard::Failure;
 mod arithmetic;
 mod comparisons;
+mod value_policies;
 
 /// OCCT's BaseMap::IndexedIterator with explicit owner arguments for safe access.
 /// Example: `BaseMapIndexedIterator::<_, false>::new(&map, 1).value(&map)?`.
@@ -89,21 +90,15 @@ impl<C> BaseMapIndexedIterator<C, false> {
 impl<C: IndexedCursorSource, const M: bool> BaseMapIndexedIterator<C, M> {
     /// Checks against the live size, including native index-zero behavior; `cursor.more(&map)?`.
     pub fn more(&self, container: &C) -> Result<bool, Failure> {
-        if self.owner.is_null() {
-            return Ok(false);
-        }
-        self.check_owner(container)?;
-        Ok(self.index <= container.indexed_size())
+        self.more_with(container, C::indexed_size)
     }
     /// Reads the native dereference, forwarding the map's index error; `cursor.value(&map)?`.
     pub fn value<'a>(&self, container: &'a C) -> Result<&'a C::Value, Failure> {
-        self.check_owner(container)?;
-        container.indexed_value(self.index)
+        self.value_with(container, C::indexed_value)
     }
     /// Reads the current key separately from its mapped value; `cursor.key(&map)?`.
     pub fn key<'a>(&self, container: &'a C) -> Result<&'a C::Key, Failure> {
-        self.check_owner(container)?;
-        container.indexed_key(self.index)
+        self.key_with(container, C::indexed_key)
     }
     /// Returns the value address for native operator-> identity; `cursor.value_ptr(&map)?`.
     pub fn value_ptr(&self, container: &C) -> Result<*const C::Value, Failure> {
@@ -111,15 +106,14 @@ impl<C: IndexedCursorSource, const M: bool> BaseMapIndexedIterator<C, M> {
     }
     /// Reads a signed offset without moving this cursor; `cursor.value_at(&map, 1)?`.
     pub fn value_at<'a>(&self, container: &'a C, offset: isize) -> Result<&'a C::Value, Failure> {
-        self.shifted(offset).value(container)
+        self.value_at_with(container, offset, C::indexed_value)
     }
 }
 
 impl<C: IndexedCursorSourceMut> BaseMapIndexedIterator<C, true> {
     /// Mutates a mapped value while retaining cursor identity; `*cursor.change_value(&mut map)? = value`.
     pub fn change_value<'a>(&self, container: &'a mut C) -> Result<&'a mut C::Value, Failure> {
-        self.check_owner(container)?;
-        container.indexed_value_mut(self.index)
+        self.change_value_with(container, C::indexed_value_mut)
     }
     /// Mutates the offset value through native writable subscript; `*cursor.change_value_at(&mut map, 1)? = value`.
     pub fn change_value_at<'a>(
@@ -127,7 +121,7 @@ impl<C: IndexedCursorSourceMut> BaseMapIndexedIterator<C, true> {
         container: &'a mut C,
         offset: isize,
     ) -> Result<&'a mut C::Value, Failure> {
-        self.shifted(offset).change_value(container)
+        self.change_value_at_with(container, offset, C::indexed_value_mut)
     }
     /// Returns native mutable arrow identity; `cursor.change_value_ptr(&mut map)?`.
     pub fn change_value_ptr(&self, container: &mut C) -> Result<*mut C::Value, Failure> {

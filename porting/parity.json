@@ -77231,206 +77231,6 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing."
     },
     {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator(TheContainer&,size_t)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator(const TheContainer&,size_t)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator(const IndexedIterator&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator=(const IndexedIterator&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator(const IndexedIterator<TheContainer,TheValue,false>&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator=(const IndexedIterator<TheContainer,TheValue,false>&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator*() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator->() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::Key() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::Index() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::Iterator() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::ChangeIterator()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::More() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator++()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator++(int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator--()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator--(int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator+=(difference_type)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator+(difference_type) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-=(difference_type)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-(difference_type) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-(const IndexedIterator<TheContainer,TheValue,theOtherIsConstant>&) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator[](difference_type) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator+(difference_type,const IndexedIterator&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
       "upstream_id": "NCollection_DataMap::DataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
@@ -242203,6 +242003,2400 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_SparseArrayBase::Iterator::value() const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "c273470c9129c8e49c5aa947599072fff260712e47b5d4cbce86e8632a3ca242",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_at"
+        },
+        {
+          "declaration_sha256": "17adaf30271443d8c5eecd1fde070c3f7b2bc95fb9b482b06d8170bad5de15d0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSourceMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSourceMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_at"
+        },
+        {
+          "declaration_sha256": "0be417f4b4391e27b803ddd28fe1d2e343e86a5f2cab62b9f3a31fb4b9da8f3c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_at_with"
+        },
+        {
+          "declaration_sha256": "1b50e06d0b0ab8d6d28b9d17380f9d2029b221aaaba5fa277fe3f3f796c31ee0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_at_with"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_at",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_at",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_at_with",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_at_with"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator[](const NCollection_BaseMap::IndexedIterator::difference_type) const"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "40fe7ad55271ba422327256059f8027e0cb784011984a601fc208409a01dc050",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::iterator"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::iterator",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::Iterator() const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "922dc5489a619d27a08ab7a384911fdbdf47e60c3190049dc416051995e42569",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted_back"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted_back",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-(const NCollection_BaseMap::IndexedIterator::difference_type) const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "a455a4e936978b542d1876547ecdb7e628c11b48753e26130c2ef37b0e6598de",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::retreat_post"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::retreat_post",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator--(int) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "2dee239e1874e0dad336ef7c2cd474dfdbd69180dec577f2c7786d5869b39a60",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Clone",
+              "resolved_item_path": "core::clone::Clone"
+            }
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::<core::clone::Clone>::clone"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::<core::clone::Clone>::clone",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::IndexedIterator<TheContainer, TheValue, IsConstant>(const IndexedIterator<TheContainer, TheValue, NCollection_BaseMap::IndexedIterator::IsConstant> &) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "3434739012b1d14eca8f6ae4d963043b101c918e4d8c3cfcdfc3c2543dff3106",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::retreat_returning"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::retreat_returning",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator--() noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "9e6e9cfc4a7d2854b30b3153be51a30b5d7ab5764744211d31be7a84992cef12",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::offset_sub_returning"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::offset_sub_returning",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-=(const NCollection_BaseMap::IndexedIterator::difference_type) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "2c4b0c1f984954f908fa92137551b703f404e9dd7b0aee482116254186086526",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_iterator"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_iterator",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::ChangeIterator() noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json. as_const is the actual fresh-returning conversion body; native source policy restricts this binding to writable M=true.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "b8766fcf0af012f79c7f785ab3b92eeaf8e21d0d713f9f1569b2907cc45c45fa",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::as_const"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::as_const",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::IndexedIterator<TheContainer, TheValue, IsConstant>(const NCollection_BaseMap::IndexedIterator<TheContainer, TheValue, false> &) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "9dd7d4f935f45acc38e0548bf4a94cb6c8ee2cf4be822b0231e64bb92fff1fc0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign"
+        },
+        {
+          "declaration_sha256": "c695697b5f297343567103ff979f4d3d545978a48a126db59cfa43dba66fba46",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign_self"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign_self"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator=(const IndexedIterator<TheContainer, TheValue, NCollection_BaseMap::IndexedIterator::IsConstant> &) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "9285f1f3a3b0fa3ad90c09af2f04261f83ed9f0acf8215930bb1e243b13d466a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::distance"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::distance",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator-(const NCollection_BaseMap::IndexedIterator<TheContainer, TheValue, theOtherIsConstant> &) const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "e139d929b1e9804f6dd9132ad02e199a7527b0119f6e161e2b3631b3ba793e92",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::key"
+        },
+        {
+          "declaration_sha256": "f0b5a108b2be921e5788f60062fd3b8b95639615ef2f3b55242873bea92ffdde",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::key_with"
+        },
+        {
+          "declaration_sha256": "b993065da7902c89cb83b705d720a6471d28413cfcedf2ca2dd5cfdbd25d31ca",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_key_with"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::key",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::key",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::key_with",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_key_with"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::Key() const"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json. Global friend declaration corrected from nonexistent nested spelling. Named shifted adapter supplies offset result; Rust isize + cursor syntax is not implemented or credited.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "6fa00fa08eb308099e87ca9e5560ca924fb63cfdcb573e9782f2889db2960ff0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "operator+(const long,const NCollection_BaseMap::IndexedIterator<TheContainer, TheValue, NCollection_BaseMap::IndexedIterator::IsConstant> &) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "b579770acb67f296b7e33e14152f74a4e98beb734c42dd6d00932aa79cb76d4f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value"
+        },
+        {
+          "declaration_sha256": "7cec175eb53d2d43bf9f048e8b3ce38417494bc58178062f5e26e1b92fc01a54",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSourceMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSourceMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value"
+        },
+        {
+          "declaration_sha256": "0503d07ad0a0bcdb8895c12e7668f1f3a725ae71c5dd2bb0d1a22585daff8ec9",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_with"
+        },
+        {
+          "declaration_sha256": "a9f40afc3835611cb3a950d99980a37afdc1275b7bea06a5231b977e62296672",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_with"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_with",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_with"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator*() const"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json. Arrow is borrowed-reference/builtin-address domain only; ordinary owned proxy address is ill-formed natively and overloaded address-of policies remain deferred.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "2eabf94b0bf8226c81ac0947e144fe75c3417f09022f20a77b8a2f516b7f94f7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_ptr"
+        },
+        {
+          "declaration_sha256": "4f56a981dc79d2ca35e7e8c2a18768e1e45adefd9eebd6e5ef724a27323cf2f7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSourceMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSourceMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_ptr"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_ptr",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::value_ptr",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::change_value_ptr"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator->"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "3c7f450ce24b3876d618583107d08ab30d5ca42aeb7928b9b45030dab04617e0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::new"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::new",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::IndexedIterator<TheContainer, TheValue, IsConstant>(const TheContainer &,const size_t) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "6fa00fa08eb308099e87ca9e5560ca924fb63cfdcb573e9782f2889db2960ff0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::shifted",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator+(const NCollection_BaseMap::IndexedIterator::difference_type) const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "633fe9bcb95894c226ed1f7e8cc4e83e24640dc22191665d597b26606f1e5ea5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign_from_mutable"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::assign_from_mutable",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator=(const NCollection_BaseMap::IndexedIterator<TheContainer, TheValue, false> &) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "0ebf65bbdd84c9bdc5025db87d6c2b1ba526ebf1246d353d9a6beb7267ffe46e",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::advance_post"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::advance_post",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator++(int) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "e2388506536d752abc3b473276b67b44f402b4569b70ab7a2e241df94571f492",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::index"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::index",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::Index() const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "3c7f450ce24b3876d618583107d08ab30d5ca42aeb7928b9b45030dab04617e0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::new"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::new",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::IndexedIterator<TheContainer, TheValue, IsConstant>(TheContainer &,const size_t) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "4bdedea4f21c392e9c35cb47d9642c2b38c782ae9d607589f7bba4916fa8492f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::offset_returning"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::offset_returning",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator+=(const NCollection_BaseMap::IndexedIterator::difference_type) noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "c7076f719883536f13daab0a4c5837049e58bab9fe10e93b610396c808403521",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::more"
+        },
+        {
+          "declaration_sha256": "28e4c7fbc970e0d939e94973f5e843a8e221f954b176236aae0d3eb4225cc867",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::more_with"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::more",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::more",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::more_with"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::More() const noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "5086412014d38b41aa8b2591adb5e4d9150607090d90004514183ac6ad8b0b89",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Default",
+              "resolved_item_path": "core::default::Default"
+            }
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::<core::default::Default>::default"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::<core::default::Default>::default",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::IndexedIterator<TheContainer, TheValue, IsConstant>() noexcept"
+    },
+    {
+      "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "f45098b8c0adbcbe8a75acb8bb77b43b0936daf30b0fb872855a975bf32e1de0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::advance_returning"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::advance_returning",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator++() noexcept"
     }
   ],
   "tests": [

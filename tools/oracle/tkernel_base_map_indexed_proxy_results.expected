@@ -1,0 +1,11 @@
+construction 1 0 1 2 2 1 1 -
+const_value 10 r1cd
+mutable_proxy 17 w1p=q
+owned_key 11 111 k1K1
+const_offset 20 1 r2cd
+mutable_offset 19 2 w1p=q
+bad_const r0e index=0; expected 1..=2
+bad_const_offset r3e index=3; expected 1..=2
+bad_mutable_offset w0e index=0; expected 1..=2
+bad_owned_key k0e index=0; expected 1..=2
+live_size 1 0 ss
