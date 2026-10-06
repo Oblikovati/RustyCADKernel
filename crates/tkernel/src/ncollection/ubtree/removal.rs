@@ -1,4 +1,5 @@
-use super::{BoundingNode, BoundingVolume, UBTree};
+use super::{BoundingVolume, UBTree};
+use crate::ncollection::{destructor_unwind::DeferredDestructorPanic, node_owner::NativeNodeOwner};
 impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     /// Kill child `index` of branch `id` (the whole sub-branch), as native `TreeNode::Kill`:
     /// the branch takes over the other child's bounds, object and children. Ancestor bounds
@@ -13,22 +14,36 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
             1 => (children[1], children[0]),
             _ => return,
         };
-        let mut survivor: BoundingNode<T, B> = self.node(kept).clone();
-        survivor.parent = self.node(id).parent;
-        *self.node_mut(id) = survivor;
-        self.nodes[kept] = None;
-        self.release_subtree(killed);
+        self.assign_survivor(id, kept);
         self.reparent_children(id);
+        let mut unwind = DeferredDestructorPanic::default();
+        unwind.capture(|| self.release_node(kept));
+        self.release_subtree(killed, &mut unwind);
+        unwind.finish(Ok(()));
     }
-    /// Frees a detached sub-branch iteratively, like native `delNode`, so deep trees
-    /// cannot overflow the call stack.
-    fn release_subtree(&mut self, top: usize) {
+    fn assign_survivor(&mut self, parent: usize, kept: usize) {
+        let [target, source] = self.nodes.get_disjoint_mut([parent, kept]).unwrap();
+        let target = target.as_deref_mut().unwrap();
+        let source = source.as_deref().unwrap();
+        // OCCT 3d097a0328 Kill commits links only after both member assignments succeed.
+        target.bounds.clone_from(&source.bounds);
+        target.object.clone_from(&source.object);
+        target.children = source.children;
+    }
+    /// Destroy detached payloads in native preorder without recursive stack growth.
+    fn release_subtree(&mut self, top: usize, unwind: &mut DeferredDestructorPanic) {
         let mut pending: Vec<usize> = vec![top];
         while let Some(index) = pending.pop() {
-            if let Some(node) = self.nodes[index].take() {
-                pending.extend(node.children.into_iter().flatten());
+            if let Some([first, second]) = self.node(index).children {
+                pending.extend([second, first]);
             }
+            unwind.capture(|| self.release_node(index));
         }
+    }
+    fn release_node(&mut self, index: usize) {
+        let owner = self.nodes[index].take().unwrap();
+        // The shared owner deallocates even if a payload destructor unwinds.
+        drop(NativeNodeOwner::from_allocated(owner));
     }
     pub(in crate::ncollection) fn remove_leaf(&mut self, index: usize) -> Option<usize> {
         let Some(parent) = self.node(index).parent else {
