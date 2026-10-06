@@ -1,6 +1,7 @@
 //! Contiguous growable storage matching NCollection_LinearVector.
 use super::{Array1, ArrayError};
 
+mod append_policy;
 mod borrowed;
 mod erase_policy;
 mod insert_policy;
@@ -98,6 +99,7 @@ impl<T> LinearVector<T> {
         self.push_reserved_item(value)
     }
     /// Constructs the next value from arguments captured by a closure; `vector.emplace_append(|| 42)`.
+    /// Use `emplace_append_with_relocation` when native growth callbacks are observable.
     pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
         self.reserve_next_item();
         self.push_reserved_item(construct())
