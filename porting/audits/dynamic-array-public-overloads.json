@@ -1,0 +1,167 @@
+{
+  "schema": "rustycad.exact-overload-reconciliation.v1",
+  "status": "partial_mappings_pending_integration",
+  "base_commit": "572d28fe4550e52b958a9bea57639e5e2f15995c",
+  "branch": "port/dynamic-public-bindings",
+  "scope": "Changes exactly11 existing DynamicArray rows: seven const-reference overloads and four signed-increment overloads. Production/test sources and other ledger/test rows unchanged.",
+  "native_exact_ids": 11,
+  "public_body_bindings": 11,
+  "old_status": "implemented",
+  "new_status": "partial",
+  "resolved_implemented_claim_delta": -11,
+  "declared_implemented_row_delta": -11,
+  "legacy_test_credit_delta": 0,
+  "rationale": "Former generic targets accepted owned values or unsigned increments, so they did not establish the actual native borrowed/signed callable contracts. Correct targets use explicit copy/move callback policies and dedicated i32 adapters. Domain limits remain explicit.",
+  "compiler_capture": {
+    "revision": "572d28fe4550e52b958a9bea57639e5e2f15995c",
+    "toolchain": "nightly-2026-09-25",
+    "format_version": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "target": "/tmp/rustycad-dynamic-tail-target",
+    "exit_code": 0,
+    "warnings": 6,
+    "warning_note": "Existing TKernel doc warnings retained in archived compiler log.",
+    "scope": "Fresh TKernel-only capture; replay re-normalizes raw compiler archive and requires exact equality before narrow body checks. Unrelated unresolved links retained; no full compiler inventory completeness claim."
+  },
+  "checks": {
+    "exact_cpp_unique": 11,
+    "public_rust_body_current_hash": 11,
+    "paired_target_tests": 8,
+    "constructor_selector_tests": 7,
+    "negative_checks": {
+      "wrong_native_id_rejected": true,
+      "missing_body_rejected": true
+    },
+    "unchanged_other_ledger_rows": true,
+    "diff_check_exit": 0
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "5f23fd4f185b4cd1d2dead5eff67913b66c7fb948cdf21158d16654fe09ff2f3",
+    "crates/tkernel/src/ncollection/dynamic_array/borrowed.rs": "903a0863605466ed923dd91f85de39efa514445234447dd8158316b4088aa627"
+  },
+  "ledger_sha256": "94e6256e2736a4333e656d9213bb47219e6bacc454ed04e70b9c271fdf6b54d8",
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "crates/tkernel/src/ncollection/mod.rs": "a60d94f6f42e547f22b4138543b89fecceedaea10db9ac2b25996a92a9af3ab9",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/api-proof-toolchain.json": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a"
+  },
+  "normalizer_tool_sha256": {
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "tools/capture_rustdoc_json.py": "dd76870ac705c6d300f441d56b15245e4b1196ff709f29d5d651d5184906f1b0",
+    "tools/api_inventory_capture.py": "2cbc42e0361bd190b8e1cd20673fbdce818cec5aaad8a42e0174d03254fec53e",
+    "tools/api_inventory_json.py": "a0f06daca76c63309453225d4652b6e20a479a4959385ea5d913c1620cd58c5c",
+    "tools/api_inventory_reexports.py": "bc62f868566558f77a296c02103016c5c7ca98048470981f9986fa7bb09472dd",
+    "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
+    "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
+    "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
+    "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
+    "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
+    "tools/rustdoc_type_aliases.py": "0fab1864cda95503bfe46b0f0881052c43273983b3f484ae0590ca0382fc9fb0",
+    "tools/rustdoc_bool_foreign_impls.py": "5068daddc044f3c492e69a069f2f02d79597944ce72e66411afcb6a411121a13",
+    "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
+    "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
+    "tools/api_tool_hashes.py": "afac9c662d14b45f4ad6b8889bcdc49e5ab033db4e6acce771ef61526ab5a2f1"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-public-bindings-compiler.log.gz": "07dee64fdf57e27a22c4141d66cea6ef719f5a81928e989987a4e1e19cf0c9bb",
+    "porting/runtime-evidence/dynamic-public-bindings-constructor-tests.log.gz": "306b12c8ea7077ca4965327cc9606f3fa15a65cf9ce000344687b0c6e35a9b62",
+    "porting/runtime-evidence/dynamic-public-bindings-normalize.log.gz": "b3343b8c04f837a41a74218c32687ed13248b1976891e851d201a594d7e61879",
+    "porting/runtime-evidence/dynamic-public-bindings-normalized.json.gz": "ed7d3dee39e3238d6c4d799e7643a8c3a513053886e105d78efb4072159d3140",
+    "porting/runtime-evidence/dynamic-public-bindings-paired-tests.log.gz": "87e2d91871463cc803309a3d84b40952a3d07ed1def9b0c7f05fb210292e21b7",
+    "porting/runtime-evidence/dynamic-public-bindings-proof.json.gz": "d2a273440a1ab5e01bf8895395e3e5b9f9dbb04368a491ca5ca6620d4fce1ca0",
+    "porting/runtime-evidence/dynamic-public-bindings-replay.py.gz": "46425becb9b586433c8b4a523ed891c8a6ac550539aa930ee77f147c9bdf08f2",
+    "porting/runtime-evidence/dynamic-public-bindings-rustdoc.json.gz": "3aa3eaeb026cdf805428e5d3d4f93f4716e85bb2ae48c1c6cbdfaa8e2729f214",
+    "porting/runtime-evidence/dynamic-public-bindings-updates.json.gz": "0589136220602b1473071228905b9f2e4795448cd6387198d844787cb07abb4b",
+    "porting/runtime-evidence/dynamic-public-bindings-verification.log.gz": "789a0d3e7f9562ddc45e6b85e40eb060999548f720d37f397f037a2b378c2120"
+  },
+  "bindings": [
+    {
+      "cpp_id": "ccf5b2071bf35a42243b59c5cdd18fd86623494dbcfcc82f19e57270b45b0c57",
+      "upstream_id": "NCollection_DynamicArray::SetIncrement(int)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment_i32",
+      "inherited_receipt": "porting/audits/dynamic-array-method-tail.json"
+    },
+    {
+      "cpp_id": "a0379884f8d9501cb5a1552f9641263f1b9d0614efa4e974654153127125084f",
+      "upstream_id": "NCollection_DynamicArray(int)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment_i32",
+      "inherited_receipt": "porting/audits/dynamic-array-method-tail.json"
+    },
+    {
+      "cpp_id": "ff3b355a7c1395f05cef69564b8705f3e2c654cb5e6a362e111456c8273d3d89",
+      "upstream_id": "NCollection_DynamicArray(int,const occ::handle<NCollection_BaseAllocator>&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator_i32",
+      "inherited_receipt": "porting/audits/dynamic-array-method-tail.json"
+    },
+    {
+      "cpp_id": "f15987a83da25fa584fd824976ef753e6331a9acdbd11307a6dec23710942d87",
+      "upstream_id": "NCollection_DynamicArray(int,const allocator_type&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator_i32",
+      "inherited_receipt": "porting/audits/dynamic-array-method-tail.json"
+    },
+    {
+      "cpp_id": "2908d15402b96cfa5f524c1f9e03e7092305f0a47573ed9021c5f0afefa435a9",
+      "upstream_id": "NCollection_DynamicArray::Append(const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::append",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::append_ref_with_constructor",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "27b12f8556767cb9981d9ea0208413a83dbc510f7a9766146cb71f448e31450b",
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(size_t,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "ebaadcc732e5a6c5b58aaf9264cfac5fc5d6728ea501d10f06e685c8884a0dd7",
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(int,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "65638685b5b75afc9079bcb8783801e6660e506bbad824610238f796bb73af6e",
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(size_t,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "9ecdf10eece0d987899c85bd60ceb3d3937f9e97353a06a11717f8175f12e5af",
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(int,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "d21d43fc97bc21ef5b5326c5c1db2fc24581ef400494e1c5de04c021470c8b54",
+      "upstream_id": "NCollection_DynamicArray::SetValue(size_t,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    },
+    {
+      "cpp_id": "2a9b29457bb213e806e297a35f6960fc2037663e02308a154e686fb1813341f7",
+      "upstream_id": "NCollection_DynamicArray::SetValue(int,const TheItemType&)",
+      "old_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "new_rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value_ref_with_assignment",
+      "inherited_receipt": "porting/audits/dynamic-array-borrowed-methods.json"
+    }
+  ],
+  "limitations": [
+    "Borrowed adapters expose explicit constructor/assignment callbacks; no automatic C++ trait inference, placement constructor ABI or self-alias borrowing claim.",
+    "SetValue callback selects assignable native branch; nonassignable reconstruction/direct policies remain separate unsafe storage extension domains.",
+    "Signed increment adapters implement native below-one clamp; C++ allocation layout and unrestricted unsafe retained storage are outside these bounded mappings.",
+    "No behavioral/native/Miri rerun in this ledger-only transaction; linked scoped receipts preserve inherited test results and historical source snapshots.",
+    "This correction deliberately lowers implemented-claim totals; neither declarations nor tests are removed from the completeness denominator."
+  ],
+  "replay": "gzip -dc porting/runtime-evidence/dynamic-public-bindings-replay.py.gz > /tmp/verify-dynamic-public-bindings.py; python3 /tmp/verify-dynamic-public-bindings.py \"$PWD\""
+}
