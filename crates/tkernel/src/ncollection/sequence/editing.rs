@@ -43,11 +43,12 @@ impl<T> Sequence<T> {
     pub fn exchange(&mut self, first: usize, second: usize) -> Result<(), Failure> {
         self.offset("Exchange", first)?;
         self.offset("Exchange", second)?;
-        unsafe { self.topology.exclusive().exchange(first, second) }
+        self.topology
+            .edit(|base| unsafe { base.exchange(first, second) })
     }
     /// Reverses links and adjusts the native cached index; `sequence.reverse()`.
     pub fn reverse(&mut self) {
-        unsafe { self.topology.exclusive().reverse() };
+        self.topology.edit(|base| unsafe { base.reverse() });
     }
     pub(super) fn cursor_insertion(
         &self,
@@ -72,9 +73,10 @@ impl<T> Sequence<T> {
     ) -> &mut T {
         let node = SequenceNodeOwner::construct(self.allocator(), construct);
         let link = node.link;
-        self.owners.push(node);
+        self.owners.insert(link as usize, node);
         // SAFETY: validation precedes construction; owners retain the live inserted allocation.
-        unsafe { self.topology.exclusive().insert_after(offset, link) }
+        self.topology
+            .edit(|base| unsafe { base.insert_after(offset, link) })
             .expect("checked insertion index");
         unsafe { owner::item_mut(link) }
     }
@@ -93,8 +95,9 @@ impl<T> Sequence<T> {
         };
         let node = SequenceNodeOwner::construct(self.allocator(), construct);
         let link = node.link;
-        self.owners.push(node);
-        unsafe { self.topology.exclusive().insert_after_cursor(&raw, link) };
+        self.owners.insert(link as usize, node);
+        self.topology
+            .edit(|base| unsafe { base.insert_after_cursor(&raw, link) });
         Ok(unsafe { owner::item_mut(link) })
     }
 }

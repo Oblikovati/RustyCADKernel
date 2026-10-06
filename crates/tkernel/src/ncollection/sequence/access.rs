@@ -8,6 +8,13 @@ impl<T> Sequence<T> {
     pub fn base_access(&self) -> SequenceBaseAccess<'_> {
         self.topology.access()
     }
+    /// Creates a read-only handle to actual metadata; `sequence.observer().snapshot().size`.
+    pub fn observer(&self) -> super::SequenceObserver {
+        self.topology.observer()
+    }
+    pub(super) fn owned_node(&self, address: Option<usize>) -> Option<*mut SeqNode> {
+        self.owners.get(&address?).map(|owner| owner.link)
+    }
     pub(super) fn checked_node(
         &self,
         member: &str,

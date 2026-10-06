@@ -28,12 +28,12 @@ impl SequenceCursor {
     }
     /// Borrows a currently owned node's item; `cursor.value(&sequence)`.
     pub fn value<T>(self, sequence: &Sequence<T>) -> Option<&T> {
-        let (_, node) = sequence.cursor_node(self.address)?;
+        let node = sequence.owned_node(self.address)?;
         Some(unsafe { owner::item_ref(node) })
     }
     /// Borrows a positioned item exclusively; `*cursor.change_value(&mut sequence)? = 3`.
     pub fn change_value<T>(self, sequence: &mut Sequence<T>) -> Option<&mut T> {
-        let (_, node) = sequence.cursor_node(self.address)?;
+        let node = sequence.owned_node(self.address)?;
         Some(unsafe { owner::item_mut(node) })
     }
     /// Follows actual native Next; exhausted cursors remain unchanged; `cursor.next(&sequence)`.
@@ -41,9 +41,9 @@ impl SequenceCursor {
         if self.address.is_none() {
             return;
         }
-        let node = sequence.cursor_node(self.address);
+        let node = sequence.owned_node(self.address);
         self.previous = self.address;
-        self.address = node.and_then(|(_, node)| pointer_address(unsafe { (*node).next() }));
+        self.address = node.and_then(|node| pointer_address(unsafe { (*node).next() }));
     }
     /// Follows the remembered native previous node; `cursor.previous(&sequence)`.
     pub fn previous<T>(&mut self, sequence: &Sequence<T>) {
@@ -52,8 +52,8 @@ impl SequenceCursor {
             return;
         }
         self.previous = sequence
-            .cursor_node(self.address)
-            .and_then(|(_, node)| pointer_address(unsafe { (*node).previous() }));
+            .owned_node(self.address)
+            .and_then(|node| pointer_address(unsafe { (*node).previous() }));
     }
     pub(super) fn position<T>(self, sequence: &Sequence<T>) -> Option<usize> {
         sequence.cursor_node(self.address).map(|(index, _)| index)
@@ -79,11 +79,11 @@ impl<T> Sequence<T> {
         }
     }
     pub(super) fn linked_iter_mut(&mut self) -> SequenceIterMut<'_, T> {
-        let base = self.topology.exclusive();
+        let (front, back) = self.topology.endpoints();
         SequenceIterMut {
-            front: base.first_node(),
-            back: base.last_node(),
-            remaining: base.size(),
+            front,
+            back,
+            remaining: self.len(),
             item: PhantomData,
         }
     }

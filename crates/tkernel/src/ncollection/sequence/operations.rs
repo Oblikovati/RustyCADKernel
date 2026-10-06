@@ -94,13 +94,12 @@ impl<T: Clone> Sequence<T> {
         if self.allocator() == source.allocator() {
             self.owners.reserve(source.owners.len());
             // Ownership registry order is unrelated to the native topology order.
-            unsafe {
-                self.topology
-                    .exclusive()
-                    .insert_sequence_after(offset, source.topology.exclusive())
-            }
-            .expect("checked sequence insertion index");
-            self.owners.append(&mut source.owners);
+            self.topology
+                .edit_pair(&mut source.topology, |base, donor| unsafe {
+                    base.insert_sequence_after(offset, donor)
+                })
+                .expect("checked sequence insertion index");
+            self.owners.extend(source.owners.drain());
             return;
         }
         // Native prependSeq/appendSeq link each successful copy before the next copy begins.

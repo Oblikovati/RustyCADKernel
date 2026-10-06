@@ -23,14 +23,9 @@ impl BaseSequence {
         cursor: &mut BaseSequenceRawIterator,
         mut delete: impl FnMut(*mut SeqNode, &mut BaseAllocator),
     ) {
-        let node = cursor.current;
-        if node.is_null() {
-            return;
+        if let Some(node) = unsafe { self.prepare_cursor_removal(cursor) } {
+            delete(node, &mut self.allocator);
         }
-        cursor.current = unsafe { self.detach_span(node, node, 1) };
-        self.current = self.last;
-        self.current_index = self.size;
-        delete(node, &mut self.allocator);
     }
     /// Removes a checked one-based node; `unsafe { base.remove(1, delete)? }`.
     /// # Safety
@@ -40,10 +35,7 @@ impl BaseSequence {
         index: usize,
         mut delete: impl FnMut(*mut SeqNode, &mut BaseAllocator),
     ) -> Result<(), Failure> {
-        self.check_index(index)?;
-        let node = unsafe { self.find(index) };
-        let after = unsafe { self.detach_span(node, node, 1) };
-        self.cache_after_removal(index, index, after);
+        let node = unsafe { self.prepare_index_removal(index) }?;
         delete(node, &mut self.allocator);
         Ok(())
     }
@@ -56,17 +48,48 @@ impl BaseSequence {
         to: usize,
         mut delete: impl FnMut(*mut SeqNode, &mut BaseAllocator),
     ) -> Result<(), Failure> {
-        self.check_range(from, to)?;
-        let mut node = unsafe { self.find(from) };
-        let last = unsafe { self.find(to) };
-        let after = unsafe { self.detach_span(node, last, to - from + 1) };
-        self.cache_after_removal(from, to, after);
+        let mut node = unsafe { self.prepare_range_removal(from, to) }?;
         for _ in from..=to {
             let next = unsafe { (*node).next() };
             delete(node, &mut self.allocator);
             node = next;
         }
         Ok(())
+    }
+    pub(crate) unsafe fn prepare_cursor_removal(
+        &mut self,
+        cursor: &mut BaseSequenceRawIterator,
+    ) -> Option<*mut SeqNode> {
+        let node = cursor.current;
+        if node.is_null() {
+            return None;
+        }
+        cursor.current = unsafe { self.detach_span(node, node, 1) };
+        self.current = self.last;
+        self.current_index = self.size;
+        Some(node)
+    }
+    pub(crate) unsafe fn prepare_index_removal(
+        &mut self,
+        index: usize,
+    ) -> Result<*mut SeqNode, Failure> {
+        self.check_index(index)?;
+        let node = unsafe { self.find(index) };
+        let after = unsafe { self.detach_span(node, node, 1) };
+        self.cache_after_removal(index, index, after);
+        Ok(node)
+    }
+    pub(crate) unsafe fn prepare_range_removal(
+        &mut self,
+        from: usize,
+        to: usize,
+    ) -> Result<*mut SeqNode, Failure> {
+        self.check_range(from, to)?;
+        let node = unsafe { self.find(from) };
+        let last = unsafe { self.find(to) };
+        let after = unsafe { self.detach_span(node, last, to - from + 1) };
+        self.cache_after_removal(from, to, after);
+        Ok(node)
     }
     unsafe fn detach_span(
         &mut self,

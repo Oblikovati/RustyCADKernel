@@ -2,6 +2,8 @@
 use super::super::node_release::release_typed_node;
 use super::{BaseAllocator, SeqNode, SequenceNode};
 use std::marker::PhantomData;
+// Canonical links alone retain order; this index retains original allocation provenance.
+pub(super) type SequenceNodeOwners<T> = std::collections::HashMap<usize, SequenceNodeOwner<T>>;
 
 pub(super) struct SequenceNodeOwner<T> {
     pub(super) link: *mut SeqNode,
@@ -31,14 +33,12 @@ impl<T> Drop for SequenceNodeOwner<T> {
     }
 }
 pub(super) fn take_owner<T>(
-    owners: &mut Vec<SequenceNodeOwner<T>>,
+    owners: &mut SequenceNodeOwners<T>,
     node: *mut SeqNode,
 ) -> SequenceNodeOwner<T> {
-    let index = owners
-        .iter()
-        .position(|owner| owner.link == node)
-        .expect("native sequence node must have one owner");
-    owners.swap_remove(index)
+    owners.remove(&(node as usize)).unwrap_or_else(|| {
+        panic!("native sequence node {node:p} has no owner; expected exactly one live allocation")
+    })
 }
 pub(super) unsafe fn item_ref<'a, T>(node: *mut SeqNode) -> &'a T {
     // SAFETY: caller supplies a live T node, shared access and a bounded owner lifetime.
