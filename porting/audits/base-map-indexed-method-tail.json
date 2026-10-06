@@ -1,0 +1,209 @@
+{
+  "schema": "rustycad.indexed-iterator-method-tail.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "327907230f8ee88ccd6dcac94042c17b34759420",
+  "branch": "port/base-map-indexed-method-tail",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Finish exact partial correspondence for remaining24 IndexedIterator class callables and its one global addition friend; implement actual return-type gap for owned values/proxies and Size on owners without reference-valued accessors. Six previously bound comparisons unchanged.",
+  "new_callable_adapters": [
+    "more_with",
+    "value_with",
+    "key_with",
+    "change_key_with",
+    "value_at_with",
+    "change_value_with",
+    "change_value_at_with"
+  ],
+  "key_dispatch": "Native Key uses a const-derived key_reference type but invokes FindKey through myContainer; a mutable cursor can select a nonconst overload. New change_key_with preserves that dispatch; callback R must match the native key_reference conversion domain. The native owned_key row distinguishes const11 versus mutable111 and k1K1 calls.",
+  "implementation": "Callbacks preserve returned R and borrow lifetime rather than requiring &C::Value or &C::Key. Const/mutable accessor dispatch remains explicit. Existing reference-valued methods delegate shared policy code; original comments/docs preserved. More preserves detached short-circuit, owner validation and native index-zero rule. No Clone/Default requirement on R.",
+  "native_return_type_reason": "Native reference and key_reference are decltype(container(index)) and decltype(FindKey(index)), which may be values or proxy types. The previous IndexedCursorSource associated getters only allowed references. The new native fixture uses deleted copy/move constructors with guaranteed C++17 return elision, writable proxy projection and by-value keys.",
+  "checks": {
+    "rust_passed": 180,
+    "new_focused_tests": 4,
+    "prior_indexed_contracts": 10,
+    "prior_comparison_tests": 3,
+    "native_originals_passed": 163,
+    "strict_provenance_miri_passed": 17,
+    "python_binding_tests_passed": 25,
+    "strict_scoped_clippy_exit": 0,
+    "cargo_fmt_check_exit": 0,
+    "diff_check_exit": 0,
+    "exact_binding_replay": {
+      "native_ids": 25,
+      "public_bodies": 36,
+      "exclusions_replaced_with_partial": 25,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    },
+    "prior_comparison_binding_replay": {
+      "native_ids": 6,
+      "public_bodies": 6,
+      "exclusions_replaced_with_partial": 6,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    }
+  },
+  "native_oracles": {
+    "new_proxy_results": {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "tools/oracle/tkernel_base_map_indexed_proxy_results.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-map-indexed-proxy-native"
+      ],
+      "compile_exit": 0,
+      "run_exit": 0,
+      "ubsan_stderr_empty": true,
+      "rows": 11,
+      "expected_proxy_arrow_compile_failures": {
+        "readonly": 1,
+        "mutable": 1
+      }
+    },
+    "inherited_indexed_contracts": {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "tools/oracle/tkernel_base_map_indexed_iterator_contracts.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-o",
+        "/tmp/base-map-indexed-inherited-native"
+      ],
+      "build_exit": 0,
+      "run_exit": 0,
+      "ubsan_stderr_empty": true,
+      "rows": 9
+    },
+    "row_join": "All11 new proxy/value/Size rows are dynamically computed by Rust and compared exactly. All9 preexisting native indexed rows were freshly replayed with UBSan and existing expected stdout; preserved Rust indexed contract assertions remain green.",
+    "failure_semantics": "Bad direct, offset, mutable offset and key access preserve getter prefix, no proxy construction, Standard_OutOfRange category and message. Rust explicit owner mismatch rejects before callback, a documented owner-validation adaptation.",
+    "lifetime_semantics": "Owned result construction/destruction and mutable projection setter/destruction trace match native successful cases without Copy/Clone. Rust noncopy proxy Drop occurs once at caller drop. This does not prove arbitrary address-sensitive C++ copy/move/destructor equivalence."
+  },
+  "native_arrow_limit": {
+    "declaration_prefix": "8d974687",
+    "readonly_compile_exit": 1,
+    "mutable_compile_exit": 1,
+    "reason": "Native operator-> returns &operator*(); ordinary prvalue results cannot be addressed. Both native const and writable proxy arrow instantiations fail with taking-address-of-rvalue diagnostics.",
+    "binding_scope": "Arrow remains partial borrowed-reference/builtin-address domain. No ordinary-prvalue arrow parity credit; arbitrary overloaded operator& policies remain open."
+  },
+  "compiler_capture": {
+    "toolchain": "nightly-2026-09-25",
+    "format_version": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "exit": 0,
+    "preexisting_doc_warnings": 8,
+    "scope": "Fresh final production-body capture. Later test-only Size row additions do not change library bodies; final tests and hashes include that row. Replay fresh-normalizes pinned raw compiler and independently checks all36 selected body identities and current source hashes."
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "f713222e76b521535057434f9597cd9a0f5a2716",
+    "native_class_forms": 24,
+    "global_friend_forms": 1,
+    "body_bindings": 36,
+    "unique_public_paths": 34,
+    "prior_exclusions_removed": 25,
+    "partial_rows_added": 25,
+    "implemented_delta": 0,
+    "new_original_test_mapping_delta": 0,
+    "integrity": "Original ledger equals fixed base with exactly these25 prior exclusions replaced. Current integrated ledger must retain every owned mapping; unrelated class changes allowed. Global operator+ resolution uses all same-named native candidates, not only this header.",
+    "global_friend_correction": "ID74f09707a0b0dcd53e71d265b25e31e7149f565871bb63fb8ebc1230feee920b is a global friend operator+, not NCollection_BaseMap::IndexedIterator::operator+(offset,iterator). Its result is represented by existing named shifted adapter. Rust isize + cursor syntax is not implemented or credited."
+  },
+  "original_tests": {
+    "join_count": 163,
+    "join_archive": "porting/runtime-evidence/base-map-indexed-tail-original-joins.json.gz",
+    "scope": "Existing concrete-map original declarations join current native/Rust passing names exactly; no new OCCT GTest translation added. They do not establish that every concrete map uses this generic cursor. No full inherited assertion-faithfulness re-audit claimed.",
+    "inherited_receipts": [
+      "porting/audits/base-map-storage-method-contracts.json",
+      "porting/audits/base-map-basic-iterator-method-contracts.json",
+      "porting/audits/base-map-indexed-comparisons.json"
+    ]
+  },
+  "remaining_limits": [
+    "All31 directly declared callable correspondences (30class plus global friend, including prior6comparisons) remain partial. Native aliases, ABI/layout and full derived-map integration are not promoted.",
+    "Rust M is inverse native IsConstant. The shared new body covers valid const/mutable construction domains; callers explicitly supply native default index1. as_const is the actual fresh-returning conversion body, credited only for native writable-to-readonly domain.",
+    "Explicit policy callbacks preserve return types and valid failure/lifetime traces, but do not automatically reproduce arbitrary C++ user move/copy, address-sensitive construction, throwing destructor or noexcept termination semantics.",
+    "Native signed conversion/subtraction and offset arithmetic credit is limited to defined non-overflowing domains. Rust wrapping extensions are not native UB oracle results.",
+    "Equality/inequality still use the reference-valued IndexedCursorSource trait; the prior comparison partial bindings do not claim every new proxy owner can invoke those direct methods.",
+    "No primitive foreign-impl normalizer change or private-return reachability change is included. No full BaseMap/toolkit/API/test parity completion claim."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/base-map-indexed-tail-replay.py.gz > /tmp/replay-base-map-indexed-tail.py && python3 /tmp/replay-base-map-indexed-tail.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor.rs": "5acdc3fbeabd1f133354989c7f4b0ccc42eea1b7f9e9617bbb7dd616ce7883ce",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/arithmetic.rs": "725e6b10205828f9e159e6221c6320b9ed242f45bf31fdcff640cae0ff26104e",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/value_policies.rs": "e5712b9be9d5be9befbd431f0f42356d7d1b44d29fd7a521620c005ef5021bc8",
+    "crates/tkernel/src/ncollection/base_map/indexed_source.rs": "0e4ceca349b4b69112791139fcb2e9db12d946361b2712883f28d57b95cde62c",
+    "crates/tkernel/tests/base_map_indexed_comparisons.rs": "0a19aecc6eaa3ebfbb130eb69f09d4cc2871cb47ef1a3acaf161516bc2933c61",
+    "crates/tkernel/tests/base_map_indexed_iterator_contracts.rs": "cba8baabc1359d8b8bdd51ccc7e9cb1f01c0fcb9f9827e381c39aac4ad198009",
+    "crates/tkernel/tests/base_map_indexed_proxy_results.rs": "5d133e06755aece55a8368a1956fb32aa6130d8cc091d3783a63d10267195f7f",
+    "crates/tkernel/tests/base_map_indexed_proxy_results/rows.rs": "af647c0c06ee0533e0ab33ec79f37681d1404ee13965e671b0c74200cf32974b",
+    "crates/tkernel/tests/base_map_indexed_proxy_results/support.rs": "97ed3eebd098f92531091917c6d6d29af781a77fbff3d30b1e2e4c2fef9d5bc2",
+    "tools/oracle/tkernel_base_map_indexed_iterator_contracts.cxx": "a564f865f33d07c0624197d60c6ab88c8918e496c5bfd98cad6891f80ded5fb9",
+    "tools/oracle/tkernel_base_map_indexed_iterator_contracts.expected": "c207690f1703f22d1727ab0beb35bc0ca9625e622663d2c65447e368668a65f9",
+    "tools/oracle/tkernel_base_map_indexed_proxy_arrow.cxx": "31412217812a3ab9d9d3c08332dec527361958f1905de1fc1333078c456b818c",
+    "tools/oracle/tkernel_base_map_indexed_proxy_items.hxx": "be86b13e350d64315883b3cad083e941ce1658fd7cd91188aa5f0ca00be1fcfa",
+    "tools/oracle/tkernel_base_map_indexed_proxy_results.cxx": "616e651bee646bcd23c374f3c7764dd7a8688dee9f27f2f16e6cc3784f3fb576",
+    "tools/oracle/tkernel_base_map_indexed_proxy_results.expected": "cda7ef641e9486af23db983523cf50742cc07c7fb544addc16d6dceb8fb02a0e"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-indexed-tail-arrow-mutable-negative.log.gz": "37d7c447220afc3c165781176135f81cc082056a62ec0884494b6457c9060f29",
+    "porting/runtime-evidence/base-map-indexed-tail-arrow-readonly-negative.log.gz": "e12e23205beb1cb86a69dc839cecdefbad5a3fc1751b1ea6bd9f2260c1a98b9c",
+    "porting/runtime-evidence/base-map-indexed-tail-binding-tests.log.gz": "f6e64ef2723aa1a6f3f4e2e15c51de107407197057ad3f428621ac0433e5d705",
+    "porting/runtime-evidence/base-map-indexed-tail-bindings.json.gz": "1a57c82eabbe023d67db69c751c9a6ca200f4ee7395677fe81447f59c0cb610a",
+    "porting/runtime-evidence/base-map-indexed-tail-clippy.log.gz": "cd3fcfac279a6215513f8d57dd5ecf67d7a977811e0fcdacdfbe319cacc37107",
+    "porting/runtime-evidence/base-map-indexed-tail-compiler.log.gz": "4bc77cbfb73e97cde56910ee3c40e7ec964c8e03b885f2a5d219f5143d7dc5d7",
+    "porting/runtime-evidence/base-map-indexed-tail-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-tail-inherited-native-command.json.gz": "faf6478ea75096236b1c81e4e8891cc6e30e6e683535c6d3cba95792733b0cb8",
+    "porting/runtime-evidence/base-map-indexed-tail-inherited-native.stdout.gz": "435cd9d8c2c5944473add43d559b6884711b0fbccbbc1ef612c05e21083afc0b",
+    "porting/runtime-evidence/base-map-indexed-tail-miri.log.gz": "c9b31418fa06e4dfabf168c2bd6bb95a378c3f79875a9d4d197ea65f9b40f31b",
+    "porting/runtime-evidence/base-map-indexed-tail-native-build.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-tail-native-command.json.gz": "bc4673fc402fc2088b9794a8e5f834f654abc8a96fc65cf932b877e019acbcc3",
+    "porting/runtime-evidence/base-map-indexed-tail-native-originals.log.gz": "e174b862c7a43e67c3f25234110e5298e21f2f426d48b3c13066d6e5f5bfb6e9",
+    "porting/runtime-evidence/base-map-indexed-tail-native.stdout.gz": "a6964488b511341e6a65f9f4ad6a9f46334a1bed5ef681ced9f910b2530d8bd7",
+    "porting/runtime-evidence/base-map-indexed-tail-normalized.json.gz": "6a407f6e02ccc380f8bcc0e52228a0d59862ca306850287a9f24e3e12d481671",
+    "porting/runtime-evidence/base-map-indexed-tail-original-joins.json.gz": "5d5a1bea7cb2cdb99465864d05f7fc8da847a7292dcfacd0637a0c2a22b802d6",
+    "porting/runtime-evidence/base-map-indexed-tail-prior-comparisons-replay.log.gz": "b32d08c9503c3fc38e1feccb7b5984ddbf6bae914317484e234e65fd3a99d259",
+    "porting/runtime-evidence/base-map-indexed-tail-replay.log.gz": "a0a489c39e0494a7285ad9e3406b91d86023de31793d990442852b52b32a9513",
+    "porting/runtime-evidence/base-map-indexed-tail-replay.py.gz": "0f595d3fd7b69ff05a3fb0d7bb85a3f3fb95b58b0fa0113c10dfed96d1fa34bb",
+    "porting/runtime-evidence/base-map-indexed-tail-rust.log.gz": "b7dc0b3675a1e5147b986be7bcac346879069e60f2e9d9ac599406188e130ace",
+    "porting/runtime-evidence/base-map-indexed-tail-rustdoc.json.gz": "75b48a2c2bd68369131837fe0b718a9654e12229e2baca62b394a2423cb3ca52",
+    "porting/runtime-evidence/base-map-indexed-tail-transaction.json.gz": "8b4ab0f8c965919d55b54a218500183bb20926c464068d318b5f3c9675f66682"
+  }
+}
