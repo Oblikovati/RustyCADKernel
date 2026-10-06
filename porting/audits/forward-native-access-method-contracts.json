@@ -1,0 +1,730 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "ForwardRangeIterator unconditional dereference/postfix and ArrowProxy public storage",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/forward_range.rs": "65892c64f655d940833e30aa6ab01b475829bdc78ed1c34cf57bb25aefc184d4",
+    "crates/tkernel/src/ncollection/forward_range/accessors.rs": "33fb01ae25c3e47fcfe4cfb0f35eb2e81e6463752df37995c832e21e8b880dd2",
+    "crates/tkernel/src/ncollection/forward_range/host_binding.rs": "01d069a6aecbf6263e1a2294bee7cb866c0ef26f8ed681500bf0c60d28c1f7a2",
+    "crates/tkernel/src/ncollection/forward_range/native_access.rs": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+    "crates/tkernel/tests/forward_native_access_contracts.rs": "059a9b4ce4beec5d313b0f3fdd8950705f77e208a00e821db20f47f6c8047755",
+    "crates/tkernel/tests/forward_range_method_contracts.rs": "ff926fa13ef9650cd66565a1139a714e0187ce71801c858d669fde1aa3002104",
+    "crates/tkernel/tests/forward_range_supplemental.rs": "7e07590abb540ee38ce0f31f0b15256f50c0f442b7f8af2b2ca2d6a34572cd76",
+    "tools/oracle/tkernel_forward_native_access.cxx": "de6e9443a759f4668a864e913f0d8eda4c4aecb5d9f601dda94f631447d732e8",
+    "tools/oracle/tkernel_forward_native_access.expected": "1fff328ad421e09059faecb2c7d89266fe0581a20e670693fe9abc8dacd84e17"
+  },
+  "upstream_sha256": "d93aaf8438a75909728c02a2ed0153dab64f801980f8e0a06f1645103b7ae885",
+  "runtime": {
+    "new_contract_tests": 5,
+    "miri_new_tests": 5,
+    "native_oracle_rows": 4,
+    "original_native_tests": 22
+  },
+  "original_cases_joined": [
+    "NCollection_ForwardRangeTest.SFINAEDetection_Value",
+    "NCollection_ForwardRangeTest.SFINAEDetection_Current",
+    "NCollection_ForwardRangeTest.SFINAEDetection_CurrentId",
+    "NCollection_ForwardRangeTest.SFINAEDetection_BothValueAndCurrent",
+    "NCollection_ForwardRangeTest.SFINAEDetection_BothCurrentAndId",
+    "NCollection_ForwardRangeTest.StandaloneRange_ValueIterator",
+    "NCollection_ForwardRangeTest.StandaloneRange_CurrentIterator",
+    "NCollection_ForwardRangeTest.StandaloneRange_CurrentIdIterator_ByValue",
+    "NCollection_ForwardRangeTest.StandaloneRange_Empty",
+    "NCollection_ForwardRangeTest.StandaloneRange_SingleElement",
+    "NCollection_ForwardRangeTest.StandaloneRange_NonCopyable_Move",
+    "NCollection_ForwardRangeTest.InClassBeginEnd_RangeFor",
+    "NCollection_ForwardRangeTest.InClassBeginEnd_Temporary",
+    "NCollection_ForwardRangeTest.IteratorTraits_ValueType",
+    "NCollection_ForwardRangeTest.IteratorTraits_ReferenceReturn",
+    "NCollection_ForwardRangeTest.IteratorTraits_ValueReturn",
+    "NCollection_ForwardRangeTest.ArrowOperator_Reference",
+    "NCollection_ForwardRangeTest.ArrowOperator_ArrowProxy",
+    "NCollection_ForwardRangeTest.PostfixIncrement",
+    "NCollection_ForwardRangeTest.SentinelComparison",
+    "NCollection_ForwardRangeTest.Priority_ValueOverCurrent",
+    "NCollection_ForwardRangeTest.Priority_CurrentOverCurrentId"
+  ],
+  "compiler_reachable_candidates": [
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy",
+      "kind": "struct",
+      "signature": {
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "shape": {
+          "kind": "plain",
+          "field_count": 1,
+          "has_stripped_fields": false
+        }
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "canonical_type_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy",
+      "declaration_sha256": "0307d9b6941e7c7796a41795cd0e2d27541ab15cb98f43eae5d56c9c3daf18cf",
+      "reexport": {
+        "source": "native_access::ForwardArrowProxy",
+        "is_glob": false,
+        "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+        "source_sha256": "65892c64f655d940833e30aa6ab01b475829bdc78ed1c34cf57bb25aefc184d4",
+        "source_status": null,
+        "canonical_target_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy"
+      }
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::value",
+      "kind": "struct_field",
+      "signature": {
+        "generic": "T"
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "declaration_sha256": "52844807fe0707f4f2c4f5e063cb802fd4c81d2afc4117ee0ed3fee26a8c9781"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::new",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "value",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "ForwardArrowProxy",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "2de6a7f2e4338ae32f0758a0777afaecebcdbc6d23e829823723332804a66f55"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::arrow",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "raw_pointer": {
+              "is_mutable": false,
+              "type": {
+                "generic": "T"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "ForwardArrowProxy",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "4c03abd342dcb7e400ed6e91de2d754fe4ccdb9595bfca4ec70bd2c635ed18f4"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::<core::ops::deref::Deref>::Target",
+      "kind": "assoc_type",
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "bounds": [],
+        "type": {
+          "generic": "T"
+        },
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "ForwardArrowProxy",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "Deref",
+          "resolved_item_path": "core::ops::deref::Deref",
+          "args": null
+        }
+      },
+      "declaration_sha256": "35065fc56b69b92624819cf9e887d355fa47459817568c07ab24151a461956f0"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::<core::ops::deref::Deref>::deref",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "generic": "T"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "ForwardArrowProxy",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::native_access::ForwardArrowProxy",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "Deref",
+          "resolved_item_path": "core::ops::deref::Deref",
+          "args": null
+        }
+      },
+      "declaration_sha256": "c05ea1f9a5203dfbf574ab810aba59c181092839c505e0ea3cc8e720a6466aea"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::PostfixProxy::value",
+      "kind": "struct_field",
+      "signature": {
+        "generic": "T"
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+      "source_sha256": "65892c64f655d940833e30aa6ab01b475829bdc78ed1c34cf57bb25aefc184d4",
+      "source_status": null,
+      "declaration_sha256": "0a035f1816d6adb3d81d495f6b4e9841dac87ad613579eabaa2f9713ef931104"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::dereference",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "ForwardItem",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardItem",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::ForwardRangeIter",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'_"
+                  },
+                  {
+                    "type": {
+                      "generic": "I"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "I",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "ForwardHost",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardHost",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "9b5d82a329cfe3dfdc95e5a306f5288af27894f72f0e0b84152090004996ece2"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::postfix_increment",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "PostfixProxy",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::PostfixProxy",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "ForwardValue",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardValue",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "I"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/forward_range/native_access.rs",
+      "source_sha256": "8ded2705b9a26540a1484cccb36bac4e6d8e0d837aa664f97ae56edda4257710",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::ForwardRangeIter",
+            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'_"
+                  },
+                  {
+                    "type": {
+                      "generic": "I"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "I",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "ForwardHost",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::ForwardHost",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "f46991869dcca99394a8a02120d53c5fcf01c842ac9f99d1ec6a53acfbb1c09e"
+    }
+  ],
+  "native_declaration_candidates": [
+    {
+      "id": "2d71afe398cd6753d01359e106e1bcf060e81beed53772fe46a05106b349b2da",
+      "qualified_name": "NCollection_ForwardRangeDetail::ArrowProxy::ValueT",
+      "kind": "TemplateTypeParm",
+      "signature": ""
+    },
+    {
+      "id": "2f2ab2359fab66c6900fc15d809cc218e411513d28c8bd83ad879aa6001f5198",
+      "qualified_name": "NCollection_ForwardRangeDetail::ArrowProxy",
+      "kind": "ClassTemplate",
+      "signature": "NCollection_ForwardRangeDetail::ArrowProxy"
+    },
+    {
+      "id": "307aece19abd13a2423a366cb9848aea00b6845d76bbc96cc7c64362a0aef409",
+      "qualified_name": "NCollection_ForwardRangeDetail::ArrowProxy",
+      "kind": "CXXRecord",
+      "signature": ""
+    },
+    {
+      "id": "3b6c7ce478b88f37e7c8989fa2e20e331eb8872d18d0daf72a88ab278ae7ff39",
+      "qualified_name": "NCollection_ForwardRangeIterator::operator++",
+      "kind": "CXXMethod",
+      "signature": "NCollection_ForwardRangeIterator<HostType> &()"
+    },
+    {
+      "id": "5f2e1af428461aefd4bed46025aa8a3b2b33c3574726157854ba853825a8b061",
+      "qualified_name": "NCollection_ForwardRangeIterator::PostfixProxy::myValue",
+      "kind": "Field",
+      "signature": "std::remove_cv<std::remove_reference<NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, void>::ReturnType>::type>::type"
+    },
+    {
+      "id": "690d27a4709e7b44a59bd4e32df4d1461687b4dc533cedc64cea96a5b5bfb422",
+      "qualified_name": "NCollection_ForwardRangeIterator::PostfixProxy::operator*",
+      "kind": "CXXMethod",
+      "signature": "const std::remove_cv<std::remove_reference<NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, void>::ReturnType>::type>::type &() const"
+    },
+    {
+      "id": "6cd285cbd846af39aaaacfe38733e3eeff8a749270e45190f99b398fb78729d3",
+      "qualified_name": "NCollection_ForwardRangeIterator::operator*",
+      "kind": "CXXMethod",
+      "signature": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, void>::ReturnType () const"
+    },
+    {
+      "id": "dc23bf5837e08adf4addd29cc3a712fe0f9150da2f215c50227b205f0323f0e1",
+      "qualified_name": "NCollection_ForwardRangeDetail::ArrowProxy::operator->",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const"
+    },
+    {
+      "id": "efab73b2525f778023172b1119dbf7a4124c690beb35498311061ed57f02fa7f",
+      "qualified_name": "NCollection_ForwardRangeIterator::PostfixProxy",
+      "kind": "CXXRecord",
+      "signature": ""
+    },
+    {
+      "id": "f49f05f1abfeeab6ad93ea32e935502a4b78adc1f75251c420bb5c054cc39e82",
+      "qualified_name": "NCollection_ForwardRangeIterator::operator++",
+      "kind": "CXXMethod",
+      "signature": "struct NCollection_ForwardRangeIterator::PostfixProxy (int)"
+    },
+    {
+      "id": "fe6954ebf183690d217e3f0c886127f6dab87b8d06796784448f33165da16dd4",
+      "qualified_name": "NCollection_ForwardRangeDetail::ArrowProxy::myValue",
+      "kind": "Field",
+      "signature": "type-parameter-0-0"
+    }
+  ],
+  "artifacts": {
+    "native-original": {
+      "path": "porting/runtime-evidence/foundation-native-tail-forward-native-original.gz",
+      "sha256": "4a6e4f2f0aea31f362704c31503af96950d1b8b64863f3a745d62983498bd86a"
+    },
+    "oracle": {
+      "path": "porting/runtime-evidence/foundation-native-tail-forward-native-oracle.gz",
+      "sha256": "3276484d7ef425c64fe81b6dd38cddc4b3c9bad18d34b437da1d78e7fb7e93bf"
+    }
+  },
+  "current_frozen_runtime_receipt": "porting/audits/foundation-native-tail-checkpoint.json",
+  "remaining_gaps": [
+    "Existing current/arrow/post_increment remain checked Rust extensions; native mappings must select new unconditional methods.",
+    "ArrowProxy is independently callable; automatic native reference-versus-value arrow result selection remains unproven.",
+    "Host accessor descriptors remain explicit Rust substitutes for native SFINAE; full template/configuration identity remains open."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

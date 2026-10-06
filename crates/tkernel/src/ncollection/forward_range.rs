@@ -2,10 +2,12 @@
 //! Rust hosts declare accessor descriptors explicitly because stable Rust has no method-name SFINAE.
 mod accessors;
 mod host_binding;
+mod native_access;
 pub use accessors::{
     AccessorMetadata, AccessorPresence, AccessorSet, Missing, Present, ReadAccessor, SelectAccessor,
 };
 use host_binding::HostBinding;
+pub use native_access::ForwardArrowProxy;
 use std::cell::RefCell;
 /// A cursor with stable borrowed or owned accessor output; implement `more` and `advance`.
 pub trait ForwardHost: Sized {
@@ -36,7 +38,8 @@ pub trait ForwardIteratorTraits {
 pub struct ForwardRangeSentinel;
 /// Owned postfix snapshot that does not copy the host; `*iter.post_increment()?`.
 pub struct PostfixProxy<T> {
-    value: T,
+    /// Native public snapshot field; `proxy.value`.
+    pub value: T,
 }
 impl<T> std::ops::Deref for PostfixProxy<T> {
     type Target = T;
