@@ -45,7 +45,7 @@ impl<I: CellGeometry> CellFilter<I> {
                 Failure::out_of_range(&format!("NCollection_Array1::ChangeValue: {error}"))
             })? = size;
         }
-        self.reset_cells(allocator);
+        self.reset_allocator(allocator);
         Ok(())
     }
     /// Native `Reset(Array1&, alloc)`: copy the sizes (bounds included, as `Array1::Assign`),
@@ -54,7 +54,7 @@ impl<I: CellGeometry> CellFilter<I> {
     pub fn reset_sizes(&mut self, sizes: &Array1<'_, f64>, allocator: Option<BaseAllocator>) {
         // OCCT Array1::Assign reuses equal-length storage while rebasing its bounds.
         self.sizes.assign_trivial(sizes);
-        self.reset_cells(allocator);
+        self.reset_allocator(allocator);
     }
     fn assemble(
         dimension: usize,
@@ -70,7 +70,9 @@ impl<I: CellGeometry> CellFilter<I> {
             inspector: PhantomData,
         }
     }
-    fn reset_cells(&mut self, allocator: Option<BaseAllocator>) {
+    /// Native protected `resetAllocator`; `filter.reset_allocator(None)` clears targets and
+    /// replaces the arena while preserving the dimension and cell sizes.
+    pub fn reset_allocator(&mut self, allocator: Option<BaseAllocator>) {
         self.resource = arena_or_default(allocator);
         // Native resetAllocator clears through the new arena without resetting NbBuckets.
         self.cells.clear_with_allocator(Some(self.resource.clone()));
