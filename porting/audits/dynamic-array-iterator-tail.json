@@ -1,0 +1,228 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_branch_pending_integration",
+  "branch": "port/dynamic-iterator-tail",
+  "base_commit": "ff00383c",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs": "b80da64567bf7ce0020b1bbf5fba539704235e492f859e062993931114289655",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/operators.rs": "81b248ce24f8e04ce7802e7fb2895ee26ac52be74986f1cab36affe690aa499f",
+    "crates/tkernel/tests/dynamic_array_iterator_tail.rs": "5e530b723f555b0cc3ead07a01ced6667f1ab28924c0c4b7f121b084e7e45fd3",
+    "tools/oracle/tkernel_dynamic_iterator_tail_contracts.cxx": "75149fe4f0f50f83c2cfda09d0c9b899debbdc99ec74ae02088fdec6f3882ff3",
+    "tools/oracle/tkernel_dynamic_iterator_tail_contracts.expected": "e9635a72d18c6346a84592a665a87ab07b4062ad0a0de48c6964ef945a4ca7d1",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/ncollection_dynamic_array/iteration.rs": "7925ba8f77b0d6eb877b89d2615a234ecf982efb0bc4f3058dcd70455f0abc42"
+  },
+  "upstream_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-iterator-tail-focused.log.gz": "3b26df34a03e1f47c530c5b93955a8984dbd72c4e8eab00ca450683bdce0c56a",
+    "porting/runtime-evidence/dynamic-iterator-tail-miri.log.gz": "83a9831bf8727fb0547d210b2afe923a156c3dc5bf7222c84ed0b87eb69da0ce",
+    "porting/runtime-evidence/dynamic-iterator-tail-clippy.log.gz": "30bce8a523da29f829634400cb7d868c6a1105ffef119f8cc06cd84f486d5998",
+    "porting/runtime-evidence/dynamic-iterator-tail-native.log.gz": "444098d07469706f1eb0071d3b2a296fc7b81af1219891aabb547f6a7b0df55f",
+    "porting/runtime-evidence/dynamic-iterator-tail-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-iterator-tail-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-iterator-tail-oracle-runtime.log.gz": "7007d531bbcc757804c9b8be5df39f79c0f8d116437b74819668ff8f69bfeb9b",
+    "porting/runtime-evidence/dynamic-iterator-tail-source.tar.gz": "0e66ff0b7027b6e1e09da6b61c3aed8c3f0cce695d9fc25fdff3f98de571b894"
+  },
+  "source_scope": "Frozen owned iterator sources/tests and native probe. Root integration supplies full workspace dependency closure; no global inventory or completion ledger changes.",
+  "exit_codes": {
+    "focused": 0,
+    "miri": 0,
+    "clippy": 0,
+    "native": 0,
+    "fmt": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0
+  },
+  "focused_rust_passes": 77,
+  "new_tests": 3,
+  "miri_passes": 3,
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_assertion_audit": {
+    "inherited_full_52_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "revisited_iterator_body_names": [
+      "Iterator",
+      "STLIterators",
+      "STLIteratorSurvivesAppendAcrossBlocks",
+      "IteratorsAcrossBlocks",
+      "ConstSTLIteratorSurvivesAppendAcrossBlocks",
+      "STLAlgorithmCompatibility_MinMax",
+      "STLAlgorithmCompatibility_Replace",
+      "STLAlgorithmCompatibility_Reverse",
+      "STLAlgorithmCompatibility_Sort"
+    ],
+    "rust_source": "crates/tkernel/tests/ncollection_dynamic_array/iteration.rs",
+    "matching_assertions": "Sums60/120/21, doubled20/40/60, captured-end inequality, append64/capturedsum10/100, offset4/6/end, exact100-value MT19937 reference and min/max/replace/reverse/sort results.",
+    "adaptations": [
+      "IteratorsAcrossBlocks legacy traversal uses iter() in its original Rust mapping; separate legacy cursor contracts exercise segmented detached traversal.",
+      "Original STL append tests use the existing begin_cursor/end_cursor facade; new supplemental fixture exercises DynamicArrayIterator directly.",
+      "Rust algorithms and borrow-based iterators replace C++ STL invocation; equivalent result assertions do not establish every custom C++ move/assignment trace."
+    ]
+  },
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_iterator_tail_contracts.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_iterator_tail_contracts.expected",
+    "row_count": 8,
+    "exact_runtime_join_count": 8,
+    "row_keys": [
+      "mutable",
+      "arrow",
+      "arithmetic",
+      "const_arithmetic",
+      "conversion",
+      "captured",
+      "fresh",
+      "empty"
+    ],
+    "rust_test": "native_iterator_rows_match_runtime_rust",
+    "type_checks": [
+      "const BasicIterator<false>::Value returns Item&",
+      "const legacy Iterator::Value returns const Item&",
+      "const BasicIterator<true>::Value returns const Item&",
+      "const-to-mutable construction is unavailable"
+    ],
+    "rust_type_parameters": "Item implements neither Clone nor Default: arithmetic/conversion adapters impose no extra item bounds."
+  },
+  "public_declaration_bindings": [
+    {
+      "native": "BasicIterator<false>::Value()/operator*()",
+      "rust": "DynamicArrayIterator<T,true>::basic_value_mut",
+      "evidence": "mutable"
+    },
+    {
+      "native": "BasicIterator<false>::operator->()",
+      "rust": "DynamicArrayIterator<T,true>::change_value_ptr",
+      "evidence": "mutable/arrow/empty"
+    },
+    {
+      "native": "BasicIterator<false>::operator[](difference_type)",
+      "rust": "DynamicArrayIterator<T,true>::change_value_at",
+      "evidence": "mutable"
+    },
+    {
+      "native": "BasicIterator::operator+(difference_type)",
+      "rust": "Add<isize>",
+      "evidence": "arithmetic/const_arithmetic/captured"
+    },
+    {
+      "native": "friend operator+(difference_type,BasicIterator)",
+      "rust": "impl Add<DynamicArrayIterator<T,M>> for isize",
+      "evidence": "arithmetic/const_arithmetic"
+    },
+    {
+      "native": "BasicIterator::operator-(difference_type)",
+      "rust": "Sub<isize>",
+      "evidence": "arithmetic/const_arithmetic"
+    },
+    {
+      "native": "BasicIterator::operator+=(difference_type)",
+      "rust": "AddAssign<isize>",
+      "evidence": "arithmetic"
+    },
+    {
+      "native": "BasicIterator::operator-=(difference_type)",
+      "rust": "SubAssign<isize>",
+      "evidence": "arithmetic"
+    },
+    {
+      "native": "BasicIterator::operator-(BasicIterator<Other>)",
+      "rust": "Sub<DynamicArrayIterator<T,O>>",
+      "evidence": "arithmetic/const_arithmetic"
+    },
+    {
+      "native": "BasicIterator<true>(const BasicIterator<false>&)",
+      "rust": "From<DynamicArrayIterator<T,true>> for DynamicArrayIterator<T,false>",
+      "evidence": "conversion/captured"
+    },
+    {
+      "native": "default/array/array-index/copy constructors; same/mutable-to-const assignments",
+      "rust": "existing default/legacy_cursor/new/Copy/assign_from/assign_from_mutable",
+      "evidence": "conversion/captured/fresh/empty plus previous cursor contracts"
+    },
+    {
+      "native": "CopyTo/Iterator/ChangeIterator accessor members",
+      "rust": null,
+      "status": "absent_in_pinned_native_BasicIterator_not_a_missing_port"
+    }
+  ],
+  "safety_boundary": [
+    "Mutable references require an exclusive borrow of the explicitly supplied owning DynamicArray. The cursor itself remains Copy and detached, so multiple cursors cannot create simultaneous mutable references through safe Rust.",
+    "Raw mutable pointer construction is safe; dereferencing requires unsafe caller-side lifetime and exclusive-access guarantees. Focused Miri executes a valid pointer mutation with a live owner and no competing access.",
+    "Default cursors and mismatched owners return Failure for access; native default arrow returns null without an owner argument. No unchecked reference-returning Deref/Index implementation is claimed.",
+    "Rust MUTABLE=true maps to native IsConstant=false; the opposite boolean convention is explicit in bindings. Legacy value() stays read-only even on a mutable facade."
+  ],
+  "remaining_partial_parity": [
+    "Native cached element/block pointers versus Rust re-resolved explicit-owner access after container exchange, move, shrink or address reuse are not proven equivalent. Valid append-stable traversal and captured ends are covered.",
+    "Rust PartialOrd across distinct owners returns None to satisfy PartialEq consistency. compare_position preserves native positional comparisons; no newly claimed exact relational-operator parity across owners.",
+    "Unsigned index wrapping and extreme signed offsets outside valid native arithmetic domain are safe Rust extensions, not native behavior claims.",
+    "No unsafe const-cast mutable access from a truly immutable Rust owner is exposed.",
+    "Protected block APIs, borrowed insertion staging, custom element move/copy/drop traces and complete DynamicArray class parity remain open per prior method-tail receipt."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "commands": {
+    "focused": "cargo test --locked -p rustycad-tkernel --test dynamic_array_iterator_tail --test dynamic_array_method_tail --test dynamic_array_legacy_cursor_contracts --test ncollection_dynamic_array",
+    "miri": "cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test dynamic_array_iterator_tail",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test dynamic_array_iterator_tail -- -D warnings",
+    "native": "OpenCascadeGTest --gtest_filter=NCollection_DynamicArrayTest.*",
+    "oracle": "g++ -std=c++17 -O2 -I <native>/include/opencascade tools/oracle/tkernel_dynamic_iterator_tail_contracts.cxx -L <native>/lin64/gcc/libi -Wl,-rpath,<native>/lin64/gcc/libi -lTKernel -o <probe>; <probe> | diff tools/oracle/tkernel_dynamic_iterator_tail_contracts.expected -",
+    "fmt": "cargo fmt --all --check"
+  }
+}
