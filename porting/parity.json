@@ -242059,6 +242059,150 @@
       ],
       "status": "partial",
       "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::new"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::NCollection_SparseArrayBase(size_t,size_t,NCollection_SparseArrayBase::DestroyItemFunc) noexcept"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json. Native destructor is nonvirtual; explicit Rust Drop calls the stored destroy callback and releases sparse storage, followed by Rust-owned metadata/resource field cleanup.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::<core::ops::drop::Drop>::drop",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::<core::ops::drop::Drop>::drop"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::~NCollection_SparseArrayBase() noexcept"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::get_block",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::get_block"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::getBlock(void *const) const noexcept"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::get_item",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::get_item"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::getItem(const NCollection_SparseArrayBase::Block &,size_t) const noexcept"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json. OutOfRange is returned as Rust Failure; its Rust error text includes the offending index and differs from the native message.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::get_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::get_value"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::getValue(const size_t) const"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::clear_items",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::clear_items"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::clearItems(NCollection_SparseArrayBase::DestroyItemFunc)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::unset_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::unset_value"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::unsetValue(const size_t,NCollection_SparseArrayBase::DestroyItemFunc)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::set_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::set_value"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::setValue(const size_t,void *const,NCollection_SparseArrayBase::CreateItemFunc,NCollection_SparseArrayBase::CopyItemFunc)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json. Native assumes equal item types; Rust additionally checks matching stride. Self-assignment and partial callback failure states are retained.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::assign"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::assign(const NCollection_SparseArrayBase &,NCollection_SparseArrayBase::CreateItemFunc,NCollection_SparseArrayBase::DestroyItemFunc,NCollection_SparseArrayBase::CopyItemFunc)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::from_optional",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::from_optional"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Iterator(const NCollection_SparseArrayBase *)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::initialize_optional",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::initialize_optional"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::init(const NCollection_SparseArrayBase *)"
+    },
+    {
+      "notes": "Exact erased sparse base/raw-iterator body on valid callback, layout, source-lifetime and pointer domains; native fixtures and original tests support scoped behavior. Nullable source uses Option; native_value_address preserves cached raw addresses even without an occupied item, while detached/uninitialized access is adapted to None. Native failure/noexcept/ABI and language type surfaces remain partial. See porting/audits/sparse-base-remaining-methods.json.",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::native_value_address",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::native_value_address"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::value() const noexcept"
     }
   ],
   "tests": [

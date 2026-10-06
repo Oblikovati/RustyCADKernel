@@ -4,6 +4,8 @@
 mod exchange_contracts;
 #[path = "sparse_array_base_contracts/fixture.rs"]
 mod fixture;
+#[path = "sparse_array_base_contracts/raw_cursor.rs"]
+mod raw_cursor_contracts;
 #[path = "sparse_array_base_contracts/resources.rs"]
 mod resource_contracts;
 use fixture::*;

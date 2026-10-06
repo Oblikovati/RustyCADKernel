@@ -1,0 +1,417 @@
+{
+  "schema": "rustycad.exact-partial-binding-transaction.v1",
+  "status": "branch_validated_pending_main_integration",
+  "source_revision": "3c9b0809ca837e5b83845450d7e908e4f192fc19",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Remaining erased SparseArrayBase and raw Iterator callables. Three new raw iterator adapters reproduce nullable source and cached address behavior. Existing eight ledger rows remain byte-for-byte; their current-source body bindings are refreshed in this new transaction. Generic BasicIterator contract reconciliation remains separate.",
+  "supersedes": {
+    "receipt": "porting/audits/sparse-base-exchange-and-resources.json",
+    "receipt_sha256": "911b1ea581fb9a5f22e543dbb4bd71abf8caaa135791586e9e26d53783ccafe0",
+    "bindings": "porting/audits/sparse-base-ledger-records.jsonl",
+    "bindings_sha256": "76c3aba204e30469bc7a550ee917f0e0937e2c6a1d99893a169c940c1a0d66dc",
+    "reason": "Current cursor.rs body/source hashes changed. Prior committed evidence is retained byte-for-byte as a historical snapshot, not rewritten."
+  },
+  "counts": {
+    "native_records_in_class": 103,
+    "visible_native_records_in_class": 57,
+    "exact_current_partial_bindings": 20,
+    "new_partial_ledger_rows": 12,
+    "unchanged_prior_ledger_rows": 8,
+    "new_public_methods": 3,
+    "implemented_credit_added": 0,
+    "matrix_statuses": {
+      "generic_iterator_contract_not_reconciled_in_batch": 26,
+      "refreshed_partial_body": 8,
+      "non_candidate_retained_without_credit": 34,
+      "nominal_field_or_callback_alias_not_reconciled_in_batch": 11,
+      "new_partial_body": 12,
+      "returned_private_type_reachability_requires_inventory_review": 12
+    }
+  },
+  "original_test_rows_unchanged": true,
+  "all_previous_api_rows_unchanged": true,
+  "legacy_test_credit_delta": 0,
+  "api_parity_complete": false,
+  "bindings_path": "porting/audits/sparse-base-remaining-bindings.jsonl",
+  "bindings_sha256": "8ca1d19e78044ff240eb58ddfa3e1a8ea940e412057ee9b3c516ff0857d1f1a0",
+  "matrix_path": "porting/audits/sparse-base-remaining-matrix.jsonl",
+  "matrix_sha256": "169007024606c33ca10d2a4c52191d020dea29614214630b112a95f02004a575",
+  "catalog_path": "porting/audits/sparse-base-remaining-rust-bodies.jsonl",
+  "catalog_sha256": "58940ef40a14db306cbeaac0ac18d2241139eb3dc927ad0085d901ecfc798412",
+  "rust_inventory_path": "porting/runtime-evidence/sparse-base-remaining-normalized.json.gz",
+  "rust_inventory_sha256": "a797bc02b24b4f01eb4410f2a676d07c5c67b9a771480387c3a49527997d4c0d",
+  "rust_raw_path": "porting/runtime-evidence/sparse-base-remaining-rustdoc.json.gz",
+  "rust_raw_sha256": "df7ea359677476070fe59fd286af3dec7866814700cdcb61b986a554b0a6e61e",
+  "runtime_evidence": {
+    "replay": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-replay.log.gz",
+      "sha256": "d60fe88cfe469bbfc56ed432c5f1bf9b80b6996439959cdaaab73f3433db20b0",
+      "uncompressed_sha256": "3133ca4b7c9dda338ae09e6ddb69a8873f03eef7910ff2f9bcf3c5aabbd12fcc"
+    },
+    "missing-methods-red": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-missing-methods-red.log.gz",
+      "sha256": "97543c9e3c3df8aded224e880df3ce0ea69f17438e8577cf545920e5caa7fca9",
+      "uncompressed_sha256": "94484381f0c2ad9d1840f9f7ec659fa4809f6a26ef24123ba9279323f27b53ba"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-rust.log.gz",
+      "sha256": "6f8203dfbbec3b83c7d69196f85286fb2adb693e77be8f593e89d61176523ef3",
+      "uncompressed_sha256": "3aebf785572f7c85596a5d1a31c0e799ae823c6515d1bd57af34731eff92acc4"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-miri.log.gz",
+      "sha256": "67430ec0a6f5f63fa22ed729108a46a5e733a967691de9cf23f4138727774156",
+      "uncompressed_sha256": "f8dd95a56b39b0b8518ef595abf2f983e707dbdd17e1d608f2a3bf9a657b6643"
+    },
+    "native-originals": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-native-originals.log.gz",
+      "sha256": "f8706ebba18820d18d427ed5d9f3765604604d94c49457e338e51eb7464d0cb2",
+      "uncompressed_sha256": "c27797d0b48daacf4eaf2d586ab601898349bd5c0fb7e5aba8052050166cd519"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-rustdoc.log.gz",
+      "sha256": "d1a082367b20a37962233bcccddda445641e872d43fa503d7fbe9243ed41aaba",
+      "uncompressed_sha256": "c7028a7f2b866f19b39a483ac7f3a61f742cb9c9b5aa2183b7791c99685054aa"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-clippy.log.gz",
+      "sha256": "b9d211824656ad1640e5977afff987eedc01c7828c6bab9b0a65c4f3eb4e3497",
+      "uncompressed_sha256": "fa34ec705a2a13326588be60830b04772f1946f5d8b1fd41844082437ef88559"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "python-lint": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-python-lint.log.gz",
+      "sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "uncompressed_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "binding-tests": {
+      "path": "porting/runtime-evidence/sparse-base-remaining-binding-tests.log.gz",
+      "sha256": "c85387e267d67690ab48472904fea7464b346af4afee2b8d1aba8f8f27996c3f",
+      "uncompressed_sha256": "f62f10bd360a9d58a5c226e9c1340398f6e9fd8628444cb88141420ff883846a"
+    }
+  },
+  "checks": {
+    "focused_rust_tests": 123,
+    "focused_target_counts": [
+      10,
+      34,
+      16,
+      12,
+      17,
+      2,
+      32
+    ],
+    "strict_provenance_miri_tests": 78,
+    "miri_target_counts": [
+      34,
+      12,
+      32
+    ],
+    "native_original_tests": 10,
+    "new_regression_tests": 6,
+    "binding_validator_tests": 31,
+    "clippy_warnings_denied": true,
+    "cargo_fmt_check": true,
+    "python_ruff_check": true,
+    "native_fixture_rows": 79
+  },
+  "original_test_joins": [
+    {
+      "upstream_id": "NCollection_SparseArrayTest.BasicFunctions",
+      "rust_test": "NCollection_SparseArrayTest__BasicFunctions",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.LargeIndices",
+      "rust_test": "NCollection_SparseArrayTest__LargeIndices",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.SparseDistribution",
+      "rust_test": "NCollection_SparseArrayTest__SparseDistribution",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.IteratorFunctions",
+      "rust_test": "NCollection_SparseArrayTest__IteratorFunctions",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.STLIterators",
+      "rust_test": "NCollection_SparseArrayTest__STLIterators",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.ComplexType",
+      "rust_test": "NCollection_SparseArrayTest__ComplexType",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.Clear",
+      "rust_test": "NCollection_SparseArrayTest__Clear",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.DataMapInterface",
+      "rust_test": "NCollection_SparseArrayTest__DataMapInterface",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.AssignAndExchange",
+      "rust_test": "NCollection_SparseArrayTest__AssignAndExchange",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock",
+      "rust_test": "NCollection_SparseArrayTest__AssignClearsUnsetItemsInSharedBlock",
+      "native_passed": true,
+      "rust_passed": true
+    }
+  ],
+  "native_fixtures": [
+    {
+      "fixture": "tools/oracle/tkernel_sparse_array_base_contracts.cxx",
+      "rows": 7,
+      "match": true,
+      "source_sha256": "7f1570ef82ed30f26cac6bdb9955982e936e8ad9d3324bb77f631690c01e62a9",
+      "expected_sha256": "d5b1355226d53435f218136de9d1007d22e3d383969fdec08427af20030f2582",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_array_base_contracts.gz",
+      "stdout_sha256": "fbf3b65dec8e1645e7888697055f0a59f83050bcacf8424c5e8e8b92e0b392c6"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_array_method_contracts.cxx",
+      "rows": 13,
+      "match": true,
+      "source_sha256": "dd6dd80bc033553068e0be5b012e54de998e381d6d76ee8cbb545f2f69a839d8",
+      "expected_sha256": "a53464fe89b35a0c161b1974674f34177c751c3312ec1da0db5c2b65881480d9",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_array_method_contracts.gz",
+      "stdout_sha256": "03290a89f59ef7f9bf5ed7ec1ae4795a1a973b54b3961e6d094646cdabfc4ace"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_basic_iterator_contracts.cxx",
+      "rows": 10,
+      "match": true,
+      "source_sha256": "b77c7cccf4ab689d44082c207878f391e7bfaa3a154f3223fd473c5d31b2388e",
+      "expected_sha256": "b912664b9202d70533d2e170a652bcfe3c8a888c0f919fe1b459ab98a7229732",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_basic_iterator_contracts.gz",
+      "stdout_sha256": "2f4f157c11adb5956510f230364f6f1cdc5bcd9376febdca4d8c7d20e07dfd21"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_cursor_contracts.cxx",
+      "rows": 22,
+      "match": true,
+      "source_sha256": "2f6efcd50f06f21bf3fc5bca006bf19866e21c6cdbec6d024aa876f7fdf72a8d",
+      "expected_sha256": "9b2948fad56d25b7e336a7fa53bdc4dfa75c90511165c41ac2eefaaaddd51d0e",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_cursor_contracts.gz",
+      "stdout_sha256": "13d773c9796166f0bfb59631fc4dff6222ef279cea390adf0e039ae9c04212e8"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_exchange_identity.cxx",
+      "rows": 6,
+      "match": true,
+      "source_sha256": "cf5aaf660d34e08c35bb3fce8b300c40115185d53b17aa422f9e22591d3dda0a",
+      "expected_sha256": "f9b435053caae4e16db0954655fb984628312a30a02260e03e36166b91e17f06",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_exchange_identity.gz",
+      "stdout_sha256": "102d814de29766d078fa1309c841c0ccffe26739ee47758e2dbce8ae75cc08e7"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx",
+      "rows": 12,
+      "match": true,
+      "source_sha256": "4acd60125d53b45d859f20ed40753308a4bda2c6638c6c12b73f8bea551741e4",
+      "expected_sha256": "0b1ebaa70c227b5334799b86f2ea38097044d645c0846a580049addbd1e5013c",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_raw_iterator_addresses.gz",
+      "stdout_sha256": "c5418e23adbd4f170e3359b9009bb92c0975eb62b0c81547d98eb5447c279590"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_typed_storage_contracts.cxx",
+      "rows": 9,
+      "match": true,
+      "source_sha256": "c16ebea960144a66e1c273b6e39de00c1ef5b29e351808d7197195b4b1d78b6e",
+      "expected_sha256": "9fb3e7457258b07a74160a4c8a1c782d9774e40726dda19a54813c9d9a159cbf",
+      "stdout_path": "porting/runtime-evidence/sparse-base-remaining-native-tkernel_sparse_typed_storage_contracts.gz",
+      "stdout_sha256": "4e9401914f289f386cae1fc7135d439010a82648e135ddbc7ac138417b06c686"
+    }
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sparse_array_base.rs": "3f9d30d870eec3263b816fcb357a80ac9995de7cf8948453c83f7bbc80d92b62",
+    "crates/tkernel/src/ncollection/sparse_array_base/cursor.rs": "dda7ca57fd03c4865634f341469c71ac0b2b32b30e94d93a1bc8c527b3180886",
+    "crates/tkernel/tests/sparse_array_base_contracts.rs": "4c710335199762b5b1d920270ebbbbc830c4ea6fd0467b00ae3fbdadcc113d01",
+    "tools/tests/test_sparse_base_bindings.py": "45f975dd6eb67ec915fff08fdaf6861a9083b64e645e13d1e36898a3497d6e8c",
+    "tools/verify_sparse_base_bindings.py": "688fe96638930e521bd98b79c7916a21dc97bd5beaed08052706b2ba600af370",
+    "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs": "35d046500ad14a658bcbf94c8a1e7bc5b1b4a7247f4a9ac96578dc339dbfc880",
+    "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx": "4acd60125d53b45d859f20ed40753308a4bda2c6638c6c12b73f8bea551741e4",
+    "tools/oracle/tkernel_sparse_raw_iterator_addresses.expected": "0b1ebaa70c227b5334799b86f2ea38097044d645c0846a580049addbd1e5013c",
+    "tools/tests/test_sparse_base_remaining_bindings.py": "082348adb8c951122ea86e4db3fe903d56195b2f370cd6efef965dfddefac1bf"
+  },
+  "native_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx": "10b27cfe10abb13400cccf6ed2f08dbcd0f173136c9944e66d0ebe52730c4e47",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.cxx": "cc3dcc7059b63663de11b0691bf2f7d6c9b53869ced9917f5b8f5ff88105adea"
+  },
+  "historical_artifacts_unchanged": {
+    "porting/audits/sparse-base-exchange-and-resources.json": "911b1ea581fb9a5f22e543dbb4bd71abf8caaa135791586e9e26d53783ccafe0",
+    "porting/audits/sparse-base-ledger-records.jsonl": "76c3aba204e30469bc7a550ee917f0e0937e2c6a1d99893a169c940c1a0d66dc",
+    "porting/audits/sparse-base-method-corrections.jsonl": "ec3bc3ac9e7b40a8d97a05f651f0a2c2bd395ae0a3c0ae57173d1cf75142d0f7",
+    "porting/runtime-evidence/sparse-base-normalized.json.gz": "2719f855c0a832fcac30f359f0934806106281a9721964960e618da2f9540649",
+    "porting/runtime-evidence/sparse-base-rustdoc.json.gz": "c68fb6d27f95d8a7a5666e511664c873b8eb4d7cd1fa3e7a569222a87872fc49",
+    "porting/runtime-evidence/sparse-base-exchange-exchange-red.gz": "d0e9f05f005870107b0b2482ecceb2ff441a39d9705343145b3195c868a1b98e",
+    "porting/runtime-evidence/sparse-base-exchange-alignment-miri-red.gz": "c978d306cdd853fa9af136328687d1d7d7c761fa366b254a2267273e119b419f",
+    "porting/runtime-evidence/sparse-base-exchange-lease-red.gz": "5170ad0d00f02dc4401f3cf2739b844243d2671787ebed88dc40c2c4a7be5aca",
+    "porting/runtime-evidence/sparse-base-exchange-rust.gz": "85a48436894f58b6b86fde803d8b7f51a13981b0570a6d83895ae43a5fd43dfb",
+    "porting/runtime-evidence/sparse-base-exchange-layout-unit.gz": "ba268f92f45f273172c94eff4cc1fff404990191e88e5428ae7e0bb128a6182c",
+    "porting/runtime-evidence/sparse-base-exchange-miri.gz": "2133127e6c59ecbc2906e9eba2f4d05af73006ded86cf973933d926794d92945",
+    "porting/runtime-evidence/sparse-base-exchange-native-originals.gz": "f8706ebba18820d18d427ed5d9f3765604604d94c49457e338e51eb7464d0cb2",
+    "porting/runtime-evidence/sparse-base-exchange-rustdoc.gz": "eb7d3959e32208fd1f2d0a1f4f48efdb43740c52044016623c90c783bf9f0bb4",
+    "porting/runtime-evidence/sparse-base-exchange-clippy.gz": "7748ab931b50ac3af0d29f0cb64fb7c083c716d347deb360b744e23001b09690",
+    "porting/runtime-evidence/sparse-base-exchange-fmt.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/sparse-base-exchange-python-lint.gz": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+    "porting/runtime-evidence/sparse-base-exchange-binding-tests.gz": "9b6a243a6797bdb2880a158d982353427b8e11f775e3fc2bcf4ae8d1051f8f88",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_array_base_contracts.gz": "fbf3b65dec8e1645e7888697055f0a59f83050bcacf8424c5e8e8b92e0b392c6",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_array_method_contracts.gz": "03290a89f59ef7f9bf5ed7ec1ae4795a1a973b54b3961e6d094646cdabfc4ace",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_basic_iterator_contracts.gz": "2f4f157c11adb5956510f230364f6f1cdc5bcd9376febdca4d8c7d20e07dfd21",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_cursor_contracts.gz": "13d773c9796166f0bfb59631fc4dff6222ef279cea390adf0e039ae9c04212e8",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_exchange_identity.gz": "102d814de29766d078fa1309c841c0ccffe26739ee47758e2dbce8ae75cc08e7",
+    "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_typed_storage_contracts.gz": "4e9401914f289f386cae1fc7135d439010a82648e135ddbc7ac138417b06c686"
+  },
+  "denominator_limitation": {
+    "status": "returned_private_type_reachability_gap",
+    "captured_visibility_policy_unchanged": true,
+    "api_credit_added": 0,
+    "returning_method": {
+      "id": "d20f4857b71047bbdb0b16f08fe7c89cca46caf3a1a5a59ff377d76c9aa43d2b",
+      "qualified_name": "NCollection_SparseArrayBase::getBlock",
+      "signature": "class NCollection_SparseArrayBase::Block (void *) const noexcept",
+      "api_visible": true
+    },
+    "affected_private_type_records": [
+      {
+        "id": "0870d478a8e6fd878358e4955e51e0fceebbfeb948c7bbb4465328b8482489d4",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Unset",
+        "signature": "unsigned char (unsigned long) noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "0c7cbcf710a249742e49c4a0566c40efecc9b08a2d57c5c4c5b81bf4552903b1",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Set",
+        "signature": "unsigned char (unsigned long) noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "165885a026ce0219cd49e4b3e7c3e20271225a621cbba55d43bbc23a2a3c4d23",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Bits",
+        "signature": "unsigned char *",
+        "api_visible": false
+      },
+      {
+        "id": "1d7ae5088b00bca7419740baaba85fe24ed79557cb2446298d7e99cdfc9de9be",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Size",
+        "signature": "unsigned long (unsigned long, unsigned long) noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "279f93c7a26021fe1ad9f256993ec647f8bea7d2de05c50d909a48fe2cdf4707",
+        "qualified_name": "NCollection_SparseArrayBase::Block::ToArray",
+        "signature": "char *(void *, unsigned long, unsigned long) noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "54b98f566a0a6fe07e38af4fa1e3934f67ed60f9645a04d15eb0643ad98ad13a",
+        "qualified_name": "NCollection_SparseArrayBase::Block::bitsPerCell",
+        "signature": "unsigned long () noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "688f29a04b90d1c8a1839c9609ebc22c4854ffb30b4a5fe8ce4e691edbd99182",
+        "qualified_name": "NCollection_SparseArrayBase::Block::IsSet",
+        "signature": "unsigned char (unsigned long) noexcept",
+        "api_visible": false
+      },
+      {
+        "id": "6d05171ccc57384af1a02bf19856ad8bebfcbb901913ed9ba7877c5b83b9813a",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Count",
+        "signature": "unsigned long *",
+        "api_visible": false
+      },
+      {
+        "id": "7ad6ed61ec3da6dcac19dce231e8aa29c8e81f19d4877d939e031064c54f0f10",
+        "qualified_name": "NCollection_SparseArrayBase::Block",
+        "signature": "",
+        "api_visible": false
+      },
+      {
+        "id": "848de59b092288f468d26055bc6ff056b14a3efad9a5bdff42a7e300a445bacb",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Array",
+        "signature": "void *",
+        "api_visible": false
+      },
+      {
+        "id": "aebfbc8c201e2d1b0a9febfa2015bebe57382709df6316e51f917cabb1f3943e",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Block",
+        "signature": "void (void *, unsigned long, unsigned long)",
+        "api_visible": false
+      },
+      {
+        "id": "f6ea4e750b4dd5e811c6a93a2bb059d6fc67dc11c88ef8e05af4d25df7f901c3",
+        "qualified_name": "NCollection_SparseArrayBase::Block::Cell",
+        "signature": "unsigned char",
+        "api_visible": false
+      }
+    ],
+    "compiled_counterexample": "tools/oracle/tkernel_sparse_raw_iterator_addresses.cxx::publiclyReachablePrivateBlock",
+    "counterexample_compiled_and_ran": true,
+    "expected_row": "private_block_reachable 1 1 1 1 8 25 1 1 2 2 0",
+    "existing_committed_example": "tools/oracle/tkernel_sparse_array_base_contracts.cxx::layout also accesses Array/Bits/Count through auto getBlock result.",
+    "explanation": "A derived class can re-expose protected getBlock, and external callers use its private nested return type through auto/decltype. Its public constructor, Cell alias, static helpers, bitmap methods and fields compile and run, despite api_visible=false inherited from the private type declaration. The current57-visible denominator cannot establish complete reachable API coverage. Only this proven family is flagged; no blanket promotion of private types."
+  },
+  "behavior_changes": [
+    {
+      "surface": "Iterator constructor/init",
+      "new_rust_methods": [
+        "SparseArrayBaseIterator::from_optional",
+        "SparseArrayBaseIterator::initialize_optional"
+      ],
+      "domain": "Some source initializes native traversal; None detaches. Native cached block/indices survive null init, and subsequent live-source rebind initializes traversal again. Detached Index/value undefined behavior remains a documented Rust safety adapter."
+    },
+    {
+      "surface": "Iterator::value() const noexcept",
+      "new_rust_method": "SparseArrayBaseIterator::native_value_address",
+      "domain": "Preserves the cached native Block independently of More. Exhausted pointers can identify the live bitmap boundary; rebinding to an empty source retains the prior live Block cache. This returns a raw address only; object dereference requires separate live-object validity. Existing checked value() remains compatible.",
+      "safety_contract": "get_item permits byte offsets within the complete allocated block or one past it; the raw cursor contract requires cached storage to remain allocated and current stride/offset valid. Miri exercises bitmap-boundary and stale-cache-with-live-storage provenance."
+    }
+  ],
+  "limits": [
+    "All20 captured public/protected erased-base and raw-Iterator callable candidates have exact scoped partial body bindings; private implementation and deleted copy operations remain recorded without credit. This does not close language, failure, ABI or configuration equivalence.",
+    "The26 BasicIterator records and11 nominal/field/callback-alias records remain unreconciled in this batch. Its const/mutable overload constraints must be inspected individually with current compiler selectors.",
+    "The additional12 private Block-family records are a demonstrated API-denominator limitation, not silently completed or automatically promoted.",
+    "Rust get_value returns Failure with index-specific text, differing from native Standard_OutOfRange message text. Native stride assumptions and noexcept/failure domains remain explicitly partial.",
+    "Rust metadata/resource allocations and automatic field cleanup are language adaptations. The explicit nonvirtual Drop body calls the native-order stored destructor and frees blocks/table on the supported callback domain.",
+    "Nullable raw value without live cached storage returns None where native pointer access is undefined; index zero for detached cursors is a Rust adapter, not an observed native result."
+  ],
+  "replay_commands": {
+    "bindings": "PYTHONPATH=tools python3 tools/verify_sparse_base_bindings.py --receipt porting/audits/sparse-base-remaining-methods.json",
+    "binding_tests": "PYTHONPATH=tools:tools/tests python3 -m unittest test_api_binding_replay test_sparse_base_bindings test_sparse_base_remaining_bindings -v",
+    "rust": "cargo test --locked -p rustycad-tkernel --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_typed_storage_contracts --test sparse_array_method_contracts --test sparse_cursor_contracts --test sparse_supplemental --test ncollection_sparse_array",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_typed_storage_contracts",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test sparse_array_base_contracts -- -D warnings",
+    "native_original_filter": "NCollection_SparseArrayTest.*",
+    "native_fixture_compile": "c++ -std=c++17 -O2 <fixture.cxx> -I<occt-build>/include/opencascade -L<occt-build>/lin64/gcc/libi -Wl,-rpath,<occt-build>/lin64/gcc/libi -lTKernel -o <fixture-binary>"
+  },
+  "red_provenance": {
+    "source_revision": "3c9b0809ca837e5b83845450d7e908e4f192fc19",
+    "kind": "missing_method_compile_errors",
+    "note": "The pre-implementation tests failed to compile because nullable constructors and native cached-address access did not exist. Later helpers/formatting were refined; historical log line numbers describe that run."
+  }
+}

@@ -1,5 +1,5 @@
 //! Direct native base traversal retains its final within-block offset.
-use super::SparseArrayBase;
+use super::{SparseArrayBase, SparseArrayBlock};
 use std::ffi::c_void;
 /// Borrowed historical base iterator; `SparseArrayBaseIterator::new(&base)`.
 #[derive(Clone, Copy, Default)]
@@ -8,29 +8,39 @@ pub struct SparseArrayBaseIterator<'a> {
     block: usize,
     offset: usize,
     more: bool,
+    cached_block: Option<SparseArrayBlock>,
 }
 impl<'a> SparseArrayBaseIterator<'a> {
     /// Starts on the first constructed object; `SparseArrayBaseIterator::new(&base)`.
     pub fn new(owner: &'a SparseArrayBase) -> Self {
+        Self::from_optional(Some(owner))
+    }
+    /// Constructs the native nullable-source cursor; `SparseArrayBaseIterator::from_optional(None)`.
+    pub fn from_optional(owner: Option<&'a SparseArrayBase>) -> Self {
         let mut iterator = Self::default();
-        iterator.initialize(owner);
+        iterator.initialize_optional(owner);
         iterator
     }
     /// Rebinds to a base; `iterator.initialize(&base)`.
     pub fn initialize(&mut self, owner: &'a SparseArrayBase) {
-        self.owner = Some(owner);
+        self.initialize_optional(Some(owner));
+    }
+    /// Rebinds or detaches like native init; `iterator.initialize_optional(None)`.
+    pub fn initialize_optional(&mut self, owner: Option<&'a SparseArrayBase>) {
+        self.owner = owner;
         self.restart();
     }
     /// Restarts native traversal; `iterator.restart()`.
     pub fn restart(&mut self) {
         self.more = false;
-        self.offset = 0;
-        self.block = 0;
         let Some(owner) = self.owner else {
             return;
         };
+        self.offset = 0;
+        self.block = 0;
         while self.block < owner.block_slots() {
             if !owner.block_address(self.block).is_null() {
+                self.cache_block(owner);
                 self.more = true;
                 self.seek();
                 return;
@@ -62,6 +72,21 @@ impl<'a> SparseArrayBaseIterator<'a> {
         self.owner
             .and_then(|owner| owner.get_value(self.index()).ok())
     }
+    /// Returns native protected value() even after exhaustion; `unsafe { cursor.native_value_address() }`.
+    /// Detached cursors or cursors without a cached block return None instead of native undefined pointer access.
+    /// # Safety
+    /// The cached block must remain allocated and the current owner's stride/offset must address
+    /// that allocation. The returned slot can be unoccupied; dereference requires a live object.
+    pub unsafe fn native_value_address(&self) -> Option<*mut c_void> {
+        let owner = self.owner?;
+        let block = self.cached_block?;
+        // OCCT 3d097a retains myBlock after exhaustion and empty/null init; More does not guard value().
+        Some(unsafe { owner.get_item(block, self.offset) })
+    }
+    fn cache_block(&mut self, owner: &SparseArrayBase) {
+        let address = owner.block_address(self.block);
+        self.cached_block = Some(unsafe { owner.get_block(address) });
+    }
     fn seek(&mut self) {
         let Some(owner) = self.owner else {
             return;
@@ -81,6 +106,7 @@ impl<'a> SparseArrayBaseIterator<'a> {
         self.block += 1;
         while self.block < owner.block_slots() {
             if !owner.block_address(self.block).is_null() {
+                self.cache_block(owner);
                 self.offset = 0;
                 return true;
             }
