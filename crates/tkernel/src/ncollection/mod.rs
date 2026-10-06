@@ -199,3 +199,7 @@ pub use sparse_array_base::{
     SparseArrayBase, SparseArrayBaseIterator, SparseArrayBaseState, SparseArrayBlock,
     SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
 };
+
+mod map_node;
+mod node_owner;
+pub use map_node::{MapNode, MapNodeOwner};

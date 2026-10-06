@@ -1,0 +1,313 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "branch_validated_pending_main_integration",
+  "branch": "port/map-native-node-storage",
+  "base_commit": "86b13beeab28dc61288f2b8944fa6d8313b6f7ac",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "classes": [
+    "NCollection_Map::MapNode",
+    "NCollection_BaseMap::BasicIterator",
+    "NCollection_DataMap"
+  ],
+  "focused_rust_passes": 329,
+  "miri_passes": 328,
+  "new_tests": 16,
+  "miri_new_tests_passed": 16,
+  "miri_skips": [
+    "sparse_supplemental::character_classification_c_locale_boundaries: existing unsupported external C isspace; passed normally"
+  ],
+  "native_oracle_rows": 10,
+  "native_oracle_rows_asserted_by_rust": 10,
+  "native_original_passed": 66,
+  "original_cases_joined": [
+    "NCollection_DataMapTest.IntegerKeys",
+    "NCollection_DataMapTest.BindingAndAccess",
+    "NCollection_DataMapTest.ChangeFind",
+    "NCollection_DataMapTest.Rebind",
+    "NCollection_DataMapTest.UnBind",
+    "NCollection_DataMapTest.Clear",
+    "NCollection_DataMapTest.Assignment",
+    "NCollection_DataMapTest.Find_NonExisting",
+    "NCollection_DataMapTest.IteratorAccess",
+    "NCollection_DataMapTest.ChangeValue",
+    "NCollection_DataMapTest.ExhaustiveIterator",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_Find",
+    "NCollection_DataMapTest.TryBind_NewKey",
+    "NCollection_DataMapTest.TryBind_ExistingKey",
+    "NCollection_DataMapTest.TryBind_MoveSemantics",
+    "NCollection_DataMapTest.TryBound_NewKey",
+    "NCollection_DataMapTest.TryBound_ExistingKey",
+    "NCollection_DataMapTest.TryBound_MoveSemantics",
+    "NCollection_DataMapTest.Emplace_NewKey",
+    "NCollection_DataMapTest.Emplace_ExistingKey",
+    "NCollection_DataMapTest.Emplaced_NewKey",
+    "NCollection_DataMapTest.Emplaced_ExistingKey",
+    "NCollection_DataMapTest.TryEmplace_NewKey",
+    "NCollection_DataMapTest.TryEmplace_ExistingKey",
+    "NCollection_DataMapTest.TryEmplaced_NewKey",
+    "NCollection_DataMapTest.TryEmplaced_ExistingKey",
+    "NCollection_DataMapTest.HasherConstructorCopy",
+    "NCollection_DataMapTest.HasherConstructorMove",
+    "NCollection_DataMapTest.CopyConstructorPreservesHasher",
+    "NCollection_DataMapTest.ItemsIteration",
+    "NCollection_DataMapTest.ItemsStructuredBindings",
+    "NCollection_DataMapTest.ItemsModifyValue",
+    "NCollection_DataMapTest.ConstItemsIteration",
+    "NCollection_DataMapTest.StandardIteratorContract",
+    "NCollection_DataMapTest.ItemsIteratorEquality",
+    "NCollection_MapTest.DefaultConstructor",
+    "NCollection_MapTest.ConstructorWithBuckets",
+    "NCollection_MapTest.AddAndContains",
+    "NCollection_MapTest.Remove",
+    "NCollection_MapTest.Clear",
+    "NCollection_MapTest.Assignment",
+    "NCollection_MapTest.IteratorAccess",
+    "NCollection_MapTest.Resize",
+    "NCollection_MapTest.ExhaustiveIterator",
+    "NCollection_MapTest.OCC24271_BooleanOperations",
+    "NCollection_MapTest.EmplaceBasic",
+    "NCollection_MapTest.EmplacedBasic",
+    "NCollection_MapTest.HasherConstructorCopy",
+    "NCollection_MapTest.HasherConstructorMove",
+    "NCollection_MapTest.CopyConstructorPreservesHasher",
+    "NCollection_MapTest.BeginEndIterator",
+    "NCollection_MapTest.RangeBasedForLoop",
+    "NCollection_MapTest.ContainedFound",
+    "NCollection_MapTest.ContainedNotFound",
+    "NCollection_MapTest.IteratorEquality",
+    "NCollection_SparseArrayTest.BasicFunctions",
+    "NCollection_SparseArrayTest.LargeIndices",
+    "NCollection_SparseArrayTest.SparseDistribution",
+    "NCollection_SparseArrayTest.IteratorFunctions",
+    "NCollection_SparseArrayTest.STLIterators",
+    "NCollection_SparseArrayTest.ComplexType",
+    "NCollection_SparseArrayTest.Clear",
+    "NCollection_SparseArrayTest.DataMapInterface",
+    "NCollection_SparseArrayTest.AssignAndExchange",
+    "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock"
+  ],
+  "clippy_exit_code": 0,
+  "fmt_exit_code": 0,
+  "suites": [
+    "data_map_storage_contracts",
+    "data_map_node_contracts",
+    "ncollection_data_map",
+    "data_map_method_contracts",
+    "data_map_supplemental",
+    "ncollection_data_map_assignment",
+    "ncollection_data_map_bind_ref",
+    "ncollection_data_map_bind_ref_allocation",
+    "ncollection_map",
+    "ncollection_map_borrowed_add",
+    "map_method_contracts",
+    "map_supplemental",
+    "ncollection_hash_maps_api_behavior",
+    "collection_cursor_method_contracts",
+    "base_map_storage_contracts",
+    "base_map_basic_iterator_contracts",
+    "base_derived_map_storage_contracts",
+    "base_map_indexed_iterator_contracts",
+    "ncollection_sparse_array",
+    "sparse_array_method_contracts",
+    "sparse_array_base_contracts",
+    "sparse_basic_iterator_contracts",
+    "sparse_cursor_contracts",
+    "sparse_typed_storage_contracts",
+    "sparse_supplemental",
+    "map_node_bridge_contracts"
+  ],
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/map-node-bridge-rust.gz",
+      "sha256": "c7cdbc5d20f63f32a24fb6daf42088e980e03b3c8cb0478d24edd7ffa8750e36"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/map-node-bridge-miri.gz",
+      "sha256": "eb47e557fb5c2314ff2b89a972ab528819df053da2f196e80fbb2f73d7f33013"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/map-node-bridge-clippy.gz",
+      "sha256": "5e5f059328a17dec078a9ac538fae2f2436d36607eb4eb76599b0ab0dbed93b0"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/map-node-bridge-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "legacy": {
+      "path": "porting/runtime-evidence/map-node-bridge-legacy.gz",
+      "sha256": "6791aac984c5d9e373017186e2f156c2b62629002429667f8c4f908fa9ef4e31"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/map-node-bridge-native.gz",
+      "sha256": "5e4f3da023c5c39a9d2ca72c7931e57966fa112d34cde4611d22c01a71618a8a"
+    },
+    "next_plan": {
+      "path": "porting/runtime-evidence/map-node-bridge-next-plan.gz",
+      "sha256": "4e443d286ab675f6c9440e3fae3100d39b5d84524230e025028d8dabf963b54d"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/map-node-bridge-source.tar.gz",
+      "sha256": "523d25e9ce0876a146c43ed84612c3c47415a5faa0c4b2004c16e6117548dd42"
+    }
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/access.rs": "078574530f97f4333b6eecba70893069ec8b431e6609b4c04a63f331c7586e77",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/construction.rs": "c9d2daaad2613fd951d922a7a02318d3e880906140edb9a2f84a77c8f86a638e",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator.rs": "eef6e90f097c774b9b2a5b3b2deae00d958bb2c7da29b53a093e0599df082d8a",
+    "crates/tkernel/src/ncollection/base_map/basic_node.rs": "f5aac544222f58a3ae6b9c61ff33c360a16d77b88bbf11782cf7a53f909822e2",
+    "crates/tkernel/src/ncollection/data_map/iterator_source.rs": "47cf0411a02706188e0ac41d60975484be6e21ed817747fda08711e6a3cc843a",
+    "crates/tkernel/src/ncollection/data_map.rs": "477aabdc014bdf0be72988e0eb62bfbc2bd3a8b81829ba848e414d76719040f0",
+    "crates/tkernel/src/ncollection/data_map_node/owner.rs": "9ed85dfdfaad50e8cf2423c329db6ad278a4923badbb2115a0513a94031386cf",
+    "crates/tkernel/src/ncollection/list_node.rs": "5a1d08e4b34d5954d7d186ee143a9a30620c2563e2b2d05b332cd37f71240249",
+    "crates/tkernel/src/ncollection/map_node/iterator_node.rs": "2a417d1a116343de33ec4f8f854691f600225cf56296bd398ce87f96984b077d",
+    "crates/tkernel/src/ncollection/map_node/owner.rs": "beb4d6a340614b15e576a61958163bea420fe62601ccd319823bebc7dc216e97",
+    "crates/tkernel/src/ncollection/map_node.rs": "986e9edc70f61995dc3781f087ba78c0a83492b8ddb5fc911c50ef37afcbe929",
+    "crates/tkernel/src/ncollection/mod.rs": "d42f0cb705091555d60d0627c4a69c761197c6f7d12c80dcbfbc8c4cdea0d100",
+    "crates/tkernel/src/ncollection/node_owner.rs": "5f1c6b17408e3d42fab590cd36b310e6038708795609c5eaaa3683d73df3800f",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/tests/base_derived_map_storage_contracts/oracle_rows.rs": "9d0ffd392055e298b4ef675994fef1ce190262901e636e656325c386705614fb",
+    "crates/tkernel/tests/base_derived_map_storage_contracts.rs": "844e268dace83b25445836cf3009e98aa8949611ffe12aadd325f2a887941843",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts/oracle_rows.rs": "bce5aee394f0c5b37b999d7f308d167924e014f8fb884b54907b001dbac091c7",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts/support.rs": "55b05ee4b05371e633e0ccc42257d1ab7317397cacd7c73ad82aface91c1d6c6",
+    "crates/tkernel/tests/base_map_basic_iterator_contracts.rs": "647c589d3ae6b03eea1813882685282fd3ed323da0524eb3b62bdf2bb36cb0aa",
+    "crates/tkernel/tests/base_map_indexed_iterator_contracts.rs": "cba8baabc1359d8b8bdd51ccc7e9cb1f01c0fcb9f9827e381c39aac4ad198009",
+    "crates/tkernel/tests/base_map_storage_contracts/oracle_rows.rs": "0a68504f0a72d7e0b061eb3cc44be13495da830a48cdc9ba60c68606995450a4",
+    "crates/tkernel/tests/base_map_storage_contracts.rs": "8e06049bf2cd3e0918b2b4fa452950ae718e1d63a8f82bd8000d863549554155",
+    "crates/tkernel/tests/collection_cursor_method_contracts.rs": "a4cfab500e476d2cbbb27e54b7433371cd4dcc10027a539847e1534d59a0599f",
+    "crates/tkernel/tests/data_map_method_contracts.rs": "9084d7ae05f65c1474d2204e8bc28439a0180cb783bfb67211e545eaf840eb59",
+    "crates/tkernel/tests/data_map_node_contracts/engine.rs": "087525cd82acb770c888cad062a12cd30122a7d9c5b94333a8d2034906083dc6",
+    "crates/tkernel/tests/data_map_node_contracts/fixture.rs": "9fed05bb34f2b66effa8f1debb12f729c08d25ca4704311deeedaa1831cb7a54",
+    "crates/tkernel/tests/data_map_node_contracts/lifetime.rs": "2ee78e4b170210913c0c6c2040b715335738c0e6cd98f7228df410ea5507b04b",
+    "crates/tkernel/tests/data_map_node_contracts.rs": "23781180c175ecc4e273e40982a87b54ab849ce310b0fdd3b14183f07edd2270",
+    "crates/tkernel/tests/data_map_storage_contracts/cloning.rs": "a4c2e7aa4308b80e5707e8d657acf8faece74e5a0a2c1939af22cf2e9fc7bf5a",
+    "crates/tkernel/tests/data_map_storage_contracts/fixture.rs": "c9f61cbd219f19dab7d5f2034a97d4781d16aec963dd13f5a6d62c6d754d5f36",
+    "crates/tkernel/tests/data_map_storage_contracts/panic_cleanup.rs": "da23906cc76bc1d561340d54e38545a28a6d0d1c9c3027f6461f58eebb9a7157",
+    "crates/tkernel/tests/data_map_storage_contracts/pointers.rs": "e2b744cea9aa9944ef148818efb1664df470276f28e2254dc02c2ec0957d1f3e",
+    "crates/tkernel/tests/data_map_storage_contracts/traits.rs": "bf6bb780b9e46197bb33fc9f75bc970a0d7be8cdfaa784e322a0392475e4a497",
+    "crates/tkernel/tests/data_map_storage_contracts.rs": "080d276fbcbe2de2c8fed0a0bced7b6dcc0839fc419b26cc70337d647d6587f5",
+    "crates/tkernel/tests/data_map_supplemental.rs": "94ed7a16deeda3a27b696f18d269b6a229c39df409d4c30b6417dc38f1c73ebb",
+    "crates/tkernel/tests/map_method_contracts.rs": "92331ac206e7f29cec697f84afb81e2865115ac5c69da1baaa7fef6aef917ea4",
+    "crates/tkernel/tests/map_node_bridge_contracts/fixture.rs": "5f607362f525051f213622b187e47b809332876c8f4d6fab1a8a22b73079a6a8",
+    "crates/tkernel/tests/map_node_bridge_contracts/iterator.rs": "59bcfcf294c5998747aa9a199afb71c1c312882827a1eff4b995c302bf5f2737",
+    "crates/tkernel/tests/map_node_bridge_contracts/lifetime.rs": "28d7fd9623d09eb051fd3ad06ab7b9ae894da913b06e0e3e5b47f0fedf2fc820",
+    "crates/tkernel/tests/map_node_bridge_contracts.rs": "e7db96201c82d760e989aed6b9d7cdffb6a412f57308184f45363683cd685d3c",
+    "crates/tkernel/tests/map_supplemental.rs": "ada6d4a96363f90d4f14a1d356495378742e388a077dfd92684b6e0b53f8d9b0",
+    "crates/tkernel/tests/ncollection_data_map/basic.rs": "e941e49cb50828e2df31489feda7290c6428ae0bbfb33ff6d1b57a8267b4a536",
+    "crates/tkernel/tests/ncollection_data_map/emplacement.rs": "14f888c13df21b8fb44c3086c54d88dd16b003fc6437a057488817a9f1826549",
+    "crates/tkernel/tests/ncollection_data_map/iteration.rs": "023a271814d3d1542cb94c7a512b15c257a4d1f730666f066049c0ed04ae57ca",
+    "crates/tkernel/tests/ncollection_data_map.rs": "5540dbcbd66f1eea89f21342aaaff7c575dc2160a0ecc98d8aa8bf0755d48f0f",
+    "crates/tkernel/tests/ncollection_data_map_assignment.rs": "db5367985e0b5eaeb287bfeb5614b1f68de8f49ac47aaebee37b50ca3c2dc55a",
+    "crates/tkernel/tests/ncollection_data_map_bind_ref.rs": "68961c0d190843a8162c61eae88d801e68e09776a3efe59aa2f479be0dd99167",
+    "crates/tkernel/tests/ncollection_data_map_bind_ref_allocation.rs": "9c349d1322ce9d1aa2afe6078944d8338b749d3b34e123efaed0cb4219238a92",
+    "crates/tkernel/tests/ncollection_hash_maps_api_behavior.rs": "e8a7bcd818a8838246e986e58e9ab710b7db09cb180d5882aac0c88b88b434af",
+    "crates/tkernel/tests/ncollection_map.rs": "d9bfb4c7cbdd805ba63b17d30dea58dc47fc2d45048c1cb85b572959b325ae9e",
+    "crates/tkernel/tests/ncollection_map_borrowed_add.rs": "ae1049b4acb1679181b8473bff719f462d1c6a5ed3765a7d155db3e77493984d",
+    "crates/tkernel/tests/ncollection_sparse_array.rs": "2421d946a75a3b47d49ea081e5aa6855b09f54a217e5f24bd1d7b8dd8fd3e420",
+    "crates/tkernel/tests/sparse_array_base_contracts/fixture.rs": "64eac5b94c06fcf6522ae776c5b9d0aa53b8885111b80108aba707bbdd159b72",
+    "crates/tkernel/tests/sparse_array_base_contracts.rs": "4f96a1d61a1f23dfee8b42ea40e93855b66d957fae4a1383d01609b7450d71d5",
+    "crates/tkernel/tests/sparse_array_method_contracts/fixture.rs": "b15c4cf5d223aabfee845a12ee9edb47f3022721b4436c5a2736a5fad0c37c6b",
+    "crates/tkernel/tests/sparse_array_method_contracts.rs": "df31a9ad020064e2f62d8e2ecf061e312cf1a670ffc3f83dbfbfc9915d24a65e",
+    "crates/tkernel/tests/sparse_basic_iterator_contracts/fixture.rs": "3a16fc2b6780cca18963a35e213671d8480d0249a8863e740c99d012c1da82b7",
+    "crates/tkernel/tests/sparse_basic_iterator_contracts.rs": "41b9cd9cba10316506f5b7d7936d3cc6a3adbb77b00984fef3018b57011aff2e",
+    "crates/tkernel/tests/sparse_cursor_contracts.rs": "05782df73eb7373da11f70b3d5e41dafa046b5ca8251469ddfb964931bf0fd6a",
+    "crates/tkernel/tests/sparse_supplemental.rs": "1edb0fbaf84adcaf6134c7e5546893277a4834e252a1dc48affe7d1dc15d95fc",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/fixture.rs": "5ff4872017340afc65530ab91e38d9e87721843c85694f37b8e9870c7cfd9efd",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/mod.rs": "67748ea995920a10b9238f7a6f0293b3361e15aafe94e0d60cf66504e1b55bf0",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/rust_safety.rs": "d7a3087be15f49a0f14d500abe0b63f88f2a6e2ed6540d0667c846d6b53379d0",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/traits.rs": "83db4897432b961fe10488ada48a862ceb74dabc649ba3f708353402aac1a896",
+    "crates/tkernel/tests/sparse_typed_storage_contracts.rs": "42a9619dbda1a5e0381887116f92b37ff8ba78746ea3cb5e293d458414d00347",
+    "tools/oracle/tkernel_map_node_bridge_contracts.cxx": "f2c067104a09187633e1f9c3d0f265cc5845c280d87cdbb5d08d3a841d4e844d",
+    "tools/oracle/tkernel_map_node_bridge_contracts.expected": "005dcb75e4b6476b9cfaa86392884f4e03ce961016c38326682a8aaa749f0c1f"
+  },
+  "method_bindings": [
+    {
+      "cpp_id": "37f155097911d9fcfae2654235166b03cc6979637496b6de05f9b31d66ed96f7",
+      "cpp": "NCollection_Map::MapNode::MapNode",
+      "signature": "void (struct std::in_place_t, class NCollection_ListNode *, type-parameter-1-0 &&...)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::construct",
+        "rustycad_tkernel::ncollection::MapNode::allocate_with"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    },
+    {
+      "cpp_id": "70e6edeb8d31b4427c42fad9b3ae44f0a7811b6d5916e64ad349b774bb71ff7b",
+      "cpp": "NCollection_Map::MapNode::Key",
+      "signature": "const type-parameter-0-0 &() noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::key"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    },
+    {
+      "cpp_id": "7e7b4ea799696de1a616c07305db89770016364e832bf120afe04d9a50040b72",
+      "cpp": "NCollection_Map::MapNode::MapNode",
+      "signature": "void (type-parameter-0-0 &&, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::new"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    },
+    {
+      "cpp_id": "9d2812540eaffb9f83f7eeae5dc1fdc45b6e7857dc88db3e62047dd18e32c942",
+      "cpp": "NCollection_Map::MapNode::MapNode",
+      "signature": "void (const type-parameter-0-0 &, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::from_ref",
+        "rustycad_tkernel::ncollection::MapNode::allocate_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    },
+    {
+      "cpp_id": "ec605a12fb9ba76d849321eb1b49fd9d469dae617429c1ea19bbc8db9c3f62b0",
+      "cpp": "NCollection_Map::MapNode::MapNode",
+      "signature": "void (struct std::in_place_t, class NCollection_ListNode *, type-parameter-1-0 &&...)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::construct",
+        "rustycad_tkernel::ncollection::MapNode::allocate_with"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    },
+    {
+      "cpp_id": "f121a5c2e00891ed18483429bf70feea68288fab7876912b2e371763737da9a4",
+      "cpp": "NCollection_Map::MapNode::Key",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::MapNode::key"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_exact_binding_and_template_scope_audit"
+    }
+  ],
+  "commands": {
+    "rust": "cargo test -p rustycad-tkernel --test data_map_storage_contracts --test data_map_node_contracts --test ncollection_data_map --test data_map_method_contracts --test data_map_supplemental --test ncollection_data_map_assignment --test ncollection_data_map_bind_ref --test ncollection_data_map_bind_ref_allocation --test ncollection_map --test ncollection_map_borrowed_add --test map_method_contracts --test map_supplemental --test ncollection_hash_maps_api_behavior --test collection_cursor_method_contracts --test base_map_storage_contracts --test base_map_basic_iterator_contracts --test base_derived_map_storage_contracts --test base_map_indexed_iterator_contracts --test ncollection_sparse_array --test sparse_array_method_contracts --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_cursor_contracts --test sparse_typed_storage_contracts --test sparse_supplemental --test map_node_bridge_contracts",
+    "miri": "cargo +nightly-2026-09-25 miri test -p rustycad-tkernel --test data_map_storage_contracts --test data_map_node_contracts --test ncollection_data_map --test data_map_method_contracts --test data_map_supplemental --test ncollection_data_map_assignment --test ncollection_data_map_bind_ref --test ncollection_data_map_bind_ref_allocation --test ncollection_map --test ncollection_map_borrowed_add --test map_method_contracts --test map_supplemental --test ncollection_hash_maps_api_behavior --test collection_cursor_method_contracts --test base_map_storage_contracts --test base_map_basic_iterator_contracts --test base_derived_map_storage_contracts --test base_map_indexed_iterator_contracts --test ncollection_sparse_array --test sparse_array_method_contracts --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_cursor_contracts --test sparse_typed_storage_contracts --test sparse_supplemental --test map_node_bridge_contracts -- --skip character_classification_c_locale_boundaries",
+    "clippy": "cargo clippy -p rustycad-tkernel --test data_map_storage_contracts --test data_map_node_contracts --test ncollection_data_map --test data_map_method_contracts --test data_map_supplemental --test ncollection_data_map_assignment --test ncollection_data_map_bind_ref --test ncollection_data_map_bind_ref_allocation --test ncollection_map --test ncollection_map_borrowed_add --test map_method_contracts --test map_supplemental --test ncollection_hash_maps_api_behavior --test collection_cursor_method_contracts --test base_map_storage_contracts --test base_map_basic_iterator_contracts --test base_derived_map_storage_contracts --test base_map_indexed_iterator_contracts --test ncollection_sparse_array --test sparse_array_method_contracts --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_cursor_contracts --test sparse_typed_storage_contracts --test sparse_supplemental --test map_node_bridge_contracts -- -D warnings",
+    "fmt": "cargo fmt --all --check",
+    "native": "g++ -std=c++17 -I<occt-modeling-full>/include/opencascade tools/oracle/tkernel_map_node_bridge_contracts.cxx -L<occt-modeling-full>/lin64/gcc/libi -lTKernel; run with that library path and diff committed expected",
+    "legacy": "OpenCascadeGTest --gtest_filter=NCollection_DataMapTest.*:NCollection_MapTest.*:NCollection_SparseArrayTest.*"
+  },
+  "implementation": [
+    "New repr(C) MapNode<K> contains the actual ListValueNode<K> at offset zero, and that existing node contains the actual MapLinkNode prefix. There is one owned key, exposed as both native Key overloads and inherited Value. It is not a DataMapNode<K,()> alias or layout coincidence.",
+    "Borrowed, owned and closure-based in-place constructors preserve native key construction and destruction. Allocation factories acquire typed memory before copying/constructing the key; failure releases the uninitialized node.",
+    "MapNodeOwner and existing DataMapNodeOwner now delegate to one private NativeNodeOwner<N>; the original ownership algorithm and shared node_release guard preserve allocation release during key/value destructor unwinding. Public raw-node auto traits receive no blanket Send or Sync implementation.",
+    "MapNode implements BasicMapNode with identical key/value types and inherited bucket links. BasicMapNodeMut is intentionally absent, so the mutable KEY_ONLY generic iterator continues to expose shared keys only. Standalone MapNode still exposes its native inherited ChangeValue method.",
+    "DataMap now implements BasicMapIteratorSource by borrowing its sole canonical BaseMapStorage table. Const and mutable BaseMapBasicIterator constructors operate on actual DataMapNode<K,V> objects and writes are visible through DataMap Find/ChangeFind; no duplicate storage or fabricated aliases are introduced.",
+    "Rust MapNode key-only generic iteration is exercised with real allocated MapNode chains owned by BaseMapStorage. The matching native row uses actual NCollection_Map. This demonstrates the concrete node/engine combination, not a claim that the safe Map facade has already migrated.",
+    "Public method docs include intent and usage; all new production and test functions fit the 20-line guideline, and new source/audit files stay below 500 lines."
+  ],
+  "safety_extensions": [
+    "Safe owner Drop and raw del_node release allocations if key Drop panics, using the shared exact-layout guard. Native delNode is noexcept, so this is a Rust safety extension outside ordinary native behavior.",
+    "Rust fixtures cover over-aligned and zero-sized keys, constructor failure, allocator identity and non-owned successor retention. The native fixture uses ordinary alignment.",
+    "C++ owned-key fixture move transfers a tracked resource and suppresses events from moved-from sources. This finite observation does not prove arbitrary custom C++ move hooks or every variadic argument pack.",
+    "BasicMapBasicIterator raw dereference and advance remain unsafe under the existing node lifetime/aliasing contracts. Const conversion extensions already documented by the generic iterator are not newly credited as native parity."
+  ],
+  "remaining_gaps": [
+    "Safe Map<K,H> still delegates to DataMap<K,(),H>; replacing that facade with canonical MapNode<K> storage is pending. The next plan extracts a sealed OwnedBucketChains<N> owner shared by DataMapNode and MapNode, avoiding a duplicate resize/removal/cleanup engine.",
+    "Map facade Buckets and BasicMapIteratorSource are not yet exposed as MapNode<K>. The custom concrete node fixture cannot substitute for that missing typed facade integration.",
+    "DataMap is unordered. Its BasicMapIteratorSource ordered head is null and no native ordered-DataMap template specialization is claimed. The implemented bridge targets the normal unordered mapped-value specialization.",
+    "Sound reentrant callback observer provenance, arbitrary protected inheritance, precise compiler declaration bindings and full C++ template coverage remain unclosed. No global inventory credit is assigned."
+  ],
+  "inventory_credit": 0,
+  "integration": "Coordinator merges to main, reruns checks, then deletes the worktree and merged branch. No PR or archived checkout."
+}
