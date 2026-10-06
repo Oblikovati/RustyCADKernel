@@ -111,7 +111,9 @@ pub fn get_minimal_weights(
         return Ok(());
     }
     let first = arc_bspline(1.0, max_ang, conv)?;
-    first.weights_array(|w| weights.assign(w));
+    first.weights_array(|w| {
+        weights.assign(w);
+    });
     let angle_min = std_max(precision::p_confusion(), min_ang);
     let second = arc_bspline(1.0, angle_min, conv)?;
     let poids: Array1<'static, f64> = second.weights_array(Clone::clone);

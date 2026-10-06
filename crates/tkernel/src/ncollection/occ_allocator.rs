@@ -53,7 +53,7 @@ impl<T> OccAllocator<T> {
     }
     /// Copies another element type's resource (templated `operator=`); `a.assign(&b)`.
     pub fn assign<U>(&mut self, other: &OccAllocator<U>) {
-        self.resource = other.resource.clone();
+        self.assign_returning(other);
     }
     /// Replaces the resource (`SetAllocator`); `allocator.set_allocator(None)`.
     pub fn set_allocator(&mut self, resource: Option<BaseAllocator>) {
@@ -154,3 +154,5 @@ impl<T> std::ops::DerefMut for AllocatorVector<T> {
         &mut self.elements
     }
 }
+
+mod method_contracts;

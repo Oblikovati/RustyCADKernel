@@ -10,6 +10,7 @@ impl ExtendedString {
     /// `text.insert_char(1, 0x57)?`.
     pub fn insert_char(&mut self, index: i32, unit: u16) -> Result<(), Failure> {
         self.check_insert_position(index)?;
+        self.ensure_owned_terminator();
         self.terminated.insert(offset(index), unit);
         Ok(())
     }
@@ -18,6 +19,10 @@ impl ExtendedString {
     pub fn insert(&mut self, index: i32, input: impl Into<Self>) -> Result<(), Failure> {
         self.check_insert_position(index)?;
         let input = input.into();
+        if input.is_empty() {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         let at = offset(index);
         self.terminated
             .splice(at..at, input.as_utf16().iter().copied());
@@ -58,6 +63,9 @@ impl ExtendedString {
     pub fn set_value_units(&mut self, index: i32, units: impl AsRef<[u16]>) -> Result<(), Failure> {
         let units = units.as_ref();
         let at = self.set_value_position(index)?;
+        if units.is_empty() {
+            return Ok(());
+        }
         let end = (at + units.len()).max(self.len());
         self.terminated.resize(end + 1, 0);
         self.terminated[at..at + units.len()].copy_from_slice(units);
@@ -118,14 +126,12 @@ impl ExtendedString {
     }
     /// Removes every occurrence of a code unit, zero included; `text.remove_all(0x20)`.
     pub fn remove_all(&mut self, unit: u16) {
-        let length = self.len();
-        let mut kept: Vec<u16> = self.terminated[..length]
-            .iter()
-            .copied()
-            .filter(|&current| current != unit)
-            .collect();
-        kept.push(0);
-        self.terminated = kept;
+        if self.is_empty() {
+            return;
+        }
+        self.terminated.truncate(self.len());
+        self.terminated.retain(|&current| current != unit);
+        self.terminated.push(0);
     }
     /// Keeps the first `length` units, `length` in 0..=len; `text.trunc(3)?`.
     pub fn trunc(&mut self, length: i32) -> Result<(), Failure> {
@@ -138,6 +144,9 @@ impl ExtendedString {
                 format_args!("theHowMany {length}; expected 0..={}", self.len()),
             ));
         };
+        if self.terminated.is_empty() {
+            return Ok(());
+        }
         self.terminated.truncate(kept);
         self.terminated.push(0);
         Ok(())
@@ -168,8 +177,12 @@ impl ExtendedString {
     /// Replaces the content with a string or code-unit slice (`Copy`, `operator=`);
     /// `text.copy(&[65, 66])`.
     pub fn copy(&mut self, units: impl AsRef<[u16]>) {
+        let units = units.as_ref();
+        if units.is_empty() && self.terminated.is_empty() {
+            return;
+        }
         self.terminated.clear();
-        self.terminated.extend_from_slice(units.as_ref());
+        self.terminated.extend_from_slice(units);
         self.terminated.push(0);
     }
     /// Copies another value and returns this receiver for assignment chaining; `target.copy_assign(&source).clear()`.
@@ -193,13 +206,12 @@ impl ExtendedString {
     pub fn copy_span(&mut self, units: Option<&[u16]>, length: i32) {
         match (units, usize::try_from(length)) {
             (Some(units), Ok(count)) => self.copy(leading_units(units, count)),
-            _ => self.clear(),
+            _ => self.copy([]),
         }
     }
     /// Empties the string; `text.clear()`.
     pub fn clear(&mut self) {
-        self.terminated.clear();
-        self.terminated.push(0);
+        self.terminated = Vec::new();
     }
     /// Exchanges the content of two strings; `first.swap(&mut second)`.
     pub fn swap(&mut self, other: &mut Self) {
@@ -208,6 +220,10 @@ impl ExtendedString {
     /// Takes the source's content and leaves the source empty (`Move`);
     /// `target.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
+        if source.terminated.is_empty() {
+            self.copy([]);
+            return;
+        }
         *self = std::mem::take(source);
     }
     fn remove_error(&self, index: i32, count: i32) -> Failure {
@@ -230,7 +246,7 @@ impl ExtendedString {
         Ok(offset(index))
     }
     fn self_c_units_length(&self, source_start: usize) -> Result<usize, Failure> {
-        let Some(source) = self.terminated.get(source_start..=self.len()) else {
+        let Some(source) = self.as_utf16_with_nul().get(source_start..=self.len()) else {
             return Err(out_of_range(
                 "TCollection_ExtendedString::SetValue self source",
                 format_args!("start {source_start}; expected 0..={}", self.len()),

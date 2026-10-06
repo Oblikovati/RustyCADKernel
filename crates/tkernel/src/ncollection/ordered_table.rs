@@ -58,6 +58,9 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
             return None;
         }
         let hash = self.hasher.hash(key) % self.bucket_count + 1;
+        self.lookup_at_hash(key, hash)
+    }
+    fn lookup_at_hash(&self, key: &K, hash: usize) -> Option<usize> {
         self.buckets[hash].iter().copied().find(|&slot| {
             self.hasher
                 .equal(&self.slots[slot].as_ref().unwrap().key, key)
@@ -73,7 +76,8 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         if self.count == 0 || self.count > self.bucket_count {
             self.resize(self.count);
         }
-        if let Some(slot) = self.lookup(&key) {
+        let hash = self.hasher.hash(&key) % self.bucket_count + 1;
+        if let Some(slot) = self.lookup_at_hash(&key, hash) {
             let node = self.slots[slot].as_mut().unwrap();
             if replace_key {
                 node.key = key;
@@ -83,20 +87,26 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
             }
             return (false, slot);
         }
-        (true, self.append_node(key, construct()))
+        (true, self.append_node(key, construct, hash))
     }
-    fn append_node(&mut self, key: K, value: V) -> usize {
-        let hash = self.hasher.hash(&key) % self.bucket_count + 1;
+    fn append_node(&mut self, key: K, construct: impl FnOnce() -> V, hash: usize) -> usize {
+        let node = self.resource.allocate_value_with(|| {
+            let value = construct();
+            OrderedNode {
+                key,
+                value,
+                previous: self.last,
+                next: None,
+            }
+        });
+        self.append_allocated(node, hash)
+    }
+    fn append_allocated(&mut self, node: AllocatedBox<OrderedNode<K, V>>, hash: usize) -> usize {
         let slot = self.free.pop().unwrap_or_else(|| {
             self.slots.push(None);
             self.slots.len() - 1
         });
-        self.slots[slot] = Some(self.resource.allocate_value(OrderedNode {
-            key,
-            value,
-            previous: self.last,
-            next: None,
-        }));
+        self.slots[slot] = Some(node);
         if let Some(last) = self.last {
             self.slots[last].as_mut().unwrap().next = Some(slot);
         } else {
@@ -156,7 +166,7 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         }
     }
 }
-impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> OrderedTable<K, V, H> {
+impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedTable<K, V, H> {
     pub fn assign(&mut self, source: &Self, replace_values: bool) {
         self.clear(false);
         if source.count == 0 {
@@ -164,7 +174,7 @@ impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> OrderedTable<K, V, H> {
         }
         self.resize(source.count - 1);
         for (key, value) in source.items() {
-            self.place(key.clone(), || value.clone(), false, replace_values);
+            self.place_borrowed(key, value, replace_values);
         }
     }
 }
@@ -194,5 +204,6 @@ mod iteration;
 mod nodes;
 pub use nodes::{OrderedNodeMut, OrderedNodeRef};
 
+mod borrowed;
 mod mutable;
 pub(super) use mutable::OrderedItemsMut;

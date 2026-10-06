@@ -81,7 +81,7 @@ fn NCollection_LinearVectorTest__FirstLast() {
 #[test]
 fn NCollection_LinearVectorTest__CopyConstructor() {
     let vector = integers(&[1, 2, 3]);
-    let mut copy = vector.clone();
+    let mut copy = vector.clone_trivial();
     same_values(&copy, &[1, 2, 3]);
     copy[0] = 99;
     assert_eq!(vector[0], 1);
@@ -90,7 +90,7 @@ fn NCollection_LinearVectorTest__CopyConstructor() {
 fn NCollection_LinearVectorTest__CopyAssignment() {
     let vector = integers(&[1, 2]);
     let mut copy = integers(&[100]);
-    copy.assign(&vector);
+    copy.assign_trivial(&vector);
     same_values(&copy, &[1, 2]);
     copy[0] = 99;
     assert_eq!(vector[0], 1);

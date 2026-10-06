@@ -84,3 +84,25 @@ impl<K> Default for MapIterator<'_, K> {
         }
     }
 }
+
+impl<K> Clone for MapIterator<'_, K> {
+    fn clone(&self) -> Self {
+        Self {
+            keys: self.keys.clone(),
+        }
+    }
+}
+
+impl<K> MapIterator<'_, K> {
+    /// Advances and returns this cursor, as native prefix increment; `cursor.advance().key()`.
+    pub fn advance(&mut self) -> &mut Self {
+        self.next();
+        self
+    }
+    /// Returns the previous cursor and advances, as native postfix increment; `cursor.advance_post().key()`.
+    pub fn advance_post(&mut self) -> Self {
+        let previous = self.clone();
+        self.next();
+        previous
+    }
+}

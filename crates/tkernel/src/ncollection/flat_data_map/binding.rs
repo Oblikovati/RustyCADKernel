@@ -38,6 +38,15 @@ impl<K: Debug, V, H: HashPolicy<K>> FlatDataMap<K, V, H> {
     }
     fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> Inserted {
         let hash: usize = self.table.reserve_then_hash(&key);
+        self.place_hashed(key, hash, construct, replace)
+    }
+    pub(super) fn place_hashed(
+        &mut self,
+        key: K,
+        hash: usize,
+        construct: impl FnOnce() -> V,
+        replace: bool,
+    ) -> Inserted {
         if let Some(index) = self.table.find_cached_hash_slot(&key, hash) {
             if replace {
                 *self.value_at(index) = construct();

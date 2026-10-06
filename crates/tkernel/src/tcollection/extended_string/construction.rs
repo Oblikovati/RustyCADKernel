@@ -6,13 +6,6 @@ use super::{
 };
 use crate::{standard::Failure, tcollection::AsciiString};
 use std::sync::LazyLock;
-impl Default for ExtendedString {
-    fn default() -> Self {
-        Self {
-            terminated: vec![0],
-        }
-    }
-}
 impl ExtendedString {
     /// Converts a C string: UTF-8 when `is_multi_byte` and the bytes decode, otherwise each
     /// byte widened; reading stops at the first NUL. `ExtendedString::from_c_string(b"\xE2\x82\xAC", true)`.
@@ -56,7 +49,11 @@ impl ExtendedString {
                 format_args!("theLength {length}; expected >= 0"),
             ));
         };
-        let mut terminated = vec![unit; count + 1];
+        if count == 0 {
+            return Ok(Self::default());
+        }
+        let mut terminated = Vec::with_capacity(super::storage::padded_unit_capacity(count));
+        terminated.resize(count + 1, unit);
         terminated[count] = 0;
         Ok(Self { terminated })
     }
@@ -76,7 +73,10 @@ impl ExtendedString {
     /// Copies an explicit span, zero units included (the `std::u16string_view` constructor);
     /// `ExtendedString::from_raw(&[65, 0, 66])`.
     pub fn from_raw(units: &[u16]) -> Self {
-        let mut terminated = Vec::with_capacity(units.len() + 1);
+        if units.is_empty() {
+            return Self::default();
+        }
+        let mut terminated = Vec::with_capacity(super::storage::padded_unit_capacity(units.len()));
         terminated.extend_from_slice(units);
         terminated.push(0);
         Self { terminated }

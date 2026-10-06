@@ -21,7 +21,8 @@ crate::impl_transient!(
     HAsciiString,
     "TCollection_HAsciiString",
     StandardTransient,
-    parent
+    parent,
+    handle_key_policy: HAsciiStringHasher
 );
 impl std::fmt::Debug for HAsciiString {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -104,4 +105,7 @@ impl HAsciiString {
     }
 }
 mod edits;
+mod hasher;
+mod method_contracts;
 mod queries;
+pub use hasher::HAsciiStringHasher;

@@ -76,7 +76,9 @@ impl NurbsConvertModification {
             let point = source.value(*parameter)?;
             new_parameter_on_curve(point, &new_curve, (first, last), tolerance, parameter)?;
         }
-        copy.change_parameters(|stored| stored.assign(&parameters))?;
+        copy.change_parameters(|stored| {
+            stored.assign(&parameters);
+        })?;
         Ok(true)
     }
 

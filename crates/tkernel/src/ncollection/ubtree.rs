@@ -82,6 +82,7 @@ impl<T, B> BoundingNode<T, B> {
 pub struct UBTree<T: Clone + Default, B: BoundingVolume> {
     nodes: Vec<Option<AllocatedBox<BoundingNode<T, B>>>>,
     root: Option<usize>,
+    last: Option<usize>,
     resource: BaseAllocator,
 }
 impl<T: Clone + Default, B: BoundingVolume> Default for UBTree<T, B> {
@@ -95,6 +96,7 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         Self {
             nodes: Vec::new(),
             root: None,
+            last: None,
             resource,
         }
     }
@@ -124,6 +126,7 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
         self.nodes.clear();
         self.root = None;
+        self.last = None;
         if let Some(resource) = allocator {
             self.resource = resource;
         }
@@ -134,8 +137,9 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         std::mem::replace(source, replacement)
     }
     /// Drop old contents and transfer source nodes; `tree.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         *self = Self::move_from(source);
+        self
     }
     /// Insert an object with its bound; duplicates are permitted, `tree.add(1, bound)`.
     pub fn add(&mut self, object: T, bounds: B) -> bool {
@@ -143,8 +147,15 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         true
     }
     /// Visit child zero first and count accepted leaves; `tree.select(&mut selector)`.
-    pub fn select(&self, selector: &mut impl TreeSelector<T, B>) -> i32 {
-        let mut pending: Vec<usize> = self.root.into_iter().collect();
+    pub fn select<S: TreeSelector<T, B> + ?Sized>(&self, selector: &mut S) -> i32 {
+        self.select_nodes(self.root, selector)
+    }
+    fn select_nodes<S: TreeSelector<T, B> + ?Sized>(
+        &self,
+        root: Option<usize>,
+        selector: &mut S,
+    ) -> i32 {
+        let mut pending: Vec<usize> = root.into_iter().collect();
         let mut count: i32 = 0;
         while let Some(index) = pending.pop() {
             let node: &BoundingNode<T, B> = self.node(index);
@@ -174,3 +185,4 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         index
     }
 }
+mod method_contracts;

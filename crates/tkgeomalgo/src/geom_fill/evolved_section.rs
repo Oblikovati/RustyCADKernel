@@ -114,7 +114,9 @@ impl GeomFillSectionLaw for GeomFillEvolvedSection {
         let val = self.t_law()?.get().expect("checked").value(u)?;
         poles.assign(&self.curve.curve().poles());
         scale_poles(poles, l, val)?;
-        self.curve.curve().weights_array(|w| weights.assign(w));
+        self.curve.curve().weights_array(|w| {
+            weights.assign(w);
+        });
         Ok(true)
     }
     fn d1(&self, u: f64, v: SectionD1<'_, '_>) -> Result<bool, Failure> {
@@ -216,7 +218,9 @@ impl GeomFillSectionLaw for GeomFillEvolvedSection {
         Ok(l * max)
     }
     fn get_minimal_weight(&self, weights: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        self.curve.curve().weights_array(|w| weights.assign(w));
+        self.curve.curve().weights_array(|w| {
+            weights.assign(w);
+        });
         Ok(())
     }
     /// Always false with `Error = 0`.

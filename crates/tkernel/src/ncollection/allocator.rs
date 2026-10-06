@@ -29,6 +29,7 @@ mod incremental;
 mod keys;
 mod owned;
 mod raw_heap;
+mod typed_heap;
 use accumulating::AccEngine;
 pub use accumulating::{
     ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockLookup, AccBlockState,
@@ -371,8 +372,9 @@ impl BaseAllocator {
     fn allocate_typed(&self, layout: Layout) -> Option<NonNull<u8>> {
         let (size, align) = (layout.size(), layout.align());
         match &*self.inner {
-            AllocatorKind::Common => heap_allocate(size, align, false),
-            AllocatorKind::Heap => heap_allocate(heap_round(size)?, align, false),
+            AllocatorKind::Common | AllocatorKind::Heap => {
+                typed_heap::allocate(layout, MALLOC_ALIGNMENT)
+            }
             AllocatorKind::Incremental(engine) => {
                 let mut engine = locked(engine);
                 let address = engine.allocate_aligned(size, align)?;
@@ -381,15 +383,16 @@ impl BaseAllocator {
             }
             AllocatorKind::Accumulating(engine) => locked(engine).allocate_aligned(size, align),
             AllocatorKind::Aligned(alignment) => {
-                heap_allocate(size, mm_malloc_alignment(*alignment)?.max(align), false)
+                typed_heap::allocate(layout, mm_malloc_alignment(*alignment)?)
             }
         }
     }
 
-    /// Releases a typed allocation made by `allocate_typed`.
+    /// Releases a raw-policy owner or a typed arena allocation.
     ///
     /// # Safety
-    /// `address` must come from `allocate_typed` on this allocator and not be freed yet.
+    /// `address` must come from this allocator's raw policy or typed arena and not be freed.
+    /// Layout-bearing heap allocations instead use `typed_heap::deallocate`.
     unsafe fn free_typed(&self, address: NonNull<u8>) {
         match &*self.inner {
             AllocatorKind::Incremental(engine) => locked(engine).release(),
@@ -420,9 +423,21 @@ unsafe impl Allocator for BaseAllocator {
         Ok(NonNull::slice_from_raw_parts(address, layout.size()))
     }
     unsafe fn deallocate(&self, pointer: NonNull<u8>, layout: Layout) {
-        if layout.size() != 0 {
-            // SAFETY: the Allocator caller returns a block of this allocator exactly once.
-            unsafe { self.free_typed(pointer) };
+        if layout.size() == 0 {
+            return;
+        }
+        let alignment = match &*self.inner {
+            AllocatorKind::Common | AllocatorKind::Heap => Some(MALLOC_ALIGNMENT),
+            AllocatorKind::Aligned(alignment) => mm_malloc_alignment(*alignment),
+            _ => None,
+        };
+        // SAFETY: caller returns this allocator's live block with its original layout.
+        unsafe {
+            if let Some(alignment) = alignment {
+                typed_heap::deallocate(pointer, layout, alignment);
+            } else {
+                self.free_typed(pointer);
+            }
         }
     }
 }

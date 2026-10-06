@@ -170,3 +170,67 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
             .ok_or_else(|| exhausted_iterator(method))
     }
 }
+
+impl<K, V> Clone for DataMapIterator<'_, K, V> {
+    fn clone(&self) -> Self {
+        Self {
+            items: self.items.clone(),
+        }
+    }
+}
+
+impl<K, V> DataMapIterator<'_, K, V> {
+    /// Advances and returns this cursor, as native prefix increment; `cursor.advance().value()`.
+    pub fn advance(&mut self) -> &mut Self {
+        self.next();
+        self
+    }
+    /// Returns the previous cursor and advances, as native postfix increment; `cursor.advance_post().value()`.
+    pub fn advance_post(&mut self) -> Self {
+        let previous = self.clone();
+        self.next();
+        previous
+    }
+}
+
+impl<K, V> Default for DataMapIteratorMut<'_, K, V> {
+    fn default() -> Self {
+        Self {
+            buckets: &mut [],
+            bucket: 0,
+            index: 0,
+        }
+    }
+}
+
+impl<K, V> DataMapIteratorMut<'_, K, V> {
+    /// Compares node identity, with all exhausted cursors equal; `first.is_equal(&second)`.
+    pub fn is_equal(&self, other: &Self) -> bool {
+        let node = |cursor: &Self| {
+            cursor
+                .buckets
+                .get(cursor.bucket)
+                .and_then(|bucket| bucket.get(cursor.index))
+                .map(|entry| &**entry as *const Entry<K, V>)
+        };
+        node(self) == node(other)
+    }
+    /// Advances and returns the writable cursor; `cursor.advance().change_value()`.
+    pub fn advance(&mut self) -> &mut Self {
+        self.next();
+        self
+    }
+    /// Returns a read-only previous position while advancing; `cursor.advance_post().value()`.
+    /// The snapshot borrows this cursor to prevent aliased writable item references.
+    pub fn advance_post(&mut self) -> DataMapIterator<'_, K, V> {
+        let (bucket, index) = (self.bucket, self.index);
+        self.next();
+        DataMapIterator {
+            items: DataMapItems {
+                buckets: self.buckets,
+                bucket,
+                index,
+            },
+        }
+    }
+}

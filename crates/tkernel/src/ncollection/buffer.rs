@@ -6,6 +6,8 @@ use crate::standard::{
 };
 use std::io;
 
+mod pointers;
+
 /// Owned buffer with explicit allocation state; `Buffer::new(Some(allocator), 16)`.
 ///
 /// `None` stands for the native null allocator handle. Like upstream it is a transient, so it

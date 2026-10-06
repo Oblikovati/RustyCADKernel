@@ -94,7 +94,9 @@ impl GeomFillSectionGenerator {
     pub fn section(&self, p: i32, section: &mut AppBlendSection) -> Result<(), Failure> {
         let curve: &GeomBSplineCurve = curve_at(&self.my_sequence, p)?;
         section.poles.assign(&curve.poles());
-        curve.weights_array(|weights| section.weights.assign(weights));
+        curve.weights_array(|weights| {
+            section.weights.assign(weights);
+        });
         Ok(())
     }
     /// `Parameter(P)`: the imposed parameter of section `p`; a generator without

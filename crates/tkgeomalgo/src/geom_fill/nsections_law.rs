@@ -142,12 +142,16 @@ impl GeomFillSectionLaw for GeomFillNSections {
     }
 
     fn knots(&self, knots: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        self.with_surface((), |s| knots.assign(&s.u_knots()));
+        self.with_surface((), |s| {
+            knots.assign(&s.u_knots());
+        });
         Ok(())
     }
 
     fn mults(&self, mults: &mut Array1<'_, i32>) -> Result<(), Failure> {
-        self.with_surface((), |s| mults.assign(&s.u_multiplicities()));
+        self.with_surface((), |s| {
+            mults.assign(&s.u_multiplicities());
+        });
         Ok(())
     }
 

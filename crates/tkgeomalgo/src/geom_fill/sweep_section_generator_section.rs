@@ -56,7 +56,9 @@ impl GeomFillSweepSectionGenerator {
     fn moved_section(&self, p: i32, section: &mut AppBlendSection) -> Result<(), Failure> {
         let first = self.first_sect("GeomFill_SweepSectionGenerator::Section")?;
         section.poles.assign(&first.poles());
-        first.weights_array(|w| section.weights.assign(w));
+        first.weights_array(|w| {
+            section.weights.assign(w);
+        });
         if p <= 1 {
             return Ok(());
         }
@@ -141,7 +143,9 @@ impl GeomFillSweepSectionGenerator {
         let bs = self.arc_bspline(axis, angle)?;
         let b = live(&bs, "GeomFill_SweepSectionGenerator::Section", "BS")?;
         section.poles.assign(&b.poles());
-        b.weights_array(|w| section.weights.assign(w));
+        b.weights_array(|w| {
+            section.weights.assign(w);
+        });
         Ok(())
     }
 

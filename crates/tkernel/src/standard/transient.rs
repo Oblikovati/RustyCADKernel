@@ -122,14 +122,19 @@ impl Transient for StandardTransient {
 /// base projections and the reference counter delegate to. The optional
 /// `interfaces` list registers one caster per abstract ancestor trait, so that
 /// `Handle<dyn Trait>` can view the object (see docs/geom-design.md).
+/// A `handle_key_policy: MyPolicy` clause selects native default-map hashing and equality
+/// by static handle type; ordinary handles keep identity and Rust operators are unchanged.
 /// Example: `impl_transient!(Derived, "Derived", Base, parent)` or
 /// `impl_transient!(Circle, "Circle", dyn Conic, parent, interfaces: [dyn Curve, dyn Conic])`.
 #[macro_export]
 macro_rules! impl_transient {
+    ($class:ty, $name:literal, $parent:ty, $field:ident, handle_key_policy: $policy:ty) => {
+        $crate::impl_transient!($class, $name, $parent, $field, interfaces: [], handle_key_policy: $policy);
+    };
     ($class:ty, $name:literal, $parent:ty, $field:ident) => {
         $crate::impl_transient!($class, $name, $parent, $field, interfaces: []);
     };
-    ($class:ty, $name:literal, $parent:ty, $field:ident, interfaces: [$($interface:ty),* $(,)?]) => {
+    ($class:ty, $name:literal, $parent:ty, $field:ident, interfaces: [$($interface:ty),* $(,)?] $(, handle_key_policy: $policy:ty)?) => {
         impl $crate::standard::RuntimeTyped for $class {
             const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
@@ -153,6 +158,12 @@ macro_rules! impl_transient {
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
                 $crate::standard::project_concrete::<Self>(object)
             }
+            $(fn handle_key_hash(handle: &$crate::standard::Handle<Self>) -> usize {
+                $crate::ncollection::HashPolicy::hash(&<$policy>::default(), handle)
+            }
+            fn handle_key_equal(first: &$crate::standard::Handle<Self>, second: &$crate::standard::Handle<Self>) -> bool {
+                $crate::ncollection::HashPolicy::equal(&<$policy>::default(), first, second)
+            })?
         }
         impl $crate::standard::Transient for $class {
             fn dynamic_type(&self) -> &'static $crate::standard::RuntimeType {

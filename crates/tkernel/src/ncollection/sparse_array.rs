@@ -1,5 +1,10 @@
 //! Sparse block allocation with stable occupied slots and ascending index traversal.
 use std::collections::BTreeMap;
+mod cursor;
+mod cursor_mut;
+mod cursor_position;
+pub use cursor::SparseArrayCursor;
+pub use cursor_mut::SparseArrayCursorMut;
 /// Sparse indexed objects; `SparseArray::new(8).set_value(1000, 42)`.
 #[derive(Clone)]
 pub struct SparseArray<T> {

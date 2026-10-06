@@ -6,6 +6,7 @@
 //! `IsConstant = true` form; `CollectionCursorMut` the mutable default form. Both deref to
 //! `CursorPositions`, which holds the shared More/Next/position protocol.
 use super::ArrayError;
+mod method_contracts;
 
 /// The `[current, last)` position pair both cursor forms share (native `myCur`/`myLast`).
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -59,17 +60,19 @@ impl CursorPositions {
 /// }
 /// assert_eq!(seen, [10, 20]);
 /// ```
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Debug)]
 pub struct CollectionCursor<'a, T> {
     items: &'a [T],
     positions: CursorPositions,
+    detached: bool,
 }
 
 /// Mutable cursor (`NCollection_Iterator<C, false>`); `CollectionCursorMut::new(&mut items)`.
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct CollectionCursorMut<'a, T> {
     items: &'a mut [T],
     positions: CursorPositions,
+    detached: bool,
 }
 
 /// Positions of a fresh cursor starting at `position` of a container of `len` items.
@@ -101,7 +104,11 @@ impl<'a, T> CollectionCursor<'a, T> {
     /// Cursor starting at `position`, ending at the container end; `with_position(s, 1)`.
     pub fn with_position(items: &'a [T], position: usize) -> Self {
         let positions = starting_at(position, items.len());
-        Self { items, positions }
+        Self {
+            items,
+            positions,
+            detached: false,
+        }
     }
 
     /// Restarts on `items` (native `Init`/`Initialize`); `cursor.init(other)`.
@@ -124,7 +131,11 @@ impl<'a, T> CollectionCursorMut<'a, T> {
     /// Cursor starting at `position`, ending at the container end.
     pub fn with_position(items: &'a mut [T], position: usize) -> Self {
         let positions = starting_at(position, items.len());
-        Self { items, positions }
+        Self {
+            items,
+            positions,
+            detached: false,
+        }
     }
 
     /// Restarts on `items` (native `Init`/`Initialize`); `cursor.init(other)`.
@@ -148,6 +159,7 @@ impl<'a, T> CollectionCursorMut<'a, T> {
         CollectionCursor {
             items: self.items,
             positions: self.positions,
+            detached: self.detached,
         }
     }
 }
@@ -181,7 +193,8 @@ impl<T> std::ops::DerefMut for CollectionCursorMut<'_, T> {
 /// Native `operator==`: same storage, same end and same current position.
 impl<T> PartialEq for CollectionCursor<'_, T> {
     fn eq(&self, other: &Self) -> bool {
-        std::ptr::eq(self.items.as_ptr(), other.items.as_ptr()) && self.positions == other.positions
+        self.value_iter_ptr() == other.value_iter_ptr()
+            && self.end_iter_ptr() == other.end_iter_ptr()
     }
 }
 

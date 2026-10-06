@@ -1,9 +1,12 @@
 //! Adapts More/Next hosts with compile-checked Value > Current > CurrentId selection.
 //! Rust hosts declare accessor descriptors explicitly because stable Rust has no method-name SFINAE.
 mod accessors;
+mod host_binding;
 pub use accessors::{
     AccessorMetadata, AccessorPresence, AccessorSet, Missing, Present, ReadAccessor, SelectAccessor,
 };
+use host_binding::HostBinding;
+use std::cell::RefCell;
 /// A cursor with stable borrowed or owned accessor output; implement `more` and `advance`.
 pub trait ForwardHost: Sized {
     /// Declares its accessor methods in Value, Current, CurrentId order; `AccessorSet<Present<A>,Missing,Missing>`.
@@ -43,24 +46,41 @@ impl<T> std::ops::Deref for PostfixProxy<T> {
 }
 /// A borrowed cursor adapter; `ForwardRangeIter::new(&mut host)`.
 pub struct ForwardRangeIter<'a, I: ForwardHost> {
-    host: &'a mut I,
+    host: HostBinding<'a, I>,
 }
 /// A movable owning range; `for item in ForwardRange::new(host) {}`.
 pub struct ForwardRange<I: ForwardHost> {
-    host: I,
+    host: RefCell<I>,
 }
 impl<I: ForwardHost> ForwardRange<I> {
     /// Moves a host into the range, including non-copyable hosts; `ForwardRange::new(host)`.
     pub fn new(host: I) -> Self {
-        Self { host }
+        Self {
+            host: RefCell::new(host),
+        }
     }
     /// Borrows the current position without resetting it; `range.iter()`.
     pub fn iter(&mut self) -> ForwardRangeIter<'_, I> {
-        ForwardRangeIter::new(&mut self.host)
+        ForwardRangeIter::new(self.host.get_mut())
+    }
+    /// Borrows the shared cursor at its current position; `range.begin().next()`.
+    /// Multiple adapters advance the same host, matching OCCT's const `begin()`.
+    pub fn begin(&self) -> ForwardRangeIter<'_, I> {
+        ForwardRangeIter {
+            host: HostBinding::Shared(&self.host),
+        }
+    }
+    /// Borrows the same advancing cursor as `begin`; `range.cbegin().next()`.
+    pub fn cbegin(&self) -> ForwardRangeIter<'_, I> {
+        self.begin()
     }
     /// Returns the end marker; `range.end()`.
     pub fn end(&self) -> ForwardRangeSentinel {
         ForwardRangeSentinel
+    }
+    /// Returns the const-range exhaustion marker; `range.cbegin() == range.cend()`.
+    pub fn cend(&self) -> ForwardRangeSentinel {
+        self.end()
     }
 }
 impl<I: ForwardHost + Clone> ForwardRange<I> {
@@ -78,11 +98,14 @@ impl<I: ForwardHost> Iterator for ForwardRange<I> {
 impl<'a, I: ForwardHost> ForwardRangeIter<'a, I> {
     /// Borrows a host at its current position; `ForwardRangeIter::new(&mut host)`.
     pub fn new(host: &'a mut I) -> Self {
-        Self { host }
+        Self {
+            host: HostBinding::Exclusive(host),
+        }
     }
     /// Reads without advancing; empty hosts yield None; `iter.current()`.
     pub fn current(&self) -> Option<ForwardItem<I>> {
-        self.host.more().then(|| I::Accessors::read(self.host))
+        self.host
+            .read(|host| host.more().then(|| I::Accessors::read(host)))
     }
     /// Exposes reference/value field access using Rust's field projection; `iter.arrow()?.x`.
     pub fn arrow(&self) -> Option<ForwardItem<I>> {
@@ -90,9 +113,17 @@ impl<'a, I: ForwardHost> ForwardRangeIter<'a, I> {
     }
     /// Advances a valid host; exhaustion remains safe; `iter.advance()`.
     pub fn advance(&mut self) {
-        if self.host.more() {
-            self.host.advance();
-        }
+        self.host.change(|host| {
+            if host.more() {
+                host.advance();
+            }
+        });
+    }
+    /// Calls the host's Next even at exhaustion and returns this adapter; `iter.pre_increment()`.
+    /// OCCT delegates prefix increment unconditionally; `advance` is the checked alternative.
+    pub fn pre_increment(&mut self) -> &mut Self {
+        self.host.change(ForwardHost::advance);
+        self
     }
     /// Copies the current value and advances without copying the host; `iter.post_increment()`.
     pub fn post_increment(&mut self) -> Option<PostfixProxy<ForwardValue<I>>> {
@@ -116,11 +147,11 @@ impl<I: ForwardHost> ForwardIteratorTraits for ForwardRangeIter<'_, I> {
 }
 impl<I: ForwardHost> PartialEq<ForwardRangeSentinel> for ForwardRangeIter<'_, I> {
     fn eq(&self, _other: &ForwardRangeSentinel) -> bool {
-        !self.host.more()
+        self.host.read(|host| !host.more())
     }
 }
 impl<I: ForwardHost> PartialEq<ForwardRangeIter<'_, I>> for ForwardRangeSentinel {
     fn eq(&self, other: &ForwardRangeIter<'_, I>) -> bool {
-        !other.host.more()
+        other == self
     }
 }

@@ -13,6 +13,9 @@ impl ExtendedString {
     }
     /// Removes trailing space code units; `text.right_adjust()`.
     pub fn right_adjust(&mut self) {
+        if self.is_empty() {
+            return;
+        }
         let length = self
             .as_utf16()
             .iter()
@@ -24,6 +27,10 @@ impl ExtendedString {
     /// Appends filler up to a minimum width; `text.left_justify(10,45)?`.
     pub fn left_justify(&mut self, width: i32, filler: u16) -> Result<(), Failure> {
         let extra = self.padding("LeftJustify", width)?;
+        if extra == 0 {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         let end = self.len();
         self.terminated
             .splice(end..end, std::iter::repeat_n(filler, extra));
@@ -32,6 +39,10 @@ impl ExtendedString {
     /// Prepends filler up to a minimum width; `text.right_justify(10,45)?`.
     pub fn right_justify(&mut self, width: i32, filler: u16) -> Result<(), Failure> {
         let extra = self.padding("RightJustify", width)?;
+        if extra == 0 {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         self.terminated
             .splice(0..0, std::iter::repeat_n(filler, extra));
         Ok(())
@@ -39,6 +50,10 @@ impl ExtendedString {
     /// Centers with any extra odd filler on the right; `text.center(7,45)?`.
     pub fn center(&mut self, width: i32, filler: u16) -> Result<(), Failure> {
         let extra = self.padding("Center", width)?;
+        if extra == 0 {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         let left = extra / 2;
         let right = extra - left;
         self.terminated

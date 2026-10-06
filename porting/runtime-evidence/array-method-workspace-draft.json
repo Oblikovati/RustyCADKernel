@@ -1,0 +1,33 @@
+{
+  "schema": "rustycad.runtime-receipt.v1",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "command": "cargo test --workspace --locked -- --test-threads=1",
+  "exit_code": 0,
+  "passed": 13633,
+  "failed": 0,
+  "ignored": 70,
+  "test_groups": 1237,
+  "source_inputs_count": 7730,
+  "source_inputs_after_run_identical": false,
+  "build_source_delta": "Only a WHY comment and allow(clippy::iter_cloned_collect) attribute changed during the build. Original source is reconstructable by removing those two lines. Final focused legacy/method tests, Miri, rustdoc and strict Clippy passed after the change.",
+  "artifacts": {
+    "runtime": {
+      "path": "porting/runtime-evidence/array-method-workspace-runtime.gz",
+      "sha256": "450b0bf07d594c953ae7bc015852b6f401be85a73f2a231a4007f37ef7a250e0"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/array-method-workspace-inputs.gz",
+      "sha256": "052c867f86b6fbae362625f604cdf3cf2bf83a3628e5baacd88de2bb5f6ce382"
+    },
+    "build-source-delta": {
+      "path": "porting/runtime-evidence/array-method-workspace-build-source-delta.gz",
+      "sha256": "0ad3917360a1433a1c4e8835a60cdafa6dc912e75cb48df7113b00757694d51d"
+    }
+  },
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

@@ -75,17 +75,20 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         }
     }
 }
-impl<K: Debug + Clone, H: HashPolicy<K> + Clone> IndexedMap<K, H> {
+impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Copies index order while retaining destination policy and allocator; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
-        self.clear(true);
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
+        // Native Assign retains the destination policy, allocator, and bucket table.
+        self.clear(false);
         if source.is_empty() {
-            return;
+            return self;
         }
         self.resize(source.len() - 1);
         for key in source {
-            self.append_new(key.clone());
+            let bucket = self.hash_bucket(key);
+            self.append_new_at_bucket_with(bucket, || key.clone());
         }
+        self
     }
 }
 impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Clone for IndexedMap<K, H> {

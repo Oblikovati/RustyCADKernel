@@ -18,7 +18,9 @@ impl AsciiString {
     /// `Capitalize`: uppercases the first byte and lowercases the rest; `text.capitalize()`.
     pub fn capitalize(&mut self) {
         self.lower_case();
-        self.terminated[0].make_ascii_uppercase();
+        if let Some(first) = self.terminated.first_mut() {
+            first.make_ascii_uppercase();
+        }
     }
     /// `ChangeAll`: replaces every `from` byte by `to`, optionally ignoring ASCII case;
     /// `text.change_all(b'a', b'o', true)`.
@@ -40,13 +42,15 @@ impl AsciiString {
     pub fn remove_all_with_case(&mut self, byte: u8, case_sensitive: bool) {
         let wanted = fold(byte, case_sensitive);
         let length = self.len();
-        let mut kept: Vec<u8> = self.terminated[..length]
-            .iter()
-            .copied()
-            .filter(|&value| fold(value, case_sensitive) != wanted)
-            .collect();
-        kept.push(0);
-        self.terminated = kept;
+        let mut retained = 0;
+        for offset in 0..length {
+            let value = self.terminated[offset];
+            if fold(value, case_sensitive) != wanted {
+                self.terminated[retained] = value;
+                retained += 1;
+            }
+        }
+        self.set_length(retained);
     }
     /// `LeftAdjust`: removes leading C-locale whitespace; `text.left_adjust()`.
     pub fn left_adjust(&mut self) {
@@ -73,6 +77,10 @@ impl AsciiString {
             return Err(negative_width("LeftJustify", width));
         }
         let padding = (width as usize).saturating_sub(self.len());
+        if padding == 0 {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         let length = self.len();
         self.terminated
             .splice(length..length, std::iter::repeat_n(filler, padding));
@@ -84,6 +92,10 @@ impl AsciiString {
             return Err(negative_width("RightJustify", width));
         }
         let padding = (width as usize).saturating_sub(self.len());
+        if padding == 0 {
+            return Ok(());
+        }
+        self.ensure_owned_terminator();
         self.terminated
             .splice(0..0, std::iter::repeat_n(filler, padding));
         Ok(())

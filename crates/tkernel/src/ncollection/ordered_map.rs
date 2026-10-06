@@ -130,6 +130,15 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(self, other);
     }
+    /// Swaps both maps and returns the destination, matching move assignment; `map.move_assign(&mut source)`.
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
+        self.exchange(source);
+        self
+    }
+    /// Preserves copy/move self-assignment safely; `map.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
+    }
     /// Borrows keys in insertion order; `map.iter()`.
     pub fn iter(&self) -> OrderedMapIter<'_, K> {
         OrderedMapIter {
@@ -161,21 +170,26 @@ impl<K, H: HashPolicy<K> + Clone> OrderedMap<K, H> {
         );
         std::mem::replace(source, empty)
     }
-    /// Native move assignment, which swaps rather than empties: the source receives this
-    /// map's former keys, policy and allocator; `map.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
-        self.exchange(source);
-    }
 }
 impl<K, H: HashPolicy<K> + Default> Default for OrderedMap<K, H> {
     fn default() -> Self {
         Self::new(1)
     }
 }
-impl<K: Clone, H: HashPolicy<K> + Clone> OrderedMap<K, H> {
+impl<K: Clone, H: HashPolicy<K>> OrderedMap<K, H> {
     /// Copies order retaining destination hash policy and allocator; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
         self.table.assign(&source.table, false);
+        self
+    }
+    /// Copies a key only when absent, preserving duplicate identity; `map.add_ref(&42)`.
+    pub fn add_ref(&mut self, key: &K) -> bool {
+        self.table.place_borrowed(key, &(), false).0
+    }
+    /// Returns the stored key, copying only on a miss; `map.added_ref(&42)`.
+    pub fn added_ref(&mut self, key: &K) -> &K {
+        let (_, slot) = self.table.place_borrowed(key, &(), false);
+        &self.table.slots[slot].as_ref().unwrap().key
     }
 }
 impl<K: Clone, H: HashPolicy<K> + Clone> Clone for OrderedMap<K, H> {
@@ -219,6 +233,30 @@ impl<'a, K> OrderedMapIter<'a, K> {
     /// Reinitializes a cursor on another borrowed map; `cursor.initialize(&map)`.
     pub fn initialize<H: HashPolicy<K>>(&mut self, map: &'a OrderedMap<K, H>) {
         self.inner = map.table.items();
+    }
+    /// Compares native current-node identity; `cursor.is_equal(&other)`.
+    pub fn is_equal(&self, other: &Self) -> bool {
+        self == other
+    }
+    /// Advances and returns this iterator, as prefix increment does; `cursor.advance_returning()`.
+    pub fn advance_returning(&mut self) -> &mut Self {
+        self.advance();
+        self
+    }
+    /// Returns the current state and then advances, as postfix increment does; `cursor.post_advance()`.
+    pub fn post_advance(&mut self) -> Self {
+        let previous = self.clone();
+        self.advance();
+        previous
+    }
+    /// Copies iterator state and returns the destination; `cursor.assign(&other)`.
+    pub fn assign(&mut self, other: &Self) -> &mut Self {
+        self.clone_from(other);
+        self
+    }
+    /// Models iterator self-assignment without aliasing references; `cursor.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
     }
 }
 impl<'a, K> Iterator for OrderedMapIter<'a, K> {

@@ -1,9 +1,10 @@
 //! The templated converting constructors `NCollection_VecN(const NCollection_VecN<Other>&)`.
 use super::{Vec2, Vec3, Vec4};
 /// `static_cast<T>(value)` between the supported element types. Float-to-integer casts
-/// truncate toward zero. Out-of-range and NaN inputs are undefined behavior in C++; the
-/// pinned x86-64 profile converts them with `cvttss2si`/`cvttsd2si`, which returns `INT_MIN`,
-/// and this port does the same; `ElementCast::<f32>::cast(1.5_f64)`.
+/// truncate toward zero. Out-of-range and NaN floating-to-integer inputs are undefined
+/// in C++; only the existing i32 adapter preserves the pinned x86-64 `INT_MIN` result.
+/// Other integer destinations retain Rust's saturation outside the defined native range.
+/// For example, `ElementCast::<f32>::cast(1.5_f64)` converts within the native range.
 pub trait ElementCast<T> {
     /// Converts one element; `ElementCast::<i32>::cast(2.7_f64) == 2`.
     fn cast(self) -> T;
@@ -19,9 +20,35 @@ macro_rules! element_casts {
         )+
     };
 }
-element_casts!(f32, f64, i32 => f32);
-element_casts!(f32, f64, i32 => f64);
-element_casts!(i32 => i32);
+macro_rules! integral_source_casts {
+    ($($target:ty),+) => {$(
+        element_casts!(i8, u8, i16, u16, i32, u32, i64, u64, isize, usize => $target);
+    )+};
+}
+integral_source_casts!(i8, u8, i16, u16, i32, u32, i64, u64, isize, usize, f32, f64);
+element_casts!(f32, f64 => f32);
+element_casts!(f32, f64 => f64);
+macro_rules! floating_destination_casts {
+    ($($target:ty),+) => {$(element_casts!(f32, f64 => $target);)+};
+}
+// Only in-range truncated floating values are defined by the native converting constructor.
+floating_destination_casts!(i8, u8, i16, u16, u32, i64, u64, isize, usize);
+macro_rules! boolean_casts {
+    ($($target:ty),+) => {$(
+        impl ElementCast<$target> for bool {
+            fn cast(self) -> $target { u8::from(self) as $target }
+        }
+        impl ElementCast<bool> for $target {
+            fn cast(self) -> bool { self != 0 as $target }
+        }
+    )+};
+}
+boolean_casts!(i8, u8, i16, u16, i32, u32, i64, u64, isize, usize, f32, f64);
+impl ElementCast<bool> for bool {
+    fn cast(self) -> bool {
+        self
+    }
+}
 /// x86-64 truncating float-to-int conversion: the "integer indefinite" `INT_MIN` for NaN and
 /// for values outside `[-2^31, 2^31)`.
 macro_rules! truncating_casts {

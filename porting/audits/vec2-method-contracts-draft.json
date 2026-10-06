@@ -1,0 +1,158 @@
+{
+  "status": "source_frozen_partial_draft",
+  "classes": [
+    "NCollection_Vec2",
+    "shared Vec3/Vec4 arithmetic and constructors"
+  ],
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/vector.rs": "7abc23aa7ba6a086baf14fc9b6d0aeb615cf126bb8d7cf02c95b1179266e5f4f",
+    "crates/tkernel/src/ncollection/vector_component.rs": "a3d18b1c3cce2ed1b6b315540695d16ec74a77fe2f4ad976781f22673f1a5cf0",
+    "crates/tkernel/src/ncollection/square_matrix.rs": "60e6b625940d4e785aab514ba6422116b05892401c6620263edbc7b1fe2443aa",
+    "crates/tkernel/src/ncollection/vector/scalar_division.rs": "1b0e2c49334457b81c837cb12712c3af5af494838865bcee8e211c606c617803",
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "31669d5f286b6b27263b4b33cef368f8bac4ac2335b54fe938cfb890a047141d",
+    "crates/tkernel/src/ncollection/vector/arithmetic_component.rs": "eaf41f0809c62ad68813518f667add33cb6cfe95254b8c41799e31ec9484335f",
+    "crates/tkernel/src/ncollection/vector/storage.rs": "e275230079529be11e9fce09f965c43ff5e3f00aba6679f13b8d68aa04884717",
+    "crates/tkernel/src/ncollection/vector/swizzle.rs": "9a5d776df265b42c75cf612452bdfbfd4a6b3411f3a073b8aef9b920172f1aa6",
+    "crates/tkernel/src/ncollection/vector/conversion.rs": "c64775f03c11bfd9c8e1ba071003366c6f0dccab0b46b8fa3c0e4dbd4216753f",
+    "crates/tkernel/src/ncollection/vector/float.rs": "45db1777a4512af0d48c3039a97532e9b53608ccc7cf9db0b96cd020566fd8cb",
+    "crates/tkernel/tests/vec2_method_contracts.rs": "e4de149f637a51c69086e61f2cf086319ee7060096ce864da034e57c7732ccbe",
+    "crates/tkernel/tests/ncollection_vector_operator_paths.rs": "423fd96685e29e82ec312a02eefa546b2570b8b6c291dbf520284dc9b4236fe4",
+    "crates/tkernel/tests/ncollection_vec2_generic_scalar_division.rs": "cb12de68082048ce7d43bfb837e4b7eb657e8fd33a146cfa67f59ff261d87174",
+    "crates/tkernel/tests/vector_generic_scalar_multiply.rs": "7cab0a22ee0054f14e20394ceec4f22676dbbba0289e422040a6b9982ad93d2b",
+    "tools/oracle/tkernel_vec2_method_contracts.cxx": "0f133a003b2f8296bd9b8b91ab7c01e3d1fbab106c6452b8ef1a6cb9c22840a6",
+    "tools/oracle/tkernel_vec2_method_contracts.expected": "24b783cc3608f1df2abfba178114381c8bf424b267e7ac3af805b1db2848223d"
+  },
+  "checks": {
+    "rust_log": "/tmp/vec2-method-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 92,
+    "new_tests": 16,
+    "native_original_log": "/tmp/vec2-method-native.log",
+    "native_original_exit": 0,
+    "native_original_passed": 5,
+    "oracle_log": "/tmp/vec2-method-oracle.log",
+    "oracle_rows": 27,
+    "oracle_compile_exit": 0,
+    "oracle_run_exit": 0,
+    "oracle_diff_exit": 0,
+    "miri_log": "/tmp/vec2-method-miri.log",
+    "miri_exit": 0,
+    "miri_passed": 50,
+    "library_check_log": "/tmp/vec2-policy-check.log",
+    "library_check_exit": 0
+  },
+  "original_scope": "No dedicated Vec2/Vec3 original GTest files found. Five original Vec4 tests are joined as shared implementation regressions, including matrix multiplication; no new original declaration credit.",
+  "original_name_join": [
+    {
+      "cpp": "NCollection_Vec4Test.BasicConstruction",
+      "rust": "NCollection_Vec4Test__BasicConstruction"
+    },
+    {
+      "cpp": "NCollection_Vec4Test.XyzMethod",
+      "rust": "NCollection_Vec4Test__XyzMethod"
+    },
+    {
+      "cpp": "NCollection_Vec4Test.MatrixMultiplicationAndTransformation",
+      "rust": "NCollection_Vec4Test__MatrixMultiplicationAndTransformation"
+    },
+    {
+      "cpp": "NCollection_Vec4Test.ComponentAccess",
+      "rust": "NCollection_Vec4Test__ComponentAccess"
+    },
+    {
+      "cpp": "NCollection_Vec4Test.HomogeneousCoordinateDivision",
+      "rust": "NCollection_Vec4Test__HomogeneousCoordinateDivision"
+    }
+  ],
+  "method_changes": [
+    "Expanded ElementCast primitive matrix across10 integral types, f32/f64 andbool; preserved legacy float->i32 behavior and restricted new oracle casts to native-defined floating range",
+    "Added raw GetData/ChangeData pointer adapters and mutable x/y/z/w reference getters",
+    "Added Vec3 planar constructor adapter supplying native default Z=0",
+    "Unsigned u8/u16/u32/u64/usize Modulus and Normalize now supported; unsigned wrapping-square case verified",
+    "Owned VectorArithmeticComponent policy implements promoted/narrowed primitive operations and default custom operator dispatch",
+    "Corrected narrow integer component arithmetic, Dot/Cross/scalar multiplication and division, signed narrow negation, compound assignments and integer Vec3/4 scalar division",
+    "Preserved custom value-vs-assignment operator dispatch with explicit empty policy implementations; added policy bound to3 generic helpers and MatrixScalar"
+  ],
+  "vec2_method_scan": [
+    {
+      "native": "Length",
+      "rust": "length"
+    },
+    {
+      "native": "zero/scalar/per-component constructors",
+      "rust": "Default/from_value/new"
+    },
+    {
+      "native": "converting constructor",
+      "rust": "convert_from + ElementCast"
+    },
+    {
+      "native": "SetValues",
+      "rust": "set_values"
+    },
+    {
+      "native": "x/y const and mutable",
+      "rust": "x/y and x_mut/y_mut"
+    },
+    {
+      "native": "xy/yx swizzles",
+      "rust": "xy/yx"
+    },
+    {
+      "native": "IsEqual/operator==/operator!=",
+      "rust": "is_equal/PartialEq"
+    },
+    {
+      "native": "GetData/ChangeData/pointer conversions",
+      "rust": "as_ptr/as_mut_ptr/as_components/as_components_mut"
+    },
+    {
+      "native": "component operator+/-/*/ and +=/-=/*=/ /=",
+      "rust": "Rust operators and *_assign_returning"
+    },
+    {
+      "native": "unary operator-",
+      "rust": "Neg + VectorArithmeticComponent::vector_negate for signed/float/custom Neg types"
+    },
+    {
+      "native": "Multiply/Multiplied/scalar operator*/*=",
+      "rust": "multiply/multiplied/Mul/MulAssign"
+    },
+    {
+      "native": "scalar operator/ and /=",
+      "rust": "Div/divide_scalar_returning"
+    },
+    {
+      "native": "cwiseMin/cwiseMax/cwiseAbs",
+      "rust": "cwise_min/cwise_max/cwise_abs"
+    },
+    {
+      "native": "minComp/maxComp",
+      "rust": "min_comp/max_comp"
+    },
+    {
+      "native": "Dot/Modulus/SquareModulus",
+      "rust": "dot/modulus/square_modulus"
+    },
+    {
+      "native": "DX/DY",
+      "rust": "dx/dy"
+    },
+    {
+      "native": "DumpJson",
+      "rust": "dump_json"
+    }
+  ],
+  "declared_rust_adaptation": "Custom arithmetic elements now opt in with impl VectorArithmeticComponent for MyElement {}. Default methods keep each existing Add versus AddAssign, Mul versus MulAssign, and Div versus DivAssign overload distinct. MatrixScalar requires this policy; custom magnitude implementations stay source-compatible and derive zero from empty magnitude unless overriding the default zero predicate.",
+  "remaining_gaps": [
+    "Unsigned primitive unary negation and bool arithmetic remain constrained by Rust primitive operator bounds, despite native promoted operators being valid",
+    "i8 DX/DY still lacks From<u8>; generic Default uses T::default rather than native T(0) for custom element types",
+    "Out-of-range/NaN floating-to-integral conversions are native undefined behavior and excluded from new exact assertions; only existing i32 adapter retains pinned INT_MIN behavior",
+    "Signed overflowing promoted arithmetic and division by zero are native undefined behavior; wrapping implementations define a Rust extension without claiming native parity for that domain",
+    "Side-effecting custom scalar evaluation orders and arbitrary custom conversion operators are not exhaustively proven",
+    "No compiler surface credit or full Vec2/Vec3/Vec4 parity claim; cross-platform integer narrowing profile not executed"
+  ]
+}

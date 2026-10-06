@@ -91,3 +91,47 @@ impl<A, B> Default for DoubleMapIterator<'_, A, B> {
         }
     }
 }
+
+impl<'a, A, B> DoubleMapIterator<'a, A, B> {
+    /// Constructs a legacy cursor; `let cursor = DoubleMapIterator::new(&map)`.
+    pub fn new<H1: HashPolicy<A>, H2: HashPolicy<B>>(map: &'a DoubleMap<A, B, H1, H2>) -> Self
+    where
+        A: Debug,
+        B: Debug,
+    {
+        map.cursor()
+    }
+    /// Copies cursor state and returns its destination; `cursor.assign(&other)`.
+    pub fn assign(&mut self, other: &Self) -> &mut Self {
+        self.pairs = other.pairs.clone();
+        self
+    }
+    /// Implements prefix increment with a stable end state; `cursor.advance()`.
+    pub fn advance(&mut self) -> &mut Self {
+        self.next();
+        self
+    }
+    /// Returns the old iterator before advancing; `let previous = cursor.post_advance()`.
+    pub fn post_advance(&mut self) -> Self {
+        let previous = self.clone();
+        self.next();
+        previous
+    }
+    /// Returns native arrow identity, null at end; `cursor.value_ptr()`.
+    pub fn value_ptr(&self) -> *const B {
+        self.value().map_or(std::ptr::null(), std::ptr::from_ref)
+    }
+}
+impl<A, B> Clone for DoubleMapIterator<'_, A, B> {
+    fn clone(&self) -> Self {
+        Self {
+            pairs: self.pairs.clone(),
+        }
+    }
+}
+impl<A, B> PartialEq for DoubleMapIterator<'_, A, B> {
+    fn eq(&self, other: &Self) -> bool {
+        self.is_equal(other)
+    }
+}
+impl<A, B> Eq for DoubleMapIterator<'_, A, B> {}

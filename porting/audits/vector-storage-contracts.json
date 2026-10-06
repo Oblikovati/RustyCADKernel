@@ -152,5 +152,61 @@
     "miri_toolchain": "nightly-2026-09-25",
     "expected_provenance": "Native output reviewed against independent Rust size, alignment, address and mutation assertions."
   },
-  "compiler_evidence_status": "pending fresh clean-revision capture"
+  "compiler_evidence_status": "verified exact pinned declarations and compiler-recorded Rust bodies",
+  "integrated_compiler_validation": {
+    "source_revision": "704a94fbf268d96438108f69cff4847136f44677",
+    "bindings": [
+      {
+        "path": "rustycad_tkernel::ncollection::Vec2::as_components",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "2b908e2ec079fd95e49b29c6fa33008cfefdddf71f48625e2bc2e43da5179c39"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec2::as_components_mut",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "43b321a552b7303e594c1e4cede4a48a0683a7ad9ddf5a7626d7d293554b53c5"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::as_components",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "5970f69a4f5f20af6ef825de0e5a5bc3985412518b9d51ec6df26bbbdf2bf0f9"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec3::as_components_mut",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "cf3a288595c438d1f1e40d4a60acb57d0ac76140cc0f8d9e941a904c5a601bf0"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::as_components",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "798ff9840b5fc992296538bc641f735e1e9057635226a965267feaee0f942d65"
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::Vec4::as_components_mut",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/vector/storage.rs",
+        "source_sha256": "ac89e126975630fd6eb12e9a22dd9101832411df559953f63cfe53f1d53f0af4",
+        "declaration_sha256": "e0a465d3c714472de94b623e3a4e86abf1a7d07a4b5e175655a5c2c65c0e308a"
+      }
+    ],
+    "inventory_sha256": "88f9c56f6d77ef487641f9f920129f94a79fa731112684f207da6b6bfe60ea45"
+  },
+  "integrated_runtime_validation": {
+    "source_revision": "704a94fbf268d96438108f69cff4847136f44677",
+    "workspace_receipt": "porting/runtime-evidence/cargo-workspace-704a94fb.json",
+    "tooling_receipt": "porting/runtime-evidence/proof-tools-704a94fb.json",
+    "foundation_receipt": "porting/runtime-evidence/base-legacy-704a94fb.json",
+    "clippy_receipt": "porting/runtime-evidence/tkernel-clippy-704a94fb.json"
+  },
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
 }

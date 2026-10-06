@@ -156,3 +156,5 @@ fn vec4_compound_multiply_divide_use_element_assignment_operators() {
         [Tagged(8023), Tagged(8042), Tagged(8015), Tagged(8067)]
     );
 }
+
+impl rustycad_tkernel::ncollection::VectorArithmeticComponent for Tagged {}

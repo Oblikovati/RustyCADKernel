@@ -1,0 +1,44 @@
+{
+  "schema": "rustycad.runtime-receipt.v1",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "command": "cargo test --workspace --locked -- --test-threads=1",
+  "cargo_environment": {
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_BUILD_JOBS": "4"
+  },
+  "exit_code": 0,
+  "passed": 13619,
+  "failed": 0,
+  "ignored": 70,
+  "test_groups": 1235,
+  "source_inputs_count": 7724,
+  "source_inputs_after_run_verified": true,
+  "artifacts": {
+    "runtime": {
+      "path": "porting/runtime-evidence/foundation-class-workspace-draft.log.gz",
+      "sha256": "e993692b6aaf06bacf119c06e3c5460a6f6ce025ff6f6db08a8cb9e467f45802"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/foundation-class-workspace-draft-inputs.json.gz",
+      "sha256": "48263fdcb46101604e26e98ff24c4deb4d299aae1c95d5602162f1d2987d75f2"
+    }
+  },
+  "native_class_audits": [
+    "porting/audits/local-trivial-move-contracts.json",
+    "porting/audits/dynamic-legacy-cursor-contracts.json",
+    "porting/audits/linear-assignment-pointer-contracts.json"
+  ],
+  "limitations": [
+    "The preserved parallel foundation attempt failed a mapped-region mincore check; independent recheck and serialized suites passed.",
+    "Runtime green does not establish full API parity, configuration coverage or integrated source provenance.",
+    "Ignored doctests retain existing workspace exclusions."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

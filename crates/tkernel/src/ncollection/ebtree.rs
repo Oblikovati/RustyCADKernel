@@ -37,11 +37,29 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         }
         let index: usize = self.tree.insert_leaf(object.clone(), bounds);
         self.objects.bind(object, index);
-        if let Some(previous) = self.tree.previous_leaf(index) {
-            self.objects
-                .bind(self.tree.node(previous).object().clone(), previous);
-        }
+        self.rebind_previous_leaf(index);
         true
+    }
+    /// Copies borrowed arguments only if the object is absent; `tree.add_ref(&1, &bounds)`.
+    pub fn add_ref(&mut self, object: &T, bounds: &B) -> bool {
+        if self.contains(object) {
+            return false;
+        }
+        let index = self.tree.insert_leaf(object.clone(), bounds.clone());
+        self.objects.bind_ref(object, &index);
+        self.rebind_previous_leaf(index);
+        true
+    }
+    fn rebind_previous_leaf(&mut self, index: usize) {
+        if let Some(previous) = self.tree.previous_leaf(index) {
+            self.rebind_leaf(previous);
+        }
+    }
+    fn rebind_leaf(&mut self, index: usize) {
+        // Native ChangeSeek changes only the pointer, without copying/reinserting the key.
+        if let Some(stored) = self.objects.change_seek(self.tree.node(index).object()) {
+            *stored = index;
+        }
     }
     /// Locate a leaf or return Standard_NoSuchObject; `tree.find_node(&1)?`.
     pub fn find_node(&self, object: &T) -> Result<&BoundingNode<T, B>, Failure> {
@@ -52,15 +70,18 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         let Ok(&index) = self.objects.find(object) else {
             return false;
         };
+        if self.tree.node(index).is_root() {
+            self.clear();
+            return true;
+        }
         self.objects.unbind(object);
         if let Some(parent) = self.tree.remove_leaf(index) {
-            self.objects
-                .bind(self.tree.node(parent).object().clone(), parent);
+            self.rebind_leaf(parent);
         }
         true
     }
     /// Select with native branch pruning and stopping; `tree.select(&mut selector)`.
-    pub fn select(&self, selector: &mut impl TreeSelector<T, B>) -> i32 {
+    pub fn select<S: TreeSelector<T, B> + ?Sized>(&self, selector: &mut S) -> i32 {
         self.tree.select(selector)
     }
     /// Release both nodes and object bindings; `tree.clear()`.
@@ -84,7 +105,12 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         std::mem::replace(source, replacement)
     }
     /// Replace old nodes with the source; `tree.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         *self = Self::move_from(source);
+        self
+    }
+    /// Preserves move self-assignment without aliasing references; `tree.move_assign_self()`.
+    pub fn move_assign_self(&mut self) -> &mut Self {
+        self
     }
 }

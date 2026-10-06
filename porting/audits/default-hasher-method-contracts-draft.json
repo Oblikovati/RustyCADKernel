@@ -1,0 +1,111 @@
+{
+  "status": "source_frozen_partial_draft",
+  "classes": [
+    "NCollection_DefaultHasher",
+    "Standard_HashUtils dispatch",
+    "Handle static key specialization"
+  ],
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/hash_policy.rs": "fb3551d3c32f49d8148cebeb51976205616abc03583075d6fbe5aea6b38d428e",
+    "crates/tkernel/src/standard/runtime_type.rs": "6ef7a55e0fa3cd8ab9185d11f67f878ffca27e7f79be9f8e730ce66ae40e933f",
+    "crates/tkernel/src/standard/transient.rs": "04c59fb678fdefa8513d87d95fca1df1676ecf254900a696d8e80e3f1c3e0506",
+    "crates/tkernel/src/standard/handle/traits.rs": "b64023366a5059ac8ba481986f9c496548146aee861a6848d3ba0d0e4f895815",
+    "crates/tkernel/src/tcollection/h_ascii_string.rs": "f21fd839dfb17118976a81d8cac70d2f873e253a05e22500e7e8e4cc162c92c0",
+    "crates/tkernel/src/tcollection/h_extended_string.rs": "db4dcf6af7f92da2ebe0bc31de30b407c66f409d77e2fa11506cda44bcbee1f4",
+    "crates/tkernel/tests/default_hasher_method_contracts.rs": "14d48c3a8f543177121294317cf3eb5b18c5d4090c28cd035db47c6aa6982b49",
+    "tools/oracle/tkernel_default_hasher_contracts.cxx": "e968a1c7bf9b3fa9fd1f67fe29a1e193bb1bdf9df6dc5f5b3bbeed43ff98ef6b",
+    "tools/oracle/tkernel_default_hasher_contracts.expected": "c3755bb3430f650dad111b19bc39de2bea32a35a1b5fd45397f0801452302122"
+  },
+  "checks": {
+    "rust_log": "/tmp/default-hasher-method-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 56,
+    "new_tests": 6,
+    "native_log": "/tmp/default-hasher-method-native.log",
+    "native_exit": 0,
+    "original_regression_passed": 15,
+    "oracle_rows": 4,
+    "miri": "not_run_by_subagent; root coordinates"
+  },
+  "original_name_join": [
+    {
+      "cpp": "HandleAdvancedTest.CompilerSpecificBehavior",
+      "rust": "HandleAdvancedTest__CompilerSpecificBehavior"
+    },
+    {
+      "cpp": "HandleAdvancedTest.DeepHierarchyRTTI",
+      "rust": "HandleAdvancedTest__DeepHierarchyRTTI"
+    },
+    {
+      "cpp": "HandleAdvancedTest.TypeInfoCompatibility",
+      "rust": "HandleAdvancedTest__TypeInfoCompatibility"
+    },
+    {
+      "cpp": "HandleAdvancedTest.AllocatorHandlePerformance",
+      "rust": "HandleAdvancedTest__AllocatorHandlePerformance"
+    },
+    {
+      "cpp": "HandleAdvancedTest.HandleArrayOperations",
+      "rust": "HandleAdvancedTest__HandleArrayOperations"
+    },
+    {
+      "cpp": "HandleAdvancedTest.ConstHandleOperations",
+      "rust": "HandleAdvancedTest__ConstHandleOperations"
+    },
+    {
+      "cpp": "HandleAdvancedTest.WeakReferenceSimulation",
+      "rust": "HandleAdvancedTest__WeakReferenceSimulation"
+    },
+    {
+      "cpp": "HandleOperationsTest.BasicHandleOperations",
+      "rust": "HandleOperationsTest__BasicHandleOperations"
+    },
+    {
+      "cpp": "HandleOperationsTest.HandleDownCast",
+      "rust": "HandleOperationsTest__HandleDownCast"
+    },
+    {
+      "cpp": "HandleOperationsTest.HandleComparisons",
+      "rust": "HandleOperationsTest__HandleComparisons"
+    },
+    {
+      "cpp": "HandleOperationsTest.AllocatorHandleCasting",
+      "rust": "HandleOperationsTest__AllocatorHandleCasting"
+    },
+    {
+      "cpp": "HandleOperationsTest.HandleCopyAndAssignment",
+      "rust": "HandleOperationsTest__HandleCopyAndAssignment"
+    },
+    {
+      "cpp": "HandleOperationsTest.HandleWithDifferentTypes",
+      "rust": "HandleOperationsTest__HandleWithDifferentTypes"
+    },
+    {
+      "cpp": "HandleOperationsTest.HandleNullOperations",
+      "rust": "HandleOperationsTest__HandleNullOperations"
+    },
+    {
+      "cpp": "Standard_Handle_Test.OCC24533_IsNullAndPointerChecks",
+      "rust": "Standard_Handle_Test__OCC24533_IsNullAndPointerChecks"
+    }
+  ],
+  "original_scope": "No dedicated DefaultHasher or HashUtils original GTest declarations found in pinned TKernel/GTests. Fifteen Handle originals are regression evidence, not new hasher declaration credit.",
+  "method_changes": [
+    "HashKey default occt_equal preserves PartialEq and allows native std::equal_to specialization independently of Rust operators",
+    "DefaultHashPolicy dispatches occt_hash and occt_equal",
+    "RuntimeTyped defaults native handle key semantics to pointer identity",
+    "impl_transient optional handle_key_policy clause selects specialization statically; both legacy macro forms retained",
+    "Handle HashKey dispatches through static RuntimeTyped hooks; ordinary and base-upcast handles retain identity",
+    "HAsciiString and HExtendedString select their native content policies incl null and embedded NUL behavior",
+    "Rust Handle PartialEq/Ord/Hash remain identity, preserving the Rust hash equality contract"
+  ],
+  "remaining_gaps": [
+    "Default policy still requires a HashKey implementation for user enum and user class types; native automatic enum casting has no blanket Rust equivalent",
+    "Default HashKey f32 and long-double/config-specific std::hash algorithms are not covered by this batch; f64 existing dispatch remains pinned to Linux libstdc++",
+    "Standard_HashUtils object representation byte hashing remains restricted to NoUninit types and explicit slices; native padding and undefined overreads are excluded",
+    "No exhaustive compiler surface or 32-bit/Windows execution proof in this audit"
+  ]
+}

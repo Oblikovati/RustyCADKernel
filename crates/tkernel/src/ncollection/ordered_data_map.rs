@@ -30,14 +30,15 @@ pub struct OrderedDataValuesMut<'a, K, V> {
 #[derive(Clone, Default)]
 pub struct OrderedDataCursor {
     slot: Option<usize>,
-    // Native iterators remember their map; a default-constructed one resets to exhausted.
-    bound: bool,
+    // Identity tokens are never dereferenced: native equality compares nodes, not dense slots.
+    owner: *const (),
+    node: *const (),
 }
 /// Native `IsEqual`: two cursors of the same map are equal on the same node, and every
 /// exhausted cursor equals every other; `map.cursor() == map.cursor()`.
 impl PartialEq for OrderedDataCursor {
     fn eq(&self, other: &Self) -> bool {
-        self.slot == other.slot
+        self.node == other.node
     }
 }
 impl Eq for OrderedDataCursor {}
@@ -164,11 +165,6 @@ impl<K: Debug, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
         );
         std::mem::replace(source, empty)
     }
-    /// Native move assignment, which swaps rather than empties: the source receives this
-    /// map's former bindings, policy and allocator; `map.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
-        self.exchange(source);
-    }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> Default for OrderedDataMap<K, V, H> {
     fn default() -> Self {
@@ -185,17 +181,31 @@ impl<K: Debug, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         true
     }
 }
-impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
+impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Copies order retaining destination policy/allocator; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
-        self.table.assign(&source.table, true);
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
+        self.table.clear(false);
+        if source.table.count == 0 {
+            return self;
+        }
+        self.table.resize(source.table.count - 1);
+        for (key, value) in source.table.items() {
+            self.table.place_borrowed(key, value, true);
+        }
+        self
     }
 }
 impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for OrderedDataMap<K, V, H> {
     fn clone(&self) -> Self {
-        Self {
-            table: self.table.clone(),
-        }
+        let mut copy = Self {
+            table: OrderedTable::new(
+                self.table.hasher.clone(),
+                self.table.bucket_count,
+                self.table.resource.clone(),
+            ),
+        };
+        copy.assign(self);
+        copy
     }
 }
 impl<K: Debug, V, H: HashPolicy<K>> std::ops::Index<&K> for OrderedDataMap<K, V, H> {
@@ -229,3 +239,4 @@ mod binding;
 mod cursor;
 mod edges;
 mod iteration;
+mod method_contracts;

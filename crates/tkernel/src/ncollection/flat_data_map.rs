@@ -125,10 +125,6 @@ impl<K: Clone, V: Clone, H: Clone> FlatDataMap<K, V, H> {
         self.table.clone_from(&source.table);
         self
     }
-    /// Preserves self-assignment without creating aliased Rust borrows; `map.assign_self()`.
-    pub fn assign_self(&mut self) -> &mut Self {
-        self
-    }
 }
 impl<K: Clone, V: Clone, H: Clone> Clone for FlatDataMap<K, V, H> {
     fn clone(&self) -> Self {
@@ -165,3 +161,14 @@ mod cursor;
 mod iteration;
 pub use cursor::FlatDataCursorMut;
 mod transfer;
+
+mod borrowed_emplacement;
+mod cursor_contracts;
+mod pointer_contracts;
+
+impl<K, V, H> FlatDataMap<K, V, H> {
+    /// Preserves self-assignment without copying keys, values or policy; `map.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
+    }
+}

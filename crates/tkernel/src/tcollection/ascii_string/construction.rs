@@ -15,8 +15,12 @@ impl AsciiString {
     /// Creates `length` copies of `byte`, NUL fillers included (`TCollection_AsciiString(int, char)`);
     /// `AsciiString::filled(3, b'*').as_bytes() == b"***"`.
     pub fn filled(length: usize, byte: u8) -> Self {
-        let mut terminated = vec![byte; length + 1];
-        terminated[length] = 0;
+        if length == 0 {
+            return Self::default();
+        }
+        let mut terminated = Vec::with_capacity(super::storage::padded_byte_capacity(length));
+        terminated.resize(length, byte);
+        terminated.push(0);
         Self { terminated }
     }
     /// Copies at most `maximum` bytes, stopping at the first NUL or the span end

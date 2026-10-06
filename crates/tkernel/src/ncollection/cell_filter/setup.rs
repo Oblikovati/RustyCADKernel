@@ -74,11 +74,19 @@ impl<I: CellGeometry> CellFilter<I> {
     }
     fn reset_cells(&mut self, allocator: Option<BaseAllocator>) {
         self.resource = arena_or_default(allocator);
-        self.cells = DataMap::with_allocator(CellHash, 1, self.resource.clone());
+        // Native resetAllocator clears through the new arena without resetting NbBuckets.
+        self.cells.clear_with_allocator(Some(self.resource.clone()));
     }
 }
 
 /// Native `resetAllocator`: a null handle means a new default incremental allocator.
 fn arena_or_default(allocator: Option<BaseAllocator>) -> BaseAllocator {
     allocator.unwrap_or_else(|| BaseAllocator::incremental(DEFAULT_ARENA_BLOCK))
+}
+
+impl<I: CellGeometry> Default for CellFilter<I> {
+    /// Constructs native zero-sized cells; call `filter.reset(1.0, None)` before spatial queries.
+    fn default() -> Self {
+        Self::new(0.0)
+    }
 }

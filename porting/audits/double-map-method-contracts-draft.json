@@ -1,0 +1,144 @@
+{
+  "status": "partial_uncommitted_draft",
+  "class": "NCollection_DoubleMap",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/double_map.rs": "e16c30902070724d0845a0150c8a393fff31b72a75230e11a6777fda29e85b97",
+    "crates/tkernel/src/ncollection/double_map/cursor.rs": "521a110262681b1fb0ca92b733a9a1a7c3c50a2352db1582dd404b6ac32a4669",
+    "crates/tkernel/src/ncollection/double_map/borrowed_binding.rs": "255b78f8e016428ab29fd4c293b31a2f2f45366bc83afecb52d0ab8c44851eff",
+    "crates/tkernel/src/ncollection/double_map/method_contracts.rs": "35e74d7b39266ce5dffe9e4061e2e77ddb23b98e017a59f9da0b2743f00de647",
+    "crates/tkernel/src/ncollection/double_map/copying.rs": "a3ec73e2cf1aaaba84db54af72aee7a8db5f80ed6cfa082f7e37cb8284d7b6c3",
+    "crates/tkernel/src/ncollection/double_map/iteration.rs": "cbe3e60a65129c4bb19eacacd9932e3da08146327d61e39eb5d6a2f4f2c270bf",
+    "crates/tkernel/src/ncollection/double_map/queries.rs": "931ec1ce0887738e2fb8c757b0e44fc64aedd3a908bf304df5dde5e0137abb66",
+    "crates/tkernel/tests/double_map_method_contracts.rs": "466e6f0a9c0b1ae60f6ddd5cdcf19ea52f5f83ad405a8ca3dc4508e395519eb7",
+    "tools/oracle/tkernel_double_map_method_contracts.cxx": "0ddd78743b4a6165c34b4490ac9a7faa8a06763f7866858586266a991a0e8a7c",
+    "tools/oracle/tkernel_double_map_method_contracts.expected": "04313b87eb252064a397ea153fcdd4c0ce628363c876f5c1a5f2490c359df68d"
+  },
+  "checks": {
+    "rust_log": "/tmp/double-map-method-rust-final.log",
+    "rust_exit": 0,
+    "rust_passed": 34,
+    "native_log": "/tmp/double-map-method-native.log",
+    "native_exit": 0,
+    "native_original_passed": 23,
+    "supplemental_oracle_rows": 7,
+    "miri": "not_run_by_subagent; root coordinates"
+  },
+  "original_name_join": [
+    {
+      "cpp": "NCollection_DoubleMapTest.AssignmentOperator",
+      "rust": "NCollection_DoubleMapTest__AssignmentOperator"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.BasicBindFind",
+      "rust": "NCollection_DoubleMapTest__BasicBindFind"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.BindWithDuplicateKeys",
+      "rust": "NCollection_DoubleMapTest__BindWithDuplicateKeys"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.Clear",
+      "rust": "NCollection_DoubleMapTest__Clear"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.ComplexKeys",
+      "rust": "NCollection_DoubleMapTest__ComplexKeys"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.CopyConstructor",
+      "rust": "NCollection_DoubleMapTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.CustomBuckets",
+      "rust": "NCollection_DoubleMapTest__CustomBuckets"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.DefaultConstructor",
+      "rust": "NCollection_DoubleMapTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.Exchange",
+      "rust": "NCollection_DoubleMapTest__Exchange"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.Iterator",
+      "rust": "NCollection_DoubleMapTest__Iterator"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.ReSize",
+      "rust": "NCollection_DoubleMapTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.STLIterators",
+      "rust": "NCollection_DoubleMapTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.SeekTests",
+      "rust": "NCollection_DoubleMapTest__SeekTests"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.StringKeys",
+      "rust": "NCollection_DoubleMapTest__StringKeys"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_BothKeysExist",
+      "rust": "NCollection_DoubleMapTest__TryBind_BothKeysExist"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_ExistingKey1",
+      "rust": "NCollection_DoubleMapTest__TryBind_ExistingKey1"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_ExistingKey2",
+      "rust": "NCollection_DoubleMapTest__TryBind_ExistingKey2"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_MoveSemantics",
+      "rust": "NCollection_DoubleMapTest__TryBind_MoveSemantics"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_NewKeys",
+      "rust": "NCollection_DoubleMapTest__TryBind_NewKeys"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryBind_VsBindException",
+      "rust": "NCollection_DoubleMapTest__TryBind_VsBindException"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryEmplace_ExistingKey",
+      "rust": "NCollection_DoubleMapTest__TryEmplace_ExistingKey"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.TryEmplace_NewKey",
+      "rust": "NCollection_DoubleMapTest__TryEmplace_NewKey"
+    },
+    {
+      "cpp": "NCollection_DoubleMapTest.UnbindTest",
+      "rust": "NCollection_DoubleMapTest__UnbindTest"
+    }
+  ],
+  "method_changes": [
+    "Assign returns destination, keeps bucket storage and policies/allocator, reproduces source-key local copies and key2-before-key1 node copies",
+    "Clone::clone_from delegates native assignment",
+    "Copy/move self-assignment is explicit assign_self",
+    "Move constructor retains source bucket count/allocator and transfers node addresses; callback seam controls moved-from hasher state",
+    "Move assignment swaps policies, clears old destination, then exchanges allocator/storage/bucket metadata",
+    "Checked int constructor and ReSize overloads",
+    "Seek1/Seek2 nullable raw pointer identity",
+    "Const-reference Bind/TryBind skip copies for duplicate pairs and construct key2 before key1",
+    "Iterator constructor/copy/assignment/prefix/postfix/arrow equivalents"
+  ],
+  "remaining_gaps": [
+    "Native public DoubleMapNode API and allocator macro ABI are not exposed",
+    "Inherited BasicIterator aliases need compiler alias proof before declaration credit",
+    "C++ custom hash invocation counts, throwing hash/copy cleanup and bucket-order destruction are not fully reproduced",
+    "Mixed const-reference/rvalue Bind/TryBind overloads and non-consuming failed rvalue binding require explicit ownership seams",
+    "Default move constructor resets policies to Default; custom C++ moved-from state must use move_from_with callbacks",
+    "Rust shared cursor lifetime prevents concurrent map mutation permitted by native unsafe iterator domains",
+    "No compiler body capture or integrated main credit in this scoped audit"
+  ]
+}

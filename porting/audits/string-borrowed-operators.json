@@ -196,10 +196,59 @@
       "Null ASCII byte operands now use bounded optional-buffer methods; existing UTF-16 pointer adapters are unchanged."
     ]
   },
-  "compiler_evidence_status": "pending fresh clean-revision capture",
+  "compiler_evidence_status": "verified exact pinned declarations and compiler-recorded Rust bodies",
   "crosswalk_receiver_regression": {
     "before_fix": "3 of 5 reference-target regressions fail with the prior crate-prefix parser",
     "after_fix": "26 focused crosswalk tests pass",
     "limitations": "Bindings require exact compiler-observed receiver paths and pinned source; no owned/reference fallback."
-  }
+  },
+  "integrated_compiler_validation": {
+    "source_revision": "704a94fbf268d96438108f69cff4847136f44677",
+    "bindings": [
+      {
+        "path": "<&rustycad_tkernel::tcollection::ExtendedString as core::ops::arith::Add<T>>::add",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/extended_string/traits.rs",
+        "source_sha256": "d05fd8de9a1e196a965285b8336187eff91f84caa69a25e9a73e17c54c90c96b",
+        "declaration_sha256": "10eb74b31706983df868060292634f4cb1bdacbd2c8db54cc268fba4425cc263"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::<core::ops::arith::AddAssign<T>>::add_assign",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/concatenation.rs",
+        "source_sha256": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+        "declaration_sha256": "192c58ae53d49974173c5d4d112314a079cd9ed1479e986cbad3f8ec7239a1a5"
+      },
+      {
+        "path": "<&rustycad_tkernel::tcollection::AsciiString as core::ops::arith::Add<T>>::add",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/concatenation.rs",
+        "source_sha256": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+        "declaration_sha256": "f04be077c8a21e8f4bffdc10bb8edc3d76e4d680e2680f2608020ae95b2746cd"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::cat_c_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/concatenation.rs",
+        "source_sha256": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+        "declaration_sha256": "17be55ab93778f8f976a7b1cbf200e1bfd65ba17e58f20a19a52ba9faa2908d2"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::assign_cat_c_bytes",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/concatenation.rs",
+        "source_sha256": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+        "declaration_sha256": "9db619f12860427b82e4f005055780e9b8339996fb59fb56833b0972b8c99869"
+      }
+    ],
+    "inventory_sha256": "88f9c56f6d77ef487641f9f920129f94a79fa731112684f207da6b6bfe60ea45"
+  },
+  "integrated_runtime_validation": {
+    "source_revision": "704a94fbf268d96438108f69cff4847136f44677",
+    "workspace_receipt": "porting/runtime-evidence/cargo-workspace-704a94fb.json",
+    "tooling_receipt": "porting/runtime-evidence/proof-tools-704a94fb.json",
+    "foundation_receipt": "porting/runtime-evidence/base-legacy-704a94fb.json",
+    "clippy_receipt": "porting/runtime-evidence/tkernel-clippy-704a94fb.json"
+  },
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
 }

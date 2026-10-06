@@ -61,7 +61,7 @@ pub fn has_intersection<K: Debug, H: HashPolicy<K>>(map: &Map<K, H>, other: &Map
 /// map_algo::union(&mut out, &a, &b);
 /// assert!(out.contains(&1));
 /// ```
-pub fn union<K: Debug + Clone, H: HashPolicy<K> + Clone>(
+pub fn union<K: Debug + Clone, H: HashPolicy<K>>(
     result: &mut Map<K, H>,
     left: &Map<K, H>,
     right: &Map<K, H>,
@@ -72,7 +72,7 @@ pub fn union<K: Debug + Clone, H: HashPolicy<K> + Clone>(
     }
     result.clear(false);
     for key in left.iter().chain(right.iter()) {
-        result.add(key.clone());
+        result.add_ref(key);
     }
 }
 
@@ -87,7 +87,7 @@ pub fn union<K: Debug + Clone, H: HashPolicy<K> + Clone>(
 pub fn unite<K: Debug + Clone, H: HashPolicy<K>>(map: &mut Map<K, H>, other: &Map<K, H>) -> bool {
     let old_extent = map.len();
     for key in other {
-        map.add(key.clone());
+        map.add_ref(key);
     }
     old_extent != map.len()
 }
@@ -103,7 +103,7 @@ pub fn unite<K: Debug + Clone, H: HashPolicy<K>>(map: &mut Map<K, H>, other: &Ma
 /// map_algo::intersection(&mut out, &a, &b);
 /// assert!(out.contains(&1));
 /// ```
-pub fn intersection<K: Debug + Clone, H: HashPolicy<K> + Clone>(
+pub fn intersection<K: Debug + Clone, H: HashPolicy<K>>(
     result: &mut Map<K, H>,
     left: &Map<K, H>,
     right: &Map<K, H>,
@@ -119,7 +119,7 @@ pub fn intersection<K: Debug + Clone, H: HashPolicy<K> + Clone>(
         (right, left)
     };
     for key in smaller.iter().filter(|key| larger.contains(key)) {
-        result.add(key.clone());
+        result.add_ref(key);
     }
 }
 
@@ -135,7 +135,7 @@ pub fn intersection<K: Debug + Clone, H: HashPolicy<K> + Clone>(
 /// a.add(1);
 /// assert!(map_algo::intersect(&mut a, &b) && a.is_empty());
 /// ```
-pub fn intersect<K: Debug + Clone, H: HashPolicy<K> + Clone + Default>(
+pub fn intersect<K: Debug + Clone, H: HashPolicy<K> + Default>(
     map: &mut Map<K, H>,
     other: &Map<K, H>,
 ) -> bool {
@@ -174,7 +174,7 @@ pub fn subtract<K: Debug, H: HashPolicy<K>>(map: &mut Map<K, H>, other: &Map<K, 
 /// map_algo::subtraction(&mut out, &a, &b);
 /// assert!(out.contains(&1));
 /// ```
-pub fn subtraction<K: Debug + Clone, H: HashPolicy<K> + Clone>(
+pub fn subtraction<K: Debug + Clone, H: HashPolicy<K>>(
     result: &mut Map<K, H>,
     left: &Map<K, H>,
     right: &Map<K, H>,
@@ -204,7 +204,7 @@ pub fn difference<K: Debug + Clone, H: HashPolicy<K>>(
     let only_left = left.iter().filter(|key| !right.contains(key));
     let only_right = right.iter().filter(|key| !left.contains(key));
     for key in only_left.chain(only_right) {
-        result.add(key.clone());
+        result.add_ref(key);
     }
 }
 

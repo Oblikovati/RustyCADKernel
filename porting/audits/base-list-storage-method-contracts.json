@@ -1,0 +1,1411 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "NCollection_BaseList",
+    "NCollection_BaseList::Iterator"
+  ],
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "259b870a1627baa5c14d130e036c29a4dc0a5cdcbd4d5fb4cccbe940effe0c78",
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+    "crates/tkernel/src/ncollection/base_list/editing.rs": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+    "crates/tkernel/src/ncollection/base_list/splicing.rs": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+    "crates/tkernel/src/ncollection/base_list.rs": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+    "crates/tkernel/src/ncollection/base_map/link_node.rs": "f1aa0f8d2bbbc36e4e029cbb15e9e6e5fd1147b1a626abd22fef62209aa7379f",
+    "crates/tkernel/src/ncollection/list_node.rs": "7769a335aa693051809a8e824fbe3a8001e250985a134150e3abc4d61ec4cb3e",
+    "crates/tkernel/src/ncollection/mod.rs": "bd4c28cc6750d6aa2dc3ef982a6d7bfc40d8f05b9a5b1ce975976271905d6882",
+    "crates/tkernel/tests/base_list_storage_contracts/fixture.rs": "24ecbe3a88b0116aaa4aacd164ca89837ce866b65ae45ef65c8ebcd113c45fa3",
+    "crates/tkernel/tests/base_list_storage_contracts.rs": "ebdb26689afd33dc855af84a35d3374bf72f3fc4418173d6e9909d597a777291",
+    "tools/oracle/tkernel_base_list_storage_contracts.cxx": "6f565a4111547b93d5ab92bc40ee4b5c0b472d7e5aaa0b545d53a3501206fb5d",
+    "tools/oracle/tkernel_base_list_storage_contracts.expected": "6ec64eff8d2cd9ea47994da1626d2b62433588a3f4d3b566bf9859f7632f2ca7"
+  },
+  "focused_rust_passes": 69,
+  "new_tests": 14,
+  "native_oracle_rows": 19,
+  "native_original_passed": 34,
+  "original_cases_joined": [
+    {
+      "cpp": "NCollection_ListTest.DefaultConstructor",
+      "rust": "NCollection_ListTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_ListTest.Append",
+      "rust": "NCollection_ListTest__Append"
+    },
+    {
+      "cpp": "NCollection_ListTest.Prepend",
+      "rust": "NCollection_ListTest__Prepend"
+    },
+    {
+      "cpp": "NCollection_ListTest.IteratorAccess",
+      "rust": "NCollection_ListTest__IteratorAccess"
+    },
+    {
+      "cpp": "NCollection_ListTest.STLIterators",
+      "rust": "NCollection_ListTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_ListTest.RemoveFirst",
+      "rust": "NCollection_ListTest__RemoveFirst"
+    },
+    {
+      "cpp": "NCollection_ListTest.Remove",
+      "rust": "NCollection_ListTest__Remove"
+    },
+    {
+      "cpp": "NCollection_ListTest.RemoveByValue",
+      "rust": "NCollection_ListTest__RemoveByValue"
+    },
+    {
+      "cpp": "NCollection_ListTest.Clear",
+      "rust": "NCollection_ListTest__Clear"
+    },
+    {
+      "cpp": "NCollection_ListTest.Assignment",
+      "rust": "NCollection_ListTest__Assignment"
+    },
+    {
+      "cpp": "NCollection_ListTest.AssignMethod",
+      "rust": "NCollection_ListTest__AssignMethod"
+    },
+    {
+      "cpp": "NCollection_ListTest.AppendList",
+      "rust": "NCollection_ListTest__AppendList"
+    },
+    {
+      "cpp": "NCollection_ListTest.PrependList",
+      "rust": "NCollection_ListTest__PrependList"
+    },
+    {
+      "cpp": "NCollection_ListTest.InsertBefore",
+      "rust": "NCollection_ListTest__InsertBefore"
+    },
+    {
+      "cpp": "NCollection_ListTest.InsertAfter",
+      "rust": "NCollection_ListTest__InsertAfter"
+    },
+    {
+      "cpp": "NCollection_ListTest.InsertList",
+      "rust": "NCollection_ListTest__InsertList"
+    },
+    {
+      "cpp": "NCollection_ListTest.Reverse",
+      "rust": "NCollection_ListTest__Reverse"
+    },
+    {
+      "cpp": "NCollection_ListTest.STLAlgorithmCompatibility_MinMax",
+      "rust": "NCollection_ListTest__STLAlgorithmCompatibility_MinMax"
+    },
+    {
+      "cpp": "NCollection_ListTest.STLAlgorithmCompatibility_Replace",
+      "rust": "NCollection_ListTest__STLAlgorithmCompatibility_Replace"
+    },
+    {
+      "cpp": "NCollection_ListTest.OCC25348_AssignDoesNotChangeAllocator",
+      "rust": "NCollection_ListTest__OCC25348_AssignDoesNotChangeAllocator"
+    },
+    {
+      "cpp": "NCollection_ListTest.EmplaceAppend",
+      "rust": "NCollection_ListTest__EmplaceAppend"
+    },
+    {
+      "cpp": "NCollection_ListTest.EmplacePrepend",
+      "rust": "NCollection_ListTest__EmplacePrepend"
+    },
+    {
+      "cpp": "NCollection_ListTest.EmplaceBefore",
+      "rust": "NCollection_ListTest__EmplaceBefore"
+    },
+    {
+      "cpp": "NCollection_ListTest.EmplaceAfter",
+      "rust": "NCollection_ListTest__EmplaceAfter"
+    },
+    {
+      "cpp": "NCollection_ListTest.EmplaceWithMoveOnlyType",
+      "rust": "NCollection_ListTest__EmplaceWithMoveOnlyType"
+    },
+    {
+      "cpp": "NCollection_ListTest.InitializerListConstructor",
+      "rust": "NCollection_ListTest__InitializerListConstructor"
+    },
+    {
+      "cpp": "NCollection_ListTest.InitializerListConstructorEmpty",
+      "rust": "NCollection_ListTest__InitializerListConstructorEmpty"
+    },
+    {
+      "cpp": "NCollection_ListTest.Exchange",
+      "rust": "NCollection_ListTest__Exchange"
+    },
+    {
+      "cpp": "NCollection_ListTest.ExchangeWithEmpty",
+      "rust": "NCollection_ListTest__ExchangeWithEmpty"
+    },
+    {
+      "cpp": "NCollection_ListTest.MoveConstructor",
+      "rust": "NCollection_ListTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_ListTest.MoveAssignment",
+      "rust": "NCollection_ListTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_ListTest.ConstIteratorFromConstList",
+      "rust": "NCollection_ListTest__ConstIteratorFromConstList"
+    },
+    {
+      "cpp": "NCollection_ListTest.InitializerListWithCustomAllocator",
+      "rust": "NCollection_ListTest__InitializerListWithCustomAllocator"
+    },
+    {
+      "cpp": "NCollection_ListTest.ExchangeWithDifferentAllocators",
+      "rust": "NCollection_ListTest__ExchangeWithDifferentAllocators"
+    }
+  ],
+  "candidate_bindings": [
+    {
+      "cpp_id": "0e6539b81267ffbbd668f34818d287b2fcae43ba367fa7c7864bd394c3f3eddb",
+      "cpp_name": "NCollection_BaseList::Iterator::Iterator",
+      "cpp_signature": "void (const class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::new",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "a82dd5b4126ca09581bdcafb7e445471bd0e79eecb622d9efc30221dae079f99",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::default::Default>::default",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "bf1a62d10c742069a43b5197ae6510d08af30ba0f6cb6df225ed550fa35444e6",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "14ed2a681e09de734213ced62b0f40930cdfd305dfc687cb87cbd7d4f2e4a0f5",
+      "cpp_name": "NCollection_BaseList::PLast",
+      "cpp_signature": "const class NCollection_ListNode *() const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "f50388db7e546f7d92cc5886d3506f9d0e4aef1bc02e96fa1f161f52edac79a9",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "ca7d23d83d1b8cc0f339876d923837182026092aca703c6329f640cdabb28ff2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "671d00422a097715d1617c23c22d2d325dd056a673818a1ff268e33a47be6acc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "1b3652b825131481bbf4d94aff5975a16aa05e5a0f8420c0fe85076b3453cfda",
+      "cpp_name": "NCollection_BaseList::Iterator::Initialize",
+      "cpp_signature": "void (const class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::initialize",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "4bd32022991be9be87359309e69feb30c0acf03127fa8b20965742649a66364b",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "1b7cf705735e7d6025648c43186e00bbf7352b4e4e185b8b5101a95f0256b0c4",
+      "cpp_name": "NCollection_BaseList::PInsertAfter",
+      "cpp_signature": "void (class NCollection_BaseList &, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "1b419dcb1f70c8ff90cab8af79f6b2f9ec1df613dc18b66989a3132586971f7a",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "a8be20ab1b5e32f3fc725447a2461200167f596df75e8521a8be2d8dd23b4e72",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "1b9535157a92bc43dd689acac3a8614b55c05748b04cac445b991a0c10d5afba",
+      "cpp_name": "NCollection_BaseList::pRemove",
+      "cpp_signature": "void (class NCollection_BaseList::Iterator &, void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::remove",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "893e47704a0c6b349aa926b62ecf7e30875f48216c418fb766366f4bce8481ea",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "1ea4eb28cc74bffb0498a53af80854ee310c5f008b3d805650d3bf8e8881a7e5",
+      "cpp_name": "NCollection_BaseList::Iterator::operator==",
+      "cpp_signature": "bool (const class NCollection_BaseList::Iterator &) const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::cmp::PartialEq>::eq",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "b77222469fb4d9d21bb933f760af40a0a4877daf472a78781a44242b5b7092b4",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "20844eccef128ffceed30fc3a4b1a4ead6ee3a85965122110e9449d63e227445",
+      "cpp_name": "NCollection_BaseList::PAppend",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "215d4d35d2e8891e332df6aaa194a2004dd54a4f10d138703afad6e6782a5b67",
+      "cpp_name": "NCollection_BaseList::PRemove",
+      "cpp_signature": "void (class NCollection_BaseList::Iterator &, void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::remove",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "893e47704a0c6b349aa926b62ecf7e30875f48216c418fb766366f4bce8481ea",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "24c345c704681a1bf3546dd2b022c77ad735ced6c908b2ab81ac013cf50c6111",
+      "cpp_name": "NCollection_BaseList::Size",
+      "cpp_signature": "unsigned long () const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::size",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "2d7dec7249c3227cab8d641dc51118e759dd4b74afb7c8bfca1e01a5e3418a6f",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "25a12e2aa1a5cd0cd51bf667a26eae866295b15c1c9d0e045629867c7d12400d",
+      "cpp_name": "NCollection_BaseList::Length",
+      "cpp_signature": "int () const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::length",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "fbc2d3080963a5658889ff1c98f997d7e0f2668c8f38fabd9431f19e5b0f8d20",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::length",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "320a37f08d954e91e15f39ab3c8120cf7848a7971af244c80a4c94aba31fcffb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "2bf6a0f1f16d5e15a73cd623e2c37c9b0cb1c2c959b16251ad0769560d342f9a",
+      "cpp_name": "NCollection_BaseList::PInsertBefore",
+      "cpp_signature": "void (class NCollection_BaseList &, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "8b674a5dd790b1f0051f5c18ecec51bad4577d6f118002ee4057b7d72975da54",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "d5a77ff4a5f7689465a2bbeff74d6bba1fdb632580a1b6f94642c627cf8c0dd2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "2f0c0d2ecb788f6aac318f846cdf483747b8db8a293287829b907c02b3ad3279",
+      "cpp_name": "NCollection_BaseList::myLast",
+      "cpp_signature": "class NCollection_ListNode *",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "f50388db7e546f7d92cc5886d3506f9d0e4aef1bc02e96fa1f161f52edac79a9",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "ca7d23d83d1b8cc0f339876d923837182026092aca703c6329f640cdabb28ff2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "34e80c090961fd21a717a6580ee187a9284c71a2eb40336c0461be85eac11e02",
+      "cpp_name": "NCollection_BaseList::IsEmpty",
+      "cpp_signature": "bool () const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::is_empty",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "77d1fd63204d0afcb661cffc17e863428e1b8bccbdd60f19ee51ffa39f917a09",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "37f858d2433f932fb517616ffe416bf36a7f51894b45ed5abf3a83644a1a8538",
+      "cpp_name": "NCollection_BaseList::pAppend",
+      "cpp_signature": "void (class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "38eecf92b661171f59e87b1660405a69dbbefba0cd3765bae78dfd041febc506",
+      "cpp_name": "NCollection_BaseList::Iterator::myPrevious",
+      "cpp_signature": "class NCollection_ListNode *",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::previous",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "7d652832e824a820752c490d5cad821ce373d2b11be16ef3d1dc7108f5e370e9",
+          "kind": "struct_field"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "3c157e7faf2ed0cc368bf72ce21f62ea1e87d17f7173485a49fd4b34ffffb684",
+      "cpp_name": "NCollection_BaseList::Iterator::Iterator",
+      "cpp_signature": "void () noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::new",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "a82dd5b4126ca09581bdcafb7e445471bd0e79eecb622d9efc30221dae079f99",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::default::Default>::default",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "bf1a62d10c742069a43b5197ae6510d08af30ba0f6cb6df225ed550fa35444e6",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "43fdd6cf32c948e21391bc064a187a33ca189a6c541a0d32aecc38143a9fdc0d",
+      "cpp_name": "NCollection_BaseList::PReverse",
+      "cpp_signature": "void () noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::reverse",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "330b9b0f4dc615cbcdef67d9ea68f43d174810aa6b96bf71f8062ffa71fb08eb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "47f24025656bf9d85b2b4f894f59f3930cd424ae910fef52aa227e1bdf91cf9d",
+      "cpp_name": "NCollection_BaseList::pAppend",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "4c8f01e5f4c443aa45ca306c5526c6655734ad6e80a5f2ff03b58a194c432b7e",
+      "cpp_name": "NCollection_BaseList::Iterator::Init",
+      "cpp_signature": "void (const class NCollection_BaseList &, class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::init",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "04460201eaba0e5b21490cb70a7b11f00771fdc117ed567ac2bb5a58344abfe7",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::init_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "02e7a43c1b2f9530e444c86fb2dab23a079b563718a55c4125b73d8687bfb8e2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "4de464feb13a23f5fea97b8db2e857f0a36a820a17ac46cf79308dadcc9d1983",
+      "cpp_name": "NCollection_BaseList::Allocator",
+      "cpp_signature": "const class opencascade::handle<class NCollection_BaseAllocator> &() const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "8dfdf34204157a4b870a419e5aca78587d12bc0c543913ef3375d8f8e1385624",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "1db48c7d90d8063ea7ac71124cde24753fe5e291ac19854c0cee756af7392dfb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "56e89ebe213f8c3ed3e0012100665cf30ec0141e289ad158ae54f7a7f5bd4dd0",
+      "cpp_name": "NCollection_BaseList::Iterator::myCurrent",
+      "cpp_signature": "class NCollection_ListNode *",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::current",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "39f5184184b8d9e4f00ef2af58a0a969ecc2bde22fdc081a396fbab83708e118",
+          "kind": "struct_field"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "59eca276bba8ed85fd17128ce68680afcac8c271eed4f0ee3919d2e494336695",
+      "cpp_name": "NCollection_BaseList::pReverse",
+      "cpp_signature": "void () noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::reverse",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "330b9b0f4dc615cbcdef67d9ea68f43d174810aa6b96bf71f8062ffa71fb08eb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "5a78f9f115237a98b5ebbaa7b781581c08db24fea30192c369cf5a42f04238ba",
+      "cpp_name": "NCollection_BaseList::PInsertAfter",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "1b419dcb1f70c8ff90cab8af79f6b2f9ec1df613dc18b66989a3132586971f7a",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "a8be20ab1b5e32f3fc725447a2461200167f596df75e8521a8be2d8dd23b4e72",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "5aed45f4dff7bfd2ff5c25457b31cec26ca85374218a658a3415ddd8d543ac9b",
+      "cpp_name": "NCollection_BaseList::PFirst",
+      "cpp_signature": "const class NCollection_ListNode *() const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "abd8f8f8b2474f640201ca8195d6c9983654fe767de4804aa5b8adc0845279c2",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "9f9867a31b13fe72f16861cb6f756caff84508e7c49b41964f372b80c54ac35b",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "e37502c5b251fc24dbf50d120c68aa39cdb83e58a99022b74fb05aef91682752",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "69eaaa83a113b74729113a9b6743bfe33afca2b7661cb00d76af8bd8e459879f",
+      "cpp_name": "NCollection_BaseList::pLast",
+      "cpp_signature": "class NCollection_ListNode *() noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "f50388db7e546f7d92cc5886d3506f9d0e4aef1bc02e96fa1f161f52edac79a9",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "ca7d23d83d1b8cc0f339876d923837182026092aca703c6329f640cdabb28ff2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "671d00422a097715d1617c23c22d2d325dd056a673818a1ff268e33a47be6acc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "6c0ac6377a322973b9bd2f293c27e9e201696b821bbedfda3e9d7a7d21a7801e",
+      "cpp_name": "NCollection_BaseList::pFirst",
+      "cpp_signature": "const class NCollection_ListNode *() const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "abd8f8f8b2474f640201ca8195d6c9983654fe767de4804aa5b8adc0845279c2",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "9f9867a31b13fe72f16861cb6f756caff84508e7c49b41964f372b80c54ac35b",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "e37502c5b251fc24dbf50d120c68aa39cdb83e58a99022b74fb05aef91682752",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "8f523a4018dc4094bd8f71cae1ec975590d427ea5c2a70b4f8e11a41ceda68f2",
+      "cpp_name": "NCollection_BaseList::myLength",
+      "cpp_signature": "unsigned long",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::length",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "fbc2d3080963a5658889ff1c98f997d7e0f2668c8f38fabd9431f19e5b0f8d20",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::length",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "320a37f08d954e91e15f39ab3c8120cf7848a7971af244c80a4c94aba31fcffb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "90fc6657330973ded96f0390f98205ac57f1479ab5c5ddab61ef6f2207fe8737",
+      "cpp_name": "NCollection_BaseList::PClear",
+      "cpp_signature": "void (void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::clear",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "5d900a0e343a84d0aa10e1ca5705ffb3e5f1461d56768ae3ba134449e77d88cc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "917ef0c7a53a838b766269c5d9f7829982c6506d4d53f3b3eafc4727cbdb4d18",
+      "cpp_name": "NCollection_BaseList::myFirst",
+      "cpp_signature": "class NCollection_ListNode *",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "abd8f8f8b2474f640201ca8195d6c9983654fe767de4804aa5b8adc0845279c2",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "9f9867a31b13fe72f16861cb6f756caff84508e7c49b41964f372b80c54ac35b",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "96452178b27722d50975fafeb360c54269b6a56e01db8068e23f66b47fa8a8ce",
+      "cpp_name": "NCollection_BaseList::PPrepend",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "63c8682fc3b274d4394f626269dd686d7f82f187940dbe395b7d2433a3c94358",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "2da626e267e392627cddf81edc0952813b3d79539506d85599e54f698da1230d",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "9e89d9326bc1ead85710b3600a5371e3925e57458a95117932b0dfc870cf0b85",
+      "cpp_name": "NCollection_BaseList::PRemoveFirst",
+      "cpp_signature": "void (void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::remove_first",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "88cfe80fce9de19fc39cf60f09c3e528eecefca6dd8713b42b8af58dcf59ca0c",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "9f6e6f0f8f7591f55bd58e80778deb14b48505840008c1b506a1093b4b7237cf",
+      "cpp_name": "NCollection_BaseList::myAllocator",
+      "cpp_signature": "class opencascade::handle<class NCollection_BaseAllocator>",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "8dfdf34204157a4b870a419e5aca78587d12bc0c543913ef3375d8f8e1385624",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "1db48c7d90d8063ea7ac71124cde24753fe5e291ac19854c0cee756af7392dfb",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "a2fe2ce5ac0e9b3c884d8b3f3b1876e17e23b15c77b09417e07c69b2ebb03040",
+      "cpp_name": "NCollection_BaseList::PInsertBefore",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "8b674a5dd790b1f0051f5c18ecec51bad4577d6f118002ee4057b7d72975da54",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "d5a77ff4a5f7689465a2bbeff74d6bba1fdb632580a1b6f94642c627cf8c0dd2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "a363aa22f821b5769b409967850340e811c409bd373777e42b70e5176de99248",
+      "cpp_name": "NCollection_BaseList::pPrepend",
+      "cpp_signature": "void (class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "63c8682fc3b274d4394f626269dd686d7f82f187940dbe395b7d2433a3c94358",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "2da626e267e392627cddf81edc0952813b3d79539506d85599e54f698da1230d",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "a7adbcac11272c3263fb9b6a6d0af9856eb401f2bd846341938de785aec2efa0",
+      "cpp_name": "NCollection_BaseList::PPrepend",
+      "cpp_signature": "void (class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "63c8682fc3b274d4394f626269dd686d7f82f187940dbe395b7d2433a3c94358",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "2da626e267e392627cddf81edc0952813b3d79539506d85599e54f698da1230d",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "afed48a608b2e26ff886bb65947750d6be359705335797e34b19556b1e6212b1",
+      "cpp_name": "NCollection_BaseList::NCollection_BaseList",
+      "cpp_signature": "void (const class opencascade::handle<class NCollection_BaseAllocator> &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::new",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "ed62d36da3f08eda8bd32639033a0b82f0b67aca9b2908c476b304a7f57952f4",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::<core::default::Default>::default",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "aea523357405c11a872accbee956c0ee07835511be23e111366bdbe53921bcfc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "b2401f5c456f1093b939ccd14210f16c96524bd7176c809bfe3776e37f8c16e1",
+      "cpp_name": "NCollection_BaseList::pAppend",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "b81c52473d3cfb3e02221c396617533d53dfd511dc7bfa45f56c9ec1046365d1",
+      "cpp_name": "NCollection_BaseList::PExchange",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::exchange",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "087ffc5cdff3c8d06aa9b2e1fa1ee1cd78a0e116dd7d3633ead7fad59b5e3764",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "ba50011d56bcbe540bad55e60e743a6147e5e33797f3228d62b18f8efdb8d29d",
+      "cpp_name": "NCollection_BaseList::Iterator::Init",
+      "cpp_signature": "void (const class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::init",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "04460201eaba0e5b21490cb70a7b11f00771fdc117ed567ac2bb5a58344abfe7",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::init_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "02e7a43c1b2f9530e444c86fb2dab23a079b563718a55c4125b73d8687bfb8e2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "bade5992fd830e52cbef21aa71591ef86ac34c50d4b316d6e4823c5f706df5a5",
+      "cpp_name": "NCollection_BaseList::pInsertBefore",
+      "cpp_signature": "void (class NCollection_BaseList &, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "8b674a5dd790b1f0051f5c18ecec51bad4577d6f118002ee4057b7d72975da54",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "d5a77ff4a5f7689465a2bbeff74d6bba1fdb632580a1b6f94642c627cf8c0dd2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "bb3531a533b266871f8d6e4540b9edf2d3e37f94d29ef8d367e7016355f888ae",
+      "cpp_name": "NCollection_BaseList::pInsertBefore",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "8b674a5dd790b1f0051f5c18ecec51bad4577d6f118002ee4057b7d72975da54",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "d5a77ff4a5f7689465a2bbeff74d6bba1fdb632580a1b6f94642c627cf8c0dd2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "bbdd48f3e8784088381b11c72257b97da486c64149dec486fed38682f7937cf2",
+      "cpp_name": "NCollection_BaseList::pInsertAfter",
+      "cpp_signature": "void (class NCollection_BaseList &, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "1b419dcb1f70c8ff90cab8af79f6b2f9ec1df613dc18b66989a3132586971f7a",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "a8be20ab1b5e32f3fc725447a2461200167f596df75e8521a8be2d8dd23b4e72",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "c2d34d4c261d03ac561e325d65f45917825be29e97bcc11c9fe23e546e94a368",
+      "cpp_name": "NCollection_BaseList::PAppend",
+      "cpp_signature": "void (class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "d07c339f7869fe0440be0d3330a93aad911e7d0a71e9bc9092b8c854401c2e09",
+      "cpp_name": "NCollection_BaseList::Iterator::IsEqual",
+      "cpp_signature": "bool (const class NCollection_BaseList::Iterator &) const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::is_equal",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "aff7a2d6fd55ee81e7271963b941d64039f1ac99be93e1b3d7a92db7825f4714",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "d590f154a7582f86d86f69473bd6ec089406c63df3675db2ea5c5d1a2992ec42",
+      "cpp_name": "NCollection_BaseList::pInsertAfter",
+      "cpp_signature": "void (class NCollection_ListNode *, class NCollection_BaseList::Iterator &)",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "1b419dcb1f70c8ff90cab8af79f6b2f9ec1df613dc18b66989a3132586971f7a",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "a8be20ab1b5e32f3fc725447a2461200167f596df75e8521a8be2d8dd23b4e72",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "d9a78c0cc8b1cb6dc7e6bb337bc3b2cd826358d41bfbc2935d208d08bdbd500d",
+      "cpp_name": "NCollection_BaseList::Extent",
+      "cpp_signature": "int () const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::extent",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "e728820b3ebde54e8d032ddfb0c4bd29eab4b1d945ffefe361c112c1247153ca",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "dc204a00236b0a1a10bce9c91688616f9b211d10f6df0b6b50c5ab7ddf1175d2",
+      "cpp_name": "NCollection_BaseList::Iterator::init",
+      "cpp_signature": "void (const class NCollection_BaseList &, class NCollection_ListNode *) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::init_after",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "02e7a43c1b2f9530e444c86fb2dab23a079b563718a55c4125b73d8687bfb8e2",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "dd0bd7fdb2b17411a77da251bff5d5dc0f4eb6e4750190598ab6dbfb7b6305c7",
+      "cpp_name": "NCollection_BaseList::pLast",
+      "cpp_signature": "const class NCollection_ListNode *() const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "f50388db7e546f7d92cc5886d3506f9d0e4aef1bc02e96fa1f161f52edac79a9",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "ca7d23d83d1b8cc0f339876d923837182026092aca703c6329f640cdabb28ff2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "671d00422a097715d1617c23c22d2d325dd056a673818a1ff268e33a47be6acc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "e0da692163b740547ccbe7baa62745d297aac5d320d33da8bb45140a81c66297",
+      "cpp_name": "NCollection_BaseList::pClear",
+      "cpp_signature": "void (void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::clear",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "5d900a0e343a84d0aa10e1ca5705ffb3e5f1461d56768ae3ba134449e77d88cc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "e4861484a6fce9eafda8c5324d9d3879bd00fcfcdb8f364d22b2527b9f95cf84",
+      "cpp_name": "NCollection_BaseList::pExchange",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::exchange",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "087ffc5cdff3c8d06aa9b2e1fa1ee1cd78a0e116dd7d3633ead7fad59b5e3764",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "ea4a8aa6dc72e19ff36071c9940ec5f9a76789c7dddcfcb59372cd68b1daf54b",
+      "cpp_name": "NCollection_BaseList::pPrepend",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "63c8682fc3b274d4394f626269dd686d7f82f187940dbe395b7d2433a3c94358",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "2da626e267e392627cddf81edc0952813b3d79539506d85599e54f698da1230d",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "ede67c30076c810ee4a7af8f2fb39f5a8b70b6ba171727a3161268218dbdd99d",
+      "cpp_name": "NCollection_BaseList::Iterator::More",
+      "cpp_signature": "bool () const noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListRawIterator::more",
+          "source_file": "crates/tkernel/src/ncollection/base_list/cursor.rs",
+          "source_sha256": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+          "declaration_sha256": "bb6cdc435f62e43bff2fe7cf8ee03465d3eb66a30ade4615430d51051ba5f529",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "f0c066e7e133788c8f6180f22c3788c68efd31f1a86a0cd21b26b2820c8d7f00",
+      "cpp_name": "NCollection_BaseList::pFirst",
+      "cpp_signature": "class NCollection_ListNode *() noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "abd8f8f8b2474f640201ca8195d6c9983654fe767de4804aa5b8adc0845279c2",
+          "kind": "struct_field"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "9f9867a31b13fe72f16861cb6f756caff84508e7c49b41964f372b80c54ac35b",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first_mut",
+          "source_file": "crates/tkernel/src/ncollection/base_list.rs",
+          "source_sha256": "25613b829ed8807ade4bf109bdce5939440cd74d4816620b3834ae0825d4d3e8",
+          "declaration_sha256": "e37502c5b251fc24dbf50d120c68aa39cdb83e58a99022b74fb05aef91682752",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "fafc5dd60bb825d009c257ce54ab5d8d5a900ca9ebe8642e7c5544cb225ec058",
+      "cpp_name": "NCollection_BaseList::PAppend",
+      "cpp_signature": "void (class NCollection_BaseList &) noexcept",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "593e3a954d7fa96ccb538de681721633f4be9743ac6a95d35db8f0d6926752b9",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "89f343960f7d1534e4c7ff01843e0db14d8c9cc35c589c25c7f65e3502f17ec2",
+          "kind": "function"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+          "source_file": "crates/tkernel/src/ncollection/base_list/splicing.rs",
+          "source_sha256": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+          "declaration_sha256": "f376994ebffced5f11717307b7c076acfe9a6f775ac63212a779d93bfa6d49dc",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    },
+    {
+      "cpp_id": "feefdd6435e0b0920a84f8239f05fa9478e76cdf8e45af503df4106f5249084e",
+      "cpp_name": "NCollection_BaseList::pRemoveFirst",
+      "cpp_signature": "void (void (*)(class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &))",
+      "inventory_api_visible": true,
+      "rust_candidates": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::remove_first",
+          "source_file": "crates/tkernel/src/ncollection/base_list/editing.rs",
+          "source_sha256": "6aeed51a09a1a08501dc3f24bb857c53b6e3960d75381975e3ff14b4f8c9346f",
+          "declaration_sha256": "88cfe80fce9de19fc39cf60f09c3e528eecefca6dd8713b42b8af58dcf59ca0c",
+          "kind": "function"
+        }
+      ],
+      "status": "partial_compiler_resolved_candidate"
+    }
+  ],
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/base-list-storage-rust.gz",
+      "sha256": "691b94fa8f744e0f40cf5981b1c737f1488da220eea2ecda641591759d2117aa"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/base-list-storage-native.gz",
+      "sha256": "9d958e72e30f6b48310a74177e40d09891ebf06c8f790f51025d98f0c4e71b33"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/base-list-storage-source.tar.gz",
+      "sha256": "2496d34f03f9fe2dbca24f291e0ecd9a4a844fe95a76ab04fdfb5304b90f9149"
+    }
+  },
+  "method_changes": [
+    "Raw first/last/count/allocator engine, matching native IsEmpty vs count distinction and unsigned counts",
+    "Allocator-preserving whole-chain append/prepend/insert transfer, explicit self-splice no-op",
+    "Native output-cursor predecessor transitions for append/insert-before/removal; null predecessor initialization selects tail",
+    "Clear/removal callbacks receive writable allocator reference and cache next before deletion",
+    "Node reversal and full allocator/endpoints/count exchange",
+    "Protected state fields are public for Rust composition; pointer dereference operations explicitly unsafe",
+    "Native DelListNode type is represented by unsafe function pointer; closures adapt callback context"
+  ],
+  "validation_scope": "Native19-row fixture and14 supplemental tests, with34 inherited List regressions. Final shared checkpoint binds current source/compiler/Miri/worldspace logs; this scoped normal run preceded test-only Clippy cleanup.",
+  "remaining_partial_contracts": [
+    "Existing typed List still uses its owned-node chain rather than this raw BaseListStorage engine.",
+    "Generic BaseList::BasicIterator custom node adapters remain separate from typed List iterator facade.",
+    "Language drop glue has no explicit native destructor-to-Rust body mapping yet; copied base storage and allocation macros require separate audits.",
+    "Unsafe raw operations require native valid-node/exclusive-link contracts; error messages add offending-state context.",
+    "Native invalid-position insertion can leave caller-owned nodes unlinked; this raw layer does not assume their destruction.",
+    "All protected/capitalized wrappers map to consolidated Rust methods; dependent template/configuration closure remains incomplete."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

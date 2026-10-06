@@ -4,6 +4,13 @@ use crate::standard::Failure;
 pub trait HashKey {
     /// Returns the native-width hash used by NCollection.
     fn occt_hash(&self) -> usize;
+    /// Native `std::equal_to` dispatch, independently of Rust operators; `first.occt_equal(&second)`.
+    fn occt_equal(&self, other: &Self) -> bool
+    where
+        Self: PartialEq,
+    {
+        self == other
+    }
 }
 /// Combined hash/equality policy; implement both methods for stateful key semantics.
 pub trait HashPolicy<K> {
@@ -20,7 +27,7 @@ impl<K: HashKey + PartialEq> HashPolicy<K> for DefaultHashPolicy {
         key.occt_hash()
     }
     fn equal(&self, first: &K, second: &K) -> bool {
-        first == second
+        first.occt_equal(second)
     }
 }
 macro_rules! integer_hash {
@@ -80,16 +87,50 @@ impl<T> HashKey for *mut T {
     }
 }
 
-// libstdc++ hash<double> in the pinned Linux oracle profile; signed zeros share a bucket.
+// libstdc++ hash<float/double> in the pinned Linux oracle profile; signed zeros share a bucket.
+impl HashKey for f32 {
+    fn occt_hash(&self) -> usize {
+        if *self == 0.0 {
+            return 0;
+        }
+        libstdcpp_float_bytes(&self.to_ne_bytes())
+    }
+}
 impl HashKey for f64 {
     fn occt_hash(&self) -> usize {
         if *self == 0.0 {
             return 0;
         }
-        if usize::BITS == 64 {
-            crate::standard::hashing::murmur64(&self.to_ne_bytes(), 0xc70f_6907) as usize
-        } else {
-            crate::standard::hashing::murmur32(&self.to_ne_bytes(), 0xc70f_6907) as usize
-        }
+        libstdcpp_float_bytes(&self.to_ne_bytes())
     }
+}
+
+fn libstdcpp_float_bytes(bytes: &[u8]) -> usize {
+    if usize::BITS == 64 {
+        crate::standard::hashing::murmur64(bytes, 0xc70f_6907) as usize
+    } else {
+        crate::standard::hashing::murmur32(bytes, 0xc70f_6907) as usize
+    }
+}
+
+/// Selects OCCT's `static_cast<size_t>` enum hashing for fieldless `Copy` enums.
+/// Equality uses the enum's `PartialEq`, as native enum keys use `operator==`.
+///
+/// ```
+/// use rustycad_tkernel::{impl_enum_hash_key, ncollection::HashKey};
+/// #[derive(Clone, Copy, PartialEq)]
+/// #[repr(i32)]
+/// enum Direction { Reverse = -1, Forward = 1 }
+/// impl_enum_hash_key!(Direction);
+/// assert_eq!(Direction::Reverse.occt_hash(), usize::MAX);
+/// ```
+#[macro_export]
+macro_rules! impl_enum_hash_key {
+    ($($enum_type:ty),+ $(,)?) => {
+        $(impl $crate::ncollection::HashKey for $enum_type {
+            fn occt_hash(&self) -> usize {
+                *self as usize
+            }
+        })+
+    };
 }

@@ -149,7 +149,9 @@ impl GeomFillProfiler {
     /// `poles`; `profiler.weights(1, &mut weights)?`.
     pub fn weights(&self, index: i32, weights: &mut Array1<'_, f64>) -> Result<(), Failure> {
         let curve: &GeomBSplineCurve = self.checked_curve(index, weights.len(), "Weights")?;
-        curve.weights_array(|stored| weights.assign(stored));
+        curve.weights_array(|stored| {
+            weights.assign(stored);
+        });
         Ok(())
     }
     /// `NbKnots()`: StdFail_NotDone before `Perform`; `profiler.nb_knots()?`.

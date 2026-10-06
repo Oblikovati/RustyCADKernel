@@ -1,0 +1,118 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Sequence allocator-before-construction and copy-failure prefix behavior; safe BaseSequence BasicIterator facade",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/base_iterator.rs": "f2fa5fd6960128eccfd1631aff1f5f0c74a70be98ddf47f4b8f6a2d1dbe3b6e8",
+    "crates/tkernel/src/ncollection/sequence/borrowed.rs": "89d3d87816b2026b09a3a313bc73f58481dc86abf57fe99b6cc9805ecc69d04b",
+    "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs": "9657c9fa26907959ff3b14c6dc2067c82baeab29721be9f4a8f66279666940a3",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "5a1ca37c2b2ec17267a9c4b40e9c5b92f70b49cde5eaefe021d921d4326cab95",
+    "crates/tkernel/src/ncollection/sequence/iteration.rs": "c176261afc9a2ce662f12457107dc6a2c35c045347f534bd6aa5d812dbd6fad7",
+    "crates/tkernel/src/ncollection/sequence/method_contracts.rs": "de6e4f4d8a487f4a2fb11ea91e6f0034468e2867870c6d2b52c7d7fc7134e117",
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "dfea129e8c6ea8a6b73610ae59034bd09adfd8795e366e7c9f885d69f336d2c9",
+    "crates/tkernel/src/ncollection/sequence/signed_indices.rs": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+    "crates/tkernel/src/ncollection/sequence.rs": "290a99b2492cbf24928324925ca5e9b2f2e7d23eaf259b6129370511398fa445",
+    "crates/tkernel/tests/base_sequence_method_contracts.rs": "02e8bcff6be5502dbd60c8eff73df6f5c9a661d8f956744bd1cc2849fad9574d",
+    "crates/tkernel/tests/fixtures/array1_mt19937_seed1.txt": "7c507148cfaa6b80177f074278a9fdfb9bab553fb2a8dd99c042eb65b0357936",
+    "crates/tkernel/tests/ncollection_allocator_views_behavior.rs": "1d7a8fef68aa62f4af177068f1a3ad048a6a582c6476c453363c90fce0c56cbf",
+    "crates/tkernel/tests/ncollection_lists_api_behavior.rs": "9f93cb973cfd3013b617c901e1ac530be8782cd502c595e69917aa5e156ac3c0",
+    "crates/tkernel/tests/ncollection_sequence/basic.rs": "c0c63588a51960ceb74d351aa47c7d05dcf2ed817395cc4fd7c169d4fce82d4b",
+    "crates/tkernel/tests/ncollection_sequence/emplacement.rs": "3218d958eec525f754efd070df3552311e6d3156c6ed166e906b3d1655aabb86",
+    "crates/tkernel/tests/ncollection_sequence/ownership.rs": "ac47a07fc0bbe3f25f7b91c14775b0b4842d5baa62dc6126d21a99211daeeb7c",
+    "crates/tkernel/tests/ncollection_sequence.rs": "70d9a0110b130bba4e359c475fbffabf2955dd5d151563210fe640ff2d194c01",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs": "6be15c5d34e5d369c4738fa7513cac13cd2d13951faa841f489983b6dcc508ec",
+    "tools/oracle/tkernel_base_sequence_method_contracts.cxx": "ee66c32f59567e48fa3aa37dbfad2a5de1aa46d51db46574a8004d03c9a22cc3",
+    "tools/oracle/tkernel_base_sequence_method_contracts.expected": "fd190b0c350d9768ad4d62a0cac3bd24f5f77ca56869df95dede9d1f903b65d0"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-sequence-method-source.tar.gz": "eec3bf1c6793ce862ce373d1f625aaca128cd7f7a54738d0b95d68093933344b",
+    "porting/runtime-evidence/base-sequence-method-rust.log.gz": "e4790763d93c86c616b30daacd8872f8a35cebbb49109ad34f398406cf11aadf",
+    "porting/runtime-evidence/base-sequence-method-native.log.gz": "61f422e76b074ede761e009580ee6cd365ee601eb683807abedb7f275e668966",
+    "porting/runtime-evidence/base-sequence-method-miri.log.gz": "219893dd266acb315e5c1fd37421d2a65dcd62897c38fb61c60a98bf818af95d",
+    "porting/runtime-evidence/base-sequence-method-oracle.log.gz": "03d11e2327064936f9a996682a3577f7a5d0de5e4fb7ad78617892264983c2cd"
+  },
+  "source_scope": "Owned method sources and tests captured after successful run; full dependency/build input closure was not captured. Shared backend files included.",
+  "compiler_body_binding_performed": false,
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "class_status": "partial",
+  "methods": [
+    "Sequence::EmplaceAppend/Prepend/After(index)/Before/After(iterator) allocate before constructing",
+    "Sequence::Append/Prepend/InsertAfter/InsertBefore borrowed item paths allocate before Clone",
+    "Sequence::Assign and cross-allocator Append/Prepend/InsertAfter preserve successful prefix on copy failure",
+    "BaseSequence::Size native unsigned count",
+    "BaseSequence::Iterator CurrentNode/PreviousNode opaque identity accessors",
+    "BaseSequence::BasicIterator constructors, CopyTo, both const conversions/assignments, equality, dereference/arrow, prefix/postfix movement, Init/Initialize and mutable-node identity"
+  ],
+  "runtime": {
+    "rust_passed": 66,
+    "group_passes": [
+      13,
+      9,
+      14,
+      20,
+      10
+    ],
+    "original_native_rust_names": [
+      "NCollection_SequenceTest.AdvancedOperations",
+      "NCollection_SequenceTest.AllocatorTest",
+      "NCollection_SequenceTest.BasicFunctions",
+      "NCollection_SequenceTest.CombiningSequences",
+      "NCollection_SequenceTest.ComplexTypeSequence",
+      "NCollection_SequenceTest.CopyAndAssignment",
+      "NCollection_SequenceTest.EmplaceAfterIndex",
+      "NCollection_SequenceTest.EmplaceAfterIterator",
+      "NCollection_SequenceTest.EmplaceAppend",
+      "NCollection_SequenceTest.EmplaceBeforeIndex",
+      "NCollection_SequenceTest.EmplacePrepend",
+      "NCollection_SequenceTest.EmplaceWithMoveOnlyType",
+      "NCollection_SequenceTest.IteratorFunctions",
+      "NCollection_SequenceTest.ModifyingOperations",
+      "NCollection_SequenceTest.MoveOperations",
+      "NCollection_SequenceTest.OCC26448_PrependEmptySequence",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_MinMax",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_Replace",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_Reverse",
+      "NCollection_SequenceTest.StandardIteratorContract"
+    ],
+    "original_native_rust_name_join": true,
+    "commands_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "rust_command": "cargo test --locked -p rustycad-tkernel --test base_sequence_method_contracts --test ncollection_sequence --test ncollection_lists_api_behavior --test ncollection_allocator_views_behavior --test shared_collection_method_contracts -- --test-threads=1",
+    "native_filter": "NCollection_SequenceTest.*",
+    "miri_passed": 13,
+    "miri_exit_code": 0,
+    "miri_command": "cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test base_sequence_method_contracts -- --test-threads=1",
+    "native_oracle_rows": 12,
+    "native_oracle_compile_run_diff_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "cargo_environment": {
+      "PATH_prefix": "/home/vmiguel/.cargo/bin",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "CARGO_BUILD_JOBS": "2",
+      "CARGO_TARGET_DIR": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target"
+    },
+    "miri_target_dir": "/tmp/rustycad-class-method-miri",
+    "oracle_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_base_sequence_method_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_base_sequence_method_contracts && /tmp/tkernel_base_sequence_method_contracts > /tmp/base-sequence-method-oracle.log && diff -u tools/oracle/tkernel_base_sequence_method_contracts.expected /tmp/base-sequence-method-oracle.log"
+  },
+  "limitations": [
+    "BaseSequence raw SeqNode constructors/link mutation, custom deletion callbacks and protected type-erased node algorithms remain unported; this is a typed safe iterator adaptation, not a complete BaseSequence port.",
+    "Native node addresses are exposed as opaque identity tokens; values require a supplied collection borrow and live-node membership. Unsafe link mutation and aliased mutable references are not reproduced.",
+    "Sequence uses stable allocated nodes ordered by Vec; native linked-list allocation layout, cached-index fields, performance and allocator-failure effects of bookkeeping storage remain different.",
+    "Custom native move/copy-assignment/destructor hooks are not fully represented by Rust move/Clone/Drop.",
+    "All 20 original Sequence declarations were joined by exact passing names in this scoped run; no standalone BaseSequence GTest declarations were found or credited.",
+    "The archive includes owned Sequence sources and listed regression tests, not full build dependency closure; shared ncollection export and allocator implementation are outside this owned archive.",
+    "Global declaration inventory binding and full API parity remain pending."
+  ]
+}

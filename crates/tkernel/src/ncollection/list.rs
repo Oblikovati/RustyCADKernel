@@ -15,17 +15,20 @@ pub struct List<T> {
 /// Detached node position, usable across insertions; `list.cursor().value(&list)`.
 ///
 /// `ListCursor::default()` is the end position, like a default `NCollection_List::Iterator`.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default)]
 pub struct ListCursor {
     address: Option<usize>,
+    previous: Option<usize>,
 }
 /// Forward shared iterator; `list.iter()`.
 pub struct ListIter<'a, T> {
     next: Option<&'a Node<T>>,
+    previous: Option<usize>,
 }
 /// Forward exclusive iterator; `list.iter_mut()`.
 pub struct ListIterMut<'a, T> {
     next: Option<&'a mut Node<T>>,
+    previous: Option<usize>,
 }
 impl<T> List<T> {
     /// Creates an empty list with the chosen resource; `List::<i32>::with_allocator(arena)`.
@@ -84,30 +87,35 @@ impl<T> List<T> {
     pub fn iter(&self) -> ListIter<'_, T> {
         ListIter {
             next: self.head.as_deref(),
+            previous: None,
         }
     }
     /// Borrows exclusive elements in chain order; `list.iter_mut().for_each(|v| *v += 1)`.
     pub fn iter_mut(&mut self) -> ListIterMut<'_, T> {
         ListIterMut {
             next: self.head.as_deref_mut(),
+            previous: None,
         }
     }
     /// Returns a stable position at the head; `let mut cursor = list.cursor()`.
     pub fn cursor(&self) -> ListCursor {
         ListCursor {
             address: address(&self.head),
+            previous: None,
         }
     }
     /// Appends a freshly allocated node; `*list.append(42) == 42`.
     pub fn append(&mut self, value: T) -> &mut T {
-        let node = self.resource.allocate_value(Node { value, next: None });
-        self.count += 1;
-        &mut find_link(&mut self.head, None).insert(node).value
+        self.emplace_append(|| value)
     }
     /// Prepends a freshly allocated node; `*list.prepend(42) == 42`.
     pub fn prepend(&mut self, value: T) -> &mut T {
-        let node = self.resource.allocate_value(Node {
-            value,
+        self.prepend_with(|| value)
+    }
+    /// Allocates before constructing the head value, preserving native placement-new order; `list.prepend_with(|| 42)`.
+    pub fn prepend_with(&mut self, construct: impl FnOnce() -> T) -> &mut T {
+        let node = self.resource.allocate_value_with(|| Node {
+            value: construct(),
             next: self.head.take(),
         });
         self.count += 1;
@@ -174,8 +182,9 @@ impl<T> List<T> {
         std::mem::replace(source, kept)
     }
     /// Replaces this list and its allocator with the source's nodes; `list.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         *self = Self::move_from(source);
+        self
     }
     /// Allocator-container spelling of append; `list.push_back(42)`.
     pub fn push_back(&mut self, value: T) {
@@ -186,12 +195,15 @@ impl<T> List<T> {
         self.first()
     }
 }
-impl<T: PartialEq> List<T> {
+impl<T> List<T> {
     /// Removes the first equal value; `list.remove_value(&42)`.
-    pub fn remove_value(&mut self, value: &T) -> bool {
+    pub fn remove_value<Q: ?Sized>(&mut self, value: &Q) -> bool
+    where
+        T: PartialEq<Q>,
+    {
         let mut cursor = self.cursor();
         while cursor.more() {
-            if cursor.value(self) == Some(value) {
+            if cursor.value(self).is_some_and(|item| item == value) {
                 return self.remove(&mut cursor).is_ok();
             }
             cursor.next(self);
@@ -199,7 +211,10 @@ impl<T: PartialEq> List<T> {
         false
     }
     /// Checks for an equal value in chain order; `list.contains(&42)`.
-    pub fn contains(&self, value: &T) -> bool {
+    pub fn contains<Q: ?Sized>(&self, value: &Q) -> bool
+    where
+        T: PartialEq<Q>,
+    {
         self.iter().any(|item| item == value)
     }
 }
@@ -238,3 +253,9 @@ fn no_such_object(member: &str, state: &str) -> Failure {
 mod iteration;
 mod operations;
 mod positions;
+
+mod base_iterator;
+mod borrowed;
+mod cursor_state;
+mod method_contracts;
+pub use base_iterator::BaseListIterator;

@@ -1,5 +1,5 @@
 //! Magnitude, unit, interpolation and JSON members of NCollection_Vec2/Vec3/Vec4.
-use super::{Vec2, Vec3, Vec4};
+use super::{Vec2, Vec3, Vec4, VectorArithmeticComponent};
 use crate::standard::dump::{self, DumpOutput};
 use std::io;
 use std::ops::{Add, Mul, Sub};
@@ -16,13 +16,22 @@ impl<T: super::super::VectorSquareComponent> Vec3<T> {
         T::vector_component_square([self.x, self.y, self.z])
     }
 }
-impl<T: Copy + Sub<Output = T> + Mul<Output = T>> Vec3<T> {
+impl<T: VectorArithmeticComponent + Sub<Output = T> + Mul<Output = T>> Vec3<T> {
     /// Computes the right-handed cross product, as `Cross`; `Vec3::cross(&dx, &dy) == dz`.
     pub fn cross(first: &Self, second: &Self) -> Self {
         Self::new(
-            first.y * second.z - first.z * second.y,
-            first.z * second.x - first.x * second.z,
-            first.x * second.y - first.y * second.x,
+            first
+                .y
+                .vector_multiply(second.z)
+                .vector_subtract(first.z.vector_multiply(second.y)),
+            first
+                .z
+                .vector_multiply(second.x)
+                .vector_subtract(first.x.vector_multiply(second.z)),
+            first
+                .x
+                .vector_multiply(second.y)
+                .vector_subtract(first.y.vector_multiply(second.x)),
         )
     }
 }
@@ -52,12 +61,12 @@ impl<T: Copy + From<u8>> Vec3<T> {
 }
 impl<T> Vec3<T>
 where
-    T: Copy + From<u8> + Sub<Output = T>,
+    T: VectorArithmeticComponent + From<u8> + Sub<Output = T>,
     Vec3<T>: Mul<T, Output = Vec3<T>> + Add<Output = Vec3<T>>,
 {
     /// Interpolates `from*(1-t) + to*t`, as `GetLERP`; `Vec3::lerp(&a, &b, 0.5)`.
     pub fn lerp(from: &Self, to: &Self, parameter: T) -> Self {
-        *from * (T::from(1) - parameter) + *to * parameter
+        *from * (T::from(1).vector_subtract(parameter)) + *to * parameter
     }
 }
 // OCCT returns the element type after sqrt, and Normalize uses / followed by assignment.
@@ -75,7 +84,7 @@ impl<T: super::super::VectorMagnitudeComponent> Vec3<T> {
     /// Divides each component by its magnitude unless zero; `vector.normalize()`.
     pub fn normalize(&mut self) {
         let modulus: T = self.modulus();
-        if modulus != T::from(0) {
+        if !modulus.vector_component_is_zero() {
             self.x = self.x / modulus;
             self.y = self.y / modulus;
             self.z = self.z / modulus;

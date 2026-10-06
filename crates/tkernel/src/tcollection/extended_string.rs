@@ -5,7 +5,7 @@
 //! A C++ `const char16_t*` argument becomes a slice that ends where the C string ends; a
 //! (pointer, length) pair keeps the nullable pointer as `Option<&[u16]>`.
 /// Owned NUL-terminated UTF-16 code units; `ExtendedString::new("Hello")`.
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Debug, Default)]
 pub struct ExtendedString {
     terminated: Vec<u16>,
 }
@@ -26,7 +26,7 @@ impl ExtendedString {
     }
     /// Returns the length in code units; `ExtendedString::new("Hello").len() == 5`.
     pub fn len(&self) -> usize {
-        self.terminated.len() - 1
+        self.terminated.len().saturating_sub(1)
     }
     /// Checks for no code units (`IsEmpty`); `ExtendedString::default().is_empty()`.
     pub fn is_empty(&self) -> bool {
@@ -83,3 +83,6 @@ mod search;
 mod spans;
 mod traits;
 mod utf;
+
+mod method_contracts;
+mod storage;

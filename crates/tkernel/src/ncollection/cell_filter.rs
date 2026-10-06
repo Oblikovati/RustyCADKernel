@@ -9,6 +9,7 @@ pub use geometry::CellGeometry;
 use indices::{CellIndices, cell_coordinate};
 /// Callback decision; returning `CellAction::Purge` destroys this cell's target copy.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(i32)]
 pub enum CellAction {
     /// Preserve this target in the cell.
     Keep,
@@ -97,7 +98,7 @@ impl<I: CellGeometry> CellFilter<I> {
         let resource: BaseAllocator = self.resource.clone();
         self.cells
             .try_emplaced(index, || List::with_allocator(resource))
-            .prepend(target.clone());
+            .prepend_with(|| target.clone());
     }
     fn retain_cell(&mut self, index: &Vec<i32>, mut keep: impl FnMut(&I::CellTarget) -> bool) {
         let result = self.try_retain_cell(index, |stored| {
@@ -126,3 +127,6 @@ impl<I: CellInspector> CellFilter<I> {
         }
     }
 }
+
+#[cfg(test)]
+mod method_tests;

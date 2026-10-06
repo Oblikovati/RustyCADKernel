@@ -46,6 +46,7 @@ HASHED_FIXED_INPUTS = (
     "tools/join_legacy_runtime_evidence.py",
     "tools/legacy_runtime_case_identity.py",
     "tools/tests/test_legacy_toolkit_sources.py",
+    "tools/tests/test_legacy_runtime_evidence.py",
     "tools/tests/test_verify_tkernel_package_identity.py",
     "tools/tests/test_tkmath_legacy_runtime.py",
     "tools/oracle/tkernel_probe.cxx",
@@ -77,9 +78,13 @@ def discovered_runtime_inputs(root: pathlib.Path) -> set[pathlib.Path]:
     """Collect verifier glob inputs; e.g. `discovered_runtime_inputs(Path('/repo'))`."""
     files = {path for path in (root / "crates").rglob("*") if path.is_file()}
     files.update((root / "tools/api_inventory").glob("*.py"))
-    files.update((root / "tools/oracle").glob("*.cxx"))
+    oracle_suffixes = {".cxx", ".cpp", ".hxx", ".inc", ".expected", ".txt", ".json", ".patch"}
+    # Rust tests include oracle goldens directly; changing them must invalidate a run.
+    files.update(
+        path for path in (root / "tools/oracle").rglob("*")
+        if path.is_file() and path.suffix in oracle_suffixes
+    )
     files.update((root / "tools").glob("tkernel_*_corpus.py"))
-    files.update((root / "tools/oracle").glob("*.hxx"))
     return files
 
 

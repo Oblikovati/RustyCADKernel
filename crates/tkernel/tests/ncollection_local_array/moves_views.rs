@@ -24,7 +24,7 @@ fn NCollection_LocalArrayTest__MoveAssignment() {
     local_fill(&mut source, 1, 100);
     let mut dest = LocalArray::<i32, 8>::new(4);
     dest.as_mut_slice().fill(-1);
-    dest = std::mem::take(&mut source);
+    dest.move_from_trivial(&mut source);
     assert_eq!(8, dest.len());
     local_check(&dest, 8, 1, 100);
     assert_eq!(0, source.len());

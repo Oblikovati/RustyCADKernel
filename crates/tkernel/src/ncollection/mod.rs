@@ -19,12 +19,16 @@ pub use vector_component::{
     VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
 };
 mod vector;
-pub use vector::{ElementCast, Vec2, Vec3, Vec4, VectorScalarDivision};
+pub use vector::{ElementCast, Vec2, Vec3, Vec4, VectorArithmeticComponent, VectorScalarDivision};
 mod square_matrix;
 pub use square_matrix::MatrixScalar;
 mod mat3;
 pub use mat3::Mat3;
 mod matrix_view;
+// Transparent matrices and fixed arrays have identical storage; alias proofs are local.
+#[allow(unsafe_code)]
+mod matrix_alias;
+mod matrix_returning;
 pub use matrix_view::{MatrixView, MatrixViewMut};
 mod lerp;
 mod mat4;
@@ -40,7 +44,7 @@ pub use allocator::{
     INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
 mod dynamic_array;
-pub use dynamic_array::{DynamicArray, DynamicCursor};
+pub use dynamic_array::{DynamicArray, DynamicArrayIterator, DynamicCursor};
 
 mod buffer;
 pub use buffer::Buffer;
@@ -54,21 +58,35 @@ pub use shared::Shared;
 mod occ_allocator;
 pub use occ_allocator::{AllocatorTypes, AllocatorVector, OccAllocator, StandardAllocator};
 
+#[allow(unsafe_code)]
+mod base_list;
+pub use base_list::{BaseListRawIterator, BaseListStorage, DelListNode};
 mod list;
+#[allow(unsafe_code)]
+mod list_node;
 pub use list::List as AllocatorList;
-pub use list::{List, ListCursor, ListIter, ListIterMut};
+pub use list::{BaseListIterator, List, ListCursor, ListIter, ListIterMut};
+pub use list_node::{ListLinkNode, ListValueNode};
 
 mod sparse_array;
-pub use sparse_array::SparseArray;
+pub use sparse_array::{SparseArray, SparseArrayCursor, SparseArrayCursorMut};
 
 mod sequence;
-pub use sequence::{Sequence, SequenceCursor, SequenceIter, SequenceIterMut};
+pub use sequence::{
+    BaseSequence, BaseSequenceIterator, BaseSequenceRawIterator, DelSeqNode, SeqNode, Sequence,
+    SequenceCursor, SequenceIter, SequenceIterMut, SequenceNode,
+};
 mod h_sequence;
 pub use h_sequence::HSequence;
 mod hash_policy;
 pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, buckets_from_int, next_map_prime};
 mod base_map;
-pub use base_map::BaseMap;
+pub use base_map::{
+    BaseDoubleMapResize, BaseDoubleMapStorage, BaseIndexedMapStorage, BaseMap,
+    BaseMapBasicIterator, BaseMapBucketIterator, BaseMapIndexedIterator, BaseMapResize,
+    BaseMapStorage, BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut, IndexedCursorSource,
+    IndexedCursorSourceMut, MapLinkNode,
+};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 
@@ -145,6 +163,6 @@ mod collection_cursor;
 pub use collection_cursor::{CollectionCursor, CollectionCursorMut, CursorPositions};
 mod items_view;
 pub use items_view::{
-    ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems, KeyValueIndexItems,
-    KeyValueItems,
+    ItemsIterator, ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems,
+    KeyValueIndexItems, KeyValueItems,
 };

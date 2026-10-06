@@ -8,6 +8,7 @@ pub struct PackedMapIter<'a, T: PackedInteger> {
     node: usize,
     remaining: u64,
     current: Option<T>,
+    cached_key: T,
 }
 impl<T: PackedInteger> PackedMap<T> {
     /// Traverse buckets, chains, then ascending bits; `map.iter().collect::<Vec<_>>()`.
@@ -29,6 +30,7 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
             node: 0,
             remaining: 0,
             current: None,
+            cached_key: T::from_bits(0),
         };
         iter.advance();
         iter
@@ -43,6 +45,7 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
     }
     /// Advance once, retaining exhausted state; `iter.advance()`.
     pub fn advance(&mut self) {
+        self.cache_exhausted_block();
         while self.remaining == 0 {
             if self.bucket >= self.buckets.len() {
                 self.current = None;
@@ -61,7 +64,15 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
             (block.index.bits() << PackedMap::<T>::SHIFT)
                 | u64::from(self.remaining.trailing_zeros()),
         ));
+        self.cached_key = self.current.expect("selected bit has a current key");
         self.remaining &= self.remaining - 1;
+    }
+    fn cache_exhausted_block(&mut self) {
+        if self.remaining == 0 && self.current.is_some() {
+            // Native findNext returns the block base when its remaining-bit mask is empty.
+            let block = &self.buckets[self.bucket][self.node - 1];
+            self.cached_key = T::from_bits(block.index.bits() << PackedMap::<T>::SHIFT);
+        }
     }
     /// Restart against the same borrowed map; `iter.reset()`.
     pub fn reset(&mut self) {
@@ -98,3 +109,5 @@ impl<'a, T: PackedInteger> IntoIterator for &'a PackedMap<T> {
         self.iter()
     }
 }
+
+mod method_contracts;

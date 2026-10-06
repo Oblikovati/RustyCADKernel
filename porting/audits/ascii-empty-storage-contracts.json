@@ -1,0 +1,145 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "ASCII shared empty storage, copying, truncation and in-place removal",
+  "integration_status": "working-tree draft; main integration blocked by read-only .git policy",
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_dirty": true,
+  "source_sha256": {
+    "crates/tkernel/src/tcollection/ascii_string.rs": "ff4d763854a0ce197c781fd2ec77fedc2f687ece1eecc0223ad5f66592f98597",
+    "crates/tkernel/src/tcollection/ascii_string/storage.rs": "54dc86b1b536c604f2718687054131e66ae60e9e361ca223ad713cebd148a284",
+    "crates/tkernel/src/tcollection/ascii_string/construction.rs": "b9de00d17ccc8213b3ea2c4c1866cc069f2bf7a9c79ba8d890babfcdc186e631",
+    "crates/tkernel/src/tcollection/ascii_string/editing.rs": "5cfdb3e58f8245990059065ab655c433d8d56f0cb5a32704458e17cef37715e1",
+    "crates/tkernel/src/tcollection/ascii_string/case_adjust.rs": "7d659a0b525b0d65eb780e9dd985fb6b016208511377911c2426dfe1ac1be223",
+    "crates/tkernel/src/tcollection/ascii_string/assignment.rs": "88f3eec69bd765b557564e0a5b72d8ab916b5d49cca67ec7ff0d343c8c9de977",
+    "crates/tkernel/tests/ascii_empty_storage_contracts.rs": "89bec6fb5ad5819959a4a97b520deb0215092b73d8f6e228f687076ba8fbe0a8",
+    "crates/tkernel/tests/ascii_copy_assignment_contracts.rs": "80b1500009d17229bd818c6a8486518ab6d76632e77df90c0977e3e70f6adf23",
+    "tools/oracle/tkernel_ascii_empty_storage.cxx": "f457d818a1c55cebef56889e307ea4d42f7a1deebf53209b5e159e25080ef10e",
+    "tools/oracle/tkernel_ascii_empty_storage.expected": "dc60d690d60e287786133db193161352a97d21bafed15723fdf63f8c7e8c7a35",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a",
+    "../OCCT/src/FoundationClasses/TKernel/GTests/TCollection_AsciiString_Test.cxx": "8c5ae783fbd4da000061ef0b34daf0ec925639fee55056685df0e3c160ceefbf"
+  },
+  "runtime": {
+    "regression_before_change": {
+      "exit": 101,
+      "failed_cases": 6
+    },
+    "native_compile_runtime_comparison_exit": 0,
+    "native_output_rows": 6,
+    "rust_tkernel_passes": 3158,
+    "rust_tkernel_failures": 0,
+    "rust_tkernel_groups": 224,
+    "new_supplemental_integration_cases": 8,
+    "new_internal_padding_case": 1,
+    "original_module_declarations": 114,
+    "native_original_passes": 114,
+    "rust_original_passes": 114,
+    "exact_original_case_name_join": true,
+    "strict_clippy_exit": 0,
+    "ascii_differential_cases": 2608,
+    "ascii_differential_input_sha256": "44069f0f9207291902edbceb27d6ec356086d2053eb53c2dffcd6d16be944e44",
+    "ascii_differential_output_sha256": "7e3d123ca9105a3ef0cef37462a6f0fa5a141c599c981f07d34008cc47f988ef",
+    "miri_passes": 10,
+    "miri_excluded_cases": [
+      "removing_all_bytes_retains_native_storage_identity",
+      "shared_empty_case_adjustment_preserves_storage"
+    ],
+    "miri_exclusion_reason": "Existing native C locale toupper/isspace calls are unsupported by Miri; both cases pass in normal execution.",
+    "initial_miri_exit": 1,
+    "filtered_miri_exit": 0
+  },
+  "compiler_evidence": {
+    "rustdoc_format_version": 61,
+    "artifact": "porting/runtime-evidence/ascii-empty-storage-draft-rustdoc.json.gz",
+    "artifact_sha256": "219e387986da82e68d8e35352bcfa4c79c98cab19a03e1fcfca104b74a7908a4",
+    "declarations": [
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::<core::clone::Clone>::clone",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/storage.rs",
+        "source_sha256": "54dc86b1b536c604f2718687054131e66ae60e9e361ca223ad713cebd148a284",
+        "declaration_sha256": "ca4e61e03172624df2c80ab15fee180490ceb1a4b87d61d17e497a6e8357f0e2"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::<core::clone::Clone>::clone_from",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/storage.rs",
+        "source_sha256": "54dc86b1b536c604f2718687054131e66ae60e9e361ca223ad713cebd148a284",
+        "declaration_sha256": "c3a56d57e7e167b106262f9485a279ad31090379557e4a8954dee00a6d826c8d"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::<core::cmp::PartialEq>::eq",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/storage.rs",
+        "source_sha256": "54dc86b1b536c604f2718687054131e66ae60e9e361ca223ad713cebd148a284",
+        "declaration_sha256": "bae311c18badf0c29ff032c13f016d04750aec1ea3cb5d4006135920d94a6c49"
+      }
+    ]
+  },
+  "artifacts": {
+    "red": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-red.gz",
+      "sha256": "c14d37edcbf621e207fde839a7d9f84484250cd2a9eecee3624a9690cfdfa2cc"
+    },
+    "verified": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-verified.gz",
+      "sha256": "a64c6b72fa2e5e5f9c995dd05d7de0d0783983d85238672fb76be4f82ad19b46"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-native.gz",
+      "sha256": "edcfa38d1cf9b9c06b639b3f0e96a2f28025d97ce8b83fbabe023bcda327a20d"
+    },
+    "native-legacy": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-native-legacy.gz",
+      "sha256": "00040c15066c66386ff3658553598fe481fc71e9043f70a4caae7065f381c650"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-rustdoc.gz",
+      "sha256": "f02979763d00a537235bda97e07fcdf48c952a3869c381c2ef0db798363ccd10"
+    },
+    "final-validation": {
+      "path": "porting/runtime-evidence/ascii-empty-storage-final-validation.gz",
+      "sha256": "a590eb432aacffec8b96b21c1a0eb5b7c97bc8d33829db6a4b07c06df0903c92"
+    },
+    "differential": {
+      "inputs.txt": {
+        "path": "porting/runtime-evidence/ascii-empty-storage-differential-inputs.txt.gz",
+        "sha256": "8f9486d1f629a6890da67f75f5eeb9cf83ba1126a8dbce332e6aad9a67538c44"
+      },
+      "native.txt": {
+        "path": "porting/runtime-evidence/ascii-empty-storage-differential-native.txt.gz",
+        "sha256": "77d14dfb21942622e74a3f64cedfbc9ba91af0aa1ef9b6008d23e716d320b0fc"
+      },
+      "rust.txt": {
+        "path": "porting/runtime-evidence/ascii-empty-storage-differential-rust.txt.gz",
+        "sha256": "77d14dfb21942622e74a3f64cedfbc9ba91af0aa1ef9b6008d23e716d320b0fc"
+      },
+      "report.json": {
+        "path": "porting/runtime-evidence/ascii-empty-storage-differential-report.json.gz",
+        "sha256": "337f1da3ee91e46569ce12ba50a2d53698b7cde36998ed8e38121461ddc175da"
+      }
+    }
+  },
+  "addressed_behavior_gaps": [
+    "Empty construction and clear/copy-empty share one static NUL buffer without a heap allocation.",
+    "Truncation and RemoveAll retain owned buffer identity, including a zero-length result.",
+    "Cloning a truncated empty string produces shared empty storage; logical equality ignores storage ownership.",
+    "Copy releases storage before growing beyond current length and reuses storage for shorter positive spans.",
+    "Constructors reserve OCCT four-byte padded allocation capacity."
+  ],
+  "limitations": [
+    "Native allocation-failure exceptions, allocator identity, exact allocation hooks and reallocation policy are unproven.",
+    "Rust mutable borrow rules do not reproduce arbitrary overlapping native pointers.",
+    "Growth pointer address is allocator-dependent and receives no parity credit.",
+    "This draft does not update the published API or original legacy declaration counts."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0,
+  "combined_foundation_validation": {
+    "receipt": "porting/runtime-evidence/foundation-storage-pointers-draft.json",
+    "receipt_sha256": "04194ea2771ff97d6922d273cff9a808b8d44d16040449db5157f63c9d304851",
+    "passed": 7374,
+    "failed": 0,
+    "source_dirty": true
+  }
+}

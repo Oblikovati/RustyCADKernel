@@ -1,0 +1,479 @@
+{
+  "status": "partial_uncommitted_draft",
+  "class": "TCollection_ExtendedString",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/tcollection/extended_string.rs": "a6bf3097ccba27c624578d6c57d024c4421f5713173637d4796eaa747974c1fc",
+    "crates/tkernel/src/tcollection/extended_string/comparison.rs": "ed8f154064e1bdaef797d2f9e7cf8423c37d0b4991f83542291670e653ee6b59",
+    "crates/tkernel/src/tcollection/extended_string/adjustment.rs": "1e7be40250a2732ac3e829689f66f0f3237952e379dd1aa33ee7b90fdbbb5ff4",
+    "crates/tkernel/src/tcollection/extended_string/traits.rs": "d05fd8de9a1e196a965285b8336187eff91f84caa69a25e9a73e17c54c90c96b",
+    "crates/tkernel/src/tcollection/extended_string/spans.rs": "f64400f84142a2c19080b7b73c1be9db27953ab8d9b49fd8c051a6a5e19a1056",
+    "crates/tkernel/src/tcollection/extended_string/append.rs": "8db8021d6b31dd5a23e24e0183fa087e586c0662d6e0fe3a9d8f0adc08c9a0d2",
+    "crates/tkernel/src/tcollection/extended_string/storage.rs": "7d8265fd3ff794673af345e548ccc8d7176b95d7a5d25f18d3fc0dc5f0f64d3b",
+    "crates/tkernel/src/tcollection/extended_string/editing.rs": "a64cdbc15e28fc0ba73e91caa45b63a663d3786fad66cbeb4d4cec794fad402c",
+    "crates/tkernel/src/tcollection/extended_string/utf.rs": "86495b7e57a9a0428bbfd3e2f84f1b91bb94311e4bb0585e792c75b4959a5a01",
+    "crates/tkernel/src/tcollection/extended_string/method_contracts.rs": "a29cf1df7c3047299e1de5b5768981922c38ceb615203f0a37e930a3503090b3",
+    "crates/tkernel/src/tcollection/extended_string/search.rs": "7c040826a75e4303fa7e05aead5d75b285e33fdb0edbdc432d0a5346203926c9",
+    "crates/tkernel/src/tcollection/extended_string/errors.rs": "f548897a4c0f7be51fb1a172c6f4a0b6fe1d7e9a620ffa578a3c85b0001397e6",
+    "crates/tkernel/src/tcollection/extended_string/conversion.rs": "93a49fa2fa6f3b92a368c20701dd6e9c95b62e0b17ab9256d2954e35abf29d5c",
+    "crates/tkernel/src/tcollection/extended_string/queries.rs": "3b1d15cd6cc8904a6e29c85532dacc994e828e4e485d2222606c64d1edf24aab",
+    "crates/tkernel/src/tcollection/extended_string/construction.rs": "6d7b818aa99c8fb33d5511e0480daa862e1dc7f9b41a5c8f1cd609e070b65799",
+    "crates/tkernel/tests/extended_string_method_contracts.rs": "623d293d3117f9e44d5669090c54371d348a67e5638ec3f5ce17b97c894142a0",
+    "tools/oracle/tkernel_extended_string_method_contracts.cxx": "67f906f7a11ab058c68ae0373ee17c170e7941a094ffb528ebb60aa9e6975b53",
+    "tools/oracle/tkernel_extended_string_method_contracts.expected": "02d50a2a0a2e790dadc0df127d1b822d584f6214b5c207686bd84e377818b9e8"
+  },
+  "checks": {
+    "rust_log": "/tmp/extended-string-method-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 171,
+    "new_integration_tests": 9,
+    "native_log": "/tmp/extended-string-method-native.log",
+    "native_exit": 0,
+    "native_original_passed": 105,
+    "supplemental_oracle_rows": 7,
+    "new_padding_unit_test": "root final lib checks requested; not included in integration count",
+    "miri": "not_run_by_subagent; root coordinates"
+  },
+  "original_name_join": [
+    {
+      "cpp": "TCollection_ExtendedStringTest.AsciiDetection",
+      "rust": "TCollection_ExtendedStringTest__AsciiDetection"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignCat_IntegerAndReal",
+      "rust": "TCollection_ExtendedStringTest__AssignCat_IntegerAndReal"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignCat_PointerIntoSelf",
+      "rust": "TCollection_ExtendedStringTest__AssignCat_PointerIntoSelf"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignCat_PointerIntoSelfBeginning",
+      "rust": "TCollection_ExtendedStringTest__AssignCat_PointerIntoSelfBeginning"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignCat_SelfAppend",
+      "rust": "TCollection_ExtendedStringTest__AssignCat_SelfAppend"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignCat_SelfAppendMultiple",
+      "rust": "TCollection_ExtendedStringTest__AssignCat_SelfAppendMultiple"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.AssignmentOperator",
+      "rust": "TCollection_ExtendedStringTest__AssignmentOperator"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.BoundaryValues",
+      "rust": "TCollection_ExtendedStringTest__BoundaryValues"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Capitalize_AlreadyCapitalized",
+      "rust": "TCollection_ExtendedStringTest__Capitalize_AlreadyCapitalized"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Capitalize_EmptyString",
+      "rust": "TCollection_ExtendedStringTest__Capitalize_EmptyString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Capitalize_UppercasesFirstLetter",
+      "rust": "TCollection_ExtendedStringTest__Capitalize_UppercasesFirstLetter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Cat",
+      "rust": "TCollection_ExtendedStringTest__Cat"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Cat_IntegerAndReal",
+      "rust": "TCollection_ExtendedStringTest__Cat_IntegerAndReal"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Center_CentersWithFiller",
+      "rust": "TCollection_ExtendedStringTest__Center_CentersWithFiller"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Center_NoChangeIfShorter",
+      "rust": "TCollection_ExtendedStringTest__Center_NoChangeIfShorter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Center_OddWidth",
+      "rust": "TCollection_ExtendedStringTest__Center_OddWidth"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ChangeAll",
+      "rust": "TCollection_ExtendedStringTest__ChangeAll"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Comparison",
+      "rust": "TCollection_ExtendedStringTest__Comparison"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Concatenation",
+      "rust": "TCollection_ExtendedStringTest__Concatenation"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ConstructorWithAsciiString",
+      "rust": "TCollection_ExtendedStringTest__ConstructorWithAsciiString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ConstructorWithCString",
+      "rust": "TCollection_ExtendedStringTest__ConstructorWithCString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ConstructorWithChar",
+      "rust": "TCollection_ExtendedStringTest__ConstructorWithChar"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ConversionRoundTrip",
+      "rust": "TCollection_ExtendedStringTest__ConversionRoundTrip"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ConversionToFromAscii",
+      "rust": "TCollection_ExtendedStringTest__ConversionToFromAscii"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.CopyConstructor",
+      "rust": "TCollection_ExtendedStringTest__CopyConstructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.DefaultConstructor",
+      "rust": "TCollection_ExtendedStringTest__DefaultConstructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EmptyStringHandling",
+      "rust": "TCollection_ExtendedStringTest__EmptyStringHandling"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EndsWith_Match",
+      "rust": "TCollection_ExtendedStringTest__EndsWith_Match"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EndsWith_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__EndsWith_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EndsWith_NoMatchMiddlePart",
+      "rust": "TCollection_ExtendedStringTest__EndsWith_NoMatchMiddlePart"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EndsWith_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__EndsWith_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.EndsWith_ZeroLength",
+      "rust": "TCollection_ExtendedStringTest__EndsWith_ZeroLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ExtendedCharConstructor",
+      "rust": "TCollection_ExtendedStringTest__ExtendedCharConstructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FillerConstructor",
+      "rust": "TCollection_ExtendedStringTest__FillerConstructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FillerConstructor_NegativeLength_Throws",
+      "rust": "TCollection_ExtendedStringTest__FillerConstructor_NegativeLength_Throws"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FillerConstructor_ZeroLength",
+      "rust": "TCollection_ExtendedStringTest__FillerConstructor_ZeroLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationInSet_EmptySet",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationInSet_EmptySet"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationInSet_FindsCharacter",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationInSet_FindsCharacter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationInSet_NotFound",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationInSet_NotFound"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationNotInSet_AllInSet",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationNotInSet_AllInSet"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationNotInSet_EmptySet",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationNotInSet_EmptySet"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.FirstLocationNotInSet_FindsCharacter",
+      "rust": "TCollection_ExtendedStringTest__FirstLocationNotInSet_FindsCharacter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.HashCode",
+      "rust": "TCollection_ExtendedStringTest__HashCode"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IntegerValue_EmptyString",
+      "rust": "TCollection_ExtendedStringTest__IntegerValue_EmptyString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IntegerValue_NegativeInteger",
+      "rust": "TCollection_ExtendedStringTest__IntegerValue_NegativeInteger"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IntegerValue_NotAnInteger",
+      "rust": "TCollection_ExtendedStringTest__IntegerValue_NotAnInteger"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IntegerValue_ValidInteger",
+      "rust": "TCollection_ExtendedStringTest__IntegerValue_ValidInteger"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsAscii",
+      "rust": "TCollection_ExtendedStringTest__IsAscii"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsDifferent_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__IsDifferent_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsDifferent_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__IsDifferent_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsEqual_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__IsEqual_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsEqual_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__IsEqual_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsEqual_ZeroLengthNullPointer",
+      "rust": "TCollection_ExtendedStringTest__IsEqual_ZeroLengthNullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsGreater_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__IsGreater_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsGreater_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__IsGreater_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsLess_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__IsLess_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsLess_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__IsLess_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsSameString_CaseInsensitiveMatch",
+      "rust": "TCollection_ExtendedStringTest__IsSameString_CaseInsensitiveMatch"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsSameString_CaseSensitiveMatch",
+      "rust": "TCollection_ExtendedStringTest__IsSameString_CaseSensitiveMatch"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsSameString_CaseSensitiveMismatch",
+      "rust": "TCollection_ExtendedStringTest__IsSameString_CaseSensitiveMismatch"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.IsSameString_DifferentLengths",
+      "rust": "TCollection_ExtendedStringTest__IsSameString_DifferentLengths"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LargeStrings",
+      "rust": "TCollection_ExtendedStringTest__LargeStrings"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftAdjust_AllSpaces",
+      "rust": "TCollection_ExtendedStringTest__LeftAdjust_AllSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftAdjust_EmptyString",
+      "rust": "TCollection_ExtendedStringTest__LeftAdjust_EmptyString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftAdjust_NoLeadingSpaces",
+      "rust": "TCollection_ExtendedStringTest__LeftAdjust_NoLeadingSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftAdjust_RemovesLeadingSpaces",
+      "rust": "TCollection_ExtendedStringTest__LeftAdjust_RemovesLeadingSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftJustify_ExtendsWithFiller",
+      "rust": "TCollection_ExtendedStringTest__LeftJustify_ExtendsWithFiller"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.LeftJustify_NoChangeIfShorter",
+      "rust": "TCollection_ExtendedStringTest__LeftJustify_NoChangeIfShorter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.MemoryAllocation",
+      "rust": "TCollection_ExtendedStringTest__MemoryAllocation"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.MultiByteCString",
+      "rust": "TCollection_ExtendedStringTest__MultiByteCString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.NumericalConstructors",
+      "rust": "TCollection_ExtendedStringTest__NumericalConstructors"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.OCC22744_NonAsciiCharIsNotAsciiAndCanBeUsedAsMapKey",
+      "rust": "TCollection_ExtendedStringTest__OCC22744_NonAsciiCharIsNotAsciiAndCanBeUsedAsMapKey"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.OCC3277_CatOperation",
+      "rust": "TCollection_ExtendedStringTest__OCC3277_CatOperation"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Prepend_EmptyPrefix",
+      "rust": "TCollection_ExtendedStringTest__Prepend_EmptyPrefix"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Prepend_InsertsAtBeginning",
+      "rust": "TCollection_ExtendedStringTest__Prepend_InsertsAtBeginning"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Prepend_PointerIntoSelf",
+      "rust": "TCollection_ExtendedStringTest__Prepend_PointerIntoSelf"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Prepend_PointerIntoSelfBeginning",
+      "rust": "TCollection_ExtendedStringTest__Prepend_PointerIntoSelfBeginning"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Prepend_ToEmptyString",
+      "rust": "TCollection_ExtendedStringTest__Prepend_ToEmptyString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RealValue_EmptyString",
+      "rust": "TCollection_ExtendedStringTest__RealValue_EmptyString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RealValue_Integer",
+      "rust": "TCollection_ExtendedStringTest__RealValue_Integer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RealValue_NotAReal",
+      "rust": "TCollection_ExtendedStringTest__RealValue_NotAReal"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RealValue_ValidReal",
+      "rust": "TCollection_ExtendedStringTest__RealValue_ValidReal"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.Remove",
+      "rust": "TCollection_ExtendedStringTest__Remove"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RightAdjust_AllSpaces",
+      "rust": "TCollection_ExtendedStringTest__RightAdjust_AllSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RightAdjust_NoTrailingSpaces",
+      "rust": "TCollection_ExtendedStringTest__RightAdjust_NoTrailingSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RightAdjust_RemovesTrailingSpaces",
+      "rust": "TCollection_ExtendedStringTest__RightAdjust_RemovesTrailingSpaces"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RightJustify_ExtendsWithFiller",
+      "rust": "TCollection_ExtendedStringTest__RightJustify_ExtendsWithFiller"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.RightJustify_NoChangeIfShorter",
+      "rust": "TCollection_ExtendedStringTest__RightJustify_NoChangeIfShorter"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StartsWith_Match",
+      "rust": "TCollection_ExtendedStringTest__StartsWith_Match"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StartsWith_NegativeLength",
+      "rust": "TCollection_ExtendedStringTest__StartsWith_NegativeLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StartsWith_NoMatchLongerPrefix",
+      "rust": "TCollection_ExtendedStringTest__StartsWith_NoMatchLongerPrefix"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StartsWith_NullPointer",
+      "rust": "TCollection_ExtendedStringTest__StartsWith_NullPointer"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StartsWith_ZeroLength",
+      "rust": "TCollection_ExtendedStringTest__StartsWith_ZeroLength"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StringView_AssignCat",
+      "rust": "TCollection_ExtendedStringTest__StringView_AssignCat"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StringView_Assignment",
+      "rust": "TCollection_ExtendedStringTest__StringView_Assignment"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StringView_Constructor",
+      "rust": "TCollection_ExtendedStringTest__StringView_Constructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StringView_Conversion",
+      "rust": "TCollection_ExtendedStringTest__StringView_Conversion"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.StringView_EmptyConstructor",
+      "rust": "TCollection_ExtendedStringTest__StringView_EmptyConstructor"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.TestMem_LargeStringAllocation",
+      "rust": "TCollection_ExtendedStringTest__TestMem_LargeStringAllocation"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.ToExtString",
+      "rust": "TCollection_ExtendedStringTest__ToExtString"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.UTF8Conversion",
+      "rust": "TCollection_ExtendedStringTest__UTF8Conversion"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.UTF8ConversionUnicode",
+      "rust": "TCollection_ExtendedStringTest__UTF8ConversionUnicode"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.UnicodeCharacters",
+      "rust": "TCollection_ExtendedStringTest__UnicodeCharacters"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.UnicodeSupport",
+      "rust": "TCollection_ExtendedStringTest__UnicodeSupport"
+    },
+    {
+      "cpp": "TCollection_ExtendedStringTest.WideCharConstructor",
+      "rust": "TCollection_ExtendedStringTest__WideCharConstructor"
+    }
+  ],
+  "method_changes": [
+    "Default and empty constructors/Clear/EmptyString share a single static terminator with no allocation",
+    "Copy/Copy-assignment/empty view assignment and Trunc retain allocated empty storage",
+    "Move constructor transfers allocated-empty storage and leaves source on static terminator",
+    "Move from static-empty source keeps destination allocation; returning and self move-assignment adapters added",
+    "RemoveAll compacts in existing storage including removal of embedded zero code units",
+    "Clone of an empty string uses shared storage; equality ignores empty storage ownership",
+    "ToExtString raw pointer and Windows-only ToWideString raw pointer aliases",
+    "Returning UTF-16 view assignment preserves embedded zeros",
+    "Mutation initialization and empty no-op guards adjusted for shared empty representation"
+  ],
+  "remaining_gaps": [
+    "C++ Standard::Reallocate callbacks, exact capacity changes and allocation-failure semantics are not reproduced by Vec",
+    "Reallocation pointer behavior for nonzero resizing remains allocator dependent; this batch only asserts native guaranteed empty/storage-transfer identity",
+    "Windows-only ToWideString raw pointer adapter was not executed on this Linux host",
+    "Existing extending self-alias SetValue rejection and other documented native undefined-pointer boundaries remain",
+    "No compiler body capture or integrated main credit in this scoped audit"
+  ]
+}

@@ -16,11 +16,30 @@ from legacy_runtime_evidence import (
     require_clean_runtime_git_state,
     require_unchanged_runtime_git_state,
     runtime_git_state,
+    runtime_input_hashes,
     tracked_runtime_inputs,
 )
 
 
 class LegacyRuntimeEvidenceTest(unittest.TestCase):
+    def test_oracle_goldens_and_nested_helpers_are_fingerprinted(self) -> None:
+        """A changed include_str golden must stale runtime proof; e.g. nested .expected."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            oracle = root / "tools/oracle/nested"
+            oracle.mkdir(parents=True)
+            expected = oracle / "probe.expected"
+            expected.write_text("old\n")
+            (oracle / "helper.inc").write_text("helper")
+            (oracle / "probe.actual").write_text("generated output")
+            before = runtime_input_hashes(root)
+            expected.write_text("new\n")
+            after = runtime_input_hashes(root)
+        key = "tools/oracle/nested/probe.expected"
+        self.assertNotEqual(before[key], after[key])
+        self.assertIn("tools/oracle/nested/helper.inc", before)
+        self.assertNotIn("tools/oracle/nested/probe.actual", before)
+
     def test_matching_aggregate_report_stays_unverified(self) -> None:
         """A current report still lacks declaration-level proof; e.g. this fixture."""
         with tempfile.TemporaryDirectory() as temporary:

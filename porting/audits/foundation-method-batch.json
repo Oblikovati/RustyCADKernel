@@ -1,0 +1,1800 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Foundation class-by-class method port: List, Sequence, AliasedArray, ForwardRange, UtfIterator; typed allocator provenance repair",
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "uncommitted main working-tree drafts; .git is read-only",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/aliased_array/access.rs": "ad2a59ff204d8d15d81eef6954575fe20cd3b8ee1944e7dac9a6a6e5b31a2698",
+    "crates/tkernel/src/ncollection/aliased_array/legacy.rs": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+    "crates/tkernel/src/ncollection/aliased_array/pointers.rs": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+    "crates/tkernel/src/ncollection/aliased_array.rs": "7675b89ab2d95307a0575430bb706398ccea4d29d5b9d0dbec5b04aa906d0cbe",
+    "crates/tkernel/src/ncollection/allocator/typed_heap.rs": "b25c8e4cbdb590206c21d0d65287f41ff5456ea84557335786aab749d987a399",
+    "crates/tkernel/src/ncollection/allocator.rs": "d99c8a8b20e19bf105abd4e16dbac580b5586436f9449b0472f07760694c38cd",
+    "crates/tkernel/src/ncollection/forward_range/accessors.rs": "33fb01ae25c3e47fcfe4cfb0f35eb2e81e6463752df37995c832e21e8b880dd2",
+    "crates/tkernel/src/ncollection/forward_range/host_binding.rs": "01d069a6aecbf6263e1a2294bee7cb866c0ef26f8ed681500bf0c60d28c1f7a2",
+    "crates/tkernel/src/ncollection/forward_range.rs": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+    "crates/tkernel/src/ncollection/list/iteration.rs": "e083e05e9fdd0853e6109936592fd6e7368c2b138aaa38a57fe6e1b23fe5b3c9",
+    "crates/tkernel/src/ncollection/list/method_contracts.rs": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+    "crates/tkernel/src/ncollection/list/operations.rs": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+    "crates/tkernel/src/ncollection/list/positions.rs": "07bce469edbf86445660580adf3d75b04a8f0ff04236971b0c6d964e4553efcf",
+    "crates/tkernel/src/ncollection/list.rs": "749aac56d00e45ab531ba1cd18809869b97a653b0465a0943fa4239a0e0b326a",
+    "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "de0b76b9cd5754959324acdbc933faafd6d1d8935730650af1d06178d0fbfa5d",
+    "crates/tkernel/src/ncollection/sequence/iteration.rs": "c176261afc9a2ce662f12457107dc6a2c35c045347f534bd6aa5d812dbd6fad7",
+    "crates/tkernel/src/ncollection/sequence/method_contracts.rs": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "fa2e5d0a63d6dc4aaf862c7cda34c5c8ddf8613a83608f0c2a3d0bce8f6b8c8f",
+    "crates/tkernel/src/ncollection/sequence/signed_indices.rs": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+    "crates/tkernel/src/ncollection/sequence.rs": "4f78b5c84a12d23c2a397d0378a477007dfcd2db38a92cfc6a8e0fc799fefe28",
+    "crates/tkernel/src/ncollection/utf_iterator/encode.rs": "09b8cbbe55dbc399e300e3e5ec3a4ba58f45177985fc39ecadc1e06f12a3329e",
+    "crates/tkernel/src/ncollection/utf_iterator/positions.rs": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+    "crates/tkernel/src/ncollection/utf_iterator/unit.rs": "5d0e31d090c9f92505e5300005d9d85c8748674bc69e2bda7397516b0e3b28a7",
+    "crates/tkernel/src/ncollection/utf_iterator.rs": "b3f6e21147422b19acfe3299b7c3f469875f0787c2378275ee5cd294f0f6e32c",
+    "crates/tkernel/tests/aliased_array_method_contracts.rs": "4872a023f2c50b66daaa5584cdfa628935905419382ef26b8d95560223604171",
+    "crates/tkernel/tests/forward_range_method_contracts.rs": "ff926fa13ef9650cd66565a1139a714e0187ce71801c858d669fde1aa3002104",
+    "crates/tkernel/tests/list_method_contracts.rs": "da476f5ecb2d220657bf48c9666902272cefacfb6a5ec24c850e2c9f9948141f",
+    "crates/tkernel/tests/sequence_method_contracts.rs": "610a9f5f63b931fe54fc65913d8575244503ce7fe4f6bd4051c6671964cc7495",
+    "crates/tkernel/tests/typed_allocator_provenance_contracts.rs": "bdece7652809de5722b5a13e352ace3370c7d681385e541a0bb6bfddc25ac170",
+    "crates/tkernel/tests/utf_iterator_method_contracts.rs": "e8a775da3f03865f183a5a1b6ff36adbe4fe87fa8df40191d5b8a4775e4c7a28",
+    "crates/tkmath/src/poly/nodes.rs": "f840f9983c320c06ebda2884c32eea5e7db4bb2fd06c10a1ab299294b41ee8f8",
+    "tools/oracle/tkernel_aliased_array_method_contracts.cxx": "0f61955f217a066951011d01a8bc58ff606252cc94054916fcb44a22a0213271",
+    "tools/oracle/tkernel_aliased_array_method_contracts.expected": "b5d3210851c2dfe5738f7329cbe95391b9e046dec7bfabe9a9610dcbe4cb4da9",
+    "tools/oracle/tkernel_forward_range_method_contracts.cxx": "5058a7e217e3b5418ff5600135d25cc37ea8a9478eeda033e02730347bebd9df",
+    "tools/oracle/tkernel_forward_range_method_contracts.expected": "31161b1ef2edd79cb4ffb312836fd7720de72abd8faef9c700fa5021b2af6330",
+    "tools/oracle/tkernel_list_method_contracts.cxx": "6a54e7e3108408d3cd8c0ad62a60f6864b2e32ec11c8e4281e13dded71f82b69",
+    "tools/oracle/tkernel_list_method_contracts.expected": "ea295b9bc8f9c1436ef04544c77da32c8c1a8ece768a004dfedc92005dbb75d9",
+    "tools/oracle/tkernel_sequence_method_contracts.cxx": "ce42f79949c3af3ea39fd9066c35bd950431274bf38ea3d0f7d59ecce22d6794",
+    "tools/oracle/tkernel_sequence_method_contracts.expected": "10607d6688ea8bae5ca52de24c2a24782f29d453a7ee9daf2472c62ede951ee7",
+    "tools/oracle/tkernel_utf_iterator_method_contracts.cxx": "262a80ffd44d30bbc5b96e2084d5d6e8c2ef765e19737cf68270268afa8fc30f",
+    "tools/oracle/tkernel_utf_iterator_method_contracts.expected": "1baf7d3fc8a9cf5b3ff8686060dec5b8fe76fd0567b346b299dfb5b852ac0554"
+  },
+  "classes": [
+    {
+      "cpp_class": "NCollection_List",
+      "compiler_bodies": [
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::assign",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "eb219964c7779494a0ca12bd8118852caaf74f380f5d4c57d929f77b09231a64"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::move_assign",
+          "source_file": "crates/tkernel/src/ncollection/list.rs",
+          "source_sha256": "749aac56d00e45ab531ba1cd18809869b97a653b0465a0943fa4239a0e0b326a",
+          "declaration_sha256": "26991b75893a71f785f34ff8bccf34d185ad8c32b5c92d86b306c11c7f7a0bb2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::assign_self",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "8b8b243a35ede3bee226e8059b5b35acb2e2655fb47a25f378b282f26d47fc8a"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::first_checked",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "b0a760d365700aec1a4cf18dc020eb7b165fa2a16ed6324fb94fee262b6f8fbd"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::first_mut_checked",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "5b00a4f5854878a6f428ac46803be5b3b8e49045b0e87acb69c9a6948abcfddd"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::last_checked",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "63cd4efe3a5c130dc98c4a047f71301218188cfbefb76b3450f3347e6032913f"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::last_mut_checked",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "a279392bbfa9b3e3d7b38cd224b1065b954f020297c20cc9e9b368a075383201"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::size",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "36295c09ee0dc4b0c948d41212c80ec48a677d75aa70ca31a71dd58a11d2dac6"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::contains",
+          "source_file": "crates/tkernel/src/ncollection/list.rs",
+          "source_sha256": "749aac56d00e45ab531ba1cd18809869b97a653b0465a0943fa4239a0e0b326a",
+          "declaration_sha256": "d9116e49aaa8cb756cfda83bdb51b157b0cc363ee980eafa5e93148616523b24"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::remove_value",
+          "source_file": "crates/tkernel/src/ncollection/list.rs",
+          "source_sha256": "749aac56d00e45ab531ba1cd18809869b97a653b0465a0943fa4239a0e0b326a",
+          "declaration_sha256": "3886ac48abb1982d5591f8e92132e0b9c14b8ce2ab8f45fadceba35a8d86424c"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::prepend_list_checked",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "af5255144e170f8df858cf4f26d206318a594e1d9a618ac3c511cd09545c7982"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::prepend_list",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "c414cb99ac8142409c9788588eabe64d3ac2852895acbe8a21713fb57a23ce2a"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::append_list",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "c42c156bda49fe1f0f68b864e3805f31a654d4019016d90285fe2fed49ec68cd"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::insert_list_before",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "ce85f0c8b7107268bcb19adaf88c619bad02813f659b1233b305eb49ce8ba174"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::insert_list_after",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "59d094d6da530be9184d3c3a17b090e4b7134e229e1e0250ca28cc38b921ddef"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::insert_before",
+          "source_file": "crates/tkernel/src/ncollection/list/positions.rs",
+          "source_sha256": "07bce469edbf86445660580adf3d75b04a8f0ff04236971b0c6d964e4553efcf",
+          "declaration_sha256": "66022d237d215dc370d7282ada8382765138772258f03e15489cb046710c861c"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::insert_after",
+          "source_file": "crates/tkernel/src/ncollection/list/positions.rs",
+          "source_sha256": "07bce469edbf86445660580adf3d75b04a8f0ff04236971b0c6d964e4553efcf",
+          "declaration_sha256": "c1e50bdf187110ca61d9271b2becec9a4475c105a24e8fd58c4e69cdf2cb7a8b"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::emplace_before",
+          "source_file": "crates/tkernel/src/ncollection/list/positions.rs",
+          "source_sha256": "07bce469edbf86445660580adf3d75b04a8f0ff04236971b0c6d964e4553efcf",
+          "declaration_sha256": "2312432b0d3a90aabbfc23104280a987ca3d109a636d0278e95183bc68fa65eb"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::emplace_after",
+          "source_file": "crates/tkernel/src/ncollection/list/positions.rs",
+          "source_sha256": "07bce469edbf86445660580adf3d75b04a8f0ff04236971b0c6d964e4553efcf",
+          "declaration_sha256": "550160264152bc7fe0763a11dcdbae65cd708defe6a424bc4c9ad0211e3f02dc"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::List::<core::clone::Clone>::clone_from",
+          "source_file": "crates/tkernel/src/ncollection/list/operations.rs",
+          "source_sha256": "f8484cd1db45ad8810835b56ee29f20cdf821b35248c9ab43a1cdacd0ef577a9",
+          "declaration_sha256": "06d14b118521bdd5b358dae92e3ae4e583cddb33a655be50dea909abb78b8847"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::new",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "aef8b103e008f5c1bac284029994a1b6995bfdec9b150b5fbc0554acd46085e8"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::initialize",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "4f27ab064456bc98784c2fccdb3b03ae9a4b3bf46c208902cf724f125619dcc5"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::from_iterator",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "92809e038714945f6d1278162ddc5c48389e2d5575fd3761510c4bc4bcc59dc0"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::assign_iterator",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "0f66875b309f8686cc698bf1e0a8d73e8b8f4e3c8e1b2c4c5e71494878cd76d2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::assign",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "877d9d081220a069cd8c0b864cfd578b7b29afb942052bf98ffae1c71afc44e2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::is_equal",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "0d2925977bd1cc5b62cdeca5199506b4b8d337b47e0dfcfbe1deea60478e81ea"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::advance",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "231d578b6b82937b221f2888c719cfebef59b230b6a61c76ac3df259ad90109f"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::post_advance",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "8b36b0256dc9573717387c8e729a6c02a0133904aab951eb2f8ffe1abc5b1b91"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListCursor::value_ptr",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "6e17781cf6f7829246c07a0a50e752ad6906a1704c391b50fd656c94ba6a5e8d"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListIter::<core::clone::Clone>::clone",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "f277ba8215e4abd1f37053d398b4b3cf5d2e5472214680d8f8724ea520151a57"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::ListIter::<core::default::Default>::default",
+          "source_file": "crates/tkernel/src/ncollection/list/method_contracts.rs",
+          "source_sha256": "837129f50df89e87ad1c431a4d85582b594abf93b6a9999f110d2b52dcb1fb0c",
+          "declaration_sha256": "7753cba19ff224d1eff6f4a022d955ba686de2ba766ae7129b5d67ef4157cfae"
+        }
+      ],
+      "candidate_bindings": [
+        {
+          "cpp_id": "1724c4562977c1fe4049ac827fe0eade78303cb292fa59e75f098659d5c20b04",
+          "cpp_name": "NCollection_List::Iterator::IsEqual",
+          "cpp_signature": "bool (const class NCollection_List::Iterator &) const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::ListCursor::is_equal"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "22f84cadb5468d9eadad44def15dadea25ed3761d3d128cd6519e628a6c721d5",
+          "cpp_name": "NCollection_List::Last",
+          "cpp_signature": "type-parameter-0-0 &()",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::last_checked",
+            "rustycad_tkernel::ncollection::List::last_mut_checked"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "2cb80054b8d0a17cec89a20a22ef64f9997937c8c4b05f8f179467f6622d677d",
+          "cpp_name": "NCollection_List::operator=",
+          "cpp_signature": "NCollection_List<TheItemType> &(const NCollection_List<TheItemType> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::assign",
+            "rustycad_tkernel::ncollection::List::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "41904dbb8a260bc748b86a9ed917ee28ab2ede3221091a814c779b8306321ebe",
+          "cpp_name": "NCollection_List::First",
+          "cpp_signature": "const type-parameter-0-0 &() const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::first_checked",
+            "rustycad_tkernel::ncollection::List::first_mut_checked"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "4c20daca25f6fe09b1168884fb23b08f90bb106b1e95ca87397e0f538b1239fe",
+          "cpp_name": "NCollection_List::Last",
+          "cpp_signature": "const type-parameter-0-0 &() const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::last_checked",
+            "rustycad_tkernel::ncollection::List::last_mut_checked"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "4ec6e76ee0a8bd71b3bf982439125706275a8a389d42d7920a9182c84756444c",
+          "cpp_name": "NCollection_List::Contains",
+          "cpp_signature": "bool (const type-parameter-1-0 &) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::contains"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "57c5d99bf2e4fb001f52728d2190c4b1da931a2c0a30aeb7b02c7f1835cd692e",
+          "cpp_name": "NCollection_List::EmplaceAfter",
+          "cpp_signature": "type-parameter-0-0 &(class NCollection_List::Iterator &, type-parameter-1-0 &&...)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::emplace_after"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "948d22e332c3dbde9dec41ec53ab68552e38735035607f8a25cbcb5630d0fb3f",
+          "cpp_name": "NCollection_List::First",
+          "cpp_signature": "type-parameter-0-0 &()",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::first_checked",
+            "rustycad_tkernel::ncollection::List::first_mut_checked"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "c99f34cbca56b13ae8f1adceef16b5266e4ae3e190692d2dbfb0d65feb1f5ba1",
+          "cpp_name": "NCollection_List::operator=",
+          "cpp_signature": "NCollection_List<TheItemType> &(NCollection_List<TheItemType> &&) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::move_assign",
+            "rustycad_tkernel::ncollection::List::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "d67b203e9e44670ab3a05ab0d0f65333ed18306ab4eddd672851dd1b231424fb",
+          "cpp_name": "NCollection_List::Iterator::Initialize",
+          "cpp_signature": "void (const NCollection_List<TheItemType> &) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::ListCursor::initialize"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "da61605f090ba50efc95629c582a7e055cedf5f7295f9443b4f2e23f195409e0",
+          "cpp_name": "NCollection_List::EmplaceBefore",
+          "cpp_signature": "type-parameter-0-0 &(class NCollection_List::Iterator &, type-parameter-1-0 &&...)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::emplace_before"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "f053076e1bad135b395df3f94cdbb6512dcc8026e216f7f2a4913b232287536e",
+          "cpp_name": "NCollection_List::Iterator::Initialize",
+          "cpp_signature": "void (NCollection_List<TheItemType> &) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::ListCursor::initialize"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "f074fe51c08d2b57db94389268dd2aec553aa545ac604ee34a286dff34a2f89b",
+          "cpp_name": "NCollection_List::Assign",
+          "cpp_signature": "NCollection_List<TheItemType> &(const NCollection_List<TheItemType> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::List::assign",
+            "rustycad_tkernel::ncollection::List::assign_self"
+          ],
+          "status": "partial"
+        }
+      ],
+      "original_cases": [
+        {
+          "cpp": "NCollection_ListTest.Append",
+          "rust": "NCollection_ListTest__Append",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.AppendList",
+          "rust": "NCollection_ListTest__AppendList",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.AssignMethod",
+          "rust": "NCollection_ListTest__AssignMethod",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Assignment",
+          "rust": "NCollection_ListTest__Assignment",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Clear",
+          "rust": "NCollection_ListTest__Clear",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.ConstIteratorFromConstList",
+          "rust": "NCollection_ListTest__ConstIteratorFromConstList",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.DefaultConstructor",
+          "rust": "NCollection_ListTest__DefaultConstructor",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.EmplaceAfter",
+          "rust": "NCollection_ListTest__EmplaceAfter",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.EmplaceAppend",
+          "rust": "NCollection_ListTest__EmplaceAppend",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.EmplaceBefore",
+          "rust": "NCollection_ListTest__EmplaceBefore",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.EmplacePrepend",
+          "rust": "NCollection_ListTest__EmplacePrepend",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.EmplaceWithMoveOnlyType",
+          "rust": "NCollection_ListTest__EmplaceWithMoveOnlyType",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Exchange",
+          "rust": "NCollection_ListTest__Exchange",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.ExchangeWithDifferentAllocators",
+          "rust": "NCollection_ListTest__ExchangeWithDifferentAllocators",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.ExchangeWithEmpty",
+          "rust": "NCollection_ListTest__ExchangeWithEmpty",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InitializerListConstructor",
+          "rust": "NCollection_ListTest__InitializerListConstructor",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InitializerListConstructorEmpty",
+          "rust": "NCollection_ListTest__InitializerListConstructorEmpty",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InitializerListWithCustomAllocator",
+          "rust": "NCollection_ListTest__InitializerListWithCustomAllocator",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InsertAfter",
+          "rust": "NCollection_ListTest__InsertAfter",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InsertBefore",
+          "rust": "NCollection_ListTest__InsertBefore",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.InsertList",
+          "rust": "NCollection_ListTest__InsertList",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.IteratorAccess",
+          "rust": "NCollection_ListTest__IteratorAccess",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.MoveAssignment",
+          "rust": "NCollection_ListTest__MoveAssignment",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.MoveConstructor",
+          "rust": "NCollection_ListTest__MoveConstructor",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.OCC25348_AssignDoesNotChangeAllocator",
+          "rust": "NCollection_ListTest__OCC25348_AssignDoesNotChangeAllocator",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Prepend",
+          "rust": "NCollection_ListTest__Prepend",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.PrependList",
+          "rust": "NCollection_ListTest__PrependList",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Remove",
+          "rust": "NCollection_ListTest__Remove",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.RemoveByValue",
+          "rust": "NCollection_ListTest__RemoveByValue",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.RemoveFirst",
+          "rust": "NCollection_ListTest__RemoveFirst",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.Reverse",
+          "rust": "NCollection_ListTest__Reverse",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.STLAlgorithmCompatibility_MinMax",
+          "rust": "NCollection_ListTest__STLAlgorithmCompatibility_MinMax",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.STLAlgorithmCompatibility_Replace",
+          "rust": "NCollection_ListTest__STLAlgorithmCompatibility_Replace",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ListTest.STLIterators",
+          "rust": "NCollection_ListTest__STLIterators",
+          "status": "passed"
+        }
+      ],
+      "original_cases_joined": 34,
+      "supplemental_rust_passes": 11,
+      "miri_passes": 11,
+      "native_oracle_rows": 8,
+      "remaining_partial_contracts": [
+        "Mutable iterator conversions and writable const aliases need a separate unsafe compatibility interface.",
+        "Rust drops allocated values on failure; native failure paths may leak nodes. Exact constructor/destructor/allocator hook equivalence remains partial.",
+        "Prefix/postfix and arrow wrappers over private native BasicIterator require a compiler-visible public-alias reachability proof before API credit."
+      ],
+      "api_parity_complete": false
+    },
+    {
+      "cpp_class": "NCollection_Sequence",
+      "compiler_bodies": [
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
+          "source_file": "crates/tkernel/src/ncollection/sequence/operations.rs",
+          "source_sha256": "fa2e5d0a63d6dc4aaf862c7cda34c5c8ddf8613a83608f0c2a3d0bce8f6b8c8f",
+          "declaration_sha256": "24f054dae801c9932c727cb984264588202be7c1f89b52169632c3df3eca50de"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::move_assign",
+          "source_file": "crates/tkernel/src/ncollection/sequence/editing.rs",
+          "source_sha256": "de0b76b9cd5754959324acdbc933faafd6d1d8935730650af1d06178d0fbfa5d",
+          "declaration_sha256": "fb85f2a81918e8f32842dd57e0a66ac93f6acf2f5c5513acc9ed87314a795871"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::assign_self",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "715094117cb460326ece60379676095a68e192a180ef55208b681ecd0c4c98a4"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::append_self",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "3b29dff0ad2aafa05607f796f3f998f8a317005537d0f9351d97c998d136f567"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::prepend_self",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "b55adae7de799b9eba93d27f3c366b4164f76a7d89f0886a0024fb1ef7c84262"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_self_before",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "edfb93d13bb195ea0efc4543dff3cc6fca70f2ab3131ebbd6f10e20fe57e64ed"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_self_after",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "36a16d7138d7e871c7cd8e95a61ed35d855d8500f7b824e8d6dea409dd920fbe"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::split_self",
+          "source_file": "crates/tkernel/src/ncollection/sequence/method_contracts.rs",
+          "source_sha256": "7df7a50606a770a2861d3d72db7e8d5ec78ec0ac5001176315d41b66bf7afba5",
+          "declaration_sha256": "49bca106041f6ad0c4d940e25a8356bc0285dbce3713fb965b849c68d38cb7e1"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::value_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "532f453b0f7195dea5901793de0a9257ece0da6adb050ba2ce1ba8611dcd9ad0"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::change_value_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "6f6a26f7141531c52d1777018241a90a09c2180cff7aa86f8e37438d09301667"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::set_value_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "2a41329679dbc5c5a4ce0c34e125f94db829f65849bcb861d65d654647c72695"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::exchange_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "ff9c463df62e4f01dba50391fd8e17fc6559f19deae6b0bb2c37e8db86fc2b0e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "d1807785c09803216c3879574c4d7089172c54aa4b4b95e745da8fdb80255ac2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_range_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "fed754e245b75934ae0308d3999ccf2074c27b393433ae26faacedf142c94333"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_before_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "3ebd444e701c748d5af6e086e589f8cf4f0651515d4be0c194fa65711cdc2b7c"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "c50e396813768bd01079de91a2bde9a187b950534ec183db72caf3e8846d95cd"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_before_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "e8e7fc0f8ce292105a7b329fd60e475964a9bb10a3c059c90b5a2167007dd947"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "ede15d6345658117efff01870a241a4bf2a4c2ce4cdc21b9f0b433c902cfc21b"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::split_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "0096c5b522255fa8e0d542d1890770af2a4d0571a783d746b79ac0fbb97926c6"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "a21dbe1cb8b7f2b89e560175de5cf32e056f2ddade0ab654604377e307964a0c"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after_signed",
+          "source_file": "crates/tkernel/src/ncollection/sequence/signed_indices.rs",
+          "source_sha256": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+          "declaration_sha256": "f921bfa3621c8b08cd72881aa178838553f2a25d514289656f02c04eeb07f1d7"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::initialize",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "e40089c25f2d27976b44e2c8a56c163b3f5056c0a7b6acef18aa5884768848db"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::copy_to",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "f740855df695ed08d023d2ad75f3793f178a116c1f4ce8faf0fadddca476a50e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::assign",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "ed4fae35a9b3d793549830597bbe8238156ae69ed5234d4224b6d3e46b6cc54a"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::assign_self",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "7453c220689e6b1ebd7265b37b9d4a3da15f3207bf7cd8b374d39f0d00e63d3e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::is_equal",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "6534a21d903abd11b270b655c3977d0d19fec98a4cdea0029e630b6d691736ba"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::advance",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "6b33c21fec9fa10fb1fa19afacf17dc71db40b43d553f3bbf9ef0f78178ae052"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::post_advance",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "7ac64fe67d22240d55367cdd27c02031d634f4a26951b6e3043cec3f35bc6a96"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::retreat",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "8d9509836c321a93defcedbad45eabeb05a05ef8e5411150ac8a0423e46a4ca1"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::post_retreat",
+          "source_file": "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs",
+          "source_sha256": "0415b97ec912caf9b52ac313b874a1cca357ca2357daf9f2ec6d8aa420e63b30",
+          "declaration_sha256": "82cdf67f7a0edb53a79386963e891e2cd366508faabbd3970d1c16a4510788c4"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceIter::<core::clone::Clone>::clone",
+          "source_file": "crates/tkernel/src/ncollection/sequence/iteration.rs",
+          "source_sha256": "c176261afc9a2ce662f12457107dc6a2c35c045347f534bd6aa5d812dbd6fad7",
+          "declaration_sha256": "0bd1c4bcc698fa5033a7f60a668c8064070851efa62a5df0f04fed8a69e24dc6"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::SequenceIter::<core::cmp::PartialEq>::eq",
+          "source_file": "crates/tkernel/src/ncollection/sequence/iteration.rs",
+          "source_sha256": "c176261afc9a2ce662f12457107dc6a2c35c045347f534bd6aa5d812dbd6fad7",
+          "declaration_sha256": "d2c2b6c58b6bd7b1601b86f8d8999f3fdf09490de37214e838bac39e981679d5"
+        }
+      ],
+      "candidate_bindings": [
+        {
+          "cpp_id": "06254ed754485fc10d71c972779d99bce5cc0f3d370414d3ecb4dc72ee456bef",
+          "cpp_name": "NCollection_Sequence::operator=",
+          "cpp_signature": "NCollection_Sequence<TheItemType> &(const NCollection_Sequence<TheItemType> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::assign",
+            "rustycad_tkernel::ncollection::Sequence::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "0f76875d319c69b2abd4937016f831df53ebae9d648f2f0a0885b6ec2264df52",
+          "cpp_name": "NCollection_Sequence::Iterator::Initialize",
+          "cpp_signature": "void (const NCollection_Sequence<TheItemType> &, bool) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::SequenceCursor::initialize"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "115d2c8ba5340cbd1501b1be94e59e6b79ec02936d0222fc480a327f53bfb84d",
+          "cpp_name": "NCollection_Sequence::SetValue",
+          "cpp_signature": "void (int, const type-parameter-0-0 &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::set_value_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "2d4948c335bdef907a82f699c51a69783697c1de65085b47526ec4f16375b935",
+          "cpp_name": "NCollection_Sequence::Exchange",
+          "cpp_signature": "void (int, int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::exchange_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "30c4bceb61fe816468e255f9297583becb833f2ccdcc061dfdb86afda948d4c1",
+          "cpp_name": "NCollection_Sequence::Iterator::IsEqual",
+          "cpp_signature": "bool (const class NCollection_Sequence::Iterator &) const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::SequenceCursor::is_equal"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "53137f78d8346212ae6e92b624cb8be4c90d7abe3a1ca76700357cddd25c644e",
+          "cpp_name": "NCollection_Sequence::ChangeValue",
+          "cpp_signature": "type-parameter-0-0 &(int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::change_value_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "54851d650be8b204bd6a69185b189a016b695aef8cb03ddd085b25ca5af71fef",
+          "cpp_name": "NCollection_Sequence::operator=",
+          "cpp_signature": "NCollection_Sequence<TheItemType> &(NCollection_Sequence<TheItemType> &&) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::move_assign",
+            "rustycad_tkernel::ncollection::Sequence::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "54c8b7d16ee7b056a02d006508895214d6a0204248270f67ffb170c7fe79f02a",
+          "cpp_name": "NCollection_Sequence::Value",
+          "cpp_signature": "const type-parameter-0-0 &(int) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::value_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "6400e94491b686b14c740e6a4924f270d4c345c499aaea3ad9fd0ecd3fa7c55f",
+          "cpp_name": "NCollection_Sequence::EmplaceAfter",
+          "cpp_signature": "type-parameter-0-0 &(int, type-parameter-1-0 &&...)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::emplace_after_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "80031b76b4fffdea125293d1bfcea464d2dd1162f348fd69645da72e1c3169d5",
+          "cpp_name": "NCollection_Sequence::Iterator::Initialize",
+          "cpp_signature": "void (NCollection_Sequence<TheItemType> &, bool) noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::SequenceCursor::initialize"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "8b33bb2c7cc6d2297a18eb28dd9086409c01ea558eb8aec0b5f72ac825e52ebd",
+          "cpp_name": "NCollection_Sequence::Split",
+          "cpp_signature": "void (int, NCollection_Sequence<TheItemType> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::split_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "e2316d434c3d8ed32574efafc55e0e4a55993b6aac3b231679863f19365f8643",
+          "cpp_name": "NCollection_Sequence::Assign",
+          "cpp_signature": "NCollection_Sequence<TheItemType> &(const NCollection_Sequence<TheItemType> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::assign",
+            "rustycad_tkernel::ncollection::Sequence::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "eb763a2d7fabfb06cecc46271a5ad30e5a76efd7939f3ed6fd0135c17b0441c9",
+          "cpp_name": "NCollection_Sequence::EmplaceBefore",
+          "cpp_signature": "type-parameter-0-0 &(int, type-parameter-1-0 &&...)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::Sequence::emplace_before_signed"
+          ],
+          "status": "partial"
+        }
+      ],
+      "original_cases": [
+        {
+          "cpp": "NCollection_SequenceTest.AdvancedOperations",
+          "rust": "NCollection_SequenceTest__AdvancedOperations",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.AllocatorTest",
+          "rust": "NCollection_SequenceTest__AllocatorTest",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.BasicFunctions",
+          "rust": "NCollection_SequenceTest__BasicFunctions",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.CombiningSequences",
+          "rust": "NCollection_SequenceTest__CombiningSequences",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.ComplexTypeSequence",
+          "rust": "NCollection_SequenceTest__ComplexTypeSequence",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.CopyAndAssignment",
+          "rust": "NCollection_SequenceTest__CopyAndAssignment",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplaceAfterIndex",
+          "rust": "NCollection_SequenceTest__EmplaceAfterIndex",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplaceAfterIterator",
+          "rust": "NCollection_SequenceTest__EmplaceAfterIterator",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplaceAppend",
+          "rust": "NCollection_SequenceTest__EmplaceAppend",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplaceBeforeIndex",
+          "rust": "NCollection_SequenceTest__EmplaceBeforeIndex",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplacePrepend",
+          "rust": "NCollection_SequenceTest__EmplacePrepend",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.EmplaceWithMoveOnlyType",
+          "rust": "NCollection_SequenceTest__EmplaceWithMoveOnlyType",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.IteratorFunctions",
+          "rust": "NCollection_SequenceTest__IteratorFunctions",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.ModifyingOperations",
+          "rust": "NCollection_SequenceTest__ModifyingOperations",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.MoveOperations",
+          "rust": "NCollection_SequenceTest__MoveOperations",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.OCC26448_PrependEmptySequence",
+          "rust": "NCollection_SequenceTest__OCC26448_PrependEmptySequence",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.STLAlgorithmCompatibility_MinMax",
+          "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_MinMax",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.STLAlgorithmCompatibility_Replace",
+          "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_Replace",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.STLAlgorithmCompatibility_Reverse",
+          "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_Reverse",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_SequenceTest.StandardIteratorContract",
+          "rust": "NCollection_SequenceTest__StandardIteratorContract",
+          "status": "passed"
+        }
+      ],
+      "original_cases_joined": 20,
+      "supplemental_rust_passes": 10,
+      "miri_passes": 10,
+      "native_oracle_rows": 15,
+      "remaining_partial_contracts": [
+        "Negative self-insertion overloads and checked endpoint exception wrappers remain to be completed.",
+        "Native node layout, arbitrary C++ copy/move hooks and mutable iterator aliasing remain partial.",
+        "Rust Iterator is a safe traversal adapter; native private iterator increment/decrement declarations still require public-alias reachability proof."
+      ],
+      "api_parity_complete": false
+    },
+    {
+      "cpp_class": "NCollection_AliasedArray",
+      "compiler_bodies": [
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::new_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "4e537ac32615f1a4106415df49202ea7804fffb009ae87c508c53c3bcf6a0c2e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::from_slice_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "29817c73cd5d82d6b55c1e0140f3e1cb5d2398e3a6d11267dc83071563d1d4c2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::resize_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "1773b4bba842d0aff18eed0a5a758f4f4dae7b163b7dc6a54b953a7e91db1fda"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "5c6a9924c5f83e050da8cfdf736e64beacb7b1e7f04a4d9810bd268648debc66"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "34eac9d1160755a62e7cda6165d6c88fbfb3b35aadd728c043d8cf62015afe07"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "69d7a3a698dcc3581f4abfb350452353b287deb5e6b87d2bb1180b36b9d9ffd1"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value2_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "53e0ca788be8c251daf95fce979a4f98cea1146eb3a2edfd769a01b7ea7061f7"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "5da022db47c68f0ce2e6a61faa302947b2a5249ac71534b577e5657cf9e9e5e5"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "c89bd7253b01fadee92c1301d3f7a7b898befd3a54d8d464261b09dde9b3451e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value_into",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "ecc0bb376bbe505d321f54c9f1438e80941b5833ad07ff9163dc4744b064099d"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2_into",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "c89120e00010c0927509bafe30acd88979bb81e821e530a8b48ebe33e2d74d92"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value_into_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "d4dffc73d805bf0507f028785e842065912a8f653fd3bf62f3b8fc4c109e611c"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2_into_signed",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/legacy.rs",
+          "source_sha256": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+          "declaration_sha256": "bc267130dd0d1ddae6579ba68a21f0be26baac21536f835bbe7d58ecfb08236d"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::data_ptr",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/pointers.rs",
+          "source_sha256": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+          "declaration_sha256": "b196b8fde4035bc36bfb6c698bb728892586d39aa8b792bb57e78685990dd7ba"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::data_mut_ptr",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/pointers.rs",
+          "source_sha256": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+          "declaration_sha256": "08b830dd681209c883c176a53f7ef7a68c374ab15755b93cc5e5ada373d4f5ff"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/pointers.rs",
+          "source_sha256": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+          "declaration_sha256": "43f92a2434f514e3baad36e78c251561714ef8d2a12ea86f91ad82bcc801bf20"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array/pointers.rs",
+          "source_sha256": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+          "declaration_sha256": "43621ebecf128cb6ac4da82863f536a41cde562b6323f2c1f0bf9860e2fc01d2"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array.rs",
+          "source_sha256": "7675b89ab2d95307a0575430bb706398ccea4d29d5b9d0dbec5b04aa906d0cbe",
+          "declaration_sha256": "ace14a3383bd47c566b9fce2cd3ffb98a9993ac15b4cebe1ad2cb4cb35f34289"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array.rs",
+          "source_sha256": "7675b89ab2d95307a0575430bb706398ccea4d29d5b9d0dbec5b04aa906d0cbe",
+          "declaration_sha256": "377d01af8a722f19364ba0ce022de986b2c302b5d470ad9e74b224c7b0ae1c95"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign_self",
+          "source_file": "crates/tkernel/src/ncollection/aliased_array.rs",
+          "source_sha256": "7675b89ab2d95307a0575430bb706398ccea4d29d5b9d0dbec5b04aa906d0cbe",
+          "declaration_sha256": "48992ba6d6a2bc79aa601203986f30ba65ceda78d360f8481e8032c2d772a9c3"
+        }
+      ],
+      "candidate_bindings": [
+        {
+          "cpp_id": "04858207ceaf369494e2e8e7c667160b1883e89ded9750a1354c52f9fcec7559",
+          "cpp_name": "NCollection_AliasedArray::ChangeValue2",
+          "cpp_signature": "type-parameter-1-0 &(int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::change_value2_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "1d3f4039a211c6abb4bbb113b665c1dfe317b37b737ba8991827dbce654df966",
+          "cpp_name": "NCollection_AliasedArray::Value",
+          "cpp_signature": "const type-parameter-1-0 &(int) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "26be8082ad61dfce61b414557dd5ae5d8b439e691962b23b8ba03cd38af5d685",
+          "cpp_name": "NCollection_AliasedArray::Resize",
+          "cpp_signature": "void (int, bool)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::resize_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "2942cb5fc14168aac68205e754ba861dc839a8d8f24f56ea63cdcf60ac05086d",
+          "cpp_name": "NCollection_AliasedArray::ChangeData",
+          "cpp_signature": "type-parameter-1-0 *()",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::data_mut_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "3ceb3eaab619c78f55b49a735e38690616ba5d905ce586626d3d51b1c4543857",
+          "cpp_name": "NCollection_AliasedArray::Value2",
+          "cpp_signature": "const type-parameter-1-0 &(int) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value2_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "479965e864c1f415e4125ceaf4c8e601036e0ae586d9231000129255579b31dc",
+          "cpp_name": "NCollection_AliasedArray::value",
+          "cpp_signature": "const unsigned char *(unsigned long) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "519438ccbf14e875d0ab78f5ecc6ac285e05de31c0b1211d0b130736fa3801d7",
+          "cpp_name": "NCollection_AliasedArray::operator=",
+          "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &&)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::move_from",
+            "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "58c8d87ef901cc7caacda97f0e2dc876c4adcccbc504ea71a005afa5993dfef8",
+          "cpp_name": "NCollection_AliasedArray::value",
+          "cpp_signature": "const unsigned char *(int) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "5a32d9c4e05d8c1cb3f13c8d07cb6ffd089bd2507d05d0cf0e111f8689e7d368",
+          "cpp_name": "NCollection_AliasedArray::changeValue",
+          "cpp_signature": "unsigned char *(int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "5b1722887c6cfe9f415cee1e5f0384140beb5eab01a7e84688baf603a691d8f3",
+          "cpp_name": "NCollection_AliasedArray::Value",
+          "cpp_signature": "void (unsigned long, type-parameter-1-0 &) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value_into"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "7d8339a2cef18089a9196dfda529c2e3a6abbd190595fe9ed804faa9df2fe1dd",
+          "cpp_name": "NCollection_AliasedArray::Move",
+          "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::move_from",
+            "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "7e047a6ef005be2b674a6de0f3b34b2d2a801cbb49d611a654a23e43b1592b80",
+          "cpp_name": "NCollection_AliasedArray::Data",
+          "cpp_signature": "const type-parameter-1-0 *() const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::data_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "7fe9ebfde3b37e3ceb9721dac8baa522ab815a182d8460171725b9485aa24ade",
+          "cpp_name": "NCollection_AliasedArray::NCollection_AliasedArray<MyAlignSize>",
+          "cpp_signature": "void (unsigned long, int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::new_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "860f4c83218edaf8499ea628592e3c3d44213fd9204a13da36cd8cb30270f907",
+          "cpp_name": "NCollection_AliasedArray::Value2",
+          "cpp_signature": "void (unsigned long, type-parameter-1-0 &) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value2_into"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "a193109e2cc2dd3bf91b5dc895b0450da3cac25988b34992f5608ad83100650e",
+          "cpp_name": "NCollection_AliasedArray::Value",
+          "cpp_signature": "void (int, type-parameter-1-0 &) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value_into_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "a99e387e7a63be3827f35fda62425238e6432cd97bf8ab15511d82e1e2a56193",
+          "cpp_name": "NCollection_AliasedArray::Value2",
+          "cpp_signature": "void (int, type-parameter-1-0 &) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::value2_into_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "c92c6d44135dbb1d22bec0d5a07d80d6e47d70cf128d477af19165a146471919",
+          "cpp_name": "NCollection_AliasedArray::Assign",
+          "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::assign",
+            "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "d17ed089255cfe00d4c5033ce5664e0f44f022823445f630268b4561475b97c9",
+          "cpp_name": "NCollection_AliasedArray::operator=",
+          "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::assign",
+            "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "d55c48df47eadadd3559e28f537ee7e7b68fc7e9336843bba2d4212fb512ba1a",
+          "cpp_name": "NCollection_AliasedArray::changeValue",
+          "cpp_signature": "unsigned char *(unsigned long)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "e047f54c4f937f0a1001d80801b9b6e357c69cc8d2fea01bb63c7dab4d586546",
+          "cpp_name": "NCollection_AliasedArray::NCollection_AliasedArray<MyAlignSize>",
+          "cpp_signature": "void (const type-parameter-1-0 *, int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::from_slice_signed"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "fdb206f99c16d74f708298387487cda996146cf04b4036ebe09d63e88031366d",
+          "cpp_name": "NCollection_AliasedArray::ChangeValue",
+          "cpp_signature": "type-parameter-1-0 &(int)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::AliasedArray::change_value_signed"
+          ],
+          "status": "partial"
+        }
+      ],
+      "original_cases": [
+        {
+          "cpp": "NCollection_AliasedArrayTest.ResizeEmptyWithCopy",
+          "rust": "NCollection_AliasedArrayTest__ResizeEmptyWithCopy",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_AliasedArrayTest.ResizeWithoutCopy",
+          "rust": "NCollection_AliasedArrayTest__ResizeWithoutCopy",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_AliasedArrayTest.TypedDataAndInit",
+          "rust": "NCollection_AliasedArrayTest__TypedDataAndInit",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_AliasedArrayTest.WrapExternalArray",
+          "rust": "NCollection_AliasedArrayTest__WrapExternalArray",
+          "status": "passed"
+        }
+      ],
+      "original_cases_joined": 4,
+      "supplemental_rust_passes": 9,
+      "miri_passes": 9,
+      "native_oracle_rows": 8,
+      "remaining_partial_contracts": [
+        "Native Move and move construction leave the source as a non-owning alias with unchanged pointer/range. Safe Rust move_from empties the source. The oracle records native-source-alias separately; this difference is not approved as parity.",
+        "Only the default 16-byte native alignment policy is represented; MyAlignSize template policies remain unported.",
+        "Native const external pointers may be written through a cast; safe Rust only accepts an exclusive mutable slice, and signed prefix construction checks that the slice is long enough.",
+        "Typed APIs accept ArrayValue/Pod types only; arbitrary C++ object representations, assignment hooks, overlapping writable aliases, and unaligned reference access are not claimed.",
+        "Rust fresh allocation zeroes bytes and checks byte-count overflow; native fresh bytes are indeterminate and native stride narrowing can truncate a size_t larger than UINT32_MAX. Existing Rust checked_stride rejects those strides.",
+        "Allocator hook policy and out-of-memory behavior are not equivalent. Native discard-resize frees owned storage before allocation; existing Rust resize allocates replacement storage before dropping the old block.",
+        "No new integrated API or original declaration mapping credit; candidate bindings need compiler-backed symbol capture and final integration validation."
+      ],
+      "api_parity_complete": false
+    },
+    {
+      "cpp_class": "NCollection_ForwardRange",
+      "compiler_bodies": [
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::new",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "8dac8d2bd6ab1d9074dfd447e66c42842d0e4cad0654f2053344b2b05c67a47e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::from_copy",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "bc18712c8f9509c88d811a0ac1a75a794f31e52b6e85cd8512ea8e591060a040"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::iter",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "17e38061ad797b9af9b806be8cfd85d6cb6734a70ad78270b6ed67a452ed1c70"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::begin",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "f4b3aba8fb1aa5e21f031b33a218555e2f90eff9d152591ba893e6b02e3d9eb4"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::cbegin",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "631073a659641b4f55a07f3e0aadd0371619ac944c909f90e96dd648098b02f7"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::end",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "80f3fa7af2d9b36fd036b91428a967be45382d119f6fd414839103bb7a577b73"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::cend",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "f7807b395b5bb31b9e7a45b7d411719bc9738df0c76d96a4db554e40c8a2abf0"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::pre_increment",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "de5b69fe0bd5ec3a74600e64bbebe839998d707f590de3d54eceda66eb6a8328"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::current",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "c35b6594f8679a48c6f988f26e802454ded31eb991f85ba34ce107912e9df204"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::arrow",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "032ef570b224da147f520177a04f62306e09f6c13cacb469c8e86d036e23d1e0"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::advance",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "1bf30e936929c4762d2fac7e752e32418ccbf073378c57f4a65286dcbbcb6b3e"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::post_increment",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "bcf48c5abf86d0093298012341c53dcd17bbc78be7d614b188f7573e03d96067"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::cmp::PartialEq<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel>>::eq",
+          "source_file": "crates/tkernel/src/ncollection/forward_range.rs",
+          "source_sha256": "a936bc9e448a86619c13bd4dc58b63a2982f87f007a6794497d28fc58d0c5b14",
+          "declaration_sha256": "8181cf8512b7da552e0f7b71d2cf70fb1f74bc24584b499b02e07284cb7c1ff7"
+        }
+      ],
+      "candidate_bindings": [
+        {
+          "cpp_id": "05e7d1ac83876527072da103e8ab1e925dfe7965627a1d15cb4348633979871d",
+          "cpp_name": "NCollection_ForwardRange::cbegin",
+          "cpp_signature": "NCollection_ForwardRangeIterator<type-parameter-0-0> () const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::forward_range::ForwardRange::cbegin"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "0de73c899e49192649fc034a3a956e656106867bc19ade223f5a0b1f19b4ada0",
+          "cpp_name": "NCollection_ForwardRange::end",
+          "cpp_signature": "struct NCollection_ForwardRangeSentinel () const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::forward_range::ForwardRange::end"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "3b6c7ce478b88f37e7c8989fa2e20e331eb8872d18d0daf72a88ab278ae7ff39",
+          "cpp_name": "NCollection_ForwardRangeIterator::operator++",
+          "cpp_signature": "NCollection_ForwardRangeIterator<HostType> &()",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::pre_increment"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "ba15a23b7de5186504086643c12046e2a093930b78681ce7a58032c78a14ef4f",
+          "cpp_name": "NCollection_ForwardRange::begin",
+          "cpp_signature": "NCollection_ForwardRangeIterator<type-parameter-0-0> () const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::forward_range::ForwardRange::begin"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "e2faa31ef3bc0422c5924f944323b3230c516d5a01e8bd53df055c886f33633d",
+          "cpp_name": "NCollection_ForwardRange::cend",
+          "cpp_signature": "struct NCollection_ForwardRangeSentinel () const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::forward_range::ForwardRange::cend"
+          ],
+          "status": "partial"
+        }
+      ],
+      "original_cases": [
+        {
+          "cpp": "NCollection_ForwardRangeTest.ArrowOperator_ArrowProxy",
+          "rust": "NCollection_ForwardRangeTest__ArrowOperator_ArrowProxy",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.ArrowOperator_Reference",
+          "rust": "NCollection_ForwardRangeTest__ArrowOperator_Reference",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.InClassBeginEnd_RangeFor",
+          "rust": "NCollection_ForwardRangeTest__InClassBeginEnd_RangeFor",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.InClassBeginEnd_Temporary",
+          "rust": "NCollection_ForwardRangeTest__InClassBeginEnd_Temporary",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.IteratorTraits_ReferenceReturn",
+          "rust": "NCollection_ForwardRangeTest__IteratorTraits_ReferenceReturn",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.IteratorTraits_ValueReturn",
+          "rust": "NCollection_ForwardRangeTest__IteratorTraits_ValueReturn",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.IteratorTraits_ValueType",
+          "rust": "NCollection_ForwardRangeTest__IteratorTraits_ValueType",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.PostfixIncrement",
+          "rust": "NCollection_ForwardRangeTest__PostfixIncrement",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.Priority_CurrentOverCurrentId",
+          "rust": "NCollection_ForwardRangeTest__Priority_CurrentOverCurrentId",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.Priority_ValueOverCurrent",
+          "rust": "NCollection_ForwardRangeTest__Priority_ValueOverCurrent",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SFINAEDetection_BothCurrentAndId",
+          "rust": "NCollection_ForwardRangeTest__SFINAEDetection_BothCurrentAndId",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SFINAEDetection_BothValueAndCurrent",
+          "rust": "NCollection_ForwardRangeTest__SFINAEDetection_BothValueAndCurrent",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SFINAEDetection_Current",
+          "rust": "NCollection_ForwardRangeTest__SFINAEDetection_Current",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SFINAEDetection_CurrentId",
+          "rust": "NCollection_ForwardRangeTest__SFINAEDetection_CurrentId",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SFINAEDetection_Value",
+          "rust": "NCollection_ForwardRangeTest__SFINAEDetection_Value",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.SentinelComparison",
+          "rust": "NCollection_ForwardRangeTest__SentinelComparison",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_CurrentIdIterator_ByValue",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_CurrentIdIterator_ByValue",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_CurrentIterator",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_CurrentIterator",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_Empty",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_Empty",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_NonCopyable_Move",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_NonCopyable_Move",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_SingleElement",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_SingleElement",
+          "status": "passed"
+        },
+        {
+          "cpp": "NCollection_ForwardRangeTest.StandaloneRange_ValueIterator",
+          "rust": "NCollection_ForwardRangeTest__StandaloneRange_ValueIterator",
+          "status": "passed"
+        }
+      ],
+      "original_cases_joined": 22,
+      "supplemental_rust_passes": 5,
+      "miri_passes": 5,
+      "native_oracle_rows": 4,
+      "remaining_partial_contracts": [
+        "Accessor selection remains explicit Rust descriptors rather than automatic C++ method-name detection.",
+        "Safe current/postfix stop at exhaustion; pre_increment is the exact unconditional native prefix delegation.",
+        "Mutable internal cursor references and independently copied adapters over an exclusive external host are not represented. Rust references returned by accessors must have lifetimes independent of the short host borrow."
+      ],
+      "api_parity_complete": false
+    },
+    {
+      "cpp_class": "NCollection_UtfIterator",
+      "compiler_bodies": [
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::from_optional",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "39d3726b479a690d233c0c35fa5bf7c2566565fa56c6d6b9cc58473aa0c489f8"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::init_optional",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "f3fcc74b663936f97032c8c44d37f0371ed75dddc7e5494598a34df40c1478e5"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_here_ptr",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "37a23a19f5533295ac3517523a1b586c5d906ea63efc40441c6893acc52dfca1"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_next_ptr",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "b6b9666e0d152470f92686b214c958d3a0cbfcd7c4659c0ddfc634c9a3b48a7a"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf_remaining",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "afbccb2c08d35d0597ffd81c713ff960a337d71d63997afc42fb794f256fe35a"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::<core::cmp::PartialEq>::eq",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator.rs",
+          "source_sha256": "b3f6e21147422b19acfe3299b7c3f469875f0787c2378275ee5cd294f0f6e32c",
+          "declaration_sha256": "cc4803d5128e64a5fa6e1f25549a82c1d0fcd8b5e2cc308960b5cd45bdb09ff9"
+        },
+        {
+          "rust_item": "rustycad_tkernel::ncollection::UtfIterator::<core::ops::deref::Deref>::deref",
+          "source_file": "crates/tkernel/src/ncollection/utf_iterator/positions.rs",
+          "source_sha256": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+          "declaration_sha256": "ee64bb952f7b05e5f1dcbdefd389ce3c57a30b2d9a02ff04ac993e205188834d"
+        }
+      ],
+      "candidate_bindings": [
+        {
+          "cpp_id": "0e9dad4264bd8e7b75dc996a684bcc6ec1c06f0731df545b2e7f0da636dd7b07",
+          "cpp_name": "NCollection_UtfIterator::Init",
+          "cpp_signature": "void (const type-parameter-0-0 *)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::init_optional"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "22663e3151991a1dd8ff01119df75a551e04c060398f59d9b80554a35aa441ba",
+          "cpp_name": "NCollection_UtfIterator::BufferNext",
+          "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::buffer_next_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "3c903d63cfa68f14e1849c0d02f615245cbe49a27322a5219f469df2366be6bf",
+          "cpp_name": "NCollection_UtfIterator::operator*",
+          "cpp_signature": "char32_t () const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::<core::ops::deref::Deref>::deref"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "62d81232322badef947c290f650d4670d1eb2c6b1b69e7fb7006caed7e4225e3",
+          "cpp_name": "NCollection_UtfIterator::GetUtf",
+          "cpp_signature": "type-parameter-1-0 *(type-parameter-1-0 *) const",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::get_utf_remaining"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "95024e66a7e4b0b90af706bd877eab9ef36cddf5a524bcf7bf04c99e6a9291a2",
+          "cpp_name": "NCollection_UtfIterator::BufferHere",
+          "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::buffer_here_ptr"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "cf9f67e11aefaf0caed398b3cc10d994108d47da517386e8b394e197126ef47c",
+          "cpp_name": "NCollection_UtfIterator::NCollection_UtfIterator<Type>",
+          "cpp_signature": "void (const type-parameter-0-0 *)",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::from_optional"
+          ],
+          "status": "partial"
+        },
+        {
+          "cpp_id": "e005b38dca8c2f5c7c37cec1756f5f63eb0f6b5f78dc4125b8cbc96d6ba2c201",
+          "cpp_name": "NCollection_UtfIterator::operator==",
+          "cpp_signature": "bool (const NCollection_UtfIterator<Type> &) const noexcept",
+          "rust_items": [
+            "rustycad_tkernel::ncollection::UtfIterator::<core::cmp::PartialEq>::eq"
+          ],
+          "status": "partial"
+        }
+      ],
+      "original_cases": [],
+      "original_cases_joined": 0,
+      "supplemental_rust_passes": 6,
+      "miri_passes": 6,
+      "native_oracle_rows": 6,
+      "remaining_partial_contracts": [
+        "ChangeBufferHere writable aliases are not implemented for shared input slices.",
+        "Input slices synthesize zero padding at exhaustion; pointer getters do not turn this padding into dereferenceable storage.",
+        "Null increment panics instead of native undefined null dereference.",
+        "Signed char template/overload variants and platform-specific wchar_t ABI are not independently proven."
+      ],
+      "api_parity_complete": false
+    }
+  ],
+  "allocator_repair": {
+    "regression_tests_passed": 3,
+    "miri_passes": 3,
+    "reason": "Box can return a reborrowed payload pointer without access to the hidden allocation prefix. Typed heap allocation now reconstructs its layout from the Allocator API, avoiding out-of-bounds provenance access.",
+    "limitations": "Typed heap allocations use the exact requested Rust payload layout, with policy minimum alignment; raw OCCT byte allocations retain their native rounding/header behavior. Native allocator hooks and exact allocation-failure parity remain unproven."
+  },
+  "runtime": {
+    "workspace_passed": 13677,
+    "workspace_failed": 0,
+    "workspace_ignored": 70,
+    "workspace_test_groups": 1243,
+    "miri_passes": 44,
+    "native_original_passes": 80,
+    "rust_original_passes": 80,
+    "supplemental_rust_passes": 44,
+    "strict_clippy_exit": 0,
+    "format_exit": 0,
+    "source_inputs_count": 8819,
+    "source_inputs_after_run_identical": true
+  },
+  "artifacts": {
+    "workspace-final": {
+      "path": "porting/runtime-evidence/foundation-method-batch-workspace-final.gz",
+      "sha256": "5b499e3b5bb2874e2ae838c7c12f545237b6c601ebb48604bf9f7e273f36a40c"
+    },
+    "miri-final": {
+      "path": "porting/runtime-evidence/foundation-method-batch-miri-final.gz",
+      "sha256": "6d8e6e3e5da945cf9f0ee2e1db1f257a6884cde089de72de68dd08c39082914e"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/foundation-method-batch-clippy.gz",
+      "sha256": "69e042ab129f269a2d1139d71f11cefaf54fb5b90448d88d4acb9419b2a1bd62"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/foundation-method-batch-rustdoc.gz",
+      "sha256": "b3b448bbdaeac6c49af9dc61dd384213835e39f13851f018018897d2b1d14026"
+    },
+    "native-legacy": {
+      "path": "porting/runtime-evidence/foundation-method-batch-native-legacy.gz",
+      "sha256": "44160cda29dbc2fac61906ea5bc8bbbd81b0338140cc0974afad2a06a3e36393"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/foundation-method-batch-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/foundation-method-batch-inputs.gz",
+      "sha256": "994cc0012fc6bc23f982d313ba8c80e7eb441beeb6ccd5237dcdbf39e238a63e"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/foundation-method-batch-compiler.gz",
+      "sha256": "88e463a215b13baeb8b7525884ce5cfc4ebe368689c7ea9bba642b794d64d388"
+    },
+    "miri-provenance-failure": {
+      "path": "porting/runtime-evidence/foundation-method-batch-miri-provenance-failure.gz",
+      "sha256": "5e47ae23a71f3208e59d74668616fe8fbf96440dc1d092fe67532f735e0fa79b"
+    },
+    "list-oracle": {
+      "path": "porting/runtime-evidence/foundation-method-batch-list-oracle.gz",
+      "sha256": "d1fbc39d14849b4b4bc5d2f8272da25bc51635f17993decdd4de7471771655f0"
+    },
+    "sequence-oracle": {
+      "path": "porting/runtime-evidence/foundation-method-batch-sequence-oracle.gz",
+      "sha256": "36ca1209a28e4ce91a67aea941462d588aed7e94be3456e80da2053565dacb6a"
+    },
+    "aliased_array-oracle": {
+      "path": "porting/runtime-evidence/foundation-method-batch-aliased_array-oracle.gz",
+      "sha256": "e71cf7abb43a9fbee9e77d7556c3ba949ec25683b282753bd047d800799656fe"
+    },
+    "forward_range-oracle": {
+      "path": "porting/runtime-evidence/foundation-method-batch-forward_range-oracle.gz",
+      "sha256": "2adb60301fad721c5efde21da8fd169ce0477b7f408194037e674308a6b2af89"
+    },
+    "utf_iterator-oracle": {
+      "path": "porting/runtime-evidence/foundation-method-batch-utf_iterator-oracle.gz",
+      "sha256": "563c8ae19e19fc9ed140b40a8932cf0466a948f2a68148741789c2e67dabe9e4"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/foundation-method-batch-source.tar.gz",
+      "sha256": "23b4bd1044b6f6bfcf050425c9873f1dfe4e31db600d861d831d36e2faaafb14"
+    }
+  },
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

@@ -1,21 +1,6 @@
 //! One-based OCCT sequences whose items live in individually allocated, stable nodes.
 use super::{AllocatedBox, BaseAllocator};
 use crate::standard::Failure;
-struct SequenceNode<T> {
-    value: T,
-    _allocation_identity: u8,
-}
-impl<T> std::ops::Deref for SequenceNode<T> {
-    type Target = T;
-    fn deref(&self) -> &T {
-        &self.value
-    }
-}
-impl<T> std::ops::DerefMut for SequenceNode<T> {
-    fn deref_mut(&mut self) -> &mut T {
-        &mut self.value
-    }
-}
 /// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
     resource: BaseAllocator,
@@ -189,6 +174,24 @@ fn no_such_node(member: &str, cursor: SequenceCursor) -> Failure {
         "",
     )
 }
+mod base_iterator;
+// Native raw topology operations require the documented live-node ownership contracts.
+#[allow(unsafe_code)]
+mod base_storage;
+pub use base_iterator::BaseSequenceIterator;
+pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
+mod borrowed;
+mod cursor_contracts;
 mod editing;
 mod iteration;
+mod links;
+// Raw node callbacks restore the exact typed allocation and its original allocator.
+#[allow(unsafe_code)]
+mod node_allocation;
+// Safety contracts cover opaque link Send/Sync and preserve exclusive node mutation.
+#[allow(unsafe_code)]
+mod nodes;
+pub use nodes::{SeqNode, SequenceNode};
+mod method_contracts;
 mod operations;
+mod signed_indices;

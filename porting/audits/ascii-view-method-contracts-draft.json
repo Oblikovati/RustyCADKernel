@@ -1,0 +1,495 @@
+{
+  "status": "source_frozen_behavioral_investigation_draft",
+  "class": "TCollection_AsciiString",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "production_changes": [],
+  "findings": [
+    "Existing from_view matches native std::string_view constructor by stopping at first NUL. No production change required.",
+    "Native Copy(view), Copy(ptr,length), operator=(view), AssignCat(view), Cat(view), operator+(view), operator+=(view) retain embedded NUL bytes. Existing copy and generic slice operands match.",
+    "From<&[u8]> is a full-span conversion used by generic append and Cat dispatch; routing it through from_view would regress those overloads. Explicit from_view is the native view constructor.",
+    "Existing original declaration tests use no embedded NULs for the view methods; three new tests assert this behavior against ten native output rows."
+  ],
+  "source_hashes": {
+    "crates/tkernel/src/tcollection/ascii_string/construction.rs": "b9de00d17ccc8213b3ea2c4c1866cc069f2bf7a9c79ba8d890babfcdc186e631",
+    "crates/tkernel/src/tcollection/ascii_string/traits.rs": "eac39057dd656685ca6fde647a98418b8554a346bf573fd96085bf3274e651ba",
+    "crates/tkernel/src/tcollection/ascii_string/concatenation.rs": "2f21c05c3f765ffbcf48839f86ad095c2bd7ea5a854d24aa693076a12dd65a39",
+    "crates/tkernel/src/tcollection/ascii_string/editing.rs": "5cfdb3e58f8245990059065ab655c433d8d56f0cb5a32704458e17cef37715e1",
+    "crates/tkernel/tests/ascii_view_method_contracts.rs": "c7a0d159fa1a40859d93b641ea7a281bb9758890084b41ac655ad11bb4c6984e",
+    "tools/oracle/tkernel_ascii_view_contracts.cxx": "686c44fc1fce912613ba008b2ba567f84fc32eab3d68244b9c990b76b200b04c",
+    "tools/oracle/tkernel_ascii_view_contracts.expected": "a772c96a45a54d5ae566945802ded701278ade98c19cfbc7376945e90077b95e"
+  },
+  "checks": {
+    "rust_log": "/tmp/ascii-view-method-rust.log",
+    "rust_exit": 0,
+    "native_log": "/tmp/ascii-view-method-native.log",
+    "native_exit": 0,
+    "native_original_passed": 114,
+    "new_tests": 3,
+    "oracle_rows": 10,
+    "miri": "root coordinated"
+  },
+  "original_name_join": [
+    {
+      "cpp": "TCollection_AsciiStringTest.DefaultConstructor",
+      "rust": "TCollection_AsciiStringTest__DefaultConstructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ConstructorWithCString",
+      "rust": "TCollection_AsciiStringTest__ConstructorWithCString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ConstructorWithChar",
+      "rust": "TCollection_AsciiStringTest__ConstructorWithChar"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.CopyConstructor",
+      "rust": "TCollection_AsciiStringTest__CopyConstructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignmentOperator",
+      "rust": "TCollection_AsciiStringTest__AssignmentOperator"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Concatenation",
+      "rust": "TCollection_AsciiStringTest__Concatenation"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SubString",
+      "rust": "TCollection_AsciiStringTest__SubString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ChangeCase",
+      "rust": "TCollection_AsciiStringTest__ChangeCase"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SearchAndLocation",
+      "rust": "TCollection_AsciiStringTest__SearchAndLocation"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.RemoveAndInsert",
+      "rust": "TCollection_AsciiStringTest__RemoveAndInsert"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Comparison",
+      "rust": "TCollection_AsciiStringTest__Comparison"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Token",
+      "rust": "TCollection_AsciiStringTest__Token"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ValueConversion",
+      "rust": "TCollection_AsciiStringTest__ValueConversion"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.HashCode",
+      "rust": "TCollection_AsciiStringTest__HashCode"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Split",
+      "rust": "TCollection_AsciiStringTest__Split"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.MemoryAllocation",
+      "rust": "TCollection_AsciiStringTest__MemoryAllocation"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.LengthConstructor",
+      "rust": "TCollection_AsciiStringTest__LengthConstructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ExtendedStringConversion",
+      "rust": "TCollection_AsciiStringTest__ExtendedStringConversion"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.NumericalConstructors",
+      "rust": "TCollection_AsciiStringTest__NumericalConstructors"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.FillerConstructor",
+      "rust": "TCollection_AsciiStringTest__FillerConstructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.ConcatenationConstructors",
+      "rust": "TCollection_AsciiStringTest__ConcatenationConstructors"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.EdgeCases",
+      "rust": "TCollection_AsciiStringTest__EdgeCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.LargeStrings",
+      "rust": "TCollection_AsciiStringTest__LargeStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.PaddingSafety",
+      "rust": "TCollection_AsciiStringTest__PaddingSafety"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_BasicCases",
+      "rust": "TCollection_AsciiStringTest__AssignCat_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_EmptyStrings",
+      "rust": "TCollection_AsciiStringTest__AssignCat_EmptyStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_SelfReference",
+      "rust": "TCollection_AsciiStringTest__AssignCat_SelfReference"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_IntegerAndReal",
+      "rust": "TCollection_AsciiStringTest__AssignCat_IntegerAndReal"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_ExtendedStringAndWideChar",
+      "rust": "TCollection_AsciiStringTest__AssignCat_ExtendedStringAndWideChar"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_LargeStrings",
+      "rust": "TCollection_AsciiStringTest__AssignCat_LargeStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Insert_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_EmptyStrings",
+      "rust": "TCollection_AsciiStringTest__Insert_EmptyStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_SelfReference",
+      "rust": "TCollection_AsciiStringTest__Insert_SelfReference"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_WithCharacter",
+      "rust": "TCollection_AsciiStringTest__Insert_WithCharacter"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_BoundaryConditions",
+      "rust": "TCollection_AsciiStringTest__Insert_BoundaryConditions"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapLeftSide",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapLeftSide"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapRightSide",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapRightSide"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapInsideShiftWindow",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapInsideShiftWindow"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapStartsBeforeShiftWindow",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapStartsBeforeShiftWindow"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapAtInsertionPoint",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapAtInsertionPoint"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapComplex1",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapComplex1"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapComplex2",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapComplex2"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapSpansEntireShiftWindow",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapSpansEntireShiftWindow"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapSingleChar",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapSingleChar"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapEndToBeginning",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapEndToBeginning"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Insert_OverlapLargeString",
+      "rust": "TCollection_AsciiStringTest__Insert_OverlapLargeString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Cat_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Cat_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Cat_IntegerAndReal",
+      "rust": "TCollection_AsciiStringTest__Cat_IntegerAndReal"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Cat_ExtendedStringAndWideChar",
+      "rust": "TCollection_AsciiStringTest__Cat_ExtendedStringAndWideChar"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Cat_EmptyStrings",
+      "rust": "TCollection_AsciiStringTest__Cat_EmptyStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Cat_ChainedOperations",
+      "rust": "TCollection_AsciiStringTest__Cat_ChainedOperations"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Copy_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Copy_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Copy_ShorterAndLonger",
+      "rust": "TCollection_AsciiStringTest__Copy_ShorterAndLonger"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Copy_EmptyString",
+      "rust": "TCollection_AsciiStringTest__Copy_EmptyString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Copy_SelfAssignment",
+      "rust": "TCollection_AsciiStringTest__Copy_SelfAssignment"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Copy_MemoryReuse",
+      "rust": "TCollection_AsciiStringTest__Copy_MemoryReuse"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Search_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Search_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Search_EdgeCases",
+      "rust": "TCollection_AsciiStringTest__Search_EdgeCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Search_RepeatedPattern",
+      "rust": "TCollection_AsciiStringTest__Search_RepeatedPattern"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SearchFromEnd_BasicCases",
+      "rust": "TCollection_AsciiStringTest__SearchFromEnd_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SearchFromEnd_EdgeCases",
+      "rust": "TCollection_AsciiStringTest__SearchFromEnd_EdgeCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Search_LongerThanString",
+      "rust": "TCollection_AsciiStringTest__Search_LongerThanString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsSameString_CaseSensitive",
+      "rust": "TCollection_AsciiStringTest__IsSameString_CaseSensitive"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsSameString_CaseInsensitive",
+      "rust": "TCollection_AsciiStringTest__IsSameString_CaseInsensitive"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsSameString_EmptyStrings",
+      "rust": "TCollection_AsciiStringTest__IsSameString_EmptyStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsSameString_DifferentLengths",
+      "rust": "TCollection_AsciiStringTest__IsSameString_DifferentLengths"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsSameString_WithCStrings",
+      "rust": "TCollection_AsciiStringTest__IsSameString_WithCStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsEqual_AllOverloads",
+      "rust": "TCollection_AsciiStringTest__IsEqual_AllOverloads"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsDifferent_AllOverloads",
+      "rust": "TCollection_AsciiStringTest__IsDifferent_AllOverloads"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsLess_AllOverloads",
+      "rust": "TCollection_AsciiStringTest__IsLess_AllOverloads"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.IsGreater_AllOverloads",
+      "rust": "TCollection_AsciiStringTest__IsGreater_AllOverloads"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Comparison_EmptyStrings",
+      "rust": "TCollection_AsciiStringTest__Comparison_EmptyStrings"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SetValue_BasicCases",
+      "rust": "TCollection_AsciiStringTest__SetValue_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SetValue_WithString",
+      "rust": "TCollection_AsciiStringTest__SetValue_WithString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SetValue_BoundaryConditions",
+      "rust": "TCollection_AsciiStringTest__SetValue_BoundaryConditions"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.SetValue_StringOverflow",
+      "rust": "TCollection_AsciiStringTest__SetValue_StringOverflow"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Remove_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Remove_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Remove_EntireString",
+      "rust": "TCollection_AsciiStringTest__Remove_EntireString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.RemoveAll_SingleCharacter",
+      "rust": "TCollection_AsciiStringTest__RemoveAll_SingleCharacter"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.RemoveAll_NoOccurrence",
+      "rust": "TCollection_AsciiStringTest__RemoveAll_NoOccurrence"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.RemoveAll_AllCharacters",
+      "rust": "TCollection_AsciiStringTest__RemoveAll_AllCharacters"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Trunc_BasicCases",
+      "rust": "TCollection_AsciiStringTest__Trunc_BasicCases"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.Trunc_NoChange",
+      "rust": "TCollection_AsciiStringTest__Trunc_NoChange"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StringView_Constructor",
+      "rust": "TCollection_AsciiStringTest__StringView_Constructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StringView_AssignmentAndComparison",
+      "rust": "TCollection_AsciiStringTest__StringView_AssignmentAndComparison"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StringView_CatAndAssignCat",
+      "rust": "TCollection_AsciiStringTest__StringView_CatAndAssignCat"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StringView_Insert",
+      "rust": "TCollection_AsciiStringTest__StringView_Insert"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.MoveConstructor",
+      "rust": "TCollection_AsciiStringTest__MoveConstructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.MoveAssignment",
+      "rust": "TCollection_AsciiStringTest__MoveAssignment"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.TemplateLiteral_Constructor",
+      "rust": "TCollection_AsciiStringTest__TemplateLiteral_Constructor"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.TemplateLiteral_Assignment",
+      "rust": "TCollection_AsciiStringTest__TemplateLiteral_Assignment"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StressTest_MultipleOperations",
+      "rust": "TCollection_AsciiStringTest__StressTest_MultipleOperations"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.StressTest_LargeOperations",
+      "rust": "TCollection_AsciiStringTest__StressTest_LargeOperations"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.EdgeCase_NullCharacterHandling",
+      "rust": "TCollection_AsciiStringTest__EdgeCase_NullCharacterHandling"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.EdgeCase_ConsecutiveOperations",
+      "rust": "TCollection_AsciiStringTest__EdgeCase_ConsecutiveOperations"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.AssignCat_MultipleInLoop",
+      "rust": "TCollection_AsciiStringTest__AssignCat_MultipleInLoop"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.BUC60724_EmptyStringInitialization",
+      "rust": "TCollection_AsciiStringTest__BUC60724_EmptyStringInitialization"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.BUC60773_HAsciiStringInitialization",
+      "rust": "TCollection_AsciiStringTest__BUC60773_HAsciiStringInitialization"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.OCC6794_LargeConcatenation",
+      "rust": "TCollection_AsciiStringTest__OCC6794_LargeConcatenation"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.OCC11758_ComprehensiveConstructorsAndMethods",
+      "rust": "TCollection_AsciiStringTest__OCC11758_ComprehensiveConstructorsAndMethods"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_EmptyString",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_EmptyString"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_AsciiNoTrailing",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_AsciiNoTrailing"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_TrailingSpaces",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_TrailingSpaces"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_TrailingControlChars",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_TrailingControlChars"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_AllSpaces",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_AllSpaces"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_AllControlChars",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_AllControlChars"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_SingleChar",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_SingleChar"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_SingleSpace",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_SingleSpace"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_MixedTrailing",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_MixedTrailing"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_Utf8AtEnd",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_Utf8AtEnd"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_Utf8ThenSpaces",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_Utf8ThenSpaces"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_Utf8Only",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_Utf8Only"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_Utf8FourByteAtEnd",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_Utf8FourByteAtEnd"
+    },
+    {
+      "cpp": "TCollection_AsciiStringTest.UsefullLength_Utf8ThenControlChars",
+      "rust": "TCollection_AsciiStringTest__UsefullLength_Utf8ThenControlChars"
+    }
+  ],
+  "remaining_gaps": [
+    "Safe byte slices do not distinguish null empty std::string_view data from nonnull empty data; this batch observes content behavior.",
+    "No new compiler-surface coverage credit or exhaustive allocation failure behavior."
+  ]
+}

@@ -28,6 +28,22 @@ impl<T> Shared<T> {
     pub fn into_inner(self) -> T {
         self.value
     }
+    /// Builds the wrapped base from captured reference arguments; `Shared::from_constructor(|| vec![7; 2])`.
+    pub fn from_constructor(construct: impl FnOnce() -> T) -> Self {
+        Self {
+            parent: StandardTransient::default(),
+            value: construct(),
+        }
+    }
+}
+impl<T: Clone> Clone for Shared<T> {
+    fn clone(&self) -> Self {
+        Self::from_constructor(|| self.value.clone())
+    }
+    fn clone_from(&mut self, source: &Self) {
+        // Standard_Transient assignment deliberately leaves its reference count unchanged.
+        self.value.clone_from(&source.value);
+    }
 }
 
 impl<T: Default> Default for Shared<T> {

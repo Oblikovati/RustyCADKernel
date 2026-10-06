@@ -1,0 +1,248 @@
+{
+  "schema": "rustycad.class-method-progress.v1",
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
+  "integration_status": "Validated foundation drafts ready for integration on main; see current_draft_checkpoint.",
+  "classes": [
+    {
+      "batch_order": 1,
+      "cpp_class": "NCollection_LocalArray",
+      "audit_path": "porting/audits/local-trivial-move-contracts.json",
+      "audit_sha256": "b079559d509dffa824a7d63e36de502b3b7fe8664d53b710c3dc804e314db11f",
+      "native_declaration_candidates": 9,
+      "owned_rust_bodies": 8,
+      "original_cases_joined": 33,
+      "native_original_passes": 33,
+      "rust_original_passes": 33,
+      "miri_passes": 9,
+      "method_status": "partial; tested method branches and remaining differences are enumerated in the audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 2,
+      "cpp_class": "NCollection_DynamicArray::Iterator / ConstIterator",
+      "audit_path": "porting/audits/dynamic-legacy-cursor-contracts.json",
+      "audit_sha256": "3a4ead8c4606882f2abe64ff7f349f5626dc52ccc032bd242163e7c2d7c514bb",
+      "native_declaration_candidates": 18,
+      "owned_rust_bodies": 25,
+      "original_cases_joined": 52,
+      "native_original_passes": 52,
+      "rust_original_passes": 52,
+      "miri_passes": 7,
+      "method_status": "partial; tested method branches and remaining differences are enumerated in the audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 3,
+      "cpp_class": "NCollection_LinearVector",
+      "audit_path": "porting/audits/linear-assignment-pointer-contracts.json",
+      "audit_sha256": "10041b8d8ec8186ee0c9054c0c0e0e885ddeed12ff7607f9d6e27af222dec124",
+      "native_declaration_candidates": 11,
+      "owned_rust_bodies": 9,
+      "original_cases_joined": 49,
+      "native_original_passes": 49,
+      "rust_original_passes": 49,
+      "miri_passes": 7,
+      "method_status": "partial; tested method branches and remaining differences are enumerated in the audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 4,
+      "cpp_class": "NCollection_Array1",
+      "audit_path": "porting/audits/array-method-contracts.json",
+      "audit_sha256": "fd0c5e392c6ace05a4e20f203234300324fc555806adb093d6bf49b2d6250e9b",
+      "native_declaration_candidates": 15,
+      "owned_rust_bodies": 11,
+      "original_cases_joined": 44,
+      "native_original_passes": 44,
+      "rust_original_passes": 44,
+      "miri_passes": 8,
+      "method_status": "partial; tested method branches and remaining differences enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 5,
+      "cpp_class": "NCollection_Array2",
+      "audit_path": "porting/audits/array-method-contracts.json",
+      "audit_sha256": "fd0c5e392c6ace05a4e20f203234300324fc555806adb093d6bf49b2d6250e9b",
+      "native_declaration_candidates": 15,
+      "owned_rust_bodies": 11,
+      "original_cases_joined": 37,
+      "native_original_passes": 37,
+      "rust_original_passes": 37,
+      "miri_passes": 6,
+      "method_status": "partial; tested method branches and remaining differences enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 6,
+      "cpp_class": "NCollection_List",
+      "audit_path": "porting/audits/foundation-method-batch.json",
+      "audit_sha256": "fd0a7c58ebde5fd8c29e3cb12e4291de1c4b283dcdee5be28fbeb4dca89dffc0",
+      "native_declaration_candidates": 13,
+      "owned_rust_bodies": 31,
+      "original_cases_joined": 34,
+      "native_original_passes": 34,
+      "rust_original_passes": 34,
+      "miri_passes": 11,
+      "method_status": "partial; tested methods and remaining gaps enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 7,
+      "cpp_class": "NCollection_Sequence",
+      "audit_path": "porting/audits/foundation-method-batch.json",
+      "audit_sha256": "fd0a7c58ebde5fd8c29e3cb12e4291de1c4b283dcdee5be28fbeb4dca89dffc0",
+      "native_declaration_candidates": 13,
+      "owned_rust_bodies": 32,
+      "original_cases_joined": 20,
+      "native_original_passes": 20,
+      "rust_original_passes": 20,
+      "miri_passes": 10,
+      "method_status": "partial; tested methods and remaining gaps enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 8,
+      "cpp_class": "NCollection_AliasedArray",
+      "audit_path": "porting/audits/foundation-method-batch.json",
+      "audit_sha256": "fd0a7c58ebde5fd8c29e3cb12e4291de1c4b283dcdee5be28fbeb4dca89dffc0",
+      "native_declaration_candidates": 21,
+      "owned_rust_bodies": 20,
+      "original_cases_joined": 4,
+      "native_original_passes": 4,
+      "rust_original_passes": 4,
+      "miri_passes": 9,
+      "method_status": "partial; tested methods and remaining gaps enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 9,
+      "cpp_class": "NCollection_ForwardRange",
+      "audit_path": "porting/audits/foundation-method-batch.json",
+      "audit_sha256": "fd0a7c58ebde5fd8c29e3cb12e4291de1c4b283dcdee5be28fbeb4dca89dffc0",
+      "native_declaration_candidates": 5,
+      "owned_rust_bodies": 13,
+      "original_cases_joined": 22,
+      "native_original_passes": 22,
+      "rust_original_passes": 22,
+      "miri_passes": 5,
+      "method_status": "partial; tested methods and remaining gaps enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    },
+    {
+      "batch_order": 10,
+      "cpp_class": "NCollection_UtfIterator",
+      "audit_path": "porting/audits/foundation-method-batch.json",
+      "audit_sha256": "fd0a7c58ebde5fd8c29e3cb12e4291de1c4b283dcdee5be28fbeb4dca89dffc0",
+      "native_declaration_candidates": 7,
+      "owned_rust_bodies": 7,
+      "original_cases_joined": 0,
+      "native_original_passes": 0,
+      "rust_original_passes": 0,
+      "miri_passes": 6,
+      "method_status": "partial; tested methods and remaining gaps enumerated in audit",
+      "api_parity_complete": false,
+      "original_test_mapping_credit_added": 0
+    }
+  ],
+  "latest_foundation_passes": 7414,
+  "latest_foundation_test_threads": 1,
+  "original_cases_joined": 295,
+  "supplemental_miri_passes": 78,
+  "parallel_runtime_limitation": "One standard_mapped_region_behavior attempt failed; the independent retry and serialized suite passed. Failure retained in linear-assignment-pointer audit.",
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "full_workspace_runtime": {
+    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
+    "passed": 13997,
+    "failed": 0,
+    "ignored": 70,
+    "test_threads": 1,
+    "source_inputs_after_run_identical": true
+  },
+  "latest_foundation_run_note": "The foundation-only 7414 count and original class entries are historical. current_draft_checkpoint records the newer frozen draft source and all workspace checks; subsequent edits require a new receipt.",
+  "additional_allocator_miri_passes": 3,
+  "current_draft_checkpoint": {
+    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
+    "sha256": "a450d60cceba4163238e4692e6a290afc0200476f75939c5dc683b73c26226bb",
+    "runtime": {
+      "workspace_passed": 13997,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_groups": 1281,
+      "new_miri_integration_passes": 122,
+      "source_inputs": 9479,
+      "source_inputs_after_run_identical": true,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "rustycad-tkernel --all-targets",
+      "workspace_clippy_exit": 101,
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "evidence_tool_tests": 16,
+      "joined_original_runtime_cases": 982
+    },
+    "scoped_method_receipts": [
+      {
+        "path": "porting/audits/default-hasher-float-contracts-draft.json",
+        "sha256": "1afdc1c32316229e72d57f3ce54980d945d9477a05ca0083f416c5933c9602ee",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/default-hasher-enum-contracts-draft.json",
+        "sha256": "6ff4a255304da655fc862fb81f61eefc692e102681e2415420e3bb5b17112006",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-map-storage-method-contracts.json",
+        "sha256": "c9344c5acd5a34d13c11a23b6265a61d2171dece2036f64909cdf276646223ad",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-map-basic-iterator-method-contracts.json",
+        "sha256": "dd36d56bce51f22a7c1c1be04f3b43d4cb2ec2d3d608e912beb68741de8caac9",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-sequence-method-batch.json",
+        "sha256": "391c8aa668a2d91c3d66b9a8dbb3ef4481c942fe0af4068391cdf63234bd608f",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/sequence-node-method-batch.json",
+        "sha256": "5e31c279daf4177e25d3b3612c10805b671d9f9ed91ad25cd84620746fe176f4",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-sequence-storage-batch.json",
+        "sha256": "64690475bfb4576b2ae37aac5cc1f7908856c330e2c46ea458bfbe40efea2f54",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-list-node-method-contracts.json",
+        "sha256": "7c9db9908e651a405cdd0647af39d56b3222b56572904174505d71d5154bce6c",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/base-list-storage-method-contracts.json",
+        "sha256": "fd2c4d2748001a8b8f35cc928d613caf856f226f2f02c9fa28426fc8144d41aa",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      },
+      {
+        "path": "porting/audits/vec2-method-contracts-draft.json",
+        "sha256": "8bddaff6d25db2158010792eed8558718b474b60f65b2c2a410d2c99185ccb8a",
+        "status": "partial method contracts; historical scoped source hashes remain scoped"
+      }
+    ]
+  }
+}

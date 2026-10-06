@@ -27,7 +27,14 @@ impl MulAssign for IntegerElement {
     }
 }
 
-fn verify_scalar_multiply<T: Copy + From<i32> + Mul<Output = T> + MulAssign + Eq + Debug>(
+fn verify_scalar_multiply<
+    T: rustycad_tkernel::ncollection::VectorArithmeticComponent
+        + From<i32>
+        + Mul<Output = T>
+        + MulAssign
+        + Eq
+        + Debug,
+>(
     increment: i32,
 ) {
     let mut planar = Vec2::new(T::from(-3), T::from(7)) * T::from(-2);
@@ -41,7 +48,14 @@ fn verify_scalar_multiply<T: Copy + From<i32> + Mul<Output = T> + MulAssign + Eq
     verify_homogeneous_scalar::<T>(increment);
 }
 
-fn verify_spatial_scalar<T: Copy + From<i32> + Mul<Output = T> + MulAssign + Eq + Debug>(
+fn verify_spatial_scalar<
+    T: rustycad_tkernel::ncollection::VectorArithmeticComponent
+        + From<i32>
+        + Mul<Output = T>
+        + MulAssign
+        + Eq
+        + Debug,
+>(
     increment: i32,
 ) {
     let mut vector = Vec3::new(T::from(1), T::from(-2), T::from(5)) * T::from(4);
@@ -54,7 +68,14 @@ fn verify_spatial_scalar<T: Copy + From<i32> + Mul<Output = T> + MulAssign + Eq 
     assert_eq!(vector.data(), expected.map(T::from));
 }
 
-fn verify_homogeneous_scalar<T: Copy + From<i32> + Mul<Output = T> + MulAssign + Eq + Debug>(
+fn verify_homogeneous_scalar<
+    T: rustycad_tkernel::ncollection::VectorArithmeticComponent
+        + From<i32>
+        + Mul<Output = T>
+        + MulAssign
+        + Eq
+        + Debug,
+>(
     increment: i32,
 ) {
     let mut vector = Vec4::new(T::from(-2), T::from(3), T::from(0), T::from(9)) * T::from(-2);
@@ -86,3 +107,5 @@ fn scalar_and_componentwise_multiplication_remain_distinct() {
     assert_eq!((first * 4).data(), [8, 12, 20]);
     assert_eq!((first * Vec3::new(7, 11, 13)).data(), [14, 33, 65]);
 }
+
+impl rustycad_tkernel::ncollection::VectorArithmeticComponent for IntegerElement {}

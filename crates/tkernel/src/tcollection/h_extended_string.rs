@@ -22,7 +22,8 @@ crate::impl_transient!(
     HExtendedString,
     "TCollection_HExtendedString",
     StandardTransient,
-    parent
+    parent,
+    handle_key_policy: HExtendedStringHasher
 );
 impl HExtendedString {
     /// Wraps a C string, each byte widened (OCCT passes no multibyte flag);
@@ -79,3 +80,4 @@ impl From<&ExtendedString> for HExtendedString {
         Self::from(string.clone())
     }
 }
+mod method_contracts;

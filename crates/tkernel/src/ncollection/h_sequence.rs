@@ -33,8 +33,39 @@ impl<T: Clone> HSequence<T> {
     pub fn append_sequence(&self, source: &mut Sequence<T>) {
         self.change_sequence(|items| items.append_sequence(source));
     }
+    /// Copies a borrowed item after allocating its node, native Append(const T&); `items.append_ref(&42)`.
+    pub fn append_ref(&self, value: &T) {
+        self.change_sequence(|items| {
+            items.append_ref(value);
+        });
+    }
 }
 impl<T> HSequence<T> {
+    /// Moves sequence storage into a fresh transient wrapper; `HSequence::from_owned(values)`.
+    pub fn from_owned(items: Sequence<T>) -> Self {
+        Self {
+            base: StandardTransient::default(),
+            items: RwLock::new(items),
+        }
+    }
+    /// Moves a wrapper while leaving its source sequence empty; `HSequence::move_from(&mut source)`.
+    pub fn move_from(source: &mut Self) -> Self {
+        let items = source
+            .items
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        Self::from_owned(Sequence::move_from(items))
+    }
+    /// Moves sequence storage while retaining this transient's counter; `target.move_assign(&mut source)`.
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
+        let target = self.items.get_mut().unwrap_or_else(PoisonError::into_inner);
+        let source = source
+            .items
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        target.move_assign(source);
+        self
+    }
     /// Lends the wrapped sequence for reading, as `Sequence()`; `items.sequence(|s| s.len())`.
     pub fn sequence<R>(&self, read: impl FnOnce(&Sequence<T>) -> R) -> R {
         read(&self.items.read().unwrap_or_else(PoisonError::into_inner))
@@ -48,6 +79,17 @@ impl<T> HSequence<T> {
     pub fn append(&self, value: T) {
         self.change_sequence(|items| {
             items.append(value);
+        });
+    }
+}
+impl<T: Clone> Clone for HSequence<T> {
+    fn clone(&self) -> Self {
+        self.sequence(Self::from_sequence)
+    }
+    fn clone_from(&mut self, source: &Self) {
+        let target = self.items.get_mut().unwrap_or_else(PoisonError::into_inner);
+        source.sequence(|items| {
+            target.assign(items);
         });
     }
 }

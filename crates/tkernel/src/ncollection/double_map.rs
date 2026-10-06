@@ -267,3 +267,6 @@ mod cursor;
 mod iteration;
 mod queries;
 pub use cursor::DoubleMapIterator;
+
+mod borrowed_binding;
+mod method_contracts;

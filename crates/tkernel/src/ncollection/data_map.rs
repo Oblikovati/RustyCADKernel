@@ -141,7 +141,8 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         self.items_mut().map(|(_, value)| value)
     }
     fn lookup(&self, key: &K) -> Option<(usize, usize)> {
-        if self.buckets.is_empty() {
+        // Native lookup skips user hashing when Clear(false) retained an empty bucket table.
+        if self.is_empty() {
             return None;
         }
         let (bucket, index) = self.lookup_with_bucket(key);
@@ -158,17 +159,29 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         if self.is_empty() || self.count > self.bucket_count {
             self.resize(self.count);
         }
-        if let Some((bucket, index)) = self.lookup(&key) {
+        let (bucket, index) = self.lookup_with_bucket(&key);
+        if let Some(index) = index {
             let value = &mut self.buckets[bucket][index].value;
             if replace {
                 *value = construct();
             }
             return (false, value);
         }
-        let bucket = self.hasher.hash(&key) % self.bucket_count + 1;
-        let node = self.resource.allocate_value(Entry {
-            key,
-            value: construct(),
+        self.insert_with(bucket, || key, construct)
+    }
+    fn insert_with(
+        &mut self,
+        bucket: usize,
+        construct_key: impl FnOnce() -> K,
+        construct_value: impl FnOnce() -> V,
+    ) -> (bool, &mut V) {
+        // Native placement new allocates before constructing the value base, then its key.
+        let node = self.resource.allocate_value_with(|| {
+            let value = construct_value();
+            Entry {
+                key: construct_key(),
+                value,
+            }
         });
         self.buckets[bucket].insert(0, node);
         self.count += 1;
@@ -195,3 +208,6 @@ mod cursor;
 mod keys;
 mod queries;
 pub use cursor::{DataMapIterator, DataMapIteratorMut};
+
+mod borrowed_operations;
+mod signed_sizes;

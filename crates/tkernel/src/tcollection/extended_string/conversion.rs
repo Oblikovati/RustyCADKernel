@@ -36,6 +36,9 @@ impl ExtendedString {
     /// Borrows the units with their terminating zero (`ToExtString`);
     /// `text.as_utf16_with_nul().last() == Some(&0)`.
     pub fn as_utf16_with_nul(&self) -> &[u16] {
+        if self.terminated.is_empty() {
+            return &super::storage::SHARED_EMPTY_EXTENDED_TERMINATOR;
+        }
         &self.terminated
     }
     /// Windows-only view of the units as a UTF-16 `wchar_t` string (`ToWideString`);

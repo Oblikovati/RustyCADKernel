@@ -1,0 +1,56 @@
+{
+  "status": "source_frozen_partial_draft",
+  "class": "NCollection_DefaultHasher",
+  "scope": "SFINAE enum hash/equality dispatch via explicit Rust macro adapter",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/hash_policy.rs": "dc391d9466f548dbfafd5dbbd5e183e3ab81a6620c0c8d7c2566634a66357dbd",
+    "crates/tkernel/tests/default_hasher_enum_contracts.rs": "6431a3e317ac354f80c8345ccad4b0d530537043a634dcabe91431372c202dbb",
+    "tools/oracle/tkernel_default_hasher_enum_contracts.cxx": "d6dc8d04d169a4f0fdd19ff2fcae5f74bfa3f8ce2ed041e53be5c167141dab90",
+    "tools/oracle/tkernel_default_hasher_enum_contracts.expected": "6111bce6b9802bb8bbfd0f2e544618642a8282f54bf7c17f734976c4b38e8fc9"
+  },
+  "checks": {
+    "rust_log": "/tmp/default-hasher-enum-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 15,
+    "new_tests": 4,
+    "native_log": "/tmp/default-hasher-enum-native.log",
+    "native_compile_exit": 0,
+    "native_run_exit": 0,
+    "oracle_diff_exit": 0,
+    "oracle_rows": 11,
+    "miri_log": "/tmp/default-hasher-enum-miri.log",
+    "miri_exit": 0,
+    "miri_passed": 4,
+    "owned_rustfmt_check_exit": 0,
+    "native_original_declarations": 0
+  },
+  "original_name_join": [],
+  "original_scope": "No dedicated original DefaultHasher/HashUtils GTest declarations found in pinned TKernel/GTests; supplemental oracle evidence only.",
+  "method_changes": [
+    "Exported impl_enum_hash_key! accepts one or more fieldless Copy enum types and implements native static_cast<size_t> via as usize",
+    "Signed negative and wide unsigned discriminants wrap/truncate by target pointer width, matching the native enum branch",
+    "HashKey default equality uses PartialEq, preserving the native enum branch operator== semantics",
+    "Downstream macro expansion and default DataMap duplicate binding/resize exercised for signed and wide unsigned enums",
+    "Native oracle deliberately replaces std::hash<SignedKey> and std::equal_to<SignedKey>, proving native enum dispatch bypasses these standard-library hooks"
+  ],
+  "native_method_join": [
+    {
+      "cpp": "NCollection_DefaultHasher::HashCode enum enable_if overload",
+      "rust": "impl_enum_hash_key! generated HashKey::occt_hash"
+    },
+    {
+      "cpp": "NCollection_DefaultHasher::IsEqual enum enable_if overload",
+      "rust": "HashKey::occt_equal default PartialEq dispatch"
+    }
+  ],
+  "remaining_gaps": [
+    "Rust enum types must opt into macro or implement HashKey; existing enums are not automatically registered by this batch",
+    "Adapter requires fieldless Copy enum; native C++ enum automatic selection has no blanket stable-Rust enum detection equivalent",
+    "Native long double and distinct nullptr_t scalar adapters remain outside this scope; raw null pointer keys work",
+    "Exact native execution performed only on Linux x86_64;32-bit wrap semantics are expressed but not executed",
+    "No new original test declaration or compiler surface credit in this scoped receipt"
+  ]
+}

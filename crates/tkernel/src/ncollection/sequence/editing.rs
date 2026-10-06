@@ -39,6 +39,7 @@ impl<T> Sequence<T> {
     pub fn remove(&mut self, index: usize) -> Result<(), Failure> {
         let offset = self.offset("Remove", index)?;
         self.nodes.remove(offset);
+        self.refresh_links_around(offset);
         Ok(())
     }
     /// Removes an inclusive one-based range, OutOfRange unless `1 <= first <= last <= len`;
@@ -53,6 +54,7 @@ impl<T> Sequence<T> {
             ));
         }
         self.nodes.drain(first - 1..last);
+        self.refresh_links_around(first - 1);
         Ok(())
     }
     /// Removes the cursor's node and advances the cursor to its successor; an end cursor is
@@ -65,6 +67,7 @@ impl<T> Sequence<T> {
             .position(self)
             .ok_or_else(|| no_such_node("Remove", *cursor))?;
         self.nodes.remove(offset);
+        self.refresh_links_around(offset);
         cursor.address = self.nodes.get(offset).map(|node| super::address(&**node));
         Ok(())
     }
@@ -80,11 +83,14 @@ impl<T> Sequence<T> {
         let a = self.offset("Exchange", first)?;
         let b = self.offset("Exchange", second)?;
         self.nodes.swap(a, b);
+        self.refresh_links_around(a);
+        self.refresh_links_around(b);
         Ok(())
     }
     /// Reverses node order without relocating elements; `sequence.reverse()`.
     pub fn reverse(&mut self) {
         self.nodes.reverse();
+        self.refresh_all_links();
     }
     /// Moves items `index..` into `destination`, which OCCT clears and rebinds to this
     /// allocator before it checks `index`; `sequence.split(2, &mut tail)?`.
@@ -92,6 +98,8 @@ impl<T> Sequence<T> {
         destination.clear(Some(self.resource.clone()));
         let offset = self.offset("Split", index)?;
         destination.nodes = self.nodes.split_off(offset);
+        self.refresh_links_around(offset);
+        destination.refresh_links_around(0);
         Ok(())
     }
     /// Moves content while leaving the source empty with its allocator; `Sequence::move_from(&mut source)`.
@@ -102,8 +110,9 @@ impl<T> Sequence<T> {
         }
     }
     /// Replaces ownership from another sequence; `sequence.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         *self = Self::move_from(source);
+        self
     }
     /// Vector offset after which a cursor inserts: 0 for an end cursor (prepend).
     pub(super) fn cursor_insertion(
@@ -120,11 +129,22 @@ impl<T> Sequence<T> {
         Ok(offset + 1)
     }
     pub(super) fn insert_node(&mut self, offset: usize, value: T) -> &mut T {
-        let node = self.resource.allocate_value(SequenceNode {
-            value,
-            _allocation_identity: 0,
-        });
+        self.insert_node_with(offset, || value)
+    }
+    pub(super) fn insert_node_with(
+        &mut self,
+        offset: usize,
+        construct: impl FnOnce() -> T,
+    ) -> &mut T {
+        let node = SequenceNode::allocate_with(&self.resource, construct);
         self.nodes.insert(offset, node);
+        self.refresh_links_around(offset);
         &mut self.nodes[offset]
+    }
+}
+impl<T: Clone> Sequence<T> {
+    /// Allocates the appended node before copying its borrowed item; `sequence.append_ref(&10)`.
+    pub fn append_ref(&mut self, value: &T) -> &mut T {
+        self.insert_node_with(self.len(), || value.clone())
     }
 }

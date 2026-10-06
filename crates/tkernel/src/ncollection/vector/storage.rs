@@ -4,6 +4,14 @@ use super::{Vec2, Vec3, Vec4};
 macro_rules! contiguous_component_storage {
     ($vector:ident, $count:literal) => {
         impl<T> $vector<T> {
+            /// Returns native GetData/pointer-conversion identity; `vector.as_ptr()` names its first field.
+            pub const fn as_ptr(&self) -> *const T {
+                self.as_components().as_ptr()
+            }
+            /// Returns native ChangeData identity; `vector.as_mut_ptr()` is invalidated when the vector moves.
+            pub const fn as_mut_ptr(&mut self) -> *mut T {
+                self.as_components_mut().as_mut_ptr()
+            }
             /// Borrows native component storage; `Vec3::new(1, 2, 3).as_components()[1] == 2`.
             #[allow(unsafe_code)] // Audited repr(C) homogeneous storage seam; checked by Miri.
             pub const fn as_components(&self) -> &[T; $count] {

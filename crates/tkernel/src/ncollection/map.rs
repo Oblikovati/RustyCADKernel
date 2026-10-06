@@ -118,10 +118,10 @@ impl<K: Debug, H: HashPolicy<K> + Default> Default for Map<K, H> {
         Self::new(1)
     }
 }
-impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Map<K, H> {
+impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
     /// Copies keys while retaining destination allocator and hasher; `map.assign(&source)`.
     pub fn assign(&mut self, source: &Self) {
-        self.bindings.assign(&source.bindings);
+        self.assign_returning(source);
     }
 }
 impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Clone for Map<K, H> {
@@ -161,3 +161,6 @@ impl<K> Eq for MapIter<'_, K> {}
 mod borrowed;
 mod cursor;
 pub use cursor::MapIterator;
+
+mod legacy_algebra;
+mod method_contracts;

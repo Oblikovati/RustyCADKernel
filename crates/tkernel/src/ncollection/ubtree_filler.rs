@@ -6,7 +6,7 @@ use crate::stl::MersenneTwister;
 pub use insertion::BoundingTreeInsertion;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
-#[derive(Clone, Default)]
+#[derive(Default)]
 pub struct ObjBnd<T, B> {
     /// The object to insert.
     pub object: T,
@@ -17,6 +17,24 @@ impl<T, B> ObjBnd<T, B> {
     /// Pair an object with its bound; `ObjBnd::new(1, bounds)`.
     pub fn new(object: T, bounds: B) -> Self {
         Self { object, bounds }
+    }
+}
+impl<T: Clone, B: Clone> ObjBnd<T, B> {
+    /// Copies the object before its bounds, as native ObjBnd does; `ObjBnd::new_ref(&1, &bounds)`.
+    pub fn new_ref(object: &T, bounds: &B) -> Self {
+        Self {
+            object: object.clone(),
+            bounds: bounds.clone(),
+        }
+    }
+}
+impl<T: Clone, B: Clone> Clone for ObjBnd<T, B> {
+    fn clone(&self) -> Self {
+        Self::new_ref(&self.object, &self.bounds)
+    }
+    fn clone_from(&mut self, source: &Self) {
+        self.object.clone_from(&source.object);
+        self.bounds.clone_from(&source.bounds);
     }
 }
 
@@ -53,17 +71,20 @@ impl<'t, T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B
     pub fn add(&mut self, object: T, bounds: B) {
         self.pending.append(ObjBnd::new(object, bounds));
     }
+    /// Queues borrowed arguments using native object/bound copy order; `filler.add_ref(&1, &bounds)`.
+    pub fn add_ref(&mut self, object: &T, bounds: &B) {
+        self.pending.append(ObjBnd::new_ref(object, bounds));
+    }
     /// Add every queued object to the tree in random order and empty the queue.
     /// Returns the number of objects added; `filler.fill()`.
     pub fn fill(&mut self) -> i32 {
         let count: i32 = self.pending.length();
         for remaining in (1..=count).rev() {
             let index: i32 = self.draw_index(remaining);
-            let item: ObjBnd<T, B> = self.pending.value(index).unwrap().clone();
-            self.tree.insert_bound(item.object, item.bounds);
+            let item = self.pending.value(index).unwrap();
+            self.tree.insert_bound_ref(&item.object, &item.bounds);
             // The drawn slot takes the last live item, shrinking the pool by one.
-            let last: ObjBnd<T, B> = self.pending.value(remaining - 1).unwrap().clone();
-            *self.pending.change_value(index).unwrap() = last;
+            self.assign_pending_slot(index, remaining - 1);
         }
         self.pending.clear(false);
         count
@@ -71,6 +92,15 @@ impl<'t, T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B
     /// Discard queued objects so dropping the filler adds nothing; `filler.reset()`.
     pub fn reset(&mut self) {
         self.pending.clear(false);
+    }
+    fn assign_pending_slot(&mut self, selected: i32, last: i32) {
+        if selected == last {
+            return;
+        }
+        let mut entries = self.pending.iter_mut();
+        let target = entries.nth(selected as usize).unwrap();
+        let source = entries.nth((last - selected - 1) as usize).unwrap();
+        target.clone_from(source);
     }
     fn draw_index(&mut self, remaining: i32) -> i32 {
         // `static_cast<unsigned int>(myRandGen()) % i` promotes `i` to unsigned.

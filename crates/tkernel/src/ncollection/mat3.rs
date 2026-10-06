@@ -4,6 +4,7 @@ use super::{MatrixScalar, Vec3};
 use crate::standard::Failure;
 /// Nine elements in column-major order, identity by default; `Mat3::<f64>::identity()`.
 #[derive(Clone, Copy, Debug)]
+#[repr(transparent)]
 pub struct Mat3<T> {
     columns: [[T; 3]; 3],
 }

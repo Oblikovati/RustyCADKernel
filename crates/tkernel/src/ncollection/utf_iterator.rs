@@ -4,6 +4,7 @@
 //! buffer is a slice whose end acts as the terminator and whose storage past the end reads as
 //! zeros, so truncated sequences decode exactly as they do over zero-padded native memory.
 mod encode;
+mod positions;
 mod unit;
 pub use unit::{UtfUnit, WideChar};
 
@@ -46,34 +47,26 @@ pub struct UtfIterator<'a, T: UtfUnit> {
     position_next: usize,
     char_index: i32,
     char_utf32: u32,
+    is_null: bool,
 }
 
 impl<'a, T: UtfUnit> UtfIterator<'a, T> {
     /// Starts at the first symbol of `text` (index 0); `UtfIterator::new(b"abc")`.
     pub fn new(text: &'a [T]) -> Self {
-        let mut iter = Self {
-            buffer: text,
-            position: 0,
-            position_next: 0,
-            char_index: 0,
-            char_utf32: 0,
-        };
-        iter.init(text);
-        iter
+        Self::from_optional(Some(text))
     }
 
     /// Restarts on `text`, reading its first symbol; `iter.init(b"xyz")`.
     pub fn init(&mut self, text: &'a [T]) {
-        self.buffer = text;
-        self.position = 0;
-        self.position_next = 0;
-        self.char_utf32 = 0;
-        self.advance();
-        self.char_index = 0;
+        self.init_optional(Some(text));
     }
 
     /// Pre-increment: reads the next symbol without overrun checks; `iter.advance()`.
     pub fn advance(&mut self) -> &mut Self {
+        assert!(
+            !self.is_null,
+            "UtfIterator buffer is null; expected a non-null code-unit buffer"
+        );
         self.position = self.position_next;
         self.char_index += 1;
         let (symbol, next) = T::read_symbol(self.buffer, self.position_next);
@@ -181,6 +174,6 @@ impl<T: UtfUnit> UtfIterator<'_, T> {
 /// Native `operator==`: iterators are equal when they point at the same buffer position.
 impl<T: UtfUnit> PartialEq for UtfIterator<'_, T> {
     fn eq(&self, other: &Self) -> bool {
-        std::ptr::eq(self.buffer.as_ptr(), other.buffer.as_ptr()) && self.position == other.position
+        self.buffer_here_ptr() == other.buffer_here_ptr()
     }
 }

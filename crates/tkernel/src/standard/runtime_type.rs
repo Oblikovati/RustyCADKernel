@@ -251,6 +251,14 @@ pub trait RuntimeTyped: 'static {
     /// Borrow `Self` inside a live object: the embedded subobject of a concrete
     /// class, or the interface view of an abstract class; `T::project_from(object)`.
     fn project_from(object: &dyn Transient) -> Option<&Self>;
+    /// Selects hashing by the handle's static type; `T::handle_key_hash(&handle)`.
+    fn handle_key_hash(handle: &Handle<Self>) -> usize {
+        handle.object_address() as usize
+    }
+    /// Selects native key equality without changing handle identity; `T::handle_key_equal(&a, &b)`.
+    fn handle_key_equal(first: &Handle<Self>, second: &Handle<Self>) -> bool {
+        first == second
+    }
 }
 /// The `project_from` of a concrete class: its embedded subobject in `object`;
 /// `project_concrete::<StandardTransient>(object)`.

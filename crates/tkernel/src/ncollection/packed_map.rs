@@ -152,10 +152,10 @@ impl<T: PackedInteger> PackedMap<T> {
         true
     }
     /// Copy source blocks into destination buckets; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
         self.clear();
         if source.is_empty() {
-            return;
+            return self;
         }
         self.resize(source.block_count);
         for bucket in &source.buckets {
@@ -165,14 +165,16 @@ impl<T: PackedInteger> PackedMap<T> {
         }
         self.count = source.count;
         self.block_count = source.block_count;
+        self
     }
     /// Transfer buckets and reset the source modulus to one; `PackedMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
         std::mem::take(source)
     }
     /// Replace contents with moved source storage; `map.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         *self = Self::move_from(source);
+        self
     }
     fn location(&self, value: T) -> (u64, u64, usize) {
         let index: u64 = value.bits() >> Self::SHIFT;
@@ -186,4 +188,9 @@ impl<T: PackedInteger> Clone for PackedMap<T> {
         copy.assign(self);
         copy
     }
+    fn clone_from(&mut self, source: &Self) {
+        self.assign(source);
+    }
 }
+
+mod method_contracts;

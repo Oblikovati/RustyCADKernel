@@ -60,3 +60,24 @@ integer!(u64, u64);
 integer!(usize, u64);
 #[cfg(target_pointer_width = "32")]
 integer!(usize, u32);
+
+integer!(i8, u32);
+integer!(u8, u32);
+integer!(i16, u32);
+integer!(u16, u32);
+#[cfg(target_pointer_width = "64")]
+integer!(isize, u64);
+#[cfg(target_pointer_width = "32")]
+integer!(isize, u32);
+impl PackedInteger for bool {
+    type Word = u32;
+    const IS_64_BIT: bool = false;
+    const MIN: Self = false;
+    const MAX: Self = true;
+    fn bits(self) -> u64 {
+        u64::from(self)
+    }
+    fn from_bits(bits: u64) -> Self {
+        bits != 0
+    }
+}

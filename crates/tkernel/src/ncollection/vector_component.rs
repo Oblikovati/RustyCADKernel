@@ -13,9 +13,14 @@ pub trait VectorSquareComponent: Copy {
 }
 /// Supplies square-root evaluation and the division used by Normalize.
 /// `f64::vector_component_modulus([3.0, 4.0]) == 5.0`.
-pub trait VectorMagnitudeComponent: Copy + From<i8> + PartialEq + Div<Output = Self> {
+pub trait VectorMagnitudeComponent: Copy + PartialEq + Div<Output = Self> {
     /// Squares and sums in component order using native promotions; `i16::vector_component_modulus([200, 200]) == 282`.
     fn vector_component_modulus<const N: usize>(components: [Self; N]) -> Self;
+    /// Tests the normalization guard; empty magnitude supplies custom scalar zero without signed conversion bounds.
+    /// For example, `0_u32.vector_component_is_zero()` is true.
+    fn vector_component_is_zero(self) -> bool {
+        self == Self::vector_component_modulus([])
+    }
 }
 /// Promotes the supported floating DumpJson elements to double; `0.1_f32.promote_vector_dump()`.
 /// Integers deliberately have no implementation: the upstream variadic dump reads them as doubles.
@@ -48,6 +53,9 @@ macro_rules! floating_component_policies {
         impl VectorMagnitudeComponent for $scalar {
             fn vector_component_modulus<const N: usize>(components: [Self; N]) -> Self {
                 Self::vector_component_square(components).sqrt()
+            }
+            fn vector_component_is_zero(self) -> bool {
+                self == 0.0
             }
         }
         impl VectorDumpComponent for $scalar {
@@ -94,6 +102,9 @@ macro_rules! signed_component_policies {
             fn vector_component_modulus<const N: usize>(components: [Self; N]) -> Self {
                 ($module::promoted_square(components) as f64).sqrt() as Self
             }
+            fn vector_component_is_zero(self) -> bool {
+                self == 0
+            }
         }
     };
 }
@@ -109,3 +120,16 @@ integral_component_square!(u32, u32, unsigned_thirty_two);
 integral_component_square!(u64, u64, unsigned_sixty_four);
 integral_component_square!(u128, u128, unsigned_one_twenty_eight);
 integral_component_square!(usize, usize, unsigned_pointer);
+
+macro_rules! unsigned_component_magnitude {
+    ($($scalar:ty => $module:ident),+) => {$(
+        impl VectorMagnitudeComponent for $scalar {
+            fn vector_component_modulus<const N: usize>(components: [Self; N]) -> Self {
+                ($module::promoted_square(components) as f64).sqrt() as Self
+            }
+            fn vector_component_is_zero(self) -> bool { self == 0 }
+        }
+    )+};
+}
+unsigned_component_magnitude!(u8 => unsigned_eight, u16 => unsigned_sixteen,
+    u32 => unsigned_thirty_two, u64 => unsigned_sixty_four, usize => unsigned_pointer);

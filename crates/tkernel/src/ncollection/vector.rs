@@ -5,6 +5,8 @@
 //! contiguous component array. The earlier `change_data` component-reference adapter
 //! stays available for existing callers.
 mod arithmetic;
+mod arithmetic_component;
+pub use arithmetic_component::VectorArithmeticComponent;
 mod conversion;
 mod float;
 mod scalar_division;
@@ -98,6 +100,15 @@ impl<T: Copy> Vec4<T> {
     /// `vector.set_values_vec3(Vec3::new(1,2,3), 4)`.
     pub fn set_values_vec3(&mut self, spatial: Vec3<T>, w: T) {
         *self = Self::from_vec3(spatial, w);
+    }
+}
+impl<T: Copy> Vec3<T>
+where
+    i32: ElementCast<T>,
+{
+    /// Uses the native Vec2 converting constructor's omitted Z argument; `Vec3::from_vec2_zero(Vec2::new(1, 2)).z == 0`.
+    pub fn from_vec2_zero(planar: Vec2<T>) -> Self {
+        Self::from_vec2(planar, ElementCast::cast(0_i32))
     }
 }
 impl<T: Copy + Default> Vec4<T> {

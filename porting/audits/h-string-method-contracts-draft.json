@@ -1,0 +1,55 @@
+{
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "TCollection_HAsciiString",
+    "TCollection_HExtendedString"
+  ],
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/tcollection/h_ascii_string.rs": "85b65f16842da3ecf950f95e288bd3e97b083ceab448b75a473852037eb85573",
+    "crates/tkernel/src/tcollection/h_ascii_string/hasher.rs": "19748f554a0a78f5c1a1ed57b2a162d4cf3182c79a496a6e970cadb5dd95a2d9",
+    "crates/tkernel/src/tcollection/h_ascii_string/method_contracts.rs": "2450ffe18bb02a7b1cc3409241e3e6f5ec947dfc35e76b2fa0d418feff996f14",
+    "crates/tkernel/src/tcollection/h_ascii_string/edits.rs": "d250a4fdcbcc1794cfbfcd1597c0469d934133d0dc22e097e28ea8d30653f8ea",
+    "crates/tkernel/src/tcollection/h_ascii_string/queries.rs": "3069b3188a16dcdfcb0f0a65f2044ef39600779f5c135af505e9ac997e830220",
+    "crates/tkernel/src/tcollection/h_extended_string.rs": "ef2681d89684d74209949deb0cca42827b43f446d9f403e913dfc917ae1c5efb",
+    "crates/tkernel/src/tcollection/h_extended_string/hasher.rs": "49942fc8b12fef84f385bcc48fffdfc5db9e7f04f858cdc26f68b7ac7fc64c8e",
+    "crates/tkernel/src/tcollection/h_extended_string/editing.rs": "04e386ec55a3276bd8d9be3d355908d93f904c0d2c69c89e6d562ca348bcee79",
+    "crates/tkernel/src/tcollection/h_extended_string/method_contracts.rs": "ba43207549ee0bfbc83948c5be6c6e29851834965b26c126145b4b532972ddd0",
+    "crates/tkernel/tests/h_string_method_contracts.rs": "b81855ae64b06240c82db2fc7797cd1f79f73e19110552834c18bdef79e38d14",
+    "tools/oracle/tkernel_h_string_method_contracts.cxx": "217b1af642bf4391bbbfb15e7cd8aeea2c5563ca7d5663ac854f089cafc3d866",
+    "tools/oracle/tkernel_h_string_method_contracts.expected": "0d9f529f41864a36ae4ccfc46ed84e4d3a63df12b0fb599ca32c12972655a12e",
+    "crates/tkernel/src/standard/handle/traits.rs": "58d7c8007e3bd9d54cc83a833edccf216ec6a69430ac4dcc791092ed6d2b178f"
+  },
+  "checks": {
+    "rust_log": "/tmp/h-string-method-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 206,
+    "new_integration_tests": 9,
+    "native_log": "/tmp/h-string-method-native.log",
+    "native_exit": 0,
+    "native_original_passed": 1,
+    "supplemental_oracle_rows": 6,
+    "miri": "not_run_by_subagent; root coordinates"
+  },
+  "original_name_join": [
+    {
+      "cpp": "TCollection_AsciiStringTest.BUC60773_HAsciiStringInitialization",
+      "rust": "TCollection_AsciiStringTest__BUC60773_HAsciiStringInitialization"
+    }
+  ],
+  "original_scope": "No HExtendedString dedicated original GTest declarations found in pinned FoundationClasses/TKernel/GTests; 114 original AsciiString tests ran as regressions but only the one named HAsciiString declaration is credited here.",
+  "method_changes": [
+    "ToCString/ToExtString raw pointer identity adapters",
+    "Move construction from mutable underlying string transfers allocation and resets source",
+    "Nullable C string and UTF-16 constructor overloads raise Standard_NullObject",
+    "HAsciiString native std::hash/std::equal_to content policy, with null, identity and full embedded-zero comparison behavior",
+    "Rust-only Handle Debug integration adapter formats type, identity and null state without accessing object contents; enables DataMap handle keys"
+  ],
+  "remaining_gaps": [
+    "Generic Handle default hashing remains identity; callers must select HAsciiStringHasher explicitly for native content specialization",
+    "Exact RefCell borrow checking and Rust ownership expose safe-host restrictions unlike native handles",
+    "No exhaustive per-overload compiler body capture or native allocation-failure injection in this batch"
+  ]
+}

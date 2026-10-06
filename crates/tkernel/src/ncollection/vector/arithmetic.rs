@@ -1,21 +1,21 @@
 //! Per-component NCollection_Vec2/3/4 operators in the native left-to-right order.
-use super::{Vec2, Vec3, Vec4};
+use super::{Vec2, Vec3, Vec4, VectorArithmeticComponent};
 use std::ops::{
     Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
 };
 
 macro_rules! componentwise_assignment {
-    ($vector:ident, $assign:ident, $assign_method:ident, $returning:ident, $op_assign:tt, [$($field:ident),+]) => {
-        impl<T: Copy + $assign> $assign for $vector<T> {
+    ($vector:ident, $assign:ident, $assign_method:ident, $returning:ident, $policy:ident, [$($field:ident),+]) => {
+        impl<T: VectorArithmeticComponent + $assign> $assign for $vector<T> {
             fn $assign_method(&mut self, right: Self) {
                 self.$returning(&right);
             }
         }
-        impl<T: Copy + $assign> $vector<T> {
+        impl<T: VectorArithmeticComponent + $assign> $vector<T> {
             #[doc = concat!("Applies component assignment in OCCT storage order and returns the destination. ",
                 "Usage: `vector.", stringify!($returning), "(&right)` permits chaining.")]
             pub fn $returning(&mut self, right: &Self) -> &mut Self {
-                $(self.$field $op_assign right.$field;)+
+                $(self.$field.$policy(right.$field);)+
                 self
             }
         }
@@ -23,11 +23,11 @@ macro_rules! componentwise_assignment {
 }
 
 macro_rules! componentwise_value_direct {
-    ($vector:ident, $trait:ident, $method:ident, $op:tt, [$first:ident $(, $rest:ident)*]) => {
-        impl<T: Copy + $trait<Output = T>> $trait for $vector<T> {
+    ($vector:ident, $trait:ident, $method:ident, $policy:ident, [$first:ident $(, $rest:ident)*]) => {
+        impl<T: VectorArithmeticComponent + $trait<Output = T>> $trait for $vector<T> {
             type Output = Self;
             fn $method(self, right: Self) -> Self {
-                Self { $first: self.$first $op right.$first $(, $rest: self.$rest $op right.$rest)* }
+                Self { $first: self.$first.$policy(right.$first) $(, $rest: self.$rest.$policy(right.$rest))* }
             }
         }
     };
@@ -35,7 +35,7 @@ macro_rules! componentwise_value_direct {
 
 macro_rules! componentwise_value_via_assignment {
     ($vector:ident, $trait:ident, $method:ident, $assign:ident, $assign_method:ident) => {
-        impl<T: Copy + $assign> $trait for $vector<T> {
+        impl<T: VectorArithmeticComponent + $assign> $trait for $vector<T> {
             type Output = Self;
             fn $method(mut self, right: Self) -> Self {
                 self.$assign_method(right);
@@ -48,14 +48,14 @@ macro_rules! componentwise_value_via_assignment {
 // OCCT Vec2 spells value operations directly; Vec3/4 implement them through +=, -=, *=, /=.
 macro_rules! componentwise_arithmetic {
     ($vector:ident, $count:literal, [$first:ident $(, $rest:ident)*]) => {
-        componentwise_assignment!($vector, AddAssign, add_assign, add_assign_returning, +=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, SubAssign, sub_assign, sub_assign_returning, -=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, MulAssign, mul_assign, mul_assign_returning, *=, [$first $(, $rest)*]);
-        componentwise_assignment!($vector, DivAssign, div_assign, div_assign_returning, /=, [$first $(, $rest)*]);
-        impl<T: Copy + Neg<Output = T>> Neg for $vector<T> {
+        componentwise_assignment!($vector, AddAssign, add_assign, add_assign_returning, vector_add_assign, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, SubAssign, sub_assign, sub_assign_returning, vector_subtract_assign, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, MulAssign, mul_assign, mul_assign_returning, vector_multiply_assign, [$first $(, $rest)*]);
+        componentwise_assignment!($vector, DivAssign, div_assign, div_assign_returning, vector_divide_assign, [$first $(, $rest)*]);
+        impl<T: VectorArithmeticComponent + Neg<Output = T>> Neg for $vector<T> {
             type Output = Self;
             fn neg(self) -> Self {
-                Self { $first: -self.$first $(, $rest: -self.$rest)* }
+                Self { $first: self.$first.vector_negate() $(, $rest: self.$rest.vector_negate())* }
             }
         }
         impl<T> Index<usize> for $vector<T> {
@@ -135,27 +135,27 @@ macro_rules! componentwise_arithmetic {
                 }
             }
         }
-        impl<T: Copy + Add<Output = T> + Mul<Output = T>> $vector<T> {
+        impl<T: VectorArithmeticComponent + Add<Output = T> + Mul<Output = T>> $vector<T> {
             /// Sums products left to right, as `Dot`; `Vec2::new(1,2).dot(&Vec2::new(3,4)) == 11`.
             pub fn dot(&self, other: &Self) -> T {
-                self.$first * other.$first $(+ self.$rest * other.$rest)*
+                self.$first.vector_multiply(other.$first) $(.vector_add(self.$rest.vector_multiply(other.$rest)))*
             }
         }
-        impl<T: Copy + MulAssign> $vector<T> {
+        impl<T: VectorArithmeticComponent + MulAssign> $vector<T> {
             /// Scales each component in place, as `Multiply`; `vector.multiply(2.0)`.
             pub fn multiply(&mut self, factor: T) {
-                self.$first *= factor;
-                $(self.$rest *= factor;)*
+                self.$first.vector_multiply_assign(factor);
+                $(self.$rest.vector_multiply_assign(factor);)*
             }
         }
     };
 }
 macro_rules! direct_values {
     ($vector:ident, [$first:ident $(, $rest:ident)*]) => {
-        componentwise_value_direct!($vector, Add, add, +, [$first $(, $rest)*]);
-        componentwise_value_direct!($vector, Sub, sub, -, [$first $(, $rest)*]);
-        componentwise_value_direct!($vector, Mul, mul, *, [$first $(, $rest)*]);
-        componentwise_value_direct!($vector, Div, div, /, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Add, add, vector_add, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Sub, sub, vector_subtract, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Mul, mul, vector_multiply, [$first $(, $rest)*]);
+        componentwise_value_direct!($vector, Div, div, vector_divide, [$first $(, $rest)*]);
     };
 }
 
@@ -180,12 +180,12 @@ values_via_assignment!(Vec4);
 // OCCT template support. Vec2 copies use *, while Vec3/4 copies use *=, as upstream.
 macro_rules! scalar_multiplication {
     ($vector:ident) => {
-        impl<T: Copy + MulAssign> MulAssign<T> for $vector<T> {
+        impl<T: VectorArithmeticComponent + MulAssign> MulAssign<T> for $vector<T> {
             fn mul_assign(&mut self, factor: T) {
                 self.multiply_scalar_returning(factor);
             }
         }
-        impl<T: Copy + MulAssign> $vector<T> {
+        impl<T: VectorArithmeticComponent + MulAssign> $vector<T> {
             /// Scales in OCCT component order and returns the destination; `vector.multiply_scalar_returning(2)`.
             pub fn multiply_scalar_returning(&mut self, factor: T) -> &mut Self {
                 self.multiply(factor);
@@ -196,7 +196,7 @@ macro_rules! scalar_multiplication {
 }
 macro_rules! scalar_copy_multiplication {
     ($vector:ident) => {
-        impl<T: Copy + MulAssign> $vector<T> {
+        impl<T: VectorArithmeticComponent + MulAssign> $vector<T> {
             /// Returns a scaled copy, as `Multiplied`; `vector.multiplied(2.0)`.
             pub fn multiplied(&self, factor: T) -> Self {
                 let mut result = *self;
@@ -204,7 +204,7 @@ macro_rules! scalar_copy_multiplication {
                 result
             }
         }
-        impl<T: Copy + MulAssign> Mul<T> for $vector<T> {
+        impl<T: VectorArithmeticComponent + MulAssign> Mul<T> for $vector<T> {
             type Output = Self;
             fn mul(self, factor: T) -> Self {
                 self.multiplied(factor)
@@ -212,13 +212,16 @@ macro_rules! scalar_copy_multiplication {
         }
     };
 }
-impl<T: Copy + Mul<Output = T>> Vec2<T> {
+impl<T: VectorArithmeticComponent + Mul<Output = T>> Vec2<T> {
     /// Returns a scaled copy, as `Multiplied`; `Vec2::new(1, 2).multiplied(3)`.
     pub fn multiplied(&self, factor: T) -> Self {
-        Self::new(self.x * factor, self.y * factor)
+        Self::new(
+            self.x.vector_multiply(factor),
+            self.y.vector_multiply(factor),
+        )
     }
 }
-impl<T: Copy + Mul<Output = T>> Mul<T> for Vec2<T> {
+impl<T: VectorArithmeticComponent + Mul<Output = T>> Mul<T> for Vec2<T> {
     type Output = Self;
     fn mul(self, factor: T) -> Self {
         self.multiplied(factor)
@@ -230,23 +233,23 @@ scalar_copy_multiplication!(Vec4);
 scalar_multiplication!(Vec2);
 scalar_multiplication!(Vec3);
 scalar_multiplication!(Vec4);
-impl<T: Copy + DivAssign<T>> DivAssign<T> for Vec2<T> {
+impl<T: VectorArithmeticComponent + DivAssign<T>> DivAssign<T> for Vec2<T> {
     fn div_assign(&mut self, divisor: T) {
         self.divide_scalar_returning(divisor);
     }
 }
-impl<T: Copy + DivAssign<T>> Vec2<T> {
+impl<T: VectorArithmeticComponent + DivAssign<T>> Vec2<T> {
     /// Divides each component directly and returns the destination; `vector.divide_scalar_returning(3)`.
     pub fn divide_scalar_returning(&mut self, divisor: T) -> &mut Self {
-        self.x /= divisor;
-        self.y /= divisor;
+        self.x.vector_divide_assign(divisor);
+        self.y.vector_divide_assign(divisor);
         self
     }
 }
-impl<T: Copy + Div<Output = T>> Div<T> for Vec2<T> {
+impl<T: VectorArithmeticComponent + Div<Output = T>> Div<T> for Vec2<T> {
     type Output = Self;
     fn div(self, divisor: T) -> Self {
-        Self::new(self.x / divisor, self.y / divisor)
+        Self::new(self.x.vector_divide(divisor), self.y.vector_divide(divisor))
     }
 }
 

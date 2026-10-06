@@ -1,0 +1,259 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_LinearVector pointer endpoints, returning assignment and explicit trivial copy policy",
+  "integration_status": "working-tree draft; main integration blocked by read-only .git policy",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/linear_vector.rs": "245fc57c780b357c43895e9bf9c6185e71b9a2e72c71215b2b7671f5224fd300",
+    "crates/tkernel/src/ncollection/linear_vector/pointers.rs": "e487b1591150b1de235b9cb60290546873194f55b085b8ae5736ff58cd770e73",
+    "crates/tkernel/src/ncollection/linear_vector/trivial_assignment.rs": "dc3f1fb7203526aaf4e7755d0466a467f25a87447bfe6c35d98f562b95fa1766",
+    "crates/tkernel/tests/linear_vector_assignment_pointer_contracts.rs": "8a1d824299c777f6fd45087df741276bf18c782522c7fe98c422a92d2ca41f1f",
+    "crates/tkernel/tests/ncollection_linear_vector/basic.rs": "2464756b3ae46dc91f381ad8eb6ce60466cf3726a21628a3d03d99e78256a575",
+    "tools/oracle/tkernel_linear_assignment_pointer_contracts.cxx": "2433c5e75fa31fddf5e71f08188d1e4651b974efe053e5395b5839004dd3704f",
+    "tools/oracle/tkernel_linear_assignment_pointer_contracts.expected": "654530a48f5a5fb54728244c7402fa90ebaed69f33a3cb8f95628a17abd87830",
+    "../OCCT/src/FoundationClasses/TKernel/GTests/NCollection_LinearVector_Test.cxx": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e"
+  },
+  "candidate_bindings": [
+    {
+      "cpp_id": "1b4591aa201ef5665b2934577ef7ab39adf583ce20571fcd295630725f4034e5",
+      "cpp_name": "NCollection_LinearVector::end",
+      "cpp_signature": "type-parameter-0-0 *() noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_end_mut_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "34ce12c33bd04fd96c0b1051f85c00ce6c24b28c8cae5ca2791118b0e6c40934",
+      "cpp_name": "NCollection_LinearVector::Data",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "5c90cb37e79a7d6b2f4b58c26588b5cce105dc02b63b2f349bf92b4db9759f39",
+      "cpp_name": "NCollection_LinearVector::end",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_end_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "78f3a1d2dae89b2d22901d45b252ac9890e5a49c9f85c3bb11bcc31e4e0b0c6c",
+      "cpp_name": "NCollection_LinearVector::NCollection_LinearVector<TheItemType>",
+      "cpp_signature": "void (const NCollection_LinearVector<TheItemType> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::clone_trivial"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "7a872e5d85d52d63a1711d70f28de8897e1f91396406134e88dcca9c3aedf29b",
+      "cpp_name": "NCollection_LinearVector::cend",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_end_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "89f01bbf71284e3279ec7ce1f8257d279384cebe1332b41ddd7fe344e3b1ee27",
+      "cpp_name": "NCollection_LinearVector::operator=",
+      "cpp_signature": "NCollection_LinearVector<TheItemType> &(const NCollection_LinearVector<TheItemType> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::assign",
+        "rustycad_tkernel::ncollection::LinearVector::assign_trivial",
+        "rustycad_tkernel::ncollection::LinearVector::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "abcd0bd84bb94d5d6f557425dadc34faeba0f31e48a899d3e731d46b7a30edac",
+      "cpp_name": "NCollection_LinearVector::begin",
+      "cpp_signature": "type-parameter-0-0 *() noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_mut_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "c801644c4c70988b579335d314c2fee74348414c441c0d9d562af7801c301d99",
+      "cpp_name": "NCollection_LinearVector::operator=",
+      "cpp_signature": "NCollection_LinearVector<TheItemType> &(NCollection_LinearVector<TheItemType> &&) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::move_from",
+        "rustycad_tkernel::ncollection::LinearVector::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "caf00a2f70cc0843832b5cee329e2d34f38f9aed54c98db65aec29361ff8b202",
+      "cpp_name": "NCollection_LinearVector::begin",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "f5ac49368d5e3914578970e2d42fb0242f2aec8887982fe57f931cda9dad971c",
+      "cpp_name": "NCollection_LinearVector::cbegin",
+      "cpp_signature": "const type-parameter-0-0 *() const noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "fb973590300afcf9ed88bbf1a0280f0943ada009d33916a99276241942cc64d2",
+      "cpp_name": "NCollection_LinearVector::Data",
+      "cpp_signature": "type-parameter-0-0 *() noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LinearVector::data_mut_ptr"
+      ],
+      "status": "partial"
+    }
+  ],
+  "compiler_bodies": [
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "source_sha256": "245fc57c780b357c43895e9bf9c6185e71b9a2e72c71215b2b7671f5224fd300",
+      "declaration_sha256": "9de410276c67b9b39eed30915e80c93f8f779234e0595460a800585816257b87"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign_self",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "source_sha256": "245fc57c780b357c43895e9bf9c6185e71b9a2e72c71215b2b7671f5224fd300",
+      "declaration_sha256": "e2134f622bec033f84a6547b82074c60d73b6464c54b3ee8b3aa153d3d4ea99b"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign_trivial",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/trivial_assignment.rs",
+      "source_sha256": "dc3f1fb7203526aaf4e7755d0466a467f25a87447bfe6c35d98f562b95fa1766",
+      "declaration_sha256": "1f93f6e537184dd517d41d855bfa78a14e028584557c865a5b07a75aa71d77a8"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::clone_trivial",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/trivial_assignment.rs",
+      "source_sha256": "dc3f1fb7203526aaf4e7755d0466a467f25a87447bfe6c35d98f562b95fa1766",
+      "declaration_sha256": "246dd564ce398c708ef7169da8ed0b1fc782d9ae94ee387612aeb59ece6f6fe8"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::data_end_mut_ptr",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/pointers.rs",
+      "source_sha256": "e487b1591150b1de235b9cb60290546873194f55b085b8ae5736ff58cd770e73",
+      "declaration_sha256": "18dbfe7c480105d2226f9519dc8dc6e404634e13022564fcb94c51ba08748a77"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::data_end_ptr",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/pointers.rs",
+      "source_sha256": "e487b1591150b1de235b9cb60290546873194f55b085b8ae5736ff58cd770e73",
+      "declaration_sha256": "5646b974f9f35e68a24ba69e757c8f8593bc98f608684b2ddcc708eab3854558"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::data_mut_ptr",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/pointers.rs",
+      "source_sha256": "e487b1591150b1de235b9cb60290546873194f55b085b8ae5736ff58cd770e73",
+      "declaration_sha256": "0fee77b277a3db6ffd31debf45778c42c63aba597e643cb7bedff02d6cec1efb"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::data_ptr",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector/pointers.rs",
+      "source_sha256": "e487b1591150b1de235b9cb60290546873194f55b085b8ae5736ff58cd770e73",
+      "declaration_sha256": "3f94a2f4341b74b5e5af59f7cb061fab059b6c6fa4e7e42aaafad1ca0c64d970"
+    },
+    {
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from",
+      "kind": "function",
+      "source_file": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "source_sha256": "245fc57c780b357c43895e9bf9c6185e71b9a2e72c71215b2b7671f5224fd300",
+      "declaration_sha256": "65b37a537a13d929366a4322143ee1d88bfd5ea2655830a0b8d52db819a22890"
+    }
+  ],
+  "runtime": {
+    "original_module_declarations": 49,
+    "native_original_passes": 49,
+    "rust_original_passes": 49,
+    "exact_original_case_name_join": true,
+    "supplemental_rust_passes": 7,
+    "miri_passes": 7,
+    "miri_exit": 0,
+    "native_output_rows": 9,
+    "native_output_comparison_exit": 0,
+    "strict_clippy_exit": 0,
+    "foundation_passes": 7414,
+    "foundation_test_groups": 586,
+    "foundation_exit": 0,
+    "foundation_test_threads": 1,
+    "parallel_foundation_attempt_exit": 101,
+    "parallel_foundation_failure": "standard_mapped_region_behavior::mapped_prefix_free_unmaps_prefix_and_keeps_suffix_resident: mincore returned 0 rather than -1; independent recheck passed; cause not proven",
+    "clone_hook_regression_failures_before_fix": 2
+  },
+  "artifacts": {
+    "foundation": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-foundation.gz",
+      "sha256": "5bf4c4bb84161b3a95196d0630d1313fdd40ded680bd9ee0f7adf0b829552d73"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-clippy.gz",
+      "sha256": "5b9c3f0332ce418490994b1052c676f04d7143aa52990c20626b9c1322791c6f"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-miri.gz",
+      "sha256": "0e8d1e3f65e00ca1292365daf24b8732e90f5068815ef667978f58fd920d64e8"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-native.gz",
+      "sha256": "64111f271437f0b6182fd454555d4ee988ba2eff7bf120c5fc1d86c50b7a8d3f"
+    },
+    "native-legacy": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-native-legacy.gz",
+      "sha256": "146f1f8abb2a0b618ca3762d8add56fadaecba8310b044904dbdd3cb26e72b19"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-rustdoc.gz",
+      "sha256": "ecf36dabb0e2100f5de50603bd3800440e548199c011d2aaf0bafe0fc59bcac4"
+    },
+    "clone-regression": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-clone-regression.gz",
+      "sha256": "99e1fbbff1979ae7e080902d8ef966234bdf5b85f6cb60a51aa449017c9a3e70"
+    },
+    "parallel-failure": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-parallel-failure.gz",
+      "sha256": "f98688a128705bc44715951ea723d4ccae88c3cd2c2797fd882c6e6f8584db15"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-rustdoc.json.gz",
+      "sha256": "fe03fcf67073f505911c5820d0552f985926156e7a9493bef9eee3640f9230bb"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/linear-assignment-pointer-source.tar.gz",
+      "sha256": "30bd6978c738db6ee46ee4172e7a56bd0621fada0d8c26c5b9e48e55fbd94ab0"
+    }
+  },
+  "limitations": [
+    "Copy explicitly selects trivial native policy; C++ trait inference and automatic policy dispatch remain unproven.",
+    "Rust zero-sized types differ from native nonzero object sizes and allocation identities.",
+    "Native custom allocation, constructor, move and destruction hooks remain partial.",
+    "Native writable const ToArray1 aliases remain Rust copy-on-write views.",
+    "Native pointer validity must obey Rust aliasing and initialization rules.",
+    "Candidate mappings are working-tree drafts and receive no integrated API or original declaration credit."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0
+}

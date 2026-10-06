@@ -135,7 +135,9 @@ impl GeomFillSectionLaw for GeomFillUniformSection {
         self.curve.length()
     }
     fn get_minimal_weight(&self, weights: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        self.curve.curve().weights_array(|w| weights.assign(w));
+        self.curve.curve().weights_array(|w| {
+            weights.assign(w);
+        });
         Ok(())
     }
     /// Always true with `Error = 0`.

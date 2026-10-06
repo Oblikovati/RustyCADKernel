@@ -106,7 +106,7 @@ pub fn purge() -> i32 {
 
 // realloc(ptr, 0) frees the block and returns NULL on glibc and MSVC; other C runtimes
 // (macOS, musl) return a live minimum-size block instead.
-const REALLOC_ZERO_FREES: bool = cfg!(any(
+pub(crate) const REALLOC_ZERO_FREES: bool = cfg!(any(
     all(target_os = "linux", target_env = "gnu"),
     target_os = "windows"
 ));

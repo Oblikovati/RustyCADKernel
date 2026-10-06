@@ -22,6 +22,17 @@ impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>> fo
     }
 }
 impl<T: ?Sized + RuntimeTyped> Eq for Handle<T> {}
+/// Formats handle identity without borrowing object contents; `format!("{handle:?}")`.
+impl<T: ?Sized + RuntimeTyped> std::fmt::Debug for Handle<T> {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Handle")
+            .field("type", &std::any::type_name::<T>())
+            .field("identity", &self.object_address())
+            .field("is_null", &self.is_null())
+            .finish()
+    }
+}
 impl<T: RuntimeTyped> PartialEq<*const T> for Handle<T> {
     fn eq(&self, other: &*const T) -> bool {
         self.as_ptr() == *other
@@ -47,5 +58,14 @@ impl<T: ?Sized + RuntimeTyped> Ord for Handle<T> {
 impl<T: ?Sized + RuntimeTyped> Hash for Handle<T> {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.address().hash(state);
+    }
+}
+/// Native default-map policy uses the static class specialization; Rust operators retain identity.
+impl<T: ?Sized + RuntimeTyped> crate::ncollection::HashKey for Handle<T> {
+    fn occt_hash(&self) -> usize {
+        T::handle_key_hash(self)
+    }
+    fn occt_equal(&self, other: &Self) -> bool {
+        T::handle_key_equal(self, other)
     }
 }

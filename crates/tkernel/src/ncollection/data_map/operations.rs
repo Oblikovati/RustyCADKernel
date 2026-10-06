@@ -44,36 +44,6 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert_eq!(*map.find(&1).unwrap(), 43);
     /// ```
     pub fn bind_ref(&mut self, key: &K, value: &V) -> bool {
-        if self.count == 0 || self.count > self.bucket_count {
-            self.resize(self.count);
-        }
-        let (bucket, index) = self.lookup_with_bucket(key);
-        self.replace_or_insert_borrowed(key, value, bucket, index)
-    }
-    fn replace_or_insert_borrowed(
-        &mut self,
-        key: &K,
-        value: &V,
-        bucket: usize,
-        index: Option<usize>,
-    ) -> bool {
-        let Some(index) = index else {
-            return self.insert_borrowed(key, value, bucket);
-        };
-        self.buckets[bucket][index].value = value.clone();
-        false
-    }
-    fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> bool {
-        let entry = self.resource.allocate_value_with(|| {
-            let copied_value = value.clone();
-            let copied_key = key.clone();
-            super::Entry {
-                key: copied_key,
-                value: copied_value,
-            }
-        });
-        self.buckets[bucket].insert(0, entry);
-        self.count += 1;
-        true
+        self.place_borrowed(key, || value.clone(), true).0
     }
 }

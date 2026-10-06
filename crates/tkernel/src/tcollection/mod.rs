@@ -5,7 +5,7 @@ pub use ascii_string::{AsciiString, CatOperand};
 mod extended_string;
 pub use extended_string::ExtendedString;
 mod h_ascii_string;
-pub use h_ascii_string::HAsciiString;
+pub use h_ascii_string::{HAsciiString, HAsciiStringHasher};
 mod h_extended_string;
 pub use h_extended_string::{HExtendedString, HExtendedStringHasher};
 mod primes;

@@ -122,6 +122,24 @@ impl<T> std::ops::Deref for AllocatedBox<T> {
         &self.storage
     }
 }
+
+impl<T> AllocatedBox<T> {
+    pub(crate) fn into_raw_with_allocator(self) -> (*mut T, BaseAllocator) {
+        AllocBox::into_raw_with_allocator(self.storage)
+    }
+
+    /// Restores a typed owner, preserving the allocator layout and provenance.
+    ///
+    /// # Safety
+    /// `pointer` must be an exclusively owned, initialized allocation of `T` returned by
+    /// `into_raw_with_allocator`, paired with an equal allocator, and not previously reclaimed.
+    pub(crate) unsafe fn from_raw_in(pointer: *mut T, allocator: BaseAllocator) -> Self {
+        Self {
+            // SAFETY: the caller transfers the original typed allocation and its resource.
+            storage: unsafe { AllocBox::from_raw_in(pointer, allocator) },
+        }
+    }
+}
 impl<T> std::ops::DerefMut for AllocatedBox<T> {
     fn deref_mut(&mut self) -> &mut T {
         &mut self.storage

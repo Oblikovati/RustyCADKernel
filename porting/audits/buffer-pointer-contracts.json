@@ -1,0 +1,169 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_Buffer const/mutable begin, end, cbegin, cend and ChangeData pointer identities",
+  "integration_status": "working-tree draft; main integration blocked by read-only .git policy",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/buffer.rs": "52753a321dd930c0b0746840ba83385699eada6cd8dbc9dcea3ac9f970354d71",
+    "crates/tkernel/src/ncollection/buffer/pointers.rs": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "b2c6e7b8f502d1e85ec808f19f48661dd9d0b95105fef2b438e290627f7ea715",
+    "crates/tkernel/tests/buffer_pointer_contracts.rs": "062b799cfc66e602451d08baaa7d25393dc77be9bf722f217bd769fa547451c1",
+    "tools/oracle/tkernel_buffer_pointer_contracts.cxx": "e48d782e177cf24e91aacaf6f2c4a8163486b1d5c07c3bd22fcd5fbfea1ac6d9",
+    "tools/oracle/tkernel_buffer_pointer_contracts.expected": "d14814cb807ef60cfec0ad3e9383f5f8951857cfbbf326241f2b3ac4a54ce5cd",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx": "e8d90ce2745f5ef78f2bfbf502cb278b56e825b485c64c80512a425907080da9",
+    "../OCCT/src/FoundationClasses/TKernel/GTests/NCollection_Buffer_Test.cxx": "397d800747c003d4faf86bf0d9ba4a05be3ad0691915f0889d85c2b8861e24a2"
+  },
+  "candidate_bindings": [
+    {
+      "selector": "NCollection_Buffer::ChangeData()",
+      "cpp_id": "d70500dc034d3b968b7fcbcec4240d7aff0109fc0a7130dacc138b3881e79f1c",
+      "cpp_signature": "unsigned char *() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_mut_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer/pointers.rs",
+        "source_sha256": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+        "declaration_sha256": "43ff5216bc0070f275862d61c29d5b9945149e7898045380f9c4609458fe3a72"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::begin()",
+      "cpp_id": "5d20ffb62add7b1f2a14083d9a611ff17608a8fe00ee41c19ecb5320f53c046d",
+      "cpp_signature": "unsigned char *() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_mut_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer/pointers.rs",
+        "source_sha256": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+        "declaration_sha256": "43ff5216bc0070f275862d61c29d5b9945149e7898045380f9c4609458fe3a72"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::begin() const",
+      "cpp_id": "6ac6553220ab8ec38d8f63c159da91bb10973ddd8d58ed42290ff519c9000185",
+      "cpp_signature": "const unsigned char *() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer.rs",
+        "source_sha256": "52753a321dd930c0b0746840ba83385699eada6cd8dbc9dcea3ac9f970354d71",
+        "declaration_sha256": "95541be193b177e011e83ec62b8c3549e0de5c9c55f85dd4b6f752883eeef5e7"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::cbegin() const",
+      "cpp_id": "1b113b7f0113ae430c354aca76beb911b568691b09d2d77e9dbfe8a097a505b4",
+      "cpp_signature": "const unsigned char *() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer.rs",
+        "source_sha256": "52753a321dd930c0b0746840ba83385699eada6cd8dbc9dcea3ac9f970354d71",
+        "declaration_sha256": "95541be193b177e011e83ec62b8c3549e0de5c9c55f85dd4b6f752883eeef5e7"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::end()",
+      "cpp_id": "602b6020fe3fe20bb803c35e4ed3b3a2bafe73cf5a6b817b6988706e4435f16c",
+      "cpp_signature": "unsigned char *() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_end_mut_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer/pointers.rs",
+        "source_sha256": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+        "declaration_sha256": "5f443c8020f3353a1bd36f589c22c254f7c37e8efe9011a73294d959c42767e3"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::end() const",
+      "cpp_id": "e8b96b0d21130e8cad788f61cf3a612ce1ecbd4b31ba7d2ed911480cb78a828a",
+      "cpp_signature": "const unsigned char *() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_end_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer/pointers.rs",
+        "source_sha256": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+        "declaration_sha256": "ebf3f39a68bf32d420b2ab108fda1bb73e3d896a133b7dce0c94ecc2eb04ddaa"
+      }
+    },
+    {
+      "selector": "NCollection_Buffer::cend() const",
+      "cpp_id": "3ba0a96a8c15e615e0d34f2b544bde9bfd4c5ed5ff8b3c8c5e1736d3069cdc34",
+      "cpp_signature": "const unsigned char *() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::data_end_ptr",
+      "status": "partial",
+      "compiler_evidence": {
+        "kind": "function",
+        "source_file": "crates/tkernel/src/ncollection/buffer/pointers.rs",
+        "source_sha256": "cd4c1bd12f46ba8827e59fda18c7fd3a81f19588147bd5044f92e9c98fe0229d",
+        "declaration_sha256": "ebf3f39a68bf32d420b2ab108fda1bb73e3d896a133b7dce0c94ecc2eb04ddaa"
+      }
+    }
+  ],
+  "runtime": {
+    "before_change_compile_exit": 101,
+    "missing_method_diagnostics": 16,
+    "focused_rust_passes": 30,
+    "supplemental_pointer_cases": 6,
+    "native_compile_runtime_comparison_exit": 0,
+    "native_output_rows": 7,
+    "original_module_declarations": 1,
+    "native_original_passes": 1,
+    "rust_original_passes": 1,
+    "exact_original_case_name_join": true,
+    "strict_clippy_exit": 0,
+    "miri_passes": 6,
+    "miri_exit": 0
+  },
+  "compiler_evidence_status": "seven unique native selectors resolve to four exact public Rust bodies in the draft; no published API credit",
+  "rustdoc_format_version": 61,
+  "artifacts": {
+    "red": {
+      "path": "porting/runtime-evidence/buffer-pointer-red.gz",
+      "sha256": "31f46b43e51062df0530d4c6c49fb3369a162c336a8e2638ec911d708d5220af"
+    },
+    "validation": {
+      "path": "porting/runtime-evidence/buffer-pointer-validation.gz",
+      "sha256": "088ed8d67ec8b8db9250317653ff6ad882cf2b833e7bcfb77a62b59ef76959f8"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/buffer-pointer-native.gz",
+      "sha256": "4b1acde189b2e62e43a679961ad0ce903319ea1c8e65a417d6e485937f113360"
+    },
+    "native-legacy": {
+      "path": "porting/runtime-evidence/buffer-pointer-native-legacy.gz",
+      "sha256": "d667d34f5286becab6e8306cbda373a12ff8d3c0f829857830ccd621218d4bec"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/buffer-pointer-rustdoc.gz",
+      "sha256": "3f6b96ebc4a25c1d9a076829ecc63ad7cacb208cbca550f5c697efbdf9379feb"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/buffer-pointer-draft-rustdoc.json.gz",
+      "sha256": "3b16aae7c4404df2824e0ce4d2abba53030244bbee6038051953b77d1df68b53"
+    }
+  },
+  "limitations": [
+    "Rust pointer dereference and aliasing rules differ from arbitrary native pointer use.",
+    "Existing allocation, adoption, null allocator, initialization and destruction differences remain outside the endpoint proof.",
+    "Pointer validity ends when native or Rust storage is released; dangling pointers are never dereferenced by these fixtures.",
+    "Candidate mappings are not integrated and do not update published API or original declaration counts."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0,
+  "combined_foundation_validation": {
+    "receipt": "porting/runtime-evidence/foundation-storage-pointers-draft.json",
+    "receipt_sha256": "04194ea2771ff97d6922d273cff9a808b8d44d16040449db5157f63c9d304851",
+    "passed": 7374,
+    "failed": 0,
+    "source_dirty": true
+  }
+}

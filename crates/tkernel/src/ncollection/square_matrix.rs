@@ -11,7 +11,8 @@ use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub};
 /// assert!(identity.inverted().unwrap().is_identity());
 /// ```
 pub trait MatrixScalar:
-    Copy
+    super::vector::VectorArithmeticComponent
+    + Copy
     + From<u8>
     + PartialEq
     + Add<Output = Self>

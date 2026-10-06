@@ -1,6 +1,8 @@
 //! Row-major arrays with independently bounded rows and columns.
 use super::{Array1, ArrayError};
 
+mod method_contracts;
+
 /// A rectangular owned array or borrowed view; `Array2::<i32>::with_size(2, 3)`.
 #[derive(Clone)]
 pub struct Array2<'a, T> {
@@ -184,8 +186,9 @@ impl<'a, T> Array2<'a, T> {
         self.col_lower = (i64::from(upper) - self.cols as i64 + 1) as i32;
     }
     /// Transfers storage, leaving the source empty; `dest.move_from(&mut source)`.
-    pub fn move_from(&mut self, source: &mut Self) {
+    pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
         *self = std::mem::take(source);
+        self
     }
 
     fn rebase(&mut self, row: i32, col: i32) {
@@ -260,21 +263,14 @@ impl<T: Clone> Array2<'_, T> {
         self.elements.init_ref(value);
     }
     /// Assigns bounds and contents, reusing equal-size storage; `dest.assign(&source)`.
-    pub fn assign(&mut self, source: &Array2<'_, T>) {
+    pub fn assign(&mut self, source: &Array2<'_, T>) -> &mut Self {
         self.elements.assign(&source.elements);
-        self.rows = source.rows;
-        self.cols = source.cols;
-        self.row_lower = source.row_lower;
-        self.col_lower = source.col_lower;
+        self.adopt_rectangle(source);
+        self
     }
     /// Copies matching dimensions without rebasing; `dest.copy_values(&source)?`.
     pub fn copy_values(&mut self, source: &Array2<'_, T>) -> Result<(), ArrayError> {
-        if (self.rows, self.cols) != (source.rows, source.cols) {
-            return Err(ArrayError::ShapeMismatch {
-                expected: (self.rows, self.cols),
-                actual: (source.rows, source.cols),
-            });
-        }
+        self.check_rectangle(source)?;
         self.elements.copy_values(&source.elements)
     }
 }

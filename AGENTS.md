@@ -56,5 +56,8 @@
 - The coordinating agent serializes merges, resolves conflicts, and runs the
   relevant checks. A subagent's work is complete only after its committed changes
   are integrated into `main`.
+- After integration and checks, delete the completed worktree and its merged
+  branch. Verify that all commits are on `main`, local changes are accounted for,
+  and no active process or pending task needs the checkout or its build artifacts.
 - Start new worktree branches from current `main`. Preserve unfinished work and
   report its branch, worktree, and remaining failures during handoff.

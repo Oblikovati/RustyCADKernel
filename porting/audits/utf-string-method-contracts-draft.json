@@ -1,0 +1,50 @@
+{
+  "status": "partial_uncommitted_draft",
+  "class": "NCollection_UtfString",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/utf_string.rs": "7577ed51b07412bfcdc17b5cbe8c665a0205bbd344ce56cd028ec425a626df2d",
+    "crates/tkernel/src/ncollection/utf_string/operators.rs": "4eb11a66857ae00b11a0081f66ab6b7a339edb0395e62047953ff59e4830e935",
+    "crates/tkernel/src/ncollection/utf_string/method_contracts.rs": "c5e588c8b35ca4b9e3781c5efd682a255f2f4097a71f41cad11a603a84758cc6",
+    "crates/tkernel/tests/utf_string_method_contracts.rs": "1d25b9a47f532be03b0e744f5174df4b8dbe204e3aa8359f56d51ea15bc07c5d",
+    "tools/oracle/tkernel_utf_string_method_contracts.cxx": "2dc91b32e37ff0316685c3559dc56429d3013f8f82deb21449eee92e0449a88f",
+    "tools/oracle/tkernel_utf_string_method_contracts.expected": "925e1c2d8e9d4610965864c497ad9f2503aee85306f02b605e63657a94060af9"
+  },
+  "checks": {
+    "rust_log": "/tmp/utf-string-method-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 36,
+    "new_tests": 7,
+    "targets": [
+      "utf_string_method_contracts",
+      "ncollection_utilities_api_behavior",
+      "ncollection_utf_locale"
+    ],
+    "native_original_declarations": 0,
+    "native_declaration_list_log": "/tmp/utf-string-native-declarations.log",
+    "native_declaration_list_exit": 0,
+    "source_search": "rg UtfString ../OCCT/src/FoundationClasses/TKernel/GTests found no matches",
+    "supplemental_oracle_rows": 9,
+    "miri": "not_run_by_subagent; root coordinates"
+  },
+  "method_changes": [
+    "ToCString and GetCharBuffer expose native null/non-null pointer identity",
+    "Move constructor transfers buffer and leaves source with null pointer, zero size/length",
+    "Move assignment returns destination and swaps storage with source",
+    "Assign/Clone::clone_from and Clear release old storage before replacement allocation",
+    "Returning Unicode-pointer assignment, nullable FromUnicode and overlapping self-buffer suffix conversion",
+    "Returning compound append and self append preserve empty-invalid-symbol cached-length quirk",
+    "Explicit const self-copy-assignment and mutable self-move-assignment"
+  ],
+  "remaining_gaps": [
+    "Rust safe is_empty on a moved-from null buffer returns true; native dereferences null and has no defined value in that state",
+    "Custom Standard allocator callbacks and recoverable allocation-failure behavior remain unported",
+    "Bounded Rust slices zero-pad truncated source inputs outside the native defined pointer domain",
+    "C++ operator[] returns a value; existing get_char is its Rust equivalent, with no Rust Index trait reference fabricated",
+    "Locale code unchanged; cross-platform locale and native wchar_t alias proof retain prior limitations",
+    "No dedicated native legacy UtfString unit declarations exist at this source revision; supplemental tests receive no original declaration credit",
+    "No compiler body capture or integrated main credit in this scoped audit"
+  ]
+}

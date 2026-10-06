@@ -1,0 +1,87 @@
+{
+  "status": "partial_uncommitted_draft",
+  "upstream_class": "NCollection_FlatMap",
+  "upstream_header_sha256": "8453a03cd0622c96cf944cf1d756341cca9dd58824b1e21f5ba56c77046ac3b8",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/flat_map.rs": "3ca4dbdf3796b5e653bfefe55f7558ca1b7e0632e3f6fe61d0e9465182a054c8",
+    "crates/tkernel/src/ncollection/flat_map/cursor_contracts.rs": "f13c549c4755a0b09cad74f549c18802eb1fc4a38caf1f8a4f945f58f9e6a6ee",
+    "crates/tkernel/src/ncollection/flat_map/pointer_contracts.rs": "f6f663bc97aec198f2ab0f8ca741a26b2c9e8004d959d57ac1f292e67c1ca1b4",
+    "crates/tkernel/src/ncollection/flat_map/transfer.rs": "f5b8ef56868b84daa47444fa1d370516a373ddb71bf49699c8e7e577daceaa9b",
+    "crates/tkernel/src/ncollection/flat_map/construction.rs": "7126fae551cab28b5fbe3d97324ab6e670c0b78c9b1646da050242e451d5cdfe",
+    "crates/tkernel/tests/flat_map_method_contracts.rs": "2e4934cc588c92fbf9a63a6795cf5a8d831ef1d352c9ec3765a111bf42fe8c04",
+    "tools/oracle/tkernel_flat_map_method_contracts.cxx": "b2045abe01ddb706dfdca624b56b945d2cf1c67e82a92ed2920e380fdb812a1e",
+    "tools/oracle/tkernel_flat_map_method_contracts.expected": "05febd87f76764c59bda22fc84d4e583c05a149b9a20579984a6bb591ac69393"
+  },
+  "source_inputs_after_run_identical": true,
+  "source_capture_note": "Owned inputs captured during compilation and compared after completion; shared FlatTable not changed in this batch.",
+  "artifact_sha256": {
+    "porting/runtime-evidence/flat-map-method-rust.log.gz": "f1b02f120a0199054427061243d522799fb8653d2e7b6ca96205c2c46eebe4db",
+    "porting/runtime-evidence/flat-map-method-legacy.log.gz": "c9e3e4307c0434ad57611aa35e55fb310b030f2fc17c55c6312be2448bc9d796",
+    "porting/runtime-evidence/flat-map-method-native.log.gz": "f16122f011af9005ea1d915d68637b32a468eef31b0bb3daba86b30aeafc5e84",
+    "porting/runtime-evidence/flat-map-method-source.json.gz": "b970515b845b1d8e4e90d1d86639778a86fc3b2dee1d05ba572a36a756d48b29"
+  },
+  "focused_rust_passes": 43,
+  "new_tests": 6,
+  "original_test_names": [
+    "NCollection_FlatMapTest.DefaultConstructor",
+    "NCollection_FlatMapTest.AddAndContains",
+    "NCollection_FlatMapTest.Remove",
+    "NCollection_FlatMapTest.Clear",
+    "NCollection_FlatMapTest.CopyConstructor",
+    "NCollection_FlatMapTest.MoveConstructor",
+    "NCollection_FlatMapTest.Iterator",
+    "NCollection_FlatMapTest.STLIterators",
+    "NCollection_FlatMapTest.LargeDataSet",
+    "NCollection_FlatMapTest.LongProbeSequence",
+    "NCollection_FlatMapTest.StringKeys",
+    "NCollection_FlatMapTest.AddedNewKey",
+    "NCollection_FlatMapTest.AddedExistingKey",
+    "NCollection_FlatMapTest.EmplaceNewKey",
+    "NCollection_FlatMapTest.EmplaceExistingKey",
+    "NCollection_FlatMapTest.EmplacedNewKey",
+    "NCollection_FlatMapTest.EmplacedExistingKey",
+    "NCollection_FlatMapTest.SeekFound",
+    "NCollection_FlatMapTest.SeekNotFound",
+    "NCollection_FlatMapTest.ChangeSeekModify",
+    "NCollection_FlatMapTest.ChangeSeekNotFound",
+    "NCollection_FlatMapTest.HasherConstructorCopy",
+    "NCollection_FlatMapTest.HasherConstructorMove",
+    "NCollection_FlatMapTest.CopyConstructorPreservesHasher",
+    "NCollection_FlatMapTest.IteratorEquality"
+  ],
+  "original_join_count": 25,
+  "native_oracle_rows": 11,
+  "exit_codes": {
+    "focused_rust": 0,
+    "original_native": 0,
+    "oracle_compile": 0,
+    "oracle_run": 0,
+    "oracle_diff": 0
+  },
+  "commands": {
+    "rust": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=2 cargo test --locked -p rustycad-tkernel --test flat_map_method_contracts --test ncollection_flat_map --test flat_map_supplemental --test ncollection_flat_maps_api_behavior -- --test-threads=1",
+    "native": "LD_LIBRARY_PATH=target/occt-modeling-full/lin64/gcc/libi target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest --gtest_filter=NCollection_FlatMapTest.*",
+    "oracle_compile": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_flat_map_method_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_flat_map_method_contracts",
+    "oracle": "/tmp/tkernel_flat_map_method_contracts > /tmp/flat-map-method-native.log; cmp /tmp/flat-map-method-native.log tools/oracle/tkernel_flat_map_method_contracts.expected"
+  },
+  "implemented_methods": [
+    "Seek => raw seek_ptr adapter; existing seek returns Option<&K>",
+    "ChangeSeek => raw change_seek_ptr adapter; existing change_seek returns Option<&mut K>",
+    "iterator_impl::operator-> => key_ptr",
+    "iterator_impl::operator++() => advance_returning",
+    "iterator_impl::operator++(int) => advance_post",
+    "iterator copy assignment => assign_from and assign_self",
+    "Iterator::IsEqual => named is_equal",
+    "container copy self-assignment => assign_self now independent of K/H Clone"
+  ],
+  "remaining_gaps": [
+    "Native allocation layout and C++ custom move/copy/destruction hooks remain explicit policy boundaries",
+    "Private iterator_impl template specializations and public alias reachability require compiler declaration proof",
+    "key_ptr reports Rust Failure on exhausted cursor; native operator-> on an exhausted cursor has undefined behavior",
+    "Source changes are uncommitted and receive no integrated API or original-declaration credit",
+    "Full class parity is not claimed from these supplemental cases alone"
+  ],
+  "integrated_api_credit": 0,
+  "original_mapping_credit_added": 0,
+  "miri": "root_pending"
+}

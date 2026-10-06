@@ -1,5 +1,9 @@
 //! Arbitrarily bounded arrays, corresponding to `NCollection_Array1`.
 
+mod pointers;
+mod returning;
+mod trivial_copy;
+
 /// An owned array or a view borrowing an external buffer.
 ///
 /// ```
@@ -211,13 +215,14 @@ impl<T: Clone> Clone for Array1<'_, T> {
 
 impl<T: Clone> Array1<'_, T> {
     /// Copies values and bounds, reusing same-size storage; `dest.assign(&source)`.
-    pub fn assign(&mut self, source: &Array1<'_, T>) {
+    pub fn assign(&mut self, source: &Array1<'_, T>) -> &mut Self {
         if self.len() == source.len() {
             self.as_mut_slice().clone_from_slice(source.as_slice());
         } else {
             self.storage = Storage::Owned(source.as_slice().to_vec());
         }
         self.lower = source.lower;
+        self
     }
 
     /// Copies equally sized contents without changing bounds; `dest.copy_values(&source)?`.
@@ -235,8 +240,9 @@ impl<T: Clone> Array1<'_, T> {
 
 impl<T> Array1<'_, T> {
     /// Transfers storage and resets the source to the empty default; `dest.move_from(&mut source)`.
-    pub fn move_from(&mut self, source: &mut Self) {
+    pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
         *self = std::mem::take(source);
+        self
     }
 }
 

@@ -1,0 +1,88 @@
+{
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "NCollection_CellFilter",
+    "NCollection_CellFilter_Action"
+  ],
+  "upstream_header_sha256": "4638a170c2052d06c82a54e70c753e417d0e2ba9dd088cc871e5e54e8a14a25c",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/cell_filter.rs": "a78faff675a93e4637cd301abc73c7da8031bee95f50619a9ca9a009deb56267",
+    "crates/tkernel/src/ncollection/cell_filter/setup.rs": "dc72013b85d68056607dc58dc88e0e8a00a4e74fd9fc5ed3f34dd312690bab36",
+    "crates/tkernel/src/ncollection/cell_filter/indices.rs": "57efcecd04962514de9e4842da2f8c6432ce28191ec764e5e6f95fd4c4dfe199",
+    "crates/tkernel/src/ncollection/cell_filter/method_tests.rs": "3eaeb7bc11b3e6905a76212718b624e4e754439d1a70a6d9450fe1a88d25e51a",
+    "crates/tkernel/src/ncollection/cell_filter/fallible.rs": "1f72e57a8528a1c53af1e401ee67575a2b70148fa175bf352204649efbfdba08",
+    "crates/tkernel/src/ncollection/cell_filter/geometry.rs": "65e2895d62344182f21cff0b6cdf4e9e86d556d4447dd20f9246dadf2ee3af8e",
+    "crates/tkernel/src/ncollection/list.rs": "0ad90b2faafe4e5c3b8ace970c38f69c32ef4c49070f926dc644a045fd8c4ffd",
+    "crates/tkernel/tests/cell_filter_method_contracts.rs": "d7e2db178045b85c08b9d260120fd3322a0d463796e1e9ef6568534bf4322731",
+    "tools/oracle/tkernel_cell_filter_method_contracts.cxx": "114ffd4ca6792ce4f7b0520c06993edc8055a22aa1824fce6190fdf448687db3",
+    "tools/oracle/tkernel_cell_filter_method_contracts.expected": "c4d8c3399a74c39e0e3bc138279999938bb9c354e3d41b9e59175f73dbf93867"
+  },
+  "source_inputs_after_run_identical": true,
+  "source_capture_note": "Owned sources including shared List helper were captured before final integration-test rerun; protected-state build began before capture and was checked afterward. Sources remained frozen throughout.",
+  "artifact_sha256": {
+    "porting/runtime-evidence/cell-filter-method-rust.log.gz": "56d97c3e9dd40e97298350888d49c9ea76dd6f1288ea632ece46ea60de82e6a3",
+    "porting/runtime-evidence/cell-filter-method-protected-rust.log.gz": "e128afa378f1d615abf696af6aeaeeded85815df062a47528984dc54d453eb39",
+    "porting/runtime-evidence/cell-filter-method-native.log.gz": "a7e2f385dbf2d8bdc7f436c56799ddd3c812cf3ce76c0ab46f9bef30fc130613",
+    "porting/runtime-evidence/cell-filter-method-legacy.log.gz": "92d6ea394302c56de7cfe5eac8ccbd3a40504370a8ae56e8cdb02523bac9d6f9",
+    "porting/runtime-evidence/cell-filter-method-source.json.gz": "51fde4ea2220e649cc2acc82ac00fe896f4aaa9857f9b53ec3b40402d51d5b3a"
+  },
+  "focused_rust_passes": 19,
+  "protected_state_unit_passes": 3,
+  "new_tests": 7,
+  "original_test_names": [
+    "NCollection_CellFilterTest.AddInspect2D_SinglePoint",
+    "NCollection_CellFilterTest.AddInspect2D_Range",
+    "NCollection_CellFilterTest.ReversedRangesAreIgnored",
+    "NCollection_CellFilterTest.Remove2D",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterRemove",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterPurge",
+    "NCollection_CellFilterTest.AddInspect3D",
+    "NCollection_CellFilterTest.Reset",
+    "NCollection_CellFilterTest.InspectWithPurge"
+  ],
+  "original_join_count": 9,
+  "native_oracle_rows": 9,
+  "exit_codes": {
+    "integration_rust": 0,
+    "protected_state_rust": 0,
+    "original_native": 0,
+    "oracle_compile": 0,
+    "oracle_run": 0,
+    "oracle_diff": 0
+  },
+  "implemented_methods": [
+    "default CellFilter constructor => Default with native zero cell size, usable after Reset",
+    "Reset(double,allocator) and Reset(Array1,allocator) now preserve native cell-map bucket modulus",
+    "Add target construction occurs after allocator node reservation through new shared List::prepend_with",
+    "CellFilter_Action has explicit native i32 enum representation"
+  ],
+  "concrete_observations": [
+    "Growing to 103 cells yields 1009 buckets; both same-arena and replacement-arena Reset retain 1009",
+    "Reset(Array1) retains filter dimension, copies array bounds, and retains bucket modulus",
+    "Target Clone observes two and three existing allocator reservations on first/second same-cell insertions, matching native placement-new order",
+    "List constructor panic releases unpublished allocation and leaves prior chain intact"
+  ],
+  "undefined_native_domains": [
+    "Default cell size zero must be reset before cell coordinate division; nonfinite/out-of-range floating-to-integer conversions have no portable C++ behavior",
+    "Zero dimensions with range operations access index -1 in native recursion",
+    "Negative dimensions may overflow signed dimension arithmetic or request enormous allocation and are not a validated input domain",
+    "Reset size array shorter than fixed dimension makes native range recursion access outside cell index storage; existing Rust clamping is not claimed as native defined behavior"
+  ],
+  "remaining_gaps": [
+    "Native protected Cell,ListNode,CellHasher classes are not exposed as standalone Rust facades",
+    "No additional public Inspector helper class exists in this pinned header; public Target/Point aliases correspond to inspector associated types",
+    "Rust allocator-owned nodes enforce live-allocation checks and unwind cleanup beyond native raw arena ownership",
+    "Reset(Array1) native storage reuse and custom allocation/destructor hooks require separate low-level policy proof",
+    "No integrated compiler API or original-declaration mapping credit is added"
+  ],
+  "commands": {
+    "rust": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=2 cargo test --locked -p rustycad-tkernel --test cell_filter_method_contracts --test ncollection_cell_filter --test cell_filter_supplemental --test cell_filter_fallible -- --test-threads=1",
+    "protected_state": "cargo test --locked -p rustycad-tkernel --lib ncollection::cell_filter::method_tests -- --test-threads=1",
+    "native": "LD_LIBRARY_PATH=target/occt-modeling-full/lin64/gcc/libi target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest --gtest_filter=NCollection_CellFilterTest.*",
+    "oracle_compile": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_cell_filter_method_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_cell_filter_method_contracts",
+    "oracle": "/tmp/tkernel_cell_filter_method_contracts > /tmp/cell-filter-method-native.log; cmp /tmp/cell-filter-method-native.log tools/oracle/tkernel_cell_filter_method_contracts.expected"
+  },
+  "integrated_api_credit": 0,
+  "original_mapping_credit_added": 0,
+  "miri": "root_pending"
+}

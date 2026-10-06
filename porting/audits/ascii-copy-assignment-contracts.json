@@ -1,0 +1,78 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "ASCII string returning copy assignment and safe self-assignment entry point",
+  "integration_status": "working-tree draft; main integration blocked by read-only .git policy",
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bindings": [
+    {
+      "selector": "TCollection_AsciiString::operator=(const TCollection_AsciiString&)",
+      "cpp_id": "5c8467612adcc9e3773c3401a16a1596e48ddc2464fadf6fe2a267055a9daedb",
+      "signature": "class TCollection_AsciiString &(const class TCollection_AsciiString &)",
+      "previous_rust_item": "<rustycad_tkernel::tcollection::AsciiString as Clone>::clone_from",
+      "previous_status": "implemented",
+      "rust_items": [
+        "rustycad_tkernel::tcollection::AsciiString::assign_from",
+        "rustycad_tkernel::tcollection::AsciiString::assign_self"
+      ],
+      "status": "partial"
+    }
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/tcollection/ascii_string/assignment.rs": "88f3eec69bd765b557564e0a5b72d8ab916b5d49cca67ec7ff0d343c8c9de977",
+    "crates/tkernel/tests/ascii_copy_assignment_contracts.rs": "80b1500009d17229bd818c6a8486518ab6d76632e77df90c0977e3e70f6adf23",
+    "tools/oracle/tkernel_ascii_copy_assignment.cxx": "6c046380edb165debf3f4791a2ac09f59f67efbdc9ca5b2672cfd61920e8d6c6",
+    "tools/oracle/tkernel_ascii_copy_assignment.expected": "738f86523ba86d8db031d8f44bcfe03c8cfbc5d5785f661f831bbe916c3b3e24",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "../OCCT/src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a",
+    "crates/tkernel/src/tcollection/ascii_string.rs": "2dc7563091b91c3758db327b7687151b121df897367a0c15e0633eb792c01be0",
+    "../OCCT/src/FoundationClasses/TKernel/GTests/TCollection_AsciiString_Test.cxx": "8c5ae783fbd4da000061ef0b34daf0ec925639fee55056685df0e3c160ceefbf"
+  },
+  "runtime": {
+    "native_compile_exit": 0,
+    "native_runtime_exit": 0,
+    "native_output_rows": 7,
+    "rust_runtime_exit": 0,
+    "supplemental_rust_cases": 4,
+    "legacy_module_tests": {
+      "source_declarations": 114,
+      "native_original_passes": 114,
+      "rust_original_passes": 114,
+      "exact_case_name_join": true
+    },
+    "focused_rust_cases": 172,
+    "focused_exit": 0,
+    "clippy_exit": 0,
+    "clippy_log": "porting/runtime-evidence/ascii-copy-assignment-clippy.gz",
+    "clippy_log_sha256": "75f88f18cf0e607f6261851c8b38ffc7e1330933dba317acc891bd44feba2bb2"
+  },
+  "limitations": [
+    "The existing copy storage path differs from native release/reallocation order when growing or clearing.",
+    "Native shared empty-buffer identity and allocation-failure behavior are not established by this fixture.",
+    "Growth pointer identity is allocator-dependent and deliberately receives no parity credit."
+  ],
+  "compiler_evidence_status": "two exact compiler-recorded public bodies verified in the uncommitted draft; no published API credit",
+  "compiler_evidence": {
+    "rustdoc_format_version": 61,
+    "rustdoc_artifact": "porting/runtime-evidence/ascii-copy-assignment-draft-rustdoc.json.gz",
+    "rustdoc_sha256": "efa9126e493115cf3ddc5af1e7e6961fe04ba76aab186a24cbdf56727fef383b",
+    "declarations": [
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::assign_from",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/assignment.rs",
+        "source_sha256": "88f3eec69bd765b557564e0a5b72d8ab916b5d49cca67ec7ff0d343c8c9de977",
+        "declaration_sha256": "a7326cf7c3c85256cfaae3cd172e92568cf87471b992b0a832b89467e53bed16"
+      },
+      {
+        "path": "rustycad_tkernel::tcollection::AsciiString::assign_self",
+        "kind": "function",
+        "source_file": "crates/tkernel/src/tcollection/ascii_string/assignment.rs",
+        "source_sha256": "88f3eec69bd765b557564e0a5b72d8ab916b5d49cca67ec7ff0d343c8c9de977",
+        "declaration_sha256": "26a786aee577239935f3d2119ad9a8dda43d308a708e28794f6a2f7c8e23ea69"
+      }
+    ],
+    "git_source_clean": false
+  },
+  "native_tkernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+}

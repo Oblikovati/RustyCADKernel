@@ -1,0 +1,71 @@
+{
+  "status": "source_frozen_partial_draft",
+  "class": "NCollection_DefaultHasher",
+  "scope": "f32/default std::hash dispatch and primitive specialization audit",
+  "integrated_api_credit": 0,
+  "original_declaration_credit": 0,
+  "full_parity": false,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/hash_policy.rs": "c5337333bc01e83f3c69054d7e73d276a5afadc0a042a2ff5c9a6861abe0f125",
+    "crates/tkernel/tests/default_hasher_float_contracts.rs": "747c8c546326637be29c66f6ac69ea9c7ff331d43c1c9ecf4b08a558cdb06666",
+    "tools/oracle/tkernel_default_hasher_float_contracts.cxx": "c6d060987107a170474285a0f6c3ecd91a30b000db1c17eb897e3f67adf597a4",
+    "tools/oracle/tkernel_default_hasher_float_contracts.expected": "4634b343b86f0768df5a09d3463ece25c89258ab58ad035e7bea605476a0f6bd"
+  },
+  "native_profile": "Linux x86_64 little-endian, GCC/libstdc++13.3.0, pinned OCCT3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checks": {
+    "rust_log": "/tmp/default-hasher-float-rust.log",
+    "rust_exit": 0,
+    "rust_passed": 30,
+    "new_tests": 5,
+    "native_log": "/tmp/default-hasher-float-native.log",
+    "native_compile_exit": 0,
+    "native_run_exit": 0,
+    "oracle_diff_exit": 0,
+    "oracle_rows": 46,
+    "miri_log": "/tmp/default-hasher-float-miri.log",
+    "miri_exit": 0,
+    "miri_passed": 5,
+    "native_original_declarations": 0
+  },
+  "original_name_join": [],
+  "original_scope": "No dedicated original DefaultHasher/HashUtils GTest declarations in pinned TKernel/GTests; this batch is supplemental oracle-backed behavior evidence.",
+  "method_changes": [
+    "HashKey f32 implementation: signed zero normalizes to0; all other raw IEEE754 bits feed pinned libstdc++ Murmur hashing with seed0xc70f6907",
+    "Shared float-byte hash helper also preserves existing f64 behavior",
+    "Actual default DataMap f32 tests: signed zeros deduplicate, finite values are retrievable, repeated NaN binding inserts distinct keys that compare unequal even to themselves"
+  ],
+  "oracle_partitions": {
+    "f32_patterns": 18,
+    "f64_patterns": 9,
+    "map_transitions": 3,
+    "integral_specializations": 15,
+    "pointer_specialization": 1
+  },
+  "primitive_mapping": {
+    "bool": "bool",
+    "char": "i8 on this native profile; signedness is ABI-specific",
+    "signed char": "i8",
+    "unsigned char": "u8",
+    "wchar_t": "i32 on this profile; width and signedness ABI-specific",
+    "char16_t": "u16",
+    "char32_t": "u32 (Rust char also handles valid scalar values)",
+    "short": "i16",
+    "int": "i32",
+    "long": "i64/isize on LP64; Windows long differs",
+    "long long": "i64",
+    "unsigned short": "u16",
+    "unsigned int": "u32",
+    "unsigned long": "u64/usize on LP64",
+    "unsigned long long": "u64",
+    "T*": "*const T / *mut T",
+    "float": "f32",
+    "double": "f64"
+  },
+  "remaining_gaps": [
+    "Exact floating hashes are pinned to this libstdc++ backend; libc++, MSVC and32-bit execution were not verified",
+    "IEEE floating exception status flags are not modeled or asserted",
+    "User enums still require a HashKey implementation; approved macro helper remains next work",
+    "Native long double and distinct nullptr_t scalar adapters are not implemented; raw null pointer keys already supported",
+    "No exhaustive compiler-surface proof or integrated declaration credit in this scoped receipt"
+  ]
+}

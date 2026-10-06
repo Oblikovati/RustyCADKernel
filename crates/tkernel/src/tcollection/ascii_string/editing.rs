@@ -187,9 +187,14 @@ impl AsciiString {
     /// `Copy` and `operator=` from a byte span, embedded NULs included; `text.copy("replacement")`.
     pub fn copy(&mut self, input: impl AsRef<[u8]>) {
         let bytes = input.as_ref();
-        self.terminated.clear();
-        self.terminated.extend_from_slice(bytes);
-        self.terminated.push(0);
+        if bytes.is_empty() || bytes.len() > self.len() {
+            // Native Copy releases first, even if the old capacity could hold the new span.
+            self.clear();
+            *self = Self::from_raw(bytes);
+            return;
+        }
+        self.terminated[..bytes.len()].copy_from_slice(bytes);
+        self.set_length(bytes.len());
     }
     /// `Copy(const char*, int)` with a pointer into this string: moves the zero-based `source`
     /// span to the front. A span starting at offset 0 is OCCT's `myString == theString` early

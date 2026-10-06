@@ -15,7 +15,15 @@ pub trait VectorScalarDivision: Copy + DivAssign {
 }
 
 macro_rules! integral_division {
-    ($($element:ty),+ $(,)?) => { $(impl VectorScalarDivision for $element {})+ };
+    ($($element:ty),+ $(,)?) => { $(
+        impl VectorScalarDivision for $element {
+            fn divide_components<const N: usize>(self, components: [&mut Self; N]) {
+                for component in components {
+                    *component = component.wrapping_div(self);
+                }
+            }
+        }
+    )+ };
 }
 integral_division!(
     i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize

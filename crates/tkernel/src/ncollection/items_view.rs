@@ -5,7 +5,9 @@
 //! extractor is a marker type (`KeyValueItems`, `KeyValueIndexItems`, `KeyIndexItems`) and
 //! each map states what it yields through `ItemsSource<Extractor>`. Items are Rust tuples,
 //! which destructure like the native structured bindings (`for (key, value) in view.begin()`).
+mod iterator;
 mod sources;
+pub use iterator::ItemsIterator;
 
 use std::marker::PhantomData;
 
@@ -26,7 +28,7 @@ pub trait ItemsSource<E> {
     where
         Self: 'a;
     /// Items from the first map position (native `View::begin`).
-    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>>;
+    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> + Clone;
     /// The map's `Size()` (native `View::size`).
     fn items_size(&self) -> usize;
     /// The map's `IsEmpty()` (native `View::empty`).
@@ -73,9 +75,38 @@ impl<'a, M: ItemsSource<E> + ?Sized, E> ItemsView<'a, M, E> {
         }
     }
 
-    /// Items from the first entry; exhaustion replaces the native `end()`; `view.begin()`.
-    pub fn begin(&self) -> impl Iterator<Item = M::Item<'a>> + use<'a, M, E> {
-        self.map.items_begin()
+    /// Items from the first entry, preserving native cursor operations; `view.begin()`.
+    pub fn begin(
+        &self,
+    ) -> ItemsIterator<impl Iterator<Item = M::Item<'a>> + Clone + use<'a, M, E>> {
+        self.cursor(true)
+    }
+
+    /// The native const-qualified iterator retains the same item type; `view.cbegin()`.
+    pub fn cbegin(
+        &self,
+    ) -> ItemsIterator<impl Iterator<Item = M::Item<'a>> + Clone + use<'a, M, E>> {
+        self.begin()
+    }
+
+    /// Constructs the default exhausted cursor; `view.begin() == view.end()` for an empty map.
+    pub fn end(&self) -> ItemsIterator<impl Iterator<Item = M::Item<'a>> + Clone + use<'a, M, E>> {
+        self.cursor(false)
+    }
+
+    /// Constructs the const-qualified end cursor; `view.cbegin() == view.cend()`.
+    pub fn cend(&self) -> ItemsIterator<impl Iterator<Item = M::Item<'a>> + Clone + use<'a, M, E>> {
+        self.end()
+    }
+
+    fn cursor(
+        &self,
+        at_begin: bool,
+    ) -> ItemsIterator<impl Iterator<Item = M::Item<'a>> + Clone + use<'a, M, E>> {
+        if !at_begin {
+            return ItemsIterator::default();
+        }
+        ItemsIterator::new(self.map.items_begin(), std::ptr::from_ref(self.map).addr())
     }
 
     /// Number of mapped entries; `view.size()`.
@@ -103,6 +134,21 @@ impl<'a, M: ItemsSourceMut<E> + ?Sized, E> ItemsViewMut<'a, M, E> {
         self.map.items_begin_mut()
     }
 
+    /// Retains writable values like native mutable-view `cbegin`; `view.cbegin()`.
+    pub fn cbegin(&mut self) -> impl Iterator<Item = M::ItemMut<'_>> {
+        self.begin()
+    }
+
+    /// Returns an exhausted mutable range without borrowing any entries; `view.end()`.
+    pub fn end(&mut self) -> std::iter::Empty<M::ItemMut<'_>> {
+        std::iter::empty()
+    }
+
+    /// Returns an exhausted const-qualified mutable range; `view.cend()`.
+    pub fn cend(&mut self) -> std::iter::Empty<M::ItemMut<'_>> {
+        self.end()
+    }
+
     /// Number of mapped entries; `view.size()`.
     pub fn size(&self) -> usize {
         self.map.items_size()
@@ -111,5 +157,12 @@ impl<'a, M: ItemsSourceMut<E> + ?Sized, E> ItemsViewMut<'a, M, E> {
     /// True for an empty map; `view.is_empty()`.
     pub fn is_empty(&self) -> bool {
         self.map.items_is_empty()
+    }
+}
+
+impl<M: ?Sized, E> Copy for ItemsView<'_, M, E> {}
+impl<M: ?Sized, E> Clone for ItemsView<'_, M, E> {
+    fn clone(&self) -> Self {
+        *self
     }
 }

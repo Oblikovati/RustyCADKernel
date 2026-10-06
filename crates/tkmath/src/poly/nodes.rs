@@ -82,7 +82,7 @@ where
     /// Copies equal-length arrays, converting precision when needed; `target.assign(&source)?`.
     pub fn assign(&mut self, source: &Self) -> Result<(), Failure> {
         if self.is_double_precision() == source.is_double_precision() {
-            return self.storage.assign(&source.storage);
+            return self.storage.assign(&source.storage).map(|_| ());
         }
         if self.len() != source.len() {
             return Err(self.failure(

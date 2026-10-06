@@ -1,0 +1,90 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "EBTree reference Add, leaf-pointer rebinding, singleton removal, selection and move assignment",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/ebtree.rs": "951528375f1b414a38714d577ca4251184b670d936962d167949b2edd63f2c0b",
+    "crates/tkernel/src/ncollection/ubtree/insertion.rs": "538d7109870fa9501a002647b3566546d2f67b047e014edc94d7f1452b43ac15",
+    "crates/tkernel/src/ncollection/ubtree/method_contracts.rs": "6d39a623147d1a57985c36450cc054760d435b043e57a2f06a405f26cad6fdfe",
+    "crates/tkernel/src/ncollection/ubtree/navigation.rs": "171bc8ce1bcb4ac7b4de407030e473a222bb916e1eb1ea309c459c18d3140066",
+    "crates/tkernel/src/ncollection/ubtree/removal.rs": "fedd9be6682bb17167714ff507bf10aff07b3b5006f395eac057ae4398b3880e",
+    "crates/tkernel/src/ncollection/ubtree/selection.rs": "cd427cb4678ed5d4b1af183f0ef3ac8665550aa5c90edd514542ef5ebcff2942",
+    "crates/tkernel/src/ncollection/ubtree.rs": "1d58d68bfddcb82e552c8b51a4c637ba202470db8d2c0f31a3944a02c065cad8",
+    "crates/tkernel/src/ncollection/ubtree_filler/balance.rs": "47ed3efb3425ef3f6d5886bcb1e89a9aa2cb33f300bd3906312899e8af275057",
+    "crates/tkernel/src/ncollection/ubtree_filler/insertion.rs": "abf0c4adcdd5698fef40bb221fb5a7dde9ea49d4aee25a6dcd9c920fd90778e3",
+    "crates/tkernel/src/ncollection/ubtree_filler.rs": "0103841ece00b39283e376dcec50d1f34c591c9b245be9a3ab8423f5366d4a21",
+    "crates/tkernel/tests/ebtree_method_contracts.rs": "277c93a89b2291959122b7890dbd72eb542c46b9f5a01e11819cef5935e740b1",
+    "crates/tkernel/tests/ncollection_ubtree.rs": "d36defe4170517f13c307992595d79db2b60a1c5cf45edcaa58cb7c97da9cf0b",
+    "crates/tkernel/tests/ubtree_fallible.rs": "96586e0340d95ba2e70a76c73a7ea527474ae313d708bd88e594e9db17aaafcf",
+    "crates/tkernel/tests/ubtree_method_contracts.rs": "b1c66b3b6db8583a961c3d9a09c64fd7f0ef9e8babc1d79a1bcdc95c1c45026e",
+    "crates/tkernel/tests/ubtree_supplemental.rs": "c5b4ff8aefa842252d9bff51cedc40ff26f16fee55be9a4f0751f8b8be9857c4",
+    "tools/oracle/tkernel_ebtree_method_contracts.cxx": "0f39b8b2cbdcc8c27130af650525c3dad9172ac846e2364acb597e3c235ce46e",
+    "tools/oracle/tkernel_ebtree_method_contracts.expected": "0431f6241a5389fb19d00e47a70ef020dc9f6df3d80e473641d659d7412d42df"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/ebtree-method-source.tar.gz": "b9affaac1955e740bb9a10b1cad34599266153ef283aea85645a6afdefa62c75",
+    "porting/runtime-evidence/ebtree-method-rust.log.gz": "59579136a4bf8eb1ed9e8fa00bd7d39c10fda534f6a9da256ba9e219233b383d",
+    "porting/runtime-evidence/ebtree-method-native.log.gz": "1b711a8774c7c35fad2b3eb02dad552ec73fd7e1dcb9713e03027a2511222183"
+  },
+  "source_scope": "Owned method sources and tests captured after successful run; full dependency/build input closure was not captured. Shared backend files included.",
+  "compiler_body_binding_performed": false,
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "class_status": "partial",
+  "methods": [
+    "Add neighbor update uses ChangeSeek without cloning/reinserting keys",
+    "Remove survivor update changes the stored pointer without copying the key",
+    "Remove singleton performs one lookup then virtual Clear",
+    "Add(const Obj&, const Bnd&) borrowed duplicate short-circuit",
+    "Select inherited dynamic selector support",
+    "operator= move returns destination and explicit self-assignment",
+    "UBTreeFiller virtual EBTree Add dispatches borrowed arguments"
+  ],
+  "runtime": {
+    "rust_passed": 34,
+    "group_passes": [
+      6,
+      16,
+      2,
+      7,
+      3
+    ],
+    "original_native_rust_names": [
+      "NCollection_EBTreeTest.AddContainsRemove",
+      "NCollection_EBTreeTest.FindNode",
+      "NCollection_EBTreeTest.MoveAssignment",
+      "NCollection_EBTreeTest.MoveConstructor",
+      "NCollection_EBTreeTest.RemoveAll",
+      "NCollection_EBTreeTest.RemoveRoot",
+      "NCollection_EBTreeTest.SelectAfterRemove",
+      "NCollection_UBTreeTest.AddAndSelect_MultipleObjects",
+      "NCollection_UBTreeTest.AddAndSelect_SingleObject",
+      "NCollection_UBTreeTest.Clear",
+      "NCollection_UBTreeTest.DeepUnbalancedTree",
+      "NCollection_UBTreeTest.EmptyTree",
+      "NCollection_UBTreeTest.ManyObjects",
+      "NCollection_UBTreeTest.MoveAssignment",
+      "NCollection_UBTreeTest.MoveConstructor",
+      "NCollection_UBTreeTest.StopSelector"
+    ],
+    "original_native_rust_name_join": true,
+    "commands_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "rust_command": "cargo test --locked -p rustycad-tkernel --test ebtree_method_contracts --test ubtree_method_contracts --test ncollection_ubtree --test ubtree_supplemental --test ubtree_fallible -- --test-threads=1",
+    "native_filter": "NCollection_EBTreeTest.*:NCollection_UBTreeTest.*"
+  },
+  "limitations": [
+    "Native copy-construction and copy-assignment hooks are adapted to Clone; aggregate key-copy counts match the probes, not all hook sequencing.",
+    "Borrowed Add still copies arguments into the existing owned UBTree insertion core; bound/object copy ordering and allocation failures remain partial.",
+    "UBTree paired Gemmate allocations, default constructors, raw pointer aliasing, and moved-from null allocator semantics remain partial.",
+    "Equal-slot filler member self-assignment effects are not invoked.",
+    "Move source object-index bucket capacity differs internally from native; contents and target stable node identities are validated.",
+    "No global API/declaration inventory credit and no complete build dependency closure captured."
+  ]
+}

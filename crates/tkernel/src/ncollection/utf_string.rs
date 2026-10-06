@@ -9,7 +9,7 @@ use super::{UtfIterator, UtfUnit, WideChar};
 
 /// Unicode string of code unit `T` with cached byte size and symbol length.
 ///
-/// The storage always ends with one zero unit, as the native buffer does. `length()` counts
+/// Allocated storage ends with one zero unit; move construction leaves a null source. `length()` counts
 /// the symbols consumed when the string was converted, including illegal symbols that wrote
 /// no units (a native quirk kept on purpose).
 ///
@@ -36,11 +36,15 @@ impl<T: UtfUnit> Default for UtfString<T> {
 
 impl<T: UtfUnit> Clone for UtfString<T> {
     fn clone(&self) -> Self {
-        Self {
-            units: self.units.clone(),
-            size: self.size,
-            length: self.length,
-        }
+        let mut copy = Self::with_size(self.size, self.length);
+        let count = self.size as usize / std::mem::size_of::<T>();
+        copy.units[..count].copy_from_slice(&self.units[..count]);
+        copy
+    }
+    fn clone_from(&mut self, source: &Self) {
+        // Native Assign frees the old buffer before allocating its replacement.
+        self.units = Vec::new();
+        *self = source.clone();
     }
 }
 
@@ -63,14 +67,14 @@ impl<T: UtfUnit> UtfString<T> {
     /// Copies Unicode text of any unit type, stopping at a zero symbol or after `length`
     /// symbols when `length > 0` (native converting constructors); see `from_unicode`.
     pub fn from_unicode_units<F: UtfUnit>(source: &[F], length: i32) -> Self {
-        let mut text = Self::new();
+        let mut text = Self::null_storage();
         text.from_unicode(source, length);
         text
     }
 
     /// Symbol cursor at the first symbol (native `Iterator()`); `text.iterator().current()`.
     pub fn iterator(&self) -> UtfIterator<'_, T> {
-        UtfIterator::new(&self.units)
+        UtfIterator::from_optional((!self.units.is_empty()).then_some(&self.units[..]))
     }
 
     /// Buffer size in bytes, excluding the terminator; `text.size()`.
@@ -90,12 +94,16 @@ impl<T: UtfUnit> UtfString<T> {
 
     /// True when the first unit is the terminator; `text.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.units[0] == T::default()
+        self.units.first().is_none_or(|unit| *unit == T::default())
     }
 
     /// Resets to the empty string, length 0; `text.clear()`.
     pub fn clear(&mut self) {
-        *self = Self::new();
+        // Native Clear frees before it allocates a new terminating unit.
+        self.units = Vec::new();
+        self.size = 0;
+        self.length = 0;
+        self.units.push(T::default());
     }
 
     /// Copies `other` (native `Assign` / copy `operator=`); `text.assign(&other)`.
@@ -149,7 +157,9 @@ impl<T: UtfUnit> UtfString<T> {
 
     /// Byte-wise equality of the buffers; lengths are not compared; `a.is_equal(&b)`.
     pub fn is_equal(&self, other: &Self) -> bool {
-        std::ptr::eq(self, other) || (self.size == other.size && self.units == other.units)
+        let count = self.size as usize / std::mem::size_of::<T>();
+        std::ptr::eq(self, other)
+            || (self.size == other.size && self.units[..count] == other.units[..count])
     }
 
     /// A UTF-8 copy; `text.to_utf8()`.
@@ -172,3 +182,5 @@ impl<T: UtfUnit> UtfString<T> {
         UtfString::from_unicode_units(&self.units, -1)
     }
 }
+
+mod method_contracts;

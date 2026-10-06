@@ -86,9 +86,27 @@ impl<T> DoubleEndedIterator for SequenceIter<'_, T> {
     }
 }
 impl<T> ExactSizeIterator for SequenceIter<'_, T> {}
+impl<T> Clone for SequenceIter<'_, T> {
+    fn clone(&self) -> Self {
+        Self {
+            remaining: self.remaining.clone(),
+        }
+    }
+}
 impl<T> PartialEq for SequenceIter<'_, T> {
     fn eq(&self, other: &Self) -> bool {
-        self.remaining.as_slice().as_ptr() == other.remaining.as_slice().as_ptr()
+        // OCCT compares the current node, including null ends from unrelated sequences.
+        let current = self
+            .remaining
+            .as_slice()
+            .first()
+            .map(|node| address(&**node));
+        let other = other
+            .remaining
+            .as_slice()
+            .first()
+            .map(|node| address(&**node));
+        current == other
     }
 }
 impl<T> Eq for SequenceIter<'_, T> {}

@@ -181,10 +181,6 @@ impl<K: Clone, H: Clone> FlatMap<K, H> {
         self.table.clone_from(&source.table);
         self
     }
-    /// Preserves self-assignment without creating aliased Rust borrows; `map.assign_self()`.
-    pub fn assign_self(&mut self) -> &mut Self {
-        self
-    }
 }
 impl<'a, K> Iterator for FlatMapIter<'a, K> {
     type Item = &'a K;
@@ -222,3 +218,13 @@ impl<'a, K, H: HashPolicy<K>> IntoIterator for &'a FlatMap<K, H> {
 }
 mod construction;
 mod transfer;
+
+mod cursor_contracts;
+mod pointer_contracts;
+
+impl<K, H> FlatMap<K, H> {
+    /// Preserves self-assignment without cloning keys or policy; `map.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
+    }
+}

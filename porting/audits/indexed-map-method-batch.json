@@ -1,0 +1,173 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_uncommitted_draft",
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "classes": [
+    {
+      "cpp_class": "NCollection_IndexedMap",
+      "original_cases_joined": [
+        "NCollection_IndexedMapTest.Added_ExistingKey",
+        "NCollection_IndexedMapTest.Added_MoveSemantics",
+        "NCollection_IndexedMapTest.Added_NewKey",
+        "NCollection_IndexedMapTest.Added_ReferenceValidity",
+        "NCollection_IndexedMapTest.AssignmentOperator",
+        "NCollection_IndexedMapTest.BasicAddFind",
+        "NCollection_IndexedMapTest.BeginEndIterator",
+        "NCollection_IndexedMapTest.Clear",
+        "NCollection_IndexedMapTest.ComplexKeys",
+        "NCollection_IndexedMapTest.CopyConstructor",
+        "NCollection_IndexedMapTest.CopyConstructorPreservesHasher",
+        "NCollection_IndexedMapTest.DefaultConstructor",
+        "NCollection_IndexedMapTest.DuplicateKey",
+        "NCollection_IndexedMapTest.Emplace_ExistingKey",
+        "NCollection_IndexedMapTest.Emplace_NewKey",
+        "NCollection_IndexedMapTest.Emplaced_NewKey",
+        "NCollection_IndexedMapTest.Exchange",
+        "NCollection_IndexedMapTest.HasherConstructorCopy",
+        "NCollection_IndexedMapTest.HasherConstructorMove",
+        "NCollection_IndexedMapTest.IndexedItemsIteration",
+        "NCollection_IndexedMapTest.IndexedItemsIteratorEquality",
+        "NCollection_IndexedMapTest.Iterator",
+        "NCollection_IndexedMapTest.RangeBasedForLoop",
+        "NCollection_IndexedMapTest.ReSize",
+        "NCollection_IndexedMapTest.RemoveFromIndex",
+        "NCollection_IndexedMapTest.RemoveKey",
+        "NCollection_IndexedMapTest.RemoveLast",
+        "NCollection_IndexedMapTest.STLAlgorithmCompatibility_Find",
+        "NCollection_IndexedMapTest.STLAlgorithmCompatibility_MinMax",
+        "NCollection_IndexedMapTest.StlIterator",
+        "NCollection_IndexedMapTest.StringKeys",
+        "NCollection_IndexedMapTest.Substitute",
+        "NCollection_IndexedMapTest.Swap"
+      ],
+      "supplemental_passes": 8,
+      "api_parity_complete": false
+    },
+    {
+      "cpp_class": "NCollection_IndexedDataMap",
+      "original_cases_joined": [
+        "NCollection_IndexedDataMapTest.AssignmentOperator",
+        "NCollection_IndexedDataMapTest.BasicAddFind",
+        "NCollection_IndexedDataMapTest.Bind_Bound_VsAdd_Behavior",
+        "NCollection_IndexedDataMapTest.Bind_ExistingKey",
+        "NCollection_IndexedDataMapTest.Bind_MoveSemantics",
+        "NCollection_IndexedDataMapTest.Bind_NewKey",
+        "NCollection_IndexedDataMapTest.Bound_ExistingKey",
+        "NCollection_IndexedDataMapTest.Bound_MoveSemantics",
+        "NCollection_IndexedDataMapTest.Bound_NewKey",
+        "NCollection_IndexedDataMapTest.ChangeValues",
+        "NCollection_IndexedDataMapTest.Clear",
+        "NCollection_IndexedDataMapTest.ComplexKeyAndValue",
+        "NCollection_IndexedDataMapTest.ConstIndexedItemsIteration",
+        "NCollection_IndexedDataMapTest.ConstItemsIteration",
+        "NCollection_IndexedDataMapTest.CopyConstructor",
+        "NCollection_IndexedDataMapTest.CopyConstructorPreservesHasher",
+        "NCollection_IndexedDataMapTest.DefaultConstructor",
+        "NCollection_IndexedDataMapTest.DuplicateKey",
+        "NCollection_IndexedDataMapTest.Emplace_ExistingKey",
+        "NCollection_IndexedDataMapTest.Emplace_NewKey",
+        "NCollection_IndexedDataMapTest.Emplaced_ExistingKey",
+        "NCollection_IndexedDataMapTest.Emplaced_NewKey",
+        "NCollection_IndexedDataMapTest.Exchange",
+        "NCollection_IndexedDataMapTest.HasherConstructorCopy",
+        "NCollection_IndexedDataMapTest.HasherConstructorMove",
+        "NCollection_IndexedDataMapTest.IndexedItemsIteration",
+        "NCollection_IndexedDataMapTest.ItemsIteration",
+        "NCollection_IndexedDataMapTest.ItemsIteratorEquality",
+        "NCollection_IndexedDataMapTest.ItemsModifyValue",
+        "NCollection_IndexedDataMapTest.ItemsStructuredBindings",
+        "NCollection_IndexedDataMapTest.Iterator",
+        "NCollection_IndexedDataMapTest.ReSize",
+        "NCollection_IndexedDataMapTest.RemoveFromIndex",
+        "NCollection_IndexedDataMapTest.RemoveKey",
+        "NCollection_IndexedDataMapTest.RemoveLast",
+        "NCollection_IndexedDataMapTest.STLAlgorithmCompatibility_Find",
+        "NCollection_IndexedDataMapTest.STLAlgorithmCompatibility_MinMax",
+        "NCollection_IndexedDataMapTest.SeekTests",
+        "NCollection_IndexedDataMapTest.StandardIteratorContract",
+        "NCollection_IndexedDataMapTest.StlIterator",
+        "NCollection_IndexedDataMapTest.StringKeys",
+        "NCollection_IndexedDataMapTest.Substitute",
+        "NCollection_IndexedDataMapTest.Swap",
+        "NCollection_IndexedDataMapTest.TryBound_ExistingKey",
+        "NCollection_IndexedDataMapTest.TryBound_MoveSemantics",
+        "NCollection_IndexedDataMapTest.TryBound_NewKey",
+        "NCollection_IndexedDataMapTest.TryBound_ReferenceValidity",
+        "NCollection_IndexedDataMapTest.TryEmplace_ExistingKey",
+        "NCollection_IndexedDataMapTest.TryEmplace_NewKey",
+        "NCollection_IndexedDataMapTest.TryEmplaced_ExistingKey",
+        "NCollection_IndexedDataMapTest.TryEmplaced_NewKey"
+      ],
+      "supplemental_passes": 9,
+      "api_parity_complete": false
+    }
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/indexed_data_map/binding.rs": "19eff5988568eb06d10abb401691fedc58be85cc8fca5e6199708062fd796dc2",
+    "crates/tkernel/src/ncollection/indexed_data_map/cursor.rs": "2be1233a2fc7c1a3fc23fb060abb2e1dd3fd99ea891e84e5f01c10f39eefd89e",
+    "crates/tkernel/src/ncollection/indexed_data_map/iteration.rs": "7e56326ae22b6127a2b1f720b6aad44005eda9ae81c407d70f06e55ff77557a1",
+    "crates/tkernel/src/ncollection/indexed_data_map/method_contracts.rs": "bb1b8794f25e8027a46e940b93281f581be889261f952cf47d7624d0dc87965e",
+    "crates/tkernel/src/ncollection/indexed_data_map/operations.rs": "6ca829d537d06ea3400ead0be6be337b45232b958e5f3de246529c4c076e424d",
+    "crates/tkernel/src/ncollection/indexed_data_map/signed_overloads.rs": "5c6f4b46214381bf99c6434b11fda78a39b5503eca5d1cc3693be9e6989b0def",
+    "crates/tkernel/src/ncollection/indexed_data_map.rs": "760c2e3a3c417d89e629c15f22367bd9f8c07116f5e543d105c569445a4b8682",
+    "crates/tkernel/src/ncollection/indexed_map/cursor.rs": "ebbee0347106f368b9c81ec457793105c3fb6670573bf61183260f678c52dc0e",
+    "crates/tkernel/src/ncollection/indexed_map/iteration.rs": "d9c5079927dd83c3778ab976c2372d803436ea80b5799407fbab4bd9a7081758",
+    "crates/tkernel/src/ncollection/indexed_map/method_contracts.rs": "e1b49730903ab6ba33310544ddbd598c65a38b5a83836163185e7d408b74d3c2",
+    "crates/tkernel/src/ncollection/indexed_map/operations.rs": "fbb13aeca44cb8196663405f4583b2b93c1d023595c94473600987818ee9a2be",
+    "crates/tkernel/src/ncollection/indexed_map/signed_overloads.rs": "bf24996404d86a7c2f34e3e6b47b303b09d08d9eca2f7f29958de18e53b1a98a",
+    "crates/tkernel/src/ncollection/indexed_map.rs": "66c04b702a5c8d6283b15bdd0afce54e43af954daad6d3fd49f5856d6e6bab6e",
+    "crates/tkernel/tests/indexed_data_map_method_contracts.rs": "976e3b526c772a3f96367a3b02ac795d7e8bcdf7502ec37eeb16b6eef68452b2",
+    "crates/tkernel/tests/indexed_map_method_contracts.rs": "158533ccf7f55edf3b3e1d168b0ef29f582053ee75ca9b533b1dc20050b24df1",
+    "tools/oracle/tkernel_indexed_data_map_method_contracts.cxx": "e9dd47efbe3db11b8dd22fbf0a420ce15046687f5a00d19877a3c6fb693c2bd0",
+    "tools/oracle/tkernel_indexed_data_map_method_contracts.expected": "fce682b4238fa23d1683b5bd8e161051f6c439eef3012e8f82b461e8dd101191",
+    "tools/oracle/tkernel_indexed_map_method_contracts.cxx": "3b8058580865d2f1c1693da3322094624615c6273c0a1d4ba5a4999b0be13628",
+    "tools/oracle/tkernel_indexed_map_method_contracts.expected": "3e901dccf5971cee28758e36ec7c377b444d8e8efcd73925eea1d461ca2a893a"
+  },
+  "runtime": {
+    "focused_rust_passed": 101,
+    "native_original_passed": 84,
+    "exact_name_joins": 84,
+    "exit_codes": {
+      "rust": 0,
+      "native": 0
+    }
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/indexed-methods-rust.log.gz",
+      "sha256": "7c1a3fbcc75117652cc8bdf6f3cbbb60ba1b8000833ac91d9405af62881541fe"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/indexed-methods-native.log.gz",
+      "sha256": "a551a101005168a115bca2c6e74c1fc1d75cfed80b8a0d89c777c683bdc13c85"
+    },
+    "map_oracle": {
+      "path": "porting/runtime-evidence/indexed-methods-map_oracle.log.gz",
+      "sha256": "f96fe4c3a4625a648f09332084e98d2d3cc456441c25b94b083b28aa61a3fb76"
+    },
+    "data_oracle": {
+      "path": "porting/runtime-evidence/indexed-methods-data_oracle.log.gz",
+      "sha256": "c529f15c95a8dc705c13133f519d56aa4011c8d15ac6a7317ed8b00f1bd33c6c"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/indexed-methods-source.tar.gz",
+      "sha256": "f8f0e2b5baaab49c0fcbf061e9447c4cd82aa36ef62f91a0920131b53bab5842"
+    }
+  },
+  "methods": [
+    "Returning Assign/move/self assignment retains destination bucket/allocator/hasher semantics",
+    "Borrowed key overloads preserve allocation/item-copy/key-copy ordering and avoid duplicate copies",
+    "Signed constructor/resize/index adapters preserve native range rules",
+    "IndexedDataMap item-copy panic no longer leaves key/value vectors mismatched"
+  ],
+  "limitations": [
+    "Explicit move constructors and arbitrary C++ element/policy copy/move hooks remain partial",
+    "IndexedDataMap keys and values use separate allocations rather than native single nodes",
+    "Borrowed values/pointer adapters enforce Rust exclusive lifetimes",
+    "Compiler declaration bindings and integrated original-test mapping credit are not added by this scoped receipt"
+  ],
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "api_parity_complete": false
+}

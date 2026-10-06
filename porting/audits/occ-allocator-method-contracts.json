@@ -1,0 +1,101 @@
+{
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "NCollection_OccAllocator",
+    "NCollection_Allocator"
+  ],
+  "upstream_header_sha256": {
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx": "b4c9e73b300d8174145e44932c78d50aa0841fc263751b64ab63e3450808a241",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx": "f4145e66b6da47a3342a1b0f8291e03ecbd1576af9fa54c53699fa8f1b93b7df",
+    "../OCCT/src/FoundationClasses/TKernel/Standard/Standard.cxx": "7c50331e36a64ca1aaff7005536bb7b98cb627060edb2049362418d2c7a0dfee"
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/occ_allocator.rs": "a6f2770eb3e1d86e158e0b5222abf504cd0c146991822e9fe09ae16c0c6e0b42",
+    "crates/tkernel/src/ncollection/occ_allocator/element.rs": "7bfb8d06a0253c5405bce86304b142f0a8feab98b603deece1302276b5a8ea11",
+    "crates/tkernel/src/ncollection/occ_allocator/method_contracts.rs": "d92e75f61aeb3ec0d8cbd135d9fd84f6b79dfde1423ca4d0174181a2e6822124",
+    "crates/tkernel/src/standard/memory.rs": "656d6e2e153847ede59c0e9a0e7a56d21792536c0d3042bee570b87c568f73be",
+    "crates/tkernel/tests/occ_allocator_method_contracts.rs": "655d5b9d999a03f670b8e146b3741b98d484c13391be87c7744b5cfa448ea1f3",
+    "tools/oracle/tkernel_occ_allocator_method_contracts.cxx": "c951133745bcbe8cff9378c46d8854d426f8db269c335cb9d9ad098cfa5201c9",
+    "tools/oracle/tkernel_occ_allocator_method_contracts.expected": "595d58a60fbd7d4271ab89525bcb506d8efa1259e6e1d203fc6ca04438cec34b",
+    "tools/oracle/tkernel_occ_allocator_cross_type_assignment.cxx": "a8d7317d9364af519e5f0ac8285876eb9b5bba14d8b65a03f143ee4bfc2982c9"
+  },
+  "source_inputs_after_run_identical": true,
+  "source_capture_note": "All owned source plus approved Standard memory-policy constant visibility captured before final focused run, verified unchanged afterward. Raw and typed allocation backends were not changed.",
+  "artifact_sha256": {
+    "porting/runtime-evidence/occ-allocator-method-rust.log.gz": "c041882f4ee30d95578cce46a60f3954632babbb3b171d8428a8b42d91caefe7",
+    "porting/runtime-evidence/occ-allocator-method-native.log.gz": "4d949bce1c24a3e7988fcb552fe3c3b8c31442caebaccddaa199cde58485aac7",
+    "porting/runtime-evidence/occ-allocator-method-legacy.log.gz": "9ca4ff3fb890b3b3cd20ce9042ef20002dc7c05429d1e3dc9f7ca94d3871cd0f",
+    "porting/runtime-evidence/occ-allocator-method-source.json.gz": "701e78f800d9f858da5bc63d10dc771da73c5d4812b461016df335e2b56dfc38",
+    "porting/runtime-evidence/occ-allocator-method-cross-type-compile.log.gz": "d0744c662350d1fd27bb625e99eeef13c06f7388cd662448e76479bb6ac2c4ee"
+  },
+  "focused_rust_passes": 51,
+  "new_tests": 12,
+  "original_test_names": [
+    "NCollection_OccAllocatorTest.AllocatorTypeTraits",
+    "NCollection_OccAllocatorTest.STLContainerIntegration",
+    "NCollection_OccAllocatorTest.DefaultAllocator",
+    "NCollection_OccAllocatorTest.AllocatorComparison",
+    "NCollection_OccAllocatorTest.CrossTypeCompatibility"
+  ],
+  "original_join_count": 5,
+  "native_oracle_rows": 15,
+  "exit_codes": {
+    "focused_rust": 0,
+    "original_native": 0,
+    "oracle_compile": 0,
+    "oracle_run": 0,
+    "oracle_diff": 0,
+    "expected_cross_type_assignment_compile_failure": 1
+  },
+  "backend_scope": {
+    "occt_configuration": "USE_MMGR_TYPE=NATIVE; USE_TBB=OFF",
+    "configuration_sha256": "f66d02cb54a4636c66e9b49a00334bf1c1c45b20e436016c7eb4bcd438492c53",
+    "observed_platform": "x86_64 GNU/Linux glibc",
+    "alternative_native_branches_reviewed": [
+      "OCCT_MMGT_OPT_FLEXIBLE",
+      "OCCT_MMGT_OPT_TBB",
+      "OCCT_MMGT_OPT_JEMALLOC"
+    ],
+    "reuse_existing_policy": "standard::memory::REALLOC_ZERO_FREES; visibility only broadened to pub(crate)",
+    "untested_platform_policy": "Existing Windows policy reused; this batch executed no MSVC oracle"
+  },
+  "implemented_methods": [
+    "OccAllocator rvalue allocator-handle constructor => with_allocator_move_from; preserves donor handle",
+    "OccAllocator move ctor/operator= => move_from,move_assign_returning; both retain donor resource",
+    "Assignment operators => assign_returning and assign_self; cross-type OccAllocator caveat below",
+    "Allocator ignored nullable-handle ctor => from_optional_base",
+    "allocate(count,hint) => allocate_with_hint",
+    "OccAllocator templated/null deallocate and Allocator null deallocate => deallocate_ptr",
+    "construct forwarded arguments/copy source => AllocatorTypes::construct_with,construct_ref",
+    "OccAllocator propagate_on_container_move_assignment alias => false associated constant",
+    "Allocator reallocate nullable pointer => reallocate_ptr; null zero request allocates a freeable zero-byte block"
+  ],
+  "behavior_fixes": [
+    "Configured NATIVE realloc(live,0) releases raw storage and returns None on the existing platform policy; corresponds to native Standard_OutOfMemory after free",
+    "Nonzero reallocation failure retains the original pointer and its initialized prefix"
+  ],
+  "native_api_defect": {
+    "signature": "NCollection_OccAllocator<int>::operator=(const NCollection_OccAllocator<char>&)",
+    "probe": "tools/oracle/tkernel_occ_allocator_cross_type_assignment.cxx",
+    "result": "Fails to instantiate: template accesses other specialization private myAllocator, native header line 100",
+    "rust_status": "Existing generic assign<U> and new returned adapter remain useful extensions; no native behavioral parity credit for this ill-formed overload"
+  },
+  "remaining_gaps": [
+    "FLEXIBLE, TBB, JEMALLOC and other-platform zero-reallocation profiles are not validated by this NATIVE/glibc oracle",
+    "Native zero-size reallocation reports exception; Rust Option represents failure and documents that zero-size consumption invalidates the old pointer",
+    "Native unsigned size multiplication can wrap while Rust checked multiplication rejects overflow; zero-sized Rust values and C++ over-alignment restrictions have no blanket parity claim",
+    "Construct closures produce Rust values then move them into storage; self-referential native placement-constructor this-address behavior is not represented",
+    "Generic custom C++ allocation and move/copy/destructor hooks require explicit policies",
+    "No integrated API/original mapping credit added"
+  ],
+  "commands": {
+    "rust": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=2 cargo test --locked -p rustycad-tkernel --test occ_allocator_method_contracts --test ncollection_occ_allocator --test ncollection_allocator_views_behavior --test ncollection_allocators_api_behavior --test typed_allocator_provenance_contracts -- --test-threads=1",
+    "native": "LD_LIBRARY_PATH=target/occt-modeling-full/lin64/gcc/libi target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest --gtest_filter=NCollection_OccAllocatorTest.*",
+    "oracle_compile": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_occ_allocator_method_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_occ_allocator_method_contracts",
+    "oracle": "/tmp/tkernel_occ_allocator_method_contracts > /tmp/occ-allocator-method-native.log; cmp /tmp/occ-allocator-method-native.log tools/oracle/tkernel_occ_allocator_method_contracts.expected",
+    "negative_compile": "g++ -std=c++17 -I target/occt-modeling-full/include/opencascade -fsyntax-only tools/oracle/tkernel_occ_allocator_cross_type_assignment.cxx"
+  },
+  "integrated_api_credit": 0,
+  "original_mapping_credit_added": 0,
+  "miri": "root_pending"
+}

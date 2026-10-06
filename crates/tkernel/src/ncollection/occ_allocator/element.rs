@@ -43,6 +43,22 @@ pub trait AllocatorTypes {
         // SAFETY: forwarded from this function's contract.
         unsafe { pointer.write(value) }
     }
+    /// Constructs from forwarded constructor arguments represented by a closure; `unsafe { alloc.construct_with(p, || 42) }`.
+    ///
+    /// # Safety
+    /// `pointer` must be writable and aligned for `U`, with no live value requiring a drop.
+    unsafe fn construct_with<U>(&self, pointer: NonNull<U>, construct: impl FnOnce() -> U) {
+        // SAFETY: pointer validity is the caller's contract; a failed constructor writes nothing.
+        unsafe { self.construct(pointer, construct()) }
+    }
+    /// Copy-constructs from a borrowed object; `unsafe { alloc.construct_ref(p, &source) }`.
+    ///
+    /// # Safety
+    /// `pointer` must be writable, aligned, and not overlap `source` or any live value.
+    unsafe fn construct_ref<U: Clone>(&self, pointer: NonNull<U>, source: &U) {
+        // SAFETY: forwarded from this method's contract.
+        unsafe { self.construct_with(pointer, || source.clone()) }
+    }
     /// Runs the destructor in place (`destroy`); `unsafe { alloc.destroy(p) }`.
     ///
     /// # Safety
@@ -79,7 +95,9 @@ impl<T> StandardAllocator<T> {
         StandardAllocator::new()
     }
     /// Assignment from another element type, a no-op upstream; `a.assign(&b)`.
-    pub fn assign<U>(&mut self, _other: &StandardAllocator<U>) {}
+    pub fn assign<U>(&mut self, other: &StandardAllocator<U>) {
+        self.assign_returning(other);
+    }
 
     /// Raw storage for `count` elements (`allocate`); `None` where upstream would get NULL,
     /// including a byte count that overflows. Example: `alloc.allocate(8)`.
@@ -96,12 +114,19 @@ impl<T> StandardAllocator<T> {
         unsafe { BaseAllocator::common().free_raw(pointer.cast()) }
     }
     /// Resizes storage to `count` elements (`reallocate`, `Standard::Reallocate`), keeping the
-    /// prefix. `None` (upstream: Standard_OutOfMemory) leaves the original block valid.
+    /// prefix. Nonzero-size failure leaves the original block valid. For the configured NATIVE
+    /// backend on GNU/Linux and MSVC, zero bytes frees the block and returns `None`, matching
+    /// the native Standard_OutOfMemory quirk; the original pointer must not then be reused.
     ///
     /// # Safety
     /// `pointer` must come from `allocate`/`reallocate` of a standard allocator, not freed yet.
     pub unsafe fn reallocate(&self, pointer: NonNull<T>, count: usize) -> Option<NonNull<T>> {
         let bytes = count.checked_mul(size_of::<T>())?;
+        if bytes == 0 && crate::standard::memory::REALLOC_ZERO_FREES {
+            // SAFETY: native realloc(p, 0) consumes this live raw block on the recorded CRTs.
+            unsafe { self.deallocate(pointer, count) }.ok()?;
+            return None;
+        }
         // SAFETY: forwarded from this function's contract.
         Some(unsafe { BaseAllocator::standard_reallocate(pointer.cast(), bytes) }?.cast())
     }

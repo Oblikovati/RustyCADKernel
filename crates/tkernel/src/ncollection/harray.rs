@@ -60,12 +60,54 @@ impl<T: Send + Sync + 'static> HArray1<T> {
     pub fn change_array1(&self) -> RwLockWriteGuard<'_, Array1<'static, T>> {
         self.values.write().unwrap_or_else(PoisonError::into_inner)
     }
+    /// Moves array storage into a wrapper with a fresh transient count; `HArray1::move_from(&mut source)`.
+    pub fn move_from(source: &mut Self) -> Self {
+        let values = source
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        Self::from_owned(std::mem::take(values))
+    }
+    /// Moves storage and bounds, preserving this transient's counter; `target.move_assign(&mut source)`.
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
+        let target = self
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        let source = source
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        target.move_from(source);
+        self
+    }
 }
 
 impl<T: Default + Send + Sync + 'static> HArray1<T> {
     /// Allocates default values at `lower..=upper`; `HArray1::<i32>::with_bounds(1, 3)?`.
     pub fn with_bounds(lower: i32, upper: i32) -> Result<Self, ArrayError> {
         Ok(Self::from_owned(Array1::with_bounds(lower, upper)?))
+    }
+    /// Borrows a writable static buffer without detaching on edits; `HArray1::from_buffer_mut(buffer, 1, 3, true)?`.
+    pub fn from_buffer_mut(
+        buffer: &'static mut [T],
+        lower: i32,
+        upper: i32,
+        use_buffer: bool,
+    ) -> Result<Self, ArrayError> {
+        if !use_buffer {
+            return Self::with_bounds(lower, upper);
+        }
+        let size = checked_extent(lower, upper)?;
+        if buffer.len() < size {
+            return Err(ArrayError::DimensionMismatch {
+                expected: size,
+                actual: buffer.len(),
+            });
+        }
+        let mut values = Array1::from_slice(&mut buffer[..size]);
+        values.update_lower_bound(lower);
+        Ok(Self::from_owned(values))
     }
 }
 
@@ -111,6 +153,18 @@ impl<T: Clone + Send + Sync + 'static> HArray1<T> {
         Self::from_owned(owned_copy(values))
     }
 }
+impl<T: Clone + Send + Sync + 'static> Clone for HArray1<T> {
+    fn clone(&self) -> Self {
+        Self::from_array(&self.array1())
+    }
+    fn clone_from(&mut self, source: &Self) {
+        let target = self
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        target.assign(&source.array1());
+    }
+}
 
 impl<T: Send + Sync + 'static> HArray2<T> {
     /// Wraps a rectangle without copying it; `HArray2::from_owned(Array2::<i32>::with_size(2, 2))`.
@@ -130,6 +184,27 @@ impl<T: Send + Sync + 'static> HArray2<T> {
     /// `grid.change_array2().init(0)`.
     pub fn change_array2(&self) -> RwLockWriteGuard<'_, Array2<'static, T>> {
         self.values.write().unwrap_or_else(PoisonError::into_inner)
+    }
+    /// Moves the rectangle into a fresh transient wrapper; `HArray2::move_from(&mut source)`.
+    pub fn move_from(source: &mut Self) -> Self {
+        let values = source
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        Self::from_owned(std::mem::take(values))
+    }
+    /// Moves storage and rectangle bounds, retaining this counter; `target.move_assign(&mut source)`.
+    pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
+        let target = self
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        let source = source
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        target.move_from(source);
+        self
     }
 }
 
@@ -155,6 +230,18 @@ impl<T: Clone + Send + Sync + 'static> HArray2<T> {
         let mut copy = Array2::default();
         copy.assign(values);
         Self::from_owned(copy)
+    }
+}
+impl<T: Clone + Send + Sync + 'static> Clone for HArray2<T> {
+    fn clone(&self) -> Self {
+        Self::from_array(&self.array2())
+    }
+    fn clone_from(&mut self, source: &Self) {
+        let target = self
+            .values
+            .get_mut()
+            .unwrap_or_else(PoisonError::into_inner);
+        target.assign(&source.array2());
     }
 }
 

@@ -28,13 +28,13 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         }
         self.insert_borrowed(key, value, bucket)
     }
-    fn prepare_borrowed_add(&mut self) {
+    pub(super) fn prepare_borrowed_add(&mut self) {
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());
         }
     }
-    fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> usize {
-        let stored_value = self.allocator().allocate_value(IndexedValue {
+    pub(super) fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> usize {
+        let stored_value = self.allocator().allocate_value_with(|| IndexedValue {
             value: value.clone(),
             _identity: 0,
         });
@@ -88,7 +88,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
             }
             return index;
         }
-        let value = self.allocator().allocate_value(IndexedValue {
+        let value = self.allocator().allocate_value_with(|| IndexedValue {
             value: construct(),
             _identity: 0,
         });

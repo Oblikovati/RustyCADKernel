@@ -206,6 +206,11 @@ impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
         }
         self.append_new_at_bucket_with(bucket, || key.clone())
     }
+    /// Borrows the stored key, copying the argument only on a miss; `map.added_ref(&42)`.
+    pub fn added_ref(&mut self, key: &K) -> &K {
+        let index = self.add_ref(key);
+        &self.nodes[index - 1].key
+    }
 }
 impl<K: Debug, H: HashPolicy<K> + Default> IndexedMap<K, H> {
     /// Selects initial buckets with the default hasher; `IndexedMap::<i32>::new(3)`.
@@ -227,5 +232,7 @@ impl<K: Debug, H: HashPolicy<K>> std::ops::Index<usize> for IndexedMap<K, H> {
 }
 mod cursor;
 mod iteration;
+mod method_contracts;
 mod operations;
+mod signed_overloads;
 pub use cursor::IndexedMapIterator;

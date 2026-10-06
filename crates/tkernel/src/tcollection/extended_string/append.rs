@@ -87,7 +87,12 @@ impl ExtendedString {
     }
     /// Inserts a string or code-unit slice at the beginning; `text.prepend(&prefix)`.
     pub fn prepend(&mut self, input: impl AsRef<[u16]>) {
-        self.terminated.splice(0..0, input.as_ref().iter().copied());
+        let units = input.as_ref();
+        if units.is_empty() {
+            return;
+        }
+        self.ensure_owned_terminator();
+        self.terminated.splice(0..0, units.iter().copied());
     }
     /// The (pointer, length) Prepend: a null pointer or a length <= 0 changes nothing;
     /// `text.prepend_span(Some(&[65]), 1)`.
@@ -111,6 +116,10 @@ impl ExtendedString {
     }
     /// Appends units before the terminator.
     fn append_units(&mut self, units: &[u16]) {
+        if units.is_empty() {
+            return;
+        }
+        self.ensure_owned_terminator();
         let end = self.len();
         self.terminated.splice(end..end, units.iter().copied());
     }

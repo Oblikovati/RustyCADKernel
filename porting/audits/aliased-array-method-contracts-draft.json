@@ -1,0 +1,290 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_AliasedArray raw pointers, signed overloads, output parameters, and destination-returning assignment",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/aliased_array.rs": "7675b89ab2d95307a0575430bb706398ccea4d29d5b9d0dbec5b04aa906d0cbe",
+    "crates/tkernel/src/ncollection/aliased_array/access.rs": "ad2a59ff204d8d15d81eef6954575fe20cd3b8ee1944e7dac9a6a6e5b31a2698",
+    "crates/tkernel/src/ncollection/aliased_array/legacy.rs": "d2bec6a2e3d81955e512a3aa6f9f437bec71edc41491145a4d8418fa2e10d2c1",
+    "crates/tkernel/src/ncollection/aliased_array/pointers.rs": "34efb54c408eeb79d90b699a9a3de5ad713c8e2866f9ab05e9a9fff3d0e5085e",
+    "crates/tkernel/tests/aliased_array_method_contracts.rs": "4872a023f2c50b66daaa5584cdfa628935905419382ef26b8d95560223604171",
+    "crates/tkernel/tests/aliased_array_supplemental.rs": "6a84bc5750f358b01a1f52a6ca2da499ea98af4cf34a4c9fcb79ab1eb722d4ba",
+    "crates/tkernel/tests/ncollection_aliased_array.rs": "a308d6fb37cc99db9d16c85368c1219dff7d309990b08f3a305e851d50dd87b6",
+    "crates/tkmath/src/poly/nodes.rs": "f840f9983c320c06ebda2884c32eea5e7db4bb2fd06c10a1ab299294b41ee8f8",
+    "tools/oracle/tkernel_aliased_array_method_contracts.cxx": "0f61955f217a066951011d01a8bc58ff606252cc94054916fcb44a22a0213271",
+    "tools/oracle/tkernel_aliased_array_method_contracts.expected": "b5d3210851c2dfe5738f7329cbe95391b9e046dec7bfabe9a9610dcbe4cb4da9"
+  },
+  "upstream_header_sha256": "b3dfbe5bee9a06c2a1e4f953132faa3c32280d0e22720f749bdba228dc1466ac",
+  "candidate_bindings": [
+    {
+      "cpp_id": "04858207ceaf369494e2e8e7c667160b1883e89ded9750a1354c52f9fcec7559",
+      "cpp_name": "NCollection_AliasedArray::ChangeValue2",
+      "cpp_signature": "type-parameter-1-0 &(int)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::change_value2_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "1d3f4039a211c6abb4bbb113b665c1dfe317b37b737ba8991827dbce654df966",
+      "cpp_name": "NCollection_AliasedArray::Value",
+      "cpp_signature": "const type-parameter-1-0 &(int) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "26be8082ad61dfce61b414557dd5ae5d8b439e691962b23b8ba03cd38af5d685",
+      "cpp_name": "NCollection_AliasedArray::Resize",
+      "cpp_signature": "void (int, bool)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::resize_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "2942cb5fc14168aac68205e754ba861dc839a8d8f24f56ea63cdcf60ac05086d",
+      "cpp_name": "NCollection_AliasedArray::ChangeData",
+      "cpp_signature": "type-parameter-1-0 *()",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::data_mut_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "3ceb3eaab619c78f55b49a735e38690616ba5d905ce586626d3d51b1c4543857",
+      "cpp_name": "NCollection_AliasedArray::Value2",
+      "cpp_signature": "const type-parameter-1-0 &(int) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value2_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "479965e864c1f415e4125ceaf4c8e601036e0ae586d9231000129255579b31dc",
+      "cpp_name": "NCollection_AliasedArray::value",
+      "cpp_signature": "const unsigned char *(unsigned long) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "519438ccbf14e875d0ab78f5ecc6ac285e05de31c0b1211d0b130736fa3801d7",
+      "cpp_name": "NCollection_AliasedArray::operator=",
+      "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &&)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::move_from",
+        "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "58c8d87ef901cc7caacda97f0e2dc876c4adcccbc504ea71a005afa5993dfef8",
+      "cpp_name": "NCollection_AliasedArray::value",
+      "cpp_signature": "const unsigned char *(int) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::byte_value_ptr_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "5a32d9c4e05d8c1cb3f13c8d07cb6ffd089bd2507d05d0cf0e111f8689e7d368",
+      "cpp_name": "NCollection_AliasedArray::changeValue",
+      "cpp_signature": "unsigned char *(int)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "5b1722887c6cfe9f415cee1e5f0384140beb5eab01a7e84688baf603a691d8f3",
+      "cpp_name": "NCollection_AliasedArray::Value",
+      "cpp_signature": "void (unsigned long, type-parameter-1-0 &) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value_into"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "7d8339a2cef18089a9196dfda529c2e3a6abbd190595fe9ed804faa9df2fe1dd",
+      "cpp_name": "NCollection_AliasedArray::Move",
+      "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::move_from",
+        "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "7e047a6ef005be2b674a6de0f3b34b2d2a801cbb49d611a654a23e43b1592b80",
+      "cpp_name": "NCollection_AliasedArray::Data",
+      "cpp_signature": "const type-parameter-1-0 *() const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::data_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "7fe9ebfde3b37e3ceb9721dac8baa522ab815a182d8460171725b9485aa24ade",
+      "cpp_name": "NCollection_AliasedArray::NCollection_AliasedArray<MyAlignSize>",
+      "cpp_signature": "void (unsigned long, int)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::new_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "860f4c83218edaf8499ea628592e3c3d44213fd9204a13da36cd8cb30270f907",
+      "cpp_name": "NCollection_AliasedArray::Value2",
+      "cpp_signature": "void (unsigned long, type-parameter-1-0 &) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value2_into"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "a193109e2cc2dd3bf91b5dc895b0450da3cac25988b34992f5608ad83100650e",
+      "cpp_name": "NCollection_AliasedArray::Value",
+      "cpp_signature": "void (int, type-parameter-1-0 &) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value_into_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "a99e387e7a63be3827f35fda62425238e6432cd97bf8ab15511d82e1e2a56193",
+      "cpp_name": "NCollection_AliasedArray::Value2",
+      "cpp_signature": "void (int, type-parameter-1-0 &) const",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::value2_into_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "c92c6d44135dbb1d22bec0d5a07d80d6e47d70cf128d477af19165a146471919",
+      "cpp_name": "NCollection_AliasedArray::Assign",
+      "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::assign",
+        "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "d17ed089255cfe00d4c5033ce5664e0f44f022823445f630268b4561475b97c9",
+      "cpp_name": "NCollection_AliasedArray::operator=",
+      "cpp_signature": "NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::assign",
+        "rustycad_tkernel::ncollection::AliasedArray::assign_self"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "d55c48df47eadadd3559e28f537ee7e7b68fc7e9336843bba2d4212fb512ba1a",
+      "cpp_name": "NCollection_AliasedArray::changeValue",
+      "cpp_signature": "unsigned char *(unsigned long)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::change_byte_value_ptr"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "e047f54c4f937f0a1001d80801b9b6e357c69cc8d2fea01bb63c7dab4d586546",
+      "cpp_name": "NCollection_AliasedArray::NCollection_AliasedArray<MyAlignSize>",
+      "cpp_signature": "void (const type-parameter-1-0 *, int)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::from_slice_signed"
+      ],
+      "status": "partial"
+    },
+    {
+      "cpp_id": "fdb206f99c16d74f708298387487cda996146cf04b4036ebe09d63e88031366d",
+      "cpp_name": "NCollection_AliasedArray::ChangeValue",
+      "cpp_signature": "type-parameter-1-0 &(int)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::AliasedArray::change_value_signed"
+      ],
+      "status": "partial"
+    }
+  ],
+  "candidate_binding_count": 21,
+  "rust_method_deltas": {
+    "new": 18,
+    "changed_return_semantics": 2
+  },
+  "original_tests": [
+    {
+      "cpp": "NCollection_AliasedArrayTest.ResizeEmptyWithCopy",
+      "rust": "NCollection_AliasedArrayTest__ResizeEmptyWithCopy",
+      "native_status": "passed",
+      "rust_status": "passed"
+    },
+    {
+      "cpp": "NCollection_AliasedArrayTest.ResizeWithoutCopy",
+      "rust": "NCollection_AliasedArrayTest__ResizeWithoutCopy",
+      "native_status": "passed",
+      "rust_status": "passed"
+    },
+    {
+      "cpp": "NCollection_AliasedArrayTest.WrapExternalArray",
+      "rust": "NCollection_AliasedArrayTest__WrapExternalArray",
+      "native_status": "passed",
+      "rust_status": "passed"
+    },
+    {
+      "cpp": "NCollection_AliasedArrayTest.TypedDataAndInit",
+      "rust": "NCollection_AliasedArrayTest__TypedDataAndInit",
+      "native_status": "passed",
+      "rust_status": "passed"
+    }
+  ],
+  "validation": {
+    "rust_focused": {
+      "command": "cargo test --locked -p rustycad-tkernel --test aliased_array_method_contracts --test aliased_array_supplemental --test ncollection_aliased_array -- --test-threads=1",
+      "exit_code": 0,
+      "passed": 16,
+      "new_supplemental_passed": 9,
+      "stdout": "   Compiling rustycad-tkernel v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkernel)\n    Finished `test` profile [unoptimized] target(s) in 0.25s\n     Running tests/aliased_array_method_contracts.rs (target/debug/deps/aliased_array_method_contracts-33426520e56c5e34)\n\nrunning 9 tests\ntest assignment_returns_destination_and_preserves_borrowed_storage ... ok\ntest empty_typed_pointers_preserve_null_and_check_stride ... ok\ntest moving_returns_destination_but_safely_empties_the_source_alias ... ok\ntest output_overload_failure_preserves_destination ... ok\ntest output_overloads_copy_without_mutating_source ... ok\ntest pointer_offsets_match_external_element_stride ... ok\ntest signed_element_access_checks_negative_before_type ... ok\ntest signed_lengths_validate_before_allocating_or_borrowing ... ok\ntest signed_prefix_access_checks_negative_before_type ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n     Running tests/aliased_array_supplemental.rs (target/debug/deps/aliased_array_supplemental-7851f3e5bad2d066)\n\nrunning 3 tests\ntest borrowed_copy_becomes_independent_and_assignment_keeps_owner ... ok\ntest invalid_dimensions_types_bounds_and_alignment_are_checked ... ok\ntest runtime_reinterpretation_partial_views_and_same_size_resize ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n     Running tests/ncollection_aliased_array.rs (target/debug/deps/ncollection_aliased_array-dce9ea41a3ae0330)\n\nrunning 4 tests\ntest NCollection_AliasedArrayTest__ResizeEmptyWithCopy ... ok\ntest NCollection_AliasedArrayTest__ResizeWithoutCopy ... ok\ntest NCollection_AliasedArrayTest__TypedDataAndInit ... ok\ntest NCollection_AliasedArrayTest__WrapExternalArray ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+    },
+    "native_original": {
+      "filter": "NCollection_AliasedArrayTest.*",
+      "exit_code": 0,
+      "passed": 4,
+      "stdout": "Running main() from /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/_deps/googletest-src/googletest/src/gtest_main.cc\nNote: Google Test filter = NCollection_AliasedArrayTest.*\n[==========] Running 4 tests from 1 test suite.\n[----------] Global test environment set-up.\n[----------] 4 tests from NCollection_AliasedArrayTest\n[ RUN      ] NCollection_AliasedArrayTest.ResizeEmptyWithCopy\n[       OK ] NCollection_AliasedArrayTest.ResizeEmptyWithCopy (0 ms)\n[ RUN      ] NCollection_AliasedArrayTest.ResizeWithoutCopy\n[       OK ] NCollection_AliasedArrayTest.ResizeWithoutCopy (0 ms)\n[ RUN      ] NCollection_AliasedArrayTest.WrapExternalArray\n[       OK ] NCollection_AliasedArrayTest.WrapExternalArray (0 ms)\n[ RUN      ] NCollection_AliasedArrayTest.TypedDataAndInit\n[       OK ] NCollection_AliasedArrayTest.TypedDataAndInit (0 ms)\n[----------] 4 tests from NCollection_AliasedArrayTest (0 ms total)\n\n[----------] Global test environment tear-down\n[==========] 4 tests from 1 test suite ran. (0 ms total)\n[  PASSED  ] 4 tests.\n"
+    },
+    "native_oracle": {
+      "exit_code": 0,
+      "rows": 8,
+      "expected_matches": true,
+      "stdout": "empty:1:1\npointers:1:1:1:1\nsigned-size:2:3:20:1\nsigned-index:4:2\noutput:17:17:1:2:99\nassign:1:1:1:0:42\nmove-destination:1:1:23:1\nnative-source-alias:1:2:0\n"
+    },
+    "miri": {
+      "exit_code": 1,
+      "status": "interpreter could not start: referenced shared-cache rustycad_tkernel rlib missing; requires final serialized rerun",
+      "log": "   Compiling rustycad-tkernel v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkernel)\n   Compiling rustycad-tkmath v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkmath)\nwarning: a method with this name may be added to the standard library in the future\n  --> crates/tkmath/src/gp/transform/json.rs:62:85\n   |\n62 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());\n   |                                                                                     ^^^^\n   |\n   = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method\n   = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!\n   = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>\n   = note: `#[warn(unstable_name_collisions)]` (part of `#[warn(future_incompatible)]`) on by default\nhelp: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`\n  --> crates/tkmath/src/lib.rs:2:1\n   |\n 2 + #![feature(float_conversions)]\n   |\n\nwarning: a method with this name may be added to the standard library in the future\n   --> crates/tkmath/src/gp/general_transform/algebra.rs:108:85\n    |\n108 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());\n    |                                                                                     ^^^^\n    |\n    = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method\n    = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!\n    = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>\nhelp: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`\n   --> crates/tkmath/src/lib.rs:2:1\n    |\n  2 + #![feature(float_conversions)]\n    |\n\n   Compiling rustycad-tkg2d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkg2d)\nwarning: `rustycad-tkmath` (lib) generated 2 warnings\n   Compiling rustycad-tkg3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkg3d)\n   Compiling rustycad-tkgeombase v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkgeombase)\n   Compiling rustycad-tkbrep v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkbrep)\n   Compiling rustycad-tkgeomalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkgeomalgo)\n   Compiling rustycad-tktopalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tktopalgo)\n    Finished `test` profile [unoptimized] target(s) in 32.83s\n     Running tests/aliased_array_method_contracts.rs (target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/b76e333d2bfeb68e/out/aliased_array_method_contracts-b76e333d2bfeb68e)\nerror: extern location for rustycad_tkernel does not exist: /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/f2159f330e5e3e9f/out/librustycad_tkernel-f2159f330e5e3e9f.rlib\n --> crates/tkernel/tests/aliased_array_method_contracts.rs:2:5\n  |\n2 | use rustycad_tkernel::{ncollection::AliasedArray, standard::Failure};\n  |     ^^^^^^^^^^^^^^^^\n\nerror: aborting due to 1 previous error\n\nerror: test failed, to rerun pass `-p rustycad-tkernel --test aliased_array_method_contracts`\n\nCaused by:\n  process didn't exit successfully: `/home/vmiguel/.rustup/toolchains/nightly-2026-09-25-x86_64-unknown-linux-gnu/bin/cargo-miri runner /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/b76e333d2bfeb68e/out/aliased_array_method_contracts-b76e333d2bfeb68e --test-threads=1` (exit status: 1)\nnote: test exited abnormally; to see the full output pass --no-capture to the harness.\n"
+    }
+  },
+  "remaining_partial_contracts": [
+    "Native Move and move construction leave the source as a non-owning alias with unchanged pointer/range. Safe Rust move_from empties the source. The oracle records native-source-alias separately; this difference is not approved as parity.",
+    "Only the default 16-byte native alignment policy is represented; MyAlignSize template policies remain unported.",
+    "Native const external pointers may be written through a cast; safe Rust only accepts an exclusive mutable slice, and signed prefix construction checks that the slice is long enough.",
+    "Typed APIs accept ArrayValue/Pod types only; arbitrary C++ object representations, assignment hooks, overlapping writable aliases, and unaligned reference access are not claimed.",
+    "Rust fresh allocation zeroes bytes and checks byte-count overflow; native fresh bytes are indeterminate and native stride narrowing can truncate a size_t larger than UINT32_MAX. Existing Rust checked_stride rejects those strides.",
+    "Allocator hook policy and out-of-memory behavior are not equivalent. Native discard-resize frees owned storage before allocation; existing Rust resize allocates replacement storage before dropping the old block.",
+    "No new integrated API or original declaration mapping credit; candidate bindings need compiler-backed symbol capture and final integration validation."
+  ],
+  "api_completeness_credit": 0,
+  "original_test_mapping_credit": 0,
+  "full_class_parity": false,
+  "subsequent_validation": {
+    "audit": "porting/audits/foundation-method-batch.json",
+    "miri_passes": 9,
+    "note": "Final combined validation supersedes the earlier Miri cache failure; the historical failure remains recorded."
+  }
+}

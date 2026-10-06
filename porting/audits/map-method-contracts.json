@@ -1,0 +1,156 @@
+{
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "NCollection_Map",
+    "NCollection_DataMap",
+    "NCollection_MapAlgo"
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/data_map/assignment.rs": "c88e611ddff77342e5bd60b6c0764dcdacc4160cb22baa4d534113deb81fd3bc",
+    "crates/tkernel/src/ncollection/data_map/borrowed_operations.rs": "8457542e8033d0f24517b8312108f30604a3b95c965ebb15fc55241cdbe97d0c",
+    "crates/tkernel/src/ncollection/data_map/cursor.rs": "d5b7401542fff4991c488dae5f7cd55e0bcaa5f79b138207fec2621990e29082",
+    "crates/tkernel/src/ncollection/data_map/iteration.rs": "350f65c7f7c22a4b41525946fa04e1886b6ed9087f4b70a15466bed5cc2ebb6a",
+    "crates/tkernel/src/ncollection/data_map/keys.rs": "f87cb12858195e12c883e25b95c3052055fea2b820408c891fb8f01aa25be448",
+    "crates/tkernel/src/ncollection/data_map/operations.rs": "2a765e50b38ee98a7d2457b82211f3b25508a597b97eb3f6b9af8301d2baa4ff",
+    "crates/tkernel/src/ncollection/data_map/queries.rs": "379dd38590c542603a177d7e1249d3b1a557e6d8e81a327f7eee91373deb1510",
+    "crates/tkernel/src/ncollection/data_map/signed_sizes.rs": "efda4a4f9e116a062c2f4d371213302c80c49c65cb751697e5edb4e8d11d2915",
+    "crates/tkernel/src/ncollection/data_map.rs": "3fb7cccd2f19ab5243f600cd090a781d4af3c1f71340837d5ef2533acb4de673",
+    "crates/tkernel/src/ncollection/map/borrowed.rs": "89c763f21e0f3c1160d9d0623ffab7432011ae2d4ccc0048e5eb921a98fed9ca",
+    "crates/tkernel/src/ncollection/map/cursor.rs": "1e168fddac3f37a9b1ff97bbf7b078baa2706a291e9b9141d8fa7a286cf04e64",
+    "crates/tkernel/src/ncollection/map/legacy_algebra.rs": "4b3c84842585b7437c902cefa30a7da22e9263d1f8d3d54f9b895bfa49afb826",
+    "crates/tkernel/src/ncollection/map/method_contracts.rs": "16f1187b181c5259410d606ff28c910c685a7bdbb24e9ae5ec6359ace4421ff7",
+    "crates/tkernel/src/ncollection/map.rs": "6be39d4199660004ed1fd741a1cf6fb95103591dbfffe2d9bedd1b0c83362298",
+    "crates/tkernel/src/ncollection/map_algo.rs": "e33ab313d7276e6ab2031f344d5a5d1e00e49b5018280b5664b6b3265b83eb51",
+    "crates/tkernel/tests/data_map_method_contracts.rs": "9084d7ae05f65c1474d2204e8bc28439a0180cb783bfb67211e545eaf840eb59",
+    "crates/tkernel/tests/map_method_contracts.rs": "92331ac206e7f29cec697f84afb81e2865115ac5c69da1baaa7fef6aef917ea4"
+  },
+  "source_inputs_after_run_identical": true,
+  "source_capture_note": "Owned source inputs captured during final build and verified identical afterward. Other concurrently edited classes are outside this evidence scope.",
+  "native_header_sha256": {
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_MapAlgo.hxx": "049fdc1847ba35fba6f40be474ed14a8ec4d7404ba3c0b5b46ee35a341c64291"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/map-data-map-final-rust.log.gz": "fb4cd54a61e9374bc842895e071f87fad53f99e9427d0d32a61a1d4af7f31a67",
+    "porting/runtime-evidence/map-method-native.log.gz": "334550dffc9fbe01d7920a02ec8699b209ebf95bf9b41bdafdd9061bd2150fe8",
+    "porting/runtime-evidence/map-method-legacy.log.gz": "3841b23e8d9e7fccf6b820b3eba2507b77f5df3ef544df7d705987b0fa01ecfa",
+    "porting/runtime-evidence/data-map-method-final-native.log.gz": "e84732766d3cf4c8477b6d51f299737d398deeefb0b4860466791558ca5f5d1b",
+    "porting/runtime-evidence/map-data-map-final-source.json.gz": "f1aa258b75d815b1479bf0a04d86bf84bf63a825df3b3d86c60d19e01a42c000"
+  },
+  "focused_rust_passes": 114,
+  "focused_rust_exit": 0,
+  "new_map_tests": 13,
+  "new_data_map_tests": 9,
+  "original_test_names": [
+    "NCollection_DataMapTest.IntegerKeys",
+    "NCollection_DataMapTest.BindingAndAccess",
+    "NCollection_DataMapTest.ChangeFind",
+    "NCollection_DataMapTest.Rebind",
+    "NCollection_DataMapTest.UnBind",
+    "NCollection_DataMapTest.Clear",
+    "NCollection_DataMapTest.Assignment",
+    "NCollection_DataMapTest.Find_NonExisting",
+    "NCollection_DataMapTest.IteratorAccess",
+    "NCollection_DataMapTest.ChangeValue",
+    "NCollection_DataMapTest.ExhaustiveIterator",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_Find",
+    "NCollection_DataMapTest.TryBind_NewKey",
+    "NCollection_DataMapTest.TryBind_ExistingKey",
+    "NCollection_DataMapTest.TryBind_MoveSemantics",
+    "NCollection_DataMapTest.TryBound_NewKey",
+    "NCollection_DataMapTest.TryBound_ExistingKey",
+    "NCollection_DataMapTest.TryBound_MoveSemantics",
+    "NCollection_DataMapTest.Emplace_NewKey",
+    "NCollection_DataMapTest.Emplace_ExistingKey",
+    "NCollection_DataMapTest.Emplaced_NewKey",
+    "NCollection_DataMapTest.Emplaced_ExistingKey",
+    "NCollection_DataMapTest.TryEmplace_NewKey",
+    "NCollection_DataMapTest.TryEmplace_ExistingKey",
+    "NCollection_DataMapTest.TryEmplaced_NewKey",
+    "NCollection_DataMapTest.TryEmplaced_ExistingKey",
+    "NCollection_DataMapTest.HasherConstructorCopy",
+    "NCollection_DataMapTest.HasherConstructorMove",
+    "NCollection_DataMapTest.CopyConstructorPreservesHasher",
+    "NCollection_DataMapTest.ItemsIteration",
+    "NCollection_DataMapTest.ItemsStructuredBindings",
+    "NCollection_DataMapTest.ItemsModifyValue",
+    "NCollection_DataMapTest.ConstItemsIteration",
+    "NCollection_DataMapTest.StandardIteratorContract",
+    "NCollection_DataMapTest.ItemsIteratorEquality",
+    "NCollection_MapTest.DefaultConstructor",
+    "NCollection_MapTest.ConstructorWithBuckets",
+    "NCollection_MapTest.AddAndContains",
+    "NCollection_MapTest.Remove",
+    "NCollection_MapTest.Clear",
+    "NCollection_MapTest.Assignment",
+    "NCollection_MapTest.IteratorAccess",
+    "NCollection_MapTest.Resize",
+    "NCollection_MapTest.ExhaustiveIterator",
+    "NCollection_MapTest.OCC24271_BooleanOperations",
+    "NCollection_MapTest.EmplaceBasic",
+    "NCollection_MapTest.EmplacedBasic",
+    "NCollection_MapTest.HasherConstructorCopy",
+    "NCollection_MapTest.HasherConstructorMove",
+    "NCollection_MapTest.CopyConstructorPreservesHasher",
+    "NCollection_MapTest.BeginEndIterator",
+    "NCollection_MapTest.RangeBasedForLoop",
+    "NCollection_MapTest.ContainedFound",
+    "NCollection_MapTest.ContainedNotFound",
+    "NCollection_MapTest.IteratorEquality"
+  ],
+  "original_join_count": 56,
+  "original_native_exit_codes": {
+    "Map": 0,
+    "DataMap": 0
+  },
+  "native_oracle_rows": {
+    "Map": 19,
+    "DataMap": 18
+  },
+  "native_oracle_exit_codes": {
+    "Map": 0,
+    "DataMap": 0
+  },
+  "native_oracle_diff_exit_codes": {
+    "Map": 0,
+    "DataMap": 0
+  },
+  "commands": {
+    "rust": "PATH=/home/vmiguel/.cargo/bin:$PATH CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_BUILD_JOBS=2 cargo test --locked -p rustycad-tkernel --test data_map_method_contracts --test ncollection_data_map --test ncollection_data_map_bind_ref --test ncollection_data_map_bind_ref_allocation --test ncollection_data_map_assignment --test data_map_supplemental --test map_method_contracts --test ncollection_map --test ncollection_map_borrowed_add --test map_supplemental --test ncollection_hash_maps_api_behavior -- --test-threads=1",
+    "native_map": "LD_LIBRARY_PATH=target/occt-modeling-full/lin64/gcc/libi target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest --gtest_filter=NCollection_MapTest.*",
+    "map_oracle_compile": "g++ -std=c++17 -O2 -Wno-deprecated-declarations -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_map_method_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_map_method_contracts",
+    "native_map_oracle": "/tmp/tkernel_map_method_contracts > /tmp/map-method-native.log; cmp /tmp/map-method-native.log tools/oracle/tkernel_map_method_contracts.expected"
+  },
+  "implemented_map_methods": [
+    "IsEqual,Contains(Map),HasIntersection,Union,Unite,Intersection,Intersect,Subtraction,Subtract,Difference,Differ => class-level methods delegating to MapAlgo",
+    "Assign,copy operator= => assign_returning; supports non-Clone hasher",
+    "move operator= => move_from_returning; self branch => assign_self",
+    "int constructor and ReSize(int) => with_hasher_signed,with_allocator_signed,resize_signed",
+    "Emplace,Emplaced,TryEmplace,TryEmplaced constructor forwarding => *_with",
+    "Iterator copy,prefix and postfix => clone,advance,advance_post"
+  ],
+  "behavior_fixes": [
+    "MapAlgo copies borrowed keys only after a missing lookup and native allocation",
+    "Map assignment no longer requires cloning hash policy",
+    "Closure Emplace grows before key construction, including throwing constructors",
+    "DataMap empty retained table lookup returns without invoking user hashing, also fixing Map Contains and Contained"
+  ],
+  "remaining_gaps": [
+    "Native custom copy/move constructors and assignment hooks are not automatically matched by Rust Clone/moves",
+    "Explicit self-alias variants of set algebra and right-destination aliases are not separately exposed; Rust borrowing disallows literal native aliased operands",
+    "Public MapNode ABI/inheritance has no direct Rust facade",
+    "Native move constructor moved-from custom hasher state has no generic Rust adapter",
+    "Compiler API mapping counts remain unchanged; no full API parity claimed"
+  ],
+  "integrated_api_credit": 0,
+  "original_mapping_credit_added": 0,
+  "miri": "root_pending",
+  "oracle_source_sha256": {
+    "tools/oracle/tkernel_map_method_contracts.cxx": "5ec482073efdfd7cefb89c9a7ab8cb3d6082fd32f2a406e04cc40e89cc0cc0de",
+    "tools/oracle/tkernel_map_method_contracts.expected": "8eb911c8b8d57ee09ce41d186a86fa4c0a7650406b2ac76652191466edf113e1",
+    "tools/oracle/tkernel_data_map_method_contracts.cxx": "366fe8b264816d9198c2f47203b7fb4e5272325ba502f85b975c1878f69b6e1d",
+    "tools/oracle/tkernel_data_map_method_contracts.expected": "616d14cd7bcd1afef4412d4f85cc6efc171394ca40ae27c52ef3c71ca915e0f2"
+  }
+}

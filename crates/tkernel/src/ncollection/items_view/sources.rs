@@ -13,7 +13,7 @@ macro_rules! key_value_source {
                 = (&'a K, &'a V)
             where
                 Self: 'a;
-            fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> {
+            fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> + Clone {
                 self.items()
             }
             fn items_size(&self) -> usize {
@@ -45,8 +45,10 @@ impl<K: Debug, V, H: HashPolicy<K>> ItemsSource<KeyValueIndexItems> for IndexedD
         = (&'a K, &'a V, usize)
     where
         Self: 'a;
-    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> {
-        self.indexed_items()
+    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> + Clone {
+        self.items()
+            .enumerate()
+            .map(|(index, (key, value))| (key, value, index + 1))
     }
     fn items_size(&self) -> usize {
         self.len()
@@ -61,7 +63,7 @@ impl<K: Debug, H: HashPolicy<K>> ItemsSource<KeyIndexItems> for IndexedMap<K, H>
         = (&'a K, usize)
     where
         Self: 'a;
-    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> {
+    fn items_begin(&self) -> impl Iterator<Item = Self::Item<'_>> + Clone {
         self.indexed_items()
     }
     fn items_size(&self) -> usize {

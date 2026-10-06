@@ -1,4 +1,4 @@
-use super::{Debug, Failure, HashPolicy, IndexedDataMap, IndexedValue};
+use super::{Debug, Failure, HashPolicy, IndexedDataMap};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Replaces an indexed pair, rejecting keys bound elsewhere; `map.substitute(2,25,2.5)?`.
     pub fn substitute(&mut self, index: usize, key: K, value: V) -> Result<(), Failure> {
@@ -45,21 +45,20 @@ impl<K: Debug, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         true
     }
 }
-impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> IndexedDataMap<K, V, H> {
+impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Copies bindings while retaining destination policy and allocator; `map.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
-        self.values.clear();
-        self.keys.assign(&source.keys);
-        self.values = source
-            .values
-            .iter()
-            .map(|node| {
-                self.allocator().allocate_value(IndexedValue {
-                    value: node.value.clone(),
-                    _identity: 0,
-                })
-            })
-            .collect();
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
+        self.clear(false);
+        if source.is_empty() {
+            return self;
+        }
+        self.resize(source.len() - 1);
+        for (key, value) in source.items() {
+            // Native Assign copies each item before its key; it does not deduplicate.
+            let bucket = self.hasher().hash(key) % self.bucket_count() + 1;
+            self.insert_borrowed(key, value, bucket);
+        }
+        self
     }
 }
 impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for IndexedDataMap<K, V, H> {

@@ -1,6 +1,9 @@
 //! Contiguous growable storage matching NCollection_LinearVector.
 use super::{Array1, ArrayError};
 
+mod pointers;
+mod trivial_assignment;
+
 struct LengthRollback<'a, T> {
     elements: &'a mut Vec<T>,
     previous_len: usize,
@@ -163,8 +166,13 @@ impl<T> LinearVector<T> {
         self.elements.clear();
     }
     /// Transfers storage and resets the source; `dest.move_from(&mut source)`.
-    pub fn move_from(&mut self, source: &mut Self) {
+    pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
         *self = std::mem::take(source);
+        self
+    }
+    /// Preserves the receiver for native self assignment; `vector.assign_self()`.
+    pub fn assign_self(&mut self) -> &mut Self {
+        self
     }
     /// Borrows a mutable zero-based array view; `vector.to_array1()[0] = 42`.
     pub fn to_array1(&mut self) -> Array1<'_, T> {
@@ -259,15 +267,16 @@ impl<T: Clone> LinearVector<T> {
         vector
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
         if source.len() > self.capacity() {
             *self = source.clone();
-            return;
+            return self;
         }
         let previous_len = self.len();
         let common_len = previous_len.min(source.len());
         self.clone_common_items(source, common_len);
         self.finish_assignment_tail(source, common_len, previous_len);
+        self
     }
 
     fn clone_common_items(&mut self, source: &Self, common_len: usize) {

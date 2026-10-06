@@ -1,20 +1,13 @@
 //! `TCollection_AsciiString`: an owned, NUL-terminated byte string with one-based access.
 //!
-//! The byte buffer always ends with one NUL that is not part of the length, as OCCT's
+//! The byte view always ends with one NUL that is not part of the length, as OCCT's
 //! `myString`/`myLength` pair does; embedded NUL bytes are allowed and kept wherever the
 //! C++ member copies by explicit length, and dropped wherever it copies a C string.
 
 /// An owned C-compatible byte string; `AsciiString::new("hello").as_bytes() == b"hello"`.
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Debug, Default)]
 pub struct AsciiString {
     terminated: Vec<u8>,
-}
-impl Default for AsciiString {
-    fn default() -> Self {
-        Self {
-            terminated: vec![0],
-        }
-    }
 }
 impl AsciiString {
     /// Copies a C string through its first NUL, `TCollection_AsciiString(const char*)`;
@@ -30,7 +23,10 @@ impl AsciiString {
     }
     /// Copies an explicit byte span including embedded NULs; `AsciiString::from_raw(b"a\0b").len() == 3`.
     pub fn from_raw(bytes: &[u8]) -> Self {
-        let mut terminated = Vec::with_capacity(bytes.len() + 1);
+        if bytes.is_empty() {
+            return Self::default();
+        }
+        let mut terminated = Vec::with_capacity(storage::padded_byte_capacity(bytes.len()));
         terminated.extend_from_slice(bytes);
         terminated.push(0);
         Self { terminated }
@@ -38,16 +34,19 @@ impl AsciiString {
     /// Borrows content excluding the terminator (`operator std::string_view`);
     /// `AsciiString::new("abc").as_bytes() == b"abc"`.
     pub fn as_bytes(&self) -> &[u8] {
-        &self.terminated[..self.terminated.len() - 1]
+        &self.as_bytes_with_nul()[..self.len()]
     }
     /// Borrows content including its terminator (`ToCString`);
     /// `AsciiString::new("abc").as_bytes_with_nul() == b"abc\0"`.
     pub fn as_bytes_with_nul(&self) -> &[u8] {
+        if self.terminated.is_empty() {
+            return &storage::SHARED_EMPTY_TERMINATOR;
+        }
         &self.terminated
     }
     /// Returns byte length, excluding the terminator; `AsciiString::new("abc").len() == 3`.
     pub fn len(&self) -> usize {
-        self.terminated.len() - 1
+        self.terminated.len().saturating_sub(1)
     }
     /// Returns OCCT's signed byte length (`Length`); `AsciiString::new("abc").length() == 3`.
     pub fn length(&self) -> i32 {
@@ -63,17 +62,27 @@ impl AsciiString {
     }
     /// Appends raw bytes before the terminator; shared by every concatenating member.
     fn append_bytes(&mut self, bytes: &[u8]) {
+        if bytes.is_empty() {
+            return;
+        }
         self.terminated.pop();
         self.terminated.extend_from_slice(bytes);
         self.terminated.push(0);
     }
     /// Inserts raw bytes at a zero-based offset that the caller already validated.
     fn splice_bytes(&mut self, offset: usize, bytes: &[u8]) {
+        if bytes.is_empty() {
+            return;
+        }
+        self.ensure_owned_terminator();
         self.terminated
             .splice(offset..offset, bytes.iter().copied());
     }
     /// Sets the length, keeping the terminator, after the caller validated `length <= len()`.
     fn set_length(&mut self, length: usize) {
+        if self.terminated.is_empty() {
+            return;
+        }
         self.terminated.truncate(length + 1);
         self.terminated[length] = 0;
     }
@@ -89,6 +98,7 @@ pub(crate) fn c_string_length(bytes: &[u8]) -> usize {
 pub(crate) fn c_string_prefix(bytes: &[u8]) -> &[u8] {
     &bytes[..c_string_length(bytes)]
 }
+mod assignment;
 mod c_string_comparison;
 mod c_string_editing;
 mod case_adjust;
@@ -100,6 +110,7 @@ mod hash;
 mod numeric;
 mod raise;
 mod search;
+mod storage;
 mod stream;
 mod traits;
 mod utf8_scan;

@@ -21,6 +21,8 @@ impl<T> Default for DynamicArray<T> {
     }
 }
 mod emplacement;
+mod legacy_cursor;
+pub use legacy_cursor::DynamicArrayIterator;
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
     pub fn with_increment(increment: usize) -> Self {

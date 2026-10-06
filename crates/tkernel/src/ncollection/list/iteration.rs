@@ -26,6 +26,10 @@ impl ListCursor {
     }
     /// Advances to the next node; `cursor.next(&list)`.
     pub fn next<T>(&mut self, list: &List<T>) {
+        if !self.more() {
+            return;
+        }
+        self.previous = self.address;
         self.address = self.node(list).and_then(|node| address(&node.next));
     }
     fn node<T>(self, list: &List<T>) -> Option<&Node<T>> {
@@ -43,6 +47,7 @@ impl<'a, T> Iterator for ListIter<'a, T> {
     type Item = &'a T;
     fn next(&mut self) -> Option<Self::Item> {
         let node = self.next.take()?;
+        self.previous = Some(node as *const Node<T> as usize);
         self.next = node.next.as_deref();
         Some(&node.value)
     }
@@ -57,6 +62,7 @@ impl<'a, T> Iterator for ListIterMut<'a, T> {
     type Item = &'a mut T;
     fn next(&mut self) -> Option<Self::Item> {
         let node = self.next.take()?;
+        self.previous = Some(std::ptr::from_ref(node) as usize);
         self.next = node.next.as_deref_mut();
         Some(&mut node.value)
     }

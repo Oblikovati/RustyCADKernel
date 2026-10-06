@@ -56,7 +56,9 @@ impl SectionCurve {
     /// that take the curve's bounds).
     pub fn assign_poles(&self, poles: &mut Array1<'_, Point3>, weights: &mut Array1<'_, f64>) {
         poles.assign(&self.curve().poles());
-        self.curve().weights_array(|w| weights.assign(w));
+        self.curve().weights_array(|w| {
+            weights.assign(w);
+        });
     }
 
     /// `SectionShape`: `(NbPoles, NbKnots, Degree)` of the B-spline.

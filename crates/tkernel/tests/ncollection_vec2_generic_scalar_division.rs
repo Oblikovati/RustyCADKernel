@@ -38,3 +38,5 @@ fn vec2_integer_scalar_division_remains_supported() {
     value /= 3;
     assert_eq!(value, Vec2::new(5, -3));
 }
+
+impl rustycad_tkernel::ncollection::VectorArithmeticComponent for Tagged {}

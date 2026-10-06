@@ -1,0 +1,11 @@
+bind_new 1 hash,item,key,
+bind_hit 0 hash,item,
+bound_hit 1 hash,item,
+try_hit 0 1 hash,hash,
+assign_order hash,item1,key1,hash,item2,key2,
+clone_order hash,item1,key1,hash,item2,key2, 10
+assign 1 90 1 1009 1 2
+move 1 1 1 7 90
+identity 1 1 1
+cursor 1 20 1 1 1 1
+reset 2 1 1

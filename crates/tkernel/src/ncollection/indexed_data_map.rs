@@ -154,5 +154,7 @@ fn missing_binding<K: Debug>(key: &K) -> Failure {
 mod binding;
 mod cursor;
 mod iteration;
+mod method_contracts;
 mod operations;
+mod signed_overloads;
 pub use cursor::{IndexedDataMapIterator, IndexedDataMapIteratorMut};

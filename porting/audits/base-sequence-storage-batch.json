@@ -1,0 +1,291 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Raw BaseSequence protected topology, allocator-mutating deleters, cache state and raw Iterator",
+  "integration_status": "uncommitted main working-tree draft; .git is read-only",
+  "source_dirty": true,
+  "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "259b870a1627baa5c14d130e036c29a4dc0a5cdcbd4d5fb4cccbe940effe0c78",
+    "crates/tkernel/src/ncollection/sequence/base_iterator.rs": "f2fa5fd6960128eccfd1631aff1f5f0c74a70be98ddf47f4b8f6a2d1dbe3b6e8",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "ee672f421001bbfb1bef50785257d0dfe90fc6b39a225db3c0ea723dfc83ba19",
+    "crates/tkernel/src/ncollection/sequence/base_storage/iterator.rs": "bb83270aa564900742c9e6b1dd9c24eb576613a130d97d15225a6d3e5d0a86b7",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "e09580d3b8f22649286feb55ed54e3079a20c60352bd4c8a5468f6b154d8a969",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "ae01ae16c09bdf1c11349524f22b8249f5cabbc556e07c5bcde706ac81fb5930",
+    "crates/tkernel/src/ncollection/sequence/borrowed.rs": "89d3d87816b2026b09a3a313bc73f58481dc86abf57fe99b6cc9805ecc69d04b",
+    "crates/tkernel/src/ncollection/sequence/cursor_contracts.rs": "9657c9fa26907959ff3b14c6dc2067c82baeab29721be9f4a8f66279666940a3",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "6585e7bb899a82b8dad606b3b04c4e396e0c7309e22700b61aed56a4559fc386",
+    "crates/tkernel/src/ncollection/sequence/iteration.rs": "c176261afc9a2ce662f12457107dc6a2c35c045347f534bd6aa5d812dbd6fad7",
+    "crates/tkernel/src/ncollection/sequence/links.rs": "44c5c88891ce8127824045fb5c1a1a6b0ce8d68b09556567ba103e1fae52c980",
+    "crates/tkernel/src/ncollection/sequence/method_contracts.rs": "de6e4f4d8a487f4a2fb11ea91e6f0034468e2867870c6d2b52c7d7fc7134e117",
+    "crates/tkernel/src/ncollection/sequence/node_allocation.rs": "00b2ee37c4baea280ba29125aea1c7e1f509fa4e7dd176f19d57748a0b6c5fed",
+    "crates/tkernel/src/ncollection/sequence/nodes.rs": "36e2f2b4f7887e5dd2b225470fce753b3e6585fea429b165b03e0ccf762aa298",
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "0f71c9cd2b15acd6afb71f2e1b9a8f0626058394636e3fcbbabb39db1b3f1104",
+    "crates/tkernel/src/ncollection/sequence/signed_indices.rs": "1c0e877d69a32b8135235325dbea1e94bfd9c73f6d1c36c0f4a52f6ab24c7c57",
+    "crates/tkernel/src/ncollection/sequence.rs": "9fe8dfbf3aa7b9cb9bf6adb66dda96b179839a2001466e5f0906571545e96636",
+    "crates/tkernel/tests/base_sequence_method_contracts.rs": "02e8bcff6be5502dbd60c8eff73df6f5c9a661d8f956744bd1cc2849fad9574d",
+    "crates/tkernel/tests/base_sequence_storage_contracts.rs": "2bc5971945d5575a1909991fd6cee69280ae80776cf771ca47ee592182435408",
+    "crates/tkernel/tests/fixtures/array1_mt19937_seed1.txt": "7c507148cfaa6b80177f074278a9fdfb9bab553fb2a8dd99c042eb65b0357936",
+    "crates/tkernel/tests/ncollection_sequence/basic.rs": "c0c63588a51960ceb74d351aa47c7d05dcf2ed817395cc4fd7c169d4fce82d4b",
+    "crates/tkernel/tests/ncollection_sequence/emplacement.rs": "3218d958eec525f754efd070df3552311e6d3156c6ed166e906b3d1655aabb86",
+    "crates/tkernel/tests/ncollection_sequence/ownership.rs": "ac47a07fc0bbe3f25f7b91c14775b0b4842d5baa62dc6126d21a99211daeeb7c",
+    "crates/tkernel/tests/ncollection_sequence.rs": "70d9a0110b130bba4e359c475fbffabf2955dd5d151563210fe640ff2d194c01",
+    "crates/tkernel/tests/sequence_node_method_contracts.rs": "c0da4f178e9b9640f8ec53d274134f97e1f9630f251ef4b4f1b529775d1af477",
+    "tools/oracle/tkernel_base_sequence_storage_contracts.cxx": "b0668764079f3e0a57e1370bf20256ae18de211691ef240a2841c77a2bef7541",
+    "tools/oracle/tkernel_base_sequence_storage_contracts.expected": "c4c6a2dcbcb7182f87237f0845462c5e14a0c3035c7a07f7ad03195cdee776f4"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-sequence-storage-source.tar.gz": "3bdf80079d5cf96f8eeb4474c3dae73e3d3739eb62347e4fb5ccba5b412e24bc",
+    "porting/runtime-evidence/base-sequence-storage-rust.log.gz": "424bb32f39efc108937b1c0ccecbaac9d0f692199bc1b15e50e97dfd91fce3cb",
+    "porting/runtime-evidence/base-sequence-storage-native.log.gz": "61f422e76b074ede761e009580ee6cd365ee601eb683807abedb7f275e668966",
+    "porting/runtime-evidence/base-sequence-storage-miri.log.gz": "1d5e23fe377c0480e0596364905537862d108d60e6c513b99d5cdc4dda0fd855",
+    "porting/runtime-evidence/base-sequence-storage-oracle.log.gz": "3f3e864d31f15807b4bf0b4eddd3f0e7266ae1e9603b12725b4fad9786d6555b"
+  },
+  "source_scope": "Owned method sources and tests captured after successful run; full dependency/build input closure was not captured. Shared backend files included.",
+  "compiler_body_binding_performed": false,
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "class_status": "partial",
+  "methods": [
+    "Raw BaseSequence node and sequence append/prepend/indexed insert/cursor insert",
+    "Raw split preserves destination allocator and does not clear it; checked explicit self split",
+    "Raw removal by cursor/index/range with forward callbacks and native cache updates",
+    "Reverse and Exchange rewire identities without copying values",
+    "Native Find first/current/last heuristic and subclass cache access",
+    "Raw Iterator construction/init/previous/current/previous-node access; next convenience",
+    "Mutable allocator callback identity preserved between calls; base destructor performs no implicit deletion",
+    "Native DelSeqNode unsafe callback alias"
+  ],
+  "runtime": {
+    "rust_passed": 52,
+    "group_passes": [
+      13,
+      8,
+      20,
+      11
+    ],
+    "original_native_rust_names": [
+      "NCollection_SequenceTest.AdvancedOperations",
+      "NCollection_SequenceTest.AllocatorTest",
+      "NCollection_SequenceTest.BasicFunctions",
+      "NCollection_SequenceTest.CombiningSequences",
+      "NCollection_SequenceTest.ComplexTypeSequence",
+      "NCollection_SequenceTest.CopyAndAssignment",
+      "NCollection_SequenceTest.EmplaceAfterIndex",
+      "NCollection_SequenceTest.EmplaceAfterIterator",
+      "NCollection_SequenceTest.EmplaceAppend",
+      "NCollection_SequenceTest.EmplaceBeforeIndex",
+      "NCollection_SequenceTest.EmplacePrepend",
+      "NCollection_SequenceTest.EmplaceWithMoveOnlyType",
+      "NCollection_SequenceTest.IteratorFunctions",
+      "NCollection_SequenceTest.ModifyingOperations",
+      "NCollection_SequenceTest.MoveOperations",
+      "NCollection_SequenceTest.OCC26448_PrependEmptySequence",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_MinMax",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_Replace",
+      "NCollection_SequenceTest.STLAlgorithmCompatibility_Reverse",
+      "NCollection_SequenceTest.StandardIteratorContract"
+    ],
+    "original_native_rust_name_join": true,
+    "commands_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "rust_command": "cargo test --locked -p rustycad-tkernel --test base_sequence_storage_contracts --test base_sequence_method_contracts --test sequence_node_method_contracts --test ncollection_sequence -- --test-threads=1",
+    "native_filter": "NCollection_SequenceTest.*",
+    "miri_passed": 8,
+    "miri_exit_code": 0,
+    "native_oracle_rows": 22,
+    "native_oracle_compile_run_diff_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "miri_command": "cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test base_sequence_storage_contracts -- --test-threads=1",
+    "miri_target_dir": "/tmp/rustycad-class-method-miri",
+    "cargo_environment": {
+      "PATH_prefix": "/home/vmiguel/.cargo/bin",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "CARGO_BUILD_JOBS": "2",
+      "CARGO_TARGET_DIR": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target"
+    },
+    "oracle_compile_command": "g++ -std=c++17 -O2 -I target/occt-modeling-full/include/opencascade tools/oracle/tkernel_base_sequence_storage_contracts.cxx -L target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_base_sequence_storage_contracts"
+  },
+  "limitations": [
+    "Raw BaseSequence and the safe typed Sequence Vec engine remain separate implementations; Sequence has NOT been silently refactored to derive its storage from this engine.",
+    "Generic BaseSequence::BasicIterator over arbitrary user-defined node/value types remains absent; previous BaseSequenceIterator adapts only the standard typed Sequence storage.",
+    "Protected raw fields can be inspected; allocator may be changed and cache can be set to a checked node. Arbitrary direct first/last/current/index/size replacement is not yet exposed.",
+    "Rust lower_snake_case methods cover both native lowercase protected implementations and uppercase forwarding wrappers; literal uppercase aliases have not been added.",
+    "Self-append/prepend/insertion raw alias behavior cannot be expressed with two simultaneous &mut references and has no explicit helper yet. Native self-split DomainError is explicitly represented.",
+    "Index-node InsertAfter rejects out-of-range input, where native protected code assumes a valid index and can have undefined pointer dereferences.",
+    "Rust callbacks accept FnMut context rather than requiring native global function pointers; the unsafe DelSeqNode alias is also available through explicit invocation inside the closure.",
+    "A callback panic after freeing nodes can leave native-equivalent partially deleted metadata; resuming traversal without repair is outside the unsafe contract.",
+    "Virtual subclass dispatch, inherited placement-new macro overload spellings, all custom C++ copy/move/destructor behaviors and protected field subclass customization are not proven complete.",
+    "Scoped source snapshot and exact20-name legacy join do not provide full dependency closure, compiler body binding or global API/test inventory credit."
+  ],
+  "signature_review": {
+    "source": "NCollection_BaseSequence.hxx at pinned revision; manual review, not declaration inventory binding",
+    "ordinary_methods": [
+      {
+        "native": "clearSeq/ClearSeq(DelSeqNode)",
+        "rust": "clear_seq",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pAppend/PAppend(SeqNode*)",
+        "rust": "append_node",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pAppend/PAppend(BaseSequence&)",
+        "rust": "append_sequence",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pPrepend/PPrepend(SeqNode*)",
+        "rust": "prepend_node",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pPrepend/PPrepend(BaseSequence&)",
+        "rust": "prepend_sequence",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pInsertAfter/PInsertAfter(Iterator&,SeqNode*)",
+        "rust": "insert_after_cursor",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pInsertAfter/PInsertAfter(size_t,SeqNode*)",
+        "rust": "insert_after",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pInsertAfter/PInsertAfter(size_t,BaseSequence&)",
+        "rust": "insert_sequence_after",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pSplit/PSplit(size_t,BaseSequence&)",
+        "rust": "split/split_self",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "removeSeq/RemoveSeq(Iterator&,DelSeqNode)",
+        "rust": "remove_cursor",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "removeSeq/RemoveSeq(size_t,DelSeqNode)",
+        "rust": "remove",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "removeSeq/RemoveSeq(size_t,size_t,DelSeqNode)",
+        "rust": "remove_range",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pReverse/PReverse()",
+        "rust": "reverse",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "pExchange/PExchange(size_t,size_t)",
+        "rust": "exchange",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      },
+      {
+        "native": "find/Find(size_t) const",
+        "rust": "find",
+        "status": "implemented unsafe adaptation; native row/regression verified"
+      }
+    ],
+    "lifecycle_and_public": [
+      {
+        "native": "BaseSequence(const Handle<BaseAllocator>&)",
+        "rust": "new(Option<BaseAllocator>)",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "virtual ~BaseSequence()",
+        "rust": "implicit Drop releases allocator, no node deletion",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "IsEmpty() const",
+        "rust": "is_empty",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Length() const",
+        "rust": "length",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Size() const",
+        "rust": "size",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Allocator() const",
+        "rust": "allocator",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "NCollection_DelSeqNode",
+        "rust": "DelSeqNode unsafe fn alias",
+        "status": "implemented adaptation"
+      }
+    ],
+    "base_iterator": [
+      {
+        "native": "Iterator()",
+        "rust": "BaseSequenceRawIterator::default",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Iterator(const BaseSequence&,bool)",
+        "rust": "new",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Init(const BaseSequence&,bool=true)",
+        "rust": "init",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "Previous()",
+        "rust": "unsafe previous",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "CurrentNode() const",
+        "rust": "current_node",
+        "status": "implemented adaptation"
+      },
+      {
+        "native": "PreviousNode() const",
+        "rust": "previous_node",
+        "status": "implemented adaptation"
+      }
+    ],
+    "partial_surfaces": [
+      "BasicIterator<TheNode,TheItemType,IsConstant> generic custom-node specialization",
+      "protected myAllocator/myFirstItem/myLastItem/myCurrentItem/myCurrentIndex/mySize direct field access",
+      "inherited DEFINE_STANDARD_ALLOC/DEFINE_NCOLLECTION_ALLOC allocation spellings",
+      "raw self-alias append/prepend/insert branches",
+      "C++ virtual subclass destruction dispatch"
+    ]
+  },
+  "native_source_sha256": {
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx": "7e0bf197ad5ec0e66bb5e263efe0d328ea170e39e2695d0623e6f281da75348d",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.cxx": "ea2a587de0fa3eda4455a3bf29fb73aab0ca628927bb531498e072f0d5d2c960",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx": "a1172b06eec049b5016f2f478a354ce837811a78c0fdac5a76d99c1608509beb"
+  }
+}

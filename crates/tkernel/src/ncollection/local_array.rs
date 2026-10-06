@@ -1,6 +1,9 @@
 //! Inline storage adapter retaining NCollection_LocalArray allocation semantics.
 use smallvec::SmallVec;
 
+mod pointers;
+mod trivial_move;
+
 /// Contiguous storage with `N` inline elements before allocation moves to the heap.
 ///
 /// ```
@@ -139,8 +142,14 @@ impl<T, const N: usize> LocalArray<T, N> {
     }
 
     /// Transfers storage and leaves the source empty; `dest.move_from(&mut source)`.
-    pub fn move_from(&mut self, source: &mut Self) {
+    pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
         *self = std::mem::take(source);
+        self
+    }
+
+    /// Preserves the receiver for native self assignment; `array.move_self()`.
+    pub fn move_self(&mut self) -> &mut Self {
+        self
     }
 
     /// Releases all elements and returns to inline storage; `array.deallocate()`.

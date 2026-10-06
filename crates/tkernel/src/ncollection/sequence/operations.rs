@@ -1,13 +1,13 @@
-use super::{Sequence, SequenceCursor, SequenceNode, out_of_range};
+use super::{Sequence, SequenceCursor, out_of_range};
 use crate::standard::Failure;
 impl<T> Sequence<T> {
     /// Constructs an appended item; `sequence.emplace_append(|| Pair(1,2.0))`.
     pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
-        self.append(construct())
+        self.insert_node_with(self.len(), construct)
     }
     /// Constructs a prepended item; `sequence.emplace_prepend(|| Pair(1,2.0))`.
     pub fn emplace_prepend(&mut self, construct: impl FnOnce() -> T) -> &mut T {
-        self.prepend(construct())
+        self.insert_node_with(0, construct)
     }
     /// Constructs after a one-based index (0 prepends), checking the index before
     /// constructing as OCCT does; `sequence.emplace_after(1, || Pair(1,2.0))?`.
@@ -20,7 +20,7 @@ impl<T> Sequence<T> {
             let expected = format!("0..={}", self.len());
             return Err(out_of_range("EmplaceAfter", index, &expected));
         }
-        Ok(self.insert_node(index, construct()))
+        Ok(self.insert_node_with(index, construct))
     }
     /// Constructs before a one-based index; `sequence.emplace_before(2, || Pair(1,2.0))?`.
     pub fn emplace_before(
@@ -41,16 +41,17 @@ impl<T> Sequence<T> {
         construct: impl FnOnce() -> T,
     ) -> Result<&mut T, Failure> {
         let offset = self.cursor_insertion("EmplaceAfter", cursor)?;
-        Ok(self.insert_node(offset, construct()))
+        Ok(self.insert_node_with(offset, construct))
     }
 }
 impl<T: Clone> Sequence<T> {
     /// Copies elements into this allocator; `sequence.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
+    pub fn assign(&mut self, source: &Self) -> &mut Self {
         self.clear(None);
         for value in source.iter() {
-            self.append(value.clone());
+            self.append_ref(value);
         }
+        self
     }
     /// Appends and empties a source sequence; `sequence.append_sequence(&mut source)`.
     pub fn append_sequence(&mut self, source: &mut Self) {
@@ -92,19 +93,16 @@ impl<T: Clone> Sequence<T> {
     /// Moves (same allocator) or copies and clears (other allocator) `source` after `offset`.
     fn splice_sequence(&mut self, offset: usize, source: &mut Self) {
         if self.resource == source.resource {
+            let moved = source.len();
             self.nodes.splice(offset..offset, source.nodes.drain(..));
+            self.refresh_links_around(offset);
+            self.refresh_links_around(offset + moved);
             return;
         }
-        let copies: Vec<_> = source
-            .iter()
-            .map(|value| {
-                self.resource.allocate_value(SequenceNode {
-                    value: value.clone(),
-                    _allocation_identity: 0,
-                })
-            })
-            .collect();
-        self.nodes.splice(offset..offset, copies);
+        // Native prependSeq/appendSeq link each successful copy before the next copy begins.
+        for (index, value) in source.iter().enumerate() {
+            self.insert_node_with(offset + index, || value.clone());
+        }
         source.clear(None);
     }
 }

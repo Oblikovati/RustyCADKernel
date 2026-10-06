@@ -34,12 +34,20 @@ macro_rules! components_3d {
 /// Component getters by position, as the const `x()`, `y()`, ...; the fields are public, so
 /// the non-const reference overloads are plain field access.
 macro_rules! position_getters {
-    ($vector:ident, [$($field:ident),+]) => {
+    ($vector:ident, [$(($field:ident, $mutable:ident)),+]) => {
         impl<T: Copy> $vector<T> {
             $(
                 #[doc = concat!("Reads `", stringify!($field), "`, as the const `", stringify!($field), "()`.")]
                 pub const fn $field(&self) -> T {
                     self.$field
+                }
+            )+
+        }
+        impl<T> $vector<T> {
+            $(
+                #[doc = concat!("Borrows native mutable coordinate `", stringify!($field), "()`; `*vector.", stringify!($mutable), "() = value`.")]
+                pub const fn $mutable(&mut self) -> &mut T {
+                    &mut self.$field
                 }
             )+
         }
@@ -62,9 +70,9 @@ macro_rules! color_aliases {
         }
     };
 }
-position_getters!(Vec2, [x, y]);
-position_getters!(Vec3, [x, y, z]);
-position_getters!(Vec4, [x, y, z, w]);
+position_getters!(Vec2, [(x, x_mut), (y, y_mut)]);
+position_getters!(Vec3, [(x, x_mut), (y, y_mut), (z, z_mut)]);
+position_getters!(Vec4, [(x, x_mut), (y, y_mut), (z, z_mut), (w, w_mut)]);
 color_aliases!(Vec3, [(x, r, r_mut), (y, g, g_mut), (z, b, b_mut)]);
 color_aliases!(
     Vec4,
