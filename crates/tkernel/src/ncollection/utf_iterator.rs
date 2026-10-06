@@ -139,6 +139,11 @@ impl<T: UtfUnit> UtfIterator<'_, T> {
         self.get_utf(out)
     }
 
+    /// Writes native signed-char UTF-8 storage; `iter.get_utf8_signed(&mut bytes)?`.
+    pub fn get_utf8_signed(&self, out: &mut [i8]) -> Result<usize, UtfBufferError> {
+        self.get_utf(out)
+    }
+
     /// Writes the symbol as UTF-16 at the start of `out`; returns the units written.
     pub fn get_utf16(&self, out: &mut [u16]) -> Result<usize, UtfBufferError> {
         self.get_utf(out)

@@ -10,19 +10,21 @@ pub type WideChar = u32;
 pub type WideChar = u16;
 
 /// A Unicode code unit (`u8` UTF-8, `u16` UTF-16, `u32` UTF-32), chosen by size as
-/// `CharTypeChooser` does; implemented only for those three types.
+/// `CharTypeChooser` does; also supports signed UTF-8 units (`i8`) with native unsigned-byte decoding.
 ///
 /// ```
 /// use rustycad_tkernel::ncollection::UtfUnit;
 /// assert_eq!(<u16 as UtfUnit>::advance_bytes(0x1F600), 4);
 /// ```
-pub trait UtfUnit: Copy + Default + Eq + Debug + Into<u32> + 'static {
+pub trait UtfUnit: Copy + Default + Eq + Debug + 'static {
     /// Decodes the symbol at `position`; returns it and the next symbol's position.
     fn read_symbol(buffer: &[Self], position: usize) -> (u32, usize);
     /// Bytes needed to store `symbol` in this encoding (`AdvanceBytesUtf<Self>`).
     fn advance_bytes(symbol: u32) -> usize;
     /// Encodes `symbol` into `out`, which holds exactly `advance_bytes / size_of::<Self>()` units.
     fn write_symbol(symbol: u32, out: &mut [Self]);
+    /// Returns storage bits without sign extension; `assert_eq!(255u8.to_bits(), 255)`.
+    fn to_bits(self) -> u32;
     /// Reinterprets a raw 32-bit value as this unit, truncating like a native store.
     fn from_bits(value: u32) -> Self;
 }
@@ -36,6 +38,9 @@ impl UtfUnit for u8 {
     }
     fn write_symbol(symbol: u32, out: &mut [Self]) {
         encode::write_utf8(symbol, out);
+    }
+    fn to_bits(self) -> u32 {
+        self as u32
     }
     fn from_bits(value: u32) -> Self {
         value as u8
@@ -51,6 +56,9 @@ impl UtfUnit for u16 {
     }
     fn write_symbol(symbol: u32, out: &mut [Self]) {
         encode::write_utf16(symbol, out);
+    }
+    fn to_bits(self) -> u32 {
+        self as u32
     }
     fn from_bits(value: u32) -> Self {
         value as u16
@@ -68,7 +76,28 @@ impl UtfUnit for u32 {
     fn write_symbol(symbol: u32, out: &mut [Self]) {
         out[0] = symbol;
     }
+    fn to_bits(self) -> u32 {
+        self
+    }
     fn from_bits(value: u32) -> Self {
         value
+    }
+}
+
+impl UtfUnit for i8 {
+    fn read_symbol(buffer: &[Self], position: usize) -> (u32, usize) {
+        encode::read_utf8(buffer, position)
+    }
+    fn advance_bytes(symbol: u32) -> usize {
+        encode::utf8_length(symbol)
+    }
+    fn write_symbol(symbol: u32, out: &mut [Self]) {
+        encode::write_utf8(symbol, out);
+    }
+    fn to_bits(self) -> u32 {
+        self as u8 as u32
+    }
+    fn from_bits(value: u32) -> Self {
+        value as i8
     }
 }

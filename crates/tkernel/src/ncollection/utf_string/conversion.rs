@@ -37,7 +37,7 @@ impl<T: UtfUnit> UtfString<T> {
         let mut text = Self::with_size((count * std::mem::size_of::<T>()) as i32, end.index());
         for (slot, offset) in text.units[..count].iter_mut().zip(0..) {
             // An overrun past the slice end copies the zeros the model reads there.
-            *slot = T::from_bits(source.get(offset).map_or(0, |&unit| unit.into()));
+            *slot = T::from_bits(source.get(offset).map_or(0, |&unit| unit.to_bits()));
         }
         text
     }

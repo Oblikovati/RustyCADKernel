@@ -22,7 +22,7 @@ fn units_text<T: UtfUnit>(units: &[T]) -> String {
     }
     let hex: Vec<String> = units
         .iter()
-        .map(|&unit| format!("{:x}", Into::<u32>::into(unit)))
+        .map(|&unit| format!("{:x}", unit.to_bits()))
         .collect();
     hex.join(",")
 }

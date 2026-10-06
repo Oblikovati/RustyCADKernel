@@ -27,8 +27,8 @@ const OFFSETS_FROM_UTF8: [u32; 6] = [
 
 /// The code unit at `index`, or 0 past the end: slices model NUL-terminated buffers whose
 /// trailing storage reads as zeros, so an unprotected overrun (native UB) stays defined.
-pub(super) fn unit_at<T: Copy + Into<u32>>(buffer: &[T], index: usize) -> u32 {
-    buffer.get(index).map_or(0, |&unit| unit.into())
+pub(super) fn unit_at<T: super::UtfUnit>(buffer: &[T], index: usize) -> u32 {
+    buffer.get(index).map_or(0, |&unit| unit.to_bits())
 }
 
 /// Trailing bytes announced by a UTF-8 lead byte (the native UTF8_BYTES_MINUS_ONE table).
@@ -44,7 +44,7 @@ fn utf8_trailing_bytes(lead: u32) -> usize {
 }
 
 /// readUTF8: decodes without validation (5- and 6-byte forms included); returns (symbol, next).
-pub(super) fn read_utf8(buffer: &[u8], position: usize) -> (u32, usize) {
+pub(super) fn read_utf8<T: super::UtfUnit>(buffer: &[T], position: usize) -> (u32, usize) {
     let trailing = utf8_trailing_bytes(unit_at(buffer, position));
     let mut symbol: u32 = 0;
     // The native switch falls through: add, then shift, for every byte but the last.
@@ -101,15 +101,15 @@ pub(super) fn utf16_length(symbol: u32) -> usize {
 }
 
 /// GetUtf8 into `out` (sized by `utf8_length`); the continuation bytes are filled last-first.
-pub(super) fn write_utf8(symbol: u32, out: &mut [u8]) {
+pub(super) fn write_utf8<T: super::UtfUnit>(symbol: u32, out: &mut [T]) {
     let length = out.len();
     let mut rest = symbol;
     for slot in (1..length).rev() {
-        out[slot] = ((rest | UTF8_BYTE_MARK) & UTF8_BYTE_MASK) as u8;
+        out[slot] = T::from_bits((rest | UTF8_BYTE_MARK) & UTF8_BYTE_MASK);
         rest >>= 6;
     }
     if length > 0 {
-        out[0] = (rest | UTF8_FIRST_BYTE_MARK[length]) as u8;
+        out[0] = T::from_bits(rest | UTF8_FIRST_BYTE_MARK[length]);
     }
 }
 
