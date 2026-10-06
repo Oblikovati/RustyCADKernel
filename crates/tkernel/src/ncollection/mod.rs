@@ -204,3 +204,9 @@ pub use sparse_array_base::{
 mod map_node;
 mod node_owner;
 pub use map_node::{MapNode, MapNodeOwner};
+
+mod indexed_data_map_node;
+mod indexed_map_node;
+mod indexed_node_owner;
+pub use indexed_data_map_node::{IndexedDataMapNode, IndexedDataMapNodeOwner};
+pub use indexed_map_node::{IndexedMapNode, IndexedMapNodeOwner};

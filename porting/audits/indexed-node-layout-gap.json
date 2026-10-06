@@ -1,0 +1,219 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Measured open IndexedMapNode/IndexedDataMapNode allocation-byte and field-offset gaps",
+  "candidate_revision": "b2465724",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "status": "partial; mandatory layout correction before indexed container migration",
+  "target": "x86_64-unknown-linux-gnu",
+  "compilers": {
+    "native": "g++ Ubuntu 13.3.0-6ubuntu2~24.04.1",
+    "rust": "rustc 1.98.1 (48a229cea 2026-09-01)"
+  },
+  "source_sha256": {
+    "indexed-layout-native.cxx": "7d26bb652deb5bbd2d93f930f1ab4360cf6a285da9eab4177d972beac4df9ac4",
+    "indexed-layout-rust.rs": "c21c60dc62cff83db9e5226efad78545e01e342bf86cb134d26fae9ab6f02dad"
+  },
+  "candidate_rlib_sha256": "7d9868358aaef257a85e53c46063afee44cbce5d1a4a86cddb22e4956056b087",
+  "artifact_sha256": {
+    "porting/runtime-evidence/indexed-node-layout-gap-sources.tar.gz": "dc32b1ec7e4335aee740e0c0c8bd69747fdcd7dd62f9923d0ea88667fdc73ce5",
+    "porting/runtime-evidence/indexed-node-layout-gap-native.log.gz": "5721b51531ed921ef1942000cebc0425233ee34dc2198a50b1bf3b43f2e85cc1",
+    "porting/runtime-evidence/indexed-node-layout-gap-rust.log.gz": "8c2184a87a5ac2453da8795f11a012048dda4c548146a91aa3fa4269524960de",
+    "porting/runtime-evidence/indexed-node-layout-gap-comparison.json.gz": "2eb1ee08e497a1c65dd61aaf608f945cf7515769995df02b967b9b40373f65fa"
+  },
+  "rows_compared": 10,
+  "rows_equal": 3,
+  "rows_differing": 7,
+  "measurements": [
+    {
+      "label": "map_u8",
+      "native": {
+        "size": 16,
+        "alignment": 8,
+        "key_offset": 8,
+        "index_offset": 12
+      },
+      "rust": {
+        "size": 24,
+        "alignment": 8,
+        "key_offset": 8,
+        "index_offset": 16
+      },
+      "equal": false
+    },
+    {
+      "label": "map_i32",
+      "native": {
+        "size": 16,
+        "alignment": 8,
+        "key_offset": 8,
+        "index_offset": 12
+      },
+      "rust": {
+        "size": 24,
+        "alignment": 8,
+        "key_offset": 8,
+        "index_offset": 16
+      },
+      "equal": false
+    },
+    {
+      "label": "map_wide",
+      "native": {
+        "size": 96,
+        "alignment": 32,
+        "key_offset": 32,
+        "index_offset": 64
+      },
+      "rust": {
+        "size": 96,
+        "alignment": 32,
+        "key_offset": 32,
+        "index_offset": 64
+      },
+      "equal": true
+    },
+    {
+      "label": "data_u8_u8",
+      "native": {
+        "size": 16,
+        "alignment": 8,
+        "key_offset": 9,
+        "value_offset": 8,
+        "index_offset": 12
+      },
+      "rust": {
+        "size": 32,
+        "alignment": 8,
+        "key_offset": 16,
+        "value_offset": 8,
+        "index_offset": 24
+      },
+      "equal": false
+    },
+    {
+      "label": "data_i32_u8",
+      "native": {
+        "size": 24,
+        "alignment": 8,
+        "key_offset": 12,
+        "value_offset": 8,
+        "index_offset": 16
+      },
+      "rust": {
+        "size": 32,
+        "alignment": 8,
+        "key_offset": 16,
+        "value_offset": 8,
+        "index_offset": 24
+      },
+      "equal": false
+    },
+    {
+      "label": "data_u8_i32",
+      "native": {
+        "size": 24,
+        "alignment": 8,
+        "key_offset": 12,
+        "value_offset": 8,
+        "index_offset": 16
+      },
+      "rust": {
+        "size": 32,
+        "alignment": 8,
+        "key_offset": 16,
+        "value_offset": 8,
+        "index_offset": 24
+      },
+      "equal": false
+    },
+    {
+      "label": "data_i32_i32",
+      "native": {
+        "size": 24,
+        "alignment": 8,
+        "key_offset": 12,
+        "value_offset": 8,
+        "index_offset": 16
+      },
+      "rust": {
+        "size": 32,
+        "alignment": 8,
+        "key_offset": 16,
+        "value_offset": 8,
+        "index_offset": 24
+      },
+      "equal": false
+    },
+    {
+      "label": "data_wide_u8",
+      "native": {
+        "size": 96,
+        "alignment": 32,
+        "key_offset": 32,
+        "value_offset": 8,
+        "index_offset": 64
+      },
+      "rust": {
+        "size": 96,
+        "alignment": 32,
+        "key_offset": 32,
+        "value_offset": 8,
+        "index_offset": 64
+      },
+      "equal": true
+    },
+    {
+      "label": "data_u8_wide",
+      "native": {
+        "size": 96,
+        "alignment": 32,
+        "key_offset": 64,
+        "value_offset": 32,
+        "index_offset": 68
+      },
+      "rust": {
+        "size": 128,
+        "alignment": 32,
+        "key_offset": 64,
+        "value_offset": 32,
+        "index_offset": 96
+      },
+      "equal": false
+    },
+    {
+      "label": "data_wide_wide",
+      "native": {
+        "size": 128,
+        "alignment": 32,
+        "key_offset": 64,
+        "value_offset": 32,
+        "index_offset": 96
+      },
+      "rust": {
+        "size": 128,
+        "alignment": 32,
+        "key_offset": 64,
+        "value_offset": 32,
+        "index_offset": 96
+      },
+      "equal": true
+    }
+  ],
+  "reproduction": {
+    "native": "g++ -std=c++17 -fno-access-control -I <native-build>/include/opencascade indexed-layout-native.cxx -L <native-build>/lin64/gcc/libi -Wl,-rpath,<native-build>/lin64/gcc/libi -lTKernel -o indexed-layout-native; ./indexed-layout-native",
+    "rust": "rustc --edition=2024 indexed-layout-rust.rs --extern rustycad_tkernel=<candidate-target>/debug/deps/librustycad_tkernel-<hash>.rlib -L dependency=<candidate-target>/debug/deps -o indexed-layout-rust; ./indexed-layout-rust"
+  },
+  "interpretation": [
+    "Pointer-prefix offset zero remains true. It does not prove native key/index byte offsets or allocation request sizes.",
+    "Rust nested repr(C) preserves complete MapNode/DataMapNode tail padding; native derived fields reuse TListNode base tail padding. IndexedDataMapNode derives directly from TListNode<V>, not DataMapNode.",
+    "Constructor/accessor/drop evidence remains scoped behavior evidence. This follow-up explicitly falsifies full native node layout/allocation-byte parity for seven of ten measured payload combinations.",
+    "align32 payload is one u8 member in a 32-byte aligned object; Rust counterpart has repr(C,align(32)). Measurements do not claim arbitrary cross-language payload ABI equivalence."
+  ],
+  "required_next_slice": [
+    "Flat repr(C) IndexedMapNode fields MapLinkNode,K,i32; flat IndexedDataMapNode fields MapLinkNode,ManuallyDrop<V>,ManuallyDrop<K>,i32.",
+    "Map agent owns shared construct_value_then_key factories and drop_key_then_value cleanup. Indexed nodes consume shared helpers after integration; no full ListValueNode/DataMapNode reference may overlap native reused padding.",
+    "Rerun all measured rows and allocation-byte requests, existing constructor/drop oracle and original suites plus Miri. Scope ABI claims to equivalent mapped payload sizes/alignments; C++ empty objects and Rust ZST need an explicit adapter for byte equality."
+  ],
+  "api_parity_credit": 0,
+  "compiler_body_binding_performed": false
+}
