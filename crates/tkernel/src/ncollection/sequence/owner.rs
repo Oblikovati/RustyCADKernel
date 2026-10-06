@@ -1,7 +1,7 @@
 //! Owners retain allocation provenance without borrowing complete nodes during link traversal.
+use super::super::node_release::release_typed_node;
 use super::{BaseAllocator, SeqNode, SequenceNode};
-use allocator_api2::alloc::Allocator;
-use std::{alloc::Layout, marker::PhantomData, ptr::NonNull};
+use std::marker::PhantomData;
 
 pub(super) struct SequenceNodeOwner<T> {
     pub(super) link: *mut SeqNode,
@@ -24,28 +24,10 @@ impl<T> SequenceNodeOwner<T> {
         }
     }
 }
-struct SequenceAllocationRelease<'a> {
-    allocator: &'a BaseAllocator,
-    pointer: NonNull<u8>,
-    layout: Layout,
-}
-impl Drop for SequenceAllocationRelease<'_> {
-    fn drop(&mut self) {
-        // SAFETY: this guard consumes the original typed allocation exactly once, even on unwind.
-        unsafe { self.allocator.deallocate(self.pointer, self.layout) };
-    }
-}
 impl<T> Drop for SequenceNodeOwner<T> {
     fn drop(&mut self) {
-        let allocation = SequenceAllocationRelease {
-            allocator: &self.allocator,
-            pointer: NonNull::new(self.link.cast()).expect("owned sequence node is nonnull"),
-            layout: Layout::new::<SequenceNode<T>>(),
-        };
-        // allocator-api2 0.4.0 Box::drop lacks unwind deallocation. Keep this guard alive
-        // while running user destruction, preserving allocator provenance and original layout.
-        unsafe { std::ptr::drop_in_place(self.link.cast::<SequenceNode<T>>()) };
-        drop(allocation);
+        // SAFETY: this owner uniquely retains the original typed node allocation.
+        unsafe { release_typed_node(self.link.cast::<SequenceNode<T>>(), &self.allocator) };
     }
 }
 pub(super) fn take_owner<T>(

@@ -67,7 +67,10 @@ pub use base_list::{
     BaseListBasicIterator, BaseListRawIterator, BaseListStorage, BasicListNode, BasicListNodeMut,
     DelListNode,
 };
+#[allow(unsafe_code)]
 mod list;
+#[allow(unsafe_code)]
+mod node_release;
 #[allow(unsafe_code)]
 mod list_node;
 pub use list::List as AllocatorList;
