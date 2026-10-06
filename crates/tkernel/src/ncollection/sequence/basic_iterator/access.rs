@@ -28,11 +28,23 @@ impl<N: BasicSequenceNode> BaseSequenceBasicIterator<N, false> {
     pub unsafe fn dereference(&self) -> &N::Item {
         unsafe { self.value() }
     }
+    /// Applies native overloaded address-of after Value; `unsafe { cursor.arrow_with(address) }`.
+    /// # Safety
+    /// The node must satisfy value's live readable-node contract for policy dispatch.
+    /// The policy must preserve that borrow. Returned raw-pointer validity, provenance and
+    /// read permissions must be established separately before dereference.
+    pub unsafe fn arrow_with(
+        &self,
+        address: impl FnOnce(&N::Item) -> *const N::Item,
+    ) -> *const N::Item {
+        // SAFETY: caller guarantees the node remains shared-readable during dispatch.
+        address(unsafe { self.dereference() })
+    }
     /// Implements native const operator-> via Value; `unsafe { cursor.arrow() }`.
     /// # Safety
     /// The node must satisfy value's readable-node contract during this call.
     pub unsafe fn arrow(&self) -> *const N::Item {
-        unsafe { self.value_ptr() }
+        unsafe { self.arrow_with(std::ptr::from_ref) }
     }
 }
 impl<N: BasicSequenceNode> BaseSequenceBasicIterator<N, true> {
@@ -64,10 +76,22 @@ impl<N: BasicSequenceNodeMut> BaseSequenceBasicIterator<N, true> {
     pub unsafe fn dereference(&mut self) -> &mut N::Item {
         unsafe { self.change_value() }
     }
+    /// Applies mutable overloaded address-of after ChangeValue; `unsafe { cursor.arrow_with(address) }`.
+    /// # Safety
+    /// The node must satisfy change_value's live exclusive-node contract for policy dispatch.
+    /// The policy must preserve that borrow. Returned raw-pointer validity, provenance and
+    /// write permissions must be established separately before dereference.
+    pub unsafe fn arrow_with(
+        &mut self,
+        address: impl FnOnce(&mut N::Item) -> *mut N::Item,
+    ) -> *mut N::Item {
+        // SAFETY: caller guarantees exclusive access while the address policy runs.
+        address(unsafe { self.dereference() })
+    }
     /// Implements native mutable operator-> through ChangeValue; `unsafe { cursor.arrow() }`.
     /// # Safety
     /// The node must satisfy change_value's exclusive-node contract for this call.
     pub unsafe fn arrow(&mut self) -> *mut N::Item {
-        std::ptr::from_mut(unsafe { self.change_value() })
+        unsafe { self.arrow_with(std::ptr::from_mut) }
     }
 }

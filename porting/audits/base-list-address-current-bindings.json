@@ -1,0 +1,32 @@
+{
+  "schema": "rustycad.exact-partial-binding-current-proof.v1",
+  "status": "current_source_proof_pending_integration",
+  "scope": "Refresh compiler-derived body evidence only; exact native IDs, proposed ledger rows and partial domains preserved. All existing signature/impl/kind/path fields are identical. Declaration digests change with whole-file source hashes; the five affected existing method bodies are independently checked unchanged against Git base. Historical receipt and archives unchanged.",
+  "base_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "historical_receipt": "porting/audits/base-list-ledger-bindings.json",
+  "native_ids_preserved": 63,
+  "ledger_rows_unchanged": true,
+  "implemented_credit_delta": 0,
+  "changed_source_hash_records": [
+    {
+      "cpp_id": "67b17825739975517785b17ad8b787b9cac9b1fcf59fe2656cf24beea6e615ed",
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::change_value",
+      "old_source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "current_source_sha256": "baf8bcf71eb092d74bb6504bb83b5709b878fe53a104b3dca7292a2bd6a1eb0e"
+    }
+  ],
+  "bindings_path": "porting/runtime-evidence/base-iterator-address-base-list-current.jsonl.gz",
+  "bindings_sha256": "6669d27f7ebcbcba74f50454b8b45b3c11a588010a601e276f0391dee38fe5a5",
+  "rust_inventory_path": "porting/runtime-evidence/base-iterator-address-normalized.json.gz",
+  "rust_inventory_sha256": "172311ac079321500a03d68367c7ed77c7cb6f63e2bb540f4bd96a20a2b0bec3",
+  "raw_compiler_path": "porting/runtime-evidence/base-iterator-address-rustdoc.json.gz",
+  "raw_compiler_sha256": "e308bfe2ff5fc11415774abc66ef028233fa209de04a43afcd200371c6d21175",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator.rs": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+    "crates/tkernel/src/ncollection/base_list.rs": "391b5f76f2ebe9ac1851180e2744efcf68d787aa55d269f4cd4f0fd0efd409a1",
+    "crates/tkernel/src/ncollection/base_list/splicing.rs": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+    "crates/tkernel/src/ncollection/base_list/editing.rs": "0d9f09eeabccad4c528ffd1a69979b2ba3dad2f2139719bbd5abca674a64ec26",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "baf8bcf71eb092d74bb6504bb83b5709b878fe53a104b3dca7292a2bd6a1eb0e"
+  }
+}
