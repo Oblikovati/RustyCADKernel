@@ -1,0 +1,262 @@
+{
+  "schema": "rustycad.scoped-runtime-diagnosis.v1",
+  "scope": "BVH sphere runtime regression diagnosis after List cursor membership lookup fix; no production edits",
+  "source_commit": "22f47b0ffb8f359153c2730a13061f957faf2334",
+  "native_reference": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "source": "src/FoundationClasses/TKMath/GTests/BVH_PairDistance_Test.cxx",
+    "sha256": "f42897d5435f7dcc75421bccc64675eed61b8ca4d56ecb4af04f47b4129d6312",
+    "declaration": "BVH_PairDistanceTest.Bug30655_SphereDistance",
+    "line": 220,
+    "native_rerun_this_slice": false
+  },
+  "rust_reference": {
+    "source": "crates/tkmath/tests/bvh_bug30655.rs",
+    "sha256": "dfbe7e73544fd3382dcafad1d651e58c11f238a2fd4c3ce7269a98c6953fabcd",
+    "declaration": "BVH_PairDistanceTest__Bug30655_SphereDistance",
+    "line": 301,
+    "source_last_changed": "6363dca973e3387db26dc81ab12285f12e3e92fe",
+    "assertions_unchanged": true,
+    "test_threads": 1
+  },
+  "input_comparison": {
+    "instrumented_source_identical": true,
+    "instrumented_source_sha256": "219453c06ed83ead4a47c01b54a449e25edfc1d5d5ab8a56481daa8c2681451f",
+    "changed_linked_rlibs": [
+      "tkernel",
+      "tkmath",
+      "tkg3d",
+      "tkbrep",
+      "tktopalgo",
+      "tkprim",
+      "tkmesh"
+    ],
+    "test_threads": 1,
+    "root_source_sha256": "dfbe7e73544fd3382dcafad1d651e58c11f238a2fd4c3ce7269a98c6953fabcd"
+  },
+  "old_linked_libraries": {
+    "tkernel": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkernel-af2d3799ec5720f7.rlib",
+      "sha256": "90af076e1e10f73705b1c483911257ea0db9d7343988f51876333ecef165a681"
+    },
+    "tkmath": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkmath-db2ba724e5f136c0.rlib",
+      "sha256": "e03cad5c85bc3f7af8f96729c582754be6ed4ee9b9452c5a60ef349195a5e165"
+    },
+    "tkg3d": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkg3d-2f09a37c6d4a24b2.rlib",
+      "sha256": "ba67c2ef110496f2ff842cf20c7dfb0e1efe1991568283ec2a3fa8a528297281"
+    },
+    "tkbrep": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkbrep-f385b546aa3122e1.rlib",
+      "sha256": "0acf38f51186adce88c2d847b83000a20a92b7eb26e4650d2adb69f7704d16a1"
+    },
+    "tktopalgo": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tktopalgo-d04ab56ac81af312.rlib",
+      "sha256": "b687c1170a9582c7ca9ea462e5d89500a6c04f740bc79622da43b890e30c4808"
+    },
+    "tkprim": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkprim-07a316c07e0b293c.rlib",
+      "sha256": "41ad8439b06fb187b1fab673792c6ebe486fc49e21ea4a05ec351b408e5b979f"
+    },
+    "tkmesh": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkmesh-37b24e800bb6958c.rlib",
+      "sha256": "988939e4a352a67800950cf7300b01dc6c9c8936702400e32414c25cadd4bc2a"
+    }
+  },
+  "new_linked_libraries": {
+    "tkernel": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkernel-af2d3799ec5720f7.rlib",
+      "sha256": "b04c5c58b6b0a9cad1c8ef482f575c8040b97e40b1066993b9b396251f45b279"
+    },
+    "tkmath": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkmath-db2ba724e5f136c0.rlib",
+      "sha256": "542f9dfa0379b55abe6d71b83675c237cfd561100ab0d85007c45923e8d95662"
+    },
+    "tkg3d": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkg3d-2f09a37c6d4a24b2.rlib",
+      "sha256": "48d3b142555014cf452dbf90b9a2b4293987f82acde9960225265038daadc176"
+    },
+    "tkbrep": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkbrep-f385b546aa3122e1.rlib",
+      "sha256": "22ec2c85011a70981a9553670dd1651589fd2dd3a68175dbd417530ba8e26554"
+    },
+    "tktopalgo": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tktopalgo-d04ab56ac81af312.rlib",
+      "sha256": "c510374e7c6748919af4907a4f38343d529a58e008b2380f8547a739ca19e7b9"
+    },
+    "tkprim": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkprim-07a316c07e0b293c.rlib",
+      "sha256": "b2594460ded99bea1b27c1c9f4c66596938ffe4410794711d7de01b542a01fc4"
+    },
+    "tkmesh": {
+      "path": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/librustycad_tkmesh-37b24e800bb6958c.rlib",
+      "sha256": "db2adb9d03a1d84d6822bb5160fea7e25920622cde84c9f3a4494a62e663c2e5"
+    }
+  },
+  "original_regression": {
+    "binary_sha256": "901b6c736ac0b1b9766bf3abd90e825db0845517cd32b9df6516e317f981e9cb",
+    "command": [
+      "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps/bvh_bug30655-f84a5d364df07d15",
+      "--exact",
+      "BVH_PairDistanceTest__Bug30655_SphereDistance",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "wall_seconds": 237.894193229964,
+    "user_cpu_seconds": 237.398765,
+    "system_cpu_seconds": 0.31305999999999995,
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "filtered_out": 2,
+    "log_in_archive": "new/original-run.log"
+  },
+  "instrumented_regression": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "filtered_out": 2,
+    "wall_seconds": 238.5,
+    "source_sha256": "219453c06ed83ead4a47c01b54a449e25edfc1d5d5ab8a56481daa8c2681451f",
+    "binary_sha256": "dcf802e01e4a3a642445821e9439ba6c995a3dab57e4a1a3fe3fe64a60be92dc",
+    "log_in_archive": "new/sampled-run.log",
+    "stages": [
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "sphere_1_shape",
+        "wall_ms": 1,
+        "cpu_ticks": 0
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "sphere_1_mesh",
+        "wall_ms": 93733,
+        "cpu_ticks": 9365
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "sphere_2_shape",
+        "wall_ms": 0,
+        "cpu_ticks": 0
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "sphere_2_mesh",
+        "wall_ms": 102830,
+        "cpu_ticks": 10276
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "triangle_extract_1",
+        "wall_ms": 53,
+        "cpu_ticks": 6
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "triangle_extract_2",
+        "wall_ms": 58,
+        "cpu_ticks": 5
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "bvh_build_1",
+        "wall_ms": 502,
+        "cpu_ticks": 51
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "bvh_build_2",
+        "wall_ms": 547,
+        "cpu_ticks": 54
+      },
+      {
+        "probe": "sphere-stage",
+        "event": "end",
+        "stage": "pair_distance",
+        "wall_ms": 40753,
+        "cpu_ticks": 4075
+      }
+    ],
+    "triangle_counts": {
+      "first": 100520,
+      "second": 110588
+    },
+    "accepted_pair_progress_last": 417000,
+    "cpu_ticks_per_second": 100
+  },
+  "sample_windows": {
+    "old_first_sphere_mesh": {
+      "file_in_archive": "old/bvh-stage-ptrace-samples.json",
+      "sample_count": 200,
+      "window_seconds": 4.017685579950921,
+      "direct_find_cursor_samples": 54,
+      "named_initialized_tail_samples": 0,
+      "unresolved_samples": 1
+    },
+    "fixed_first_sphere_mesh_early": {
+      "file_in_archive": "new/ptrace-samples.json",
+      "sample_count": 200,
+      "window_seconds": 4.057726445957087,
+      "direct_find_cursor_samples": 0,
+      "named_initialized_tail_samples": 21,
+      "unresolved_samples": 14
+    },
+    "fixed_first_sphere_mesh_after_60_seconds": {
+      "file_in_archive": "new/late-ptrace-samples.json",
+      "sample_count": 200,
+      "window_seconds": 4.059128941036761,
+      "direct_find_cursor_samples": 0,
+      "named_initialized_tail_samples": 62,
+      "unresolved_samples": 14
+    }
+  },
+  "findings": [
+    "Old libraries directly sampled List<i32>::find_cursor54/200; fixed early and60s windows both0/200. This localizes a removed cursor lookup hotspot in real sphere meshing.",
+    "The fixed original regression passes in237.894s wall,237.712s CPU. The staged copy passes in238.50s. No assertion or geometry input was reduced.",
+    "Sphere meshing accounts for196.563s of the staged run, extraction111ms, BVH construction1049ms, pair-distance40.753s.",
+    "The later fixed window has62/200 samples in symbols explicitly naming DynamicArray::has_initialized_tail. This implementation predates the historical125s checkpoint, so these samples do not establish a new regression cause.",
+    "No source difference between2dd0b974 and22f47b0f in tkmesh, tkprim, tkg3d, tkbrep, tktopalgo, or the sphere regression. This does not establish identical generated mesh work without baseline counts."
+  ],
+  "limitations": [
+    "Old instrumented runs were terminated after hotspot collection; no old completed timing or old green regression is claimed.",
+    "Historical125s whole-binary result is contextual parent evidence, not a controlled old-checkpoint run in this slice. Residual runtime difference remains unattributed.",
+    "RIP sampling records bounded symbol hits, not call stacks. Shared helper samples are not assigned to callers. Unknown external addresses remain unresolved.",
+    "Different library builds include four merged branches; improvement is supported by direct cursor symbols and existing List scaling evidence, not a one-change A/B experiment.",
+    "Fixed probe and original ran concurrently with the root workspace check and a later diagnostic probe; both used near one full CPU, but environmental timing variance is not eliminated.",
+    "The60s sampling-only child was deliberately terminated; it provides profile evidence and no passing-test credit.",
+    "This receipt reruns an existing translated regression and grants no new API or original-test mapping coverage."
+  ],
+  "related_receipts": [
+    "porting/audits/list-indexed-ownership-methods.json",
+    "porting/audits/list-indexed-ownership-scaling.json"
+  ],
+  "coverage_credit": {
+    "new_api_declarations": 0,
+    "new_original_test_mappings": 0,
+    "existing_original_rust_tests_rerun": 1
+  },
+  "artifact": {
+    "path": "porting/runtime-evidence/bvh-sphere-list-hotspot-comparison.json.gz",
+    "sha256": "d85fdeb7af1ea6d26af69f039cd0f5b0da324d363e131364ff6b338d70523840",
+    "uncompressed_sha256": "cb4d076e76eaddae5c663130ad15e7afb77563c5ecddfb71a51955eb85c81006",
+    "format": "gzip JSON with exact text and SHA256 for each evidence file"
+  },
+  "verification": {
+    "instrumented_source_identical": true,
+    "original_exit": 0,
+    "probe_exit": 0,
+    "late_sampling_exit": -15,
+    "no_production_source_changes": true,
+    "jobs_remaining": 0
+  }
+}
