@@ -3,7 +3,7 @@ use super::*;
 impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn move_from_with(source: &mut Self, take_policy: impl FnOnce(&mut H) -> H) -> Self {
         let buckets = source.bucket_count;
-        let resource = source.resource.clone();
+        let resource = source.resource().clone();
         let mut moved =
             Self::new_with_policy(|| take_policy(&mut source.hasher), buckets, resource);
         moved.exchange_graph(source);
@@ -19,7 +19,6 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         std::mem::swap(&mut self.bucket_count, &mut other.bucket_count);
         std::mem::swap(&mut self.first, &mut other.first);
         std::mem::swap(&mut self.last, &mut other.last);
-        std::mem::swap(&mut self.resource, &mut other.resource);
     }
 }
 macro_rules! ordered_policy_construction {

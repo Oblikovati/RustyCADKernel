@@ -80,7 +80,7 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     ) -> usize {
         // Native allocation precedes value then key construction, including clone failures.
         let node = N::allocate(
-            &self.resource,
+            self.resource(),
             self.base.bucket_slots()[hash],
             || key.construct_key(),
             construct,

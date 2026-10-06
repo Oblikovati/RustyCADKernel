@@ -1,6 +1,9 @@
 //! Both ordered families expose the same native base without copying buckets or nodes.
 use super::*;
 impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+    pub fn resource(&self) -> &BaseAllocator {
+        self.base.allocator()
+    }
     pub fn base_storage(&self) -> &BaseMapStorage {
         &self.base
     }
@@ -17,7 +20,7 @@ macro_rules! ordered_base_bridge {
         impl<$($parameter),+> crate::ncollection::BaseMap for $map<$($parameter),+> {
             fn nb_buckets(&self)->usize { self.table.bucket_count }
             fn size(&self)->usize { self.table.count }
-            fn allocator(&self)->&crate::ncollection::BaseAllocator { &self.table.resource }
+            fn allocator(&self)->&crate::ncollection::BaseAllocator { self.table.resource() }
         }
         impl<$($parameter),+> crate::ncollection::BasicMapIteratorSource for $map<$($parameter),+> {
             type Node=$node;

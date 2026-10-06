@@ -66,7 +66,7 @@ fn exercise<V: Default, N: StorageNode<i32, V>>(
         &format!("{prefix}_clear"),
         format!(
             "{prefix}_clear {} {}",
-            map.resource
+            map.resource()
                 .accumulating_chain()
                 .iter()
                 .map(|block| block.alloc_count)
@@ -82,13 +82,13 @@ fn allocation_span<V: Default, N: StorageNode<i32, V>>(
 ) -> usize {
     let node = map.node_pointer(map.first.unwrap());
     let before = map
-        .resource
+        .resource()
         .accumulating_block(node.addr())
         .unwrap()
         .free_size;
     map.place(100, V::default, false, false);
     let after = map
-        .resource
+        .resource()
         .accumulating_block(node.addr())
         .unwrap()
         .free_size;
@@ -117,7 +117,7 @@ fn native_set_storage_layout_allocations_links_and_rehash() {
             size_of::<OrderedMapNode<i32>>(),
             key.addr() - node.addr(),
             key.addr() - node.addr(),
-            map.resource
+            map.resource()
                 .accumulating_block(node.addr())
                 .unwrap()
                 .alloc_count
@@ -141,7 +141,7 @@ fn native_data_storage_layout_allocations_links_and_rehash() {
             size_of::<OrderedDataMapNode<i32, i32>>(),
             (map.key(slot) as *const i32).addr() - node.addr(),
             (map.value(slot) as *const i32).addr() - node.addr(),
-            map.resource
+            map.resource()
                 .accumulating_block(node.addr())
                 .unwrap()
                 .alloc_count
@@ -167,6 +167,6 @@ fn identity_slots_reuse_without_owning_or_relinking_nodes() {
     assert_eq!(map.next_slot(second), Some(reused));
     assert_eq!(map.slot_of(old), None);
     map.clear(true);
-    assert!(map.resource.reset(false).is_ok());
+    assert!(map.resource().reset(false).is_ok());
     assert!(map.base.buckets().is_null());
 }
