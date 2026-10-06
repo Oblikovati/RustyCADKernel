@@ -1,0 +1,55 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "c90d828828f2c4d4e53ba20b73342521718ef7ba",
+  "validated_source_revision": "c90d828828f2c4d4e53ba20b73342521718ef7ba",
+  "tkernel_passed": 4584,
+  "tkernel_failed": 0,
+  "tkernel_ignored": 0,
+  "strict_provenance_miri_passed": 42,
+  "miri_counts": {
+    "unit-miri": 33,
+    "cell-miri": 9
+  },
+  "strict_tkernel_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "unchanged_runtime_inputs": 10003,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/cell-native-root-rust.gz",
+      "sha256": "c12af5296769094ebe1e83a1447f8c1f031a0d6366f84ee3f2ead1362964d818"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/cell-native-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/cell-native-root-clippy.gz",
+      "sha256": "482ce74af3e0a74d18bbde76f33867b9227f951f81dbe8f26780359c19dda7ae"
+    },
+    "unit-miri": {
+      "path": "porting/runtime-evidence/cell-native-root-unit-miri.gz",
+      "sha256": "25d90c0d40975603f2d2a0af39d816bda1d58a8aededcd25468d5667d6f56d23"
+    },
+    "cell-miri": {
+      "path": "porting/runtime-evidence/cell-native-root-cell-miri.gz",
+      "sha256": "ec99bd668a63bd04a9004344a5bcffc2f64869056737fbb7321cf28e9b97998e"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/cell-native-root-inputs.gz",
+      "sha256": "f17e5138e052efe23eb3a7256e428d37a5204af0dfa709f0bec0100cecc959f5"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "5ac996d05f10b527cf07d534b08fd2894dee5f17",
+      "deleted_worktree": "/tmp/rustycad-cell-index-native-storage",
+      "deleted_branch": "port/cell-index-native-storage",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false,
+  "scope": "All TKernel tests/doctests and CellFilter unit and Cell class strict Miri; full workspace/API inventory remains at prior foundation-nodes checkpoint."
+}
