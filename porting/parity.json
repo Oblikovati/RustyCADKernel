@@ -71908,57 +71908,85 @@
       "upstream_id": "NCollection_SparseArrayBase::Size() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SparseArray::len",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the untyped NCollection_SparseArrayBase is folded into the generic SparseArray<T>. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::size",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::size"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
       "upstream_id": "NCollection_SparseArrayBase::Capacity() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SparseArray::capacity",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; myNbBlocks * myBlockSize, with the block table starting at `increment` entries and doubling; probed. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::capacity",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::capacity"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
-      "upstream_id": "NCollection_SparseArrayBase::HasValue(size_t) const",
+      "upstream_id": "NCollection_SparseArrayBase::HasValue(const size_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SparseArray::has_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the untyped NCollection_SparseArrayBase is folded into the generic SparseArray<T>."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::has_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::has_value"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
       "upstream_id": "NCollection_SparseArrayBase::Iterator::Restart()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::restart",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::restart"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
-      "upstream_id": "NCollection_SparseArrayBase::Iterator::More() const",
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::More() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::more",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::more"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
       "upstream_id": "NCollection_SparseArrayBase::Iterator::Next()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::next",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::next"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
-      "upstream_id": "NCollection_SparseArrayBase::Iterator::Index() const",
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Index() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::index",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBaseIterator::index"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json."
     },
     {
       "upstream_id": "NCollection_Vector",
@@ -238962,6 +238990,18 @@
       "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize",
       "status": "partial",
       "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::exchange(NCollection_SparseArrayBase &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::exchange",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::SparseArrayBase::exchange"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json. Metadata allocation stays on each container while fields and allocator ownership move; exchange_self represents native aliasing no-op without invalid Rust borrows."
     }
   ],
   "tests": [

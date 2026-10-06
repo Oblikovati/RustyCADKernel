@@ -1,7 +1,11 @@
 //! Native erased storage, callback observations and pointer-table contracts.
 #![allow(unsafe_code)]
+#[path = "sparse_array_base_contracts/exchange.rs"]
+mod exchange_contracts;
 #[path = "sparse_array_base_contracts/fixture.rs"]
 mod fixture;
+#[path = "sparse_array_base_contracts/resources.rs"]
+mod resource_contracts;
 use fixture::*;
 use rustycad_tkernel::ncollection::{
     BaseAllocator, SparseArrayBase, SparseArrayBaseIterator, SparseArrayBlock,

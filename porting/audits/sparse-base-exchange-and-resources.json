@@ -1,0 +1,363 @@
+{
+  "schema": "rustycad.exact-partial-binding-transaction.v1",
+  "status": "branch_validated_pending_main_integration",
+  "source_revision": "72e52d58a62167bf2cbfd6401308fc8caadfcd64",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Bounded behavior correction of SparseArrayBase exchange and Rust injected-resource ownership. Eight exact base/raw-iterator mappings only; this is not the full SparseArrayBase/BasicIterator reconciliation.",
+  "counts": {
+    "native_records_in_class": 103,
+    "visible_native_records_in_class": 57,
+    "exact_partial_mappings": 8,
+    "implemented_corrected_to_partial": 3,
+    "excluded_corrected_to_partial": 4,
+    "new_partial_mappings": 1,
+    "implemented_credit_added": 0
+  },
+  "original_test_rows_unchanged": true,
+  "other_class_rows_unchanged": true,
+  "legacy_test_credit_delta": 0,
+  "api_parity_complete": false,
+  "self_exchange_adapter": {
+    "path": "rustycad_tkernel::ncollection::SparseArrayBase::exchange_self",
+    "kind": "function",
+    "signature": {
+      "sig": {
+        "inputs": [
+          [
+            "self",
+            {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": true,
+                "type": {
+                  "generic": "Self"
+                }
+              }
+            }
+          ]
+        ],
+        "output": null,
+        "is_c_variadic": false
+      },
+      "generics": {
+        "params": [],
+        "where_predicates": []
+      },
+      "header": {
+        "is_const": false,
+        "is_unsafe": false,
+        "is_async": false,
+        "abi": "Rust"
+      },
+      "has_body": true,
+      "default_unstable": null
+    },
+    "source_file": "crates/tkernel/src/ncollection/sparse_array_base.rs",
+    "source_sha256": "b808809281a748b062011cd7833e2f7b53a66f2d7eb27094afbabd6d615e604b",
+    "source_status": null,
+    "impl_context": {
+      "for": {
+        "resolved_path": {
+          "path": "SparseArrayBase",
+          "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::SparseArrayBase",
+          "args": null
+        }
+      },
+      "generics": {
+        "params": [],
+        "where_predicates": []
+      },
+      "trait": null
+    },
+    "declaration_sha256": "3c23ff44fa2c934b4c0c8f983e5664ae2ac85ae39bbea80fb3f4a8456310c1f3"
+  },
+  "bindings_path": "porting/audits/sparse-base-ledger-records.jsonl",
+  "bindings_sha256": "76c3aba204e30469bc7a550ee917f0e0937e2c6a1d99893a169c940c1a0d66dc",
+  "matrix_path": "porting/audits/sparse-base-method-corrections.jsonl",
+  "matrix_sha256": "ec3bc3ac9e7b40a8d97a05f651f0a2c2bd395ae0a3c0ae57173d1cf75142d0f7",
+  "rust_inventory_path": "porting/runtime-evidence/sparse-base-normalized.json.gz",
+  "rust_inventory_sha256": "2719f855c0a832fcac30f359f0934806106281a9721964960e618da2f9540649",
+  "rust_raw_path": "porting/runtime-evidence/sparse-base-rustdoc.json.gz",
+  "rust_raw_sha256": "c68fb6d27f95d8a7a5666e511664c873b8eb4d7cd1fa3e7a569222a87872fc49",
+  "runtime_evidence": {
+    "exchange-red": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-exchange-red.gz",
+      "sha256": "d0e9f05f005870107b0b2482ecceb2ff441a39d9705343145b3195c868a1b98e",
+      "uncompressed_sha256": "2af4d461bf445ec5f474890932db74bf816c601bab095151e00d502c9c226adb"
+    },
+    "alignment-miri-red": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-alignment-miri-red.gz",
+      "sha256": "c978d306cdd853fa9af136328687d1d7d7c761fa366b254a2267273e119b419f",
+      "uncompressed_sha256": "8012e361461f2f02b09d7fef78ac010c61f0dcb9ab16dd1571e94614d270f776"
+    },
+    "lease-red": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-lease-red.gz",
+      "sha256": "5170ad0d00f02dc4401f3cf2739b844243d2671787ebed88dc40c2c4a7be5aca",
+      "uncompressed_sha256": "cdfd1f0a46a09677d1d0826ac356703a0f63750029ef16e6372a0c7d432ce15e"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-rust.gz",
+      "sha256": "85a48436894f58b6b86fde803d8b7f51a13981b0570a6d83895ae43a5fd43dfb",
+      "uncompressed_sha256": "6c23e8b6ceba5463d30a4ed72fbf8248a236b7b1de9d06e0e86c92e360f51752"
+    },
+    "layout-unit": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-layout-unit.gz",
+      "sha256": "ba268f92f45f273172c94eff4cc1fff404990191e88e5428ae7e0bb128a6182c",
+      "uncompressed_sha256": "7a026225596b9ec167c2cf02a7497554c740f5fc472157acfda7921df4ee718a"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-miri.gz",
+      "sha256": "2133127e6c59ecbc2906e9eba2f4d05af73006ded86cf973933d926794d92945",
+      "uncompressed_sha256": "440c0d39d92758115dd13aa4d318c55f1e2bc15bb24044f46b0d26dbbd29db9b"
+    },
+    "native-originals": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-native-originals.gz",
+      "sha256": "f8706ebba18820d18d427ed5d9f3765604604d94c49457e338e51eb7464d0cb2",
+      "uncompressed_sha256": "c27797d0b48daacf4eaf2d586ab601898349bd5c0fb7e5aba8052050166cd519"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-rustdoc.gz",
+      "sha256": "eb7d3959e32208fd1f2d0a1f4f48efdb43740c52044016623c90c783bf9f0bb4",
+      "uncompressed_sha256": "06b9e5d7b2d77d105c49fba9517bcaa8e26d9905f54d65f03b47627f4b37110d"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-clippy.gz",
+      "sha256": "7748ab931b50ac3af0d29f0cb64fb7c083c716d347deb360b744e23001b09690",
+      "uncompressed_sha256": "cea24bfd31fefd16ac9417c8875330943e11065817d99e81c27da90d4652b9ba"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "python-lint": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-python-lint.gz",
+      "sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "uncompressed_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "binding-tests": {
+      "path": "porting/runtime-evidence/sparse-base-exchange-binding-tests.gz",
+      "sha256": "9b6a243a6797bdb2880a158d982353427b8e11f775e3fc2bcf4ae8d1051f8f88",
+      "uncompressed_sha256": "351765440fbdd4b997bf371226c9d51db451a8ed39bb9b1e77ed50d5490d0972"
+    }
+  },
+  "checks": {
+    "focused_rust_tests": 117,
+    "focused_target_counts": [
+      10,
+      28,
+      16,
+      12,
+      17,
+      2,
+      32
+    ],
+    "layout_unit_tests": 2,
+    "strict_provenance_miri_tests": 72,
+    "miri_target_counts": [
+      28,
+      12,
+      32
+    ],
+    "binding_validator_tests": 23,
+    "clippy_warnings_denied": true,
+    "cargo_fmt_check": true,
+    "python_ruff_check": true,
+    "native_original_tests": 10,
+    "new_regression_tests": 14,
+    "native_fixture_rows": 67
+  },
+  "original_test_joins": [
+    {
+      "upstream_id": "NCollection_SparseArrayTest.BasicFunctions",
+      "rust_test": "NCollection_SparseArrayTest__BasicFunctions",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.LargeIndices",
+      "rust_test": "NCollection_SparseArrayTest__LargeIndices",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.SparseDistribution",
+      "rust_test": "NCollection_SparseArrayTest__SparseDistribution",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.IteratorFunctions",
+      "rust_test": "NCollection_SparseArrayTest__IteratorFunctions",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.STLIterators",
+      "rust_test": "NCollection_SparseArrayTest__STLIterators",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.ComplexType",
+      "rust_test": "NCollection_SparseArrayTest__ComplexType",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.Clear",
+      "rust_test": "NCollection_SparseArrayTest__Clear",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.DataMapInterface",
+      "rust_test": "NCollection_SparseArrayTest__DataMapInterface",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.AssignAndExchange",
+      "rust_test": "NCollection_SparseArrayTest__AssignAndExchange",
+      "native_passed": true,
+      "rust_passed": true
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock",
+      "rust_test": "NCollection_SparseArrayTest__AssignClearsUnsetItemsInSharedBlock",
+      "native_passed": true,
+      "rust_passed": true
+    }
+  ],
+  "native_fixtures": [
+    {
+      "fixture": "tools/oracle/tkernel_sparse_array_base_contracts.cxx",
+      "rows": 7,
+      "match": true,
+      "source_sha256": "7f1570ef82ed30f26cac6bdb9955982e936e8ad9d3324bb77f631690c01e62a9",
+      "expected_sha256": "d5b1355226d53435f218136de9d1007d22e3d383969fdec08427af20030f2582",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_array_base_contracts.gz",
+      "stdout_sha256": "fbf3b65dec8e1645e7888697055f0a59f83050bcacf8424c5e8e8b92e0b392c6"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_array_method_contracts.cxx",
+      "rows": 13,
+      "match": true,
+      "source_sha256": "dd6dd80bc033553068e0be5b012e54de998e381d6d76ee8cbb545f2f69a839d8",
+      "expected_sha256": "a53464fe89b35a0c161b1974674f34177c751c3312ec1da0db5c2b65881480d9",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_array_method_contracts.gz",
+      "stdout_sha256": "03290a89f59ef7f9bf5ed7ec1ae4795a1a973b54b3961e6d094646cdabfc4ace"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_basic_iterator_contracts.cxx",
+      "rows": 10,
+      "match": true,
+      "source_sha256": "b77c7cccf4ab689d44082c207878f391e7bfaa3a154f3223fd473c5d31b2388e",
+      "expected_sha256": "b912664b9202d70533d2e170a652bcfe3c8a888c0f919fe1b459ab98a7229732",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_basic_iterator_contracts.gz",
+      "stdout_sha256": "2f4f157c11adb5956510f230364f6f1cdc5bcd9376febdca4d8c7d20e07dfd21"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_cursor_contracts.cxx",
+      "rows": 22,
+      "match": true,
+      "source_sha256": "2f6efcd50f06f21bf3fc5bca006bf19866e21c6cdbec6d024aa876f7fdf72a8d",
+      "expected_sha256": "9b2948fad56d25b7e336a7fa53bdc4dfa75c90511165c41ac2eefaaaddd51d0e",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_cursor_contracts.gz",
+      "stdout_sha256": "13d773c9796166f0bfb59631fc4dff6222ef279cea390adf0e039ae9c04212e8"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_exchange_identity.cxx",
+      "rows": 6,
+      "match": true,
+      "source_sha256": "cf5aaf660d34e08c35bb3fce8b300c40115185d53b17aa422f9e22591d3dda0a",
+      "expected_sha256": "f9b435053caae4e16db0954655fb984628312a30a02260e03e36166b91e17f06",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_exchange_identity.gz",
+      "stdout_sha256": "102d814de29766d078fa1309c841c0ccffe26739ee47758e2dbce8ae75cc08e7"
+    },
+    {
+      "fixture": "tools/oracle/tkernel_sparse_typed_storage_contracts.cxx",
+      "rows": 9,
+      "match": true,
+      "source_sha256": "c16ebea960144a66e1c273b6e39de00c1ef5b29e351808d7197195b4b1d78b6e",
+      "expected_sha256": "9fb3e7457258b07a74160a4c8a1c782d9774e40726dda19a54813c9d9a159cbf",
+      "stdout_path": "porting/runtime-evidence/sparse-base-exchange-native-tkernel_sparse_typed_storage_contracts.gz",
+      "stdout_sha256": "4e9401914f289f386cae1fc7135d439010a82648e135ddbc7ac138417b06c686"
+    }
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sparse_array_base.rs": "b808809281a748b062011cd7833e2f7b53a66f2d7eb27094afbabd6d615e604b",
+    "crates/tkernel/src/ncollection/sparse_array_base/allocation.rs": "8769ae99461c7be7dd8a04f264d04cd9e7e501381e3ba5b3eb3a0ad447ad1997",
+    "crates/tkernel/src/ncollection/sparse_array_base/editing.rs": "bd2c24371b5bcd58352da8ec9cc5c7cf5ad88bba88817e7d5f9201b64a2ba6c0",
+    "crates/tkernel/tests/sparse_array_base_contracts.rs": "ceb45c1cd8404d3acf0c35d51b89eb32232b07570547e38e4cc1d4ab1eb74969",
+    "crates/tkernel/tests/sparse_array_base_contracts/exchange.rs": "f7b6a2fa292bc218c9bdb6de50253b846dbdb93aeb7016438e582a996927afc3",
+    "crates/tkernel/tests/sparse_array_base_contracts/resources.rs": "61bc071adcaf7180537faa03fa0f307c4b7782902c24655c55ccb3cc2c730287",
+    "tools/oracle/tkernel_sparse_exchange_identity.cxx": "cf5aaf660d34e08c35bb3fce8b300c40115185d53b17aa422f9e22591d3dda0a",
+    "tools/oracle/tkernel_sparse_exchange_identity.expected": "f9b435053caae4e16db0954655fb984628312a30a02260e03e36166b91e17f06",
+    "tools/verify_sparse_base_bindings.py": "45f323f0bc180c37bce42307af7785a5eb83d2ec3de4819b44b10a3469c76f63",
+    "tools/tests/test_sparse_base_bindings.py": "222a7c0e5bfcf54ad6eb110f276972d2ebf5986947bdaf0e9b9c3c653d9f7982"
+  },
+  "native_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx": "10b27cfe10abb13400cccf6ed2f08dbcd0f173136c9944e66d0ebe52730c4e47",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.cxx": "cc3dcc7059b63663de11b0691bf2f7d6c9b53869ced9917f5b8f5ff88105adea"
+  },
+  "baseline_source_sha256": {
+    "crates/tkernel/src/ncollection/sparse_array_base.rs": "9acf25f7ed533da78c0eae11c7e72e928d3961bda509ee0a6301f879ed6fff68",
+    "crates/tkernel/src/ncollection/sparse_array_base/allocation.rs": "71b87c6be64f56973bb3cd1b04b4694b0fda8d9cafa9b2f9613818576c31cfaf",
+    "crates/tkernel/src/ncollection/sparse_array_base/editing.rs": "ff9cac5db1392b42076646cce6013df9379ed9f2f2ff0b1f78223d1f72dbacce"
+  },
+  "behavior_changes": [
+    {
+      "method": "NCollection_SparseArrayBase::exchange",
+      "cpp_id": "1c718f3a18f5e2f444d41984aaf6faf659cc7f04d3ab41bffbe7ab5ec9b30317",
+      "before": "Whole-owner swap moved Rc state allocations; saved size/table observers became bound to the other object. Stored destructor trace was 80:1,90:1,.",
+      "after": "Swap protected state values in place and transfer allocator handle; saved metadata addresses remain bound to each object while blocks, callback and geometry move. Native/Rust trace is 80:2,90:1,.",
+      "native_rows": [
+        "identity 1 1 1 1",
+        "contents 2 1 12 9 1 1",
+        "clear_phase 80:2,90:1, 0 1",
+        "drop_phase 80:2,90:1,",
+        "round_trip 1 2 1 1",
+        "self 1 1 1 10"
+      ]
+    },
+    {
+      "surface": "SparseArrayBase::with_allocator Rust extension",
+      "before": "allocate_optimal_raw/free_raw omitted layout alignment and incremental leases. AccAllocator(256), item_size4, block_size4: table32 bytes, block25 bytes rounded to28 by 4-byte allocator, block address offset modulo8=4; native usize header needs8. Miri reported invalid aligned access at publish_slot. Incremental reset(false) was allowed while sparse table/block allocations remained live.",
+      "after": "Use existing allocator_api2::Allocator Layout path, requesting max(usize,pointer) header/table alignment, with matching original byte size on deallocation. Existing aligned arena allocation and incremental acquire/release provide ownership and reset protection. Native block logical byte count remains unchanged.",
+      "public_reproducer_contract": "with_allocator is safe; population requires unsafe set_value with valid i32 source and callbacks. No safe typed facade accepts injected sparse allocators, so this is not described as an entirely safe initialization reproducer. Once valid objects exist, safe resource reset and base reads previously exposed missing lease protection.",
+      "error_paths": "Failed allocation publishes no table and invokes no item callback. Constructor panic retains unpublished storage until clear/drop; no item destruction, allocator allocations/leases released exactly once.",
+      "native_credit": false
+    }
+  ],
+  "red_provenance": {
+    "production_revision": "72e52d58a62167bf2cbfd6401308fc8caadfcd64",
+    "historical_logs": "Red logs were captured before production edits. Test helpers were subsequently formatted and expanded; line numbers refer to that historical run. Baseline production hashes are pinned separately.",
+    "alignment_reproducer_test": "resource_contracts::accumulating_sparse_headers_are_aligned_before_publication",
+    "exchange_failures": 2,
+    "alignment_miri_undefined_behavior": true,
+    "lease_assertion_failure": true
+  },
+  "limits": [
+    "Only eight of the 57 visible captured SparseArrayBase records are reconciled in this transaction; 103 captured records include non-candidates. No full class or toolkit parity claim.",
+    "Generic BasicIterator callable bodies were inspected and existing contracts replayed, but its exact overload/alias reconciliation remains separate; no arbitrary Rust bool specialization is selected.",
+    "The unsafe erased API still requires valid stride/item alignment, callback object lifetimes, exclusive mutation and non-unwinding destruction. Over-aligned typed storage remains handled by its existing indirection adapter.",
+    "Rust self-exchange uses explicit exchange_self; no aliasing pair of mutable references is constructed.",
+    "Injected allocation resources and reset leases are Rust extensions; native protected constructor uses the common OCCT allocation functions. Allocation failure/panic and impossible Rust layouts are not credited as native exception equivalence.",
+    "Native object allocation macros, callback type aliases, C++ iterator aliases, ABI/noexcept/configuration closure and destructor language semantics are not completed by these bindings."
+  ],
+  "next_method_work": [
+    "Reconcile remaining protected constructor, getBlock/getItem/getValue, setValue/unsetValue/clearItems/assign and raw Iterator constructors/init/value to exact compiler bodies and native IDs.",
+    "Then reconcile BasicIterator const and mutable overloads separately, preserving conditional return/reference and alias surfaces; existing behavior tests are supporting evidence, not automatic API credit."
+  ],
+  "replay_commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_typed_storage_contracts --test sparse_array_method_contracts --test sparse_cursor_contracts --test sparse_supplemental --test ncollection_sparse_array",
+    "layout_unit": "cargo test --locked -p rustycad-tkernel --lib sparse_layout_",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test sparse_array_base_contracts --test sparse_basic_iterator_contracts --test sparse_typed_storage_contracts",
+    "bindings": "PYTHONPATH=tools python3 tools/verify_sparse_base_bindings.py",
+    "binding_tests": "PYTHONPATH=tools:tools/tests python3 -m unittest test_api_binding_replay test_sparse_base_bindings -v",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test sparse_array_base_contracts -- -D warnings",
+    "native_original_filter": "NCollection_SparseArrayTest.*",
+    "native_fixture_compile": "c++ -std=c++17 -O2 <fixture.cxx> -I<occt-build>/include/opencascade -L<occt-build>/lin64/gcc/libi -Wl,-rpath,<occt-build>/lin64/gcc/libi -lTKernel -o <fixture-binary>"
+  }
+}

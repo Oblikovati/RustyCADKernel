@@ -52,6 +52,7 @@ impl SparseArrayBase {
     }
 
     /// Injects an allocation resource (Rust extension); `SparseArrayBase::with_allocator(4, 8, destroy, resource)`.
+    /// Layout allocations align native headers and keep arena reset leases until released.
     pub fn with_allocator(
         item_size: usize,
         block_size: usize,
@@ -154,7 +155,13 @@ impl SparseArrayBase {
     /// # Safety
     /// No live item references or iterators may be invalidated; each state must remain internally valid.
     pub unsafe fn exchange(&mut self, other: &mut Self) {
-        std::mem::swap(self, other);
+        // OCCT 3d097a exchanges fields, retaining protected-state observers on each container.
+        unsafe { std::ptr::swap(self.state.get(), other.state.get()) };
+        std::mem::swap(&mut self.allocator, &mut other.allocator);
+    }
+    /// Preserves native self-exchange without aliasing mutable borrows; `base.exchange_self()`.
+    pub fn exchange_self(&mut self) {
+        // OCCT 3d097a returns immediately when both exchange arguments are the same object.
     }
 }
 
