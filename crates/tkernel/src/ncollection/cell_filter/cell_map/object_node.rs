@@ -5,7 +5,8 @@ use std::mem::ManuallyDrop;
 #[repr(C)]
 pub(super) struct CellObjectNode<T> {
     pub(super) object: ManuallyDrop<T>,
-    // Readonly link type preserves target covariance; only the unique CellMap owner mutates it.
+    // Readonly links preserve target covariance; only the unique CellMap or CellFilterCell
+    // owner mutates them.
     pub(super) next: *const Self,
 }
 impl<T: Clone> CellObjectNode<T> {

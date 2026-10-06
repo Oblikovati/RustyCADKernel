@@ -160,7 +160,9 @@ pub use ordered_data_map::{
 pub mod forward_range;
 
 mod cell_filter;
-pub use cell_filter::{CellAction, CellFilter, CellGeometry, CellInspector};
+pub use cell_filter::{
+    CellAction, CellFilter, CellFilterCell, CellFilterCellHasher, CellGeometry, CellInspector,
+};
 
 mod ebtree;
 mod ubtree;

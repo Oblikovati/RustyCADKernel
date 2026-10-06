@@ -5,7 +5,7 @@ use super::{CellHash, CellIndex};
 use crate::ncollection::owned_bucket_chains::BucketNodeRange;
 use crate::ncollection::owned_bucket_chains::OwnedBucketChains;
 use crate::ncollection::{BaseAllocator, BaseMap, HashPolicy, MapLinkNode, MapNode};
-mod cell_node;
+pub(super) mod cell_node;
 mod object_node;
 mod retention;
 use cell_node::{CellMapNode, CellRecord};
@@ -17,10 +17,10 @@ pub(super) struct CellMap<T> {
 struct CellMapHash;
 impl<T> HashPolicy<CellRecord<T>> for CellMapHash {
     fn hash(&self, cell: &CellRecord<T>) -> usize {
-        CellHash.hash(&cell.index)
+        cell.hash_code()
     }
     fn equal(&self, first: &CellRecord<T>, second: &CellRecord<T>) -> bool {
-        CellHash.equal(&first.index, &second.index)
+        first.is_equal(second)
     }
 }
 impl<T> CellMap<T> {
@@ -49,11 +49,12 @@ impl<T> CellMap<T> {
             self.storage.resize(size, &CellMapHash);
         }
         // Native TryEmplaced constructs the lookup Cell after map growth, even for a hit.
-        let cell = CellRecord::from_coordinates(index);
+        let mut cell = CellRecord::from_coordinates(index);
         let (bucket, existing) = self.storage.lookup_with_bucket(&cell, &CellMapHash);
         let node = existing.unwrap_or_else(|| {
-            self.storage
-                .allocate_node(bucket, |next| CellMapNode(MapNode::new(cell, next)))
+            self.storage.allocate_node(bucket, |next| {
+                CellMapNode(MapNode::new(CellRecord::move_construct(&mut cell), next))
+            })
         });
         unsafe { CellMapNode::cell_ptr(node.cast()) }
     }
