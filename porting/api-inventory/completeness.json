@@ -3,18 +3,18 @@
   "artifacts": {
     "api-crosswalk": {
       "path": "api-crosswalk.json.gz",
-      "sha256": "2c7c28051f5cb97ea3f2da2963c2db5570c403e15adbf57cf02c445e951da8a0",
-      "uncompressed_sha256": "26126c35d0644fde1a500d5c2aac9387d4c0fafb3d395a97f1d407ff5637022d"
+      "sha256": "c1f8ba3cc35ba584bc0d67952e8bb8d1979e8c0a90f0602c6ef04c72490eb964",
+      "uncompressed_sha256": "650deca6e912ec9731f20e110209d66bc0b8b185a8a6dad7bd42ac3ef60a86c7"
     },
     "rust-api": {
       "path": "rust-api.json.gz",
-      "sha256": "336dfaba3598dd48ce8e54c63987e6081118df61e392af5d0e0e1d00398a0db5",
-      "uncompressed_sha256": "88f9c56f6d77ef487641f9f920129f94a79fa731112684f207da6b6bfe60ea45"
+      "sha256": "9582d58bc12b2e1212b1f4e9b892d6e035bf88d27fc7e529217730e319eb71d4",
+      "uncompressed_sha256": "147990cab32dce3dc017915754a55a765984c8ccde10747ba70fa0d315e9ec3e"
     }
   },
   "behavioral_equivalence_proven": false,
   "configuration_matrix_complete": false,
-  "cpp_declarations_with_resolved_implemented_claim": 23642,
+  "cpp_declarations_with_resolved_implemented_claim": 23636,
   "cpp_manifest_header_status": {
     "included_fragment": 384,
     "missing_compile_configuration": 28,
@@ -28,9 +28,9 @@
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
     "parity": "58c22bae46fb6ad257c3ddc34f4a9b7bfd4a40bb9048a7f9b49195774487ecd8",
-    "rust": "88f9c56f6d77ef487641f9f920129f94a79fa731112684f207da6b6bfe60ea45"
+    "rust": "147990cab32dce3dc017915754a55a765984c8ccde10747ba70fa0d315e9ec3e"
   },
-  "matched_declared_mappings": 23642,
+  "matched_declared_mappings": 23636,
   "observed_cpp_api_declarations": 108622,
   "parity_api_rows": 29290,
   "partial_mappings": 803,
@@ -53,20 +53,20 @@
     "unsupported_cpp_inventory_records:5224"
   ],
   "rust_capture_inputs": {
-    "cargo_metadata_sha256": "14803357383303d5622bde1a7453ef98a2c604ae5eb8f852dc77bd0b3f0af0b2",
+    "cargo_metadata_sha256": "d7ef7a7e7fd3c4ac4cc27f61346e2b8a476a4a676fae112c2141c792b04af5f9",
     "tool_versions": {
       "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
       "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
       "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
     },
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
-    "workspace_file_count": 7702,
-    "workspace_inputs_sha256": "48881c4f808d9eacf91d83425ab34790223e4b7897b16cb89b5a1e1892455f4f",
-    "workspace_revision": "704a94fbf268d96438108f69cff4847136f44677"
+    "workspace_file_count": 8019,
+    "workspace_inputs_sha256": "7e32110cee60c639e147342d030c46613b355a14fd43bd9bc171bc3a88e18a6b",
+    "workspace_revision": "eef5a189b0d3f188f7a35ddbfc91367fafb4211b"
   },
-  "rust_capture_revision": "704a94fbf268d96438108f69cff4847136f44677",
+  "rust_capture_revision": "eef5a189b0d3f188f7a35ddbfc91367fafb4211b",
   "rust_crates": 20,
-  "rust_public_paths": 59695,
+  "rust_public_paths": 62713,
   "schema_version": 1,
   "tool_implementation_sha256": {
     "api_crosswalk": {
@@ -93,7 +93,7 @@
       "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
       "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
       "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
-      "tools/rustdoc_generic_arguments.py": "0be5e5a5555aa507d7d23591529b842e5b0ddfa049df63b4343e32ff67f1ba3d",
+      "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
       "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
       "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
       "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
@@ -905,18 +905,18 @@
       "upstream_unimplemented": 0
     },
     "TKernel": {
-      "cpp_declarations_with_resolved_implemented_claim": 4198,
+      "cpp_declarations_with_resolved_implemented_claim": 4192,
       "excluded": 229,
-      "implemented": 4198,
+      "implemented": 4192,
       "observed_cpp_api": 7324,
       "parity_rows": 5235,
       "partial": 254,
       "unclaimed_cpp_api": 2582,
-      "unresolved": 557,
+      "unresolved": 563,
       "upstream_unimplemented": 0
     }
   },
   "unclaimed_cpp_count": 80996,
-  "unresolved_row_count": 4400,
+  "unresolved_row_count": 4406,
   "upstream_unimplemented": 3
 }
