@@ -1,6 +1,7 @@
 //! Contiguous growable storage matching NCollection_LinearVector.
 use super::{Array1, ArrayError};
 
+mod borrowed;
 mod pointers;
 mod trivial_assignment;
 
@@ -216,15 +217,7 @@ impl<T: Default> LinearVector<T> {
     }
     /// Resizes, default-constructing new values; `vector.resize(10)`.
     pub fn resize(&mut self, size: usize) {
-        if size < self.len() {
-            self.elements.truncate(size);
-            return;
-        }
-        self.reserve(size);
-        let previous_len = self.len();
-        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
-        rollback.elements.resize_with(size, T::default);
-        rollback.commit();
+        self.resize_with_constructor(size, T::default);
     }
     /// Overwrites or extends to an index, returning the stored slot as natively;
     /// `*vector.set_value(5, 42) += 1`.
