@@ -129,9 +129,10 @@ impl<T> LinearVector<T> {
     pub fn change_last(&mut self) -> Result<&mut T, ArrayError> {
         self.change_value(self.len().saturating_sub(1))
     }
-    /// Removes the last value if present; `vector.erase_last()`.
+    /// Removes the last value in its original slot after reducing length; `vector.erase_last()`.
     pub fn erase_last(&mut self) {
-        self.elements.pop();
+        // OCCT 3d097a03 EraseLast reduces Size before destroying the original final slot.
+        self.elements.truncate(self.len().saturating_sub(1));
     }
     /// Removes one checked index; `vector.erase(0)?`.
     /// Rust ownership shifts skip element move-assignment callbacks; use `erase_with_move` for those.

@@ -1,0 +1,10 @@
+empty:ok,:0:0:1:::0
+reserved-empty:ok,:0:4:1:::0
+one:ok,:0:4:1:D10@0,R10,::0
+many:ok,:2:4:1:D12@2,R12,:10,11,:2
+all:ok,ok,ok,ok,:0:4:1:D12@2,R12,D11@1,R11,D10@0,R10,::0
+append:ok,:3:4:1:D12@2,R12,:10,11,99,:3
+throw-tail:throw,:2:4:1:D12@2,R12,:10,11,:2
+throw-single:throw,:0:4:1:D10@0,R10,::0
+throw-then-next:throw,ok,:1:4:1:D12@2,R12,D11@1,R11,:10,:1
+throw-then-append:throw,:3:4:1:D12@2,R12,:10,11,99,:3
