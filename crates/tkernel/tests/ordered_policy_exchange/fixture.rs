@@ -60,6 +60,12 @@ impl SwapPolicy {
         self.state = std::mem::replace(&mut source.state, -99);
         self.trace.event('A', self.state);
     }
+    pub fn native_self_swap(policy: &mut Self) {
+        let mut temporary = Self::take(policy);
+        policy.state = -99;
+        policy.trace.event('A', policy.state);
+        policy.assign(&mut temporary);
+    }
     pub fn native_swap(first: &mut Self, second: &mut Self) {
         let mut temporary = Self::take(first);
         first.assign(second);

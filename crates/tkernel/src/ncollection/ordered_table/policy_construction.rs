@@ -9,7 +9,7 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         moved.exchange_graph(source);
         moved
     }
-    fn exchange_graph(&mut self, other: &mut Self) {
+    pub(super) fn exchange_graph(&mut self, other: &mut Self) {
         // OCCT 3d097a0 moves its policy first; swapping only graph ownership keeps the donor policy.
         std::mem::swap(&mut self.slots, &mut other.slots);
         std::mem::swap(&mut self.free, &mut other.free);

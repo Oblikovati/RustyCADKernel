@@ -6,7 +6,7 @@ mod fixture;
 #[path = "ordered_policy_exchange/scenarios.rs"]
 mod scenarios;
 use adapters::{Map, Set};
-use scenarios::{scenario, self_assign};
+use scenarios::{scenario, self_assign, self_exchange};
 macro_rules! suites {
     ($module:ident,$map:ty,$prefix:literal) => {
         mod $module {
@@ -30,6 +30,12 @@ macro_rules! suites {
             #[test]
             fn move_assignment_empty_graphs_keeps_native_bucket_selections() {
                 scenario::<$map>($prefix, true, 0, true);
+            }
+            #[test]
+            fn self_exchange_runs_native_policy_throw_prefixes() {
+                for rejected in 0..4 {
+                    self_exchange::<$map>($prefix, rejected);
+                }
             }
             #[test]
             fn self_move_assignment_never_invokes_the_policy() {

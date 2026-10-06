@@ -183,3 +183,29 @@ pub fn self_assign<M: OrderedExchangeFixture>(prefix: &str) {
         ),
     );
 }
+
+pub fn self_exchange<M: OrderedExchangeFixture>(prefix: &str, rejected: usize) {
+    let trace = Rc::new(SwapTrace::default());
+    let mut map = M::construct(SwapPolicy::new(7, &trace), 101, BaseAllocator::common());
+    map.insert(4, &trace);
+    let node = map.basic_first_node();
+    trace.rejected.set(rejected);
+    let success = catch_unwind(AssertUnwindSafe(|| map.native_self_exchange())).is_ok();
+    let status = if success { "ok" } else { "throw" };
+    let label = format!("{prefix}_self_exchange_{rejected}");
+    native_row(
+        &label,
+        format!(
+            "{label} {status} {} {} {} {} 0 {} {}",
+            map.policy().state,
+            map.size(),
+            u8::from(node == map.basic_first_node()),
+            trace.phase.get(),
+            trace.drops.get(),
+            trace.events.borrow()
+        ),
+    );
+    assert_eq!(map.keys(), vec![4]);
+    drop(map);
+    assert_eq!(trace.drops.get(), M::PAYLOADS_PER_NODE);
+}

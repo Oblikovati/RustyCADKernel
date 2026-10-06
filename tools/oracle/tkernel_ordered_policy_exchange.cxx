@@ -77,9 +77,20 @@ template<class Table> void self(const char* prefix)
             << (node==map.FirstNode()) << ' ' << phase << ' ' << payloadMoves << ' ' << payloadDrops << '\n';
   rejectedPhase=0;
 }
+template<class Table> void selfExchange(const char* prefix,int rejected)
+{
+  reset(0); Table map(Policy(7),size_t(101)); add(map,4);
+  const auto node=map.FirstNode(); reset(rejected); bool success=false;
+  try { map.Exchange(map); success=true; } catch (const std::runtime_error&) {}
+  std::cout << prefix << "_self_exchange_" << rejected << ' ' << (success?"ok":"throw") << ' '
+    << map.GetHasher().state << ' ' << map.Size() << ' ' << (node==map.FirstNode()) << ' '
+    << phase << ' ' << payloadMoves << ' ' << payloadDrops << ' ' << trace << '\n';
+  rejectedPhase=0;
+}
 template<class Table> void suite(const char* prefix)
 {
   for (int rejected=0;rejected!=4;++rejected) { run<Table>(prefix,false,rejected,false); run<Table>(prefix,true,rejected,false); }
+  for (int rejected=0;rejected!=4;++rejected) selfExchange<Table>(prefix,rejected);
   run<Table>(prefix,false,0,true); run<Table>(prefix,true,0,true); self<Table>(prefix);
 }
 int main() { suite<Set>("set"); suite<Map>("data"); }

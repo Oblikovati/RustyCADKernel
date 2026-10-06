@@ -3,6 +3,7 @@ use super::{HashPolicy, OrderedDataMap};
 
 impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Swaps both maps and returns this destination; `map.move_assign(&mut source)`.
+    /// Uses Rust policy swapping; use `move_assign_with` for native policy callbacks.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         std::mem::swap(self, source);
         self

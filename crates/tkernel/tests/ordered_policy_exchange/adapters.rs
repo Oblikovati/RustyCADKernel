@@ -13,6 +13,7 @@ pub trait OrderedExchangeFixture: BaseMap + BasicMapIteratorSource {
     fn native_exchange(&mut self, other: &mut Self);
     fn native_assign(&mut self, other: &mut Self);
     fn native_self_assign(&mut self);
+    fn native_self_exchange(&mut self);
     fn keys(&self) -> Vec<i32>;
 }
 macro_rules! adapter {
@@ -37,6 +38,9 @@ macro_rules! adapter {
                     address,
                     std::ptr::from_mut(self.move_assign_with(other, SwapPolicy::native_swap))
                 );
+            }
+            fn native_self_exchange(&mut self) {
+                self.exchange_self_with(SwapPolicy::native_self_swap);
             }
             fn native_self_assign(&mut self) {
                 let address = std::ptr::from_mut(self);
