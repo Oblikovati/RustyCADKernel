@@ -4,7 +4,7 @@ use crate::standard::Failure;
 impl<'a> AliasedArray<'a> {
     /// Allocate using OCCT's signed length overload; `AliasedArray::new_signed(4, 3)?`.
     pub fn new_signed(stride: usize, count: i32) -> Result<Self, Failure> {
-        Self::new(stride, checked_signed_count(count)?)
+        Self::new(stride, Self::checked_size(count)?)
     }
 
     /// Wrap the requested external prefix using signed length; `AliasedArray::from_slice_signed(&mut values, 2)?`.
@@ -12,7 +12,7 @@ impl<'a> AliasedArray<'a> {
         values: &'a mut [T],
         count: i32,
     ) -> Result<Self, Failure> {
-        let count: usize = checked_signed_count(count)?;
+        let count: usize = Self::checked_size(count)?;
         let available: usize = values.len();
         let prefix: &mut [T] = values.get_mut(..count).ok_or_else(|| {
             Failure::with_type(
@@ -26,7 +26,7 @@ impl<'a> AliasedArray<'a> {
 
     /// Resize through OCCT's signed length overload; `array.resize_signed(3, true)?`.
     pub fn resize_signed(&mut self, count: i32, copy: bool) -> Result<(), Failure> {
-        self.resize(checked_signed_count(count)?, copy)
+        self.resize(Self::checked_size(count)?, copy)
     }
 
     /// Read an element after the native signed-index check; `array.value_signed::<i32>(0)?`.
@@ -88,17 +88,6 @@ impl<'a> AliasedArray<'a> {
     ) -> Result<(), Failure> {
         self.value2_into(checked_signed_index(index)?, output)
     }
-}
-
-fn checked_signed_count(count: i32) -> Result<usize, Failure> {
-    if count <= 0 {
-        return Err(Failure::with_type(
-            "Standard_RangeError",
-            &format!("AliasedArray length {count}; expected a positive signed length"),
-            "",
-        ));
-    }
-    Ok(count as usize)
 }
 
 fn checked_signed_index(index: i32) -> Result<usize, Failure> {

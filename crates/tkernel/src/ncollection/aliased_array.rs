@@ -3,6 +3,7 @@ use crate::standard::Failure;
 mod access;
 mod legacy;
 mod pointers;
+mod validation;
 /// Plain bitwise value accepted by runtime-stride views; all integer and float primitives qualify.
 pub trait ArrayValue: bytemuck::Pod {}
 impl<T: bytemuck::Pod> ArrayValue for T {}
@@ -20,7 +21,7 @@ pub struct AliasedArray<'a> {
 impl<'a> AliasedArray<'a> {
     /// Create zero-length non-owning state; `AliasedArray::empty(4)?`.
     pub fn empty(stride: usize) -> Result<Self, Failure> {
-        checked_stride(stride)?;
+        let stride: usize = Self::checked_stride(stride)? as usize;
         Ok(Self {
             storage: ArrayStorage::Empty,
             stride,
@@ -36,12 +37,12 @@ impl<'a> AliasedArray<'a> {
     }
     /// Borrow mutable external values without copying; `AliasedArray::from_slice(&mut values)?`.
     pub fn from_slice<T: ArrayValue>(values: &'a mut [T]) -> Result<Self, Failure> {
-        checked_stride(size_of::<T>())?;
+        let stride: usize = Self::checked_stride(size_of::<T>())? as usize;
         checked_count(values.len())?;
         let count: usize = values.len();
         Ok(Self {
             storage: ArrayStorage::Borrowed(bytemuck::cast_slice_mut(values)),
-            stride: size_of::<T>(),
+            stride,
             count,
         })
     }
@@ -182,19 +183,18 @@ impl<'a> AliasedArray<'a> {
 }
 impl Clone for AliasedArray<'_> {
     fn clone(&self) -> Self {
-        if self.is_empty() {
-            return Self::empty(self.stride).unwrap();
+        // Copy the stored stride: native checkedStride may have narrowed it to zero.
+        let mut copy = Self {
+            storage: ArrayStorage::Empty,
+            stride: self.stride,
+            count: 0,
+        };
+        if !self.is_empty() {
+            copy.resize(self.count, false).unwrap();
+            copy.bytes_mut().copy_from_slice(self.bytes());
         }
-        let mut copy: Self = Self::new(self.stride, self.count).unwrap();
-        copy.bytes_mut().copy_from_slice(self.bytes());
         copy
     }
-}
-fn checked_stride(stride: usize) -> Result<(), Failure> {
-    if stride == 0 || stride > u32::MAX as usize {
-        return Err(invalid_shape(stride, 0));
-    }
-    Ok(())
 }
 fn checked_count(count: usize) -> Result<(), Failure> {
     if count == 0 {
