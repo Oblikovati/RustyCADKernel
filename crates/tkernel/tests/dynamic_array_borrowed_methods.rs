@@ -6,6 +6,7 @@ use std::{
     panic::{AssertUnwindSafe, catch_unwind},
 };
 mod dynamic_array_borrowed_methods {
+    pub mod alias_insertion;
     pub mod contracts;
     pub mod internal;
     pub mod moving;
@@ -79,13 +80,16 @@ fn move_assign(target: &mut BorrowedItem, source: &mut BorrowedItem) {
     let failure = event(format!("M{},{}", target.value, source.value));
     target.value = source.value;
     source.value = -7;
+    finish_move(failure, target.value);
+}
+fn finish_move(failure: &str, target_value: i32) {
     let call = BORROWED_PROBE.with(|probe| {
         let mut probe = probe.borrow_mut();
         probe.move_count += 1;
         probe.move_count
     });
     assert!(
-        !((call == 1 && failure == "move") || (target.value == 99 && failure == "final_move")),
+        !((call == 1 && failure == "move") || (target_value == 99 && failure == "final_move")),
         "move 1: expected success"
     );
 }

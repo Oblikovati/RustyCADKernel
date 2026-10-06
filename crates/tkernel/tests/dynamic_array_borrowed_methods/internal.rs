@@ -31,13 +31,21 @@ fn actual_internal(
         returned = append_internal(&mut array, source, moving);
     }
     let stable = original == &array[source];
+    observed_internal_row(name, &array, returned, stable)
+}
+pub(super) fn observed_internal_row(
+    name: &str,
+    array: &DynamicArray<BorrowedItem>,
+    returned: bool,
+    stable: bool,
+) -> String {
     let events = BORROWED_PROBE.with(|probe| probe.borrow().events.clone());
     format!(
         "{name} {events} {} {} {}{}",
         array.size(),
         usize::from(returned),
         usize::from(stable),
-        internal_values(&array)
+        internal_values(array)
     )
 }
 fn internal_values(array: &DynamicArray<BorrowedItem>) -> String {
