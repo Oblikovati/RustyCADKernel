@@ -1,0 +1,427 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "candidate_pending_root_integration",
+  "branch": "port/dynamic-erase-last",
+  "base_commit": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/metadata.rs": "83d66ec923d7a869df65b33c269f59b42c991e1caf5a11f1e5e6544af28bdaf5",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/phases.rs": "4cb64dc38da098702d1c10884ba2149797ae233297380586a89b9174dc289822",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests.rs": "5e02ced661421092a9e22763ece63b126041035c7ac8e0e27fd3a3980fa7f274",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table.rs": "db729325ec70f313682191fb316a2a42ebff66d9fcf1b8367c5d93e153f7543d",
+    "crates/tkernel/src/ncollection/dynamic_array/borrowed.rs": "ef6e55dffe3b52e0f385249276a96c44560b48d735743ccca2e5649acd7ad753",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date/copy_bits.rs": "ce6c717b1c84b707043ce542a2d2598352f1947b2809731bc76c76aeabf47b80",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "57967339a34f84be4d13c463dd7f81404216192cc2832e73ea36e5a65901c464",
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "450e91a7fd2d5337314c1a93b2ffff0a8ec07fc880f5486df9b2dcb90165e6ec",
+    "crates/tkernel/src/ncollection/dynamic_array/erase_phase.rs": "db4410f8bcd851fc61721dfa6ff9556a946cf2f6f511a098e7eb7f2b202e7875",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/native.rs": "3ea3ebc44c3dce14a7a6b3850a016a979ed5dd629f51c06fc958735e545973d7",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/panics.rs": "b82774790213c03b778b72116b4c6567483cdbceaaaf0f95e3a248ca7532df0d",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/transitions.rs": "883129645216e45c03acf746ead28ceb8e4ad9d72358d60646e96e1dcbe3802b",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests.rs": "bd910af6b86668aee26123534ccc9edafa0c1a5ba5d328ff618a0c4d2e2360c4",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail.rs": "0042d8b8df85e9674f8b96ef9b41c56a2a43db1266fd4f318731da7aae7a6ebc",
+    "crates/tkernel/src/ncollection/dynamic_array/insertion.rs": "8af21efec62c3af5f0fe189efce0b9c13a72505cf96d6b1bdd65f7609528e99a",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_append.rs": "d94a565f9be4243377872c4d99f293204e022ec7403411a74674bae51cd004e5",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_insertion.rs": "66086d6068d617853507d8e66e4bccb10840910e98953230efe9914714ae0ac9",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_setvalue.rs": "90c6481bbf4739e54e8c25491036f4b4b310cc39be247e2fcab1e46bb1513411",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/operators.rs": "81b248ce24f8e04ce7802e7fb2895ee26ac52be74986f1cab36affe690aa499f",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs": "b80da64567bf7ce0020b1bbf5fba539704235e492f859e062993931114289655",
+    "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "5f23fd4f185b4cd1d2dead5eff67913b66c7fb948cdf21158d16654fe09ff2f3",
+    "crates/tkernel/src/ncollection/dynamic_array/moving.rs": "be9978b566be7ae2d409788a64a888c9ed96c8aba57ea7797c600a8845e6cf6a",
+    "crates/tkernel/src/ncollection/dynamic_array/replacement_policy.rs": "2b486aae632b4d7e7ec0b76f030cecc35ab2835670c95f63258879afe70a24d4",
+    "crates/tkernel/src/ncollection/dynamic_array/slots.rs": "4715d1fd33438deaadaa88804421bfe5cb7cd3d82ff221aeb09eef5798d4393d",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/copy_policy.rs": "4cb21f873f5f28338429e0f4117dc7d005b3a40ad0e961e62319d2f5b97c1295",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs": "f4f67c1210601cc42daa0fc265279db7f0ec97ba7a4463ac5b383acb22a9126d",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/replacement.rs": "6653000b73da6836ec6a607f4de3e1b8d44fef93ec0fa73e67d04e5ca032ee58",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/retained_parameters.rs": "7715354f13f5c3bf03e69b114a4f66834b42478c170757c88bac3b5fa25e2cba",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "414d699b49c4092416e535b8727f43506f04cd94b57eac5e0671893044730b65",
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "9ae13a82b9e90422bf51e1159554ec9e73958675a572969b9315cff4870b8d38",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_insertion.rs": "c386dc6542e649d4fe6dd5481fef5d35dbbe7a4e87a2699102a17123d28dd7ae",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_setvalue.rs": "2659554a3f340f1ada5fa3ff39149efb4708a1e0c9f84bd06f5095907b5300b2",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/contracts.rs": "b00ad8972429b09413031d863fd07f3f030a8bee54a0bf969d98366d7e0e4781",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/internal.rs": "a6508fcde68c497b93bbdd265ed376b797eb68a47c1d627645c733b8cba56b4f",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/moving.rs": "8d8f22091abe3220eda9e4878a8fd58d6b445d4e746bb277de62c51353bc26b6",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/oracle.rs": "ac94513e13d49b962a29de2d57ddcd624018ded7544e44949f6c0df40f0ce1be",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods.rs": "fa7fd0a0870ce9c6a687cb96ae88bcce35b494273aa05d29d941548a92241000",
+    "crates/tkernel/tests/dynamic_array_copy_date/contracts.rs": "58abad0fc0bdfe99bb1e7cd11f2d57754f3771fa213929c73bad195e09512f54",
+    "crates/tkernel/tests/dynamic_array_copy_date/oracle.rs": "f5d23b8ffd140c8dbe635886aeb4a4f1750fed333cef66862947d9035cab7b90",
+    "crates/tkernel/tests/dynamic_array_copy_date.rs": "6bc88b234c9d90b719745c3d61aebd49f58df8b6a5551a4cecbed1dfcdc3732b",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs": "55d8b39b9bf49775105782556ed1a89e62c26190c95c3a2ead36f768ae943a32",
+    "crates/tkernel/tests/dynamic_array_emplace_allocation_order.rs": "ef722d17af1eb4b9b18dd0f988963bcd6fc5a21d191687f59a2c3a6902544f1a",
+    "crates/tkernel/tests/dynamic_array_emplace_value_order.rs": "06c80884073436e7f948f46174170e3631ea9dc0820cfc96a76e88df2c392f7a",
+    "crates/tkernel/tests/dynamic_array_erase_last_phase.rs": "1d2c3b60fb76b63c0bf273fb90472e4683d4fb9cf3db097130c5adaced3e5997",
+    "crates/tkernel/tests/dynamic_array_iterator_tail.rs": "5e530b723f555b0cc3ead07a01ced6667f1ab28924c0c4b7f121b084e7e45fd3",
+    "crates/tkernel/tests/dynamic_array_legacy_cursor_contracts.rs": "f5615e17d979a4152d6936159d7a634722469b8b722c9f05042f7b0d2084449b",
+    "crates/tkernel/tests/dynamic_array_method_tail/oracle.rs": "5c1c93128133492ade6dc889558b1a7994aed8d28dc398be73c97166df09bd66",
+    "crates/tkernel/tests/dynamic_array_method_tail/storage.rs": "5175e099f3ef67019e0a2d40c70ef894721a0643f735f3c7c1a5d451905dfba5",
+    "crates/tkernel/tests/dynamic_array_method_tail.rs": "66dd2eefcb5c71e85f4b99edb5bbeb4fe8f4b302d7a0ec836574b9f0c1c0622e",
+    "crates/tkernel/tests/dynamic_array_move_constructor.rs": "dbb462e6f6fe19a535c5383bf45d9e6974245161a8db3569fc14aaeff00ed37f",
+    "crates/tkernel/tests/dynamic_array_native_insertion/convenience.rs": "3a57bdc38468dddcb64fcc61060b2eb362cd38f3d68b0ddefeb0445f92807968",
+    "crates/tkernel/tests/dynamic_array_native_insertion/oracle.rs": "b59a7cc46d9c3164128defc9c07672bd16f9e7da9931846be86df360d50ad652",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs": "576c25dc0ec56d26ef965d1a66b2eea9a71f5d9a7122a2716884c008ce7f735d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/contracts.rs": "f45f3ba6678d66780ebe44d8bcaef0cbc495c2b4e1d5654001602c1ef812066d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/oracle.rs": "2be06c452aa3744033688fce7ed095050ec7483b146413d8979eb8bd4837370c",
+    "crates/tkernel/tests/dynamic_array_protected_storage.rs": "9f2583cd069b782e1d2f31443f9f50f16e4d26865d2582fde70d15f7711f38a1",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/contracts.rs": "9e73e8402dbd5172c7af2e4e0823ffe9e4aa571bbaf9aa2d0f8f49b2ff3d2e90",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/oracle.rs": "232802eb0f7214040bd16dad06b40b7264e6bebb10de3da92a5ca7b48ae5f48d",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs": "04d2991938e0f58511110dccc7542d3ae7f0e17775df325c246daf44db80b884",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/contracts.rs": "466f4ca295f14298ca9b0c766fe174287a6841d3e7f320ca1cddf099de819b46",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/emplace.rs": "eb560358b432b2024f07da572ac6ffa1b7997c4feb5a763268fc5f4b3e8f9439",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/oracle.rs": "1c7668759bdd3398a378fe2198c535f64b23cb7be5d7690d995fcf161dcb0c54",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs": "a1ff2c1c76a75d54008ea5d1e0515d16d2271ffd719c20b0b5f655190c4ad3c3",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/contracts.rs": "336e4b234f62849b3ec7a6ba2af79e2d9705bd2ba083763f850906e579de27f9",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/oracle.rs": "3eb53e8681941e356d184bef61e97509d226ac68576af8b34072549079c02611",
+    "crates/tkernel/tests/dynamic_array_retained_parameters.rs": "0be211e1854f9b078265e3d61b1a3b1a0901a8c8a1b4e9efa5271093c35be3eb",
+    "crates/tkernel/tests/ncollection_dynamic_array/basic.rs": "585b61713888ed825672bee602f618f1282705641a6172f61c6b49c4e713dcf3",
+    "crates/tkernel/tests/ncollection_dynamic_array/emplacement.rs": "e67889874ef91a39460f695cdfc808c456c4ceee02d4f49a0039c4b7943e64a8",
+    "crates/tkernel/tests/ncollection_dynamic_array/indices.rs": "dfee440e1f60829811f4fd687b6f69364586963155a466f4ad5302dc3cf63e3e",
+    "crates/tkernel/tests/ncollection_dynamic_array/insertion.rs": "8be53f9883d2ecc737b85f4bb4531ff32bed1fea9e9a4e3cb51200a89a5b0ac9",
+    "crates/tkernel/tests/ncollection_dynamic_array/iteration.rs": "7925ba8f77b0d6eb877b89d2615a234ecf982efb0bc4f3058dcd70455f0abc42",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs": "2709f289827412be11a3f7f78d0e9d0240f20cd4c8cd0402d85ce73a81e6cf3d",
+    "tools/oracle/tkernel_dynamic_erase_last_phase.cxx": "edbc06b4a7d5ba5ad424469553f270c0b2e7a13c83deb7322e0f2e3006373927",
+    "tools/oracle/tkernel_dynamic_erase_last_phase.expected": "d4b2266a565fc223746fed64dd07762dc4dbb01a6d0dd3a9a211b8233fe7e51c"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "native_header_resolution": {
+    "installed_forwarder": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_DynamicArray.hxx",
+    "forwarder_sha256": "1f2fcb0d67395dcef9425cb5c59ecf1d6bdcfc8fe3c861b7502556ee17e966a0",
+    "included_source": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+    "included_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "matches_pinned_git_blob": true
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-erase-last-rust.log.gz": "d881bd26c5ab10ca8d8cbacecb7231818dbbae037a639459febb91214c79ca0c",
+    "porting/runtime-evidence/dynamic-erase-last-unit.log.gz": "dc84778c1f5d4631f9a615840cef5f3d0730fade720425a36fde4da45c482ba9",
+    "porting/runtime-evidence/dynamic-erase-last-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-erase-last-clippy.log.gz": "926a701f4c41c9df39d9ebfa325432f9897efd70ffe99eb956ac9858aa379699",
+    "porting/runtime-evidence/dynamic-erase-last-miri.log.gz": "85fed3fbcb722ead82ea3f72684fda9f44dee6310e945fb7580abd3a8a05e36b",
+    "porting/runtime-evidence/dynamic-erase-last-unit-miri.log.gz": "f75ca75977562ac122477cdef9f2be845498bb8fa315af627c33de892bdde7d1",
+    "porting/runtime-evidence/dynamic-erase-last-compiler.log.gz": "1efc763ef95deb94c9fdc5cb3327c2b1a03bf29163fbee70de159161be190b1b",
+    "porting/runtime-evidence/dynamic-erase-last-native-originals.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-erase-last-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-erase-last-native-final.log.gz": "3e48e2e4365183aae4b5bd92fdb6d856bf5ceedfb396491a0b268e5792d96531",
+    "porting/runtime-evidence/dynamic-erase-last-compiler-json.json.gz": "c27443c1c93ab0bf443a624bf93893cbbebf682aa94514f3b09fdfa63409f25e",
+    "porting/runtime-evidence/dynamic-erase-last-normalized.json.gz": "b4f18e6bbd668f2ee5c65af8447a4b011b4199f64c32b0c5c38557e9ea72e2e8",
+    "porting/runtime-evidence/dynamic-erase-last-source.tar.gz": "29d9d715c07732fafaea1ec88d3d1636760f27756c856bc6b6d260301d75ad72"
+  },
+  "checks": {
+    "rust_passed": 261,
+    "unit_passed": 20,
+    "miri_passed": 57,
+    "unit-miri_passed": 13,
+    "native_originals_passed": 52,
+    "new_native_rows": 6,
+    "fmt_exit": 0,
+    "scoped_dynamic_clippy_exit": 0,
+    "compiler_exit": 0
+  },
+  "targets": [
+    "dynamic_array_borrowed_methods",
+    "dynamic_array_copy_date",
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_erase_last_phase",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_move_constructor",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_retained_parameters",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "miri_targets": [
+    "dynamic_array_erase_last_phase",
+    "ncollection_dynamic_array"
+  ],
+  "miri_unit_filter": "ncollection::dynamic_array::initialized_tail",
+  "miri_flags": [
+    "-Zmiri-strict-provenance"
+  ],
+  "native_compile_flags": [
+    "-std=c++17",
+    "-O2"
+  ],
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.Value"
+  ],
+  "bindings": [
+    {
+      "native": {
+        "id": "3dd4cf64e023455c5c2022eadd0834270e933c73fb7ee4422a635c8fb93a0d6b",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::EraseLast",
+        "signature": "void ()",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@F@EraseLast#",
+        "written_parameter_types": []
+      },
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::DynamicArray::erase_last_with_destruction",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "destroy",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnOnce",
+                          "resolved_item_path": "core::ops::function::FnOnce",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "raw_pointer": {
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                },
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": false,
+                                    "type": {
+                                      "primitive": "usize"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": null
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "impl FnOnce(*mut T, &usize)",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnOnce",
+                            "resolved_item_path": "core::ops::function::FnOnce",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [
+                                  {
+                                    "raw_pointer": {
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": false,
+                                      "type": {
+                                        "primitive": "usize"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "output": null
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/dynamic_array/erase_phase.rs",
+        "source_sha256": "db4410f8bcd851fc61721dfa6ff9556a946cf2f6f511a098e7eb7f2b202e7875",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::DynamicArray",
+              "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "40fc34cb4a7e72d0f2a1246ad71d0d066a6935205863ade8df752769c1180c25"
+      },
+      "status": "partial_canonical_prefix_explicit_destruction_domain"
+    }
+  ],
+  "behavior": [
+    "The explicit unsafe EraseLast adapter removes automatic ownership of the last slot without moving its bytes, invokes the destructor callback with its exclusive pointer and a shared borrow of the actual used field, then decrements used.",
+    "Metadata borrows are disjoint from block storage. No whole-array alias, mirrored count or copied snapshot is supplied. The native fixture reads owner.Size inside Item::~Item; the Rust Drop implementation reads the scoped used reference installed by the callback.",
+    "Six native traces span empty, one-item, same-block and crossing-block cases, repeated erasure, retained-slot reuse and a final empty erasure. Every destructor sees the pre-erasure logical size and the exact original element address.",
+    "A guard decrements logical size on unwind and retains uncertainty, while the vector no longer owns the retired slot. Focused Rust-only panic tests prove destructor failure cannot cause a second drop. This is explicitly separate from the native noexcept destruction domain.",
+    "The adapter validates canonical initialized block prefixes before transferring destruction responsibility. Hidden initialized tails are rejected without callback invocation or mutation; empty calls do not require item traits or callbacks.",
+    "All52 original legacy runtime declarations are joined to normal and strict Miri Rust results; existing initialized-tail panic recovery tests remain green."
+  ],
+  "limitations": [
+    "The existing safe erase_last convenience is unchanged and remains partial for callback-time native Size: it decrements used before truncate. The new explicit adapter covers the native nonpanicking destructor observation phase.",
+    "The unsafe callback must end the original lifetime exactly once without freeing block storage and cannot access the element or metadata borrow after returning/unwinding. If it panics before destruction, cleanup remains its responsibility.",
+    "The native destroyAt noexcept termination behavior is not emulated by Rust unwinding; recovery tests are Rust extensions.",
+    "Only initialized canonical prefixes are covered. Native undefined behavior, whole-owner reentrant mutation, generic destructor ABI and arbitrary ownership corruption are not claimed.",
+    "Trivial items use a no-op destruction callback; native trait inference is not automatic in this explicit policy adapter."
+  ],
+  "global_api_credit_delta": 0,
+  "global_legacy_credit_delta": 0,
+  "validation_scope": "Final source/test files pass17 DynamicArray integration targets, DynamicArray unit filter, strict Clippy and fmt. Focused strict-provenance Miri validates actual metadata reads during Drop and original-slot lifetime retirement; original52 and initialized-tail unit regressions run under Miri as well. Compiler binding is unique, public and body-bearing; archives capture source, outputs and source hashes. No shared ledger or raw lifetime helper edits."
+}
