@@ -1,0 +1,42 @@
+{
+  "schema": "rustycad.exact-scalar-selectors.v1",
+  "base_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler_capture": "foundation-method-tail (20 libraries, all features, frozen14dba9cc)",
+  "raw_tkernel_sha256": "a15074c42e886173c3496bdc5278eb14a93b188c530d4f1980ec5ba54fcd0954",
+  "native_declarations": 6,
+  "selected_current_compiler_bodies": 12,
+  "status_changes": 0,
+  "original_test_mapping_credit_added": 0,
+  "new_implementations": 0,
+  "regression_tests_passed": 6,
+  "baseline_failure": "Six per-mapping ambiguity failures and three missing-selector errors; fixture-source and ambiguity controls passed.",
+  "candidate_exit": 0,
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "6fa9acb52d0ce74423b8bd9fe7521330577ed3277191f18400ebfca1703cbff5",
+    "crates/tkernel/src/ncollection/vector/boolean.rs": "a8c483f9b3db13280e08c2155ee1c225d8736e11a24a8440610c323cc2240ec4"
+  },
+  "artifacts": {
+    "red": {
+      "path": "porting/runtime-evidence/vector-scalar-body-selectors-red.gz",
+      "sha256": "618ba92b262b1076a5c9977d127d47c1397800b068cee8224f16372378012229"
+    },
+    "green": {
+      "path": "porting/runtime-evidence/vector-scalar-body-selectors-green.gz",
+      "sha256": "a9a84cbcfcd0de1db174fc6e435a7cd1133d0c9a0741967e156f4d6158cdc7f3"
+    },
+    "replay.py": {
+      "path": "porting/runtime-evidence/vector-scalar-body-selectors-replay.py.gz",
+      "sha256": "2b613a7a1213dc2e313342e6999ebffdaf1a723a25a8c1785f0319acb039d309"
+    },
+    "bindings.json": {
+      "path": "porting/runtime-evidence/vector-scalar-body-selectors-bindings.json.gz",
+      "sha256": "f47b2fc917b5392c12fae5a6bbbf4b8de4ec8a3e8beb71b46f0220da59b7d309"
+    }
+  },
+  "limitations": [
+    "This resolves six existing ambiguous Rust paths, preserving their implemented ledger status. It does not prove unconstrained C++ template or ABI parity.",
+    "Both generic arithmetic and boolean specialized bodies are explicitly selected; exact source hashes and current compiler declarations were independently checked.",
+    "Full API denominator and original legacy test parity remain incomplete."
+  ]
+}
