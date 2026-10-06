@@ -7,6 +7,7 @@ mod cell_index;
 mod fallible;
 mod geometry;
 mod indices;
+mod protected;
 mod setup;
 use cell_index::CellIndex;
 pub use geometry::CellGeometry;
@@ -39,14 +40,18 @@ pub trait CellInspector {
 struct CellHash;
 impl HashPolicy<CellIndex> for CellHash {
     fn hash(&self, key: &CellIndex) -> usize {
-        let coordinates: &[i32] = key.as_slice();
+        Self::hash_coordinates(key.as_slice())
+    }
+    fn equal(&self, first: &CellIndex, second: &CellIndex) -> bool {
+        first.as_slice() == second.as_slice()
+    }
+}
+impl CellHash {
+    fn hash_coordinates(coordinates: &[i32]) -> usize {
         // OCCT 3d097a03 hashes CellIndex storage directly; copying bytes adds an allocation.
         let bytes: &[u8] =
             crate::standard::hashing::object_bytes(coordinates, std::mem::size_of_val(coordinates));
         crate::standard::hashing::hash_bytes(bytes)
-    }
-    fn equal(&self, first: &CellIndex, second: &CellIndex) -> bool {
-        first.as_slice() == second.as_slice()
     }
 }
 /// Hash-indexed cells owning independent target copies; `CellFilter::<Inspector>::new(1.0)`.
@@ -96,14 +101,8 @@ impl<I: CellGeometry> CellFilter<I> {
     fn add_cell(&mut self, index: CellIndex, target: &I::CellTarget) {
         self.cells.add(&index, target);
     }
-    fn retain_cell(&mut self, index: &CellIndex, mut keep: impl FnMut(&I::CellTarget) -> bool) {
-        let result = self.try_retain_cell(index, |stored| {
-            Ok::<bool, std::convert::Infallible>(keep(stored))
-        });
-        match result {
-            Ok(()) => (),
-            Err(never) => match never {},
-        }
+    fn retain_cell(&mut self, index: &CellIndex, keep: impl FnMut(&I::CellTarget) -> bool) {
+        self.retain_index(index.as_slice(), keep);
     }
 }
 

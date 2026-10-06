@@ -7,6 +7,13 @@ impl<T> CellMap<T> {
         index: &CellIndex,
         keep: impl FnMut(&T) -> Result<bool, E>,
     ) -> Result<(), E> {
+        self.try_retain_index(index.as_slice(), keep)
+    }
+    pub(in crate::ncollection::cell_filter) fn try_retain_index<E>(
+        &mut self,
+        index: &[i32],
+        keep: impl FnMut(&T) -> Result<bool, E>,
+    ) -> Result<(), E> {
         let Some((bucket, node)) = self.lookup_index(index) else {
             return Ok(());
         };

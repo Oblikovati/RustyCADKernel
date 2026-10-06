@@ -10,9 +10,9 @@ pub(in crate::ncollection::cell_filter) struct CellRecord<T> {
     ownership: std::marker::PhantomData<Box<T>>,
 }
 impl<T> CellRecord<T> {
-    pub(super) fn from_index(index: &CellIndex) -> Self {
+    pub(super) fn from_coordinates(index: &[i32]) -> Self {
         Self {
-            index: index.clone(),
+            index: CellIndex::from_slice(index),
             objects: std::ptr::null(),
             ownership: std::marker::PhantomData,
         }

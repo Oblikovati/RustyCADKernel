@@ -32,24 +32,24 @@ impl<T> CellMap<T> {
     pub(super) fn clear_with_allocator(&mut self, requested: Option<BaseAllocator>) {
         self.storage.clear_with_allocator(requested);
     }
-    fn lookup_index(&self, index: &CellIndex) -> Option<(usize, *mut MapLinkNode)> {
+    fn lookup_index(&self, index: &[i32]) -> Option<(usize, *mut MapLinkNode)> {
         if self.storage.base.size() == 0 {
             return None;
         }
         let (bucket, found) = self.storage.lookup_with_bucket_by(
-            index,
-            |key| CellHash.hash(key),
-            |cell, key| CellHash.equal(&cell.index, key),
+            &index,
+            |key| CellHash::hash_coordinates(key),
+            |cell, key| cell.index.as_slice() == *key,
         );
         found.map(|node| (bucket, node))
     }
-    fn prepare_cell(&mut self, index: &CellIndex) -> *mut CellRecord<T> {
+    fn prepare_cell(&mut self, index: &[i32]) -> *mut CellRecord<T> {
         let size = self.storage.base.size();
         if size == 0 || size > self.storage.base.nb_buckets() {
             self.storage.resize(size, &CellMapHash);
         }
         // Native TryEmplaced constructs the lookup Cell after map growth, even for a hit.
-        let cell = CellRecord::from_index(index);
+        let cell = CellRecord::from_coordinates(index);
         let (bucket, existing) = self.storage.lookup_with_bucket(&cell, &CellMapHash);
         let node = existing.unwrap_or_else(|| {
             self.storage
@@ -60,6 +60,9 @@ impl<T> CellMap<T> {
 }
 impl<T: Clone> CellMap<T> {
     pub(super) fn add(&mut self, index: &CellIndex, target: &T) {
+        self.add_index(index.as_slice(), target);
+    }
+    pub(super) fn add_index(&mut self, index: &[i32], target: &T) {
         let cell = self.prepare_cell(index);
         let allocator = self.storage.base.allocator();
         unsafe { CellObjectNode::prepend(cell, target, allocator) };

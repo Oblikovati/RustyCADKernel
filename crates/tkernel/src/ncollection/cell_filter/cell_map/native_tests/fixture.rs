@@ -103,7 +103,7 @@ pub(super) fn filled(mode: usize) -> (CellFilter<Inspector>, Rc<RefCell<Probe>>)
 }
 fn bind_probe(filter: &CellFilter<Inspector>, probe: &Rc<RefCell<Probe>>) {
     let index = filter.indices(&[0.]);
-    let (_, map_node) = filter.cells.lookup_index(&index).unwrap();
+    let (_, map_node) = filter.cells.lookup_index(index.as_slice()).unwrap();
     let cell = unsafe { CellMapNode::cell_ptr(map_node.cast()) };
     let mut observed = probe.borrow_mut();
     observed.cell = Some(cell);
