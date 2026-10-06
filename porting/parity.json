@@ -70494,20 +70494,26 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator(NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Iterator(NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::new",
+      "status": "partial",
+      "notes": "Index zero; MUTABLE=true for Iterator and false for ConstIterator. Explicit owner borrow at dereference; no native const_cast/virtual subclass contract. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Iterator(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::new",
+      "status": "partial",
+      "notes": "Index zero; MUTABLE=true for Iterator and false for ConstIterator. Explicit owner borrow at dereference; no native const_cast/virtual subclass contract. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::Iterator::More() const",
@@ -70542,36 +70548,48 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator::Init(NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Init(NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator::Init(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Init(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::ConstIterator()",
@@ -70582,12 +70600,15 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
     },
     {
-      "upstream_id": "NCollection_DynamicArray::ConstIterator(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::ConstIterator(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::new",
+      "status": "partial",
+      "notes": "Index zero; MUTABLE=true for Iterator and false for ConstIterator. Explicit owner borrow at dereference; no native const_cast/virtual subclass contract. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::ConstIterator::More() const",
@@ -70614,20 +70635,26 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
     },
     {
-      "upstream_id": "NCollection_DynamicArray::ConstIterator::Init(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Init(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::ConstIterator::Initialize(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Initialize(const NCollection_DynamicArray<TheItemType> &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize",
+      "status": "partial",
+      "notes": "Captures owner and starts at zero; Iterator and ConstIterator must retain distinct const generic selection and explicit owner dereference. Owner identity is invalidated by moving the array; native const-qualified mutable Iterator constructor does not justify const_cast mutation from an immutable Rust owner. Scoped behavior evidence: porting/audits/dynamic-array-iterator-tail.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::begin() const",
@@ -70790,64 +70817,86 @@
       "notes": "Manual NCollection member mapping; the int increment is clamped to at least 1."
     },
     {
-      "upstream_id": "NCollection_DynamicArray(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::NCollection_DynamicArray<TheItemType>(const NCollection_DynamicArray<TheItemType> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::clone::Clone>::clone",
-      "status": "implemented",
-      "notes": "Copies logical values, increment, allocator and the allocated block layout; a clone panic drops its uncommitted Rust object."
+      "status": "partial",
+      "notes": "Clone adapter only; native copyDate trivial/nontrivial dispatch and arbitrary constructor failures remain partial. Scoped behavior evidence: porting/audits/dynamic-array-copy-date.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::<core::clone::Clone>::clone"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray(NCollection_DynamicArray&&)",
+      "upstream_id": "NCollection_DynamicArray::NCollection_DynamicArray<TheItemType>(NCollection_DynamicArray<TheItemType> &&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
-      "status": "implemented",
-      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::from_moved",
+      "status": "partial",
+      "notes": "Genuine fresh-returning move constructor transfers existing blocks/allocator and resets donor used size while retaining stride; no payload Copy/Default/Drop operations. Address and allocation identity checked natively; C++ object ABI/noexcept termination and arbitrary descriptor byte layout remain outside adapter domain. Scoped behavior evidence: porting/audits/dynamic-array-move-constructor.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::from_moved"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::~NCollection_DynamicArray()",
+      "upstream_id": "NCollection_DynamicArray::~NCollection_DynamicArray<TheItemType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::drop::Drop>::drop",
+      "status": "partial",
+      "notes": "Real Drop calls clear(true) with phased teardown. Native throwing destructor/termination differences remain explicit. Scoped behavior evidence: porting/audits/dynamic-array-block-table.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::<core::ops::drop::Drop>::drop"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray&,bool)",
+      "upstream_id": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray<TheItemType> &,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_returning",
+      "status": "partial",
+      "notes": "Receiver-returning adapter; preserve explicit self-assignment companion and allocator policy. Generic clone/move/noexcept behavior not fully equivalent. own_allocator=true is default and preserves receiver allocator; false adopts source allocator. Clone panic cleanup differs from native raw untracked construction. Scoped behavior evidence: porting/audits/dynamic-array-copy-date.json.",
       "rust_items": [
         "rustycad_tkernel::ncollection::DynamicArray::assign_returning",
-        "rustycad_tkernel::ncollection::DynamicArray::assign_default_returning"
-      ],
-      "status": "implemented",
-      "notes": "Copies according to theOwnAllocator (default true) and returns destination; paired Rust methods preserve explicit/default calls. Probe checks identity, allocator retention/adoption, and complete-block state after caught copy exceptions."
+        "rustycad_tkernel::ncollection::DynamicArray::assign_default_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_self"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
+      "upstream_id": "NCollection_DynamicArray::Assign(NCollection_DynamicArray<TheItemType> &&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
-      "status": "implemented",
-      "notes": "Transfers blocks and allocator, leaves source empty with its increment and null allocator, and returns destination; native probe checks identity/state."
+      "status": "partial",
+      "notes": "Receiver-returning adapter; preserve explicit self-assignment companion and allocator policy. Generic clone/move/noexcept behavior not fully equivalent. Receiver Clear(true) occurs before donor extraction; named Assign can unwind, whereas native operator= noexcept termination is not reproduced. Scoped behavior evidence: porting/audits/dynamic-array-initialized-tail-fastpath.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::move_self"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray&)",
+      "upstream_id": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray<TheItemType> &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning",
-      "status": "implemented",
-      "notes": "Uses copy assignment allocator policy (adopt source allocator) and returns destination; native probe checks identity, chain result, and values."
+      "status": "partial",
+      "notes": "Receiver-returning adapter; preserve explicit self-assignment companion and allocator policy. Generic clone/move/noexcept behavior not fully equivalent. Copy operator adopts source allocator; Clone panic cleanup differs from native untracked constructed prefix. Scoped behavior evidence: porting/audits/dynamic-array-copy-date.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_operator_self"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::operator=(NCollection_DynamicArray&&)",
+      "upstream_id": "NCollection_DynamicArray::operator=(NCollection_DynamicArray<TheItemType> &&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
-      "status": "implemented",
-      "notes": "Transfers blocks and allocator and returns destination; native probe checks identity and the moved-from state."
+      "status": "partial",
+      "notes": "Receiver-returning adapter; preserve explicit self-assignment companion and allocator policy. Generic clone/move/noexcept behavior not fully equivalent. Receiver Clear(true) occurs before donor extraction; named Assign can unwind, whereas native operator= noexcept termination is not reproduced. Scoped behavior evidence: porting/audits/dynamic-array-initialized-tail-fastpath.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::move_self"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::Append(const TheItemType&)",
@@ -70954,20 +71003,26 @@
       "notes": "Constructor arguments become a constructing closure, invoked after reserving the element block as native EmplaceAppend. Supplemental nested incremental-allocation oracle and original tests pass; see dynamic-array-emplace-allocation-order.json."
     },
     {
-      "upstream_id": "NCollection_DynamicArray::EmplaceValue(size_t,Args&&)",
+      "upstream_id": "NCollection_DynamicArray::EmplaceValue(const size_t,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; extends with default values like SetValue. Rust preallocates all destination blocks, constructs gaps before the requested value, and publishes length only on success. Caught constructor failure retains the old length; staged gap values are forgotten to match native destruction behavior for objects beyond UsedSize. Partial: arbitrary throwing/destructor/retry lifetimes and non-assignable replacement semantics are not proven; see tkernel_dynamic_emplace_value_order.md."
+      "notes": "Closure construction policy and signed/unsigned index inputs; native trait dispatch is not automatic and address-dependent placement constructors are unsupported. T:Default and FnOnce()->T replace native variadic argument forwarding; existing-slot behavior uses Rust value replacement, not arbitrary native assignable/reconstruct trait dispatch. Native undefined negative index/allocation-overflow domains excluded. Scoped behavior evidence: porting/audits/dynamic-array-initialized-tail-fastpath.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::emplace_value"
+      ]
     },
     {
-      "upstream_id": "NCollection_DynamicArray::EmplaceValue(int,Args&&)",
+      "upstream_id": "NCollection_DynamicArray::EmplaceValue(const int,Args &&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
       "status": "partial",
-      "notes": "Manual NCollection member mapping; a negative int index is an ArrayError. Rust preallocates all destination blocks, constructs gaps before the requested value, and publishes length only on success. Caught constructor failure retains the old length; staged gap values are forgotten to match native destruction behavior for objects beyond UsedSize. Partial: arbitrary throwing/destructor/retry lifetimes and non-assignable replacement semantics are not proven; see tkernel_dynamic_emplace_value_order.md."
+      "notes": "Closure construction policy and signed/unsigned index inputs; native trait dispatch is not automatic and address-dependent placement constructors are unsupported. T:Default and FnOnce()->T replace native variadic argument forwarding; existing-slot behavior uses Rust value replacement, not arbitrary native assignable/reconstruct trait dispatch. Native undefined negative index/allocation-overflow domains excluded. Scoped behavior evidence: porting/audits/dynamic-array-initialized-tail-fastpath.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::emplace_value"
+      ]
     },
     {
       "upstream_id": "NCollection_DynamicArray::operator()(size_t) const",
