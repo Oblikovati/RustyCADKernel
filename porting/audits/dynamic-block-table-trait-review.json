@@ -1,0 +1,85 @@
+{
+  "source_candidate_commit": "a730e7d9654f5a93431b148beac5dcca51081a87",
+  "main_parent_checkpoint": "20647bf4 frozen root checkpoint",
+  "probes": [
+    {
+      "version": "candidate",
+      "kind": "auto-trait",
+      "exit": 0,
+      "rlib_sha256": "76243e77dab4524022324090e75ee29cc1bdcdf0ba8bd5c44bda740cb4bd0f4a",
+      "log": "/tmp/dynamic-candidate-auto-trait.log",
+      "source": "/tmp/dynamic-auto-trait-probe.rs"
+    },
+    {
+      "version": "candidate",
+      "kind": "dropck",
+      "exit": 1,
+      "rlib_sha256": "76243e77dab4524022324090e75ee29cc1bdcdf0ba8bd5c44bda740cb4bd0f4a",
+      "log": "/tmp/dynamic-candidate-dropck.log",
+      "source": "/tmp/dynamic-dropck-probe.rs"
+    },
+    {
+      "version": "main",
+      "kind": "auto-trait",
+      "exit": 0,
+      "rlib_sha256": "69dd7d27b9f7276f87e8ee705f5871a5e2e7dd3665469ff097c34f81d43bac41",
+      "log": "/tmp/dynamic-main-auto-trait.log",
+      "source": "/tmp/dynamic-auto-trait-probe.rs"
+    },
+    {
+      "version": "main",
+      "kind": "dropck",
+      "exit": 1,
+      "rlib_sha256": "69dd7d27b9f7276f87e8ee705f5871a5e2e7dd3665469ff097c34f81d43bac41",
+      "log": "/tmp/dynamic-main-dropck.log",
+      "source": "/tmp/dynamic-dropck-probe.rs"
+    }
+  ],
+  "positive_runtime": {
+    "main": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "candidate": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "files": {
+    "/tmp/dynamic-auto-trait-probe.rs": {
+      "sha256": "3308f62cc7eb12d3520df2b00caedc8a6b4217a7cbeaf133b07560c2abd303bc",
+      "text": "use rustycad_tkernel::ncollection::DynamicArray;\nuse std::marker::PhantomPinned;\nfn require_send_sync<T: Send + Sync>() {}\nfn require_unpin<T: Unpin>() {}\nfn require_unwind<T: std::panic::UnwindSafe + std::panic::RefUnwindSafe>() {}\nfn covariance<'short, 'long: 'short>(value: DynamicArray<&'long i32>) -> DynamicArray<&'short i32> { value }\nfn main() {\n    require_send_sync::<DynamicArray<i32>>();\n    require_unpin::<DynamicArray<PhantomPinned>>();\n    require_unwind::<DynamicArray<i32>>();\n    let value = 7;\n    let mut array = DynamicArray::default();\n    array.append(&value);\n    let array = covariance(array);\n    assert_eq!(array.size(), 1);\n}\n"
+    },
+    "/tmp/dynamic-dropck-probe.rs": {
+      "sha256": "83f4d4b4113e1c079db2b147cf01b0e7908d498346269f2dbd8096454cd74426",
+      "text": "use rustycad_tkernel::ncollection::DynamicArray;\nfn main() {\n    let mut array = DynamicArray::default();\n    let value = 7;\n    array.append(&value);\n    assert_eq!(array.size(), 1);\n}\n"
+    },
+    "/tmp/run-dynamic-trait-probes.py": {
+      "sha256": "f009ab34d0277a6e458750db0e9ae95229f364850ed2929bef68858d86cc1ed0",
+      "text": "from pathlib import Path\nimport json,subprocess,hashlib\nroots={'candidate':'/tmp/rustycad-dynamic-tail-target/debug/deps','main':'/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace/RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/target/debug/deps'}\nrows=[]\nfor version,root in roots.items():\n lib=next(Path(root).glob('librustycad_tkernel-*.rlib'))\n for kind in ['auto-trait','dropck']:\n  source=Path('/tmp/dynamic-'+kind+'-probe.rs');out='/tmp/dynamic-'+version+'-'+kind\n  command=['/home/vmiguel/.cargo/bin/rustc','--edition=2024',str(source),'-L','dependency='+root,'--extern','rustycad_tkernel='+str(lib),'-o',out]\n  result=subprocess.run(command,capture_output=True)\n  Path(out+'.log').write_bytes(result.stdout+result.stderr)\n  rows.append({'version':version,'kind':kind,'exit':result.returncode,'rlib_sha256':hashlib.sha256(lib.read_bytes()).hexdigest(),'log':out+'.log','source':str(source)})\n  print(version,kind,result.returncode,result.stderr.decode()[:1800])\nPath('/tmp/dynamic-trait-probe-results.json').write_text(json.dumps(rows,indent=2)+'\\n')\n"
+    },
+    "/tmp/dynamic-trait-probe-results.json": {
+      "sha256": "8a1432179214fc2f7d323d436a37097e6c5ad7a56a77faa4b475c6fe745e81b6",
+      "text": "[\n  {\n    \"version\": \"candidate\",\n    \"kind\": \"auto-trait\",\n    \"exit\": 0,\n    \"rlib_sha256\": \"76243e77dab4524022324090e75ee29cc1bdcdf0ba8bd5c44bda740cb4bd0f4a\",\n    \"log\": \"/tmp/dynamic-candidate-auto-trait.log\",\n    \"source\": \"/tmp/dynamic-auto-trait-probe.rs\"\n  },\n  {\n    \"version\": \"candidate\",\n    \"kind\": \"dropck\",\n    \"exit\": 1,\n    \"rlib_sha256\": \"76243e77dab4524022324090e75ee29cc1bdcdf0ba8bd5c44bda740cb4bd0f4a\",\n    \"log\": \"/tmp/dynamic-candidate-dropck.log\",\n    \"source\": \"/tmp/dynamic-dropck-probe.rs\"\n  },\n  {\n    \"version\": \"main\",\n    \"kind\": \"auto-trait\",\n    \"exit\": 0,\n    \"rlib_sha256\": \"69dd7d27b9f7276f87e8ee705f5871a5e2e7dd3665469ff097c34f81d43bac41\",\n    \"log\": \"/tmp/dynamic-main-auto-trait.log\",\n    \"source\": \"/tmp/dynamic-auto-trait-probe.rs\"\n  },\n  {\n    \"version\": \"main\",\n    \"kind\": \"dropck\",\n    \"exit\": 1,\n    \"rlib_sha256\": \"69dd7d27b9f7276f87e8ee705f5871a5e2e7dd3665469ff097c34f81d43bac41\",\n    \"log\": \"/tmp/dynamic-main-dropck.log\",\n    \"source\": \"/tmp/dynamic-dropck-probe.rs\"\n  }\n]\n"
+    },
+    "/tmp/dynamic-candidate-auto-trait.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    "/tmp/dynamic-candidate-dropck.log": {
+      "sha256": "94e0069f5546dcf3de84119b9e988b0c0cc26b54da504929d12a4170b9650972",
+      "text": "error[E0597]: `value` does not live long enough\n --> /tmp/dynamic-dropck-probe.rs:5:18\n  |\n4 |     let value = 7;\n  |         ----- binding `value` declared here\n5 |     array.append(&value);\n  |                  ^^^^^^ borrowed value does not live long enough\n6 |     assert_eq!(array.size(), 1);\n7 | }\n  | -\n  | |\n  | `value` dropped here while still borrowed\n  | borrow might be used here, when `array` is dropped and runs the `Drop` code for type `DynamicArray`\n  |\n  = note: values in a scope are dropped in the opposite order they are defined\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0597`.\n"
+    },
+    "/tmp/dynamic-main-auto-trait.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    "/tmp/dynamic-main-dropck.log": {
+      "sha256": "6b53e853d89736e7faa184be7f767143f55cbc3af2107013a298d2816b6cfedb",
+      "text": "error[E0597]: `value` does not live long enough\n --> /tmp/dynamic-dropck-probe.rs:5:18\n  |\n4 |     let value = 7;\n  |         ----- binding `value` declared here\n5 |     array.append(&value);\n  |                  ^^^^^^ borrowed value does not live long enough\n6 |     assert_eq!(array.size(), 1);\n7 | }\n  | -\n  | |\n  | `value` dropped here while still borrowed\n  | borrow might be used here, when `array` is dropped and runs the destructor for type `DynamicArray<&i32>`\n  |\n  = note: values in a scope are dropped in the opposite order they are defined\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0597`.\n"
+    }
+  },
+  "conclusion": "Both versions compile Send+Sync<i32>, UnwindSafe+RefUnwindSafe<i32>, Unpin<PhantomPinned>, lifetime covariance; both reject the late referent E0597 drop-order probe. No observed auto-trait/covariance/drop-check regression."
+}
