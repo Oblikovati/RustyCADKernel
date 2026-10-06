@@ -1,0 +1,1702 @@
+{
+  "status": "bucket_allocation_policy_candidate_verified_pending_root_integration",
+  "base_commit": "ab09ded5fab7ab1c3eb21115e5bd8dd1dc2d5aa8",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "full_api_parity": false,
+  "allocation_policy_full_parity": false,
+  "global_api_credit": 0,
+  "new_original_test_credit": 0,
+  "changes": [
+    "The canonical bucket table now uses existing BaseAllocator::common().allocate_optimal_raw and matching free_raw_nullable ownership instead of a private std::alloc payload.",
+    "Raw bucket heads are initialized before any link is changed, and old bucket memory is released before committing the new modulus.",
+    "A null table release remains a no-op without lazily allocating a common-allocator handle.",
+    "Node global Box ownership and open PackedWord transactional scratch are unchanged."
+  ],
+  "checks": {
+    "normal_integration": {
+      "passed": 397,
+      "failed": 0,
+      "ignored": 0
+    },
+    "normal_unit": {
+      "passed": 19,
+      "failed": 0,
+      "ignored": 0
+    },
+    "strict_miri_integration": {
+      "passed": 317,
+      "failed": 0,
+      "ignored": 0
+    },
+    "strict_miri_unit": {
+      "passed": 19,
+      "failed": 0,
+      "ignored": 0
+    },
+    "native_original_passed": 264,
+    "new_normal_tests": 6,
+    "new_miri_tests": 6,
+    "normal_fixture_rows": 240,
+    "miri_fixture_rows": 240,
+    "injected_failure_rows": 108,
+    "successful_reallocation_rows": 108,
+    "unchanged_noop_rows": 24,
+    "frozen_runtime_inputs": 10169,
+    "inputs_unchanged": true,
+    "all_target_tkernel_clippy_exit": 0,
+    "fmt_exit": 0,
+    "rustdoc_exit": 0,
+    "commands": [
+      {
+        "name": "rust",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_packed_map",
+          "--test",
+          "packed_map_supplemental",
+          "--test",
+          "packed_map_method_contracts",
+          "--test",
+          "packed_cursor_behavior",
+          "--test",
+          "packed_map_aliases",
+          "--test",
+          "packed_map_protected_helpers",
+          "--test",
+          "packed_map_node_contracts",
+          "--test",
+          "packed_map_iterator_errors",
+          "--test",
+          "packed_map_object_storage"
+        ],
+        "exit": 0,
+        "wall_seconds": 39.53486395208165
+      },
+      {
+        "name": "unit",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--lib",
+          "ncollection::packed_map::"
+        ],
+        "exit": 0,
+        "wall_seconds": 5.4456807089736685
+      },
+      {
+        "name": "clippy",
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "wall_seconds": 45.75568253709935
+      },
+      {
+        "name": "fmt",
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0,
+        "wall_seconds": 6.276910427957773
+      },
+      {
+        "name": "rustdoc",
+        "command": [
+          "cargo",
+          "+nightly-2026-09-25",
+          "rustdoc",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--lib",
+          "--",
+          "-Z",
+          "unstable-options",
+          "--output-format",
+          "json",
+          "--document-private-items"
+        ],
+        "exit": 0,
+        "wall_seconds": 1.6012755139963701
+      }
+    ],
+    "miri_commands": [
+      {
+        "name": "miri",
+        "command": [
+          "cargo",
+          "+nightly-2026-09-25",
+          "miri",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_packed_map",
+          "--test",
+          "packed_map_method_contracts",
+          "--test",
+          "packed_map_iterator_errors",
+          "--test",
+          "packed_map_object_storage"
+        ],
+        "exit": 0,
+        "wall_seconds": 101.94628647400532
+      },
+      {
+        "name": "unit-miri",
+        "command": [
+          "cargo",
+          "+nightly-2026-09-25",
+          "miri",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--lib",
+          "ncollection::packed_map::"
+        ],
+        "exit": 0,
+        "wall_seconds": 269.1180724769365
+      }
+    ],
+    "native_commands": [
+      {
+        "name": "native-build",
+        "command": [
+          "g++",
+          "-std=c++17",
+          "-O2",
+          "-fno-access-control",
+          "-I",
+          "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+          "tools/oracle/tkernel_packed_map_bucket_policy.cxx",
+          "-L",
+          "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-lTKernel",
+          "-o",
+          "/tmp/rustycad-packed-map-bucket-policy-native"
+        ],
+        "exit": 0,
+        "wall_seconds": 1.1319147879257798
+      },
+      {
+        "name": "native-actual",
+        "command": [
+          "/tmp/rustycad-packed-map-bucket-policy-native"
+        ],
+        "exit": 0,
+        "wall_seconds": 0.0031640870729461312
+      },
+      {
+        "name": "native-original",
+        "command": [
+          "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest",
+          "--gtest_filter=NCollection_PackedMap*"
+        ],
+        "exit": 0,
+        "wall_seconds": 0.023772765998728573
+      }
+    ]
+  },
+  "native_matrix": {
+    "types": [
+      "i32",
+      "u32",
+      "i64",
+      "u64",
+      "i8",
+      "bool"
+    ],
+    "initial_states": [
+      "unallocated default",
+      "allocated empty",
+      "populated collision/boundary keys",
+      "remove-all retains allocated table",
+      "unallocated requested 700 buckets"
+    ],
+    "requests": [
+      0,
+      1000,
+      1009,
+      "SIZE_MAX"
+    ],
+    "allocation_outcomes": [
+      "normal allocation",
+      "injected throw before allocation"
+    ],
+    "observations": [
+      "exact AllocateOptimal requested byte count",
+      "allocation then Free order, including native Free(nullptr)",
+      "no allocation/free on nonempty no-growth requests",
+      "exact old/new modulus, extent, packed-node count and allocated flag",
+      "16-byte native malloc alignment",
+      "exact ordered bucket, mask and occupied-bit triples",
+      "node identities retained through successful rehash and injected failure",
+      "table identity retained on failure and no-op, replaced on success"
+    ],
+    "native_binary_sha256": "fcba033f24d9f598c73d55ef347c3a623d57e3f30f08fce7aee0b8ac704cb6cc"
+  },
+  "fault_injection": {
+    "native": "The executable interposes Standard::AllocateOptimal and Standard::Free. Successful calls still use malloc/free. An enabled allocation boundary throws integer17 before malloc; null-return failure and host exhaustion are never executed.",
+    "rust": "A cfg(test) thread-local private observer throws before the raw allocator call, outside GlobalAlloc. The observer is restored by an RAII guard. Exact allocation-boundary events and pre/post map snapshots are compared with the native fixture.",
+    "scope": "This proves failure-before-mutation and successful release ordering at the allocator seam. It does not claim that a NATIVE malloc failure raises a catchable exception.",
+    "actual_null_policy": "Pinned Standard::AllocateOptimal returns unchecked malloc result and ReSize immediately memset()s it. Rust retains handle_alloc_error for a rejected representable request; fatal behavior/signals are not asserted equivalent."
+  },
+  "ownership_proof": "The table retains exactly the raw payload pointer returned by the common policy, initializes every pointer slot, destroys nodes before release and frees the same raw payload once. Strict Miri validates allocation headers, pointer alignment/provenance, moves, rehash and destructor paths.",
+  "miri_exclusions": {
+    "new_tests": [],
+    "inherited_iterator_tests": [
+      "signed_32::positive_stack_length",
+      "unsigned_32::positive_stack_length",
+      "signed_64::positive_stack_length",
+      "unsigned_64::positive_stack_length",
+      "signed_byte::positive_stack_length",
+      "boolean::positive_stack_length"
+    ],
+    "reason": "Only the prior six positive libc-backtrace iterator tests are cfg(not(miri)); all six new bucket-policy tests, all30 raw-storage tests and all264 original tests run under strict Miri.",
+    "native_original_exclusions": []
+  },
+  "bindings": [
+    {
+      "cpp_id": "26e08d00af74094c27ad40ea58ca4553e08a53c78b78a51a6933ae5ece1bfdf7",
+      "cpp_name": "NCollection_PackedMap::ReSize",
+      "cpp_signature": "void (unsigned long)",
+      "cpp_api_visible": true,
+      "cpp_sites": [
+        {
+          "expansion_location": {
+            "column": 8,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+            "line": 507
+          },
+          "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+          "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+          "spelling_location": {
+            "column": 8,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+            "line": 507
+          }
+        }
+      ],
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::PackedMap::resize",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "requested",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/packed_map.rs",
+        "source_sha256": "77857d7de2d8243099c48709eb26a39d12c506f20a1a6816ccf2f0916dbefa51",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "PackedMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::packed_map::PackedMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "PackedInteger",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::packed_map::integer::PackedInteger",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "5413aca5e0979f3cea6c5a15585cc8074c95d68c0bf837c638145157f0af14b8"
+      },
+      "scope": "Bucket allocation/release policy and pre-mutation failure boundary only; signed overload delegates to size_t path and its input conversion is covered by unchanged original/method/alias regressions. No global API completion credit."
+    },
+    {
+      "cpp_id": "e7e10ebe43220f04340dbaf26f47ae310cc1306f6b401f97a406cf3606b277ae",
+      "cpp_name": "NCollection_PackedMap::ReSize",
+      "cpp_signature": "void (int)",
+      "cpp_api_visible": true,
+      "cpp_sites": [
+        {
+          "expansion_location": {
+            "column": 8,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+            "line": 546
+          },
+          "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+          "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+          "spelling_location": {
+            "column": 8,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+            "line": 546
+          }
+        }
+      ],
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::PackedMap::resize_int",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "requested",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/packed_map.rs",
+        "source_sha256": "77857d7de2d8243099c48709eb26a39d12c506f20a1a6816ccf2f0916dbefa51",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "PackedMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::packed_map::PackedMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "PackedInteger",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::packed_map::integer::PackedInteger",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "1cb08a9478f52806c72311b30394494b975a2870e632553631258ba8e5a2eec5"
+      },
+      "scope": "Bucket allocation/release policy and pre-mutation failure boundary only; signed overload delegates to size_t path and its input conversion is covered by unchanged original/method/alias regressions. No global API completion credit."
+    }
+  ],
+  "private_compiler_body_count": 22,
+  "original_name_join": [
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.DefaultConstructor",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.ConstructorWithBuckets",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__ConstructorWithBuckets"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.CopyConstructor",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.MoveConstructor",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.CopyAssignment",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__CopyAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.MoveAssignment",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.AddAndContains",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__AddAndContains"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.AddDuplicate",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__AddDuplicate"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Remove",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Remove"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Clear",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Clear"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.STLIterator",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__STLIterator"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.ZeroValue",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__ZeroValue"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.ConsecutiveValues",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__ConsecutiveValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.SparseValues",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__SparseValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.BlockBoundary",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__BlockBoundary"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.GetMinimalMapped",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__GetMinimalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.GetMaximalMapped",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__GetMaximalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Union",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Union"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Unite",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Unite"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.UniteInPlace",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__UniteInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Intersection",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Intersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Intersect",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Intersect"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IntersectInPlace",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IntersectInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IntersectionDisjoint",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IntersectionDisjoint"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Subtraction",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Subtraction"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Subtract",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Subtract"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.SubtractInPlace",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__SubtractInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Difference",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Difference"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.Differ",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__Differ"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.DifferInPlace",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__DifferInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IsEqual",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IsEqual"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IsEqualEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IsEqualEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IsSubset",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IsSubset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IsSubsetSame",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IsSubsetSame"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IsSubsetEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IsSubsetEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.HasIntersection",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__HasIntersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IteratorBasic",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IteratorBasic"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.STLIterators",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IteratorEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IteratorEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IteratorReinitialize",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IteratorReinitialize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IteratorReset",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IteratorReset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.ReSize",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.LargeValues",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__LargeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.UnionWithSelf",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__UnionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IntersectionWithSelf",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IntersectionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.SubtractionFromSelf",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__SubtractionFromSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.DifferenceWithSelf",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__DifferenceWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.UnionWithEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__UnionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.IntersectionWithEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__IntersectionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/0.SubtractionEmpty",
+      "rust": "cpp_int::NCollection_PackedMapTypedTest__SubtractionEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.DefaultConstructor",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.ConstructorWithBuckets",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__ConstructorWithBuckets"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.CopyConstructor",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.MoveConstructor",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.CopyAssignment",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__CopyAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.MoveAssignment",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.AddAndContains",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__AddAndContains"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.AddDuplicate",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__AddDuplicate"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Remove",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Remove"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Clear",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Clear"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.STLIterator",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__STLIterator"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.ZeroValue",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__ZeroValue"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.ConsecutiveValues",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__ConsecutiveValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.SparseValues",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__SparseValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.BlockBoundary",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__BlockBoundary"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.GetMinimalMapped",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__GetMinimalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.GetMaximalMapped",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__GetMaximalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Union",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Union"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Unite",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Unite"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.UniteInPlace",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__UniteInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Intersection",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Intersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Intersect",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Intersect"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IntersectInPlace",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IntersectInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IntersectionDisjoint",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IntersectionDisjoint"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Subtraction",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Subtraction"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Subtract",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Subtract"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.SubtractInPlace",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__SubtractInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Difference",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Difference"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.Differ",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__Differ"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.DifferInPlace",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__DifferInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IsEqual",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IsEqual"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IsEqualEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IsEqualEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IsSubset",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IsSubset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IsSubsetSame",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IsSubsetSame"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IsSubsetEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IsSubsetEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.HasIntersection",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__HasIntersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IteratorBasic",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IteratorBasic"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.STLIterators",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IteratorEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IteratorEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IteratorReinitialize",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IteratorReinitialize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IteratorReset",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IteratorReset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.ReSize",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.LargeValues",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__LargeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.UnionWithSelf",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__UnionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IntersectionWithSelf",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IntersectionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.SubtractionFromSelf",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__SubtractionFromSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.DifferenceWithSelf",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__DifferenceWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.UnionWithEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__UnionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.IntersectionWithEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__IntersectionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/1.SubtractionEmpty",
+      "rust": "cpp_uint::NCollection_PackedMapTypedTest__SubtractionEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.DefaultConstructor",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.ConstructorWithBuckets",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__ConstructorWithBuckets"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.CopyConstructor",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.MoveConstructor",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.CopyAssignment",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__CopyAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.MoveAssignment",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.AddAndContains",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__AddAndContains"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.AddDuplicate",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__AddDuplicate"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Remove",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Remove"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Clear",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Clear"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.STLIterator",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__STLIterator"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.ZeroValue",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__ZeroValue"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.ConsecutiveValues",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__ConsecutiveValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.SparseValues",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__SparseValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.BlockBoundary",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__BlockBoundary"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.GetMinimalMapped",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__GetMinimalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.GetMaximalMapped",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__GetMaximalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Union",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Union"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Unite",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Unite"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.UniteInPlace",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__UniteInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Intersection",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Intersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Intersect",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Intersect"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IntersectInPlace",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IntersectInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IntersectionDisjoint",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IntersectionDisjoint"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Subtraction",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Subtraction"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Subtract",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Subtract"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.SubtractInPlace",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__SubtractInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Difference",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Difference"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.Differ",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__Differ"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.DifferInPlace",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__DifferInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IsEqual",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IsEqual"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IsEqualEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IsEqualEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IsSubset",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IsSubset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IsSubsetSame",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IsSubsetSame"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IsSubsetEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IsSubsetEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.HasIntersection",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__HasIntersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IteratorBasic",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IteratorBasic"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.STLIterators",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IteratorEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IteratorEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IteratorReinitialize",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IteratorReinitialize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IteratorReset",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IteratorReset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.ReSize",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.LargeValues",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__LargeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.UnionWithSelf",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__UnionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IntersectionWithSelf",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IntersectionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.SubtractionFromSelf",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__SubtractionFromSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.DifferenceWithSelf",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__DifferenceWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.UnionWithEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__UnionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.IntersectionWithEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__IntersectionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/2.SubtractionEmpty",
+      "rust": "cpp_long::NCollection_PackedMapTypedTest__SubtractionEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.DefaultConstructor",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.ConstructorWithBuckets",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__ConstructorWithBuckets"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.CopyConstructor",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.MoveConstructor",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.CopyAssignment",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__CopyAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.MoveAssignment",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.AddAndContains",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__AddAndContains"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.AddDuplicate",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__AddDuplicate"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Remove",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Remove"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Clear",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Clear"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.STLIterator",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__STLIterator"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.ZeroValue",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__ZeroValue"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.ConsecutiveValues",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__ConsecutiveValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.SparseValues",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__SparseValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.BlockBoundary",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__BlockBoundary"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.GetMinimalMapped",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__GetMinimalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.GetMaximalMapped",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__GetMaximalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Union",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Union"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Unite",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Unite"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.UniteInPlace",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__UniteInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Intersection",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Intersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Intersect",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Intersect"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IntersectInPlace",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IntersectInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IntersectionDisjoint",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IntersectionDisjoint"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Subtraction",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Subtraction"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Subtract",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Subtract"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.SubtractInPlace",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__SubtractInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Difference",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Difference"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.Differ",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__Differ"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.DifferInPlace",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__DifferInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IsEqual",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IsEqual"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IsEqualEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IsEqualEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IsSubset",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IsSubset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IsSubsetSame",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IsSubsetSame"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IsSubsetEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IsSubsetEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.HasIntersection",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__HasIntersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IteratorBasic",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IteratorBasic"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.STLIterators",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IteratorEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IteratorEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IteratorReinitialize",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IteratorReinitialize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IteratorReset",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IteratorReset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.ReSize",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.LargeValues",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__LargeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.UnionWithSelf",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__UnionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IntersectionWithSelf",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IntersectionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.SubtractionFromSelf",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__SubtractionFromSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.DifferenceWithSelf",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__DifferenceWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.UnionWithEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__UnionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.IntersectionWithEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__IntersectionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/3.SubtractionEmpty",
+      "rust": "cpp_int64::NCollection_PackedMapTypedTest__SubtractionEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.DefaultConstructor",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__DefaultConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.ConstructorWithBuckets",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__ConstructorWithBuckets"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.CopyConstructor",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__CopyConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.MoveConstructor",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__MoveConstructor"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.CopyAssignment",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__CopyAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.MoveAssignment",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__MoveAssignment"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.AddAndContains",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__AddAndContains"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.AddDuplicate",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__AddDuplicate"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Remove",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Remove"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Clear",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Clear"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.STLIterator",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__STLIterator"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.ZeroValue",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__ZeroValue"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.ConsecutiveValues",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__ConsecutiveValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.SparseValues",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__SparseValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.BlockBoundary",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__BlockBoundary"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.GetMinimalMapped",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__GetMinimalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.GetMaximalMapped",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__GetMaximalMapped"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Union",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Union"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Unite",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Unite"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.UniteInPlace",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__UniteInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Intersection",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Intersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Intersect",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Intersect"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IntersectInPlace",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IntersectInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IntersectionDisjoint",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IntersectionDisjoint"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Subtraction",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Subtraction"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Subtract",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Subtract"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.SubtractInPlace",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__SubtractInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Difference",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Difference"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.Differ",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__Differ"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.DifferInPlace",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__DifferInPlace"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IsEqual",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IsEqual"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IsEqualEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IsEqualEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IsSubset",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IsSubset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IsSubsetSame",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IsSubsetSame"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IsSubsetEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IsSubsetEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.HasIntersection",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__HasIntersection"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IteratorBasic",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IteratorBasic"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.STLIterators",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__STLIterators"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IteratorEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IteratorEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IteratorReinitialize",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IteratorReinitialize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IteratorReset",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IteratorReset"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.ReSize",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__ReSize"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.LargeValues",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__LargeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.UnionWithSelf",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__UnionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IntersectionWithSelf",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IntersectionWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.SubtractionFromSelf",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__SubtractionFromSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.DifferenceWithSelf",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__DifferenceWithSelf"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.UnionWithEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__UnionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.IntersectionWithEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__IntersectionWithEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapTypedTest/4.SubtractionEmpty",
+      "rust": "cpp_size::NCollection_PackedMapTypedTest__SubtractionEmpty"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/0.NegativeValues",
+      "rust": "signed_int::NCollection_PackedMapSignedTest__NegativeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/0.MixedPositiveNegative",
+      "rust": "signed_int::NCollection_PackedMapSignedTest__MixedPositiveNegative"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/0.MinMaxWithNegatives",
+      "rust": "signed_int::NCollection_PackedMapSignedTest__MinMaxWithNegatives"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/1.NegativeValues",
+      "rust": "signed_long::NCollection_PackedMapSignedTest__NegativeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/1.MixedPositiveNegative",
+      "rust": "signed_long::NCollection_PackedMapSignedTest__MixedPositiveNegative"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/1.MinMaxWithNegatives",
+      "rust": "signed_long::NCollection_PackedMapSignedTest__MinMaxWithNegatives"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/2.NegativeValues",
+      "rust": "signed_int64::NCollection_PackedMapSignedTest__NegativeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/2.MixedPositiveNegative",
+      "rust": "signed_int64::NCollection_PackedMapSignedTest__MixedPositiveNegative"
+    },
+    {
+      "cpp": "NCollection_PackedMapSignedTest/2.MinMaxWithNegatives",
+      "rust": "signed_int64::NCollection_PackedMapSignedTest__MinMaxWithNegatives"
+    },
+    {
+      "cpp": "NCollection_PackedMap64BitTest.LargeValues64Bit",
+      "rust": "NCollection_PackedMap64BitTest__LargeValues64Bit"
+    },
+    {
+      "cpp": "NCollection_PackedMap64BitTest.Negative64BitValues",
+      "rust": "NCollection_PackedMap64BitTest__Negative64BitValues"
+    },
+    {
+      "cpp": "NCollection_PackedMap64BitTest.SizeTypeValues",
+      "rust": "NCollection_PackedMap64BitTest__SizeTypeValues"
+    },
+    {
+      "cpp": "NCollection_PackedMapConfigTest.ConfigFor32BitTypes",
+      "rust": "NCollection_PackedMapConfigTest__ConfigFor32BitTypes"
+    },
+    {
+      "cpp": "NCollection_PackedMapConfigTest.ConfigFor64BitTypes",
+      "rust": "NCollection_PackedMapConfigTest__ConfigFor64BitTypes"
+    }
+  ],
+  "source_hashes": {
+    "crates/tkernel/src/ncollection/allocator/accumulating/alignment_tests.rs": "9beb42cc9bb885ec4859fb796093fda8a41a5dc416b315a050e46c3e3c733105",
+    "crates/tkernel/src/ncollection/allocator/accumulating.rs": "4c65d9357eb8cb640a7dc28850e54ce151febe802bda6461a4f5a849e20b8a16",
+    "crates/tkernel/src/ncollection/allocator/aligned.rs": "ca0b0648c1923b14d7894f6361943d47ab586a1126fe05694bb8373d69e4c61a",
+    "crates/tkernel/src/ncollection/allocator/block.rs": "f854a0644eb949b0d80e654a3be5da653bee37573091578580dee1e6e3645c8c",
+    "crates/tkernel/src/ncollection/allocator/incremental/protected_tests.rs": "a5bbf46e95d9a68494fef57aa5637b67b49dc86db5439eaaa4127308cca15470",
+    "crates/tkernel/src/ncollection/allocator/incremental.rs": "47aacce78d266d58fe3fc86583c0631a09e5b0d87cff1901992077c28c58382e",
+    "crates/tkernel/src/ncollection/allocator/incremental_extension.rs": "d0d6dfec0b225b6faa4fd8ccc158a7c9860fb0a18d70f3aaefd6bedc5b913966",
+    "crates/tkernel/src/ncollection/allocator/keys.rs": "8b45c0c058fdf1a88a51d3c1b245e3d54e491fcbe305babee631bc1ce6d0bf68",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "f07a750d876bd2e58cd7cc7adf93aebcafa4825da60cdf48bcc104cb65af2431",
+    "crates/tkernel/src/ncollection/allocator/raw_heap.rs": "413b193a7bb13a31819e16580e2d9ff9a6fb7dc5ebd448d4108f82c1000f5a98",
+    "crates/tkernel/src/ncollection/allocator/typed_heap.rs": "b25c8e4cbdb590206c21d0d65287f41ff5456ea84557335786aab749d987a399",
+    "crates/tkernel/src/ncollection/allocator.rs": "e4567ec5ebe78c5fb0ff301652955edda674c24ec5152d2a54ed1c94febb736e",
+    "crates/tkernel/src/ncollection/packed_map/engine_contracts/bucket_policy.rs": "9dcaddf7b2c92d2817839db696081b50cb6dfa7ae4c0732d3bd1dff8f4f7c060",
+    "crates/tkernel/src/ncollection/packed_map/engine_contracts.rs": "e9cad85ef7f12550bf1c050dbafbdde5771dc494e11879d1198ad8bdda0efc7e",
+    "crates/tkernel/src/ncollection/packed_map/storage/allocation/observation.rs": "9511fd9612fe4ff934ff458d3b61a884d0cfab19d0cfe080ea47a2f38770aa47",
+    "crates/tkernel/src/ncollection/packed_map/storage/allocation.rs": "1341ecad0c2cc8bd85abac4138e6a8dd7bf23ffa598c4b5862dae05c2794a3b6",
+    "crates/tkernel/src/ncollection/packed_map/storage/mutation.rs": "96df6b3b1faf71f1ebce870f9ed12fa45f62cec56361caee37fe9718bd691546",
+    "crates/tkernel/src/ncollection/packed_map/storage.rs": "8a639b9fcd8d28439d6309eaf95314f3e492465e019477beb5b559f2203642b8",
+    "crates/tkernel/src/ncollection/packed_map.rs": "77857d7de2d8243099c48709eb26a39d12c506f20a1a6816ccf2f0916dbefa51",
+    "tools/oracle/tkernel_packed_map_bucket_policy.cxx": "84c92e4772f6e7a2bda4d4012e2f522cc0b24ce96dd0c22ccb1a84ba696e8f2f",
+    "tools/oracle/tkernel_packed_map_bucket_policy.expected": "1b87ed58167854e64aabde52215d6d8e14ce8e7aa0f3786b67e6d20bc18c3ffe"
+  },
+  "native_header_hashes": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx": "042695cd49fb106f88bc8374dc9c91cb8ce6b9bec963621d4b6be169eca4c660",
+    "src/FoundationClasses/TKernel/Standard/Standard.hxx": "e7a35e7ba65d4152f47c65889a262b8085f02116c61b1194001f07050715f360",
+    "src/FoundationClasses/TKernel/Standard/Standard.cxx": "7c50331e36a64ca1aaff7005536bb7b98cb627060edb2049362418d2c7a0dfee"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-rust.gz",
+      "sha256": "39aa56684cc27e475bda0a5f50349dce6456a581267ba976e32e1ec0fb3b3c22",
+      "uncompressed_sha256": "c880d4836b0deec128dfe9ff27c4c6ce03173609129faef818f80078151ec633"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-unit.gz",
+      "sha256": "ccc09ac187b2759ff780646d519e808d059a9e610da6e496cc06f184e866e4ef",
+      "uncompressed_sha256": "8c90f9e332ec446457abf351f3d595c5a9f205cab8f9df6474ae1a991bda90e9"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-clippy.gz",
+      "sha256": "9b3a19927776b5292bda96bfe1dd11c1027b20848ee730fe1f92c2ee6b2c67f1",
+      "uncompressed_sha256": "86c001a16b6bd9b36e35eeb7424a292a6dc68ad0bdf1ae4cdc6c85a5e18eaad8"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-rustdoc.gz",
+      "sha256": "a225de8e350c9f3b7c4c94e67e5ec4a4f59066edbfaaa99bf0e14d202ea6128f",
+      "uncompressed_sha256": "e4f71e76710251a1f040de8160f54507a890fd88e600d3e3076946b1508dd8c6"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-miri.gz",
+      "sha256": "1521e54145e036bc2b6537e137c3f6b378b854901dbb08b586560f7a8e26e02f",
+      "uncompressed_sha256": "42194173fce8d33794de6aafc01b01218c9c92117a27a61f9b06299074d68f64"
+    },
+    "unit-miri": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-unit-miri.gz",
+      "sha256": "88cb3d618182a5c72bb0fe47f9c807d61df5770d0b5eee331befff1af22794a5",
+      "uncompressed_sha256": "c3c7ad4677a6685f9cf96e4cfc9af0f659961db497420f5e50b2438863f0b305"
+    },
+    "native-build": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-native-build.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-actual": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-native-actual.gz",
+      "sha256": "0c4b5bfafac377e4cae18c34c08f9374898ef2b72996085ca54ed5b97d8daab5",
+      "uncompressed_sha256": "1b87ed58167854e64aabde52215d6d8e14ce8e7aa0f3786b67e6d20bc18c3ffe"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-native-original.gz",
+      "sha256": "c7fd3849e906efefbfe07319eb229d704ce358e8a6db0bbb9f8f8a9ef0d668d9",
+      "uncompressed_sha256": "ded24e2c3c09ec3f6a6cd4ba984b71c8395dc2c9c67c898c8f2d55fc66e09b00"
+    },
+    "commands": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-commands.gz",
+      "sha256": "6c19eae20148af424ac38fb5b6fd26c4857e3ee965460ec19f39f883c24d12d5",
+      "uncompressed_sha256": "e723a947768b782f6373385cc01c062ab3bea47edd15a38f19dfae3317d618c4"
+    },
+    "miri-commands": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-miri-commands.gz",
+      "sha256": "9a2dac095910ea0b5db1c8bbd963e6a4617a87a14213e1a4b50038ae27daed50",
+      "uncompressed_sha256": "07236d97a565cbcdb71c000dc066efb79c21ff28930616666422eb180ece5c65"
+    },
+    "native-commands": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-native-commands.gz",
+      "sha256": "d6ed600b8c010482597b15fd516eebd2140175176d5ff6cd62c1a51d6572b19d",
+      "uncompressed_sha256": "5dc8b1349916e02ea2c736ebd80f74dd92dbc2833dcbf32a0c53f844a424e94f"
+    },
+    "bindings": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-bindings.gz",
+      "sha256": "0f47c3e8637377178ab953f847460585eb6a31dd12a2ac7be2d3601a15c7da4c",
+      "uncompressed_sha256": "021bcd25af5b5441623765eb7e02e4a6bcace2a9ffdc1e08c3228af66ce2e990"
+    },
+    "private-bodies": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-private-bodies.gz",
+      "sha256": "ecaf0b421012d45e2594e7926ad42874418d9dd4e9b48cc74e620af07cf47ad3",
+      "uncompressed_sha256": "4a2fa15175767ea9837ca151258f2314fc4f200c0a061ace37a5adf0a2cdc08c"
+    },
+    "native-declarations": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-native-declarations.gz",
+      "sha256": "383189491cf0164b6300a1edea758d5dbb22e59dd42de6e790f7e0e4aa4f4fde",
+      "uncompressed_sha256": "3fa26f5c92b949456d6687bc2305d75b4e7087fa905eb5cb7af79bb570d5baac"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-inputs.gz",
+      "sha256": "b6ca5da62dafab92b76746938ea8183ad16d677cd9f3a1891eef6b93f0676ccf",
+      "uncompressed_sha256": "33303c72e16046b07a0d65532617fc1eb2c1b806afb7feaf2b2e866d52eaaf38"
+    },
+    "raw-rustdoc": {
+      "path": "porting/runtime-evidence/packed-map-bucket-policy-raw-rustdoc.gz",
+      "sha256": "5dd61f3e74fe03e0b0d2a5feb9af648b58ebb9cc6accadc381921435790b0462",
+      "uncompressed_sha256": "e62a33f18b3b2229310dff3beab6b95c010bc16cd74ffb65f977e98f14a90ac2"
+    }
+  },
+  "remaining_gaps": [
+    "The destination-index Vec remains an extra Rust rehash allocation: it computes all custom PackedWord hashes before rewiring to preserve the existing strong unwind guarantee. Removing it requires a sound native-primitive fast path or an explicitly specified custom-word unwind contract.",
+    "Common raw allocations use the existing layout-recovery header, so physical heap request size and custom global-allocator callbacks differ from native malloc. Alternate OCCT memory-manager configurations are not covered.",
+    "True null-allocation fatal behavior/signals and overflowing native bucket-byte arithmetic are not reproduced; no host exhaustion was attempted.",
+    "C++ container ABI, compiler array cookies and broad inventory reconciliation remain separate; no global ledger changes or full-class parity claim."
+  ]
+}
