@@ -1,4 +1,3 @@
-use super::super::base_map::replace_allocator;
 use super::{BaseAllocator, DataMap, Debug, HashPolicy};
 use std::ops::{Index, IndexMut};
 
@@ -24,9 +23,9 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert_eq!(map.contained(&1), Some((&1, &10)));
     /// ```
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
-        let (bucket, index) = self.lookup(key)?;
-        let entry = &self.buckets[bucket][index];
-        Some((&entry.key, &entry.value))
+        let (_, node) = self.lookup(key)?;
+        let entry = unsafe { self.storage.node(node) };
+        Some((entry.key(), entry.value()))
     }
 
     /// `Contained()`: the stored key and a mutable item of an equivalent key, if bound.
@@ -39,9 +38,8 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert_eq!(map.seek(&1), Some(&5));
     /// ```
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
-        let (bucket, index) = self.lookup(key)?;
-        let entry = &mut *self.buckets[bucket][index];
-        Some((&entry.key, &mut entry.value))
+        let (_, node) = self.lookup(key)?;
+        Some(unsafe { self.storage.node_mut(node).key_value_mut() })
     }
 
     /// `Seek`: the bound item or `None` (the native null pointer).
@@ -93,8 +91,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert!(map.is_empty() && map.allocator() == &arena);
     /// ```
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        let release = replace_allocator(&mut self.resource, resource);
-        self.clear(release);
+        self.storage.clear_with_allocator(resource);
     }
 }
 

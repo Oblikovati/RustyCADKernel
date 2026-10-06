@@ -38,6 +38,12 @@ impl<K, V> DataMapNode<K, V> {
             key: ManuallyDrop::new(key),
         }
     }
+    pub(crate) fn key_value_mut(&mut self) -> (&K, &mut V) {
+        (&self.key, self.value_node.change_value())
+    }
+    pub(crate) fn key_mut(&mut self) -> &mut K {
+        &mut self.key
+    }
     /// Borrows the native immutable key; `assert_eq!(node.key(), &1)`.
     pub fn key(&self) -> &K {
         &self.key
