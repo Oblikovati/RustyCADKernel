@@ -5,10 +5,14 @@ fn NCollection_DynamicArrayTest__Iterator() {
     let mut sum = 0;
     while cursor.more() {
         sum += *cursor.value(&array).unwrap();
-        *cursor.change_value(&mut array).unwrap() *= 2;
         cursor.next();
     }
     assert_eq!(sum, 60);
+    cursor.initialize(&array);
+    while cursor.more() {
+        *cursor.change_value(&mut array).unwrap() *= 2;
+        cursor.next();
+    }
     equal(&array, &[20, 40, 60]);
 }
 #[test]
