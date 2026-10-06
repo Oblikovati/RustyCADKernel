@@ -1,0 +1,235 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "branch_validated_pending_main_integration",
+  "branch": "port/sparse-base-iterator",
+  "base_commit": "ca0fdb75facea71fce72e3d50404b097a19c70dd",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "classes": [
+    "NCollection_SparseArrayBase::BasicIterator"
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/mod.rs": "77be1877b1a3ed76d2da87b153b9fe5e48963db5ca15a5cb43ae3d6400cf7546",
+    "crates/tkernel/src/ncollection/sparse_array_base.rs": "9acf25f7ed533da78c0eae11c7e72e928d3961bda509ee0a6301f879ed6fff68",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator.rs": "cc235d37f2e882c2a1ba1ec8afb837ac61ec76fb1805ba4a8f71b9046a6dd465",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator/access.rs": "87f249ca3f9570919631c5f3bc7dfb0859da0faa05cab3d65992b910e3b4a3e2",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator/movement.rs": "e9024fa4308104d5555e828fab0e295618da5bc5f66b99d84c13d0f75bfe8d75",
+    "crates/tkernel/tests/sparse_basic_iterator_contracts.rs": "41b9cd9cba10316506f5b7d7936d3cc6a3adbb77b00984fef3018b57011aff2e",
+    "crates/tkernel/tests/sparse_basic_iterator_contracts/fixture.rs": "3a16fc2b6780cca18963a35e213671d8480d0249a8863e740c99d012c1da82b7",
+    "tools/oracle/tkernel_sparse_basic_iterator_contracts.cxx": "b77c7cccf4ab689d44082c207878f391e7bfaa3a154f3223fd473c5d31b2388e",
+    "tools/oracle/tkernel_sparse_basic_iterator_contracts.expected": "b912664b9202d70533d2e170a652bcfe3c8a888c0f919fe1b459ab98a7229732"
+  },
+  "focused_rust_passes": 71,
+  "new_tests": 12,
+  "miri_passes": 28,
+  "miri_new_tests_passed": 12,
+  "native_oracle_rows": 10,
+  "native_oracle_rows_asserted_by_rust": 10,
+  "native_original_passed": 10,
+  "original_cases_joined": [
+    "NCollection_SparseArrayTest.BasicFunctions",
+    "NCollection_SparseArrayTest.LargeIndices",
+    "NCollection_SparseArrayTest.SparseDistribution",
+    "NCollection_SparseArrayTest.IteratorFunctions",
+    "NCollection_SparseArrayTest.STLIterators",
+    "NCollection_SparseArrayTest.ComplexType",
+    "NCollection_SparseArrayTest.Clear",
+    "NCollection_SparseArrayTest.DataMapInterface",
+    "NCollection_SparseArrayTest.AssignAndExchange",
+    "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock"
+  ],
+  "clippy_exit_code": 0,
+  "fmt_exit_code": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-rust.gz",
+      "sha256": "a29cfe3216b8f8eb498d7ae9af10d806dea27ee7d95a00711a84660c32774856"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-clippy.gz",
+      "sha256": "dc5f93289a4ee0f941f203e1b69ae97411916df1b0220fc3a4217fe21aceff5c"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-miri.gz",
+      "sha256": "95b7dc0e06f416c62583f8a06ee8771a1da89b95fe5181649a1bc6cbb415e8ea"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-native.gz",
+      "sha256": "2f4f157c11adb5956510f230364f6f1cdc5bcd9376febdca4d8c7d20e07dfd21"
+    },
+    "legacy": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-legacy.gz",
+      "sha256": "f8706ebba18820d18d427ed5d9f3765604604d94c49457e338e51eb7464d0cb2"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/sparse-basic-iterator-source.tar.gz",
+      "sha256": "cd45c57d65de8e89fd999082ffe147ae1b0b4ceb51077d3b1dc6e4c0ebaa23c4"
+    }
+  },
+  "method_bindings": [
+    {
+      "cpp_id": "0c316e47b1925848df1b3b51aa693e335665a36a8062d94c6e55440842fcfa82",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::Restart",
+      "signature": "void () noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::restart"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "556effd93f6d38e76d463a77f6ff0a292c8a1633f62d646e6a7ca974ee496b04",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator=",
+      "signature": "NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> &(const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_mutable",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_self"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "5b9f8f2094ba4afba51fc58ff7603a673cbc0ae8ddc067dd4b97e6b4b41814ef",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::Index",
+      "signature": "unsigned long () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::index"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "68fe88d4dc47c57721c670d233c0317a885aaaae607f066ee19a9d40a370bc71",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator->",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::arrow"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "7ebac7f0f9703330428668c1e2fee4ae02828c8e3b61e568156ae11fc1426958",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator*",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::dereference"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "95f0f50192d0b44b65e3b9b45c39c1c253196de130107a128df606566d0a5e2c",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator!=",
+      "signature": "bool (const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "afc1241733356062625aef1923bdf72c8ccd8e02ca4d286f63336654a6996742",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::Key",
+      "signature": "unsigned long () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::key"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "b5e91bf9283067b80724a92edd3e763417ea65b39fc8f218b55394ac92b3bd7b",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator==",
+      "signature": "bool (const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "c199bf5696a8543ae3d7aca6d3f6611fd9bf1bfa8788dce9f69d36223d2113d9",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator=",
+      "signature": "NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> &(const NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> &) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_mutable",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_self"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "c8847ef327a95980309086b79dccd01dde60cdd2f4363813d93b7ce8fbff148b",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::More",
+      "signature": "bool () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::more"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "dcbd6969a85f39384bfc88d21d00990bf5ba832ef1cc0ee50268ab39dfc6075a",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator=",
+      "signature": "NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> &(const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_mutable",
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::assign_self"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "e574d12b58473abd76b503478c8dcf3299ac8d1bee85186825bd8fe4ce071fbd",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator++",
+      "signature": "NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> &() noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::advance_returning"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "e8a1ade3ecaae48de75d9f1537e8fadc9d9fa1ef4f624ab9e8e7491420e15277",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator==",
+      "signature": "bool (const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "f2bf144c46340d95fdba7fef56bd7b32c117b6a24f7ff5bcfb8e48acb91dd299",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator!=",
+      "signature": "bool (const NCollection_SparseArrayBase::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "f33a60a810380a2c7aac07ef73a64ac5ab20ed2686d1e1aa7db2eafdcc29ce23",
+      "cpp": "NCollection_SparseArrayBase::BasicIterator::operator++",
+      "signature": "NCollection_SparseArrayBase::BasicIterator<TheContainer, TheValue, NCollection_SparseArrayBase::BasicIterator::IsConstant> (int) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::advance_post"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    }
+  ],
+  "method_changes": [
+    "Actual raw engine traversal supports independently parameterized custom container and value via unsafe projection traits.",
+    "Calls custom Capacity once; cached end survives copying, conversion and Restart.",
+    "Preserves native inner-block scan exceeding a custom short end, then exhausts to the captured end.",
+    "Custom getItem dispatch occurs on every dereference/arrow, including field-offset projection from nonzero-position base storage.",
+    "Same-specialization copy/assignment, mutable-to-const conversion/assignment, cross-const comparisons, prefix identity and fully mutable shallow postfix state.",
+    "Unsafe item references enforce aliasing obligations of copied native cursors; raw mutable arrow creates no reference.",
+    "No Clone bounds on container or value; default source projection and native beyond-end index semantics exercised."
+  ],
+  "remaining_partial_contracts": [
+    "Typed SparseArray facade still uses its earlier BTreeMap storage and cursor implementation; delegation remains separate.",
+    "Raw owning engine is Rc/UnsafeCell and not Send/Sync. Delegation must preserve existing typed auto-traits through explicit ownership/thread design.",
+    "BasicIterator itself has no Value/ChangeValue methods in native OCCT; Rust value/change_value are access adapters corresponding to typed-wrapper usage and receive no invented BasicIterator declaration credit.",
+    "Native typedef/algorithm trait correspondence and compiler-proven template instantiation closure remain pending; public methods are only ID-bound candidates here.",
+    "Mutable iterator construction borrows the custom source readonly; actual write access requires unsafe writable-source projection/exclusive-reference guarantees. Native const-to-mutable conversion is intentionally unavailable.",
+    "Structural invalidation and expired cursor access retain unsafe preconditions; Rust rejects detached projection via panic instead of claiming native undefined behavior equivalence."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}
