@@ -174,17 +174,17 @@
   "latest_foundation_run_note": "Historical class entries remain scoped evidence; current_integrated_checkpoint records the latest frozen workspace validation. Subsequent source edits require a new checkpoint.",
   "additional_allocator_miri_passes": 3,
   "current_integrated_checkpoint": {
-    "commit": "71df09a9b65826adcf0d6d565f163df511dac8e6",
-    "receipt": "porting/audits/foundation-nodes-checkpoint.json",
-    "sha256": "3ae446870baa7ff4fda4d7cd74a6ca96c5231012815e77713572c9f1e13a582e",
-    "workspace_passed": 14949,
+    "commit": "680d02b1dd56d04f3d485f0cc8eb3a28de6621b7",
+    "receipt": "porting/audits/foundation-canonical-checkpoint.json",
+    "sha256": "d67617bd91f356ee65ba37e630634460bb29726372c9a296295310db0c93fdb3",
+    "workspace_passed": 15126,
     "workspace_failed": 0,
     "workspace_ignored": 70,
-    "miri_passes_total": 356,
-    "strict_provenance_miri_passes": 356,
+    "miri_passes_total": 711,
+    "strict_provenance_miri_passes": 711,
     "joined_original_runtime_cases": 1066,
     "python_tools_exit": 0,
-    "python_tools_tests_passed": 758
+    "python_tools_tests_passed": 766
   },
   "latest_scoped_integration": {
     "receipt": "porting/audits/vector-policies-merge-cleanup.json",
@@ -192,38 +192,5 @@
     "validated_source_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
     "tkernel_passed": 4633,
     "strict_provenance_miri_passed": 186
-  },
-  "current_draft_checkpoint": {
-    "receipt": "porting/audits/foundation-canonical-checkpoint.json",
-    "sha256": "d67617bd91f356ee65ba37e630634460bb29726372c9a296295310db0c93fdb3",
-    "runtime": {
-      "workspace_passed": 15126,
-      "workspace_failed": 0,
-      "workspace_ignored": 70,
-      "workspace_groups": 1359,
-      "workspace_ignored_doctests": 70,
-      "miri_passes_total": 711,
-      "miri_counts": {
-        "strict-miri": 634,
-        "sparse-unit-miri": 2,
-        "packed-unit-miri": 13,
-        "ordered-unit-miri": 3,
-        "dynamic-unit-miri": 20,
-        "linear-unit-miri": 6,
-        "cell-unit-miri": 33
-      },
-      "strict_provenance_miri_passes": 711,
-      "miri_scope": "Focused integrated changed-method targets and unit filters; prior broader memory run remains historical evidence, not a rerun on this source.",
-      "source_inputs": 10060,
-      "source_inputs_after_run_identical": true,
-      "strict_clippy_exit": 0,
-      "strict_clippy_scope": "workspace --all-targets",
-      "format_exit": 0,
-      "compiler_exit": 0,
-      "python_tools_tests_passed": 766,
-      "python_tools_exit": 0,
-      "joined_original_runtime_cases": 1066,
-      "new_original_runtime_joins": 0
-    }
   }
 }
