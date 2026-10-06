@@ -5,6 +5,7 @@ use std::alloc::Layout;
 use std::ptr::NonNull;
 pub(super) mod allocation;
 mod mutation;
+mod rehash;
 
 pub(super) struct PackedNodeTable<T: PackedInteger> {
     pub(super) heads: NonNull<*mut PackedMapNode<T>>,

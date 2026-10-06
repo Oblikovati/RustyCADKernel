@@ -30,8 +30,17 @@ pub fn verify<'a>(_lifetime: &'a u8) {
     for value in [0, 1, 32, 3232, u32::MAX] {
         map.add(BorrowedInteger(value, PhantomData));
     }
-    map.resize(1000);
+    custom_resize(&mut map);
     assert_eq!(map.bucket_count(), 1009);
     assert_eq!(map.len(), 5);
     assert!(map.contains(BorrowedInteger(u32::MAX, PhantomData)));
+}
+
+fn custom_resize(map: &mut PackedMap<BorrowedInteger<'_>>) {
+    let (_, events) = super::trace::capture(|| map.resize(1000));
+    assert!(
+        events
+            .iter()
+            .any(|event| event.align == align_of::<usize>())
+    );
 }
