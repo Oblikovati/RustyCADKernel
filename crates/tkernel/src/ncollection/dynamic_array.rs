@@ -31,6 +31,8 @@ mod emplacement;
 mod insertion;
 mod legacy_cursor;
 mod method_tail;
+#[allow(unsafe_code)]
+mod replacement_policy;
 mod storage_extension;
 pub use legacy_cursor::DynamicArrayIterator;
 pub use storage_extension::DynamicArrayStorageExtension;

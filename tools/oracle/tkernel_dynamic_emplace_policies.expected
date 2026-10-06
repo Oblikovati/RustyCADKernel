@@ -1,0 +1,13 @@
+assign threw=0 size=1 live=1 same=1 value=2 trace=C2,A2,D-7
+assign_ctor_fail threw=1 size=1 live=1 same=0 value=1 trace=C99
+assign_fail threw=1 size=1 live=1 same=0 value=77 trace=C77,A77,D-7
+move_success threw=0 size=1 live=1 same=1 value=2 trace=C2,D1,M2,D-7
+move_ctor_fail threw=1 size=1 live=1 same=0 value=1 trace=C99
+copy threw=0 size=1 live=1 same=1 value=2 trace=C2,D1,K2,D2
+copy_ctor_fail threw=1 size=1 live=1 same=0 value=1 trace=C99
+copy_transfer_fail threw=1 size=1 live=0 same=0 value=dead trace=C88,D1,K88,D88
+direct threw=0 size=1 live=1 same=1 value=2 trace=D1,C2
+direct_ctor_fail threw=1 size=1 live=0 same=0 value=dead trace=D1,C99
+direct_negative threw=1 size=1 live=1 same=0 value=1 trace=none
+copy_negative threw=1 size=1 live=1 same=0 value=1 trace=none
+assign_negative threw=1 size=1 live=1 same=0 value=1 trace=none

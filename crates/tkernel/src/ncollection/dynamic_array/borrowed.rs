@@ -1,5 +1,5 @@
 //! Explicit borrowed C++ operations, independent of Rust Clone's assignment default.
-use super::{ArrayError, DynamicArray, checked_index};
+use super::{ArrayError, DynamicArray};
 use std::fmt::Debug;
 
 impl<T> DynamicArray<T> {
@@ -26,15 +26,7 @@ impl<T: Default> DynamicArray<T> {
         copy_construct: impl FnOnce(&T) -> T,
         move_assign: impl FnOnce(&mut T, &mut T),
     ) -> Result<&mut T, ArrayError> {
-        let index = checked_index(index)?;
-        self.ensure_storage_for_index(index);
-        if index >= self.used {
-            return self.emplace_checked(index, || copy_construct(source));
-        }
-        let mut temporary = copy_construct(source);
-        let target = self.change_value(index)?;
-        move_assign(target, &mut temporary);
-        Ok(target)
+        self.emplace_value_with_assignment(index, || copy_construct(source), move_assign)
     }
 
     /// Defaults the tail, move-assigns descending shifts, then copy-assigns the borrowed source.

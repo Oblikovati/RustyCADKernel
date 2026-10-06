@@ -9,6 +9,7 @@ use std::{
 };
 mod dynamic_array_replacement_policy {
     pub mod contracts;
+    pub mod emplace;
     pub mod oracle;
 }
 type ReplacementTrace = Rc<RefCell<Vec<String>>>;
@@ -51,6 +52,11 @@ impl ReplacementItem {
             value: donor.value,
             trace: Rc::clone(&donor.trace),
         }
+    }
+}
+impl Default for ReplacementItem {
+    fn default() -> Self {
+        panic!("ReplacementItem default: expected existing-slot fixture without gaps");
     }
 }
 impl Drop for ReplacementItem {
