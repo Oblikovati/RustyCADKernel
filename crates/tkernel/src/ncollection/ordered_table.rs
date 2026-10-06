@@ -118,39 +118,19 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         slot
     }
     pub fn remove(&mut self, key: &K) -> bool {
-        let Some(slot) = self.lookup(key) else {
+        // OCCT 3d097a03 hashes once before mutation: user hash callbacks can throw.
+        if self.count == 0 {
+            return false;
+        }
+        let hash = self.hasher.hash(key) % self.bucket_count + 1;
+        let Some(slot) = self.lookup_at_hash(key, hash) else {
             return false;
         };
         let node = self.slots[slot].take().unwrap();
-        let hash = self.hasher.hash(&node.key) % self.bucket_count + 1;
-        self.buckets[hash].retain(|&entry| entry != slot);
-        if let Some(previous) = node.previous {
-            self.slots[previous].as_mut().unwrap().next = node.next;
-        } else {
-            self.first = node.next;
-        }
-        if let Some(next) = node.next {
-            self.slots[next].as_mut().unwrap().previous = node.previous;
-        } else {
-            self.last = node.previous;
-        }
-        self.free.push(slot);
         self.count -= 1;
+        self.buckets[hash].retain(|&entry| entry != slot);
+        self.unlink_order(slot, &node);
         true
-    }
-    pub fn clear(&mut self, release: bool) {
-        self.slots.clear();
-        self.free.clear();
-        self.first = None;
-        self.last = None;
-        self.count = 0;
-        if release {
-            self.buckets.clear();
-        } else {
-            for bucket in &mut self.buckets {
-                bucket.clear();
-            }
-        }
     }
     /// Native `Clear(theAllocator)`: release bucket storage only when the allocator changes,
     /// then adopt `resource`, or the common allocator for a null handle.
@@ -207,3 +187,5 @@ pub use nodes::{OrderedNodeMut, OrderedNodeRef};
 mod borrowed;
 mod mutable;
 pub(super) use mutable::OrderedItemsMut;
+
+mod destruction;
