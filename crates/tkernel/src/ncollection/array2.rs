@@ -2,6 +2,7 @@
 use super::array1::checked_array_extent as extent;
 use super::{Array1, ArrayError};
 
+mod assignment_policy;
 mod buffer_constructors;
 mod emplace_policy;
 mod method_contracts;
@@ -152,7 +153,8 @@ impl<'a, T> Array2<'a, T> {
         let (r, c) = self.bounded_offsets(row, col)?;
         self.change_at(r, c)
     }
-    /// Replaces a cell; `array.set_value(1,1,42)?`.
+    /// Moves a Rust replacement into a cell; `array.set_value(1,1,42)?`.
+    /// Use `set_value_with_assignment` to retain a caller-owned mutable donor.
     pub fn set_value(&mut self, row: i32, col: i32, value: T) -> Result<(), ArrayError> {
         *self.change_value(row, col)? = value;
         Ok(())

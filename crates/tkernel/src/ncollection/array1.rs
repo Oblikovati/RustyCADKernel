@@ -1,5 +1,6 @@
 //! Arbitrarily bounded arrays, corresponding to `NCollection_Array1`.
 
+pub(super) mod assignment_policy;
 mod buffer_constructors;
 pub(super) mod emplace_policy;
 mod pointers;
@@ -260,7 +261,8 @@ impl<T> std::ops::IndexMut<i32> for Array1<'_, T> {
 }
 
 impl<T> Array1<'_, T> {
-    /// Replaces a bounded element; `array.set_value(array.lower(), value)?`.
+    /// Moves a Rust replacement into a bounded element; `array.set_value(array.lower(), value)?`.
+    /// Use `set_value_with_assignment` to retain a caller-owned mutable donor.
     pub fn set_value(&mut self, index: i32, value: T) -> Result<(), super::ArrayError> {
         *self.change_value(index)? = value;
         Ok(())
