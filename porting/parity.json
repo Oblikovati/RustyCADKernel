@@ -73380,81 +73380,121 @@
       "upstream_id": "NCollection_BaseSequence::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::<core::default::Default>::default",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::<core::default::Default>::default",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::<core::default::Default>::default"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Iterator(const NCollection_BaseSequence&,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::new"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Iterator::Init(const NCollection_BaseSequence&,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::init",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::init"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Iterator::Previous()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::previous",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Iterator::CurrentNode() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: raw node-pointer accessor of the base iterator. Rust cursors hold node identities privately; the element is reached through `SequenceCursor::value`/`change_value` and the previous node through `SequenceCursor::previous`."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::current_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::current_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Iterator::PreviousNode() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: raw node-pointer accessor of the base iterator. Rust cursors hold node identities privately; the element is reached through `SequenceCursor::value`/`change_value` and the previous node through `SequenceCursor::previous`."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::IsEmpty() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::is_empty",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::is_empty",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::is_empty"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Length() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::length",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::length",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::length"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Size() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::len",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::size",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::size"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_BaseSequence::Allocator() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::allocator",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::allocator",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::allocator"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     },
     {
       "upstream_id": "NCollection_HSequence()",
@@ -237974,6 +238014,738 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_BaseList::pRemoveFirst(NCollection_DelListNode)"
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence::Iterator &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::from_raw",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::from_raw"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator=(const BasicIterator<TheNode, TheItemType, NCollection_BaseSequence::BasicIterator::IsConstant> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. One generic Rust method copies both raw links for same-specialization and both historical conversion directions; native SFINAE cases remain separate exact records."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pExchange(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::exchange",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::exchange"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::removeSeq(const size_t,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pPrepend(NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::prepend_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::prepend_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Initialize(NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::initialize",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::initialize"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Generic Rust initialization only copies base metadata and accepts a shared base for both MUTABLE values; subsequent writable dereference remains unsafe. C++ const-reference constraints are not identical."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::ClearSeq(NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::clear_seq",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::clear_seq"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pInsertAfter(const size_t,NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint sequence transfer; insert_self_after separately reproduces native self-splice cycles and metadata clearing."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::CurrentNode() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::current_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::current_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::new"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. One generic Rust constructor copies base metadata for both MUTABLE values. Native mutable/const overload records are retained separately, with explicit bool arguments in Rust."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator++(int) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::post_advance",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::post_advance"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator=(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, true> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. One generic Rust method copies both raw links for same-specialization and both historical conversion directions; native SFINAE cases remain separate exact records."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PAppend(NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::append_sequence",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::append_sequence"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint transfer; native self-splice also has explicit append_self with native cycle/metadata behavior. No simultaneous aliasing &mut parameters are permitted."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PInsertAfter(NCollection_BaseSequence::Iterator &,NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const BasicIterator<TheNode, TheItemType, NCollection_BaseSequence::BasicIterator::IsConstant> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::clone::Clone>::clone",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::clone::Clone>::clone"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pReverse() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::reverse",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::reverse"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PExchange(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::exchange",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::exchange"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::new"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. One generic Rust constructor copies base metadata for both MUTABLE values. Native mutable/const overload records are retained separately, with explicit bool arguments in Rust."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Initialize(const NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::initialize",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::initialize"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Generic Rust initialization only copies base metadata and accepts a shared base for both MUTABLE values; subsequent writable dereference remains unsafe. C++ const-reference constraints are not identical."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::NCollection_BaseSequence(const occ::handle<NCollection_BaseAllocator> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::new"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pSplit(const size_t,NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::split",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::split"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Distinct destination with retained caller allocation ownership; split_self separately represents native Standard_DomainError without aliasing Rust mutable borrows."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pPrepend(NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint transfer; native self-splice also has explicit prepend_self with native cycle/metadata behavior. No simultaneous aliasing &mut parameters are permitted."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator--(int) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::post_retreat",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::post_retreat"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, false> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::convert",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::convert"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Both C++ historical const-to-mutable and mutable-to-const constructors are retained. Rust convert::<OTHER> performs raw-link copy; writable access always requires unsafe caller obligations."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Next() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::next",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::next"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PPrepend(NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::prepend_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::prepend_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PInsertAfter(const size_t,NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_after"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Valid native index/node domain; Rust also checks out-of-range indices where the native protected node overload assumes valid input."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::RemoveSeq(const size_t,const size_t,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove_range",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove_range"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::find(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::find",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::find"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Init(const NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::init",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::init"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Generic Rust initialization only copies base metadata and accepts a shared base for both MUTABLE values; subsequent writable dereference remains unsafe. C++ const-reference constraints are not identical."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::More() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::more",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::more"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::MutableNode() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::removeSeq(NCollection_BaseSequence::Iterator &,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove_cursor",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove_cursor"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pInsertAfter(NCollection_BaseSequence::Iterator &,NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pAppend(NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::append_sequence",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::append_sequence"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint transfer; native self-splice also has explicit append_self with native cycle/metadata behavior. No simultaneous aliasing &mut parameters are permitted."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PReverse() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::reverse",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::reverse"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PPrepend(NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint transfer; native self-splice also has explicit prepend_self with native cycle/metadata behavior. No simultaneous aliasing &mut parameters are permitted."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::ChangeValue() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::change_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::change_value"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PSplit(const size_t,NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::split",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::split"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Distinct destination with retained caller allocation ownership; split_self separately represents native Standard_DomainError without aliasing Rust mutable borrows."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::removeSeq(const size_t,const size_t,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove_range",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove_range"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::IsEqual(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, theOtherIsConstant> &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::is_equal",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::is_equal"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PInsertAfter(const size_t,NCollection_BaseSequence &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Disjoint sequence transfer; insert_self_after separately reproduces native self-splice cycles and metadata clearing."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::PreviousNode() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::previous_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::previous_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::RemoveSeq(const size_t,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pInsertAfter(const size_t,NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::insert_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::insert_after"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Valid native index/node domain; Rust also checks out-of-range indices where the native protected node overload assumes valid input."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::default::Default>::default",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::default::Default>::default"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::pAppend(NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::append_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::append_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Init(NCollection_BaseSequence &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::init",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::init"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Generic Rust initialization only copies base metadata and accepts a shared base for both MUTABLE values; subsequent writable dereference remains unsafe. C++ const-reference constraints are not identical."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator++() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::advance",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::advance"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator=(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, false> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::assign"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. One generic Rust method copies both raw links for same-specialization and both historical conversion directions; native SFINAE cases remain separate exact records."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Find(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::find",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::find"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::PAppend(NCollection_SeqNode *)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::append_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::append_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, true> &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::convert",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::convert"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Both C++ historical const-to-mutable and mutable-to-const constructors are retained. Rust convert::<OTHER> performs raw-link copy; writable access always requires unsafe caller obligations."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Value() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::value"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json. Unlike BaseList Value, native BaseSequence Value is readonly in both specializations. Mutable operator* and operator-> use ChangeValue separately."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator==(const NCollection_BaseSequence::BasicIterator<TheNode, TheItemType, theOtherIsConstant> &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator<N, OTHER>>>::eq",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator<N, OTHER>>>::eq"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator--() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::retreat",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::retreat"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::MutablePreviousNode() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_previous_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_previous_node"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Previous() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::previous",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::previous"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::clearSeq(NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::clear_seq",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::clear_seq"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::RemoveSeq(NCollection_BaseSequence::Iterator &,NCollection_DelSeqNode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::remove_cursor",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequence::remove_cursor"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::CopyTo(NCollection_BaseSequence::Iterator &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::copy_to",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::copy_to"
+      ],
+      "rust_kind": "function",
+      "status": "partial",
+      "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
     }
   ],
   "tests": [

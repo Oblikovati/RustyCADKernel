@@ -1,0 +1,355 @@
+{
+  "schema": "rustycad.exact-partial-binding-transaction.v1",
+  "source_revision": "aee3f8375d8cc489b293fdee33e1bc96e54c1d5f",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "status": "partial_bindings_pending_root_integration",
+  "scope": "Every captured NCollection_BaseSequence record, including raw Iterator, generic BasicIterator, protected methods/fields, macro allocations, aliases and non-candidates. Exact unique callable mappings only are added/corrected in the ledger.",
+  "counts": {
+    "native_records": 126,
+    "api_visible_candidates": 101,
+    "non_candidate_records": 25,
+    "previous_ledger_rows": 10,
+    "previous_unclaimed_visible": 91,
+    "partial_proposals": 71,
+    "partial_rows_added": 61,
+    "rows_replaced": 10,
+    "implemented_corrected_to_partial": 8,
+    "excluded_corrected_to_partial": 2,
+    "catalog_records": 67,
+    "exact_public_bodies": 50,
+    "statuses": {
+      "partial_body_binding": 86,
+      "partial_nominal_or_field_binding": 12,
+      "template_parameter_not_separate_api_candidate": 6,
+      "missing_native_iterator_alias_contract": 6,
+      "missing_object_allocation_surface": 8,
+      "trait_default_without_project_body_proof": 2,
+      "private_non_candidate_no_public_mapping_required": 2,
+      "conditional_body_requires_impl_selector": 3,
+      "virtual_destructor_drop_glue_without_exact_body_proof": 1
+    }
+  },
+  "original_test_rows_unchanged": true,
+  "other_class_rows_unchanged": true,
+  "legacy_test_credit_delta": 0,
+  "fresh_tkernel_capture": true,
+  "source_body_sha256": {
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator.rs": "e7bb35786564e05625b42ee168dc2f2560473fbd8253a801b0bba1e0b471141c",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/movement.rs": "f6fb47da14de5f01dd22bd0a1e3b7778d75d20fbe02ee067c697b934838eb265",
+    "crates/tkernel/src/ncollection/sequence/base_storage/iterator.rs": "e43004262b135482a7354071fd91452a366e1dfac3caa48f3eb94823760711b0",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/access.rs": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f"
+  },
+  "api_parity_complete": false,
+  "matrix_path": "porting/audits/base-sequence-api-matrix.jsonl",
+  "matrix_sha256": "f48fbe2e0b0b3692db209e2de24eb5bfb6d2941fc33fc95ec19ec096002d5ccd",
+  "catalog_path": "porting/audits/base-sequence-api-rust-bodies.jsonl",
+  "catalog_sha256": "30b9f206228b180cdfd17a4bcf0eea40de407f4a0fd0bf3066a41c99cd343b30",
+  "bindings_path": "porting/audits/base-sequence-ledger-records.jsonl",
+  "bindings_sha256": "1fd4fa8120c0d1b9aecca67e6c63f4c86ea3f20c0073ac849495212c0a371ddf",
+  "rust_inventory_path": "porting/runtime-evidence/base-sequence-normalized.json.gz",
+  "rust_inventory_sha256": "0b79370e90ed854d5113726f0018e9b9fc8a393c820063aae863710b6d35cc6d",
+  "rust_raw_path": "porting/runtime-evidence/base-sequence-rustdoc.json.gz",
+  "rust_raw_sha256": "60e4d5b6832c2f131fe09b8895a8230dbf3dbec38f353ef2d01a036f5b017319",
+  "original_runtime_name_joins": [
+    {
+      "native": "NCollection_SequenceTest.AdvancedOperations",
+      "rust": "NCollection_SequenceTest__AdvancedOperations"
+    },
+    {
+      "native": "NCollection_SequenceTest.AllocatorTest",
+      "rust": "NCollection_SequenceTest__AllocatorTest"
+    },
+    {
+      "native": "NCollection_SequenceTest.BasicFunctions",
+      "rust": "NCollection_SequenceTest__BasicFunctions"
+    },
+    {
+      "native": "NCollection_SequenceTest.CombiningSequences",
+      "rust": "NCollection_SequenceTest__CombiningSequences"
+    },
+    {
+      "native": "NCollection_SequenceTest.ComplexTypeSequence",
+      "rust": "NCollection_SequenceTest__ComplexTypeSequence"
+    },
+    {
+      "native": "NCollection_SequenceTest.CopyAndAssignment",
+      "rust": "NCollection_SequenceTest__CopyAndAssignment"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplaceAfterIndex",
+      "rust": "NCollection_SequenceTest__EmplaceAfterIndex"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplaceAfterIterator",
+      "rust": "NCollection_SequenceTest__EmplaceAfterIterator"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplaceAppend",
+      "rust": "NCollection_SequenceTest__EmplaceAppend"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplaceBeforeIndex",
+      "rust": "NCollection_SequenceTest__EmplaceBeforeIndex"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplacePrepend",
+      "rust": "NCollection_SequenceTest__EmplacePrepend"
+    },
+    {
+      "native": "NCollection_SequenceTest.EmplaceWithMoveOnlyType",
+      "rust": "NCollection_SequenceTest__EmplaceWithMoveOnlyType"
+    },
+    {
+      "native": "NCollection_SequenceTest.IteratorFunctions",
+      "rust": "NCollection_SequenceTest__IteratorFunctions"
+    },
+    {
+      "native": "NCollection_SequenceTest.ModifyingOperations",
+      "rust": "NCollection_SequenceTest__ModifyingOperations"
+    },
+    {
+      "native": "NCollection_SequenceTest.MoveOperations",
+      "rust": "NCollection_SequenceTest__MoveOperations"
+    },
+    {
+      "native": "NCollection_SequenceTest.OCC26448_PrependEmptySequence",
+      "rust": "NCollection_SequenceTest__OCC26448_PrependEmptySequence"
+    },
+    {
+      "native": "NCollection_SequenceTest.STLAlgorithmCompatibility_MinMax",
+      "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_MinMax"
+    },
+    {
+      "native": "NCollection_SequenceTest.STLAlgorithmCompatibility_Replace",
+      "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_Replace"
+    },
+    {
+      "native": "NCollection_SequenceTest.STLAlgorithmCompatibility_Reverse",
+      "rust": "NCollection_SequenceTest__STLAlgorithmCompatibility_Reverse"
+    },
+    {
+      "native": "NCollection_SequenceTest.StandardIteratorContract",
+      "rust": "NCollection_SequenceTest__StandardIteratorContract"
+    }
+  ],
+  "runtime": {
+    "rust_passed": 51,
+    "native_original_passed": 20,
+    "original_name_joins": 20,
+    "new_original_test_credit": 0,
+    "native_fixture_rows": {
+      "storage": 22,
+      "generic_iterator": 6,
+      "self_splice": 6,
+      "readonly_node": 1,
+      "method": 12
+    },
+    "all_native_fixture_outputs_byte_equal": true,
+    "miri_rerun": false,
+    "full_workspace_rerun": false,
+    "note": "Existing tests and native fixtures were re-run unchanged; this receipt does not imply method-by-method complete behavior or all specialization/configuration closure."
+  },
+  "checks": {
+    "validator_tests_passed": 23,
+    "standalone_replay_exit_code": 0,
+    "fresh_rustdoc_exit_code": 0,
+    "formatter_exit_code": 0,
+    "git_diff_check_exit_code": 0
+  },
+  "validation_command": "PYTHONPATH=tools python3 tools/verify_base_sequence_bindings.py",
+  "validator_test_command": "PYTHONPATH=tools:tools/tests python3 -m unittest test_api_binding_replay test_base_sequence_bindings -v",
+  "capture_command": "CARGO_TARGET_DIR=/tmp/rustycad-base-api-check cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib -- -Z unstable-options --output-format json --document-private-items",
+  "validation_artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/base-sequence-api-rust.gz",
+      "sha256": "78078587870a1c773692fee396943de4b32b1b79c8527a78ff8874816102e678",
+      "uncompressed_sha256": "35247ec90990ea904851756b6b0c394b54fa67c6dd821006e616c3341ba4bd39"
+    },
+    "storage-compile": {
+      "path": "porting/runtime-evidence/base-sequence-api-storage-compile.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "storage-run": {
+      "path": "porting/runtime-evidence/base-sequence-api-storage-run.gz",
+      "sha256": "3f3e864d31f15807b4bf0b4eddd3f0e7266ae1e9603b12725b4fad9786d6555b",
+      "uncompressed_sha256": "c4c6a2dcbcb7182f87237f0845462c5e14a0c3035c7a07f7ad03195cdee776f4"
+    },
+    "generic_iterator-compile": {
+      "path": "porting/runtime-evidence/base-sequence-api-generic_iterator-compile.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "generic_iterator-run": {
+      "path": "porting/runtime-evidence/base-sequence-api-generic_iterator-run.gz",
+      "sha256": "f72cc141a52e15c89b78e43056f7166fed1efea915d55f3858acc05ab187f59c",
+      "uncompressed_sha256": "8b418bb0214d3a358d0e0737ed57768f6e8de2bd689adea05325e2731fb57eb1"
+    },
+    "self_splice-compile": {
+      "path": "porting/runtime-evidence/base-sequence-api-self_splice-compile.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "self_splice-run": {
+      "path": "porting/runtime-evidence/base-sequence-api-self_splice-run.gz",
+      "sha256": "519e638c0ec04f8bfc244ea98941428120d4f0cae9d50fc06ef6ee06004abe3f",
+      "uncompressed_sha256": "2b2453120169c2060e246652546f2edab9b76a0281830ee3ef5d897e7e630322"
+    },
+    "readonly_node-compile": {
+      "path": "porting/runtime-evidence/base-sequence-api-readonly_node-compile.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readonly_node-run": {
+      "path": "porting/runtime-evidence/base-sequence-api-readonly_node-run.gz",
+      "sha256": "4f540399a516091bbf3574820ba6b67c0312bcda43d0040da862730c1491c5f4",
+      "uncompressed_sha256": "a7a1dae8eb17cffe59e8d39d31ed062246ef9c09d76b3bdd27f18f2168965923"
+    },
+    "method-compile": {
+      "path": "porting/runtime-evidence/base-sequence-api-method-compile.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "method-run": {
+      "path": "porting/runtime-evidence/base-sequence-api-method-run.gz",
+      "sha256": "03d11e2327064936f9a996682a3577f7a5d0de5e4fb7ad78617892264983c2cd",
+      "uncompressed_sha256": "fd190b0c350d9768ad4d62a0cac3bd24f5f77ca56869df95dede9d1f903b65d0"
+    },
+    "originals": {
+      "path": "porting/runtime-evidence/base-sequence-api-originals.gz",
+      "sha256": "61f422e76b074ede761e009580ee6cd365ee601eb683807abedb7f275e668966",
+      "uncompressed_sha256": "0db8e30f8bb0dc844b009630ea49dec59bb4ed0b65bea2587539c350cd293196"
+    },
+    "rustdoc": {
+      "path": "porting/runtime-evidence/base-sequence-api-rustdoc.gz",
+      "sha256": "d646dd39d1b8436ae96645d36bd754e3d7eca198631a4870b069c0d7c9bcd651",
+      "uncompressed_sha256": "24c0a2fc1b3148277c19172fc2c5eec2ba5696e1715d385ae229395b96b6e841"
+    },
+    "format": {
+      "path": "porting/runtime-evidence/base-sequence-api-format.gz",
+      "sha256": "67abd30339f36b8cb33867ea9b8b4cad3685fdb67930c6bd7f1aecda80ee3d8f",
+      "uncompressed_sha256": "2672c6f9cc00e37affa05f162cd2fda371db49d33b436b4af71ca56423f2b55f"
+    },
+    "binding-tests": {
+      "path": "porting/runtime-evidence/base-sequence-api-binding-tests.gz",
+      "sha256": "0c957c78c14b91fe156ed42f764c373c4e516654ae051102505f0a765cc8f3c6",
+      "uncompressed_sha256": "20a89e6b88d605e336c6b3ef428d494912e1035da3750d1639b641864d010a27"
+    },
+    "replay": {
+      "path": "porting/runtime-evidence/base-sequence-api-replay.gz",
+      "sha256": "b2a08a56a623b808c501d67796db2ae3b10729d81ad3a8f5a43abc68c1b1b846",
+      "uncompressed_sha256": "d399031056d12940a7532d01e8ab1f6270fff97c851ad02092965d9ad7b4e041"
+    }
+  },
+  "historical_receipt_findings": [
+    {
+      "path": "porting/audits/base-sequence-method-batch.json",
+      "finding": "The earlier raw-engine/custom-node absence and typed Vec-only engine descriptions are superseded by current public BaseSequence/BaseSequenceBasicIterator and SequenceTopology containing BaseSequence."
+    },
+    {
+      "path": "porting/audits/base-sequence-storage-batch.json",
+      "finding": "The earlier missing BasicIterator, unexposed protected fields and absent self-splice helpers are now present. Compiler binding is supplied here; historical snapshots remain scoped to their original source hashes."
+    },
+    {
+      "path": "porting/audits/base-sequence-generic-methods.json",
+      "finding": "The statement that typed Sequence retains a separate vector-of-owned-nodes engine is stale; current sequence.rs and sequence/topology.rs use canonical BaseSequence. This does not establish complete subclass/ABI/language equivalence."
+    }
+  ],
+  "evidence_groups": {
+    "storage": {
+      "fixtures": [
+        "tkernel_base_sequence_storage_contracts",
+        "tkernel_base_sequence_self_splice_contracts"
+      ],
+      "domain": "Valid raw-node topology, native cache/index rules, callback ordering and allocator retention, explicit native self-splice cycles. Checked Rust invalid-index extensions are not native unchecked-pointer behavior."
+    },
+    "basic": {
+      "fixtures": [
+        "tkernel_base_sequence_generic_iterator_contracts",
+        "tkernel_base_sequence_readonly_node_contracts"
+      ],
+      "domain": "Both historical conversion directions, custom-node offset projection and const/mutable dispatch. C++ IsConstant is !Rust MUTABLE. Value always returns readonly reference, unlike mutable dereference/arrow. Rust methods require explicit unsafe lifetime/alias guarantees."
+    },
+    "field": {
+      "domain": "Rust public fields expose native protected metadata through composition; no C++ inheritance layout/ABI equivalence claim."
+    },
+    "nominal": {
+      "domain": "Compiler-visible BaseSequence, raw Iterator, generic BasicIterator. C++ virtual destruction/subclass dispatch, iterator aliases, allocation macros and full generic obligations remain open."
+    }
+  },
+  "remaining_actions": [
+    "Resolve three conditional body mappings (Node/operator*/operator->) with explicit compiler impl-context selectors; retain both const and mutable bodies.",
+    "Audit eight object allocation overloads and six native iterator alias contracts separately.",
+    "Prove virtual destructor/subclass behavior and Rust member drop order rather than treating absence of a callable Drop body as coverage.",
+    "Keep operator!= default-trait dependency explicit; project eq body alone is not an observed ne body.",
+    "Native defaults, protected customization, checked Rust extensions, pointer lifetime/alias obligations, noexcept and configuration closure remain partial."
+  ],
+  "limitations": [
+    "126 captured records and101 visible candidates are this compiler capture scope, not a proven complete all-platform/configuration denominator.",
+    "No production Rust behavior changed; 71 partial mappings link existing implementation/evidence and correct eight broad implementation claims plus two obsolete exclusions.",
+    "Native template-owned non-candidates and private records are retained without separate API credit.",
+    "Fresh capture is TKernel only; published whole-workspace API inventory remains unchanged.",
+    "The source archive includes scoped base implementations and fixtures, not full workspace dependency closure."
+  ],
+  "implemented_api_credit_delta": -8,
+  "accounted_exclusion_delta": -2,
+  "raw_and_partial_surface_credit_only": true,
+  "audited_source_sha256": {
+    "crates/tkernel/src/ncollection/sequence.rs": "225e9f6ea1c2b735be56d68f36519600f2aadf9290da083d8f05c3b3346f52ce",
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion/self_splice.rs": "2d5a571acfd9e7de290d99b41a33141c457dd3fb188bfb55e654027045d96662",
+    "crates/tkernel/src/ncollection/sequence/base_storage/iterator.rs": "e43004262b135482a7354071fd91452a366e1dfac3caa48f3eb94823760711b0",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator.rs": "e7bb35786564e05625b42ee168dc2f2560473fbd8253a801b0bba1e0b471141c",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/access.rs": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/movement.rs": "f6fb47da14de5f01dd22bd0a1e3b7778d75d20fbe02ee067c697b934838eb265",
+    "crates/tkernel/src/ncollection/sequence/basic_node.rs": "626d6c6a8b05d86efa251583f51bd8ebcc6a6f127d8d6b89a3eb30df5be2eb6d",
+    "crates/tkernel/src/ncollection/sequence/topology.rs": "2e9d18577307f6b3de6016fd55b8f4351e441f555dcdadd9bfde4ee79eb8ba92",
+    "crates/tkernel/tests/base_sequence_generic_contracts.rs": "495e99510b4559f57f761d782cc5061843f8c9d0c990add13e7bbd9db4aeba38",
+    "crates/tkernel/tests/base_sequence_generic_contracts/fixture.rs": "995cfaff58be5ba210c35287bab6dc2e19fcd4ad6b08af7914fa103e9159de14",
+    "crates/tkernel/tests/base_sequence_method_contracts.rs": "02e8bcff6be5502dbd60c8eff73df6f5c9a661d8f956744bd1cc2849fad9574d",
+    "crates/tkernel/tests/base_sequence_self_splice_contracts.rs": "fb16ac0f65988609210f59449a6d80d9620ff5b23b874afcb693780d4f132392",
+    "crates/tkernel/tests/base_sequence_storage_contracts.rs": "19a70d89ea4e57c2d868cf1207a97a10b4f2ab54550c043474e4e15727693b6a",
+    "tools/oracle/tkernel_base_sequence_generic_iterator_contracts.cxx": "4bdfa06aa1bcf6a8aaf928b52fbbce2135dbd395a54794e64d85368ee6f67b97",
+    "tools/oracle/tkernel_base_sequence_generic_iterator_contracts.expected": "8b418bb0214d3a358d0e0737ed57768f6e8de2bd689adea05325e2731fb57eb1",
+    "tools/oracle/tkernel_base_sequence_method_contracts.cxx": "ee66c32f59567e48fa3aa37dbfad2a5de1aa46d51db46574a8004d03c9a22cc3",
+    "tools/oracle/tkernel_base_sequence_method_contracts.expected": "fd190b0c350d9768ad4d62a0cac3bd24f5f77ca56869df95dede9d1f903b65d0",
+    "tools/oracle/tkernel_base_sequence_readonly_node_contracts.cxx": "1ebe4c8c4ba44a5c91f1887ad3f4f2187b4e9f974c91f9c9694f524be4b11358",
+    "tools/oracle/tkernel_base_sequence_readonly_node_contracts.expected": "a7a1dae8eb17cffe59e8d39d31ed062246ef9c09d76b3bdd27f18f2168965923",
+    "tools/oracle/tkernel_base_sequence_self_splice_contracts.cxx": "76c6a5e030ca0930723de12875d7d8147ccc20e9c0b5c21f542d8944f0794b09",
+    "tools/oracle/tkernel_base_sequence_self_splice_contracts.expected": "2b2453120169c2060e246652546f2edab9b76a0281830ee3ef5d897e7e630322",
+    "tools/oracle/tkernel_base_sequence_storage_contracts.cxx": "b0668764079f3e0a57e1370bf20256ae18de211691ef240a2841c77a2bef7541",
+    "tools/oracle/tkernel_base_sequence_storage_contracts.expected": "c4c6a2dcbcb7182f87237f0845462c5e14a0c3035c7a07f7ad03195cdee776f4"
+  },
+  "native_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx": "7e0bf197ad5ec0e66bb5e263efe0d328ea170e39e2695d0623e6f281da75348d",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.cxx": "ea2a587de0fa3eda4455a3bf29fb73aab0ca628927bb531498e072f0d5d2c960"
+  },
+  "native_artifacts": {
+    "include_wrapper_sha256": "ac6658bf21afdae92b4c4a79e1396f9f65b6fbefdf14220f117874da1cce594a",
+    "resolved_header": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+    "TKernel_library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_gtest_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "proof_tools_sha256": {
+    "tools/api_binding_replay.py": "8730756dc873c3f78340e4972bbb87bb07117b750013ab3f83c723643b14a4d0",
+    "tools/api_binding_transaction.py": "5fb604a7c56b470f4958a12be285f6ff428131d3b4becec260531aca5236ebd1",
+    "tools/verify_base_list_bindings.py": "ea7e2bf63fcad8591936e025c3b2d01f8b33866cd577dc961ab4052cf8e8ae40",
+    "tools/verify_base_sequence_bindings.py": "57aa254307bfbbe4fae5a3afac06cbb6cad6eafddbb6a240cc16ecf000620d0e",
+    "tools/tests/test_base_sequence_bindings.py": "6feae4996027e253741be1a07ffa9ec54b9b266cdc283d24b1ee253301429450"
+  },
+  "source_archive": {
+    "path": "porting/runtime-evidence/base-sequence-api-sources.tar.gz",
+    "sha256": "d99761ac6c1d45ed4a27a30a1b5cb9b43afa2a3988b5dd0ad040f8b125387baa"
+  },
+  "runtime_command_archive": {
+    "path": "porting/runtime-evidence/base-sequence-api-commands.json.gz",
+    "sha256": "b9aa3e5e495fb6e3f3fd735957c3cc4b62b69b8d4897499d21c9d7a1455981ab"
+  }
+}
