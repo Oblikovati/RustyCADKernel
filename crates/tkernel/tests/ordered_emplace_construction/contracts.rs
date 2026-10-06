@@ -31,10 +31,10 @@ fn tracked_case(operation: Operation, test: EmplaceCase) {
     let arena = BaseAllocator::accumulating(8192).unwrap();
     let trace = EmplaceTrace::new(&arena);
     let mut map = OrderedMap::with_allocator(EmplacePolicy(&trace), 0, arena.clone());
-    map.add(make_key(&trace, 7));
+    map.add(make_key(&trace, 7, 10));
     let first = map.basic_first_node();
     trace.configure(&test);
-    let result = invoke(&mut map, operation, || make_key(&trace, test.key));
+    let result = invoke(&mut map, operation, || make_key(&trace, test.key, 20));
     snapshot(
         &format!("{}_tracked_{}", operation.name(), test.label),
         &result,
@@ -70,9 +70,10 @@ emplace_suite!(emplaced, Operation::Emplaced);
 emplace_suite!(try_emplace, Operation::TryEmplace);
 emplace_suite!(try_emplaced, Operation::TryEmplaced);
 
-fn make_key<'a>(trace: &'a EmplaceTrace<'a>, id: i32) -> EmplaceKey<'a> {
+fn make_key<'a>(trace: &'a EmplaceTrace<'a>, id: i32, tag: i32) -> EmplaceKey<'a> {
     EmplaceKey {
         id: trace.construct(id),
+        tag,
         trace,
     }
 }

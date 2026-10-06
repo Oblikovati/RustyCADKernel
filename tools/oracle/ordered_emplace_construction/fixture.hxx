@@ -17,14 +17,16 @@ struct EmplaceArgument {
  operator int()const{return trace->construct(id);}
 };
 struct EmplaceKey {
- int id;EmplaceTrace* trace;
- EmplaceKey(int value,EmplaceTrace& log):id(value),trace(&log){}
- explicit EmplaceKey(const EmplaceArgument& arg):id(arg.trace->construct(arg.id)),trace(arg.trace){}
- EmplaceKey(EmplaceKey&& other):id(other.id),trace(other.trace){trace->note("M"+std::to_string(id));other.id=-id;}
- ~EmplaceKey(){trace->note("D"+std::to_string(id));}
+ int id,tag;EmplaceTrace* trace;
+ EmplaceKey(int value,EmplaceTrace& log):id(value),tag(10),trace(&log){}
+ explicit EmplaceKey(const EmplaceArgument& arg):id(arg.trace->construct(arg.id)),tag(20),trace(arg.trace){}
+ EmplaceKey(EmplaceKey&& other):id(other.id),tag(other.tag),trace(other.trace){trace->note("M"+std::to_string(id));other.id=-id;}
+ ~EmplaceKey(){trace->note("D"+std::to_string(id)+"t"+std::to_string(tag));}
 };
 int keyId(int key){return key;}
 int keyId(const EmplaceKey& key){return key.id;}
+std::string keyDisplay(int key){return std::to_string(key);}
+std::string keyDisplay(const EmplaceKey& key){return std::to_string(key.id)+":"+std::to_string(key.tag);}
 struct EmplacePolicy {
  EmplaceTrace* trace;
  template<class K>size_t operator()(const K& key)const {
@@ -58,7 +60,7 @@ EmplaceCase scenarios[]={
 };
 void populate(IntegerSet& map,int count){if(count==3){for(int key:{4,1,7})map.Add(key);return;}for(int key=0;key<count;++key)map.Add(key);}
 template<class Map>std::string order(const Map& map) {
- std::string result;for(const auto& key:map)result+=std::to_string(keyId(key))+",";return result.empty()?"-":result;
+ std::string result;for(const auto& key:map)result+=keyDisplay(key)+",";return result.empty()?"-":result;
 }
 template<class Map>void snapshot(const std::string& label,const std::string& result,const Map& map,const EmplaceTrace& trace,bool sameFirst) {
  std::cout<<label<<' '<<result<<' '<<map.Size()<<' '<<map.NbBuckets()<<' '<<(map.Buckets()!=nullptr)<<' '<<trace.arena->Active()<<' '<<sameFirst<<' '<<trace.events<<' '<<order(map)<<'\n';

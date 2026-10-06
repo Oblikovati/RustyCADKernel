@@ -46,6 +46,9 @@ impl<'a> EmplaceTrace<'a> {
 }
 pub trait KeyIdentity {
     fn identity(&self) -> i32;
+    fn display(&self) -> String {
+        self.identity().to_string()
+    }
 }
 impl KeyIdentity for i32 {
     fn identity(&self) -> i32 {
@@ -54,16 +57,20 @@ impl KeyIdentity for i32 {
 }
 pub struct EmplaceKey<'a> {
     pub id: i32,
+    pub tag: i32,
     pub trace: &'a EmplaceTrace<'a>,
 }
 impl KeyIdentity for EmplaceKey<'_> {
     fn identity(&self) -> i32 {
         self.id
     }
+    fn display(&self) -> String {
+        format!("{}:{}", self.id, self.tag)
+    }
 }
 impl Drop for EmplaceKey<'_> {
     fn drop(&mut self) {
-        self.trace.note(&format!("D{}", self.id));
+        self.trace.note(&format!("D{}t{}", self.id, self.tag));
     }
 }
 pub struct EmplacePolicy<'a>(pub &'a EmplaceTrace<'a>);
@@ -127,7 +134,7 @@ pub fn snapshot<K: KeyIdentity>(
 fn order<K: KeyIdentity>(map: &OrderedMap<K, EmplacePolicy<'_>>) -> String {
     let order: String = map
         .iter()
-        .map(|key| format!("{},", key.identity()))
+        .map(|key| format!("{},", key.display()))
         .collect();
     if order.is_empty() {
         "-".to_owned()
