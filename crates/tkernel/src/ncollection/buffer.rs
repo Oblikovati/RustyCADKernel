@@ -8,6 +8,7 @@ use std::io;
 
 mod adoption;
 mod pointers;
+mod raw_adoption;
 
 /// Owned buffer with explicit allocation state; `Buffer::new(Some(allocator), 16)`.
 ///

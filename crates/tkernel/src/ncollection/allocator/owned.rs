@@ -31,15 +31,45 @@ impl BaseAllocator {
     /// expose uninitialized or reused memory as `u8`. `None` where upstream returns NULL or
     /// throws. Example: `allocator.allocate(16).unwrap().as_slice().len() == 16`.
     pub fn allocate(&self, size: usize) -> Option<AllocatedBytes> {
-        let address = self.allocate_policy(size, true)?;
+        let address = self.allocate_owned_address(size)?;
         match &*self.inner {
-            AllocatorKind::Incremental(engine) => super::locked(engine).acquire(),
-            AllocatorKind::Accumulating(_) => {}
+            AllocatorKind::Incremental(_) | AllocatorKind::Accumulating(_) => {}
             _ => return Some(self.owned_bytes(address, size)),
         }
         // SAFETY: arena ranges of `size` bytes are exclusively ours; reused bytes are zeroed.
         unsafe { address.write_bytes(0, size) };
         Some(self.owned_bytes(address, size))
+    }
+
+    fn allocate_owned_address(&self, size: usize) -> Option<NonNull<u8>> {
+        if let AllocatorKind::Incremental(engine) = &*self.inner {
+            let mut engine = super::locked(engine);
+            let address = engine.allocate(size)?;
+            // Reset shares this lock: the lease must exist before another thread can rewind/free.
+            engine.acquire();
+            return Some(address);
+        }
+        self.allocate_policy(size, true)
+    }
+
+    /// Transfers initialized raw-policy bytes into the safe owner without allocating or zeroing.
+    ///
+    /// # Safety
+    /// The exclusive live allocation must belong to this allocator's raw policy; `size` initialized
+    /// bytes must fit the allocation and `isize::MAX`. No reset may invalidate it during adoption.
+    pub(in crate::ncollection) unsafe fn adopt_raw_bytes(
+        &self,
+        address: NonNull<u8>,
+        size: usize,
+    ) -> AllocatedBytes {
+        self.acquire_owned_byte_lease();
+        self.owned_bytes(address, size)
+    }
+
+    fn acquire_owned_byte_lease(&self) {
+        if let AllocatorKind::Incremental(engine) = &*self.inner {
+            super::locked(engine).acquire();
+        }
     }
 
     fn owned_bytes(&self, address: NonNull<u8>, size: usize) -> AllocatedBytes {
