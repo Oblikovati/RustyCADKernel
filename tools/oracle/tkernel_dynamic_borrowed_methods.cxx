@@ -208,9 +208,53 @@ static void insertion_failures() {
   insertion_case<false,false>("alias_before_negative",-1,0,"",false);
   insertion_case<true,true>("alias_after_end",4,0,"",true);
 }
+template<bool Moving, class Index>
+static bool set_internal(NCollection_DynamicArray<Item>& array, Index index, size_t source) {
+  try {
+    Item& result = array.SetValue(index, forwarded<Moving>(array[source]));
+    return &result == &array[size_t(index)];
+  } catch (...) { event("E"); return false; }
+}
+template<bool Moving>
+static void set_case(const char* name, int index, size_t source, const char* fail, bool wide) {
+  occ::handle<ProbeAllocator> allocator = new ProbeAllocator;
+  probe = allocator.get(); failure.clear(); moveCount = 0;
+  NCollection_DynamicArray<Item> array(2, allocator);
+  for (int i = 0; i < 4; ++i) array.EmplaceAppend((i + 1) * 10);
+  const Item* original = &array[source]; probe->events.clear(); failure = fail;
+  const bool returned = wide ? set_internal<Moving>(array, size_t(index), source)
+                            : set_internal<Moving>(array, index, source);
+  print_internal(name, array, returned, original == &array[source]);
+}
+template<bool Moving> static void set_matrix() {
+  for (int index = 0; index < 8; ++index) {
+    for (size_t source = 0; source < 4; ++source) {
+      const std::string name = "alias_set_m" + std::to_string(Moving)
+                            + "_i" + std::to_string(index) + "_s" + std::to_string(source);
+      set_case<Moving>(name.c_str(), index, source, "", index % 2 == 1);
+    }
+  }
+}
+static void set_failures() {
+  set_case<false>("set_alias_copy_ctor",0,1,"construct",false);
+  set_case<false>("set_alias_self_copy_ctor",1,1,"construct",false);
+  set_case<true>("set_alias_move_ctor",0,1,"move_construct",false);
+  set_case<true>("set_alias_self_move_ctor",1,1,"move_construct",false);
+  set_case<false>("set_alias_copy_assign",0,1,"move",false);
+  set_case<false>("set_alias_self_copy_assign",1,1,"move",false);
+  set_case<true>("set_alias_move_assign",0,1,"move",false);
+  set_case<true>("set_alias_self_move_assign",1,1,"move",false);
+  set_case<false>("set_alias_gap_copy_ctor",7,1,"construct",false);
+  set_case<true>("set_alias_gap_move_ctor",7,1,"move_construct",false);
+  set_case<false>("set_alias_gap_copy_default",7,1,"default",false);
+  set_case<true>("set_alias_gap_move_default",7,1,"default",false);
+  set_case<false>("set_alias_negative_copy",-1,1,"",false);
+  set_case<true>("set_alias_negative_move",-1,1,"",false);
+}
 int main() {
   borrowed_cases(); moved_cases(); internal_cases();
   insertion_matrix<false,false>(); insertion_matrix<false,true>();
   insertion_matrix<true,false>(); insertion_matrix<true,true>();
   insertion_failures();
+  set_matrix<false>(); set_matrix<true>(); set_failures();
 }
