@@ -1,0 +1,87 @@
+{
+  "schema": "rustycad.api-denominator-gap.v1",
+  "status": "confirmed_open",
+  "source_revision": "4df1d302b147f610535f1183716d3ecc3310f1fe",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "api_denominator_complete": false,
+  "summary": "Private nested type has externally reachable members through an exposed protected return value, despite current private-ancestor API exclusion.",
+  "fixture": {
+    "path": "tools/oracle/tkernel_sparse_array_base_contracts.cxx",
+    "sha256": "7f1570ef82ed30f26cac6bdb9955982e936e8ad9d3324bb77f631690c01e62a9",
+    "uses_access_control_override": false,
+    "compile_exit": 0,
+    "runtime_exit": 0,
+    "expected_stdout_path": "tools/oracle/tkernel_sparse_array_base_contracts.expected",
+    "stdout_matches_expected": true,
+    "native_rows": 7,
+    "demonstrated_access": "RawSparse publicly exposes protected getBlock; external auto block expressions access Array, Bits and Count without spelling private Block."
+  },
+  "native_header_sha256": "10b27cfe10abb13400cccf6ed2f08dbcd0f173136c9944e66d0ebe52730c4e47",
+  "extractor_policy": {
+    "path": "tools/api_inventory/src/Schema.cpp",
+    "sha256": "93fe46b89542ef5a2627ae167fed449c6908f71829178a71205f095a870fc1c2",
+    "reason": "Ancestor access rejection omits non-nameable types exposed through callable signatures; alias reachability handling is a separate existing feature."
+  },
+  "observed_declarations": [
+    {
+      "id": "0c7cbcf710a249742e49c4a0566c40efecc9b08a2d57c5c4c5b81bf4552903b1",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Set",
+      "kind": "CXXMethod",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "165885a026ce0219cd49e4b3e7c3e20271225a621cbba55d43bbc23a2a3c4d23",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Bits",
+      "kind": "Field",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "7ad6ed61ec3da6dcac19dce231e8aa29c8e81f19d4877d939e031064c54f0f10",
+      "qualified_name": "NCollection_SparseArrayBase::Block",
+      "kind": "CXXRecord",
+      "api_visible": false,
+      "exclusion_reason": "private_access"
+    },
+    {
+      "id": "848de59b092288f468d26055bc6ff056b14a3efad9a5bdff42a7e300a445bacb",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Array",
+      "kind": "Field",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "d20f4857b71047bbdb0b16f08fe7c89cca46caf3a1a5a59ff377d76c9aa43d2b",
+      "qualified_name": "NCollection_SparseArrayBase::getBlock",
+      "kind": "CXXMethod",
+      "api_visible": true,
+      "exclusion_reason": ""
+    }
+  ],
+  "artifacts": {
+    "native-build": {
+      "path": "porting/runtime-evidence/returned-private-type-native-build.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native-stdout": {
+      "path": "porting/runtime-evidence/returned-private-type-native-stdout.gz",
+      "sha256": "fbf3b65dec8e1645e7888697055f0a59f83050bcacf8424c5e8e8b92e0b392c6"
+    },
+    "inventory-rows": {
+      "path": "porting/runtime-evidence/returned-private-type-inventory-rows.gz",
+      "sha256": "89a4f912177e406da475f7ae624ee742a8394f860d2d21de1051d50bb70d0a9f"
+    }
+  },
+  "limitations": [
+    "This existing fixture demonstrates exposed fields; the Set method is recorded as a follow-up callable candidate, not newly runtime-proven by this fixture.",
+    "Do not make all private members or private type names visible: direct member access, construction accessibility, return/parameter/field exposure, aliases, references/pointers, templates and configuration visibility require separate proof.",
+    "Observed global counts remain unchanged; a validated reachability model and recapture are required before denominator completeness can be asserted."
+  ],
+  "next_work": [
+    "Add positive inferred-return-member fixtures and negative direct-private-member/private-type-name fixtures.",
+    "Track exposing declaration and reached record/member IDs without changing native declaration identity.",
+    "Audit transitive exposed type reachability and keep unsupported template/configuration cases explicit.",
+    "Refresh native capture and crosswalk only after extractor and merge validation."
+  ]
+}
