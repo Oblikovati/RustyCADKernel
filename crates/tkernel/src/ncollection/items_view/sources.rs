@@ -7,8 +7,8 @@ use std::fmt::Debug;
 
 /// Implements the key/value extractor (read and write) for a map with `items`/`items_mut`.
 macro_rules! key_value_source {
-    ($map:ident) => {
-        impl<K: Debug, V, H: HashPolicy<K>> ItemsSource<KeyValueItems> for $map<K, V, H> {
+    ($map:ident $(, $bound:path)?) => {
+        impl<K $(: $bound)?, V, H: HashPolicy<K>> ItemsSource<KeyValueItems> for $map<K, V, H> {
             type Item<'a>
                 = (&'a K, &'a V)
             where
@@ -23,7 +23,7 @@ macro_rules! key_value_source {
                 self.is_empty()
             }
         }
-        impl<K: Debug, V, H: HashPolicy<K>> ItemsSourceMut<KeyValueItems> for $map<K, V, H> {
+        impl<K $(: $bound)?, V, H: HashPolicy<K>> ItemsSourceMut<KeyValueItems> for $map<K, V, H> {
             type ItemMut<'a>
                 = (&'a K, &'a mut V)
             where
@@ -35,9 +35,9 @@ macro_rules! key_value_source {
     };
 }
 
-key_value_source!(DataMap);
-key_value_source!(IndexedDataMap);
-key_value_source!(FlatDataMap);
+key_value_source!(DataMap, Debug);
+key_value_source!(IndexedDataMap, Debug);
+key_value_source!(FlatDataMap, Debug);
 key_value_source!(OrderedDataMap);
 
 impl<K: Debug, V, H: HashPolicy<K>> ItemsSource<KeyValueIndexItems> for IndexedDataMap<K, V, H> {

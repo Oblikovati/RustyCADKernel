@@ -1,8 +1,8 @@
 use super::{
-    Debug, HashPolicy, OrderedDataItems, OrderedDataItemsMut, OrderedDataMap, OrderedDataValues,
+    HashPolicy, OrderedDataItems, OrderedDataItemsMut, OrderedDataMap, OrderedDataValues,
     OrderedDataValuesMut, OrderedItems,
 };
-impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Borrows values in insertion order; `map.iter()`.
     pub fn iter(&self) -> OrderedDataValues<'_, K, V> {
         OrderedDataValues {
@@ -90,14 +90,14 @@ impl<'a, K, V> Iterator for OrderedDataValuesMut<'a, K, V> {
         self.inner.next().map(|(_, value)| value)
     }
 }
-impl<'a, K: Debug, V, H: HashPolicy<K>> IntoIterator for &'a OrderedDataMap<K, V, H> {
+impl<'a, K, V, H: HashPolicy<K>> IntoIterator for &'a OrderedDataMap<K, V, H> {
     type Item = &'a V;
     type IntoIter = OrderedDataValues<'a, K, V>;
     fn into_iter(self) -> Self::IntoIter {
         self.iter()
     }
 }
-impl<'a, K: Debug, V, H: HashPolicy<K>> IntoIterator for &'a mut OrderedDataMap<K, V, H> {
+impl<'a, K, V, H: HashPolicy<K>> IntoIterator for &'a mut OrderedDataMap<K, V, H> {
     type Item = &'a mut V;
     type IntoIter = OrderedDataValuesMut<'a, K, V>;
     fn into_iter(self) -> Self::IntoIter {

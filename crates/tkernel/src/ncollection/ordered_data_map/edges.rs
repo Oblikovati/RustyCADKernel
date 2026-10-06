@@ -1,8 +1,8 @@
 use super::{
-    Debug, Failure, HashPolicy, OrderedDataMap, OrderedNode, OrderedNodeMut, OrderedNodeRef,
+    Failure, HashPolicy, OrderedDataMap, OrderedNode, OrderedNodeMut, OrderedNodeRef,
     missing_ordered_node,
 };
-impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// The head of the insertion order as a node view, `None` when empty; `map.first_node()`.
     pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, V>> {
         OrderedNodeRef::at(&self.table.slots, self.table.first)
