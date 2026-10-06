@@ -11,7 +11,8 @@
       "late-fill"
     ],
     "observed_gap": "Prior Resize/SetValue receipts recorded automatic Rust rollback. The native-tail slice replaces that policy with unpublished spare lifetimes; those historical receipts remain accurate for their archived commits. Outer constructor, growth allocation ownership, and destructive shrink exceptions remain subsequent slices.",
-    "implementation_receipt": "porting/audits/linear-vector-native-tail-methods.json"
+    "implementation_receipt": "porting/audits/linear-vector-native-tail-methods.json",
+    "copy_constructor_receipt": "porting/audits/linear-vector-copy-constructor-methods.json"
   },
   "next_slice": {
     "name": "Preserve initialized spare slots on native tail-constructor failure",
@@ -56,13 +57,12 @@
       "design": "Use explicit unpublished allocation ownership/progress, with commit transferring ownership only after all relocations and old storage disposal succeed. An intentionally disarmed-on-unwind owner can preserve native leaks. Keep native allocated/constructed/published states distinct, and provide test-only typed recovery of leaked replacement allocations under strict Miri."
     },
     {
-      "name": "Copy/fill constructor failure ownership",
+      "name": "Fill constructor failure ownership",
       "native_methods": [
-        "NCollection_LinearVector copy constructor",
         "NCollection_LinearVector(size_t,const T&)"
       ],
-      "gap": "A failing native constructor does not run the container destructor; member raw storage and completed objects may remain allocated. A local Rust Vec guard currently frees them.",
-      "design": "Build under an explicit allocation owner whose failure policy matches the native constructor, and transfer to the normal vector only on successful construction. Record allocation and initialized-slot progress for test-only recovery. Do not infer constructor parity from the Resize method alone."
+      "gap": "Copy construction now retains its native allocation/prefix on failure, with a separate exact-method receipt. The fill constructor still uses a local Rust Vec guard that drops completed copies and frees storage on panic.",
+      "design": "Reuse explicit unpublished allocation ownership for the fill constructor, preserving Resize's initial growth capacity rule rather than copy construction's exact source.Size capacity. Transfer to the normal vector only after full construction succeeds. Record failure storage/progress only in test instrumentation for explicit typed recovery; do not introduce production cleanup of native leaks."
     },
     {
       "name": "Destructive shrink exceptions",
