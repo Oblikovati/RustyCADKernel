@@ -1,3 +1,4 @@
+use super::CellIndex;
 pub(super) fn cell_coordinate(value: f64) -> i32 {
     let wrapped: f64 = if value > f64::from(i32::MAX - 1) {
         value % f64::from(i32::MAX)
@@ -12,15 +13,15 @@ pub(super) fn cell_coordinate(value: f64) -> i32 {
 /// Inclusive cell range over the first `axes` axes, axis zero fastest; later axes keep
 /// the minimum corner's values, as the native recursion never touches them.
 pub(super) struct CellIndices {
-    min: Vec<i32>,
-    max: Vec<i32>,
+    min: CellIndex,
+    max: CellIndex,
     axes: usize,
-    current: Option<Vec<i32>>,
+    current: Option<CellIndex>,
 }
 impl CellIndices {
-    pub(super) fn new(min: Vec<i32>, max: Vec<i32>, axes: usize) -> Self {
-        let reversed: bool = (0..axes).any(|axis| min[axis] > max[axis]);
-        let current: Option<Vec<i32>> = (!reversed).then(|| min.clone());
+    pub(super) fn new(min: CellIndex, max: CellIndex, axes: usize) -> Self {
+        let reversed: bool = (0..axes).any(|axis| min.as_slice()[axis] > max.as_slice()[axis]);
+        let current: Option<CellIndex> = (!reversed).then(|| min.clone());
         Self {
             min,
             max,
@@ -29,9 +30,14 @@ impl CellIndices {
         }
     }
     fn advance(&mut self) {
-        let current: &mut Vec<i32> = self.current.as_mut().unwrap();
-        let bounds = self.min.iter().zip(&self.max);
-        for (value, (lower, upper)) in current.iter_mut().zip(bounds).take(self.axes) {
+        let current: &mut CellIndex = self.current.as_mut().unwrap();
+        let bounds = self.min.as_slice().iter().zip(self.max.as_slice());
+        for (value, (lower, upper)) in current
+            .as_mut_slice()
+            .iter_mut()
+            .zip(bounds)
+            .take(self.axes)
+        {
             if *value < *upper {
                 *value += 1;
                 return;
@@ -42,9 +48,9 @@ impl CellIndices {
     }
 }
 impl Iterator for CellIndices {
-    type Item = Vec<i32>;
+    type Item = CellIndex;
     fn next(&mut self) -> Option<Self::Item> {
-        let result: Vec<i32> = self.current.clone()?;
+        let result: CellIndex = self.current.clone()?;
         self.advance();
         Some(result)
     }
