@@ -31,8 +31,10 @@ fn NCollection_LinearVectorTest__InsertBeforeAtEnd_EquivalentToAppend() {
 #[test]
 fn NCollection_LinearVectorTest__SetValueMove() {
     let mut vector = LinearVector::default();
-    let source = "abc".to_owned();
-    vector.set_value(0, source);
+    let mut source = "abc".to_owned();
+    vector.set_value_with_policies(0, std::mem::take, String::new, |value| {
+        *value = std::mem::take(&mut source);
+    });
     assert_eq!(vector.len(), 1);
     assert_eq!(vector[0], "abc");
 }

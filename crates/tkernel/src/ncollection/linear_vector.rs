@@ -8,6 +8,7 @@ mod insert_policy;
 mod pointers;
 mod relocation;
 mod resize_policy;
+mod set_value_policy;
 mod trivial_assignment;
 
 struct LengthRollback<'a, T> {
