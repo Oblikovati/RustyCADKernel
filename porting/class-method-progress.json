@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation canonical storage checkpoint validated on frozen committed main source; receipt commit recorded separately.",
+  "integration_status": "Foundation method-tail checkpoint validated on frozen committed main source; receipt commit recorded separately.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-canonical-checkpoint.json",
-    "passed": 15126,
+    "receipt": "porting/audits/foundation-method-tail-checkpoint.json",
+    "passed": 15239,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -192,5 +192,41 @@
     "validated_source_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
     "tkernel_passed": 4633,
     "strict_provenance_miri_passed": 186
+  },
+  "current_draft_checkpoint": {
+    "receipt": "porting/audits/foundation-method-tail-checkpoint.json",
+    "sha256": "bbf6089804bee74790bfb663218976abec1cd1ac552dc069072cad02353d13e0",
+    "runtime": {
+      "workspace_passed": 15239,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_groups": 1369,
+      "workspace_ignored_doctests": 70,
+      "miri_passes_total": 819,
+      "miri_counts": {
+        "allocator-unit-miri": 4,
+        "strict-miri": 738,
+        "sparse-unit-miri": 2,
+        "packed-unit-miri": 13,
+        "ordered-unit-miri": 3,
+        "dynamic-unit-miri": 20,
+        "linear-unit-miri": 6,
+        "cell-unit-miri": 33
+      },
+      "strict_provenance_miri_passes": 819,
+      "miri_scope": "Focused integrated changed-method targets and unit filters; prior broader memory run remains historical evidence, not a rerun on this source.",
+      "source_inputs": 10108,
+      "source_inputs_after_run_identical": true,
+      "native_extractor_ctests_passed": 3,
+      "native_extractor_exit": 0,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "workspace --all-targets",
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "python_tools_tests_passed": 781,
+      "python_tools_exit": 0,
+      "joined_original_runtime_cases": 1066,
+      "new_original_runtime_joins": 0
+    }
   }
 }
