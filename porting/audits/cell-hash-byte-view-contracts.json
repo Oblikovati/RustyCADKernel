@@ -1,0 +1,99 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_CellFilter::CellHasher native byte view",
+  "base_revision": "c0cc09a04668d250236a1b2832054d1fb55a5d10",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "Committed candidate; root integration/check/deletion pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/cell_filter.rs": "64916342ddb4b1c138e8340cdf42619ee8231774e1f8f439be23cfb2838eff06",
+    "crates/tkernel/src/ncollection/local_array.rs": "6edf45f7ecd9b2499c938679845c12e9c419845acef71b0df97488efdc801c6d",
+    "crates/tkernel/src/ncollection/local_array/trivial_move.rs": "953003820c1c70901d9221e337a44a9e5a5db7052d29534ccaabce6645ccd61c",
+    "crates/tkernel/src/ncollection/local_array/pointers.rs": "b53ee5ff4dba3abee29b13f70fc658b717bd51933c070b0b33c8c33b524f23b9",
+    "crates/tkernel/src/ncollection/cell_filter/setup.rs": "2fbd40d6726a174d59eee65473dd44ed41be4f38c57314a5f9a8a76e2d370797",
+    "crates/tkernel/src/ncollection/cell_filter/range_storage_tests.rs": "d150e306f00c18fc95e31b78ccdad6e88e16e5db56cfeeacce9787f5cb8828df",
+    "crates/tkernel/src/ncollection/cell_filter/index_storage_tests.rs": "b2e24bb3097c6bf9ebaec2fac2eaecab06f2ffdb0002a8420fedbab12ab6ed6b",
+    "crates/tkernel/src/ncollection/cell_filter/cell_index.rs": "96532fde9396e0aae6c5a77234b8bad04028bbcf57ae3f7ed04a31a83d9aa5db",
+    "crates/tkernel/src/ncollection/cell_filter/indices.rs": "9622613154c910ccf2afd31756fed0a1633e61d0ee80a28a3d247f59ce992ce8",
+    "crates/tkernel/src/ncollection/cell_filter/hash_storage_tests.rs": "97481302092fa0b2e6bba199a430a5142722dd68997c4e05cf8a54ccff986aba",
+    "crates/tkernel/src/ncollection/cell_filter/method_tests.rs": "3eaeb7bc11b3e6905a76212718b624e4e754439d1a70a6d9450fe1a88d25e51a",
+    "crates/tkernel/src/ncollection/cell_filter/fallible.rs": "2e698550f9675bb13e9767ef4d9795574ac313aefe9004e95bec36f0e7e10c7c",
+    "crates/tkernel/src/ncollection/cell_filter/geometry.rs": "65e2895d62344182f21cff0b6cdf4e9e86d556d4447dd20f9246dadf2ee3af8e",
+    "crates/tkernel/src/ncollection/cell_filter/size_storage_tests.rs": "5ce51ded3701c473b4fef82d2ff1430578a189baa2ecba148c42163e6240fdb9",
+    "tools/oracle/tkernel_cell_hash_bytes.cxx": "ecbb74af70e5fd152a17e80186c1edcbdb1dbc4f094056955175aac5cc84db66",
+    "tools/oracle/tkernel_cell_hash_bytes.expected": "e10976efe1f0fca147ae06f9b8645a77ed06724729eaea04d0f9e3ad9c384592",
+    "crates/tkernel/src/standard/hashing.rs": "f8511264495a9c52c4da387910b9eb72fddade42dde662d59f21984dda825244",
+    "crates/tkernel/src/standard/hashing/murmur_hash.rs": "c804784ecbad8782d186677abe774dfdb6f6e4377366c43252bdfc25e719a83e",
+    "tools/oracle/tkernel_cell_index_storage.cxx": "b1411d088d0c9c034f22a9f664b438f3d47985b093ae03f2625b6a4ed35184cd",
+    "tools/oracle/tkernel_cell_index_storage.expected": "11df29c14047c4af4803607e3ec6f9b828b782cb8d9011db169e43305d80dcf5"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx": "4638a170c2052d06c82a54e70c753e417d0e2ba9dd088cc871e5e54e8a14a25c",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
+  },
+  "source_scope": "CellFilter/LocalArray source and both referenced coordinate fixtures; not full compiler dependency closure.",
+  "artifacts": {
+    "unit": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-unit.gz",
+      "sha256": "43aba1ec3aa1998ea5f3bf784389128b4c61545406398b372e549545f110b80b"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-rust.gz",
+      "sha256": "b7ffc319912d9c177a00c9b1369dfffe62ebac4f63ffe316696ff37ddff11895"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-miri.gz",
+      "sha256": "22304ae44eab54d11f55b8a7c4d8c3efd4e7732ef1a5b73a1ab90dc30a06a55d"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-clippy.gz",
+      "sha256": "dbaa246d67fcbcd5d6102ee213212846d6c1aa12d729049f03850fff8db5ff4d"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-native-original.gz",
+      "sha256": "92d6ea394302c56de7cfe5eac8ccbd3a40504370a8ae56e8cdb02523bac9d6f9"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/cell-hash-byte-view-source.tar.gz",
+      "sha256": "858e85afc5da196d182703df053afc1cc66faef4575d89fd9d8e71dd1b968ff9"
+    }
+  },
+  "rust_integration_passed": 19,
+  "rust_unit_passed": 15,
+  "new_regression_tests": 2,
+  "strict_provenance_miri_passed": 15,
+  "native_original_passed": 9,
+  "original_runtime_names": [
+    "NCollection_CellFilterTest.AddInspect2D_SinglePoint",
+    "NCollection_CellFilterTest.AddInspect2D_Range",
+    "NCollection_CellFilterTest.ReversedRangesAreIgnored",
+    "NCollection_CellFilterTest.Remove2D",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterRemove",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterPurge",
+    "NCollection_CellFilterTest.AddInspect3D",
+    "NCollection_CellFilterTest.Reset",
+    "NCollection_CellFilterTest.InspectWithPurge"
+  ],
+  "native_probe_rows": 7,
+  "clippy_exit": 0,
+  "fmt_exit": 0,
+  "method_bindings": [
+    "CellHasher::operator()(const Cell&) const noexcept"
+  ],
+  "observations": [
+    "CellHasher reads initialized i32 object bytes through the existing project-owned object_bytes wrapper, eliminating the scratch Vec and duplicate pointer-width hash dispatch.",
+    "Seven native rows compare signed extremes and Murmur block/tail lengths; five existing native storage/hash rows and nine original tests remain passing.",
+    "A pointer-identity assertion verifies the project byte view borrows original coordinate storage; strict-provenance Miri covers inline and spilled indices."
+  ],
+  "remaining_gaps": [
+    "CellFilter still uses DataMap<CellIndex,List<T>> rather than native Map<Cell>; Cell/ListNode storage, move ownership and destructor callback phases remain partial.",
+    "LocalArray object ABI and allocator plumbing still differ.",
+    "Native rows were executed on x86_64 Linux only; no cross-platform or global API credit."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "class_status": "partial"
+}

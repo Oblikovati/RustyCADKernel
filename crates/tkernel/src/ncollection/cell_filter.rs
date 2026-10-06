@@ -37,15 +37,11 @@ pub trait CellInspector {
 struct CellHash;
 impl HashPolicy<CellIndex> for CellHash {
     fn hash(&self, key: &CellIndex) -> usize {
-        let bytes: Vec<u8> = key
-            .as_slice()
-            .iter()
-            .flat_map(|index| index.to_ne_bytes())
-            .collect();
-        #[cfg(target_pointer_width = "64")]
-        return crate::standard::hashing::murmur64(&bytes, 0xA329_F1D3_A586) as usize;
-        #[cfg(target_pointer_width = "32")]
-        return crate::standard::hashing::murmur32(&bytes, 0xc70f_6907) as usize;
+        let coordinates: &[i32] = key.as_slice();
+        // OCCT 3d097a03 hashes CellIndex storage directly; copying bytes adds an allocation.
+        let bytes: &[u8] =
+            crate::standard::hashing::object_bytes(coordinates, std::mem::size_of_val(coordinates));
+        crate::standard::hashing::hash_bytes(bytes)
     }
     fn equal(&self, first: &CellIndex, second: &CellIndex) -> bool {
         first.as_slice() == second.as_slice()
@@ -140,3 +136,6 @@ mod index_storage_tests;
 
 #[cfg(test)]
 mod range_storage_tests;
+
+#[cfg(test)]
+mod hash_storage_tests;
