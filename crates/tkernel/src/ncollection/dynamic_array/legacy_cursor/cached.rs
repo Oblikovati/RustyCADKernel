@@ -2,6 +2,7 @@
 use super::{DynamicArray, DynamicArrayIterator, Failure};
 mod capture;
 mod navigation;
+mod operations;
 
 /// Captures real element pointers independently of the container's later block ownership.
 /// `let cursor = DynamicArrayCachedIterator::from_shared(&array, 0)?; let pointer = cursor.pointer();`
