@@ -1,12 +1,12 @@
 //! Singly linked OCCT lists with allocator-owned stable nodes.
 use super::{BaseAllocator, BaseListRawIterator, BaseListStorage, ListLinkNode, ListValueNode};
 use crate::standard::Failure;
-use owner::ListNodeOwner;
+use owner::{ListNodeOwner, ListNodeOwners};
 use std::marker::PhantomData;
 /// Allocator-owned list; `List::from_iter_in([1,2], BaseAllocator::common())`.
 pub struct List<T> {
     topology: topology::ListTopology,
-    owners: Vec<ListNodeOwner<T>>,
+    owners: ListNodeOwners<T>,
 }
 // SAFETY: base links are inert ownership metadata; shared access never mutates them.
 // Owners enforce the same item Send/Sync bounds as the former boxed chain.
@@ -37,7 +37,7 @@ impl<T> List<T> {
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
             topology: topology::ListTopology::new(resource),
-            owners: Vec::new(),
+            owners: ListNodeOwners::new(),
         }
     }
     /// Constructs items in a selected resource; `List::from_iter_in([1,2], arena)`.
@@ -119,7 +119,7 @@ impl<T> List<T> {
     pub fn prepend_with(&mut self, construct: impl FnOnce() -> T) -> &mut T {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let node = owner.link;
-        self.owners.push(owner);
+        self.owners.insert(node as usize, owner);
         self.topology
             .edit(|base| unsafe { base.prepend_node(node) });
         unsafe { owner::item_mut(node) }

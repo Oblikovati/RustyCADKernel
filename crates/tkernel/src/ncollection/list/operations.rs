@@ -21,7 +21,7 @@ impl<T: Clone> List<T> {
             .edit_pair(&mut source.topology, |base, donor| unsafe {
                 base.append_list(donor)
             });
-        self.owners.append(&mut source.owners);
+        self.owners.extend(source.owners.drain());
     }
     /// Prepends another list, panicking on native failure; `destination.prepend_list(&mut source)`.
     pub fn prepend_list(&mut self, source: &mut Self) {
@@ -39,7 +39,7 @@ impl<T: Clone> List<T> {
             .edit_pair(&mut source.topology, |base, donor| unsafe {
                 base.prepend_list(donor)
             });
-        self.owners.append(&mut source.owners);
+        self.owners.extend(source.owners.drain());
         Ok(())
     }
     /// Splices before a node while retaining caller cursor state; `list.insert_list_before(&mut source, &cursor)?`.
@@ -66,7 +66,7 @@ impl<T: Clone> List<T> {
             .edit_pair(&mut source.topology, |base, donor| unsafe {
                 base.insert_list_before(donor, &mut raw)
             })?;
-        self.owners.append(&mut source.owners);
+        self.owners.extend(source.owners.drain());
         cursor.update_raw(raw);
         Ok(())
     }
@@ -98,7 +98,7 @@ impl<T: Clone> List<T> {
             .edit_pair(&mut source.topology, |base, donor| unsafe {
                 base.insert_list_after(donor, raw)
             })?;
-        self.owners.append(&mut source.owners);
+        self.owners.extend(source.owners.drain());
         Ok(())
     }
     fn append_copied_list(&mut self, source: &mut Self) {

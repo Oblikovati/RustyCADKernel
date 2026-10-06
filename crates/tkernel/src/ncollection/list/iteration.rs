@@ -16,13 +16,13 @@ impl ListCursor {
     }
     /// Looks up the stable node in its list; `cursor.value(&list)`.
     pub fn value<T>(self, list: &List<T>) -> Option<&T> {
-        let node = list.find_cursor(self.address)?.current;
+        let node = list.owned_node(self.address)?;
         Some(unsafe { owner::item_ref(node) })
     }
     /// Borrows the positioned item exclusively; `*cursor.change_value(&mut list).unwrap() = 9`.
     /// End or foreign cursors return None instead of native undefined dereferencing.
     pub fn change_value<'a, T>(&self, list: &'a mut List<T>) -> Option<&'a mut T> {
-        let node = list.find_cursor(self.address)?.current;
+        let node = list.owned_node(self.address)?;
         Some(unsafe { owner::item_mut(node) })
     }
     /// Advances while remembering current, including transition to end; `cursor.next(&list)`.
@@ -32,8 +32,8 @@ impl ListCursor {
         }
         self.previous = self.address;
         self.address = list
-            .find_cursor(self.address)
-            .and_then(|raw| address(unsafe { (*raw.current).next() }));
+            .owned_node(self.address)
+            .and_then(|node| address(unsafe { (*node).next() }));
     }
 }
 impl<'a, T> Iterator for ListIter<'a, T> {
