@@ -1,0 +1,67 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "9c95346c5aa7ab2020c432eba8d5bf0212a7d88e",
+  "focused_rust_passed": 377,
+  "focused_integration_passed": 233,
+  "tkernel_unit_passed": 144,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "dynamic_array_borrowed_methods",
+    "dynamic_array_copy_date",
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_retained_parameters",
+    "linear_vector_assignment_pointer_contracts",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior",
+    "ncollection_linear_vector",
+    "ncollection_linear_vector_exception_state"
+  ],
+  "strict_tkernel_all_tests_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/borrowed-vectors-root-rust.gz",
+      "sha256": "eef0ddd4f9e385888e5e4c00b27e82b23871d49b1273da7387d44f0cdc5808f3"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/borrowed-vectors-root-unit.gz",
+      "sha256": "239215d7a11a16f2bd72cd351e54fa281b7bc2fc2072c24c5b1d85a01f103573"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/borrowed-vectors-root-clippy.gz",
+      "sha256": "14c582b4144ae5ba8940b81fc3ec522dc510a2c721f4355d12ddd6f6248aee22"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/borrowed-vectors-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "9274140420804dc7c72f3e5234cca3fef727dbf2",
+      "deleted_worktree": "/tmp/rustycad-linear-borrowed",
+      "deleted_branch": "port/linear-borrowed",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "595c0e6582a9ced9fc82f1f6d96f4b12921980f5",
+      "deleted_worktree": "/tmp/rustycad-dynamic-borrowed-methods",
+      "deleted_branch": "port/dynamic-borrowed-methods",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
