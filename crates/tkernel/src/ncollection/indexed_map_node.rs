@@ -6,8 +6,8 @@ use super::{BaseAllocator, MapLinkNode, indexed_node_owner::IndexedNodeAllocatio
 pub struct IndexedMapNode<K> {
     // OCCT 3d097a reuses TListNode tail padding for Index; nesting a Rust base overpads.
     link: MapLinkNode,
-    key: K,
-    index: i32,
+    pub(super) key: K,
+    pub(super) index: i32,
 }
 /// Allocator-owned indexed key node; `IndexedMapNode::allocate_ref(&arena, &7, 1, next)`.
 pub type IndexedMapNodeOwner<K> = IndexedNodeAllocation<IndexedMapNode<K>>;

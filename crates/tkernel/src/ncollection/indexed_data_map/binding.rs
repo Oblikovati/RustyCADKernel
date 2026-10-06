@@ -1,4 +1,4 @@
-use super::{Debug, HashPolicy, IndexedDataMap, IndexedValue};
+use super::{Debug, HashPolicy, IndexedDataMap, IndexedDataMapNode};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Inserts without replacing existing values, returning the index; `map.add(1,42)`.
     pub fn add(&mut self, key: K, value: V) -> usize {
@@ -22,7 +22,7 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// ```
     pub fn add_ref(&mut self, key: &K, value: &V) -> usize {
         self.prepare_borrowed_add();
-        let (index, bucket) = self.keys.lookup_with_bucket(key);
+        let (index, bucket) = self.storage.lookup(key, &self.hasher);
         if index != 0 {
             return index;
         }
@@ -34,13 +34,9 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         }
     }
     pub(super) fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> usize {
-        let stored_value = self.allocator().allocate_value_with(|| IndexedValue {
-            value: value.clone(),
-            _identity: 0,
-        });
-        let index = self.keys.append_new_at_bucket(key.clone(), bucket);
-        self.values.push(stored_value);
-        index
+        self.storage.append(bucket, |index, next| {
+            IndexedDataMapNode::construct_parts(index, next, || key.clone(), || value.clone())
+        })
     }
 }
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
@@ -52,12 +48,12 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Inserts or replaces and returns stable value storage; `*map.bound(1,42)=7`.
     pub fn bound(&mut self, key: K, value: V) -> &mut V {
         let index = self.place(key, || value, true);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
     /// Returns an existing value or inserts without replacement; `map.try_bound(1,42)`.
     pub fn try_bound(&mut self, key: K, value: V) -> &mut V {
         let index = self.place(key, || value, false);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
     /// Constructs a replacement value in place, returning the index; `map.emplace(1,||42)`.
     pub fn emplace(&mut self, key: K, construct: impl FnOnce() -> V) -> usize {
@@ -66,7 +62,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Constructs and returns a replacement value; `map.emplaced(1,||42)`.
     pub fn emplaced(&mut self, key: K, construct: impl FnOnce() -> V) -> &mut V {
         let index = self.place(key, construct, true);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
     /// Constructs only for absent keys, returning the index; `map.try_emplace(1,||42)`.
     pub fn try_emplace(&mut self, key: K, construct: impl FnOnce() -> V) -> usize {
@@ -75,25 +71,21 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Borrows an existing value or constructs it lazily; `map.try_emplaced(1,||42)`.
     pub fn try_emplaced(&mut self, key: K, construct: impl FnOnce() -> V) -> &mut V {
         let index = self.place(key, construct, false);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
     pub(super) fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> usize {
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());
         }
-        let index = self.find_index(&key);
+        let (index, bucket) = self.storage.lookup(&key, &self.hasher);
         if index != 0 {
             if replace {
-                self.values[index - 1].value = construct();
+                *self.storage.value_mut(index) = construct();
             }
             return index;
         }
-        let value = self.allocator().allocate_value_with(|| IndexedValue {
-            value: construct(),
-            _identity: 0,
-        });
-        let index = self.keys.add(key);
-        self.values.push(value);
-        index
+        self.storage.append(bucket, |index, next| {
+            IndexedDataMapNode::construct(key, index, next, construct)
+        })
     }
 }

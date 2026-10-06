@@ -1,28 +1,36 @@
-use super::{Debug, Failure, HashPolicy, IndexedDataMap};
+use super::{Debug, Failure, HashPolicy, IndexedDataMap, IndexedDataMapNode, IndexedNode};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Replaces an indexed pair, rejecting keys bound elsewhere; `map.substitute(2,25,2.5)?`.
     pub fn substitute(&mut self, index: usize, key: K, value: V) -> Result<(), Failure> {
-        self.keys.substitute(index, key)?;
-        self.values[index - 1].value = value;
+        let (bucket, detached) =
+            self.storage
+                .prepare_substitute(index, &key, &self.hasher, "IndexedDataMap")?;
+        self.storage
+            .replace_substitute(index, bucket, detached, |node| unsafe {
+                *IndexedDataMapNode::key_ptr(node) = key;
+                *IndexedDataMapNode::value_ptr(node) = value;
+            });
         Ok(())
     }
     /// Swaps two indices while keeping key/value pairing; `map.swap(1,3)?`.
     pub fn swap(&mut self, first: usize, second: usize) -> Result<(), Failure> {
-        self.keys.swap(first, second)?;
-        self.values.swap(first - 1, second - 1);
+        self.check_index(first)?;
+        self.check_index(second)?;
+        if first != second {
+            self.storage.swap(first, second);
+        }
         Ok(())
     }
     /// Removes the last binding; empty maps report OutOfRange; `map.remove_last()?`.
     pub fn remove_last(&mut self) -> Result<(), Failure> {
-        self.keys.remove_last()?;
-        self.values.pop();
+        self.check_index(self.len())?;
+        self.storage.remove_last(&self.hasher);
         Ok(())
     }
     /// Removes a binding and moves the last binding into its index; `map.remove_from_index(2)?`.
     pub fn remove_from_index(&mut self, index: usize) -> Result<(), Failure> {
-        self.keys.remove_from_index(index)?;
-        self.values.swap_remove(index - 1);
-        Ok(())
+        self.swap(index, self.len())?;
+        self.remove_last()
     }
     /// Removes a key without affecting absent keys; `map.remove_key(&42)`.
     pub fn remove_key(&mut self, key: &K) -> bool {
@@ -70,5 +78,20 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for IndexedData
         );
         copy.assign(self);
         copy
+    }
+}
+
+impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
+    /// Assigns key then item into an existing native node; `map.substitute_ref(1,&7,&42)?`.
+    pub fn substitute_ref(&mut self, index: usize, key: &K, value: &V) -> Result<(), Failure> {
+        let (bucket, detached) =
+            self.storage
+                .prepare_substitute(index, key, &self.hasher, "IndexedDataMap")?;
+        self.storage
+            .replace_substitute(index, bucket, detached, |node| unsafe {
+                (*IndexedDataMapNode::key_ptr(node)).clone_from(key);
+                (*IndexedDataMapNode::value_ptr(node)).clone_from(value);
+            });
+        Ok(())
     }
 }
