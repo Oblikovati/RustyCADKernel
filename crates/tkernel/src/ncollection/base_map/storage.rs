@@ -107,6 +107,11 @@ impl BaseMapStorage {
             // SAFETY: the caller guarantees that all nonempty bucket chains remain valid.
             unsafe { self.destroy_nonempty(&mut delete_node) };
         }
+        self.finish_destroy(release);
+    }
+    // Shared final phase: callers have completed all node callbacks and cleared bucket heads.
+    pub(in crate::ncollection) fn finish_destroy(&mut self, release: bool) {
+        self.size = 0;
         if release {
             self.table = None;
         }
@@ -124,7 +129,6 @@ impl BaseMapStorage {
             unsafe { destroy_chain(*first, &mut self.allocator, delete_node) };
             *first = std::ptr::null_mut();
         }
-        self.size = 0;
     }
 }
 

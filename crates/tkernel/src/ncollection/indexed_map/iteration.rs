@@ -3,14 +3,16 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Traverses keys in dense index order; `map.iter().min()`.
     pub fn iter(&self) -> IndexedMapIter<'_, K> {
         IndexedMapIter {
-            nodes: &self.nodes,
+            nodes: self.storage.indices(),
+            ownership: std::marker::PhantomData,
             position: 0,
         }
     }
     /// Returns an exhausted key iterator; `map.iter()!=map.end()`.
     pub fn end(&self) -> IndexedMapIter<'_, K> {
         IndexedMapIter {
-            nodes: &self.nodes,
+            nodes: self.storage.indices(),
+            ownership: std::marker::PhantomData,
             position: self.len(),
         }
     }
@@ -28,20 +30,23 @@ impl<'a, K> Iterator for IndexedMapIter<'a, K> {
     fn next(&mut self) -> Option<Self::Item> {
         let node = self.nodes.get(self.position)?;
         self.position += 1;
-        Some(&node.key)
+        // SAFETY: the iterator borrows the owning map, preventing removal or reallocation.
+        Some(unsafe { (&*node.cast::<super::IndexedMapNode<K>>()).value() })
     }
 }
 impl<K> Clone for IndexedMapIter<'_, K> {
     fn clone(&self) -> Self {
         Self {
             nodes: self.nodes,
+            ownership: std::marker::PhantomData,
             position: self.position,
         }
     }
 }
 impl<K> PartialEq for IndexedMapIter<'_, K> {
     fn eq(&self, other: &Self) -> bool {
-        self.nodes.as_ptr() == other.nodes.as_ptr() && self.position == other.position
+        (self.position >= self.nodes.len() && other.position >= other.nodes.len())
+            || (self.nodes.as_ptr() == other.nodes.as_ptr() && self.position == other.position)
     }
 }
 impl<K> Eq for IndexedMapIter<'_, K> {}
@@ -72,3 +77,7 @@ impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a IndexedMap<K, H> {
         self.iter()
     }
 }
+
+// SAFETY: a shared map borrow keeps all keys alive and excludes all mutation.
+unsafe impl<K: Sync> Send for IndexedMapIter<'_, K> {}
+unsafe impl<K: Sync> Sync for IndexedMapIter<'_, K> {}

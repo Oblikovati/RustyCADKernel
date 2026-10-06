@@ -3,45 +3,41 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Replaces a key while rejecting duplicates at another index; `map.substitute(2,25)?`.
     pub fn substitute(&mut self, index: usize, key: K) -> Result<(), Failure> {
         self.check_index(index)?;
-        let existing = self.find_index(&key);
-        if existing != 0 && existing != index {
-            return Err(Failure::with_type(
-                "Standard_DomainError",
-                &format!(
-                    "IndexedMap key {key:?} already at {existing}; expected an absent key or index {index}"
-                ),
-                "",
-            ));
-        }
+        let (existing, bucket) = self.lookup_with_bucket(&key);
+        self.check_substitute(index, existing, &key)?;
+        let node = self.storage.node(index);
         if existing == 0 {
-            self.unlink_index(index - 1);
-            let bucket = self.hash_bucket(&key);
-            self.buckets[bucket].insert(0, index - 1);
+            self.storage
+                .unlink(self.hash_bucket(self.storage.key(index)), node);
         }
-        self.nodes[index - 1].key = key;
+        self.replace_substitute(index, bucket, existing == 0, |stored| *stored = key);
         Ok(())
     }
     /// Exchanges two indices without moving key storage; `map.swap(1,3)?`.
     pub fn swap(&mut self, first: usize, second: usize) -> Result<(), Failure> {
         self.check_index(first)?;
         self.check_index(second)?;
-        if first == second {
-            return Ok(());
+        if first != second {
+            self.storage.swap(first, second);
         }
-        let a = self.hash_bucket(&self.nodes[first - 1].key);
-        let b = self.hash_bucket(&self.nodes[second - 1].key);
-        self.swap_bucket_indices(a, first - 1, second - 1);
-        if a != b {
-            self.swap_bucket_indices(b, first - 1, second - 1);
-        }
-        self.nodes.swap(first - 1, second - 1);
         Ok(())
     }
     /// Removes the final index; empty maps report OutOfRange; `map.remove_last()?`.
     pub fn remove_last(&mut self) -> Result<(), Failure> {
         self.check_index(self.len())?;
-        self.unlink_index(self.len() - 1);
-        self.nodes.pop();
+        let node = self.storage.node(self.len());
+        self.storage.set_last_slot(std::ptr::null_mut());
+        let hashed = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            self.hash_bucket(unsafe { (&*node.cast::<super::IndexedMapNode<K>>()).value() })
+        }));
+        let bucket = match hashed {
+            Ok(bucket) => bucket,
+            Err(panic) => {
+                self.storage.set_last_slot(node);
+                std::panic::resume_unwind(panic)
+            }
+        };
+        self.storage.destroy_last(bucket, node);
         Ok(())
     }
     /// Removes an index and moves the last index into its position; `map.remove_from_index(2)?`.
@@ -58,21 +54,6 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         self.remove_from_index(index)
             .expect("lookup returned a valid index");
         true
-    }
-    fn unlink_index(&mut self, index: usize) {
-        let bucket = self.hash_bucket(&self.nodes[index].key);
-        self.buckets[bucket].retain(|&stored| stored != index);
-    }
-    fn swap_bucket_indices(&mut self, bucket: usize, first: usize, second: usize) {
-        for index in &mut self.buckets[bucket] {
-            *index = if *index == first {
-                second
-            } else if *index == second {
-                first
-            } else {
-                *index
-            };
-        }
     }
 }
 impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
@@ -95,10 +76,70 @@ impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Clone for IndexedMap<K, H> {
     fn clone(&self) -> Self {
         let mut copy = Self::with_allocator(
             self.hasher.clone(),
-            self.bucket_count,
-            self.resource.clone(),
+            self.bucket_count(),
+            self.allocator().clone(),
         );
         copy.assign(self);
         copy
+    }
+}
+
+impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
+    fn check_substitute(&self, index: usize, existing: usize, key: &K) -> Result<(), Failure> {
+        if existing == 0 || existing == index {
+            return Ok(());
+        }
+        Err(Failure::with_type(
+            "Standard_DomainError",
+            &format!(
+                "IndexedMap key {key:?} already at {existing}; expected an absent key or index {index}"
+            ),
+            "",
+        ))
+    }
+}
+impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
+    fn replace_substitute(
+        &mut self,
+        index: usize,
+        bucket: usize,
+        detached: bool,
+        assign: impl FnOnce(&mut K),
+    ) {
+        let node = self.storage.node(index);
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            assign(self.storage.key_mut(index))
+        }));
+        if detached {
+            self.storage.prepend(bucket, node);
+        }
+        if let Err(panic) = result {
+            self.clear_failed_assignment(panic);
+        }
+    }
+    fn clear_failed_assignment(&mut self, panic: Box<dyn std::any::Any + Send>) {
+        // A throwing clone_from can change the hash key partially. Clearing is a Rust safety
+        // extension; the nonthrowing native assignment/unlink/relink order stays unchanged.
+        let mut panics = crate::ncollection::destructor_unwind::DeferredDestructorPanic::default();
+        panics.capture(|| std::panic::resume_unwind(panic));
+        panics.capture(|| self.clear(false));
+        panics.finish(Ok(()));
+    }
+}
+impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
+    /// Copies into the existing key with native assignment semantics; `map.substitute_ref(1, &7)?`.
+    pub fn substitute_ref(&mut self, index: usize, key: &K) -> Result<(), Failure> {
+        self.check_index(index)?;
+        let (existing, bucket) = self.lookup_with_bucket(key);
+        self.check_substitute(index, existing, key)?;
+        let node = self.storage.node(index);
+        if existing == 0 {
+            self.storage
+                .unlink(self.hash_bucket(self.storage.key(index)), node);
+        }
+        self.replace_substitute(index, bucket, existing == 0, |stored| {
+            stored.clone_from(key)
+        });
+        Ok(())
     }
 }
