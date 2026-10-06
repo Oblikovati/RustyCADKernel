@@ -1,13 +1,13 @@
 //! One-based OCCT sequences whose items live in individually allocated, stable nodes.
 use super::{AllocatedBox, BaseAllocator};
 use crate::standard::Failure;
-use owner::SequenceNodeOwner;
+use owner::{SequenceNodeOwner, SequenceNodeOwners};
 use std::marker::PhantomData;
 use topology::SequenceTopology;
 /// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
     topology: SequenceTopology,
-    owners: Vec<SequenceNodeOwner<T>>,
+    owners: SequenceNodeOwners<T>,
 }
 /// Shared double-ended iterator in index order; `sequence.iter()`.
 pub struct SequenceIter<'a, T> {
@@ -37,7 +37,7 @@ impl<T> Sequence<T> {
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
             topology: SequenceTopology::new(resource),
-            owners: Vec::new(),
+            owners: SequenceNodeOwners::new(),
         }
     }
     /// Returns selected allocator identity; `sequence.allocator() == &arena`.
@@ -217,4 +217,8 @@ mod access;
 mod owner;
 #[allow(unsafe_code)]
 mod topology;
-pub use topology::SequenceBaseAccess;
+pub use topology::{SequenceBaseAccess, SequenceObservation, SequenceObserver};
+
+#[allow(unsafe_code)]
+mod native_cursor;
+pub use native_cursor::{SequenceCursorObserver, SequenceNativeCursor};
