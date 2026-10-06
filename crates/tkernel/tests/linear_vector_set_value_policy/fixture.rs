@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use super::*;
 
 pub struct SetSpec {
@@ -32,9 +33,17 @@ pub fn set_case(spec: SetSpec) {
     trace.active.set(true);
     let result = attempt(&mut vector, &mut donor, &trace, &spec);
     trace.active.set(false);
-    let recovered =
+    let unpublished =
         result.is_none() && vector.len() == spec.count && trace.completed_tail.get() > 0;
-    assert_rows(&spec, &vector, &donor, &trace, before, result, recovered);
+    assert_rows("native", &spec, &vector, &donor, &trace, before, result);
+    if unpublished {
+        trace.active.set(true);
+        // SAFETY: construction failed before length publication. The counted completed
+        // spare objects are live and no assignment or subsequent write touched them.
+        unsafe { tail_repair::destroy_completed_tail(&mut vector, trace.completed_tail.get()) };
+        trace.active.set(false);
+        assert_rows("recovered", &spec, &vector, &donor, &trace, before, result);
+    }
     drop((vector, donor));
     assert_eq!(trace.resources.get(), 0);
 }
@@ -70,15 +79,14 @@ fn attempt(
 }
 
 fn assert_rows(
+    phase: &str,
     spec: &SetSpec,
     vector: &LinearVector<SetItem>,
     donor: &SetItem,
     trace: &SetTrace,
     before: (*const SetItem, *const i32),
     result: Option<*const SetItem>,
-    recovered: bool,
 ) {
-    let phase = if recovered { "recovered" } else { "native" };
     let outcome = if result.is_some() { "ok" } else { "throw" };
     let values: String = vector
         .iter()
@@ -101,9 +109,6 @@ fn assert_rows(
         u8::from(same_payload)
     );
     assert_native_row(&row);
-    if recovered {
-        assert_native_unpublished_tail(spec, trace);
-    }
 }
 
 fn assert_native_row(row: &str) {
@@ -111,18 +116,5 @@ fn assert_native_row(row: &str) {
     assert!(
         expected.lines().any(|line| line == row),
         "missing SetValue fixture row {row:?}"
-    );
-}
-
-fn assert_native_unpublished_tail(spec: &SetSpec, trace: &SetTrace) {
-    let prefix = format!("native:{}:", spec.name);
-    let native = include_str!("../../../../tools/oracle/tkernel_linear_set_value.expected")
-        .lines()
-        .find(|line| line.starts_with(&prefix))
-        .unwrap();
-    let native_resources: usize = native.rsplit(':').nth(2).unwrap().parse().unwrap();
-    assert_eq!(
-        native_resources,
-        trace.resources.get() + trace.completed_tail.get()
     );
 }

@@ -27,7 +27,8 @@ fn empty_growth_failure_reserves_before_copying_without_default_bound() {
     assert_eq!(&*trace.events.borrow(), "C");
 }
 #[test]
-fn failed_default_extension_keeps_existing_rollback_policy_and_skips_assignment() {
+#[allow(unsafe_code)]
+fn failed_default_extension_retains_unpublished_copy_and_skips_assignment() {
     let trace = Rc::new(BorrowTrace::default());
     let donor = BorrowedItem::new(9, &trace);
     let mut target = LinearVector::with_capacity(8);
@@ -44,6 +45,11 @@ fn failed_default_extension_keeps_existing_rollback_policy_and_skips_assignment(
     assert_eq!(target.len(), 1);
     assert_eq!(target[0].value, 3);
     assert_eq!(&*trace.events.borrow(), "D");
+    assert_eq!(Rc::strong_count(&trace), 4); // Includes the unpublished first default.
+    // SAFETY: the first spare constructor succeeded and the second failed before writing.
+    // This explicit test-only repair follows native state assertions; kernel Drop omits it.
+    unsafe { target.elements.spare_capacity_mut()[0].assume_init_drop() };
+    assert_eq!(Rc::strong_count(&trace), 3);
 }
 #[test]
 fn shared_resize_constructor_keeps_shrink_equal_and_growth_behavior() {
