@@ -12,10 +12,10 @@ pub type OrderedDataMapNodeOwner<K, V> = OrderedNodeOwner<OrderedDataMapNode<K, 
 #[repr(C)]
 pub struct OrderedDataMapNode<K, V> {
     // OCCT 3d097a03 places order links before the derived key. Flat fields avoid borrowing padded bases.
-    link: MapLinkNode,
-    value: ManuallyDrop<V>,
-    order: OrderedNodeLinks,
-    key: ManuallyDrop<K>,
+    pub(super) link: MapLinkNode,
+    pub(super) value: ManuallyDrop<V>,
+    pub(super) order: OrderedNodeLinks,
+    pub(super) key: ManuallyDrop<K>,
 }
 impl<K, V> OrderedDataMapNode<K, V> {
     /// Transfers key and item while clearing order links; `OrderedDataMapNode::new(1, 7, next)`.

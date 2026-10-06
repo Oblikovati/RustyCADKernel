@@ -9,8 +9,8 @@ pub type OrderedMapNodeOwner<K> = OrderedNodeOwner<OrderedMapNode<K>>;
 #[repr(C)]
 pub struct OrderedMapNode<K> {
     // Native order pointers follow the ListValueNode prefix; pointer alignment prevents tail overlap.
-    value_node: ListValueNode<K>,
-    order: OrderedNodeLinks,
+    pub(super) value_node: ListValueNode<K>,
+    pub(super) order: OrderedNodeLinks,
 }
 impl<K> OrderedMapNode<K> {
     /// Transfers a key and clears both order links; `OrderedMapNode::new(7, next)`.

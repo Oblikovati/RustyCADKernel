@@ -1,57 +1,38 @@
-//! Shared hash chains and insertion-order links over stable allocator-owned nodes.
-use super::hash_policy::next_map_prime;
-use super::{AllocatedBox, BaseAllocator, HashPolicy};
-pub(super) struct OrderedNode<K, V> {
-    pub key: K,
-    pub value: V,
-    previous: Option<usize>,
-    pub next: Option<usize>,
-}
-pub(super) type OrderedSlots<K, V> = Vec<Option<AllocatedBox<OrderedNode<K, V>>>>;
-pub(super) struct OrderedTable<K, V, H> {
-    pub slots: OrderedSlots<K, V>,
+//! Native ordered nodes and bucket/order links are the sole owning graph.
+#![allow(unsafe_code)]
+use super::{BaseAllocator, BaseMapStorage, HashPolicy, MapLinkNode, OrderedDataMapNode};
+use std::{collections::HashMap, marker::PhantomData};
+mod node_contract;
+use node_contract::StorageNode;
+pub(super) struct OrderedTable<K, V, H, N: StorageNode<K, V> = OrderedDataMapNode<K, V>> {
+    // These non-owning identity slots preserve safe detached cursor validation and reuse.
+    pub slots: Vec<Option<*mut MapLinkNode>>,
     free: Vec<usize>,
-    buckets: Vec<Vec<usize>>,
+    identities: HashMap<usize, usize>,
+    base: BaseMapStorage,
     pub count: usize,
     pub bucket_count: usize,
     pub first: Option<usize>,
     pub last: Option<usize>,
     pub resource: BaseAllocator,
     pub hasher: H,
+    ownership: PhantomData<Box<(K, V, N)>>,
 }
-pub(super) struct OrderedItems<'a, K, V> {
-    pub slots: &'a [Option<AllocatedBox<OrderedNode<K, V>>>],
-    pub current: Option<usize>,
-    // The map's head when the iterator was created: native `Reset()` restarts there.
-    pub first: Option<usize>,
-}
-impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
+impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn new(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
             slots: Vec::new(),
             free: Vec::new(),
-            buckets: Vec::new(),
+            identities: HashMap::new(),
+            base: BaseMapStorage::new(buckets, Some(resource.clone())),
             count: 0,
-            // NCollection_BaseMap keeps a requested zero; the first insertion resizes to a prime.
             bucket_count: buckets,
             first: None,
             last: None,
             resource,
             hasher,
+            ownership: PhantomData,
         }
-    }
-    pub fn resize(&mut self, requested: usize) {
-        let count = next_map_prime(requested).max(self.bucket_count);
-        if count == self.bucket_count && !self.buckets.is_empty() {
-            return;
-        }
-        let mut buckets: Vec<Vec<usize>> = (0..=count).map(|_| Vec::new()).collect();
-        for &slot in self.buckets.iter().flatten() {
-            let hash = self.hasher.hash(&self.slots[slot].as_ref().unwrap().key) % count + 1;
-            buckets[hash].insert(0, slot);
-        }
-        self.buckets = buckets;
-        self.bucket_count = count;
     }
     pub fn lookup(&self, key: &K) -> Option<usize> {
         if self.count == 0 {
@@ -61,29 +42,17 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         self.lookup_at_hash(key, hash)
     }
     fn lookup_at_hash(&self, key: &K, hash: usize) -> Option<usize> {
-        self.buckets[hash].iter().copied().find(|&slot| {
-            self.hasher
-                .equal(&self.slots[slot].as_ref().unwrap().key, key)
-        })
-    }
-    fn append_allocated(&mut self, node: AllocatedBox<OrderedNode<K, V>>, hash: usize) -> usize {
-        let slot = self.free.pop().unwrap_or_else(|| {
-            self.slots.push(None);
-            self.slots.len() - 1
-        });
-        self.slots[slot] = Some(node);
-        if let Some(last) = self.last {
-            self.slots[last].as_mut().unwrap().next = Some(slot);
-        } else {
-            self.first = Some(slot);
+        let mut node = self.base.bucket_slots()[hash];
+        while !node.is_null() {
+            // SAFETY: bucket links contain only owned live nodes; shared projection excludes values.
+            if self.hasher.equal(unsafe { &*N::key(node) }, key) {
+                return self.slot_of(node);
+            }
+            node = unsafe { (*node).next() };
         }
-        self.last = Some(slot);
-        self.buckets[hash].insert(0, slot);
-        self.count += 1;
-        slot
+        None
     }
     pub fn remove(&mut self, key: &K) -> bool {
-        // OCCT 3d097a03 hashes once before mutation: user hash callbacks can throw.
         if self.count == 0 {
             return false;
         }
@@ -91,27 +60,19 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
         let Some(slot) = self.lookup_at_hash(key, hash) else {
             return false;
         };
-        let node = self.slots[slot].take().unwrap();
-        self.count -= 1;
-        self.buckets[hash].retain(|&entry| entry != slot);
-        self.unlink_order(slot, &node);
+        self.remove_slot(slot, hash);
         true
     }
-    /// Native `Clear(theAllocator)`: release bucket storage only when the allocator changes,
-    /// then adopt `resource`, or the common allocator for a null handle.
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        self.clear(resource.as_ref() != Some(&self.resource));
+        let release = resource.as_ref() != Some(&self.resource);
+        self.clear(release);
         self.resource = resource.unwrap_or_else(BaseAllocator::common);
-    }
-    pub fn items(&self) -> OrderedItems<'_, K, V> {
-        OrderedItems {
-            slots: &self.slots,
-            current: self.first,
-            first: self.first,
+        if release {
+            self.base = BaseMapStorage::new(self.bucket_count, Some(self.resource.clone()));
         }
     }
 }
-impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedTable<K, V, H> {
+impl<K: Clone, V: Clone, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn assign(&mut self, source: &Self, replace_values: bool) {
         self.clear(false);
         if source.count == 0 {
@@ -123,7 +84,9 @@ impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedTable<K, V, H> {
         }
     }
 }
-impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for OrderedTable<K, V, H> {
+impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone, N: StorageNode<K, V>> Clone
+    for OrderedTable<K, V, H, N>
+{
     fn clone(&self) -> Self {
         let mut copy = Self::new(
             self.hasher.clone(),
@@ -134,8 +97,7 @@ impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for OrderedTable<K, V, 
         copy
     }
 }
-/// `NCollection_BaseMap::nbBucketsFromInt`: a negative signed bucket count raises
-/// Standard_OutOfRange; `buckets_from_int(-1)` is an error naming -1.
+/// Signed native bucket count validation; `buckets_from_int(-1)` names the invalid value.
 pub(super) fn buckets_from_int(buckets: i32) -> Result<usize, crate::standard::Failure> {
     usize::try_from(buckets).map_err(|_| {
         crate::standard::Failure::with_type(
@@ -146,13 +108,18 @@ pub(super) fn buckets_from_int(buckets: i32) -> Result<usize, crate::standard::F
     })
 }
 mod iteration;
+pub(super) use iteration::OrderedItems;
 mod nodes;
 pub use nodes::{OrderedNodeMut, OrderedNodeRef};
-
 mod borrowed;
 mod mutable;
 pub(super) use mutable::OrderedItemsMut;
-
 mod destruction;
-
+mod graph;
 mod placement;
+mod projection;
+mod resize;
+mod traits;
+
+#[cfg(test)]
+mod canonical_contracts;

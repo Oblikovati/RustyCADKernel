@@ -4,7 +4,7 @@ use super::{BaseAllocator, DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
 /// An insertion-ordered set; `OrderedMap::<i32>::default().add(42)`.
 pub struct OrderedMap<K, H = DefaultHashPolicy> {
-    table: OrderedTable<K, (), H>,
+    table: OrderedTable<K, (), H, super::OrderedMapNode<K>>,
 }
 /// Shared key range and legacy cursor; `map.iter().key()?`.
 pub struct OrderedMapIter<'a, K> {
@@ -46,7 +46,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     }
     /// The head of the insertion order as a node view, `None` when empty; `map.first_node()`.
     pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, ()>> {
-        OrderedNodeRef::at(&self.table.slots, self.table.first)
+        self.table.first_node()
     }
     /// Counts unique keys; `map.len()==3`.
     pub fn len(&self) -> usize {
@@ -82,7 +82,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     }
     /// Borrows an equivalent stored key if present; `map.contained(&42)`.
     pub fn contained(&self, key: &K) -> Option<&K> {
-        Some(&self.table.slots[self.table.lookup(key)?].as_ref()?.key)
+        Some(self.table.key(self.table.lookup(key)?))
     }
     /// Appends a new key without changing duplicate order; `map.add(42)`.
     pub fn add(&mut self, key: K) -> bool {
@@ -91,7 +91,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     /// Borrows a stored key, appending only when absent; `map.added(42)`.
     pub fn added(&mut self, key: K) -> &K {
         let (_, slot) = self.table.place(key, || (), false, false);
-        &self.table.slots[slot].as_ref().unwrap().key
+        self.table.key(slot)
     }
     /// Replaces an equivalent key without changing its position; `map.emplace(42)`.
     pub fn emplace(&mut self, key: K) -> bool {
@@ -100,7 +100,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     /// Reconstructs and returns stable key storage; `map.emplaced(42)`.
     pub fn emplaced(&mut self, key: K) -> &K {
         let (_, slot) = self.table.place(key, || (), true, false);
-        &self.table.slots[slot].as_ref().unwrap().key
+        self.table.key(slot)
     }
     /// Adds without replacing an equivalent key; `map.try_emplace(42)`.
     pub fn try_emplace(&mut self, key: K) -> bool {
@@ -150,7 +150,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
         OrderedMapIter::default()
     }
     fn edge(&self, slot: Option<usize>) -> Result<&K, Failure> {
-        slot.map(|slot| &self.table.slots[slot].as_ref().unwrap().key)
+        slot.map(|slot| self.table.key(slot))
             .ok_or_else(empty_ordered)
     }
 }
@@ -189,7 +189,7 @@ impl<K: Clone, H: HashPolicy<K>> OrderedMap<K, H> {
     /// Returns the stored key, copying only on a miss; `map.added_ref(&42)`.
     pub fn added_ref(&mut self, key: &K) -> &K {
         let (_, slot) = self.table.place_borrowed(key, &(), false);
-        &self.table.slots[slot].as_ref().unwrap().key
+        self.table.key(slot)
     }
 }
 impl<K: Clone, H: HashPolicy<K> + Clone> Clone for OrderedMap<K, H> {
