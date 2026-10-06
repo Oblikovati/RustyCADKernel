@@ -1,0 +1,66 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "5f8ed45fca7e6658b3e00f9a1dbe2af49868cb1a",
+  "tkernel_tests_passed": 4283,
+  "tkernel_tests_failed": 0,
+  "tkernel_tests_ignored": 0,
+  "strict_miri_passed": 82,
+  "strict_miri_targets": [
+    "linear_vector_relocation_methods",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_borrowed_methods",
+    "ordered_mixed_ownership",
+    "ordered_map_generic_bounds",
+    "items_view_method_contracts",
+    "indexed_items_mutable_view"
+  ],
+  "unchanged_runtime_inputs": 9891,
+  "strict_tkernel_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/foundation-callback-batch-rust.gz",
+      "sha256": "ed9e9d14c8d433be40f2cf177ac94333c5773919b4f00651225ef1bdd28ed3ee"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/foundation-callback-batch-miri.gz",
+      "sha256": "b478d0eef1e86aeff59bc3fd3a8a70b8d89c2efdc136cba022f96e3d77250211"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/foundation-callback-batch-clippy.gz",
+      "sha256": "68a1a0078fb25cf870d934fa5382996a58011efb4635bd94079389443a7bb077"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/foundation-callback-batch-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "e31237d6b351c68de5772736112f177c3842993e",
+      "deleted_worktree": "/tmp/rustycad-linear-vector-remaining",
+      "deleted_branch": "port/linear-vector-remaining",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "90f91ef79306bdf49a6edcb162eabb94179dd695",
+      "deleted_worktree": "/tmp/rustycad-dynamic-emplace-policies",
+      "deleted_branch": "port/dynamic-emplace-policies",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "ffcf451af72274f7ba5f5c2ddb1906a1f0c45bcb",
+      "deleted_worktree": "/tmp/rustycad-ordered-map-mixed-ownership",
+      "deleted_branch": "port/ordered-map-mixed-ownership",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false
+}
