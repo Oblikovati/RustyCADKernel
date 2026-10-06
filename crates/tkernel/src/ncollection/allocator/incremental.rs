@@ -95,6 +95,7 @@ struct BlockSlot {
 pub(super) struct IncEngine {
     block_size: u32,
     block_count: u32,
+    thread_safe_policy: bool,
     blocks: Vec<BlockSlot>,
     allocation_heap: Option<usize>,
     used_heap: Option<usize>,
@@ -117,6 +118,7 @@ impl IncEngine {
         Self {
             block_size: size as u32, // static_cast<unsigned>, truncating like the native member
             block_count: 0,
+            thread_safe_policy: false,
             blocks: Vec::new(),
             allocation_heap: None,
             used_heap: None,
@@ -125,19 +127,35 @@ impl IncEngine {
         }
     }
 
-    /// `AllocateOptimal`/`Allocate`: bump `size` bytes; `None` only on exhaustion.
+    /// Keep native fast-path topology while the outer Rust mutex protects all modes.
+    pub(super) fn set_thread_safe(&mut self, enabled: bool) {
+        self.thread_safe_policy = enabled;
+    }
+
+    /// `AllocateOptimal`/`Allocate`: enabled native fast paths leave list order unchanged.
     pub(super) fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
-        let block = match self.allocation_heap {
-            Some(head) if self.blocks[head].state.available_size >= size => head,
-            _ => self.push_block(size)?,
+        let existing = self
+            .allocation_heap
+            .filter(|&head| self.blocks[head].state.available_size >= size);
+        let skip_reorder = self.thread_safe_policy && existing.is_some();
+        let block = match existing {
+            Some(head) => head,
+            None => self.push_block(size)?,
         };
+        let address = self.bump_block(block, size);
+        if !skip_reorder {
+            self.reorder(block);
+        }
+        Some(address)
+    }
+
+    fn bump_block(&mut self, block: usize, size: usize) -> NonNull<u8> {
         let slot = &mut self.blocks[block];
-        // SAFETY: cursor + size <= block payload size, by the available-size check above.
+        // SAFETY: cursor + size is bounded by this block's available-size check.
         let address = unsafe { slot.payload.add(slot.state.cursor) };
         slot.state.cursor += size;
         slot.state.available_size -= size;
-        self.reorder(block);
-        Some(address)
+        address
     }
 
     /// Allocation honouring a Rust layout alignment (typed allocations only).
