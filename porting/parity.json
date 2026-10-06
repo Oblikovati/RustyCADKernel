@@ -70764,9 +70764,9 @@
       "upstream_id": "NCollection_DynamicArray::SetIncrement(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the int overload clamps values below 1 to 1; usize cannot be negative and 0 is clamped to 1."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment_i32",
+      "status": "partial",
+      "notes": "Signed i32 overload uses its dedicated adapter, including clamp of increments below one; pointer/ownership/layout and retained-storage constructor domains remain those documented in porting/audits/dynamic-array-method-tail.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray(size_t)",
@@ -70780,9 +70780,9 @@
       "upstream_id": "NCollection_DynamicArray(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the int overload (default 256, `Default`) clamps values below 1 to 1, as with_increment clamps 0."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment_i32",
+      "status": "partial",
+      "notes": "Signed i32 overload uses its dedicated adapter, including clamp of increments below one; pointer/ownership/layout and retained-storage constructor domains remain those documented in porting/audits/dynamic-array-method-tail.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray(size_t,const occ::handle<NCollection_BaseAllocator>&)",
@@ -70796,9 +70796,9 @@
       "upstream_id": "NCollection_DynamicArray(int,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the int increment is clamped to at least 1."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator_i32",
+      "status": "partial",
+      "notes": "Signed i32 overload uses its dedicated adapter, including clamp of increments below one; pointer/ownership/layout and retained-storage constructor domains remain those documented in porting/audits/dynamic-array-method-tail.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray(size_t,const allocator_type&)",
@@ -70812,9 +70812,9 @@
       "upstream_id": "NCollection_DynamicArray(int,const allocator_type&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; the int increment is clamped to at least 1."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator_i32",
+      "status": "partial",
+      "notes": "Signed i32 overload uses its dedicated adapter, including clamp of increments below one; pointer/ownership/layout and retained-storage constructor domains remain those documented in porting/audits/dynamic-array-method-tail.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::NCollection_DynamicArray<TheItemType>(const NCollection_DynamicArray<TheItemType> &)",
@@ -70902,9 +70902,9 @@
       "upstream_id": "NCollection_DynamicArray::Append(const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::append",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::append_ref_with_constructor",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::Append(TheItemType&&)",
@@ -70918,9 +70918,9 @@
       "upstream_id": "NCollection_DynamicArray::InsertAfter(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::InsertAfter(size_t,TheItemType&&)",
@@ -70934,9 +70934,9 @@
       "upstream_id": "NCollection_DynamicArray::InsertAfter(int,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::InsertAfter(int,TheItemType&&)",
@@ -70950,9 +70950,9 @@
       "upstream_id": "NCollection_DynamicArray::InsertBefore(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::InsertBefore(size_t,TheItemType&&)",
@@ -70966,9 +70966,9 @@
       "upstream_id": "NCollection_DynamicArray::InsertBefore(int,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::InsertBefore(int,TheItemType&&)",
@@ -71156,9 +71156,9 @@
       "upstream_id": "NCollection_DynamicArray::SetValue(size_t,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::SetValue(size_t,TheItemType&&)",
@@ -71172,9 +71172,9 @@
       "upstream_id": "NCollection_DynamicArray::SetValue(int,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value_ref_with_assignment",
+      "status": "partial",
+      "notes": "Explicit native-policy borrowed adapter; separate copy-construction/copy-assignment/move-assignment callbacks preserve measured phases. No automatic C++ trait dispatch, address-dependent placement construction, const alias mutation or noexcept termination. See porting/audits/dynamic-array-borrowed-methods.json."
     },
     {
       "upstream_id": "NCollection_DynamicArray::SetValue(int,TheItemType&&)",
