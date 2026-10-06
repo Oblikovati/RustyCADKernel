@@ -70,7 +70,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     }
     /// Borrows the node allocator; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        &self.table.resource
+        self.table.resource()
     }
     /// Rehashes while retaining insertion order and node addresses; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
@@ -159,7 +159,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
 impl<K, H: HashPolicy<K> + Default> OrderedMap<K, H> {
     /// Selects initial buckets with default hashing; `OrderedMap::<i32>::new(10)`.
     pub fn new(buckets: usize) -> Self {
-        Self::with_hasher(H::default(), buckets)
+        Self::with_default_allocator(buckets, BaseAllocator::common())
     }
 }
 impl<K, H: HashPolicy<K> + Clone> OrderedMap<K, H> {
@@ -301,3 +301,5 @@ super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>,super::OrderedMapNode
 super::ordered_table::ordered_policy_construction!(OrderedMap<K,H>, H);
 
 super::ordered_table::ordered_policy_exchange!(OrderedMap<K,H>, H);
+
+super::ordered_table::ordered_default_construction!(OrderedMap<K,H>, H);

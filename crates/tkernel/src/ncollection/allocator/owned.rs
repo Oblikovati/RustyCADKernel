@@ -88,11 +88,13 @@ impl BaseAllocator {
     }
 
     pub(crate) fn allocate_value_with<T>(&self, construct: impl FnOnce() -> T) -> AllocatedBox<T> {
-        let storage = AllocBox::<T, BaseAllocator>::new_uninit_in(self.clone());
+        // Native placement allocation borrows its handle during payload construction.
+        // allocate_typed still acquires arena leases atomically before returning storage.
+        let storage = AllocBox::<T, &BaseAllocator>::new_uninit_in(self);
         let value = construct();
-        AllocatedBox {
-            storage: AllocBox::write(storage, value),
-        }
+        let (pointer, _) = AllocBox::into_raw_with_allocator(AllocBox::write(storage, value));
+        // SAFETY: initialized typed storage retains this same allocator and original layout.
+        unsafe { AllocatedBox::from_raw_in(pointer, self.clone()) }
     }
 
     /// Constructs contiguous elements with this allocator; `allocator.allocate_array(5, |i| i)`.
@@ -175,3 +177,33 @@ impl<T> std::ops::DerefMut for AllocatedBox<T> {
         &mut self.storage
     }
 }
+
+impl BaseAllocator {
+    /// Reports actual native handle retention; `arena.ref_count() == 1` for a fresh arena.
+    pub fn ref_count(&self) -> i32 {
+        std::sync::Arc::strong_count(&self.inner) as i32
+    }
+    /// Restores a typed owner for an initialized allocation abandoned to native raw ownership.
+    /// # Safety
+    /// `pointer` must still own one initialized `T` with its exact original typed layout,
+    /// allocated by this allocator, without another owner or active typed lease. The caller
+    /// must exclude reset/free until lease acquisition finishes; `arena.adopt_abandoned_value(p)`.
+    pub unsafe fn adopt_abandoned_value<T>(&self, pointer: NonNull<T>) -> AllocatedBox<T> {
+        self.acquire_owned_byte_lease();
+        // SAFETY: the caller retains exact layout/provenance and excludes reset until this lease.
+        unsafe { AllocatedBox::from_raw_in(pointer.as_ptr(), self.clone()) }
+    }
+    /// Relinquishes a live typed allocation to native raw ownership without freeing it.
+    /// # Safety
+    /// One exclusively owned typed allocation must be abandoned exactly once. No Rust
+    /// references or destructor obligations may remain; arena reset can invalidate its bytes.
+    pub(in crate::ncollection) unsafe fn relinquish_typed_to_raw(&self) {
+        if let AllocatorKind::Incremental(engine) = &*self.inner {
+            super::locked(engine).release();
+        }
+    }
+}
+
+#[cfg(test)]
+#[path = "owned_contracts.rs"]
+mod owned_contracts;

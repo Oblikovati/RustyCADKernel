@@ -1,6 +1,6 @@
 //! Native ordered nodes and bucket/order links are the sole owning graph.
 #![allow(unsafe_code)]
-use super::{BaseAllocator, BaseMapStorage, HashPolicy, MapLinkNode, OrderedDataMapNode};
+use super::{BaseAllocator, BaseMap, BaseMapStorage, HashPolicy, MapLinkNode, OrderedDataMapNode};
 use std::{collections::HashMap, marker::PhantomData};
 mod node_contract;
 use node_contract::StorageNode;
@@ -9,13 +9,14 @@ pub(super) struct OrderedTable<K, V, H, N: StorageNode<K, V> = OrderedDataMapNod
     pub slots: Vec<Option<*mut MapLinkNode>>,
     free: Vec<usize>,
     identities: HashMap<usize, usize>,
+    // Derived hasher destruction precedes base cleanup on constructor unwind (OCCT 3d097a0).
+    pub hasher: H,
     base: BaseMapStorage,
+    incomplete_copy: bool,
     pub count: usize,
     pub bucket_count: usize,
     pub first: Option<usize>,
     pub last: Option<usize>,
-    pub resource: BaseAllocator,
-    pub hasher: H,
     ownership: PhantomData<Box<(K, V, N)>>,
 }
 impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
@@ -31,12 +32,12 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
             slots: Vec::new(),
             free: Vec::new(),
             identities: HashMap::new(),
-            base: BaseMapStorage::new(buckets, Some(resource.clone())),
+            base: BaseMapStorage::new(buckets, Some(resource)),
+            incomplete_copy: false,
             count: 0,
             bucket_count: buckets,
             first: None,
             last: None,
-            resource,
             hasher: make_policy(),
             ownership: PhantomData,
         }
@@ -71,11 +72,10 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         true
     }
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        let release = resource.as_ref() != Some(&self.resource);
+        let release = resource.as_ref() != Some(self.resource());
         self.clear(release);
-        self.resource = resource.unwrap_or_else(BaseAllocator::common);
         if release {
-            self.base = BaseMapStorage::new(self.bucket_count, Some(self.resource.clone()));
+            self.base = BaseMapStorage::new(self.bucket_count, resource);
         }
     }
 }
@@ -95,13 +95,7 @@ impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone, N: StorageNode<K, V>> Clone
     for OrderedTable<K, V, H, N>
 {
     fn clone(&self) -> Self {
-        let mut copy = Self::new(
-            self.hasher.clone(),
-            self.bucket_count,
-            self.resource.clone(),
-        );
-        copy.assign(self, false);
-        copy
+        self.clone_with(false)
     }
 }
 /// Signed native bucket count validation; `buckets_from_int(-1)` names the invalid value.
@@ -139,3 +133,6 @@ pub(super) use policy_construction::ordered_policy_construction;
 
 mod policy_exchange;
 pub(super) use policy_exchange::ordered_policy_exchange;
+
+mod copy_construction;
+pub(super) use copy_construction::ordered_default_construction;

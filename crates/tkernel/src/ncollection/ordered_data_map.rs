@@ -97,7 +97,7 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     }
     /// Borrows the node allocator; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        &self.table.resource
+        self.table.resource()
     }
     /// Rehashes without changing order or node addresses; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
@@ -153,7 +153,7 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
 impl<K, V, H: HashPolicy<K> + Default> OrderedDataMap<K, V, H> {
     /// Selects initial buckets with default hashing; `OrderedDataMap::<i32,i32>::new(10)`.
     pub fn new(buckets: usize) -> Self {
-        Self::with_hasher(H::default(), buckets)
+        Self::with_default_allocator(buckets, BaseAllocator::common())
     }
 }
 impl<K, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
@@ -199,15 +199,9 @@ impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
 }
 impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for OrderedDataMap<K, V, H> {
     fn clone(&self) -> Self {
-        let mut copy = Self {
-            table: OrderedTable::new(
-                self.table.hasher.clone(),
-                self.table.bucket_count,
-                self.table.resource.clone(),
-            ),
-        };
-        copy.assign(self);
-        copy
+        Self {
+            table: self.table.clone_with(true),
+        }
     }
 }
 impl<K: Debug, V, H: HashPolicy<K>> std::ops::Index<&K> for OrderedDataMap<K, V, H> {
@@ -250,3 +244,5 @@ super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>,super::OrderedD
 super::ordered_table::ordered_policy_construction!(OrderedDataMap<K,V,H>, H);
 
 super::ordered_table::ordered_policy_exchange!(OrderedDataMap<K,V,H>, H);
+
+super::ordered_table::ordered_default_construction!(OrderedDataMap<K,V,H>, H);
