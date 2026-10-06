@@ -2,6 +2,7 @@
 use super::{Array1, ArrayError};
 
 mod method_contracts;
+mod raw_copy;
 
 /// A rectangular owned array or borrowed view; `Array2::<i32>::with_size(2, 3)`.
 #[derive(Clone)]

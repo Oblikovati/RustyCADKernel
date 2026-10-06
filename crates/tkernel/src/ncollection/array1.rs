@@ -1,6 +1,7 @@
 //! Arbitrarily bounded arrays, corresponding to `NCollection_Array1`.
 
 mod pointers;
+mod raw_copy;
 mod returning;
 mod trivial_copy;
 
