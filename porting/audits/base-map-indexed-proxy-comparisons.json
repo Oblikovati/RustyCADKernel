@@ -1,0 +1,157 @@
+{
+  "schema": "rustycad.indexed-proxy-comparisons.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "branch": "port/base-map-indexed-proxy-comparisons",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Extend the exact operator== and operator!= partial domains to owners with owned/proxy accessor results, removing their accidental dependency on borrowed IndexedCursorSource getters. No full class/API/toolkit parity claim.",
+  "new_adapters": [
+    "BaseMapIndexedIterator::is_equal_with",
+    "BaseMapIndexedIterator::is_not_equal_with"
+  ],
+  "shared_implementation": "Existing is_equal delegates to is_equal_with; existing inequality delegates equality; new inequality negates the same policy body. Existing More owner validation is reused. FnOnce callbacks are consumed at most once, in native left-to-right short-circuit order. No new unsafe code, lifetime extension or duplicate owner state.",
+  "native_behavior": "Native operator== evaluates (!More() && !other.More()) before comparing owner and index. More invokes Size through the respective const/nonconst container pointer and never reads values or keys. Native owned noncopy/nonmovable accessor results instantiate successfully for these comparisons.",
+  "checks": {
+    "rust_passed": 186,
+    "new_focused_tests": 6,
+    "prior_indexed_and_proxy_tests": 17,
+    "native_original_tests_passed": 163,
+    "strict_provenance_miri_passed": 23,
+    "python_binding_tests_passed": 25,
+    "strict_scoped_clippy_exit": 0,
+    "cargo_fmt_exit": 0,
+    "diff_check_exit": 0,
+    "exact_binding_replay": {
+      "native_ids": 2,
+      "public_bodies": 4,
+      "partial_rows_extended": 2,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    }
+  },
+  "native_oracle": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_base_map_indexed_proxy_comparisons.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/base-map-indexed-proxy-comparisons-native"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "run_exit": 0,
+    "run_stderr": "",
+    "rows": 12
+  },
+  "row_join": "All 12 native stdout rows are computed independently in Rust and compared exactly, including live/same-owner, foreign live, exhausted pairs, native index zero, changed Size, default/null, and mixed const/nonconst Size traces. Getter trace symbols v/k never occur during comparison rows.",
+  "rust_specific_checks": [
+    "Foreign left owner rejects before either callback.",
+    "Live left skips foreign right validation and its callback.",
+    "Exhausted left validates foreign right before evaluating its callback.",
+    "Callbacks consuming unique owned String captures demonstrate true FnOnce support.",
+    "An owned non-Clone value and owned key remain independently accessible through existing policy adapters; comparison invokes only Size."
+  ],
+  "commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test base_map_indexed_proxy_comparisons --test base_map_indexed_proxy_results --test base_map_indexed_comparisons --test base_map_indexed_iterator_contracts --test ncollection_map --test ncollection_data_map --test ncollection_double_map --test ncollection_indexed_map --test ncollection_indexed_data_map",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test base_map_indexed_proxy_comparisons --test base_map_indexed_proxy_results --test base_map_indexed_comparisons --test base_map_indexed_iterator_contracts",
+    "python": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_api_binding*.py'",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --test base_map_indexed_proxy_comparisons --test base_map_indexed_proxy_results --test base_map_indexed_comparisons --test base_map_indexed_iterator_contracts -- -D warnings",
+    "native_originals": "OpenCascadeGTest --gtest_filter='NCollection_MapTest.*:NCollection_DataMapTest.*:NCollection_DoubleMapTest.*:NCollection_IndexedMapTest.*:NCollection_IndexedDataMapTest.*'"
+  },
+  "compiler_capture": {
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "format_version": 61,
+    "exit": 0,
+    "unrelated_preexisting_doc_warnings": 9,
+    "integrity": "Pinned raw compiler normalized independently; each selected body must match declaration hash, full impl context and current file hash. Four selected bodies remain partial; selector existence alone grants no behavior completion credit."
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "99d625bb50af68dc930bebbdecea23ff33aafbef",
+    "native_ids": [
+      "2c1c344c38f86ab6795b5dcdeba343971045ba9758d16cf7d3f7b44fe3750958",
+      "575c2564ec04f0c636f4bd7e7f2add6caed6e50eb84cfc49effe4b1c8c37d890"
+    ],
+    "partial_rows_extended": 2,
+    "public_bodies": 4,
+    "implemented_delta": 0,
+    "exclusion_delta": 0,
+    "new_test_mapping_delta": 0,
+    "scope": "Exact base ledger with only the two owned rows replaced. Current root may contain unrelated class transactions, but owned row mutations and relevant stale body hashes fail replay."
+  },
+  "original_tests": {
+    "joined_declarations": 163,
+    "join_archive": "porting/runtime-evidence/base-map-indexed-proxy-comparisons-original-joins.json.gz",
+    "scope": "Existing concrete Map/DataMap/DoubleMap/IndexedMap/IndexedDataMap native passing names join Rust passing names exactly. Existing assertions and test mappings unchanged; no new full assertion-faithfulness re-audit or claim that all maps use this cursor."
+  },
+  "limitations": [
+    "Size callbacks explicitly select const/nonconst behavior; shared Rust references require sound interior mutability when a native nonconst Size implementation changes owner state. No aliasing bypass or arbitrary mutation policy is supplied.",
+    "Native More/comparisons are noexcept. Throwing native Size leads to termination; Rust panic termination equivalence is not claimed or treated as an oracle result.",
+    "Owner identity validates live explicit Rust owner references; dangling native pointers, Rust owner relocation/reused addresses and arbitrary raw object layouts are outside this safe adapter domain.",
+    "The prior direct is_equal/is_not_equal API retains its reference-valued trait bound; proxy callers use the newly bound explicit policy methods.",
+    "Overloaded operator& and ordinary prvalue arrow domains remain unchanged; no primitive foreign-impl or exposed-private-return inventory change."
+  ],
+  "historical_evidence": [
+    "porting/audits/base-map-indexed-comparisons.json",
+    "porting/audits/base-map-indexed-method-tail.json"
+  ],
+  "historical_scope": "Prior receipts remain immutable historical captures. comparisons.rs changes its hash in this batch; current proof for the two updated methods is here. Unmodified native declarations and source methods are not relabeled as new behavior.",
+  "replay_command": "gzip -dc porting/runtime-evidence/base-map-indexed-proxy-comparisons-replay.py.gz > /tmp/replay-base-map-indexed-proxy-comparisons.py && python3 /tmp/replay-base-map-indexed-proxy-comparisons.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/value_policies.rs": "e5712b9be9d5be9befbd431f0f42356d7d1b44d29fd7a521620c005ef5021bc8",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor.rs": "5acdc3fbeabd1f133354989c7f4b0ccc42eea1b7f9e9617bbb7dd616ce7883ce",
+    "crates/tkernel/src/ncollection/base_map/indexed_source.rs": "0e4ceca349b4b69112791139fcb2e9db12d946361b2712883f28d57b95cde62c",
+    "crates/tkernel/tests/base_map_indexed_proxy_comparisons.rs": "00a2e3c60e8efdd563fc18296b6058c9744c2016d2fdd181330a89d780ff3e38",
+    "crates/tkernel/tests/base_map_indexed_proxy_comparisons/support.rs": "1b809d4253f0476954f4842e6988d2393570161cb6caf15fbd5da64b80ec4e1b",
+    "crates/tkernel/tests/base_map_indexed_comparisons.rs": "0a19aecc6eaa3ebfbb130eb69f09d4cc2871cb47ef1a3acaf161516bc2933c61",
+    "crates/tkernel/tests/base_map_indexed_iterator_contracts.rs": "cba8baabc1359d8b8bdd51ccc7e9cb1f01c0fcb9f9827e381c39aac4ad198009",
+    "crates/tkernel/tests/base_map_indexed_proxy_results.rs": "5d133e06755aece55a8368a1956fb32aa6130d8cc091d3783a63d10267195f7f",
+    "tools/oracle/tkernel_base_map_indexed_proxy_comparisons.cxx": "bf3bb32d58d4cd4c4e802c3bc0f4ca135f4bf946f8fe79c269c1ad419b9b1de0",
+    "tools/oracle/tkernel_base_map_indexed_proxy_comparisons.expected": "394707ee29dc33b0941beed640ac2e299db3ea5d42d46d7441dc62be6f0d2a97"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-binding-tests.log.gz": "2c86c953efebe724976d98854fc5e9891e6a8b20fb18e08988c04313aeee4bc9",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-bindings.json.gz": "18a8bad367e971320358c69881125323c33c267d120beec83010aa3d07bea5ae",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-clippy.log.gz": "895e9d80f091cef977629ebb8272883d8252931d7515ae93b263e3a20ca12f68",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-compiler.log.gz": "15b4657154d0437d0ef8ccf85dbb2307164e5a9658ad226c16f71af34da528f7",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-miri.log.gz": "e6df4f9a8c8907f3b87869420ffaf98db0df4ac5c12fdcd647920ad420d184b5",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-native-command.json.gz": "a8a7c7ac0de255e4927a7292efbc3de8f646da3e11c9456a54b5a19da2d798df",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-native-originals.log.gz": "f04caa4685b1cbe961d1692d9369c0e980e5306f9fc54d5d3017016fbf76707d",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-native.stdout.gz": "cd99eaac21400c62044bb942d609891afa019d49867437b2560367059d134632",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-normalized.json.gz": "6e2a63cc83b48f3cf3d7852bfc52889b97b29965f7c006b1e6f4319b8bf3b8b4",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-original-joins.json.gz": "42fe942ff8398196133931cd0e625dbef48b79eb10e7c56ff7767161ef70458f",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-replay.log.gz": "846b29337f471c20c2992f6a710fbfe29be7d731e5b2d7c983e23260a271ecb1",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-replay.py.gz": "50c834b3c98c586ef8c437fd8608654491a502045a86c043b1c7510339c30a80",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-rust.log.gz": "ba4be93b0467760ef8e431a1aef564accf33f7320a99f3248d2227cff18989ab",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-rustdoc.json.gz": "5ec41e05af3f74c03a787b66e6268d4862e762d1f36ea3f5beac9e5f8f4fdf87",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-transaction.json.gz": "5c4ab605d7891f99b0ad55a2532de1bb7c2cd3063b37dc21a83c4450e40e317c"
+  }
+}

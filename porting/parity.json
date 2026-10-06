@@ -241497,86 +241497,6 @@
       "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
     },
     {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator==",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal",
-      "rust_declaration_selectors": [
-        {
-          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal",
-          "declaration_sha256": "8cc5e03ae1df6229c32631fc13b59b3fa6d5ca6b124a3975c7f8e71150aa0d0b",
-          "impl_context": {
-            "for": {
-              "resolved_path": {
-                "path": "super::BaseMapIndexedIterator",
-                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
-                "args": {
-                  "angle_bracketed": {
-                    "args": [
-                      {
-                        "type": {
-                          "generic": "C"
-                        }
-                      },
-                      {
-                        "const": {
-                          "expr": "M",
-                          "value": null,
-                          "is_literal": false
-                        }
-                      }
-                    ],
-                    "constraints": []
-                  }
-                }
-              }
-            },
-            "generics": {
-              "params": [
-                {
-                  "name": "C",
-                  "kind": {
-                    "type": {
-                      "bounds": [
-                        {
-                          "trait_bound": {
-                            "trait": {
-                              "path": "IndexedCursorSource",
-                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource",
-                              "args": null
-                            },
-                            "generic_params": [],
-                            "modifier": "none"
-                          }
-                        }
-                      ],
-                      "default": null,
-                      "is_synthetic": false
-                    }
-                  }
-                },
-                {
-                  "name": "M",
-                  "kind": {
-                    "const": {
-                      "type": {
-                        "primitive": "bool"
-                      },
-                      "default": null
-                    }
-                  }
-                }
-              ],
-              "where_predicates": []
-            },
-            "trait": null
-          }
-        }
-      ],
-      "status": "partial",
-      "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
-    },
-    {
       "upstream_id": "NCollection_BaseMap::IndexedIterator::operator>",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
@@ -241618,86 +241538,6 @@
                   "kind": {
                     "type": {
                       "bounds": [],
-                      "default": null,
-                      "is_synthetic": false
-                    }
-                  }
-                },
-                {
-                  "name": "M",
-                  "kind": {
-                    "const": {
-                      "type": {
-                        "primitive": "bool"
-                      },
-                      "default": null
-                    }
-                  }
-                }
-              ],
-              "where_predicates": []
-            },
-            "trait": null
-          }
-        }
-      ],
-      "status": "partial",
-      "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator!=",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal",
-      "rust_declaration_selectors": [
-        {
-          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal",
-          "declaration_sha256": "7707cc9189c1d26ea9db877381440a7cf7c32a879d500c92e95654c93c8a55ce",
-          "impl_context": {
-            "for": {
-              "resolved_path": {
-                "path": "super::BaseMapIndexedIterator",
-                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
-                "args": {
-                  "angle_bracketed": {
-                    "args": [
-                      {
-                        "type": {
-                          "generic": "C"
-                        }
-                      },
-                      {
-                        "const": {
-                          "expr": "M",
-                          "value": null,
-                          "is_literal": false
-                        }
-                      }
-                    ],
-                    "constraints": []
-                  }
-                }
-              }
-            },
-            "generics": {
-              "params": [
-                {
-                  "name": "C",
-                  "kind": {
-                    "type": {
-                      "bounds": [
-                        {
-                          "trait_bound": {
-                            "trait": {
-                              "path": "IndexedCursorSource",
-                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource",
-                              "args": null
-                            },
-                            "generic_params": [],
-                            "modifier": "none"
-                          }
-                        }
-                      ],
                       "default": null,
                       "is_synthetic": false
                     }
@@ -244397,6 +244237,290 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_BaseMap::IndexedIterator::operator++() noexcept"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator==",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal",
+          "declaration_sha256": "b5f86989f5fe49e159ec390210f858c98823ddf4b040ce095a12ddc6321ebe7d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "C",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal_with",
+          "declaration_sha256": "2d240276ec6242949b7ffaab9a7a1c8a16ddc28c0521ca4692e87f9cbc64d030",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "C",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial native comparison adapter. Explicit Size callbacks allow owned/proxy accessor containers without IndexedCursorSource borrowed-reference constraints. Callback dispatch, detached short-circuit and native left-to-right evaluation match the nonthrowing defined-domain fixture. M is inverse native IsConstant; each policy selects its respective const/nonconst Size behavior. Callbacks take shared Rust borrows: native nonconst mutation must use a caller-provided sound interior-mutability policy. No arbitrary aliasing, address-reuse, noexcept termination or invalid pointer parity claim. See porting/audits/base-map-indexed-proxy-comparisons.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal_with"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator!=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal",
+          "declaration_sha256": "6e396139c4b33b4142a548bd8bab62fd1f1b380f498f700557aad7371e4f9aa4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "C",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "IndexedCursorSource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_source::IndexedCursorSource",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal_with",
+          "declaration_sha256": "0dcff19f248e07b6c24e340b24b42c3adaac0b33eef19f8aa7f7d73e56bdefbe",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::BaseMapIndexedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::indexed_cursor::BaseMapIndexedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "C",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial native comparison adapter. Explicit Size callbacks allow owned/proxy accessor containers without IndexedCursorSource borrowed-reference constraints. Callback dispatch, detached short-circuit and native left-to-right evaluation match the nonthrowing defined-domain fixture. M is inverse native IsConstant; each policy selects its respective const/nonconst Size behavior. Callbacks take shared Rust borrows: native nonconst mutation must use a caller-provided sound interior-mutability policy. No arbitrary aliasing, address-reuse, noexcept termination or invalid pointer parity claim. See porting/audits/base-map-indexed-proxy-comparisons.json.",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal",
+        "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal_with"
+      ]
     }
   ],
   "tests": [
