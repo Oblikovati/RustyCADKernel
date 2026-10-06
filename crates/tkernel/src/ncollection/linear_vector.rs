@@ -169,8 +169,17 @@ impl<T> LinearVector<T> {
     }
     /// Transfers storage and resets the source; `dest.move_from(&mut source)`.
     pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
-        *self = std::mem::take(source);
+        // Native assignment clears the receiver before touching the source;
+        // extracting first also destroys the source if a Rust destructor panics.
+        self.clear(true);
+        *self = Self::from_moved(source);
         self
+    }
+
+    /// Constructs by transferring the source allocation without element callbacks;
+    /// `let moved = LinearVector::from_moved(&mut source)` leaves source empty.
+    pub fn from_moved(source: &mut Self) -> Self {
+        std::mem::take(source)
     }
     /// Preserves the receiver for native self assignment; `vector.assign_self()`.
     pub fn assign_self(&mut self) -> &mut Self {

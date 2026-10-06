@@ -95,20 +95,23 @@ fn NCollection_LinearVectorTest__CopyAssignment() {
     copy[0] = 99;
     assert_eq!(vector[0], 1);
 }
-fn move_check(mut destination: LinearVector<i32>) {
-    let mut source = integers(&[1, 2]);
-    destination.move_from(&mut source);
-    same_values(&destination, &[1, 2]);
+fn check_moved_values(destination: &LinearVector<i32>, source: &LinearVector<i32>) {
+    same_values(destination, &[1, 2]);
     assert!(source.is_empty());
     assert_eq!(source.len(), 0);
 }
 #[test]
 fn NCollection_LinearVectorTest__MoveConstructor() {
-    move_check(LinearVector::default());
+    let mut source = integers(&[1, 2]);
+    let destination = LinearVector::from_moved(&mut source);
+    check_moved_values(&destination, &source);
 }
 #[test]
 fn NCollection_LinearVectorTest__MoveAssignment() {
-    move_check(integers(&[100]));
+    let mut source = integers(&[1, 2]);
+    let mut destination = integers(&[100]);
+    destination.move_from(&mut source);
+    check_moved_values(&destination, &source);
 }
 #[test]
 fn NCollection_LinearVectorTest__Reserve() {
