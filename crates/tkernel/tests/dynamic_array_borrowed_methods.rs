@@ -7,6 +7,7 @@ use std::{
 };
 mod dynamic_array_borrowed_methods {
     pub mod contracts;
+    pub mod internal;
     pub mod moving;
     pub mod oracle;
 }
@@ -59,7 +60,8 @@ fn copy_construct(source: &BorrowedItem) -> BorrowedItem {
     assert_ne!(
         event(format!("C{}", source.value)),
         "construct",
-        "copy 99: expected success"
+        "copy source{}: expected success",
+        source.value
     );
     BorrowedItem {
         value: source.value,
@@ -88,11 +90,21 @@ fn move_assign(target: &mut BorrowedItem, source: &mut BorrowedItem) {
     );
 }
 fn fixture(failure: &'static str) -> DynamicArray<BorrowedItem> {
+    fixture_with(2, 2, failure)
+}
+fn fixture_with(
+    increment: usize,
+    count: usize,
+    failure: &'static str,
+) -> DynamicArray<BorrowedItem> {
     BORROWED_PROBE.with(|probe| *probe.borrow_mut() = BorrowedProbe::default());
     let allocator = BaseAllocator::accumulating(4096).unwrap();
-    let mut array = DynamicArray::with_allocator(2, Some(allocator.clone()));
-    array.append(BorrowedItem { value: 10 });
-    array.append(BorrowedItem { value: 20 });
+    let mut array = DynamicArray::with_allocator(increment, Some(allocator.clone()));
+    for index in 0..count {
+        array.append(BorrowedItem {
+            value: (index as i32 + 1) * 10,
+        });
+    }
     BORROWED_PROBE.with(|probe| {
         *probe.borrow_mut() = BorrowedProbe {
             failure,

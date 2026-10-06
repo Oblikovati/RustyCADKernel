@@ -1,11 +1,11 @@
 use super::super::*;
-fn move_construct(source: &mut BorrowedItem) -> BorrowedItem {
+pub(super) fn move_construct(source: &mut BorrowedItem) -> BorrowedItem {
     let failure = event(format!("K{}", source.value));
     let value = source.value;
     source.value = -7;
     assert_ne!(
         failure, "move_construct",
-        "move source99: expected successful construction"
+        "move source{value}: expected successful construction"
     );
     BorrowedItem { value }
 }

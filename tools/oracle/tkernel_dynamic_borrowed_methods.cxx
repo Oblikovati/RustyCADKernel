@@ -1,3 +1,4 @@
+// -fno-access-control asserts private native descriptor capacity without changing OCCT headers.
 // Unmodified OCCT 3d097a0: distinguish copy construction and both assignment operators.
 #include <NCollection_DynamicArray.hxx>
 #include <iostream>
@@ -24,12 +25,12 @@ struct Item {
   }
   Item(const Item& source) : value(source.value) {
     event("C" + std::to_string(value));
-    if (failure == "construct") throw std::runtime_error("copy 99");
+    if (failure == "construct") throw std::runtime_error("copy " + std::to_string(value));
   }
   Item(Item&& source) : value(source.value) {
     event("K" + std::to_string(value));
     source.value = -7;
-    if (failure == "move_construct") throw std::runtime_error("move construction 99");
+    if (failure == "move_construct") throw std::runtime_error("move construction " + std::to_string(value));
   }
   ~Item() { event("X" + std::to_string(value)); }
   Item& operator=(Item&& source) {
@@ -118,4 +119,46 @@ static void moved_cases() {
   run<true>("moved_after_end",3,2,"",true);
 }
 
-int main() { borrowed_cases(); moved_cases(); }
+
+template<bool Moving> static bool append_internal(NCollection_DynamicArray<Item>& array, size_t source) {
+  try {
+    Item& result = array.Append(forwarded<Moving>(array[source]));
+    return &result == &array[array.Size() - 1];
+  } catch (...) { event("E"); return false; }
+}
+static void print_internal(const char* name, const NCollection_DynamicArray<Item>& array,
+                           bool returned, bool stable) {
+  std::cout << name << ' ' << probe->events << ' ' << array.Size() << ' ' << returned << ' ' << stable;
+  for (size_t i = 0; i < array.Size(); ++i) std::cout << ' ' << array[i].value;
+  std::cout << '\n';
+}
+template<bool Moving> static void internal(const char* name, int increment, int count,
+                                            size_t source, const char* fail, bool retry = false) {
+  occ::handle<ProbeAllocator> allocator = new ProbeAllocator;
+  probe = allocator.get(); failure.clear(); moveCount = 0;
+  NCollection_DynamicArray<Item> array(increment, allocator);
+  for (int i = 0; i < count; ++i) array.EmplaceAppend((i + 1) * 10);
+  if (count == 4 && array.myContainer.Capacity() != 2) throw std::logic_error("table capacity: expected 2 before append");
+  const Item* original = &array[source]; probe->events.clear(); failure = fail;
+  bool returned = append_internal<Moving>(array, source);
+  if (retry) { failure.clear(); returned = append_internal<Moving>(array, source); }
+  if (count == 4 && array.myContainer.Capacity() != 4) throw std::logic_error("table capacity: expected 4 after append");
+  print_internal(name, array, returned, original == &array[source]);
+}
+static void internal_cases() {
+  internal<false>("self_copy_same",4,1,0,"");
+  internal<true>("self_move_same",4,1,0,"");
+  internal<false>("self_copy_new_block",2,2,0,"");
+  internal<true>("self_move_new_block",2,2,1,"");
+  internal<false>("self_copy_table_growth",2,4,0,"");
+  internal<true>("self_move_table_growth",2,4,3,"");
+  internal<false>("self_copy_later_block",2,5,3,"");
+  internal<true>("self_move_later_block",2,5,3,"");
+  internal<false>("self_copy_same_throw",4,1,0,"construct");
+  internal<true>("self_move_same_throw",4,1,0,"move_construct");
+  internal<false>("self_copy_table_throw",2,4,0,"construct");
+  internal<true>("self_move_table_throw",2,4,3,"move_construct");
+  internal<false>("self_copy_retry",2,4,0,"construct",true);
+  internal<true>("self_move_retry",2,4,3,"move_construct",true);
+}
+int main() { borrowed_cases(); moved_cases(); internal_cases(); }

@@ -29,6 +29,7 @@ mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
 mod insertion;
+mod internal_append;
 mod legacy_cursor;
 mod method_tail;
 mod moving;
@@ -95,13 +96,16 @@ impl<T> DynamicArray<T> {
     }
     /// Reserves storage before constructing the appended value; `array.emplace_append(||42)`.
     pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
+        self.append_constructed_with(|_| construct())
+    }
+    fn append_constructed_with(&mut self, construct: impl FnOnce(&mut Self) -> T) -> &mut T {
         let index = self.used;
         let block = index / self.increment;
         let offset = index % self.increment;
         if block == self.blocks.len() {
             self.add_block();
         }
-        let value = construct();
+        let value = construct(self);
         if offset < self.blocks[block].len() {
             self.blocks[block][offset] = value;
         } else {

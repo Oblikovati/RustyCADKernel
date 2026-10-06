@@ -38,3 +38,17 @@ moved_after_shift_fail A;D;M0,20;E; 3 0 10 -7 20 source=99
 moved_before_default_fail A;D;E; 2 0 10 20 source=99
 moved_before_negative E; 2 0 10 20 source=99
 moved_after_end E; 2 0 10 20 source=99
+self_copy_same C10; 2 1 1 10 10
+self_move_same K10; 2 1 1 -7 10
+self_copy_new_block A;C10; 3 1 1 10 20 10
+self_move_new_block A;K20; 3 1 1 10 -7 20
+self_copy_table_growth A;C10; 5 1 1 10 20 30 40 10
+self_move_table_growth A;K40; 5 1 1 10 20 30 -7 40
+self_copy_later_block C40; 6 1 1 10 20 30 40 50 40
+self_move_later_block K40; 6 1 1 10 20 30 -7 50 40
+self_copy_same_throw C10;E; 1 0 1 10
+self_move_same_throw K10;E; 1 0 1 -7
+self_copy_table_throw A;C10;E; 4 0 1 10 20 30 40
+self_move_table_throw A;K40;E; 4 0 1 10 20 30 -7
+self_copy_retry A;C10;E;C10; 5 1 1 10 20 30 40 10
+self_move_retry A;K40;E;K-7; 5 1 1 10 20 30 -7 -7
