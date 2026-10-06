@@ -9,10 +9,10 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
     /// Returns the legacy key or its native exception at end; `cursor.key_checked()?`.
     pub fn key_checked(&self) -> Result<&T, Failure> {
         self.key().ok_or_else(|| {
-            Failure::with_type(
+            // OCCT 3d097a0 uses the message-only constructor, including configured stack capture.
+            Failure::with_message(
                 "Standard_NoSuchObject",
-                "NCollection_PackedMap::Iterator::Key at end; expected a current packed key",
-                "",
+                "NCollection_PackedMap::Iterator::Key",
             )
         })
     }
