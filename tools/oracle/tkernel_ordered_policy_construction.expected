@@ -1,0 +1,32 @@
+set_borrow_size ok 7 13 7 C
+set_borrow_signed ok 7 0 7 C
+set_borrow_negative range 7 -
+set_borrow_throw throw 7 CX
+set_borrow_throw_signed throw 7 CX
+set_borrow_negative_throw range 7 -
+set_move_size ok 7 13 -99 M
+set_move_signed ok 7 0 -99 M
+set_move_negative range 7 -
+set_move_throw throw -99 MX
+set_move_throw_signed throw -99 MX
+set_move_negative_throw range 7 -
+set_transfer_0_0 ok 7 0 1 1 1 -99 0 101 1 M
+set_transfer_1_0 ok 7 2 1 1 1 -99 0 101 1 M
+set_transfer_1_1 throw 1 1 -99 2 101 0 MX
+data_borrow_size ok 7 13 7 C
+data_borrow_signed ok 7 0 7 C
+data_borrow_negative range 7 -
+data_borrow_throw throw 7 CX
+data_borrow_throw_signed throw 7 CX
+data_borrow_negative_throw range 7 -
+data_move_size ok 7 13 -99 M
+data_move_signed ok 7 0 -99 M
+data_move_negative range 7 -
+data_move_throw throw -99 MX
+data_move_throw_signed throw -99 MX
+data_move_negative_throw range 7 -
+data_transfer_0_0 ok 7 0 1 1 1 -99 0 101 1 M
+data_transfer_1_0 ok 7 2 1 1 1 -99 0 101 1 M
+data_transfer_1_1 throw 1 1 -99 2 101 0 MX
+set_move_only 19 -99 2 0 1 M
+data_move_only 19 -99 2 0 1 M

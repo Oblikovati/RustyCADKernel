@@ -20,6 +20,13 @@ pub(super) struct OrderedTable<K, V, H, N: StorageNode<K, V> = OrderedDataMapNod
 }
 impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn new(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
+        Self::new_with_policy(|| hasher, buckets, resource)
+    }
+    pub fn new_with_policy(
+        make_policy: impl FnOnce() -> H,
+        buckets: usize,
+        resource: BaseAllocator,
+    ) -> Self {
         Self {
             slots: Vec::new(),
             free: Vec::new(),
@@ -30,7 +37,7 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
             first: None,
             last: None,
             resource,
-            hasher,
+            hasher: make_policy(),
             ownership: PhantomData,
         }
     }
@@ -126,3 +133,6 @@ mod canonical_contracts;
 
 mod base_bridge;
 pub(super) use base_bridge::ordered_base_bridge;
+
+mod policy_construction;
+pub(super) use policy_construction::ordered_policy_construction;
