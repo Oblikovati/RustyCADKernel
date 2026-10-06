@@ -1,0 +1,279 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "branch_validated_pending_main_integration",
+  "branch": "port/sparse-typed-storage",
+  "base_commit": "1f8ad39c86c692fbd6034da7f27f8c55f4ba2363",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "classes": [
+    "NCollection_SparseArray",
+    "NCollection_SparseArrayBase"
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sparse_array/assignment.rs": "6cd6299beeae26cfd99172c85961aa11eb0455ec56ac33a07573183654b1cef2",
+    "crates/tkernel/src/ncollection/sparse_array/borrowed.rs": "c4de3124bb3d5f206af4b91bd5e8ad7856a38448aa3d7f5fa901131b59264b4c",
+    "crates/tkernel/src/ncollection/sparse_array/cursor.rs": "45381c9057689b1aa4bb36ec1269e83c7f5e87d6d1ecf7f39d6496d57d16e8f7",
+    "crates/tkernel/src/ncollection/sparse_array/cursor_mut.rs": "9042fabd24b7e44eb0ec7eb9ed506cf2e6efcc03773ad3e4d83bf9a73dd832cf",
+    "crates/tkernel/src/ncollection/sparse_array/cursor_position.rs": "8475cb36380be180676d7d60bf2db40c6553fd182502bdda69460e048a4d68b6",
+    "crates/tkernel/src/ncollection/sparse_array/iteration.rs": "69a36bd763bb41f5c5c88d29c0006e027fdb9c22652ea09691dc1ce79a54790b",
+    "crates/tkernel/src/ncollection/sparse_array/legacy_cursor.rs": "7164f01431f3561472b8f98f44602aec13cdb2e461ba69c30ea1fa05e8e744ae",
+    "crates/tkernel/src/ncollection/sparse_array/storage/cloning.rs": "c96aa2aa0fe83df45eec70164e0b4d52c09356192e02275a5d0be7c4d6257dbf",
+    "crates/tkernel/src/ncollection/sparse_array/storage/editing.rs": "a8a54e92e455ab2f4fd71b2dccd0a8cba9eb62575e26884f2d4f7b70cd0cfbbb",
+    "crates/tkernel/src/ncollection/sparse_array/storage/layout.rs": "8d56739f5c860d0d219fd71c56f4f44891b89abcd220c417984f6bd1493c8044",
+    "crates/tkernel/src/ncollection/sparse_array/storage/lifecycle.rs": "55f1aeceed5dba2e2cd40aea83694cee4df73862d1e2fe8ec1f61c5e24ec55f8",
+    "crates/tkernel/src/ncollection/sparse_array/storage/traversal.rs": "9fcf0ee38c674137f57fd1f22d45f625561741ac00f5fc52abf7ce6b74f93bf9",
+    "crates/tkernel/src/ncollection/sparse_array/storage.rs": "b226f71f873dd86a46e56ba1e0a2986cc3dea6ba1067c7379f544493d6fc68b6",
+    "crates/tkernel/src/ncollection/sparse_array.rs": "b845a6ccaf9b368dd36d88c869ae89064b7a6aaa6e31cf664bc8e817f873b6ad",
+    "crates/tkernel/src/ncollection/sparse_array_base/allocation.rs": "71b87c6be64f56973bb3cd1b04b4694b0fda8d9cafa9b2f9613818576c31cfaf",
+    "crates/tkernel/src/ncollection/sparse_array_base/assignment.rs": "a2b49ed6658c46527d02753edffc7613427817bb116f5a57c044a30856b50727",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator/access.rs": "87f249ca3f9570919631c5f3bc7dfb0859da0faa05cab3d65992b910e3b4a3e2",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator/movement.rs": "e9024fa4308104d5555e828fab0e295618da5bc5f66b99d84c13d0f75bfe8d75",
+    "crates/tkernel/src/ncollection/sparse_array_base/basic_iterator.rs": "cc235d37f2e882c2a1ba1ec8afb837ac61ec76fb1805ba4a8f71b9046a6dd465",
+    "crates/tkernel/src/ncollection/sparse_array_base/block.rs": "e7517e913f9b4011ae150d46851108bc0b902b1682fcb326c023a845b795e6dd",
+    "crates/tkernel/src/ncollection/sparse_array_base/cursor.rs": "b768815a38ec425dcbde37e4e0fb5bad7cf6312a95b807a530488ee0552c1e7d",
+    "crates/tkernel/src/ncollection/sparse_array_base/editing.rs": "ff9cac5db1392b42076646cce6013df9379ed9f2f2ff0b1f78223d1f72dbacce",
+    "crates/tkernel/src/ncollection/sparse_array_base.rs": "9acf25f7ed533da78c0eae11c7e72e928d3961bda509ee0a6301f879ed6fff68",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/fixture.rs": "5ff4872017340afc65530ab91e38d9e87721843c85694f37b8e9870c7cfd9efd",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/mod.rs": "67748ea995920a10b9238f7a6f0293b3361e15aafe94e0d60cf66504e1b55bf0",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/rust_safety.rs": "d7a3087be15f49a0f14d500abe0b63f88f2a6e2ed6540d0667c846d6b53379d0",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/traits.rs": "83db4897432b961fe10488ada48a862ceb74dabc649ba3f708353402aac1a896",
+    "crates/tkernel/tests/sparse_typed_storage_contracts.rs": "42a9619dbda1a5e0381887116f92b37ff8ba78746ea3cb5e293d458414d00347",
+    "tools/oracle/tkernel_sparse_typed_storage_contracts.cxx": "c16ebea960144a66e1c273b6e39de00c1ef5b29e351808d7197195b4b1d78b6e",
+    "tools/oracle/tkernel_sparse_typed_storage_contracts.expected": "9fb3e7457258b07a74160a4c8a1c782d9774e40726dda19a54813c9d9a159cbf"
+  },
+  "focused_rust_passes": 105,
+  "new_tests": 32,
+  "miri_passes": 104,
+  "miri_new_tests_passed": 32,
+  "native_oracle_rows": 9,
+  "native_oracle_rows_asserted_by_rust": 9,
+  "native_original_passed": 10,
+  "original_cases_joined": [
+    "NCollection_SparseArrayTest.BasicFunctions",
+    "NCollection_SparseArrayTest.LargeIndices",
+    "NCollection_SparseArrayTest.SparseDistribution",
+    "NCollection_SparseArrayTest.IteratorFunctions",
+    "NCollection_SparseArrayTest.STLIterators",
+    "NCollection_SparseArrayTest.ComplexType",
+    "NCollection_SparseArrayTest.Clear",
+    "NCollection_SparseArrayTest.DataMapInterface",
+    "NCollection_SparseArrayTest.AssignAndExchange",
+    "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock"
+  ],
+  "clippy_exit_code": 0,
+  "fmt_exit_code": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-rust.gz",
+      "sha256": "483a9619a6c3dd76d8d7aec8e94e620717ff35513d58e939c4bb9405fa233192"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-clippy.gz",
+      "sha256": "93490e5cf4a09591bb0ac988ae215ccb67ed507e29b7a8e564a9508d05718e32"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-miri.gz",
+      "sha256": "010c3d0de508ca88367c22325458f549a383eddce587faf958596f65b45f3972"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-native.gz",
+      "sha256": "4e9401914f289f386cae1fc7135d439010a82648e135ddbc7ac138417b06c686"
+    },
+    "legacy": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-legacy.gz",
+      "sha256": "f8706ebba18820d18d427ed5d9f3765604604d94c49457e338e51eb7464d0cb2"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "miri-unsupported-ctype": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-miri-unsupported-ctype.gz",
+      "sha256": "ca37e44330cfa1e4afdc946956249290368440366c2375f115a4db3a6770911f"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/sparse-typed-storage-source.tar.gz",
+      "sha256": "ce3730131c5d054f8a1aafdbf705ffe220fe8d81c73ddc0eb3546935d90eb189"
+    }
+  },
+  "test_targets": [
+    "ncollection_sparse_array",
+    "sparse_array_method_contracts",
+    "sparse_array_base_contracts",
+    "sparse_basic_iterator_contracts",
+    "sparse_cursor_contracts",
+    "sparse_supplemental",
+    "sparse_typed_storage_contracts"
+  ],
+  "miri_filter": {
+    "excluded": "character_classification_c_locale_boundaries",
+    "reason": "Unrelated existing character test in sparse_supplemental calls C isspace, which Miri does not support. Normal test passes; initial unsupported-run log retained. All 104 actual SparseArray tests pass Miri."
+  },
+  "method_bindings": [
+    {
+      "cpp_id": "025634a1f3e992f974a71ea54aa3930e274c54cf5bdbf3ef036eb908ee068528",
+      "cpp": "NCollection_SparseArray::Assign",
+      "signature": "NCollection_SparseArray<TheItemType> &(const NCollection_SparseArray<TheItemType> &)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::assign"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "23d4c5ba054f7629f077cdced603944b25c91fa2ca063d5cd7c7d06c7dc813a4",
+      "cpp": "NCollection_SparseArray::ChangeValue",
+      "signature": "type-parameter-0-0 &(unsigned long)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::change_value"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "43ad8d4311d9f9bdde2159f3bf6693c8cd02196dba9b9fdefa83f225b405ea11",
+      "cpp": "NCollection_SparseArray::NCollection_SparseArray<TheItemType>",
+      "signature": "void (unsigned long) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::new"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "456fcaec3e3d3c2421137ac35de07bf43e6cb2a768e74cec76dd0be5e583c5ca",
+      "cpp": "NCollection_SparseArray::Extent",
+      "signature": "unsigned long () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::extent"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "4ab435a47beb4d2310ee3fd86c5189ec133b1d89bbe1dce415b4ee030ae29976",
+      "cpp": "NCollection_SparseArray::IsEmpty",
+      "signature": "bool () const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::is_empty"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "7e49552d5b2814ea5f91563718de311c04026c9c471d90a70e46dcf6f24ca4b5",
+      "cpp": "NCollection_SparseArray::Find",
+      "signature": "const type-parameter-0-0 &(unsigned long) const",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::find"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "96083eaa166c19803b0eadae67b151a82a9ebfddbde9956b5e17f63565e828d7",
+      "cpp": "NCollection_SparseArray::IsBound",
+      "signature": "bool (unsigned long) const",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::is_bound"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "9a6a0c13ed95dd94268fdc1b91c3c5486dc90d770bd3162f99d339c460ce8fdf",
+      "cpp": "NCollection_SparseArray::Exchange",
+      "signature": "void (NCollection_SparseArray<TheItemType> &) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::exchange"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "9c0c4febd360fc9c2c4f1de0ef904e836c1c8f919f8699154dba6dc66ba19f39",
+      "cpp": "NCollection_SparseArray::UnsetValue",
+      "signature": "bool (unsigned long)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::unset_value"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "9f608e9b726b854d2c5abe6788e638a2366f5bd9c5204458fdff8239eb2aa49a",
+      "cpp": "NCollection_SparseArray::Clear",
+      "signature": "void ()",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::clear"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "b0e5a8d2e31cdfb3a9ed19c0adf8d815d19f358bd1074b91ad5e5994b890b96f",
+      "cpp": "NCollection_SparseArray::SetValue",
+      "signature": "type-parameter-0-0 &(unsigned long, const type-parameter-0-0 &)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::set_value_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "b50c540233796f367775b8ebed69120afdf0e44307ec425f4b5176ad48a8c6e0",
+      "cpp": "NCollection_SparseArray::ChangeFind",
+      "signature": "type-parameter-0-0 &(unsigned long)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::change_find"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "bfb0cdabbbd6830a8a2ee42d1a97eebfd09b909a739a974fa7b3fdf6643f1c33",
+      "cpp": "NCollection_SparseArray::Bind",
+      "signature": "type-parameter-0-0 &(unsigned long, const type-parameter-0-0 &)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::bind_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "d5250d474b886c052954f9bd55edd2b04a89b101fe0d9be97d3d07ac012d2321",
+      "cpp": "NCollection_SparseArray::Value",
+      "signature": "const type-parameter-0-0 &(unsigned long) const",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::value"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "d8cfe2a767aeb255a51719e1a61b9907add3339e8b5745060bbaebc931cdca18",
+      "cpp": "NCollection_SparseArray::UnBind",
+      "signature": "bool (unsigned long)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::SparseArray::unbind"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    }
+  ],
+  "storage_change": [
+    "SparseArray<T> now owns a private TypedSparseStorage<T> containing the actual SparseArrayBase; BTreeMap and Option block storage and duplicate counts/capacity are removed.",
+    "Ordinary T occupies native header/items/bitmap blocks directly, at native sizeof(T) stride. New inline-stride regression distinguishes this from the prior Option<T> representation.",
+    "SetValue/Bind borrowed operations and Assign dispatch real raw engine callbacks. New clones publish only after success; existing slots use Clone::clone_from; native count/bit/destruction ordering remains authoritative.",
+    "All iteration reads raw block bitmaps. Safe facade cursor ownership and captured exhaustion semantics remain intact. Legacy allocated-empty-block exhaustion remains capacity+increment.",
+    "Private raw reserve_clone_table helper preserves retained table capacity for the existing Rust Clone extension, including removed and failed-construction blocks."
+  ],
+  "ownership_proof": [
+    "Erased public SparseArrayBase remains !Send/!Sync. Only private typed owner implements Send for T:Send and Sync for T:Sync.",
+    "Private Rc<UnsafeCell<State>> is never cloned or externally exposed as Rc; its strong count stays one. Moving typed owner cannot race reference-count operations. Shared access reads only; mutation requires exclusive typed owner borrow. Allocator is thread-safe. Destructor callbacks operate only on owned T.",
+    "The private Rc allocation is retained because earlier Miri proved inline-state observer pointers become invalid during Drop &mut retag. Existing raw observer Drop regression passes in this batch.",
+    "Typed owner drains live objects before raw field Drop. Base stored destructor is no-op because the private typed owner exclusively owns object lifetimes while raw base owns allocation bytes.",
+    "Auto-traits preserve existing UnwindSafe/RefUnwindSafe bounds T:RefUnwindSafe and unconditional Unpin including PhantomPinned. Positive and negative trait tests plus threaded move, shared reads and scoped mutable iteration pass Miri.",
+    "Mutable iterator explicitly preserves RefUnwindSafe for T:RefUnwindSafe, Unpin, Send for T:Send and Sync for T:Sync; exclusive borrow freezes metadata and each occupied slot is yielded at most once."
+  ],
+  "rust_extensions_and_boundaries": [
+    "Zero-size T gets nonzero aligned stride; T aligned beyond usize header alignment gets a Box<T> pointer slot. Native ordinary object layout is unchanged; these Rust extensions are not credited as native declarations.",
+    "Safe allocation entry points check block size, table bytes, capacity and address limits before raw allocation. Zero increment remains constructible for defined empty queries; indexed access panics.",
+    "Panicking Rust destructors are caught inside non-unwinding native callbacks; engine cleanup completes, then first panic resumes. Multiple panics and panicking discarded panic payloads are drained without leaks. Native nonthrowing-destructor domain retains its callback timing.",
+    "Owned SetValue, Clone, Clone::clone_from, Option lookup and standard borrowing iterators are existing Rust extensions. Clone first constructs a complete replacement and preserves source capacity; Clone::clone_from does not call native Assign, which reuses values and retains target capacity.",
+    "Safe absent Option lookups check occupancy before raw get_value to avoid constructing/discarding a Failure and allocating its message.",
+    "No binary ABI parity or identical global allocator-call count is claimed: the Rust raw engine retains private heap state for pointer provenance. Allocation topology and ordinary item placement match the raw engine native contract."
+  ],
+  "remaining_gaps": [
+    "No global declaration inventory or mapping credit is changed; exact rustdoc binding, signature scope and downstream compiler proof remain coordinating-agent work.",
+    "This migration does not add public inheritance/protected-field access to safe typed SparseArray; erased SparseArrayBase and generic BasicIterator remain separately available for unsafe derived-container adaptation.",
+    "Native typedef/algorithm closure and all possible generic instantiations are not established by these finite runtime fixtures.",
+    "Raw allocation exhaustion remains a Rust panic rather than a mapped Standard_OutOfMemory, as documented by the prior base-engine receipt."
+  ],
+  "inventory_credit": 0,
+  "integration": "Coordinator merges into main, reruns relevant checks, then deletes worktree and merged branch. No PR and no archive."
+}

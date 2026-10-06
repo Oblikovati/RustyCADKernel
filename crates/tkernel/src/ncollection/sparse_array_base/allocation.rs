@@ -2,6 +2,13 @@
 use super::{SparseArrayBase, SparseArrayBlock};
 use std::{ffi::c_void, ptr::NonNull};
 impl SparseArrayBase {
+    // Rust Clone preserves retained table capacity even when no live item reaches its last block.
+    pub(crate) unsafe fn reserve_clone_table(&self, count: usize) {
+        if count > self.block_slots() {
+            unsafe { self.grow_table(count - 1) };
+        }
+    }
+
     pub(super) unsafe fn ensure_block(&self, number: usize) {
         if number >= self.block_slots() {
             unsafe { self.grow_table(number) };

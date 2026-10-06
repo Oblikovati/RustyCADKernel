@@ -50,16 +50,5 @@ fn first_sparse_key<T>(array: &SparseArray<T>, start: usize) -> Option<usize> {
     if start >= array.capacity() {
         return None;
     }
-    array
-        .blocks
-        .range(start / array.increment..)
-        .find_map(|(&number, block)| first_key_in_block(block, number * array.increment, start))
-}
-
-fn first_key_in_block<T>(block: &[Option<T>], beginning: usize, start: usize) -> Option<usize> {
-    block
-        .iter()
-        .enumerate()
-        .skip(start.saturating_sub(beginning))
-        .find_map(|(offset, slot)| slot.as_ref().map(|_| beginning + offset))
+    array.storage.first_key(start)
 }
