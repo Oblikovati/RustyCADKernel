@@ -242,3 +242,5 @@ mod iteration;
 mod method_contracts;
 
 mod mixed_binding;
+
+super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>,super::OrderedDataMapNode<K,V>);
