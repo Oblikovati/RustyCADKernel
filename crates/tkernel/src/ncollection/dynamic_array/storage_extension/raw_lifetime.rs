@@ -35,9 +35,8 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// The pointer must be aligned, writable for T, exclusively accessible, and uninitialized.
     /// Caller owns cleanup until initialized slots are published; no active reference may alias.
     pub unsafe fn construct_at(pointer: *mut T, construct: impl FnOnce() -> T) {
-        let value = construct();
         // SAFETY: the caller provides exclusive aligned storage with no owned live value.
-        unsafe { pointer.write(value) };
+        unsafe { crate::ncollection::raw_element_lifetime::construct_in_slot(pointer, construct) };
     }
     /// Ends one value's lifetime without freeing storage or changing initialized lengths.
     /// `unsafe { DynamicArrayStorageExtension::<i32>::destroy_at(pointer) };`
@@ -47,7 +46,7 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// when matching native destroyAt's noexcept contract.
     pub unsafe fn destroy_at(pointer: *mut T) {
         // SAFETY: caller guarantees a live value whose destructor will not run automatically.
-        unsafe { pointer.drop_in_place() };
+        unsafe { crate::ncollection::raw_element_lifetime::destroy_in_slot(pointer) };
     }
     /// Publishes exactly the initialized prefix without constructing, moving or dropping values.
     /// `unsafe { storage.set_used_size(3)? };`
