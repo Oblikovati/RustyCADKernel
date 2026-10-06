@@ -1,0 +1,110 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_CellFilter CellIndex coordinate storage and lookup index construction/hash",
+  "base_revision": "b19b0395f8a84046dfc02a970b7c870463ce2f8e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "Committed candidate; root integration and deletion pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/cell_filter.rs": "85adeb90c4cd4c15a324d5c78e73f7659daf123130da05b6822a15ebe7544775",
+    "crates/tkernel/src/ncollection/local_array.rs": "6edf45f7ecd9b2499c938679845c12e9c419845acef71b0df97488efdc801c6d",
+    "crates/tkernel/src/ncollection/local_array/trivial_move.rs": "953003820c1c70901d9221e337a44a9e5a5db7052d29534ccaabce6645ccd61c",
+    "crates/tkernel/src/ncollection/local_array/pointers.rs": "b53ee5ff4dba3abee29b13f70fc658b717bd51933c070b0b33c8c33b524f23b9",
+    "crates/tkernel/src/ncollection/cell_filter/setup.rs": "2fbd40d6726a174d59eee65473dd44ed41be4f38c57314a5f9a8a76e2d370797",
+    "crates/tkernel/src/ncollection/cell_filter/index_storage_tests.rs": "fa8867c546e046b8a29ac7ccaf9ee0fdc1bf42956d0b154eedf4d7c1cb8d7477",
+    "crates/tkernel/src/ncollection/cell_filter/cell_index.rs": "039bcc0a24c6214c572a4f59a8b0d0d434c8fed178ca5c06504e82d8518d024a",
+    "crates/tkernel/src/ncollection/cell_filter/indices.rs": "57efcecd04962514de9e4842da2f8c6432ce28191ec764e5e6f95fd4c4dfe199",
+    "crates/tkernel/src/ncollection/cell_filter/method_tests.rs": "3eaeb7bc11b3e6905a76212718b624e4e754439d1a70a6d9450fe1a88d25e51a",
+    "crates/tkernel/src/ncollection/cell_filter/fallible.rs": "5e51e2705e90ad972af85141a7f278cc02a9a881755dc3d26c4ba929e00704a9",
+    "crates/tkernel/src/ncollection/cell_filter/geometry.rs": "65e2895d62344182f21cff0b6cdf4e9e86d556d4447dd20f9246dadf2ee3af8e",
+    "crates/tkernel/src/ncollection/cell_filter/size_storage_tests.rs": "5ce51ded3701c473b4fef82d2ff1430578a189baa2ecba148c42163e6240fdb9",
+    "tools/oracle/tkernel_cell_index_storage.cxx": "b1411d088d0c9c034f22a9f664b438f3d47985b093ae03f2625b6a4ed35184cd",
+    "tools/oracle/tkernel_cell_index_storage.expected": "11df29c14047c4af4803607e3ec6f9b828b782cb8d9011db169e43305d80dcf5"
+  },
+  "source_scope": "CellFilter and LocalArray adapter source; not full compiler dependency closure.",
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx": "4638a170c2052d06c82a54e70c753e417d0e2ba9dd088cc871e5e54e8a14a25c",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
+  },
+  "artifacts": {
+    "unit": {
+      "path": "porting/runtime-evidence/cell-index-storage-unit.gz",
+      "sha256": "ca031e787093efded73f1825cf6d7c48efad6ac37e72be01f5a88265a76fb5ea"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/cell-index-storage-rust.gz",
+      "sha256": "b304dfa30b4baff786f760c3f109014bc47417cbb6da432574888887a72ad65e"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/cell-index-storage-miri.gz",
+      "sha256": "0408d6711831e30b954d34a4809724975608e4fc8514fc0719be6a67a98a6385"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/cell-index-storage-clippy.gz",
+      "sha256": "96073e6b1137230bbad7fdb45b12e538b96e2db79535a13ba9520f3401353ef6"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/cell-index-storage-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/cell-index-storage-native-original.gz",
+      "sha256": "92d6ea394302c56de7cfe5eac8ccbd3a40504370a8ae56e8cdb02523bac9d6f9"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/cell-index-storage-source.tar.gz",
+      "sha256": "e70f9fde3821c64a6160c4498914f120bfa374053f025346c9ed8875f9f33e5d"
+    }
+  },
+  "rust_integration_passed": 19,
+  "rust_unit_passed": 10,
+  "new_regression_tests": 3,
+  "strict_provenance_miri_passed": 10,
+  "native_original_passed": 9,
+  "original_runtime_names": [
+    "NCollection_CellFilterTest.AddInspect2D_SinglePoint",
+    "NCollection_CellFilterTest.AddInspect2D_Range",
+    "NCollection_CellFilterTest.ReversedRangesAreIgnored",
+    "NCollection_CellFilterTest.Remove2D",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterRemove",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterPurge",
+    "NCollection_CellFilterTest.AddInspect3D",
+    "NCollection_CellFilterTest.Reset",
+    "NCollection_CellFilterTest.InspectWithPurge"
+  ],
+  "native_probe_rows": 5,
+  "clippy_exit": 0,
+  "fmt_exit": 0,
+  "method_bindings": [
+    {
+      "native": "CellIndex typedef NCollection_LocalArray<int,10>",
+      "rust": "cell_filter::CellIndex(LocalArray<i32,10>)"
+    },
+    {
+      "native": "Cell(Point,Array1<double>) coordinate construction",
+      "rust": "CellIndex::from_point"
+    },
+    {
+      "native": "Cell(CellIndex) lookup coordinate copy",
+      "rust": "CellIndex::from_slice"
+    },
+    {
+      "native": "Cell::IsEqual and CellHasher operators coordinate domain",
+      "rust": "CellHash::equal / hash"
+    }
+  ],
+  "observations": [
+    "Actual filter keys now hold LocalArray<i32,10> instead of Vec<i32>; point lookup construction avoids a coordinate heap allocation for dimensions one through ten.",
+    "Five native rows compare inline-versus-heap storage, independent lookup copies, equality, hashes and every coordinate for dimensions1,3,10,11,24 using nonzero Array1 bounds and signed fractional coordinates.",
+    "Actual retained filter keys, removal and original nine native CellFilter assertions remain green; unequal dimensions compare unequal."
+  ],
+  "remaining_gaps": [
+    "This ports the coordinate-storage part of Cell constructors, not full Cell/ListNode ownership, move assignment or destructor phases. CellFilter still uses DataMap<CellIndex,List<T>> rather than native Map<Cell>.",
+    "LocalArray uses owned smallvec storage; object ABI and allocation backend/overhead equivalence are not established. Hashing still allocates temporary serialized bytes and recursive range traversal still uses Vec buffers.",
+    "Five hash rows are scoped to the pinned 64-bit little-endian oracle. Native zero-dimensional hash reads index[0] outside logical range; this fixture excludes that case and the existing Rust extension remains.",
+    "No arbitrary allocator callback/OOM/address-sensitive constructors or target destructor observation closure is claimed.",
+    "No original declaration mappings or global compiler API coverage credit is added."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "class_status": "partial"
+}
