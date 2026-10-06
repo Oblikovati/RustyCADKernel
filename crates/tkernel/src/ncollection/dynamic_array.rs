@@ -25,6 +25,7 @@ impl<T> Default for DynamicArray<T> {
 mod block_table;
 mod borrowed;
 mod copy_date;
+mod increment;
 mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
@@ -50,15 +51,13 @@ impl<T> DynamicArray<T> {
     pub fn with_increment(increment: usize) -> Self {
         Self::with_allocator(increment, None)
     }
+    /// Unsigned rounding overflow preserves a zero stride; reset with SetIncrement before element operations.
     /// Selects the allocator that owns every element block; `DynamicArray::<i32>::with_allocator(256,Some(alloc))`.
     pub fn with_allocator(increment: usize, allocator: Option<BaseAllocator>) -> Self {
-        Self {
-            blocks: LinearVector::default(),
+        Self::with_rounded_increment(
+            DynamicArrayStorageExtension::<T>::round_up_pow2(increment),
             allocator,
-            increment: increment.max(1).next_power_of_two(),
-            used: 0,
-            needs_tail_scan: false,
-        }
+        )
     }
     /// Keeps the resource of a typed allocator, as the native `allocator_type` constructor
     /// stores `theAllocator.Allocator()`; `DynamicArray::with_occ_allocator(256, &OccAllocator::default())`.
@@ -95,7 +94,7 @@ impl<T> DynamicArray<T> {
             return;
         }
         // OCCT keeps allocated blocks when changing the stride of an empty array.
-        self.increment = increment.max(1).next_power_of_two();
+        self.increment = DynamicArrayStorageExtension::<T>::round_up_pow2(increment);
     }
     /// Appends without moving existing elements; `array.append(42)`.
     pub fn append(&mut self, value: T) -> &mut T {
@@ -106,6 +105,7 @@ impl<T> DynamicArray<T> {
         self.append_constructed_with(|_| construct())
     }
     fn append_constructed_with(&mut self, construct: impl FnOnce(&mut Self) -> T) -> &mut T {
+        self.require_element_stride();
         let index = self.used;
         let block = index / self.increment;
         let offset = index % self.increment;
@@ -122,11 +122,13 @@ impl<T> DynamicArray<T> {
         &mut self.blocks[block][offset]
     }
     fn ensure_storage_for_index(&mut self, index: usize) {
+        self.require_element_stride();
         self.reserve_block_count(index / self.increment + 1);
     }
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
         let index = checked_index(index)?;
+        self.validate_element_index(index)?;
         self.blocks
             .as_slice()
             .get(index / self.increment)
@@ -139,6 +141,7 @@ impl<T> DynamicArray<T> {
         index: I,
     ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
+        self.validate_element_index(index)?;
         let error = self.index_error(index);
         self.blocks
             .as_mut_slice()
@@ -257,7 +260,7 @@ impl<T: Default> DynamicArray<T> {
 }
 impl<T: Clone> Clone for DynamicArray<T> {
     fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(self.increment, self.allocator.clone());
+        let mut copy = Self::with_rounded_increment(self.increment, self.allocator.clone());
         copy.copy_blocks_from(self);
         copy
     }
