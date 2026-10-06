@@ -7,6 +7,7 @@ impl<T> DynamicArray<T> {
         index: usize,
         construct: impl FnMut() -> T,
     ) -> &mut T {
+        self.require_element_stride();
         let block = index / self.increment;
         let offset = index % self.increment;
         assert!(

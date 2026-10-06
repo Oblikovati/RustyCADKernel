@@ -6,7 +6,7 @@ impl<T> DynamicArray<T> {
     /// Moves every block into a fresh array, leaving an empty source with its original stride.
     /// `let moved = DynamicArray::from_moved(&mut source);` invokes no item operations.
     pub fn from_moved(source: &mut Self) -> Self {
-        let empty = Self::with_increment(source.increment);
+        let empty = Self::with_rounded_increment(source.increment, None);
         std::mem::replace(source, empty)
     }
     /// Reports native size_t Size, without truncating to Length; `array.size() == array.len()`.
