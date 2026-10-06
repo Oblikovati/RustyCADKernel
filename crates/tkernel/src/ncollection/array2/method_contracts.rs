@@ -28,12 +28,15 @@ impl<T> Array2<'_, T> {
         self.col_lower = source.col_lower;
     }
     pub(super) fn check_rectangle(&self, source: &Array2<'_, T>) -> Result<(), ArrayError> {
-        if (self.rows, self.cols) == (source.rows, source.cols) {
+        self.check_dimensions(source.rows, source.cols)
+    }
+    pub(super) fn check_dimensions(&self, rows: usize, cols: usize) -> Result<(), ArrayError> {
+        if (self.rows, self.cols) == (rows, cols) {
             return Ok(());
         }
         Err(ArrayError::ShapeMismatch {
             expected: (self.rows, self.cols),
-            actual: (source.rows, source.cols),
+            actual: (rows, cols),
         })
     }
 }

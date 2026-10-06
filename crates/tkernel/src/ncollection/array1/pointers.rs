@@ -10,11 +10,16 @@ impl<T> Array1<'_, T> {
     }
     /// Returns writable storage; a shared view detaches first; `array.data_mut_ptr()`.
     pub fn data_mut_ptr(&mut self) -> *mut T {
-        let _ = self.as_mut_slice();
-        if matches!(&self.storage, Storage::Owned(values) if values.capacity() == 0) {
-            return std::ptr::null_mut();
+        if let Storage::Shared(values, detach) = self.storage {
+            self.storage = Storage::Owned(detach(values));
         }
-        self.as_mut_slice().as_mut_ptr()
+        match &mut self.storage {
+            Storage::Owned(values) if values.capacity() == 0 => std::ptr::null_mut(),
+            Storage::Owned(values) => values.as_mut_ptr(),
+            // A slice method would reborrow the whole buffer and invalidate earlier raw aliases.
+            Storage::Borrowed(values) => (&raw mut **values).cast::<T>(),
+            Storage::Shared(..) => unreachable!("shared storage must detach before mutable access"),
+        }
     }
     /// Returns the initialized range end, including empty borrowed buffers; `array.data_end_ptr()`.
     pub fn data_end_ptr(&self) -> *const T {
