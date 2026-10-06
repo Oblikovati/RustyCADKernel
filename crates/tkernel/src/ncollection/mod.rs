@@ -70,9 +70,9 @@ pub use base_list::{
 #[allow(unsafe_code)]
 mod list;
 #[allow(unsafe_code)]
-mod node_release;
-#[allow(unsafe_code)]
 mod list_node;
+#[allow(unsafe_code)]
+mod node_release;
 pub use list::List as AllocatorList;
 pub use list::{BaseListIterator, List, ListCursor, ListIter, ListIterMut};
 pub use list_node::{ListLinkNode, ListValueNode};
@@ -99,6 +99,8 @@ pub use base_map::{
     BaseMapStorage, BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut, IndexedCursorSource,
     IndexedCursorSourceMut, MapLinkNode,
 };
+mod data_map_node;
+pub use data_map_node::{DataMapNode, DataMapNodeOwner};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 

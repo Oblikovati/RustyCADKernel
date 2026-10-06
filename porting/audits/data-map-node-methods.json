@@ -1,0 +1,209 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "branch_validated_pending_main_integration",
+  "branch": "port/data-map-node",
+  "base_commit": "be5b81e2af6a09c5f75cd2effbec5e6041048f60",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "classes": [
+    "NCollection_DataMap::DataMapNode"
+  ],
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/data_map_node/borrowed.rs": "3ffff809417ce7a9af697b14c588c92677003a52cd0a52a3efbcb3ab751cf4c0",
+    "crates/tkernel/src/ncollection/data_map_node/iterator_node.rs": "ddbf1b4e72482e045d97d3e9f6757c0c72e442f3f25f95cee6f8cf4f32fc2019",
+    "crates/tkernel/src/ncollection/data_map_node/lifetime.rs": "f18e27d74c5f3c4cc03374a9a3a1d147223c1d2ea271cf18d475e843e4efb5ad",
+    "crates/tkernel/src/ncollection/data_map_node/owner.rs": "8c2d8b0ab7ef7f10a66cbccf41f459e7308b18c1d98fb609f23f210adf75c3d8",
+    "crates/tkernel/src/ncollection/data_map_node.rs": "3973eb1506e70748313a9d989a2c3a60e33eae84c2c62877380ee0c712395e2a",
+    "crates/tkernel/src/ncollection/list_node.rs": "5a1d08e4b34d5954d7d186ee143a9a30620c2563e2b2d05b332cd37f71240249",
+    "crates/tkernel/src/ncollection/mod.rs": "1d96fde9b87ee652686523537eb9ca9ca9921502ed579b183a269a98d3ed3fe6",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/tests/data_map_node_contracts/engine.rs": "087525cd82acb770c888cad062a12cd30122a7d9c5b94333a8d2034906083dc6",
+    "crates/tkernel/tests/data_map_node_contracts/fixture.rs": "9fed05bb34f2b66effa8f1debb12f729c08d25ca4704311deeedaa1831cb7a54",
+    "crates/tkernel/tests/data_map_node_contracts/lifetime.rs": "2ee78e4b170210913c0c6c2040b715335738c0e6cd98f7228df410ea5507b04b",
+    "crates/tkernel/tests/data_map_node_contracts.rs": "23781180c175ecc4e273e40982a87b54ab849ce310b0fdd3b14183f07edd2270",
+    "tools/oracle/tkernel_data_map_node_contracts.cxx": "b9b3383559fe31219475a9baa284948f3138e0eea693f82bda23f1e5b918c5b5",
+    "tools/oracle/tkernel_data_map_node_contracts.expected": "8c86766a82943221728c6d2186728dabeff3819f9856f3a9ae1465155c28663b"
+  },
+  "focused_rust_passes": 116,
+  "new_tests": 19,
+  "miri_passes": 116,
+  "miri_new_tests_passed": 19,
+  "native_oracle_rows": 11,
+  "native_oracle_rows_asserted_by_rust": 11,
+  "native_original_passed": 36,
+  "original_cases_joined": [
+    "NCollection_DataMapTest.IntegerKeys",
+    "NCollection_DataMapTest.BindingAndAccess",
+    "NCollection_DataMapTest.ChangeFind",
+    "NCollection_DataMapTest.Rebind",
+    "NCollection_DataMapTest.UnBind",
+    "NCollection_DataMapTest.Clear",
+    "NCollection_DataMapTest.Assignment",
+    "NCollection_DataMapTest.Find_NonExisting",
+    "NCollection_DataMapTest.IteratorAccess",
+    "NCollection_DataMapTest.ChangeValue",
+    "NCollection_DataMapTest.ExhaustiveIterator",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DataMapTest.STLAlgorithmCompatibility_Find",
+    "NCollection_DataMapTest.TryBind_NewKey",
+    "NCollection_DataMapTest.TryBind_ExistingKey",
+    "NCollection_DataMapTest.TryBind_MoveSemantics",
+    "NCollection_DataMapTest.TryBound_NewKey",
+    "NCollection_DataMapTest.TryBound_ExistingKey",
+    "NCollection_DataMapTest.TryBound_MoveSemantics",
+    "NCollection_DataMapTest.Emplace_NewKey",
+    "NCollection_DataMapTest.Emplace_ExistingKey",
+    "NCollection_DataMapTest.Emplaced_NewKey",
+    "NCollection_DataMapTest.Emplaced_ExistingKey",
+    "NCollection_DataMapTest.TryEmplace_NewKey",
+    "NCollection_DataMapTest.TryEmplace_ExistingKey",
+    "NCollection_DataMapTest.TryEmplaced_NewKey",
+    "NCollection_DataMapTest.TryEmplaced_ExistingKey",
+    "NCollection_DataMapTest.HasherConstructorCopy",
+    "NCollection_DataMapTest.HasherConstructorMove",
+    "NCollection_DataMapTest.CopyConstructorPreservesHasher",
+    "NCollection_DataMapTest.ItemsIteration",
+    "NCollection_DataMapTest.ItemsStructuredBindings",
+    "NCollection_DataMapTest.ItemsModifyValue",
+    "NCollection_DataMapTest.ConstItemsIteration",
+    "NCollection_DataMapTest.StandardIteratorContract",
+    "NCollection_DataMapTest.ItemsIteratorEquality"
+  ],
+  "clippy_exit_code": 0,
+  "fmt_exit_code": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/data-map-node-rust.gz",
+      "sha256": "79386cb83e9d10deacc462c03e664a6d6430e64f0f8f7e080c12193161f9940e"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/data-map-node-clippy.gz",
+      "sha256": "bdaff0be61fca1481d8216779d578888a17406794d55258a6c55e43d74dafcfd"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/data-map-node-miri.gz",
+      "sha256": "ade8f78e18890df1e73e21a6a02b4b1569055a7af97fdfcd8357c4c064d7f7ed"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/data-map-node-native.gz",
+      "sha256": "2d80e65801c92a05cde2560b1a3273990384d9c63eafd3a0895c76230300e868"
+    },
+    "legacy": {
+      "path": "porting/runtime-evidence/data-map-node-legacy.gz",
+      "sha256": "e1f0a029044666702692f2addc8bc10265bc8fd31fe333e5edc3c19812a19bad"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/data-map-node-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/data-map-node-source.tar.gz",
+      "sha256": "9725dfd5b34dda6e773ea584db1d122bf34cecc3a7538b3031a081354bc82988"
+    }
+  },
+  "method_bindings": [
+    {
+      "cpp_id": "012b0d41c2c6919457274a9e7cc77555281fae25cca2ab25f649a140f86bb5e9",
+      "cpp": "NCollection_DataMap::DataMapNode::Key",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::key"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "289f1f87278e9a6b0b9fe8353fe6966004d8304495f715acd43f327f4e4f76fc",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (const type-parameter-0-0 &, const type-parameter-0-1 &, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::from_refs",
+        "rustycad_tkernel::ncollection::DataMapNode::allocate_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "2d70d484ac491ed9edb3556c9d0defd96cb90b49158212fc3f5c579098e8c468",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (type-parameter-1-0 &&, struct std::in_place_t, class NCollection_ListNode *, type-parameter-1-1 &&...)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::construct",
+        "rustycad_tkernel::ncollection::DataMapNode::construct_ref",
+        "rustycad_tkernel::ncollection::DataMapNode::allocate_with"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "3dfed52896e30187b9f81f873b1fcbb88533e612ba8cfa450173434c8925e56c",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (type-parameter-0-0 &&, type-parameter-0-1 &&, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::new"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "5fc1a6dc9ca44da206992748d8e779aac4207b842b4b8916cd920d1a90acdfdc",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (type-parameter-1-0 &&, struct std::in_place_t, class NCollection_ListNode *, type-parameter-1-1 &&...)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::construct",
+        "rustycad_tkernel::ncollection::DataMapNode::construct_ref",
+        "rustycad_tkernel::ncollection::DataMapNode::allocate_with"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "88edeaf5301c024fb027b264347c41fe7fcfc5bec41dd855428d62dfb5346799",
+      "cpp": "NCollection_DataMap::DataMapNode::delNode",
+      "signature": "void (class NCollection_ListNode *, class opencascade::handle<class NCollection_BaseAllocator> &) noexcept",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::del_node"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "976f5621defc55818253c6ec1f52004cd4fc3673d4ef5db52cefb66a2ce9742f",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (type-parameter-0-0 &&, const type-parameter-0-1 &, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::from_value_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    },
+    {
+      "cpp_id": "df50615b5b8b6e8e4e94ed870b35a0721dc2e85124d117c0a9cedd8f1a2ae838",
+      "cpp": "NCollection_DataMap::DataMapNode::DataMapNode",
+      "signature": "void (const type-parameter-0-0 &, type-parameter-0-1 &&, class NCollection_ListNode *)",
+      "rust_candidates": [
+        "rustycad_tkernel::ncollection::DataMapNode::from_key_ref"
+      ],
+      "status": "candidate_pending_rustdoc_resolution_and_scope_audit"
+    }
+  ],
+  "implementation": [
+    "Public repr(C) DataMapNode<K,V> contains the real ListValueNode<V> first, which contains the actual MapLinkNode prefix. Keys and values are owned, not aliases to a mock map.",
+    "Four borrowed/owned constructor families plus borrowed/owned emplacement factories construct the value base before the key. A key construction panic destroys the already-created value.",
+    "Explicit ManuallyDrop fields and a local value cleanup guard destroy key before inherited value without moving either object during destruction. If key Drop panics, value cleanup still executes.",
+    "DataMapNodeOwner transfers allocator-api2 construction storage to a raw typed owner and reuses shared release_typed_node for destruction/deallocation. Both safe owner Drop and native del_node free allocations when one destructor panics.",
+    "The shared deallocation guard was integrated from main be5b81e2, avoiding another duplicate allocator-release implementation.",
+    "Allocation factories acquire typed storage before invoking either value or key factory; failed factories release the still-uninitialized node allocation.",
+    "BasicMapNode/BasicMapNodeMut projections drive actual BaseMapStorage bucket chains and existing BaseMapBasicIterator. Integration tests traverse two real allocated nodes and mutate mapped values in place."
+  ],
+  "native_fixture_scope": [
+    "The fixture traces value/key copy order, node destruction order, construction failure cleanup, allocator live count during each copy, real prefix identity, inherited links and values.",
+    "Move construction in the fixture transfers a tracked resource and leaves a source with no tracked resource; moved-from source destruction deliberately emits no event. Rust owned arguments transfer ownership without C++ user-defined move hooks. This finite fixture does not prove every possible custom C++ move constructor.",
+    "Rust closure factories implement in-place construction; no claim of compiler closure over every C++ variadic argument pack is made."
+  ],
+  "safety_extensions": [
+    "Rust Drop panics are outside native noexcept delNode valid behavior. Value cleanup and allocation guards make the Rust API safe for a single panicking subobject destructor; simultaneous key and value destructor panics retain Rust double-panic abort semantics.",
+    "Over-aligned Rust values and zero-sized keys use correctly aligned typed allocation. The native fixture only exercises ordinary native alignment.",
+    "No broad Send/Sync implementation is introduced for public raw linked nodes or node owners; successor pointers remain non-owning."
+  ],
+  "remaining_gaps": [
+    "Safe DataMap and Map still use the prior Vec bucket/AllocatedBox entry representation. Their atomic delegation to BaseMapStorage plus this real DataMapNode remains the next slice; original DataMap tests here are compatibility regressions, not evidence that safe DataMap already delegates.",
+    "DataMap allocator replacement currently occurs before clearing old nodes, contrary to native callback observation order; fix during delegation with a native observer fixture.",
+    "DataMap UnBind currently decrements count after dropping its entry, while native decrements and unlinks before destruction; fix during delegation and check callback-visible counts.",
+    "Exact declaration binding, overload/template scope and downstream compiler proof remain pending. This receipt grants no global inventory credit."
+  ],
+  "inventory_credit": 0,
+  "integration": "Coordinator merges to main, reruns checks, then deletes worktree and merged branch. No archive or PR."
+}
