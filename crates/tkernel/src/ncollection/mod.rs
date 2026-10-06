@@ -19,7 +19,10 @@ pub use vector_component::{
     VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
 };
 mod vector;
-pub use vector::{ElementCast, Vec2, Vec3, Vec4, VectorArithmeticComponent, VectorScalarDivision};
+pub use vector::{
+    ElementCast, Vec2, Vec3, Vec4, VectorArithmeticComponent, VectorInterpolationComponent,
+    VectorNegationComponent, VectorProductDifference, VectorScalarDivision,
+};
 mod square_matrix;
 pub use square_matrix::MatrixScalar;
 mod mat3;
@@ -60,7 +63,10 @@ pub use occ_allocator::{AllocatorTypes, AllocatorVector, OccAllocator, StandardA
 
 #[allow(unsafe_code)]
 mod base_list;
-pub use base_list::{BaseListRawIterator, BaseListStorage, DelListNode};
+pub use base_list::{
+    BaseListBasicIterator, BaseListRawIterator, BaseListStorage, BasicListNode, BasicListNodeMut,
+    DelListNode,
+};
 mod list;
 #[allow(unsafe_code)]
 mod list_node;
@@ -69,12 +75,15 @@ pub use list::{BaseListIterator, List, ListCursor, ListIter, ListIterMut};
 pub use list_node::{ListLinkNode, ListValueNode};
 
 mod sparse_array;
-pub use sparse_array::{SparseArray, SparseArrayCursor, SparseArrayCursorMut};
+pub use sparse_array::{
+    SparseArray, SparseArrayCursor, SparseArrayCursorMut, SparseArrayLegacyCursor,
+};
 
 mod sequence;
 pub use sequence::{
-    BaseSequence, BaseSequenceIterator, BaseSequenceRawIterator, DelSeqNode, SeqNode, Sequence,
-    SequenceCursor, SequenceIter, SequenceIterMut, SequenceNode,
+    BaseSequence, BaseSequenceBasicIterator, BaseSequenceIterator, BaseSequenceRawIterator,
+    BasicSequenceNode, BasicSequenceNodeMut, DelSeqNode, SeqNode, Sequence, SequenceCursor,
+    SequenceIter, SequenceIterMut, SequenceNode,
 };
 mod h_sequence;
 pub use h_sequence::HSequence;

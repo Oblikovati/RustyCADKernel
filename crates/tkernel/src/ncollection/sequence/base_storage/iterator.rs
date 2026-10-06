@@ -3,8 +3,10 @@ use super::{BaseSequence, SeqNode};
 /// Raw BaseSequence::Iterator links; `BaseSequenceRawIterator::new(&base, false)`.
 #[derive(Clone, Copy, Debug)]
 pub struct BaseSequenceRawIterator {
-    pub(super) current: *mut SeqNode,
-    previous: *mut SeqNode,
+    /// Native protected current link for derived cursor composition.
+    pub current: *mut SeqNode,
+    /// Native protected previous link for derived cursor composition.
+    pub previous: *mut SeqNode,
 }
 impl Default for BaseSequenceRawIterator {
     fn default() -> Self {

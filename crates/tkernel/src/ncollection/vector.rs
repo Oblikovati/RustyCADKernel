@@ -5,6 +5,12 @@
 //! contiguous component array. The earlier `change_data` component-reference adapter
 //! stays available for existing callers.
 mod arithmetic;
+mod boolean;
+mod constants;
+mod negation;
+mod product_difference;
+pub use negation::VectorNegationComponent;
+pub use product_difference::{VectorInterpolationComponent, VectorProductDifference};
 mod arithmetic_component;
 pub use arithmetic_component::VectorArithmeticComponent;
 mod conversion;
@@ -17,7 +23,7 @@ pub use scalar_division::VectorScalarDivision;
 
 /// Two scalar components; `Vec2::new(1.0_f64,2.0)`.
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
 pub struct Vec2<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
@@ -26,7 +32,7 @@ pub struct Vec2<T> {
 }
 /// Three scalar components; `Vec3::new(1.0_f64,2.0,3.0)`.
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
 pub struct Vec3<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
@@ -37,7 +43,7 @@ pub struct Vec3<T> {
 }
 /// Four scalar components; `Vec4::new(1.0_f64,2.0,3.0,1.0)`.
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
 pub struct Vec4<T> {
     /// First component; `vector.x = 1.0`.
     pub x: T,
@@ -111,10 +117,17 @@ where
         Self::from_vec2(planar, ElementCast::cast(0_i32))
     }
 }
-impl<T: Copy + Default> Vec4<T> {
+impl<T: Copy> Vec4<T>
+where
+    i32: ElementCast<T>,
+{
+    /// Uses the native Vec3 constructor's omitted W argument; `Vec4::from_vec3_zero(Vec3::new(1,2,3)).w == 0`.
+    pub fn from_vec3_zero(spatial: Vec3<T>) -> Self {
+        Self::from_vec3(spatial, 0_i32.cast())
+    }
     /// Extends a planar vector with zero Z and W, as `NCollection_Vec4(Vec2)`;
     /// `Vec4::from_vec2(Vec2::new(1,2)).z == 0`.
     pub fn from_vec2(planar: Vec2<T>) -> Self {
-        Self::new(planar.x, planar.y, T::default(), T::default())
+        Self::new(planar.x, planar.y, 0_i32.cast(), 0_i32.cast())
     }
 }

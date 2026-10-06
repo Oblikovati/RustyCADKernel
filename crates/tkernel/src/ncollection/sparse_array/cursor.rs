@@ -84,6 +84,11 @@ impl<'a, T> SparseArrayCursor<'a, T> {
         self.position.index
     }
 
+    /// Returns the native Index alias; `cursor.index() == cursor.key()`.
+    pub fn index(&self) -> usize {
+        self.key()
+    }
+
     /// Advances to the next occupied slot (`Next`); exhaustion is stable; `cursor.next()`.
     pub fn next(&mut self) {
         self.position.advance(self.array);

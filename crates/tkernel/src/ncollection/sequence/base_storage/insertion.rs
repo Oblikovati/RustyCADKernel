@@ -1,3 +1,4 @@
+mod self_splice;
 use super::{BaseSequence, BaseSequenceRawIterator, SeqNode};
 use crate::standard::Failure;
 

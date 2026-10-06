@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation checkpoint integrated on main at 68f95c49cc4917598419389c95e78342f2bdc4ff; later work is tracked separately.",
+  "integration_status": "Generic iterator, SparseArray and vector method contracts validated on main; current draft awaits integration commit.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
-    "passed": 13997,
+    "receipt": "porting/audits/foundation-generic-checkpoint.json",
+    "passed": 14044,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -174,74 +174,38 @@
   "latest_foundation_run_note": "The foundation-only 7414 count and original class entries are historical. current_draft_checkpoint records the newer frozen draft source and all workspace checks; subsequent edits require a new receipt.",
   "additional_allocator_miri_passes": 3,
   "current_draft_checkpoint": {
-    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
-    "sha256": "a450d60cceba4163238e4692e6a290afc0200476f75939c5dc683b73c26226bb",
+    "receipt": "porting/audits/foundation-generic-checkpoint.json",
+    "sha256": "a36799c254629336cc626f5f435082cbf67fd42b170e5878ff72c3b18725e391",
     "runtime": {
-      "workspace_passed": 13997,
+      "workspace_passed": 14044,
       "workspace_failed": 0,
       "workspace_ignored": 70,
-      "workspace_groups": 1281,
-      "new_miri_integration_passes": 122,
-      "source_inputs": 9479,
+      "workspace_groups": 1286,
+      "new_miri_integration_passes": 47,
+      "source_inputs": 9515,
       "source_inputs_after_run_identical": true,
       "strict_clippy_exit": 0,
-      "strict_clippy_scope": "rustycad-tkernel --all-targets",
-      "workspace_clippy_exit": 101,
+      "strict_clippy_scope": "workspace --all-targets",
       "format_exit": 0,
       "compiler_exit": 0,
-      "evidence_tool_tests": 16,
       "joined_original_runtime_cases": 982
     },
     "scoped_method_receipts": [
       {
-        "path": "porting/audits/default-hasher-float-contracts-draft.json",
-        "sha256": "1afdc1c32316229e72d57f3ce54980d945d9477a05ca0083f416c5933c9602ee",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
+        "path": "porting/audits/base-list-basic-iterator-method-contracts.json",
+        "sha256": "d3a3f647800960329fca4c297ed7400cacc3f1bcce14b32d5c7e3bdfd9cec693"
       },
       {
-        "path": "porting/audits/default-hasher-enum-contracts-draft.json",
-        "sha256": "6ff4a255304da655fc862fb81f61eefc692e102681e2415420e3bb5b17112006",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
+        "path": "porting/audits/base-sequence-generic-methods.json",
+        "sha256": "0ff7ec7b70bd0d534e383377cb5b799b206db2d662091a85dc69e3144a653bd3"
       },
       {
-        "path": "porting/audits/base-map-storage-method-contracts.json",
-        "sha256": "c9344c5acd5a34d13c11a23b6265a61d2171dece2036f64909cdf276646223ad",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
+        "path": "porting/audits/sparse-array-method-contracts.json",
+        "sha256": "e43c777edc2d0559e197a38a04595951252e68a764d56760e193c0ba3f345c42"
       },
       {
-        "path": "porting/audits/base-map-basic-iterator-method-contracts.json",
-        "sha256": "dd36d56bce51f22a7c1c1be04f3b43d4cb2ec2d3d608e912beb68741de8caac9",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/base-sequence-method-batch.json",
-        "sha256": "391c8aa668a2d91c3d66b9a8dbb3ef4481c942fe0af4068391cdf63234bd608f",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/sequence-node-method-batch.json",
-        "sha256": "5e31c279daf4177e25d3b3612c10805b671d9f9ed91ad25cd84620746fe176f4",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/base-sequence-storage-batch.json",
-        "sha256": "64690475bfb4576b2ae37aac5cc1f7908856c330e2c46ea458bfbe40efea2f54",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/base-list-node-method-contracts.json",
-        "sha256": "7c9db9908e651a405cdd0647af39d56b3222b56572904174505d71d5154bce6c",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/base-list-storage-method-contracts.json",
-        "sha256": "fd2c4d2748001a8b8f35cc928d613caf856f226f2f02c9fa28426fc8144d41aa",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
-      },
-      {
-        "path": "porting/audits/vec2-method-contracts-draft.json",
-        "sha256": "8bddaff6d25db2158010792eed8558718b474b60f65b2c2a410d2c99185ccb8a",
-        "status": "partial method contracts; historical scoped source hashes remain scoped"
+        "path": "porting/audits/vec-native-tail-method-contracts.json",
+        "sha256": "c825788d83e53df4a65d2c4eb51f383facb8f0d52d2e29c2ee250409b31e3e77"
       }
     ]
   },

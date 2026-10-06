@@ -81,9 +81,9 @@ impl<T: MatrixScalar + Neg<Output = T>> Mat4<T> {
         let rows: [Vec4<T>; 4] = std::array::from_fn(|row| self.get_row(row));
         let mut adjoint: Self = Self::default();
         adjoint.set_row(0, cross4(rows[1], rows[2], rows[3]));
-        adjoint.set_row(1, cross4(-rows[0], rows[2], rows[3]));
+        adjoint.set_row(1, cross4(negated_components(rows[0]), rows[2], rows[3]));
         adjoint.set_row(2, cross4(rows[0], rows[1], rows[3]));
-        adjoint.set_row(3, cross4(-rows[0], rows[1], rows[2]));
+        adjoint.set_row(3, cross4(negated_components(rows[0]), rows[1], rows[2]));
         adjoint
     }
 }
@@ -100,5 +100,15 @@ fn cross4<T: MatrixScalar + Neg<Output = T>>(a: Vec4<T>, b: Vec4<T>, c: Vec4<T>)
         a.x * d1 - a.z * d4 + a.w * d5,
         -a.x * d2 + a.y * d4 - a.w * d6,
         a.x * d3 - a.y * d5 + a.z * d6,
+    )
+}
+
+// Keep Mat4's existing scalar Neg contract independent of vector template policy adapters.
+fn negated_components<T: MatrixScalar + Neg<Output = T>>(row: Vec4<T>) -> Vec4<T> {
+    Vec4::new(
+        row.x.vector_negate(),
+        row.y.vector_negate(),
+        row.z.vector_negate(),
+        row.w.vector_negate(),
     )
 }

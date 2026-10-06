@@ -81,3 +81,7 @@ macro_rules! vector_conversion {
 vector_conversion!(Vec2, [x, y]);
 vector_conversion!(Vec3, [x, y, z]);
 vector_conversion!(Vec4, [x, y, z, w]);
+
+// Preserve the existing Rust i128/u128 vector extensions when constructing native zero constants.
+element_casts!(i32 => i128);
+element_casts!(i32 => u128);

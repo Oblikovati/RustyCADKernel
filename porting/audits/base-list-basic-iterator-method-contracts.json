@@ -1,0 +1,4015 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_BaseList::BasicIterator arbitrary node projection and const dispatch",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "status": "validated method slice; full class parity remains partial",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_list.rs": "ec4da73773fb2a24d91d99865e5525ff1a38268e4f80b299410ee401b827442a",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator.rs": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+    "crates/tkernel/src/ncollection/base_list/basic_node.rs": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+    "crates/tkernel/src/ncollection/mod.rs": "0501ff430311316e6aa76a23e88b65e876601bfb65b4d36a6bdaae1beae56f37",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts.rs": "eb50cdf7f5476485eeb884ceb8977d32e6ffdbe8581d25fb4b11bd26de44fe9e",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts/fixture.rs": "025215b3390fcdfde37307bd3cb7f9192aceb75b33a2eaa795289b4141d5cb00",
+    "tools/oracle/tkernel_base_list_basic_iterator_contracts.cxx": "870a89e27735da542ac35e4fe3b420694c7423049cb2d1198fde4f59298ac0fa",
+    "tools/oracle/tkernel_base_list_basic_iterator_contracts.expected": "5b810c8be6c14c9737e66091a7aa5fcf010e798b9a91c5f01436b85d379bca6a"
+  },
+  "upstream_sha256": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43",
+  "native_declaration_candidates": [
+    {
+      "id": "0aa00c5c03cec1aec7202e74641baa6086e6918f3435ec3f349960818f364863",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "CXXConstructor",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "111190e9c08f8ebf58e0039d02a6652d960f8146ad5a0b02e5bea2010c9833f1",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Initialize",
+      "kind": "CXXMethod",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "14ca903123a4c595374356980a10654ac8552fd18b3b5cd06c4659773affa365",
+      "qualified_name": "NCollection_BaseList::BasicIterator::More",
+      "kind": "CXXMethod",
+      "signature": "bool () const noexcept"
+    },
+    {
+      "id": "15803841d92793dd39bc4e491bc077da0cd6f3127ed49f542f48697b56fcc50c",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Initialize",
+      "kind": "FunctionTemplate",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "18bd65f08c121a57b66d284c2e6b5155cf6d5cf9910f1d70b349a0514e4fae1c",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "FunctionTemplate",
+      "signature": "void (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept"
+    },
+    {
+      "id": "1bff44bb84ef8d5ee3e72fd45d32b9f5fb73501dbbc93f62f45ec526e2d0e892",
+      "qualified_name": "NCollection_BaseList::BasicIterator::ChangeValue",
+      "kind": "CXXMethod",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type () const noexcept"
+    },
+    {
+      "id": "1c32fdc0bb7e22638a5373c9a19aefedbd13aea87d2835b380bd355cb4fc5ca4",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator!=",
+      "kind": "FunctionTemplate",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "289f658f218495d454b1db946328afa7a61ca601bb0660eee6c688f35a5951f9",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator*",
+      "kind": "CXXMethod",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type () const noexcept"
+    },
+    {
+      "id": "381e0a6971b770b04a06c6115076cdd5c236c4a2e4d627aa1830e711b6f08558",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Iterator",
+      "kind": "CXXMethod",
+      "signature": "const NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &() const noexcept"
+    },
+    {
+      "id": "3bab747c9eb746375aa0024df71c6df5de179a426d4be4056691be1767f471cb",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator++",
+      "kind": "CXXMethod",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> (int) noexcept"
+    },
+    {
+      "id": "4574f3bb0db681b3e6fc55ac59c57dabcccc6d8116d4494711a968bca546b348",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "FunctionTemplate",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "57bec13067a1a81fe74e75eb7696b776cc32fd047dbc77f2d0dac97bd381da14",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator==",
+      "kind": "FunctionTemplate",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "59cb15a8219446704807d0346d3ead20928e387d5882d6e66af4a59c87b2cc12",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Initialize",
+      "kind": "FunctionTemplate",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "5a33d8ca8c4da37c5c05f337504288ded278599b43c12902d1a3f35501572fc8",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Value",
+      "kind": "CXXMethod",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type () const noexcept"
+    },
+    {
+      "id": "67b17825739975517785b17ad8b787b9cac9b1fcf59fe2656cf24beea6e615ed",
+      "qualified_name": "NCollection_BaseList::BasicIterator::ChangeValue",
+      "kind": "FunctionTemplate",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type () const noexcept"
+    },
+    {
+      "id": "6bba1261e92c707ce013b58fdb79bcac4b4ed4736e4d1d443aa695d0f31ebb19",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Init",
+      "kind": "FunctionTemplate",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "7070446a2cdfb1ceabe438b9918cb03da451060e9cd7a1e2b29d22069a6faa3d",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &(const NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &) noexcept"
+    },
+    {
+      "id": "79d858ea4f2535926c7b960fa55f9958aabd94408bfb6c4ebec449991a0886f3",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &(const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept"
+    },
+    {
+      "id": "82570f0f6a419adc09024947c6f54dfbfb3fc568cc9aeccd876f70e447819dd3",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator!=",
+      "kind": "CXXMethod",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "8b82260c63f3a5ebe635a605f9824b3ca90471754328a1d16dd958826ffea5a5",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "FunctionTemplate",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "8f7b0bbba7c5ad92e65a56a4f4ca326578a9d2f8916a0c4f932f70928fbcf50e",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Initialize",
+      "kind": "CXXMethod",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "a729563d7aa0372300229a1469bd65ab29de9232aa6341ab13b4de7377e3d27d",
+      "qualified_name": "NCollection_BaseList::BasicIterator::IsEqual",
+      "kind": "CXXMethod",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "aecda403afcade696df7e6071399e5174fc02ce1bfcd31e5f48c9a897709ab7f",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator->",
+      "kind": "CXXMethod",
+      "signature": "std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type () const noexcept"
+    },
+    {
+      "id": "b1b3e8c9952fb14285f9216ec4a05d988b57af0358cda3796345282ff8a1e465",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator=",
+      "kind": "FunctionTemplate",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &(const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept"
+    },
+    {
+      "id": "b1fd43e60d6109deb15a7768ac5ee6103836df637de66eedcdf78ab0dab8a3c5",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "CXXConstructor",
+      "signature": "void (const NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &) noexcept"
+    },
+    {
+      "id": "b5b41b0dd9f4fb1775614a61eb347c2401236300f58680a331878fdb12d079b9",
+      "qualified_name": "NCollection_BaseList::BasicIterator::ChangeIterator",
+      "kind": "CXXMethod",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &() noexcept"
+    },
+    {
+      "id": "bd4fe564602bfc71699b701223a76f5c317fff6857b249745df76c812a269cc2",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Init",
+      "kind": "CXXMethod",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "c002aa6df2e2391bbe45e7ac7297b4be03ad10978a29027d5b70c5ac95cd0d0f",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "CXXConstructor",
+      "signature": "void () noexcept"
+    },
+    {
+      "id": "c0455f4f1367c667cebd69f7d1b79c46c44d9ce74e8ff99855fe84e5056fa81e",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator==",
+      "kind": "CXXMethod",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "e6521969258932a07e8d3da0f8779e0a692c71a24d6140db3b33c692e532eba8",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Next",
+      "kind": "CXXMethod",
+      "signature": "void () noexcept"
+    },
+    {
+      "id": "eeed45d920feb60331f9dbdab19b87cec1eac24f6f83603cd963d2fe3dcb732a",
+      "qualified_name": "NCollection_BaseList::BasicIterator::IsEqual",
+      "kind": "FunctionTemplate",
+      "signature": "bool (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, value-parameter-1-0> &) const noexcept"
+    },
+    {
+      "id": "f181ef95f16c63917823025ed68909743f54033915fba230a839852746fa0e44",
+      "qualified_name": "NCollection_BaseList::BasicIterator::operator++",
+      "kind": "CXXMethod",
+      "signature": "NCollection_BaseList::BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &() noexcept"
+    },
+    {
+      "id": "f4a73b8966e638be3a1a07eda8af324c1f5815a9c04f7fbe8f26dca123ae2c84",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Init",
+      "kind": "CXXMethod",
+      "signature": "void (const class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "f77b7196fcadf2d72a57041b4a2e14210514d6f33ebf224581d68a2a8c09407c",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "CXXConstructor",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "faf890122c909f038334cfd38ea2c8adc2170ec87252fa68d55029e1b253c2c5",
+      "qualified_name": "NCollection_BaseList::BasicIterator::Init",
+      "kind": "FunctionTemplate",
+      "signature": "void (class NCollection_BaseList &) noexcept"
+    },
+    {
+      "id": "feadf6a40af6b7b168e54b401cc5c023d65ab0726ef13c1c32d0927e3e73b60f",
+      "qualified_name": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>",
+      "kind": "CXXConstructor",
+      "signature": "void (const NCollection_BaseList::BasicIterator<type-parameter-0-0, type-parameter-0-1, false> &) noexcept"
+    }
+  ],
+  "native_candidate_note": "Template wrappers and child declarations are separate rows, not distinct method counts.",
+  "compiler_reachable_candidates": [
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator",
+      "kind": "struct",
+      "signature": {
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "MUTABLE",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": "false"
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "shape": {
+          "kind": "plain",
+          "field_count": 2,
+          "has_stripped_fields": false
+        }
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "canonical_type_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+      "declaration_sha256": "1fc455a8a3b7af79eb83e7a62379663641255bbbafcfbfa2173a45c683968304",
+      "reexport": {
+        "source": "base_list::BaseListBasicIterator",
+        "is_glob": false,
+        "source_file": "crates/tkernel/src/ncollection/mod.rs",
+        "source_sha256": "0501ff430311316e6aa76a23e88b65e876601bfb65b4d36a6bdaae1beae56f37",
+        "source_status": null,
+        "canonical_target_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+      }
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::raw",
+      "kind": "struct_field",
+      "signature": {
+        "resolved_path": {
+          "path": "super::BaseListRawIterator",
+          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::cursor::BaseListRawIterator",
+          "args": null
+        }
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "declaration_sha256": "6af03937fb634cfc272ed7f8ba15ec722413d65b83ba1dea55eda7a1ad6abcc4"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::dereference",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "5485c78e0828dea00cd3ba332686d72b105a5e0949a68222238287ac17b921eb"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "5ed9b6fd407a7ffc9017763814c7534c2b3835885186272e7e60c2fd6f05b098"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::arrow",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "raw_pointer": {
+              "is_mutable": false,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "9547e00503b07ed71f5aed11a2d61ebb384aaf0f0632d550ceec219855fef7fc"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::dereference",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNodeMut",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "d9578678b7a421641f5d9b7f7869a723b8c582c3060dd626b9eb1bc12d24187c"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNodeMut",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "3389372f54f9539ffad1e57a37c1bbd2365a65d992fe782de03bcf87f6269334"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::change_value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNodeMut",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "25b790aec2096e9ac811f08f6ae68b6e30e5a8812b55ed30491ea5d5d1f0745f"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::arrow",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "N"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+      "source_sha256": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNodeMut",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "604203a8d46783028c058864af3cebffa30f2fa004e9d1c061d6c17897b77512"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::from_raw",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "raw",
+              {
+                "resolved_path": {
+                  "path": "BaseListRawIterator",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::base_list::cursor::BaseListRawIterator",
+                  "args": null
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "67ed0f82de8f6ee20535b885615602a5333995b9c1b1192b1388236232f2607e"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::assign",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "ad9ab906ecfb3b0da1deaaf095dca8649f3d9df3fe02affde88d7b76e9326fc0"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::assign_self",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "1b2df02a9cd9532faca541c74a376fcc08b5c63e8d10dd85aa39121c086b52b5"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::more",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "aa4a47652e2d07c4423f2e7201cb897d8ab73f04d151830e4845f212e2e19492"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::iterator",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "71b9fd9bf86a5d0b5960cf0279d8026a2c970fcab6a1afcacb0972b2e90946e1"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::change_iterator",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "6f68dfa19762b8baf65babec3dd936caa9c44701c82f9650d466fc2de7f7ff3a"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::is_equal",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "O",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "f408cd5aae4e97a538be7031c16d8b8cb85b6b3cbc2e87298c4304bb40facb58"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::prefix_increment",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "606c33767650788a148156d3010c860058d134b55669bcc2ca39bdd5a4d9a121"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::postfix_increment",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "06fb7184f0724c1f233305bcaa4f5fa702a6ed784dea32ba8b3d0fc3eddbd6ea"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::next",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "80baae06df4f6448b4ac902de44da0ea4fe0d1035252e568e1a82c3b22be1745"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "949d63d5f946394f66fa15b0820756401f7f03b399d2a584933b29629e3b45e4"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "b0d3db548c1a2ed4b54185ca5f57333cb42f5b198456c693b675674e981a5812"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "ab16499a8982894868a7a87d87a41897398c152d26957da6d2d870b63143a218"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "eb2e3b6adca1a4596b48915b789403d74e03a4a3c53b2f6d6044caf840659a0c"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "d33dfd8fbe0f4b1907fcbb08fbf400142a08f901216fd92831a3fb2630155ea5"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "storage",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListStorage",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::BaseListStorage",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "true",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "a4441929f44370677ddb6f0c5a342bd2b5cc07369fcd12ec5c2bf057602871df"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::from_mutable",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "true",
+                                "value": null,
+                                "is_literal": true
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "724dd6a2edb8fb68f4ce899a9a40c79b72fb36b4af901a89391e661d29f65901"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::assign_mutable",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "true",
+                                "value": null,
+                                "is_literal": true
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "false",
+                      "value": null,
+                      "is_literal": true
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "9b78aef868d547a1789427ae6e1d39c249847fb8083dde91af24dd4da4ebbe77"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::clone::Clone>::clone",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "Clone",
+          "resolved_item_path": "core::clone::Clone",
+          "args": null
+        }
+      },
+      "declaration_sha256": "a4a7e758f4e867a5f77b40802446107de1644f5eb5c80b29c0e2b81f87f0074f"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::default::Default>::default",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [],
+          "output": {
+            "generic": "Self"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "Default",
+          "resolved_item_path": "core::default::Default",
+          "args": null
+        }
+      },
+      "declaration_sha256": "77cc671e528dab9565cbb105d64ca886a67256e5fd9b7b41eee64a73be758016"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNode",
+      "kind": "trait",
+      "signature": {
+        "is_auto": false,
+        "is_unsafe": true,
+        "is_dyn_compatible": false,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "bounds": [
+          {
+            "trait_bound": {
+              "trait": {
+                "path": "Sized",
+                "resolved_item_path": "core::marker::Sized",
+                "args": null
+              },
+              "generic_params": [],
+              "modifier": "none"
+            }
+          }
+        ],
+        "implementations": [
+          7608
+        ]
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "canonical_trait_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+      "declaration_sha256": "7159912d6606a0c7194355a25b5a7f7f6d6f3c62515f6d34f1b8c1339166534d",
+      "reexport": {
+        "source": "base_list::BasicListNode",
+        "is_glob": false,
+        "source_file": "crates/tkernel/src/ncollection/mod.rs",
+        "source_sha256": "0501ff430311316e6aa76a23e88b65e876601bfb65b4d36a6bdaae1beae56f37",
+        "source_status": null,
+        "canonical_target_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+      }
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNode::Item",
+      "kind": "assoc_type",
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "bounds": [],
+        "type": null,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "declaration_sha256": "3cd1636af82624cb601ac7414545a157b4e0a5b8037b2f479ef9d8840578737d"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNode::from_list_link",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "link",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "ListLinkNode",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListLinkNode",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": false,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "declaration_sha256": "d6c4c44d9b8775766ddff2aaa11818486fd1e7f5bd3d866f9a7810ffa90d74c5"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNode::list_value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "Self"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": false,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "declaration_sha256": "9279256809a774feb2df73cf61b783b54227e281ebcd09f8a2d04f293f0a931e"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNodeMut",
+      "kind": "trait",
+      "signature": {
+        "is_auto": false,
+        "is_unsafe": false,
+        "is_dyn_compatible": false,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "bounds": [
+          {
+            "trait_bound": {
+              "trait": {
+                "path": "BasicListNode",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                "args": null
+              },
+              "generic_params": [],
+              "modifier": "none"
+            }
+          }
+        ],
+        "implementations": [
+          7612
+        ]
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "canonical_trait_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+      "declaration_sha256": "aedf39e304ce17ab4ff3024098a3622bdb549dd6aea731bbcf25fdb09c1657d0",
+      "reexport": {
+        "source": "base_list::BasicListNodeMut",
+        "is_glob": false,
+        "source_file": "crates/tkernel/src/ncollection/mod.rs",
+        "source_sha256": "0501ff430311316e6aa76a23e88b65e876601bfb65b4d36a6bdaae1beae56f37",
+        "source_status": null,
+        "canonical_target_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut"
+      }
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BasicListNodeMut::list_change_value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "qualified_path": {
+                  "name": "Item",
+                  "args": null,
+                  "self_type": {
+                    "generic": "Self"
+                  },
+                  "trait": {
+                    "path": "",
+                    "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                    "args": null
+                  }
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": false,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "declaration_sha256": "3d75d4706eb2982300b7c732fe029a5852cd866fe2da90d33aabc6129e833d6a"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::ListValueNode::<rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode>::Item",
+      "kind": "assoc_type",
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "bounds": [],
+        "type": {
+          "generic": "T"
+        },
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "crate::ncollection::ListValueNode",
+            "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListValueNode",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "BasicListNode",
+          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+          "args": null
+        }
+      },
+      "declaration_sha256": "999aea1de6bf207d9c58dd2789630ed479ba9460a55e1af6012192376b0febf3"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::ListValueNode::<rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode>::from_list_link",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "link",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "ListLinkNode",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListLinkNode",
+                      "args": null
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "generic": "Self"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "crate::ncollection::ListValueNode",
+            "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListValueNode",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "BasicListNode",
+          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+          "args": null
+        }
+      },
+      "declaration_sha256": "024bef24bf7c03123b9f28529a408edebcf6de4efc515437c07228f47fb98a2c"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::ListValueNode::<rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode>::list_value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": false,
+              "type": {
+                "generic": "T"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "crate::ncollection::ListValueNode",
+            "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListValueNode",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "BasicListNode",
+          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+          "args": null
+        }
+      },
+      "declaration_sha256": "1b2799e73f231b9497a155b5491f71f04cf20e3624167b34a22d7c07edfcd826"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::ListValueNode::<rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut>::list_change_value",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": null,
+              "is_mutable": true,
+              "type": {
+                "generic": "T"
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+      "source_sha256": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "crate::ncollection::ListValueNode",
+            "resolved_item_path": "rustycad_tkernel::ncollection::list_node::ListValueNode",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "BasicListNodeMut",
+          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut",
+          "args": null
+        }
+      },
+      "declaration_sha256": "2bef226f7f718cce57979f9e7244eac7db17091bdb3f1a8fdf7905d8d1547b7c"
+    }
+  ],
+  "compiler_candidate_note": "Reachability candidates only; no complete overload/template declaration join claimed.",
+  "runtime": {
+    "new_contract_tests": 9,
+    "miri_new_contract_tests": 9,
+    "native_original_passed": 34,
+    "native_oracle_rows": 9,
+    "historical_focused_rust_passed": 78
+  },
+  "artifacts": {
+    "native-oracle": {
+      "path": "porting/runtime-evidence/foundation-generic-list-native-oracle.gz",
+      "sha256": "85141f9f0ac197c9094b6afef2aa7aa120abc8a74e77777c45fd7742cfff9098"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/foundation-generic-list-native-original.gz",
+      "sha256": "c767170467c3c47cba87113161e0a40408ccc9a9b4149c1d97b7d1e9564b8e55"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/foundation-generic-list-rust.gz",
+      "sha256": "b72e070b0c82c39c83964af5db7066f82d8a056fe1046c9779a0d2435f5d375e"
+    }
+  },
+  "current_frozen_runtime_receipt": "porting/audits/foundation-generic-checkpoint.json",
+  "historical_focused_note": "Focused ordinary run preceded readonly fixture provenance correction; current frozen workspace and Miri runs cover corrected sources.",
+  "remaining_gaps": [
+    "Typed List still uses its independent owned-node engine.",
+    "Detached raw cursors require explicit unsafe lifetime and alias guarantees; no safe STL adapter claimed.",
+    "All native overloads, template specializations, aliases and configurations still need authoritative compiler binding."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0
+}

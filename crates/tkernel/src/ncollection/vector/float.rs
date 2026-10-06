@@ -1,8 +1,8 @@
 //! Magnitude, unit, interpolation and JSON members of NCollection_Vec2/Vec3/Vec4.
-use super::{Vec2, Vec3, Vec4, VectorArithmeticComponent};
+use super::{ElementCast, Vec2, Vec3, Vec4};
 use crate::standard::dump::{self, DumpOutput};
 use std::io;
-use std::ops::{Add, Mul, Sub};
+use std::ops::{Add, Mul};
 
 impl<T: super::super::VectorSquareComponent> Vec2<T> {
     /// Evaluates x*x+y*y in upstream order; `Vec2::new(3,4).square_modulus() == 25`.
@@ -16,57 +16,54 @@ impl<T: super::super::VectorSquareComponent> Vec3<T> {
         T::vector_component_square([self.x, self.y, self.z])
     }
 }
-impl<T: VectorArithmeticComponent + Sub<Output = T> + Mul<Output = T>> Vec3<T> {
+impl<T: super::VectorProductDifference> Vec3<T> {
     /// Computes the right-handed cross product, as `Cross`; `Vec3::cross(&dx, &dy) == dz`.
     pub fn cross(first: &Self, second: &Self) -> Self {
         Self::new(
-            first
-                .y
-                .vector_multiply(second.z)
-                .vector_subtract(first.z.vector_multiply(second.y)),
-            first
-                .z
-                .vector_multiply(second.x)
-                .vector_subtract(first.x.vector_multiply(second.z)),
-            first
-                .x
-                .vector_multiply(second.y)
-                .vector_subtract(first.y.vector_multiply(second.x)),
+            T::vector_product_difference(first.y, second.z, first.z, second.y),
+            T::vector_product_difference(first.z, second.x, first.x, second.z),
+            T::vector_product_difference(first.x, second.y, first.y, second.x),
         )
     }
 }
-impl<T: Copy + From<u8>> Vec2<T> {
+impl<T: Copy> Vec2<T>
+where
+    i32: ElementCast<T>,
+{
     /// Builds the X unit vector; `Vec2::<f64>::dx().x == 1.0`.
     pub fn dx() -> Self {
-        Self::new(T::from(1), T::from(0))
+        Self::new(1_i32.cast(), 0_i32.cast())
     }
     /// Builds the Y unit vector; `Vec2::<f64>::dy().y == 1.0`.
     pub fn dy() -> Self {
-        Self::new(T::from(0), T::from(1))
+        Self::new(0_i32.cast(), 1_i32.cast())
     }
 }
-impl<T: Copy + From<u8>> Vec3<T> {
+impl<T: Copy> Vec3<T>
+where
+    i32: ElementCast<T>,
+{
     /// Builds the X unit vector; `Vec3::<f64>::dx().x == 1.0`.
     pub fn dx() -> Self {
-        Self::new(T::from(1), T::from(0), T::from(0))
+        Self::new(1_i32.cast(), 0_i32.cast(), 0_i32.cast())
     }
     /// Builds the Y unit vector; `Vec3::<f64>::dy().y == 1.0`.
     pub fn dy() -> Self {
-        Self::new(T::from(0), T::from(1), T::from(0))
+        Self::new(0_i32.cast(), 1_i32.cast(), 0_i32.cast())
     }
     /// Builds the Z unit vector; `Vec3::<f64>::dz().z == 1.0`.
     pub fn dz() -> Self {
-        Self::new(T::from(0), T::from(0), T::from(1))
+        Self::new(0_i32.cast(), 0_i32.cast(), 1_i32.cast())
     }
 }
 impl<T> Vec3<T>
 where
-    T: VectorArithmeticComponent + From<u8> + Sub<Output = T>,
+    T: super::VectorInterpolationComponent,
     Vec3<T>: Mul<T, Output = Vec3<T>> + Add<Output = Vec3<T>>,
 {
     /// Interpolates `from*(1-t) + to*t`, as `GetLERP`; `Vec3::lerp(&a, &b, 0.5)`.
     pub fn lerp(from: &Self, to: &Self, parameter: T) -> Self {
-        *from * (T::from(1).vector_subtract(parameter)) + *to * parameter
+        *from * parameter.vector_interpolation_complement() + *to * parameter
     }
 }
 // OCCT returns the element type after sqrt, and Normalize uses / followed by assignment.

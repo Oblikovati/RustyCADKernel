@@ -1,0 +1,100 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_uncommitted_draft",
+  "classes": [
+    "NCollection_Vec2",
+    "NCollection_Vec3",
+    "NCollection_Vec4"
+  ],
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/mat4.rs": "d35fb1541d32e92e10e56ed3ad3147409c500867327d1e01b5a7bd7943e206ce",
+    "crates/tkernel/src/ncollection/vector/arithmetic.rs": "6fa9acb52d0ce74423b8bd9fe7521330577ed3277191f18400ebfca1703cbff5",
+    "crates/tkernel/src/ncollection/vector/arithmetic_component.rs": "eaf41f0809c62ad68813518f667add33cb6cfe95254b8c41799e31ec9484335f",
+    "crates/tkernel/src/ncollection/vector/boolean.rs": "a8c483f9b3db13280e08c2155ee1c225d8736e11a24a8440610c323cc2240ec4",
+    "crates/tkernel/src/ncollection/vector/constants.rs": "e73206e4c0bd4312aa52df982416d568a578a5af7cab421ac7953be9ca0c324d",
+    "crates/tkernel/src/ncollection/vector/conversion.rs": "745db06c1cb23455b945205f9aa611f0d02ff5108a3659f742585aa5d338c534",
+    "crates/tkernel/src/ncollection/vector/float.rs": "f8670329e444853b9eabfedd3110683af918bbc6fb74d97613d997341866931d",
+    "crates/tkernel/src/ncollection/vector/negation.rs": "83d77f94b534b8ec599203797a3b8bcd7b42ea6538393df2864b7fe977f5ab78",
+    "crates/tkernel/src/ncollection/vector/product_difference.rs": "4e7423e72cdd445c86318c2a2a82a4182fe544e723979892e49b4dd99f648d75",
+    "crates/tkernel/src/ncollection/vector/scalar_division.rs": "1b0e2c49334457b81c837cb12712c3af5af494838865bcee8e211c606c617803",
+    "crates/tkernel/src/ncollection/vector/storage.rs": "e275230079529be11e9fce09f965c43ff5e3f00aba6679f13b8d68aa04884717",
+    "crates/tkernel/src/ncollection/vector/swizzle.rs": "9a5d776df265b42c75cf612452bdfbfd4a6b3411f3a073b8aef9b920172f1aa6",
+    "crates/tkernel/src/ncollection/vector.rs": "8b87957149f5d5d241242cbbcfa327da7976cac00cf02643349f4245d5903083",
+    "crates/tkernel/tests/vec_native_tail_contracts/oracle.rs": "825c89e03ee5d557cc23367f13614263af8cff450195eb4ccc4a49ac69e4c45d",
+    "crates/tkernel/tests/vec_native_tail_contracts.rs": "a58be9526d22e057d194a2cc71d87f37f75b154ea3bbc6ed994e59854a242809",
+    "tools/oracle/tkernel_vec_native_tail_contracts.cxx": "da043596ecc014846c4e8200aaac7144d9d9825cdf5fa049005d175afd753cad",
+    "tools/oracle/tkernel_vec_native_tail_contracts.expected": "0cbc1d75774885e4ebfe75df309074f8adc448cc1b3630ba75ec8a2b957d6ed5"
+  },
+  "source_inputs_after_run_identical": true,
+  "source_capture_note": "Owned vector modules, Mat4 adaptation, focused tests and native fixtures captured before final normal run. Other agents concurrently edited independent sources; full dependency closure and Miri are deferred to root frozen checkpoint.",
+  "upstream_sha256": {
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx": "50b592446f0c1b30b99f32ce0417d104535fcd4ab0fb9689626c993841d2802f",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx": "0980b0136795fcc386b2bfef30f814eedf5fa7c55fc38ba1b048be670efedf66",
+    "../OCCT/src/FoundationClasses/TKernel/GTests/NCollection_Vec4_Test.cxx": "43298f2b73e15c5dbf757122d9368d6ec18e767c3a9220f824e6de73284f1306"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/vec-native-tail-rust.log.gz": "ebe435aa20febdc73e20ac5473406fe9d0c645888545d526e685f24ff8378099",
+    "porting/runtime-evidence/vec-native-tail-native.log.gz": "eb02a39127e6712aec8e65658ec9ad4de4f49db2e2a87f08ae1d9fa3654db265",
+    "porting/runtime-evidence/vec-native-tail-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/vec-native-tail-source.tar.gz": "0a5100bb816846593dcb1bce382c1228e8754080d22b4ee3b861ea70bd310931"
+  },
+  "focused_rust_passes": 124,
+  "new_tests": 12,
+  "native_original_passed": 5,
+  "original_test_names": [
+    "NCollection_Vec4Test.BasicConstruction",
+    "NCollection_Vec4Test.XyzMethod",
+    "NCollection_Vec4Test.MatrixMultiplicationAndTransformation",
+    "NCollection_Vec4Test.ComponentAccess",
+    "NCollection_Vec4Test.HomogeneousCoordinateDivision"
+  ],
+  "original_join_count": 5,
+  "native_oracle_rows": 414,
+  "native_oracle_partitions": {
+    "original_probe_and_constructors": 14,
+    "all_boolean_vector_pairs": 336,
+    "all_boolean_spatial_pairs": 64
+  },
+  "rust_oracle_join": "All414 native stdout rows are dynamically reconstructed by Rust operations and compared byte-for-byte in native_fixture_rows_are_reconstructed_from_rust_operations.",
+  "exit_codes": {
+    "rust_final": 0,
+    "native_original": 0,
+    "native_oracle_compile": 0,
+    "native_oracle_run": 0
+  },
+  "miri": {
+    "status": "deferred_to_root_frozen_checkpoint",
+    "test_target": "vec_native_tail_contracts",
+    "expected_tests": 12,
+    "discarded_early_run": "Earlier run failed a test fixture formatting typo before execution; fixed and final normal run passed, no green Miri claim."
+  },
+  "method_changes": [
+    "Unsigned and bool vector unary minus through explicit scalar VectorNegationComponent policy; narrow signed and floating behavior retained.",
+    "Boolean value, assignment, scalar multiplication/division, Dot, cwiseAbs, SquareModulus, Modulus, Cross, Normalize/Normalized and GetLERP use native promoted truth tables.",
+    "Default Vec2/3/4 and Vec4 planar constructor use explicit i32 ElementCast(0), independently of custom Default.",
+    "DX/DY/DZ use native integer constructor constants, supporting i8, bool and custom ElementCast elements.",
+    "Added omitted-W Vec4::from_vec3_zero constructor adapter.",
+    "Mat4 adjoint retains its existing MatrixScalar+Neg bounds and VectorArithmeticComponent::vector_negate dispatch through a focused helper."
+  ],
+  "original_assertion_audit": {
+    "rust_file": "crates/tkernel/tests/ncollection_vec4.rs",
+    "native_file": "../OCCT/src/FoundationClasses/TKernel/GTests/NCollection_Vec4_Test.cxx",
+    "original_tests": 5,
+    "numeric_component_assertions": 24,
+    "near_assertions": 2,
+    "result": "Read all five original declarations and Rust translations: same input values, cube point ordering, component writes, matrix translation, and 0.001 tolerance. Component equality checks are consolidated into tuple assertions; both matrix norm assertions retained."
+  },
+  "remaining_gaps": [
+    "Custom unary-negation elements must implement VectorNegationComponent explicitly; arbitrary C++ unary expression template deduction is represented by this Rust policy.",
+    "Native integer-constant construction requires i32: ElementCast<T>; custom Rust Default/From<u8> alone no longer supplies native zero/unit behavior.",
+    "Custom C++ constructors, copy/move/destructor hooks, overload side effects, floating environment flags and undefined behavior domains are not exhaustively modeled.",
+    "Division by false is undefined natively; Rust reports the offending false divisor with a panic, an explicitly excluded native domain.",
+    "i128/u128 policies remain Rust extensions; no OCCT standard-primitive parity claim for those widths.",
+    "Protected ABI/layout, all platform/compiler configurations and full template-instantiation closure remain unproven."
+  ],
+  "integrated_api_credit": 0,
+  "original_mapping_credit_added": 0,
+  "full_parity": false
+}

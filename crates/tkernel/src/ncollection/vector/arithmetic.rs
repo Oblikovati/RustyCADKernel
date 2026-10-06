@@ -1,8 +1,6 @@
 //! Per-component NCollection_Vec2/3/4 operators in the native left-to-right order.
 use super::{Vec2, Vec3, Vec4, VectorArithmeticComponent};
-use std::ops::{
-    Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
-};
+use std::ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Sub, SubAssign};
 
 macro_rules! componentwise_assignment {
     ($vector:ident, $assign:ident, $assign_method:ident, $returning:ident, $policy:ident, [$($field:ident),+]) => {
@@ -52,12 +50,6 @@ macro_rules! componentwise_arithmetic {
         componentwise_assignment!($vector, SubAssign, sub_assign, sub_assign_returning, vector_subtract_assign, [$first $(, $rest)*]);
         componentwise_assignment!($vector, MulAssign, mul_assign, mul_assign_returning, vector_multiply_assign, [$first $(, $rest)*]);
         componentwise_assignment!($vector, DivAssign, div_assign, div_assign_returning, vector_divide_assign, [$first $(, $rest)*]);
-        impl<T: VectorArithmeticComponent + Neg<Output = T>> Neg for $vector<T> {
-            type Output = Self;
-            fn neg(self) -> Self {
-                Self { $first: self.$first.vector_negate() $(, $rest: self.$rest.vector_negate())* }
-            }
-        }
         impl<T> Index<usize> for $vector<T> {
             type Output = T;
             fn index(&self, index: usize) -> &T {

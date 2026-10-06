@@ -4,7 +4,7 @@ use rustycad_tkernel::ncollection::SparseArray;
 fn populated(increment: usize, pairs: &[(usize, i32)]) -> SparseArray<i32> {
     let mut array = SparseArray::new(increment);
     for &(index, value) in pairs {
-        array.set_value(index, value);
+        array.set_value_ref(index, &value);
     }
     array
 }
@@ -12,12 +12,12 @@ fn populated(increment: usize, pairs: &[(usize, i32)]) -> SparseArray<i32> {
 fn NCollection_SparseArrayTest__BasicFunctions() {
     let mut array = SparseArray::new(10);
     assert!(array.is_empty());
-    assert_eq!(array.len(), 0);
+    assert_eq!(array.size(), 0);
     assert_eq!(array.extent(), 0);
-    array.set_value(5, 55);
-    array.set_value(15, 155);
+    array.set_value_ref(5, &55);
+    array.set_value_ref(15, &155);
     assert!(!array.is_empty());
-    assert_eq!(array.len(), 2);
+    assert_eq!(array.size(), 2);
     assert_eq!(array.value(5), Some(&55));
     assert_eq!(array[15], 155);
     assert!(array.has_value(5));
@@ -26,14 +26,14 @@ fn NCollection_SparseArrayTest__BasicFunctions() {
     assert!(!array.is_bound(20));
     assert!(array.unset_value(5));
     assert!(!array.has_value(5));
-    assert_eq!(array.len(), 1);
+    assert_eq!(array.size(), 1);
     *array.change_value(15).unwrap() = 255;
     assert_eq!(array.value(15), Some(&255));
 }
 #[test]
 fn NCollection_SparseArrayTest__LargeIndices() {
     let array = populated(10, &[(1000, 1000), (10000, 10000)]);
-    assert_eq!(array.len(), 2);
+    assert_eq!(array.size(), 2);
     assert!(array.has_value(1000));
     assert!(array.has_value(10000));
     assert_eq!(array.value(1000), Some(&1000));
@@ -42,7 +42,7 @@ fn NCollection_SparseArrayTest__LargeIndices() {
 #[test]
 fn NCollection_SparseArrayTest__SparseDistribution() {
     let array = populated(8, &[(3, 3), (10, 10), (17, 17), (100, 100), (1000, 1000)]);
-    assert_eq!(array.len(), 5);
+    assert_eq!(array.size(), 5);
     for index in [3, 10, 17, 100, 1000] {
         assert!(array.has_value(index));
     }
@@ -56,16 +56,21 @@ fn NCollection_SparseArrayTest__IteratorFunctions() {
     let mut array = populated(8, &expected);
     let mut found = [false; 4];
     let mut count = 0;
-    for (index, value) in array.entries() {
-        if let Some(position) = expected.iter().position(|entry| *entry == (index, *value)) {
+    let mut cursor = array.cursor();
+    while cursor.more() {
+        let entry = (cursor.index(), *cursor.value().unwrap());
+        if let Some(position) = expected.iter().position(|expected| *expected == entry) {
             found[position] = true;
         }
         count += 1;
+        cursor.next();
     }
     assert_eq!(count, 4);
     assert!(found.into_iter().all(|value| value));
-    for value in array.iter_mut() {
-        *value *= 2;
+    let mut cursor = array.cursor_mut();
+    while cursor.more() {
+        *cursor.change_value().unwrap() *= 2;
+        cursor.next();
     }
     for (index, value) in expected {
         assert_eq!(array.value(index), Some(&(value * 2)));
@@ -74,17 +79,13 @@ fn NCollection_SparseArrayTest__IteratorFunctions() {
 #[test]
 fn NCollection_SparseArrayTest__STLIterators() {
     let mut array = populated(8, &[(5, 50), (10, 100), (30, 300)]);
+    assert!(array.cursor() == array.cursor());
+    assert!(array.end_cursor() == array.end_cursor());
+    let begin = array.cursor_mut();
+    let constant_begin = begin.as_const_cursor();
+    assert!(begin == constant_begin);
+    assert_eq!(*constant_begin.value().unwrap(), 50);
     let constant = &array;
-    assert_eq!(
-        array.iter().next().unwrap() as *const i32,
-        constant.iter().next().unwrap() as *const i32
-    );
-    assert!(array.iter().nth(3).is_none());
-    assert!(constant.iter().nth(3).is_none());
-    let begin = array.iter().next().unwrap();
-    let constant_begin = begin;
-    assert!(std::ptr::eq(begin, constant_begin));
-    assert_eq!(*constant_begin, 50);
     assert_eq!(constant.iter().copied().collect::<Vec<_>>(), [50, 100, 300]);
     assert_eq!(constant.iter().find(|&&value| value == 100), Some(&100));
     array.iter_mut().for_each(|value| *value += 1);
@@ -100,15 +101,15 @@ struct TestClass {
 #[test]
 fn NCollection_SparseArrayTest__ComplexType() {
     let mut array = SparseArray::new(10);
-    array.set_value(5, TestClass { id: 5, value: 3.14 });
-    array.set_value(
+    array.set_value_ref(5, &TestClass { id: 5, value: 3.14 });
+    array.set_value_ref(
         10,
-        TestClass {
+        &TestClass {
             id: 10,
             value: 2.718,
         },
     );
-    assert_eq!(array.len(), 2);
+    assert_eq!(array.size(), 2);
     assert_eq!(array[5].id, 5);
     assert_eq!(array[5].value, 3.14);
     assert_eq!(array[10].id, 10);
@@ -121,10 +122,10 @@ fn NCollection_SparseArrayTest__ComplexType() {
 #[test]
 fn NCollection_SparseArrayTest__Clear() {
     let mut array = populated(8, &[(5, 5), (10, 10), (15, 15)]);
-    assert_eq!(array.len(), 3);
+    assert_eq!(array.size(), 3);
     array.clear();
     assert!(array.is_empty());
-    assert_eq!(array.len(), 0);
+    assert_eq!(array.size(), 0);
     for index in [5, 10, 15] {
         assert!(!array.has_value(index));
     }
@@ -132,8 +133,8 @@ fn NCollection_SparseArrayTest__Clear() {
 #[test]
 fn NCollection_SparseArrayTest__DataMapInterface() {
     let mut array = SparseArray::new(10);
-    array.bind(5, 50);
-    array.bind(15, 150);
+    array.bind_ref(5, &50);
+    array.bind_ref(15, &150);
     assert!(array.is_bound(5));
     assert!(array.is_bound(15));
     assert_eq!(array.find(5), Some(&50));
@@ -142,10 +143,10 @@ fn NCollection_SparseArrayTest__DataMapInterface() {
     assert_eq!(array.find(5), Some(&55));
     assert!(array.unbind(5));
     assert!(!array.is_bound(5));
-    assert_eq!(array.len(), 1);
+    assert_eq!(array.size(), 1);
 }
 fn check_contents(array: &SparseArray<i32>, pairs: &[(usize, i32)], missing: &[usize]) {
-    assert_eq!(array.len(), pairs.len());
+    assert_eq!(array.size(), pairs.len());
     for &(index, value) in pairs {
         assert!(array.has_value(index));
         assert_eq!(array.value(index), Some(&value));

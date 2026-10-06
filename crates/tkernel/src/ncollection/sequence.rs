@@ -195,3 +195,11 @@ pub use nodes::{SeqNode, SequenceNode};
 mod method_contracts;
 mod operations;
 mod signed_indices;
+
+// Custom-node projection and detached raw cursor access retain explicit unsafe contracts.
+#[allow(unsafe_code)]
+mod basic_iterator;
+#[allow(unsafe_code)]
+mod basic_node;
+pub use basic_iterator::BaseSequenceBasicIterator;
+pub use basic_node::{BasicSequenceNode, BasicSequenceNodeMut};

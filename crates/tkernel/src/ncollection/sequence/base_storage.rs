@@ -15,12 +15,18 @@ pub type DelSeqNode = unsafe fn(*mut SeqNode, &mut BaseAllocator);
 /// Raw operations require exclusive, live, well-formed links. Drop never deletes nodes,
 /// matching the native base destructor; subclasses must explicitly call clear_seq.
 pub struct BaseSequence {
-    allocator: BaseAllocator,
-    first: *mut SeqNode,
-    last: *mut SeqNode,
-    current: *mut SeqNode,
-    current_index: usize,
-    size: usize,
+    /// Native protected allocator for derived-class composition.
+    pub allocator: BaseAllocator,
+    /// Native protected first link; raw operations require consistent metadata.
+    pub first: *mut SeqNode,
+    /// Native protected last link; raw operations require consistent metadata.
+    pub last: *mut SeqNode,
+    /// Native protected cached link; must agree with current_index.
+    pub current: *mut SeqNode,
+    /// Native protected one-based cached index.
+    pub current_index: usize,
+    /// Native protected sequence size.
+    pub size: usize,
 }
 impl Default for BaseSequence {
     fn default() -> Self {

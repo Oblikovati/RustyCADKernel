@@ -1,10 +1,14 @@
 //! Sparse block allocation with stable occupied slots and ascending index traversal.
 use std::collections::BTreeMap;
+mod assignment;
+mod borrowed;
 mod cursor;
 mod cursor_mut;
 mod cursor_position;
+mod legacy_cursor;
 pub use cursor::SparseArrayCursor;
 pub use cursor_mut::SparseArrayCursorMut;
+pub use legacy_cursor::SparseArrayLegacyCursor;
 /// Sparse indexed objects; `SparseArray::new(8).set_value(1000, 42)`.
 #[derive(Clone)]
 pub struct SparseArray<T> {
@@ -18,10 +22,6 @@ pub struct SparseArray<T> {
 impl<T> SparseArray<T> {
     /// Selects the number of slots allocated per block; `SparseArray::<i32>::new(8)`.
     pub fn new(increment: usize) -> Self {
-        assert!(
-            increment > 0,
-            "SparseArray increment {increment}; expected a positive block size"
-        );
         Self {
             increment,
             blocks: BTreeMap::new(),
@@ -54,6 +54,10 @@ impl<T> SparseArray<T> {
     pub fn len(&self) -> usize {
         self.count
     }
+    /// Returns the native item count; `array.size() == array.len()`.
+    pub fn size(&self) -> usize {
+        self.count
+    }
     /// Returns the occupied extent; `array.extent() == 2`.
     pub fn extent(&self) -> usize {
         self.count
@@ -64,16 +68,9 @@ impl<T> SparseArray<T> {
     }
     /// Constructs or replaces an indexed object; `array.set_value(5, 55)`.
     pub fn set_value(&mut self, index: usize, value: T) -> &mut T {
-        self.reserve_block(index / self.increment);
-        let block = self
-            .blocks
-            .entry(index / self.increment)
-            .or_insert_with(|| {
-                std::iter::repeat_with(|| None)
-                    .take(self.increment)
-                    .collect()
-            });
-        let slot = &mut block[index % self.increment];
+        let number = index / self.increment;
+        self.ensure_sparse_block(number);
+        let slot = &mut self.blocks.get_mut(&number).unwrap()[index % self.increment];
         if slot.is_none() {
             self.count += 1;
         }
@@ -169,29 +166,6 @@ impl<T> SparseArray<T> {
     /// Data-map spelling of removal; `array.unbind(5)`.
     pub fn unbind(&mut self, index: usize) -> bool {
         self.unset_value(index)
-    }
-}
-impl<T: Clone> SparseArray<T> {
-    /// Replaces occupied slots, clearing obsolete destination slots; `destination.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) {
-        if self.increment != source.increment {
-            self.clear();
-            self.increment = source.increment;
-        }
-        self.blocks
-            .retain(|index, _| source.blocks.contains_key(index));
-        for &index in source.blocks.keys() {
-            self.reserve_block(index);
-        }
-        for (&index, source_block) in &source.blocks {
-            let block = self.blocks.entry(index).or_insert_with(|| {
-                std::iter::repeat_with(|| None)
-                    .take(self.increment)
-                    .collect()
-            });
-            block.clone_from_slice(source_block);
-        }
-        self.count = source.count;
     }
 }
 impl<T> std::ops::Index<usize> for SparseArray<T> {
