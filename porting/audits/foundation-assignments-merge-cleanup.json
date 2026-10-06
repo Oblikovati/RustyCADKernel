@@ -1,0 +1,88 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "327907230f8ee88ccd6dcac94042c17b34759420",
+  "validated_source_revision": "327907230f8ee88ccd6dcac94042c17b34759420",
+  "tkernel_passed": 4577,
+  "tkernel_failed": 0,
+  "tkernel_ignored": 0,
+  "strict_provenance_miri_passed": 161,
+  "miri_counts": {
+    "strict-miri": 141,
+    "dynamic-unit-miri": 20
+  },
+  "strict_tkernel_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "exact_indexed_binding_replay_exit": 0,
+  "unchanged_runtime_inputs": 9999,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/foundation-assignments-rust.gz",
+      "sha256": "6b00720f7731a7584be8caacec65250be71d59bb76293ca7925204b995826105"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/foundation-assignments-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/foundation-assignments-clippy.gz",
+      "sha256": "1c37a7da480b6bb73a39184da6a9685c5ae13dbf73be324badce1a1f7ea9f34f"
+    },
+    "bindings": {
+      "path": "porting/runtime-evidence/foundation-assignments-bindings.gz",
+      "sha256": "b32d08c9503c3fc38e1feccb7b5984ddbf6bae914317484e234e65fd3a99d259"
+    },
+    "strict-miri": {
+      "path": "porting/runtime-evidence/foundation-assignments-strict-miri.gz",
+      "sha256": "59c65dd4cf01ec8c8214acc7ab855d58ae91a4a39bf3a539ccf4135d4b51b1fd"
+    },
+    "dynamic-unit-miri": {
+      "path": "porting/runtime-evidence/foundation-assignments-dynamic-unit-miri.gz",
+      "sha256": "3aa69f7de1bf630c16268e413ca7b2c265f9241c7430918b84572dcbe1b17b9a"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/foundation-assignments-inputs.gz",
+      "sha256": "830c7ddaaa8c1433527e01a5a4050056b0927e635caea359ed6f673dd58786a5"
+    },
+    "miri-targets": {
+      "path": "porting/runtime-evidence/foundation-assignments-miri-targets.gz",
+      "sha256": "6bd9fc8d2f2f54d46ee9a2baba0e181f74cff4a76df6159ac9249b3357c3e6d2"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "c9db7e4a42730f0f1b46711de5391356527d08c9",
+      "deleted_worktree": "/tmp/rustycad-ubtree-move-assignment",
+      "deleted_branch": "port/ubtree-move-assignment",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "407ff886e139de553f6a488649878c8fc87ab407",
+      "deleted_worktree": "/tmp/rustycad-array-emplace-assignment",
+      "deleted_branch": "port/array-emplace-assignment",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "1a6ecdf933dbb5e3cc43980ac1972b32aac138d6",
+      "deleted_worktree": "/tmp/rustycad-dynamic-internal-insertion",
+      "deleted_branch": "port/dynamic-internal-insertion",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "b6a14b9272d6914cba1ab0179cc0442fea127eb3",
+      "deleted_worktree": "/tmp/rustycad-base-map-indexed-comparisons",
+      "deleted_branch": "port/base-map-indexed-comparisons",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false,
+  "scope": "All TKernel tests/doctests and focused changed-method strict Miri; full workspace/API inventory remains at prior foundation-nodes checkpoint."
+}
