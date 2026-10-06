@@ -1,5 +1,5 @@
 //! Transfers use the actual BaseList chain; cross-resource copies commit one node at a time.
-use super::{List, ListCursor};
+use super::{BaseListRawIterator, List, ListCursor};
 use crate::standard::Failure;
 impl<T: Clone> List<T> {
     /// Copies contents while retaining this allocator (OCC25348); `destination.assign(&source)`.
@@ -17,7 +17,10 @@ impl<T: Clone> List<T> {
             return;
         }
         self.owners.reserve(source.owners.len());
-        unsafe { self.base.append_list(&mut source.base) };
+        self.topology
+            .edit_pair(&mut source.topology, |base, donor| unsafe {
+                base.append_list(donor)
+            });
         self.owners.append(&mut source.owners);
     }
     /// Prepends another list, panicking on native failure; `destination.prepend_list(&mut source)`.
@@ -32,7 +35,10 @@ impl<T: Clone> List<T> {
             return self.insert_copied_list_before(source, &mut self.cursor());
         }
         self.owners.reserve(source.owners.len());
-        unsafe { self.base.prepend_list(&mut source.base) };
+        self.topology
+            .edit_pair(&mut source.topology, |base, donor| unsafe {
+                base.prepend_list(donor)
+            });
         self.owners.append(&mut source.owners);
         Ok(())
     }
@@ -56,7 +62,10 @@ impl<T: Clone> List<T> {
         }
         let mut raw = self.locate_cursor(*cursor, "InsertBefore")?;
         self.owners.reserve(source.owners.len());
-        unsafe { self.base.insert_list_before(&mut source.base, &mut raw)? };
+        self.topology
+            .edit_pair(&mut source.topology, |base, donor| unsafe {
+                base.insert_list_before(donor, &mut raw)
+            })?;
         self.owners.append(&mut source.owners);
         cursor.update_raw(raw);
         Ok(())
@@ -77,8 +86,18 @@ impl<T: Clone> List<T> {
             following.next(self);
             return self.insert_copied_list_before(source, &mut following);
         }
+        self.transfer_after_same(source, &mut raw)
+    }
+    fn transfer_after_same(
+        &mut self,
+        source: &mut Self,
+        raw: &mut BaseListRawIterator,
+    ) -> Result<(), Failure> {
         self.owners.reserve(source.owners.len());
-        unsafe { self.base.insert_list_after(&mut source.base, &mut raw)? };
+        self.topology
+            .edit_pair(&mut source.topology, |base, donor| unsafe {
+                base.insert_list_after(donor, raw)
+            })?;
         self.owners.append(&mut source.owners);
         Ok(())
     }

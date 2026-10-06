@@ -5,7 +5,7 @@ use owner::ListNodeOwner;
 use std::marker::PhantomData;
 /// Allocator-owned list; `List::from_iter_in([1,2], BaseAllocator::common())`.
 pub struct List<T> {
-    base: BaseListStorage,
+    topology: topology::ListTopology,
     owners: Vec<ListNodeOwner<T>>,
 }
 // SAFETY: base links are inert ownership metadata; shared access never mutates them.
@@ -36,7 +36,7 @@ impl<T> List<T> {
     /// Creates an empty list with the chosen resource; `List::<i32>::with_allocator(arena)`.
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
-            base: BaseListStorage::new(Some(resource)),
+            topology: topology::ListTopology::new(resource),
             owners: Vec::new(),
         }
     }
@@ -50,15 +50,15 @@ impl<T> List<T> {
     }
     /// Returns allocator identity; `list.allocator() == &arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        self.base.allocator()
+        self.base_storage().allocator()
     }
     /// Returns the element count; `list.len() == 2`.
     pub fn len(&self) -> usize {
-        self.base.size()
+        self.base_storage().size()
     }
     /// Returns OCCT's signed extent; `list.extent() == 2`.
     pub fn extent(&self) -> i32 {
-        self.base.extent()
+        self.base_storage().extent()
     }
     /// Returns OCCT's signed length, an alias of the extent; `list.length() == 2`.
     pub fn length(&self) -> i32 {
@@ -66,28 +66,28 @@ impl<T> List<T> {
     }
     /// Checks whether the chain is empty; `list.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.base.is_empty()
+        self.base_storage().is_empty()
     }
     /// Borrows the head, `None` where OCCT raises NoSuchObject; `list.first() == Some(&1)`.
     pub fn first(&self) -> Option<&T> {
-        self.endpoint_ref(self.base.first)
+        self.endpoint_ref(self.base_storage().first)
     }
     /// Borrows the head for mutation; `*list.first_mut().unwrap() = 42`.
     pub fn first_mut(&mut self) -> Option<&mut T> {
-        self.endpoint_mut(self.base.first)
+        self.endpoint_mut(self.base_storage().first)
     }
     /// Borrows the final element; `list.last() == Some(&2)`.
     pub fn last(&self) -> Option<&T> {
-        self.endpoint_ref(self.base.last)
+        self.endpoint_ref(self.base_storage().last)
     }
     /// Borrows the final element for mutation; `*list.last_mut().unwrap() = 42`.
     pub fn last_mut(&mut self) -> Option<&mut T> {
-        self.endpoint_mut(self.base.last)
+        self.endpoint_mut(self.base_storage().last)
     }
     /// Borrows all elements in chain order; `list.iter().count()`.
     pub fn iter(&self) -> ListIter<'_, T> {
         ListIter {
-            next: self.base.first,
+            next: self.base_storage().first,
             item: PhantomData,
             previous: None,
         }
@@ -95,7 +95,7 @@ impl<T> List<T> {
     /// Borrows exclusive elements in chain order; `list.iter_mut().for_each(|v| *v += 1)`.
     pub fn iter_mut(&mut self) -> ListIterMut<'_, T> {
         ListIterMut {
-            next: self.base.first,
+            next: self.base_storage().first,
             item: PhantomData,
             previous: None,
         }
@@ -103,7 +103,7 @@ impl<T> List<T> {
     /// Returns a stable position at the head; `let mut cursor = list.cursor()`.
     pub fn cursor(&self) -> ListCursor {
         ListCursor {
-            address: address(self.base.first),
+            address: address(self.base_storage().first),
             previous: None,
         }
     }
@@ -120,7 +120,8 @@ impl<T> List<T> {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let node = owner.link;
         self.owners.push(owner);
-        unsafe { self.base.prepend_node(node) };
+        self.topology
+            .edit(|base| unsafe { base.prepend_node(node) });
         unsafe { owner::item_mut(node) }
     }
     /// Keeps selected nodes without reallocating survivors; `list.retain(|value| *value > 0)`.
@@ -158,22 +159,23 @@ impl<T> List<T> {
     /// Frees all nodes, then adopts `resource` for later nodes; `list.clear_with_allocator(arena)`.
     pub fn clear_with_allocator(&mut self, resource: BaseAllocator) {
         self.clear();
-        self.base.allocator = resource;
+        self.topology.edit(|base| base.allocator = resource);
     }
     /// Reverses links without moving values between nodes; `list.reverse()`.
     pub fn reverse(&mut self) {
-        unsafe { self.base.reverse() };
+        self.topology.edit(|base| unsafe { base.reverse() });
     }
     /// Exchanges nodes and their allocator resources; `first.exchange(&mut second)`.
     pub fn exchange(&mut self, other: &mut Self) {
-        self.base.exchange(&mut other.base);
+        self.topology.exchange(&mut other.topology);
         std::mem::swap(&mut self.owners, &mut other.owners);
     }
     /// Transfers the nodes, leaving the source empty with its own allocator (as OCCT's move
     /// constructor does); `List::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
-        let kept = Self::with_allocator(source.allocator().clone());
-        std::mem::replace(source, kept)
+        let mut moved = Self::with_allocator(source.allocator().clone());
+        moved.exchange(source);
+        moved
     }
     /// Replaces this list and its allocator with the source's nodes; `list.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
@@ -252,3 +254,8 @@ pub use base_iterator::BaseListIterator;
 mod access;
 mod owner;
 mod removal;
+
+mod native_cursor;
+mod topology;
+pub use native_cursor::{ListCursorObserver, ListNativeCursor};
+pub use topology::ListObserver;

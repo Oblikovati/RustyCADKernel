@@ -6,7 +6,11 @@ use crate::standard::Failure;
 impl<T> List<T> {
     /// Borrows the actual native list base for raw iterator construction; `list.base_storage().size()`.
     pub fn base_storage(&self) -> &BaseListStorage {
-        &self.base
+        self.topology.base()
+    }
+    /// Creates a handle to actual native owner metadata; `let observer = list.observer()`.
+    pub fn observer(&self) -> super::ListObserver {
+        self.topology.observer()
     }
     pub(super) fn locate_cursor(
         &self,
@@ -17,7 +21,7 @@ impl<T> List<T> {
             .ok_or_else(|| no_such_object(member, &format!("{cursor:?} outside this list")))
     }
     pub(super) fn find_cursor(&self, target: Option<usize>) -> Option<BaseListRawIterator> {
-        let mut cursor = BaseListRawIterator::new(&self.base);
+        let mut cursor = BaseListRawIterator::new(self.topology.base());
         while !cursor.current.is_null() {
             if super::address(cursor.current) == target {
                 return Some(cursor);
