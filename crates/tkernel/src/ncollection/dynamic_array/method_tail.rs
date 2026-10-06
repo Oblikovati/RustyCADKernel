@@ -39,7 +39,7 @@ impl<T> DynamicArray<T> {
 impl<T: Clone> DynamicArray<T> {
     /// Reserves the element block before invoking the borrowed copy; `array.append_ref(&value)`.
     pub fn append_ref(&mut self, value: &T) -> &mut T {
-        self.emplace_append(|| value.clone())
+        self.append_ref_with_constructor(value, T::clone)
     }
 }
 impl<T: Clone + Default> DynamicArray<T> {
