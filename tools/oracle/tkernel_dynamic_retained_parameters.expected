@@ -1,0 +1,25 @@
+equal_before 3 2 4 2 0 3 0 1,2,3
+equal_forgotten 0 2 4 2 0 3 0 1,2,3
+equal_restored 3 2 4 2 0 3 0 1,2,3
+equal_cleared 0 0 0 2 2 3 3 -
+smaller_before 6 2 8 2 0 6 0 1,2,3,4,5,6
+smaller_forgotten 0 2 4 2 0 6 0 1,2,3,4,5,6
+smaller_destroyed_old 0 2 4 2 0 6 6 -
+smaller_reused 5 3 6 3 0 11 6 11,12,13,14,15
+smaller_cleared 0 0 0 3 3 11 11 -
+regrow_shrunk 0 1 2 1 0 3 0 1,2,3
+regrow_expanded 0 1 4 1 0 3 0 1,2,3
+regrow_restored 3 1 4 1 0 3 0 1,2,3
+regrow_cleared 0 0 0 1 1 3 3 -
+empty_retained_copied 0 3 6 3 0 0 0 -
+empty_retained_reused 2 3 6 3 0 2 0 21,22
+empty_retained_cleared 0 0 0 3 3 2 2 -
+common_to_heap_forgotten 0 2 4 1 1 1,2,3
+common_to_heap_restored 3 2 4 1 1 1,2,3
+common_to_heap_cleared 0 0 0 1 0 -
+heap_to_common_forgotten 0 2 4 1 1 1,2,3
+heap_to_common_restored 3 2 4 1 1 1,2,3
+heap_to_common_cleared 0 0 0 1 0 -
+heap_to_null_forgotten 0 2 4 1 1 1,2,3
+heap_to_null_restored 3 2 4 1 1 1,2,3
+heap_to_null_cleared 0 0 0 1 0 -
