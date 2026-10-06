@@ -1,0 +1,47 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "36e9915fc36267acb340763e2b368834f7611fae",
+  "base_sequence_partial_bindings": 71,
+  "base_map_partial_bindings": 38,
+  "validator_tests_passed": 23,
+  "base_map_replay_scope_guards": 6,
+  "merge_resolution": "Appended BaseMap additions conflicted with BaseSequence additions. Applied exact11 removed/38 added BaseMap records to current ledger, retaining all BaseSequence records and all tests. Both class replays passed afterward.",
+  "artifacts": {
+    "base-sequence-root-replay": {
+      "path": "porting/runtime-evidence/base-sequence-root-replay.gz",
+      "sha256": "b2a08a56a623b808c501d67796db2ae3b10729d81ad3a8f5a43abc68c1b1b846"
+    },
+    "base-sequence-root-validation": {
+      "path": "porting/runtime-evidence/base-sequence-root-validation.gz",
+      "sha256": "66461dcbb7f9dc780e09843c9e7f8217cc5ec1cbec96494180a3101fe6f50108"
+    },
+    "base-sequence-after-merge-replay": {
+      "path": "porting/runtime-evidence/base-sequence-after-merge-replay.gz",
+      "sha256": "b2a08a56a623b808c501d67796db2ae3b10729d81ad3a8f5a43abc68c1b1b846"
+    },
+    "base-map-root-replay": {
+      "path": "porting/runtime-evidence/base-map-root-replay.gz",
+      "sha256": "2dde49d0086928748bc0d2d9548ea96eb1f5dda8c981d957762458d4e2c368c2"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "90d25b69e389dbac353563350851549a4d6019fe",
+      "deleted_worktree": "/tmp/rustycad-base-sequence-reconciliation",
+      "deleted_branch": "audit/base-sequence-reconciliation",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "51bd6444d8a6f0c9088cc23f2f43cd343c6baacb",
+      "deleted_worktree": "/tmp/rustycad-base-map-bindings",
+      "deleted_branch": "port/base-map-bindings",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "implemented_credit_added": 0,
+  "test_credit_added": 0
+}
