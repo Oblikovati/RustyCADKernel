@@ -1,0 +1,147 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_UBTree::TreeNode::Kill member assignment, link publication and detached subtree payload destruction over the current checked arena facade",
+  "integration_status": "Candidate; root merge/check/deletion required.",
+  "base_revision": "5f8ed45fca7e6658b3e00f9a1dbe2af49868cb1a",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/destructor_unwind.rs": "758266d3ca88c0840f7443a0cf4a0857d4dd6b9ff55c1b802f8fa8e329012289",
+    "crates/tkernel/src/ncollection/ebtree.rs": "951528375f1b414a38714d577ca4251184b670d936962d167949b2edd63f2c0b",
+    "crates/tkernel/src/ncollection/node_owner.rs": "5f1c6b17408e3d42fab590cd36b310e6038708795609c5eaaa3683d73df3800f",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/src/ncollection/ubtree/insertion.rs": "538d7109870fa9501a002647b3566546d2f67b047e014edc94d7f1452b43ac15",
+    "crates/tkernel/src/ncollection/ubtree/method_contracts.rs": "6d39a623147d1a57985c36450cc054760d435b043e57a2f06a405f26cad6fdfe",
+    "crates/tkernel/src/ncollection/ubtree/navigation.rs": "171bc8ce1bcb4ac7b4de407030e473a222bb916e1eb1ea309c459c18d3140066",
+    "crates/tkernel/src/ncollection/ubtree/payload.rs": "5e51df37260249b1dcee4fef2b2f4447d3ffbfb0fec75f98604ce34b767a9802",
+    "crates/tkernel/src/ncollection/ubtree/removal.rs": "6caa3f81636637d4ddb027c93d97591f66ba8b24d63d319440825c287e2dfc8d",
+    "crates/tkernel/src/ncollection/ubtree/selection.rs": "cd427cb4678ed5d4b1af183f0ef3ac8665550aa5c90edd514542ef5ebcff2942",
+    "crates/tkernel/src/ncollection/ubtree.rs": "dce7d8f62e0b9f5e5ecae91bf23794d11077d726156d5adc9ec9a0ac4e94aa20",
+    "crates/tkernel/src/ncollection/ubtree_filler/balance.rs": "47ed3efb3425ef3f6d5886bcb1e89a9aa2cb33f300bd3906312899e8af275057",
+    "crates/tkernel/src/ncollection/ubtree_filler/insertion.rs": "abf0c4adcdd5698fef40bb221fb5a7dde9ea49d4aee25a6dcd9c920fd90778e3",
+    "crates/tkernel/src/ncollection/ubtree_filler/payload.rs": "1adaf95e976ec3b3175cf2c197a5451c8d9bb60963ba8e448754f923692bef42",
+    "crates/tkernel/src/ncollection/ubtree_filler.rs": "c961ce6aedf2579119a034dfeb28a204c657f3026d9ec47f769da9c925f30f88",
+    "crates/tkernel/tests/ncollection_ubtree/support.rs": "2a892d809e46777664e31d16a398974e2d9535154c1379009bb20c42ea66bfc2",
+    "crates/tkernel/tests/ncollection_ubtree.rs": "d36defe4170517f13c307992595d79db2b60a1c5cf45edcaa58cb7c97da9cf0b",
+    "crates/tkernel/tests/ubtree_fallible.rs": "96586e0340d95ba2e70a76c73a7ea527474ae313d708bd88e594e9db17aaafcf",
+    "crates/tkernel/tests/ubtree_kill_contracts/failures.rs": "a0a6ed3c46a3ae6b45ff788a5066b191c6619e81798dae8afa7e857179153d5d",
+    "crates/tkernel/tests/ubtree_kill_contracts/fixture.rs": "a9f9a8ac094d2a258fe58ae9cfb0b38159e08af427a68b316a0be3a6a309ea26",
+    "crates/tkernel/tests/ubtree_kill_contracts.rs": "c0e3bcafe11ab444393ba0ce3c210d255e0111bcde1161af60a7cb886d414ca2",
+    "crates/tkernel/tests/ubtree_method_contracts.rs": "b1c66b3b6db8583a961c3d9a09c64fd7f0ef9e8babc1d79a1bcdc95c1c45026e",
+    "crates/tkernel/tests/ubtree_payload_contracts/construction.rs": "851c22701100759c144856ad7f5bf976c98627f90d96b74653dfafe9e8f4ead1",
+    "crates/tkernel/tests/ubtree_payload_contracts/failures.rs": "1eadfb552c13d24f9df399aa6b12d56757a26d652fdc8827f900d7a2468b34f3",
+    "crates/tkernel/tests/ubtree_payload_contracts/fixture.rs": "c33dcbe3227ce18967affafe2dc634b719efc73cc2fea75178db85c63c9f85a4",
+    "crates/tkernel/tests/ubtree_payload_contracts/traits.rs": "e7c389a8e970d73f68bde2241a915b7fd7184a61c752660fdfc6400d42f04188",
+    "crates/tkernel/tests/ubtree_payload_contracts.rs": "cfde59afa498302690ba7c994d422de9a0e5a80f4b166f9f1e9d7c6bc923dc00",
+    "crates/tkernel/tests/ubtree_supplemental.rs": "c5b4ff8aefa842252d9bff51cedc40ff26f16fee55be9a4f0751f8b8be9857c4",
+    "tools/oracle/tkernel_ubtree_kill_contracts.cxx": "1f63beac3c243604e0c315af962330729f3ecf37b0faed8f9731026d2004e3ad",
+    "tools/oracle/tkernel_ubtree_kill_contracts.expected": "bc3280b3ccecba27a0c0a2f1271632a88fb78017ce893160450ae7fb2e0d3065",
+    "tools/oracle/tkernel_ubtree_method_contracts.cxx": "e525503c812957733c91657115aa8ee66e07d8950d0b529cd7a247ae073f8154",
+    "tools/oracle/tkernel_ubtree_method_contracts.expected": "a1b97c5a4dd7f37a74681addaaab3cbeb9a2d7127df5ad2626d807ca8851cc77",
+    "tools/oracle/tkernel_ubtree_payload_contracts.cxx": "249430ced1dcd96d06426708450052c80121c8bb5f5ac2698786656bc733d896",
+    "tools/oracle/tkernel_ubtree_payload_contracts.expected": "f596bdf87b734f9a9c9f1fbe1a6afaf8ec45bf17eaa6e3d2528515954df42ff3"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/ubtree-kill-source.tar.gz": "7b81ee3bf364f52847c1d1e516acc7d42f0bb44b787f0d8f40c5096a74734289",
+    "porting/runtime-evidence/ubtree-kill-normal.log.gz": "462e696737f3e1f83c667c64023216650f308d6a6a1a68b083be6ec7768b2cbc",
+    "porting/runtime-evidence/ubtree-kill-miri.log.gz": "a7da1b97cdef0e78b967d83889385bd68319faa048afb3f5ee355aa4c6ffa895",
+    "porting/runtime-evidence/ubtree-kill-docs.log.gz": "e4eb432a6f2c0976c378b895f9b412a78a52934380cb43ee1ab8defece8f1995",
+    "porting/runtime-evidence/ubtree-kill-clippy.log.gz": "576c63469491befdcbdadd8f81a7ce3b367713c326857741c2b1723d592d6930",
+    "porting/runtime-evidence/ubtree-kill-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ubtree-kill-legacy.log.gz": "1b711a8774c7c35fad2b3eb02dad552ec73fd7e1dcb9713e03027a2511222183",
+    "porting/runtime-evidence/ubtree-kill-native-tkernel_ubtree_kill_contracts.log.gz": "76bb480b52c8cd6900f22bf1951630d28c6051941d7628843b194c1cf11b04fe",
+    "porting/runtime-evidence/ubtree-kill-native-tkernel_ubtree_payload_contracts.log.gz": "498467dcb0037b472f53b240677c46199701b7c078fbb48356b3651e0f907220",
+    "porting/runtime-evidence/ubtree-kill-native-tkernel_ubtree_method_contracts.log.gz": "d86d359cb85db50e8e26a2f52f1c9587e186cbd6b6a1b9ae3dfc8ea5fa46ab31",
+    "porting/runtime-evidence/ubtree-kill-original-test-joins.json.gz": "b8b9d3bdd4367b15ee546fad6c2e8eb006e0645d299fb702e910f6163ba6f7b2",
+    "porting/runtime-evidence/ubtree-kill-run-ubtree-kill-checks.py.gz": "0b8199234b3e551d2df44754baeabfce7028a821ae974ee8843f47f51edbb4e4",
+    "porting/runtime-evidence/ubtree-kill-run-ubtree-kill-native.py.gz": "f611a9ef314d559ba1be721dadbc259e6da010d251164d9fb3d382cbdfd41ee4",
+    "porting/runtime-evidence/ubtree-kill-ubtree-kill-suites.txt.gz": "0ccc000bb35c696d3e07c568612ee48cbc235cf5d4d166e1f3a0ecf8b3999484"
+  },
+  "occt_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx": "3e8e07bf370088a143a123dc44712741e3c09148ca7c846eaa0997e00767ad39"
+  },
+  "source_scope": "UBTree/EBTree/filler source, shared destruction guards, selected tests and native probes; not full compiler or allocator dependency closure.",
+  "prior_receipt": {
+    "path": "porting/audits/ubtree-payload-methods.json",
+    "sha256": "fa3f3195648fde292e782e112fca5c7f2dc69e3b1fb59a508b5fda3a296b41a0"
+  },
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "compiler_body_binding_performed": false,
+  "class_status": "partial",
+  "method_bindings": [
+    {
+      "cpp": "NCollection_UBTree<T,B>::TreeNode::Kill(int, allocator)",
+      "rust": "UBTree::kill / assign_survivor / reparent_children",
+      "domain": "Live checked node identifiers with children and index 0 or 1. In-place bounds then object clone_from; original parent retained; surviving child links committed after assignment, grandchildren reparented before destruction."
+    },
+    {
+      "cpp": "NCollection_UBTree<T,B>::TreeNode::delNode payload traversal used by Kill",
+      "rust": "UBTree::release_subtree / release_node",
+      "domain": "Detached killed branch only. Preorder payload destruction, child zero before child one; native paired allocation and deferred paired frees remain outside this binding."
+    }
+  ],
+  "behavior": [
+    "Kill no longer copy constructs a survivor and replaces the whole parent. Bounds.clone_from runs before object.clone_from at original destination field addresses, with no spurious parent destruction or Clone callback.",
+    "If either assignment callback fails, native and Rust retain the old live child links; partially changed bounds/object values match the native exception traces.",
+    "After successful assignment, Kill publishes the retained child links and reparents surviving grandchildren before destroying the old survivor. Parent identity remains unchanged.",
+    "Old survivor payloads are destroyed first, then killed subtree payloads in preorder: current node, child zero, child one. Each object is destroyed before its bounds at its original allocated address.",
+    "Detached AllocatedBox owners transfer to the existing NativeNodeOwner deallocation guard. Even when a Rust payload destructor panics, allocation and incremental live lease are released; DeferredDestructorPanic drains the detached branch before resuming the first panic.",
+    "The destructor-panic drain is a Rust ownership safety extension, not native throwing-destructor parity. The native fixture throws only during assignment before any ownership graph mutation or destruction.",
+    "Native destructor callbacks directly confirm grandchildren already point at the retained parent. Rust has no safe reentrant public tree metadata observer; final link tests and the explicit reparent-before-release source sequence establish the implemented phase order, not an equivalent observer API."
+  ],
+  "native_row_test_bindings": {
+    "kill 0": "kill_zero_assigns_in_place_then_destroys_survivor_and_preorder_branch",
+    "kill 1": "kill_one_uses_child_zero_survivor_and_child_zero_first_destruction",
+    "nested": "nested_kill_preserves_parent_and_stable_leaf",
+    "leaf": "kill_leaf_and_checked_invalid_arguments_have_no_callbacks",
+    "failure B": "failures::bounds_assignment_failure_preserves_original_live_links",
+    "failure O": "failures::object_assignment_failure_preserves_original_live_links"
+  },
+  "compatibility": {
+    "generic_drop_impl_added": false,
+    "unsafe_code_added": false,
+    "public_structs_unchanged": true,
+    "evidence": "ubtree.rs and ubtree_filler.rs are byte-identical to branch base. Existing borrowed payload drop-check, covariance, public field partial move and positive auto-trait compile tests run unchanged in both normal and Miri sweeps. No new bound or public signature changes.",
+    "checked_extensions": "Dead node ids, leaves and out-of-range child indices return without callbacks. Native only defines the live leaf/no-op and valid branch index domain."
+  },
+  "checks": {
+    "rust_passed": 49,
+    "miri_passed": 49,
+    "rust_targets": [
+      "ubtree_payload_contracts",
+      "ubtree_method_contracts",
+      "ncollection_ubtree",
+      "ubtree_supplemental",
+      "ubtree_fallible",
+      "ubtree_kill_contracts"
+    ],
+    "miri_targets": [
+      "ubtree_payload_contracts",
+      "ubtree_method_contracts",
+      "ncollection_ubtree",
+      "ubtree_supplemental",
+      "ubtree_fallible",
+      "ubtree_kill_contracts"
+    ],
+    "miri_toolchain": "nightly-2026-09-25",
+    "miri_flags": "-Zmiri-strict-provenance",
+    "new_tests": 9,
+    "native_kill_rows": 6,
+    "unchanged_native_payload_rows": 22,
+    "unchanged_native_method_rows": 10,
+    "native_original_passed": 16,
+    "native_rust_original_names_exactly_joined": true,
+    "tkernel_doctests_passed": 264,
+    "strict_selected_clippy_exit": 0,
+    "workspace_fmt_exit": 0
+  },
+  "remaining_gaps": [
+    "Gemmate still uses separate arena allocations and cloning rather than native paired allocation/default construction/member assignment. Native Kill releases paired arrays after payload traversal; current Rust frees each individually allocated node as it is destroyed. No allocation bytes, allocation count or pair-free timing parity is credited.",
+    "Clear and UBTree automatic destruction still use arena insertion order, not native delNode traversal/deferred pair frees. This receipt does not change or close those paths.",
+    "TreeNode destructor-body child-pointer clearing and raw Child/Parent pointer projections remain open; checked identifiers and Rust borrowing do not provide native reentrant pointer observer access.",
+    "Moved-from allocator null state, native dangling last pointer behavior, filler equal-slot assignment effects and borrowed filler insertion/canonical tree construction remain as prior receipts describe.",
+    "Arbitrary C++ generic payload ABI and address-sensitive construction are not claimed. Rust clone_from models assignment only for payload implementations that supply the corresponding assignment semantics.",
+    "No global API or legacy declaration credit is added; full TreeNode, UBTree and UBTreeFiller parity remains incomplete."
+  ],
+  "validation_history": "Initial draft attempted a direct unsafe release_typed_node call and was rejected by the crate unsafe-code lint before tests ran. Final implementation reuses existing NativeNodeOwner with no new unsafe code. Initial native fixture used a nonexistent ChangeRoot shorthand; corrected to const_cast of Root on a nonconst tree. Final native matrices, normal tests, docs, strict Clippy/fmt and strict Miri cover final sources. Miri emitted existing downstream ElementCast unstable-name-collision warnings but no errors."
+}
