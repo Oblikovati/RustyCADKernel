@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Native foundation tail validated on main; ForwardRange slice awaits final commit.",
+  "integration_status": "Native foundation tail integrated and validated on main; full parity remains incomplete.",
   "classes": [
     {
       "batch_order": 1,
@@ -174,49 +174,13 @@
   "latest_foundation_run_note": "The foundation-only 7414 count and original class entries are historical. current_draft_checkpoint records the newer frozen draft source and all workspace checks; subsequent edits require a new receipt.",
   "additional_allocator_miri_passes": 3,
   "current_integrated_checkpoint": {
-    "commit": "9f4236187e9ca686af31ab86a4f203f20c873879",
-    "receipt": "porting/audits/foundation-generic-checkpoint.json",
-    "sha256": "a36799c254629336cc626f5f435082cbf67fd42b170e5878ff72c3b18725e391",
-    "workspace_passed": 14044,
-    "workspace_failed": 0,
-    "workspace_ignored": 70,
-    "new_miri_passed": 47
-  },
-  "current_draft_checkpoint": {
+    "commit": "0cf7672bc7f0c9aa0430dded5c5b8699ef379963",
     "receipt": "porting/audits/foundation-native-tail-checkpoint.json",
     "sha256": "e430e5b9840fdc60082500a9248662fe36a6066f2016adc459ea672796b94d75",
-    "runtime": {
-      "workspace_passed": 14086,
-      "workspace_failed": 0,
-      "workspace_ignored": 70,
-      "workspace_groups": 1290,
-      "new_miri_integration_passes": 42,
-      "source_inputs": 9540,
-      "source_inputs_after_run_identical": true,
-      "strict_clippy_exit": 0,
-      "strict_clippy_scope": "workspace --all-targets",
-      "format_exit": 0,
-      "compiler_exit": 0,
-      "joined_original_runtime_cases": 1066,
-      "new_original_runtime_joins": 84
-    },
-    "scoped_method_receipts": [
-      {
-        "path": "porting/audits/sequence-borrowed-assignment-methods.json",
-        "sha256": "e3825b367d56303b1cd80efb2668d7d2957630f9d87c43d3fda10b8f7a483e26"
-      },
-      {
-        "path": "porting/audits/dynamic-array-method-tail.json",
-        "sha256": "f7311d954fdfcaaf5d386d1665673d56ee2ba9d0d2b7ab0dcc810f7d2c0fae8f"
-      },
-      {
-        "path": "porting/audits/sparse-array-base-engine.json",
-        "sha256": "badd3e06f3495763974d7367dc49749f233b9bc527afb67987b354003107f1be"
-      },
-      {
-        "path": "porting/audits/forward-native-access-method-contracts.json",
-        "sha256": "4cfdcaf21b2032263fade0732ed3fc794864e17c4db30a32fe3d2c6f8f75c80c"
-      }
-    ]
+    "workspace_passed": 14086,
+    "workspace_failed": 0,
+    "workspace_ignored": 70,
+    "new_miri_passed": 42,
+    "joined_original_runtime_cases": 1066
   }
 }
