@@ -2,7 +2,10 @@
 use super::DynamicArray;
 use crate::standard::Failure;
 
+#[allow(unsafe_code)]
+mod cached;
 mod operators;
+pub use cached::DynamicArrayCachedIterator;
 
 /// Native legacy cursor with an explicit array argument for safe access.
 /// `let cursor = array.legacy_cursor::<false>(); cursor.value(&array)?;`

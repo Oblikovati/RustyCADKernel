@@ -47,7 +47,7 @@ mod moving;
 mod replacement_policy;
 mod slots;
 mod storage_extension;
-pub use legacy_cursor::DynamicArrayIterator;
+pub use legacy_cursor::{DynamicArrayCachedIterator, DynamicArrayIterator};
 pub use storage_extension::DynamicArrayStorageExtension;
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
