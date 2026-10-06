@@ -49,11 +49,12 @@ class SparseBaseBindingTest(unittest.TestCase):
             self.native_index, self.rust_index, self.source.digest
         )
 
-    def test_exact_eight_records_and_current_sources_replay(self) -> None:
+    def test_historical_eight_records_and_explicit_current_sources_replay(self) -> None:
         for record in self.records:
             self.replay.verify(record)
         self.assertEqual(len(self.records), 8)
-        self.assertEqual(replay_sparse_base_bindings(ROOT), 8)
+        current = Path("porting/audits/sparse-base-remaining-methods.json")
+        self.assertEqual(replay_sparse_base_bindings(ROOT, current), 20)
 
     def test_stale_typed_size_cannot_substitute_for_erased_size(self) -> None:
         record = copy.deepcopy(self.records[0])

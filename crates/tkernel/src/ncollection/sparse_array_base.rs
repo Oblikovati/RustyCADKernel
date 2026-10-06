@@ -125,7 +125,8 @@ impl SparseArrayBase {
 
     /// Computes the native item address; `unsafe { base.get_item(block, 2) }`.
     /// # Safety
-    /// Block must be live and index within its allocated item span.
+    /// Block must be live and the byte offset must stay within its allocation or one past it.
+    /// The returned address need not identify an occupied object (native exhausted cursors reach the bitmap).
     pub unsafe fn get_item(&self, block: SparseArrayBlock, index: usize) -> *mut c_void {
         unsafe {
             block
