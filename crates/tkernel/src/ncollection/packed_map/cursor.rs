@@ -42,33 +42,21 @@ impl<T: PackedInteger> PackedMap<T> {
     }
     // findNext: the lowest live bit under the mask, then a mask of the bits above it.
     fn cursor_take_bit(&self, cursor: &mut PackedCursor, block: u64) -> Option<T> {
-        let bits = self.block_bits(cursor.bucket, block).unwrap_or(0) & cursor.mask;
-        if bits == 0 {
+        let Some(node) = self.buckets.find(cursor.bucket, T::Word::from_bits(block)) else {
             cursor.mask = Self::FULL_MASK;
             return None;
-        }
-        let zeros = bits.trailing_zeros();
-        cursor.mask = Self::FULL_MASK.checked_shl(zeros + 1).unwrap_or(0) & Self::FULL_MASK;
-        Some(T::from_bits((block << Self::SHIFT) | u64::from(zeros)))
-    }
-    fn block_bits(&self, bucket: usize, block: u64) -> Option<u64> {
-        self.buckets
-            .get(bucket)?
-            .iter()
-            .find(|entry| entry.index.bits() == block)
-            .map(|entry| entry.bits.bits())
+        };
+        let mut mask = T::Word::from_bits(cursor.mask);
+        let key = Self::find_next(node, &mut mask);
+        cursor.mask = mask.bits();
+        (cursor.mask != Self::FULL_MASK).then_some(key)
     }
     // nextNode: follow the live chain link, then scan the following buckets.
     fn cursor_next_node(&self, cursor: &mut PackedCursor, block: u64) {
-        let chain = self
-            .buckets
-            .get(cursor.bucket)
-            .map_or(&[][..], Vec::as_slice);
-        let position = chain.iter().position(|entry| entry.index.bits() == block);
-        // A node is only destroyed after the iterator left it, as in every native caller;
-        // an unknown node ends its chain instead of reading freed memory.
-        if let Some(next) = position.and_then(|position| chain.get(position + 1)) {
-            cursor.block = Some(next.index.bits());
+        let current = self.buckets.find(cursor.bucket, T::Word::from_bits(block));
+        // A destroyed native cursor node would be invalid; retain Rust's safe end-of-chain extension.
+        if let Some(next) = current.and_then(|node| self.buckets.following(node)) {
+            cursor.block = Some(next.mask().bits() >> Self::SHIFT);
             return;
         }
         cursor.bucket += 1;
@@ -77,9 +65,9 @@ impl<T: PackedInteger> PackedMap<T> {
     // findFirst: the head of the first non-empty bucket at or after the cursor's bucket.
     fn cursor_find_first(&self, cursor: &mut PackedCursor) {
         cursor.block = None;
-        while let Some(chain) = self.buckets.get(cursor.bucket) {
-            if let Some(head) = chain.first() {
-                cursor.block = Some(head.index.bits());
+        while cursor.bucket < self.buckets.len() {
+            if let Some(head) = self.buckets.head(cursor.bucket) {
+                cursor.block = Some(head.mask().bits() >> Self::SHIFT);
                 return;
             }
             cursor.bucket += 1;
