@@ -1,0 +1,139 @@
+{
+  "schema": "rustycad.indexed-cursor-comparison-methods.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "36a03a25349af088e08239418c2b1e2d45249c05",
+  "branch": "port/base-map-indexed-comparisons",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Six native comparison declarations only: equality corrected for observable Size evaluation order; five named boolean comparison adapters added. Six stale exclusions replaced by exact independently source-hashed partial bindings. Existing comparison documentation preserved when moved into focused comparisons module.",
+  "fixed_behavior": "Native (!More() && !other.More()) evaluates right Size only when the left cursor is exhausted. Previous Rust code eagerly evaluated both More calls, producing extra callbacks and evaluating otherwise-skipped explicit owner validation. New equality preserves short-circuit and node-owner/index fallback; inequality delegates once and propagates Result errors.",
+  "ordering_behavior": "Four predicates follow native signed distance and reversed/negated less-than definitions. They do not call Size and may order exhausted cursors that native equality treats as equal. They deliberately do not implement Rust total-order traits.",
+  "native_oracle": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_base_map_indexed_comparisons.cxx",
+      "-o",
+      "/tmp/base-map-indexed-comparison-native"
+    ],
+    "compile_exit": 0,
+    "run_exit": 0,
+    "ubsan_stderr_empty": true,
+    "oracle_rows": 13,
+    "scope": "Eight equality/inequality traces across live/end/null, independent/same owner and mutable/const policies; five relational rows include equal/different indices and zero/PTRDIFF_MAX. UBSan observed no undefined operation; overflow cases are not an oracle."
+  },
+  "controlled_regression": {
+    "restored_behavior": "Before fix eager equality body temporarily restored verbatim in its moved module, then restored final fix in finally before final tests/capture. No production mutant retained.",
+    "result": "Two new tests fail: native row trace (aa/ab versus native a) and skipped right-owner validation. One helper test passes.",
+    "exit": 101,
+    "artifact": "porting/runtime-evidence/base-map-indexed-comparison-prior-behavior-red.log.gz"
+  },
+  "checks": {
+    "rust_passed": 176,
+    "new_focused_tests": 3,
+    "existing_indexed_cursor_tests": 10,
+    "existing_original_rust_joins": 163,
+    "native_originals_passed": 163,
+    "strict_provenance_miri_passed": 13,
+    "python_binding_tests_passed": 25,
+    "strict_scoped_clippy_exit": 0,
+    "cargo_fmt_check_exit": 0,
+    "diff_check_exit": 0,
+    "binding_replay": {
+      "native_ids": 6,
+      "public_bodies": 6,
+      "exclusions_replaced_with_partial": 6,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    }
+  },
+  "compiler_capture": {
+    "toolchain": "nightly-2026-09-25",
+    "format_version": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "exit": 0,
+    "preexisting_doc_warnings": 6,
+    "scope": "Fresh production-body capture after final Rust implementation formatting. Subsequent focused test assertions/comments do not change compiled library bodies. Raw compiler and normalized archives retained; replay independently checks selected current sources."
+  },
+  "original_tests": {
+    "join_archive": "porting/runtime-evidence/base-map-indexed-comparison-original-joins.json.gz",
+    "scope": "No direct BaseMap IndexedIterator GTest declarations were added. The163 original concrete-map tests are exact-name existing regression joins; they are not proof that every concrete map uses this generic adapter. The13 native custom-container rows directly exercise the base comparisons.",
+    "inherited_receipts": [
+      "porting/audits/base-map-storage-method-contracts.json",
+      "porting/audits/base-map-basic-iterator-method-contracts.json"
+    ],
+    "assertion_audit": "No original Rust assertions changed; this batch does not claim a new complete assertion-by-assertion audit of all163 inherited tests."
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "1d819067fd6a9268ff91c3dc05772c8f65e3582a",
+    "native_ids": 6,
+    "rust_body_bindings": 6,
+    "prior_exclusions_removed": 6,
+    "partial_rows_added": 6,
+    "implemented_delta": 0,
+    "new_original_test_mapping_delta": 0,
+    "scope": "Original candidate must equal fixed base with exactly the six prior exclusion rows replaced. Current integrated ledger may include unrelated class evolution but must preserve these exact six mappings. Existing other IndexedIterator declarations are untouched."
+  },
+  "remaining_limits": [
+    "Only valid owner domains with explicit live owner arguments are claimed. Pointer identity is checked along evaluated More calls; invalid/moved owner access returns Rust Failure rather than dereferencing native invalid pointers.",
+    "Ordering parity is claimed where native conversions and signed subtraction are defined and representable. Rust distance wraps outside this domain; no C++ signed-overflow behavior claim.",
+    "Native noexcept termination on throwing Size callbacks is not equivalent to Rust unwinding. ABI, arbitrary class layout and cross-language raw storage are outside scope.",
+    "Other IndexedIterator constructors, accessors, arithmetic, aliases and remaining stale exclusions require their own exact reconciliation. No full BaseMap/toolkit/API parity claim."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/base-map-indexed-comparison-replay.py.gz > /tmp/replay-base-map-indexed-comparisons.py && python3 /tmp/replay-base-map-indexed-comparisons.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor.rs": "5e0118ee5e402c998dd1fcdecdbd1eef0bf4be278ab79451bf37ccc80763d3a2",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/arithmetic.rs": "725e6b10205828f9e159e6221c6320b9ed242f45bf31fdcff640cae0ff26104e",
+    "crates/tkernel/src/ncollection/base_map/indexed_source.rs": "0e4ceca349b4b69112791139fcb2e9db12d946361b2712883f28d57b95cde62c",
+    "crates/tkernel/tests/base_map_indexed_comparisons.rs": "0a19aecc6eaa3ebfbb130eb69f09d4cc2871cb47ef1a3acaf161516bc2933c61",
+    "crates/tkernel/tests/base_map_indexed_comparisons/support.rs": "881903e66be67355cc3de10a8fc18d210253508ff62e74d6cbf5035ad48f22b5",
+    "crates/tkernel/tests/base_map_indexed_iterator_contracts.rs": "cba8baabc1359d8b8bdd51ccc7e9cb1f01c0fcb9f9827e381c39aac4ad198009",
+    "tools/oracle/tkernel_base_map_indexed_comparisons.cxx": "f6644912d439cdb21f796f41e8798a3360810af8091f628f20bc32084f015a9e",
+    "tools/oracle/tkernel_base_map_indexed_comparisons.expected": "b4ed5828e47e46b26d60448ac3b23892a7e85d7d0b32f79c44509ca191c947f5"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-indexed-comparison-binding-tests.log.gz": "7bae9490e027ec51ddf5910bce4e174597c826a974a059a27d61a511a27c1d21",
+    "porting/runtime-evidence/base-map-indexed-comparison-bindings.json.gz": "2ba7f61612625be803a710f0c0db10eeb9daf442ab07713078be96e69b27296f",
+    "porting/runtime-evidence/base-map-indexed-comparison-clippy.log.gz": "906ce892fdbeeb25989651458e6f206690ca115bdb56ea06b131fc671719ddd2",
+    "porting/runtime-evidence/base-map-indexed-comparison-compiler.log.gz": "f5c6a503f23c629b57a4d4cffbba22e82f05ecd98bf1ea02c6e22b0ec9637a9f",
+    "porting/runtime-evidence/base-map-indexed-comparison-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-comparison-miri.log.gz": "46ec87d47f3b2f37e5180bcdf086611c6afe8686d725e775171b198add282691",
+    "porting/runtime-evidence/base-map-indexed-comparison-native-build.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-comparison-native-command.json.gz": "1b829736c05387cb1ba9e4dd128da453eccc4f2488a5f1418bca9edda0bd9c27",
+    "porting/runtime-evidence/base-map-indexed-comparison-native-originals.log.gz": "d3944942f3e0a1496e452d947d298a42ac78db57e8d183ef9aa2fd704e3a9a39",
+    "porting/runtime-evidence/base-map-indexed-comparison-native.stderr.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-map-indexed-comparison-native.stdout.gz": "d3cfac0a756f7cae925368fbc022b823f6bb7aeab1d8c9cbecfa5b7742b6766b",
+    "porting/runtime-evidence/base-map-indexed-comparison-normalized.json.gz": "226ac09ccbba9205718e71f96a9c891a4d85142b58489db7770133047d78b993",
+    "porting/runtime-evidence/base-map-indexed-comparison-original-joins.json.gz": "5d5a1bea7cb2cdb99465864d05f7fc8da847a7292dcfacd0637a0c2a22b802d6",
+    "porting/runtime-evidence/base-map-indexed-comparison-prior-behavior-red.log.gz": "06cf31d84f79f0d2d20dd5898094b6e7e98bf7a6b8b5764069b41f019a584009",
+    "porting/runtime-evidence/base-map-indexed-comparison-replay.log.gz": "b32d08c9503c3fc38e1feccb7b5984ddbf6bae914317484e234e65fd3a99d259",
+    "porting/runtime-evidence/base-map-indexed-comparison-replay.py.gz": "e42b94ffc218cb345555b0b5494c654f9a606ea1346d194d8fd55915b4a12876",
+    "porting/runtime-evidence/base-map-indexed-comparison-rust.log.gz": "83ecac5d7a25182e3c38b3f6c74d1b7e503f702c8629ecbce4e7c869e0650fc4",
+    "porting/runtime-evidence/base-map-indexed-comparison-rustdoc.json.gz": "40bed7a8c662768577b342e02d2060208ea0ec79d09cb32df156e5b91291cd19",
+    "porting/runtime-evidence/base-map-indexed-comparison-transaction.json.gz": "3879b49b187040bb3ffb79079ef194fcb8423002a3c54618f8afc44fb45bb398"
+  }
+}
