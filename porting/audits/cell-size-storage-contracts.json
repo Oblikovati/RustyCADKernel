@@ -1,0 +1,90 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_CellFilter::Reset(Array1&,allocator) same-length Array1 storage reuse",
+  "base_revision": "aff420190b0d58dc037c881a51323fd40c8a9459",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "Committed candidate; root integration and deletion pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/cell_filter.rs": "28091918af4984d04a494ca8f58d526022361a7090a0dcc0b2efee464a0dc6c7",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "69ffffeeccb745917edf78b9c501a97a3bc5ec3bce77f623d6484dda658306ce",
+    "crates/tkernel/src/ncollection/cell_filter/setup.rs": "2fbd40d6726a174d59eee65473dd44ed41be4f38c57314a5f9a8a76e2d370797",
+    "crates/tkernel/src/ncollection/cell_filter/indices.rs": "57efcecd04962514de9e4842da2f8c6432ce28191ec764e5e6f95fd4c4dfe199",
+    "crates/tkernel/src/ncollection/cell_filter/method_tests.rs": "3eaeb7bc11b3e6905a76212718b624e4e754439d1a70a6d9450fe1a88d25e51a",
+    "crates/tkernel/src/ncollection/cell_filter/fallible.rs": "1f72e57a8528a1c53af1e401ee67575a2b70148fa175bf352204649efbfdba08",
+    "crates/tkernel/src/ncollection/cell_filter/geometry.rs": "65e2895d62344182f21cff0b6cdf4e9e86d556d4447dd20f9246dadf2ee3af8e",
+    "crates/tkernel/src/ncollection/cell_filter/size_storage_tests.rs": "5ce51ded3701c473b4fef82d2ff1430578a189baa2ecba148c42163e6240fdb9",
+    "tools/oracle/tkernel_cell_size_storage.cxx": "3e5f20db945afb73b2481d254fbf007f237464c5c18c438d418db0cf28a3ae3d",
+    "tools/oracle/tkernel_cell_size_storage.expected": "6a2d73c13d7dc3556646522949593c4d3b1b50c95e1cc73cde1c2866f440c84a"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx": "4638a170c2052d06c82a54e70c753e417d0e2ba9dd088cc871e5e54e8a14a25c",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+  },
+  "artifacts": {
+    "unit": {
+      "path": "porting/runtime-evidence/cell-size-storage-unit.gz",
+      "sha256": "2507b963f8bfd91204e53da5057483d009585e940cf4c6a2d4523d533ba47885"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/cell-size-storage-rust.gz",
+      "sha256": "fa451a9596f79deb36b3a7c98eab0860d60b2fce1b89afe82f5873c3c9bce8fe"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/cell-size-storage-miri.gz",
+      "sha256": "f2e27741b8d6658764ce5efaacf63e63a9ae921311a7ed5cd2a351860011d7e2"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/cell-size-storage-clippy.gz",
+      "sha256": "fad9be268504e8cc935c4910154f74d5cc317ddda09660ad93abf59872582969"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/cell-size-storage-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/cell-size-storage-native-original.gz",
+      "sha256": "92d6ea394302c56de7cfe5eac8ccbd3a40504370a8ae56e8cdb02523bac9d6f9"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/cell-size-storage-source.tar.gz",
+      "sha256": "cd3cf7b12b5be916f54b79439fd56658bac44f04386447d9d9bae6a75ccdebd0"
+    }
+  },
+  "rust_integration_passed": 19,
+  "rust_unit_passed": 7,
+  "new_regression_tests": 2,
+  "strict_provenance_miri_passed": 7,
+  "native_original_passed": 9,
+  "original_runtime_names": [
+    "NCollection_CellFilterTest.AddInspect2D_SinglePoint",
+    "NCollection_CellFilterTest.AddInspect2D_Range",
+    "NCollection_CellFilterTest.ReversedRangesAreIgnored",
+    "NCollection_CellFilterTest.Remove2D",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterRemove",
+    "NCollection_CellFilterTest.EmptyCellCleanupAfterPurge",
+    "NCollection_CellFilterTest.AddInspect3D",
+    "NCollection_CellFilterTest.Reset",
+    "NCollection_CellFilterTest.InspectWithPurge"
+  ],
+  "native_probe_rows": 4,
+  "clippy_exit": 0,
+  "fmt_exit": 0,
+  "method_binding": {
+    "native": "NCollection_CellFilter<Inspector>::Reset(NCollection_Array1<double>&, const handle<IncAllocator>&)",
+    "rust": "CellFilter<I>::reset_sizes",
+    "correction": "Delegate to Array1::assign_trivial rather than replacing the size array allocation."
+  },
+  "observations": [
+    "Same-length resets retain the actual existing size-buffer address, copy values, and adopt source bounds, matching native Array1::Assign for double.",
+    "Changing the incoming source after Reset does not change the stored copy. Different-length reset changes size/values/bounds and later same-length reset reuses the resized buffer.",
+    "Reset still preserves the original spatial dimension and clears target cells. Allocator replacement ordering remains delegated to the existing implementation."
+  ],
+  "remaining_gaps": [
+    "CellFilter nested Cell/ListNode/CellHasher classes and exact native map-node/arena layout remain partial as recorded in cell-filter-method-contracts.json.",
+    "Four oracle rows observe size storage identity/values/bounds/dimension/empty cells; no arbitrary Standard allocator callback, OOM, zero-dimensional native hashing, or destructor callback observation parity is claimed.",
+    "No new original declaration mappings or global compiler API coverage credit is added."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "class_status": "partial"
+}

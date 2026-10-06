@@ -52,10 +52,8 @@ impl<I: CellGeometry> CellFilter<I> {
     /// drop all targets and adopt `allocator`. The iterated dimension stays unchanged.
     /// Example: `filter.reset_sizes(&sizes, None)`.
     pub fn reset_sizes(&mut self, sizes: &Array1<'_, f64>, allocator: Option<BaseAllocator>) {
-        let mut copy: Array1<'static, f64> =
-            Array1::with_bounds(sizes.lower(), sizes.upper()).unwrap();
-        copy.as_mut_slice().copy_from_slice(sizes.as_slice());
-        self.sizes = copy;
+        // OCCT Array1::Assign reuses equal-length storage while rebasing its bounds.
+        self.sizes.assign_trivial(sizes);
         self.reset_cells(allocator);
     }
     fn assemble(

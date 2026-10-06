@@ -130,3 +130,6 @@ impl<I: CellInspector> CellFilter<I> {
 
 #[cfg(test)]
 mod method_tests;
+
+#[cfg(test)]
+mod size_storage_tests;
