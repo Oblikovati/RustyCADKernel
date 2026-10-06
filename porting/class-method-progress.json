@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Generic iterator, SparseArray and vector method contracts validated on main; current draft awaits integration commit.",
+  "integration_status": "Generic iterator, SparseArray and vector method contracts integrated on main; full parity remains incomplete.",
   "classes": [
     {
       "batch_order": 1,
@@ -173,49 +173,13 @@
   },
   "latest_foundation_run_note": "The foundation-only 7414 count and original class entries are historical. current_draft_checkpoint records the newer frozen draft source and all workspace checks; subsequent edits require a new receipt.",
   "additional_allocator_miri_passes": 3,
-  "current_draft_checkpoint": {
+  "current_integrated_checkpoint": {
+    "commit": "9f4236187e9ca686af31ab86a4f203f20c873879",
     "receipt": "porting/audits/foundation-generic-checkpoint.json",
     "sha256": "a36799c254629336cc626f5f435082cbf67fd42b170e5878ff72c3b18725e391",
-    "runtime": {
-      "workspace_passed": 14044,
-      "workspace_failed": 0,
-      "workspace_ignored": 70,
-      "workspace_groups": 1286,
-      "new_miri_integration_passes": 47,
-      "source_inputs": 9515,
-      "source_inputs_after_run_identical": true,
-      "strict_clippy_exit": 0,
-      "strict_clippy_scope": "workspace --all-targets",
-      "format_exit": 0,
-      "compiler_exit": 0,
-      "joined_original_runtime_cases": 982
-    },
-    "scoped_method_receipts": [
-      {
-        "path": "porting/audits/base-list-basic-iterator-method-contracts.json",
-        "sha256": "d3a3f647800960329fca4c297ed7400cacc3f1bcce14b32d5c7e3bdfd9cec693"
-      },
-      {
-        "path": "porting/audits/base-sequence-generic-methods.json",
-        "sha256": "0ff7ec7b70bd0d534e383377cb5b799b206db2d662091a85dc69e3144a653bd3"
-      },
-      {
-        "path": "porting/audits/sparse-array-method-contracts.json",
-        "sha256": "e43c777edc2d0559e197a38a04595951252e68a764d56760e193c0ba3f345c42"
-      },
-      {
-        "path": "porting/audits/vec-native-tail-method-contracts.json",
-        "sha256": "c825788d83e53df4a65d2c4eb51f383facb8f0d52d2e29c2ee250409b31e3e77"
-      }
-    ]
-  },
-  "current_integrated_checkpoint": {
-    "commit": "68f95c49cc4917598419389c95e78342f2bdc4ff",
-    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
-    "sha256": "a450d60cceba4163238e4692e6a290afc0200476f75939c5dc683b73c26226bb",
-    "workspace_passed": 13997,
+    "workspace_passed": 14044,
     "workspace_failed": 0,
     "workspace_ignored": 70,
-    "new_miri_passed": 122
+    "new_miri_passed": 47
   }
 }
