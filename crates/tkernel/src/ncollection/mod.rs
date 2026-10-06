@@ -48,6 +48,7 @@ pub use allocator::{
     INC_MINIMUM_BLOCK_SIZE, IncAllocatorExtension, IncBlock, IncBlockSizeLevel,
 };
 mod dynamic_array;
+pub use dynamic_array::DynamicArrayCachedIterator;
 pub use dynamic_array::{
     DynamicArray, DynamicArrayCopyFailure, DynamicArrayIterator, DynamicArrayStorageExtension,
     DynamicCursor,

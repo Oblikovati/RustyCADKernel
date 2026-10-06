@@ -1,0 +1,4095 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "candidate_pending_root_integration",
+  "branch": "port/dynamic-cached-iterator",
+  "base_commit": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/metadata.rs": "83d66ec923d7a869df65b33c269f59b42c991e1caf5a11f1e5e6544af28bdaf5",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/phases.rs": "4cb64dc38da098702d1c10884ba2149797ae233297380586a89b9174dc289822",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests.rs": "5e02ced661421092a9e22763ece63b126041035c7ac8e0e27fd3a3980fa7f274",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table.rs": "db729325ec70f313682191fb316a2a42ebff66d9fcf1b8367c5d93e153f7543d",
+    "crates/tkernel/src/ncollection/dynamic_array/borrowed.rs": "ef6e55dffe3b52e0f385249276a96c44560b48d735743ccca2e5649acd7ad753",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date/copy_bits.rs": "ce6c717b1c84b707043ce542a2d2598352f1947b2809731bc76c76aeabf47b80",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "57967339a34f84be4d13c463dd7f81404216192cc2832e73ea36e5a65901c464",
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "450e91a7fd2d5337314c1a93b2ffff0a8ec07fc880f5486df9b2dcb90165e6ec",
+    "crates/tkernel/src/ncollection/dynamic_array/erase_phase.rs": "db4410f8bcd851fc61721dfa6ff9556a946cf2f6f511a098e7eb7f2b202e7875",
+    "crates/tkernel/src/ncollection/dynamic_array/increment/tests.rs": "18c23c895aa284471043c6e07229a480c84b14721e5a54b36e0b47ed08b8af39",
+    "crates/tkernel/src/ncollection/dynamic_array/increment.rs": "78c74ce986a382b393958214056b911371704c32c78f88e154d2c28a12e9fd06",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/native.rs": "3ea3ebc44c3dce14a7a6b3850a016a979ed5dd629f51c06fc958735e545973d7",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/panics.rs": "b82774790213c03b778b72116b4c6567483cdbceaaaf0f95e3a248ca7532df0d",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/transitions.rs": "883129645216e45c03acf746ead28ceb8e4ad9d72358d60646e96e1dcbe3802b",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests.rs": "bd910af6b86668aee26123534ccc9edafa0c1a5ba5d328ff618a0c4d2e2360c4",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail.rs": "fdeb3e2ee5538273c3291ac162e9f0a990d99c1b8e952b5999cf7cfcc717b7cb",
+    "crates/tkernel/src/ncollection/dynamic_array/insertion.rs": "8af21efec62c3af5f0fe189efce0b9c13a72505cf96d6b1bdd65f7609528e99a",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_append.rs": "d94a565f9be4243377872c4d99f293204e022ec7403411a74674bae51cd004e5",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_insertion.rs": "66086d6068d617853507d8e66e4bccb10840910e98953230efe9914714ae0ac9",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_reconstruction.rs": "aefbf6ae3b9105e417737d11399e66fa2aec65b2ebf296d3029e33f75d857f73",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_setvalue.rs": "6474fbb34c498505bef2c43a49783ce7d263e7ab26bfb807925172b035de7a7e",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/operators.rs": "81b248ce24f8e04ce7802e7fb2895ee26ac52be74986f1cab36affe690aa499f",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs": "175ebfe57031d29c99e5ff4347b4226b47c28de0b06f6d1b2d8270628ab276b8",
+    "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "b1ce06fe8b01d03c72d4864ee0e418788054739e67255231f546756aefb1d414",
+    "crates/tkernel/src/ncollection/dynamic_array/moving.rs": "be9978b566be7ae2d409788a64a888c9ed96c8aba57ea7797c600a8845e6cf6a",
+    "crates/tkernel/src/ncollection/dynamic_array/replacement_policy.rs": "2b486aae632b4d7e7ec0b76f030cecc35ab2835670c95f63258879afe70a24d4",
+    "crates/tkernel/src/ncollection/dynamic_array/slots.rs": "4715d1fd33438deaadaa88804421bfe5cb7cd3d82ff221aeb09eef5798d4393d",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/copy_policy.rs": "4cb21f873f5f28338429e0f4117dc7d005b3a40ad0e961e62319d2f5b97c1295",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs": "f4f67c1210601cc42daa0fc265279db7f0ec97ba7a4463ac5b383acb22a9126d",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/replacement.rs": "6653000b73da6836ec6a607f4de3e1b8d44fef93ec0fa73e67d04e5ca032ee58",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/retained_parameters.rs": "7715354f13f5c3bf03e69b114a4f66834b42478c170757c88bac3b5fa25e2cba",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "6e1bf9bfa6684c89effcd2af4845af7d7645be520852913f583b467ea38bfbb7",
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "81c3764d07d20262ad447f8f5e53b964acf5f4eb2fecfcafa0b823a0ee886c1e",
+    "crates/tkernel/src/ncollection/mod.rs": "90c48fda202527b4271061decb40f36c59b5938016571dbc43e997ccb0a86033",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_insertion.rs": "c386dc6542e649d4fe6dd5481fef5d35dbbe7a4e87a2699102a17123d28dd7ae",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_setvalue.rs": "2659554a3f340f1ada5fa3ff39149efb4708a1e0c9f84bd06f5095907b5300b2",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/contracts.rs": "b00ad8972429b09413031d863fd07f3f030a8bee54a0bf969d98366d7e0e4781",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/internal.rs": "a6508fcde68c497b93bbdd265ed376b797eb68a47c1d627645c733b8cba56b4f",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/moving.rs": "8d8f22091abe3220eda9e4878a8fd58d6b445d4e746bb277de62c51353bc26b6",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/oracle.rs": "ac94513e13d49b962a29de2d57ddcd624018ded7544e44949f6c0df40f0ce1be",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods.rs": "fa7fd0a0870ce9c6a687cb96ae88bcce35b494273aa05d29d941548a92241000",
+    "crates/tkernel/tests/dynamic_array_cached_iterator/contracts.rs": "052604e6cc813fa0c21673c78a47cb6c1c2844cffca75567434cac0bdd681c8c",
+    "crates/tkernel/tests/dynamic_array_cached_iterator.rs": "b97526b401981868a2c25b9d85360d36f0fb49b628712db57db017177ebaf6ba",
+    "crates/tkernel/tests/dynamic_array_copy_date/contracts.rs": "58abad0fc0bdfe99bb1e7cd11f2d57754f3771fa213929c73bad195e09512f54",
+    "crates/tkernel/tests/dynamic_array_copy_date/oracle.rs": "f5d23b8ffd140c8dbe635886aeb4a4f1750fed333cef66862947d9035cab7b90",
+    "crates/tkernel/tests/dynamic_array_copy_date.rs": "6bc88b234c9d90b719745c3d61aebd49f58df8b6a5551a4cecbed1dfcdc3732b",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs": "55d8b39b9bf49775105782556ed1a89e62c26190c95c3a2ead36f768ae943a32",
+    "crates/tkernel/tests/dynamic_array_emplace_allocation_order.rs": "ef722d17af1eb4b9b18dd0f988963bcd6fc5a21d191687f59a2c3a6902544f1a",
+    "crates/tkernel/tests/dynamic_array_emplace_value_order.rs": "06c80884073436e7f948f46174170e3631ea9dc0820cfc96a76e88df2c392f7a",
+    "crates/tkernel/tests/dynamic_array_erase_last_phase.rs": "1d2c3b60fb76b63c0bf273fb90472e4683d4fb9cf3db097130c5adaced3e5997",
+    "crates/tkernel/tests/dynamic_array_increment_overflow.rs": "4d24c227d928c4131ef0b239e39b0d4b25b65ca2c0d211ce6b84cf54040628b5",
+    "crates/tkernel/tests/dynamic_array_internal_reconstruction.rs": "2aa509be0ea8a0f0ddc9f7f4ebef9c3c06963ed4ad2dbfe4bee8cd6094e8d00d",
+    "crates/tkernel/tests/dynamic_array_iterator_tail.rs": "5e530b723f555b0cc3ead07a01ced6667f1ab28924c0c4b7f121b084e7e45fd3",
+    "crates/tkernel/tests/dynamic_array_legacy_cursor_contracts.rs": "f5615e17d979a4152d6936159d7a634722469b8b722c9f05042f7b0d2084449b",
+    "crates/tkernel/tests/dynamic_array_method_tail/oracle.rs": "5c1c93128133492ade6dc889558b1a7994aed8d28dc398be73c97166df09bd66",
+    "crates/tkernel/tests/dynamic_array_method_tail/storage.rs": "5175e099f3ef67019e0a2d40c70ef894721a0643f735f3c7c1a5d451905dfba5",
+    "crates/tkernel/tests/dynamic_array_method_tail.rs": "66dd2eefcb5c71e85f4b99edb5bbeb4fe8f4b302d7a0ec836574b9f0c1c0622e",
+    "crates/tkernel/tests/dynamic_array_move_constructor.rs": "dbb462e6f6fe19a535c5383bf45d9e6974245161a8db3569fc14aaeff00ed37f",
+    "crates/tkernel/tests/dynamic_array_native_insertion/convenience.rs": "3a57bdc38468dddcb64fcc61060b2eb362cd38f3d68b0ddefeb0445f92807968",
+    "crates/tkernel/tests/dynamic_array_native_insertion/oracle.rs": "b59a7cc46d9c3164128defc9c07672bd16f9e7da9931846be86df360d50ad652",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs": "576c25dc0ec56d26ef965d1a66b2eea9a71f5d9a7122a2716884c008ce7f735d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/contracts.rs": "f45f3ba6678d66780ebe44d8bcaef0cbc495c2b4e1d5654001602c1ef812066d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/oracle.rs": "2be06c452aa3744033688fce7ed095050ec7483b146413d8979eb8bd4837370c",
+    "crates/tkernel/tests/dynamic_array_protected_storage.rs": "9f2583cd069b782e1d2f31443f9f50f16e4d26865d2582fde70d15f7711f38a1",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/contracts.rs": "9e73e8402dbd5172c7af2e4e0823ffe9e4aa571bbaf9aa2d0f8f49b2ff3d2e90",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/oracle.rs": "232802eb0f7214040bd16dad06b40b7264e6bebb10de3da92a5ca7b48ae5f48d",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs": "04d2991938e0f58511110dccc7542d3ae7f0e17775df325c246daf44db80b884",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/contracts.rs": "466f4ca295f14298ca9b0c766fe174287a6841d3e7f320ca1cddf099de819b46",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/emplace.rs": "eb560358b432b2024f07da572ac6ffa1b7997c4feb5a763268fc5f4b3e8f9439",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/oracle.rs": "1c7668759bdd3398a378fe2198c535f64b23cb7be5d7690d995fcf161dcb0c54",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs": "a1ff2c1c76a75d54008ea5d1e0515d16d2271ffd719c20b0b5f655190c4ad3c3",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/contracts.rs": "336e4b234f62849b3ec7a6ba2af79e2d9705bd2ba083763f850906e579de27f9",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/oracle.rs": "3eb53e8681941e356d184bef61e97509d226ac68576af8b34072549079c02611",
+    "crates/tkernel/tests/dynamic_array_retained_parameters.rs": "0be211e1854f9b078265e3d61b1a3b1a0901a8c8a1b4e9efa5271093c35be3eb",
+    "crates/tkernel/tests/ncollection_dynamic_array/basic.rs": "585b61713888ed825672bee602f618f1282705641a6172f61c6b49c4e713dcf3",
+    "crates/tkernel/tests/ncollection_dynamic_array/emplacement.rs": "e67889874ef91a39460f695cdfc808c456c4ceee02d4f49a0039c4b7943e64a8",
+    "crates/tkernel/tests/ncollection_dynamic_array/indices.rs": "dfee440e1f60829811f4fd687b6f69364586963155a466f4ad5302dc3cf63e3e",
+    "crates/tkernel/tests/ncollection_dynamic_array/insertion.rs": "8be53f9883d2ecc737b85f4bb4531ff32bed1fea9e9a4e3cb51200a89a5b0ac9",
+    "crates/tkernel/tests/ncollection_dynamic_array/iteration.rs": "7925ba8f77b0d6eb877b89d2615a234ecf982efb0bc4f3058dcd70455f0abc42",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs": "2709f289827412be11a3f7f78d0e9d0240f20cd4c8cd0402d85ce73a81e6cf3d",
+    "tools/oracle/tkernel_dynamic_cached_iterator.cxx": "5fdc008eb5cb6f436c8849bb79c15927c1e1156dcb06f1879b530c6ff4e55181",
+    "tools/oracle/tkernel_dynamic_cached_iterator.expected": "9afd285561ac1211ee553b9f4fbb420c79b2325cb733499a34ebd254b38c1c98"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "native_header_resolution": {
+    "installed_forwarder": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_DynamicArray.hxx",
+    "forwarder_sha256": "1f2fcb0d67395dcef9425cb5c59ecf1d6bdcfc8fe3c861b7502556ee17e966a0",
+    "included_source": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+    "included_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "matches_pinned_git_blob": true
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-cached-iterator-rust.log.gz": "8f2cd7382939eecb8638fec788c486a631593fe3e8da3ff3172506fb05ce1603",
+    "porting/runtime-evidence/dynamic-cached-iterator-unit.log.gz": "1dafcb160ccc99f732106602b745364cb9278a9dacf4098d2f0deb2ed94e5ca8",
+    "porting/runtime-evidence/dynamic-cached-iterator-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-cached-iterator-clippy.log.gz": "cf06d51a44f24a132f861cff0401d86d0eaa1ff13f1521f63d4957542ced8b42",
+    "porting/runtime-evidence/dynamic-cached-iterator-miri.log.gz": "8d3a9d8f787be881f8791f6db626eef22c1a1c5e2675d7cdc9e5eaf5e1f97a28",
+    "porting/runtime-evidence/dynamic-cached-iterator-unit-miri.log.gz": "9f9dd79e7968bc9b32fd4610117b5840bff2bb4f2492e530f9c2e6e60cf28895",
+    "porting/runtime-evidence/dynamic-cached-iterator-compiler.log.gz": "61fc3c3a3e734c5c6512fd8c9062dc4d7cd61e9eb3253f129508577d09385543",
+    "porting/runtime-evidence/dynamic-cached-iterator-native-originals.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-cached-iterator-native-compile.log.gz": "f6a1805107bdff1ace11843459abf5afc4e9fa0a252a5721efdd8bc23e6564cd",
+    "porting/runtime-evidence/dynamic-cached-iterator-native-final.log.gz": "727d9b19fd1d98a297f3011970a0ed01ca212f0011a763c701912be99cfd40bd",
+    "porting/runtime-evidence/dynamic-cached-iterator-native-ubsan.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-cached-iterator-compiler-json.json.gz": "f953a35f8b3e7b935ef4c00c59412260a58c4c055dd0a6c9a99726ea295eb815",
+    "porting/runtime-evidence/dynamic-cached-iterator-normalized.json.gz": "89a78929db5926a360c22b97021e29f9ac80e88a41428646f2ef3511a354ef13",
+    "porting/runtime-evidence/dynamic-cached-iterator-source.tar.gz": "5b36d0be5de515f997350a8d6674c9441eff278a4b3a2c57c7ee49df789987b6"
+  },
+  "checks": {
+    "rust_passed": 284,
+    "unit_passed": 21,
+    "miri_passed": 82,
+    "unit-miri_passed": 21,
+    "native_originals_passed": 52,
+    "new_native_cached_pointer_rows": 13,
+    "native_ubsan_exit": 0,
+    "fmt_exit": 0,
+    "scoped_dynamic_clippy_exit": 0,
+    "compiler_exit": 0
+  },
+  "targets": [
+    "dynamic_array_borrowed_methods",
+    "dynamic_array_cached_iterator",
+    "dynamic_array_copy_date",
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_erase_last_phase",
+    "dynamic_array_increment_overflow",
+    "dynamic_array_internal_reconstruction",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_move_constructor",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_retained_parameters",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "miri_targets": [
+    "dynamic_array_cached_iterator",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_method_tail",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "miri_unit_filter": "ncollection::dynamic_array",
+  "miri_flags": [
+    "-Zmiri-strict-provenance"
+  ],
+  "native_compile_flags": [
+    "-std=c++17",
+    "-O1",
+    "-g",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.Value"
+  ],
+  "bindings": [
+    {
+      "native": {
+        "id": "01e34824318f8f029e5e1c6fe3a61f5d4505c05812366a1f8dca9f05be4358e3",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::Value",
+        "signature": "std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>::type () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@Value#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "8b2c91d79c4fbe1554d3a5b1f01a417aeb4be7239821d10bb9ba25e2cac5b82b"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::change_value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "3468e6813cc3d92ea0242068b6bbba7b36d86934290e2b9e4fbad695f27d8b30"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "08d3c6878ebf423b189b20caeb2669857b276c59a26149e74cae87a59ae10cad",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator--",
+        "signature": "NCollection_DynamicArray::BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant> &() noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@operator--#",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::retreat_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "762c97e20b2b7314a1cd946a2a84c32b75454a7545b2143fcb9831bb9c9863a7"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::retreat_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "31473bb1ae50a1b0ab7707cc9874577514abd21d1e5bc99d7bef2c99b3c8cb8a"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "2241b5e2360fc939dac9d2817fc8889c5e8cd2daa021a31ec5d4d3af3e3b4a76",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator->",
+        "signature": "std::conditional<value-parameter-1-0, const type-parameter-0-0 *, type-parameter-0-0 *>::type () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@operator->#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::pointer",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "raw_pointer": {
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "c74adff89b2c8085983f8cb8c1007febb3265cef9abed6c5d12408071aa62bcd"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::change_pointer",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "269b8da6778d86ca691e547dccf247ccecf7abfe578a179f4b26c6a810c29ee7"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "29e215ee6461019dcc8d2230b190c2d026233b0752d7a305dea1a2b0e7f2b3af",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator==",
+        "signature": "bool (const NCollection_DynamicArray::BasicIterator<value-parameter-2-0> &) const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>1#Nboperator==#&1>@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator1#b#1",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray::BasicIterator<theOtherIsConstant> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::same_position",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "other",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArrayCachedIterator",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                },
+                                {
+                                  "const": {
+                                    "expr": "O",
+                                    "value": null,
+                                    "is_literal": false
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "primitive": "bool"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "O",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1bb4beb92a0671ad2d695359dc807ff731a9dacad73063be166daeec3007eb57"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "6851685c6568a86b4687ad98cf0b90ab187685a4797a926b67736623c8f788fe",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray::BasicIterator<false> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator1Vb0#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray::BasicIterator<false> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::as_const_cursor",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "DynamicArrayCachedIterator",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "T"
+                          }
+                        },
+                        {
+                          "const": {
+                            "expr": "false",
+                            "value": null,
+                            "is_literal": true
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "ec9b9f5299d6fea811818815c1df9920f4be86a941e293c990e5467a1bfa3505"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "685bad0c417dc517c6b3ff5e358d77d2c96deb3ceffc3b1bf6135a7f50cbb981",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray::BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@BasicIterator#&1>@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator1#",
+        "written_parameter_types": [
+          "const BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::<core::clone::Clone>::clone",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "generic": "Self"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "Clone",
+              "resolved_item_path": "core::clone::Clone",
+              "args": null
+            }
+          },
+          "declaration_sha256": "fb65b86ab9744e0ef9e19008f43c0e9dea61823b6499241b1745d34fa405b564"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "6a7ca21f4dfd752fc88813750031ff5e9ba3adf052ad74b48f594845c9d2b535",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator++",
+        "signature": "NCollection_DynamicArray::BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant> &() noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@operator++#",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::advance_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "95f4b3a265beacfe798c4ca32d33dfa90acdcf57142c7e8a4ea3b30fc27cfdbe"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::advance_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "681e59ac5908546ba50e14b00595de302fc1260b9134d81ab488a459c04acbae"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "6e8ae2eb504df2b7189ffeebcf4d775e6c49bba06daba3269ca63e996d15fc1b",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator*",
+        "signature": "std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>::type () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@operator*#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "8b2c91d79c4fbe1554d3a5b1f01a417aeb4be7239821d10bb9ba25e2cac5b82b"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::change_value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "3468e6813cc3d92ea0242068b6bbba7b36d86934290e2b9e4fbad695f27d8b30"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "70204e3a3e340dcc8010f15cdbfaa1787e0a584307aed8e5678c70576adc3d96",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray<TheItemType> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray1t0.0#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray<TheItemType> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "cc99c7625a71488497fb1219bddd2d226439cca997ad49870783e311a89468ad"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "75c03597bf9297b977d1854cb023e5305407bb57dbc37622a523268a3bfcae55",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray<TheItemType> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray1t0.0#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray<TheItemType> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "cc99c7625a71488497fb1219bddd2d226439cca997ad49870783e311a89468ad"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "843e238ec433746db9ddea986aee9487af02367efc6567697c33e96bdb16be04",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray::BasicIterator<false> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator1Vb0#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray::BasicIterator<false> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::as_const_cursor",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "DynamicArrayCachedIterator",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "T"
+                          }
+                        },
+                        {
+                          "const": {
+                            "expr": "false",
+                            "value": null,
+                            "is_literal": true
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "ec9b9f5299d6fea811818815c1df9920f4be86a941e293c990e5467a1bfa3505"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "91a646b2a501ea6d347822a19a68a4fcb14762a25723374ea16af431c6eff553",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (NCollection_DynamicArray<TheItemType> &, unsigned long) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeBasicIterator#&>@ST>1#T@NCollection_DynamicArray1t0.0#l#v#",
+        "written_parameter_types": [
+          "NCollection_DynamicArray<TheItemType> &",
+          "const size_t"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_mutable",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1137155a7ec0ec3f43415c4b8669dd009c55efe339cdefb68cf36364db7c8ea9"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "94850d7764c121e3e3df406826680881cb799326d616d91d68d2f8ab941ecd85",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::More",
+        "signature": "bool () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@More#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::more",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "primitive": "bool"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "9a019623d6a8b89567af444af5a6bf6e408df5407262da61f4ad93c16e97bc43"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "97d06dad93112892c95c12bc153d998a719f6af083036f577195415e8ab0c3c6",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (NCollection_DynamicArray<TheItemType> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeBasicIterator#&>@ST>1#T@NCollection_DynamicArray1t0.0#v#",
+        "written_parameter_types": [
+          "NCollection_DynamicArray<TheItemType> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_mutable",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1137155a7ec0ec3f43415c4b8669dd009c55efe339cdefb68cf36364db7c8ea9"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "a314d484618f5e87e1b06ba3d970aed8af57d715a3d95a2b1611ce00a76de7c9",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::ChangeValue",
+        "signature": "std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>::type () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeChangeValue#^std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>:::type#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::change_value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "3468e6813cc3d92ea0242068b6bbba7b36d86934290e2b9e4fbad695f27d8b30"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "a7e011bbdc6ef71a70b4c1380114f56a4edf57cff0a5be4c74a12624e609d67e",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (NCollection_DynamicArray<TheItemType> &) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeBasicIterator#&>@ST>1#T@NCollection_DynamicArray1t0.0#v#",
+        "written_parameter_types": [
+          "NCollection_DynamicArray<TheItemType> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_mutable",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1137155a7ec0ec3f43415c4b8669dd009c55efe339cdefb68cf36364db7c8ea9"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "aac6d98635f82f5654221feb3ebec26aadbce521405c8decc60298bce3aedaa7",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator==",
+        "signature": "bool (const NCollection_DynamicArray::BasicIterator<value-parameter-2-0> &) const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>1#Nboperator==#&1>@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator1#b#1",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray::BasicIterator<theOtherIsConstant> &"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::same_position",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "other",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArrayCachedIterator",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                },
+                                {
+                                  "const": {
+                                    "expr": "O",
+                                    "value": null,
+                                    "is_literal": false
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "primitive": "bool"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "O",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1bb4beb92a0671ad2d695359dc807ff731a9dacad73063be166daeec3007eb57"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "b31284a2ef663cbcd1b039703c34d137a044a50189ddd8738fa885cedd94ac93",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::operator+=",
+        "signature": "NCollection_DynamicArray::BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant> &(long) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@operator+=#L#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray::BasicIterator::difference_type"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::offset_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "offset",
+                  {
+                    "primitive": "isize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "141bb4b020f53b16a6e9caf61cfc53ed46110841c90e6656f85c4668c186db9e"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::offset_with",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "owner",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "offset",
+                  {
+                    "primitive": "isize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "borrowed_ref": {
+                              "lifetime": null,
+                              "is_mutable": true,
+                              "type": {
+                                "generic": "Self"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/navigation.rs",
+          "source_sha256": "ab65c95991275437f7c7873e116c89b17ec6d2f7e43f251a6570b55b568f8f3d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "172d73ad7198b54ad185bbc49f6dd133e26aff5e7bb6221d68edfab394d6fb70"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "c7576065b2bda0a9f4f0ee3df2cd2fb3f2282d2d2d821b9c81f9280551d5e729",
+        "kind": "FunctionTemplate",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray<TheItemType> &, unsigned long) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray1t0.0#l#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray<TheItemType> &",
+          "const size_t"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "cc99c7625a71488497fb1219bddd2d226439cca997ad49870783e311a89468ad"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "cacbed3892f27a1aa6d1dc3f3ca2a57ccac96e0b2498cdcf3c07e0cabe25160b",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (const NCollection_DynamicArray<TheItemType> &, unsigned long) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-2-0, int>:::typeBasicIterator#&1>@ST>1#T@NCollection_DynamicArray1t0.0#l#v#",
+        "written_parameter_types": [
+          "const NCollection_DynamicArray<TheItemType> &",
+          "const size_t"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": false,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "cc99c7625a71488497fb1219bddd2d226439cca997ad49870783e311a89468ad"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "d1b8855f41b91ab4d2a7f30e8c51d271b9c9bd6dbbd57ea104276b77c9709c92",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::ChangeValue",
+        "signature": "std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>::type () const noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeChangeValue#^std::conditional<value-parameter-1-0, const type-parameter-0-0 &, type-parameter-0-0 &>:::type#1",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::change_value",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "3468e6813cc3d92ea0242068b6bbba7b36d86934290e2b9e4fbad695f27d8b30"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "e2bc9c4356cdc4e318ae1d21a7c6443ff57d8e967cd53391f5d395ffd0ef2e1b",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void (NCollection_DynamicArray<TheItemType> &, unsigned long) noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<!value-parameter-2-0, int>:::typeBasicIterator#&>@ST>1#T@NCollection_DynamicArray1t0.0#l#v#",
+        "written_parameter_types": [
+          "NCollection_DynamicArray<TheItemType> &",
+          "const size_t"
+        ]
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_mutable",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "array",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "DynamicArray",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::DynamicArray",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "Failure",
+                              "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached/capture.rs",
+          "source_sha256": "a2ea61953443deb9dfe9bdca17dfd7fc283dc6b06afbc93ec56ebc9a92c5b474",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "value": null,
+                          "is_literal": true
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1137155a7ec0ec3f43415c4b8669dd009c55efe339cdefb68cf36364db7c8ea9"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    },
+    {
+      "native": {
+        "id": "f05bd7fab880e373d8a9ff9cd8a00a994e91d1d7c20bfbd1b55193953520e9b4",
+        "kind": "CXXConstructor",
+        "qualified_name": "NCollection_DynamicArray::BasicIterator::BasicIterator<IsConstant>",
+        "signature": "void () noexcept",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@ST>1#Nb@BasicIterator@F@BasicIterator#",
+        "written_parameter_types": []
+      },
+      "rust_targets": [
+        {
+          "path": "rustycad_tkernel::ncollection::DynamicArrayCachedIterator::<core::default::Default>::default",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [],
+              "output": {
+                "generic": "Self"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/cached.rs",
+          "source_sha256": "62187b28400f6bedbe3e0ea42d621f40305b8d4c19c4b73b2b4620494d971f04",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "DynamicArrayCachedIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::cached::DynamicArrayCachedIterator",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "value": null,
+                          "is_literal": false
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "M",
+                  "kind": {
+                    "const": {
+                      "type": {
+                        "primitive": "bool"
+                      },
+                      "default": null
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "Default",
+              "resolved_item_path": "core::default::Default",
+              "args": null
+            }
+          },
+          "declaration_sha256": "6d7dc5dbe95d1f50eced1d7291002bc0c27787b6db5593bd6161d4eeb95866b1"
+        }
+      ],
+      "status": "partial_actual_cached_pointer_domain",
+      "domain": "Native IsConstant=true corresponds to Rust MUTABLE=false; native IsConstant=false corresponds to Rust MUTABLE=true. Array-only constructors invoke index0. Generic const pointer/value adapters use M=false for const BasicIterator; mutable BasicIterator uses change_pointer/change_value. Default template arguments only. Navigation takes the original owner explicitly; unsafe dereference requires current allocation-owner lifetime and compatible aliasing."
+    }
+  ],
+  "behavior": [
+    "DynamicArrayCachedIterator stores actual current and block-end pointers alongside the existing detached position state. It does not synthesize element addresses from logical IDs, copy the owner block table, or dereference the stored owner pointer.",
+    "Shared construction captures read provenance from block.as_ptr. Mutable construction/reload captures writable raw provenance directly from block.as_mut_ptr, covering the block rather than narrowing to a single &mut T. Const conversion and Clone copy the real cached pointers without reloading. No Clone/Default bound is imposed on payload T.",
+    "Pointer getters return the actual saved address, More tests null, and same_position compares original container identity plus index independently of pointer equality. Unsafe value/change_value require initialized current storage, allocation-owner lifetime, retained pointer provenance and appropriate shared/exclusive access.",
+    "Checked advance/retreat/offset accept the original owner explicitly and verify its address before changing state. Within-block increments preserve the transferred pointer; native boundary reloads and even offset0 consult the original container. Failed reload/owner/overflow validation leaves the saved state unchanged.",
+    "Thirteen native rows prove move construction and move Assign preserve cached pointer identity and writable access in the destination while iterator equality still names the original source. After source refill, cached value2 remains from the old block, offset0 selects source102, crossing the old boundary selects source103, and retreat selects source102.",
+    "A native row and strict Miri show cached reads remain valid after destruction of the original container when the moved-to array retains the allocation. Such access never reads owner metadata. Further navigation requires an available original owner reference and is intentionally a narrower domain.",
+    "Tests cover shared and mutable pointer transfer, non-Clone payload writes, const traversal across blocks, exhausted-pointer return, const conversion, copied cursor state, wrong owners, absent/dead-slot reloads, signed overflow and rejecting null-pointer increments after unsigned index wrap.",
+    "All52 original runtime names join normal and strict Miri logs. Existing safe detached cursor behavior is unchanged. The receipt contains23 exact inventory IDs including distinct template and callable child declarations; they are scoped partial bindings, not23 newly completed semantic APIs. Const-specialized navigation bodies are distinguished by full compiler impl_context literal false/true."
+  ],
+  "limitations": [
+    "This is an explicit cached-pointer adapter, not a replacement of every existing safe iterator convenience. Remaining cached postfix, arithmetic-returning-copy, subscript, difference/order, assignment and legacy Init/Initialize surfaces are not claimed complete by this batch.",
+    "Safe navigation may compute or return a raw address for an ended or invalidated element; More/pointer are not lifetime validation. Actual dereference is unsafe and callers must keep the current allocation alive and avoid conflicting access. No read of a dead slot is tested or authorized.",
+    "Navigation requires a supplied original owner even in native phases that do not read it. After original-owner destruction, cached pointer/value observations are supported under their lifetime contract, but navigation cannot be expressed through this checked adapter.",
+    "Wrong-owner and invalid initialized-slot/block-end checks, signed-overflow errors and null-increment rejection are Rust boundary extensions outside defined native dereference/navigation cases. Zero-sized payloads, zero-stride retained mutation and incompatible retained block-end layouts remain outside captured slot domains.",
+    "C++ cached-pointer semantics do not remove Rust provenance obligations. A pointer whose tag was invalidated by a conflicting Rust reference is not made valid by container transfer or by this adapter.",
+    "Native generic overload bindings cover default IsConstant-dependent enable_if parameters; explicit unusual template-parameter overrides and virtual legacy cursor override behavior are not proved. Cross-platform ABI/layout and native dangling-pointer reads remain excluded.",
+    "Public copy-constructor failure descriptor-unwind and leaked resource lifetimes remain actionable in the separate copy-policy work; this iterator adapter does not change that domain."
+  ],
+  "global_api_credit_delta": 0,
+  "global_legacy_credit_delta": 0,
+  "validation_scope": "Final source passes20 DynamicArray integration targets (284 tests),21 units, strict Clippy/fmt and103 strict Miri tests. One native probe compiles with UBSan; linked TKernel is prebuilt.23 exact native declarations bind body-bearing Rust cached-pointer methods, with both specialized navigation signatures identified by const impl context. No shared ledger or raw lifetime helper changes."
+}
