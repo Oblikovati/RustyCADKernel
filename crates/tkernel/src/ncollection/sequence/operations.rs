@@ -40,8 +40,7 @@ impl<T> Sequence<T> {
         cursor: &SequenceCursor,
         construct: impl FnOnce() -> T,
     ) -> Result<&mut T, Failure> {
-        let offset = self.cursor_insertion("EmplaceAfter", cursor)?;
-        Ok(self.insert_node_with(offset, construct))
+        self.insert_cursor_with(cursor, construct)
     }
 }
 impl<T: Clone> Sequence<T> {
@@ -92,11 +91,16 @@ impl<T: Clone> Sequence<T> {
     }
     /// Moves (same allocator) or copies and clears (other allocator) `source` after `offset`.
     fn splice_sequence(&mut self, offset: usize, source: &mut Self) {
-        if self.resource == source.resource {
-            let moved = source.len();
-            self.nodes.splice(offset..offset, source.nodes.drain(..));
-            self.refresh_links_around(offset);
-            self.refresh_links_around(offset + moved);
+        if self.allocator() == source.allocator() {
+            self.owners.reserve(source.owners.len());
+            // Ownership registry order is unrelated to the native topology order.
+            unsafe {
+                self.topology
+                    .exclusive()
+                    .insert_sequence_after(offset, source.topology.exclusive())
+            }
+            .expect("checked sequence insertion index");
+            self.owners.append(&mut source.owners);
             return;
         }
         // Native prependSeq/appendSeq link each successful copy before the next copy begins.
@@ -108,7 +112,7 @@ impl<T: Clone> Sequence<T> {
 }
 impl<T: Clone> Clone for Sequence<T> {
     fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(self.resource.clone());
+        let mut copy = Self::with_allocator(self.allocator().clone());
         copy.assign(self);
         copy
     }
