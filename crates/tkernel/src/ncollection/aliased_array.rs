@@ -4,6 +4,7 @@ mod access;
 mod legacy;
 mod pointers;
 mod validation;
+use validation::access_failure;
 /// Plain bitwise value accepted by runtime-stride views; all integer and float primitives qualify.
 pub trait ArrayValue: bytemuck::Pod {}
 impl<T: bytemuck::Pod> ArrayValue for T {}
@@ -32,13 +33,20 @@ impl<'a> AliasedArray<'a> {
     /// Fresh bytes are initialized to zero where native bytes are indeterminate.
     pub fn new(stride: usize, count: usize) -> Result<Self, Failure> {
         let mut array: Self = Self::empty(stride)?;
+        checked_count(
+            count,
+            "NCollection_AliasedArray, array size is out of supported range",
+        )?;
         array.resize(count, false)?;
         Ok(array)
     }
     /// Borrow mutable external values without copying; `AliasedArray::from_slice(&mut values)?`.
     pub fn from_slice<T: ArrayValue>(values: &'a mut [T]) -> Result<Self, Failure> {
         let stride: usize = Self::checked_stride(size_of::<T>())? as usize;
-        checked_count(values.len())?;
+        checked_count(
+            values.len(),
+            "NCollection_AliasedArray, array pointer and length should be valid",
+        )?;
         let count: usize = values.len();
         Ok(Self {
             storage: ArrayStorage::Borrowed(bytemuck::cast_slice_mut(values)),
@@ -96,10 +104,19 @@ impl<'a> AliasedArray<'a> {
     }
     /// Reallocate unless the element count is unchanged; `array.resize(4, true)?`.
     pub fn resize(&mut self, count: usize, copy: bool) -> Result<(), Failure> {
-        checked_count(count)?;
+        checked_count(
+            count,
+            "NCollection_AliasedArray::Resize, size is out of supported range",
+        )?;
         if count == self.count {
             return Ok(());
         }
+        let storage = self.resized_storage(count, copy)?;
+        self.storage = ArrayStorage::Owned(storage);
+        self.count = count;
+        Ok(())
+    }
+    fn resized_storage(&self, count: usize, copy: bool) -> Result<Vec<u128>, Failure> {
         let bytes: usize = self
             .stride
             .checked_mul(count)
@@ -110,20 +127,14 @@ impl<'a> AliasedArray<'a> {
             bytemuck::cast_slice_mut::<u128, u8>(&mut storage)[..copied]
                 .copy_from_slice(&self.bytes()[..copied]);
         }
-        self.storage = ArrayStorage::Owned(storage);
-        self.count = count;
-        Ok(())
+        Ok(storage)
     }
     /// Copy equal-shaped contents into existing storage; `array.assign(&source)?`.
     pub fn assign(&mut self, source: &Self) -> Result<&mut Self, Failure> {
         if self.stride != source.stride || self.count != source.count {
-            return Err(Failure::with_type(
+            return Err(Failure::with_message(
                 "Standard_DimensionMismatch",
-                &format!(
-                    "AliasedArray shape ({}, {}); expected ({}, {})",
-                    source.stride, source.count, self.stride, self.count
-                ),
-                "",
+                "NCollection_AliasedArray::Assign(), arrays have different size",
             ));
         }
         self.bytes_mut().copy_from_slice(source.bytes());
@@ -150,33 +161,29 @@ impl<'a> AliasedArray<'a> {
         };
         &mut bytes[..size]
     }
-    fn check_type<T: ArrayValue>(&self, partial: bool) -> Result<(), Failure> {
-        if size_of::<T>() == 0
-            || (if partial {
-                size_of::<T>() > self.stride
-            } else {
-                size_of::<T>() != self.stride
-            })
-        {
-            return Err(Failure::with_type(
-                "Standard_TypeMismatch",
-                &format!(
-                    "AliasedArray type size {}; expected {} stride {}",
-                    size_of::<T>(),
-                    if partial { "at most" } else { "exactly" },
-                    self.stride
-                ),
-                "",
-            ));
+    fn check_type<T: ArrayValue>(&self, partial: bool, method: &str) -> Result<(), Failure> {
+        let size = size_of::<T>();
+        let matches = if partial {
+            size <= self.stride
+        } else {
+            size == self.stride
+        };
+        if size != 0 && matches {
+            return Ok(());
         }
-        Ok(())
+        Err(access_failure(
+            method,
+            "wrong type",
+            "Standard_TypeMismatch",
+        ))
     }
-    fn offset(&self, index: usize) -> Result<usize, Failure> {
+    fn offset(&self, index: usize, method: &str) -> Result<usize, Failure> {
         if index >= self.count {
-            return Err(Failure::out_of_range(&format!(
-                "AliasedArray index {index}; expected 0..{}",
-                self.count
-            )));
+            return Err(access_failure(
+                method,
+                "out of range index",
+                "Standard_OutOfRange",
+            ));
         }
         Ok(index * self.stride)
     }
@@ -196,9 +203,9 @@ impl Clone for AliasedArray<'_> {
         copy
     }
 }
-fn checked_count(count: usize) -> Result<(), Failure> {
+fn checked_count(count: usize, message: &str) -> Result<(), Failure> {
     if count == 0 {
-        return Err(invalid_shape(0, count));
+        return Err(Failure::with_message("Standard_RangeError", message));
     }
     Ok(())
 }
