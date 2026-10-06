@@ -1,5 +1,6 @@
 //! Arbitrarily bounded arrays, corresponding to `NCollection_Array1`.
 
+mod buffer_constructors;
 mod pointers;
 mod raw_copy;
 mod returning;
@@ -78,11 +79,7 @@ impl<T> Array1<'_, T> {
 impl<'a, T: Default> Array1<'a, T> {
     /// Allocates inclusive bounds; `Array1::<i32>::with_bounds(-2, 2).unwrap().len() == 5`.
     pub fn with_bounds(lower: i32, upper: i32) -> Result<Self, super::ArrayError> {
-        let size = i64::from(upper) - i64::from(lower) + 1;
-        if size < 0 {
-            return Err(super::ArrayError::Bounds { lower, upper });
-        }
-        let mut array = Self::with_size(size as usize);
+        let mut array = Self::with_size(checked_array_extent(lower, upper)?);
         array.lower = lower;
         Ok(array)
     }
@@ -97,10 +94,9 @@ impl<'a, T: Default> Array1<'a, T> {
 
     /// Selects borrowed storage or a fresh owned allocation; `Array1::from_buffer(&mut [1,2], true)`.
     pub fn from_buffer(buffer: &'a mut [T], use_buffer: bool) -> Self {
-        if use_buffer {
-            return Self::from_slice(buffer);
-        }
-        Self::with_size(buffer.len())
+        let length = buffer.len();
+        Self::from_buffer_size(buffer, length, use_buffer)
+            .expect("the requested prefix equals the buffer length")
     }
 }
 
@@ -319,11 +315,7 @@ impl<T: Default + Clone> Array1<'_, T> {
         upper: i32,
         copy: bool,
     ) -> Result<(), super::ArrayError> {
-        let length = i64::from(upper) - i64::from(lower) + 1;
-        if length < 0 {
-            return Err(super::ArrayError::Bounds { lower, upper });
-        }
-        self.resize(length as usize, copy);
+        self.resize(checked_array_extent(lower, upper)?, copy);
         self.lower = lower;
         Ok(())
     }
@@ -395,4 +387,13 @@ impl<T> Array1<'_, T> {
     pub const fn range_size(lower: i32, upper: i32) -> usize {
         upper.wrapping_sub(lower).wrapping_add(1) as usize
     }
+}
+
+// Constructors accept [lower, lower - 1]; negative native extents are outside the safe domain.
+pub(super) fn checked_array_extent(lower: i32, upper: i32) -> Result<usize, super::ArrayError> {
+    let length = i64::from(upper) - i64::from(lower) + 1;
+    if length < 0 {
+        return Err(super::ArrayError::Bounds { lower, upper });
+    }
+    Ok(length as usize)
 }

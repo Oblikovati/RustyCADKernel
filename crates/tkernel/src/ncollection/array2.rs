@@ -1,6 +1,8 @@
 //! Row-major arrays with independently bounded rows and columns.
+use super::array1::checked_array_extent as extent;
 use super::{Array1, ArrayError};
 
+mod buffer_constructors;
 mod method_contracts;
 mod raw_copy;
 
@@ -59,14 +61,8 @@ impl<'a, T> Array2<'a, T> {
         let length = rows
             .checked_mul(cols)
             .expect("array dimensions overflow usize");
-        if buffer.len() < length {
-            return Err(ArrayError::DimensionMismatch {
-                expected: length,
-                actual: buffer.len(),
-            });
-        }
         Ok(Self {
-            elements: Array1::from_slice(&mut buffer[..length]),
+            elements: Array1::from_slice_size(buffer, length)?,
             row_lower: 0,
             col_lower: 0,
             rows,
@@ -276,20 +272,13 @@ impl<T: Clone> Array2<'_, T> {
     }
 }
 
+// Constructors accept an empty `[lower, lower - 1]` range (native RangeSize 0); only
+// Resize raises Standard_RangeError for `upper < lower`, which `dimension` mirrors.
 fn dimension(lower: i32, upper: i32) -> Result<usize, ArrayError> {
     if upper < lower {
         return Err(ArrayError::Bounds { lower, upper });
     }
     Ok((i64::from(upper) - i64::from(lower) + 1) as usize)
-}
-// Constructors accept an empty `[lower, lower - 1]` range (native RangeSize 0); only
-// Resize raises Standard_RangeError for `upper < lower`, which `dimension` mirrors.
-fn extent(lower: i32, upper: i32) -> Result<usize, ArrayError> {
-    let size = i64::from(upper) - i64::from(lower) + 1;
-    if size < 0 {
-        return Err(ArrayError::Bounds { lower, upper });
-    }
-    Ok(size as usize)
 }
 fn upper(lower: i32, size: usize) -> i32 {
     (i64::from(lower) + size as i64 - 1) as i32
