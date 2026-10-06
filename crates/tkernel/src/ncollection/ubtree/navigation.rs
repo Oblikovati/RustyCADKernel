@@ -42,9 +42,10 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         self.reparent_children(first);
         let node: &mut BoundingNode<T, B> = self.node_mut(id);
         node.children = Some([first, second]);
-        node.bounds = new_bounds;
+        // OCCT 3d097a0328 assigns retained parent payloads after publishing child links.
+        node.bounds.clone_from(&new_bounds);
         // Native `myObject = TheObjType()` nullifies the branch object.
-        node.object = T::default();
+        node.object.clone_from(&T::default());
         Some(second)
     }
 }
