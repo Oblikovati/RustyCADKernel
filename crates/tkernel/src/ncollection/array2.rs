@@ -208,8 +208,8 @@ impl<'a, T> Array2<'a, T> {
     }
     fn bounded_offsets(&self, row: i32, col: i32) -> Result<(usize, usize), ArrayError> {
         Ok((
-            bounded_offset(row, self.lower_row(), self.upper_row())?,
-            bounded_offset(col, self.lower_col(), self.upper_col())?,
+            bounded_offset(row, self.row_lower, self.rows)?,
+            bounded_offset(col, self.col_lower, self.cols)?,
         ))
     }
 }
@@ -299,15 +299,20 @@ fn check_offset(index: usize, size: usize) -> Result<(), ArrayError> {
         upper: size as i64 - 1,
     })
 }
-fn bounded_offset(index: i32, lower: i32, upper: i32) -> Result<usize, ArrayError> {
-    if index < lower || index > upper {
-        return Err(ArrayError::Index {
-            index: index.into(),
-            lower: lower.into(),
-            upper: upper.into(),
-        });
+fn bounded_offset(index: i32, lower: i32, size: usize) -> Result<usize, ArrayError> {
+    // OCCT 3d097a03 compares widened offsets with sizes, never with UpperRow/Col:
+    // lower-bound updates can leave accessible indices below an overflowing upper bound.
+    let offset = usize::try_from(i64::from(index) - i64::from(lower));
+    if let Ok(offset) = offset
+        && offset < size
+    {
+        return Ok(offset);
     }
-    Ok((i64::from(index) - i64::from(lower)) as usize)
+    Err(ArrayError::Index {
+        index: index.into(),
+        lower: lower.into(),
+        upper: lower.wrapping_add(size as i32).wrapping_sub(1).into(),
+    })
 }
 
 impl<T> std::ops::Index<(i32, i32)> for Array2<'_, T> {
