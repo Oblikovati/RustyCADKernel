@@ -1,0 +1,265 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_branch_pending_integration",
+  "branch": "port/dynamic-protected-storage",
+  "base_commit": "be5b81e2",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "848c9d68ffd33e2b877a19ed4bd0673fb3ccec8a2c412808caf398bbd64ee1c4",
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "c0d28a5ee3d849ddf49c67c151406c13435ed7d400343a8a62d976a1f3ad701b",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "9120b4bdefc881c62e68266da37358e9f0ef8af9f3c54cacfa2e6e56ab41725c",
+    "crates/tkernel/src/ncollection/mod.rs": "b7f6f9fdd299128e6224c0cd480954a35554b3f440e0b5873d44d6995e605365",
+    "crates/tkernel/tests/dynamic_array_protected_storage.rs": "9f2583cd069b782e1d2f31443f9f50f16e4d26865d2582fde70d15f7711f38a1",
+    "crates/tkernel/tests/dynamic_array_protected_storage/contracts.rs": "f45f3ba6678d66780ebe44d8bcaef0cbc495c2b4e1d5654001602c1ef812066d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/oracle.rs": "2be06c452aa3744033688fce7ed095050ec7483b146413d8979eb8bd4837370c",
+    "tools/oracle/tkernel_dynamic_protected_storage.cxx": "7689085f1cbc812c3e050e107a28cf9b96e1c3aa54c74bfbd7f195b5920a78de",
+    "tools/oracle/tkernel_dynamic_protected_storage.expected": "8f839e1dd906fdfdd89ddd66264fdf2c43f87f53ca999a66170a9374dbf795a3"
+  },
+  "upstream_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-protected-storage-focused.log.gz": "d30597acba23d9045a655eb0b20b1104ea6d86c77c3d6b677126416f0bfb3047",
+    "porting/runtime-evidence/dynamic-protected-storage-miri-strict.log.gz": "c468253a32c83b2d13434898f3a3be4fe73d3290f6ddbe7b1462639e2fd5fc54",
+    "porting/runtime-evidence/dynamic-protected-storage-clippy.log.gz": "2d8d070a22bfff28bdfdc5265b0d78b8a33b4c3e43a7ecbe5eec90f29b2ab50f",
+    "porting/runtime-evidence/dynamic-protected-storage-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-protected-storage-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-protected-storage-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-protected-storage-oracle-runtime.log.gz": "4d4eb2f7fa38369247d9cafac732a52dd4f4a39ee1a8970034b79860e858924c",
+    "porting/runtime-evidence/dynamic-protected-storage-source.tar.gz": "2357b3eb3e9df143986918d81ac15f545107eac541aa9d6f54cbaa929818e186"
+  },
+  "source_scope": "Owned frozen storage extension/engine changes, focused tests and compiled native fixture. Root integration supplies full workspace dependency closure. Public export added in ncollection/mod.rs; rustfmt also reordered existing list_node/node_release module declarations in that touched file.",
+  "exit_codes": {
+    "focused": 0,
+    "miri-strict": 0,
+    "clippy": 0,
+    "native": 0,
+    "fmt": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0
+  },
+  "focused_rust_passes": 105,
+  "new_test_count": 8,
+  "new_test_names": [
+    "dynamic_array_protected_storage::contracts::clear_empty_blocks_is_idempotent_and_retains_allocator_identity",
+    "dynamic_array_protected_storage::contracts::clear_blocks_forgets_values_but_releases_real_allocations",
+    "dynamic_array_protected_storage::contracts::empty_reservation_does_not_require_default_or_clone",
+    "dynamic_array_protected_storage::contracts::pointer_access_checks_blocks_without_referencing_uninitialized_slots",
+    "dynamic_array_protected_storage::contracts::storage_size_guards_reject_overflow_without_allocation",
+    "dynamic_array_protected_storage::contracts::typed_reservations_reject_item_sizes_before_allocating",
+    "dynamic_array_protected_storage::contracts::zero_sized_rust_elements_are_outside_the_native_typed_block_domain",
+    "dynamic_array_protected_storage::oracle::native_storage_rows_match_typed_runtime_observations"
+  ],
+  "strict_provenance_miri_passes": 8,
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "inherited_iterator_review": "porting/audits/dynamic-array-iterator-tail.json",
+    "inherited_insertion_review": "porting/audits/dynamic-array-native-insertion.json",
+    "current_change": "No original test body changed. All52 mapped declarations executed on both native and Rust after shared reservation ordering change."
+  },
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_protected_storage.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_protected_storage.expected",
+    "row_count": 16,
+    "exact_runtime_join_count": 16,
+    "row_keys": [
+      "round",
+      "log",
+      "reserve_zero",
+      "reserve_index8",
+      "addresses",
+      "reserve_smaller",
+      "expand",
+      "expand_identity",
+      "initialized_at",
+      "one_initialized",
+      "clear_retain",
+      "decrease_stride",
+      "retained_identity",
+      "clear_empty_blocks",
+      "before_clear_live_blocks",
+      "clear_live_blocks"
+    ],
+    "rust_test": "dynamic_array_protected_storage::oracle::native_storage_rows_match_typed_runtime_observations",
+    "joined_columns": "Block count, logical available size, Size, constructor/destructor counts, allocation/free counts, mutable/const raw/typed pointer identities, initialized value, pure round/log results.",
+    "allocation_observation": "Native derived allocator records allocation/free calls. Rust observes actual live allocations from accumulating_chain at every monotonic allocate-only or free-only stage and accumulates deltas. No expected count is injected, and no phase interleaves hidden allocations and frees.",
+    "defined_domain": "All block item sizes equal sizeof(Item). Raw pointers are compared only while their allocated storage lives. Only initialized index0 is dereferenced. clearBlocks releases dynamic storage without destructor calls; Item owns no secondary resource and the native container resets Size before its eventual destructor.",
+    "numeric_domain": "Pure unsigned helper calls include high+1 and SIZE_MAX wrap-to-zero. No overflow-sized array is created or accessed. Fixture recorded on 64-bit native/Rust target."
+  },
+  "public_declaration_bindings": [
+    {
+      "native": "roundUpPow2(size_t)",
+      "rust": "DynamicArrayStorageExtension::round_up_pow2",
+      "fixture": "round",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "log2Pow2(size_t)",
+      "rust": "DynamicArrayStorageExtension::log2_pow2",
+      "fixture": "log",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "ensureStorageForIndex(size_t,size_t)",
+      "rust": "DynamicArrayStorageExtension::ensure_storage_for_index",
+      "fixture": "reserve_index8",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "ensureBlockCount(size_t,size_t)",
+      "rust": "DynamicArrayStorageExtension::ensure_block_count",
+      "fixture": "reserve_zero/reserve_smaller",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "expandBlock(size_t)",
+      "rust": "DynamicArrayStorageExtension::expand_block",
+      "fixture": "expand/expand_identity",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "blockAddress(size_t)",
+      "rust": "DynamicArrayStorageExtension::change_block_address",
+      "fixture": "addresses",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "blockAddress(size_t) const",
+      "rust": "DynamicArrayStorageExtension::block_address",
+      "fixture": "addresses/retained_identity",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "blockCount() const",
+      "rust": "DynamicArrayStorageExtension::block_count",
+      "fixture": "all storage snapshots",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "availableSize() const",
+      "rust": "DynamicArrayStorageExtension::available_size",
+      "fixture": "all storage snapshots/decrease_stride",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "clearBlocks()",
+      "rust": "DynamicArrayStorageExtension::clear_blocks",
+      "fixture": "clear_empty_blocks/clear_live_blocks",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "at(size_t)",
+      "rust": "DynamicArrayStorageExtension::change_at",
+      "fixture": "initialized_at",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "at(size_t) const",
+      "rust": "DynamicArrayStorageExtension::at",
+      "fixture": "initialized_at",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "blockAt(size_t)",
+      "rust": "DynamicArrayStorageExtension::change_block_at",
+      "fixture": "addresses",
+      "scope": "typed valid-domain adapter"
+    },
+    {
+      "native": "blockAt(size_t) const",
+      "rust": "DynamicArrayStorageExtension::block_at",
+      "fixture": "addresses",
+      "scope": "typed valid-domain adapter"
+    }
+  ],
+  "protected_declaration_forms_in_batch": 14,
+  "protected_declaration_forms_in_header": 22,
+  "ownership_and_shared_engine": [
+    "DynamicArrayStorageExtension owns an exclusive borrow of the array; no block allocation is detached or given another owner.",
+    "Const/mutable typed and untyped getters return raw pointers without manufacturing T references to uninitialized capacity. Actual reference access delegates to existing checked value/change_value.",
+    "Both existing element-emplacement reservation and new protected reservation now call the shared reserve_block_count method, reserving the pointer vector before block allocations like native ensureBlockCount.",
+    "Expansion reuses add_block. clear_blocks reuses the existing forget_block_values_after implementation, then frees blocks and sets logical used size to zero.",
+    "Native clearBlocks and Clear(true) intentionally differ: clear_blocks forgets values without Drop, while ordinary clear(true) continues dropping them. Tests observe exact lifetime counts and real allocation release."
+  ],
+  "safety_boundaries": [
+    "Block item-size mismatch, zero-sized Rust element types and overflowing logical slot counts are rejected before typed allocation. Native arbitrary-byte allocation signatures remain constrained adapters, not complete raw-domain parity.",
+    "Invalid block indices and uninitialized slot access return errors including offending values and expected ranges; native unchecked undefined-access domains are not imitated.",
+    "Raw pointer dereference/write requires unsafe caller lifetime, initialization and aliasing guarantees. This batch does not expose setUsedSize or arbitrary lifetime-publication setters.",
+    "clear_blocks can intentionally leak secondary resources held by T because native skips destructors; the method documents this explicitly. Forgetting values is safe Rust and no unsafe implementation code was added.",
+    "All8 new tests pass MIRIFLAGS=-Zmiri-strict-provenance using the integrated allocator provenance fix. No permissive provenance flag is used."
+  ],
+  "remaining_partial_parity": [
+    "Eight protected forms remain outside this batch: allocateBlock, deallocateBlock, setUsedSize, copyParameters, copyDate, constructAt, destroyAt, replaceAt.",
+    "The block engine only allocates correctly typed T-sized blocks. Arbitrary raw item sizes and detached allocator/provenance ownership require a separate raw boundary.",
+    "Native LinearVector pointer-storage capacity growth and allocation-failure behavior are not fully reproduced by Rust Vec. Verified successful reservation ordering does not prove capacity/OOM-policy parity.",
+    "Pure round_up_pow2 matches native defined overflow, but existing constructors still retain their Rust overflow behavior. No invalid overflowing allocation is credited.",
+    "Copy partial-block exception cleanup/leak behavior, native custom value move/assignment/destructor dispatch, same-container aliases and cursor behavior remain limited as documented in earlier scoped receipts.",
+    "Fourteen declaration-form adapters and sixteen supplemental rows do not establish complete DynamicArray class/template or global API parity."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "commands": {
+    "focused": "cargo test --locked -p rustycad-tkernel --test dynamic_array_protected_storage --test dynamic_array_native_insertion --test dynamic_array_iterator_tail --test dynamic_array_method_tail --test dynamic_array_legacy_cursor_contracts --test ncollection_dynamic_array --test dynamic_array_default_constructor_order --test dynamic_array_emplace_allocation_order --test dynamic_array_emplace_value_order --test ncollection_dynamic_array_assignment_behavior",
+    "miri_strict": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test dynamic_array_protected_storage",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test dynamic_array_protected_storage -- -D warnings",
+    "native": "OpenCascadeGTest --gtest_filter=NCollection_DynamicArrayTest.*",
+    "oracle": "g++ -std=c++17 -O2 -I <native>/include/opencascade tools/oracle/tkernel_dynamic_protected_storage.cxx -L <native>/lin64/gcc/libi -Wl,-rpath,<native>/lin64/gcc/libi -lTKernel -o <probe>; <probe> | diff tools/oracle/tkernel_dynamic_protected_storage.expected -",
+    "fmt": "cargo fmt --all --check"
+  }
+}

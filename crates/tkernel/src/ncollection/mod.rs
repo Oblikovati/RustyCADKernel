@@ -47,7 +47,9 @@ pub use allocator::{
     INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
 mod dynamic_array;
-pub use dynamic_array::{DynamicArray, DynamicArrayIterator, DynamicCursor};
+pub use dynamic_array::{
+    DynamicArray, DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
+};
 
 mod buffer;
 pub use buffer::Buffer;

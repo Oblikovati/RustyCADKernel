@@ -177,7 +177,7 @@ impl<T> DynamicArray<T> {
         self.change_value(final_index)
     }
 }
-fn forget_block_values_after<T>(block: &mut AllocVec<T, BaseAllocator>, keep: usize) {
+pub(super) fn forget_block_values_after<T>(block: &mut AllocVec<T, BaseAllocator>, keep: usize) {
     while block.len() > keep {
         let Some(value) = block.pop() else {
             return;

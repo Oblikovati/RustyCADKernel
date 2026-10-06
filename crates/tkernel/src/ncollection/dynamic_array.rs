@@ -24,7 +24,9 @@ mod emplacement;
 mod insertion;
 mod legacy_cursor;
 mod method_tail;
+mod storage_extension;
 pub use legacy_cursor::DynamicArrayIterator;
+pub use storage_extension::DynamicArrayStorageExtension;
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
     pub fn with_increment(increment: usize) -> Self {
@@ -98,10 +100,7 @@ impl<T> DynamicArray<T> {
         &mut self.blocks[block][offset]
     }
     fn ensure_storage_for_index(&mut self, index: usize) {
-        let final_block = index / self.increment;
-        while self.blocks.len() <= final_block {
-            self.add_block();
-        }
+        self.reserve_block_count(index / self.increment + 1);
     }
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
