@@ -165,7 +165,10 @@ fn NCollection_LinearVectorTest__LargeAppend() {
 fn NCollection_LinearVectorTest__MoveOnlyType() {
     let mut vector = LinearVector::default();
     for value in [1, 2, 3] {
-        vector.append(MoveOnly { value });
+        vector.emplace_append_with_relocation(
+            |item: &mut MoveOnly| MoveOnly { value: std::mem::replace(&mut item.value, -1) },
+            || MoveOnly { value },
+        );
     }
     assert_eq!(vector.len(), 3);
     for index in 0..3 {

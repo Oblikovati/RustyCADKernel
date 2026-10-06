@@ -22,7 +22,7 @@ fn NCollection_LinearVectorTest__Append() {
 fn NCollection_LinearVectorTest__AppendMove() {
     let mut vector = LinearVector::default();
     let mut source = "hello".to_owned();
-    vector.append(std::mem::take(&mut source));
+    vector.emplace_append_with_relocation(std::mem::take, || std::mem::take(&mut source));
     assert_eq!(vector.len(), 1);
     assert_eq!(vector[0], "hello");
     assert!(source.is_empty());
