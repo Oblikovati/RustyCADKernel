@@ -123,11 +123,13 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// `storage.clear_blocks()` is distinct from `array.clear(true)` which drops values.
     /// OCCT 3d097a0 uses this after destruction; direct use can intentionally leak element resources.
     pub fn clear_blocks(&mut self) {
+        self.array.needs_tail_scan = true;
         for block in &mut self.array.blocks {
             forget_block_values_after(block, 0);
         }
         self.array.blocks.clear(true);
         self.array.used = 0;
+        self.array.needs_tail_scan = false;
     }
     fn validate_item_size(&self, item_size: usize) -> Result<(), Failure> {
         let expected = std::mem::size_of::<T>();

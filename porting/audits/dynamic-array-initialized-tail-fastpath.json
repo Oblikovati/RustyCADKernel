@@ -1,0 +1,360 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "bounded_defined_domains_pending_integration",
+  "branch": "port/dynamic-tail-fastpath",
+  "base_commit": "c0cc09a04668d250236a1b2832054d1fb55a5d10",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "6316a2fa71b918a14423dc1f87f91e205575adee161f24e483fe20683564566b",
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "924839848d95ed6f1a78bd8df8465a1970bc36d771daed5ab02d90c62411f70e",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "414d699b49c4092416e535b8727f43506f04cd94b57eac5e0671893044730b65",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs": "062a61292c1807dc6c583d7752c834b0a4f3c206245e65cf6cc9ac7118fc9485",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/retained_parameters.rs": "7715354f13f5c3bf03e69b114a4f66834b42478c170757c88bac3b5fa25e2cba",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail.rs": "0042d8b8df85e9674f8b96ef9b41c56a2a43db1266fd4f318731da7aae7a6ebc",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests.rs": "bd910af6b86668aee26123534ccc9edafa0c1a5ba5d328ff618a0c4d2e2360c4",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/transitions.rs": "883129645216e45c03acf746ead28ceb8e4ad9d72358d60646e96e1dcbe3802b",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/panics.rs": "b82774790213c03b778b72116b4c6567483cdbceaaaf0f95e3a248ca7532df0d",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/native.rs": "3ea3ebc44c3dce14a7a6b3850a016a979ed5dd629f51c06fc958735e545973d7",
+    "tools/oracle/tkernel_dynamic_tail_fastpath.cxx": "3ee2fc57208bee2a06bcefc7b41948bcca444a905e5fc8cbfb353faaec82d69c",
+    "tools/oracle/tkernel_dynamic_tail_fastpath.expected": "44c4e286490d08bd9697fb64fdc11de5b2b9dea270ec2d6cd5b441a0aababb0e"
+  },
+  "implementation_dependency_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "57967339a34f84be4d13c463dd7f81404216192cc2832e73ea36e5a65901c464",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table.rs": "db729325ec70f313682191fb316a2a42ebff66d9fcf1b8367c5d93e153f7543d",
+    "crates/tkernel/src/ncollection/linear_vector.rs": "245fc57c780b357c43895e9bf9c6185e71b9a2e72c71215b2b7671f5224fd300",
+    "crates/tkernel/src/ncollection/allocator.rs": "d99c8a8b20e19bf105abd4e16dbac580b5586436f9449b0472f07760694c38cd"
+  },
+  "upstream_sha256": {
+    "NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-tail-fastpath-focused.log.gz": "574733b06368c94f940bd25b2658d41a8d845d2cd5fecad2cf2fcc01d0079f4e",
+    "porting/runtime-evidence/dynamic-tail-fastpath-unit.log.gz": "0dfc116e9f9d4062c76fcd2c175e76bba35572c63c34fd9f636114ea368eff95",
+    "porting/runtime-evidence/dynamic-tail-fastpath-library.log.gz": "87c15e66d88258ccc90494109e27f07d03c53c43fbc4f60fc410e3cf02baf48c",
+    "porting/runtime-evidence/dynamic-tail-fastpath-miri-prior.log.gz": "4bd3bcfae87ed8141265ca88e0d5900b991f1897a6a4836d22e66bbd048cced6",
+    "porting/runtime-evidence/dynamic-tail-fastpath-miri-storage-library.log.gz": "e3731763efaf63aa60458be14de0594c88bca6e1d6b4e11cb41bd760324eef77",
+    "porting/runtime-evidence/dynamic-tail-fastpath-clippy.log.gz": "beba9e1660f8fe2b05c338eff64a8c102385d591b9a085da7c710a016d69c5fe",
+    "porting/runtime-evidence/dynamic-tail-fastpath-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-tail-fastpath-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-tail-fastpath-oracle-runtime.log.gz": "2e23bf1e0a58fd1f4a888eae06221ca2f117f4c70088db30c123e45938939380",
+    "porting/runtime-evidence/dynamic-tail-fastpath-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-tail-fastpath-source.json.gz": "eb1aba26ac61f4eba7f7328dc3ca61d015218e45c706e952037c8b4edb09899e",
+    "porting/runtime-evidence/dynamic-tail-fastpath-replay.json.gz": "708008495e7914d92def3700054b094d51d48b9272b86854fc8460fb03857899",
+    "porting/runtime-evidence/dynamic-tail-fastpath-traits.json.gz": "c92ba8c46aecadfbe12d26b447909fe18551f600a2601256eed70db0822195e5"
+  },
+  "exit_codes": {
+    "focused": 0,
+    "unit": 0,
+    "library": 0,
+    "miri-prior": 0,
+    "miri-storage-library": 0,
+    "clippy": 0,
+    "native": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0,
+    "fmt": 0
+  },
+  "source_scope": "Optimizes existing EmplaceValue/SetValue initialized-tail bookkeeping with one conservative ordinary bool, preserving the exact old per-block predicate when uncertain. Also fixes existing move_from/rvalue Assign receiver destruction before source extraction, including the native named Assign exception domain. No new public convenience or native declaration credit.",
+  "normal_unique_passes": 271,
+  "focused_integration_passes": 134,
+  "whole_tkernel_library_passes": 137,
+  "new_test_count": 13,
+  "new_test_names": [
+    "ncollection::dynamic_array::initialized_tail::tests::panics::holes_and_hidden_values_cannot_be_replaced_by_total_length",
+    "ncollection::dynamic_array::initialized_tail::tests::panics::clear_panic_holes_remain_on_the_exact_scan_path",
+    "ncollection::dynamic_array::initialized_tail::tests::panics::erase_panic_keeps_uncertainty_and_never_double_drops",
+    "ncollection::dynamic_array::initialized_tail::tests::panics::emplace_constructor_failures_preserve_clean_and_uncertain_gates",
+    "ncollection::dynamic_array::initialized_tail::tests::native::native_growth_and_assign_receiver_failure_rows_match",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::copy_move_insert_and_empty_stride_preserve_gate_invariants",
+    "ncollection::dynamic_array::initialized_tail::tests::panics::partial_slot_construction_marks_uncertainty_before_unwind",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::failed_raw_validation_preserves_uncertain_gate",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::initialized_tail_uses_exact_scan_until_canonical_reset",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::move_transfers_uncertainty_and_copy_omits_hidden_owned_tail",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::partial_copy_failure_only_publishes_canonical_complete_blocks",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::protected_lifetime_publication_and_parameter_reset_canonicalize",
+    "ncollection::dynamic_array::initialized_tail::tests::transitions::sequential_native_growth_inspects_zero_descriptors"
+  ],
+  "strict_provenance_miri_unique_passes": 152,
+  "strict_provenance_integration_passes": 134,
+  "strict_provenance_dynamic_library_passes": 18,
+  "counting": "The 13 new tests are included in 137 library and 18 DynamicArray library checks. Repeated focused unit checks do not add unique pass credit.",
+  "strict_provenance_flags": "-Zmiri-strict-provenance; no leak-ignore or permissive-provenance flags",
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_native_to_rust_mappings": {
+    "NCollection_DynamicArrayTest.DefaultConstructor": "NCollection_DynamicArrayTest__DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor": "NCollection_DynamicArrayTest__ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append": "NCollection_DynamicArrayTest__Append",
+    "NCollection_DynamicArrayTest.SetValue": "NCollection_DynamicArrayTest__SetValue",
+    "NCollection_DynamicArrayTest.Value": "NCollection_DynamicArrayTest__Value",
+    "NCollection_DynamicArrayTest.ChangeValue": "NCollection_DynamicArrayTest__ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast": "NCollection_DynamicArrayTest__FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor": "NCollection_DynamicArrayTest__CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator": "NCollection_DynamicArrayTest__AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear": "NCollection_DynamicArrayTest__Clear",
+    "NCollection_DynamicArrayTest.Iterator": "NCollection_DynamicArrayTest__Iterator",
+    "NCollection_DynamicArrayTest.STLIterators": "NCollection_DynamicArrayTest__STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks": "NCollection_DynamicArrayTest__STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks": "NCollection_DynamicArrayTest__IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks": "NCollection_DynamicArrayTest__ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow": "NCollection_DynamicArrayTest__Grow",
+    "NCollection_DynamicArrayTest.Move": "NCollection_DynamicArrayTest__Move",
+    "NCollection_DynamicArrayTest.EraseLast": "NCollection_DynamicArrayTest__EraseLast",
+    "NCollection_DynamicArrayTest.Appended": "NCollection_DynamicArrayTest__Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator": "NCollection_DynamicArrayTest__CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement": "NCollection_DynamicArrayTest__SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax": "NCollection_DynamicArrayTest__STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace": "NCollection_DynamicArrayTest__STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse": "NCollection_DynamicArrayTest__STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort": "NCollection_DynamicArrayTest__STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend": "NCollection_DynamicArrayTest__EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue": "NCollection_DynamicArrayTest__EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting": "NCollection_DynamicArrayTest__EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType": "NCollection_DynamicArrayTest__EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType": "NCollection_DynamicArrayTest__ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany": "NCollection_DynamicArrayTest__EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting": "NCollection_DynamicArrayTest__SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle": "NCollection_DynamicArrayTest__InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First": "NCollection_DynamicArrayTest__InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last": "NCollection_DynamicArrayTest__InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement": "NCollection_DynamicArrayTest__InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle": "NCollection_DynamicArrayTest__InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First": "NCollection_DynamicArrayTest__InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last": "NCollection_DynamicArrayTest__InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics": "NCollection_DynamicArrayTest__InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts": "NCollection_DynamicArrayTest__InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT": "NCollection_DynamicArrayTest__SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt": "NCollection_DynamicArrayTest__LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty": "NCollection_DynamicArrayTest__UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor": "NCollection_DynamicArrayTest__SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess": "NCollection_DynamicArrayTest__SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends": "NCollection_DynamicArrayTest__SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue": "NCollection_DynamicArrayTest__SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter": "NCollection_DynamicArrayTest__SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative": "NCollection_DynamicArrayTest__IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree": "NCollection_DynamicArrayTest__IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues": "NCollection_DynamicArrayTest__SetValue_OutOfOrderIndices_CorrectValues"
+  },
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "latest_prior_receipts": [
+      "porting/audits/dynamic-array-retained-parameters.json",
+      "porting/audits/dynamic-array-block-table.json"
+    ],
+    "current_change": "All original test bodies and prior public comments/docstrings retained. All 52 original native/Rust mappings rerun green, including strict Miri. All 134 prior integration tests plus the existing five DynamicArray private tests pass normally and under strict Miri."
+  },
+  "public_declaration_bindings": [
+    {
+      "native": "NCollection_DynamicArray::EmplaceValue / SetValue",
+      "rust": "DynamicArray::emplace_new -> has_initialized_tail -> initialized_tail_in",
+      "scope": "Same value/constructor/failure behavior; canonical-prefix states avoid descriptor scanning. Unknown states use unchanged per-block predicate."
+    },
+    {
+      "native": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
+      "rust": "DynamicArray::move_from / move_from_returning",
+      "scope": "Calls clear(true) before extracting source ownership. If receiver destructor panics, source remains intact. Native oracle calls named Assign, which is not noexcept; native noexcept move operator= is not used in the throw case."
+    }
+  ],
+  "canonical_gate_proof": {
+    "representation": "Private bool needs_tail_scan, moved together with real owned blocks. No Cell, atomics, global state, authoritative mirrored count, or ownership inference from unregistered raw writes.",
+    "false_invariant": "At stable method boundaries, every registered block length equals its logical-prefix contribution min(increment, used.saturating_sub(block_index*increment)); trailing retained blocks have length zero. False therefore proves the exact scan cannot find an initialized tail.",
+    "true_invariant": "No canonical-shape claim; exact old scan remains authoritative. Includes hidden initialized tails, safe IndexMut construction failures, and holes after caught Rust destructor panic. A conservative stale true only retains previous scan work, never changes branch choice.",
+    "transition_audit": [
+      [
+        "constructor/default",
+        "Initialize ordinary bool needs_tail_scan=false; all lengths and used are zero."
+      ],
+      [
+        "has_initialized_tail",
+        "If flag is false return false immediately; otherwise execute current exact any(block.len > logical prefix contribution) scan unchanged. Never infer true merely from the flag."
+      ],
+      [
+        "allocated_slot/IndexMut",
+        "Before resize_with may initialize any extra values, set flag=true. This must happen before Default can panic, not after resize returns. Existing in-range mutation that does not resize leaves it unchanged."
+      ],
+      [
+        "EmplaceValue direct stage",
+        "Preserve existing flag. False canonical state stays canonical on successful publication; failed construction runs existing forget_staged_storage and restores old lengths. Unknown/holed true state remains true even if scan found no tail."
+      ],
+      [
+        "EmplaceValue pending tail stage",
+        "Flag stays true. Failed construction preserves old registered lengths; successful writes may leave other tails/holes so do not reset without proof."
+      ],
+      [
+        "Append/Appended/EmplaceAppend",
+        "Preserve flag. From a canonical prefix, allocation adds a zero-length block; construction failure leaves prefix unchanged; success writes exactly next slot then increases used. Existing unknown state stays true."
+      ],
+      [
+        "EraseLast",
+        "When nonempty, save old flag and set true before decrement/truncate because Drop may panic. Restore old flag only after successful truncate. Empty no-op preserves flag."
+      ],
+      [
+        "Clear / Drop",
+        "Set true before beginning any Drop. Successful complete clear resets false after used becomes zero. Caught destructor panic leaves true because earlier blocks can be empty while used is unchanged."
+      ],
+      [
+        "clearBlocks",
+        "Mark true before forgetting/releasing blocks, then reset false only after successful complete block release and used=0. Existing no-drop semantics preserved."
+      ],
+      [
+        "setUsedSize unsafe",
+        "Leave flag unchanged on validation error. After successful promised-prefix length reconciliation and used update set false. Caller still proves initialization, uniqueness, aliasing and cleanup of forgotten removed values."
+      ],
+      [
+        "copyParameters retained / zero",
+        "Shared metadata helper sets false only after retained path has reset every block length to zero, or safe zero-block validator has passed. Errors leave flag unchanged."
+      ],
+      [
+        "copyDate / Clone / copy assignment",
+        "Unallocated destination begins canonical; each complete block append plus used increment preserves canonical shape. Partial unpublished failure token is not counted as destination storage. No extra field update required beyond constructors/clear."
+      ],
+      [
+        "move assignment and whole-value move",
+        "Field moves with actual owned blocks automatically; moved-from replacement constructor supplies false. No independent mirror repair and no added bounds."
+      ],
+      [
+        "setIncrement",
+        "If empty canonical state all lengths are zero, changing stride preserves it; unknown true state remains true. No special scan/reset."
+      ],
+      [
+        "reserve / expand",
+        "Append empty block descriptor only; flag unchanged."
+      ],
+      [
+        "value / changeValue / insertion shifts / sorting",
+        "Do not change lengths or used except existing delegated Appended; preserve flag."
+      ],
+      [
+        "constructAt/destroyAt/replaceAt raw policies",
+        "Do not infer ownership from arbitrary raw writes. Static raw methods retain existing caller obligations to suspend/republish ownership; ordinary flag tracks AllocVec registered prefixes only."
+      ]
+    ],
+    "partial_constructor_injection": "Existing allocated_slot delegates to private allocated_slot_with(index,T::default). This shared implementation marks uncertainty before resize_with invokes constructors; tests inject a stateful failing constructor without global Default counters.",
+    "holes_counterexample": "After caught Clear panic, test has missing first block values and hidden later values. Sum of registered lengths equals used, yet the exact tail predicate is true. The bool retains scanning and no count shortcut is introduced.",
+    "raw_contracts": "setUsedSize and retained copyParameters reset the gate only after existing validation and complete registered-length updates. Their initialization, cleanup, aliasing and allocator obligations remain unchanged; validation errors preserve previous gate."
+  },
+  "structural_work_proof": {
+    "test": "sequential_native_growth_inspects_zero_descriptors",
+    "growing_operations": 512,
+    "increments": [
+      1,
+      2,
+      4,
+      16
+    ],
+    "preallocated_blocks_per_case": 64,
+    "descriptor_visits_by_gated_predicate": 0,
+    "observation": "The production predicate accepts a lazy iterator of actual block lengths. Tests use inspect on that same actual-length iterator to count consumption, compare its result with the previous exact predicate, and assert zero visits after each of 128 growth operations per increment. No fake storage or timing threshold is used.",
+    "uncertain_examples": "Hidden tail in block index 2 consumes three actual descriptors; fully consumed but conservatively dirty four-block state consumes all four and returns false. Caught hole states remain on exact scan.",
+    "complexity": "Predicate work is O(1) for false gate and remains O(B) for uncertain states. No numerical wall-clock speedup or new BVH regression attribution is claimed.",
+    "historical_context": "Prior 62/200 has_initialized_tail symbol samples are recorded in bvh-sphere-list-hotspot-comparison.json; that implementation predates historical baseline and does not establish regression causality."
+  },
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_tail_fastpath.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_tail_fastpath.expected",
+    "row_count": 12,
+    "exact_runtime_join_count": 12,
+    "row_keys": [
+      "grow0",
+      "grow1",
+      "grow2",
+      "grow3",
+      "grow4",
+      "grow5",
+      "grow_clear",
+      "grow_reuse",
+      "move_receiver_failed",
+      "move_receiver_repaired",
+      "move_receiver_succeeded",
+      "move_receiver_cleared"
+    ],
+    "rust_test": "initialized_tail::tests::native::native_growth_and_assign_receiver_failure_rows_match",
+    "growth_columns": "Actual Size, allocated block count, and every logical value through sequential SetValue, retained Clear, and gap/default reuse.",
+    "assignment_columns": "Actual receiver Size, source Size, live element allocation count, readable source value or empty marker, and element destructor order.",
+    "failure_domain": "MoveItem destructor explicitly noexcept(false); named Assign is not noexcept. Receiver has exactly one live item, whose lifetime ends before its throw. Observer repairs receiver setUsedSize(0) before later Clear/destruction. No dead receiver slot is read.",
+    "allocation_observation": "Native custom allocator actual AllocateOptimal/Free live count; Rust actual accumulating allocator live allocation records. No expected counters injected.",
+    "regression_closed": "Previous Rust extracted the source before receiver Drop, so unwinding could destroy the moved RHS and empty the source. Explicit receiver clear now precedes source extraction and matches native failed/repaired/retried/cleared rows."
+  },
+  "auto_trait_review": {
+    "artifact": "porting/runtime-evidence/dynamic-tail-fastpath-traits.json.gz",
+    "positive_compiles_and_runs": [
+      "DynamicArray<i32>: Send + Sync",
+      "DynamicArray<i32>: UnwindSafe + RefUnwindSafe",
+      "DynamicArray<PhantomPinned>: Unpin",
+      "DynamicArray<&long i32> lifetime covariance to shorter borrow"
+    ],
+    "negative_expected": "Later-declared referent drop-order probe still rejects with E0597, matching earlier frozen-main/candidate comparison.",
+    "scope": "Ordinary bool adds no interior-mutability trait restriction. Object byte-layout equivalence is not claimed."
+  },
+  "known_limits": [
+    "The flag is intentionally conservative. A true state may retain full scanning after its last actual tail is consumed; only proven canonical reset boundaries clear it.",
+    "Caught Rust Clear/EraseLast destructor panic tests prove internal safety/gate consistency; they do not claim all native destructor-throw poststates or noexcept termination behavior match. The new native exception comparison is specifically named Assign(rvalue).",
+    "Typed ownership metadata and descriptor allocation byte sizes remain different from native pointer tables. Allocator/OOM and previously recorded constructor, replacement, retained-layout and raw-lifetime domains remain partial.",
+    "Structural zero-visit proof covers predicate traversal, not all allocation, value construction, geometry, or wall-clock work. No flaky performance threshold or extrapolated BVH speedup is used.",
+    "The current method audit from the preceding slice remains a bounded inventory aid. Its receiver-clear-before-source-extraction item is narrowed by this receipt; other listed gaps are not declared closed.",
+    "13 new tests and 12 supplemental native rows do not add original legacy declarations or global API completeness credit."
+  ],
+  "validation_notes": {
+    "format": "cargo fmt --all -- --check",
+    "clippy": "cargo clippy -p rustycad-tkernel --lib --tests -- -D warnings",
+    "new_rust_function_max_lines": 20,
+    "new_files_under_500_lines": true,
+    "miri_warnings": "Existing dependency unstable-name-collision warnings retained in exact logs; stable scoped Clippy denies warnings."
+  },
+  "new_unique_native_declarations": 0,
+  "global_coverage_credit": 0
+}

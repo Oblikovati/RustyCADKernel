@@ -9,6 +9,8 @@ pub struct DynamicArray<T> {
     allocator: Option<BaseAllocator>,
     increment: usize,
     used: usize,
+    // False proves canonical registered prefixes; uncertain states retain the exact scan.
+    needs_tail_scan: bool,
 }
 /// A detached index that survives appends; `array.begin_cursor().value(&array)?`.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -22,6 +24,7 @@ impl<T> Default for DynamicArray<T> {
 }
 mod block_table;
 mod copy_date;
+mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
 mod insertion;
@@ -42,6 +45,7 @@ impl<T> DynamicArray<T> {
             allocator,
             increment: increment.max(1).next_power_of_two(),
             used: 0,
+            needs_tail_scan: false,
         }
     }
     /// Keeps the resource of a typed allocator, as the native `allocator_type` constructor
@@ -148,11 +152,15 @@ impl<T> DynamicArray<T> {
         if self.used == 0 {
             return;
         }
+        let previous_scan = self.needs_tail_scan;
+        self.needs_tail_scan = true;
         self.used -= 1;
         self.blocks[self.used / self.increment].truncate(self.used % self.increment);
+        self.needs_tail_scan = previous_scan;
     }
     /// Drops logical elements, optionally releasing blocks; `array.clear(false)`.
     pub fn clear(&mut self, release: bool) {
+        self.needs_tail_scan = true;
         // Native Clear destroys every logical element before clearBlocks frees any block.
         for block in &mut self.blocks {
             block.clear();
@@ -161,9 +169,12 @@ impl<T> DynamicArray<T> {
             self.blocks.clear(true);
         }
         self.used = 0;
+        self.needs_tail_scan = false;
     }
     /// Transfers blocks and empties the source; `dest.move_from(&mut source)`.
     pub fn move_from(&mut self, source: &mut Self) {
+        // Named native Assign(rvalue) destroys the receiver before touching the source.
+        self.clear(true);
         let empty = Self::with_increment(source.increment);
         *self = std::mem::replace(source, empty);
     }
@@ -233,17 +244,7 @@ impl<T: Default> DynamicArray<T> {
         self.emplace_value(index, || value)
     }
     fn allocated_slot(&mut self, index: usize) -> &mut T {
-        let block = index / self.increment;
-        let offset = index % self.increment;
-        assert!(
-            block < self.blocks.len(),
-            "index {index}: expected allocated capacity {}",
-            self.blocks.len() * self.increment
-        );
-        if self.blocks[block].len() <= offset {
-            self.blocks[block].resize_with(offset + 1, T::default);
-        }
-        &mut self.blocks[block][offset]
+        self.allocated_slot_with(index, T::default)
     }
 }
 impl<T: Clone> Clone for DynamicArray<T> {

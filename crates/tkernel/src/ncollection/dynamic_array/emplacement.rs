@@ -80,13 +80,6 @@ impl<T> DynamicArray<T> {
             forget_block_values_after(block, keep);
         }
     }
-    fn has_initialized_tail(&self) -> bool {
-        self.blocks.iter().enumerate().any(|(block_index, block)| {
-            let block_start = block_index * self.increment;
-            let used_in_block = self.used.saturating_sub(block_start).min(self.increment);
-            block.len() > used_in_block
-        })
-    }
     fn emplace_direct(&mut self, index: usize, construct: impl FnOnce() -> T) -> usize
     where
         T: Default,

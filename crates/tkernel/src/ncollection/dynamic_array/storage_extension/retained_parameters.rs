@@ -41,6 +41,7 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         }
         self.array.increment = source.increment;
         self.array.used = 0;
+        self.array.needs_tail_scan = false;
     }
     fn parameter_allocator(&self, source: &DynamicArray<T>, copy_allocator: bool) -> BaseAllocator {
         let allocator = if copy_allocator {
