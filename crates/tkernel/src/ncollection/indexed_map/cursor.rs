@@ -1,5 +1,5 @@
 //! `NCollection_IndexedMap::Iterator`, the remaining lookups and the allocator-replacing `Clear`.
-use super::super::base_map::{exhausted_iterator, replace_allocator};
+use super::super::base_map::exhausted_iterator;
 use super::super::{BaseAllocator, DefaultHashPolicy};
 use super::{Debug, HashPolicy, IndexedMap};
 use crate::standard::Failure;
@@ -31,7 +31,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// ```
     pub fn try_emplaced(&mut self, key: K) -> &K {
         let index = self.place(key, false);
-        &self.nodes[index - 1].key
+        self.storage.key(index)
     }
 
     /// `Contained`: the stored key equivalent to `key`, if any.
@@ -44,7 +44,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// ```
     pub fn contained(&self, key: &K) -> Option<&K> {
         let index = self.find_index(key).checked_sub(1)?;
-        Some(&self.nodes[index].key)
+        Some(self.storage.key(index + 1))
     }
 
     /// `Clear(const Handle(NCollection_BaseAllocator)&)`: clears, releasing storage only when
@@ -58,8 +58,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// assert!(map.is_empty());
     /// ```
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        let release = replace_allocator(&mut self.resource, resource);
-        self.clear(release);
+        self.storage.clear_with_allocator(resource);
     }
 
     /// `Iterator(const NCollection_IndexedMap&)`: a cursor on index 1.

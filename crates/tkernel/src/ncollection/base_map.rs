@@ -115,17 +115,6 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> BaseMap for Doubl
     }
 }
 
-/// `Clear(const Handle(NCollection_BaseAllocator)&)`: bucket memory is released only when the
-/// allocator changes, and a null handle (`None`) selects the common allocator.
-pub(super) fn replace_allocator(
-    current: &mut BaseAllocator,
-    requested: Option<BaseAllocator>,
-) -> bool {
-    let release = requested.as_ref() != Some(current);
-    *current = requested.unwrap_or_else(BaseAllocator::common);
-    release
-}
-
 /// The Standard_NoSuchObject an OCCT map `Iterator` raises when read past its end.
 pub(super) fn exhausted_iterator(method: &str) -> crate::standard::Failure {
     crate::standard::Failure::with_type(

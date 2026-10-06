@@ -117,7 +117,10 @@ pub use map::{Map, MapIter, MapIterator};
 pub mod map_algo;
 
 mod indexed_map;
-pub use indexed_map::{IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator};
+pub use indexed_map::{
+    IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator, IndexedMapObservation,
+    IndexedMapObserver,
+};
 
 mod indexed_data_map;
 pub use indexed_data_map::{
