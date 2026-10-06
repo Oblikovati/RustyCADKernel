@@ -1,0 +1,80 @@
+{
+  "schema": "rustycad.native-lifetime-followup.v1",
+  "status": "required_next_implementation_slice_after_set_value",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "objective": "Preserve current OCCT unpublished-tail behavior; safe rollback is a temporary partial adapter, not an accepted replacement for native semantics.",
+  "current_evidence": {
+    "receipt": "porting/audits/linear-vector-resize-policy-methods.json",
+    "fixture": "tools/oracle/tkernel_linear_resize.cxx",
+    "cases": [
+      "late-default",
+      "late-fill"
+    ],
+    "observed_gap": "Native Resize retains two completed tail objects beyond unchanged Size. Current Rust LengthRollback destroys them. The explicitly recovered native rows are extra fixture cleanup, not native equivalence."
+  },
+  "next_slice": {
+    "name": "Preserve initialized spare slots on native tail-constructor failure",
+    "native_methods": [
+      "NCollection_LinearVector::Resize(size_t)",
+      "NCollection_LinearVector::Resize(size_t,const T&)",
+      "NCollection_LinearVector::SetValue copy/move extension path"
+    ],
+    "storage_model": "Keep Vec<T>'s registered initialized prefix [0,len). Its spare capacity may also contain live but unregistered T values, as OCCT does after constructor failure. Do not create dead slots below len or change generic Drop/variance.",
+    "implementation": [
+      "After successful capacity preparation, iterate the requested spare prefix through Vec::spare_capacity_mut. Before each constructor, replace its MaybeUninit slot with MaybeUninit::uninit without Drop: a retry must forget any old unpublished object before attempting native-style placement construction. Write the returned T only when construction succeeds.",
+      "Publish the requested length with one reviewed set_len only after every tail constructor succeeds. Do not install LengthRollback or an implicit destructor guard for completed spare values.",
+      "If construction panics, retain old len and the successfully initialized spare values. Their omitted Drop is intentional native behavior, and memory-safe resource leakage is permitted by Rust.",
+      "A later native-style placement write over a previously initialized spare slot must omit its old destructor. MaybeUninit::write can express that overwrite without creating a reference to a dead registered T.",
+      "Freeing or replacing storage must drop only the registered prefix and free the allocation; it must not discover and silently destroy the unpublished tail. Clearing retained storage similarly must not sweep unregistered slots.",
+      "Route the explicit native Resize and SetValue extension policies through this core once proven. Keep any rollback convenience variant explicitly named/documented; do not continue counting rollback as native failure parity."
+    ],
+    "safety_review": [
+      "Spare slots must be in the currently owned allocation and outside registered len; capacity and overflow validation precede construction.",
+      "MaybeUninit<T> permits initialized and uninitialized spare storage. Forgetting a valid T or freeing its backing bytes without running Drop leaks resources but does not itself violate Rust memory safety.",
+      "All registered prefix values stay valid on unwind. Rust references into the vector cannot alias the exclusive mutable operation; callback-time C++ alias observers remain a separate explicit adapter problem.",
+      "Returning T from a callback still does not promise native address-dependent in-place construction. Keep that remaining callable domain distinct.",
+      "Constructor entry points need their own allocation ownership treatment on failure; do not assume successful reuse of this tail core closes copy/fill constructor leak behavior."
+    ]
+  },
+  "acceptance_tests": [
+    "The existing late-default and late-fill Rust observations must match the original native rows directly, including retained resource counts and absence of tail Drop events. Do not match the recovered rows as native behavior.",
+    "Cover first, intermediate and final requested tail-constructor failures, both retained and grown storage, default and fill policies, then retry, overwrite, Clear(false), Clear(true), Reserve and destruction.",
+    "Use nonallocating elements with borrowed destructor counters to prove overwrite/free omit unpublished Drop under strict Miri without intentional allocator leaks.",
+    "On a failed retry over previously initialized spare storage, track attempted slots separately from completed slots: native placement construction ends the prior object lifetime even if the new constructor throws. Do not repair or drop that failed slot as though its old T were still live; recover leaked payloads through the test-only ownership registry if necessary.",
+    "For owning payload cases, record exact constructed spare slots and explicitly destroy them only in test teardown before ordinary allocation cleanup. Label this typed repair as test-only and keep it out of production behavior.",
+    "Separate tests that inspect native state before repair from tests validating the repair itself. Assert original-slot destruction and exactly-once cleanup of known live values; never read or drop unwritten spare slots.",
+    "Preserve all 49 original LinearVector declarations, compiler body bindings, borrowed lifetime/auto-trait checks, strict provenance and leak checking. No ignore-leaks or permissive-provenance flags."
+  ],
+  "subsequent_slices": [
+    {
+      "name": "Native growth failure allocation ownership",
+      "native_methods": [
+        "NCollection_LinearVector::grow"
+      ],
+      "gap": "Native growth can leave an unpublished allocation and constructed replacement prefix live when relocation throws. Current reserve_with_relocation cleans both.",
+      "design": "Use explicit unpublished allocation ownership/progress, with commit transferring ownership only after all relocations and old storage disposal succeed. An intentionally disarmed-on-unwind owner can preserve native leaks. Keep native allocated/constructed/published states distinct, and provide test-only typed recovery of leaked replacement allocations under strict Miri."
+    },
+    {
+      "name": "Copy/fill constructor failure ownership",
+      "native_methods": [
+        "NCollection_LinearVector copy constructor",
+        "NCollection_LinearVector(size_t,const T&)"
+      ],
+      "gap": "A failing native constructor does not run the container destructor; member raw storage and completed objects may remain allocated. A local Rust Vec guard currently frees them.",
+      "design": "Build under an explicit allocation owner whose failure policy matches the native constructor, and transfer to the normal vector only on successful construction. Record allocation and initialized-slot progress for test-only recovery. Do not infer constructor parity from the Resize method alone."
+    },
+    {
+      "name": "Destructive shrink exceptions",
+      "native_methods": [
+        "Resize shrink",
+        "Clear",
+        "destroyRange"
+      ],
+      "gap": "Native destructor exceptions can leave dead registered slots and untouched later values. This is different from unpublished live tail storage.",
+      "design": "Use a separately reviewed unsafe lifetime policy with ManuallyDrop and precise hole/progress recovery obligations if exact malformed native state must be exposed. Keep ordinary safe shrink sound; do not conflate this requirement with the memory-safe unpublished-tail slice."
+    }
+  ],
+  "completion_rule": "Close each gap only with direct native-state comparisons and exact method/compiler bindings. Explicit test repair and safe cleanup alternatives receive no native-parity credit.",
+  "api_parity_complete": false,
+  "global_api_claims_added": 0
+}
