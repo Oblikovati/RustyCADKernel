@@ -1,0 +1,122 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "a006feb608b0983ed436d9e2e60b01befeb25c20",
+  "checks": {
+    "rust": {
+      "passed": 4188,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 321
+    },
+    "miri": {
+      "passed": 121,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 5
+    },
+    "cell-miri": {
+      "passed": 26,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    }
+  },
+  "tkernel_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "unchanged_runtime_inputs": 9854,
+  "miri_flags": "-Zmiri-strict-provenance",
+  "strict_miri_targets": [
+    "ncollection_local_array",
+    "local_array_nontrivial_methods",
+    "ncollection_map",
+    "ncollection_data_map",
+    "ncollection_cell_filter"
+  ],
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/foundation-method-batch-rust.log.gz",
+      "sha256": "d9a1f4b62b91a676fe853350cb3dab3eaa595e7956c4768c736dd67820398616"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/foundation-method-batch-fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/foundation-method-batch-clippy.log.gz",
+      "sha256": "a652ffd63e3fac1ffcf953d0a3bdce6191799336b4d8814d8946891756671012"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/foundation-method-batch-miri.log.gz",
+      "sha256": "01f3b08625e7b74f2cfe524c4a860eadb1326c51b846c9c18c9d199b7f7ce3db"
+    },
+    "cell-miri": {
+      "path": "porting/runtime-evidence/foundation-method-batch-cell-miri.log.gz",
+      "sha256": "931bdd38c75baefff74ce398bf343c840af562e66df0515be781f12d4f93da1a"
+    },
+    "input-check": {
+      "path": "porting/runtime-evidence/foundation-method-batch-input-check.log.gz",
+      "sha256": "e4614eddd9ea844c916335cd1b66ae6e427f36a9f1fbebd3e591f5f0a4765e29"
+    }
+  },
+  "proof_checks": {
+    "base_list_exact_native_records": 115,
+    "base_list_current_hashed_function_bodies": 58,
+    "base_list_current_hashed_nominal_field_records": 9,
+    "dynamic_protected_exact_native_ids": 22,
+    "dynamic_protected_current_public_bodies": 26,
+    "dynamic_protected_negative_checks": 3
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "37f51a7e19908f9561f4055a53f1ad28b10f24e7",
+      "deleted_worktree": "/tmp/rustycad-base-api-reconciliation",
+      "deleted_branch": "audit/base-api-reconciliation",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "26c667bda326f9b00a25271e856250597181bd34",
+      "deleted_worktree": "/tmp/rustycad-dynamic-protected-bindings",
+      "deleted_branch": "port/dynamic-protected-bindings",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "4ee4301b758e76dd3a5cd20204ddfba6d0494a7f",
+      "deleted_worktree": "/tmp/rustycad-ordered-map-remaining",
+      "deleted_branch": "port/ordered-map-remaining",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "6eb36787575e02b190f6a415ae60c5e237387886",
+      "deleted_worktree": "/tmp/rustycad-packed-map-methods",
+      "deleted_branch": "port/packed-map-methods",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "15276655dfaaad9ff6c9ad58003f28a6756577cc",
+      "deleted_worktree": "/tmp/rustycad-cell-filter-native-engine",
+      "deleted_branch": "port/cell-filter-native-engine",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "35013b6273e052a85ede68361f2b4a3eef1cbb66",
+      "deleted_worktree": "/tmp/rustycad-local-array-remaining",
+      "deleted_branch": "port/local-array-remaining",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "runner_note": "Tests, formatting, and Clippy exited0. The temporary runner passed wrong argument types to its final input guard; corrected standalone guard confirmed all9854 inputs unchanged. No checks were skipped.",
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false
+}
