@@ -17,13 +17,29 @@ pub struct DataMapIteratorMut<'a, K, V> {
 unsafe impl<K: Send, V: Send> Send for DataMapIteratorMut<'_, K, V> {}
 unsafe impl<K: Sync, V: Sync> Sync for DataMapIteratorMut<'_, K, V> {}
 impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
-    /// Constructs the native const-map Iterator overload; `map.cursor().value()?`.
+    /// `Iterator(const NCollection_DataMap&)`: a cursor on the first binding in bucket order.
+    ///
+    /// ```
+    /// # use rustycad_tkernel::ncollection::DataMap;
+    /// let mut map = DataMap::<i32, i32>::default();
+    /// map.bind(1, 10);
+    /// let it = map.cursor();
+    /// assert_eq!((it.key().unwrap(), it.value().unwrap()), (&1, &10));
+    /// ```
     pub fn cursor(&self) -> DataMapIterator<'_, K, V> {
         DataMapIterator {
             items: self.items(),
         }
     }
-    /// Constructs the native mutable-map Iterator overload; `map.cursor_mut().change_value()?`.
+    /// `Iterator(NCollection_DataMap&)`: a cursor that may also change items.
+    ///
+    /// ```
+    /// # use rustycad_tkernel::ncollection::DataMap;
+    /// let mut map = DataMap::<i32, i32>::default();
+    /// map.bind(1, 10);
+    /// *map.cursor_mut().change_value().unwrap() = 5;
+    /// assert_eq!(map.seek(&1), Some(&5));
+    /// ```
     pub fn cursor_mut(&mut self) -> DataMapIteratorMut<'_, K, V> {
         DataMapIteratorMut {
             position: DataMapPosition::new(&self.storage.base),
