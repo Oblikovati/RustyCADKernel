@@ -1,0 +1,2134 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Eight mixed OrderedDataMap binding overloads and removal of unrelated formatting bounds",
+  "base_revision": "a53e3551ab83a77174630d85fb5ed9b693457159",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "candidate awaiting coordinating main integration and checks",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/items_view/sources.rs": "8746892b19acf60dac541916a8d3e3114d054b510b5a5d1e158d23d6b025b4c6",
+    "crates/tkernel/src/ncollection/ordered_data_map/binding.rs": "1063c00bd8f712e321d34649eb693581953a601703db4c1cd92f9e191f4aa654",
+    "crates/tkernel/src/ncollection/ordered_data_map/cursor.rs": "8258f8fc488eb41658cf17c43dd8bb263991d7a7ea8df1155392c879f8b60ba8",
+    "crates/tkernel/src/ncollection/ordered_data_map/edges.rs": "336815239db265ab9a6042969b33c4a1490f1a3adb1997203fc6f5ae34a4fbbf",
+    "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs": "4f5b0c440651e1548f578c4b3622def5c94aa70ea09c254a18a9d860a0676c64",
+    "crates/tkernel/src/ncollection/ordered_data_map/method_contracts.rs": "4b97efb3ba9e899d97f87ce72c1a6ad73b8c08df0257f8175b3c35de664b9b8b",
+    "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+    "crates/tkernel/src/ncollection/ordered_data_map.rs": "769392a933cf2f8353e4b39c0c9d2cf296e6ece69db9f442914663889a3b0ba8",
+    "crates/tkernel/src/ncollection/ordered_map.rs": "5dc134a5e6b7bc957f71ffee72f71236b5e95844c9848b9d160c755b5f89f56e",
+    "crates/tkernel/src/ncollection/ordered_table/borrowed.rs": "3f1559827bbbba35c33111f87a2b684aaa3eb43e76afca02baa55b8182e490f0",
+    "crates/tkernel/src/ncollection/ordered_table/destruction.rs": "8bec44fc03988314b6e87e3027dde367908183d62ec3afaf98cf433d07cb0e6c",
+    "crates/tkernel/src/ncollection/ordered_table/iteration.rs": "410b9dbfd90a4424d0cf39ac8ab4b175d6afdd9a2a2d8d75d90412ed487a583c",
+    "crates/tkernel/src/ncollection/ordered_table/mutable.rs": "906b77c3f4e140968c7ca2d03976593cc0db9e280b2474aadc8b3a77893c41c6",
+    "crates/tkernel/src/ncollection/ordered_table/nodes.rs": "da1adefd1cc95e547144ba60c99f05dfd0a1847142e8097a7d859dedaa145186",
+    "crates/tkernel/src/ncollection/ordered_table/placement.rs": "26555c3453449f1e272a6531647ae6f4571eaff1da343e5972d26bea50b7101a",
+    "crates/tkernel/src/ncollection/ordered_table.rs": "04ebf96eda5e00017493d188b4c18a4baf0b1deb3fcec0e90e0aec04ea9ed1ab",
+    "crates/tkernel/tests/indexed_items_mutable_view.rs": "8035674df42fc73f42329fc77568057fded4d560d37b3e96670656e7ef36d01e",
+    "crates/tkernel/tests/items_view_method_contracts.rs": "4ab7b2868587b9bdbb387901530693d23a553f7ae7b41b8672b8e100d6fc6703",
+    "crates/tkernel/tests/ncollection_flat_maps_api_behavior.rs": "a3e0f6518e118bec71bb71a79c90ece21343087ad7eb19c2120acf044992e9ed",
+    "crates/tkernel/tests/ncollection_ordered_data_map/basic.rs": "53d70b1696e082458fd4de26142892c0c12fed6dc3973813a189e68b0850505b",
+    "crates/tkernel/tests/ncollection_ordered_data_map/binding.rs": "6112db7f03c74876c694a3a2ee488e8c5cca5d5379cc5ee8fd1f691f87c2f6dd",
+    "crates/tkernel/tests/ncollection_ordered_data_map/iteration.rs": "e9b839edb59851018abde863d3be0338b516e738f661409bd1fd41afd5b46872",
+    "crates/tkernel/tests/ncollection_ordered_data_map.rs": "f33acaaffb41208552c56474088ee28e38a26aea096e820140f35b2d11f21a0e",
+    "crates/tkernel/tests/ncollection_ordered_map/basic.rs": "bebd1c49b15bafd7da54388202a487d76af21c3f466fc8cfc2f5aac49268bcc0",
+    "crates/tkernel/tests/ncollection_ordered_map/iteration.rs": "f9ff666de8bc1f844cc2cf4e72d66460cbd15ee55ae9214cd338ba336869e651",
+    "crates/tkernel/tests/ncollection_ordered_map.rs": "5baeee16ede21147b1d2fc985c3c6e3f4944de5afc81e593bb4c5f64d7513b98",
+    "crates/tkernel/tests/ordered_data_map_method_contracts.rs": "655440c83191592c5d1231aeca58b63f282b76ade5620d4cc9db4726b0cca8be",
+    "crates/tkernel/tests/ordered_data_supplemental.rs": "3222a3120a8776970e4c5c3d36a1b1f75b5120842459a3f0214062f0d7d3282c",
+    "crates/tkernel/tests/ordered_map_destruction.rs": "0e822d002a285aa11a433749ca8ba05b2d1bd7388d7c45fb535c5e5856349416",
+    "crates/tkernel/tests/ordered_map_generic_bounds.rs": "8183cf7ba91afa6344c0ae6d2d9260ad28ce20c715c4e95b7daa04d35c01b4a8",
+    "crates/tkernel/tests/ordered_map_method_contracts.rs": "8807bdd1813e0319cc5baf0e879877e655cddefd190b6c52ba93481aa9a9447e",
+    "crates/tkernel/tests/ordered_map_supplemental.rs": "ed590e70f2a5a1da70daada789a12ecc1c58589b7154937270538a0c8ece299f",
+    "crates/tkernel/tests/ordered_mixed_ownership.rs": "3de94e155820437cc5db1d327b659e7e588249374483e071919c276aee1b655d",
+    "tools/oracle/tkernel_ordered_data_map_method_contracts.cxx": "2b9ec853c0c2ad1c78f38883008e432a758d380097dbaede1b12f369f8f5ed22",
+    "tools/oracle/tkernel_ordered_data_map_method_contracts.expected": "fc92d415a3b773177f3ca190517d2a1e58af1d1e98f5ea95231a0d789fc3bd5d",
+    "tools/oracle/tkernel_ordered_map_destruction.cxx": "e2442fec067e4e5180e35dbf2140d42de0e9bbc6413459c5d72ae90faec5bcf6",
+    "tools/oracle/tkernel_ordered_map_destruction.expected": "ca895421a17ce14fdeb6af52e79300273b7966d4aec3be405b685915d9474f27",
+    "tools/oracle/tkernel_ordered_map_method_contracts.cxx": "df3cee96c997edcd78bb7f18531c4eab300997f85ff4191a3444e973b93545c7",
+    "tools/oracle/tkernel_ordered_map_method_contracts.expected": "2364b9d6a3ec41a9b3b3946e981bee7e318c19f2500973b08d753807823806c6",
+    "tools/oracle/tkernel_ordered_mixed_ownership.cxx": "4fc448860d0d700fbd5a5901eb8f8e9bb2d0d993578919c7a30bc69ce699e13b",
+    "tools/oracle/tkernel_ordered_mixed_ownership.expected": "bb8e5d6baebf9eae19139c2702271fad1fe2e115875b44534511e95574eccfa5"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx": "13e1b322e91e0814782f20aaed2ec6d994fa605ca8d343f0790923a642d941b3",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx": "dd38d42090a75c6d2d7fd9e405fdd829b1524e15a821308d2f432494089013fb",
+    "src/FoundationClasses/TKernel/GTests/NCollection_OrderedMap_Test.cxx": "8971dadeb7c5384847fc1630b915ea96820d8d6c239ba48adce1b4d7b49931d5",
+    "src/FoundationClasses/TKernel/GTests/NCollection_OrderedDataMap_Test.cxx": "ce59569b05703dae1e5df019f785b382f6a70433e29421957c5cebff8826590a"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/ordered-mixed-ownership-rust.gz": "7c6b8c848d07b533f7d81d8debe6ddc20a8cc43725608c4111acf4938de9e324",
+    "porting/runtime-evidence/ordered-mixed-ownership-miri-final.gz": "0432ba729a0a7be4f252fa8ade66309fd37e04990ff4b0683bccab8937b9370d",
+    "porting/runtime-evidence/ordered-mixed-ownership-native-original.gz": "3e22e45ca4f81206d55f3af220de60a3b8a453c2c61d7c6e5dfe451e3155949e",
+    "porting/runtime-evidence/ordered-mixed-ownership-native-fixture.gz": "18fdceb5073e5499c7e6e4edd18b4a3d5940d7bda921c893c0da8c3b25a39e50",
+    "porting/runtime-evidence/ordered-mixed-ownership-native-build.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ordered-mixed-ownership-clippy.gz": "0c408bb9bce483015b4fa1bac8783d97a220e6d046191586d197c98fcd9919c9",
+    "porting/runtime-evidence/ordered-mixed-ownership-fmt.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ordered-mixed-ownership-compiler.gz": "c68fdf3f06bbd66f767b9f7f33587980396dcf3be0144b39561aa1847d514b5e",
+    "porting/runtime-evidence/ordered-mixed-ownership-compiler-json.gz": "c6e0846fc741c1f5bf9ba0e2e8b80e7f5e0f4be90909b143bddf8efca6a4923b",
+    "porting/runtime-evidence/ordered-mixed-ownership-normalized.gz": "ffcf8a78fbc9844da023f5fc532f942093ef0da5ab328942a1bce35b3b812934",
+    "porting/runtime-evidence/ordered-mixed-ownership-commands.gz": "3c15755c1cdc2b5da895a6f90fff194abc61086417eb17248a759b6e246f249e",
+    "porting/runtime-evidence/ordered-mixed-ownership-inputs.gz": "72983b3d66927a78d0e472443eec583aa140397092c7f10dfa8f49c1eaf87096",
+    "porting/runtime-evidence/ordered-mixed-ownership-native-commands.gz": "ecd8280e4080276859efe3df2c9ccceabe2567e8cd73e8d2feef845ffacb86e6",
+    "porting/runtime-evidence/ordered-mixed-ownership-source.tar.gz": "018bedbca457edc20d3ec9bec828c663cd30aa85222d7945b761527c9cca2d5f"
+  },
+  "checks": [
+    {
+      "label": "rust",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "items_view_method_contracts",
+        "--test",
+        "indexed_items_mutable_view",
+        "--test",
+        "ordered_mixed_ownership",
+        "--test",
+        "ordered_map_generic_bounds",
+        "--test",
+        "ordered_map_destruction",
+        "--test",
+        "ncollection_ordered_map",
+        "--test",
+        "ncollection_ordered_data_map",
+        "--test",
+        "ordered_map_method_contracts",
+        "--test",
+        "ordered_data_map_method_contracts",
+        "--test",
+        "ncollection_flat_maps_api_behavior",
+        "--test",
+        "ordered_map_supplemental",
+        "--test",
+        "ordered_data_supplemental"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "items_view_method_contracts",
+        "--test",
+        "indexed_items_mutable_view",
+        "--test",
+        "ordered_mixed_ownership",
+        "--test",
+        "ordered_map_generic_bounds",
+        "--test",
+        "ordered_map_destruction",
+        "--test",
+        "ncollection_ordered_map",
+        "--test",
+        "ncollection_ordered_data_map",
+        "--test",
+        "ordered_map_method_contracts",
+        "--test",
+        "ordered_data_map_method_contracts",
+        "--test",
+        "ncollection_flat_maps_api_behavior",
+        "--test",
+        "ordered_map_supplemental",
+        "--test",
+        "ordered_data_supplemental",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "rust_passed": 158,
+  "strict_provenance_miri_passed": 158,
+  "native_original_passed": 85,
+  "original_declaration_joins": [
+    {
+      "declaration_id": "d039091b8801c939ff34a20c9ed1217beb460a80fa62d3bf40139221396cb358",
+      "native_name": "NCollection_OrderedDataMapTest.AssignPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__AssignPreservesOrder"
+    },
+    {
+      "declaration_id": "cb0215c4224bcc1324092024b0d2842e31ffaf60b4e322b61bad8e779126d37b",
+      "native_name": "NCollection_OrderedDataMapTest.AutoResize",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__AutoResize"
+    },
+    {
+      "declaration_id": "9d5688960819d6045b24d932bf0b3994eb17b6ad55580578d7303975c0f62f0b",
+      "native_name": "NCollection_OrderedDataMapTest.BindAndFind",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindAndFind"
+    },
+    {
+      "declaration_id": "1c8b73d9f6509f8e98bd68cdc2e11213432d33e2909774ff4f230f1885b469d0",
+      "native_name": "NCollection_OrderedDataMapTest.BindOverwritesValuePreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindOverwritesValuePreservesOrder"
+    },
+    {
+      "declaration_id": "583c74c7f9c270befe1af12e8ec295a69d17a515962fe7c58e4d0bfb60cdbc6e",
+      "native_name": "NCollection_OrderedDataMapTest.BindPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindPreservesOrder"
+    },
+    {
+      "declaration_id": "4f10c78d366277a495d0a1e60a85203dd3e2705e34201e4a2bcbb1e37ccbf562",
+      "native_name": "NCollection_OrderedDataMapTest.ChangeFind",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ChangeFind"
+    },
+    {
+      "declaration_id": "1b8e5e03c3c201d0d156f3536ebd79794775434d7f31497e6e1ff01ef098ac62",
+      "native_name": "NCollection_OrderedDataMapTest.Clear",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Clear"
+    },
+    {
+      "declaration_id": "25a697c1e4a6f86010f701c3fe7ce09eb4a2040956b14dcd83dff9c18d27774e",
+      "native_name": "NCollection_OrderedDataMapTest.ClearAndReAdd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ClearAndReAdd"
+    },
+    {
+      "declaration_id": "b466659f967f135a3e43c80332d0ac43493277a46b9a0b3a69547c4127bf97fa",
+      "native_name": "NCollection_OrderedDataMapTest.ConstItemsIteration",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ConstItemsIteration"
+    },
+    {
+      "declaration_id": "dbe703f7bbf31e7625ca733995dfa7bc392d904abd9990af4413f27c4ea8c042",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedConst_Found",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedConst_Found"
+    },
+    {
+      "declaration_id": "b88aac92eeddde535d7ea3bb7c54ce481bc3f55e7039c3de7f5af2db74e3ac6c",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedConst_NotFound",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedConst_NotFound"
+    },
+    {
+      "declaration_id": "0bdf1a721e2079305b6fc0dc0bb3a37cb6c9b3f2750814c4d2ca0a01544f2d54",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedEmpty",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedEmpty"
+    },
+    {
+      "declaration_id": "4e78538552abf98f00e1d315a86c96d8fc47ec7db8fa450a599c62b1a35e074b",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedMutable",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedMutable"
+    },
+    {
+      "declaration_id": "49185b5af21129d5e0404e63da16c36d9b58f0e4e8c2f1dc9898e0fd9b1bfb4b",
+      "native_name": "NCollection_OrderedDataMapTest.CopyPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__CopyPreservesOrder"
+    },
+    {
+      "declaration_id": "ef5787d7afc621ac1834621fbac6f7be0b0f06bc838614827a2da73a3e411743",
+      "native_name": "NCollection_OrderedDataMapTest.CustomStatefulHasher",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__CustomStatefulHasher"
+    },
+    {
+      "declaration_id": "06f7bfa678ba530d48b5616150aa0d1815cce5d206cd3bb73dcb79cf6b8b53d1",
+      "native_name": "NCollection_OrderedDataMapTest.DefaultConstructor",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__DefaultConstructor"
+    },
+    {
+      "declaration_id": "9f129b821cd69dc46f22be1a9c29f7bf9aeace979ca1aa105e2e7901d31b15fd",
+      "native_name": "NCollection_OrderedDataMapTest.Emplace_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplace_ExistingKey"
+    },
+    {
+      "declaration_id": "f47ae2713aad1407f6b6ca37875a18a16bbadafc306cde62f6bc27d33a3458ea",
+      "native_name": "NCollection_OrderedDataMapTest.Emplace_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplace_NewKey"
+    },
+    {
+      "declaration_id": "a4c9d8b5c2b6e212b98ab7d8ba792aabf11490114a6e93405f4516b6a0047abc",
+      "native_name": "NCollection_OrderedDataMapTest.Emplaced",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplaced"
+    },
+    {
+      "declaration_id": "3ed7ab0244e548402f5526aa2d1723400183772168d576225f3f278a3de0fb52",
+      "native_name": "NCollection_OrderedDataMapTest.Exchange",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Exchange"
+    },
+    {
+      "declaration_id": "c50e271e68a8ce188e20f5bda65ffbb17ad068f90252afd348fbc8533013c73f",
+      "native_name": "NCollection_OrderedDataMapTest.FindNonExisting",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FindNonExisting"
+    },
+    {
+      "declaration_id": "97521af4b50d68ca8975756bcf1bbb0f9eda40388781fa14ed90f68577f3c6c1",
+      "native_name": "NCollection_OrderedDataMapTest.FindWithCopy",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FindWithCopy"
+    },
+    {
+      "declaration_id": "475d9bf10c57d6f0f199823ade40e2ee9a4759066945d9bc45102b0614d50239",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastAfterRemove",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastAfterRemove"
+    },
+    {
+      "declaration_id": "d8860d9d3a1523f4813acf91f770d5320b6970d72199ec617b950ba6d4e41b4b",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastEmpty",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastEmpty"
+    },
+    {
+      "declaration_id": "498dda27d988591b08b0941e74483fa580036c29a77a61ab03b85ab011b4ae4a",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastKey"
+    },
+    {
+      "declaration_id": "2ed96e48b31e0a5f3e0da0f8617ed7f02f3c3701ef5c781519351ad8ece65bcd",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastValue",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastValue"
+    },
+    {
+      "declaration_id": "74b293ea22bf9b4ff1b331670e87921e8bd45562ac4608f88df062cea7b6a857",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsIteratorEquality",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsIteratorEquality"
+    },
+    {
+      "declaration_id": "f84be6e823eceb1792203c5096dad6a5557629e71bd3ec7bd3c987c54898018f",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsModifyValue",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsModifyValue"
+    },
+    {
+      "declaration_id": "8bba43b1209101a7dd6a9642d2ae93a4119fdaabe5504b94563925c02a9c6ddd",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsStructuredBindings",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsStructuredBindings"
+    },
+    {
+      "declaration_id": "4b3fd20ed7b62eeb8209163b7b34034806494710fc8df056bafba5f3024c5dc2",
+      "native_name": "NCollection_OrderedDataMapTest.LargeMapOrderPreservation",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__LargeMapOrderPreservation"
+    },
+    {
+      "declaration_id": "f4eec7006acfca7c64380c4d524da2449b7204b9fc67af399db2895e6d8ac5d0",
+      "native_name": "NCollection_OrderedDataMapTest.MoveAssignment",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__MoveAssignment"
+    },
+    {
+      "declaration_id": "46945316716bc670dd1473b621f07c04c9e56200821e3e0cd8f9ddbd4a9c549d",
+      "native_name": "NCollection_OrderedDataMapTest.MoveConstructor",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__MoveConstructor"
+    },
+    {
+      "declaration_id": "d2ea5370abd9dc32bab11db6a6c273d93a9f548669ea74f3cda322aa65bd7b40",
+      "native_name": "NCollection_OrderedDataMapTest.NativeIterator",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__NativeIterator"
+    },
+    {
+      "declaration_id": "4950b06fed4065824f79e625f3888ba805b18a538c1761428632a6b77791400f",
+      "native_name": "NCollection_OrderedDataMapTest.OperatorParens",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__OperatorParens"
+    },
+    {
+      "declaration_id": "0b8e04b02847f241076bc865df576a4cf065c0d5936236e22587918bba6c1ab5",
+      "native_name": "NCollection_OrderedDataMapTest.ReSizePreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ReSizePreservesOrder"
+    },
+    {
+      "declaration_id": "79d1b2b17a2baddd8f41599c47bf5a34c4a0f047845e4597d9a31ea0c85fea4a",
+      "native_name": "NCollection_OrderedDataMapTest.STLBeginEnd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__STLBeginEnd"
+    },
+    {
+      "declaration_id": "a41785e178e193f818d5f6d5647a2a5d7af40544b4011d7acee19c0791ccfa44",
+      "native_name": "NCollection_OrderedDataMapTest.SeekAndChangeSeek",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__SeekAndChangeSeek"
+    },
+    {
+      "declaration_id": "e6d26c328a1c35544fb8bae4567cdcfc9c9805c17eb8cccc6c9fd89dcf7af76b",
+      "native_name": "NCollection_OrderedDataMapTest.TryBindPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBindPreservesOrder"
+    },
+    {
+      "declaration_id": "6894b7f401e34a989d7a999a8f5f6b4f569807a32cd86b5db2776b49390f357e",
+      "native_name": "NCollection_OrderedDataMapTest.TryBind_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBind_ExistingKey"
+    },
+    {
+      "declaration_id": "3c3afe2cbb55f4bb1d2d2aa101eadcc24932881101be50f18d65c3e0f52b2bba",
+      "native_name": "NCollection_OrderedDataMapTest.TryBind_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBind_NewKey"
+    },
+    {
+      "declaration_id": "9acc0f84396673a3ad7b7baf84dafe0b1fa74e90b84e0d304eb700d7628c9294",
+      "native_name": "NCollection_OrderedDataMapTest.TryBound_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBound_ExistingKey"
+    },
+    {
+      "declaration_id": "eba629a438ec9c7643e03a5875c5c5adea4d0a105423f5ba66792b3759f5dba2",
+      "native_name": "NCollection_OrderedDataMapTest.TryBound_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBound_NewKey"
+    },
+    {
+      "declaration_id": "441a0050e5cc4044c315db3832c9d7ec95ef187bbe76ba3ca68e514409287660",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplace_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplace_ExistingKey"
+    },
+    {
+      "declaration_id": "659da999ef87473538bfad2f4aaa9a6b0e4168d0da8ec5d25b5e9e769e792d2a",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplace_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplace_NewKey"
+    },
+    {
+      "declaration_id": "2b2b79ef584f20a2fe8c5d5c0c377e36f6b380696df491a06e07d5adad31919b",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplaced",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplaced"
+    },
+    {
+      "declaration_id": "cc9da2771ead4dbac9d2d52edaea875cac2bbee69eacbd94cc36f7beed9bf608",
+      "native_name": "NCollection_OrderedDataMapTest.UnBindAndReAdd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__UnBindAndReAdd"
+    },
+    {
+      "declaration_id": "95188dfd4e290b98e801b6904a5d7473d4ce176541458e9f36c74bbac45ab0aa",
+      "native_name": "NCollection_OrderedDataMapTest.UnBindOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__UnBindOrder"
+    },
+    {
+      "declaration_id": "f160cb47176d2466d851c62e7e84383c55f291fc5186d01748adf6d533987c6e",
+      "native_name": "NCollection_OrderedMapTest.AddAndContainsWithOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddAndContainsWithOrder"
+    },
+    {
+      "declaration_id": "932d20045e1c652cfecd847ca5051596154f548360042bd6f82834bd5ba9f1ad",
+      "native_name": "NCollection_OrderedMapTest.AddDuplicate",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddDuplicate"
+    },
+    {
+      "declaration_id": "7be6caf8938fbdf4b70464fef25d2b9ad7da2b49238ad0549ec51dd0454df625",
+      "native_name": "NCollection_OrderedMapTest.AddedMethod",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddedMethod"
+    },
+    {
+      "declaration_id": "f14e22b0a5113972aac5922e5f4b3f6f2a5bf9ebb2806faf659c44dc008ca3a3",
+      "native_name": "NCollection_OrderedMapTest.AssignPreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AssignPreservesOrder"
+    },
+    {
+      "declaration_id": "598c3253fd8b86c4f21ade24cbc9416442a26a372f1d3f5663255c5c8a72358e",
+      "native_name": "NCollection_OrderedMapTest.AutoResize",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AutoResize"
+    },
+    {
+      "declaration_id": "164c0536d833d9eb7adf3a2dc2c3ceb5f54f98ff28480191349042929f601ba3",
+      "native_name": "NCollection_OrderedMapTest.ClearAndReAdd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ClearAndReAdd"
+    },
+    {
+      "declaration_id": "a46cade26c1fb34066b1405772d4cfe5c0332994abb2b8a823db5819b27d3a75",
+      "native_name": "NCollection_OrderedMapTest.ConstructorWithBuckets",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ConstructorWithBuckets"
+    },
+    {
+      "declaration_id": "141270c24dd821cbabec950eee71990488270a2a05aea0577b97db9c215bb22e",
+      "native_name": "NCollection_OrderedMapTest.ContainedEmpty",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedEmpty"
+    },
+    {
+      "declaration_id": "59355bdd38e6b2c7487d9ca6f2b7e24ae99446cb6f2c029c1e78f4a00195e3ba",
+      "native_name": "NCollection_OrderedMapTest.ContainedFound",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedFound"
+    },
+    {
+      "declaration_id": "0bfe5175069e4abc74c228cac55abb081169f45497ec0e3ea8b146613f611428",
+      "native_name": "NCollection_OrderedMapTest.ContainedNotFound",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedNotFound"
+    },
+    {
+      "declaration_id": "d93a86231954a0485c331dcb5ba608251c26c1f61f7719732ff47447d01c859e",
+      "native_name": "NCollection_OrderedMapTest.CopyPreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__CopyPreservesOrder"
+    },
+    {
+      "declaration_id": "9ae88b7830c8da571e9b0b84850cc3b4b213c597020e22532238b4b26671df4a",
+      "native_name": "NCollection_OrderedMapTest.CustomStatefulHasher",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__CustomStatefulHasher"
+    },
+    {
+      "declaration_id": "1bbb40aed0c988ca59b240da92bd5e8986c77da4b7bb8925c234ca43f443c42e",
+      "native_name": "NCollection_OrderedMapTest.DefaultConstructor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__DefaultConstructor"
+    },
+    {
+      "declaration_id": "3247abda9b4074d769649ca2ab5bfcfe0ec91f06968002202221ca0cc5addd1a",
+      "native_name": "NCollection_OrderedMapTest.EmplaceBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplaceBasic"
+    },
+    {
+      "declaration_id": "05bf73f26adf010ea33ec2d040d9b429a0af924ea5eee62ba9caa1c64997c5ff",
+      "native_name": "NCollection_OrderedMapTest.EmplacePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplacePreservesOrder"
+    },
+    {
+      "declaration_id": "61fe940ccc346053893a0ea01e50c3745e652b0e79427b6c03ea2e8401d00d7b",
+      "native_name": "NCollection_OrderedMapTest.EmplacedBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplacedBasic"
+    },
+    {
+      "declaration_id": "fe9d3a7541d811c354ae75ce1b6e5cf6ed9c5858e84bbd7c7e724c1cf765eac9",
+      "native_name": "NCollection_OrderedMapTest.Exchange",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__Exchange"
+    },
+    {
+      "declaration_id": "ba0767d66ddf4fbc25031163945abe2978f7a9373e9ece0cb7d18167eaec0eba",
+      "native_name": "NCollection_OrderedMapTest.FirstLast",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLast"
+    },
+    {
+      "declaration_id": "212caa2add2e9730298d874b3eed2fca19ce23a66de4b951e7d99e6a61d7a44c",
+      "native_name": "NCollection_OrderedMapTest.FirstLastEmpty",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLastEmpty"
+    },
+    {
+      "declaration_id": "589e8be83bfb5544b8672e1ce05f050bf19822a2dadc60f35ab1ef82d277ca2c",
+      "native_name": "NCollection_OrderedMapTest.FirstLastSingleElement",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLastSingleElement"
+    },
+    {
+      "declaration_id": "98351fa6055fb1aa891f2b79b8e477aedc063195dad5eaccec56f176bde613f0",
+      "native_name": "NCollection_OrderedMapTest.IteratorEquality",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__IteratorEquality"
+    },
+    {
+      "declaration_id": "92a81bebe6200051ceef33e5244c0fd99e813fe5332b1963f6c1c293c8c475d5",
+      "native_name": "NCollection_OrderedMapTest.IteratorInitialize",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__IteratorInitialize"
+    },
+    {
+      "declaration_id": "e71affd50fe0435c7697756ae7e4da63e7fb2ccf74623b309cec0c94cb7a5640",
+      "native_name": "NCollection_OrderedMapTest.LargeMapOrderPreservation",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__LargeMapOrderPreservation"
+    },
+    {
+      "declaration_id": "994dfe005a1fed034cfa8df59df61f46b776617a66f2374e1953f29025dc4ad9",
+      "native_name": "NCollection_OrderedMapTest.MoveAssignment",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__MoveAssignment"
+    },
+    {
+      "declaration_id": "0be713219197fd2bd105a9de76ebd7d06978533498eb040df555a96ee1cbbfae",
+      "native_name": "NCollection_OrderedMapTest.MoveConstructor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__MoveConstructor"
+    },
+    {
+      "declaration_id": "6b55a34e160d27d16ea3a31f6948935dea611fc52e9282e634f312d6a122fa70",
+      "native_name": "NCollection_OrderedMapTest.NativeIterator",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__NativeIterator"
+    },
+    {
+      "declaration_id": "ac2f39be817df59411a8f1e0a7c080364c296a3bf16f3eb7331022f12f194334",
+      "native_name": "NCollection_OrderedMapTest.RangeBasedFor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RangeBasedFor"
+    },
+    {
+      "declaration_id": "6ed25225ded1af7ec83e1632d35fced13a181c42a4bc949023b82dd5e63472ed",
+      "native_name": "NCollection_OrderedMapTest.ReSizePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ReSizePreservesOrder"
+    },
+    {
+      "declaration_id": "c4cb6d679216cc9de32c53ee7bae68f0a051b262cdb69c3afc54cac9f11d0727",
+      "native_name": "NCollection_OrderedMapTest.RemoveAll",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveAll"
+    },
+    {
+      "declaration_id": "d1bd856d760fca3a4d73b138c0425113a7c7ad48f3822500e38aa1b3e0cfb032",
+      "native_name": "NCollection_OrderedMapTest.RemoveAndReAdd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveAndReAdd"
+    },
+    {
+      "declaration_id": "d2ab0313796f55543d0a87db71bb25e6639899428fa2d3902e5436dddfe6ca6d",
+      "native_name": "NCollection_OrderedMapTest.RemoveFirst",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveFirst"
+    },
+    {
+      "declaration_id": "aa2af04d7ffc077d87f601fdc7144365a46fc407cda9e8f02f681a5cc4263c99",
+      "native_name": "NCollection_OrderedMapTest.RemoveLast",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveLast"
+    },
+    {
+      "declaration_id": "00d8fd64bd95a57b50ee907eaa3d628ea264b8b99d353ce87ae735137a06c26d",
+      "native_name": "NCollection_OrderedMapTest.RemoveMiddle",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveMiddle"
+    },
+    {
+      "declaration_id": "919d47113a2639236b15589d19b07cb88101170deebc09319292fdd5cef45ab7",
+      "native_name": "NCollection_OrderedMapTest.RemoveNonExistent",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveNonExistent"
+    },
+    {
+      "declaration_id": "5cf929e9030039d8c0830e27dac6f804a7db37809544dfcc5c738e09c8c2d9fa",
+      "native_name": "NCollection_OrderedMapTest.STLBeginEnd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__STLBeginEnd"
+    },
+    {
+      "declaration_id": "94efbd321c4d230ed4281dbb62a91595e90e35ab9f7c99fbe001f6cc529e5097",
+      "native_name": "NCollection_OrderedMapTest.TryEmplaceBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplaceBasic"
+    },
+    {
+      "declaration_id": "2f7b5e1960e32cf396fdd985306f7393aecd8c1aaf28841d1dfbb262597dc7fb",
+      "native_name": "NCollection_OrderedMapTest.TryEmplacePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplacePreservesOrder"
+    },
+    {
+      "declaration_id": "0b7ca92902743978cca958bd486fa6203217aa314d04cff53be6a79b62746bf2",
+      "native_name": "NCollection_OrderedMapTest.TryEmplacedBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplacedBasic"
+    }
+  ],
+  "native_fixture_rows": 32,
+  "local_method_bindings": [
+    {
+      "occt_id": "14db94618e20ff66d5157db0598053a315b642926e7e6d9190b83b16e34100d5",
+      "occt_name": "NCollection_OrderedDataMap::Bound",
+      "occt_signature": "type-parameter-0-1 *(type-parameter-0-0 &&, const type-parameter-0-1 &)",
+      "written_parameter_types": [
+        "TheKeyType &&",
+        "const TheItemType &"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::bound_value_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "generic": "K"
+                }
+              ],
+              [
+                "value",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "V"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": true,
+                "type": {
+                  "generic": "V"
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "23007ac8dc669222cd63614de189bb3a697fa46ab643fa60812d20ce1a4ffc7c"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "14e5e4e14500dc9bd76b85fcb7e7ae6fb8987507b90731238ac39e0aad3685ef",
+      "occt_name": "NCollection_OrderedDataMap::Bind",
+      "occt_signature": "bool (type-parameter-0-0 &&, const type-parameter-0-1 &)",
+      "written_parameter_types": [
+        "TheKeyType &&",
+        "const TheItemType &"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::bind_value_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "generic": "K"
+                }
+              ],
+              [
+                "value",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "V"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "primitive": "bool"
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "64254d52aa98107c03c3f4230a1f603b807aa34300920331e9184060510c40e0"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "3de600e4a1098e18a16ed5ee5ce2a6e8899242e3cab796674ca093453584d0bc",
+      "occt_name": "NCollection_OrderedDataMap::Bind",
+      "occt_signature": "bool (const type-parameter-0-0 &, type-parameter-0-1 &&)",
+      "written_parameter_types": [
+        "const TheKeyType &",
+        "TheItemType &&"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::bind_key_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "K"
+                    }
+                  }
+                }
+              ],
+              [
+                "value",
+                {
+                  "generic": "V"
+                }
+              ]
+            ],
+            "output": {
+              "primitive": "bool"
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "12926d4fef2aa589cb5f27e094550f79ba97ba6b828d99da5ff29bbc67336591"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "5a164868bcc6734d1a8d5f3a12421619f19b809ca81edf94fb7ad7591a878584",
+      "occt_name": "NCollection_OrderedDataMap::TryBound",
+      "occt_signature": "type-parameter-0-1 &(const type-parameter-0-0 &, type-parameter-0-1 &&)",
+      "written_parameter_types": [
+        "const TheKeyType &",
+        "TheItemType &&"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::try_bound_key_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "K"
+                    }
+                  }
+                }
+              ],
+              [
+                "value",
+                {
+                  "generic": "V"
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": true,
+                "type": {
+                  "generic": "V"
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "f3d222513e15de10a7f2f07020add037f0d730181f2e7ee751e5af2acf8b359e"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "5eec482248bfbc8ac439d9a2ab6e46588ed5566589cbb30f67e3905240142e56",
+      "occt_name": "NCollection_OrderedDataMap::Bound",
+      "occt_signature": "type-parameter-0-1 *(const type-parameter-0-0 &, type-parameter-0-1 &&)",
+      "written_parameter_types": [
+        "const TheKeyType &",
+        "TheItemType &&"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::bound_key_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "K"
+                    }
+                  }
+                }
+              ],
+              [
+                "value",
+                {
+                  "generic": "V"
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": true,
+                "type": {
+                  "generic": "V"
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "04b32144697825712b91909a269accb25a45d9ffc4524a455c7423e5b1a9c15d"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "7d4141a48206ea2c47b960afe215d84a30c7d844b3cda96f434b3a3dae60bd77",
+      "occt_name": "NCollection_OrderedDataMap::TryBind",
+      "occt_signature": "bool (const type-parameter-0-0 &, type-parameter-0-1 &&)",
+      "written_parameter_types": [
+        "const TheKeyType &",
+        "TheItemType &&"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::try_bind_key_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "K"
+                    }
+                  }
+                }
+              ],
+              [
+                "value",
+                {
+                  "generic": "V"
+                }
+              ]
+            ],
+            "output": {
+              "primitive": "bool"
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "b5d3f1673850fb07304f636ad06389de6db1475e2a9838f35f505bb2efe49c4c"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "a8b7796fb99cd80cb386b35b17ad3ef15a75921bed904eb797aa1808e59662af",
+      "occt_name": "NCollection_OrderedDataMap::TryBind",
+      "occt_signature": "bool (type-parameter-0-0 &&, const type-parameter-0-1 &)",
+      "written_parameter_types": [
+        "TheKeyType &&",
+        "const TheItemType &"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::try_bind_value_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "generic": "K"
+                }
+              ],
+              [
+                "value",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "V"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "primitive": "bool"
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "823d5c61de84f8a3b458a44bffc35616fdaab17b47893dea363168f1e63c68ad"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    },
+    {
+      "occt_id": "d3f37eb35b72e3cf596d8dbc98da3dc40082d702850ba2eb825f3620a7be6941",
+      "occt_name": "NCollection_OrderedDataMap::TryBound",
+      "occt_signature": "type-parameter-0-1 &(type-parameter-0-0 &&, const type-parameter-0-1 &)",
+      "written_parameter_types": [
+        "TheKeyType &&",
+        "const TheItemType &"
+      ],
+      "compiler_declaration": {
+        "path": "rustycad_tkernel::ncollection::OrderedDataMap::try_bound_value_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "key",
+                {
+                  "generic": "K"
+                }
+              ],
+              [
+                "value",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "V"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": true,
+                "type": {
+                  "generic": "V"
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs",
+        "source_sha256": "db0caf907ad622019b1451b0900fd545f2dda2c7b66683cb7a2fb34e19360482",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::OrderedDataMap",
+              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "K"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "V"
+                      }
+                    },
+                    {
+                      "type": {
+                        "generic": "H"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "K",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "V",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Clone",
+                            "resolved_item_path": "core::clone::Clone",
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              },
+              {
+                "name": "H",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "HashPolicy",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "K"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "2be5462359396cc2aa7c6727557557871abcf996228bff3335f180e319fdf9f0"
+      },
+      "behavior_status": "copy/hash/allocation-before-copy/return behavior verified on fixture domain; custom C++ move hooks and allocation failure recovery remain partial"
+    }
+  ],
+  "global_api_credit": 0,
+  "new_original_mapping_credit": 0,
+  "class_status": "partial",
+  "frozen_runtime_inputs": 9860,
+  "unchanged_runtime_inputs": true,
+  "retained_debug_method_constraints": [
+    "rustycad_tkernel::ncollection::OrderedDataMap::find",
+    "rustycad_tkernel::ncollection::OrderedDataMap::change_find",
+    "rustycad_tkernel::ncollection::OrderedDataMap::<core::ops::index::Index<&K>>::index",
+    "rustycad_tkernel::ncollection::OrderedDataMap::<core::ops::index::IndexMut<&K>>::index_mut"
+  ],
+  "changes": [
+    "Eight mixed ownership overloads require Clone only for the borrowed component.",
+    "One private KeyArgument engine handles owned, borrowed and mixed insertion paths.",
+    "New-key allocation precedes borrowed argument copying; lookups precede copies; try-hit performs no borrowed argument copying.",
+    "Throwing replacement copy retains the old value and stable stored value address.",
+    "Constructors, binding, lookup/seek, iteration, cursor, edge, copy/move and generic ItemsView access accept non-Debug keys.",
+    "Shared items_view/sources.rs macro accepts an optional bound; other map bounds remain unchanged."
+  ],
+  "limitations": [
+    "Native custom move-construction/move-assignment hooks are represented by Rust ownership transfer/replacement; oracle intentionally does not instrument move hooks.",
+    "Owned Rust arguments are consumed even on native try-hit paths that leave caller rvalue arguments unmoved; caller-observable move-slot adaptation remains open.",
+    "Throwing native IncAllocator placement construction retains allocator memory; Rust allocation guards reclaim unpublished ownership. Exception allocation recovery is not claimed equivalent.",
+    "Four find/change_find/index paths retain Debug to include the offending key value in diagnostics; native opaque-key API parity for these remains open.",
+    "Node and bucket storage remain slot/vector based; canonical native graph, allocator layout and public node constructor surface remain open.",
+    "Native moved-from hash policy behavior and complete destructor callback observations remain partial.",
+    "Scoped tests and bindings do not replace the main whole-workspace checkpoint or prove global API completeness."
+  ],
+  "native_fixture_executable_sha256": "315383ff4b8cb2a157c2dc5421a1089d5b75767b7caba54fb3197b949ca50b31",
+  "native_return_adaptation": "Bound native pointer becomes a Rust mutable reference; TryBound already returns a native reference.",
+  "miri_command": [
+    "cargo",
+    "+nightly-2026-09-25",
+    "miri",
+    "test",
+    "--locked",
+    "-p",
+    "rustycad-tkernel",
+    "--test",
+    "items_view_method_contracts",
+    "--test",
+    "indexed_items_mutable_view",
+    "--test",
+    "ordered_mixed_ownership",
+    "--test",
+    "ordered_map_generic_bounds",
+    "--test",
+    "ordered_map_destruction",
+    "--test",
+    "ncollection_ordered_map",
+    "--test",
+    "ncollection_ordered_data_map",
+    "--test",
+    "ordered_map_method_contracts",
+    "--test",
+    "ordered_data_map_method_contracts",
+    "--test",
+    "ncollection_flat_maps_api_behavior",
+    "--test",
+    "ordered_map_supplemental",
+    "--test",
+    "ordered_data_supplemental"
+  ],
+  "miri_environment": {
+    "MIRIFLAGS": "-Zmiri-strict-provenance"
+  },
+  "rustdoc_command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib -- -Z unstable-options --output-format json --document-private-items"
+}

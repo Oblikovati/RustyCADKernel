@@ -66,41 +66,6 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
                 .equal(&self.slots[slot].as_ref().unwrap().key, key)
         })
     }
-    pub fn place(
-        &mut self,
-        key: K,
-        construct: impl FnOnce() -> V,
-        replace_key: bool,
-        replace_value: bool,
-    ) -> (bool, usize) {
-        if self.count == 0 || self.count > self.bucket_count {
-            self.resize(self.count);
-        }
-        let hash = self.hasher.hash(&key) % self.bucket_count + 1;
-        if let Some(slot) = self.lookup_at_hash(&key, hash) {
-            let node = self.slots[slot].as_mut().unwrap();
-            if replace_key {
-                node.key = key;
-            }
-            if replace_value {
-                node.value = construct();
-            }
-            return (false, slot);
-        }
-        (true, self.append_node(key, construct, hash))
-    }
-    fn append_node(&mut self, key: K, construct: impl FnOnce() -> V, hash: usize) -> usize {
-        let node = self.resource.allocate_value_with(|| {
-            let value = construct();
-            OrderedNode {
-                key,
-                value,
-                previous: self.last,
-                next: None,
-            }
-        });
-        self.append_allocated(node, hash)
-    }
     fn append_allocated(&mut self, node: AllocatedBox<OrderedNode<K, V>>, hash: usize) -> usize {
         let slot = self.free.pop().unwrap_or_else(|| {
             self.slots.push(None);
@@ -189,3 +154,5 @@ mod mutable;
 pub(super) use mutable::OrderedItemsMut;
 
 mod destruction;
+
+mod placement;

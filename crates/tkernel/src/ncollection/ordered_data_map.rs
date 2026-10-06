@@ -42,7 +42,7 @@ impl PartialEq for OrderedDataCursor {
     }
 }
 impl Eq for OrderedDataCursor {}
-impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Injects hash/equality policy and initial buckets; `OrderedDataMap::with_hasher(policy,10)`.
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
         Self::with_allocator(hasher, buckets, BaseAllocator::common())
@@ -127,15 +127,6 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         let node = &mut **self.table.slots[slot].as_mut()?;
         Some((&node.key, &mut node.value))
     }
-    /// Finds a value or reports NoSuchObject; `map.find(&42)?`.
-    pub fn find(&self, key: &K) -> Result<&V, Failure> {
-        self.seek(key).ok_or_else(|| missing_ordered_key(key))
-    }
-    /// Finds a mutable value or reports NoSuchObject; `*map.change_find(&42)?=7`.
-    pub fn change_find(&mut self, key: &K) -> Result<&mut V, Failure> {
-        self.change_seek(key)
-            .ok_or_else(|| missing_ordered_key(key))
-    }
     /// Unlinks a pair while retaining all other positions; `map.unbind(&42)`.
     pub fn unbind(&mut self, key: &K) -> bool {
         self.table.remove(key)
@@ -149,13 +140,24 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         std::mem::swap(self, other);
     }
 }
-impl<K: Debug, V, H: HashPolicy<K> + Default> OrderedDataMap<K, V, H> {
+impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+    /// Finds a value or reports NoSuchObject; `map.find(&42)?`.
+    pub fn find(&self, key: &K) -> Result<&V, Failure> {
+        self.seek(key).ok_or_else(|| missing_ordered_key(key))
+    }
+    /// Finds a mutable value or reports NoSuchObject; `*map.change_find(&42)?=7`.
+    pub fn change_find(&mut self, key: &K) -> Result<&mut V, Failure> {
+        self.change_seek(key)
+            .ok_or_else(|| missing_ordered_key(key))
+    }
+}
+impl<K, V, H: HashPolicy<K> + Default> OrderedDataMap<K, V, H> {
     /// Selects initial buckets with default hashing; `OrderedDataMap::<i32,i32>::new(10)`.
     pub fn new(buckets: usize) -> Self {
         Self::with_hasher(H::default(), buckets)
     }
 }
-impl<K: Debug, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
+impl<K, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
     /// Moves nodes, leaving source allocator and bucket selection intact; `OrderedDataMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
         let empty = Self::with_allocator(
@@ -166,12 +168,12 @@ impl<K: Debug, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
         std::mem::replace(source, empty)
     }
 }
-impl<K: Debug, V, H: HashPolicy<K> + Default> Default for OrderedDataMap<K, V, H> {
+impl<K, V, H: HashPolicy<K> + Default> Default for OrderedDataMap<K, V, H> {
     fn default() -> Self {
         Self::new(1)
     }
 }
-impl<K: Debug, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+impl<K, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Copies a value to output only when found; `map.find_copy(&42,&mut value)`.
     pub fn find_copy(&self, key: &K, output: &mut V) -> bool {
         let Some(value) = self.seek(key) else {
@@ -240,3 +242,5 @@ mod cursor;
 mod edges;
 mod iteration;
 mod method_contracts;
+
+mod mixed_binding;

@@ -1,5 +1,5 @@
-use super::{Debug, Failure, HashPolicy, OrderedDataCursor, OrderedDataMap};
-impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+use super::{Failure, HashPolicy, OrderedDataCursor, OrderedDataMap};
+impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Creates a detached legacy cursor for explicit reborrowing; `map.cursor()`.
     pub fn cursor(&self) -> OrderedDataCursor {
         OrderedDataCursor {
@@ -15,12 +15,12 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
 }
 impl OrderedDataCursor {
     /// Rebinds the cursor to `map`'s first binding, native `Initialize`; `cursor.initialize(&map)`.
-    pub fn initialize<K: Debug, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+    pub fn initialize<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
         *self = map.cursor();
     }
     /// Native `Reset`: a bound cursor restarts at the current first binding of `map` (the map
     /// it was created on), a default cursor stays exhausted; `cursor.reset(&map)`.
-    pub fn reset<K: Debug, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+    pub fn reset<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
         if self.owner.is_null() {
             return;
         }
@@ -36,21 +36,21 @@ impl OrderedDataCursor {
         self.slot.is_some()
     }
     /// Borrows the current key from its map; `cursor.key(&map)?`.
-    pub fn key<'a, K: Debug, V, H: HashPolicy<K>>(
+    pub fn key<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a K, Failure> {
         Ok(&map.node(self.checked_slot(map)?)?.key)
     }
     /// Borrows the current value from its map; `cursor.value(&map)?`.
-    pub fn value<'a, K: Debug, V, H: HashPolicy<K>>(
+    pub fn value<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a V, Failure> {
         Ok(&map.node(self.checked_slot(map)?)?.value)
     }
     /// Borrows the current value exclusively; `*cursor.change_value(&mut map)?=42`.
-    pub fn change_value<'a, K: Debug, V, H: HashPolicy<K>>(
+    pub fn change_value<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a mut OrderedDataMap<K, V, H>,
     ) -> Result<&'a mut V, Failure> {
@@ -58,7 +58,7 @@ impl OrderedDataCursor {
         Ok(&mut map.node_mut(slot)?.value)
     }
     /// Advances through insertion-order links; `cursor.advance(&map)`.
-    pub fn advance<K: Debug, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+    pub fn advance<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
         self.slot = self
             .checked_slot(map)
             .ok()
@@ -66,7 +66,7 @@ impl OrderedDataCursor {
         self.node = map.cursor_node_identity(self.slot);
     }
 
-    fn checked_slot<K: Debug, V, H: HashPolicy<K>>(
+    fn checked_slot<K, V, H: HashPolicy<K>>(
         &self,
         map: &OrderedDataMap<K, V, H>,
     ) -> Result<Option<usize>, Failure> {
@@ -102,7 +102,7 @@ impl OrderedDataCursor {
     }
 
     /// Advances and returns this cursor, matching prefix increment; `cursor.advance_returning(&map)`.
-    pub fn advance_returning<K: Debug, V, H: HashPolicy<K>>(
+    pub fn advance_returning<K, V, H: HashPolicy<K>>(
         &mut self,
         map: &OrderedDataMap<K, V, H>,
     ) -> &mut Self {
@@ -111,10 +111,7 @@ impl OrderedDataCursor {
     }
 
     /// Advances while returning the old state, matching postfix increment; `cursor.post_advance(&map)`.
-    pub fn post_advance<K: Debug, V, H: HashPolicy<K>>(
-        &mut self,
-        map: &OrderedDataMap<K, V, H>,
-    ) -> Self {
+    pub fn post_advance<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) -> Self {
         let previous = self.clone();
         self.advance(map);
         previous

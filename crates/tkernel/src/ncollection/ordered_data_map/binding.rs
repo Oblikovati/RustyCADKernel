@@ -1,5 +1,5 @@
-use super::{Debug, HashPolicy, OrderedDataMap};
-impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+use super::{HashPolicy, OrderedDataMap};
+impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Replaces existing values and reports new-key insertion; `map.bind(1,42)`.
     pub fn bind(&mut self, key: K, value: V) -> bool {
         self.table.place(key, || value, false, true).0
