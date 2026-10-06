@@ -4,6 +4,7 @@ use std::marker::PhantomData;
 mod integer;
 mod iteration;
 mod legacy_algebra;
+mod protected_helpers;
 mod queries;
 pub use integer::{PackedInteger, PackedWord};
 pub use iteration::PackedMapIter;
@@ -84,7 +85,7 @@ impl<T: PackedInteger> PackedMap<T> {
             (0..=modulus).map(|_| Vec::new()).collect();
         for bucket in self.buckets.drain(..) {
             for block in bucket {
-                buckets[block.index.bits() as usize % modulus + 1].insert(0, block);
+                buckets[Self::hash_code(block.index, modulus)].insert(0, block);
             }
         }
         self.bucket_count = modulus;
@@ -92,7 +93,7 @@ impl<T: PackedInteger> PackedMap<T> {
     }
     /// Add a bit, growing based on occupied blocks; `map.add(42)`.
     pub fn add(&mut self, value: T) -> bool {
-        if self.is_empty() || self.block_count > self.bucket_count {
+        if self.resizable() {
             self.resize(self.block_count);
         }
         let (index, bit, bucket) = self.location(value);
@@ -160,7 +161,7 @@ impl<T: PackedInteger> PackedMap<T> {
         self.resize(source.block_count);
         for bucket in &source.buckets {
             for block in bucket {
-                self.buckets[block.index.bits() as usize % self.bucket_count + 1].insert(0, *block);
+                self.buckets[Self::hash_code(block.index, self.bucket_count)].insert(0, *block);
             }
         }
         self.count = source.count;
@@ -177,9 +178,9 @@ impl<T: PackedInteger> PackedMap<T> {
         self
     }
     fn location(&self, value: T) -> (u64, u64, usize) {
-        let index: u64 = value.bits() >> Self::SHIFT;
+        let index: T::Word = Self::packed_key_index(value);
         let bit: u64 = 1 << (value.bits() & (Self::BITS_PER_BLOCK as u64 - 1));
-        (index, bit, index as usize % self.bucket_count + 1)
+        (index.bits(), bit, Self::hash_code(index, self.bucket_count))
     }
 }
 impl<T: PackedInteger> Clone for PackedMap<T> {
