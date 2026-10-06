@@ -6,6 +6,7 @@
 //! and [`HArray1::change_array1`] return read and write guards that expose the complete
 //! [`Array1`] API, exactly as the native `Array1()`/`ChangeArray1()` expose the base class.
 mod initialization;
+mod matrix_initialization;
 
 use super::generic_transient::impl_generic_transient;
 use super::{Array1, Array2, ArrayError};
@@ -207,15 +208,6 @@ impl<T: Default + Send + Sync + 'static> HArray2<T> {
     /// Allocates default values in the inclusive rectangle; `HArray2::<i32>::with_bounds(1, 2, 1, 3)?`.
     pub fn with_bounds(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Self, ArrayError> {
         Ok(Self::from_owned(Array2::with_bounds(rl, ru, cl, cu)?))
-    }
-}
-
-impl<T: Default + Clone + Send + Sync + 'static> HArray2<T> {
-    /// Allocates the rectangle and fills it with `value`; `HArray2::with_value(1, 2, 1, 3, 0)?`.
-    pub fn with_value(rl: i32, ru: i32, cl: i32, cu: i32, value: T) -> Result<Self, ArrayError> {
-        let mut values = Array2::with_bounds(rl, ru, cl, cu)?;
-        values.init(value);
-        Ok(Self::from_owned(values))
     }
 }
 
