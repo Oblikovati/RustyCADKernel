@@ -137,9 +137,13 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         let replacement: Self = Self::with_allocator(source.resource.clone());
         std::mem::replace(source, replacement)
     }
-    /// Drop old contents and transfer source nodes; `tree.move_assign(&mut source)`.
+    /// Clear old contents before transferring source nodes; `tree.move_assign(&mut source)`.
+    /// The source receives the old destination allocator, matching native handle move assignment.
+    /// If a Rust destructor panics, the source remains intact and the destination is empty.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
-        *self = Self::move_from(source);
+        self.clear();
+        // OCCT Standard_Handle.hxx move assignment swaps allocator entities.
+        std::mem::swap(self, source);
         self
     }
     /// Insert an object with its bound; duplicates are permitted, `tree.add(1, bound)`.
