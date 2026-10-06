@@ -156,6 +156,7 @@ impl<K, V, H: HashPolicy<K> + Default> OrderedDataMap<K, V, H> {
     }
 }
 impl<K, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
+    /// Compatibility transfer retaining a cloned source policy; use `move_from_with` for native policy moves.
     /// Moves nodes, leaving source allocator and bucket selection intact; `OrderedDataMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
         let empty = Self::with_allocator(
@@ -244,3 +245,5 @@ mod method_contracts;
 mod mixed_binding;
 
 super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>,super::OrderedDataMapNode<K,V>);
+
+super::ordered_table::ordered_policy_construction!(OrderedDataMap<K,V,H>, H);

@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation canonical storage checkpoint validated on frozen committed main source; receipt commit recorded separately.",
+  "integration_status": "Foundation method-tail checkpoint validated on frozen committed main source; receipt commit recorded separately.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-canonical-checkpoint.json",
-    "passed": 15126,
+    "receipt": "porting/audits/foundation-method-tail-checkpoint.json",
+    "passed": 15239,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -174,23 +174,23 @@
   "latest_foundation_run_note": "Historical class entries remain scoped evidence; current_integrated_checkpoint records the latest frozen workspace validation. Subsequent source edits require a new checkpoint.",
   "additional_allocator_miri_passes": 3,
   "current_integrated_checkpoint": {
-    "commit": "680d02b1dd56d04f3d485f0cc8eb3a28de6621b7",
-    "receipt": "porting/audits/foundation-canonical-checkpoint.json",
-    "sha256": "d67617bd91f356ee65ba37e630634460bb29726372c9a296295310db0c93fdb3",
-    "workspace_passed": 15126,
+    "commit": "723ace71e494487fd9fc3d6b31387dfdd7afa639",
+    "receipt": "porting/audits/foundation-method-tail-checkpoint.json",
+    "sha256": "bbf6089804bee74790bfb663218976abec1cd1ac552dc069072cad02353d13e0",
+    "workspace_passed": 15239,
     "workspace_failed": 0,
     "workspace_ignored": 70,
-    "miri_passes_total": 711,
-    "strict_provenance_miri_passes": 711,
+    "miri_passes_total": 819,
+    "strict_provenance_miri_passes": 819,
     "joined_original_runtime_cases": 1066,
     "python_tools_exit": 0,
-    "python_tools_tests_passed": 766
+    "python_tools_tests_passed": 781
   },
   "latest_scoped_integration": {
-    "receipt": "porting/audits/vector-policies-merge-cleanup.json",
-    "sha256": "c88ae448d12725a694c9f4d6747d41df05ad5df5d9f93c9c25555c1708d1431b",
-    "validated_source_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
-    "tkernel_passed": 4633,
-    "strict_provenance_miri_passed": 186
+    "receipt": "porting/audits/foundation-method-tail-merge-cleanup.json",
+    "sha256": "8a44a2707e121260ae4408e93585bf8dc189e5d99f492731d59c4dfe5f1d9ac0",
+    "validated_source_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+    "workspace_passed": 15239,
+    "strict_provenance_miri_passed": 819
   }
 }

@@ -59,7 +59,9 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// Counts slots with the current native stride, not physical retained capacity.
     /// `storage.available_size()` changes after decreasing the empty array's increment.
     pub fn available_size(&self) -> usize {
-        self.block_count() * self.array.increment
+        // Native uses the stored shift, which is zero when unsigned stride rounding overflows.
+        self.block_count()
+            .wrapping_shl(Self::log2_pow2(self.array.increment) as u32)
     }
     /// Allocates typed storage through the requested index without constructing elements.
     /// `storage.ensure_storage_for_index(8, size_of::<i32>())?` leaves Size unchanged.
@@ -68,6 +70,7 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         index: usize,
         item_size: usize,
     ) -> Result<(), Failure> {
+        self.validate_nonzero_stride()?;
         let count = (index / self.array.increment).checked_add(1);
         let count = count.ok_or_else(|| self.storage_size_failure(index))?;
         self.ensure_block_count(count, item_size)
@@ -131,6 +134,16 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         self.array.used = 0;
         self.array.needs_tail_scan = false;
     }
+    pub(super) fn validate_nonzero_stride(&self) -> Result<(), Failure> {
+        if self.array.increment != 0 {
+            return Ok(());
+        }
+        Err(Failure::with_type(
+            "Standard_DomainError",
+            "block stride 0: expected nonzero stride before allocating typed element blocks",
+            "",
+        ))
+    }
     fn validate_item_size(&self, item_size: usize) -> Result<(), Failure> {
         let expected = std::mem::size_of::<T>();
         if item_size == expected && expected > 0 {
@@ -143,6 +156,9 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         ))
     }
     fn validate_block_count(&self, count: usize) -> Result<(), Failure> {
+        if count != 0 {
+            self.validate_nonzero_stride()?;
+        }
         if count.checked_mul(self.array.increment).is_some() {
             return Ok(());
         }

@@ -17,6 +17,10 @@ fn strings(values: &[&str]) -> LinearVector<String> {
     }
     vector
 }
+fn resize_strings_with_value(vector: &mut LinearVector<String>, size: usize, value: String) {
+    vector.resize_with_relocation(size, std::mem::take, || value.clone());
+}
+
 fn same_values<T: std::fmt::Debug + PartialEq>(vector: &LinearVector<T>, expected: &[T]) {
     assert_eq!(vector.len(), expected.len());
     assert_eq!(vector.as_slice(), expected);

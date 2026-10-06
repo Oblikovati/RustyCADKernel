@@ -183,19 +183,19 @@ fn NCollection_LinearVectorTest__MoveOnlyType() {
 #[test]
 fn NCollection_LinearVectorTest__ResizeNonTrivial() {
     let mut vector = strings(&["a", "b"]);
-    vector.resize(4);
+    vector.resize_with_relocation(4, std::mem::take, String::new);
     same_values(&vector, &["a".into(), "b".into(), "".into(), "".into()]);
-    vector.resize(1);
+    vector.resize_with_relocation(1, std::mem::take, String::new);
     same_values(&vector, &["a".into()]);
 }
 #[test]
 fn NCollection_LinearVectorTest__Resize_WithValue_NonTrivial() {
     let mut vector = strings(&["x"]);
-    vector.resize_with_value(4, "hello".into());
+    resize_strings_with_value(&mut vector, 4, "hello".into());
     same_values(
         &vector,
         &["x".into(), "hello".into(), "hello".into(), "hello".into()],
     );
-    vector.resize_with_value(2, "ignored".into());
+    resize_strings_with_value(&mut vector, 2, "ignored".into());
     same_values(&vector, &["x".into(), "hello".into()]);
 }
