@@ -5,6 +5,8 @@
 //! lends only shared references, so the array sits behind a lock: [`HArray1::array1`]
 //! and [`HArray1::change_array1`] return read and write guards that expose the complete
 //! [`Array1`] API, exactly as the native `Array1()`/`ChangeArray1()` expose the base class.
+mod initialization;
+
 use super::generic_transient::impl_generic_transient;
 use super::{Array1, Array2, ArrayError};
 use crate::standard::StandardTransient;
@@ -112,13 +114,6 @@ impl<T: Default + Send + Sync + 'static> HArray1<T> {
 }
 
 impl<T: Default + Clone + Send + Sync + 'static> HArray1<T> {
-    /// Allocates the bounds and fills every slot with `value`; `HArray1::with_value(1, 3, 0.5)?`.
-    pub fn with_value(lower: i32, upper: i32, value: T) -> Result<Self, ArrayError> {
-        let mut values = Array1::with_bounds(lower, upper)?;
-        values.init(value);
-        Ok(Self::from_owned(values))
-    }
-
     /// The native C-array constructor: with `use_buffer` the array views the first
     /// `upper - lower + 1` values of a static buffer (detached on first write, see
     /// [`Array1::from_shared`]); without it the buffer is ignored and fresh default values
