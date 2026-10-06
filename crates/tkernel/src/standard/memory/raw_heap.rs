@@ -9,7 +9,7 @@ use std::{
 };
 
 /// Header bytes kept before every payload; also glibc's x86-64 `malloc` alignment.
-pub(super) const MALLOC_ALIGNMENT: usize = 16;
+pub(crate) const MALLOC_ALIGNMENT: usize = 16;
 
 /// Recorded shape of one payload, stored in the `MALLOC_ALIGNMENT` bytes preceding it.
 #[derive(Clone, Copy)]
@@ -33,7 +33,7 @@ fn block_layout(size: usize, align: usize) -> Option<Layout> {
 ///
 /// Returns `None` where the C allocator would return NULL (exhaustion or an impossible layout).
 /// Example: `heap_allocate(24, 16, true)` behaves like `calloc(24, 1)`.
-pub(super) fn heap_allocate(size: usize, align: usize, zeroed: bool) -> Option<NonNull<u8>> {
+pub(crate) fn heap_allocate(size: usize, align: usize, zeroed: bool) -> Option<NonNull<u8>> {
     let layout = block_layout(size, align)?;
     // SAFETY: the layout has a nonzero size (it always includes the header).
     let base = unsafe {
@@ -85,7 +85,7 @@ unsafe fn read_header(payload: NonNull<u8>) -> (Header, NonNull<u8>) {
 ///
 /// # Safety
 /// `payload` must be the original, still-live pointer returned by this module.
-pub(super) unsafe fn heap_payload_size(payload: NonNull<u8>) -> usize {
+pub(crate) unsafe fn heap_payload_size(payload: NonNull<u8>) -> usize {
     // SAFETY: the caller retains the exact original allocation and its header.
     unsafe { read_header(payload).0.size }
 }
@@ -94,7 +94,7 @@ pub(super) unsafe fn heap_payload_size(payload: NonNull<u8>) -> usize {
 ///
 /// # Safety
 /// `payload` must come from `heap_allocate`/`heap_reallocate` and not be freed yet.
-pub(super) unsafe fn heap_free(payload: NonNull<u8>) {
+pub(crate) unsafe fn heap_free(payload: NonNull<u8>) {
     // SAFETY: guaranteed by the caller.
     unsafe {
         let (header, base) = read_header(payload);
@@ -108,7 +108,7 @@ pub(super) unsafe fn heap_free(payload: NonNull<u8>) {
 ///
 /// # Safety
 /// `payload` must come from `heap_allocate`/`heap_reallocate` and not be freed yet.
-pub(super) unsafe fn heap_reallocate(payload: NonNull<u8>, size: usize) -> Option<NonNull<u8>> {
+pub(crate) unsafe fn heap_reallocate(payload: NonNull<u8>, size: usize) -> Option<NonNull<u8>> {
     // SAFETY: guaranteed by the caller.
     unsafe {
         let (header, base) = read_header(payload);
@@ -130,7 +130,7 @@ pub(super) unsafe fn heap_reallocate(payload: NonNull<u8>, size: usize) -> Optio
 /// `1` falls back to `malloc`; `2` and `4` are raised to the pointer size; any other value
 /// must be a power of two, else `posix_memalign` fails with EINVAL and the result is NULL.
 /// Example: `mm_malloc_alignment(3) == None`, `mm_malloc_alignment(4) == Some(8)`.
-pub(super) fn mm_malloc_alignment(alignment: usize) -> Option<usize> {
+pub(crate) fn mm_malloc_alignment(alignment: usize) -> Option<usize> {
     match alignment {
         1 => Some(MALLOC_ALIGNMENT),
         2 | 4 => Some(size_of::<usize>()),
