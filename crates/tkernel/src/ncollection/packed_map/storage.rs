@@ -1,8 +1,9 @@
 #![allow(unsafe_code)]
 //! Authoritative native bucket heads and globally allocated, stable-address node chains.
 use super::{PackedInteger, PackedMapNode};
-use std::alloc::{Layout, alloc, dealloc, handle_alloc_error};
+use std::alloc::Layout;
 use std::ptr::NonNull;
+pub(super) mod allocation;
 mod mutation;
 
 pub(super) struct PackedNodeTable<T: PackedInteger> {
@@ -24,10 +25,7 @@ unsafe impl<T: PackedInteger> Sync for PackedNodeTable<T> where T::Word: Sync {}
 impl<T: PackedInteger> PackedNodeTable<T> {
     fn allocated(length: usize) -> Self {
         let layout = Self::layout(length);
-        // Pinned Standard::AllocateOptimal/Free use the native heap. Keep the table's
-        // allocation separate from global node Box allocation and retain pointer alignment.
-        let raw = unsafe { alloc(layout) };
-        let heads = NonNull::new(raw.cast()).unwrap_or_else(|| handle_alloc_error(layout));
+        let heads = allocation::reserve(layout).cast();
         let mut table = Self { heads, length };
         for bucket in 0..length {
             table.set_head(bucket, std::ptr::null_mut());
@@ -109,9 +107,12 @@ impl<T: PackedInteger> Drop for PackedNodeTable<T> {
                 pointer = owner.next();
             }
         }
-        if self.length != 0 {
-            // This is the identical layout used for the separate optimal bucket allocation.
-            unsafe { dealloc(self.heads.as_ptr().cast(), Self::layout(self.length)) };
-        }
+        let address = if self.length == 0 {
+            std::ptr::null_mut()
+        } else {
+            self.heads.as_ptr().cast()
+        };
+        // Nodes are gone; only the original optimal allocation remains to be released.
+        unsafe { allocation::release(address) };
     }
 }
