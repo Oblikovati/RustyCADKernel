@@ -1,0 +1,1135 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Array1 bounded and independent-size buffer constructor overloads, plus the mutable bounded Array2 constructor",
+  "base_revision": "b36937cda35e60db6f6ce149edf4af9d6db74641",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "committed candidate; root integration and cleanup pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/array1.rs": "a47fbdfca2c0e124a515f31e594b405b244aa87406f0dd8365e923a51152f659",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "79ac316df3e360435f00e31ae581ead96bf771af8fc4e99d896db5bbaf5c9beb",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "2e09d3cd06d301bf4062d5345a98962e143f4aa9bb3fffec2aa3332a62e2e87a",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "ccfd252c64698a515552dfb23d41baebd3c99ab1d78b4b0c3d2253884086263f",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs": "8dc0294af2b18dfddffd593af87a0bf11dd909fe1bf5b4d6281fddc25ca7a840",
+    "crates/tkernel/tests/local_array_trivial_move_contracts.rs": "21c879e9c471727256fe1a3c797fbd499a43f5ec920e80d91b76198b472a0156",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/local_array_nontrivial_methods.rs": "abb3699d780b252036e9dc42e038f409853927697f836ce7beda29ac0eb9bd19",
+    "crates/tkernel/tests/dynamic_array_move_constructor.rs": "dbb462e6f6fe19a535c5383bf45d9e6974245161a8db3569fc14aaeff00ed37f",
+    "crates/tkernel/tests/local_array_shared_view.rs": "c239b2c969c1875a74144da851d3ed06be7b45eb1107111dcd7f8a4a1f44a6f1",
+    "crates/tkernel/tests/ncollection_aliased_array.rs": "a308d6fb37cc99db9d16c85368c1219dff7d309990b08f3a305e851d50dd87b6",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods.rs": "9a214a4fa3db75f83d660d1531d0cdbe46f7d4544fa474cdbf0ce6e6556ed35a",
+    "crates/tkernel/tests/dynamic_array_protected_storage.rs": "9f2583cd069b782e1d2f31443f9f50f16e4d26865d2582fde70d15f7711f38a1",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/aliased_array_supplemental.rs": "6a84bc5750f358b01a1f52a6ca2da499ea98af4cf34a4c9fcb79ab1eb722d4ba",
+    "crates/tkernel/tests/dynamic_array_method_tail.rs": "66dd2eefcb5c71e85f4b99edb5bbeb4fe8f4b302d7a0ec836574b9f0c1c0622e",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs": "576c25dc0ec56d26ef965d1a66b2eea9a71f5d9a7122a2716884c008ce7f735d",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs": "04d2991938e0f58511110dccc7542d3ae7f0e17775df325c246daf44db80b884",
+    "crates/tkernel/tests/sparse_array_method_contracts.rs": "df31a9ad020064e2f62d8e2ecf061e312cf1a670ffc3f83dbfbfc9915d24a65e",
+    "crates/tkernel/tests/standard_array_stream_buffer.rs": "f7d7497f2983022ce71436b032935143bf775dfcc7a3562529be11e25d6f34c5",
+    "crates/tkernel/tests/aliased_array_method_contracts.rs": "4872a023f2c50b66daaa5584cdfa628935905419382ef26b8d95560223604171",
+    "crates/tkernel/tests/dynamic_array_emplace_allocation_order.rs": "ef722d17af1eb4b9b18dd0f988963bcd6fc5a21d191687f59a2c3a6902544f1a",
+    "crates/tkernel/tests/dynamic_array_emplace_value_order.rs": "06c80884073436e7f948f46174170e3631ea9dc0820cfc96a76e88df2c392f7a",
+    "crates/tkernel/tests/array_stream_integer_putback.rs": "045856d4bb52b7817f58a4c10691ed52084f524ef07332340f6654ad79fb5ca9",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs": "55d8b39b9bf49775105782556ed1a89e62c26190c95c3a2ead36f768ae943a32",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/dynamic_array_retained_parameters.rs": "0be211e1854f9b078265e3d61b1a3b1a0901a8c8a1b4e9efa5271093c35be3eb",
+    "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs": "2709f289827412be11a3f7f78d0e9d0240f20cd4c8cd0402d85ce73a81e6cf3d",
+    "crates/tkernel/tests/sparse_array_base_contracts.rs": "4f96a1d61a1f23dfee8b42ea40e93855b66d957fae4a1383d01609b7450d71d5",
+    "crates/tkernel/tests/array_stream_hook_dispatch.rs": "42057c53d2621111e1ca7227ca8307da45640ce04dd6b699d32a790d42a4f0af",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/dynamic_array_legacy_cursor_contracts.rs": "f5615e17d979a4152d6936159d7a634722469b8b722c9f05042f7b0d2084449b",
+    "crates/tkernel/tests/dynamic_array_copy_date.rs": "6bc88b234c9d90b719745c3d61aebd49f58df8b6a5551a4cecbed1dfcdc3732b",
+    "crates/tkernel/tests/array_stream_signed_reads.rs": "ce9b5a7f63191afc8d0a55f09c975b08e26a4043b4e446ff844d6a02e48cb900",
+    "crates/tkernel/tests/ncollection_sparse_array.rs": "2421d946a75a3b47d49ea081e5aa6855b09f54a217e5f24bd1d7b8dd8fd3e420",
+    "crates/tkernel/tests/dynamic_array_iterator_tail.rs": "5e530b723f555b0cc3ead07a01ced6667f1ab28924c0c4b7f121b084e7e45fd3",
+    "crates/tkernel/tests/h_array1_of_real_supplemental.rs": "d25c717d3df29eaae0676cc60e144f41732531a8b53c0bfb6c9cb646519813e1",
+    "crates/tkernel/tests/ncollection_local_array.rs": "c6795b0e887eac9b8843f0e3ca9bfbbc5c844fecfe6bf3f695ff36ff21fbd110",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "tools/oracle/tkernel_array_buffer_constructors.cxx": "0e972591718df1cc9893c89a5dc73f741634eb29775c46ecbd5ba74766febbb2",
+    "tools/oracle/tkernel_array_buffer_constructors.expected": "df09b25281e45040557f674be591ba9e97bc99640d10dc4bb066b74012e88133"
+  },
+  "native_sources_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array1_Test.cxx": "4e3ed53fab5eda22313e4c9a9629a15194da293ed74be33d1ef7aeb8489eaa83",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array2_Test.cxx": "056a7282224275fdbd8775096d31e6173f5252ef85c94bbd16d757876068899e"
+  },
+  "candidate_bindings": [
+    {
+      "cpp_id": "0b569cb2f36f730cfbf9f6c9eda93023ca46ad759cc2de24ecef08b96472d2a0",
+      "cpp_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "cpp_signature": "void (const type-parameter-0-0 &, int, int, int, int)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 199
+      },
+      "rust_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "buffer",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": "'a",
+                      "is_mutable": true,
+                      "type": {
+                        "slice": {
+                          "generic": "T"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "row_lower",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "row_upper",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "col_lower",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "col_upper",
+                  {
+                    "primitive": "i32"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "ArrayError",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/array2/buffer_constructors.rs",
+          "source_sha256": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Array2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "'a",
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  }
+                },
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "cdf4a4cc35e2e8a267ef144797548a5bc21f6b6a4fd33ade94d312460a8ea001"
+        }
+      ],
+      "status": "partial_domain",
+      "domain": "Exclusive mutable source buffer with sufficient initialized extent when reused; native-valid signed arithmetic and corresponding Rust Default constructor policy when allocating."
+    },
+    {
+      "cpp_id": "1b9d761fec4e5ed205b09066e51cf6da5679e2d12c6aa355a8cd4866f3c98e2f",
+      "cpp_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "cpp_signature": "void (const type-parameter-0-0 &, int, int, bool)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 154
+      },
+      "rust_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "buffer",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": "'a",
+                      "is_mutable": true,
+                      "type": {
+                        "slice": {
+                          "generic": "T"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "lower",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "upper",
+                  {
+                    "primitive": "i32"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "ArrayError",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/array1/buffer_constructors.rs",
+          "source_sha256": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "'a",
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  }
+                },
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "276eb7d402163810bee81b4de020afd8af727d73b5d69d2ab91a366796f58fe3"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "buffer",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": "'a",
+                      "is_mutable": true,
+                      "type": {
+                        "slice": {
+                          "generic": "T"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "lower",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "upper",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "use_buffer",
+                  {
+                    "primitive": "bool"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "ArrayError",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/array1/buffer_constructors.rs",
+          "source_sha256": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "'a",
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  }
+                },
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Default",
+                              "resolved_item_path": "core::default::Default",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "c5e6c85731a3d44e0de5518fdf44b9d38f904d5839a7c1ef5fb9bcdc2b42bea1"
+        }
+      ],
+      "status": "partial_domain",
+      "domain": "Exclusive mutable source buffer with sufficient initialized extent when reused; native-valid signed arithmetic and corresponding Rust Default constructor policy when allocating."
+    },
+    {
+      "cpp_id": "2ea118e8dfea253eea97dbb7eb60e8b0b99c8f66f7ccde97be34f070f57ee84d",
+      "cpp_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "cpp_signature": "void (type-parameter-0-0 *, unsigned long)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 204
+      },
+      "rust_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::Array1::from_slice_size",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "buffer",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": "'a",
+                      "is_mutable": true,
+                      "type": {
+                        "slice": {
+                          "generic": "T"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "size",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "ArrayError",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/array1/buffer_constructors.rs",
+          "source_sha256": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "'a",
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  }
+                },
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "c798c6750e6453f03575a299b3d82a988e1569f17b4b7ca9bee2e276e59e5ade"
+        }
+      ],
+      "status": "partial_domain",
+      "domain": "Exclusive mutable source buffer with sufficient initialized extent when reused; native-valid signed arithmetic and corresponding Rust Default constructor policy when allocating."
+    },
+    {
+      "cpp_id": "ec842df3b2dee00e10a56d2118c56a6cce3d527ca1319ba5ca9144f102d372fa",
+      "cpp_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "cpp_signature": "void (const type-parameter-0-0 &, unsigned long, bool)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 174
+      },
+      "rust_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "buffer",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": "'a",
+                      "is_mutable": true,
+                      "type": {
+                        "slice": {
+                          "generic": "T"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "size",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "use_buffer",
+                  {
+                    "primitive": "bool"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "ArrayError",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                              "args": null
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/array1/buffer_constructors.rs",
+          "source_sha256": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "'a",
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  }
+                },
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Default",
+                              "resolved_item_path": "core::default::Default",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "89da9492203a80867408fde31e3572c4d226ca869204459e5415ffc164cd3d14"
+        }
+      ],
+      "status": "partial_domain",
+      "domain": "Exclusive mutable source buffer with sufficient initialized extent when reused; native-valid signed arithmetic and corresponding Rust Default constructor policy when allocating."
+    }
+  ],
+  "compiler_reachable_new_bodies": 5,
+  "cpp_bindings_count": 4,
+  "runtime": {
+    "rust": {
+      "passed": 161,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 12
+    },
+    "docs": {
+      "passed": 269,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "miri": {
+      "passed": 39,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 4
+    }
+  },
+  "new_rust_tests": 18,
+  "native_oracle_rows": 16,
+  "native_original_passes": 81,
+  "rust_original_passes": 81,
+  "exact_original_case_name_join": [
+    "NCollection_Array1Test.AssignmentOperator",
+    "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+    "NCollection_Array1Test.AssignmentOperatorEmptySource",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array1Test.AssignmentValue",
+    "NCollection_Array1Test.ChangeValue",
+    "NCollection_Array1Test.ChangeValueAccess",
+    "NCollection_Array1Test.ConstructorWithBounds",
+    "NCollection_Array1Test.ConstructorWithNegativeBounds",
+    "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+    "NCollection_Array1Test.CopyConstructor",
+    "NCollection_Array1Test.CopyValuesDifferentSize",
+    "NCollection_Array1Test.CopyValuesPreservesBounds",
+    "NCollection_Array1Test.DefaultConstructor",
+    "NCollection_Array1Test.EmplaceValue",
+    "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+    "NCollection_Array1Test.FirstLast",
+    "NCollection_Array1Test.Init",
+    "NCollection_Array1Test.IteratorAccess",
+    "NCollection_Array1Test.Move",
+    "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+    "NCollection_Array1Test.Resize",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+    "NCollection_Array1Test.STLIteration",
+    "NCollection_Array1Test.SetValue",
+    "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array1Test.SizeConstructor_AtAccess",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+    "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+    "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+    "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+    "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+    "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+    "NCollection_Array1Test.SizeConstructor_ZeroSize",
+    "NCollection_Array1Test.ValueAccess",
+    "NCollection_Array2Test.AssignmentOperator",
+    "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array2Test.ChangeValueAccess",
+    "NCollection_Array2Test.ConstructorWithBounds",
+    "NCollection_Array2Test.ConstructorWithNegativeBounds",
+    "NCollection_Array2Test.CopyConstructor",
+    "NCollection_Array2Test.CopyValuesDifferentDimensions",
+    "NCollection_Array2Test.CopyValuesPreservesBounds",
+    "NCollection_Array2Test.DefaultConstructor",
+    "NCollection_Array2Test.EmplaceValue",
+    "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array2Test.Init",
+    "NCollection_Array2Test.MoveAssignment",
+    "NCollection_Array2Test.MoveConstructor",
+    "NCollection_Array2Test.ReIndex_Interference",
+    "NCollection_Array2Test.ReIndex_UpdateBounds",
+    "NCollection_Array2Test.Resize",
+    "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+    "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+    "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+    "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+    "NCollection_Array2Test.Resize_FromEmpty",
+    "NCollection_Array2Test.Resize_NoCopy",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+    "NCollection_Array2Test.STLIteration",
+    "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array2Test.SizeConstructor_AtAccess",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+    "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+    "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array2Test.ValueAccess"
+  ],
+  "validation": {
+    "targets": [
+      "ncollection_array1",
+      "ncollection_array2",
+      "ncollection_arrays_api_behavior",
+      "array1_assignment_pointer_contracts",
+      "array2_assignment_pointer_contracts",
+      "array1_borrowed_init",
+      "ncollection_array2_buffer_prefix",
+      "ncollection_array_set_value_ref",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation",
+      "array_buffer_constructors",
+      "array_buffer_validation"
+    ],
+    "results": {
+      "rust": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation"
+        ],
+        "exit": 0
+      },
+      "clippy": {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      },
+      "fmt": {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0
+      },
+      "docs": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--doc"
+        ],
+        "exit": 0
+      }
+    }
+  },
+  "miri": {
+    "flags": "-Zmiri-strict-provenance",
+    "targets": [
+      "array_buffer_constructors",
+      "array_buffer_validation",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation"
+    ],
+    "exit": 0
+  },
+  "native_probe": {
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/tkernel_array_buffer_constructors.cxx -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_array_buffer_constructors",
+    "binary_sha256": "a7fb0010dfe31cb87528540aace310e43281d675ae8e2b96caaa092977003fb5",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+    "generated_header_wrappers": {
+      "NCollection_Array1": {
+        "wrapper_sha256": "9da1703ce2cd4db6acd0aa930a4f9ac751ae82616a4e40225417219c69a537a2",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "referent_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+      },
+      "NCollection_Array2": {
+        "wrapper_sha256": "29fed56d4ae5ef628e3d24ea26ee97c6eca0794182181fe4bc013d9f33236228",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "referent_sha256": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a"
+      }
+    }
+  },
+  "changes": [
+    "Expose Array1 mutable prefix and bounded constructor entry points without ownership, initialization, or Clone requirements.",
+    "Expose requested size/bounds independently of supplied buffer length for use_buffer=false; the input is ignored and nontrivial elements default-construct in new owned storage.",
+    "Expose bounded mutable Array2 prefix construction, preserving row/column origins and native flat Array1 lower/upper bounds.",
+    "Share checked inclusive extent and mutable prefix validation among existing and new Array1/Array2 entry points without changing resize algorithms."
+  ],
+  "probe_policy": "Native BufferItem records default/copy/destruction calls. Rust BufferItem has no Clone implementation and uses per-instance or constructor-injected Rc counters; there are no shared global test counters. The observed initialized objects and their destruction receipts are compared to the exact native rows.",
+  "limitations": [
+    "Native const-reference constructors can create arbitrary writable aliases; these entry points accept exclusive mutable slices and do not close the raw or const-cast aliasing domain.",
+    "Rust buffer-length and negative-extent errors are checked extensions. Native out-of-bounds buffers or signed arithmetic overflow are not claimed.",
+    "Use-buffer=false shares the Rust return lifetime with its input even though its runtime storage is independent; that conservative borrow-checker constraint is not native source-level parity.",
+    "Rust Default corresponds to the probed nontrivial C++ default constructor. Primitive C++ uninitialized storage, arbitrary traits, allocation hooks/failures, and exception cleanup remain open.",
+    "The unconstrained mutable view helpers can accept extra Rust types; this is not a claim that every equivalent bounded C++ const-reference instantiation accepts non-default-constructible elements.",
+    "The safe from_shared copy-on-write extension is unchanged. No class or module is declared complete by these constructor-domain bindings.",
+    "Original assertions are unchanged; supplemental constructor tests add no original legacy declaration credit."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0,
+  "global_api_inventory_credit_added": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-rust.gz",
+      "sha256": "9e14682053173a4e2370f4b1e7d0424c0293556431e524200acdf197ddb07705",
+      "uncompressed_sha256": "a5476a81d2a2509b47fdac5f023e8690dec83d359ee4947a09058024997a2e9a"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-miri.gz",
+      "sha256": "3c4321021b32e8be1a70884baea4f4a75b7e43f7c8205447c00b95ca7eb373c3",
+      "uncompressed_sha256": "94f7c609862dbc7f090eab2a7bb02eaf9f8f8c6ab223fcccbf69b72d6763b0de"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-docs.gz",
+      "sha256": "f0a2e24848d3b4a79365bd442f1948b625677832f45305c3ba1298e0428bef23",
+      "uncompressed_sha256": "d277b07b608fde762b8e7dab02c5ffadf442516ce3de91037933e2678cfc8574"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-clippy.gz",
+      "sha256": "8a6a97412b642bb9c5c8b3b05962422c0010964ebb6096783f20b173367084c6",
+      "uncompressed_sha256": "f557b7e079e56a4e2bd1927d7b3005248ddbd12d721034436ccca7bb76b1f302"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-compiler.gz",
+      "sha256": "dfc660d742bf16be32a28f217ec5fe97ace9d6bab56354b8ac59285f2b0f1579",
+      "uncompressed_sha256": "3231b9faaef7a30f2cc6dc1e46705d4968d8b4014a235c86bd56d54ecb36dd73"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-compiler-json.gz",
+      "sha256": "579f2d25c28144abf0565dd08893484d165a97d6cd51bf2adc0eea46d3f7b4bf",
+      "uncompressed_sha256": "9fb67f5508b6a134b2ebb796fba9d5bde93df1edaf8bafce4a6edd46046c6920"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-normalized.gz",
+      "sha256": "5de29f285c627b6bfbcbb29bc160ce614b99f0ff343ec87d9a6e024b4ee17551",
+      "uncompressed_sha256": "65a3276fde39f30ad356c973f0021594d15e358cb324e86cc3976717c11f1197"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-native.gz",
+      "sha256": "58ca1d03c58ee3dc361a0d8ac5818e939fadc3c66164f12faa4505e65f703734",
+      "uncompressed_sha256": "df09b25281e45040557f674be591ba9e97bc99640d10dc4bb066b74012e88133"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-buffer-constructors-source.tar.gz",
+      "sha256": "396d806b170913ecb24415c62425004056e165f44227ecb7d059d695015b12a2"
+    }
+  }
+}
