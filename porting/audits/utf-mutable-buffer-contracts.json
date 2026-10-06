@@ -1,0 +1,83 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_UtfIterator::ChangeBufferHere through exclusively borrowed writable storage",
+  "base_revision": "22f47b0ffb8f359153c2730a13061f957faf2334",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "Committed branch candidate; root integration and worktree deletion pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/mod.rs": "9701cedf3153ae2d6b64b835c65b2de006273c9b7689174cde972b335320d54f",
+    "crates/tkernel/src/ncollection/utf_iterator.rs": "a960829ef159b29cb2f487989c384594d375a093e8103a5202feb96338c79895",
+    "crates/tkernel/src/ncollection/utf_iterator/mutable.rs": "5c15390670edc7f8332188168af019165161730c5ef863d6873b98e4c7a1e43f",
+    "crates/tkernel/src/ncollection/utf_iterator/positions.rs": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+    "crates/tkernel/src/ncollection/utf_iterator/encode.rs": "68ed4a287940fe930856f3a25e51172a0b1ffd3dfd9e6eb9d4203e929c70d6da",
+    "crates/tkernel/src/ncollection/utf_iterator/unit.rs": "e5823e75e911128800703f683cb32a5be156ec0474e45bc5af6e65dffda20fd9",
+    "crates/tkernel/src/ncollection/utf_iterator/signed_wide.rs": "632f61c30486b9d099d967271f65dd093ce6160537d346562d583a8ce1294c20",
+    "crates/tkernel/tests/utf_mutable_buffer_contracts.rs": "671b523cc9176363312ae32e462dd89be72c34b42696dfd1227e4582ddeff3bc",
+    "tools/oracle/tkernel_utf_mutable_buffer.cxx": "7df38d6d0a0ff7fdde5f6e2037ea271010b2ee5e8fc52473199c931351a5eb0d",
+    "tools/oracle/tkernel_utf_mutable_buffer.expected": "781b11c088ec6273f2c6456534e2835b32394105b6513a3e57a2e7868b302e63"
+  },
+  "occt_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx": "2bfcc2e02561e5c4fc9f0c4c8762602aaebaa020bf2a39b179f951f347a573de",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.lxx": "5b3624e2f8342c8c86d342d61845bcb368c7a289c4f6f9d0f1f3c34281c00e5d"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-rust.gz",
+      "sha256": "28ccfe727509a51f16efad03942f06a960260e32d4e37336b1fc1a0011df123e"
+    },
+    "doc": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-doc.gz",
+      "sha256": "d389fe7b586c43134100e941bd1274f968a824033e61bf0a38014b6752228f9c"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-clippy.gz",
+      "sha256": "7f22196b61610af5fc6135d5db846e662533e8ebab861cdf991947ee86cb86e6"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-miri.gz",
+      "sha256": "0098b39ff0964d4256ab61d85936aac2dc0e730cef4861e8ca91bcb3086300c9"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-native.gz",
+      "sha256": "182965e7abb4f36e8c8e35b31cfea1d352a9c0e0f5a4624767f436e02feef27f"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/utf-mutable-buffer-source.tar.gz",
+      "sha256": "df8f5e8dfb909537d5ba9d107b0a9dd721cc5387de66232048c8d63b51bf1efe"
+    }
+  },
+  "rust_passed": 57,
+  "new_tests": 6,
+  "strict_provenance_miri_passed": 6,
+  "doctest_passed": 1,
+  "native_rows": 10,
+  "native_exact_join_count": 10,
+  "clippy_exit": 0,
+  "format_exit": 0,
+  "declaration_bindings": [
+    {
+      "native": "NCollection_UtfIterator<T>::ChangeBufferHere()",
+      "rust": "UtfIteratorMut<T>::change_buffer_here",
+      "scope": "Exclusive, live, in-bounds code-unit storage; returns remaining writable slice with actual native current offset."
+    }
+  ],
+  "behavior": [
+    "All decoding, advancing, validity and output conversion reuse the existing UtfIterator implementation through a short immutable view. No unsafe code or synthetic allocation is added.",
+    "Changing a stored symbol leaves the decoded symbol and cached next offset unchanged. Advancing uses that cached offset; rewinding or rebinding decodes again and resets the index. Native UTF8 multibyte and UTF16 surrogate mutations join all10 observation rows.",
+    "The mutable remainder points into the original allocation; null yields None and one-past-end yields an empty slice. Synthetic padded positions beyond one-past-end yield None. Pointer identity is covered under strict-provenance Miri.",
+    "Signed UTF16 mutations retain the established native sign-promotion behavior. Shared views cannot coexist with an exclusive write through the safe borrowed API."
+  ],
+  "remaining_gaps": [
+    "Native simultaneously writable copied iterators and external aliases require a separate lifetime/provenance contract; UtfIteratorMut intentionally does not implement Copy or Clone.",
+    "ChangeBufferHere through the original shared-slice UtfIterator is still unavailable. This binding requires the caller to provide genuinely writable exclusive storage.",
+    "Null native increment and accesses outside actual allocation are undefined and are excluded from native probes. Rust retains checked null increment and zero-padded read semantics.",
+    "Platform wchar_t configurations and arbitrary size-dispatched native types remain outside this bounded binding."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "class_status": "partial"
+}

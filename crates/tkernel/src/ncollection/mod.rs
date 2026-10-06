@@ -174,7 +174,7 @@ mod kdtree;
 pub use kdtree::{KDTree, KdPoint};
 
 mod utf_iterator;
-pub use utf_iterator::{UtfBufferError, UtfIterator, UtfUnit, WideChar};
+pub use utf_iterator::{UtfBufferError, UtfIterator, UtfIteratorMut, UtfUnit, WideChar};
 mod utf_string;
 #[cfg(not(target_os = "android"))]
 pub use utf_string::UtfStringTool;
