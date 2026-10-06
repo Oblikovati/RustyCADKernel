@@ -1,0 +1,221 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_branch_pending_integration",
+  "branch": "port/dynamic-native-insertion",
+  "base_commit": "99b1688c",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "18fc9838ec822537ecb8fa4aea0a97faf0c4c11e52999ae3731682aeb2a41ee6",
+    "crates/tkernel/src/ncollection/dynamic_array/insertion.rs": "dfc2d72d424a47fbcf7a56d725908678a65cb32c5dd3158b025c64b3eea16044",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs": "576c25dc0ec56d26ef965d1a66b2eea9a71f5d9a7122a2716884c008ce7f735d",
+    "crates/tkernel/tests/dynamic_array_native_insertion/convenience.rs": "3a57bdc38468dddcb64fcc61060b2eb362cd38f3d68b0ddefeb0445f92807968",
+    "crates/tkernel/tests/dynamic_array_native_insertion/oracle.rs": "b59a7cc46d9c3164128defc9c07672bd16f9e7da9931846be86df360d50ad652",
+    "tools/oracle/tkernel_dynamic_native_insertion.cxx": "8b6e0c1d6d689ddf6ce61eb01d37b04059a97587da61287724b52071d7d30ba1",
+    "tools/oracle/tkernel_dynamic_native_insertion.expected": "1312b17e3b0b472667bb6da3e98195970c17f50d96e7cc6ebdd5507084db3054",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/ncollection_dynamic_array/insertion.rs": "8be53f9883d2ecc737b85f4bb4531ff32bed1fea9e9a4e3cb51200a89a5b0ac9",
+    "crates/tkernel/tests/ncollection_dynamic_array/indices.rs": "dfee440e1f60829811f4fd687b6f69364586963155a466f4ad5302dc3cf63e3e"
+  },
+  "upstream_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-native-insertion-focused.log.gz": "91ba975b1c56c61d933fbeada928bf5feb639ed2d142384d061fb5c50aa1b827",
+    "porting/runtime-evidence/dynamic-native-insertion-miri.log.gz": "05fb1da254979c495593a7a808546289f469416a4581b09dd5e2743091243b04",
+    "porting/runtime-evidence/dynamic-native-insertion-miri-strict.log.gz": "f0065f3e6f77d1612c34aacf02ed6bfffacc2d1531ed96d9d7651e691206a90a",
+    "porting/runtime-evidence/dynamic-native-insertion-clippy.log.gz": "fbefad09889426003c32440596c462a36197b12b6928eb6d1a6dd2f7303654b3",
+    "porting/runtime-evidence/dynamic-native-insertion-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-native-insertion-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-native-insertion-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-native-insertion-oracle-runtime.log.gz": "d3b8f8da61ac6c09a6aac5f19924595e589667f5d09bff254b7e3fd9fc475e3c",
+    "porting/runtime-evidence/dynamic-native-insertion-source.tar.gz": "be79c60a4f53c936c2951d3ea54983e75203080741cfcfdcb5eb19afc3a747e9"
+  },
+  "source_scope": "Frozen owned insertion implementation/tests, original assertion mapping sources, and compiled native fixture. Root integration supplies whole-workspace dependency closure. No global completion ledger changed.",
+  "exit_codes": {
+    "focused": 0,
+    "miri": 0,
+    "miri-strict": 0,
+    "clippy": 0,
+    "native": 0,
+    "fmt": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0
+  },
+  "focused_rust_passes": 97,
+  "new_test_count": 9,
+  "new_test_names": [
+    "dynamic_array_native_insertion::convenience::borrowed_bounds_fail_before_default_or_assignment",
+    "dynamic_array_native_insertion::convenience::borrowed_before_uses_copy_assignment_after_default_staging",
+    "dynamic_array_native_insertion::convenience::borrowed_after_last_uses_copy_assignment_without_shift",
+    "dynamic_array_native_insertion::convenience::borrowed_copy_panic_keeps_published_size_and_shifted_values",
+    "dynamic_array_native_insertion::convenience::custom_hook_receives_distinct_initialized_slots_and_returns_inserted_reference",
+    "dynamic_array_native_insertion::convenience::owned_before_and_after_construct_one_default_each",
+    "dynamic_array_native_insertion::convenience::default_panic_retains_allocated_block_without_publishing_size",
+    "dynamic_array_native_insertion::convenience::strict_heap_assignment_stages_preserve_initialized_slots",
+    "dynamic_array_native_insertion::oracle::native_insertion_rows_match_full_assignment_traces"
+  ],
+  "miri_passes": 9,
+  "strict_provenance_miri_passes": 1,
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "behavior_fixed": [
+    "Insertion now allocates and default-constructs an appended tail slot before shifting, then publishes Size before assignment. Previously it appended the supplied value without ever calling Default.",
+    "Invalid signed or unsigned indices are checked before allocation, Default, shifting, or copy/move assignment.",
+    "Borrowed before/after overloads perform Clone::clone_from on the insertion slot after Default and shifts. They do not eagerly clone the input.",
+    "Explicit assignment callbacks reproduce user-defined native move/copy operations in descending shift order; panics retain the size and exactly the completed assignment prefix. All slots remain initialized."
+  ],
+  "public_declaration_bindings": [
+    {
+      "native": "InsertBefore(int/size_t, T&&)",
+      "rust": "insert_before<I>",
+      "scope": "Default/allocation/publication order and Rust ownership-move convenience adapter"
+    },
+    {
+      "native": "InsertAfter(int/size_t, T&&)",
+      "rust": "insert_after<I>",
+      "scope": "Default/allocation/publication order and Rust ownership-move convenience adapter"
+    },
+    {
+      "native": "InsertBefore(int/size_t, const T&)",
+      "rust": "insert_before_ref<I>",
+      "scope": "Default staging, Rust move shifts, then Clone::clone_from destination assignment"
+    },
+    {
+      "native": "InsertAfter(int/size_t, const T&)",
+      "rust": "insert_after_ref<I>",
+      "scope": "Default staging, Rust move shifts, then Clone::clone_from destination assignment"
+    },
+    {
+      "native": "InsertBefore overload algorithm with observable custom T assignment",
+      "rust": "insert_before_with_assignment<I>(index, shift_assignment, final_assignment)",
+      "scope": "Explicit operation adapter; native custom assignment/default/allocator traces and failure states joined"
+    },
+    {
+      "native": "InsertAfter overload algorithm with observable custom T assignment",
+      "rust": "insert_after_with_assignment<I>(index, shift_assignment, final_assignment)",
+      "scope": "Explicit operation adapter; native custom move/copy final assignment and no-shift-last-element paths joined"
+    }
+  ],
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_native_insertion.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_native_insertion.expected",
+    "row_count": 12,
+    "exact_runtime_join_count": 12,
+    "row_keys": [
+      "before_copy",
+      "after_move",
+      "after_last_copy",
+      "before_negative",
+      "after_end",
+      "default_failure",
+      "first_move_failure",
+      "second_move_failure",
+      "final_copy_failure",
+      "final_move_failure",
+      "before_first_move",
+      "after_negative"
+    ],
+    "rust_test": "dynamic_array_native_insertion::oracle::native_insertion_rows_match_full_assignment_traces",
+    "joined_columns": "Event sequence, allocation-before-default order, constructor/assignment failure point, final Size, external move-source state, every final element value.",
+    "allocation_observation": "Native derived allocator logs AllocateOptimal. Rust observes real BaseAllocator::accumulating block alloc_count deltas during Default; no fake allocator or synthesized expected allocation count. Covered fixture has no intervening element deallocations.",
+    "value_operation_dispatch": "Native Item move assignment sets donor=-7; Rust explicit callback performs the same value operation. Custom copy/default failures are injected in those value operations at the matching native stage. Generic Rust moves are not relabeled C++ move assignment.",
+    "scratch_probe_scope": "The preliminary scratch probe had ten insertion rows and two protected engine observations. This committed fixture contains twelve insertion rows: added before_first_move and after_negative; protected observations were not claimed ported."
+  },
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "revisited": [
+      "InsertAfter_Middle",
+      "InsertAfter_First",
+      "InsertAfter_Last",
+      "InsertAfter_SingleElement",
+      "InsertBefore_Middle",
+      "InsertBefore_First",
+      "InsertBefore_Last",
+      "InsertAfter_MoveSemantics",
+      "InsertAfter_MultipleInserts",
+      "SizeTInsertBeforeAfter",
+      "IntOverloadGuardsNegative"
+    ],
+    "faithfulness": "All native initial values, insertion indices, final Length/Size and every element assertion remain in the existing Rust mappings. Negative guards preserve ArrayError::Index classification; previous receipt maps this to Standard_OutOfRange.",
+    "type_adaptation": "Rust MoveOnly reproduces original values and non-Clone capability; it has no implicit user-defined move assignment. Supplemental explicit hook tests now verify custom move/default/failure behavior separately."
+  },
+  "safety_and_miri": [
+    "No unsafe code added. Same-block references use a slice split at destination offset; cross-block references use Vec::split_at_mut on the owning block vector.",
+    "Miri runs all nine new tests successfully. The accumulating allocator emits its pre-existing integer-to-pointer provenance warning at allocator/block.rs:46; this is not claimed strict-provenance verification of the allocator.",
+    "A separate MIRIFLAGS=-Zmiri-strict-provenance run passes the new heap-storage success/failure test at increments1,2,4, covering both same-block and cross-block shifts independently of the accumulating allocator.",
+    "Callback panic leaves initialized values owned by their original allocation slots; normal Rust destruction remains enabled. Callbacks receive distinct mutable references and can expose no dangling references in safe Rust."
+  ],
+  "remaining_partial_parity": [
+    "Convenience owned and borrowed methods use Rust mem::swap shifts; these do not invoke custom C++ move operations. Users porting such value types must supply the explicit operation hooks. Generic custom destructor traces and Rust moved-input Drop timing remain adaptations.",
+    "Same-container input aliasing is not accepted through forged simultaneous references. A future index-based alias adapter needs native probes, including source mutation during descending shifts.",
+    "The generic Clone::clone_from contract may fall back to clone-and-replace. Exact native copy assignment is established only when the value operation itself is ported, as in the fixture override or explicit callback.",
+    "Protected raw block APIs, setUsedSize, arbitrary item-size allocation, constructAt/destroyAt/replaceAt capability dispatch, and raw lifetime setters remain unported; they need a separate initialized-range ownership model.",
+    "Native copyDate partial-block exception leaks versus Rust cleanup and the cursor lifetime/comparison limitations remain as documented in previous scoped receipts.",
+    "Supplemental fixtures prove the specified bounded operations and failure prefixes, not complete DynamicArray class, template instantiation, or global API parity."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "commands": {
+    "focused": "cargo test --locked -p rustycad-tkernel --test dynamic_array_native_insertion --test dynamic_array_iterator_tail --test dynamic_array_method_tail --test dynamic_array_legacy_cursor_contracts --test ncollection_dynamic_array --test dynamic_array_default_constructor_order --test dynamic_array_emplace_allocation_order --test dynamic_array_emplace_value_order --test ncollection_dynamic_array_assignment_behavior",
+    "miri": "cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test dynamic_array_native_insertion",
+    "miri_strict": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test dynamic_array_native_insertion strict_heap_assignment_stages_preserve_initialized_slots",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test dynamic_array_native_insertion -- -D warnings",
+    "native": "OpenCascadeGTest --gtest_filter=NCollection_DynamicArrayTest.*",
+    "oracle": "g++ -std=c++17 -O2 -I <native>/include/opencascade tools/oracle/tkernel_dynamic_native_insertion.cxx -L <native>/lin64/gcc/libi -Wl,-rpath,<native>/lin64/gcc/libi -lTKernel -o <probe>; <probe> | diff tools/oracle/tkernel_dynamic_native_insertion.expected -",
+    "fmt": "cargo fmt --all --check"
+  }
+}

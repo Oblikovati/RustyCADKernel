@@ -21,6 +21,7 @@ impl<T> Default for DynamicArray<T> {
     }
 }
 mod emplacement;
+mod insertion;
 mod legacy_cursor;
 mod method_tail;
 pub use legacy_cursor::DynamicArrayIterator;
@@ -226,38 +227,6 @@ impl<T: Default> DynamicArray<T> {
         value: T,
     ) -> Result<&mut T, ArrayError> {
         self.emplace_value(index, || value)
-    }
-    /// Inserts before an existing index; `array.insert_before(1,42)?`.
-    pub fn insert_before<I: TryInto<usize> + Copy + Debug>(
-        &mut self,
-        index: I,
-        value: T,
-    ) -> Result<&mut T, ArrayError> {
-        let index = checked_index(index)?;
-        if index >= self.used {
-            return Err(self.index_error(index));
-        }
-        self.insert_at(index, value);
-        self.change_value(index)
-    }
-    /// Inserts after an existing index; `array.insert_after(1,42)?`.
-    pub fn insert_after<I: TryInto<usize> + Copy + Debug>(
-        &mut self,
-        index: I,
-        value: T,
-    ) -> Result<&mut T, ArrayError> {
-        let index = checked_index(index)?;
-        if index >= self.used {
-            return Err(self.index_error(index));
-        }
-        self.insert_at(index + 1, value);
-        self.change_value(index + 1)
-    }
-    fn insert_at(&mut self, index: usize, value: T) {
-        self.append(value);
-        for position in (index + 1..self.used).rev() {
-            self.swap(position, position - 1);
-        }
     }
     fn allocated_slot(&mut self, index: usize) -> &mut T {
         let block = index / self.increment;

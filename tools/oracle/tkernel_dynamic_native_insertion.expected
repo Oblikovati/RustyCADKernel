@@ -1,0 +1,12 @@
+before_copy A;D;M(0,40);M(-7,30);M(-7,20);C(-7,99); 5 99 10 99 20 30 40
+after_move A;D;M(0,40);M(-7,30);M(-7,99); 5 -7 10 20 99 30 40
+after_last_copy A;D;C(0,99); 5 99 10 20 30 40 99
+before_negative E; 4 99 10 20 30 40
+after_end E; 4 99 10 20 30 40
+default_failure A;D;E; 4 99 10 20 30 40
+first_move_failure A;D;M(0,40);E; 5 99 10 20 30 40 0
+second_move_failure A;D;M(0,40);M(-7,30);E; 5 99 10 20 30 -7 40
+final_copy_failure A;D;M(0,40);M(-7,30);M(-7,20);C(-7,99);E; 5 99 10 -7 20 30 40
+final_move_failure A;D;M(0,40);M(-7,30);M(-7,20);M(-7,99);E; 5 99 10 -7 20 30 40
+before_first_move A;D;M(0,40);M(-7,30);M(-7,20);M(-7,10);M(-7,99); 5 -7 99 10 20 30 40
+after_negative E; 4 99 10 20 30 40
