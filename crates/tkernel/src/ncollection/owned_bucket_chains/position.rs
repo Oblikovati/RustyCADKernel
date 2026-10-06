@@ -1,12 +1,12 @@
 //! Native iteration follows one link chain, then scans actual bucket pointers.
 use crate::ncollection::{BaseMapStorage, MapLinkNode};
 #[derive(Clone, Copy, Default)]
-pub(super) struct DataMapPosition {
-    pub(super) node: *mut MapLinkNode,
+pub(in crate::ncollection) struct BucketChainPosition {
+    pub(in crate::ncollection) node: *mut MapLinkNode,
     bucket: usize,
 }
-impl DataMapPosition {
-    pub(super) fn new(base: &BaseMapStorage) -> Self {
+impl BucketChainPosition {
+    pub(in crate::ncollection) fn new(base: &BaseMapStorage) -> Self {
         let mut result = Self::default();
         result.seek(base);
         result
@@ -21,7 +21,7 @@ impl DataMapPosition {
         }
         self.node = std::ptr::null_mut();
     }
-    pub(super) fn advance(&mut self, base: &BaseMapStorage) {
+    pub(in crate::ncollection) fn advance(&mut self, base: &BaseMapStorage) {
         if self.node.is_null() {
             return;
         }

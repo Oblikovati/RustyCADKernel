@@ -13,13 +13,16 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
         buckets: i32,
         allocator: BaseAllocator,
     ) -> Result<Self, Failure> {
-        Ok(Self {
-            bindings: super::super::DataMap::with_allocator_signed(hasher, buckets, allocator)?,
-        })
+        Ok(Self::with_allocator(
+            hasher,
+            super::super::buckets_from_int(buckets)?,
+            allocator,
+        ))
     }
     /// Rejects negative resize requests before mutation; `map.resize_signed(-1)`.
     pub fn resize_signed(&mut self, buckets: i32) -> Result<(), Failure> {
-        self.bindings.resize_signed(buckets)
+        self.resize(super::super::buckets_from_int(buckets)?);
+        Ok(())
     }
     /// Preserves the self-assignment branch without aliasing Rust references; `map.assign_self()`.
     pub fn assign_self(&mut self) -> &mut Self {
@@ -50,7 +53,7 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
         self.prepare_emplacement();
         self.try_emplaced(construct())
     }
-    fn prepare_emplacement(&mut self) {
+    pub(super) fn prepare_emplacement(&mut self) {
         // C++ emplaceImpl grows before construction, observable if the constructor fails.
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());

@@ -25,7 +25,7 @@ impl<K, V> DataMapNode<K, V> {
     pub fn construct(key: K, successor: *mut MapLinkNode, construct: impl FnOnce() -> V) -> Self {
         Self::construct_parts(successor, || key, construct)
     }
-    fn construct_parts(
+    pub(crate) fn construct_parts(
         successor: *mut MapLinkNode,
         construct_key: impl FnOnce() -> K,
         construct_value: impl FnOnce() -> V,
@@ -41,6 +41,8 @@ impl<K, V> DataMapNode<K, V> {
     pub(crate) fn key_value_mut(&mut self) -> (&K, &mut V) {
         (&self.key, self.value_node.change_value())
     }
+    // IndexedDataMapNode::Key1 consumes this projection in the concurrent indexed-node slice.
+    #[allow(dead_code)]
     pub(crate) fn key_mut(&mut self) -> &mut K {
         &mut self.key
     }

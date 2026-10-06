@@ -204,3 +204,5 @@ pub use sparse_array_base::{
 mod map_node;
 mod node_owner;
 pub use map_node::{MapNode, MapNodeOwner};
+
+mod owned_bucket_chains;

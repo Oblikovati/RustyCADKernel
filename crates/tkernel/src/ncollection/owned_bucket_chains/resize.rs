@@ -1,8 +1,8 @@
 //! Hash callbacks complete before canonical links change, so a Rust panic cannot corrupt ownership.
-use super::{DataMapStorage, MapLinkNode};
+use super::{CanonicalMapNode, MapLinkNode, OwnedBucketChains};
 use crate::ncollection::{BaseMapResize, HashPolicy};
-impl<K, V> DataMapStorage<K, V> {
-    pub(in super::super) fn resize(&mut self, size: usize, hasher: &impl HashPolicy<K>) {
+impl<N: CanonicalMapNode> OwnedBucketChains<N> {
+    pub(in crate::ncollection) fn resize(&mut self, size: usize, hasher: &impl HashPolicy<N::Key>) {
         let mut plan = self
             .base
             .begin_resize(size)
@@ -17,13 +17,13 @@ impl<K, V> DataMapStorage<K, V> {
     fn rehash_destinations(
         &self,
         count: usize,
-        hasher: &impl HashPolicy<K>,
+        hasher: &impl HashPolicy<N::Key>,
     ) -> Vec<(*mut MapLinkNode, usize)> {
         let mut destinations = Vec::new();
         for &head in self.base.bucket_slots() {
             let mut node = head;
             while !node.is_null() {
-                let key = unsafe { self.node(node).key() };
+                let key = unsafe { self.node(node).map_key() };
                 destinations.push((node, hasher.hash(key) % count + 1));
                 node = unsafe { (*node).next() };
             }

@@ -103,26 +103,10 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         self.items_mut().map(|(_, value)| value)
     }
     fn lookup(&self, key: &K) -> Option<(usize, *mut MapLinkNode)> {
-        // Native lookup skips user hashing when Clear(false) retained an empty bucket table.
-        if self.is_empty() {
-            return None;
-        }
-        let (bucket, node) = self.lookup_with_bucket(key);
-        node.map(|node| (bucket, node))
+        self.storage.lookup(key, &self.hasher)
     }
     fn lookup_with_bucket(&self, key: &K) -> (usize, Option<*mut MapLinkNode>) {
-        let bucket = self.hasher.hash(key) % self.bucket_count() + 1;
-        let mut node = self.storage.base.bucket_slots()[bucket];
-        while !node.is_null() {
-            if self
-                .hasher
-                .equal(unsafe { self.storage.node(node).key() }, key)
-            {
-                return (bucket, Some(node));
-            }
-            node = unsafe { (*node).next() };
-        }
-        (bucket, None)
+        self.storage.lookup_with_bucket(key, &self.hasher)
     }
     fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> (bool, &mut V) {
         if self.is_empty() || self.storage.base.size() > self.storage.base.nb_buckets() {
@@ -166,8 +150,6 @@ mod iteration;
 mod operations;
 
 mod cursor;
-mod keys;
-mod position;
 mod queries;
 pub use cursor::{DataMapIterator, DataMapIteratorMut};
 

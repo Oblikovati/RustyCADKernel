@@ -1,38 +1,42 @@
 //! Stable allocator-owned hash keys with OCCT's insertion and traversal behavior.
-use super::{BaseAllocator, DataMap, DataMapItems, DefaultHashPolicy, HashPolicy};
+#![allow(unsafe_code)]
+use super::{
+    BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy, MapLinkNode, MapNode,
+    owned_bucket_chains::{BucketNodeRange, OwnedBucketChains},
+};
 use std::fmt::Debug;
 /// A set of hash keys; `Map::<i32>::default().add(42)`.
 pub struct Map<K, H = DefaultHashPolicy> {
-    bindings: DataMap<K, (), H>,
+    storage: OwnedBucketChains<MapNode<K>>,
+    hasher: H,
 }
 /// Shared keys in OCCT bucket order; `map.iter()`.
 pub struct MapIter<'a, K> {
-    entries: DataMapItems<'a, K, ()>,
+    entries: BucketNodeRange<'a, MapNode<K>>,
 }
 impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     /// Creates a map with injected equality/hash state; `Map::with_hasher(policy,10)`.
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
-        Self {
-            bindings: DataMap::with_hasher(hasher, buckets),
-        }
+        Self::with_allocator(hasher, buckets, BaseAllocator::common())
     }
     /// Selects storage for stable key nodes; `Map::with_allocator(policy,10,arena)`.
     pub fn with_allocator(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
-            bindings: DataMap::with_allocator(hasher, buckets, resource),
+            storage: OwnedBucketChains::new(buckets, resource),
+            hasher,
         }
     }
     /// Returns the retained hash policy; `map.hasher().salt`.
     pub fn hasher(&self) -> &H {
-        self.bindings.hasher()
+        &self.hasher
     }
     /// Returns the node allocator; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        self.bindings.allocator()
+        self.storage.base.allocator()
     }
     /// Counts unique keys; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.bindings.len()
+        self.storage.base.size()
     }
     /// Returns OCCT's key extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
@@ -40,39 +44,41 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     }
     /// Checks for no keys; `map.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.bindings.is_empty()
+        self.storage.base.size() == 0
     }
     /// Returns the hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.bindings.bucket_count()
+        self.storage.base.nb_buckets()
     }
     /// Grows buckets without relocating keys; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
-        self.bindings.resize(size);
+        self.storage.resize(size, &self.hasher);
     }
     /// Tests key membership using the injected equality; `map.contains(&42)`.
     pub fn contains(&self, key: &K) -> bool {
-        self.bindings.is_bound(key)
+        self.storage.lookup(key, &self.hasher).is_some()
     }
     /// Returns the stored key when found; `map.contained(&42)==Some(&42)`.
     pub fn contained(&self, key: &K) -> Option<&K> {
-        self.bindings.stored_key(key)
+        self.storage
+            .lookup(key, &self.hasher)
+            .map(|(_, node)| unsafe { self.storage.node(node).key() })
     }
     /// Adds a key, preserving the existing value on duplicates; `map.add(42)`.
     pub fn add(&mut self, key: K) -> bool {
-        self.bindings.place_key(key, false).0
+        self.place_key(key, false).0
     }
     /// Returns the stored key, adding when absent; `map.added(42)`.
     pub fn added(&mut self, key: K) -> &K {
-        self.bindings.place_key(key, false).1
+        self.place_key(key, false).1
     }
     /// Replaces an equivalent stored key in place; `map.emplace(42)`.
     pub fn emplace(&mut self, key: K) -> bool {
-        self.bindings.place_key(key, true).0
+        self.place_key(key, true).0
     }
     /// Reconstructs and returns a stable stored key; `map.emplaced(42)`.
     pub fn emplaced(&mut self, key: K) -> &K {
-        self.bindings.place_key(key, true).1
+        self.place_key(key, true).1
     }
     /// Keeps an existing equivalent key; `map.try_emplace(42)`.
     pub fn try_emplace(&mut self, key: K) -> bool {
@@ -84,11 +90,15 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     }
     /// Removes an equivalent key, reporting whether found; `map.remove(&42)`.
     pub fn remove(&mut self, key: &K) -> bool {
-        self.bindings.unbind(key)
+        let Some((bucket, node)) = self.storage.lookup(key, &self.hasher) else {
+            return false;
+        };
+        self.storage.remove(bucket, node);
+        true
     }
     /// Frees keys and optionally buckets; `map.clear(true)`.
     pub fn clear(&mut self, release: bool) {
-        self.bindings.clear(release);
+        self.storage.clear(release);
     }
     /// Swaps nodes, allocator and hash policy; `map.exchange(&mut other)`.
     pub fn exchange(&mut self, other: &mut Self) {
@@ -97,14 +107,14 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     /// Borrows keys in bucket traversal order; `for key in map.iter() {}`.
     pub fn iter(&self) -> MapIter<'_, K> {
         MapIter {
-            entries: self.bindings.items(),
+            entries: BucketNodeRange::new(&self.storage),
         }
     }
     /// Returns an exhausted iterator for OCCT iterator comparisons; `map.iter()!=map.end()`.
     pub fn end(&self) -> MapIter<'_, K> {
-        let mut iter = self.iter();
-        while iter.next().is_some() {}
-        iter
+        MapIter {
+            entries: BucketNodeRange::default(),
+        }
     }
 }
 impl<K: Debug, H: HashPolicy<K> + Default> Map<K, H> {
@@ -126,9 +136,13 @@ impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
 }
 impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Clone for Map<K, H> {
     fn clone(&self) -> Self {
-        Self {
-            bindings: self.bindings.clone(),
-        }
+        let mut copy = Self::with_allocator(
+            self.hasher.clone(),
+            self.bucket_count(),
+            self.allocator().clone(),
+        );
+        copy.assign(self);
+        copy
     }
 }
 impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a Map<K, H> {
@@ -141,7 +155,7 @@ impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a Map<K, H> {
 impl<'a, K> Iterator for MapIter<'a, K> {
     type Item = &'a K;
     fn next(&mut self) -> Option<Self::Item> {
-        self.entries.next().map(|(key, ())| key)
+        self.entries.next().map(MapNode::key)
     }
 }
 impl<K> Clone for MapIter<'_, K> {
@@ -164,3 +178,5 @@ pub use cursor::MapIterator;
 
 mod legacy_algebra;
 mod method_contracts;
+
+mod storage_methods;

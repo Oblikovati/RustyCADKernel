@@ -1,9 +1,10 @@
 //! `NCollection_DataMap::Iterator`: More/Next/Value over the actual native bucket topology.
 use super::super::base_map::exhausted_iterator;
-use super::{
-    DataMap, DataMapItems, Debug, HashPolicy, position::DataMapPosition, storage::DataMapStorage,
+use super::{DataMap, DataMapItems, Debug, HashPolicy, storage::DataMapStorage};
+use crate::{
+    ncollection::{DataMapNode, owned_bucket_chains::BucketChainPosition},
+    standard::Failure,
 };
-use crate::{ncollection::DataMapNode, standard::Failure};
 /// Read-only OCCT cursor; `let mut cursor=map.cursor(); while cursor.more() { cursor.next(); }`.
 pub struct DataMapIterator<'a, K, V> {
     items: DataMapItems<'a, K, V>,
@@ -11,7 +12,7 @@ pub struct DataMapIterator<'a, K, V> {
 /// Exclusive OCCT cursor; `*map.cursor_mut().change_value()?=7`.
 pub struct DataMapIteratorMut<'a, K, V> {
     source: Option<&'a mut DataMapStorage<K, V>>,
-    position: DataMapPosition,
+    position: BucketChainPosition,
 }
 // SAFETY: the cursor retains the exclusive graph borrow; each value follows K,V ownership.
 unsafe impl<K: Send, V: Send> Send for DataMapIteratorMut<'_, K, V> {}
@@ -42,7 +43,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// ```
     pub fn cursor_mut(&mut self) -> DataMapIteratorMut<'_, K, V> {
         DataMapIteratorMut {
-            position: DataMapPosition::new(&self.storage.base),
+            position: BucketChainPosition::new(&self.storage.base),
             source: Some(&mut self.storage),
         }
     }
@@ -153,8 +154,8 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
         self.position = self
             .source
             .as_ref()
-            .map_or_else(DataMapPosition::default, |source| {
-                DataMapPosition::new(&source.base)
+            .map_or_else(BucketChainPosition::default, |source| {
+                BucketChainPosition::new(&source.base)
             });
     }
     fn entry(&self, method: &str) -> Result<&DataMapNode<K, V>, Failure> {
@@ -168,7 +169,7 @@ impl<K, V> Default for DataMapIteratorMut<'_, K, V> {
     fn default() -> Self {
         Self {
             source: None,
-            position: DataMapPosition::default(),
+            position: BucketChainPosition::default(),
         }
     }
 }
@@ -188,10 +189,7 @@ impl<K, V> DataMapIteratorMut<'_, K, V> {
         let position = self.position;
         self.next();
         DataMapIterator {
-            items: DataMapItems {
-                source: self.source.as_deref(),
-                position,
-            },
+            items: DataMapItems::from_position(self.source.as_deref(), position),
         }
     }
 }
