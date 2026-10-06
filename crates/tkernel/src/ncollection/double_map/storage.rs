@@ -25,7 +25,10 @@ impl<A: RefUnwindSafe, B: RefUnwindSafe> RefUnwindSafe for DoubleStorage<A, B> {
 impl<A, B> DoubleStorage<A, B> {
     pub(super) fn new(count: usize, allocator: BaseAllocator) -> Self {
         Self {
-            topology: DoubleTopology::new(count, allocator),
+            topology: DoubleTopology::new(crate::ncollection::BaseDoubleMapStorage::new(
+                count,
+                Some(allocator),
+            )),
             ownership: PhantomData,
         }
     }
@@ -42,7 +45,7 @@ impl<A, B> DoubleStorage<A, B> {
         self.base().allocator()
     }
     pub(super) fn observer(&self) -> DoubleMapObserver {
-        self.topology.observer()
+        DoubleMapObserver(self.topology.observer())
     }
     pub(super) fn exchange(&mut self, other: &mut Self) {
         self.topology.exchange(&mut other.topology);

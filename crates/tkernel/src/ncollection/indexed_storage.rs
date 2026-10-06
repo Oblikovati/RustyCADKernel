@@ -45,7 +45,10 @@ where
 impl<N: IndexedNode> IndexedStorage<N> {
     pub(super) fn new(count: usize, allocator: BaseAllocator) -> Self {
         Self {
-            topology: IndexedTopology::new(count, allocator),
+            topology: IndexedTopology::new(crate::ncollection::BaseIndexedMapStorage::new(
+                count,
+                Some(allocator),
+            )),
             ownership: PhantomData,
         }
     }
@@ -76,7 +79,7 @@ impl<N: IndexedNode> IndexedStorage<N> {
         unsafe { &mut *N::key_ptr(self.node(index).cast()) }
     }
     pub(super) fn observer(&self) -> IndexedMapObserver {
-        self.topology.observer()
+        IndexedMapObserver(self.topology.observer())
     }
     pub(super) fn exchange(&mut self, other: &mut Self) {
         self.topology.exchange(&mut other.topology);
