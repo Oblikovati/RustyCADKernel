@@ -21,7 +21,7 @@
     "exit_code": 0,
     "warnings": 6,
     "warning_note": "Existing TKernel doc warnings retained in archived compiler log.",
-    "scope": "Fresh TKernel-only capture; replay re-normalizes raw compiler archive and requires exact equality before narrow body checks. Unrelated unresolved links retained; no full compiler inventory completeness claim."
+    "scope": "Fresh original TKernel capture. Integration replay validates raw archive digest and re-normalizes its declarations; exact selected11 body signatures, impl contexts, declaration hashes and source hashes must match the archived capture. Unrelated current class source changes are allowed. Original full normalized capture equality was verified before f632bc56."
   },
   "checks": {
     "exact_cpp_unique": 11,
@@ -30,10 +30,17 @@
     "constructor_selector_tests": 7,
     "negative_checks": {
       "wrong_native_id_rejected": true,
-      "missing_body_rejected": true
+      "missing_body_rejected": true,
+      "unrelated_candidate_transaction_mutation_rejected": true,
+      "unrelated_integrated_class_change_allowed": true,
+      "owned_integrated_row_mutation_rejected": true,
+      "unrelated_integrated_body_change_allowed": true,
+      "stale_owned_body_hash_rejected": true
     },
     "unchanged_other_ledger_rows": true,
-    "diff_check_exit": 0
+    "diff_check_exit": 0,
+    "candidate_replay_exit": 0,
+    "root_integration_replay_exit": 0
   },
   "source_sha256": {
     "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "5f23fd4f185b4cd1d2dead5eff67913b66c7fb948cdf21158d16654fe09ff2f3",
@@ -71,11 +78,12 @@
     "porting/runtime-evidence/dynamic-public-bindings-normalize.log.gz": "b3343b8c04f837a41a74218c32687ed13248b1976891e851d201a594d7e61879",
     "porting/runtime-evidence/dynamic-public-bindings-normalized.json.gz": "ed7d3dee39e3238d6c4d799e7643a8c3a513053886e105d78efb4072159d3140",
     "porting/runtime-evidence/dynamic-public-bindings-paired-tests.log.gz": "87e2d91871463cc803309a3d84b40952a3d07ed1def9b0c7f05fb210292e21b7",
-    "porting/runtime-evidence/dynamic-public-bindings-proof.json.gz": "d2a273440a1ab5e01bf8895395e3e5b9f9dbb04368a491ca5ca6620d4fce1ca0",
-    "porting/runtime-evidence/dynamic-public-bindings-replay.py.gz": "46425becb9b586433c8b4a523ed891c8a6ac550539aa930ee77f147c9bdf08f2",
+    "porting/runtime-evidence/dynamic-public-bindings-proof.json.gz": "7c457a7444ffad16c36a07b8cd8f0394e97f3880c488fdbba6974e7a977dc999",
+    "porting/runtime-evidence/dynamic-public-bindings-replay.py.gz": "5d7f5271d07dd2aec3d2f2fd71f211299a766b23ef098e4db2f344c5f2fce7ee",
+    "porting/runtime-evidence/dynamic-public-bindings-root-integration.log.gz": "afc9433500e744ca63886a64c7e6ba2d4c9cf3074b9f5cc69a3d4b3d4e62f4f6",
     "porting/runtime-evidence/dynamic-public-bindings-rustdoc.json.gz": "3aa3eaeb026cdf805428e5d3d4f93f4716e85bb2ae48c1c6cbdfaa8e2729f214",
     "porting/runtime-evidence/dynamic-public-bindings-updates.json.gz": "0589136220602b1473071228905b9f2e4795448cd6387198d844787cb07abb4b",
-    "porting/runtime-evidence/dynamic-public-bindings-verification.log.gz": "789a0d3e7f9562ddc45e6b85e40eb060999548f720d37f397f037a2b378c2120"
+    "porting/runtime-evidence/dynamic-public-bindings-verification.log.gz": "afc9433500e744ca63886a64c7e6ba2d4c9cf3074b9f5cc69a3d4b3d4e62f4f6"
   },
   "bindings": [
     {
@@ -163,5 +171,13 @@
     "No behavioral/native/Miri rerun in this ledger-only transaction; linked scoped receipts preserve inherited test results and historical source snapshots.",
     "This correction deliberately lowers implemented-claim totals; neither declarations nor tests are removed from the completeness denominator."
   ],
-  "replay": "gzip -dc porting/runtime-evidence/dynamic-public-bindings-replay.py.gz > /tmp/verify-dynamic-public-bindings.py; python3 /tmp/verify-dynamic-public-bindings.py \"$PWD\""
+  "replay": "gzip -dc porting/runtime-evidence/dynamic-public-bindings-replay.py.gz > /tmp/verify-dynamic-public-bindings.py; python3 /tmp/verify-dynamic-public-bindings.py \"$PWD\"",
+  "integration_replay": {
+    "candidate_commit": "f632bc56",
+    "base_commit": "572d28fe4550e52b958a9bea57639e5e2f15995c",
+    "original_transaction": "Read both fixed Git snapshots and require candidate ledger equals base ledger with exactly11 declared substitutions; unrelated transaction edits fail.",
+    "current_root": "Require exact owned11 row values once each, unique native IDs and unchanged owned body identities/hashes. Other classes may evolve independently.",
+    "root_verified_revision": "e87fa3cd96078b95e8d4db575cf8ec40ec660555",
+    "initial_root_rejection": "Original replay compared whole live ledger and normalized inventory to candidate baseline, rejecting independently merged BaseList work. Scoped replay repairs validation, with no ledger or API behavior changes."
+  }
 }
