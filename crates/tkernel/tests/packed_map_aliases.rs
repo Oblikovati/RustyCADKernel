@@ -1,26 +1,15 @@
 //! Native exact bucket/traversal fixtures for every destination/source alias partition.
 use rustycad_tkernel::ncollection::{PackedInteger, PackedMap, PackedMapOperand};
-use std::collections::BTreeMap;
+mod packed_map_oracle;
+use packed_map_oracle::{NativeRows, decode_native_rows};
 use std::sync::OnceLock;
-
-type NativeRows = BTreeMap<&'static str, Vec<u64>>;
 
 fn native_rows() -> &'static NativeRows {
     static ROWS: OnceLock<NativeRows> = OnceLock::new();
     ROWS.get_or_init(|| {
-        include_str!("../../../tools/oracle/tkernel_packed_map_aliases.expected")
-            .lines()
-            .map(|line| {
-                let (label, values) = line.split_once(' ').unwrap();
-                (
-                    label,
-                    values
-                        .split_whitespace()
-                        .map(|value| value.parse().unwrap())
-                        .collect(),
-                )
-            })
-            .collect()
+        decode_native_rows(include_str!(
+            "../../../tools/oracle/tkernel_packed_map_aliases.expected"
+        ))
     })
 }
 
