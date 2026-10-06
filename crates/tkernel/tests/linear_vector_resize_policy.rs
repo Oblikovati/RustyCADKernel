@@ -49,3 +49,6 @@ native_resize!(first_default, "first-default", 2, 2, 4, false, true, 1);
 native_resize!(first_fill, "first-fill", 6, 2, 4, true, false, 1);
 native_resize!(late_default, "late-default", 2, 2, 5, false, true, 3);
 native_resize!(late_fill, "late-fill", 6, 2, 5, true, false, 3);
+
+#[path = "support/linear_unpublished_tail.rs"]
+mod tail_repair;

@@ -15,7 +15,7 @@ fn protected_growth_updates_every_native_level_without_allocating() {
             "native growth row {row}"
         );
         assert_eq!(engine.block_count, 0);
-        assert!(engine.blocks.is_empty());
+        assert!(engine.ordered_blocks.is_none());
         assert_eq!(engine.live, 0);
     }
 }

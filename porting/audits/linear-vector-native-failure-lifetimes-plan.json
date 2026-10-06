@@ -1,6 +1,6 @@
 {
   "schema": "rustycad.native-lifetime-followup.v1",
-  "status": "required_next_implementation_slice_after_set_value",
+  "status": "unpublished_resize_tail_implemented_pending_integration",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "objective": "Preserve current OCCT unpublished-tail behavior; safe rollback is a temporary partial adapter, not an accepted replacement for native semantics.",
   "current_evidence": {
@@ -10,7 +10,8 @@
       "late-default",
       "late-fill"
     ],
-    "observed_gap": "Native Resize retains two completed tail objects beyond unchanged Size. Current Rust LengthRollback destroys them. The explicitly recovered native rows are extra fixture cleanup, not native equivalence."
+    "observed_gap": "Prior Resize/SetValue receipts recorded automatic Rust rollback. The native-tail slice replaces that policy with unpublished spare lifetimes; those historical receipts remain accurate for their archived commits. Outer constructor, growth allocation ownership, and destructive shrink exceptions remain subsequent slices.",
+    "implementation_receipt": "porting/audits/linear-vector-native-tail-methods.json"
   },
   "next_slice": {
     "name": "Preserve initialized spare slots on native tail-constructor failure",
