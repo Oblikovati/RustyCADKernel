@@ -14,7 +14,7 @@ import subprocess
 from dataclasses import dataclass
 from typing import Any
 
-from api_inventory.inputs import compiler_flags, digest
+from api_inventory.inputs import JSONObject, compiler_flags, digest
 
 INCLUDE = re.compile(r"^\s*#\s*include\s*([<\"])([^>\"]+)[>\"]", re.MULTILINE)
 
@@ -346,12 +346,27 @@ def retry_one(
     return record
 
 
+def contexts_for_failed_toolkits(
+    contexts: list[CompileContext], failures: list[JSONObject], source_root: pathlib.Path
+) -> list[CompileContext]:
+    """Skip source contexts that matching_contexts would reject by toolkit anyway."""
+    requested = {str(row["toolkit"]) for row in failures}
+    selected: list[CompileContext] = []
+    for context in contexts:
+        if not context.source_file.is_relative_to(source_root):
+            continue
+        parts = context.source_file.relative_to(source_root).parts
+        if len(parts) > 1 and parts[1] in requested:
+            selected.append(context)
+    return selected
+
+
 def run_capture(args: argparse.Namespace) -> None:
     source_root = args.source.resolve() / "src"
     original = json.loads(args.capture.read_text())
-    contexts = compile_contexts(args.database)
-    include_index = index_source_includes(contexts, source_root)
     failures = [row for row in original["results"] if row["status"] == "parse_failed"]
+    contexts = contexts_for_failed_toolkits(compile_contexts(args.database), failures, source_root)
+    include_index = index_source_includes(contexts, source_root)
     args.output.mkdir(parents=True, exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
         futures = [

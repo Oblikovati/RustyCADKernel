@@ -10,7 +10,7 @@ from api_binding_transaction import replay_binding_transaction
 
 def replay_base_sequence_bindings(root: Path) -> int:
     """Replay the recorded base surface; `replay_base_sequence_bindings(repo_root)`."""
-    receipt = Path("porting/audits/base-sequence-api-reconciliation.json")
+    receipt = Path("porting/audits/base-sequence-address-current-bindings.json")
     return replay_binding_transaction(root, receipt)
 
 

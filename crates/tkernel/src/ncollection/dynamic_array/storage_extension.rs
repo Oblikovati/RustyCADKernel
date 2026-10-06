@@ -71,8 +71,8 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         item_size: usize,
     ) -> Result<(), Failure> {
         self.validate_nonzero_stride()?;
-        let count = (index / self.array.increment).checked_add(1);
-        let count = count.ok_or_else(|| self.storage_size_failure(index))?;
+        // OCCT 3d097a0 permits stride-one SIZE_MAX to wrap to a zero-block no-op.
+        let count = (index / self.array.increment).wrapping_add(1);
         self.ensure_block_count(count, item_size)
     }
     /// Reserves blocks before constructing any elements; `storage.ensure_block_count(3, size_of::<i32>())?`.

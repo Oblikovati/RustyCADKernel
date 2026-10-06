@@ -1,5 +1,5 @@
 //! Borrowed copy construction and copy assignment retain native publication order.
-use super::{LengthRollback, LinearVector};
+use super::LinearVector;
 
 impl<T> LinearVector<T> {
     pub(super) fn resize_with_constructor(&mut self, size: usize, construct: impl FnMut() -> T) {
@@ -8,10 +8,7 @@ impl<T> LinearVector<T> {
             return;
         }
         self.reserve(size);
-        let previous_len = self.len();
-        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
-        rollback.elements.resize_with(size, construct);
-        rollback.commit();
+        self.construct_unpublished_tail(size, construct);
     }
 }
 impl<T: Clone> LinearVector<T> {

@@ -14,11 +14,15 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
             1 => (children[1], children[0]),
             _ => return,
         };
+        let old_pairs = self.nodes.child_pairs(children);
         self.assign_survivor(id, kept);
         self.reparent_children(id);
         let mut unwind = DeferredDestructorPanic::default();
         unwind.capture(|| self.release_node(kept));
         self.release_subtree(killed, &mut unwind);
+        for pair in old_pairs {
+            self.nodes.release_pair(pair);
+        }
         unwind.finish(Ok(()));
     }
     fn assign_survivor(&mut self, parent: usize, kept: usize) {

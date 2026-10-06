@@ -45,12 +45,13 @@ pub use allocator::{
     ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccAlignedPtr, AccAlignedSize,
     AccAllocatorExtension, AccBlock, AccBlockKey, AccBlockKeyHasher, AccBlockLookup, AccBlockState,
     AllocatedArray, AllocatedBox, AllocatedBytes, BaseAllocator, INC_DEFAULT_BLOCK_SIZE,
-    INC_MINIMUM_BLOCK_SIZE, IncAllocatorExtension, IncBlock, IncBlockSizeLevel,
+    INC_MINIMUM_BLOCK_SIZE, IncAllocatorBlock, IncAllocatorExtension, IncAllocatorObservation,
+    IncBlock, IncBlockObservation, IncBlockSizeLevel,
 };
 mod dynamic_array;
 pub use dynamic_array::{
-    DynamicArray, DynamicArrayCopyFailure, DynamicArrayIterator, DynamicArrayStorageExtension,
-    DynamicCursor,
+    DynamicArray, DynamicArrayCopyConstructionFailure, DynamicArrayCopyFailure,
+    DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
 };
 
 mod buffer;

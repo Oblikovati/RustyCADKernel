@@ -1,0 +1,130 @@
+{
+  "schema": "rustycad.indexed-comparisons-current-proof.v1",
+  "status": "partial_current_proof_pending_integration",
+  "base_commit": "cce86f6c3a93d2dbb16a55fb30bad5490d85eebb",
+  "scope": "Superseding current body proof for all six IndexedIterator comparisons after the owned/proxy equality implementation. Four otherwise unchanged relation rows need exact-selector refresh because declaration hashes include the whole source-file hash. No domain/status/credit promotion.",
+  "counts": {
+    "native_ids": 6,
+    "current_public_bodies": 8,
+    "equality_bodies": 4,
+    "unchanged_relation_bodies": 4,
+    "selector_only_rows_refreshed": 4,
+    "implemented_credit_delta": 0,
+    "legacy_test_mapping_delta": 0
+  },
+  "candidate_ledger_blob": "76336c491ea71680e8c67b09addbc8999bee2385",
+  "before_after_proof": {
+    "before_commit": "cce86f6c3a93d2dbb16a55fb30bad5490d85eebb^",
+    "records": [
+      {
+        "cpp_id": "10336da17ddd31589c41555b4116a85b18a583ac24639b0858697b1800be8bc9",
+        "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_less",
+        "source_file": "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs",
+        "before_source_sha256": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+        "after_source_sha256": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a",
+        "unchanged_method_text_sha256": "ca87ce917f121b0ccbc98e3acc132cbd660208406dfeb63bdf9b002b53ec2849"
+      },
+      {
+        "cpp_id": "4699a522f659c66602b74390aa4c9e162f4e4330db2a858cc82ec283bd2d64d4",
+        "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_greater",
+        "source_file": "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs",
+        "before_source_sha256": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+        "after_source_sha256": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a",
+        "unchanged_method_text_sha256": "0e5b795133e2898b41bfecbabbf72d9fe57796818a75d0066f60c88f2f34c8d0"
+      },
+      {
+        "cpp_id": "80286b27a56e805c92337193fc1b161ea95fdc25af1ce7802c61123e547ee630",
+        "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_greater_or_equal",
+        "source_file": "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs",
+        "before_source_sha256": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+        "after_source_sha256": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a",
+        "unchanged_method_text_sha256": "38a4d97b38e585f2d45cef4df6973bc037d7963b39de5d75597cebcec940bf24"
+      },
+      {
+        "cpp_id": "da2ac7d180da33f6e2ca71ab9b4240eebfea62d53c52ba05c9e0ceb42ad785f5",
+        "path": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_less_or_equal",
+        "source_file": "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs",
+        "before_source_sha256": "40b05907ee17f5a83812dad0d2ccae6a824245f34e995720603d2328b0a2bdaa",
+        "after_source_sha256": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a",
+        "unchanged_method_text_sha256": "1a9f248146e57ae98b85e79059452b60426e37ebb864f11de5ac0a772d41b1ed"
+      }
+    ]
+  },
+  "ledger_integrity": "Original follow-up transaction equals cce86f6c base with exactly four selector-only replacements. Every non-selector field, including status and semantic obligations, is identical. Current root may contain unrelated transactions; all six owned comparison rows must match. Original two-row candidate replay also remains green.",
+  "compiler_capture": "Reuses unchanged production-source rustdoc capture from cce86f6c candidate, independently normalizes it against current files, and verifies exact native ID/signature plus every Rust declaration/impl/source identity. No compiler rebuild or Rust behavior change in this follow-up.",
+  "checks": {
+    "six_comparison_replay": {
+      "native_ids": 6,
+      "public_bodies": 8,
+      "selector_only_rows_refreshed": 4,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "non_selector_refresh_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    },
+    "original_two_row_replay": {
+      "native_ids": 2,
+      "public_bodies": 4,
+      "partial_rows_extended": 2,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    },
+    "four_relation_body_texts_unchanged": true,
+    "format_and_diff_exit": 0,
+    "inherited_tail25_replay": {
+      "native_ids": 25,
+      "public_bodies": 36,
+      "exclusions_replaced_with_partial": 25,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "stale_last_body_hash_rejected": true,
+        "missing_last_selected_body_rejected": true,
+        "unrelated_candidate_change_rejected": true,
+        "unrelated_current_class_change_allowed": true,
+        "owned_current_mapping_change_rejected": true
+      }
+    }
+  },
+  "inherited_runtime_proof": {
+    "receipt": "porting/audits/base-map-indexed-proxy-comparisons.json",
+    "rust_passed": 186,
+    "native_originals_passed": 163,
+    "strict_miri_passed": 23,
+    "python_binding_tests_passed": 25,
+    "scope": "Exact same source code as the preceding candidate; no new runtime test execution claimed for this metadata-only follow-up."
+  },
+  "historical_receipts_preserved": [
+    "porting/audits/base-map-indexed-comparisons.json",
+    "porting/audits/base-map-indexed-proxy-comparisons.json"
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/base-map-indexed-comparisons-current-replay.py.gz > /tmp/replay-base-map-indexed-comparisons-current.py && python3 /tmp/replay-base-map-indexed-comparisons-current.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/indexed_cursor/comparisons.rs": "9c0b16a1477258c6e484d9936e37c201e268be909ec25a608a95afe7ddbf515a"
+  },
+  "inherited_artifact_sha256": {
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-rustdoc.json.gz": "5ec41e05af3f74c03a787b66e6268d4862e762d1f36ea3f5beac9e5f8f4fdf87",
+    "porting/runtime-evidence/base-map-indexed-proxy-comparisons-normalized.json.gz": "6e2a63cc83b48f3cf3d7852bfc52889b97b29965f7c006b1e6f4319b8bf3b8b4",
+    "porting/audits/base-map-indexed-proxy-comparisons.json": "e02a74182f47e6144612c055c332407fdead335123e33f180976598a8e94b9c2"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-bindings.json.gz": "6ea13084bb75b98c47ca8e1465198e518c00ae78064fc1988e40cad12bf4030a",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-body-text.json.gz": "a6b40e49f5117d4f7d3ea3753f7d82f9c8ae8c307bb79272d9e769e72035e4d9",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-original-two-replay.log.gz": "846b29337f471c20c2992f6a710fbfe29be7d731e5b2d7c983e23260a271ecb1",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-replay.log.gz": "e258a566011a7a13e7feb7d1749e7e5c45ae45b59ba4b7ddcfd12daa4338d4ba",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-replay.py.gz": "b98fbfe4dd9f57ae8199551efd7a085a6e8cea40cef65f33d3e1270a264dd4c3",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-tail25-replay.log.gz": "a0a489c39e0494a7285ad9e3406b91d86023de31793d990442852b52b32a9513",
+    "porting/runtime-evidence/base-map-indexed-comparisons-current-transaction.json.gz": "611b7a5fe3c156ef62f5f224d5c1e92e0cf0c719740a872d0af8c25d98d1c2c2"
+  },
+  "inherited_tail_scope": "All25 remaining IndexedIterator method bindings replay unchanged: none of their36 selected bodies reside in comparisons.rs. No additional selector or ledger changes required."
+}

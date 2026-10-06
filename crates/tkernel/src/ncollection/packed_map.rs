@@ -6,6 +6,7 @@ mod iteration;
 mod legacy_algebra;
 mod node;
 mod node_cursor;
+mod object_storage;
 mod protected_helpers;
 pub use node::PackedMapNode;
 mod queries;
@@ -82,8 +83,8 @@ impl<T: PackedInteger> PackedMap<T> {
             return;
         }
         let buckets = self.buckets.rehashed(modulus);
-        self.bucket_count = modulus;
         self.buckets = buckets;
+        self.bucket_count = modulus;
     }
     /// Add a bit, growing based on occupied blocks; `map.add(42)`.
     pub fn add(&mut self, value: T) -> bool {

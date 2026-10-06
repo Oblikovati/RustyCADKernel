@@ -1,0 +1,156 @@
+{
+  "schema": "occt-declaration-inventory-v1",
+  "inputs": {
+    "manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "database_sha256": "b4ddcffd211e937778c34371ba303efedbed8670883253b405ad58a0668d4a48",
+    "extractor_sha256": "6995709a196005b17a1bbbb1c8684728a0b6e827735df6ed3b615916341ee8c4",
+    "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "cmake_cache_sha256": "ca1eb676fed291cf92873e2f0be8db026347ff21ed0096663d923256235706a0",
+    "generated_version_sha256": "c08af7e65b838a84fde395a55be184e079136a3cdf12f826a42c79da1666a1fc",
+    "file_inputs": {
+      "manifest": "/tmp/rustycad-tkernel-returned-type-recapture/porting/api-header-manifest.json",
+      "database": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/compile_commands.json",
+      "extractor": "/tmp/rustycad-tkernel-returned-type-recapture/target/returned-reachability/extractor/occt-api-extract",
+      "toolchain_config": "/tmp/rustycad-tkernel-returned-type-recapture/porting/api-proof-toolchain.json",
+      "cmake_cache": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/CMakeCache.txt",
+      "generated_version": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx"
+    },
+    "source": "/home/vmiguel/git/oblikovati-workspace/OCCT",
+    "generated_version_path": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx",
+    "requested_toolkits": [
+      "TKernel"
+    ],
+    "sdk_headers": [
+      {
+        "root": "/usr/include",
+        "files": 4282,
+        "sha256": "880afe0f69e79cd9e787b2b1b4c9f0a720cab1d9e65e19938f8fd3100312b849"
+      },
+      {
+        "root": "/usr/local/include",
+        "files": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/clang/23/include",
+        "files": 327,
+        "sha256": "6995ecc0260d2eee4fc7909689ca3a0eff2d36df04fb6f46621f662239b0d960"
+      }
+    ],
+    "compiler_libraries": [
+      {
+        "path": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/libclang-cpp.so.23.1",
+        "sha256": "255add214d5aea3a28c8ba9dc5caf0b3e5a480bfc720ffe672597766b1340120"
+      }
+    ],
+    "external_headers": [
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/deps/rapidjson-1.1.0/usr/include",
+        "files": 35,
+        "sha256": "474d444e61549f1cbec51ced309d260caf9e75ba51b0a490cb75131bb42e7655"
+      }
+    ],
+    "collector_sha256": "83941dcb9b0560ec9e247e7abfb539ba67afb6b1a8a736d3d172a64281cf96d0"
+  },
+  "capture_fingerprint": "40fcd5baed5c2eaa6b4766a825aefcb1f1d3361d8eee2176b70cb034cbff64f0",
+  "context_retry_sha256": "7d28e9e8a9f5431fdc891af25653d925b71b04659e706eb2c1c8737a26016065",
+  "expected_headers": 329,
+  "headers_by_status": {
+    "parsed": 308,
+    "included_fragment": 15,
+    "parse_failed": 2,
+    "parsed_with_context": 4
+  },
+  "declarations": 17162,
+  "api_declarations": 7352,
+  "alias_reachability_records": 8,
+  "alias_reachability_members": 186,
+  "returned_type_reachability_records": 1138,
+  "returned_type_reachability_complete": false,
+  "macro_definitions": 529,
+  "macro_candidates": 221,
+  "declarations_by_kind": {
+    "Namespace": 12,
+    "Function": 163,
+    "FunctionTemplate": 319,
+    "ClassTemplateSpecialization": 25,
+    "CXXMethod": 4205,
+    "CXXConstructor": 657,
+    "CXXRecord": 255,
+    "Typedef": 163,
+    "CXXDestructor": 78,
+    "Field": 202,
+    "Enum": 29,
+    "EnumConstant": 860,
+    "CXXConversion": 18,
+    "Var": 9,
+    "ClassTemplate": 70,
+    "TypeAlias": 265,
+    "ClassTemplatePartialSpecialization": 19,
+    "TypeAliasTemplate": 2,
+    "UsingDirective": 1
+  },
+  "unsupported_records": 4,
+  "diagnostics": 363,
+  "skipped_ranges": 162,
+  "configuration_matrix_complete": false,
+  "declaration_inventory_complete": false,
+  "coverage_proof": false,
+  "artifacts": {
+    "declarations": {
+      "path": "occt-declarations.jsonl.gz",
+      "sha256": "0ccc83161aa8c292fff8db5a56e76f699edb9d6d01c339b3e48da0f5f9147033",
+      "rows": 17162
+    },
+    "alias-reachability": {
+      "path": "occt-alias-reachability.jsonl.gz",
+      "sha256": "56928d301dca33d31806fe616c574b6116b336b5397bdfb81fa0c1fd101be3ef",
+      "rows": 8
+    },
+    "returned-type-reachability": {
+      "path": "occt-returned-type-reachability.jsonl.gz",
+      "sha256": "5f6ee72a6706429f74e098c3b5140d45911db899883267bfc81b1aa1997b17fa",
+      "rows": 1138
+    },
+    "macros": {
+      "path": "occt-macros.jsonl.gz",
+      "sha256": "0bcfab8c52cdc635c172041a43a1bc2e920802d24b63510bcb20d4b374e37f5c",
+      "rows": 529
+    },
+    "headers": {
+      "path": "occt-headers.jsonl.gz",
+      "sha256": "4f8991451564d5ac9576f0cc5d2d3674e853af3a3804b51ef0d80d02682824f9",
+      "rows": 329
+    },
+    "diagnostics": {
+      "path": "occt-diagnostics.jsonl.gz",
+      "sha256": "f916c0bf2427df38072a856085633a682039f340ea1fdc5f9a49a715611988a9",
+      "rows": 363
+    },
+    "unsupported": {
+      "path": "occt-unsupported.jsonl.gz",
+      "sha256": "b2716b7190cec4b9cfa704e293d531f5284c8fef605b951b168a450cdea356c6",
+      "rows": 4
+    },
+    "skipped-ranges": {
+      "path": "occt-skipped-ranges.jsonl.gz",
+      "sha256": "51fa0d384dfad4a9e7221b6891801244f802e9902e29a6d901529f5d4e659a3c",
+      "rows": 162
+    },
+    "compiler-summaries": {
+      "path": "occt-compiler-summaries.jsonl.gz",
+      "sha256": "977c18242437497e5b59fc6e0e89bdb3de3f71773016e2339a0aaaa8089a3873",
+      "rows": 312
+    },
+    "context-retries": {
+      "path": "occt-context-retries.jsonl.gz",
+      "sha256": "6c6d54e5d184bf9bd32f55545f1ea1059dbe68ccf4323a7b8355458f13822791",
+      "rows": 6
+    },
+    "included-files": {
+      "path": "occt-included-files.jsonl.gz",
+      "sha256": "0a424faa421b87dae1f85f46a5a8b9ece3ca05935aa80b3aaca4106288db16cd",
+      "rows": 975
+    }
+  }
+}
