@@ -181,3 +181,9 @@ pub use items_view::{
     note = "OCCT 8.0 renamed NCollection_Vector to NCollection_DynamicArray; use DynamicArray"
 )]
 pub type Vector<T> = DynamicArray<T>;
+
+mod sparse_array_base;
+pub use sparse_array_base::{
+    SparseArrayBase, SparseArrayBaseIterator, SparseArrayBaseState, SparseArrayBlock,
+    SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
+};
