@@ -1,11 +1,11 @@
 //! Segmented storage whose existing element addresses survive append.
-use super::{ArrayError, BaseAllocator};
+use super::{ArrayError, BaseAllocator, LinearVector};
 use allocator_api2::vec::Vec as AllocVec;
 use std::fmt::Debug;
 
 /// Stable-block storage with zero-based indexing; `DynamicArray::<i32>::with_increment(256)`.
 pub struct DynamicArray<T> {
-    blocks: Vec<AllocVec<T, BaseAllocator>>,
+    blocks: LinearVector<AllocVec<T, BaseAllocator>>,
     allocator: Option<BaseAllocator>,
     increment: usize,
     used: usize,
@@ -20,6 +20,7 @@ impl<T> Default for DynamicArray<T> {
         Self::with_increment(256)
     }
 }
+mod block_table;
 mod copy_date;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
@@ -37,7 +38,7 @@ impl<T> DynamicArray<T> {
     /// Selects the allocator that owns every element block; `DynamicArray::<i32>::with_allocator(256,Some(alloc))`.
     pub fn with_allocator(increment: usize, allocator: Option<BaseAllocator>) -> Self {
         Self {
-            blocks: Vec::new(),
+            blocks: LinearVector::default(),
             allocator,
             increment: increment.max(1).next_power_of_two(),
             used: 0,
@@ -108,6 +109,7 @@ impl<T> DynamicArray<T> {
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
         let index = checked_index(index)?;
         self.blocks
+            .as_slice()
             .get(index / self.increment)
             .and_then(|block| block.get(index % self.increment))
             .ok_or_else(|| self.index_error(index))
@@ -120,6 +122,7 @@ impl<T> DynamicArray<T> {
         let index = checked_index(index)?;
         let error = self.index_error(index);
         self.blocks
+            .as_mut_slice()
             .get_mut(index / self.increment)
             .and_then(|block| block.get_mut(index % self.increment))
             .ok_or(error)
@@ -150,12 +153,12 @@ impl<T> DynamicArray<T> {
     }
     /// Drops logical elements, optionally releasing blocks; `array.clear(false)`.
     pub fn clear(&mut self, release: bool) {
+        // Native Clear destroys every logical element before clearBlocks frees any block.
+        for block in &mut self.blocks {
+            block.clear();
+        }
         if release {
-            self.blocks.clear();
-        } else {
-            for block in &mut self.blocks {
-                block.clear();
-            }
+            self.blocks.clear(true);
         }
         self.used = 0;
     }
@@ -190,7 +193,7 @@ impl<T> DynamicArray<T> {
         }
     }
     fn add_block(&mut self) {
-        self.blocks.push(AllocVec::with_capacity_in(
+        self.blocks.append(AllocVec::with_capacity_in(
             self.increment,
             self.allocator.clone().unwrap_or_default(),
         ));
@@ -209,7 +212,7 @@ impl<T> DynamicArray<T> {
             self.blocks[block1].swap(first % self.increment, second % self.increment);
             return;
         }
-        let (left, right) = self.blocks.split_at_mut(block2);
+        let (left, right) = self.blocks.as_mut_slice().split_at_mut(block2);
         std::mem::swap(
             &mut left[block1][first % self.increment],
             &mut right[0][second % self.increment],
