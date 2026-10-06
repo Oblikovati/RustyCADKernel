@@ -1,11 +1,17 @@
+mod native_reader;
+pub use native_reader::PackedWordReader;
 /// Unsigned storage word for packed integer blocks.
 pub trait PackedWord: Copy + Default {
+    /// Trusted primitive rehash path; custom words default to transactional scratch storage.
+    /// Example: `assert!(<u32 as PackedWord>::NATIVE_REHASH_READER.is_some())`.
+    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = None;
     /// Preserve the low word bits; `u32::from_bits(42)`.
     fn from_bits(value: u64) -> Self;
     /// Widen without sign extension; `word.bits()`.
     fn bits(self) -> u64;
 }
 impl PackedWord for u32 {
+    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = Some(native_reader::U32_READER);
     fn from_bits(value: u64) -> Self {
         value as Self
     }
@@ -14,6 +20,7 @@ impl PackedWord for u32 {
     }
 }
 impl PackedWord for u64 {
+    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = Some(native_reader::U64_READER);
     fn from_bits(value: u64) -> Self {
         value
     }

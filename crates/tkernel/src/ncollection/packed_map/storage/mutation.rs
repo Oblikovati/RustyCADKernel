@@ -9,38 +9,6 @@ impl<T: PackedInteger> PackedNodeTable<T> {
         let node = Box::new(PackedMapNode::from_parts(mask, bits, self.head_ptr(bucket)));
         self.set_head(bucket, Box::into_raw(node));
     }
-    pub(in super::super) fn rehashed(&mut self, modulus: usize) -> Self {
-        let mut replacement = Self::allocated(
-            modulus
-                .checked_add(1)
-                .expect("bucket count: expected space for terminal slot"),
-        );
-        // Public integer traits may panic. Resolve all hashes before changing any ownership.
-        let destinations: Vec<usize> = self.nodes().map(|node| node.hash_code(modulus)).collect();
-        let mut targets = destinations.into_iter();
-        for bucket in 0..self.length {
-            self.transfer_chain(bucket, &mut replacement, &mut targets);
-        }
-        replacement
-    }
-    fn transfer_chain(
-        &mut self,
-        bucket: usize,
-        replacement: &mut Self,
-        targets: &mut impl Iterator<Item = usize>,
-    ) {
-        let mut pointer = self.head_ptr(bucket);
-        self.set_head(bucket, std::ptr::null_mut());
-        while !pointer.is_null() {
-            // No user callback occurs between unlinking and linking this owned node.
-            let node = unsafe { &mut *pointer };
-            let next = node.next();
-            let target = targets.next().expect("one destination per owned node");
-            node.set_next(replacement.head_ptr(target));
-            replacement.set_head(target, pointer);
-            pointer = next;
-        }
-    }
     pub(in super::super) fn remove_value(
         &mut self,
         bucket: usize,
