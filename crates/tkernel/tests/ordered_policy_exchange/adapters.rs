@@ -6,6 +6,7 @@ use std::rc::Rc;
 pub type Set = OrderedMap<Payload, SwapPolicy>;
 pub type Map = OrderedDataMap<Payload, Payload, SwapPolicy>;
 pub trait OrderedExchangeFixture: BaseMap + BasicMapIteratorSource {
+    const PAYLOADS_PER_NODE: usize;
     fn construct(policy: SwapPolicy, buckets: usize, arena: BaseAllocator) -> Self;
     fn insert(&mut self, key: i32, trace: &Rc<SwapTrace>);
     fn policy(&self) -> &SwapPolicy;
@@ -15,8 +16,9 @@ pub trait OrderedExchangeFixture: BaseMap + BasicMapIteratorSource {
     fn keys(&self) -> Vec<i32>;
 }
 macro_rules! adapter {
-    ($map:ty,$insert:expr,$keys:expr) => {
+    ($map:ty,$payloads:expr,$insert:expr,$keys:expr) => {
         impl OrderedExchangeFixture for $map {
+            const PAYLOADS_PER_NODE: usize = $payloads;
             fn construct(policy: SwapPolicy, buckets: usize, arena: BaseAllocator) -> Self {
                 Self::with_allocator(policy, buckets, arena)
             }
@@ -48,6 +50,7 @@ macro_rules! adapter {
 }
 adapter!(
     Set,
+    1,
     |map: &mut Set, key, trace| {
         map.add(Payload::new(key, trace));
     },
@@ -55,6 +58,7 @@ adapter!(
 );
 adapter!(
     Map,
+    2,
     |map: &mut Map, key, trace| {
         map.bind(Payload::new(key, trace), Payload::new(key * 10, trace));
     },

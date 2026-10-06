@@ -41,21 +41,7 @@ struct SwapScenario<M> {
 impl<M: OrderedExchangeFixture> SwapScenario<M> {
     fn new(empty: bool, rejected: usize) -> Self {
         let trace = Rc::new(SwapTrace::default());
-        let mut first = M::construct(
-            SwapPolicy::new(7, &trace),
-            101,
-            BaseAllocator::incremental(1024),
-        );
-        let mut second = M::construct(
-            SwapPolicy::new(19, &trace),
-            13,
-            BaseAllocator::incremental(1024),
-        );
-        if !empty {
-            first.insert(4, &trace);
-            first.insert(1, &trace);
-            second.insert(7, &trace);
-        }
+        let (first, second) = Self::populated_pair(&trace, empty);
         let (before_first, before_second) = (
             GraphSnapshot::capture(&first),
             GraphSnapshot::capture(&second),
@@ -68,6 +54,42 @@ impl<M: OrderedExchangeFixture> SwapScenario<M> {
             before_second,
             trace,
         }
+    }
+    fn populated_pair(trace: &Rc<SwapTrace>, empty: bool) -> (M, M) {
+        let mut first = M::construct(
+            SwapPolicy::new(7, trace),
+            101,
+            BaseAllocator::incremental(1024),
+        );
+        let mut second = M::construct(
+            SwapPolicy::new(19, trace),
+            13,
+            BaseAllocator::incremental(1024),
+        );
+        if !empty {
+            first.insert(4, trace);
+            first.insert(1, trace);
+            second.insert(7, trace);
+        }
+        (first, second)
+    }
+    fn verify_release(self, empty: bool) {
+        let trace = Rc::clone(&self.trace);
+        let (first, second) = (
+            self.first.allocator().clone(),
+            self.second.allocator().clone(),
+        );
+        if !empty {
+            assert!(first.reset(false).is_err());
+            assert!(second.reset(false).is_err());
+        }
+        drop(self);
+        assert_eq!(
+            trace.drops.get(),
+            if empty { 0 } else { 3 * M::PAYLOADS_PER_NODE }
+        );
+        assert!(first.reset(false).is_ok());
+        assert!(second.reset(false).is_ok());
     }
     fn execute(&mut self, assign: bool) -> bool {
         catch_unwind(AssertUnwindSafe(|| {
@@ -139,6 +161,7 @@ pub fn scenario<M: OrderedExchangeFixture>(
     let label = format!("{prefix}_{operation}_{rejected}_{}", u8::from(empty));
     scenario.match_native(&label, success);
     scenario.match_keys(success, empty);
+    scenario.verify_release(empty);
 }
 pub fn self_assign<M: OrderedExchangeFixture>(prefix: &str) {
     let trace = Rc::new(SwapTrace::default());
