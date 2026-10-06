@@ -134,19 +134,33 @@ impl IncEngine {
 
     /// `AllocateOptimal`/`Allocate`: enabled native fast paths leave list order unchanged.
     pub(super) fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
-        let existing = self
-            .allocation_heap
-            .filter(|&head| self.blocks[head].state.available_size >= size);
-        let skip_reorder = self.thread_safe_policy && existing.is_some();
-        let block = match existing {
+        if self.thread_safe_policy
+            && let Some(head) = self.available_head(size)
+        {
+            return Some(self.bump_block(head, size));
+        }
+        self.allocate_slow(size)
+    }
+
+    /// Protected allocateSlow always repairs lists, even when public allocation enables fast bumps.
+    pub(super) fn allocate_slow(&mut self, size: usize) -> Option<NonNull<u8>> {
+        let block = match self.available_head(size) {
             Some(head) => head,
             None => self.push_block(size)?,
         };
         let address = self.bump_block(block, size);
-        if !skip_reorder {
-            self.reorder(block);
-        }
+        self.reorder(block);
         Some(address)
+    }
+
+    fn available_head(&self, size: usize) -> Option<usize> {
+        self.allocation_heap
+            .filter(|&head| self.blocks[head].state.available_size >= size)
+    }
+
+    /// Protected increaseBlockSize updates the real capacity used for the next allocated block.
+    pub(super) fn increase_block_size(&mut self) {
+        self.block_size = IncBlockSizeLevel::of(self.block_size).grow(self.block_size);
     }
 
     fn bump_block(&mut self, block: usize, size: usize) -> NonNull<u8> {
@@ -195,7 +209,7 @@ impl IncEngine {
         let requested = u32::try_from(size).ok()?; // native truncation would corrupt the block
         self.block_count = self.block_count.wrapping_add(1);
         if self.block_count.is_multiple_of(5) {
-            self.block_size = IncBlockSizeLevel::of(self.block_size).grow(self.block_size);
+            self.increase_block_size();
         }
         self.block_size = self.block_size.max(requested);
         let payload_size = self.block_size as usize;
@@ -313,3 +327,7 @@ impl Drop for IncEngine {
         self.clean();
     }
 }
+
+#[cfg(test)]
+#[path = "incremental/protected_tests.rs"]
+mod protected_tests;

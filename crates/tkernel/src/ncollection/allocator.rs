@@ -26,6 +26,7 @@ mod accumulating;
 mod aligned;
 mod block;
 mod incremental;
+mod incremental_extension;
 mod keys;
 mod owned;
 mod raw_heap;
@@ -40,6 +41,7 @@ use incremental::IncEngine;
 pub use incremental::{
     INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
+pub use incremental_extension::IncAllocatorExtension;
 pub use keys::{AccBlockKey, AccBlockKeyHasher};
 pub use owned::{AllocatedArray, AllocatedBox, AllocatedBytes};
 use raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, mm_malloc_alignment};
@@ -59,6 +61,11 @@ pub struct AccAllocatorExtension<'a> {
 }
 
 impl AccAllocatorExtension<'_> {
+    /// Computes protected `getKey` without a lookup or miss adjustment; `access.key_for_address(64)`.
+    pub fn key_for_address(&self, address: usize) -> AccBlockKey {
+        AccBlockKey::new(self.engine.key(address))
+    }
+
     /// Finds the block and returns native's output key even on misses; `access.find_block(address)`.
     pub fn find_block(&self, address: usize) -> AccBlockLookup {
         let (key, found) = self.engine.lookup_block(address);

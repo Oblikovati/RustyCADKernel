@@ -136,7 +136,7 @@ impl AccEngine {
         Ok(engine)
     }
 
-    fn key(&self, address: usize) -> usize {
+    pub(super) fn key(&self, address: usize) -> usize {
         address / self.block_size
     }
 
