@@ -4,6 +4,8 @@
 //! buffer is a slice whose end acts as the terminator and whose storage past the end reads as
 //! zeros, so truncated sequences decode exactly as they do over zero-padded native memory.
 mod encode;
+mod mutable;
+pub use mutable::UtfIteratorMut;
 mod positions;
 mod signed_wide;
 mod unit;
