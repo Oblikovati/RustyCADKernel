@@ -1,0 +1,274 @@
+{
+  "schema": "rustycad.exact-selector-reconciliation.v1",
+  "status": "partial_mappings_pending_integration",
+  "base_commit": "321cd5ac477abfdfd0a5afb5962c20c3b2beef2c",
+  "branch": "port/dynamic-stale-bindings",
+  "scope": "Replaces exactly18 existing DynamicArray ledger rows in place. No source/test changes, no edits to other classes, no additions to test ledger and no full-class parity claim.",
+  "native_exact_declaration_ids": 18,
+  "public_body_bindings": 23,
+  "previous_status_counts": {
+    "partial": 2,
+    "excluded": 10,
+    "implemented": 6
+  },
+  "replacement_status": "partial",
+  "previous_cpp_resolution": "All18 former selectors were missing from exact compiler matching; excluded variants were previously unmatched_exclusion at report level.",
+  "resolved_implemented_claim_delta": 0,
+  "declared_implemented_row_delta": -6,
+  "legacy_test_credit_delta": 0,
+  "compiler_capture": {
+    "source_commit": "321cd5ac477abfdfd0a5afb5962c20c3b2beef2c",
+    "toolchain": "nightly-2026-09-25",
+    "rustdoc_format": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "environment": {
+      "CARGO_TARGET_DIR": "/tmp/rustycad-dynamic-tail-target",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "CARGO_BUILD_JOBS": "2"
+    },
+    "exit_code": 0,
+    "warnings": 6,
+    "warnings_scope": "Existing TKernel documentation links/HTML; preserved in compiler log, no production-doc edits.",
+    "normalization": "Fresh raw rustdoc normalized by current make_reachable_inventory; replay normalizes raw archive again and requires exact equality. Unrelated unresolved-links retained in normalized artifact; no whole-crate/full-workspace completeness claim."
+  },
+  "checks": {
+    "exact_cpp_unique": 18,
+    "public_rust_body_bindings_unique_and_current_hash": 23,
+    "paired_target_tests": 8,
+    "constructor_selector_tests": 7,
+    "negative_checks": {
+      "wrong_native_id_rejected": true,
+      "missing_body_rejected": true
+    },
+    "unchanged_other_ledger_rows": true,
+    "diff_check_exit": 0
+  },
+  "negative_behavior_credit": "This binding-only transaction runs compiler/selector checks. Existing behavioral tests remain historical scoped evidence; no fresh Rust/native/Miri behavior run or test credit claimed.",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "c9a43d787e380492e2db37fd588e829c6f05768be1ea817560041ec16c31ae54",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs": "b80da64567bf7ce0020b1bbf5fba539704235e492f859e062993931114289655",
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "2fc02cad21c1fb60e12ada259948fb4a66ecc1770e6d979735f9ad93b448cda6",
+    "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "5f23fd4f185b4cd1d2dead5eff67913b66c7fb948cdf21158d16654fe09ff2f3",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table.rs": "db729325ec70f313682191fb316a2a42ebff66d9fcf1b8367c5d93e153f7543d",
+    "crates/tkernel/src/ncollection/mod.rs": "a60d94f6f42e547f22b4138543b89fecceedaea10db9ac2b25996a92a9af3ab9",
+    "crates/tkernel/src/lib.rs": "7f37c68789296c8d947b1523ff71f55157b36e428c4439171554628393c017c2"
+  },
+  "native_header_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+  "ledger_sha256": "c30bf67b705cb21c65ecaa8a0d50a4ec6c17f7303efab368eae6fe29d71b2b7a",
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/api-proof-toolchain.json": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a"
+  },
+  "normalizer_tool_sha256": {
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "tools/capture_rustdoc_json.py": "dd76870ac705c6d300f441d56b15245e4b1196ff709f29d5d651d5184906f1b0",
+    "tools/api_inventory_capture.py": "2cbc42e0361bd190b8e1cd20673fbdce818cec5aaad8a42e0174d03254fec53e",
+    "tools/api_inventory_json.py": "a0f06daca76c63309453225d4652b6e20a479a4959385ea5d913c1620cd58c5c",
+    "tools/api_inventory_reexports.py": "bc62f868566558f77a296c02103016c5c7ca98048470981f9986fa7bb09472dd",
+    "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
+    "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
+    "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
+    "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
+    "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
+    "tools/rustdoc_type_aliases.py": "0fab1864cda95503bfe46b0f0881052c43273983b3f484ae0590ca0382fc9fb0",
+    "tools/rustdoc_bool_foreign_impls.py": "5068daddc044f3c492e69a069f2f02d79597944ce72e66411afcb6a411121a13",
+    "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
+    "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
+    "tools/api_tool_hashes.py": "afac9c662d14b45f4ad6b8889bcdc49e5ab033db4e6acce771ef61526ab5a2f1"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-stale-bindings-compiler.log.gz": "579d3d813049b3e3edbc0d6e4ab5742536d39473f584c7444a5f47b3413681c1",
+    "porting/runtime-evidence/dynamic-stale-bindings-constructor-tests.log.gz": "306b12c8ea7077ca4965327cc9606f3fa15a65cf9ce000344687b0c6e35a9b62",
+    "porting/runtime-evidence/dynamic-stale-bindings-normalize.log.gz": "82e22fb76de259be917f3923a1b4e347699cc230704971133416cd83094848a3",
+    "porting/runtime-evidence/dynamic-stale-bindings-normalized.json.gz": "abe2f447e1baaeba01365d0be2b34ba2d878f3dc9e491e2e8290d2909d771ff5",
+    "porting/runtime-evidence/dynamic-stale-bindings-paired-tests.log.gz": "87e2d91871463cc803309a3d84b40952a3d07ed1def9b0c7f05fb210292e21b7",
+    "porting/runtime-evidence/dynamic-stale-bindings-proof.json.gz": "f74dc58ceee706a12e0f029fa8aee2088acad33c585e3fc9bbfa85d8424ff3aa",
+    "porting/runtime-evidence/dynamic-stale-bindings-replay.py.gz": "ebf774d05c864f1cc2a2bf3768febc3657463e167511a64abe89dc03f4a576bc",
+    "porting/runtime-evidence/dynamic-stale-bindings-rustdoc.json.gz": "8dcc607d773db31edfdd8232069e86985efdac1673e434ba7d07f283bf1f1cfd",
+    "porting/runtime-evidence/dynamic-stale-bindings-updates.json.gz": "f05c11013b9a94352fccfd65759b6e8538b2188bea17483a408001b96ee211eb",
+    "porting/runtime-evidence/dynamic-stale-bindings-verification.log.gz": "dbe743da855d6944c6693c9de62287958fc9768b62be6ce7688aa7a425e45c63"
+  },
+  "bindings": [
+    {
+      "cpp_id": "0a7fb8297315d689597ea74c7849d3a85af305518b454af132481ec07097116f",
+      "old_selector": "NCollection_DynamicArray::EmplaceValue(int,Args&&)",
+      "new_selector": "NCollection_DynamicArray::EmplaceValue(const int,Args &&...)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::emplace_value"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-initialized-tail-fastpath.json"
+    },
+    {
+      "cpp_id": "16a127d714f48670a6206245481018f31fe81e48ee463c951d64b4b47db2e620",
+      "old_selector": "NCollection_DynamicArray::Iterator::Initialize(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Initialize(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "2f51d85b484feb8e21fdb188612062f7f8ad44a068dd26c3f20ee1d8cde8f9ac",
+      "old_selector": "NCollection_DynamicArray::Iterator::Init(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Init(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "31d243ec763e8428fe9f9dfd6673ff68712b5d4cd21ec316ae808e1a8b036102",
+      "old_selector": "NCollection_DynamicArray::operator=(NCollection_DynamicArray&&)",
+      "new_selector": "NCollection_DynamicArray::operator=(NCollection_DynamicArray<TheItemType> &&) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::move_self"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-initialized-tail-fastpath.json"
+    },
+    {
+      "cpp_id": "3af6f3548eda099bb789e42d7d1d6d4d92cbec4dcb03578db73b50449f8def82",
+      "old_selector": "NCollection_DynamicArray::ConstIterator::Initialize(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::ConstIterator::Initialize(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "3dcd25cbb4b32094bdd827ce14e976e78d25c59bf45d6cd5d0a0623897c00a6d",
+      "old_selector": "NCollection_DynamicArray::Iterator::Init(NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Init(NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "6e27171b776210dc8c65ecf0910adeb708be00f5131306de99927f8d8cf9c5d1",
+      "old_selector": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
+      "new_selector": "NCollection_DynamicArray::Assign(NCollection_DynamicArray<TheItemType> &&)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::move_from_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::move_self"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-initialized-tail-fastpath.json"
+    },
+    {
+      "cpp_id": "846516dc50a3c4c405bf6b433cb18fa40e1c59dbf56755ca21adad0f1354ba7a",
+      "old_selector": "NCollection_DynamicArray::ConstIterator(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::ConstIterator::ConstIterator(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "9a777601807551a51769e1a2f3c870f9fb4e9cf7e275a28d12a5f5431f04261c",
+      "old_selector": "NCollection_DynamicArray(NCollection_DynamicArray&&)",
+      "new_selector": "NCollection_DynamicArray::NCollection_DynamicArray<TheItemType>(NCollection_DynamicArray<TheItemType> &&) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::from_moved"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-move-constructor.json"
+    },
+    {
+      "cpp_id": "a4979abc97c22f4510ec86e67193dab5d04b098445be104fc1eca509da975bbd",
+      "old_selector": "NCollection_DynamicArray(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::NCollection_DynamicArray<TheItemType>(const NCollection_DynamicArray<TheItemType> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::<core::clone::Clone>::clone"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-copy-date.json"
+    },
+    {
+      "cpp_id": "ac99bb67b35eca6e1b0043062aae54481793c481d703e136ae7774a001099a57",
+      "old_selector": "NCollection_DynamicArray::Iterator(NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Iterator(NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "ace7a80181b52ad786db6f98420c18971b33cd8871169f9adccc06fbe3ae77f1",
+      "old_selector": "NCollection_DynamicArray::Iterator(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Iterator(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::new"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "ae71c2d8449c493876397885c285fc61333d3f3b83925d0f380af15743b054e3",
+      "old_selector": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray<TheItemType> &)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_operator_self"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-copy-date.json"
+    },
+    {
+      "cpp_id": "b05648e0faa2f4d5bde99b2e56dfec71065c9d7739535b6c7d8e989a91e13f5c",
+      "old_selector": "NCollection_DynamicArray::Iterator::Initialize(NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::Iterator::Initialize(NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "c8e3d7cba5ce057c7d415e79d8ea43c7aea61be8f1cf62f8a849e458c5c95136",
+      "old_selector": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray&,bool)",
+      "new_selector": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray<TheItemType> &,const bool)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::assign_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_default_returning",
+        "rustycad_tkernel::ncollection::DynamicArray::assign_self"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-copy-date.json"
+    },
+    {
+      "cpp_id": "cc212467c1123fa7187d3b2457490d0631ace821202bcd99574e2e91f589e639",
+      "old_selector": "NCollection_DynamicArray::ConstIterator::Init(const NCollection_DynamicArray&)",
+      "new_selector": "NCollection_DynamicArray::ConstIterator::Init(const NCollection_DynamicArray<TheItemType> &) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayIterator::initialize"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-iterator-tail.json"
+    },
+    {
+      "cpp_id": "d4f08b8f6a937b1174ce598fa92ea54c66e281e42083b05572125b0b356228c4",
+      "old_selector": "NCollection_DynamicArray::~NCollection_DynamicArray()",
+      "new_selector": "NCollection_DynamicArray::~NCollection_DynamicArray<TheItemType>()",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::<core::ops::drop::Drop>::drop"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-block-table.json"
+    },
+    {
+      "cpp_id": "fcef0a09fcc882ae81f22ffffc3fea805985b7e542803e36595ab9594bfc4ef2",
+      "old_selector": "NCollection_DynamicArray::EmplaceValue(size_t,Args&&)",
+      "new_selector": "NCollection_DynamicArray::EmplaceValue(const size_t,Args &&...)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArray::emplace_value"
+      ],
+      "inherited_receipt": "porting/audits/dynamic-array-initialized-tail-fastpath.json"
+    }
+  ],
+  "limitations": [
+    "Clone-based copy and assignment are bounded adapters; arbitrary C++ copy traits, user throwing constructors/raw leaks and allocator byte layouts remain partial.",
+    "Iterator adapters require explicit owner references and correct Rust MUTABLE const generic; native const_cast mutation and virtual subclass ABI are not claimed.",
+    "EmplaceValue uses T:Default plus closure, not C++ variadic placement constructor/trait dispatch.",
+    "Move constructor now targets actual from_moved instead of receiver assignment; noop self-assignment companions are explicit for assignment rows.",
+    "Native C++ noexcept termination differs from Rust Drop/panic; destructor mapping remains partial.",
+    "Previously resolved borrowed/signed/public mappings not included in these18 remain separate reconciliation work."
+  ],
+  "replay": "gzip -dc porting/runtime-evidence/dynamic-stale-bindings-replay.py.gz > /tmp/verify-dynamic-stale-bindings.py; python3 /tmp/verify-dynamic-stale-bindings.py \"$PWD\""
+}
