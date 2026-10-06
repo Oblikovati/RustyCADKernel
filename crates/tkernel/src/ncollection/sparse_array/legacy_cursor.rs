@@ -41,7 +41,7 @@ impl<'a, T> SparseArrayLegacyCursor<'a, T> {
         };
         self.more = false;
         self.index = array.capacity();
-        if !array.blocks.is_empty() {
+        if array.storage.has_allocated_blocks() {
             self.seek_legacy_key(0);
         }
     }
@@ -78,6 +78,9 @@ impl<'a, T> SparseArrayLegacyCursor<'a, T> {
         };
         let next = array.entries().find(|(index, _)| *index >= start);
         self.more = next.is_some();
-        self.index = next.map_or(array.capacity() + array.increment, |(index, _)| index);
+        self.index = next.map_or(
+            array.capacity() + array.storage.base.block_size(),
+            |(index, _)| index,
+        );
     }
 }
