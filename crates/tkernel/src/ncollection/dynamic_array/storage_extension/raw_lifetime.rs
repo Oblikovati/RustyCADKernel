@@ -71,17 +71,14 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// `destination.storage_extension().copy_parameters(&source, true)?;`
     /// Retained blocks are rejected because allocator rebinding needs a separate ownership model.
     /// Existing detached pointers still require their original allocator after an allocator change.
+    /// The unsafe `copy_parameters_retained` adapter supplies the separate retained ownership policy.
     pub fn copy_parameters(
         &mut self,
         source: &DynamicArray<T>,
         copy_allocator: bool,
     ) -> Result<(), Failure> {
         self.require_unallocated_parameters()?;
-        if copy_allocator {
-            self.array.allocator = source.allocator.clone();
-        }
-        self.array.increment = source.increment;
-        self.array.used = 0;
+        self.apply_parameter_metadata(source, copy_allocator);
         Ok(())
     }
     fn require_unallocated_parameters(&self) -> Result<(), Failure> {
