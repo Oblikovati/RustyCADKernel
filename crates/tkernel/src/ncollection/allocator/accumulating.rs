@@ -78,6 +78,11 @@ impl AccBlockSlot {
             alloc_count: self.descriptor.alloc_count,
         }
     }
+    fn reservation(&self, size: usize, align: usize) -> Option<usize> {
+        let cursor = self.descriptor.alloc_start.as_ptr().addr();
+        let aligned_start = cursor.checked_sub(size)? & !(align - 1);
+        (aligned_start >= self.start()).then_some(cursor - aligned_start)
+    }
     fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
         let cursor = self.descriptor.allocate(AccAlignedSize::new(size));
         // SAFETY: selection guarantees the descriptor cursor stays within the owned block; the
@@ -131,46 +136,43 @@ impl AccEngine {
     /// `Allocate`: last block, a dedicated block for oversize requests, or a scan of the
     /// previous `MaxLookupBlocks - 1` blocks before a new block; `None` only on exhaustion.
     pub(super) fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
-        let size = aligned_size(size)?;
-        let key = self.select_block(size)?;
-        self.blocks
-            .get_mut(&key)
-            .expect("selected block is bound")
-            .allocate(size)
+        self.allocate_aligned(size, ACC_ALIGN)
     }
 
-    /// Allocation honouring a Rust layout alignment (typed allocations only).
-    ///
-    /// Upstream guarantees 4 bytes; a stricter alignment reserves `align - 4` extra bytes and
-    /// aligns the address up inside the reservation, so the block still owns the address.
+    /// Reserves only actual downward padding; aligned native geometries consume native bytes.
     pub(super) fn allocate_aligned(&mut self, size: usize, align: usize) -> Option<NonNull<u8>> {
-        if align <= ACC_ALIGN {
-            return self.allocate(size);
-        }
-        let raw = self.allocate(aligned_size(size)?.checked_add(align - ACC_ALIGN)?)?;
-        let offset = raw.as_ptr().align_offset(align);
-        // SAFETY: the reservation starts 4-aligned, so `offset <= align - 4` bytes of it pad.
-        Some(unsafe { raw.add(offset) })
+        let size = aligned_size(size)?;
+        let align = align.max(ACC_ALIGN);
+        let key = self.select_block(size, align)?;
+        let slot = self.blocks.get_mut(&key).expect("selected block is bound");
+        let reservation = slot.reservation(size, align)?;
+        slot.allocate(reservation)
     }
 
-    fn select_block(&mut self, size: usize) -> Option<usize> {
+    fn select_block(&mut self, size: usize, align: usize) -> Option<usize> {
         let last = self
             .last_block
             .expect("an AccAllocator always owns a block");
-        if size <= self.blocks[&last].free_size() {
+        if self.blocks[&last].reservation(size, align).is_some() {
             return Some(last);
         }
         if size > self.block_size {
-            return self.allocate_new_block(size);
+            return self.allocate_aligned_block(size, align);
         }
-        match self.lookup_previous(last, size) {
+        match self.lookup_previous(last, size, align) {
             Some(key) => Some(key),
-            None => self.allocate_new_block(self.block_size),
+            None => self.allocate_aligned_block(size, align),
         }
     }
 
+    fn allocate_aligned_block(&mut self, size: usize, align: usize) -> Option<usize> {
+        // raw_heap's Layout and header offset guarantee MALLOC_ALIGNMENT for every payload.
+        let capacity = size.checked_add(align.saturating_sub(MALLOC_ALIGNMENT))?;
+        self.allocate_new_block(capacity.max(self.block_size))
+    }
+
     /// The native `for (b = last->prev; b && --rest; b = b->prev)` scan.
-    fn lookup_previous(&self, last: usize, size: usize) -> Option<usize> {
+    fn lookup_previous(&self, last: usize, size: usize, align: usize) -> Option<usize> {
         let mut rest = ACC_MAX_LOOKUP_BLOCKS;
         let mut iterator = self.blocks[&last].descriptor.prev_block;
         while let Some(key) = iterator {
@@ -178,7 +180,7 @@ impl AccEngine {
             if rest == 0 {
                 return None;
             }
-            if size <= self.blocks[&key].free_size() {
+            if self.blocks[&key].reservation(size, align).is_some() {
                 return Some(key);
             }
             iterator = self.blocks[&key].descriptor.prev_block;
@@ -402,3 +404,7 @@ mod tests {
         assert_eq!(engine.blocks[&key].descriptor.alloc_count, 0);
     }
 }
+
+#[cfg(test)]
+#[path = "accumulating/alignment_tests.rs"]
+mod alignment_tests;

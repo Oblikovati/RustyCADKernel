@@ -95,14 +95,10 @@ fn allocation_span<V: Default, N: StorageNode<i32, V>>(
     assert!(map.remove(&100));
     before - after
 }
-fn reservation_gap<N>(label: &str, span: usize) {
+fn reservation_matches_native<N>(label: &str, span: usize) {
     native_row(label, format!("{label} {}", size_of::<N>()));
-    // Existing AccAllocator typed allocation reserves alignment slack beyond native's 4-byte guarantee.
-    // This is a recorded Rust safety adaptation, not an assertion of equal physical arena reservation.
-    assert_eq!(
-        span,
-        size_of::<N>() + align_of::<N>() - crate::ncollection::ACC_ALIGN
-    );
+    // Exact cursor padding closes the measured +4 byte adaptation for these aligned nodes.
+    assert_eq!(span, size_of::<N>());
 }
 #[test]
 fn native_set_storage_layout_allocations_links_and_rehash() {
@@ -127,7 +123,7 @@ fn native_set_storage_layout_allocations_links_and_rehash() {
                 .alloc_count
         ),
     );
-    reservation_gap::<OrderedMapNode<i32>>("set_reservation", span);
+    reservation_matches_native::<OrderedMapNode<i32>>("set_reservation", span);
     exercise("set", &mut map);
 }
 #[test]
@@ -151,7 +147,7 @@ fn native_data_storage_layout_allocations_links_and_rehash() {
                 .alloc_count
         ),
     );
-    reservation_gap::<OrderedDataMapNode<i32, i32>>("data_reservation", span);
+    reservation_matches_native::<OrderedDataMapNode<i32, i32>>("data_reservation", span);
     exercise("data", &mut map);
 }
 #[test]
