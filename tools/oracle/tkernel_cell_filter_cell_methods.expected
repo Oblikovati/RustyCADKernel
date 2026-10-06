@@ -1,0 +1,30 @@
+copy 0 len 0 first -1 distinct 1 empty 1
+move 0 lens 0 0 head 1 1 pointer 0 allocations 2 events C1,C2,
+move-drop 0 events C1,C2,D2,D1, frees 0
+copy 1 len 1 first 10 distinct 1 empty 1
+move 1 lens 1 0 head 1 1 pointer 0 allocations 2 events C1,C2,
+move-drop 1 events C1,C2,D2,D1, frees 0
+copy 10 len 10 first 10 distinct 1 empty 1
+move 10 lens 10 0 head 1 1 pointer 0 allocations 2 events C1,C2,
+move-drop 10 events C1,C2,D2,D1, frees 0
+copy 11 len 11 first 10 distinct 1 empty 1
+move 11 lens 11 0 head 1 1 pointer 1 allocations 2 events C1,C2,
+move-drop 11 events C1,C2,D2,D1, frees 0
+copy 24 len 24 first 10 distinct 1 empty 1
+move 24 lens 24 0 head 1 1 pointer 1 allocations 2 events C1,C2,
+move-drop 24 events C1,C2,D2,D1, frees 0
+assign 3 3 lens 3 0 head 1 1 pointer 0 0 events C1,C2,
+assign-drop 3 3 events C1,C2,D1, frees 0
+assign 3 11 lens 3 0 head 1 1 pointer 0 0 events C1,C2,
+assign-drop 3 11 events C1,C2,D1, frees 0
+assign 11 3 lens 11 0 head 1 1 pointer 1 0 events C1,C2,
+assign-drop 11 3 events C1,C2,D1, frees 0
+assign 11 11 lens 11 0 head 1 1 pointer 1 1 events C1,C2,
+assign-drop 11 11 events C1,C2,D1, frees 0
+self 3 len 3 empty 1 pointer 1 events C1,C2,
+self-drop 3 events C1,C2, frees 0
+self 11 len 11 empty 1 pointer 1 events C1,C2,
+self-drop 11 events C1,C2, frees 0
+point 2 -3 3 hash 12726235276513266618 equal 1 1 1 0 0
+objects-ignored 1 1
+retained delta 24 node 16 frees 0

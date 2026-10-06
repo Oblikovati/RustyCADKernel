@@ -1,6 +1,8 @@
 //! Spatial hash cells with native truncation and newest-first inspection.
 use super::{Array1, BaseAllocator, HashPolicy};
+mod cell;
 mod cell_map;
+pub use cell::{CellFilterCell, CellFilterCellHasher};
 use cell_map::CellMap;
 use std::marker::PhantomData;
 mod cell_index;

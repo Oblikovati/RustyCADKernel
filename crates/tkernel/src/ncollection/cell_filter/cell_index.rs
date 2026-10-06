@@ -39,3 +39,17 @@ impl Clone for CellIndex {
         Self::from_slice(self.as_slice())
     }
 }
+
+impl CellIndex {
+    pub(super) fn move_construct(source: &mut Self) -> Self {
+        let mut index = Self(LocalArray::default());
+        index.0.move_from_trivial(&mut source.0);
+        index
+    }
+    pub(super) fn move_from(&mut self, source: &mut Self) {
+        self.0.move_from_trivial(&mut source.0);
+    }
+    pub(super) fn data_ptr(&self) -> *const i32 {
+        self.0.data_ptr()
+    }
+}
