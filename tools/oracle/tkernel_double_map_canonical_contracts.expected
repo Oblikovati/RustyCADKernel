@@ -1,0 +1,16 @@
+insert_empty H1:1,H2:5,
+insert_nonempty H1:2,H2:6,E2:5:6,
+duplicate_first H1:1,E1:1:1,
+duplicate_second H1:3,H2:5,E2:6:5,E2:5:5,
+are_missing 0 trace H1:99,H2:5,
+are_primary_next_quirk 0 trace H1:1,H2:5,E1:1:1,E2:6:5,
+resize 1009 trace H1:1,H2:5,H1:2,H2:6,
+unbind_first H1:2,E1:2:2,H2:6,
+unbind_second H2:5,E2:5:5,H1:1,
+borrowed_allocation CV@1,CK@1,
+remove_observer HK@1:1:1,HV@1:0:1,DK@1:0:0,DV@1:0:0,after=0:0:0
+clear_observer DK@1:1:1,DV@1:1:1,after=0:0:0
+retained_tables 1 1 101
+assign_order CK@0,CV@0,HK@0,HV@0,CV@1,CK@1,DV@1,DK@1,
+mixed_first CK@1,
+mixed_second CV@1,

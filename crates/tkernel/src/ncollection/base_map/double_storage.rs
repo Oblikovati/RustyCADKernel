@@ -99,6 +99,10 @@ impl BaseDoubleMapStorage {
     pub fn exchange(&mut self, other: &mut Self) {
         self.base.exchange(&mut other.base);
     }
+    pub(in crate::ncollection) fn finish_destroy(&mut self, release: bool) {
+        self.second_slots_mut().fill(std::ptr::null_mut());
+        self.base.finish_destroy(release);
+    }
     /// Destroys through the first table and clears the second even when size is zero; `unsafe { map.destroy(drop_node, false) }`.
     ///
     /// # Safety
@@ -110,10 +114,7 @@ impl BaseDoubleMapStorage {
     ) {
         // SAFETY: the caller provides the same first-table chain guarantees.
         unsafe { self.base.destroy(delete_node, false) };
-        self.second_slots_mut().fill(std::ptr::null_mut());
-        if release {
-            self.base.table = None;
-        }
+        self.finish_destroy(release);
     }
 }
 

@@ -43,8 +43,12 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     ) -> Self {
         let first = first_move(&mut source.first_policy);
         let second = second_move(&mut source.second_policy);
-        let mut moved =
-            Self::with_allocator(first, second, source.bucket_count, source.resource.clone());
+        let mut moved = Self::with_allocator(
+            first,
+            second,
+            source.bucket_count(),
+            source.allocator().clone(),
+        );
         moved.exchange_bindings(source);
         moved
     }
@@ -57,13 +61,7 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
         self.seek2(key).map_or(std::ptr::null(), std::ptr::from_ref)
     }
     fn exchange_bindings(&mut self, other: &mut Self) {
-        std::mem::swap(&mut self.slots, &mut other.slots);
-        std::mem::swap(&mut self.free, &mut other.free);
-        std::mem::swap(&mut self.first_buckets, &mut other.first_buckets);
-        std::mem::swap(&mut self.second_buckets, &mut other.second_buckets);
-        std::mem::swap(&mut self.count, &mut other.count);
-        std::mem::swap(&mut self.bucket_count, &mut other.bucket_count);
-        std::mem::swap(&mut self.resource, &mut other.resource);
+        self.storage.exchange(&mut other.storage);
     }
 }
 

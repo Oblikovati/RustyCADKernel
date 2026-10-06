@@ -18,9 +18,14 @@ impl<A: Debug + Clone, B: Debug + Clone, H1: HashPolicy<A>, H2: HashPolicy<B>>
         // OCCT Assign copies locals, then constructs the node base (key2) before key1.
         let local_first = first.clone();
         let local_second = second.clone();
-        let node_second = local_second.clone();
-        let node_first = local_first.clone();
-        self.insert_pair(node_first, node_second);
+        let first_bucket = self.first_policy.hash(&local_first) % self.bucket_count() + 1;
+        let second_bucket = self.second_policy.hash(&local_second) % self.bucket_count() + 1;
+        self.storage.insert(
+            first_bucket,
+            second_bucket,
+            || local_first.clone(),
+            || local_second.clone(),
+        );
     }
 }
 impl<A: Debug + Clone, B: Debug + Clone, H1: HashPolicy<A> + Clone, H2: HashPolicy<B> + Clone> Clone
@@ -30,8 +35,8 @@ impl<A: Debug + Clone, B: Debug + Clone, H1: HashPolicy<A> + Clone, H2: HashPoli
         let mut copy = Self::with_allocator(
             self.first_policy.clone(),
             self.second_policy.clone(),
-            self.bucket_count,
-            self.resource.clone(),
+            self.bucket_count(),
+            self.allocator().clone(),
         );
         copy.assign(self);
         copy

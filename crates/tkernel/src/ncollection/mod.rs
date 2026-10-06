@@ -128,7 +128,10 @@ pub use indexed_data_map::{
 };
 
 mod double_map;
-pub use double_map::{DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapValues};
+pub use double_map::{
+    DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapObservation, DoubleMapObserver,
+    DoubleMapValues,
+};
 
 mod flat_map;
 mod flat_table;
