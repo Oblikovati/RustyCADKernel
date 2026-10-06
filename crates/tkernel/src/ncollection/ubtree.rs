@@ -4,6 +4,7 @@
 //! `BoundingNode::child_id` and `BoundingNode::parent_id` name nodes, and the tree resolves
 //! them (`UBTree::child`, `UBTree::change_child`, ...).
 use super::{AllocatedBox, BaseAllocator};
+mod destruction;
 mod insertion;
 mod navigation;
 mod payload;
@@ -123,11 +124,10 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     }
     /// Release all nodes, then adopt `allocator` for future nodes when given (native
     /// `Clear(aNewAlloc)`, which also swaps the allocator of an empty tree).
+    /// If a Rust destructor panics, drain the tree and retain its original allocator.
     /// Example: `tree.clear_with_allocator(Some(BaseAllocator::incremental(1024)))`.
     pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
-        self.nodes.clear();
-        self.root = None;
-        self.last = None;
+        self.clear_owned_nodes();
         if let Some(resource) = allocator {
             self.resource = resource;
         }
