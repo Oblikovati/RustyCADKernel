@@ -1,0 +1,972 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_Array1/Array2 EmplaceValue temporary construction, assignment, destruction and return phases",
+  "base_revision": "3c9b0809ca837e5b83845450d7e908e4f192fc19",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "committed candidate; root integration and cleanup pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/array1.rs": "a9b5d8ea8dc80c1812be487e9fd099b552193c60fa9995c53a75457bf4ee5082",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "183b12552edc76e4a70dd819fc235ddcfe9fbfb79ba60932b822fdc4dd8acfdf",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "a9f4fe3366683c613e6d9b2e2aaaf8862702504545a3b894de18f1e4fa9d344c",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/emplace_policy.rs": "7c024243fafbe9d9988fd03e16f6fbdf4238a1f55918897df5d29098e06f64c8",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "ccfd252c64698a515552dfb23d41baebd3c99ab1d78b4b0c3d2253884086263f",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array1/resize_storage.rs": "098bfcc476955f9e802eec235fed8048a4d660c9082d86762b94438e426d6475",
+    "crates/tkernel/src/ncollection/array2/emplace_policy.rs": "cb5d97b4db10a993b071ce516d8a1fbfb284c15f76533835b32ec76c5c6a8de6",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/src/ncollection/array2/resize_policy.rs": "00af82c5e5ce72e35553f440ba2dd778e1e500d2c9ae68d961c8b9a7f0735e8b",
+    "crates/tkernel/src/ncollection/array2/resize_policy/assignment.rs": "95477196755d1174e1357d4e213e035ad6754ad1e9240baf6868a231d3942ec1",
+    "tools/oracle/tkernel_array_emplace_assignment.expected": "244581a0939508ec7b3eaf69bd35e4127dd816cd67a5b5df6dce972887365a90",
+    "tools/oracle/tkernel_array_emplace_assignment.cxx": "0b8d86c1a1687098ee0027489c3fb938eee0c7e037d81e54368febe8341b94f7",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/array2_resize_assignment.rs": "d978a897356011b500ce2d581bb9d7b39ef53809127d7c803d51465429eb7efa",
+    "crates/tkernel/tests/array2_resize_assignment/support.rs": "b4d7e39db0a1618f966eac7ad50c42f5d11e9cb62f2c23cddac2b15ca04b98c7",
+    "crates/tkernel/tests/array2_resize_validation.rs": "8217d6d6411604519412e166c0f8545c2785372082efb4046b0b321be9476f22",
+    "crates/tkernel/tests/array_emplace_assignment.rs": "ef075786addde15ef6089b7dd11bf4388bace660e64414a931ad66391f44fa66",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs": "4f58e39643e0e47a6790ee4bcf002cde0caf275cb174f0c0e07ea9992ce7a1ed"
+  },
+  "native_sources_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array1_Test.cxx": "4e3ed53fab5eda22313e4c9a9629a15194da293ed74be33d1ef7aeb8489eaa83",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array2_Test.cxx": "056a7282224275fdbd8775096d31e6173f5252ef85c94bbd16d757876068899e"
+  },
+  "candidate_bindings": [
+    {
+      "cpp_id": "2f1c1127fcbb733aa12dec885a08c9ce83e7a161099d42cb672be4d2c775925c",
+      "cpp_name": "NCollection_Array1::EmplaceValue",
+      "cpp_kind": "FunctionTemplate",
+      "cpp_signature": "type-parameter-0-0 &(int, type-parameter-1-0 &&...)",
+      "cpp_site": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 394
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::emplace_value_with_assignment",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "index",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "construct",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnOnce",
+                          "resolved_item_path": "core::ops::function::FnOnce",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [],
+                              "output": {
+                                "generic": "T"
+                              }
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "assign",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnOnce",
+                          "resolved_item_path": "core::ops::function::FnOnce",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                },
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": null
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "borrowed_ref": {
+                            "lifetime": null,
+                            "is_mutable": true,
+                            "type": {
+                              "generic": "T"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "ArrayError",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "impl FnOnce() -> T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnOnce",
+                            "resolved_item_path": "core::ops::function::FnOnce",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [],
+                                "output": {
+                                  "generic": "T"
+                                }
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              },
+              {
+                "name": "impl FnOnce(&mut T, &mut T)",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnOnce",
+                            "resolved_item_path": "core::ops::function::FnOnce",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "output": null
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/emplace_policy.rs",
+        "source_sha256": "7c024243fafbe9d9988fd03e16f6fbdf4238a1f55918897df5d29098e06f64c8",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "dfb1304987a59dbbf51b01e153b0b732e0e45ccce3966a181b70f6bfdd814da3"
+      },
+      "status": "partial_domain",
+      "domain": "Initialized owned or exclusive borrowed storage, explicitly selected constructor and move/copy-assignment operations, bounded access, nonthrowing destructors; native temporary/assignment/failure/destruction/return phases."
+    },
+    {
+      "cpp_id": "33b204d0285793e2a88131c79d074a73db0c6829f8e484c599edc343d7d81a0e",
+      "cpp_name": "NCollection_Array2::EmplaceValue",
+      "cpp_kind": "FunctionTemplate",
+      "cpp_signature": "type-parameter-0-0 &(int, int, type-parameter-1-0 &&...)",
+      "cpp_site": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 468
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array2::emplace_value_with_assignment",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "row",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "col",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "construct",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnOnce",
+                          "resolved_item_path": "core::ops::function::FnOnce",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [],
+                              "output": {
+                                "generic": "T"
+                              }
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "assign",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnOnce",
+                          "resolved_item_path": "core::ops::function::FnOnce",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                },
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": null
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "borrowed_ref": {
+                            "lifetime": null,
+                            "is_mutable": true,
+                            "type": {
+                              "generic": "T"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "ArrayError",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "impl FnOnce() -> T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnOnce",
+                            "resolved_item_path": "core::ops::function::FnOnce",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [],
+                                "output": {
+                                  "generic": "T"
+                                }
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              },
+              {
+                "name": "impl FnOnce(&mut T, &mut T)",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnOnce",
+                            "resolved_item_path": "core::ops::function::FnOnce",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "output": null
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array2/emplace_policy.rs",
+        "source_sha256": "cb5d97b4db10a993b071ce516d8a1fbfb284c15f76533835b32ec76c5c6a8de6",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array2",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "f72a7db77212831755186aadf0842a114c23cce5fd22fdb8b793fc4ebe827c74"
+      },
+      "status": "partial_domain",
+      "domain": "Initialized owned or exclusive borrowed storage, explicitly selected constructor and move/copy-assignment operations, bounded access, nonthrowing destructors; native temporary/assignment/failure/destruction/return phases."
+    }
+  ],
+  "template_owned_duplicates_not_credited": [
+    {
+      "id": "1f9e01439534ce5452667e1483ddaa63a48aa118ba6dff6dd4f3403dde539e09",
+      "name": "NCollection_Array1::EmplaceValue",
+      "reason": "template-owned declaration child at the same spelling site; no separate API credit"
+    },
+    {
+      "id": "2d3f542d53b0d2f78c8ea63f5d33dbef6538f6d1720b2b9309972a2cc6525d43",
+      "name": "NCollection_Array2::EmplaceValue",
+      "reason": "template-owned declaration child at the same spelling site; no separate API credit"
+    }
+  ],
+  "compiler_reachable_new_bodies": 2,
+  "cpp_bindings_count": 2,
+  "runtime": {
+    "rust": {
+      "passed": 197,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 15
+    },
+    "docs": {
+      "passed": 269,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "miri": {
+      "passed": 89,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 9
+    }
+  },
+  "new_rust_tests": 15,
+  "native_oracle_rows": 22,
+  "native_original_passes": 81,
+  "rust_original_passes": 81,
+  "exact_original_case_name_join": [
+    "NCollection_Array1Test.AssignmentOperator",
+    "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+    "NCollection_Array1Test.AssignmentOperatorEmptySource",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array1Test.AssignmentValue",
+    "NCollection_Array1Test.ChangeValue",
+    "NCollection_Array1Test.ChangeValueAccess",
+    "NCollection_Array1Test.ConstructorWithBounds",
+    "NCollection_Array1Test.ConstructorWithNegativeBounds",
+    "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+    "NCollection_Array1Test.CopyConstructor",
+    "NCollection_Array1Test.CopyValuesDifferentSize",
+    "NCollection_Array1Test.CopyValuesPreservesBounds",
+    "NCollection_Array1Test.DefaultConstructor",
+    "NCollection_Array1Test.EmplaceValue",
+    "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+    "NCollection_Array1Test.FirstLast",
+    "NCollection_Array1Test.Init",
+    "NCollection_Array1Test.IteratorAccess",
+    "NCollection_Array1Test.Move",
+    "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+    "NCollection_Array1Test.Resize",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+    "NCollection_Array1Test.STLIteration",
+    "NCollection_Array1Test.SetValue",
+    "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array1Test.SizeConstructor_AtAccess",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+    "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+    "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+    "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+    "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+    "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+    "NCollection_Array1Test.SizeConstructor_ZeroSize",
+    "NCollection_Array1Test.ValueAccess",
+    "NCollection_Array2Test.AssignmentOperator",
+    "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array2Test.ChangeValueAccess",
+    "NCollection_Array2Test.ConstructorWithBounds",
+    "NCollection_Array2Test.ConstructorWithNegativeBounds",
+    "NCollection_Array2Test.CopyConstructor",
+    "NCollection_Array2Test.CopyValuesDifferentDimensions",
+    "NCollection_Array2Test.CopyValuesPreservesBounds",
+    "NCollection_Array2Test.DefaultConstructor",
+    "NCollection_Array2Test.EmplaceValue",
+    "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array2Test.Init",
+    "NCollection_Array2Test.MoveAssignment",
+    "NCollection_Array2Test.MoveConstructor",
+    "NCollection_Array2Test.ReIndex_Interference",
+    "NCollection_Array2Test.ReIndex_UpdateBounds",
+    "NCollection_Array2Test.Resize",
+    "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+    "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+    "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+    "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+    "NCollection_Array2Test.Resize_FromEmpty",
+    "NCollection_Array2Test.Resize_NoCopy",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+    "NCollection_Array2Test.STLIteration",
+    "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array2Test.SizeConstructor_AtAccess",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+    "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+    "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array2Test.ValueAccess"
+  ],
+  "validation": {
+    "targets": [
+      "ncollection_array1",
+      "ncollection_array2",
+      "ncollection_arrays_api_behavior",
+      "array1_assignment_pointer_contracts",
+      "array2_assignment_pointer_contracts",
+      "array1_borrowed_init",
+      "ncollection_array2_buffer_prefix",
+      "ncollection_array_set_value_ref",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation",
+      "array_buffer_constructors",
+      "array_buffer_validation",
+      "array2_resize_assignment",
+      "array2_resize_validation",
+      "array_emplace_assignment"
+    ],
+    "results": {
+      "rust": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation",
+          "--test",
+          "array2_resize_assignment",
+          "--test",
+          "array2_resize_validation",
+          "--test",
+          "array_emplace_assignment"
+        ],
+        "exit": 0
+      },
+      "clippy": {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation",
+          "--test",
+          "array2_resize_assignment",
+          "--test",
+          "array2_resize_validation",
+          "--test",
+          "array_emplace_assignment",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      },
+      "fmt": {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0
+      },
+      "docs": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--doc"
+        ],
+        "exit": 0
+      }
+    }
+  },
+  "miri": {
+    "flags": "-Zmiri-strict-provenance",
+    "targets": [
+      "array_emplace_assignment",
+      "array2_resize_assignment",
+      "array2_resize_validation",
+      "array_buffer_constructors",
+      "array_buffer_validation",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation",
+      "array1_assignment_pointer_contracts",
+      "array2_assignment_pointer_contracts"
+    ],
+    "exit": 0
+  },
+  "native_probe": {
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/tkernel_array_emplace_assignment.cxx -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_array_emplace_assignment",
+    "binary_sha256": "9a140f40584837c7901a085f48ed59dd00cfed4cab5f2b8a9b3e282ac7bd113b",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+    "generated_header_wrappers": {
+      "NCollection_Array1": {
+        "wrapper_sha256": "9da1703ce2cd4db6acd0aa930a4f9ac751ae82616a4e40225417219c69a537a2",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "referent_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+      },
+      "NCollection_Array2": {
+        "wrapper_sha256": "29fed56d4ae5ef628e3d24ea26ee97c6eca0794182181fe4bc013d9f33236228",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "referent_sha256": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a"
+      }
+    }
+  },
+  "changes": [
+    "Add Array1/Array2 emplace_value_with_assignment with FnOnce constructor and mutable-donor assignment callbacks, sharing one temporary-lifetime engine without Clone or Default restrictions.",
+    "Validate declared bounds before construction; construct a separate temporary, assign into the existing object, destroy the possibly moved-from temporary, and return the existing mutable cell.",
+    "Preserve native constructor failure, early assignment failure, and partial assignment failure traces and target mutations; borrowed external storage and unused buffer tails remain observable.",
+    "Array2 validates inherited Array1 storage only after construction, preserving C++17 RHS-before-LHS order when ChangeArray1 has independently shortened the backing storage.",
+    "Match native copy-assignment fallback through an explicit copy callback, leaving the temporary donor unchanged before its destruction.",
+    "Keep existing emplace_value convenience methods as documented Rust replacement policies; do not silently claim they perform native element assignment."
+  ],
+  "probe_policy": "Native and Rust payloads record C construction, A move assignment, Q copy assignment, X destruction and R successful return. Rust payloads use injected per-fixture Rc recorders and intentionally do not implement Clone. Native copy fallback has only a const-reference assignment overload. Twenty-two native rows are consumed by thirteen tests; two additional tests check Rust FnOnce ownership and returned mutable-cell behavior.",
+  "limitations": [
+    "C++ variadic perfect forwarding and automatic overload selection are represented by explicit Rust closures. No automatic selection of arbitrary native move/copy assignment operators is claimed.",
+    "Ordinary safe Shared views detach on mutable access. Native writable const-reference aliases, arbitrary overlapping wrapper aliases, callback reentry and retained pointers across exclusive borrows remain outside this interface.",
+    "The existing convenience emplace_value methods retain Rust replacement and old-target Drop behavior, which is not the native user-defined-assignment lifetime policy.",
+    "Constructor/assignment Rust panics are compared with native exceptions at the defined receiver-state and element-event level; stack internals and constructor subobject cleanup require an appropriate caller callback. Panicking Drop and native throwing-destructor termination remain outside this scope.",
+    "Only initialized elements and native-defined bounded arithmetic are claimed. Native uninitialized trivial storage, allocator/type-trait policy, ABI equivalence and lifetime covariance beyond the unchanged representation are not proved.",
+    "Original assertions are unchanged. These two partial-domain template bindings do not declare either array class complete; duplicate compiler template children add no credit, and no global inventory or original declaration credit is added."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0,
+  "global_api_inventory_credit_added": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-rust.gz",
+      "sha256": "8c9a3910a6da60d08daf9877a399341cb429305962c5ed37afb866a54700d888",
+      "uncompressed_sha256": "17d8b7d88b9dcaeaf2919fcaac0afcadcd110f58978abf1dbd25c89c90bf29da"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-miri.gz",
+      "sha256": "cc9b88b3a5e3212cf5c02ce36f62143f1eeb71b36527d61158e0781984fcb22f",
+      "uncompressed_sha256": "47a748be3591d7e8b663a397cd51ff99f7a11c70010f285bf6734c4790c57bf6"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-docs.gz",
+      "sha256": "efffdfbefd73892c8d0fc1e9f850218de32b9995a0a9b9da72cf65574bddbe17",
+      "uncompressed_sha256": "bd892984266ea71bf9518e6061385d2d674860691062c97b1a641b48ad4bdd23"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-clippy.gz",
+      "sha256": "b37eb09d618c4fee60ba334e1d947b7bd4544004dcdbd926d0a73958f47ad977",
+      "uncompressed_sha256": "994af56a36a5bafdd2e2282fceb1ae418184c56a2b950977756fb2d874ce18c9"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-compiler.gz",
+      "sha256": "d3cdc0f9cde43e09bf16fb656e11eb2f73267df7d0ac6052dc433fead00fe44b",
+      "uncompressed_sha256": "441fbf87d4be3b22159f06aac636f37d4bf8220086c6fcfb5e45b6823ceca96f"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-compiler-json.gz",
+      "sha256": "833d03f5772f3256d3b315c5b0bf0de481cf30133d9cde0dd95579145c8d7c18",
+      "uncompressed_sha256": "8af24a6d8f84e0fb26cb94dd6fddba79ebdb685def28dcc3512ba1abb26b87b1"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-normalized.gz",
+      "sha256": "9b25b47faa6156d60722dbdb9dad9ba010cbf101a6483e096d989388c5673191",
+      "uncompressed_sha256": "58a5af3cdaf9d9345bc3117ad82176177aaa758e043305694e0f2f8880e93783"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-native.gz",
+      "sha256": "1226782c35db4ed1249c45f0e336e2475c79566636ddb333125d7a2a8522fad8",
+      "uncompressed_sha256": "244581a0939508ec7b3eaf69bd35e4127dd816cd67a5b5df6dce972887365a90"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-emplace-assignment-source.tar.gz",
+      "sha256": "014fff5659865dd25b93d2c9e2b694daa1d3dad3520b65c0cc3fe23f4a04e8b8"
+    }
+  }
+}
