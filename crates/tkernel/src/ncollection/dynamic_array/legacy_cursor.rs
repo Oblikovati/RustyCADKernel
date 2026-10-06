@@ -2,6 +2,8 @@
 use super::DynamicArray;
 use crate::standard::Failure;
 
+mod operators;
+
 /// Native legacy cursor with an explicit array argument for safe access.
 /// `let cursor = array.legacy_cursor::<false>(); cursor.value(&array)?;`
 /// Moving the array invalidates its identity, as moving a native container does.
@@ -174,6 +176,33 @@ impl<T, const M: bool> DynamicArrayIterator<T, M> {
     }
 }
 impl<T> DynamicArrayIterator<T, true> {
+    /// Exposes mutable BasicIterator::Value/operator* with an exclusive owner borrow.
+    /// `*cursor.basic_value_mut(&mut array)? = 3`; legacy `value` remains read-only.
+    pub fn basic_value_mut<'a>(
+        &self,
+        array: &'a mut DynamicArray<T>,
+    ) -> Result<&'a mut T, Failure> {
+        self.change_value(array)
+    }
+    /// Mutates an offset item, as mutable `iterator[offset]`.
+    /// `*cursor.change_value_at(&mut array, 2)? = 3`.
+    pub fn change_value_at<'a>(
+        &self,
+        array: &'a mut DynamicArray<T>,
+        offset: isize,
+    ) -> Result<&'a mut T, Failure> {
+        self.shifted(offset).change_value(array)
+    }
+    /// Returns the mutable operator-> pointer, or null at the captured end.
+    /// `let pointer = cursor.change_value_ptr(&mut array)?;`
+    /// Dereferencing requires the caller to preserve allocation lifetime and exclusive access.
+    pub fn change_value_ptr(&self, array: &mut DynamicArray<T>) -> Result<*mut T, Failure> {
+        self.validate_owner(array)?;
+        if !self.more() {
+            return Ok(std::ptr::null_mut());
+        }
+        Ok(self.change_value(array)? as *mut T)
+    }
     /// Mutates the current item with an exclusive array borrow; `*cursor.change_value(&mut array)? = 3`.
     pub fn change_value<'a>(&self, array: &'a mut DynamicArray<T>) -> Result<&'a mut T, Failure> {
         self.validate_owner(array)?;
