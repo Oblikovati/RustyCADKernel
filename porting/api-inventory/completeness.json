@@ -3,13 +3,13 @@
   "artifacts": {
     "api-crosswalk": {
       "path": "api-crosswalk.json.gz",
-      "sha256": "907645a1e6d8bf7284ed54d1a9a92a46870165384b530a7722ea15171acb1b9f",
-      "uncompressed_sha256": "f8c8da8bb0bd1dcc16f59452f421618cad7daf5ee5efa925d235dc89a5498f47"
+      "sha256": "7c958d1197db94cfc11fd45d8366597cf4dc2bb53ab8bb2fc506abd8856538c1",
+      "uncompressed_sha256": "f505cdd95851407fa21162a2aadc4702fee5e7b9c300a9ff6c4688af3f9e106f"
     },
     "rust-api": {
       "path": "rust-api.json.gz",
-      "sha256": "aa266d6fe329abeef6a44a949b12220f77b47e662592e5c0828673be03ff0aae",
-      "uncompressed_sha256": "d21311ad11943e9914c44200a03a3b247a6eaf396e9ee61564985e2f7a39809e"
+      "sha256": "9f07a0b5a04cda4b5aed5decf4ca80a6fde73b576771f3a740d06210d044f3c1",
+      "uncompressed_sha256": "0968b83b3e7cf8c3a3cc50bbd95bbaeb8ace9e10dbc2434a4ff044e0bb0a88c0"
     }
   },
   "behavioral_equivalence_proven": false,
@@ -27,13 +27,13 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "7cb42a448f8261b5d6c9526f63b19853a35baefee9f4baab9a65b7c91662edc5",
-    "rust": "d21311ad11943e9914c44200a03a3b247a6eaf396e9ee61564985e2f7a39809e"
+    "parity": "ca683bd93a4f7e42bbd3279ee73778ea6bb08c155865cc740fb6ffb146976ed9",
+    "rust": "0968b83b3e7cf8c3a3cc50bbd95bbaeb8ace9e10dbc2434a4ff044e0bb0a88c0"
   },
   "matched_declared_mappings": 23595,
   "observed_cpp_api_declarations": 108622,
-  "parity_api_rows": 29466,
-  "partial_mappings": 1047,
+  "parity_api_rows": 29478,
+  "partial_mappings": 1065,
   "proof_gaps": [
     "cxx_configuration_matrix_incomplete",
     "cxx_declaration_inventory_incomplete",
@@ -53,20 +53,20 @@
     "unsupported_cpp_inventory_records:5224"
   ],
   "rust_capture_inputs": {
-    "cargo_metadata_sha256": "47ea01ba8fccf485338260812de2353ab7d1c10166c701554e77b106d1f7acb6",
+    "cargo_metadata_sha256": "248460e1c41a2b44b8da79f57ec21d0ac7346d2e3b9f0fdf39df336f21100e27",
     "tool_versions": {
       "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
       "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
       "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
     },
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
-    "workspace_file_count": 8195,
-    "workspace_inputs_sha256": "aa2ae2e5c93129f8e757684ba1f5f592edda9d2f10f6c5a7a5acc9931f1c088d",
-    "workspace_revision": "36a03a25349af088e08239418c2b1e2d45249c05"
+    "workspace_file_count": 8246,
+    "workspace_inputs_sha256": "60c7a90e60db1ff8c6b683e5a57573c45ab1aa056c75b07fe1345f6c9dcde8bd",
+    "workspace_revision": "f6189ec4c12c95c2be51d3609568eb59e61572fb"
   },
-  "rust_capture_revision": "36a03a25349af088e08239418c2b1e2d45249c05",
+  "rust_capture_revision": "f6189ec4c12c95c2be51d3609568eb59e61572fb",
   "rust_crates": 20,
-  "rust_public_paths": 63273,
+  "rust_public_paths": 63323,
   "schema_version": 1,
   "tool_implementation_sha256": {
     "api_crosswalk": {
@@ -910,14 +910,14 @@
       "excluded": 219,
       "implemented": 4151,
       "observed_cpp_api": 7324,
-      "parity_rows": 5411,
-      "partial": 498,
-      "unclaimed_cpp_api": 2387,
-      "unresolved": 544,
+      "parity_rows": 5423,
+      "partial": 516,
+      "unclaimed_cpp_api": 2369,
+      "unresolved": 538,
       "upstream_unimplemented": 0
     }
   },
-  "unclaimed_cpp_count": 80801,
-  "unresolved_row_count": 4387,
+  "unclaimed_cpp_count": 80783,
+  "unresolved_row_count": 4381,
   "upstream_unimplemented": 3
 }
