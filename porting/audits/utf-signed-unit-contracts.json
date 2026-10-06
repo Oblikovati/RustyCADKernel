@@ -1,0 +1,236 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "current_frozen_runtime_receipt": "porting/audits/foundation-storage-checkpoint.json",
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "scope": "NCollection_UtfIterator signed UTF-8 input and output dispatch",
+  "source_sha256": {
+    "crates/tkernel/examples/oracle_probe/ncollection/utilities.rs": "04bd7d2acb08fa3580681071a5348778ff4b408e1f9f8c3a1e30b30ff3e2409a",
+    "crates/tkernel/src/ncollection/utf_iterator.rs": "22470fbfc6decd4a708939a13d0ee861a17a3591f64b00fa43279cb63bea2ec1",
+    "crates/tkernel/src/ncollection/utf_iterator/encode.rs": "68ed4a287940fe930856f3a25e51172a0b1ffd3dfd9e6eb9d4203e929c70d6da",
+    "crates/tkernel/src/ncollection/utf_iterator/positions.rs": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+    "crates/tkernel/src/ncollection/utf_iterator/signed_wide.rs": "632f61c30486b9d099d967271f65dd093ce6160537d346562d583a8ce1294c20",
+    "crates/tkernel/src/ncollection/utf_iterator/unit.rs": "e5823e75e911128800703f683cb32a5be156ec0474e45bc5af6e65dffda20fd9",
+    "crates/tkernel/src/ncollection/utf_string/conversion.rs": "5fe6dc47d01099c5177d60511865594a1fa910e2ace1262aae73f03d62e820b1",
+    "crates/tkernel/tests/ncollection_utilities/utf_iterator.rs": "e67b55eac14c10eb3af1855c68b429b49f5836608187ac2c7df628a613ec3611",
+    "crates/tkernel/tests/utf_iterator_method_contracts.rs": "e8a775da3f03865f183a5a1b6ff36adbe4fe87fa8df40191d5b8a4775e4c7a28",
+    "crates/tkernel/tests/utf_signed_unit_contracts.rs": "20958ebfdebc45b92750b7dcbe70ea29096dfdaef56f42e21ff3bd56776e830e",
+    "tools/oracle/tkernel_utf_iterator_method_contracts.cxx": "262a80ffd44d30bbc5b96e2084d5d6e8c2ef765e19737cf68270268afa8fc30f",
+    "tools/oracle/tkernel_utf_iterator_method_contracts.expected": "1baf7d3fc8a9cf5b3ff8686060dec5b8fe76fd0567b346b299dfb5b852ac0554",
+    "tools/oracle/tkernel_utf_signed_units.cxx": "6b14e03c8494ad7e3b186b620ae0f3529b139e4d0a3dabd4a1784f770be57c55",
+    "tools/oracle/tkernel_utf_signed_units.expected": "24e7a64dcbd454c5dd2f58181443205046164d935edb0829a43983605183ff90"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx": "2bfcc2e02561e5c4fc9f0c4c8762602aaebaa020bf2a39b179f951f347a573de",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.lxx": "5b3624e2f8342c8c86d342d61845bcb368c7a289c4f6f9d0f1f3c34281c00e5d"
+  },
+  "runtime": {
+    "new_contract_tests": 8,
+    "strict_provenance_miri_tests": 21,
+    "strict_miri_log_additional_dynamic_tests": 16,
+    "strict_miri_log_additional_wide_tests": 6,
+    "native_oracle_rows": 270,
+    "original_native_tests": 0
+  },
+  "compiler_reachable_candidates": [
+    {
+      "path": "rustycad_tkernel::ncollection::UtfIterator::get_utf8_signed",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "out",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": true,
+                  "type": {
+                    "slice": {
+                      "primitive": "i8"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "Result",
+              "resolved_item_path": "core::result::Result",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "usize"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "UtfBufferError",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::utf_iterator::UtfBufferError",
+                          "args": null
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/utf_iterator.rs",
+      "source_sha256": "22470fbfc6decd4a708939a13d0ee861a17a3591f64b00fa43279cb63bea2ec1",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "UtfIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::utf_iterator::UtfIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'_"
+                  },
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "UtfUnit",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::utf_iterator::unit::UtfUnit",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "98eebf946a551ecdf0d9d0cff0d7de1128481b8c496bcf883c0594c814772474"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::UtfUnit::to_bits",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "u32"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": false,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/utf_iterator/unit.rs",
+      "source_sha256": "e5823e75e911128800703f683cb32a5be156ec0474e45bc5af6e65dffda20fd9",
+      "source_status": null,
+      "declaration_sha256": "2cc769b1c142c4b160a33e3c06993cd79fda7e96be763b185ed8aac5596c7b1e"
+    }
+  ],
+  "artifacts": {
+    "native-oracle": {
+      "path": "porting/runtime-evidence/foundation-storage-utf-native.gz",
+      "sha256": "590e64bd48ae07a2423ea5ec0873261f699e5bb7a538032244315e52047fca8e"
+    },
+    "strict-miri": {
+      "path": "porting/runtime-evidence/foundation-storage-strict-miri.gz",
+      "sha256": "33f5c552e682503b639f0ba517b5c4cb31e8b7e0352db771efe299087640af7a"
+    },
+    "initial-example-compile-failure": {
+      "path": "porting/runtime-evidence/foundation-storage-utf-example-initial.gz",
+      "sha256": "ad0834d1a7430562e3d2e292342323f7ad13ed25e35b485e564ef5ff5feb0764"
+    },
+    "initial-clippy-failure": {
+      "path": "porting/runtime-evidence/foundation-storage-utf-clippy-initial.gz",
+      "sha256": "41de949480e330d81f112c55d6ebec9f7324cb7a519ec72b516cd822ffc97986"
+    }
+  },
+  "behavior": [
+    "i8 reads through the shared UTF-8 decoder with unsigned byte bits, matching native reinterpretation. All 256 leading bytes and padded malformed sequences are probed.",
+    "Signed destinations reuse the encoder and preserve untouched buffer tails for valid, surrogate and out-of-range symbols.",
+    "UtfUnit now requires to_bits instead of Into<u32>; signed-byte conversions preserve storage bits. Existing unsigned unit and UTF string conversion paths are regression-tested.",
+    "Initial validation caught a redundant u32 cast and a generic oracle formatter still requiring Into<u32>. Both were corrected before the frozen full validation."
+  ],
+  "remaining_gaps": [
+    "ChangeBufferHere writable aliases remain unavailable on shared input slices.",
+    "Input slices synthesize zero padding; padding addresses are not dereferenceable storage. Null increment remains a Rust panic instead of undefined native behavior.",
+    "Signed16/32 behavior has subsequent scoped evidence in utf-signed-wide-contracts.json. Arbitrary size-dispatched native types and platform-specific wchar_t ABI configurations remain unproven.",
+    "The checked destination slice API returns a buffer-size error where native output would overrun; invalid pointer domains are excluded."
+  ]
+}

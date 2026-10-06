@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation topology checkpoint integrated and validated on main; full parity remains incomplete.",
+  "integration_status": "Foundation storage checkpoint validated on committed main source; receipt commit recorded separately.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-topology-checkpoint.json",
-    "passed": 14125,
+    "receipt": "porting/audits/foundation-storage-checkpoint.json",
+    "passed": 14259,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -183,5 +183,68 @@
     "new_miri_passed": 39,
     "miri_integration_passed": 89,
     "joined_original_runtime_cases": 1066
+  },
+  "current_draft_checkpoint": {
+    "receipt": "porting/audits/foundation-storage-checkpoint.json",
+    "sha256": "05d26e9123c00044abef5c3b34370a7c723ec1ee35a287b9ce438ee0980dd176",
+    "runtime": {
+      "workspace_passed": 14259,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_groups": 1306,
+      "miri_integration_passes": 442,
+      "new_miri_integration_passes": 136,
+      "strict_provenance_miri_passes": 43,
+      "source_inputs": 9651,
+      "source_inputs_after_run_identical": true,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "workspace --all-targets",
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "joined_original_runtime_cases": 1066,
+      "new_original_runtime_joins": 0
+    },
+    "scoped_method_receipts": [
+      {
+        "path": "porting/audits/list-native-topology-methods.json",
+        "sha256": "f862b159e979305d931dbd7c0c0544ae4c103103d6a731b1f8ef6c184cc53da2"
+      },
+      {
+        "path": "porting/audits/sparse-typed-storage-contracts.json",
+        "sha256": "d1ae1477fef4e7be2244409d16e49c77bbd609570a7b31def87cb8614d25e156"
+      },
+      {
+        "path": "porting/audits/dynamic-array-protected-storage.json",
+        "sha256": "0b26668f14a290f779332747cf46b46ad3b516394a3e42276f1f0ae4072a652c"
+      },
+      {
+        "path": "porting/audits/data-map-node-methods.json",
+        "sha256": "a96963195ba596f45d9f5f42bd9540c21f044286203e00ae75e8046e9500f42c"
+      },
+      {
+        "path": "porting/audits/utf-signed-unit-contracts.json",
+        "sha256": "cdf8897ee910074108dbd0db421527acd031079af032db047966ad1b7a09594b"
+      },
+      {
+        "path": "porting/audits/list-canonical-observer-methods.json",
+        "sha256": "a862c0f03250082175bdcf0b6471c826e454d6a88593ac77448bb1a20fdc7e0c"
+      },
+      {
+        "path": "porting/audits/list-indexed-ownership-methods.json",
+        "sha256": "319b9f66382092b0d049f72c64eb816ba7624a1efbcbaeef12c04c52fe0dfccd"
+      },
+      {
+        "path": "porting/audits/data-map-native-storage-methods.json",
+        "sha256": "6fa81d842968d6ebbe786b8e7df32b37895a6ed1cf93693a189d31e51eb3d3d7"
+      },
+      {
+        "path": "porting/audits/dynamic-array-raw-lifetime.json",
+        "sha256": "cb6bd63ebe2227da5843e844ffc7ed09c50977004108031e57c9a89da97470c7"
+      },
+      {
+        "path": "porting/audits/utf-signed-wide-contracts.json",
+        "sha256": "4b33d96de7e44bda5b2f20f0fb42adc4022a8e351fd77a3a74e3a38f08662771"
+      }
+    ]
   }
 }
