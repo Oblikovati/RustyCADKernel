@@ -1,0 +1,41 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "42d9119950204adef0ea6d432d063e9027efaf25",
+  "focused_rust_passed": 47,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "buffer_adopted_size_contracts",
+    "buffer_pointer_contracts",
+    "ncollection_buffer",
+    "ncollection_allocator_views_behavior",
+    "ncollection_allocators_api_behavior",
+    "allocator_supplemental"
+  ],
+  "strict_workspace_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/buffer-adopted-root-rust.gz",
+      "sha256": "a474a7d2962da0bb72ef182f96de1b30fb249a54f0e16fc0fcc4fd34743d4436"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/buffer-adopted-root-clippy.gz",
+      "sha256": "2d6e6109d0b328a54c0cc3187c9563b1298177e895c36ea2c0ff526e49ea2d19"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/buffer-adopted-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "27c3e06722dc947e37d5dbceea981c9b29cad0bb",
+      "deleted_worktree": "/tmp/rustycad-buffer-adopted-size",
+      "deleted_branch": "port/buffer-adopted-size",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
