@@ -81,7 +81,12 @@ impl SparseArrayBase {
         for number in 0..self.block_slots() {
             unsafe { self.free_block_with(number, &mut destroy) };
         }
-        unsafe { self.release_raw((*self.state.get()).table.cast()) };
+        unsafe {
+            self.release_storage(
+                (*self.state.get()).table.cast(),
+                self.block_slots() * size_of::<*mut c_void>(),
+            )
+        };
         unsafe {
             (*self.state.get()).table = std::ptr::null_mut();
             (*self.state.get()).block_slots = 0;
@@ -100,7 +105,10 @@ impl SparseArrayBase {
         let block = unsafe { self.get_block(address) };
         unsafe { self.destroy_block_objects(block, destroy) };
         unsafe {
-            self.release_raw(address.cast());
+            self.release_storage(
+                address.cast(),
+                SparseArrayBlock::size(self.block_size(), self.item_size()),
+            );
             *(*self.state.get()).table.add(number) = std::ptr::null_mut();
         }
     }
