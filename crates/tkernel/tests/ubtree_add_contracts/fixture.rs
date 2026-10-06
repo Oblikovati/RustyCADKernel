@@ -51,18 +51,10 @@ pub fn partial_case(rejection: &str) {
     let native: Vec<&str> = native_row(1, rejection).split_whitespace().collect();
     let prefix = native[3].strip_suffix("DB100:2,").unwrap();
     let extra = events.strip_prefix(prefix).unwrap();
-    assert_eq!(extra, cleanup_suffix(rejection));
+    assert_eq!(extra, failed_union_cleanup_suffix(rejection));
     assert_eq!(tree.last_node().unwrap().object().0, 1);
     assert_eq!(tree.root().unwrap().bounds().0, 10);
     assert_eq!(allocations(&allocator), 1);
     tree.clear();
     assert_eq!(allocations(&allocator), 0);
-}
-fn cleanup_suffix(rejection: &str) -> &'static str {
-    match rejection {
-        "NB1" => "DB100:1,",
-        "NO2" => "DO0:2,DB0:2,DB100:1,",
-        "AB1" => "DO0:2,DB10:2,DO0:2,DB0:2,DB100:1,",
-        _ => panic!("rejection {rejection}; expected unpublished pair failure"),
-    }
 }

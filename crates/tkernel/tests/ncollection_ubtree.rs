@@ -170,9 +170,9 @@ fn NCollection_EBTreeTest__AddContainsRemove() {
 
     assert!(aTree.is_empty());
 
-    aTree.add(1, TestBnd1D::new(0.0, 2.0));
-    aTree.add(2, TestBnd1D::new(3.0, 5.0));
-    aTree.add(3, TestBnd1D::new(4.0, 6.0));
+    aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aTree.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aTree.add_native_ref(&3, &TestBnd1D::new(4.0, 6.0));
 
     assert!(aTree.contains(&1));
     assert!(aTree.contains(&2));
@@ -180,7 +180,7 @@ fn NCollection_EBTreeTest__AddContainsRemove() {
     assert!(!aTree.contains(&4));
 
     // Duplicate add should return false
-    assert!(!aTree.add(1, TestBnd1D::new(0.0, 2.0)));
+    assert!(!aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0)));
 
     // Remove object 2
     assert!(aTree.remove(&2));
@@ -196,7 +196,7 @@ fn NCollection_EBTreeTest__AddContainsRemove() {
 fn NCollection_EBTreeTest__RemoveRoot() {
     let mut aTree: EBTree<i32, TestBnd1D> = EBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 5.0));
+    aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 5.0));
     assert!(aTree.contains(&1));
 
     // Removing the only element (root) should clear the tree
@@ -208,9 +208,9 @@ fn NCollection_EBTreeTest__RemoveRoot() {
 fn NCollection_EBTreeTest__SelectAfterRemove() {
     let mut aTree: EBTree<i32, TestBnd1D> = EBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 2.0));
-    aTree.add(2, TestBnd1D::new(3.0, 5.0));
-    aTree.add(3, TestBnd1D::new(4.0, 6.0));
+    aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aTree.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aTree.add_native_ref(&3, &TestBnd1D::new(4.0, 6.0));
 
     // Remove object 2
     aTree.remove(&2);
@@ -227,8 +227,8 @@ fn NCollection_EBTreeTest__SelectAfterRemove() {
 fn NCollection_EBTreeTest__FindNode() {
     let mut aTree: EBTree<i32, TestBnd1D> = EBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 2.0));
-    aTree.add(2, TestBnd1D::new(3.0, 5.0));
+    aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aTree.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
 
     let aNode = aTree.find_node(&1).unwrap();
     assert!(aNode.is_leaf());
@@ -239,9 +239,9 @@ fn NCollection_EBTreeTest__FindNode() {
 fn NCollection_EBTreeTest__RemoveAll() {
     let mut aTree: EBTree<i32, TestBnd1D> = EBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 2.0));
-    aTree.add(2, TestBnd1D::new(3.0, 5.0));
-    aTree.add(3, TestBnd1D::new(4.0, 6.0));
+    aTree.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aTree.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aTree.add_native_ref(&3, &TestBnd1D::new(4.0, 6.0));
 
     assert!(aTree.remove(&1));
     assert!(aTree.remove(&2));
@@ -252,9 +252,9 @@ fn NCollection_EBTreeTest__RemoveAll() {
 #[test]
 fn NCollection_EBTreeTest__MoveConstructor() {
     let mut aSrc: EBTree<i32, TestBnd1D> = EBTree::default();
-    aSrc.add(1, TestBnd1D::new(0.0, 2.0));
-    aSrc.add(2, TestBnd1D::new(3.0, 5.0));
-    aSrc.add(3, TestBnd1D::new(4.0, 6.0));
+    aSrc.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aSrc.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aSrc.add_native_ref(&3, &TestBnd1D::new(4.0, 6.0));
 
     let aDst = EBTree::move_from(&mut aSrc);
 
@@ -276,11 +276,11 @@ fn NCollection_EBTreeTest__MoveConstructor() {
 #[test]
 fn NCollection_EBTreeTest__MoveAssignment() {
     let mut aSrc: EBTree<i32, TestBnd1D> = EBTree::default();
-    aSrc.add(1, TestBnd1D::new(0.0, 2.0));
-    aSrc.add(2, TestBnd1D::new(3.0, 5.0));
+    aSrc.add_native_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aSrc.add_native_ref(&2, &TestBnd1D::new(3.0, 5.0));
 
     let mut aDst: EBTree<i32, TestBnd1D> = EBTree::default();
-    aDst.add(10, TestBnd1D::new(100.0, 200.0));
+    aDst.add_native_ref(&10, &TestBnd1D::new(100.0, 200.0));
 
     aDst.move_assign(&mut aSrc);
 
