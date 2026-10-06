@@ -3,8 +3,10 @@ use super::{Array1, ArrayError};
 
 mod append_policy;
 mod borrowed;
+mod constructor_ownership;
 mod copy_construction;
 mod erase_policy;
+mod fill_construction;
 mod insert_policy;
 mod pointers;
 mod relocation;
@@ -259,13 +261,15 @@ impl<T: Clone> LinearVector<T> {
     /// let vector = rustycad_tkernel::ncollection::LinearVector::with_value_ref(3, &fill);
     /// assert_eq!(vector.as_slice(), &[42, 42, 42]);
     /// ```
+    /// A clone panic retains the native abandoned allocation and completed copies;
+    /// no container destructor runs, and those payloads can remain leaked.
     pub fn with_value_ref(size: usize, value: &T) -> Self {
-        let mut vector = Self::default();
-        vector.reserve(size);
-        // A failed native outer constructor leaks its allocation; that separate ownership
-        // policy is not represented by this safe constructor's local Vec cleanup.
-        vector.elements.resize_with(size, || value.clone());
-        vector
+        Self::construct_fill(
+            size,
+            value,
+            #[cfg(test)]
+            |_| {},
+        )
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
     /// Common-slot assignments remain observable if copying later fails. With sufficient
