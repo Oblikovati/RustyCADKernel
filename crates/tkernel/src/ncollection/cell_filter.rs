@@ -71,7 +71,7 @@ impl<I: CellGeometry> CellFilter<I> {
     /// Add an independent copy to every covered cell; `filter.add_range(&target, &min, &max)`.
     pub fn add_range(&mut self, target: &I::CellTarget, min: &I::CellPoint, max: &I::CellPoint) {
         for index in self.range(min, max) {
-            self.add_cell(CellIndex::from_slice(&index), target);
+            self.add_cell(index, target);
         }
     }
     /// Remove all equal targets in one cell; `filter.remove(&target, &point)`.
@@ -83,9 +83,7 @@ impl<I: CellGeometry> CellFilter<I> {
     /// Remove equal targets throughout an inclusive range; `filter.remove_range(&target, &min, &max)`.
     pub fn remove_range(&mut self, target: &I::CellTarget, min: &I::CellPoint, max: &I::CellPoint) {
         for index in self.range(min, max) {
-            self.retain_cell(&CellIndex::from_slice(&index), |stored| {
-                !I::targets_equal(stored, target)
-            });
+            self.retain_cell(&index, |stored| !I::targets_equal(stored, target));
         }
     }
     fn indices(&self, point: &I::CellPoint) -> CellIndex {
@@ -95,11 +93,7 @@ impl<I: CellGeometry> CellFilter<I> {
         // Native iterateAdd/Remove/Inspect start at axis myDim - 1; axes beyond the cell
         // index length would read past the native LocalArray, so they are clamped.
         let axes: usize = self.dimension.min(self.sizes.len());
-        CellIndices::new(
-            self.indices(min).as_slice().to_vec(),
-            self.indices(max).as_slice().to_vec(),
-            axes,
-        )
+        CellIndices::new(self.indices(min), self.indices(max), axes)
     }
     fn add_cell(&mut self, index: CellIndex, target: &I::CellTarget) {
         let resource: BaseAllocator = self.resource.clone();
@@ -128,7 +122,7 @@ impl<I: CellInspector> CellFilter<I> {
     /// Visit cells with axis zero varying fastest; `filter.inspect_range(&min, &max, &mut inspector)`.
     pub fn inspect_range(&mut self, min: &I::Point, max: &I::Point, inspector: &mut I) {
         for index in self.range(min, max) {
-            self.retain_cell(&CellIndex::from_slice(&index), |stored| {
+            self.retain_cell(&index, |stored| {
                 inspector.inspect(stored) == CellAction::Keep
             });
         }
@@ -143,3 +137,6 @@ mod size_storage_tests;
 
 #[cfg(test)]
 mod index_storage_tests;
+
+#[cfg(test)]
+mod range_storage_tests;

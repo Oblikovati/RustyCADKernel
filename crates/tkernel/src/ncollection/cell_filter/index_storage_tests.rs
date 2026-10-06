@@ -1,7 +1,7 @@
 //! Native Cell constructors/hash oracle, exercised through the filter's actual key storage.
 use super::{CellFilter, CellGeometry, CellHash, CellIndex};
 use crate::ncollection::{Array1, HashPolicy};
-struct IndexGeometry;
+pub(super) struct IndexGeometry;
 impl CellGeometry for IndexGeometry {
     type CellTarget = i32;
     type CellPoint = Vec<f64>;
@@ -13,7 +13,7 @@ impl CellGeometry for IndexGeometry {
         first == second
     }
 }
-fn inline_storage(index: &CellIndex) -> bool {
+pub(super) fn inline_storage(index: &CellIndex) -> bool {
     let begin = std::ptr::from_ref(index).addr();
     let buffer = index.as_slice().as_ptr().addr();
     (begin..begin + std::mem::size_of::<CellIndex>()).contains(&buffer)

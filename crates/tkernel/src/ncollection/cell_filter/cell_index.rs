@@ -20,6 +20,9 @@ impl CellIndex {
         index.0.as_mut_slice().copy_from_slice(source);
         index
     }
+    pub(super) fn as_mut_slice(&mut self) -> &mut [i32] {
+        self.0.as_mut_slice()
+    }
     pub(super) fn as_slice(&self) -> &[i32] {
         self.0.as_slice()
     }
@@ -27,5 +30,12 @@ impl CellIndex {
 impl fmt::Debug for CellIndex {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         self.as_slice().fmt(formatter)
+    }
+}
+
+impl Clone for CellIndex {
+    fn clone(&self) -> Self {
+        // Native Cell(CellIndex) copies coordinates into its own ten-inline-element storage.
+        Self::from_slice(self.as_slice())
     }
 }

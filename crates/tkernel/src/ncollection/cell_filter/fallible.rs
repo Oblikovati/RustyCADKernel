@@ -17,7 +17,7 @@ impl<I: CellGeometry> CellFilter<I> {
         mut inspect: impl FnMut(&I::CellTarget) -> Result<CellAction, E>,
     ) -> Result<(), E> {
         for index in self.range(min, max) {
-            self.try_inspect_with_cell(&CellIndex::from_slice(&index), &mut inspect)?;
+            self.try_inspect_with_cell(&index, &mut inspect)?;
         }
         Ok(())
     }
