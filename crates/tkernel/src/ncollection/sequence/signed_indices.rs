@@ -98,3 +98,24 @@ impl<T: Clone> Sequence<T> {
         self.insert_sequence_after(unsigned_sequence_index("InsertAfter", index)?, source)
     }
 }
+
+impl<T: Clone> Sequence<T> {
+    /// Copies into the signed one-based position; `sequence.set_value_ref_signed(1, &item)?`.
+    pub fn set_value_ref_signed(&mut self, index: i32, value: &T) -> Result<(), Failure> {
+        self.set_value_ref(unsigned_sequence_index("SetValue", index)?, value)
+    }
+
+    /// Assigns indexed items with signed checks and explicit self-assignment behavior.
+    /// Example: `sequence.set_value_from_index_with_signed(1, 2, |_| {})?`.
+    pub fn set_value_from_index_with_signed(
+        &mut self,
+        destination: i32,
+        source: i32,
+        assign_self: impl FnOnce(&mut T),
+    ) -> Result<(), Failure> {
+        let source = unsigned_sequence_index("Value", source)?;
+        self.value(source)?;
+        let destination = unsigned_sequence_index("SetValue", destination)?;
+        self.set_value_from_index_with(destination, source, assign_self)
+    }
+}
