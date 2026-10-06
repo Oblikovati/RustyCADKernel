@@ -102,6 +102,7 @@ pub use base_map::{
     IndexedCursorSourceMut, MapLinkNode,
 };
 mod data_map_node;
+mod destructor_unwind;
 pub use data_map_node::{DataMapNode, DataMapNodeOwner};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};

@@ -1,7 +1,7 @@
 //! Copy and move assignment preserve OCCT return identity and allocator rules.
 use super::{DataMap, Debug, HashPolicy};
 
-impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> DataMap<K, V, H> {
+impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> DataMap<K, V, H> {
     /// Copies bindings while preserving the destination hasher and allocator; `map.assign(&source)`.
     pub fn assign(&mut self, source: &Self) {
         self.assign_returning(source);
@@ -33,8 +33,8 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for DataMap<K, 
     fn clone(&self) -> Self {
         let mut copy = Self::with_allocator(
             self.hasher.clone(),
-            self.bucket_count,
-            self.resource.clone(),
+            self.bucket_count(),
+            self.allocator().clone(),
         );
         copy.assign(self);
         copy

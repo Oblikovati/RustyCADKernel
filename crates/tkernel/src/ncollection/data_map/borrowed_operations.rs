@@ -24,12 +24,12 @@ impl<K: Debug + Clone, V, H: HashPolicy<K>> DataMap<K, V, H> {
         construct: impl FnOnce() -> V,
         replace: bool,
     ) -> (bool, &mut V) {
-        if self.is_empty() || self.count > self.bucket_count {
-            self.resize(self.count);
+        if self.is_empty() || self.len() > self.bucket_count() {
+            self.resize(self.len());
         }
         let (bucket, index) = self.lookup_with_bucket(key);
         if let Some(index) = index {
-            let value = &mut self.buckets[bucket][index].value;
+            let value = unsafe { self.storage.node_mut(index).change_value() };
             if replace {
                 *value = construct();
             }

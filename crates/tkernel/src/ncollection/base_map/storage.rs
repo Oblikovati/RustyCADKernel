@@ -1,4 +1,4 @@
-//! Extension storage for native-style custom maps; existing safe maps keep their own layouts.
+//! Native bucket ownership for typed DataMap and extension maps; other map families migrate separately.
 #![allow(unsafe_code)]
 use super::{BaseMap, BaseMapResize, MapLinkNode, bucket_table::BucketTable};
 use crate::{ncollection::BaseAllocator, standard::Failure};
