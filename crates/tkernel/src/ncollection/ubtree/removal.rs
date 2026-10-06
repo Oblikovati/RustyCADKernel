@@ -30,23 +30,23 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         target.object.clone_from(&source.object);
         target.children = source.children;
     }
-    pub(in crate::ncollection) fn remove_leaf(&mut self, index: usize) -> Option<usize> {
-        let Some(parent) = self.node(index).parent else {
-            self.clear();
-            return None;
-        };
-        let first: usize = self.node(parent).children.unwrap()[0];
-        self.kill(parent, if first == index { 0 } else { 1 });
-        self.update_ancestors(parent);
-        self.node(parent).is_leaf().then_some(parent)
-    }
-    fn update_ancestors(&mut self, mut index: usize) {
+    pub(in crate::ncollection) fn update_ancestors(&mut self, mut index: usize) {
         while let Some(parent) = self.node(index).parent {
-            let [first, second] = self.node(parent).children.unwrap();
-            let mut bounds: B = self.node(first).bounds.clone();
-            bounds.add(&self.node(second).bounds);
-            self.node_mut(parent).bounds = bounds;
+            self.assign_child_union(parent);
             index = parent;
         }
+    }
+    fn assign_child_union(&mut self, parent: usize) {
+        let [first, second] = self.node(parent).children.unwrap();
+        let [target, left, right] = self
+            .nodes
+            .get_disjoint_mut([parent, first, second])
+            .unwrap();
+        let target = target.as_deref_mut().unwrap();
+        let left = left.as_deref().unwrap();
+        let right = right.as_deref().unwrap();
+        // OCCT 3d097a0328 Remove assigns into the retained bound before expanding it.
+        target.bounds.clone_from(&left.bounds);
+        target.bounds.add(&right.bounds);
     }
 }
