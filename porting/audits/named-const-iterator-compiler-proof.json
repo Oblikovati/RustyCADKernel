@@ -1,0 +1,1172 @@
+{
+  "schema": "rustycad.compiler-inventory-fix.v1",
+  "base_revision": "4b6d9899ad2df0be2ec54cf052c3552083929be1",
+  "scope": "Preserve named const generic arguments in compiler trait identities.",
+  "fixture": "tools/tests/fixtures/rustdoc-iterator-const-arguments/capture.json",
+  "source_sha256": {
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "tools/rustdoc_bool_foreign_impls.py": "5068daddc044f3c492e69a069f2f02d79597944ce72e66411afcb6a411121a13",
+    "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
+    "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
+    "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
+    "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
+    "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
+    "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
+    "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
+    "tools/rustdoc_type_aliases.py": "0fab1864cda95503bfe46b0f0881052c43273983b3f484ae0590ca0382fc9fb0",
+    "tools/tests/test_rustdoc_named_const_arguments.py": "7f8709df6abd0d9bb0444ad13701900e5f8ae316d6e8836d6b96588a52ec5649",
+    "tools/tests/fixtures/rustdoc-iterator-const-arguments/capture.json": "436c7c4fceb4be7e3efe83960bf6816f5843c63727462f7461276b56b76f2ebc",
+    "tools/tests/fixtures/rustdoc-iterator-const-arguments/lib.rs": "da64e158836738dda244098cea355e3c1f2ed9e7a227b948083ccf5c652366d7",
+    "tools/tests/fixtures/rustdoc-iterator-const-arguments/rustdoc-61.json": "02cde84fe96f11460315523b6021f03147130c6f7ea5103e6f814df74e85c213"
+  },
+  "compiler_input": {
+    "path": "porting/runtime-evidence/foundation-generic-compiler-json.gz",
+    "sha256": "bd98085a3d6407a895ff8124e7bf8f98e813ebd14b6111324487d2d13b18bb88"
+  },
+  "runtime": {
+    "tooling_tests_passed": 701,
+    "tooling_exit": 0,
+    "new_targeted_tests": 4
+  },
+  "compiler_declarations_before": 8813,
+  "compiler_declarations_after": 8819,
+  "newly_reachable_declarations": [
+    {
+      "path": "rustycad_tkernel::ncollection::DynamicArrayIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator<T, O>>>::eq",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "DynamicArrayIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs",
+      "source_sha256": "7821f8f19ec34efdd6268c0154742f308a6ba66501702e079b635a518225e6d7",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "DynamicArrayIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "O",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialEq",
+          "resolved_item_path": "core::cmp::PartialEq",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "DynamicArrayIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "95c20116be2c7d68852020325271ab8b947198a1a65d8eeea53a06598c8032b2"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::DynamicArrayIterator::<core::cmp::PartialOrd<rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator<T, O>>>::partial_cmp",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "DynamicArrayIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "Option",
+              "resolved_item_path": "core::option::Option",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "std::cmp::Ordering",
+                          "resolved_item_path": "core::cmp::Ordering",
+                          "args": null
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs",
+      "source_sha256": "7821f8f19ec34efdd6268c0154742f308a6ba66501702e079b635a518225e6d7",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "DynamicArrayIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "O",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialOrd",
+          "resolved_item_path": "core::cmp::PartialOrd",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "DynamicArrayIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::legacy_cursor::DynamicArrayIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "9f929ec02de802726d6ce49a946196968cfed11610089a5fc4f522f262530766"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator<N, O>>>::eq",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+      "source_sha256": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicListNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "O",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialEq",
+          "resolved_item_path": "core::cmp::PartialEq",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "O",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "9cb1d8bfb40a15717ad090f28b15271cd9d3ab5e98da0ee9744b0a023d891247"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseListIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::list::base_iterator::BaseListIterator<T, OTHER>>>::eq",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::list::base_iterator::BaseListIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/list/base_iterator.rs",
+      "source_sha256": "ec61ac2efccccc8518267a0817967f60482c96bf27c3c872326a3a61dd1a409e",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseListIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::list::base_iterator::BaseListIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "OTHER",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialEq",
+          "resolved_item_path": "core::cmp::PartialEq",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseListIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::list::base_iterator::BaseListIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "791cff8776139902d2c2c97ddd374ad30af0c55aab2aee4f79fc7923dd1820a9"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator<N, OTHER>>>::eq",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseSequenceBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/sequence/basic_iterator.rs",
+      "source_sha256": "e7bb35786564e05625b42ee168dc2f2560473fbd8253a801b0bba1e0b471141c",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseSequenceBasicIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "N"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "N",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "BasicSequenceNode",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNode",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "OTHER",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialEq",
+          "resolved_item_path": "core::cmp::PartialEq",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseSequenceBasicIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "N"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "cef5e629f031fd07b9d44ffb29d5ca47434f4b83b58be6f165b94f41478793da"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::BaseSequenceIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::sequence::base_iterator::BaseSequenceIterator<T, OTHER>>>::eq",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "other",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseSequenceIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::sequence::base_iterator::BaseSequenceIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": {
+            "primitive": "bool"
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/sequence/base_iterator.rs",
+      "source_sha256": "f2fa5fd6960128eccfd1631aff1f5f0c74a70be98ddf47f4b8f6a2d1dbe3b6e8",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "BaseSequenceIterator",
+            "resolved_item_path": "rustycad_tkernel::ncollection::sequence::base_iterator::BaseSequenceIterator",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  },
+                  {
+                    "const": {
+                      "expr": "M",
+                      "value": null,
+                      "is_literal": false
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "M",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            },
+            {
+              "name": "OTHER",
+              "kind": {
+                "const": {
+                  "type": {
+                    "primitive": "bool"
+                  },
+                  "default": null
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "PartialEq",
+          "resolved_item_path": "core::cmp::PartialEq",
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "path": "BaseSequenceIterator",
+                      "resolved_item_path": "rustycad_tkernel::ncollection::sequence::base_iterator::BaseSequenceIterator",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            },
+                            {
+                              "const": {
+                                "expr": "OTHER",
+                                "value": null,
+                                "is_literal": false
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          }
+        }
+      },
+      "declaration_sha256": "39bb7dab7b43668c4f3e5044122ec066abdd1fe5d08de9b17abb8d4e29c02e52"
+    }
+  ],
+  "artifacts": {
+    "tooling-tests": {
+      "path": "porting/runtime-evidence/named-const-tooling-tests.gz",
+      "sha256": "c9bcac567049000908447194bdf9ef820e9df68a7e434886ab989b0200ecb666"
+    },
+    "targeted-tests": {
+      "path": "porting/runtime-evidence/named-const-targeted-tests.gz",
+      "sha256": "e8d5e5864b81334e3d116c66a51a76947876d22367cd16b37941ab7e2c31c1c6"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/named-const-tkernel-normalized.gz",
+      "sha256": "42fe2a0574e486992868f54a5d258438fdf52bf925995477ccb8cf5a825471f0"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/named-const-source.tar.gz",
+      "sha256": "ae36f6cd798fc1bc709cfc821f388b029b071558d20373ee2519c01583f457a4"
+    }
+  },
+  "limitations": [
+    "Named const arguments only; literals, unknown shapes and expressions remain explicitly unresolved.",
+    "This reprocesses the immutable compiler capture from the integrated generic checkpoint; no Rust kernel source changes.",
+    "Six reachable comparison bodies are inventory evidence, not six completed native APIs.",
+    "Published whole-OCCT API/test inventory has not been regenerated."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0
+}

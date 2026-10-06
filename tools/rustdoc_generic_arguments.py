@@ -47,7 +47,24 @@ def display_generic_argument(
     if not isinstance(value, dict) or len(value) != 1:
         return None
     kind, body = next(iter(value.items()))
+    if kind == "const":
+        return display_named_const_argument(body)
     return display_type(body, paths) if kind == "type" else None
+
+
+def display_named_const_argument(value: JSONValue) -> str | None:
+    """Keep a compiler-captured const name; `display_named_const_argument(body)`."""
+    if not isinstance(value, dict) or set(value) != {"expr", "value", "is_literal"}:
+        return None
+    expression = value["expr"]
+    if value["is_literal"] is not False or value["value"] is not None:
+        return None
+    if not isinstance(expression, str) or expression == "_":
+        return None
+    # Preserve the compiler's generic identity; never evaluate or erase expressions.
+    if re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*", expression) is None:
+        return None
+    return expression
 
 
 def display_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
