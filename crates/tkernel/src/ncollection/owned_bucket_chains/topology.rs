@@ -1,9 +1,6 @@
 //! Head publication and removal update the one native table/count, without an ownership registry.
 use super::{BaseMap, CanonicalMapNode, MapLinkNode, OwnedBucketChains};
-use crate::ncollection::{
-    destructor_unwind::DeferredDestructorPanic, node_owner::NativeNodeOwner,
-    node_release::release_typed_node,
-};
+use crate::ncollection::{destructor_unwind::DeferredDestructorPanic, node_owner::NativeNodeOwner};
 impl<N: CanonicalMapNode> OwnedBucketChains<N> {
     pub(in crate::ncollection) fn allocate_node(
         &mut self,
@@ -31,7 +28,7 @@ impl<N: CanonicalMapNode> OwnedBucketChains<N> {
         self.base.decrement();
         let next = unsafe { (*target).next() };
         self.unlink(bucket, previous, next);
-        unsafe { release_typed_node(target.cast::<N>(), self.base.allocator()) };
+        unsafe { N::release_owned(target.cast::<N>(), self.base.allocator()) };
     }
     fn unlink(&mut self, bucket: usize, previous: *mut MapLinkNode, next: *mut MapLinkNode) {
         if previous.is_null() {
@@ -46,7 +43,7 @@ impl<N: CanonicalMapNode> OwnedBucketChains<N> {
         unsafe {
             self.base.destroy(
                 |node, allocator| {
-                    panics.capture(|| release_typed_node(node.cast::<N>(), allocator));
+                    panics.capture(|| N::release_owned(node.cast::<N>(), allocator));
                 },
                 release,
             )

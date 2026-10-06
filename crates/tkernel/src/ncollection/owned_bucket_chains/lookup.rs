@@ -19,10 +19,22 @@ impl<N: CanonicalMapNode> OwnedBucketChains<N> {
         key: &N::Key,
         hasher: &impl HashPolicy<N::Key>,
     ) -> (usize, Option<*mut MapLinkNode>) {
-        let bucket = hasher.hash(key) % self.base.nb_buckets() + 1;
+        self.lookup_with_bucket_by(
+            key,
+            |key| hasher.hash(key),
+            |stored, key| hasher.equal(stored, key),
+        )
+    }
+    pub(in crate::ncollection) fn lookup_with_bucket_by<Q>(
+        &self,
+        key: &Q,
+        hash: impl FnOnce(&Q) -> usize,
+        equal: impl Fn(&N::Key, &Q) -> bool,
+    ) -> (usize, Option<*mut MapLinkNode>) {
+        let bucket = hash(key) % self.base.nb_buckets() + 1;
         let mut node = self.base.bucket_slots()[bucket];
         while !node.is_null() {
-            if hasher.equal(unsafe { self.node(node).map_key() }, key) {
+            if equal(unsafe { self.node(node).map_key() }, key) {
                 return (bucket, Some(node));
             }
             node = unsafe { (*node).next() };

@@ -1,5 +1,7 @@
 //! Spatial hash cells with native truncation and newest-first inspection.
-use super::{Array1, BaseAllocator, DataMap, HashPolicy, List};
+use super::{Array1, BaseAllocator, HashPolicy};
+mod cell_map;
+use cell_map::CellMap;
 use std::marker::PhantomData;
 mod cell_index;
 mod fallible;
@@ -55,7 +57,7 @@ impl HashPolicy<CellIndex> for CellHash {
 pub struct CellFilter<I: CellGeometry> {
     dimension: usize,
     sizes: Array1<'static, f64>,
-    cells: DataMap<CellIndex, List<I::CellTarget>, CellHash>,
+    cells: CellMap<I::CellTarget>,
     resource: BaseAllocator,
     inspector: PhantomData<I>,
 }
@@ -92,10 +94,7 @@ impl<I: CellGeometry> CellFilter<I> {
         CellIndices::new(self.indices(min), self.indices(max), axes)
     }
     fn add_cell(&mut self, index: CellIndex, target: &I::CellTarget) {
-        let resource: BaseAllocator = self.resource.clone();
-        self.cells
-            .try_emplaced(index, || List::with_allocator(resource))
-            .prepend_with(|| target.clone());
+        self.cells.add(&index, target);
     }
     fn retain_cell(&mut self, index: &CellIndex, mut keep: impl FnMut(&I::CellTarget) -> bool) {
         let result = self.try_retain_cell(index, |stored| {
