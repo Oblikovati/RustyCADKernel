@@ -301,3 +301,6 @@ super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>,super::OrderedMapNode
 super::ordered_table::ordered_policy_construction!(OrderedMap<K,H>, H);
 
 super::ordered_table::ordered_policy_exchange!(OrderedMap<K,H>, H);
+
+#[path = "ordered_map/construction.rs"]
+mod construction;
