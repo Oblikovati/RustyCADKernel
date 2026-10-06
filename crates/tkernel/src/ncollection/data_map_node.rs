@@ -27,7 +27,7 @@ impl<K, V> DataMapNode<K, V> {
     pub fn construct(key: K, successor: *mut MapLinkNode, construct: impl FnOnce() -> V) -> Self {
         Self::construct_parts(successor, || key, construct)
     }
-    pub(crate) fn construct_parts(
+    pub(super) fn construct_parts(
         successor: *mut MapLinkNode,
         construct_key: impl FnOnce() -> K,
         construct_value: impl FnOnce() -> V,
@@ -42,9 +42,6 @@ impl<K, V> DataMapNode<K, V> {
     }
     pub(crate) fn key_value_mut(&mut self) -> (&K, &mut V) {
         (&self.key, &mut self.value)
-    }
-    pub(crate) fn key_mut(&mut self) -> &mut K {
-        &mut self.key
     }
     /// Borrows the native immutable key; `assert_eq!(node.key(), &1)`.
     pub fn key(&self) -> &K {
