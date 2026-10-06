@@ -3,6 +3,7 @@ use super::{Array1, ArrayError};
 
 mod borrowed;
 mod erase_policy;
+mod insert_policy;
 mod pointers;
 mod relocation;
 mod trivial_assignment;
@@ -149,6 +150,8 @@ impl<T> LinearVector<T> {
         Ok(())
     }
     /// Inserts before an index, including the end; `vector.insert_before(0,42)?`.
+    /// Rust ownership shifts omit native element move callbacks; explicit constructor policies
+    /// are available through the unsafe `insert_before_with_constructors` adapter.
     pub fn insert_before(&mut self, index: usize, value: T) -> Result<(), ArrayError> {
         if index > self.len() {
             return Err(self.index_error(index));

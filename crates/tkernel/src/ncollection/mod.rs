@@ -13,6 +13,7 @@ mod generic_transient;
 mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
+mod raw_element_lifetime;
 pub use linear_vector::LinearVector;
 mod vector_component;
 pub use vector_component::{

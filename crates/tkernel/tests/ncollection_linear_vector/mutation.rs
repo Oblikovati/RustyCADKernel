@@ -116,6 +116,7 @@ fn NCollection_LinearVectorTest__TrivialTypeGrowth() {
     }
 }
 #[test]
+#[allow(unsafe_code)]
 fn NCollection_LinearVectorTest__NonTrivialType() {
     let vector = strings(&["hello", "world", "test"]);
     same_values(&vector, &["hello".into(), "world".into(), "test".into()]);
@@ -129,7 +130,12 @@ fn NCollection_LinearVectorTest__NonTrivialType() {
     assert!(copy.is_empty());
     moved.erase(1).unwrap();
     same_values(&moved, &["hello".into(), "test".into()]);
-    moved.insert_before(1, "inserted".into()).unwrap();
+    let inserted = String::from("inserted");
+    // SAFETY: String destruction, taking owned buffers and moving the donor cannot unwind.
+    unsafe {
+        moved.insert_before_with_constructors(1, std::mem::take, std::mem::take, || inserted)
+            .unwrap();
+    }
     assert_eq!(moved.len(), 3);
     assert_eq!(moved[1], "inserted");
 }
