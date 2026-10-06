@@ -1,5 +1,5 @@
 //! Native BaseList current/previous state without dereferencing detached addresses.
-use super::{BaseListIterator, List, ListCursor, ListIterMut, Node};
+use super::{BaseListIterator, List, ListCursor, ListIterMut};
 use crate::standard::Failure;
 
 impl PartialEq for ListCursor {
@@ -20,10 +20,7 @@ impl ListCursor {
     /// Copies a mutable standard iterator's two links; `ListCursor::from_mut_iterator(&iterator)`.
     pub fn from_mut_iterator<T>(iterator: &ListIterMut<'_, T>) -> Self {
         Self {
-            address: iterator
-                .next
-                .as_deref()
-                .map(|node| node as *const Node<T> as usize),
+            address: super::address(iterator.next),
             previous: iterator.previous,
         }
     }

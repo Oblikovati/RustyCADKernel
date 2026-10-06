@@ -9,7 +9,7 @@ pub type ListLinkNode = MapLinkNode;
 #[repr(C)]
 pub struct ListValueNode<T> {
     link: ListLinkNode,
-    value: T,
+    pub(super) value: T,
 }
 impl<T> ListValueNode<T> {
     /// Stores an owned value and successor; `ListValueNode::new(7, next)`.

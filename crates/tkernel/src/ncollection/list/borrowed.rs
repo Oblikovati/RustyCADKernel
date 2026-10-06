@@ -21,9 +21,6 @@ impl<T: Clone> List<T> {
     }
     /// Copies and points the cursor at the appended node; `list.append_at_ref(&value, &mut cursor)`.
     pub fn append_at_ref(&mut self, value: &T, cursor: &mut ListCursor) {
-        let previous = self.tail_address();
-        self.append_ref(value);
-        cursor.address = self.tail_address();
-        cursor.previous = previous;
+        self.append_constructed_at(cursor, || value.clone());
     }
 }

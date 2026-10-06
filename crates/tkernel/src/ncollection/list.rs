@@ -1,17 +1,17 @@
 //! Singly linked OCCT lists with allocator-owned stable nodes.
-use super::{AllocatedBox, BaseAllocator};
+use super::{BaseAllocator, BaseListRawIterator, BaseListStorage, ListLinkNode, ListValueNode};
 use crate::standard::Failure;
-type Link<T> = Option<AllocatedBox<Node<T>>>;
-struct Node<T> {
-    value: T,
-    next: Link<T>,
-}
+use owner::ListNodeOwner;
+use std::marker::PhantomData;
 /// Allocator-owned list; `List::from_iter_in([1,2], BaseAllocator::common())`.
 pub struct List<T> {
-    resource: BaseAllocator,
-    head: Link<T>,
-    count: usize,
+    base: BaseListStorage,
+    owners: Vec<ListNodeOwner<T>>,
 }
+// SAFETY: base links are inert ownership metadata; shared access never mutates them.
+// Owners enforce the same item Send/Sync bounds as the former boxed chain.
+unsafe impl<T: Send> Send for List<T> {}
+unsafe impl<T: Sync> Sync for List<T> {}
 /// Detached node position, usable across insertions; `list.cursor().value(&list)`.
 ///
 /// `ListCursor::default()` is the end position, like a default `NCollection_List::Iterator`.
@@ -22,21 +22,22 @@ pub struct ListCursor {
 }
 /// Forward shared iterator; `list.iter()`.
 pub struct ListIter<'a, T> {
-    next: Option<&'a Node<T>>,
+    next: *mut ListLinkNode,
+    item: PhantomData<&'a T>,
     previous: Option<usize>,
 }
 /// Forward exclusive iterator; `list.iter_mut()`.
 pub struct ListIterMut<'a, T> {
-    next: Option<&'a mut Node<T>>,
+    next: *mut ListLinkNode,
+    item: PhantomData<&'a mut T>,
     previous: Option<usize>,
 }
 impl<T> List<T> {
     /// Creates an empty list with the chosen resource; `List::<i32>::with_allocator(arena)`.
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
-            resource,
-            head: None,
-            count: 0,
+            base: BaseListStorage::new(Some(resource)),
+            owners: Vec::new(),
         }
     }
     /// Constructs items in a selected resource; `List::from_iter_in([1,2], arena)`.
@@ -49,15 +50,15 @@ impl<T> List<T> {
     }
     /// Returns allocator identity; `list.allocator() == &arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        &self.resource
+        self.base.allocator()
     }
     /// Returns the element count; `list.len() == 2`.
     pub fn len(&self) -> usize {
-        self.count
+        self.base.size()
     }
     /// Returns OCCT's signed extent; `list.extent() == 2`.
     pub fn extent(&self) -> i32 {
-        self.count as i32
+        self.base.extent()
     }
     /// Returns OCCT's signed length, an alias of the extent; `list.length() == 2`.
     pub fn length(&self) -> i32 {
@@ -65,42 +66,44 @@ impl<T> List<T> {
     }
     /// Checks whether the chain is empty; `list.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.count == 0
+        self.base.is_empty()
     }
     /// Borrows the head, `None` where OCCT raises NoSuchObject; `list.first() == Some(&1)`.
     pub fn first(&self) -> Option<&T> {
-        self.head.as_ref().map(|node| &node.value)
+        self.endpoint_ref(self.base.first)
     }
     /// Borrows the head for mutation; `*list.first_mut().unwrap() = 42`.
     pub fn first_mut(&mut self) -> Option<&mut T> {
-        self.head.as_mut().map(|node| &mut node.value)
+        self.endpoint_mut(self.base.first)
     }
     /// Borrows the final element; `list.last() == Some(&2)`.
     pub fn last(&self) -> Option<&T> {
-        self.iter().last()
+        self.endpoint_ref(self.base.last)
     }
     /// Borrows the final element for mutation; `*list.last_mut().unwrap() = 42`.
     pub fn last_mut(&mut self) -> Option<&mut T> {
-        self.iter_mut().last()
+        self.endpoint_mut(self.base.last)
     }
     /// Borrows all elements in chain order; `list.iter().count()`.
     pub fn iter(&self) -> ListIter<'_, T> {
         ListIter {
-            next: self.head.as_deref(),
+            next: self.base.first,
+            item: PhantomData,
             previous: None,
         }
     }
     /// Borrows exclusive elements in chain order; `list.iter_mut().for_each(|v| *v += 1)`.
     pub fn iter_mut(&mut self) -> ListIterMut<'_, T> {
         ListIterMut {
-            next: self.head.as_deref_mut(),
+            next: self.base.first,
+            item: PhantomData,
             previous: None,
         }
     }
     /// Returns a stable position at the head; `let mut cursor = list.cursor()`.
     pub fn cursor(&self) -> ListCursor {
         ListCursor {
-            address: address(&self.head),
+            address: address(self.base.first),
             previous: None,
         }
     }
@@ -114,12 +117,11 @@ impl<T> List<T> {
     }
     /// Allocates before constructing the head value, preserving native placement-new order; `list.prepend_with(|| 42)`.
     pub fn prepend_with(&mut self, construct: impl FnOnce() -> T) -> &mut T {
-        let node = self.resource.allocate_value_with(|| Node {
-            value: construct(),
-            next: self.head.take(),
-        });
-        self.count += 1;
-        &mut self.head.insert(node).value
+        let owner = ListNodeOwner::construct(self.allocator(), construct);
+        let node = owner.link;
+        self.owners.push(owner);
+        unsafe { self.base.prepend_node(node) };
+        unsafe { owner::item_mut(node) }
     }
     /// Keeps selected nodes without reallocating survivors; `list.retain(|value| *value > 0)`.
     pub fn retain(&mut self, mut keep: impl FnMut(&T) -> bool) {
@@ -131,59 +133,52 @@ impl<T> List<T> {
     }
     /// Retain until the first failure, preserving earlier removals; `list.try_retain(|value| Ok::<bool, ()>(*value > 0))?`.
     pub fn try_retain<E>(&mut self, mut keep: impl FnMut(&T) -> Result<bool, E>) -> Result<(), E> {
-        let mut link = &mut self.head;
-        while let Some(node) = link.as_ref() {
-            if keep(&node.value)? {
-                link = &mut link.as_mut().unwrap().next;
+        let mut cursor = self.cursor();
+        while let Some(value) = cursor.value(self) {
+            if keep(value)? {
+                cursor.next(self);
                 continue;
             }
-            let mut removed = link.take().unwrap();
-            *link = removed.next.take();
-            self.count -= 1;
+            self.remove(&mut cursor)
+                .expect("retain cursor remains in its live list");
         }
         Ok(())
     }
     /// Removes the head, reporting OCCT's NoSuchObject when empty; `list.remove_first()?`.
     pub fn remove_first(&mut self) -> Result<(), Failure> {
-        let Some(mut node) = self.head.take() else {
+        if self.is_empty() {
             return Err(no_such_object("RemoveFirst", "an empty list"));
-        };
-        self.head = node.next.take();
-        self.count -= 1;
-        Ok(())
+        }
+        self.remove(&mut self.cursor())
     }
-    /// Frees all nodes without recursive destruction; `list.clear()`.
+    /// Frees nodes in native link order without recursive destruction; `list.clear()`.
     pub fn clear(&mut self) {
-        while self.remove_first().is_ok() {}
+        self.clear_owned_chain();
     }
     /// Frees all nodes, then adopts `resource` for later nodes; `list.clear_with_allocator(arena)`.
     pub fn clear_with_allocator(&mut self, resource: BaseAllocator) {
         self.clear();
-        self.resource = resource;
+        self.base.allocator = resource;
     }
     /// Reverses links without moving values between nodes; `list.reverse()`.
     pub fn reverse(&mut self) {
-        let mut reversed = None;
-        while let Some(mut node) = self.head.take() {
-            self.head = node.next.take();
-            node.next = reversed;
-            reversed = Some(node);
-        }
-        self.head = reversed;
+        unsafe { self.base.reverse() };
     }
     /// Exchanges nodes and their allocator resources; `first.exchange(&mut second)`.
     pub fn exchange(&mut self, other: &mut Self) {
-        std::mem::swap(self, other);
+        self.base.exchange(&mut other.base);
+        std::mem::swap(&mut self.owners, &mut other.owners);
     }
     /// Transfers the nodes, leaving the source empty with its own allocator (as OCCT's move
     /// constructor does); `List::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
-        let kept = Self::with_allocator(source.resource.clone());
+        let kept = Self::with_allocator(source.allocator().clone());
         std::mem::replace(source, kept)
     }
     /// Replaces this list and its allocator with the source's nodes; `list.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
-        *self = Self::move_from(source);
+        self.clear_with_allocator(source.allocator().clone());
+        self.exchange(source);
         self
     }
     /// Allocator-container spelling of append; `list.push_back(42)`.
@@ -233,14 +228,8 @@ impl<T> FromIterator<T> for List<T> {
         Self::from_iter_in(iter, BaseAllocator::common())
     }
 }
-fn address<T>(link: &Link<T>) -> Option<usize> {
-    link.as_ref().map(|node| &**node as *const Node<T> as usize)
-}
-fn find_link<T>(mut link: &mut Link<T>, target: Option<usize>) -> &mut Link<T> {
-    while link.is_some() && address(link) != target {
-        link = &mut link.as_mut().unwrap().next;
-    }
-    link
+fn address(node: *mut ListLinkNode) -> Option<usize> {
+    (!node.is_null()).then_some(node as usize)
 }
 /// OCCT's `Standard_NoSuchObject` for a list member, naming the offending state.
 fn no_such_object(member: &str, state: &str) -> Failure {
@@ -259,3 +248,7 @@ mod borrowed;
 mod cursor_state;
 mod method_contracts;
 pub use base_iterator::BaseListIterator;
+
+mod access;
+mod owner;
+mod removal;

@@ -1,7 +1,8 @@
-use super::{List, ListCursor, find_link, positions::locate};
+//! Transfers use the actual BaseList chain; cross-resource copies commit one node at a time.
+use super::{List, ListCursor};
 use crate::standard::Failure;
 impl<T: Clone> List<T> {
-    /// Copies contents while preserving this allocator (OCC25348); `destination.assign(&source)`.
+    /// Copies contents while retaining this allocator (OCC25348); `destination.assign(&source)`.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         self.clear();
         for value in source {
@@ -11,53 +12,56 @@ impl<T: Clone> List<T> {
     }
     /// Appends and empties another list; `destination.append_list(&mut source)`.
     pub fn append_list(&mut self, source: &mut Self) {
-        if self.resource != source.resource {
+        if self.allocator() != source.allocator() {
             self.append_copied_list(source);
             return;
         }
-        let tail = find_link(&mut self.head, None);
-        *tail = source.head.take();
-        self.count += std::mem::take(&mut source.count);
+        self.owners.reserve(source.owners.len());
+        unsafe { self.base.append_list(&mut source.base) };
+        self.owners.append(&mut source.owners);
     }
-    /// Prepends a list, panicking on native failure; `destination.prepend_list(&mut source)`.
-    /// Use `prepend_list_checked` to handle a nonempty foreign source and empty destination.
+    /// Prepends another list, panicking on native failure; `destination.prepend_list(&mut source)`.
     pub fn prepend_list(&mut self, source: &mut Self) {
         self.prepend_list_checked(source).expect(
             "native list prepend failed; expected a nonempty destination for a foreign allocator",
         );
     }
-    /// Preserves native cross-allocator prepend failures; `destination.prepend_list_checked(&mut source)?`.
+    /// Preserves native cross-resource prepend failures; `destination.prepend_list_checked(&mut source)?`.
     pub fn prepend_list_checked(&mut self, source: &mut Self) -> Result<(), Failure> {
-        if self.resource != source.resource {
-            return self.insert_copied_list_before(source, &self.cursor());
+        if self.allocator() != source.allocator() {
+            return self.insert_copied_list_before(source, &mut self.cursor());
         }
-        let tail = find_link(&mut source.head, None);
-        *tail = self.head.take();
-        self.head = source.head.take();
-        self.count += std::mem::take(&mut source.count);
+        self.owners.reserve(source.owners.len());
+        unsafe { self.base.prepend_list(&mut source.base) };
+        self.owners.append(&mut source.owners);
         Ok(())
     }
-    /// Splices a list before a positioned node, emptying the source; an end cursor reports
-    /// NoSuchObject except for an empty source in another allocator, which OCCT copies
-    /// without ever checking the position; `destination.insert_list_before(&mut source, &cursor)?`.
+    /// Splices before a node while retaining caller cursor state; `list.insert_list_before(&mut source, &cursor)?`.
     pub fn insert_list_before(
         &mut self,
         source: &mut Self,
         cursor: &ListCursor,
     ) -> Result<(), Failure> {
-        if self.resource != source.resource {
+        let mut position = *cursor;
+        self.insert_list_before_at(source, &mut position)
+    }
+    /// Splices before current and updates native previous; `list.insert_list_before_at(&mut source, &mut cursor)?`.
+    pub fn insert_list_before_at(
+        &mut self,
+        source: &mut Self,
+        cursor: &mut ListCursor,
+    ) -> Result<(), Failure> {
+        if self.allocator() != source.allocator() {
             return self.insert_copied_list_before(source, cursor);
         }
-        locate(&mut self.head, "InsertBefore", *cursor)?;
-        let link = find_link(&mut self.head, cursor.address);
-        let tail = find_link(&mut source.head, None);
-        *tail = link.take();
-        *link = source.head.take();
-        self.count += std::mem::take(&mut source.count);
+        let mut raw = self.locate_cursor(*cursor, "InsertBefore")?;
+        self.owners.reserve(source.owners.len());
+        unsafe { self.base.insert_list_before(&mut source.base, &mut raw)? };
+        self.owners.append(&mut source.owners);
+        cursor.update_raw(raw);
         Ok(())
     }
-    /// Splices a list after a positioned node, emptying the source; an end cursor appends
-    /// (OCCT's `InsertAfter(List&, Iterator&)`); `destination.insert_list_after(&mut source, &cursor)?`.
+    /// Splices after current; an end cursor appends, as native does; `list.insert_list_after(&mut source, &cursor)?`.
     pub fn insert_list_after(
         &mut self,
         source: &mut Self,
@@ -67,23 +71,16 @@ impl<T: Clone> List<T> {
             self.append_list(source);
             return Ok(());
         }
-        locate(&mut self.head, "InsertAfter", *cursor)?;
-        if self.resource != source.resource {
+        let mut raw = self.locate_cursor(*cursor, "InsertAfter")?;
+        if self.allocator() != source.allocator() {
             let mut following = *cursor;
             following.next(self);
-            return self.insert_copied_list_before(source, &following);
+            return self.insert_copied_list_before(source, &mut following);
         }
-        self.splice_list_after(source, cursor);
+        self.owners.reserve(source.owners.len());
+        unsafe { self.base.insert_list_after(&mut source.base, &mut raw)? };
+        self.owners.append(&mut source.owners);
         Ok(())
-    }
-    fn splice_list_after(&mut self, source: &mut Self, cursor: &ListCursor) {
-        let node = find_link(&mut self.head, cursor.address)
-            .as_mut()
-            .expect("located links hold a node");
-        let rest = node.next.take();
-        node.next = source.head.take();
-        *find_link(&mut node.next, None) = rest;
-        self.count += std::mem::take(&mut source.count);
     }
     fn append_copied_list(&mut self, source: &mut Self) {
         // Native appendList commits each node before constructing the next one.
@@ -95,11 +92,11 @@ impl<T: Clone> List<T> {
     fn insert_copied_list_before(
         &mut self,
         source: &mut Self,
-        cursor: &ListCursor,
+        cursor: &mut ListCursor,
     ) -> Result<(), Failure> {
-        // Native checks the cursor after each copy; an empty source never checks it.
+        // Native checks after each copy; an empty source never validates the cursor.
         for value in source.iter() {
-            self.insert_before_ref(value, cursor)?;
+            self.insert_before_at_ref(value, cursor)?;
         }
         source.clear();
         Ok(())
@@ -107,12 +104,20 @@ impl<T: Clone> List<T> {
 }
 impl<T: Clone> Clone for List<T> {
     fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(self.resource.clone());
+        let mut copy = Self::with_allocator(self.allocator().clone());
         copy.assign(self);
         copy
     }
     fn clone_from(&mut self, source: &Self) {
-        // OCC25348: replacement retains the destination allocator, unlike construction.
+        // OCC25348 retains destination allocator, unlike copy construction.
         self.assign(source);
     }
+}
+impl<T> List<T> {
+    /// Preserves native self-append's early return; `list.append_self()`.
+    pub fn append_self(&mut self) {}
+    /// Preserves native self-prepend's early return; `list.prepend_self()`.
+    pub fn prepend_self(&mut self) {}
+    /// Preserves native self-insertion-before's early return even at end; `list.insert_before_self(&cursor)`.
+    pub fn insert_before_self(&mut self, _cursor: &ListCursor) {}
 }

@@ -1,70 +1,69 @@
-use super::{List, ListCursor, ListIter, ListIterMut, Node, address};
+//! Forward borrows project item fields only, leaving raw links disjoint from yielded values.
+use super::{List, ListCursor, ListIter, ListIterMut, address, owner};
+// SAFETY: shared/mutable iterators borrow their List and carry the same bounds as slice iterators.
+unsafe impl<T: Sync> Send for ListIter<'_, T> {}
+unsafe impl<T: Sync> Sync for ListIter<'_, T> {}
+unsafe impl<T: Send> Send for ListIterMut<'_, T> {}
+unsafe impl<T: Sync> Sync for ListIterMut<'_, T> {}
 impl ListCursor {
-    /// Repositions on the head of `list`, as OCCT's `Iterator::Init`; `cursor.init(&list)`.
+    /// Repositions on the head; `cursor.init(&list)`.
     pub fn init<T>(&mut self, list: &List<T>) {
         *self = list.cursor();
     }
-    /// Checks whether this cursor names a node; `cursor.more()`.
+    /// Checks whether the cursor names a node; `cursor.more()`.
     pub fn more(self) -> bool {
         self.address.is_some()
     }
     /// Looks up the stable node in its list; `cursor.value(&list)`.
     pub fn value<T>(self, list: &List<T>) -> Option<&T> {
-        self.node(list).map(|node| &node.value)
+        let node = list.find_cursor(self.address)?.current;
+        Some(unsafe { owner::item_ref(node) })
     }
-    /// Borrows the positioned value for mutation; `*cursor.change_value(&mut list).unwrap() = 9`.
-    /// An end or foreign cursor returns `None`, rejecting native's undefined dereference domain.
+    /// Borrows the positioned item exclusively; `*cursor.change_value(&mut list).unwrap() = 9`.
+    /// End or foreign cursors return None instead of native undefined dereferencing.
     pub fn change_value<'a, T>(&self, list: &'a mut List<T>) -> Option<&'a mut T> {
-        let mut node = list.head.as_deref_mut();
-        while let Some(current) = node {
-            if Some(current as *mut Node<T> as usize) == self.address {
-                return Some(&mut current.value);
-            }
-            node = current.next.as_deref_mut();
-        }
-        None
+        let node = list.find_cursor(self.address)?.current;
+        Some(unsafe { owner::item_mut(node) })
     }
-    /// Advances to the next node; `cursor.next(&list)`.
+    /// Advances while remembering current, including transition to end; `cursor.next(&list)`.
     pub fn next<T>(&mut self, list: &List<T>) {
         if !self.more() {
             return;
         }
         self.previous = self.address;
-        self.address = self.node(list).and_then(|node| address(&node.next));
-    }
-    fn node<T>(self, list: &List<T>) -> Option<&Node<T>> {
-        let mut node = list.head.as_deref();
-        while let Some(current) = node {
-            if Some(current as *const Node<T> as usize) == self.address {
-                return node;
-            }
-            node = current.next.as_deref();
-        }
-        None
+        self.address = list
+            .find_cursor(self.address)
+            .and_then(|raw| address(unsafe { (*raw.current).next() }));
     }
 }
 impl<'a, T> Iterator for ListIter<'a, T> {
     type Item = &'a T;
     fn next(&mut self) -> Option<Self::Item> {
-        let node = self.next.take()?;
-        self.previous = Some(node as *const Node<T> as usize);
-        self.next = node.next.as_deref();
-        Some(&node.value)
+        if self.next.is_null() {
+            return None;
+        }
+        let node = self.next;
+        self.previous = address(node);
+        self.next = unsafe { (*node).next() };
+        Some(unsafe { owner::item_ref(node) })
     }
 }
 impl<T> PartialEq for ListIter<'_, T> {
     fn eq(&self, other: &Self) -> bool {
-        self.next.map(|n| n as *const Node<T>) == other.next.map(|n| n as *const Node<T>)
+        self.next == other.next
     }
 }
 impl<T> Eq for ListIter<'_, T> {}
 impl<'a, T> Iterator for ListIterMut<'a, T> {
     type Item = &'a mut T;
     fn next(&mut self) -> Option<Self::Item> {
-        let node = self.next.take()?;
-        self.previous = Some(std::ptr::from_ref(node) as usize);
-        self.next = node.next.as_deref_mut();
-        Some(&mut node.value)
+        if self.next.is_null() {
+            return None;
+        }
+        let node = self.next;
+        self.previous = address(node);
+        self.next = unsafe { (*node).next() };
+        Some(unsafe { owner::item_mut(node) })
     }
 }
 impl<'a, T> IntoIterator for &'a List<T> {
