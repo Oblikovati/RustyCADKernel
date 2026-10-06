@@ -1,6 +1,7 @@
 //! Arbitrarily bounded arrays, corresponding to `NCollection_Array1`.
 
 mod buffer_constructors;
+pub(super) mod emplace_policy;
 mod pointers;
 mod raw_copy;
 mod resize_storage;
@@ -354,7 +355,8 @@ impl<'b, T> IntoIterator for &'b mut Array1<'_, T> {
 }
 
 impl<T> Array1<'_, T> {
-    /// Constructs a replacement and returns its mutable slot; `array.emplace_value(0, || 42)?`.
+    /// Constructs a Rust replacement; `array.emplace_value(0, || 42)?`.
+    /// Use `emplace_value_with_assignment` for observable native element assignment.
     pub fn emplace_value(
         &mut self,
         index: i32,

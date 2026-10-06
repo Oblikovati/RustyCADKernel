@@ -3,6 +3,7 @@ use super::array1::checked_array_extent as extent;
 use super::{Array1, ArrayError};
 
 mod buffer_constructors;
+mod emplace_policy;
 mod method_contracts;
 mod raw_copy;
 mod resize_policy;
@@ -156,7 +157,8 @@ impl<'a, T> Array2<'a, T> {
         *self.change_value(row, col)? = value;
         Ok(())
     }
-    /// Constructs a replacement cell; `array.emplace_value(1,1,|| 42)?`.
+    /// Constructs a Rust replacement cell; `array.emplace_value(1,1,|| 42)?`.
+    /// Use `emplace_value_with_assignment` for observable native element assignment.
     pub fn emplace_value(
         &mut self,
         row: i32,
