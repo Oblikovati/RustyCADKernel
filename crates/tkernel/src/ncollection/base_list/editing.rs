@@ -74,14 +74,9 @@ impl BaseListStorage {
         mut delete_node: impl FnMut(*mut ListLinkNode, &mut BaseAllocator),
     ) -> Result<(), Failure> {
         require_position(&BaseListRawIterator::new(self), "pRemoveFirst")?;
-        let removed = self.first;
-        // SAFETY: the head is live and readable by the caller's contract.
-        self.first = unsafe { (*removed).next() };
-        delete_node(removed, &mut self.allocator);
-        self.length = self.length.wrapping_sub(1);
-        if self.length == 0 {
-            self.last = null_mut();
-        }
+        let phase = unsafe { self.detach_removal(BaseListRawIterator::new(self)) };
+        delete_node(phase.node, &mut self.allocator);
+        self.finish_removal(phase);
         Ok(())
     }
     /// Removes the positioned node and retains its predecessor; `unsafe { storage.remove(&mut cursor, delete_node)? }`.
@@ -94,16 +89,11 @@ impl BaseListStorage {
         delete_node: impl FnMut(*mut ListLinkNode, &mut BaseAllocator),
     ) -> Result<(), Failure> {
         require_position(cursor, "pRemove")?;
-        if cursor.previous.is_null() {
-            // SAFETY: caller guarantees current is the head and callback is valid.
-            unsafe {
-                self.remove_first(delete_node)?;
-            }
-            cursor.current = self.first;
-            return Ok(());
-        }
-        // SAFETY: non-head current and predecessor are live and exclusive.
-        unsafe { self.remove_linked(cursor, delete_node) };
+        let phase = unsafe { self.detach_removal(*cursor) };
+        let mut delete_node = delete_node;
+        delete_node(phase.node, &mut self.allocator);
+        cursor.current = phase.next;
+        self.finish_removal(phase);
         Ok(())
     }
     /// Reverses links without moving values; `unsafe { storage.reverse() }`.
@@ -127,22 +117,5 @@ impl BaseListStorage {
             current = next;
         }
         self.first = previous;
-    }
-    unsafe fn remove_linked(
-        &mut self,
-        cursor: &mut BaseListRawIterator,
-        mut delete_node: impl FnMut(*mut ListLinkNode, &mut BaseAllocator),
-    ) {
-        // SAFETY: caller guarantees both current and previous are exclusive live nodes.
-        let next = unsafe { (*cursor.current).next() };
-        unsafe {
-            *(*cursor.previous).next_mut() = next;
-        }
-        delete_node(cursor.current, &mut self.allocator);
-        cursor.current = next;
-        if next.is_null() {
-            self.last = cursor.previous;
-        }
-        self.length = self.length.wrapping_sub(1);
     }
 }

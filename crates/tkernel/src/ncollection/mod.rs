@@ -76,7 +76,10 @@ mod list_node;
 #[allow(unsafe_code)]
 mod node_release;
 pub use list::List as AllocatorList;
-pub use list::{BaseListIterator, List, ListCursor, ListIter, ListIterMut};
+pub use list::{
+    BaseListIterator, List, ListCursor, ListCursorObserver, ListIter, ListIterMut,
+    ListNativeCursor, ListObserver,
+};
 pub use list_node::{ListLinkNode, ListValueNode};
 
 mod sparse_array;

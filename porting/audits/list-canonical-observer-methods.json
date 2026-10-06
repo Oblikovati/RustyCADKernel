@@ -1,0 +1,325 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "List canonical heap metadata and native cursor state observation across destructor phases",
+  "integration_status": "committed branch candidate; root integration and cleanup required",
+  "base_revision": "e8e2b4e0795e09eb6f21fa59795d400cc3fbb9a4",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator.rs": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+    "crates/tkernel/src/ncollection/base_list/basic_node.rs": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+    "crates/tkernel/src/ncollection/base_list/editing.rs": "0d9f09eeabccad4c528ffd1a69979b2ba3dad2f2139719bbd5abca674a64ec26",
+    "crates/tkernel/src/ncollection/base_list/removal_phase.rs": "1e4dbe75d373035d8d6b1c8c4dff8d30e289c43ad786dc2d739256cc74b92e67",
+    "crates/tkernel/src/ncollection/base_list/splicing.rs": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+    "crates/tkernel/src/ncollection/base_list.rs": "391b5f76f2ebe9ac1851180e2744efcf68d787aa55d269f4cd4f0fd0efd409a1",
+    "crates/tkernel/src/ncollection/list/access.rs": "015608e22ab01ce2c5776ef213ff1faed18f2d89f6944234665dd08d340159ea",
+    "crates/tkernel/src/ncollection/list/base_iterator.rs": "ec61ac2efccccc8518267a0817967f60482c96bf27c3c872326a3a61dd1a409e",
+    "crates/tkernel/src/ncollection/list/borrowed.rs": "9ed298ce20bb55c6745cff3d39fd4edc898503d375d142883162e1ebc4d00817",
+    "crates/tkernel/src/ncollection/list/cursor_state.rs": "f411cf9ce5672e0f048e61bad62c0359b7c0410c4b7a09c52929ba39ed5fd610",
+    "crates/tkernel/src/ncollection/list/iteration.rs": "67d439f1989c3f0fd96a2c0d753122279cadc5266b6677e231254b8a58258234",
+    "crates/tkernel/src/ncollection/list/method_contracts.rs": "43a9c68fba55756b5120bc930faa1f8a0faca1215f34672c8e8e2418cad8826a",
+    "crates/tkernel/src/ncollection/list/native_cursor.rs": "6f64bb9e0fc513c803fa15f7b427ac4a3bfce55f2ccbffadea289f00832cb49e",
+    "crates/tkernel/src/ncollection/list/operations.rs": "7049ed7247338ba004c79825edd9de1eba570ec63e70a83fd814c721bee8e05a",
+    "crates/tkernel/src/ncollection/list/owner.rs": "bd2bca0fc66f73e2aca9e63eed31ae5f5e55e9b9c318180387c8e90e0c1c3752",
+    "crates/tkernel/src/ncollection/list/positions.rs": "18bbc40e6201f63e52b5f11fe27c94151de75797038dd9f2695e760b73579260",
+    "crates/tkernel/src/ncollection/list/removal.rs": "03558832fb7378f2c8fd92ec77e3974a88fff71103d016193c3d86977bc3f4c1",
+    "crates/tkernel/src/ncollection/list/topology.rs": "6e4724fabfc8dcbb9bcc9b9d872700c5c7b83475f2e3ff56f647390be0a21258",
+    "crates/tkernel/src/ncollection/list.rs": "64545f5b51fc404869f3d7a53fe91aaa66066a311463e3ad35261f4651f5fbcb",
+    "crates/tkernel/src/ncollection/list_node.rs": "5a1d08e4b34d5954d7d186ee143a9a30620c2563e2b2d05b332cd37f71240249",
+    "crates/tkernel/src/ncollection/mod.rs": "9e018540a81f2873e9af67f9cb7072c48b0268c7af27886187d08abc8dc3beab",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts/fixture.rs": "025215b3390fcdfde37307bd3cb7f9192aceb75b33a2eaa795289b4141d5cb00",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts.rs": "eb50cdf7f5476485eeb884ceb8977d32e6ffdbe8581d25fb4b11bd26de44fe9e",
+    "crates/tkernel/tests/base_list_iterator_contracts.rs": "8dabcd9476dfd59d1543fb7ddbc7c713baf8dc6401b9a920445ce106e2337bf8",
+    "crates/tkernel/tests/base_list_storage_contracts/fixture.rs": "24ecbe3a88b0116aaa4aacd164ca89837ce866b65ae45ef65c8ebcd113c45fa3",
+    "crates/tkernel/tests/base_list_storage_contracts.rs": "ebdb26689afd33dc855af84a35d3374bf72f3fc4418173d6e9909d597a777291",
+    "crates/tkernel/tests/list_allocation_contracts.rs": "0bc7a4583ec6b6e1796190979ac0ecedbb4538ff2726f902765f2c7e29001525",
+    "crates/tkernel/tests/list_method_contracts.rs": "da476f5ecb2d220657bf48c9666902272cefacfb6a5ec24c850e2c9f9948141f",
+    "crates/tkernel/tests/list_node_contracts.rs": "dbe5d1ddb2facbfbe29a3f2d040b2adf23d9c32bb0bf1e214be3ce2b2edc27fb",
+    "crates/tkernel/tests/list_observer_contracts/fixture.rs": "866257ff81c95a2d14961a5f876385190ee561f3da49ea8e05f2a39bd46931d0",
+    "crates/tkernel/tests/list_observer_contracts/parallel.rs": "2b11df13d4900e488ec32a8b6cf7ac54c75f2ca8040b291b5f0884f63c03e110",
+    "crates/tkernel/tests/list_observer_contracts.rs": "892341714f319921d9ff9380711d8463ac33d4f80063af6ebe7c57edf3e23562",
+    "crates/tkernel/tests/list_supplemental.rs": "439a9b93d5aca99d8a72990a05730aa266e0f5a5dc39213badb36eafffae57cf",
+    "crates/tkernel/tests/list_topology_contracts/destruction.rs": "66043f04041fe2401cda31cf6b785f9a596fd7dca9e1036fddc35e2eedcb5007",
+    "crates/tkernel/tests/list_topology_contracts/transitions.rs": "ece72d3c95f151f87079bfba8ee2977f39bc3e761995918e8152749ab13ffa6f",
+    "crates/tkernel/tests/list_topology_contracts.rs": "cc815f8705a709180f2811eadac93b4b16918eb996c74282632c7524736dca2a",
+    "crates/tkernel/tests/ncollection_list/basic.rs": "2609a73d579ae8d812aee96871366a01c0a965fd96efa70f82968d3c551b4978",
+    "crates/tkernel/tests/ncollection_list/emplacement.rs": "f9c5efe28b1c2020138de7d461a26524df908580a485a10d5cf5f6e170880723",
+    "crates/tkernel/tests/ncollection_list/ownership.rs": "ff4d378adfaf2a81b154b734be5141ae2a6fb44a6a9592a5ae7c9c6ce07657be",
+    "crates/tkernel/tests/ncollection_list.rs": "ed0b86051c7a0a542a8f8b9e22656baadf53bab4d6f00ac5fe7feccfceb45e68",
+    "crates/tkernel/tests/ncollection_lists_api_behavior.rs": "9f93cb973cfd3013b617c901e1ac530be8782cd502c595e69917aa5e156ac3c0",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs": "6be15c5d34e5d369c4738fa7513cac13cd2d13951faa841f489983b6dcc508ec",
+    "tools/oracle/tkernel_base_list_storage_contracts.cxx": "6f565a4111547b93d5ab92bc40ee4b5c0b472d7e5aaa0b545d53a3501206fb5d",
+    "tools/oracle/tkernel_base_list_storage_contracts.expected": "6ec64eff8d2cd9ea47994da1626d2b62433588a3f4d3b566bf9859f7632f2ca7",
+    "tools/oracle/tkernel_list_destructor_observer.cxx": "67eca2a20364d565dae3de6b9cdc20ba0c15078002902f055063512ee35f70a9",
+    "tools/oracle/tkernel_list_destructor_observer.expected": "d076859297d1c385f27c7cdf62026dbd7be65276c25ac0e10fef11ab5b4ee51b",
+    "tools/oracle/tkernel_list_observer_phases.cxx": "afb9aa12601f1ecc6ee4e20db2af7786514c62b0be23e5f290bd6de065b958e6",
+    "tools/oracle/tkernel_list_observer_phases.expected": "664b4b6e364ff14b2bb640da2e98252737f5bbc10e14b68e6c447e4c3fa7b25a",
+    "tools/oracle/tkernel_list_topology_transitions.cxx": "724a16cd6216f78e38c8527d25d28bfae5c75d792dadf825005f6fef20aa0b1c",
+    "tools/oracle/tkernel_list_topology_transitions.expected": "b463a0952f11912eaad7b922530d910368eef6b8b18d9dbd7cedf1407e634de7"
+  },
+  "occt_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.cxx": "fac8df13bccb069d2070f90c84e5dd733ed33062f5399f7c4e9a349c91e7e2ff",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx": "8c4bef79ead7da3d5c5f4667f905aebb7262628d025530766c9c0e4cdff41d01"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/list-canonical-observer-methods-source.tar.gz": "d3a5bd355b3d221af8a2c31c8842c1fb71591851f733f8bed421c47da9544130",
+    "porting/runtime-evidence/list-canonical-observer-methods-rust.log.gz": "d779f44c5e19a3a7a272602c797f088474ddf7e4859704d407de5fe9e3843174",
+    "porting/runtime-evidence/list-canonical-observer-methods-miri.log.gz": "116441a0d9d3355a1ed75dfefbe31cc8a8ef21769e188d70697e1731f3743308",
+    "porting/runtime-evidence/list-canonical-observer-methods-clippy.log.gz": "2c98a258c90fc336cd1236af9ee760a5d6caacaa18e28e5311e5186326db59f1",
+    "porting/runtime-evidence/list-canonical-observer-methods-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/list-canonical-observer-methods-native-original.log.gz": "c767170467c3c47cba87113161e0a40408ccc9a9b4149c1d97b7d1e9564b8e55",
+    "porting/runtime-evidence/list-canonical-observer-methods-native-legacy.log.gz": "93cafab8cbbf0e403a36a4c5b11ac025511863d882a112fd47de9210d138ed62",
+    "porting/runtime-evidence/list-canonical-observer-methods-native-base.log.gz": "9d958e72e30f6b48310a74177e40d09891ebf06c8f790f51025d98f0c4e71b33",
+    "porting/runtime-evidence/list-canonical-observer-methods-native-topology.log.gz": "7e89f329424dd62a6d0d911426bc0ecf725e416d925155e4518d32e40bce9394",
+    "porting/runtime-evidence/list-canonical-observer-methods-native-endpoints.log.gz": "8f97dde98d66bcc1f18eb1aba1cca893d1416d12366c29a7ad829201b336eb18"
+  },
+  "source_scope": "List/base sources and invoked test/oracle files archived; full compiler/dependency closure not captured. Root integrated frozen workspace checkpoint remains authoritative.",
+  "compiler_body_binding_performed": false,
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "class_status": "partial",
+  "behavior": [
+    "Actual BaseListStorage lives in stable shared storage. ListObserver reads its canonical size/head/tail directly under a short lock; there is no detached metadata mirror.",
+    "BaseList detach_removal/finish_removal phases are shared by raw engine removal and typed List. Typed removal releases the metadata borrow and lock before user Drop; normal destructor observes native intermediate fields.",
+    "Clear leaves canonical native metadata intact throughout normal destruction, then resets it. Panic cleanup resets actual metadata before remaining owned items unwind.",
+    "ListNativeCursor owns canonical current/previous state; ListCursorObserver reads it during destruction. Removal updates current after destruction, matching native observation. Existing Copy ListCursor is preserved.",
+    "Native cursor next/removal resolve live owner pointers before dereference, retaining fresh allocation provenance after incremental-arena address reuse.",
+    "Move and exchange transfer metadata between stable logical owner states; source observer handles see empty state after native move rather than following moved nodes.",
+    "Miri validates normal and panic observation, original topology, borrowed iteration, ownership, and a destructor spawning/joining a cross-thread metadata observer with no lock retained across user code."
+  ],
+  "runtime": {
+    "rust_passed": 137,
+    "miri_passed": 83,
+    "new_contract_tests": 10,
+    "native_original_passed": 34,
+    "original_native_rust_names": [
+      "NCollection_ListTest.Append",
+      "NCollection_ListTest.AppendList",
+      "NCollection_ListTest.AssignMethod",
+      "NCollection_ListTest.Assignment",
+      "NCollection_ListTest.Clear",
+      "NCollection_ListTest.ConstIteratorFromConstList",
+      "NCollection_ListTest.DefaultConstructor",
+      "NCollection_ListTest.EmplaceAfter",
+      "NCollection_ListTest.EmplaceAppend",
+      "NCollection_ListTest.EmplaceBefore",
+      "NCollection_ListTest.EmplacePrepend",
+      "NCollection_ListTest.EmplaceWithMoveOnlyType",
+      "NCollection_ListTest.Exchange",
+      "NCollection_ListTest.ExchangeWithDifferentAllocators",
+      "NCollection_ListTest.ExchangeWithEmpty",
+      "NCollection_ListTest.InitializerListConstructor",
+      "NCollection_ListTest.InitializerListConstructorEmpty",
+      "NCollection_ListTest.InitializerListWithCustomAllocator",
+      "NCollection_ListTest.InsertAfter",
+      "NCollection_ListTest.InsertBefore",
+      "NCollection_ListTest.InsertList",
+      "NCollection_ListTest.IteratorAccess",
+      "NCollection_ListTest.MoveAssignment",
+      "NCollection_ListTest.MoveConstructor",
+      "NCollection_ListTest.OCC25348_AssignDoesNotChangeAllocator",
+      "NCollection_ListTest.Prepend",
+      "NCollection_ListTest.PrependList",
+      "NCollection_ListTest.Remove",
+      "NCollection_ListTest.RemoveByValue",
+      "NCollection_ListTest.RemoveFirst",
+      "NCollection_ListTest.Reverse",
+      "NCollection_ListTest.STLAlgorithmCompatibility_MinMax",
+      "NCollection_ListTest.STLAlgorithmCompatibility_Replace",
+      "NCollection_ListTest.STLIterators"
+    ],
+    "original_native_rust_name_join": true,
+    "observer_scenarios": 7,
+    "native_observation_rows": 23,
+    "legacy_observer_rows_compared": 23,
+    "extended_observer_rows_compared": 23,
+    "observer_rust_comparison": true,
+    "topology_reference_rows": 1090,
+    "native_raw_base_rows": 19,
+    "strict_clippy_exit": 0,
+    "workspace_formatter_exit": 0,
+    "rust_test_targets": [
+      "list_observer_contracts",
+      "list_topology_contracts",
+      "base_list_storage_contracts",
+      "ncollection_list",
+      "list_allocation_contracts",
+      "base_list_basic_iterator_contracts",
+      "base_list_iterator_contracts",
+      "list_node_contracts",
+      "list_method_contracts",
+      "list_supplemental",
+      "ncollection_lists_api_behavior",
+      "shared_collection_method_contracts"
+    ],
+    "miri_test_targets": [
+      "list_observer_contracts",
+      "list_topology_contracts",
+      "base_list_storage_contracts",
+      "ncollection_list",
+      "list_allocation_contracts",
+      "base_list_iterator_contracts"
+    ],
+    "miri_toolchain": "nightly-2026-09-25"
+  },
+  "row_fields": {
+    "remove": "initial count and cursor position",
+    "drop_legacy": "item value, size, empty-by-head, cursor.More",
+    "after_legacy": "size, empty-by-head, cursor.More when cursor exists",
+    "drop_extended": "item value, size, empty-by-head, cursor.More, head identity, tail identity, current identity, previous identity",
+    "after_extended": "size, empty-by-head, cursor.More, head identity, tail identity, current identity, previous identity",
+    "identity": "0 means null; 1..3 identify original native node positions, without dereferencing destroyed nodes"
+  },
+  "native_row_coverage": [
+    {
+      "row": 0,
+      "legacy": "remove 1 0",
+      "endpoints": "remove 1 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 1,
+      "legacy": "drop 1 1 1 1",
+      "endpoints": "drop 1 1 1 1 0 1 1 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 2,
+      "legacy": "after 0 1 0",
+      "endpoints": "after 0 1 0 0 0 0 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 3,
+      "legacy": "remove 2 0",
+      "endpoints": "remove 2 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 4,
+      "legacy": "drop 1 2 0 1",
+      "endpoints": "drop 1 2 0 1 2 2 1 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 5,
+      "legacy": "after 1 0 1",
+      "endpoints": "after 1 0 1 2 2 2 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 6,
+      "legacy": "remove 2 1",
+      "endpoints": "remove 2 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 7,
+      "legacy": "drop 2 2 0 1",
+      "endpoints": "drop 2 2 0 1 1 2 2 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 8,
+      "legacy": "after 1 0 0",
+      "endpoints": "after 1 0 0 1 1 0 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 9,
+      "legacy": "remove 3 0",
+      "endpoints": "remove 3 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 10,
+      "legacy": "drop 1 3 0 1",
+      "endpoints": "drop 1 3 0 1 2 3 1 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 11,
+      "legacy": "after 2 0 1",
+      "endpoints": "after 2 0 1 2 3 2 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 12,
+      "legacy": "remove 3 1",
+      "endpoints": "remove 3 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 13,
+      "legacy": "drop 2 3 0 1",
+      "endpoints": "drop 2 3 0 1 1 3 2 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 14,
+      "legacy": "after 2 0 1",
+      "endpoints": "after 2 0 1 1 3 3 1",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 15,
+      "legacy": "remove 3 2",
+      "endpoints": "remove 3 2",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 16,
+      "legacy": "drop 3 3 0 1",
+      "endpoints": "drop 3 3 0 1 1 3 3 2",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 17,
+      "legacy": "after 2 0 0",
+      "endpoints": "after 2 0 0 1 2 0 2",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 18,
+      "legacy": "clear",
+      "endpoints": "clear",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 19,
+      "legacy": "drop 1 3 0 0",
+      "endpoints": "drop 1 3 0 0 1 3 0 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 20,
+      "legacy": "drop 2 3 0 0",
+      "endpoints": "drop 2 3 0 0 1 3 0 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 21,
+      "legacy": "drop 3 3 0 0",
+      "endpoints": "drop 3 3 0 0 1 3 0 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    },
+    {
+      "row": 22,
+      "legacy": "after 0 1",
+      "endpoints": "after 0 1 0 0 0 0 0",
+      "comparison": "exact; Rust assertion passed normally and under Miri"
+    }
+  ],
+  "remaining_gaps": [
+    "Observer parity is bounded to read-only size, emptiness, endpoint identities and native removal cursor links. Reentrant value access, mutation and allocator extension callbacks are not claimed.",
+    "ListNativeCursor is a separate owned-state adapter for observable removal; the existing Copy ListCursor cannot expose live canonical state through an outstanding mutable borrow. Other observable native cursor editing overloads remain future work.",
+    "Sequence still needs canonical heap observer storage and phases for its different native cache/cursor/destructor ordering.",
+    "Observers may safely outlive their owner, retaining empty metadata and allocator identity after List destruction; this is a Rust lifetime extension over invalid native dangling-owner references.",
+    "The metadata Arc/Mutex and existing unordered owner Vec add allocation and synchronization costs. Native allocation footprint and performance parity remain unclaimed.",
+    "Safe cursor membership/predecessor validation, panic recovery and invalid-position cleanup remain explicit Rust safety extensions. Undefined/unsupported native alias domains are not granted credit.",
+    "Compiler declaration/body binding and whole-class/full-API completeness remain unclaimed."
+  ]
+}

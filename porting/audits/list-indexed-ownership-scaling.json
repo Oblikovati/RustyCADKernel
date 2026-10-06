@@ -1,0 +1,413 @@
+{
+  "schema": "rustycad.diagnostic-scaling.v1",
+  "measurements": {
+    "baseline": [
+      {
+        "operation": "clear",
+        "size": 4000,
+        "median_ns": 5985307,
+        "samples_ns": [
+          5962495,
+          5985307,
+          6137920
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 4000,
+        "median_ns": 6343229,
+        "samples_ns": [
+          6341136,
+          6343229,
+          6787763
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 8000,
+        "median_ns": 23861992,
+        "samples_ns": [
+          23483001,
+          23861992,
+          24750857
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 8000,
+        "median_ns": 24342130,
+        "samples_ns": [
+          24305904,
+          24342130,
+          24381133
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 16000,
+        "median_ns": 93678693,
+        "samples_ns": [
+          93515020,
+          93678693,
+          95381966
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 16000,
+        "median_ns": 94866972,
+        "samples_ns": [
+          94100534,
+          94866972,
+          95171215
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 32000,
+        "median_ns": 372762219,
+        "samples_ns": [
+          371657094,
+          372762219,
+          377075162
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 32000,
+        "median_ns": 376782280,
+        "samples_ns": [
+          375304885,
+          376782280,
+          383382876
+        ]
+      }
+    ],
+    "fixed": [
+      {
+        "operation": "clear",
+        "size": 4000,
+        "median_ns": 805431,
+        "samples_ns": [
+          794770,
+          805431,
+          824667
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 4000,
+        "median_ns": 1256035,
+        "samples_ns": [
+          1221811,
+          1256035,
+          1257217
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 8000,
+        "median_ns": 1599690,
+        "samples_ns": [
+          1573102,
+          1599690,
+          1603959
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 8000,
+        "median_ns": 2493094,
+        "samples_ns": [
+          2488616,
+          2493094,
+          2512349
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 16000,
+        "median_ns": 3267828,
+        "samples_ns": [
+          3148978,
+          3267828,
+          3289758
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 16000,
+        "median_ns": 5003270,
+        "samples_ns": [
+          4958958,
+          5003270,
+          5013859
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 32000,
+        "median_ns": 6606397,
+        "samples_ns": [
+          6394385,
+          6606397,
+          6756865
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 32000,
+        "median_ns": 10069346,
+        "samples_ns": [
+          10013612,
+          10069346,
+          10121231
+        ]
+      }
+    ],
+    "cursor-baseline": [
+      {
+        "operation": "retain_all",
+        "size": 4000,
+        "median_ns": 115991538,
+        "samples_ns": [
+          107989458,
+          115991538,
+          122570274
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 4000,
+        "median_ns": 116453173,
+        "samples_ns": [
+          115836871,
+          116453173,
+          121034712
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 8000,
+        "median_ns": 475490050,
+        "samples_ns": [
+          451617819,
+          475490050,
+          481330940
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 8000,
+        "median_ns": 483811350,
+        "samples_ns": [
+          461031722,
+          483811350,
+          491582042
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 16000,
+        "median_ns": 1841270711,
+        "samples_ns": [
+          1820741266,
+          1841270711,
+          1841917708
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 16000,
+        "median_ns": 1717712469,
+        "samples_ns": [
+          1699009774,
+          1717712469,
+          1812201021
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 32000,
+        "median_ns": 6981903163,
+        "samples_ns": [
+          6879561087,
+          6981903163,
+          7244210102
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 32000,
+        "median_ns": 6885200785,
+        "samples_ns": [
+          6871553287,
+          6885200785,
+          6922388098
+        ]
+      }
+    ],
+    "final-scaling": [
+      {
+        "operation": "clear",
+        "size": 4000,
+        "median_ns": 846396,
+        "samples_ns": [
+          800331,
+          846396,
+          915815
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 4000,
+        "median_ns": 2138999,
+        "samples_ns": [
+          2076983,
+          2138999,
+          2254132
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 4000,
+        "median_ns": 1097531,
+        "samples_ns": [
+          876973,
+          1097531,
+          1505997
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 4000,
+        "median_ns": 869981,
+        "samples_ns": [
+          869510,
+          869981,
+          874889
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 8000,
+        "median_ns": 1720193,
+        "samples_ns": [
+          1654712,
+          1720193,
+          1799320
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 8000,
+        "median_ns": 3915727,
+        "samples_ns": [
+          3640858,
+          3915727,
+          4155922
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 8000,
+        "median_ns": 2041629,
+        "samples_ns": [
+          1832611,
+          2041629,
+          2123660
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 8000,
+        "median_ns": 1960608,
+        "samples_ns": [
+          1756151,
+          1960608,
+          2278577
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 16000,
+        "median_ns": 4001556,
+        "samples_ns": [
+          3974426,
+          4001556,
+          5116659
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 16000,
+        "median_ns": 9205857,
+        "samples_ns": [
+          8432947,
+          9205857,
+          10116142
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 16000,
+        "median_ns": 4553978,
+        "samples_ns": [
+          3604300,
+          4553978,
+          5247662
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 16000,
+        "median_ns": 3617525,
+        "samples_ns": [
+          3611944,
+          3617525,
+          3626241
+        ]
+      },
+      {
+        "operation": "clear",
+        "size": 32000,
+        "median_ns": 8349152,
+        "samples_ns": [
+          7817838,
+          8349152,
+          8478772
+        ]
+      },
+      {
+        "operation": "remove_first",
+        "size": 32000,
+        "median_ns": 19391819,
+        "samples_ns": [
+          19380007,
+          19391819,
+          21004323
+        ]
+      },
+      {
+        "operation": "retain_all",
+        "size": 32000,
+        "median_ns": 9160814,
+        "samples_ns": [
+          8229170,
+          9160814,
+          9519508
+        ]
+      },
+      {
+        "operation": "search_miss",
+        "size": 32000,
+        "median_ns": 9091486,
+        "samples_ns": [
+          8644429,
+          9091486,
+          9267211
+        ]
+      }
+    ]
+  }
+}

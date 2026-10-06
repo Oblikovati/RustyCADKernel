@@ -24,17 +24,18 @@ impl<T> List<T> {
     ) {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let node = owner.link;
-        self.owners.push(owner);
+        self.owners.insert(node as usize, owner);
         let mut raw = BaseListRawIterator::default();
-        unsafe { self.base.append_at(node, &mut raw) };
+        self.topology
+            .edit(|base| unsafe { base.append_at(node, &mut raw) });
         cursor.update_raw(raw);
     }
     /// Allocates before evaluating construction arguments; `list.emplace_append(|| Pair(1,2.0))`.
     pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let node = owner.link;
-        self.owners.push(owner);
-        unsafe { self.base.append_node(node) };
+        self.owners.insert(node as usize, owner);
+        self.topology.edit(|base| unsafe { base.append_node(node) });
         unsafe { owner::item_mut(node) }
     }
     /// Constructs a prepended element; `list.emplace_prepend(|| Pair(1,2.0))`.
@@ -59,8 +60,9 @@ impl<T> List<T> {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let mut raw = self.locate_cursor(*cursor, "InsertBefore")?;
         let node = owner.link;
-        self.owners.push(owner);
-        unsafe { self.base.insert_before_node(node, &mut raw)? };
+        self.owners.insert(node as usize, owner);
+        self.topology
+            .edit(|base| unsafe { base.insert_before_node(node, &mut raw) })?;
         cursor.update_raw(raw);
         Ok(unsafe { owner::item_mut(node) })
     }
@@ -73,8 +75,9 @@ impl<T> List<T> {
         let owner = ListNodeOwner::construct(self.allocator(), construct);
         let mut raw = self.locate_cursor(*cursor, "InsertAfter")?;
         let node = owner.link;
-        self.owners.push(owner);
-        unsafe { self.base.insert_after_node(node, &mut raw)? };
+        self.owners.insert(node as usize, owner);
+        self.topology
+            .edit(|base| unsafe { base.insert_after_node(node, &mut raw) })?;
         Ok(unsafe { owner::item_mut(node) })
     }
 }
