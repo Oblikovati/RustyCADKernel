@@ -77163,30 +77163,6 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing."
     },
     {
-      "upstream_id": "NCollection_BaseMap::Iterator::Initialize(const NCollection_BaseMap&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::Iterator is the protected-constructible base of the legacy bucket iterators; no NCollection map derives its Iterator from it any more (they derive from BasicIterator), so instances exist only in user subclasses. Initialize/Reset/IsEqual are covered per map by DataMapIterator, MapIterator and DoubleMapIterator (`initialize`, `reset`, `is_equal`)."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Iterator::Reset()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::Iterator is the protected-constructible base of the legacy bucket iterators; no NCollection map derives its Iterator from it any more (they derive from BasicIterator), so instances exist only in user subclasses. Initialize/Reset/IsEqual are covered per map by DataMapIterator, MapIterator and DoubleMapIterator (`initialize`, `reset`, `is_equal`)."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Iterator::IsEqual(const Iterator&) const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: NCollection_BaseMap::Iterator is the protected-constructible base of the legacy bucket iterators; no NCollection map derives its Iterator from it any more (they derive from BasicIterator), so instances exist only in user subclasses. Initialize/Reset/IsEqual are covered per map by DataMapIterator, MapIterator and DoubleMapIterator (`initialize`, `reset`, `is_equal`)."
-    },
-    {
       "upstream_id": "NCollection_BaseMap::IndexedIterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
@@ -77433,70 +77409,6 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: NCollection_BaseMap::IndexedIterator is the STL random-access iterator behind IndexedMap/IndexedDataMap begin()/end(). Rust covers it with IndexedMapIter, IndexedDataValues, IndexedDataItems (slice-backed iterators in index order) and the OCCT cursors IndexedMapIterator and IndexedDataMapIterator (`more`, `next`, `index`, `value`, `key`, `is_equal`); pointer arithmetic, ordering operators and operator[] have no separate counterpart."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::NbBuckets() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::nb_buckets",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Zero until the first insertion when constructed with zero buckets, and kept by Clear(true)."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Buckets()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: Buckets() exposes the raw NCollection_ListNode* bucket array for the STL iterators. Rust bucket storage is private and typed per map; bucket order is observable through each map's items() and cursor(), compared with OCCT by the hash_maps differential probe."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Buckets() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: Buckets() exposes the raw NCollection_ListNode* bucket array for the STL iterators. Rust bucket storage is private and typed per map; bucket order is observable through each map's items() and cursor(), compared with OCCT by the hash_maps differential probe."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Extent() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::extent",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Narrowed to int like the native static_cast."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Length() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::length",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap. Narrowed to int like the native static_cast."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Size() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::size",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::IsEmpty() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::is_empty",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::Allocator() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMap::allocator",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; The NCollection_BaseMap query is the BaseMap trait, implemented by DataMap, Map, IndexedMap, IndexedDataMap and DoubleMap."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
@@ -237974,6 +237886,310 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_BaseList::pRemoveFirst(NCollection_DelListNode)"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const occ::handle<NCollection_BaseAllocator> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::new",
+      "status": "partial",
+      "notes": "Owns bucket table only, not custom node objects. Null allocator selects shared allocator; move construction retains donor allocator and clears donor table/count/modulus. RAII ownership uses Rust storage types; no placement/object-allocation ABI or arbitrary C++ inheritance claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::nbBucketsFromInt(const int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::buckets_from_int",
+      "status": "partial",
+      "notes": "Preserves conversion and Standard_OutOfRange type for negative i32. Rust returns Result and adds offending value/expected shape to diagnostic text; native exception text is not identical. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::Iterator() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::<core::default::Default>::default",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NextPrimeForMap(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::next_map_prime",
+      "status": "partial",
+      "notes": "Shared prime table and unsigned wrap policy reproduce native scalar helper. No allocation feasibility or native exception/ABI implications. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NbBuckets() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::nb_buckets",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Length() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::length",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::Reset() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::reset",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::pNext() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::advance",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Resizable() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::resizable",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::destroy",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy",
+      "status": "partial",
+      "notes": "Unsafe valid acyclic live chains only; caches next before callback, visits ascending buckets and chain links, passes mutable allocator, optionally frees table while retaining modulus. Callback must preserve unvisited links. Rust closure policy and panic behavior do not prove arbitrary native function-pointer/throw/ABI contracts. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BeginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_into",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IsEmpty() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::is_empty",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::EndResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::exchangeMapsData(NCollection_BaseMap &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::exchange",
+      "status": "partial",
+      "notes": "Exchanges all base fields including allocator/table identity through actual owned storage. Native overlapping object/ABI and callback termination domains are not claimed. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Buckets() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets",
+      "status": "partial",
+      "notes": "Returns actual const/mutable table pointer with native null state. Raw node chains remain caller-owned; pointer provenance, valid live nodes and alias obligations apply. No unrelated C++ object-layout reinterpretation claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Increment() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::increment",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::IsEqual(const NCollection_BaseMap::Iterator &) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::is_equal",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Allocator() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::allocator",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Decrement() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::decrement",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::increment() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::increment",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Buckets() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets_mut",
+      "status": "partial",
+      "notes": "Returns actual const/mutable table pointer with native null state. Raw node chains remain caller-owned; pointer provenance, valid live nodes and alias obligations apply. No unrelated C++ object-layout reinterpretation claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Destroy",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy",
+      "status": "partial",
+      "notes": "Unsafe valid acyclic live chains only; caches next before callback, visits ascending buckets and chain links, passes mutable allocator, optionally frees table while retaining modulus. Callback must preserve unvisited links. Rust closure policy and panic behavior do not prove arbitrary native function-pointer/throw/ABI contracts. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NbBucketsFromInt(const int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::buckets_from_int",
+      "status": "partial",
+      "notes": "Preserves conversion and Standard_OutOfRange type for negative i32. Rust returns Result and adds offending value/expected shape to diagnostic text; native exception text is not identical. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Size() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::size",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::decrement() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::decrement",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::pMore() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::more",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Extent() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::extent",
+      "status": "partial",
+      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::Iterator(const NCollection_BaseMap &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::new",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(NCollection_BaseMap &&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::move_from",
+      "status": "partial",
+      "notes": "Owns bucket table only, not custom node objects. Null allocator selects shared allocator; move construction retains donor allocator and clears donor table/count/modulus. RAII ownership uses Rust storage types; no placement/object-allocation ABI or arbitrary C++ inheritance claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::ExchangeMapsData(NCollection_BaseMap &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::exchange",
+      "status": "partial",
+      "notes": "Exchanges all base fields including allocator/table identity through actual owned storage. Native overlapping object/ABI and callback termination domains are not claimed. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::resizable() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::resizable",
+      "status": "partial",
+      "notes": "Native wrapping count changes and resizable predicate operate on actual base state; caller must keep node-chain/count consistency. No arbitrary C++ storage layout or noexcept termination claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const bool,const occ::handle<NCollection_BaseAllocator> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::new_legacy",
+      "status": "partial",
+      "notes": "Owns bucket table only, not custom node objects. Null allocator selects shared allocator; move construction retains donor allocator and clears donor table/count/modulus. RAII ownership uses Rust storage types; no placement/object-allocation ABI or arbitrary C++ inheritance claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::Initialize(const NCollection_BaseMap &) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::initialize",
+      "status": "partial",
+      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::nextPrimeForMap(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::next_map_prime",
+      "status": "partial",
+      "notes": "Shared prime table and unsigned wrap policy reproduce native scalar helper. No allocation feasibility or native exception/ABI implications. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize",
+      "status": "partial",
+      "notes": "RAII pending plan replaces raw output/adoption ownership. beginResize preserves output/no-op phases and legacy second-output nulling. endResize takes count from plan and ignores obsolete extent/second pointer. Replacing an existing pending plan frees it instead of native leaked raw output; arbitrary raw adoption, pointer-size overflow and allocation-throw equivalence remain unsupported. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
     }
   ],
   "tests": [
