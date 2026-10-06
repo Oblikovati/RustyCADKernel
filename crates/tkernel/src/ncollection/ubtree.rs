@@ -6,6 +6,7 @@
 use super::{AllocatedBox, BaseAllocator};
 mod insertion;
 mod navigation;
+mod payload;
 mod removal;
 mod selection;
 pub use selection::FallibleTreeSelector;
@@ -28,10 +29,10 @@ pub trait TreeSelector<T, B> {
     fn stop(&self) -> bool;
 }
 /// A stable tree node; branch objects hold the target type's default value.
-#[derive(Clone)]
 pub struct BoundingNode<T, B> {
-    bounds: B,
+    // OCCT 3d097a0328 TreeNode destroys object before bounds; Rust drops in field order.
     object: T,
+    bounds: B,
     children: Option<[usize; 2]>,
     parent: Option<usize>,
 }
