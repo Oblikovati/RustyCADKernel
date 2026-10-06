@@ -65,6 +65,7 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
             unsafe { block.set_len(length) };
         }
         self.array.used = new_used;
+        self.array.needs_tail_scan = false;
         Ok(())
     }
     /// Copies native parameters into a destination with no allocated blocks.
