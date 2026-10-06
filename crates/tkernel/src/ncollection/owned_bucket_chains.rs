@@ -2,7 +2,7 @@
 #![allow(unsafe_code)]
 use crate::ncollection::{BaseAllocator, BaseMap, BaseMapStorage, MapLinkNode};
 use std::{marker::PhantomData, panic::RefUnwindSafe};
-mod node_contract;
+pub(in crate::ncollection) mod node_contract;
 pub(super) use node_contract::CanonicalMapNode;
 mod lookup;
 mod range;

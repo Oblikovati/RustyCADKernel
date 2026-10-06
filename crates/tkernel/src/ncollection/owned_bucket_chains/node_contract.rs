@@ -1,6 +1,6 @@
 //! Prefix casts and payload-derived thread bounds apply only to these audited native node layouts.
-use crate::ncollection::{BasicMapNode, DataMapNode, MapNode};
-mod sealed {
+use crate::ncollection::{BaseAllocator, BasicMapNode, DataMapNode, MapNode};
+pub(in crate::ncollection) mod sealed {
     pub trait Sealed {}
 }
 /// # Safety
@@ -10,6 +10,12 @@ mod sealed {
 pub(in crate::ncollection) unsafe trait CanonicalMapNode:
     BasicMapNode + sealed::Sealed
 {
+    /// Releases exactly this owned node, including allocator-dependent private payloads.
+    /// # Safety
+    /// Pointer must denote this allocator's live concrete node without outstanding borrows.
+    unsafe fn release_owned(pointer: *mut Self, allocator: &BaseAllocator) {
+        unsafe { crate::ncollection::node_release::release_typed_node(pointer, allocator) };
+    }
 }
 impl<K, V> sealed::Sealed for DataMapNode<K, V> {}
 impl<K> sealed::Sealed for MapNode<K> {}

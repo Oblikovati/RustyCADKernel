@@ -22,6 +22,10 @@ impl<K> MapNode<K> {
             value_node: ListValueNode::construct(next, construct),
         }
     }
+    // Private canonical owners project a field without retagging the whole node across callbacks.
+    pub(in crate::ncollection) unsafe fn key_ptr(node: *mut Self) -> *mut K {
+        unsafe { std::ptr::addr_of_mut!((*node).value_node.value) }
+    }
     /// Returns the same object as inherited Value for both native Key overloads; `node.key()`.
     pub fn key(&self) -> &K {
         self.value_node.value()

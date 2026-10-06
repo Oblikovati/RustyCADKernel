@@ -1,6 +1,6 @@
 //! CellFilter construction and the native `Reset` overloads.
-use super::{CellFilter, CellGeometry, CellHash};
-use crate::ncollection::{Array1, BaseAllocator, DataMap};
+use super::{CellFilter, CellGeometry, CellMap};
+use crate::ncollection::{Array1, BaseAllocator};
 use crate::standard::Failure;
 use std::marker::PhantomData;
 
@@ -65,7 +65,7 @@ impl<I: CellGeometry> CellFilter<I> {
         Self {
             dimension,
             sizes,
-            cells: DataMap::with_allocator(CellHash, 1, resource.clone()),
+            cells: CellMap::new(resource.clone()),
             resource,
             inspector: PhantomData,
         }

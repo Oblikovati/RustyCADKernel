@@ -35,13 +35,6 @@ impl<I: CellGeometry> CellFilter<I> {
         index: &CellIndex,
         keep: impl FnMut(&I::CellTarget) -> Result<bool, E>,
     ) -> Result<(), E> {
-        let Ok(targets) = self.cells.change_find(index) else {
-            return Ok(());
-        };
-        targets.try_retain(keep)?;
-        if targets.is_empty() {
-            self.cells.unbind(index);
-        }
-        Ok(())
+        self.cells.try_retain(index, keep)
     }
 }
