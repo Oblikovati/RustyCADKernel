@@ -72346,100 +72346,148 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator()",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::default::Default>::default",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::<core::default::Default>::default"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::default::Default>::default",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator()"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator(const NCollection_BaseList&)",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::new"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::cursor",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator(const NCollection_BaseList&)"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::Init(const NCollection_BaseList&)",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::init",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::init"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::Init(const NCollection_BaseList&)"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::Initialize(const NCollection_BaseList&)",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::initialize",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::initialize"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::Initialize(const NCollection_BaseList&)"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::More() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::more",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::more"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::more",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::More() const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::cmp::PartialEq>::eq",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::<core::cmp::PartialEq>::eq"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::is_equal",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::is_equal"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Extent() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::extent",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::extent"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::extent",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Extent() const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Length() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::length",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::length"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::length",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Length() const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Size() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::size",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::size"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::len",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Size() const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::IsEmpty() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::is_empty",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::is_empty"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::is_empty",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::IsEmpty() const noexcept"
     },
     {
-      "upstream_id": "NCollection_BaseList::Allocator() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::allocator"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::List::allocator",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Allocator() const noexcept"
     },
     {
       "upstream_id": "NCollection_BaseList::~NCollection_BaseList()",
@@ -236034,12 +236082,16 @@
       "notes": "Protected native recomputation operation; declaration ID e584fc476b1270fed8d9cb3dbf857e536dc66d03adcfb59a7a698bb5eda5ca9c, header SHA-256 d84a88d95ab7fb1581ba54447e428c19c78e1af2deb8dc451deab2e79335a079. Safe Rust counterpart recomputes V distribution, flat knots and smoothness, invalidates the shared resolution cache, and retains the evaluation representation; native derived probe and focused Rust tests: tools/oracle/bspline_surface_update_knots.md. Rust reports allocation/state failures with Result; only valid constructed surfaces are covered."
     },
     {
-      "upstream_id": "NCollection_BaseList::BasicIterator::ChangeValue() const noexcept",
-      "toolkit": "TKernel",
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::change_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::change_value"
+      ],
+      "rust_kind": "function",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::ListCursor::change_value",
-      "status": "implemented",
-      "notes": "Non-consuming mutation through a positioned stable node cursor; supplemental native fixture tools/oracle/tkernel_ncollection_list_cursor_change_value.cxx. Native undefined end/foreign-node dereference returns None. FunctionTemplate origin retained; no synthetic List method identity or new legacy declaration count."
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::ChangeValue() const noexcept"
     },
     {
       "upstream_id": "math_Uzawa::Perform(const math_Matrix &,const math_Vector &,const math_Vector &,const int,const int,const double,const double,const int)",
@@ -237267,6 +237319,606 @@
       ],
       "status": "partial",
       "notes": "Unsafe publication requires exact initialized [0,new_used) prefix with unique ownership and no conflicting aliases. Removed slots lose automatic Drop ownership and caller must destroy or validly republish them; dead slots must be reconstructed. Validation checks physical capacity before mutation. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::more",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::more"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::More() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::last",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::last"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PLast() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::from_mutable",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::from_mutable"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseList::BasicIterator<TheNode, TheItemType, false> &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PInsertAfter(NCollection_BaseList &,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::remove",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::remove"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pRemove(NCollection_BaseList::Iterator &,NCollection_DelListNode)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_at"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PAppend(NCollection_ListNode *,NCollection_BaseList::Iterator &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::remove",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::remove"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PRemove(NCollection_BaseList::Iterator &,NCollection_DelListNode)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PInsertBefore(NCollection_BaseList &,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pAppend(NCollection_ListNode *) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::iterator",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::iterator"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::Iterator() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::postfix_increment",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::postfix_increment"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator++(int) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::reverse",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::reverse"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PReverse() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_list"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pAppend(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::init_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::init_after"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::Init(const NCollection_BaseList &,NCollection_ListNode *const) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator<N, O>>>::eq",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator<N, O>>>::eq"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator==(const NCollection_BaseList::BasicIterator<TheNode, TheItemType, theOtherIsConstant> &) const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::reverse",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::reverse"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pReverse() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PInsertAfter(NCollection_ListNode *,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::first",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::first"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PFirst() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::last_mut",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::last_mut"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pLast() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::first",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::first"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pFirst() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::assign"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator=(const BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::clear",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::clear"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PClear(NCollection_DelListNode)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::prepend_list"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PPrepend(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::remove_first",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::remove_first"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PRemoveFirst(NCollection_DelListNode)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PInsertBefore(NCollection_ListNode *,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::prepend_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pPrepend(NCollection_ListNode *) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::prepend_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::prepend_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PPrepend(NCollection_ListNode *) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::new",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::new"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::NCollection_BaseList(const occ::handle<NCollection_BaseAllocator> &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::assign_mutable",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::assign_mutable"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator=(const NCollection_BaseList::BasicIterator<TheNode, TheItemType, false> &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::clone::Clone>::clone",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::clone::Clone>::clone"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const BasicIterator<TheNode, TheItemType, NCollection_BaseList::BasicIterator::IsConstant> &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_at"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pAppend(NCollection_ListNode *,NCollection_BaseList::Iterator &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::change_iterator",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::change_iterator"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::ChangeIterator() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::exchange",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::exchange"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PExchange(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_list_before"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pInsertBefore(NCollection_BaseList &,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_before_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pInsertBefore(NCollection_ListNode *,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_list_after"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pInsertAfter(NCollection_BaseList &,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::default::Default>::default",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::default::Default>::default"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PAppend(NCollection_ListNode *) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::insert_after_node"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pInsertAfter(NCollection_ListNode *,NCollection_BaseList::Iterator &)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::init_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListRawIterator::init_after"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::Iterator::init(const NCollection_BaseList &,NCollection_ListNode *const) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::last",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::last"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pLast() const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::clear",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::clear"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pClear(NCollection_DelListNode)"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::exchange",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::exchange"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pExchange(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::next",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::next"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::Next() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::prepend_list",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::prepend_list"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pPrepend(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::is_equal",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::is_equal"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::IsEqual(const NCollection_BaseList::BasicIterator<TheNode, TheItemType, theOtherIsConstant> &) const noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::first_mut",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::first_mut"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pFirst() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::prefix_increment",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListBasicIterator::prefix_increment"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator++() noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::append_list",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::append_list"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::PAppend(NCollection_BaseList &) noexcept"
+    },
+    {
+      "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::remove_first",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseListStorage::remove_first"
+      ],
+      "rust_kind": "function",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseList::pRemoveFirst(NCollection_DelListNode)"
     }
   ],
   "tests": [
