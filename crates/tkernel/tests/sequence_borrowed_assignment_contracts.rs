@@ -24,6 +24,14 @@ fn assignment_rows(rows: &mut Vec<String>) {
         sequence.value(1).unwrap().value,
         u8::from(std::ptr::eq(sequence.value(1).unwrap(), address))
     ));
+    indexed_assignment_rows(&mut sequence, &trace, rows);
+    partial_rows(&mut sequence, source, address, &trace, rows);
+}
+fn indexed_assignment_rows(
+    sequence: &mut Sequence<AssignmentItem>,
+    trace: &AssignmentTrace,
+    rows: &mut Vec<String>,
+) {
     trace.clear();
     sequence
         .set_value_from_index_with(1, 1, AssignmentItem::assign_self)
@@ -37,7 +45,6 @@ fn assignment_rows(rows: &mut Vec<String>) {
         .set_value_from_index_with(1, 2, AssignmentItem::assign_self)
         .unwrap();
     rows.push(format!("indexed {}", trace.text()));
-    partial_rows(&mut sequence, source, address, &trace, rows);
 }
 fn partial_rows(
     sequence: &mut Sequence<AssignmentItem>,
@@ -57,10 +64,18 @@ fn partial_rows(
         sequence.value(1).unwrap().value,
         u8::from(std::ptr::eq(sequence.value(1).unwrap(), address))
     ));
+    invalid_assignment_row(sequence, &source, trace, rows);
+}
+fn invalid_assignment_row(
+    sequence: &mut Sequence<AssignmentItem>,
+    source: &AssignmentItem,
+    trace: &AssignmentTrace,
+    rows: &mut Vec<String>,
+) {
     trace.clear();
     let errors = [-1, 0, 3]
         .into_iter()
-        .filter(|index| sequence.set_value_ref_signed(*index, &source).is_err())
+        .filter(|index| sequence.set_value_ref_signed(*index, source).is_err())
         .count();
     rows.push(format!("invalid {errors} {}", trace.text().len()));
 }
@@ -81,10 +96,14 @@ fn cursor_rows(rows: &mut Vec<String>) {
         sequence.value(2).unwrap().value,
         cursor.value(&sequence).unwrap().value
     ));
+    empty_cursor_row(&mut source, &trace, rows);
+    copy_failure_row(&mut sequence, &cursor, &mut source, &trace, rows);
+}
+fn empty_cursor_row(source: &mut AssignmentItem, trace: &AssignmentTrace, rows: &mut Vec<String>) {
     let mut empty = Sequence::default();
     let end = empty.cursor();
     trace.clear();
-    empty.insert_after_cursor_rvalue(&end, &mut source).unwrap();
+    empty.insert_after_cursor_rvalue(&end, source).unwrap();
     rows.push(format!(
         "empty_rvalue {} {} {} {}",
         trace.text(),
@@ -92,7 +111,6 @@ fn cursor_rows(rows: &mut Vec<String>) {
         empty.first().unwrap().value,
         u8::from(end.more())
     ));
-    copy_failure_row(&mut sequence, &cursor, &mut source, &trace, rows);
 }
 fn copy_failure_row(
     sequence: &mut Sequence<AssignmentItem>,
@@ -103,10 +121,7 @@ fn copy_failure_row(
 ) {
     source.fail_copy = true;
     trace.clear();
-    let caught = catch_unwind(AssertUnwindSafe(|| {
-        sequence.insert_after_cursor_rvalue(cursor, source).unwrap();
-    }))
-    .is_err();
+    let caught = failed_cursor_copy(sequence, cursor, source);
     rows.push(format!(
         "copy_failure {} {} {} {}",
         trace.text(),
@@ -114,6 +129,16 @@ fn copy_failure_row(
         source.value,
         sequence.size()
     ));
+}
+fn failed_cursor_copy(
+    sequence: &mut Sequence<AssignmentItem>,
+    cursor: &SequenceCursor,
+    source: &mut AssignmentItem,
+) -> bool {
+    catch_unwind(AssertUnwindSafe(|| {
+        sequence.insert_after_cursor_rvalue(cursor, source).unwrap();
+    }))
+    .is_err()
 }
 #[test]
 fn borrowed_assignment_and_cursor_rvalue_match_native_rows() {
