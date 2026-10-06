@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation storage checkpoint validated on committed main source; receipt commit recorded separately.",
+  "integration_status": "Foundation cursor checkpoint validated on committed main source; receipt commit recorded separately.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-storage-checkpoint.json",
-    "passed": 14259,
+    "receipt": "porting/audits/foundation-cursor-checkpoint.json",
+    "passed": 14304,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -183,5 +183,33 @@
     "new_miri_passed": 136,
     "miri_integration_passed": 442,
     "joined_original_runtime_cases": 1066
+  },
+  "current_draft_checkpoint": {
+    "receipt": "porting/audits/foundation-cursor-checkpoint.json",
+    "sha256": "8ca7a4b10efac24bd64d0e2880c3452e92fe373198a9683d4d07070020f38b2d",
+    "runtime": {
+      "workspace_passed": 14304,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_ignored_doctests": 70,
+      "workspace_groups": 1310,
+      "miri_integration_passes": 541,
+      "new_miri_integration_passes": 42,
+      "strict_provenance_miri_passes": 63,
+      "source_inputs": 9681,
+      "source_inputs_after_run_identical": true,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "workspace --all-targets",
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "joined_original_runtime_cases": 1066,
+      "new_original_runtime_joins": 0,
+      "test_count_delta": {
+        "new_supplemental_integration_tests": 42,
+        "restored_existing_doctests": 2,
+        "new_doctests": 1,
+        "net_pass_count_change": 45
+      }
+    }
   }
 }
