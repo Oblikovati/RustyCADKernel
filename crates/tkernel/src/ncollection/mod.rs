@@ -175,3 +175,9 @@ pub use items_view::{
     ItemsIterator, ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems,
     KeyValueIndexItems, KeyValueItems,
 };
+
+mod sparse_array_base;
+pub use sparse_array_base::{
+    SparseArrayBase, SparseArrayBaseIterator, SparseArrayBaseState, SparseArrayBlock,
+    SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
+};
