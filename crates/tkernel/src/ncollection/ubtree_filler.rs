@@ -2,42 +2,18 @@
 use super::{BaseAllocator, BoundingVolume, DynamicArray, UBTree};
 mod balance;
 mod insertion;
+mod payload;
 use crate::stl::MersenneTwister;
 pub use insertion::BoundingTreeInsertion;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
-#[derive(Default)]
 pub struct ObjBnd<T, B> {
-    /// The object to insert.
-    pub object: T,
+    // OCCT 3d097a0328 ObjBnd destroys bounds before object; Rust drops in field order.
     /// Its bounding geometry.
     pub bounds: B,
+    /// The object to insert.
+    pub object: T,
 }
-impl<T, B> ObjBnd<T, B> {
-    /// Pair an object with its bound; `ObjBnd::new(1, bounds)`.
-    pub fn new(object: T, bounds: B) -> Self {
-        Self { object, bounds }
-    }
-}
-impl<T: Clone, B: Clone> ObjBnd<T, B> {
-    /// Copies the object before its bounds, as native ObjBnd does; `ObjBnd::new_ref(&1, &bounds)`.
-    pub fn new_ref(object: &T, bounds: &B) -> Self {
-        Self {
-            object: object.clone(),
-            bounds: bounds.clone(),
-        }
-    }
-}
-impl<T: Clone, B: Clone> Clone for ObjBnd<T, B> {
-    fn clone(&self) -> Self {
-        Self::new_ref(&self.object, &self.bounds)
-    }
-    fn clone_from(&mut self, source: &Self) {
-        self.object.clone_from(&source.object);
-        self.bounds.clone_from(&source.bounds);
-    }
-}
-
 /// Collects objects, then adds them to the borrowed tree in `std::mt19937` order.
 /// Items still pending when the filler is dropped are added then, as the native destructor does.
 /// Example: `let mut filler = UBTreeFiller::new(&mut tree, None, true); filler.add(1, b); filler.fill();`

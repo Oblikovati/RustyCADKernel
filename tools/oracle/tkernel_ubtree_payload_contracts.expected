@@ -1,0 +1,22 @@
+node_ctor CB,CO,DO,DB, 1
+node_copy CB,CO,DO,DB, 1
+pair_ctor CO,CB,DB,DO, 1
+pair_copy CO,CB,DB,DO, 1
+pair_default NO,NB,DB,DO, 1
+node_assign AB,AO, 1
+pair_assign AO,AB, 1
+node_ctor_fail O CB,CO,DB, 1
+pair_ctor_fail O CO, 1
+default_fail O NO, 1
+node_assign_fail O AB,AO, 1 1 7 8
+pair_assign_fail O AO, 1 1 7 2
+node_drop_fail O DO,DB, 1 1
+pair_drop_fail O DB,DO, 1 1
+node_ctor_fail B CB, 1
+pair_ctor_fail B CO,CB,DO, 1
+default_fail B NO,NB,DO, 1
+node_assign_fail B AB, 1 1 1 8
+pair_assign_fail B AO,AB, 1 1 7 8
+node_drop_fail B DO,DB, 1 1
+pair_drop_fail B DB,DO, 1 1
+filler_reset DB,DO,DB,DO,DB,DO, 1
