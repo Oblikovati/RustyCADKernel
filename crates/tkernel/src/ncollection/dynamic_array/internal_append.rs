@@ -11,7 +11,7 @@ impl<T> DynamicArray<T> {
         source_index: I,
         copy_construct: impl FnOnce(&T) -> T,
     ) -> Result<&mut T, ArrayError> {
-        let source_index = self.internal_append_index(source_index)?;
+        let source_index = self.logical_source_index(source_index)?;
         Ok(self.append_constructed_with(|array| {
             let source =
                 &array.blocks[source_index / array.increment][source_index % array.increment];
@@ -28,7 +28,7 @@ impl<T> DynamicArray<T> {
         source_index: I,
         move_construct: impl FnOnce(&mut T) -> T,
     ) -> Result<&mut T, ArrayError> {
-        let source_index = self.internal_append_index(source_index)?;
+        let source_index = self.logical_source_index(source_index)?;
         Ok(self.append_constructed_with(|array| {
             let source =
                 &mut array.blocks[source_index / array.increment][source_index % array.increment];
@@ -36,7 +36,7 @@ impl<T> DynamicArray<T> {
         }))
     }
 
-    fn internal_append_index<I: TryInto<usize> + Copy + Debug>(
+    pub(super) fn logical_source_index<I: TryInto<usize> + Copy + Debug>(
         &self,
         source_index: I,
     ) -> Result<usize, ArrayError> {

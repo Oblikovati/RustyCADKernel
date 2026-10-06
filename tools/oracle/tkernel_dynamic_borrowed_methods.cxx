@@ -34,14 +34,17 @@ struct Item {
   }
   ~Item() { event("X" + std::to_string(value)); }
   Item& operator=(Item&& source) {
+    if (this == &source) event("S");
     event("M" + std::to_string(value) + "," + std::to_string(source.value));
     value = source.value;
     source.value = -7;
     if ((++moveCount == 1 && failure == "move") || (value == 99 && failure == "final_move"))
       throw std::runtime_error("move assignment");
+    if (this == &source && failure == "self") throw std::runtime_error("self move assignment");
     return *this;
   }
   Item& operator=(const Item& source) {
+    if (this == &source) event("Q");
     event("P" + std::to_string(value) + "," + std::to_string(source.value));
     if (failure == "assign") throw std::runtime_error("copy assignment");
     value = source.value;
@@ -161,4 +164,53 @@ static void internal_cases() {
   internal<false>("self_copy_retry",2,4,0,"construct",true);
   internal<true>("self_move_retry",2,4,3,"move_construct",true);
 }
-int main() { borrowed_cases(); moved_cases(); internal_cases(); }
+
+template<bool Moving, bool After, class Index>
+static bool insert_internal(NCollection_DynamicArray<Item>& array, Index index, size_t source) {
+  try {
+    Item& result = After ? array.InsertAfter(index, forwarded<Moving>(array[source]))
+                        : array.InsertBefore(index, forwarded<Moving>(array[source]));
+    return &result == &array[size_t(index) + size_t(After)];
+  } catch (...) { event("E"); return false; }
+}
+template<bool Moving, bool After>
+static void insertion_case(const char* name, int index, size_t source, const char* fail, bool wide) {
+  occ::handle<ProbeAllocator> allocator = new ProbeAllocator;
+  probe = allocator.get(); failure.clear(); moveCount = 0;
+  NCollection_DynamicArray<Item> array(2, allocator);
+  for (int i = 0; i < 4; ++i) array.EmplaceAppend((i + 1) * 10);
+  if (std::string(fail) == "final_move") array[source].value = 99;
+  const Item* original = &array[source]; probe->events.clear(); failure = fail;
+  const bool returned = wide ? insert_internal<Moving, After>(array, size_t(index), source)
+                            : insert_internal<Moving, After>(array, index, source);
+  print_internal(name, array, returned, original == &array[source]);
+}
+template<bool Moving, bool After> static void insertion_matrix() {
+  for (int index = 0; index < 4; ++index) {
+    for (size_t source = 0; source < 4; ++source) {
+      const std::string name = "alias_a" + std::to_string(After) + "_m" + std::to_string(Moving)
+                            + "_i" + std::to_string(index) + "_s" + std::to_string(source);
+      insertion_case<Moving, After>(name.c_str(), index, source, "", index % 2 == 1);
+    }
+  }
+}
+static void insertion_failures() {
+  insertion_case<false,false>("alias_copy_before_throw",0,1,"assign",false);
+  insertion_case<false,false>("alias_copy_self_throw",0,0,"assign",true);
+  insertion_case<false,true>("alias_copy_after_throw",1,0,"assign",true);
+  insertion_case<true,false>("alias_move_before_shift_throw",0,3,"move",false);
+  insertion_case<true,true>("alias_move_after_shift_throw",0,1,"move",true);
+  insertion_case<true,false>("alias_move_before_self_throw",0,0,"self",false);
+  insertion_case<true,true>("alias_move_after_self_throw",0,1,"self",true);
+  insertion_case<true,false>("alias_move_final_throw",2,0,"final_move",true);
+  insertion_case<false,false>("alias_default_before_throw",0,1,"default",false);
+  insertion_case<true,true>("alias_default_after_throw",0,1,"default",true);
+  insertion_case<false,false>("alias_before_negative",-1,0,"",false);
+  insertion_case<true,true>("alias_after_end",4,0,"",true);
+}
+int main() {
+  borrowed_cases(); moved_cases(); internal_cases();
+  insertion_matrix<false,false>(); insertion_matrix<false,true>();
+  insertion_matrix<true,false>(); insertion_matrix<true,true>();
+  insertion_failures();
+}

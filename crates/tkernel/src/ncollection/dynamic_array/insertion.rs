@@ -45,7 +45,7 @@ impl<T: Default> DynamicArray<T> {
         let index = self.insertion_position(index, true)?;
         Ok(self.assign_insertion(index, shift_assignment, final_assignment))
     }
-    fn insertion_position<I: TryInto<usize> + Copy + Debug>(
+    pub(super) fn insertion_position<I: TryInto<usize> + Copy + Debug>(
         &self,
         index: I,
         after: bool,
@@ -59,28 +59,24 @@ impl<T: Default> DynamicArray<T> {
     fn assign_insertion(
         &mut self,
         index: usize,
-        mut shift_assignment: impl FnMut(&mut T, &mut T),
+        shift_assignment: impl FnMut(&mut T, &mut T),
         final_assignment: impl FnOnce(&mut T),
     ) -> &mut T {
-        self.appended();
-        for destination in (index + 1..self.used).rev() {
-            let (target, source) = self.adjacent_insertion_slots(destination);
-            shift_assignment(target, source);
-        }
+        self.stage_insertion(index, shift_assignment);
         let target = &mut self.blocks[index / self.increment][index % self.increment];
         final_assignment(target);
         target
     }
-    fn adjacent_insertion_slots(&mut self, destination: usize) -> (&mut T, &mut T) {
-        let block = destination / self.increment;
-        let offset = destination % self.increment;
-        if offset > 0 {
-            let (sources, targets) = self.blocks[block].split_at_mut(offset);
-            return (&mut targets[0], &mut sources[offset - 1]);
+    pub(super) fn stage_insertion(
+        &mut self,
+        index: usize,
+        mut shift_assignment: impl FnMut(&mut T, &mut T),
+    ) {
+        self.appended();
+        for destination in (index + 1..self.used).rev() {
+            let (target, source) = self.distinct_value_slots(destination, destination - 1);
+            shift_assignment(target, source);
         }
-        let (sources, targets) = self.blocks.as_mut_slice().split_at_mut(block);
-        let source = &mut sources[block - 1][self.increment - 1];
-        (&mut targets[0][0], source)
     }
 }
 impl<T: Clone + Default> DynamicArray<T> {

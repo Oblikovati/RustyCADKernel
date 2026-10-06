@@ -30,11 +30,13 @@ pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
 mod insertion;
 mod internal_append;
+mod internal_insertion;
 mod legacy_cursor;
 mod method_tail;
 mod moving;
 #[allow(unsafe_code)]
 mod replacement_policy;
+mod slots;
 mod storage_extension;
 pub use legacy_cursor::DynamicArrayIterator;
 pub use storage_extension::DynamicArrayStorageExtension;
@@ -224,17 +226,11 @@ impl<T> DynamicArray<T> {
         }
     }
     fn swap(&mut self, first: usize, second: usize) {
-        let (first, second) = (first.min(second), first.max(second));
-        let (block1, block2) = (first / self.increment, second / self.increment);
-        if block1 == block2 {
-            self.blocks[block1].swap(first % self.increment, second % self.increment);
+        if first == second {
             return;
         }
-        let (left, right) = self.blocks.as_mut_slice().split_at_mut(block2);
-        std::mem::swap(
-            &mut left[block1][first % self.increment],
-            &mut right[0][second % self.increment],
-        );
+        let (first, second) = self.distinct_value_slots(first, second);
+        std::mem::swap(first, second);
     }
 }
 impl<T: Default> DynamicArray<T> {
