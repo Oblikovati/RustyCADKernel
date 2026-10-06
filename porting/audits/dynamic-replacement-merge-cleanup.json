@@ -1,0 +1,47 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "fb8cec1e8756fb88ebac7afefe1e09d00312f7af",
+  "focused_rust_passed": 120,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "strict_tkernel_scoped_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/dynamic-replacement-root-rust.gz",
+      "sha256": "78ef2cb2bfbe4161f95205ee905a1b5f85e97e8495729833f8ae7dbf2d3292d9"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/dynamic-replacement-root-clippy.gz",
+      "sha256": "62d4f5adfbb3361c75dae4fb6f364f0eff830d1d896cb0fef7b2ae750eecbefa"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/dynamic-replacement-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "d1d34c097bb1da727e1f471687f0c28ffdca2c35",
+      "deleted_worktree": "/tmp/rustycad-dynamic-replacement-policy",
+      "deleted_branch": "port/dynamic-replacement-policy",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
