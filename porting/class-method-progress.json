@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Validated foundation drafts ready for integration on main; see current_draft_checkpoint.",
+  "integration_status": "Foundation checkpoint integrated on main at 68f95c49cc4917598419389c95e78342f2bdc4ff; later work is tracked separately.",
   "classes": [
     {
       "batch_order": 1,
@@ -244,5 +244,14 @@
         "status": "partial method contracts; historical scoped source hashes remain scoped"
       }
     ]
+  },
+  "current_integrated_checkpoint": {
+    "commit": "68f95c49cc4917598419389c95e78342f2bdc4ff",
+    "receipt": "porting/audits/foundation-base-storage-checkpoint.json",
+    "sha256": "a450d60cceba4163238e4692e6a290afc0200476f75939c5dc683b73c26226bb",
+    "workspace_passed": 13997,
+    "workspace_failed": 0,
+    "workspace_ignored": 70,
+    "new_miri_passed": 122
   }
 }

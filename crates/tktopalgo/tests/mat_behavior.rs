@@ -73,7 +73,7 @@ fn list_edits_keep_the_native_order() {
 fn empty_list_reads_are_native_null_dereferences() {
     let list: MatListOfBisector = MatListOfBisector::new();
     assert!(list.is_empty());
-    let failure = list.current().err().expect("a null current node");
+    let failure = list.current().expect_err("a null current node");
     assert_eq!(failure.exception_type(), "Standard_NullObject");
 }
 
