@@ -12,35 +12,6 @@ mod set_value_policy;
 mod trivial_assignment;
 mod unpublished_tail;
 
-struct LengthRollback<'a, T> {
-    elements: &'a mut Vec<T>,
-    previous_len: usize,
-    committed: bool,
-}
-
-impl<'a, T> LengthRollback<'a, T> {
-    fn new(elements: &'a mut Vec<T>, previous_len: usize) -> Self {
-        Self {
-            elements,
-            previous_len,
-            committed: false,
-        }
-    }
-
-    fn commit(&mut self) {
-        debug_assert!(!self.committed);
-        self.committed = true;
-    }
-}
-
-impl<T> Drop for LengthRollback<'_, T> {
-    fn drop(&mut self) {
-        if !self.committed {
-            self.elements.truncate(self.previous_len);
-        }
-    }
-}
-
 /// A zero-based growable collection; `LinearVector::<i32>::with_capacity(10)`.
 #[derive(Debug)]
 pub struct LinearVector<T> {
@@ -288,6 +259,10 @@ impl<T: Clone> LinearVector<T> {
         vector
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
+    /// Common-slot assignments remain observable if copying later fails. With sufficient
+    /// capacity, failed tail construction leaves len unchanged and completed spare copies
+    /// live; subsequent overwrite/free omits their destructors as native operator= does.
+    /// Insufficient-capacity construction and throwing shrink retain Rust's safe cleanup.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         if source.len() > self.capacity() {
             *self = source.clone();
@@ -311,11 +286,12 @@ impl<T: Clone> LinearVector<T> {
             self.elements.truncate(source.len());
             return;
         }
-        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
-        for item in &source.elements[common_len..] {
-            rollback.elements.push(item.clone());
-        }
-        rollback.commit();
+        let mut index = common_len;
+        self.construct_unpublished_tail(source.len(), || {
+            let copied = source.elements[index].clone();
+            index += 1;
+            copied
+        });
     }
     /// Resizes by cloning `value` into each new slot:
     ///
