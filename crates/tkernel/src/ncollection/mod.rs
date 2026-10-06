@@ -47,7 +47,9 @@ pub use allocator::{
     INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
 };
 mod dynamic_array;
-pub use dynamic_array::{DynamicArray, DynamicArrayIterator, DynamicCursor};
+pub use dynamic_array::{
+    DynamicArray, DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
+};
 
 mod buffer;
 pub use buffer::Buffer;
@@ -70,9 +72,9 @@ pub use base_list::{
 #[allow(unsafe_code)]
 mod list;
 #[allow(unsafe_code)]
-mod node_release;
-#[allow(unsafe_code)]
 mod list_node;
+#[allow(unsafe_code)]
+mod node_release;
 pub use list::List as AllocatorList;
 pub use list::{BaseListIterator, List, ListCursor, ListIter, ListIterMut};
 pub use list_node::{ListLinkNode, ListValueNode};
