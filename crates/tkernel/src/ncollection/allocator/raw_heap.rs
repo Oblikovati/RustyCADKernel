@@ -81,6 +81,15 @@ unsafe fn read_header(payload: NonNull<u8>) -> (Header, NonNull<u8>) {
     }
 }
 
+/// Reads the live allocation extent used to recover owned arena pointers beyond native key windows.
+///
+/// # Safety
+/// `payload` must be the original, still-live pointer returned by this module.
+pub(super) unsafe fn heap_payload_size(payload: NonNull<u8>) -> usize {
+    // SAFETY: the caller retains the exact original allocation and its header.
+    unsafe { read_header(payload).0.size }
+}
+
 /// Releases a payload, like `free`.
 ///
 /// # Safety

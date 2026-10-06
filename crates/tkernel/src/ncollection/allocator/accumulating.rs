@@ -2,7 +2,9 @@
 //!
 //! Blocks are found by `address / block_size` exactly as upstream; the map stores block
 //! descriptors by key and the `prevBlock` chain links keys instead of descriptor pointers.
-use super::raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_reallocate};
+use super::raw_heap::{
+    MALLOC_ALIGNMENT, heap_allocate, heap_free, heap_payload_size, heap_reallocate,
+};
 use super::{AccAlignedSize, AccBlock, AccBlockKey};
 use crate::standard::Failure;
 use std::{collections::HashMap, ptr::NonNull};
@@ -78,6 +80,16 @@ impl AccBlockSlot {
             alloc_count: self.descriptor.alloc_count,
         }
     }
+    fn contains_owned(&self, address: usize) -> bool {
+        // SAFETY: this slot retains the live original raw_heap pointer, including its header.
+        let capacity = unsafe { heap_payload_size(self.payload) };
+        address >= self.start() && address - self.start() <= capacity
+    }
+    fn reservation(&self, size: usize, align: usize) -> Option<usize> {
+        let cursor = self.descriptor.alloc_start.as_ptr().addr();
+        let aligned_start = cursor.checked_sub(size)? & !(align - 1);
+        (aligned_start >= self.start()).then_some(cursor - aligned_start)
+    }
     fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
         let cursor = self.descriptor.allocate(AccAlignedSize::new(size));
         // SAFETY: selection guarantees the descriptor cursor stays within the owned block; the
@@ -131,46 +143,43 @@ impl AccEngine {
     /// `Allocate`: last block, a dedicated block for oversize requests, or a scan of the
     /// previous `MaxLookupBlocks - 1` blocks before a new block; `None` only on exhaustion.
     pub(super) fn allocate(&mut self, size: usize) -> Option<NonNull<u8>> {
-        let size = aligned_size(size)?;
-        let key = self.select_block(size)?;
-        self.blocks
-            .get_mut(&key)
-            .expect("selected block is bound")
-            .allocate(size)
+        self.allocate_aligned(size, ACC_ALIGN)
     }
 
-    /// Allocation honouring a Rust layout alignment (typed allocations only).
-    ///
-    /// Upstream guarantees 4 bytes; a stricter alignment reserves `align - 4` extra bytes and
-    /// aligns the address up inside the reservation, so the block still owns the address.
+    /// Reserves only actual downward padding; aligned native geometries consume native bytes.
     pub(super) fn allocate_aligned(&mut self, size: usize, align: usize) -> Option<NonNull<u8>> {
-        if align <= ACC_ALIGN {
-            return self.allocate(size);
-        }
-        let raw = self.allocate(aligned_size(size)?.checked_add(align - ACC_ALIGN)?)?;
-        let offset = raw.as_ptr().align_offset(align);
-        // SAFETY: the reservation starts 4-aligned, so `offset <= align - 4` bytes of it pad.
-        Some(unsafe { raw.add(offset) })
+        let size = aligned_size(size)?;
+        let align = align.max(ACC_ALIGN);
+        let key = self.select_block(size, align)?;
+        let slot = self.blocks.get_mut(&key).expect("selected block is bound");
+        let reservation = slot.reservation(size, align)?;
+        slot.allocate(reservation)
     }
 
-    fn select_block(&mut self, size: usize) -> Option<usize> {
+    fn select_block(&mut self, size: usize, align: usize) -> Option<usize> {
         let last = self
             .last_block
             .expect("an AccAllocator always owns a block");
-        if size <= self.blocks[&last].free_size() {
+        if self.blocks[&last].reservation(size, align).is_some() {
             return Some(last);
         }
         if size > self.block_size {
-            return self.allocate_new_block(size);
+            return self.allocate_aligned_block(size, align);
         }
-        match self.lookup_previous(last, size) {
+        match self.lookup_previous(last, size, align) {
             Some(key) => Some(key),
-            None => self.allocate_new_block(self.block_size),
+            None => self.allocate_aligned_block(size, align),
         }
     }
 
+    fn allocate_aligned_block(&mut self, size: usize, align: usize) -> Option<usize> {
+        // raw_heap's Layout and header offset guarantee MALLOC_ALIGNMENT for every payload.
+        let capacity = size.checked_add(align.saturating_sub(MALLOC_ALIGNMENT))?;
+        self.allocate_new_block(capacity.max(self.block_size))
+    }
+
     /// The native `for (b = last->prev; b && --rest; b = b->prev)` scan.
-    fn lookup_previous(&self, last: usize, size: usize) -> Option<usize> {
+    fn lookup_previous(&self, last: usize, size: usize, align: usize) -> Option<usize> {
         let mut rest = ACC_MAX_LOOKUP_BLOCKS;
         let mut iterator = self.blocks[&last].descriptor.prev_block;
         while let Some(key) = iterator {
@@ -178,7 +187,7 @@ impl AccEngine {
             if rest == 0 {
                 return None;
             }
-            if size <= self.blocks[&key].free_size() {
+            if self.blocks[&key].reservation(size, align).is_some() {
                 return Some(key);
             }
             iterator = self.blocks[&key].descriptor.prev_block;
@@ -310,17 +319,38 @@ impl AccEngine {
     /// owners free exactly once, and `BaseAllocator::free_raw` is `unsafe`.
     pub(super) fn free(&mut self, address: usize) -> Result<(), Failure> {
         let key = self.freeable_block(address)?;
+        self.release_counted_block(key);
+        Ok(())
+    }
+
+    /// Rust-owned pointers may exceed native findBlock's window or equal a zero-byte endpoint.
+    pub(super) fn free_owned(&mut self, address: usize) -> Result<(), Failure> {
+        let key = self
+            .find_block(address)
+            .filter(|key| self.blocks[key].contains_owned(address));
+        let key = key
+            .or_else(|| {
+                self.blocks
+                    .iter()
+                    .find_map(|(&key, slot)| slot.contains_owned(address).then_some(key))
+            })
+            .filter(|key| self.blocks[key].descriptor.alloc_count != 0)
+            .ok_or_else(|| Failure::with_type("Standard_ProgramError", INVALID_FREE, ""))?;
+        self.release_counted_block(key);
+        Ok(())
+    }
+
+    fn release_counted_block(&mut self, key: usize) {
         let block = self.blocks.get_mut(&key).expect("found block is bound");
         block.descriptor.free();
         if block.descriptor.alloc_count != 0 {
-            return Ok(());
+            return;
         }
         if self.blocks.len() > 1 {
             self.release_block(key);
         } else {
             self.shrink_sole_block(key);
         }
-        Ok(())
     }
 
     /// Frees an empty block and unlinks it from the `prevBlock` chain.
@@ -402,3 +432,7 @@ mod tests {
         assert_eq!(engine.blocks[&key].descriptor.alloc_count, 0);
     }
 }
+
+#[cfg(test)]
+#[path = "accumulating/alignment_tests.rs"]
+mod alignment_tests;
