@@ -123,3 +123,6 @@ mod traits;
 
 #[cfg(test)]
 mod canonical_contracts;
+
+mod base_bridge;
+pub(super) use base_bridge::ordered_base_bridge;

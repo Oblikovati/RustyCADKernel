@@ -292,3 +292,5 @@ impl<'a, K, H: HashPolicy<K>> IntoIterator for &'a OrderedMap<K, H> {
         self.iter()
     }
 }
+
+super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>,super::OrderedMapNode<K>);
