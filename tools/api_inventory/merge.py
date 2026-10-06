@@ -12,6 +12,7 @@ from functools import lru_cache
 from typing import Iterator, cast
 
 from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
+from .returned_reachability import bind_returned_edge, returned_capture_gap
 from .template_identity import normalize_template_signature
 
 CALLABLE_DECLARATION_KINDS = frozenset(
@@ -32,6 +33,7 @@ class InventoryRecords:
     site_keys: dict[str, set[str]] = field(default_factory=dict)
     declarations: dict[str, JSONObject] = field(default_factory=dict)
     alias_reachability: list[JSONObject] = field(default_factory=list)
+    returned_type_reachability: list[JSONObject] = field(default_factory=list)
     macros: dict[str, JSONObject] = field(default_factory=dict)
     includes: set[str] = field(default_factory=set)
     skipped_ranges: list[JSONObject] = field(default_factory=list)
@@ -234,6 +236,7 @@ def preserve_evidence_event(
         "diagnostic": records.diagnostics,
         "summary": records.summaries,
         "alias_reachability": records.alias_reachability,
+        "returned_type_reachability": records.returned_type_reachability,
         "unsupported": records.unsupported,
     }
     target = collections.get(str(event.get("event")), records.unsupported)
@@ -247,6 +250,10 @@ def normalize_locations(
     for key, value in event.items():
         if isinstance(value, dict):
             normalize_locations(value, source, aliases)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    normalize_locations(item, source, aliases)
         elif isinstance(value, str) and key in {"source", "file", "main_header"}:
             event[key] = aliases.get(value, source_identity(value, source))
 
@@ -263,7 +270,8 @@ def consume_event(
         merge_macro(records, event, header)
     elif kind == "header_seen":
         records.includes.add(text_field(event, "source"))
-    elif kind == "alias_reachability":
+    elif kind == "returned_type_reachability":
+        bind_returned_edge(event, declaration_identity)
         preserve_evidence_event(records, event, header)
     else:
         preserve_evidence_event(records, event, header)
@@ -279,7 +287,8 @@ def capture_diagnostic(
 
 
 def verify_capture_summary(
-    records: InventoryRecords, previous: int, previous_aliases: int, header: str
+    records: InventoryRecords, previous: int, previous_aliases: int, header: str,
+    previous_returned: int = 0,
 ) -> None:
     """Reject truncated declarations and alias edges; e.g. `verify_capture_summary(records, 0, 0, header)`."""
     summaries = records.summaries[previous:]
@@ -291,6 +300,11 @@ def verify_capture_summary(
             {"reason": "incomplete_compiler_summary", "header": header}
         )
         return
+    gap = returned_capture_gap(
+        summaries[0], len(records.returned_type_reachability) - previous_returned, header
+    )
+    if gap is not None:
+        records.unsupported.append(gap)
     emitted = summaries[0].get("alias_reachability_events")
     observed = len(records.alias_reachability) - previous_aliases
     if type(emitted) is not int or emitted != observed:
@@ -333,10 +347,11 @@ def consume_capture(
         return
     summary_count = len(records.summaries)
     alias_count = len(records.alias_reachability)
+    returned_count = len(records.returned_type_reachability)
     for event in json_lines(artifact):
         consume_event(records, event, text_field(result, "path"), source)
     verify_capture_summary(
-        records, summary_count, alias_count, text_field(result, "path")
+        records, summary_count, alias_count, text_field(result, "path"), returned_count
     )
     if result.get("stderr"):
         capture_diagnostic(records, result, "compiler_stderr")
@@ -425,6 +440,8 @@ def declaration_counts(records: InventoryRecords) -> JSONObject:
             len(cast(list[JSONValue], row.get("exposed_members", [])))
             for row in records.alias_reachability
         ),
+        "returned_type_reachability_records": len(records.returned_type_reachability),
+        "returned_type_reachability_complete": False,
         "macro_definitions": len(records.macros),
         "macro_candidates": sum(
             row.get("api_candidate") is True for row in records.macros.values()

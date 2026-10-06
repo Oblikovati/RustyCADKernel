@@ -328,7 +328,9 @@ class MergeTests(InventoryFixture):
         event = {"event": "alias_reachability", "source": "a.hxx",
                  "alias_usr": "alias", "exposed_members": []}
         summary = {"event": "summary", "complete_for_emit_scope": True,
-                   "alias_reachability_events": 0}
+                   "alias_reachability_events": 0,
+                   "returned_type_reachability_events": 0,
+                   "returned_type_reachability_policy": "inferred_private_record_v1"}
         artifact.write_text(json.dumps(event) + "\n" + json.dumps(summary) + "\n")
         result = {"path": "a.hxx", "artifact": "alias.jsonl",
                   "output_sha256": digest(artifact), "status": "parsed"}

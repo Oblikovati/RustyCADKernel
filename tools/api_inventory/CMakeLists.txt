@@ -4,6 +4,7 @@ project(occt_api_extract LANGUAGES CXX)
 find_package(LLVM 23.1.2 CONFIG REQUIRED)
 find_package(Clang 23.1.2 CONFIG REQUIRED)
 add_executable(occt-api-extract
+  src/ReturnedTypeReachability.cpp
   src/AliasReachability.cpp
   src/main.cpp
   src/InventoryVisitor.cpp
@@ -21,6 +22,9 @@ target_link_libraries(occt-api-extract PRIVATE clang-cpp)
 include(CTest)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 if(BUILD_TESTING)
+  add_test(NAME api_inventory_returned_type_reachability
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_returned_reachability.py
+      $<TARGET_FILE:occt-api-extract> ${CMAKE_CURRENT_SOURCE_DIR}/fixtures)
   add_test(NAME api_inventory_fixture
     COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_fixture.py
       $<TARGET_FILE:occt-api-extract> ${CMAKE_CURRENT_SOURCE_DIR}/fixtures)

@@ -58,6 +58,9 @@ def inventory_tables(
             records.alias_reachability,
             key=lambda row: (str(row.get("source")), str(row.get("alias_usr"))),
         ),
+        "returned-type-reachability": sorted(
+            records.returned_type_reachability, key=lambda row: str(row["id"])
+        ),
         "macros": sorted(records.macros.values(), key=lambda row: str(row["id"])),
         "headers": headers,
         "diagnostics": records.diagnostics,
