@@ -189,7 +189,10 @@ impl BaseAllocator {
     /// allocated by this allocator, without another owner or active typed lease. The caller
     /// must exclude reset/free until lease acquisition finishes; `arena.adopt_abandoned_value(p)`.
     pub unsafe fn adopt_abandoned_value<T>(&self, pointer: NonNull<T>) -> AllocatedBox<T> {
-        self.acquire_owned_byte_lease();
+        // allocator-api2 owns no backing allocation or reset lease for zero-sized values.
+        if std::mem::size_of::<T>() != 0 {
+            self.acquire_owned_byte_lease();
+        }
         // SAFETY: the caller retains exact layout/provenance and excludes reset until this lease.
         unsafe { AllocatedBox::from_raw_in(pointer.as_ptr(), self.clone()) }
     }

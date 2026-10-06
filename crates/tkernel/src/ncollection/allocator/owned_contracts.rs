@@ -92,3 +92,15 @@ fn reset_reclaims_abandoned_incremental_storage_without_running_payload_drop() {
     drop(replacement);
     assert!(arena.reset(true).is_ok());
 }
+
+#[test]
+fn zero_sized_re_adoption_does_not_create_an_unreleasable_arena_lease() {
+    let arena = BaseAllocator::incremental(1024);
+    let (pointer, resource) = arena.allocate_value(()).into_raw_with_allocator();
+    drop(resource);
+    // SAFETY: exact initialized ZST owner is transferred without any allocated bytes or lease.
+    let owner = unsafe { arena.adopt_abandoned_value(NonNull::new(pointer).unwrap()) };
+    assert!(arena.reset(false).is_ok());
+    drop(owner);
+    assert!(arena.reset(true).is_ok());
+}
