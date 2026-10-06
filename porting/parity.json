@@ -237021,6 +237021,252 @@
       "status": "partial",
       "selector_id": "982a2700dcfa395aba36bc793839cf487fe59cb4b7ac655d0570f8a08ceed294",
       "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::allocateBlock(const size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::allocate_block",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::allocate_block"
+      ],
+      "status": "partial",
+      "notes": "Detached raw allocation using native-style byte count and selected allocator; these pointers are not typed AllocVec payloads and must be freed only through matching raw API. Layout/byte request parity limited to documented backend. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::at(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::at"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate rows; only initialized registered slots exposed through references with actual guard lifetimes. Checked Rust failure replaces native undefined out-of-range/uninitialized access. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::at(const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_at"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate rows; only initialized registered slots exposed through references with actual guard lifetimes. Checked Rust failure replaces native undefined out-of-range/uninitialized access. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::availableSize() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::available_size",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::available_size"
+      ],
+      "status": "partial",
+      "notes": "Allocated block count times current native stride, not physical retained capacity after decreasing increment. Valid representable product only; native unsigned overflow versus checked/debug Rust multiplication not claimed. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::blockAddress(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_address",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_address"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate exact rows. Returned pointer exposes live typed block allocation, bounds are checked; no native void-pointer reinterpretation into unrelated type. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::blockAddress(const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_block_address",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_block_address"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate exact rows. Returned pointer exposes live typed block allocation, bounds are checked; no native void-pointer reinterpretation into unrelated type. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::blockAt(const size_t) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_at"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate exact rows. Returned pointer preserves real typed allocation provenance; dereference requires initialization/lifetime and alias contracts. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::blockAt(const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_block_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::change_block_at"
+      ],
+      "status": "partial",
+      "notes": "Const/mutable overloads remain separate exact rows. Returned pointer preserves real typed allocation provenance; dereference requires initialization/lifetime and alias contracts. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::blockCount() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_count",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::block_count"
+      ],
+      "status": "partial",
+      "notes": "Count of actual retained typed blocks, including uninitialized retained storage; no claim of identical C++ descriptor ABI. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::clearBlocks() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::clear_blocks",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::clear_blocks"
+      ],
+      "status": "partial",
+      "notes": "Forgets initialized values without running Drop, then releases block and table allocations. Native no-drop behavior explicit; caller is responsible for external resources otherwise leaked. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::constructAt(NCollection_DynamicArray::pointer,Args &&...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::construct_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::construct_at"
+      ],
+      "status": "partial",
+      "notes": "Unsafe caller supplies suitably aligned valid uninitialized slot with exclusive access. Closure returns Rust value; no arbitrary C++ placement constructor or address-dependent object dispatch. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::copyDate(const NCollection_DynamicArray<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_date_with",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_date_with",
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_date_trivial"
+      ],
+      "status": "partial",
+      "notes": "Explicit nontrivial constructor callback or Copy trivial policy; partial block failure returns recovery token owning initialized objects. Token cleanup deliberately differs from native leaked raw prefix. No blanket Clone dispatch, address-dependent placement construction or all allocation-failure equivalence. Scoped source/native evidence: porting/audits/dynamic-array-copy-date.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::copyParameters(const NCollection_DynamicArray<TheItemType> &,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_parameters",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_parameters",
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::copy_parameters_retained"
+      ],
+      "status": "partial",
+      "notes": "Safe zero-block reset plus unsafe retained-parameter adapter. Retained adapter suppresses Drop, requires caller cleanup/republication of initialized payloads, physical capacity and compatible original typed allocator layout. Native arbitrary pointer leaks and all allocator layouts not claimed. Scoped source/native evidence: porting/audits/dynamic-array-retained-parameters.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::deallocateBlock(void *) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::deallocate_block",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::deallocate_block"
+      ],
+      "status": "partial",
+      "notes": "Unsafe matching detached raw allocation contract; typed owner payload addresses must never be passed. No generic C++ allocator compatibility promise. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::destroyAt(NCollection_DynamicArray::pointer) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::destroy_at",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::destroy_at"
+      ],
+      "status": "partial",
+      "notes": "Unsafe caller supplies one live initialized valid slot with exclusive access and updates registered lifetime prefix appropriately. Drop panic is not C++ noexcept termination. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ensureBlockCount(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::ensure_block_count",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::ensure_block_count"
+      ],
+      "status": "partial",
+      "notes": "Real typed block allocation and retention; item size must match T, no detached raw ownership imitation. Descriptor pointer-table byte layout remains different. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ensureStorageForIndex(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::ensure_storage_for_index",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::ensure_storage_for_index"
+      ],
+      "status": "partial",
+      "notes": "Real typed block storage engine; item size must equal size_of<T>, representable valid index, descriptor capacity policy matches but descriptor payload has different byte size. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::expandBlock(const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::expand_block",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::expand_block"
+      ],
+      "status": "partial",
+      "notes": "Allocates actual next typed block; supplied item size validated, raw address aliases actual owner and initialized prefix remains caller responsibility. Descriptor allocation byte equality is not claimed. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::log2Pow2(const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::log2_pow2",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::log2_pow2"
+      ],
+      "status": "partial",
+      "notes": "Exact native floor-log loop, including zero for zero and non-power-of-two inputs. Return scalar matches native usize-sized unsigned domain; does not prove constructor/allocation parity. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::replaceAt(NCollection_DynamicArray::pointer,Args &&...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::replace_at_assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::replace_at_assign",
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::replace_at_reconstruct",
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::replace_at_direct"
+      ],
+      "status": "partial",
+      "notes": "Three explicit policies preserve assign, reconstruct, or direct replacement branch ordering under documented lifetime contracts. Caller supplies trait dispatch; Rust cannot infer arbitrary C++ nothrow/trivial constructors. Failed reconstruction leaves dead slot requiring repair. Scoped source/native evidence: porting/audits/dynamic-array-replacement-policy.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::roundUpPow2(const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::round_up_pow2",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::round_up_pow2"
+      ],
+      "status": "partial",
+      "notes": "Native unsigned wrapping round-up calculation; zero/wrap result is exposed by pure helper, not proof that constructors can safely allocate or index zero stride. Scoped source/native evidence: porting/audits/dynamic-array-protected-storage.json."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::setUsedSize(const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::set_used_size",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::set_used_size"
+      ],
+      "status": "partial",
+      "notes": "Unsafe publication requires exact initialized [0,new_used) prefix with unique ownership and no conflicting aliases. Removed slots lose automatic Drop ownership and caller must destroy or validly republish them; dead slots must be reconstructed. Validation checks physical capacity before mutation. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
     }
   ],
   "tests": [
