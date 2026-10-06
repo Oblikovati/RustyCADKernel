@@ -11,9 +11,10 @@ struct EmplaceValueStage<'a, T> {
     committed: bool,
 }
 impl<T: Default> EmplaceValueStage<'_, T> {
-    fn construct(mut self, construct: impl FnOnce() -> T) -> usize {
+    fn construct(mut self, construct: impl FnOnce(&mut DynamicArray<T>) -> T) -> usize {
         self.append_gap_defaults();
-        self.append_requested_value(construct());
+        let value = construct(self.array);
+        self.append_requested_value(value);
         self.array.used = self.index + 1;
         self.committed = true;
         self.index
@@ -80,7 +81,7 @@ impl<T> DynamicArray<T> {
             forget_block_values_after(block, keep);
         }
     }
-    fn emplace_direct(&mut self, index: usize, construct: impl FnOnce() -> T) -> usize
+    fn emplace_direct(&mut self, index: usize, construct: impl FnOnce(&mut Self) -> T) -> usize
     where
         T: Default,
     {
@@ -97,7 +98,7 @@ impl<T> DynamicArray<T> {
     fn emplace_with_initialized_tail(
         &mut self,
         index: usize,
-        construct: impl FnOnce() -> T,
+        construct: impl FnOnce(&mut Self) -> T,
     ) -> usize
     where
         T: Default,
@@ -105,7 +106,7 @@ impl<T> DynamicArray<T> {
         // Stage separately so a failed constructor preserves safe Rust IndexMut slots.
         let mut pending = PendingEmplaceValues::with_capacity(index - self.used + 1);
         self.stage_gap_defaults(self.used, index, &mut pending);
-        pending.push(construct());
+        pending.push(construct(self));
         self.commit_staged_values(self.used, pending.release());
         self.used = index + 1;
         index
@@ -133,7 +134,11 @@ impl<T> DynamicArray<T> {
         *slot = replacement;
         Ok(slot)
     }
-    fn emplace_new(&mut self, index: usize, construct: impl FnOnce() -> T) -> usize
+    pub(super) fn emplace_new(
+        &mut self,
+        index: usize,
+        construct: impl FnOnce(&mut Self) -> T,
+    ) -> usize
     where
         T: Default,
     {
@@ -166,7 +171,7 @@ impl<T> DynamicArray<T> {
         if index < self.used {
             return self.emplace_existing(index, construct);
         }
-        let final_index = self.emplace_new(index, construct);
+        let final_index = self.emplace_new(index, |_| construct());
         self.change_value(final_index)
     }
 }

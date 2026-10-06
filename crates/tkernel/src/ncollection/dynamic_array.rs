@@ -31,6 +31,7 @@ mod emplacement;
 mod insertion;
 mod internal_append;
 mod internal_insertion;
+mod internal_setvalue;
 mod legacy_cursor;
 mod method_tail;
 mod moving;

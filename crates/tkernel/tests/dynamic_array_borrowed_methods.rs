@@ -7,6 +7,7 @@ use std::{
 };
 mod dynamic_array_borrowed_methods {
     pub mod alias_insertion;
+    pub mod alias_setvalue;
     pub mod contracts;
     pub mod internal;
     pub mod moving;
