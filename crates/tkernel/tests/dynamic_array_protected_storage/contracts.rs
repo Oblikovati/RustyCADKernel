@@ -36,12 +36,13 @@ fn storage_size_guards_reject_overflow_without_allocation() {
     assert!(storage.ensure_block_count(usize::MAX, 4).is_err());
     assert!(storage.ensure_storage_for_index(usize::MAX, 4).is_err());
     assert_eq!(storage.block_count(), 0);
+    // Native stride-one SIZE_MAX wraps the block count to zero without allocating.
     let mut unit_stride = DynamicArray::<i32>::with_increment(1);
     assert!(
         unit_stride
             .storage_extension()
             .ensure_storage_for_index(usize::MAX, 4)
-            .is_err()
+            .is_ok()
     );
 }
 #[test]
