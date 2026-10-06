@@ -1,5 +1,6 @@
 #include "InventoryVisitor.h"
 #include "AliasReachability.h"
+#include "ReturnedTypeReachability.h"
 #include "clang/AST/ASTContext.h"
 
 namespace api_inventory {
@@ -30,6 +31,12 @@ bool InventoryVisitor::VisitDecl(clang::Decl *declaration) {
   ++emitted_;
   writeEvent(event);
   emitAliasReachability(*declaration, event);
+  if (visible) {
+    for (auto exposure : returnedTypeReachabilityEvents(*declaration, context_, config_)) {
+      writeEvent(std::move(exposure));
+      ++returnedTypeReachabilityEvents_;
+    }
+  }
   return true;
 }
 
@@ -55,6 +62,8 @@ void InventoryVisitor::emitSummary() {
       {"event", "summary"},
       {"emitted_declarations", static_cast<int64_t>(emitted_)},
       {"alias_reachability_events", static_cast<int64_t>(aliasReachabilityEvents_)},
+      {"returned_type_reachability_events", static_cast<int64_t>(returnedTypeReachabilityEvents_)},
+      {"returned_type_reachability_policy", "inferred_private_record_v1"},
       {"external_declarations_excluded", static_cast<int64_t>(externalDecls_)},
       {"occt_declarations_outside_emit_scope", static_cast<int64_t>(occtUnemittedDecls_)},
       {"declarations_by_kind", std::move(kinds)},

@@ -1,0 +1,261 @@
+{
+  "schema": "rustycad.returned-private-type-reachability.v1",
+  "status": "bounded_capture_validated_global_recapture_pending",
+  "baseline_source_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "supersedes_scope": {
+    "receipt": "porting/audits/returned-private-type-reachability-gap.json",
+    "scope": "Extraction and bounded native evidence; original denominator incompleteness remains open. Original receipt unchanged."
+  },
+  "api_denominator_complete": false,
+  "coverage_credit": false,
+  "published_inventory_modified": false,
+  "ledger_modified": false,
+  "capture_source_root": "/home/vmiguel/git/oblikovati-workspace/OCCT/src",
+  "header": "FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+  "baseline_capture": "porting/runtime-evidence/returned-private-type-baseline-capture-v1.jsonl.gz",
+  "current_capture": "porting/runtime-evidence/returned-private-type-current-capture-v1.jsonl.gz",
+  "producer_id": "d20f4857b71047bbdb0b16f08fe7c89cca46caf3a1a5a59ff377d76c9aa43d2b",
+  "reached_declarations": [
+    {
+      "id": "7ad6ed61ec3da6dcac19dce231e8aa29c8e81f19d4877d939e031064c54f0f10",
+      "qualified_name": "NCollection_SparseArrayBase::Block",
+      "kind": "CXXRecord",
+      "signature": "",
+      "api_visible": false,
+      "exclusion_reason": "private_access"
+    },
+    {
+      "id": "f6ea4e750b4dd5e811c6a93a2bb059d6fc67dc11c88ef8e05af4d25df7f901c3",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Cell",
+      "kind": "Typedef",
+      "signature": "unsigned char",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "54b98f566a0a6fe07e38af4fa1e3934f67ed60f9645a04d15eb0643ad98ad13a",
+      "qualified_name": "NCollection_SparseArrayBase::Block::bitsPerCell",
+      "kind": "CXXMethod",
+      "signature": "unsigned long () noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "aebfbc8c201e2d1b0a9febfa2015bebe57382709df6316e51f917cabb1f3943e",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Block",
+      "kind": "CXXConstructor",
+      "signature": "void (void *, unsigned long, unsigned long)",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "1d7ae5088b00bca7419740baaba85fe24ed79557cb2446298d7e99cdfc9de9be",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Size",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (unsigned long, unsigned long) noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "279f93c7a26021fe1ad9f256993ec647f8bea7d2de05c50d909a48fe2cdf4707",
+      "qualified_name": "NCollection_SparseArrayBase::Block::ToArray",
+      "kind": "CXXMethod",
+      "signature": "char *(void *, unsigned long, unsigned long) noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "0c7cbcf710a249742e49c4a0566c40efecc9b08a2d57c5c4c5b81bf4552903b1",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Set",
+      "kind": "CXXMethod",
+      "signature": "unsigned char (unsigned long) noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "688f29a04b90d1c8a1839c9609ebc22c4854ffb30b4a5fe8ce4e691edbd99182",
+      "qualified_name": "NCollection_SparseArrayBase::Block::IsSet",
+      "kind": "CXXMethod",
+      "signature": "unsigned char (unsigned long) noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "0870d478a8e6fd878358e4955e51e0fceebbfeb948c7bbb4465328b8482489d4",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Unset",
+      "kind": "CXXMethod",
+      "signature": "unsigned char (unsigned long) noexcept",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "6d05171ccc57384af1a02bf19856ad8bebfcbb901913ed9ba7877c5b83b9813a",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Count",
+      "kind": "Field",
+      "signature": "unsigned long *",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "848de59b092288f468d26055bc6ff056b14a3efad9a5bdff42a7e300a445bacb",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Array",
+      "kind": "Field",
+      "signature": "void *",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    },
+    {
+      "id": "165885a026ce0219cd49e4b3e7c3e20271225a621cbba55d43bbc23a2a3c4d23",
+      "qualified_name": "NCollection_SparseArrayBase::Block::Bits",
+      "kind": "Field",
+      "signature": "unsigned char *",
+      "api_visible": false,
+      "exclusion_reason": "private_ancestor"
+    }
+  ],
+  "observations": {
+    "identical_normalized_primary_declarations": 181,
+    "unchanged_api_candidates": 57,
+    "returned_type_edges": 7,
+    "dependent_paths_unresolved": 6,
+    "private_block_members_recorded": 11,
+    "private_block_nominal_record": 1,
+    "private_names_or_members_promoted": 0
+  },
+  "validation": {
+    "ctest": {
+      "passed": 3,
+      "native_positive_executable": 1,
+      "native_negative_compiles": 6
+    },
+    "occt_python_regressions": 31,
+    "returned_merge_negative_and_positive_tests": 8,
+    "receipt_replay_tests": 7
+  },
+  "scope": [
+    "Public/protected function and type-alias roots; value/pointer/reference return forms preserve exact producer/target/member identities.",
+    "Public members of inferred types, protected members requiring derived inferred types, private inaccessible members and final-type protected blockers are recorded separately.",
+    "Transitive public/protected returned private records and public aliases are traversed, with cycles/repeated targets recorded.",
+    "Dependent and class-template specialization return types are explicitly unresolved. No arbitrary specialization or constraints credit.",
+    "Merger exports returned-type-reachability separately, binds IDs with existing declaration_identity, normalizes nested locations, and rejects malformed edges, missing policy, invalid/bool counters, truncated streams and promoted credit.",
+    "Existing primary declaration visibility and inventory counts remain unchanged. Supplemental edges do not grant API parity or implementation credit."
+  ],
+  "limitations": [
+    "Global captures must be regenerated using the new extractor; old captures lack returned-type policy and are explicit unsupported evidence when merged.",
+    "Inherited base-member access, field/nested-type closure, function/member-pointer type closure, template substitutions and configuration closure remain unproved.",
+    "Construction/destruction, cv qualifiers, deleted/inaccessible call targets, argument/constraint viability and allocation are not inferred as callable from member visibility.",
+    "The existing native Sparse oracle proves getBlock inferred-field access; supplemental reachability alone does not establish behavioral parity for each Block method.",
+    "The published declaration inventory uses different captured flags/context from this bounded probe; invariance is against a fresh same-flags baseline built from the recorded main revision, not a replacement published inventory."
+  ],
+  "replay_command": "PYTHONPATH=tools python3 tools/verify_returned_private_reachability.py",
+  "capture_command": [
+    "<extractor>",
+    "--source-root",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src",
+    "--main-header",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+    "--",
+    "-std=c++17",
+    "--gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/13",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade"
+  ],
+  "native_capture_exit_codes": {
+    "baseline": 0,
+    "current": 0
+  },
+  "extractor_binaries": {
+    "baseline_sha256": "2a0e094430561415e6e0614c3988b0b80cdd51b15579d20341f686e2a7de9711",
+    "current_sha256": "6995709a196005b17a1bbbb1c8684728a0b6e827735df6ed3b615916341ee8c4"
+  },
+  "attested_files": [
+    {
+      "path": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "sha256": "10b27cfe10abb13400cccf6ed2f08dbcd0f173136c9944e66d0ebe52730c4e47"
+    },
+    {
+      "path": "porting/audits/returned-private-type-reachability-gap.json",
+      "sha256": "aeeed59fb5945d74b24b843704e5281134440565bf608ce6f30ac9b9a2f792e0"
+    },
+    {
+      "path": "porting/runtime-evidence/returned-private-type-baseline-capture-v1.jsonl.gz",
+      "sha256": "95b4806f5a682efc0328b83c34f4d1a7747357807935bc7d08d578fa078a0b05"
+    },
+    {
+      "path": "porting/runtime-evidence/returned-private-type-current-capture-v1.jsonl.gz",
+      "sha256": "06c7604f6d312b2cb8ce5dbe1845bee77f0992a922495c11647e7d0c5d14a825"
+    },
+    {
+      "path": "tools/api_inventory/CMakeLists.txt",
+      "sha256": "b47c8ad5721dc93684fd8122ee37a7e51028db79de5579704aa24d1cce68482d"
+    },
+    {
+      "path": "tools/api_inventory/fixtures/source/include/ReturnedPrivate.hxx",
+      "sha256": "912955465dbac186f4f38f33fe81f94fd10d98cafc6dd62c8f5a12c10fabb44d"
+    },
+    {
+      "path": "tools/api_inventory/include/InventoryVisitor.h",
+      "sha256": "d998d149423d67a80b18e811e84770f8a66ae0c1a4ecdffeedef8b94afc79a1f"
+    },
+    {
+      "path": "tools/api_inventory/include/ReturnedTypeReachability.h",
+      "sha256": "182455651b66fc4c94ff7a94bcbf89633c1155ac46a9a3f26e70c8b5f4fd9e78"
+    },
+    {
+      "path": "tools/api_inventory/merge.py",
+      "sha256": "df457cf3f2ab889d2ab6b8344996d5f879e66f04e939037c4eaa846d533ce8c3"
+    },
+    {
+      "path": "tools/api_inventory/returned_reachability.py",
+      "sha256": "87dae0f60dfbb6786d8d23e80bb6bf0c55ed9fc5e62ffbe5eddc891cbbb1ad1e"
+    },
+    {
+      "path": "tools/api_inventory/src/InventoryVisitor.cpp",
+      "sha256": "2292ed1d27dfe4438ce7f72011a97591cab48303b455c45855a328b07b7b1015"
+    },
+    {
+      "path": "tools/api_inventory/src/ReturnedTypeReachability.cpp",
+      "sha256": "a40273040ab7b8b3dd8f29be97f38ab52a38fa18db2835ab94d9703fe1186605"
+    },
+    {
+      "path": "tools/api_inventory/src/Schema.cpp",
+      "sha256": "93fe46b89542ef5a2627ae167fed449c6908f71829178a71205f095a870fc1c2"
+    },
+    {
+      "path": "tools/api_inventory/template_identity.py",
+      "sha256": "fb07fc0d49c8ff258deb25ebc0bd3332631835f2a976485aa9062628dc2f7cbe"
+    },
+    {
+      "path": "tools/api_inventory/tests/check_returned_reachability.py",
+      "sha256": "dbae1af63d35af2503671bd3dd4fd75175208ec880298d94434e6c7c01468692"
+    },
+    {
+      "path": "tools/merge_occt_inventory.py",
+      "sha256": "e176d806b5df6b2467d97e157d569986f0f3df189eff7f8d882161fdf73ec554"
+    },
+    {
+      "path": "tools/oracle/tkernel_sparse_array_base_contracts.cxx",
+      "sha256": "7f1570ef82ed30f26cac6bdb9955982e936e8ad9d3324bb77f631690c01e62a9"
+    },
+    {
+      "path": "tools/oracle/tkernel_sparse_array_base_contracts.expected",
+      "sha256": "d5b1355226d53435f218136de9d1007d22e3d383969fdec08427af20030f2582"
+    },
+    {
+      "path": "tools/tests/test_occt_inventory.py",
+      "sha256": "3a8a323ca0fd952e7c870a2e6a4a24cfbc4f4a51b462e455f2b121b86e5503e4"
+    },
+    {
+      "path": "tools/tests/test_returned_private_receipt.py",
+      "sha256": "436f185c27c493047e10a740c650b7cdfa97c1e70547570d93e59af6306a713b"
+    },
+    {
+      "path": "tools/tests/test_returned_type_reachability.py",
+      "sha256": "9210dab2a39b065a2ed9119f9a0f66c488ee18b9a861aefa5e24ca3ab002ef59"
+    },
+    {
+      "path": "tools/verify_returned_private_reachability.py",
+      "sha256": "4cb80ff53c7a93eb719185599d8324f71520537c4f100c666b4b9d145df0625d"
+    }
+  ]
+}

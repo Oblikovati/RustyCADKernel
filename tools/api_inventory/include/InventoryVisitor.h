@@ -25,6 +25,7 @@ private:
   std::set<std::string> unhandledKinds_;
   unsigned emitted_ = 0;
   unsigned aliasReachabilityEvents_ = 0;
+  unsigned returnedTypeReachabilityEvents_ = 0;
   unsigned externalDecls_ = 0;
   unsigned occtUnemittedDecls_ = 0;
 };
