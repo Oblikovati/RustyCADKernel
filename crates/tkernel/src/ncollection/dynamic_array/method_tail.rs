@@ -3,6 +3,12 @@ use super::DynamicArray;
 use crate::ncollection::{ArrayError, BaseAllocator, OccAllocator};
 use std::fmt::Debug;
 impl<T> DynamicArray<T> {
+    /// Moves every block into a fresh array, leaving an empty source with its original stride.
+    /// `let moved = DynamicArray::from_moved(&mut source);` invokes no item operations.
+    pub fn from_moved(source: &mut Self) -> Self {
+        let empty = Self::with_increment(source.increment);
+        std::mem::replace(source, empty)
+    }
     /// Reports native size_t Size, without truncating to Length; `array.size() == array.len()`.
     pub const fn size(&self) -> usize {
         self.len()

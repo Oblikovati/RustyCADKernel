@@ -176,8 +176,7 @@ impl<T> DynamicArray<T> {
     pub fn move_from(&mut self, source: &mut Self) {
         // Named native Assign(rvalue) destroys the receiver before touching the source.
         self.clear(true);
-        let empty = Self::with_increment(source.increment);
-        *self = std::mem::replace(source, empty);
+        *self = Self::from_moved(source);
     }
     /// Iterates the logical sequence; `array.iter().sum::<i32>()`.
     pub fn iter(&self) -> impl DoubleEndedIterator<Item = &T> + ExactSizeIterator {
