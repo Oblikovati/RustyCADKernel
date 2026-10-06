@@ -3,6 +3,7 @@
 //! OCCT derives the class from both `NCollection_Sequence` and `Standard_Transient`, and
 //! every handle holder edits the one sequence. Rust handles share `&` access only, so the
 //! sequence sits behind a lock and is lent to closures (`sequence`, `change_sequence`).
+mod borrowed_append;
 use super::Sequence;
 use super::generic_transient::impl_generic_transient;
 use crate::standard::StandardTransient;
@@ -33,12 +34,6 @@ impl<T: Clone> HSequence<T> {
     /// Appends and empties `source` (OCCT `Append(SequenceType&)`); `items.append_sequence(&mut more)`.
     pub fn append_sequence(&self, source: &mut Sequence<T>) {
         self.change_sequence(|items| items.append_sequence(source));
-    }
-    /// Copies a borrowed item after allocating its node, native Append(const T&); `items.append_ref(&42)`.
-    pub fn append_ref(&self, value: &T) {
-        self.change_sequence(|items| {
-            items.append_ref(value);
-        });
     }
 }
 impl<T> HSequence<T> {
