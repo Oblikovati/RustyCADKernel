@@ -39,7 +39,8 @@ pub use aligned::{AccAlignedPtr, AccAlignedSize};
 pub use block::AccBlock;
 use incremental::IncEngine;
 pub use incremental::{
-    INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncBlock, IncBlockSizeLevel,
+    INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE, IncAllocatorBlock, IncAllocatorObservation,
+    IncBlock, IncBlockObservation, IncBlockSizeLevel,
 };
 pub use incremental_extension::IncAllocatorExtension;
 pub use keys::{AccBlockKey, AccBlockKeyHasher};

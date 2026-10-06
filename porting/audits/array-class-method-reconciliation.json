@@ -1,0 +1,3580 @@
+{
+  "schema": "rustycad.array-class-method-reconciliation.v1",
+  "base_revision": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "inventory_sha256": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+  "scope": "All direct callable declaration inventory rows of NCollection_Array1 and NCollection_Array2; this is a review checklist, not completion or coverage credit.",
+  "counts": {
+    "public_callable_requires_exact_receipt_reconciliation": 66,
+    "scoped_receipt_partial_domain": 51,
+    "internal_protocol_requires_separate_domain_evidence": 26,
+    "allocation_macro_surface_open": 16,
+    "template_owned_child_no_separate_credit": 13
+  },
+  "class_counts": {
+    "NCollection_Array1": 93,
+    "NCollection_Array2": 79
+  },
+  "receipt_search": {
+    "command": "rg -l NCollection_Array[12] porting/audits -g *.json",
+    "binding_extraction": "Recursive dictionaries with exact cpp_id and cpp_name; other mentions remain input evidence without an exact binding claim."
+  },
+  "receipt_inputs": {
+    "porting/audits/array-buffer-constructor-contracts.json": {
+      "sha256": "3f1fae004c3bdee8c0ede206d311c83d2e5d50e214243fb24db6395e58921481",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-const-assignment-contracts.json": {
+      "sha256": "019bee0581f1f711e460f28950a3cb8f45dceffe3f30e919e6085207801f067d",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-copy-values-assignment-contracts.json": {
+      "sha256": "262d51be08a8007dd90db4b424f46885bd8ccad8e810499d7bf6e33925a26554",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-emplace-assignment-contracts.json": {
+      "sha256": "3c81a1eb405cca07a86c1e7a5e817b8b46f839c39de9c882f8dac4ec3cb7b92e",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-internal-init-assignment-contracts.json": {
+      "sha256": "3bfd47889b0154b0bd64412a31315ae3b5a8c3c4acb760234b44ea55f993533e",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-internal-set-value-assignment-contracts.json": {
+      "sha256": "32f04e33ae57f6335cf0e1b955a3c565a8711cea612680956edcb663edf6dab0",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-method-contracts.json": {
+      "sha256": "fd0c5e392c6ace05a4e20f203234300324fc555806adb093d6bf49b2d6250e9b",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-raw-copy-contracts.json": {
+      "sha256": "6e57c3fa5b1cfeaf823ec174b03b2af9a3d2e4de7ffb1ff76b330ea1eec1507a",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-set-value-assignment-contracts.json": {
+      "sha256": "04d2ada9a0f1b4e005c4b8024c71bca3fd58f246fa5aa028a9608a328fb9a442",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-uninitialized-constructor-contracts.json": {
+      "sha256": "c7358518fa4678ca5e4df49786cf7fa2c8b67db841feb3cc6d367d9c8aa7ea14",
+      "integration": "current candidate receipt; integration pending"
+    },
+    "porting/audits/array1-borrowed-init.json": {
+      "sha256": "0ae895ae53598cb43d26491be1a01eae1a131a4152e47eac900e462aad0afdca",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array2-resize-assignment-contracts.json": {
+      "sha256": "271f803712b624c3f140b22450e66c726cdd3ebf4b194ab17dd4e5b0860421a6",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/cell-size-storage-contracts.json": {
+      "sha256": "b5c5dd2f3083f2a5c5c7c34485cc985e7a8233d35edad69f2d836572ce32eb13",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/compiler-scoped-alias-selectors.json": {
+      "sha256": "1f1e72c45508274884943c5587267f5aa399a0a0f955e2339e8f6ad1d5068c3e",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/cpp-unqualified-member-selectors.json": {
+      "sha256": "998c2420529221bfbdb08301b3018ff18ec7fab93d23242ac0c117c712f6ce67",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-base-storage-checkpoint.json": {
+      "sha256": "a450d60cceba4163238e4692e6a290afc0200476f75939c5dc683b73c26226bb",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-canonical-checkpoint.json": {
+      "sha256": "d67617bd91f356ee65ba37e630634460bb29726372c9a296295310db0c93fdb3",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-class-checkpoint.json": {
+      "sha256": "70646577eebb89a8f29886a19e98a91f00ec041a9d49425fd5f6ee58876b1ce2",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-cursor-checkpoint.json": {
+      "sha256": "8ca7a4b10efac24bd64d0e2880c3452e92fe373198a9683d4d07070020f38b2d",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-flat-layout-checkpoint.json": {
+      "sha256": "658d672ca3869c93af9d28e442ea558ac4536f18e1cca350536a7d83986061f0",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-generic-checkpoint.json": {
+      "sha256": "a36799c254629336cc626f5f435082cbf67fd42b170e5878ff72c3b18725e391",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-indexed-engine-checkpoint.json": {
+      "sha256": "181e1b281b1fa828269ccab5be5457ef7948ac92bfdb0260e1a3b766e34123cf",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-map-engines-checkpoint.json": {
+      "sha256": "00ad44d9b03c167d79a4c3db3c182ab3ad388fae1d483ab493d99b22e4e54b9c",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-method-tail-checkpoint.json": {
+      "sha256": "bbf6089804bee74790bfb663218976abec1cd1ac552dc069072cad02353d13e0",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-methods-checkpoint.json": {
+      "sha256": "e3b0444342791b29a0901bad4ca03c9ab140f85ad778bf146b7f20d0f127437a",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-native-tail-checkpoint.json": {
+      "sha256": "e430e5b9840fdc60082500a9248662fe36a6066f2016adc459ea672796b94d75",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-nodes-checkpoint.json": {
+      "sha256": "3ae446870baa7ff4fda4d7cd74a6ca96c5231012815e77713572c9f1e13a582e",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-storage-checkpoint.json": {
+      "sha256": "eceab210f80107e9c701a45202c09d31f6488992f11e481456cd0eaefb306718",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/foundation-topology-checkpoint.json": {
+      "sha256": "162e91f190703132372055062761c0961b3e9f66a39921c824d03ce87b8b5bfd",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/inc-allocator-thread-policy.json": {
+      "sha256": "3212fc661b17a777de45163958de0a7d0471aad9cf36790178969608c16b0fa7",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/ncollection-array-set-value-ref.json": {
+      "sha256": "defb3116f931dd669628b0515de41650a2a67a9cd4396d368d061bb486bc0d74",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/ncollection-array2-buffer-prefix.json": {
+      "sha256": "ba3b9046f196c666a9c832a75d04dd81d76097a23c09680901968af7c9f0771b",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/shared-collection-method-batch.json": {
+      "sha256": "ea3e18e1749e6025ca5884bd1d00de5db160051a450578672d7232757ef62ba7",
+      "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+    },
+    "porting/audits/array-internal-emplace-assignment-contracts.json": {
+      "sha256": "de59a5a60b2e4e352318e2c4fedec33673f8e77b1ddaa2dc4822542afd82268c",
+      "integration": "pending candidate adc022697298f9f496e462db6488c370e5231f29; not in audited base"
+    }
+  },
+  "selected_next_domain": "Trivially-default-constructible native element allocation without initialization; explicit MaybeUninit constructors and consuming initialization transition.",
+  "already_present_operations": [
+    "Ordinary copy constructors and assignment have Clone/clone_from policies; adding redundant clone callbacks was rejected as the next task.",
+    "Both Array2 resize layouts already have explicit mutable-donor operation callbacks and native failure-phase receipts.",
+    "Scalar/matrix access, flattened-bound helpers, pointer iterators and basic constructor entry points already exist; a reachable review candidate is not an exact declaration binding."
+  ],
+  "remaining_domains": [
+    "Arbitrary raw alias protocols and independently overlapping mutable wrappers.",
+    "Multiple internal EmplaceValue constructor arguments and constructor-retained aliases.",
+    "Allocator macro entry points and native allocator routing; outside this array-only slice.",
+    "Nontrivial constructor failure leaks and throwing destructor behavior.",
+    "Native trivial resize/reallocation address effects and uninitialized tail storage remain separate future evidence domains.",
+    "Inherited declarations, typedef/type aliases, macros and template specializations outside these direct callable rows require the global inventory workflow."
+  ],
+  "candidate_code_note": "The four uninitialized constructors appear among review candidates, but their new exact bindings belong to the separate uninitialized receipt. Pending internal Emplace bodies are referenced by immutable candidate receipt, not claimed compiled on this base.",
+  "api_parity_complete": false,
+  "global_api_inventory_credit_added": 0,
+  "methods": [
+    {
+      "id": "0124ba37329ef0ac56984d837150abf665ceb5959277d694eaeacd5c36cd4ea3",
+      "qualified_name": "NCollection_Array1::At",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(unsigned long) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 371
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::at"
+      ]
+    },
+    {
+      "id": "034a7997cb43920090ae16c7521a302c8349e4b1f16c874a49cc6f6d37ffa93b",
+      "qualified_name": "NCollection_Array2::At",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(unsigned long) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 431
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::at"
+      ]
+    },
+    {
+      "id": "037bbbe7ba5115f936e51826f6febfd0f538443a3dfb15ade6d15a0476ad45f6",
+      "qualified_name": "NCollection_Array2::end",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 117
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_end_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_end_mut_ptr"
+      ]
+    },
+    {
+      "id": "055c0a8e2f5dd2080ef0310d65c3597cf8ff5634512b4592d6b0e65f73c9da4d",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 90,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 545
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "05d4cf6e44bf5afab3905da6c05d85ad7eb38ff6e4237ae68e1033f3c61e7a61",
+      "qualified_name": "NCollection_Array2::cbegin",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 113
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_ptr"
+      ]
+    },
+    {
+      "id": "065efac015bc9725ef3fb130337cb3195d4a589631985983154fea79c0cae085",
+      "qualified_name": "NCollection_Array2::UpperCol",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 306
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::upper_col"
+      ]
+    },
+    {
+      "id": "0867af1f9103328f48a4c877b0d6296cfee29a2d21e75ea0d1f0ae54ba4ed207",
+      "qualified_name": "NCollection_Array2::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(const NCollection_Array2<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 388
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::assign",
+        "rustycad_tkernel::ncollection::Array2::assign_trivial",
+        "rustycad_tkernel::ncollection::Array2::move_from",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "0aa29862b9799e9ec9d4c879a4a140cdec6711bcb966103f4ea9ee4b63d3fede",
+      "qualified_name": "NCollection_Array1::Move",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(NCollection_Array1<TheItemType> &) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 319
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::move_from",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "0b20dd988e65eb8be880396445869e4d79c95ebdd7ca414bccdf8f39db033f7a",
+      "qualified_name": "NCollection_Array1::copyAssign",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 637
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "0b569cb2f36f730cfbf9f6c9eda93023ca46ad759cc2de24ecef08b96472d2a0",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (const type-parameter-0-0 &, int, int, int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 199
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-buffer-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "0bc1844fca54cad17cbe6a1fdd2596bb7a3b8bb59b567063e706875abe3f56d5",
+      "qualified_name": "NCollection_Array1::offsetOf",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (int, const char *) const",
+      "access": "protected",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 431
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "0c3c61411f600d8219c9ceb12f387d25b2b16e38bce99ae14509f7afd2020d0e",
+      "qualified_name": "NCollection_Array1::operator()",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(int) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 352
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::value",
+        "rustycad_tkernel::ncollection::Array1::change_value"
+      ]
+    },
+    {
+      "id": "0c7d502a6e31fc0200f9d5721618e3744d3374d904b29693c1f8f22c435aeb65",
+      "qualified_name": "NCollection_Array1::allocateRaw",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *()",
+      "access": "private",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 679
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "0d336456f1280f1a2e83b88a06a52cedcdb010912aa15fd67211a394391aa5ee",
+      "qualified_name": "NCollection_Array2::UpperForSize",
+      "kind": "CXXMethod",
+      "signature": "int (int, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 14,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 89
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::upper_for_size"
+      ]
+    },
+    {
+      "id": "0dd9c61daa8d93bc1e829ea973d6ad8df5ce37e564c2d18a903b17085b840597",
+      "qualified_name": "NCollection_Array2::CopyValues",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(const NCollection_Array2<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 345
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-copy-values-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::copy_values_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::copy_values_returning",
+        "rustycad_tkernel::ncollection::Array2::copy_values_trivial",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "0f78e5be4ad79475898584159f7808f07b936663ab3755dec46f80e4b6ed2e03",
+      "qualified_name": "NCollection_Array2::Resize",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, int, int, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 484
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array2-resize-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::resize",
+        "rustycad_tkernel::ncollection::Array2::resize_bounds",
+        "rustycad_tkernel::ncollection::Array2::resize_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::resize_bounds_with_assignment"
+      ]
+    },
+    {
+      "id": "100467e4f3cff5dff269ce2750b2b16758b4febcd3ce8b4a8a924b7e133ca27e",
+      "qualified_name": "NCollection_Array1::ChangeAt",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 375
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::change_at"
+      ]
+    },
+    {
+      "id": "14edff89b820e5718fef1e76a2d02dfb0867007028f27d5b5fa6ac31722d2b60",
+      "qualified_name": "NCollection_Array2::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *, void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 50
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "165ffca7f2d9d45439f967cf7417c585a9f0beb6abfc5cf0b21e74f6e1582018",
+      "qualified_name": "NCollection_Array2::Resize",
+      "kind": "CXXMethod",
+      "signature": "void (unsigned long, unsigned long, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 528
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array2-resize-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::resize",
+        "rustycad_tkernel::ncollection::Array2::resize_bounds",
+        "rustycad_tkernel::ncollection::Array2::resize_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::resize_bounds_with_assignment"
+      ]
+    },
+    {
+      "id": "1b9d761fec4e5ed205b09066e51cf6da5679e2d12c6aa355a8cd4866f3c98e2f",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (const type-parameter-0-0 &, int, int, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 154
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-buffer-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "1c5661e116ec37456a94f5b515d1656c1a67dd211c6ac08302c670a3ca923bf3",
+      "qualified_name": "NCollection_Array1::copyAssign",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 77,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 625
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "afd65e9c251b40bf8573436c9a9973278b54366d40a793e1591348a6b1f5b52f",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "1e6db259e9de12e64869b2a58c7f953e4e89029bfd1b032c91939d8e46be7470",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (NCollection_Array2<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 185
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "1e9033ac88920d905afe70d8af5d9342d96c65905cca80cf6940070e0202dbe6",
+      "qualified_name": "NCollection_Array2::BeginPosition",
+      "kind": "CXXMethod",
+      "signature": "int (int, int, int, int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 14,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 127
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::begin_position"
+      ]
+    },
+    {
+      "id": "1e9e8714d7a4f77cc90cfee200b1a9dbe5cc1a9548387e2538d101c0c8c5fb56",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (int, int, int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 160
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-uninitialized-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "current candidate receipt; integration pending"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "1eddbac31f9f61bdc29d367b294f4f7ce1d95cbd683010e79897c1a6ea8a95fd",
+      "qualified_name": "NCollection_Array2::resizeImpl",
+      "kind": "FunctionTemplate",
+      "signature": "void (int, int, int, int)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 585
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "1f34c036876aa5637ddfe07f41446c6b7daa9a1167642acd4d7508e0b3581606",
+      "qualified_name": "NCollection_Array2::ResizeWithTrim",
+      "kind": "CXXMethod",
+      "signature": "void (unsigned long, unsigned long, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 549
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array2-resize-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::resize_with_trim",
+        "rustycad_tkernel::ncollection::Array2::resize_trim_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::resize_trim_bounds_with_assignment"
+      ]
+    },
+    {
+      "id": "1f9e01439534ce5452667e1483ddaa63a48aa118ba6dff6dd4f3403dde539e09",
+      "qualified_name": "NCollection_Array1::EmplaceValue",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int, type-parameter-1-0 &&...)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 394
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "2f1c1127fcbb733aa12dec885a08c9ce83e7a161099d42cb672be4d2c775925c",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::emplace_value_with_assignment"
+      ]
+    },
+    {
+      "id": "1fc068067041d3b5b578072889a5933ed93bedbaa346034cb5bc663c8e445633",
+      "qualified_name": "NCollection_Array2::Size",
+      "kind": "CXXMethod",
+      "signature": "unsigned long () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 240
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::len"
+      ]
+    },
+    {
+      "id": "1fc74606715b0a36ceef52f83ecf36fd5bb5603c329070e1c0cf3e12084c527f",
+      "qualified_name": "NCollection_Array2::operator()",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 415
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::value",
+        "rustycad_tkernel::ncollection::Array2::change_value"
+      ]
+    },
+    {
+      "id": "23733afa2dabde0eda577ff2551303cb7bf63783f6b1366b98091276f8e7ee8e",
+      "qualified_name": "NCollection_Array2::RowSize",
+      "kind": "CXXMethod",
+      "signature": "unsigned long () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 252
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::row_size"
+      ]
+    },
+    {
+      "id": "2621a127520fba35440ebaacc8c4299531d36b8a3228f7e6acb7212c96c5b323",
+      "qualified_name": "NCollection_Array2::ResizeWithTrim",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, int, int, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 509
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array2-resize-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::resize_with_trim",
+        "rustycad_tkernel::ncollection::Array2::resize_trim_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::resize_trim_bounds_with_assignment"
+      ]
+    },
+    {
+      "id": "26a0fb19212cab88e4a6ec79a5d954a4ebeea29921ac14ef4a17f7fd9c01b30c",
+      "qualified_name": "NCollection_Array1::SetValue",
+      "kind": "CXXMethod",
+      "signature": "void (int, const type-parameter-0-0 &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 378
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-const-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::set_value_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_from_index_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_moved_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "26a8f5966f1c18e14214448f9f33e0937e56480d5306e66b4012a21b4c8589e7",
+      "qualified_name": "NCollection_Array1::Last",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 340
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::last"
+      ]
+    },
+    {
+      "id": "2721537698524a22ecacc457539b19e506420348a1666045f7324a3270131680",
+      "qualified_name": "NCollection_Array1::operator new[]",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 25
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "27eb3e0bb5d1abaecd97e9a01723b71004c40b395402bba0606eff4f592af7ad",
+      "qualified_name": "NCollection_Array1::ChangeLast",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 343
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::change_last"
+      ]
+    },
+    {
+      "id": "27eb488de0187122c53bd6cda6f69d220c00b732ef2ffbad4c022a6bb6bd635d",
+      "qualified_name": "NCollection_Array1::~NCollection_Array1<TheItemType>",
+      "kind": "CXXDestructor",
+      "signature": "void ()",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 240
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "28b22b894ab1c1822125b5fe3423276938d81434573442ac0c1ff0767ace432d",
+      "qualified_name": "NCollection_Array2::RowLength",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 261
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::row_length"
+      ]
+    },
+    {
+      "id": "2af365d3075a7000251ba7cdac3d69508241427786f9a34f1ff03c4daaca4ef7",
+      "qualified_name": "NCollection_Array2::LowerCol",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 303
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::lower_col"
+      ]
+    },
+    {
+      "id": "2d3f542d53b0d2f78c8ea63f5d33dbef6538f6d1720b2b9309972a2cc6525d43",
+      "qualified_name": "NCollection_Array2::EmplaceValue",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int, int, type-parameter-1-0 &&...)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 468
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "33b204d0285793e2a88131c79d074a73db0c6829f8e484c599edc343d7d81a0e",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::emplace_value_with_assignment"
+      ]
+    },
+    {
+      "id": "2ea118e8dfea253eea97dbb7eb60e8b0b99c8f66f7ccde97be34f070f57ee84d",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (type-parameter-0-0 *, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 204
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-buffer-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "2f1c1127fcbb733aa12dec885a08c9ce83e7a161099d42cb672be4d2c775925c",
+      "qualified_name": "NCollection_Array1::EmplaceValue",
+      "kind": "FunctionTemplate",
+      "signature": "type-parameter-0-0 &(int, type-parameter-1-0 &&...)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 394
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-emplace-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-emplace-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "pending candidate adc022697298f9f496e462db6488c370e5231f29; not in audited base"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::emplace_value_with_assignment"
+      ]
+    },
+    {
+      "id": "31b442cdc87af080b4982e0a2f22848324282b5afc42c1b1a565236d100f0f27",
+      "qualified_name": "NCollection_Array1::destroy",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<!std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 82,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 590
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "31dd7d48ce668ac6dfb98a1c73dfd3b5bf26dedc4197a8862d8f572db0d1f5b1",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void () noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 143
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "33b204d0285793e2a88131c79d074a73db0c6829f8e484c599edc343d7d81a0e",
+      "qualified_name": "NCollection_Array2::EmplaceValue",
+      "kind": "FunctionTemplate",
+      "signature": "type-parameter-0-0 &(int, int, type-parameter-1-0 &&...)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 468
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-emplace-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-emplace-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "pending candidate adc022697298f9f496e462db6488c370e5231f29; not in audited base"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::emplace_value_with_assignment"
+      ]
+    },
+    {
+      "id": "348ba865fa223a7cebef039c1ee6d83440de4aa774d0de0b020686a502676580",
+      "qualified_name": "NCollection_Array1::Assign",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(const NCollection_Array1<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 266
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::assign",
+        "rustycad_tkernel::ncollection::Array1::assign_trivial",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "3508236e95ecf33dfc140fd747f1b7be20b14937f3f05d77cfc3eee8899aa34b",
+      "qualified_name": "NCollection_Array1::IsEmpty",
+      "kind": "CXXMethod",
+      "signature": "bool () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 124
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::is_empty"
+      ]
+    },
+    {
+      "id": "3532ee5960282c2e06fa62d410be2cc4dcb5df091405a40c908ce288bbdfa8f5",
+      "qualified_name": "NCollection_Array1::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 9,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 55
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "357031085a19b441229efe62d1850525039ef6c01c7b26557f51590bbec798d0",
+      "qualified_name": "NCollection_Array1::allocate",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 16,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 441
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "395733875b44cb1634ee25cba043065fdcbad606100eaac65a1b3d469e497d9f",
+      "qualified_name": "NCollection_Array1::destroy",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<!std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 82,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 590
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "31b442cdc87af080b4982e0a2f22848324282b5afc42c1b1a565236d100f0f27",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "3ac9f2847e6ea061abb6cb3684a550a9fea59e60d8cf1fe46b35f799476e4472",
+      "qualified_name": "NCollection_Array1::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(NCollection_Array1<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 328
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::assign",
+        "rustycad_tkernel::ncollection::Array1::assign_trivial",
+        "rustycad_tkernel::ncollection::Array1::move_from",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "3bdb67f619362cc1467c9142602a757733f019de5f4f6546499e1360902712e7",
+      "qualified_name": "NCollection_Array2::ChangeFirst",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 285
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_first"
+      ]
+    },
+    {
+      "id": "3dcab5491452a5083b1fa0fcdb27eab67baa14bf7d002a9e0144b2df5983d974",
+      "qualified_name": "NCollection_Array1::at",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 538
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "3ee63fb213d2cc410b57bc6067e3b2575227bb1143eba9fcf6cb9a55dbc52c79",
+      "qualified_name": "NCollection_Array1::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long, void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 46
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "41ba13461c865073da70b8ef86bc86453b647c2554352b3a02bdcec56a474905",
+      "qualified_name": "NCollection_Array2::UpdateLowerRow",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 309
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::update_lower_row"
+      ]
+    },
+    {
+      "id": "45dd812bc247e0d73b5bbaf525fb28e9931f2cfe8434569106a2fec5fa72d32c",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 553
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "ead40663400d9c62af3146e253ea97fc782cb47cbd0dcfa77b1c224493ad1a52",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "4646de93ea45e84c732621d1b66a0a7b66fbce679ce19ad655ce69267b69ff0f",
+      "qualified_name": "NCollection_Array1::ChangeValue",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 358
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::change_value"
+      ]
+    },
+    {
+      "id": "466ec1fb0a67d9451ce32acf9b4cb7a6dff4b7801cc38df600c212b11c0e9ddb",
+      "qualified_name": "NCollection_Array1::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(const NCollection_Array1<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 325
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::assign",
+        "rustycad_tkernel::ncollection::Array1::assign_trivial",
+        "rustycad_tkernel::ncollection::Array1::move_from",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "47541a159c43c323cc3f6c8aa134ac31ed884680b4584cb59086c9ca47761ba7",
+      "qualified_name": "NCollection_Array1::operator[]",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 367
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::value",
+        "rustycad_tkernel::ncollection::Array1::change_value"
+      ]
+    },
+    {
+      "id": "497ffa4c71067d53970a12ef68da40045fe83231c2d226d42839a8f3057eb7fe",
+      "qualified_name": "NCollection_Array2::Array1",
+      "kind": "CXXMethod",
+      "signature": "const NCollection_Array1<type-parameter-0-0> &() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 42,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 273
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::array1"
+      ]
+    },
+    {
+      "id": "4a34cff472fe2c6a11e6e1cd33ec81d6fd1e855dee2d8e82d94a9462d96f89aa",
+      "qualified_name": "NCollection_Array2::begin",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 109
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_mut_ptr",
+        "rustycad_tkernel::ncollection::Array2::iter",
+        "rustycad_tkernel::ncollection::Array2::iter_mut"
+      ]
+    },
+    {
+      "id": "4aec81712b5c1c24f86ce02014fa9a0605c2bca6e6c27fa6a3bdb83d5b7f33a9",
+      "qualified_name": "NCollection_Array2::SetValue",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, type-parameter-0-0 &&)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 424
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-internal-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::set_value_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_from_index_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_moved_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "4d127fe075a88afd03403bfe0b84f72122703bc1504b82c236df3d8fdc34417b",
+      "qualified_name": "NCollection_Array1::copyConstruct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 663
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "4e4e0ed0ee17b77540e41e491071a25340132f8b3b79384369663dc28e52461a",
+      "qualified_name": "NCollection_Array1::CopyValues",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(const NCollection_Array1<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 279
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-copy-values-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::copy_values_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::copy_values_returning",
+        "rustycad_tkernel::ncollection::Array1::copy_values_trivial",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "4ec8b75a0daff7d9a85131a94ebb02533fa1c090651cba6d74d569317f330898",
+      "qualified_name": "NCollection_Array2::Last",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 288
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::last"
+      ]
+    },
+    {
+      "id": "4f14a2cc4b3bb6479b9a0a4d2f2fb5e20734edca91a507636a00d2f9ce83dac2",
+      "qualified_name": "NCollection_Array1::deallocate",
+      "kind": "CXXMethod",
+      "signature": "void (void *) noexcept",
+      "access": "protected",
+      "spelling_location": {
+        "column": 15,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 447
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "4fe3431485d312c560eadf445f8ce58bbbd2a7ed82363dd701e899a651319304",
+      "qualified_name": "NCollection_Array2::LowerRow",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 297
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::lower_row"
+      ]
+    },
+    {
+      "id": "503bdecfda79ca224401522fa5f8e3af58fcfd47ec3e078dfc03f5e7683b0176",
+      "qualified_name": "NCollection_Array2::ColSize",
+      "kind": "CXXMethod",
+      "signature": "unsigned long () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 258
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::col_size"
+      ]
+    },
+    {
+      "id": "5131a295e0a71037db7cb9caf7b671ee3fa559be9506c866ce0c0e77b711ff0e",
+      "qualified_name": "NCollection_Array1::at",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(unsigned long) const",
+      "access": "protected",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 532
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "51c010180229f96371e45f03b15083e67c375488582de6bb3492b20af250d498",
+      "qualified_name": "NCollection_Array1::releaseStorage",
+      "kind": "CXXMethod",
+      "signature": "void () noexcept",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 462
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "534bb0e83d8ac25bca21f9f8db4373bb07a537c407539c9808199a06bd4970f0",
+      "qualified_name": "NCollection_Array1::end",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 110
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_end_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_end_mut_ptr"
+      ]
+    },
+    {
+      "id": "544aa83f97017e9061b4698e3f965a3e7a8c7593fdbd9705233786131bb40043",
+      "qualified_name": "NCollection_Array2::At",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(unsigned long, unsigned long) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 445
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::at"
+      ]
+    },
+    {
+      "id": "5a68393affa1a4775d02dcfa0dce21715bc827ac00a3040d2b529efa18a261b3",
+      "qualified_name": "NCollection_Array2::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 9,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 55
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "5c1a08cb72f1e432d4b86ce47728b6cdfb9304533d24ec59bfeaeecf4bc09ff9",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void () noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 150
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "5c35ebef02cf4f1f4ebaa06abf480bbfd0d22c0315f710bbb6540e7c9c03a3e2",
+      "qualified_name": "NCollection_Array1::copyConstruct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 77,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 654
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "5d3a17b36aec912ae183a8ff05d35355f24415cfbc11f266338e466a50248ca2",
+      "qualified_name": "NCollection_Array1::resizeImpl",
+      "kind": "CXXMethod",
+      "signature": "void (unsigned long, int, bool)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 478
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "6183136fde4034d05b7393dddf8b3654f9cb31db93e233c2ebd4db2a627b6890",
+      "qualified_name": "NCollection_Array1::copyConstruct",
+      "kind": "CXXMethod",
+      "signature": "void (const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 648
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "61e6c403842ce3a29113c1d2357b1906b5cb78d13722d357098588134b9dd877",
+      "qualified_name": "NCollection_Array1::begin",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 104
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_mut_ptr",
+        "rustycad_tkernel::ncollection::Array1::iter",
+        "rustycad_tkernel::ncollection::Array1::iter_mut"
+      ]
+    },
+    {
+      "id": "6792643403d9e282debb7e3385564fc837355a3d43218f0a1c652b96d2b2714a",
+      "qualified_name": "NCollection_Array1::allocateAndConstruct",
+      "kind": "CXXMethod",
+      "signature": "void ()",
+      "access": "private",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 691
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "6a1e220a65836b0acd1127de97280eea24aad22b6b625c4832ba9df1ecaa2392",
+      "qualified_name": "NCollection_Array1::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *, void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 50
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "6cd3c9825d0b076961f09f26b7e2ba4165222a37612fe52cb860594ecd1913f5",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 90,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 561
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "6dec70ba93ae2a26aa04f82266902e614886aaac8fafac08dbd831be82b0d873",
+      "qualified_name": "NCollection_Array1::assign",
+      "kind": "CXXMethod",
+      "signature": "void (const type-parameter-0-0 *, unsigned long, int)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 601
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "6e5e3a95b78d368909aec7a65309c4a865726594d7e2fe51709a109c89e64ca5",
+      "qualified_name": "NCollection_Array2::operator()",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(int, int) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 403
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::value",
+        "rustycad_tkernel::ncollection::Array2::change_value"
+      ]
+    },
+    {
+      "id": "70188a4da8676f88b7081f85ecf88ce4f893839f46816abbb24b07818030c858",
+      "qualified_name": "NCollection_Array1::Value",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(int) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 346
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::value"
+      ]
+    },
+    {
+      "id": "702822f81a31e600b7883b9bbc5679ad680a647e13b73388e547b56df0b4d8fd",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (type-parameter-0-0 *, unsigned long, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 230
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "70390d7a5bfd09b333c97e83caae0938add57387120d867f05257aec7f8a052e",
+      "qualified_name": "NCollection_Array2::LastPosition",
+      "kind": "CXXMethod",
+      "signature": "int (int, int, int, int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 14,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 136
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::last_position"
+      ]
+    },
+    {
+      "id": "732f2f707b1ef62ef6fec42d814dd3e94b9314dab03da60e899ec9f262ffa3f7",
+      "qualified_name": "NCollection_Array1::ChangeFirst",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 337
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::change_first"
+      ]
+    },
+    {
+      "id": "737ffc5ec1bda2a03167d09b42e985bdb41d7cda33785db705bd28f2f81a2374",
+      "qualified_name": "NCollection_Array2::Value",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(int, int) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 397
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::value"
+      ]
+    },
+    {
+      "id": "742006b9c812b188c7f5fd4012671e41d6c88dcf70110a3ecfb4006aeecd9035",
+      "qualified_name": "NCollection_Array1::data",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "private",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 677
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "7648b50059da2ebda1388f11bce444fd6384aa2b14b7598652be9e5023bc6b11",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (const NCollection_Array2<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 175
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "77229a7c539de54fc081a74a682397fe68c17e093a524ffecf4bfd6541ac1d13",
+      "qualified_name": "NCollection_Array2::Move",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(NCollection_Array2<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 361
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::move_from",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "78cf0ea7bdb5f3a5c8b9d4e825bec67a4fde174b99ac71523600c5a9d9392a88",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 569
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "7b33bbc9d67d7c1a9a88de1b06ab1dbcce11e1d375ec9ddb287623a68f384f89",
+      "qualified_name": "NCollection_Array1::Resize",
+      "kind": "CXXMethod",
+      "signature": "void (unsigned long, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 424
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::resize",
+        "rustycad_tkernel::ncollection::Array1::resize_bounds"
+      ]
+    },
+    {
+      "id": "7c7be7b60268f79c86cd3ead13c39fb30c8765743b4d0153346cc04c15fed913",
+      "qualified_name": "NCollection_Array2::Length",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 246
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::length"
+      ]
+    },
+    {
+      "id": "7e3be55a63108d5035facf2309521031973420d13c8b22dff21705666cf6839c",
+      "qualified_name": "NCollection_Array2::ChangeAt",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 437
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_at"
+      ]
+    },
+    {
+      "id": "816b5ac8364773570a0bbdaf0c729942b90b92c8d05da21ff4362b3bf58701ce",
+      "qualified_name": "NCollection_Array2::IsEmpty",
+      "kind": "CXXMethod",
+      "signature": "bool () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 243
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::is_empty"
+      ]
+    },
+    {
+      "id": "8191156dba18d48b2749e5dc94c6d675bac047256a943e4a47f2c1ba0dc5f7db",
+      "qualified_name": "NCollection_Array1::data",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "private",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 675
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "8455c412b4058caa56901b16cdc6155cf53b4cd6934fae43664f47a4d2a57a3e",
+      "qualified_name": "NCollection_Array1::operator[]",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &(int) const",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 355
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::value",
+        "rustycad_tkernel::ncollection::Array1::change_value"
+      ]
+    },
+    {
+      "id": "853ec02ef89529920513e45d2f9db0898a3d9ff9c4e29dde9d25e2f427e6a32e",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 569
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "78cf0ea7bdb5f3a5c8b9d4e825bec67a4fde174b99ac71523600c5a9d9392a88",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "86d9dd3075915a9ab59d022bda4dba5ff993762fd810640425d879ce37c7f6a6",
+      "qualified_name": "NCollection_Array1::Lower",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 127
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::lower"
+      ]
+    },
+    {
+      "id": "8a0bc4755d935f8edecd5604f604cec8eed50dcc17a697dcdd2446495bc16d4e",
+      "qualified_name": "NCollection_Array1::copyConstruct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 663
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "4d127fe075a88afd03403bfe0b84f72122703bc1504b82c236df3d8fdc34417b",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "8acd8a169d9014cecb8e8905b47f21b99621298789fac33304d7aa538a007641",
+      "qualified_name": "NCollection_Array1::Data",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 99
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_mut_ptr"
+      ]
+    },
+    {
+      "id": "8c232551558698c9d447b2c0c3b93bf1875b5a05bab8ec7b86b900ed50030fc7",
+      "qualified_name": "NCollection_Array2::begin",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 111
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_mut_ptr",
+        "rustycad_tkernel::ncollection::Array2::iter",
+        "rustycad_tkernel::ncollection::Array2::iter_mut"
+      ]
+    },
+    {
+      "id": "8de1f6003a45062bb89f32b3c585df1ad2e1629b5a736823b316629cc2915ff0",
+      "qualified_name": "NCollection_Array1::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *, const class opencascade::handle<class NCollection_BaseAllocator> &) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_DefineAlloc.hxx",
+        "line": 27
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "8f9e797eb78210e8b67ee25bae745c9e16c38d7d94a478cf411682396627d342",
+      "qualified_name": "NCollection_Array2::cend",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 119
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_end_ptr"
+      ]
+    },
+    {
+      "id": "9095620576ef44b9bf76016bb0ecf5479b3dce0c946bedf578757693edfd5328",
+      "qualified_name": "NCollection_Array2::resizeNoData",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, int, int)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 567
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "9110f68d058cf2cfc8177b66174637c0d8d1eb209c1fe7bec595ac388b129fee",
+      "qualified_name": "NCollection_Array2::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long, const class opencascade::handle<class NCollection_BaseAllocator> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 9,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_DefineAlloc.hxx",
+        "line": 23
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "9117f02b0067a20a2325eb16622bc00431f24b89c210cfd08644249970ca17af",
+      "qualified_name": "NCollection_Array1::copyConstruct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 77,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 654
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "5c35ebef02cf4f1f4ebaa06abf480bbfd0d22c0315f710bbb6540e7c9c03a3e2",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "913304be9730356801a50305b8a6ad6358cc092aa905e656587a972acf8493aa",
+      "qualified_name": "NCollection_Array1::destroy",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 81,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 581
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "913a4b4b750aafc08537d6445954d2e12efd2fa61fcf11b7889803c984befb8b",
+      "qualified_name": "NCollection_Array1::UpdateLowerBound",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 402
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::update_lower_bound"
+      ]
+    },
+    {
+      "id": "91c72aaf7929b14b87c02fb2e48716eb7064228b8b02d59e5fd2b498c5367c0c",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (const NCollection_Array1<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 213
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "967d33d67774b4f6a6493a3ee32336396a5eac1fa4272d96dfeb087645847849",
+      "qualified_name": "NCollection_Array1::operator()",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 364
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::value",
+        "rustycad_tkernel::ncollection::Array1::change_value"
+      ]
+    },
+    {
+      "id": "9745f6f984fa35a4f15c9472772e31d4045309dfa4728b49e1cc5258f8e49b48",
+      "qualified_name": "NCollection_Array2::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 59
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "98a6d371404f538f85d1e5703e8a3e77ec809ef7228afcc2bfa973cf5e1ed5f8",
+      "qualified_name": "NCollection_Array1::begin",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 106
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_mut_ptr",
+        "rustycad_tkernel::ncollection::Array1::iter",
+        "rustycad_tkernel::ncollection::Array1::iter_mut"
+      ]
+    },
+    {
+      "id": "9908a9515dadb71821c665ab9698ff3186fee89abc403ee60799cad030297ed9",
+      "qualified_name": "NCollection_Array2::UpperRow",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 300
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::upper_row"
+      ]
+    },
+    {
+      "id": "9a1a254aa2a8d30452e4deaefdf09790ae998fe19924cea9826a9450d8b15ef3",
+      "qualified_name": "NCollection_Array2::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *, const class opencascade::handle<class NCollection_BaseAllocator> &) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_DefineAlloc.hxx",
+        "line": 27
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "a01ca298ecd152c8afc755b1a03ec09918a6b18ed5652e6efc28ea9d55e23c2c",
+      "qualified_name": "NCollection_Array1::Move",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<TheItemType> &(NCollection_Array1<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 296
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::move_from",
+        "rustycad_tkernel::ncollection::Array1::assign_self"
+      ]
+    },
+    {
+      "id": "a02b1099f57544fdf3549fae3085e3da46527dc448a32453fa9f49f9715c414b",
+      "qualified_name": "NCollection_Array2::ChangeArray1",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array1<type-parameter-0-0> &() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 36,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 267
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_array1"
+      ]
+    },
+    {
+      "id": "a15038a1f3ab65a4e0dd0cebd096f98ea5425203f9ea5c1ecd4400d3fae3aaf9",
+      "qualified_name": "NCollection_Array1::end",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 112
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_end_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_end_mut_ptr"
+      ]
+    },
+    {
+      "id": "a2ec08b18ded9ab7b5830eb78b0366784aaa8478b48b9878cf3c64d5d4fde8b7",
+      "qualified_name": "NCollection_Array2::Data",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 122
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_mut_ptr"
+      ]
+    },
+    {
+      "id": "a318aa809f5b29cd9e509cfb1951e7ffc0a55fd5a08c960cbbd1b27108f1521c",
+      "qualified_name": "NCollection_Array1::copyAssign",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 637
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "0b20dd988e65eb8be880396445869e4d79c95ebdd7ca414bccdf8f39db033f7a",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "a752170b3ad82418a63f9b344a78c933ecc4c1060850d4cd8ddf28d2c98529b0",
+      "qualified_name": "NCollection_Array1::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long, const class opencascade::handle<class NCollection_BaseAllocator> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 9,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_DefineAlloc.hxx",
+        "line": 23
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "aa3b8707c456b1886f028bdfe3f2d75e6fbad02dd46be131b7bfcf6826cc07d3",
+      "qualified_name": "NCollection_Array2::ChangeAt",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(unsigned long, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 455
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_at"
+      ]
+    },
+    {
+      "id": "aa6064b6be6ecf62190be44bb2e418f1912f1c57bfd9cf64be05d1bb7e7314a3",
+      "qualified_name": "NCollection_Array2::Init",
+      "kind": "CXXMethod",
+      "signature": "void (const type-parameter-0-0 &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 279
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-const-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-init-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::init_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::init_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "ac287fe6aaf16ce73ea5515f0d9368db88169e68b5d52788fce6e2592c5c1899",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 90,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 561
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "6cd3c9825d0b076961f09f26b7e2ba4165222a37612fe52cb860594ecd1913f5",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "ae1fef1893dcfe061bb5ac7ae856e95c7ecdd1bfbe8cb76cba2d4189274497f6",
+      "qualified_name": "NCollection_Array1::setStorage",
+      "kind": "CXXMethod",
+      "signature": "void (void *, unsigned long, int, bool) noexcept",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 450
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "af4aaf89d8b36c40dcdaed11775430c40b4eb52bba1ded573174526fc070b3fb",
+      "qualified_name": "NCollection_Array1::RangeSize",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 136
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::range_size"
+      ]
+    },
+    {
+      "id": "afd65e9c251b40bf8573436c9a9973278b54366d40a793e1591348a6b1f5b52f",
+      "qualified_name": "NCollection_Array1::copyAssign",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 77,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 625
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "b62b9269839cf6237476ff469cbb5c8fdb528c8cd8a2c491bca6d8ebc3f88910",
+      "qualified_name": "NCollection_Array2::UpdateUpperCol",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 321
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::update_upper_col"
+      ]
+    },
+    {
+      "id": "b817abdaafe4f6ddd59be6bde9b49ec3f374322e3209218e84863a52606a662c",
+      "qualified_name": "NCollection_Array1::IsDeletable",
+      "kind": "CXXMethod",
+      "signature": "bool () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 133
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::is_deletable"
+      ]
+    },
+    {
+      "id": "b9529ba219e97e7a1cb61507ab63cb545f7f4cbe7974493a8634f57a20ea762b",
+      "qualified_name": "NCollection_Array2::operator delete[]",
+      "kind": "CXXMethod",
+      "signature": "void (void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 29
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "b9a7be86d7c337b0564adbcc552d225c688261979928e73ba546a21de108f097",
+      "qualified_name": "NCollection_Array2::operator new[]",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 25
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "bb86961ab211a7dacee7372abd61536d57c2dbb2ad8e5248edbf3d20bb7ad32e",
+      "qualified_name": "NCollection_Array1::destroy",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 81,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 581
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "913304be9730356801a50305b8a6ad6358cc092aa905e656587a972acf8493aa",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "bbdc49e6a3b5312ea16d6a3a750dc1d70c8de69e4cb6acbd2370e2a0a94fb5e4",
+      "qualified_name": "NCollection_Array1::Resize",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 416
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::resize",
+        "rustycad_tkernel::ncollection::Array1::resize_bounds"
+      ]
+    },
+    {
+      "id": "bd1bedd1b6ccdf2c7c216bb308f6cd823a446bd33cbbf15e65b865ecd079dd65",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 192
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-uninitialized-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "current candidate receipt; integration pending"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "bd5a5880c13407665c4c2cfdf0a5ded8c12535b65079c844c7ee29b9f23a7384",
+      "qualified_name": "NCollection_Array1::operator delete[]",
+      "kind": "CXXMethod",
+      "signature": "void (void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 29
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "bea244ff144facab8e623a8fa2b54ea5e5b2e97e39174067bf319f8e0e5073e8",
+      "qualified_name": "NCollection_Array1::First",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 334
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::first"
+      ]
+    },
+    {
+      "id": "bf764d88a1819c16072540e46277b34a06cb0bf29b546bd4ef0553be69419aed",
+      "qualified_name": "NCollection_Array1::SetValue",
+      "kind": "CXXMethod",
+      "signature": "void (int, type-parameter-0-0 &&)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 384
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-internal-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::set_value_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_from_index_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::set_value_moved_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "c01096e2fbf899e50baf77c20b0fb63c072397f56c75da8848e9905d9be878c5",
+      "qualified_name": "NCollection_Array1::Upper",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 130
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::upper"
+      ]
+    },
+    {
+      "id": "c2547bce644e1d419e38180a28e866d39b4cbf2624ba02ec345fd6ed181e31e5",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 145
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-uninitialized-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "current candidate receipt; integration pending"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "c272212ce1301d0ebdc059a70dfd855fafe120e87c94f0eefc1eec8e784fe0e1",
+      "qualified_name": "NCollection_Array2::operator new",
+      "kind": "CXXMethod",
+      "signature": "void *(unsigned long, void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 11,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 46
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "c58b956195771a3b0f92f761aae509c7393a283a98e09e8ea4ff9e78c443169c",
+      "qualified_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (unsigned long, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 218
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-uninitialized-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "current candidate receipt; integration pending"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::with_size",
+        "rustycad_tkernel::ncollection::Array2::with_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array2::from_buffer",
+        "rustycad_tkernel::ncollection::Array2::clone_trivial",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array2::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "c9dcc32bc06a4090d1bccd920272c01afc5d45e26ecbd67cd521eb1210408e9a",
+      "qualified_name": "NCollection_Array1::Data",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 102
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_ptr",
+        "rustycad_tkernel::ncollection::Array1::data_mut_ptr"
+      ]
+    },
+    {
+      "id": "ca68b47571e79de8d13abbc4101d2cfd8ddb718197b1dbcb3b25a6a83ca76b76",
+      "qualified_name": "NCollection_Array1::Length",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 121
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::length"
+      ]
+    },
+    {
+      "id": "cda85f928369ff8802c05529fb8f05939952315ea72d88ac30cdd6ebc658f115",
+      "qualified_name": "NCollection_Array2::resizeImpl",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, int, int)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 585
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "1eddbac31f9f61bdc29d367b294f4f7ce1d95cbd683010e79897c1a6ea8a95fd",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "cdba9eca68e5b5473bb91accab6b0107218a682878d628318e4502c0ee4b0413",
+      "qualified_name": "NCollection_Array2::operator=",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(NCollection_Array2<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 391
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::assign",
+        "rustycad_tkernel::ncollection::Array2::assign_trivial",
+        "rustycad_tkernel::ncollection::Array2::move_from",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "cef5d50c162b31eac7705ece05b222fd0372826fe7a49f79f8ccf8b5ff7613a3",
+      "qualified_name": "NCollection_Array1::Init",
+      "kind": "CXXMethod",
+      "signature": "void (const type-parameter-0-0 &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 250
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-const-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-init-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::init_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array1::init_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "cf99017bcbe5cecf1aebbfe79fd23dc34eeb9f1d9f96bb26e5e30ce29f868f2a",
+      "qualified_name": "NCollection_Array2::ArraySize",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (unsigned long, unsigned long)",
+      "access": "public",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 79
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::array_size"
+      ]
+    },
+    {
+      "id": "d0ef48b7ac426219fec32183438bb0a971f78af9f7c6250d111725e3f48c30f5",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "CXXMethod",
+      "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 90,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 545
+      },
+      "scoped_receipts": [],
+      "status": "template_owned_child_no_separate_credit",
+      "owner": "055c0a8e2f5dd2080ef0310d65c3597cf8ff5634512b4592d6b0e65f73c9da4d",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "d17d133f0d42a0f6d0b0fdd29d3272eb78039d175a16744bde160a738245bb1f",
+      "qualified_name": "NCollection_Array2::NbColumns",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 255
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::nb_columns"
+      ]
+    },
+    {
+      "id": "d278f984ca4ef5bc6f82b2f8b5af26ea94706f6c8029347fa45fef45689c6d83",
+      "qualified_name": "NCollection_Array2::ChangeValue",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &(int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 409
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_value"
+      ]
+    },
+    {
+      "id": "d47d015921ecdd7dd0a444b777fed078f690a0be45435c2609828fc7ded49685",
+      "qualified_name": "NCollection_Array1::UpdateUpperBound",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 405
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::update_upper_bound"
+      ]
+    },
+    {
+      "id": "d6b4a993b415266d4a853fc447e23f9b6b0f016c897d5d0e861c33695a227677",
+      "qualified_name": "NCollection_Array2::SetValue",
+      "kind": "CXXMethod",
+      "signature": "void (int, int, const type-parameter-0-0 &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 418
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-const-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-internal-set-value-assignment-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::set_value_ref_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_from_index_with_assignment",
+        "rustycad_tkernel::ncollection::Array2::set_value_moved_from_index_with_assignment"
+      ]
+    },
+    {
+      "id": "d73d30c735adce67827bd40b5109c65a5755993aa4224fe37b4dd9610583806b",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (NCollection_Array1<TheItemType> &&) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 228
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "d7504c7fca3ab7d704ef9419adf9e59d37929947e17bdfbdb419472c7ca386b0",
+      "qualified_name": "NCollection_Array2::offsetOf",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (int, int, const char *) const",
+      "access": "private",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 95
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "d75a0f91cdefa7e562f348374996939c0f09a9178a3dbbde002d13b1e1a8af07",
+      "qualified_name": "NCollection_Array2::ColLength",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 264
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::col_length"
+      ]
+    },
+    {
+      "id": "d96024c9ab379b3a4977cf91660d7691d225f54c0d1e185336a2e58efab209b5",
+      "qualified_name": "NCollection_Array2::Assign",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(const NCollection_Array2<TheItemType> &)",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 328
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        },
+        {
+          "receipt": "porting/audits/array-raw-copy-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::assign",
+        "rustycad_tkernel::ncollection::Array2::assign_trivial",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "d9cbdc5bb2676ff28e0da8e5d27534343231a24d74791ddb81e84677b05f9de0",
+      "qualified_name": "NCollection_Array2::Move",
+      "kind": "CXXMethod",
+      "signature": "NCollection_Array2<TheItemType> &(NCollection_Array2<TheItemType> &) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 23,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 382
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::move_from",
+        "rustycad_tkernel::ncollection::Array2::assign_self"
+      ]
+    },
+    {
+      "id": "db74d69e348144b3c8962edad66e0c158d0adfcda4bdd93a778483e5ad0b8211",
+      "qualified_name": "NCollection_Array2::First",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 &() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 19,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 282
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::first"
+      ]
+    },
+    {
+      "id": "de4d86d88ccef58b7173a6710e5868171ffc31825ebb911cdff853cc2b7d49b4",
+      "qualified_name": "NCollection_Array2::IsDeletable",
+      "kind": "CXXMethod",
+      "signature": "bool () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 294
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::is_deletable"
+      ]
+    },
+    {
+      "id": "e10c559292b6a80408a87f5a8fcea03e936b5f68e808434c5f8a9c4bdddeb76d",
+      "qualified_name": "NCollection_Array2::end",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 *() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 115
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_end_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_end_mut_ptr"
+      ]
+    },
+    {
+      "id": "e1f6e4321b68bb130522e17fe92a60abb3bca5e1170c50f5c66d5d6e3b7d96ec",
+      "qualified_name": "NCollection_Array1::cend",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 114
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_end_ptr"
+      ]
+    },
+    {
+      "id": "e61e844aac1658c14e579b1b37c00c6a0518a7f0d90be3c76ea0b447a7e0e03b",
+      "qualified_name": "NCollection_Array2::UpdateLowerCol",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 312
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::update_lower_col"
+      ]
+    },
+    {
+      "id": "e9f9a92afea1ee3fc647814b9f078421ee033225d0b8addb043267f5c4c948fd",
+      "qualified_name": "NCollection_Array2::ChangeLast",
+      "kind": "CXXMethod",
+      "signature": "type-parameter-0-0 &() noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 13,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 291
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::change_last"
+      ]
+    },
+    {
+      "id": "ead40663400d9c62af3146e253ea97fc782cb47cbd0dcfa77b1c224493ad1a52",
+      "qualified_name": "NCollection_Array1::construct",
+      "kind": "FunctionTemplate",
+      "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)",
+      "access": "protected",
+      "spelling_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 553
+      },
+      "scoped_receipts": [],
+      "status": "internal_protocol_requires_separate_domain_evidence",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "ebd9e694279c7992df7ab4781f40f52935cde9fa06c046984a5b8672305a7244",
+      "qualified_name": "NCollection_Array2::NbRows",
+      "kind": "CXXMethod",
+      "signature": "int () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 7,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 249
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::nb_rows"
+      ]
+    },
+    {
+      "id": "ec842df3b2dee00e10a56d2118c56a6cce3d527ca1319ba5ca9144f102d372fa",
+      "qualified_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "kind": "CXXConstructor",
+      "signature": "void (const type-parameter-0-0 &, unsigned long, bool)",
+      "access": "public",
+      "spelling_location": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 174
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-buffer-constructor-contracts.json",
+          "status": "partial_domain",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::with_size",
+        "rustycad_tkernel::ncollection::Array1::with_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_slice_size",
+        "rustycad_tkernel::ncollection::Array1::from_slice_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_size",
+        "rustycad_tkernel::ncollection::Array1::from_buffer_bounds",
+        "rustycad_tkernel::ncollection::Array1::from_buffer",
+        "rustycad_tkernel::ncollection::Array1::clone_trivial",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "rustycad_tkernel::ncollection::Array1::with_uninit_bounds"
+      ]
+    },
+    {
+      "id": "f2b718d1081a941cb28a3ab341dc3f865131d33222c876b648cb685e4df49fca",
+      "qualified_name": "NCollection_Array1::operator delete",
+      "kind": "CXXMethod",
+      "signature": "void (void *) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+        "line": 59
+      },
+      "scoped_receipts": [],
+      "status": "allocation_macro_surface_open",
+      "reachable_rust_review_candidates": []
+    },
+    {
+      "id": "f2e9d806873536a4086c76441f4405f3330f860938300c10325530cf2bf6cf19",
+      "qualified_name": "NCollection_Array2::RangeSize",
+      "kind": "CXXMethod",
+      "signature": "unsigned long (int, int)",
+      "access": "public",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 84
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::range_size"
+      ]
+    },
+    {
+      "id": "f675ade9c2d19c15590dffcdb12de8ddd56793eab02d2f9e88fbf7af36304c84",
+      "qualified_name": "NCollection_Array1::Size",
+      "kind": "CXXMethod",
+      "signature": "unsigned long () const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 10,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 118
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::len"
+      ]
+    },
+    {
+      "id": "f8d62cbac41f615fa629b04923321166356e930ff375a9b7aac359e94ba4a184",
+      "qualified_name": "NCollection_Array2::Data",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 17,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 125
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::data_ptr",
+        "rustycad_tkernel::ncollection::Array2::data_mut_ptr"
+      ]
+    },
+    {
+      "id": "f9d777d4830b3b9e301169287d5e28a161cfa2189f58d3dc005f8e4d25725611",
+      "qualified_name": "NCollection_Array1::cbegin",
+      "kind": "CXXMethod",
+      "signature": "const type-parameter-0-0 *() const noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 18,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 108
+      },
+      "scoped_receipts": [
+        {
+          "receipt": "porting/audits/array-method-contracts.json",
+          "status": "partial",
+          "integration": "present in audited base c6b9259f4c554df53390c963d11817d1c2d20c4e"
+        }
+      ],
+      "status": "scoped_receipt_partial_domain",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array1::data_ptr"
+      ]
+    },
+    {
+      "id": "fc41c0be31f4d3b9f0a218e0d9e77348ac20a7e05a7cdd7f70c35a7777dc766a",
+      "qualified_name": "NCollection_Array2::UpdateUpperRow",
+      "kind": "CXXMethod",
+      "signature": "void (int) noexcept",
+      "access": "public",
+      "spelling_location": {
+        "column": 8,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 315
+      },
+      "scoped_receipts": [],
+      "status": "public_callable_requires_exact_receipt_reconciliation",
+      "reachable_rust_review_candidates": [
+        "rustycad_tkernel::ncollection::Array2::update_upper_row"
+      ]
+    }
+  ]
+}

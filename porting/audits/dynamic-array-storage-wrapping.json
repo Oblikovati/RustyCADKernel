@@ -1,0 +1,510 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "candidate_pending_root_integration",
+  "branch": "port/dynamic-method-audit",
+  "base_commit": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/metadata.rs": "83d66ec923d7a869df65b33c269f59b42c991e1caf5a11f1e5e6544af28bdaf5",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/phases.rs": "4cb64dc38da098702d1c10884ba2149797ae233297380586a89b9174dc289822",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table/tests.rs": "5e02ced661421092a9e22763ece63b126041035c7ac8e0e27fd3a3980fa7f274",
+    "crates/tkernel/src/ncollection/dynamic_array/block_table.rs": "db729325ec70f313682191fb316a2a42ebff66d9fcf1b8367c5d93e153f7543d",
+    "crates/tkernel/src/ncollection/dynamic_array/borrowed.rs": "ef6e55dffe3b52e0f385249276a96c44560b48d735743ccca2e5649acd7ad753",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date/copy_bits.rs": "ce6c717b1c84b707043ce542a2d2598352f1947b2809731bc76c76aeabf47b80",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "57967339a34f84be4d13c463dd7f81404216192cc2832e73ea36e5a65901c464",
+    "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "450e91a7fd2d5337314c1a93b2ffff0a8ec07fc880f5486df9b2dcb90165e6ec",
+    "crates/tkernel/src/ncollection/dynamic_array/erase_phase.rs": "db4410f8bcd851fc61721dfa6ff9556a946cf2f6f511a098e7eb7f2b202e7875",
+    "crates/tkernel/src/ncollection/dynamic_array/increment/tests.rs": "18c23c895aa284471043c6e07229a480c84b14721e5a54b36e0b47ed08b8af39",
+    "crates/tkernel/src/ncollection/dynamic_array/increment.rs": "78c74ce986a382b393958214056b911371704c32c78f88e154d2c28a12e9fd06",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/native.rs": "3ea3ebc44c3dce14a7a6b3850a016a979ed5dd629f51c06fc958735e545973d7",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/panics.rs": "b82774790213c03b778b72116b4c6567483cdbceaaaf0f95e3a248ca7532df0d",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/transitions.rs": "883129645216e45c03acf746ead28ceb8e4ad9d72358d60646e96e1dcbe3802b",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests.rs": "bd910af6b86668aee26123534ccc9edafa0c1a5ba5d328ff618a0c4d2e2360c4",
+    "crates/tkernel/src/ncollection/dynamic_array/initialized_tail.rs": "fdeb3e2ee5538273c3291ac162e9f0a990d99c1b8e952b5999cf7cfcc717b7cb",
+    "crates/tkernel/src/ncollection/dynamic_array/insertion.rs": "8af21efec62c3af5f0fe189efce0b9c13a72505cf96d6b1bdd65f7609528e99a",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_append.rs": "d94a565f9be4243377872c4d99f293204e022ec7403411a74674bae51cd004e5",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_insertion.rs": "66086d6068d617853507d8e66e4bccb10840910e98953230efe9914714ae0ac9",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_reconstruction.rs": "aefbf6ae3b9105e417737d11399e66fa2aec65b2ebf296d3029e33f75d857f73",
+    "crates/tkernel/src/ncollection/dynamic_array/internal_setvalue.rs": "6474fbb34c498505bef2c43a49783ce7d263e7ab26bfb807925172b035de7a7e",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor/operators.rs": "81b248ce24f8e04ce7802e7fb2895ee26ac52be74986f1cab36affe690aa499f",
+    "crates/tkernel/src/ncollection/dynamic_array/legacy_cursor.rs": "b80da64567bf7ce0020b1bbf5fba539704235e492f859e062993931114289655",
+    "crates/tkernel/src/ncollection/dynamic_array/method_tail.rs": "b1ce06fe8b01d03c72d4864ee0e418788054739e67255231f546756aefb1d414",
+    "crates/tkernel/src/ncollection/dynamic_array/moving.rs": "be9978b566be7ae2d409788a64a888c9ed96c8aba57ea7797c600a8845e6cf6a",
+    "crates/tkernel/src/ncollection/dynamic_array/replacement_policy.rs": "2b486aae632b4d7e7ec0b76f030cecc35ab2835670c95f63258879afe70a24d4",
+    "crates/tkernel/src/ncollection/dynamic_array/slots.rs": "4715d1fd33438deaadaa88804421bfe5cb7cd3d82ff221aeb09eef5798d4393d",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/copy_policy.rs": "4cb21f873f5f28338429e0f4117dc7d005b3a40ad0e961e62319d2f5b97c1295",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs": "d53f50ff7cac57f0bcc6e0737c8bb8ad283ffc6af9701e7c6d7614bfffac8fb7",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/replacement.rs": "6653000b73da6836ec6a607f4de3e1b8d44fef93ec0fa73e67d04e5ca032ee58",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/retained_parameters.rs": "7715354f13f5c3bf03e69b114a4f66834b42478c170757c88bac3b5fa25e2cba",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "e843dd95b665e2dc1f3494be176300df7d9823e60c4c1b11e43844ec366e5e5c",
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "4587c6ef7169f195736c7f1b9321be9d1435269ea16e7be77557521fdae6ebca",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_insertion.rs": "c386dc6542e649d4fe6dd5481fef5d35dbbe7a4e87a2699102a17123d28dd7ae",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_setvalue.rs": "2659554a3f340f1ada5fa3ff39149efb4708a1e0c9f84bd06f5095907b5300b2",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/contracts.rs": "b00ad8972429b09413031d863fd07f3f030a8bee54a0bf969d98366d7e0e4781",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/internal.rs": "a6508fcde68c497b93bbdd265ed376b797eb68a47c1d627645c733b8cba56b4f",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/moving.rs": "8d8f22091abe3220eda9e4878a8fd58d6b445d4e746bb277de62c51353bc26b6",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/oracle.rs": "ac94513e13d49b962a29de2d57ddcd624018ded7544e44949f6c0df40f0ce1be",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods.rs": "fa7fd0a0870ce9c6a687cb96ae88bcce35b494273aa05d29d941548a92241000",
+    "crates/tkernel/tests/dynamic_array_copy_date/contracts.rs": "58abad0fc0bdfe99bb1e7cd11f2d57754f3771fa213929c73bad195e09512f54",
+    "crates/tkernel/tests/dynamic_array_copy_date/oracle.rs": "f5d23b8ffd140c8dbe635886aeb4a4f1750fed333cef66862947d9035cab7b90",
+    "crates/tkernel/tests/dynamic_array_copy_date.rs": "6bc88b234c9d90b719745c3d61aebd49f58df8b6a5551a4cecbed1dfcdc3732b",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs": "55d8b39b9bf49775105782556ed1a89e62c26190c95c3a2ead36f768ae943a32",
+    "crates/tkernel/tests/dynamic_array_emplace_allocation_order.rs": "ef722d17af1eb4b9b18dd0f988963bcd6fc5a21d191687f59a2c3a6902544f1a",
+    "crates/tkernel/tests/dynamic_array_emplace_value_order.rs": "06c80884073436e7f948f46174170e3631ea9dc0820cfc96a76e88df2c392f7a",
+    "crates/tkernel/tests/dynamic_array_erase_last_phase.rs": "1d2c3b60fb76b63c0bf273fb90472e4683d4fb9cf3db097130c5adaced3e5997",
+    "crates/tkernel/tests/dynamic_array_increment_overflow.rs": "4d24c227d928c4131ef0b239e39b0d4b25b65ca2c0d211ce6b84cf54040628b5",
+    "crates/tkernel/tests/dynamic_array_internal_reconstruction.rs": "2aa509be0ea8a0f0ddc9f7f4ebef9c3c06963ed4ad2dbfe4bee8cd6094e8d00d",
+    "crates/tkernel/tests/dynamic_array_iterator_tail.rs": "5e530b723f555b0cc3ead07a01ced6667f1ab28924c0c4b7f121b084e7e45fd3",
+    "crates/tkernel/tests/dynamic_array_legacy_cursor_contracts.rs": "f5615e17d979a4152d6936159d7a634722469b8b722c9f05042f7b0d2084449b",
+    "crates/tkernel/tests/dynamic_array_method_tail/oracle.rs": "5c1c93128133492ade6dc889558b1a7994aed8d28dc398be73c97166df09bd66",
+    "crates/tkernel/tests/dynamic_array_method_tail/storage.rs": "5175e099f3ef67019e0a2d40c70ef894721a0643f735f3c7c1a5d451905dfba5",
+    "crates/tkernel/tests/dynamic_array_method_tail.rs": "66dd2eefcb5c71e85f4b99edb5bbeb4fe8f4b302d7a0ec836574b9f0c1c0622e",
+    "crates/tkernel/tests/dynamic_array_move_constructor.rs": "dbb462e6f6fe19a535c5383bf45d9e6974245161a8db3569fc14aaeff00ed37f",
+    "crates/tkernel/tests/dynamic_array_native_insertion/convenience.rs": "3a57bdc38468dddcb64fcc61060b2eb362cd38f3d68b0ddefeb0445f92807968",
+    "crates/tkernel/tests/dynamic_array_native_insertion/oracle.rs": "b59a7cc46d9c3164128defc9c07672bd16f9e7da9931846be86df360d50ad652",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs": "576c25dc0ec56d26ef965d1a66b2eea9a71f5d9a7122a2716884c008ce7f735d",
+    "crates/tkernel/tests/dynamic_array_protected_storage/contracts.rs": "4e4179a571da0d23cb8badd258dfc307085ac601037ab23a6bd8331f67d6d929",
+    "crates/tkernel/tests/dynamic_array_protected_storage/oracle.rs": "2be06c452aa3744033688fce7ed095050ec7483b146413d8979eb8bd4837370c",
+    "crates/tkernel/tests/dynamic_array_protected_storage.rs": "9f2583cd069b782e1d2f31443f9f50f16e4d26865d2582fde70d15f7711f38a1",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/contracts.rs": "9e73e8402dbd5172c7af2e4e0823ffe9e4aa571bbaf9aa2d0f8f49b2ff3d2e90",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/oracle.rs": "232802eb0f7214040bd16dad06b40b7264e6bebb10de3da92a5ca7b48ae5f48d",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs": "04d2991938e0f58511110dccc7542d3ae7f0e17775df325c246daf44db80b884",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/contracts.rs": "466f4ca295f14298ca9b0c766fe174287a6841d3e7f320ca1cddf099de819b46",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/emplace.rs": "eb560358b432b2024f07da572ac6ffa1b7997c4feb5a763268fc5f4b3e8f9439",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/oracle.rs": "1c7668759bdd3398a378fe2198c535f64b23cb7be5d7690d995fcf161dcb0c54",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs": "a1ff2c1c76a75d54008ea5d1e0515d16d2271ffd719c20b0b5f655190c4ad3c3",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/contracts.rs": "336e4b234f62849b3ec7a6ba2af79e2d9705bd2ba083763f850906e579de27f9",
+    "crates/tkernel/tests/dynamic_array_retained_parameters/oracle.rs": "3eb53e8681941e356d184bef61e97509d226ac68576af8b34072549079c02611",
+    "crates/tkernel/tests/dynamic_array_retained_parameters.rs": "0be211e1854f9b078265e3d61b1a3b1a0901a8c8a1b4e9efa5271093c35be3eb",
+    "crates/tkernel/tests/dynamic_array_storage_wrapping.rs": "0765270dadca391f1e0c75f8d1c057c92926a19b2f9d35c42fa5ff9273068ac7",
+    "crates/tkernel/tests/ncollection_dynamic_array/basic.rs": "585b61713888ed825672bee602f618f1282705641a6172f61c6b49c4e713dcf3",
+    "crates/tkernel/tests/ncollection_dynamic_array/emplacement.rs": "e67889874ef91a39460f695cdfc808c456c4ceee02d4f49a0039c4b7943e64a8",
+    "crates/tkernel/tests/ncollection_dynamic_array/indices.rs": "dfee440e1f60829811f4fd687b6f69364586963155a466f4ad5302dc3cf63e3e",
+    "crates/tkernel/tests/ncollection_dynamic_array/insertion.rs": "8be53f9883d2ecc737b85f4bb4531ff32bed1fea9e9a4e3cb51200a89a5b0ac9",
+    "crates/tkernel/tests/ncollection_dynamic_array/iteration.rs": "7925ba8f77b0d6eb877b89d2615a234ecf982efb0bc4f3058dcd70455f0abc42",
+    "crates/tkernel/tests/ncollection_dynamic_array.rs": "15a2d49e6699ee295f804201d8c8a639904ffb75dd6ebbc44e85168af79abc2e",
+    "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs": "2709f289827412be11a3f7f78d0e9d0240f20cd4c8cd0402d85ce73a81e6cf3d",
+    "tools/oracle/tkernel_dynamic_storage_wrapping.cxx": "a0d9c9ffd3c7a5ec6813e45e698cf27746630d3cab5ed68bb0a44336c6bb86c1",
+    "tools/oracle/tkernel_dynamic_storage_wrapping.expected": "828b2733ac86cd55edac31ea8780d429605f9826e2324d672d047a1b83b20122"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "native_header_resolution": {
+    "installed_forwarder": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_DynamicArray.hxx",
+    "forwarder_sha256": "1f2fcb0d67395dcef9425cb5c59ecf1d6bdcfc8fe3c861b7502556ee17e966a0",
+    "included_source": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+    "included_sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "matches_pinned_git_blob": true
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-storage-wrapping-rust.log.gz": "dccc5b8798e965cb753b2911b1c2ac2906e2adc6f68fcf885bfcd3ed4313fb32",
+    "porting/runtime-evidence/dynamic-storage-wrapping-unit.log.gz": "10e9a015dfa79145b548647d24c1b76519a04c1642475828c0fb8795c5f94c33",
+    "porting/runtime-evidence/dynamic-storage-wrapping-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-storage-wrapping-clippy.log.gz": "ef7a8b97afbfcbd8f4da133c8d0e5132644a2e302531c16264c25bd71f42bf7d",
+    "porting/runtime-evidence/dynamic-storage-wrapping-miri.log.gz": "c333e5d88a042f8fc6b6fd7b361f411bfba40a9b106dd536b203317f62cbaa39",
+    "porting/runtime-evidence/dynamic-storage-wrapping-unit-miri.log.gz": "da14ad92ea86517de26c920ac388e466e7aeeefa9acc6dd72310a00caa74795a",
+    "porting/runtime-evidence/dynamic-storage-wrapping-compiler.log.gz": "755ecde99b03993a6b611a5f3471751bb488f6c03193669b6ec0c7176a5bf257",
+    "porting/runtime-evidence/dynamic-storage-wrapping-native-originals.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-storage-wrapping-native-compile.log.gz": "66adde92f2e56b4c1d19fa18be4d5c65bab03bc5e363e4c2cc01e4adefdf1ac1",
+    "porting/runtime-evidence/dynamic-storage-wrapping-native-final.log.gz": "b18f1753e5783e24590534588f31e4039dab43db4ac926ba8c64522993b75692",
+    "porting/runtime-evidence/dynamic-storage-wrapping-native-ubsan.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-storage-wrapping-compiler-json.json.gz": "08878d6cd19be72c1458d8d668816b4ca5d5b0d7aea4c0eb657cee5a106bd05d",
+    "porting/runtime-evidence/dynamic-storage-wrapping-normalized.json.gz": "eab148228592fe21774403a71dabf832fefa047c2a222dfe038578368d644b7b",
+    "porting/runtime-evidence/dynamic-storage-wrapping-source.tar.gz": "92e13fe89cede624da343fc9c16fa0fa2ec3a033e34d30deb80f9573d2abf763"
+  },
+  "checks": {
+    "rust_passed": 277,
+    "unit_passed": 21,
+    "miri_passed": 73,
+    "unit-miri_passed": 21,
+    "native_originals_passed": 52,
+    "new_native_arithmetic_rows": 11,
+    "native_ubsan_exit": 0,
+    "fmt_exit": 0,
+    "scoped_dynamic_clippy_exit": 0,
+    "compiler_exit": 0
+  },
+  "targets": [
+    "dynamic_array_borrowed_methods",
+    "dynamic_array_copy_date",
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_erase_last_phase",
+    "dynamic_array_increment_overflow",
+    "dynamic_array_internal_reconstruction",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_move_constructor",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_retained_parameters",
+    "dynamic_array_storage_wrapping",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "miri_targets": [
+    "dynamic_array_storage_wrapping",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_protected_storage",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "miri_unit_filter": "ncollection::dynamic_array",
+  "miri_flags": [
+    "-Zmiri-strict-provenance"
+  ],
+  "native_compile_flags": [
+    "-std=c++17",
+    "-O1",
+    "-g",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=undefined"
+  ],
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.Value"
+  ],
+  "bindings": [
+    {
+      "native": {
+        "id": "1ae4908d04158a841511ce182303efe0c2f661907b6c1e2c4ba7e369af1a8a7e",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::ensureStorageForIndex",
+        "signature": "void (unsigned long, unsigned long)",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@F@ensureStorageForIndex#l#l#",
+        "written_parameter_types": [
+          "const size_t",
+          "const size_t"
+        ]
+      },
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::ensure_storage_for_index",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "index",
+                {
+                  "primitive": "usize"
+                }
+              ],
+              [
+                "item_size",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs",
+        "source_sha256": "e843dd95b665e2dc1f3494be176300df7d9823e60c4c1b11e43844ec366e5e5c",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "DynamicArrayStorageExtension",
+              "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::storage_extension::DynamicArrayStorageExtension",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "176d6e1d60127137c878c2287447991f557599db5427253521b8125a799c32da"
+      },
+      "status": "partial_defined_unsigned_raw_storage_arithmetic_domain"
+    },
+    {
+      "native": {
+        "id": "a961d742147873069e2e826b360ebd1b7be2ee6d4256e6596b6f10bcad55d9b5",
+        "kind": "CXXMethod",
+        "qualified_name": "NCollection_DynamicArray::allocateBlock",
+        "signature": "void *(unsigned long) const",
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+        "usr": "c:@ST>1#T@NCollection_DynamicArray@F@allocateBlock#l#1",
+        "written_parameter_types": [
+          "const size_t"
+        ]
+      },
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::allocate_block",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "item_size",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "raw_pointer": {
+                            "is_mutable": true,
+                            "type": {
+                              "primitive": "u8"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs",
+        "source_sha256": "d53f50ff7cac57f0bcc6e0737c8bb8ad283ffc6af9701e7c6d7614bfffac8fb7",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::DynamicArrayStorageExtension",
+              "resolved_item_path": "rustycad_tkernel::ncollection::dynamic_array::storage_extension::DynamicArrayStorageExtension",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "cfd26e62e1db977de55d38b3a43db0a2d3efa8f5df2ed14c0b9c1480cfa9c8c2"
+      },
+      "status": "partial_defined_unsigned_raw_storage_arithmetic_domain"
+    }
+  ],
+  "behavior": [
+    "Protected allocateBlock multiplies unsigned stride by item size with native wrapping, instead of rejecting before the detached raw allocator receives the request. Typed AllocVec registration is not involved in this API.",
+    "Protected ensureStorageForIndex wraps its unsigned block-count addition. A stride-one SIZE_MAX index becomes ensureBlockCount(0), preserving every allocation, value, address and logical size. Nonzero stride division remains equivalent to the native power-of-two right shift.",
+    "Eleven UBSan-clean native rows cover normal detached allocation, four huge item-size inputs whose products wrap to tiny positive byte counts, two zero-byte requests, and four stride-one maximum-index no-ops with empty, retained and populated arrays. Native allocator instrumentation captures requested bytes and allocation/free counts.",
+    "Rust positive-request observations measure actual accumulating allocator byte consumption for aligned sizes and read/write every byte before raw deallocation. Zero-byte cases use common allocator semantics; they assert successful allocate/free and unchanged typed state without claiming AccAllocator zero-free behavior.",
+    "Typed size mismatch, typed count overflow and zero-stride typed element allocation restrictions remain enforced. A regression asserts mismatched overflowing item sizes are rejected by ensureStorageForIndex, ensureBlockCount and expandBlock before allocator state changes.",
+    "The pre-existing Rust-only stride-one overflow assertion is corrected from error to native no-op success. No legacy test declarations are added or re-credited. All52 original runtime names join normal and strict Miri results."
+  ],
+  "method_audit_findings": [
+    "Reviewed direct public constructors/Assign/operators, Append/Appended, InsertBefore/After, EmplaceValue, SetValue, EraseLast/Clear/destructor, protected storage/copy/lifetime methods, and nested BasicIterator/Iterator/ConstIterator declarations against current Rust implementations. Existing block_table Drop already delegates Clear(true); no redundant destructor adapter was added.",
+    "The public copy-policy candidate b135361a is pending independent parent integration and is not part of this base capture. Its constructor-failure ownership and native resource-lifetime limitations remain actionable.",
+    "Other unresolved defined domains include native cached iterator pointers surviving allocation transfer while the original owner is empty; defined per-layout retained zero-stride element operations; arbitrary raw-sized registered blocks; explicit versus automatic C++ element-trait dispatch. These require separate ownership/layout work and are not classified as blanket native UB."
+  ],
+  "limitations": [
+    "Bindings remain partial: arbitrary raw-sized registered block layouts and allocator subclasses cannot be represented by the current typed block API. This batch changes detached raw allocation arithmetic only.",
+    "No huge allocation is attempted by the native oracle: all resulting byte requests are at most256. Resource exhaustion, allocator-specific zero-size failures, byte-layout ABI, and other host widths remain outside these comparisons.",
+    "The maximum-index no-op binding covers stride1 and a valid nonzero Rust T item size. Native no-op requests with arbitrary item-size arguments are still rejected by existing typed validation and remain a defined-domain gap.",
+    "Zero-stride metadata can produce a zero-byte detached raw allocation; typed zero-stride mutation is still rejected. Some retained native layouts support defined access and remain actionable rather than universally undefined.",
+    "The Rust unsigned multiplication/addition now matches the pinned implementation; safe typed guards and allocator failure Results remain Rust boundary policies and are not proof of full protected method parity."
+  ],
+  "global_api_credit_delta": 0,
+  "global_legacy_credit_delta": 0,
+  "validation_scope": "Final source passes20 DynamicArray integration targets (277 tests),21 units, strict Clippy/fmt and94 strict Miri tests. One native probe compiles with UBSan; linked TKernel is prebuilt. Two exact protected declarations bind unique public body-bearing Rust methods. No shared ledger or shared raw_element_lifetime helper changes."
+}

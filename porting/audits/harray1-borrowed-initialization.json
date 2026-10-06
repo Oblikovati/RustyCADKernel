@@ -1,0 +1,155 @@
+{
+  "schema": "rustycad.harray1-borrowed-initialization.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+  "branch": "port/harray1-method-tail",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "One native HArray1 fill constructor: borrowed donor, default-all then copy-assign-all, explicit assignment policy without Clone bound. Existing consuming convenience delegates to the same implementation. Array1 initialization internals are unchanged.",
+  "native_id": "3033a93879730646e214053aa78c4a964f21fd8b5c18dfc8899effcbbd815c76",
+  "native": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_harray1_borrowed_initialization.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/harray1-borrowed-initialization-native"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "run_exit": 0,
+    "run_stderr": "",
+    "rows": 8
+  },
+  "fixture_join": "Eight native rows are dynamically generated in Rust and compared exactly. A native element with deleted copy/move constructors proves only default construction and copy assignment are required. Success, empty range, each assignment failure prefix and forward cleanup are covered. Actual handle counters are 1/2/1, and ChangeArray1 edits and inherited bounds are observed through shared handles.",
+  "rust_only_checks": "Borrowed Clone convenience invokes clone_from without clone; invalid safe bounds reject before defaults or assignment; nested fixture contexts restore prior state. Invalid bounds are not claimed as a native allocation-failure oracle.",
+  "checks": {
+    "rust_passed": 75,
+    "rust_failed": 0,
+    "strict_provenance_miri_passed": 31,
+    "native_original_passed": 44,
+    "python_binding_passed": 25,
+    "scoped_clippy_exit": 0,
+    "fmt_exit": 0,
+    "native_fixture_rows": 8
+  },
+  "compiler_capture": {
+    "format_version": 61,
+    "exit": 0,
+    "unrelated_doc_warnings": 9,
+    "native_ids": 1,
+    "public_bodies": 3,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options"
+  },
+  "original_tests": {
+    "joined": 44,
+    "dedicated_wrapper_gtest_declarations": 0,
+    "archive": "porting/runtime-evidence/harray1-borrowed-original-joins.json.gz",
+    "scope": "All native NCollection_Array1Test passing names join existing Rust passing declarations exactly. These inherited dependency regressions count once; their assertions and mappings are unchanged. No new exhaustive assertion-faithfulness audit is claimed."
+  },
+  "wrapper_inventory": {
+    "archive": "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz",
+    "counts": {
+      "direct_declarations": {
+        "NCollection_HArray1": 24,
+        "NCollection_HArray2": 22,
+        "NCollection_HSequence": 25
+      },
+      "harray1_base_declaration_candidates": 137,
+      "dedicated_wrapper_gtest_declarations": 0,
+      "consumer_files": 24,
+      "consumer_file_declarations": 283
+    },
+    "api_visible_direct": {
+      "NCollection_HArray1": 22,
+      "NCollection_HArray2": 20,
+      "NCollection_HSequence": 22
+    },
+    "scope": "HArray2/HSequence are inventoried backlog only. 137 Array1/Standard_Transient base candidates require individual exposure review. The 283 declarations are file-level consumer candidates from 24 GTest sources, not independently proven wrapper test declarations or new coverage credit."
+  },
+  "commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test harray1_borrowed_initialization --test ncollection_array1 --test ncollection_arrays_api_behavior --test shared_collection_method_contracts",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test harray1_borrowed_initialization --test shared_collection_method_contracts --test ncollection_arrays_api_behavior",
+    "python": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_api_binding*.py'",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --test harray1_borrowed_initialization --test ncollection_arrays_api_behavior --test shared_collection_method_contracts -- -D warnings",
+    "native_originals": "OpenCascadeGTest --gtest_filter='NCollection_Array1Test.*'",
+    "fmt": "cargo fmt --all -- --check"
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "f8e16c5489716e3fd36b1483a74cd9b987a67b26",
+    "replaced_rows": 1,
+    "previous_status": "implemented",
+    "current_status": "partial",
+    "implemented_credit_delta": -1,
+    "legacy_test_mapping_delta": 0,
+    "proof": "Exact constructor identity plus three current source-hashed compiler bodies. Six replay guards reject wrong IDs, stale bodies, missing selectors, unrelated original transaction mutation and owned current mutation, while allowing unrelated current class changes."
+  },
+  "limits": [
+    "Default-constructor and allocation failures remain open. Native partial default construction may leak storage; Rust safe cleanup is not represented as equivalent.",
+    "Native primitive uninitialized default storage has no general safe Rust value equivalent.",
+    "Explicit assignment callbacks and Clone::clone_from are selected policies, not automatic equivalence for arbitrary C++ copy/move or address-sensitive types.",
+    "The owned convenience consumes its donor; native donor retention is modeled by the borrowed adapters.",
+    "Rust panics model the tested assignment failure traces, not arbitrary native exception types, messages, ABI or noexcept termination.",
+    "Send+Sync+static bounds and lock guards restrict native type, aliasing and reentrant access domains.",
+    "Existing immutable buffer construction uses copy-on-write, unlike native const-cast aliasing; the mutable static-buffer adapter has a narrower domain.",
+    "No wrapper class completion, implicit special-member parity, inherited alias/RTTI/allocation coverage or denominator-complete proof is claimed."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/harray1-borrowed-replay.py.gz > /tmp/replay-harray1-borrowed.py && python3 /tmp/replay-harray1-borrowed.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/harray.rs": "8c53adbae0e27356850e4780e303926fbb037a954fff7eec2f13ca3dbda6a656",
+    "crates/tkernel/src/ncollection/harray/initialization.rs": "9408a7bd7409d0d7575869f882fe57db6e9b6428f0d39f7b869ec25f1f03fc18",
+    "crates/tkernel/src/ncollection/array1.rs": "5842eef147f51a8fec7a033f22b09944dec23e24cd4343eded7c03c39e1d6748",
+    "crates/tkernel/src/ncollection/array1/assignment_policy.rs": "95473067ddc963054a0f0865533025e6ff70d05fd18a305ac808078e2868445b",
+    "crates/tkernel/tests/harray1_borrowed_initialization.rs": "230b58155550fbb8339b517630f99fe6e2787463af1a13a03d0489fff3c92f4a",
+    "crates/tkernel/tests/harray1_borrowed_initialization/fixture.rs": "6197b2f79b288954512e191eafc297fceb4f687d0983d0eb5f9378cc89a5c86c",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs": "6be15c5d34e5d369c4738fa7513cac13cd2d13951faa841f489983b6dcc508ec",
+    "tools/oracle/tkernel_harray1_borrowed_initialization.cxx": "5c163dde03b7b813145ea13ed256dd4edb50ab1542d1ac2caa7f9dbc2c6b365e",
+    "tools/oracle/tkernel_harray1_borrowed_initialization.expected": "c53c5e29c6350e08d98b6d89d4f15bb799ab86e9e11929a3d71b7f947417472a"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-inventory/legacy-tests.jsonl.gz": "d6037cc257db2c5d1dc903313da24fb2b3849636fa6d25924d8dbed7ec114d8b",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx": "28da2eee9a8873260e5fbacfc28cf97d9f0c5eb31293b115b1cfd589a81e46ec",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx": "9111b436360dd841f72e49479fb7f3eba81171859be00d8177419a22b92e9ad1",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx": "285ad522ec910f7c3995fd54ad2ea3375d6e8ee3904ed951d466469667f5d20b",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/harray1-borrowed-binding-tests.log.gz": "c36120e5c18b60e08545ed8b9cccd371b9876cb32134f2fb8710bf87147fa436",
+    "porting/runtime-evidence/harray1-borrowed-bindings.json.gz": "4ed354c578f1655b456b41bfd92b681da9d40e04992792989676b6f1d7f49c54",
+    "porting/runtime-evidence/harray1-borrowed-clippy.log.gz": "f3eb5f4c684067d164af43fafb288f2efb909ee4f9e1d6317ebe7396e0d6254d",
+    "porting/runtime-evidence/harray1-borrowed-compiler.log.gz": "e7a36b9ed1f7833ccb33b4f742a678aca5567bb7b350d515082c981860b90f29",
+    "porting/runtime-evidence/harray1-borrowed-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/harray1-borrowed-miri.log.gz": "aa52ee64e5353f6c58eee5d9f44be8f16d7b1da01c3c43d31ec2f023efaed69e",
+    "porting/runtime-evidence/harray1-borrowed-native-command.json.gz": "fa0c9db6eccdbfa2a274ddbda595703440cd0527d2cc8900561d1518d280f56b",
+    "porting/runtime-evidence/harray1-borrowed-native-originals.log.gz": "fb01b2c0c283eab8e7a1d1a212715571b03a304f35a81faf1fed93ba064767b2",
+    "porting/runtime-evidence/harray1-borrowed-native.stdout.gz": "4a14f80a3ff41dd652534a96472839aae0b98c20c8c69714f52bac8816b6d6ec",
+    "porting/runtime-evidence/harray1-borrowed-normalized.json.gz": "b1933c0abd971c2a49b8f951e647dffd98773e5b0bd5d71745583614080b146d",
+    "porting/runtime-evidence/harray1-borrowed-original-joins.json.gz": "2643cf4d999bf24a20d015584e3f6162f5191eda58928569386ed33b644b1b19",
+    "porting/runtime-evidence/harray1-borrowed-replay.log.gz": "cd6f9741e7a42ea63a9c602a66c5433f73cfe3988c696e5385f2f4860dbb12a3",
+    "porting/runtime-evidence/harray1-borrowed-replay.py.gz": "03fadd800771aac750c63fd72f7f11395ce922e74362fb625fee8da04ddece22",
+    "porting/runtime-evidence/harray1-borrowed-rust.log.gz": "6551f7e96739cff4fbea8132c8b25fdc253330e2ab10beaa413d8229b74e7a25",
+    "porting/runtime-evidence/harray1-borrowed-rustdoc.json.gz": "e4f32cb8432a9e6477cb557ed66c8dce6a8a175c66713d6c102460e42aeafe03",
+    "porting/runtime-evidence/harray1-borrowed-transaction.json.gz": "a397ea8a41200077e2d5c50589d9e438b1b1e455c1c8c4289b661b5717ffb071",
+    "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz": "0e6f0a0858a218da54b3f90d31691676187bc13a598ae011bec1065a5487478e"
+  }
+}

@@ -1,6 +1,7 @@
 //! Native storage observations, with private access limited to this contract suite.
 use super::{PackedInteger, PackedMap, PackedMapNode, PackedWord};
 use std::collections::BTreeMap;
+mod bucket_policy;
 #[path = "../../../tests/packed_map_oracle/mod.rs"]
 mod decoder;
 mod unwind;

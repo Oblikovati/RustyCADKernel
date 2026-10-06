@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use rustycad_tkernel::ncollection::LinearVector;
 use std::cell::Cell;
 use std::rc::Rc;
@@ -94,7 +95,7 @@ fn borrowed_fill_reallocation_moves_existing_values_then_clones_each_tail() {
 }
 
 #[test]
-fn borrowed_fill_clone_panic_rolls_back_and_drops_completed_tail() {
+fn borrowed_fill_clone_panic_retains_completed_unpublished_tail() {
     let control = Rc::new(CloneControl::default());
     control.panic_at.set(2);
     let mut vector = make_vector(4, &[1], &control);
@@ -109,6 +110,9 @@ fn borrowed_fill_clone_panic_rolls_back_and_drops_completed_tail() {
     assert_eq!(vector.len(), 1);
     assert_eq!(vector.capacity(), 4);
     assert_eq!(control.attempts.get(), 2);
+    assert_eq!(control.drops.get(), 0);
+    // SAFETY: exactly the first spare clone succeeded; native state is asserted above.
+    unsafe { crate::tail_repair::destroy_completed_tail(&mut vector, 1) };
     assert_eq!(control.drops.get(), 1);
     assert_values(&vector, &[1]);
 }

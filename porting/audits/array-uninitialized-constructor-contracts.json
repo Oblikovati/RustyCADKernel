@@ -1,0 +1,1422 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_Array1/Array2 explicit uninitialized construction and consuming initialized-storage transition",
+  "base_revision": "c6b9259f4c554df53390c963d11817d1c2d20c4e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "committed candidate; root integration and cleanup pending",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/array1.rs": "e15f2f326a9abab2a9a6ca0baf1b11234a386c192920519428394c89047b90d8",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "183b12552edc76e4a70dd819fc235ddcfe9fbfb79ba60932b822fdc4dd8acfdf",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "30e214878708a47f2d634e661386168e30d304889f1f574f77d0c041c71acf1c",
+    "crates/tkernel/src/ncollection/array1/assignment_policy.rs": "95473067ddc963054a0f0865533025e6ff70d05fd18a305ac808078e2868445b",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/copy_assignment_policy.rs": "30d1c2d598f53f724aa7cadfee156c5383c47c2c49649ed961b9d0f28c55abba",
+    "crates/tkernel/src/ncollection/array1/uninitialized.rs": "613137b31378ce7e6d82509129cd5ce653c3bd8fab0ca3f1028a903474bfd66a",
+    "crates/tkernel/src/ncollection/array1/emplace_policy.rs": "7c024243fafbe9d9988fd03e16f6fbdf4238a1f55918897df5d29098e06f64c8",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/internal_init.rs": "01a3e96e6585895268c47dcfa17b306b77aa8367f286b940f3dcb9f0955cdd3a",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "ccfd252c64698a515552dfb23d41baebd3c99ab1d78b4b0c3d2253884086263f",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array1/resize_storage.rs": "098bfcc476955f9e802eec235fed8048a4d660c9082d86762b94438e426d6475",
+    "crates/tkernel/src/ncollection/array2/assignment_policy.rs": "0b578dd32aba999254ebe311b68ac4d67adbe6dd9770e90186b5cca1bea33b53",
+    "crates/tkernel/src/ncollection/array2/copy_assignment_policy.rs": "109989aad5bb05679e6749780d05a886a7a084cbb2b2fdde1b3db6800c449e93",
+    "crates/tkernel/src/ncollection/array2/uninitialized.rs": "c6490b8e66cb2f0642df82a672c721c0c0db9832856fdddfa97308f18e4398ba",
+    "crates/tkernel/src/ncollection/array2/emplace_policy.rs": "cb5d97b4db10a993b071ce516d8a1fbfb284c15f76533835b32ec76c5c6a8de6",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/internal_init.rs": "651bf9bd8644bcb187ecbbbbc8fa322992239f15cef858b65436e4735e1e3885",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/src/ncollection/array2/resize_policy.rs": "00af82c5e5ce72e35553f440ba2dd778e1e500d2c9ae68d961c8b9a7f0735e8b",
+    "crates/tkernel/src/ncollection/array2/resize_policy/assignment.rs": "95477196755d1174e1357d4e213e035ad6754ad1e9240baf6868a231d3942ec1",
+    "tools/oracle/tkernel_array_uninitialized.expected": "23d3f73162507cbe2d923b8015952ed797072f1a98365b8da29b3451a39c01f0",
+    "tools/oracle/tkernel_array_uninitialized.cxx": "1449b6fe9cc4acbda6b29cbbed2e4cd919a20b638baf44597a66b84a78d96653",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/array2_resize_assignment.rs": "d978a897356011b500ce2d581bb9d7b39ef53809127d7c803d51465429eb7efa",
+    "crates/tkernel/tests/array2_resize_assignment/support.rs": "b4d7e39db0a1618f966eac7ad50c42f5d11e9cb62f2c23cddac2b15ca04b98c7",
+    "crates/tkernel/tests/array2_resize_validation.rs": "8217d6d6411604519412e166c0f8545c2785372082efb4046b0b321be9476f22",
+    "crates/tkernel/tests/array_emplace_assignment.rs": "ef075786addde15ef6089b7dd11bf4388bace660e64414a931ad66391f44fa66",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs": "4f58e39643e0e47a6790ee4bcf002cde0caf275cb174f0c0e07ea9992ce7a1ed",
+    "crates/tkernel/tests/array_set_value_assignment.rs": "02bed0fcf2a1d1757f6438d89f313541d161fce146e83b8f8ba4cd4e3cf6d2c7",
+    "crates/tkernel/tests/array_set_value_assignment/support.rs": "3e4d770878f2ab3f303a91cf9bc7da7ec7787248fcd27fc74d222e8f83f8e2bf",
+    "crates/tkernel/tests/array_const_assignment.rs": "a9e91b0e1cd0097ba9eb566cfe75a0d1aae07a0e0e0b3bb728ef9b8445a6ea88",
+    "crates/tkernel/tests/array_const_assignment/support.rs": "163136bf665b857eb9631e0ca431b442d6c48b3f98ef22e24c6e28443373b2c0",
+    "crates/tkernel/tests/array_copy_values_assignment.rs": "4335699d3ce25ac8e51ae75d81dd8b1f125bf2c69804cd22a352e84ee319317d",
+    "crates/tkernel/tests/array_copy_values_assignment/support.rs": "1b24b3a7fd81cfcf0c6f947b878062a1f8a8022fa5ab97b0056a1fe65f5a13f7",
+    "crates/tkernel/tests/array_internal_set_value.rs": "c48d2bad381321630f2782e233acf838a0f74f869c814fa956f60ac7200d23e7",
+    "crates/tkernel/tests/array_internal_set_value/support.rs": "d90515f6d610369fd8fc9b4166f229255e8292b15c7ecd40f2b97a0168baa71a",
+    "crates/tkernel/tests/array_internal_init.rs": "63675cd25763c40d3fe09d97ca1ba735854ebe76dbfaefd3f24312012da859b6",
+    "crates/tkernel/tests/array_internal_init/support.rs": "f9ccabf17493b2d4395bc4681d107358f6b0ab2741c6a5e1fdb171b4bf6b7e87",
+    "crates/tkernel/tests/array_uninitialized.rs": "060815af5e809cb2e3d4371006b87aece6078bd7fb7e0877311db6e482c7b332",
+    "crates/tkernel/tests/array_uninitialized/support.rs": "4ce3e3ad6ab7d07da721ca1612fa545ec461bdee5cfbb064536f8705cce1e947"
+  },
+  "native_sources_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array1_Test.cxx": "4e3ed53fab5eda22313e4c9a9629a15194da293ed74be33d1ef7aeb8489eaa83",
+    "src/FoundationClasses/TKernel/GTests/NCollection_Array2_Test.cxx": "056a7282224275fdbd8775096d31e6173f5252ef85c94bbd16d757876068899e"
+  },
+  "candidate_bindings": [
+    {
+      "cpp_id": "1e9e8714d7a4f77cc90cfee200b1a9dbe5cc1a9548387e2538d101c0c8c5fb56",
+      "cpp_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (int, int, int, int)",
+      "cpp_site": {
+        "column": 3,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 160
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array2::with_uninit_bounds",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "rl",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "ru",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "cl",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "cu",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Array2",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'a"
+                                  },
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "MaybeUninit",
+                                        "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "generic": "T"
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "ArrayError",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array2/uninitialized.rs",
+        "source_sha256": "c6490b8e66cb2f0642df82a672c721c0c0db9832856fdddfa97308f18e4398ba",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array2",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "c994d68b33df2be8e229236b52e50467d23e9bc4c5cee01b0a7b6bca5dfcb558"
+      },
+      "status": "partial_domain",
+      "domain": "Explicit native trivially-default-constructible element storage. MaybeUninit represents unreadable slots; defined values are observed only after each actual storage element has been initialized."
+    },
+    {
+      "cpp_id": "bd1bedd1b6ccdf2c7c216bb308f6cd823a446bd33cbbf15e65b865ecd079dd65",
+      "cpp_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (unsigned long)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 192
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::with_uninit_size",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "size",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "MaybeUninit",
+                            "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "source_sha256": "613137b31378ce7e6d82509129cd5ce653c3bd8fab0ca3f1028a903474bfd66a",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "b2b88a4b374866d598d109c05198141ab495b2f4060ded2cd9ea1b681736fcda"
+      },
+      "status": "partial_domain",
+      "domain": "Explicit native trivially-default-constructible element storage. MaybeUninit represents unreadable slots; defined values are observed only after each actual storage element has been initialized."
+    },
+    {
+      "cpp_id": "c2547bce644e1d419e38180a28e866d39b4cbf2624ba02ec345fd6ed181e31e5",
+      "cpp_name": "NCollection_Array1::NCollection_Array1<TheItemType>",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (int, int)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 145
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::with_uninit_bounds",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "lower",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "upper",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Array1",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'a"
+                                  },
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "MaybeUninit",
+                                        "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "generic": "T"
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "ArrayError",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array_error::ArrayError",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "source_sha256": "613137b31378ce7e6d82509129cd5ce653c3bd8fab0ca3f1028a903474bfd66a",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "242c3743688f0585b4d17332647722181da3da530a52472c19bfcde07c4db928"
+      },
+      "status": "partial_domain",
+      "domain": "Explicit native trivially-default-constructible element storage. MaybeUninit represents unreadable slots; defined values are observed only after each actual storage element has been initialized."
+    },
+    {
+      "cpp_id": "c58b956195771a3b0f92f761aae509c7393a283a98e09e8ea4ff9e78c443169c",
+      "cpp_name": "NCollection_Array2::NCollection_Array2<TheItemType>",
+      "cpp_kind": "CXXConstructor",
+      "cpp_signature": "void (unsigned long, unsigned long)",
+      "cpp_site": {
+        "column": 12,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "line": 218
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array2::with_uninit_size",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "rows",
+                {
+                  "primitive": "usize"
+                }
+              ],
+              [
+                "cols",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Array2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "MaybeUninit",
+                            "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array2/uninitialized.rs",
+        "source_sha256": "c6490b8e66cb2f0642df82a672c721c0c0db9832856fdddfa97308f18e4398ba",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array2",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "194b7c083513c2455d8a10552fe97e963b60fcd7056d17030db69bbb0be099c8"
+      },
+      "status": "partial_domain",
+      "domain": "Explicit native trivially-default-constructible element storage. MaybeUninit represents unreadable slots; defined values are observed only after each actual storage element has been initialized."
+    }
+  ],
+  "compiler_reachable_new_bodies": 6,
+  "cpp_bindings_count": 4,
+  "rust_only_initialization_transition_bodies": [
+    {
+      "path": "rustycad_tkernel::ncollection::Array1::assume_init",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+      "source_sha256": "613137b31378ce7e6d82509129cd5ce653c3bd8fab0ca3f1028a903474bfd66a",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Array1",
+            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'a"
+                  },
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "path": "std::mem::MaybeUninit",
+                        "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "generic": "T"
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "'a",
+              "kind": {
+                "lifetime": {
+                  "outlives": []
+                }
+              }
+            },
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "Copy",
+                          "resolved_item_path": "core::marker::Copy",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "d6e03f290ff48d062ffc6085e81152ca6e30592f43732f0f0a55b2b5c9686831"
+    },
+    {
+      "path": "rustycad_tkernel::ncollection::Array2::assume_init",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "Array2",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/array2/uninitialized.rs",
+      "source_sha256": "c6490b8e66cb2f0642df82a672c721c0c0db9832856fdddfa97308f18e4398ba",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Array2",
+            "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'a"
+                  },
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "path": "std::mem::MaybeUninit",
+                        "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "generic": "T"
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "'a",
+              "kind": {
+                "lifetime": {
+                  "outlives": []
+                }
+              }
+            },
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "Copy",
+                          "resolved_item_path": "core::marker::Copy",
+                          "args": null
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "cd00c0270000b37a4081705d5b7bedb6b37179dd235efb6fb967eb418f0f78f2"
+    }
+  ],
+  "runtime": {
+    "rust": {
+      "passed": 265,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 21
+    },
+    "docs": {
+      "passed": 270,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "miri": {
+      "passed": 157,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 15
+    },
+    "unit": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "miri-unit": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    }
+  },
+  "new_rust_tests": 13,
+  "native_oracle_rows": 15,
+  "native_original_passes": 81,
+  "rust_original_passes": 81,
+  "exact_original_case_name_join": [
+    "NCollection_Array1Test.AssignmentOperator",
+    "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+    "NCollection_Array1Test.AssignmentOperatorEmptySource",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array1Test.AssignmentValue",
+    "NCollection_Array1Test.ChangeValue",
+    "NCollection_Array1Test.ChangeValueAccess",
+    "NCollection_Array1Test.ConstructorWithBounds",
+    "NCollection_Array1Test.ConstructorWithNegativeBounds",
+    "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+    "NCollection_Array1Test.CopyConstructor",
+    "NCollection_Array1Test.CopyValuesDifferentSize",
+    "NCollection_Array1Test.CopyValuesPreservesBounds",
+    "NCollection_Array1Test.DefaultConstructor",
+    "NCollection_Array1Test.EmplaceValue",
+    "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+    "NCollection_Array1Test.FirstLast",
+    "NCollection_Array1Test.Init",
+    "NCollection_Array1Test.IteratorAccess",
+    "NCollection_Array1Test.Move",
+    "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+    "NCollection_Array1Test.Resize",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+    "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+    "NCollection_Array1Test.STLIteration",
+    "NCollection_Array1Test.SetValue",
+    "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array1Test.SizeConstructor_AtAccess",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+    "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+    "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+    "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+    "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+    "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+    "NCollection_Array1Test.SizeConstructor_ZeroSize",
+    "NCollection_Array1Test.ValueAccess",
+    "NCollection_Array2Test.AssignmentOperator",
+    "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+    "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+    "NCollection_Array2Test.ChangeValueAccess",
+    "NCollection_Array2Test.ConstructorWithBounds",
+    "NCollection_Array2Test.ConstructorWithNegativeBounds",
+    "NCollection_Array2Test.CopyConstructor",
+    "NCollection_Array2Test.CopyValuesDifferentDimensions",
+    "NCollection_Array2Test.CopyValuesPreservesBounds",
+    "NCollection_Array2Test.DefaultConstructor",
+    "NCollection_Array2Test.EmplaceValue",
+    "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+    "NCollection_Array2Test.Init",
+    "NCollection_Array2Test.MoveAssignment",
+    "NCollection_Array2Test.MoveConstructor",
+    "NCollection_Array2Test.ReIndex_Interference",
+    "NCollection_Array2Test.ReIndex_UpdateBounds",
+    "NCollection_Array2Test.Resize",
+    "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+    "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+    "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+    "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+    "NCollection_Array2Test.Resize_FromEmpty",
+    "NCollection_Array2Test.Resize_NoCopy",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds",
+    "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+    "NCollection_Array2Test.STLIteration",
+    "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+    "NCollection_Array2Test.SizeConstructor_AtAccess",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+    "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+    "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+    "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+    "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+    "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+    "NCollection_Array2Test.ValueAccess"
+  ],
+  "validation": {
+    "targets": [
+      "ncollection_array1",
+      "ncollection_array2",
+      "ncollection_arrays_api_behavior",
+      "array1_assignment_pointer_contracts",
+      "array2_assignment_pointer_contracts",
+      "array1_borrowed_init",
+      "ncollection_array2_buffer_prefix",
+      "ncollection_array_set_value_ref",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation",
+      "array_buffer_constructors",
+      "array_buffer_validation",
+      "array2_resize_assignment",
+      "array2_resize_validation",
+      "array_emplace_assignment",
+      "array_set_value_assignment",
+      "array_const_assignment",
+      "array_copy_values_assignment",
+      "array_internal_set_value",
+      "array_internal_init",
+      "array_uninitialized"
+    ],
+    "results": {
+      "rust": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation",
+          "--test",
+          "array2_resize_assignment",
+          "--test",
+          "array2_resize_validation",
+          "--test",
+          "array_emplace_assignment",
+          "--test",
+          "array_set_value_assignment",
+          "--test",
+          "array_const_assignment",
+          "--test",
+          "array_copy_values_assignment",
+          "--test",
+          "array_internal_set_value",
+          "--test",
+          "array_internal_init",
+          "--test",
+          "array_uninitialized"
+        ],
+        "exit": 0
+      },
+      "clippy": {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "ncollection_array1",
+          "--test",
+          "ncollection_array2",
+          "--test",
+          "ncollection_arrays_api_behavior",
+          "--test",
+          "array1_assignment_pointer_contracts",
+          "--test",
+          "array2_assignment_pointer_contracts",
+          "--test",
+          "array1_borrowed_init",
+          "--test",
+          "ncollection_array2_buffer_prefix",
+          "--test",
+          "ncollection_array_set_value_ref",
+          "--test",
+          "array_raw_copy_contracts",
+          "--test",
+          "array_raw_copy_validation",
+          "--test",
+          "array_buffer_constructors",
+          "--test",
+          "array_buffer_validation",
+          "--test",
+          "array2_resize_assignment",
+          "--test",
+          "array2_resize_validation",
+          "--test",
+          "array_emplace_assignment",
+          "--test",
+          "array_set_value_assignment",
+          "--test",
+          "array_const_assignment",
+          "--test",
+          "array_copy_values_assignment",
+          "--test",
+          "array_internal_set_value",
+          "--test",
+          "array_internal_init",
+          "--test",
+          "array_uninitialized",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      },
+      "fmt": {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit": 0
+      },
+      "docs": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--doc"
+        ],
+        "exit": 0
+      }
+    }
+  },
+  "miri": {
+    "targets": [
+      "array_uninitialized",
+      "array_internal_set_value",
+      "array_internal_init",
+      "array_copy_values_assignment",
+      "array_const_assignment",
+      "array_set_value_assignment",
+      "array_emplace_assignment",
+      "array2_resize_assignment",
+      "array2_resize_validation",
+      "array_buffer_constructors",
+      "array_buffer_validation",
+      "array_raw_copy_contracts",
+      "array_raw_copy_validation",
+      "array1_assignment_pointer_contracts",
+      "array2_assignment_pointer_contracts"
+    ],
+    "command": [
+      "cargo",
+      "+nightly-2026-09-25",
+      "miri",
+      "test",
+      "--locked",
+      "-p",
+      "rustycad-tkernel",
+      "--test",
+      "array_uninitialized",
+      "--test",
+      "array_internal_set_value",
+      "--test",
+      "array_internal_init",
+      "--test",
+      "array_copy_values_assignment",
+      "--test",
+      "array_const_assignment",
+      "--test",
+      "array_set_value_assignment",
+      "--test",
+      "array_emplace_assignment",
+      "--test",
+      "array2_resize_assignment",
+      "--test",
+      "array2_resize_validation",
+      "--test",
+      "array_buffer_constructors",
+      "--test",
+      "array_buffer_validation",
+      "--test",
+      "array_raw_copy_contracts",
+      "--test",
+      "array_raw_copy_validation",
+      "--test",
+      "array1_assignment_pointer_contracts",
+      "--test",
+      "array2_assignment_pointer_contracts"
+    ],
+    "exit": 0,
+    "flags": "-Zmiri-strict-provenance"
+  },
+  "native_probe": {
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "command": "g++ -std=c++17 -O2 -I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade tools/oracle/tkernel_array_uninitialized.cxx -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi -lTKernel -o /tmp/tkernel_array_uninitialized",
+    "binary_sha256": "c087386392178b517facf867873aced72323c81e4575cbba3a92ab89d2f0e234",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary_sha256": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693",
+    "generated_header_wrappers": {
+      "NCollection_Array1": {
+        "wrapper_sha256": "9da1703ce2cd4db6acd0aa930a4f9ac751ae82616a4e40225417219c69a537a2",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "referent_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+      },
+      "NCollection_Array2": {
+        "wrapper_sha256": "29fed56d4ae5ef628e3d24ea26ee97c6eca0794182181fe4bc013d9f33236228",
+        "referent": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+        "referent_sha256": "452d5656962a8e521578a04ce16dbffcee4a279fe4f01570d9796d145d32c75a"
+      }
+    }
+  },
+  "native_composition_dependencies": [
+    {
+      "name": "NCollection_Array1::construct trivial branch (existing storage)",
+      "id": "055c0a8e2f5dd2080ef0310d65c3597cf8ff5634512b4592d6b0e65f73c9da4d",
+      "source": "NCollection_Array1.hxx:544",
+      "credit": 0
+    },
+    {
+      "name": "NCollection_Array1::construct trivial branch (explicit pointer)",
+      "id": "6cd3c9825d0b076961f09f26b7e2ba4165222a37612fe52cb860594ecd1913f5",
+      "source": "NCollection_Array1.hxx:560",
+      "credit": 0
+    }
+  ],
+  "base_scope_note": "Fresh main c6b9259f includes internal Init and SetValue but not pending internal Emplace candidate adc02269. Its immutable receipt is reconciled in array-class-method-reconciliation.json; no claim is made that its unmerged tests ran on this base.",
+  "additional_validation": {
+    "unit": {
+      "command": "cargo test --locked -p rustycad-tkernel --lib ncollection::array1::uninitialized::tests",
+      "exit": 0
+    },
+    "miri-unit": {
+      "command": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --lib ncollection::array1::uninitialized::tests",
+      "exit": 0
+    },
+    "unit-clippy": {
+      "command": "cargo clippy --locked -p rustycad-tkernel --lib --tests -- -D warnings",
+      "exit": 0
+    }
+  },
+  "changes": [
+    "Add four explicit uninitialized constructors returning Array1/Array2 of MaybeUninit<T>, with no Default or Clone requirement on T.",
+    "Add consuming unsafe assume_init transitions for Copy elements. Transfer an owned Vec with identical pointer, length and capacity using into_raw_parts/from_raw_parts. Borrowed and shared slices keep their original lifetime and provenance; no initialization transition allocates or invokes element construction/copy callbacks.",
+    "Require valid initialized T in every actual flat slot before transition, including slots outside matrix metadata after inherited backing replacement or resize. Spare owned capacity and unborrowed external tails are not accessible elements and need not be initialized.",
+    "Keep ordinary initialized constructors and all original assertions unchanged. No shared allocator or allocation routing changes are made."
+  ],
+  "probe_policy": "The native payload is statically asserted trivially default constructible/copyable. Fifteen rows cover linear size/bounds, matrix size/bounds, empty ranges, negative origins, mutable borrowed prefixes, and actual matrix flat backing resized to zero/shorter/longer lengths. Every slot is assigned before any native read. Seven Rust tests compare all rows; five Rust-only tests cover safe invalid-dimension guards, borrowed reference lifetimes, shared read-only detachment and zero-sized elements. One library unit test transfers an initialized length with spare uninitialized Vec capacity and verifies identical pointer/length/capacity.",
+  "initial_failure": {
+    "kind": "implementation compile failure",
+    "log": "array-uninitialized-constructor-first.gz",
+    "cause": "The crate denies unsafe_code by default. The first build omitted existing-style localized allow attributes for the new audited unsafe transition/helper operations. The functions now carry focused allows with explicit safety contracts; no Miri validation or provenance flags were relaxed."
+  },
+  "limitations": [
+    "These constructors explicitly select the uninitialized storage policy; Rust traits do not infer the native C++ is_trivially_default_constructible predicate. Existing Default constructors still select initialized Rust storage.",
+    "The unsafe initialization transition is a Rust representation adapter, not another native declaration. It requires Copy so shared-view detachment remains expressible without constructing a new cloning contract for arbitrary T. Its two compiler bodies earn no additional native mapping credit.",
+    "No native uninitialized value is read or compared. Native invalid/uninitialized reads, object-lifetime violations and signed bounds arithmetic overflow remain outside the claim.",
+    "All actual inherited backing slots must be initialized, even if shorter/longer than rectangular metadata. Native changed-base cases use Array1::Resize while Rust reconstructs the same backing state; this does not claim a new uninitialized Resize entry point.",
+    "The initialization transition does not allocate, move elements or clone them. Vec owner identity, allocation pointer, length and capacity transfer intact; borrowed/shared lifetimes remain unchanged. Current arrays use their existing Vec allocation and gain no native allocator-routing claim.",
+    "Shared read-only storage retains the Rust detachment policy after later mutable access. This transition does not close the native writable const-cast alias domain.",
+    "Arbitrary raw overlapping wrappers, multiple internal Emplace arguments, nontrivial constructor failure leaks, throwing destructors and native allocator hooks remain open.",
+    "The protected native trivial construct branches explain the constructor policy but are not separately exposed as raw pointer callbacks. The class checklist retains those unresolved protocol domains.",
+    "All four constructor bindings remain partial; global API inventory and original legacy mapping credit are unchanged."
+  ],
+  "api_parity_complete": false,
+  "original_test_mapping_credit_added": 0,
+  "global_api_inventory_credit_added": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-rust.gz",
+      "sha256": "76d5f33a566ecd6b87ee4409079c65eeb92646532f2530a8c616025d6309cbe9",
+      "uncompressed_sha256": "8cbfbdfd1d45771a586009527d7f486490226502793d5e9b187faccce26fa4a8"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-miri.gz",
+      "sha256": "adbe1d54ded34845573f19f57f305fb080b8911c54b84b813f642d29bfc06fa1",
+      "uncompressed_sha256": "da8e0a465068924c9c289408bc40d8abc9c184db544838f674e36f28cd1238d1"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-docs.gz",
+      "sha256": "91eed9671476ded51be33c94c82a1b52e81a462004869e1742272915c59f4cc3",
+      "uncompressed_sha256": "0ad71ffa7308a7a625d851d4e83a16ec0d5cdfadfcdd3ecf08a8cb6242a969ab"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-clippy.gz",
+      "sha256": "174c35683123a2c21a2e7e2f0117e68c72c94fef990336d46b7357fda98ebcf0",
+      "uncompressed_sha256": "a6b338c9d81699dd0aa843da49979c8ea724cf082b8afbf1ca6e6d76b351b61f"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-unit.gz",
+      "sha256": "ad554ce7c709b2b125e4e0601bc18a852015b8d92223acfab40e4f5a1c60ccd0",
+      "uncompressed_sha256": "e425ed29fa34d6631357e90596678da0031afde6d91b23bfdcfedf122232b304"
+    },
+    "miri-unit": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-miri-unit.gz",
+      "sha256": "e0b82ebd223108ab335095b01deab7b6f9ae2fddef6cafa56befef76da862ebd",
+      "uncompressed_sha256": "36850612ae22cd2697da2f7c65b0cde1f51f3cabb0091066d0eb9a856855eae3"
+    },
+    "unit-clippy": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-unit-clippy.gz",
+      "sha256": "58bb1fc9a90d6839479b31800d6a5b90b2f2ef074a603d83de07b8d8bc5fa905",
+      "uncompressed_sha256": "7b3e2551484b2b25d06c220e2d28a830679fc7a263bf70c1aa6779e245d05600"
+    },
+    "first": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-first.gz",
+      "sha256": "ba5efb053a92fbd30efdb946ded27f40b1d7b2d29af3c9af41b4ccf851a95016",
+      "uncompressed_sha256": "415fd0b86f2d7a38e9d403230355fc7bf4222f941a12dd1b928ce5f5ff52f6db"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-compiler.gz",
+      "sha256": "47fa62303bd59068707f9d866bc33c31790a38d87257ca0a1fb1297fa82de381",
+      "uncompressed_sha256": "39f3305a98784e303e6af3643d90a64567811075a0fc436ae678b4c1869cf2b1"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-compiler-json.gz",
+      "sha256": "6acb1381897f20da2d8fc1d91e11555efa70d0d371f9db6dcd1890a8b8e30935",
+      "uncompressed_sha256": "87f40ffb5299a7d529ae1d030a1d3c4053124a47c03bd86af78c445992c65a24"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-normalized.gz",
+      "sha256": "6f3cf2a0c76fa40404cda63b1ca8f7e1824d4012ced2cc31a401a768701885b6",
+      "uncompressed_sha256": "a45aa7838c5725da84e0c7826f47477907dab1a903e03c5d5a440b6c44b600a7"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-native.gz",
+      "sha256": "37b99669e60e71454d2f2e2a3cc87e2dda45d6bb2e5f47d1426a86595c789563",
+      "uncompressed_sha256": "23d3f73162507cbe2d923b8015952ed797072f1a98365b8da29b3451a39c01f0"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-uninitialized-constructor-source.tar.gz",
+      "sha256": "ce9332cba1b451d87e860fa490b19472cf71d04958c559e0b6745f375bedfd5c"
+    }
+  }
+}

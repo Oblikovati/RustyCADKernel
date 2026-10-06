@@ -10,6 +10,7 @@ mod relocation;
 mod resize_policy;
 mod set_value_policy;
 mod trivial_assignment;
+mod unpublished_tail;
 
 struct LengthRollback<'a, T> {
     elements: &'a mut Vec<T>,
@@ -59,7 +60,7 @@ impl<T> LinearVector<T> {
             elements: Vec::with_capacity(capacity),
         }
     }
-    /// Counts constructed elements; `LinearVector::<i32>::default().len() == 0`.
+    /// Counts published elements; `LinearVector::<i32>::default().len() == 0`.
     pub fn len(&self) -> usize {
         self.elements.len()
     }
@@ -79,11 +80,11 @@ impl<T> LinearVector<T> {
     pub fn as_mut_slice(&mut self) -> &mut [T] {
         &mut self.elements
     }
-    /// Iterates constructed values; `vector.iter().count()`.
+    /// Iterates published values; `vector.iter().count()`.
     pub fn iter(&self) -> std::slice::Iter<'_, T> {
         self.elements.iter()
     }
-    /// Mutably iterates constructed values; `vector.iter_mut().for_each(|v| *v = 1)`.
+    /// Mutably iterates published values; `vector.iter_mut().for_each(|v| *v = 1)`.
     pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, T> {
         self.elements.iter_mut()
     }
@@ -238,6 +239,8 @@ impl<T: Default> LinearVector<T> {
     }
     /// Resizes, default-constructing new values; `vector.resize(10)`.
     /// Use `resize_with_relocation` for observable native relocation callbacks.
+    /// On constructor panic, completed spare values remain unpublished; native-style
+    /// overwrite and storage release omit their destructors and can leak resources.
     pub fn resize(&mut self, size: usize) {
         self.resize_with_constructor(size, T::default);
     }
@@ -278,7 +281,10 @@ impl<T: Clone> LinearVector<T> {
     /// ```
     pub fn with_value_ref(size: usize, value: &T) -> Self {
         let mut vector = Self::default();
-        vector.resize_with_value_ref(size, value);
+        vector.reserve(size);
+        // A failed native outer constructor leaks its allocation; that separate ownership
+        // policy is not represented by this safe constructor's local Vec cleanup.
+        vector.elements.resize_with(size, || value.clone());
         vector
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
@@ -319,18 +325,10 @@ impl<T: Clone> LinearVector<T> {
     /// vector.resize_with_value_ref(5, &fill);
     /// assert_eq!(vector[4], -1);
     /// ```
+    /// On clone panic, completed spare copies remain unpublished, matching native Resize.
+    /// Later overwrite and storage release omit their destructors and can leak resources.
     pub fn resize_with_value_ref(&mut self, size: usize, value: &T) {
-        if size < self.len() {
-            self.elements.truncate(size);
-            return;
-        }
-        self.reserve(size);
-        let previous_len = self.len();
-        let mut rollback = LengthRollback::new(&mut self.elements, previous_len);
-        while rollback.elements.len() < size {
-            rollback.elements.push(value.clone());
-        }
-        rollback.commit();
+        self.resize_with_constructor(size, || value.clone());
     }
 
     /// Resizes, cloning `value` into new slots; `vector.resize_with_value(5, -1)`.

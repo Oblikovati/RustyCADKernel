@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use rustycad_tkernel::ncollection::LinearVector;
 use std::cell::Cell;
 use std::rc::Rc;
@@ -82,7 +83,7 @@ fn resize_restores_logical_length_after_default_panics() {
 }
 
 #[test]
-fn resize_with_value_drops_completed_tail_after_clone_panics() {
+fn resize_with_value_retains_completed_tail_after_clone_panics() {
     let control = copy_control();
     let mut vector = tracked_vector(&[42], &control);
     let fill = PanickingClone {
@@ -95,6 +96,9 @@ fn resize_with_value_drops_completed_tail_after_clone_panics() {
 
     assert_eq!(vector.len(), 1);
     assert_eq!(vector[0].value, 42);
+    assert_eq!(control.dropped.get(), 1); // Only the owned fill argument was dropped.
+    // SAFETY: one clone completed in spare slot len; the second constructor failed.
+    unsafe { crate::tail_repair::destroy_completed_tail(&mut vector, 1) };
     assert_eq!(control.dropped.get(), 2);
 }
 

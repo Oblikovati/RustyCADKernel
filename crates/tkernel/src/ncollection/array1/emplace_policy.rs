@@ -30,3 +30,37 @@ pub(in crate::ncollection) fn assign_emplaced<'a, T>(
     drop(temporary);
     Ok(slot)
 }
+
+impl<T> Array1<'_, T> {
+    /// Constructs a distinct temporary from a live internal argument, then assigns it.
+    /// Source validation precedes target validation; constructor mutations survive panic.
+    /// `array.emplace_value_from_index_with_assignment(0, 1, |s| *s, |t, s| *t = *s)?`.
+    pub fn emplace_value_from_index_with_assignment(
+        &mut self,
+        target: i32,
+        source: i32,
+        construct: impl FnOnce(&T) -> T,
+        assign: impl FnOnce(&mut T, &mut T),
+    ) -> Result<&mut T, ArrayError> {
+        let source = self.offset(source)?;
+        let target = self.offset(target)?;
+        let temporary = construct(self.at(source)?);
+        assign_emplaced(|| temporary, || self.change_at(target), assign)
+    }
+
+    /// Constructs a distinct temporary from a live internal argument, then assigns it.
+    /// Source validation precedes target validation; constructor mutations survive panic.
+    /// `array.emplace_value_moved_from_index_with_assignment(0, 1, |s| *s, |t, s| *t = *s)?`.
+    pub fn emplace_value_moved_from_index_with_assignment(
+        &mut self,
+        target: i32,
+        source: i32,
+        construct: impl FnOnce(&mut T) -> T,
+        assign: impl FnOnce(&mut T, &mut T),
+    ) -> Result<&mut T, ArrayError> {
+        let source = self.offset(source)?;
+        let target = self.offset(target)?;
+        let temporary = construct(self.change_at(source)?);
+        assign_emplaced(|| temporary, || self.change_at(target), assign)
+    }
+}

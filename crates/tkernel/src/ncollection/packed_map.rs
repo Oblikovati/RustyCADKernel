@@ -83,8 +83,8 @@ impl<T: PackedInteger> PackedMap<T> {
             return;
         }
         let buckets = self.buckets.rehashed(modulus);
-        self.bucket_count = modulus;
         self.buckets = buckets;
+        self.bucket_count = modulus;
     }
     /// Add a bit, growing based on occupied blocks; `map.add(42)`.
     pub fn add(&mut self, value: T) -> bool {

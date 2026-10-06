@@ -6,11 +6,8 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
     /// `let pointer = storage.allocate_block(size_of::<i32>())?;`
     /// The block is not registered in the array; retain its allocator until raw deallocation.
     pub fn allocate_block(&self, item_size: usize) -> Result<*mut u8, Failure> {
-        let bytes = self
-            .array
-            .increment
-            .checked_mul(item_size)
-            .ok_or_else(|| self.storage_size_failure(item_size))?;
+        // OCCT 3d097a0 uses size_t multiplication here; this detached request has no typed layout.
+        let bytes = self.array.increment.wrapping_mul(item_size);
         let allocator = self.array.allocator.clone().unwrap_or_default();
         let reason = format!("raw block bytes {bytes}: expected successful allocation");
         allocator
