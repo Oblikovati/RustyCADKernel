@@ -1,0 +1,175 @@
+{
+  "schema": "rustycad.hsequence-borrowed-append.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "2d4c5f08ed113c184d33f7df271db0c0bcb6b369",
+  "branch": "port/hsequence-borrowed-append",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "One native HSequence Append(const T&) method. Adds explicit copy construction for non-Clone item types, via existing Sequence::emplace_append. Borrowed Clone convenience delegates T::clone. Sequence allocation, topology, copying and cleanup engines are unchanged; independent projected-handle candidate is not required.",
+  "native_id": "5ca0c896c932a9b8ee554b5da5ca9a4d0aeaae60fab1026b72aeec79ea6b6c92",
+  "native": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_hsequence_borrowed_append.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/hsequence-borrowed-native"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "run_exit": 0,
+    "run_stderr": "",
+    "rows": 9
+  },
+  "fixture_join": "Nine native rows are dynamically generated from Rust state and matched exactly. Empty and two-node receivers are observed at successful/throwing copy: live allocation count is prefix+1 while canonical size remains prefix. Success publishes one node; failure frees the unpublished node, retains the receiver prefix and preserves mutable donor read count. Explicit clear drops items in order and releases all node owners. A failed copy followed by success proves recovery.",
+  "adapter_domain": "The explicit constructor callback chooses Rust copy behavior for a type with no Clone/Default/copy-assignment implementation; it is not a native callback parameter or automatic arbitrary C++ special-member equivalence. Native item deletes move construction and copy assignment, and appends only through const copy.",
+  "rust_only_checks": "A consumed FnOnce capture proves one constructor dispatch; the donor remains caller-owned. Existing Clone convenience retains its donor. A scoped borrowed item proves the new callable adds no static/Send/Sync/Clone constraint. Native custom allocator subclass support and exact raw allocation sizes are not inferred from the normalized state rows.",
+  "baseline_capability_probe": {
+    "command": [
+      "/home/vmiguel/.cargo/bin/rustc",
+      "--edition=2024",
+      "/tmp/hsequence-borrowed-call-probe.rs",
+      "--extern",
+      "rustycad_tkernel=/tmp/rustycad-dynamic-tail-target/debug/deps/librustycad_tkernel-af2d3799ec5720f7.rlib",
+      "-L",
+      "dependency=/tmp/rustycad-dynamic-tail-target/debug/deps",
+      "-o",
+      "/tmp/hsequence-borrowed-call-probe"
+    ],
+    "rlib_sha256": "d0e6b202ad3603ccd469684a1575c6472be7ac55bfc4a94982ef8ca9d9342e77",
+    "probe_sha256": "2bb36460f47bffbcf319bd5c84252108a2e84e08b544c88773a9c3701f6aa75b",
+    "legacy_entrypoint_exit": 1,
+    "adapter_compile_exit": 0,
+    "adapter_run_exit": 0,
+    "scope": "Legacy append_ref requires Clone, as its unchanged trait bound did at the base commit. The candidate explicit constructor compiles and runs for the same non-Clone item. This is a legacy-entrypoint capability check, not a rebuild of historical production libraries."
+  },
+  "checks": {
+    "rust_passed": 61,
+    "rust_failed": 0,
+    "strict_provenance_miri_passed": 55,
+    "native_original_passed": 20,
+    "python_binding_passed": 25,
+    "scoped_clippy_exit": 0,
+    "fmt_exit": 0,
+    "native_fixture_rows": 9
+  },
+  "compiler_capture": {
+    "format_version": 61,
+    "exit": 0,
+    "unrelated_doc_warnings": 9,
+    "native_ids": 1,
+    "public_bodies": 2,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options"
+  },
+  "original_tests": {
+    "joined": 20,
+    "dedicated_wrapper_gtest_declarations": 0,
+    "archive": "porting/runtime-evidence/hsequence-borrowed-original-joins.json.gz",
+    "scope": "All native NCollection_SequenceTest passing names join existing Rust passing declarations exactly. These inherited dependency regressions count once; assertions and mappings are unchanged. No new exhaustive assertion-faithfulness audit is claimed."
+  },
+  "wrapper_inventory": {
+    "archive": "porting/runtime-evidence/hsequence-borrowed-wrapper-method-inventory.json.gz",
+    "counts": {
+      "direct": 25,
+      "api_visible_direct": 22,
+      "inherited_candidates_requiring_review": 265
+    },
+    "prior_archive": "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz",
+    "scope": "25 direct HSequence declarations, 22 api_visible. 265 Sequence/BaseSequence/Standard_Transient candidates still require individual inheritance/reachability review. This branch corrects only const-item Append; projected-handle work is an independent pending candidate, not a dependency. No automatic inherited or wrapper test credit."
+  },
+  "commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test hsequence_borrowed_append --test shared_collection_method_contracts --test ncollection_sequence --test sequence_method_contracts --test sequence_borrowed_assignment_contracts --test sequence_node_method_contracts",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test hsequence_borrowed_append --test shared_collection_method_contracts --test ncollection_sequence --test sequence_method_contracts --test sequence_node_method_contracts",
+    "python": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_api_binding*.py'",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --test hsequence_borrowed_append --test shared_collection_method_contracts --test ncollection_sequence --test sequence_method_contracts --test sequence_node_method_contracts -- -D warnings",
+    "native_originals": "OpenCascadeGTest --gtest_filter='NCollection_SequenceTest.*'",
+    "fmt": "cargo fmt --all -- --check"
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "db57aeedc059b340ac4cdebb3169cd821a37b6bb",
+    "replaced_rows": 1,
+    "previous_status": "implemented",
+    "current_status": "partial",
+    "implemented_credit_delta": -1,
+    "legacy_test_mapping_delta": 0,
+    "proof": "Exact const-item method identity and two current source-hashed compiler bodies. Six guards reject wrong IDs, stale bodies, missing selectors, unrelated original-transaction mutation and owned current mutation, while allowing unrelated current class changes."
+  },
+  "limits": [
+    "Explicit callbacks are selected Rust copy policies, not native API parameters or automatic arbitrary C++ copy/lifetime/address-sensitive dispatch.",
+    "Panic traces model the observed copy exceptions, not arbitrary exception type/message, ABI or noexcept behavior.",
+    "Outer wrapper lock scopes narrow native reentrant and aliased access; callbacks must avoid reentering the wrapper lock. The fixture observes canonical metadata through the existing observer.",
+    "Native allocator subclass callbacks and physical allocation sizes/policies are not ported by this batch. Logical live allocation and publication/release order are verified; allocation failure itself remains unproved.",
+    "The older consuming append convenience remains available but is no longer the binding target for native const-reference Append.",
+    "No complete class, implicit special-member, inherited API, RTTI/alias or denominator-complete proof is claimed."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/hsequence-borrowed-replay.py.gz > /tmp/replay-hsequence-borrowed.py && python3 /tmp/replay-hsequence-borrowed.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/h_sequence.rs": "7fba21e8c3cf0f8e10e67ace3fe2ea74bee01103b3a43e875af3381c8fe87e84",
+    "crates/tkernel/src/ncollection/h_sequence/borrowed_append.rs": "1b2be83b52bdd8a2e7c33d6d355c3373114508cc580ceed4ff19d86c7cd143a5",
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "05103d686a6cb41a4136415c6d092e49cf0009df0d0c8505f1249473be64d11a",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "64a3148a59a557aacf96bca2828d064a9a01c7a65472ffae2fcc0cc2df5f2f1a",
+    "crates/tkernel/src/ncollection/sequence/owner.rs": "6c10c51b72112fabb22825f32c17cac44d34a7ff4f98fe97b31b179dafc43c67",
+    "crates/tkernel/src/ncollection/sequence/topology.rs": "2e9d18577307f6b3de6016fd55b8f4351e441f555dcdadd9bfde4ee79eb8ba92",
+    "crates/tkernel/src/ncollection/allocator/incremental/operations.rs": "de87beb70c0561fa7f61576b4eda8c5493dc2d96182ed7cfbab633030a63c603",
+    "crates/tkernel/tests/hsequence_borrowed_append.rs": "b51ee7943589ef252ad940239e07724b723f1917607d7245df3d70ba6b8d2de5",
+    "crates/tkernel/tests/hsequence_borrowed_append/fixture.rs": "1cdd28c90ce0728e760abe61babbdac12f8cd7ac254fb993f709b9237f1c973b",
+    "crates/tkernel/tests/hsequence_borrowed_append/native_rows.rs": "501b23226a4cb64464fd379d06d316854b144e847e4694a4afbabd0f58217553",
+    "crates/tkernel/tests/ncollection_sequence.rs": "70d9a0110b130bba4e359c475fbffabf2955dd5d151563210fe640ff2d194c01",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs": "6be15c5d34e5d369c4738fa7513cac13cd2d13951faa841f489983b6dcc508ec",
+    "crates/tkernel/tests/sequence_method_contracts.rs": "610a9f5f63b931fe54fc65913d8575244503ce7fe4f6bd4051c6671964cc7495",
+    "crates/tkernel/tests/sequence_borrowed_assignment_contracts.rs": "53093b912ea673cf812d79554f9f540e004aa75a39618a9155f4bff71d10f083",
+    "crates/tkernel/tests/sequence_node_method_contracts.rs": "c0da4f178e9b9640f8ec53d274134f97e1f9630f251ef4b4f1b529775d1af477",
+    "tools/oracle/tkernel_hsequence_borrowed_append.cxx": "e854462dd2e62f1ab0cc17ea6b04cefa0217829bd6efd5e5d13ad3c39b9bc17c",
+    "tools/oracle/tkernel_hsequence_borrowed_append.expected": "5d31d8def4d1f21ef580c3c92e039e9d15537fbb0c8bb8ff80bd035bd80eb1b4"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-inventory/legacy-tests.jsonl.gz": "d6037cc257db2c5d1dc903313da24fb2b3849636fa6d25924d8dbed7ec114d8b",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz": "0e6f0a0858a218da54b3f90d31691676187bc13a598ae011bec1065a5487478e"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx": "285ad522ec910f7c3995fd54ad2ea3375d6e8ee3904ed951d466469667f5d20b",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx": "a1172b06eec049b5016f2f478a354ce837811a78c0fdac5a76d99c1608509beb",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx": "7e0bf197ad5ec0e66bb5e263efe0d328ea170e39e2695d0623e6f281da75348d",
+    "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx": "17324edfa4eac229897635d359554f699e70e1c95522c17dadf7c8c34644c25f"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/hsequence-borrowed-binding-tests.log.gz": "7982c24423bf093e5f5e9a45e0178603cef95ed9bd17ce0124fca199f3bbb26c",
+    "porting/runtime-evidence/hsequence-borrowed-bindings.json.gz": "5fc6e86d5929cd2b65dba329c3e1be567c1212c41cacfe8c18e65b5e5dac2cbb",
+    "porting/runtime-evidence/hsequence-borrowed-call-probe-new.stderr.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/hsequence-borrowed-call-probe-old.stderr.gz": "01334cc8d8e45288efbcc45b3656fa4fff710ee9481a3310019bdcf79f0ce917",
+    "porting/runtime-evidence/hsequence-borrowed-call-probe.json.gz": "7395656931ed8ef603540568d1a1faf8e1bb6a527c2f18dcf5fec2a3c96f5256",
+    "porting/runtime-evidence/hsequence-borrowed-call-probe.rs.gz": "f15419c77cbe85cdf23057d872a31e1a8b348f5b9561ef7d1e8ef6068d481c42",
+    "porting/runtime-evidence/hsequence-borrowed-clippy.log.gz": "6f024c34c5b10eea5886414f359dc5a10ba7c94d8ddcb8d79e9df7e996bf1a11",
+    "porting/runtime-evidence/hsequence-borrowed-compiler.log.gz": "b719e15609e889d8ef37df0f52b7aeda69ebba28f834d50e68cce676f006d95f",
+    "porting/runtime-evidence/hsequence-borrowed-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/hsequence-borrowed-miri.log.gz": "735e7770d02737d28b5e9971687f6f9095a16c681e580643cfcd77ff5d025748",
+    "porting/runtime-evidence/hsequence-borrowed-native-command.json.gz": "0b61c07b560f6661fd3504b8e3588da77f718b86253fa151c8af79b15bc382b8",
+    "porting/runtime-evidence/hsequence-borrowed-native-originals.log.gz": "61f422e76b074ede761e009580ee6cd365ee601eb683807abedb7f275e668966",
+    "porting/runtime-evidence/hsequence-borrowed-native.stdout.gz": "60494ca916d25bb40dec4fe796310743c9dc608c8d188e6c2f9795e392ea0f72",
+    "porting/runtime-evidence/hsequence-borrowed-normalized.json.gz": "06626f08fa0602a873f01cf20432a5de1c11c86327a0b09a698cf4b0261a1657",
+    "porting/runtime-evidence/hsequence-borrowed-original-joins.json.gz": "439ea05466cbe532795783a64464855e4caa5f85e00223d5839ccbb393edf162",
+    "porting/runtime-evidence/hsequence-borrowed-replay.log.gz": "3a4af994e7e64d3067985410b691cad272466905feb97cf65c29e3ee19fd6786",
+    "porting/runtime-evidence/hsequence-borrowed-replay.py.gz": "d0a2e12476b8b1b894c54720d7ebdf1215514bd1bd30f60a9cde560e4fcdd2f1",
+    "porting/runtime-evidence/hsequence-borrowed-rust.log.gz": "06e648850c8997832d20438790acc3229ce2503f6ebf056656ce92ed3b9e9230",
+    "porting/runtime-evidence/hsequence-borrowed-rustdoc.json.gz": "679aabd7ae017238a699223fec5f4e2f0152003a093bbcaeaffce2d84ac05aec",
+    "porting/runtime-evidence/hsequence-borrowed-transaction.json.gz": "0a6c1663bd7733c26818e2d159dad9d2b3667376df2318b8d832072d02672087",
+    "porting/runtime-evidence/hsequence-borrowed-wrapper-method-inventory.json.gz": "64d5af076787fc1437e5de4bc73fb3b8e0bb3659a292d327b522d9b86fd6c82e"
+  },
+  "allocator_observation": "Native custom BaseAllocator counts successful Allocate/Free calls. Rust reads real live typed-allocation counts from the incremental allocator checked-reset diagnostic; no fake node engine or mirrored count is used. Successful zero-live reset only rewinds empty storage. Canonical SequenceObserver reads size during construction without reentering the outer wrapper lock. These observations prove logical allocation/publication/release phases, not identical underlying heap-policy callbacks, byte requests or retained memory."
+}

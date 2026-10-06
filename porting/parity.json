@@ -74122,14 +74122,6 @@
       "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. The mutable reference becomes a closure borrowing the sequence under the write lock."
     },
     {
-      "upstream_id": "NCollection_HSequence::Append(const TheItemType&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HSequence::append",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
-    },
-    {
       "upstream_id": "NCollection_HSequence::Append(SequenceType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
@@ -245622,6 +245614,112 @@
       ],
       "status": "partial",
       "notes": "Exact partial fill-constructor domain: default all matrix cells, then assign borrowed donor in row-major order. Explicit callback supports non-Clone assignment-only types; Clone convenience dispatches clone_from, not clone. Assignment failure drops all initialized elements in native forward order; donor remains caller-owned. Owned with_value remains a consuming Rust convenience. Shared wrapper requires Send+Sync+static and guarded base access; allocation/default-constructor failure, arbitrary C++ lifetime/address hooks, primitive uninitialized defaults and invalid range handling and full inherited surface remain outside this proof. See porting/audits/harray2-borrowed-initialization.json."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const TheItemType &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_ref",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::HSequence::append_ref",
+        "rustycad_tkernel::ncollection::HSequence::append_ref_with_constructor"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::append_ref",
+          "declaration_sha256": "ba2629935a60df4650fafdebbab1bf764892a43fc5b86190f6613d819fb6841b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::append_ref_with_constructor",
+          "declaration_sha256": "26081c1100f6d4b2391a29345c10980803a99f6433f77beacdd6f7f21b5e6f85",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial Append(const T&) domain: borrowed donor remains caller-owned and node allocation precedes explicit copy construction. Callback supports types without Clone; Clone convenience delegates to T::clone. Existing sequence size remains visible until construction succeeds; failure releases the uninitialized node and leaves the receiver prefix intact while preserving source-side callback mutations. The prior consuming append mapping did not model const borrowing and is replaced. Explicit callbacks are Rust policy adapters, not a native parameter or automatic arbitrary C++ copy-hook equivalence. Lock reentrancy, allocation failures/byte sizes and exception ABI remain outside this proof. See porting/audits/hsequence-borrowed-append.json."
     }
   ],
   "tests": [
