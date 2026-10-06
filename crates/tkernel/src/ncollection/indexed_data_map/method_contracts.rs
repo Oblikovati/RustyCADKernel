@@ -24,7 +24,7 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Copies a binding and borrows its stored item; `*map.bound_ref(&1, &42) = 7`.
     pub fn bound_ref(&mut self, key: &K, value: &V) -> &mut V {
         let index = self.place_borrowed(key, value, true);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
 
     /// Copies arguments only if no binding exists; `map.try_bind_ref(&1, &42)`.
@@ -36,17 +36,17 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Borrows a stored item, copying arguments only on a miss; `map.try_bound_ref(&1, &42)`.
     pub fn try_bound_ref(&mut self, key: &K, value: &V) -> &mut V {
         let index = self.place_borrowed(key, value, false);
-        &mut self.values[index - 1].value
+        self.storage.value_mut(index)
     }
 
     fn place_borrowed(&mut self, key: &K, value: &V, replace: bool) -> usize {
         self.prepare_borrowed_add();
-        let (index, bucket) = self.keys.lookup_with_bucket(key);
+        let (index, bucket) = self.storage.lookup(key, &self.hasher);
         if index == 0 {
             return self.insert_borrowed(key, value, bucket);
         }
         if replace {
-            self.values[index - 1].value.clone_from(value);
+            self.storage.value_mut(index).clone_from(value);
         }
         index
     }

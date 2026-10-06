@@ -1,12 +1,12 @@
 //! Rehash follows native callback/link order; Rust unwind restores original links without hashing.
-use super::{IndexedMapNode, IndexedStorage, MapLinkNode};
+use super::{IndexedNode, IndexedStorage, MapLinkNode};
 use crate::ncollection::{HashPolicy, next_map_prime};
 use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
-impl<K> IndexedStorage<K> {
-    pub(in crate::ncollection::indexed_map) fn resize(
+impl<N: IndexedNode> IndexedStorage<N> {
+    pub(in crate::ncollection) fn resize(
         &mut self,
         requested: usize,
-        hasher: &impl HashPolicy<K>,
+        hasher: &impl HashPolicy<N::Key>,
     ) {
         let Some(mut plan) = self.prepare_resize(requested) else {
             return;
@@ -59,10 +59,10 @@ impl<K> IndexedStorage<K> {
     fn relink(
         links: &[(*mut MapLinkNode, *mut MapLinkNode)],
         plan: &mut crate::ncollection::BaseMapResize,
-        hasher: &impl HashPolicy<K>,
+        hasher: &impl HashPolicy<N::Key>,
     ) {
         for &(node, _) in links {
-            let key = unsafe { (&*node.cast::<IndexedMapNode<K>>()).value() };
+            let key = unsafe { &*N::key_ptr(node.cast()) };
             let bucket = hasher.hash(key) % plan.bucket_count() + 1;
             let head = &mut plan.bucket_slots_mut()[bucket];
             unsafe {

@@ -39,11 +39,8 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// assert_eq!(map.contained(&1), Some((&1, &10)));
     /// ```
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
-        let index = self.find_index(key).checked_sub(1)?;
-        Some((
-            self.keys.find_key(index + 1).ok()?,
-            &self.values[index].value,
-        ))
+        let index = self.find_index(key);
+        (index != 0).then(|| (self.storage.key(index), self.storage.value(index)))
     }
 
     /// `Contained()`: the stored key and a mutable item of an equivalent key, if bound.
@@ -56,9 +53,9 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// assert_eq!(map.seek(&1), Some(&3));
     /// ```
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
-        let index = self.find_index(key).checked_sub(1)?;
-        let stored = self.keys.find_key(index + 1).ok()?;
-        Some((stored, &mut self.values[index].value))
+        let index = self.find_index(key);
+        (index != 0)
+            .then(|| unsafe { super::iteration::pair_mut::<K, V>(self.storage.node(index)) })
     }
 
     /// `Clear(const Handle(NCollection_BaseAllocator)&)`: clears, releasing storage only when
@@ -72,12 +69,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// assert!(map.is_empty());
     /// ```
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        let release = resource.as_ref() != Some(self.allocator());
-        self.keys.clear_with_allocator(resource);
-        self.values.clear();
-        if release {
-            self.values.shrink_to_fit();
-        }
+        self.storage.clear_with_allocator(resource);
     }
 
     /// `IndexedItems()`: keys, mutable items and one-based indices in index order.

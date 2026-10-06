@@ -1,14 +1,14 @@
 //! Stable keys with dense one-based indices and OCCT's swap-last removal.
 #![allow(unsafe_code)]
+use super::indexed_storage as storage;
 use super::{BaseAllocator, DefaultHashPolicy, HashPolicy, IndexedMapNode, MapLinkNode};
-mod storage;
 use crate::standard::Failure;
 use std::fmt::Debug;
 use storage::IndexedStorage;
 pub use storage::{IndexedMapObservation, IndexedMapObserver};
 /// A hash map from unique keys to dense indices; `IndexedMap::<i32>::default().add(42)`.
 pub struct IndexedMap<K, H = DefaultHashPolicy> {
-    storage: IndexedStorage<K>,
+    storage: IndexedStorage<IndexedMapNode<K>>,
     hasher: H,
 }
 /// Shared keys in index order; `map.iter()`.
@@ -70,16 +70,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         self.lookup_with_bucket(key).0
     }
     pub(super) fn lookup_with_bucket(&self, key: &K) -> (usize, usize) {
-        let bucket = self.hash_bucket(key);
-        let mut pointer = self.storage.head(bucket);
-        while !pointer.is_null() {
-            let node = unsafe { &*pointer.cast::<IndexedMapNode<K>>() };
-            if self.hasher.equal(node.value(), key) {
-                return (node.index_value() as usize, bucket);
-            }
-            pointer = node.link().next();
-        }
-        (0, bucket)
+        self.storage.lookup(key, &self.hasher)
     }
     /// Checks membership through the injected policy; `map.contains(&42)`.
     pub fn contains(&self, key: &K) -> bool {
@@ -121,14 +112,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         self.hasher.hash(key) % self.bucket_count() + 1
     }
     fn check_index(&self, index: usize) -> Result<(), Failure> {
-        if index == 0 || index > self.len() {
-            return Err(Failure::with_type(
-                "Standard_OutOfRange",
-                &format!("IndexedMap index {index}; expected 1..={}", self.len()),
-                "",
-            ));
-        }
-        Ok(())
+        self.storage.check_index(index, "IndexedMap")
     }
     fn place(&mut self, key: K, replace: bool) -> usize {
         self.prepare_add();
@@ -143,7 +127,9 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         self.append_new_at_bucket_with(bucket, || key)
     }
     fn append_new_at_bucket_with(&mut self, bucket: usize, construct: impl FnOnce() -> K) -> usize {
-        self.storage.append(bucket, construct)
+        self.storage.append(bucket, |index, next| {
+            IndexedMapNode::construct(index, next, construct)
+        })
     }
 }
 impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {

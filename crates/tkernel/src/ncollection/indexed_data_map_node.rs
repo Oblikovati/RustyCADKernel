@@ -8,9 +8,9 @@ mod borrowed;
 pub struct IndexedDataMapNode<K, V> {
     // OCCT 3d097a places Key1/Index in inherited TListNode tail padding.
     link: MapLinkNode,
-    value: ManuallyDrop<V>,
-    key: ManuallyDrop<K>,
-    index: i32,
+    pub(super) value: ManuallyDrop<V>,
+    pub(super) key: ManuallyDrop<K>,
+    pub(super) index: i32,
 }
 /// Allocator-owned indexed data node; `IndexedDataMapNode::allocate_ref(&arena, &1, 2, &7, next)`.
 pub type IndexedDataMapNodeOwner<K, V> = IndexedNodeAllocation<IndexedDataMapNode<K, V>>;
@@ -88,7 +88,7 @@ impl<K, V> IndexedDataMapNode<K, V> {
 }
 
 impl<K, V> IndexedDataMapNode<K, V> {
-    fn construct_parts(
+    pub(super) fn construct_parts(
         index: i32,
         next: *mut MapLinkNode,
         construct_key: impl FnOnce() -> K,
