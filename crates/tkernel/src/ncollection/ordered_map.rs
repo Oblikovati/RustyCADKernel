@@ -127,10 +127,12 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
         self.edge(self.table.last)
     }
     /// Swaps storage, order, policies and allocators; `map.exchange(&mut other)`.
+    /// Uses Rust policy swapping; use `exchange_with` for native policy callbacks.
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(self, other);
     }
     /// Swaps both maps and returns the destination, matching move assignment; `map.move_assign(&mut source)`.
+    /// Uses Rust policy swapping; use `move_assign_with` for native policy callbacks.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
         self.exchange(source);
         self
@@ -297,3 +299,5 @@ impl<'a, K, H: HashPolicy<K>> IntoIterator for &'a OrderedMap<K, H> {
 super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>,super::OrderedMapNode<K>);
 
 super::ordered_table::ordered_policy_construction!(OrderedMap<K,H>, H);
+
+super::ordered_table::ordered_policy_exchange!(OrderedMap<K,H>, H);

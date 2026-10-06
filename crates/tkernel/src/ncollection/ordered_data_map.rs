@@ -134,6 +134,7 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         self.table.clear(release);
     }
     /// Swaps order, storage, policies and allocators; `map.exchange(&mut other)`.
+    /// Uses Rust policy swapping; use `exchange_with` for native policy callbacks.
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(self, other);
     }
@@ -247,3 +248,5 @@ mod mixed_binding;
 super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>,super::OrderedDataMapNode<K,V>);
 
 super::ordered_table::ordered_policy_construction!(OrderedDataMap<K,V,H>, H);
+
+super::ordered_table::ordered_policy_exchange!(OrderedDataMap<K,V,H>, H);
