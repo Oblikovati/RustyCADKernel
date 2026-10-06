@@ -1,0 +1,75 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
+  "validated_source_revision": "0ece8fe369e3c2a5961c1b2a56ebf8690e931be0",
+  "tkernel_passed": 4633,
+  "tkernel_failed": 0,
+  "tkernel_ignored": 0,
+  "strict_provenance_miri_passed": 186,
+  "miri_counts": {
+    "strict-miri": 166,
+    "dynamic-unit-miri": 20
+  },
+  "strict_tkernel_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "unchanged_runtime_inputs": 10020,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/vector-policies-rust.gz",
+      "sha256": "cf1719d6c8e9816f810aabebd47950412516cf4e2f3b67ac60715fdc3a313e1a"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/vector-policies-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/vector-policies-clippy.gz",
+      "sha256": "ff74770224c82d3788502b4943faf4178c5f5c04e685168839419b01e8ca0c14"
+    },
+    "strict-miri": {
+      "path": "porting/runtime-evidence/vector-policies-strict-miri.gz",
+      "sha256": "cd1642a77f88bbab760b1445e14cb9d5c0d69220e38b722f4a121bdab61d26c3"
+    },
+    "dynamic-unit-miri": {
+      "path": "porting/runtime-evidence/vector-policies-dynamic-unit-miri.gz",
+      "sha256": "9d7150f643bfda64c63b31b454dc4f6f1d479acc2ce51eebc4dacd431f4bc9c5"
+    },
+    "inputs": {
+      "path": "porting/runtime-evidence/vector-policies-inputs.gz",
+      "sha256": "71bd076a937af39f98451cb2b6066437f65c5d0457eda88d7f48b53bbd5fc1d2"
+    },
+    "miri-targets": {
+      "path": "porting/runtime-evidence/vector-policies-miri-targets.gz",
+      "sha256": "f4228ee11b69a135d205b852ead47919e68ba8bbc2ba47cdaecb83806a385da8"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "82f575b946ffb606ef943509b1dfbd22e2e9ccf1",
+      "deleted_worktree": "/tmp/rustycad-linear-vector-insert",
+      "deleted_branch": "port/linear-vector-insert",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "f13b2973738dd9f49834641c86838c515a7910db",
+      "deleted_worktree": "/tmp/rustycad-array-set-value-assignment",
+      "deleted_branch": "port/array-set-value-assignment",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "ce8a4bf39821a6e5fac7910d188640fc013463ba",
+      "deleted_worktree": "/tmp/rustycad-dynamic-internal-setvalue",
+      "deleted_branch": "port/dynamic-internal-setvalue",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false,
+  "scope": "All TKernel tests/doctests and focused changed-method strict Miri; full workspace/API inventory remains at prior foundation-nodes checkpoint."
+}
