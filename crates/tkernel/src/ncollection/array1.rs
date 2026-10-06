@@ -10,6 +10,7 @@ mod raw_copy;
 mod resize_storage;
 mod returning;
 mod trivial_copy;
+mod uninitialized;
 
 /// An owned array or a view borrowing an external buffer.
 ///
