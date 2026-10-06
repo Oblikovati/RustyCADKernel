@@ -5,6 +5,7 @@
 //! lends only shared references, so the array sits behind a lock: [`HArray1::array1`]
 //! and [`HArray1::change_array1`] return read and write guards that expose the complete
 //! [`Array1`] API, exactly as the native `Array1()`/`ChangeArray1()` expose the base class.
+mod copy_construction;
 mod initialization;
 mod matrix_initialization;
 
@@ -143,12 +144,6 @@ impl<T: Default + Clone + Send + Sync + 'static> HArray1<T> {
     }
 }
 
-impl<T: Clone + Send + Sync + 'static> HArray1<T> {
-    /// Copies an array and its bounds into a new shared array; `HArray1::from_array(&values)`.
-    pub fn from_array(values: &Array1<'_, T>) -> Self {
-        Self::from_owned(owned_copy(values))
-    }
-}
 impl<T: Clone + Send + Sync + 'static> Clone for HArray1<T> {
     fn clone(&self) -> Self {
         Self::from_array(&self.array1())
@@ -230,14 +225,6 @@ impl<T: Clone + Send + Sync + 'static> Clone for HArray2<T> {
             .unwrap_or_else(PoisonError::into_inner);
         target.assign(&source.array2());
     }
-}
-
-// A copy that owns its storage even when `values` views a borrowed buffer, as the
-// native copy constructor always allocates.
-fn owned_copy<T: Clone>(values: &Array1<'_, T>) -> Array1<'static, T> {
-    let mut copy = Array1::default();
-    copy.assign(values);
-    copy
 }
 
 fn checked_extent(lower: i32, upper: i32) -> Result<usize, ArrayError> {
