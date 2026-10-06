@@ -1,0 +1,300 @@
+{
+  "schema": "rustycad.base-class-partial-binding-transaction.v1",
+  "status": "partial_bindings_pending_integration",
+  "base_commit": "f3caf1a778200194291dad0adaabd1f9a326013c",
+  "branch": "port/base-map-bindings",
+  "scope": "BaseMap top-level storage/query/helper forms and legacy Iterator only. Replaces11old rows and adds27partial rows; all other classes/test rows unchanged. No production source edits.",
+  "compiler_native_records": 193,
+  "api_visible_native_records": 123,
+  "verified_native_ids": 38,
+  "current_public_body_bindings": 38,
+  "unique_rust_body_paths": 29,
+  "prior_replaced_statuses": {
+    "implemented": 6,
+    "excluded": 5
+  },
+  "new_status": "partial",
+  "declared_implemented_row_delta": -6,
+  "legacy_test_credit_delta": 0,
+  "trait_required_body_correction": "Old NbBuckets/Size/Allocator paths were bodyless BaseMap trait requirements. New mappings target actual BaseMapStorage trait impl bodies; the other three queries use real default bodies.",
+  "compiler_capture": {
+    "source_commit": "f3caf1a778200194291dad0adaabd1f9a326013c",
+    "toolchain": "nightly-2026-09-25",
+    "format_version": 61,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "target": "/tmp/rustycad-dynamic-tail-target",
+    "exit_code": 0,
+    "warnings": 6,
+    "scope": "Fresh TKernel raw capture and normalized archive. Replay normalizes raw using current source files and shared BindingReplay checks exact selected body path/signature/impl_context/declaration/source hashes. Other class evolution does not invalidate this scoped proof; relevant changes fail. No whole-crate completeness claim."
+  },
+  "transaction_ledger_blob": "5524ab0e9dfd8154a36e16b9492dec60f065abb2",
+  "transaction_integrity": "Pinned Git ledger blob must equal fixed base ledger with exactly these38 mappings replacing11 old rows. Current integration ledger must contain every exact owned row once; unrelated later class edits are allowed. Candidate blob becomes reachable from committed parity.json.",
+  "checks": {
+    "shared_binding_replay_tests": 16,
+    "constructor_selector_tests": 7,
+    "replay_exit": 0,
+    "scope_checks": {
+      "wrong_native_id_rejected": true,
+      "missing_rust_body_rejected": true,
+      "stale_owned_body_hash_rejected": true,
+      "unrelated_candidate_change_rejected": true,
+      "unrelated_integrated_class_change_allowed": true,
+      "owned_integrated_mapping_change_rejected": true
+    },
+    "diff_check_exit": 0
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_map/storage.rs": "2133a69fa13542b110d194aecfa1204ffcc6a4f2199c0cf7ad21b72e159f8223",
+    "crates/tkernel/src/ncollection/base_map/resize_outputs.rs": "401772440aad88552088c01265bc5c2c9b94e43160ad6e04222015d940f50d40",
+    "crates/tkernel/src/ncollection/hash_policy.rs": "dc391d9466f548dbfafd5dbbd5e183e3ab81a6620c0c8d7c2566634a66357dbd",
+    "crates/tkernel/src/ncollection/base_map/bucket_iterator.rs": "a0eef82042aad66d348a4c6b66b5b8a3011adf8655ec79f5e9fc7c150f9a4bbf",
+    "crates/tkernel/src/ncollection/base_map.rs": "d74b17b5e35c7389e2b3c37604b6c36df20d860668c368f78034d58db0ec6182"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "crates/tkernel/src/ncollection/mod.rs": "a60d94f6f42e547f22b4138543b89fecceedaea10db9ac2b25996a92a9af3ab9",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/api-proof-toolchain.json": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "tools/api_binding_replay.py": "8730756dc873c3f78340e4972bbb87bb07117b750013ab3f83c723643b14a4d0"
+  },
+  "normalizer_tool_sha256": {
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "tools/capture_rustdoc_json.py": "dd76870ac705c6d300f441d56b15245e4b1196ff709f29d5d651d5184906f1b0",
+    "tools/api_inventory_capture.py": "2cbc42e0361bd190b8e1cd20673fbdce818cec5aaad8a42e0174d03254fec53e",
+    "tools/api_inventory_json.py": "a0f06daca76c63309453225d4652b6e20a479a4959385ea5d913c1620cd58c5c",
+    "tools/api_inventory_reexports.py": "bc62f868566558f77a296c02103016c5c7ca98048470981f9986fa7bb09472dd",
+    "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
+    "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
+    "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
+    "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
+    "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
+    "tools/rustdoc_type_aliases.py": "0fab1864cda95503bfe46b0f0881052c43273983b3f484ae0590ca0382fc9fb0",
+    "tools/rustdoc_bool_foreign_impls.py": "5068daddc044f3c492e69a069f2f02d79597944ce72e66411afcb6a411121a13",
+    "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
+    "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
+    "tools/api_tool_hashes.py": "afac9c662d14b45f4ad6b8889bcdc49e5ab033db4e6acce771ef61526ab5a2f1"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-map-bindings-class-matrix.json.gz": "aac01193fe9b90463f120f617dcb660e4b6a38fbe4428ee5beddc2d03db0b975",
+    "porting/runtime-evidence/base-map-bindings-compiler.log.gz": "f68ad6871c3e4df437bc77f8770c785175a87eabcef24abdce6268f99dccb695",
+    "porting/runtime-evidence/base-map-bindings-constructor-tests.log.gz": "306b12c8ea7077ca4965327cc9606f3fa15a65cf9ce000344687b0c6e35a9b62",
+    "porting/runtime-evidence/base-map-bindings-normalized.json.gz": "780cc06b1057f6a9e71b84d7619d827b5cc080cfd18ba5a8a847644642a413f0",
+    "porting/runtime-evidence/base-map-bindings-preparation.log.gz": "81b271b6cc1a2a92ea0f824c34171edf5f36dd06f19ef6b277b602816ab564d9",
+    "porting/runtime-evidence/base-map-bindings-proof.json.gz": "342291843c93c2091725e7a527f8b0078007c982e0618f689609bd73cbd2d03e",
+    "porting/runtime-evidence/base-map-bindings-replay.py.gz": "f6bae31019692bd40875263f60ae52684f5d82975aaa8c18046e0a733e6a3f32",
+    "porting/runtime-evidence/base-map-bindings-rustdoc.json.gz": "c7260a835f09e0b90990bb48dc71d45b1f051f1b1a6a6a101664a8dad0a8aa85",
+    "porting/runtime-evidence/base-map-bindings-transaction.json.gz": "db902cde6a25bb06b87bbc52bc98f5c0beb4167684a0974c473a7da2ef4836ef",
+    "porting/runtime-evidence/base-map-bindings-validator-tests.log.gz": "7cd7f75d93f9437f8d56c974018c4b7e5a36ab3a16c001d9c9ee554a75169d76",
+    "porting/runtime-evidence/base-map-bindings-verification.log.gz": "2dde49d0086928748bc0d2d9548ea96eb1f5dda8c981d957762458d4e2c368c2"
+  },
+  "inherited_behavior_receipt": "porting/audits/base-map-storage-method-contracts.json",
+  "inherited_behavior_receipt_sha256": "c9344c5acd5a34d13c11a23b6265a61d2171dece2036f64909cdf276646223ad",
+  "behavior_note": "Native/Rust tests remain historical scoped evidence, including source snapshots and explicit ownership adaptations. No native/normal/Miri behavior test rerun or additional legacy credit in this binding-only transaction. Historical broad derived-storage limitations are not current global status.",
+  "limitations": [
+    "All38 rows are partial; no full BaseMap class/derived-map completion claim.",
+    "Unsafe custom-node chains and callbacks require live acyclic nodes and alias discipline. RAII resize output/adoption restricts arbitrary native raw ownership and differs when replacing leaked outputs.",
+    "Signed bucket conversion preserves error type but includes offending value/expected shape in Rust diagnostics; native text differs.",
+    "Eight object allocation operators, three native deleted declarations, virtual destructor body, fields, aliases and nominal types remain separate.",
+    "BasicIterator advertised const-conversion native failures receive no parity credit; IndexedIterator and other BasicIterator mappings are outside this slice.",
+    "Function-pointer destroy selectors use unique qualified method names; exact compiler ID/full signature independently pin each overload."
+  ],
+  "bindings": [
+    {
+      "cpp_id": "013f3e3c138bd5df3182b9ec5d23de82510b460306cfccdd92a52c343bcdcdf4",
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const occ::handle<NCollection_BaseAllocator> &)",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::new"
+    },
+    {
+      "cpp_id": "07e2478c8b8f97fdc712e68fe77839cce1843871cb8022ccfcc10253bbb5ea87",
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy"
+    },
+    {
+      "cpp_id": "0b0aed25ab456ba4b68219c73f375bdaf7144825f12e5881052eaed5af992062",
+      "upstream_id": "NCollection_BaseMap::nbBucketsFromInt(const int)",
+      "rust_item": "rustycad_tkernel::ncollection::buckets_from_int"
+    },
+    {
+      "cpp_id": "0b58c9de0b30d9fcd141d819c431a2053f1b796d0ac49c54c39e172e84652679",
+      "upstream_id": "NCollection_BaseMap::Iterator::Iterator() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::<core::default::Default>::default"
+    },
+    {
+      "cpp_id": "0bec92e3104e5c2aa302b9e0abf54fbd52feaf0914c41e51a84dc7ab87c2699a",
+      "upstream_id": "NCollection_BaseMap::NextPrimeForMap(const size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::next_map_prime"
+    },
+    {
+      "cpp_id": "15e3be08b982e742f483ae4d9e2292348d8e11bf2aaae131514fe893fbde56ac",
+      "upstream_id": "NCollection_BaseMap::NbBuckets() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::nb_buckets"
+    },
+    {
+      "cpp_id": "1ce6f84a9322ffbdef5aef8d8220e0b2a050cd538655ef644228a5f7392ef781",
+      "upstream_id": "NCollection_BaseMap::Length() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::length"
+    },
+    {
+      "cpp_id": "2b844fbba44509ba10d971892e2ecc7fa2e25c843f88134a0b52aaf9f83c82fe",
+      "upstream_id": "NCollection_BaseMap::Iterator::Reset() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::reset"
+    },
+    {
+      "cpp_id": "2c0d052b8ff7c0119f43482a1b69d4640be61da1347ee994de7e035e9416a634",
+      "upstream_id": "NCollection_BaseMap::Iterator::pNext() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::advance"
+    },
+    {
+      "cpp_id": "300561b89d2376bfe3831260f1b8d8fefe973784fa622816d768a1576fc6dfcd",
+      "upstream_id": "NCollection_BaseMap::Resizable() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::resizable"
+    },
+    {
+      "cpp_id": "305c501fac0fad69bbcbb50f05b50768f8ea79446aa367b00bc1cb11db06ccc7",
+      "upstream_id": "NCollection_BaseMap::destroy",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy"
+    },
+    {
+      "cpp_id": "3757691394480032c0cf4f01e110e133d35f1796a5cc87c67afc96ae16c7eca0",
+      "upstream_id": "NCollection_BaseMap::BeginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into"
+    },
+    {
+      "cpp_id": "449448fc7371568c307d6b324056f71efda871b28e93c76f7ee422f27d66cd73",
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&) const",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_into"
+    },
+    {
+      "cpp_id": "4a36090713e87edce80b1e786da201553d27c9719cfbca39e579fcc7939fc2da",
+      "upstream_id": "NCollection_BaseMap::IsEmpty() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::is_empty"
+    },
+    {
+      "cpp_id": "59ae6cca4453b7175e455b2c16871b136ad999398b5d66ccbd2c5d123f0ad920",
+      "upstream_id": "NCollection_BaseMap::EndResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy"
+    },
+    {
+      "cpp_id": "5f058f159d4ef3b24447475fbab9ae3518914b353df02603214b043f4df86681",
+      "upstream_id": "NCollection_BaseMap::exchangeMapsData(NCollection_BaseMap &) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::exchange"
+    },
+    {
+      "cpp_id": "79dbc430fbefa1164f63b139ae6954aff70ecd86b589ff503eb72ed90ebee7ec",
+      "upstream_id": "NCollection_BaseMap::Buckets() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets"
+    },
+    {
+      "cpp_id": "7cb1a8a70d1b332158be15e84c67618e80b8d04835d41a1041f4c15322030792",
+      "upstream_id": "NCollection_BaseMap::Increment() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::increment"
+    },
+    {
+      "cpp_id": "7ff5e3088c7d570d488484f198e8b39eafdd8b156a0b0afe249b2a5f2f397815",
+      "upstream_id": "NCollection_BaseMap::Iterator::IsEqual(const NCollection_BaseMap::Iterator &) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::is_equal"
+    },
+    {
+      "cpp_id": "8386677a4ae940b9c84b90c14d95a84f025bf4b8da5b25b00e77b3ec668d2ede",
+      "upstream_id": "NCollection_BaseMap::Allocator() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::allocator"
+    },
+    {
+      "cpp_id": "8493b94964c75bf43ddcb7e5a64dfe88087044b73ec26107df0643a1ff9c2701",
+      "upstream_id": "NCollection_BaseMap::Decrement() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::decrement"
+    },
+    {
+      "cpp_id": "84d49b552740a54583e573fd637c4e718424afebbd14ce74c454fa950480e35e",
+      "upstream_id": "NCollection_BaseMap::increment() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::increment"
+    },
+    {
+      "cpp_id": "91202289138128c1782c34b15232acfd4f639d51c81b69fb66cea3a84484a41c",
+      "upstream_id": "NCollection_BaseMap::Buckets() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets_mut"
+    },
+    {
+      "cpp_id": "9ede401bbc002ac8714bd7ed383c056c8c4deeb269cdce8a55d6d1eae5fbf55e",
+      "upstream_id": "NCollection_BaseMap::Destroy",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy"
+    },
+    {
+      "cpp_id": "ab670bf4b0eafbf0a9741b57db5fbccca07565960fd388e90fcabdfe9b2d1c28",
+      "upstream_id": "NCollection_BaseMap::NbBucketsFromInt(const int)",
+      "rust_item": "rustycad_tkernel::ncollection::buckets_from_int"
+    },
+    {
+      "cpp_id": "adb0c995059b3174f66b3568651f094f5e505ee9f30b8a1909e651ef54d327f2",
+      "upstream_id": "NCollection_BaseMap::Size() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::size"
+    },
+    {
+      "cpp_id": "c6037a43cfa673eceeb9138c9b9569882be0348bf21ac37dc533d7086a05960d",
+      "upstream_id": "NCollection_BaseMap::decrement() noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::decrement"
+    },
+    {
+      "cpp_id": "cbd66324356d0d975eeb6b3651ed8296295ca7f5d63da6d0bfd560c173702842",
+      "upstream_id": "NCollection_BaseMap::Iterator::pMore() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::more"
+    },
+    {
+      "cpp_id": "cc5806be47e81171b1d46f266b0bff5d86d92848b9341a6796e69f59b5926335",
+      "upstream_id": "NCollection_BaseMap::Extent() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::extent"
+    },
+    {
+      "cpp_id": "d12e39b4645fc6006d4164cd1078adbfa8c6bbb1eef6f1bf997b98169fec7ef3",
+      "upstream_id": "NCollection_BaseMap::Iterator::Iterator(const NCollection_BaseMap &) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::new"
+    },
+    {
+      "cpp_id": "d2f5e422f9a6c5a31940a3427573097d270f68d947498688650581da8b696a22",
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(NCollection_BaseMap &&) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::move_from"
+    },
+    {
+      "cpp_id": "d3ffd1be67c3baa460b59c85117583f6087ac3e22b6b563ee56d811244b69cc3",
+      "upstream_id": "NCollection_BaseMap::ExchangeMapsData(NCollection_BaseMap &) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::exchange"
+    },
+    {
+      "cpp_id": "d7ff16e5e12df04e7652882c48f7fb9b333b2b731910fbacef243ebdb192ff92",
+      "upstream_id": "NCollection_BaseMap::resizable() const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::resizable"
+    },
+    {
+      "cpp_id": "e17e1585ded2ca03a9201fd1866273b2ec423cdc74305a2f90b31cb85e7fe210",
+      "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const bool,const occ::handle<NCollection_BaseAllocator> &)",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::new_legacy"
+    },
+    {
+      "cpp_id": "eb99bde438fdb0d745b132b9dccdc42615fce2284c69a05c14c1bc0a346434b6",
+      "upstream_id": "NCollection_BaseMap::Iterator::Initialize(const NCollection_BaseMap &) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::initialize"
+    },
+    {
+      "cpp_id": "ef0eea95bf51eb0ce67f37f51b4d26121371dbc8e869afae4a092e1ea3121d45",
+      "upstream_id": "NCollection_BaseMap::nextPrimeForMap(const size_t) const noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::next_map_prime"
+    },
+    {
+      "cpp_id": "f556a103ca9d50c2c543d728b10db2f863ce5eaee5df328be55368d0ad9762c6",
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into"
+    },
+    {
+      "cpp_id": "fe9dae9a7a0b8e03bfb4c1981d02c57fc73621b5e4109498cd4ff08c2c2e8b62",
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **) noexcept",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize"
+    }
+  ],
+  "replay": "gzip -dc porting/runtime-evidence/base-map-bindings-replay.py.gz > /tmp/verify-base-map-bindings.py; python3 /tmp/verify-base-map-bindings.py \"$PWD\"",
+  "native_current_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0"
+  }
+}
