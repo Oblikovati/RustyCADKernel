@@ -156,11 +156,12 @@ impl BaseAllocator {
         ))))
     }
 
-    /// Accepts the native thread-safety request for an incremental allocator; its internal
-    /// mutex remains enabled for Rust memory safety even when `is_thread_safe` is false.
+    /// Selects native incremental allocation/reordering policy; Rust synchronization
+    /// remains enabled even when `is_thread_safe` is false.
     /// Example: `BaseAllocator::incremental(4096).set_thread_safe(true)?`.
-    pub fn set_thread_safe(&self, _is_thread_safe: bool) -> Result<(), Failure> {
-        if matches!(&*self.inner, AllocatorKind::Incremental(_)) {
+    pub fn set_thread_safe(&self, is_thread_safe: bool) -> Result<(), Failure> {
+        if let AllocatorKind::Incremental(engine) = &*self.inner {
+            locked(engine).set_thread_safe(is_thread_safe);
             return Ok(());
         }
         Err(Failure::with_message(
