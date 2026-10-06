@@ -2,6 +2,7 @@
 use super::{Array1, ArrayError};
 
 mod borrowed;
+mod erase_policy;
 mod pointers;
 mod relocation;
 mod trivial_assignment;
@@ -132,12 +133,14 @@ impl<T> LinearVector<T> {
         self.elements.pop();
     }
     /// Removes one checked index; `vector.erase(0)?`.
+    /// Rust ownership shifts skip element move-assignment callbacks; use `erase_with_move` for those.
     pub fn erase(&mut self, index: usize) -> Result<(), ArrayError> {
         self.value(index)?;
         self.elements.remove(index);
         Ok(())
     }
     /// Removes a nonempty half-open range; `vector.erase_range(1,4)?`.
+    /// Use `erase_range_with_move` when native element move assignment is observable.
     pub fn erase_range(&mut self, from: usize, to: usize) -> Result<(), ArrayError> {
         if from >= to || to > self.len() {
             return Err(self.index_error(to));

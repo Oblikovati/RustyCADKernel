@@ -20,7 +20,7 @@ fn NCollection_LinearVectorTest__EraseSingle_NonTrivial_HeapBuffers() {
             "{prefix}-string-forces-heap-allocation"
         )));
     }
-    vector.erase(1).unwrap();
+    vector.erase_with_move(1, AsciiString::move_assign).unwrap();
     assert_eq!(vector.len(), 3);
     for (index, prefix) in ["alpha", "gamma", "delta"].into_iter().enumerate() {
         assert_eq!(
@@ -28,7 +28,7 @@ fn NCollection_LinearVectorTest__EraseSingle_NonTrivial_HeapBuffers() {
             format!("{prefix}-string-forces-heap-allocation").as_bytes()
         );
     }
-    vector.erase(0).unwrap();
+    vector.erase_with_move(0, AsciiString::move_assign).unwrap();
     assert_eq!(vector.len(), 2);
     for (index, prefix) in ["gamma", "delta"].into_iter().enumerate() {
         assert_eq!(
@@ -45,7 +45,7 @@ fn NCollection_LinearVectorTest__EraseRange_NonTrivial_HeapBuffers() {
         entry.append(&AsciiString::from_integer(index));
         vector.append(entry);
     }
-    vector.erase_range(1, 4).unwrap();
+    vector.erase_range_with_move(1, 4, AsciiString::move_assign).unwrap();
     assert_eq!(vector.len(), 3);
     for (index, value) in [0, 4, 5].into_iter().enumerate() {
         assert_eq!(
