@@ -13,6 +13,6 @@ pub(in crate::ncollection) unsafe trait CanonicalMapNode:
 }
 impl<K, V> sealed::Sealed for DataMapNode<K, V> {}
 impl<K> sealed::Sealed for MapNode<K> {}
-// SAFETY: both repr(C) classes wrap the real ListValueNode prefix; their only payloads are K/V.
+// SAFETY: both repr(C) classes have a real MapLinkNode prefix; their only payloads are K/V.
 unsafe impl<K, V> CanonicalMapNode for DataMapNode<K, V> {}
 unsafe impl<K> CanonicalMapNode for MapNode<K> {}

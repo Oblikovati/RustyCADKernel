@@ -1,6 +1,6 @@
-//! Native DataMapNode inherits the value/link prefix and destroys its key before that base.
+//! Native DataMapNode flattens link/value/key fields so derived keys reuse C++ base tail padding.
 #![allow(unsafe_code)]
-use super::{AllocatedBox, BaseAllocator, ListValueNode, MapLinkNode};
+use super::{AllocatedBox, BaseAllocator, MapLinkNode, map_payload::construct_value_then_key};
 use std::mem::ManuallyDrop;
 mod borrowed;
 mod iterator_node;
@@ -11,9 +11,11 @@ mod lifetime;
 /// A real `NCollection_DataMap::DataMapNode` key/value node; `DataMapNode::new(1, 7, next)`.
 #[repr(C)]
 pub struct DataMapNode<K, V> {
-    // Native base-subobject layout puts the link/value first, but C++ destroys derived members
-    // first. ManuallyDrop preserves both layout and key-before-value destruction (OCCT 3d097a).
-    value_node: ManuallyDrop<ListValueNode<V>>,
+    // OCCT 3d097a reuses non-POD base tail padding (int/int key offset12, not16 on x86_64).
+    // Separate fields preserve those measured offsets; never borrow a whole ListValueNode base
+    // because its Rust padding may overlap the derived key. Payload Drop remains key then value.
+    link: MapLinkNode,
+    value: ManuallyDrop<V>,
     key: ManuallyDrop<K>,
 }
 impl<K, V> DataMapNode<K, V> {
@@ -30,19 +32,17 @@ impl<K, V> DataMapNode<K, V> {
         construct_key: impl FnOnce() -> K,
         construct_value: impl FnOnce() -> V,
     ) -> Self {
-        // Keep a normal owner until key construction succeeds so a key panic drops the value.
-        let value_node = ListValueNode::construct(successor, construct_value);
-        let key = construct_key();
+        let link = MapLinkNode::new(successor);
+        let (value, key) = construct_value_then_key(construct_value, construct_key);
         Self {
-            value_node: ManuallyDrop::new(value_node),
+            link,
+            value: ManuallyDrop::new(value),
             key: ManuallyDrop::new(key),
         }
     }
     pub(crate) fn key_value_mut(&mut self) -> (&K, &mut V) {
-        (&self.key, self.value_node.change_value())
+        (&self.key, &mut self.value)
     }
-    // IndexedDataMapNode::Key1 consumes this projection in the concurrent indexed-node slice.
-    #[allow(dead_code)]
     pub(crate) fn key_mut(&mut self) -> &mut K {
         &mut self.key
     }
@@ -52,19 +52,19 @@ impl<K, V> DataMapNode<K, V> {
     }
     /// Borrows inherited Value; `assert_eq!(node.value(), &7)`.
     pub fn value(&self) -> &V {
-        self.value_node.value()
+        &self.value
     }
     /// Borrows inherited ChangeValue; `*node.change_value() = 8`.
     pub fn change_value(&mut self) -> &mut V {
-        self.value_node.change_value()
+        &mut self.value
     }
     /// Borrows the real inherited ListNode prefix; `node.link().next()`.
     pub fn link(&self) -> &MapLinkNode {
-        self.value_node.link()
+        &self.link
     }
     /// Edits inherited Next without owning its target; `*node.link_mut().next_mut() = next`.
     pub fn link_mut(&mut self) -> &mut MapLinkNode {
-        self.value_node.link_mut()
+        &mut self.link
     }
     /// Allocates before constructing value then key; `DataMapNode::allocate_with(&arena, next, || 1, || 7)`.
     pub fn allocate_with(
@@ -86,7 +86,7 @@ impl<K, V> DataMapNode<K, V> {
     /// # Safety
     /// Node must be a live `Self::into_raw` result paired with its allocator and have no live borrows.
     pub unsafe fn del_node(node: *mut MapLinkNode, allocator: &mut BaseAllocator) {
-        // SAFETY: repr(C) keeps the real ListValueNode and its ListNode prefix at offset zero.
+        // SAFETY: repr(C) keeps the actual MapLinkNode at offset zero, with this exact typed layout.
         unsafe { super::node_release::release_typed_node(node.cast::<Self>(), allocator) };
     }
 }
