@@ -1,0 +1,26 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "cc19580b00a6c22f6b77d02f82ef4cbe134663cb",
+  "exact_native_ids_reverified": 11,
+  "current_public_bodies_reverified": 11,
+  "integration_replay_checks": 7,
+  "artifacts": {
+    "replay": {
+      "path": "porting/runtime-evidence/dynamic-public-root-replay.gz",
+      "sha256": "afc9433500e744ca63886a64c7e6ba2d4c9cf3074b9f5cc69a3d4b3d4e62f4f6"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "b6b3e2fa0d59421da73578d00626d424ff8eeb85",
+      "deleted_worktree": "/tmp/rustycad-dynamic-public-bindings",
+      "deleted_branch": "port/dynamic-public-bindings",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "implemented_credit_added": 0,
+  "test_credit_added": 0,
+  "initial_failure": "Initial whole-ledger replay rejected independently integrated BaseList changes; fixed replay validates exact original transaction and current owned entries separately, with seven rejection/isolation checks."
+}
