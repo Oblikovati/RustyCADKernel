@@ -180,6 +180,7 @@ mod base_iterator;
 mod base_storage;
 pub use base_iterator::BaseSequenceIterator;
 pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
+mod assignment;
 mod borrowed;
 mod cursor_contracts;
 mod editing;

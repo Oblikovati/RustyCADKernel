@@ -27,3 +27,16 @@ impl<T: Clone> Sequence<T> {
         self.emplace_after_cursor(cursor, || value.clone())
     }
 }
+
+impl<T: Clone> Sequence<T> {
+    /// Matches native iterator InsertAfter(T&&), which copies its named rvalue argument.
+    /// Example: `sequence.insert_after_cursor_rvalue(&cursor, &mut item)?` leaves item unchanged.
+    /// OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871 omits std::forward in this overload.
+    pub fn insert_after_cursor_rvalue(
+        &mut self,
+        cursor: &SequenceCursor,
+        value: &mut T,
+    ) -> Result<&mut T, Failure> {
+        self.insert_after_cursor_ref(cursor, value)
+    }
+}
