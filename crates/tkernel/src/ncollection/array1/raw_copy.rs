@@ -97,3 +97,64 @@ unsafe fn copy_trivial_raw_to_vec<T: Copy>(source: *const T, count: usize) -> Ve
     let values = unsafe { std::slice::from_raw_parts(source, count) };
     values.iter().copied().collect()
 }
+
+#[allow(unsafe_code)]
+impl<T> Array1<'_, T> {
+    /// Applies native nontrivial `copyAssign` in ascending slot order.
+    ///
+    /// ```
+    /// use rustycad_tkernel::ncollection::Array1;
+    /// let mut values = [1, 2, 3];
+    /// let pointer = values.as_mut_ptr();
+    /// unsafe {
+    ///     Array1::copy_assign_nontrivial_raw(pointer.add(1), pointer, 2,
+    ///         |slot, donor| *slot = *donor, |_| {});
+    /// }
+    /// assert_eq!(values, [1, 1, 1]);
+    /// ```
+    ///
+    /// # Safety
+    /// For nonzero `count` and nonzero-sized `T`, both pointers must identify
+    /// ranges of `count` live, initialized, aligned values with valid provenance.
+    /// Each range must fit within one allocation and `isize::MAX` bytes.
+    /// The target range must be writable and the source range readable. Ranges
+    /// may overlap, but no conflicting references may remain live. Callbacks
+    /// must not access either range through retained pointers or reenter it.
+    /// Equal element pointers call `assign_self` with one mutable reference.
+    /// Zero count permits null pointers and performs no accesses or callbacks.
+    ///
+    /// # Panics
+    /// Nonzero `count` with zero-sized `T` is rejected before accessing pointers.
+    pub unsafe fn copy_assign_nontrivial_raw(
+        target: *mut T,
+        source: *const T,
+        count: usize,
+        mut assign: impl FnMut(&mut T, &T),
+        mut assign_self: impl FnMut(&mut T),
+    ) {
+        assert!(
+            count == 0 || size_of::<T>() > 0,
+            "element size 0; expected nonzero size for {count} slots"
+        );
+        for offset in 0..count {
+            let slot = unsafe { target.add(offset) };
+            let donor = unsafe { source.add(offset) };
+            unsafe { assign_raw_slot(slot, donor, &mut assign, &mut assign_self) };
+        }
+    }
+}
+
+#[allow(unsafe_code)]
+unsafe fn assign_raw_slot<T>(
+    slot: *mut T,
+    donor: *const T,
+    assign: &mut impl FnMut(&mut T, &T),
+    assign_self: &mut impl FnMut(&mut T),
+) {
+    if std::ptr::eq(slot, donor) {
+        unsafe { assign_self(&mut *slot) };
+    } else {
+        // Per-element borrows permit the native forward overlap cascade.
+        unsafe { assign(&mut *slot, &*donor) };
+    }
+}

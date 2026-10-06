@@ -1,0 +1,1286 @@
+{
+  "schema": 1,
+  "title": "Array1 protected nontrivial copyAssign forward raw assignment policy",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_header": {
+    "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+    "sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "method_lines": [
+      636,
+      646
+    ]
+  },
+  "base_commit": "295508115efe754faf1244e28b74d9db009b1267",
+  "status": "partial_domain",
+  "global_coverage_credit_added": 0,
+  "bindings": [
+    {
+      "cpp_declaration": {
+        "access": "protected",
+        "ancestor_access": [
+          {
+            "access": "public",
+            "qualified_name": "NCollection_Array1",
+            "usr": "c:@ST>1#T@NCollection_Array1"
+          }
+        ],
+        "api_visible": true,
+        "canonical_type": "NCollection_Array1::copyAssign",
+        "default_argument_capture": "complete",
+        "default_argument_observations": [
+          [
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 0,
+              "state": "absent"
+            },
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 1,
+              "state": "absent"
+            },
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 2,
+              "state": "absent"
+            }
+          ]
+        ],
+        "default_arguments": [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 1,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 2,
+            "state": "absent"
+          }
+        ],
+        "event": "declaration",
+        "exclusion_reason": "",
+        "expansion_location": {
+          "column": 78,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "line": 637
+        },
+        "id": "0b20dd988e65eb8be880396445869e4d79c95ebdd7ca414bccdf8f39db033f7a",
+        "identity_signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+        "implicit": false,
+        "kind": "FunctionTemplate",
+        "macro_generated": false,
+        "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "parameter_types": [
+          "type-parameter-0-0 *",
+          "const type-parameter-0-0 *",
+          "const unsigned long"
+        ],
+        "parent_usr": "c:@ST>1#T@NCollection_Array1",
+        "qualified_name": "NCollection_Array1::copyAssign",
+        "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+        "signature_variants": [
+          "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+        ],
+        "sites": [
+          {
+            "expansion_location": {
+              "column": 78,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+              "line": 637
+            },
+            "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "spelling_location": {
+              "column": 78,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+              "line": 637
+            }
+          }
+        ],
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "spelling_location": {
+          "column": 78,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "line": 637
+        },
+        "stable_identity": true,
+        "template_signature": "template <typename __template_param_0 = TheItemType> ",
+        "template_signature_variants": [
+          "template <typename __template_param_0 = TheItemType> "
+        ],
+        "usr": "c:@ST>1#T@NCollection_Array1@FT@>1#TcopyAssign#*t0.0#*1S1_#l#^std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>:::type#",
+        "variadic": false,
+        "written_parameter_types": [
+          "NCollection_Array1::pointer",
+          "NCollection_Array1::const_pointer",
+          "const size_t"
+        ]
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::copy_assign_nontrivial_raw",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "target",
+                {
+                  "raw_pointer": {
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                }
+              ],
+              [
+                "source",
+                {
+                  "raw_pointer": {
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                }
+              ],
+              [
+                "count",
+                {
+                  "primitive": "usize"
+                }
+              ],
+              [
+                "assign",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnMut",
+                          "resolved_item_path": "core::ops::function::FnMut",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                },
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": false,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": null
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "assign_self",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnMut",
+                          "resolved_item_path": "core::ops::function::FnMut",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": true,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": null
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "impl FnMut(&mut T, &T)",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnMut",
+                            "resolved_item_path": "core::ops::function::FnMut",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": false,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "output": null
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              },
+              {
+                "name": "impl FnMut(&mut T)",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnMut",
+                            "resolved_item_path": "core::ops::function::FnMut",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [
+                                  {
+                                    "borrowed_ref": {
+                                      "lifetime": null,
+                                      "is_mutable": true,
+                                      "type": {
+                                        "generic": "T"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "output": null
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/raw_copy.rs",
+        "source_sha256": "c6c04bf4ddded8fa8935e73cec6009a0ca6c8bd498b368f46f5b51dd3df7614d",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "f52b239a93efd02672c233097ea2c34382de42edbd2730ab9e4924aa8c89426a"
+      },
+      "rust_helper": {
+        "id": 3942,
+        "crate_id": 0,
+        "name": "assign_raw_slot",
+        "span": {
+          "filename": "crates/tkernel/src/ncollection/array1/raw_copy.rs",
+          "begin": [
+            145,
+            1
+          ],
+          "end": [
+            157,
+            2
+          ]
+        },
+        "visibility": {
+          "restricted": {
+            "parent": 3941,
+            "path": "::ncollection::array1::raw_copy"
+          }
+        },
+        "docs": null,
+        "links": {},
+        "attrs": [
+          {
+            "other": "#[allow(unsafe_code)]"
+          }
+        ],
+        "deprecation": null,
+        "stability": null,
+        "const_stability": null,
+        "inner": {
+          "function": {
+            "sig": {
+              "inputs": [
+                [
+                  "slot",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": true,
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "donor",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": false,
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "assign",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "impl_trait": [
+                          {
+                            "trait_bound": {
+                              "trait": {
+                                "path": "FnMut",
+                                "id": 3937,
+                                "args": {
+                                  "parenthesized": {
+                                    "inputs": [
+                                      {
+                                        "borrowed_ref": {
+                                          "lifetime": null,
+                                          "is_mutable": true,
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "borrowed_ref": {
+                                          "lifetime": null,
+                                          "is_mutable": false,
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "output": null
+                                  }
+                                }
+                              },
+                              "generic_params": [],
+                              "modifier": "none"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                [
+                  "assign_self",
+                  {
+                    "borrowed_ref": {
+                      "lifetime": null,
+                      "is_mutable": true,
+                      "type": {
+                        "impl_trait": [
+                          {
+                            "trait_bound": {
+                              "trait": {
+                                "path": "FnMut",
+                                "id": 3937,
+                                "args": {
+                                  "parenthesized": {
+                                    "inputs": [
+                                      {
+                                        "borrowed_ref": {
+                                          "lifetime": null,
+                                          "is_mutable": true,
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "output": null
+                                  }
+                                }
+                              },
+                              "generic_params": [],
+                              "modifier": "none"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              ],
+              "output": null,
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "impl FnMut(&mut T, &T)",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "FnMut",
+                              "id": 3937,
+                              "args": {
+                                "parenthesized": {
+                                  "inputs": [
+                                    {
+                                      "borrowed_ref": {
+                                        "lifetime": null,
+                                        "is_mutable": true,
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "borrowed_ref": {
+                                        "lifetime": null,
+                                        "is_mutable": false,
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "output": null
+                                }
+                              }
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": true
+                    }
+                  }
+                },
+                {
+                  "name": "impl FnMut(&mut T)",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "FnMut",
+                              "id": 3937,
+                              "args": {
+                                "parenthesized": {
+                                  "inputs": [
+                                    {
+                                      "borrowed_ref": {
+                                        "lifetime": null,
+                                        "is_mutable": true,
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "output": null
+                                }
+                              }
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": true
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          }
+        }
+      },
+      "status": "partial_domain",
+      "domain": "Default native U=TheItemType nontrivial policy, valid initialized aligned non-ZST raw ranges, forward sequential distinct-element or self assignment. Overlapping ranges retain valid single-root pointer provenance; callbacks receive only per-element references and cannot reenter storage. No Clone or Default bounds."
+    }
+  ],
+  "duplicate_template_child": {
+    "declaration": {
+      "access": "protected",
+      "ancestor_access": [
+        {
+          "access": "public",
+          "qualified_name": "NCollection_Array1",
+          "usr": "c:@ST>1#T@NCollection_Array1"
+        }
+      ],
+      "api_visible": false,
+      "canonical_type": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "default_argument_capture": "complete",
+      "default_argument_observations": [
+        [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 1,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 2,
+            "state": "absent"
+          }
+        ]
+      ],
+      "default_arguments": [
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 0,
+          "state": "absent"
+        },
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 1,
+          "state": "absent"
+        },
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 2,
+          "state": "absent"
+        }
+      ],
+      "event": "declaration",
+      "exclusion_reason": "template_owned_declaration",
+      "expansion_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 637
+      },
+      "id": "a318aa809f5b29cd9e509cfb1951e7ffc0a55fd5a08c960cbbd1b27108f1521c",
+      "identity_signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "implicit": false,
+      "kind": "CXXMethod",
+      "macro_generated": false,
+      "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "parameter_types": [
+        "type-parameter-0-0 *",
+        "const type-parameter-0-0 *",
+        "const unsigned long"
+      ],
+      "parent_usr": "c:@ST>1#T@NCollection_Array1",
+      "qualified_name": "NCollection_Array1::copyAssign",
+      "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)",
+      "signature_variants": [
+        "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+      ],
+      "sites": [
+        {
+          "expansion_location": {
+            "column": 78,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "line": 637
+          },
+          "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "spelling_location": {
+            "column": 78,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "line": 637
+          }
+        }
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "spelling_location": {
+        "column": 78,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 637
+      },
+      "stable_identity": true,
+      "template_signature": "template <typename __template_param_0 = TheItemType> ",
+      "template_signature_variants": [
+        "template <typename __template_param_0 = TheItemType> "
+      ],
+      "usr": "c:@ST>1#T@NCollection_Array1@FT@>1#TcopyAssign#*t0.0#*1S1_#l#^std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>:::type#",
+      "variadic": false,
+      "written_parameter_types": [
+        "NCollection_Array1::pointer",
+        "NCollection_Array1::const_pointer",
+        "const size_t"
+      ]
+    },
+    "binding_kind": "template_body_duplicate",
+    "independent_credit": 0
+  },
+  "baseline": {
+    "kind": "missing_callable_compile_error",
+    "restored_file_from": "HEAD:crates/tkernel/src/ncollection/array1/raw_copy.rs",
+    "diagnostic": "E0599 copy_assign_nontrivial_raw absent; existing trivial helper performs memmove snapshot copying rather than cascading nontrivial assignment"
+  },
+  "native_oracle": {
+    "source": "tools/oracle/tkernel_array_nontrivial_raw_copy.cxx",
+    "expected": "tools/oracle/tkernel_array_nontrivial_raw_copy.expected",
+    "rows": 8,
+    "compiler": "c++ -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all",
+    "note": "Probe instrumented by UBSan; linked TKernel binary not fully instrumented. Native copy constructor deleted, destructor observed, no default constructor. Every source value initialized before access."
+  },
+  "validation": {
+    "counts": {
+      "rust": {
+        "passed": 279,
+        "failed": 0,
+        "ignored": 0
+      },
+      "miri": {
+        "passed": 171,
+        "failed": 0,
+        "ignored": 0
+      },
+      "docs": {
+        "passed": 271,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    "native_original_names": [
+      "NCollection_Array1Test.AssignmentOperator",
+      "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+      "NCollection_Array1Test.AssignmentOperatorEmptySource",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array1Test.AssignmentValue",
+      "NCollection_Array1Test.ChangeValue",
+      "NCollection_Array1Test.ChangeValueAccess",
+      "NCollection_Array1Test.ConstructorWithBounds",
+      "NCollection_Array1Test.ConstructorWithNegativeBounds",
+      "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+      "NCollection_Array1Test.CopyConstructor",
+      "NCollection_Array1Test.CopyValuesDifferentSize",
+      "NCollection_Array1Test.CopyValuesPreservesBounds",
+      "NCollection_Array1Test.DefaultConstructor",
+      "NCollection_Array1Test.EmplaceValue",
+      "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+      "NCollection_Array1Test.FirstLast",
+      "NCollection_Array1Test.Init",
+      "NCollection_Array1Test.IteratorAccess",
+      "NCollection_Array1Test.Move",
+      "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+      "NCollection_Array1Test.Resize",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+      "NCollection_Array1Test.STLIteration",
+      "NCollection_Array1Test.SetValue",
+      "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array1Test.SizeConstructor_AtAccess",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+      "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+      "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+      "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+      "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+      "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+      "NCollection_Array1Test.SizeConstructor_ZeroSize",
+      "NCollection_Array1Test.ValueAccess",
+      "NCollection_Array2Test.AssignmentOperator",
+      "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array2Test.ChangeValueAccess",
+      "NCollection_Array2Test.ConstructorWithBounds",
+      "NCollection_Array2Test.ConstructorWithNegativeBounds",
+      "NCollection_Array2Test.CopyConstructor",
+      "NCollection_Array2Test.CopyValuesDifferentDimensions",
+      "NCollection_Array2Test.CopyValuesPreservesBounds",
+      "NCollection_Array2Test.DefaultConstructor",
+      "NCollection_Array2Test.EmplaceValue",
+      "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array2Test.Init",
+      "NCollection_Array2Test.MoveAssignment",
+      "NCollection_Array2Test.MoveConstructor",
+      "NCollection_Array2Test.ReIndex_Interference",
+      "NCollection_Array2Test.ReIndex_UpdateBounds",
+      "NCollection_Array2Test.Resize",
+      "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+      "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+      "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+      "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+      "NCollection_Array2Test.Resize_FromEmpty",
+      "NCollection_Array2Test.Resize_NoCopy",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+      "NCollection_Array2Test.STLIteration",
+      "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array2Test.SizeConstructor_AtAccess",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+      "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+      "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array2Test.ValueAccess"
+    ],
+    "native_original_count": 81,
+    "original_rust_case_names_match": true,
+    "new_tests": 4,
+    "operation_rows_tested_twice": "stack backing and heap Vec backing, both using exclusive borrowed Array1 projections",
+    "checks": {
+      "targets": [
+        "ncollection_array1",
+        "ncollection_array2",
+        "ncollection_arrays_api_behavior",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts",
+        "array1_borrowed_init",
+        "ncollection_array2_buffer_prefix",
+        "ncollection_array_set_value_ref",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_emplace_assignment",
+        "array_set_value_assignment",
+        "array_const_assignment",
+        "array_copy_values_assignment",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_nontrivial_raw_copy"
+      ],
+      "results": {
+        "rust": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_nontrivial_raw_copy"
+          ],
+          "exit": 0
+        },
+        "clippy": {
+          "command": [
+            "cargo",
+            "clippy",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_nontrivial_raw_copy",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0
+        },
+        "fmt": {
+          "command": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--",
+            "--check"
+          ],
+          "exit": 0
+        },
+        "docs": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--doc"
+          ],
+          "exit": 0
+        },
+        "compiler": {
+          "command": [
+            "cargo",
+            "+nightly-2026-09-25",
+            "rustdoc",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--lib",
+            "--",
+            "-Z",
+            "unstable-options",
+            "--output-format",
+            "json",
+            "--document-private-items"
+          ],
+          "exit": 0
+        }
+      }
+    },
+    "miri": {
+      "targets": [
+        "array_nontrivial_raw_copy",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_copy_values_assignment",
+        "array_const_assignment",
+        "array_set_value_assignment",
+        "array_emplace_assignment",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts"
+      ],
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "array_nontrivial_raw_copy",
+        "--test",
+        "array_internal_emplace",
+        "--test",
+        "array_uninitialized",
+        "--test",
+        "array_internal_set_value",
+        "--test",
+        "array_internal_init",
+        "--test",
+        "array_copy_values_assignment",
+        "--test",
+        "array_const_assignment",
+        "--test",
+        "array_set_value_assignment",
+        "--test",
+        "array_emplace_assignment",
+        "--test",
+        "array2_resize_assignment",
+        "--test",
+        "array2_resize_validation",
+        "--test",
+        "array_buffer_constructors",
+        "--test",
+        "array_buffer_validation",
+        "--test",
+        "array_raw_copy_contracts",
+        "--test",
+        "array_raw_copy_validation",
+        "--test",
+        "array1_assignment_pointer_contracts",
+        "--test",
+        "array2_assignment_pointer_contracts"
+      ],
+      "exit": 0
+    }
+  },
+  "remaining_limits": [
+    "Public Assign/CopyValues overlapping-wrapper protocols are not closed by this protected raw helper.",
+    "Zero-sized nonempty Rust T is rejected before pointer arithmetic; no corresponding native sizeof(T)==0 domain.",
+    "Shared read-only storage writable aliasing, invalid pointer/count/provenance, incompatible references and callbacks retaining or reentering raw ranges remain excluded.",
+    "Native forced alternate U template-policy selection is not modeled.",
+    "Native allocation hooks, constructor-failure leaks, uninitialized object reads and arbitrary C++ exception translation remain open.",
+    "The heap fixture owns Vec storage externally; it does not claim Array1-owned non-Default construction.",
+    "Explicit callbacks model assignment and self-assignment; Rust panic preserves tested mutation prefix, not C++ ABI exception mechanics."
+  ],
+  "inputs": {
+    "crates/tkernel/src/ncollection/array1.rs": "e15f2f326a9abab2a9a6ca0baf1b11234a386c192920519428394c89047b90d8",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "183b12552edc76e4a70dd819fc235ddcfe9fbfb79ba60932b822fdc4dd8acfdf",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "30e214878708a47f2d634e661386168e30d304889f1f574f77d0c041c71acf1c",
+    "crates/tkernel/src/ncollection/array1/assignment_policy.rs": "95473067ddc963054a0f0865533025e6ff70d05fd18a305ac808078e2868445b",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/copy_assignment_policy.rs": "30d1c2d598f53f724aa7cadfee156c5383c47c2c49649ed961b9d0f28c55abba",
+    "crates/tkernel/src/ncollection/array1/uninitialized.rs": "613137b31378ce7e6d82509129cd5ce653c3bd8fab0ca3f1028a903474bfd66a",
+    "crates/tkernel/src/ncollection/array1/emplace_policy.rs": "8fc3bb4d3320365098ee355e83b81ff3d94ec7c128bb5b14a33b198c2f6f102d",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/internal_init.rs": "01a3e96e6585895268c47dcfa17b306b77aa8367f286b940f3dcb9f0955cdd3a",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "c6c04bf4ddded8fa8935e73cec6009a0ca6c8bd498b368f46f5b51dd3df7614d",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array1/resize_storage.rs": "098bfcc476955f9e802eec235fed8048a4d660c9082d86762b94438e426d6475",
+    "crates/tkernel/src/ncollection/array2/assignment_policy.rs": "0b578dd32aba999254ebe311b68ac4d67adbe6dd9770e90186b5cca1bea33b53",
+    "crates/tkernel/src/ncollection/array2/copy_assignment_policy.rs": "109989aad5bb05679e6749780d05a886a7a084cbb2b2fdde1b3db6800c449e93",
+    "crates/tkernel/src/ncollection/array2/uninitialized.rs": "c6490b8e66cb2f0642df82a672c721c0c0db9832856fdddfa97308f18e4398ba",
+    "crates/tkernel/src/ncollection/array2/emplace_policy.rs": "399b75178f4b4371b872448a9f8994e011790a9064638a36da8da10e4cebd4dd",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/internal_init.rs": "651bf9bd8644bcb187ecbbbbc8fa322992239f15cef858b65436e4735e1e3885",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/src/ncollection/array2/resize_policy.rs": "00af82c5e5ce72e35553f440ba2dd778e1e500d2c9ae68d961c8b9a7f0735e8b",
+    "crates/tkernel/src/ncollection/array2/resize_policy/assignment.rs": "95477196755d1174e1357d4e213e035ad6754ad1e9240baf6868a231d3942ec1",
+    "tools/oracle/tkernel_array_nontrivial_raw_copy.cxx": "a2ab2e3b195f8487338c4c2a3f8908b5279684b27d32bfb9b2a06c982a47e120",
+    "tools/oracle/tkernel_array_nontrivial_raw_copy.expected": "b3eba928af20e456035f04ee6fa045770e0e706fcfef3a787140af1e01967036",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/array2_resize_assignment.rs": "d978a897356011b500ce2d581bb9d7b39ef53809127d7c803d51465429eb7efa",
+    "crates/tkernel/tests/array2_resize_assignment/support.rs": "b4d7e39db0a1618f966eac7ad50c42f5d11e9cb62f2c23cddac2b15ca04b98c7",
+    "crates/tkernel/tests/array2_resize_validation.rs": "8217d6d6411604519412e166c0f8545c2785372082efb4046b0b321be9476f22",
+    "crates/tkernel/tests/array_emplace_assignment.rs": "ef075786addde15ef6089b7dd11bf4388bace660e64414a931ad66391f44fa66",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs": "4f58e39643e0e47a6790ee4bcf002cde0caf275cb174f0c0e07ea9992ce7a1ed",
+    "crates/tkernel/tests/array_set_value_assignment.rs": "02bed0fcf2a1d1757f6438d89f313541d161fce146e83b8f8ba4cd4e3cf6d2c7",
+    "crates/tkernel/tests/array_set_value_assignment/support.rs": "3e4d770878f2ab3f303a91cf9bc7da7ec7787248fcd27fc74d222e8f83f8e2bf",
+    "crates/tkernel/tests/array_const_assignment.rs": "a9e91b0e1cd0097ba9eb566cfe75a0d1aae07a0e0e0b3bb728ef9b8445a6ea88",
+    "crates/tkernel/tests/array_const_assignment/support.rs": "163136bf665b857eb9631e0ca431b442d6c48b3f98ef22e24c6e28443373b2c0",
+    "crates/tkernel/tests/array_copy_values_assignment.rs": "4335699d3ce25ac8e51ae75d81dd8b1f125bf2c69804cd22a352e84ee319317d",
+    "crates/tkernel/tests/array_copy_values_assignment/support.rs": "1b24b3a7fd81cfcf0c6f947b878062a1f8a8022fa5ab97b0056a1fe65f5a13f7",
+    "crates/tkernel/tests/array_internal_set_value.rs": "c48d2bad381321630f2782e233acf838a0f74f869c814fa956f60ac7200d23e7",
+    "crates/tkernel/tests/array_internal_set_value/support.rs": "d90515f6d610369fd8fc9b4166f229255e8292b15c7ecd40f2b97a0168baa71a",
+    "crates/tkernel/tests/array_internal_init.rs": "63675cd25763c40d3fe09d97ca1ba735854ebe76dbfaefd3f24312012da859b6",
+    "crates/tkernel/tests/array_internal_init/support.rs": "f9ccabf17493b2d4395bc4681d107358f6b0ab2741c6a5e1fdb171b4bf6b7e87",
+    "crates/tkernel/tests/array_internal_emplace.rs": "704169299a6d7dfe3c51a754d541b23820c56f7014098ea87310b5eb4f574db3",
+    "crates/tkernel/tests/array_internal_emplace/support.rs": "f2ae64a0700ca8614dcb1a8d53b990e03fe283ac2664eb2e88d0cb8c3446f26d",
+    "crates/tkernel/tests/array_uninitialized.rs": "060815af5e809cb2e3d4371006b87aece6078bd7fb7e0877311db6e482c7b332",
+    "crates/tkernel/tests/array_uninitialized/support.rs": "4ce3e3ad6ab7d07da721ca1612fa545ec461bdee5cfbb064536f8705cce1e947",
+    "crates/tkernel/tests/array_nontrivial_raw_copy.rs": "0d653f9bd7df7f4c0c4234e973ad363d10bcf5444e68f7b2b294b8c4d0430bb6"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-rust.gz",
+      "sha256": "a38fd432a6244cd70cf0e5358717fff582b097e8bf38fad453376647acca4e59",
+      "uncompressed_sha256": "cbd01214c9f9780058daa0295f6072f0687359d9ed93e7ace71a351f937ab369"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-miri.gz",
+      "sha256": "908d3281299473faf4b2fb74a4f24171380ca0bdaf63c57159027da500c4230d",
+      "uncompressed_sha256": "b65219924860d5672e5b5107cff0603112df5168678b1e3d83f5c256d84a709a"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-docs.gz",
+      "sha256": "b0dda2895ab375b65457a9cc747d98c5b6a0a929afb296b7a77b8aa82eb8e9b8",
+      "uncompressed_sha256": "25ea7ca6efd94fd7fdc9527af5b6fbaca54610d82845b3be4956c6a224c1cb73"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-clippy.gz",
+      "sha256": "640b784f1ab20eae61719e4c7e4becad8a391ddaf93acd7c5c2f0866dc6093be",
+      "uncompressed_sha256": "e61cd73e602e7c1907df12edf1319f114a116db5f22b2fec87eac70a249ed289"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "red": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-red.gz",
+      "sha256": "b401f6d912fef80f9c283f04d993f96b9bf8a5609d4bd4914dd12566b328ebaa",
+      "uncompressed_sha256": "554cc459d21c9466b8249c1bca35f996a478835fd9ffb0ba0d1125eb3fccdd4f"
+    },
+    "first": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-first.gz",
+      "sha256": "daa0aeee533c2a85f2565685fa581bf143e0ffabe8dc8418a1f3f2493646e566",
+      "uncompressed_sha256": "2cf7508819afb281b3716d558a0f694a6d27145f8304092730e18f935732e39a"
+    },
+    "ubsan": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-ubsan.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-compiler.gz",
+      "sha256": "e7ee82c4c8033ea0434c7b29c55aaff7c29cdfc0d3a0a5562614ac8f0c9690c9",
+      "uncompressed_sha256": "abfd0d77fbccd5e77745dc8b9ef48a9ebd15385fb3979d7d0e700a5396a49e85"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-compiler-json.gz",
+      "sha256": "e2c45e90347647591ba7bad33f07ba1c0dc5b6f9b8dc8d702d878ec2ee8a2d9b",
+      "uncompressed_sha256": "48ce4a908d7357ddbeda67f1e8ec33dcb535268189c148246e6f005b98eb0e29"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-normalized.gz",
+      "sha256": "bbbf8624c6c57f0ad71126097255618482d99d43791dacdfa8b71b7708276be3",
+      "uncompressed_sha256": "46784017606db77c9729de7dc02972949987363ce8f8b2c05d3b1d472e4f006c"
+    },
+    "checks": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-checks.gz",
+      "sha256": "d909ba5f2deebbf14d10902b031088971c4a637c5958ad0a13be9c409018730a",
+      "uncompressed_sha256": "ecf9a257ae210c6e9d2c9723eac91ef8d0f54426558dd7f838f37f0e3dac6d05"
+    },
+    "miri-command": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-miri-command.gz",
+      "sha256": "ebc9777c03dffd43eac0a207d79a3c5d9cbf4a0ffd824c4662e6501cf16b8879",
+      "uncompressed_sha256": "ef595d1a155cefbdb659ea7b47833af5c68ed149ad34c93f5d6df285b54a8716"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-nontrivial-raw-copy-source.tar.gz",
+      "sha256": "8abbcc2c113e4e1305b7d02c277fa97c41534105dfd157aa27da0f636082b2f1"
+    }
+  }
+}
