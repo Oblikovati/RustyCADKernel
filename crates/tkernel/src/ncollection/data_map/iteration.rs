@@ -1,74 +1,71 @@
 //! Safe ranges borrow the sole graph owner while following native links.
-use super::{position::DataMapPosition, storage::DataMapStorage};
-use crate::ncollection::DataMapNode;
+use super::storage::DataMapStorage;
+use crate::ncollection::{
+    DataMapNode,
+    owned_bucket_chains::{BucketChainPosition, BucketNodeRange},
+};
 use std::{marker::PhantomData, panic::RefUnwindSafe};
 /// Shared key/value traversal in native bucket order; `map.items()`.
 pub struct DataMapItems<'a, K, V> {
-    pub(super) source: Option<&'a DataMapStorage<K, V>>,
-    pub(super) position: DataMapPosition,
+    nodes: BucketNodeRange<'a, DataMapNode<K, V>>,
 }
 impl<'a, K, V> DataMapItems<'a, K, V> {
     pub(super) fn new(source: &'a DataMapStorage<K, V>) -> Self {
         Self {
-            source: Some(source),
-            position: DataMapPosition::new(&source.base),
+            nodes: BucketNodeRange::new(source),
+        }
+    }
+    pub(super) fn from_position(
+        source: Option<&'a DataMapStorage<K, V>>,
+        position: BucketChainPosition,
+    ) -> Self {
+        Self {
+            nodes: BucketNodeRange::from_position(source, position),
         }
     }
     pub(super) fn current(&self) -> Option<&'a DataMapNode<K, V>> {
-        if self.position.node.is_null() {
-            return None;
-        }
-        Some(unsafe { self.source?.node(self.position.node) })
+        self.nodes.current()
     }
     pub(super) fn reset(&mut self) {
-        self.position = self.source.map_or_else(DataMapPosition::default, |source| {
-            DataMapPosition::new(&source.base)
-        });
+        self.nodes.reset();
     }
 }
-// SAFETY: each shared range borrows a graph that cannot mutate; references require K,V:Sync.
-unsafe impl<K: Sync, V: Sync> Send for DataMapItems<'_, K, V> {}
-unsafe impl<K: Sync, V: Sync> Sync for DataMapItems<'_, K, V> {}
 impl<'a, K, V> Iterator for DataMapItems<'a, K, V> {
     type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
-        let entry = self.current()?;
-        self.position.advance(&self.source?.base);
-        Some((entry.key(), entry.value()))
+        self.nodes.next().map(|node| (node.key(), node.value()))
     }
 }
 impl<K, V> Default for DataMapItems<'_, K, V> {
     fn default() -> Self {
         Self {
-            source: None,
-            position: DataMapPosition::default(),
+            nodes: BucketNodeRange::default(),
         }
     }
 }
 impl<K, V> Clone for DataMapItems<'_, K, V> {
     fn clone(&self) -> Self {
         Self {
-            source: self.source,
-            position: self.position,
+            nodes: self.nodes.clone(),
         }
     }
 }
 impl<K, V> PartialEq for DataMapItems<'_, K, V> {
     fn eq(&self, other: &Self) -> bool {
-        self.position.node == other.position.node
+        self.nodes == other.nodes
     }
 }
 impl<K, V> Eq for DataMapItems<'_, K, V> {}
 
 pub(super) struct DataMapItemsMut<'a, K, V> {
     source: &'a DataMapStorage<K, V>,
-    position: DataMapPosition,
+    position: BucketChainPosition,
     exclusive: PhantomData<&'a mut (K, V)>,
 }
 impl<'a, K, V> DataMapItemsMut<'a, K, V> {
     pub(super) fn new(source: &'a mut DataMapStorage<K, V>) -> Self {
         Self {
-            position: DataMapPosition::new(&source.base),
+            position: BucketChainPosition::new(&source.base),
             source,
             exclusive: PhantomData,
         }

@@ -11,7 +11,7 @@ impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
     /// assert!(!keys.add_ref(&7));
     /// ```
     pub fn add_ref(&mut self, key: &K) -> bool {
-        self.bindings.place_key_ref(key).0
+        self.place_key_ref(key).0
     }
     /// Returns a stable stored key, copying the borrowed key only on insertion.
     ///
@@ -22,6 +22,6 @@ impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
     /// assert_eq!(keys.added_ref(&7), &7);
     /// ```
     pub fn added_ref(&mut self, key: &K) -> &K {
-        self.bindings.place_key_ref(key).1
+        self.place_key_ref(key).1
     }
 }
