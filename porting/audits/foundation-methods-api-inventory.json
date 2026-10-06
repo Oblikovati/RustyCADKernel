@@ -1,0 +1,65 @@
+{
+  "schema": "rustycad.compiler-inventory-refresh.v1",
+  "source_revision": "363237df6ed055c1a15a6d76e4f8c6e6cd1609ea",
+  "previous_snapshot_revision": "ce7f58a5",
+  "rust_libraries": 20,
+  "all_features_per_library": true,
+  "source_and_artifact_hashes_verified": true,
+  "observed_cpp_api_declarations": 108622,
+  "resolved_implementation_claims": 23598,
+  "unresolved_ledger_rows": 4387,
+  "unclaimed_cpp_declarations": 80817,
+  "rust_public_paths": 63017,
+  "artifacts": {
+    "raw_rustdoc": {
+      "path": "porting/runtime-evidence/foundation-methods-api-raw-rustdoc.tar.gz",
+      "sha256": "818bf9bb0f42c939549f9b614295a3b7150484e656ba695eb88cfbd4f1e7f42c"
+    },
+    "capture": {
+      "path": "porting/runtime-evidence/foundation-methods-api-capture.gz",
+      "sha256": "7df2d6292e467eba319c750f5a2414f3e8109b9cfe4e287568a8e2f8f86d4628"
+    },
+    "normalizer": {
+      "path": "porting/runtime-evidence/foundation-methods-api-normalizer.gz",
+      "sha256": "49b4062eeb4ddd166a2ff09885e7706520c0d01686d84e5f77917975782348d4"
+    },
+    "crosswalk": {
+      "path": "porting/runtime-evidence/foundation-methods-api-crosswalk.gz",
+      "sha256": "cc7992d5057a9c0951bafb0ab646983fb563b9cc61cd530e7b66e80edcaa97cb"
+    },
+    "rust-api.json.gz": {
+      "path": "porting/api-inventory/rust-api.json.gz",
+      "sha256": "ac414f862d72adb967d0b895e24f50abbafd2b943b97d8eb4113c318c95ea465"
+    },
+    "api-crosswalk.json.gz": {
+      "path": "porting/api-inventory/api-crosswalk.json.gz",
+      "sha256": "8f85eb4793afc34fbdba52a7ffadf83bc3c9df05b8e26331803891d3d2b9e171"
+    },
+    "completeness.json": {
+      "path": "porting/api-inventory/completeness.json",
+      "sha256": "13abb1414c0335db90be08202467ef26d9223968fbd900e8b057ae0a1d4e87d5"
+    }
+  },
+  "current_status_lines": [
+    "Compiler API snapshot: 108622 observed C++ declarations; 23598 resolved implementation claims (source/ledger/artifact/tool fingerprints current)",
+    "Unresolved ledger rows: 4387; unclaimed C++ declarations: 80817",
+    "Full API coverage: UNKNOWN (explicit configuration/identity/mapping gaps); port completion: NOT COMPLETE"
+  ],
+  "api_parity_complete": false,
+  "configuration_matrix_complete": false,
+  "resolved_claim_delta": -38,
+  "carried_ambiguous_mappings": [
+    "NCollection_Vec2::Multiply(Element_t)",
+    "NCollection_Vec2::Multiplied(Element_t) const noexcept",
+    "NCollection_Vec3::Multiply(Element_t)",
+    "NCollection_Vec3::Multiplied(Element_t) const noexcept",
+    "NCollection_Vec4::Multiply(Element_t)",
+    "NCollection_Vec4::Multiplied(Element_t) const noexcept"
+  ],
+  "ambiguity_reason": "Rust compiler exposes both generic vector arithmetic and boolean specialization methods at each declared public path; the current path-only ledger cannot identify their distinct generic obligations. These six mappings remain unresolved, not evidence of a runtime regression or lost implementations.",
+  "limitations": [
+    "Raw all-features rustdoc capture and reachable-path normalization do not establish C++ overload/template behavioral equivalence.",
+    "Native capture retains existing platform/configuration/identity gaps;108622 is an observed candidate count, not a proven complete denominator.",
+    "No new native API implementations or original legacy mappings receive coverage credit from this inventory refresh."
+  ]
+}

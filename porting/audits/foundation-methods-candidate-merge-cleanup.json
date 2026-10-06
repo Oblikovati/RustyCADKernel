@@ -1,0 +1,72 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "363237df6ed055c1a15a6d76e4f8c6e6cd1609ea",
+  "validated_source_revision": "363237df6ed055c1a15a6d76e4f8c6e6cd1609ea",
+  "workspace_passed": 14778,
+  "workspace_failed": 0,
+  "workspace_ignored_doctests": 70,
+  "strict_workspace_all_targets_clippy_exit": 0,
+  "format_exit": 0,
+  "compiler_exit": 0,
+  "unchanged_runtime_inputs": 9917,
+  "artifacts": {
+    "workspace": {
+      "path": "porting/runtime-evidence/foundation-methods-workspace.gz",
+      "sha256": "cf175ae6bcec1f7a710b0e8bee97e7a6cdc4406f37da8c53f11d0f941d89aa08"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/foundation-methods-clippy.gz",
+      "sha256": "73021a2fc324820627b58248e98a66ab85e42c0810a085e645233eff1410e5cb"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/foundation-methods-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "9046747fb8c836266deaf029c993590bb86ea141",
+      "deleted_worktree": "/tmp/rustycad-cell-filter-protected-helpers",
+      "deleted_branch": "port/cell-filter-protected-helpers",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "01515bae5520bcfaa968c6413444c50d8ad57c73",
+      "deleted_worktree": "/tmp/rustycad-array-bounded-buffer-constructors",
+      "deleted_branch": "port/array-bounded-buffer-constructors",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "345f758dd0f825ada40a1aec734d609619f69083",
+      "deleted_worktree": "/tmp/rustycad-packed-map-helpers",
+      "deleted_branch": "port/packed-map-helpers",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "427239cc53b3acda4ae663b5d3dab11de40efe0e",
+      "deleted_worktree": "/tmp/rustycad-ubtree-kill-methods",
+      "deleted_branch": "port/ubtree-kill-methods",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    },
+    {
+      "branch_commit": "8cc6d0a3b937467ef2a9fea97c8b65f026ff4417",
+      "deleted_worktree": "/tmp/rustycad-dynamic-move-overloads",
+      "deleted_branch": "port/dynamic-move-overloads",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "broad_integrated_miri_still_running_at_cleanup": true,
+  "cleanup_basis": "Full integrated workspace tests and strict Clippy are green; candidate strict Miri receipts are already green. The continuing broad Miri run uses main and external root artifacts and has no dependency on these completed checkouts. New tasks use different worktrees.",
+  "full_workspace_checkpoint_pending": true,
+  "api_parity_complete": false
+}
