@@ -20,23 +20,16 @@ impl<T: Clone> Sequence<T> {
         assign_self: impl FnOnce(&mut T),
     ) -> Result<(), Failure> {
         // The native source Value expression runs before entering SetValue.
-        let source = self.offset("Value", source)?;
-        let destination = self.offset("ChangeValue", destination)?;
+        let source = self.checked_node("Value", source, true)?;
+        let destination = self.checked_node("ChangeValue", destination, true)?;
         if source == destination {
-            assign_self(&mut self.nodes[destination].value);
+            assign_self(unsafe { super::owner::item_mut(destination) });
             return Ok(());
         }
-        self.assign_distinct_nodes(destination, source);
+        // Distinct live owned nodes provide disjoint item borrows without aliasing their links.
+        unsafe {
+            super::owner::item_mut::<T>(destination).clone_from(super::owner::item_ref(source))
+        };
         Ok(())
-    }
-
-    fn assign_distinct_nodes(&mut self, destination: usize, source: usize) {
-        let split = destination.max(source);
-        let (earlier, later) = self.nodes.split_at_mut(split);
-        if destination > source {
-            later[0].value.clone_from(&earlier[source].value);
-            return;
-        }
-        earlier[destination].value.clone_from(&later[0].value);
     }
 }

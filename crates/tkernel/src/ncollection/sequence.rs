@@ -1,18 +1,27 @@
 //! One-based OCCT sequences whose items live in individually allocated, stable nodes.
 use super::{AllocatedBox, BaseAllocator};
 use crate::standard::Failure;
+use owner::SequenceNodeOwner;
+use std::marker::PhantomData;
+use topology::SequenceTopology;
 /// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
-    resource: BaseAllocator,
-    nodes: Vec<AllocatedBox<SequenceNode<T>>>,
+    topology: SequenceTopology,
+    owners: Vec<SequenceNodeOwner<T>>,
 }
 /// Shared double-ended iterator in index order; `sequence.iter()`.
 pub struct SequenceIter<'a, T> {
-    remaining: std::slice::Iter<'a, AllocatedBox<SequenceNode<T>>>,
+    front: *mut SeqNode,
+    back: *mut SeqNode,
+    remaining: usize,
+    item: PhantomData<&'a T>,
 }
 /// Exclusive double-ended iterator in index order; `sequence.iter_mut()`.
 pub struct SequenceIterMut<'a, T> {
-    remaining: std::slice::IterMut<'a, AllocatedBox<SequenceNode<T>>>,
+    front: *mut SeqNode,
+    back: *mut SeqNode,
+    remaining: usize,
+    item: PhantomData<&'a mut T>,
 }
 /// Detached bidirectional node position (OCCT's `Sequence::Iterator`): the current node
 /// and the node before it; `let cursor = sequence.cursor()`.
@@ -27,25 +36,25 @@ impl<T> Sequence<T> {
     /// Creates an empty sequence with a chosen allocator; `Sequence::<i32>::with_allocator(arena)`.
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
-            resource,
-            nodes: Vec::new(),
+            topology: SequenceTopology::new(resource),
+            owners: Vec::new(),
         }
     }
     /// Returns selected allocator identity; `sequence.allocator() == &arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        &self.resource
+        self.topology.allocator()
     }
     /// Returns the element count; `sequence.len() == 3`.
     pub fn len(&self) -> usize {
-        self.nodes.len()
+        self.topology.size()
     }
     /// Returns the signed length; `sequence.length() == 3`.
     pub fn length(&self) -> i32 {
-        self.nodes.len() as i32
+        self.topology.size() as i32
     }
     /// Checks for an empty sequence; `sequence.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.nodes.is_empty()
+        self.len() == 0
     }
     /// Returns the fixed lower bound; `sequence.lower() == 1`.
     pub const fn lower(&self) -> usize {
@@ -57,29 +66,27 @@ impl<T> Sequence<T> {
     }
     /// Borrows the first item, `None` where OCCT raises NoSuchObject; `sequence.first() == Some(&10)`.
     pub fn first(&self) -> Option<&T> {
-        self.nodes.first().map(|node| &node.value)
+        self.endpoint_value(true)
     }
     /// Borrows the first item exclusively (`ChangeFirst`); `*sequence.first_mut().unwrap() = 1`.
     pub fn first_mut(&mut self) -> Option<&mut T> {
-        self.nodes.first_mut().map(|node| &mut node.value)
+        self.endpoint_mut(true)
     }
     /// Borrows the final item; `sequence.last() == Some(&30)`.
     pub fn last(&self) -> Option<&T> {
-        self.nodes.last().map(|node| &node.value)
+        self.endpoint_value(false)
     }
     /// Borrows the final item exclusively (`ChangeLast`); `*sequence.last_mut().unwrap() = 3`.
     pub fn last_mut(&mut self) -> Option<&mut T> {
-        self.nodes.last_mut().map(|node| &mut node.value)
+        self.endpoint_mut(false)
     }
     /// Borrows an item by one-based index; `sequence.value(1)?`.
     pub fn value(&self, index: usize) -> Result<&T, Failure> {
-        let offset = self.offset("Value", index)?;
-        Ok(&self.nodes[offset])
+        self.read_indexed(index)
     }
     /// Borrows an item exclusively by one-based index; `*sequence.change_value(1)? = 10`.
     pub fn change_value(&mut self, index: usize) -> Result<&mut T, Failure> {
-        let offset = self.offset("ChangeValue", index)?;
-        Ok(&mut self.nodes[offset])
+        self.write_indexed(index)
     }
     /// Replaces an existing item; `sequence.set_value(1, 10)?`.
     pub fn set_value(&mut self, index: usize, value: T) -> Result<(), Failure> {
@@ -98,21 +105,17 @@ impl<T> Sequence<T> {
     }
     /// Borrows elements in order; `sequence.iter().sum::<i32>()`.
     pub fn iter(&self) -> SequenceIter<'_, T> {
-        SequenceIter {
-            remaining: self.nodes.iter(),
-        }
+        self.linked_iter()
     }
     /// Borrows exclusive elements in order; `sequence.iter_mut().for_each(|v| *v+=1)`.
     pub fn iter_mut(&mut self) -> SequenceIterMut<'_, T> {
-        SequenceIterMut {
-            remaining: self.nodes.iter_mut(),
-        }
+        self.linked_iter_mut()
     }
     /// Captures a position at the first element; `let cursor=sequence.cursor()`.
     pub fn cursor(&self) -> SequenceCursor {
         SequenceCursor::new(self, true)
     }
-    /// One-based index to vector offset, or OCCT's OutOfRange naming the index.
+    /// Checks the one-based index and returns its zero-based numeric offset.
     fn offset(&self, member: &str, index: usize) -> Result<usize, Failure> {
         if index == 0 || index > self.len() {
             return Err(out_of_range(member, index, &format!("1..={}", self.len())));
@@ -155,9 +158,6 @@ impl<T> std::ops::IndexMut<usize> for Sequence<T> {
             .unwrap_or_else(|error| panic!("{}", error.message()))
     }
 }
-fn address<T>(value: &T) -> usize {
-    value as *const T as usize
-}
 /// OCCT's `Standard_OutOfRange` for a sequence member, naming index and valid range.
 fn out_of_range(member: &str, index: usize, expected: &str) -> Failure {
     Failure::out_of_range(&format!(
@@ -180,11 +180,15 @@ mod base_iterator;
 mod base_storage;
 pub use base_iterator::BaseSequenceIterator;
 pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
+#[allow(unsafe_code)]
 mod assignment;
 mod borrowed;
 mod cursor_contracts;
+#[allow(unsafe_code)]
 mod editing;
+#[allow(unsafe_code)]
 mod iteration;
+#[allow(unsafe_code)]
 mod links;
 // Raw node callbacks restore the exact typed allocation and its original allocator.
 #[allow(unsafe_code)]
@@ -194,6 +198,7 @@ mod node_allocation;
 mod nodes;
 pub use nodes::{SeqNode, SequenceNode};
 mod method_contracts;
+#[allow(unsafe_code)]
 mod operations;
 mod signed_indices;
 
@@ -204,3 +209,12 @@ mod basic_iterator;
 mod basic_node;
 pub use basic_iterator::BaseSequenceBasicIterator;
 pub use basic_node::{BasicSequenceNode, BasicSequenceNodeMut};
+
+// Canonical raw topology and owners are private; safe methods enforce live-node borrowing.
+#[allow(unsafe_code)]
+mod access;
+#[allow(unsafe_code)]
+mod owner;
+#[allow(unsafe_code)]
+mod topology;
+pub use topology::SequenceBaseAccess;

@@ -82,8 +82,8 @@ pub use sparse_array::{
 mod sequence;
 pub use sequence::{
     BaseSequence, BaseSequenceBasicIterator, BaseSequenceIterator, BaseSequenceRawIterator,
-    BasicSequenceNode, BasicSequenceNodeMut, DelSeqNode, SeqNode, Sequence, SequenceCursor,
-    SequenceIter, SequenceIterMut, SequenceNode,
+    BasicSequenceNode, BasicSequenceNodeMut, DelSeqNode, SeqNode, Sequence, SequenceBaseAccess,
+    SequenceCursor, SequenceIter, SequenceIterMut, SequenceNode,
 };
 mod h_sequence;
 pub use h_sequence::HSequence;
