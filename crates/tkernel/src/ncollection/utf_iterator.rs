@@ -5,6 +5,7 @@
 //! zeros, so truncated sequences decode exactly as they do over zero-padded native memory.
 mod encode;
 mod positions;
+mod signed_wide;
 mod unit;
 pub use unit::{UtfUnit, WideChar};
 

@@ -1,0 +1,89 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "NCollection_UtfIterator signed 16/32-bit input dispatch and Rust signed-output adapters",
+  "status": "branch_validated_pending_main_integration",
+  "base_commit": "aa22e3291ab35e3cae8821b4c3d6dbbca55ce672",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/utf_iterator.rs": "22470fbfc6decd4a708939a13d0ee861a17a3591f64b00fa43279cb63bea2ec1",
+    "crates/tkernel/src/ncollection/utf_iterator/encode.rs": "68ed4a287940fe930856f3a25e51172a0b1ffd3dfd9e6eb9d4203e929c70d6da",
+    "crates/tkernel/src/ncollection/utf_iterator/positions.rs": "bcfe23db964e5e257c8db2ff71742e49dc1d55ef558408223c55e930dbc6e2c0",
+    "crates/tkernel/src/ncollection/utf_iterator/signed_wide.rs": "632f61c30486b9d099d967271f65dd093ce6160537d346562d583a8ce1294c20",
+    "crates/tkernel/src/ncollection/utf_iterator/unit.rs": "e5823e75e911128800703f683cb32a5be156ec0474e45bc5af6e65dffda20fd9",
+    "crates/tkernel/src/ncollection/utf_string.rs": "7577ed51b07412bfcdc17b5cbe8c665a0205bbd344ce56cd028ec425a626df2d",
+    "crates/tkernel/src/ncollection/utf_string/conversion.rs": "5fe6dc47d01099c5177d60511865594a1fa910e2ace1262aae73f03d62e820b1",
+    "crates/tkernel/src/ncollection/utf_string/locale.rs": "b42dedf5d1bf0c0e7a7e2a6bee651be6bcff79f98925c4387f5d53e8812e9a45",
+    "crates/tkernel/src/ncollection/utf_string/locale_fallback.rs": "782bf1a84f4893bed6ca7b179e12d16c280d3897b4ad861f813c4fcc30186ce8",
+    "crates/tkernel/src/ncollection/utf_string/locale_unix.rs": "195637af40364e00ba5d2f3c6a9705ed3d86631c845e107e7afa355d7a63d639",
+    "crates/tkernel/src/ncollection/utf_string/locale_windows.rs": "5533ee0a13085cbd304842b624b27cf81e90218d738e1905660a362ff93e094f",
+    "crates/tkernel/src/ncollection/utf_string/method_contracts.rs": "c5e588c8b35ca4b9e3781c5efd682a255f2f4097a71f41cad11a603a84758cc6",
+    "crates/tkernel/src/ncollection/utf_string/operators.rs": "4eb11a66857ae00b11a0081f66ab6b7a339edb0395e62047953ff59e4830e935",
+    "crates/tkernel/tests/ncollection_utilities/utf_iterator.rs": "e67b55eac14c10eb3af1855c68b429b49f5836608187ac2c7df628a613ec3611",
+    "crates/tkernel/tests/ncollection_utilities/utf_string.rs": "4d4a25f5e27957d65f665fdcbdf8493aba8086f1cb4a98fdf32a766b335b9a6a",
+    "crates/tkernel/tests/utf_iterator_method_contracts.rs": "e8a775da3f03865f183a5a1b6ff36adbe4fe87fa8df40191d5b8a4775e4c7a28",
+    "crates/tkernel/tests/utf_signed_wide_contracts.rs": "b15e13d6c07a91c6f1fd0c3868d198b5fb3f36eba0a00bfcf197e0163067ab2e",
+    "crates/tkernel/tests/utf_string_method_contracts.rs": "1d25b9a47f532be03b0e744f5174df4b8dbe204e3aa8359f56d51ea15bc07c5d",
+    "tools/oracle/tkernel_utf_signed_wide.cxx": "723218c708fd3288372edc0aaa47627959dcecdd94122f93bcb9c348b643f0d0",
+    "tools/oracle/tkernel_utf_signed_wide.expected": "7ad6f1af7045c037fe712b2338f8319a10db15c25ae0cad24949a41cc53de050"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/utf-signed-wide-rust.gz",
+      "sha256": "0d28d25753d77e0c4427e4b5f981a35650c158e38cc8f80c3d043c297761754a"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/utf-signed-wide-miri.gz",
+      "sha256": "cdc77ff3ebe101704dff44ecb23f339be7f97bac220e9737281918428a5393c6"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/utf-signed-wide-clippy.gz",
+      "sha256": "9b25f085c5ddda2810ed71fa0dadd9b7facce9f2cabb7576e54f914da1341703"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/utf-signed-wide-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/utf-signed-wide-native.gz",
+      "sha256": "b3d36f5761158a214f81090795230996bea7ed62527c61c1844f5949b3be832c"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/utf-signed-wide-source.tar.gz",
+      "sha256": "1c4d0436a1263320c64922cd1c0f8fea1151dc066f6bc42278d63a1e4a4cac77"
+    }
+  },
+  "runtime": {
+    "focused_rust_passed": 51,
+    "new_contract_tests": 6,
+    "strict_provenance_miri_passed": 27,
+    "new_miri_passed": 6,
+    "native_oracle_rows": 30,
+    "native_original_test_declarations": 0,
+    "strict_clippy_exit": 0,
+    "fmt_exit": 0
+  },
+  "behavior": [
+    "Native signed 16-bit decoding numerically promotes negative units to u32; surrogate-looking bits do not form a pair because every nonnegative i16 is below 0xD800. Rust preserves this behavior.",
+    "Signed 32-bit input reads one unit and retains its converted u32 value, including negative values outside the legal Unicode range.",
+    "Unsigned output from signed input is compared against native UTF-8/16/32 outputs, including illegal values and untouched output tails.",
+    "Shared unsigned encoders drive safe signed destination storage through bounded stack buffers, avoiding pointer alias casts. Storage-bit conversion remains separate from input numeric promotion."
+  ],
+  "evidence_scope": {
+    "native_input_and_unsigned_output_rows": 30,
+    "signed_destination_tests": "Rust bit-storage adaptation tested against existing unsigned encoding; native GetUtf<short/int> reinterpret-cast aliasing behavior is not claimed.",
+    "compiler_body_binding": "pending coordinating-agent fresh capture"
+  },
+  "remaining_gaps": [
+    "Mutable ChangeBufferHere still needs exclusive input storage; casting the existing shared slice cannot supply writable alias parity.",
+    "Native arbitrary code-unit types, every wchar_t ABI/configuration and signed-output pointer aliasing domains remain unproven.",
+    "Synthetic zero padding, checked output buffers and null-increment errors remain explicit Rust adaptations.",
+    "No whole-class completion or global declaration/test mapping credit is claimed."
+  ],
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx": "2bfcc2e02561e5c4fc9f0c4c8762602aaebaa020bf2a39b179f951f347a573de",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.lxx": "5b3624e2f8342c8c86d342d61845bcb368c7a289c4f6f9d0f1f3c34281c00e5d"
+  }
+}
