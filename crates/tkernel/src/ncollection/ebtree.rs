@@ -1,6 +1,7 @@
 //! Editable bounding tree maintains object-to-leaf bindings through node moves.
 use super::{BaseAllocator, BoundingNode, BoundingVolume, DataMap, HashKey, TreeSelector, UBTree};
 use crate::{ncollection::destructor_unwind::DeferredDestructorPanic, standard::Failure};
+mod removal;
 /// Unique objects with indexed removal; `EBTree::<i32, Bounds>::default()`.
 pub struct EBTree<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolume> {
     tree: UBTree<T, B>,
@@ -55,17 +56,21 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
             self.rebind_leaf(previous);
         }
     }
-    fn rebind_leaf(&mut self, index: usize) {
+    fn rebind_leaf(&mut self, index: usize) -> bool {
         // Native ChangeSeek changes only the pointer, without copying/reinserting the key.
         if let Some(stored) = self.objects.change_seek(self.tree.node(index).object()) {
             *stored = index;
+            return true;
         }
+        false
     }
     /// Locate a leaf or return Standard_NoSuchObject; `tree.find_node(&1)?`.
     pub fn find_node(&self, object: &T) -> Result<&BoundingNode<T, B>, Failure> {
         Ok(self.tree.node(*self.objects.find(object)?))
     }
-    /// Absorb the sibling and update ancestor bounds; `tree.remove(&1)`.
+    /// Absorb the sibling and update ancestor bounds in place; `tree.remove(&1)`.
+    /// The surviving leaf is rebound before ancestor callbacks. Rust cleanup panics
+    /// repair its index before resuming; a failed bounds assignment retains native partial state.
     pub fn remove(&mut self, object: &T) -> bool {
         let Ok(&index) = self.objects.find(object) else {
             return false;
@@ -75,9 +80,7 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
             return true;
         }
         self.objects.unbind(object);
-        if let Some(parent) = self.tree.remove_leaf(index) {
-            self.rebind_leaf(parent);
-        }
+        self.remove_indexed_leaf(index);
         true
     }
     /// Select with native branch pruning and stopping; `tree.select(&mut selector)`.
