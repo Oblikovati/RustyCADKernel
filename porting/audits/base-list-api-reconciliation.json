@@ -1,0 +1,303 @@
+{
+  "schema": "rustycad.read-only-binding-reconciliation.v1",
+  "source_revision": "e781f597df39f9eb278bc1c6d7a00c73ae47c895",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Every captured declaration owned by NCollection_BaseList, including both Iterator classes, protected methods, fields, allocation macros, aliases, and template-owned non-candidates. No BaseSequence/BaseMap method conclusions are claimed.",
+  "rust_capture_revision": "e781f597df39f9eb278bc1c6d7a00c73ae47c895",
+  "artifacts": {
+    "matrix": {
+      "path": "porting/audits/base-list-api-correction-matrix.jsonl",
+      "sha256": "0f142b91a18dfc67e91eb8e28f29e8c11901125fd6b0bcbc746ac5ba27be5a7f",
+      "rows": 115
+    },
+    "rust_body_catalog": {
+      "path": "porting/audits/base-list-api-rust-bodies.jsonl",
+      "sha256": "f734c5c07c260b49e76f80170c7d0ae53e077ad9f423a0e5aa1ba3176977cf6a",
+      "rows": 67
+    },
+    "source_archive": {
+      "path": "porting/runtime-evidence/base-list-api-sources.tar.gz",
+      "sha256": "afe0bda43d136bd88c8c544b20d801c9aa9a4a25760b38c44fcb75cb53eb33bb"
+    }
+  },
+  "counts": {
+    "captured_native_records": 115,
+    "api_visible_candidates": 96,
+    "non_candidate_records": 19,
+    "existing_claimed_candidates": 14,
+    "unclaimed_api_candidates": 82,
+    "exact_rust_binding_records": 67,
+    "safe_partial_proposals": 63,
+    "proposal_replacements": 13,
+    "proposal_additions": 50,
+    "status_counts": {
+      "partial_body_binding": 80,
+      "trait_default_operator_without_project_body_proof": 2,
+      "missing_object_allocation_surface": 8,
+      "partial_conditional_body_binding_requires_impl_selector": 3,
+      "partial_nominal_or_field_binding": 10,
+      "template_parameter_not_separate_api_candidate": 6,
+      "language_drop_glue_without_exact_body_proof": 1,
+      "missing_native_iterator_alias_contract": 5
+    }
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-inventory/rust-api.json.gz": "7b529521800dc7ebcfd5e01e3f3295ed30758d5681098b8143cd653ee788ef07",
+    "porting/api-inventory/api-crosswalk.json.gz": "615f92301ff2bb6d31f223ce6494eeca48d442215167be999fa9424e4e4075b0",
+    "porting/parity.json": "58c22bae46fb6ad257c3ddc34f4a9b7bfd4a40bb9048a7f9b49195774487ecd8",
+    "target/api-proof/rustdoc-map-engines/crates/rustycad_tkernel.json": "c50ac971f4235a6f358acfcfa3f471c40446b6d552dfd4da780a1726deaa7fa9"
+  },
+  "native_header": {
+    "path": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+    "sha256": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43"
+  },
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "api_parity_complete": false,
+  "checks": {
+    "commands": [
+      {
+        "stage": "rust",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "rustycad-tkernel",
+          "--test",
+          "base_list_storage_contracts",
+          "--test",
+          "base_list_basic_iterator_contracts"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "porting/runtime-evidence/base-list-api-rust.gz",
+          "sha256": "60bad2f9f2e84a37f2fb7441bd1e817e62c2bbae552bec0097909f04990040dc",
+          "uncompressed_sha256": "315272c30e1fe5c08708958cc3d351f6d951597723a8ea8c8c36f7fbd3399db2"
+        }
+      },
+      {
+        "stage": "storage-compile",
+        "command": [
+          "g++",
+          "-std=c++17",
+          "-O2",
+          "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+          "/tmp/rustycad-base-api-reconciliation/tools/oracle/tkernel_base_list_storage_contracts.cxx",
+          "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-lTKernel",
+          "-o",
+          "/tmp/base-api-storage-oracle"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "porting/runtime-evidence/base-list-api-storage-compile.gz",
+          "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+          "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "stage": "storage-run",
+        "command": [
+          "/tmp/base-api-storage-oracle"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "porting/runtime-evidence/base-list-api-storage-run.gz",
+          "sha256": "9d958e72e30f6b48310a74177e40d09891ebf06c8f790f51025d98f0c4e71b33",
+          "uncompressed_sha256": "6ec64eff8d2cd9ea47994da1626d2b62433588a3f4d3b566bf9859f7632f2ca7"
+        }
+      },
+      {
+        "stage": "basic_iterator-compile",
+        "command": [
+          "g++",
+          "-std=c++17",
+          "-O2",
+          "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+          "/tmp/rustycad-base-api-reconciliation/tools/oracle/tkernel_base_list_basic_iterator_contracts.cxx",
+          "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+          "-lTKernel",
+          "-o",
+          "/tmp/base-api-basic_iterator-oracle"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "porting/runtime-evidence/base-list-api-basic_iterator-compile.gz",
+          "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+          "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "stage": "basic_iterator-run",
+        "command": [
+          "/tmp/base-api-basic_iterator-oracle"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "porting/runtime-evidence/base-list-api-basic_iterator-run.gz",
+          "sha256": "85141f9f0ac197c9094b6afef2aa7aa120abc8a74e77777c45fd7742cfff9098",
+          "uncompressed_sha256": "5b810c8be6c14c9737e66091a7aa5fcf010e798b9a91c5f01436b85d379bca6a"
+        }
+      }
+    ],
+    "rust_passed": 23,
+    "native_rows": {
+      "storage": 19,
+      "basic_iterator": 9
+    },
+    "native_expected_bytes_equal": true,
+    "full_workspace_tests_rerun": false,
+    "runtime_scope_note": "Existing 23 focused tests and 28 native oracle rows were re-run unchanged. Related fixture success does not establish per-declaration complete behavior, ABI, all instantiations, or new original legacy test credit."
+  },
+  "audited_source_sha256": {
+    "crates/tkernel/src/ncollection/base_list.rs": "391b5f76f2ebe9ac1851180e2744efcf68d787aa55d269f4cd4f0fd0efd409a1",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator.rs": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd",
+    "crates/tkernel/src/ncollection/base_list/basic_node.rs": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+    "crates/tkernel/src/ncollection/base_list/editing.rs": "0d9f09eeabccad4c528ffd1a69979b2ba3dad2f2139719bbd5abca674a64ec26",
+    "crates/tkernel/src/ncollection/base_list/removal_phase.rs": "1e4dbe75d373035d8d6b1c8c4dff8d30e289c43ad786dc2d739256cc74b92e67",
+    "crates/tkernel/src/ncollection/base_list/splicing.rs": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+    "crates/tkernel/src/ncollection/list.rs": "12b26ba9b6681c74c013201988574241e43b4a0e033a6e5763cd5ae379f0d68e",
+    "crates/tkernel/src/ncollection/list/cursor_state.rs": "f411cf9ce5672e0f048e61bad62c0359b7c0410c4b7a09c52929ba39ed5fd610",
+    "crates/tkernel/src/ncollection/list/iteration.rs": "31e6883271e409f7d7606ba7ddeeff6829e784073c819201b59607f826f886fb",
+    "crates/tkernel/src/ncollection/list/topology.rs": "6e4724fabfc8dcbb9bcc9b9d872700c5c7b83475f2e3ff56f647390be0a21258",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts.rs": "eb50cdf7f5476485eeb884ceb8977d32e6ffdbe8581d25fb4b11bd26de44fe9e",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts/fixture.rs": "025215b3390fcdfde37307bd3cb7f9192aceb75b33a2eaa795289b4141d5cb00",
+    "crates/tkernel/tests/base_list_storage_contracts.rs": "ebdb26689afd33dc855af84a35d3374bf72f3fc4418173d6e9909d597a777291",
+    "crates/tkernel/tests/base_list_storage_contracts/fixture.rs": "24ecbe3a88b0116aaa4aacd164ca89837ce866b65ae45ef65c8ebcd113c45fa3",
+    "tools/oracle/tkernel_base_list_basic_iterator_contracts.cxx": "870a89e27735da542ac35e4fe3b420694c7423049cb2d1198fde4f59298ac0fa",
+    "tools/oracle/tkernel_base_list_basic_iterator_contracts.expected": "5b810c8be6c14c9737e66091a7aa5fcf010e798b9a91c5f01436b85d379bca6a",
+    "tools/oracle/tkernel_base_list_storage_contracts.cxx": "6f565a4111547b93d5ab92bc40ee4b5c0b472d7e5aaa0b545d53a3501206fb5d",
+    "tools/oracle/tkernel_base_list_storage_contracts.expected": "6ec64eff8d2cd9ea47994da1626d2b62433588a3f4d3b566bf9859f7632f2ca7"
+  },
+  "evidence_groups": {
+    "storage": {
+      "receipts": [
+        "porting/audits/base-list-storage-method-contracts.json"
+      ],
+      "native_fixture": "tools/oracle/tkernel_base_list_storage_contracts.cxx",
+      "rust_fixture": "crates/tkernel/tests/base_list_storage_contracts.rs",
+      "domain": "Raw externally owned valid nodes, native pointer/callback ordering, transfer, allocator identity, count and empty-position errors. Aliasing self append/prepend is spelled splice_self in Rust. Native allocation macro/ABI/noexcept and arbitrary forged raw state closure remain open."
+    },
+    "basic": {
+      "receipts": [
+        "porting/audits/base-list-basic-iterator-method-contracts.json"
+      ],
+      "native_fixture": "tools/oracle/tkernel_base_list_basic_iterator_contracts.cxx",
+      "rust_fixture": "crates/tkernel/tests/base_list_basic_iterator_contracts.rs",
+      "domain": "Custom writable/read-only nodes, nonzero embedded link offset, explicit caller lifetime/alias obligations; C++ IsConstant is the inverse of Rust MUTABLE. Native const member mutable access becomes &mut self; no safe STL trait adapter or all-template/alias closure claimed."
+    },
+    "field": {
+      "domain": "Compiler-visible public fields replace native public/protected slots through Rust composition. No binary-layout or inheritance ABI equivalence claim."
+    },
+    "nominal": {
+      "domain": "Compiler-visible base storage/raw iterator/generic cursor types. Generic bounds, inherited name visibility, allocator handle semantics and layout still require full-domain proof."
+    }
+  },
+  "historical_receipt_findings": [
+    {
+      "path": "porting/audits/base-list-storage-method-contracts.json",
+      "finding": "partial_uncommitted_draft is historical metadata although code/artifact is now integrated. The generic candidate lists sometimes include both constructor forms or both pointer mutabilities; this matrix selects exact native records independently."
+    },
+    {
+      "paths": [
+        "porting/audits/base-list-storage-method-contracts.json",
+        "porting/audits/base-list-basic-iterator-method-contracts.json"
+      ],
+      "finding": "Their statement that typed List retains an independent node engine is stale: current list.rs delegates allocator/count/empty queries through BaseListStorage and ListTopology stores BaseListStorage. Historical runtime artifacts remain scoped to their source hashes."
+    },
+    {
+      "path": "porting/audits/base-list-cursor-selectors.json",
+      "finding": "Its statement that ListCursor has a sole address field is stale after predecessor state was introduced. Current equality is explicit address-only; exact base-surface replacements are recorded separately."
+    }
+  ],
+  "historical_receipt_source_freshness": {
+    "base-list-storage-method-contracts.json": {
+      "receipt_sha256": "fd2c4d2748001a8b8f35cc928d613caf856f226f2f02c9fa28426fc8144d41aa",
+      "matching_source_hashes": [
+        "crates/tkernel/src/ncollection/allocator/owned.rs",
+        "crates/tkernel/src/ncollection/base_list/cursor.rs",
+        "crates/tkernel/src/ncollection/base_list/splicing.rs",
+        "crates/tkernel/src/ncollection/base_map/link_node.rs",
+        "crates/tkernel/tests/base_list_storage_contracts/fixture.rs",
+        "crates/tkernel/tests/base_list_storage_contracts.rs",
+        "tools/oracle/tkernel_base_list_storage_contracts.cxx",
+        "tools/oracle/tkernel_base_list_storage_contracts.expected"
+      ],
+      "changed_or_missing_source_hashes": [
+        "crates/tkernel/src/ncollection/base_list/editing.rs",
+        "crates/tkernel/src/ncollection/base_list.rs",
+        "crates/tkernel/src/ncollection/list_node.rs",
+        "crates/tkernel/src/ncollection/mod.rs"
+      ]
+    },
+    "base-list-basic-iterator-method-contracts.json": {
+      "receipt_sha256": "d3a3f647800960329fca4c297ed7400cacc3f1bcce14b32d5c7e3bdfd9cec693",
+      "matching_source_hashes": [
+        "crates/tkernel/src/ncollection/base_list/basic_iterator.rs",
+        "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs",
+        "crates/tkernel/src/ncollection/base_list/basic_node.rs",
+        "crates/tkernel/tests/base_list_basic_iterator_contracts.rs",
+        "crates/tkernel/tests/base_list_basic_iterator_contracts/fixture.rs",
+        "tools/oracle/tkernel_base_list_basic_iterator_contracts.cxx",
+        "tools/oracle/tkernel_base_list_basic_iterator_contracts.expected"
+      ],
+      "changed_or_missing_source_hashes": [
+        "crates/tkernel/src/ncollection/base_list.rs",
+        "crates/tkernel/src/ncollection/mod.rs"
+      ]
+    }
+  },
+  "next_porting_actions": [
+    {
+      "priority": 1,
+      "action": "Root serially validate and apply the 63 exact partial rows: replace 13 typed-facade implementation claims and add 50 missing links. Keep all statuses partial, with zero implemented-parity credit."
+    },
+    {
+      "priority": 2,
+      "action": "Add explicit compiler impl-context selection for six Init/Initialize/constructor overloads and three conditional accessors; do not arbitrarily pick a same-path specialization. Matrix already records exact bodies and the C++/Rust boolean inversion."
+    },
+    {
+      "priority": 3,
+      "action": "Audit a shared Rust object-allocation surface for all eight DEFINE_STANDARD_ALLOC/DEFINE_NCOLLECTION_ALLOC declarations, including allocator placement new/delete and failure cleanup. Existing node allocation is not a proof of BaseList object allocation."
+    },
+    {
+      "priority": 4,
+      "action": "Prove destructor member-drop ordering and the five native iterator aliases/trait obligations. Keep destructor exclusion and alias gaps explicit until language-equivalence evidence exists."
+    },
+    {
+      "priority": 5,
+      "action": "Reconcile BaseSequence and BaseMap separately with the same exact-ID/body/partial-domain discipline; this audit grants them no coverage."
+    }
+  ],
+  "limitations": [
+    "This is a complete reconciliation of the captured BaseList records, not proof that compiler capture has a complete platform/configuration denominator.",
+    "The 19 api_visible=false records remain present and receive no separate candidate credit. Template wrapper and underlying method records are not collapsed.",
+    "A compiler body and source hash prove an implementation exists; fixture success proves only the exercised cases. All recommended ledger changes remain partial.",
+    "Two operator!= records use the standard PartialEq default, whose body is not a project-defined compiler path in this capture. No direct ne-body credit is granted.",
+    "No shared ledger or published inventory is edited by this branch."
+  ],
+  "native_toolchain": {
+    "g++": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "include_wrapper_sha256": "1aa98a7caddaf1f9745701f319d86bea7ff7738ede1966290b9626d241724af3",
+    "compiled_header_path": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+    "compiled_header_sha256": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43",
+    "library_path": "target/occt-modeling-full/lin64/gcc/libi/libTKernel.so",
+    "library_sha256": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee"
+  },
+  "artifact_validation": {
+    "unique_native_ids": 115,
+    "pinned_rust_binding_records": 67,
+    "unique_cpp_and_rust_partial_proposals": 63,
+    "source_hashes_verified": 20,
+    "proposal_ids_equal_exact_matrix_native_ids": true,
+    "proposal_body_keys_equal_exact_selected_catalog_keys": true,
+    "all_proposals_status_partial": true,
+    "git_diff_check_exit_code": 0
+  }
+}
