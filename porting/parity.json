@@ -70426,14 +70426,6 @@
       "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
     },
     {
-      "upstream_id": "NCollection_HArray1(int,int,const TheItemType&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_value",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
-    },
-    {
       "upstream_id": "NCollection_HArray1(const TheItemType&,int,int,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -245102,6 +245094,274 @@
       ],
       "status": "partial",
       "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const int,const int,const TheItemType &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_value",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::HArray1::with_value",
+        "rustycad_tkernel::ncollection::HArray1::with_value_ref",
+        "rustycad_tkernel::ncollection::HArray1::with_value_ref_with_assignment"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::HArray1::with_value",
+          "declaration_sha256": "c0f856f535014f05d00188d8440983e1a6a66c2dea48b6cbbf053bed2ce0be76",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HArray1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::harray::HArray1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Default",
+                              "resolved_item_path": "core::default::Default",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::HArray1::with_value_ref",
+          "declaration_sha256": "69afc044429ae60729f581b3cae413f7a8a096ecf771e05f54eb8069f56c0d6f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HArray1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::harray::HArray1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Default",
+                              "resolved_item_path": "core::default::Default",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::HArray1::with_value_ref_with_assignment",
+          "declaration_sha256": "f2f837bb67d0e40d0ff746b555ad99e4d69ff0f9fe27369284e5ac79671e8d7e",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HArray1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::harray::HArray1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Default",
+                              "resolved_item_path": "core::default::Default",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial fill-constructor domain: default all elements, then assign borrowed donor in order. Explicit callback supports non-Clone assignment-only types; Clone convenience dispatches clone_from, not clone. Assignment failure drops all initialized elements in native forward order; donor remains caller-owned. Owned with_value remains a consuming Rust convenience. Shared wrapper requires Send+Sync+static and guarded base access; allocation/default-constructor failure, arbitrary C++ lifetime/address hooks, primitive uninitialized defaults and full inherited surface remain outside this proof. See porting/audits/harray1-borrowed-initialization.json."
     }
   ],
   "tests": [
