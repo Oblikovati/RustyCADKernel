@@ -1,0 +1,198 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "bounded_defined_domains_pending_integration",
+  "branch": "port/dynamic-replacement-policy",
+  "base_commit": "aff420190b0d58dc037c881a51323fd40c8a9459",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "9c66024e3f842b8beef901a79b6f5b2711ceb29586b19c4ba6566a5b67202ece",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/replacement.rs": "6653000b73da6836ec6a607f4de3e1b8d44fef93ec0fa73e67d04e5ca032ee58",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs": "8dc0294af2b18dfddffd593af87a0bf11dd909fe1bf5b4d6281fddc25ca7a840",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/contracts.rs": "466f4ca295f14298ca9b0c766fe174287a6841d3e7f320ca1cddf099de819b46",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/oracle.rs": "1c7668759bdd3398a378fe2198c535f64b23cb7be5d7690d995fcf161dcb0c54",
+    "tools/oracle/tkernel_dynamic_replacement_policy.cxx": "ca65c79210d9bab4082d51be7609997b03f5bde90d1f3bccad0a74c0bb891a27",
+    "tools/oracle/tkernel_dynamic_replacement_policy.expected": "f60b0c1d149adbe05e1507f59006520c6208405816f61d959fa04f88de0d905d"
+  },
+  "upstream_sha256": {
+    "NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-replacement-policy-focused.log.gz": "765546a1cd9d9740df4a009659be0c2810a10e5d4866ed4cb5a645b8ce23d7c8",
+    "porting/runtime-evidence/dynamic-replacement-policy-miri-strict.log.gz": "e2dc25d4949abe453bc75111e9bbcc91be101425d374e8be7b27fb74492afede",
+    "porting/runtime-evidence/dynamic-replacement-policy-clippy.log.gz": "5abe60d16507051f61ad368fce336eae72e84213751c74f08b75c2a0f43caf2e",
+    "porting/runtime-evidence/dynamic-replacement-policy-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-replacement-policy-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-replacement-policy-oracle-runtime.log.gz": "3bfab0ff39b5e845e6410c5a36da121dafe2a12e3930b5f4c9d5fff313f79166",
+    "porting/runtime-evidence/dynamic-replacement-policy-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-replacement-policy-source.json.gz": "26e568785f930433ce1d169cdf7835e8e4cea171e92485245109ecec268c413c"
+  },
+  "source_scope": "New raw replacement policy submodule, focused tests and native fixture. Existing DynamicArray algorithms, original tests and public docs/doctests are unchanged. Full workspace closure supplied by coordinating integration checkpoint.",
+  "exit_codes": {
+    "focused": 0,
+    "miri-strict": 0,
+    "clippy": 0,
+    "native": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0,
+    "fmt": 0
+  },
+  "focused_rust_passes": 120,
+  "new_test_count": 7,
+  "new_test_names": [
+    "dynamic_array_replacement_policy::contracts::direct_policy_destroys_actual_array_slot_before_construction",
+    "dynamic_array_replacement_policy::contracts::copy_preferred_policy_keeps_temporary_value_until_its_drop",
+    "dynamic_array_replacement_policy::contracts::assignment_policy_updates_actual_array_slot_with_mutated_donor_drop",
+    "dynamic_array_replacement_policy::contracts::failed_transfer_leaves_array_slot_unpublished_until_explicit_repair",
+    "dynamic_array_replacement_policy::contracts::noexcept_move_policy_reconstructs_actual_array_slot_in_native_order",
+    "dynamic_array_replacement_policy::contracts::throwing_assignment_keeps_published_target_live_with_native_prefix_change",
+    "dynamic_array_replacement_policy::oracle::native_replacement_policy_rows_match_runtime_traces"
+  ],
+  "strict_provenance_miri_passes": 7,
+  "strict_provenance_flags": "-Zmiri-strict-provenance; no leak-ignore or permissive-provenance flags",
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "subsequent_reviews": [
+      "porting/audits/dynamic-array-iterator-tail.json",
+      "porting/audits/dynamic-array-native-insertion.json",
+      "porting/audits/dynamic-array-protected-storage.json",
+      "porting/audits/dynamic-array-raw-lifetime.json"
+    ],
+    "current_change": "No original test declarations/assertions changed. All52 prior mappings joined against fresh native and Rust successful test names. Existing method, iterator, insertion, storage and raw-lifetime regressions remain green."
+  },
+  "protected_declaration_forms_in_batch": 1,
+  "native_declaration": "NCollection_DynamicArray<T>::replaceAt(pointer,Args&&...)",
+  "native_line": 1037,
+  "public_declaration_bindings": [
+    {
+      "rust": "DynamicArrayStorageExtension::replace_at_assign",
+      "native_branch": "is_assignable_v<T&,T&&>",
+      "scope": "Explicit temporary constructor and assignment hook, mutable donor, temporary Drop on normal/unwind path; target remains valid after assignment panic",
+      "rows": [
+        "assign_success",
+        "assign_constructor_failure",
+        "assignment_failure",
+        "trivial_assign",
+        "default_assign"
+      ]
+    },
+    {
+      "rust": "DynamicArrayStorageExtension::replace_at_reconstruct",
+      "native_branch": "nonassignable && (move constructible || copy constructible)",
+      "scope": "Temporary before old Drop; explicit caller-selected copy/move transfer after old destruction; failed transfer leaves detached slot dead and destroys temporary",
+      "rows": [
+        "move_success",
+        "move_constructor_failure",
+        "copy_success",
+        "copy_constructor_failure",
+        "copy_transfer_failure"
+      ]
+    },
+    {
+      "rust": "DynamicArrayStorageExtension::replace_at_direct",
+      "native_branch": "nonassignable && !move constructible && !copy constructible",
+      "scope": "Old Drop before constructor; failed constructor leaves detached slot dead; no transfer hook",
+      "rows": [
+        "direct_success",
+        "direct_constructor_failure"
+      ]
+    }
+  ],
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_replacement_policy.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_replacement_policy.expected",
+    "row_count": 12,
+    "exact_runtime_join_count": 12,
+    "row_keys": [
+      "assign_success",
+      "assign_constructor_failure",
+      "assignment_failure",
+      "move_success",
+      "move_constructor_failure",
+      "copy_success",
+      "copy_constructor_failure",
+      "copy_transfer_failure",
+      "direct_success",
+      "direct_constructor_failure",
+      "trivial_assign",
+      "default_assign"
+    ],
+    "rust_test": "dynamic_array_replacement_policy::oracle::native_replacement_policy_rows_match_runtime_traces",
+    "joined_columns": "Throw status, measured live object count, readable final value, constructor/destructor/assignment/copy/move event sequence and mutable donor state.",
+    "live_state_measurement": "Native constructors increment liveItems only after successful construction and destructors decrement it. Rust items each own one Rc recorder; strong_count minus the external recorder observes remaining live values. Expected live/dead state is asserted before raw reads or repair; it is not substituted for observed row output.",
+    "cleanup": "Failed reconstruction/direct slots are never read or destroyed before repair. Both fixtures reconstruct value5 in dead raw slots before cleanup. Rust verifies cleanup traces and strict Miri verifies no leaked references, double destruction, or invalid alias/provenance accesses."
+  },
+  "integration_behavior": "Four successful policies replace an actual unpublished DynamicArray block slot, republish initialized ownership, verify unchanged block address and value, and observe one final Drop. Additional tests prove a failed transfer remains unpublished until repair and a throwing assignment keeps its modified published target live.",
+  "known_limits": [
+    "Policy selection is explicit. Rust Copy/Clone/Drop traits do not infer native assignability, move/copy constructors or noexcept. Native move_if_noexcept selects the transfer callback in the caller policy; no automatic C++ trait dispatch is claimed.",
+    "Callbacks return Rust values. Address-dependent placement constructors and C++ implicit user move hooks caused by language-level relocation are not modeled by these adapters.",
+    "Unsafe reconstruction/direct callers must suspend automatic Drop ownership and repair or discard dead raw slots on unwind. Passing an ordinarily owned live slot that a later destructor visits after failed construction violates the documented precondition.",
+    "Destructors must not unwind for native noexcept parity. Rust unwinding or process abort for violated destructor preconditions is outside the accepted domain.",
+    "Generic existing Rust emplace_value still uses Rust value replacement. These explicit policies are not a blanket claim that every Rust T behaves like every C++ T.",
+    "Protected copyDate and retained-block copyParameters remain deferred: copyDate partial-block leaks/trivial-copy dispatch and copyParameters allocator/physical-capacity lifetime domains require separate policies.",
+    "All12 fixture rows are additional native behavior probes, not additional original OCCT test declarations. No new global coverage credit is applied."
+  ],
+  "validation_notes": {
+    "format": "cargo fmt --all -- --check",
+    "clippy": "cargo clippy -p rustycad-tkernel --lib --test dynamic_array_replacement_policy -- -D warnings",
+    "new_rust_function_max_lines": 20,
+    "new_files_under_500_lines": true,
+    "miri_dependency_warnings": "Nightly dependencies may emit existing unstable-name-collision warnings; scoped stable Clippy exits0 with warnings denied. Exact log retained."
+  },
+  "global_coverage_credit": 0
+}
