@@ -1,0 +1,55 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "c43df409d10810131a873b5319f060bb0dd3a33a",
+  "focused_rust_passed": 135,
+  "focused_integration_passed": 134,
+  "focused_private_ownership_unit_passed": 1,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "dynamic_array_copy_date",
+    "dynamic_array_default_constructor_order",
+    "dynamic_array_emplace_allocation_order",
+    "dynamic_array_emplace_value_order",
+    "dynamic_array_iterator_tail",
+    "dynamic_array_legacy_cursor_contracts",
+    "dynamic_array_method_tail",
+    "dynamic_array_native_insertion",
+    "dynamic_array_protected_storage",
+    "dynamic_array_raw_lifetime",
+    "dynamic_array_replacement_policy",
+    "dynamic_array_retained_parameters",
+    "ncollection_dynamic_array",
+    "ncollection_dynamic_array_assignment_behavior"
+  ],
+  "strict_tkernel_scoped_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/dynamic-retained-root-rust.gz",
+      "sha256": "aca6a978edd4e99a47471c9bcc6130c2c891091bf53c92283dc99dc5dd1ee960"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/dynamic-retained-root-unit.gz",
+      "sha256": "267a673107fcf20aecb7b418f7406aa903d487b7bd9f5a42cb72f653ded3a2ce"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/dynamic-retained-root-clippy.gz",
+      "sha256": "b5d7b8d738916530af531038301a6bf85e6300f61f164b3a26badcfecb9cd270"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/dynamic-retained-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "c02f6dd53bd35020bdc834e60d5d6ed2ad8c3996",
+      "deleted_worktree": "/tmp/rustycad-dynamic-retained-parameters",
+      "deleted_branch": "port/dynamic-retained-parameters",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
