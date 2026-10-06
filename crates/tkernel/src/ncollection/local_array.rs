@@ -1,6 +1,7 @@
 //! Inline storage adapter retaining NCollection_LocalArray allocation semantics.
 use smallvec::SmallVec;
 
+mod nontrivial_move;
 mod pointers;
 mod trivial_move;
 
@@ -61,9 +62,11 @@ impl<T: Default, const N: usize> LocalArray<T, N> {
 
     /// Grows or shrinks with OCCT's inline and retention rules; `array.reallocate(16, true)`.
     /// Replacement growth without copying preserves the old array if `Default` panics.
+    /// Rust ownership moves have no callbacks; use `reallocate_with_move` when
+    /// the native element type has an observable nontrivial move constructor.
     pub fn reallocate(&mut self, size: usize, copy: bool) {
         if size <= self.len() {
-            self.elements.truncate(size);
+            self.truncate_forward(size);
             return;
         }
         let stays_inline = !self.elements.spilled() && size <= N;
@@ -81,6 +84,7 @@ impl<T: Default, const N: usize> LocalArray<T, N> {
         let mut replacement = SmallVec::with_capacity(size);
         replacement.resize_with(size, T::default);
         // OCCT publishes the replacement pointer only after construction completes.
+        self.truncate_forward(0);
         self.elements = replacement;
     }
 }
@@ -142,7 +146,9 @@ impl<T, const N: usize> LocalArray<T, N> {
     }
 
     /// Transfers storage and leaves the source empty; `dest.move_from(&mut source)`.
+    /// Use `move_from_with` to preserve native element move-constructor callbacks.
     pub fn move_from(&mut self, source: &mut Self) -> &mut Self {
+        self.deallocate();
         *self = std::mem::take(source);
         self
     }
@@ -154,7 +160,25 @@ impl<T, const N: usize> LocalArray<T, N> {
 
     /// Releases all elements and returns to inline storage; `array.deallocate()`.
     pub fn deallocate(&mut self) {
+        self.truncate_forward(0);
         self.elements = SmallVec::new();
+    }
+}
+
+impl<T, const N: usize> LocalArray<T, N> {
+    #[allow(unsafe_code)]
+    fn truncate_forward(&mut self, size: usize) {
+        let removed = self.len() - size;
+        // OCCT destroys in place in increasing order; SmallVec::truncate reverses
+        // that order, and drain moves values before dropping them. Publish the
+        // retained length first so slice drop glue also handles a Rust panic.
+        // SAFETY: callers only shorten initialized storage. After shortening,
+        // the removed tail stays allocated and is owned solely by this slice drop.
+        unsafe {
+            self.elements.set_len(size);
+            let tail = self.elements.as_mut_ptr().add(size);
+            std::ptr::drop_in_place(std::ptr::slice_from_raw_parts_mut(tail, removed));
+        }
     }
 }
 
