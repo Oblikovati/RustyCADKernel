@@ -27,3 +27,17 @@ impl<T: Clone, B: Clone> Clone for BoundingNode<T, B> {
         self.parent = source.parent;
     }
 }
+
+impl<T: Default, B: Default> Default for BoundingNode<T, B> {
+    /// Creates the detached empty leaf used by native `TreeNode()` during Gemmate.
+    /// Example: `let leaf = BoundingNode::<i32, i32>::default();`.
+    fn default() -> Self {
+        // OCCT 3d097a0328 declares bounds first; preserve construction order despite Rust drop order.
+        Self {
+            bounds: B::default(),
+            object: T::default(),
+            children: None,
+            parent: None,
+        }
+    }
+}

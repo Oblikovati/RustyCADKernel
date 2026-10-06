@@ -1,0 +1,163 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Actual NCollection_UBTree::TreeNode private default constructor, initialization failure cleanup and completed-node destruction",
+  "integration_status": "Candidate; root merge/check/deletion required. Sibling Clear branch is intentionally absent from this branch base.",
+  "base_revision": "363237df6ed055c1a15a6d76e4f8c6e6cd1609ea",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/destructor_unwind.rs": "758266d3ca88c0840f7443a0cf4a0857d4dd6b9ff55c1b802f8fa8e329012289",
+    "crates/tkernel/src/ncollection/ebtree.rs": "951528375f1b414a38714d577ca4251184b670d936962d167949b2edd63f2c0b",
+    "crates/tkernel/src/ncollection/node_owner.rs": "5f1c6b17408e3d42fab590cd36b310e6038708795609c5eaaa3683d73df3800f",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/src/ncollection/ubtree/insertion.rs": "538d7109870fa9501a002647b3566546d2f67b047e014edc94d7f1452b43ac15",
+    "crates/tkernel/src/ncollection/ubtree/method_contracts.rs": "6d39a623147d1a57985c36450cc054760d435b043e57a2f06a405f26cad6fdfe",
+    "crates/tkernel/src/ncollection/ubtree/navigation.rs": "171bc8ce1bcb4ac7b4de407030e473a222bb916e1eb1ea309c459c18d3140066",
+    "crates/tkernel/src/ncollection/ubtree/payload.rs": "6f50059f6b38c7ea571b0ec1f8d7d71575970824de72534acbc810924dd96ca2",
+    "crates/tkernel/src/ncollection/ubtree/removal.rs": "6caa3f81636637d4ddb027c93d97591f66ba8b24d63d319440825c287e2dfc8d",
+    "crates/tkernel/src/ncollection/ubtree/selection.rs": "cd427cb4678ed5d4b1af183f0ef3ac8665550aa5c90edd514542ef5ebcff2942",
+    "crates/tkernel/src/ncollection/ubtree.rs": "dce7d8f62e0b9f5e5ecae91bf23794d11077d726156d5adc9ec9a0ac4e94aa20",
+    "crates/tkernel/src/ncollection/ubtree_filler/balance.rs": "47ed3efb3425ef3f6d5886bcb1e89a9aa2cb33f300bd3906312899e8af275057",
+    "crates/tkernel/src/ncollection/ubtree_filler/insertion.rs": "abf0c4adcdd5698fef40bb221fb5a7dde9ea49d4aee25a6dcd9c920fd90778e3",
+    "crates/tkernel/src/ncollection/ubtree_filler/payload.rs": "1adaf95e976ec3b3175cf2c197a5451c8d9bb60963ba8e448754f923692bef42",
+    "crates/tkernel/src/ncollection/ubtree_filler.rs": "c961ce6aedf2579119a034dfeb28a204c657f3026d9ec47f769da9c925f30f88",
+    "crates/tkernel/tests/ncollection_ubtree/support.rs": "2a892d809e46777664e31d16a398974e2d9535154c1379009bb20c42ea66bfc2",
+    "crates/tkernel/tests/ncollection_ubtree.rs": "d36defe4170517f13c307992595d79db2b60a1c5cf45edcaa58cb7c97da9cf0b",
+    "crates/tkernel/tests/ubtree_fallible.rs": "96586e0340d95ba2e70a76c73a7ea527474ae313d708bd88e594e9db17aaafcf",
+    "crates/tkernel/tests/ubtree_kill_contracts/failures.rs": "a0a6ed3c46a3ae6b45ff788a5066b191c6619e81798dae8afa7e857179153d5d",
+    "crates/tkernel/tests/ubtree_kill_contracts/fixture.rs": "a9f9a8ac094d2a258fe58ae9cfb0b38159e08af427a68b316a0be3a6a309ea26",
+    "crates/tkernel/tests/ubtree_kill_contracts.rs": "c0e3bcafe11ab444393ba0ce3c210d255e0111bcde1161af60a7cb886d414ca2",
+    "crates/tkernel/tests/ubtree_method_contracts.rs": "b1c66b3b6db8583a961c3d9a09c64fd7f0ef9e8babc1d79a1bcdc95c1c45026e",
+    "crates/tkernel/tests/ubtree_payload_contracts/construction.rs": "851c22701100759c144856ad7f5bf976c98627f90d96b74653dfafe9e8f4ead1",
+    "crates/tkernel/tests/ubtree_payload_contracts/failures.rs": "1eadfb552c13d24f9df399aa6b12d56757a26d652fdc8827f900d7a2468b34f3",
+    "crates/tkernel/tests/ubtree_payload_contracts/fixture.rs": "c33dcbe3227ce18967affafe2dc634b719efc73cc2fea75178db85c63c9f85a4",
+    "crates/tkernel/tests/ubtree_payload_contracts/node_default.rs": "03b2bbd8fc4344e92c0f1f51311faa7f41ccad99be28974ef4fd6255e8066bf1",
+    "crates/tkernel/tests/ubtree_payload_contracts/traits.rs": "e7c389a8e970d73f68bde2241a915b7fd7184a61c752660fdfc6400d42f04188",
+    "crates/tkernel/tests/ubtree_payload_contracts.rs": "2c800491c1ed3f3930a5f8c26359ed1d1e0d26aa38f13e1587be6c845656e382",
+    "crates/tkernel/tests/ubtree_supplemental.rs": "c5b4ff8aefa842252d9bff51cedc40ff26f16fee55be9a4f0751f8b8be9857c4",
+    "tools/oracle/tkernel_ubtree_kill_contracts.cxx": "1f63beac3c243604e0c315af962330729f3ecf37b0faed8f9731026d2004e3ad",
+    "tools/oracle/tkernel_ubtree_kill_contracts.expected": "bc3280b3ccecba27a0c0a2f1271632a88fb78017ce893160450ae7fb2e0d3065",
+    "tools/oracle/tkernel_ubtree_method_contracts.cxx": "e525503c812957733c91657115aa8ee66e07d8950d0b529cd7a247ae073f8154",
+    "tools/oracle/tkernel_ubtree_method_contracts.expected": "a1b97c5a4dd7f37a74681addaaab3cbeb9a2d7127df5ad2626d807ca8851cc77",
+    "tools/oracle/tkernel_ubtree_node_default_contracts.cxx": "30716540c2f02128959bf3a784f088fb71f4fb516495ced805a9d9588e7f5691",
+    "tools/oracle/tkernel_ubtree_node_default_contracts.expected": "fbe30e58d6b6e6854ac0ed54d31d4d1c0dd03f81677186441b266dd5803b3c37",
+    "tools/oracle/tkernel_ubtree_payload_contracts.cxx": "f4057824d7e8b4be6b4d1f955ab4f5deb75ff75c81b78a8b7663e215eda1310e",
+    "tools/oracle/tkernel_ubtree_payload_contracts.expected": "f596bdf87b734f9a9c9f1fbe1a6afaf8ec45bf17eaa6e3d2528515954df42ff3",
+    "tools/oracle/tkernel_ubtree_payload_trace.hxx": "eb9f2289f94ef773499a5a5ea0aaad203fe31a9ae73a542a647c09cabb5f58b7"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/ubtree-node-default-source.tar.gz": "f6295b0a10419235789b2f932551581596217fb03e7d1bea7a1622b4e55c04ac",
+    "porting/runtime-evidence/ubtree-node-default-normal.log.gz": "0a993aa9de82544071ff1acf26536900b35f54864a8ff2156860bfeaaf082603",
+    "porting/runtime-evidence/ubtree-node-default-miri.log.gz": "9bb8ae632bcfb1e32e842f4db5fa72d031ec04feaf73459e88ded238cc0428e3",
+    "porting/runtime-evidence/ubtree-node-default-docs.log.gz": "9f1d92d76d89bf60a3e912c4a7354075e3b57ddbb1723ac7dd19fe93d89d3442",
+    "porting/runtime-evidence/ubtree-node-default-clippy.log.gz": "8e535e746bc35cc16b18e41f235998dd844e3cfe912a0ad4e9addb4b00b77be5",
+    "porting/runtime-evidence/ubtree-node-default-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ubtree-node-default-legacy.log.gz": "1b711a8774c7c35fad2b3eb02dad552ec73fd7e1dcb9713e03027a2511222183",
+    "porting/runtime-evidence/ubtree-node-default-baseline-build.log.gz": "cb2fe24a96f008300809b412b4afc65fddb1d0107397fa85e1f5f9123bfd0ce1",
+    "porting/runtime-evidence/ubtree-node-default-baseline-dropck.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ubtree-node-default-candidate-build.log.gz": "9676721b6ee388b195e3c212be572f6763b31516be29a6b140abbf6708fd0c41",
+    "porting/runtime-evidence/ubtree-node-default-candidate-dropck.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ubtree-node-default-private-access.log.gz": "7217f9ae153bdf0bc3a1ca4cedd9c21d6bb140f0c94db3108c5c821d04f1b685",
+    "porting/runtime-evidence/ubtree-node-default-native-tkernel_ubtree_node_default_contracts.log.gz": "c77d05cd0dd6a98e14e88ee7014a5819a74723bd3691d7fc01bdce55261fc942",
+    "porting/runtime-evidence/ubtree-node-default-native-tkernel_ubtree_kill_contracts.log.gz": "76bb480b52c8cd6900f22bf1951630d28c6051941d7628843b194c1cf11b04fe",
+    "porting/runtime-evidence/ubtree-node-default-native-tkernel_ubtree_payload_contracts.log.gz": "498467dcb0037b472f53b240677c46199701b7c078fbb48356b3651e0f907220",
+    "porting/runtime-evidence/ubtree-node-default-native-tkernel_ubtree_method_contracts.log.gz": "d86d359cb85db50e8e26a2f52f1c9587e186cbd6b6a1b9ae3dfc8ea5fa46ab31",
+    "porting/runtime-evidence/ubtree-node-default-original-test-joins.json.gz": "b8b9d3bdd4367b15ee546fad6c2e8eb006e0645d299fb702e910f6163ba6f7b2",
+    "porting/runtime-evidence/ubtree-node-default-run-ubtree-node-default-checks.py.gz": "88908ddf8500d8b4410d75be8d8210cabd8fb78fc3bbcec9ba3c0ed8a7cdb9c6",
+    "porting/runtime-evidence/ubtree-node-default-run-ubtree-node-default-native.py.gz": "1efe8183931dbf42f9256dae4ac5831e71929461f940d7e618434a87f6694c31",
+    "porting/runtime-evidence/ubtree-node-default-ubtree-node-default-suites.txt.gz": "0ccc000bb35c696d3e07c568612ee48cbc235cf5d4d166e1f3a0ecf8b3999484",
+    "porting/runtime-evidence/ubtree-node-default-check-ubtree-node-default-dropck.py.gz": "a121bb2ee59987b5a36ecf44579035944a2714b720b22543585d4188de1f093d",
+    "porting/runtime-evidence/ubtree-node-default-ubtree-node-default-dropck.rs.gz": "cc8d51009993bf52b57bf684d7093cc9fed9e5c2f817d2ba269da4f23bf7e083",
+    "porting/runtime-evidence/ubtree-node-default-ubtree-node-default-baseline-payload.rs.gz": "3d19a721754a027de4cedf12a230bba4fda023ec9f009fa91466987a4fcf729c"
+  },
+  "occt_source_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx": "3e8e07bf370088a143a123dc44712741e3c09148ca7c846eaa0997e00767ad39"
+  },
+  "source_scope": "UBTree/EBTree/filler source, shared destruction guards, selected tests and native probes; not complete compiler or allocator dependency closure.",
+  "prior_receipt": {
+    "path": "porting/audits/ubtree-payload-methods.json",
+    "sha256": "fa3f3195648fde292e782e112fca5c7f2dc69e3b1fb59a508b5fda3a296b41a0"
+  },
+  "api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "compiler_body_binding_performed": false,
+  "class_status": "partial",
+  "method_bindings": [
+    {
+      "cpp": "NCollection_UBTree<T,B>::TreeNode::TreeNode() [private]",
+      "rust": "impl<T:Default,B:Default> Default for BoundingNode<T,B>",
+      "domain": "Bounds and object have defined default constructors matching their Rust Default implementations. Bounds construction precedes object construction; root/leaf links are absent."
+    }
+  ],
+  "native_constructor_identity": {
+    "invocation": "Node is exactly NCollection_UBTree<Item<O>,Item<B>>::TreeNode; new Node and local Node node invoke the pinned header private default constructor directly.",
+    "access_relaxation": "The positive oracle compiles with GCC -fno-access-control. This relaxes access checking only; no constructor body is copied, replaced, mocked or reached through a Gemmate surrogate.",
+    "negative_control": "The same source compiled with -fsyntax-only and no access relaxation fails with the pinned TreeNode() private-access diagnostic. Exact command is retained in the native check script and diagnostic log.",
+    "scope": "A private implementation prerequisite, not an added OCCT public API declaration and not evidence that Gemmate now calls this Rust method."
+  },
+  "behavior": [
+    "The manual Default implementation explicitly evaluates B::default before T::default, independently of BoundingNode field declaration order chosen for object-before-bounds destruction.",
+    "A bounds-construction failure prevents object construction. An object-construction failure destroys the completed bounds and no uninitialized object. Exact native phase traces are checked from the committed native expected file.",
+    "Completed nodes are detached roots and leaves. On destruction the object precedes bounds, and both destructor callbacks retain their original boxed field addresses.",
+    "Throwing native member destructors explicitly use noexcept(false). Matching Rust panic tests prove completed-member destruction order and original addresses for either failing member, with strict Miri checking Rust Box cleanup.",
+    "The new implementation requires only Default on each payload; it does not require Clone or BoundingVolume. Existing constructors, collection generic bounds, public fields, lifetime variance, auto-traits and borrowed payload acceptance remain unchanged.",
+    "Rust borrowed and zero-sized payload defaults are tested as Rust-safe supported domains. Scalar Rust Default produces initialized zero values; the native private constructor default-initializes scalar members without initialization, so scalar value equivalence is not claimed.",
+    "Existing payload and new default native probes share one extracted trace header; prior native rows are unchanged. Historical receipt hashes and archived source snapshots remain intact."
+  ],
+  "native_row_test_bindings": {
+    "node_default": "ubtree_payload_contracts::node_default::node_default_constructs_bounds_before_object_with_detached_links",
+    "node_default_fail B/O": "ubtree_payload_contracts::node_default::node_default_failure_destroys_only_completed_members",
+    "node_default_drop B/O": "ubtree_payload_contracts::node_default::node_default_destructor_failure_preserves_member_order_and_addresses"
+  },
+  "compatibility": {
+    "generic_drop_impl_added": false,
+    "unsafe_code_added": false,
+    "public_fields_and_existing_bounds_unchanged": true,
+    "baseline_actual_library_probe": "Restored exact branch-base ubtree/payload.rs, built actual TKernel rlib, compiled and ran the shared compatibility probe; exit0.",
+    "candidate_actual_library_probe": "Restored final payload.rs, rebuilt actual TKernel rlib, compiled and ran the identical probe; exit0.",
+    "probe_domain": "BoundingNode and ObjBnd borrowed drop-check acceptance, public field partial moves, UBTree borrowed str insertion/clear, UBTree covariance and positive Send/Sync/Unpin/UnwindSafe/RefUnwindSafe bounds.",
+    "evidence": "Exact baseline payload source, command script, build/compile logs and probe source are archived. Existing payload compatibility tests run unchanged in normal and Miri sweeps."
+  },
+  "checks": {
+    "rust_passed": 54,
+    "miri_passed": 54,
+    "rust_targets": [
+      "ubtree_payload_contracts",
+      "ubtree_method_contracts",
+      "ncollection_ubtree",
+      "ubtree_supplemental",
+      "ubtree_fallible",
+      "ubtree_kill_contracts"
+    ],
+    "miri_targets": [
+      "ubtree_payload_contracts",
+      "ubtree_method_contracts",
+      "ncollection_ubtree",
+      "ubtree_supplemental",
+      "ubtree_fallible",
+      "ubtree_kill_contracts"
+    ],
+    "miri_toolchain": "nightly-2026-09-25",
+    "miri_flags": "-Zmiri-strict-provenance",
+    "new_tests": 5,
+    "native_default_rows": 5,
+    "unchanged_native_kill_rows": 6,
+    "unchanged_native_payload_rows": 22,
+    "unchanged_native_method_rows": 10,
+    "native_original_passed": 16,
+    "native_rust_original_names_exactly_joined": true,
+    "tkernel_doctests_passed": 269,
+    "strict_selected_clippy_exit": 0,
+    "workspace_fmt_exit": 0,
+    "baseline_dropck_compile_run_exit": 0,
+    "candidate_dropck_compile_run_exit": 0,
+    "native_no_access_relaxation_expected_failure": true
+  },
+  "remaining_gaps": [
+    "Gemmate does not yet delegate to this constructor. It still separately allocates/clones arena nodes rather than native contiguous pair allocation, two default constructions and native assignment phases. No paired-allocation or Gemmate credit is awarded.",
+    "Generic C++ scalar default initialization, uninitialized storage, address-sensitive construction and arbitrary payload ABI are not represented by a Rust Default equivalence claim.",
+    "Destructor-body child-link nulling, native raw pointer projections, paired free timing, implicit tree destruction and moved-from allocator null state remain outside this method slice.",
+    "Sibling Clear work is queued independently and is not included in these branch-local source hashes or checks. Root must validate the integrated union.",
+    "No global API or original-declaration credit is added. Full TreeNode, UBTree and filler parity remain incomplete."
+  ],
+  "validation_history": "Final normal suites, doctests, strict Clippy/fmt, exact native rows, original-name joins and strict Miri cover the final payload source. Actual baseline/candidate compilation uses only a temporary restoration of payload.rs and restores its exact final bytes before final checks. Shared native trace extraction preserves all prior expected rows."
+}

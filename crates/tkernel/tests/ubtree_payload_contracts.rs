@@ -3,6 +3,7 @@ mod ubtree_payload_contracts {
     pub mod construction;
     pub mod failures;
     pub mod fixture;
+    pub mod node_default;
     pub mod traits;
 }
 fn native_row(label: &str, actual: String) {
