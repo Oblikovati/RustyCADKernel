@@ -1,0 +1,213 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "bounded_defined_domains_pending_integration",
+  "branch": "port/linear-borrowed",
+  "base_commit": "e781f597df39f9eb278bc1c6d7a00c73ae47c895",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/linear_vector.rs": "6efefc8b594d30cd513ce46892d7a7608e763c0fe783d1312c12ac5a027f1481",
+    "crates/tkernel/src/ncollection/linear_vector/borrowed.rs": "e4f1e652a46489a3f044a2b63613a7458e9e906b7150f14584adbda7ecbe0376",
+    "crates/tkernel/src/ncollection/linear_vector/borrowed/tests.rs": "5ace042f486a07fbd17e9ea2f0ecae4162d18a8531db1968ebd22c9f963ef8cd",
+    "crates/tkernel/src/ncollection/linear_vector/borrowed/tests/contracts.rs": "0d32e82bb7b6a4c9802c4ff9fbea180ac58ded81150fcc353ff7fb412715bda1",
+    "crates/tkernel/src/ncollection/linear_vector/borrowed/tests/oracle.rs": "9822ea4979c9b93ca33dfa1d6c290bb372e3e93a506a2279ab01da691567b411",
+    "tools/oracle/tkernel_linear_borrowed.cxx": "8c449478bd93d6ccafa08bfae824ead3439902e2501ea2b96568ecfdc0ab1c4f",
+    "tools/oracle/tkernel_linear_borrowed.expected": "c82de90bc1529153ca1a23c17e29d21f2111a13befcbe136b658077d5f17ab38"
+  },
+  "upstream_sha256": {
+    "NCollection/NCollection_LinearVector.hxx": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",
+    "GTests/NCollection_LinearVector_Test.cxx": "87114b676e4fb74e327b17036c81894df0aa94df0a077ec23c111d81f302de31"
+  },
+  "original_rust_source_sha256": {
+    "crates/tkernel/tests/ncollection_linear_vector.rs": "af964f6f13b9603c1759b5718a169f0b2c7fe0ebb61ecd35771a2352d1b99dae",
+    "crates/tkernel/tests/ncollection_linear_vector/basic.rs": "2464756b3ae46dc91f381ad8eb6ce60466cf3726a21628a3d03d99e78256a575",
+    "crates/tkernel/tests/ncollection_linear_vector/mutation.rs": "c90d154ad63350b1654e333163dcd6a44ea3dd5552d48bcbec2499c89c35fc50",
+    "crates/tkernel/tests/ncollection_linear_vector/storage.rs": "14c09d9daf92bad0670596e58e3e2aa14238db137eee32771575b90775ff5e47"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/linear-borrowed-focused.log.gz": "41fe559b1f59db381878a9ae0683915cffeb57d6cd6d50e48582ed0e86852a1b",
+    "porting/runtime-evidence/linear-borrowed-unit.log.gz": "122f7d491f57c488edd51774e88f0ef07cfc2159e6d63d388ae8096de8727e76",
+    "porting/runtime-evidence/linear-borrowed-library.log.gz": "21062f2089d3e83a48a387e1d6c886d323ba3fc7e234a448bc60299bcaa3599f",
+    "porting/runtime-evidence/linear-borrowed-miri-prior.log.gz": "320dda35e2d4c968037fb23db7a4a6ba28fd0126bdec9b4182223f630f5a1e29",
+    "porting/runtime-evidence/linear-borrowed-miri-storage-library.log.gz": "6b78ad0aca4bcf5116cc2c9a35fcbb899994ac004225d400ff62471242613036",
+    "porting/runtime-evidence/linear-borrowed-clippy.log.gz": "e05d8b9eb3bde30946d914c803bf2ab0ec77fe88227c55820a5f6e7f89a0f5c3",
+    "porting/runtime-evidence/linear-borrowed-native.log.gz": "146f1f8abb2a0b618ca3762d8add56fadaecba8310b044904dbdd3cb26e72b19",
+    "porting/runtime-evidence/linear-borrowed-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/linear-borrowed-oracle-runtime.log.gz": "5b0f891e4e85cf7fda6f3bbae41f6103e4533145f5be43a1545554e63bf5966e",
+    "porting/runtime-evidence/linear-borrowed-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/linear-borrowed-source.json.gz": "b7b1b15cdfa66e7a561425d0cd9d97fea55053dfb42f7fc31c0f52ff622970a6",
+    "porting/runtime-evidence/linear-borrowed-replay.json.gz": "3164d81d14b4cdae54210567423b71f718001098897fd0718e364474b0db82ad",
+    "porting/runtime-evidence/linear-borrowed-public-proof.json.gz": "a514af18a6e585f2f924460c33868a9a1bf0a9a25664597b3c7c212f915271b4"
+  },
+  "exit_codes": {
+    "focused": 0,
+    "unit": 0,
+    "library": 0,
+    "miri-prior": 0,
+    "miri-storage-library": 0,
+    "clippy": 0,
+    "native": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0,
+    "fmt": 0
+  },
+  "source_scope": "Adds missing borrowed Append(const T&) and SetValue(size_t,const T&) adapters with separate copy-construction and copy-assignment dispatch. Existing resize rollback body moves unchanged into a shared private constructor-injected helper; public resize retains T::default and all existing docs. No descriptor/allocator layout rewrite or global ledger changes.",
+  "normal_unique_passes": 353,
+  "focused_integration_passes": 209,
+  "whole_tkernel_library_passes": 144,
+  "new_test_count": 5,
+  "new_test_names": [
+    "ncollection::linear_vector::borrowed::tests::contracts::empty_growth_failure_reserves_before_copying_without_default_bound",
+    "ncollection::linear_vector::borrowed::tests::contracts::failed_default_extension_keeps_existing_rollback_policy_and_skips_assignment",
+    "ncollection::linear_vector::borrowed::tests::contracts::public_borrowed_methods_return_the_actual_stored_slot",
+    "ncollection::linear_vector::borrowed::tests::contracts::shared_resize_constructor_keeps_shrink_equal_and_growth_behavior",
+    "ncollection::linear_vector::borrowed::tests::oracle::borrowed_copy_and_assignment_phases_join_native_rows"
+  ],
+  "strict_provenance_miri_unique_passes": 214,
+  "strict_provenance_integration_passes": 209,
+  "strict_provenance_linear_library_passes": 5,
+  "counting": "Five new tests are included in whole-library 144 and focused LinearVector-library Miri five. Focused integration consists of 49 original LinearVector, 19 exception-state, seven pointer/assignment tests and 134 dependent DynamicArray tests. Repeated unit run adds no unique credit.",
+  "strict_provenance_flags": "-Zmiri-strict-provenance; no permissive provenance or leak-ignore flags",
+  "original_native_passes": 49,
+  "original_native_to_rust_mappings": {
+    "NCollection_LinearVectorTest.DefaultConstructor": "NCollection_LinearVectorTest__DefaultConstructor",
+    "NCollection_LinearVectorTest.ReserveConstructor": "NCollection_LinearVectorTest__ReserveConstructor",
+    "NCollection_LinearVectorTest.Append": "NCollection_LinearVectorTest__Append",
+    "NCollection_LinearVectorTest.AppendMove": "NCollection_LinearVectorTest__AppendMove",
+    "NCollection_LinearVectorTest.Appended": "NCollection_LinearVectorTest__Appended",
+    "NCollection_LinearVectorTest.EmplaceAppend": "NCollection_LinearVectorTest__EmplaceAppend",
+    "NCollection_LinearVectorTest.SetValue": "NCollection_LinearVectorTest__SetValue",
+    "NCollection_LinearVectorTest.ValueAccess": "NCollection_LinearVectorTest__ValueAccess",
+    "NCollection_LinearVectorTest.FirstLast": "NCollection_LinearVectorTest__FirstLast",
+    "NCollection_LinearVectorTest.CopyConstructor": "NCollection_LinearVectorTest__CopyConstructor",
+    "NCollection_LinearVectorTest.CopyAssignment": "NCollection_LinearVectorTest__CopyAssignment",
+    "NCollection_LinearVectorTest.MoveConstructor": "NCollection_LinearVectorTest__MoveConstructor",
+    "NCollection_LinearVectorTest.MoveAssignment": "NCollection_LinearVectorTest__MoveAssignment",
+    "NCollection_LinearVectorTest.Reserve": "NCollection_LinearVectorTest__Reserve",
+    "NCollection_LinearVectorTest.Resize": "NCollection_LinearVectorTest__Resize",
+    "NCollection_LinearVectorTest.Resize_WithValue": "NCollection_LinearVectorTest__Resize_WithValue",
+    "NCollection_LinearVectorTest.EraseLast": "NCollection_LinearVectorTest__EraseLast",
+    "NCollection_LinearVectorTest.EraseSingle": "NCollection_LinearVectorTest__EraseSingle",
+    "NCollection_LinearVectorTest.EraseRange": "NCollection_LinearVectorTest__EraseRange",
+    "NCollection_LinearVectorTest.EraseSingle_NonTrivial_HeapBuffers": "NCollection_LinearVectorTest__EraseSingle_NonTrivial_HeapBuffers",
+    "NCollection_LinearVectorTest.EraseRange_NonTrivial_HeapBuffers": "NCollection_LinearVectorTest__EraseRange_NonTrivial_HeapBuffers",
+    "NCollection_LinearVectorTest.InsertBefore": "NCollection_LinearVectorTest__InsertBefore",
+    "NCollection_LinearVectorTest.InsertAfter": "NCollection_LinearVectorTest__InsertAfter",
+    "NCollection_LinearVectorTest.Clear": "NCollection_LinearVectorTest__Clear",
+    "NCollection_LinearVectorTest.IteratorRangeFor": "NCollection_LinearVectorTest__IteratorRangeFor",
+    "NCollection_LinearVectorTest.STLAlgorithms": "NCollection_LinearVectorTest__STLAlgorithms",
+    "NCollection_LinearVectorTest.TrivialTypeGrowth": "NCollection_LinearVectorTest__TrivialTypeGrowth",
+    "NCollection_LinearVectorTest.NonTrivialType": "NCollection_LinearVectorTest__NonTrivialType",
+    "NCollection_LinearVectorTest.EmptyOperations": "NCollection_LinearVectorTest__EmptyOperations",
+    "NCollection_LinearVectorTest.LargeAppend": "NCollection_LinearVectorTest__LargeAppend",
+    "NCollection_LinearVectorTest.MoveOnlyType": "NCollection_LinearVectorTest__MoveOnlyType",
+    "NCollection_LinearVectorTest.ResizeNonTrivial": "NCollection_LinearVectorTest__ResizeNonTrivial",
+    "NCollection_LinearVectorTest.Resize_WithValue_NonTrivial": "NCollection_LinearVectorTest__Resize_WithValue_NonTrivial",
+    "NCollection_LinearVectorTest.BoundsAccess": "NCollection_LinearVectorTest__BoundsAccess",
+    "NCollection_LinearVectorTest.ReserveZero_NoEffect": "NCollection_LinearVectorTest__ReserveZero_NoEffect",
+    "NCollection_LinearVectorTest.ReserveDecreasing_NoShrink": "NCollection_LinearVectorTest__ReserveDecreasing_NoShrink",
+    "NCollection_LinearVectorTest.InsertBeforeAtEnd_EquivalentToAppend": "NCollection_LinearVectorTest__InsertBeforeAtEnd_EquivalentToAppend",
+    "NCollection_LinearVectorTest.SetValueMove": "NCollection_LinearVectorTest__SetValueMove",
+    "NCollection_LinearVectorTest.InsertBeforeZero_InsertsAtFront": "NCollection_LinearVectorTest__InsertBeforeZero_InsertsAtFront",
+    "NCollection_LinearVectorTest.OutOfRangeIndicesThrow": "NCollection_LinearVectorTest__OutOfRangeIndicesThrow",
+    "NCollection_LinearVectorTest.Constructor_SizeAndValue": "NCollection_LinearVectorTest__Constructor_SizeAndValue",
+    "NCollection_LinearVectorTest.Constructor_SizeAndValue_NonTrivial": "NCollection_LinearVectorTest__Constructor_SizeAndValue_NonTrivial",
+    "NCollection_LinearVectorTest.Constructor_SizeZero_IsEmpty": "NCollection_LinearVectorTest__Constructor_SizeZero_IsEmpty",
+    "NCollection_LinearVectorTest.OcctApiCoverage": "NCollection_LinearVectorTest__OcctApiCoverage",
+    "NCollection_LinearVectorTest.ToArray1_SamePointer": "NCollection_LinearVectorTest__ToArray1_SamePointer",
+    "NCollection_LinearVectorTest.ToArray1_ModifyReflectsInSource": "NCollection_LinearVectorTest__ToArray1_ModifyReflectsInSource",
+    "NCollection_LinearVectorTest.ToArray1_EmptyVector": "NCollection_LinearVectorTest__ToArray1_EmptyVector",
+    "NCollection_LinearVectorTest.ToArray1_ReadThrough": "NCollection_LinearVectorTest__ToArray1_ReadThrough",
+    "NCollection_LinearVectorTest.ToArray1_NonTrivial": "NCollection_LinearVectorTest__ToArray1_NonTrivial"
+  },
+  "original_assertion_audit": {
+    "inherited_receipts": [
+      "porting/audits/linear-vector-contract.json",
+      "porting/audits/linear-vector-append-order.json",
+      "porting/audits/linear-vector-resize-value-ref.json",
+      "porting/audits/linear-vector-with-value-constructor.json",
+      "porting/audits/linear-vector-assign-tail-exception.json"
+    ],
+    "current_change": "All 49 exact native legacy declarations and Rust names freshly pass, including strict Miri; original assertion bodies unchanged. Existing Rust rollback/drop semantics remain explicit and are rerun, not relabeled full native constructor-exception parity."
+  },
+  "public_declaration_bindings": [
+    {
+      "native_id": "4edeec5dca74907dc976c639a493ef4cb3941101a0122e6ab11cf9b0029626ec",
+      "native": "NCollection_LinearVector::Append",
+      "signature": "type-parameter-0-0 &(const type-parameter-0-0 &)",
+      "native_line": 322,
+      "rust": "LinearVector::append_ref",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector/borrowed.rs",
+      "domain": "Borrowed donor, explicit Clone copy construction after reserve; grown capacity persists and Size is unchanged on clone panic.",
+      "status": "partial_defined_domain",
+      "reachable_export": "ncollection::LinearVector existing public type; exported inherent methods verified by separate external Rust crate compile/run."
+    },
+    {
+      "native_id": "c4b952c72798b3f17fbb9d66b0922904676aeab4a895ea6d08af46dd26ce6fe3",
+      "native": "NCollection_LinearVector::SetValue",
+      "signature": "type-parameter-0-0 &(unsigned long, const type-parameter-0-0 &)",
+      "native_line": 375,
+      "rust": "LinearVector::set_value_ref",
+      "rust_source": "crates/tkernel/src/ncollection/linear_vector/borrowed.rs",
+      "domain": "Borrowed donor, existing slot or default extension; Resize publishes Size before Clone::clone_from. Assignment panic preserves published size and target mutations.",
+      "status": "partial_defined_domain",
+      "reachable_export": "ncollection::LinearVector existing public type; exported inherent methods verified by separate external Rust crate compile/run."
+    }
+  ],
+  "native_declaration_forms_in_batch": 2,
+  "new_rust_public_methods": 2,
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_linear_borrowed.cxx",
+    "expected": "tools/oracle/tkernel_linear_borrowed.expected",
+    "row_count": 8,
+    "exact_runtime_join_count": 8,
+    "row_keys": [
+      "append_grow_success",
+      "append_grow_failed",
+      "append_retained_success",
+      "append_retained_failed",
+      "set_existing_success",
+      "set_existing_failed",
+      "set_gap_success",
+      "set_gap_failed"
+    ],
+    "rust_test": "ncollection::linear_vector::borrowed::tests::oracle::borrowed_copy_and_assignment_phases_join_native_rows",
+    "columns": "Actual Size, element capacity, unchanged donor value, ordered constructor/assignment events, every registered value.",
+    "events": "C is the copy constructor; A is copy assignment; D is successful default construction. Assignment modifies target to donor+100 before the configured throw, making partial mutation observable.",
+    "append_cases": "Empty growth and already-reserved no-growth, both success and copy-constructor failure. No existing values relocate in the traced growth case.",
+    "set_cases": "Existing target and gap extension inside reserved capacity, both success and copy-assignment failure. Gap rows observe DDDA and published Size 4; failing target remains 109.",
+    "rust_instrumentation": "BorrowTrace is injected through values and private constructor callback, with no global Rust Default counter. Public set_value_ref passes T::default into the same set_value_ref_with/resize_with_constructor engine used by the traced test. Separate public String tests and external crate probe verify exported wrapper behavior. No duplicate mutation engine or fabricated counters."
+  },
+  "public_boundary_proof": {
+    "artifact": "porting/runtime-evidence/linear-borrowed-public-proof.json.gz",
+    "compile_exit": 0,
+    "runtime_exit": 0,
+    "checks": [
+      "append_ref callable from a separate crate for Clone-only type with no Default implementation",
+      "Returned append reference modifies actual stored slot and leaves donor unchanged",
+      "set_value_ref callable publicly, default-fills gaps, returns actual stored slot"
+    ]
+  },
+  "behavior_notes": [
+    "append_ref calls existing reserve_next_item before value.clone, then existing push_reserved_item; a panic leaves capacity grown and no registered new element.",
+    "set_value_ref calls shared resize first, then clone_from directly on the initialized target. No temporary clone replaces assignment; custom clone_from is distinguished from clone by exact trace.",
+    "The private resize constructor seam preserves the existing LengthRollback semantics and supports injected constructor failure tests without global Rust fixture state. Shrink/equal/grow and public default construction are rerun.",
+    "Clone-only borrowed append has no unnecessary Default bound; SetValue retains Default because native extension instantiates default construction."
+  ],
+  "known_limits": [
+    "Rust Vec relocation does not invoke native std::move_if_noexcept user constructors. Populated buffer growth with observable relocation hooks remains unported; custom trace rows use empty growth or reserved capacity.",
+    "Clone and Clone::clone_from are explicit Rust policy bindings, not automatic inference of arbitrary C++ copy/assignment capabilities, address-dependent placement constructors or exception specifications.",
+    "Existing Rust resize panic rollback destroys completed tail values; native raw storage can leave them untracked. The new default-failure test preserves that documented Rust policy and does not claim native leak parity.",
+    "Borrowing a donor from the same vector while mutably calling these methods is restricted by Rust borrowing. Native self-alias domains need explicit separate adapters, and aliases invalidated by native reallocation are not oracle cases.",
+    "Global allocation failure, descriptor/object ABI and exact byte allocation requests are outside this batch.",
+    "Eight supplemental rows and five new tests add no original legacy declaration count. The two exact compiler IDs are scoped partial-domain bindings awaiting coordinator consolidation; no full-class/global coverage claim."
+  ],
+  "validation_notes": {
+    "format": "cargo fmt --all -- --check",
+    "clippy": "cargo clippy -p rustycad-tkernel --lib --tests -- -D warnings",
+    "new_rust_function_max_lines": 20,
+    "new_files_under_500_lines": true,
+    "miri_warnings": "Existing dependency unstable-name-collision warnings retained in exact logs; stable scoped Clippy denies warnings."
+  },
+  "new_unique_native_declarations": 0,
+  "global_coverage_credit": 0
+}
