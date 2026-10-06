@@ -24,7 +24,7 @@ impl<T> DynamicArray<T> {
     }
     pub(super) fn reserve_block_count(&mut self, count: usize) {
         // Native ensureBlockCount reserves its pointer vector before element allocations.
-        self.blocks.reserve(count.saturating_sub(self.blocks.len()));
+        self.blocks.reserve(count);
         while self.blocks.len() < count {
             self.add_block();
         }
@@ -126,7 +126,7 @@ impl<T> DynamicArrayStorageExtension<'_, T> {
         for block in &mut self.array.blocks {
             forget_block_values_after(block, 0);
         }
-        self.array.blocks.clear();
+        self.array.blocks.clear(true);
         self.array.used = 0;
     }
     fn validate_item_size(&self, item_size: usize) -> Result<(), Failure> {

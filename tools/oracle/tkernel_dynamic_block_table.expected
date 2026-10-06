@@ -1,0 +1,27 @@
+table_empty 0 0 0 0 0
+table_append1 1 1 2 2 1
+table_append2 2 1 2 2 1
+table_append3 3 2 2 4 2
+table_append5 5 3 4 6 3
+table_reserve6 5 6 8 12 6
+table_reserve9 5 9 16 18 9
+table_clear_retain 0 9 16 18 9
+table_smaller_reserve 0 9 16 18 9
+table_reuse 1 9 16 18 9
+table_clear_release 0 0 0 0 0
+table_expand_empty 0 1 2 2 1
+table_clear_blocks 0 0 0 0 0
+table_initial_reserve6 0 6 6 12 6
+copy_source 1 7 7 14 7
+copy_constructed 1 7 8 14 14
+copy_cleared 0 0 0 0 7
+copy_destination_reserved 0 10 10 20 17
+copy_assigned 1 7 8 14 14
+move_constructed 1 7 8 14 14
+move_source 0 0 0 0 14
+append_constructor_failed 0 1 2 2 1
+append_constructor_retry 1 1 2 2 1
+append_constructor_cleared 0 0 0 0 0
+clear_retain_phases 3 d1@3,d2@3,d3@3,d4@3,d5@3
+clear_release_phases 0 d1@3,d2@3,d3@3,d4@3,d5@3
+destructor_phases 0 d1@3,d2@3,d3@3,d4@3,d5@3

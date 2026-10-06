@@ -78,7 +78,7 @@ impl<T: Default> DynamicArray<T> {
             let (sources, targets) = self.blocks[block].split_at_mut(offset);
             return (&mut targets[0], &mut sources[offset - 1]);
         }
-        let (sources, targets) = self.blocks.split_at_mut(block);
+        let (sources, targets) = self.blocks.as_mut_slice().split_at_mut(block);
         let source = &mut sources[block - 1][self.increment - 1];
         (&mut targets[0][0], source)
     }

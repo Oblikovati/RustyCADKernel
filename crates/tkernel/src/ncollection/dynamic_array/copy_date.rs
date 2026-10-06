@@ -102,7 +102,7 @@ impl<T> DynamicArray<T> {
         for source_block in &source.blocks {
             let count = source.used.saturating_sub(self.used).min(self.increment);
             let block = self.copy_unpublished_block(&source_block[..count], &mut copy)?;
-            self.blocks.push(block);
+            self.blocks.append(block);
             self.used += count;
         }
         Ok(())
