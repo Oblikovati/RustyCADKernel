@@ -4,8 +4,9 @@ use crate::{ncollection::destructor_unwind::DeferredDestructorPanic, standard::F
 mod removal;
 /// Unique objects with indexed removal; `EBTree::<i32, Bounds>::default()`.
 pub struct EBTree<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolume> {
-    tree: UBTree<T, B>,
+    // OCCT 3d097a0328 destroys derived map members before its UBTree base.
     objects: DataMap<T, usize>,
+    tree: UBTree<T, B>,
 }
 impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolume> Default
     for EBTree<T, B>
