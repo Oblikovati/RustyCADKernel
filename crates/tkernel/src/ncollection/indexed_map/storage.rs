@@ -20,7 +20,10 @@ impl<K: std::panic::UnwindSafe> std::panic::UnwindSafe for IndexedStorage<K> {}
 impl<K> IndexedStorage<K> {
     pub(super) fn new(count: usize, allocator: BaseAllocator) -> Self {
         Self {
-            topology: IndexedTopology::new(count, allocator),
+            topology: IndexedTopology::new(crate::ncollection::BaseIndexedMapStorage::new(
+                count,
+                Some(allocator),
+            )),
             ownership: PhantomData,
         }
     }
@@ -51,7 +54,7 @@ impl<K> IndexedStorage<K> {
         unsafe { (&mut *self.node(index).cast::<IndexedMapNode<K>>()).key1() }
     }
     pub(super) fn observer(&self) -> IndexedMapObserver {
-        self.topology.observer()
+        IndexedMapObserver(self.topology.observer())
     }
     pub(super) fn exchange(&mut self, other: &mut Self) {
         self.topology.exchange(&mut other.topology);
