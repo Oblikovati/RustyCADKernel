@@ -1,0 +1,202 @@
+{
+  "schema": "rustycad.harray1-trivial-copy.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "a8df949e568be0ebe60fd92e31247ec842a8ea1e",
+  "branch": "port/harray1-trivial-copy",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "One native HArray1 const-Array1 constructor. Adds explicitly selected trivially-copyable element policy through existing Array1::assign_trivial. Ordinary from_array and its owned_copy helper are relocated byte-for-byte unchanged; no Array storage engine changes.",
+  "native_id": "8ff06efee5061db4bd0831d3dfded357ba1fe951cf5843756236302dcc2f2035",
+  "native": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_harray1_trivial_copy.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/harray1-trivial-native"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "run_exit": 0,
+    "run_stderr": "",
+    "rows": 8
+  },
+  "fixture_join": "Eight native rows are dynamically generated from Rust state and matched exactly. Owned, borrowed, rebased, default-empty, rebased-empty and borrowed-empty sources retain bounds and values in independent copied storage. Empty ownership/null-pointer observations match. Source mutation leaves the copy unchanged. Shared handles have counts1/2/1 and see edits, while the original borrowed source remains unchanged.",
+  "adapter_domain": "Caller explicitly chooses trivial copy using T:Copy. The native fixture statically asserts std::is_trivially_copyable. A deliberately observable custom Rust Clone hook proves ordinary from_array still invokes its existing policy while from_array_trivial bypasses Clone. No automatic specialization or blanket equivalence for the ordinary constructor is claimed.",
+  "baseline_pre_edit_probe": {
+    "command": [
+      "/home/vmiguel/.cargo/bin/rustc",
+      "--edition=2024",
+      "/tmp/harray1-trivial-baseline.rs",
+      "--extern",
+      "rustycad_tkernel=/tmp/rustycad-dynamic-tail-target/debug/deps/librustycad_tkernel-af2d3799ec5720f7.rlib",
+      "-L",
+      "dependency=/tmp/rustycad-dynamic-tail-target/debug/deps",
+      "-o",
+      "/tmp/harray1-trivial-baseline"
+    ],
+    "run_exit": 101,
+    "stdout": "",
+    "stderr": "\nthread 'main' (3369359) panicked at /tmp/harray1-trivial-baseline.rs:4:50:\nClone hook called\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+    "rlib_sha256": "d0e6b202ad3603ccd469684a1575c6472be7ac55bfc4a94982ef8ca9d9342e77"
+  },
+  "candidate_dispatch_probe": {
+    "command": [
+      "/home/vmiguel/.cargo/bin/rustc",
+      "--edition=2024",
+      "/tmp/harray1-trivial-call-probe.rs",
+      "--extern",
+      "rustycad_tkernel=/tmp/rustycad-dynamic-tail-target/debug/deps/librustycad_tkernel-af2d3799ec5720f7.rlib",
+      "-L",
+      "dependency=/tmp/rustycad-dynamic-tail-target/debug/deps",
+      "-o",
+      "/tmp/harray1-trivial-call-probe"
+    ],
+    "rlib_sha256": "ec4b23b9a5e35e10d8344346849e6662c82fc8d151db33ad67affbd541fe724a",
+    "probe_sha256": "112adac556fb9544f033f7b7a6d368edbc66aa2ec287d3946ac1b69d4c42f1be",
+    "ordinary_compile_exit": 0,
+    "ordinary_run_exit": 101,
+    "trivial_compile_exit": 0,
+    "trivial_run_exit": 0,
+    "scope": "The unchanged ordinary constructor still invokes Clone; explicitly selecting trivial policy bypasses that hook for the same Copy item. Baseline probe before edits is archived separately."
+  },
+  "ordinary_behavior_preserved": {
+    "archive": "porting/runtime-evidence/harray1-trivial-ordinary-preserved.json.gz",
+    "sections": 2,
+    "verification": "Exact old from_array impl block and owned_copy helper including provenance comment occur unchanged in the new copy_construction module. Ordinary nontrivial String copying and custom-Clone panic remain tested."
+  },
+  "checks": {
+    "rust_passed": 83,
+    "rust_failed": 0,
+    "strict_provenance_miri_passed": 39,
+    "native_original_passed": 44,
+    "python_binding_passed": 25,
+    "scoped_clippy_exit": 0,
+    "fmt_exit": 0,
+    "native_fixture_rows": 8
+  },
+  "compiler_capture": {
+    "format_version": 61,
+    "exit": 0,
+    "unrelated_doc_warnings": 9,
+    "native_ids": 1,
+    "public_bodies": 2,
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options"
+  },
+  "original_tests": {
+    "joined": 44,
+    "dedicated_wrapper_gtest_declarations": 0,
+    "archive": "porting/runtime-evidence/harray1-trivial-original-joins.json.gz",
+    "scope": "All native NCollection_Array1Test passing names join existing Rust passing declarations exactly. These inherited dependency regressions count once; assertions and mappings are unchanged. No new exhaustive assertion-faithfulness audit is claimed."
+  },
+  "wrapper_inventory": {
+    "archive": "porting/runtime-evidence/harray1-trivial-wrapper-method-inventory.json.gz",
+    "counts": {
+      "direct": 24,
+      "api_visible_direct": 22
+    },
+    "prior_archive": "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz",
+    "scope": "24 direct HArray1 declarations,22 api_visible. Only const-Array1 constructor domain changes. Prior inventory retains inheritance candidates and absence of dedicated wrapper GTest names; no automatic inherited coverage or implicit special-member credit."
+  },
+  "inherited_proof_replay": {
+    "harray1_fill": "porting/audits/harray1-borrowed-initialization.json",
+    "harray2_fill": "porting/audits/harray2-borrowed-initialization.json",
+    "result": "Each current replay passes1exact native ID/3compiler bodies/6guards against unchanged ledger rows; archived current logs provided. Historical receipts remain unchanged."
+  },
+  "commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test harray1_trivial_copy --test harray1_borrowed_initialization --test harray2_borrowed_initialization --test ncollection_array1 --test ncollection_arrays_api_behavior --test shared_collection_method_contracts",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test harray1_trivial_copy --test harray1_borrowed_initialization --test harray2_borrowed_initialization --test ncollection_arrays_api_behavior --test shared_collection_method_contracts",
+    "python": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_api_binding*.py'",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --test harray1_trivial_copy --test harray1_borrowed_initialization --test harray2_borrowed_initialization --test ncollection_arrays_api_behavior --test shared_collection_method_contracts -- -D warnings",
+    "native_originals": "OpenCascadeGTest --gtest_filter='NCollection_Array1Test.*'",
+    "fmt": "cargo fmt --all -- --check"
+  },
+  "ledger_transaction": {
+    "candidate_ledger_blob": "42e437e5528d3b8641ec934c9981df7240d26cc2",
+    "replaced_rows": 1,
+    "previous_status": "implemented",
+    "current_status": "partial",
+    "implemented_credit_delta": -1,
+    "legacy_test_mapping_delta": 0,
+    "proof": "Exact native constructor identity and two current source-hashed compiler bodies. Six guards reject wrong IDs, stale bodies, missing selectors, unrelated original-transaction mutation and owned current mutation, while allowing unrelated current class changes."
+  },
+  "limits": [
+    "T:Copy is an explicitly selected Rust policy, not automatic proof that arbitrary cross-language item representations satisfy native trivial-copy requirements.",
+    "Ordinary from_array remains a Clone policy; its existing success and failure behavior is not silently relabeled equivalent to all native copy constructors.",
+    "Native allocation failure, nontrivial partial construction leaks/destruction, zero-sized Rust values and exact byte layout/allocation requests remain outside this batch.",
+    "Send+Sync+static bounds and wrapper lock guards restrict native type, aliasing and reentrant access domains.",
+    "Only valid initialized source storage is covered; no invalid pointer or overflowing-range behavior is adopted.",
+    "No full class, implicit special-member, inherited API, RTTI/alias or denominator-complete proof is claimed."
+  ],
+  "replay_command": "gzip -dc porting/runtime-evidence/harray1-trivial-replay.py.gz > /tmp/replay-harray1-trivial.py && python3 /tmp/replay-harray1-trivial.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/harray.rs": "39712c0884c8424a41293612855b7f2681810a063a19b3968921a2cd4e54ef9e",
+    "crates/tkernel/src/ncollection/harray/copy_construction.rs": "1c0f90a8a4bb6b5a7aec3991ee9e52ea194a5c6f04274675b0c1fa3016e8c7b3",
+    "crates/tkernel/src/ncollection/array1.rs": "e15f2f326a9abab2a9a6ca0baf1b11234a386c192920519428394c89047b90d8",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "ccfd252c64698a515552dfb23d41baebd3c99ab1d78b4b0c3d2253884086263f",
+    "crates/tkernel/tests/harray1_trivial_copy.rs": "12c0a9ea8828b21d68fc9b5fcc25acfce29fb05734272cd08a5c113829801c41",
+    "crates/tkernel/tests/harray1_trivial_copy/native_rows.rs": "566ee088dfb747f5ade2b0aebab6d2e09d51f65294586a0b736ff28facb15b1b",
+    "crates/tkernel/tests/harray1_borrowed_initialization.rs": "230b58155550fbb8339b517630f99fe6e2787463af1a13a03d0489fff3c92f4a",
+    "crates/tkernel/tests/harray2_borrowed_initialization.rs": "64ea61bf9fb56fc7cdb5093263a96976cf70bae071b46567d9c54122bae74195",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs": "6be15c5d34e5d369c4738fa7513cac13cd2d13951faa841f489983b6dcc508ec",
+    "tools/oracle/tkernel_harray1_trivial_copy.cxx": "3ec59313e31a687a41bd3f356279e235e186b1711d9daa52414c5d37e2885ef2",
+    "tools/oracle/tkernel_harray1_trivial_copy.expected": "6cfca37d444b79fc95de03d0853200dd3ebfa065a2e0d8ac042376b44674a7b1"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-inventory/legacy-tests.jsonl.gz": "d6037cc257db2c5d1dc903313da24fb2b3849636fa6d25924d8dbed7ec114d8b",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "tools/normalize_rustdoc_inventory.py": "dd8f7ffb34eedf0b55d69b71a4c4dbdc117ea55a9109c4ae333f592fbe45a28e",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/runtime-evidence/harray1-borrowed-wrapper-method-inventory.json.gz": "0e6f0a0858a218da54b3f90d31691676187bc13a598ae011bec1065a5487478e",
+    "porting/audits/harray1-borrowed-initialization.json": "08aa9510b27c07eefed12cc93bc2617974a5ca8002a772e576a89faeba9f79eb",
+    "porting/audits/harray2-borrowed-initialization.json": "7d13bfd9997418859a38bf874604989c9f8ecd93300a6869b20ee1978cd3dfcc"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx": "28da2eee9a8873260e5fbacfc28cf97d9f0c5eb31293b115b1cfd589a81e46ec",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/harray1-trivial-baseline.json.gz": "413d5f690663e72874ab187c89e473d7dd4a14df51da8d1686cc4f13805dee58",
+    "porting/runtime-evidence/harray1-trivial-baseline.rs.gz": "274dba209d072f4d7ff980a9786deb1c526fb49c4b22bb37412de1ca828f9f87",
+    "porting/runtime-evidence/harray1-trivial-binding-tests.log.gz": "b8323218109e630bb4dd0082ce6edffa3553b716285c1dd17421078c2a8bdb07",
+    "porting/runtime-evidence/harray1-trivial-bindings.json.gz": "8ed3b8798f530e3d1545a603de376f57b1bc61995f137d0d8664dde9a03233b0",
+    "porting/runtime-evidence/harray1-trivial-call-probe-new.stderr.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/harray1-trivial-call-probe-old.stderr.gz": "95b80737bbd7f2b32c70ff24842ce0ec27bbd1f3bed4a102d9dfaf15c740ec16",
+    "porting/runtime-evidence/harray1-trivial-call-probe.json.gz": "9d8a10d23152b0b1db0ef882095a13fd4ee62d615d06053d4bba93ada7e9e3bf",
+    "porting/runtime-evidence/harray1-trivial-call-probe.rs.gz": "3c462223c3e28bd03eb425b7dd5253c02aa187bfc3adfed64fb8a9080a5ec45f",
+    "porting/runtime-evidence/harray1-trivial-clippy.log.gz": "b945d5dc15e3bc9ca30df9bdd098d46753b71c3e3592c60d4dd9de9066277efc",
+    "porting/runtime-evidence/harray1-trivial-compiler.log.gz": "b8db33d4ed9264dc87a308c66011619a5585676ef8a60a5e50e59a6b3c07ec64",
+    "porting/runtime-evidence/harray1-trivial-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/harray1-trivial-inherited-harray1-replay.log.gz": "cd6f9741e7a42ea63a9c602a66c5433f73cfe3988c696e5385f2f4860dbb12a3",
+    "porting/runtime-evidence/harray1-trivial-inherited-harray2-replay.log.gz": "cd6f9741e7a42ea63a9c602a66c5433f73cfe3988c696e5385f2f4860dbb12a3",
+    "porting/runtime-evidence/harray1-trivial-miri.log.gz": "e3c426f7e4b4df738b6269d947647d138b36d9a5a59d477d2d047f299a7c6032",
+    "porting/runtime-evidence/harray1-trivial-native-command.json.gz": "fe9f623937be45e8ae8baa2a65cd70d620e3683846f1e0c9891e4230b27021db",
+    "porting/runtime-evidence/harray1-trivial-native-originals.log.gz": "fb01b2c0c283eab8e7a1d1a212715571b03a304f35a81faf1fed93ba064767b2",
+    "porting/runtime-evidence/harray1-trivial-native.stdout.gz": "dbbd1233564bcb924e9f8e330e553b762f4024bc888b5332b4de727fdb4a48b7",
+    "porting/runtime-evidence/harray1-trivial-normalized.json.gz": "7c1acc2055993e8304c20ef913db1267cb9a39ad00506100cd92ec2e672f3d02",
+    "porting/runtime-evidence/harray1-trivial-ordinary-preserved.json.gz": "4f2e62852579a3b8b1fe63e2aacd8b1af9c24a6dc0d3f7df6ebf8706277d2f7d",
+    "porting/runtime-evidence/harray1-trivial-original-joins.json.gz": "2643cf4d999bf24a20d015584e3f6162f5191eda58928569386ed33b644b1b19",
+    "porting/runtime-evidence/harray1-trivial-replay.log.gz": "3a4af994e7e64d3067985410b691cad272466905feb97cf65c29e3ee19fd6786",
+    "porting/runtime-evidence/harray1-trivial-replay.py.gz": "7c7cf5c57e35582ab9182f6b262b460051ade4d23f52ad20bdbb3e1f9551da2b",
+    "porting/runtime-evidence/harray1-trivial-rust.log.gz": "39c6079eac0b819544bb3e0dc0f782b07300f6110cbb83fe5a6b209762387aa8",
+    "porting/runtime-evidence/harray1-trivial-rustdoc.json.gz": "888cd7f1592653b93028286b2554daeede12b0bc6ef7417a16b573fb7aad1667",
+    "porting/runtime-evidence/harray1-trivial-transaction.json.gz": "fe122ad786c7d3a44f0c781d3cf9cea81bf50e7759a621edacaee89d39af546e",
+    "porting/runtime-evidence/harray1-trivial-wrapper-method-inventory.json.gz": "a47e712e06dd369ffad57d77d118508aab23dfd283942e6e79a5d4f71b26e0f4"
+  }
+}
