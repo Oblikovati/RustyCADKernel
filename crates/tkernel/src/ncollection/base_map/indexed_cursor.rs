@@ -1,6 +1,7 @@
 use super::{IndexedCursorSource, IndexedCursorSourceMut};
 use crate::standard::Failure;
 mod arithmetic;
+mod comparisons;
 
 /// OCCT's BaseMap::IndexedIterator with explicit owner arguments for safe access.
 /// Example: `BaseMapIndexedIterator::<_, false>::new(&map, 1).value(&map)?`.
@@ -111,18 +112,6 @@ impl<C: IndexedCursorSource, const M: bool> BaseMapIndexedIterator<C, M> {
     /// Reads a signed offset without moving this cursor; `cursor.value_at(&map, 1)?`.
     pub fn value_at<'a>(&self, container: &'a C, offset: isize) -> Result<&'a C::Value, Failure> {
         self.shifted(offset).value(container)
-    }
-    /// Matches native equality: all exhausted iterators compare equal, even across owners.
-    /// Example: `left.is_equal(&left_map, &right, &right_map)?`.
-    pub fn is_equal<const OTHER: bool>(
-        &self,
-        container: &C,
-        other: &BaseMapIndexedIterator<C, OTHER>,
-        other_container: &C,
-    ) -> Result<bool, Failure> {
-        let left_more = self.more(container)?;
-        let right_more = other.more(other_container)?;
-        Ok((!left_more && !right_more) || (self.owner == other.owner && self.index == other.index))
     }
 }
 
