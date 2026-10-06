@@ -70,3 +70,22 @@ fn broader_editable_convenience_construction_gap_remains_explicit() {
         "construct 1 CB10:1,CO1:1,CO1:1, 1"
     );
 }
+
+fn native_construction_case(count: i32) {
+    let allocator = BaseAllocator::accumulating(65536).unwrap();
+    let mut tree = Editable::with_allocator(allocator.clone());
+    let objects = [Payload(1), Payload(2), Payload(3)];
+    let bounds = [Payload(10), Payload(20), Payload(30)];
+    start(&allocator, ('X', 'X', 0));
+    for index in 0..usize::try_from(count).unwrap() {
+        tree.add_native_ref(&objects[index], &bounds[index]);
+    }
+    let row = format!("construct {count} {} {}", finish(), allocations(&allocator));
+    assert_eq!(row, native_row("construct", count));
+}
+#[test]
+fn native_borrowed_adapter_matches_all_previously_unmatched_construction_rows() {
+    for count in 0..=3 {
+        native_construction_case(count);
+    }
+}
