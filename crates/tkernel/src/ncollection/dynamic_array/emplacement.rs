@@ -155,7 +155,7 @@ impl<T> DynamicArray<T> {
         self.ensure_storage_for_index(index);
         self.emplace_checked(index, construct)
     }
-    fn emplace_checked(
+    pub(super) fn emplace_checked(
         &mut self,
         index: usize,
         construct: impl FnOnce() -> T,

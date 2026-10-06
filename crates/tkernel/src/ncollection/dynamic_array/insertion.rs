@@ -91,7 +91,7 @@ impl<T: Clone + Default> DynamicArray<T> {
         index: I,
         value: &T,
     ) -> Result<&mut T, ArrayError> {
-        self.insert_before_with_assignment(index, std::mem::swap, |slot| slot.clone_from(value))
+        self.insert_before_ref_with_assignment(index, value, std::mem::swap, T::clone_from)
     }
     /// Copies after the selected item once native default and shift staging have completed.
     /// `array.insert_after_ref(1, &value)?`; custom move assignment uses the hook adapter.
@@ -100,6 +100,6 @@ impl<T: Clone + Default> DynamicArray<T> {
         index: I,
         value: &T,
     ) -> Result<&mut T, ArrayError> {
-        self.insert_after_with_assignment(index, std::mem::swap, |slot| slot.clone_from(value))
+        self.insert_after_ref_with_assignment(index, value, std::mem::swap, T::clone_from)
     }
 }

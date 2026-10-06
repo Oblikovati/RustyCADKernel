@@ -23,6 +23,7 @@ impl<T> Default for DynamicArray<T> {
     }
 }
 mod block_table;
+mod borrowed;
 mod copy_date;
 mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
