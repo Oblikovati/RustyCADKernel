@@ -31,6 +31,7 @@ mod emplacement;
 mod insertion;
 mod legacy_cursor;
 mod method_tail;
+mod moving;
 #[allow(unsafe_code)]
 mod replacement_policy;
 mod storage_extension;
