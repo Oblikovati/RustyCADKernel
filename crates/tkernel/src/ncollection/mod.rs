@@ -226,3 +226,10 @@ mod owned_bucket_chains;
 
 mod map_payload;
 mod map_topology;
+
+mod ordered_data_map_node;
+mod ordered_map_node;
+mod ordered_node_links;
+mod ordered_node_owner;
+pub use ordered_data_map_node::{OrderedDataMapNode, OrderedDataMapNodeOwner};
+pub use ordered_map_node::{OrderedMapNode, OrderedMapNodeOwner};
