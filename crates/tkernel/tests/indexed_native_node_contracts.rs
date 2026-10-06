@@ -7,9 +7,7 @@ mod fixture;
 #[path = "indexed_native_node_contracts/lifetime.rs"]
 mod lifetime;
 use fixture::{NodeItem, NodeTrace};
-use rustycad_tkernel::ncollection::{
-    IndexedDataMapNode, IndexedMapNode, ListValueNode, MapLinkNode,
-};
+use rustycad_tkernel::ncollection::{IndexedDataMapNode, IndexedMapNode, MapLinkNode};
 fn native_row(prefix: &str, actual: String) {
     let expected = include_str!("../../../tools/oracle/tkernel_indexed_native_nodes.expected");
     let row = expected
@@ -72,8 +70,8 @@ fn all_native_indexed_key_constructor_overloads_preserve_copy_and_drop_order() {
     }
 }
 fn key_prefix_row(node: &mut IndexedMapNode<i32>, next: *mut MapLinkNode) -> String {
-    let base = std::ptr::from_ref(node).cast::<ListValueNode<i32>>();
-    assert_eq!(unsafe { (*base).value() }, &7);
+    // Flat native fields share the link prefix, not a Rust base spanning derived padding.
+    assert_eq!(node.value(), &7);
     let prefix = std::ptr::from_ref(node.link()).cast::<()>() == std::ptr::from_ref(node).cast();
     let same_value =
         std::ptr::from_mut(node.key1()).cast_const() == std::ptr::from_ref(node.value());
@@ -104,8 +102,8 @@ fn native_indexed_key_fields_alias_actual_prefix_and_keep_signed_index() {
     native_row("map_fields", row);
 }
 fn data_prefix_row(node: &IndexedDataMapNode<i32, i32>, next: *mut MapLinkNode) -> String {
-    let base = std::ptr::from_ref(node).cast::<ListValueNode<i32>>();
-    assert_eq!(unsafe { (*base).value() }, &7);
+    // Flat native fields share the link prefix, not a Rust base spanning derived padding.
+    assert_eq!(node.value(), &7);
     let prefix = std::ptr::from_ref(node.link()).cast::<()>() == std::ptr::from_ref(node).cast();
     format!(
         "data_fields {} {} {} {} {}",
