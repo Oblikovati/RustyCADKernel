@@ -1,0 +1,408 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "bounded_defined_domains_pending_integration",
+  "branch": "port/local-array-remaining",
+  "base_commit": "e781f597df39f9eb278bc1c6d7a00c73ae47c895",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "NCollection_LocalArray nontrivial move constructor, move assignment, Reallocate, Allocate, Deallocate; restore original move accounting and ascending in-place tail destruction.",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/local_array.rs": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+    "crates/tkernel/src/ncollection/local_array/nontrivial_move.rs": "1b63f47f4da28fb5c2a362e3d8487e081b9bbc045c7cb1d32db3300f76c58c26",
+    "crates/tkernel/src/ncollection/local_array/trivial_move.rs": "953003820c1c70901d9221e337a44a9e5a5db7052d29534ccaabce6645ccd61c",
+    "crates/tkernel/src/ncollection/local_array/pointers.rs": "b53ee5ff4dba3abee29b13f70fc658b717bd51933c070b0b33c8c33b524f23b9",
+    "crates/tkernel/tests/ncollection_local_array.rs": "c6795b0e887eac9b8843f0e3ca9bfbbc5c844fecfe6bf3f695ff36ff21fbd110",
+    "crates/tkernel/tests/local_array_nontrivial_methods.rs": "abb3699d780b252036e9dc42e038f409853927697f836ce7beda29ac0eb9bd19",
+    "crates/tkernel/tests/local_array_trivial_move_contracts.rs": "21c879e9c471727256fe1a3c797fbd499a43f5ec920e80d91b76198b472a0156",
+    "crates/tkernel/tests/local_array_shared_view.rs": "c239b2c969c1875a74144da851d3ed06be7b45eb1107111dcd7f8a4a1f44a6f1",
+    "crates/tkernel/tests/ncollection_local_array/lifetimes.rs": "083789271d0efad526ee6247218fc599a8b2cd7dd43f2456dbd76d533d616643",
+    "crates/tkernel/tests/ncollection_local_array/moves_views.rs": "099adf09e7ca102c323e14a84938de896da179285c3e0e0c88804972e6e7f67f",
+    "crates/tkernel/tests/ncollection_local_array/allocation.rs": "d0f30a1cf5daa4ffac0c712ff6655603e04ceb37935fdaf5542c6297a6bb82a9",
+    "tools/oracle/tkernel_local_nontrivial_methods.cxx": "43f3d70b0d3c2148637ee95ff137bdb11b3c81208208e4769977eb1577ea1c84",
+    "tools/oracle/tkernel_local_nontrivial_methods.expected": "712f00e60d4c731450f093576afadb5097f79f9143e1b812c539cc889f3d2649",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "crates/tkernel/Cargo.toml": "1e3bb49bd7104209041bffc9ad419edf888b8766d03bd31b014971d23b4d904c"
+  },
+  "upstream_sha256": {
+    "NCollection/NCollection_LocalArray.hxx": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f",
+    "GTests/NCollection_LocalArray_Test.cxx": "d24eb586570d9f970f864f655ec071b07351a66517059b86d0fcaddf1100a864"
+  },
+  "smallvec_source_sha256": "71b0073a3b667542b244a6d7700c652d02f56e3c91849b51ead9fa793ee50bef",
+  "artifact_sha256": {
+    "porting/runtime-evidence/local-nontrivial-rust.log.gz": "c2a29b6166568dec0c8c96894fa0d882b788ae98de6fca4a075de98bab2d3498",
+    "porting/runtime-evidence/local-nontrivial-miri.log.gz": "0977f8479bc4b2aea1fe23e489c6cbaee6e27d00f0d5c5a50ff0b90e41ecf862",
+    "porting/runtime-evidence/local-nontrivial-rustdoc.log.gz": "f45b7d93b166fb2bebfbaac73b08cf5a321929e3a45bf2225e1a79a29e6cbd5d",
+    "porting/runtime-evidence/local-nontrivial-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-unit.log.gz": "0cf332f3ea1faf77620f45c4aac1d9b3e65f1c87f0d38ccb8e3261103f1a82c7",
+    "porting/runtime-evidence/local-nontrivial-clippy.log.gz": "61241afa22dfe6ba658d7900a2a754784ef68adafe489f282561455c6af21db5",
+    "porting/runtime-evidence/local-nontrivial-doc.log.gz": "2a1e4ca8bd5b335268b760831945d554930046d8b07fde61c6b7d978cbb321f7",
+    "porting/runtime-evidence/local-nontrivial-miri-unit.log.gz": "7803285a6469e84733a0611ca2b7218df7e203f1990a7f21afbcc46abf2d9a65",
+    "porting/runtime-evidence/local-nontrivial-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-native-trace.log.gz": "fd9032c3a8d93d43cfa9f66fc37e4b14fe1499506c27d6be4081f90621ba58ac",
+    "porting/runtime-evidence/local-nontrivial-native-original.log.gz": "30040dadde7aba69d3e3262f886849ddfcfb8181b75ced59379e54a9643e2b49",
+    "porting/runtime-evidence/local-nontrivial-native-original.xml.gz": "8a3b56d7ee370f0e771bf4cc7006452318fa9cf34c87fb30385c1de18e568353",
+    "porting/runtime-evidence/local-nontrivial-replay.json.gz": "2a1634882ec302ad3850b7a6b7a7d680173f07dfd4cff5f10e255c664cec04bf",
+    "porting/runtime-evidence/local-nontrivial-clippy-initial.log.gz": "4c9ba7f41d96a83dd791d2645f2db95f9973aada208bcc0fa2be443fc7cb2347",
+    "porting/runtime-evidence/local-nontrivial-rust-unsafe-red.log.gz": "155e4cf8d3c140a1021c3568fdcae5b6d1f449d8ba8605e25780a7f1a71cab3f",
+    "porting/runtime-evidence/local-nontrivial-miri-unsafe-red.log.gz": "155e4cf8d3c140a1021c3568fdcae5b6d1f449d8ba8605e25780a7f1a71cab3f",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-shrink-order.log.gz": "f55d89e9ff850cdc19956e54771db76602d9d17303b9b195aa0f856d159e7243",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-auto.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-variance.log.gz": "b37ad7387745981ada013648e391aeffaac8c063aa6ad0f0842b9b5ace0b1481",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-dropck.log.gz": "35707c9ac44c540451b7a7420fd27d5c042a4e52aadeeeae459bade545b5147c",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-pinned.log.gz": "137dc91542424202136810aac52d79618506ab7e76cd4e0369ffe830c15a9f17",
+    "porting/runtime-evidence/local-nontrivial-probe-baseline-borrowed.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-shrink-order.log.gz": "52a67c47c44eeb4906a85fbb2d1a2683a538185d6f303b89c059c327cfa6b19f",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-auto.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-variance.log.gz": "b37ad7387745981ada013648e391aeffaac8c063aa6ad0f0842b9b5ace0b1481",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-dropck.log.gz": "35707c9ac44c540451b7a7420fd27d5c042a4e52aadeeeae459bade545b5147c",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-pinned.log.gz": "a2bd7542ffa8f7007574432f967813e4512d31dff4eeee2be49da381f1cc99af",
+    "porting/runtime-evidence/local-nontrivial-probe-candidate-borrowed.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/local-nontrivial-trait-review.json.gz": "a58db228594a3cbd67347481a70197d76d7fd7ed2296e7819ef39b8928dd436d",
+    "porting/runtime-evidence/local-nontrivial-compiler.json.gz": "bbdf99bdd7caa79682e66d47d36e1238ac0da8050036cd56dcc5d28278286773",
+    "porting/runtime-evidence/local-nontrivial-compiler-local-array.json.gz": "0dc4c248700c5c7b0e5d13cb39da78820960d766cd831d753171088bb6b37580",
+    "porting/runtime-evidence/local-nontrivial-source.json.gz": "d44e65717fe9aabf88885cc958a8dfb74a3dbb78753138fd43fd7d3526100243",
+    "porting/runtime-evidence/local-nontrivial-baseline-source.json.gz": "a503230b70b6ef362143bc05752a350389a5a0c6e048b7e3c3782ce6f0995bc7",
+    "porting/runtime-evidence/local-nontrivial-native-source.json.gz": "f819b29cb2037a6748d063251825c3332b5a8561f00d5abfbfd86c6ae0413d5b",
+    "porting/runtime-evidence/local-nontrivial-smallvec-source.rs.gz": "cce238594642659b98ba8ee94be8116dd7fc418af5ad44caf4cb537977621c83"
+  },
+  "exit_codes": {
+    "rust": 0,
+    "miri": 0,
+    "rustdoc": 0,
+    "fmt": 0,
+    "unit": 0,
+    "clippy": 0,
+    "doc": 0,
+    "miri-unit": 0
+  },
+  "suites": [
+    "ncollection_local_array",
+    "local_array_nontrivial_methods",
+    "local_array_trivial_move_contracts",
+    "local_array_shared_view"
+  ],
+  "focused_integration_passes": 66,
+  "local_array_unit_passes": 1,
+  "rustdoc_passes": 259,
+  "new_test_count": 23,
+  "new_test_names": [
+    "nontrivial_inline_growth_preserves_old_values_with_either_copy_flag",
+    "nontrivial_inline_to_heap_moves_then_defaults_then_destroys",
+    "nontrivial_heap_to_heap_moves_even_when_storage_could_be_retained",
+    "nontrivial_retained_heap_can_return_to_inline",
+    "nontrivial_inline_to_heap_without_copy_constructs_before_destroying",
+    "nontrivial_heap_to_heap_without_copy_constructs_before_destroying",
+    "nontrivial_heap_to_inline_without_copy_constructs_before_destroying",
+    "shrink_destroys_in_native_forward_order",
+    "same_size_does_not_construct_move_or_destroy",
+    "construct_inline_invokes_moves_before_destroying_sources",
+    "construct_heap_transfers_allocation_without_callbacks",
+    "assign_inline_to_inline_destroys_destination_before_moves",
+    "assign_inline_to_heap_destroys_destination_before_moves",
+    "assign_heap_to_inline_transfers_allocation_after_destination_drops",
+    "assign_heap_to_heap_transfers_allocation_after_destination_drops",
+    "destructor_visits_values_in_native_ascending_order",
+    "ordinary_shrink_and_allocate_use_the_same_forward_destruction",
+    "move_adapter_accepts_borrowed_values",
+    "panicking_destructor_releases_each_inline_or_heap_value_once",
+    "panicking_deallocate_leaves_no_live_values_to_drop_twice",
+    "public_local_array_auto_traits_are_preserved",
+    "removed_values_are_destroyed_in_place_in_inline_and_heap_buffers",
+    "nontrivial_relocation_destroys_moved_sources_in_place"
+  ],
+  "strict_provenance_miri_passes": 67,
+  "strict_provenance_flags": "-Zmiri-strict-provenance; no ignore-leaks or permissive-provenance options",
+  "original_native_passes": 33,
+  "original_names_joined": [
+    "NCollection_LocalArrayTest.ConstructorWithSize",
+    "NCollection_LocalArrayTest.CustomMaxArraySize",
+    "NCollection_LocalArrayTest.CustomType",
+    "NCollection_LocalArrayTest.DefaultConstructor",
+    "NCollection_LocalArrayTest.LargeSizeAllocation",
+    "NCollection_LocalArrayTest.MoveAssignment",
+    "NCollection_LocalArrayTest.MoveConstructor_FromHeap",
+    "NCollection_LocalArrayTest.MoveConstructor_FromStack",
+    "NCollection_LocalArrayTest.NonTrivial_DestructorCallBalance",
+    "NCollection_LocalArrayTest.NonTrivial_HeapAllocation",
+    "NCollection_LocalArrayTest.NonTrivial_MoveAssignment",
+    "NCollection_LocalArrayTest.NonTrivial_MoveConstructor_FromHeap",
+    "NCollection_LocalArrayTest.NonTrivial_MoveConstructor_FromInline",
+    "NCollection_LocalArrayTest.NonTrivial_ReallocateWithCopy_HeapToHeap",
+    "NCollection_LocalArrayTest.NonTrivial_ReallocateWithCopy_InlineToHeap",
+    "NCollection_LocalArrayTest.NonTrivial_ReallocateWithCopy_InlineToInline",
+    "NCollection_LocalArrayTest.NonTrivial_Shrink_DestroysExcess",
+    "NCollection_LocalArrayTest.NonTrivial_SmallAllocation",
+    "NCollection_LocalArrayTest.ReallocateAsGrowableStack",
+    "NCollection_LocalArrayTest.ReallocateHeapToHeap_WithCopy",
+    "NCollection_LocalArrayTest.ReallocateNoCopy",
+    "NCollection_LocalArrayTest.ReallocateShrink",
+    "NCollection_LocalArrayTest.ReallocateStackToHeap_WithCopy",
+    "NCollection_LocalArrayTest.ReallocateStackToStack_WithCopy",
+    "NCollection_LocalArrayTest.Reallocation",
+    "NCollection_LocalArrayTest.STLIterators",
+    "NCollection_LocalArrayTest.SmallSizeAllocation",
+    "NCollection_LocalArrayTest.ToArray1_EmptyVector",
+    "NCollection_LocalArrayTest.ToArray1_HeapBuffer",
+    "NCollection_LocalArrayTest.ToArray1_ModifyReflectsInSource",
+    "NCollection_LocalArrayTest.ToArray1_ReadThrough",
+    "NCollection_LocalArrayTest.ToArray1_SamePointer",
+    "NCollection_LocalArrayTest.TransitionStackToHeap"
+  ],
+  "original_assertion_restored": "NCollection_LocalArrayTest.NonTrivial_DestructorCallBalance now checks constructor_count + move_count == destructor_count, exactly as native. All nontrivial legacy transitions use explicit move callbacks.",
+  "native_trace_rows": 33,
+  "candidate_bindings": [
+    {
+      "cpp_id": "1448a174c3578f4d02fede8279d4927222eebe655aeb56d54a83d5bbb6820af7",
+      "cpp_name": "NCollection_LocalArray::Reallocate",
+      "cpp_signature": "void (unsigned long, bool)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::reallocate",
+        "rustycad_tkernel::ncollection::LocalArray::reallocate_with_move"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::reallocate_with_move",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array/nontrivial_move.rs",
+          "source_sha256": "1b63f47f4da28fb5c2a362e3d8487e081b9bbc045c7cb1d32db3300f76c58c26",
+          "declaration_sha256": "dc6bdd40e90fe6a69790803883e3ebdcc05f45313fc7c770d845928169082845"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::reallocate",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array.rs",
+          "source_sha256": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+          "declaration_sha256": "8249fd224ecb5464396b990de03d54ecb5f80098ff4b800da9350d42a7ea4558"
+        }
+      ]
+    },
+    {
+      "cpp_id": "0f8f1eec76cb43f23e4f40d1d010a45296ed967437932d6b89f867d2e8fdade7",
+      "cpp_name": "NCollection_LocalArray::Deallocate",
+      "cpp_signature": "void () noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::deallocate"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::deallocate",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array.rs",
+          "source_sha256": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+          "declaration_sha256": "6b7e63d041288b298da42345dcd4f93d7f4bfeba48ab1c433ec9477e9298d1cc"
+        }
+      ]
+    },
+    {
+      "cpp_id": "398dc1da1cb34f3fe592485c9388353352de61a7eb39d9de0ebcb4c9c658519c",
+      "cpp_name": "NCollection_LocalArray::Allocate",
+      "cpp_signature": "void (unsigned long)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::allocate"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::allocate",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array.rs",
+          "source_sha256": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+          "declaration_sha256": "49891c99842671eca5128faac6f08e19ce0ee71883a90d13701110da7aea4ad7"
+        }
+      ]
+    },
+    {
+      "cpp_id": "acdf8fe8b6680486eb091d2d1e5831cc846610265a43ada072f60a8c974813b8",
+      "cpp_name": "NCollection_LocalArray::NCollection_LocalArray<theItem, MAX_ARRAY_SIZE>",
+      "cpp_signature": "void (NCollection_LocalArray<theItem, NCollection_LocalArray::MAX_ARRAY_SIZE> &&) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::move_construct_with"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::move_construct_with",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array/nontrivial_move.rs",
+          "source_sha256": "1b63f47f4da28fb5c2a362e3d8487e081b9bbc045c7cb1d32db3300f76c58c26",
+          "declaration_sha256": "8b99c6e1685eb476ff8b69b941a2f0f56ba081989ad35806588fa399e77e1fc9"
+        }
+      ]
+    },
+    {
+      "cpp_id": "d2d4c8cc11cd92965daa863d8ff352b3ed2c79941199830c855bd90c928457c6",
+      "cpp_name": "NCollection_LocalArray::operator=",
+      "cpp_signature": "NCollection_LocalArray<theItem, NCollection_LocalArray::MAX_ARRAY_SIZE> &(NCollection_LocalArray<theItem, NCollection_LocalArray::MAX_ARRAY_SIZE> &&) noexcept",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::move_from_with",
+        "rustycad_tkernel::ncollection::LocalArray::move_self",
+        "rustycad_tkernel::ncollection::LocalArray::move_from_trivial"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::move_from_with",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array/nontrivial_move.rs",
+          "source_sha256": "1b63f47f4da28fb5c2a362e3d8487e081b9bbc045c7cb1d32db3300f76c58c26",
+          "declaration_sha256": "5de50c5482bb72030c3490ad46cafb779360cc10067bcfa3472a210298e8a8b1"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::move_from_trivial",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array/trivial_move.rs",
+          "source_sha256": "953003820c1c70901d9221e337a44a9e5a5db7052d29534ccaabce6645ccd61c",
+          "declaration_sha256": "4a67ecf50935c30e6d66d5a6b7300444c6caded9b781a593d51a5acc63a80616"
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::move_self",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array.rs",
+          "source_sha256": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+          "declaration_sha256": "3d90f66722e256b2ccf1249d7ed2c3b2b846bf787a6df7966c735a8bfe522709"
+        }
+      ]
+    },
+    {
+      "cpp_id": "cfd07d922d3a49022f44eee70d0497c8436a76a517f06d849145b05e2ca22a25",
+      "cpp_name": "NCollection_LocalArray::NCollection_LocalArray<theItem, MAX_ARRAY_SIZE>",
+      "cpp_signature": "void (unsigned long)",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::LocalArray::new"
+      ],
+      "status": "partial_nontrivial_defined_domain",
+      "compiler_bodies": [
+        {
+          "path": "rustycad_tkernel::ncollection::LocalArray::new",
+          "kind": "function",
+          "source_file": "crates/tkernel/src/ncollection/local_array.rs",
+          "source_sha256": "7bf8d2bdb5cf6d8e4ef34148cfbc92d28e395531dfa666e5cba1b4cfd6b88bec",
+          "declaration_sha256": "c7bb0d330879f81a80fb9dc5b8540e03cb5dcba8dbac34a7b0b7857719946c9c"
+        }
+      ]
+    }
+  ],
+  "behavior_evidence": [
+    "Native event rows cover inline growth, inline/heap relocation, copy=false, heap-to-inline reuse after shrink, equal size, ascending destruction, all four move-assignment storage combinations, and inline/heap move construction.",
+    "Baseline executable shrink order is [15,14,13,12]; native and candidate are [12,13,14,15].",
+    "Move callbacks run for every inline source before any moved-from destructor; heap move transfers the allocation without callbacks. Assignment destroys receiver values before invoking source move callbacks.",
+    "Shrinking destroys removed elements in place; explicit address-sensitive destructor tests protect against accidental drain/move destruction.",
+    "Rust destructor panic checks prove remaining values are destroyed exactly once under strict Miri. Native noexcept destructor exceptions are outside the common domain."
+  ],
+  "trait_review": {
+    "baseline_and_candidate": "Both accept Send+Sync+Unpin+UnwindSafe+RefUnwindSafe for i32 and properly ordered borrowed values. Both reject covariance, later-declared referent drop order, and LocalArray<PhantomPinned>:Unpin. No LocalArray Drop impl was added.",
+    "probes": [
+      {
+        "version": "baseline",
+        "probe": "shrink-order",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-shrink-order.log.gz"
+      },
+      {
+        "version": "baseline",
+        "probe": "auto",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-auto.log.gz"
+      },
+      {
+        "version": "baseline",
+        "probe": "variance",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-variance.log.gz"
+      },
+      {
+        "version": "baseline",
+        "probe": "dropck",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-dropck.log.gz"
+      },
+      {
+        "version": "baseline",
+        "probe": "pinned",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-pinned.log.gz"
+      },
+      {
+        "version": "baseline",
+        "probe": "borrowed",
+        "library_sha256": "8e13f3eb2356dd2fcb7b22ef30a38e9c6ee68c7c0afe1fb58ecdcd90f3b978fa",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-baseline-borrowed.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "shrink-order",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-shrink-order.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "auto",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-auto.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "variance",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-variance.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "dropck",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-dropck.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "pinned",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 1,
+        "run": null,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-pinned.log.gz"
+      },
+      {
+        "version": "candidate",
+        "probe": "borrowed",
+        "library_sha256": "03a8e8b4acc2c289b9b73e4b461523cf031be847788d54cb8fa9710e89fd6427",
+        "exit": 0,
+        "run": 0,
+        "artifact": "porting/runtime-evidence/local-nontrivial-probe-candidate-borrowed.log.gz"
+      }
+    ]
+  },
+  "limitations": [
+    "Explicit callbacks model native nontrivial element move construction; generic reallocate and move_from retain Rust ownership-move semantics and are documented accordingly.",
+    "Defined common domain is non-self-referential movable initialized values with non-panicking default/move/drop callbacks; Rust constructor-panic recovery and destructor-panic cleanup are safety extensions, not native exception equivalence.",
+    "Native trivial uninitialized storage remains initialized Rust storage. No uninitialized scalar or C++ trait inference parity is claimed.",
+    "Standard allocator byte layouts, allocator hooks, exact growth capacities and Standard::Reallocate identity are not reproduced by SmallVec.",
+    "Const ToArray1 remains a Rust copy-on-write shared view; writable native const aliases and aliases across mutations remain unported.",
+    "Container callback metadata reentrancy through native aliases is not covered by Rust exclusive borrows.",
+    "Inline physical moves of the Rust container can change element addresses; no pinned/self-referential element compatibility or ABI/sizeof equality is claimed.",
+    "Remaining protected storage helpers and automatic C++ type-trait selection are not closed by this receipt."
+  ],
+  "api_parity_complete": false,
+  "global_api_claims_added": 0,
+  "original_test_mapping_credit_added": 0
+}
