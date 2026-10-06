@@ -33,6 +33,8 @@ mod erase_phase;
 mod insertion;
 mod internal_append;
 mod internal_insertion;
+#[allow(unsafe_code)]
+mod internal_reconstruction;
 mod internal_setvalue;
 mod legacy_cursor;
 mod method_tail;

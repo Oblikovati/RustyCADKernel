@@ -1,0 +1,102 @@
+reconstruct_m0_i0_s0 K10;X10;K10;X10; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m0_i0_s1 K20;X10;K20;X20; size=4 live=4 threw=0 same=1 stable=1 20 20 30 40
+reconstruct_m0_i0_s2 K30;X10;K30;X30; size=4 live=4 threw=0 same=1 stable=1 30 20 30 40
+reconstruct_m0_i0_s3 K40;X10;K40;X40; size=4 live=4 threw=0 same=1 stable=1 40 20 30 40
+reconstruct_m0_i1_s0 K10;X20;K10;X10; size=4 live=4 threw=0 same=1 stable=1 10 10 30 40
+reconstruct_m0_i1_s1 K20;X20;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m0_i1_s2 K30;X20;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 30 30 40
+reconstruct_m0_i1_s3 K40;X20;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 40 30 40
+reconstruct_m0_i2_s0 K10;X30;K10;X10; size=4 live=4 threw=0 same=1 stable=1 10 20 10 40
+reconstruct_m0_i2_s1 K20;X30;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 20 20 40
+reconstruct_m0_i2_s2 K30;X30;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m0_i2_s3 K40;X30;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 20 40 40
+reconstruct_m0_i3_s0 K10;X40;K10;X10; size=4 live=4 threw=0 same=1 stable=1 10 20 30 10
+reconstruct_m0_i3_s1 K20;X40;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 20 30 20
+reconstruct_m0_i3_s2 K30;X40;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 20 30 30
+reconstruct_m0_i3_s3 K40;X40;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m0_i7_s0 D0;D0;D0;K10; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 10
+reconstruct_m0_i7_s1 D0;D0;D0;K20; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 20
+reconstruct_m0_i7_s2 D0;D0;D0;K30; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 30
+reconstruct_m0_i7_s3 D0;D0;D0;K40; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 40
+reconstruct_m0_i0_construct K20; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m0_i0_transfer K20;X10;K20;X20; size=4 live=3 threw=1 same=0 stable=1 dead 20 30 40
+reconstruct_m0_i1_construct K20; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m0_i1_transfer K20;X20;K20;X20; size=4 live=3 threw=1 same=0 stable=1 10 dead 30 40
+reconstruct_m0_default D0; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m0_negative none size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m1_i0_s0 M10;X-7;K10;X10; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m1_i0_s1 M20;X10;K20;X20; size=4 live=4 threw=0 same=1 stable=1 20 -7 30 40
+reconstruct_m1_i0_s2 M30;X10;K30;X30; size=4 live=4 threw=0 same=1 stable=1 30 20 -7 40
+reconstruct_m1_i0_s3 M40;X10;K40;X40; size=4 live=4 threw=0 same=1 stable=1 40 20 30 -7
+reconstruct_m1_i1_s0 M10;X20;K10;X10; size=4 live=4 threw=0 same=1 stable=1 -7 10 30 40
+reconstruct_m1_i1_s1 M20;X-7;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m1_i1_s2 M30;X20;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 30 -7 40
+reconstruct_m1_i1_s3 M40;X20;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 40 30 -7
+reconstruct_m1_i2_s0 M10;X30;K10;X10; size=4 live=4 threw=0 same=1 stable=1 -7 20 10 40
+reconstruct_m1_i2_s1 M20;X30;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 -7 20 40
+reconstruct_m1_i2_s2 M30;X-7;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m1_i2_s3 M40;X30;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 20 40 -7
+reconstruct_m1_i3_s0 M10;X40;K10;X10; size=4 live=4 threw=0 same=1 stable=1 -7 20 30 10
+reconstruct_m1_i3_s1 M20;X40;K20;X20; size=4 live=4 threw=0 same=1 stable=1 10 -7 30 20
+reconstruct_m1_i3_s2 M30;X40;K30;X30; size=4 live=4 threw=0 same=1 stable=1 10 20 -7 30
+reconstruct_m1_i3_s3 M40;X-7;K40;X40; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m1_i7_s0 D0;D0;D0;M10; size=8 live=8 threw=0 same=1 stable=1 -7 20 30 40 0 0 0 10
+reconstruct_m1_i7_s1 D0;D0;D0;M20; size=8 live=8 threw=0 same=1 stable=1 10 -7 30 40 0 0 0 20
+reconstruct_m1_i7_s2 D0;D0;D0;M30; size=8 live=8 threw=0 same=1 stable=1 10 20 -7 40 0 0 0 30
+reconstruct_m1_i7_s3 D0;D0;D0;M40; size=8 live=8 threw=0 same=1 stable=1 10 20 30 -7 0 0 0 40
+reconstruct_m1_i0_construct M20; size=4 live=4 threw=1 same=0 stable=1 10 -7 30 40
+reconstruct_m1_i0_transfer M20;X10;K20;X20; size=4 live=3 threw=1 same=0 stable=1 dead -7 30 40
+reconstruct_m1_i1_construct M20; size=4 live=4 threw=1 same=0 stable=1 10 -7 30 40
+reconstruct_m1_i1_transfer M20;X-7;K20;X20; size=4 live=3 threw=1 same=0 stable=1 10 dead 30 40
+reconstruct_m1_default D0; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m1_negative none size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m2_i0_s0 M10;X-7;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m2_i0_s1 M20;X10;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 20 -7 30 40
+reconstruct_m2_i0_s2 M30;X10;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 30 20 -7 40
+reconstruct_m2_i0_s3 M40;X10;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 40 20 30 -7
+reconstruct_m2_i1_s0 M10;X20;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 -7 10 30 40
+reconstruct_m2_i1_s1 M20;X-7;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m2_i1_s2 M30;X20;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 30 -7 40
+reconstruct_m2_i1_s3 M40;X20;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 40 30 -7
+reconstruct_m2_i2_s0 M10;X30;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 -7 20 10 40
+reconstruct_m2_i2_s1 M20;X30;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 -7 20 40
+reconstruct_m2_i2_s2 M30;X-7;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m2_i2_s3 M40;X30;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 40 -7
+reconstruct_m2_i3_s0 M10;X40;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 -7 20 30 10
+reconstruct_m2_i3_s1 M20;X40;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 -7 30 20
+reconstruct_m2_i3_s2 M30;X40;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 -7 30
+reconstruct_m2_i3_s3 M40;X-7;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m2_i7_s0 D0;D0;D0;M10; size=8 live=8 threw=0 same=1 stable=1 -7 20 30 40 0 0 0 10
+reconstruct_m2_i7_s1 D0;D0;D0;M20; size=8 live=8 threw=0 same=1 stable=1 10 -7 30 40 0 0 0 20
+reconstruct_m2_i7_s2 D0;D0;D0;M30; size=8 live=8 threw=0 same=1 stable=1 10 20 -7 40 0 0 0 30
+reconstruct_m2_i7_s3 D0;D0;D0;M40; size=8 live=8 threw=0 same=1 stable=1 10 20 30 -7 0 0 0 40
+reconstruct_m2_i0_construct M20; size=4 live=4 threw=1 same=0 stable=1 10 -7 30 40
+reconstruct_m2_i0_transfer M20;X10;M20;X-7; size=4 live=3 threw=1 same=0 stable=1 dead -7 30 40
+reconstruct_m2_i1_construct M20; size=4 live=4 threw=1 same=0 stable=1 10 -7 30 40
+reconstruct_m2_i1_transfer M20;X-7;M20;X-7; size=4 live=3 threw=1 same=0 stable=1 10 dead 30 40
+reconstruct_m2_default D0; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m2_negative none size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m3_i0_s0 K10;X10;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m3_i0_s1 K20;X10;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 20 20 30 40
+reconstruct_m3_i0_s2 K30;X10;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 30 20 30 40
+reconstruct_m3_i0_s3 K40;X10;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 40 20 30 40
+reconstruct_m3_i1_s0 K10;X20;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 10 10 30 40
+reconstruct_m3_i1_s1 K20;X20;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m3_i1_s2 K30;X20;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 30 30 40
+reconstruct_m3_i1_s3 K40;X20;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 40 30 40
+reconstruct_m3_i2_s0 K10;X30;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 10 40
+reconstruct_m3_i2_s1 K20;X30;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 20 40
+reconstruct_m3_i2_s2 K30;X30;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m3_i2_s3 K40;X30;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 40 40
+reconstruct_m3_i3_s0 K10;X40;M10;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 10
+reconstruct_m3_i3_s1 K20;X40;M20;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 20
+reconstruct_m3_i3_s2 K30;X40;M30;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 30
+reconstruct_m3_i3_s3 K40;X40;M40;X-7; size=4 live=4 threw=0 same=1 stable=1 10 20 30 40
+reconstruct_m3_i7_s0 D0;D0;D0;K10; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 10
+reconstruct_m3_i7_s1 D0;D0;D0;K20; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 20
+reconstruct_m3_i7_s2 D0;D0;D0;K30; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 30
+reconstruct_m3_i7_s3 D0;D0;D0;K40; size=8 live=8 threw=0 same=1 stable=1 10 20 30 40 0 0 0 40
+reconstruct_m3_i0_construct K20; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m3_i1_construct K20; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m3_default D0; size=4 live=4 threw=1 same=0 stable=1 10 20 30 40
+reconstruct_m3_negative none size=4 live=4 threw=1 same=0 stable=1 10 20 30 40

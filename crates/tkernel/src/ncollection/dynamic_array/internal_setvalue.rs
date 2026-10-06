@@ -47,6 +47,26 @@ impl<T: Default> DynamicArray<T> {
         construct: impl FnOnce(&mut T) -> T,
         assign: impl FnOnce(&mut T, &mut T),
     ) -> Result<&mut T, ArrayError> {
+        self.set_internal_constructed(
+            index,
+            source_index,
+            construct,
+            |array, index, mut temporary| {
+                assign(array.change_value(index)?, &mut temporary);
+                Ok(())
+            },
+        )
+    }
+    pub(super) fn set_internal_constructed<
+        I: TryInto<usize> + Copy + Debug,
+        S: TryInto<usize> + Copy + Debug,
+    >(
+        &mut self,
+        index: I,
+        source_index: S,
+        construct: impl FnOnce(&mut T) -> T,
+        replace: impl FnOnce(&mut Self, usize, T) -> Result<(), ArrayError>,
+    ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
         let source = self.logical_source_index(source_index)?;
         self.ensure_storage_for_index(index);
@@ -56,8 +76,8 @@ impl<T: Default> DynamicArray<T> {
         if index >= self.used {
             self.emplace_new(index, constructor);
         } else {
-            let mut temporary = constructor(self);
-            assign(self.change_value(index)?, &mut temporary);
+            let temporary = constructor(self);
+            replace(self, index, temporary)?;
         }
         self.change_value(index)
     }
