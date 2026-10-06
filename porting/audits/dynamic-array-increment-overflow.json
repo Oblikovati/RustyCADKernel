@@ -2,7 +2,7 @@
   "schema": "rustycad.native-behavior-audit.v1",
   "status": "candidate_pending_root_integration",
   "branch": "port/dynamic-increment-overflow",
-  "base_commit": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "base_commit": "48c2483df50b71137ca38b3c447e72c040fe334a",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "source_sha256": {
     "crates/tkernel/src/ncollection/dynamic_array/block_table/tests/metadata.rs": "83d66ec923d7a869df65b33c269f59b42c991e1caf5a11f1e5e6544af28bdaf5",
@@ -14,7 +14,7 @@
     "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "57967339a34f84be4d13c463dd7f81404216192cc2832e73ea36e5a65901c464",
     "crates/tkernel/src/ncollection/dynamic_array/emplacement.rs": "450e91a7fd2d5337314c1a93b2ffff0a8ec07fc880f5486df9b2dcb90165e6ec",
     "crates/tkernel/src/ncollection/dynamic_array/erase_phase.rs": "db4410f8bcd851fc61721dfa6ff9556a946cf2f6f511a098e7eb7f2b202e7875",
-    "crates/tkernel/src/ncollection/dynamic_array/increment/tests.rs": "73cb62dafa89ec739828604fd408f399a5d77355025d3a85fa1ee64b30163396",
+    "crates/tkernel/src/ncollection/dynamic_array/increment/tests.rs": "18c23c895aa284471043c6e07229a480c84b14721e5a54b36e0b47ed08b8af39",
     "crates/tkernel/src/ncollection/dynamic_array/increment.rs": "78c74ce986a382b393958214056b911371704c32c78f88e154d2c28a12e9fd06",
     "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/native.rs": "3ea3ebc44c3dce14a7a6b3850a016a979ed5dd629f51c06fc958735e545973d7",
     "crates/tkernel/src/ncollection/dynamic_array/initialized_tail/tests/panics.rs": "b82774790213c03b778b72116b4c6567483cdbceaaaf0f95e3a248ca7532df0d",
@@ -98,20 +98,20 @@
     "matches_pinned_git_blob": true
   },
   "artifact_sha256": {
-    "porting/runtime-evidence/dynamic-increment-overflow-rust.log.gz": "ab8c5156d8bbfa22f3e87b85cb0d4926b9f196e0d2a320a4f15d4a113dcfdbf2",
-    "porting/runtime-evidence/dynamic-increment-overflow-unit.log.gz": "afb0f09dbfaed3d0689808564a6da850c558d5b685167df0d893bb69a3588d9c",
+    "porting/runtime-evidence/dynamic-increment-overflow-rust.log.gz": "ef956ff71653f6120762298ce98b36e7dd7f79ccdab8b8c211eee6763048e12f",
+    "porting/runtime-evidence/dynamic-increment-overflow-unit.log.gz": "c4164676fd72647f0a410e2770d640e7cb3a9453a72cd253a9c38aa87a8bc329",
     "porting/runtime-evidence/dynamic-increment-overflow-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
-    "porting/runtime-evidence/dynamic-increment-overflow-clippy.log.gz": "ab0198878b9460333654e6e9fd0c0b8fba1f6164feac351a29d1fc36b4323289",
+    "porting/runtime-evidence/dynamic-increment-overflow-clippy.log.gz": "7f22196b61610af5fc6135d5db846e662533e8ebab861cdf991947ee86cb86e6",
     "porting/runtime-evidence/dynamic-increment-overflow-miri.log.gz": "91e6771f5f4da84c74967685aceb2d55dfd30cec4d58055d4be5f5206bcdf304",
-    "porting/runtime-evidence/dynamic-increment-overflow-unit-miri.log.gz": "6a5b4b4332605d10072b09a9bc7eda12ec2d533b579786374ddf6ba8f7ae1076",
-    "porting/runtime-evidence/dynamic-increment-overflow-compiler.log.gz": "ae87a33347694a9b5af41c61870fbc7706bf8d556bb616446ecc062c3d776a19",
+    "porting/runtime-evidence/dynamic-increment-overflow-unit-miri.log.gz": "e2fdf23281f8d6a6f5d68f74dc33a78268d9ac8f36bfdac6179e59862a082b7a",
+    "porting/runtime-evidence/dynamic-increment-overflow-compiler.log.gz": "995b0b5805cf1b61385ead8ee8549d01a497ada02a3dbb46d3a7f9ff2013c410",
     "porting/runtime-evidence/dynamic-increment-overflow-native-originals.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
     "porting/runtime-evidence/dynamic-increment-overflow-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
     "porting/runtime-evidence/dynamic-increment-overflow-native-final.log.gz": "359769548770a2ba508815afca7ce4f21783ce0b65ddf611aebf865805f0eb8e",
     "porting/runtime-evidence/dynamic-increment-overflow-native-ubsan.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
     "porting/runtime-evidence/dynamic-increment-overflow-compiler-json.json.gz": "0385b2c9b02e1e163c72031bfbc31bf1833e9db35610d9f5ea6c8f94821a68c9",
     "porting/runtime-evidence/dynamic-increment-overflow-normalized.json.gz": "4100b7e2f419529b8ee2f73ec48297b86d27b68ce69ca4eab38919fc556da68d",
-    "porting/runtime-evidence/dynamic-increment-overflow-source.tar.gz": "91cf908bbc81646e8fb4659b8cb82a94cafb53cf479029dd82754839562da5b4"
+    "porting/runtime-evidence/dynamic-increment-overflow-source.tar.gz": "ceb55e579a272bb46fbe6733b01d62aaacde34c89e222ab3c7ae630d613765f1"
   },
   "checks": {
     "rust_passed": 275,
@@ -1345,5 +1345,21 @@
   ],
   "global_api_credit_delta": 0,
   "global_legacy_credit_delta": 0,
-  "validation_scope": "Final source passes19 DynamicArray integration targets,21 units, strict Clippy/fmt and87 strict Miri tests. The pinned inline native code is compiled with UBSan; linked TKernel itself is prebuilt. Compiler capture provides11 unique body-bearing mappings for8 constructors,2 SetIncrement overloads and availableSize. No shared ledger or raw lifetime helper changes."
+  "validation_scope": "Final source passes19 DynamicArray integration targets,21 units, strict Clippy/fmt and87 strict Miri tests. The pinned inline native code is compiled with UBSan; linked TKernel itself is prebuilt. Compiler capture provides11 unique body-bearing mappings for8 constructors,2 SetIncrement overloads and availableSize. No shared ledger or raw lifetime helper changes.",
+  "style_followup": {
+    "production_commit_unchanged": "48c2483df50b71137ca38b3c447e72c040fe334a",
+    "change": "Extracted unsigned/signed scenario constructors, shared family rows, constants and metadata flag formatting; assertions and native domain unchanged.",
+    "helper_line_counts": [
+      16,
+      13,
+      16,
+      7,
+      7,
+      7,
+      17,
+      19,
+      8
+    ],
+    "rerun": "275 integration tests,21 units,21 unit strict Miri,fmt,scoped Clippy,rustdoc normalization. Earlier66 integration strict Miri remain applicable to unchanged production and integration sources."
+  }
 }
