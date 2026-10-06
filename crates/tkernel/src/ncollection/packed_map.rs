@@ -11,7 +11,7 @@ mod protected_helpers;
 pub use node::PackedMapNode;
 mod queries;
 mod storage;
-pub use integer::{PackedInteger, PackedWord};
+pub use integer::{PackedInteger, PackedWord, PackedWordReader};
 pub use iteration::PackedMapIter;
 use storage::PackedNodeTable;
 mod cursor;
