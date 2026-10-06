@@ -6,8 +6,8 @@ impl<T> LinearVector<T> {
     /// `vector.set_value_with_policies(2, |v| *v, || 0, |v| *v = 7)`.
     /// Successful extension publishes its full length before assignment. If assignment
     /// panics, its valid partial mutations and the extended length remain observable.
-    /// Failed extension retains `resize_with_relocation`'s temporary safe rollback policy;
-    /// native unpublished-tail preservation remains tracked in the lifetime follow-up plan.
+    /// Failed extension retains completed tail objects outside len as native Resize does;
+    /// subsequent overwrite or storage release omits their destructors and can leak resources.
     pub fn set_value_with_policies(
         &mut self,
         index: usize,

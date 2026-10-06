@@ -150,3 +150,6 @@ native_set!(first_copy, "first-copy", 2, 2, 4, false, true, 1, false);
 native_set!(first_move, "first-move", 6, 2, 4, true, false, 1, false);
 native_set!(late_copy, "late-copy", 2, 2, 4, false, true, 3, false);
 native_set!(late_move, "late-move", 6, 2, 4, true, false, 3, false);
+
+#[path = "support/linear_unpublished_tail.rs"]
+mod tail_repair;

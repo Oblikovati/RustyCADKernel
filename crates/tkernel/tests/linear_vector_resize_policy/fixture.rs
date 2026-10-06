@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use super::*;
 
 pub struct ResizeSpec {
@@ -30,15 +31,22 @@ pub fn resize_case(spec: ResizeSpec) {
     trace.active.set(true);
     let success = attempt(&mut vector, &donor, &trace, &spec);
     trace.active.set(false);
-    let phase = if !success && trace.completed_tail.get() > 0 {
-        "recovered"
-    } else {
-        "native"
-    };
-    let row = result_row(phase, &spec, &vector, &donor, &trace, (before, success));
+    let row = result_row("native", &spec, &vector, &donor, &trace, (before, success));
     assert_native_row(&row);
-    if phase == "recovered" {
-        assert_native_unpublished_tail(&spec, &trace);
+    if !success && trace.completed_tail.get() > 0 {
+        trace.active.set(true);
+        // SAFETY: this first failed attempt completed exactly this many consecutive
+        // spare objects. No later operation has overwritten or destroyed any of them.
+        unsafe { tail_repair::destroy_completed_tail(&mut vector, trace.completed_tail.get()) };
+        trace.active.set(false);
+        assert_native_row(&result_row(
+            "recovered",
+            &spec,
+            &vector,
+            &donor,
+            &trace,
+            (before, success),
+        ));
     }
     drop((vector, donor));
     assert_eq!(trace.resources.get(), 0);
@@ -103,18 +111,5 @@ fn assert_native_row(row: &str) {
     assert!(
         expected.lines().any(|line| line == row),
         "missing resize fixture row {row:?}"
-    );
-}
-
-fn assert_native_unpublished_tail(spec: &ResizeSpec, trace: &ResizeTrace) {
-    let prefix = format!("native:{}:", spec.name);
-    let native = include_str!("../../../../tools/oracle/tkernel_linear_resize.expected")
-        .lines()
-        .find(|line| line.starts_with(&prefix))
-        .unwrap();
-    let native_resources: usize = native.rsplit(':').next().unwrap().parse().unwrap();
-    assert_eq!(
-        native_resources,
-        trace.resources.get() + trace.completed_tail.get()
     );
 }
