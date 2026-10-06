@@ -4,35 +4,30 @@ impl<T: PackedInteger> PackedMap<T> {
     pub fn minimal(&self) -> T {
         let mut result: T = T::MAX;
         let mut selected = None;
-        for block in self.buckets.iter().flatten() {
-            let base: T = T::from_bits(block.index.bits() << Self::SHIFT);
+        for block in self.buckets.nodes() {
+            let base: T = block.key();
             if result > base {
                 result = base;
                 selected = Some(block);
             }
         }
-        selected.map_or(result, |block| {
-            T::from_bits(
-                (block.index.bits() << Self::SHIFT) | u64::from(block.bits.bits().trailing_zeros()),
-            )
+        selected.map_or(result, |node| {
+            Self::find_next(node, &mut T::Word::from_bits(u64::MAX))
         })
     }
     /// Preserve native block-base selection, including the lowest-block edge case; `map.maximal()`.
     pub fn maximal(&self) -> T {
         let mut result: T = T::MIN;
         let mut selected = None;
-        for block in self.buckets.iter().flatten() {
-            let base: T = T::from_bits(block.index.bits() << Self::SHIFT);
+        for block in self.buckets.nodes() {
+            let base: T = block.key();
             if result < base {
                 result = base;
                 selected = Some(block);
             }
         }
-        selected.map_or(result, |block| {
-            T::from_bits(
-                (block.index.bits() << Self::SHIFT)
-                    | u64::from(63 - block.bits.bits().leading_zeros()),
-            )
+        selected.map_or(result, |node| {
+            Self::find_prev(node, &mut T::Word::from_bits(u64::MAX))
         })
     }
 }

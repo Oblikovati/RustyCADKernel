@@ -1,82 +1,92 @@
-use super::{PackedBlock, PackedInteger, PackedMap, PackedWord};
+#![allow(unsafe_code)]
+use super::{PackedInteger, PackedMap, PackedMapNode, PackedWord, storage::PackedNodeTable};
 /// Restartable native cursor and Rust value iterator; `map.iter()`.
 #[derive(Clone)]
 pub struct PackedMapIter<'a, T: PackedInteger> {
-    // The map's bucket chains; empty for a default-constructed native iterator.
-    buckets: &'a [Vec<PackedBlock<T::Word>>],
+    table: Option<&'a PackedNodeTable<T>>,
     bucket: usize,
-    node: usize,
+    node: Option<&'a PackedMapNode<T>>,
     remaining: u64,
-    current: Option<T>,
     cached_key: T,
 }
+// The immutable table borrow prevents link changes or freeing any cursor node.
+unsafe impl<T: PackedInteger + Send> Send for PackedMapIter<'_, T> where T::Word: Sync {}
+unsafe impl<T: PackedInteger + Sync> Sync for PackedMapIter<'_, T> where T::Word: Sync {}
 impl<T: PackedInteger> PackedMap<T> {
     /// Traverse buckets, chains, then ascending bits; `map.iter().collect::<Vec<_>>()`.
     pub fn iter(&self) -> PackedMapIter<'_, T> {
-        PackedMapIter::over(&self.buckets)
+        PackedMapIter::over(Some(&self.buckets))
     }
 }
 /// The native default `Iterator()`: bound to no map, exhausted, equal to every end.
 impl<T: PackedInteger> Default for PackedMapIter<'_, T> {
     fn default() -> Self {
-        Self::over(&[])
+        Self::over(None)
     }
 }
 impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
-    fn over(buckets: &'a [Vec<PackedBlock<T::Word>>]) -> Self {
+    fn over(table: Option<&'a PackedNodeTable<T>>) -> Self {
         let mut iter = Self {
-            buckets,
+            table,
             bucket: 0,
-            node: 0,
-            remaining: 0,
-            current: None,
+            node: None,
+            remaining: T::Word::from_bits(u64::MAX).bits(),
             cached_key: T::from_bits(0),
         };
-        iter.advance();
+        iter.find_first();
+        if let Some(node) = iter.node {
+            iter.take_key(node);
+        }
         iter
     }
     /// Check for a current bit; `iter.more()`.
     pub fn more(&self) -> bool {
-        self.current.is_some()
+        self.node.is_some()
     }
     /// Borrow the cursor's value; `iter.key()`.
     pub fn key(&self) -> Option<&T> {
-        self.current.as_ref()
+        self.node.map(|_| &self.cached_key)
     }
     /// Advance once, retaining exhausted state; `iter.advance()`.
     pub fn advance(&mut self) {
-        self.cache_exhausted_block();
-        while self.remaining == 0 {
-            if self.bucket >= self.buckets.len() {
-                self.current = None;
+        while let Some(node) = self.node {
+            self.take_key(node);
+            if self.remaining != T::Word::from_bits(u64::MAX).bits() {
                 return;
             }
-            if self.node >= self.buckets[self.bucket].len() {
-                self.bucket += 1;
-                self.node = 0;
-                continue;
-            }
-            self.remaining = self.buckets[self.bucket][self.node].bits.bits();
-            self.node += 1;
+            self.next_node();
         }
-        let block = &self.buckets[self.bucket][self.node - 1];
-        self.current = Some(T::from_bits(
-            (block.index.bits() << PackedMap::<T>::SHIFT)
-                | u64::from(self.remaining.trailing_zeros()),
-        ));
-        self.cached_key = self.current.expect("selected bit has a current key");
-        self.remaining &= self.remaining - 1;
     }
-    fn cache_exhausted_block(&mut self) {
-        if self.remaining == 0 && self.current.is_some() {
-            // Native findNext returns the block base when its remaining-bit mask is empty.
-            let block = &self.buckets[self.bucket][self.node - 1];
-            self.cached_key = T::from_bits(block.index.bits() << PackedMap::<T>::SHIFT);
+    fn take_key(&mut self, node: &PackedMapNode<T>) {
+        let mut mask = T::Word::from_bits(self.remaining);
+        self.cached_key = PackedMap::<T>::find_next(node, &mut mask);
+        self.remaining = mask.bits();
+    }
+    fn find_first(&mut self) {
+        let Some(table) = self.table else {
+            return;
+        };
+        while self.bucket < table.len() {
+            self.node = table.head(self.bucket);
+            if self.node.is_some() {
+                return;
+            }
+            self.bucket += 1;
         }
+    }
+    fn next_node(&mut self) {
+        self.node = self
+            .node
+            .and_then(|node| self.table.and_then(|table| table.following(node)));
+        if self.node.is_some() {
+            return;
+        }
+        self.bucket += 1;
+        self.find_first();
     }
     /// Restart against the same borrowed map; `iter.reset()`.
     pub fn reset(&mut self) {
-        *self = Self::over(self.buckets);
+        *self = Self::over(self.table);
     }
     /// Rebind to another map with the same lifetime; `iter.initialize(&other)`.
     pub fn initialize(&mut self, map: &'a PackedMap<T>) {
@@ -86,7 +96,7 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
 impl<T: PackedInteger> Iterator for PackedMapIter<'_, T> {
     type Item = T;
     fn next(&mut self) -> Option<T> {
-        let value: T = self.current?;
+        let value = self.key().copied()?;
         self.advance();
         Some(value)
     }
@@ -96,9 +106,19 @@ impl<T: PackedInteger> PartialEq for PackedMapIter<'_, T> {
         if !self.more() || !other.more() {
             return self.more() == other.more();
         }
-        std::ptr::eq(self.buckets, other.buckets)
-            && (self.bucket, self.node, self.remaining, self.current)
-                == (other.bucket, other.node, other.remaining, other.current)
+        let table_equal = self
+            .table
+            .zip(other.table)
+            .is_some_and(|(a, b)| std::ptr::eq(a, b));
+        let node_equal = self
+            .node
+            .zip(other.node)
+            .is_some_and(|(a, b)| std::ptr::eq(a, b));
+        table_equal
+            && node_equal
+            && self.bucket == other.bucket
+            && self.remaining == other.remaining
+            && self.cached_key == other.cached_key
     }
 }
 impl<T: PackedInteger> Eq for PackedMapIter<'_, T> {}
@@ -109,5 +129,4 @@ impl<'a, T: PackedInteger> IntoIterator for &'a PackedMap<T> {
         self.iter()
     }
 }
-
 mod method_contracts;
